@@ -1,0 +1,76 @@
+\documentclass[modal-logic]{subfiles}
+
+\begin{document}
+
+\section{Relational Models for Normal Modal Logics}
+
+\begin{defn}
+A \emph{modal model}~$\Mod M = \langle W, R, V\rangle$ consists of
+\begin{enumerate}
+\item a nonempty set $ W\neq \emptyset$,
+\item a relation $R \subseteq W \times W$, and
+\item a valuation $V: \Var \times W \to \{\True, \False\}$
+\end{enumerate}
+\end{defn}
+
+The set $W$ is often called the set of ``worlds,'' to reflect the
+intuitive idea that the points of evaluation correspond to ``possible
+worlds.'' Depending on the application, a different terminology may be
+more appropriate, e.g., ``states.''  The relation~$R$ is usually
+called the accessibility relation, and we say that if $wRv$ holds for
+worlds $w, v \in W$ that ``$v$ is accessible from (or relatie to)
+$w$.''  Again, this reflects the intutive interpretation that
+world~$v$ is possible relative to $w$.  The valuation~$s$
+represents the truth value of atomic propositions: $s(p, w) = \True$
+if $p$ is ``true at''~$w$.
+
+\begin{defn}\label{defn:mmodels}
+\emph{Truth} of a formula~$!A$  at~$w$ in a~$\Mod M$, $\Mod M, w
+\Mmodels !A$, is defined inductively as follows:
+\begin{enumerate}
+\item $\Mod M, w \Mmodels p$ iff $V(w, p) = \True$
+\item $\Mod M, w \nMmodels \bot$ 
+\item $\Mod M, w \Mmodels \lnot !B$ iff $\Mod s M, w \nMmodels !B$
+\item $\Mod M, w \Mmodels !A \land !B$ iff $\Mod M, w \Mmodels !A$ and
+  $\Mod M, w \Mmodels !B$
+\item $\Mod M, w \Mmodels !A \lor !B$ iff $\Mod M, w \Mmodels !A$ or
+  $\Mod M, w \Mmodels !B$ (or both)
+\item $\Mod M, w \Mmodels !A \lif !B$ iff $\Mod M, w \nMmodels !A$ or
+  $\Mod M, w \Mmodels !B$
+\item\label{defn:sub:mmodels-box} $\Mod M, w \Mmodels \Box !A$ iff $\Mod M, w'
+  \Mmodels !A$ for all $w' \in W$ with $wRw'$
+\item $\Mod M, w \Mmodels \Diamond !A$ iff $\Mod M, w' \Mmodels !A$ for
+  at least one $w' \in W$ with $wRw'$
+\end{enumerate} 
+\end{defn}
+
+Note that by clause~\ref{mmodels-box}, a formula $\Box!B$ is satisfied at
+$w$ whenever there are no~$w'$ with $wRw'$. In such a case $\Box !B$
+is vacuously satisfied at~$w$. Also, $\Box !B$ may be satisifed at~$w$
+even if $!B$ is not, and the truth of~$!B$ at~$w$ does not guarantee
+the truth of~$\Diamond !B$ there---this only holds if $wRw$, e.g., if
+$R$ is reflexive.
+
+\begin{defn}
+The \emph{proposition expressed} by a formula~$!A$ in $\Mod M$,
+$\Prop{!A}{M}$, is the set of worlds at which $!A$ is true in~$\Mod
+M$, i.e.,
+\[
+\Prop{!A}{M} = \{w \in W : \Mod M, w \Mmodels !A\}
+\]
+\end{defn}
+
+\begin{thm}
+\begin{enumerate}
+\item $\Prop{\lnot !A}{M} = W \setminus \Prop{!A}{M}$
+\item $\Prop{!A \land !B}{M} = \Prop{!A}{M} \cap \Prop{!B}{M}$
+\item $\Prop{!A \lor !B}{M} = \Prop{!A}{M} \cup \Prop{!B}{M}$
+\item $\Prop{\Diamond!A}{M} = R^{-1}[\Prop{!A}{M}]$
+\end{enumerate}
+\end{thm}
+
+\begin{defn}
+A \emph{frame}~$\Mod F = \langle W, R\rangle$ consists of a nonempty set~$W$ and a relation~$R \subseteq W \times W$ on it.  If $\Mod M = \langle W, R, V\rangle$ for some valuation~$V$, we say that $\Mod M$ is \emph{based on} the frame~$\Mod F$, and that $\Mod F$ is \emph{the frame of}~$\Mod M$.
+\end{defn}
+
+\end{document}

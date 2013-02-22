@@ -1,0 +1,38 @@
+\documentclass[modal-logic]{subfiles}
+
+\begin{document}
+
+\section{Axiom Systems for Normal Modal Logics}
+
+One way of specifying normal modal logics as the set of formulas provable in certain proof systems.  The simplest and historically oldest proof systems are so-called Hilbert-type axiomatic proof systems.  Hilbert-type proof systems for many normal modal logics are relatively easy to construct, they are simple as objects of metatheoretical study (e.g., to prove soundness and completeness), but they are much harder to use to prove formulas in than, say, natural deduction systems.
+
+In Hilbert-type proof systems, a derivation of a formula is a sequence of formulas leading from certain axioms, via a handful of inference rules, to the formula in question.  For normal modal logics, there are only two inference rules that need to be assumed: modus ponens and necessitation.  A axioms we take all (substitution instances) of tautologies, and, depending on the modal logic we deal with, a number of modal axioms. In order to generate a normal modal logic, all substitution instances of K and Dual count as axioms. This alone generates the minimal normal modal logic~$\Log K$.  Additional axioms generate other normal modal logics.
+
+\begin{defn}
+The rule of \emph{modus ponens} is the inference schema
+\[
+\infer{!B}{!A & !A \lif !B}
+\]
+We say a formula $!B$ follows from formulas $!A$, $!C$ by modus ponens iff $!C \ident !A \lif !B$.
+\end{defn}
+
+\begin{defn}
+The rule of \emph{necessitation} is the inference schema
+\[
+\infer{\Box !A}{!A}
+\]
+We say the formula $!B$ follows from the formulas $!A$ by necessitation iff $!B \ident \Box !A$.
+\end{defn}
+
+\begin{defn}
+A \emph{derivation} from a set of axioms~$\Sigma$ is a sequence of formulas $!B_1$, $!B_2$, \dots, $!B_n$, where each $!B_i$ is either
+\begin{enumerate}
+\item a substitution instance of a tautology, or
+\item a substitution instance of a formula in~$\Sigma$, or
+\item follows from two formulas $!B_j$, $!B_k$ with $j, k < i$ by modus ponens, or
+\item follows from a formula $!B_j$ with $j < i$  by necessitation.
+\end{enumerate}
+If there is such a derivation with $!B_n \ident !A$, we say that $!A$ is \emph{$\Sigma$-derivable}, in symbols $\Deriv{\Sigma} !A$.
+\end{defn}
+
+\end{document}

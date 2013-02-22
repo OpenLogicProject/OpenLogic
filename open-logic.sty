@@ -1,0 +1,86 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{open-logic}
+
+
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+
+\RequirePackage{proof}
+
+% make ! active in math mode for formula meta variables
+
+{\catcode`!=\active
+\gdef!{\formula}
+\let\formula\relax % default: do nothing
+}
+\mathcode`\!="8000 % set ! active in math mode
+
+
+% greekformulas -- formula metavariables are phi, psi, etc.
+\DeclareOption{greekformulas}
+{\gdef\formula{%
+  \@ifnextchar A{\varphi\@gobble}{
+  \@ifnextchar B{\psi\@gobble}{
+  \@ifnextchar C{\chi\@gobble}{
+  \@ifnextchar D{\theta\@gobble}{
+  \@ifnextchar E{\alpha\@gobble}{
+  \@ifnextchar F{\beta\@gobble}{
+  \@ifnextchar G{\gamma\@gobble}{
+  \@ifnextchar H{\delta\@gobble}{
+  \@ifnextchar K{\xi\@gobble}{
+  \@ifnextchar L{\zeta\@gobble}\relax
+}}}}}}}}}}}
+
+\ProcessOptions\relax
+
+% truth values
+\def\True{1}
+\def\False{0}
+% (modal) model
+\let\Mod\mathfrak
+% logic
+\let\Log\mathbf
+% propositional variables
+\def\Var{\mathrm{Var}}
+% derivability
+\def\Deriv#1{\vdash_{#1}}
+
+% syntactic identity
+\let\ident\equiv
+% conditional
+\let\lif\to
+% biconditional
+\let\liff\leftrightarrow
+% domain
+\def\dom#1{\mathrm{dom}(#1)}
+% range
+\def\ran#1{\mathrm{ran}(#1)}
+% length
+\def\len#1{\mathrm{len}(#1)}
+% restrict
+\let\restrict\upharpoonright
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{prob}{Problem}[chapter]
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+% If compiled standalone as a subfile, execute \OLSubfileHook at beginning
+\ifx\document\comment
+\AtBeginDocument{\OLSubfileHook}
+\fi
+\let\OLSubfileHook\relax

@@ -1,0 +1,16 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{modal-logic}
+
+
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+
+% modal truth at world
+\let\Mmodels\Vdash
+\let\nMmodels\nVdash
+
+% proposition expressed by #1 in #2
+\def\Prop#1#2{[{#1}]_{\Mod{#2}}}
