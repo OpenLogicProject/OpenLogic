@@ -38,11 +38,13 @@ A term containing no variables is a \emph{closed term}.
 \begin{defn}[Formula]
 The \emph{formulae} (or \emph{well-formed formulae}, abbreviated wff) of the language of first-order logic are defined inductively:
 \begin{enumerate}
+\item $\bot$ is an atomic formula.
 \item If $R$ is an $n$-place predicate and $t_1,\ldots,t_n$ are terms, then $R(t_1\ldots t_n)$ is an (atomic) formula.
 \item If $t_1$ and $t_2$ are terms, then $=(t_1,t_2)$ is an atomic formula.
 \item If $!A$ is a formula, then $(\lnot !A)$ is a formula.
 \item If $!A$ and $!B$ are formulae, then $(!A \land !B)$ is a formula.
 \item If $!A$ and $!B$ are formulae, then $(!A \lor !B)$ is a formula.
+\item If $!A$ and $!B$ are formulae, then $(!A \rightarrow !B)$ is a formula.
 \item If $!A$ is a formula and $x$ is a variable, then $(\forall x !A)$ is a formula.
 \item If $!A$ is a formula and $x$ is a variable, then $(\exists x !A)$ is a formula.
 \item Nothing else is a formula.
@@ -51,6 +53,7 @@ The \emph{formulae} (or \emph{well-formed formulae}, abbreviated wff) of the lan
 
 %Vacuous quantification?
 
+%option 1 for subformula
 \begin{defn}[Subformula]
 Given a formula $!A$, the set of \emph{subformulae} of $!A$, $\mathsf{SBF}(!A)$, is defined inductively as follows:
 \begin{enumerate}
@@ -61,13 +64,69 @@ Given a formula $!A$, the set of \emph{subformulae} of $!A$, $\mathsf{SBF}(!A)$,
 \item If $x$ is a variable, then $\mathsf{SBF}(\forall x !A) = \{\forall x !A\} \cup \mathsf{SBF}(!A)$
 \item If $x$ is a variable, then $\mathsf{SBF}(\exists x !A) = \{\exists x !A\} \cup \mathsf{SBF}(!A)$
 \end{enumerate}
-The set of all \emph{proper} subformulae of $!A$ is $\mathsf{SBF}(!A) - \{!A\}$.
+The set of all \emph{proper} subformulae of $!A$ is $\mathsf{SBF}(!A) - \{!A\}$. That is, a formula $!B$ is a proper subformula of $!A$ if and only if $!B$ is a subformula of $!A$ but is distinct from $!A$. 
 \end{defn}
 
+\begin{defn}[Immediate subformula]
+Given formulae $!A$ and $!B$, define \emph{immediate subformula} inductively as follows:
+\begin{enumerate}
+\item Atomic formulae have no immediate subformulae.
+\item $!A$ is the immediate subformula of $(\lnot!A)$.
+\item $!A$ is the immediate subformula of $(\forall x !A)$.
+\item $!A$ is the immediate subformula of $(\exists x !A)$.
+\item $!A$ and $!B$ are the immediate subformulae of $(!A \land !B)$.
+\item $!A$ and $!B$ are the immediate subformulae of $(!A \lor !B)$.
+\item $!A$ and $!B$ are the immediate subformulae of $(!A \rightarrow !B)$.
+%I listed these all separately rather than combining them because eventually we will have to be able to let people pick which logical symbols they use. if we can make it work without looking so "listy" (so we can condense the clauses), that would probably look better.
+\end{enumerate}
+\end{defn}
 %Wordy explanation of subformula in here
 
-\begin{defn}[Bound/free variable]
-A variable $x$ occurring in a formula $!A$ is \emph{bound} if and only if there is some subformula of $!A$ of the form $\forall x !B$ or $\exists x !B$ for $!B\in\mathsf{SBF}(!A)$. A variable $x$ is \emph{free} (or \emph{unbound}) in $!A$ if and only if it is not bound in $!A$. \end{defn}
+%option 2: Alternate definition of subformula via the definition of immediate subformula? This one avoids the SBF notation.
+
+\begin{defn}[Subformula]
+Define \emph{subformula} as follows:
+\begin{enumerate}
+\item If $!B$ is equal to $!A$, then $!B$ is a subformula of $!A$.
+\item If $!B$ is an immediate subformula of $!A$, then $!B$ is a subformula of $!A$.
+\item If $!C$ is a subformula of $!B$ and $!B$ is a subformula of $!A$, then $!C$ is also a subformula of $!A$.
+\end{enumerate}
+A formula $!B$ is a \emph{proper} subformula of $!A$ if and only if it is a subformula of $!A$ and is not equal to $!A$.
+\end{defn}
+
+% option 3: Or we could do it this way, combining immediate, proper, (regular) subformula definitions, so this would go after the definition of immediate subformula
+
+\begin{defn}[Proper subformula]
+Define \emph{proper subformula} as follows:
+\begin{enumerate}
+\item If $!B$ is an immediate subformula of $!A$, then $!B$ is a proper subformula of $!A$.
+\item If $!C$ is a proper subformula of $!B$ and $!B$ is a proper subformula of $!A$, then $!C$ is also a proper subformula of $!A$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[Subformula]
+Define \emph{subformula} as follows:
+\begin{enumerate}
+\item If $!B$ is equal to $!A$, then $!B$ is a subformula of $!A$.
+\item If $!B$ is a proper subformula of $!A$, then $!B$ is a subformula of $!A$.
+\end{enumerate}
+\end{defn}
+
+%This is what I figured RZ meant for an inductive definition of free occurrences. I didn't combine it all at once with the definition of a formula because I think it would be too long...
+
+\begin{defn}[Free occurrences of a variable]
+Define a \emph{free} occurrence of a variable in a formula inductively:
+\begin{enumerate}
+\item If $!A$ is atomic, all variables in $!A$ occur free in $!A$.
+\item If $!A$ is a formula, then the free variable occurrences of $(\lnot !A)$ are exactly those in $!A$.
+\item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \land !B)$ are those in $!A$ together with those in $!B$.
+\item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \lor !B)$ are those in $!A$ together with those in $!B$.
+\item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \rightarrow !B)$ are those in $!A$ together with those in $!B$.
+\item If $!A$ is a formula, then the free variable occurrences in $(\forall x !A)$ are all of those in $!A$ except for occurrences of $x$.
+\item If $!A$ is a formula, then the free variable occurrences in $(\exists x !A)$ are all of those in $!A$ except for occurrences of $x$.
+\end{enumerate}
+%Again, if we could figure out a way to condense those clauses and still be able to allow people to "pick and choose" which logical connectives to use, that would look better
+\end{defn}
 
 \begin{defn}[Sentence]
 A formula $!A$ is a \emph{sentence} if and only if it is a (well-formed) formula and contains no free variables.\end{defn}
