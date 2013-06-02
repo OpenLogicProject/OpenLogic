@@ -10,73 +10,97 @@
 
 %This still needs to be macro'd.
 
-The basic language of first-order logic contains
+The basic language of first-order logic contains \emph{variables}, \emph{constants}, \emph{predicates} and sometimes \emph{functions}.  From them, together with the logical connectives and the quantifiers, \emph{terms} and \emph{formulas} are formed.  In the general case, we make use of the following symbols in first-order logic:
 
 \begin{itemize}
-\item Logical connectives: $\lnot, \land, \lor, \forall, \exists, \rightarrow$
-\item The propositional constant for falsity, $\bot$
-\item The two-place equality predicate, $=$
-\item A denumerable set of $n$-place predicates for each $n>0$: $A^n_0, A^n_1, A^n_2,\ldots$
-\item A denumerable set of constants: $f^0_0, f^0_1, f^0_2,\ldots$
-\item A denumerable set of $n$-place function symbols for each $n>0$: $f^n_0, f^n_1, f^n_2,\ldots$
-\item A denumerable set of variables: $v_0, v_1, v_2,\ldots$
+\item Logical connectives: $\lnot$ (negation), $\land$ (conjunction), $\lor$ (disjunction), $\lif$ (conditional), $\liff$ (biconditional), $\lforall$ (universal quantifier), $\lexists$ (existential quantifier).
+\item The propositional constant for falsity~$\lfalse$.
+\item The two-place equality predicate~$=$.
+\item A denumerable set of $n$-place predicates for each $n>0$: $\Obj A^n_0$, $\Obj A^n_1$, $\Obj A^n_2$, \dots
+\item A denumerable set of constants: $\Obj c_0$, $\Obj c_1$, $\Obj c_2$, \dots.
+\item A denumerable set of $n$-place function symbols for each $n>0$: $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots
+\item A denumerable set of variables: $\Obj v_0$, $\Obj v_1$, $\Obj v_2$, \dots
 \end{itemize}
 
-% Explanation of using ~ vs. $\lnot$, ampersand versus wedge, arrow vs. horseshoe, quantifiers, etc. compared to LPL and Logic Book
-% Perhaps an explanation for "wordy" of 0-place function symbols counting as constants
+% Explanation of using ~ vs. $\lnot$, ampersand versus wedge, arrow
+% vs. horseshoe, quantifiers, etc. compared to LPL and Logic Book
+% Perhaps an explanation for "wordy" of constants as 0-place function
+% symbols
+
+% Include discussion of language restricted to a certain vocabulary,
+% extensions of a language, examples (eg language of arithmetic, set
+% theory, etc.)
 
 \begin{defn}[Term]
-The \emph{terms} of the language of first-order logic are defined inductively:
+The set of \emph{terms}~$\Trm$ of the language of first-order logic is
+defined inductively:
 \begin{enumerate}
 \item Variables and constants are terms.
-\item If $f$ is an $n$-place function symbol and $t_1,\ldots,t_n$ are terms, then $f(t_1 \ldots t_n)$ is a term.
+\item If $f$ is an $n$-place function symbol and $t_1$, \dots, $t_n$
+  are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.
 \item Nothing else is a term.
 \end{enumerate}
 A term containing no variables is a \emph{closed term}.
 \end{defn}
 
 \begin{defn}[Formula]
-The \emph{formulae} (or \emph{well-formed formulae}, abbreviated wff) of the language of first-order logic are defined inductively:
+The set of \emph{formulae}~$\Frm$ of the language of first-order logic
+is defined inductively:
 \begin{enumerate}
 \item $\bot$ is an atomic formula.
-\item If $R$ is an $n$-place predicate and $t_1,\ldots,t_n$ are terms, then $R(t_1\ldots t_n)$ is an (atomic) formula.
-\item If $t_1$ and $t_2$ are terms, then $=(t_1,t_2)$ is an atomic formula.
-\item If $!A$ is a formula, then $(\lnot !A)$ is a formula.
+\item If $R$ is an $n$-place predicate and $t_1$, \dots, $t_n$ are
+  terms, then $\Atom{R}{t_1,\ldots, t_n}$ is an (atomic) formula.
+\item If $t_1$ and $t_2$ are terms, then $=(t_1, t_2)$ is an atomic formula.
+\item If $!A$ is a formula, then $\lnot !A$ is a formula.
 \item If $!A$ and $!B$ are formulae, then $(!A \land !B)$ is a formula.
 \item If $!A$ and $!B$ are formulae, then $(!A \lor !B)$ is a formula.
-\item If $!A$ and $!B$ are formulae, then $(!A \rightarrow !B)$ is a formula.
-\item If $!A$ is a formula and $x$ is a variable, then $(\forall x !A)$ is a formula.
-\item If $!A$ is a formula and $x$ is a variable, then $(\exists x !A)$ is a formula.
+\item If $!A$ and $!B$ are formulae, then $(!A \lif !B)$ is a formula.
+\item If $!A$ and $!B$ are formulae, then $(!A \liff !B)$ is a formula.
+\item If $!A$ is a formula and $x$ is a variable, then $\lforall[x]\,
+  !A$ is a formula.
+\item If $!A$ is a formula and $x$ is a variable, then $\lexists[x]\,
+  !A$ is a formula.
 \item Nothing else is a formula.
 \end{enumerate}
 \end{defn}
 
-%Vacuous quantification?
+%Vacuous quantification
+
+Some logic texts require that the variable $x$ must occur in $!A$ in
+order for $\lexists x\, !A$ and $\lexists x\, !A$ to count as
+formulas.  Nothing bad happens if you don't require this, and it makes
+things easier.
 
 %option 1 for subformula
 \begin{defn}[Subformula]
-Given a formula $!A$, the set of \emph{subformulae} of $!A$, $\mathsf{SBF}(!A)$, is defined inductively as follows:
+Given a formula $!A$, the set of \emph{subformulae} of $!A$,
+$\SubFrm{!A}$, is defined inductively as follows:
 \begin{enumerate}
-\item If $!A$ is atomic, then $\mathsf{SBF}(!A)=\{!A\}$
-\item $\mathsf{SBF}(\lnot !A) = \{\lnot !A\} \cup \mathsf{SBF}(!A)$
-\item If $!B$ is also a formula, then $\mathsf{SBF}(!A \land !B) = \{!A \land !B\} \cup \mathsf{SBF}(!A) \cup \mathsf{SBF}(!B)$
-\item If $!B$ is also a formula, then $\mathsf{SBF}(!A \lor !B) = \{!A \lor !B\} \cup \mathsf{SBF}(!A) \cup \mathsf{SBF}(!B)$
-\item If $x$ is a variable, then $\mathsf{SBF}(\forall x !A) = \{\forall x !A\} \cup \mathsf{SBF}(!A)$
-\item If $x$ is a variable, then $\mathsf{SBF}(\exists x !A) = \{\exists x !A\} \cup \mathsf{SBF}(!A)$
+\item If $!A$ is atomic, then $\SubFrm{!A} = \{!A\}$.
+\item $\SubFrm{\lnot !A} = \{\lnot !A\} \cup \SubFrm{!A}$
+\item If $!B$ is also a formula, then $\SubFrm{!A \land !B} = \{!A \land !B\} \cup \SubFrm{!A} \cup \SubFrm{!B}$
+\item If $!B$ is also a formula, then $\SubFrm{!A \lor !B} = \{!A \lor !B\} \cup \SubFrm{!A} \cup \SubFrm{!B}$
+\item If $!B$ is also a formula, then $\SubFrm{!A \lif !B} = \{!A \lif !B\} \cup \SubFrm{!A} \cup \SubFrm{!B}$
+\item If $!B$ is also a formula, then $\SubFrm{!A \liff !B} = \{!A \liff !B\} \cup \SubFrm{!A} \cup \SubFrm{!B}$
+\item If $x$ is a variable, then $\SubFrm{\forall[x][!A]} = \{\lforall[x][!A]\} \cup \SubFrm{!A}$
+\item If $x$ is a variable, then $\SubFrm{\lexists[x][!A]} = \{\lexists[x][!A]\} \cup \SubFrm{!A}$
 \end{enumerate}
-The set of all \emph{proper} subformulae of $!A$ is $\mathsf{SBF}(!A) - \{!A\}$. That is, a formula $!B$ is a proper subformula of $!A$ if and only if $!B$ is a subformula of $!A$ but is distinct from $!A$. 
+The set of all \emph{proper} subformulae of $!A$ is $\SubFrm{!A} -
+\{!A\}$. That is, a formula $!B$ is a proper subformula of $!A$ if and
+only if $!B$ is a subformula of $!A$ but is distinct from $!A$.
 \end{defn}
 
 \begin{defn}[Immediate subformula]
 Given formulae $!A$ and $!B$, define \emph{immediate subformula} inductively as follows:
 \begin{enumerate}
 \item Atomic formulae have no immediate subformulae.
-\item $!A$ is the immediate subformula of $(\lnot!A)$.
-\item $!A$ is the immediate subformula of $(\forall x !A)$.
-\item $!A$ is the immediate subformula of $(\exists x !A)$.
+\item $!A$ is the immediate subformula of $\lnot !A$.
 \item $!A$ and $!B$ are the immediate subformulae of $(!A \land !B)$.
 \item $!A$ and $!B$ are the immediate subformulae of $(!A \lor !B)$.
-\item $!A$ and $!B$ are the immediate subformulae of $(!A \rightarrow !B)$.
+\item $!A$ and $!B$ are the immediate subformulae of $(!A \lif !B)$.
+\item $!A$ and $!B$ are the immediate subformulae of $(!A \liff !B)$.
+\item $!A$ is the immediate subformula of $\lforall[x][!A]$.
+\item $!A$ is the immediate subformula of $\lexists[x][!A]$.
 %I listed these all separately rather than combining them because eventually we will have to be able to let people pick which logical symbols they use. if we can make it work without looking so "listy" (so we can condense the clauses), that would probably look better.
 \end{enumerate}
 \end{defn}
@@ -118,18 +142,19 @@ Define \emph{subformula} as follows:
 Define a \emph{free} occurrence of a variable in a formula inductively:
 \begin{enumerate}
 \item If $!A$ is atomic, all variables in $!A$ occur free in $!A$.
-\item If $!A$ is a formula, then the free variable occurrences of $(\lnot !A)$ are exactly those in $!A$.
+\item If $!A$ is a formula, then the free variable occurrences of $\lnot !A$ are exactly those in $!A$.
 \item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \land !B)$ are those in $!A$ together with those in $!B$.
 \item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \lor !B)$ are those in $!A$ together with those in $!B$.
-\item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \rightarrow !B)$ are those in $!A$ together with those in $!B$.
-\item If $!A$ is a formula, then the free variable occurrences in $(\forall x !A)$ are all of those in $!A$ except for occurrences of $x$.
-\item If $!A$ is a formula, then the free variable occurrences in $(\exists x !A)$ are all of those in $!A$ except for occurrences of $x$.
+\item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \lif !B)$ are those in $!A$ together with those in $!B$.
+\item If $!A$ and $!B$ are formulae, then the free variable occurrences in $(!A \liff !B)$ are those in $!A$ together with those in $!B$.
+\item If $!A$ is a formula, then the free variable occurrences in $\lforall[x][!A]$ are all of those in $!A$ except for occurrences of $x$.
+\item If $!A$ is a formula, then the free variable occurrences in $\lexists[x][!A]$ are all of those in $!A$ except for occurrences of $x$.
 \end{enumerate}
 %Again, if we could figure out a way to condense those clauses and still be able to allow people to "pick and choose" which logical connectives to use, that would look better
 \end{defn}
 
 \begin{defn}[Sentence]
-A formula $!A$ is a \emph{sentence} if and only if it is a (well-formed) formula and contains no free variables.\end{defn}
+A formula $!A$ is a \emph{sentence} if and only if it is a (well-formed) formula and contains no free occurrences of variables.\end{defn}
 
 %"Wordy" explanation of bound variable in here
 

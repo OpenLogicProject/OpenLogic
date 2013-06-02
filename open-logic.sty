@@ -1,12 +1,16 @@
+% OpenLogic Project
+% Master Style Package
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{open-logic}
 
+\RequirePackage{xparse}
 
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
+\RequirePackage[OMLmathsfit]{isomath}
 
 \RequirePackage{proof}
 
@@ -20,6 +24,7 @@
 
 
 % greekformulas -- formula metavariables are phi, psi, etc.
+% Provides !A, !B etc in math mode to produce \phi, \psi etc.
 \DeclareOption{greekformulas}
 {\gdef\formula{%
   \@ifnextchar A{\varphi\@gobble}{
@@ -36,24 +41,142 @@
 
 \ProcessOptions\relax
 
+% Symbols
+% =======
+
+% Logical symbols
+
 % truth values
-\def\True{1}
-\def\False{0}
-% (modal) model
+\DeclareDocumentCommand \True {} {1}
+\DeclareDocumentCommand \False {} {0}
+
+% falsity is \lfalse
+\let\lfalse\bot
+
+% truth is \ltrue
+\let\ltrue\top
+
+% negation is \lnot
+% for tilde replace with
+% \renewcommand*{\lnot}{\mathord{\sim}}
+
+% conjunction is \land
+% for ampersand replace with
+% \renewcommand*{\land}{\mathbin{\&}}
+
+% disjunction is \lor
+
+% conditional is \lif
+% for horseshoe replace with
+% \let\lif\supset
+\let\lif\to
+
+% biconditional is \liff
+% for triple bar replace with
+% \let\liff\equiv
+\let\liff\leftrightarrow
+
+% existential quantifier is \lexists
+% optional argument takes bound variable as argument
+% redefine if you want parentheses around quantifiers
+\DeclareDocumentCommand \lexists { o o } {
+    \IfNoValueTF {#1} 
+        { \exists }
+        { \exists #1 }
+    \IfNoValueTF {#2} 
+        \relax
+        { \, #2 }
+}
+
+% universal quantifier is \lforall
+% optional argument takes bound variable as argument
+% redefine if you want parentheses around quantifiers
+\DeclareDocumentCommand \lforall { o o } {
+    \IfNoValueTF {#1} 
+        { \forall }
+        { \forall #1 }
+    \IfNoValueTF {#2} 
+        \relax
+        { \, #2 }
+}
+
+% satisfaction/truth relation
+\let\Sat\models
+
+% derivability relation
+\DeclareDocumentCommand \Deriv { o } {
+    \IfNoValueTF {#1} 
+        { \vdash }
+        { \vdash_{#1} }
+}
+
+% semantic consequence relation relation
+\DeclareDocumentCommand \Deriv { o } {
+    \IfNoValueTF {#1} 
+        { \models }
+        { \models_{#1} }
+}
+
+% typesetting commands for logical concepts
+% =========================================
+
+% modal models set in Fraktur by default
 \let\Mod\mathfrak
-% logic
+
+% structures set in Fraktur by default
+\let\Struct\mathfrak
+
+% languages set in Script font by default
+\let\Lang\mathcal
+
+% logics set boldface Roman by default
 \let\Log\mathbf
+
+% object-language symbols set in sans-serif italics
+\let\Obj\mathsfit
+
+% atomic formula
+% TO DO: provide xparse document processor to remove commas from #2
+\DeclareDocumentCommand \Atom { m m } {
+        { #1(#2) }
+}
+
+
+% commands for various special sets
+% =================================
+
 % propositional variables
 \def\Var{\mathrm{Var}}
-% derivability
-\def\Deriv#1{\vdash_{#1}}
+
+% Terms (optional argument: language
+\DeclareDocumentCommand \Trm { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Trm} }
+        { \mathrm{Trm}({\Lang #1}) }
+}
+
+% Formulas
+\DeclareDocumentCommand \Frm { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Frm} }
+        { \mathrm{Frm}({\Lang #1}) }
+}
+
+% Formulas
+\DeclareDocumentCommand \SubFrm { m } {
+        \mathrm{SFrm}({#1})
+}
+
+% Sentences
+\DeclareDocumentCommand \Sent { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Sent} }
+        { \mathrm{Sent}({\Lang #1}) }
+}
+
 
 % syntactic identity
 \let\ident\equiv
-% conditional
-\let\lif\to
-% biconditional
-\let\liff\leftrightarrow
 % domain
 \def\dom#1{\mathrm{dom}(#1)}
 % range
