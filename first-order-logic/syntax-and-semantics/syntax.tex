@@ -22,10 +22,11 @@ The basic language of first-order logic contains \emph{variables}, \emph{constan
 \item A denumerable set of variables: $\Obj v_0$, $\Obj v_1$, $\Obj v_2$, \dots
 \end{itemize}
 
-% Explanation of using ~ vs. $\lnot$, ampersand versus wedge, arrow
-% vs. horseshoe, quantifiers, etc. compared to LPL and Logic Book
-% Perhaps an explanation for "wordy" of constants as 0-place function
-% symbols
+% Alternate symbols
+
+You may be familiar with different symbols than the ones we use above. Logic texts (and teachers) commonly use either $\sim$ or $\neg$ for negation, $\wedge$ or $\&$ for conjunction, and $\rightarrow$ or $\supset$ for conditional. Other alternatives include $\cdot$ for conjunction, $\equiv$ for biconditional and ! for negation. It is very common to use lower case letters (e.g. \textit{a, b, c}) from the beginning of the Roman alphabet for constants (sometimes called names), and lower case letters from the end (e.g. \textit{x, y, z}) for variables. Quantifier variations include $\forall$ and $(x)$ (where \textit{x} is a variable) for the universal quantifier and $\exists$ and $(Ex)$ for the existential quantifier.
+
+%Polish notation?
 
 % Include discussion of language restricted to a certain vocabulary,
 % extensions of a language, examples (eg language of arithmetic, set
@@ -42,6 +43,19 @@ defined inductively:
 \end{enumerate}
 A term containing no variables is a \emph{closed term}.
 \end{defn}
+
+% Constants as 0-place function symbols (for wordy)
+%I've put this as a numberless subsection for now, but I suspect it would be best if this sort of commentary was set aside in a box or something.
+\subsection*{Constants}
+
+The constants appear in our specification of the language and the terms as a separate category of symbols, but they could instead have been included as zero-place function symbols with the following clause:
+\begin{itemize}
+\item A denumerable set of $n$-place function symbols for each $n\ge 0$: $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots
+\end{itemize}
+
+The first clause of the definition of a term could then merely specify that variables are terms. The zero-place function symbols are covered by the second clause, since where \textit{n} is zero, $\Atom{f}{t_1, \ldots, t_n}$ is just $f$.
+
+Alternatively we could do without constants at all, as we will see when we turn to the semantics of first-order logic.
 
 \begin{defn}[Formula]
 The set of \emph{formulae}~$\Frm$ of the language of first-order logic
