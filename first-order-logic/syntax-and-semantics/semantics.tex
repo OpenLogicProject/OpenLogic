@@ -7,136 +7,65 @@
 \begin{document}
 
 % I will macro this once any major changes have been suggested/implemented
-
 \section{Semantics}
 
-\subsection{Models}
+%Change then name of this module to Structures instead of Semantics? and have semantics be a larger heading containing Structures and Semantic notions?
 
-\begin{defn}[Model]
-A \emph{model}, $M$, for first-order logic consists of the following elements:
+%I like Aldo's notation of |M| for domain of M. Can we figure out some way to switch out D^M with |M|, if desired? I find the D^M notation unappealing, especially when using other superscripts 
+
+%I replaced what I had originally from Nicole's notes to definitions from Aldo's
+
+\begin{defn}[Structure]
+A \emph{structure}, $\Struct{M}$, for a language $\Lang{L}$ of first-order logic consists of the following elements:
 \begin{quote}
 \begin{description}
-\item[Domain:] a non-empty set, $D^M$ 
-\item[Name assignment:] an assignment, $\alpha^M$, of an item in the domain to each name $\alpha$ of the language, 
-\item[Functions:] an assignment, $f^M$, of a total function from the set of all $n$-tuples on the domain to the domain for each $n$-place function symbol $f$.
-\item[Relations:] an assignment, $R^M$, of a set of $n$-tuples on the domain to each $n$-place predicate $R$.
+\item[Domain:] a non-empty set, $D^\Struct{M}$ 
+\item[Name assignment:] for each constant symbol $\Obj c$ of $\Lang{L}$, an element $\Obj c^\Struct{M} \in D^\Struct{M}$
+\item[Relations:] for each $n$-place predicate symbol $\Obj R$ of $\Lang{L}$ (other than $=$), an $n$-ary relation $\Obj R^\Struct{M} \subseteq (D^\Struct{M})^n$
+\item[Functions:] for each $n$-place function symbol $\Obj f$ of $\Lang{L}$, an $n$-ary function $\Obj f^\Struct{M} : (D^\Struct{M})^n \rightarrow D^\Struct{M}$
+
 \end{description}
 \end{quote}
 \end{defn}
 
-\begin{defn}[Closed term]
-A term is \emph{closed} if it is a term or if it is a function of terms only (without variables, whether free or bound).
-\end{defn}
+\begin{wordy}
+Recall that a term is \emph{closed} if it is a term or if it is a function of terms only (without variables, whether free or bound).
+\end{wordy}
 
 \begin{defn}[Denotation of closed terms]
-The \emph{denotation} of the closed term $f(t_1 \ldots t_n)^M$ is identical to $f^M(t_1^M \ldots t_n^M)$. 
+In a structure $\Struct{M}$, the \emph{denotation} of the closed term $\Obj f(\Obj t_1 \ldots \Obj t_n)^\Struct{M}$ is identical to $\Obj f^\Struct{M}(\Obj t_1^\Struct{M} \ldots \Obj t_n^\Struct{M})$. 
 \end{defn}
 
-\begin{defn}[Covered model]
-A model is \emph{covered} if every element of the domain is the denotation of some closed term. 
+\begin{defn}[Covered structure]
+A structure is \emph{covered} if every element of the domain is the denotation of some closed term. 
 \end{defn}
 
-\begin{defn}[Model variants]
-The variant $M^\alpha_d$ of the model $M$ is a model just like $M$ except that it assigns the name $\alpha$ to the element $d$ in the domain of $M$.
+%Should I make d an \Obj in the following definition?
+\begin{defn}[Structure variants]
+The variant $\Struct{M}^\alpha_d$ of the structure $\Struct{M}$ is a structure just like $\Struct{M}$ except that it assigns the name $\alpha$ to the element $d$ in the domain of $\Struct{M}$.
 \end{defn}
 
 %Possibly we could have the following be another "boxed" section, or a wordy section, or a boxed wordy section?
 
-The stipulations we make as to what counts as a model impact our logic. For example, the choice to prevent empty domains ensures (given the usual account of truth for quantified sentences), that $\exists x(Fx \vee\sim Fx)$ is a logical truth. And the stipulation that all names must refer to an object in the domain ensures that the existential generalization is a sound pattern of inference: \emph{Fa}, therefore $\exists xFx$. If we allowed names to refer outside the domain, or to not refer, then we would be on our way to a \emph{free logic}, in which existential generalization requires an additional premise: \emph{Fa} and $\exists x (x=a)$, therefore $\exists xFx$.
+The stipulations we make as to what counts as a structure impact our logic. For example, the choice to prevent empty domains ensures (given the usual account of truth for quantified sentences), that $\lexists[x][(Fx \lor \lnot Fx)]$ is a logical truth. And the stipulation that all names must refer to an object in the domain ensures that the existential generalization is a sound pattern of inference: \emph{Fa}, therefore $\lexists[x][Fx]$. If we allowed names to refer outside the domain, or to not refer, then we would be on our way to a \emph{free logic}, in which existential generalization requires an additional premise: \emph{Fa} and $\lexists[x][(x=a)]$, therefore $\lexists[x][Fx]$.
 
-\begin{defn}[Truth in a model]
+\begin{defn}[Truth in a structure]
 
-%To avoid confusion, should we swap for this section the word "model" with "structure" or "interpretation"?
-
-Let $!B$ and $!C$ be sentences, $!A$ be a formula with at most $x$ free, and $t_n$ a closed term throughout. Read $M \vDash !A$ as ``$M$ makes $!A$ true''.  Then truth in the model $M$ is defined as follows:
+Let $!B$ and $!C$ be sentences, $!A$ be a formula with at most $x$ free, and $t_n$ a closed term throughout. Read $\Struct{M} \Sat !A$ as ``the structure $\Struct{M}$ makes $!A$ true''.  Then truth in the structure $\Struct{M}$ is defined as follows:
 \begin{enumerate}
-\item $M \nvDash \bot$
-\item $M \vDash R(t_1 \ldots t_n)$ iff $\langle t_1^M \ldots t_n^M \rangle \in R^M$
-\item $M \vDash (t_1 = t_2)$ iff $t_1^M=t_2^M$
-\item $M \vDash \lnot !B$ iff $M \nvDash !B$
-\item $M \vDash !B \land !C$ iff $M \vDash !B$ and $M \vDash !C$
-\item $M \vDash !B \lor !C$ iff $M \vDash !B$ or $M \vDash !C$
-\item $M \vDash !B \rightarrow !C$ iff $M \nvDash !B$ or $M \vDash !C$
-\item $M \vDash \exists x !A$ iff there is a $d$ in the domain of $M$ such that $M^\alpha_d \vDash A!(x/\alpha)$, where $\alpha$ is new to $!A$
-\item $M \vDash \forall x !A$ iff for every $d$ in the domain of $m$, $M^\alpha_d \vDash A!(x/\alpha)$, where $\alpha$ is new to $!A$
+\item $\Struct{M} \not\Sat \lfalse$
+\item $\Struct{M} \Sat \ltrue$
+\item $\Struct{M} \Sat \Obj R(\Obj t_1 \ldots \Obj t_n)$ iff $\langle \Obj t_1^\Struct{M} \ldots \Obj t_n^\Struct{M} \rangle \in \Obj R^\Struct{M}$
+\item $\Struct{M} \Sat (\Obj t_1 = \Obj t_2)$ iff $\Obj t_1^\Struct{M}=\Obj t_2^\Struct{M}$
+\item $\Struct{M} \Sat \lnot !B$ iff $\Struct{M} \not\Sat !B$
+\item $\Struct{M} \Sat !B \land !C$ iff $\Struct{M} \Sat !B$ and $\Struct{M} \Sat !C$
+\item $\Struct{M} \Sat !B \lor !C$ iff $\Struct{M} \Sat !B$ or $\Struct{M} \Sat !C$
+\item $\Struct{M} \Sat !B \lif !C$ iff $\Struct{M} \not\Sat !B$ or $\Struct{M} \Sat !C$
+\item $\Struct{M} \Sat \lexists[x][!A]$ iff there is a $d$ in the domain of $\Struct{M}$ such that $\Struct{M}^\alpha_d \Sat A!(x/\alpha)$, where $\alpha$ is new to $!A$
+\item $\Struct{M} \Sat \lforall[x][!A]$ iff for every $d$ in the domain of $m$, $\Struct{M}^\alpha_d \Sat !A(x/\alpha)$, where $\alpha$ is new to $!A$
 \end{enumerate}
 \end{defn}
 
-\subsection{Basic Metatheoretical Concepts}
-
-%Do we prefer to state "by definition, blah blah blah" or use iff_def? In the past, I've noticed that iff_def either (1) goes unnoticed or (2) causes confusion. I've left them out, pending feedback
-
-\begin{defn}[Consequence]
-For a set of sentences $\Gamma$ and a sentence $!A$, $\Gamma \vDash !A$ (``$\Gamma$ implies $!A$'') iff there is no model making every sentence in $\Gamma$ true while making $!A$ false.
-\end{defn}
-
-\begin{defn}[Validity]
-For a sentence $!A$, $\hspace{1em}\vDash !A$ is valid iff every model makes $!A$ true. $!A$ is \emph{invalid} iff no model makes $!A$ true.
-\end{defn}
-
-\begin{defn}[Satisfiability]
-A set of sentences $\Gamma$ is \emph{satisfiable} iff there is a model making true every sentence in $\Gamma$. $\Gamma$ is \emph{unsatisfiable} iff no model makes every sentence in $\Gamma$ true.
-\end{defn}
-
-\begin{defn}[Logical equivalence]
-Two sentences $!A$ and $!B$ are logically equivalent iff $!A$ is true in a model iff $!B$ is, so they are either both true or both false in any given model.
-\end{defn}
-
-
-
-\begin{thm}[Extensionality]
-Whether or not a sentence $!A$ is true in a model depends only on the domain and the denotations of the non-logical symbols in $!A$.
-\end{thm}
-%Wordy? Proof sketch? How are we going to implement these kinds of explanations for proofs?
-This proof is by induction on the complexity of $!A$, and it starts with the basis cases showing that the extensionality theorem holds for the two simplest kinds of sentences\textemdash the atomic sentences. It then shows that it holds for each of the more complex kinds of sentences if it holds for sentences that are less complex than them.
-
-When it comes to sentences of \emph{FOL}, less complex just means having fewer logical operators.
-
-Remember that all inductions on complexity have this general form: an argument for the basis case or cases, and then, on the inductive hypothesis that it holds for less complex cases, an argument that it holds for the various complex cases.
-%End wordy.
-
-\begin{proof} By induction on the complexity of $!A$. Let $M$ and $M^*$ be models with a common domain, $D$. Assume that $M$ and $M^*$ agree on all names $\alpha$ and predicates $R$ in $!A$.
-
-For the basis case, let $!A$ be atomic; then $!A$ is of the form $R^n(t_1 \ldots t_n)$ for some predicate $R$. From the definition of truth in a model, we get $M \vDash R^n(t_1 \ldots t_n)$ iff $\langle t_1^M \ldots t_n^M \rangle \in R^M$. Since $M$ and $M^*$ agree on all names (each $t_i$) and on $R$, we get that $\langle t_1^{M^*} \ldots t_n^{M^*} \rangle \in R^{M^*}$. Hence, by definition of truth in a model, we conclude that $M^* \vDash R^n(t_1 \ldots t_n)$. 
-
-For the inductive hypothesis, suppose that for any sentence $!B$ that is less complex than $!A$, whenever $M$ and $M^*$ agree on the terms in $!B$, $M \vDash !B$ iff $M^* \vDash !B$. The induction step proceeds in cases given by the principal connective of $!A$.
-
-If $!A$ is a negation, then $!A = \lnot !B$ for some sentence $!B$. By definition of truth in a model, $M \vDash \lnot !B$ iff $M \nvDash !B$, so by the induction hypothesis (since $!B$ is less complex than $!A$), $M^* \nvDash !B$. Hence, $M^* \vDash \lnot !B$, so $M^* \vDash !A$.
-
-If $!A$ is a conjunction, then $!A = !B \land !C$ for some sentences $!B$ and $!C$ less complex than $!A$. By definition of truth in a model, $M \vDash !B \land !C$ iff $M \vDash !B$ and $M \vDash !C$. By the induction hypothesis, we must also have both $M^* \vDash !B$ and $M^* \vDash !C$, hence $M^* \vDash !B \land !C$.
-
-If $!A$ is a disjunction, then $!A = !B \lor !C$ for some sentences $!B$ and $!C$ less complex than $!A$. By definition of truth in a model, $M \vDash !B \lor !C$ iff $M \vDash !B$ or $M \vDash !C$, so by the induction hypothesis, $M^* \vDash !B$ or $M^* \vDash !C$. Hence $M^* \vDash !B \lor !C$. 
-
-If $!A$ is an implication, then $!A = !B \rightarrow !C$ for some sentences $!B$ and $!C$ less complex than $!A$. By definition of truth in a model, $M \vDash !B \rightarrow !C$ iff $M \nvDash !B$ or $M \nvDash !C$. Hence, by the induction hypothesis, $M^* \nvDash !B$ or $M^* \nvDash !C$, so $M^* \vDash !B \rightarrow !C$.
-
-If $!A$ is universally quantified, then $!A = \forall x !B$ for some sentence $!B$ less complex than $!A$ with at most $x$ free. By definition of truth in a model, $M \vDash \forall x !B$ iff every $d$ in the domain of $M$ is such that $M^\alpha_d \vDash B!(x/\alpha)$, where $\alpha$ is new to $!B$. Since $\alpha$ is new to $!B$, it is also new to $!A$, so the induction hypothesis cannot be applied just yet. Let $M^\alpha_d$ and ${M^*}^\alpha_d$ be extensions of the models $M$ and $M^*$ respectively such that the name $\alpha$ (new to $!B$) is assigned to $d$, any element of the common domain of $M$ and $M^*$. Since $!B$ is less complex than $!A$, and the extended models agree everywhere in $B!(x/\alpha)$, we apply the induction hypothesis to get that $M^\alpha_d \vDash B!(x/\alpha)$ iff ${M^*}^\alpha_d \vDash B!(x/\alpha)$. Hence, for every $d$ in the common domain of $M^*$, we conclude that ${M^*}^\alpha_d \vDash B!(x/\alpha)$, so by definition of truth in a model, $M^* \vDash \forall x !B$.  
-
-If $!A$ is existentially quantified, then $!A = \exists x !B$ for some sentence $!B$ less complex than $!A$ with at most $x$ free. By definition of truth in a model, $M \vDash \exists x !B$ iff some $d$ in the domain of $M$ is such that $M^\alpha_d \vDash B!(x/\alpha)$, where $\alpha$ is new to $!B$. Since $\alpha$ is new to $!B$, it is also new to $!A$, so the induction hypothesis cannot be applied just yet. Let $M^\alpha_d$ and ${M^*}^\alpha_d$ be extensions of the models $M$ and $M^*$ respectively such that the name $\alpha$ (new to $!B$) is assigned to $d$, which is as described before and is in the common domain of $M$ and $M^*$. Since $!B$ is less complex than $!A$, and the extended models agree everywhere in $B!(x/\alpha)$, we apply the induction hypothesis to get that $M^\alpha_d \vDash B!(x/\alpha)$ iff ${M^*}^\alpha_d \vDash B!(x/\alpha)$. Hence, for some $d$ in the common domain of $M^*$, we conclude that ${M^*}^\alpha_d \vDash B!(x/\alpha)$, so by definition of truth in a model, $M^* \vDash \exists x !B$.
-
-Hence, if we assume our induction hypothesis, that for any sentence $!B$ that is less complex than $!A$, whenever $M$ and $M^*$ agree on the terms in $!B$, then $M\vDash !A$ iff $M^* \vDash !B$, we get from the induction step that $M \vDash !A$ iff $M^* \vDash !A$ whenever $M$ and $M^*$ agree on all the terms in $!A$. By induction, we get the theorem as required.
-\end{proof}
-
-%I put in all of the cases... We can probably trim this down though, leaving some steps as exercises, maybe
-
-%Below is one spot where I really think we ought to clarify model vs interpretation, as mentioned on line 47
-
-\begin{thm}[L\"owenheim-Skolem for FOL]
-If a set of sentences has a model, then it has an enumerable model.
-\end{thm}
-
-\begin{thm}[L\"owenheim-Skolem for FOL without =]
-If a set of sentences has a model, then it has a denumerable model.
-\end{thm}
-
-
-
-
-
-
-
-
-
-
-
+%Moved metatheoretical concepts ("semantic notions") to a new section, semantic-notions
 
 \end{document}
