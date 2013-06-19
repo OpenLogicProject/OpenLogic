@@ -45,7 +45,7 @@ Remember that all inductions on complexity have this general form: an argument f
 
 For the basis case, let $!A$ be atomic; then $!A$ is of the form $\Obj R^n(\Obj t_1 \ldots \Obj t_n)$ for some predicate $\Obj R$. From the definition of truth in a structure, we get $\Struct{M} \Sat \Obj R^n(\Obj t_1 \ldots \Obj t_n)$ iff $\langle \Obj t_1^\Struct{M} \ldots \Obj t_n^\Struct{M} \rangle \in \Obj R^\Struct{M}$. Since $\Struct{M}$ and $\Struct{M}^*$ agree on all names (each $\Obj t_i$) and on $R$, we get that $\langle \Obj t_1^{\Struct{M}^*} \ldots \Obj t_n^{\Struct{M}^*} \rangle \in \Obj R^{\Struct{M}^*}$. Hence, by definition of truth in a structure, we conclude that $\Struct{M}^* \Sat \Obj R^n(\Obj t_1 \ldots \Obj t_n)$. 
 
-For the inductive hypothesis, suppose that for any sentence $!B$ that is less complex than $!A$, whenever $\Struct{M}$ and $\Struct{M}^*$ agree on the terms in $!B$, $\Struct{M} \Sat !B$ iff $\Struct{M}^* \Sat !B$. The induction step proceeds in cases given by the principal connective of $!A$.
+For the inductive hypothesis, suppose that for any sentence $!B$ that is less complex than $!A$, whenever $\Struct{M}$ and $\Struct{M}^*$ agree on the terms in $!B$, $\Struct{M} \Sat !B$ iff $\Struct{M}^* \Sat !B$. The induction step proceeds in cases given by the main connective of $!A$.
 
 If $!A$ is a negation, then $!A \ident \lnot !B$ for some sentence $!B$. By definition of truth in a structure, $\Struct{M} \Sat \lnot !B$ iff $\Struct{M} \not\Sat !B$, so by the induction hypothesis (since $!B$ is less complex than $!A$), $\Struct{M}^* \not\Sat !B$. Hence, $\Struct{M}^* \Sat \lnot !B$, so $\Struct{M}^* \Sat !A$.
 
