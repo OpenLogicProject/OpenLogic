@@ -1,0 +1,49 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proof-theoretic-notions
+
+\documentclass[sequent-calculus]{subfiles}
+
+\begin{document}
+
+\section{Proof-Theoretic Notions}
+
+\begin{wordy}
+Just as we've defined a number of important semantic notions
+(validity, entailment, satisfiabilty), we now define corresponding
+\emph{proof-theoretic notions}. These are not defined by appeal to
+satisfaction of sentneces in structures, but by appeal to the
+provability or unprovability of certain sequents.  It was an important
+discovery, due to G\"odel, that these notions coincide.  That they do
+is the content of the \emph{completeness theorem}.
+\end{wordy}
+
+\begin{defn}[Theorems]
+A sentence~$!A$ is a \emph{theorem} if there is a proof in LK of the
+sequent $\Sequent !A$. We write $\Proves !A$ if $!A$ is a theorem and
+$\Proves/ !A$ if it is not.
+\end{defn}
+
+\begin{defn}[Provability]
+A sentence $!A$ is \emph{provable from} a set of sentences~$\Gamma$,
+$\Gamma \Proves !A$, if there is a finite subset~$\Gamma_0 \subseteq
+\Gamma$ such that LK derives $\Gamma_0 \Sequent !A$.  If $!A$ is not
+provable from $\Gamma$ we write $\Gamma \Proves/ !A$.
+\end{defn}
+
+\begin{defn}[Consistency]
+A set of sentences~$\Gamma$ is \emph{consistent} iff $\Gamma \Proves!
+\lfalse$.  If $\Gamma$ is not consistent we say it is \emph{inconsistent}.
+\end{defn}
+
+\begin{prop}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot A\}$ is inconsistent.
+\end{prop}
+
+\begin{prop}
+$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every sentence~$!A$.
+\end{prop}
+
+
+
+\end{document}
