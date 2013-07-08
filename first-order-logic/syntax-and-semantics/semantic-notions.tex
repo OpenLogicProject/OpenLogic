@@ -1,6 +1,6 @@
-%Part: first-order-logic
+% Part: first-order-logic
 % Chapter: syntax-and-semantics
-% Section: semantic-notions
+% Section: Semantic Notions
 
 \documentclass[syntax-and-semantics]{subfiles}
 
@@ -8,77 +8,60 @@
 
 \section{Semantic Notions}
 
-%Do we prefer to state "by definition, blah blah blah" or use iff_def? In the past, I've noticed that iff_def either (1) goes unnoticed or (2) causes confusion. I've left them out, pending feedback
-
-\begin{defn}[Consequence]
-For a set of sentences $\Gamma$ and a sentence $!A$, $\Gamma \Sat !A$ (``$\Gamma$ implies $!A$'') iff there is no structure making every sentence in $\Gamma$ true while making $!A$ false.
-\end{defn}
+\begin{wordy}
+Give the definition of structures for first order langauges, we can
+define some basic semantic properties of and relationships between
+sentences.  The simplest of these is the notion of \emph{validity} of
+a sentence.  A sentence is valid if it is satisfied in every
+structure.  Valid sentences are those that are satisfied regardless of
+how the non-logical symbols in it are interpreted.  Valid sentences
+are therefore also called \emph{logical truths}---they are true, i.e.,
+satisifed, in any structure and hence their truth depends only on the
+logical symbols occuring in it and their syntactic structure, but not
+on the non-logical symbols or their interpretation.  
+\end{wordy}
 
 \begin{defn}[Validity]
-For a sentence $!A$, $\hspace{1em}\Sat !A$ is valid iff every structure makes $!A$ true. $!A$ is \emph{invalid} iff no structure makes $!A$ true.
+A sentence $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
+structure~$\Struct M$.
+\end{defn}
+
+\begin{defn}[Entailment]
+A set of sentences~$\Gamma$ \emph{entails} a sentence~$!A$, $\Gamma
+\Entails !A$, iff for every structure~$\Struct M$ with
+$\Sat{M}{\Gamma}$, $\Sat{M}{!A}$.
 \end{defn}
 
 \begin{defn}[Satisfiability]
-A set of sentences $\Gamma$ is \emph{satisfiable} iff there is a structure making true every sentence in $\Gamma$. $\Gamma$ is \emph{unsatisfiable} iff no structure makes every sentence in $\Gamma$ true.
+A set of sentences~$\Gamma$ is \emph{satisfiable} if $\Sat{M}{\Gamma}$
+for some structure~$\Struct M$.  If $\Gamma$ is not satisfiable it is
+called \emph{unsatisfiable}.
 \end{defn}
 
-\begin{defn}[Logical equivalence]
-Two sentences $!A$ and $!B$ are logically equivalent iff $!A$ is true in a structure iff $!B$ is, so they are either both true or both false in any given structure.
-\end{defn}
+\begin{prop}
+A sentence $!A$ is valid iff $\Gamma \Entails !A$ for every set of
+sentences~$\Gamma$.
+\end{prop}
 
+% Dana: prove this
 
-\begin{thm}[Extensionality]
-If two structures agree on what they assign to the symbols occurring in a sentence $!A$, then they both either make $!A$ true or both make it false.
+\begin{prop}
+$\Gamma \Entails !A$ iff $\Gamma \cup \{\lnot !A}$ is unsatisfiable.
+\end{prop}
+
+% Dana: prove this
+
+\begin{prop}
+If $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$, then $\Gamma'
+\Entails !A$.
+\end{prop}
+
+% Dana: prove this
+
+\begin{thm}[Semantic Deduction Theorem]
+If $\Gamma \cup \{!A\} \Entails !B$ iff $\Gamma \Entails !A \lif !B$.
 \end{thm}
 
-\begin{wordy}
-That is to say, whether or not a sentence $!A$ is true in a model depends only on the domain and the denotations of the non-logical symbols in $!A$.
-
-This proof is by induction on the complexity of $!A$, and it starts with the basis cases showing that the extensionality theorem holds for the two simplest kinds of sentences\textemdash the atomic sentences. It then shows that it holds for each of the more complex kinds of sentences if it holds for sentences that are less complex than them.
-
-When it comes to sentences of \emph{FOL}, less complex just means having fewer logical operators.
-
-Remember that all inductions on complexity have this general form: an argument for the basis case or cases, and then, on the inductive hypothesis that it holds for less complex cases, an argument that it holds for the various complex cases.
-\end{wordy}
-
-\begin{proof} By induction on the complexity of $!A$. Let $\Struct{M}$ and $\Struct{M}^*$ be structures with a common domain, $D$. Assume that $\Struct{M}$ and $\Struct{M}^*$ agree on all names $\alpha$ and predicates $\Obj R$ in $!A$.
-
-For the basis case, let $!A$ be atomic; then $!A$ is of the form $\Obj R^n(\Obj t_1 \ldots \Obj t_n)$ for some predicate $\Obj R$. From the definition of truth in a structure, we get $\Struct{M} \Sat \Obj R^n(\Obj t_1 \ldots \Obj t_n)$ iff $\langle \Obj t_1^\Struct{M} \ldots \Obj t_n^\Struct{M} \rangle \in \Obj R^\Struct{M}$. Since $\Struct{M}$ and $\Struct{M}^*$ agree on all names (each $\Obj t_i$) and on $R$, we get that $\langle \Obj t_1^{\Struct{M}^*} \ldots \Obj t_n^{\Struct{M}^*} \rangle \in \Obj R^{\Struct{M}^*}$. Hence, by definition of truth in a structure, we conclude that $\Struct{M}^* \Sat \Obj R^n(\Obj t_1 \ldots \Obj t_n)$. 
-
-For the inductive hypothesis, suppose that for any sentence $!B$ that is less complex than $!A$, whenever $\Struct{M}$ and $\Struct{M}^*$ agree on the terms in $!B$, $\Struct{M} \Sat !B$ iff $\Struct{M}^* \Sat !B$. The induction step proceeds in cases given by the main connective of $!A$.
-
-If $!A$ is a negation, then $!A \ident \lnot !B$ for some sentence $!B$. By definition of truth in a structure, $\Struct{M} \Sat \lnot !B$ iff $\Struct{M} \not\Sat !B$, so by the induction hypothesis (since $!B$ is less complex than $!A$), $\Struct{M}^* \not\Sat !B$. Hence, $\Struct{M}^* \Sat \lnot !B$, so $\Struct{M}^* \Sat !A$.
-
-If $!A$ is a conjunction, then $!A \ident !B \land !C$ for some sentences $!B$ and $!C$ less complex than $!A$. By definition of truth in a structure, $\Struct{M} \Sat !B \land !C$ iff $\Struct{M} \Sat !B$ and $\Struct{M} \Sat !C$. By the induction hypothesis, we must also have both $\Struct{M}^* \Sat !B$ and $\Struct{M}^* \Sat !C$, hence $\Struct{M}^* \Sat !B \land !C$.
-
-If $!A$ is a disjunction, then $!A \ident !B \lor !C$ for some sentences $!B$ and $!C$ less complex than $!A$. By definition of truth in a structure, $\Struct{M} \Sat !B \lor !C$ iff $\Struct{M} \Sat !B$ or $\Struct{M} \Sat !C$, so by the induction hypothesis, $\Struct{M}^* \Sat !B$ or $\Struct{M}^* \Sat !C$. Hence $\Struct{M}^* \Sat !B \lor !C$. 
-
-If $!A$ is an implication, then $!A \ident !B \lif !C$ for some sentences $!B$ and $!C$ less complex than $!A$. By definition of truth in a structure, $\Struct{M} \Sat !B \lif !C$ iff $\Struct{M} \not\Sat !B$ or $\Struct{M} \not\Sat !C$. Hence, by the induction hypothesis, $\Struct{M}^* \not\Sat !B$ or $\Struct{M}^* \not\Sat !C$, so $\Struct{M}^* \Sat !B \lif !C$.
-
-%Do we want to use \Obj for variables in the language? (ie. do we want \lforall[x][!A] to print with sans serif x)
-
-If $!A$ is universally quantified, then $!A \ident \lforall[x][!B]$ for some sentence $!B$ less complex than $!A$ with at most $x$ free. By definition of truth in a structure, $\Struct{M} \Sat \lforall[x][!B]$ iff every $d$ in the domain of $\Struct{M}$ is such that $\Struct{M}^\alpha_d \Sat !B(x/\alpha)$, where $\alpha$ is new to $!B$. Since $\alpha$ is new to $!B$, it is also new to $!A$, so the induction hypothesis cannot be applied just yet. Let $\Struct{M}^\alpha_d$ and ${\Struct{M}^*}^\alpha_d$ be extensions of the structures $\Struct{M}$ and $\Struct{M}^*$ respectively such that the name $\alpha$ (new to $!B$) is assigned to $d$, any element of the common domain of $\Struct{M}$ and $\Struct{M}^*$. Since $!B$ is less complex than $!A$, and the extended structures agree everywhere in $!B(x/\alpha)$, we apply the induction hypothesis to get that $\Struct{M}^\alpha_d \Sat !B(x/\alpha)$ iff ${\Struct{M}^*}^\alpha_d \Sat !B(x/\alpha)$. Hence, for every $d$ in the common domain of $\Struct{M}^*$, we conclude that ${\Struct{M}^*}^\alpha_d \Sat !B(x/\alpha)$, so by definition of truth in a structure, $\Struct{M}^* \Sat \lforall[x][!B]$.  
-
-If $!A$ is existentially quantified, then $!A \ident \lexists[x][!B]$ for some sentence $!B$ less complex than $!A$ with at most $x$ free. By definition of truth in a structure, $\Struct{M} \Sat \lexists[x][!B]$ iff some $d$ in the domain of $\Struct{M}$ is such that $\Struct{M}^\alpha_d \Sat B!(x/\alpha)$, where $\alpha$ is new to $!B$. Since $\alpha$ is new to $!B$, it is also new to $!A$, so the induction hypothesis cannot be applied just yet. Let $\Struct{M}^\alpha_d$ and ${\Struct{M}^*}^\alpha_d$ be extensions of the structures $\Struct{M}$ and $\Struct{M}^*$ respectively such that the name $\alpha$ (new to $!B$) is assigned to $d$, which is as described before and is in the common domain of $\Struct{M}$ and $\Struct{M}^*$. Since $!B$ is less complex than $!A$, and the extended structures agree everywhere in $B!(x/\alpha)$, we apply the induction hypothesis to get that $\Struct{M}^\alpha_d \Sat B!(x/\alpha)$ iff ${\Struct{M}^*}^\alpha_d \Sat B!(x/\alpha)$. Hence, for some $d$ in the common domain of $\Struct{M}^*$, we conclude that ${\Struct{M}^*}^\alpha_d \Sat B!(x/\alpha)$, so by definition of truth in a structure, $\Struct{M}^* \Sat \lexists[x][!B]$.
-
-Hence, if we assume our induction hypothesis, that for any sentence $!B$ that is less complex than $!A$, whenever $\Struct{M}$ and $\Struct{M}^*$ agree on the terms in $!B$, then $\Struct{M}\Sat !A$ iff $\Struct{M}^* \Sat !B$, we get from the induction step that $\Struct{M} \Sat !A$ iff $\Struct{M}^* \Sat !A$ whenever $\Struct{M}$ and $\Struct{M}^*$ agree on all the terms in $!A$. By induction, we get the theorem as required.
-\end{proof}
-
-%I put in all of the cases... We can probably trim this down though, leaving some steps as exercises, maybe
-
-\begin{defn}[Model]
-A \emph{model} for a set of sentences $\Gamma$ is a structure that makes true all of the sentences in $\Gamma$.
-\end{defn}
-%Why does \Gamma now show up italicized? I'm not sure if I like it...
-
-%Still needs a definition for (d)enumerable model
-
-\begin{thm}[L\"owenheim-Skolem for FOL]
-If a set of sentences has a model, then it has an enumerable model.
-\end{thm}
-
-\begin{thm}[L\"owenheim-Skolem for FOL without =]
-If a set of sentences has a model, then it has a denumerable model.
-\end{thm}
+% Dana: prove this
 
 \end{document}
