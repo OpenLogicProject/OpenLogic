@@ -1,0 +1,116 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction
+
+\documentclass[syntax-and-semantics]{subfiles}
+
+\begin{document}
+
+\section{Satisfaction of a Formula in a Structure}
+
+\begin{wordy}
+The basic notion that relates expressions such as terms and formulas,
+n the one hand, and structures on the other, are those of
+\emph{denotation} and \emph{satisfaction}.  Informally, a term
+\emph{denotes} an element of a structure---if the term is just a
+constant, it denotes the object assigned to the constant by the
+structure, and if it is built up using function symbols, the
+denotation is comuted from the values of constants and the functions
+assigned to the functions in the term.  A formula is \emph{satisifed}
+in a structure if the interpretation given to the predicates makes the
+formula true in the domain of the structure. This notion of
+satisfaction is specified inductively: the specification of the
+structure directly states when atomic formulas are satisifed, and we
+define when a complex formula is satisfied depending on the main
+connective or quantifier and whether or not the immediate subformulas
+are satisifed. The case of the quantifiers here is a bit tricky, as
+the immediate subformula of a quantified formula has a free variable,
+and structures don't specify what variables denote.  In order to deal
+with this difficulty, we also introduce \emph{variable assignments}
+and define satisfaction not with respect to a structure alone, but
+with respect to a structure plus a variable assignment.
+\end{wordy}
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a structure~$\Struct{M}$ is a
+function which maps each variabe to an element of~$\Domain M$, i.e.,
+$s\colon \Var \to \Domain M$.
+\end{defn}
+
+\begin{defn}[Denotation of terms]
+If $t$ is a term of the langage~$\Lang L$, $\Struct M$ is a structure
+for~$\Lang L$, and $s$ is a variable assignment for~$\Struct M$, the
+\emph{denotation}~$\Value{t}{M}[s]$ is defied as follows:
+\begin{enumerate}
+\item If $t$ is just the constant $c$, then $\Value{c}{M}[s] = \Assign{c}{M}$.
+\item If $t$ is just the variable~$x$, then $\Value{c}{M}[s] = s(x)$.
+\item If $t$ is of the form $\Atom{f}{t_1, \ldots, t_n}$, then
+\[
+\Value{t}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s]).
+\]
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[$x$-Variant]
+If $s$ is a variable assignment for a structure~$\Struct M$, then any
+variable assignment $s'$ for $\Struct M$ which differs from $s$ only
+in what it assigns to $x$ is called an \emph{$x$-variant} of~$s$.  If
+$s'$ is an $x$-variant of $s$ we write $s \sim_x s'$.
+\end{defn}
+
+\begin{defn}[Satisfaction]
+Satisfaction of a formula~$!A$ in a structure~$\Struct M$ relative to
+a variable assignment~$s$, $\Sat{M}{!A}[s]$ is defined inductively as
+follows. If not $\Sat{M}{!A}[s]$ we write $\Sat!{M}{!A}[s]$.
+\begin{enumerate}
+\item Never $\Sat{M}{\lfalse}[s]$.
+\item Always $\Sat{M}{\ltrue}[s]$.
+\item For any $n$-place predicate~$R$ and terms $t_1$, \dots, $t_n$,
+  $\Sat{M}{\Atom{R}{t_1, \dots, t_n}}[s]$ iff $\langle \Value{t_1}{M}[s],
+  \dots, \Value{t_n}{M}[s] \rangle \in \Assign{R}{M}$.
+\item For any terms $t$, $t'$, $\Sat{M}{t_1 = t_2}[s]$ iff
+  $\Value{t}{M}[s] = \Value{t'}{M}[s]$.
+\item $\Sat{M}{\lnot !A}[s]$ iff $\Sat!{M}{!A}[s]$
+\item $\Sat{M}{!A \land !B}[s]$ iff $\Sat{M}{!A}[s]$ and $\Sat{M}{!B}[s]$.
+\item $\Sat{M}{!A \lor !B}[s]$ iff $\Sat{M}{!A}[s]$ or
+  $\Sat{M}{!B}[s]$ (or both).
+\item $\Sat{M}{!A \lif !B}[s]$ iff $\Sat!{M}{!A}[s]$ or
+  $\Sat{M}{!B}[s]$ (or both).
+\item $\Sat{M}{\lexists[x][!A]}[s]$ iff there is an $x$-variant $s'$
+  of $s$ so that $\Sat{M}{!A}[s']$.
+\item $\Sat{M}{\lforall[x][!A]}[s]$ iff for every $x$-variant $s'$ of
+  $s$, $\Sat{M}{!A}[s']$.
+\end{enumerate}
+\end{defn}
+
+\begin{wordy}
+A variable assignment~$s$ provide a value for \emph{every} variable in
+the language. This is of course not necessary: whether or not a
+formula~$!A$ is satisfied in a structure with respect to~$s$ only
+depends on the assignments~$s$ makes to the free variables that
+actually occur in~$!A$.  This is the content of the next theorem.  We
+require variable assignments to assign vaues to all variables simply
+because it makes things a lot easier.
+\end{wordy}
+
+\begin{prop}
+If $x_1$, \dots, $x_n$ are the only free variables in $!A$ and $s(x_i)
+= s'(x_i)$ for $i = 1$, \dots, $n$, then $\Sat{M}{!A}[s]$ iff
+$\Sat{M}{!A}[s']$.
+\end{prop}
+
+% Dana: prove this!
+
+\begin{defn}
+If $!A$ is a sentence, we say that a structure~$\Struct M$
+satisfies~$!A$, $\Sat{M}{!A}$, iff $\Sat{M}{!A}[s]$ for all variable
+assignments~$s$.
+\end{defn}
+
+\begin{prob}
+Show that if $!A$ is a sentence, $\Sat{M}{!A}$ iff there is a variable
+assignment~$s$ so that $\Sat{M}{!A}[s]$.
+\end{prob}
+
+\end{document}
