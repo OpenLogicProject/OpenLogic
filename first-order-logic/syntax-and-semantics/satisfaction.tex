@@ -62,7 +62,7 @@ $s'$ is an $x$-variant of $s$ we write $s \sim_x s'$.
 \begin{defn}[Satisfaction]
 Satisfaction of a formula~$!A$ in a structure~$\Struct M$ relative to
 a variable assignment~$s$, $\Sat{M}{!A}[s]$ is defined inductively as
-follows. If not $\Sat{M}{!A}[s]$ we write $\Sat!{M}{!A}[s]$.
+follows. If not $\Sat{M}{!A}[s]$ we write $\Sat/{M}{!A}[s]$.
 \begin{enumerate}
 \item Never $\Sat{M}{\lfalse}[s]$.
 \item Always $\Sat{M}{\ltrue}[s]$.
@@ -71,11 +71,11 @@ follows. If not $\Sat{M}{!A}[s]$ we write $\Sat!{M}{!A}[s]$.
   \dots, \Value{t_n}{M}[s] \rangle \in \Assign{R}{M}$.
 \item For any terms $t$, $t'$, $\Sat{M}{t_1 = t_2}[s]$ iff
   $\Value{t}{M}[s] = \Value{t'}{M}[s]$.
-\item $\Sat{M}{\lnot !A}[s]$ iff $\Sat!{M}{!A}[s]$
+\item $\Sat{M}{\lnot !A}[s]$ iff $\Sat/{M}{!A}[s]$
 \item $\Sat{M}{!A \land !B}[s]$ iff $\Sat{M}{!A}[s]$ and $\Sat{M}{!B}[s]$.
 \item $\Sat{M}{!A \lor !B}[s]$ iff $\Sat{M}{!A}[s]$ or
   $\Sat{M}{!B}[s]$ (or both).
-\item $\Sat{M}{!A \lif !B}[s]$ iff $\Sat!{M}{!A}[s]$ or
+\item $\Sat{M}{!A \lif !B}[s]$ iff $\Sat/{M}{!A}[s]$ or
   $\Sat{M}{!B}[s]$ (or both).
 \item $\Sat{M}{\lexists[x][!A]}[s]$ iff there is an $x$-variant $s'$
   of $s$ so that $\Sat{M}{!A}[s']$.

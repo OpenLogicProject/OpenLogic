@@ -1,71 +1,73 @@
 % Part: first-order-logic
 % Chapter: syntax-and-semantics
-% Section: semantics
+% Section: Structures
 
 \documentclass[syntax-and-semantics]{subfiles}
 
 \begin{document}
 
-% I will macro this once any major changes have been suggested/implemented
-\section{Semantics}
-
-%Change then name of this module to Structures instead of Semantics? and have semantics be a larger heading containing Structures and Semantic notions?
-
-%I like Aldo's notation of |M| for domain of M. Can we figure out some way to switch out D^M with |M|, if desired? I find the D^M notation unappealing, especially when using other superscripts 
-
-%I replaced what I had originally from Nicole's notes to definitions from Aldo's
-
-\begin{defn}[Structure]
-A \emph{structure}, $\Struct{M}$, for a language $\Lang{L}$ of first-order logic consists of the following elements:
-\begin{quote}
-\begin{description}
-\item[Domain:] a non-empty set, $D^\Struct{M}$ 
-\item[Name assignment:] for each constant symbol $\Obj c$ of $\Lang{L}$, an element $\Obj c^\Struct{M} \in D^\Struct{M}$
-\item[Relations:] for each $n$-place predicate symbol $\Obj R$ of $\Lang{L}$ (other than $=$), an $n$-ary relation $\Obj R^\Struct{M} \subseteq (D^\Struct{M})^n$
-\item[Functions:] for each $n$-place function symbol $\Obj f$ of $\Lang{L}$, an $n$-ary function $\Obj f^\Struct{M} : (D^\Struct{M})^n \rightarrow D^\Struct{M}$
-
-\end{description}
-\end{quote}
-\end{defn}
+\section{Structures for First-order Languages}
 
 \begin{wordy}
-Recall that a term is \emph{closed} if it is a term or if it is a function of terms only (without variables, whether free or bound).
+First-order languages are, by themselves, \emph{uninterpreted:} the
+constants, functions, and predicates have nospecific meaning attached
+to them.  Meanings are given by specifying a \emph{structure}
+(somtimes called an \emph{interpretation}).  It specifies the
+\emph{domain}, i.e., the objects which the constats pick out, the
+functions operate on, and the quantifiers range over. In addition, it
+specifies which constants pick out which objects, how a function maps
+objects to objects, and which objects the predicates apply to.
+Structures are the basis for \emph{semantic} notions in logic, e.g.,
+the notion of consequence, validity, satisfiablity.
 \end{wordy}
 
-\begin{defn}[Denotation of closed terms]
-In a structure $\Struct{M}$, the \emph{denotation} of the closed term $\Obj f(\Obj t_1 \ldots \Obj t_n)^\Struct{M}$ is identical to $\Obj f^\Struct{M}(\Obj t_1^\Struct{M} \ldots \Obj t_n^\Struct{M})$. 
-\end{defn}
-
-\begin{defn}[Covered structure]
-A structure is \emph{covered} if every element of the domain is the denotation of some closed term. 
-\end{defn}
-
-%Should I make d an \Obj in the following definition?
-\begin{defn}[Structure variants]
-The variant $\Struct{M}^\alpha_d$ of the structure $\Struct{M}$ is a structure just like $\Struct{M}$ except that it assigns the name $\alpha$ to the element $d$ in the domain of $\Struct{M}$.
-\end{defn}
-
-%Possibly we could have the following be another "boxed" section, or a wordy section, or a boxed wordy section?
-
-The stipulations we make as to what counts as a structure impact our logic. For example, the choice to prevent empty domains ensures (given the usual account of truth for quantified sentences), that $\lexists[x][(Fx \lor \lnot Fx)]$ is a logical truth. And the stipulation that all names must refer to an object in the domain ensures that the existential generalization is a sound pattern of inference: \emph{Fa}, therefore $\lexists[x][Fx]$. If we allowed names to refer outside the domain, or to not refer, then we would be on our way to a \emph{free logic}, in which existential generalization requires an additional premise: \emph{Fa} and $\lexists[x][(x=a)]$, therefore $\lexists[x][Fx]$.
-
-\begin{defn}[Truth in a structure]
-
-Let $!B$ and $!C$ be sentences, $!A$ be a formula with at most $x$ free, and $t_n$ a closed term throughout. Read $\Struct{M} \Sat !A$ as ``the structure $\Struct{M}$ makes $!A$ true''.  Then truth in the structure $\Struct{M}$ is defined as follows:
+\begin{defn}[Structure]
+A \emph{structure}, $\Struct{M}$, for a language $\Lang{L}$ of
+first-order logic consists of the following elements:
 \begin{enumerate}
-\item $\Struct{M} \not\Sat \lfalse$
-\item $\Struct{M} \Sat \ltrue$
-\item $\Struct{M} \Sat \Obj R(\Obj t_1 \ldots \Obj t_n)$ iff $\langle \Obj t_1^\Struct{M} \ldots \Obj t_n^\Struct{M} \rangle \in \Obj R^\Struct{M}$
-\item $\Struct{M} \Sat (\Obj t_1 = \Obj t_2)$ iff $\Obj t_1^\Struct{M}=\Obj t_2^\Struct{M}$
-\item $\Struct{M} \Sat \lnot !B$ iff $\Struct{M} \not\Sat !B$
-\item $\Struct{M} \Sat !B \land !C$ iff $\Struct{M} \Sat !B$ and $\Struct{M} \Sat !C$
-\item $\Struct{M} \Sat !B \lor !C$ iff $\Struct{M} \Sat !B$ or $\Struct{M} \Sat !C$
-\item $\Struct{M} \Sat !B \lif !C$ iff $\Struct{M} \not\Sat !B$ or $\Struct{M} \Sat !C$
-\item $\Struct{M} \Sat \lexists[x][!A]$ iff there is a $d$ in the domain of $\Struct{M}$ such that $\Struct{M}^\alpha_d \Sat A!(x/\alpha)$, where $\alpha$ is new to $!A$
-\item $\Struct{M} \Sat \lforall[x][!A]$ iff for every $d$ in the domain of $m$, $\Struct{M}^\alpha_d \Sat !A(x/\alpha)$, where $\alpha$ is new to $!A$
+\item \emph{Domain:} a non-empty set, $\Domain M$ 
+\item \emph{Name assignment:} for each constant symbol $c$ of
+  $\Lang{L}$, an element $\Assign{c}{M} \in \Domain M$
+\item \emph{Relations:} for each $n$-place predicate symbol $R$ of
+  $\Lang{L}$ (other than $=$), an $n$-ary relation $\Assign{R}{M}
+  \subseteq \Domain{M}^n$
+\item \emph{Functions:} for each $n$-place function symbol $\Obj f$ of
+  $\Lang{L}$, an $n$-ary function $\Assign{f}{M} \colon
+  \Domain{M})^n \to \Domain{M}$
 \end{enumerate}
 \end{defn}
 
-%Moved metatheoretical concepts ("semantic notions") to a new section, semantic-notions
+\begin{wordy}
+Recall that a term is \emph{closed} if it is a term or if it is a
+function of terms only (without variables, whether free or bound).
+\end{wordy}
+
+\begin{defn}[Denotation of closed terms]
+If $t$ is a closed term of the langage~$\Lang L$ and $\Struct M$ i a structure for~$\Lang L$, the \emph{denotation}~$\Value{t}{M}$ is defied as follows:
+\begin{enumerate}
+\item If $t$ is just the constant $c$, then $\Value{c}{M} = \Assign{c}{M}$.
+\item If $t$ is of the form $\Atom{f}{t_1, \ldots, t_n}$, then
+  $\Value{t}{M}$ is $\Assign{f}{M}(\Value{t_1}{M}, \ldots,
+  \Value{t_n}{M})$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[Covered structure]
+A structure is \emph{covered} if every element of the domain is the
+denotation of some closed term.
+\end{defn}
+
+The stipulations we make as to what counts as a structure impact our
+logic. For example, the choice to prevent empty domains ensures (given
+the usual account of truth for quantified sentences), that
+$\lexists[x][(!A(x) \lor \lnot !A(x))]$ is a logical truth. And the
+stipulation that all names must refer to an object in the domain
+ensures that the existential generalization is a sound pattern of
+inference: $!A(a)$, therefore $\lexists[x][!A(x)]$. If we allowed names
+to refer outside the domain, or to not refer, then we would be on our
+way to a \emph{free logic}, in which existential generalization
+requires an additional premise: $!A(a)$ and $\lexists[x][(x=a)]$,
+therefore $\lexists[x][!A(x)]$.
+
 
 \end{document}

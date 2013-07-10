@@ -100,18 +100,34 @@
         { \, #2 }
 }
 
+% sequent symbol is a double arrow
+\let\Sequent\Rightarrow
+
 % satisfaction/truth relation
-\let\Sat\models
+\DeclareDocumentCommand \Sat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    \IfNoValueTF {#4} 
+        { \Struct #2 \not\models #3 }
+        { \Struct #2 \not\models #3 \, [#4]}}{
+    \IfNoValueTF {#4} 
+        { \Struct #2 \models #3 }
+        { \Struct #2 \models #3 \, [#4]}}
+}
+
 
 % derivability relation
-\DeclareDocumentCommand \Deriv { o } {
-    \IfNoValueTF {#1} 
+\DeclareDocumentCommand \Proves { t{/} o } {
+  \IfBooleanTF {#1}{
+    \IfNoValueTF {#2} 
+        { \not\vdash }
+        { \not\vdash_{#2} }}{
+    \IfNoValueTF {#2} 
         { \vdash }
-        { \vdash_{#1} }
+        { \vdash_{#2} }}
 }
 
 % semantic consequence relation relation
-\DeclareDocumentCommand \Deriv { o } {
+\DeclareDocumentCommand \Entails { o } {
     \IfNoValueTF {#1} 
         { \models }
         { \models_{#1} }
@@ -141,6 +157,23 @@
         { #1(#2) }
 }
 
+% domain of a structure
+\def\Domain#1{\left| \Struct #1 \right|}
+
+% assignment of a constant/predicate symbol in a structure
+\def\Assign#1#2{#1^{\Struct #2}}
+
+
+% value of a term symbol in a structure
+\DeclareDocumentCommand \Value { m m o} {
+    \IfNoValueTF {#3}
+        { \mathrm{Val}^{\Struct #2}(#1) }
+        { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
+}
+
+
+
+
 
 % commands for various special sets
 % =================================
@@ -162,7 +195,7 @@
         { \mathrm{Frm}({\Lang #1}) }
 }
 
-% Formulas
+% Sub Formulas
 \DeclareDocumentCommand \SubFrm { m } {
         \mathrm{SFrm}({#1})
 }
@@ -210,7 +243,7 @@
 \newenvironment{wordy}{\marginpar{\color{blue}\textsc{wordy\quad}}}{}
 
 % intro -- for comments and comparisions to intro texts
-\newenvironment{intro}{\marginpar{\color{blue}\textsc{notation\quad}}}{}
+\newenvironment{intro}{\marginpar{\color{blue}\textsc{intro\quad}}}{}
 
 % pedantic -- for pedantic comments
 \newenvironment{pedantic}{\marginpar{\color{blue}\textsc{padantic\quad}}}{}
@@ -264,6 +297,8 @@
 \settexttoken{formula}{formula}{formulae}
 \settexttoken{constant}{constant symbol}{constant symbols}
 \settexttoken{function}{function symbol}{function symbols}
+\settexttoken{predicate}{predicate symbol}{predicate symbols}
+\settexttoken{identity}{identity}{identities}
 
 % If compiled standalone as a subfile, execute \OLSubfileHook at beginning
 \ifx\document\comment
