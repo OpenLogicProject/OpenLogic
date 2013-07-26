@@ -1,0 +1,62 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: identity
+
+\documentclass[open-logic-section]{subfiles}
+
+\begin{document}
+
+\section{Identity}
+
+\begin{wordy}
+The construction of the term model given in the preceding section is
+enough to establish completeness for first-order logic without
+identity.  We could define satisfaction and provability for a language
+without~$=$, and construct a maximally consistent saturated set
+$\Gamma^*$ for a given se $\Gamma$.  The term model would then be a
+model of $\Gamma^*$ (and hence of $\Gamma$).  It does not work,
+however, if identity is present.  The reason is that $\Gamma$ might
+contain a sentence $t = t'$, but in the term model the value of any
+term is that term itself. Hence, if $t$ and $t'$ are different terms,
+their values in the term model, i.e., $t$ and $t'$ respectively, are
+differnt and so $t = t'$ is false.  We can fix this, however, using a
+construction known as ``factoring.''  This construction works
+generally for so-called congruence relations.
+\end{wordy}
+
+\begin{defn}
+Let $\Gamma^*$ be a maximally consistent set of sentences in~$\Lang
+L$. We define the relation $\approx$ on the set of closed terms
+of~$\Lang L$ by
+\[
+t \approx t' \text{\quad iff \quad} t = t' \in \Gamma^*
+\]
+\end{defn}
+
+\begin{prop}
+The relation $\approx$ has the following properties:
+\begin{enumerate}
+\item $\approx$ is reflexive
+\item $\approx$ is symmetric
+\item  $\approx$ is transitive
+\item If $t \approx t'$, $f$ is a function, and $t_1$, \dots, $t_n$ are
+  terms, then $f(t_1,\dots, t, \dots t_n) \approx f(t_1, \dots, t',
+  \dots, t_n)$.
+\end{enumerate}
+\end{prop}
+
+% Prove
+
+\begin{defn}
+Define $\Trm/\approx$.
+\end{defn}
+
+\begin{defn}
+Define term model mod $\approx$
+\end{defn}
+
+\begin{prop}
+$\Sat{M(\Gamma^*)/\approx}{!A}$ iff $!A \in \Gamma^*$.
+\end{prop}
+
+\end{document}

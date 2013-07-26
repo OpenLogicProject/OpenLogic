@@ -1,0 +1,39 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: henkin-expansion
+
+\documentclass[open-logic-section]{subfiles}
+
+\begin{document}
+
+\section{Henkin Expansion}
+
+\begin{wordy}
+Part of the challene in proving the completeness theorem is that the
+model we construct from a maximally consistent set~$\Gamma$ must make
+all the quantified formulas in~$\Gamma$ true.  In order to guarantee
+this, we use a trick due to Leon Henkin.  In essence, the trick
+consists in expanding the language by infinitely many constants and
+adding, for each formula with one free variable $[!A(x)]$ a formula of
+the form $\lexists[x][!A(x)] \lif !A(c)$, where $c$ is one of the new
+constant symbols.  
+\end{wordy}
+
+\begin{defn}
+  A set $\Gamma$ of formulas of a language $\Lang {L}$ is
+  \emph{saturated} if and only if for each formula $!A \in
+  \Frm {L}$ and variable $x$ there is a constant $c$ such that
+  $\lexists[x][!A] \lif !A(c) \in \Gamma$.
+\end{defn}
+
+% do we need to also add conditionals for the universally quantified 
+% formulas or does max. consistency take care of those?
+
+\begin{prop}
+  Every consistent set $\Gamma$ can be extended to a saturated
+  consistent set.
+\end{prop}
+
+% proof in Aldo's notes, prop:saturation
+
+\end{document}
