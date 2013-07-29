@@ -1,0 +1,62 @@
+% Part: first-order-logic
+% Chapter: model-theory
+% Section: isomorphism
+
+\documentclass[open-logic-section]{subfiles}
+
+\begin{document}
+
+\section{Isomorphic Structures}
+
+\begin{defn}
+  Given two structures $\Struct{M}$ and $\Struct M'$ for the same
+  language $\mathcal{L}$, we say that $\Struct{M}$ is
+  \emph{elementarily equivalent to} $\Struct M'$, written $\Struct{M}
+  \equiv \Struct M'$, if and only if for every \emph{sentence} $!A$ of
+  $\Lang L$, $\Sat{M}{!A}$ iff $\Sat{M'}{!A}$.
+\end{defn}
+
+\begin{defn}\label{def:isom}
+  Given two structures $\Struct{M}$ and $\Struct M'$ for the same
+  language $\Lang L$, we say that    $\Struct{M}$ is
+  \emph{isomorphic to} $\Struct M'$, written
+  $\Struct{M} \simeq \Struct M'$, if and only if there is a
+  function $h\colon \Domain{M} \to \Domain{M'}$ such that:
+  \begin{enumerate}
+  \item $h$ is one-one: if $h(x) =
+    h(y)$ then $x = y$; 
+  \item $\mathsf{h}$ is onto $\Domain{M'}$: for every $y \in
+    \Domain{M'}$ there is $x \in \Domain{M}$ such that $h(x) = y$;
+  \item for every constant $c$: $h(\Assign{c}{M}) =
+    \Assign{c}{M'}$; 
+  \item for every $n$-place predicate symbol $P$: $\langle
+    a_1,\dots,a_n\rangle \in \Assign{P}{M}$ if and only if  $\langle
+    h(a_1),\dots,h(a_n)\rangle \in \Assign{P}{M'}$;
+  \item for every $n$-place function symbol $f$:
+    $h(\Assign{f}{M}(a_1,\dots,a_n)) =
+    \Assign{f}{M'}(h(a_1),\ldots,h(a_n))$.
+ \end{enumerate}
+\end{defn}
+
+\begin{thm}\label{thm:isom}
+  If $\Struct{M} \simeq \Struct M'$ then $\Struct{M} \equiv
+  \Struct M'$.
+\end{thm}
+
+\begin{proof}
+  Let $h$ be an isomorphism of $\Struct{M}$ onto
+  $\Struct M'$; for any assignment $s$, $h \circ s$ is the
+  composition of $h$ and $s$, i.e., the assignment in
+  $\Struct M'$ such that  $(h \circ s)(x) = h(s(x))$.
+  We proceed by induction on $t$ $!A$ and prove the stronger claims: 
+  \begin{align*}
+  &  h(\Value{t}{M}[s]) = \Value{t}{M'}[h\circ s];\\
+  &  \Sat{M}{!A}[s] \text{ if and only if }
+    \Sat{M'}{!A}[h \circ s].
+  \end{align*}
+Make sure to take note at each step of how each of the five properties
+characterizing isomorphisms is used.    
+\end{proof}
+
+
+\end{document}
