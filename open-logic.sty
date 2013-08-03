@@ -7,12 +7,14 @@
 \RequirePackage{xparse}
 
 \RequirePackage{amsmath}
-\RequirePackage{amsthm}
+
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage[OMLmathsfit]{isomath}
-
 \RequirePackage{proof}
+\RequirePackage{hyperref}
+\RequirePackage{amsthm}
+\RequirePackage[nameinlink]{cleveref}
 
 % make ! active in math mode for formula meta variables
 
@@ -240,14 +242,21 @@
 
 \theoremstyle{plain}
 \newtheorem{thm}{Theorem}[chapter]
+\crefname{thm}{theorem}{theorems}
 \newtheorem{lem}[thm]{Lemma}
+\crefname{lem}{lemma}{lemmata}
 \newtheorem{prop}[thm]{Proposition}
+\crefname{prop}{proposition}{propositions}
 \newtheorem{cor}[thm]{Corollary}
+\crefname{cor}{corollary}{corollaries}
 
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition}
+\crefname{defn}{definition}{definitions}
 \newtheorem{ex}[thm]{Example}
+\crefname{ex}{example}{examples}
 \newtheorem{prob}{Problem}[chapter]
+\crefname{prob}{problem}{problems}
 
 \theoremstyle{remark}
 \newtheorem*{rem}{Remark}
@@ -266,6 +275,7 @@
 
 % pedantic -- for pedantic comments
 \newenvironment{pedantic}{\marginpar{\color{blue}\textsc{padantic\quad}}}{}
+
 
 % Tokens 
 % ====== 
