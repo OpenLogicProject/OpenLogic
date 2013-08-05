@@ -12,16 +12,16 @@
 The construction of the term model given in the preceding section is
 enough to establish completeness for first-order logic without
 identity.  We could define satisfaction and provability for a language
-without~$=$, and construct a maximally consistent saturated set
+without~$leq$, and construct a maximally consistent saturated set
 $\Gamma^*$ for a given se $\Gamma$.  The term model would then be a
 model of $\Gamma^*$ (and hence of $\Gamma$).  It does not work,
 however, if identity is present.  The reason is that $\Gamma$ might
-contain a sentence $t = t'$, but in the term model the value of any
-term is that term itself. Hence, if $t$ and $t'$ are different terms,
-their values in the term model, i.e., $t$ and $t'$ respectively, are
-differnt and so $t = t'$ is false.  We can fix this, however, using a
-construction known as ``factoring.''  This construction works
-generally for so-called congruence relations.
+contain a sentence $\leq[t][t']$, but in the term model the value of
+any term is that term itself. Hence, if $t$ and $t'$ are different
+terms, their values in the term model, i.e., $t$ and $t'$
+respectively, are differnt and so $\leq[t][t']$ is false.  We can fix
+this, however, using a construction known as ``factoring.''  This
+construction works generally for so-called congruence relations.
 \end{wordy}
 
 \begin{defn}
@@ -29,7 +29,7 @@ Let $\Gamma^*$ be a maximally consistent set of sentences in~$\Lang
 L$. We define the relation $\approx$ on the set of closed terms
 of~$\Lang L$ by
 \[
-t \approx t' \text{\quad iff \quad} t = t' \in \Gamma^*
+t \approx t' \text{\quad iff \quad} \leq[t][t'] \in \Gamma^*
 \]
 \end{defn}
 

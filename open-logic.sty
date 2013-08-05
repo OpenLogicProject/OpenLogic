@@ -102,6 +102,17 @@
         { \, #2 }
 }
 
+% identity relation
+% \leq by itself produces identit predicate symbol
+% \leq[#1][#2] produces atomic formula
+% \leq/ produces negated symbol/formula.
+\DeclareDocumentCommand \leq { t{/} o o } {
+  \IfNoValueTF {#3}{
+    \IfBooleanTF{#1}{ \neq }{ = }}{
+    \IfBooleanTF{#1}{ #2 \neq #3}{#2 = #3}}
+}
+
+
 % sequent symbol is a double arrow
 \let\Sequent\Rightarrow
 

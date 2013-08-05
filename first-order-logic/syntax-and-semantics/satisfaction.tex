@@ -69,7 +69,7 @@ follows. If not $\Sat{M}{!A}[s]$ we write $\Sat/{M}{!A}[s]$.
 \item For any $n$-place predicate~$R$ and terms $t_1$, \dots, $t_n$,
   $\Sat{M}{\Atom{R}{t_1, \dots, t_n}}[s]$ iff $\langle \Value{t_1}{M}[s],
   \dots, \Value{t_n}{M}[s] \rangle \in \Assign{R}{M}$.
-\item For any terms $t$, $t'$, $\Sat{M}{t_1 = t_2}[s]$ iff
+\item For any terms $t$, $t'$, $\Sat{M}{\leq[t_1][t_2]}[s]$ iff
   $\Value{t}{M}[s] = \Value{t'}{M}[s]$.
 \item $\Sat{M}{\lnot !A}[s]$ iff $\Sat/{M}{!A}[s]$
 \item $\Sat{M}{!A \land !B}[s]$ iff $\Sat{M}{!A}[s]$ and $\Sat{M}{!B}[s]$.
@@ -102,28 +102,70 @@ $\Sat{M}{!A}[s']$.
 
 \begin{proof}
 
-Prove by induction on the complexity of $!A$. For the base case, where $!A$ is atomic, $!A$ can be: $\ltrue$, $\lfalse$, $R(t_1 \ldots t_k)$ for a $k$-place predicate $R$ and terms $t_1,\ldots,t_k$, or $t_1 = t_2$ for terms $t_1$ and $t_2$.
+Prove by induction on the complexity of $!A$. For the base case, where
+$!A$ is atomic, $!A$ can be: $\ltrue$, $\lfalse$, $R(t_1 \ldots t_k)$
+for a $k$-place predicate $R$ and terms $t_1,\ldots,t_k$, or
+$\leq[t_1][t_2]$ for terms $t_1$ and $t_2$.
 
-When $!A = \ltrue$, since $\ltrue$ is valid, both $\Sat{M}{!A}[s]$ and $\Sat{M}{!A}[s']$. Similarly, when $!A = \lfalse$, both $\Sat!{M}{!A}[s]$ and $\Sat!{M}{!A}[s']$. 
+When $!A$ is $\ltrue$, since $\ltrue$ is valid, both $\Sat{M}{!A}[s]$
+and $\Sat{M}{!A}[s']$. Similarly, when $!A$ is $\lfalse$, both
+$\Sat!{M}{!A}[s]$ and $\Sat!{M}{!A}[s']$.
 
-For the case when $!A = R(t_1 \ldots t_k)$, let $\Sat{M}{!A}[s]$. Then $\langle \Value{t_1}{M}[s], \ldots, \Value{t_k}{M}[s] \rangle \in \Assign{R}{M}$. For $1 \leq i \leq k$, if $t_i$ is a constant, then $\Value{t_i}{M}[s] = \Value{t_i}{M} = \Value{t_i}{M}[s']$. If $t_i$ is a free variable, then since the mappings $s$ and $s'$ agree on all free variables, $\Value{t_i}{M}[s] = s(t_i) = s'(t_i) = \Value{t_i}{M}[s']$. Similarly, if $t_i$ is of the form $f(t'_1,\ldots,t'_j)$, we will also get $\Value{t_i}{M}[s] = \Value{t_i}{M}[s']$. Hence, $\Value{t_i}{M}[s] = \Value{t_i}{M}[s']$ for any term $t_i$ for $1 \leq i \leq k$, so we also have $\langle \Value{t_i}{M}[s'], \ldots, \Value{t_k}{M}[s'] \rangle \in \Assign{R}{M}$. Similarly, when $!A = (t_1 = t_2)$, and when $\Sat{M}{t_1 = t_2}[s]$, $\Value{t_1}{M}[s'] = \Value{t_1}{M}[s] = \Value{t_2}{M}[s] = \Value{t_2}{M}[s']$, so $\Sat{M}{t_1 = t_2}[s']$.
+For the case when $!A$ is $\Atom{R}{t_1, \ldots, t_k}$, let
+$\Sat{M}{!A}[s]$. Then $\langle \Value{t_1}{M}[s], \ldots,
+\Value{t_k}{M}[s] \rangle \in \Assign{R}{M}$. For $1 \leq i \leq k$,
+if $t_i$ is a constant, then $\Value{t_i}{M}[s] = \Value{t_i}{M} =
+\Value{t_i}{M}[s']$. If $t_i$ is a free variable, then since the
+mappings $s$ and $s'$ agree on all free variables, $\Value{t_i}{M}[s]
+= s(t_i) = s'(t_i) = \Value{t_i}{M}[s']$. Similarly, if $t_i$ is of
+the form $f(t'_1,\ldots,t'_j)$, we will also get $\Value{t_i}{M}[s] =
+\Value{t_i}{M}[s']$. Hence, $\Value{t_i}{M}[s] = \Value{t_i}{M}[s']$
+for any term $t_i$ for $1 \leq i \leq k$, so we also have $\langle
+\Value{t_i}{M}[s'], \ldots, \Value{t_k}{M}[s'] \rangle \in
+\Assign{R}{M}$. Similarly, when $!A$ is $\leq[t_1][t_2]$, and when
+$\Sat{M}{\leq[t_1][t_2]}[s]$, $\Value{t_1}{M}[s'] = \Value{t_1}{M}[s] =
+\Value{t_2}{M}[s] = \Value{t_2}{M}[s']$, so $\Sat{M}{\leq[t_1][t_2]}[s']$.
 
-Let $\Sat{M}{!B}[s] \Leftrightarrow \Sat{M}{!B}[s']$ for all formulae $!B$ and $!C$ that are less complex than $!A$. The induction step proceeds in cases determined by the main connective of $!A$. In each case, only the forward direction of the biconditional is demonstrated since the proof of the reverse direction is symmetrical.
+Let $\Sat{M}{!B}[s] \Leftrightarrow \Sat{M}{!B}[s']$ for all formulae
+$!B$ and $!C$ that are less complex than $!A$. The induction step
+proceeds in cases determined by the main connective of $!A$. In each
+case, only the forward direction of the biconditional is demonstrated
+since the proof of the reverse direction is symmetrical.
 
-If $!A = \lnot !B$ and $\Sat{M}{\lnot !B}[s]$, then $\Sat!{M}{!B}[s]$, so by the induction hypothesis, $\Sat!{M}{!B}[s']$, hence $\Sat{M}{\lnot !B}[s']$.
+If $!A$ is $\lnot !B$ and $\Sat{M}{\lnot !B}[s]$, then
+$\Sat!{M}{!B}[s]$, so by the induction hypothesis, $\Sat!{M}{!B}[s']$,
+hence $\Sat{M}{\lnot !B}[s']$.
 
-If $!A = !B \land !C$ and $\Sat{M}{!B \land !C}[s]$, then $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, so by the induction hypothesis, $\Sat{M}{!B}[s']$ and $\Sat{M}{!C}[s']$. Hence, $\Sat{M}{!B \land !C}[s']$.
+If $!A$ is $!B \land !C$ and $\Sat{M}{!B \land !C}[s]$, then
+$\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, so by the induction hypothesis,
+$\Sat{M}{!B}[s']$ and $\Sat{M}{!C}[s']$. Hence, $\Sat{M}{!B \land
+  !C}[s']$.
 
-If $!A = !B \lor !C$ and $\Sat{M}{!B \lor !C}[s]$, then $\Sat{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction hypothesis, $\Sat{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{!B \lor !C}[s']$.
+If $!A$ is $!B \lor !C$ and $\Sat{M}{!B \lor !C}[s]$, then
+$\Sat{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction hypothesis,
+$\Sat{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{!B \lor !C}[s']$.
 
-If $!A = !B \lif !C$ and $\Sat{M}{!B \lif !C}[s]$, then $\Sat!{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction hypothesis, $\Sat!{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{!B \lif !C}[s']$.
+If $!A$ is $!B \lif !C$ and $\Sat{M}{!B \lif !C}[s]$, then
+$\Sat!{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction hypothesis,
+$\Sat!{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{!B \lif !C}[s']$.
 
-If $!A = \lexists[x][!B]$ and $\Sat{M}{\lexists[x][!B]}[s]$, there is an $x$-variant $\bar{s}$ of $s$ so that $\Sat{M}{!B}[\bar{s}]$. Let $\bar{s}'$ denote the $x$-variant of $s'$ that assigns the same thing to $x$ as does $\bar{s}$: then by the induction hypothesis, $\Sat{M}{!B}[\bar{s}']$. Hence, there is an $x$-variant of $s'$ that satisfies $!B$, so $\Sat{M}{\lexists[x][!B]}[s']$.
+If $!A$ is $\lexists[x][!B]$ and $\Sat{M}{\lexists[x][!B]}[s]$, there
+is an $x$-variant $\bar{s}$ of $s$ so that $\Sat{M}{!B}[\bar{s}]$. Let
+$\bar{s}'$ denote the $x$-variant of $s'$ that assigns the same thing
+to $x$ as does $\bar{s}$: then by the induction hypothesis,
+$\Sat{M}{!B}[\bar{s}']$. Hence, there is an $x$-variant of $s'$ that
+satisfies $!B$, so $\Sat{M}{\lexists[x][!B]}[s']$.
 
-If $!A = \lforall[x][!B]$ and $\Sat{M}{\lforall[x][!B]}[s]$, then for every $x$-variant $\bar{s}$ of $s$, $\Sat{M}{!B}[\bar{s}]$. Hence, if $\bar{s}'$ is the $x$-variant of $s'$ that assigns the same thing to $x$ as does $\bar{s}$, then we have $\Sat{M}{!B}[\bar{s}']$. Hence, every $x$-variant of $s'$ satisfies $!B$, so $\Sat{M}{\lforall[x][!B]}[s']$.
+If $!A$ is $\lforall[x][!B]$ and $\Sat{M}{\lforall[x][!B]}[s]$, then
+for every $x$-variant $\bar{s}$ of $s$, $\Sat{M}{!B}[\bar{s}]$. Hence,
+if $\bar{s}'$ is the $x$-variant of $s'$ that assigns the same thing
+to $x$ as does $\bar{s}$, then we have $\Sat{M}{!B}[\bar{s}']$. Hence,
+every $x$-variant of $s'$ satisfies $!B$, so
+$\Sat{M}{\lforall[x][!B]}[s']$.
 
-By induction, we get that $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$ whenever $x_1,\ldots,x_n$ are the only free variables in $!A$ and $s(x_i)=s'(x_i)$ for $i=1,\ldots,n$. 
-
+By induction, we get that $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$
+whenever $x_1$, \dots, $x_n$ are the only free variables in $!A$ and
+$s(x_i)=s'(x_i)$ for $i=1$, \dots,~$n$.
 \end{proof}
  
 \begin{defn}

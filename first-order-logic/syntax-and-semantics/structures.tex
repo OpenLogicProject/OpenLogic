@@ -29,7 +29,7 @@ first-order logic consists of the following elements:
 \item \emph{Name assignment:} for each constant symbol $c$ of
   $\Lang{L}$, an element $\Assign{c}{M} \in \Domain M$
 \item \emph{Relations:} for each $n$-place predicate symbol $R$ of
-  $\Lang{L}$ (other than $=$), an $n$-ary relation $\Assign{R}{M}
+  $\Lang{L}$ (other than $\leq$), an $n$-ary relation $\Assign{R}{M}
   \subseteq \Domain{M}^n$
 \item \emph{Functions:} for each $n$-place function symbol $\Obj f$ of
   $\Lang{L}$, an $n$-ary function $\Assign{f}{M} \colon
@@ -66,7 +66,7 @@ ensures that the existential generalization is a sound pattern of
 inference: $!A(a)$, therefore $\lexists[x][!A(x)]$. If we allowed names
 to refer outside the domain, or to not refer, then we would be on our
 way to a \emph{free logic}, in which existential generalization
-requires an additional premise: $!A(a)$ and $\lexists[x][(x=a)]$,
+requires an additional premise: $!A(a)$ and $\lexists[x][\leq[x][a]]$,
 therefore $\lexists[x][!A(x)]$.
 
 
