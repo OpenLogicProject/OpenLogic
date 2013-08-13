@@ -4,6 +4,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{open-logic}
 
+\RequirePackage{open-logic-referencing}
+
 \RequirePackage{xparse}
 
 \RequirePackage{amsmath}
@@ -103,10 +105,10 @@
 }
 
 % identity relation
-% \leq by itself produces identit predicate symbol
-% \leq[#1][#2] produces atomic formula
-% \leq/ produces negated symbol/formula.
-\DeclareDocumentCommand \leq { t{/} o o } {
+% \eq by itself produces identit predicate symbol
+% \eq[#1][#2] produces atomic formula
+% \eq/ produces negated symbol/formula.
+\DeclareDocumentCommand \eq { t{/} o o } {
   \IfNoValueTF {#3}{
     \IfBooleanTF{#1}{ \neq }{ = }}{
     \IfBooleanTF{#1}{ #2 \neq #3}{#2 = #3}}

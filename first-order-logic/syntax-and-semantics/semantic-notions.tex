@@ -6,7 +6,8 @@
 
 \begin{document}
 
-\section{Semantic Notions}
+\olfileid{fol}{syn}{sem}
+\olsection{Semantic Notions}
 
 \begin{wordy}
 Give the definition of structures for first-order languages, we can
@@ -44,9 +45,16 @@ sentences~$\Gamma$.
 \end{prop}
 
 \begin{proof}
-For the forward direction, let $!A$ be valid, and let $\Gamma$ be a set of sentences. Let $\Struct M$ be a structure so that $\Sat{M}{\Gamma}$. Since $!A$ is valid, $\Sat{M}{!A}$, hence $\Gamma \Entails !A$.
+For the forward direction, let $!A$ be valid, and let $\Gamma$ be a
+set of sentences. Let $\Struct M$ be a structure so that
+$\Sat{M}{\Gamma}$. Since $!A$ is valid, $\Sat{M}{!A}$, hence $\Gamma
+\Entails !A$.
 
-For the contrapositive of the reverse direction, let $!A$ be invalid, so there is a structure $\Struct M$ with $\Sat!{M}{!A}$. When $\Gamma = \{ \ltrue \}$, since $\ltrue$ is valid, $\Sat{M}{\Gamma}$. Hence, there is a structure $\Struct M$ so that $\Sat{M}{\Gamma}$ but $\Sat!{M}{!A}$, hence $\Gamma$ does not entail $!A$.
+For the contrapositive of the reverse direction, let $!A$ be invalid,
+so there is a structure $\Struct M$ with $\Sat!{M}{!A}$. When $\Gamma
+= \{ \ltrue \}$, since $\ltrue$ is valid, $\Sat{M}{\Gamma}$. Hence,
+there is a structure $\Struct M$ so that $\Sat{M}{\Gamma}$ but
+$\Sat!{M}{!A}$, hence $\Gamma$ does not entail $!A$.
 \end{proof}
 
 \begin{prop}
@@ -74,7 +82,10 @@ If $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$, then $\Gamma'
 \end{prop}
 
 \begin{proof}
-Suppose that $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$. Let $\Struct M$ be such that $\Sat{M}{\Gamma'}$; then $\Sat{M}{\Gamma}$, and since $\Gamma \Entails !A$, we get that $\Sat{M}{!A}$. Hence, whenever $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma' \Entails !A$.
+Suppose that $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$. Let
+$\Struct M$ be such that $\Sat{M}{\Gamma'}$; then $\Sat{M}{\Gamma}$,
+and since $\Gamma \Entails !A$, we get that $\Sat{M}{!A}$. Hence,
+whenever $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma' \Entails !A$.
 \end{proof}
 
 
@@ -83,9 +94,17 @@ If $\Gamma \cup \{!A\} \Entails !B$ iff $\Gamma \Entails !A \lif !B$.
 \end{thm}
 
 \begin{proof}
-For the forward direction, let $\Gamma \cup \{ !A \} \Entails !B$ and let $\Struct M$ be a structure so that $\Sat{M}{\Gamma}$. If $\Sat{M}{!A}$, then $\Sat{M}{\Gamma \cup \{ !A \} }$, so since $\Gamma \cup \{ !A \}$ entails $!B$, we get $\Sat{M}{!B}$. Therefore, $\Sat{M}{!A \lif !B}$, so $\Gamma \Entails !A \lif !B$.
+For the forward direction, let $\Gamma \cup \{ !A \} \Entails !B$ and
+let $\Struct M$ be a structure so that $\Sat{M}{\Gamma}$. If
+$\Sat{M}{!A}$, then $\Sat{M}{\Gamma \cup \{ !A \} }$, so since $\Gamma
+\cup \{ !A \}$ entails $!B$, we get $\Sat{M}{!B}$. Therefore,
+$\Sat{M}{!A \lif !B}$, so $\Gamma \Entails !A \lif !B$.
 
-For the reverse direction, let $\Gamma \Entails !A \lif !B$ and $\Struct M$ be a structure so that $\Sat{M}{\Gamma \cup \{ !A \}}$. Then $\Sat{M}{\Gamma}$, so $\Sat{M}{!A \lif !B}$, and since $\Sat{M}{!A}$, $\Sat{M}{!B}$. Hence, whenever $\Sat{M}{\Gamma \cup \{ !A \} }$, $\Sat{M}{!B}$, so $\Gamma \cup \{ !A \} \Entails !B$.
+For the reverse direction, let $\Gamma \Entails !A \lif !B$ and
+$\Struct M$ be a structure so that $\Sat{M}{\Gamma \cup \{ !A
+  \}}$. Then $\Sat{M}{\Gamma}$, so $\Sat{M}{!A \lif !B}$, and since
+$\Sat{M}{!A}$, $\Sat{M}{!B}$. Hence, whenever $\Sat{M}{\Gamma \cup \{
+  !A \} }$, $\Sat{M}{!B}$, so $\Gamma \cup \{ !A \} \Entails !B$.
 \end{proof}
 
 \end{document}
