@@ -9,6 +9,226 @@
 \olfileid{fol}{seq}{rul}
 \olsection{Rules and Proofs}
 
-% Dana: define sequents, give axioms and rules, define a proof of a sequent
+%wordy bit
+
+Let $\Lang L$ be a first-order language with the usual constants, variables, and logical symbols and auxiliary symbols (parentheses and the comma). 
+
+\begin{defn}[sequent]
+A \emph{sequent} is an expression of the form
+\[ \Gamma \Sequent \Delta \]
+where $\Gamma$ and $\Delta$ are finite (possibly empty) sets of formulae of the language $\Lang L$. The formulae in $\Gamma$ are the \emph{antecedent formulae}, while the formulae in $\Delta$ are the \emph{succedent formulae}. 
+
+The intuitive idea behind a sequent is: if all of the antecedent formulae hold, then some of the succedent formulae hold. That is, if $\Gamma = \{ \Gamma_1,\ldots,\Gamma_m\}$ and $\Delta = \{ \Delta_1,\ldots, \Delta_n\}$, then $\Gamma \Sequent \Delta$ means the same as 
+\[ \Gamma_1 \land \cdots \land \Gamma_m \lif \Delta_1 \lor \cdots \lor \Delta_n \]
+
+When $m=0$, $\hspace{1em} \Sequent \Delta$ means that $\Delta_1 \lor \cdots \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \hspace{1em}$ means that $\Gamma_1 \land \cdots \land \Gamma_m$ gives a contradiction. An empty antecedent is sometimes filled with the $\lfalse$ symbol. The empty sequent $\hspace{1em} \Sequent \hspace{1em}$ means that there is a contradiction.
+\end{defn}
+
+\begin{defn}[Inference]
+An \emph{inference} is an expression of the form
+
+\[
+\AxiomC{$S_1$}
+\UnaryInfC{$S$}
+\DisplayProof
+\quad
+\textrm{  or  }
+\quad
+\AxiomC{$S_1$}
+\AxiomC{$S_2$}
+\BinaryInfC{$S$}
+\DisplayProof
+\]
+where $S, S_1$, and $S_2$ are sequents. $S_1$ and $S_2$ are called \emph{upper sequents} and $S$ is a \emph{lower sequent}.
+
+Inferences represent the idea that whenever the upper sequent(s) is (are) asserted, from it, we may logically infer the lower sequent.
+\end{defn}
+
+For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite sets of formulae, and let $!A, !B, !C, !D, \ldots$ represent individual formulae.
+
+The rules for $\Log{LK}$ are divided into two main types: \emph{structural} rules and \emph{logical} rules. The logical rules are further divided into \emph{propositional} rules (quantifier-free) and \emph{quantifier} rules.\\ 
+
+\underline{Structural rules:}
+
+Weakening:
+\[
+\Axiom$ \Gamma \fCenter \Delta $
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\textrm{  and  }
+\quad
+\Axiom$ \Gamma \fCenter \Delta$
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\]
+where $!A$ is called the \emph{weakening formula}.
+
+Contraction:
+\[
+\Axiom$ !A, !A, \Gamma \fCenter \Delta $
+\UnaryInf$ !A, \Gamma \fCenter \Delta $
+\DisplayProof
+\quad
+\textrm{  and  }
+\quad
+\Axiom$ \Gamma \fCenter \Delta, !A, !A $
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\]
+
+Interchange:
+\[
+\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
+\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta$
+\DisplayProof
+\quad
+\textrm{  and  }
+\quad
+\Axiom$ \Gamma \fCenter \Delta, !A, !B, \Lambda $
+\UnaryInf$ \Gamma \fCenter \Delta, !B, !A, \Lambda$
+\DisplayProof
+\]
+The above three inferences can be trivial and numerous, and are  often denoted simply by a double line between the upper lower sequents.\\
+
+Cut:
+\[
+\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !A, \Pi \fCenter \Lambda $
+\BinaryInf$ \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+
+\underline{Logical rules:}
+The rules are named by the logical symbol of the \emph{principal formula} of the inference (the formula containing $!A$ and/or $!B$ in the lower sequent). The designations ``left'' and ``right'' indicate whether the logical symbol has been introduced in an antecedent formula or a succedent formula (to the left or to the right of the sequent symbol).\\
+
+\emph{Propositional Rules:}
+\[
+\Axiom$ \Gamma \fCenter \Delta, !A $
+\RightLabel{$\lnot$ left}
+\UnaryInf$ \lnot !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$!A, \Gamma \fCenter \Delta$
+\RightLabel{$\lnot$ right}
+\UnaryInf$ \Gamma \fCenter \Delta, \lnot !A $
+\DisplayProof
+\]
+
+\[
+\Axiom$ !A, \Gamma \fCenter \Delta$
+\RightLabel{$\land$ left}
+\UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$!B, \Gamma \fCenter \Delta$
+\RightLabel{$\land$ left}
+\UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{$\land$ right}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\DisplayProof
+\]
+
+\[
+\Axiom$!A,\Gamma\fCenter \Delta$
+\Axiom$ !B, \Gamma \fCenter \Delta$
+\RightLabel{$\lor$ left}
+\BinaryInf$ !A \lor !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$\Gamma \fCenter \Delta, !A$
+\RightLabel{$\lor$ right}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
+\DisplayProof
+\quad
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{$\lor$ right}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
+\DisplayProof
+\]
+
+\[
+\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !B, \Pi \fCenter \Lambda$
+\RightLabel{$\lif$ left}
+\BinaryInf$ !A \lif !B, \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\quad
+\Axiom$ !A, \Gamma \fCenter \Delta, !B$
+\RightLabel{$\lif$ right}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lif !B $
+\DisplayProof
+\]
+
+\emph{Quantifier Rules:}
+
+\[
+\Axiom$ F(t), \Gamma \fCenter \Delta$
+\RightLabel{$\lforall$ left}
+\UnaryInf$ \lforall[x] F(x),\Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$ \Gamma \fCenter \Delta, F(a) $
+\RightLabel{$\lforall$ right}
+\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x] F(x)$
+\DisplayProof
+\]
+
+Where $t$ is a term, and $a$ does not occur in the lower sequent of the $\lforall$ right rule and is called the \emph{eigenvariable} of this rule.
+
+\[
+\Axiom$ F(a), \Gamma \fCenter \Delta $
+\RightLabel{$\lexists$ left}
+\UnaryInf$ \lexists[x] F(x), \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$ \Gamma \fCenter \Delta, F(t) $
+\RightLabel{$\lexists$ right}
+\UnaryInf$ \Gamma \fCenter \Delta, \lexists[x] F(x)$
+\DisplayProof
+\]
+where $a$ does not occur in the lower sequent of the $\lexists$ left rule and is called the \emph{eigenvariable} of this rule, and where $t$ is a term.
+
+The condition that an eigenvariable not occur in the upper sequent of the $\lforall$ right/$\lexists$ left rule is called the \emph{eigenvariable condition}.
+
+\begin{defn}[initial sequent]
+An \emph{initial sequent} is a sequent of the form $!A \Sequent !A$ for any formula $!A$ in the language.
+\end{defn}
+
+\begin{defn}[LK derivation]
+An $\Log{LK}$-derivation of a sequent $S$ is a tree of sequents satisfying the following conditions:
+\begin{enumerate}
+\item The topmost sequents of the tree are initial sequents
+\item Every sequent in the tree (except $S$) is an upper sequent of an inference whose lower sequent stands directly below that sequent in the tree.
+\end{enumerate}
+We then say that $S$ is the \emph{end-sequent} of the derivation and that $S$ is \emph{derivable in $\Log{LK}$} (or $\Log{LK}$-derivable).
+\end{defn}
+
+\begin{defn}[LK theorem]
+A formula $!A$ is a \emph{theorem} of $\Log{LK}$ if the sequent $\hspace{1em} \Sequent !A$ is $\Log{LK}$-derivable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
