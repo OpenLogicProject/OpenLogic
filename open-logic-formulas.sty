@@ -1,0 +1,38 @@
+% OpenLogic Project
+% formulas
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{open-logic-formulas}
+
+
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage[OMLmathsfit]{isomath}
+
+% make ! active in math mode for formula meta variables
+
+{\catcode`!=\active
+\gdef!{\formula}
+\let\formula\relax % default: do nothing
+}
+\mathcode`\!="8000 % set ! active in math mode
+
+% greekformulas -- formula metavariables are phi, psi, etc.
+% Provides !A, !B etc in math mode to produce \phi, \psi etc.
+
+\def\olgreekformulas
+{\gdef\formula{%
+  \@ifnextchar A{\varphi\@gobble}{
+  \@ifnextchar B{\psi\@gobble}{
+  \@ifnextchar C{\chi\@gobble}{
+  \@ifnextchar D{\theta\@gobble}{
+  \@ifnextchar E{\alpha\@gobble}{
+  \@ifnextchar F{\beta\@gobble}{
+  \@ifnextchar G{\gamma\@gobble}{
+  \@ifnextchar H{\delta\@gobble}{
+  \@ifnextchar K{\xi\@gobble}{
+  \@ifnextchar L{\zeta\@gobble}\relax
+}}}}}}}}}}}
+
+
+

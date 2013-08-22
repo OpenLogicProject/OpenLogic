@@ -5,11 +5,12 @@
 \ProvidesPackage{open-logic}
 
 \RequirePackage{open-logic-referencing}
+\RequirePackage{open-logic-formulas}
+\RequirePackage{open-logic-tokenize}
 
 \RequirePackage{xparse}
 
 \RequirePackage{amsmath}
-
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage[OMLmathsfit]{isomath}
@@ -18,35 +19,12 @@
 \RequirePackage{amsthm}
 \RequirePackage[nameinlink]{cleveref}
 
-% make ! active in math mode for formula meta variables
-
-{\catcode`!=\active
-\gdef!{\formula}
-\let\formula\relax % default: do nothing
-}
-\mathcode`\!="8000 % set ! active in math mode
-
-
-% greekformulas -- formula metavariables are phi, psi, etc.
-% Provides !A, !B etc in math mode to produce \phi, \psi etc.
-\DeclareOption{greekformulas}
-{\gdef\formula{%
-  \@ifnextchar A{\varphi\@gobble}{
-  \@ifnextchar B{\psi\@gobble}{
-  \@ifnextchar C{\chi\@gobble}{
-  \@ifnextchar D{\theta\@gobble}{
-  \@ifnextchar E{\alpha\@gobble}{
-  \@ifnextchar F{\beta\@gobble}{
-  \@ifnextchar G{\gamma\@gobble}{
-  \@ifnextchar H{\delta\@gobble}{
-  \@ifnextchar K{\xi\@gobble}{
-  \@ifnextchar L{\zeta\@gobble}\relax
-}}}}}}}}}}}
-
-\ProcessOptions\relax
-
 % Symbols
 % =======
+
+% Formula metavariabes. Comment out the following line if you want A,
+% B, C...
+\olgreekformulas
 
 % Logical symbols
 
@@ -287,60 +265,22 @@
 \newenvironment{intro}{\marginpar{\color{blue}\textsc{intro\quad}}}{}
 
 % pedantic -- for pedantic comments
-\newenvironment{pedantic}{\marginpar{\color{blue}\textsc{padantic\quad}}}{}
-
+\newenvironment{pedantic}{\marginpar{\color{blue}\textsc{pedantic\quad}}}{}
 
 % Tokens 
 % ====== 
 
-% Text that should be uniform, and changeable Has four forms: in-text
+% Text that should be uniform and changeable has four forms: in-text
 % singular, in-text plural, initial singular, initial plural. Initial
 % forms are usually capitalized. They are optional, if left out, we'll
 % take the in-text version and make the first letter uppercase.
-
-\usepackage{mfirstuc}
-
-\DeclareDocumentCommand \settexttoken { m m m o o } {
-    \expandafter\def\csname TEXTTOK@s@#1\endcsname{#2}
-    \expandafter\def\csname TEXTTOK@p@#1\endcsname{#3}
-    \IfNoValueTF {#4} 
-        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{\makefirstuc{#2}} }
-        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{#4} }
-    \IfNoValueTF {#5} 
-        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{\makefirstuc{#3}} }
-        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#5} }
-}
-
-\def\@printtexttokens#1{\csname TEXTTOK@s@#1\endcsname}
-\def\@printtexttokenp p#1{\csname TEXTTOK@p@#1\endcsname}
-\def\@printtexttokenS S#1{\csname TEXTTOK@S@#1\endcsname}
-\def\@printtexttokenP P#1{\csname TEXTTOK@P@#1\endcsname}
-
-
-
-%\DeclareDocumentCommand \printtexttoken { m ts}{
-%\IfBooleanTF{#2}{
-%    \IfBooleanTF{#3}{\printtexttokenP{#1}}
-%    {\printtexttokens{#1}}
-%}
-%{
-%    \IfBooleanTF{#3}{\printtexttokenS{#1}}{
-%      \printtexttokens{#1}}}}
-%}
-
-\def\printtexttoken{\@ifnextchar P{\@printtexttokenP}{%
-    \@ifnextchar S{\@printtexttokenS}{%
-      \@ifnextchar p{\@printtexttokenp}{\@printtexttokens}}}}
-
-\catcode`\"=\active
-\def"{\printtexttoken}
-
 
 \settexttoken{formula}{formula}{formulae}
 \settexttoken{constant}{constant symbol}{constant symbols}
 \settexttoken{function}{function symbol}{function symbols}
 \settexttoken{predicate}{predicate symbol}{predicate symbols}
 \settexttoken{identity}{identity}{identities}
+
 
 % If compiled standalone as a subfile, execute \OLSubfileHook at beginning
 \ifx\document\comment

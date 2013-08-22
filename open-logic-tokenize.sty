@@ -1,0 +1,54 @@
+% OpenLogic Project
+% Package for tokenizing text
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{open-logic-tokenize}
+
+\RequirePackage{mfirstuc}
+\RequirePackage{xparse}
+
+
+
+% Tokens 
+% ====== 
+
+% Text that should be uniform and changeable 
+% Has four forms: in-text
+% singular, in-text plural, initial singular, initial plural. Initial
+% forms are usually capitalized. They are optional, if left out, we'll
+% take the in-text version and make the first letter uppercase.
+
+\DeclareDocumentCommand \settexttoken { m m m o o } {
+    \expandafter\def\csname TEXTTOK@s@#1\endcsname{#2}
+    \expandafter\def\csname TEXTTOK@p@#1\endcsname{#3}
+    \IfNoValueTF {#4} 
+        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{\makefirstuc{#2}} }
+        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{#4} }
+    \IfNoValueTF {#5} 
+        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{\makefirstuc{#3}} }
+        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#5} }
+}
+
+\def\@printtexttokens #1{\csname TEXTTOK@s@#1\endcsname}
+\def\@printtexttokenp p#1{\csname TEXTTOK@p@#1\endcsname}
+\def\@printtexttokenS S#1{\csname TEXTTOK@S@#1\endcsname}
+\def\@printtexttokenP P#1{\csname TEXTTOK@P@#1\endcsname}
+
+%\DeclareDocumentCommand \printtexttoken { m ts}{
+%\IfBooleanTF{#2}{
+%    \IfBooleanTF{#3}{\printtexttokenP{#1}}
+%    {\printtexttokens{#1}}
+%}
+%{
+%    \IfBooleanTF{#3}{\printtexttokenS{#1}}{
+%      \printtexttokens{#1}}}}
+%}
+
+\def\printtexttoken{\@ifnextchar P{\@printtexttokenP}{%
+    \@ifnextchar S{\@printtexttokenS}{%
+      \@ifnextchar p{\@printtexttokenp}{\@printtexttokens}}}}
+
+\catcode`\"=\active
+\def"{\printtexttoken}
+
+
