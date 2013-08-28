@@ -55,6 +55,7 @@ Suppose that $\Gamma \Proves !A$. Then there is a finite set $\Gamma_0 \subseteq
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$, $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma \Proves \lfalse$. Contradiction: $\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin \Gamma$, so $!A \in \Gamma$.
 
 \item For any $!A$, either $!A \in \Gamma$ or $\lnot !A \in \Gamma$:
+
 Suppose to the contrary that there is an $!A$ such that $!A \notin \Gamma$ and $\lnot !A \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup \{\lnot !A\} \Proves \lfalse$. So there are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$ so that there are $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ of $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent \lfalse$, respectively. We can then derive
 
 \begin{prooftree}
@@ -135,18 +136,23 @@ For the forward direction, $!A \lif !B \in \Gamma$, and suppose to the contrary 
 \AxiomC{$\Pi_1$}
 \noLine \UnaryInfC{$\vdots$}
 \noLine \UnaryInf$ \Gamma_1 \fCenter !A $
-\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2 \fCenter !A$
 
 \AxiomC{$\Pi_2$}
 \noLine \UnaryInfC{$\vdots$}
 \noLine \UnaryInf$ \Gamma_2, !B \fCenter \lfalse$
-\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1,\Gamma_2, !B \fCenter \lfalse$
 
-\RightLabel{$\lif$ left} \BinaryInf$ \Gamma_0,\Gamma_1,\Gamma_2,!A \lif !B \fCenter \lfalse$
+\RightLabel{$\lif$ left} \BinaryInf$\Gamma_1,\Gamma_2,!A \lif !B \fCenter \lfalse$
+\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2, !A \lif !B \fCenter \lfalse$
 
 \RightLabel{cut} \BinaryInf$ \Gamma_0,\Gamma_1,\Gamma_2 \fCenter \lfalse$
 
 \end{prooftree}
+
+Since $\Gamma_0 \cup \Gamma_1 \cup \Gamma_2 \subseteq \Gamma$, this means that $\Gamma \Proves \lfalse$, which is a contradiction since $\Gamma$ was supposed to be consistent. Hence, it cannot be the case that neither $!A \notin \Gamma$ nor $!B \in \Gamma$, so at least one of $!A \in \Gamma$ or $!B \notin \Gamma$ must hold.
+
+For the reverse direction, first consider the case where $!A \notin \Gamma$. By 1., $\Gamma \Proves! !A$, hence $\Gamma \Proves !A \lif !B$. Applying 1. again, we get that $!A \lif !B \in \Gamma$, as required.
+
+Now consider the case where $!B \in \Gamma$. Since $\{ !B \} \subseteq \Gamma$ and obviously $\Log{LK} \Proves !B \Sequent !B$, we have that $\Gamma \Proves !B$. Therefore, $\Gamma \Proves !A \lif !B$, so by 1., $!A \lif !B \in \Gamma$.
 \end{enumerate}
 \end{proof}
 
