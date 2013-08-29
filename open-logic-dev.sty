@@ -1,0 +1,12 @@
+% OpenLogic Project
+% development commands
+
+\RequirePackage{open-logic}
+\RequirePackage{marginnote}
+
+\DeclareDocumentCommand \oldevnote { s o m } {
+  \IfBooleanTF{#1}{\reversemarginpar}{}
+  \marginnote{\tiny
+    \IfNoValueTF{#2}{}{\color{#2}}
+    #3}
+  \IfBooleanTF{#1}{\normalmarginpar}{}}

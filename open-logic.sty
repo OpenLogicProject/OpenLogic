@@ -7,6 +7,7 @@
 \RequirePackage{open-logic-referencing}
 \RequirePackage{open-logic-formulas}
 \RequirePackage{open-logic-tokenize}
+\RequirePackage{open-logic-dev}
 
 \RequirePackage{xparse}
 
@@ -14,7 +15,6 @@
 \RequirePackage{amsfonts}
 \RequirePackage{amssymb}
 \RequirePackage[OMLmathsfit]{isomath}
-\RequirePackage{proof}
 \RequirePackage{hyperref}
 \RequirePackage{amsthm}
 \RequirePackage[nameinlink]{cleveref}
@@ -263,13 +263,13 @@
 % =================
 
 % wordy -- for wordy informal explanations
-\newenvironment{wordy}{\marginpar{\color{blue}\textsc{wordy\quad}}}{}
+\newenvironment{wordy}{\oldevnote[blue]{explanation}}{}
 
 % intro -- for comments and comparisions to intro texts
-\newenvironment{intro}{\marginpar{\color{blue}\textsc{intro\quad}}}{}
+\newenvironment{intro}{\oldevnote[blue]{intro}}{}
 
 % pedantic -- for pedantic comments
-\newenvironment{pedantic}{\marginpar{\color{blue}\textsc{pedantic\quad}}}{}
+\newenvironment{pedantic}{\oldevnote[blue]{pedantic}}{}
 
 % Tokens 
 % ====== 
@@ -284,6 +284,8 @@
 \settexttoken{function}{function symbol}{function symbols}
 \settexttoken{predicate}{predicate symbol}{predicate symbols}
 \settexttoken{identity}{identity}{identities}
+
+
 
 
 % If compiled standalone as a subfile, execute \OLSubfileHook at beginning
