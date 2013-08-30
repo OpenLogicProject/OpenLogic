@@ -15,6 +15,23 @@ Every consistent set~$\Gamma$ can be extended to a maximally
 consistent saturated set~$\Gamma^*$.
 \end{lem}
 
-% Dana: prove
+\begin{proof}
+Let $\Gamma$ be consistent, and let $\Theta$ be as in the previous definition: we already
+ proved that $\Gamma \cup \Theta$ is a consistent saturated set in the richer language 
+ $\Lang L'$ (with the countably many new constants). Let $!A_0, !A_1, \dots$ be an
+  enumeration of all the formulae of $\Lang L'$. Define $\Gamma_0 = 
+  \Gamma \cup \Theta$, and
+\[
+\Gamma_{n+1} =
+\begin{cases}
+\Gamma_n \cup \{ !A_n \} & \textrm{if $\Gamma_n \cup \{!A_n\}$ is consistent;} \\
+\Gamma_n \cup \{ \lnot !A_n \} & \textrm{otherwise.}
+\end{cases}
+\]
+
+Putting $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$, we obtain a maximally consistent 
+set in $\Lang L'$; since $\Gamma \cup \Theta$ is saturated, so is $\Gamma^*$. 
+
+\end{proof}
 
 \end{document}
