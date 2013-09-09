@@ -2,7 +2,7 @@
 
 ALLDIRS = first-order-logic sets-functions-relations 
 
-ALLTEXFILES = open-logic-dev.tex open-logic.tex \
+ALLTEXFILES = open-logic-dev.tex open-logic-rel.tex \
 	$(shell grep '\.tex' open-logic-dev.fls | grep 'open-logic/' | uniq | sed 's/INPUT .*open-logic\///g' )
 
 ALLPDFFILES = $(ALLTEXFILES:.tex=.pdf)
