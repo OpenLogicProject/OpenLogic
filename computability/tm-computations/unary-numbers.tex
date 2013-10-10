@@ -1,0 +1,33 @@
+% Part: computability
+% Chapter: tm-computations
+% Section: unary-numbers
+
+\documentclass[open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{tur}{una}
+\olsection{Unary Representation of Numbers}
+
+\begin{wordy}
+Turing machines work on sequences of symbols written on their tape.
+Depending on the alphabet a Turing machine uses, these sequences of
+symbols can represent various inuts and outputs.  Of particular
+interest, of course, are Turing machines which compute
+\emph{arithmetical} functions, i.e., functions of natural numbers.
+One very simple way to represent positive integers is by coding them
+as sequences of a single symbol~\TMstroke.
+\end{wordy}
+
+\begin{defn}
+A Turing machine~$M$ \emph{computes} the function $f\colon \Nat^n \to \Nat$ iff
+$M$ halts on input
+\[
+\TMstroke^{k_1} \TMblank \dots \TMblank \TMstroke^{k_n}
+\]
+with output $\TMblank^{f(k_1, \dots, k_n)}$.
+\end{defn}
+
+% need examples!
+
+\end{document}
