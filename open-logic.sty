@@ -146,6 +146,12 @@
 \def\Rat{\mathbb{Q}}
 \def\BinStr{\mathbb{B}}
 
+% Turing machines
+
+\let\TMendtape\triangleright
+\def\TMblank{\mathord{\text{\textvisiblespace}}}
+\let\TMstroke\mid
+
 
 % typesetting commands for logical concepts
 % =========================================
@@ -284,6 +290,9 @@
 \settexttoken{identity}{identity}{identities}
 
 
+% Hooks
+\def\OLEndChapterHook{}
+\def\OLEndPartHook{}
 
 
 % If compiled standalone as a subfile, execute \OLSubfileHook at beginning
@@ -291,3 +300,4 @@
 \AtBeginDocument{\OLSubfileHook}
 \fi
 \let\OLSubfileHook\relax
+
