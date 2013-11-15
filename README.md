@@ -1,9 +1,9 @@
-The Open Logic Text
-===================
+The Open Logic Project
+======================
 
-This is/will hopefully once be a open textbook on mathematical and philosophical logic, coded in LaTeX.
+The OLP is an open source, open access textbook on advanced logic, aimed at philosophers, coded in LaTeX.
 
-For more information, see the <a href="https://github.com/OpenLogicProject/OpenLogic/wiki">Open Logic wiki</a>.
+For more information, see the <a href="http://openlogicproject.org/">project website</a> and <a href="https://github.com/OpenLogicProject/OpenLogic/wiki">Open Logic wiki</a> .
 
 Author(s): The Open Logic Project
 
