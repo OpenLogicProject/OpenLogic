@@ -1,0 +1,34 @@
+% OpenLogic Project
+% Package for deferring processing of environments
+
+% This is a hack using the answers package.
+% A clean solution is needed
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{open-logic-defer}
+
+\RequirePackage{etoolbox}
+\RequirePackage{answers}
+
+\csundef{prob}
+\csundef{endprob}
+
+\Newassociation{prob}{probdeferred}{problems}
+
+% Redefine probdeferred as a theorem environment
+\csundef{probdeferred}
+\csundef{endprobdeferred}
+\csundef{c@probdeferred}
+\newtheorem{probdeferred}{Problem}[chapter]
+% answers writes current label as argument
+\apptocmd{\probdeferred}{\@gobble}{}{}
+
+% at the end of a chapter, read the solutionfile
+\appto\OLEndChapterHook{%
+  \Closesolutionfile{problems}
+  \Readsolutionfile{problems}}
+
+% at the end of a \chapter command, open the solution file 
+\renewcommand\memendofchapterhook{%
+  \Opensolutionfile{problems}
+  \Writetofile{problems}{\protect\section*{Problems}}}
