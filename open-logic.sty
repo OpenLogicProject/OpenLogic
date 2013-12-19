@@ -4,9 +4,12 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{open-logic}
 
+\RequirePackage[english]{babel}
+
 \RequirePackage{open-logic-referencing}
 \RequirePackage{open-logic-formulas}
 \RequirePackage{open-logic-tokenize}
+\RequirePackage{open-logic-tokens}
 
 \RequirePackage{xparse}
 \RequirePackage{amsmath}
@@ -17,6 +20,7 @@
 \RequirePackage{amsthm}
 \RequirePackage[nameinlink]{cleveref}
 \RequirePackage{bussproofs}
+
 
 % Symbols
 % =======
@@ -274,21 +278,6 @@
 
 % pedantic -- for pedantic comments
 \newenvironment{pedantic}{}{}
-
-% Tokens 
-% ====== 
-
-% Text that should be uniform and changeable has four forms: in-text
-% singular, in-text plural, initial singular, initial plural. Initial
-% forms are usually capitalized. They are optional, if left out, we'll
-% take the in-text version and make the first letter uppercase.
-
-\settexttoken{formula}{formula}{formulae}
-\settexttoken{constant}{constant symbol}{constant symbols}
-\settexttoken{function}{function symbol}{function symbols}
-\settexttoken{predicate}{predicate symbol}{predicate symbols}
-\settexttoken{identity}{identity}{identities}
-
 
 % Hooks
 \def\OLEndChapterHook{}

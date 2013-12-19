@@ -4,6 +4,7 @@
 \RequirePackage{open-logic}
 \RequirePackage{marginnote}
 \RequirePackage{xparse}
+\RequirePackage{xcolor}
 
 \DeclareDocumentCommand \oldevnote { s o m } {
   \IfBooleanTF{#1}{\reversemarginpar}{}
@@ -21,3 +22,5 @@
 \AtBeginEnvironment{wordy}{\oldevnote[blue]{explanation}}
 \AtBeginEnvironment{intro}{\oldevnote[blue]{intro}}
 \AtBeginEnvironment{pedantic}{\oldevnote[blue]{pedantic}}
+
+\def\printtexttoken#1#2{{\color{blue}#2}}
