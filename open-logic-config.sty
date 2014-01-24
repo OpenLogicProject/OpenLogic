@@ -1,0 +1,409 @@
+% OpenLogic Project
+% Default configuration file
+% Copy this to <main file>-config.sty and edit for customization
+
+\NeedsTeXFormat{LaTeX2e}
+
+% Symbols
+% =======
+
+% Formula metavariabes 
+% --------------------
+% Default: lowercase greek
+% Comment out the following line if you want A, B, C...
+
+\olgreekformulas
+
+% Logical symbols
+% ---------------
+
+% truth values
+\newcommand*{\True}{1}
+\newcommand*{\False}{0}
+
+% falsity is \lfalse
+% Default: bottom
+
+\newcommand*{\lfalse}{\bot}
+
+% truth is \ltrue
+% Default: top
+
+\newcommand*{\ltrue}{\top}
+
+% negation is \lnot
+% to use tilde, uncomment the following line
+
+% \renewcommand*{\lnot}{\mathord{\sim}}
+
+% conjunction is \land
+% to use ampersand, uncomment the following line
+
+% \renewcommand*{\land}{\mathbin{\&}}
+
+% disjunction is \lor
+
+% conditional is \lif
+% Default: single arrow
+% for horseshoe replace with \supset
+
+\newcommand*{\lif}{\rightarrow}
+
+% biconditional is \liff
+% Default: double arrow
+% for triple bar replace with
+% \equiv
+
+\newcommand*{\liff}{\leftrightarrow}
+
+% Quantifiers
+% -----------
+% This are command that takes two optional arguments, e.g.,
+% \lexists[x][!A(x)]
+% no arguments: just typesets existential quantifier
+% one optional argument: typesets quantifier and variable
+% two arguments: typesets quantifier, variable, and matrix
+
+% existential quantifier is \lexists
+% replace \exists with \boldsymbol{\exists} for bold
+% redefine if you want parentheses around quantifiers
+
+\DeclareDocumentCommand \lexists { o o } {
+    \IfNoValueTF {#1} 
+        { \exists }    % no arguments
+        { \exists #1 } % one argument: variable
+    \IfNoValueTF {#2} 
+        \relax
+        { \, #2 }      % two arguments: space and matrix
+}
+
+% universal quantifier is \lforall
+% redefine if you want parentheses around quantifiers
+
+\DeclareDocumentCommand \lforall { o o } {
+    \IfNoValueTF {#1} 
+        { \forall }    % no arguments
+        { \forall #1 } % one argument: variable
+    \IfNoValueTF {#2} 
+        \relax
+        { \, #2 }      % two arguments: space and matrix
+}
+
+% identity relation
+% \eq by itself produces identity predicate symbol
+% \eq[#1][#2] produces atomic formula (Default: #1 = #2)
+% \eq/ produces negated symbol/formula.
+
+\DeclareDocumentCommand \eq { t{/} o o } {
+  \IfNoValueTF {#3}
+    % no optional arguments: just typeset symbol
+    { \IfBooleanTF{#1}{ \neq }{ = } }
+    % optional arguments: typeset atomic formula
+    { \IfBooleanTF{#1}{ #2 \neq #3}{#2 = #3} }
+}
+
+% sequent symbol is a double arrow
+% for turnstile replace with \let\Sequent\
+\newcommand*{\Sequent}{\Rightarrow}
+
+% sequent symbol in proofs displays as the above sequent symbol
+\let\fCenter\Sequent
+
+
+% Metalogical Relations
+% ---------------------
+
+
+% satisfaction/truth relation
+
+% Takes two mandatory and an optional argument
+% First argument #2 is the structure
+% Second argument #3 is the formula
+% Optional argument #4 is a variable assignment
+% \Sat/ is negated relation
+
+\DeclareDocumentCommand \Sat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    % negated
+    \IfNoValueTF {#4} 
+        { \Struct #2 \not\models #3 }
+        { \Struct #2, #4 \not\models #3}}{
+    % not negated
+    \IfNoValueTF {#4} 
+        { \Struct #2 \models #3 }
+        { \Struct #2, #4 \models #3 }}
+}
+
+
+% derivability relation
+
+% Optional argument is subscript on the turnstile (e.g., calculus)
+% / negates
+
+\DeclareDocumentCommand \Proves { t{/} o } {
+  \IfBooleanTF {#1}{
+    \IfNoValueTF {#2} 
+        { \not\vdash }
+        { \not\vdash_{#2} }}{
+    \IfNoValueTF {#2} 
+        { \vdash }
+        { \vdash_{#2} }}
+}
+
+% semantic consequence relation relation
+
+% Optional argument is subscript on the turnstile (e.g., logic)
+% / negates
+
+\DeclareDocumentCommand \Entails { o } {
+    \IfNoValueTF {#1} 
+        { \models }
+        { \models_{#1} }
+}
+
+% substructure
+
+\newcommand*{\substruct}{\subseteq}
+
+
+% Various Special Sets and Related commands
+
+% Setabs - set abstract
+% Might want to replace : with \mid
+
+\newcommand*{\Setabs}[2]{\{ #1 : #2 \}}
+
+% Pow - power set of
+
+\newcommand{\Pow}[1]{\wp(#1)}
+
+% special sets
+
+% Nat - natural numbers
+\def\Nat{\mathbb{N}}
+
+% Int - integers
+\def\Int{\mathbb{Z}}
+
+% Real - reals
+\def\Real{\mathbb{R}}
+
+% rat - rationals
+\def\Rat{\mathbb{Q}}
+
+% BinStr - binary strings
+\def\BinStr{\mathbb{B}}
+
+% Turing Machines
+% ---------------
+
+% TMendtape - symbol indicating left end of tape
+\newcommand*{\TMendtape}{\triangleright}
+
+% TMblank - symbol for a blank
+\newcommand*{\TMblank}{\mathord{\text{\textvisiblespace}}}
+
+% TMstroke - single stroke symbol on tape
+\newcommand*{\TMstroke}{\mid}
+
+
+
+% Typesetting commands for logical concepts
+% =========================================
+
+% Mod - modal models 
+% Default: set first token in Fraktur
+\newcommand*{\Mod}[1]{\mathfrak #1}
+
+% Struct - first-order structures
+% Default: set first token in Fraktur
+\newcommand*{\Struct}[1]{\mathfrak #1}
+
+% Lang - langauges
+% Default: set first token in Fraktur
+\newcommand*{\Lang}[1]{\mathcal #1}
+
+% Log - logics 
+% Default: set entirely in bold
+\newcommand*{\Log}[1]{\mathbf{#1}}
+
+% Obj - object-language symbols
+% Default: set entirely in sans-serif italics
+\newcommand*{\Obj}[1]{\mathsfit{#1}}
+
+% Atom - atomic formula
+% first argument: predicate symbol
+% second argument: argument(s)
+\newcommand*{\Atom}[2]{ #1(#2) }
+
+% Domain - domain of a structure
+\newcommand*{\Domain}[1]{\left| \Struct #1 \right|}
+
+% Assign - assignment of a constant/predicate symbol in a structure
+\newcommand*{\Assign}[2]{#1^{\Struct #2}}
+
+% Value value of a term symbol in a structure
+% first argument: term 
+% second argument: structure
+% third (optional) argument: variable assignment
+\DeclareDocumentCommand \Value { m m o} {
+    \IfNoValueTF {#3}
+        % optional argument not present
+        { \mathrm{Val}^{\Struct #2}(#1) }
+        % optional argument present
+        { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
+}
+
+
+
+
+% commands for various special sets
+% =================================
+
+% propositional variables
+\def\Var{\mathrm{Var}}
+
+% Terms (optional argument: language
+\DeclareDocumentCommand \Trm { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Trm} }
+        { \mathrm{Trm}({\Lang #1}) }
+}
+
+% Formulas
+\DeclareDocumentCommand \Frm { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Frm} }
+        { \mathrm{Frm}({\Lang #1}) }
+}
+
+% Sub Formulas
+\DeclareDocumentCommand \SubFrm { m } {
+        \mathrm{SFrm}({#1})
+}
+
+% Sentences
+\DeclareDocumentCommand \Sent { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Sent} }
+        { \mathrm{Sent}({\Lang #1}) }
+}
+
+
+% syntactic identity
+\newcommand*{\ident}{\equiv}
+
+% domain of a function
+\newcommand*{\dom}[1]{\mathrm{dom}(#1)}
+
+% range of a function
+\newcommand*{\ran}[1]{\mathrm{ran}(#1)}
+
+% length
+\newcommand*{\len}[1]{\mathrm{len}(#1)}
+
+% restrict - restriction of a function
+\newcommand*{\restrict}{\upharpoonright}
+
+% Environments
+% ============
+
+% Theorem Environments
+% --------------------
+
+\declaretheorem[
+  style=plain,
+  name=Theorem,
+  numberwithin=chapter]{thm}
+
+\declaretheorem[
+  style=definition,
+  name=Example,
+  sibling=thm]{ex}
+
+\declaretheorem[
+  style=plain,
+  name=Lemma,
+  refname={lemma,lemmata},
+  sibling=thm]{lem}
+
+\declaretheorem[
+  style=plain,
+  name=Proposition,
+  sibling=thm]{prop}
+
+\declaretheorem[
+  style=plain,
+  name=Corollary,
+  sibling=thm]{cor}
+
+\declaretheorem[
+  style=definition,
+  name=Definition,
+  sibling=thm]{defn}
+
+\declaretheorem[
+  style=definition,
+  name=Problem,
+  numberwithin=chapter]{prob}
+
+\declaretheorem[
+  style=remark,
+  name=Remark]{rem}
+
+\declaretheorem[
+  style=remark,
+  name=Note]{note}
+
+\declaretheorem[
+  style=remark,
+  name=Case]{case}
+
+\declaretheorem[
+  style=remark,
+  name=Convention]{conv}
+
+
+% Other Enviroments
+% -----------------
+
+% wordy -- for wordy informal explanations
+\newenvironment{wordy}{}{}
+
+% intro -- for comments and comparisions to intro texts
+\newenvironment{intro}{}{}
+
+% pedantic -- for pedantic comments
+\newenvironment{pedantic}{}{}
+
+
+
+% Tokens
+% ======
+
+% formulas/formulae/wff
+\settexttoken{formula}{formula}{formul{\ae}}
+
+% variables/individual variables
+\settexttoken{variable}{variable}{variables}
+
+% constants/individual constants/constant symbols
+\settexttoken{constant}{constant symbol}{constant symbols}
+
+% predicate/predicate symbol
+\settexttoken{predicate}{predicate symbol}{predicate symbols}
+
+% function/function symbol
+\settexttoken{function}{function symbol}{function symbols}
+
+% identity/equality symbol/predicate
+\settexttoken{identity}{identity predicate}{identity predicates}
+
+% conditional/implication
+\settexttoken{conditional}{conditional}{conditionals}
+
+% biconditional/equivalence
+\settexttoken{biconditional}{biconditional}{biconditionals}
+
+% falsity/absurdity
+\settexttoken{falsity}{falsity}{falsities}
