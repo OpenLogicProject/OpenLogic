@@ -7,7 +7,6 @@
 \RequirePackage{hyperref}
 \RequirePackage{amsthm}
 \RequirePackage[nameinlink]{cleveref}
-
 \RequirePackage{xparse}
 
 \newcommand*{\theolpart}{udf}
@@ -19,8 +18,7 @@
   \renewcommand*{\theolsection}{#3}}
 
 \newcommand{\ollabel}[1]{
-  \label{\theolpart:\theolchapter:\theolsection:#1}%
-  \oldevnote*[blue]{\theolpart:\theolchapter:\theolsection:\\{#1}}}
+  \label{\theolpart:\theolchapter:\theolsection:#1}}
 
 \DeclareDocumentCommand \olref { o o o m } {
     \cref{\IfNoValueTF {#1} 
@@ -45,6 +43,3 @@
 \DeclareDocumentCommand \olsection { o m } {
   \IfNoValueTF {#1}{\section{#2}}{\section[#1]{#2}}%
   \ollabel{sec}}
-
-
-

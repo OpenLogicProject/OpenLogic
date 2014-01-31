@@ -1,0 +1,44 @@
+% OpenLogic Project
+% Master Style Package
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{open-logic}
+
+\RequirePackage[english]{babel}
+
+% load all tool packages
+
+\RequirePackage{open-logic-referencing}
+\RequirePackage{open-logic-formulas}
+\RequirePackage{open-logic-tokenize}
+
+% load various required standard packages
+
+\RequirePackage{xparse}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage[OMLmathsfit]{isomath}
+\RequirePackage{hyperref}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage[nameinlink]{cleveref}
+\RequirePackage{bussproofs}
+
+% Hooks
+\def\OLEndChapterHook{}
+\def\OLEndPartHook{}
+
+% If compiled standalone as a subfile, execute \OLSubfileHook at beginning
+\ifx\document\comment
+\AtBeginDocument{\OLSubfileHook}
+\fi
+\let\OLSubfileHook\relax
+
+% If a custom config file exists, load it, otherwise load default
+
+\IfFileExists{\jobname-config.sty}
+             {\RequirePackage{\jobname-config}}
+             {\RequirePackage{open-logic-config}}
+
+

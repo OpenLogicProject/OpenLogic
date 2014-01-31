@@ -3,6 +3,8 @@
 
 \RequirePackage{open-logic}
 \RequirePackage{marginnote}
+\RequirePackage{xparse}
+\RequirePackage{xcolor}
 
 \DeclareDocumentCommand \oldevnote { s o m } {
   \IfBooleanTF{#1}{\reversemarginpar}{}
@@ -10,3 +12,15 @@
     \IfNoValueTF{#2}{}{\color{#2}}
     #3}
   \IfBooleanTF{#1}{\normalmarginpar}{}}
+
+% patch various commands and envs to produce margin notes
+
+\apptocmd{\ollabel}{%
+  \oldevnote*[blue]{\theolpart:\theolchapter:\theolsection:\\ 
+    {#1}}}{\typeout{OK!}}{\typeout{FAIL!}}
+
+\AtBeginEnvironment{wordy}{\oldevnote[blue]{explanation}}
+\AtBeginEnvironment{intro}{\oldevnote[blue]{intro}}
+\AtBeginEnvironment{pedantic}{\oldevnote[blue]{pedantic}}
+
+\def\printtexttoken#1#2{{\color{blue}#2}}

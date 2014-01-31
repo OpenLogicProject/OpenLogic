@@ -1,0 +1,34 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: operations
+
+\documentclass[open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid{sfr}{fun}{ops}
+\olsection{Operations on functions}
+
+\begin{wordy}
+We've already seen that the inverse of a one-to-one function $f^{-1}$ is itself a function. It is also possible to compose functions.
+\end{wordy}
+
+\begin{defn}
+ Let $f: X \rightarrow Y$ and $g: Y \rightarrow W$. Then we \emph{compose} $g$ and $f$ to form the function $g \circ f: X \rightarrow W$, where $g \circ f(x) =
+    g(f(x))$.
+\end{defn}
+
+\begin{wordy}
+The function $g \circ f:  X \rightarrow W$ pairs each member of $X$ with a member of $W$. We specify which member of $W$ a member of $X$ is paired with as follows---given an input $x\in X$, first apply the function $f$, to $x$ which will output some $y\in Y$. Then apply the function $g$ to $y$, which will out put some $w\in W$. 
+\end{wordy}
+
+\begin{ex}
+Consider the functions $f(x) = x + 1$, and $g(x) = 2x$. What function do you get when you compose these two? $g \circ f(x) = g(f(x))$. So that means for every natural number you give this function, you first add one, and then you multiply the result by two. So their composition is $g \circ f(x) = 2(x+1)$.
+\end{ex}
+
+\begin{prob}
+Show that if the functions $g: X \rightarrow Y$ and $f: Y \rightarrow W$ are both bijections then $g \circ f: X \rightarrow W$ is also a bijection.
+\end{prob}
+
+\end{document}
