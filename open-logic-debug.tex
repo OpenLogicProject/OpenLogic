@@ -1,16 +1,23 @@
 % open-logic-dev.tex
-% master file to produce development version
+% master file to produce debug version
 % includes all references, markup, etc.
 
 \documentclass{memoir}
 
+% Lives in main directory
+\newcommand*{\olpath}{.}
+
 \usepackage{subfiles}
 \usepackage[footinfo]{gitinfo}
-\usepackage{open-logic}
-\usepackage{open-logic-dev}
 
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-dev.sty}
+
+% needed for absolute paths of included files and linksto GitHub
 \RequirePackage[abspath]{currfile}
 \RequirePackage{xstring}
+
+% all files included with \subfile will have filename & link to GitHub printed
 
 \makeatletter \renewcommand{\skip@preamble}{%
   \let\document\relax\let\enddocument\relax%
@@ -28,7 +35,8 @@
 
 \begin{document}
 
-\subfile{open-logic}
+% include complete text
+\olimport{open-logic}
 
 \end{document}
 

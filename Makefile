@@ -1,9 +1,9 @@
 .PHONY : FORCE_MAKE
 
-ALLDIRS = first-order-logic sets-functions-relations 
+ALLDIRS = first-order-logic computability sets-functions-relations 
 
-ALLTEXFILES = open-logic-dev.tex open-logic-rel.tex \
-	$(shell grep '\.tex' open-logic-dev.fls | grep 'open-logic/' | uniq | sed 's/INPUT .*open-logic\///g' )
+ALLTEXFILES = open-logic-debug.tex open-logic-complete.tex \
+	$(shell grep 'INPUT [^/].*\.tex' open-logic-debug.fls | uniq | sed 's/INPUT //g' )
 
 ALLPDFFILES = $(ALLTEXFILES:.tex=.pdf)
 

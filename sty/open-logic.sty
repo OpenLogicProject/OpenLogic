@@ -1,19 +1,21 @@
 % OpenLogic Project
 % Master Style Package
 
-\NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{open-logic}
-
 \RequirePackage[english]{babel}
 
 % load all tool packages
+% located in \olpath/sty/
 
-\RequirePackage{open-logic-referencing}
-\RequirePackage{open-logic-formulas}
-\RequirePackage{open-logic-tokenize}
+\makeatletter
+
+\input{\olpath/sty/open-logic-referencing.sty}
+\input{\olpath/sty/open-logic-formulas.sty}
+\input{\olpath/sty/open-logic-tokenize.sty}
 
 % load various required standard packages
+% let LaTeXfind those
 
+\RequirePackage{subfiles}
 \RequirePackage{xparse}
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
@@ -24,6 +26,7 @@
 \RequirePackage{thmtools}
 \RequirePackage[nameinlink]{cleveref}
 \RequirePackage{bussproofs}
+\RequirePackage{import}
 
 % Hooks
 \def\OLEndChapterHook{}
@@ -38,7 +41,19 @@
 % If a custom config file exists, load it, otherwise load default
 
 \IfFileExists{\jobname-config.sty}
-             {\RequirePackage{\jobname-config}}
-             {\RequirePackage{open-logic-config}}
+             {\input{\jobname-config.sty}}
+             {\input{\olpath/open-logic-config.sty}}
 
+% olimport -- combines \subfile and \subimport
+% optional argument is subdirectory, if present subimport #1/#2
+% no optional argument: just\include
+% in either case, supress preamble like \subfile would
 
+\DeclareDocumentCommand \olimport { o m }{
+  \begingroup\skip@preamble%
+  \IfNoValueTF{#1} 
+     {\input{#2}}
+     {\subimport*{#1/}{#2}}
+     \endgroup}
+
+\makeatother

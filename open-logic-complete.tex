@@ -1,19 +1,21 @@
 % open-logic-rel.tex
-% master file to produce a release version
+% master file to produce a complete release version
 % without references, markup, etc.
 
 \documentclass{memoir}
 
+% we're compiling from main directory
+\newcommand{\olpath}{.}
 
 \usepackage{mathpazo}
 \usepackage[scaled=0.95]{helvet}
 \usepackage{courier}
 \linespread{1.05} % Palatino looks better with this
 
-\usepackage{subfiles}
 \usepackage[footinfo]{gitinfo}
-\usepackage{open-logic}
-\usepackage{open-logic-defer}
+
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-defer.sty}
 
 \title{Open Logic Text}
 \author{Open Logic Project}
@@ -23,7 +25,7 @@
 
 \maketitle
 
-\subfile{open-logic}
+\olimport{open-logic}
 
 \end{document}
 
