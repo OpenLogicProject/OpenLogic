@@ -3,7 +3,7 @@
 ALLDIRS = first-order-logic computability sets-functions-relations 
 
 ALLTEXFILES = open-logic-debug.tex open-logic-complete.tex \
-	$(shell grep 'INPUT [^/].*\.tex' open-logic-debug.fls | uniq | sed 's/INPUT //g' )
+	$(shell grep 'INPUT [^/].*/.*\.tex' open-logic-debug.fls | uniq | sed 's/INPUT //g' )
 
 ALLPDFFILES = $(ALLTEXFILES:.tex=.pdf)
 
