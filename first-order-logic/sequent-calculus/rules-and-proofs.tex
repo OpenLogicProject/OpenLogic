@@ -18,10 +18,10 @@ A \emph{sequent} is an expression of the form
 \[ \Gamma \Sequent \Delta \]
 where $\Gamma$ and $\Delta$ are finite (possibly empty) sets of formulae of the language $\Lang L$. The formulae in $\Gamma$ are the \emph{antecedent formulae}, while the formulae in $\Delta$ are the \emph{succedent formulae}. 
 
-The intuitive idea behind a sequent is: if all of the antecedent formulae hold, then some of the succedent formulae hold. That is, if $\Gamma = \{ \Gamma_1,\ldots,\Gamma_m\}$ and $\Delta = \{ \Delta_1,\ldots, \Delta_n\}$, then $\Gamma \Sequent \Delta$ means the same as 
+The intuitive idea behind a sequent is: if all of the antecedent formulae hold, then some of the succedent formulae hold. That is, if $\Gamma = \{ \Gamma_1,\ldots,\Gamma_m\}$ and $\Delta = \{ \Delta_1,\ldots, \Delta_n\}$, then $\Gamma \Sequent \Delta$ abbreviates
 \[ \Gamma_1 \land \cdots \land \Gamma_m \lif \Delta_1 \lor \cdots \lor \Delta_n \]
 
-When $m=0$, $\hspace{1em} \Sequent \Delta$ means that $\Delta_1 \lor \cdots \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \hspace{1em}$ means that $\Gamma_1 \land \cdots \land \Gamma_m$ gives a contradiction. An empty antecedent is sometimes filled with the $\lfalse$ symbol. The empty sequent $\hspace{1em} \Sequent \hspace{1em}$ means that there is a contradiction.
+When $m=0$, $\hspace{1em} \Sequent \Delta$ means that $\Delta_1 \lor \cdots \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \hspace{1em}$ means that $\Gamma_1 \land \cdots \land \Gamma_m$ gives a contradiction. An empty succedent is sometimes filled with the $\lfalse$ symbol. The empty sequent $\hspace{1em} \Sequent \hspace{1em}$ canonically represents a contradiction.
 \end{defn}
 
 \begin{defn}[Inference]
@@ -178,7 +178,7 @@ The rules are named by the logical symbol of the \emph{principal formula} of the
 \DisplayProof
 \]
 
-Where $t$ is a term, and $a$ does not occur in the lower sequent of the $\lforall$ right rule and is called the \emph{eigenvariable} of this rule.
+Where $t$ is a term, and $a$ is a constant which does not occur anywhere in the lower sequent of the $\lforall[]$ right rule. We call $a$ the \emph{eigenvariable}.
 
 \[
 \Axiom$ F(a), \Gamma \fCenter \Delta $
@@ -191,7 +191,7 @@ Where $t$ is a term, and $a$ does not occur in the lower sequent of the $\lforal
 \UnaryInf$ \Gamma \fCenter \Delta, \lexists[x] F(x)$
 \DisplayProof
 \]
-where $a$ does not occur in the lower sequent of the $\lexists$ left rule and is called the \emph{eigenvariable} of this rule, and where $t$ is a term.
+Where $t$ is a term, and $a$ is a constant which does not occur in the lower sequent of the $\lexists$ left rule. Again, we call $a$ the \emph{eigenvariable}. 
 
 The condition that an eigenvariable not occur in the upper sequent of the $\lforall$ right/$\lexists$ left rule is called the \emph{eigenvariable condition}.
 
