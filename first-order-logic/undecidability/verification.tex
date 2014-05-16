@@ -9,7 +9,7 @@
 \olfileid{fol}{und}{ver}
 \olsection{Verifying the Representation}
 
-\begin{wordy}
+\begin{explain}
 In order to verify that our representation works, we first have to
 make sure that if $M$ halts on input~$w$, then $T(m, w) \lif H(M, w)$
 is valid.  We can do this simly by proving that $T(m, w)$ implies a
@@ -18,7 +18,7 @@ of $M$ on input $w$.  If $M$ halts on input $w$, then for some $n$,
 $M$ will be in a halting configuration at step $n$ (and be scanning
 square~$m$, for some $m$).  Hence, $T(M, w)$ implies $\Obj
 Q_h(\overline m, \overline n)$.  
-\end{wordy}
+\end{explain}
 
 \begin{defn}
 Let $C(M, w, n)$ be the sentence
@@ -50,11 +50,11 @@ $\sigma_k$.
 
 \end{proof}
 
-\begin{wordy}
+\begin{explain}
 To complete the verification of our clam, we also have to establish
 the reverse direction: if $T(M, w) \lif H(M, w)$ is valid, then $M$
 does in fact halt when started on input~$m$.  
-\end{wordy}
+\end{explain}
 
 \begin{lem}
 If $T(M, w)$ entails $H(M, w)$, then $M$ halts on input~$w$.
