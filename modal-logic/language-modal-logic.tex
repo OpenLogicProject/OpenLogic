@@ -22,4 +22,14 @@ well as the two basic modalities $\Box$ and $\Diamond$.
 
 % modal depth
 
+\begin{defn}
+The \emph{modal depth} $d(!A)$ of a formula $!A$ in modal logic is defined recursively:
+\begin{enumerate}
+\item For a propositional variable $p \in \Var$, $d(p) = 0$.
+\item $d(\lnot !A) = d(!A)$.
+\item $d(!A \land !B) = d(!A \lor !B) = d(!A \lif !B) = \max( d(!A), d(!B))$.
+\item $d(\Box !A) = d(\Diamond !A) = d(!A) + 1$.
+\end{enumerate}
+\end{defn}
+
 \end{document}
