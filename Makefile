@@ -7,7 +7,10 @@ ALLTEXFILES = open-logic-debug.tex open-logic-complete.tex \
 
 ALLPDFFILES = $(ALLTEXFILES:.tex=.pdf)
 
-all: $(ALLPDFFILES)
+all: $(ALLPDFFILES) open-logic-config.pdf
+
+open-logic-config.pdf: open-logic-config.sty
+	grep -e "^%" -e "^$$" open-logic-config.sty | cut --bytes=3-|pandoc -f markdown -M date="`git log --format=format:"%ad %h" --date=short -1 open-logic-config.sty`" -o open-logic-config.pdf
 
 %.pdf : %.tex FORCE_MAKE
 	latexmk -pdf -dvi- -ps- -cd $<
