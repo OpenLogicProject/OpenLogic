@@ -34,5 +34,16 @@
   \@ifnextchar L{\zeta\@gobble}\relax
 }}}}}}}}}}}
 
+% args -- format a list of arguments
+
+\newcommand{\args}[1]{%
+  \let\@argsep\@argsepinit
+  \@for\@arg:=#1\do{%
+    \@argsep\@arg}%
+}
+
+\def\@argsepinit{\let\@argsep\argsep}
+
+\newcommand{\argsep}{}
 
 

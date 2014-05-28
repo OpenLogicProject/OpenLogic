@@ -320,8 +320,11 @@
 \newcommand*{\Obj}[1]{\mathsfit{#1}}
 
 %  - `\Atom` - Atomic formula; default produces predicate symbol
-%  followed by argumnets surrounded by parentheses. Some prefer no
-%  parentheses around the arguments.
+%  followed by arguments surrounded by parentheses. Some prefer no
+%  parentheses around the arguments. To remove commas from a list of
+%  arguments, use the `\args` function, e.g., redefine as
+%  `#1\args{#2}`.
+
 \newcommand*{\Atom}[2]{ #1(#2) }
 
 
@@ -508,7 +511,7 @@
 % - `formulas`: defaults to "formula/formulae", redefine for
 % "formulas," or "wff".
 
-\settexttoken{formula}{formula}{formul{\ae}}
+\settexttoken{formula}{formula}{formulas}
 
 % - `variable`: defaults to "variable/varaibles", redefine to be more
 % specific, e.g., "individual variable", "object veriable".
