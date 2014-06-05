@@ -46,4 +46,113 @@ A !!{formula} $!A$ is a \emph{sentence} iff it contains no free
 occurrences of variables.
 \end{defn}
 
+\begin{explain}
+Induction is a commonly-used proof technique of mathematics in logic. 
+You may be familiar with it from math, in which you do induction on 
+natural numbers. As it turns out, there are lots of different kinds of 
+mathematical and logical sets of objects that lend themselves to induction.
+
+In general, what induction allows one to do is prove a universal claim; that 
+is, show that every object of a certain kind has some property. In particular, 
+induction is often useful where a ``universal introduction'' method of proof 
+is too complicated. Induction only works on matehmatical objects that are 
+constructed in special ways: if every element in the set is either basic or is 
+built up from basic elements, then we can use induction on it. More precisely:
+\end{explain}
+
+\begin{defn}
+A set $S$ is \emph{closed} under a function $f$ iff whenever $x \in S$, then $f(x) \in S$.
+\end{defn}
+
+\begin{explain}
+For example, the natural numbers ($\mathbb{N}$) are closed under the successor 
+function $f(x) = x+1$. If $x$ is a natural number, so is $x+1$. The natural numbers 
+are not, however, closed under the predecessor function $f(x) = x-1$, since $0$ is a 
+natural number, but $-1$ is not.
+\end{explain}
+
+\begin{defn}
+A property $P$ is said to be \emph{preserved under} a function $f(x)$ when, for any
+object $a$ in the domain of $f$, $P(a)$ implies $P(f(a))$ (if $a$ has property $P$, then 
+so does $f(a)$).
+\end{defn}
+
+\begin{explain}
+The property of ``being an even number'' is preserved under the function $f(x) = x+2$, 
+since if $x$ is even, so is $x+2$. The property of being an even number is not preserved 
+under the successor function, since if $x$ is even, $x+1$ is odd.
+
+Induction works on natural numbers because every natural number can be 
+reached from 0 by applying the successor function a finite number of times. This is 
+characteristic of any set upon which we can do induction.
+\end{explain}
+
+\begin{defn}[Induction on $\mathbb{N}$]
+If 0 has some property $P$, and if $P$ is preserved under the successor function, then
+every natural number has property $P$.
+\end{defn}
+
+\begin{ex} The sum of the first $n$ natural numbers is $\frac{n(n+1)}{2}$. \\
+
+\textbf{Base case.} The sum of the first 0 natural numbers is $0= \frac{0\cdot 1}{2}$.\\
+
+\textbf{Inductive step.} Suppose the property holds for $k$. We will show that it holds 
+for $k+1$. In other words, suppose that $P(k)$ holds, that is,
+\[ 0 + 1 + \ldots + k = \frac{k(k+1)}{2} \]
+We will show that $P(k+1)$ holds, i.e. that
+\[ 0 + 1 + \ldots + k + (k+1) = \frac{(k+1)(k+2)}{2} \]
+by using the assumption that $P(k)$.
+
+\begin{align*}
+0 + 1 + \ldots + k &= \frac{k(k+1)}{2} \tag{Assumption} \\
+0 + 1 + \ldots + k + (k+1) &= \frac{k(k+1)}{2} + (k+1) \tag{Add $k+1$ to both sides} \\
+&= \frac{k(k+1) + 2(k+1)}{2} \\
+&= \frac{2k + k + 2k +2}{2} \\
+&=\frac{(k+1)(k+2)}{2}
+\end{align*}
+Hence, the inductive step goes through, and we have proved the claim.
+\end{ex}
+
+\begin{explain}
+For !p{formula}, the basic elements are the atomic !p{formula}. More complex !p{formula} 
+are obtained by joining together less-complicated !p{formula} using operators. Each 
+operator can be seen as corresponding to a function of !p{formula} that returns a new 
+!!{formula} joining these two together with the operator in question. For example, the function 
+that joins two !p{formula} $!A$ and $!B$ into a conjunction can be written as $\mathcal E _\land 
+(!A, !B) = !A \land !B$. We can call these \emph{formula-building functions}. The set of 
+!p{formula} is closed these functions: whenever $!A$ and $!B$ are !p{formula}, so are 
+$\lnot !A$, $!A \land !B$, etc. 
+\end{explain}
+
+\begin{defn}[Induction on !p{formula}]
+If every atomic !!{formula} has property $P$ and $P$ is preserved under the formula-building 
+functions, then every !!{formula} has property $P$.
+\end{defn}
+
+\begin{explain}
+This definition suggests a ``recipe'' for inductive proofs on !p{formula}. If we are asked 
+to show that every !!{formula} has property $P$, follow the following steps:\\
+
+\textbf{Base Case.} Let $!A$ be an atomic !!{formula}. [\ldots] Therefore, $!A$ has 
+property $P$.\\
+
+\textbf{Inductive Step.} Let $!A$ and $!B$ be !p{formula}, both of which have the property $P$.
+
+Case $\lnot$: [\ldots] Therefore, $\lnot !A$ has property $P$.
+
+Case $\land$: [\ldots] Therefore, $!A \land !B$ has property $P$. 
+
+Case $\lor$: [\ldots] Therefore, $!A \lor !B$ has property $P$. 
+
+Case $\lif$: [\ldots] Therefore, $!A \lif !B$ has property $P$.
+
+Case $\liff$: [\ldots] Therefore, $!A \liff !B$ has property $P$.
+
+Case $\lforall[]$: [\ldots] Therefore, $\lforall[x] !A$ has property $P$.
+
+Case $\lexists[]$: [\ldots] Therefore, $\lexists[x] !A$ has property $P$. \\
+
+Therefore, every !!{formula} has property $P$.
+\end{explain}
+
 \end{document}
