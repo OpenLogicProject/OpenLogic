@@ -47,4 +47,33 @@ The \emph{modal depth} $d(!A)$ of a formula $!A$ in modal logic is defined recur
 \end{enumerate}
 \end{defn}
 
+% substitution instance
+
+\begin{defn}\label{def:subst-inst}
+  Where $\!A$ is a modal formula all of whose propositional variables are among $p_1,\ldots, p_n$,
+  and $!C_1,\ldots,!C_n$ are also modal formulas, we define $!Ai[\nf{!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}]$
+  as the result of simultaneously substituting each $!B_i$ for
+  $p_i$ in $\!A$. Formally, this is a definition by recursion on
+  $!A$:
+  \begin{itemize}
+  \item If $!A$ is atomic, say $\!A= q$, then
+    $!A[\nf{!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}] =
+    !C_i$ if $q$ is $p_i$ for some $i \le n$, and
+    $\!A[\nf{!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}] = q$
+    otherwise (including the case $!A = \bot)$).
+  \item If $\!A = \lnot!B$, then $\!A[\nf{!C_1}{p_1},
+    \ldots, \nf{!C_n}{p_n}] = \lnot (!B[\nf{!C_1}{p_1},
+    \ldots, \nf{!C_n}{p_n}])$.
+  \item If $!A = !B \to !D$, then
+    $\!A[\nf{!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}] =
+    (!Bi[\nf{!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}]) \to
+    (!D[\nf{!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}])$.
+  \item If $!A = \Box !B$, then  $!Ai[\nf{\!C_1}{p_1},
+    \ldots, \nf{!C_n}{p_n}] = \Box (!B[\nf{!C_1}{p_1},
+    \ldots, \nf{!C_n}{p_n}])$. 
+  \end{itemize}
+The formula  $!A[\nf{\!C_1}{p_1}, \ldots, \nf{!C_n}{p_n}]$
+is called a \emph{substitution instance} of $!A$. 
+\end{defn}
+
 \end{document}
