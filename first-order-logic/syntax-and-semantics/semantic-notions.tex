@@ -10,32 +10,32 @@
 \olsection{Semantic Notions}
 
 \begin{explain}
-Give the definition of structures for first-order languages, we can
+Give the definition of !p{structure} for first-order languages, we can
 define some basic semantic properties of and relationships between
 sentences.  The simplest of these is the notion of \emph{validity} of
 a sentence.  A sentence is valid if it is satisfied in every
-structure.  Valid sentences are those that are satisfied regardless of
+!!{structure}.  Valid sentences are those that are satisfied regardless of
 how the non-logical symbols in it are interpreted.  Valid sentences
 are therefore also called \emph{logical truths}---they are true, i.e.,
-satisified, in any structure and hence their truth depends only on the
-logical symbols occurring in them and their syntactic structure, but not
+satisified, in any !!{structure} and hence their truth depends only on the
+logical symbols occurring in them and their syntactic !!{structure}, but not
 on the non-logical symbols or their interpretation.  
 \end{explain}
 
 \begin{defn}[Validity]
 A sentence $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
-structure~$\Struct M$.
+!!{structure}~$\Struct M$.
 \end{defn}
 
 \begin{defn}[Entailment]
 A set of sentences~$\Gamma$ \emph{entails} a sentence~$!A$, $\Gamma
-\Entails !A$, iff for every structure~$\Struct M$ with
+\Entails !A$, iff for every !!{structure}~$\Struct M$ with
 $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$.
 \end{defn}
 
 \begin{defn}[Satisfiability]
 A set of sentences~$\Gamma$ is \emph{satisfiable} if $\Sat{M}{\Gamma}$
-for some structure~$\Struct M$.  If $\Gamma$ is not satisfiable it is
+for some !!{structure}~$\Struct M$.  If $\Gamma$ is not satisfiable it is
 called \emph{unsatisfiable}.
 \end{defn}
 
@@ -46,14 +46,14 @@ sentences~$\Gamma$.
 
 \begin{proof}
 For the forward direction, let $!A$ be valid, and let $\Gamma$ be a
-set of sentences. Let $\Struct M$ be a structure so that
+set of sentences. Let $\Struct M$ be a !!{structure} so that
 $\Sat{M}{\Gamma}$. Since $!A$ is valid, $\Sat{M}{!A}$, hence $\Gamma
 \Entails !A$.
 
 For the contrapositive of the reverse direction, let $!A$ be invalid,
-so there is a structure $\Struct M$ with $\Sat!{M}{!A}$. When $\Gamma
+so there is a !!{structure} $\Struct M$ with $\Sat!{M}{!A}$. When $\Gamma
 = \{ \ltrue \}$, since $\ltrue$ is valid, $\Sat{M}{\Gamma}$. Hence,
-there is a structure $\Struct M$ so that $\Sat{M}{\Gamma}$ but
+there is a !!{structure} $\Struct M$ so that $\Sat{M}{\Gamma}$ but
 $\Sat!{M}{!A}$, hence $\Gamma$ does not entail $!A$.
 \end{proof}
 
@@ -63,16 +63,16 @@ $\Gamma \Entails !A$ iff $\Gamma \cup \{\lnot !A\}$ is unsatisfiable.
 
 \begin{proof}
 For the forward direction, let $\Gamma$ entail $!A$ and suppose to the
-contrary that there is a structure $\Struct M$ so that $\Sat{M}{\Gamma
+contrary that there is a !!{structure} $\Struct M$ so that $\Sat{M}{\Gamma
   \cup \{ \lnot !A \}}$. Since $\Sat{M}{\Gamma}$ and $\Gamma \Entails
 !A$, $\Sat{M}{!A}$. Also, since $\Sat{M}{\Gamma\cup \{ \lnot !A \}}$,
 $\Sat{M}{\lnot !A}$, so we have both $\Sat{M}{!A}$ and $\Sat!{M}{!A}$,
-a contradiction. Hence, there can be no such structure $\Struct M$, so
+a contradiction. Hence, there can be no such !!{structure} $\Struct M$, so
 $\Gamma \cup \{ !A \}$ is unsatisfiable.
 
 For the reverse direction, let $\Gamma \cup \{ \lnot !A \}$. So for
-every structure $\Struct M$, either $\Sat!{M}{\Gamma}$ or
-$\Sat{M}{!A}$. Hence, for every structure $\Struct M$ with
+every !!{structure} $\Struct M$, either $\Sat!{M}{\Gamma}$ or
+$\Sat{M}{!A}$. Hence, for every !!{structure} $\Struct M$ with
 $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma \Entails !A$.
 \end{proof}
 
@@ -95,13 +95,13 @@ $\Gamma \cup \{!A\} \Entails !B$ iff $\Gamma \Entails !A \lif !B$.
 
 \begin{proof}
 For the forward direction, let $\Gamma \cup \{ !A \} \Entails !B$ and
-let $\Struct M$ be a structure so that $\Sat{M}{\Gamma}$. If
+let $\Struct M$ be a !!{structure} so that $\Sat{M}{\Gamma}$. If
 $\Sat{M}{!A}$, then $\Sat{M}{\Gamma \cup \{ !A \} }$, so since $\Gamma
 \cup \{ !A \}$ entails $!B$, we get $\Sat{M}{!B}$. Therefore,
 $\Sat{M}{!A \lif !B}$, so $\Gamma \Entails !A \lif !B$.
 
 For the reverse direction, let $\Gamma \Entails !A \lif !B$ and
-$\Struct M$ be a structure so that $\Sat{M}{\Gamma \cup \{ !A
+$\Struct M$ be a !!{structure} so that $\Sat{M}{\Gamma \cup \{ !A
   \}}$. Then $\Sat{M}{\Gamma}$, so $\Sat{M}{!A \lif !B}$, and since
 $\Sat{M}{!A}$, $\Sat{M}{!B}$. Hence, whenever $\Sat{M}{\Gamma \cup \{
   !A \} }$, $\Sat{M}{!B}$, so $\Gamma \cup \{ !A \} \Entails !B$.
