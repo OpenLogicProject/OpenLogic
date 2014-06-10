@@ -1,35 +1,35 @@
 % OpenLogic Project
 % Package for selective typesetting
 
-% cribbed from tagging.sty package by Brent Longborough http://www.ctan.org/tex-archive/macros/latex/contrib/tagging
-% uses etoolbox's toggles for tags instead, allows for boolean expressions in addition to tag lists
+% cribbed from tagging.sty package by Brent Longborough
+% http://www.ctan.org/tex-archive/macros/latex/contrib/tagging 
+
+% uses etoolbox's toggles for tags instead, allows for boolean
+% expressions in addition to tag lists
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{open-logic-selective}
+\ProvidesFile{open-logic-selective.sty}
 
 \RequirePackage{etoolbox}
 
+\makeatletter
+
 % initialize a list of tags as true
 
-\newcommand{\tagtrue}[1]{\def\do##1{\providetoggle{##1}\toggletrue{##1}}
-    \docsvlist{#1}}
+\newcommand{\tagtrue}[1]{%
+  \def\do##1{\providetoggle{##1}\toggletrue{##1}}
+    \docsvlist{#1}%
+  \def\do##1{\providetoggle{not##1}\togglefalse{not##1}}
+    \docsvlist{#1}%
+}
 
 % initialize a list of tags as false
 
-\newcommand{\tagfalse}[1]{\def\do##1{\providetoggle{##1}\togglefalse{##1}}
-    \docsvlist{#1}}
-
-% \begin{blockif}{boolean expression} text if true \end{blockif}
-
-\newenvironment{blockif}[1]{\ifboolexpr { #1 }{\let\comment\relax\let\endcomment\relax}{}\comment}{\endcomment\leavevmode}
-
-% \begin{blocktag}{taglist} text if tagged \end{blocktag}
-
-\newenvironment{blocktag}[1]{\def\do##1{%
-        \iftoggle{##1}{\let\comment\relax\let\endcomment\relax}{}}
+\newcommand{\tagfalse}[1]{%
+  \def\do##1{\providetoggle{##1}\togglefalse{##1}}%
     \docsvlist{#1}%
-    \comment}%
-    {\endcomment\leavevmode}
+\def\do##1{\providetoggle{not##1}\toggletrue{not##1}}
+    \docsvlist{#1}}
 
 % \printif{boolean expression}{text if true}{text if false}
 
@@ -46,8 +46,23 @@
    \printtagtext%
   }
 
+% change \begin to take optional tags in <...>
+% if one of the tags is active, behave as \begin otherwise would
+% if one of them is, supress everything until the end of the environment
 
+\let\orig@begin\begin
 
+\def\begin{\@ifnextchar<{\tag@begin}{\orig@begin}}
+\def\tag@begin<#1>{\printtag{#1}{\orig@begin}{\supressenv}}
 
+\def\supressenv#1{\begingroup\@bsphack
+             \let\do\@makeother\dospecials\catcode`\^^M\active
+             \let\verbatim@startline\relax
+             \let\verbatim@addtoline\@gobble
+             \let\verbatim@processline\relax
+             \let\verbatim@finish\relax
+             \def\@currenvir{#1}
+             \verbatim@}
 
+\makeatother
 
