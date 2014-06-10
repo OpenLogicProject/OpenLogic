@@ -27,12 +27,12 @@ A \emph{structure}, $\Struct{M}$, for a language $\Lang{L}$ of
 first-order logic consists of the following elements:
 \begin{enumerate}
 \item \emph{Domain:} a non-empty set, $\Domain M$ 
-\item \emph{Name assignment:} for each constant symbol $c$ of
+\item \emph{Name assignment:} for each !!{constant} $c$ of
   $\Lang{L}$, an element $\Assign{c}{M} \in \Domain M$
-\item \emph{Relations:} for each $n$-place predicate symbol $R$ of
+\item \emph{Relations:} for each $n$-place !!{predicate} $R$ of
   $\Lang{L}$ (other than $\eq$), an $n$-ary relation $\Assign{R}{M}
   \subseteq \Domain{M}^n$
-\item \emph{Functions:} for each $n$-place function symbol $\Obj f$ of
+\item \emph{Functions:} for each $n$-place !!{function} $\Obj f$ of
   $\Lang{L}$, an $n$-ary function $\Assign{f}{M} \colon
   \Domain{M})^n \to \Domain{M}$
   %Do we mean to have f appear as a sans serif and then as serif?
@@ -43,12 +43,12 @@ first-order logic consists of the following elements:
 
 \begin{explain}
 Recall that a term is \emph{closed} if it is closed or if it is a
-function of constants only (without variables, whether free or bound).
+function of constants only (without !p{variable}, whether free or bound).
 \end{explain}
 
 \begin{defn}[Denotation of closed terms]
 If $t$ is a closed term of the langage~$\Lang L$ and $\Struct M$ i a
-structure for~$\Lang L$, the \emph{denotation}~$\Value{t}{M}$ is
+!!{structure} for~$\Lang L$, the \emph{denotation}~$\Value{t}{M}$ is
 defied as follows:
 \begin{enumerate}
 \item If $t$ is just the constant $c$, then $\Value{c}{M} = \Assign{c}{M}$.
@@ -58,23 +58,23 @@ defied as follows:
 \end{enumerate}
 \end{defn}
 
-\begin{defn}[Covered structure]
-A structure is \emph{covered} if every element of the domain is the
+\begin{defn}[Covered !!{structure}]
+A !!{structure} is \emph{covered} if every element of the domain is the
 denotation of some closed term.
 \end{defn}
 
-For example: let ~$\Lang L$ be the language with constant symbols 
+For example: let ~$\Lang L$ be the language with !p{constant} 
 $\mathsf{Zero}, \mathsf{One}, \mathsf{Two}, \ldots$, the binary predicate 
-symbols $=$ and $<$, and the binary function symbols $+$ and $\times$. 
-Then a structure $\Struct M$ for $\Lang L$ is the one with domain 
+symbols $=$ and $<$, and the binary !p{function} $+$ and $\times$. 
+Then a !!{structure} $\Struct M$ for $\Lang L$ is the one with domain 
 $\Domain M = \{0, 1, 2, \ldots \}$ and name assignment $\Assign{\mathsf{Zero}}{M}
 = 0$, $\Assign{\mathsf{One}}{M} = 1$, $\Assign{\mathsf{Two}}{M} = 2$, and 
 so forth. For the binary relation symbol $<$, the set $\Assign{<}{M}$ is the set of all 
 pairs $\langle c_1, c_2 \rangle \in \Domain{M}^2$ such that the integer $c_1$ 
 is less than the integer $c_2$: for example, $\langle 1, 3 \rangle \in \Value{<}{M}$ 
-but $\langle 2, 2 \rangle \notin \Value{<}{M}$. For the binary function symbol $+$, 
+but $\langle 2, 2 \rangle \notin \Value{<}{M}$. For the binary !!{function} $+$, 
 define $\Assign{+}{M}$ in the usual way --- for example, $\Assign{+}{M}(2,3)$ maps 
-to $5$, and similarly for the binary function symbol $\times$. Hence, the 
+to $5$, and similarly for the binary !!{function} $\times$. Hence, the 
 denotation of $\mathsf{Four}$ is just 4, and the denotation of $\times(\mathsf{Two}, 
 +(\mathsf{Three},\mathsf{Zero}))$ (or in infix notation, $\mathsf{Two} \times 
 (\mathsf{Three} + \mathsf{Zero})$ ) is
@@ -92,7 +92,7 @@ denotation of $\mathsf{Four}$ is just 4, and the denotation of $\times(\mathsf{T
 &= 5
 \end{align*}
 
-The stipulations we make as to what counts as a structure impact our
+The stipulations we make as to what counts as a !!{structure} impact our
 logic. For example, the choice to prevent empty domains ensures, given
 the usual account of satisfaction (or truth) for quantified sentences, that
 $\lexists[x][(!A(x) \lor \lnot !A(x))]$ is valid --- that is, a logical truth. And the

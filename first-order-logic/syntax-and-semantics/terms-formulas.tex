@@ -18,19 +18,19 @@ include in particular \emph{terms} and \emph{!p{formulas}}.
 The set of \emph{terms}~$\Trm$ of~$\Lang L$ is
 defined inductively:
 \begin{enumerate}
-\item Every variable is a term.
+\item Every !!{variable} is a term.
 \item Every !!{constant} of~$\Lang L$ is a term.
 \item If $f$ is an $n$-place !!{function} and $t_1$, \dots, $t_n$
   are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.
 \item Nothing else is a term.
 \end{enumerate}
-A term containing no variables is a \emph{closed term}.
+A term containing no !p{variable} is a \emph{closed term}.
 \end{defn}
 
 \begin{explain}
 The constants appear in our specification of the language and the
 terms as a separate category of symbols, but they could instead have
-been included as zero-place function symbols.  We could then do
+been included as zero-place !p{function}.  We could then do
 without the second clause in the definition of terms. We just have to
 understand $\Atom{f}{t_1, \ldots, t_n}$ as just $f$ by itself if $n =
 0$.
@@ -52,9 +52,9 @@ is defined inductively as follows:
 \item If $!A$ and $!B$ are !p{formula}, then $(!A \lor !B)$ is a !!{formula}.
 \item If $!A$ and $!B$ are !p{formula}, then $(!A \lif !B)$ is a !!{formula}.
 \item If $!A$ and $!B$ are !p{formula}, then $(!A \liff !B)$ is a !!{formula}.
-\item If $!A$ is a !!{formula} and $x$ is a variable, then $\lforall[x]\,
+\item If $!A$ is a !!{formula} and $x$ is a !!{variable}, then $\lforall[x]\,
   !A$ is a !!{formula}.
-\item If $!A$ is a !!{formula} and $x$ is a variable, then $\lexists[x]\,
+\item If $!A$ is a !!{formula} and $x$ is a !!{variable}, then $\lexists[x]\,
   !A$ is a !!{formula}.
 \item Nothing else is a !!{formula}.
 \end{enumerate}
@@ -65,9 +65,9 @@ By convention, $\lnot \eq[t_1][t_2]$ is written as $\eq/[t_1][t_2]$.
 \end{explain}
 
 \begin{intro}
-Some logic texts require that the variable~$x$ must occur in~$!A$ in
+Some logic texts require that the !!{variable}~$x$ must occur in~$!A$ in
 order for $\lexists[x][!A]$ and $\lforall[x][!A$] to count as
-formulas.  Nothing bad happens if you don't require this, and it makes
+!p{formula}.  Nothing bad happens if you don't require this, and it makes
 things easier.
 \end{intro}
 
