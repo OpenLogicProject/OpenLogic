@@ -12,16 +12,16 @@
 \begin{explain}
 Part of the challenge in proving the completeness theorem is that the
 model we construct from a maximally consistent set~$\Gamma$ must make
-all the quantified formulas in~$\Gamma$ true.  In order to guarantee
+all the quantified "p{formula} in~$\Gamma$ true.  In order to guarantee
 this, we use a trick due to Leon Henkin.  In essence, the trick
 consists in expanding the language by infinitely many constants and
-adding, for each formula with one free variable $[!A(x)]$ a formula of
+adding, for each "{formula} with one free "{variable} $[!A(x)]$ a formula of
 the form $\lexists[x][!A(x)] \lif !A(c)$, where $c$ is one of the new
-constant symbols.  
+"p{constant}.  
 \end{explain}
 
 \begin{prop}[Generalization]
-If $\Gamma \Proves !A$ and $x$ is not free in any formula in $\Gamma$, 
+If $\Gamma \Proves !A$ and $x$ is not free in any "{formula} in $\Gamma$, 
 then $\Gamma \Proves \lforall[x] !A$.
 \end{prop}
 
@@ -31,33 +31,33 @@ If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta \Proves !A$.
 
 \begin{thm}[Weak Generalization on Constants]
 If $\Gamma \Proves !A$ and $c$ is a constant not occurring in
-$\Gamma$, then there is a variable $x$ not in $!A$ such that $\Gamma
+$\Gamma$, then there is a "{variable} $x$ not in $!A$ such that $\Gamma
 \Proves \lforall[x] !A [x/c]$ and the derivation does not involve $c$.
 \end{thm}
 
 \begin{proof}
 Let $!A_1, \dots, !A_n$ be a derivation of $!A$ from $\Gamma$, so $!A
-= !A_n$.  Choose a variable $x$ not in $!A_1, \dots, !A_n$, and
+= !A_n$.  Choose a "{variable} $x$ not in $!A_1, \dots, !A_n$, and
 consider the new sequence $!A_1[x/c], \dots, !A_n [x/c]$. Such a
 sequence is a derivation of $!A[x/c]$ from $\Gamma$, and the constant
 $c$ no longer occurs in the new sequence.
 %More detail here
-Now let $\Gamma' \subseteq \Gamma$ be the formulae in $\Gamma$ that
+Now let $\Gamma' \subseteq \Gamma$ be the "p{formula} in $\Gamma$ that
 appear in the derivation of $!A [x/c]$; then $x$ is not free in any
-formula in $\Gamma'$ and $\Gamma' \Proves !A [x/c]$. By
+"{formula} in $\Gamma'$ and $\Gamma' \Proves !A [x/c]$. By
 generalization, $\Gamma' \Proves \lforall[x] !A[x/c]$, whence by
 monotony, $\Gamma \Proves \lforall[x] !A [x/c]$, as desired.
 \end{proof}
 
 \begin{defn} 
 A term $t$ is \emph{free for $x$ in $!A$} if $x$ does not occur in
-$!A$ within the scope of a quantifier $\lforall[z]$ binding a variable
+$!A$ within the scope of a quantifier $\lforall[z]$ binding a "{variable}
 $z$ occurring in $t$.
 \end{defn}
 
 %Examples of this maybe?
 
-\begin{prop}[Change of bound variable]
+\begin{prop}[Change of bound "{variable}]
 If $x$ and $y$ are not free in $!A$ and are both free for $c$ in $!A$,
 then $\Proves \lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, and the
 derivation does not involve $c$.
@@ -71,11 +71,11 @@ $\Gamma \Proves \lforall[x] !A[x/c]$.
 
 \begin{proof}
 Since $\Gamma \Proves !A$ and $c$ is not in $\Gamma$, by Weak
-Generalization, there is a variable $y$ not in $!A$ such that $\Gamma
+Generalization, there is a "{variable} $y$ not in $!A$ such that $\Gamma
 \Proves \lforall[y] !A [y/c]$.  Since $y$ is not in $!A$, it is not
 free in $!A$ and it is also free for $c$ in $!A$; if moreover (by
 hypothesis) $x$ is not free in $!A$ and is free for $c$ in $!A$, then
-the requirements for a change of bound variable are met, so $\Proves
+the requirements for a change of bound "{variable} are met, so $\Proves
 \lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, whence $\Gamma \Proves
 \lforall[x] !A[x/c]$.
 \end{proof}
@@ -87,26 +87,26 @@ then $\Gamma$ is consistent in $\Lang L'$.
 \end{lem}
 
 \begin{defn}
-  A set $\Gamma$ of formulas of a language $\Lang {L}$ is
-  \emph{saturated} if and only if for each formula $!A \in
-  \Frm {L}$ and variable $x$ there is a constant $c$ such that
+  A set $\Gamma$ of "p{formula} of a language $\Lang {L}$ is
+  \emph{saturated} if and only if for each "{formula} $!A \in
+  \Frm {L}$ and "{variable} $x$ there is a constant $c$ such that
   $\lexists[x][!A] \lif !A(c) \in \Gamma$.
 \end{defn}
 
-% do we need to also add conditionals for the universally quantified 
-% formulas or does max. consistency take care of those?
+% do we need to also add "p{conditional} for the universally quantified 
+% "p{formula} or does max. consistency take care of those?
 
 The following definition will be used in the proof of the next theorem.
 
 \begin{defn}
 Fix an enumeration $\langle !A_0, x_0 \rangle, \langle !A_1, x_1
-\rangle, \dots$ of all formula-variable pairs of $\Lang L'$, and
+\rangle, \dots$ of all "{formula}-"{variable} pairs of $\Lang L'$, and
 define the sentence $!D_n$ by recursion on $n$. For $!D_0$,
 let $c_0$ be the first new constant that does not occur in $!A_0$ and
-let $!D_0$ be the formula $\lnot \lforall[x_0] !A_0 \lif \lnot
+let $!D_0$ be the "{formula} $\lnot \lforall[x_0] !A_0 \lif \lnot
 !A_0[c_0/x_0]$. Assuming that $!D_0, \dots, !D_n$ have been
 defined, denote by $c_{n+1}$ the first new constant not occurring in
-$!D_0, \dots, !D_n$, and let $!D_{n+1}$ be the formula
+$!D_0, \dots, !D_n$, and let $!D_{n+1}$ be the "{formula}
 $\lnot \lforall[x_{n+1}] !A_{n+1} \lif \lnot
 !A_{n+1}[c_{n+1}/x_{n+1}]$. Finally, set $!D = \{ !D_n : n
 \geq 0 \}$.
@@ -134,7 +134,7 @@ For the basis of the induction, suppose that $\Gamma \cup \{ !D_0
 \quad
 \Gamma \Proves !A_0[c_0/x_0]
 \]
-But $c_0$ does not occur in $\Gamma$ and the variable $x_0$ is not
+But $c_0$ does not occur in $\Gamma$ and the "{variable} $x_0$ is not
 free in $!A_0 [ c_0/x_0]$. Moreover, $x_0$ is free for $c_0$ in $!A_0
 [c_0/x_0]$ (since by the choice of $c_0$, the only occurrences of
 $c_0$ in $!A_0 [c_0/x_0]$ derive from the substitution $[c_0/x_0]$,
