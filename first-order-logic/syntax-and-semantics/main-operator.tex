@@ -1,0 +1,69 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: main-operator
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{mai}
+
+\olsection{Main Operator of a Formula}
+
+\begin{explain}
+It is often useful to talk about the last operator used in
+constructing a !!{formula}~$!A$.  This operator is called the \emph{main
+  operator} of ~$!A$. Intuitively, it is the ``outermost'' operator
+of $!A$. For example, the main operator of $(\lnot !A)$ is $\lnot$,
+the main operator of $(!A \lor !B)$ is $\lor$, etc.
+\end{explain}
+
+
+\begin{defn}[!S{main operator}]
+The \emph{!!{main operator}} of a !!{formula}~$!A$ is inductively
+defined as follows:
+\begin{enumerate}
+\item Atomic !p{formula} have no !!{main operator}.
+
+\tagitem{prvNot}{If $!A$ is of the form $\lnot !B$, then the main
+  operator of $!A$ is $\lnot$.}{}
+
+\tagitem{prvAnd}{If $!A$ is of the form $!B \land !C$, then the main
+  operator of $!A$ is $\land$.}{}
+
+\tagitem{prvOr}{If $!A$ is of the form $!B \lor !C$, then the !!{main
+    operator} of $!A$ is $\lor$.}{}
+
+\tagitem{prvIf}{If $!A$ is of the form $!B \lif !C$, then the !!{main
+    operator} of $!A$ is $\lif$.}{}
+
+\tagitem{prvIff}{If $!A$ is of the form $!B \liff !C$, then the !!{main
+  operator} of $!A$ is $\liff$.}{}
+
+\tagitem{prvAll}{If $!A$ is of the form $\lforall[x][!B]$, then the
+  !!{main operator} of $!A$ is $\lforall$.}{}
+
+\tagitem{prvEx}{If $!A$ is of the form $\lexists[x][!B]$, then the
+  !!{main operator} of $!A$ is $\lexists$.}{}
+\end{enumerate}
+\end{defn}
+
+!P{formula} with each type of !!{main operator}:
+
+\begin{figure}[!h]
+\centering
+\begin{tabular}{| c | c | c |}
+\hline
+!S{main operator} & Type of !!{formula} & Example\\
+\hline
+$\lnot$ & negation & $\lnot !A$ \\
+$\land$ & conjunction & $!A \land !B$ \\
+$\lor$ & disjunction & $!A \lor !B$ \\
+$\lif$ & !!{conditional} & $!A \lif !B$ \\
+\iftag{prvIff,defIff}{}{$\liff$ & !!{biconditional} & $!A \liff !B$ \\}
+$\lforall[][]$ & universal & $\lforall[x][!A]$ \\
+$\lexists[][]$ & existential & $\lexists[x][!A]$\\ \hline
+\end{tabular}
+\end{figure}
+
+\end{document}

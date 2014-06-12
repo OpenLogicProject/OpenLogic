@@ -5,7 +5,8 @@
 % A clean solution is needed
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{open-logic-defer}
+
+\ProvidesFile{open-logic-defer}
 
 \RequirePackage{etoolbox}
 \RequirePackage{answers}
@@ -25,10 +26,10 @@
 
 % at the end of a chapter, read the solutionfile
 \appto\OLEndChapterHook{%
-  \Closesolutionfile{problems}
-  \Readsolutionfile{problems}}
+  \Closesolutionfile{\jobname.problems}
+  \Readsolutionfile{\jobname.problems}}
 
 % at the end of a \chapter command, open the solution file 
 \renewcommand\memendofchapterhook{%
-  \Opensolutionfile{problems}
-  \Writetofile{problems}{\protect\section*{Problems}}}
+  \Opensolutionfile{\jobname.problems}
+  \Writetofile{\jobname.problems}{\protect\section*{Problems}}}

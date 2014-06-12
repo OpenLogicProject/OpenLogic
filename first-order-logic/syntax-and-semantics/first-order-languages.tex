@@ -62,7 +62,7 @@ first-order logic:
 \item Punctuation marks: (, ), and the comma.
 \end{enumerate}
 
-\iftag{definedSyms}{%
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
 In addition to the primitive connectives and
 \iftag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
 above, we also use the following \emph{defined} symbols:
@@ -75,9 +75,10 @@ above, we also use the following \emph{defined} symbols:
   \iftag{defAll}{\ycomma $\lforall$ (universal quantifier)}{}%
   \iftag{defEx}{\ycomma $\lexists$ (existential quantifier)}{}%
   \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
-  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}}{}.
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}.}{}
 
-\begin<definedSyms>{explain}
+\begin<defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll>
+  {explain}
 A defined symbol is not officially part of the language, but is
 introduced as an informal abbreviation: it allows us to abbreviate
 formulas which would, if we only used primitive symbols, get quite
