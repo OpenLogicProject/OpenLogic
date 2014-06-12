@@ -584,11 +584,6 @@
 % value. We assume that all operators other than `\ltrue`, `\lfalse`,
 % and `\liff` will at least be defined.
 
-% - Operators: tags for operators which are
-%  included/mentioned. Default: include all.
-
-\tagtrue{incIff,incTrue,incFalse}
-
 % - Primitives: tags for (sets of) operators which are treated as
 %   primitives. Default: all as primitives.  `\notprvAny` is a Boolean
 %   expression which is true if there are any non-primitive (defined)
@@ -596,12 +591,19 @@
 
 \tagtrue{prvNot,prvOr,prvAnd,prvIf,prvIff,prvTrue,prvFalse,prvEx,prvAll}
 
-\tagfalse{prvIf,prvEx,prvTrue}
+\tagfalse{prvIff,prvAnd,prvOr,prvTrue}
+
+% - Defined operators: tags for operators which are defined, not
+%  primitive. Default: none.  Note: Not all combinations of
+%  primitive/defined operators will result in complete definitions!
+
+\tagfalse{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+
+\tagtrue{defAnd}
 
 % `definedSyms` should be true if there are any defined symbols.
 
 \tagtrue{definedSyms}
-
 
 % - Cases in proofs: tags for (sets of) operators for which cases are
 %   proved; if the corresponding tag is off then the case is added as
@@ -611,3 +613,7 @@
 
 \tagtrue{caseNot,caseOr,caseAnd,caseIf,caseIff,caseEx,caseAll}
 
+% - Limit clause in inductive definitions: do you want inductive
+% definitions to have a "Nothing else is a ..." clause?
+
+\tagtrue{limitClause}

@@ -20,12 +20,12 @@ symbols such as parentheses and commas, \emph{terms} and
 
 \begin{explain}
 Informally, !p{predicate} are names for properties and relations,
-!p{constant} are names for individual objects, and !p{function} are names
-for mappings.  These, except for the !!{identity}~$\eq$, are the
+!p{constant} are names for individual objects, and !p{function} are
+names for mappings.  These, except for the !!{identity}~$\eq$, are the
 \emph{non-logical symbols} and together make up a language.  Any
 first-order language~$\Lang L$ is determined by its non-logical
-symbols.  In the most general case, $\Lang L$ contains infinitely
-many symbols of each kind.
+symbols.  In the most general case, $\Lang L$ contains infinitely many
+symbols of each kind.
 \end{explain}
 
 In the general case, we make use of the following symbols in
@@ -36,17 +36,15 @@ first-order logic:
 \begin{enumerate}
 \item Logical connectives:
   \startycommalist
-  \printtag{notprvNot}{}{\ycomma $\lnot$ (negation)}%
-  \printtag{notprvAnd}{}{\ycomma $\land$ (conjunction)}%
-  \printtag{notprvOr}{}{\ycomma $\lor$ (disjunction)}%
-  \printtag{notprvIf}{}{\ycomma $\lif$ (!!{conditional})}%
-  \printtag{notincIff,notprvIff}{}{\ycomma $\liff$ (!!{biconditional})}%
-  \printtag{notprvAll}{}{\ycomma $\lforall$ (universal quantifier)}%
-  \printtag{notprvEx}{}{\ycomma $\lexists$ (existential quantifier)}.
-\printtag{notincFalse,notprvFalse}{}{%
-\item The propositional constant for !!{falsity}~$\lfalse$.}
-\printtag{notincTrue,notprvTrue}{}{%
-\item The propositional constant for !!{truth}~$\ltrue$.}
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{prvAll}{\ycomma $\lforall$ (universal quantifier)}{}%
+  \iftag{prvEx}{\ycomma $\lexists$ (existential quantifier)}{}.
+\tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+\tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
 \item The two-place !!{identity}~$\eq$.
 \item A !p{denumerable} set of !p{variable}: $\Obj v_0$, $\Obj v_1$, $\Obj
   v_2$, \dots
@@ -64,20 +62,20 @@ first-order logic:
 \item Punctuation marks: (, ), and the comma.
 \end{enumerate}
 
-\printtag{definedSyms}{%
+\iftag{definedSyms}{%
 In addition to the primitive connectives and
-\printtag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
+\iftag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
 above, we also use the following \emph{defined} symbols:
 \startycommalist
-  \printtag{prvNot}{}{\ycomma $\lnot$ (negation)}%
-  \printtag{prvAnd}{}{\ycomma $\land$ (conjunction)}%
-  \printtag{prvOr}{}{\ycomma $\lor$ (disjunction)}% 
-  \printtag{prvIf}{}{\ycomma $\lif$ (!!{conditional})}% 
-  \printtag{notincIff,prvIff}{}{\ycomma $\liff$ (!!{biconditional})}%
-  \printtag{prvAll}{}{\ycomma $\lforall$ (universal quantifier)}%
-  \printtag{prvEx}{}{\ycomma $\lexists$ (existential quantifier)}%
-  \printtag{notincFalse,prvFalse}{}{\ycomma !!{falsity}~$\lfalse$}%
-  \printtag{notincTrue,prvTrue}{}{\ycomma !!{truth}~$\ltrue$}}.
+  \iftag{defNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (disjunction)}{}% 
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}% 
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defAll}{\ycomma $\lforall$ (universal quantifier)}{}%
+  \iftag{defEx}{\ycomma $\lexists$ (existential quantifier)}{}%
+  \iftag{defFalse}{\ycomma !!{falsity}~$\lfalse$}{}%
+  \iftag{defTrue}{\ycomma !!{truth}~$\ltrue$}}{}.
 
 \begin<definedSyms>{explain}
 A defined symbol is not officially part of the language, but is
@@ -94,15 +92,15 @@ the longer our proofs.
 \begin{intro}
 You may be familiar with different terminology and symbols than the
 ones we use above. Logic texts (and teachers) commonly use either
-$\sim$, $\neg$, and~! for ``negation'', $\wedge$, $\cdot$, and $\&$
+$\sim$, $\neg$, and~!\ for ``negation'', $\wedge$, $\cdot$, and $\&$
 for ``conjunction''.  Commonly used symbols for the ``conditional'' or
 ``implication'' are $\rightarrow$, $\Rightarrow$, and $\supset$.
-\printtag{incIff}{Symbols for ``biconditional,'' ``bi-implication,''
+\iftag{prvIff,defIff}{Symbols for ``biconditional,'' ``bi-implication,''
   or ``(material) equivalence'' are $\leftrightarrow$,
   $\Leftrightarrow$, and $\equiv$.}{} 
-\printtag{incFalse}{The $\lfalse$ symbol is variously called
+\iftag{prvFalse,defFalse}{The $\lfalse$ symbol is variously called
   ``falsity,'' ``falsum,'', ``absurdity,'', or ``bottom.''}{}
-\printtag{incTrue}{The $\ltrue$ symbol is variously called
+\iftag{prvTrue,defTrue}{The $\ltrue$ symbol is variously called
   ``truth,'' ``verum,'', or ``top.''}{}
 
 It is very common to use lower case letters (e.g., $a$, $b$, $c$) from
