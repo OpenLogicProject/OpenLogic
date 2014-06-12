@@ -34,13 +34,19 @@ first-order logic:
 \begin{enumerate}
 \item Logical symbols
 \begin{enumerate}
-\item Logical connectives: $\lnot$ (negation), $\land$ (conjunction),
-  $\lor$ (disjunction), $\lif$ (!!{conditional}), $\liff$ (!!{biconditional}),
-  $\lforall$ (universal quantifier), $\lexists$ (existential
-  quantifier).
-\item The propositional constant for !!{falsity}~$\lfalse$, called ``bottom'' or ``\emph{falsum}''.
-\item The propositional constant for $\ltrue$, called ``top'' or ``\emph{verum}''.
-% Need to add in !!{true}~ into the above
+\item Logical connectives:
+  \startycommalist
+  \printtag{notprvNot}{}{\ycomma $\lnot$ (negation)}%
+  \printtag{notprvAnd}{}{\ycomma $\land$ (conjunction)}%
+  \printtag{notprvOr}{}{\ycomma $\lor$ (disjunction)}%
+  \printtag{notprvIf}{}{\ycomma $\lif$ (!!{conditional})}%
+  \printtag{notincIff,notprvIff}{}{\ycomma $\liff$ (!!{biconditional})}%
+  \printtag{notprvAll}{}{\ycomma $\lforall$ (universal quantifier)}%
+  \printtag{notprvEx}{}{\ycomma $\lexists$ (existential quantifier)}.
+\printtag{notincFalse,notprvFalse}{}{%
+\item The propositional constant for !!{falsity}~$\lfalse$.}
+\printtag{notincTrue,notprvTrue}{}{%
+\item The propositional constant for !!{truth}~$\ltrue$.}
 \item The two-place !!{identity}~$\eq$.
 \item A !p{denumerable} set of !p{variable}: $\Obj v_0$, $\Obj v_1$, $\Obj
   v_2$, \dots
@@ -58,23 +64,55 @@ first-order logic:
 \item Punctuation marks: (, ), and the comma.
 \end{enumerate}
 
+\printtag{definedSyms}{%
+In addition to the primitive connectives and
+\printtag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
+above, we also use the following \emph{defined} symbols:
+\startycommalist
+  \printtag{prvNot}{}{\ycomma $\lnot$ (negation)}%
+  \printtag{prvAnd}{}{\ycomma $\land$ (conjunction)}%
+  \printtag{prvOr}{}{\ycomma $\lor$ (disjunction)}% 
+  \printtag{prvIf}{}{\ycomma $\lif$ (!!{conditional})}% 
+  \printtag{notincIff,prvIff}{}{\ycomma $\liff$ (!!{biconditional})}%
+  \printtag{prvAll}{}{\ycomma $\lforall$ (universal quantifier)}%
+  \printtag{prvEx}{}{\ycomma $\lexists$ (existential quantifier)}%
+  \printtag{notincFalse,prvFalse}{}{\ycomma !!{falsity}~$\lfalse$}%
+  \printtag{notincTrue,prvTrue}{}{\ycomma !!{truth}~$\ltrue$}}.
+
+\begin<definedSyms>{explain}
+A defined symbol is not officially part of the language, but is
+introduced as an informal abbreviation: it allows us to abbreviate
+formulas which would, if we only used primitive symbols, get quite
+long.  This is obviously an advantage.  The bigger advantage, however,
+is that proofs becme shorter.  If a symbol is primitive, it has to be
+treated separately in proofs. The more primitive symbols, therefore,
+the longer our proofs.
+\end{explain}
+
 % Alternate symbols
 
 \begin{intro}
-You may be familiar with different symbols than the ones we use
-above. Logic texts (and teachers) commonly use either $\sim$ or $\neg$
-for negation, $\wedge$ or $\&$ for conjunction, and $\rightarrow$ or
-$\supset$ for the !!{conditional}. Other alternatives include $\cdot$ for
-conjunction, $\equiv$ for !!{biconditional} and !~for negation. It is very
-common to use lower case letters (e.g. $a$, $b$, $c$) from the
-beginning of the Latin alphabet for !p{constant} (sometimes called
-names), and lower case letters from the end (e.g. $x$, $y$, $z$)
-for !p{variable}. Quantifier variations include $\forall$ and $(x)$
-(where $x$ is a !!{variable}) for the universal quantifier and
-$\exists$ and $(Ex)$ for the existential quantifier.
-\end{intro}
+You may be familiar with different terminology and symbols than the
+ones we use above. Logic texts (and teachers) commonly use either
+$\sim$, $\neg$, and~! for ``negation'', $\wedge$, $\cdot$, and $\&$
+for ``conjunction''.  Commonly used symbols for the ``conditional'' or
+``implication'' are $\rightarrow$, $\Rightarrow$, and $\supset$.
+\printtag{incIff}{Symbols for ``biconditional,'' ``bi-implication,''
+  or ``(material) equivalence'' are $\leftrightarrow$,
+  $\Leftrightarrow$, and $\equiv$.}{} 
+\printtag{incFalse}{The $\lfalse$ symbol is variously called
+  ``falsity,'' ``falsum,'', ``absurdity,'', or ``bottom.''}{}
+\printtag{incTrue}{The $\ltrue$ symbol is variously called
+  ``truth,'' ``verum,'', or ``top.''}{}
 
-%Polish notation?
+It is very common to use lower case letters (e.g., $a$, $b$, $c$) from
+the beginning of the Latin alphabet for !p{constant} (sometimes called
+names), and lower case letters from the end (e.g., $x$, $y$, $z$) for
+!p{variable}. Quantifiers combine with !p{variable}, e.g., $x$;
+notational variations include $\forall x$, $(\forall x)$, $(x)$, $\Pi x$,
+$\bigwedge_x$ for the universal quantifier and $\exists x$, $(\exists
+x)$, $(Ex)$, $\Sigma x$, $\bigvee_x$ for the existential quantifier.
+\end{intro}
 
 \begin{explain}
 We are treating the propositional operators and both quantifiers as

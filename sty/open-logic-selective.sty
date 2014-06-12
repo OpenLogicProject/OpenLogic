@@ -11,6 +11,9 @@
 \ProvidesFile{open-logic-selective.sty}
 
 \RequirePackage{etoolbox}
+\RequirePackage{xpunctuate} % for xcomma, xperiod
+
+
 
 \makeatletter
 
@@ -43,8 +46,7 @@
    \def\do##1{%
      \iftoggle{##1}{\renewcommand{\printtagtext}{#2}}{}}%
    \docsvlist{#1}%
-   \printtagtext%
-  }
+   \printtagtext}
 
 % change \begin to take optional tags in <...>
 % if one of the tags is active, behave as \begin otherwise would
@@ -63,6 +65,9 @@
              \let\verbatim@finish\relax
              \def\@currenvir{#1}
              \verbatim@}
+
+\def\startycommalist{\def\ycomma{\def\ycomma{, }}}
+
 
 \makeatother
 
