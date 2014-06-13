@@ -18,26 +18,22 @@
 }
 \mathcode`\!="8000 % set ! active in math mode
 
+% latinformulas -- switch to latin formulas A, B, C, etc.
+
+\def\ollatinformulas{\let\formula\relax}
+
 % greekformulas -- formula metavariables are phi, psi, etc.
 % Provides !A, !B etc in math mode to produce \phi, \psi etc.
 
 \def\olgreekformulas
-{\gdef\formula{%
-  \@ifnextchar A{\varphi\@gobble}{
-  \@ifnextchar B{\psi\@gobble}{
-  \@ifnextchar C{\chi\@gobble}{
-  \@ifnextchar D{\theta\@gobble}{
-  \@ifnextchar E{\alpha\@gobble}{
-  \@ifnextchar F{\beta\@gobble}{
-  \@ifnextchar G{\gamma\@gobble}{
-  \@ifnextchar H{\delta\@gobble}{
-  \@ifnextchar K{\xi\@gobble}{
-  \@ifnextchar L{\zeta\@gobble}\relax
-}}}}}}}}}}}
+{\gdef\formula{\lookup{A/\varphi,B/\psi,C/\chi,D/\theta,E/\alpha,F/\beta,G/\gamma,H/\delta,K/\xi,L/\zeta}}}
+
+\def\olalphagreekformulas
+{\gdef\formula{\lookup{A/\alpha,B/\beta,C/\gamma,D/\delta,E/\phi,F/\psi,G/\chi,H/\sigma,K/\xi,L/\zeta}}}
 
 % args -- format a list of arguments separated by commas without commas
 
-\newcommand{\args}[1]{%
+\newcommand*{\args}[1]{%
   \let\@argsep\@argsepinit
   \@for\@arg:=#1\do{%
     \@argsep\@arg}%
@@ -47,4 +43,13 @@
 
 \newcommand{\argsep}{}
 
+% lookup#1#2 -- look up #2 in #1, a comma-separated list of pairs
 
+\def\@match#1/#2{\def\match@input{#1}\def\match@result{#2}}
+\newcommand*{\lookup}[2]{%
+  \def\lookup@input{#2}
+  \def\lookup@result{#2}%
+  \def\do##1{\@match##1\if\lookup@input\match@input
+    \let\lookup@result\match@result\fi}%
+  \docsvlist{#1}%
+  \lookup@result}
