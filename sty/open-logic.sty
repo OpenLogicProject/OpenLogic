@@ -49,6 +49,12 @@
              {\input{\jobname-config.sty}}
              {}
 
+% Load environment definition file, or custom file if available
+
+\IfFileExists{\jobname-envs.sty}
+             {\input{\jobname-envs.sty}}
+             {\input{\olpath/open-logic-envs.sty}}
+
 % olfilepath -- holds the path of the currently processed file
 % relative to the main input file.
 
