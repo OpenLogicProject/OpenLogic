@@ -39,11 +39,12 @@
 \fi
 \let\OLSubfileHook\relax
 
-% If a custom config file exists, load it, otherwise load default
+% Load configuration file, then custom changes if available
 
+\input{\olpath/open-logic-config.sty}
 \IfFileExists{\jobname-config.sty}
              {\input{\jobname-config.sty}}
-             {\input{\olpath/open-logic-config.sty}}
+             {}
 
 % olimport -- combines \subfile and \subimport
 % optional argument is subdirectory, if present subimport #1/#2
