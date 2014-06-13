@@ -2,7 +2,7 @@
 % Master Style Package
 
 % load various required standard packages
-% let LaTeXfind those
+% let LaTeX find those
 
 \RequirePackage[english]{babel}
 \RequirePackage{amsmath}
@@ -11,7 +11,6 @@
 \RequirePackage{xparse}
 \RequirePackage{mfirstuc}
 \RequirePackage{subfiles}
-\RequirePackage{import}
 \RequirePackage{bussproofs}
 \RequirePackage{hyperref}
 \RequirePackage{amsthm}
@@ -46,16 +45,27 @@
              {\input{\jobname-config.sty}}
              {}
 
-% olimport -- combines \subfile and \subimport
-% optional argument is subdirectory, if present subimport #1/#2
-% no optional argument: just\include
-% in either case, supress preamble like \subfile would
+% olfilepath -- holds the path of the currently processed file
+% relative to the main input file.
+
+% olimport -- import another text optional argument is subdirectory,
+% if present subimport #1/#2 no optional argument: just \subfile it.
+% When asking for a file from a subdirectory, change \olfilepath
+% accordingly. This happens within a gorup, so \olfilepath reverts to
+% its original content after the \subfile.
+
+\def\olfilebase{}
+\edef\olfilename{\jobname.tex}
 
 \DeclareDocumentCommand \olimport { o m }{
-  \begingroup\skip@preamble%
-  \IfNoValueTF{#1} 
-     {\input{#2}}
-     {\subimport*{#1/}{#2}}
-     \endgroup}
+  \begingroup
+  \IfNoValueTF{#1}{%
+    \def\olfilename{#2.tex}%
+    \subfile{\olfilebase #2}%
+}{%
+    \def\olfilename{#2.tex}%
+    \edef\olfilebase{\olfilebase #1/}%
+    \subfile{\olfilebase #2}}
+  \endgroup}
 
 \makeatother
