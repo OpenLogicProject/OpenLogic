@@ -72,7 +72,7 @@
 
 \newcommand*{\lif}{\rightarrow}
 
-% - The biconditional is `\liff` anddefaults to $\leftrightarrow$.  To
+% - The biconditional is `\liff` and defaults to $\leftrightarrow$.  To
 % use the triple bar $\equiv$ replace with `\equiv`.
 
 \newcommand*{\liff}{\leftrightarrow}
@@ -382,7 +382,7 @@
 % definition (`defn`), lemma (`lem`), proposition (`prop`), corollary
 % (`cor`), example (`ex`), problem (`prob`), remark (`rem`), and
 % convention (`conv`). The definitions make use of the `thmtools`
-% package.  To change the numbering or style of these enviornments,
+% package.  To change the numbering or style of these environments,
 % adjust their definitions. Refer to the [`thmtools`
 % documentation](http://www.ctan.org/pkg/thmtools).
 
@@ -421,6 +421,18 @@
   style=definition,
   name=Problem,
   numberwithin=chapter]{prob}
+
+% These are the names of the environments that `\cref` adds
+% automatically. `thmtools` should do that as well, but sometimes it
+% doesn't work, so we set them explicitly.  Redefine, e.g., if you
+% want references to "Prop. 5.4"
+
+\crefname{thm}{Theorem}{Theorems}
+\crefname{ex}{Example}{Examples}
+\crefname{defn}{Definition}{Definitions}
+\crefname{lem}{Lemma}{Lemmata}
+\crefname{prop}{Proposition}{Propositions}
+\crefname{prob}{Problem}{Problem}
 
 \declaretheorem[
   style=remark,
@@ -537,6 +549,11 @@
 
 \settexttoken{operator}{logical operator}{logical operators}
 
+% - `main operator`: defaults to "main operator", redefine for
+% "outermost operator".
+
+\settexttoken{main operator}{main operator}{main operators}
+
 % - `identity`: defaults to "identity predicate", redefine for
 % "equality predicate."
 
@@ -555,6 +572,11 @@
 
 \settexttoken{falsity}{falsity}{falsities}
 
+% - `truth`: the falsity symbol, defaults to "truth", redefine for
+% "verum" or "top".
+
+\settexttoken{truth}{truth}{truth}
+
 % - `structure`: term for first-order structures, defaults to
 % "structure", redefine for "interpretation", "model".
 
@@ -568,3 +590,36 @@
 % - `denumerable`: term for countably infinite; defaults to "denumerable". 
 
 \settexttoken{denumerable}{denumerable}{denumerable}
+
+% Tags
+% ====
+
+% Tags are used to guide selective compilation, using
+% `sty/open-logic-selective.sty`.  Tags are initialized using
+% `\tagtrue` and `\tagfalse`, which also initialize, for each `tag`
+% given as argument, a corresponding tag `nottag` with opposite truth
+% value is automatically provided. 
+
+% - Primitives: tags for (sets of) operators which are treated as
+%   primitives. Default: all as primitives. 
+
+\tagtrue{prvNot,prvOr,prvAnd,prvIf,prvIff,prvTrue,prvFalse,prvEx,prvAll}
+
+% - Defined operators: tags for operators which are defined, not
+%  primitive. Default: none.  Note: Not all combinations of
+%  primitive/defined operators will result in complete definitions!
+
+\tagfalse{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+
+% - Cases in proofs: tags for (sets of) operators for which cases are
+%   proved; if the corresponding tag is off then the case is added as
+%   a problem. Default: prove all cases. Note: propositional constants
+%   are part of induction base case and are always treated, if
+%   included.
+
+\tagfalse{probNot,probOr,probAnd,probIf,probIff,probEx,probAll}
+
+% - Limit clause in inductive definitions: do you want inductive
+% definitions to have a "Nothing else is a ..." clause?
+
+\tagtrue{limitClause}

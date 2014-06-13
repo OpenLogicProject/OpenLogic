@@ -22,7 +22,8 @@ defined inductively:
 \item Every !!{constant} of~$\Lang L$ is a term.
 \item If $f$ is an $n$-place !!{function} and $t_1$, \dots, $t_n$
   are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.
-\item Nothing else is a term.
+\tagitem{limitClause}{
+  Nothing else is a term.}{}
 \end{enumerate}
 A term containing no !p{variable} is a \emph{closed term}.
 \end{defn}
@@ -30,8 +31,8 @@ A term containing no !p{variable} is a \emph{closed term}.
 \begin{explain}
 The constants appear in our specification of the language and the
 terms as a separate category of symbols, but they could instead have
-been included as zero-place !p{function}.  We could then do
-without the second clause in the definition of terms. We just have to
+been included as zero-place !p{function}.  We could then do without
+the second clause in the definition of terms. We just have to
 understand $\Atom{f}{t_1, \ldots, t_n}$ as just $f$ by itself if $n =
 0$.
 \end{explain}
@@ -40,36 +41,90 @@ understand $\Atom{f}{t_1, \ldots, t_n}$ as just $f$ by itself if $n =
 The set of \emph{!p{formulas}}~$\Frm[L]$ of the language~$\Lang L$
 is defined inductively as follows:
 \begin{enumerate}
-\item $\lfalse$ is an atomic !!{formula}.
-\item $\ltrue$ is an atomic !!{formula}.
+\tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+
+\tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+
 \item If $R$ is an $n$-place !!{predicate} of~$\Lang L$ and $t_1$, \dots,
   $t_n$ are terms of~$\Lang L$, then $\Atom{R}{t_1,\ldots, t_n}$ is an
   (atomic) !!{formula}.
+
 \item If $t_1$ and $t_2$ are terms of~$\Lang L$, then $\eq[t_1][t_2]$
-  is an atomic !!{formula}.
-\item If $!A$ is a !!{formula}, then $\lnot !A$ is a !!{formula}.
-\item If $!A$ and $!B$ are !p{formula}, then $(!A \land !B)$ is a !!{formula}.
-\item If $!A$ and $!B$ are !p{formula}, then $(!A \lor !B)$ is a !!{formula}.
-\item If $!A$ and $!B$ are !p{formula}, then $(!A \lif !B)$ is a !!{formula}.
-\item If $!A$ and $!B$ are !p{formula}, then $(!A \liff !B)$ is a !!{formula}.
-\item If $!A$ is a !!{formula} and $x$ is a !!{variable}, then $\lforall[x]\,
-  !A$ is a !!{formula}.
-\item If $!A$ is a !!{formula} and $x$ is a !!{variable}, then $\lexists[x]\,
-  !A$ is a !!{formula}.
-\item Nothing else is a !!{formula}.
+  is an atomic !!{formula}.  
+
+\tagitem{prvNot}{If $!A$ is a !!{formula}, then $\lnot !A$ is a
+  !!{formula}.}{}
+
+\tagitem{prvAnd}{If $!A$ and $!B$ are !p{formula}, then $(!A \land
+  !B)$ is a !!{formula}.}{}
+
+\tagitem{prvOr}{If $!A$ and $!B$ are !p{formula}, then $(!A \lor !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvIf}{If $!A$ and $!B$ are !p{formula}, then $(!A \lif !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvIff}{If $!A$ and $!B$ are !p{formula}, then $(!A \liff !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvAll}{If $!A$ is a !!{formula} and $x$ is a !!{variable},
+  then $\lforall[x][!A]$ is a !!{formula}.}{}
+
+\tagitem{prvEx}{If $!A$ is a !!{formula} and $x$ is a !!{variable},
+  then $\lexists[x][!A]$ is a !!{formula}.}{}
+
+\tagitem{limitClause}{Nothing else is a !!{formula}.}{}
 \end{enumerate}
 \end{defn}
 
-\begin{explain}
-By convention, $\lnot \eq[t_1][t_2]$ is written as $\eq/[t_1][t_2]$.
-\end{explain}
+By convention, $\lnot \eq[t_1][t_2]$ is abbreviated as
+$\eq/[t_1][t_2]$, and when writing a formula containing a two-place
+operator, we leave out the outermost parentheses.
 
 \begin{intro}
-Some logic texts require that the !!{variable}~$x$ must occur in~$!A$ in
-order for $\lexists[x][!A]$ and $\lforall[x][!A$] to count as
-!p{formula}.  Nothing bad happens if you don't require this, and it makes
-things easier.
+Some logic texts require that the !!{variable}~$x$ must occur in~$!A$
+in order for
+\iftag{prvEx}{$\lexists[x][!A]$ }{}%
+\iftag{notprvEx,notprvAll}{}{and }%
+\iftag{prvAll}{$\lforall[x][!A]$ }{}%
+to count as 
+\iftag{notprvEx,notprvAll}{a !!{formula}}{!p{formula}}.
+Nothing bad happens if you don't require this, and it makes things
+easier.
 \end{intro}
 
+\begin<defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll>
+  {defn}
+\begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defEx,defAll}
+
+\tagitem{defTrue}{$\ltrue$ abbreviates
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \land \lnot !A)$ for some
+    fixed atomic !!{formula}~$!A$}.}{}
+
+\tagitem{defFalse}{$\lfalse$ abbreviates
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \lor \lnot !A)$ for some
+    fixed atomic !!{formula}~$!A$}.}{}
+
+\tagitem{defNot}{$\lnot !A$ abbreviates $!A \lif \lfalse$.}{}
+
+\tagitem{defOr}{$!A \lor !B$ abbreviates
+  \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+    !B$}.}{}
+
+\tagitem{defAnd}{$!A \land !B$ abbreviates
+  \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+    \lnot !B)$}.}{}
+
+\tagitem{defIf}{$!A \lif !B$ abbreviates 
+  \iftag{prvOr}{$\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+
+\tagitem{defIff}{$!A \liff !B$ abbreviates $(!A \lif !B) \land (!B
+  \lif !A)$.}{}
+
+\tagitem{defAll}{$\lforall[x][!A]$ abbreviates $\lnot\lexists[x][\lnot !A]$.}{}
+
+\tagitem{defEx}{$\lexists[x][!A]$ abbreviates $\lnot\lforall[x][\lnot !A]$.}{}
+\end{tagenumerate}
+\end{defn}
 
 \end{document}

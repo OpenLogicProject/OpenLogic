@@ -11,8 +11,8 @@
 \ProvidesFile{open-logic-selective.sty}
 
 \RequirePackage{etoolbox}
+\RequirePackage{xpunctuate} % for xcomma, xperiod
 
-\makeatletter
 
 % initialize a list of tags as true
 
@@ -31,20 +31,24 @@
 \def\do##1{\providetoggle{not##1}\toggletrue{not##1}}
     \docsvlist{#1}}
 
-% \printif{boolean expression}{text if true}{text if false}
+% tagcount -- count number of active tags
 
-\newcommand{\printif}[3]{\ifboolexpr{#1}{#2}{#3}}
+\newcounter{tagnum}
 
-% \printtag{taglist}{text if tagged}{text if not tagged}
+\newcommand{\tagcount}[1]{%
+  \setcounter{tagnum}{0}
+  \def\do##1{\iftoggle{##1}{\stepcounter{tagnum}}{}}%
+    \docsvlist{#1}}
 
-\newcommand{\printtagtext}{}
-\newcommand{\printtag}[3]
-  {\renewcommand{\printtagtext}{#3}%
+% \iftag{tags}{text if tagged}{text if not tagged}
+
+\newcommand{\iftagtext}{}
+\newcommand{\iftag}[3]
+  {\renewcommand{\iftagtext}{#3}%
    \def\do##1{%
-     \iftoggle{##1}{\renewcommand{\printtagtext}{#2}}{}}%
+     \iftoggle{##1}{\renewcommand{\iftagtext}{#2}}{}}%
    \docsvlist{#1}%
-   \printtagtext%
-  }
+   \iftagtext}
 
 % change \begin to take optional tags in <...>
 % if one of the tags is active, behave as \begin otherwise would
@@ -53,7 +57,7 @@
 \let\orig@begin\begin
 
 \def\begin{\@ifnextchar<{\tag@begin}{\orig@begin}}
-\def\tag@begin<#1>{\printtag{#1}{\orig@begin}{\supressenv}}
+\def\tag@begin<#1>{\iftag{#1}{\orig@begin}{\supressenv}}
 
 \def\supressenv#1{\begingroup\@bsphack
              \let\do\@makeother\dospecials\catcode`\^^M\active
@@ -64,5 +68,26 @@
              \def\@currenvir{#1}
              \verbatim@}
 
-\makeatother
+% \tagitem<tags><tagged text><untagged text>: typeset an \item if tags active
+
+\newcommand{\tagitem}[3]{\iftag{#1}{%
+    \expandafter\ifstrempty{#2}{}{\item #2}}{
+    \expandafter\ifstrempty{#3}{}{\item #3}}}
+
+% \begin{tagenumerate}{tags} -- like enumerate, but only if more than
+% one tag is active
+
+\newenvironment{tagenumerate}[1]{%
+  \tagcount{#1}%
+  \ifnumgreater{\value{tagnum}}{1}{%
+    \begin{enumerate}}{%
+    \let\orig@tagitem\tagitem
+    \let\tagitem\iftag}}{%
+  \ifnumgreater{\value{tagnum}}{1}{%
+    \end{enumerate}}{%
+    \let\tagitem\orig@tagitem}}
+
+\def\startycommalist{\def\ycomma{\def\ycomma{, }}}
+
+
 

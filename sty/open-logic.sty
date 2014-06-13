@@ -1,32 +1,33 @@
 % OpenLogic Project
 % Master Style Package
 
+% load various required standard packages
+% let LaTeXfind those
+
 \RequirePackage[english]{babel}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage[OMLmathsfit]{isomath}
+\RequirePackage{xparse}
+\RequirePackage{mfirstuc}
+\RequirePackage{subfiles}
+\RequirePackage{import}
+\RequirePackage{bussproofs}
+\RequirePackage{hyperref}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage[nameinlink]{cleveref} % always after hyperref!
+
+\makeatletter
 
 % load all tool packages
 % located in \olpath/sty/
 
-\makeatletter
-
 \input{\olpath/sty/open-logic-referencing.sty}
 \input{\olpath/sty/open-logic-formulas.sty}
 \input{\olpath/sty/open-logic-tokenize.sty}
+\input{\olpath/sty/open-logic-selective.sty}
 
-% load various required standard packages
-% let LaTeXfind those
-
-\RequirePackage{subfiles}
-\RequirePackage{xparse}
-\RequirePackage{amsmath}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-\RequirePackage[OMLmathsfit]{isomath}
-\RequirePackage{hyperref}
-\RequirePackage{amsthm}
-\RequirePackage{thmtools}
-\RequirePackage[nameinlink]{cleveref}
-\RequirePackage{bussproofs}
-\RequirePackage{import}
 
 % Hooks
 \def\OLEndChapterHook{}
@@ -38,11 +39,12 @@
 \fi
 \let\OLSubfileHook\relax
 
-% If a custom config file exists, load it, otherwise load default
+% Load configuration file, then custom changes if available
 
+\input{\olpath/open-logic-config.sty}
 \IfFileExists{\jobname-config.sty}
              {\input{\jobname-config.sty}}
-             {\input{\olpath/open-logic-config.sty}}
+             {}
 
 % olimport -- combines \subfile and \subimport
 % optional argument is subdirectory, if present subimport #1/#2

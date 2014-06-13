@@ -15,30 +15,34 @@ The \emph{free} occurrences of a !!{variable} in a !!{formula} are defined
 inductively:
 \begin{enumerate}
 \item If $!A$ is atomic, all !!{variable} occurrences in $!A$ are free.
-\item If $!A$ is a !!{formula}, then the free !!{variable} occurrences of
-  $\lnot !A$ are exactly those of $!A$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \land !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \lor !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \lif !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \liff !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ is a !!{formula}, then the free !!{variable} occurrences in
-  $\lforall[x][!A]$ are all of those in $!A$ except for occurrences of
-  $x$.
-\item If $!A$ is a !!{formula}, then the free !!{variable} occurrences in
-  $\lexists[x][!A]$ are all of those in $!A$ except for occurrences of
-  $x$.
+
+\tagitem{prvNot}{If $!A$ is a !!{formula}, then the free !!{variable}
+  occurrences of $\lnot !A$ are exactly those of $!A$.}{}
+
+\tagitem{prvAnd}{If $!A$ and $!B$ are !p{formula}, then the free
+  !!{variable} occurrences in $(!A \land !B)$ are those in $!A$
+  together with those in $!B$.}{}
+
+\tagitem{prvOr}{If $!A$ and $!B$ are !p{formula}, then the free
+  !!{variable} occurrences in $(!A \lor !B)$ are those in $!A$
+  together with those in $!B$.}
+
+\tagitem{prvIf}{If $!A$ and $!B$ are !p{formula}, then the free
+  !!{variable} occurrences in $(!A \lif !B)$ are those in $!A$
+  together with those in $!B$.}{}
+
+\tagitem{prvIff}{If $!A$ and $!B$ are !p{formula}, then the free
+  !!{variable} occurrences in $(!A \liff !B)$ are those in $!A$
+  together with those in $!B$.}{}
+
+\tagitem{prvAll}{If $!A$ is a !!{formula}, then the free !!{variable}
+  occurrences in $\lforall[x][!A]$ are all of those in~$!A$ except for
+  occurrences of~$x$.}{}
+
+\tagitem{prvEx}{If $!A$ is a !!{formula}, then the free !!{variable}
+  occurrences in $\lexists[x][!A]$ are all of those in~$!A$ except for
+  occurrences of~$x$.}{}
 \end{enumerate}
-% Again, if we could figure out a way to condense those clauses and
-% still be able to allow people to "pick and choose" which logical
-% connectives to use, that would look better
 \end{defn}
 
 \begin{defn}[Sentence]
@@ -61,7 +65,8 @@ built up from basic elements, then we can use induction on it. More precisely:
 \end{explain}
 
 \begin{defn}
-A set $S$ is \emph{closed} under a function $f$ iff whenever $x \in S$, then $f(x) \in S$.
+A set $S$ is \emph{closed} under a function $f$ iff whenever $x \in
+S$, then $f(x) \in S$.
 \end{defn}
 
 \begin{explain}

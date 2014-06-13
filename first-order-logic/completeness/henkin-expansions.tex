@@ -21,12 +21,13 @@ the form $\lexists[x][!A(x)] \lif !A(c)$, where $c$ is one of the new
 \end{explain}
 
 \begin{prop}[Generalization]
-If $\Gamma \Proves !A$ and $x$ is not free in any !!{formula} in $\Gamma$, 
-then $\Gamma \Proves \lforall[x] !A$.
+If $\Gamma \Proves !A$ and $x$ is not free in any !!{formula} in
+$\Gamma$, then $\Gamma \Proves \lforall[x][!A]$.
 \end{prop}
 
 \begin{prop}[Monotony]
-If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta \Proves !A$.
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
 \end{prop}
 
 \begin{thm}[Weak Generalization on Constants]
@@ -57,7 +58,7 @@ $z$ occurring in $t$.
 
 %Examples of this maybe?
 
-\begin{prop}[Change of bound !!{variable}]
+\begin{prop}[Change of bound !p{variable}]
 If $x$ and $y$ are not free in $!A$ and are both free for $c$ in $!A$,
 then $\Proves \lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, and the
 derivation does not involve $c$.
@@ -101,7 +102,7 @@ The following definition will be used in the proof of the next theorem.
 \begin{defn}
 Fix an enumeration $\langle !A_0, x_0 \rangle, \langle !A_1, x_1
 \rangle, \dots$ of all !!{formula}-!!{variable} pairs of $\Lang L'$, and
-define the sentence $!D_n$ by recursion on $n$. For $!D_0$,
+define the sentence $!D_n$ by recursion on~$n$. For $!D_0$,
 let $c_0$ be the first new constant that does not occur in $!A_0$ and
 let $!D_0$ be the !!{formula} $\lnot \lforall[x_0] !A_0 \lif \lnot
 !A_0[c_0/x_0]$. Assuming that $!D_0, \dots, !D_n$ have been
@@ -127,10 +128,10 @@ by induction on $n$, that each set of the form $\Gamma \cup \{
 !D_0, \dots, !D_n \}$ is consistent.
 
 For the basis of the induction, suppose that $\Gamma \cup \{ !D_0
-\}$ is inconsistent. Recall that $!D_0 = \lnot \lforall[x_0] !A_0
+\}$ is inconsistent. Recall that $!D_0 = \lnot \lforall[x_0][!A_0]
 \lif \lnot !A_0 [c_0/x_0]$: then both of the following hold:
 \[
-\Gamma \Proves \lforall[x_0] !A_0
+\Gamma \Proves \lforall[x_0][!A_0]
 \quad
 \Gamma \Proves !A_0[c_0/x_0]
 \]
