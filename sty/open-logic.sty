@@ -38,6 +38,10 @@
 \fi
 \let\OLSubfileHook\relax
 
+% DeclareDocumentMacro -- for macros (no argument), doesn't check if defined
+
+\newcommand*{\DeclareDocumentMacro}[2]{\def#1{#2}}
+
 % Load configuration file, then custom changes if available
 
 \input{\olpath/open-logic-config.sty}
@@ -57,15 +61,19 @@
 \def\olfilebase{}
 \edef\olfilename{\jobname.tex}
 
-\DeclareDocumentCommand \olimport { o m }{
+\DeclareDocumentCommand \olimport { s o m }{
   \begingroup
-  \IfNoValueTF{#1}{%
-    \def\olfilename{#2.tex}%
-    \subfile{\olfilebase #2}%
+  \IfNoValueTF{#2}{%
+    \def\olfilename{#3.tex}%
+    \subfile{\olfilebase #3}%
 }{%
-    \def\olfilename{#2.tex}%
-    \edef\olfilebase{\olfilebase #1/}%
-    \subfile{\olfilebase #2}}
+    \def\olfilename{#3.tex}%
+    \IfBooleanTF{#1}{%
+      \edef\olfilebase{\olpath #2/}}{%
+      \edef\olfilebase{\olfilebase #2/}}%
+    \subfile{\olfilebase #3}}
   \endgroup}
+
+
 
 \makeatother

@@ -41,28 +41,28 @@
 %
 % - `\True` defaults to $1$ and `\False` to $0$.
 
-\newcommand*{\True}{1}
-\newcommand*{\False}{0}
+\DeclareDocumentMacro \True {1}
+\DeclareDocumentMacro \False {0}
 
 % ### Propositional Constants and Connectives
 %
 % - Falsity is `\lfalse` and defaults to $\bot$.
 
-\newcommand*{\lfalse}{\bot}
+\DeclareDocumentMacro \lfalse {\bot}
 
 % - Truth is `\ltrue` and defaults to $\top$.
 
-\newcommand*{\ltrue}{\top}
+\DeclareDocumentMacro \ltrue {\top}
 
 % - Negation is `\lnot` and defaults to $\lnot$.  To use a different
-% symbol (e.g., tilde), uncomment/change the following line.
+% symbol (e.g., tilde), use the following line.
 
-% \renewcommand*{\lnot}{\mathord{\sim}}
+% \DeclareDocumentMacro \lnot {\mathord{\sim}}
 
 % - Conjunction is `\land` and deaults to $\land$.  to use ampersand,
 % uncomment the following line
 
-% \renewcommand*{\land}{\mathbin{\&}}
+% \DeclareDocumentMacro \land {\mathbin{\&}}
 
 % - Disjunction `\lor` and defaults to $\lor$.
 
@@ -70,12 +70,12 @@
 % different symbol, replace `\rightarrow` in the definition, e.g., by
 % `\supset`
 
-\newcommand*{\lif}{\rightarrow}
+\DeclareDocumentMacro \lif {\rightarrow}
 
 % - The biconditional is `\liff` and defaults to $\leftrightarrow$.  To
 % use the triple bar $\equiv$ replace with `\equiv`.
 
-\newcommand*{\liff}{\leftrightarrow}
+\DeclareDocumentMacro \liff {\leftrightarrow}
 
 % Quantifiers 
 % ----------- 
@@ -132,11 +132,11 @@
 % - The sequent symbol `\Sequent` produces $\Rightarrow$ by
 % default. Change the definition for $\vdash$, or another symbol.
 
-\newcommand*{\Sequent}{\Rightarrow}
+\DeclareDocumentMacro \Sequent {\Rightarrow}
 
 % The sequent symbol in proofs displays as the above sequent symbol
 
-\let\fCenter\Sequent
+\DeclareDocumentMacro \fCenter {\,\Sequent\,}
 
 
 % Metalogical Relations
@@ -204,12 +204,12 @@
 % - `\Domain` - domain of a structure, e.g., `\Domain M` gives
 % $\left|\mathfrak M\right|$.
 
-\newcommand*{\Domain}[1]{\left| \Struct #1 \right|}
+\DeclareDocumentCommand \Domain { m }{\left| \Struct #1 \right|}
 
 % - `\Assign` - Assignment (value of) of a constant/predicate symbol
 % in a structure; e.g., `\Assign R M` produces $R^\mathfrak{M}$.
 
-\newcommand*{\Assign}[2]{#1^{\Struct #2}}
+\DeclareDocumentCommand \Assign { m m }{#1^{\Struct #2}}
 
 % - `\Value` - Value of a term in a structure. Takes two mandatory
 % arguments (term and structure) and one optional argument (variable
@@ -226,10 +226,11 @@
 
 % - `\substruct`: symbol for the substructure relation
 
-\newcommand*{\substruct}{\subseteq}
+\DeclareDocumentMacro \substruct {\subseteq}
 
 % - `\ident`: syntactic identity between expressions (infix realtion)
-\newcommand*{\ident}{\equiv}
+
+\DeclareDocumentMacro \ident {\equiv}
 
 
 
@@ -242,52 +243,53 @@
 % $\{ x : \varphi(x) \}$. If you prefer a $\mid$ to :, change the
 % definition accordingly.
 
-\newcommand*{\Setabs}[2]{\{ #1 : #2 \}}
+\DeclareDocumentCommand \Setabs { m m }{\{ #1 : #2 \}}
 
 % - Power set: `\Pow{X}` produces $\wp(X)$
 
-\newcommand{\Pow}[1]{\wp(#1)}
+\DeclareDocumentCommand \Pow { m }{\wp(#1)}
 
 % - `\dom{f}`: domain of a function (mandatory argument)
-\newcommand*{\dom}[1]{\mathrm{dom}(#1)}
+
+\DeclareDocumentCommand \dom { m }{\mathrm{dom}(#1)}
 
 % - `\ran{f}`: range of a function (mandatory argument)
-\newcommand*{\ran}[1]{\mathrm{ran}(#1)}
+\DeclareDocumentCommand \ran { m }{\mathrm{ran}(#1)}
 
 % - `\len(s)`: length of asequence (mandatory argument)
-\newcommand*{\len}[1]{\mathrm{len}(#1)}
+\DeclareDocumentCommand \len { m }{\mathrm{len}(#1)}
 
 % - `\restrict`: restriction of a function to a set (infix operator)
-\newcommand*{\restrict}{\upharpoonright}
+\DeclareDocumentMacro \restrict {\upharpoonright}
 
 
 % ### Particular sets
 
 % - Natural numbers: `\Nat`
-\def\Nat{\mathbb{N}}
+\DeclareDocumentMacro \Nat {\mathbb{N}}
 
 % - Integers: `\Int`
-\def\Int{\mathbb{Z}}
+\DeclareDocumentMacro \Int {\mathbb{Z}}
 
 % - Real numbers: `\Real`
-\def\Real{\mathbb{R}}
+\DeclareDocumentMacro \Real {\mathbb{R}}
 
 % - Rational numbers: `\Rat`
-\def\Rat{\mathbb{Q}}
+\DeclareDocumentMacro \Rat {\mathbb{Q}}
 
 % - Binary strings: `\BinStr`
-\def\BinStr{\mathbb{B}}
+\DeclareDocumentMacro \BinStr {\mathbb{B}}
 
 % ### Symbols for Turing Machines
 
 % - `\TMendtape` - symbol indicating left end of tape
-\newcommand*{\TMendtape}{\triangleright}
+\DeclareDocumentMacro \TMendtape {\triangleright}
 
 % - `\TMblank` - symbol for a blank
-\newcommand*{\TMblank}{\mathord{\text{\textvisiblespace}}}
+\DeclareDocumentMacro \TMblank {\mathord{\text{\textvisiblespace}}}
 
 % - `\TMstroke` - single stroke symbol on tape
-\newcommand*{\TMstroke}{\mid}
+\DeclareDocumentMacro \TMstroke {\mid}
 
 
 % Typesetting commands for logical concepts
@@ -304,25 +306,25 @@
 % M_n` will generate $\mathfrak M_n$ and not $\mathfrak{M_n}$.
 
 % - `\Struct` - First-order structures; by default, the first token in Fraktur
-\newcommand*{\Struct}[1]{\mathfrak #1}
+\DeclareDocumentCommand \Struct { m }{\mathfrak #1}
 
 % - `\Mod` - modal structures; default: set first token in Fraktur
-\newcommand*{\Mod}[1]{\mathfrak #1}
+\DeclareDocumentCommand \Mod { m }{\mathfrak #1}
 
 % - `\Lang` - Languages; default: set first token in callgraphic font
-\newcommand*{\Lang}[1]{\mathcal #1}
+\DeclareDocumentCommand \Lang { m }{\mathcal #1}
 
 % - `\Log` - Logics; default: set entirely in boldface
-\newcommand*{\Log}[1]{\mathbf{#1}}
+\DeclareDocumentCommand \Log { m }{\mathbf{#1}}
 
 % - `\Obj` - Object-language symbols; default: set entirely in
 % sans-serif italics
-\newcommand*{\Obj}[1]{\mathsfit{#1}}
+\DeclareDocumentCommand \Obj { m }{\mathsfit{#1}}
 
 %  - `\Atom` - Atomic formula; default produces predicate symbol
 %  followed by argumnets surrounded by parentheses. Some prefer no
 %  parentheses around the arguments.
-\newcommand*{\Atom}[2]{ #1(#2) }
+\DeclareDocumentCommand \Atom { m m }{ #1(#2) }
 
 
 
