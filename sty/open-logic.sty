@@ -58,17 +58,24 @@
 % olfilepath -- holds the path of the currently processed file
 % relative to the main input file.
 
-% olimport -- import another text optional argument is subdirectory,
-% if present subimport #1/#2 no optional argument: just \subfile it.
-% When asking for a file from a subdirectory, change \olfilepath
-% accordingly. This happens within a gorup, so \olfilepath reverts to
-% its original content after the \subfile.
+% olimport -- import a text. First optional argument is subdirectory,
+% if present subimport #1/#2, no optional argument: just \subfile it.
+% Starred version interprets #1 as relative to main O-L directory
+% \olpath.  When asking for a file from a subdirectory, change
+% \olfilepath accordingly. This happens within a gorup, so \olfilepath
+% reverts to its original content after the \subfile.  Second optional
+% argument is name of sectioning command to use for \olsection.  Use
+% ``nosection'' to supress sectioning, ``subsection'' to make it a
+% subsection instead of a section, etc..
 
 \def\olfilebase{}
 \edef\olfilename{\jobname.tex}
 
-\DeclareDocumentCommand \olimport { s o m }{
+\DeclareDocumentCommand \olimport { s o m o }{
   \begingroup
+  \IfNoValueTF{#4}{%
+    \def\ol@sectioncs{section}}{%
+    \def\ol@sectioncs{#4}}
   \IfNoValueTF{#2}{%
     \def\olfilename{#3.tex}%
     \subfile{\olfilebase #3}%

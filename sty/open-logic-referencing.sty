@@ -36,6 +36,14 @@
             {#1:#2:#3}}}:#4}
 }
 
-\DeclareDocumentCommand \olsection { o m } {
-  \IfNoValueTF {#1}{\section{#2}}{\section[#1]{#2}}%
+% \olsection - ever OLP text starts with this, starts a \section
+
+\DeclareDocumentCommand \olsection { o m } {%
+  \IfNoValueTF {#1}{\csuse{\ol@sectioncs}{#2}}{\csuse{\ol@sectioncs}[#1]{#2}}%
   \ollabel{sec}}
+
+\def\ol@sectioncs{section}
+
+% \nosection - sectioning command that supresses section header.
+
+\DeclareDocumentCommand \nosection { o m }{\ollabel{sec}}
