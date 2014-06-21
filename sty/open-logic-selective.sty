@@ -82,10 +82,13 @@
   \ifnumgreater{\value{tagnum}}{1}{%
     \begin{enumerate}}{%
     \let\orig@tagitem\tagitem
-    \let\tagitem\iftag}}{%
+    \let\orig@item\item
+    \let\tagitem\iftag
+    \let\item\relax}}{%
   \ifnumgreater{\value{tagnum}}{1}{%
     \end{enumerate}}{%
-    \let\tagitem\orig@tagitem}}
+    \let\tagitem\orig@tagitem
+    \let\item\orig@item}}
 
 \def\startycommalist{\def\ycomma{\def\ycomma{, }}}
 

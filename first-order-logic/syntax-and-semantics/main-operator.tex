@@ -14,7 +14,7 @@
 It is often useful to talk about the last operator used in
 constructing a !!{formula}~$!A$.  This operator is called the \emph{main
   operator} of ~$!A$. Intuitively, it is the ``outermost'' operator
-of $!A$. For example, the main operator of $(\lnot !A)$ is $\lnot$,
+of $!A$. For example, the main operator of $\lnot !A$ is $\lnot$,
 the main operator of $(!A \lor !B)$ is $\lor$, etc.
 \end{explain}
 
@@ -23,28 +23,28 @@ the main operator of $(!A \lor !B)$ is $\lor$, etc.
 The \emph{!!{main operator}} of a !!{formula}~$!A$ is inductively
 defined as follows:
 \begin{enumerate}
-\item Atomic !p{formula} have no !!{main operator}.
+\item \indcase*{!A}{!A} $\indfrm$ has no !!{main operator}.
 
-\tagitem{prvNot}{If $!A$ is of the form $\lnot !B$, then the main
-  operator of $!A$ is $\lnot$.}{}
+\tagitem{prvNot}{\indcase{!A}{\lnot !B} the main operator of $\indfrm$
+  is~$\lnot$.}{}
 
-\tagitem{prvAnd}{If $!A$ is of the form $!B \land !C$, then the main
-  operator of $!A$ is $\land$.}{}
+\tagitem{prvAnd}{\indcase{!A}{!B \land !C} the !!{main operator} of
+  $\indfrm$ is~$\land$.}{}
 
-\tagitem{prvOr}{If $!A$ is of the form $!B \lor !C$, then the !!{main
-    operator} of $!A$ is $\lor$.}{}
+\tagitem{prvOr}{\indcase{!A}{!B \lor !C} the !!{main operator} of
+  $\indfrm$ is~$\lor$.}{}
 
-\tagitem{prvIf}{If $!A$ is of the form $!B \lif !C$, then the !!{main
-    operator} of $!A$ is $\lif$.}{}
+\tagitem{prvIf}{\indcase{!A}{!B \lif !C} the !!{main operator} of
+  $\indfrm$ is~$\lif$.}{}
 
-\tagitem{prvIff}{If $!A$ is of the form $!B \liff !C$, then the !!{main
-  operator} of $!A$ is $\liff$.}{}
+\tagitem{prvIff}{\indcase{!A}{!B \liff !C} the !!{main operator} of
+  $\indfrm$ is~$\liff$.}{}
 
-\tagitem{prvAll}{If $!A$ is of the form $\lforall[x][!B]$, then the
-  !!{main operator} of $!A$ is $\lforall$.}{}
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]} the !!{main operator}
+  of $\indfrm$ is~$\lforall$.}{}
 
-\tagitem{prvEx}{If $!A$ is of the form $\lexists[x][!B]$, then the
-  !!{main operator} of $!A$ is $\lexists$.}{}
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]} the !!{main operator} of
+  $\indfrm$ is~$\lexists$.}{}
 \end{enumerate}
 \end{defn}
 

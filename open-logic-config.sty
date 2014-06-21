@@ -376,6 +376,35 @@
         { \mathrm{Sent}({\Lang #1}) }
 }
 
+% Commands for uniform formulations
+% =================================
+
+% Inductive definitions
+% ---------------------
+
+% Inductive definitions typically divide into cases depening on the
+% form of a formula for which a concept if defined.  To uniformly
+% typeset these definitions flexibly, we provide a command
+% `\indcase{formula}{complex formula}{case text}` which (a) typesets a
+% uniform description of a case and (b) defines `\indfrm` and
+% `\indcomplex` which can then be used in the definitions. For
+% instance, in an inductive definition of $\models A$, you might say
+% `\indcase{A}{B \land C} $\models \indfrm$ iff $\models B$ and
+% $\models C$` to produce: "If $A \equiv B \land C$, then $\models A$
+% iff $\models B$ and $\models C$" or, alternatively and more
+% succinctly: "$\models B \land C$ iff $\models B$ and $\models C$".
+% Use the starred version for the atomic case, and a ! instead of the
+% star for a case you to leave as an exercise.
+
+\DeclareDocumentCommand \indcase { s t{!} m m m }{%
+  \DeclareDocumentMacro \indfrm {#3}%
+  \DeclareDocumentMacro \indcomplex {#4}%
+  \IfBooleanTF{#1}
+     {$\indfrm$ is atomic: #5}{}
+  \IfBooleanTF{#2}
+     {$\indfrm \ident \indcomplex$: exercise.}
+     {$\indfrm \ident \indcomplex$: #5}}
+
 % Tokens
 % ======
 
@@ -505,3 +534,7 @@
 % definitions to have a "Nothing else is a ..." clause?
 
 \tagtrue{limitClause}
+
+% tagTrue - a true tag respectively.
+
+\tagtrue{tagTrue}

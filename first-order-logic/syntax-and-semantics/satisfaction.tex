@@ -45,11 +45,11 @@ If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
 for~$\Struct M$, the \emph{denotation}~$\Value{t}{M}[s]$ is defined as
 follows:
 \begin{enumerate}
-\item If $t$ is just the constant $c$, then $\Value{c}{M}[s] = \Assign{c}{M}$.
-\item If $t$ is just the !!{variable}~$x$, then $\Value{c}{M}[s] = s(x)$.
-\item If $t$ is of the form $\Atom{f}{t_1, \ldots, t_n}$, then
+\item \indcase{t}{c} $\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.
+\item \indcase{t}{x} $\Value{\indfrm}{M}[s] = s(\indcomplex)$.
+\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}
 \[
-\Value{t}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
+\Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
 \Value{t_n}{M}[s]).
 \]
 \end{enumerate}
@@ -67,24 +67,42 @@ Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$ relative to
 a !!{variable} assignment~$s$, $\Sat{M}{!A}[s]$ is defined inductively as
 follows. If not $\Sat{M}{!A}[s]$ we write $\Sat/{M}{!A}[s]$.
 \begin{enumerate}
-\tagitem{prvFalse}{Never $\Sat{M}{\lfalse}[s]$.}{}
-\tagitem{prvTrue}{\item Always $\Sat{M}{\ltrue}[s]$.}{}
-\item For any $n$-place predicate~$R$ and terms $t_1$, \dots, $t_n$,
-  $\Sat{M}{\Atom{R}{t_1, \dots, t_n}}[s]$ iff $\langle \Value{t_1}{M}[s],
-  \dots, \Value{t_n}{M}[s] \rangle \in \Assign{R}{M}$.
-\item For any terms $t$, $t'$, $\Sat{M}{\eq[t_1][t_2]}[s]$ iff
-  $\Value{t}{M}[s] = \Value{t'}{M}[s]$.
-\tagitem{prvNot}{$\Sat{M}{\lnot !A}[s]$ iff $\Sat/{M}{!A}[s]$.}{}
-\tagitem{prvAnd}{$\Sat{M}{!A \land !B}[s]$ iff $\Sat{M}{!A}[s]$ and
-    $\Sat{M}{!B}[s]$.}{}
-\tagitem{prvOr}{$\Sat{M}{!A \lor !B}[s]$ iff $\Sat{M}{!A}[s]$ or
-  $\Sat{M}{!B}[s]$ (or both).}{}
-\tagitem{prvIf}{$\Sat{M}{!A \lif !B}[s]$ iff $\Sat/{M}{!A}[s]$ or
-  $\Sat{M}{!B}[s]$ (or both).}{}
-\tagitem{prvEx}{$\Sat{M}{\lexists[x][!A]}[s]$ iff there is an $x$-variant $s'$
-  of $s$ so that $\Sat{M}{!A}[s']$.}{}
-\tagitem{prvAll}{$\Sat{M}{\lforall[x][!A]}[s]$ iff for every $x$-variant $s'$ of
-  $s$, $\Sat{M}{!A}[s']$.}{}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{not $\Sat{M}{\indfrm}[s]$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Sat{M}{\indfrm}[s]$.}}{}
+
+\item \indcase{!A}{\Atom{R}{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  iff $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Sat{M}{\indfrm}[s]$ iff
+  $\Value{t_1}{M}[s] = \Value{t_2}{M}[s]$.}
+
+\tagitem{prvNot}{% 
+  \indcase{!A}{\lnot !B}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat/{M}{!B}[s]$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{!B \land !C}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
+    and $\Sat{M}{!C}[s]$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{!B \lor !C}{$\Sat{M}{\indfrm}[s]$ iff
+    $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{!B \lif !C}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
+    or $\Sat{M}{!C}[s]$ (or both).}}{}
+
+\tagitem{prvEx}{% 
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $x$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $x$-variant $s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
 \end{enumerate}
 \end{defn}
 
@@ -112,72 +130,99 @@ $!A$ is atomic, $!A$ can be:
 $R(t_1 \ldots t_k)$ for a $k$-place predicate $R$ and terms
 $t_1,\ldots,t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and $t_2$.
 
-\iftag{prvTrue}{When $!A$ is $\ltrue$, both $\Sat{M}{!A}[s]$ and
-  $\Sat{M}{!A}[s']$.}{}
-\iftag{prvFalse}{\iftag{prvTrue}{Similarly, w}{W}hen $!A$ is
-  $\lfalse$, both $\Sat!{M}{!A}[s]$ and $\Sat!{M}{!A}[s']$.}{}
+\begin{enumerate}
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{both $\Sat{M}{\indfrm}[s]$ and
+    $\Sat{M}{\indfrm}[s']$.}}{}
 
-For the case when $!A$ is $\Atom{R}{t_1, \ldots, t_k}$, let
-$\Sat{M}{!A}[s]$. Then $\langle \Value{t_1}{M}[s], \ldots,
-\Value{t_k}{M}[s] \rangle \in \Assign{R}{M}$. For $1 \eq i \eq k$,
-if $t_i$ is a constant, then $\Value{t_i}{M}[s] = \Value{t_i}{M} =
-\Value{t_i}{M}[s']$. If $t_i$ is a free !!{variable}, then since the
-mappings $s$ and $s'$ agree on all free !p{variable}, $\Value{t_i}{M}[s]
-= s(t_i) = s'(t_i) = \Value{t_i}{M}[s']$. Similarly, if $t_i$ is of
-the form $f(t'_1,\ldots,t'_j)$, we will also get $\Value{t_i}{M}[s] =
-\Value{t_i}{M}[s']$. Hence, $\Value{t_i}{M}[s] = \Value{t_i}{M}[s']$
-for any term $t_i$ for $1 \eq i \eq k$, so we also have $\langle
-\Value{t_i}{M}[s'], \ldots, \Value{t_k}{M}[s'] \rangle \in
-\Assign{R}{M}$. Similarly, when $!A$ is $\eq[t_1][t_2]$, and when
-$\Sat{M}{\eq[t_1][t_2]}[s]$, $\Value{t_1}{M}[s'] = \Value{t_1}{M}[s] =
-\Value{t_2}{M}[s] = \Value{t_2}{M}[s']$, so $\Sat{M}{\eq[t_1][t_2]}[s']$.
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{both $\Sat/{M}{!A}[s]$ and
+    $\Sat/{M}{!A}[s']$.}}{}
+
+\item
+  \indcase{!A}{\Atom{R}{t_1, \ldots, t_k}}{let $\Sat{M}{\indfrm}[s]$. Then
+    $\langle \Value{t_1}{M}[s], \ldots, \Value{t_k}{M}[s] \rangle \in
+    \Assign{R}{M}$. For $1 \eq i \eq k$, if $t_i$ is a constant, then
+    $\Value{t_i}{M}[s] = \Value{t_i}{M} = \Value{t_i}{M}[s']$. If
+    $t_i$ is a free !!{variable}, then since the mappings $s$ and $s'$
+    agree on all free !p{variable}, $\Value{t_i}{M}[s] = s(t_i) =
+    s'(t_i) = \Value{t_i}{M}[s']$. Similarly, if $t_i$ is of the form
+    $f(t'_1,\ldots,t'_j)$, we will also get $\Value{t_i}{M}[s] =
+    \Value{t_i}{M}[s']$. Hence, $\Value{t_i}{M}[s] =
+    \Value{t_i}{M}[s']$ for any term $t_i$ for $i = 1$, \dots,~$k$, so
+    we also have $\langle \Value{t_i}{M}[s'], \ldots,
+    \Value{t_k}{M}[s'] \rangle \in \Assign{R}{M}$.}
+\item
+  \indcase{!A}{\eq[t_1][t_2]}{if $\Sat{M}{\indfrm}[s]$,
+    $\Value{t_1}{M}[s'] = \Value{t_1}{M}[s] = \Value{t_2}{M}[s] =
+    \Value{t_2}{M}[s']$, so $\Sat{M}{\eq[t_1][t_2]}[s']$.}
+\end{enumerate}
 
 Let $\Sat{M}{!B}[s] \Leftrightarrow \Sat{M}{!B}[s']$ for all
-!p{formula} $!B$ and $!C$ that are less complex than $!A$. The
-induction step proceeds in cases determined by the main operator of
-$!A$. In each case, we only demonstrate the forward direction of the
-!!{biconditional}; the proof of the reverse direction is symmetrical.
+!p{formula} $!B$ less complex than $!A$. The induction step proceeds
+by cases determined by the main operator of $!A$. In each case, we
+only demonstrate the forward direction of the !!{biconditional}; the
+proof of the reverse direction is symmetrical.
 
 \begin{enumerate}
-\tagitem{defNot}{}{$!A$ is $\lnot !B$:
-  \iftag{probNot}{Exercise}{If $\Sat{M}{\lnot !B}[s]$,
-  then $\Sat!{M}{!B}[s]$, so by the induction hypothesis,
-  $\Sat!{M}{!B}[s']$, hence $\Sat{M}{\lnot !B}[s']$}.}
+\tagitem{defNot}{}{%
+  \iftag{probNot}{%
+    \indcase!{!A}{\lnot !B}{}}{%
+    \indcase{!A}{\lnot !B}{if $\Sat{M}{\indfrm}[s]$, then
+      $\Sat/{M}{!B}[s]$, so by the induction hypothesis,
+      $\Sat/{M}{!B}[s']$, hence $\Sat{M}{\indfrm}[s']$.}}}
 
-\tagitem{defAnd}{}{$!A$ is $!B \land !C$: 
-  \iftag{probAnd}{Exercise}{If $\Sat{M}{!B \land !C}[s]$, then
-    $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, so by induction hypothesis,
-    $\Sat{M}{!B}[s']$ and $\Sat{M}{!C}[s']$. Hence, $\Sat{M}{!B \land
-      !C}[s']$}.}
+\tagitem{defAnd}{}{%
+  \iftag{probAnd}{%
+    \indcase!{!A}{!B \land !C}{}}{%
+    \indcase{!A}{!B \land !C}{if $\Sat{M}{\indfrm}[s]$, then
+      $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, so by induction
+      hypothesis, $\Sat{M}{!B}[s']$ and $\Sat{M}{!C}[s']$. Hence,
+      $\Sat{M}{\indfrm}[s']$.}}}
 
-\tagitem{defOr}{}{$!A$ is $!B \lor !C$:
-  \iftag{probOr}{Exercise}{$\Sat{M}{!B \lor !C}[s]$, then
-    $\Sat{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction hypothesis,
-    $\Sat{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{!B \lor
-      !C}[s']$}.}
+\tagitem{defOr}{}{%
+  \iftag{probOr}{%
+    \indcase!{!A}{!B \lor !C}{}}{%
+    \indcase{!A}{!B \lor !C}{if $\Sat{M}{\indfrm}[s]$, then
+      $\Sat{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By induction hypothesis,
+      $\Sat{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{\indfrm}[s']$.}}}
 
-\tagitem{defIf}{}{$!A$ is $!B \lif !C$:
-  \iftag{probIf}{Exercise}{If $\Sat{M}{!B \lif !C}[s]$,
-  then $\Sat{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction
-  hypothesis, $\Sat{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{!B
-    \lif !C}[s']$}.}
+\tagitem{defIf}{}{%
+  \iftag{probIf}{%
+    \indcase!{!A}{!B \lif !C}{}}{%
+    \indcase{!A}{!B \lif !C}{if $\Sat{M}{\indfrm}[s]$, then
+    $\Sat/{M}{!B}[s]$ or $\Sat{M}{!C}[s]$. By the induction hypothesis,
+    $\Sat/{M}{!B}[s']$ or $\Sat{M}{!C}[s']$, so $\Sat{M}{\indfrm}[s']$.}}}
 
-\tagitem{defEx}{}{$!A$ is $\lexists[x][!B]$:
-  \iftag{probEx}{Exercise}{If $\Sat{M}{\lexists[x][!B]}[s]$, there is
-    an $x$-variant $\bar{s}$ of $s$ so that
-    $\Sat{M}{!B}[\bar{s}]$. Let $\bar{s}'$ denote the $x$-variant of
-    $s'$ that assigns the same thing to $x$ as does $\bar{s}$: then by
-    the induction hypothesis, $\Sat{M}{!B}[\bar{s}']$. Hence, there is
-    an $x$-variant of $s'$ that satisfies $!B$, so
-    $\Sat{M}{\lexists[x][!B]}[s']$}.}
+\tagitem{defIff}{}{%
+  \iftag{probIff}{%
+    \indcase!{!A}{!B \liff !C}{}}{%
+    \indcase{!A}{!B \liff !C}{if $\Sat{M}{\indfrm}[s]$, then either
+      $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or $\Sat/{M}{!B}[s]$ and
+      $\Sat/{M}{!C}[s]$. By the induction hypothesis, either
+      $\Sat{M}{!B}[s']$ and $\Sat{M}{!C}[s']$ or $\Sat/{M}{!B}[s']$
+      and $\Sat/{M}{!C}[s']$. In either case, $\Sat{M}{\indfrm}[s']$.}}}
 
-\tagitem{defAll}{}{$!A$ is $\lforall[x][!B]$:
-  \iftag{probAll}{Exercise}{If $\Sat{M}{\lforall[x][!B]}[s]$, then for
-    every $x$-variant $\bar{s}$ of $s$, $\Sat{M}{!B}[\bar{s}]$. Hence,
-    if $\bar{s}'$ is the $x$-variant of $s'$ that assigns the same
-    thing to $x$ as does $\bar{s}$, then we have
-    $\Sat{M}{!B}[\bar{s}']$. Hence, every $x$-variant of $s'$
-    satisfies $!B$, so $\Sat{M}{\lforall[x][!B]}[s']$}.}
+\tagitem{defEx}{}{%
+  \iftag{probEx}{%
+    \indcase!{!A}{\lexists[x][!B]}{}}{%
+    \indcase{!A}{\lexists[x][!B]}{if $\Sat{M}{\indfrm}[s]$, there is an
+      $x$-variant $\bar{s}$ of $s$ so that $\Sat{M}{!B}[\bar{s}]$. Let
+      $\bar{s}'$ denote the $x$-variant of $s'$ that assigns the same
+      thing to $x$ as does $\bar{s}$: then by the induction
+      hypothesis, $\Sat{M}{!B}[\bar{s}']$. Hence, there is an
+      $x$-variant of $s'$ that satisfies $!B$, so
+      $\Sat{M}{\indfrm}[s']$.}}}
+
+\tagitem{defAll}{}{%
+  \iftag{probAll}{%
+    \indcase!{!A}{\lforall[x][!B]}{}}{%
+    \indcase{!A}{\lforall[x][!B]}{if $\Sat{M}{\indfrm}[s]$, then for
+      every $x$-variant $\bar{s}$ of $s$,
+      $\Sat{M}{!B}[\bar{s}]$. Hence, if $\bar{s}'$ is the $x$-variant
+      of $s'$ that assigns the same thing to $x$ as does $\bar{s}$,
+      then we have $\Sat{M}{!B}[\bar{s}']$. Hence, every $x$-variant
+      of $s'$ satisfies $!B$, so $\Sat{M}{\indfrm}[s']$}}}
 \end{enumerate}
 By induction, we get that $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$
 whenever $x_1$, \dots, $x_n$ are the only free !p{variable} in $!A$ and
