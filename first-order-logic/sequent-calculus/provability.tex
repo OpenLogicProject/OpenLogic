@@ -1,0 +1,338 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: provability
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{prv}
+\olsection{Properties of Provability}
+
+
+\begin{prop}\ollabel{prop:provability}
+\begin{enumerate}
+\item \ollabel{prop:provability-contr} If $\Gamma \Proves[\Log{LK}]
+  !A$ and $\Gamma \cup \{ \lnot !A\} \Proves[\Log{LK}] \lfalse$, then
+  $\Gamma$ is inconsistent.
+\item \ollabel{prop:provability-lnot} If $\Gamma \cup \{!A\}
+  \Proves[\Log{LK}] \lfalse$, then $\Gamma \Proves[\Log{LK}] \lnot !A$.
+\item \ollabel{prop:provability-exhaustive} If $\Gamma \cup \{!A\}
+  \Proves[\Log{LK}] \lfalse$ and $\Gamma \cup \{\lnot !A\}
+  \Proves[\Log{LK}] \lfalse$, then $\Gamma \Proves[\Log{LK}] \lfalse$.
+\item \ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}
+  \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$, then
+    $\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.
+\item \ollabel{prop:provability-lor-right} If $\Gamma
+  \Proves[\Log{LK}] !A$ or $\Gamma \Proves[\Log{LK}] !B$,
+      then $\Gamma \Proves[\Log{LK}] !A \lor !B$
+\item \ollabel{prop:provability-land-left} If $\Gamma
+  \Proves[\Log{LK}] !A \land !B$ then $\Gamma \Proves[\Log{LK}] !A$
+  and $\Gamma \Proves[\Log{LK}] !B$
+\item \ollabel{prop:provability-land-right} If $\Gamma
+  \Proves[\Log{LK}] !A$ and $\Gamma \Proves[\Log{LK}] !B$,
+ then $\Gamma \Proves[\Log{LK}] !A \land !B$
+\item \ollabel{prop:provability-mp} If $\Gamma \Proves[\Log{LK}] !A$
+  and $\Gamma \Proves[\Log{LK}] !A \lif !B$, then $\Gamma
+  \Proves[\Log{LK}] !B$.
+\item \ollabel{prop:provability-lif} If $\Gamma \Proves[\Log{LK}]
+  \lnot !A$ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma
+  \Proves[\Log{LK}] !A \lif !B$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\begin{enumerate}
+\item Let the $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A$ be
+$\Pi_0$ and the $\Log{LK}$-derivation of $\Gamma_1 \cup\{!A\} \Sequent
+\lfalse$ be $\Pi_1$. We can then derive
+
+\begin{prooftree}
+
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$ \vdots$ }
+\noLine \UnaryInf$ \Gamma_0 \fCenter !A $
+\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1 \fCenter !A $
+
+\AxiomC{$\Pi_1$}
+\noLine \UnaryInfC{$ \vdots$ }
+\noLine \UnaryInf$ \Gamma_1, !A \fCenter \lfalse$
+\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter \lfalse $
+
+\RightLabel{cut} \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter \lfalse $
+
+\end{prooftree}
+Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma \Proves[\Log{LK}]
+\lfalse$.
+
+\item  
+Suppose that $\Gamma \cup \{!A\} \Proves[\Log{LK}] \lfalse$. Then
+there is a finite set $\Gamma_0 \subseteq \Gamma$ with
+$\Proves[\Log{LK}] \Gamma_0 \cup \{!A\} \Sequent \lfalse$.  Let
+$\Pi_0$ be an $\Log{LK}$-derivation of $\Gamma_0 \cup \{!A\} \Sequent
+\lfalse$, and consider
+
+\begin{prooftree}
+\AxiomC{$\Pi_0$}
+\UnaryInf$\Gamma_0 \cup \{!A\} \fCenter \lfalse$
+\RightLabel{$\lnot$ right}
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+\end{prooftree}
+
+\item There are finite sets
+$\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$ so that
+there are $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ of $\Gamma_0, !A
+\Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent \lfalse$,
+respectively. We can then derive
+
+\begin{prooftree}
+
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0, !A \fCenter \lfalse $
+\RightLabel{$\lnot$ right} 
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+
+\AxiomC{$\Pi_1$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_1, \lnot !A \fCenter \lfalse $
+
+\RightLabel{cut} \BinaryInf$ \Gamma_0, \Gamma_1 \fCenter \lfalse $
+
+\end{prooftree}
+Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
+\Proves[\Log{LK}] \lfalse$.
+
+% prop:provability-lor-left
+\item 
+There are finite sets $\Gamma_0,\Gamma_1 \subseteq \Gamma$ and
+$\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ such that
+
+\begin{prooftree}
+
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0 !A \fCenter \lfalse $
+\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1,!A \fCenter \lfalse $
+
+\AxiomC{$\Pi_1$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_1, !B \fCenter \lfalse $
+\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1, !B \fCenter \lfalse$
+
+\RightLabel{$\lor$ left} \BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B
+\fCenter \lfalse $
+\end{prooftree}
+
+Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and 
+$\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.
+
+% prop:provability-lor-right
+\item There is an $\Log{LK}$-derivation $\Pi_0$ and a finite set
+  $\Gamma_0 \subseteq \Gamma$ such that we can derive
+
+\begin{prooftree}
+
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0 \fCenter !A $
+\RightLabel{$\lor$ right} \UnaryInf$ \Gamma_0 \fCenter !A \lor !B$ 
+
+\end{prooftree}
+
+Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
+\Proves[\Log{LK}] !B$ is similar.
+
+% prop:provability-land-left
+\item If $\Gamma \Proves[\Log{LK}] !A \land !B$, there is a finite set
+  $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation $\Pi_0$ of
+  $\Gamma_0 \Sequent !A \land !B$. Consider
+
+\begin{prooftree}
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0, \fCenter !A \land !B$
+\Axiom$!A \fCenter !A$
+\RightLabel{$\land$ left} 
+\UnaryInf$!A \land !B \fCenter !A$
+\RightLabel{cut} 
+\BinaryInf$\Gamma_0 \fCenter !A$
+\end{prooftree}
+
+Hence, $\Gamma \Proves[\Log{LK}] !A$.  A similar derivation starting
+with $!B \Sequent !B$ on the right side shows that $\Gamma
+\Proves[\Log{LK}] !B$.
+
+% prop:provability-land-right
+\item If $\Gamma \Proves[\Log{LK}] !A$ as well as $\Gamma
+  \Proves[\Log{LK}] !B$, there are finite sets $\Gamma_0$, $\Gamma_1
+  \subseteq \Gamma$ and an $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0
+  \Sequent !A$ and $\Pi_1$ of $\Gamma_1
+  \Sequent !A$. Consider
+
+\begin{prooftree}
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0, \fCenter !A$
+\AxiomC{$\Pi_1$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_1, \fCenter !B$
+\RightLabel{$\land$ right} 
+\BinaryInf$\Gamma_0, \Gamma_1 \fCenter !A \land !B $
+\end{prooftree}
+Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, we have $\Gamma
+\Proves[\Log{LK}] !A \land !B$.
+
+% prop:provability-mp
+\item Suppose that $\Gamma \Proves[\Log{LK}] !A$
+  and $\Gamma \Proves[\Log{LK}] !A \lif !B$.
+There are finite sets $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$
+such that there are $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0
+\Sequent !A$ and  $\Pi_1$ of $\Gamma_1
+\Sequent !A \lif !B$. Consider:
+
+\begin{prooftree}
+
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_1 \fCenter !A \lif !B$
+\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2 \fCenter !A \lif !B$
+
+\AxiomC{$\Pi_1$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0 \fCenter !A $
+
+\AxiomC{$!B \fCenter !B$}
+\noLine \UnaryInfC{$\vdots$}
+\doubleLine \UnaryInf$ \Gamma_0, !B \fCenter !B$
+
+\RightLabel{$\lif$ left} 
+\BinaryInf$\Gamma_0, !A \lif !B \fCenter !B$
+
+\RightLabel{cut} \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter !B$
+\end{prooftree}
+Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, this
+means that $\Gamma \Proves[\Log{LK}] !B$.
+
+% prop:provability-lif
+\item First suppose $\Gamma \Proves[\Log{LK}] \lnot !A$.  Then for
+  some finite $\Gamma_0 \subseteq \Gamma$ there is a
+  $\Log{LK}$-derivation of $\Gamma_0 \Sequent \lnot !A$. The following
+  derivation shows that $\Gamma \Proves[\Log{LK}] !A \lif !B$:
+
+\begin{prooftree}
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+
+\Axiom$!A \fCenter !A$
+\RightLabel{$\lnot right$}
+\UnaryInf$\lnot !A, !A \fCenter$
+\doubleLine
+\UnaryInf$!A, \lnot !A \fCenter !B$
+\RightLabel{$\lif$ right}
+\UnaryInf$\lnot !A \fCenter !A \lif !B$
+\RightLabel{cut}
+\BinaryInf$\Gamma_0 \fCenter !A \lif !B$
+\end{prooftree}
+
+Now suppose $\Gamma \Proves[\Log{LK}] !B$.  Then for some finite
+$\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-derivation of
+$\Gamma_0 \Sequent !B$. The following derivation shows that $\Gamma
+\Proves[\Log{LK}] !A \lif !B$:
+
+\begin{prooftree}
+\AxiomC{$\Pi_0$}
+\noLine \UnaryInfC{$\vdots$}
+\noLine \UnaryInf$ \Gamma_0 \fCenter !B$
+
+\Axiom$!B \fCenter !B$
+\doubleLine
+\UnaryInf$!A, !B \fCenter !B$
+\RightLabel{$\lif$ right}
+\UnaryInf$!B \fCenter !A \lif !B$
+\RightLabel{cut}
+\BinaryInf$\Gamma_0 \fCenter !A \lif !B$
+\end{prooftree}
+\end{enumerate}
+\end{proof}
+
+\begin{prop}[Generalization]
+\ollabel{prop:generalization} 
+If $\Gamma \Proves !A$ and $x$ is not free in any !!{formula} in
+$\Gamma$, then $\Gamma \Proves \lforall[x][!A]$.
+\end{prop}
+
+\begin{proof}
+If $\Gamma \Proves !A$, then for some finite $\Gamma_0 \subseteq
+\Gamma$, there is an $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A$.
+Since $x$ does not occur free in any formula in $\Gamma_0$, the
+egenvariable condition for ($\lforall$ right) is satisfied, and we
+obtain an $\Log{LK}$-derivation of $\Gamma_0 \Sequent
+\lforall[x][!A]$.
+\end{proof}
+
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
+of~$\Delta$, so derivation of $\Gamma_0 \Sequent !A$ also shows
+$\Delta \Proves !A$.
+\end{proof}
+
+\begin{thm}[Weak Generalization on Constants]
+\ollabel{thm:weak-generalization}
+If $\Gamma \Proves !A$ and $c$ is a constant not occurring in
+$\Gamma$, then there is a !!{variable} $x$ not in $!A$ such that
+$\Gamma \Proves \lforall[x][!A [x/c]]$ and the derivation does not
+involve~$c$.
+\end{thm}
+
+\begin{proof}
+Let $\Pi_0$ be an $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A$ for
+some finite $\Gamma_0 \subseteq Gamma$.  Choose a !!{variable} $x$ not
+occurring in~$\Pi_0$, and consider the derivation~$\Pi_1$ resulting
+from $\Pi_0$ by replacing $c$ everywhere by~$x$.  $\Pi_1$ is indeed a
+derivation, since $x$ did not occur in~$\Pi_0$, so in particular did
+not occur as an eigenvariable, hence the replacement does not disturb
+any quantifier inferences.  Moreover, since $c$ does not occur
+in~$\Gamma_0$, the end-sequent of $\Pi_1$ is $\Gamma_0 \Sequent
+!A[x/c]$, and so $\Gamma \Proves !A[x/c]$. By
+\olref{prop:generalization}, $\Gamma \Proves \lforall[x][!A[x/c]]$.
+\end{proof}
+
+\begin{prop}[Change of bound !p{variable}]
+If $x$ and $y$ are not free in $!A$ and are both free for $c$ in $!A$,
+then $\Proves \lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, and the
+derivation does not involve $c$.
+\end{prop}
+
+\begin{thm}[Strong Generalization on Constants]
+\ollabel{thm:strong-generalization}
+If $\Gamma \Proves !A$, the constant $c$ does not occur in $\Gamma$,
+and $x$ is not free in $!A$ but it is free for $c$ in $!A$, then
+$\Gamma \Proves \lforall[x] !A[x/c]$.
+\end{thm}
+
+\begin{proof}
+Since $\Gamma \Proves !A$ and $c$ is not in $\Gamma$,
+by~\olref{thm:weak-generalization}, there is a !!{variable} $y$ not
+in $!A$ such that $\Gamma \Proves \lforall[y] !A [y/c]$.  Since $y$ is
+not in $!A$, it is not free in $!A$ and it is also free for $c$ in
+$!A$; if moreover (by hypothesis) $x$ is not free in $!A$ and is free
+for $c$ in $!A$, then the requirements for a change of bound
+!!{variable} are met, so $\Proves \lforall[x] !A[x/c] \liff
+\lforall[y] !A[y/c]$, whence $\Gamma \Proves \lforall[x] !A[x/c]$.
+\end{proof}
+
+
+\end{document}
