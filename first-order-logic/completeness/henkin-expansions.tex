@@ -12,105 +12,42 @@
 \begin{explain}
 Part of the challenge in proving the completeness theorem is that the
 model we construct from a maximally consistent set~$\Gamma$ must make
-all the quantified !p{formula} in~$\Gamma$ true.  In order to guarantee
-this, we use a trick due to Leon Henkin.  In essence, the trick
-consists in expanding the language by infinitely many constants and
-adding, for each !!{formula} with one free !!{variable} $[!A(x)]$ a formula of
-the form $\lexists[x][!A(x)] \lif !A(c)$, where $c$ is one of the new
-!p{constant}.  
+all the quantified !p{formula} in~$\Gamma$ true.  In order to
+guarantee this, we use a trick due to Leon Henkin.  In essence, the
+trick consists in expanding the language by infinitely many constants
+and adding, for each !!{formula} with one free !!{variable} $!A(x)$ a
+formula of the form $\lexists[x][!A(x)] \lif !A(c)$, where $c$ is one
+of the new !p{constant}.
 \end{explain}
-
-\begin{prop}[Generalization]
-If $\Gamma \Proves !A$ and $x$ is not free in any !!{formula} in
-$\Gamma$, then $\Gamma \Proves \lforall[x][!A]$.
-\end{prop}
-
-\begin{prop}[Monotony]
-If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
-\Proves !A$.
-\end{prop}
-
-\begin{thm}[Weak Generalization on Constants]
-If $\Gamma \Proves !A$ and $c$ is a constant not occurring in
-$\Gamma$, then there is a !!{variable} $x$ not in $!A$ such that $\Gamma
-\Proves \lforall[x] !A [x/c]$ and the derivation does not involve $c$.
-\end{thm}
-
-\begin{proof}
-Let $!A_1, \dots, !A_n$ be a derivation of $!A$ from $\Gamma$, so $!A
-= !A_n$.  Choose a !!{variable} $x$ not in $!A_1, \dots, !A_n$, and
-consider the new sequence $!A_1[x/c], \dots, !A_n [x/c]$. Such a
-sequence is a derivation of $!A[x/c]$ from $\Gamma$, and the constant
-$c$ no longer occurs in the new sequence.
-%More detail here
-Now let $\Gamma' \subseteq \Gamma$ be the !p{formula} in $\Gamma$ that
-appear in the derivation of $!A [x/c]$; then $x$ is not free in any
-!!{formula} in $\Gamma'$ and $\Gamma' \Proves !A [x/c]$. By
-generalization, $\Gamma' \Proves \lforall[x] !A[x/c]$, whence by
-monotony, $\Gamma \Proves \lforall[x] !A [x/c]$, as desired.
-\end{proof}
-
-\begin{defn} 
-A term $t$ is \emph{free for $x$ in $!A$} if $x$ does not occur in
-$!A$ within the scope of a quantifier $\lforall[z]$ binding a !!{variable}
-$z$ occurring in $t$.
-\end{defn}
-
-%Examples of this maybe?
-
-\begin{prop}[Change of bound !p{variable}]
-If $x$ and $y$ are not free in $!A$ and are both free for $c$ in $!A$,
-then $\Proves \lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, and the
-derivation does not involve $c$.
-\end{prop}
-
-\begin{thm}[Strong Generalization on Constants]
-If $\Gamma \Proves !A$, the constant $c$ does not occur in $\Gamma$,
-and $x$ is not free in $!A$ but it is free for $c$ in $!A$, then
-$\Gamma \Proves \lforall[x] !A[x/c]$.
-\end{thm}
-
-\begin{proof}
-Since $\Gamma \Proves !A$ and $c$ is not in $\Gamma$, by Weak
-Generalization, there is a !!{variable} $y$ not in $!A$ such that $\Gamma
-\Proves \lforall[y] !A [y/c]$.  Since $y$ is not in $!A$, it is not
-free in $!A$ and it is also free for $c$ in $!A$; if moreover (by
-hypothesis) $x$ is not free in $!A$ and is free for $c$ in $!A$, then
-the requirements for a change of bound !!{variable} are met, so $\Proves
-\lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, whence $\Gamma \Proves
-\lforall[x] !A[x/c]$.
-\end{proof}
 
 \begin{lem}
 If $\Gamma$ is consistent in $\Lang L$ and $\Lang L'$ is obtained from
-$\Lang L$ by adding countably many new constants $c_0, c_1, \dots$,
+$\Lang L$ by adding countably many new constants $c_1, c_2, \dots$,
 then $\Gamma$ is consistent in $\Lang L'$.
 \end{lem}
 
 \begin{defn}
   A set $\Gamma$ of !p{formula} of a language $\Lang {L}$ is
   \emph{saturated} if and only if for each !!{formula} $!A \in
-  \Frm {L}$ and !!{variable} $x$ there is a constant $c$ such that
+  \Frm[L]$ and !!{variable} $x$ there is a constant $c$ such that
   $\lexists[x][!A] \lif !A(c) \in \Gamma$.
 \end{defn}
 
-% do we need to also add !p{conditional} for the universally quantified 
-% !p{formula} or does max. consistency take care of those?
+% do we need to also add conditionals for the universally quantified 
+% formulas or does max. consistency take care of those?
 
 The following definition will be used in the proof of the next theorem.
 
 \begin{defn}
-Fix an enumeration $\langle !A_0, x_0 \rangle, \langle !A_1, x_1
-\rangle, \dots$ of all !!{formula}-!!{variable} pairs of $\Lang L'$, and
-define the sentence $!D_n$ by recursion on~$n$. For $!D_0$,
-let $c_0$ be the first new constant that does not occur in $!A_0$ and
-let $!D_0$ be the !!{formula} $\lnot \lforall[x_0] !A_0 \lif \lnot
-!A_0[c_0/x_0]$. Assuming that $!D_0, \dots, !D_n$ have been
-defined, denote by $c_{n+1}$ the first new constant not occurring in
-$!D_0, \dots, !D_n$, and let $!D_{n+1}$ be the !!{formula}
-$\lnot \lforall[x_{n+1}] !A_{n+1} \lif \lnot
-!A_{n+1}[c_{n+1}/x_{n+1}]$. Finally, set $!D = \{ !D_n : n
-\geq 0 \}$.
+Fix an enumeration $\langle !A_1, x_1 \rangle$, $\langle !A_2, x_2
+\rangle$, \dots of all !!{formula}-!!{variable} pairs of $\Lang L'$,
+and define the sentence $!D_n$ by recursion on~$n$. Assuming that
+$!D_1, \dots, !D_n$ have been defined, denote by $c_{n+1}$ the first
+new constant not occurring in $!D_1, \dots, !D_n$, and let $!D_{n+1}$
+be the !!{formula} $\lexists[x_{n+1}] !A_{n+1} \lif
+!A_{n+1}[c_{n+1}/x_{n+1}]$. This includes the case where $n = 0$,
+i.e., $D_1$ is $\lexists[x_1] !A_1 \lif !A_1[c_1/x_1]$ as the new
+constant $c_1$ does not occur in any~$A_i$.
 \end{defn}
 
 \begin{thm}
@@ -123,31 +60,42 @@ Given a consistent $\Gamma$, expand the language by adding countably
 many new constants. By the previous Lemma, $\Gamma$ is still
 consistent in the richer language. Further, let $!D$ be as in the
 previous definition: then $\Gamma \cup !D$ is saturated by
-construction. To show that it is also consistent, it suffices to show,
-by induction on $n$, that each set of the form $\Gamma \cup \{
-!D_0, \dots, !D_n \}$ is consistent.
+construction. Let
+\begin{align*}
+\Gamma_0 & = \Gamma \\
+\Gamma_{n+1} & = \Gamma_n \cup \{!D_{n+1} \}
+\end{align*}
+i.e., $\Gamma_i = \Gamma \cup \{ !D_1, \dots, !D_n \}$, and let
+$\Gamma^* = \bigcup_{n} \Gamma_n$.  To show that $\Gamma^*$ is
+consistent it suffices to show, by induction on $n$, that each
+set~$\Gamma_n$ is consistent.
 
-For the basis of the induction, suppose that $\Gamma \cup \{ !D_0
-\}$ is inconsistent. Recall that $!D_0 = \lnot \lforall[x_0][!A_0]
-\lif \lnot !A_0 [c_0/x_0]$: then both of the following hold:
+The induction basis is simply the claim that $\Gamma_0 = \Gamma$ is
+consistent, which is the hypothesis of the theorem.
+
+For the induction step, suppose that $\Gamma_{n-1}$ is consistent but
+$\Gamma_n = \Gamma_{n-1} \cup \{!D_n\}$ is inconsistent. Recall that
+$!D_{n} = \lexists[x_n][!A_n] \lif !A_n [c_n/x_n]$.  If $\Gamma_{n-1}
+\cup \{!D_n\}$ is inconsistent, then $\Gamma_{n-1} \Proves \lnot
+!D_n$, end hence then both of the following hold:
 \[
-\Gamma \Proves \lforall[x_0][!A_0]
+\Gamma_{n-1} \Proves \lexists[x_n][!A_n]
 \quad
-\Gamma \Proves !A_0[c_0/x_0]
+\Gamma_{n-1} \Proves \lnot !A_n[c_n/x_n]
 \]
-But $c_0$ does not occur in $\Gamma$ and the !!{variable} $x_0$ is not
-free in $!A_0 [ c_0/x_0]$. Moreover, $x_0$ is free for $c_0$ in $!A_0
-[c_0/x_0]$ (since by the choice of $c_0$, the only occurrences of
-$c_0$ in $!A_0 [c_0/x_0]$ derive from the substitution $[c_0/x_0]$,
+But $c_n$ does not occur in $\Gamma_{n-1}$ and the !!{variable} $x_n$
+is not free in $!A_n[c_n/x_n]$. Moreover, $x_n$ is free for $c_n$ in
+$!A_n [c_n/x_n]$ (since by the choice of $c_n$, the only occurrences
+of $c_n$ in $!A_n [c_n/x_n]$ derive from the substitution $[c_n/x_n]$,
 and therefore fall outside the scope of any quantifier binding
-$x_0$). By Strong Generalization on Constants, from $\Gamma \Proves
-!A_0 [c_0/x_0]$, we obtain $\Gamma \Proves \lforall[x_0] ( !A_0
-[c_0/x_0] ) [x_0/c_0]$, hence $\Gamma \Proves \lforall[x_0]
-!A_0$. Thus we have that both $\Gamma \Proves \lforall[x_0] !A_0$ and
-$\Gamma \Proves \lnot \lforall[x_0] !A_0$, so $\Gamma$ itself is
-inconsistent. Contradiction: $\Gamma$ was supposed to be
-consistent. Hence $\Gamma \cup \{ !D_0\}$ is consistent. The
-demonstration of the induction step is analogous.
+$x_n$). By \olref[seq][prv]{thm:strong-generalization}, from $\Gamma
+\Proves \lnot !A_n [c_n/x_n]$, we obtain $\Gamma \Proves
+\lforall[x_n][(\lnot !A_0 [c_n/x_n])[x_n/c_n]]$, hence $\Gamma \Proves
+\lforall[x_n][\lnot !A_n]$. Thus we have that both $\Gamma_{n-1}
+\Proves \lexists[x_0] !A_0$ and $\Gamma_{n-1} \Proves
+\lforall[x_0][\lnot !A_0]$, so $\Gamma$ itself is
+inconsistent. Contradiction: $\Gamma_{n-1}$ was supposed to be
+consistent. Hence $\Gamma_n \cup \{ !D_n\}$ is consistent.
 \end{proof}
 
 \end{document}

@@ -17,26 +17,26 @@
   \label{\theolpart:\theolchapter:\theolsection:#1}}
 
 \DeclareDocumentCommand \olref { o o o m } {
-    \cref{\IfNoValueTF {#1} 
+    \cref{%
+      \IfNoValueTF {#1} 
         {\theolpart:\theolchapter:\theolsection}
         {\IfNoValueTF {#2} 
           {\theolpart:\theolchapter:#1}
           {\IfNoValueTF {#3} 
             {\theolpart:#1:#2}
-            {#1:#2:#3}}}:#4}
-}
+            {#1:#2:#3}}}:#4}}
 
 \DeclareDocumentCommand \Olref { o o o m } {
-    \Cref{\IfNoValueTF {#1} 
+    \Cref{%
+      \IfNoValueTF {#1} 
         {\theolpart:\theolchapter:\theolsection}
         {\IfNoValueTF {#2} 
           {\theolpart:\theolchapter:#1}
           {\IfNoValueTF {#3} 
             {\theolpart:#1:#2}
-            {#1:#2:#3}}}:#4}
-}
+            {#1:#2:#3}}}:#4}}
 
-% \olsection - ever OLP text starts with this, starts a \section
+% \olsection - every OLP text starts with this, starts a \section
 
 \DeclareDocumentCommand \olsection { o m } {%
   \IfNoValueTF {#1}{\csuse{\ol@sectioncs}{#2}}{\csuse{\ol@sectioncs}[#1]{#2}}%
@@ -46,4 +46,6 @@
 
 % \nosection - sectioning command that supresses section header.
 
-\DeclareDocumentCommand \nosection { o m }{\ollabel{sec}}
+\DeclareDocumentCommand \nosection { o m }{}
+
+\crefformat{enumi}{#2(#1)#3}
