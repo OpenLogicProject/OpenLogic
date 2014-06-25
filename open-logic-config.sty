@@ -152,6 +152,18 @@
 % below you can uniformly change notation in the text.
 
 
+% ### Substiution
+
+% The operation of substituting a term for a (free) variable in
+% another term or in a formula.  \#1 is the formula, \#2 is the term,
+% \#3 is the variable.  Common notations are $\varphi^t_x$,
+% $\varphi(t/x)$, $\varphi[x/t]$, or $S^t_x \varphi$.
+
+\DeclareDocumentCommand \Subst { m m m } {
+  #1[#2/#3]}
+
+
+
 % ### The satisfaction/truth relation
 %
 % The relation of being satisfied in a structure (relative to an
@@ -398,12 +410,13 @@
 
 \DeclareDocumentCommand \indcase { s t{!} m m m }{%
   \DeclareDocumentMacro \indfrm {#3}%
+  \DeclareDocumentMacro \indfrmp {#3}%
   \DeclareDocumentMacro \indcomplex {#4}%
   \IfBooleanTF{#1}
-     {$\indfrm$ is atomic: #5}{}
+     {$#3$ is atomic: #5}{}
   \IfBooleanTF{#2}
-     {$\indfrm \ident \indcomplex$: exercise.}
-     {$\indfrm \ident \indcomplex$: #5}}
+     {$#3 \ident #4$: exercise.}
+     {$#3 \ident #4$: #5}}
 
 % Tokens
 % ======
@@ -464,6 +477,11 @@
 % "outermost operator".
 
 \settexttoken{main operator}{main operator}{main operators}
+
+% - `free for`: defaults to "free for", redefine for
+% "substitutable for" as in Enderton.
+
+\settexttoken{free for}{free for}{free for}
 
 % - `identity`: defaults to "identity predicate", redefine for
 % "equality predicate."
