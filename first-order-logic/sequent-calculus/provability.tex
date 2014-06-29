@@ -18,29 +18,37 @@
 \item \ollabel{prop:provability-contr} If $\Gamma \Proves[\Log{LK}]
   !A$ and $\Gamma \cup \{ \lnot !A\} \Proves[\Log{LK}] \lfalse$, then
   $\Gamma$ is inconsistent.
+
 \item \ollabel{prop:provability-lnot} If $\Gamma \cup \{!A\}
   \Proves[\Log{LK}] \lfalse$, then $\Gamma \Proves[\Log{LK}] \lnot !A$.
+
 \item \ollabel{prop:provability-exhaustive} If $\Gamma \cup \{!A\}
   \Proves[\Log{LK}] \lfalse$ and $\Gamma \cup \{\lnot !A\}
   \Proves[\Log{LK}] \lfalse$, then $\Gamma \Proves[\Log{LK}] \lfalse$.
-\item \ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}
+
+\tagitem{prvOr}{\ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}
   \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$, then
-    $\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.
-\item \ollabel{prop:provability-lor-right} If $\Gamma
+    $\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:provability-lor-right} If $\Gamma
   \Proves[\Log{LK}] !A$ or $\Gamma \Proves[\Log{LK}] !B$,
-      then $\Gamma \Proves[\Log{LK}] !A \lor !B$
-\item \ollabel{prop:provability-land-left} If $\Gamma
+      then $\Gamma \Proves[\Log{LK}] !A \lor !B$.}{}
+
+\tagitem{prvAnd}{\ollabel{prop:provability-land-left} If $\Gamma
   \Proves[\Log{LK}] !A \land !B$ then $\Gamma \Proves[\Log{LK}] !A$
-  and $\Gamma \Proves[\Log{LK}] !B$
-\item \ollabel{prop:provability-land-right} If $\Gamma
+  and $\Gamma \Proves[\Log{LK}] !B$.}{}
+
+\tagitem{prvAnd}{\ollabel{prop:provability-land-right} If $\Gamma
   \Proves[\Log{LK}] !A$ and $\Gamma \Proves[\Log{LK}] !B$,
- then $\Gamma \Proves[\Log{LK}] !A \land !B$
-\item \ollabel{prop:provability-mp} If $\Gamma \Proves[\Log{LK}] !A$
+ then $\Gamma \Proves[\Log{LK}] !A \land !B$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:provability-mp} If $\Gamma \Proves[\Log{LK}] !A$
   and $\Gamma \Proves[\Log{LK}] !A \lif !B$, then $\Gamma
-  \Proves[\Log{LK}] !B$.
-\item \ollabel{prop:provability-lif} If $\Gamma \Proves[\Log{LK}]
+  \Proves[\Log{LK}] !B$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:provability-lif} If $\Gamma \Proves[\Log{LK}]
   \lnot !A$ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma
-  \Proves[\Log{LK}] !A \lif !B$.
+  \Proves[\Log{LK}] !A \lif !B$.}{}
 \end{enumerate}
 \end{prop}
 
@@ -109,7 +117,8 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
 \Proves[\Log{LK}] \lfalse$.
 
 % prop:provability-lor-left
-\item 
+\tagitem{defOr}{}{
+\iftag{probOr}{Exercise.}{
 There are finite sets $\Gamma_0,\Gamma_1 \subseteq \Gamma$ and
 $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ such that
 
@@ -130,11 +139,13 @@ $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ such that
 \end{prooftree}
 
 Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and 
-$\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.
+$\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.}}
 
 % prop:provability-lor-right
-\item There is an $\Log{LK}$-derivation $\Pi_0$ and a finite set
-  $\Gamma_0 \subseteq \Gamma$ such that we can derive
+\tagitem{defOr}{}{
+\iftag{probOr}{Exercise.}{
+There is an $\Log{LK}$-derivation $\Pi_0$ and a finite set $\Gamma_0
+\subseteq \Gamma$ such that we can derive
 
 \begin{prooftree}
 
@@ -146,12 +157,14 @@ $\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.
 \end{prooftree}
 
 Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
-\Proves[\Log{LK}] !B$ is similar.
+\Proves[\Log{LK}] !B$ is similar.}}
 
 % prop:provability-land-left
-\item If $\Gamma \Proves[\Log{LK}] !A \land !B$, there is a finite set
-  $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation $\Pi_0$ of
-  $\Gamma_0 \Sequent !A \land !B$. Consider
+\tagitem{defAnd}{}{
+\iftag{probAnd}{Exercise}{
+If $\Gamma \Proves[\Log{LK}] !A \land !B$, there is a finite set
+$\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation $\Pi_0$ of
+$\Gamma_0 \Sequent !A \land !B$. Consider
 
 \begin{prooftree}
 \AxiomC{$\Pi_0$}
@@ -166,14 +179,15 @@ Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
 
 Hence, $\Gamma \Proves[\Log{LK}] !A$.  A similar derivation starting
 with $!B \Sequent !B$ on the right side shows that $\Gamma
-\Proves[\Log{LK}] !B$.
+\Proves[\Log{LK}] !B$.}}
 
 % prop:provability-land-right
-\item If $\Gamma \Proves[\Log{LK}] !A$ as well as $\Gamma
-  \Proves[\Log{LK}] !B$, there are finite sets $\Gamma_0$, $\Gamma_1
-  \subseteq \Gamma$ and an $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0
-  \Sequent !A$ and $\Pi_1$ of $\Gamma_1
-  \Sequent !A$. Consider
+\tagitem{defAnd}{}{
+\iftag{probAnd}{Exercise.}{ 
+If $\Gamma \Proves[\Log{LK}] !A$ as well as $\Gamma \Proves[\Log{LK}]
+!B$, there are finite sets $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$ and
+an $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0 \Sequent !A$ and
+$\Pi_1$ of $\Gamma_1 \Sequent !A$. Consider
 
 \begin{prooftree}
 \AxiomC{$\Pi_0$}
@@ -186,15 +200,16 @@ with $!B \Sequent !B$ on the right side shows that $\Gamma
 \BinaryInf$\Gamma_0, \Gamma_1 \fCenter !A \land !B $
 \end{prooftree}
 Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, we have $\Gamma
-\Proves[\Log{LK}] !A \land !B$.
+\Proves[\Log{LK}] !A \land !B$.}}
 
 % prop:provability-mp
-\item Suppose that $\Gamma \Proves[\Log{LK}] !A$
-  and $\Gamma \Proves[\Log{LK}] !A \lif !B$.
-There are finite sets $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$
-such that there are $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0
-\Sequent !A$ and  $\Pi_1$ of $\Gamma_1
-\Sequent !A \lif !B$. Consider:
+\tagitem{defIf}{}{
+\iftag{probIf}{Exercise.}{
+Suppose that $\Gamma \Proves[\Log{LK}] !A$ and $\Gamma
+\Proves[\Log{LK}] !A \lif !B$.  There are finite sets $\Gamma_0$,
+$\Gamma_1 \subseteq \Gamma$ such that there are $\Log{LK}$-derivations
+$\Pi_0$ of $\Gamma_0 \Sequent !A$ and $\Pi_1$ of $\Gamma_1 \Sequent !A
+\lif !B$. Consider:
 
 \begin{prooftree}
 
@@ -217,13 +232,15 @@ such that there are $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0
 \RightLabel{cut} \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter !B$
 \end{prooftree}
 Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, this
-means that $\Gamma \Proves[\Log{LK}] !B$.
+means that $\Gamma \Proves[\Log{LK}] !B$.}}
 
 % prop:provability-lif
-\item First suppose $\Gamma \Proves[\Log{LK}] \lnot !A$.  Then for
-  some finite $\Gamma_0 \subseteq \Gamma$ there is a
-  $\Log{LK}$-derivation of $\Gamma_0 \Sequent \lnot !A$. The following
-  derivation shows that $\Gamma \Proves[\Log{LK}] !A \lif !B$:
+\tagitem{defIf}{}{
+\iftag{probIf}{Exercise.}{
+First suppose $\Gamma \Proves[\Log{LK}] \lnot !A$.  Then for some
+finite $\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-derivation of
+$\Gamma_0 \Sequent \lnot !A$. The following derivation shows that
+$\Gamma \Proves[\Log{LK}] !A \lif !B$:
 
 \begin{prooftree}
 \AxiomC{$\Pi_0$}
@@ -258,9 +275,15 @@ $\Gamma_0 \Sequent !B$. The following derivation shows that $\Gamma
 \UnaryInf$!B \fCenter !A \lif !B$
 \RightLabel{cut}
 \BinaryInf$\Gamma_0 \fCenter !A \lif !B$
-\end{prooftree}
+\end{prooftree}}}
+
 \end{enumerate}
 \end{proof}
+
+\begin<probOr,probAnd,probIf>{prob}
+Complete the proof of \olref{prop:provability}.
+\end{prob}
+
 
 \begin{prop}[Generalization]
 \ollabel{prop:generalization} 

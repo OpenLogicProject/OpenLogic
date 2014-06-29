@@ -27,14 +27,13 @@ then $\Gamma$ is consistent in $\Lang L'$.
 \end{lem}
 
 \begin{defn}
-  A set $\Gamma$ of !p{formula} of a language $\Lang {L}$ is
-  \emph{saturated} if and only if for each !!{formula} $!A \in
-  \Frm[L]$ and !!{variable} $x$ there is a constant $c$ such that
-  $\lexists[x][!A] \lif !A(c) \in \Gamma$.
+A set $\Gamma$ of !p{formula} of a language $\Lang {L}$ is
+\emph{saturated} if and only if for each !!{formula} $!A \in \Frm[L]$
+and !!{variable} $x$ there is a constant $c$ such that
+\iftag{prvEx}
+      {$\lexists[x][!A] \lif !A(c) \in \Gamma$}
+      {$\lnot\lforall[x][!A] \lif \lnot !A(c) \in \Gamma$}.
 \end{defn}
-
-% do we need to also add conditionals for the universally quantified 
-% formulas or does max. consistency take care of those?
 
 The following definition will be used in the proof of the next theorem.
 
@@ -44,15 +43,20 @@ Fix an enumeration $\langle !A_1, x_1 \rangle$, $\langle !A_2, x_2
 and define the sentence $!D_n$ by recursion on~$n$. Assuming that
 $!D_1, \dots, !D_n$ have been defined, denote by $c_{n+1}$ the first
 new constant not occurring in $!D_1, \dots, !D_n$, and let $!D_{n+1}$
-be the !!{formula} $\lexists[x_{n+1}] !A_{n+1} \lif
-!A_{n+1}[c_{n+1}/x_{n+1}]$. This includes the case where $n = 0$,
-i.e., $D_1$ is $\lexists[x_1] !A_1 \lif !A_1[c_1/x_1]$ as the new
-constant $c_1$ does not occur in any~$A_i$.
+be the !!{formula} 
+\iftag{prvEx}
+{$\lexists[x_{n+1}][!A_{n+1}] \lif \Subst{!A_{n+1}}{c_{n+1}}{x_{n+1}}$}
+{$\lnot\lforall[x_{n+1}][!A_{n+1}] \lif \lnot \Subst{!A_{n+1}}{c_{n+1}}{x_{n+1}}$}. 
+This includes the case where $n = 0$, i.e., $D_1$ is 
+\iftag{prvEx}
+{$\lexists[x_1] !A_1 \lif \Subst{!A_1}{c_1}{x_1}$}
+{$\lnot\lforall[x_1] !A_1 \lif \lnot \Subst{!A_1}{c_1}{x_1}$}
+as the new constant~$c_1$ does not occur in any~$A_i$.
 \end{defn}
 
 \begin{thm}
-  Every consistent set $\Gamma$ can be extended to a saturated
-  consistent set.
+Every consistent set $\Gamma$ can be extended to a saturated
+consistent set~$\Gamma'$.
 \end{thm}
 
 \begin{proof}
@@ -65,37 +69,60 @@ construction. Let
 \Gamma_0 & = \Gamma \\
 \Gamma_{n+1} & = \Gamma_n \cup \{!D_{n+1} \}
 \end{align*}
-i.e., $\Gamma_i = \Gamma \cup \{ !D_1, \dots, !D_n \}$, and let
-$\Gamma^* = \bigcup_{n} \Gamma_n$.  To show that $\Gamma^*$ is
-consistent it suffices to show, by induction on $n$, that each
+i.e., $\Gamma_n = \Gamma \cup \{ !D_1, \dots, !D_n \}$, and let
+$\Gamma' = \bigcup_{n} \Gamma_n$.  To show that $\Gamma'$ is
+consistent it suffices to show, by induction on~$n$, that each
 set~$\Gamma_n$ is consistent.
 
 The induction basis is simply the claim that $\Gamma_0 = \Gamma$ is
 consistent, which is the hypothesis of the theorem.
-
 For the induction step, suppose that $\Gamma_{n-1}$ is consistent but
 $\Gamma_n = \Gamma_{n-1} \cup \{!D_n\}$ is inconsistent. Recall that
-$!D_{n} = \lexists[x_n][!A_n] \lif !A_n [c_n/x_n]$.  If $\Gamma_{n-1}
-\cup \{!D_n\}$ is inconsistent, then $\Gamma_{n-1} \Proves \lnot
-!D_n$, end hence then both of the following hold:
+$!D_n$ is
+\iftag{prvEx}
+{$\lexists[x_{n}][!A_{n}] \lif \Subst{!A_{n}}{c_{n}}{x_{n}}$}
+{$\lnot\lforall[x_{n}][!A_{n}] \lif \lnot \Subst{!A_{n}}{c_{n}}{x_{n}}$}. 
+
+If $\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent, then $\Gamma_{n-1}
+\Proves \lnot !D_n$, and hence both of the following hold:
+\iftag{prvEx}{
 \[
 \Gamma_{n-1} \Proves \lexists[x_n][!A_n]
 \quad
-\Gamma_{n-1} \Proves \lnot !A_n[c_n/x_n]
-\]
+\Gamma_{n-1} \Proves \lnot \Subst{!A_n}{c_n}{x_n}
+\]}{
+\[
+\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n]
+\quad
+\Gamma_{n-1} \Proves \Subst{!A_n}{c_n}{x_n}
+\]}
 But $c_n$ does not occur in $\Gamma_{n-1}$ and the !!{variable} $x_n$
-is not free in $!A_n[c_n/x_n]$. Moreover, $x_n$ is free for $c_n$ in
-$!A_n [c_n/x_n]$ (since by the choice of $c_n$, the only occurrences
-of $c_n$ in $!A_n [c_n/x_n]$ derive from the substitution $[c_n/x_n]$,
-and therefore fall outside the scope of any quantifier binding
-$x_n$). By \olref[seq][prv]{thm:strong-generalization}, from $\Gamma
-\Proves \lnot !A_n [c_n/x_n]$, we obtain $\Gamma \Proves
-\lforall[x_n][(\lnot !A_0 [c_n/x_n])[x_n/c_n]]$, hence $\Gamma \Proves
-\lforall[x_n][\lnot !A_n]$. Thus we have that both $\Gamma_{n-1}
-\Proves \lexists[x_0] !A_0$ and $\Gamma_{n-1} \Proves
-\lforall[x_0][\lnot !A_0]$, so $\Gamma$ itself is
-inconsistent. Contradiction: $\Gamma_{n-1}$ was supposed to be
-consistent. Hence $\Gamma_n \cup \{ !D_n\}$ is consistent.
+is not free in $\Subst{!A_n}{c_n}{x_n}$.
+By \olref[seq][prv]{thm:strong-generalization}, from 
+\iftag{prvEx}
+{$\Gamma \Proves \lnot \Subst{!A_n}{c_n}{x_n}$} 
+{$\Gamma \Proves \Subst{!A_n}{c_n}{x_n}$}, 
+we obtain 
+\iftag{prvEx}
+{$\Gamma \Proves \lforall[x_n][\lnot !A_n]$}
+{$\Gamma \Proves \lforall[x_n][!A_n]$}.
+Thus we have that both 
+\iftag{prvEx}
+{$\Gamma_{n-1} \Proves \lexists[x_n][!A_n]$ and 
+$\Gamma_{n-1} \Proves \lforall[x_n][\lnot !A_n]$}
+{$\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n]$ and 
+$\Gamma_{n-1} \Proves \lforall[x_n][!A_n]$},
+so $\Gamma$ itself is inconsistent. (Note that
+\iftag{prvEx}
+{\iftag{prvAll}
+{$\lforall[x_n][\lnot !A_n] \Proves
+  \lnot\lexists[x_n][!A_n]$}
+{$\lforall[x_n][\lnot !A_n]$ is defined as
+  $\lnot\lexists[x_n][\lnot\lnot !A_n]$ and
+  $\lnot\lexists[x_n][\lnot\lnot !A_n] \Proves
+  \lnot\lexists[x_n][!A_n]$}}{}.)
+Contradiction: $\Gamma_{n-1}$ was supposed to be consistent. Hence
+$\Gamma_n \cup \{ !D_n\}$ is consistent.
 \end{proof}
 
 \end{document}
