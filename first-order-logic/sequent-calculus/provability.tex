@@ -312,49 +312,18 @@ of~$\Delta$, so derivation of $\Gamma_0 \Sequent !A$ also shows
 $\Delta \Proves !A$.
 \end{proof}
 
-\begin{thm}[Weak Generalization on Constants]
-\ollabel{thm:weak-generalization}
-If $\Gamma \Proves !A$ and $c$ is a constant not occurring in
-$\Gamma$, then there is a !!{variable} $x$ not in $!A$ such that
-$\Gamma \Proves \lforall[x][!A [x/c]]$ and the derivation does not
-involve~$c$.
+\begin{thm}
+\ollabel{thm:strong-generalization} If $c$ is a constant not occurring
+in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
+\Proves \lforall[x][!A(c)]$.
 \end{thm}
 
 \begin{proof}
-Let $\Pi_0$ be an $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A$ for
-some finite $\Gamma_0 \subseteq Gamma$.  Choose a !!{variable} $x$ not
-occurring in~$\Pi_0$, and consider the derivation~$\Pi_1$ resulting
-from $\Pi_0$ by replacing $c$ everywhere by~$x$.  $\Pi_1$ is indeed a
-derivation, since $x$ did not occur in~$\Pi_0$, so in particular did
-not occur as an eigenvariable, hence the replacement does not disturb
-any quantifier inferences.  Moreover, since $c$ does not occur
-in~$\Gamma_0$, the end-sequent of $\Pi_1$ is $\Gamma_0 \Sequent
-!A[x/c]$, and so $\Gamma \Proves !A[x/c]$. By
-\olref{prop:generalization}, $\Gamma \Proves \lforall[x][!A[x/c]]$.
-\end{proof}
-
-\begin{prop}[Change of bound !p{variable}]
-If $x$ and $y$ are not free in $!A$ and are both free for $c$ in $!A$,
-then $\Proves \lforall[x] !A[x/c] \liff \lforall[y] !A[y/c]$, and the
-derivation does not involve $c$.
-\end{prop}
-
-\begin{thm}[Strong Generalization on Constants]
-\ollabel{thm:strong-generalization}
-If $\Gamma \Proves !A$, the constant $c$ does not occur in $\Gamma$,
-and $x$ is not free in $!A$ but it is free for $c$ in $!A$, then
-$\Gamma \Proves \lforall[x] !A[x/c]$.
-\end{thm}
-
-\begin{proof}
-Since $\Gamma \Proves !A$ and $c$ is not in $\Gamma$,
-by~\olref{thm:weak-generalization}, there is a !!{variable} $y$ not
-in $!A$ such that $\Gamma \Proves \lforall[y] !A [y/c]$.  Since $y$ is
-not in $!A$, it is not free in $!A$ and it is also free for $c$ in
-$!A$; if moreover (by hypothesis) $x$ is not free in $!A$ and is free
-for $c$ in $!A$, then the requirements for a change of bound
-!!{variable} are met, so $\Proves \lforall[x] !A[x/c] \liff
-\lforall[y] !A[y/c]$, whence $\Gamma \Proves \lforall[x] !A[x/c]$.
+Let $\Pi_0$ be an $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A(c)$
+for some finite $\Gamma_0 \subseteq Gamma$.  By adding a $\lforall$
+right inference, we obtain a proof of $\Gamma \Sequent
+\lforall[x][!A(x)]$, since $c$ does not occur in $\Gamma$ or $!A(x)$
+and thus the eigenvariable condition is satisfied.
 \end{proof}
 
 

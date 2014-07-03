@@ -39,7 +39,7 @@ Begin by writing the desired end-sequent at the bottom of the derivation.
 \UnaryInf$\lnot !A \lor !B \fCenter !A \lif !B$
 \end{prooftree}
 
-To find a logical rule that could give us this end-sequent, we look at the logical connectives in the end-sequent: $\lnot$, $\lor$, and $\lif$. We only care at the moment about $\lor$ and $\lif$ because they are \emph{main connectives} of !p{formula} in the end-sequent, while $\lnot$ is inside the scope of another connective, so we will take care of it later. Our options for logical rules for the terminal inference are therefore the $\lor$ left rule and the $\lif$ right rule. We could pick either rule, really, but let's pick the $\lif$ right rule (if for no reason other than it allows us to put off splitting into two branches). According to the schema of the rule to the lower sequent, this must look like:
+To find a logical rule that could give us this end-sequent, we look at the logical connectives in the end-sequent: $\lnot$, $\lor$, and $\lif$. We only care at the moment about $\lor$ and $\lif$ because they are \emph{main connectives} of !p{sentnce} in the end-sequent, while $\lnot$ is inside the scope of another connective, so we will take care of it later. Our options for logical rules for the terminal inference are therefore the $\lor$ left rule and the $\lif$ right rule. We could pick either rule, really, but let's pick the $\lif$ right rule (if for no reason other than it allows us to put off splitting into two branches). According to the schema of the rule to the lower sequent, this must look like:
 
 \begin{prooftree}
 \AxiomC{}
@@ -69,7 +69,7 @@ Remember that we are trying to wind our way up to initial sequents; we seem to b
 \RightLabel{$\lif$ right} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
 
-Now looking at the left branch, the only logical connective in any !!{formula} is the $\lnot$ symbol in the antecedent !p{formula}, so we're looking at an instance of the $\lnot$ left rule.
+Now looking at the left branch, the only logical connective in any !!{sentence} is the $\lnot$ symbol in the antecedent !p{sentence}, so we're looking at an instance of the $\lnot$ left rule.
 
 \begin{prooftree}
 \AxiomC{}
@@ -105,7 +105,7 @@ Using the techniques from above, we start by writing the desired end-sequent at 
 \AxiomC{}
 \UnaryInf$ \lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B) $
 \end{prooftree}
-The available main connectives of !p{formula} in the end-sequent are the $\lor$ symbol and the $\lnot$ symbol. It would work to apply either the $\lor$ left or the $\lnot$ right rule here, but we start with the $\lnot$ right rule because it avoids splitting up into two branches for a moment:
+The available main connectives of !p{sentence} in the end-sequent are the $\lor$ symbol and the $\lnot$ symbol. It would work to apply either the $\lor$ left or the $\lnot$ right rule here, but we start with the $\lnot$ right rule because it avoids splitting up into two branches for a moment:
 
 \begin{prooftree}
 \AxiomC{}
@@ -170,42 +170,42 @@ Completing each branch as we've done before, we get
 
 \end{ex}
 
-\begin{ex} Give an $\Log{LK}$-derivation of the sequent $\lexists[x] \lnot F(x) \Sequent \lnot \lforall[x] F(x)$.
+\begin{ex} Give an $\Log{LK}$-derivation of the sequent $\lexists[x][\lnot !A(x)] \Sequent \lnot \lforall[x][!A(x)]$.
 
-When we are dealing with quantifiers, we have to make sure not to violate the eigenvariable condition, and sometimes this requires us to play around with the order of carrying out certain inferences. In general, it helps to try and take care of rules subject to the eigenvariable condition first (they will be lower down in the finished proof). Also, it is a good idea to try and look ahead and try to guess what the initial sequent might look like. In our case, it will have to be something like $F(a) \Sequent F(a)$. That means that when we are ``reversing'' the quantifier rules, we will have to pick the same term - what we will call $a$ - for both the $\lforall$ and the $\lexists$ rule. If we picked different terms for each rule, we would end up with something like $F(a) \Sequent F(b)$, which, of course, is not derivable.
+When we are dealing with quantifiers, we have to make sure not to violate the eigenvariable condition, and sometimes this requires us to play around with the order of carrying out certain inferences. In general, it helps to try and take care of rules subject to the eigenvariable condition first (they will be lower down in the finished proof). Also, it is a good idea to try and look ahead and try to guess what the initial sequent might look like. In our case, it will have to be something like $!A(a) \Sequent !A(a)$. That means that when we are ``reversing'' the quantifier rules, we will have to pick the same term - what we will call $a$ - for both the $\lforall$ and the $\lexists$ rule. If we picked different terms for each rule, we would end up with something like $!A(a) \Sequent !A(b)$, which, of course, is not derivable.
 
 Starting as usual, we write
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$\lexists[x] \lnot F(x) \fCenter \lnot \lforall[x] F(x)$
+\UnaryInf$\lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
 
 We could either carry out the $\exists$ left rule or the $\lnot$ right rule. Since the $\exists$ left rule is subject to the eigenvariable condition, it's a good idea to take care of it sooner rather than later, so we'll do that one first.
 
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$ \lnot F(a) \fCenter \lnot \lforall[x] F(x)$
-\RightLabel{$\lexists$ left} \UnaryInf$ \lexists[x] \lnot F(x) \fCenter \lnot \lforall[x] F(x)$
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{$\lexists$ left} \UnaryInf$ \lexists[x][\lnot !F(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
 
 Applying the $\lnot$ left and right rules to eliminate the $\lnot$ signs, we get
 
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$\lforall[x] F(x) \fCenter F(a)$
-\RightLabel{$\lnot$ right} \UnaryInf$ \fCenter \lnot \lforall[x] F(x), F(a)$
-\RightLabel{$\lnot$ left} \UnaryInf$ \lnot F(a) \fCenter \lnot \lforall[x] F(x)$
-\RightLabel{$\lexists$ left} \UnaryInf$ \lexists[x] \lnot F(x) \fCenter \lnot \lforall[x] F(x)$
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{$\lnot$ right} \UnaryInf$ \fCenter \lnot \lforall[x][!A(x)], !A(a)$
+\RightLabel{$\lnot$ left} \UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
+\RightLabel{$\lexists$ left} \UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
 \end{prooftree}
 
-At this point, our only option is to carry out the $\forall$ left rule. Since this rule is not subject to the eigenvariable restriction, we're in the clear. Remember, we want to try and obtain an initial sequent (of the form $F(a) \Sequent F(a)$, so we should choose $a$ as our argument for $F$ when we apply the rule.
+At this point, our only option is to carry out the $\forall$ left rule. Since this rule is not subject to the eigenvariable restriction, we're in the clear. Remember, we want to try and obtain an initial sequent (of the form $!A(a) \Sequent !A(a)$, so we should choose $a$ as our argument for $F$ when we apply the rule.
 
 \begin{prooftree}
-\Axiom$F(a) \fCenter F(a)$
-\RightLabel{$\lforall$ left} \UnaryInf$\lforall[x] F(x) \fCenter F(a)$
-\RightLabel{$\lnot$ right} \UnaryInf$ \fCenter \lnot \lforall[x] F(x), F(a)$
-\RightLabel{$\lnot$ left} \UnaryInf$ \lnot F(a) \fCenter \lnot \lforall[x] F(x)$
-\RightLabel{$\lexists$ left} \UnaryInf$ \lexists[x] \lnot F(x) \fCenter \lnot \lforall[x] F(x)$
+\Axiom$!A(a) \fCenter !A(a)$
+\RightLabel{$\lforall$ left} \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{$\lnot$ right} \UnaryInf$ \fCenter \lnot \lforall[x][!A(x)], !A(a)$
+\RightLabel{$\lnot$ left} \UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{$\lexists$ left} \UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
 
 It is important, especially when dealing with quantifiers, to double check at this point that the eigenvariable condition has not been violated. Since the only rule we applied that is subject to the eigenvariable condition was $\exists$ left, and the eigenvariable $a$ does not occur in its lower sequent (the end-sequent), this is a correct derivation.

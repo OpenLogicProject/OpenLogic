@@ -9,20 +9,21 @@
 \olfileid{fol}{seq}{rul}
 \olsection{Rules and Proofs}
 
-%explain bit
-
 Let $\Lang L$ be a first-order language with the usual constants, !p{variable}, and logical symbols and auxiliary symbols (parentheses and the comma). 
 
 \begin{defn}[sequent]
 A \emph{sequent} is an expression of the form
 \[ \Gamma \Sequent \Delta \]
-where $\Gamma$ and $\Delta$ are finite (possibly empty) sets of !p{formula} of the language $\Lang L$. The !p{formula} in $\Gamma$ are the \emph{antecedent formulae}, while the formulae in $\Delta$ are the \emph{succedent formulae}. 
+where $\Gamma$ and $\Delta$ are finite (possibly empty) sets of !p{sentences} of the language $\Lang L$. The !p{formula} in $\Gamma$ are the \emph{antecedent formulae}, while the formulae in $\Delta$ are the \emph{succedent formulae}. 
 
 The intuitive idea behind a sequent is: if all of the antecedent !p{formula} hold, then some of the succedent !p{formula} hold. That is, if $\Gamma = \{ \Gamma_1,\ldots,\Gamma_m\}$ and $\Delta = \{ \Delta_1,\ldots, \Delta_n\}$, then $\Gamma \Sequent \Delta$ abbreviates
 \[ \Gamma_1 \land \cdots \land \Gamma_m \lif \Delta_1 \lor \cdots \lor \Delta_n \]
 
 When $m=0$, $\hspace{1em} \Sequent \Delta$ means that $\Delta_1 \lor \cdots \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \hspace{1em}$ means that $\Gamma_1 \land \cdots \land \Gamma_m$ gives a contradiction. An empty succedent is sometimes filled with the $\lfalse$ symbol. The empty sequent $\hspace{1em} \Sequent \hspace{1em}$ canonically represents a contradiction.
 \end{defn}
+
+We write $\Gamma, !A$ (or $!A, \Gamma$) for $\Gamma \cup \{!A\}$, and
+$\Gamma, \Delta$ for $\Gamma \cup \Delta$.
 
 \begin{defn}[Inference]
 An \emph{inference} is an expression of the form
@@ -44,7 +45,7 @@ where $S, S_1$, and $S_2$ are sequents. $S_1$ and $S_2$ are called \emph{upper s
 Inferences represent the idea that whenever the upper sequent(s) is (are) asserted, from it, we may logically infer the lower sequent.
 \end{defn}
 
-For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite sets of !p{formula}, and let $!A, !B, !C, !D, \ldots$ represent individual !p{formula}.
+For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite sets of !p{sentence}.
 
 The rules for $\Log{LK}$ are divided into two main types: \emph{structural} rules and \emph{logical} rules. The logical rules are further divided into \emph{propositional} rules (quantifier-free) and \emph{quantifier} rules.\\ 
 
@@ -64,32 +65,6 @@ Weakening:
 \]
 where $!A$ is called the \emph{weakening !!{formula}}.
 
-Contraction:
-\[
-\Axiom$ !A, !A, \Gamma \fCenter \Delta $
-\UnaryInf$ !A, \Gamma \fCenter \Delta $
-\DisplayProof
-\quad
-\textrm{  and  }
-\quad
-\Axiom$ \Gamma \fCenter \Delta, !A, !A $
-\UnaryInf$ \Gamma \fCenter \Delta, !A$
-\DisplayProof
-\]
-
-Interchange:
-\[
-\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
-\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta$
-\DisplayProof
-\quad
-\textrm{  and  }
-\quad
-\Axiom$ \Gamma \fCenter \Delta, !A, !B, \Lambda $
-\UnaryInf$ \Gamma \fCenter \Delta, !B, !A, \Lambda$
-\DisplayProof
-\]
-The above three inferences can be trivial and numerous, and are  often denoted simply by a double line between the upper lower sequents.\\
 
 Cut:
 \[
@@ -167,49 +142,60 @@ The rules are named by the logical symbol of the \emph{principal !!{formula}} of
 \emph{Quantifier Rules:}
 
 \[
-\Axiom$ F(t), \Gamma \fCenter \Delta$
+\Axiom$ !A(t), \Gamma \fCenter \Delta$
 \RightLabel{$\lforall$ left}
-\UnaryInf$ \lforall[x] F(x),\Gamma \fCenter \Delta$
+\UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
 \DisplayProof
 \quad
-\Axiom$ \Gamma \fCenter \Delta, F(a) $
+\Axiom$ \Gamma \fCenter \Delta, !A(a) $
 \RightLabel{$\lforall$ right}
-\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x] F(x)$
+\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
 \DisplayProof
 \]
-
-Where $t$ is a term, and $a$ is a constant which does not occur anywhere in the lower sequent of the $\lforall[]$ right rule. We call $a$ the \emph{eigenvariable}.
+where $t$ is a ground term, and $a$ is a constant which does not occur
+anywhere in the lower sequent of the $\lforall[]$ right rule. We call
+$a$ the \emph{eigenvariable} of the $\forall$ right inference.
 
 \[
-\Axiom$ F(a), \Gamma \fCenter \Delta $
-\RightLabel{$\lexists$ left}
-\UnaryInf$ \lexists[x] F(x), \Gamma \fCenter \Delta$
+\Axiom$ !A(a), \Gamma \fCenter \Delta $
+\RightLabel{$\lexists$ left}   
+\UnaryInf$ \lexists[x][!A(x)], \Gamma \fCenter \Delta$
 \DisplayProof
 \quad
-\Axiom$ \Gamma \fCenter \Delta, F(t) $
+\Axiom$ \Gamma \fCenter \Delta, !A(t) $
 \RightLabel{$\lexists$ right}
-\UnaryInf$ \Gamma \fCenter \Delta, \lexists[x] F(x)$
+\UnaryInf$ \Gamma \fCenter \Delta, \lexists[x][!A(x)]$
 \DisplayProof
 \]
-Where $t$ is a term, and $a$ is a constant which does not occur in the lower sequent of the $\lexists$ left rule. Again, we call $a$ the \emph{eigenvariable}. 
+where $t$ is a ground term, and $a$ is a constant which does not occur
+in the lower sequent of the $\lexists$ left rule. We call $a$
+the \emph{eigenvariable} of the $\lexists$ left inference.
 
-The condition that an eigenvariable not occur in the upper sequent of the $\lforall$ right/$\lexists$ left rule is called the \emph{eigenvariable condition}.
+The condition that an eigenvariable not occur in the upper sequent of
+the $\lforall$ right or $\lexists$ left inference is called the
+\emph{eigenvariable condition}.
+
+\begin{explain}
+We use the term ``eigenvariable'' even though $a$ in the above rules
+is a constant. This has historical reasons.
+\end{explain}
 
 \begin{defn}[initial sequent]
-An \emph{initial sequent} is a sequent of the form $!A \Sequent !A$ for any !!{formula} $!A$ in the language.
+An \emph{initial sequent} is a sequent of the form $!A \Sequent !A$
+for any !!{sentence} $!A$ in the language.
 \end{defn}
 
 \begin{defn}[LK derivation]
 An $\Log{LK}$-derivation of a sequent $S$ is a tree of sequents satisfying the following conditions:
 \begin{enumerate}
-\item The topmost sequents of the tree are initial sequents
+\item The topmost sequents of the tree are initial sequents.
 \item Every sequent in the tree (except $S$) is an upper sequent of an inference whose lower sequent stands directly below that sequent in the tree.
 \end{enumerate}
 We then say that $S$ is the \emph{end-sequent} of the derivation and that $S$ is \emph{derivable in $\Log{LK}$} (or $\Log{LK}$-derivable).
 \end{defn}
 
 \begin{defn}[LK theorem]
-A !!{formula} $!A$ is a \emph{theorem} of $\Log{LK}$ if the sequent $\hspace{1em} \Sequent !A$ is $\Log{LK}$-derivable.
+A !!{sentence} $!A$ is a \emph{theorem} of $\Log{LK}$ if the sequent $\hspace{1em} \Sequent !A$ is $\Log{LK}$-derivable.
 \end{defn}
 
 
