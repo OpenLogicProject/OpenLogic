@@ -1,0 +1,176 @@
+% Part: first-order-logic
+% Chapter: model-theory
+% Section: nonstandard-arithmetic
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mod}{nsa}
+\section{Non-standard Models of Arithmetic}
+
+\begin{defn}
+  Let $\Lang{L}_N$ be the language of arithmetic, comprising a
+  !!{constant} $\mathbf{0}$, a 2-place !!{predicate} $<$, a 1-place
+  !!{function} $s$, and 2-place !p{function} $+$ and
+  $\times$. 
+  \begin{enumerate}
+  \item The \emph{standard model} of arithmetic is the !!{structure}
+    $\Struct{N}$ for $\Lang{L}_N$ having $\Nat = \{ 0, 1, 2,
+    \dots\}$ and interpreting $\mathbf{0}$ as $0$, $<$ as the
+    less-than relation over $\Nat$, and $s$, $+$ and $\times$ as
+    successor, addition, and multiplication over $\Nat$,
+    respectively.
+  \item \emph{True arithmetic} is the theory
+    $\Theory{N})$.
+  \end{enumerate}
+\end{defn}
+
+When working in $\Lang{L}_n$ we abbreviate each term of
+the form $s \cdots s\mathbf{0}$, with $n$ applications of the
+successor function to $\mathbf{0}$, as $\mathbf{n}$.
+
+\begin{defn}
+  A !!{structure} $\Struct{M}$ for $\Lang{L}_N$ is \emph{standard} if
+  and only $\Struct{N} \iso \Struct{M}$.
+\end{defn}
+
+\begin{thm}\ollabel{thm:non-std}
+  There are non-standard !!{enumerable} models of true arithmetic.
+\end{thm}
+
+\begin{proof}
+  Expand $\Lang{L}_N$ by introducing a new constant, $c$, and
+  consider the theory 
+  \[
+  \Theory{N}) \cup \{\mathbf{n} < c
+  : n \in \Nat \}.
+  \]
+  The theory is finitely satisfiable, so by compactness it has a model
+  $\Struct{M}$, which can be taken to be !!{enumerable} by the Downward
+  L\"owenheim-Skolem theorem. Where $M$ is the domain of
+  $\Struct{M}$, let $\Struct{M}$ interpret the non-logical
+  constants of $\Lang{L}$ as $\mathbf{z} \in M$, ${\prec} \subseteq
+  M^2$, $* : M \to M$, and $\oplus, \otimes : M^2 \to M$. For
+  each $x \in M$, we write $x^*$ for the element of $M$ obtained from
+  $x$ by application of $*$.
+
+  Now, if $h$ were an isomorphism of $\Struct{N}$ and $\Struct{M}$,
+  there would be $n \in \Nat$ such that $h(n) = c^\Struct{M}$.  So let
+  $s$ be any assignment in $\Struct{N}$ such that $s(x) = n$ (we use
+  $s$ both for the successor symbol in $\Lang{L}_N$ and the
+  assignment: no confusion should arise). Then
+  $\Sat{N}{\eq[\mathbf{n}][x]}[s]$; by the proof of \olref[iso]{thm:isom},
+  also $\Sat{M}{\eq[\mathbf{n}][x]}[h\circ s]$, so that $\Assign{c}{M}
+  = \mathbf{z}^{*\cdots *}$ (with $*$ iterated $n$ times). But this is
+  impossible since by assumption $\Sat{M}{\mathbf{n} < c}$ and $\prec$
+  is irreflexive. So $\Struct{M}$ is non-standard.
+\end{proof}
+
+Since the non-standrd model $\Struct{M}$ from \olref{thm:non-std} is
+elementarily equivalent to the standard one, a number of properties of
+$\Struct{M}$ can be derived. The rest of this section is devoted to
+such a task, which will allow us to obtain a precise characterization
+of !!{enumerable} non-standard models of $\Theory{N})$.
+
+
+\begin{enumerate}
+\item No member of $M$ is $\prec$-less than itself: the sentence
+  $\lforall[x][\lnot x < x]$ is true in $\Struct{N}$ and therefore in
+  $\Struct{M}$.
+\item By a similar reasoning we obtain that $\prec$ is a \emph{linear
+    ordering} of $M$, i.e., a total, irreflexive, transitive relation
+  on $M$. 
+\item The element $\mathbf{z}$ is the $\prec$-least element of $M$.
+\item Any member of $M$ is $\prec$-less than its $*$-successor and
+  $x^*$ is the $\prec$-least member of $M$ greater than $x$.
+\item $\Struct{M}$ contains an initial segment (of $\prec$)
+  isomorphic to $\Nat$: $\mathbf{z}, \mathbf{z}^*,
+  \mathbf{z}^{**}, \dots$, which we call the \emph{standard part} of
+  $M$. Any other member of $M$ is \emph{non-standard}. There must be
+  non-standard members of $M$, or else the function $h$ from
+  the proof of \olref{thm:non-std} is an isomorphism.  We use
+  $n, m, \dots$ as !p{variable} ranging on this standard part of
+  $\Struct{M}$.
+\item Every non-standard element is greater than any standard one;
+  this is because for every $n \in \Nat$,
+  \[
+  \Sat{N}{\lforall[z][(\lnot(\eq[z][\mathbf{0}] \lor
+  \dots \lor \eq[z][\mathbf{n}]) \lif \mathbf{n} < z)]},
+  \]
+  so if $z \in M$ is different from all the standard elements, it must
+  be \emph{greater} than all of them. 
+\item Any member of $M$ other than $\mathbf{z}$ is the $*$-successor
+  of some unique element of $M$, denoted by $^*x$. If $x = y^*$ then
+  both $x$ and $y$ are standard if one of them is (and both
+  non-standard if one of them is).
+\item Define an equivalence relation $\approx$ over $M$ by saying
+  that $x \approx y$ if and only if for some \emph{standard} $n$,
+  either $x \oplus n = y$ or $y \oplus n =x$. In other words, $x
+  \approx y$ if and only if $x$ and $y$ are a finite distance
+  apart. If $n$ and $m$ are standard then $n \approx m$. Define the
+  \emph{block} of $x$ to be the equivalence class $[x] = \{y: x
+  \approx y \}$. 
+\item Suppose that $x \prec y$ where $x \not\approx y$; then either
+  $x^* \prec y$ or $x^* = y$; the latter is impossible because it
+  implies $x \approx y$, so $x \prec y$. Similarly, if $x \prec y$ and
+  $x \not\approx y$, then $x \prec {^*y}$. Therefore if $x \prec y$
+  and $x \not\approx y$, then every $w \approx x$ is $\prec$-less than
+  every $v \approx y$. Accordingly, each block $[x]$ forms a doubly
+  infinite chain
+  \[
+  \cdots \prec  {^{**}x} \prec {^*}x \prec x \prec x^* \prec x^{**}
+  \prec \cdots
+  \]
+  which is referred to as a $Z$-chain because it has the order type of
+  the integers.
+\item The $\prec$ ordering can be lifted up the blocks: if $x \prec y$
+  then the block of $x$ is less than the block of $y$. A block is
+  \emph{non-standard} if it contains a non-standard element. The
+  standard block is the least block. 
+\item There is no least non-standard block: if $y$ is non-standard
+  then there is a $x \prec y$ where $x$ is also non-standard and $x
+  \not\approx y$. Proof: in the standard model $\Struct{N}$, every
+  number is divisible by two, possibly with remainder one. By
+  elementary equivalence, for every $y \in M$ there is $x \in M$ such
+  that either $x \oplus x = y$ or  $x \oplus x \oplus
+  \mathbf{z}^*= y$. If $x$ were standard, then so would be $y$; so $x$
+  is non-standard. And $x \not\approx y$ for if $x \oplus n = y$
+  for some standard $n$ then (say) $x \oplus n = x \oplus x$, whence
+  $x = n$ by the cancellation law for addition (which holds in
+  $\Struct{N}$ and therefore in $\Struct{M}$ as well), and $x$
+  would be standard after all. (Similarly if  $x \oplus x \oplus
+  \mathbf{z}^*= y$.)
+\item By a similar argument, there is no greatest block. 
+\item The ordering of the blocks is dense: if $[x]$ is less than $[y]$
+  (where $x \not\approx y$), then there is a block $[z]$ distinct from
+  both that is between them. Suppose $x \prec y$. As before, $x
+  \oplus y$ is divisible by two (possibly with remainder) so there
+  is a $u \in M$ such that either $x \oplus y = u \oplus u$ or
+  $x \oplus y = u \oplus u \oplus \mathbf{z}^*$. The element
+  $u$ is the average of $x$ and $y$, and so is between them. Assume $x
+  \oplus y = u \oplus u$ (the other case being similar): if $u
+  \approx x$ then for some standard $n$:
+  \[
+  x \oplus y = x \oplus n \oplus x \oplus n,
+  \]
+  so $y = x \oplus n \oplus n$ and we would have $x \approx y$,
+  against assumption. We conclude that $u \not\approx x$. A similar
+  argument gives $u \not\approx y$.
+\end{enumerate}
+The non-standard blocks  are therefore ordered like the rationals:
+they form a !!{enumerable} linear ordering without endpoints.  It follows
+that any two !!{enumerable} non-standard models, $\Struct{M}_1$ and
+$\Struct{M}_2$, of true arithmetic are isomorphic. Indeed, an
+isomorphism $h$ can be defined as follows: the standard parts
+of $\Struct{M}_1$ and $\Struct{M}_2$ are isomorphic to the standard
+model $\Struct{N}$ and hence to each other. The blocks making up
+the non-standard part are themselves ordered like the rationals and
+therefore by \olref[dlo]{thm:cantorQ} are isomorphic; an isomorphism
+of the blocks can be extended to an isomorphism \emph{within} the
+blocks by matching up arbitrary elements in each, and then taking the
+image of the successor of $x$ in $\Struct{M}_1$ to be the successor
+of the image of $x$ in $\Struct{M}_2$. 
+
+
+\end{document}

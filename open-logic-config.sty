@@ -170,7 +170,7 @@
 % assignment) isprovided as the command `\Sat` with two mandatory
 % arguents (the structure and the formula) and one optional argument
 % (the assignment).  Use `\Sat/` to create the negated relation.  By
-% default, `\Sat{M}{!A}[s]` istypeset as $\mathfrak{M}, s\models
+% default, `\Sat{M}{!A}[s]` is typeset as $\mathfrak{M}, s \models
 % \varphi$.
 
 \DeclareDocumentCommand \Sat { t{/} m m o } {
@@ -208,11 +208,16 @@
 
 % `\Entails` is the semantic counterpart of `\Proves`. 
 
-\DeclareDocumentCommand \Entails { o } {
-    \IfNoValueTF {#1} 
+\DeclareDocumentCommand \Entails { t{/} o } {
+  \IfBooleanTF {#1}{
+    \IfNoValueTF {#2} 
+        { \not\models }
+        { \not\models_{#2} }}{
+    \IfNoValueTF {#2} 
         { \models }
-        { \models_{#1} }
+        { \models_{#2} }}
 }
+
 
 % ### Model-theoretic notions and symbols
 
@@ -243,10 +248,43 @@
 
 \DeclareDocumentMacro \substruct {\subseteq}
 
+% - `\Theory`: theory of a structure
+
+\DeclareDocumentCommand \Theory { m } {\mathrm{Th}(\Struct{#1})}
+
+% - `\elemequiv`: elementary equivalence (infix realtion)
+
+\DeclareDocumentCommand \elemequiv { t{/} o } {
+  \IfBooleanTF {#1}{
+    \IfNoValueTF {#2} 
+        { \not\equiv }
+        { \not\equiv_{#2} }}{
+    \IfNoValueTF {#2} 
+        { \equiv }
+        { \equiv_{#2} }}
+}
+
+% `\iso`: relation of (partial) isomorphism
+
+\DeclareDocumentCommand \iso { t{/} o } {
+  \IfBooleanTF {#1}{
+    \IfNoValueTF {#2} 
+        { \not\simeq }
+        { \not\simeq_{#2} }}{
+    \IfNoValueTF {#2} 
+        { \simeq }
+        { \simeq_{#2} }}
+}
+
+
+
 % - `\ident`: syntactic identity between expressions (infix realtion)
 
 \DeclareDocumentMacro \ident {\equiv}
 
+% `\QuantRank`: quantifier rank of a formula
+
+\DeclareDocumentCommand \QuantRank { m } {\mathrm{qr}(#1)}
 
 
 % Special Sets and Mathematical Symbols
@@ -340,6 +378,10 @@
 %  followed by argumnets surrounded by parentheses. Some prefer no
 %  parentheses around the arguments.
 \DeclareDocumentCommand \Atom { m m }{ #1(#2) }
+
+% - `\PIso` - Set of all partial isomorphisms
+\DeclareDocumentCommand \PIso { m }{\mathcal{#1}}
+
 
 
 
