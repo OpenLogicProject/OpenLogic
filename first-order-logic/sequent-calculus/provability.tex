@@ -326,5 +326,42 @@ right inference, we obtain a proof of $\Gamma \Sequent
 and thus the eigenvariable condition is satisfied.
 \end{proof}
 
+\begin{thm}
+\ollabel{thM:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{If $\Gamma \Proves !A(t)$ then $\Gamma \Proves
+  \lexists[x][!A(x)]$}{} 
 
+\tagitem{prvAll}{If $\Gamma \Proves \lnot !A(t)$ then $\Gamma \Proves
+  \lnot \lforall[x][!A(x)]$}{}
+\end{tagenumerate}
+\end{thm}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{Suppose $\Gamma \Proves !A(t)$. Then for some
+  finite~$\Gamma_0 \subseteq \Gamma$, $\Log{LK}$ derives $\Gamma_0
+  \Sequent !A(t)$. Add an $\lexists$ right inference to get a
+  derivation of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
+\tagitem{prvAll}{Suppose $\Gamma \Proves \lnot !A(t)$. Then there is a
+  finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation
+  $\Pi$ of $\Gamma_0 \Sequent \lnot !A(t)$.  Then
+
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\Pi$}
+\Deduce$\Gamma_0 \fCenter  \lnot !A(t)$
+\Axiom$!A(t) \fCenter !A(t)$
+\RightLabel{$\lforall$ right}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(t)$
+\RightLabel{$\lnot$ left}
+\UnaryInf$\lnot !A(t), \lforall[x][!A(x)]  \fCenter$
+\RightLabel{$\lnot$ right}
+\UnaryInf$\lnot !A(t) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{cut}
+\BinaryInf$\Gamma_0 \fCenter  \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+shows that $\Gamma_0 \Proves  \lnot \lforall[x][!A(x)]$.}{}
+\end{tagenumerate}
+\end{proof}
 \end{document}
