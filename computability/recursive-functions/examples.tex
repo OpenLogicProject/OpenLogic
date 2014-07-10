@@ -23,7 +23,7 @@ Here are some examples of primitive recursive functions:
 
 \item Exponentiation, $x^y$ (with $0^0$ defined to be $1$)
 
-\item Factorial, $x!$
+\item Factorial, $x\fac$
 
 \item The predecessor function, $\fn{pred}(x)$, defined by
 \[
@@ -42,7 +42,7 @@ x \tsub 0 = x, \quad x \tsub (y+1) = \fn{pred}(x \tsub y)
 
 \item Minimum, $\fn{min}(x,y)$
 
-\item Distance between $x$ and $y$, $|x-y|$
+\item Distance between $x$ and $y$, $\left|x-y\right|$
 \end{enumerate}
 
 The set of primitive recursive functions is further closed under the
@@ -100,7 +100,8 @@ recursion by
 It should be clear that one can compose relations with other primitive
 recursive functions. So the following are also primitive recursive:
 \begin{enumerate}
-\item The equality relation, $x = y$, defined by $\fn{Zero}(|x - y|)$
+\item The equality relation, $x = y$, defined by $\fn{Zero}(\left|x -
+  y\right|)$
 \item The less-than relation, $x \leq y$, defined by $\fn{Zero}(x
   \tsub y)$
 \end{enumerate}
@@ -206,24 +207,24 @@ All this provides us with a good deal of machinery to show that
 natural functions and relations are primitive recursive. For example,
 the following are all primitive recursive:
 \begin{enumerate}
-\item The relation ``$x$ divides $y$'', written $x | y$, defined by
+\item The relation ``$x$ divides $y$'', written $x \mid y$, defined by
 \[
-x | y \defiff \lexists[z \leq y][(x \cdot z) = y].
+x \mid y \defiff \lexists[z \leq y][(x \cdot z) = y].
 \]
 
 \item The relation $\fn{Prime}(x)$, which holds iff $x$ is prime,
   defined by
 \[
-\fn{Prime}(x) \defiff (x \geq 2 \land \lforall[y \leq x][(y | x \lif y
+\fn{Prime}(x) \defiff (x \geq 2 \land \lforall[y \leq x][(y \mid x \lif y
   = 1 \lor y = x))].
 \]
 \item The function $\fn{nextPrime(x)}$, which returns the first prime
   number larger than $x$, defined by
 \[
-  \fn{nextPrime(x)} = \fn{min} \; {y \leq x!+1} \\ (y > x \land \fn{Prime}(y))
+  \fn{nextPrime(x)} = \fn{min} \; {y \leq x\fac+1} \\ (y > x \land \fn{Prime}(y))
 \]
 Here we are relying on Euclid's proof of the fact that there is always
-a prime number between $x$ and $x!+1$.
+a prime number between $x$ and $x\fac+1$.
 
 \item The function $p(x)$, returning the $x$th prime, defined by $p(0)
   = 2, p(x+1) = \fn{nextPrime}(p(x))$. For convenience we will write
