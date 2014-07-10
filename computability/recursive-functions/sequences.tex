@@ -1,0 +1,115 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: sequences
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{seq}
+\olsection{Sequences}
+
+The set of primitive recursive functions is
+remarkably robust. But we will be able to do even more once we have
+developed an adequate means of handling \emph{sequences}.  We will
+identify finite sequences of natural numbers with natural numbers, in
+the following way: the sequence $\langle a_0, a_1, a_2, \dots, a_k \rangle$
+corresponds to the number
+\[
+p_0^{a_0} \cdot p_1^{a_1} \cdot p_2^{a_2} \cdot \dots \cdot
+p_k^{a_k+1}.
+\]
+We add one to the last exponent, to guarantee that, for example,
+the sequences $\langle 2, 7, 3\rangle$ and $\langle 2, 7, 3, 0, 0 \rangle$ have
+distinct numeric codes. I will take both 0 and 1 to code the empty
+sequence; for concreteness, let $\emptyset$ denote $0$.
+
+Let us define the following functions:
+\begin{enumerate}
+\item $\fn{length}(s)$, which returns the length of the sequence $s$:
+\[
+\fn{length}(s) = 
+\begin{cases} 
+0 & \text{if $s = 0$ or $s = 1$} \\
+\fn{min} \; i < s \; (p_i | s \land \lforall[j < s][(j > i \lif
+    p_j \not | s)])+1 & \text{otherwise}
+\end{cases}
+\]
+Note that we need to bound the search on $i$; clearly $s$ provides an
+acceptable bound.
+
+\item $\fn{append}(s,a)$, which returns the result of appending $a$ to
+  the sequence $s$:
+\[
+\fn{append}(s,a) = 
+\begin{cases}
+  2^{a+1} & \text{if $s = 0$ or $s = 1$} \\
+\frac{s \cdot p_{\len(s)}^{a+1}}{p_{\len(s)-1}} & \text{otherwise}
+\end{cases}
+\]
+\item $\fn{element}(s,i)$, which returns the $i$th element of $s$
+  (where the initial element is called the $0$th), or $0$ if $i$ is
+  greater than or equal to the length of $s$:
+\[
+\fn{element}(s,i) = 
+\begin{cases}
+  0 & \mbox{if $i \geq \fn{length}(s)$} \\
+  \fn{min} \; {j < s} \; (p_i^{j+1} \not | s)-1  & \text{if $i+1 = 
+    \fn{length}(s)$} \\
+  \fn{min} \; {j < s} \; (p_i^{j+1} \not | s)  & \text{otherwise}
+\end{cases}
+\]
+\end{enumerate}
+
+\begin{prob}
+Define integer division using minimization.
+\end{prob}
+
+Instead of using the official names for the functions defined above,
+we introduce a more compact notation.  We will use $(s)_i$ instead of
+$\fn{element}(s,i)$, and $\langle s_0, \dots, s_k\rangle$ to abbreviate
+$\fn{append}(\fn{append}(\dots \fn{append}(\emptyset,s_0)
+\dots),s_k)$. Note that if $s$ has length $k$, the elements of $s$ are
+$(s)_0$, \dots,~$(s)_{k-1}$.
+
+It will be useful for us to be able to bound the numeric code of a
+sequence, in terms of its length and its largest element. Suppose $s$
+is a sequence of length $k$, each element of which is less than equal
+to some number $x$. Then $s$ has at most $k$ prime factors, each at
+most $p_{k-1}$, and each raised to at most $x+1$ in the prime
+factorization of $s$. In other words, if we define
+\[
+\fn{sequenceBound}(x,k) = p_{k-1}^{k \cdot (x+1)},
+\]
+then the numeric code of the sequence, $s$, described above, is at
+most $\fn{sequenceBound}(x,k)$.
+
+Having such a bound on sequences gives us a way of defining new
+functions using bounded search. For example, suppose we want to
+define the function $\fn{concat}(s,t)$, which concatenates two
+sequences. One first option is to define a ``helper'' function
+$\fn{hconcat}(s,t,n)$ which concatenates the first $n$ symbols of $t$
+to $s$. This function can be defined by primitive recursion, as
+follows:
+\begin{enumerate}
+\item $\fn{hconcat}(s,t,0) = s$
+\item $\fn{hconcat}(s,t,n+1) = \fn{append}(\fn{hconcat}(s,t,n),(t)_n)$
+\end{enumerate}
+Then we can define $\fn{concat}$ by 
+\[
+\fn{concat}(s,t) = \fn{hconcat}(s,t,\fn{length}(t)).
+\]
+But using bounded search, we can be lazy. All we need to do is write
+down a primitive recursive \emph{specification} of the object (number)
+we are looking for, and a bound on how far to look. The following works:
+\begin{multline*}
+  \fn{concat}(s,t) = \fn{min} \; {v < \fn{sequenceBound}(s+t,\fn{length}(s) +
+    \fn{length}(t))} \\
+  (\fn{length}(v) = \fn{\len}(s) + \fn{length}(t) \land \\
+  \lforall[i < \fn{length}(s)][((v)_i = (s)_i) \land \lforall[j <
+    \fn{length}(t)][((v)_{\len(s)+j} = (t)_j)])]
+\end{multline*}
+We will write $s \concat t$ instead of $\fn{concat}(s,t)$.
+
+\end{document}
+
