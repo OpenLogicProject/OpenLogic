@@ -1,0 +1,38 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: theory-q
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{thq}
+\olsection{The Theory $\Th{Q}$}
+
+The language of $\Th{Q}$ is the language of
+arithmetic; $\Th{Q}$ consists of the following axioms
+(to be used in conjunction with the other axioms and rules of
+first-order logic with !!{identity}):
+\begin{enumerate}
+\item $x' = y' \lif x = y$
+\item $\eq/[0][x']$
+\item $\eq/[x][0] \lif \lexists[y][\eq[x][y']]$
+\item $x+0 = x$
+\item $x+ y' = (x+y)'$
+\item $x \times 0 = 0$
+\item $x \times y' = x \times y + x$
+\item $x < y \liff \lexists[z][(z' + x) = y]$
+\end{enumerate}
+For each natural number $n$, define the numeral $\bar n$ to be the
+term $0^{''\ldots'}$ where there are $n$ tick marks in all.
+
+As a theory of arithmetic, $Q$ is \emph{extremely} weak; for example,
+you can't even prove very simple facts like $\lforall[x][\eq/[x][x']]$
+or $\lforall[x][\lforall[y][(x+ y) = (y+x)]]$.  But we will see that
+much of the reason that $Q$ is so interesting is \emph{because} it is
+so weak, in fact, just barely strong enough for the incompleteness
+theorem to hold; and also because it has a \emph{finite} set of
+axioms.
+
+\end{document}
+
