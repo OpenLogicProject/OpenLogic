@@ -57,11 +57,11 @@ Suppose $\Gamma$ is maximally consistent. Then:
 \item \ollabel{prop:mcs-either-or} For any $!A$, either $!A \in
   \Gamma$ or $\lnot !A \in \Gamma$.
 
-\tagitem{prvOr}{\ollabel{prop:mcs-or} $!A \lor !B \in \Gamma$ iff
-  either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
-
 \tagitem{prvAnd}{\ollabel{prop:mcs-and} $!A \land !B \in \Gamma$
   iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:mcs-or} $!A \lor !B \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
 
 \tagitem{prvIf}{\ollabel{prop:mcs-if} $!A \lif !B \in \Gamma$ iff
   either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
@@ -94,6 +94,23 @@ both inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma
 $\Gamma$ is inconsistent, a contradiction.  Hence there cannot be such
 a $!A$ and, for every $!A$, $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
 
+\tagitem{defAnd}{}{
+\iftag{probAnd}{Exercise.}{
+$!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
+
+For the forward direction, let $!A \land !B \in \Gamma$. Then $\Gamma
+\Proves !A \land !B$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-left},
+$\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
+\olref{prop:mcs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
+required.
+
+For the reverse direction, let $!A \in \Gamma$ and $!B \in
+\Gamma$. Then $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-right},
+$\Gamma \Proves !A \land !B$. By \olref{prop:mcs-prov-in}, $!A \land
+!B \in \Gamma$.}}
+
 \tagitem{defOr}{}{
 \iftag{probOr}{Exercise.}{
 $!A \lor !B \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$.
@@ -112,23 +129,6 @@ For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-right},
 $\Gamma \Proves !A \lor !B$.  By \olref{prop:mcs-prov-in}, $!A \lor !B
 \in \Gamma$, as required.}}
-
-\tagitem{defAnd}{}{
-\iftag{probAnd}{Exercise.}{
-$!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
-
-For the forward direction, let $!A \land !B \in \Gamma$. Then $\Gamma
-\Proves !A \land !B$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-left},
-$\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
-\olref{prop:mcs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
-required.
-
-For the reverse direction, let $!A \in \Gamma$ and $!B \in
-\Gamma$. Then $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-right},
-$\Gamma \Proves !A \land !B$. By \olref{prop:mcs-prov-in}, $!A \land
-!B \in \Gamma$.}}
 
 \tagitem{defIf}{}{
 \iftag{probIf}{Exercise.}{
