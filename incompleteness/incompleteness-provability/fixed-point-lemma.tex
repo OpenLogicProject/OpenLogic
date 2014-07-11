@@ -1,0 +1,84 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: fixed-point-lemma
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{fix}
+
+\olsection{The Fixed-Point Lemma}
+
+Let $\fn{diag}(y)$ be the computable (in fact, primitive recursive)
+function that does the following: if $y$ is the code of a formula
+$!B(x)$, $\fn{diag}(y)$ returns a code of $!B(\gn{!B(x)})$. If
+$\Obj{diag}$ were a function symbol in $\Th{T}$ representing the
+function $\fn{diag}$, we could take $!A$ to be the formula
+$!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$. Notice that
+\begin{eqnarray*}
+\fn{diag}(\#(!B(\Obj{diag}(x)))) & = & 
+\#(!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))
+\\
+& = & \#(!A).
+\end{eqnarray*}
+Assuming $\Th{T}$ can prove
+\[
+\Obj{diag}(\gn{!B(\Obj{diag}(x))}) = \gn{!A},
+\]
+it can prove $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))
+\liff !B(\gn{!A})$. But the left hand side is, by
+definition, $!A$.
+
+In general, $\Obj{diag}$ will not be a function symbol of
+$\Th{T}$. But since $\Th{T}$ extends $\Th{Q}$, the function
+$\fn{diag}$ will be {\em represented} in $\Th{T}$ by some formula
+$!D_{\fn{diag}}(x,y)$. So instead of writing $!B(\Obj{diag}(x))$ we
+will have to write $\lexists[y][(!D_{\fn{diag}}(x,y) \land
+  !B(y))]$. Otherwise, the proof sketched above goes through.
+
+\begin{lem}
+  Let $\Th{T}$ be any theory extending $\Th{Q}$, and let $!B(x)$ be any
+  formula with free variable $x$. Then there is a sentence $!A$ such
+  that $\Th{T}$ proves $!A \liff !B(\gn{!A})$.
+\end{lem}
+
+
+\begin{proof}
+Given $!B(x)$, let $!E(x)$ be the formula
+$\lexists[y][(!D_{\fn{diag}}(x,y) \land !B(y))]$ and let $!A$ be the
+formula $!E(\gn{!E(x)})$.
+
+Since $!D_{\fn{diag}}$ represents $\fn{diag}$, $\Th{T}$ can prove
+\[
+\lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \liff
+  \eq[y][\num{\fn{diag}(\gn{!E(x)})}])].
+\]
+But by definition, 
+$\fn{diag}(\#(!E(x))) = \#(!E(\gn{!E(x)})) =
+\#(!A)$, so $\Th{T}$ can prove
+\[
+\lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \liff \eq[y][\gn{!A}])].
+\]
+Going back to the definition of $!E(x)$, we see
+$!E(\gn{!E(x)})$ is just the formula
+\[
+\lexists[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \land !B(y))].
+\]
+Using the last two sentences and ordinary first-order logic, one can
+then prove
+\[
+!E(\gn{!E(x)}) \liff !B(\gn{!A}).
+\]
+But the left-hand side is just $!A$. 
+\end{proof}
+
+\begin{digress}
+You should compare this to the proof of the fixed-point lemma in
+computability theory. The difference is that here we want to define a
+{\em statement} in terms of itself, whereas there we wanted to define
+a {\em function} in terms of itself; this difference aside, it is
+really the same idea.
+\end{digress}
+
+\end{document}

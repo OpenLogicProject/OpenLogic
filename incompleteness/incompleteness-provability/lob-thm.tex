@@ -1,0 +1,97 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: lob-thm
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{lob}
+
+\olsection{L\"ob's Theorem}
+
+\newcommand{\pt}{\fn{Prov}_T}
+
+In this section, we will consider a fun application of the fixed-point
+lemma. We now know that any ``reasonable'' theory of arithmetic is
+incomplete, which is to say, there are sentences $!A$ that are neither
+provable nor refutable in the theory. One can ask whether, in general,
+a theory can prove ``If I can prove $!A$, then it must be true.'' The
+answer is that, in general, it can't. More precisely, we have:
+
+\begin{thm}
+  Let $\Th{T}$ be any theory extending $\Th{Q}$, and suppose
+  $\OProv[T](y)$ is a formula satisfying conditions 1--3 from
+  \olref[2in]{sec}. If $\Th{T}$ proves $\OProv[T](\gn{!A}) \lif !A$,
+  then in fact $\Th{T}$ proves $!A$.
+\end{thm}
+Put differently, if $!A$ is not provable in $\Th{T}$, $\Th{T}$ can't
+prove $\OProv[T](\gn{!A}) \lif !A$. This is known as L\"ob's theorem.
+
+The heuristic for the proof of L\"ob's theorem is a clever proof that
+Santa Claus exists. (If you don't like that conclusion, you are free
+to substitute any other conclusion you would like.) Here it is:
+\begin{enumerate}
+\item Let $X$ be the sentence, ``If $X$ is true, then Santa Claus
+  exists.''
+\item Suppose $X$ is true.
+\item Then what is says is true; i.e., if $X$ is true, then
+  Santa Claus exists.
+\item Since we are assuming $X$ is true, we can conclude that
+  Santa Claus exists.
+\item So, we have shown: ``If $X$ is true, then Santa Claus exists.''
+\item But this is just the statement $X$. So we have shown that $X$ is
+  true.
+\item But then, by the argument above, Santa Claus exists.
+\end{enumerate}
+A formalization of this idea, replacing ``is true'' with ``is
+provable,'' yields the proof of L\"ob's theorem. 
+
+\begin{proof}
+Suppose $!A$ is a sentence such that $\Th{T}$ proves
+$\OProv[T](\gn{!A}) \lif !A$. Let $!B(y)$ be the formula $\OProv[T](y)
+\lif !A$, and use the fixed-point lemma to find a sentence $!D$
+such that $\Th{T}$ proves $!D \liff !B(\gn{!D})$. Then each of the
+following is provable in $\Th{T}$:
+\begin{align*}
+& !D \lif (\OProv[T](\gn{!D}) \lif !A) \\
+& \OProv[T](\gn{!D \lif (\OProv[T](\gn{!D}) \lif !A)}) && \text{by 1} \\
+& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D}) \lif !A})
+  && \text{using 2} \\
+& \OProv[T](\gn{!D}) \lif \\
+&\qquad(\OProv[T](\gn{\OProv[T](\gn{!D})}) \lif \OProv[T](\gn{!A}))
+  && \text{using 2} \\
+& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D})}) 
+  && \text{by 3} \\
+& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{!A})  \\
+& \OProv[T](\gn{!A}) \lif !A && \text{by assumption} \\
+& \OProv[T](\gn{!D}) \lif !A \\
+& !D && \text{def of $!D$} \\
+& \OProv[T](\gn{!D}) && \text{by 1} \\
+& !A \\
+\end{align*}
+\end{proof}
+
+With L\"ob's theorem in hand, there is a short proof of the first
+incompleteness theorem (for theories having a provability predicate
+satisfying 1--3): if a theory proves $\OProv[T](\gn{\eq[0][1]}) \lif
+\eq[0][1]$, it proves $\eq[0][1]$. 
+
+% Going in the other direction, for homework I
+% may ask you to work through a short proof of L\"ob's theorem, using
+% the second incompleteness theorem instead of the fixed-point lemma.
+
+\begin{prob}
+Let $\Th{T}$ be a computably axiomatized theory, and
+let $\OProv[T]$ be a provability predicate for $\Th{T}$. Consider the
+following four statements:
+\begin{enumerate}
+\item If $T \Proves !A$, then $T \Proves \OProv[T](\gn{!A})$.
+\item $T \Proves !A \lif \OProv[T](\gn{!A})$.
+\item If $T \Proves \OProv[T](\gn{!A})$, then $T \Proves !A$.
+\item $T \Proves \OProv[T](\gn{!A}) \lif !A$
+\end{enumerate}
+Under what conditions are each of these statements true?
+\end{prob}
+
+\end{document}
