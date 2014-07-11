@@ -35,6 +35,91 @@ of $\Gamma^*$ is the first-order !!{structure} defined as follows:
 $\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$
 \end{lem}
 
-% prove!
+\begin{proof}
+For the forward direction, let $\Sat{M(\Gamma^*)}{!A}$. We want to show that $!A \in \Gamma^*$. \\
+
+Base Case: If $!A$ is atomic, then $!A = R(t_1, \dots, t_n)$ for $R$ an $n$-place !!{predicate}. Hence 
+$\langle t_1, \dots, t_n \rangle \in R^{\Struct M(\Gamma^*)}$, and by the construction of $\Struct 
+M(\Gamma^*)$, $R(t_1, \dots, t_n) \in \Gamma^*$.\\
+
+Induction Hypothesis: Fix $k$ and let $!A \in \Gamma^*$ for any $!A$ with degree $<k$. \\
+
+Induction Step: Proceed by cases determined by the main connective of $!A$.
+
+\begin{enumerate}
+
+\item \tagitem{prvAnd} If $!A= !B \land !C$, then since $\Sat{M(\Gamma^*)}{!B \land !C}$, we have both 
+$\Sat{M(\Gamma^*)}{!B}$ and $\Sat{M(\Gamma^*)}{!C}$. By the induction hypothesis, we get both 
+that $!B \in \Gamma^*$ and that $!C \in \Gamma^*$. By the maximal consistency of $\Gamma^*$, 
+$!B \land !C \in \Gamma^*$.
+
+\item \tagitem{prvOr} If $!A = !B \lor !C$, then since $\Sat{M(\Gamma^*)}{!B \lor !C}$, we have at least one of 
+$\Sat{M(\Gamma^*)}{!B}$ or $\Sat{M(\Gamma^*)}{!C}$. If $\Sat{M(\Gamma^*)}{!B}$, then by the 
+induction hypothesis, $!B \in \Gamma^*$, so by the maximal consistency of $\Gamma^*$, $!B \lor !C 
+\in \Gamma^*$ (similar if $\Sat{M(\Gamma^*)}{!C}$).
+
+\item \tagitem{prvNot} If $!A=\lnot !B$, consider the following cases according to the main connective of $!B$:
+\begin{enumerate}
+
+\item \tagitem{prvNot} If $!B = \lnot !C$, then $\Sat{M(\Gamma^*)}{\lnot\lnot !C}$, so $\Sat{M(\Gamma^*)}{!C}$. 
+Thus by the induction hypothesis, $!C \in \Gamma^*$, so by the maximal consistency of 
+$\Gamma^*$, $\lnot !C \notin \Gamma^*$, so $!A = \lnot \lnot !C \in \Gamma^*$. 
+
+\item \tagitem{prvAnd} If $!B = !C \land !D$, then $\Sat/{M(\Gamma^*)}{!C}$ or $\Sat/{M(\Gamma^*)}{!D}$. If 
+$\Sat/{M(\Gamma^*)}{!C}$, then by the induction hypothesis, $\lnot !C \in \Gamma^*$, so $!C \land !D 
+\notin \Gamma^*$, hence $\lnot (!C \land !D) \in \Gamma^*$ (similar if $\Sat/{M(\Gamma^*)}{!D}$).
+
+\item \tagitem{prvOr} If $!B = !C \lor !D$, then $\Sat/{M(\Gamma^*)}{!C}$ and $\Sat/{M(\Gamma^*)}{!D}$. Hence, $!C \notin 
+\Gamma^*$ and $!D \notin \Gamma^*$, so $!C \lor !D \notin \Gamma^*$. Therefore, $\lnot (!C \lor !D) \notin 
+\Gamma^*$.
+
+\item \tagitem{prvIf} If $!B = !C \lif !D$, then $\Sat{M(\Gamma^*)}{\lnot(!C \lif !D)}$, hence $\Sat{M(\Gamma^*)}{!C}$ and 
+$\Sat{M(\Gamma^*)}{\lnot !D}$. By the induction hypothesis, $!C \in \Gamma^*$ and $\lnot !D \in 
+\Gamma^*$, so by the maximal consistency of $\Gamma^*$, $!C \lif !D \notin \Gamma^*$. Thus $\lnot 
+(!C \lif !D) \in \Gamma^*$.
+
+\item \tagitem{prvAll} If $!B=\lforall[x][!C]$, then $\Sat{M(\Gamma^*)}{\lnot \lforall[x][!C]}$. Hence, for some variable 
+assignment $s$, $\Sat/{M(\Gamma^*)}{!C}[s]$. If $s(x)=c$, then that means $\Sat/{M(\Gamma^*)}{!C(x/c)}$, 
+so by the induction hypothesis, $\lnot !C(c) \in \Gamma^*$. By \olref[seq]{thm:provability-quantifiers}, since 
+$\Gamma^* \Proves \lnot !C (c)$, we have $\Gamma^* \Proves \lnot \lforall[x][!C]$. By the maximal 
+consistency of $\Gamma^*$, $\lnot \lforall[x][!C]\in \Gamma^*$. 
+
+\item \tagitem{prvEx} If $!B = \lexists[x][!C]$, then $\Sat{M(\Gamma^*)}{\lnot \lexists[x][!C]}$. Hence, for any variable assignment 
+$s$, $\Sat/{M(\Gamma^*)}{!C}[s]$. By saturation, $\lnot \lforall[x](\lnot !C) \lif \lnot (\lnot !C(c)) \in \Gamma^*$, 
+hence $\lforall[x][\lnot !C] \in \Gamma^*$ or $!C (c) \in \Gamma^*$. The latter cannot be, since if $s'$ is the 
+variable assignment such that $s'(x)=c$, then $\Sat/{M(\Gamma^*)}{!C}[s']$ and the induction hypothesis imply 
+that $!C (c) \notin \Gamma^*$. Hence, we must have $\lforall[x][\lnot!C] \in \Gamma^*$. Since $\{ \lforall[x][\lnot !C] \} 
+\Proves \lnot \lexists[x][!C]$, by the maximal consistency of $\Gamma^*$, we conclude that $\lnot 
+\lexists[x][!C] \in \Gamma^*$. 
+
+\end{enumerate}
+
+\tagitem{prvNot} Hence, if $!A$ is a negation, the induction step goes through.
+
+\item \tagitem{prvIf} If $!A = !B \lif !C$, then $\Sat{M(\Gamma^*)}{!B \lif !C}$, so $\Sat/{M(\Gamma^*}{!B}$ or $\Sat{M 
+(\Gamma^*)}{!C}$. If we have the latter, then by the induction hypothesis, $!C \in \Gamma^*$, so $!B \lif !C \in 
+\Gamma^*$. If the former, by the same argument as in the previous case (case 4), $\lnot !B \in \Gamma^*$, hence 
+by the maximal consistency of $\Gamma^*$, $!B \notin \Gamma^*$, and $!B \lif !C \in \Gamma^*$.
+
+\item \tagitem{prvAll} If $!A= \lforall[x][!B]$. Then $\Sat{M(\Gamma^*)}{\lforall[x][!B]}$, so for every variable assignment $s$, 
+$\Sat{M(\Gamma^*)}{!B}[s]$. Suppose to the contrary that $\lforall[x][!B]\notin \Gamma^*$: then by saturation, 
+$\lnot !B(c) \in \Gamma^*$ for some $c$. However, if $s'$ is the variable assignment such that $s'(x)=c$, then 
+$s'$ would satisfy $\Sat{M(\Gamma^*)}{!B}[s']$, contradicting the earlier result that $\Sat/{M(\Gamma^*)}{!B}[s']$. 
+Therefore, we must have $\lforall[x][!B] \in \Gamma^*$.
+
+\item \tagitem{prvEx} Lastly, consider when $!A = \lexists[x][!B]$. Then for some variable assignment $s$ with $s(x)=c$, 
+$\Sat{M(\Gamma^*)}{!B}[s]$. Thus, $\Sat{M(\Gamma^*)}{!B(c)}$, and by our induction hypothesis, $!B(c) \in \Gamma^*$. 
+By \olref[seq]{thm:provability-quantifiers}, since $\Gamma^* \Proves !B(c)$, we have $\Gamma^* \Proves \lexists[x][!B]$. 
+Then, by the maximal consistency of $\Gamma^*$, we conclude that $\lexists[x][!B] \in \Gamma^*$.
+
+\end{enumerate}
+
+Therefore, the induction step for the forward direction goes through.\\
+
+For the reverse direction, let $!A \in \Gamma^*$. Suppose to the contrary that $\Sat/{M(\Gamma^*)}{!A}$. Then 
+$\Sat{M(\Gamma^*)}{\lnot !A}$, so by the forward direction of the proof, $\lnot !A \in \Gamma^*$. Contradiction: $\Gamma^*$ 
+is consistent. Hence, we must have that $\Sat{M(\Gamma^*)}{!A}$.
+
+\end{proof}
 
 \end{document}
