@@ -9,7 +9,31 @@
 \olfileid{fol}{seq}{sou}
 \olsection{Soundness}
 
+\begin{explain}
+A proof system, such as the sequent calculus, is \emph{sound} if it
+cannot prove things that do not actually hold.  Soundness is thus a
+kind of guaranteed safety property for proof systems.  Depending on
+which proof theoretic property is in question, we would like to know
+for instance, that
+\begin{enumerate}
+\item every provable sentence is valid;
+\item if a sentence is provable from some others, it is also a
+  consequence of them;
+\item if a set of sentences is inconsistent, it is unsatisfiable.
+\end{enumerate}
+These are important properties of a proof sytem.  If any of them do
+not hold, the proof system is deficient---it would proves too much.
+Consequently, establishing the soundness of a proof system is of the
+utmost importance.
 
+Because all these proof-theoretic properties are
+defined via provability in the sequent calculus of certain sequents,
+proving (1)--(3) above requires proving something about the semantic
+properties of provable sequents.  We will first define what it means
+for a sequent to be \emph{valid}, and then show that every provable
+sequent is valid.  (1)--(3) then follow as corollaries from this
+result.
+\end{explain}
 
 \begin{defn}
 A !!{structure}~$\Struct M$ \emph{satisifes} a sequent $\Gamma
@@ -66,7 +90,7 @@ $\Gamma' \Sequent \Delta'$.
   for some $!E \in \Gamma$ (since $\Gamma' \subseteq \Gamma$) or
   $\Sat{M}{!E}$ for some $!E \in \Delta'$ different from~$!A$ (since
   $\Delta' \setminus \{!A\} \subseteq \Delta$).
-\item The last inference is $\lnot$~right: similarly.
+\item The last inference is $\lnot$~right: Exercise.
 \item The last inference is $\land$~left: There are two variants: $!A
   \land !B$ may be inferred on the left from $!A$ or from $!B$ on the
   left side of the premise.  In the first case, $!A \in \Gamma'$.
@@ -120,7 +144,7 @@ $\Gamma' \Sequent \Delta'$.
   $\Sat{M}{!E}$, as $\Delta = \Delta'$. So in each case, $\Struct M$
   satisfies $\Gamma \Sequent \Delta$. Since $\Struct M$ was arbitrary,
   $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is $\lexists$~right: similarly.
+\item The last inference is $\lexists$~right: Exercise.
 \item The last inference is $\forall$~right: Then there is a
   !!{formula}~$!A(x)$ and a !!{constant}~$a$ such that $!A(a) \in
   \Delta'$, $\lforall[x][!A(x)] \in \Delta$, and $\Delta' \setminus
@@ -164,7 +188,7 @@ $\Gamma' \Sequent \Delta'$.
   an $!E \in \Delta' \setminus \{!A(a)\}$ such that $\Sat{M}{!E}$.  So
   in each case, $\Struct M$ satisfies $\Gamma \Sequent \Delta$. Since
   $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is $\lexists$~left: similarly.
+\item The last inference is $\lexists$~left: Exercise.
 \end{enumerate}
 Now let's consider the possible inferences with two premises: cut,
 $\lor$~left, $\land$~right, and $\lif$~left.
@@ -196,7 +220,7 @@ $\lor$~left, $\land$~right, and $\lif$~left.
   $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  In case (b),
   $\Struct M$ satisfies $\Gamma \Sequent \Delta$ since $!A \land !B
   \in \Delta$.
-\item The last inference is $\lor$~left: similarly.
+\item The last inference is $\lor$~left: Exercise.
 \item The last inference is $\lif$~right. The premises are $\Gamma
   \Sequent \Delta'$ and $\Gamma' \Sequent \Delta$, where $!A \in
   \Delta'$ an $!B \in \Gamma'$.  By induction hypothesis, both are
@@ -212,6 +236,10 @@ $\lor$~left, $\land$~right, and $\lif$~left.
   satisfies $\Gamma \Sequent \Delta$ since $!A \lif !B \in \Gamma$.
 \end{enumerate}
 \end{proof}
+
+\begin{prob}
+Complete the proof of \olref{sequent-soundness}.
+\end{prob}
 
 \begin{cor}
 \ollabel{weak-soundness}
