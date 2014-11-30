@@ -15,16 +15,16 @@ considered as sets of pairs). Here are some other ways:
 
 \begin{defn} Let $R$, $S$ be relations and $X$ a set.
 \begin{enumerate}
-\item The \emph{inverse}~$R^{-1}$ of $R$ is $R^-1 = \{ (b, a) : (a, b)
-  \in R\}$.
+\item The \emph{inverse}~$R^{-1}$ of $R$ is $R^-1 = \{ \tuple{b, a} :
+  \tuple{a, b} \in R\}$.
 \item The \emph{relative product}~$R \mid S$ of $R$ and $S$ is 
 \[
-(R \mid S) = \{(a, c) : \text{for some }b, Rab \text{ and } Rbc\}
+(R \mid S) = \{\tuple{a, c} : \text{for some } b, Rab \text{ and } Rbc\}
 \]
 \item The \emph{restriction}~$R \restrict X$ of $R$ to $X$
 \item The \emph{application}~$R[X]$ of $R$ to $X$ is
 \[
-R[X] = \{b : \text{for some }a, Rab\}
+R[X] = \{b : \text{for some } a, Rab\}
 \]
 \end{enumerate}
 \end{defn}
@@ -33,7 +33,7 @@ R[X] = \{b : \text{for some }a, Rab\}
 The \emph{transitive closure}~$R^+$ of a relation $R$ is $R^+ =
 \bigcup_{i=1}^\infty R^i$ where $R^1 = R$ and $R^{i+1} = R^i \mid R$.
 
-The reflexive transitive closure~$R^*$ of $R$ is $R* = R^+ \cup
+The \emph{reflexive transitive closure} of $R$ is $R^* = R^+ \cup
 I_{\dom{R}}$.
 \end{defn}
 
