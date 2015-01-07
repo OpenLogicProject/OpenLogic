@@ -346,11 +346,17 @@
 % - `\restrict`: restriction of a function to a set (infix operator)
 \DeclareDocumentMacro \restrict {\upharpoonright}
 
-% - `\Complement`: complement of a set
+% - `\Complement{X}`: complement of a set
 \DeclareDocumentCommand \Complement { m } {{#1}^\complement}
 
-% - `\tuple`: pairs, tuples, sequences
+% - `\card{X}`: cardinality of a set
+\DeclareDocumentCommand \card { m } {\left| #1 \right|}
+
+% - `\tuple{x,y}`: pairs, tuples, sequences
 \DeclareDocumentCommand \tuple { m } {\langle #1 \rangle}
+
+% - `\comp{f}{g}`: composition of f with g, defaults to $g \circ f$
+\DeclareDocumentCommand \comp { m m }{g \circ f}
 
 % ### Particular sets
 
@@ -623,6 +629,25 @@
 % - `denumerable`: term for countably infinite; defaults to "denumerable". 
 
 \settexttoken{denumerable}{denumerable}{denumerable}
+
+% - `element`: element of a set; redefine for "member"
+
+\settexttoken{element}{element}{elements}
+
+% - `injective`, `injection`: redefine for "one-one"
+
+\settexttoken{injective}{injective}{injective}
+\settexttoken{injection}{injection}{injections}
+
+% - `surjective`, `surjection`: redefine for "onto"
+
+\settexttoken{surjective}{surjective}{surjective}
+\settexttoken{surjection}{surjection}{surjections}
+
+% - `bijective`, `bijection`: redefine for "one-one onto"
+
+\settexttoken{bijective}{bijective}{bijective}
+\settexttoken{bijection}{bijection}{bijections}
 
 % Tags
 % ====
