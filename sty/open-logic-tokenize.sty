@@ -26,17 +26,16 @@
         { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#5} }
 }
 
-\def\@printtexttokens #1{\printtexttoken{#1}{\csname TEXTTOK@s@#1\endcsname}}
-\def\@printtexttokenp #1{\printtexttoken{#1}{\csname TEXTTOK@p@#1\endcsname}}
-\def\@printtexttokenS #1{\printtexttoken{#1}{\csname TEXTTOK@S@#1\endcsname}}
-\def\@printtexttokenP #1{\printtexttoken{#1}{\csname TEXTTOK@P@#1\endcsname}}
+\def\@printtexttoken #1#2{\ifcsname TEXTTOK@#1@#2\endcsname
+    \printtexttoken{#1}{\csname TEXTTOK@#1@#2\endcsname}\else
+    \textbf{Undefined token #2}\fi}
 
 % command can be redefined to eg print tokens in color
 \def\printtexttoken#1#2{#2}
 
 % use shorthand mechanism from babel.sty
 \useshorthands{!}
-\defineshorthand{!!}{\@printtexttokens}
-\defineshorthand{!p}{\@printtexttokenp}
-\defineshorthand{!P}{\@printtexttokenP}
-\defineshorthand{!S}{\@printtexttokenS}
+\defineshorthand{!!}{\@printtexttoken{s}}
+\defineshorthand{!p}{\@printtexttoken{p}}
+\defineshorthand{!P}{\@printtexttoken{P}}
+\defineshorthand{!S}{\@printtexttoken{S}}
