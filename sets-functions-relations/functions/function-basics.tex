@@ -15,28 +15,30 @@ A function is a relation in which each object is related to a unique partner. Ma
 \end{explain}
 
 \begin{defn}
-A \emph{function} $f : X \rightarrow Y$ goes
-    from a set $X$ to a set $Y$. We call $X$ the \emph{domain} of $f$ and $Y$ the \emph{codomain} of $f$. The \emph{range} of $f$ is the subset of the codomain that is actually output by $f$ for some input.
+A \emph{function} $f \colon X \to Y$ is a mapping of each !p{element}
+of~$X$ to an !p{element} of~$Y$. We call $X$ the \emph{domain} of $f$
+and $Y$ the \emph{codomain} of $f$. The \emph{range} of $f$ is the
+subset of the codomain that is actually output by $f$ for some input.
 \end{defn}
 
 \begin{ex}
-Multiplication goes from $\mathbb{N} \times \mathbb{N}$ (the domain) to $\mathbb{N}$ (the codomain). As it turns out, the range is also $\mathbb{N}$.
+Multiplication goes from $\Nat \times \Nat$ (the domain) to $\Nat$ (the codomain). As it turns out, the range is also $\Nat$, since every $n \in \Nat$ is $n \times 1$.
 \end{ex}
 
 \begin{explain}
-Multiplication is a function because it pairs each input---each pair of natural numbers---with a single output. In contrast, the square root operation applied to the domain $\mathbb{N}$ is not functional, since each positive integer $n$ has two square roots: $\sqrt{n}$ and $-\sqrt{n}$. The relation that pairs each student in a class with their final grade is a function---no student can get two different final grades in the same class. The relation that pairs each student in a class with their parents is not a function---generally each student will have at least two parents.
+Multiplication is a function because it pairs each input---each pair of natural numbers---with a single output. In contrast, the square root operation applied to the domain $\Nat$ is not functional, since each positive integer $n$ has two square roots: $\sqrt{n}$ and $-\sqrt{n}$. The relation that pairs each student in a class with their final grade is a function---no student can get two different final grades in the same class. The relation that pairs each student in a class with their parents is not a function---generally each student will have at least two parents.
 \end{explain}
 
 \begin{ex}
-Let $f: \mathbb{N} \rightarrow \mathbb{N}$ be defined such that $f(x) = x+1$. This tells us that $f$ is a function which takes in natural numbers and outputs natural numbers. It then tells us that, given a natural number, $f$ will output its successor.
+Let $f \colon \Nat \to \Nat$ be defined such that $f(x) = x+1$. This tells us that $f$ is a function which takes in natural numbers and outputs natural numbers. It then tells us that, given a natural number, $f$ will output its successor.
 \end{ex}
 
 \begin{explain}
-In this case, the codomain $\mathbb{N}$ is not the range of $f$, since the natural number $0$ is not the successor of any other natural number. The range is the set of all positive integers, $\mathbb{Z}^{+}$.
+In this case, the codomain $\Nat$ is not the range of $f$, since the natural number $0$ is not the successor of any natural number. The range of~$f$ is the set of all positive integers, $\Int^{+}$.
 \end{explain}
 
 \begin{ex}
-Let $g: \mathbb{N} \rightarrow \mathbb{N}$ be defined such that $g(x) = x-1+2$. This tells us that $g$ is a function which takes in natural numbers and outputs natural numbers. It then tells us that, given a natural number, $g$ will output the successor of the successor of its predecessor. Despite their different definitions, $g$ and $f$ are the same function.
+Let $g \colon \Nat \to \Nat$ be defined such that $g(x) = x-1+2$. This tells us that $g$ is a function which takes in natural numbers and outputs natural numbers. It then tells us that, given a natural number, $g$ will output the successor of the successor of its predecessor. Despite their different definitions, $g$ and $f$ are the same function.
 \end{ex}
 
 \begin{explain}
@@ -45,14 +47,13 @@ Functions $f$ and $g$ defined above are the same because for any natural number 
 
 \begin{ex}
 We can also define functions by cases. For instance, we could define
-    $f: \mathbb{N} \rightarrow \mathbb{N}$  by 
+$f \colon \Nat \to \Nat$  by 
 \[
-f(x) = \left\{
-                                                \begin{array}{ll}
-                                                  \frac{x}{2}, & \hbox{if $x$ is even;} \\
-                                                  \frac{x+1}{2}, & \hbox{if $x$ is odd.}
-                                                \end{array}
-                                              \right.
+f(x) = 
+\begin{cases}
+  \frac{x}{2} & \text{if $x$ is even} \\
+  \frac{x+1}{2} & \text{if $x$ is odd.}
+\end{cases}
 \]
 This is fine, since every natural number is either even or odd, and the output of this function will always be a natural number. Just remember that if you define a function by cases, every possible input must fall into exactly one case.
 \end{ex}
