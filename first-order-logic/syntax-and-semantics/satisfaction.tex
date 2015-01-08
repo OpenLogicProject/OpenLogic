@@ -11,23 +11,23 @@
 
 \begin{explain}
 The basic notion that relates expressions such as terms and
-!p{formula}, on the one hand, and !p{structure} on the other, are
+!!{formula}s, on the one hand, and !!{structure}s on the other, are
 those of \emph{denotation} and \emph{satisfaction}.  Informally, a
 term \emph{denotes} an element of a !!{structure}---if the term is
 just a constant, it denotes the object assigned to the constant by the
-!!{structure}, and if it is built up using !p{function}, the
+!!{structure}, and if it is built up using !!{function}s, the
 denotation is computed from the values of constants and the functions
 assigned to the functions in the term.  A !!{formula} is
 \emph{satisfied} in a !!{structure} if the interpretation given to the
 predicates makes the !!{formula} true in the domain of the
 !!{structure}. This notion of satisfaction is specified inductively:
 the specification of the !!{structure} directly states when atomic
-!p{formula} are satisfied, and we define when a complex !!{formula} is
+!!{formula}s are satisfied, and we define when a complex !!{formula} is
 satisfied depending on the main connective or quantifier and whether
-or not the immediate !p{subformula} are satisfied. The case of the
+or not the immediate !!{subformula}s are satisfied. The case of the
 quantifiers here is a bit tricky, as the immediate !!{subformula} of a
-quantified !!{formula} has a free !!{variable}, and !p{structure}
-don't specify what !p{variable} denote.  In order to deal with this
+quantified !!{formula} has a free !!{variable}, and !!{structure}s
+don't specify what !!{variable}s denote.  In order to deal with this
 difficulty, we also introduce \emph{variable assignments} and define
 satisfaction not with respect to a !!{structure} alone, but with
 respect to a !!{structure} plus a !!{variable} assignment.
@@ -110,14 +110,14 @@ follows. If not $\Sat{M}{!A}[s]$ we write $\Sat/{M}{!A}[s]$.
 A !!{variable} assignment~$s$ provide a value for \emph{every} variable in
 the language. This is of course not necessary: whether or not a
 !!{formula}~$!A$ is satisfied in a !!{structure} with respect to~$s$ only
-depends on the assignments~$s$ makes to the free !p{variable} that
+depends on the assignments~$s$ makes to the free !!{variable}s that
 actually occur in~$!A$.  This is the content of the next theorem.  We
-require !!{variable} assignments to assign values to all !p{variable} simply
+require !!{variable} assignments to assign values to all !!{variable}s simply
 because it makes things a lot easier.
 \end{explain}
 
 \begin{prop}\ollabel{prop:satindep}
-If $x_1$, \dots, $x_n$ are the only free !p{variable} in $!A$ and $s(x_i)
+If $x_1$, \dots, $x_n$ are the only free !!{variable}s in $!A$ and $s(x_i)
 = s'(x_i)$ for $i = 1$, \dots, $n$, then $\Sat{M}{!A}[s]$ iff
 $\Sat{M}{!A}[s']$.
 \end{prop}
@@ -145,7 +145,7 @@ $t_1,\ldots,t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and $t_2$.
     \Assign{R}{M}$. For $1 \eq i \eq k$, if $t_i$ is a constant, then
     $\Value{t_i}{M}[s] = \Value{t_i}{M} = \Value{t_i}{M}[s']$. If
     $t_i$ is a free !!{variable}, then since the mappings $s$ and $s'$
-    agree on all free !p{variable}, $\Value{t_i}{M}[s] = s(t_i) =
+    agree on all free !!{variable}s, $\Value{t_i}{M}[s] = s(t_i) =
     s'(t_i) = \Value{t_i}{M}[s']$. Similarly, if $t_i$ is of the form
     $f(t'_1,\ldots,t'_j)$, we will also get $\Value{t_i}{M}[s] =
     \Value{t_i}{M}[s']$. Hence, $\Value{t_i}{M}[s] =
@@ -159,7 +159,7 @@ $t_1,\ldots,t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and $t_2$.
 \end{enumerate}
 
 Let $\Sat{M}{!B}[s] \Leftrightarrow \Sat{M}{!B}[s']$ for all
-!p{formula} $!B$ less complex than $!A$. The induction step proceeds
+!!{formula}s $!B$ less complex than $!A$. The induction step proceeds
 by cases determined by the main operator of $!A$. In each case, we
 only demonstrate the forward direction of the !!{biconditional}; the
 proof of the reverse direction is symmetrical.
@@ -225,7 +225,7 @@ proof of the reverse direction is symmetrical.
       of $s'$ satisfies $!B$, so $\Sat{M}{\indfrm}[s']$}}}
 \end{enumerate}
 By induction, we get that $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$
-whenever $x_1$, \dots, $x_n$ are the only free !p{variable} in $!A$ and
+whenever $x_1$, \dots, $x_n$ are the only free !!{variable}s in $!A$ and
 $s(x_i)=s'(x_i)$ for $i=1$, \dots,~$n$.
 \end{proof}
  
@@ -243,7 +243,7 @@ If $!A$ is a sentence, we say that a !!{structure}~$\Struct M$
 %sure that the statement of the thm is ok before I type up a proof.
 
 \begin{cor}[Extensionality]
-Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !p{structure}. 
+Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s. 
 If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and 
 $\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant} $c$, relation 
 symbol $R$, and !!{function} $f$ occurring in $!A$, then $\Sat{M}{!A}$ 

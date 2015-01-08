@@ -85,20 +85,20 @@ Hence, the inductive step goes through, and we have proved the claim.
 \end{ex}
 
 \begin{explain}
-For !p{formula}, the basic elements are the atomic !p{formula}. More
-complex !p{formula} are obtained by joining together less-complicated
-!p{formula} using operators. Each operator can be seen as
-corresponding to a function of !p{formula} that returns a new
+For !!{formula}s, the basic elements are the atomic !!{formula}s. More
+complex !!{formula}s are obtained by joining together less-complicated
+!!{formula}s using operators. Each operator can be seen as
+corresponding to a function of !!{formula}s that returns a new
 !!{formula} joining these two together with the operator in
-question. For example, the function that joins two !p{formula} $!A$
-and $!B$ into a conjunction can be written as $\mathcal E _\land (!A,
-!B) = !A \land !B$. We can call these \emph{formula-building
-  functions}. The set of !p{formula} is closed these functions:
-whenever $!A$ and $!B$ are !p{formula}, so are $\lnot !A$, $!A \land
+question. For example, the function that joins two !!{formula}s $!!^a$
+and $!B$ into a conjunction can be written as $\mathcal E _\land (!!^a,
+!B) = !!^a \land !B$. We can call these \emph{formula-building
+  functions}. The set of !!{formula}s is closed these functions:
+whenever $!!^a$ and $!B$ are !!{formula}s, so are $\lnot !!^a$, $!!^a \land
 !B$, etc.
 \end{explain}
 
-\begin{defn}[Induction on !p{formula}]
+\begin{defn}[Induction on !!{formula}s]
 If every atomic !!{formula} has property $P$ and $P$ is preserved
 under the !!{formula}-building functions, then every !!{formula} has
 property $P$.
@@ -106,28 +106,28 @@ property $P$.
 
 \begin{explain}
 This definition suggests a ``recipe'' for inductive proofs on
-!p{formula}. If we are asked to show that every !!{formula} has
+!!{formula}s. If we are asked to show that every !!{formula} has
 property $P$, follow the following steps:\\
 
-\textbf{Base Case.} Let $!A$ be an atomic !!{formula}. [\ldots]
-Therefore, $!A$ has property $P$.
+\textbf{Base Case.} Let $!!^a$ be an atomic !!{formula}. [\ldots]
+Therefore, $!!^a$ has property $P$.
 
-\textbf{Inductive Step.} Let $!A$ and $!B$ be !p{formula}, both of
+\textbf{Inductive Step.} Let $!!^a$ and $!B$ be !!{formula}s, both of
 which have the property $P$.
 
-Case $\lnot$: [\ldots] Therefore, $\lnot !A$ has property $P$.
+Case $\lnot$: [\ldots] Therefore, $\lnot !!^a$ has property $P$.
 
-Case $\land$: [\ldots] Therefore, $!A \land !B$ has property $P$. 
+Case $\land$: [\ldots] Therefore, $!!^a \land !B$ has property $P$. 
 
-Case $\lor$: [\ldots] Therefore, $!A \lor !B$ has property $P$. 
+Case $\lor$: [\ldots] Therefore, $!!^a \lor !B$ has property $P$. 
 
-Case $\lif$: [\ldots] Therefore, $!A \lif !B$ has property $P$.
+Case $\lif$: [\ldots] Therefore, $!!^a \lif !B$ has property $P$.
 
-Case $\liff$: [\ldots] Therefore, $!A \liff !B$ has property $P$.
+Case $\liff$: [\ldots] Therefore, $!!^a \liff !B$ has property $P$.
 
-Case $\lforall[]$: [\ldots] Therefore, $\lforall[x] !A$ has property $P$.
+Case $\lforall[]$: [\ldots] Therefore, $\lforall[x] !!^a$ has property $P$.
 
-Case $\lexists[]$: [\ldots] Therefore, $\lexists[x] !A$ has property $P$. \\
+Case $\lexists[]$: [\ldots] Therefore, $\lexists[x] !!^a$ has property $P$. \\
 
 Therefore, every !!{formula} has property $P$.
 \end{explain}

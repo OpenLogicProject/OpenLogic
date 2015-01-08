@@ -12,7 +12,7 @@
 
 Once a first-order language~$\Lang L$ is given, we can define
 expressions built up from the basic vocabulary of~$\Lang L$.  These
-include in particular \emph{terms} and \emph{!p{formulas}}.
+include in particular \emph{terms} and \emph{!!{formulas}s}.
 
 \begin{defn}[Term]
 The set of \emph{terms}~$\Trm$ of~$\Lang L$ is
@@ -25,20 +25,20 @@ defined inductively:
 \tagitem{limitClause}{
   Nothing else is a term.}{}
 \end{enumerate}
-A term containing no !p{variable} is a \emph{closed term}.
+A term containing no !!{variable}s is a \emph{closed term}.
 \end{defn}
 
 \begin{explain}
 The constants appear in our specification of the language and the
 terms as a separate category of symbols, but they could instead have
-been included as zero-place !p{function}.  We could then do without
+been included as zero-place !!{function}s.  We could then do without
 the second clause in the definition of terms. We just have to
 understand $\Atom{f}{t_1, \ldots, t_n}$ as just $f$ by itself if $n =
 0$.
 \end{explain}
 
 \begin{defn}[Formula]
-The set of \emph{!p{formulas}}~$\Frm[L]$ of the language~$\Lang L$
+The set of \emph{!!{formulas}s}~$\Frm[L]$ of the language~$\Lang L$
 is defined inductively as follows:
 \begin{enumerate}
 \tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
@@ -52,19 +52,19 @@ is defined inductively as follows:
 \item If $t_1$ and $t_2$ are terms of~$\Lang L$, then $\eq[t_1][t_2]$
   is an atomic !!{formula}.  
 
-\tagitem{prvNot}{If $!A$ is a !!{formula}, then $\lnot !A$ is a
-  !!{formula}.}{}
+\tagitem{prvNot}{If $!A$ is a !!{formula}, then $\lnot !A$ is 
+  !a{formula}.}{}
 
-\tagitem{prvAnd}{If $!A$ and $!B$ are !p{formula}, then $(!A \land
+\tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
   !B)$ is a !!{formula}.}{}
 
-\tagitem{prvOr}{If $!A$ and $!B$ are !p{formula}, then $(!A \lor !B)$
+\tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
   is a !!{formula}.}{}
 
-\tagitem{prvIf}{If $!A$ and $!B$ are !p{formula}, then $(!A \lif !B)$
+\tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
   is a !!{formula}.}{}
 
-\tagitem{prvIff}{If $!A$ and $!B$ are !p{formula}, then $(!A \liff !B)$
+\tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
   is a !!{formula}.}{}
 
 \tagitem{prvAll}{If $!A$ is a !!{formula} and $x$ is a !!{variable},
@@ -88,7 +88,7 @@ in order for
 \iftag{notprvEx,notprvAll}{}{and }%
 \iftag{prvAll}{$\lforall[x][!A]$ }{}%
 to count as 
-\iftag{notprvEx,notprvAll}{a !!{formula}}{!p{formula}}.
+\iftag{notprvEx,notprvAll}{a !!{formula}}{!!{formula}s}.
 Nothing bad happens if you don't require this, and it makes things
 easier.
 \end{intro}

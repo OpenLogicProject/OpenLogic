@@ -32,6 +32,20 @@
         { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#6} }
 }
 
+\DeclareDocumentCommand \@printtoken { t^ ta m ts } {%
+  \IfBooleanTF {#1} 
+               {\IfBooleanTF {#2}{\@printtexttoken{A}{#3} 
+                \IfBooleanTF {#4}
+                 {\@printtexttoken{p}{#3}}
+                 {\@printtexttoken{s}{#3}}}{%
+                \IfBooleanTF {#4}
+                 {\@printtexttoken{P}{#3}}
+                 {\@printtexttoken{S}{#3}}}}{%
+               {\IfBooleanTF {#2}{\@printtexttoken{a}{#3} }{}%
+                \IfBooleanTF {#4}
+                 {\@printtexttoken{p}{#3}}
+                 {\@printtexttoken{s}{#3}}}}}
+
 \def\@printtexttoken #1#2{\ifcsname TEXTTOK@#1@#2\endcsname
     \printtexttoken{#1}{\csname TEXTTOK@#1@#2\endcsname}\else
     \textbf{Undefined token #2}\fi}
@@ -44,10 +58,14 @@
 \def\Article#1{\@printtexttoken{A}{#1}}
 
 % use shorthand mechanism from babel.sty
+
+%\useshorthands{!}
+%\defineshorthand{!!}{\@printtexttoken{s}}
+%\defineshorthand{!p}{\@printtexttoken{p}}
+%\defineshorthand{!P}{\@printtexttoken{P}}
+%\defineshorthand{!S}{\@printtexttoken{S}}
+%\defineshorthand{!a}{\@printtexttokenarticle{a}}
+%\defineshorthand{!A}{\@printtexttokenarticle{A}}
+
 \useshorthands{!}
-\defineshorthand{!!}{\@printtexttoken{s}}
-\defineshorthand{!p}{\@printtexttoken{p}}
-\defineshorthand{!P}{\@printtexttoken{P}}
-\defineshorthand{!S}{\@printtexttoken{S}}
-\defineshorthand{!a}{\@printtexttokenarticle{a}}
-\defineshorthand{!A}{\@printtexttokenarticle{A}}
+\defineshorthand{!!}{\@printtoken}
