@@ -51,25 +51,25 @@ The following provides a more formal definition of an
 enumeration:
 
 \begin{defn}
-An \emph{enumeration} of a set $X$ is any onto function $f: 
+An \emph{enumeration} of a set $X$ is any !!{surjective} function $f: 
 \Nat \rightarrow X$.
 \end{defn}
 
 \begin{explain}
 Let's convince ourselves that the formal definition and the informal
 definition using an possibly gappy, possibly infinite list are
-equivalent. A function (partial or total) from $\Nat$ onto a set $X$
-enumerates~$X$. Such a function determines an enumeration as defined
-informally above. Then an enumeration for $X$ is the list $f(1), f(2),
-f(3), \dots$. Since $f$ is onto, every !!{element} of $X$ is
-guaranteed to be the value of $f(n)$ for some $n \in \Nat$.  Hence,
-every !!{element} of $X$ appears at some finite place in the
-list. Since the function may be partial or one-to-one, the list may be
-gappy or redundant, but that is acceptable (as noted above). On the
-other hand, given a list that enumerates all !p{element} of~$X$, we
-can define an onto function $f\colon \Nat \to X$ by letting $f(n)$ be
-the $(n-1)$st member of the list, or undefined if the list has a gap
-in the $(n-1)$st spot.
+equivalent. !A{surjective} function (partial or total) from $\Nat$ to
+a set $X$ enumerates~$X$. Such a function determines an enumeration as
+defined informally above. Then an enumeration for $X$ is the list
+$f(1)$, $f(2)$, $f(3)$, \dots. Since $f$ is !!{surjective}, every
+!!{element} of $X$ is guaranteed to be the value of $f(n)$ for some $n
+\in \Nat$.  Hence, every !!{element} of $X$ appears at some finite
+place in the list. Since the function may be partial or one-to-one,
+the list may be gappy or redundant, but that is acceptable (as noted
+above). On the other hand, given a list that enumerates all
+!p{element} of~$X$, we can define an !!{surjective} function $f\colon
+\Nat \to X$ by letting $f(n)$ be the $(n-1)$st member of the list, or
+undefined if the list has a gap in the $(n-1)$st spot.
 \end{explain}
 
 \begin{ex}
@@ -78,16 +78,20 @@ simply the identity function given by $f(n) = n$.
 \end{ex}
 
 \begin{ex}
-The functions $f(n) = 2n$ and $f(n) = 2n+1$ (for $n \in \Nat$) 
+The functions $f\colon \Nat \to \Nat$ and $g \colon \Nat \to \Nat$ given by
+\begin{align}
+f(n) & = 2n \tex{ and}\\
+g(n) = 2n+1
+\end{align}
 enumerate the even natural numbers and the odd natural numbers, 
-respectively. However, neither function is an enumeration for all of 
-$\Nat$, since neither is onto $\Nat$.
+respectively. However, neither function is an enumeration of 
+$\Nat$, since neither is !!{surjective}.
 \end{ex}
 
 \begin{ex}
 The function $f(n) = \lceil \frac{(-1)^n n}{2}\rceil$ (where $\lceil x
 \rceil$ denotes the \emph{ceiling} function, which rounds $x$ up to
-the nearest integer) enumerates the set of integers, $\Int$. Notice
+the nearest integer) enumerates the set of integers~$\Int$. Notice
 how $f$ generates the values of $\Int$ by ``hopping'' back and forth
 between positive and negative integers: 
 \[
@@ -111,7 +115,6 @@ Another method we can use to enumerate sets is to organize them
 in an \emph{array}, such as the following:
 \[
 \begin{array}{ c | c | c | c | c | c}
-\hline
 & \textbf 1 & \textbf 2 & \textbf 3 & \textbf 4 & \dots \\
 \hline
 \textbf 1 & \tuple{1,1} & \tuple{1,2} & \tuple{1,3} & \tuple{1,4} & \dots \\

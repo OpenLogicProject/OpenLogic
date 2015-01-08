@@ -53,9 +53,9 @@ Equinumerosity defines an equivalence relation.
 
 \item[Symmetry:] Suppose that $X$ is equinumerous with $Y$. Then there
   is a bijection $f\colon X \rightarrow Y$. Since $f$ is bijective,
-  its inverse $f^{-1}$ is also a bijection. Since $f$ is onto,
+  its inverse $f^{-1}$ is also a bijection. Since $f$ is !!{surjective},
   $f^{-1}$ is total. Hence, $f^{-1}\colon Y \rightarrow X$ is a total
-  bijection of $Y$ onto~$X$, so $Y$ is also equinumerous with $X$.
+  !!{bijection} from $Y$ to~$X$, so $Y$ is also equinumerous with $X$.
 
 \item[Transitivity:] Suppose that $X$ is equinumerous with $Y$ via the
   total bijection~$f$ and that $Y$ is equinumerous with $Z$ via the
@@ -73,19 +73,20 @@ and only if $Y$ is.
 
 \begin{proof}
 Let $X$ and $Y$ be equinumerous.  Suppose that $X$ is
-!!{enumerable}. Then there is a possibly partial, onto function
-$f\colon \Nat \to X$. Since $X$ and $Y$ are equinumerous, there is a
-total bijection $g\colon X \to Y$. Claim: $g \circ f \colon \Nat
-\rightarrow Y$ is onto. Clearly, $g \circ f$ is a function (since
-functions are closed under composition). For ontoness, let $y \in
-Y$. Since $g$ is onto $Y$, there is an $x \in X$ such that $g(x) =
-y$. Since $f$ is onto $X$, there is an $n \in \Nat$ such that $f(n) =
+!!{enumerable}. Then there is a possibly partial, !!{surjective}
+function $f\colon \Nat \to X$. Since $X$ and $Y$ are equinumerous,
+there is a total bijection $g\colon X \to Y$. Claim: $g \circ f \colon
+\Nat \rightarrow Y$ is !!{surjective}. Clearly, $g \circ f$ is a
+function (since functions are closed under composition). To see $g
+\circ f$ is !!{surjective}, let $y \in Y$. Since $g$ is
+!!{surjective}, there is an $x \in X$ such that $g(x) = y$. Since $f$
+is !!{surjective}, there is an $n \in \Nat$ such that $f(n) =
 x$. Hence,
 \[ 
 (g \circ f)(n) = g(f(n)) = g(x) = y 
 \]
-and thus $g \circ f$ is onto $Y$. Since $g \circ f\colon \Nat \to Y$
-is onto, $Y$ it is an enumeration of~$Y$, and so $Y$ is
+and thus $g \circ f$ is !!{surjective}. Since $g \circ f\colon \Nat
+\to Y$ is !!{surjective}, $Y$ it is an enumeration of~$Y$, and so $Y$ is
 !!{enumerable}.
 \end{proof}
 
