@@ -10,14 +10,6 @@
 \olsection{Orders}
 
 \begin{defn}
-A relation $R$ on a set $X$ is called \emph{reflexive} if, for every
-$x\in X$, $Rxx$. A relation which has the property that whenever $Rxy$
-and $Ryz$, then also $Rxz$, is called \emph{transitive}.  $R$ is
-called \emph{anti-symmetric,} if, whenever both $Rxy$ and $Ryx$, then
-$x=y$ (or, in other words: if $x\neq y$ then either $\not Rxy$ or
-$\not Ryx$). Finally, $R$ is \emph{total} if for all $x,y\in X$,
-either $Rxy$ or $Ryx$.
-
 A relation which is both reflexive and transitive is called a
 \emph{preorder.}  A preorder which is also anti-symmetric is called a
 \emph{partial order}. A partial order which is also total is called a
@@ -62,13 +54,13 @@ partial order which is also linear is called a \emph{strict linear
 \end{defn}
 
 A strict partial order $R$ on $X$ can be turned into a weak partial
-order $R'$by adding the identity relation on $X$: $R'=R\cup I_{X}$.
+order $R'$by adding the identity relation on $X$: $R' = R \cup \Id{X}$.
 Conversely, starting from a weak partial order, one can get a strict
-partial order by removing~$I_{X}$
+partial order by removing~$\Id{X}$
 
 \begin{prop}
 $R$ is a strict partial (linear) order on $X$ iff $R'$is a weak
-  partial (linear) order. Moreover, $xRy$ iff $xR'y$ for all $x\neq
+  partial (linear) order. Moreover, $xRy$ iff $xR'y$ for all $x \neq
   y$.
 \end{prop}
 
@@ -80,7 +72,7 @@ $\le$ is the weak linear order corresponding to the strict linear
 
 \begin{prob}
 Show that if $R$ is a weak partial order on $X$, then
-$R^{-}=R\setminus I_{X}$ is a strict partial order and $xRy$ iff
+$R^{-}=R\setminus \Id{X}$ is a strict partial order and $xRy$ iff
 $xR^{-}y$ for all $x\neq y$.
 \end{prob}
 

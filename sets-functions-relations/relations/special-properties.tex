@@ -1,0 +1,60 @@
+% Part: sets-functions-relations
+% Chapter: relations
+% Section: special-properties
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{rel}{ord}
+\olsection{Special properties of relations}
+
+\begin{intro}
+Some kinds of relations turn out to be so common that they have been
+given special names.  For instance, $\le$ and $\subseteq$ both relate
+their respective domains (say, $\Nat$ in the case of $\le$ and
+$\Pow(X)$ in the case of $\subseteq$) in similar ways.  To get at
+exactly how these relations are similar, and how they differ, we
+categorize them according to some special properties that relations
+can have.  It turns out that (combinations of) some of these special
+properties are especially important: orders and equivalence relations.
+\end{intro}
+
+\begin{defn}
+A relation $R \subset X^2X$ is \emph{reflexive} iff, for every $x \in
+X$, $Rxx$.
+\end{defn}
+
+\begin{defn}
+A relation $R \subseteq X^2$ is \emph{transitive} iff, whenever $Rxy$
+and $Ryz$, then also $Rxz$.
+\end{defn}
+
+\begin{defn}
+A relation~$R \subset X^2$ is \emph{symmetric} iff, whenever both
+$Rxy$, then $Ryx$.
+\end{defn}
+
+\begin{defn}
+A relation~$R \subset X^2$ is \emph{anti-symmetric} iff, whenever both
+$Rxy$ and $Ryx$, then $x=y$ (or, in other words: if $x\neq y$ then
+either $\not Rxy$ or $\not Ryx$).
+\end{defn}
+
+\begin{defn}
+A relation $R$ is \emph{total} if for all $x,y\in X$,
+either $Rxy$ or $Ryx$.
+\end{defn}
+
+\begin{defn}
+A relation~$R \subseteq X^2$ that is reflexive, transitive, and
+anti-symmetric is called a \emph{partial order}.  A partial order that
+is also total is called a \emph{linear order}.
+\end{defn}
+
+\begin{defn}
+A relation $R \subseteq X^2$ that is reflexive, symmetric, and
+transitive is called an \emph{equivalence relation}.
+\end{defn}
+
+\end{document}
