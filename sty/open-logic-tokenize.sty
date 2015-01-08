@@ -13,25 +13,35 @@
 % Text that should be uniform and changeable Has four forms: in-text
 % singular, in-text plural, initial singular, initial plural. Initial
 % forms are usually capitalized. They are optional; if left out, we'll
-% take the in-text version and make the first letter uppercase.
+% take the in-text version and make the first letter uppercase. 
+% Optional star indicates nouns that take "an" rather than "a" as article.
 
-\DeclareDocumentCommand \settexttoken { m m m o o } {
-    \expandafter\def\csname TEXTTOK@s@#1\endcsname{#2}
-    \expandafter\def\csname TEXTTOK@p@#1\endcsname{#3}
-    \IfNoValueTF {#4} 
-        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{\makefirstuc{#2}} }
-        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{#4} }
+\DeclareDocumentCommand \settexttoken { m s m m o o } {
+    \expandafter\def\csname TEXTTOK@s@#1\endcsname{#3}
+    \expandafter\def\csname TEXTTOK@p@#1\endcsname{#4}
+    \IfBooleanTF {#2} 
+        { \expandafter\def\csname TEXTTOK@a@#1\endcsname{an} 
+          \expandafter\def\csname TEXTTOK@A@#1\endcsname{An} }
+        { \expandafter\def\csname TEXTTOK@a@#1\endcsname{a} 
+          \expandafter\def\csname TEXTTOK@A@#1\endcsname{A} }
     \IfNoValueTF {#5} 
-        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{\makefirstuc{#3}} }
-        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#5} }
+        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{\makefirstuc{#3}} }
+        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{#5} }
+    \IfNoValueTF {#6} 
+        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{\makefirstuc{#4}} }
+        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#6} }
 }
 
 \def\@printtexttoken #1#2{\ifcsname TEXTTOK@#1@#2\endcsname
     \printtexttoken{#1}{\csname TEXTTOK@#1@#2\endcsname}\else
     \textbf{Undefined token #2}\fi}
 
+\def\@printtexttokenarticle #1#2{\@printtexttoken{#1}{#2} \@printtexttoken{s}{#2}}
+
 % command can be redefined to eg print tokens in color
 \def\printtexttoken#1#2{#2}
+\def\article#1{\@printtexttoken{a}{#1}}
+\def\Article#1{\@printtexttoken{A}{#1}}
 
 % use shorthand mechanism from babel.sty
 \useshorthands{!}
@@ -39,3 +49,5 @@
 \defineshorthand{!p}{\@printtexttoken{p}}
 \defineshorthand{!P}{\@printtexttoken{P}}
 \defineshorthand{!S}{\@printtexttoken{S}}
+\defineshorthand{!a}{\@printtexttokenarticle{a}}
+\defineshorthand{!A}{\@printtexttokenarticle{A}}
