@@ -16,7 +16,7 @@
 \newcommand{\ollabel}[1]{
   \label{\theolpart:\theolchapter:\theolsection:#1}}
 
-\DeclareDocumentCommand \olref { o o o m } {
+\DeclareDocumentCommand \olref { o o o m } {%
     \cref{%
       \IfNoValueTF {#1} 
         {\theolpart:\theolchapter:\theolsection}
@@ -26,7 +26,7 @@
             {\theolpart:#1:#2}
             {#1:#2:#3}}}:#4}}
 
-\DeclareDocumentCommand \Olref { o o o m } {
+\DeclareDocumentCommand \Olref { o o o m } {%
     \Cref{%
       \IfNoValueTF {#1} 
         {\theolpart:\theolchapter:\theolsection}
