@@ -53,7 +53,7 @@ is defined inductively as follows:
   is an atomic !!{formula}.  
 
 \tagitem{prvNot}{If $!A$ is a !!{formula}, then $\lnot !A$ is 
-  !a{formula}.}{}
+  !!{formula}.}{}
 
 \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
   !B)$ is a !!{formula}.}{}
@@ -94,15 +94,16 @@ easier.
 \end{intro}
 
 \begin<defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll>
-  {defn}
+  {defn} Formulas constructed using the defined operators are to be understood as follows:
+
 \begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defEx,defAll}
 
 \tagitem{defTrue}{$\ltrue$ abbreviates
-  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \land \lnot !A)$ for some
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$ for some
     fixed atomic !!{formula}~$!A$}.}{}
 
 \tagitem{defFalse}{$\lfalse$ abbreviates
-  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \lor \lnot !A)$ for some
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$ for some
     fixed atomic !!{formula}~$!A$}.}{}
 
 \tagitem{defNot}{$\lnot !A$ abbreviates $!A \lif \lfalse$.}{}
