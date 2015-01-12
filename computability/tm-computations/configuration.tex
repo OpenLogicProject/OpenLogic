@@ -16,13 +16,13 @@ what a Turing machine computation is.  Formally, we can define the
 computation of a Turing machine on a given input as a sequence of
 \emph{configurations}---and a configuration in turn is a sequence of
 symbols (corresponding to the contents of the tape at a given point in
-the compuation), a number indicating the position of the read/write
+the computation), a number indicating the position of the read/write
 head, and a state.  Using these, we can define what the Turing machine
 $M$ computes on a given input.
 \end{explain}
 
 \begin{defn}
-A emph{configuration} of Turing machine $M = \langle Q, \Sigma, s,
+A \emph{configuration} of Turing machine $M = \langle Q, \Sigma, s,
 I\rangle$ is a triple $\langle C, n, q\rangle$ where
 \begin{enumerate}
 \item $C \in \Sigma^*$ is a finite sequence of symbols from $\Sigma$,
@@ -34,7 +34,7 @@ I\rangle$ is a triple $\langle C, n, q\rangle$ where
 \begin{explain}
 The potential input for a Turing machine is a sequence of symbols,
 usually a sequence that encodes a number in some form.  The initial
-configuration of the Turing machne is that configuration in which we
+configuration of the Turing machine is that configuration in which we
 start the Turing machine to work on that input: the tape contains the
 tape end marker immediately followed by the input written on the
 squares to the right, the read/write head is scanning the leftmost
@@ -71,7 +71,7 @@ We say that a configuration $\langle C, n, q\rangle$ \emph{yields
 
 \begin{defn}
 A \emph{run of $M$ on input~$I$} is a sequence $C_i$ of configurations
-of $M$, where $C_0$ is the initial confiuration of $M$ for input $I$,
+of $M$, where $C_0$ is the initial configuration of $M$ for input $I$,
 and each $C_i$ yields $C_{i+1}$ in one step.  
 
 We say that $M$ \emph{halts on input $I$ after $k$ steps} if $C_k =
