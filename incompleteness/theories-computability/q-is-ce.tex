@@ -1,0 +1,53 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: q-is-ce
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{qce}
+
+\olsection{$\Th{Q}$ is c.e.}
+
+
+\begin{thm}
+  $\Th{Q}$ is c.e.\ but not decidable. In fact, it is a complete c.e.\ set.
+\end{thm}
+
+\begin{proof}
+It is not hard to see that $\Th{Q}$ is c.e., since it is the set of
+(codes for) sentences $y$ such that there is a proof $x$ of $y$ in
+$\Th{Q}$:
+\[
+Q = \Setabs{y}{\lexists[x][\fn{Pr_Q}(x,y)]}.
+\]
+But we know that $\fn{Pr_Q}(x,y)$ is computable (in fact, primitive
+recursive), and any set that can be written in the above form is c.e.
+
+Saying that it is a complete c.e.\ set is equivalent to saying that $K
+\leq_m Q$, where $K = \Setabs{x}{!A_x(x) \downarrow}$. So let us show
+that $K$ is reducible to $\Th{Q}$. Since Kleene's predicate $T(e,x,s)$ is
+primitive recursive, it is representable in $\Th{Q}$, say by $!A_T$. Then
+for every $x$, we have
+\begin{eqnarray*}
+x \in K & \lif & \lexists[s][T(x,x,s)] \\
+& \lif & \lexists[s][(\text{$\Th{Q}$ proves $!A_T(\num x,\num x, \num s)$})]
+  \\
+& \lif & \text{$\Th{Q}$ proves $\lexists[s][!A_T(\num x, \num x, s)]$}.
+\end{eqnarray*}
+Conversely, if $\Th{Q}$ proves $\lexists[s][!A_T(\num x, \num x, s)]$,
+then, in fact, for some natural number $n$ the formula $!A_T(\num x,
+\num x, \num n)$ must be true.  Now, if $T(x,x,n)$ were false,
+$\Th{Q}$ would prove $\lnot !A_T(\num x, \num x, \num n)$, since
+$!A_T$ represents $T$.  But then $\Th{Q}$ proves a false formula,
+which is a contradiction. So $T(x,x,n)$ must be true, which implies
+$!A_x(x) \downarrow$.
+
+In short, we have that for every $x$, $x$ is in $K$ if and only if
+$\Th{Q}$ proves $\lexists[s][T(\num x,\num x,s)]$. So the function $f$
+which takes $x$ to (a code for) the sentence $\lexists[s][T(\num x,
+  \num x, s)]$ is a reduction of $K$ to $\Th{Q}$.
+\end{proof}
+
+\end{document}
