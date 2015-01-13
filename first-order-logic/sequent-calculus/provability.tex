@@ -322,7 +322,9 @@ and thus the eigenvariable condition is satisfied.
 \tagitem{prvAll}{Suppose $\Gamma \Proves \lnot !A(t)$. Then there is a
   finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation
   $\Pi$ of $\Gamma_0 \Sequent \lnot !A(t)$.  Then
-\begin{prooftree}
+% for some reason, prooftree env sometimes doesn't work here
+% \begin{prooftree}
+\[
 \AxiomC{}
 \RightLabel{$\Pi$}
 \Deduce$\Gamma_0 \fCenter  \lnot !A(t)$
@@ -335,7 +337,9 @@ and thus the eigenvariable condition is satisfied.
 \UnaryInf$\lnot !A(t) \fCenter \lnot \lforall[x][!A(x)]$
 \RightLabel{cut}
 \BinaryInf$\Gamma_0 \fCenter  \lnot \lforall[x][!A(x)]$
-\end{prooftree}
+%\end{prooftree}
+\DisplayProof
+\]
 shows that $\Gamma_0 \Proves  \lnot \lforall[x][!A(x)]$.}{}
 \end{tagenumerate}
 \end{proof}
