@@ -555,11 +555,18 @@
 % Here `token` is the term as it is used in the source text, where it
 % typically is used as `!!{token}`.  `singular` and `plural` are the
 % text you want printed wherever an OLP text contains `!!{token}` or
-% `!p{token}`.  In sentence-initial position, OLP texts would use
-% `!S{token}` and `!P{token}` to create capitalized versions of these
-% token replacements.  By default, they are generated from `singluar`
-% and `plural` by capitalizing the first chracter, but can be provided
-% explicitly to `\settexttoken` as optional arguments.
+% `!!{token}s`.  In sentence-initial position, OLP texts would use
+% `!!^{token}` and `!!^{token}s` to create capitalized versions of
+% these token replacements.  By default, they are generated from
+% `singluar` and `plural` by capitalizing the first chracter, but can
+% be provided explicitly to `\settexttoken` as optional arguments.
+% `!!a{token}` produces a indefinite article plus the token
+% replacement. This is usually "a" unless the settexttoken command is
+% used with a star, as in `\settexttoken{element}*{element}{elements},
+% in which case it produces "an". This can be combined with `^` to
+% produce the uppercase version, e.g., `!!^a{element}` for "An
+% element".  `\article{token}` and `\Article{token}` produce just the
+% article by itself (lower or uppercase, respectively).
 
 % - `formula`: defaults to "formula/formuls", redefine for
 % plural "formulae," or for "wff".
@@ -570,6 +577,11 @@
 % "subformulae," hyphenated spelling "sub-formula", or "sub-wff".
 
 \settexttoken{subformula}{subformula}{subformulas}
+
+% - `sentence`: defaults to "sentence", redefine for
+% "closed formula" etc.
+
+\settexttoken{sentence}{sentence}{sentences}
 
 % - `variable`: defaults to "variable/variables", redefine to be more
 % specific, e.g., "individual variable", "object veriable".
