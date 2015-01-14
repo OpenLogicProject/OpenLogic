@@ -46,4 +46,33 @@ apart from being convenient, justifies the act of discussing the
 familiar anti-symmetric property that numbers have.
 \end{explain}
 
+\begin{defn}
+$\card{X} < \card{Y}$ if and only if there is !!a{injective}
+  function~$f\colon X \to Y$ but no !!{bijective}~$g\colon X \to Y$.
+\end{defn}
+
+\begin{thm}[Cantor]
+For all $X$, $\card{X} < \card{\Pow{X}}$.
+\end{thm}
+
+\begin{proof}
+The function~$f \colon X \to \Pow{X}$ that maps any $x \in X$ to its
+singleton~$\{x\}$ is !!{injective}, since if $x \neq y$ then also $f(x) =
+\{x\} \neq \{y\} = f(y)$.
+
+There cannot be !!a{surjective} function~$g\colon X \to \Pow{X}$, let
+alone a !!{bijective} one. For assume that a surjective $g\colon X \to
+\Pow{X}$ exists.  Then let $Y = \Setabs{x \in X}{x \notin g(x)}$. If
+$g(x)$ is defined for all $x \in X$, then $Y$ is clearly a
+well-defined subset of~$X$.  If $g$ is !!{surjective}, $Y$ must be the
+value of~$g$ for some $x_0 \in X$, i.e., $Y = g(x_0)$.  Now consider
+$x_0$: it cannot be !!a{element} of $Y$, since if $x_0 \in Y$ then
+$x_0 \in g(x_0)$, and the definition of~$Y$ then would have $x_0
+\notin Y$.  On the other hand, it must be !!a{element} of~$Y$, since
+if it were not, then $x_0 \notin Y = g(x_0)$.  But then $x_0$
+satisfies the defining condition of~$Y$, and so $x_0 \in Y$. In either
+case, we have a contradiction.
+\end{proof}
+
+
 \end{document}
