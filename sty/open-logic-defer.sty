@@ -6,30 +6,46 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesFile{open-logic-defer}
+\ProvidesFile{open-logic-defer.sty}
 
 \RequirePackage{etoolbox}
 \RequirePackage{answers}
 
+\def\solutionextension{prb}
+
+\makeatletter
+
+% save definition of prob environment as probd
+\let\probd\prob
+\let\endprobd\endprob
+\let\c@probd\c@prob
+\makeatother
+
 \csundef{prob}
 \csundef{endprob}
 
-\Newassociation{prob}{probdeferred}{problems}
+\Newassociation{prob}{probdeferred}{\jobname}
 
 % Redefine probdeferred as a theorem environment
-\csundef{probdeferred}
-\csundef{endprobdeferred}
-\csundef{c@probdeferred}
-\newtheorem{probdeferred}{Problem}[chapter]
+%\csundef{probdeferred}
+%\csundef{endprobdeferred}
+%\csundef{c@probdeferred}
+
+\renewenvironment{probdeferred}[1]{\begin{probd}}{\end{probd}}
+
+%\declaretheorem[
+%  style=definition,
+%  name=Problem,
+%  sibling=thm]{probdeferred}
 % answers writes current label as argument
-\apptocmd{\probdeferred}{\@gobble}{}{}
+%\apptocmd{\probdeferred}{\@gobble}{}{}
 
 % at the end of a chapter, read the solutionfile
 \appto\OLEndChapterHook{%
-  \Closesolutionfile{\jobname.problems}
-  \Readsolutionfile{\jobname.problems}}
+  \Closesolutionfile{\jobname}
+  \Readsolutionfile{\jobname}}
 
 % at the end of a \chapter command, open the solution file 
 \renewcommand\memendofchapterhook{%
-  \Opensolutionfile{\jobname.problems}
-  \Writetofile{\jobname.problems}{\protect\section*{Problems}}}
+  \Opensolutionfile{\jobname}
+  \Writetofile{\jobname}{\protect\section*{Problems}}}
