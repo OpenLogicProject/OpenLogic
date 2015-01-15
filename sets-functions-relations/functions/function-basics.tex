@@ -11,7 +11,14 @@
 \olsection{Basics}
 
 \begin{explain}
-A function is a relation in which each object is related to a unique partner. Many functions are familiar to us from basic arithmetic. For instance, addition and multiplication are functions. They take in two numbers and return a third. A function, more generally, is something that takes one or more things as input and returns some kind of output. A function is a \emph{black box}: what matters is only what output is paired with what input, not the method for calculating the output. 
+A function is a relation in which each object is related to a unique
+partner. Many functions are familiar to us from basic arithmetic. For
+instance, addition and multiplication are functions. They take in two
+numbers and return a third. A function, more generally, is something
+that takes one or more things as input and returns some kind of
+output. A function is a \emph{black box}: what matters is only what
+output is paired with what input, not the method for calculating the
+output.
 \end{explain}
 
 \begin{defn}
@@ -22,27 +29,54 @@ subset of the codomain that is actually output by $f$ for some input.
 \end{defn}
 
 \begin{ex}
-Multiplication goes from $\Nat \times \Nat$ (the domain) to $\Nat$ (the codomain). As it turns out, the range is also $\Nat$, since every $n \in \Nat$ is $n \times 1$.
+Multiplication goes from $\Nat \times \Nat$ (the domain) to $\Nat$
+(the codomain). As it turns out, the range is also $\Nat$, since every
+$n \in \Nat$ is $n \times 1$.
 \end{ex}
 
 \begin{explain}
-Multiplication is a function because it pairs each input---each pair of natural numbers---with a single output. In contrast, the square root operation applied to the domain $\Nat$ is not functional, since each positive integer $n$ has two square roots: $\sqrt{n}$ and $-\sqrt{n}$. The relation that pairs each student in a class with their final grade is a function---no student can get two different final grades in the same class. The relation that pairs each student in a class with their parents is not a function---generally each student will have at least two parents.
+Multiplication is a function because it pairs each input---each pair
+of natural numbers---with a single output: $\times \colon \Nat^2 \to
+\Nat$. In contrast, the square root operation applied to the domain
+$\Nat$ is not functional, since each positive integer $n$ has two
+square roots: $\sqrt{n}$ and $-\sqrt{n}$. We can make it functional by
+only returning the positive square root: $\sqrt{\phantom{X}} \colon
+\Nat \to \Real$. The relation that pairs each student in a class with
+their final grade is a function---no student can get two different
+final grades in the same class. The relation that pairs each student
+in a class with their parents is not a function---generally each
+student will have at least two parents.
 \end{explain}
 
 \begin{ex}
-Let $f \colon \Nat \to \Nat$ be defined such that $f(x) = x+1$. This tells us that $f$ is a function which takes in natural numbers and outputs natural numbers. It then tells us that, given a natural number, $f$ will output its successor.
+Let $f \colon \Nat \to \Nat$ be defined such that $f(x) = x+1$. This
+tells us that $f$ is a function which takes in natural numbers and
+outputs natural numbers. It then tells us that, given a natural
+number, $f$ will output its successor.
 \end{ex}
 
 \begin{explain}
-In this case, the codomain $\Nat$ is not the range of $f$, since the natural number $0$ is not the successor of any natural number. The range of~$f$ is the set of all positive integers, $\Int^{+}$.
+In this case, the codomain $\Nat$ is not the range of $f$, since the
+natural number $0$ is not the successor of any natural number. The
+range of~$f$ is the set of all positive integers, $\Int^{+}$.
 \end{explain}
 
 \begin{ex}
-Let $g \colon \Nat \to \Nat$ be defined such that $g(x) = x-1+2$. This tells us that $g$ is a function which takes in natural numbers and outputs natural numbers. It then tells us that, given a natural number, $g$ will output the successor of the successor of its predecessor. Despite their different definitions, $g$ and $f$ are the same function.
+Let $g \colon \Nat \to \Nat$ be defined such that $g(x) = x-1+2$. This
+tells us that $g$ is a function which takes in natural numbers and
+outputs natural numbers. It then tells us that, given a natural
+number, $g$ will output the successor of the successor of its
+predecessor. Despite their different definitions, $g$ and $f$ are the
+same function.
 \end{ex}
 
 \begin{explain}
-Functions $f$ and $g$ defined above are the same because for any natural number $x$, $x-1+2 = x+1$. $f$ and $g$ pair each natural number with the same output. Functions, just like relations more generally, can be treated as just sets of pairs. The definitions for $f$ and $g$ specify the same set by means of different equations, and as we know, sets are independent of how they are specified.
+Functions $f$ and $g$ defined above are the same because for any
+natural number $x$, $x-1+2 = x+1$. $f$ and $g$ pair each natural
+number with the same output. Functions, just like relations more
+generally, can be treated as just sets of pairs. The definitions for
+$f$ and $g$ specify the same set by means of different equations, and
+as we know, sets are independent of how they are specified.
 \end{explain}
 
 \begin{ex}
@@ -55,7 +89,10 @@ f(x) =
   \frac{x+1}{2} & \text{if $x$ is odd.}
 \end{cases}
 \]
-This is fine, since every natural number is either even or odd, and the output of this function will always be a natural number. Just remember that if you define a function by cases, every possible input must fall into exactly one case.
+This is fine, since every natural number is either even or odd, and
+the output of this function will always be a natural number. Just
+remember that if you define a function by cases, every possible input
+must fall into exactly one case.
 \end{ex}
 
 \end{document}
