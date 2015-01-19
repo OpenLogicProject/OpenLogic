@@ -23,8 +23,11 @@
 
 \csundef{prob}
 \csundef{endprob}
+\csundef{probtag}
+\csundef{endprobtag}
 
 \Newassociation{prob}{probdeferred}{\jobname}
+\Newassociation{probtag}{probdeferredtag}{\jobname}
 
 % Redefine probdeferred as a theorem environment
 %\csundef{probdeferred}
@@ -32,6 +35,7 @@
 %\csundef{c@probdeferred}
 
 \renewenvironment{probdeferred}[1]{\begin{probd}}{\end{probd}}
+\renewenvironment{probdeferredtag}[2]{\begin{probd}}{\end{probd}}
 
 %\declaretheorem[
 %  style=definition,
