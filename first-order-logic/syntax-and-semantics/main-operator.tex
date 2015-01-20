@@ -8,36 +8,37 @@
 
 \olfileid{fol}{syn}{mai}
 
-\olsection{Main Operator of a Formula}
+\olsection{!!^{main operator} of a Formula}
 
 \begin{explain}
 It is often useful to talk about the last operator used in
 constructing a !!{formula}~$!A$.  This operator is called the \emph{main
-  operator} of ~$!A$. Intuitively, it is the ``outermost'' operator
+  operator} of~$!A$. Intuitively, it is the ``outermost'' operator
 of $!A$. For example, the main operator of $\lnot !A$ is $\lnot$,
 the main operator of $(!A \lor !B)$ is $\lor$, etc.
 \end{explain}
 
 
 \begin{defn}[!!^{main operator}]
-The \emph{!!{main operator}} of a !!{formula}~$!A$ is inductively
+\ollabel{def:main-op}
+The \emph{!!{main operator}} of a !!{formula}~$!A$ is 
 defined as follows:
 \begin{enumerate}
 \item \indcase*{!A}{!A}{$\indfrm$ has no !!{main operator}.}
 
-\tagitem{prvNot}{\indcase{!A}{\lnot !B}{the main operator of $\indfrm$
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{the !!{main operator} of $\indfrm$
   is~$\lnot$.}}{}
 
-\tagitem{prvAnd}{\indcase{!A}{!B \land !C}{the !!{main operator} of
+\tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{the !!{main operator} of
   $\indfrm$ is~$\land$.}}{}
 
-\tagitem{prvOr}{\indcase{!A}{!B \lor !C}{the !!{main operator} of
+\tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{the !!{main operator} of
   $\indfrm$ is~$\lor$.}}{}
 
-\tagitem{prvIf}{\indcase{!A}{!B \lif !C}{the !!{main operator} of
+\tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{the !!{main operator} of
   $\indfrm$ is~$\lif$.}}{}
 
-\tagitem{prvIff}{\indcase{!A}{!B \liff !C}{the !!{main operator} of
+\tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{the !!{main operator} of
   $\indfrm$ is~$\liff$.}}{}
 
 \tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{the !!{main operator}
@@ -48,21 +49,45 @@ defined as follows:
 \end{enumerate}
 \end{defn}
 
-!!^{formula}s with each type of !!{main operator}:
+In each case, we intend the specific indicated \emph{occurrence} of
+the !!{main operator} in the formula. For instance, since the formula
+$((!D \lif !E) \lif (!E \lif !D))$ is of the form $(!B \lif !C)$ where
+$!B$ is $(!D \lif !E)$ an $!C$ is $(!E \lif !D)$, the second
+occurrence of $\lif$ is the !!{main operator}.
+
+\begin{explain}
+This is a \emph{recursive} definition of a function which maps all
+non-atomic !!{formula}s to their !!{main operator} occurrence. Because
+of the way !!{formula}s are defined inductively, every
+!!{formula}~$!A$ satisfies one of the cases in \olref{def:main-op}.
+This guarantees that for each non-atomic !!{formula}~$!A$ a !!{main
+  operator} exists. Because each !!{formula} satisfies only one of these
+conditions, and because the smaller !!{formula}s from which $!A$ is
+constructed are uniquely determined in each case, the !!{main
+  operator} occurrence of~$!A$ is unique, and so we have defined a
+function.
+\end{explain}
+
+We call !!{formula}s by the following names depending on which symbol their
+!!{main operator} is:
 
 \begin{figure}[!h]
 \centering
-\begin{tabular}{| c | c | c |}
-\hline
+\begin{tabular}{c | c | c}
 !!^{main operator} & Type of !!{formula} & Example\\
 \hline
+none & atomic (!!{formula}) & 
+\iftag{prvFalse}{$\lfalse$,}{}
+\iftag{prvTrue}{$\ltrue$,}{}
+$\Atom{R}{t_1, \dots, t_n}$,
+$\eq[t_1][t_2]$\\
 $\lnot$ & negation & $\lnot !A$ \\
-$\land$ & conjunction & $!A \land !B$ \\
-$\lor$ & disjunction & $!A \lor !B$ \\
-$\lif$ & !!{conditional} & $!A \lif !B$ \\
+$\land$ & conjunction & $(!A \land !B$) \\
+$\lor$ & disjunction & $(!A \lor !B$) \\
+$\lif$ & !!{conditional} & $(!A \lif !B$) \\
 \iftag{prvIff,defIff}{}{$\liff$ & !!{biconditional} & $!A \liff !B$ \\}
-$\lforall[][]$ & universal & $\lforall[x][!A]$ \\
-$\lexists[][]$ & existential & $\lexists[x][!A]$\\ \hline
+$\lforall[][]$ & universal (!!{formula})& $\lforall[x][!A]$ \\
+$\lexists[][]$ & existential (!!{formula})& $\lexists[x][!A]$
 \end{tabular}
 \end{figure}
 

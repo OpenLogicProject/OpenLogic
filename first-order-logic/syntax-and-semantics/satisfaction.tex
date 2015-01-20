@@ -7,7 +7,7 @@
 \begin{document}
 
 \olfileid{fol}{syn}{sat}
-\olsection{Satisfaction of a Formula in a Structure}
+\olsection{Satisfaction of a !!^{formula} in a !!^{structure}}
 
 \begin{explain}
 The basic notion that relates expressions such as terms and
@@ -39,7 +39,7 @@ function which maps each !!{variable} to an element of~$\Domain M$,
 i.e., $s\colon \Var \to \Domain M$.
 \end{defn}
 
-\begin{defn}[Denotation of terms]
+\begin{defn}[Denotation of Terms]
 If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
 !!{structure} for~$\Lang L$, and $s$ is a !!{variable} assignment
 for~$\Struct M$, the \emph{denotation}~$\Value{t}{M}[s]$ is defined as
@@ -63,9 +63,10 @@ $s'$ is an $x$-variant of $s$ we write $s \sim_x s'$.
 \end{defn}
 
 \begin{defn}[Satisfaction]
-Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$ relative to
-a !!{variable} assignment~$s$, $\Sat{M}{!A}[s]$ is defined inductively as
-follows. If not $\Sat{M}{!A}[s]$ we write $\Sat/{M}{!A}[s]$.
+Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
+relative to a !!{variable} assignment~$s$, in symbols:
+$\Sat{M}{!A}[s]$, is defined recursively as follows. (We write
+$\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 \begin{enumerate}
 \tagitem{prvFalse}{%
   \indcase{!A}{\lfalse}{not $\Sat{M}{\indfrm}[s]$.}}{}
@@ -85,29 +86,34 @@ follows. If not $\Sat{M}{!A}[s]$ we write $\Sat/{M}{!A}[s]$.
     $\Sat/{M}{!B}[s]$.}}{}
 
 \tagitem{prvAnd}{%
-  \indcase{!A}{!B \land !C}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
+  \indcase{!A}{(!B \land !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat{M}{!B}[s]$
     and $\Sat{M}{!C}[s]$.}}{}
 
 \tagitem{prvOr}{%
-  \indcase{!A}{!B \lor !C}{$\Sat{M}{\indfrm}[s]$ iff
+  \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ iff
     $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
 
 \tagitem{prvIf}{%
-  \indcase{!A}{!B \lif !C}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
     or $\Sat{M}{!C}[s]$ (or both).}}{}
 
-\tagitem{prvEx}{% 
-  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-    $x$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+\tagitem{prvIff}{% 
+  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
+    $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
+    nor $\Sat{M}{!C}[s]$.}}{}
 
 \tagitem{prvAll}{%
   \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
     $x$-variant $s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{% 
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $x$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
 \end{enumerate}
 \end{defn}
 
 \begin{explain}
-A !!{variable} assignment~$s$ provide a value for \emph{every} variable in
+A !!{variable} assignment~$s$ provides a value for \emph{every} variable in
 the language. This is of course not necessary: whether or not a
 !!{formula}~$!A$ is satisfied in a !!{structure} with respect to~$s$ only
 depends on the assignments~$s$ makes to the free !!{variable}s that
@@ -158,11 +164,11 @@ $t_1,\ldots,t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and $t_2$.
     \Value{t_2}{M}[s']$, so $\Sat{M}{\eq[t_1][t_2]}[s']$.}
 \end{enumerate}
 
-Let $\Sat{M}{!B}[s] \Leftrightarrow \Sat{M}{!B}[s']$ for all
-!!{formula}s $!B$ less complex than $!A$. The induction step proceeds
-by cases determined by the main operator of $!A$. In each case, we
-only demonstrate the forward direction of the !!{biconditional}; the
-proof of the reverse direction is symmetrical.
+Now assume $\Sat{M}{!B}[s]$ iff $\Sat{M}{!B}[s']$ for all !!{formula}s
+$!B$ less complex than $!A$. The induction step proceeds by cases
+determined by the main operator of $!A$. In each case, we only
+demonstrate the forward direction of the !!{biconditional}; the proof
+of the reverse direction is symmetrical.
 
 \begin{enumerate}
 \tagitem{defNot}{}{%
@@ -239,20 +245,9 @@ If $!A$ is a sentence, we say that a !!{structure}~$\Struct M$
 !!{variable} assignments~$s$.
 \end{defn}
 
-%N: is this what you had in mind for extensionality? I just want to make 
-%sure that the statement of the thm is ok before I type up a proof.
-
-\begin{cor}[Extensionality]
-Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s. 
-If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and 
-$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant} $c$, relation 
-symbol $R$, and !!{function} $f$ occurring in $!A$, then $\Sat{M}{!A}$ 
-iff $\Sat{M'}{!A}$.
-\end{cor}
-
 \begin{prob}
-Show that if $!A$ is a sentence, $\Sat{M}{!A}$ iff there is a !!{variable}
-assignment~$s$ so that $\Sat{M}{!A}[s]$.
+Show that if $!A$ is a sentence, $\Sat{M}{!A}$ iff \emph{there is} a
+!!{variable} assignment~$s$ so that $\Sat{M}{!A}[s]$.
 \end{prob}
 
 \end{document}

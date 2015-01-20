@@ -27,14 +27,14 @@ for every occurrence of~$x$ in $s$, recursively:
 \end{defn}
 
 \begin{defn}
-A term~$t$ is !!{free for} $x$ in $!A$ if none of the free occurrences
+A term~$t$ is \emph{!!{free for}} $x$ in $!A$ if none of the free occurrences
 of~$x$ in $!A$ occur in the scope of a quantifier that binds a
 variable in~$t$.
 \end{defn}
 
 \begin{defn}[Substitution in a !!{formula}]
 If $!A$ is a !!{formula}, $x$ is a !!{variable}, and $t$ is a term
-free for~$x$ in $!A$, then $\Subst{!A}{t}{x}$ is the result of substituting
+!!{free for}~$x$ in $!A$, then $\Subst{!A}{t}{x}$ is the result of substituting
 $t$ for all free occurrences of $x$ in~$!A$.
 \begin{enumerate}
 \item \indcase{!A}{\Atom{P}{t_1,\dots,
@@ -81,19 +81,20 @@ $t$ for all free occurrences of $x$ in~$!A$.
 Note that substitution may be vacuous: If $x$ does not occur in $!A$
 at all, then $\Subst{!A}{t}{x}$ is just~$!A$.
 
-The restriction that $t$ must be free for $x$ in $!A$ is necessary to
+The restriction that $t$ must be !!{free for}~$x$ in~$!A$ is necessary to
 exclude cases like the following. If $!A \ident \lexists[y][x < y]$
 and $t \ident y$, then $\Subst{!A}{t}{y}$ would be $\lexists[y][y <
-  y]$, and this case where the free variable $y$ is ``captured'' by
-the quantifier $\lexists[y]$ upon substitution, is undesirable.  For
-instance, we would like it to be the case that whenever
-$\lforall[x][!B]$ holts, so does $\Subst{!B}{t}{x}$. But if we take
-$!B$ to be $\lforall[x][\lexists[y][x < y]]$ we have a sentence that
-is true about, e.g., the natural numbers: for every number~$x$ there
-is a number~$y$ greater than it. If we allowed $y$ as a possible
-substitution for~$x$, we would end up with $\lexists[y][y < y]$, which
-is false. We prevent this by requiring that none of the free variables
-in~$t$ would end up being bound by a quantifier in~$!A$.
+  y]$. In this case the free variable $y$ is ``captured'' by the
+quantifier $\lexists[y]$ upon substitution, and that is undesirable.
+For instance, we would like it to be the case that whenever
+$\lforall[x][!B]$ holds, so does $\Subst{!B}{t}{x}$. But consider
+$\lforall[x][\lexists[y][x < y]]$ (here $!B$ is $\lexists[y][x <
+  y]$). It is sentence that is true about, e.g., the natural numbers:
+for every number~$x$ there is a number~$y$ greater than it. If we
+allowed $y$ as a possible substitution for~$x$, we would end up with
+$\Subst{!B}{y}{x} \ident \lexists[y][y < y]$, which is false. We
+prevent this by requiring that none of the free variables in~$t$ would
+end up being bound by a quantifier in~$!A$.
 \end{explain}
 
 \end{document}

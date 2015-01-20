@@ -8,49 +8,76 @@
 
 \olfileid{fol}{syn}{fvs}
 
-\olsection{Free Variables and Sentences}
+\olsection{Free !!^{variable}s and !!^{sentence}s}
 
 \begin{defn}[Free occurrences of a !!{variable}]
 The \emph{free} occurrences of a !!{variable} in a !!{formula} are defined
-inductively:
+inductively as follows:
 \begin{enumerate}
-\item If $!A$ is atomic, all !!{variable} occurrences in $!A$ are free.
+\item \indcase*{!A}{$!A$ is atomic}{all !!{variable} occurrences in
+  $\indfrm$ are free.}
 
-\tagitem{prvNot}{If $!A$ is a !!{formula}, then the free !!{variable}
-  occurrences of $\lnot !A$ are exactly those of $!A$.}{}
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{the free !!{variable}
+  occurrences of $\indfrm$ are exactly those of $!B$.}}{}
 
-\tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then the free
-  !!{variable} occurrences in $(!A \land !B)$ are those in $!A$
-  together with those in $!B$.}{}
+\item \indcase{!A}{(!B \ast !C)}{the free
+  !!{variable} occurrences of $\indfrm$ are those in $!B$
+  together with those in~$!C$.}
 
-\tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then the free
-  !!{variable} occurrences in $(!A \lor !B)$ are those in $!A$
-  together with those in $!B$.}
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{the free !!{variable}
+  occurrences in $\indfrm$ are all of those in~$!B$ except for
+  occurrences of~$x$.}}{}
 
-\tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then the free
-  !!{variable} occurrences in $(!A \lif !B)$ are those in $!A$
-  together with those in $!B$.}{}
-
-\tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then the free
-  !!{variable} occurrences in $(!A \liff !B)$ are those in $!A$
-  together with those in $!B$.}{}
-
-\tagitem{prvAll}{If $!A$ is a !!{formula}, then the free !!{variable}
-  occurrences in $\lforall[x][!A]$ are all of those in~$!A$ except for
-  occurrences of~$x$.}{}
-
-\tagitem{prvEx}{If $!A$ is a !!{formula}, then the free !!{variable}
-  occurrences in $\lexists[x][!A]$ are all of those in~$!A$ except for
-  occurrences of~$x$.}{}
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]}{the free !!{variable}
+  occurrences in $\indfrm$ are all of those in~$!B$ except for
+  occurrences of~$x$.}}{}
 \end{enumerate}
 \end{defn}
+
+\begin{defn}[Bound Variables]
+An occurrence of a !!{variable} in a formula~$!A$ is \emph{bound} if
+it is not free.
+\end{defn}
+
+\begin{defn}[Scope]
+\iftag{prvAll}{If $\lforall[x][!B]$ is an occurrence of a subformula
+  in a formula~$!A$, then the corresponding occurrence of~$!B$ in~$!A$
+  is called the \emph{scope} of the corresponding occurrence
+  of~$\lforall[x]$. \iftag{prvEx}{Similarly for $\lexists[x]$.}{}}{If
+  $\lexists[x][!B]$ is an occurrence of a subformula in a
+  formula~$!A$, then the corresponding occurrence of~$!B$ in~$!A$ is
+  called the \emph{scope} of the corresponding occurrence
+  of~$\lexists[x]$.}
+
+If $!B$ is the scope of a quantifier occurrence
+\iftag{prvAll}{$\lforall[x]$\iftag{prvEx}{ or
+    $\lexists[x]$}{}}{$\lexists[x]$} in~$!A$, then all occurrences of
+$x$ which are free in~$!B$ are said to be \emph{bound by} the
+mentioned quantifier occurrence.
+\end{defn}
+
+\begin{ex}
+Here is a somewhat complicated !!{formula}~$!A$:
+\[
+\lforall[\Obj x_0][\underbrace{(\Atom{\Obj A^1_0}{\Obj x_0} \lif
+    \Atom{\Obj A^2_0}{\Obj x_0, \Obj x_1})}_{!B}] \lif \lexists[\Obj
+  x_1][\underbrace{(\Atom{\Obj A^2_1}{\Obj x_0, \Obj x_1} \lor \lforall[\Obj x_0][\overbrace{\lnot \Atom{\Obj A^1_1}{\Obj x_0}}^{!D}])}_{!C}]
+\]
+$!B$ is the scope of the first $\lforall[\Obj x_0]$, $!C$ is the scope
+of $\lexists[\Obj x_1]$, and $!D$ is the scope of the second
+$\lforall[\Obj x_0]$.  The first $\lforall[\Obj x_0]$ binds the
+occurrences of $\Obj x_0$ in~$!B$, $\lexists[\Obj x_1]$ the occurrence
+of $\Obj x_1$ in $!C$, and the second $\lforall[\Obj x_0]$ binds the
+occurrence of $\Obj x_0$ in~$!D$.  The first occurrence of $\Obj x_1$
+and the fourth occurrence of $\Obj x_0$ are free in~$!A$. The last
+occurrence of $\Obj x_0$ is free in $!D$, but bound in $!C$ and~$!A$.
+\end{ex}
 
 \begin{defn}[Sentence]
 A !!{formula} $!A$ is a \emph{sentence} iff it contains no free
 occurrences of !!{variable}s.
 \end{defn}
 
-%Examples of this maybe?
-
+% add examples!
 
 \end{document}

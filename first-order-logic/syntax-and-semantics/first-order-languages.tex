@@ -62,6 +62,33 @@ first-order logic:
 \item Punctuation marks: (, ), and the comma.
 \end{enumerate}
 
+Most of our definitions and results will be formulated for the full
+standard language of first-order logic.  However, depending on the
+application, we may also restrict the language to only a few
+!!{predicate}s, !!{constant}s, and !!{function}s.  In these cases, we
+often use special (sequences of) letters or symbols.
+
+\begin{ex}
+The language of arithmetic contains a single two-place
+!!{predicate}~$<$, a single !!{constant}~$\Obj 0$, one one-place
+!!{function}~$'$, and two two-place !!{function}s~$+$ and $\times$.
+\end{ex}
+
+\begin{ex}
+The language of set theory contains only the single two-place
+!!{predicate}~$\in$.
+\end{ex}
+
+\begin{ex}
+The language of orders contains only the two-place
+!!{predicate}~$\le$.
+\end{ex}
+
+Again, these are conventions: officially, these are just aliases,
+e.g., $<$, $\in$, and $\le$ are aliases for $\Obj A^2_0$, $\Obj 0$ for
+$\Obj c_0$, $'$ for $\Obj f^1_0$, $+$ for $\Obj f^2_0$, $\times$ for
+$\Obj f^2_1$.
+
 \iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
 In addition to the primitive connectives and
 \iftag{notprvEx,notprvAll}{quantifier}{quantifiers} introduced
@@ -114,19 +141,19 @@ x)$, $(Ex)$, $\Sigma x$, $\bigvee_x$ for the existential quantifier.
 \end{intro}
 
 \begin{explain}
-We are treating the propositional operators and both quantifiers as
+We might treat all the propositional operators and both quantifiers as
 primitive symbols of the language. We might instead choose a smaller
 stock of primitive symbols and treat the other !!{operator}s as
 defined. ``Truth functionally complete'' sets of Boolean operators
 include $\{ \lnot, \lor \}$, $\{ \lnot, \land \}$, and $\{ \lnot,
-\lif\}$ --- these can be combined with either quantifier for an
+\lif\}$---these can be combined with either quantifier for an
 expressively complete first-order language.
 
 You may be familiar with two other !!{operator}s: the Sheffer
-stroke, $|$ (named after Henry Sheffer), and Peirce's arrow
-$\downarrow$, also known as Quine's dagger. When given their usual
-readings of ``nand'' and ``nor'' (respectively), these operators are
-truth functionally complete by themselves.
+stroke~$|$ (named after Henry Sheffer), and Peirce's
+arrow~$\downarrow$, also known as Quine's dagger. When given their
+usual readings of ``nand'' and ``nor'' (respectively), these operators
+are truth functionally complete by themselves.
 \end{explain}
 
 \end{document}

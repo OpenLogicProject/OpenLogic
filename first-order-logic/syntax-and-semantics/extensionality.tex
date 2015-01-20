@@ -11,12 +11,27 @@
 \olsection{Extensionality}
 
 \begin{explain}
-Extensionality, sometimes called relevance, can be expressed informally as follows: the only thing that bears upon the satisfaction of !!{formula}~$!A$ in a !!{structure}~$\Struct M$ relative to a !!{variable} assignment~$s$, are the assignments made by ~$\Struct M$ and ~$s$ to the elements of the language that actually appear in ~$!A$.
+Extensionality, sometimes called relevance, can be expressed
+informally as follows: the only thing that bears upon the satisfaction
+of !!{formula}~$!A$ in a !!{structure}~$\Struct M$ relative to a
+!!{variable} assignment~$s$, are the assignments made by ~$\Struct M$
+and ~$s$ to the elements of the language that actually appear in
+~$!A$.
 
-One immediate consequence of extensionality is that where two !!{structures}~$\Struct M$ and ~$\Struct N$ agree on all the elements of the language appearing in a sentence~$!A$ and have the same domain, ~$\Struct M$ and ~$\Struct N$ must also agree on ~$!A$ itself.
-
-We will now give a formal statement of the theorem and prove it.
+One immediate consequence of extensionality is that where two
+!!{structure}s~$\Struct M$ and ~$\Struct M'$ agree on all the elements
+of the language appearing in a sentence~$!A$ and have the same domain,
+~$\Struct M$ and ~$\Struct M'$ must also agree on~$!A$ itself.
 \end{explain}
+
+\begin{prop}[Extensionality]
+Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s. 
+If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and 
+$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant} $c$, relation 
+symbol $R$, and !!{function} $f$ occurring in $!A$, then $\Sat{M}{!A}$ 
+iff $\Sat{M'}{!A}$.
+\end{prop}
+
 
 
 

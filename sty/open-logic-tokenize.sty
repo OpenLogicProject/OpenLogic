@@ -48,7 +48,7 @@
 
 \def\@printtexttoken #1#2{\ifcsname TEXTTOK@#1@#2\endcsname
     \printtexttoken{#1}{\csname TEXTTOK@#1@#2\endcsname}\else
-    \textbf{Undefined token #2}\fi}
+    \PackageWarning{open-logic-tokenize}{Token #2 undefined}{\color{red}#2}\fi}
 
 \def\@printtexttokenarticle #1#2{\@printtexttoken{#1}{#2} \@printtexttoken{s}{#2}}
 

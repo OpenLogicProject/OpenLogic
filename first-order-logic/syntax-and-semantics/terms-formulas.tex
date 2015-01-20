@@ -8,15 +8,15 @@
 
 \olfileid{fol}{syn}{frm}
 
-\olsection{Terms and Formulas}
+\olsection{Terms and !!^{formula}s}
 
 Once a first-order language~$\Lang L$ is given, we can define
 expressions built up from the basic vocabulary of~$\Lang L$.  These
 include in particular \emph{terms} and \emph{!!{formula}s}.
 
-\begin{defn}[Term]
-The set of \emph{terms}~$\Trm$ of~$\Lang L$ is
-defined inductively:
+\begin{defn}[Terms]
+The set of \emph{terms}~$\Trm[L]$ of~$\Lang L$ is
+defined inductively by:
 \begin{enumerate}
 \item Every !!{variable} is a term.
 \item Every !!{constant} of~$\Lang L$ is a term.
@@ -29,7 +29,7 @@ A term containing no !!{variable}s is a \emph{closed term}.
 \end{defn}
 
 \begin{explain}
-The constants appear in our specification of the language and the
+The !!{constant}s appear in our specification of the language and the
 terms as a separate category of symbols, but they could instead have
 been included as zero-place !!{function}s.  We could then do without
 the second clause in the definition of terms. We just have to
@@ -78,8 +78,8 @@ is defined inductively as follows:
 \end{defn}
 
 By convention, $\lnot \eq[t_1][t_2]$ is abbreviated as
-$\eq/[t_1][t_2]$, and when writing a formula containing a two-place
-operator, we leave out the outermost parentheses.
+$\eq/[t_1][t_2]$, and when writing a formula we often will leave out
+the outermost pair of parentheses.
 
 \begin{intro}
 Some logic texts require that the !!{variable}~$x$ must occur in~$!A$
@@ -128,5 +128,30 @@ as follows:
 \tagitem{defEx}{$\lexists[x][!A]$ abbreviates $\lnot\lforall[x][\lnot !A]$.}{}
 \end{tagenumerate}
 \end{defn}
+
+If we work in a language for a specific application, we will often
+write two-place !!{predicate}s and !!{function}s between the
+respective terms, e.g., $t_1 < t_2$ and $(t_1 + t_2)$ in the language
+of arithmetic and $t_1 \in t_2$ in the language of set theory.  The
+successor function in the language of arithmetic is even written
+conventionally \emph{after} its argument:~$t'$.  Officially, however,
+these are just conventional abbreviations for $\Obj A^2_0(t_1, t_2)$,
+$\Obj f^2_0(t_1, t_2)$, $\Obj A^2_0(t_1, t_2)$ and $f^1_0(t)$,
+respectively.
+
+\begin{defn}
+The symbol $\ident$ expresses syntactic identity between strings of
+symbols, i.e., $!A \ident !B$ iff $!A$ and $!B$ are strings of symbols
+of the same length and which contain the same symbol in each place.
+\end{defn}
+
+The $\ident$ symbol may be flanked by strings obtained by
+concatenation, e.g., $!A \ident (!B \lor !C)$ means: the string of
+symbols~$!A$ is the same string as the one obtained by concatenating
+an opening parenthesis, the string $!B$, the $\lor$ symbol, the
+string~$!C$, and a closing parenthesis, in this order. If this is the
+case, then we know that the first symbol of $!A$ is an opening
+parenthesis, $!A$ contains $!B$ as a substring (starting at the second
+symbol), that substring is followed by $\lor$, etc.
 
 \end{document}
