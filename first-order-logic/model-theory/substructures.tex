@@ -1,0 +1,41 @@
+% Part: first-order-logic
+% Chapter: model-theory
+% Section: substructures
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mod}{sub}
+\olsection{Substructures}
+
+\begin{defn}
+\ollabel{substructure}
+Given !!{structure}s $\Struct M$ and $\Struct M'$ for the same language~$\Lang L$,
+we say that $\Struct M$ is a \emph{substructure} of $\Struct M'$, and
+$\Struct M'$ an \emph{extension} of $\Struct M$, written $\Struct M
+\substruct \Struct M'$, iff
+\begin{enumerate}
+\item $\Domain{M} \subseteq \Domain{M'}$,
+\item For each constant $c \in \Lang L$, $\Assign{c}{M} =
+    \Assign{c}{M'}$;
+\item For each $n$-place !!{predicate} $f \in \Lang L$
+  $\Assign{f}{M}(a_1, \dots, a_n) = \Assign{f}{M'}(a_1, \dots, a_n)$
+  for all $a_1$, \dots, $a_n \in \Domain{M}$.
+\item For each $n$-place !!{predicate} $R \in \Lang L$, $\langle
+  a_1, \dots, a_n\rangle \in \Assign{R}{M}$ iff $\langle a_1, \dots,
+  a_n\rangle \in \Assign{R}{M'}$ for all $a_1$, \dots, $a_n \in
+  \Domain{M}$.
+\end{enumerate}
+\end{defn}
+
+\begin{rem}
+If the language contains no constant or !!{function}s, then any $N
+\subseteq \Domain{M}$ determines a substructure $\Struct N$ of
+$\Struct M$ with universe $N$ by putting $\Assign{R}{N} =
+\Assign{R}{M} \cap N^n$.
+\end{rem}
+
+% prove something about this? Examples?
+
+\end{document}
