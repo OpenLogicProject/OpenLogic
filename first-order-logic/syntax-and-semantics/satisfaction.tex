@@ -100,7 +100,7 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
     or $\Sat{M}{!C}[s]$ (or both).}}{}
 
 \tagitem{prvIff}{% 
-  \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
+  \indcase{!A}{(!B \liff !C)}{$\Sat{M}{\indfrm}[s]$ iff either both
     $\Sat{M}{!B}[s]$ and $\Sat{M}{!C}[s]$, or neither $\Sat{M}{!B}[s]$
     nor $\Sat{M}{!C}[s]$.}}{}
 
@@ -251,5 +251,76 @@ If $!A$ is a sentence, we say that a !!{structure}~$\Struct M$
 Show that if $!A$ is a sentence, $\Sat{M}{!A}$ iff \emph{there is} a
 !!{variable} assignment~$s$ so that $\Sat{M}{!A}[s]$.
 \end{prob}
+
+\DeclareRobustCommand{\VDash}{\mathrel{||}\joinrel\Relbar}
+
+\begin{prob}
+Suppose $\Lang L$ is a language without !!{function}s. Given a
+!!{structure}~$\Struct M$ and $a \in \Domain M$, define $\Struct
+M[a/c]$ to be the !!{structure} that is just like~$\Struct M$, except
+that $\Assign{c}{M[a/c]} = a$. Define $\Struct M \VDash !A$ for
+!!{sentence}s~$!A$ by:
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{not $\Struct{M} \VDash \indfrm$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Struct{M} \VDash \indfrm$.}}{}
+
+\item \indcase{!A}{\Atom{R}{d_1, \dots, d_n}}{$\Struct M \VDash \indfrm$
+  iff $\langle \Assign{d_1}{M}, \dots, \Assign{d_n}{M} \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[d_1][d_2]}{$\Struct{M}{\indfrm}$ iff
+  $\Assign{d_1}{M} = \Assign{d_2}{M}$.}
+
+\tagitem{prvNot}{% 
+  \indcase{!A}{\lnot !B}{$\Struct{M} \VDash \indfrm$ iff
+    not $\Struct{M} \VDash {!B}$.}}{}
+
+\tagitem{prvAnd}{% 
+  \indcase{!A}{(!B \land !C)}{$\Struct{M} \VDash
+    \indfrm$ iff $\Struct{M} \VDash!B$ and $\Struct{M} \VDash !C$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Struct{M} \VDash \indfrm$ iff
+    $\Struct{M} \VDash !A$ or $\Struct{M} \VDash !B$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Struct{M} \VDash \indfrm$ iff 
+    not $\Struct {M} \VDash !B$ or $\Struct M \VDash !C$ (or both).}}{}
+
+\tagitem{prvIff}{% 
+  \indcase{!A}{(!B \liff !C)}{$\Struct{M} \VDash {\indfrm}$ iff either
+    both $\Struct{M} \VDash {!B}$ and $\Struct{M} \VDash {!C}$, or
+    neither $\Struct{M} \VDash {!B}$ nor $\Struct{M} \VDash {!C}$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Struct{M} \VDash {\indfrm}$ iff for
+    all $a \in \Domain{M}$, $\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}$,
+    if $c$ does not occur in~$!B$.}}{}
+
+\tagitem{prvEx}{% 
+  \indcase{!A}{\lexists[x][!B]}{$\Struct{M} \VDash
+  {\indfrm}$ iff there is an $a \in \Domain M$ such that
+  $\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}$, if $c$ does not occur
+  in~$!B$.}}{}
+\end{enumerate}
+Let $x_1$, \dots, $x_n$ be all free !!{variable}s in~$!A$,
+$c_1$, \dots, $c_n$ constant symbols not in~$!A$,
+$a_1$, \dots, $a_n \in \Domain M$, and $s(x_i) = a_i$.
+
+Show that $\Sat{M}{!A}[s]$ iff $\Struct M[a_1/c_1,\dots,a_n/c_n]
+\VDash \Subst{\Subst{!A}{c_1}{x_1}\dots}{c_n}{x_n}$.
+\end{prob}
+
+\begin{prob}
+  Suppose that $f$ is a function symbol not in~$!A(x,y)$. Show that
+  there is a~$\Struct{M}$ such that
+  $\Sat{M}{\lforall[x][\lexists[y][!A(x,y)]]}$ iff there is a~$\Struct
+  M'$ such that $\Sat{M'}{\lforall[x][!A(x,f(x))]}$.
+\end{prob}
+
+
 
 \end{document}

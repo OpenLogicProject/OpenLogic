@@ -41,6 +41,56 @@ $\Lang{L}$ of first-order logic consists of the following elements:
 \end{enumerate}
 \end{defn}
 
+\begin{ex}
+!!^a{structure}~$\Struct M$ for the language of arithmetic consists of a
+  set, an element of $\Domain M$, $\Assign{\Obj 0}{M}$, as
+  interpretation of the !!{constant}~$\Obj 0$, a one-place function
+  $\Assign{\Obj \prime}{M} \colon \Domain{M}^2 \to \Domain M$, two
+  two-place functions $\Assign{\Obj +}{M}$ and $\Assign{\Obj
+    \times}{M}$, both $\Domain M^2 \to \Domain M$, and a two-place
+  relation $\Assign{\Obj <}{M} \subseteq \Domain{M}^2$.
+
+An obvious example of such a structure is the following:
+\begin{enumerate}
+\item $\Domain N = \Nat$
+\item $\Assign{\Obj 0}{N} = 0$
+\item $\Assign{\Obj \prime}{N}(n) = n + 1$ for all $n \in \Nat$
+\item $\Assign{\Obj +}{N}(n, m) = n + m$ for all $n, m \in \Nat$
+\item $\Assign{\Obj \times}{N}(n, m) = n\cdot m$ for all $n, m \in \Nat$
+\item $\Assign{\Obj <}{N} = \Setabs{\tuple{n, m}}{n \in \Nat, m \in
+  \Nat, n < m}$
+\end{enumerate}
+The structure~$\Struct N$ for $\Lang L_A$ so defined is called the
+\emph{standard model of arithmetic}, because it interprets the
+non-logical constants of~$\Lang L_A$ exactly how you would expect.
+
+However, there are many other possible !!{structure}s for~$\Lang
+L_A$. For instance, we might take as the domain the set~$\Int$ of
+integers instead of~$\Nat$, and define the interpretations of $\Obj
+0$, $\Obj \prime$, $\Obj +$, $\Obj \times$, $\Obj <$ accordingly.  But
+we can also define structures for~$\Lang L_A$ which have nothing even
+remotely to do with numbers. 
+\end{ex}
+
+\begin{ex}
+A structure~$\Struct M$ for the language~$\Lang L_Z$ of set theory requires
+just a set and a single-two place relation. So technically, e.g., the
+set of people plus the relation ``$x$ is older than $y$'' could be
+used as !!a{structure} for $\Lang L_Z$, as well as $\Nat$ together
+with $n \ge m$ for $n, m \in \Nat$.
+
+A particularly interesting !!{structure} for $\Lang L_Z$ in which the
+!!{element}s of the domain are actually sets, and the interpretation
+of $\Obj \in$ actually is the relation ``$x$ is !!a{element} of~$y$''
+is the !!{structure} $\Struct{{HF}}$ of \emph{hereditarily finite sets}:
+\begin{enumerate}
+\item $\Domain{{{HF}}} = \emptyset \cup \Pow{\emptyset} \cup
+  \Pow{\Pow{\emptyset}} \cup \Pow{\Pow{\Pow{\emptyset}}} \cup \dots$;
+\item $\Assign{\Obj \in}{{{HF}}} = \Setabs{\tuple{x, y}}{x, y \in
+  \Domain{{{HF}}}, x \in y}$.
+\end{enumerate}
+\end{ex}
+
 \begin{explain}
 Recall that a term is \emph{closed} if it contains no !!{variable}s.
 \end{explain}
@@ -93,6 +143,10 @@ is just 4, and the denotation of $\times(\Obj{two},
 &= 5
 \end{align*}
 \end{ex}
+
+\begin{prob}
+Is $\Struct N$, the standard model of arithmetic, covered? Explain.
+\end{prob}
 
 \begin{digress}
 The stipulations we make as to what counts as a !!{structure} impact

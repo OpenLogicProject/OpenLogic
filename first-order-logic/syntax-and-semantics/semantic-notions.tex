@@ -33,6 +33,7 @@ A set of sentences~$\Gamma$ \emph{entails} a sentence~$!A$, $\Gamma
 $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$.
 \end{defn}
 
+
 \begin{defn}[Satisfiability]
 A set of sentences~$\Gamma$ is \emph{satisfiable} if $\Sat{M}{\Gamma}$
 for some !!{structure}~$\Struct M$.  If $\Gamma$ is not satisfiable it is
@@ -76,6 +77,17 @@ $\Sat{M}{!A}$. Hence, for every !!{structure} $\Struct M$ with
 $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma \Entails !A$.
 \end{proof}
 
+\begin{prob}
+\begin{enumerate}
+\item Show that $\Gamma \Entails \bot$ iff $\Gamma$ is unsatisfiable.
+\item Show that $\Gamma, !A \Entails \bot$ iff $\Gamma \Entails \lnot !A$.
+\item Suppose $c$ does not occur in $!A$ or $\Gamma$.  Show that
+  $\Gamma \Entails \lforall[x][!A]$ iff $\Gamma \Entails
+  \Subst{!A}{c}{x}$.
+\end{enumerate}
+\end{prob}
+
+
 \begin{prop}
 If $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$, then $\Gamma'
 \Entails !A$.
@@ -106,5 +118,6 @@ $\Struct M$ be a !!{structure} so that $\Sat{M}{\Gamma \cup \{ !A
 $\Sat{M}{!A}$, $\Sat{M}{!B}$. Hence, whenever $\Sat{M}{\Gamma \cup \{
   !A \} }$, $\Sat{M}{!B}$, so $\Gamma \cup \{ !A \} \Entails !B$.
 \end{proof}
+
 
 \end{document}
