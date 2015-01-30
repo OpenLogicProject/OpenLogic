@@ -114,6 +114,27 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 \end{enumerate}
 \end{defn}
 
+\begin{prob}
+Let $\Lang L = \{c, f, A\}$ with one !!{constant}, one one-place
+!!{function} and one two-place !!{predicate}, and let the
+!!{structure} $\Struct{M}$ be given by
+\begin{enumerate}
+\item $\Domain M = \{1, 2, 3\}$
+\item $\Assign{c}{M} = 3$
+\item $\Assign{f}{M}(1) = 2, \Assign{f}{M}(2) = 3, \Assign{f}{M}(3) = 2$
+\item $\Assign{A}{M} = \{\tuple{1, 2}, \tuple{2, 3}, \tuple{3, 3}\}$
+\end{enumerate}
+(a) Let $s(v) = 1$ for all variables~$v$.  Find out whether
+\[
+\Sat{M}{\lexists[x][(A(f(z), c) \lif \lforall[y][(A(y, x) \lor A(f(y),
+      x))])]}[s]
+\]
+Explain why or why not.
+
+(b) Give a different structure and variable assignment in which the
+formula is not satisfied.
+\end{prob}
+
 \begin{explain}
 A !!{variable} assignment~$s$ provides a value for \emph{every} variable in
 the language. This is of course not necessary: whether or not a
