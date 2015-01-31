@@ -14,37 +14,39 @@ Just as we've defined a number of important semantic notions
 (validity, entailment, satisfiabilty), we now define corresponding
 \emph{proof-theoretic notions}. These are not defined by appeal to
 satisfaction of sentences in !!{structure}s, but by appeal to the
-provability or unprovability of certain sequents.  It was an important
-discovery, due to G\"odel, that these notions coincide.  That they do
-is the content of the \emph{completeness theorem}.
+!!{derivability} or !!{nonderivability} of certain sequents.  It was
+an important discovery, due to G\"odel, that these notions coincide.
+That they do is the content of the \emph{completeness theorem}.
 \end{explain}
 
 \begin{defn}[Theorems]
-A sentence~$!A$ is a \emph{theorem} if there is a proof in LK of the
-sequent $\Sequent !A$. We write $\Proves !A$ if $!A$ is a theorem and
-$\Proves/ !A$ if it is not.
+A sentence~$!A$ is a \emph{theorem} if there is a !!{derivation}
+in~$\Log{LK}$ of the sequent $\quad \Sequent !A$. We write
+$\Proves[\Log{LK}] !A$ if $!A$ is a theorem and $\Proves/[\Log{LK}]
+!A$ if it is not.
 \end{defn}
 
 \begin{defn}[Provability]
-A sentence $!A$ is \emph{provable from} a set of sentences~$\Gamma$,
-$\Gamma \Proves !A$, if there is a finite subset~$\Gamma_0 \subseteq
-\Gamma$ such that LK derives $\Gamma_0 \Sequent !A$.  If $!A$ is not
-provable from $\Gamma$ we write $\Gamma \Proves/ !A$.
+A sentence $!A$ is \emph{!!{derivable} from} a set of
+sentences~$\Gamma$, $\Gamma \Proves[\Log{LK}] !A$, if there is a
+finite subset~$\Gamma_0 \subseteq \Gamma$ such that $\Log{LK}$
+!!{derive}s $\Gamma_0 \Sequent !A$.  If $!A$ is not !!{derivable} from
+$\Gamma$ we write $\Gamma \Proves/[\Log{LK}] !A$.
 \end{defn}
 
 \begin{defn}[Consistency]
-A set of sentences~$\Gamma$ is \emph{consistent} iff $\Gamma \Proves/
-\lfalse$.  If $\Gamma$ is not consistent we say it is \emph{inconsistent}.
+A set of sentences~$\Gamma$ is \emph{consistent} iff $\Gamma
+\Proves/[\Log{LK}] \lfalse$.  If $\Gamma$ is not consistent, i.e., if
+$\Gamma \Proves[\Log{LK}] \lfalse$, we say it is \emph{inconsistent}.
 \end{defn}
 
 \begin{prop}
-$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot A\}$ is inconsistent.
+$\Gamma \Proves[\Log{LK}] !A$ iff $\Gamma \cup \{\lnot A\}$ is inconsistent.
 \end{prop}
 
 \begin{prop}
-$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every sentence~$!A$.
+$\Gamma$ is inconsistent iff $\Gamma \Proves[\Log{LK}] {!A}$ for every
+  sentence~$!A$.
 \end{prop}
-
-
 
 \end{document}

@@ -10,7 +10,7 @@
 \begin{document}
 
 \olfileid{fol}{seq}{prv}
-\olsection{Properties of Provability}
+\olsection{Properties of \usetoken{S}{derivability}}
 
 
 \begin{prop}\ollabel{prop:provability}
@@ -26,9 +26,10 @@
   \Proves[\Log{LK}] \lfalse$ and $\Gamma \cup \{\lnot !A\}
   \Proves[\Log{LK}] \lfalse$, then $\Gamma \Proves[\Log{LK}] \lfalse$.
 
-\tagitem{prvOr}{\ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}
-  \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$, then
-    $\Gamma \cup \{!A \lor !B\} \Proves \lfalse$.}{}
+\tagitem{prvOr}{\ollabel{prop:provability-lor-left} If $\Gamma \cup
+  \{!A\} \Proves[\Log{LK}] \lfalse$ and $\Gamma \cup \{!B\}
+  \Proves[\Log{LK}] \lfalse$, then $\Gamma \cup \{!A \lor !B\}
+  \Proves[\Log{LK}] \lfalse$.}{}
 
 \tagitem{prvOr}{\ollabel{prop:provability-lor-right} If $\Gamma
   \Proves[\Log{LK}] !A$ or $\Gamma \Proves[\Log{LK}] !B$,
@@ -54,9 +55,9 @@
 
 \begin{proof}
 \begin{enumerate}
-\item Let the $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A$ be
-  $\Pi_0$ and the $\Log{LK}$-derivation of $\Gamma_1 \cup\{!A\}
-  \Sequent \lfalse$ be $\Pi_1$. We can then derive
+\item Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A$ be
+  $\Pi_0$ and the $\Log{LK}$-!!{derivation} of $\Gamma_1 \cup\{!A\}
+  \Sequent \lfalse$ be $\Pi_1$. We can then !!{derive}
 
 \begin{prooftree}
 \AxiomC{}
@@ -81,7 +82,7 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
 \item Suppose that $\Gamma \cup \{!A\} \Proves[\Log{LK}]
   \lfalse$. Then there is a finite set $\Gamma_0 \subseteq \Gamma$
   with $\Proves[\Log{LK}] \Gamma_0 \cup \{!A\} \Sequent \lfalse$.  Let
-  $\Pi_0$ be an $\Log{LK}$-derivation of $\Gamma_0 \cup \{!A\}
+  $\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \cup \{!A\}
   \Sequent \lfalse$, and consider
 
 \begin{prooftree}
@@ -93,9 +94,9 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
 \end{prooftree}
 
 \item There are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1
-  \subseteq \Gamma$ and $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ of
+  \subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$ of
   $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent
-  \lfalse$, respectively. We can then derive
+  \lfalse$, respectively. We can then !!{derive}
 
 \begin{prooftree}
 \AxiomC{}
@@ -119,7 +120,7 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
 \tagitem{defOr}{}{
 \iftag{probOr}{Exercise.}{
 There are finite sets $\Gamma_0,\Gamma_1 \subseteq \Gamma$ and
-$\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ such that
+$\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$ such that
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
@@ -142,8 +143,8 @@ Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
 % prop:provability-lor-right
 \tagitem{defOr}{}{
 \iftag{probOr}{Exercise.}{
-There is an $\Log{LK}$-derivation $\Pi_0$ and a finite set $\Gamma_0
-\subseteq \Gamma$ such that we can derive
+There is an $\Log{LK}$-!!{derivation} $\Pi_0$ and a finite set $\Gamma_0
+\subseteq \Gamma$ such that we can !!{derive}
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
@@ -158,7 +159,7 @@ Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
 \tagitem{defAnd}{}{
 \iftag{probAnd}{Exercise}{
 If $\Gamma \Proves[\Log{LK}] !A \land !B$, there is a finite set
-$\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation $\Pi_0$ of
+$\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation} $\Pi_0$ of
 $\Gamma_0 \Sequent !A \land !B$. Consider
 \begin{prooftree}
 \AxiomC{}
@@ -170,7 +171,7 @@ $\Gamma_0 \Sequent !A \land !B$. Consider
 \RightLabel{cut} 
 \BinaryInf$\Gamma_0 \fCenter !A$
 \end{prooftree}
-Hence, $\Gamma \Proves[\Log{LK}] !A$.  A similar derivation starting
+Hence, $\Gamma \Proves[\Log{LK}] !A$.  A similar !!{derivation} starting
 with $!B \Sequent !B$ on the right side shows that $\Gamma
 \Proves[\Log{LK}] !B$.}}
 
@@ -178,7 +179,7 @@ with $!B \Sequent !B$ on the right side shows that $\Gamma
 \tagitem{defAnd}{}{\iftag{probAnd}{Exercise.}{If $\Gamma
     \Proves[\Log{LK}] !A$ as well as $\Gamma \Proves[\Log{LK}] !B$,
     there are finite sets $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$ and
-    an $\Log{LK}$-derivations $\Pi_0$ of $\Gamma_0 \Sequent !A$ and
+    an $\Log{LK}$-!!{derivation}s $\Pi_0$ of $\Gamma_0 \Sequent !A$ and
     $\Pi_1$ of $\Gamma_1 \Sequent !A$. Consider
 \begin{prooftree}
 \AxiomC{}
@@ -200,7 +201,7 @@ Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, we have $\Gamma
 \iftag{probIf}{Exercise.}{
 Suppose that $\Gamma \Proves[\Log{LK}] !A$ and $\Gamma
 \Proves[\Log{LK}] !A \lif !B$.  There are finite sets $\Gamma_0$,
-$\Gamma_1 \subseteq \Gamma$ such that there are $\Log{LK}$-derivations
+$\Gamma_1 \subseteq \Gamma$ such that there are $\Log{LK}$-!!{derivation}s
 $\Pi_0$ of $\Gamma_0 \Sequent !A$ and $\Pi_1$ of $\Gamma_1 \Sequent !A
 \lif !B$. Consider:
 
@@ -231,8 +232,8 @@ means that $\Gamma \Proves[\Log{LK}] !B$.}}
 % prop:provability-lif
 \tagitem{defIf}{}{\iftag{probIf}{Exercise.}{First suppose $\Gamma
     \Proves[\Log{LK}] \lnot !A$.  Then for some finite $\Gamma_0
-    \subseteq \Gamma$ there is a $\Log{LK}$-derivation of $\Gamma_0
-    \Sequent \lnot !A$. The following derivation shows that $\Gamma
+    \subseteq \Gamma$ there is a $\Log{LK}$-!!{derivation} of $\Gamma_0
+    \Sequent \lnot !A$. The following !!{derivation} shows that $\Gamma
     \Proves[\Log{LK}] !A \lif !B$:
 \begin{prooftree}
 \AxiomC{}
@@ -251,8 +252,8 @@ means that $\Gamma \Proves[\Log{LK}] !B$.}}
 \end{prooftree}
 
 Now suppose $\Gamma \Proves[\Log{LK}] !B$.  Then for some finite
-$\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-derivation of
-$\Gamma_0 \Sequent !B$. The following derivation shows that $\Gamma
+$\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-!!{derivation} of
+$\Gamma_0 \Sequent !B$. The following !!{derivation} shows that $\Gamma
 \Proves[\Log{LK}] !A \lif !B$:
 \begin{prooftree}
 \AxiomC{}
@@ -283,7 +284,7 @@ If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
 
 \begin{proof}
 Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
-of~$\Delta$, so derivation of $\Gamma_0 \Sequent !A$ also shows
+of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
 $\Delta \Proves !A$.
 \end{proof}
 
@@ -294,7 +295,7 @@ in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
 \end{thm}
 
 \begin{proof}
-Let $\Pi_0$ be an $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A(c)$
+Let $\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A(c)$
 for some finite $\Gamma_0 \subseteq \Gamma$.  By adding a $\lforall$
 right inference, we obtain a proof of $\Gamma \Sequent
 \lforall[x][!A(x)]$, since $c$ does not occur in $\Gamma$ or $!A(x)$
@@ -315,12 +316,12 @@ and thus the eigenvariable condition is satisfied.
 \begin{proof}
 \begin{tagenumerate}{prvEx,prvAll}
 \tagitem{prvEx}{Suppose $\Gamma \Proves !A(t)$. Then for some
-  finite~$\Gamma_0 \subseteq \Gamma$, $\Log{LK}$ derives $\Gamma_0
-  \Sequent !A(t)$. Add an $\lexists$ right inference to get a
-  derivation of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
+  finite~$\Gamma_0 \subseteq \Gamma$, $\Log{LK}$ !!{derive}s $\Gamma_0
+  \Sequent !A(t)$. Add an $\lexists$ right inference to get 
+  !!a{derivation} of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
 
 \tagitem{prvAll}{Suppose $\Gamma \Proves \lnot !A(t)$. Then there is a
-  finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation
+  finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation}
   $\Pi$ of $\Gamma_0 \Sequent \lnot !A(t)$.  Then
 % for some reason, prooftree env sometimes doesn't work here
 % \begin{prooftree}

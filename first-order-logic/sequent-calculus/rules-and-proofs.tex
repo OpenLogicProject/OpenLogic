@@ -7,19 +7,36 @@
 \begin{document}
 
 \olfileid{fol}{seq}{rul}
-\olsection{Rules and Proofs}
 
-Let $\Lang L$ be a first-order language with the usual constants, !!{variable}s, and logical symbols and auxiliary symbols (parentheses and the comma). 
+\olsection{Rules and \usetoken{P}{derivation}}
+
+Let $\Lang L$ be a first-order language with the usual constants,
+!!{variable}s, logical symbols, and auxiliary symbols (parentheses
+and the comma).
 
 \begin{defn}[sequent]
 A \emph{sequent} is an expression of the form
 \[ \Gamma \Sequent \Delta \]
-where $\Gamma$ and $\Delta$ are finite (possibly empty) sets of !!{sentences}s of the language $\Lang L$. The !!{formula}s in $\Gamma$ are the \emph{antecedent formulae}, while the formulae in $\Delta$ are the \emph{succedent formulae}. 
+where $\Gamma$ and $\Delta$ are finite (possibly empty) sets of
+!!{sentence}s of the language $\Lang L$. The !!{formula}s in $\Gamma$
+are the \emph{antecedent !!{formula}s}, while the formulae in $\Delta$ are
+the \emph{succedent !!{formula}s}.
 
-The intuitive idea behind a sequent is: if all of the antecedent !!{formula}s hold, then some of the succedent !!{formula}s hold. That is, if $\Gamma = \{ \Gamma_1,\ldots,\Gamma_m\}$ and $\Delta = \{ \Delta_1,\ldots, \Delta_n\}$, then $\Gamma \Sequent \Delta$ abbreviates
-\[ \Gamma_1 \land \cdots \land \Gamma_m \lif \Delta_1 \lor \cdots \lor \Delta_n \]
+The intuitive idea behind a sequent is: if all of the antecedent
+!!{formula}s hold, then at least one of the succedent !!{formula}s
+holds. That is, if $\Gamma = \{ \Gamma_1, \dots, \Gamma_m\}$ and
+$\Delta = \{ \Delta_1, \dots, \Delta_n\}$, then $\Gamma \Sequent
+\Delta$ holds iff
+\[ 
+(\Gamma_1 \land \cdots \land \Gamma_m) \lif (\Delta_1 \lor \cdots \lor
+\Delta_n) \] holds.
 
-When $m=0$, $\hspace{1em} \Sequent \Delta$ means that $\Delta_1 \lor \cdots \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \hspace{1em}$ means that $\Gamma_1 \land \cdots \land \Gamma_m$ gives a contradiction. An empty succedent is sometimes filled with the $\lfalse$ symbol. The empty sequent $\hspace{1em} \Sequent \hspace{1em}$ canonically represents a contradiction.
+When $m=0$, $\quad \Sequent \Delta$ holds iff $\Delta_1 \lor \dots
+\lor \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \quad$ holds iff
+$\Gamma_1 \land \dots \land \Gamma_m$ does not. An empty succedent is
+sometimes filled with the $\lfalse$ symbol. The empty sequent
+$\quad \Sequent \quad$ canonically represents a
+contradiction.
 \end{defn}
 
 We write $\Gamma, !A$ (or $!A, \Gamma$) for $\Gamma \cup \{!A\}$, and
@@ -27,7 +44,6 @@ $\Gamma, \Delta$ for $\Gamma \cup \Delta$.
 
 \begin{defn}[Inference]
 An \emph{inference} is an expression of the form
-
 \[
 \AxiomC{$S_1$}
 \UnaryInfC{$S$}
@@ -40,16 +56,23 @@ An \emph{inference} is an expression of the form
 \BinaryInfC{$S$}
 \DisplayProof
 \]
-where $S, S_1$, and $S_2$ are sequents. $S_1$ and $S_2$ are called \emph{upper sequents} and $S$ is a \emph{lower sequent}.
+where $S, S_1$, and $S_2$ are sequents. $S_1$ and $S_2$ are called the
+\emph{upper sequents} and $S$ the \emph{lower sequent} of the
+inference.
 
-Inferences represent the idea that whenever the upper sequent(s) is (are) asserted, from it, we may logically infer the lower sequent.
+Inferences represent the idea that whenever the upper sequent(s) is
+(are) asserted, from it, we may logically infer the lower sequent.
 \end{defn}
 
-For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite sets of !!{sentence}s.
+For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite
+sets of !!{sentence}s.
 
-The rules for $\Log{LK}$ are divided into two main types: \emph{structural} rules and \emph{logical} rules. The logical rules are further divided into \emph{propositional} rules (quantifier-free) and \emph{quantifier} rules.\\ 
+The rules for $\Log{LK}$ are divided into two main types:
+\emph{structural} rules and \emph{logical} rules. The logical rules
+are further divided into \emph{propositional} rules (quantifier-free)
+and \emph{quantifier} rules.
 
-\underline{Structural rules:}
+\paragraph{Structural rules:}
 
 Weakening:
 \[
@@ -65,7 +88,6 @@ Weakening:
 \]
 where $!A$ is called the \emph{weakening !!{formula}}.
 
-
 Cut:
 \[
 \Axiom$ \Gamma \fCenter \Delta, !A$
@@ -74,8 +96,14 @@ Cut:
 \DisplayProof
 \]
 
-\underline{Logical rules:}
-The rules are named by the logical symbol of the \emph{principal !!{formula}} of the inference (the formula containing $!A$ and/or $!B$ in the lower sequent). The designations ``left'' and ``right'' indicate whether the logical symbol has been introduced in an antecedent formula or a succedent formula (to the left or to the right of the sequent symbol).\\
+\paragraph{Logical rules:}
+
+The rules are named by the !!{main operator} of the \emph{principal
+  !!{formula}} of the inference (the formula containing $!A$ and/or
+$!B$ in the lower sequent). The designations ``left'' and ``right''
+indicate whether the logical symbol has been introduced in an
+antecedent formula or a succedent formula (to the left or to the right
+of the sequent symbol).
 
 \emph{Propositional Rules:}
 \[
@@ -153,7 +181,7 @@ The rules are named by the logical symbol of the \emph{principal !!{formula}} of
 \DisplayProof
 \]
 where $t$ is a ground term, and $a$ is a constant which does not occur
-anywhere in the lower sequent of the $\lforall[]$ right rule. We call
+anywhere in the lower sequent of the $\lforall$ right rule. We call
 $a$ the \emph{eigenvariable} of the $\forall$ right inference.
 
 \[
@@ -185,8 +213,8 @@ An \emph{initial sequent} is a sequent of the form $!A \Sequent !A$
 for any !!{sentence} $!A$ in the language.
 \end{defn}
 
-\begin{defn}[LK derivation]
-An $\Log{LK}$-derivation of a sequent $S$ is a tree of sequents
+\begin{defn}[LK !!{derivation}]
+An \emph{$\Log{LK}$-!!{derivation}} of a sequent $S$ is a tree of sequents
 satisfying the following conditions:
 \begin{enumerate}
 \item The topmost sequents of the tree are initial sequents.
@@ -194,13 +222,13 @@ satisfying the following conditions:
   inference whose lower sequent stands directly below that sequent in
   the tree.
 \end{enumerate}
-We then say that $S$ is the \emph{end-sequent} of the derivation and
-that $S$ is \emph{derivable in $\Log{LK}$} (or $\Log{LK}$-derivable).
+We then say that $S$ is the \emph{end-sequent} of the !!{derivation} and
+that $S$ is \emph{!!{derivable} in $\Log{LK}$} (or $\Log{LK}$-!!{derivable}).
 \end{defn}
 
 \begin{defn}[LK theorem]
-A !!{sentence} $!A$ is a \emph{theorem} of $\Log{LK}$ if the sequent
-${} \Sequent !A$ is $\Log{LK}$-derivable.
+!!a{sentence} $!A$ is a \emph{theorem} of $\Log{LK}$ if the sequent
+$\quad \Sequent !A$ is $\Log{LK}$-!!{derivable}.
 \end{defn}
 
 \end{document}

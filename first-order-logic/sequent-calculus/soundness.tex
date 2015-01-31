@@ -10,48 +10,47 @@
 \olsection{Soundness}
 
 \begin{explain}
-A proof system, such as the sequent calculus, is \emph{sound} if it
-cannot prove things that do not actually hold.  Soundness is thus a
-kind of guaranteed safety property for proof systems.  Depending on
-which proof theoretic property is in question, we would like to know
-for instance, that
+A !!{derivation} system, such as the sequent calculus, is \emph{sound}
+if it cannot !!{derive} things that do not actually hold.  Soundness is
+thus a kind of guaranteed safety property for !!{derivation} systems.
+Depending on which proof theoretic property is in question, we would
+like to know for instance, that
 \begin{enumerate}
-\item every provable sentence is valid;
-\item if a sentence is provable from some others, it is also a
+\item every !!{derivable} !!{sentence} is valid;
+\item if a !!{sentence} is !!{derivable} from some others, it is also a
   consequence of them;
-\item if a set of sentences is inconsistent, it is unsatisfiable.
+\item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
 \end{enumerate}
-These are important properties of a proof sytem.  If any of them do
-not hold, the proof system is deficient---it would proves too much.
-Consequently, establishing the soundness of a proof system is of the
+These are important properties of a !!{derivation} sytsem.  If any of them do
+not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
+Consequently, establishing the soundness of a !!{derivation} system is of the
 utmost importance.
 
 Because all these proof-theoretic properties are
-defined via provability in the sequent calculus of certain sequents,
+defined via !!{derivability} in the sequent calculus of certain sequents,
 proving (1)--(3) above requires proving something about the semantic
-properties of provable sequents.  We will first define what it means
-for a sequent to be \emph{valid}, and then show that every provable
+properties of !!{derivable} sequents.  We will first define what it means
+for a sequent to be \emph{valid}, and then show that every !!{derivable}
 sequent is valid.  (1)--(3) then follow as corollaries from this
 result.
 \end{explain}
 
 \begin{defn}
-A !!{structure}~$\Struct M$ \emph{satisifes} a sequent $\Gamma
+A !!{structure}~$\Struct M$ \emph{satisfies} a sequent $\Gamma
 \Sequent \Delta$ is \emph{valid} if either $\Sat/{M}{!E}$ for some $!E
 \in \Gamma$ or $\Sat{M}{!E}$ for some $!E \in \Delta$.
 
-A sequent is \emph{valid} if every !!{structure} $\Struct M$ satisfies
+A sequent is \emph{valid} if every !!{structure}~$\Struct M$ satisfies
 it.
 \end{defn}
 
 \begin{thm}[Soundness]
-\ollabel{sequent-soundness}
-If LK derives $\Gamma \Sequent \Delta$, then $\Gamma \Sequent \Delta$
-is valid.
+\ollabel{sequent-soundness} If $\Log{LK}$ !!{derive}s $\Gamma \Sequent
+\Delta$, then $\Gamma \Sequent \Delta$ is valid.
 \end{thm}
 
 \begin{proof}
-Let $\Pi$ be a derivation of $\Gamma \Sequent \Delta$. We proceed by
+Let $\Pi$ be a !!{derivation} of $\Gamma \Sequent \Delta$. We proceed by
 induction on the number of inferences in~$\Pi$.
 
 If the number of inferences is~0, then $\Pi$ consists only of an
@@ -83,7 +82,7 @@ $\Gamma' \Sequent \Delta'$.
   and $\Delta' \setminus \{!A\} \subseteq \Delta$. 
 
   If $\Sat{M}{!A}$, then $\Sat/{M}{\lnot !A}$, and since $\lnot !A
-  \in \Gamma$, $\Struct M$ satisifes $\Gamma \Sequent \Delta$.  Since
+  \in \Gamma$, $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  Since
   $\Gamma' \Sequent \Delta'$ is valid, if $\Sat/{M}{!A}$, then either
   $\Sat/{M}{!E}$ for some $!E \in \Gamma'$ or $\Sat{M}{!E}$ for some
   $!E \in \Delta'$ different from~$!A$. Consequently, $\Sat/{M}{!E}$
@@ -209,7 +208,7 @@ $\lor$~left, $\land$~right, and $\lif$~left.
 \item The last inference is $\land$~right. The premises are $\Gamma
   \Sequent \Delta'$ and $\Gamma \Sequent \Delta''$, where $!A \in
   \Delta'$ an $!B \in \Delta''$.  By induction hypothesis, both are
-  valid.  Consider a !!{strcuture}~$\Struct M$.  We have two cases:
+  valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
   (a) $\Sat/{M}{!A \land !B}$ or (b) $\Sat{M}{!A \land !B}$. In case
   (a), either $\Sat/{M}{!A}$ or $\Sat/{M}{!B}$.  In the former case,
   in order for $\Struct M$ to satisfy $\Gamma \Sequent \Delta'$, it
@@ -224,7 +223,7 @@ $\lor$~left, $\land$~right, and $\lif$~left.
 \item The last inference is $\lif$~right. The premises are $\Gamma
   \Sequent \Delta'$ and $\Gamma' \Sequent \Delta$, where $!A \in
   \Delta'$ an $!B \in \Gamma'$.  By induction hypothesis, both are
-  valid.  Consider a !!{strcuture}~$\Struct M$.  We have two cases:
+  valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
   (a) $\Sat/{M}{!A \lif !B}$ or (b) $\Sat{M}{!A \lif !B}$. In case
   (a), either $\Sat/{M}{!A}$ or $\Sat{M}{!B}$.  In the former case, in
   order for $\Struct M$ to satisfy $\Gamma \Sequent \Delta'$, it must
@@ -253,7 +252,7 @@ If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
 
 \begin{proof}
 If $\Gamma \Proves !A$ then for some finite subset $\Gamma_0 \subseteq
-\Gamma$, there is a derivation of $\Gamma_0 \Sequent !A$. By
+\Gamma$, there is !!a{derivation} of $\Gamma_0 \Sequent !A$. By
 \olref{sequent-soundness}, every !!{structure} $\Struct M$ either
 makes some $!B \in \Gamma_0$ false or makes $!A$ true.  Hence, if
 $\Sat{M}{\Gamma_0}$ then also $\Sat{M}{!A}$.
@@ -267,7 +266,7 @@ If $\Gamma$ is satisfiable, then it is consistent.
 \begin{proof}
 We prove the contrapositive. Suppose that $\Gamma$ is not
 consistent. Then $\Gamma \Proves \lfalse$, i.e., there is a finite
-$\Gamma_0 \subseteq \Gamma$ and a proof of $\Gamma_0 \Sequent
+$\Gamma_0 \subseteq \Gamma$ and !!a{derivation} of $\Gamma_0 \Sequent
 \lfalse$. By \olref{sequent-soundness}, $\Gamma_0 \Sequent \lfalse$ is
 valid.  Since $\Sat/{M}{\lfalse}$ for every !!{structure}~$\Struct M$,
 for $\Struct M$ to satisfy $\Gamma_0 \Sequent \lfalse$ there must be
