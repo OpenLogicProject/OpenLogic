@@ -11,39 +11,42 @@
 \begin{document}
 
 \olfileid{fol}{com}{mcs}
-\olsection{Maximally Consistent Sets of Sentences}
+\olsection{Maximally Consistent Sets of \usetoken{P}{sentence}}
 
 \begin{defn}
 \ollabel{mcs}
-A set~$\Gamma$ of sentences is \emph{maximally consistent} iff
+A set~$\Gamma$ of !!{sentence}s is \emph{maximally consistent} iff
 \begin{enumerate}
 \item $\Gamma$ is consistent, and
 \item if $\Gamma \subsetneq \Gamma'$, then $\Gamma'$ is inconsistent.
 \end{enumerate}
 \end{defn}
 
-\begin{digress}
+\begin{explain}
 An alternate definition equivalent to the above is: a set $\Gamma$ of
 sentences is \emph{maximally consistent} iff
 \begin{enumerate}
 \item $\Gamma$ is consistent, and
 \item If $\Gamma \cup \{ !A \}$ is consistent, then $!A \in \Gamma$.
 \end{enumerate}
-\end{digress}
+In other words, one cannot add !!{sentence}s not already in~$\Gamma$
+to a maximally consistent set~$\Gamma$ without making the resulting
+larger set inconsistent.
+\end{explain}
 
 \begin{explain}
 Maximally consistent sets are important in the completeness proof
-since we can guarantee that every consistent set of sentences~$\Gamma$
+since we can guarantee that every consistent set of !!{sentence}s~$\Gamma$
 is contained in a maximally consistent set~$\Gamma^*$, and a maximally
-consistent set contains, for each sentence~$!A$, either $!A$ or its
-negation $\lnot !A$.  This is true in particular for atomic sentences,
+consistent set contains, for each !!{sentence}~$!A$, either $!A$ or its
+negation $\lnot !A$.  This is true in particular for atomic !!{sentence}s,
 so from a maximally consistent set in a language suitably expanded by
 !!{constant}s, we can construct a !!{structure} where the
-interpretation of !!{predicates}s is defined according to which atomic
-sentences are in~$\Gamma^*$. This !!{structure} can then be shown to
-make all sentences in~$\Gamma^*$ (and hence also in $\Gamma$)
+interpretation of !!{predicate}s is defined according to which atomic
+!!{sentence}s are in~$\Gamma^*$. This !!{structure} can then be shown to
+make all !!{sentence}s in~$\Gamma^*$ (and hence also in $\Gamma$)
 true. The proof of this latter fact requires that $\lnot !A \in
-\Gamma^*$ iff $!A \notin \Gamma^*$, $!A \lor !B \in \Gamma^*$ iff $!A
+\Gamma^*$ iff $!A \notin \Gamma^*$, $(!A \lor !B) \in \Gamma^*$ iff $!A
 \in \Gamma^*$ or $!B \in \Gamma^*$, etc.
 \end{explain}
 
@@ -57,13 +60,13 @@ Suppose $\Gamma$ is maximally consistent. Then:
 \item \ollabel{prop:mcs-either-or} For any $!A$, either $!A \in
   \Gamma$ or $\lnot !A \in \Gamma$.
 
-\tagitem{prvAnd}{\ollabel{prop:mcs-and} $!A \land !B \in \Gamma$
+\tagitem{prvAnd}{\ollabel{prop:mcs-and} $(!A \land !B) \in \Gamma$
   iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
 
-\tagitem{prvOr}{\ollabel{prop:mcs-or} $!A \lor !B \in \Gamma$ iff
+\tagitem{prvOr}{\ollabel{prop:mcs-or} $(!A \lor !B) \in \Gamma$ iff
   either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
 
-\tagitem{prvIf}{\ollabel{prop:mcs-if} $!A \lif !B \in \Gamma$ iff
+\tagitem{prvIf}{\ollabel{prop:mcs-if} $(!A \lif !B) \in \Gamma$ iff
   either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
 \end{enumerate}
 \end{prop}
@@ -85,21 +88,22 @@ $\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
 
 \item For any $!A$, either $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
 
-Suppose to the contrary that there is an $!A$ such that $!A \notin
-\Gamma$ and $\lnot !A \notin \Gamma$. Since $\Gamma$ is maximally
-consistent, $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are
-both inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma
-\cup \{\lnot !A\} \Proves \lfalse$. By
+Suppose to the contrary that for some~$!A$ both $!A \notin \Gamma$ and
+$\lnot !A \notin \Gamma$. Since $\Gamma$ is maximally consistent,
+$\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup
+\{\lnot !A\} \Proves \lfalse$. By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-exhaustive},
 $\Gamma$ is inconsistent, a contradiction.  Hence there cannot be such
-a $!A$ and, for every $!A$, $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
+a !!{sentence}~$!A$ and, for every $!A$, $!A \in \Gamma$ or $\lnot !A
+\in \Gamma$.
 
-\tagitem{defAnd}{}{
-\iftag{probAnd}{Exercise.}{
-$!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
+\tagitem{defAnd}{}{%
+\iftag{probAnd}{Exercise.}{%
+$(!A \land !B) \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
 
-For the forward direction, let $!A \land !B \in \Gamma$. Then $\Gamma
-\Proves !A \land !B$. By
+For the forward direction, suppose $(!A \land !B) \in \Gamma$. Then
+$\Gamma \Proves !A \land !B$. By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-left},
 $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
 \olref{prop:mcs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
@@ -108,34 +112,33 @@ required.
 For the reverse direction, let $!A \in \Gamma$ and $!B \in
 \Gamma$. Then $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-right},
-$\Gamma \Proves !A \land !B$. By \olref{prop:mcs-prov-in}, $!A \land
-!B \in \Gamma$.}}
+$\Gamma \Proves !A \land !B$. By \olref{prop:mcs-prov-in}, $(!A \land
+!B) \in \Gamma$.}}
 
-\tagitem{defOr}{}{
-\iftag{probOr}{Exercise.}{
-$!A \lor !B \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$.
+\tagitem{defOr}{}{%
+\iftag{probOr}{Exercise.}{%
+$(!A \lor !B) \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$.
 
 For the contrapositive of the forward direction, suppose that $!A
-\notin \Gamma$ and $!B \notin \Gamma$. We want to show that $!A \lor
-!B \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma
+\notin \Gamma$ and $!B \notin \Gamma$. We want to show that $(!A \lor
+!B) \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma
 \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$.
 By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-left},
-$\Gamma \cup \{!A \lor !B\}$ is inconsistent. Hence, $!A \lor !B
+$\Gamma \cup \{(!A \lor !B)\}$ is inconsistent. Hence, $(!A \lor !B)
 \notin \Gamma$, as required.
 
 For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
 \Gamma$. Then $\Gamma \Proves !A$ or $\Gamma \Proves !B$. By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-right},
-$\Gamma \Proves !A \lor !B$.  By \olref{prop:mcs-prov-in}, $!A \lor !B
+$\Gamma \Proves !A \lor !B$.  By \olref{prop:mcs-prov-in}, $(!A \lor !B)
 \in \Gamma$, as required.}}
 
-\tagitem{defIf}{}{
-\iftag{probIf}{Exercise.}{
-$!A \lif !B \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in
-\Gamma$:
+\tagitem{defIf}{}{%
+\iftag{probIf}{Exercise.}{%
+$(!A \lif !B) \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in \Gamma$:
 
-For the forward direction, $!A \lif !B \in \Gamma$, and suppose to the
+For the forward direction, let $(!A \lif !B) \in \Gamma$, and suppose to the
 contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
 assumptions, $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !A$. By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-mp},
@@ -147,12 +150,12 @@ For the reverse direction, first consider the case where $!A \notin
 hence $\Gamma \Proves \lnot !A$. By
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lif},
 $\Gamma \Proves !A \lif !B$. Again by \olref{prop:mcs-prov-in}, we get
-that $!A \lif !B \in \Gamma$, as required.
+that $(!A \lif !B) \in \Gamma$, as required.
 
 Now consider the case where $!B \in \Gamma$. Then $\Gamma \Proves !B$
 and by
 \olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lif},
-$\Gamma \Proves !A \lif !B$. By \olref{prop:mcs-prov-in}, $!A \lif !B
+$\Gamma \Proves !A \lif !B$. By \olref{prop:mcs-prov-in}, $(!A \lif !B)
 \in \Gamma$.}}
 \end{enumerate}
 \end{proof}

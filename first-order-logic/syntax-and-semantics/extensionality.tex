@@ -32,7 +32,60 @@ symbol $R$, and !!{function} $f$ occurring in $!A$, then $\Sat{M}{!A}$
 iff $\Sat{M'}{!A}$.
 \end{prop}
 
+Moreover, the value of a term, and whether or not a !!{structure}
+satisfies a !!{formula}, only depends on the values of its subterms.
 
+\begin{prop}\ollabel{prop:ext-terms}
+Let $\Struct M$ be a !!{structure}, $t$ and $t'$ terms, and $s$ a
+variable assignment. Let $s' \sim_x s$ be the $x$-variant of $s$ given
+by~$s'(x) = \Value{t}{M}[s]$. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
+\Value{t}{M}[s']$.
+\end{prop}
+
+\begin{proof}
+By induction on~$t$. 
+\begin{enumerate}
+\item If $t$ is a constant, say, $t\ident c$, then $\Subst{t}{t'}{x} =
+  c$, and $\Value{c}{M}[s] = \Assign{c}{M} = \Value{c}{M}[s']$.
+
+\item If $t$ is a variable other than~$x$, say, $t \ident y$, then
+  $\Subst{t}{t'}{x} = y$, and $\Value{y}{M}[s] = \Value{y}{M}[s']$
+  since $s' \sim_x s'$.
+
+\item If $t \ident x$, then $\Subst{t}{t'}{x} = t'$.  But
+  $\Value{x}{M}[s'] = \Value{t'}{M}[s]$ by definition of~$s'$.
+
+\item If $t \ident \Atom{f}{t_1,\dots,t_n}$ then we have:
+\begin{align*}
+\Value{\Subst{t}{t'}{x}}{M}[s] & = 
+\Value{\Atom{f}{\Subst{t_1}{t'}{x}, \dots, \Subst{t_n}{t'}{x}}}{M}[s]
+    \text{ by definition of $\Subst{t}{t'}{x}$}\\
+& = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots, 
+   \Value{\Subst{t_n}{t'}{x}}{M}[s]) 
+    \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s]$}\\
+& = \Assign{f}{M}(\Value{t_1}{M}[s'], \dots, 
+   \Value{t_n}{M}[s']) 
+    \text{ by induction hypothesis}\\
+& = \Value{t}{M}[s']
+    \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s']$}
+\end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:ext-formulas}
+Let $\Struct M$ be a !!{structure}, $!A$ a !!{formula}, $t$ a term,
+and $s$ a variable assignment. Let $s' \sim_x s$ be the $x$-variant of
+$s$ given by~$s'(x) = \Value{t}{M}[s]$. Then
+$\Sat{M}{\Subst{!A}{t}{x}}[s]$ iff $\Sat{M}{!A}[x']$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][ext]{prop:ext-formulas}
+\end{prob}
 
 
 \end{document}

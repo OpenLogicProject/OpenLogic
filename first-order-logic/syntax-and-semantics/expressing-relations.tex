@@ -48,14 +48,17 @@ for any variable assignment~$s$ with $s(\Obj x_i) = a_i$ ($i = 1,
 \end{defn}
 
 \begin{ex}
-In the standard model of arithmetic~$\Struct N$, the !!{formula} $\Obj x_1
-< \Obj x_2 \lor \Obj x_1 = \Obj x_2$ expresses the $\le$ relation
-on~$\Nat$. The !!{formula} $\Obj x_2 = \Obj x_1'$ expresses the successor
-relation, i.e., the relation $R \subseteq \Nat^2$ where $Rnm$ holds if
-$m$ is the successor of~$n$. The formula $\Obj x_1 = \Obj x_2'$
-expresses the predecessor relation.  The !!{formula} $\lexists[\Obj
-  x_3][(\eq/[\Obj x_3][\Obj 0] \land Obj x_2 = (\Obj x_1 + \Obj
-  x_3))]$ expresses the $\Obj <$ relation as well.
+In the standard model of arithmetic~$\Struct N$, the !!{formula} $\Obj
+x_1 < \Obj x_2 \lor \Obj x_1 = \Obj x_2$ expresses the $\le$ relation
+on~$\Nat$. The !!{formula} $\Obj x_2 = \Obj x_1'$ expresses the
+successor relation, i.e., the relation $R \subseteq \Nat^2$ where
+$Rnm$ holds if $m$ is the successor of~$n$. The formula $\Obj x_1 =
+\Obj x_2'$ expresses the predecessor relation.  The !!{formula}s
+$\lexists[\Obj x_3][(\eq/[\Obj x_3][\Obj 0] \land \eq[\Obj x_2][(\Obj
+    x_1 + \Obj x_3)])]$ and $\lexists[\Obj x_3][\eq[\Obj x_1 + {\Obj
+      x_3}'][x_2]]$ both express the $\Obj <$ relation.  This means
+that the predicate symbol~$<$ is actually superfluous in the language
+of arithmetic; it can be defined.
 \end{ex}
 
 \begin{prob}

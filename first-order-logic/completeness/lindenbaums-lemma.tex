@@ -19,9 +19,9 @@ consistent saturated set~$\Gamma^*$.
 Let $\Gamma$ be consistent, and let $\Gamma'$ be as in the previous
 definition: we already proved that $\Gamma \cup \Gamma'$ is a
 consistent saturated set in the richer language $\Lang L'$ (with the
-countably many new constants). Let $!A_0, !A_1, \dots$ be an
-enumeration of all the !!{formula}s of~$\Lang L'$. Define $\Gamma_0 =
-\Gamma \cup \Gamma'$, and
+!!{denumerable} set of new constants). Let $!A_0$, $!A_1$, \dots{} be
+an enumeration of all the !!{formula}s of~$\Lang L'$. Define
+$\Gamma_0 = \Gamma \cup \Gamma'$, and
 \[
 \Gamma_{n+1} =
 \begin{cases}
@@ -35,8 +35,8 @@ Let $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$. Since $\Gamma' \subseteq
 \Gamma^*$, for each !!{formula}~$!A$, $\Gamma^*$ contains a
 !!{formula} of the form
 \iftag{prvEx} 
-{$\lexists[x][!A] \lif \Subst{!A}{c}{x}$}
-{$\lnot\lforall[x][!A] \lif \lnot\Subst{!A}{c}{x}$}
+{$\lexists[x][!A] \lif !A(c)$}
+{$\lnot\lforall[x][!A] \lif \lnot !A(c)$}
 and thus is saturated.
 
 Each $\Gamma_n$ is consistent: $\Gamma_0$ is consistent by
@@ -48,7 +48,7 @@ inconsistent, then $\Gamma_n \Proves \lnot !A$ and $\Gamma_n \Proves
 !A$, so $\Gamma_n$ would be inconsistent contrary to induction
 hypothesis.
 
-Any !!{formula} of $\Frm[L']$ appears on the list used to
+Every !!{formula} of $\Frm[L']$ appears on the list used to
 define~$\Gamma^*$.  If $!A_n \notin \Gamma^*$, then that is because
 $\Gamma_n \cup \{!A_n\}$ was inconsistent.  But that means that
 $\Gamma^*$ is maximally consistent.

@@ -83,6 +83,17 @@ an axiom system for a theory, i.e., a set of sentences.
   redundant by showing that $(\Gamma \setminus \{!A\}) \cup \{\lnot
   A\}$ is satisfiable. For instance, this is how it was shown that the
   parallel postulate is independent of the other axioms of geometry.
+\item Another important question is that of definability of concepts
+  in a theory: The choice of the language determines what the models
+  of a theory consists of. But not every aspect of a theory must be
+  represented separately in its models.  For instance, every ordering
+  $\le$ determines a corresponding strict ordering~$<$---given one, we
+  can define the other.  So it is not necessary that a model of a
+  theory involving such an order must \emph{also} contain the
+  corresponding strict ordering.  When is it the case, in general,
+  that one relation can be defined in terms of others?  When is it
+  impossible to define a relation in terms of other (and hence must
+  add it to the primitives of the language)?
 \end{enumerate}
 \end{explain}
 
@@ -117,33 +128,49 @@ The theory of Peano arithmetic is axiomatized by the following sentences:
 \begin{align*}
 & \lnot\lexists[x][x' = \Obj 0]\\
 & \lforall[x][\lforall[y][(x' = y' \lif x = y)]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][(x + z' = y)])]]\\
 & \lforall[x][\eq[(x + \Obj 0)][x]]\\
 & \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
 & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
 & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
-\intertext{plus all sentences of the form}\\
+\intertext{plus all sentences of the form}
 & (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][A(x)]
 \end{align*}
 Since there are infinitely many sentences of the latter form, this
 axiom system is infinite.  The latter form is called the
-\emph{induction schema}.
+\emph{induction schema}. (Actually, the induction schema is a bit more
+complicated than we let on here.)
+
+The second axiom is an explicit definition of~$<$.  
 \end{ex}
 
 \begin{ex}
 The following might be considered as an axiom system for a theory of sets:
 \begin{align*}
-& \lexists[x][\lnot \lexists[y][y \in x]]\\
-& \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff (u = x \lor u = y))]]]]\\
-& \lforall[x][\lforall[y][(\lforall[z](z \in x \liff z \in y) \lif x = y)]]\\
-& \lforall[x][\lexists[y][\lforall[z][(z \in y \liff \lexists[u][(z \in u \land u \in x)])]]]\\
-\intertext{plus all sentences of the form}
-& \lexists[x][\lforall[y][(y \in x \liff !A(y))]]
+& \lexists[x][\lnot \lexists[y][y \in x]]\\ 
+& \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff (u =
+          x \lor u = y))]]]]\\ 
+& \lforall[x][\lforall[y][(\lforall[z](z \in x \liff z \in y) \lif x =
+      y)]]\\ 
+& \lforall[x][\lexists[y][\lforall[z][(z \in y \liff \lexists[u][(z \in
+        u \land u \in x)])]]]\\ 
+\intertext{plus all sentences of the form} &
+\lexists[x][\lforall[y][(y \in x \liff !A(y))]]
 \end{align*}
 The last form is called the \emph{naive comprehension scheme}.  It
 essentially says that for every $!A(x)$, the set $\Setabs{x}{!A(x)}$
 exists. It is called naive because, as it turns out, this theory is
 contradictory.
 \end{ex}
+
+
+\begin{ex}
+In the area of \emph{mereology}, the relation of \emph{parthood} is a
+fundamental relation. Just like theories of sets, there are theories
+of parthood that axiomatize verious conceptions (sometimes
+conflicting) of this relation.  
+\end{ex}
+
 
 
 \end{document}
