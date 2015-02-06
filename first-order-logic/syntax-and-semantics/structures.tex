@@ -95,9 +95,9 @@ is the !!{structure} $\Struct{{HF}}$ of \emph{hereditarily finite sets}:
 Recall that a term is \emph{closed} if it contains no !!{variable}s.
 \end{explain}
 
-\begin{defn}[Denotation of closed terms]
+\begin{defn}[!!^{value} of closed terms]
 If $t$ is a closed term of the langage~$\Lang L$ and $\Struct M$ is a
-!!{structure} for~$\Lang L$, the \emph{denotation}~$\Value{t}{M}$ is
+!!{structure} for~$\Lang L$, the \emph{!!{value}}~$\Value{t}{M}$ is
 defined as follows:
 \begin{enumerate}
 \item If $t$ is just the !!{constant}~$c$, then $\Value{c}{M} = \Assign{c}{M}$.
@@ -109,7 +109,7 @@ defined as follows:
 
 \begin{defn}[Covered !!{structure}]
 A !!{structure} is \emph{covered} if every element of the domain is the
-denotation of some closed term.
+!!{value} some closed term.
 \end{defn}
 
 \begin{ex}
@@ -126,8 +126,8 @@ than the integer $c_2$: for example, $\langle 1, 3 \rangle \in
 \Assign{<}{M}$ but $\langle 2, 2 \rangle \notin \Assign{<}{M}$. For the
 binary !!{function} $+$, define $\Assign{+}{M}$ in the usual way---for
 example, $\Assign{+}{M}(2,3)$ maps to $5$, and similarly for the
-binary !!{function} $\times$. Hence, the denotation of $\Obj{four}$
-is just 4, and the denotation of $\times(\Obj{two},
+binary !!{function} $\times$. Hence, the !!{value} of $\Obj{four}$
+is just 4, and the !!{value} of $\times(\Obj{two},
 +(\Obj{three},\Obj{zero}))$ (or in infix notation, $\Obj{two}
 \times (\Obj{three} + \Obj{zero})$ ) is
 \begin{align*} 
@@ -152,14 +152,15 @@ Is $\Struct N$, the standard model of arithmetic, covered? Explain.
 The stipulations we make as to what counts as a !!{structure} impact
 our logic. For example, the choice to prevent empty domains ensures,
 given the usual account of satisfaction (or truth) for quantified
-sentences, that $\lexists[x][(!A(x) \lor \lnot !A(x))]$ is valid ---
-that is, a logical truth. And the stipulation that all !!{constant}s
-must refer to an object in the domain ensures that the existential
-generalization is a sound pattern of inference: $!A(a)$, therefore
-$\lexists[x][!A(x)]$. If we allowed names to refer outside the domain,
-or to not refer, then we would be on our way to a \emph{free logic},
-in which existential generalization requires an additional premise:
-$!A(a)$ and $\lexists[x][\eq[x][a]]$, therefore $\lexists[x][!A(x)]$.
+sentences, that $\lexists[x][(!A(x) \lor \lnot !A(x))]$ is
+valid---that is, a logical truth. And the stipulation that all
+!!{constant}s must refer to an object in the domain ensures that the
+existential generalization is a sound pattern of inference: $!A(a)$,
+therefore $\lexists[x][!A(x)]$. If we allowed names to refer outside
+the domain, or to not refer, then we would be on our way to a
+\emph{free logic}, in which existential generalization requires an
+additional premise: $!A(a)$ and $\lexists[x][\eq[x][a]]$, therefore
+$\lexists[x][!A(x)]$.
 \end{digress}
 
 \end{document}

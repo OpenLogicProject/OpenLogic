@@ -11,20 +11,19 @@
 \olsection{Examples of first-order theories}
 
 \begin{ex}
-The theory of linear orders in the language~$\Lang L_\le$ is
+The theory of strict linear orders in the language~$\Lang L_<$ is
 axiomatized by the set
 \begin{align*}
-& \lforall[x][x \le x], \\
-& \lforall[x][\lforall[y][((x \le y \land y \le
-    x) \lif x = y)]], \\
-& \lforall[x][\lforall[y][\lforall[z][((x \le y
-      \land y \le z) \lif x \le z)]]],\\
-& \lforall[x][\lforall[y][(x \le y \lor y \le x)]] \quad \}
+& \lforall[x][\lnot x < x], \\
+& \lforall[x][\lforall[y][((x < y \lor y <
+    x) \lor x = y)]], \\
+& \lforall[x][\lforall[y][\lforall[z][((x < y
+      \land y < z) \lif x < z)]]]
 \end{align*}
-It completely captures the intended !!{structure}s: every linear order
-is a model of this axiom system, and vice versa, if $R$ is a linear
-order on a set $X$, then the structure $\Struct M$ with $\Domain M =
-X$ and $\Assign{\le}{M} = R$ is a model of this theory.
+It completely captures the intended !!{structure}s: every strict
+linear order is a model of this axiom system, and vice versa, if $R$
+is a linear order on a set $X$, then the structure $\Struct M$ with
+$\Domain M = X$ and $\Assign{<}{M} = R$ is a model of this theory.
 \end{ex}
 
 \begin{ex}
@@ -90,13 +89,13 @@ fourth that for any sets $X$ and $Y$, the set $X \cup Y$ exists.
 The !!{sentence}s mentioned last are collectively called the
 \emph{naive comprehension scheme}.  It essentially says that for every
 $!A(x)$, the set $\Setabs{x}{!A(x)}$ exists---so at first glance a
-true, useful, and perhaps even necessary axiom. It is called naive
+true, useful, and perhaps even necessary axiom. It is called ``naive''
 because, as it turns out, it makes this theory unsatisfiable: if you
 take $!A(y)$ to be $\lnot y \in y$, you get the !!{sentence}
 \[
 \lexists[x][\lforall[y][(y \in x \liff \lnot y \in y)]]
 \]
-and this !!{sentence} is not true in any !!{structure}.
+and this !!{sentence} is not satisfied in any !!{structure}.
 \end{ex}
 
 \begin{ex}

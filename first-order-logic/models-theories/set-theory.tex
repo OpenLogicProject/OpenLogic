@@ -16,7 +16,7 @@ First, it requires a set of axioms for the relation~$\in$.  A number
 of different axiom systems have been developed, sometimes with
 conflicting properties of~$\in$. The axiom system known as
 $\Log{ZFC}$, Zermelo-Fraenkel set theory with the axiom of choice
-stands out: it is by far the most widely used and studied, becasue it
+stands out: it is by far the most widely used and studied, because it
 turns out that its axioms suffice to prove almost all the things
 mathematicians expect to be able to prove.  But before that can be
 established, it first is necessary to make clear how we can even
@@ -39,7 +39,7 @@ we can define $\subseteq$ by the formula
 \[
 \lforall[z][(z \in x \lif z \in y)]
 \]
-So whenever we want to use the relation~$\subseteq$ in a formula, we
+Now, whenever we want to use the relation~$\subseteq$ in a formula, we
 could instead use that formula (with $x$ and $y$ suitably replaced,
 and the bound variable~$z$ renamed if necessary).  For instance,
 extensionality of sets means that if any sets~$x$ and $y$ are
@@ -99,14 +99,14 @@ relation $\tuple{x, y} = z$, i.e., $\{\{x\}, \{x, y\}\} = z$:
 \lforall[u][(u \in z \liff (\lforall[v][(v \in u \liff v = x)] \lor
   \lforall[v][(v \in u \liff (v = x \lor v = y))]))]
 \]
-This says that the !!{element}s of~$z$ are exactly those sets which
-either have $x$ as its only !!{element} or have $x$ and $y$ as its
+This says that the !!{element}s~$u$ of~$z$ are exactly those sets which
+either have $x$ as its only !!{element} or have $x$ and~$y$ as its
 only !!{element}s (in other words, those sets that are either identical
 to $\{x\}$ or identical to $\{x, y\}$).  Once we have this, we can say
 further things, e.g., that $X \times Y = Z$:
 \[
-\lforall[u][(u \in Z \liff \lexists[x][\lexists[y][\lexists[z][(x \in
-        X \land y \in Y \land \tuple{x, y} = z)]]])]
+\lforall[z][(z \in Z \liff \lexists[x][\lexists[y][(x \in
+        X \land y \in Y \land \tuple{x, y} = z)]])]
 \]
 
 A function $f \colon X \to Y$ can be thought of as the relation $f(x)
@@ -129,21 +129,21 @@ where $\mathrm{maps}(f, x, y)$ abbreviates $\lexists[v][(v \in f \land
   \tuple{x, y} = v)]$ (this !!{formula} expresses ``$f(x) = y$'').
 
 It is now also not hard to express that $f\colon X \to Y$ is
-injective, for instance:
+!!{injective}, for instance:
 \begin{align*}
 & f \colon X \to Y \land {}\\
 & \lforall[x][\lforall[x'][((x \in X \land x' \in
     X \land \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
         x', y))]) \lif x = x')]]
 \end{align*}
-A function~$f\colon X \to Y$ is injective iff, whenever $f$ maps $x, x'
+A function~$f\colon X \to Y$ is !!{injective} iff, whenever $f$ maps $x, x'
 \in X$ to a single~$y$, $x = x'$.  If we abbreviate this formula as
 $\mathrm{inj}(f, X, Y)$, we're already in a position to state in the
 language of set theory something as non-trivial as Cantor's theorem:
-there is no injective function from $X$ to $\Pow{X}$:
+there is no !!{injective} function from $\Pow{X}$ to $X$:
 \[
 \lforall[X][\lforall[Y][(\Pow{X} = Y \lif
-    \lnot\lexists[f][\mathrm{inj}(f, X, Y)])]]
+    \lnot\lexists[f][\mathrm{inj}(f, Y, X)])]]
 \]
 
 

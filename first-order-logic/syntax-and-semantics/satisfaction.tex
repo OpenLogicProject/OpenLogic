@@ -14,25 +14,26 @@
 \begin{explain}
 The basic notion that relates expressions such as terms and
 !!{formula}s, on the one hand, and !!{structure}s on the other, are
-those of \emph{denotation} and \emph{satisfaction}.  Informally, a
-term \emph{denotes} an element of a !!{structure}---if the term is
-just a constant, it denotes the object assigned to the constant by the
-!!{structure}, and if it is built up using !!{function}s, the
-denotation is computed from the values of constants and the functions
-assigned to the functions in the term.  A !!{formula} is
-\emph{satisfied} in a !!{structure} if the interpretation given to the
-predicates makes the !!{formula} true in the domain of the
-!!{structure}. This notion of satisfaction is specified inductively:
-the specification of the !!{structure} directly states when atomic
-!!{formula}s are satisfied, and we define when a complex !!{formula} is
-satisfied depending on the main connective or quantifier and whether
-or not the immediate !!{subformula}s are satisfied. The case of the
-quantifiers here is a bit tricky, as the immediate !!{subformula} of a
-quantified !!{formula} has a free !!{variable}, and !!{structure}s
-don't specify what !!{variable}s denote.  In order to deal with this
-difficulty, we also introduce \emph{variable assignments} and define
-satisfaction not with respect to a !!{structure} alone, but with
-respect to a !!{structure} plus a !!{variable} assignment.
+those of \emph{!!{value}} of a term and \emph{satisfaction} of a
+!!{formula}.  Informally, the !!{value} of a term is an !!{element} of
+a !!{structure}---if the term is just a constant, its !!{value} is the
+object assigned to the constant by the !!{structure}, and if it is
+built up using !!{function}s, the !!{value} is computed from the
+!!{value}s of constants and the functions assigned to the functions in
+the term.  A !!{formula} is \emph{satisfied} in a !!{structure} if the
+interpretation given to the predicates makes the !!{formula} true in
+the domain of the !!{structure}. This notion of satisfaction is
+specified inductively: the specification of the !!{structure} directly
+states when atomic !!{formula}s are satisfied, and we define when a
+complex !!{formula} is satisfied depending on the main connective or
+quantifier and whether or not the immediate !!{subformula}s are
+satisfied. The case of the quantifiers here is a bit tricky, as the
+immediate !!{subformula} of a quantified !!{formula} has a free
+!!{variable}, and !!{structure}s don't specify he !!{value}s of
+!!{variable}s.  In order to deal with this difficulty, we also
+introduce \emph{variable assignments} and define satisfaction not with
+respect to a !!{structure} alone, but with respect to a !!{structure}
+plus a !!{variable} assignment.
 \end{explain}
 
 \begin{defn}[Variable Assignment]
@@ -41,10 +42,21 @@ function which maps each !!{variable} to an element of~$\Domain M$,
 i.e., $s\colon \Var \to \Domain M$.
 \end{defn}
 
-\begin{defn}[Denotation of Terms]
+\begin{explain}
+A !!{structure} assigns a !!{value} to each !!{constant}, and a
+variable assignment to each variable.  But we want to use terms built
+up from them to also name !!{element}s of the !!{domain}.  For this we
+define the !!{value} of terms inductively. For !!{constant}s and
+variables the value is just as the !!{structure} or the variable
+assignment specifies it; for more complex terms it is computed
+recursively using the functions the !!{structure} assigns to the
+!!{function}s.
+\end{explain}
+
+\begin{defn}[!!^{value} of Terms]
 If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
 !!{structure} for~$\Lang L$, and $s$ is a !!{variable} assignment
-for~$\Struct M$, the \emph{denotation}~$\Value{t}{M}[s]$ is defined as
+for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
 follows:
 \begin{enumerate}
 \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
@@ -59,10 +71,16 @@ follows:
 
 \begin{defn}[$x$-Variant]
 If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, then any
-!!{variable} assignment $s'$ for $\Struct M$ which differs from $s$ only
+!!{variable} assignment $s'$ for $\Struct M$ which differs from $s$ at most
 in what it assigns to $x$ is called an \emph{$x$-variant} of~$s$.  If
 $s'$ is an $x$-variant of $s$ we write $s \sim_x s'$.
 \end{defn}
+
+\begin{explain}
+Note that an $x$-variant of an assignment~$s$ does not \emph{have} to
+assign something different to~$x$.  In fact, every assignment counts
+as an $x$-variant of itself.
+\end{explain}
 
 \begin{defn}[Satisfaction]
 Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
@@ -113,6 +131,23 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
     $x$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
 \end{enumerate}
 \end{defn}
+
+\begin{explain}
+The variable assignments are important in the last
+\iftag{notprvEx,notprvAll}{clause}{two clauses}.  \iftag{prvAll}{We
+  cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $a
+  \in \Domain{M}$, $\Sat{M}{!B(a)}$.}{} \iftag{prvEx}{We cannot define
+  satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $a \in
+  \Domain{M}$, $\Sat{M}{!B(a)}$.}{} The reason is that $a$ is not
+symbol of the language, and so $!B(a)$ is not a !!{formula} (that is,
+$\Subst{!B}{a}{x}$ is undefined).  We can also not assume that we have
+!!{constant}s or terms available that name every !!{element}
+of~$\Struct{M}$, since there is nothing in the definition of
+!!{structure}s that requires it.  Even in the standard language the
+set of !!{constant}s is !!{denumerable}, so if $\Domain{M}$ is not
+!!{enumerable} there aren't even enough !!{constant}s to name every
+object.
+\end{explain}
 
 \begin{prob}
 Let $\Lang L = \{c, f, A\}$ with one !!{constant}, one one-place
@@ -293,7 +328,7 @@ that $\Assign{c}{M[a/c]} = a$. Define $\Struct M \VDash !A$ for
   iff $\langle \Assign{d_1}{M}, \dots, \Assign{d_n}{M} \rangle \in
   \Assign{R}{M}$.}
 
-\item \indcase{!A}{\eq[d_1][d_2]}{$\Struct{M}{\indfrm}$ iff
+\item \indcase{!A}{\eq[d_1][d_2]}{$\Struct M \VDash \indfrm$ iff
   $\Assign{d_1}{M} = \Assign{d_2}{M}$.}
 
 \tagitem{prvNot}{% 

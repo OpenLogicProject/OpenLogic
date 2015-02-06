@@ -71,8 +71,10 @@ proof that for any term~$t$, $l(t) = r(t)$ as an exercise.
 \tagitem{prvFalse}{\indcase*{!A}{\lfalse}{$\indfrm$ has 0 left and 0
     right parentheses.}}{}
 
-\item \indcase{!A}{\Atom{R}{t_1,\dots,t_n}}{$l(\indfrm) = 2 + l(t_1) +
-  \dots l(t_n) = 2 + r(t_1) = \dots + r(t_n) = r(\indfrm)$.}
+\item \indcase{!A}{\Atom{R}{t_1,\dots,t_n}}{$l(\indfrm) = 1 + l(t_1) +
+  \dots + l(t_n) = 1 + r(t_1) + \dots + r(t_n) = r(\indfrm)$. Here we
+  make use of the fact, left as an exercise, that $l(t) = r(t)$ for
+  any term~$t$.}
 
 \item \indcase{!A}{\eq[t_1][t_2]}{$l(\indfrm) = l(t_1) + l(t_2) =
   r(t_1) + r(t_2) = r(\indfrm)$.}
@@ -82,8 +84,8 @@ proof that for any term~$t$, $l(t) = r(t)$ as an exercise.
     r(\indfrm)$.}}{}
 
 \item \indcase{!A}{(!B \ast !C)}{By induction hypothesis, $l(!B) =
-  r(!B)$ and $l(!C) = r(!C)$.  Thus $l(\indfrm) = 2 + l(!B) + l(!C) =
-  2 + r(!B) + r(!C) = r(\indfrm)$.}
+  r(!B)$ and $l(!C) = r(!C)$.  Thus $l(\indfrm) = 1 + l(!B) + l(!C) =
+  1 + r(!B) + r(!C) = r(\indfrm)$.}
 
 \tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{By induction
     hypothesis, $l(!B) = r(!B)$. Thus, $l(\indfrm) = l(!B) = r(!B) =
