@@ -1,12 +1,12 @@
 % Part: first-order-logic
-% Chapter: syntax-and-semantics
+% Chapter: models-theories
 % Section: expressing-props-of-structures
 
 \documentclass[../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{fol}{syn}{exs} 
+\olfileid{fol}{mat}{exs} 
 
 \olsection{Expressing properties of \printtoken{s}{structure}}
 
@@ -50,13 +50,16 @@ true in~$\Struct M$ iff $\Assign{\le}{M}$ is anti-reflexive.  The
 sentence $\lforall[x][\lforall[y][\lforall[z][((x \le y \land y \le z)
       \lif x \le z)]]]$ is true in~$\Struct M$ iff $\Assign{\le}{M}$
 is transitive.  Thus, the models of
-\[
-\{\lforall[x][x \le x], \lforall[x][\lforall[y][((x \le y \land y \le
-    x) \lif x = y)]], \lforall[x][\lforall[y][\lforall[z][((x \le y
-      \land y \le z) \lif x \le z)]]]\}
-\]
+\begin{align*}
+\{ &\lforall[x][x \le x], \\
+   & \lforall[x][\lforall[y][((x \le y \land y \le
+    x) \lif x = y)]], \\
+   &\lforall[x][\lforall[y][\lforall[z][((x \le y
+      \land y \le z) \lif x \le z)]]] \quad \}
+\end{align*}
 are exactly those structures in which~$\Assign{\le}{M}$ is reflexive,
-symmetric, and transitive, i.e., a partial order.
+symmetric, and transitive, i.e., a partial order.  Hence, we can take
+them as axioms for the \emph{first-order theory of partial orders}.
 \end{ex}
 
 \end{document}
