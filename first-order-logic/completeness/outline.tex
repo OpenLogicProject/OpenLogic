@@ -1,0 +1,118 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: outline
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{out}
+
+\olsection{Outline of the Proof}
+
+The proof of the completeness theorem is a bit complex, and upon first
+reading it, it is easy to get lost.  So let us outline the proof.  The
+first step is a shift of perspective, that allows us to see a route to
+a proof.  When completeness is thought of as ``whenever $\Gamma
+\Entails !A$ then $\Gamma \Proves !A$,'' it may be hard to even come up
+with an idea: for to show that $\Gamma \Proves !A$ we have to find a
+!!{derivation}, and it does not look like the hypothesis that $\Gamma
+\Entails !A$ helps us for this in any way.  For some proof systems it
+is possible to directly construct a !!{derivation}q, but we will take
+a slightly different tack.  The shift in perspective required is this:
+completeness can also be formulated as: ``if $\Gamma$ is consistent, it
+has a model.''  Perhaps we can use the information in $\Gamma$ together
+with the hypothesis that it is consistent to construct a model.  After
+all, we know what kind of model we are looking for: one that is as
+$\Gamma$ describes it!
+
+If $\Gamma$ contains only atomic sentences, it is actually very easy
+to construct a model for it: for atomic sentences are all of the form
+$\Atom{P}{a_1,\dots,a_n}$ where the $a_i$ are !!{constant}s.  So all
+we have to do is come up with a !!{domain}~$\Domain{M}$ and an
+interpretation for $P$ so that
+$\Sat{M}{\Atom{P}{a_1,\ldots,a_n}}$. But nothing's easier than that:
+put $\Domain{M} = \Nat$, $\Assign{M}{\Obj c_i} = i$, and for every
+$\Atom{P}{a_1,\ldots,a_n} \in \Gamma$, put the tuple $\tuple{k_1,
+  \dots, k_n}$ into $\Assign{P}{M}$, where $k_i$ is the index of the
+constant symbol~$a_i$ (i.e., $a_i \ident \Obj c_{k_i}$).
+
+Now suppose $\Gamma$ contains some sentence $\lnot !B$, with $!B$
+atomic.  We might worry that the construction of $\Struct M$
+interferes with the possibility of making $\lnot !B$ true.  But here's
+where the consistency of $\Gamma$ comes in: if $\lnot !B \in \Gamma$,
+then $!B \notin \Gamma$, or else $\Gamma$ would be inconsistent.  And
+if $!B \notin \Gamma$, then according to our construction of~$\Struct M$,
+$\Sat/{M}{!B}$, so $\Sat{M}{\lnot !B}$.  So far so good.
+
+Now what if $\Gamma$ contains complex, non-atomic formulas? Say, it
+contains $!A \land !B$, where $!A$ and $!B$ are atomic. Then obviously
+we should proceed as if both $!A$ and $!B$ were in $\Gamma$.  And if
+$!A \lor !B \in \Gamma$, then we will have to make at least one of
+them true, i.e., proceed as if one of them was in $\Gamma$.
+
+This suggests the following idea: we add additional sentences to
+$\Gamma$ so as to (a) keep the resulting set consistent and (b) make
+sure that for every possible atomic sentence $!A$, either $!A$ is in
+the resulting set, or $\lnot !A$, and (c) such that, whenever $!A \land
+!B$ is in the set, so are both $!A$ and $!B$, if $!A \lor !B$ is in
+the set, at least one of $!A$ or $!B$ is also, etc.  We keep doing this
+(potentially forever). Call the set of all sentences so
+added~$\Gamma^*$. Then our construction above would provide us with a
+structure for which we could prove, by induction, that all sentences
+in~$\Gamma^*$ are true in~$\Struct M$, and hence also all sentence
+in~$\Gamma$ since $\Gamma \subseteq \Gamma^*$.
+
+There is one wrinkle in this plan: if $\lexists[x][!A(x)] \in \Gamma$
+we would hope to be able to pick some !!{constant}~$c$ and add $!A(c)$
+in this process.  But how do we know we can always do that? Perhaps we
+only have a few !!{constant}s in our language, and for each one of
+them we have $\lnot !B(c) \in \Gamma$.  We can't also add $!B(c)$,
+since this would make the set inconsistent, and we wouldn't know
+whether $\Struct{M}$ has to make $!B(c)$ or $\lnot !B(c)$ true.
+Moreover, it might happen that $\Gamma$ contains only sentences in a
+language that has no constant symbols at all (e.g., the language of
+set theory).
+
+The solution to this problem is to simply add infinitely many
+constants at the beginning, plus sentences that connect them with the
+quantifiers in the right way.  (Of course, we have to verify that this
+cannot introduce an inconsistency.)
+
+Our original construction works well if we only have !!{constant}s in
+the atomic sentences. But the language might also contain
+!!{function}s.  In that case, it might be tricky to find the right
+functions on~$\Nat$ to assign to these !!{function}s to make
+everything work.  So here's another trick: instead of using $i$ to
+interpret $\Obj c_i$, just take the set of !!{constant}s itself as the
+domain. Then $\Struct M$ can assign every !!{constant} to itself:
+$\Assign{\Obj c_i}{M} = \Obj c_i$.  But why not go all the way: let
+$\Domain{M}$ be all \emph{terms} of the language!{} If we do this,
+there is an obvious assignment of functions (that take terms as
+arguments and have terms as values) to !!{function}s: we assign to the
+!!{function}~$\Obj f^n_i$ the function which, given $n$ terms $t_1$,
+\dots,~$t_n$ as input, produces the term $\Obj f^n_i(t_1, \dots, t_n)$
+as value.
+
+The last piece of the puzzle is what to do with~$\eq$.  The
+!!{predicate}~$\eq$ has a fixed interpretation: $\Sat{M}{\eq[t][t']}$
+iff $\Value{t}{M} = \Value{t'}{M}$. Now if we set things up so that the
+!!{value} of a term~$t$ is $t$ itself, then this !!{structure} 
+will make \emph{no} sentence of the form $\eq[t][t']$ true
+unless $t$ and $t'$ are one and the same term.  And of
+course this is a problem, since basically every interesting theory in
+a language with !!{function}s will have as theorems sentences
+$\eq[t][t']$ where $t$ and $t'$ are not the same term (e.g., in
+theories of arithmetic: $\eq[(\Obj 0+ \Obj 0)][\Obj 0]$). To solve
+this problem, we change the domain of~$\Struct M$: instead of using terms as
+the objects in~$\Domain{M}$, we use sets of terms, and each set is so
+that it contains all those terms which the sentences in~$\Gamma$
+require to be equal.  So, e.g., if $\Gamma$ is a theory of arithmetic,
+one of these sets will contain: $\Obj 0$, $(\Obj 0 + \Obj 0)$, $(\Obj
+0 \times \Obj 0)$, etc.  This will be the set we assign to $\Obj 0$,
+and it will turn out that this set is also the value of all the terms
+in it, e.g., also of $(\Obj 0 + \Obj 0)$. Therefore, the sentence
+$\eq[(\Obj 0+ \Obj 0)][\Obj 0]$ will be true in this revised
+!!{structure}.
+
+\end{document}
