@@ -13,6 +13,18 @@
 \olsection{Properties of \usetoken{S}{derivability}}
 
 
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
+of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
+$\Delta \Proves !A$.
+\end{proof}
+
 \begin{prop}\ollabel{prop:provability}
 \begin{enumerate}
 \item \ollabel{prop:provability-contr} If $\Gamma \Proves[\Log{LK}]
@@ -88,7 +100,7 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
-\Deduce$\Gamma_0 \cup \{!A\} \fCenter \lfalse$
+\Deduce$\Gamma_0, !A \fCenter \lfalse$
 \RightLabel{$\lnot$ right}
 \UnaryInf$ \Gamma_0 \fCenter \lnot !A$
 \end{prooftree}
@@ -124,15 +136,15 @@ $\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$ such that
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0 !A \fCenter \lfalse $
+\Deduce$ \Gamma_0, !A \fCenter \lfalse $
 \doubleLine 
-\UnaryInf$ \Gamma_0,\Gamma_1,!A \fCenter \lfalse $
+\UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter \lfalse $
 
 \AxiomC{}
 \RightLabel{$\Pi_1$}
 \Deduce$ \Gamma_1, !B \fCenter \lfalse $
 \doubleLine 
-\UnaryInf$ \Gamma_0,\Gamma_1, !B \fCenter \lfalse$
+\UnaryInf$ \Gamma_0, \Gamma_1, !B \fCenter \lfalse$
 
 \RightLabel{$\lor$ left} 
 \BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter \lfalse $
@@ -275,18 +287,6 @@ $\Gamma_0 \Sequent !B$. The following !!{derivation} shows that $\Gamma
 \begin{probtag}{probOr,probAnd,probIf}
 Complete the proof of \olref[fol][seq][prv]{prop:provability}.
 \end{probtag}
-
-\begin{prop}[Monotony]
-\ollabel{prop:monotony}
-If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
-\Proves !A$.
-\end{prop}
-
-\begin{proof}
-Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
-of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
-$\Delta \Proves !A$.
-\end{proof}
 
 \begin{thm}
 \ollabel{thm:strong-generalization} If $c$ is a constant not occurring

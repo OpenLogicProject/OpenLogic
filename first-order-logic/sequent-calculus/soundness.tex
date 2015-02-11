@@ -21,7 +21,7 @@ like to know for instance, that
   consequence of them;
 \item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
 \end{enumerate}
-These are important properties of a !!{derivation} sytsem.  If any of them do
+These are important properties of a !!{derivation} system.  If any of them do
 not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
 Consequently, establishing the soundness of a !!{derivation} system is of the
 utmost importance.
@@ -37,11 +37,11 @@ result.
 
 \begin{defn}
 A !!{structure}~$\Struct M$ \emph{satisfies} a sequent $\Gamma
-\Sequent \Delta$ is \emph{valid} if either $\Sat/{M}{!E}$ for some $!E
+\Sequent \Delta$ iff either $\Sat/{M}{!E}$ for some $!E
 \in \Gamma$ or $\Sat{M}{!E}$ for some $!E \in \Delta$.
 
-A sequent is \emph{valid} if every !!{structure}~$\Struct M$ satisfies
-it.
+A sequent is \emph{valid} iff every !!{structure}~$\Struct M$
+satisfies it.
 \end{defn}
 
 \begin{thm}[Soundness]
@@ -73,12 +73,12 @@ $\Gamma' \Sequent \Delta'$.
   $\Gamma' \subseteq \Gamma$.  If $\Sat/{M}{!E}$ for some $!E \in
   \Gamma'$, then, since $\Gamma' \subseteq \Gamma$, $!E \in \Gamma$ as
   well, and so $\Sat/{M}{!E}$ for the same $!E \in \Gamma$. Similarly,
-  if $\Sat{M}{!E}$ for some $!E \in \Gamma'$, as $!E \in \Gamma$,
+  if $\Sat{M}{!E}$ for some $!E \in \Delta'$, as $!E \in \Delta$,
   $\Sat{M}{!E}$ for some $!E \in \Delta$. Since $\Gamma' \Sequent
   \Delta'$ is valid, one of these cases obtains for every~$\Struct
   M$. Consequently, $\Gamma \Sequent \Delta$ is valid.
 \item The last inference is $\lnot$~left: Then for some $!A \in
-  \Gamma'$, $\lnot !A \in \Delta$.  Also, $\Gamma' \subseteq \Gamma$,
+  \Delta'$, $\lnot !A \in \Gamma$.  Also, $\Gamma' \subseteq \Gamma$,
   and $\Delta' \setminus \{!A\} \subseteq \Delta$. 
 
   If $\Sat{M}{!A}$, then $\Sat/{M}{\lnot !A}$, and since $\lnot !A
@@ -112,7 +112,7 @@ $\Gamma' \Sequent \Delta'$.
   \Delta'$ is valid, (a) $\Sat{M}{!A}$, (b) $\Sat/{M}{!E}$ for some
   $!E \in \Gamma'$, or (c)~$\Sat{M}{!E}$ for some $!E \in \Delta'
   \setminus \{!A\}$.  In case (a), $\Sat{M}{!A \lor !B}$. In case (b),
-  there is $!E \in \Delta$ such that $\Sat/{M}{!E}$, as $\Gamma =
+  there is $!E \in \Gamma$ such that $\Sat/{M}{!E}$, as $\Gamma =
   \Gamma'$. In case (c), there is an $!E \in \Delta$ such that
   $\Sat{M}{!E}$, since $\Delta' \setminus \{!A\} \subseteq \Delta$. So
   in each case, $\Struct M$ satisfies $!A \land !B, \Gamma \Sequent
@@ -171,7 +171,7 @@ $\Gamma' \Sequent \Delta'$.
   $x$-variant $s'$ of $s$, we must have $\Sat{M}{!A(x)}[s']$.  So
   consider any variable assignment~$s$ and let $s'$ be an $x$-variant
   of~$s$. Since $\Gamma'$ and $\Delta'$ consist entirely of sentences,
-  $\Sat{M}{!E}[s]$ iff iff $\Sat{M}{!E}[s']$ iff $\Sat{M}{!E}$ for all
+  $\Sat{M}{!E}[s]$ iff $\Sat{M}{!E}[s']$ iff $\Sat{M}{!E}$ for all
   $!E \in \Gamma' \cup \Delta'$.  Let $\Struct M'$ be like $\Struct M$
   except that $\Assign{a}{M'} = s'(x)$.  Then $\Sat{M}{!A(x)}[s']$ iff
   $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$). Since we've
@@ -220,7 +220,7 @@ $\lor$~left, $\land$~right, and $\lif$~left.
   $\Struct M$ satisfies $\Gamma \Sequent \Delta$ since $!A \land !B
   \in \Delta$.
 \item The last inference is $\lor$~left: Exercise.
-\item The last inference is $\lif$~right. The premises are $\Gamma
+\item The last inference is $\lif$~left. The premises are $\Gamma
   \Sequent \Delta'$ and $\Gamma' \Sequent \Delta$, where $!A \in
   \Delta'$ an $!B \in \Gamma'$.  By induction hypothesis, both are
   valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:

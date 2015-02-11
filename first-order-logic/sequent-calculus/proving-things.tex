@@ -88,6 +88,8 @@ from an initial sequent and then it is done:
 \RightLabel{$\lor$ left} \BinaryInf$ !A, \lnot !A \lor !B \fCenter !B $
 \RightLabel{$\lif$ right} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
+The double line indicates a weakening inference has been left out.
+
 Now looking at the left branch, the only logical connective in any
 !!{sentence} is the $\lnot$ symbol in the antecedent !!{sentence}s, so
 we're looking at an instance of the $\lnot$ left rule.
@@ -233,7 +235,7 @@ later, so we'll do that one first.
 \AxiomC{}
 \UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
 \RightLabel{$\lexists$ left} 
-\UnaryInf$ \lexists[x][\lnot !F(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
 Applying the $\lnot$ left and right rules to eliminate the $\lnot$ signs, we get
 \begin{prooftree}
@@ -249,7 +251,7 @@ Applying the $\lnot$ left and right rules to eliminate the $\lnot$ signs, we get
 At this point, our only option is to carry out the $\forall$ left
 rule. Since this rule is not subject to the eigenvariable restriction,
 we're in the clear. Remember, we want to try and obtain an initial
-sequent (of the form $!A(a) \Sequent !A(a)$, so we should choose $a$
+sequent (of the form $!A(a) \Sequent !A(a)$), so we should choose $a$
 as our argument for $F$ when we apply the rule.
 \begin{prooftree}
 \Axiom$!A(a) \fCenter !A(a)$

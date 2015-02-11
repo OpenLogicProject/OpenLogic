@@ -31,7 +31,7 @@ If $t$ is a closed term, then ${} \Sequent \eq[t][t]$ is an initial sequent.
 \UnaryInf$ \Gamma, \eq[t_1][t_2] \fCenter \Delta, !A(t_1)$
 \DisplayProof
 \]
-where $s$ and $t$ are ground terms.
+where $t_1$ and $t_2$ are closed terms.
 
 \begin{ex}
 If $s$ and $t$ are ground terms, then $!A(s), \eq[s][t] \Proves !A(t)$:
@@ -83,9 +83,9 @@ and $!A(t_1)$ on the right, and the conclusion is $\Gamma \Sequent
 \{!A(t_1)\}) \cup \{!A(t_2)\}$. Consider a !!{structure}~$\Struct
 M$. Since, by induction hypothesis, the premise $\Gamma' \Sequent
 \Delta'$ is valid, either (a) for some $!E \in \Gamma'$,
-$\Sat/{M}{!E}$, (b) for some $!E \in \Delta' \setminus \{A(s)\}$,
+$\Sat/{M}{!E}$, (b) for some $!E \in \Delta' \setminus \{!A(s)\}$,
 $\Sat{M}{!E}$, or (c) $\Sat{M}{!A(t_1)}$.  In both cases cases (a) and
-(b), since $\Gamma = \Gamma'$, and $\Delta' \setminus \{!A(s)
+(b), since $\Gamma = \Gamma'$, and $\Delta' \setminus \{!A(s)\}
 \subseteq \Delta$, $\Struct M$ satisfies $\Gamma \Sequent \Delta$. So
 assume cases (a) and (b) do not apply, but case (c) does.  If (a) does
 not apply, $\Sat{M}{!E}$ for all $!E \in \Gamma'$, in particular,
