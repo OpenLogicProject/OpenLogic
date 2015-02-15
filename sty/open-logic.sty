@@ -43,17 +43,19 @@
 
 \newcommand*{\DeclareDocumentMacro}[2]{\def#1{#2}}
 
+\ifdefined\oljobname\relax\else\let\oljobname\jobname\fi
+
 % Load configuration file, then custom changes if available
 
 \input{\olpath/open-logic-config.sty}
-\IfFileExists{\jobname-config.sty}
-             {\input{\jobname-config.sty}}
+\IfFileExists{\oljobname-config.sty}
+             {\input{\oljobname-config.sty}}
              {}
 
 % Load environment definition file, or custom file if available
 
-\IfFileExists{\jobname-envs.sty}
-             {\input{\jobname-envs.sty}}
+\IfFileExists{\oljobname-envs.sty}
+             {\input{\oljobname-envs.sty}}
              {\input{\olpath/open-logic-envs.sty}}
 
 % olfilepath -- holds the path of the currently processed file
