@@ -1,0 +1,70 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: completeness-theorem
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{cth}
+\olsection{The Completeness Theorem}
+
+\begin{thm}[Completeness Theorem]
+\ollabel{thm:completeness} 
+Let $\Gamma$ be a set of !!{sentence}s.  If
+$\Gamma$ is consistent, it is satisfiable.
+\end{thm}
+
+\begin{proof}
+Suppose $\Gamma$ is consistent.  By \olref[lin]{lem:lindenbaum}, there
+is a $\Gamma' \supseteq \Gamma$ which is maximally consistent and
+saturated.  By \olref[mod]{lem:truth} If $\Gamma$ does not contain
+$\eq$, then by \olref[mod]{lem:truth}, $\Sat{M(\Gamma^*)}{!A}$ iff $!A
+\in \Gamma^*$.  From this it follows in particular that for all $!A
+\in \Gamma$, $\Sat{M(\Gamma^*)}{!A}$, so $\Gamma$ is satisfiable.  If
+$\Gamma$ does contain $\eq$, then by \olref[ide]{lem:truth},
+$\Sat{M/_\approx}{!A}$ iff $!A \in \Gamma^*$ for all
+sentences~$!A$. In particular, $\Sat{M/_\approx}{!A}$ for all $!A \in
+\Gamma$, so $\Gamma$ is satisfiable.
+\end{proof}
+
+\begin{cor}[Completeness Theorem, Second Version]
+\ollabel{cor:completeness}
+For all $\Gamma$ and $!A$ sentences: if $\Gamma \Entails !A$ then
+$\Gamma \Proves !A$.
+\end{cor}
+
+\begin{proof}
+Note that the $\Gamma$'s in \olref{cor:completeness} and
+\olref{thm:completeness} are universally quantified. To make sure we
+do not confuse ourselves, let us restate \olref{thm:completeness}
+using a different variable: for any set of sentences~$\Delta$, if
+$\Delta$ is consistent, it is satisfiable.  By contraposition, if
+$\Delta$ is not satisfiable, then $\Delta$ is inconsistent. We will
+use this to prove the corollary.
+
+Suppose that $\Gamma \Entails !A$. Then $\Gamma \cup \{\lnot !A\}$ is
+unsatisfiable by \olref[syn][sem]{prop:entails-unsat}. Taking $\Gamma
+\cup \{\lnot !A\}$ as our $\Delta$, the previous version of
+\olref{thm:completeness} gives us that $\Gamma \cup \{\lnot !A\}$ is
+inconsistent. By \olref[seq][ptn]{prop:prov-incons}, $\Gamma \Proves
+!A$.
+\end{proof}
+
+\begin{prob}
+Use \olref[fol][com][cth]{cor:completeness} to prove
+[fol][com][cth]{thm:completeness}, thus showing that the two
+formulations of the completeness theorem are equivalent.
+\end{prob}
+
+\begin{prob}
+In order for a !!{derivation} system to be complete, its rules must be
+strong enough to prove every unsatisfiable set inconsistent.  Which of
+the rules of $\Log{LK}$ were necessary to prove completeness?  Are any
+of these rules not used anywhere in the proof?  In order to answer
+these questions, make a list or diagram that shows which of the rules
+of $\Log{LK}$ were used in which results that lead up to the proof of
+\olref[fol][com][cth]{thm:completeness}.
+\end{prob}
+
+\end{document}
