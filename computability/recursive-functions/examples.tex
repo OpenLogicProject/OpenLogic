@@ -73,6 +73,7 @@ $0$ for false:
 Other classical boolean operations like $\fn{or}(x,y)$ and
 $\fn{ifthen}(x,y)$ can be defined from these in the usual way.
 
+\begin{defn}
 A relation $R(\vec x)$ is said to be primitive recursive if its characteristic
 function,
 \[
@@ -83,14 +84,14 @@ function,
   \end{array}
 \right.
 \]
-is primitive recursive. In other words, when one speaks of a primitive
+is primitive recursive. 
+\end{defn}
+
+In other words, when one speaks of a primitive
 recursive relation $R(\vec x)$, one is referring to a relation of the
 form $\Char{R}(\vec x) = 1$, where $\Char{R}$ is a primitive recursive
 function which, on any input, returns either 1 or 0. For example, the
-relation
-\begin{enumerate}
-\item $\fn{Zero}(x)$, which holds if and only if $x = 0$,
-\end{enumerate}
+relation $\fn{Zero}(x)$, which holds if and only if $x = 0$,
 corresponds to the function $\Char{\fn{Zero}}$, defined using primitive
 recursion by 
 \[
@@ -113,6 +114,8 @@ boolean operations:
 \item Disjunction, $P \lor Q$
 \item Implication $P \lif Q$
 \end{enumerate}
+are all primitive recursive, if $P$ and $Q$ are.
+
 One can also define relations using bounded quantification:
 \begin{enumerate}
 \item Bounded universal quantification: if $R(x, \vec z)$ is a
