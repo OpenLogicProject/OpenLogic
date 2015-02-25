@@ -308,7 +308,25 @@ Show that if $!A$ is a sentence, $\Sat{M}{!A}$ iff \emph{there is} a
 !!{variable} assignment~$s$ so that $\Sat{M}{!A}[s]$.
 \end{prob}
 
+\begin{prop}
+\ollabel{prop:sat-quant}
+Suppose $!A(x)$ only contains $x$ free, and $\Struct M$ is a
+!!{structure}. Then:
+\begin{enumerate}
+\item $\Sat{M}{\lexists[x][!A(x)]}$ iff $\Sat{M}{!A(x)}[s]$ for at
+  least one variable assignment~$s$.
+\item $\Sat{M}{\lforall[x][!A(x)]}$ iff $\Sat{M}{!A(x)}[s]$ for all
+  variable assignments~$s$.
+\end{enumerate}
+\end{prop}
 
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][sat]{prop:sat-quant}.
+\end{prob}
 
 \begin{prob}
 \DeclareRobustCommand{\VDash}{\mathrel{||}\joinrel\Relbar}

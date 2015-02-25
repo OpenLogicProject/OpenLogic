@@ -525,14 +525,14 @@
 % uniform description of a case and (b) defines `\indfrm` and
 % `\indcomplex` which can then be used in the definitions. For
 % instance, in an inductive definition of $\models A$, you might say
-% `\indcase{A}{B \land C} $\models \indfrm$ iff $\models B$ and
-% $\models C$` to produce: "If $A \equiv B \land C$, then $\models A$
+% `\indcase{A}{B \land C}{$\models \indfrm$ iff $\models B$ and
+% $\models C$}` to produce: "If $A \equiv B \land C$, then $\models A$
 % iff $\models B$ and $\models C$" or, alternatively and more
 % succinctly: "$\models B \land C$ iff $\models B$ and $\models C$".
 % Use the starred version for the atomic case, and a ! instead of the
 % star for a case you to leave as an exercise.
 
-\DeclareDocumentCommand \indcase { s t{!} m m m }{%
+\DeclareDocumentCommand \indcase { s t{!} m m +m }{%
   \DeclareDocumentMacro \indfrm {#3}%
   \DeclareDocumentMacro \indfrmp {#3}%
   \DeclareDocumentMacro \indcomplex {#4}%

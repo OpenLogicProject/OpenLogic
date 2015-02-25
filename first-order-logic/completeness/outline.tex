@@ -32,7 +32,7 @@ $\Atom{P}{a_1,\dots,a_n}$ where the $a_i$ are !!{constant}s.  So all
 we have to do is come up with a !!{domain}~$\Domain{M}$ and an
 interpretation for $P$ so that
 $\Sat{M}{\Atom{P}{a_1,\ldots,a_n}}$. But nothing's easier than that:
-put $\Domain{M} = \Nat$, $\Assign{M}{\Obj c_i} = i$, and for every
+put $\Domain{M} = \Nat$, $\Assign{\Obj c_i}{M} = i$, and for every
 $\Atom{P}{a_1,\ldots,a_n} \in \Gamma$, put the tuple $\tuple{k_1,
   \dots, k_n}$ into $\Assign{P}{M}$, where $k_i$ is the index of the
 constant symbol~$a_i$ (i.e., $a_i \ident \Obj c_{k_i}$).
@@ -46,10 +46,10 @@ if $!B \notin \Gamma$, then according to our construction of~$\Struct M$,
 $\Sat/{M}{!B}$, so $\Sat{M}{\lnot !B}$.  So far so good.
 
 Now what if $\Gamma$ contains complex, non-atomic formulas? Say, it
-contains $!A \land !B$, where $!A$ and $!B$ are atomic. Then obviously
+contains $!A \land !B$. Then obviously
 we should proceed as if both $!A$ and $!B$ were in $\Gamma$.  And if
 $!A \lor !B \in \Gamma$, then we will have to make at least one of
-them true, i.e., proceed as if one of them was in $\Gamma$.
+them true, i.e., proceed as if one of them was in`$\Gamma$.
 
 This suggests the following idea: we add additional sentences to
 $\Gamma$ so as to (a) keep the resulting set consistent and (b) make

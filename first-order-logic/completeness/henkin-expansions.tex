@@ -30,9 +30,10 @@ among the new constants.
 \end{explain}
 
 \begin{lem}
+\ollabel{defn:lang-exp}.
 If $\Gamma$ is consistent in $\Lang L$ and $\Lang L'$ is obtained from
-$\Lang L$ by adding !!a{denumerable} set of new !!{constant}s $c_1$,
-$c_2$, \dots, then $\Gamma$ is consistent in~$\Lang L'$.
+$\Lang L$ by adding !!a{denumerable} set of new !!{constant}s $\Obj d_1$,
+$\Obj d_2$, \dots, then $\Gamma$ is consistent in~$\Lang L'$.
 \end{lem}
 
 \begin{defn}
@@ -47,19 +48,19 @@ and !!{variable}~$x$ there is a !!{constant} $c$ such that
 The following definition will be used in the proof of the next theorem.
 
 \begin{defn}
-Fix an enumeration $\tuple{!A_1, x_1}$, $\tuple{!A_2, x_2}$, \dots of
-all !!{formula}-!!{variable} pairs of~$\Lang L'$, where $x_i$ is the
-only free !!{variable} in~$!A_i$.  We define the !!{sentence}s~$!D_n$
-by recursion on~$n$. Assuming that $!D_1$, \dots,~$!D_n$ have already
-been defined, let $c_{n+1}$ the first new !!{constant} not occurring
-in $!D_1$, \dots,~$!D_n$, and let $!D_{n+1}$ be the !!{formula}
-\iftag{prvEx} {$\lexists[x_{n+1}][!A_{n+1}(x_{x+1})] \lif
-  !A_{n+1}(c_{n+1})$} {$\lnot\lforall[x_{n+1}][!A_{n+1}(x_{n+1})] \lif
-  \lnot !A_{n+1}(c_{n+1})$}.  This includes the case where $n = 0$ and
-the list of previous $!D_i$'s is empty, i.e., $!D_1$ is 
-\iftag{prvEx}
-{$\lexists[x_1][!A_1] \lif !A_1(c_1)$} 
-{$\lnot\lforall[x_1][!A_1] \lif \lnot !A_1(c_1)$}.
+Let $\Lang L'$ be as in \olref{defn:lang-exp}.  Fix an enumeration
+$\tuple{!A_1, x_1}$, $\tuple{!A_2, x_2}$, \dots of all
+!!{formula}-!!{variable} pairs of~$\Lang L'$.  We define the
+!!{sentence}s~$!D_n$ by recursion on~$n$. Assuming that $!D_1$,
+\dots,~$!D_n$ have already been defined, let $c_{n+1}$ be the first
+new !!{constant} among the~$\Obj d_i$ that does not occur in $!D_1$,
+\dots,~$!D_n$, and let $!D_{n+1}$ be the !!{formula} \iftag{prvEx}
+     {$\lexists[x_{n+1}][!A_{n+1}(x_{n+1})] \lif !A_{n+1}(c_{n+1})$}
+     {$\lnot\lforall[x_{n+1}][!A_{n+1}(x_{n+1})] \lif \lnot
+       !A_{n+1}(c_{n+1})$}.  This includes the case where $n = 0$ and
+     the list of previous $!D_i$'s is empty, i.e., $!D_1$ is
+     \iftag{prvEx} {$\lexists[x_1][!A_1] \lif !A_1(c_1)$}
+           {$\lnot\lforall[x_1][!A_1] \lif \lnot !A_1(c_1)$}.
 \end{defn}
 
 \begin{thm}
@@ -89,7 +90,7 @@ consistent, which is the hypothesis of the theorem.  For the induction
 step, suppose that $\Gamma_{n-1}$ is consistent but $\Gamma_n =
 \Gamma_{n-1} \cup \{!D_n\}$ is inconsistent. Recall that $!D_n$~is
 \iftag{prvEx}
-{$\lexists[x_{n}][!A_{n}(xn)] \lif !A_{n}(c_{n})$}
+{$\lexists[x_{n}][!A_{n}(x_n)] \lif !A_{n}(c_{n})$}
 {$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$}. 
 where $!A(x)$ is a !!{formula} of $\Lang{L'}$ with only the
 variable~$x_n$ free and not containing any !!{constant}s~$c_i$ where
@@ -128,7 +129,7 @@ so $\Gamma$ itself is inconsistent.
 \iftag{prvEx}
 {(Note that 
 \iftag{prvAll}
-{$\lforall[x_n][\lnot !A_n] \Proves
+{$\lforall[x_n][\lnot !A_n(x_n)] \Proves
   \lnot\lexists[x_n][!A_n(x_n)]$}
 {$\lforall[x_n][\lnot !A_n]$ is defined as
   $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)]$ and

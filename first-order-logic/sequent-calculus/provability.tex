@@ -308,8 +308,8 @@ and thus the eigenvariable condition is satisfied.
 \tagitem{prvEx}{If $\Gamma \Proves !A(t)$ then $\Gamma \Proves
   \lexists[x][!A(x)]$.}{} 
 
-\tagitem{prvAll}{If $\Gamma \Proves \lnot !A(t)$ then $\Gamma \Proves
-  \lnot \lforall[x][!A(x)]$.}{}
+\tagitem{prvAll}{If $\Gamma \Proves \lforall[x][!A(x)]$ then $\Gamma \Proves
+  !A(t)$.}{}
 \end{tagenumerate}
 \end{thm}
 
@@ -322,26 +322,22 @@ and thus the eigenvariable condition is satisfied.
 
 \tagitem{prvAll}{Suppose $\Gamma \Proves \lnot !A(t)$. Then there is a
   finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation}
-  $\Pi$ of $\Gamma_0 \Sequent \lnot !A(t)$.  Then
+  $\Pi$ of $\Gamma_0 \Sequent \lforall[x][!A(x)]$.  Then
 % for some reason, prooftree env sometimes doesn't work here
 % \begin{prooftree}
 \[
 \AxiomC{}
 \RightLabel{$\Pi$}
-\Deduce$\Gamma_0 \fCenter  \lnot !A(t)$
+\Deduce$\Gamma_0 \fCenter \lforall[x][!A(x)]$
 \Axiom$!A(t) \fCenter !A(t)$
-\RightLabel{$\lforall$ right}
+\RightLabel{$\lforall$ left}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(t)$
-\RightLabel{$\lnot$ left}
-\UnaryInf$\lnot !A(t), \lforall[x][!A(x)]  \fCenter$
-\RightLabel{$\lnot$ right}
-\UnaryInf$\lnot !A(t) \fCenter \lnot \lforall[x][!A(x)]$
 \RightLabel{cut}
-\BinaryInf$\Gamma_0 \fCenter  \lnot \lforall[x][!A(x)]$
+\BinaryInf$\Gamma_0 \fCenter  !A(t)$
 %\end{prooftree}
 \DisplayProof
 \]
-shows that $\Gamma_0 \Proves  \lnot \lforall[x][!A(x)]$.}{}
+shows that $\Gamma_0 \Proves !A(t)$.}{}
 \end{tagenumerate}
 \end{proof}
 \end{document}
