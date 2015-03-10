@@ -13,15 +13,15 @@
 The construction of the term model given in the preceding section is
 enough to establish completeness for first-order logic for
 sets~$\Gamma$ that do not contain~$\eq$.  The term model satisfies
-every $!A \in \Gamma^*$ which does not conatin~$\eq$ (and hence all
-$!A \in \Gamma$).  It does not work, however, if identity is present.
-The reason is that $\Gamma^*$ will contain sentence $\eq[t][t']$, but
-in the term model the value of any term is that term itself. Hence, if
-$t$ and $t'$ are different terms, their values in the term model,
-i.e., $t$ and $t'$ respectively, are different and so $\eq[t][t']$ is
-false.  We can fix this, however, using a construction known as
-``factoring.''  This construction works generally for so-called
-congruence relations.
+every $!A \in \Gamma^*$ which does not contain~$\eq$ (and hence all
+$!A \in \Gamma$).  It does not work, however, if $\eq$ is present.
+The reason is that $\Gamma^*$ then may contain
+!!a{sentence}~$\eq[t][t']$, but in the term model the value of any
+term is that term itself. Hence, if $t$ and $t'$ are different terms,
+their values in the term model---i.e., $t$ and $t'$,
+respectively---are different, and so $\eq[t][t']$ is false.  We can
+fix this, however, using a construction known as ``factoring.''  This
+construction works generally for so-called congruence relations.
 \end{explain}
 
 \begin{defn}
@@ -71,10 +71,12 @@ following:
 \]
 for every $n$-place !!{function}~$f$ and terms $t_1$, \dots,
 $t_{i-1}$, $t_{i+1}$, \dots,~$t_n$.
-\item If $\Gamma^* \Proves \eq[t][t']$ and
-$\Gamma^* \Proves
-\Atom{R}{t_1,\dots,t_{i-1},t,t_{i+1},,\dots,t_n}$, then
-$\Gamma^* \Proves \Atom{f}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}$
+\item If $\Gamma^* \Proves \eq[t][t']$, then
+\[
+\Gamma^* \Proves
+\Atom{R}{t_1,\dots,t_{i-1},t,t_{i+1},\dots,t_n}
+\lif \Atom{R}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}
+\]
 for every $n$-place !!{predicate}~$R$ and terms $t_1$, \dots,
 $t_{i-1}$, $t_{i+1}$, \dots,~$t_n$.
 \end{enumerate}
@@ -109,12 +111,22 @@ $\Struct M/_\approx$ is the following !!{structure}:
 
 \begin{explain}
 Note that we have defined $\Assign{f}{M/_\approx}$ and
-$\Assign{R}{M/_\approx}$ for elements of $\Trm[L]/_\approx$ by referring
-to them as $[t]_\approx$, i.e., via \emph{representatives}~$t \in
-[t]_\approx$.  We have to make sure that these definitions do not
-depend on the choice of these representatives, i.e., that for some
-other choices~$t'$ which determine the same equivalence classes
-($[t]_\approx = [t']_\approx$), the definitions yield the same result.
+$\Assign{R}{M/_\approx}$ for elements of $\Trm[L]/_\approx$ by
+referring to them as $[t]_\approx$, i.e., via
+\emph{representatives}~$t \in [t]_\approx$.  We have to make sure that
+these definitions do not depend on the choice of these
+representatives, i.e., that for some other choices~$t'$ which
+determine the same equivalence classes ($[t]_\approx = [t']_\approx$),
+the definitions yield the same result.  For instance, if $R$ is a
+one-place !!{predicate}, the last clause of the definition says that
+$[t]_\approx \in \Assign{R}{M/_\approx}$ iff $\Sat{M}{\Atom{R}{t}}$.
+If for some other term~$t'$ with $t \approx t'$,
+$\Sat/{M}{\Atom{R}{t}}$, then the definition would require
+$[t']_\approx \notin \Assign{R}{M/_\approx}$. If $t \approx t'$,
+then $[t]_\approx = [t']_\approx$, but we can't have both $[t]_\approx
+\in \Assign{R}{M/_\approx}$ and $[t]_\approx \notin
+\Assign{R}{M/_\approx}$.  However, \olref{prop:approx-equiv}
+guarantees that this cannot happen.
 \end{explain}
 
 \begin{prop}
@@ -146,11 +158,21 @@ The only case that needs additional attention is when $!A \ident
 \eq[t][t']$.
 \begin{align*}
 \Sat{M/_\approx}{\eq[t][t']} & \text{ iff } [t]_\approx = [t']_\approx
-\text{ (by definition of $\Sat{M_\approx}$)}\\ 
+\text{ (by definition of $\Struct{M/_\approx}$)}\\ 
 & \text{ iff } t \approx t' \text{ (by definition of $[t]_\approx$)}\\ 
 & \text{ iff } \eq[t][t'] \in \Gamma^* \text{ (by definition of $\approx$).}
 \end{align*}
 \end{proof}
 
+\begin{digress}
+Note that while $\Struct{M(\Gamma^*)}$ is always !!{enumerable} and
+infinite, $\Struct{M/_\approx}$ may be finite, since it may turn out
+that there are only finitely many classes $[t]_\approx$.  This is to
+be expected, since $\Gamma$ may contain !!{sentence}s which require
+any !!{structure} in which they are true to be finite. For instance,
+$\lforall[x][\lforall[y][x = y]]$ is a consistent !!{sentence}, but is
+satisfied only in !!{structure}s with a !!{domain} that contains
+exactly one !!{element}.
+\end{digress}
 
 \end{document}
