@@ -22,12 +22,12 @@ but any explicit description of a collection of computable functions
 cannot be exhaustive!
 
 The way out is to allow \emph{partial} functions to come into play. We
-will see that it \emph{is} possible to enumerate the partial Turing
-computable functions; in fact, we already pretty much know that this
-is the case, since it is possible to enumerate Turing machines in a
-systematic way. We will come back to our diagonal argument later, and
-explore why it does not go through when partial functions are
-included.
+will see that it \emph{is} possible to enumerate the partial
+computable functions.\iftag{TMs}{in fact, we already pretty much know
+  that this is the case, since it is possible to enumerate Turing
+  machines in a systematic way.}{} We will come back to our diagonal
+argument later, and explore why it does not go through when partial
+functions are included.
 
 The question is now this: what do we need to add to the primitive
 recursive functions to obtain all the partial recursive functions? We
@@ -44,13 +44,13 @@ projections, and close under composition and primitive recursion. The
 only difference is that we have to modify the definitions of
 composition and primitive recursion to allow for the possibility that
 some of the terms in the definition are not defined. If $f$ and $g$
-are partial functions, I will write $f(x) \downarrow$ to mean that $f$
+are partial functions, we will write $f(x) \defined$ to mean that $f$
 is defined at $x$, i.e., $x$ is in the domain of $f$; and $f(x)
-\uparrow$ to mean the opposite, i.e., that $f$ is not defined at $x$.
-I will use $f(x) \simeq g(x)$ to mean that either $f(x)$ and $g(x)$
+\undefined$ to mean the opposite, i.e., that $f$ is not defined at~$x$.
+We will use $f(x) \simeq g(x)$ to mean that either $f(x)$ and $g(x)$
 are both undefined, or they are both defined and equal. We will these
-notations for more complicated terms, as well. We will adopt the
-convention that if $h$ and $g_0$, \dots,~$g_k$ are all partial functions,
+notations for more complicated terms as well. We will adopt the
+convention that if $h$ and $g_0$, \dots,~$g_k$ all are partial functions,
 then
 \[
 h(g_0(\vec x),\dots,g_k(\vec x))
@@ -73,21 +73,21 @@ with the understanding that $\mu x \; f(x,\vec z)$ is undefined
 otherwise. This defines $\mu x \; f(x,\vec z)$ uniquely.
 
 \begin{explain}
-Note that our definition makes no reference to Turing machines, or
-algorithms, or any specific computational model. But like composition
-and primitive recursion, there is an operational, computational
-intuition behind unbounded search. Remember that when it comes to the
-Turing computability of a partial function, arguments where the
-function is undefined correspond to inputs for which the computation
-does not halt. The procedure for computing $\mu x \; f(x,\vec z)$
-will amount to this: compute $f(0,\vec z), f(1,\vec z), f(2,\vec z)$
-until a value of 0 is returned. If any of the intermediate
-computations do not halt, however, neither does the computation of
-$\mu x \; f(x,\vec z)$.
+Note that our definition makes no reference to\iftag{TMs}{ Turing
+  machines, or}{} algorithms, or any specific computational model. But
+like composition and primitive recursion, there is an operational,
+computational intuition behind unbounded search. When it
+comes to the computability of a partial function, arguments
+where the function is undefined correspond to inputs for which the
+computation does not halt. The procedure for computing $\mu x \;
+f(x,\vec z)$ will amount to this: compute $f(0,\vec z), f(1,\vec z),
+f(2,\vec z)$ until a value of 0 is returned. If any of the
+intermediate computations do not halt, however, neither does the
+computation of $\mu x \; f(x,\vec z)$.
 \end{explain}
 
 If $R(x,\vec z)$ is any relation, $\mu x \; R(x,\vec z)$ is defined to
-be $\mu x \; (1 \tsub Char{R}(x,\vec z))$. In other words, $\mu x \;
+be $\mu x \; (1 \tsub \Char{R}(x,\vec z))$. In other words, $\mu x \;
 R(x,\vec z)$ returns the least value of $x$ such that $R(x,\vec z)$
 holds. So, if $f(x,\vec z)$ is a total function, $\mu x \; f(x,\vec
 z)$ is the same as $\mu x \; (f(x,\vec z) = 0)$. But note that our
@@ -96,20 +96,19 @@ possibility that $f(x,\vec z)$ is not everywhere defined (whereas, in
 contrast, the characteristic function of a relation is always total).
 
 \begin{defn}
-  The set of \emph{partial recursive functions} is the smallest set of
-  \emph{partial} functions from the natural numbers to the natural
-  numbers (of various arities) containing zero, successor, and
-  projections, and closed under composition, primitive recursion, and
-  unbounded search.
+The set of \emph{partial recursive functions} is the smallest set of
+partial functions from the natural numbers to the natural numbers (of
+various arities) containing zero, successor, and projections, and
+closed under composition, primitive recursion, and unbounded search.
 \end{defn}
 
 Of course, some of the partial recursive functions will happen to be
-total, i.e., defined at every input.
+total, i.e., defined for every argument.
 
 \begin{defn}
-\ollabel{defn:recursive-fn}
-  The set of \emph{recursive functions} is the set of partial
-  recursive functions that are total.
+\ollabel{defn:recursive-fn} 
+The set of \emph{recursive functions} is
+the set of partial recursive functions that are total.
 \end{defn}
 
 A recursive function is sometimes called ``total recursive'' to

@@ -335,13 +335,16 @@
 
 % - `\dom{f}`: domain of a function (mandatory argument)
 
-\DeclareDocumentCommand \dom { m }{\mathrm{dom}(#1)}
+\DeclareDocumentCommand \dom { m }{\fn{dom}(#1)}
 
 % - `\ran{f}`: range of a function (mandatory argument)
-\DeclareDocumentCommand \ran { m }{\mathrm{ran}(#1)}
+\DeclareDocumentCommand \ran { m }{\fn{ran}(#1)}
 
-% - `\len{s}`: length of asequence (mandatory argument)
-\DeclareDocumentCommand \len { m }{\mathrm{len}(#1)}
+% - `\len{s}`: length of a sequence (mandatory argument)
+\DeclareDocumentCommand \len { m }{\fn{len}(#1)}
+
+% - `\emptyseq`: the empty sequence
+\DeclareDocumentMacro \emptyseq {\emptyset}
 
 % - `\restrict`: restriction of a function to a set (infix operator)
 \DeclareDocumentMacro \restrict {\upharpoonright}
@@ -745,3 +748,7 @@
 % tagTrue - a true tag respectively.
 
 \tagtrue{tagTrue}
+
+% TMs - Turing machines have been discussed
+
+\tagfalse{TMs}

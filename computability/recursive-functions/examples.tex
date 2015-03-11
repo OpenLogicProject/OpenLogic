@@ -51,12 +51,12 @@ following two operations:
 \item Finite sums: if $f(x,\vec z)$ is primitive recursive, then so is the
 function 
 \[
-g(y,\vec z) \defis \Sigma_{x = 0}^y f(x,\vec z).
+g(y,\vec z) \defis \sum_{x = 0}^y f(x,\vec z).
 \]
 \item Finite products: if $f(x,\vec z)$ is primitive recursive, then so is the
 function 
 \[
-h(y,\vec z) \defis \Pi_{x = 0}^y f(x,\vec z).
+h(y,\vec z) \defis \prod_{x = 0}^y f(x,\vec z).
 \]
 \end{enumerate}
 For example, finite sums are defined recursively by the equations
@@ -72,166 +72,5 @@ $0$ for false:
 \end{enumerate}
 Other classical boolean operations like $\fn{or}(x,y)$ and
 $\fn{ifthen}(x,y)$ can be defined from these in the usual way.
-
-\begin{defn}
-A relation $R(\vec x)$ is said to be primitive recursive if its characteristic
-function,
-\[
-\Char{R}(\vec x) = \left\{
-  \begin{array}{ll}
-  1 & \mbox{if $R(\vec x)$} \\
-  0 & \mbox{otherwise} 
-  \end{array}
-\right.
-\]
-is primitive recursive. 
-\end{defn}
-
-In other words, when one speaks of a primitive
-recursive relation $R(\vec x)$, one is referring to a relation of the
-form $\Char{R}(\vec x) = 1$, where $\Char{R}$ is a primitive recursive
-function which, on any input, returns either 1 or 0. For example, the
-relation $\fn{Zero}(x)$, which holds if and only if $x = 0$,
-corresponds to the function $\Char{\fn{Zero}}$, defined using primitive
-recursion by 
-\[
-\Char{\fn{Zero}}(0) = 1, \quad \Char{\fn{Zero}}(x+1) = 0.
-\]
-
-It should be clear that one can compose relations with other primitive
-recursive functions. So the following are also primitive recursive:
-\begin{enumerate}
-\item The equality relation, $x = y$, defined by $\fn{Zero}(\left|x -
-  y\right|)$
-\item The less-than relation, $x \leq y$, defined by $\fn{Zero}(x
-  \tsub y)$
-\end{enumerate}
-Furthermore, the set of primitive recursive relations is closed under
-boolean operations:
-\begin{enumerate}
-\item Negation, $\lnot P$
-\item Conjunction, $P \land Q$
-\item Disjunction, $P \lor Q$
-\item Implication $P \lif Q$
-\end{enumerate}
-are all primitive recursive, if $P$ and $Q$ are.
-
-One can also define relations using bounded quantification:
-\begin{enumerate}
-\item Bounded universal quantification: if $R(x, \vec z)$ is a
-primitive recursive relation, then so is the relation 
-\[
-\lforall[x < y][R(x, \vec z)]
-\]
-which holds if and only if $R(x,\vec z)$ holds for every $x$ less than
-$y$.
-\item Bounded existential quantification: if $R(x, \vec z)$ is a
-primitive recursive relation, then so is 
-\[
-\lexists[x < y][R(x, \vec z)].
-\]
-\end{enumerate}
-By convention, we take expressions of the form $\lforall[x < 0][R(x,\vec
-z)]$ to be true (for the trivial reason that there \emph{are} no $x$
-less than $0$) and $\lexists[x < 0][R(x,\vec z)]$ to be false. A universal
-quantifier functions just like a finite product; it can also be
-defined directly by
-\[
-g(0,\vec z) = 1, \quad g(y+1,\vec z) = \Char{\fn{and}}(g(y,\vec
-z),\Char{R}(y,\vec z)).
-\]
-Bounded existential quantification can similarly be defined using
-$\fn{or}$. Alternatively, it can be defined from bounded universal
-quantification, using the equivalence, $\lexists[x < y][!A(x)] \liff \lnot
-\lforall[x < y][\lnot !A(x)]$. Note that, for example, a bounded quantifier
-of the form $\lexists[x \leq y]$ is equivalent to $\lexists[x < y+1]$.
-
-Another useful primitive recursive function is:
-\begin{enumerate}
-\item The conditional function, $\fn{cond}(x,y,z)$, defined by
-\[
-\fn{cond}(x,y,z) = \left\{ \begin{array}{ll}
-  y & \mbox{if $x$ = 0} \\
-  z & \mbox{otherwise}
-\end{array}\right.
-\]
-\end{enumerate}
-This is defined recursively by
-\[
-\fn{cond}(0,y,z) = y, \quad \fn{cond}(x+1,y,z) = z.
-\]
-One can use this to justify:
-\begin{enumerate}
-\item Definition by cases: if $g_0(\vec x), \dots, g_m(\vec x)$ are
-functions, and $R_1(\vec x), \dots, R_{m-1}(\vec x)$ are relations, then
-the function $f$ defined by
-\[
-f(\vec x) = \left\{\begin{array}{ll}
-    g_0(\vec x) & \mbox{if $R_0(\vec{x})$} \\
-    g_1(\vec x) & \mbox{if $R_1(\vec{x})$ and not $R_0(\vec{x})$} \\
-    \vdots & \\
-    g_{m-1}(\vec x) & \mbox{if $R_{m-1}(\vec{x})$ and none of the
-      previous hold}
-    \\
-    g_m(\vec x) & \mbox{otherwise}
-\end{array}\right.
-\]
-is also primitive recursive.
-\end{enumerate}
-When $m = 1$, this is just the the function defined by 
-\[
-f(\vec x) = \fn{cond}(\Char{\lnot R_0}(\vec x),g_0(\vec x),g_1(\vec
- x)).
-\]
-For $m$ greater than $1$, one can just compose definitions of this
-form. 
-
-We will also make good use of bounded minimization:
-\begin{enumerate}
-\item Bounded minimization: if $R(x, \vec z)$ is primitive recursive,
-  so is the function $f(y, \vec z)$, written 
-\[
-\fn{min} \; x < y \; R(x, \vec z),
-\]
-which returns the least $x$ less than $y$ such that $R(x,\vec z)$
-holds, if there is one, and 0 otherwise.
-\end{enumerate}
-
-\begin{explain}
-The choice of ``$0$ otherwise'' is somewhat arbitrary. It is easier to
-recursively define a function that returns the least $x$ less than $y$
-such that $R(x,\vec z)$ holds, and $y$ otherwise, and then define
-$\fn{min}$ from that. As with bounded quantification, $\fn{min} \; x
-\leq y \; \dots$ can be understood as $\fn{min} \; x < y + 1 \;
-\dots$.
-\end{explain}
-
-All this provides us with a good deal of machinery to show that
-natural functions and relations are primitive recursive. For example,
-the following are all primitive recursive:
-\begin{enumerate}
-\item The relation ``$x$ divides $y$'', written $x \mid y$, defined by
-\[
-x \mid y \defiff \lexists[z \leq y][(x \cdot z) = y].
-\]
-
-\item The relation $\fn{Prime}(x)$, which holds iff $x$ is prime,
-  defined by
-\[
-\fn{Prime}(x) \defiff (x \geq 2 \land \lforall[y \leq x][(y \mid x \lif y
-  = 1 \lor y = x))].
-\]
-\item The function $\fn{nextPrime(x)}$, which returns the first prime
-  number larger than $x$, defined by
-\[
-  \fn{nextPrime(x)} = \fn{min} \; {y \leq x\fac+1} \\ (y > x \land \fn{Prime}(y))
-\]
-Here we are relying on Euclid's proof of the fact that there is always
-a prime number between $x$ and $x\fac+1$.
-
-\item The function $p(x)$, returning the $x$th prime, defined by $p(0)
-  = 2, p(x+1) = \fn{nextPrime}(p(x))$. For convenience we will write
-  this as $p_x$ (starting with 0; i.e.\ $p_0=2$).
-\end{enumerate}
 
 \end{document}
