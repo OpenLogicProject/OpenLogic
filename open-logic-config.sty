@@ -154,24 +154,22 @@
 
 % ### Substitution
 
-% The operation of substituting a term for a (free) variable in
-% another term or in a formula.  \#1 is the formula, \#2 is the term,
-% \#3 is the variable.  Common notations are $\varphi^t_x$,
-% $\varphi(t/x)$, $\varphi[x/t]$, or $S^t_x \varphi$.
+% `Subst{!A}{t}{x}`: The operation of substituting a term for a (free)
+% variable in another term or in a formula.  Common notations are
+% $\varphi^t_x$, $\varphi(t/x)$, $\varphi[x/t]$, or $S^t_x \varphi$.
 
 \DeclareDocumentCommand \Subst { m m m } {
   #1[#2/#3]}
 
 
 
-% ### The satisfaction/truth relation
-%
-% The relation of being satisfied in a structure (relative to an
-% assignment) isprovided as the command `\Sat` with two mandatory
-% arguents (the structure and the formula) and one optional argument
-% (the assignment).  Use `\Sat/` to create the negated relation.  By
-% default, `\Sat{M}{!A}[s]` is typeset as $\mathfrak{M}, s \models
-% \varphi$.
+% ### The satisfaction/truth relation `\Sat[/]{M}{!A}[s]`: The
+%relation of being satisfied in a structure (relative to an
+%assignment) isprovided as the command `\Sat` with two mandatory
+%arguents (the structure and the formula) and one optional argument
+%(the assignment).  Use `\Sat/` to create the negated relation.  By
+%default, `\Sat{M}{!A}[s]` is typeset as $\mathfrak{M}, s \models
+%\varphi$.
 
 \DeclareDocumentCommand \Sat { t{/} m m o } {
   \IfBooleanTF{#1}{
@@ -221,17 +219,17 @@
 
 % ### Model-theoretic notions and symbols
 
-% - `\Domain` - domain of a structure, e.g., `\Domain M` gives
+% - `\Domain{M}` - domain of a structure, e.g., `\Domain M` gives
 % $\left|\mathfrak M\right|$.
 
 \DeclareDocumentCommand \Domain { m }{\left| \Struct #1 \right|}
 
-% - `\Assign` - Assignment (value of) of a constant/predicate symbol
+% - `\Assign{R}{M}` - Assignment (value of) of a constant/predicate symbol
 % in a structure; e.g., `\Assign R M` produces $R^\mathfrak{M}$.
 
 \DeclareDocumentCommand \Assign { m m }{#1^{\Struct #2}}
 
-% - `\Value` - Value of a term in a structure. Takes two mandatory
+% - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
 % arguments (term and structure) and one optional argument (variable
 % assignment). By default, `\Value{t}{M}[s]` produces 
 % $\mathrm{Val}^\mathfrak{M}_s(t)$.
@@ -244,15 +242,16 @@
         { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
 }
 
-% - `\substruct`: symbol for the substructure relation
+% - `\substruct`: symbol for the substructure relation $\substruct$
 
 \DeclareDocumentMacro \substruct {\subseteq}
 
-% - `\Theory`: theory of a structure
+% - `\Theory{M}`: theory of a structure $\Theory{M}$
 
 \DeclareDocumentCommand \Theory { m } {\mathrm{Th}(\Struct{#1})}
 
-% - `\elemequiv`: elementary equivalence (infix realtion)
+% - `\elemequiv`: elementary equivalence (infix relation), $\Struct{M}
+% \elemequiv \Struct{M'}
 
 \DeclareDocumentCommand \elemequiv { t{/} o } {
   \IfBooleanTF {#1}{
@@ -264,7 +263,7 @@
         { \equiv_{#2} }}
 }
 
-% `\iso`: relation of (partial) isomorphism
+% - `\iso[/]`: relation of (partial) isomorphism
 
 \DeclareDocumentCommand \iso { t{/} o } {
   \IfBooleanTF {#1}{
@@ -278,11 +277,12 @@
 
 
 
-% - `\ident`: syntactic identity between expressions (infix realtion)
+% - `\ident`: syntactic identity between expressions (infix relation),
+% $!A \ident !B$.
 
 \DeclareDocumentMacro \ident {\equiv}
 
-% `\QuantRank`: quantifier rank of a formula
+% - `\QuantRank`: quantifier rank of a formula
 
 \DeclareDocumentCommand \QuantRank { m } {\mathrm{qr}(#1)}
 
@@ -290,31 +290,31 @@
 % Recursion-theoretic Notions and Symbols
 % ---------------------------------------
 
-% `\Proj`: projection functions
+% - `\Proj{n}{i}`: projection functions~$\Proj{n}{i}$
 
 \DeclareDocumentCommand \Proj { m m } {P^{#1}_{#2}}
 
-% `\tsub`: truncated subtraction function
-
-% `\Char`: characteristic function
-
-\DeclareDocumentCommand \Char { m } {\chi_{#1}}
+% - `\tsub`: truncated subtraction function, $n \tsub m$
 
 \DeclareDocumentMacro \tsub {\mathbin{\dot-}}
 
-% `\defis`: definitional identity
+% - `\Char{R}`: characteristic function~$\Char{R}$
+
+\DeclareDocumentCommand \Char { m } {\chi_{#1}}
+
+% - `\defis`: definitional identity~$\defis$
 
 \DeclareDocumentMacro \defis {=} %{\mathrel{=_\mathrm{df}}}
 
-% `\defiff`: definitional equivalence
+% - `\defiff`: definitional equivalence~$\defiff$
 
 \DeclareDocumentMacro \defiff {\Leftrightarrow}
 
-% `\concat`: concatenation of sequences
+% - `\concat`: concatenation of sequences~$s \concat t$
 
 \DeclareDocumentMacro \concat {\frown}
 
-% `\num` : numeral corresponding to a number
+% - `\num{n}` : numeral corresponding to a number~$\num{n}$
 
 \DeclareDocumentCommand \num { m } {\overline{#1}}
 
@@ -329,7 +329,7 @@
 
 \DeclareDocumentCommand \Setabs { m m }{\{ #1 : #2 \}}
 
-% - Power set: `\Pow{X}` produces $\wp(X)$
+% - `\Pow{X}`: Power set, produces $\wp(X)$
 
 \DeclareDocumentCommand \Pow { m }{\wp(#1)}
 
@@ -362,30 +362,34 @@
 \DeclareDocumentCommand \comp { m m }{g \circ f}
 
 % - `\pto`: partial function arrow
-\DeclareDocumentMacro \pto {\mathrel{\ooalign{\hfil$\mapstochar\mkern 5mu$\hfil\cr$\to$}}}
 
-% - `\defined`, `\undefined`: postfix for defined, undefined functions
+\DeclareDocumentMacro \pto {\mathrel{\ooalign{\hfil$\mapstochar\mkern
+      5mu$\hfil\cr$\to$}}}
+
+% - `\defined`, `\undefined`: postfix for defined, undefined
+% functions, $f \defined$, $f \undefined$
+
 \DeclareDocumentMacro \defined {\downarrow}
 \DeclareDocumentMacro \undefined {\uparrow}
 
 % ### Particular sets
 
-% - Natural numbers: `\Nat`
+% - Natural numbers: `\Nat`, $\Nat$
 \DeclareDocumentMacro \Nat {\mathbb{N}}
 
-% - Integers: `\Int`
+% - Integers: `\Int`, $\Int$
 \DeclareDocumentMacro \Int {\mathbb{Z}}
 
-% - Real numbers: `\Real`
+% - Real numbers: `\Real`, $\Real$
 \DeclareDocumentMacro \Real {\mathbb{R}}
 
-% - Rational numbers: `\Rat`
+% - Rational numbers: `\Rat`, $\Rat$
 \DeclareDocumentMacro \Rat {\mathbb{Q}}
 
-% - The set $\{0, 1\}$: `\Bin`
+% - The set $\{0, 1\}$: `\Bin`, $\Bin$
 \DeclareDocumentMacro \Bin {\mathbb{B}}
 
-% - Identity relation: `\Id{X}`
+% - Identity relation: `\Id{X}`, $\Id{X}$
 \DeclareDocumentCommand \Id { m } {\mathord{\mathrm{Id}_{#1}}}
 
 % ### Symbols for Turing Machines
@@ -401,7 +405,7 @@
 
 % ### Functions and Function/Relation symbols
 
-% `\Part`: the parthood predicate 
+% - `\Part`: the parthood predicate 
 
 \DeclareDocumentCommand \Part { m m } {\Atom{\Obj P}{#1, #2}}
 
@@ -414,6 +418,7 @@
 
 \DeclareDocumentCommand \Prov { o } { \mathrm{Prov}\IfNoValueTF {#1} {} {_\Th{#1}}}
 \DeclareDocumentCommand \OProv { o } { \Obj{Prov}\IfNoValueTF {#1} {} {_\Th{#1}}}
+
 % - `\RProv`: the Rosser provability relation
 
 \DeclareDocumentCommand \RProv { o } { \mathrm{RProv}\IfNoValueTF {#1} {} {_\Th{#1}}}
@@ -422,8 +427,6 @@
 % - `\OCon`: the consistency statement
 
 \DeclareDocumentCommand \OCon { o } { \Obj{Con}\IfNoValueTF {#1} {} {_\Th{#1}}}
-
-
 
 % Typesetting commands for logical concepts
 % =========================================
@@ -438,35 +441,45 @@
 % typeface command to the first token in the argument, e.g., `\Struct
 % M_n` will generate $\mathfrak M_n$ and not $\mathfrak{M_n}$.
 
-% - `\Struct` - First-order structures; by default, the first token in Fraktur
+% - `\Struct{M}` - First-order structures; by default, the first token
+% in Fraktur~$\Struct{M}$
+
 \DeclareDocumentCommand \Struct { m }{\mathfrak #1}
 
-% - `\Mod` - modal structures; default: set first token in Fraktur
+% - `\Mod{M}` - modal structures; default: set first token in
+% Fraktur~$\Mod{M}$
+
 \DeclareDocumentCommand \Mod { m }{\mathfrak #1}
 
-% - `\Lang` - Languages; default: set first token in callgraphic font
+% - `\Lang{L}` - Languages; default: set first token in callgraphic
+% font~$\Lang{L}$
+
 \DeclareDocumentCommand \Lang { m }{\mathcal #1}
 
-% - `\Log` - Logics; default: set entirely in boldface
+% - `\Log{L}` - Logics; default: set entirely in boldface~$\Log{Int}$.
+
 \DeclareDocumentCommand \Log { m }{\mathbf{#1}}
 
 % - `\Obj` - Object-language symbols; default: set entirely in
-% sans-serif italics
+% sans-serif italics~$\Obj{P}$.
+
 \DeclareDocumentCommand \Obj { m }{\mathsfit{#1}}
 
-%  - `\Atom` - Atomic formula; default produces predicate symbol
-%  followed by argumnets surrounded by parentheses. Some prefer no
-%  parentheses around the arguments.
+%  - `\Atom{P}{t_1, t_2)` - Atomic formula or term; default produces
+%  predicate symbol followed by argumnets surrounded by
+%  parentheses. Some prefer no parentheses around the arguments.
+
 \DeclareDocumentCommand \Atom { m m }{ \mathord{#1}(#2) }
 
 % - `\PIso` - Set of all partial isomorphisms
+
 \DeclareDocumentCommand \PIso { m }{\mathcal{#1}}
 
-% `\fn` -- typeset a function name
+% `\fn{func}` -- typeset a function name~$\Fn{func}$
 
 \DeclareDocumentCommand \fn { m } {\mathrm{#1}}
 
-% `\Th` -- typeset name of a theory
+% `\Th{T}` -- typeset name of a theory~$\Th{T}$
 
 \DeclareDocumentCommand \Th { m } {\mathbf{#1}}
 
@@ -486,7 +499,7 @@
 
 \def\Var{\mathrm{Var}}
 
-% - `\Trm[L]`: the set of terms (optional argument: language)
+% - `\Trm[L]`: the set of terms (of a language)
 
 \DeclareDocumentCommand \Trm { o } {
     \IfNoValueTF {#1} 
@@ -494,21 +507,21 @@
         { \mathrm{Trm}({\Lang #1}) }
 }
 
-% - `\Frm[L]`: the set of formulas (optional argument: language)
+% - `\Frm[L]`: the set of formulas (of a language)
 \DeclareDocumentCommand \Frm { o } {
     \IfNoValueTF {#1} 
         { \mathrm{Frm} }
         { \mathrm{Frm}({\Lang #1}) }
 }
 
-% - `\SubFrm[!A]`: the set of subformulas of a formula (mandatory
+% - `\SubFrm{!A}`: the set of subformulas of a formula (mandatory
 % argument: formula)
 
 \DeclareDocumentCommand \SubFrm { m } {
         \mathrm{SFrm}({#1})
 }
 
-% - `\Sent[L]`: theset of sentences (optional argument: language)
+% - `\Sent[L]`: the set of sentences (of a language)
 \DeclareDocumentCommand \Sent { o } {
     \IfNoValueTF {#1} 
         { \mathrm{Sent} }

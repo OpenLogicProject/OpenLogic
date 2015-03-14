@@ -59,13 +59,9 @@ s \cdot p_{\len{s}}^{a+1} & \text{otherwise}
 \]
 \end{enumerate}
 
-\begin{prob}
-Define integer division using minimization.
-\end{prob}
-
 Instead of using the official names for the functions defined above,
 we introduce a more compact notation.  We will use $(s)_i$ instead of
-$\fn{element}(s,i)$, and $\langle s_0, \dots, s_k\rangle$ to abbreviate
+$\fn{element}(s,i)$, and $\tuple{s_0, \dots, s_k}$ to abbreviate
 $\fn{append}(\fn{append}(\dots \fn{append}(\emptyseq,s_0)
 \dots),s_k)$. Note that if $s$ has length~$k$, the elements of $s$ are
 $(s)_0$, \dots,~$(s)_{k-1}$.
@@ -108,6 +104,14 @@ we are looking for, and a bound on how far to look. The following works:
     \len{t}][((v)_{\len{s}+j} = (t)_j)])]
 \end{multline*}
 We will write $s \concat t$ instead of $\fn{concat}(s,t)$.
+
+\begin{prob}
+Show that there is a primitive recursive function~$\Fn{sconcat}(s)$
+whith the property that
+\[
+\Fn{sconcat}(\tuple{s_0, \dots, s_k}) = s_0 \concat \dots \dots \concat s_k.
+\]
+\end{prob}
 
 \end{document}
 
