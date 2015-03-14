@@ -8,7 +8,7 @@
 
 \olfileid{inc}{tcp}{qce}
 
-\olsection{$\Th{Q}$ is c.e.}
+\olsection{$\Th{Q}$ is c.e.-complete}
 
 
 \begin{thm}
@@ -20,23 +20,23 @@ It is not hard to see that $\Th{Q}$ is c.e., since it is the set of
 (codes for) sentences $y$ such that there is a proof $x$ of $y$ in
 $\Th{Q}$:
 \[
-Q = \Setabs{y}{\lexists[x][\fn{Pr_Q}(x,y)]}.
+Q = \Setabs{y}{\lexists[x][\fn{Pr}_\Th{Q}(x,y)]}.
 \]
-But we know that $\fn{Pr_Q}(x,y)$ is computable (in fact, primitive
+But we know that $\fn{Pr}_\Th{Q}(x,y)$ is computable (in fact, primitive
 recursive), and any set that can be written in the above form is c.e.
 
 Saying that it is a complete c.e.\ set is equivalent to saying that $K
 \leq_m Q$, where $K = \Setabs{x}{!A_x(x) \downarrow}$. So let us show
 that $K$ is reducible to $\Th{Q}$. Since Kleene's predicate $T(e,x,s)$ is
-primitive recursive, it is representable in $\Th{Q}$, say by $!A_T$. Then
+primitive recursive, it is representable in $\Th{Q}$, say, by $!A_T$. Then
 for every $x$, we have
-\begin{eqnarray*}
-x \in K & \lif & \lexists[s][T(x,x,s)] \\
-& \lif & \lexists[s][(\text{$\Th{Q}$ proves $!A_T(\num x,\num x, \num s)$})]
+\begin{align*}
+x \in K & \lif \lexists[s][T(x,x,s)] \\
+& \lif \lexists[s][(\Th{Q} \Proves !A_T(\num x,\num x, \num s))]
   \\
-& \lif & \text{$\Th{Q}$ proves $\lexists[s][!A_T(\num x, \num x, s)]$}.
-\end{eqnarray*}
-Conversely, if $\Th{Q}$ proves $\lexists[s][!A_T(\num x, \num x, s)]$,
+& \lif \Th{Q} \Proves \lexists[s][!A_T(\num x, \num x, s)].
+\end{align*}
+Conversely, if $\Th{Q} \Proves \lexists[s][!A_T(\num x, \num x, s)]$,
 then, in fact, for some natural number $n$ the formula $!A_T(\num x,
 \num x, \num n)$ must be true.  Now, if $T(x,x,n)$ were false,
 $\Th{Q}$ would prove $\lnot !A_T(\num x, \num x, \num n)$, since

@@ -16,12 +16,11 @@ $!B(x)$, $\fn{diag}(y)$ returns a code of $!B(\gn{!B(x)})$. If
 $\Obj{diag}$ were a function symbol in $\Th{T}$ representing the
 function $\fn{diag}$, we could take $!A$ to be the formula
 $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$. Notice that
-\begin{eqnarray*}
-\fn{diag}(\#(!B(\Obj{diag}(x)))) & = & 
-\#(!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))
-\\
-& = & \#(!A).
-\end{eqnarray*}
+\begin{align*}
+\fn{diag}(\Gn{!B(\Obj{diag}(x))}) & = 
+\Gn{!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))})} \\
+& = \Gn{!A}.
+\end{align*}
 Assuming $\Th{T}$ can prove
 \[
 \Obj{diag}(\gn{!B(\Obj{diag}(x))}) = \gn{!A},
@@ -55,8 +54,8 @@ Since $!D_{\fn{diag}}$ represents $\fn{diag}$, $\Th{T}$ can prove
   \eq[y][\num{\fn{diag}(\gn{!E(x)})}])].
 \]
 But by definition, 
-$\fn{diag}(\#(!E(x))) = \#(!E(\gn{!E(x)})) =
-\#(!A)$, so $\Th{T}$ can prove
+$\fn{diag}(\Gn{!E(x)}) = \Gn{!E(\gn{!E(x)})} =
+\Gn{!A}$, so $\Th{T}$ can prove
 \[
 \lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \liff \eq[y][\gn{!A}])].
 \]

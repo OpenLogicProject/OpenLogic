@@ -28,10 +28,10 @@ functions.  (Recall that $\tuple{n_0, \dots, n_k}$ is the number
 coding the sequence of numbers $n_0$, \dots, $n_k$.)
 
 \begin{defn}
-If $s$ is a symbol of~$\Lang L$, let the \emph{code}~$\#(s)$ be
+If $s$ is a symbol of~$\Lang L$, let the \emph{symbol code}~$\scode s$ be
 defined as follows:
 \begin{enumerate}
-\item If $s$ is among the logical symbols, $\#(s)$ is given by the
+\item If $s$ is among the logical symbols, $\scode s$ is given by the
   following table:
 \[
 \begin{array}{cccccccccc}
@@ -41,30 +41,30 @@ defined as follows:
 \tuple{0, 8} & \tuple{0, 9} 
 \end{array}
 \]
-\item If $s$ is the $i$-th variable $\Obj x_i$, then $\#(s) = \tuple{1, i}$.
+\item If $s$ is the $i$-th variable $\Obj x_i$, then $\scode s = \tuple{1, i}$.
 \item If $s$ is the $i$-th $n$-ary !!{constant}~$\Obj c_i^n$, then
-  $\#(s) = \tuple{2, n, i}$.
+  $\scode s = \tuple{2, n, i}$.
 \item If $s$ is the $i$-th $n$-ary !!{function}~$\Obj f_i^n$, then
-  $\#(s) = \tuple{3, n, i}$.
+  $\scode s = \tuple{3, n, i}$.
 \item If $s$ is the $i$-th $n$-ary !!{predicate}~$\Obj P_i^n$, then
-  $\#(s) = \tuple{4, n, i}$.
+  $\scode s = \tuple{4, n, i}$.
 \end{enumerate}
 \end{defn}
 
 \begin{prop}
 The following relations are primitive recursive:
 \begin{enumerate}
-\item $\fn{Fn}{x, n}$ iff $x$ is the code of $\Obj f^n_i$ for
-  some~$i$, i.e., ``$x$ is the code of an $n$-ary !!{function}.
-\item $\fn{Pred}{x, n}$ iff $x$ is the code of $\Obj P^n_i$ for
-  some~$i$ or $x$ is $\#(\eq)$ and $n = 2$, i.e., ``$x$ is the code of
-  an $n$-ary !!{predicate}.
+\item $\fn{Fn}(x, n)$ iff $x$ is the code of $\Obj f^n_i$ for
+  some~$i$, i.e., $x$ is the code of an $n$-ary !!{function}.
+\item $\fn{Pred}(x, n)$ iff $x$ is the code of $\Obj P^n_i$ for
+  some~$i$ or $x$ is the code of $\eq$ and $n = 2$, i.e., $x$ is the
+  code of an $n$-ary !!{predicate}.
 \end{enumerate}
 \end{prop}
 
 \begin{defn}
 If $\tuple{s_0, \dots, s_n}$ is a sequence of symbols, its
-\emph{G\"odel number} is $\tuple{\#(s_0), \dots, \#(s_n)}$.
+\emph{G\"odel number} is $\tuple{\scode{s_0}, \dots, \scode{s_n}}$.
 \end{defn}
 
 \end{document}

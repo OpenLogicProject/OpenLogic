@@ -35,6 +35,14 @@ relation that ``cannot be asserted to be recursive.''  What he
 probably meant is this: from the definition, it is not clear that it
 is computable; and later developments, in fact, show that it isn't.
 
+\begin{defn}
+\ollabel{thm:oconsis-q}
+A theory $\Th{T}$ is $\omega$-consistent if the following holds: if
+$\lexists[x][!A(x)]$ is any sentence and $\Th{T}$ proves $\lnot
+!A(\num 0)$, $\lnot !A(\num 1)$, $\lnot !A(\num 2)$, \dots then $\Th{T}$
+does not prove $\lexists[x][!A(x)]$.
+\end{defn}
+
 We can now prove the following. 
 \begin{thm}
 \ollabel{thm:first-incompleteness}
@@ -63,7 +71,7 @@ since it proves neither $!G_\Th{T}$ nor $\lnot !G_\Th{T}$. Let us take
 each claim in turn.
 
 Suppose $\Th{T}$ proves $!G_\Th{T}$. Then there {\em is} a proof, and
-so, for some number $m$, the relation $\Prf[T](m, \#{!G_\Th{T}})$
+so, for some number $m$, the relation $\Prf[T](m, \Gn{!G_\Th{T}})$
 holds. But then $\Th{T}$ proves the sentence $\OPrf[T](\num m,
 \gn{!G_\Th{T}})$. So $\Th{T}$ proves
 $\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$, which is, by definition,
