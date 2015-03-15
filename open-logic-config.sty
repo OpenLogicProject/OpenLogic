@@ -312,6 +312,43 @@
 
 \DeclareDocumentMacro \concat {\frown}
 
+% - `\umin{x}{!A}`: unbounded minimization
+
+\DeclareDocumentCommand \umin { m m } {\mu #1 \; #2}
+
+% - `\bmin{x < y}{!A}`: bounded minimization
+
+\DeclareDocumentCommand \bmin { m m } {\mu #1 \; #2}
+
+% - `\cfind{e}[n]`: partial computable function with index $e$
+
+\DeclareDocumentCommand \cfind { m o } {%
+    \IfNoValueTF {#2}
+        % optional argument not present
+        { \varphi_{#1} }
+        % optional argument present
+        { \varphi_{#1}^{#2} }
+}
+
+% - `\redone`: one-step reduction
+
+\DeclareDocumentMacro \redone {\mathrel{\triangleright_1}}
+
+% - `\red`: reduction
+
+\DeclareDocumentMacro \red {\triangleright}
+
+% - `\lambd[x][!A]`: lambda abstract
+
+\DeclareDocumentCommand \lambd { o o } {
+    \IfNoValueTF {#1} 
+        { \lambda }    % no arguments
+        { \lambda #1 } % one argument
+    \IfNoValueTF {#2} 
+        \relax
+        { .\, #2 }      % two arguments
+}
+
 % - `\num{n}` : numeral corresponding to a number
 
 \DeclareDocumentCommand \num { m } {\overline{#1}}
@@ -323,6 +360,8 @@
 % - `\Gn{!A}`: G\"odel number of a string of symbols
 
 \DeclareDocumentCommand \Gn { m } {\#(#1)}
+
+
 
 % Special Sets and Mathematical Symbols
 % -------------------------------------
@@ -356,7 +395,7 @@
 \DeclareDocumentMacro \restrict {\upharpoonright}
 
 % - `\Complement{X}`: complement of a set
-\DeclareDocumentCommand \Complement { m } {{#1}^\complement}
+\DeclareDocumentCommand \Complement { m } {\overline{#1}}
 
 % - `\card{X}`: cardinality of a set
 \DeclareDocumentCommand \card { m } {\left| #1 \right|}
@@ -770,4 +809,8 @@
 
 % TMs - Turing machines have been discussed
 
-\tagfalse{TMs}
+\tagtrue{TMs}
+
+% lambda - Lambda calculus has been discussed
+
+\tagtrue{lambda}

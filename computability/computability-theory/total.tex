@@ -1,0 +1,61 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: total
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{tot}
+\olsection{Totality is Undecidable}
+
+Let us consider one more example of using the $s$-$m$-$n$ theorem to show
+that something is noncomputable. Let $\fn{Tot}$ be the set of indices
+of total computable functions, i.e.
+\[
+\fn{Tot} = \Setabs{x}{\text{for every $y$, $\cfind{x}(y)\defined$}}.
+\]
+
+\begin{prop}
+\ollabel{prop:total}
+$\fn{Tot}$ is not computable.
+\end{prop}
+
+\begin{proof}
+To see that $\fn{Tot}$ is not computable, it suffices to show that $K$
+is reducible to it. Let $h(x,y)$ be defined by
+\[
+h(x,y) \simeq 
+\begin{cases}
+0 & \text{if $x \in K$} \\
+\text{undefined} & \text{otherwise}
+\end{cases}
+\]
+Note that $h(x,y)$ does not depend on $y$ at all.  It should
+not be hard to see that $h$~is partial computable: on input $x, y$, the
+we compute~$h$ by first simulating the function~$\cfind{x}$ on input~$x$; if
+this computation halts, $h(x,y)$ outputs $0$ and halts. So
+$h(x,y)$ is just $Z(\umin{s}{T(x,x,s))}$, where $Z$ is the constant zero
+function. 
+
+Using the $s$-$m$-$n$ theorem, there is a primitive recursive
+function~$k(x)$ such that for every $x$ and~$y$,
+\[
+\cfind{k(x)}(y) = 
+\begin{cases}
+0 & \text{if $x \in K$} \\
+\text{undefined} & \text{otherwise}
+\end{cases}
+\]
+So $\cfind{k(x)}$ is total if $x \in K$, and undefined otherwise. Thus,
+$k$ is a reduction of $K$ to $\fn{Tot}$. 
+\end{proof}
+
+\begin{digress}
+It turns out that $\fn{Tot}$ is not even computably enumerable---its
+complexity lies further up on the ``arithmetic hierarchy.''  But we
+will not worry about this strengthening here.
+\end{digress}
+
+\end{document}
+

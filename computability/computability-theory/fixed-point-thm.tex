@@ -1,0 +1,240 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: fixed-point-thm
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{fix}
+\olsection{The Fixed-Point Theorem}
+
+Let's consider the halting problem again. As temporary
+notation, let us write $\gn{\cfind{x}(y)}$ for $\tuple{x, y}$; think of
+this as representing a ``name'' for the value $\cfind{x}(y)$. With this
+notation, we can reword one of our proofs that the halting problem is
+undecidable. 
+
+Question: is there a computable function $h$, with the
+following property?  For every $x$ and $y$,
+\[
+h(\gn{\cfind{x}(y)}) = 
+\begin{cases}
+1 & \text{if $\cfind{x}(y) \defined$} \\
+0 & \text{otherwise.}
+\end{cases}
+\]
+
+Answer: No; otherwise, the partial function
+\[
+g(x) \simeq 
+\begin{cases}
+0 & \text{if $h(\gn{\cfind{x}(x)}) = 0$} \\
+\text{undefined} & \text{otherwise}
+\end{cases}
+\]
+would be computable, and so have some index~$e$. But then we have
+\[
+\cfind{e}(e) \simeq 
+\begin{cases}
+0 & \text{if $h(\gn{\cfind{e}(e)}) = 0$} \\
+\text{undefined} & \text{otherwise,}
+\end{cases}
+\]
+in which case $\cfind{e}(e)$ is defined if and only if it isn't, a
+contradiction. 
+
+Now, take a look at the equation with $\cfind{e}$. There is an instance of
+self-reference there, in a sense: we have arranged for the value of
+$\cfind{e}(e)$ to depend on $\gn{\cfind{e}(e)}$, in a certain way. The
+fixed-point theorem says that we {\em can} do this, in general---not
+just for the sake of proving contradictions.
+
+\olref{lem:fixed-equiv} gives two equivalent ways of stating the
+fixed-point theorem. Logically speaking, the fact that the statements
+are equivalent follows from the fact that they are both true; but what
+we really mean is that each one follows straightforwardly from the
+other, so that they can be taken as alternative statements of the same
+theorem.
+
+\begin{lem}
+\ollabel{lem:fixed-equiv}
+The following statements are equivalent:
+\begin{enumerate}
+\item For every partial computable function $g(x,y)$, there is an
+  index~$e$ such that for every~$y$, 
+\[
+\cfind{e}(y) \simeq g(e,y).
+\]
+\item For every computable function~$f(x)$, there is an index~$e$ such
+  that for every~$y$,
+\[
+\cfind{e}(y) \simeq \cfind{f(e)}(y).
+\]
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+$(1) \Rightarrow (2)$: Given $f$, define $g$ by $g(x,y) \simeq
+\fn{Un}(f(x),y)$. Use (1) to get an index~$e$ such that for every~$y$,
+\begin{align*}
+\cfind{e}(y) & = \fn{Un}(f(e),y) \\
+& = \cfind{f(e)}(y).
+\end{align*}
+
+$(2) \Rightarrow (1)$: Given $g$, use the $s$-$m$-$n$ theorem to get $f$ such
+that for every $x$ and~$y$, $\cfind{f(x)}(y) \simeq g(x,y)$. Use (2) to
+get an index~$e$ such that
+\begin{align*}
+\cfind{e}(y) & = \cfind{f(e)}(y) \\ 
+& = g(e,y).
+\end{align*}
+This concludes the proof. 
+\end{proof}
+
+\begin{explain}
+Before showing that statement (1) is true (and hence (2) as well),
+consider how bizarre it is. Think of $e$ as being a computer program;
+statement (1) says that given any partial computable $g(x,y)$, you can
+find a computer program $e$ that computes $g_e(y) \simeq g(e,y)$. In
+other words, you can find a computer program that computes a function
+that references the program itself.
+\end{explain}
+
+\begin{thm}
+The two statements in \olref{lem:fixed-equiv} are
+true. Specifically, for every partial computable function $g(x,y)$,
+there is an index~$e$ such that for every~$y$,
+\[
+\cfind{e}(y) \simeq g(e,y).
+\]
+\end{thm}
+
+\begin{proof}
+The ingredients are already implicit in the discussion of the halting
+problem above. Let $\fn{diag}(x)$ be a computable function which for each
+$x$ returns an index for the function $f_x(y) \simeq \cfind{x}(x,y)$,
+i.e.
+\[
+\cfind{\fn{diag}(x)}(y) \simeq \cfind{x}(x,y).
+\]
+Think of $\fn{diag}$ as a function that transforms a program for a 2-ary
+function into a program for a 1-ary function, obtained by fixing the
+original program as its first argument. The function $\fn{diag}$ can be
+defined formally as follows: first define $s$ by
+\[
+s(x,y) \simeq \fn{Un}^2(x,x,y),
+\]
+where $\fn{Un}^2$ is a 3-ary function that is universal for partial computable
+2-ary functions. Then, by the $s$-$m$-$n$ theorem, we can find a primitive
+recursive function $\fn{diag}$ satisfying
+\[
+\cfind{\fn{diag}(x)}(y) \simeq s(x,y).
+\]
+
+Now, define the function $l$ by
+\[
+l(x,y) \simeq g(\fn{diag}(x),y).
+\]
+and let $\gn{l}$ be an index for $l$. Finally, let $e = \fn{diag}(\gn{l})$.
+Then for every $y$, we have
+\begin{align*}
+\cfind{e}(y) & \simeq \cfind{\fn{diag}(\gn{l})}(y) \\
+& \simeq \cfind{\gn{l}}(\gn{l}, y) \\
+& \simeq l(\gn{l}, y) \\
+& \simeq g(\fn{diag}(\gn{l}),y) \\
+& \simeq g(e, y),
+\end{align*}
+as required. 
+\end{proof}
+
+\begin{explain}
+What's going on? Suppose you are given the task of writing a computer
+program that prints itself out. Suppose further, however, that you are
+working with a programming language with a rich and bizarre library of
+string functions. In particular, suppose your programming language has
+a function $\fn{diag}$ which works as follows: given an input
+string~$s$, $\fn{diag}$ locates each instance of the symbol `x'
+occuring in~$s$, and replaces it by a quoted version of the original
+string. For example, given the string
+\begin{quote}
+\begin{verbatim}
+hello x world
+\end{verbatim}
+\end{quote}
+as input, the function returns
+\begin{quote}
+\begin{verbatim}
+hello 'hello x world' world
+\end{verbatim}
+\end{quote}
+as output. In that case, it is easy to write the desired program; you
+can check that
+\begin{quote}
+\begin{verbatim}
+print(diag('print(diag(x))'))
+\end{verbatim}
+\end{quote}
+does the trick. For more common programming languages like C++ and
+Java, the same idea (with a more involved implementation) still works.
+
+We are only a couple of steps away from the proof of the fixed-point
+theorem. Suppose a variant of the print function $\fn{print}(x,y)$
+accepts a string $x$ and another numeric argument $y$, and prints the
+string $x$ repeatedly, $y$ times. Then the ``program''
+\begin{quote}
+\begin{verbatim}
+getinput(y); print(diag('getinput(y); print(diag(x), y)'), y)
+\end{verbatim}
+\end{quote}
+prints itself out $y$ times, on input $y$. Replacing the 
+$\fn{getinput}$---$\fn{print}$---$\fn{diag}$ skeleton by an
+arbitrary funtion $g(x,y)$ yields
+\begin{quote}
+\begin{verbatim}
+g(diag('g(diag(x), y)'), y)
+\end{verbatim}
+\end{quote}
+which is a program that, on input $y$, runs $g$ on the program itself
+and $y$. Thinking of ``quoting'' with ``using an index for,'' we have
+the proof above.
+
+For now, it is o.k.\ if you want to think of the proof as formal
+trickery, or black magic. But you should be able to reconstruct the
+details of the argument given above. When we prove the incompleteness
+theorems (and the related ``fixed-point theorem'') we will discuss
+other ways of understanding why it works.
+\end{explain}
+
+\begin<lambda>{digress}
+The same idea can be used to get a ``fixed point'' combinator. Suppose
+you have a lambda term $g$, and you want another term $k$ with the
+property that $k$ is $\beta$-equivalent to $gk$. Define terms
+\[
+\fn{diag}(x) = xx
+\]
+and
+\[
+l(x) = g(\fn{diag}(x))
+\]
+using our notational conventions; in other words, $l$ is the term
+$\lambd[x][g(xx)]$. Let $k$ be the term $ll$. Then we have
+\begin{align*}
+k & = (\lambd[x][g(xx)])(\lambd[x][g(xx)]) \\
+& \red  g((\lambd[x][g(xx)])(\lambd[x][g(xx)])) \\
+& = gk.
+\end{align*}
+If one takes
+\[
+Y = \lambd[g][((\lambd[x][g(xx)])(\lambd[x][g(xx)]))]
+\]
+then $Yg$ and $g(Yg)$ reduce to a common term; so $Yg \equiv_\beta
+g(Yg)$. This is known as ``Curry's combinator.'' If instead one takes
+\[
+Y = (\lambd[xg][g(xxg)])(\lambd[xg][g(xxg)])
+\]
+then in fact $Yg$ reduces to $g(Yg)$, which is a stronger statement.
+This latter version of $Y$ is known as ``Turing's combinator.''
+\end{digress}
+
+\end{document}

@@ -1,0 +1,51 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: ce-sets
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{ces}
+\olsection{Computably Enumerable Sets}
+
+\begin{defn}
+A set is \emph{computably enumerable} if it is empty or the range of a
+computable function.
+\end{defn}
+
+\begin{history}
+Computably enumarable sets are also called \emph{recursively
+  enumerable} instead. This is the original terminology, and today
+both are commonly used, as well as the abbreviations ``c.e.'' and
+``r.e.'' 
+\end{history}
+
+\begin{explain}
+You should think about what the definition means, and why the
+terminology is appropriate. The idea is that if $S$ is the range of
+the computable function~$f$, then
+\[
+S = \{ f(0), f(1), f(2), \dots \},
+\]
+and so $f$ can be seen as ``enumerating'' the elements of $S$. Note
+that according to the definition, $f$ need not be an increasing
+function, i.e., the enumeration need not be in increasing order. In
+fact, $f$ need not even be injective, so that the constant function
+$f(x) = 0$ enumerates the set $\{ 0 \}$.
+\end{explain}
+
+Any computable set is computably enumerable. To see this, suppose
+$S$~is computable. If $S$ is empty, then by definition it is
+computably enumerable. Otherwise, let $a$ be any element of
+$S$. Define $f$ by
+\[
+f(x) = 
+\begin{cases}
+x & \text{if $\Char{S}(x) = 1$} \\
+a & \text{otherwise.}
+\end{cases}
+\]
+Then $f$ is a computable function, and $S$ is the range of~$f$.
+
+\end{document}
