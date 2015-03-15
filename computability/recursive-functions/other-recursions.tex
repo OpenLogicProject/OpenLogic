@@ -9,7 +9,7 @@
 \olfileid{cmp}{rec}{ore}
 \olsection{Other Recursions}
 
-TheUsing pairing and sequencing, we can justify more exotic (and
+Using pairing and sequencing, we can justify more exotic (and
 useful) forms of primitive recursion. For example, it is often useful
 to define two functions simultaneously, such as in the following
 definition:
@@ -25,12 +25,12 @@ terms of \emph{all} the values $f(0,\vec z)$, \dots,~$f(x,\vec z)$, as in
 the following definition:
 \begin{eqnarray*}
 f(0,\vec z) & = & g(\vec z) \\
-f(x+1,\vec z) & = & h(x, \langle f(0,\vec z), \dots, f(x,\vec z) \rangle,
+f(x+1,\vec z) & = & h(x, \tuple{f(0,\vec z), \dots, f(x,\vec z)},
 \vec z).
 \end{eqnarray*}
 The following schema captures this idea more succinctly:
 \[
-f(x,\vec z) = h(x,\langle f(0,\vec z), \dots, f(x-1,\vec z) \rangle)
+f(x,\vec z) = h(x,\tuple{f(0,\vec z), \dots, f(x-1,\vec z)})
 \]
 with the understanding that the second argument to $h$ is just the
 empty sequence when $x$ is $0$. In either formulation, the idea is
@@ -66,7 +66,7 @@ can take an integer to be given by a pair $\langle m, n \rangle$ of natural
 numbers, which, intuitively, represents the integer $m-n$. In other
 words, we say
 \[
-\fn{Integer}(x) \equiv \fn{length}(x) = 2
+\fn{Integer}(x) \defiff \fn{length}(x) = 2
 \]
 and then we define the following:
 \begin{enumerate}

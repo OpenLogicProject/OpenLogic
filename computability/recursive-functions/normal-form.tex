@@ -1,0 +1,38 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: normal-form
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{nft}
+\olsection{The Normal Form Theorem}
+
+\begin{thm}[Kleene's Normal Form Theorem]
+There are a primitive recursive relation $T(e, x, s)$ and a primitive
+recursive function $U(s)$, with the following property: if $f$ is any
+partial recursive function, then for some~$e$,
+\[
+f(x) \simeq U(\mu s \; T(e, x, s))
+\]
+for every $x$.
+\end{thm}
+
+\begin{explain}
+The proof of the norm is involved, but the basic idea is simple.
+Every partial recursive function has an \emph{index}~$e$, intuitively,
+a number coding its program or definition.  If $f(x) \defined$, the
+computation can be recorded systematically and coded by some
+number~$s$, and that $s$ codes the computation of $f$ on input $x$ can
+be checked primitive recursively using only $x$ and the
+definition~$e$.  This means that $T$ is primitive recursive.  Given
+the full record of the computation~$s$, the ``upshot'' of~$s$ is the
+value of~$f(x)$, and it can be obtained from~$s$ primitive recursively
+as well.  The normal form theorem shows that only a single unbounded
+search is required for the definition of any partial recursive
+function.
+\end{explain}
+
+\end{document}
+

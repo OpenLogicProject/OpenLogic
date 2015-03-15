@@ -242,16 +242,15 @@
         { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
 }
 
-% - `\substruct`: symbol for the substructure relation $\substruct$
+% - `\substruct`: symbol for the substructure relation
 
 \DeclareDocumentMacro \substruct {\subseteq}
 
-% - `\Theory{M}`: theory of a structure $\Theory{M}$
+% - `\Theory{M}`: theory of a structure
 
 \DeclareDocumentCommand \Theory { m } {\mathrm{Th}(\Struct{#1})}
 
-% - `\elemequiv`: elementary equivalence (infix relation), $\Struct{M}
-% \elemequiv \Struct{M'}
+% - `\elemequiv`: elementary equivalence (infix relation)
 
 \DeclareDocumentCommand \elemequiv { t{/} o } {
   \IfBooleanTF {#1}{
@@ -278,7 +277,6 @@
 
 
 % - `\ident`: syntactic identity between expressions (infix relation),
-% $!A \ident !B$.
 
 \DeclareDocumentMacro \ident {\equiv}
 
@@ -290,39 +288,39 @@
 % Recursion-theoretic Notions and Symbols
 % ---------------------------------------
 
-% - `\Proj{n}{i}`: projection functions~$\Proj{n}{i}$
+% - `\Proj{n}{i}`: projection functions
 
 \DeclareDocumentCommand \Proj { m m } {P^{#1}_{#2}}
 
-% - `\tsub`: truncated subtraction function, $n \tsub m$
+% - `\tsub`: truncated subtraction function
 
 \DeclareDocumentMacro \tsub {\mathbin{\dot-}}
 
-% - `\Char{R}`: characteristic function~$\Char{R}$
+% - `\Char{R}`: characteristic function
 
 \DeclareDocumentCommand \Char { m } {\chi_{#1}}
 
-% - `\defis`: definitional identity~$\defis$
+% - `\defis`: definitional identity
 
 \DeclareDocumentMacro \defis {=} %{\mathrel{=_\mathrm{df}}}
 
-% - `\defiff`: definitional equivalence~$\defiff$
+% - `\defiff`: definitional equivalence
 
 \DeclareDocumentMacro \defiff {\Leftrightarrow}
 
-% - `\concat`: concatenation of sequences~$s \concat t$
+% - `\concat`: concatenation of sequences
 
 \DeclareDocumentMacro \concat {\frown}
 
-% - `\num{n}` : numeral corresponding to a number~$\num{n}$
+% - `\num{n}` : numeral corresponding to a number
 
 \DeclareDocumentCommand \num { m } {\overline{#1}}
 
-% - `\scode{s}`: code for a symbol, $\scode s$.
+% - `\scode{s}`: code for a symbol
 
 \DeclareDocumentCommand \scode { m } {\fn{c}(#1)}
 
-% - `\Gn{!A}`: G\"odel number of a string of symbols, $\Gn{!A}$.
+% - `\Gn{!A}`: G\"odel number of a string of symbols
 
 \DeclareDocumentCommand \Gn { m } {\#(#1)}
 
@@ -341,14 +339,14 @@
 
 \DeclareDocumentCommand \Pow { m }{\wp(#1)}
 
-% - `\dom{f}`: domain of a function (mandatory argument)
+% - `\dom{f}`: domain of a function
 
 \DeclareDocumentCommand \dom { m }{\fn{dom}(#1)}
 
-% - `\ran{f}`: range of a function (mandatory argument)
+% - `\ran{f}`: range of a function
 \DeclareDocumentCommand \ran { m }{\fn{ran}(#1)}
 
-% - `\len{s}`: length of a sequence (mandatory argument)
+% - `\len{s}`: length of a sequence
 \DeclareDocumentCommand \len { m }{\fn{len}(#1)}
 
 % - `\emptyseq`: the empty sequence
@@ -375,29 +373,29 @@
       5mu$\hfil\cr$\to$}}}
 
 % - `\defined`, `\undefined`: postfix for defined, undefined
-% functions, $f \defined$, $f \undefined$
+% functions
 
 \DeclareDocumentMacro \defined {\downarrow}
 \DeclareDocumentMacro \undefined {\uparrow}
 
 % ### Particular sets
 
-% - Natural numbers: `\Nat`, $\Nat$
+% - Natural numbers: `\Nat`
 \DeclareDocumentMacro \Nat {\mathbb{N}}
 
-% - Integers: `\Int`, $\Int$
+% - Integers: `\Int`
 \DeclareDocumentMacro \Int {\mathbb{Z}}
 
-% - Real numbers: `\Real`, $\Real$
+% - Real numbers: `\Real`
 \DeclareDocumentMacro \Real {\mathbb{R}}
 
-% - Rational numbers: `\Rat`, $\Rat$
+% - Rational numbers: `\Rat`
 \DeclareDocumentMacro \Rat {\mathbb{Q}}
 
-% - The set $\{0, 1\}$: `\Bin`, $\Bin$
+% - The set $\{0, 1\}$: `\Bin`
 \DeclareDocumentMacro \Bin {\mathbb{B}}
 
-% - Identity relation: `\Id{X}`, $\Id{X}$
+% - Identity relation: `\Id{X}`
 \DeclareDocumentCommand \Id { m } {\mathord{\mathrm{Id}_{#1}}}
 
 % ### Symbols for Turing Machines
@@ -450,26 +448,26 @@
 % M_n` will generate $\mathfrak M_n$ and not $\mathfrak{M_n}$.
 
 % - `\Struct{M}` - First-order structures; by default, the first token
-% in Fraktur~$\Struct{M}$
+% in Fraktur
 
 \DeclareDocumentCommand \Struct { m }{\mathfrak #1}
 
 % - `\Mod{M}` - modal structures; default: set first token in
-% Fraktur~$\Mod{M}$
+% Fraktur
 
 \DeclareDocumentCommand \Mod { m }{\mathfrak #1}
 
 % - `\Lang{L}` - Languages; default: set first token in callgraphic
-% font~$\Lang{L}$
+% font
 
 \DeclareDocumentCommand \Lang { m }{\mathcal #1}
 
-% - `\Log{L}` - Logics; default: set entirely in boldface~$\Log{Int}$.
+% - `\Log{L}` - Logics; default: set entirely in boldface
 
 \DeclareDocumentCommand \Log { m }{\mathbf{#1}}
 
 % - `\Obj` - Object-language symbols; default: set entirely in
-% sans-serif italics~$\Obj{P}$.
+% sans-serif italics
 
 \DeclareDocumentCommand \Obj { m }{\mathsfit{#1}}
 
@@ -483,11 +481,11 @@
 
 \DeclareDocumentCommand \PIso { m }{\mathcal{#1}}
 
-% `\fn{func}` -- typeset a function name~$\Fn{func}$
+% `\fn{func}` -- typeset a function name
 
 \DeclareDocumentCommand \fn { m } {\mathrm{#1}}
 
-% `\Th{T}` -- typeset name of a theory~$\Th{T}$
+% `\Th{T}` -- typeset name of a theory
 
 \DeclareDocumentCommand \Th { m } {\mathbf{#1}}
 
