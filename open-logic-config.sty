@@ -361,6 +361,19 @@
 
 \DeclareDocumentCommand \Gn { m } {\#(#1)}
 
+% - `\mSat{M}{!A}[w]`: modal stasfaction relation
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    % negated
+    \IfNoValueTF {#4} 
+        { \Struct #2 \nVdash #3 }
+        { \Struct #2, #4 \nVdash #3}}{
+    % not negated
+    \IfNoValueTF {#4} 
+        { \Struct #2 \Vdash #3 }
+        { \Struct #2, #4 \Vdash #3 }}
+}
 
 
 % Special Sets and Mathematical Symbols
