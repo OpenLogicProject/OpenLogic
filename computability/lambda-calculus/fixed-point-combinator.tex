@@ -1,0 +1,40 @@
+% Part: computability
+% Chapter: lambda-calculus
+% Section: fixed-point-combinator
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{lam}{fix}
+\olsection{Fixed-Point Combinators}
+
+Suppose you have a lambda term $g$, and you want another term $k$ with
+the property that $k$ is $\beta$-equivalent to $gk$. Define terms
+\[
+\fn{diag}(x) = xx
+\]
+and
+\[
+l(x) = g(\fn{diag}(x))
+\]
+using our notational conventions; in other words, $l$ is the term
+$\lambd[x][g(xx)]$. Let $k$ be the term $ll$. Then we have
+\begin{align*}
+k & = (\lambd[x][g(xx)])(\lambd[x][g(xx)]) \\
+& \red  g((\lambd[x][g(xx)])(\lambd[x][g(xx)])) \\
+& = gk.
+\end{align*}
+If one takes
+\[
+Y = \lambd[g][((\lambd[x][g(xx)])(\lambd[x][g(xx)]))]
+\]
+then $Yg$ and $g(Yg)$ reduce to a common term; so $Yg \equiv_\beta
+g(Yg)$. This is known as ``Curry's combinator.'' If instead one takes
+\[
+Y = (\lambd[xg][g(xxg)])(\lambd[xg][g(xxg)])
+\]
+then in fact $Yg$ reduces to $g(Yg)$, which is a stronger statement.
+This latter version of $Y$ is known as ``Turing's combinator.''
+
+\end{document}

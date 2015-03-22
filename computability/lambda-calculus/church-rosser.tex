@@ -1,0 +1,41 @@
+% Part: computability
+% Chapter: lambda-calculus
+% Section: church-rosser
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{lam}{cr}
+\olsection{The Church-Rosser Property}
+
+\begin{thm}
+\ollabel{thm:church-rosser}
+Let $M$, $N_1$, and $N_2$ be terms, such that $M \red N_1$ and $M \red
+N_2$. Then there is a term $P$ such that $N_1 \red P$ and $N_2 \red P$.
+\end{thm}
+
+\begin{cor}
+Suppose $M$ can be reduced to normal form. Then this normal form is
+unique.
+\end{cor}
+
+\begin{proof}
+If $M \red N_1$ and $M \red N_2$, by the previous theorem there is a
+term~$P$ such that $N_1$ and $N_2$ both reduce to~$P$. If $N_1$
+and~$N_2$ are both in normal form, this can only happen if $N_1 = P =
+N_2$.
+\end{proof}
+
+Finally, we will say that two terms $M$ and~$N$ are
+\emph{$\beta$-equivalent}, or just \emph{equivalent}, if they reduce
+to a common term; in other words, if there is some $P$ such that $M
+\red P$ and $N \red P$. This is written $M \equiv N$. Using
+\olref{thm:church-rosser}, you can check that $\equiv$ is an
+equivalence relation, with the additional property that for every $M$
+and~$N$, if $M \red N$ or $N \red M$, then $M \equiv N$. (In fact, one
+can show that $\equiv$ is the \emph{smallest} equivalence relation
+having this property.)
+
+\end{document}
+
