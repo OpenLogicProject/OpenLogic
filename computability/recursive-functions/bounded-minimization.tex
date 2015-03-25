@@ -12,55 +12,45 @@
 
 \begin{prop}
 If $R(x, \vec z)$ is primitive recursive, so is the function $m_R(y,
-\vec z)$ which returns the least~$x$ less than $y$ such that $R(x,\vec
-z)$ holds, if there is one, and 0 otherwise.  We will write the
-function~$m_R$ as
+\vec{z})$ which returns the least~$x$ less than $y$ such that
+$R(x,\vec{z})$ holds, if there is one, and 0 otherwise.  We will write
+the function~$m_R$ as
 \[
-\fn{min} \; x < y \; R(x, \vec z),
+\bmin{x < y}{R(x, \vec{z})},
 \]
 \end{prop}
 
 \begin{proof}
-We first define the function~$m'_R(y, \vec z)$ which returns the
-least~$x$ less than $y$ such that $R(x,\vec z)$ holds, if there is
-one, and $y$ otherwise.  First, we define 
-\[
-f(u, \vec z) = 
+Note than there can be no~$x < y$ such that $R(x, \vec{z})$ since
+there is no $x < y$ at all.  So $m_R(x, 0) = 0$.
+
+In case the bound is $y + 1$ we have three cases: (a) There is an $x <
+y$ such that $R(x, \vec{z})$, in which case $m_R(y+1, \vec{z}) =
+m_R(y, \vec{z})$. (b) There is no such~$x$ but $R(y, \vec{z})$, then
+$m_R(y+1, \vec{z}) = y$. (c) There is no $x < y+1$ such that $R(x,
+\vec{z})$, then $m_R(y+1,\vec{z}) = 0$. So,
+\begin{align*}
+m_R(0, \vec{z}) & = 0\\
+m_R(y+1, \vec{z}) & = 
 \begin{cases}
-0 & \text{if $\lexists[x \le u][R(x, \vec z)]$} \\
-1 & \text{otherwise.}
-\end{cases}
-\]
-$f$ is primitive recursive.  $f(u, \vec z)$ is 1 for all $u$ less than
-the least $x$ such that $R(x, \vec z)$, and is~$0$ thereafter.  Since
-there are exactly $x$ natural numbers less than~$x$, if we sum the
-values of $f(u, \vec z)$ for all $u = 0$, \dots,~$y$, we get the least
-$x$ such that $R(x, \vec z)$ if that $x$ is less than $y$, and $y+1$
-otherwise:
-\[
-m'_R(y, \vec z) = \sum_{u = 0}^y f(u, \vec z)
-\]
-To get $m_R$, we set:
-\[
-m_R(u, \vec z) = 
-\begin{cases}
-m'_R(y, \vec z) & \text{if $m'_R(y, \vec z) < y$}\\
+m_R(y, \vec{z}) & \text{if $\lexists[x < y][R(x, \vec{z})]$} \\
+y & \text{otherwise, provided $R(y, \vec{z})$}\\
 0 & \text{otherwise.}
 \end{cases}
-\]
+\end{align*}
 \end{proof}
 
 \begin{explain}
-The choice of ``$0$ otherwise'' is somewhat arbitrary. As we saw, it
-is in fact easier to recursively define the function~$m'$ which
-returns the least $x$ less than $y$ such that $R(x,\vec z)$ holds, and
-$y+1$ otherwise.  When we use $\fn{min}$, however, we will always know
-that the least $x$ such that $R(x, \vec z)$ exists and is less than
-$y$. Thus, in practice, we will not have to worry about the
-possibility that if $\fn{min}$ returns $0$ we do not know if that
+The choice of ``$0$ otherwise'' is somewhat arbitrary. It is in fact
+even easier to recursively define the function~$m'_R$ which returns
+the least $x$ less than $y$ such that $R(x,\vec z)$ holds, and $y+1$
+otherwise.  When we use $\fn{min}$, however, we will always know that
+the least $x$ such that $R(x, \vec z)$ exists and is less
+than~$y$. Thus, in practice, we will not have to worry about the
+possibility that if $\bmin{x<y}{R(x, \vec{z})} = 0$ we do not know if that
 value indicates that $R(0, \vec z)$ or that for no $x < y$, $R(x, \vec
-z)$. As with bounded quantification, $\fn{min} \; x \leq y \; \dots$
-can be understood as $\fn{min} \; x < y + 1 \; \dots$.
+z)$. As with bounded quantification, $\bmin{x \leq y}{\dots}$
+can be understood as $\bmin{x < y + 1}{\dots}$.
 \end{explain}
 
 All this provides us with a good deal of machinery to show that
@@ -81,7 +71,8 @@ x \mid y \defiff \lexists[z \leq y][(x \cdot z) = y].
 \item The function $\fn{nextPrime(x)}$, which returns the first prime
   number larger than $x$, defined by
 \[
-  \fn{nextPrime(x)} = \fn{min} \; {y \leq x\fac+1} \\ (y > x \land \fn{Prime}(y))
+  \fn{nextPrime(x)} = 
+  \bmin{y \leq x\fac+1}{(y > x \land \fn{Prime}(y))}
 \]
 Here we are relying on Euclid's proof of the fact that there is always
 a prime number between $x$ and $x\fac+1$.
@@ -92,7 +83,7 @@ a prime number between $x$ and $x\fac+1$.
 \end{enumerate}
 
 \begin{prob}
-Define integer division using bounded minimization.
+Define integer division $d(x, y)$ using bounded minimization.
 \end{prob}
 
 \end{document}

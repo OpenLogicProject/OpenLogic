@@ -31,8 +31,8 @@ Let us define the following functions:
 \len{s} = 
 \begin{cases} 
 0 & \text{if $s = 0$ or $s = 1$} \\
-\fn{min} \; i < s \; (p_i | s \land \lforall[j < s][(j > i \lif
-    p_j \not | s)])+1 & \text{otherwise}
+\bmin{i < s}{(p_i \mid s \land \lforall[j < s][(j > i \lif
+    p_j \mathrel{\not\mid} s)])}+1 & \text{otherwise}
 \end{cases}
 \]
 Note that we need to bound the search on $i$; clearly $s$ provides an
