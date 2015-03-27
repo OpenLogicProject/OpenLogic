@@ -1,0 +1,92 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: halting-problem
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{hlt}
+\olsection{The Halting Problem}
+
+The \emph{halting problem} in general is the problem of deciding,
+given the specification~$e$ (e.g., program) of a computable function
+and a number~$n$, whether the computation of the function on input~$e$
+halts, i.e., produces a result.  Famously, Alan Turing proved that
+this problem itself cannot be solved by a computable function, i.e.,
+the function
+\[
+h(e, n) = 
+\begin{cases}
+1 & \text{if computation $e$ halts on input $n$}
+0 & otherwise
+\end{cases}
+\]
+is not computable.
+
+In the context of partial recursive functions, the role of the
+specification of a program may be played by the index~$e$ given in
+Kleene's normal form theorem.  If $f$ is a partial recursive function,
+any $e$~for which the equation in the normal form theorem holds, is an
+index of~$f$. Given a number~$e$, the normal form theorem states that
+\[
+\cfind{e}(x) \simeq U(\mu s \; T(e, x, s))
+\]
+is partial recursive, and for every partial recursive $f\colon \Nat
+\to \Nat$, there is an $e \in \Nat$ such that $\cfind{e}(x) \simeq
+f(x)$ for all~$x \in \Nat$.  In fact, for each such $f$ there is not
+just one, but infinitely many such~$e$.  The \emph{halting function}~$h$
+is defined by
+\[
+h(e, x) = 
+\begin{cases}
+1 & \text{if $\cfind{e}(x) \defined$}
+0 & otherwise.
+\end{cases}
+\]
+Note that $h(e, x) = 0$ if $\cfind{e}(x) \undefined$, but also
+when~$e$ is not he index of a partial recursive function at all.
+
+\begin{thm}
+\ollabel{thm:halting-problem}
+$h$ is not partial recursive.
+\end{thm}
+
+\begin{proof}
+If $h$
+were partial recursive, we could define
+\[
+d(y) = 
+\begin{cases}
+1 & \text{if $h(y, y) = 0$}
+\umin{x}{x \neq x} & \text{otherwise.}
+\end{cases}
+\]
+From this definition it follows that
+\begin{enumerate}
+\item $d(y) \defined$ iff $\cfind{y}(y) \undefined$ or $y$ is
+  not the index of a partial recursive function.
+\item $d(y) \undefined$ iff $\cfind{y}(y) \defined$.
+\end{enumerate}
+If $h$ were partial recursive, then $d$ would be partial recursive as
+well.  Thus, by the Kleene normal form theorem, it has an index
+$e_d$. Consider the value of $h(e_d, e_d)$. There are two
+possible cases, 0 and 1.
+\begin{enumerate}
+\item If $h(e_d, e_d) = 1$ then $\cfind{e_d}(e_d) \defined$.  But
+  $\cfind{e_d} = d$, and $d(e_d)$ is defined iff $h(e_d, e_d) = 0$.
+  So $h(e_d, e_d) \neq 1$.
+\item If $h(e_d, e_d) = 0$ then either $e_d$ is not the index of a
+  partial recursive function, or it is and $\cfind{e_d}(e_d)
+  \undefined$. But again, $\cfind{e_d} = d$, and $d(e_d)$ is undefined
+  iff $\cfind{e_d}(e_d) \defined$.
+\end{enumerate}
+The upshot is that $e_d$ cannot, after all, be the index of a partial
+recursive function.  But if $h$ were partial recursive, $d$ would be
+too, and so our definition of $e_d$ as an index of it would be
+admissible.  We must conclude that $h$ cannot be partial recursive.
+\end{proof}
+
+\end{document}
+
+
