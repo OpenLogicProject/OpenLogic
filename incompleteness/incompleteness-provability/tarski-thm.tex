@@ -10,17 +10,14 @@
 
 \olsection{The Undefinability of Truth}
 
-Now, for the moment, we will set aside the notion of {\em proof} and
-consider the notion of {\em definability}. This notion depends on
-having a formal semantics for the language of arithmetic, and we have
-not covered semantic notions for this course. But the intuitions are
-not difficult. We have described a set of formulas and sentences in
-the language of arithmetic. The ``intended interpretation'' is to read
-such sentences as making assertions about the natural numbers, and
-such an assertion can be true or false. Let $\Struct{N}$ be the
-!!{structure} with domain $\Nat$ and the standard interpretation for
-the symbols in the langauge of arithmetic.  The $\Sat{N}{!A}$ means
-``$!A$ is true in the standard interpretation.''
+The notion of {\em definability} depends on having a formal semantics
+for the language of arithmetic.  We have described a set of formulas
+and sentences in the language of arithmetic. The ``intended
+interpretation'' is to read such sentences as making assertions about
+the natural numbers, and such an assertion can be true or false. Let
+$\Struct{N}$ be the !!{structure} with domain $\Nat$ and the standard
+interpretation for the symbols in the language of arithmetic.  Then
+$\Sat{N}{!A}$ means ``$!A$ is true in the standard interpretation.''
 
 \begin{defn}
   A relation $R(x_1,\dots,x_k)$ of natural numbers is {\em definable}
@@ -37,7 +34,7 @@ back and check the definitions and convince yourself that this is the
 case.)
 
 \begin{lem}
-Every computable relation is definable in $\Struct{N}$.
+Every computable relation is definable in~$\Struct{N}$.
 \end{lem}
 
 \begin{proof}
@@ -49,30 +46,24 @@ Now one can ask, is ``definable in $\Struct{N}$'' the same as
 ``representable in $\Th{Q}$''? The answer is no. For example:
 
 \begin{lem}
-Every c.e.\ set is definable in $\Struct{N}$.
+The halting relation is definable in $\Struct{N}$.
 \end{lem}
 
 \begin{proof}
-Suppose $S$ is the range of $!A_e$, i.e.
+Let $H$ be the halting relation, i.e.,
 \[
-S = \Setabs{x}{\lexists[y][T(\num e,x,y)]}.
+H = \Setabs{x}{\lexists[y][T(\num e, x, y)]}.
 \]
 Let $!D_T$ define $T$ in $\Struct{N}$. Then
 \[
-S = \Setabs{x}{\Sat{N}{\lexists[y][!D_T(\num e, \num x, y)]}},
+H = \Setabs{x}{\Sat{N}{\lexists[y][!D_T(\num e, \num x, y)]}},
 \]
-so $\lexists[y][!D_T(\num e, x, y)]$ defines~$S$ is $\Struct{N}$. 
+so $\lexists[y][!D_T(\num e, x, y)]$ defines~$H$ is $\Struct{N}$. 
 \end{proof}
 
-\begin{cor}
-$\Th{Q}$ is definable in arithmetic.
-\end{cor}
-
-So, more sets are definable in $\Struct{N}$. For example, it is not hard
-to see that complements of c.e.\ sets are also definable. The sets of
-numbers definable in $\Struct{N}$ are called, appropriately, the
-``arithmetically definable sets,'' or, more simply, the ``arithmetic
-sets.'' 
+\begin{prob}
+Show that $\Th{Q}$ is definable in arithmetic.
+\end{prob}
 
 What about $\Th{TA}$ itself? Is it definable in arithmetic? That
 is: is the set $\Setabs{\Gn{!A}}{\Sat{N}{!A}}$ definable in

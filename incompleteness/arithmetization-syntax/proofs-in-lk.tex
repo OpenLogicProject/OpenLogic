@@ -130,35 +130,35 @@ Define the following relations as in
 
 \begin{prop}
 Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
-the relation $\fn{Pr}_\Gamma(x, y)$ expressing ``$x$ is the G\"odel
-number of a sentence~$!A$ and $y$ is the code of !!a{derivation}~$\Pi$
-of $\Gamma_0 \Sequent !A$ for some finite $\Gamma_0 \subseteq
-\Gamma$'' is primitive recursive.
+the relation $\fn{Pr}_\Gamma(x, y)$ expressing ``$x$ is the code of
+!!a{derivation}~$\Pi$ of $\Gamma_0 \Sequent !A$ for some finite
+$\Gamma_0 \subseteq \Gamma$ and $x$ is the G\"odel number of~$!A$'' is
+primitive recursive.
 \end{prop}
 
 \begin{proof}
-Suppose ``$x \in \Gamma$'' is given by the primitive recursive
-predicate~$R_\Gamma(x)$. We have to show that $\fn{Pr}_\Gamma(x, y)$
-which holds iff $x$ is the G\"odel number of a sentence~$!A$ and $y$
-is the code of an $\Log{LK}$-!!{derivation} with end sequent
+Suppose ``$y \in \Gamma$'' is given by the primitive recursive
+predicate~$R_\Gamma(y)$. We have to show that $\fn{Pr}_\Gamma(x, y)$
+which holds iff $y$ is the G\"odel number of a sentence~$!A$ and
+$x$~is the code of an $\Log{LK}$-!!{derivation} with end sequent
 $\Gamma_0 \Sequent !A$ is primitive recursive.
 
-By the previous proposition, the property $\fn{Deriv}(y)$ which holds
-iff $y$`is the code of a correct derivation~$\Pi$ in $\Log{LK}$ is
-primitive recursive.  If $y$ is such a code, then $(y)_1$ is the code
-of the end sequent of`$\Pi$, and so $((y)_1)_0$ is the code of the
-left side of the end sequent and $((y)_1)_1$ the right side. So we can
+By the previous proposition, the property $\fn{Deriv}()$ which holds
+iff $x$ is the code of a correct derivation~$\Pi$ in $\Log{LK}$ is
+primitive recursive.  If $x$ is such a code, then $(x)_1$ is the code
+of the end sequent of~$\Pi$, and so $((x)_1)_0$ is the code of the
+left side of the end sequent and $((x)_1)_1$ the right side. So we can
 express ``the right side of the end sequent of~$\Pi$ is~$!A$'' as
-$\len{((y)_1)_1} = 1 \land (((y)_1)_1)_0 = x$.  The left side of the
+$\len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x$.  The left side of the
 end sequent of $\Pi$ is of course automatically finite, we just have
 to express that every sentence in it is in~$\Gamma$.  Thus we can
 define $\fn{Pr}_\Gamma(x, y)$ by
 \begin{align*}
 \fn{Pr}_\Gamma(x, y) \defiff {}&
-\fn{Sent}(x) \land \fn{Deriv}(y) \land {} \\
+\fn{Sent}(y) \land \fn{Deriv}(x) \land {} \\
 & \lforall[i <
-  \len{((y)_1)_0}][(((y)_1)_0)_i \in \Gamma] \land {}\\
-& \len{((y)_1)_1} = 1 \land (((y)_1)_1)_0 = x
+  \len{((x)_1)_0}][(((x)_1)_0)_i \in \Gamma] \land {}\\
+& \len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x
 \end{align*}
 \end{proof}
 

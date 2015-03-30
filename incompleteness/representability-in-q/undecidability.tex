@@ -16,15 +16,15 @@ prove~$!A$'' for any sentence~$!A$ in the language of~$\Th{T}$.  So
 $\Th{Q}$ would be decidable iff there were a computational procedure
 which decides, given a sentence~$A$ in the language of arithmetic,
 whether $\Th{Q} \Proves !A$ or not.  We can make this more precise by
-asking: Is the relation~$\fn{Prov}_{\Th{Q}}(x)$, which holds of~$x$
-iff $x$ is the G\"odel number of a sentence provable in~$\Th{Q}$,
+asking: Is the relation~$\fn{Prov}_{\Th{Q}}(y)$, which holds of~$y$
+iff $y$ is the G\"odel number of a sentence provable in~$\Th{Q}$,
 recursive?  The answer is: no. 
 
 \begin{thm}
 $\Th{Q}$ is undecidable, i.e., the relation 
 \[
-\fn{Prov}_{\Th{Q}}(x) \defiff \fn{Sent}(x) \land
-\lexists[y][\fn{Pr}_{\Th{Q}}(x, y)]
+\fn{Prov}_{\Th{Q}}(y) \defiff \fn{Sent}(y) \land
+\lexists[x][\fn{Pr}_{\Th{Q}}(x, y)]
 \]
 is not recursive.
 \end{thm}
@@ -32,21 +32,20 @@ is not recursive.
 \begin{proof}
 Suppose it were.  Then we could solve the halting problem as follows:
 Given $e$ and $n$, we know that $\cfind{e}(n) \defined$ iff there is
-an~$s$ such that $T(e, x, s)$, where $T$ is Kleene's predicate from
-\olref[cmp][rec][nft]{thm:kleene-nf}. Since $\Char{T}$ is primitive
-recursive it is representable in~$\Th{Q}$ by a formula
-$!B_T(e,x,s,y)$, that is, $\Th{Q} \Proves !B_T(\num{e}, \num{x},
-\num{s}, \num{1})$ iff $T(e, x, s)$.  If $\Th{Q} \Proves !B_T(\num{e},
-\num{x}, \num{s}, \num{1})$ then also $\Th{Q} \Proves \Th{Q} \Proves
-\lexists[y][!B_T(\num{e}, \num{x}, y, \num{1})]$. If no such $s$
-exists, then $\Th{Q} \Proves \lnot !B_T(\num{e}, \num{x}, \num{s},
-\num{1})$ for every~$s$. Since $\Th{Q}$ is $\omega$-consistent,
-$\Th{Q} \Proves/ \lexists[y][!B_T(\num{e}, \num{x}, y, \num{1})]$.  In
-other words, $\Th{Q} \Proves \lexists[y][!B_T(\num{e}, \num{x}, y,
-  \num{1})]$ iff there is an $s$ such that $T(e, n, s)$, i.e., iff
-$\cfind{e}(n) \defined$.  From $e$ and~$n$ we can compute
-$\Gn{\lexists[y][!B_T(\num{e}, \num{n}, y, \num{1})]}$, let $g(e, n)$
-  be the primitive recursive function which does that. So
+an~$s$ such that $T(e, n, s)$, where $T$ is Kleene's predicate from
+\olref[cmp][rec][nft]{thm:kleene-nf}. Since $T$ is primitive recursive
+it is representable in~$\Th{Q}$ by a formula $!B_T$, that is, $\Th{Q}
+\Proves !B_T(\num{e}, \num{n}, \num{s})$ iff $T(e, n, s)$.  If $\Th{Q}
+\Proves !B_T(\num{e}, \num{n}, \num{s})$ then also $\Th{Q} \Proves
+\Th{Q} \Proves \lexists[y][!B_T(\num{e}, \num{n}, y)]$. If no such $s$
+exists, then $\Th{Q} \Proves \lnot !B_T(\num{e}, \num{n}, \num{s})$
+for every~$s$. Since $\Th{Q}$ is $\omega$-consistent, $\Th{Q} \Proves/
+\lexists[y][!B_T(\num{e}, \num{n}, y)]$.  In other words,
+$\Th{Q} \Proves \lexists[y][!B_T(\num{e}, \num{n}, y)]$ iff
+there is an $s$ such that $T(e, n, s)$, i.e., iff $\cfind{e}(n)
+\defined$.  From $e$ and~$n$ we can compute
+$\Gn{\lexists[y][!B_T(\num{e}, \num{n}, y)]}$, let $g(e, n)$
+be the primitive recursive function which does that. So
 \[
 h(e, n) = 
 \begin{cases}
@@ -54,9 +53,9 @@ h(e, n) =
 0 & \text{otherwise}.
 \end{cases}
 \]
-This would show that $h$ is recursive if $\fn{Pr}_{\Th{Q}}$ is. But $h$ is not
-recursive, by \olref[cmp][rec][hlt]{thm:halting-problem}, so $\fn{Pr}_{\Th{Q}}$
-cannot be either.
+This would show that $h$ is recursive if $\fn{Pr}_{\Th{Q}}$ is. But
+$h$ is not recursive, by \olref[cmp][rec][hlt]{thm:halting-problem},
+so $\fn{Pr}_{\Th{Q}}$ cannot be either.
 \end{proof}
 
 \begin{cor}
