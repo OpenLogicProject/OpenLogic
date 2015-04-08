@@ -12,7 +12,7 @@
 The set of primitive recursive functions is
 remarkably robust. But we will be able to do even more once we have
 developed an adequate means of handling \emph{sequences}.  We will
-identify finite sequences of natural numbers with natural numbers, in
+identify finite sequences of natural numbers with natural numbers in
 the following way: the sequence $\langle a_0, a_1, a_2, \dots, a_k \rangle$
 corresponds to the number
 \[
@@ -67,7 +67,7 @@ $\fn{append}(\fn{append}(\dots \fn{append}(\emptyseq,s_0)
 $(s)_0$, \dots,~$(s)_{k-1}$.
 
 It will be useful for us to be able to bound the numeric code of a
-sequence, in terms of its length and its largest element. Suppose $s$
+sequence in terms of its length and its largest element. Suppose $s$
 is a sequence of length $k$, each element of which is less than equal
 to some number $x$. Then $s$ has at most $k$ prime factors, each at
 most $p_{k-1}$, and each raised to at most $x+1$ in the prime
@@ -75,7 +75,7 @@ factorization of $s$. In other words, if we define
 \[
 \fn{sequenceBound}(x,k) = p_{k-1}^{k \cdot (x+1)},
 \]
-then the numeric code of the sequence~$s$ described above, is at
+then the numeric code of the sequence~$s$ described above is at
 most~$\fn{sequenceBound}(x,k)$.
 
 Having such a bound on sequences gives us a way of defining new
