@@ -16,14 +16,20 @@ of an atomic !!{formula}, is primitive recursive.
 
 \begin{proof}
 The number $x$ is the G\"odel number of an atomic !!{formula} iff
+one of the following holds:
 \begin{enumerate}
-\item there are $n$, $j < x$, and $z < x$ such that for each $i < n$,
+\item There are $n$, $j < x$, and $z < x$ such that for each $i < n$,
   $\fn{Term}((z)_i)$ and
 \[
-x = \Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)} \text{, or}
+x = \Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)}.
 \]
-\item there are $z_1, z_2 < x$ such that $x = z_1 \concat \Gn{\eq}
-  \concat \eq z_2$ and $\fn{Term}(z_1)$ and $\fn{Term}(z_2)$.
+\item There are $z_1, z_2 < x$ such that $\fn{Term}(z_1)$,
+  $\fn{Term}(z_2)$, and 
+\[
+x = z_1 \concat \Gn{\eq} \concat z_2.
+\]
+  \tagitem{prvFalse}{$x = \Gn{\lfalse}$.}{}
+  \tagitem{prvTrue}{$x = \Gn{\ltrue}$.}{}
 \end{enumerate}
 \end{proof}
 

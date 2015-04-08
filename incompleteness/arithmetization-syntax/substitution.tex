@@ -10,7 +10,7 @@
 \olsection{Substitution}
 
 \begin{prop}
-There is a primitive recursive function $\fn{Subst}(x, y, z)$ with
+There is a primitive recursive function $\fn{Subst}(x, y, z)$ with the property that
 \[
 \fn{Subst}(\Gn{!A}, \Gn{t}, \Gn{x}) = \Gn{\Subst{!A}{t}{x}}
 \]
@@ -23,6 +23,7 @@ occurrence of the variable with G\"odel number~$z$, is primitive
 recursive.  We can then define a function $\fn{Subst}'$ by primitive
 recursion as follows:
 
+% Also need to ensure that y is free for z in x as well.
 \begin{align*}
 \fn{Subst}'(0, x, y, z) & = \emptyseq \\
 \fn{Subst}'(i + 1, x, y, z) & =
