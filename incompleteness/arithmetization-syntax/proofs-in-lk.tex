@@ -56,6 +56,7 @@ $k$: & 1 & 2 & 3 & 4
 The following relations are primitive recursive:
 \begin{enumerate}
 \item $!A \in \Gamma$.
+\item $\Gamma \subseteq \Delta$.
 \item $\Gamma \Sequent \Delta$ is an initial sequent.
 \item $\Gamma \Sequent \Delta$ follows from $\Gamma' \Sequent \Delta'$
   (and $\Gamma'' \Sequent \Delta''$) by a rule of $\Log{LK}$.
@@ -64,31 +65,67 @@ The following relations are primitive recursive:
 \end{prop}
 
 \begin{proof}
+We have to show that the corresponding relations between G\"odel
+numbers of !!{formula}s, sequences of G\"odel numbers of !!{formula}s
+(which code sets of !!{formula}s), and G\"odel numbers of sequents,
+are primitive recursive.
 \begin{enumerate}
-\item $\fn{IsIn}(x, g) = \lexists[i < \len{g}][(g)_i = x]$.
-\item $\fn{InitSeq}(s) = \lexists[x < s][(\fn{Sent}(x) \land s =
-  \tuple{\tuple{x},\tuple{x}})] \lor \lexists[t<s][(\fn{Term}(t) \land
-  s = \tuple{0, t\concat \eq \concat t})]$.
+\item $!A \in \Gamma$ iff $\Gn{!A}$ occurs in the
+  sequence~$\Gn{\Gamma}$, i.e, $\fn{IsIn}(x, g) \defiff \lexists[i <
+    \len{g}][(g)_i = x]$. We'll abbreviate this as $x \in g$.
+\item $\Gamma \subseteq \Delta$ iff every element of $\Gn{\Gamma}$ is
+  also an an element of $\Gn{\Delta}$, i.e., $\fn{SubSet}(g, d)
+  \defiff \lforall[i < \len{g}][(g)_i \in d]$. We'll abbreviate this
+  as $g \subseteq d$.
+\item $\Gamma \Sequent \Delta$ is an initial sequent if either there
+  is a !!{sentence}~$!A$ such that $\Gamma \Sequent \Delta$ is $!A
+  \Sequent !A$, or there is a term~$t$ such that $\Gamma \Sequent
+  \Delta$ is $\emptyset \Sequent \eq[t][t]$.  In terms of G\"odel
+  numbers,
+\begin{align*}
+\fn{InitSeq}(s) \defiff &
+\lexists[x < s][(\fn{Sent}(x) \land 
+s = \tuple{\tuple{x},\tuple{x}})] 
+\lor {}\\
+& \lexists[t<s][(\fn{Term}(t)  \land 
+s = \tuple{0, t\concat \Gn{\eq} \concat t})].
+\end{align*}
 \item Here we have to show that for each rule of inference~$R$ the
   relation $\fn{FollowsBy}_R(s, s')$ which holds if $s$ and $s'$ are
   the G\"odel numbers of conclusion and premise of a correct
   application of~$R$ is primitive recursive.  If $R$ has two premises,
   $\fn{FollowsBy}_R$ of course has three arguments.
 
-For instance, $\Gamma \Sequent \Delta$ follows from $\Gamma' \Sequent
-\Delta'$ by $\lexists$right iff there is a formula~$!A$, a
-variable~$x$ and a closed term~$t$ such that $\Gamma = \Gamma'$,
-$\Subst{!A}{t}{x} \in \Delta'$, $\lexists[x][!A] \in \Delta$, and for
+For instance, $\Gamma \Sequent \Delta$ follows correctly from $\Gamma'
+\Sequent \Delta'$ by $\lexists$right iff $\Gamma = \Gamma'$ and there
+is a formula~$!A$, a variable~$x$ and a closed term~$t$ such that
+$\Subst{!A}{t}{x} \in \Delta'$ and $\lexists[x][!A] \in \Delta$, for
 every $!B \in \Delta$, either $!B = \lexists[x][!A]$ or $!B \in
-\Delta'$.  We just have to translate into G\"odel numbers.  If $s =
-\Gn{\Gamma \Sequent \Delta}$ then $(s)_0 = \Gn{\Gamma}$ and $(s)_1 =
-\Gn{\Gamma}$. So:
+\Delta'$, and for every $!B \in \Delta'$, $!B = \Subst{!A}{t}{x}$ or
+$!B \in \Delta$.  We just have to translate this into G\"odel numbers.
+If $s = \Gn{\Gamma \Sequent \Delta}$ then $(s)_0 = \Gn{\Gamma}$ and
+$(s)_1 = \Gn{\Delta}$. So:
 \begin{align*}
 \fn{FollowsBy}_{\lexists \text{right}}(s, s') \defiff {} & 
+(s)_0 \subseteq (s')_0 \land (s')_0 \subseteq (s)_0 \land {}\\
+& 
 \lexists[f<s][\lexists[x<s][\lexists[t<s'][(\fn{Frm}(f) \land \fn{Var}(x) \land \fn{Term}(t) \land {}]]] \\
 & \fn{Subst}(f,t,x) \in (s')_1 \land \#(\lexists) \concat x \concat f \in (s)_1 \land {}\\
-& \lforall[i < \len{(s)_1}][(((s)_1)_i = \#(\lexists) \concat x \concat f \lor ((s)_1)_i \in (s')_1)])
+& \lforall[i < \len{(s)_1}][(((s)_1)_i = \#(\lexists) \concat x \concat f \lor ((s)_1)_i \in (s')_1)] \land {} \\
+& \lforall[i < \len{(s')_1}][(((s)_1')_i = \fn{Subst}(f, t, x) \lor ((s')_1)_i \in (s)_1)])
 \end{align*}
+The individual lines express, respectively, ``$\Gamma \subseteq
+\Gamma' \land \Gamma' \subseteq \Gamma$,'' ``there is a !!{formula}
+with G\"odel number~$f$, a variable with G\"odel number $x$, and a
+term with G\"odel number~$t$,'' ``$\Subst{!A}{t}{x} \in \Delta' \land
+\lexists[x][!A] \in \Delta$,'' ``for all $!B \in \Delta$, either $!B =
+\lexists[x][!A]$ or $!B \in \Delta'$,'' ``for all $!B \in \Delta'$,
+either $!B = \Subst{!A}{t}{x}$ or $!B \in \Delta$. Note that in the
+last two lines, we quantify over the elements~$!B$ of~$\Delta$ and
+$\Delta'$ not directly, but via their place~$i$ in the G\"odel numbers
+of $\Delta$ and $\Delta'$. (Remember that $\Gn{\Delta}$ is the number
+of a sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
+
 \item We first define a helper relation $\fn{hDeriv}(s,n)$ which holds
   if $s$ codes a correct derivation at least to $n$ inferences up from
   the end sequent.  If $n=0$ we let the relation be satisfied by
@@ -110,10 +147,11 @@ every $!B \in \Delta$, either $!B = \lexists[x][!A]$ or $!B \in
 & \quad ((s)_2 = 4 \land \fn{FollowsBy}_{\lif\text{left}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \land {}\\
 & \quad \fn{nDeriv}((s)_3, n) \land \fn{nDeriv}((s)_4, n))
 \end{align*}
-This is a primitive recursive definition, if the number~$n$ is large
+This is a primitive recursive definition. If the number~$n$ is large
 enough, e.g., larger than the maximum number of inferences between an
 initial sequent and the end sequent in~$s$, it holds of $s$ iff $s$ is
-the G\"odel number of a correct !!{derivation}.  So we can now define
+the G\"odel number of a correct !!{derivation}.  The number $s$ itself
+is larger than that maximum number of inferences. So we can now define
 $\fn{Deriv}(s)$ by $\fn{nDeriv}(s,s)$.
 \end{enumerate}
 \end{proof}
