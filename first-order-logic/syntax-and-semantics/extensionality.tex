@@ -27,8 +27,8 @@ of the language appearing in a sentence~$!A$ and have the same domain,
 \begin{prop}[Extensionality]
 Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s. 
 If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and 
-$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant} $c$, relation 
-symbol $R$, and !!{function} $f$ occurring in $!A$, then $\Sat{M}{!A}$ 
+$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant}~$c$, relation 
+symbol~$R$, and !!{function} $f$ occurring in~$!A$, then $\Sat{M}{!A}$ 
 iff $\Sat{M'}{!A}$.
 \end{prop}
 
@@ -37,8 +37,8 @@ satisfies a !!{formula}, only depends on the values of its subterms.
 
 \begin{prop}\ollabel{prop:ext-terms}
 Let $\Struct M$ be a !!{structure}, $t$ and $t'$ terms, and $s$ a
-variable assignment. Let $s' \sim_x s$ be the $x$-variant of $s$ given
-by~$s'(x) = \Value{t}{M}[s]$. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
+variable assignment. Let $s' \sim_x s$ be the $x$-variant of~$s$ given
+by~$s'(x) = \Value{t'}{M}[s]$. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
 \Value{t}{M}[s']$.
 \end{prop}
 
@@ -50,7 +50,7 @@ By induction on~$t$.
 
 \item If $t$ is a variable other than~$x$, say, $t \ident y$, then
   $\Subst{t}{t'}{x} = y$, and $\Value{y}{M}[s] = \Value{y}{M}[s']$
-  since $s' \sim_x s'$.
+  since $s' \sim_x s$.
 
 \item If $t \ident x$, then $\Subst{t}{t'}{x} = t'$.  But
   $\Value{x}{M}[s'] = \Value{t'}{M}[s]$ by definition of~$s'$.

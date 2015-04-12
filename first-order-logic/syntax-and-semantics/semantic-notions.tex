@@ -64,7 +64,7 @@ $\Gamma \Entails !A$ iff $\Gamma \cup \{\lnot !A\}$ is unsatisfiable.
 \end{prop}
 
 \begin{proof}
-For the forward direction, let $\Gamma$ entail $!A$ and suppose to the
+For the forward direction, suppose $\Gamma \Entails !A$ and suppose to the
 contrary that there is a !!{structure} $\Struct M$ so that $\Sat{M}{\Gamma
   \cup \{ \lnot !A \}}$. Since $\Sat{M}{\Gamma}$ and $\Gamma \Entails
 !A$, $\Sat{M}{!A}$. Also, since $\Sat{M}{\Gamma\cup \{ \lnot !A \}}$,
@@ -72,10 +72,11 @@ $\Sat{M}{\lnot !A}$, so we have both $\Sat{M}{!A}$ and $\Sat/{M}{!A}$,
 a contradiction. Hence, there can be no such !!{structure} $\Struct M$, so
 $\Gamma \cup \{ !A \}$ is unsatisfiable.
 
-For the reverse direction, let $\Gamma \cup \{ \lnot !A \}$. So for
-every !!{structure} $\Struct M$, either $\Sat/{M}{\Gamma}$ or
-$\Sat{M}{!A}$. Hence, for every !!{structure} $\Struct M$ with
-$\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma \Entails !A$.
+For the reverse direction, suppose $\Gamma \cup \{ \lnot !A \}$ is
+unsatisfiable. So for every !!{structure} $\Struct M$, either
+$\Sat/{M}{\Gamma}$ or $\Sat{M}{!A}$. Hence, for every !!{structure}
+$\Struct M$ with $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma \Entails
+!A$.
 \end{proof}
 
 \begin{prob}
@@ -98,7 +99,7 @@ If $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$, then $\Gamma'
 Suppose that $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$. Let
 $\Struct M$ be such that $\Sat{M}{\Gamma'}$; then $\Sat{M}{\Gamma}$,
 and since $\Gamma \Entails !A$, we get that $\Sat{M}{!A}$. Hence,
-whenever $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma' \Entails !A$.
+whenever $\Sat{M}{\Gamma'}$, $\Sat{M}{!A}$, so $\Gamma' \Entails !A$.
 \end{proof}
 
 
