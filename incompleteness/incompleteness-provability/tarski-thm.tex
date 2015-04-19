@@ -53,13 +53,13 @@ The halting relation is definable in $\Struct{N}$.
 \begin{proof}
 Let $H$ be the halting relation, i.e.,
 \[
-H = \Setabs{x}{\lexists[y][T(\num e, x, y)]}.
+H = \Setabs{\tuple{e,x}}{\lexists[s][T(e, x, s)]}.
 \]
 Let $!D_T$ define $T$ in $\Struct{N}$. Then
 \[
-H = \Setabs{x}{\Sat{N}{\lexists[y][!D_T(\num e, \num x, y)]}},
+H = \Setabs{\tuple{e,x}}{\Sat{N}{\lexists[s][!D_T(\num e, \num x, s)]}},
 \]
-so $\lexists[y][!D_T(\num e, x, y)]$ defines~$H$ in $\Struct{N}$. 
+so $\lexists[s][!D_T(z, x, s)]$ defines~$H$ in $\Struct{N}$. 
 \end{proof}
 
 \begin{prob}
