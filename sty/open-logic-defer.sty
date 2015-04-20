@@ -11,45 +11,94 @@
 \RequirePackage{etoolbox}
 \RequirePackage{answers}
 
+% write problems to \oljobname.prb
+
 \def\solutionextension{prb}
 
 \makeatletter
 
-% save definition of prob environment as probd
-\let\probd\prob
-\let\endprobd\endprob
-\let\c@probd\c@prob
-\makeatother
+% Undefine the prob and probtag environments
 
 \csundef{prob}
 \csundef{endprob}
 \csundef{probtag}
 \csundef{endprobtag}
 
+% Instead, make them into environments which write probdeferred and
+% probdeferredtag environments to the problem file using answers.sty
+
 \Newassociation{prob}{probdeferred}{\jobname}
 \Newassociation{probtag}{probdeferredtag}{\jobname}
 
-% Redefine probdeferred as a theorem environment
-%\csundef{probdeferred}
-%\csundef{endprobdeferred}
-%\csundef{c@probdeferred}
+% probdeferred and probdeferredtag are just wrappers for theorem
+% environments which do the actual typesetting.  answers.sty writes
+% the number of the problem into the .prb file, but we throw them away
+% and just count them separately. It also throws away the tags. This
+% is a bug; actually probtag should deal with the tags but this
+% requires hacking answers.sty code.
 
 \renewenvironment{probdeferred}[1]{\begin{probd}}{\end{probd}}
 \renewenvironment{probdeferredtag}[2]{\begin{probd}}{\end{probd}}
 
-%\declaretheorem[
-%  style=definition,
-%  name=Problem,
-%  sibling=thm]{probdeferred}
-% answers writes current label as argument
-%\apptocmd{\probdeferred}{\@gobble}{}{}
+% the probd environment does the actual typesetting.
 
-% at the end of a chapter, read the solutionfile
-\appto\OLEndChapterHook{%
+\declaretheorem[
+  style=definition, numbered=yes,
+  name={Problem}]{probd}
+
+% Print the chapter number with the problem number
+
+\def\theprobd{\probch.\arabic{probd}}
+
+% make sure the .prb file is open
+\Opensolutionfile{\jobname}
+
+% - `\problemsperchapter`: execute this in the preamble to print the
+% - problem file at the end of every chapter
+
+\newcommand{\problemsperchapter}{% 
+% after each chapter command, open the .prb file and write a section
+% header into it
+\renewcommand\memendofchapterhook{%
+  \Closesolutionfile{\jobname}
+  \Opensolutionfile{\jobname}
+  \Writetofile{\jobname}{
+    \protect\section*{Problems}
+    \protect\def\protect\probch{\thechapter}
+    \protect\setcounter{probd}{0}}}
+  % at the end of every chapter, close the .prb file and print it
+  \appto\OLEndChapterHook{%
+    \Closesolutionfile{\jobname}
+    \def\probch{\thechapter}
+    \Readsolutionfile{\jobname}}}
+
+% - `\collectproblems`: execute this in the preamble to arrange for
+% the printing of problems explicitly, e.g., at the end of the book
+
+\newcommand{\collectproblems}{%
+% at the end of every \chapter command, write a section header into
+% the .prb file and reset counters
+\renewcommand\memendofchapterhook{%
+  \Writetofile{\jobname}{
+    \protect\section*{Problems for Chapter~\thechapter}
+    \protect\def\protect\probch{\thechapter}
+    \protect\setcounter{probd}{0}}}}
+
+% \collectproblems is the default, so we execute it right away
+
+\collectproblems
+
+% - `\stopproblems`: execute at the end of the mainmatter, to stop
+% chapter commands from writing to the .prb file
+
+\newcommand{\stopproblems}{%
+  \renewcommand\memendofchapterhook{}}
+
+% - `\printproblems`: closes problem file and prints problems.
+
+\newcommand{\printproblems}{%
   \Closesolutionfile{\jobname}
   \Readsolutionfile{\jobname}}
 
-% at the end of a \chapter command, open the solution file 
-\renewcommand\memendofchapterhook{%
-  \Opensolutionfile{\jobname}
-  \Writetofile{\jobname}{\protect\section*{Problems}}}
+\makeatother
+
