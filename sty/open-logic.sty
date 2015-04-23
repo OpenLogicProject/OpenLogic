@@ -131,6 +131,19 @@
 \hfill
 \href{http://openlogicproject.org/}{\includegraphics[width=2.4cm]{\olpath/assets/logos/openlogic-logo-bw}}}
 
+% - `\ifgitinfo`: produced Git revision information if `gitinfo` is used
+
+\newcommand*{\ifgitinfo}{\ifdefined\gitVtags\sffamily\footnotesize
+  rev\gitVtags:
+  \href{https://github.com/OpenLogicProject/OpenLogic/commits/master}
+       {\gitAbbrevHash}
+  (\gitAuthorDate)\else\relax\fi}
+
+\newcommand*{\shortollicense}{\sffamily\footnotesize
+  \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{\jobname}}
+  \ifgitinfo\ by \href{http://openlogicproject.org/}{OLP} /
+  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
+
 
 \newcommand*{\oluselicense}[2]{%
 \begin{minipage}[b]{.9cm}
@@ -153,5 +166,8 @@
 \hfill
 \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}}
 
+\copypagestyle{openlogic}{plain}
+\makeevenfoot{openlogic}{\thepage}{}{\shortollicense}
+\makeoddfoot{openlogic}{\shortollicense}{}{\thepage}
 
 \makeatother
