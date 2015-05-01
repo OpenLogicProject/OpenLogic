@@ -1,0 +1,106 @@
+% Part: model-theory
+% Chapter: interpolation
+% Section: definability
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{int}{def}
+
+\olsection{The Definability Theorem}
+
+\begin{defn}
+Given a language $\Lang{L}$ and !!{predicate}s $P$ and $P'$ not in
+$\Lang{L}$, a set $\Sigma(P)$ of !!{sentence}s of $\Lang{L} \cup\{P\}$
+\emph{implicitly defines} $P$ if and only if
+\[
+\Sigma(P) \cup \Sigma(P') \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff \Atom{P'}{x_1,\dots,
+      x_n})]],
+\]
+where $\Sigma(P')$ is the result of uniformly replacing $P'$ for $P$
+in $\Sigma(P)$.
+\end{defn}
+
+In other words, for any model $\Struct{M}$ and $R, R' \subseteq
+\Domain{M}^n$, if both $\tuple{\Struct{M},R} \Entails \Sigma(P)$ and
+$\tuple{\Struct{M},R'} \Entails \Sigma(P')$, then $R=R'$; where
+$\tuple{\Struct{M},R}$ is the !!{structure}~$\Struct{M'}$ for the
+expansion of $\Lang{L}$ to $\Lang{L} \cup \{P\}$ such that
+$\Assign{P}{M'} = R$, and similarly for $\tuple{\Struct{M}, R'}$.
+
+\begin{defn}
+Given a language $\Lang{L}$ and a !!{predicate} $P$ not in $\Lang{L}$,
+a set $\Sigma(P)$ of !!{sentence}s of $\Lang{L} \cup\{P\}$
+\emph{explicitly defines} $P$ if and only if there is a !!{formula}
+$!C(x_1, \dots, x_n)$ of $\Lang{L}$ such that
+\[
+\Sigma(P) \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1, \dots,
+    x_n))]].
+\]
+\end{defn}
+
+\begin{thm}[Beth Definability Theorem] A set $\Sigma(P)$ of $\Lang{L}
+  \cup\{P\}$-!!{formula}s implicitly defines $P$ if and only $\Sigma(P)$
+  explicitly defines $P$.
+\end{thm}
+
+\begin{proof}
+If $\Sigma(P)$ explicitly defines $P$ then both
+\begin{align*}
+  \Sigma(P) & \Entails & \lforall[x_1][\dots \lforall[x_n]
+    [(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1,\dots,x_n))]]\\
+  \Sigma(P') & \Entails & \lforall[x_1][\dots \lforall[x_n]
+    [(\Atom{P'}{x_1,\dots, x_n} \liff !C(x_1,\dots,x_n))]]
+\end{align*}
+and the conclusion follows. For the converse: assume that $\Sigma(P)$
+implicitly defines $P$, and add countably many new !!{constant}s to
+$\Lang{L}$. Then
+\[
+\Sigma(P) \cup \Sigma(P') \Entails \Atom{P}{c_1, \dots, c_n} \to  \Atom{P'}{c_1, \dots, c_n}.
+\]
+By compactness, there are finite sets $\Delta_0 \subseteq \Sigma(P)$
+and $\Delta_1 \subseteq \Sigma(P')$ such that
+\[
+\Delta_0 \cup \Delta_1 \Entails \Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+Let $!D(P)$ be the conjunction of all !!{sentence}s $!A(P)$ such
+that either $!A(P) \in \Delta_0$ or $!A(P') \in \Delta_1$ and let
+$!D(P')$ be the conjunction of all !!{sentence}s $!A(P')$ such
+that either $!A(P) \in \Delta_0$ or $!A(P') \in \Delta_1$. Then
+$!D(P) \land !D(P') \Entails \Atom{P}{c_1, \dots, c_n} \to P'c_1\dots
+c_n$. Re-arranging such that each !!{predicate} occurs on one side of
+$\Entails$:
+\[
+!D(P) \land \Atom{P}{c_1, \dots, c_n} \Entails !D(P') \to \Atom{P'}{c_1, \dots, c_n}.
+\]
+By Craig's Interpolation there is a !!{sentence} $!C(c_1,\dots, c_n)$
+not containing $P$ or $P'$ such that:
+\begin{align*}
+  !D(P) \land \Atom{P}{c_1, \dots, c_n} & \Entails !C(c_1,\dots, c_n); &
+  !C(c_1,\dots, c_n) & \Entails !D(P') \to \Atom{P'}{c_1, \dots, c_n}.
+\end{align*}
+From the former of these two entailments we have: $!D(P) \Entails
+\Atom{P}{c_1,\dots, c_n} \lif !C(c_1,\dots, c_n)$. And from the
+latter, since an $\Lang{L} \cup \{P\}$-model $\tuple{\Struct{M}, R}
+\Entails !A(P)$ if and only if the corresponding $\Lang{L} \cup
+\{P'\}$-model $\tuple{\Struct{M}, R} \models !A(P')$, we have
+$!C(c_1,\dots, c_n) \Entails !D(P) \lif \Atom{P}{c_1,\dots, c_n}$,
+from which:
+\[
+!D(P) \Entails !C(c_1,\dots,c_n) \to \Atom{P}{c_1,\dots, c_n}.
+\]
+Putting the two together, $!D(P) \Entails \Atom{P}{c_1,\dots, c_n}
+\liff !C(c_1, \dots, c_n)$, and by monotony and generalization also
+\[
+\Sigma(P) \Entails
+\lforall[x_1][\dots\lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff
+    !C(x_1,\dots, x_n))]].\qedhere
+\]
+
+\end{proof}
+
+\end{document}
+
