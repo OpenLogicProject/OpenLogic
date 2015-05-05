@@ -163,13 +163,14 @@
 
 
 
-% ### The satisfaction/truth relation `\Sat[/]{M}{!A}[s]`: The
-%relation of being satisfied in a structure (relative to an
-%assignment) isprovided as the command `\Sat` with two mandatory
-%arguents (the structure and the formula) and one optional argument
-%(the assignment).  Use `\Sat/` to create the negated relation.  By
-%default, `\Sat{M}{!A}[s]` is typeset as $\mathfrak{M}, s \models
-%\varphi$.
+% ### The satisfaction/truth relation 
+
+% `\Sat[/]{M}{!A}[s]` is the relation of being satisfied in a
+% structure (relative to an assignment) isprovided as the command
+% `\Sat` with two mandatory arguents (the structure and the formula)
+% and one optional argument (the assignment).  Use `\Sat/` to create
+% the negated relation.  By default, `\Sat{M}{!A}[s]` is typeset as
+% $\mathfrak{M}, s \models \varphi$.
 
 \DeclareDocumentCommand \Sat { t{/} m m o } {
   \IfBooleanTF{#1}{
@@ -250,6 +251,22 @@
 
 \DeclareDocumentCommand \Theory { m } {\mathrm{Th}(\Struct{#1})}
 
+% - `\Mod[L](L'){T}`: class of models of a theory/sentence $T$ in a
+% language $L$ and logic $L'$.
+
+\DeclareDocumentCommand \Mod { o d() m } {
+  \IfNoValueTF {#2} {
+  % optional logic argument not present
+    \IfNoValueTF {#1}{
+      \mathrm{Mod}(#3) }{
+      \mathrm{Mod}^{\Lang{#1}}(#3) }}{
+  % optional logic argument present
+    \IfNoValueTF {#1}{
+      \mathrm{Mod}_{#2}(#3)}{
+      \mathrm{Mod}_{#2}^{\Lang{#1}}(#3)}}
+}
+
+
 % - `\elemequiv`: elementary equivalence (infix relation)
 
 \DeclareDocumentCommand \elemequiv { t{/} o } {
@@ -283,6 +300,10 @@
 % - `\QuantRank`: quantifier rank of a formula
 
 \DeclareDocumentCommand \QuantRank { m } {\mathrm{qr}(#1)}
+
+% `\Expan{M}{R}`: expansion of a structure by a relation (etc.)
+
+\DeclareDocumentCommand \Expan { m m } {(\Struct{#1}, #2)}
 
 
 % Recursion-theoretic Notions and Symbols
@@ -504,10 +525,10 @@
 
 \DeclareDocumentCommand \Struct { m }{\mathfrak #1}
 
-% - `\Mod{M}` - modal structures; default: set first token in
+% - `\mStruct{M}` - modal structures; default: set first token in
 % Fraktur
 
-\DeclareDocumentCommand \Mod { m }{\mathfrak #1}
+\DeclareDocumentCommand \mStruct { m }{\mathfrak #1}
 
 % - `\Lang{L}` - Languages; default: set first token in callgraphic
 % font
@@ -645,6 +666,11 @@
 % produce the uppercase version, e.g., `!!^a{element}` for "An
 % element".  `\article{token}` and `\Article{token}` produce just the
 % article by itself (lower or uppercase, respectively).
+
+% - `language`: defaults to ``language'', redefine for
+% ``signature''
+
+\settexttoken{language}{language}{languages}
 
 % - `formula`: defaults to "formula/formuls", redefine for
 % plural "formulae," or for "wff".

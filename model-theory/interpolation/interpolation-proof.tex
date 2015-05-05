@@ -8,10 +8,18 @@
 
 \olfileid{mod}{int}{prf}
 
-\olsection{Proof of the Interpolation Theorem}
+\olsection{Craig's Interpolation Theorem}
 
+\begin{thm}[Craig's Interpolation Theorem]
+\ollabel{thm:interpol} 
+If $\Entails !A \lif !B$, then there is a !!{sentence} $!C$ such that
+$\Entails !A \lif !C$ and $\Entails !C \lif !B$, and every
+!!{constant}, !!{function}, and !!{predicate} (other than $\eq$) in
+$!C$ occurs both in $!A$ and~$!B$. The !!{sentence} $!C$ is called an
+\emph{interpolant} of $!A$ and~$!B$.
+\end{thm}
 
-\begin{proof}[Proof of Theorem \olref{thm:interpol}]
+\begin{proof}
 Let $\Lang{L}_1$ be the language of $!A$ and $\Lang{L}_2$ be the
 language of $!B$; put $\Lang{L}_0 = \Lang{L}_1 \cap \Lang{L}_2$. For
 each $i \in \{0, 1, 2 \}$, let $\Lang{L}'_i$ be obtained from
@@ -68,7 +76,7 @@ part \olref{part-b}, we need to distinguish three cases:
 \item It remains to consider the case where $!A_0$ is existential, so
   that $\Gamma_1 = \Gamma_0 \cup \{ \lexists[x][!S], \Subst{!S}{c}{x}
   \}$. By construction, $\Gamma_0 \cup \{ \lexists[x][!S]\}$ and
-  $\Delta_0$ are inseparable, so that by Lemma \olref{lem:sep2} also
+  $\Delta_0$ are inseparable, so that by Lemma \olref[sep]{lem:sep2} also
   $\Gamma_0 \cup \{ \lexists[x][!S], \Subst{!S}{c}{x} \}$ and
   $\Delta_0$ are inseparable.
 \end{enumerate}
@@ -76,13 +84,13 @@ This completes the basis of the induction for \olref{part-a} and
 \olref{part-b} above. Now for the inductive step. For \olref{part-a}, if
 $\Delta_{n=1} = \Delta_n \cup \{ !B_n \}$ then $\Gamma_{n+1}$ and
 $\Delta_{n+1}$ are inseparable by construction (even when $!B_n$ is
-existential, by \olref{lem:sep2}); if $\Delta_{n+1} = \Delta_n$
+existential, by \olref[sep]{lem:sep2}); if $\Delta_{n+1} = \Delta_n$
 (because $\Gamma_{n+1}$ and $\Delta_n \cup \{!B_n\}$ are separable),
 then we use the induction hypothesis on \olref{part-b}. For the
 inductive step for \olref{part-b}, if $\Gamma_{n+2} = \Gamma_{n+1} \cup
 \{!A_{n+1} \}$ then $\Gamma_{n+2}$ and $\Delta_{n+1}$ are
 inseparable by construction (even when $!A_{n+1}$ is existential,
-by \olref{lem:sep2}); and if  $\Gamma_{n+2} = \Gamma_{n+1}$ then
+by \olref[sep]{lem:sep2}); and if  $\Gamma_{n+2} = \Gamma_{n+1}$ then
 we use the inductive case for \olref{part-a} just proved. This
 concludes the induction on \olref{part-a} and \olref{part-b}. 
 
@@ -132,10 +140,10 @@ and $\Gamma^* \cap \Delta^*$ is maximal.
 Since $\Gamma^*$ is maximally consistent, it has a model
 $\Struct{M}'_1$ whose !!{domain} $\Domain{M'_1}$ comprises all and
 only the elements $\Assign{c}{M'_1}$ interpreting the
-!!{constant}s---just like in the proof of Theorem
-\olref{thm:consis}. Similarly, $\Delta^*$ has a model $\Struct{M}'_2$
-whose !!{domain} $\Domain{M'_2}$ is given by the interpretations
-$\Assign{c}{M'_2}$ of the !!{constant}s.
+!!{constant}s---just like in the proof of completeness,
+\olref[fol][com][cth]{thm:completeness}. Similarly, $\Delta^*$ has a
+model $\Struct{M}'_2$ whose !!{domain} $\Domain{M'_2}$ is given by the
+interpretations $\Assign{c}{M'_2}$ of the !!{constant}s.
 
 Let $\Struct{M_1}$ be obtained from $\Struct{M'_1}$ by dropping
 interpretations for !!{constant}s, !!{function}s, and !!{predicate}s in

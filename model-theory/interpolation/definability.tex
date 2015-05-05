@@ -24,11 +24,11 @@ in $\Sigma(P)$.
 \end{defn}
 
 In other words, for any model $\Struct{M}$ and $R, R' \subseteq
-\Domain{M}^n$, if both $\tuple{\Struct{M},R} \Entails \Sigma(P)$ and
-$\tuple{\Struct{M},R'} \Entails \Sigma(P')$, then $R=R'$; where
-$\tuple{\Struct{M},R}$ is the !!{structure}~$\Struct{M'}$ for the
+\Domain{M}^n$, if both $\Expan{M}{R} \Entails \Sigma(P)$ and
+$\Expan{M}{R'} \Entails \Sigma(P')$, then $R=R'$; where
+$\Expan{M}{R}$ is the !!{structure}~$\Struct{M'}$ for the
 expansion of $\Lang{L}$ to $\Lang{L} \cup \{P\}$ such that
-$\Assign{P}{M'} = R$, and similarly for $\tuple{\Struct{M}, R'}$.
+$\Assign{P}{M'} = R$, and similarly for $\Expan{M}{R'}$.
 
 \begin{defn}
 Given a language $\Lang{L}$ and a !!{predicate} $P$ not in $\Lang{L}$,
@@ -84,9 +84,9 @@ not containing $P$ or $P'$ such that:
 \end{align*}
 From the former of these two entailments we have: $!D(P) \Entails
 \Atom{P}{c_1,\dots, c_n} \lif !C(c_1,\dots, c_n)$. And from the
-latter, since an $\Lang{L} \cup \{P\}$-model $\tuple{\Struct{M}, R}
+latter, since an $\Lang{L} \cup \{P\}$-model $\Expan{M}{R}
 \Entails !A(P)$ if and only if the corresponding $\Lang{L} \cup
-\{P'\}$-model $\tuple{\Struct{M}, R} \models !A(P')$, we have
+\{P'\}$-model $\Expan{M}{R} \models !A(P')$, we have
 $!C(c_1,\dots, c_n) \Entails !D(P) \lif \Atom{P}{c_1,\dots, c_n}$,
 from which:
 \[
