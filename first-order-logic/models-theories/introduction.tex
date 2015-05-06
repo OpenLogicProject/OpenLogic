@@ -1,0 +1,101 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: introduction
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{int}
+\olsection{Introduction}
+
+\begin{explain}
+The development of the axiomatic method is a significant achievement
+in the history of science, and is of special importnace in the history
+of mathematics.  An axiomatic development of a field involves the
+clarification of many questions: What is the field about? What are the
+most fundamental concepts?  How are they related?  Can all the
+concepts of the field be defined in terms of these fundamental
+concepts?  What laws do, and must, these concepts obey?
+
+The axiomatic method and logic were made for each other.  Formal logic
+provides the tools for formulating axiomatic theories, for proving
+theorems from the axioms of the theory in a precisely specified way,
+for studying the properties of all systems satisfying the axioms in a
+systematic way.
+\end{explain}
+
+\begin{defn}
+A set of !!{sentence}s~$\Gamma$ is \emph{closed} iff, whenever
+$\Gamma \Entails !A$ then $!A \in \Gamma$.  The \emph{closure} of a set
+of !!{sentence}s~$\Gamma$ is $\Setabs{!A}{\Gamma \Entails !A}$.
+
+We say that~$\Gamma$ is \emph{axiomatized by} a set of
+sentences~$\Delta$ if $\Gamma$ is the closure of~$\Delta$
+\end{defn}
+
+\begin{explain}
+We can think of an axiomatic theory as the set of sentences that is
+axiomatized by its set of axioms~$\Delta$.  In other words, when we
+have a first-order language which contains non-logical symbols for the
+primitives of the axiomatically developed science we wish to study,
+together with a set of !!{sentence}s that express the fundamental laws
+of the science, we can think of the theory as represented by all the
+!!{sentence}s in this language that are entailed by the axioms. This
+ranges from very simple examples with only a single primitive and very
+simple axioms like the theory of partial orders to very complex
+theories like Newtonian mechanics.
+
+The important logical facts that make this formal approach to the 
+axiomatic method so important are the following. Suppose $\Gamma$ is
+an axiom system for a theory, i.e., a set of sentences.
+\begin{enumerate}
+\item We can state precisely when an axiom system captures an intended
+  class of !!{structure}s.  That is, if we are interested in a certain
+  class of !!{structure}s, we will successfully capture that class by
+  an axiom system~$\Gamma$ iff the !!{structure}s are exactly
+  those~$\Struct M$ such that $\Sat{M}{\Gamma}$.
+\item We may fail in this respect because there are $\Struct M$ such
+  that $\Sat{M}{\Gamma}$, but $\Struct M$ is not one of the
+  !!{structure}s we intend. This may lead us to add axioms which are
+  not true in~$\Struct M$.
+\item If we are successful at least in the respect that $\Gamma$ is
+  true in all the intended !!{structure}s, then a sentence~$!A$ is true in
+  all intended !!{structure}s whenever $\Gamma \Entails !A$.  Thus we can
+  use logical tools (such as proof methods) to show that sentences are
+  true in all intended !!{structure}s simply by showing that they are
+  entailed by the axioms.
+\item Sometimes we don't have intended !!{structure}s in mind, but instead
+  start from the axioms themselves: we begin with some primitives that
+  we want to satisfy certain laws which we codify in an axiom system.
+  One thing that we would like to verify right away is that the axioms
+  do not contradict each other: if they do, there can be no concepts
+  that obey these laws, and we have tried to set up an incoherent
+  theory. We can verify that this doesn't happen by finding a model
+  of~$\Gamma$.  And if there are models of our theory, we can use
+  logical methods to investigate them, and we can also use logical
+  methods to construct models.
+\item The independence of the axioms is likewise an important
+  question.  It may happen that one of the axioms is actually a
+  consequence of the others, and so is redundant.  We can prove that
+  an axiom $!A$ in $\Gamma$ is redundant by proving $\Gamma \setminus
+  \{!A\} \Entails !A$.  We can also prove that an axiom is not
+  redundant by showing that $(\Gamma \setminus \{!A\}) \cup \{\lnot
+  !A\}$ is satisfiable. For instance, this is how it was shown that the
+  parallel postulate is independent of the other axioms of geometry.
+\item Another important question is that of definability of concepts
+  in a theory: The choice of the language determines what the models
+  of a theory consists of. But not every aspect of a theory must be
+  represented separately in its models.  For instance, every ordering
+  $\le$ determines a corresponding strict ordering~$<$---given one, we
+  can define the other.  So it is not necessary that a model of a
+  theory involving such an order must \emph{also} contain the
+  corresponding strict ordering.  When is it the case, in general,
+  that one relation can be defined in terms of others?  When is it
+  impossible to define a relation in terms of other (and hence must
+  add it to the primitives of the language)?
+\end{enumerate}
+\end{explain}
+
+
+\end{document}

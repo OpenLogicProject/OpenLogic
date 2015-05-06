@@ -10,7 +10,7 @@
 \olsection{Unions and Intersections}
 
 \begin{defn} 
-The \emph{union} of two sets $X$ and $Y$, written $A \cup B$, is the
+The \emph{union} of two sets $X$ and $Y$, written $X \cup Y$, is the
 set of all things which are members of $X$, $Y$, or both.
 \[
 X \cup Y = \Setabs{x}{x \in X \lor x\in Y}
@@ -19,10 +19,10 @@ X \cup Y = \Setabs{x}{x \in X \lor x\in Y}
 
 \begin{ex}
 Since the multiplicity of elements doesn't matter, the union of two
-sets which have an element in common contains that element only once,
+sets which have !!a{element} in common contains that !!{element} only once,
 e.g., $\{ a, b, c\} \cup \{ a, 0, 1\} = \{a, b, c, 0, 1\}$.
 
-The union of a set and one of its subsets isjust the bigger set: $\{a,
+The union of a set and one of its subsets is just the bigger set: $\{a,
 b, c \} \cup \{a \} = \{a, b, c\}$.
 
 The union of a set with the empty set is identical to the set: $\{a,
@@ -30,21 +30,27 @@ b, c \} \cup \emptyset = \{a, b, c \}$.
 \end{ex}
 
 \begin{defn}
-The emph{intersection} of two sets$X$ and $Y$, written $X \cap Y$, is
-the set of all things which are members of both $X$ and~$Y$. 
+The \emph{intersection} of two sets $X$ and $Y$, written $X \cap Y$, is
+the set of all things which are !!{element}s of both $X$ and~$Y$. 
 \[
 X \cap Y = \Setabs{x}{x \in X \land x\in Y}
 \]
 Two sets are called \emph{disjoint} if their intersection is
-empty. This means they have no elements in common.
+empty. This means they have no !!{element}s in common.
 \end{defn}
 
 \begin{ex}
+If two sets have no !!{element}s in common, their intersection is empty:
 $\{ a, b, c\} \cap \{ 0, 1\} = \emptyset$.
 
-$\{a, b, c \} \cap \{a, 0, 1 \} = \{a\}$.
+If two sets do have !!{element}s in common, their intersection is the set of
+all those: $\{a, b, c \} \cap \{a, b, d \} = \{a, b\}$.
 
-$\{a, b, c \} \cap \emptyset = \emptyset$.
+The intersection of a set with one of its subsets is just the smaller
+set: $\{a, b, c\} \cap \{a, b\} = \{a, b\}$.
+
+The intersection of any set with the empty set is empty: $\{a, b, c \}
+\cap \emptyset = \emptyset$.
 \end{ex}
 
 \begin{explain}
@@ -52,24 +58,29 @@ We can obviously also form the union or intersection of more than two
 sets.  An elegant way of dealing with this in general is the
 following: suppose you collect all the sets you want to form the union
 (or intersection) of into a single set. Then we can define the union
-or intersection of all our original sets as the set of all objects
-which belong to at least one, respectively, to all members of the set.
+of all our original sets as the set of all objects which belong to at
+least one !!{element} of the set, and the intersection as the set of
+all objects which belong to every !!{element} of the set.
 \end{explain}
 
 \begin{defn}
-If $C$ is a set of sets, then $\bigcup C$ is the set of elements of
-elements of $C$:
-\[
-\bigcup C = \Setabs{x}{x \text{ belongs to an element of } C}
-\]
+If $C$ is a set of sets, then $\bigcup C$ is the set of !!{element}s of
+!!{element}s of $C$:
+\begin{align*}
+\bigcup C & = \Setabs{x}{x \text{ belongs to an !!{element} of } C},
+\text{ i.e.,}\\ 
+\bigcup C & = \Setabs{x}{\text{there is a } y \in C
+  \text{ so that } x \in y}
+\end{align*}
 \end{defn}
 
 \begin{defn}
 If $C$ is a set of sets, then $\bigcap C$ is the set of objects which
 all elements of $C$ have in common:
-\[
-\bigcap C = \Setabs{x}{x \text{ belongs to every element of } C}
-\]
+\begin{align*}
+\bigcap C & = \Setabs{x}{x \text{ belongs to every element of } C}, \text{i.e.,}
+\bigcap C & = \Setabs{x}{\text{for all } y \in C, x \in y}
+\end{align*}
 \end{defn}
 
 \begin{ex}
@@ -77,15 +88,15 @@ Suppose $C = \{ \{ a, b \}, \{ a, d, e \}, \{ a, d \} \}$.
 Then $\bigcup C = \{ a, b, d, e \}$ and $\bigcap C = \{ a \}$.
 \end{ex}
 
-We could also do the same for a sequence of sets $A_1, A_2, ... $
-
-$\bigcup_i A_i = \{ x : x \mbox{ belongs to one of the } A_i \}$.
-
-$\bigcap_i A_i = \{ x : x \mbox{ belongs to every } A_i \}$.
+We could also do the same for a sequence of sets $A_1$, $A_2$, \dots
+\begin{align*}
+\bigcup_i A_i & = \Setabs{x}{x \text{ belongs to one of the } A_i}\\
+\bigcap_i A_i & = \Setabs{x}{x \text{ belongs to every } A_i}.
+\end{align*}
 
 \begin{defn}
-The \emph{difference}~$X \setminus Y$ is the set of all elements of
-$X$ which are not also elements of $Y$, i.e.,
+The \emph{difference}~$X \setminus Y$ is the set of all !!{element}s of
+$X$ which are not also !!{element}s of~$Y$, i.e.,
 \[
 X\setminus Y = \Setabs{x}{x\in X \text{ and } x \notin Y}.
 \]

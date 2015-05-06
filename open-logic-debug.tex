@@ -7,38 +7,58 @@
 % Lives in main directory
 \newcommand*{\olpath}{.}
 
-\usepackage{subfiles}
-\usepackage[footinfo]{gitinfo}
+\usepackage{gitinfo}
 
 \input{\olpath/sty/open-logic.sty}
-\input{\olpath/sty/open-logic-dev.sty}
+\input{\olpath/sty/open-logic-debug.sty}
 
-% needed for links to GitHub
-\RequirePackage{currfile}
-
-% all files included with \subfile will have filename & link to GitHub printed
+% all files included with \olimport will have filename & link to GitHub printed
 
 \makeatletter \renewcommand{\skip@preamble}{%
   \let\document\relax\let\enddocument\relax%
   \newenvironment{document}{\noindent
-    \hrulefill\par{\hfill\color{red}%
-      \href{https://github.com/OpenLogicProject/OpenLogic/blob/master/\currfilepath}{\texttt{\currfilepath}}}}{}%
+    \hrulefill\par{\hfill
+      \href{https://github.com/OpenLogicProject/OpenLogic/blob/master/\olfilebase\olfilename}{\texttt{\olfilebase\olfilename}}}}{}%
   \renewcommand{\documentclass}[2][subfiles]{}} \makeatother
 
 \renewcommand*{\beforepartskip}{}
 \renewcommand*{\afterpartskip}{}
 \renewcommand*{\clearforchapter}{}
 \nopartblankpage
+\let\cleardoublepage\clearpage
 
-\title{Open Logic Text (Debug Version)}
-\author{Open Logic Project}
-\date{Revision\gitVtags: \gitAbbrevHash{} (\gitAuthorDate)}
+\pagestyle{openlogic}
 
 \begin{document}
 
-\maketitle
+\begin{titlingpage}
+\begin{raggedleft}
+\HUGE
+\selectfont\bfseries\sffamily
+THE OPEN LOGIC TEXT
+\vskip 3ex
+\normalfont\huge
+Debug Build
+\vskip 4ex
+\textbf{\href{http://openlogicproject.org/}{Open Logic Project}}
+\vskip 4ex
+\Large
+Revision\gitVtags: \gitAbbrevHash\\
+\gitAuthorDate
 
-\tableofcontents
+\end{raggedleft}
+
+\vfill
+
+\ollicense
+
+\end{titlingpage}
+
+% make links red green
+\hypersetup{urlcolor=[rgb]{0.5,0,0}}
+
+
+\tableofcontents*
 
 % include complete text
 \olimport{open-logic}

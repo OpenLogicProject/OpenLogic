@@ -10,17 +10,9 @@
 \olsection{Orders}
 
 \begin{defn}
-A relation $R$ on a set $X$ is called \emph{reflexive} if, for every
-$x\in X$, $Rxx$. A relation which has the property that whenever $Rxy$
-and $Ryz$, then also $Rxz$, is called \emph{transitive}.  $R$ is
-called \emph{anti-symmetric,} if, whenever both $Rxy$ and $Ryx$, then
-$x=y$ (or, in other words: if $x\neq y$ then either $\not Rxy$ or
-$\not Ryx$). Finally, $R$ is \emph{total} if for all $x,y\in X$,
-either $Rxy$ or $Ryx$.
-
 A relation which is both reflexive and transitive is called a
 \emph{preorder.}  A preorder which is also anti-symmetric is called a
-\emph{partial order}. A partial order which is also total is called a
+\emph{partial order}. A partial order which is also connected is called a
 \emph{total order} or \emph{linear order.} (If we want to emphasize
 that the order is reflexive, we add the adjective ``weak''---see
 below).
@@ -33,11 +25,11 @@ identity relation and the full relation on~$X$ are preorders, but they
 are not partial orders, because they are not anti-symmetric (if $X$
 has more than one element). For a somewhat less silly example,
 consider the \emph{no longer than} relation $\preccurlyeq$
-on~$\BinStr$: $x\preccurlyeq y$ iff $\len(x)\le\len(y)$. This is a
-preorder, even a total preorder, but not a partial order.
+on~$\Bin^*$: $x \preccurlyeq y$ iff $\len{x} \le \len{y}$. This is a
+preorder, even a linear preorder, but not a partial order.
 
 The relation of \emph{divisibility without remainder} gives us an
-example of a partial order which isn't a total order: for integers
+example of a partial order which isn't a linear order: for integers
 $n$, $m$, we say $n$ (evenly) divides $m$, in symbols: $n\mid m$, if
 there is some $k$ so that $m=kn$.  On $\Nat$, this is a partial order,
 but not a linear order: for instance, $2\nmid3$ and also
@@ -48,40 +40,41 @@ on a set of sets.
 
 Notice that the examples $L$ and $G$ from \olref[set]{relations},
 although we said there that they were called ``strict orders'' are not
-total orders even though they are total. But there is a close
-connection, as we will see momentarily.
+linear orders even though they are connected (they are not
+reflexive). But there is a close connection, as we will see
+momentarily.
 \end{ex}
 
 \begin{defn}
-A relation $R$ on $X$is called \emph{irreflexive} if, for all $x\in
-X$, $x\not Rx$. $R$ is called \emph{asymmetric} if for no pair $x,y\in
-X$ we have $xRy$ and $yRx$. A \emph{strict partial order} is a
+A relation $R$ on $X$ is called \emph{irreflexive} if, for all $x \in
+X$, $ \lnot Rxx$. $R$ is called \emph{asymmetric} if for no pair $x,y\in
+X$ we have $Rxy$ and $Ryx$. A \emph{strict partial order} is a
 relation which is irreflexive, asymmetric, and transitive. A strict
-partial order which is also linear is called a \emph{strict linear
+partial order which is also connected is called a \emph{strict linear
   order.}
 \end{defn}
 
 A strict partial order $R$ on $X$ can be turned into a weak partial
-order $R'$by adding the identity relation on $X$: $R'=R\cup I_{X}$.
+order $R'$by adding the identity relation on $X$: $R' = R \cup \Id{X}$.
 Conversely, starting from a weak partial order, one can get a strict
-partial order by removing~$I_{X}$
+partial order by removing~$\Id{X}$, i.e., $R' = R \setminus \Id{X}$.
 
 \begin{prop}
-$R$ is a strict partial (linear) order on $X$ iff $R'$is a weak
-  partial (linear) order. Moreover, $xRy$ iff $xR'y$ for all $x\neq
+$R$ is a strict partial (linear) order on $X$ iff $R'$ is a weak
+  partial (linear) order. Moreover, $Rxy$ iff $R'xy$ for all $x \neq
   y$.
 \end{prop}
 
 \begin{ex}
 $\le$ is the weak linear order corresponding to the strict linear
-  order $<$. $\subseteq$is the weak partial order corresponding to the
+  order $<$. $\subseteq$ is the weak partial order corresponding to the
   strict partial order $\subsetneq$.
 \end{ex}
 
 \begin{prob}
 Show that if $R$ is a weak partial order on $X$, then
-$R^{-}=R\setminus I_{X}$ is a strict partial order and $xRy$ iff
-$xR^{-}y$ for all $x\neq y$.
+$R^{-}=R \setminus \Id{X}$ is a strict partial order and $Rxy$ iff
+$R^{-}xy$ for all $x \neq y$.
 \end{prob}
 
 \end{document}

@@ -2,7 +2,7 @@
 % Package for tokenizing text
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{open-logic-tokenize}
+\ProvidesFile{open-logic-tokenize}
 
 \RequirePackage{mfirstuc}
 \RequirePackage{xparse}
@@ -13,30 +13,83 @@
 % Text that should be uniform and changeable Has four forms: in-text
 % singular, in-text plural, initial singular, initial plural. Initial
 % forms are usually capitalized. They are optional; if left out, we'll
-% take the in-text version and make the first letter uppercase.
+% take the in-text version and make the first letter uppercase. 
+% Optional star indicates nouns that take "an" rather than "a" as article.
 
-\DeclareDocumentCommand \settexttoken { m m m o o } {
-    \expandafter\def\csname TEXTTOK@s@#1\endcsname{#2}
-    \expandafter\def\csname TEXTTOK@p@#1\endcsname{#3}
-    \IfNoValueTF {#4} 
-        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{\makefirstuc{#2}} }
-        { \expandafter\def\csname TEXTTOK@S@#1\endcsname{#4} }
+% `\definetoken{switch}{token}{replacement text}` - defines a macro
+% `\TOK@switch@token` to produce <replacement text>. `\definetokenuc`
+% takes the first character an makes it uppercase.
+
+\newcommand*{\definetoken}[3]{\expandafter\edef\csname TOK@#1@#2\endcsname{#3}}
+
+\newcommand*{\definetokenuc}[3]{\definetokenucaux{#1}{#2}#3\relax}
+\def\definetokenucaux #1#2#3#4\relax{
+\uppercase{\gdef\firstcharuc{#3}}
+\definetoken{#1}{#2}{\firstcharuc #4}}
+
+% `\usetoken{switch}{token}` - produces the replacement text for
+% switch/token, i.e., whatever the macro `\TOK@switch@token` was
+% defined as
+
+\newcommand*{\usetoken}[2]{\csname TOK@#1@#2\endcsname}
+
+\DeclareDocumentCommand \settexttoken { m s m m o o } {%
+    \definetoken{s}{#1}{#3}
+    \definetoken{p}{#1}{#4}
+    \IfBooleanTF {#2} 
+        { \definetoken{a}{#1}{an} 
+          \definetoken{A}{#1}{An}}
+        { \definetoken{a}{#1}{a} 
+          \definetoken{A}{#1}{A}}
     \IfNoValueTF {#5} 
-        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{\makefirstuc{#3}} }
-        { \expandafter\def\csname TEXTTOK@P@#1\endcsname{#5} }
-}
+        { \definetokenuc{S}{#1}{#3}}
+        { \definetoken{S}{#1}{#5} }
+    \IfNoValueTF {#6} 
+        { \definetokenuc{P}{#1}{#4}}
+        { \definetoken{P}{#1}{#6}}}
 
-\def\@printtexttokens #1{\printtexttoken{#1}{\csname TEXTTOK@s@#1\endcsname}}
-\def\@printtexttokenp #1{\printtexttoken{#1}{\csname TEXTTOK@p@#1\endcsname}}
-\def\@printtexttokenS #1{\printtexttoken{#1}{\csname TEXTTOK@S@#1\endcsname}}
-\def\@printtexttokenP #1{\printtexttoken{#1}{\csname TEXTTOK@P@#1\endcsname}}
+% `\@printtoken` - non-expandable wrapper macro for tokens, essentially
+% what `!!` does: if first arg is `^`, we want uppercase, if next arg
+% is `a` we want an article, if `{token}` followed by `s` we want
+% plural.
 
-% command can be redefined to eg print tokens in color
-\def\printtexttoken#1#2{#2}
+\DeclareDocumentCommand \@printtoken { t^ ta m ts } {%
+  \IfBooleanTF {#1} 
+               {\IfBooleanTF {#2}{\printtoken{A}{#3}~% 
+                \IfBooleanTF {#4}
+                 {\printtoken{p}{#3}}
+                 {\printtoken{s}{#3}}}{%
+                \IfBooleanTF {#4}
+                 {\printtoken{P}{#3}}
+                 {\printtoken{S}{#3}}}}{%
+               {\IfBooleanTF {#2}{\printtoken{a}{#3}~}{}%
+                \IfBooleanTF {#4}
+                 {\printtoken{p}{#3}}
+                 {\printtoken{s}{#3}}}}}
 
-% use shorthand mechanism from babel.sty
+% `\printtoken{switch}{token}` - print switch/token if defined within
+% a `\tokenformat{...}`, produce warning if undefined defined, expand
+% to `\tokenformat{\TEXTTOK@switch@token}`
+
+\def\printtoken#1#2{%
+  \ifcsname TOK@#1@#2\endcsname
+    \tokenformat{\usetoken{#1}{#2}}\else
+    \PackageWarning{open-logic-tokenize}{Token #2 undefined}{\color{red}#2}\fi}
+
+% `\tokenformat` - wrapper to format token text; command can be
+% redefined to eg print tokens in color. Warning: to work in headers
+% it must be compatible with `\uppercase`
+
+\def\tokenformat#1{#1}
+
+% `\article{token}`, `\Article{token}` - just print the article for a
+% token
+
+\def\article#1{\printtoken{a}{#1}}
+\def\Article#1{\printtoken{A}{#1}}
+
+% use shorthand mechanism from `babel.sty` to define `!!` as shorthand
+% for `\printtoken`
+
 \useshorthands{!}
-\defineshorthand{!!}{\@printtexttokens}
-\defineshorthand{!p}{\@printtexttokenp}
-\defineshorthand{!P}{\@printtexttokenP}
-\defineshorthand{!S}{\@printtexttokenS}
+\defineshorthand{!!}{\@printtoken}

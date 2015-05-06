@@ -1,0 +1,188 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: c-representable
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{cre}
+\olsection{Functions in $C$ are Representable in $\Th{Q}$}
+
+We have to show that every function in $C$ is representable in
+$\Th{Q}$.  In the end, we need to show how to assign to each $k$-ary
+function $f(x_0,\dots,x_{k-1})$ in $C$ a formula
+$!A_f(x_0,\dots,x_{k-1},y)$ that represents it.
+
+\begin{lem}
+Given natural numbers $n$ and $m$, if $n \neq m$, then $Q \Proves \num
+n \neq \num m$.
+\end{lem}
+
+\begin{proof}
+Use induction on $n$ to show that for every $m$, if $n \neq m$, then
+$Q \Proves \eq/[\num n][\num m]$.
+
+In the base case, $n = 0$. If $m$ is not equal to $0$, then $m = k +
+1$ for some natural number $k$. We have an axiom that says
+$\lforall[x][\eq/[0][x']]$. By a quantifier axiom, replacing $x$ by
+  $\num k$, we can conclude $\eq/[0][\num k']$. But $\num k'$ is just
+  $\num m$.
+
+In the induction step, we can assume the claim is true for $n$, and
+consider $n+1$. Let $m$ be any natural number. There are two
+possibilities: either $m = 0$ or for some $k$ we have $m = k+1$.  The
+first case is handled as above. In the second case, suppose $n+1 \neq
+k+1$. Then $n \neq k$. By the induction hypothesis for $n$ we have
+$\Th{Q} \Proves \eq/[\num n][\num k]$. We have an axiom that says
+$\lforall[x][\lforall[y][\eq[x'][y'] \lif \eq[x][y]]]$. Using a
+quantifier axiom, we have $\eq[\num n'][\num k'] \lif \eq[\num n][\num
+  k]$. Using propositional logic, we can conclude, in $\Th{Q}$,
+$\eq/[\num n][\num k] \lif \eq/[\num n'][\num k']$.  Using modus
+ponens, we can conclude $\eq/[\num n'][\num k']$, which is what we want,
+since $\num k'$ is $\num m$.
+\end{proof}
+
+Note that the lemma does not say much: in essence it says that $\Th{Q}$ can
+prove that different numerals denote different objects. For example,
+$\Th{Q}$ proves $0'' \neq 0'''$. But showing that this holds in general
+requires some care. Note also that although we are using induction, it
+is induction \emph{outside} of $\Th{Q}$.
+
+We will be able to represent zero, successor, plus, times, the
+characteristic function for equality, and projections. In each case,
+the appropriate representing function is entirely straightforward; for
+example, zero is represented by the formula
+\[
+y = 0,
+\]
+successor is represented by the formula
+\[
+x_0' = y,
+\]
+and plus is represented by the formula
+\[
+x_0 + x_1 = y.
+\]
+The work involves showing that $\Th{Q}$ can prove the relevant statements;
+for example, saying that plus is represented by the formula above
+involves showing that for every pair of natural numbers $m$ and $n$,
+$\Th{Q}$ proves
+\[
+\eq[\num n + \num m][\num {n+m}]
+\]
+and
+\[
+\lforall[y][(\eq[(\num n + \num m)][y] \lif \eq[y][\num {n+m}])].
+\]
+
+What about composition? Suppose $h$ is defined by
+\[
+h(x_0,\dots,x_{l-1}) = f(g_0(x_0,\dots,x_{l-1}), \dots,
+g_{k-1}(x_0,\dots,x_{l-1})).
+\]
+where we have already found formulas $!A_f, !A_{g_0}, \dots,
+!A_{g_{k-1}}$ representing the functions $f,g_0,\dots,g_{k-1}$,
+respectively. Then we can define a formula $!A_h$ representing $h$,
+by defining $!A_h(x_0,\dots,x_{l-1},y)$ to be
+\begin{multline*}
+  \lexists[z_0,\dots][\lexists[z_{k-1}][(!A_{g_0}(x_0,\dots,x_{l-1},z_0) \land
+  \dots \land !A_{g_{k-1}}(x_0,\dots,x_{l-1},z_{k-1}) \land]]\\
+  !A_f(z_0,\dots,z_{k-1},y)).
+\end{multline*}
+
+Finally, let us consider unbounded search. Suppose $g(x,\vec z)$ is
+regular and representable in $\Th{Q}$, say by the formula $!A_g(x,\vec
+z,y)$. Let $f$ be defined by $f(\vec z) = \mu x \; g(x,\vec z)$. We would
+like to find a formula $!A_f(\vec z,y)$ representing $f$. Here is
+a natural choice:
+\[
+!A_f(\vec z,y) \ident !A_g(y,\vec z,0) \land \lforall[w][(w < y
+\lif \lnot !A_g(w,\vec z,0))].
+\]
+
+It can be shown that this works using some additional lemmas, e.g.,
+
+\begin{lem}
+  For every variable $x$ and every natural number $n$, $\Th{Q}$ proves $\eq[(x'
+  + \num n)][(x + \num n)']$.
+\end{lem}
+
+It is again worth mentioning that this is weaker than saying that $\Th{Q}$
+proves $\lforall[x][\lforall[y][(x' + y) = (x +y)']]$ (which is false). 
+
+\begin{proof}
+The proof is, as usual, by induction on $n$. In the base case, $n =
+0$, we need to show that $\Th{Q}$ proves $\eq[(x'+0)][(x+0)']$. But we have:
+\begin{eqnarray*}
+& & \eq[(x' + 0)][x'] \quad \text{from axiom 4} \\
+& & \eq[(x + 0)][x] \quad \text{from axiom 4} \\
+& & \eq[(x+0)'][x'] \quad \text{by line 2} \\
+& & \eq[(x' + 0)][(x + 0)'] \quad \text{lines 1 and 3}
+\end{eqnarray*}
+In the induction step, we can assume that we have derived $\eq[(x' +
+  \num n)][(x + \num n)']$ in $\Th{Q}$. Since $\num{n+1}$ is $\num
+n'$, we need to show that $\Th{Q}$ proves $\eq[(x' + \num n')][(x + \num
+n')']$. The following chain of equalities can be derived in $\Th{Q}$:
+\begin{eqnarray*}
+(x' + \num n') & \eq & (x' + \num n)' \quad \text{axiom 5} \\
+& \eq & (x + \num n')' \quad \text{from the inductive hypothesis}
+\end{eqnarray*}
+\end{proof}
+
+\begin{lem}
+\begin{enumerate}
+\item $\Th{Q}$ proves $\lnot (x < \num 0)$.
+\item For every natural number $n$, $\Th{Q}$ proves
+\[
+x < \num {n+1} \lif (\eq[x][\num 0] \lor \dots \lor \eq[x][\num n]).
+\]
+\end{enumerate}
+\end{lem}
+
+\begin{proof} 
+Let us do 1 and part of 2, informally (i.e., only giving hints as to
+how to construct the formal derivation).
+
+For part 1, by the definition of $<$, we need to prove $\lnot
+\lexists[y][\eq[(y'+x)][0]]$ in $\Th{Q}$, which is equivalent (using
+the axioms and rules of first-order logic) to $\lforall[y][\eq/[(y' +
+    x)][0]]$. Here is the idea: suppose $\eq[(y'+x)][0]$. If $x$ is 0,
+we have $\eq[(y' + 0)][0]$. But by axiom 4 of $\Th{Q}$, we have
+$\eq[(y' + 0)][y']$, and by axiom 2 we have $\eq/[y'][0]$, a
+contradiction. So $\lforall[y][\eq/[(y' +x)][0]]$. If $x$ is not $0$,
+by axiom 3 there is a $z$ such that $\eq[x][z']$. But then we have
+$\eq[(y' + z')][0]$. By axiom~5, we have $\eq[(y' + z)'][0]$, again
+contradicting axiom~2.
+
+For part 2, use induction on $n$. Let us consider the base case, when
+$n =0$. In that case, we need to show $x < \num 1 \lif \eq[x][\num
+  0]$. Suppose $x < \num 1$. Then by the defining axiom for $<$, we
+have $\lexists[y][\eq[(y'+x)][0']]$. Suppose $y$ has that property; so
+we have $\eq[y'+x][0']$.
+
+We need to show $\eq[x][0]$. By axiom 3, if $x$ is not 0, it is equal
+to $z'$ for some $z$. Then we have $\eq[(y' + z')][0']$. By axiom~5 of
+  $\Th{Q}$, we have $\eq[(y'+z)'][0']$. By axiom 1, we have $\eq[(y' +
+    z)][0]$. But this means, by definition, $z < 0$, contradicting
+  part~1.
+\end{proof}
+
+\begin{explain}
+We have shown that the set of computable functions can be
+characterized as the set of functions representable in $\Th{Q}$. In fact,
+the proof is more general. From the definition of representability, it
+is not hard to see that any theory extending $\Th{Q}$ (or in which one can
+interpret $\Th{Q}$) can represent the computable functions; but,
+conversely, in any proof system in which the notion of proof is
+computable, every representable function is computable. So, for
+example, the set of computable functions can be characterized as the
+set of functions represented in Peano arithmetic, or even Zermelo
+Fraenkel set theory. As G\"odel noted, this is somewhat surprising.
+We will see that when it comes to provability, questions are very
+sensitive to which theory you consider; roughly, the stronger the
+axioms, the more you can prove. But across a wide range of axiomatic
+theories, the representable functions are exactly the computable ones.
+\end{explain}
+
+\end{document}

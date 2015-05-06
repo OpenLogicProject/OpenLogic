@@ -1,32 +1,40 @@
 % OpenLogic Project
 % Master Style Package
 
+% load various required standard packages
+% let LaTeX find those
+
 \RequirePackage[english]{babel}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{mathdots}
+\RequirePackage[OMLmathsfit]{isomath}
+\RequirePackage{xparse}
+\RequirePackage{mfirstuc}
+\RequirePackage{subfiles}
+\RequirePackage{bussproofs}
+\RequirePackage{graphicx}
+
+\RequirePackage{xcolor}
+\definecolor{dark-gray}{gray}{0.2}
+\definecolor{reflex-blue}{RGB}{12, 28, 140}
+\RequirePackage[pdftex,breaklinks,bookmarks,bookmarksopen,bookmarksopenlevel=1,colorlinks,urlcolor=dark-gray,linkcolor=reflex-blue]{hyperref}
+
+\RequirePackage{hyperref}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+\RequirePackage[nameinlink]{cleveref} % always after hyperref!
+
+\makeatletter
 
 % load all tool packages
 % located in \olpath/sty/
 
-\makeatletter
-
 \input{\olpath/sty/open-logic-referencing.sty}
 \input{\olpath/sty/open-logic-formulas.sty}
 \input{\olpath/sty/open-logic-tokenize.sty}
-
-% load various required standard packages
-% let LaTeXfind those
-
-\RequirePackage{subfiles}
-\RequirePackage{xparse}
-\RequirePackage{amsmath}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-\RequirePackage[OMLmathsfit]{isomath}
-\RequirePackage{hyperref}
-\RequirePackage{amsthm}
-\RequirePackage{thmtools}
-\RequirePackage[nameinlink]{cleveref}
-\RequirePackage{bussproofs}
-\RequirePackage{import}
+\input{\olpath/sty/open-logic-selective.sty}
+\input{\olpath/sty/bpextra.sty} % load version supplied by OLP
 
 % Hooks
 \def\OLEndChapterHook{}
@@ -38,22 +46,128 @@
 \fi
 \let\OLSubfileHook\relax
 
-% If a custom config file exists, load it, otherwise load default
+% DeclareDocumentMacro -- for macros (no argument), doesn't check if defined
 
-\IfFileExists{\jobname-config.sty}
-             {\input{\jobname-config.sty}}
-             {\input{\olpath/open-logic-config.sty}}
+\newcommand*{\DeclareDocumentMacro}[2]{\def#1{#2}}
 
-% olimport -- combines \subfile and \subimport
-% optional argument is subdirectory, if present subimport #1/#2
-% no optional argument: just\include
-% in either case, supress preamble like \subfile would
+\ifdefined\oljobname\relax\else\let\oljobname\jobname\fi
 
-\DeclareDocumentCommand \olimport { o m }{
-  \begingroup\skip@preamble%
-  \IfNoValueTF{#1} 
-     {\input{#2}}
-     {\subimport*{#1/}{#2}}
-     \endgroup}
+% Load configuration file, then custom changes if available
+
+\input{\olpath/open-logic-config.sty}
+\IfFileExists{\oljobname-config.sty}
+             {\input{\oljobname-config.sty}}
+             {}
+
+% Load environment definition file, or custom file if available
+
+\IfFileExists{\oljobname-envs.sty}
+             {\input{\oljobname-envs.sty}}
+             {\input{\olpath/open-logic-envs.sty}}
+
+% olfilepath -- holds the path of the currently processed file
+% relative to the main input file.
+
+% olimport -- import a text. First optional argument is subdirectory,
+% if present subimport #1/#2, no optional argument: just \subfile it.
+% Starred version interprets #1 as relative to main O-L directory
+% \olpath.  When asking for a file from a subdirectory, change
+% \olfilepath accordingly. This happens within a gorup, so \olfilepath
+% reverts to its original content after the \subfile.  Second optional
+% argument is name of sectioning command to use for \olsection.  Use
+% ``nosection'' to supress sectioning, ``subsection'' to make it a
+% subsection instead of a section, etc..
+
+\def\olfilebase{}
+\edef\olfilename{\jobname.tex}
+
+\DeclareDocumentCommand \olimport { s o m o }{
+  \begingroup
+  \IfNoValueTF{#4}{%
+    \def\ol@sectioncs{section}}{%
+    \def\ol@sectioncs{#4}}
+  \IfNoValueTF{#2}{%
+    \def\olfilename{#3.tex}%
+    \subfile{\olfilebase #3}%
+}{%
+    \def\olfilename{#3.tex}%
+    \IfBooleanTF{#1}{%
+      \edef\olfilebase{\olpath #2/}}{%
+      \edef\olfilebase{\olfilebase #2/}}%
+    \subfile{\olfilebase #3}}
+  \endgroup}
+
+% Goedel corner quotes
+
+\newbox\gnBoxA
+\newdimen\gnCornerHgt
+\setbox\gnBoxA=\hbox{$\ulcorner$}
+\global\gnCornerHgt=\ht\gnBoxA
+\newdimen\gnArgHgt
+\def\gn #1{%
+\setbox\gnBoxA=\hbox{$#1$}%
+\gnArgHgt=\ht\gnBoxA%
+\ifnum     \gnArgHgt<\gnCornerHgt \gnArgHgt=0pt%
+\else \advance \gnArgHgt by -\gnCornerHgt%
+\fi \raise\gnArgHgt\hbox{$\ulcorner$} \box\gnBoxA %
+\raise\gnArgHgt\hbox{$\urcorner$}}
+
+% License boxes
+
+\newcommand*{\ollicense}{%
+\begin{minipage}[b]{1.2cm}
+\includegraphics[width=1.2cm]{\olpath/assets/logos/by}
+\includegraphics[width=1.2cm]{\olpath/assets/logos/cc}
+\end{minipage}
+\hspace{.3cm}
+\begin{minipage}[b]{3.5cm}
+\sffamily
+\textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
+    Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
+  Project} is licensed under a
+\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}.
+\end{minipage}
+\hfill
+\href{http://openlogicproject.org/}{\includegraphics[width=2.4cm]{\olpath/assets/logos/openlogic-logo-bw}}}
+
+% - `\ifgitinfo`: produced Git revision information if `gitinfo` is used
+
+\newcommand*{\ifgitinfo}{\ifdefined\gitVtags\sffamily\footnotesize
+  rev\gitVtags:
+  \href{https://github.com/OpenLogicProject/OpenLogic/commits/master}
+       {\gitAbbrevHash}
+  (\gitAuthorDate)\else\relax\fi}
+
+\newcommand*{\shortollicense}{\sffamily\footnotesize
+  \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{\jobname}}
+  \ifgitinfo\ by \href{http://openlogicproject.org/}{OLP} /
+  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
+
+
+\newcommand*{\oluselicense}[2]{%
+\begin{minipage}[b]{.9cm}
+\includegraphics[width=.9cm]{\olpath/assets/logos/by}
+\includegraphics[width=.9cm]{\olpath/assets/logos/cc}
+\includegraphics[width=.9cm]{\olpath/assets/logos/remix}
+\end{minipage}
+\hspace{.3cm}
+\begin{minipage}[b]{5cm}
+\sffamily\small
+\textit{#1} by #2 is licensed under a
+\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}. It is based on
+\textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
+    Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
+  Project}, used under a
+\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}.
+\end{minipage}
+\hfill
+\href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}}
+
+\copypagestyle{openlogic}{plain}
+\makeevenfoot{openlogic}{\thepage}{}{\shortollicense}
+\makeoddfoot{openlogic}{\shortollicense}{}{\thepage}
 
 \makeatother

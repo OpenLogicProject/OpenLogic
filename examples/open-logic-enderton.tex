@@ -1,0 +1,28 @@
+% open-logic-enderton.tex
+% master file to produce an exapmle text
+% in the style of Enderton
+
+\documentclass{memoir}
+
+% we're compiling from example directory
+\newcommand{\olpath}{../}
+
+\usepackage[footinfo]{gitinfo}
+
+\input{\olpath/sty/open-logic.sty}
+\input{\olpath/sty/open-logic-defer.sty}
+
+\title{OLP: Example \`a la Enderton}
+\author{Open Logic Project}
+\date{Revision\gitVtags: \gitAbbrevHash{} (\gitAuthorDate)}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents*
+
+\olimport*[first-order-logic]{first-order-logic}
+
+\end{document}
+

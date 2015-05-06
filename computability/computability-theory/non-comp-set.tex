@@ -1,0 +1,36 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: equiv-ce-defs
+non-comp-set
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{ces}
+\olsection{There Are Non-Computable Sets}
+
+
+We saw above that every computable set is computably enumerable. Is
+the converse true? The following shows that, in general, it is not.
+
+\begin{thm}
+Let $K_0$ be the set $\Setabs{\tuple{e, x}}{\cfind{e}(x) \defined}$.
+Then $K_0$ is computably enumerable but not computable.
+\end{them}
+
+\begin{proof}
+To see that $K_0$ is computably enumerable, note that it is the
+domain of the function~$f$ defined by
+\[
+f(z) = \umin{y}{(\len{z} = 2 \land T((z)_0, (z)_1, y))}.
+\]
+For, if $\cfind{e}(x)$ is defined, $f(\tuple{e, x})$ finds a halting
+computation sequence; if $\cfind{e}(x)$ is undefined, so is
+$f(\tuple{e, x})$; and if $z$ doesn't even code a pair, then $f(z)$ is
+also undefined.
+
+The fact that $K_0$ is not computable is just the undecidability of
+the halting problem, \olref[hlt]{thm:halting-thm}.
+\end{proof}
+
+\end{document}

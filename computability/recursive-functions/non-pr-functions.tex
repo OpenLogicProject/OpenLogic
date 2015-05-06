@@ -1,0 +1,98 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: non-pr-functions
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{npr}
+\olsection{Non-Primitive Recursive Functions}
+
+The primitive recursive functions do not exhaust the intuitively
+computable functions. It should be intuitively clear that we can make
+a list of all the unary primitive recursive functions,
+$f_0$, $f_1$, $f_2$,~\dots such that we can effectively compute the value of
+$f_x$ on input $y$; in other words, the function $g(x,y)$, defined by
+\[
+g(x,y) = f_x(y)
+\] 
+is computable. But then so is the function 
+\begin{eqnarray*}
+h(x) & = & g(x,x) + 1 \\
+& = & f_x(x) +1.
+\end{eqnarray*}
+For each primitive recursive function $f_i$, the value of $h$ and
+$f_i$ differ at $i$. So $h$ is computable, but not primitive
+recursive; and one can say the same about $g$.  This is a an
+``effective'' version of Cantor's diagonalization argument.
+
+One can provide more explicit examples of computable functions that
+are not primitive recursive. For example, let the notation $g^n(x)$
+denote $g(g(\dots g(x)))$, with $n$ $g$'s in all; and define a
+sequence $g_0,g_1,\dots$ of functions by
+\begin{eqnarray*}
+g_0(x) & = & x+1 \\
+g_{n + 1}(x) & = & g_n^x(x)
+\end{eqnarray*}
+You can confirm that each function $g_n$ is primitive recursive. Each
+successive function grows much faster than the one before; $g_1(x)$ is
+equal to $2x$, $g_2(x)$ is equal to $2^x \cdot x$, and $g_3(x)$ grows
+roughly like an exponential stack of $x$ $2$'s. Ackermann's function is
+essentially the function $G(x) = g_x(x)$, and one can show that this
+grows faster than any primitive recursive function.
+
+Let us return to the issue of enumerating the primitive recursive
+functions. Remember that we have assigned symbolic notations to each
+primitive recursive function; so it suffices to enumerate
+notations. We can assign a natural number $\#(F)$ to each notation $F$,
+recursively, as follows:
+\begin{eqnarray*}
+\#(0) & = & \langle 0 \rangle \\
+\#(S) & = & \langle 1 \rangle \\
+\#(\Proj{n}{i}) & = & \langle 2, n, i \rangle \\
+\#(\fn{Comp}_{k,l}[H,G_0,\dots,G_{k-1}]) & = & \langle
+3,k,l,\#(H),\#(G_0),\dots,\#(G_{k-1}) \rangle \\
+\#(\fn{Rec}_l[G,H]) & = & \langle 4, l, \#(G), \#(H) \rangle
+\end{eqnarray*}
+Here I am using the fact that every sequence of numbers can be viewed
+as a natural number, using the codes from the last section. The upshot
+is that every code is assigned a natural number. Of course, some
+sequences (and hence some numbers) do not correspond to notations; but
+we can let $f_i$ be the unary primitive recursive function with
+notation coded as $i$, if $i$ codes such a notation; and the constant
+$0$ function otherwise. The net result is that we have an explicit way of
+enumerating the unary primitive recursive functions.
+
+(In fact, some functions, like the constant zero function, will appear
+more than once on the list. This is not just an artifact of our
+coding, but also a result of the fact that the constant zero function has
+more than one notation. We will later see that one can not computably
+avoid these repetitions; for example, there is no computable function
+that decides whether or not a given notation represents the constant
+zero function.)
+
+We can now take the function $g(x,y)$ to be given by $f_x(y)$, where
+$f_x$ refers to the enumeration we have just described. How do we know
+that $g(x,y)$ is computable? Intuitively, this is clear: to compute
+$g(x,y)$, first ``unpack'' $x$, and see if it a notation for a unary
+function; if it is, compute the value of that function on input
+$y$. 
+
+\begin<TMs>{digress}
+You may already be convinced that (with some work!) one can write a
+program (say, in Java or C++) that does this; and now we can appeal to
+the Church-Turing thesis, which says that anything that, intuitively,
+is computable can be computed by a Turing machine.
+
+Of course, a more direct way to show that $g(x,y)$ is computable is to
+describe a Turing machine that computes it, explicitly. This would,
+in particular, avoid the Church-Turing thesis and appeals to
+intuition. But, as noted above, working with Turing machines directly is
+unpleasant. Soon we will have built up enough machinery to show
+that $g(x,y)$ is computable, appealing to a model of computation that
+can be \emph{simulated} on a Turing machine: namely, the recursive
+functions.
+\end{digress}
+
+\end{document}

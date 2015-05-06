@@ -10,20 +10,40 @@
 \olsection{The Compactness Theorem}
 
 \begin{defn}
-  A set $\Gamma$ of !p{formula} is \emph{finitely satisfiable} if and
+  A set $\Gamma$ of !!{formula}s is \emph{finitely satisfiable} if and
   only if every finite $\Gamma_0 \subseteq \Gamma$ is satisfiable.
 \end{defn}
 
 \begin{thm}[Compactness Theorem]
-\ollabel{compactness} 
+\ollabel{thm:compactness} 
+The following hold for any sentences $\Gamma$ and $!A$:
 \begin{enumerate}
-  \item If $\Gamma \Entails !A$ then there is a finite $\Gamma_0
-    \subseteq \Gamma$ such that $\Gamma_0 \Entails !A$;
+  \item $\Gamma \Entails !A$ iff there is a finite $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Entails !A$.
   \item $\Gamma$ is satisfiable if and only if it is finitely
     satisfiable. 
 \end{enumerate}
 \end{thm}
 
-% Dana: prove
+\begin{proof}
+We prove (2). If $\Gamma$ is satisfiable, then there is a
+!!{structure}~$\Struct{M}$ such that $\Sat{M}{!A}$ for all $!A \in
+\Gamma$.  Of course, this $\Struct M$ also satisfies every finite
+subset of~$\Gamma$, so $\Gamma$ is finitely satisfiable.
+
+Now suppose that $\Gamma$ is finitely satisfiable.  Then every finite
+subset~$\Gamma_0 \subseteq \Gamma$ is satisfiable.  By soundness,
+every finite subset is consistent.  Then $\Gamma$ itself must be
+consistent. For assume it is not, i.e., $\Gamma \Proves \bot$.  But
+!!{derivation}s are finite, and so already some finite
+subset~$\Gamma_0 \subseteq \Gamma$ must be inconsistent
+(cf.~\olref[seq][ptn]{prop:proves-compact}).  But we just showed they
+are all consistent, a contradiction.  Now by completeness, since
+$\Gamma$ is consistent, it is satisfiable.
+\end{proof}
+
+\begin{prob}
+Prove (1) of \olref[fol][com][com]{thm:compactness}.
+\end{prob}
 
 \end{document}

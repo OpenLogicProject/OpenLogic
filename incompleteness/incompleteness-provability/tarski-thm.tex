@@ -1,0 +1,108 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: lob-thm
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{tar}
+
+\olsection{The Undefinability of Truth}
+
+The notion of {\em definability} depends on having a formal semantics
+for the language of arithmetic.  We have described a set of formulas
+and sentences in the language of arithmetic. The ``intended
+interpretation'' is to read such sentences as making assertions about
+the natural numbers, and such an assertion can be true or false. Let
+$\Struct{N}$ be the !!{structure} with domain $\Nat$ and the standard
+interpretation for the symbols in the language of arithmetic.  Then
+$\Sat{N}{!A}$ means ``$!A$ is true in the standard interpretation.''
+
+\begin{defn}
+  A relation $R(x_1,\dots,x_k)$ of natural numbers is {\em definable}
+  in $\Struct{N}$ if and only if there is a formula $!A(x_1,\dots,x_k)$
+  in the language of arithmetic such that for every $n_1,\dots,n_k$,
+  $R(n_1,\dots,n_k)$ if and only if $\Sat{N}{!A(\num
+  n_1,\dots,\num n_k)}$.
+\end{defn}
+Put differently, a relation is definable in in $\Struct{N}$ if and
+only if it is representable in the theory $\Th{TA}$, where $\Th{TA} =
+\Setabs{!A}{\Sat{N}{!A}}$ is the set of true sentences of
+arithmetic. (If this is not immediately clear to you, you should go
+back and check the definitions and convince yourself that this is the
+case.)
+
+\begin{lem}
+Every computable relation is definable in~$\Struct{N}$.
+\end{lem}
+
+\begin{proof}
+It is easy to check that the formula representing a relation in
+$\Th{Q}$ defines the same relation in $\Struct{N}$. 
+\end{proof}
+
+Now one can ask, is the converse also true?  That is, is every
+replation definable in~$\Struct{N}$ computable? The answer is no. For
+example:
+
+\begin{lem}
+The halting relation is definable in $\Struct{N}$.
+\end{lem}
+
+\begin{proof}
+Let $H$ be the halting relation, i.e.,
+\[
+H = \Setabs{\tuple{e,x}}{\lexists[s][T(e, x, s)]}.
+\]
+Let $!D_T$ define $T$ in $\Struct{N}$. Then
+\[
+H = \Setabs{\tuple{e,x}}{\Sat{N}{\lexists[s][!D_T(\num e, \num x, s)]}},
+\]
+so $\lexists[s][!D_T(z, x, s)]$ defines~$H$ in $\Struct{N}$. 
+\end{proof}
+
+\begin{prob}
+Show that $Q(n) \defiff n \in \Setabs{\Gn{!A}}{\Th{Q} \Proves !A}$ is
+  definable in arithmetic.
+\end{prob}
+
+What about $\Th{TA}$ itself? Is it definable in arithmetic? That
+is: is the set $\Setabs{\Gn{!A}}{\Sat{N}{!A}}$ definable in
+arithmetic? Tarski's theorem answers this in the negative.
+
+\begin{thm}
+\ollabel{thm:tarski}
+The set of true statements of arithmetic is not definable in arithmetic.
+\end{thm}
+
+\begin{proof} 
+Suppose $!D(x)$ defined it. By the fixed-point lemma, there is a
+formula $!A$ such that $\Th{Q}$ proves $!A \liff \lnot !D(\gn{!A})$,
+and hence $\Sat{N}{!A \liff \lnot !D(\gn{!A})}$. But then
+$\Sat{N}{!A}$ if and only if $\Sat{N}{\lnot !D(\gn{!A})}$, which
+contradicts the fact that $!D(y)$ is supposed to define the set of true
+statements of arithmetic.  
+\end{proof}
+
+Tarski applied this analysis to a more general philosophical notion of
+truth. Given any language $L$, Tarski argued that an adequate notion
+of truth for $L$ would have to satisfy, for each sentence $X$,
+\begin{quote}
+`$X$' is true if and only if $X$.
+\end{quote}
+Tarski's oft-quoted example, for English, is the sentence
+\begin{quote}
+`Snow is white' is true if and only if snow is white.
+\end{quote}
+However, for any language strong enough to represent the diagonal
+function, and any linguistic predicate $T(x)$, we can construct a
+sentence $X$ satisfying ``$X$ if and only if not $T(\text{`$X$'})$.''
+Given that we do not want a truth predicate to declare some sentences
+to be both true and false, Tarski concluded that one cannot specify a
+truth predicate for all sentences in a language without, somehow,
+stepping outside the bounds of the language. In other words, a the
+truth predicate for a language cannot be defined in the language
+itself.
+
+\end{document}

@@ -1,0 +1,78 @@
+% Part:sets-functions-relations
+% Chapter: sets
+% Section: comparing-sizes
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{set}{car}
+
+\olsection{Comparing Sizes of Sets}
+
+\begin{explain}
+Just like we were able to make precise when two sets have the same
+size in a way that also accounts for the size of infinite sets, we can
+also compare the sizes of sets in a precise way. Our definition of
+``is smaller than (or equinumerous)'' will require, instead of a
+!!{bijection} between the sets, a total !!{injective} function from the first
+set to the second. If such a function exists, the size of the first
+set is less than or equal to the size of the second.  Intuitively, 
+!!a{injective} function from one set to another guarantees that the range of
+the function has at least as many elements as the domain, since no two
+!!{element}s of the domain map to the same !!{element} of the range.
+\end{explain}
+
+\begin{defn}
+$\card{X} \leq \card{Y}$ if and only if there is an !!{injective}
+  function~$f \colon X \to Y$.
+\end{defn}
+
+\begin{thm}[Schr\"oder-Bernstein]
+Let $X$ and $Y$ be sets. If $\card{X} \leq \card{Y}$ and $\card{Y}
+\leq \card{X}$, then $\card{X} = \card{Y}$.
+\end{thm}
+
+\begin{explain}
+In other words, if there is a total !!{injective} function from $X$ to
+$Y$, and if there is a total !!{injective} function from $Y$ back to $X$,
+then there is a total !!{bijection} from $X$ to $Y$. Sometimes, it can be
+difficult to think of a !!{bijection} between two equinumerous sets, so
+the Schr\"oder-Bernstein theorem allows us to break the comparison
+down into cases so we only have to think of an !!{injection} from the
+first to the second, and vice-versa. The Schr\"oder-Bernstein theorem,
+apart from being convenient, justifies the act of discussing the
+``sizes'' of sets, for it tells us that set cardinalities have the
+familiar anti-symmetric property that numbers have.
+\end{explain}
+
+\begin{defn}
+$\card{X} < \card{Y}$ if and only if there is !!a{injective}
+  function~$f\colon X \to Y$ but no !!{bijective}~$g\colon X \to Y$.
+\end{defn}
+
+\begin{thm}[Cantor]
+For all $X$, $\card{X} < \card{\Pow{X}}$.
+\end{thm}
+
+\begin{proof}
+The function~$f \colon X \to \Pow{X}$ that maps any $x \in X$ to its
+singleton~$\{x\}$ is !!{injective}, since if $x \neq y$ then also $f(x) =
+\{x\} \neq \{y\} = f(y)$.
+
+There cannot be !!a{surjective} function~$g\colon X \to \Pow{X}$, let
+alone a !!{bijective} one. For assume that a surjective $g\colon X \to
+\Pow{X}$ exists.  Then let $Y = \Setabs{x \in X}{x \notin g(x)}$. If
+$g(x)$ is defined for all $x \in X$, then $Y$ is clearly a
+well-defined subset of~$X$.  If $g$ is !!{surjective}, $Y$ must be the
+value of~$g$ for some $x_0 \in X$, i.e., $Y = g(x_0)$.  Now consider
+$x_0$: it cannot be !!a{element} of $Y$, since if $x_0 \in Y$ then
+$x_0 \in g(x_0)$, and the definition of~$Y$ then would have $x_0
+\notin Y$.  On the other hand, it must be !!a{element} of~$Y$, since
+if it were not, then $x_0 \notin Y = g(x_0)$.  But then $x_0$
+satisfies the defining condition of~$Y$, and so $x_0 \in Y$. In either
+case, we have a contradiction.
+\end{proof}
+
+
+\end{document}

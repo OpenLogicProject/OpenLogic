@@ -1,0 +1,28 @@
+% OpenLogic Project
+% debug commands
+
+\RequirePackage{marginnote}
+\RequirePackage{xparse}
+\RequirePackage{xcolor}
+
+\DeclareDocumentCommand \oldebugnote { s o m } {
+  \IfBooleanTF{#1}{\reversemarginpar}{}
+  \marginnote{\tiny
+    \IfNoValueTF{#2}{}{\color{#2}}
+    #3}
+  \IfBooleanTF{#1}{\normalmarginpar}{}}
+
+% patch various commands and envs to produce margin notes
+
+\apptocmd{\ollabel}{%
+  \oldebugnote*[blue]{\theolpart:\theolchapter:\theolsection:\\ 
+    {#1}}}{\typeout{OK!}}{\typeout{FAIL!}}
+
+\AtBeginEnvironment{explain}{\oldebugnote[blue]{explanation}}
+\AtBeginEnvironment{digress}{\oldebugnote[blue]{digression}}
+\AtBeginEnvironment{intro}{\oldebugnote[blue]{intro}}
+\AtBeginEnvironment{pedantic}{\oldebugnote[blue]{pedantic}}
+
+% print tokenized text in dark green
+\def\tokencolor{\color[rgb]{0,.5,0}}
+\def\tokenformat#1{{\tokencolor #1}}

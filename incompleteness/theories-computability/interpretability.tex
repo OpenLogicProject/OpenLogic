@@ -1,0 +1,68 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: intepretability
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{itp}
+
+\olsection{Theories In Which $\Th{Q}$ is Intepretable are Undecidable}
+
+We can strengthen these results even more. Informally, an
+interpretation of a language $\Lang{L_1}$ in another language
+$\Lang{L_2}$ involves defining the universe, relation symbols, and
+function symbols of $\Lang{L_1}$ with !!{formula}s in
+$\Lang{L_2}$. Though we won't take the time to do this, one can make
+this definition precise.
+
+\begin{thm}
+  Suppose $\Th{T}$ is a theory in a language in which one can
+  interpret the language of arithmetic, in such a way that $\Th{T}$ is
+  consistent with the interpretation of $\Th{Q}$. Then $\Th{T}$ is
+  undecidable. If $\Th{T}$ proves the interpretation of the axioms of
+  $\Th{Q}$, then no consistent extension of $\Th{T}$ is decidable.
+\end{thm}
+
+The proof is just a small modification of the proof of the last
+theorem; one could use a counterexample to get a separation of $\Th{Q}$ and
+$\Th{\bar Q}$. One can take $\Th{ZFC}$, Zermelo Fraenkel set theory with the
+axiom of choice, to be an axiomatic foundation that is powerful enough
+to carry out a good deal of ordinary mathematics. In $\Th{ZFC}$ one
+can define the natural numbers, and via this interpretation, the
+axioms of $\Th{Q}$ are true. So we have
+
+\begin{cor}
+There is no decidable extension of $\Th{ZFC}$.
+\end{cor}
+
+\begin{cor}
+There is no complete, consistent, computably axiomatized extension of
+$\Th{ZFC}$. 
+\end{cor}
+
+The language of $\Th{ZFC}$ has only a single binary relation,
+$\in$. (In fact, you don't even need equality.) So we have
+
+\begin{cor}
+First-order logic for any language with a binary relation symbol is
+undecidable.
+\end{cor}
+
+This result extends to any language with two unary function symbols,
+since one can use these to simulate a binary relation symbol. The
+results just cited are tight: it turns out that first-order logic for
+a language with only {\em unary} relation symbols and at most one
+{\em unary} function symbol is decidable.
+
+One more bit of trivia. We know that the set of sentences in the
+language $0,S,+,\times,<$ true in the standard model is
+undecidable. In fact, one can define $<$ in terms of the other
+symbols, and then one can define $+$ in terms of $\times$ and $S$. So
+the set of true sentences in the language $0,S,\times$ is
+undecidable. On the other hand, Presburger has shown that the set of
+sentences in the language $0,S,+$ true in the language of arithmetic
+is decidable. The procedure is computationally infeasible, however.
+
+\end{document}

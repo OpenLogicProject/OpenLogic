@@ -1,0 +1,99 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: expressing-relations
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{exr} 
+
+\olsection{Expressing Relations in \article{structure}
+  \printtoken{S}{structure}}
+
+\begin{explain}
+One main use !!{formula}s can be put to is to express properties and
+relations in !!a{structure}~$\Struct M$ in terms of the primitives of
+the language~$\Lang L$ of~$\Struct M$.  By this we mean the following:
+the !!{domain} of $\Struct M$ is a set of objects.  The !!{constant}s,
+!!{function}s, and !!{predicate}s are interpreted in~$\Struct M$ by
+some objects in$\Domain M$, functions on~$\Domain M$, and relations
+on~$\Domain M$.  For instance, if $\Obj A^2_0$ is in $\Lang L$, then
+$\Struct M$ assigns to it a relation~$R = \Assign{{\Obj
+  A^2_0}}{M}$. Then the formula $\Atom{\Obj A^2_0}{\Obj x_1, \Obj x_2}$
+\emph{expresses} that very relation, in the following sense: if a
+variable assignment~$s$ maps $\Obj x_1$ to $a \in \Domain{M}$ and
+$\Obj x_2$ to $b \in \Domain M$, then
+\[
+Rab \text{\quad iff\quad} \Sat{M}{\Atom{\Obj A^2_0}{\Obj x_1, \Obj x_2}}[s].
+\]
+Note that we have to involve variable assignments here: we can't just
+say ``$Rab$ iff $\Sat{M}{\Atom{\Obj A^2_0}{a, b}}$'' because $a$ and
+  $b$ are not symbols of our language: they are !!{element}s
+  of~$\Domain{M}$.
+
+Since we don't just have atomic !!{formula}s, but can combine them
+using the logical connectives and the quantifiers, more complex
+!!{formula}s can define other relations which aren't directly built
+into~$\Struct M$.  We're interested in how to do that, and
+specifically, which relations we can define in !!a{structure}.
+\end{explain}
+
+\begin{defn}
+Let $!A(\Obj x_1,\dots, \Obj x_n)$ be a !!{formula} of $\Lang L$ in
+which only $\Obj x_1$,\dots, $\Obj x_n$ occur free, and let $\Struct
+M$ be !!a{structure} for~$\Lang L$. $!A(\Obj x_1,\dots, \Obj x_n)$
+\emph{expresses the relation}~$R \subseteq \Domain M^n$ iff
+\[
+Ra_1\dots a_n \text{\quad iff\quad} \Sat{M}{\Atom{!A}{\Obj
+    x_1,\dots, \Obj x_n}}[s]
+\]
+for any variable assignment~$s$ with $s(\Obj x_i) = a_i$ ($i = 1,
+\dots, n$).
+\end{defn}
+
+\begin{ex}
+In the standard model of arithmetic~$\Struct N$, the !!{formula} $\Obj
+x_1 < \Obj x_2 \lor \Obj x_1 = \Obj x_2$ expresses the $\le$ relation
+on~$\Nat$. The !!{formula} $\Obj x_2 = \Obj x_1'$ expresses the
+successor relation, i.e., the relation $R \subseteq \Nat^2$ where
+$Rnm$ holds if $m$ is the successor of~$n$. The formula $\Obj x_1 =
+\Obj x_2'$ expresses the predecessor relation.  The !!{formula}s
+$\lexists[\Obj x_3][(\eq/[\Obj x_3][\Obj 0] \land \eq[\Obj x_2][(\Obj
+    x_1 + \Obj x_3)])]$ and $\lexists[\Obj x_3][\eq[(\Obj x_1 + {\Obj
+      x_3}')][x_2]]$ both express the $\Obj <$ relation.  This means
+that the predicate symbol~$<$ is actually superfluous in the language
+of arithmetic; it can be defined.
+\end{ex}
+
+This idea is not just interesting in specific !!{structure}s, but
+generally whenever we use a language to describe an intended model or
+models, i.e., when we consider theories. These theories often only
+contain a few !!{predicate}s as basic symbols, but in the domain they
+are used to describe often many other relations play an important
+role.  If these other relations can be systematically expressed by the
+relations that interpret the basic !!{predicate}s of the language, we
+say we can \emph{define} them in the language.
+
+\begin{prob}
+Find !!{formula}s in $\Lang L_A$ which define the following relations:
+\begin{enumerate}
+\item $n$ is between $i$ and $j$;
+\item $n$ evenly divides $m$ (i.e., $m$ is a multiple of $n$);
+\item $n$ is a prime number (i.e., no number other than $1$ and $n$ evenly
+  divides~$n$).
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Suppose the formula $!A(\Obj x_1, \Obj x_2)$ expresses the relation $R
+\subseteq \Domain M^2$ in a !!{structure}~$\Struct M$. Find formulas
+that express the following relations:
+\begin{enumerate}
+\item the inverse $R^{-1}$ of $R$;
+\item the relative product $R \mid R$;
+\end{enumerate}
+Can you find a way to express $R^+$, the transitive closure of~$R$?
+\end{prob}
+
+\end{document}

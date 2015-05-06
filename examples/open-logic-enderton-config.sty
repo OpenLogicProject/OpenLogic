@@ -1,0 +1,57 @@
+% % The Default OLP Configuration File `open-logic-config.sty`
+% % OpenLogic Project
+
+% Formulas are \alpha, \beta, etc.
+
+\olalphagreekformulas
+
+% Herb likes \mathfrak{A} for structures
+
+\DeclareDocumentCommand \Struct { m }{\mathfrak{\lookup{M/A,N/B}{#1}}}
+
+\DeclareDocumentCommand \Sat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    % negated
+    \IfNoValueTF {#4} 
+        { \not\models_{\Struct #2} #3 }
+        { \not\models_{\Struct #2} #3 [#4]}}{
+    % not negated
+    \IfNoValueTF {#4} 
+        { \models_{\Struct #2} #3 }
+        { \models_{\Struct #2} #3 [#4] }}
+}
+
+\DeclareDocumentCommand \Value { m m o} {
+    \IfNoValueTF {#3}
+        % optional argument not present
+        { {#1}^{\Struct #2} }
+        % optional argument present
+        { \bar{#3}(#1) }
+}
+
+
+% object language: regular math italics
+
+\DeclareDocumentCommand \Obj { m }{#1}
+
+% atomic formulas -- no parens, no commas
+
+\DeclareDocumentCommand \Atom { m m }{ #1 \args{#2} }
+
+\settexttoken{formula}{wff}{wffs}
+
+\settexttoken{identity}*{equality symbol}{equality symbols}
+
+% only \not, \lif, \lforall are primitives
+
+\tagfalse{prvOr,prvAnd,prvIff,prvTrue,prvFalse,prvEx}
+
+% \everything else defined, no constants
+
+\tagtrue{defOr,defAnd,defIff,defEx,defTrue,defFalse}
+
+\tagfalse{probNot,probOr,probAnd,probIf,probIff,probEx,probAll}
+
+% no limit clauses
+
+\tagfalse{limitClause}

@@ -1,0 +1,72 @@
+% Part: computability
+% Chapter: lambda-calculus
+% Section: reduction
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{lam}{red}
+\olsection{Reduction of Lambda Terms}
+
+What can one do with lambda terms? Simplify them. If $M$ and $N$ are
+any lambda terms and $x$ is any variable, we can use $\Subst{M}{N}{x}$ to
+denote the result of substituting $N$ for~$x$ in~$M$, after renaming
+any bound variables of $M$ that would interfere with the free
+variables of~$N$ after the substitution. For example,
+\[
+\Subst{(\lambd[w][xxw])}{yyz}{x} = \lambd[w][(yyz)(yyz)w].
+\]
+
+\begin{digress}
+Alternative notations for substitution are $[N/x]M$, $M[N/x]$, and
+also $M[x/N]$. Beware!
+\end{digress}
+
+Intuitively, $(\lambd[x][M])N$ and $\Subst{M}{N}{x}$ have the same
+meaning; the act of replacing the first term by the second is called
+$\beta$-conversion.  More generally, if it is possible convert a
+term $P$ to~$P'$ by $\beta$-conversion of some subterm, one says
+\emph{$P$ $\beta$-reduces to $P'$ in one step}. If $P$ can be
+converted to~$P'$ with any number of one-step reductions (possibly
+none), then $P$ \emph{$\beta$-reduces} to~$P'$. A term that cannot be
+$\beta$-reduced any further is called \emph{$\beta$-irreducible}, or
+$\beta$-normal. I will say ``reduces'' instead of ``$\beta$-reduces,''
+etc., when the context is clear.
+
+Let us consider some examples.
+\begin{enumerate}
+\item We have
+\begin{align*}
+(\lambd[x][xxy]) \lambd[z][z] & \redone (\lambd[z][z])(\lambd[z][z]) y \\
+& \redone (\lambd[z][z]) y \\
+& \redone y
+\end{align*}
+\item ``Simplifying'' a term can make it more complex:
+\begin{align*}
+(\lambd[x][xxy])(\lambd[x][xxy]) & \redone (\lambd[x][xxy])(\lambd[x][xxy])y \\
+& \redone (\lambd[x][xxy])(\lambd[x][xxy])yy \\
+& \redone \dots
+\end{align*}
+\item It can also leave a term unchanged:
+\[
+(\lambd[x][xx])(\lambd[x][xx]) \redone (\lambd[x][xx])(\lambd[x][xx])
+\]
+\item Also, some terms can be reduced in more than one way; for
+  example,
+\[
+(\lambd[x][(\lambd[y][yx]) z)] v \redone (\lambd[y][yv]) z
+\]
+by contracting the outermost application; and
+\[
+(\lambd[x][(\lambd[y][yx]) z)] v \redone (\lambd[x][zx]) v
+\]
+by contracting the innermost one. Note, in this case, however, that
+both terms further reduce to the same term, $zv$.
+\end{enumerate}
+
+The final outcome in the last example is not a coincidence, but rather
+illustrates a deep and important property of the lambda calculus, known as the
+``Church-Rosser property.''
+
+\end{document}

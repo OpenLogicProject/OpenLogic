@@ -1,0 +1,126 @@
+% Part:sets-functions-relations
+% Chapter: sets
+% Section: non-enumerability
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{nen}
+
+\olsection{\printtoken{S}{nonenumerable} Sets}
+
+Some sets, such as the set $\Nat$ of natural numbers, are infinite. So
+far we've seen examples of infinite sets which were all
+!!{enumerable}.  However, there are also infinite sets which do not
+have this property. Such sets are called \emph{!!{nonenumerable}}.
+
+Cantor's method of diagonalization shows a set to be !!{nonenumerable}
+via a reductio proof. We start with the assumption that the set is
+!!{enumerable}, and show that a contradiction results from this
+assumption.  Our first example is the set~$\Bin^\omega$ of all
+infinite, non-gappy sequences of $0$'s and $1$'s.
+
+\begin{thm}
+\ollabel{thm-nonenum-bin-omega}
+$\Bin^\omega$~is !!{nonenumerable}.
+\end{thm}
+
+\begin{proof}
+Suppose, for reductio, that $\Bin^\omega$ is !!{enumerable}, so that
+there is a list $s_{1}$, $s_{2}$, $s_{3}$, $s_{4}$, \dots{} of all the
+!!{element}s of~$\Bin^\omega$.  We may arrange this list, and the
+elements of each sequence $s_i$ in it vertically in an array with the
+positive integers on the horizontal axis, as so:
+\[
+\begin{array}{c|c|c|c|c}
+1 & 2 & 3 & 4 & \dots \\\hline
+s_{1}(1) & s_{1}(2) & s_{1}(3) & s_1(4) & \dots \\\hline
+s_{2}(1)& s_{2}(2) & s_2(3) & s_2(4) & \dots \\\hline
+s_{3}(1)& s_{3}(2) & s_3(3) & s_3(4) & \dots \\\hline
+s_{4}(1)& s_{4}(2) & s_4(3) & s_4(4) & \dots \\\hline
+\vdots & \vdots & \vdots & \vdots & \ddots
+\end{array}
+\]
+Here $s_{1}(1)$ is a name for whatever number, a $0$ or a~$1$, is the
+first member in the sequence $s_{1}$, and so on.
+
+Now define $\overline{s}$ as follows: The $n$th member
+$\overline{s}(n)$ of the sequence
+$\overline{s}$ is set to
+\[
+\overline{s}(n) = 
+\begin{cases}
+1 & \text{if $s_{n}(n) = 0$}\\
+0 & \text{if $s_{n}(n) = 1$}.
+\end{cases}
+\]
+In other words, $\overline{s}(n)$ has the opposite value to~$s_{n}(n)$.
+
+Clearly $\overline{s}$ is a non-gappy infinite sequence of $0$s and
+$1$s, since it is just the mirror sequence to the sequence of $0$s and
+$1$s that appear on the diagonal of our array. So $\overline{s}$ is
+!!a{element} of~$\Bin^\omega$. Since it is !!a{element}
+of~$\Bin^\omega$, it must appear somewhere in the enumeration
+of~$\Bin^\omega$, that is, $\overline{s} = s_{n}$ for some~$n$.
+
+If $\overline{s} = s_{n}$, then for any~$m$, $\overline{s}(m) =
+s_{n}(m)$. (This is just the criterion of identity for
+sequences---sequences are identical when they agree at every place.)
+
+So in particular, $\overline{s}(n) = s_{n}(n)$. $\overline{s}(n)$ must
+be either an 0 or a~1. If it is a 0 then (given the definition of
+$\overline{s}$) $s_{n}(n)$ must be a~$1$. But if it is a~1 then
+$s_{n}(n)$ must be a~0. In either case $\overline{s}(n) \neq
+s_{n}(n)$.
+\end{proof}
+
+Diagonalization need not involve the presence of an array, though the
+array method is where it takes its name.
+
+\begin{thm}
+\ollabel{thm-nonenum-pownat}
+$\Pow{\Int^+}$ is not enumerable.
+\end{thm}
+
+\begin{proof}
+Suppose, for reductio, that $\Pow{\Int^+}$ is !!{enumerable}, and so
+it has an enumeration, i.e., a list of all subsets of~$\Int^+$:
+\[
+Z_{1}, Z_{2}, Z_{3}, \dots
+\]
+
+We now define a set $\overline{Z}$ such that for any positive
+integer~$i$, $i \in \overline{Z}$ iff $i \notin Z_{i}$:
+\[
+\overline{Z} = \Setabs{i \in \Int^+}{i \notin Z_i}
+\]
+
+$\overline{Z}$ is clearly a set of positive integers, and thus $\overline{Z}
+\in \Pow{\Int^+}$. So $\overline{Z}$ must be $= Z_k$ for some~$k \in
+\Int^+$.  And if that is the case, i.e., $\overline{Z} = Z_k$, then $i
+\in \overline{Z}$ iff $i \in Z_k$ for all~$i \in \Int^+$.
+
+In particular, $k \in \overline{Z}$ iff $k \in Z_k$.
+
+Now either $k \in Z_{k}$ or $k \notin Z_{k}$. In the first case, by
+the previous line, $k \in \overline{Z}$. But we've defined
+$\overline{Z}$ so that it contains exactly those~$i \in \Int^+$ which
+are \emph{not} !!{element}s of~$Z_i$. So by that definition, we would
+have to also have~$k \notin Z_k$.  In the second case, $k \notin Z_k$.
+But now $k$~satisfies the condition by which we have
+defined~$\overline{Z}$, and that means that $k \in \overline{Z}$.  And
+as $\overline{Z} = Z_k$, we get that $k \in Z_k$ after all.  Either
+case leads to a contradiction.
+\end{proof}
+
+\begin{prob}
+Show that $\Pow{\Nat}$ is !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+Show that the set of functions $f \colon \Int^+ \to \Int^+$ is
+!!{nonenumerable} by a direct diagonal argument.
+\end{prob}
+
+\end{document}

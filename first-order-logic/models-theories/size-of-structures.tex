@@ -1,0 +1,68 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: size-of-structures
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{siz} 
+
+\olsection{Expressing the Size of \printtoken{P}{structure}}
+
+\begin{explain}
+There are some properties of structures we can express even without
+using the non-logical symbols of a language.  For instance, there are
+!!{sentence}s which are true in a !!{structure} iff the !!{domain} of
+the !!{structure} has at least, at most, or exactly a certain
+number~$n$ of !!{element}s.
+\end{explain}
+
+\begin{prop}
+The !!{sentence}
+\begin{align*}
+!A_{\ge n} & \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] &
+  (\eq/[x_1][x_2] \land {} 
+  \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
+& & \eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+& & \vdots\\
+& & \eq/[x_{n-1}][x_n])
+\end{align*}
+is true in a !!{structure}~$\Struct M$ iff $\Domain M$ contains at
+least $n$ !!{element}s. Consequently, $\Sat{M}{\lnot !A_{\ge n+1}}$ iff
+$\Domain M$ contains at most~$n$ !!{element}s.
+
+\end{prop}
+
+\begin{prop}
+The !!{sentence}
+\begin{align*}
+!A_{= n} & \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] &
+  (\eq/[x_1][x_2] \land {} 
+  \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
+& & \eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+& & \vdots\\
+& & \eq/[x_{n-1}][x_n] \land {} \\
+& &\lforall[y][(\eq[y][x_1] \lor \dots \eq[y][x_n]])\dots))
+\end{align*}
+is true in a !!{structure}~$\Struct M$ iff $\Domain M$ contains
+exactly $n$ !!{element}s.
+\end{prop}
+
+\begin{prop}
+A !!{structure} is infinite iff it is a model of
+\[
+\{!A_{\ge 1}, !A_{\ge 2}, !A_{\ge 3}, \dots \}
+\]
+\end{prop}
+
+There is no single purely logical sentence which is true in~$\Struct
+M$ iff $\Domain M$ is infinite.  However, one can give !!{sentence}s with
+non-logical !!{predicate}s which only have infinite models (although
+not every infinite !!{structure} is a model of them).  The property of
+being a finite structure, and the property of being a
+!!{nonenumerable} structure cannot even be expressed with an infinite
+set of !!{sentence}s.  These facts follow from the compactness and
+L\"owenheim-Skolem theorems.
+
+\end{document}

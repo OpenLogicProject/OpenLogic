@@ -8,151 +8,82 @@
 
 \olfileid{fol}{syn}{fvs}
 
-\olsection{Free Variables and Sentences}
+\olsection{Free \printtoken{P}{variable} and \printtoken{P}{sentence}}
 
 \begin{defn}[Free occurrences of a !!{variable}]
+\ollabel{defn:free-occ}
 The \emph{free} occurrences of a !!{variable} in a !!{formula} are defined
-inductively:
+inductively as follows:
 \begin{enumerate}
-\item If $!A$ is atomic, all !!{variable} occurrences in $!A$ are free.
-\item If $!A$ is a !!{formula}, then the free !!{variable} occurrences of
-  $\lnot !A$ are exactly those of $!A$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \land !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \lor !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \lif !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ and $!B$ are !p{formula}, then the free !!{variable}
-  occurrences in $(!A \liff !B)$ are those in $!A$ together with those
-  in $!B$.
-\item If $!A$ is a !!{formula}, then the free !!{variable} occurrences in
-  $\lforall[x][!A]$ are all of those in $!A$ except for occurrences of
-  $x$.
-\item If $!A$ is a !!{formula}, then the free !!{variable} occurrences in
-  $\lexists[x][!A]$ are all of those in $!A$ except for occurrences of
-  $x$.
+\item \indcase*{!A}{$!A$ is atomic}{all !!{variable} occurrences in
+  $\indfrm$ are free.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{the free !!{variable}
+  occurrences of $\indfrm$ are exactly those of $!B$.}}{}
+
+\item \indcase{!A}{(!B \ast !C)}{the free
+  !!{variable} occurrences of $\indfrm$ are those in $!B$
+  together with those in~$!C$.}
+
+\tagitem{prvAll}{\indcase{!A}{\lforall[x][!B]}{the free !!{variable}
+  occurrences in $\indfrm$ are all of those in~$!B$ except for
+  occurrences of~$x$.}}{}
+
+\tagitem{prvEx}{\indcase{!A}{\lexists[x][!B]}{the free !!{variable}
+  occurrences in $\indfrm$ are all of those in~$!B$ except for
+  occurrences of~$x$.}}{}
 \end{enumerate}
-% Again, if we could figure out a way to condense those clauses and
-% still be able to allow people to "pick and choose" which logical
-% connectives to use, that would look better
 \end{defn}
+
+\begin{defn}[Bound Variables]
+An occurrence of a !!{variable} in a formula~$!A$ is \emph{bound} if
+it is not free.
+\end{defn}
+
+\begin{prob}
+Give an inductive definition of the bound variable occurrences along
+the lines of \olref[fol][syn][fvs]{defn:free-occ}.
+\end{prob}
+
+\begin{defn}[Scope]
+\iftag{prvAll}{If $\lforall[x][!B]$ is an occurrence of a subformula
+  in a formula~$!A$, then the corresponding occurrence of~$!B$ in~$!A$
+  is called the \emph{scope} of the corresponding occurrence
+  of~$\lforall[x]$. \iftag{prvEx}{Similarly for $\lexists[x]$.}{}}{If
+  $\lexists[x][!B]$ is an occurrence of a subformula in a
+  formula~$!A$, then the corresponding occurrence of~$!B$ in~$!A$ is
+  called the \emph{scope} of the corresponding occurrence
+  of~$\lexists[x]$.}
+
+If $!B$ is the scope of a quantifier occurrence
+\iftag{prvAll}{$\lforall[x]$\iftag{prvEx}{ or
+    $\lexists[x]$}{}}{$\lexists[x]$} in~$!A$, then all occurrences of
+$x$ which are free in~$!B$ are said to be \emph{bound by} the
+mentioned quantifier occurrence.
+\end{defn}
+
+\begin{ex}
+Here is a somewhat complicated !!{formula}~$!A$:
+\[
+\lforall[\Obj x_0][\underbrace{(\Atom{\Obj A^1_0}{\Obj x_0} \lif
+    \Atom{\Obj A^2_0}{\Obj x_0, \Obj x_1})}_{!B}] \lif \lexists[\Obj
+  x_1][\underbrace{(\Atom{\Obj A^2_1}{\Obj x_0, \Obj x_1} \lor \lforall[\Obj x_0][\overbrace{\lnot \Atom{\Obj A^1_1}{\Obj x_0}}^{!D}])}_{!C}]
+\]
+$!B$ is the scope of the first $\lforall[\Obj x_0]$, $!C$ is the scope
+of $\lexists[\Obj x_1]$, and $!D$ is the scope of the second
+$\lforall[\Obj x_0]$.  The first $\lforall[\Obj x_0]$ binds the
+occurrences of $\Obj x_0$ in~$!B$, $\lexists[\Obj x_1]$ the occurrence
+of $\Obj x_1$ in $!C$, and the second $\lforall[\Obj x_0]$ binds the
+occurrence of $\Obj x_0$ in~$!D$.  The first occurrence of $\Obj x_1$
+and the fourth occurrence of $\Obj x_0$ are free in~$!A$. The last
+occurrence of $\Obj x_0$ is free in $!D$, but bound in $!C$ and~$!A$.
+\end{ex}
 
 \begin{defn}[Sentence]
 A !!{formula} $!A$ is a \emph{sentence} iff it contains no free
-occurrences of !p{variable}.
+occurrences of !!{variable}s.
 \end{defn}
 
-\begin{explain}
-Induction is a commonly-used proof technique of mathematics in logic. 
-You may be familiar with it from math, in which you do induction on 
-natural numbers. As it turns out, there are lots of different kinds of 
-mathematical and logical sets of objects that lend themselves to induction.
-
-In general, what induction allows one to do is prove a universal claim; that 
-is, show that every object of a certain kind has some property. In particular, 
-induction is often useful where a ``universal introduction'' method of proof 
-is too complicated. Induction only works on matehmatical objects that are 
-constructed in special ways: if every element in the set is either basic or is 
-built up from basic elements, then we can use induction on it. More precisely:
-\end{explain}
-
-\begin{defn}
-A set $S$ is \emph{closed} under a function $f$ iff whenever $x \in S$, then $f(x) \in S$.
-\end{defn}
-
-\begin{explain}
-For example, the natural numbers ($\mathbb{N}$) are closed under the successor 
-function $f(x) = x+1$. If $x$ is a natural number, so is $x+1$. The natural numbers 
-are not, however, closed under the predecessor function $f(x) = x-1$, since $0$ is a 
-natural number, but $-1$ is not.
-\end{explain}
-
-\begin{defn}
-A property $P$ is said to be \emph{preserved under} a function $f(x)$ when, for any
-object $a$ in the domain of $f$, $P(a)$ implies $P(f(a))$ (if $a$ has property $P$, then 
-so does $f(a)$).
-\end{defn}
-
-\begin{explain}
-The property of ``being an even number'' is preserved under the function $f(x) = x+2$, 
-since if $x$ is even, so is $x+2$. The property of being an even number is not preserved 
-under the successor function, since if $x$ is even, $x+1$ is odd.
-
-Induction works on natural numbers because every natural number can be 
-reached from 0 by applying the successor function a finite number of times. This is 
-characteristic of any set upon which we can do induction.
-\end{explain}
-
-\begin{defn}[Induction on $\mathbb{N}$]
-If 0 has some property $P$, and if $P$ is preserved under the successor function, then
-every natural number has property $P$.
-\end{defn}
-
-\begin{ex} The sum of the first $n$ natural numbers is $\frac{n(n+1)}{2}$. \\
-
-\textbf{Base case.} The sum of the first 0 natural numbers is $0= \frac{0\cdot 1}{2}$.\\
-
-\textbf{Inductive step.} Suppose the property holds for $k$. We will show that it holds 
-for $k+1$. In other words, suppose that $P(k)$ holds, that is,
-\[ 0 + 1 + \ldots + k = \frac{k(k+1)}{2} \]
-We will show that $P(k+1)$ holds, i.e. that
-\[ 0 + 1 + \ldots + k + (k+1) = \frac{(k+1)(k+2)}{2} \]
-by using the assumption that $P(k)$.
-
-\begin{align*}
-0 + 1 + \ldots + k &= \frac{k(k+1)}{2} \tag{Assumption} \\
-0 + 1 + \ldots + k + (k+1) &= \frac{k(k+1)}{2} + (k+1) \tag{Add $k+1$ to both sides} \\
-&= \frac{k(k+1) + 2(k+1)}{2} \\
-&= \frac{2k + k + 2k +2}{2} \\
-&=\frac{(k+1)(k+2)}{2}
-\end{align*}
-Hence, the inductive step goes through, and we have proved the claim.
-\end{ex}
-
-\begin{explain}
-For !p{formula}, the basic elements are the atomic !p{formula}. More complex !p{formula} 
-are obtained by joining together less-complicated !p{formula} using operators. Each 
-operator can be seen as corresponding to a function of !p{formula} that returns a new 
-!!{formula} joining these two together with the operator in question. For example, the function 
-that joins two !p{formula} $!A$ and $!B$ into a conjunction can be written as $\mathcal E _\land 
-(!A, !B) = !A \land !B$. We can call these \emph{formula-building functions}. The set of 
-!p{formula} is closed these functions: whenever $!A$ and $!B$ are !p{formula}, so are 
-$\lnot !A$, $!A \land !B$, etc. 
-\end{explain}
-
-\begin{defn}[Induction on !p{formula}]
-If every atomic !!{formula} has property $P$ and $P$ is preserved under the !!{formula}-building 
-functions, then every !!{formula} has property $P$.
-\end{defn}
-
-\begin{explain}
-This definition suggests a ``recipe'' for inductive proofs on !p{formula}. If we are asked 
-to show that every !!{formula} has property $P$, follow the following steps:\\
-
-\textbf{Base Case.} Let $!A$ be an atomic !!{formula}. [\ldots] Therefore, $!A$ has 
-property $P$.\\
-
-\textbf{Inductive Step.} Let $!A$ and $!B$ be !p{formula}, both of which have the property $P$.
-
-Case $\lnot$: [\ldots] Therefore, $\lnot !A$ has property $P$.
-
-Case $\land$: [\ldots] Therefore, $!A \land !B$ has property $P$. 
-
-Case $\lor$: [\ldots] Therefore, $!A \lor !B$ has property $P$. 
-
-Case $\lif$: [\ldots] Therefore, $!A \lif !B$ has property $P$.
-
-Case $\liff$: [\ldots] Therefore, $!A \liff !B$ has property $P$.
-
-Case $\lforall[]$: [\ldots] Therefore, $\lforall[x] !A$ has property $P$.
-
-Case $\lexists[]$: [\ldots] Therefore, $\lexists[x] !A$ has property $P$. \\
-
-Therefore, every !!{formula} has property $P$.
-\end{explain}
+% add examples!
 
 \end{document}

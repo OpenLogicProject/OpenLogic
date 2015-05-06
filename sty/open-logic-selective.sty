@@ -1,53 +1,98 @@
 % OpenLogic Project
 % Package for selective typesetting
 
-% cribbed from tagging.sty package by Brent Longborough http://www.ctan.org/tex-archive/macros/latex/contrib/tagging
-% uses etoolbox's toggles for tags instead, allows for boolean expressions in addition to tag lists
+% cribbed from tagging.sty package by Brent Longborough
+% http://www.ctan.org/tex-archive/macros/latex/contrib/tagging 
+
+% uses etoolbox's toggles for tags instead, allows for boolean
+% expressions in addition to tag lists
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{open-logic-selective}
+\ProvidesFile{open-logic-selective.sty}
 
 \RequirePackage{etoolbox}
+\RequirePackage{xpunctuate} % for xcomma, xperiod
+
+
+\makeatletter
 
 % initialize a list of tags as true
 
-\newcommand{\tagtrue}[1]{\def\do##1{\providetoggle{##1}\toggletrue{##1}}
-    \docsvlist{#1}}
+\newcommand{\tagtrue}[1]{%
+  \def\do##1{\providetoggle{##1}\toggletrue{##1}}
+    \docsvlist{#1}%
+  \def\do##1{\providetoggle{not##1}\togglefalse{not##1}}
+    \docsvlist{#1}%
+}
 
 % initialize a list of tags as false
 
-\newcommand{\tagfalse}[1]{\def\do##1{\providetoggle{##1}\togglefalse{##1}}
+\newcommand{\tagfalse}[1]{%
+  \def\do##1{\providetoggle{##1}\togglefalse{##1}}%
+    \docsvlist{#1}%
+\def\do##1{\providetoggle{not##1}\toggletrue{not##1}}
     \docsvlist{#1}}
 
-% \begin{blockif}{boolean expression} text if true \end{blockif}
+% tagcount -- count number of active tags in a tag list
 
-\newenvironment{blockif}[1]{\ifboolexpr { #1 }{\let\comment\relax\let\endcomment\relax}{}\comment}{\endcomment\leavevmode}
+\newcounter{tagnum}
 
-% \begin{blocktag}{taglist} text if tagged \end{blocktag}
+\newcommand{\tagcount}[1]{%
+  \setcounter{tagnum}{0}
+  \def\do##1{\iftoggle{##1}{\stepcounter{tagnum}}{}}%
+    \docsvlist{#1}}
 
-\newenvironment{blocktag}[1]{\def\do##1{%
-        \iftoggle{##1}{\let\comment\relax\let\endcomment\relax}{}}
-    \docsvlist{#1}%
-    \comment}%
-    {\endcomment\leavevmode}
+% \iftag{tags}{text if tagged}{text if not tagged}
 
-% \printif{boolean expression}{text if true}{text if false}
-
-\newcommand{\printif}[3]{\ifboolexpr{#1}{#2}{#3}}
-
-% \printtag{taglist}{text if tagged}{text if not tagged}
-
-\newcommand{\printtagtext}{}
-\newcommand{\printtag}[3]
-  {\renewcommand{\printtagtext}{#3}%
+\newcommand{\iftagtext}{}
+\newcommand{\iftag}[3]
+  {\def\iftagtext{#3}%
    \def\do##1{%
-     \iftoggle{##1}{\renewcommand{\printtagtext}{#2}}{}}%
+     \iftoggle{##1}{\def\iftagtext{#2}}{}}%
    \docsvlist{#1}%
-   \printtagtext%
-  }
+   \iftagtext}
 
+% change \begin to take optional tags in <...>
+% if one of the tags is active, behave as \begin otherwise would
+% if one of them is, supress everything until the end of the environment
 
+\let\orig@begin\begin
 
+\def\begin{\@ifnextchar<{\tag@begin}{\orig@begin}}
+\def\tag@begin<#1>{\iftag{#1}\orig@begin\supressenv}
 
+\def\supressenv#1{\begingroup\@bsphack
+             \let\do\@makeother\dospecials\catcode`\^^M\active
+             \let\verbatim@startline\relax
+             \let\verbatim@addtoline\@gobble
+             \let\verbatim@processline\relax
+             \let\verbatim@finish\relax
+             \def\@currenvir{#1}
+             \verbatim@}
 
+% \tagitem<tags><tagged text><untagged text>: typeset an \item if tags active
+
+\newcommand{\tagitem}[3]{\iftag{#1}{%
+    \expandafter\ifstrempty{#2}{}{\item #2}}{
+    \expandafter\ifstrempty{#3}{}{\item #3}}}
+
+% \begin{tagenumerate}{tags} -- like enumerate, but only if more than
+% one tag is active
+
+\newenvironment{tagenumerate}[1]{%
+  \tagcount{#1}%
+  \ifnumgreater{\value{tagnum}}{1}{%
+    \begin{enumerate}}{%
+    \let\orig@tagitem\tagitem
+    \let\orig@item\item
+    \let\tagitem\iftag
+    \let\item\relax}}{%
+  \ifnumgreater{\value{tagnum}}{1}{%
+    \end{enumerate}}{%
+    \let\tagitem\orig@tagitem
+    \let\item\orig@item}}
+
+\def\startycommalist{\def\ycomma{\def\ycomma{, }}}
+
+\makeatother
 

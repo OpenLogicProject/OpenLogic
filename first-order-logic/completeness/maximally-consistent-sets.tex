@@ -2,167 +2,166 @@
 % Chapter: completeness
 % Section: maximally-consistent-sets
 
+% Definition of maximally consistent sets. Properties of mcs required
+% for completeness proved are in maximally-consistsnt-sets.tex in the
+% chapter on the proof system used.
+
 \documentclass[../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
 \olfileid{fol}{com}{mcs}
-\olsection{Maximally Consistent Sets of Sentences}
+\olsection{Maximally Consistent Sets of \usetoken{P}{sentence}}
 
 \begin{defn}
 \ollabel{mcs}
-A set~$\Gamma$ of sentences is \emph{maximally consistent} iff
+A set~$\Gamma$ of !!{sentence}s is \emph{maximally consistent} iff
 \begin{enumerate}
 \item $\Gamma$ is consistent, and
 \item if $\Gamma \subsetneq \Gamma'$, then $\Gamma'$ is inconsistent.
 \end{enumerate}
 \end{defn}
 
-\begin{explain} %Change to digression
-An alternate definition equivalent to the above is: a set $\Gamma$ of sentences is 
-\emph{maximally consistent} iff
+\begin{explain}
+An alternate definition equivalent to the above is: a set $\Gamma$ of
+sentences is \emph{maximally consistent} iff
 \begin{enumerate}
 \item $\Gamma$ is consistent, and
-\item If $\Gamma \cup \{ !A \}$ is consistent, then $A \in \Gamma$.
+\item If $\Gamma \cup \{ !A \}$ is consistent, then $!A \in \Gamma$.
 \end{enumerate}
+In other words, one cannot add !!{sentence}s not already in~$\Gamma$
+to a maximally consistent set~$\Gamma$ without making the resulting
+larger set inconsistent.
+\end{explain}
+
+\begin{explain}
+Maximally consistent sets are important in the completeness proof
+since we can guarantee that every consistent set of !!{sentence}s~$\Gamma$
+is contained in a maximally consistent set~$\Gamma^*$, and a maximally
+consistent set contains, for each !!{sentence}~$!A$, either $!A$ or its
+negation $\lnot !A$.  This is true in particular for atomic !!{sentence}s,
+so from a maximally consistent set in a language suitably expanded by
+!!{constant}s, we can construct a !!{structure} where the
+interpretation of !!{predicate}s is defined according to which atomic
+!!{sentence}s are in~$\Gamma^*$. This !!{structure} can then be shown to
+make all !!{sentence}s in~$\Gamma^*$ (and hence also in $\Gamma$)
+true. The proof of this latter fact requires that $\lnot !A \in
+\Gamma^*$ iff $!A \notin \Gamma^*$, $(!A \lor !B) \in \Gamma^*$ iff $!A
+\in \Gamma^*$ or $!B \in \Gamma^*$, etc.
 \end{explain}
 
 \begin{prop}
+\ollabel{prop:mcs}
 Suppose $\Gamma$ is maximally consistent. Then:
 \begin{enumerate}
-\item If $\Gamma \Proves !A$, then $!A \in \Gamma$.
-\item For any $!A$, either $!A \in \Gamma$ or $\lnot !A \in \Gamma$
-\item $!A \lor !B \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$
-\item $!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$
-\item $!A \lif !B \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in \Gamma$
+\item \ollabel{prop:mcs-prov-in} If $\Gamma \Proves !A$, then $!A \in
+  \Gamma$.
+
+\item \ollabel{prop:mcs-either-or} For any $!A$, either $!A \in
+  \Gamma$ or $\lnot !A \in \Gamma$.
+
+\tagitem{prvAnd}{\ollabel{prop:mcs-and} $(!A \land !B) \in \Gamma$
+  iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:mcs-or} $(!A \lor !B) \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:mcs-if} $(!A \lif !B) \in \Gamma$ iff
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
 \end{enumerate}
 \end{prop}
 
 \begin{proof}
-Let us suppose for all of the following that $\Gamma$ is maximally consistent.
+Let us suppose for all of the following that $\Gamma$ is maximally
+consistent.
 \begin{enumerate}
-\item  If $\Gamma \Proves !A$, then $!A \in \Gamma$:
+\item If $\Gamma \Proves !A$, then $!A \in \Gamma$.
 
-Suppose that $\Gamma \Proves !A$. Then there is a finite set $\Gamma_0 \subseteq \Gamma$ such that $\Log{LK} \Proves \Gamma_0 \Sequent !A$. Suppose to the contrary that $!A \notin \Gamma$: then since $\Gamma$ is maximally consistent, $\Gamma \cup \{!A\}$ is inconsistent, hence $\Gamma \cup \{!A\} \Proves \lfalse$. Since $\Gamma$ is consistent, there is a finite set $\Gamma_1 \subseteq \Gamma$ with $\Log{LK} \Proves \Gamma_1 \cup \{!A\} \Sequent \lfalse$. Let the $\Log{LK}$-derivation of $\Gamma_0 \Sequent !A$ be $\Pi_0$ and the $\Log{LK}$-derivation of $\Gamma_1\cup\{!A\} \Sequent \lfalse$ be $\Pi_1$. We can then derive
+Suppose that $\Gamma \Proves !A$. Suppose to the contrary that $!A
+\notin \Gamma$: then since $\Gamma$ is maximally consistent, $\Gamma
+\cup \{!A\}$ is inconsistent, hence $\Gamma \cup \{!A\} \Proves
+\lfalse$.  By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-contr}
+$\Gamma$ is inconsistent. This contradicts the assumption that
+$\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
+\Gamma$, so $!A \in \Gamma$.
 
-\begin{prooftree}
+\item For any $!A$, either $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
 
-\AxiomC{$\Pi_0$}
-\noLine \UnaryInfC{$ \vdots$ }
-\noLine \UnaryInf$ \Gamma_0 \fCenter !A $
-\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1 \fCenter !A $
+Suppose to the contrary that for some~$!A$ both $!A \notin \Gamma$ and
+$\lnot !A \notin \Gamma$. Since $\Gamma$ is maximally consistent,
+$\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup
+\{\lnot !A\} \Proves \lfalse$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-exhaustive},
+$\Gamma$ is inconsistent, a contradiction.  Hence there cannot be such
+a !!{sentence}~$!A$ and, for every $!A$, $!A \in \Gamma$ or $\lnot !A
+\in \Gamma$.
 
-\AxiomC{$\Pi_1$}
-\noLine \UnaryInfC{$ \vdots$ }
-\noLine \UnaryInf$ \Gamma_1, !A \fCenter \lfalse$
-\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter \lfalse $
+\tagitem{defAnd}{}{%
+\iftag{probAnd}{Exercise.}{%
+$(!A \land !B) \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
 
-\RightLabel{cut} \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter \lfalse $
+For the forward direction, suppose $(!A \land !B) \in \Gamma$. Then
+$\Gamma \Proves !A \land !B$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-left},
+$\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
+\olref{prop:mcs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
+required.
 
-\end{prooftree}
+For the reverse direction, let $!A \in \Gamma$ and $!B \in
+\Gamma$. Then $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-right},
+$\Gamma \Proves !A \land !B$. By \olref{prop:mcs-prov-in}, $(!A \land
+!B) \in \Gamma$.}}
 
-Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$, $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma \Proves \lfalse$. Contradiction: $\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin \Gamma$, so $!A \in \Gamma$.
+\tagitem{defOr}{}{%
+\iftag{probOr}{Exercise.}{%
+$(!A \lor !B) \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$.
 
-\item For any $!A$, either $!A \in \Gamma$ or $\lnot !A \in \Gamma$:
+For the contrapositive of the forward direction, suppose that $!A
+\notin \Gamma$ and $!B \notin \Gamma$. We want to show that $(!A \lor
+!B) \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma
+\cup \{!A\} \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$.
+By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-left},
+$\Gamma \cup \{(!A \lor !B)\}$ is inconsistent. Hence, $(!A \lor !B)
+\notin \Gamma$, as required.
 
-Suppose to the contrary that there is an $!A$ such that $!A \notin \Gamma$ and $\lnot !A \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup \{\lnot !A\} \Proves \lfalse$. So there are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$ so that there are $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ of $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent \lfalse$, respectively. We can then derive
+For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
+\Gamma$. Then $\Gamma \Proves !A$ or $\Gamma \Proves !B$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-right},
+$\Gamma \Proves !A \lor !B$.  By \olref{prop:mcs-prov-in}, $(!A \lor !B)
+\in \Gamma$, as required.}}
 
-\begin{prooftree}
+\tagitem{defIf}{}{%
+\iftag{probIf}{Exercise.}{%
+$(!A \lif !B) \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in \Gamma$:
 
-\AxiomC{$\Pi_0$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_0, !A \fCenter \lfalse $
-\RightLabel{$\lnot$ right} \UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+For the forward direction, let $(!A \lif !B) \in \Gamma$, and suppose to the
+contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
+assumptions, $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !A$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-mp},
+$\Gamma \Proves !B$. But then by \olref{prop:mcs-prov-in}, $!B \in
+\Gamma$, contradicting the assumption that $!B \notin \Gamma$.
 
-\AxiomC{$\Pi_1$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_1, \lnot !A \fCenter \lfalse $
+For the reverse direction, first consider the case where $!A \notin
+\Gamma$. By \olref{prop:mcs-either-or}, $\lnot !A \in \Gamma$ and
+hence $\Gamma \Proves \lnot !A$. By
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lif},
+$\Gamma \Proves !A \lif !B$. Again by \olref{prop:mcs-prov-in}, we get
+that $(!A \lif !B) \in \Gamma$, as required.
 
-\RightLabel{cut} \BinaryInf$ \Gamma_0, \Gamma_1 \fCenter \lfalse $
-
-\end{prooftree}
-
-Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$, $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma \Proves \lfalse$. Contradiction: $\Gamma$ is consistent. Hence there cannot be such a $!A$ and, for every $!A$, $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
-
-\item $!A \lor !B \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$:
-
-For the contrapositive of the forward direction, suppose that $!A \notin \Gamma$ and $!B \notin \Gamma$. We want to show that $!A \lor !B \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$. Hence there are finite sets $\Gamma_0,\Gamma_1 \subseteq \Gamma$ and $\Log{LK}$-derivations $\Pi_0$ and $\Pi_1$ such that
-
-\begin{prooftree}
-
-\AxiomC{$\Pi_0$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_0 !A \fCenter \lfalse $
-\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1,!A \fCenter \lfalse $
-
-\AxiomC{$\Pi_1$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_1, !B \fCenter \lfalse $
-\doubleLine \UnaryInf$ \Gamma_0,\Gamma_1, !B \fCenter \lfalse$
-
-\RightLabel{$\lor$ right} \BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter \lfalse $
-\end{prooftree}
-
-Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma$ is consistent (so $\Gamma \Proves! \lfalse$), $!A \lor !B \notin \Gamma$, as required.
-
-For the reverse direction, suppose that $!A \in \Gamma$. Then $\Gamma \Proves !A$, so there is an $\Log{LK}$-derivation $\Pi_0$ and a finite set $\Gamma_0 \subseteq \Gamma$ such that we can derive
-
-\begin{prooftree}
-
-\AxiomC{$\Pi_0$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_0 \fCenter !A $
-\RightLabel{$\lor$ right} \UnaryInf$ \Gamma_0 \fCenter !A \lor !B$ 
-
-\end{prooftree}
-
-Therefore $\Gamma \Proves !A \lor !B$ so by part 1, $!A \lor !B \in \Gamma$, as required. (The proof for when we start with $!B \in \Gamma$ is identical.)
-
-\item $!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
-
-For the forward direction, let $!A \land !B \in \Gamma$ and suppose that $!A \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma \cup \{!A\}$ would be inconsistent, so there is a finite set $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-derivation $\Pi_0$ such that 
-
-\begin{prooftree}
-\AxiomC{$\Pi_0$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_0, !A \fCenter \lfalse $
-\RightLabel{$\land$ left} \UnaryInf$ \Gamma_0, !A \land !B \fCenter \lfalse $
-\end{prooftree}
-
-Since we supposed that $!A \land !B \in \Gamma$, we must have then that $\Gamma_0\cup\{!A \land !B \} \subseteq \Gamma$, hence $\Gamma \Proves \lfalse$. Contradiction: $\Gamma$ is consistent. Hence we must have that $!A \in \Gamma$. (Similarly, we get that $!B \in \Gamma$).
-
-\item $!A \lif !B \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in \Gamma$:
-
-For the forward direction, $!A \lif !B \in \Gamma$, and suppose to the contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. Since $\Gamma \Proves !A \lif !B$, there is a finite set $\Gamma_0 \subseteq \Gamma$ such that there is an $\Log{LK}$-derivation $\Pi_0$ of $\Gamma_0 \Sequent !A \lif !B$. Since $!A \in \Gamma$, there is a finite set $\Gamma_1 \subseteq \Gamma$ such that there is an $\Log{LK}$-derivation $\Pi_1$ of $\Gamma_1 \Sequent !A$. Also, since $\Gamma$ is maximally consistent and $!B \notin \Gamma$, $\Gamma \cup \{!B\} \Proves \lfalse$, and hence there is a finite set $\Gamma_2 \subseteq \Gamma$ such that there is an $\Log{LK}$-derivation $\Pi_2$ of $\Gamma_2, !B \Sequent \lfalse$. From derivations $\Pi_0, \Pi_1$, and $\Pi_2$, we derive
-
-\begin{prooftree}
-
-\AxiomC{$\Pi_0$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_0 \fCenter !A \lif !B$
-\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2 \fCenter !A \lif !B$
-
-\AxiomC{$\Pi_1$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_1 \fCenter !A $
-
-\AxiomC{$\Pi_2$}
-\noLine \UnaryInfC{$\vdots$}
-\noLine \UnaryInf$ \Gamma_2, !B \fCenter \lfalse$
-
-\RightLabel{$\lif$ left} \BinaryInf$\Gamma_1,\Gamma_2,!A \lif !B \fCenter \lfalse$
-\doubleLine \UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2, !A \lif !B \fCenter \lfalse$
-
-\RightLabel{cut} \BinaryInf$ \Gamma_0,\Gamma_1,\Gamma_2 \fCenter \lfalse$
-
-\end{prooftree}
-
-Since $\Gamma_0 \cup \Gamma_1 \cup \Gamma_2 \subseteq \Gamma$, this means that $\Gamma \Proves \lfalse$, which is a contradiction since $\Gamma$ was supposed to be consistent. Hence, it cannot be the case that neither $!A \notin \Gamma$ nor $!B \in \Gamma$, so at least one of $!A \in \Gamma$ or $!B \notin \Gamma$ must hold.
-
-For the reverse direction, first consider the case where $!A \notin \Gamma$. By 1., $\Gamma \Proves! !A$, hence $\Gamma \Proves !A \lif !B$. Applying 1. again, we get that $!A \lif !B \in \Gamma$, as required.
-
-Now consider the case where $!B \in \Gamma$. Since $\{ !B \} \subseteq \Gamma$ and obviously $\Log{LK} \Proves !B \Sequent !B$, we have that $\Gamma \Proves !B$. Therefore, $\Gamma \Proves !A \lif !B$, so by 1., $!A \lif !B \in \Gamma$.
+Now consider the case where $!B \in \Gamma$. Then $\Gamma \Proves !B$
+and by
+\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lif},
+$\Gamma \Proves !A \lif !B$. By \olref{prop:mcs-prov-in}, $(!A \lif !B)
+\in \Gamma$.}}
 \end{enumerate}
 \end{proof}
+
+\begin{prob}
+Complete the proof of \olref[fol][com][mcs]{prop:mcs}.
+\end{prob}
 
 \end{document}

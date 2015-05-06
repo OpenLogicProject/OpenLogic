@@ -10,9 +10,9 @@
 \olsection{Relations as Sets}
 
 \begin{explain}
-You will no doubt remember some interesting relations between objects of
-some of the sets we've mentioned. For instance, numbers come with an
-\emph{order relation}~$<$ and from the theory of whole numbers the
+You will no doubt remember some interesting relations between objects
+of some of the sets we've mentioned. For instance, numbers come with
+an \emph{order relation}~$<$ and from the theory of whole numbers the
 relation of \emph{divisibility without remainder} (usually written
 $n\mid m$) may be familar. There is also the relation \emph{is
   identical with} that every object bears to itself and to no other
@@ -21,38 +21,37 @@ encounter, and even more possible relations. Before we review them,
 we'll just point out that we can look at relations as a special sort
 of set. For this, first recall what a \emph{pair} is: if $a$ and $b$
 are two objects, we can combine them into the \emph{ordered
-  pair}~$\langle a,b\rangle$.  Note that for ordered pairs the order
-\emph{does} matter, e.g, $\langle a,b\rangle \neq \langle b,a\rangle$, 
-in contrast to unordered pairs, i.e., 2-element sets, where
-$\{a,b\}=\{b,a\}$.
+  pair}~$\tuple{a, b}$.  Note that for ordered pairs the order
+\emph{does} matter, e.g, $\tuple{a, b} \neq \tuple{b, a}$, in contrast
+to unordered pairs, i.e., 2-element sets, where $\{a, b\}=\{b, a\}$.
 
-If $X$ and $Y$ are sets, then the \emph{Cartesian product} $X\times Y$
-of $X$ and $Y$ is the set of all pairs $\langle a,b\rangle$ with $a\in X$ and
-$b\in Y$. In particular, $X^{2}=X\times X$ is the set of all pairs
+If $X$ and $Y$ are sets, then the \emph{Cartesian product} $X \times Y$
+of $X$ and $Y$ is the set of all pairs $\tuple{a, b}$ with $a \in X$ and
+$b \in Y$. In particular, $X^{2}=X \times X$ is the set of all pairs
 from~$X$.
 
 Now consider a relation on a set, e.g., the $<$-relation on the set
 $\mathbb{N}$ of natural numbers, and consider the set of all pairs of
-numbers $\langle n,m \rangle$ where $n<m$, i.e.,
+numbers $\tuple{n, m}$ where $n<m$, i.e.,
 \[
-R=\Setabs{\langle n,m\rangle}{n,m\in\mathbb{N}\text{ and }n<m}.
+R=\Setabs{\tuple{n, m}}{n, m \in \mathbb{N} \text{ and } n<m}.
 \]
 Then there is a close connection between the number $n$ being less
-than a number $m$ and the corresponding pair $\langle n,m\rangle$
-being a member of $R$, namely, $n<m$ if and only if $\langle n,m
-\rangle\in R$. In a sense we can consider the set $R$ to \emph{be} the
+than a number $m$ and the corresponding pair $\tuple{n, m}$
+being a member of $R$, namely, $n<m$ if and only if $\tuple{n, m}
+\in R$. In a sense we can consider the set $R$ to \emph{be} the
 $<$-relation on the set $\mathbb{N}$. In the same way we can construct
-a subset of $\mathbb{N}^{2}$for any relation between
+a subset of $\mathbb{N}^{2}$ for any relation between
 numbers. Conversely, given any set of pairs of numbers
 $S\subseteq\mathbb{N}^{2}$, there is a corresponding relation between
 numbers, namely, the relationship $n$ bears to $m$ if and only if
-$\langle n,m \rangle\in S$. This justifies the following definition:
+$\tuple{n, m} \in S$. This justifies the following definition:
 \end{explain}
 
 \begin{defn}
-A \emph{binary relation} on a set $X$ is a subset of $X^{2}$. If
-$R\subseteq X^{2}$ is a binary relation on~$X$ and $x,y\in X$,
-we write $Rxy$ (or $xRy$) for $\langle x,y \rangle\in R$.
+A \emph{binary relation} on a set $X$ is a subset of~$X^{2}$. If
+$R\subseteq X^{2}$ is a binary relation on~$X$ and $x, y \in X$,
+we write $Rxy$ (or $xRy$) for $\tuple{x, y} \in R$.
 \end{defn}
 
 \begin{ex}
@@ -62,45 +61,53 @@ pairs of natural numbers can be listed in a 2-dimensional matrix like
 this:
 \[
 \begin{array}{ccccc}
-\mathbf{\langle 0,0 \rangle} & \langle 0,1 \rangle & 
-  \langle 0,2 \rangle & \langle 0,3 \rangle & \ldots\\ 
-\langle 1,0 \rangle & \mathbf{\langle 1,1 \rangle} & 
-  \langle 1,2 \rangle & \langle 1,3 \rangle & \ldots\\ 
-\langle 2,0 \rangle & \langle 2,1 \rangle & 
-  \mathbf{\langle 2,2 \rangle} & \langle 2,3 \rangle & \ldots\\ 
-\langle 3,0 \rangle & \langle 3,1 \rangle & \langle 3,2 \rangle &
-  \mathbf{\langle 3,3 \rangle} & \ldots\\ 
+\mathbf{\tuple{ 0,0 }} & \tuple{ 0,1 } & 
+  \tuple{ 0,2 } & \tuple{ 0,3 } & \ldots\\ 
+\tuple{ 1,0 } & \mathbf{\tuple{ 1,1 }} & 
+  \tuple{ 1,2 } & \tuple{ 1,3 } & \ldots\\ 
+\tuple{ 2,0 } & \tuple{ 2,1 } & 
+  \mathbf{\tuple{ 2,2 }} & \tuple{ 2,3 } & \ldots\\ 
+\tuple{ 3,0 } & \tuple{ 3,1 } & \tuple{ 3,2 } &
+  \mathbf{\tuple{ 3,3 }} & \ldots\\ 
 \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
 \end{array}
 \]
-The subset consisting of the pairs lying on the diagonal, $I=\{\langle
-0,0 \rangle, \langle 1,1 \rangle,\langle 2,2 \rangle,\ldots\}$, is the
+The subset consisting of the pairs lying on the diagonal, $\{\tuple{
+0,0 }, \tuple{ 1,1 }, \tuple{ 2,2 }, \dots\}$, is the
 \emph{identity relation on}~$\mathbb{N}$. (Since the identity
-relation is popular, let's define $I_{X}=\{\langle x,x \rangle:x\in
-X\}$ for any set $X$.) The subset of all pairs lying above the
-diagonal, $L=\{\langle 0,1 \rangle,\langle 0,2 \rangle,\ldots,\langle
-1,2 \rangle,\langle 1,3 \rangle,\ldots,\langle 2,3 \rangle,\langle 2,4
-\rangle,\ldots\}$ is the \emph{less than} relation, i.e., $Lnm$ iff
-$n<m$. The subset of pairs below the diagonal, $G=\{\langle 1,0
-\rangle,\langle 2,0 \rangle,\langle 2,1 \rangle,\langle 3,0
-\rangle,\langle 3,1 \rangle,\langle 3,2 \rangle,\ldots\}$ is the
+relation is popular, let's define $\Id{X}=\Setabs{\tuple{ x,x }}{x \in
+X}$ for any set $X$.) The subset of all pairs lying above the
+diagonal, $L = \{\tuple{ 0,1 },\tuple{ 0,2 },\ldots,\tuple{
+1,2 }, \tuple{ 1,3 }, \dots, \tuple{ 2,3 }, \tuple{ 2,4
+},\ldots\}$ is the \emph{less than} relation, i.e., $Lnm$ iff
+$n<m$. The subset of pairs below the diagonal, $G=\{ \tuple{ 1,0
+},\tuple{ 2,0 },\tuple{ 2,1 }, \tuple{ 3,0
+},\tuple{ 3,1 },\tuple{ 3,2 }, \dots\}$ is the
 \emph{greater than} relation, i.e., $Gnm$ iff $n>m$. The union of $L$
 with $I$, $K=L\cup I$, is the \emph{less than or equal to} relation:
-$Kmn$ iff $n\le m$. Similarly, $H=G\cup I$ is the \emph{greater than
+$Knm$ iff $n \le m$. Similarly, $H=G \cup I$ is the \emph{greater than
   or equal to relation.} $L$, $G$, $K$, and $H$ are special kinds of
 relations called \emph{orders}. $L$ and $G$ have the property that no
 number bears $L$ or $G$ to itself (i.e., for all $n$, neither $Lnn$
 nor $Gnn$). Relations with this property are called
 \emph{antireflexive}, and, if they also happen to be orders, they are
 called \emph{strict orders.}
+\end{ex}
 
+\begin{explain}
 Although orders and identity are important and natural relations, it
 should be emphasized that according to our definition \emph{any}
 subset of $X^{2}$ is a relation on~$X$, regardless of how unnatural or
-contrived it seems. In particular, $\emptyset$is a relation on any set
+contrived it seems. In particular, $\emptyset$ is a relation on any set
 (the \emph{empty relation}, which no pair of elements bears), and
-$X^{2}$itself is a relation on $X$ as well (one which every pair
-bears). But also something like $E=\Setabs{\langle
-  n,m\rangle}{n>5\text{ or }m\times n\ge34}$ counts as a relation.
-\end{ex}
+$X^{2}$~itself is a relation on $X$ as well (one which every pair
+bears). But also something like $E=\Setabs{\tuple{n, m}}{n>5 \text{ or
+  } m \times n \ge 34}$ counts as a relation.
+\end{explain}
+
+\begin{prob}
+List the !!{element}s of the relation $\subseteq$ on the set
+$\Pow{\{a, b, c\}}$.
+\end{prob}
+
 \end{document}

@@ -1,0 +1,89 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: bounded-minimization
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{bmi}
+\olsection{Bounded Minimization}
+
+
+\begin{prop}
+If $R(x, \vec z)$ is primitive recursive, so is the function $m_R(y,
+\vec{z})$ which returns the least~$x$ less than $y$ such that
+$R(x,\vec{z})$ holds, if there is one, and 0 otherwise.  We will write
+the function~$m_R$ as
+\[
+\bmin{x < y}{R(x, \vec{z})},
+\]
+\end{prop}
+
+\begin{proof}
+Note than there can be no~$x < 0$ such that $R(x, \vec{z})$ since
+there is no $x < 0$ at all.  So $m_R(x, 0) = 0$.
+
+In case the bound is $y + 1$ we have three cases: (a) There is an $x <
+y$ such that $R(x, \vec{z})$, in which case $m_R(y+1, \vec{z}) =
+m_R(y, \vec{z})$. (b) There is no such~$x$ but $R(y, \vec{z})$ holds, then
+$m_R(y+1, \vec{z}) = y$. (c) There is no $x < y+1$ such that $R(x,
+\vec{z})$, then $m_R(y+1,\vec{z}) = 0$. So,
+\begin{align*}
+m_R(0, \vec{z}) & = 0\\
+m_R(y+1, \vec{z}) & = 
+\begin{cases}
+m_R(y, \vec{z}) & \text{if $\lexists[x < y][R(x, \vec{z})]$} \\
+y & \text{otherwise, provided $R(y, \vec{z})$}\\
+0 & \text{otherwise.}
+\end{cases}
+\end{align*}
+\end{proof}
+
+\begin{explain}
+The choice of ``$0$ otherwise'' is somewhat arbitrary. It is in fact
+even easier to recursively define the function~$m'_R$ which returns
+the least $x$ less than $y$ such that $R(x,\vec z)$ holds, and $y+1$
+otherwise.  When we use $\fn{min}$, however, we will always know that
+the least $x$ such that $R(x, \vec z)$ exists and is less
+than~$y$. Thus, in practice, we will not have to worry about the
+possibility that if $\bmin{x<y}{R(x, \vec{z})} = 0$ we do not know if that
+value indicates that $R(0, \vec z)$ or that for no $x < y$, $R(x, \vec
+z)$. As with bounded quantification, $\bmin{x \leq y}{\dots}$
+can be understood as $\bmin{x < y + 1}{\dots}$.
+\end{explain}
+
+All this provides us with a good deal of machinery to show that
+natural functions and relations are primitive recursive. For example,
+the following are all primitive recursive:
+\begin{enumerate}
+\item The relation ``$x$ divides $y$'', written $x \mid y$, defined by
+\[
+x \mid y \defiff \lexists[z \leq y][(x \cdot z) = y].
+\]
+
+\item The relation $\fn{Prime}(x)$, which holds iff $x$ is prime,
+  defined by
+\[
+\fn{Prime}(x) \defiff (x \geq 2 \land \lforall[y \leq x][(y \mid x \lif y
+  = 1 \lor y = x))].
+\]
+\item The function $\fn{nextPrime(x)}$, which returns the first prime
+  number larger than $x$, defined by
+\[
+  \fn{nextPrime(x)} = 
+  \bmin{y \leq x\fac+1}{(y > x \land \fn{Prime}(y))}
+\]
+Here we are relying on Euclid's proof of the fact that there is always
+a prime number between $x$ and $x\fac+1$.
+
+\item The function $p(x)$, returning the $x$th prime, defined by $p(0)
+  = 2, p(x+1) = \fn{nextPrime}(p(x))$. For convenience we will write
+  this as $p_x$ (starting with 0; i.e.\ $p_0=2$).
+\end{enumerate}
+
+\begin{prob}
+Define integer division $d(x, y)$ using bounded minimization.
+\end{prob}
+
+\end{document}

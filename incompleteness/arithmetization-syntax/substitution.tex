@@ -1,0 +1,52 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: substitution
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{sub}
+\olsection{Substitution}
+
+\begin{prop}
+There is a primitive recursive function $\fn{Subst}(x, y, z)$ with the property that
+\[
+\fn{Subst}(\Gn{!A}, \Gn{t}, \Gn{x}) = \Gn{\Subst{!A}{t}{x}}
+\]
+\end{prop}
+
+\begin{proof}
+Let us suppose that the predicate $\fn{FreeOcc}(x, z, i)$, which holds
+if the $i$-th symbols of the formula with G\"odel number~$x$ is a free
+occurrence of the variable with G\"odel number~$z$, is primitive
+recursive.  We can then define a function $\fn{Subst}'$ by primitive
+recursion as follows:
+
+% Also need to ensure that y is free for z in x as well.
+\begin{align*}
+\fn{Subst}'(0, x, y, z) & = \emptyseq \\
+\fn{Subst}'(i + 1, x, y, z) & =
+\begin{cases}
+\fn{Subst}'(i, x, y, z) \concat y & \text{if $\fn{FreeOcc}(x, z, i+1)$} \\
+\fn{append}(\fn{Subst}'(i, x, y, z), (x)_{i+1}) & \text{otherwise.}
+\end{cases}
+\end{align*}
+$\fn{Subst}(x, y, z)$ can now be defined as $\fn{Subst}'(\len{x}, x, y, z)$.
+\end{proof}
+
+\begin{prob}
+Show that the relation $\fn{FreeOcc}(x, z, i)$, which holds if the
+$i$-th symbols of the formula with G\"odel number~$x$ is a free
+occurrence of the variable with G\"odel number~$z$, is primitive
+recursive.
+\end{prob}
+
+\begin{prob}
+Show that $\fn{FreeFor}(x, y, z)$, which holds iff the term with
+G\"odel number~$y$ is !!{free for} the variable with G\"odel
+number~$z$ in the the formula with G\"odel number~$x$, is primitive
+recursive.
+\end{prob}
+
+\end{document}

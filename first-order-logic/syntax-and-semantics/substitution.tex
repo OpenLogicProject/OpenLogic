@@ -10,19 +10,97 @@
 
 \olsection{Substitution}
 
+\begin{defn}[Substitution in a term]
+We define $\Subst{s}{t}{x}$, the result of \emph{substituting} $t$
+for every occurrence of~$x$ in $s$, recursively:
+\begin{enumerate}
+\item \indcase{s}{c}{$\Subst{\indfrm}{t}{x}$ is just $s$.}
 
-\begin{defn}[Substitution of a term for a !!{variable}]
-If $!A$ is a !!{formula}, $x$ is a !!{variable}, and $t$ is a term, $A(x/t)$
-is the result of replacing all free occurrences of $x$ in $!A$ with
-$t$. Substitution may be vacuous ($x$ need not occur in $!A$).
+\item \indcase{s}{y}{$\Subst{\indfrm}{t}{x}$ is also just~$s$,
+  provided $y$ is a variable other than~$x$.}
+
+\item \indcase{s}{x}{$\Subst{\indfrm}{t}{x}$ is~$t$.}
+
+\item\indcase{s}{\Atom{f}{t_1, \dots, t_n}}{$\Subst{\indfrmp}{t}{x}$ is
+  $\Atom{f}{\Subst{t_1}{t}{x}, \dots, \Subst{t_n}{t}{x}}$.}
+\end{enumerate}
 \end{defn}
 
-\begin{defn}[Substitution of a term for a term]
-If $!A$ is a !!{formula} and $t_1$, $t_2$ are terms, $!A(t_1/t_2)$ is
-the result of replacing all occurrences of $t_1$ in $!A$ with $t_2$
-and relabelling instances of $\lforall[t_1]$/$\lexists[t_1]$ as
-$\lforall[t_2]$/$\lexists[t_2]$. Again, substitution may be vacuous.
+\begin{defn}
+A term~$t$ is \emph{!!{free for}} $x$ in $!A$ if none of the free occurrences
+of~$x$ in $!A$ occur in the scope of a quantifier that binds a
+variable in~$t$.
 \end{defn}
 
+\begin{defn}[Substitution in a !!{formula}]
+If $!A$ is a !!{formula}, $x$ is a !!{variable}, and $t$ is a term
+!!{free for}~$x$ in $!A$, then $\Subst{!A}{t}{x}$ is the result of substituting
+$t$ for all free occurrences of $x$ in~$!A$.
+\begin{enumerate}
+\item \indcase{!A}{\Atom{P}{t_1,\dots,
+    t_n}}{$\Subst{\indfrm}{t}{x}$ is $\Atom{P}{\Subst{t_1}{t}{x},
+    \dots, \Subst{t_n}{t}{x}}$.}
+
+\item \indcase{!A}{\eq[t_1][t_2]}{$\Subst{\indfrmp}{t}{x}$ is
+  $\Subst{t_1}{t}{x} = \Subst{t_2}{t}{x}$.}
+
+\tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\Subst{\indfrmp}{t}{x}$ is
+    $\lnot \Subst{!B}{t}{x}$.}}{}
+
+\tagitem{prvAnd}{\indcase{!A}{(!B \land
+    !C)}{$\Subst{\indfrmp}{t}{x}$ is $(\Subst{!B}{t}{x} \land
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvOr}{\indcase{!A}{(!B \lor
+    !C)}{$\Subst{\indfrmp}{t}{x}$ is $(\Subst{!B}{t}{x} \lor
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvIf}{\indcase{!A}{(!B \lif
+    !C)}{$\Subst{\indfrmp}{t}{x}$ is $(\Subst{!B}{t}{x} \lif
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvIff}{\indcase{!A}{(!B \liff
+    !C)}{$\Subst{\indfrmp}{t}{x}$ is $(\Subst{!B}{t}{x} \liff
+    \Subst{!C}{t}{x})$.}}{}
+
+\tagitem{prvAll}{
+\indcase{!A}{\lforall[y][!B]}{$\Subst{\indfrmp}{t}{x}$
+    is $\lforall[y][\Subst{!B}{t}{x}]$, provided $y$ is a variable
+    other than $x$; otherwise $\Subst{\indfrmp}{t}{x}$
+    is just $\indfrm$.}}{}
+
+\tagitem{prvEx}{
+\indcase{!A}{\lexists[y][!B]}{$\Subst{\indfrmp}{t}{x}$
+    is $\lexists[y][\Subst{!B}{t}{x}]$, provided $y$ is a variable
+    other than $x$; otherwise $\Subst{\indfrmp}{t}{x}$
+    is just $\indfrm$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+Note that substitution may be vacuous: If $x$ does not occur in $!A$
+at all, then $\Subst{!A}{t}{x}$ is just~$!A$.
+
+The restriction that $t$ must be !!{free for}~$x$ in~$!A$ is necessary to
+exclude cases like the following. If $!A \ident \lexists[y][x < y]$
+and $t \ident y$, then $\Subst{!A}{t}{y}$ would be $\lexists[y][y <
+  y]$. In this case the free variable $y$ is ``captured'' by the
+quantifier $\lexists[y]$ upon substitution, and that is undesirable.
+For instance, we would like it to be the case that whenever
+$\lforall[x][!B]$ holds, so does $\Subst{!B}{t}{x}$. But consider
+$\lforall[x][\lexists[y][x < y]]$ (here $!B$ is $\lexists[y][x <
+  y]$). It is sentence that is true about, e.g., the natural numbers:
+for every number~$x$ there is a number~$y$ greater than it. If we
+allowed $y$ as a possible substitution for~$x$, we would end up with
+$\Subst{!B}{y}{x} \ident \lexists[y][y < y]$, which is false. We
+prevent this by requiring that none of the free variables in~$t$ would
+end up being bound by a quantifier in~$!A$.
+\end{explain}
+
+We often use the following convention to avoid cumbersume notation: If
+$!A$ is a formula with a free !!{variable}~$x$, we write $!A(x)$ to
+indicate this. When it is clear which $!A$ and $x$ we have in mind,
+and $t$ is a term (assumed to be free for $x$ in $!A(x)$), then we
+write $!A(t)$ as short for $\Subst{!A(x)}{t}{x}$.
 
 \end{document}

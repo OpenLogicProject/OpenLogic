@@ -8,50 +8,77 @@
 \begin{document}
 
 \olfileid{sfr}{fun}{kind}
-\olsection{Kinds of functions}
+\olsection{Kinds of Functions}
 
 \begin{defn}
-A function $f : X \rightarrow Y$ is \emph{onto} iff $Y$ is also the range of $f$.
+A function $f \colon X \rightarrow Y$ is \emph{!!{surjective}} iff $Y$
+is also the range of~$f$, i.e., for every $y \in Y$ there is at least
+one $x \in X$ such that~$f(x) = y$.
 \end{defn}
 
 \begin{explain}
-If you want to show that a function is onto, then you need to show that every object in the codomain can be the output of the function given some input or other.
+If you want to show that a function is !!{surjective}, then you need
+to show that every object in the codomain is the output of the
+function given some input or other.
 \end{explain}
 
 \begin{defn}
-A function $f : X \rightarrow Y$ is \emph{one-to-one} iff for each $x$ in $X$ there is at most one $y$ in $Y$ such $f(x)=y$.
+A function $f \colon X \rightarrow Y$ is \emph{!!{injective}} iff for
+each $y \in Y$ there is at most one $x \in X$ such that~$f(x) = y$.
 \end{defn}
 
 \begin{explain}
-Any function pairs each input with a unique output. A one-to-one function has a unique input for each possible output. If a function is one-to-one then its inverse is also a function, whereas the inverse of a many-to-one function is a relation but not a function. If you want to show that a function $f$ is one-to-one, you need to show that for any element $y$ of the codomain, if $f(x)=y$ and $f(w)=y$, then $x=w$.
+Any function pairs each input with a unique output. !!^a{injective}
+function has a unique input for each possible output. If you want to
+show that a function $f$ is !!{injective}, you need to show that for
+any element $y$ of the codomain, if $f(x)=y$ and $f(w)=y$, then $x=w$.
 
-A function which is neither one-to-one, nor onto, is the constant function $f: \mathbb{N} \rightarrow \mathbb{N}$ where $f(x) = 1$.
+A function which is neither !!{injective}, nor !!{surjective}, is the
+constant function $f\colon \Nat \rightarrow \Nat$ where $f(x) = 1$.
     
-A function which is both one-to-one and onto is the identity function $f: \mathbb{N} \rightarrow \mathbb{N}$ where $f(x) = x$.
+A function which is both !!{injective} and !!{surjective} is the
+identity function $f\colon \Nat \rightarrow \Nat$ where $f(x) = x$.
 
-The successor function $f: \mathbb{N} \rightarrow \mathbb{N}$ where $f(x) = x+1$ is one-to-one, but not onto.
+The successor function $f \colon \Nat \rightarrow \Nat$ where $f(x) =
+x+1$ is !!{injective}, but not !!{surjective}.
 
-The function $f(x) = \left\{
-                                                \begin{array}{ll}
-                                                  \frac{x}{2}, & \hbox{if $x$ is even;} \\
-                                                  \frac{x+1}{2}, & \hbox{if $x$ is odd.}
-                                                \end{array}
-                                              \right.$
-
-is onto, but not one-to-one.
+The function 
+\[
+f(x) = 
+\begin{cases}
+  \frac{x}{2} & \text{if $x$ is even} \\
+  \frac{x+1}{2} & \text{if $x$ is odd.}
+\end{cases}
+\]
+is !!{surjective}, but not !!{injective}.
 
 \end{explain}
 
 \begin{defn}
-A function \emph{on} a set $W$ is a function $f : X \rightarrow Y$ such that $X\subseteq W$. A \emph{partial} function on a set $W$ is $f : X \rightarrow Y$ such that $X\subset W$. 
-\end{defn}
-
-\begin{defn}
-A \emph{bijection} between $X$ to $Y$ is a function $f : X \rightarrow Y$ which is both onto and one-to-one.
+A function $f \colon X \to Y$ is \emph{!!{bijective}} iff it is both
+!!{surjective} and !!{injective}.  We call such a function
+\article{bijection} \emph{!!{bijection}} from $X$ to~$Y$ (or between
+$X$ and~$Y$).
 \end{defn}
 
 \begin{prob}
-Show that the inverse of any bijection is also a bijection.
+Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
+!!{injective}, then $g \circ f \colon X \to Z$ is !!{injective}.
+\end{prob}
+
+\begin{prob}
+Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
+!!{surjective}, then $g \circ f \colon X \to Z$ is !!{surjective}.
+\end{prob}
+
+\begin{prob}
+A function $g \colon Y \to X$ is the \emph{inverse} of a function $f
+\colon X \to Y$ if $f(g(y)) = y$ and $g(f(x)) = x$ for all $x \in X$
+and $y \in Y$.
+
+Show that if $f$ is bijective, such a function~$g$ exists, i.e.,
+define such a function and show that it is a function. Then show that
+it is also bijective.
 \end{prob}
 
 \end{document}

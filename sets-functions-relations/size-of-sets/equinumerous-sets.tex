@@ -1,0 +1,104 @@
+% Part:sets-functions-relations
+% Chapter: sets
+% Section: equinumerous-sets
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{set}{equ}
+
+\olsection{Equinumerous Sets}
+
+\begin{intro}
+We have an intuitive notion of ``size'' of sets, which works fine for
+finite sets. But what about infinite sets? If we want to come up with
+a formal way of comparing the sizes of two sets of \emph{any} size, it
+is a good idea to start with defining when sets are the same size.
+Let's say sets of the same size are \emph{equinumerous}. We want the
+formal notion of equinumerosity to correspond with our intuitive
+notion of ``same size,'' hence the formal notion ought to satisfy the
+following properties:
+
+\begin{description}
+\item[Reflexivity:] Every set is equinumerous with itself.
+\item[Symmetry:] For any sets $X$ and $Y$, if $X$ is equinumerous with
+  $Y$, then $Y$ is equinumerous with $X$.
+\item[Transitivity:] For any sets $X, Y$, and $Z$, if $X$ is
+  equinumerous with $Y$ and $Y$ is equinumerous with $Z$, then $X$ is
+  equinumerous with $Z$.
+\end{description}
+
+In other words, we want equinumerosity to be an
+\emph{equivalence relation}.
+\end{intro}
+
+\begin{defn}
+A set $X$ is \emph{equinumerous} with a set $Y$ if and only if there
+is a total bijection $f$ from $X$ to $Y$ (that is, $f \colon X
+\to Y$).
+\end{defn}
+
+\begin{prop} 
+Equinumerosity defines an equivalence relation.
+\end{prop}
+
+\begin{proof} Let $X, Y$, and $Z$ be sets.
+
+\begin{description}
+
+\item[Reflexivity:] Using the identity map $1_X \colon X \rightarrow
+  X$, where $1_X (x) = x$ for all $x \in X$, we see
+  that $X$ is equinumerous with itself (clearly, $1_X$ is bijective).
+
+\item[Symmetry:] Suppose that $X$ is equinumerous with $Y$. Then there
+  is a bijection $f\colon X \rightarrow Y$. Since $f$ is bijective,
+  its inverse $f^{-1}$ is also a bijection. Since $f$ is !!{surjective},
+  $f^{-1}$ is total. Hence, $f^{-1}\colon Y \rightarrow X$ is a total
+  !!{bijection} from $Y$ to~$X$, so $Y$ is also equinumerous with $X$.
+
+\item[Transitivity:] Suppose that $X$ is equinumerous with $Y$ via the
+  total bijection~$f$ and that $Y$ is equinumerous with $Z$ via the
+  total bijection~$g$. Then the composition of $g \circ f \colon X
+  \rightarrow Z$ is a total bijection, and $X$ is thus equinumerous
+  with $Z$.
+\end{description}
+Therefore, equinumerosity is an equivalence relation by the given definition.
+\end{proof}
+
+\begin{thm}
+Suppose $X$ and $Y$ are equinumerous. Then $X$ is !!{enumerable} if
+and only if $Y$ is.
+\end{thm}
+
+\begin{proof}
+Let $X$ and $Y$ be equinumerous.  Suppose that $X$ is
+!!{enumerable}. Then there is a possibly partial, !!{surjective}
+function $f\colon \Nat \to X$. Since $X$ and $Y$ are equinumerous,
+there is a total bijection $g\colon X \to Y$. Claim: $g \circ f \colon
+\Nat \rightarrow Y$ is !!{surjective}. Clearly, $g \circ f$ is a
+function (since functions are closed under composition). To see $g
+\circ f$ is !!{surjective}, let $y \in Y$. Since $g$ is
+!!{surjective}, there is an $x \in X$ such that $g(x) = y$. Since $f$
+is !!{surjective}, there is an $n \in \Nat$ such that $f(n) =
+x$. Hence,
+\[ 
+(g \circ f)(n) = g(f(n)) = g(x) = y 
+\]
+and thus $g \circ f$ is !!{surjective}. Since $g \circ f\colon \Nat
+\to Y$ is !!{surjective}, it is an enumeration of~$Y$, and so $Y$~is
+!!{enumerable}.
+\end{proof}
+
+\begin{prob}
+Show that if $X$ is equinumerous with $U$ and and $Y$ is equinumerous
+with $V$, and the intersections $X \cap Y$ and $U \cap V$ are empty,
+then the unions $X \cup Y$ and $U \cup V$ are equinumerous.
+\end{prob}
+
+\begin{prob}
+Given an enumeration of a set $X$, show that if $X$ is not finite then
+it is equinumerous with the positive integers~$\Int^+$.
+\end{prob}
+
+\end{document}
