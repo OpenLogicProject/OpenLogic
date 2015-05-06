@@ -12,11 +12,11 @@
 \DeclareDocumentCommand \Sat { t{/} m m o } {
   \IfBooleanTF{#1}{
     % negated
-    \IfNoValueTF {#4} 
+    \IfNoValueTF {#4}
         { \not\models_{\Struct #2} #3 }
         { \not\models_{\Struct #2} #3 [#4]}}{
     % not negated
-    \IfNoValueTF {#4} 
+    \IfNoValueTF {#4}
         { \models_{\Struct #2} #3 }
         { \models_{\Struct #2} #3 [#4] }}
 }

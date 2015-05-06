@@ -13,12 +13,12 @@ Let's consider the halting problem again. As temporary
 notation, let us write $\gn{\cfind{x}(y)}$ for $\tuple{x, y}$; think of
 this as representing a ``name'' for the value $\cfind{x}(y)$. With this
 notation, we can reword one of our proofs that the halting problem is
-undecidable. 
+undecidable.
 
 Question: is there a computable function $h$, with the
-following property?  For every $x$ and $y$,
+following property? For every $x$ and $y$,
 \[
-h(\gn{\cfind{x}(y)}) = 
+h(\gn{\cfind{x}(y)}) =
 \begin{cases}
 1 & \text{if $\cfind{x}(y) \defined$} \\
 0 & \text{otherwise.}
@@ -27,7 +27,7 @@ h(\gn{\cfind{x}(y)}) =
 
 Answer: No; otherwise, the partial function
 \[
-g(x) \simeq 
+g(x) \simeq
 \begin{cases}
 0 & \text{if $h(\gn{\cfind{x}(x)}) = 0$} \\
 \text{undefined} & \text{otherwise}
@@ -35,14 +35,14 @@ g(x) \simeq
 \]
 would be computable, and so have some index~$e$. But then we have
 \[
-\cfind{e}(e) \simeq 
+\cfind{e}(e) \simeq
 \begin{cases}
 0 & \text{if $h(\gn{\cfind{e}(e)}) = 0$} \\
 \text{undefined} & \text{otherwise,}
 \end{cases}
 \]
 in which case $\cfind{e}(e)$ is defined if and only if it isn't, a
-contradiction. 
+contradiction.
 
 Now, take a look at the equation with $\cfind{e}$. There is an instance of
 self-reference there, in a sense: we have arranged for the value of
@@ -62,7 +62,7 @@ theorem.
 The following statements are equivalent:
 \begin{enumerate}
 \item For every partial computable function $g(x,y)$, there is an
-  index~$e$ such that for every~$y$, 
+  index~$e$ such that for every~$y$,
 \[
 \cfind{e}(y) \simeq g(e,y).
 \]
@@ -86,10 +86,10 @@ $(2) \Rightarrow (1)$: Given $g$, use the $s$-$m$-$n$ theorem to get $f$ such
 that for every $x$ and~$y$, $\cfind{f(x)}(y) \simeq g(x,y)$. Use (2) to
 get an index~$e$ such that
 \begin{align*}
-\cfind{e}(y) & = \cfind{f(e)}(y) \\ 
+\cfind{e}(y) & = \cfind{f(e)}(y) \\
 & = g(e,y).
 \end{align*}
-This concludes the proof. 
+This concludes the proof.
 \end{proof}
 
 \begin{explain}
@@ -145,7 +145,7 @@ Then for every $y$, we have
 & \simeq g(\fn{diag}(\gn{l}),y) \\
 & \simeq g(e, y),
 \end{align*}
-as required. 
+as required.
 \end{proof}
 
 \begin{explain}
@@ -187,7 +187,7 @@ string $x$ repeatedly, $y$ times. Then the ``program''
 getinput(y); print(diag('getinput(y); print(diag(x), y)'), y)
 \end{verbatim}
 \end{quote}
-prints itself out $y$ times, on input $y$. Replacing the 
+prints itself out $y$ times, on input $y$. Replacing the
 $\fn{getinput}$---$\fn{print}$---$\fn{diag}$ skeleton by an
 arbitrary funtion $g(x,y)$ yields
 \begin{quote}

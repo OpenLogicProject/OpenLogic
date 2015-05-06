@@ -13,7 +13,7 @@ When it comes to primitive recursion, we finally need to do some
 work. We will have to proceed in stages. As before, on the assumption
 that we already have terms $\num{g}$ and $\num{h}$ representing functions
 $g$ and~$h$, respectively, we want a term $\num{f}$ representing the
-function~$f$ defined by 
+function~$f$ defined by
 \begin{align*}
 f(0, \vec z) & = g(\vec z) \\
 f(x+1, \vec z) & = h(z, f(x,\vec z), \vec z).
@@ -50,7 +50,7 @@ and~$N$, $D(M,N)(\num{0}) \red M$ and $D(M,N)(\num{1}) \red N$.
 \end{lem}
 
 \begin{proof}
-First, define the lambda term $K$ by 
+First, define the lambda term $K$ by
 \[
 K(y) = \lambd[x][y].
 \]
@@ -63,7 +63,7 @@ Now define $D(x,y,z)$ by $D(x,y,z) = z (K(y))x$. Then we have
 D(M,N,\num 0) & \red \num 0 (K(N)) M \red M \text{ and}\\
 D(M,N,\num 1) & \red \num 1 (K(N)) M \red K(N) M \red N,
 \end{align*}
-as required. 
+as required.
 \end{proof}
 
 The idea is that $D(M,N)$ represents the pair $\tuple{M, N}$, and if
@@ -85,7 +85,7 @@ F(\num{n+1}) & \equiv H(\num{n}, F(\num{n}))
 for every natural number~$n$. The idea is roughly to compute sequences
 of \emph{pairs}
 \[
-\tuple{\num 0, F(\num 0)}, \tuple{\num 1, F(\num 1)}, \dots, 
+\tuple{\num 0, F(\num 0)}, \tuple{\num 1, F(\num 1)}, \dots,
 \]
 using numerals as iterators. Notice that the first pair is just
 $\tuple{\num 0, G}$. Given a pair $\tuple{\num{n}, F(\num{n})}$, the
@@ -97,7 +97,7 @@ The details are as follows. Define $T(u)$ by
 \[
 T(u) = \tuple{S((u)_0), H((u)_0,(u)_1)}.
 \]
-Now it is easy to verify that for any number~$n$, 
+Now it is easy to verify that for any number~$n$,
 \[
 T(\tuple{\num{n}, M}) \red \tuple{\num{n+1}, H(\num{n}, M)}.
 \]
@@ -106,7 +106,7 @@ As suggested above, given $G$ and $H$, define~$F(u)$ by
 F(u) = (u(T,\tuple{\num 0, G}))_1.
 \]
 In other words, on input~$\num{n}$, $F$ iterates $T$ $n$ times on
-$\tuple{\num 0, G}$, and then returns the second component.  To start
+$\tuple{\num 0, G}$, and then returns the second component. To start
 with, we have
 \begin{enumerate}
 \item $\num{0} (T, \tuple{\num 0, G}) \equiv \tuple{\num{0}, G}$
@@ -129,7 +129,7 @@ F(\num{n+1}) & \red (\num{n+1}(T, \tuple{\num 0, G}))_1 \\
 Here we have used the induction hypothesis on the second-to-last
 line. For the first clause, we have
 \begin{align*}
-\num{n+1} (T, \tuple{\num 0, G}) & 
+\num{n+1} (T, \tuple{\num 0, G}) &
 \equiv T(\num{n} (T, \tuple{\num 0, G})) \\
 & \equiv T( \tuple{\num{n}, F(\num{n})}) \\
 & \equiv \tuple{\num{n+1}, H(\num{n}, F(\num{n}))} \\

@@ -30,12 +30,12 @@ Here are some examples of primitive recursive functions:
 \fn{pred}(0) = 0, \quad \fn{pred}(x+1) = x
 \]
 
-\item Truncated subtraction, $x \tsub y$, defined by 
+\item Truncated subtraction, $x \tsub y$, defined by
 \[
 x \tsub 0 = x, \quad x \tsub (y+1) = \fn{pred}(x \tsub y)
 \]
 
-\item Maximum, $\fn{max}(x,y)$, defined by 
+\item Maximum, $\fn{max}(x,y)$, defined by
 \[
 \fn{max}(x,y) \defis x + (y \tsub x)
 \]
@@ -54,7 +54,7 @@ Show that \[f(x, y) =
 \begin{prob}
 Show that $d(x, y) = \lfloor x/y \rfloor$ (i.e., division, where you
 disregard everything after the decimal point) is primitive
-recursive. When $y = 0$, we stipulate $d(x, y) = 0$.  Give an explicit
+recursive. When $y = 0$, we stipulate $d(x, y) = 0$. Give an explicit
 definifion of $d$ using primitive recursion and composition. You will
 have detour through an axiliary function---you cannot use recursion on
 the arguments $x$ or $y$ themselves.
@@ -64,12 +64,12 @@ The set of primitive recursive functions is further closed under the
 following two operations:
 \begin{enumerate}
 \item Finite sums: if $f(x,\vec z)$ is primitive recursive, then so is the
-function 
+function
 \[
 g(y,\vec z) \defis \sum_{x = 0}^y f(x,\vec z).
 \]
 \item Finite products: if $f(x,\vec z)$ is primitive recursive, then so is the
-function 
+function
 \[
 h(y,\vec z) \defis \prod_{x = 0}^y f(x,\vec z).
 \]
