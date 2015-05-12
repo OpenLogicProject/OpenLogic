@@ -17,7 +17,7 @@ all the quantified !!{formula}s in~$\Gamma$ true.  In order to
 guarantee this, we use a trick due to Leon Henkin.  In essence, the
 trick consists in expanding the language by infinitely many constants
 and adding, for each !!{formula} with one free !!{variable} $!A(x)$ a
-formula of the form 
+formula of the form
 \iftag{prvEx}
       {$\lexists[x][!A] \lif !A(c)$}
       {$\lnot\lforall[x][!A] \lif \lnot !A(c)$},
@@ -72,10 +72,10 @@ consistent set~$\Gamma'$.
 \begin{proof}
 Given a consistent set of sentences~$\Gamma$ in a language~$\Lang{L}$,
 expand the language by adding !!a{denumerable} set of new
-!!{constant}s to form~$\Lang{L'}$. By the previous Lemma, $\Gamma$ is still
-consistent in the richer language. Further, let $!D_i$ be as in the
+!!{constant}s to form~$\Lang{L'}$.  By the previous Lemma, $\Gamma$ is still
+consistent in the richer language.  Further, let $!D_i$ be as in the
 previous definition: then $\Gamma \cup \{!D_1, !D_2, \dots\}$ is
-saturated by construction. Let
+saturated by construction.  Let
 \begin{align*}
 \Gamma_0 & = \Gamma \\
 \Gamma_{n+1} & = \Gamma_n \cup \{!D_{n+1} \}
@@ -88,10 +88,10 @@ set~$\Gamma_n$ is consistent.
 The induction basis is simply the claim that $\Gamma_0 = \Gamma$ is
 consistent, which is the hypothesis of the theorem.  For the induction
 step, suppose that $\Gamma_{n-1}$ is consistent but $\Gamma_n =
-\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent. Recall that $!D_n$~is
+\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent.  Recall that $!D_n$~is
 \iftag{prvEx}
 {$\lexists[x_{n}][!A_{n}(x_n)] \lif !A_{n}(c_{n})$}
-{$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$}. 
+{$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$}.
 where $!A(x)$ is a !!{formula} of $\Lang{L'}$ with only the
 variable~$x_n$ free and not containing any !!{constant}s~$c_i$ where
 $i \ge n$.
@@ -110,24 +110,24 @@ If $\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent, then $\Gamma_{n-1}
 \Gamma_{n-1} \Proves !A_n(c_n)
 \]}
 Here $c_n$ does not occur in $\Gamma_{n-1}$ or $!A_n(x_n)$ (remember,
-it was added only with~$!D_n$). By
+it was added only with~$!D_n$).  By
 \olref[seq][prv]{thm:strong-generalization}, from
 \iftag{prvEx}
-{$\Gamma \Proves \lnot !A_n(c_n)$} 
-{$\Gamma \Proves !A_n(c_n)$}, 
-we obtain 
+{$\Gamma \Proves \lnot !A_n(c_n)$}
+{$\Gamma \Proves !A_n(c_n)$},
+we obtain
 \iftag{prvEx}
 {$\Gamma \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
 {$\Gamma \Proves \lforall[x_n][!A_n(x_n)]$}.
-Thus we have that both 
+Thus we have that both
 \iftag{prvEx}
-{$\Gamma_{n-1} \Proves \lexists[x_n][!A_n]$ and 
+{$\Gamma_{n-1} \Proves \lexists[x_n][!A_n]$ and
 $\Gamma_{n-1} \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
-{$\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n(x_n)]$ and 
+{$\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n(x_n)]$ and
 $\Gamma_{n-1} \Proves \lforall[x_n][!A_n(x_n)]$},
-so $\Gamma$ itself is inconsistent. 
+so $\Gamma$ itself is inconsistent.
 \iftag{prvEx}
-{(Note that 
+{(Note that
 \iftag{prvAll}
 {$\lforall[x_n][\lnot !A_n(x_n)] \Proves
   \lnot\lexists[x_n][!A_n(x_n)]$}
@@ -135,7 +135,7 @@ so $\Gamma$ itself is inconsistent.
   $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)]$ and
   $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)] \Proves
   \lnot\lexists[x_n][!A_n(x_n)]$}.)}{}
-Contradiction: $\Gamma_{n-1}$ was supposed to be consistent. Hence
+Contradiction: $\Gamma_{n-1}$ was supposed to be consistent.  Hence
 $\Gamma_n \cup \{ !D_n\}$ is consistent.
 \end{proof}
 
