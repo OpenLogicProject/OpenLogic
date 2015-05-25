@@ -27,6 +27,7 @@
     are in the domain of $p$, then $p(\Assign f M (a_1, \dots,a_n))
     = \Assign f N (p(a_1), \ dots, p(a_n))$.
   \end{enumerate}
+  That $p$ is finite means that $\dom{p}$ is finite.
 \end{defn}
 
 Notice that the empty map $\emptyset$ is a partial isomorphism
@@ -55,8 +56,8 @@ between any two !!{structure}s.
 \end{thm}
 
 \begin{proof}
-  Since $\Struct{M}$ and $\Struct{N}$ are !!{enumerable}, let $\Domain A =
-  \{a_0, a_1, \ldots \}$ and $\Domain B = \{b_0, b_1, \ldots \}$. Starting
+  Since $\Struct{M}$ and $\Struct{N}$ are !!{enumerable}, let $\Domain{M} =
+  \{a_0, a_1, \ldots \}$ and $\Domain{N} = \{b_0, b_1, \ldots \}$. Starting
   with an arbitrary $p_0 \in I$, we define an increasing
   sequence of partial isomorphisms $p_0 \subseteq p_1 \subseteq p_2
   \subseteq \cdots$ as follows:
@@ -129,7 +130,7 @@ how many times the relevant partial isomorphisms can be extended.
   Given a !!{structure} $\Struct{M}$, let $\Domain M^{<\omega}$ be the set of
   all finite sequences over $\Domain{M}$. We use !!{variable}s $\mathbf{a},
   \mathbf{b}, \mathbf{c}, \ldots$ to range over finite sequences of
-  elements. If $\mathbf{a} \in \Domain A^{<\omega}$ and $a \in \Domain A$, then
+  elements. If $\mathbf{a} \in \Domain{M}^{<\omega}$ and $a \in \Domain{M}$, then
   $\mathbf{a}a$ represents the concatenation of $\mathbf{a}$ with $a$.
 \end{defn}
 
@@ -142,8 +143,8 @@ how many times the relevant partial isomorphisms can be extended.
      $\mathbf{b}$ satisfy the same atomic !!{formula}s in  $\Struct{M}$
      and  $\Struct{N}$; i.e., if $s_1(x_i) = a_i$ and $s_2(x_i) =
      b_i$ and $!A$ is atomic with all !!{variable}s among
-     $x_1,\ldots,x_n$, then $\Sat{M}{!A}[s_1]$ if and
-     only if $\Sat{N}{!A}[s_2]$.
+     $x_1$, \dots,~$x_n$, then $\Sat{M}{!A}[s_1]$ if and
+     only if~$\Sat{N}{!A}[s_2]$.
    \item $I_{n+1} (\mathbf{a},\mathbf{b})$ if and only if for every
      $a\in A$ there is a $b\in B$ such that $I_n
      (\mathbf{a}a,\mathbf{b}b)$, and vice-versa.
@@ -153,8 +154,8 @@ how many times the relevant partial isomorphisms can be extended.
 
 \begin{defn}
   Write $\Struct{M} \approx_n \Struct{N}$ if
-  $I_n(\varnothing,\varnothing)$ holds of $\Struct{M}$ and
-  $\Struct{N}$ (where $\varnothing$ is the empty sequence).
+  $I_n(\emptyseq,\emptyseq)$ holds of $\Struct{M}$ and
+  $\Struct{N}$ (where $\emptyseq$ is the empty sequence).
 \end{defn}
 
 \begin{thm}\ollabel{thm:b-n-f}

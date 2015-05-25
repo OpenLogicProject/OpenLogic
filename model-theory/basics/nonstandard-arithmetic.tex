@@ -10,107 +10,110 @@
 \section{Non-standard Models of Arithmetic}
 
 \begin{defn}
-  Let $\Lang{L}_N$ be the language of arithmetic, comprising a
-  !!{constant} $\mathbf{0}$, a 2-place !!{predicate} $<$, a 1-place
-  !!{function} $s$, and 2-place !!{function}s $+$ and
-  $\times$. 
-  \begin{enumerate}
-  \item The \emph{standard model} of arithmetic is the !!{structure}
-    $\Struct{N}$ for $\Lang{L}_N$ having $\Nat = \{ 0, 1, 2,
-    \dots\}$ and interpreting $\mathbf{0}$ as $0$, $<$ as the
-    less-than relation over $\Nat$, and $s$, $+$ and $\times$ as
-    successor, addition, and multiplication over $\Nat$,
-    respectively.
-  \item \emph{True arithmetic} is the theory
-    $\Theory{N})$.
-  \end{enumerate}
+Let $\Lang{L_N}$ be the language of arithmetic, comprising a
+!!{constant} $\Obj{0}$, a 2-place !!{predicate} $<$, a 1-place
+!!{function} $\prime$, and 2-place !!{function}s $+$ and $\times$.
+\begin{enumerate}
+\item The \emph{standard model} of arithmetic is the !!{structure}
+  $\Struct{N}$ for $\Lang{L_N}$ having $\Nat = \{ 0, 1, 2, \dots\}$
+  and interpreting $\Obj{0}$ as $0$, $<$ as the less-than relation
+  over $\Nat$, and $\prime$, $+$ and $\times$ as successor, addition,
+  and multiplication over $\Nat$, respectively.
+\item \emph{True arithmetic} is the theory $\Theory{N})$.
+\end{enumerate}
 \end{defn}
 
-When working in $\Lang{L}_n$ we abbreviate each term of
-the form $s \cdots s\mathbf{0}$, with $n$ applications of the
-successor function to $\mathbf{0}$, as $\mathbf{n}$.
+When working in $\Lang{L_N}$ we abbreviate each term of
+the form $\Obj{0}^{\prime\dots\prime}$, with $n$ applications of the
+successor function to $\Obj{0}$, as~$\num{n}$.
 
 \begin{defn}
-  A !!{structure} $\Struct{M}$ for $\Lang{L}_N$ is \emph{standard} if
-  and only $\Struct{N} \iso \Struct{M}$.
+A !!{structure} $\Struct{M}$ for $\Lang{L_N}$ is \emph{standard} if
+and only $\Struct{N} \iso \Struct{M}$.
 \end{defn}
 
 \begin{thm}\ollabel{thm:non-std}
-  There are non-standard !!{enumerable} models of true arithmetic.
+There are non-standard !!{enumerable} models of true arithmetic.
 \end{thm}
 
 \begin{proof}
-  Expand $\Lang{L}_N$ by introducing a new constant, $c$, and
-  consider the theory 
-  \[
-  \Theory{N}) \cup \{\mathbf{n} < c
-  : n \in \Nat \}.
-  \]
-  The theory is finitely satisfiable, so by compactness it has a model
-  $\Struct{M}$, which can be taken to be !!{enumerable} by the Downward
-  L\"owenheim-Skolem theorem. Where $M$ is the domain of
-  $\Struct{M}$, let $\Struct{M}$ interpret the non-logical
-  constants of $\Lang{L}$ as $\mathbf{z} \in M$, ${\prec} \subseteq
-  M^2$, $* : M \to M$, and $\oplus, \otimes : M^2 \to M$. For
-  each $x \in M$, we write $x^*$ for the element of $M$ obtained from
-  $x$ by application of $*$.
+Expand $\Lang{L_N}$ by introducing a new !!{constant}~$c$, and
+consider the theory
+\[
+\Theory{N} \cup \Setabs{\num{n} < c}{n \in \Nat}.
+\]
+The theory is finitely satisfiable, so by compactness it has a model
+$\Struct{M}$, which can be taken to be !!{enumerable} by the Downward
+L\"owenheim-Skolem theorem. Where $\Domain{M}$ is the domain of
+$\Struct{M}$, let $\Struct{M}$ interpret the non-logical constants of
+$\Lang{L}$ as $\mathbf{z} = \Assign{\Obj{0}}{M} \in \Domain{M}$, ${\prec} =
+\Assign{<}{M} \subseteq M^2$, $* = \Assign{\prime}{M} \colon
+\Domain{M} \to \Domain{M}$, and $\oplus = \Assign{+}{M}, \otimes =
+\Assign{\times}{M} \colon \Domain{M}^2 \to \Domain{M}$. For each $x
+\in \Domain{M}$, we write $x^*$ for the element of $\Domain{M}$
+obtained from $x$ by application of~$*$.
 
-  Now, if $h$ were an isomorphism of $\Struct{N}$ and $\Struct{M}$,
-  there would be $n \in \Nat$ such that $h(n) = c^\Struct{M}$.  So let
-  $s$ be any assignment in $\Struct{N}$ such that $s(x) = n$ (we use
-  $s$ both for the successor symbol in $\Lang{L}_N$ and the
-  assignment: no confusion should arise). Then
-  $\Sat{N}{\eq[\mathbf{n}][x]}[s]$; by the proof of \olref[iso]{thm:isom},
-  also $\Sat{M}{\eq[\mathbf{n}][x]}[h\circ s]$, so that $\Assign{c}{M}
-  = \mathbf{z}^{*\cdots *}$ (with $*$ iterated $n$ times). But this is
-  impossible since by assumption $\Sat{M}{\mathbf{n} < c}$ and $\prec$
-  is irreflexive. So $\Struct{M}$ is non-standard.
+Now, if $h$ were an isomorphism of $\Struct{N}$ and $\Struct{M}$,
+there would be $n \in \Nat$ such that $h(n) = \Assign{c}{M}$.  So let
+$s$ be any assignment in $\Struct{N}$ such that $s(x) = n$. Then
+$\Sat{N}{\eq[\num{n}][x]}[s]$; by the proof of \olref[iso]{thm:isom},
+also $\Sat{M}{\eq[\num{n}][x]}[h \circ s]$, so that $\Assign{c}{M} =
+\mathbf{z}^{*\cdots *}$ (with $*$ iterated $n$ times). But this is impossible
+since by assumption $\Sat{M}{\num{n} < c}$ and $\prec$ is
+irreflexive. So $\Struct{M}$ is non-standard.
 \end{proof}
 
-Since the non-standrd model $\Struct{M}$ from \olref{thm:non-std} is
+\begin{prob}
+A relation $R$ over a set $X$ is \emph{well-founded} if and only if
+there are no infinite descending chains in~$R$, i.e., if there are no
+$x_0$, $x_1$, $x_2$,~\dots in $X$ such that $\dots x_2Rx_1Rx_0$.  Assuming
+Zermelo-Fr\"ankel set theory~$ZF$, is consistent, show that there are
+non-well-founded models of $ZF$, i.e., models $\mathfrak{M}$ such that
+$\dots x_2 \in x_1 \in x_0$.
+\end{prob}
+
+Since the non-standard model $\Struct{M}$ from \olref{thm:non-std} is
 elementarily equivalent to the standard one, a number of properties of
 $\Struct{M}$ can be derived. The rest of this section is devoted to
 such a task, which will allow us to obtain a precise characterization
 of !!{enumerable} non-standard models of $\Theory{N})$.
 
-
 \begin{enumerate}
-\item No member of $M$ is $\prec$-less than itself: the sentence
+\item No member of $\Domain{M}$ is $\prec$-less than itself: the sentence
   $\lforall[x][\lnot x < x]$ is true in $\Struct{N}$ and therefore in
   $\Struct{M}$.
 \item By a similar reasoning we obtain that $\prec$ is a \emph{linear
-    ordering} of $M$, i.e., a total, irreflexive, transitive relation
-  on $M$. 
-\item The element $\mathbf{z}$ is the $\prec$-least element of $M$.
-\item Any member of $M$ is $\prec$-less than its $*$-successor and
-  $x^*$ is the $\prec$-least member of $M$ greater than $x$.
-\item $\Struct{M}$ contains an initial segment (of $\prec$)
-  isomorphic to $\Nat$: $\mathbf{z}, \mathbf{z}^*,
-  \mathbf{z}^{**}, \dots$, which we call the \emph{standard part} of
-  $M$. Any other member of $M$ is \emph{non-standard}. There must be
-  non-standard members of $M$, or else the function $h$ from
-  the proof of \olref{thm:non-std} is an isomorphism.  We use
-  $n, m, \dots$ as !!{variable}s ranging on this standard part of
-  $\Struct{M}$.
+    ordering} of $\Domain{M}$, i.e., a total, irreflexive, transitive relation
+  on $\Domain{M}$. 
+\item The element $\mathbf{z}$ is the $\prec$-least element of $\Domain{M}$.
+\item Any member of $\Domain{M}$ is $\prec$-less than its $*$-successor and
+  $x^*$ is the $\prec$-least member of $\Domain{M}$ greater than $x$.
+\item $\Struct{M}$ contains an initial segment (of $\prec$) isomorphic
+  to $\Nat$: $\mathbf{z}, \mathbf{z}^*, \mathbf{z}^{**}, \dots$, which
+  we call the \emph{standard part} of $\Domain{M}$. Any other member
+  of $\Domain{M}$ is \emph{non-standard}. There must be non-standard
+  members of $\Domain{M}$, or else the function $h$ from the proof of
+  \olref{thm:non-std} is an isomorphism.  We use $n, m, \dots$ as
+  !!{variable}s ranging on this standard part of $\Struct{M}$.
 \item Every non-standard element is greater than any standard one;
   this is because for every $n \in \Nat$,
   \[
-  \Sat{N}{\lforall[z][(\lnot(\eq[z][\mathbf{0}] \lor
-  \dots \lor \eq[z][\mathbf{n}]) \lif \mathbf{n} < z)]},
+  \Sat{N}{\lforall[z][(\lnot(\eq[z][\Obj{0}] \lor
+  \dots \lor \eq[z][\num{n}]) \lif \num{n} < z)]},
   \]
-  so if $z \in M$ is different from all the standard elements, it must
-  be \emph{greater} than all of them. 
-\item Any member of $M$ other than $\mathbf{z}$ is the $*$-successor
-  of some unique element of $M$, denoted by $^*x$. If $x = y^*$ then
-  both $x$ and $y$ are standard if one of them is (and both
-  non-standard if one of them is).
-\item Define an equivalence relation $\approx$ over $M$ by saying
-  that $x \approx y$ if and only if for some \emph{standard} $n$,
-  either $x \oplus n = y$ or $y \oplus n =x$. In other words, $x
+  so if $z \in \Domain{M}$ is different from all the standard
+  elements, it must be \emph{greater} than all of them.
+\item Any member of $\Domain{M}$ other than $\mathbf{z}$ is the
+  $*$-successor of some unique element of $\Domain{M}$, denoted by
+  $^*x$. If $x = y^*$ then both $x$ and $y$ are standard if one of
+  them is (and both non-standard if one of them is).
+\item Define an equivalence relation $\approx$ over $\Domain{M}$ by
+  saying that $x \approx y$ if and only if for some \emph{standard}
+  $n$, either $x \oplus n = y$ or $y \oplus n =x$. In other words, $x
   \approx y$ if and only if $x$ and $y$ are a finite distance
   apart. If $n$ and $m$ are standard then $n \approx m$. Define the
-  \emph{block} of $x$ to be the equivalence class $[x] = \{y: x
-  \approx y \}$. 
+  \emph{block} of $x$ to be the equivalence class $[x] = \Setabs{y}{x
+  \approx y}$.
 \item Suppose that $x \prec y$ where $x \not\approx y$; then either
   $x^* \prec y$ or $x^* = y$; the latter is impossible because it
   implies $x \approx y$, so $x \prec y$. Similarly, if $x \prec y$ and
@@ -132,25 +135,24 @@ of !!{enumerable} non-standard models of $\Theory{N})$.
   then there is a $x \prec y$ where $x$ is also non-standard and $x
   \not\approx y$. Proof: in the standard model $\Struct{N}$, every
   number is divisible by two, possibly with remainder one. By
-  elementary equivalence, for every $y \in M$ there is $x \in M$ such
-  that either $x \oplus x = y$ or  $x \oplus x \oplus
+  elementary equivalence, for every $y \in \Domain{M}$ there is $x \in
+  \Domain{M}$ such that either $x \oplus x = y$ or $x \oplus x \oplus
   \mathbf{z}^*= y$. If $x$ were standard, then so would be $y$; so $x$
-  is non-standard. And $x \not\approx y$ for if $x \oplus n = y$
-  for some standard $n$ then (say) $x \oplus n = x \oplus x$, whence
-  $x = n$ by the cancellation law for addition (which holds in
-  $\Struct{N}$ and therefore in $\Struct{M}$ as well), and $x$
-  would be standard after all. (Similarly if  $x \oplus x \oplus
-  \mathbf{z}^*= y$.)
+  is non-standard. And $x \not\approx y$ for if $x \oplus n = y$ for
+  some standard $n$ then (say) $x \oplus n = x \oplus x$, whence $x =
+  n$ by the cancellation law for addition (which holds in $\Struct{N}$
+  and therefore in $\Struct{M}$ as well), and $x$ would be standard
+  after all. (Similarly if $x \oplus x \oplus \mathbf{z}^*= y$.)
 \item By a similar argument, there is no greatest block. 
 \item The ordering of the blocks is dense: if $[x]$ is less than $[y]$
   (where $x \not\approx y$), then there is a block $[z]$ distinct from
-  both that is between them. Suppose $x \prec y$. As before, $x
-  \oplus y$ is divisible by two (possibly with remainder) so there
-  is a $u \in M$ such that either $x \oplus y = u \oplus u$ or
-  $x \oplus y = u \oplus u \oplus \mathbf{z}^*$. The element
-  $u$ is the average of $x$ and $y$, and so is between them. Assume $x
-  \oplus y = u \oplus u$ (the other case being similar): if $u
-  \approx x$ then for some standard $n$:
+  both that is between them. Suppose $x \prec y$. As before, $x \oplus
+  y$ is divisible by two (possibly with remainder) so there is a $u
+  \in \Domain{M}$ such that either $x \oplus y = u \oplus u$ or $x
+  \oplus y = u \oplus u \oplus \mathbf{z}^*$. The element $u$ is the
+  average of $x$ and $y$, and so is between them. Assume $x \oplus y =
+  u \oplus u$ (the other case being similar): if $u \approx x$ then
+  for some standard $n$:
   \[
   x \oplus y = x \oplus n \oplus x \oplus n,
   \]
@@ -161,16 +163,50 @@ of !!{enumerable} non-standard models of $\Theory{N})$.
 The non-standard blocks  are therefore ordered like the rationals:
 they form a !!{enumerable} linear ordering without endpoints.  It follows
 that any two !!{enumerable} non-standard models, $\Struct{M}_1$ and
-$\Struct{M}_2$, of true arithmetic are isomorphic. Indeed, an
+$\Struct{M_2}$, of true arithmetic are isomorphic. Indeed, an
 isomorphism $h$ can be defined as follows: the standard parts
-of $\Struct{M}_1$ and $\Struct{M}_2$ are isomorphic to the standard
+of $\Struct{M_1}$ and $\Struct{M_2}$ are isomorphic to the standard
 model $\Struct{N}$ and hence to each other. The blocks making up
 the non-standard part are themselves ordered like the rationals and
 therefore by \olref[dlo]{thm:cantorQ} are isomorphic; an isomorphism
 of the blocks can be extended to an isomorphism \emph{within} the
 blocks by matching up arbitrary elements in each, and then taking the
-image of the successor of $x$ in $\Struct{M}_1$ to be the successor
-of the image of $x$ in $\Struct{M}_2$. 
+image of the successor of $x$ in $\Struct{M_1}$ to be the successor
+of the image of $x$ in $\Struct{M_2}$. 
 
+
+\begin{prob} 
+Let $\Lang{L}$ be the first-order language containing $<$ as its only
+predicate symbol (besides $\eq$), and let $\Struct{N} = (\Nat,
+<)$. All the finite or cofinite subsets of $\Struct{N}$ are
+definable. Show that these are the \emph{only} definable subsets of
+$\Struct{N}$.
+ 
+(Hint: First, let $\Obj{prc}(x,y)$ be the
+$\mathcal{L}$-formula abbreviating ``$x$ is the immediate predecessor
+of $y$:''
+\[
+x<y \land \lnot \lexists[z][(x<z \land z < y)].
+\]
+Now, to any definable subset of $\Struct{N}$ there corresponds a
+formula $!A(x)$ in $\Lang{L}$. For any such $!A$,
+consider the sentence $!D$:
+\[
+\lexists[x][\lforall[y][\lforall[z][((x<y \land x<z \land \Obj{prc}(y,z)
+  \land !A(y)) \lif !A(z))]]].
+\]
+Show that $\Sat{N}{!D}$ if and only if the subset of
+$\Struct{N}$ defined by $!A$ is either finite or cofinite.
+
+Now, let $\Struct{M}$ be a non-standard model elementarily
+equivalent to $\Struct{N}$.  If $a \in \Domain{M}$ is
+non-standard, let $b, c \in \Domain{M}$ be greater than $a$, and
+let $b$ be the immediate predecessor of~$c$. Then there is an
+automorphism $h$ of $\Domain{M}$ such that $h(b)=c$
+(why?). Therefore, if $b$ satisfies $!A$, so does $c$ (why?). It
+follows that $!D$ is true in $\Struct{M}$, and hence also in
+$\Struct{N}$. But this implies that the subset of $\Struct{N}$
+defined by $!A$ is either finite or co-finite.
+\end{prob}
 
 \end{document}
