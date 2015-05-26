@@ -1,0 +1,76 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: undecidability-proof
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{und}{unp}
+\olsection{The Undecidability Proof}
+
+\begin{proof}
+We show that if first order logic without $\eq$ and terms is decidable then the halting problem is solvable.
+\begin{enumerate}
+\item We know that given input $n$ and a Turing machine $M$ we can effectively describe a set of sentences $\Delta$ and a sentence H (in the language of first order-logic with identity and terms) such that:
+
+$\Sat{\Delta}{H}$ if, and only if, $M$ halts of input $n$.
+
+So if $\Lang{L_T}$ is decidable (i.e., if I can decide whether $\Sat{\Delta}{H}$ or not) then the halting problem is solvable. We need to show that if there is a decision procedure for consequence in $\Lang{L_=}$ then the halting problem is solvable.
+
+Since $\Delta$ is finite, $\Sat{\Delta}{H}$  iff $\Sat{}{\Delta_\land \lif H}$, where $\Delta_\land$ is the sentence that results from conjoining all the members of $\Delta$ together.
+
+Next, there is a sentence B of $\Lang{L_=}$ that is valid iff $\Delta_\land \lif H$ is. In general, for any sentence $A$ of $\Lang{L_T}$ , there is a sentence of $\Lang{L_=}$ with the form $\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'$ which is equally valid. So, $\Sat{}{A}$ if, and only if, $\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$.
+
+We construct $\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$ as follows:
+
+Given a sentence $A$ of $\Lang{L_T}$, first "normalize" $A$ to form $A*$. We normalize a sentence by converting it to an equivalent sentence in which all names and function symbols appear only as arguments for the logical constant identity. This means that all other predicates have only variables as their arguments.
+
+Take $\Atom{P}{f}{a}$ for example. We normalize $\Atom{P}{f}{a}$ in two steps. First, we take the name $a$ out of the scope of the predicate P as follows:
+
+$\lexists{x}{\eq{x}{a} \land \Atom{P}{f}{x}}$
+
+Second, we take the function symbol out of the scope of the predicate $P$ as follows:
+
+$\lexists{x}{\eq{x}{a} \land \lexists{y}{\eq{fx}{y} \land \Atom{P}{y}}}$
+
+Notice that $ A \simeq A*$.
+
+Then from the normalized $A*$, form $A'$ by replacing all subformulas of the form $\eq{ft}{\delta}$ with the subformula $R{t}{\delta}$, where $R$ is a 2-place predicate which does not appear in $A*$. 
+
+Since $f$ is a 1-place function, whereas R is a binary relation, and there is no guarantee that R is functional, i.e. that there is only one object d such that 
+
+To continue the example, $\lexists{x}{\eq{x}{a} \land \lexists{y}{\eq{fx}{y} \land \Atom{P}{y}}}$ becomes $\lexists{x}{\eq{x}{a} \land \lexists{y}{\Atom{R}{fx}{y} \land \Atom{P}{y}}}$.
+
+Now form the sentence $\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'$. Quantifier thing.
+
+\item We now want to prove that for any sentence $A$ of $L_T$, $\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$ if, and only if, $\Sat{}{A}$. We will prove this in its contrapositive form.
+
+Right to left: Suppose that $\Sat/{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$. So there is some !!{structure} $\Domain{M}$ such that  $\Sat{M}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}$ and $\Sat/{M}{A'}$.
+
+Based on the !!{structure} $\Domain{M}$, create a new !!{structure} $\Domain{M*}$ which is identical to $\Domain{M}$ except that we turn the predicate $R$ back into $\fn{f}$. That is, whatever functional relation is assigned to $R$ in $\Domain{M}$ should be assigned to $\fn{f}$ in $\Domain{M*}$. Clearly, $\Sat/{M*}{A}$. We can give an inductive argument on the complexity of A to this effect. So, $\Sat/{}{A}$.
+
+Left to Right: Suppose $\Sat/{}{A}$. So there is some !!{structure} $\Domain{M}$ such that  $\Sat/{M}{A}$.
+
+Based on the !!{structure} $\Domain{M}$, create a new !!{structure} $\Domain{M'}$ which is identical to $\Domain{M}$ except that the functional relation assigned to $\fn{f}$ in $\Domain{M}$ is assigned to $R$ in $\Domain{M'}$. Since $R$ is assigned a functional relationship in $\Domain{M}$, $\Sat{M}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}$. But, clearly, $\Sat/{M}{A'}$ (again, we can give an inductive argument to this effect). So, $\Sat/{M}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$, and $\Sat/{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$.
+
+\item In general, $\Sat/{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$ if, and only if, $\Sat/{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}{A'}$. So, $\Sat{}{\Delta_\land \lif H}$ iff $\Sat/{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}{(\Delta_\land \lif H)'}$ (there is just one function symbol in $\Delta_\land$, H).
+
+Thus we can immediately conclude that if FOL with identity is decidable, then the halting problem is solvable. We know that $\Sat{\Delta_\land}{H}$ iff $\Sat{}{\Delta_\land \lif H}$, and that $\Sat{}{\Delta_\land \lif H}$ iff $\Sat/{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}{(\Delta_\land \lif H)'}$. So, if we have a decision procedure for consequence in $\Lang{L_=}$ then we can decide whether $\Delta_\land \lif H$ is valid or not, and thus whether $H$ is a consequence of $\Delta$ or not. It is then possible to determine whether a randomly chosen machine halts for a randomly chosen input or not.
+
+\item There is a sentence $C$ of $\Lang{L}$ which is valid just in case $\lforall{x}\lexists{y}{\Atom{R}{x}{y}} \lif (\Delta_\land \lif H)'$ is. In general, for any sentence $A$ of $\Lang{L_=}$ there is a sentence $\Lang{L_T}$ with the form $(E \land S) \lif A(=/E)$ which is equally valid - i.e., $\Sat{}{A}$ iff $(E \land S) \lif A(=/E)$.
+
+Construct $(E \land S) \lif A(=/E)$ as follows:
+\begin{itemize}
+	\item Let the sentence $E$ be: $\lforall{x}{\Atom{E}{x, x}}  \land  \lforall{x} \lforall{y}{(\Atom{E}{x, y} \lif \Atom{E}{y, x})}  \land  \lforall{x} \lforall{y} \lforall{z}{((\Atom{E}{x, y} \land \Atom{E}{y, z}) \lif \Atom{E}{x, z})}$. $E$ guarantees the equivalence relation.
+	\item Given a sentence $A$ of $\Lang{L_=}$, form $A(=/E)$ (i.e., replace the two-place logical constant = with a two-place predicate $E$ that does not already appear in $A$).
+	\item For each predicate $R$ in $A$, form $S_R$.
+	$S_R$ is $\lforall{x_1...x_n y_1...y_n}{((\Atom{E}{x_1, y_1} \land ... \land \Atom{E}{x_n, y_n}) \lif (\Atom{R}{x_1, x_n} \liff \Atom{R}{y_1, y_n}))}$. Each $S_R$ guarantees substitution holds when $\Atom{E}{t,\delta}$ holds.
+	\item Form $S$ by conjoining all of the $S_R$ sentences.
+\end{itemize}
+
+\item Step Five
+\end{enumerate}
+\end{proof}
+
+\end{document}
