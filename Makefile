@@ -21,6 +21,16 @@ all: open-logic-debug.pdf open-logic-complete.pdf
 
 everything: $(ALLPDFFILES) open-logic-config.pdf
 
+branches:
+	for branch in `git branch --list --no-column |grep -v master` ; do \
+		git checkout $$branch ;\
+		latexmk -pdf -dvi- -ps- open-logic-debug ;\
+		latexmk -pdf -dvi- -ps- open-logic-complete ;\
+		mkdir -p branches/$$branch ;\
+		cp open-logic-debug.pdf open-logic-complete.pdf branches/$$branch ;\
+	done 
+	git checkout master
+
 open-logic-config.pdf: open-logic-config.sty
 	grep -e "^%" -e "^$$" open-logic-config.sty | cut --bytes=3-|pandoc -f markdown -M date="`git log --format=format:"%ad %h" --date=short -1 open-logic-config.sty`" -o open-logic-config.pdf
 
