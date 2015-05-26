@@ -1,0 +1,75 @@
+% Part: computability
+% Chapter: tm-computations
+% Section: halting-problem
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{tur}{hal}
+\olsection{The Halting Problem}
+
+\begin{explain}
+We know, via a simple proof, that there are some functions that are not Turing-computable (i.e. computable by Turing machine).
+We can show that the set of all Turing-machines is enumerable. This follows from the fact that each Turing machine is described by a sequence of quadruples. Take the enumerably infinite vocabulary: $R$, $L$, $q_0$, $S_0$, $q_1$, $S_1$ (Check the language on this one)... Any Turing machine can be specified by some finite string of symbols from this alphabet (though not every finite string of symbols specifies a Turing machine). We know that the set of finite strings of symbols from an enumerably infinite alphabet is enumerable. This gives us an enumeration of the Turing machines (a subset of the finite strings):~$M_1$,~$M_2$,~$M_3$.
+
+The set of all functions is not enumerable. This follows immediately from the fact that not even the set of all functions of one argument from the positive integers to the set {0,1} is enumerable (is this an exercize?). If all functions were computable by some Turing machine we could enumerate the set of all functions. So there are some functions that are not Turing-computable. One such function is the halting function.
+\end{explain}
+
+\begin{defn} The function~$h$ is defined as
+\[
+h(n,m) =
+\begin{cases}
+  \text{0} & \text{if machine~$M_m$ does not halt for input n} \\
+  \text{1} & \text{if machine~$M_m$ halts for input n}
+\end{cases}
+\]
+\end{defn}
+
+\begin{defn}
+The \emph{Halting Problem} is the problem of determining (for any m, n) whether the Turing machine~$M_m$ halts for an input of n $\mid$s.
+\end{defn}
+
+\begin{explain}
+We show that~$h$ is not Turing-computable by showing that a related function,~$s$, is not Turing-computable. This proof relies on the fact that anything that can be computed by a Turing machine can be computed using just two symbols: $\TMblank$ and $\mid$, and the fact that two Turing machines can be "hooked" together to create a single machine (Maybe an example could go here).
+\end{explain}
+
+\begin{defn} The function~$s$ is defined as
+\[
+s(n) =
+\begin{cases}
+  \text{0} & \text{if machine~$M_n$ does not halt for input n} \\
+  \text{1} & \text{if machine~$M_n$ halts for input n}
+\end{cases}
+\]
+\end{defn}
+
+\begin{proof}
+We suppose, for contradiction, that the function~$s$ is Turing-computable.
+\begin{enumerate}
+	\item Suppose there is a Turing-machine that computes~$s$. Call it $S$. This machine can be hooked up to another machine $J$, where $J$ halts iff it is started on a blank tape.
+	\item $S-J$, the machine created from hooking $S$ to $J$, is a Turing-machine, so it is $M_n$ for some n (i.e., it appears in the enumeration).
+	\item Start $S-J$ on an input of n $\mid$s. There are two possibilities: either $S-J$ (i.e. $M_n$) halts or it does not halt.
+\begin{enumerate}
+	\item Case 1: Suppose $S-J$/$M_n$ halts for an input of n $\mid$s.
+	\item Then $s(n) = 1$
+	\item So $S$ halts with a $\mid$ on the tape.
+	\item So $J$ starts with a $\mid$ on the tape.
+	\item So $J$ does not halt.
+	\item So $S-J$/$M_n$ does not halt for an input of n $\mid$s.
+\end{enumerate}
+\begin{enumerate}
+	\item Case 2: Suppose $S-J$/$M_n$ does not halt for an input of n $\mid$s.
+	\item Then $s(n) = 0$
+	\item So $S$ halts with a blank tape.
+	\item S $J$ starts with a blank tape.
+	\item So $J$ halts.
+	\item So $S-J$/$M_n$ does halt for an input of n $\mid$s.
+\end{enumerate}
+\end{enumerate}
+
+Since any Turing machine which computed~$h$ would \emph{ipso facto} compute~$s$, it follows immediately that there can be no Turing machine which computes~$h$ either, and thus that no Turing machine can serve as a solution to the halting problem.
+\end{proof}
+
+
+\end{document}
