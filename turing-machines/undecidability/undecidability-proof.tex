@@ -10,215 +10,249 @@
 \olsection{The Undecidability Proof}
 
 \begin{proof}
-We show that if first order logic without $\eq$ and terms is decidable
-thenthe halting problem is solvable.
 \begin{enumerate}
-\item We know that given input $n$ and a Turing machine $\Struct M$ we can
-effectively describe a set of sentences $\Delta$ and a sentence H (in the
+\item We know that given input $w$ and a Turing machine $M$ we can
+effectively describe a set of !!{sentence}s $\Atom{T}{M,w}$ and
+!!a{sentence} $\Atom{H}{M,w}$ (in the
 language of first order-logic with identity and terms) such that:
 
-$\Sat{\Delta}{H}$ if, and only if, $\Struct M$ halts of input $n$.
+$\Sat{T(M,w)}{\Atom{H}{M,w}}$ if, and only if, $M$ halts of input $w$.
 
 So if $\Lang{L_T}$ is decidable (i.e., if I can decide whether
-$\Sat{\Delta}{H}$ or not) then the halting problem is solvable. We need to
+$\Sat{}{\Atom{H}{M,w}}$ or not) then the halting problem is
+solvable. We need to
 show that if there is a decision procedure for consequence in $\Lang{L_=}$
 then the halting problem is solvable.
 
-Since $\Delta$ is finite, $\Sat{\Delta}{H}$ iff $\Sat{}{\Delta_\land \lif
-H}$, where $\Delta_\land$ is the sentence that results from conjoining all
-the members of $\Delta$ together.
+Since $\Atom{T}{M,w}$ is finite, $\Sat{T(M,w)}{ \Atom{H}{M,w} }$
+iff $\Sat{}{\Atom{T}{M,w}_\land \lif
+\Atom{H}{M,w}}$, where $\Atom{T}{M,w}_\land$ is the !!{sentence} that
+results from conjoining all
+the members of $\Atom{T}{M,w}$ together.
 
-Next, there is a sentence B of $\Lang{L_=}$ that is valid iff
-$\Delta_\land\lif H$ is. In general, for any sentence $A$ of $\Lang{L_T}$ ,there is a
-sentence of $\Lang{L_=}$ with the form
-$\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'$ which is equally valid.
-So,$\Sat{}{A}$ if, and only if,
-$\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$.
+Next, there is a !!{sentence} $!B$ of $\Lang{L_=}$ that is valid iff
+$\Atom{T}{M,w}_\land\lif \Atom{H}{M,w}$ is. In general, for any
+!!{sentence} $!A$ of $\Lang{L_T}$ ,there is
+!!a{sentence} of $\Lang{L_=}$ with the form
+$\lforall[x]\lexists[y][\Atom{R}{x,y}\lif !A']$ which is equally valid.
+So,$\Sat{}{!A}$ if, and only if,
+$\Sat{}{\lforall[x]\lexists[!y][\Atom{R}{x,y}\lif !A']}$.
 
-We construct $\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$ as
+We construct $\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}\lif !A']}$ as
 follows:
 
-Given a sentence $A$ of $\Lang{L_T}$, first "normalize" $A$ to form $A*$.
-We normalize a sentence by converting it to an equivalent sentence in
-whichall names and function symbols appear only as arguments for the
-logical
-constant identity. This means that all other predicates have only
-variablesas their arguments.
+Given !!a{sentence} $!A$ of $\Lang{L_T}$, first "normalize" $!A$ to form
+$!A*$.
+We normalize !!a{sentence} by converting it to an equivalent !!{sentence}
+in
+which all names and !!{function}s appear only as arguments for the
+logical constant identity. This means that all other predicates have
+only !!{variable}s as their arguments.
 
-Take $\Atom{P}{f}{a}$ for example. We normalize $\Atom{P}{f}{a}$ in two
-steps. First, we take the name $a$ out of the scope of the predicate P as
-follows:
+Take $\Atom{P}{f,a}$ for example. We normalize $\Atom{P}{f,a}$ in two
+steps. First, we take the name $a$ out of the scope of the !!{predicate}
+$P$ as follows:
 
-$\lexists{x}{\eq{x}{a} \land \Atom{P}{f}{x}}$
+$\lexists[x][(\eq[x][a] \land \Atom{P}{f,x})]$
 
-Second, we take the function symbol out of the scope of the predicate $P$
-as follows:
+Second, we take the !!{function} out of the scope of the
+!!{predicate} $P$ as follows:
 
-$\lexists{x}{\eq{x}{a} \land \lexists{y}{\eq{fx}{y} \land \Atom{P}{y}}}$
+$\lexists[x][(\eq[x][a] \land \lexists[y][(\eq[fx][y] \land
+\Atom{P}{y}]))]$
 
-Notice that $ A \simeq A*$.
+Notice that $ !A \simeq !A*$.
 
-Then from the normalized $A*$, form $A'$ by replacing all subformulas of
-the form $\eq{ft}{\delta}$ with the subformula $R{t}{\delta}$, where $R$
-isa 2-place predicate which does not appear in $A*$.
+Then from the normalized $!A*$, form $!A'$ by replacing all
+!!{subformula}s of the form $\eq[ft][\delta]$ with the 
+!!{subformula} $\Atom{R}{t,\delta}$, where $R$
+is a 2-place !!{predicate} which does not appear in $!A*$.
 
-Since $f$ is a 1-place function, whereas R is a binary relation, and there
-is no guarantee that R is functional, i.e. that there is only one object d
-such that
+Since $f$ is a 1-place !!{function}, whereas $R$ is a binary relation, and
+there is no guarantee that $R$ is functional, i.e. that there is only one
+object d such that $\Sat{M}{\Subst{\Atom{R}{t,\delta}}{\delta}{d}}$.
+ What we need to do is force $R$ to be a functional relation, and this 
+is what $\lforall[x]\lexists[y][\Atom{R}{x,y}]$ does.
 
-To continue the example, $\lexists{x}{\eq{x}{a} \land
-\lexists{y}{\eq{fx}{y} \land \Atom{P}{y}}}$ becomes $\lexists{x}{\eq{x}{a}
-\land \lexists{y}{\Atom{R}{fx}{y} \land \Atom{P}{y}}}$.
+To continue the example, $\lexists[x][(\eq[x][a] \land
+\lexists[y][(\eq[fx][y] \land \Atom{P}{y}))]]$ becomes
+$\lexists[x][(\eq[x][a] \land \lexists[y][(\Atom{R}{fx,y} 
+\land \Atom{P}{y}))]]$.
 
-Now form the sentence $\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'$.
-Quantifier thing.
+Now form the !!{sentence} $\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'$.
 
-\item We now want to prove that for any sentence $A$ of $L_T$,
-$\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$ if, and only if,
-$\Sat{}{A}$. We will prove this in its contrapositive form.
+
+\item We now want to show that for any !!{sentence} $A$ of $L_T$,
+$\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$ if, and only if,
+$\Sat{}{!A}$. We will prove this in its contrapositive form.
 
 Right to left: Suppose that
-$\Sat/{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$. So there is some
+$\Sat/{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$. So there is some
 !!{structure} $\Struct M$ such that
-$\Sat{M}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}$ and $\Sat/{M}{A'}$.
+$\Sat{M}{\lforall[x]\lexists[y][\Atom{R}{x,y}]}$ and $\Sat/{M}{!A'}$.
 
 Based on the !!{structure} $\Struct M$, create a new !!{structure}
-$\Struct M*$ which is identical to $\Struct M$ except that we turn the
-predicate $R$ back into $\fn{f}$. That is, whatever functional relation is
+$\Struct M^*$ which is identical to $\Struct M$ except that we turn the
+!!{predicate} $R$ back into $\fn{f}$. That is, whatever functional
+relationis
 assigned to $R$ in $\Struct M$ should be assigned to $\fn{f}$ in
-$\Struct M*$. Clearly, $\Sat/{M*}{A}$. We can give an inductive argument
-on the complexity of A to this effect. So, $\Sat/{}{A}$.
+$\Struct M^*$. Clearly, $\Sat/{M^*}{!A}$. We can give an inductive
+argumenton the complexity of $!A$ to this effect. So, $\Sat/{}{!A}$.
 
-Left to Right: Suppose $\Sat/{}{A}$. So there is some !!{structure}
-$\Struct M$ such that $\Sat/{M}{A}$.
+Left to Right: Suppose $\Sat/{}{!A}$. So there is some !!{structure}
+$\Struct M$ such that $\Sat/{M}{!A}$.
 
 Based on the !!{structure} $\Struct M$, create a new !!{structure}
 $\Struct M'$ which is identical to $\Struct M$ except that the functional
 relation assigned to $\fn{f}$ in $\Struct M$ is assigned to $R$ in
 $\Struct M'$. Since $R$ is assigned a functional relationship in
-$\Struct M$, $\Sat{M}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}$. But,
-clearly, $\Sat/{M}{A'}$ (again, we can give an inductive argument to this
-effect). So, $\Sat/{M}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$,
-and$\Sat/{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$.
+$\Struct M$, $\Sat{M}{\lforall[x]\lexists[y][\Atom{R}{x,y}]}$. But,
+clearly, $\Sat/{M}{!A'}$ (again, we can give an inductive argument to this
+effect). So, $\Sat/{M}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$,
+and$\Sat/{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$.
 
-\item In general, $\Sat/{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$
-if, and only if, $\Sat/{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}{A'}$. So,
-$\Sat{}{\Delta_\land \lif H}$ iff
-$\Sat/{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}{(\Delta_\land \lif H)'}$
-(there is just one function symbol in $\Delta_\land$, H).
+\item In general, $\Sat/{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$
+if, and only if, $\Sat/{\lforall[x]\lexists[y][\Atom{R}{x,y}]}{!A'}$. So,
+$\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$ iff
+$\Sat/{\lforall[x]\lexists[y][\Atom{R}{x,y}]}{(\Atom{T}{M,w}_\land \lif
+\Atom{H}{M,w})'}$
+(there is just one !!{function} in $\Atom{T}{M,w}_\land,
+\Atom{H}{M,w}$).
 
-Thus we can immediately conclude that if FOL with identity is decidable,
-then the halting problem is solvable. We know that $\Sat{\Delta_\land}{H}$
-iff $\Sat{}{\Delta_\land \lif H}$, and that $\Sat{}{\Delta_\land \lif H}$
-iff $\Sat/{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}}{(\Delta_\land \lif
-H)'}$. So, if we have a decision procedure for consequence in $\Lang{L_=}$
-then we can decide whether $\Delta_\land \lif H$ is valid or not, and thus
-whether $H$ is a consequence of $\Delta$ or not. It is then possible to
+Thus we can immediately conclude that if FOL with !!{identity} is
+decidable,
+then the halting problem is solvable. We know that
+$\Sat{\Atom{T}{M,w}_\land}{\Atom{H}{M,w}}$
+iff $\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$, and that
+$\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$
+iff $\Sat/{\lforall[x]\lexists![y][\Atom{R}{x,y}]}{(\Atom{T}{M,w}_\land
+\lif\Atom{H}{M,w})'}$. So, if we have a decision procedure for consequence
+in
+$\Lang{L_=}$
+then we can decide whether $\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}$ is
+valid or not, and thus
+whether $\Atom{H}{M,w}$ is a consequence of $\Atom{T}{M,w}$ or not. It is
+then possible to
 determine whether a randomly chosen machine halts for a randomly chosen
 input or not.
 
-\item There is a sentence $C$ of $\Lang{L}$ which is valid just in case
-$\lforall{x}\lexists{y}{\Atom{R}{x}{y}} \lif (\Delta_\land \lif H)'$ is.
-Ingeneral, for any sentence $A$ of $\Lang{L_=}$ there is a sentence
-$\Lang{L_T}$ with the form $(E \land S) \lif A(=/E)$ which is equally
-valid- i.e., $\Sat{}{A}$ iff $(E \land S) \lif A(=/E)$.
+\item There is !!a{sentence} $!C$ of $\Lang{L}$ which is valid just in
+case$\lforall[x]\lexists[y][\Atom{R}{x,y}] \lif (\Atom{T}{M,w}_\land \lif
+\Atom{H}{M,w})'$ is.
+In general, for any !!{sentence} $!A$ of $\Lang{L_=}$ there is
+!!a{sentence}
+$\Lang{L_T}$ with the form $(!E \land !D) \lif !A(=/!E)$ which is equally
+valid- i.e., $\Sat{}{!A}$ iff $(!E \land !D) \lif !A(=/!E)$.
 
-Construct $(E \land S) \lif A(=/E)$ as follows:
+Construct $(!E \land !D) \lif !A(=/!E)$ as follows:
 \begin{itemize}
-\item Let the sentence $E$ be: $\lforall{x}{\Atom{E}{x, x}} \land
-\lforall{x} \lforall{y}{(\Atom{E}{x, y} \lif \Atom{E}{y, x})} \land
-\lforall{x} \lforall{y} \lforall{z}{((\Atom{E}{x, y} \land \Atom{E}{y, z})
-\lif \Atom{E}{x, z})}$. $E$ guarantees the equivalence relation.
-\item Given a sentence $A$ of $\Lang{L_=}$, form $A(=/E)$ (i.e., replace
-the two-place logical constant = with a two-place predicate $E$ that does
-not already appear in $A$).
-	\item For each predicate $R$ in $A$, form $S_R$.
-$S_R$ is $\lforall{x_1...x_n y_1...y_n}{((\Atom{E}{x_1, y_1} \land ...
-\land \Atom{E}{x_n, y_n}) \lif (\Atom{R}{x_1, x_n} \liff \Atom{R}{y_1,
-y_n}))}$. Each $S_R$ guarantees substitution holds when
-$\Atom{E}{t,\delta}$ holds.
-	\item Form $S$ by conjoining all of the $S_R$ sentences.
-\item Then, for any !!{sentence} $A$ of $\Lang{L_=}$, $\Sat{}{A}$ iff $(E
-\land S) \lif A(=/E)$
+\item Let the !!{sentence} $!E$ be: $\lforall[x][\Atom{!E}{x, x}] \land
+\lforall[x]\lforall[y][(\Atom{!E}{x, y} \lif \Atom{!E}{y, x})] \land
+\lforall[x]\lforall[y]\lforall[z][((\Atom{!E}{x, y} \land \Atom{!E}{y,
+z})
+\lif \Atom{!E}{x, z})]$. $!E$ guarantees the equivalence relation.
+\item Given !!a{sentence} $!A$ of $\Lang{L_=}$, form $!A(=/!E)$ (i.e.,
+replace
+the two-place logical !!{constant}~$\eq$ with a two-place !!{predicate}
+$!E$ that does
+not already appear in $!A$).
+	
+\item For each !!{predicate} $R$ in $!A$, form $!D_R$.
+$!D_R$ is $\lforall[x_1...x_n y_1...y_n][((\Atom{!E}{x_1, y_1} \land ...
+\land \Atom{!E}{x_n, y_n}) \lif (\Atom{R}{x_1, x_n} \liff \Atom{R}{y_1,
+y_n}))]$. Each $!D_R$ guarantees substitution holds when
+$\Atom{!E}{t,\delta}$ holds.
+
+\item Form $!D$ by conjoining all of the $!D_R$ !!{sentence}s.
+
+\item Then, for any !!{sentence} $!A$ of $\Lang{L_=}$, $\Sat{}{!A}$ iff
+$(!E
+\land !D) \lif !A(=/!E)$
 \end{itemize}
 
 We prove this in its contrapositive form.
 
-Left to right: Suppose $\Sat/{}{A}$.
-So there is some !!{structure} $\Struct M$ where $\Sat/{M}{A}$.
-Construct $\Struct M*$ which is just like $\Struct M$ except that $\Struct
-M* (E) = \Setabs{x,y}{x \eq y}$
-$E \land S$ is true in $\Struct M*$, since identity is an equivalence
-relation and substitution holds for it.
-But $A( \eq / E)$ will be false in $\Struct M*$ (this can be shown through
-induction).
-So, $\Sat/{M*}{(E \land S) \lif A(=/E)}$.
-So, $\Sat/{}{(E \land S) \lif A(=/E)}$.
+Left to right: Suppose $\Sat/{}{!A}$.
+So there is some !!{structure} $\Struct M$ where $\Sat/{M}{!A}$.
+Construct $\Struct M^*$ which is just like $\Struct M$ except that
+$\Struct{M^*} (!E) = \Setabs{x,y}{x \eq y}$.
 
-Right to left: Suppose $\Sat/{}{(E \land S) \lif A(=/E)}$.
-So there is some !!{structure} $\Struct M$ where $\Sat/{M}{(E \land S)
-\lifA(=/E)}$.
-So, $\Sat{M}{E \land S}$ and $\Sat/{M}{A( \eq / E}$.
-Since $\Sat{M}{E}$, M(E) is an equivalence relation. Call $\Struct{M} (E)
-~$
-Construct $\Struct M*$ as follows
+$!E \land !D$ is true in $\Struct M^*$, since !!{identity} is an
+equivalence relation and substitution holds for it.
+But $!A( \eq / !E)$ will be false in $\Struct M^*$ (this can be shown
+through induction).
+So, $\Sat/{M^*}{(!E \land !D) \lif !A(=/!E)}$.
+So, $\Sat/{}{(!E \land !D) \lif !A(=/!E)}$.
+
+Right to left: Suppose $\Sat/{}{(!E \land !D) \lif !A(=/!E)}$.
+So there is some !!{structure} $\Struct M$ where $\Sat/{M}{(!E \land !D)
+\lif !A(=/!D)}$.
+So, $\Sat{M}{!E \land !D}$ and $\Sat/{M}{!A(= / !E}$.
+Since $\Sat{M}{!E}$, $\Struct{M}(!E)$ is an equivalence relation. Call
+$\Struct{M} (E)
+\sim$.
+Construct $\Struct M^*$ as follows
 \begin{enumerate}
-\item The !!{domain} of $\Struct M*$ is the set of equivalence classes
+\item The !!{domain} of $\Struct M^*$ is the set of equivalence classes
 defined by $\sim$. In other words, where d and o are objects in $\Domain
-M,d \in [0] iff d \sim 0$, and if $\Domain{M}$ is $\Setabs{o_1, o_2, o_3,
-...}{}$ then $\Domain{M*}$ is $\Setabs{[o_1], [o_2], [o_3], ...}{}$.
-\item $\Struct M* (a_n) \eq [d]$ iff $\Struct M (a_n) \eq d$.
-\item For all !!{predicate}s $\Atom{R^n}$ if $\tuple{d_1,...,d_n} \in
-\Struct{M} (\Atom{R_n})$ then $\tuple{[d_1],...,[d_n]} \in \Struct{M*}
-(\Atom{R_n})$.
+M, d \in [0]$ iff $d \sim 0$, and if $\Domain{M}$ is $\{o_1, o_2, o_3,
+...\}$ then $\Domain{M^*}$ is $\{[o_1], [o_2], [o_3], ...\}$.
+\item $\Struct M^* (a_n) = [d]$ iff $\Struct M (a_n) \eq d$.
+\item For all !!{predicate}s $R^n$ if $\tuple{d_1,...,d_n} \in
+\Struct{M}(R_n)$ then $\tuple{[d_1],...,[d_n]} \in \Struct{M^*}
+(R_n)$.
 \end{enumerate}
-Thus, $\tuple{[d_1],[d_2]} \in \Struct{M*} (E)$ iff $\tuple{d_1,d_2} \in
-\Struct{M}(E)$.
-$\tuple{d_1,d_2} \in \Struct{M}(E)$ iff $d_1 \sim d_2$.
-$d_1 \sim d_2$ iff $[d_1] \eq [d_2]$
+Thus, $\tuple{[d_1],[d_2]} \in \Struct{M^*}(!E)$ iff $\tuple{d_1,d_2} \in
+\Struct{M}(!E)$.
+$\tuple{d_1,d_2} \in \Struct{M}(!E)$ iff $d_1 \sim d_2$.
+$d_1 \sim d_2$ iff $ \eq [[d_1]][[d_2]]$
+So, $\Struct{M^*}(!E) = \Setabs{x,y}{x \eq y}$.
 
-So, $\Struct{M*} (E) = \Setabs{x,y}{x \eq y}$
+So $\Sat/{M^*}{!A(=/!E)}$
 
-So $\Sat/{M*}{A(=/E)}$
+So $\Sat/{M^*}{!A}$
 
-So $\Sat/{M*}{A}$
+So $\Sat/{}{!A}$.
 
-So $\Sat/{}{A}$.
+\item So for any !!{sentence} $!A$ of $\Lang L_=$ there is a set $\{!E, !D
+\}$
+and a !!{sentence} $!A(=/!E)$ such that $\Sat{}{!A}$ iff $\Sat{\{ !E, !D
+\}}{!A(=/!E)}$.
 
-\item So for any sentence $A$ of $\Lang L_=$ there is a set $\{ E, S \}$
-and a sentence $A(=/E)$ such that $\Sat{}{A}$ iff $\Sat{\{ E, S \}
-}{A(=/E)}$.
+So in particular, there is a set $\{ !E, !D \}$ such that $\Sat{\{!E, !D\}
+}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land \lif
+\Atom{H}{M,w})'(=/!E)}$
+iff $\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land
+\lif \Atom{H}{M,w})'}$.
 
-So in particular, there is a set $\{ E, S \}$ such that $\Sat{\{ E, S\}
-}{\lforall{x}\lexists{y}{\Atom{R}{x,y}}\lif (\Delta_\land \lif H)'(=/E)}
-iff \Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x,y}}\lif (\Delta_\land \lif
-H)'}$.
+$\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land
+\lif\Atom{H}{M,w})'}$
+iff $\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$
 
-$\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x,y}}\lif (\Delta_\land \lif H)'}
-iff \Sat{}{\Delta_\land \lif H}$
+$\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$ iff
+$\Sat{\Atom{T}{M,w}}{\Atom{H}{M,w}}$
 
-$\Sat{}{\Delta_\land \lif H} iff \Sat{\Delta}{H}$
-
-$\Sat{\Delta}{H} iff M$ halts for input $n$.
+$\Sat{\Atom{T}{M,w}}{\Atom{H}{M,w}}$ iff $M$ halts for input $w$.
 
 So if there is a decision procedure for consequence in $\Lang L$ then the
-halting problem is solvable 9Them 5).
+halting problem is solvable.
 
 A quick look at this outline of the proof of the undecidability of FOL
 should reveal that we have now reached the final step of the proof.
 
 \begin{enumerate}
 \item First-order logic is decidable iff there is an effective mechanical
-method for determining whether a sentence is valid or not.
+method for determining whether a !!{sentence} is valid or not.
 \item The Church-Turing thesis: every function which is computable is
 Turing-computable.
-\item The function $h$ such that $h{m,m} = 1$ if the Turing machine
+\item The !!{function} $h$ such that $h(m,n) = 1$ if the Turing machine
 described by $m$ halts for an input of $n$ and $0$ otherwise is not
 Turing-computable.
 \item Via the Church-Turing thesis and 3, $h$ is not computable.
 \item If first-order logic is decidable then $h$ is computable.
 \item Therefore, first-order logic is not decidable.
 \end{enumerate}
+
 In addition, as the proof above has made clear, we can also conclude two
 corollaries:
 
@@ -230,9 +264,9 @@ Since all languages have a PET for consequence (the deductive system) we
 can also conclude that none of these language have a NET for consequence.
 
 In other words, while the deductive system will tell us that
-$\Sat{\Gamma}{A}$ in a finite amount of time, if $\Sat/{\Gamma}{A}$, there
-is no effective mechanical test that will tell us that $\Sat/{\Gamma}{A}$.
-
+$\Sat{\Gamma}{!A}$ in a finite amount of time, if $\Sat/{\Gamma}{A}$,
+thereis no effective mechanical test that will tell us that
+$\Sat/{\Gamma}{A}$.
 \end{enumerate}
 \end{proof}
 

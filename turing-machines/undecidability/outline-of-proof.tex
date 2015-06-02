@@ -11,16 +11,36 @@
 
 \begin{explain}
 The proof of undecidability is complex, and it will be beneficial to
-outline the proof first. We will proceed in five parts. First, we show that
-if FOL with identity and terms ($\Lang{L_T}$) is decidable, then the
-halting problem is solvable (i.e., we reduce the halting problem to the
-decision problem). We then show that for any sentence $A$ of $L_T$,
-$\Sat{}{\lforall{x}\lexists{y}{\Atom{R}{x}{y}}\lif A'}$ if, and only if,
-$\Sat{}{A}$. From these two things, it follows that if FOL with identity
-($\Lang{L_=}$) is decidable, then the halting problem is also solvable. We
-then prove that for any sentence A of $\Lang{L_=} , \Sat{}{(A \land B) \lif
-A (something)}$. Finally, we can then show that if FOL without identity and
-terms is decidable, then the halting problem is solvable.
+outline the proof first. 
+
+We know that first-order logic is decidable iff there is an effective mechanical
+method for determining whether or not a sentence is valid. We also know, from
+the Chruch-Turing thesis, that every function which is computable is 
+Turing-computable. We have proved that the function~$h(m,w)$, that halts with
+an output $\TMstroke$ if the Turing-machine described by $m$ halts on input $w$ 
+and outputs $\TMblank$ otherwise, is not Turing-computable. Via the Church-Turing
+thesis,~$h$ is not computable. 
+
+What we need to show is that if first-order logic is decidable, then~$h$
+is computable. By doing so, we show that first-order logic is not decidable.
+
+We will proceed in five parts. First, we show that
+if first-order-logic with identity and terms ($\Lang{L_T}$) is decidable,
+then the halting problem is solvable (i.e., we reduce the halting problem to the
+decision problem). We then show that for any sentence $!A$ of $L_T$,
+$\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x}{y}]\lif !A'}$ if, and only if,
+$\Sat{}{!A}$. From these two things, it follows that if first-order
+logic with identity ($\Lang{L_=}$) is decidable, then the halting problem
+ is also solvable. We then prove that for any sentence $!A$ of $\Lang{L_=} , 
+\Sat{}{(!E \land !D) \lif !A(=/!E)}$. Finally, we can then show that if firsr-order
+logic without identity and terms is decidable, then the halting problem is 
+solvable.
+
+This proof proves our main claim, that first-order logic is not decidable. However,
+we also get the corrolaries that both first-order logic without identity and terms,
+as well as first-order logic without identity, are not decidable.
+
+
 \end{explain}
 
 
