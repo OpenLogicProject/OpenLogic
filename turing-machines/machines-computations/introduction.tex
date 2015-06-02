@@ -20,7 +20,7 @@ direction (to the right), and it is divided into \emph{squares}, each
 of which may contain a symbol from a finite \emph{alphabet}.  Such
 alphabets can contain any number of different symbols, but we will
 mainly make do with three: $\TMendtape$, $\TMblank$, and
-$\mid$.  When he mechanism is started, the tape is empty (i.e., each
+$\TMstroke$.  When he mechanism is started, the tape is empty (i.e., each
 square contains the symbol $\TMblank$) except for the
 leftmost square, which contains $\TMendtape$, and a finite number
 of squares which contain the \emph{input}.  At any time, the mechanism
@@ -33,7 +33,8 @@ machine program consists of a list of 5-tuples $\langle q_i, \sigma,
 q_j, \sigma', D\rangle$.  Whenever the mechanism is in state $q_i$ and
 reads symbol $\sigma$, it replaces the symbol on the current square
 with $\sigma'$, the head moves left, right, or stays put according to
-whether $D$ is $L$, $R$, or $N$, and the mechanism goes into
+whether $D$ is $\TMleft$, $\TMright$, or $\TMstay$, and the mechanism goes
+into
 state~$q_j$.  When the mechanism enters state~$h$ we say it
 \emph{halts}, and the contents of the tape at that point is its
 \emph{output}.
