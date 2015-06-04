@@ -18,10 +18,10 @@ which decides, given a sentence~$!A$ in the language of arithmetic,
 whether $\Th{Q} \Proves !A$ or not.  We can make this more precise by
 asking: Is the relation~$\fn{Prov}_{\Th{Q}}(y)$, which holds of~$y$
 iff $y$ is the G\"odel number of a sentence provable in~$\Th{Q}$,
-recursive?  The answer is: no. 
+recursive?  The answer is: no.
 
 \begin{thm}
-$\Th{Q}$ is undecidable, i.e., the relation 
+$\Th{Q}$ is undecidable, i.e., the relation
 \[
 \fn{Prov}_{\Th{Q}}(y) \defiff \fn{Sent}(y) \land
 \lexists[x][\fn{Pr}_{\Th{Q}}(x, y)]
@@ -33,13 +33,13 @@ is not recursive.
 Suppose it were.  Then we could solve the halting problem as follows:
 Given $e$ and $n$, we know that $\cfind{e}(n) \defined$ iff there is
 an~$s$ such that $T(e, n, s)$, where $T$ is Kleene's predicate from
-\olref[cmp][rec][nft]{thm:kleene-nf}. Since $T$ is primitive recursive
+\olref[cmp][rec][nft]{thm:kleene-nf}.  Since $T$ is primitive recursive
 it is representable in~$\Th{Q}$ by a formula $!B_T$, that is, $\Th{Q}
 \Proves !B_T(\num{e}, \num{n}, \num{s})$ iff $T(e, n, s)$.  If $\Th{Q}
 \Proves !B_T(\num{e}, \num{n}, \num{s})$ then also $ \Th{Q} \Proves
-\lexists[y][!B_T(\num{e}, \num{n}, y)]$. If no such $s$ exists, then
+\lexists[y][!B_T(\num{e}, \num{n}, y)]$.  If no such $s$ exists, then
 $\Th{Q} \Proves \lnot !B_T(\num{e}, \num{n}, \num{s})$ for
-every~$s$. But $\Th{Q}$ is $\omega$-consistent, i.e., if $\Th{Q}
+every~$s$.  But $\Th{Q}$ is $\omega$-consistent, i.e., if $\Th{Q}
 \Proves \lnot !A(\num{n})$ for every~$n \in \Nat$, then $\Th{Q}
 \Proves/ \lexists[y][!A(y)]$.  We know this because the axioms of
 $\Th{Q}$ are true in the standard model~$\Struct{N}$.  So, $\Th{Q}
@@ -48,9 +48,9 @@ $\Th{Q} \Proves \lexists[y][!B_T(\num{e}, \num{n}, y)]$ iff there is
 an $s$ such that $T(e, n, s)$, i.e., iff $\cfind{e}(n) \defined$.
 From $e$ and~$n$ we can compute $\Gn{\lexists[y][!B_T(\num{e},
     \num{n}, y)]}$, let $g(e, n)$ be the primitive recursive function
-which does that. So
+which does that.  So
 \[
-h(e, n) = 
+h(e, n) =
 \begin{cases}
 1 & \text{if $\fn{Pr}_{\Th{Q}}(g(e, n))$}\\
 0 & \text{otherwise}.

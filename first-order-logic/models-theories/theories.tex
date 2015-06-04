@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{fol}{mat}{the} 
+\olfileid{fol}{mat}{the}
 
 \olsection{Examples of First-Order Theories}
 
@@ -30,7 +30,7 @@ $\Domain M = X$ and $\Assign{<}{M} = R$ is a model of this theory.
 The theory of groups in the language $\Obj 1$ (!!{constant}), $\cdot$
 (two-place !!{function}) is axiomatized by
 \begin{align*}
-& \lforall[x][(x \cdot \Obj 1) = x]\\ 
+& \lforall[x][(x \cdot \Obj 1) = x]\\
 & \lforall[x][\lforall[y][\lforall[z][\eq[(x \cdot (y \cdot z))][((x
           \cdot y) \cdot z)]]]]\\
 & \lforall[x][\lexists[y][(x \cdot y) = \Obj 1]]
@@ -56,28 +56,28 @@ axiom system is infinite.  The latter form is called the
 \emph{induction schema}. (Actually, the induction schema is a bit more
 complicated than we let on here.)
 
-The second axiom is an \emph{explicit definition} of~$<$.  
+The third axiom is an \emph{explicit definition} of~$<$.
 \end{ex}
 
 \begin{ex}
 The theory of pure sets plays an important role in the foundations
-(and in the philosophy) of mathematics. A set is pure if all its
+(and in the philosophy) of mathematics.  A set is pure if all its
 !!{element}s are also pure sets.  The empty set counts therefore as
 pure, but a set that has something as !!a{element} that is not a set
-would not be pure. So the pure sets are those that are formed just
+would not be pure.  So the pure sets are those that are formed just
 from the empty set and no ``urelements,'' i.e., objects that are not
 themselves sets.
 
 The following might be considered as an axiom system for a theory of
 pure sets:
 \begin{align*}
-& \lexists[x][\lnot \lexists[y][y \in x]]\\ 
+& \lexists[x][\lnot \lexists[y][y \in x]]\\
 & \lforall[x][\lforall[y][(\lforall[z](z \in x \liff z \in y) \lif x =
-      y)]]\\ 
+      y)]]\\
 & \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff (u =
-          x \lor u = y))]]]]\\ 
+          x \lor u = y))]]]]\\
 & \lforall[x][\lexists[y][\lforall[z][(z \in y \liff \lexists[u][(z \in
-        u \lor u \in x)])]]]\\ 
+        u \lor u \in x)])]]]\\
 \intertext{plus all sentences of the form} &
 \lexists[x][\lforall[y][(y \in x \liff !A(y))]]
 \end{align*}
@@ -89,7 +89,7 @@ fourth that for any sets $X$ and $Y$, the set $X \cup Y$ exists.
 The !!{sentence}s mentioned last are collectively called the
 \emph{naive comprehension scheme}.  It essentially says that for every
 $!A(x)$, the set $\Setabs{x}{!A(x)}$ exists---so at first glance a
-true, useful, and perhaps even necessary axiom. It is called ``naive''
+true, useful, and perhaps even necessary axiom.  It is called ``naive''
 because, as it turns out, it makes this theory unsatisfiable: if you
 take $!A(y)$ to be $\lnot y \in y$, you get the !!{sentence}
 \[
@@ -100,7 +100,7 @@ and this !!{sentence} is not satisfied in any !!{structure}.
 
 \begin{ex}
 In the area of \emph{mereology}, the relation of \emph{parthood} is a
-fundamental relation. Just like theories of sets, there are theories
+fundamental relation.  Just like theories of sets, there are theories
 of parthood that axiomatize various conceptions (sometimes
 conflicting) of this relation.
 
@@ -120,7 +120,7 @@ subset of,'' but does not resemble ``is an element of'' which is
 neither reflexive nor transitive.
 \begin{align*}
 & \lforall[x][\Atom{\Obj P}{x,x}], \\
-& \lforall[x][\lforall[y][((\Part{x}{y} \land \Part{y}{x}) 
+& \lforall[x][\lforall[y][((\Part{x}{y} \land \Part{y}{x})
       \lif x = y)]], \\
 & \lforall[x][\lforall[y][\lforall[z][((\Part{x}{y} \land
         \Part{y}{z}) \lif \Part{x}{z})]]],\\
@@ -133,7 +133,7 @@ These are only some of the basic principles of parthood considered by
 metaphysicians.  Further principles, however, quickly become hard to
 formulate or write down without first introducting some defined
 relations.  For instance, most metaphysicians interested in mereology
-also view the the following as a valid principle: whenever an
+also view the following as a valid principle: whenever an
 object~$x$ has a proper part~$y$, it also has a part~$z$ that has no
 parts in common with~$y$, and so that the fusion of $y$ and $z$ is
 $x$.
