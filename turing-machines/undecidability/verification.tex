@@ -40,16 +40,70 @@ For each $n$, $T(M, w)$ implies $C(M, w, n)$.
 \begin{proof}
 By induction on $n$.
 
+Inductive hypothesis: for any n, if $M$ has not halted before time $n$, then $T(M,w)$ implies $C(M, w, n)$.
+
 If $n = 0$, then $C(M, w, n)$ is a conjunct of $T(M, w)$, so implied by it.
 
 Suppose $n > 0$ and at time $n$, $M$ started on $w$ is in state~$q$
 scanning square $m$, and the content of the tape is $\sigma_0$, \dots,
 $\sigma_k$.
 
-\dots to be completed
+Suppose that $M$ has not halted before time $n+1$. Since $T(M,n)$ is true in its intended interpretation $\Struct M$, the inductive hypothesis tells us that $C(M, w, n)$ is true in $\Struct M$ also. In particular, $Q_q(\overline m, \overline n)$ and $S_{\sigma_m}(\overline m, \overline n)$ are true in $\Struct M$.
 
-%Nicole find notes on this
+Since M does not halt at n, there must be an instruction of one of the following three forms in the program of M:
+\begin{enumerate}
+\item $\tuple{q_q, \sigma_m , q_{q'}, \sigma'_{m}, \TMright}$
 
+\item $\tuple{q_q, \sigma_m , q_{q'}, \sigma'_{m}, \TMleft}$
+
+\item $\tuple{q_q, \sigma_m , q_{q'}, \sigma'_{m}, \TMstay}$
+\end{enumerate}
+
+We will consider each of these three cases in turn.
+
+\begin{enumerate}
+\item Suppose there is an instruction of the form of 1.
+So, 
+ \[
+(i) \lforall[\Obj x] \lforall[\Obj y](
+   (\Obj Q_{q}(\Obj x, \Obj y) \land \Obj S_{\sigma_m}(\Obj x, \Obj y)) \lif
+   (\Obj Q_{q'}(\Obj x', \Obj y') \land \Obj S_{\sigma'_{m}}(\Obj x, \Obj y') \land
+A(\Obj x, \Obj y)))
+\]
+is a member of $T(M,w)$.
+
+(i) implies:
+ \[
+   (\Obj Q_{q}(\Obj m, \Obj n) \land \Obj S_{\sigma_m}(\Obj m, \Obj n)) \lif
+   (\Obj Q_{q'}(\Obj m', \Obj n') \land \Obj S_{\sigma'_{m}}(\Obj m, \Obj n') \land
+A(\Obj x, \Obj y)))
+\]
+
+Which in turn implies,
+
+\[
+\Obj Q_{q'}(m', n') \land \Obj S_{\sigma'_m}(m, n') \land \Obj S_{\sigma_0}(0, n')\dots \land \Obj S_{\sigma_k}(\overline k,
+n')
+\]
+
+But this just is $C(M, w, n')$.
+
+
+\item Suppose there is an instruction of the form of 2.
+So, 
+\[
+\lforall[\Obj x] \lforall[\Obj y](
+   (\Obj Q_{q}(\Obj x', \Obj y) \land \Obj S_{\sigma_m}(\Obj x, \Obj y)) \lif
+   (\Obj Q_{q'}(\Obj x, \Obj y) \land \Obj S_{\sigma'_m}(\Obj x, \Obj y) \land
+A(\Obj x, \Obj y)))
+\]
+
+is an element of $T(M,w)$.
+
+\item Left as an exercise?
+
+%% Working on this!
+\end{enumerate}
 \end{proof}
 
 \begin{explain}
