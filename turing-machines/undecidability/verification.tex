@@ -33,16 +33,32 @@ at time~$n$, square $i$ contains symbol~$\sigma_i$ at time~$n$ for $0
 time~$m$.
 \end{defn}
 
+\begin{proof}
+Suppose that $M$ does halt for input $w$. Then there is some time $n$, state $q$ and square $m$ and symbol $\sigma$ such that:
+\begin{enumerate}
+\item There is no instruction beginning $\tuple{q_q, \sigma}$
+\item At time $n$ the machine is in state $q$ scanning a square $m$ on which $\sigma$ appears.
+\end{enumerate}
+
+C(M, w, n) will be the description of this time and will include the clauses $Q_q(\overline m, \overline n)$ and $S_{\sigma}(\overline m, \overline n)$.
+
+These clauses together imply $H(M,w)$, since by definition one of the disjuncts will be:
+\[
+\lexists[\Obj x]\lexists[\Obj y][(\Obj Q_q(\Obj x, \Obj y) \land S_\sigma(\Obj x, \Obj y))]
+\]
+
+So if $M$ halts for input $w$, then there is some time $n$ such that $\Sat{ C(M, w, n)}{H(M,w)}$
+
+Since consequence is transitive, it is sufficient to show that for any time n, $\Sat{T(M, w)}{C(M, w, n)}$
+
 \begin{lem}
 For each $n$, $T(M, w)$ implies $C(M, w, n)$.
 \end{lem}
 
-\begin{proof}
 By induction on $n$.
 
-Inductive hypothesis: for any n, if $M$ has not halted before time $n$, then $T(M,w)$ implies $C(M, w, n)$.
-
 If $n = 0$, then $C(M, w, n)$ is a conjunct of $T(M, w)$, so implied by it.
+Inductive hypothesis: If $M$ has not halted before time $n$, then $T(M,w)$ implies $C(M, w, n)$.
 
 Suppose $n > 0$ and at time $n$, $M$ started on $w$ is in state~$q$
 scanning square $m$, and the content of the tape is $\sigma_0$, \dots,
@@ -62,47 +78,52 @@ Since M does not halt at n, there must be an instruction of one of the following
 We will consider each of these three cases in turn.
 
 \begin{enumerate}
-\item Suppose there is an instruction of the form of 1.
-So, 
- \[
-(i) \lforall[\Obj x] \lforall[\Obj y](
+\item Suppose there is an instruction of the form of (1). This means that 
+\[
+ \lforall[\Obj x] \lforall[\Obj y](
    (\Obj Q_{q}(\Obj x, \Obj y) \land \Obj S_{\sigma_m}(\Obj x, \Obj y)) \lif
    (\Obj Q_{q'}(\Obj x', \Obj y') \land \Obj S_{\sigma'_{m}}(\Obj x, \Obj y') \land
 A(\Obj x, \Obj y)))
 \]
-is a member of $T(M,w)$.
-
-(i) implies:
- \[
-   (\Obj Q_{q}(\Obj m, \Obj n) \land \Obj S_{\sigma_m}(\Obj m, \Obj n)) \lif
-   (\Obj Q_{q'}(\Obj m', \Obj n') \land \Obj S_{\sigma'_{m}}(\Obj m, \Obj n') \land
+is a member of $T(M,w)$. This in turn implies the following sentence, through universal instantiation:
+\[
+(\Obj Q_{q}(\overline m, \overline n) \land \Obj S_{\sigma_m}(\overline m, \overline n)) \lif
+   (\Obj Q_{q'}(\overline m', \overline n') \land \Obj S_{\sigma'_{m}}(\overline m, \overline n') \land
 A(\Obj x, \Obj y)))
 \]
-
 Which in turn implies,
-
 \[
-\Obj Q_{q'}(m', n') \land \Obj S_{\sigma'_m}(m, n') \land \Obj S_{\sigma_0}(0, n')\dots \land \Obj S_{\sigma_k}(\overline k,
-n')
+\Obj Q_{q'}(\overline m', \overline n') \land \Obj S_{\sigma'_m}(\overline m, \overline n') \land \Obj S_{\sigma_0}(\overline 0, \overline n')\dots \land \Obj S_{\sigma_k}(\overline k,
+\overline n')
 \]
-
 But this just is $C(M, w, n')$.
 
-
-\item Suppose there is an instruction of the form of 2.
-So, 
+\item Suppose there is an instruction of the form of 2. So, 
 \[
 \lforall[\Obj x] \lforall[\Obj y](
    (\Obj Q_{q}(\Obj x', \Obj y) \land \Obj S_{\sigma_m}(\Obj x, \Obj y)) \lif
-   (\Obj Q_{q'}(\Obj x, \Obj y) \land \Obj S_{\sigma'_m}(\Obj x, \Obj y) \land
+   (\Obj Q_{q'}(\Obj x, \Obj y') \land \Obj S_{\sigma'_m}(\Obj x, \Obj y') \land
 A(\Obj x, \Obj y)))
 \]
+is an element of $T(M,w)$, which implies the following sentence:
+\[
+   (\Obj Q_{q}(\overline m', \overline n) \land \Obj S_{\sigma_m}(\overline m, \overline n) \lif
+   (\Obj Q_{q'}(\overline m, \overline n') \land \Obj S_{\sigma'_m}(\overline m, \overline n') \land
+A(\Obj x, \Obj y)))
+\]
+Which in turn implies
+\[
+   \Obj Q_{q'}(\overline m, \overline n')\land \Obj S_{\sigma'_m}(\overline m, \overline n') \land \Obj S_{\sigma_0}(\overline 0, \overline n')\dots \land \Obj S_{\sigma_k}(\overline k,
+\overline n')
+\]
+But this just is $C(M, w, n')$.
 
-is an element of $T(M,w)$.
+\item This case is left as an exercise.
 
-\item Left as an exercise?
+Given the above cases, we have shown that for any $n$, $T(M, w) \lif C(M, w, n)$.
 
-%% Working on this!
+Based on this lemma, we know that, for any time~$n$, the description of time~$n$ is a consequence of $T(M, w)$, and therefore, that $T(M, w) \lif H(M, w)$ is valid.
+
 \end{enumerate}
 \end{proof}
 
