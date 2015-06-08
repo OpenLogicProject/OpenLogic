@@ -34,11 +34,11 @@ Next, there is a !!{sentence} $!B$ of $\Lang{L_=}$ that is valid iff
 $\Atom{T}{M,w}_\land\lif \Atom{H}{M,w}$ is. In general, for any
 !!{sentence} $!A$ of $\Lang{L_T}$ ,there is
 !!a{sentence} of $\Lang{L_=}$ with the form
-$\lforall[x]\lexists[y][\Atom{R}{x,y}\lif !A']$ which is equally valid.
+$\lforall[x]\lexists[\fac y][\Atom{R}{x,y}\lif !A']$ which is equally valid.
 So,$\Sat{}{!A}$ if, and only if,
-$\Sat{}{\lforall[x]\lexists[!y][\Atom{R}{x,y}\lif !A']}$.
+$\Sat{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}\lif !A']}$.
 
-We construct $\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}\lif !A']}$ as
+We construct $\Sat{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}\lif !A']}$ as
 follows:
 
 Given !!a{sentence} $!A$ of $\Lang{L_T}$, first "normalize" $!A$ to form
@@ -72,24 +72,24 @@ Since $f$ is a 1-place !!{function}, whereas $R$ is a binary relation, and
 there is no guarantee that $R$ is functional, i.e. that there is only one
 object d such that $\Sat{M}{\Subst{\Atom{R}{t,\delta}}{\delta}{d}}$.
  What we need to do is force $R$ to be a functional relation, and this 
-is what $\lforall[x]\lexists[y][\Atom{R}{x,y}]$ does.
+is what $\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]$ does.
 
 To continue the example, $\lexists[x][(\eq[x][a] \land
-\lexists[y][(\eq[fx][y] \land \Atom{P}{y}))]]$ becomes
+\lexists[\fac y][(\eq[fx][y] \land \Atom{P}{y}))]]$ becomes
 $\lexists[x][(\eq[x][a] \land \lexists[y][(\Atom{R}{fx,y} 
 \land \Atom{P}{y}))]]$.
 
-Now form the !!{sentence} $\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'$.
+Now form the !!{sentence} $\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif !A'$.
 
 
 \item We now want to show that for any !!{sentence} $A$ of $L_T$,
-$\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$ if, and only if,
+$\Sat{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif !A'}$ if, and only if,
 $\Sat{}{!A}$. We will prove this in its contrapositive form.
 
 Right to left: Suppose that
-$\Sat/{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$. So there is some
+$\Sat/{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif !A'}$. So there is some
 !!{structure} $\Struct M$ such that
-$\Sat{M}{\lforall[x]\lexists[y][\Atom{R}{x,y}]}$ and $\Sat/{M}{!A'}$.
+$\Sat{M}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]}$ and $\Sat/{M}{!A'}$.
 
 Based on the !!{structure} $\Struct M$, create a new !!{structure}
 $\Struct M^*$ which is identical to $\Struct M$ except that we turn the
@@ -106,15 +106,15 @@ Based on the !!{structure} $\Struct M$, create a new !!{structure}
 $\Struct M'$ which is identical to $\Struct M$ except that the functional
 relation assigned to $\fn{f}$ in $\Struct M$ is assigned to $R$ in
 $\Struct M'$. Since $R$ is assigned a functional relationship in
-$\Struct M$, $\Sat{M}{\lforall[x]\lexists[y][\Atom{R}{x,y}]}$. But,
+$\Struct M$, $\Sat{M}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]}$. But,
 clearly, $\Sat/{M}{!A'}$ (again, we can give an inductive argument to this
-effect). So, $\Sat/{M}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$,
-and$\Sat/{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$.
+effect). So, $\Sat/{M}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif !A'}$,
+and$\Sat/{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif !A'}$.
 
-\item In general, $\Sat/{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif !A'}$
-if, and only if, $\Sat/{\lforall[x]\lexists[y][\Atom{R}{x,y}]}{!A'}$. So,
+\item In general, $\Sat/{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif !A'}$
+if, and only if, $\Sat/{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]}{!A'}$. So,
 $\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$ iff
-$\Sat/{\lforall[x]\lexists[y][\Atom{R}{x,y}]}{(\Atom{T}{M,w}_\land \lif
+$\Sat/{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]}{(\Atom{T}{M,w}_\land \lif
 \Atom{H}{M,w})'}$
 (there is just one !!{function} in $\Atom{T}{M,w}_\land,
 \Atom{H}{M,w}$).
@@ -137,7 +137,7 @@ determine whether a randomly chosen machine halts for a randomly chosen
 input or not.
 
 \item There is !!a{sentence} $!C$ of $\Lang{L}$ which is valid just in
-case$\lforall[x]\lexists[y][\Atom{R}{x,y}] \lif (\Atom{T}{M,w}_\land \lif
+case$\lforall[x]\lexists[\fac y][\Atom{R}{x,y}] \lif (\Atom{T}{M,w}_\land \lif
 \Atom{H}{M,w})'$ is.
 In general, for any !!{sentence} $!A$ of $\Lang{L_=}$ there is
 !!a{sentence}
@@ -220,12 +220,12 @@ and a !!{sentence} $!A(=/!E)$ such that $\Sat{}{!A}$ iff $\Sat{\{ !E, !D
 \}}{!A(=/!E)}$.
 
 So in particular, there is a set $\{ !E, !D \}$ such that $\Sat{\{!E, !D\}
-}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land \lif
+}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land \lif
 \Atom{H}{M,w})'(=/!E)}$
-iff $\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land
+iff $\Sat{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land
 \lif \Atom{H}{M,w})'}$.
 
-$\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land
+$\Sat{}{\lforall[x]\lexists[\fac y][\Atom{R}{x,y}]\lif (\Atom{T}{M,w}_\land
 \lif\Atom{H}{M,w})'}$
 iff $\Sat{}{\Atom{T}{M,w}_\land \lif \Atom{H}{M,w}}$
 
