@@ -25,10 +25,10 @@ of the language appearing in a sentence~$!A$ and have the same domain,
 \end{explain}
 
 \begin{prop}[Extensionality]
-Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s. 
-If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and 
-$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant}~$c$, relation 
-symbol~$R$, and !!{function} $f$ occurring in~$!A$, then $\Sat{M}{!A}$ 
+Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s.
+If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and
+$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant}~$c$, relation
+symbol~$R$, and !!{function} $f$ occurring in~$!A$, then $\Sat{M}{!A}$
 iff $\Sat{M'}{!A}$.
 \end{prop}
 
@@ -43,7 +43,7 @@ by~$s'(x) = \Value{t'}{M}[s]$. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
 \end{prop}
 
 \begin{proof}
-By induction on~$t$. 
+By induction on~$t$.
 \begin{enumerate}
 \item If $t$ is a constant, say, $t\ident c$, then $\Subst{t}{t'}{x} =
   c$, and $\Value{c}{M}[s] = \Assign{c}{M} = \Value{c}{M}[s']$.
@@ -52,19 +52,19 @@ By induction on~$t$.
   $\Subst{t}{t'}{x} = y$, and $\Value{y}{M}[s] = \Value{y}{M}[s']$
   since $s' \sim_x s$.
 
-\item If $t \ident x$, then $\Subst{t}{t'}{x} = t'$.  But
+\item If $t \ident x$, then $\Subst{t}{t'}{x} = t'$. But
   $\Value{x}{M}[s'] = \Value{t'}{M}[s]$ by definition of~$s'$.
 
 \item If $t \ident \Atom{f}{t_1,\dots,t_n}$ then we have:
 \begin{align*}
-\Value{\Subst{t}{t'}{x}}{M}[s] & = 
+\Value{\Subst{t}{t'}{x}}{M}[s] & =
 \Value{\Atom{f}{\Subst{t_1}{t'}{x}, \dots, \Subst{t_n}{t'}{x}}}{M}[s]
     \text{ by definition of $\Subst{t}{t'}{x}$}\\
-& = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots, 
-   \Value{\Subst{t_n}{t'}{x}}{M}[s]) 
+& = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots,
+   \Value{\Subst{t_n}{t'}{x}}{M}[s])
     \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s]$}\\
-& = \Assign{f}{M}(\Value{t_1}{M}[s'], \dots, 
-   \Value{t_n}{M}[s']) 
+& = \Assign{f}{M}(\Value{t_1}{M}[s'], \dots,
+   \Value{t_n}{M}[s'])
     \text{ by induction hypothesis}\\
 & = \Value{t}{M}[s']
     \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s']$}

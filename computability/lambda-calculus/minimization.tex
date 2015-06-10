@@ -23,7 +23,7 @@ lambda term $Y$ to define a function $h_x(n)$ which searches for a~$y$
 starting at~$n$; then $g(x)$ is just $h_x(0)$. The function~$h_x$ can
 be expressed as the solution of a fixed-point equation:
 \[
-h_x(n) \simeq 
+h_x(n) \simeq
 \begin{cases}
 n & \text{if $f(x,n) = 0$} \\
 h_x(n+1) & \text{otherwise.}
@@ -33,7 +33,7 @@ h_x(n+1) & \text{otherwise.}
 Here are the details. Since $f$ is primitive recursive, it is
 represented by some term $F$. Remember that we also have a lambda
 term~$D$, such that $D(M, N, \bar{0}) \red M$ and $D(M, N, \bar{1})
-\red N$.  Fixing $x$ for the moment, to represent $h_x$ we want to
+\red N$. Fixing $x$ for the moment, to represent $h_x$ we want to
 find a term~$H$ (depending on~$x$) satisfying
 \[
 H(\num{n}) \equiv D(\num{n}, H(S(\num{n})), F(x, \num{n})).

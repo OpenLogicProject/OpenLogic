@@ -29,7 +29,7 @@ validity, satisfiablity. They are variously called ``structures,''
 \Article{structure} \emph{!!{structure}}~$\Struct M$, for a language
 $\Lang{L}$ of first-order logic consists of the following elements:
 \begin{enumerate}
-\item \emph{Domain:} a non-empty set, $\Domain M$ 
+\item \emph{Domain:} a non-empty set, $\Domain M$
 \item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
   $\Lang{L}$, !!a{element} $\Assign{c}{M} \in \Domain M$
 \item \emph{Interpretation of !!{predicate}s:} for each $n$-place
@@ -69,7 +69,7 @@ L_A$. For instance, we might take as the domain the set~$\Int$ of
 integers instead of~$\Nat$, and define the interpretations of $\Obj
 0$, $\Obj \prime$, $\Obj +$, $\Obj \times$, $\Obj <$ accordingly.  But
 we can also define structures for~$\Lang L_A$ which have nothing even
-remotely to do with numbers. 
+remotely to do with numbers.
 \end{ex}
 
 \begin{ex}
@@ -130,13 +130,13 @@ binary !!{function} $\times$. Hence, the !!{value} of $\Obj{four}$
 is just 4, and the !!{value} of $\times(\Obj{two},
 +(\Obj{three},\Obj{zero}))$ (or in infix notation, $\Obj{two}
 \times (\Obj{three} + \Obj{zero})$ ) is
-\begin{align*} 
+\begin{align*}
 \Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero})}{M}&=
-\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{\Obj{two}, 
+\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{\Obj{two},
 +(\Obj{three}, \Obj{zero})}{M})\\
-&= \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M}, 
+&= \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M},
 \Value{\Obj{zero}}{M})) \\
-&= \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M}, 
+&= \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M},
 \Assign{\Obj{zero}}{M})) \\
 &= \Assign{\times}{M}(2, \Assign{+}{M}(3, 0)) \\
 &= \Assign{\times}{M}(2, 3) \\

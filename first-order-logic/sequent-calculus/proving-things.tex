@@ -10,7 +10,7 @@
 
 \olsection{Examples of \usetoken{P}{derivation}}
 
-\begin{ex} 
+\begin{ex}
 Give an $\Log{LK}$-derivation for the sequent $!A \land !B \Sequent !A$.
 
 We begin by writing the desired end-sequent at the bottom of the derivation.
@@ -42,7 +42,7 @@ We now have a correct $\Log{LK}$-derivation of the sequent $!A \land
 !B \Sequent !A$.
 \end{ex}
 
-\begin{ex} 
+\begin{ex}
 Give an $\Log{LK}$-derivation for the sequent $\lnot !A \lor !B
 \Sequent !A \lif !B$.
 
@@ -118,7 +118,7 @@ weakening away from finishing off this left branch as well.
 \end{prooftree}
 \end{ex}
 
-\begin{ex} 
+\begin{ex}
 Give an $\Log{LK}$-derivation of the sequent $\lnot !A \lor \lnot !B
 \Sequent \lnot (!A \land !B)$
 
@@ -136,7 +136,7 @@ branches for a moment:
 \begin{prooftree}
 \AxiomC{}
 \UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 Now we have a choice of whether to look at the $\land$ left or the
@@ -148,9 +148,9 @@ regards to $!A$ and $!B$, let's go with the former:
 \begin{prooftree}
 \AxiomC{}
 \UnaryInf$!A, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\land$ left} 
+\RightLabel{$\land$ left}
 \UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 Continuing to fill in the derivation, we see that we run into a problem:
@@ -161,11 +161,11 @@ Continuing to fill in the derivation, we see that we run into a problem:
 \RightLabel{?} \UnaryInf$!A \fCenter !B$
 \RightLabel{$\lnot$ left} \UnaryInf$ !A, \lnot !B \fCenter$
 
-\RightLabel{$\lor$ left} 
+\RightLabel{$\lor$ left}
 \BinaryInf$!A, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\land$ left} 
+\RightLabel{$\land$ left}
 \UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 The top of the right branch cannot be reduced any further, and it
@@ -180,9 +180,9 @@ had before and carrying out the $\lor$ left rule instead, we get
 \AxiomC{}
 \UnaryInf$!A \land !B, \lnot !B \fCenter $
 
-\RightLabel{$\lor$ left} 
+\RightLabel{$\lor$ left}
 \BinaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 Completing each branch as we've done before, we get
@@ -195,16 +195,16 @@ Completing each branch as we've done before, we get
 \RightLabel{$\land$ left} \UnaryInf$!A \land !B \fCenter !B$
 \RightLabel{$\lnot$ left} \UnaryInf$!A \land !B, \lnot !B \fCenter $
 
-\RightLabel{$\lor$ left} 
+\RightLabel{$\lor$ left}
 \BinaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 (We could have carried out the $\land$ rules lower than the $\lnot$
 rules in these steps and still obtained a correct derivation).
 \end{ex}
 
-\begin{ex} 
+\begin{ex}
 Give an $\Log{LK}$-derivation of the sequent $\lexists[x][\lnot !A(x)]
 \Sequent \lnot \lforall[x][!A(x)]$.
 
@@ -234,18 +234,18 @@ later, so we'll do that one first.
 \begin{prooftree}
 \AxiomC{}
 \UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
-\RightLabel{$\lexists$ left} 
+\RightLabel{$\lexists$ left}
 \UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
 Applying the $\lnot$ left and right rules to eliminate the $\lnot$ signs, we get
 \begin{prooftree}
 \AxiomC{}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$ \fCenter \lnot \lforall[x][!A(x)], !A(a)$
-\RightLabel{$\lnot$ left} 
+\RightLabel{$\lnot$ left}
 \UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
-\RightLabel{$\lexists$ left} 
+\RightLabel{$\lexists$ left}
 \UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
 \end{prooftree}
 At this point, our only option is to carry out the $\forall$ left
@@ -255,13 +255,13 @@ sequent (of the form $!A(a) \Sequent !A(a)$), so we should choose $a$
 as our argument for $!A$ when we apply the rule.
 \begin{prooftree}
 \Axiom$!A(a) \fCenter !A(a)$
-\RightLabel{$\lforall$ left} 
+\RightLabel{$\lforall$ left}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\RightLabel{$\lnot$ right} 
+\RightLabel{$\lnot$ right}
 \UnaryInf$ \fCenter \lnot \lforall[x][!A(x)], !A(a)$
-\RightLabel{$\lnot$ left} 
+\RightLabel{$\lnot$ left}
 \UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
-\RightLabel{$\lexists$ left} 
+\RightLabel{$\lexists$ left}
 \UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
 It is important, especially when dealing with quantifiers, to double

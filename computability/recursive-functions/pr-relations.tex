@@ -17,11 +17,11 @@ function,
 \Char{R}(\vec x) = \left\{
   \begin{array}{ll}
   1 & \mbox{if $R(\vec x)$} \\
-  0 & \mbox{otherwise} 
+  0 & \mbox{otherwise}
   \end{array}
 \right.
 \]
-is primitive recursive. 
+is primitive recursive.
 \end{defn}
 
 In other words, when one speaks of a primitive
@@ -30,7 +30,7 @@ form $\Char{R}(\vec x) = 1$, where $\Char{R}$ is a primitive recursive
 function which, on any input, returns either 1 or 0. For example, the
 relation $\fn{Zero}(x)$, which holds if and only if $x = 0$,
 corresponds to the function $\Char{\fn{Zero}}$, defined using primitive
-recursion by 
+recursion by
 \[
 \Char{\fn{Zero}}(0) = 1, \quad \Char{\fn{Zero}}(x+1) = 0.
 \]
@@ -56,14 +56,14 @@ are all primitive recursive, if $P$ and $Q$ are.
 One can also define relations using bounded quantification:
 \begin{enumerate}
 \item Bounded universal quantification: if $R(x, \vec z)$ is a
-primitive recursive relation, then so is the relation 
+primitive recursive relation, then so is the relation
 \[
 \lforall[x < y][R(x, \vec z)]
 \]
 which holds if and only if $R(x,\vec z)$ holds for every $x$ less than
 $y$.
 \item Bounded existential quantification: if $R(x, \vec z)$ is a
-primitive recursive relation, then so is 
+primitive recursive relation, then so is
 \[
 \lexists[x < y][R(x, \vec z)].
 \]
@@ -115,12 +115,12 @@ f(\vec x) = \left\{\begin{array}{ll}
 \]
 is also primitive recursive.
 \end{enumerate}
-When $m = 1$, this is just the the function defined by 
+When $m = 1$, this is just the function defined by
 \[
 f(\vec x) = \fn{cond}(\Char{\lnot R_0}(\vec x),g_0(\vec x),g_1(\vec
  x)).
 \]
 For $m$ greater than $1$, one can just compose definitions of this
-form. 
+form.
 
 \end{document}
