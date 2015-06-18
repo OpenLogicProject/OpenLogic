@@ -1,0 +1,155 @@
+% Part: computability
+% Chapter: tm-computations
+% Section: tm-comparison
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{tur}{tmc}
+\olsection{Comparison of Popular Textbooks}
+
+\subsection{Computability Textbooks}
+
+\subsection{Open Logic}
+%%This is obviously under construction
+A Turing machine is defined as a quadruple $\tuple{Q, \Sigma, s, I}$ where:
+\begin{enumerate}
+\item a finite set of states $Q$ which includes the \emph{halting
+state}~$h$,
+\item a finite alphabet $\Sigma$ which includes $\TMendtape$ and
+  $\TMblank$,
+\item an initial state $s \in Q$,
+\item a finite instruction set~$I \subseteq Q \times \Sigma \times Q
+  \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$.
+\end{enumerate}
+
+The tape is taken to be infine in one direction only, with a symbol $\TMendtape$ signifying the end of the tape.
+
+Material Covered:
+\begin{itemize}
+\item Unary Representations of numbers
+\item The Church-Turing Thesis
+\item Decidability
+\end{itemize}
+
+\subsection{An Introduction to Formal Languages and Automata by Peter Linz}
+
+Out of all the textbooks considered here, Linz presents the most comprehensive and detailed chapter on Turing machines.
+
+A Turing machine is defined as a 7-tuple $\tuple{Q, \Sigma, \Gamma, \delta, q_0, \TMblank, F}$, where:
+\begin{enumerate}
+\item $Q$ is the set of internal states,
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is a finite set of symbols that create the tape alphabet
+\item $\delta$ is the transition function,
+\item $\TMblank \in \Gamma$ is a special symbol called the blank,
+\item $q_0 \in Q$ is the initial state, and
+\item $F \subseteq Q$ is the set of final states
+\end{enumerate}
+
+The tape is taken to be infinite in both directions. 
+
+The presentation of Turing Machines in this textbook varies slightly from the Open Logic text. The texts are similar insofar as they use a 5-tuple set for instructions (i.e., they allow for writing and moving in one instruction). However, Linz presents the transitions as functions rather than instruction sets. Linz uses a set $F$ of final states, rather than the Open Logic's convention of using a halting state~$h$. 
+
+Transition functions are of the form $\delta(q_m, \sigma) = (q_n, \sigma', \TMleft)$, similar to Sipser.
+
+The textbook also gives examples using state diagrams.
+
+Material covered:
+\begin{itemize}
+\item Turing machines as language acceptors
+\item Turing machines as transducers
+\item Combining Turing machines for complex tasks
+\item Other models of Turing machines, including:
+\begin{itemize}
+\item Turing machines with a stay option
+\item Turing machines with a semi-infinite tape
+\item Offline Turing machines
+\item Multitape Turing machines
+\item Multidimensional Turing machines
+\item Nondeterministic Turing machines
+\item Universal Turing machines
+\item Linear bounded automata
+\end{itemize}
+\item Turing's thesis
+\item Decidability
+\end{itemize}
+
+\subsection{Inroduction to the Theory of Computation by Michael Sipser}
+
+A Turing Machine is defined as a 7-tuple $\tuple{Q, \Sigma, \Gamma, \delta, q_0, q_accept, q_reject}$ where:
+\begin{enumerate}
+\item $Q$ is a finite set of states,
+\item $\Sigma$ is the input alphabet, not counting the $\TMblank$ symbol,
+\item $\Gamma$ is the tape alphabet, where$\TMblank \in \Gamma$ and $\Sigma \subseteq \Gamma$,
+\item $\delta$ is the transition function, defined as $\delta: Q \times \Sigma \lif Q \times \Gamma \times \{L, R\}$
+\item $q_0 \in Q$ is the start state,
+\item $q_accept \in Q$ is the accept state, and
+\item $q_reject \in Q$ is the reject state, where $\eq/[q_reject][q_accept]$
+\end{enumerate}
+
+The tape is taken to be infinite only in one direction. Input is written on the leftmost squares, and the head starts on the leftmost square. 
+
+Sipser's formulation of Turing Machines varies only slightly from the Open Logic text. Sipser opts to use a transition function, $\delta$ instead of instruction sets. This is similar to Linz's definition, and can be altered in the same way to be represented in the Open Logic style. Futhermore, Sipser includes both an accept and reject state, as the book focuses on Turing machines as language deciders.
+
+Material covered:
+\begin{itemize}
+\item Turing machines as language deciders
+\item Variants of Turing machines, including:
+\begin{itemize}
+\item Multitape Turing machines
+\item Universal Turing machines
+\item Enumerators
+\item The Church-Turing thesis
+\item Decidability
+\end{itemize}
+\end{itemize}
+
+\subsection{Computability and Logc by George Boolos, John Burgess and Richard Jeffrey}
+
+BBJ present a less formal overview of Turing machines. They take the tape to be infinite in both directions, where standard initial configuration places the head of the machines at the leftmost marked square. The Turing machine is composed of:
+\begin{enumerate}
+\item A finite set of internal states, $q_0, ..., q_m$
+\item A symbol for the blank $S_0$ and the stroke $S_1$
+\item A symbol L for move left, and a symbol R for move right. 
+\end{enumerate}
+
+The book represents Turing machines mainly as state diagrams, but also uses instruction sets and tables. Instructions take the form of quadruples $q_n S_0 S_1 q_m$.
+
+Material covered:
+\begin{itemize}
+\item Turing Computability 
+\item Uncomputability (including the halting problem)
+\item Simulating abacus machines
+\item Coding Turing computations (includes Universal machines)
+\item Undecidability
+\end{itemize}
+
+\subsection{Turing Machine Simulators}
+Linz and Sipser use a transition function instead of instruction sets, so in order to use the Turing machine simulators, it is necessary to convert each function into a tuple. This is fairly trivial, and just requires rearranging the components of the transition function into the appropriate format (each simulator requires a diferent order/number of elements, as listed below).
+
+\begin{enumerate}
+\item https://martinugarte.com/turingmachine/
+
+This simulator uses a 5-tuple for transitions 
+
+$\langle$ [current state], [current symbol], [new state], [new symbol], [Direction ($>$ or $<$ or $-$)]$\rangle$.
+
+ Provies examples for modelling language acceptors. Also can simulate Turing machines with up to three tapes. Compatible best with the Open Logic, Linz and Sipser texts, but the instruction format is flexible and could be made to work with the BBJ quadruple.
+\item http://morphett.info/turing/turing.html
+
+Uses a 5-tuple for transitions:
+
+$\langle$ [current state], [current symbol], [new symbol], [direction (l or r or *)], [new state] $\rangle$
+
+This is compatible with the Open Logic text, as well as the Linz and Sipser texts. The student may need to rewrite their instructions to be in the appropriate order for the simulatorl.
+
+\item http://rendell-attic.org/gol/TMapplet/index.htm
+
+This simulator uses a 5-tuple for transitions 
+
+$\langle$ [current state], [current symbol], [new state], [new symbol], [Direction ($>$ or $<$ or $-$)]$\rangle$.
+
+\end{enumerate}
+\end{document}
