@@ -1,0 +1,72 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-proofs 
+% Section: propositional-semantics
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axp}{pse}
+
+\olsection{Semantics for Propositional Logic}
+
+\begin{defn}[Valuations] Let $\{\True,\False\}$ be the set of the two truth
+values, ``true'' and ``false.'' A \emph{valuation} for $\Lang L_0$ is a
+function $v$ assigning either $\True$ or $\False$ to the propositional
+variables of the language, i.e., $v : At_0 \to\{\True,\False \}$.
+\end{defn}
+
+\begin{thm} Every valuation $v$ can be ``lifted'' to a unique function
+$\overline{v} : F_0 \to \{\True,\False \}$ such that: \begin{align*}
+\overline{v}(p_n) & = v(p_n); \\ \overline{v}(\lnot !A) & = \begin{cases}
+\True & \text{ if } \overline{v}(!A) = \False;\\ \False & \text{
+otherwise.} \end{cases} \\ \overline{v}(!A \lif !B) &= \begin{cases} \True
+& \text{ if $\overline{v}(!A) = \False$ or $\overline{v}(!B) = \True$;}\\
+\False & \text{ if $\overline{v}(!A) = \True$ and $\overline{v}(!B) =
+\False$}. \end{cases} \end{align*} \end{thm}
+
+\begin{proof} Apply Theorem \olref{thm:rec}. \end{proof}
+\begin{prob} Show that the valuation clauses for $\lif$ and $\lnot$ give
+the right truth tables for $\land$ and $\lor$: \begin{center}
+\begin{tabular}{|cc||c|c|} \hline $!B$ & $!B$ & $!A \land !B$ & $!Ai \lor
+!B$ \\ \hline \hline $\True$ & $\True$ & $\True$ & $\True$ \\ $\True$ &
+$\False$ & $\False$ & $\True$ \\ $\False$ & $\True$ & $\False$ & $\True$ \\
+$\False$ & $\False$ & $\False$ & $\False$ \\ \hline \end{tabular}
+\end{center} \end{prob}
+
+\begin{thm} [Local Determination] \ollabel{thm:LocalDetermination}  Suppose
+that $v_1$ and $v_2$ are valuations that agree on the propositional letters
+occurring in $!A$, i.e., $v_1(p_n) = v_2(p_n)$ whenever $p_n$ occurs in
+$!A$. Show that they also agree on $!A$, i.e., $\overline{v}_1(!A) =
+\overline{v}_2(!A)$. \end{thm}
+
+\begin{proof} By induction on $!A$.\end{proof}
+
+\begin{defn} Define the following semantic notions: \begin{itemize} \item A
+!!{formula} $!A$ is \emph{satisfiable} if for some $v$, $\overline{v}(!A) =
+\True$; it is \emph{unsatisfiable} if for no $v$ it holds $\overline{v}(!A)
+= \True$; \item A !!{formula} $!A$ is a \emph{tautology} if
+$\overline{v}(!A) = \True$ for all valuations $v$; \item A !!{formula} $!A$
+is \emph{contingent} if it is satisfiable but not a tautology; \item if
+$\Gamma$ is a set of !!{formula}s, $\Gamma !A$ (``$\Gamma$ entails $!A$'')
+if and only if $\overline{v}(!A) = \True$ for every valuation $v$ on which
+$\overline{v}(!B) = \True$ for every $!B \in \Gamma$. \item if $\Gamma$ is
+a set of !!{formula}s, $\Gamma$ is \emph{satisfiable} if there is a
+valuation $v$ on which $\overline{v}(!B) = \True$ for every $!B \in
+\Gamma$, and $\Gamma$ is unsatisfiable otherwise. \end{itemize} \end{defn}
+
+\begin{prob}\ollabel{prob:semanticalfacts} The following can all be proved
+with little more than ``definition chasing'': \begin{itemize} \item $!A$ is
+a tautology if and only if $\Sat{\varnothing}{!A}$; \item $\Gamma \Entails
+!A$ if and only if $\Gamma \cup \{ \lnot\!A\}$ is unsatisfiable; \item if
+$\Gamma \Entails !A$ and $\Gamma \Entails !A\lif !B$ then $\Gamma \Entails
+!B$; \item if $\Gamma$ is satisfiable then every finite subset of $\Gamma$
+is also satisfiable; \item \ollabel{def:Monotony} Monotony: if $\Gamma
+\subseteq \Delta$ and $\Gamma \models !A$ then also $\Delta \models !A$;
+\item \ollabel{def:Cut} Cut: if $\Gamma \models !A$ and $\Delta \cup \{
+!A\} \models !B$ then $\Gamma \cup \Delta \models !B$; \item
+\ollabel{def:DecudtionTheorem} Deduction theorem: $\Gamma \models !A
+\supset !B$ if and only if $\Gamma \cup \{!A\} \models !B$ . \end{itemize}
+\end{prob}
+
+\end{document}
