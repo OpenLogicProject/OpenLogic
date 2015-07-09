@@ -1,0 +1,94 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proof-theoretic-notions
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{ptn}
+\olsection{Proof-Theoretic Notions}
+
+\begin{explain}
+Just as we've defined a number of important semantic notions
+(validity, entailment, satisfiabilty), we now define corresponding
+\emph{proof-theoretic notions}.  These are not defined by appeal to
+satisfaction of !!{sentence}s in !!{structure}s, but by appeal to the
+!!{derivability} or !!{nonderivability} of certain formulas.  It was
+an important discovery, due to G\"odel, that these notions coincide.
+That they do is the content of the \emph{completeness theorem}.
+\end{explain}
+
+\begin{defn}[Theorems]
+  $\mathsf{Thm}_\Gamma = \{ !A :  \Gamma \Proves !A\}$. 
+
+ $\mathsf{Thm}_\Gamma$ is the smallest set of !!{formula}s containing
+ $\Gamma$, the axioms, and closed under \emph{modus
+   ponens}. Accordingly, we have a principle of proof by
+ \emph{induction on the theorem of $\Gamma$}.  
+\end{defn}
+
+\begin{proof}
+  We know from Proposition \olref{prop:contain} that
+  $\mathsf{Thm}(\Gamma)$ has the desired properties; so we need to
+  show that it is the smallest such. Let $A$ be any other set of
+  !!{formula}s containing the axioms and $\Gamma$ and closed under
+  \emph{modus ponens}. Prove that $\mathsf{Thm}(\Gamma) \subseteq A$
+  by induction on the length of a proof of $!A$ from $\Gamma$.
+\end{proof}
+
+\begin{cor}\ollabel{cor:induction-thms}
+  \emph{Principle of induction on theorems}: any property $P$ that
+  holds of the axioms, of !!{formula}s in $\Gamma$, and is preserved by
+  \emph{modus ponens} holds of every !!{formula} in
+  $\mathsf{Thm}(\Gamma)$.
+\end{cor}
+
+\begin{defn}[!!^{derivability}]
+ A !!{formula}
+  $!A$ is \emph{{!!derivable}} from $\Gamma$, written $\Gamma \Proves
+  !A$, if there is a !!{derivation} from $\Gamma$ ending in $!A$. 
+\end{defn}
+
+\begin{defn}[Consistency]
+  A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if 
+  $\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
+\end{defn}
+
+\begin{prop} \olref{prop:prov-incons}
+$\Gamma \Proves[\Log{LK}] !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][axd][ptn]{prop:prov-incons}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
+  sentence~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][axd][ptn]{prop:incons}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:proves-compact}
+If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
+\Gamma$, $\Gamma_0 \Proves !A$.
+\end{prop}
+
+\begin{proof}
+Follows immediately from the definion of~$\Proves$.
+\end{proof}
+
+\end{document}

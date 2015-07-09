@@ -1,0 +1,42 @@
+% Part: first-order-logic
+% Chapter: axiomatic-proofs
+% Section: identity
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{ide}
+
+\olsection{\usetoken{P}{derivation} with \usetoken{S}{identity}}
+
+\begin{prop}\ollabel{prop:iden1}
+ $\Gamma \Proves t \doteq t$, for any term $t$ and set
+  $\Gamma$.
+\end{prop}
+
+\begin{proof}
+  $\lforall[x][(x \doteq x)]$ is an axiom, and any term $t$ is free for
+  $x$ in $x \doteq x$. 
+\end{proof}
+
+\begin{prop}\ollabel{prop:iden2}
+  If $\Gamma \Proves \Subst{!A}{t}{z}$ and $\Gamma \Proves t \doteq
+  t'$, and both $t$ and $t'$ are !!{free for} $x$ in $!A$, then
+  $\Gamma \Proves \Subst{!A}{t'}{z}]$.  
+\end{prop}
+
+\begin{proof}
+  Pick !!{variable}s $x$ and $y$ not occurring $!A$, $t$, or $t'$ (at
+  all). Then 
+  \[
+  \lforall[x]\lforall[y][(x \doteq y \lif (\Subst{!A}{x}{z}] \lif
+  \Subst{!A}{y}{z})) 
+  \]
+  is an axiom (\textbf{Ax5}), since $x$ and $y$ are !!{free for} $z$ in
+  $!A$. By \textbf{Ax1} and MP (twice), $\Gamma \Proves (t \doteq t'
+  \lif (\Subst{!A}{t}{z} \lif \Subst{!A}{t'}{z}))$, whence the
+  conclusion follows by two further applications of MP. 
+\end{proof}
+
+\end{document}
