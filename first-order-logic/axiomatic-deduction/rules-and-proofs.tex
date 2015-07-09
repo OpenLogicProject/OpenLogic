@@ -1,29 +1,49 @@
-% Part: first-order-logic 
-% Chapter: axiomatic-proofs 
-% Section: propositional-proof-theory
+% Part: first-order-logic
+% Chapter: axiomatic-proofs
+% Section: rules-and-proofs
 
 \documentclass[../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{fol}{axp}{ppt}
+\olfileid{fol}{axp}{rul}
 
-\olsection{Proof Theory for Propositional Logic}
+\olsection{Rules and \usetoken{P}{derivation}}
+
+Let $\Lang L$ be a first-order language with the usual constants,
+!!{variable}s, logical symbols, and auxiliary symbols (parentheses
+and the comma).
+
+\begin{defn}[Tautological Instance]
+  A !!{formula} $!A$ of predicate logic is a \emph{tautological
+    instance} if and only if there is a tautology $!B(p_1,\ldots,p_n)$ of
+  propositional logic and first-order !!{formula}s
+  $!C_1,\ldots,!C_n$ such that $!A =
+  \Subst{!B}{!C_1}{p_1},\ldots,\Subst{}{!C_n}{p_n}$. 
+\end{defn}
 
 \begin{defn}[Axioms]
-  The set of \textbf{Ax} of the \emph{Axioms} of propositional logic
-  comprises all !!{formula}s of the following forms:
+  The set \textbf{Ax} of the \emph{Axioms} of first-order logic
+  comprises all !!{formula}s obtained by prefixing any number of universal
+  quantifiers to the following:
   \begin{description}
-  \item[{[Ax1]}] $!A \lif (!B \lif !A)$;
-  \item[{[Ax2]}] $(!A \lif (!B \lif !C)) \lif
-    ((!A \lif !B) \lif (!A \lif !C))$;
-  \item[{[Ax3]}] $(\lnot !A \lif \lnot !B) \lif (!B
-    \lif !A)$.
+  \item[{[\textbf{Ax0}]}] $!A$, where $!A$ is a tautological
+    instance;
+  \item[{[\textbf{Ax1}]}] $\lforall[x][!B] \lif \Subst{!B}{t}{x}$,
+    if $t$ is !!{free for} $x$ in $!B$;
+  \item[{[\textbf{Ax2}]}] $\lforall[x][(!A \lif !B)] \lif
+    (\lforall[x][!A] \lif \lforall[x][!B])$;
+  \item[{[\textbf{Ax3}]}] $!B \lif \lforall[x][!B]$, if $x$ is
+    \emph{not} free in $!B$;
+  \item[{[\textbf{Ax4}]}] $\eq[x][x]$;
+  \item[{[\textbf{Ax5}]}] $\eq[x][y] \lif (\Subst{!B}{x}{z}
+    \lif \Subst{!B}{y}{z})$, if both $x$ and $y$ are !!{free for}
+    $z$ in $!B$.
   \end{description}
 \end{defn}
 
-\begin{defn}[!!^{derivability}]
-  If $\Gamma$ is a set of !!{formula}s of $\Lang L_0$ and $!A$ a
+\begin{defn}[!!^{derivation}]
+  If $\Gamma$ is a set of !!{formula}s of $\Lang L$ and $!A$ a
 !!{formula}, then a \emph{!!{derivation}} of $!A$ from $\Gamma$ is a finite
 sequence $!A_1,\ldots, !A_n$ of !!{formula}s such that
   $!A_n = !A$ and for each $i\le n$ one of the following
@@ -39,11 +59,7 @@ sequence $!A_1,\ldots, !A_n$ of !!{formula}s such that
 \begin{explain}
 The last clause just says that $!A_i$ can be obtained from
 previously occurring $!A_k$ and $!A_k \lif !A_i$ by
-\emph{modus ponens} (MP).  We write $\Gamma \Proves !A$
-(``$\Gamma$ !!{derive}s $!A$,'' or ``$!A$ is !!{derivable} from
-$\Gamma$'') to mean that there is a !!{derivation} of $!A$ from
-$\Gamma$. When $\Gamma$ is empty, we write $\Proves !A$ to mean
-$\varnothing \Proves !A$.
+\emph{modus ponens} (MP). 
 \end{explain}
 
 \begin{prop}\ollabel{prop:easyproofs}
@@ -83,35 +99,18 @@ For part \olref{prop:easyproofs:refl}, consider the instance of
   \end{enumerate}
 \end{prop}
 
-\begin{thm}
-  Let $\mathsf{Thm}(\Gamma) = \{!A : \Gamma \Proves
-  !A\}$. Then $\mathsf{Thm}(\Gamma)$ is the smallest set of
-  formulas containing the axioms, every !!{formula} in $\Gamma$, and
-  closed under \emph{modus ponens} (from $!A$ and $!A
-  \lif !B$ infer $!B$).
-\end{thm} 
-
-\begin{proof}
-  We know from Proposition \olref{prop:contain} that
-  $\mathsf{Thm}(\Gamma)$ has the desired properties; so we need to
-  show that it is the smallest such. Let $A$ be any other set of
-  !!{formula}s containing the axioms and $\Gamma$ and closed under
-  \emph{modus ponens}. Prove that $\mathsf{Thm}(\Gamma) \subseteq A$
-  by induction on the length of a proof of $!A$ from $\Gamma$.
-\end{proof}
-
-\begin{cor}\ollabel{cor:induction-thms}
-  \emph{Principle of induction on theorems}: any property $P$ that
-  holds of the axioms, of !!{formula}s in $\Gamma$, and is preserved by
-  \emph{modus ponens} holds of every !!{formula} in
-  $\mathsf{Thm}(\Gamma)$.
-\end{cor}
-
 \begin{thm}\ollabel{thm:deduction-thm}
   \emph{Deduction Theorem}: $\Gamma \cup \{!A\} \Proves !B$ if
   and only if $\Gamma \Proves !A \lif !B$.
 \end{thm}
 \begin{proof}
+For this proof we rely on the following instances of \textbf{Ax0}:
+\begin{enumerate}
+  \item $!A \lif (!B \lif !A)$;
+  \item $(!A \lif (!B \lif !C)) \lif
+    ((!A \lif !B) \lif (!A \lif !C))$;
+\end{enumerate}
+
   The ``if'' direction is immediate; if $\Gamma \Proves !A \lif
   !B$ then also $\Gamma \cup \{!A\}\Proves !A \lif
   !B$, so there is !!a{derivation} of $!A\lif !B$ from $\Gamma \cup
@@ -120,7 +119,7 @@ For part \olref{prop:easyproofs:refl}, consider the instance of
 
   For the converse, proceed by induction on theorems. If $!B \in
   \Gamma$ or $!B$ is an axiom then also $\Gamma \Proves !B \lif
-  (!A \lif !B)$ by \textbf{Ax1}, and \emph{modus ponens}
+  (!A \lif !B)$ by 1, and \emph{modus ponens}
   gives $\Gamma\cup \Proves !A \lif !B$; and if $!B \in \{
   !A\}$ then $\Gamma \Proves !A \lif !B$ because the
   last !!{sentence} is the same as $!A \lif !A$.
@@ -138,14 +137,9 @@ But also
 \Gamma \Proves (!A \lif (!C \lif !B)) \lif
 ((!A\lif !C)  \lif (!A \lif !B)),
 \]
-by \textbf{Ax2}, and two applications of \emph{modus ponens} give
+by 2, and two applications of \emph{modus ponens} give
 $\Gamma \Proves !A \lif !B$, as required.
 \end{proof}
-
-Notice how \textbf{Ax1} and \textbf{Ax2} were chosen precisely so that
-the Deduction Theorem would hold. The following proposition collects
-useful facts about !!{derivability} that will be needed in the next
-section.
 
 \begin{prop}\ollabel{prop:derivfacts}
   The following are all !!{derivable}:
@@ -248,10 +242,6 @@ The following shows that the conclusion is !!{derivable}:
     contraposition, 8. 
  \end{tabular}
 
-\end{proof}
-
-
-
 \begin{prop} \ollabel{prop:consistent} 
 The following hold:
   \begin{enumerate}
@@ -326,84 +316,10 @@ and monotony, $\Gamma, !A \lif !B, !A \lif \lnot !B
   \Proves \lnot !A$; two applications of Cut give the desired result. 
 \end{proof}
 
-\begin{defn}[Consistency]
-  A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if there
-  is a !!{formula} $!A$ such that $\Gamma\Proves/!A$; it is
-  \emph{inconsistent} otherwise.
-\end{defn}
 
-\begin{prop}
-  $\Gamma$ is inconsistent if and only if there is a formula $!A$
-  such that both $\Gamma \Proves !A$ and $\Gamma\Proves\lnot !A$.
-\end{prop}
-
-\begin{proof}
-  The ``only if'' direction is obvious. For the converse, suppose that
-  $\Gamma \Proves !A$ and $\Gamma\Proves\lnot !A$. Then by
-  Proposition \olref{prop:derivfacts}, part (c) and monotony, $\Gamma
-  \cup \{!A,\lnot!A \} \Proves !B$ for any !!{formula} $!B$,
-  and now two applications of Cut give $\Gamma\Proves!B$ for any
-  $!B$, so $\Gamma$ is inconsistent.
-\end{proof}
-
-\begin{prop}\ollabel{prop:proves}
-  $\Gamma \Proves!A$ if and only if $\Gamma\cup \{\lnot!A \}$
-  is inconsistent.
-\end{prop}
-
-\begin{proof}
-  If $\Gamma \Proves !A$ then also $\Gamma, \lnot !A \Proves
-  !A$ by monotony, and $\Gamma, \lnot !A \Proves
-  \lnot !A$ by reflexivity, so $\Gamma\cup\{\lnot !A\}$ is
-  inconsistent.  Conversely, suppose $\Gamma\cup\{\lnot !A\}$ is
-  inconsistent. Then $\Gamma \lnot !A \Proves !C$ and $\Gamma
-  \lnot !A \Proves \lnot !C$ for some $!C$. By
-  Prop. \olref{prop:consistent} part \olref{prop:consistent:3},
-  $\Gamma \Proves \lnot \lnot !A$. But also $\lnot\lnot!A
-  \Proves !A$, by double negation so that by cut $\Gamma \Proves
-  !A$. 
-\end{proof}
-
-\begin{prop}\ollabel{prop:phi}
-  If $\Gamma$ is consistent, then for any !!{formula} $!A$, either
-  $\Gamma \cup\{!A\}$ is consistent or $\Gamma \cup\{\lnot
-  !A\}$ is consistent.
-\end{prop}
-
-\begin{proof}
-  From Prop. \olref{prop:proves} we have that if $\Gamma \cup\{\lnot
-  !A\}$ is inconsistent, then $\Gamma \Proves !A$; if $\Gamma
-  \cup\{ !A\}$ is also inconsistent, then $\Gamma \cup\{
-  !A\} \Proves !B$ for any $!B$. But then by Cut $\Gamma
-  \Proves !B$ for any $!B$, so $\Gamma$ is inconsistent.
-\end{proof}
-
-\begin{prop}
-  $\Gamma$ is consistent if and only if every finite subset
-  $\Gamma_0\subseteq \Gamma$ is consistent.
-\end{prop}
-\begin{proof}
- For the non-trivial direction: if $\Gamma$ is inconsistent, then
- $\Gamma \Proves !B$ and $\Gamma \Proves \lnot !B$ for some
-$!B$; each !!{derivation} involves only finitely many !!{formula}s from
-$\Gamma$;
-collect the ones occurring in the first !!{derivation} into the finite set
-$\Gamma_1$, and those occurring in the second proof into the finite
- set $\Gamma_2$. Then $\Gamma_0 = \Gamma_1 \cup \Gamma_2$ is a finite
- subset of $\Gamma$ that is a inconsistent.   
 \end{proof}
 
 
-\begin{prob}
-Show that the following hold by \emph{exhibiting} !!{derivation}s from the
-axioms (i.e., without using meta-theoretic facts such as Cut,
-  Monotony, the Deduction Theorem, etc.):
-  \begin{itemize}
-  \item $\{!A\lif !B, !B\lif !C\} \Proves !A\lif !C$;
-  \item $\Proves !A \lif !A$;
-  \item $\Proves \lnot !A \lif (!A \lif !B)$;
-  \item $\Proves !A \supset (\lnot !A \lif !B)$.
- \end{itemize}
-\end{prob}
+
 
 \end{document}

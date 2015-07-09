@@ -1,0 +1,64 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: soundness
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{sou}
+\olsection{Soundness}
+
+\begin{explain}
+A !!{derivation} system, such as axiomatic deduction, is \emph{sound}
+if it cannot !!{derive} things that do not actually hold.  Soundness is
+thus a kind of guaranteed safety property for !!{derivation} systems.
+Depending on which proof theoretic property is in question, we would
+like to know for instance, that
+\begin{enumerate}
+\item every !!{derivable} !!{sentence} is valid;
+\item if a !!{sentence} is !!{derivable} from some others, it is also a
+  consequence of them;
+\item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
+\end{enumerate}
+These are important properties of a !!{derivation} system.  If any of them do
+not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
+Consequently, establishing the soundness of a !!{derivation} system is of the
+utmost importance.
+\end{explain}
+
+
+\begin{prop}
+  If $!A$ is an axiom of predicate logic, then $\Struct{A}
+  \Entails !A[s]$ for each !!{structure} $\Struct{A}$ and assignment
+  $s$.
+\end{prop}
+
+\begin{proof}
+  We first verify that the schemas \textbf{Ax0}--\textbf{Ax5} are
+  valid. For instance, here is the case for \textbf{Ax1}: suppose $t$
+is free for $x$ in $!A$, and assume $\Sat{A}{\lforall[x][!A]}[s]$. Then by
+definition of satisfaction, for each
+  $a \in A$, also $\Sat{A}{!A\Subst{s}{a}{x}}$, and in
+particular this holds when $a = \overline s(t)$, i.e.,
+$\Sat{A}{!A\Subst{s}{\overline s(t)}{x}}$. By the Substitution Theorem,
+  $\Sat{A}{\Subst{!A}{t}{x}}[s]$. This shows that
+$\Sat{A}{(\lforall[x][!A] \lif \Subst{!A}{t}{x})}[s]$. After verifying the
+schemas, we see that
+  their universal closures are also valid, by Corollary
+  \ref{cor:valid}.
+\end{proof}
+
+\begin{thm} \ollabel{thm:Soundness}
+  (\emph{Soundness}) If $\Gamma \Proves !A$ then $\Gamma \Entails
+  !A$. 
+\end{thm}
+
+\begin{proof}
+  By induction on theorems. By the previous proposition, all the
+  axioms are valid, and hence if $!A$ is an axiom then $\Gamma
+  \Entails !A$. Similarly if $!A \in \Gamma$. And if $\Gamma
+  \Proves !B$ and $\Gamma \Proves !B \lif !A$ then $\Gamma
+  \Entails !A$.
+\end{proof}
+\end{document}
