@@ -32,8 +32,9 @@ $\Delta \Proves !A$.
 %%Taken as reminder from the Sequent Calculus Chapter - will update when done
 \begin{prop}
 \begin{enumerate}
-\item \ollabel{prop:provability-contr} If $\Gamma \Proves[\Log{LK}]
-  !A$ and $\Gamma \cup \{ !A\} \Proves[\Log{LK}] \lfalse$, then
+
+\item \ollabel{prop:provability-contr} If $\Gamma \Proves
+  !A$ and $\Gamma \cup \{ !A\} \Proves \lfalse$, then
   $\Gamma$ is inconsistent.
 
 \item \ollabel{prop:provability-lnot} If $\Gamma \cup \{!A\}
@@ -72,219 +73,105 @@ $\Delta \Proves !A$.
 
 \begin{proof}
 \begin{enumerate}
-\item Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A$ be
-  $\Pi_0$ and the $\Log{LK}$-!!{derivation} of $\Gamma_1 \cup\{!A\}
-  \Sequent \lfalse$ be $\Pi_1$. We can then !!{derive}
 
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0 \fCenter !A $
-\doubleLine
-\UnaryInf$ \Gamma_0,\Gamma_1 \fCenter !A $
+\item Consider the following !!{derivation}:
 
-\AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, !A \fCenter \lfalse$
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter \lfalse $
+\begin{tabular}{rll}
+1. & $\Gamma_0 \cup \{!A\} \Proves \lfalse$ & hyp. \\
+2. & $\Gamma_1 \Proves !A$ & hyp.\\
+3. & $\Gamma_0 \cup \Gamma_1 \Proves \lfalse$ & cut \\
+\end{tabular}
 
-\RightLabel{cut}
-\BinaryInf$ \Gamma_0,\Gamma_1 \fCenter \lfalse $
-\end{prooftree}
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
-\Proves[\Log{LK}] \lfalse$.
+\Proves \lfalse$.
 
-\item Suppose that $\Gamma \cup \{!A\} \Proves[\Log{LK}]
-  \lfalse$. Then there is a finite set $\Gamma_0 \subseteq \Gamma$
-  with $\Proves[\Log{LK}] \Gamma_0 \cup \{!A\} \Sequent \lfalse$.  Let
-  $\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \cup \{!A\}
-  \Sequent \lfalse$, and consider
+\item Consider the following derivation:
+ 
+\begin{tabular}{rll}
+1. & $\Gamma_0 \cup\{\lnot !A\} \Proves \lfalse$ & hyp. \\
+2. & $\Gamma_0 \Proves \lnot \lnot !A$ & Prop \olref[fol][axd][rul]{prop:consistent:3}\\
+3. & $\lnot \lnot !A \Proves !A$ & Double Negation \\
+4. & $\Gamma_0 \Proves !A$ & MP 2, 3 \\
+\end{tabular}
 
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$\Gamma_0, !A \fCenter \lfalse$
-\RightLabel{$\lnot$ right}
-\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
-\end{prooftree}
+\item Consider the following derivation:
 
-\item There are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1
-  \subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$ of
-  $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent
-  \lfalse$, respectively. We can then !!{derive}
+ \begin{tabular}{rll}
+1. & $\Gamma_0 \cup\{!A\} \Proves \lfalse$ & hyp. \\
+2. & $\Gamma_1 \cup \{\lnot !A \} \Proves \lfalse$ & hyp\\
+3. & $\Gamma_0 \Proves \lnot !A$ & Prop \olref[fol][axd][rul]{prop:consistent:3} \\
+4. & $\Gamma_0 \cup \Gamma_1 \Proves \lfalse$ & Cut 2, 3 \\
+\end{tabular}
 
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, !A \fCenter \lfalse $
-\RightLabel{$\lnot$ right}
-\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
-
-\AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, \lnot !A \fCenter \lfalse $
-
-\RightLabel{cut}
-\BinaryInf$ \Gamma_0, \Gamma_1 \fCenter \lfalse $
-\end{prooftree}
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
-\Proves[\Log{LK}] \lfalse$.
+\Proves \lfalse$.
 
 % prop:provability-lor-left
 \tagitem{defOr}{}{
-\iftag{probOr}{Exercise.}{
-There are finite sets $\Gamma_0,\Gamma_1 \subseteq \Gamma$ and
-$\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$ such that
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, !A \fCenter \lfalse $
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter \lfalse $
+\iftag{probOr}{Exercise.}{}}
 
-\AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, !B \fCenter \lfalse $
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, !B \fCenter \lfalse$
-
-\RightLabel{$\lor$ left}
-\BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter \lfalse $
-\end{prooftree}
-Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
-!B\} \Proves \lfalse$.}}
 
 % prop:provability-lor-right
 \tagitem{defOr}{}{
 \iftag{probOr}{Exercise.}{
-There is an $\Log{LK}$-!!{derivation} $\Pi_0$ and a finite set $\Gamma_0
-\subseteq \Gamma$ such that we can !!{derive}
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0 \fCenter !A $
-\RightLabel{$\lor$ right}
-\UnaryInf$ \Gamma_0 \fCenter !A \lor !B$
-\end{prooftree}
+
+ \begin{tabular}{rll}
+1. & $\Gamma_0 \Proves !A$ & hyp \\
+2. & $!A \lif (!A \lor !B)$ & Ax0\\
+3. & $\Gamma_0 \Proves !A \lor !B$ & MP 1, 2 \\
+\end{tabular}
+
 Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
-\Proves[\Log{LK}] !B$ is similar.}}
+\Proves !B$ is similar.}}
 
 % prop:provability-land-left
 \tagitem{defAnd}{}{
 \iftag{probAnd}{Exercise}{
-If $\Gamma \Proves[\Log{LK}] !A \land !B$, there is a finite set
-$\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation} $\Pi_0$ of
-$\Gamma_0 \Sequent !A \land !B$. Consider
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, \fCenter !A \land !B$
-\Axiom$!A \fCenter !A$
-\RightLabel{$\land$ left}
-\UnaryInf$!A \land !B \fCenter !A$
-\RightLabel{cut}
-\BinaryInf$\Gamma_0 \fCenter !A$
-\end{prooftree}
-Hence, $\Gamma \Proves[\Log{LK}] !A$.  A similar !!{derivation} starting
-with $!B \Sequent !B$ on the right side shows that $\Gamma
-\Proves[\Log{LK}] !B$.}}
+
+ \begin{tabular}{rll}
+1. & $\Gamma_0 \Proves !A \land !B$ & hyp \\
+2. & $(!A \land !B) \lif !A $ & Ax0\\
+3. & $\Gamma_0 \Proves !A \lor !B$ & MP 1, 2 \\
+\end{tabular}
+
+Hence, $\Gamma \Proves !A$. A similar !!{derivation} starting
+ shows that $\Gamma \Proves !B$.}}
 
 % prop:provability-land-right
-\tagitem{defAnd}{}{\iftag{probAnd}{Exercise.}{If $\Gamma
-    \Proves[\Log{LK}] !A$ as well as $\Gamma \Proves[\Log{LK}] !B$,
-    there are finite sets $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$ and
-    an $\Log{LK}$-!!{derivation}s $\Pi_0$ of $\Gamma_0 \Sequent !A$ and
-    $\Pi_1$ of $\Gamma_1 \Sequent !A$. Consider
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, \fCenter !A$
-
-\AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, \fCenter !B$
-
-\RightLabel{$\land$ right}
-\BinaryInf$\Gamma_0, \Gamma_1 \fCenter !A \land !B $
-\end{prooftree}
-Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, we have $\Gamma
-\Proves[\Log{LK}] !A \land !B$.}}
+\tagitem{defAnd}{}{\iftag{probAnd}{Exercise.}{}}
 
 % prop:provability-mp
 \tagitem{defIf}{}{
 \iftag{probIf}{Exercise.}{
-Suppose that $\Gamma \Proves[\Log{LK}] !A$ and $\Gamma
-\Proves[\Log{LK}] !A \lif !B$.  There are finite sets $\Gamma_0$,
-$\Gamma_1 \subseteq \Gamma$ such that there are $\Log{LK}$-!!{derivation}s
-$\Pi_0$ of $\Gamma_0 \Sequent !A$ and $\Pi_1$ of $\Gamma_1 \Sequent !A
-\lif !B$. Consider:
 
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_1 \fCenter !A \lif !B$
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2 \fCenter !A \lif !B$
+ \begin{tabular}{rll}
+1. & $\Gamma_0 \Proves !A$ & hyp \\
+2. & $\Gamma_0 \Proves !A \lif !B $ & hyp\\
+3. & $\Gamma_0 \Proves !B$ & MP 1, 2\\
+\end{tabular}
 
-\AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$\Gamma_0 \fCenter !A $
-
-\AxiomC{$!B \fCenter !B$}
-\doubleLine
-\UnaryInf$ \Gamma_0, !B \fCenter !B$
-
-\RightLabel{$\lif$ left}
-\BinaryInf$\Gamma_0, !A \lif !B \fCenter !B$
-
-\RightLabel{cut}
-\BinaryInf$ \Gamma_0,\Gamma_1 \fCenter !B$
-\end{prooftree}
 Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, this
 means that $\Gamma \Proves[\Log{LK}] !B$.}}
 
 % prop:provability-lif
 \tagitem{defIf}{}{\iftag{probIf}{Exercise.}{First suppose $\Gamma
-    \Proves[\Log{LK}] \lnot !A$.  Then for some finite $\Gamma_0
-    \subseteq \Gamma$ there is a $\Log{LK}$-!!{derivation} of $\Gamma_0
-    \Sequent \lnot !A$. The following !!{derivation} shows that $\Gamma
-    \Proves[\Log{LK}] !A \lif !B$:
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0 \fCenter \lnot !A$
+    \Proves \lnot !A$.
+    
+\begin{tabular}{rll}
+1. & $\Gamma_0 \Proves \lnot !A$ & hyp \\
+2. & $\lnot !A \lif (!A \lif !B) $ & Ax0\\
+3. & $\Gamma_0 \Proves !A \lif !B$ & MP 1, 2\\
+\end{tabular}
 
-\Axiom$!A \fCenter !A$
-\RightLabel{$\lnot right$}
-\UnaryInf$\lnot !A, !A \fCenter$
-\doubleLine
-\UnaryInf$!A, \lnot !A \fCenter !B$
-\RightLabel{$\lif$ right}
-\UnaryInf$\lnot !A \fCenter !A \lif !B$
-\RightLabel{cut}
-\BinaryInf$\Gamma_0 \fCenter !A \lif !B$
-\end{prooftree}
+The proof for $\Gamma \Proves !B$ is similar:
 
-Now suppose $\Gamma \Proves[\Log{LK}] !B$.  Then for some finite
-$\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-!!{derivation} of
-$\Gamma_0 \Sequent !B$. The following !!{derivation} shows that $\Gamma
-\Proves[\Log{LK}] !A \lif !B$:
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$\Gamma_0 \fCenter !B$
-
-\Axiom$!B \fCenter !B$
-\doubleLine
-\UnaryInf$!A, !B \fCenter !B$
-\RightLabel{$\lif$ right}
-\UnaryInf$!B \fCenter !A \lif !B$
-\RightLabel{cut}
-\BinaryInf$\Gamma_0 \fCenter !A \lif !B$
-\end{prooftree}}}
+\begin{tabular}{rll}
+1. & $\Gamma_0 \Proves !B$ & hyp \\
+2. & $!B \lif (!A \lif !B) $ & Ax0\\
+3. & $\Gamma_0 \Proves !A \lif !B$ & MP 1, 2\\
+\end{tabular}}}
 
 \end{enumerate}
 \end{proof}
