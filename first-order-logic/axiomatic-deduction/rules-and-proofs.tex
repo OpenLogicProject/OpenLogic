@@ -1,5 +1,5 @@
-% Part: first-order-logic
-% Chapter: axiomatic-deduction
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
 % Section: rules-and-proofs
 
 \documentclass[../../include/open-logic-section]{subfiles}
@@ -11,315 +11,259 @@
 \olsection{Rules and \usetoken{P}{derivation}}
 
 Let $\Lang L$ be a first-order language with the usual constants,
-!!{variable}s, logical symbols, and auxiliary symbols (parentheses
-and the comma).
+!!{variable}s, logical symbols, and auxiliary symbols (parentheses and the
+comma).
 
-\begin{defn}[Tautological Instance]
-  A !!{formula} $!A$ of predicate logic is a \emph{tautological
-    instance} if and only if there is a tautology $!B(p_1,\ldots,p_n)$ of
-  propositional logic and first-order !!{formula}s
-  $!C_1,\ldots,!C_n$ such that $!A =
-  \Subst{!B}{!C_1}{p_1},\ldots,\Subst{}{!C_n}{p_n}$. 
+\begin{defn}[Tautological Instance] A !!{formula} $!A$ of predicate logic
+is a \emph{tautological instance} if and only if there is a tautology
+$!B(p_1,\ldots,p_n)$ of propositional logic and first-order !!{formula}s
+$!C_1,\ldots,!C_n$ such that $!A =
+\Subst{!B}{!C_1}{p_1},\ldots,\Subst{}{!C_n}{p_n}$. 
 \end{defn}
 
-\begin{defn}[Axioms]
-  The set \textbf{Ax} of the \emph{Axioms} of first-order logic
-  comprises all !!{formula}s obtained by prefixing any number of universal
-  quantifiers to the following:
-  \begin{description}
-  \item[{[\textbf{Ax0}]}] $!A$, where $!A$ is a tautological
-    instance;
-  \item[{[\textbf{Ax1}]}] $\lforall[x][!B] \lif \Subst{!B}{t}{x}$,
-    if $t$ is !!{free for} $x$ in $!B$;
-  \item[{[\textbf{Ax2}]}] $\lforall[x][(!A \lif !B)] \lif
-    (\lforall[x][!A] \lif \lforall[x][!B])$;
-  \item[{[\textbf{Ax3}]}] $!B \lif \lforall[x][!B]$, if $x$ is
-    \emph{not} free in $!B$;
-  \item[{[\textbf{Ax4}]}] $\eq[x][x]$;
-  \item[{[\textbf{Ax5}]}] $\eq[x][y] \lif (\Subst{!B}{x}{z}
-    \lif \Subst{!B}{y}{z})$, if both $x$ and $y$ are !!{free for}
-    $z$ in $!B$.
-  \end{description}
+\begin{defn}[Axioms] The set \textbf{Ax} of the \emph{Axioms} of
+first-order logic comprises all !!{formula}s obtained by prefixing any
+number of universal quantifiers to the following: 
+\begin{description}
+\item[{[\textbf{Ax0}]}] $!A$, where $!A$ is a tautological instance;
+\item[{[\textbf{Ax1}]}] $\lforall[x][!B] \lif \Subst{!B}{t}{x}$, if $t$ is
+!!{free for} $x$ in $!B$; 
+\item[{[\textbf{Ax2}]}] $\lforall[x][(!A \lif
+!B)] \lif (\lforall[x][!A] \lif \lforall[x][!B])$; 
+\item[{[\textbf{Ax3}]}]
+$!B \lif \lforall[x][!B]$, if $x$ is \emph{not} free in $!B$;
+\item[{[\textbf{Ax4}]}] $\eq[x][x]$; \item[{[\textbf{Ax5}]}] $\eq[x][y]
+\lif (\Subst{!B}{x}{z} \lif \Subst{!B}{y}{z})$, if both $x$ and $y$ are
+!!{free for} $z$ in $!B$. 
+\end{description} 
 \end{defn}
 
-\begin{defn}[!!^{derivation}]
-  If $\Gamma$ is a set of !!{formula}s of $\Lang L$ and $!A$ a
-!!{formula}, then a \emph{!!{derivation}} of $!A$ from $\Gamma$ is a finite
-sequence $!A_1,\ldots, !A_n$ of !!{formula}s such that
-  $!A_n = !A$ and for each $i\le n$ one of the following
-  holds:
-  \begin{itemize}
-  \item $!A_i \in \Gamma$; or
-  \item $!A_i$ is an axiom; or
-  \item there are $j,k<i$ that $!A_j$ is $!A_k \lif
-    !A_i$.
-  \end{itemize}
+\begin{defn}[!!^{derivation}] If $\Gamma$ is a set of !!{formula}s of
+$\Lang L$ and $!A$ a !!{formula}, then a \emph{!!{derivation}} of $!A$ from
+$\Gamma$ is a finite sequence $!A_1,\ldots, !A_n$ of !!{formula}s such that
+$!A_n = !A$ and for each $i\le n$ one of the following holds:
+\begin{itemize} 
+\item $!A_i \in \Gamma$; or 
+\item $!A_i$ is an axiom; or
+\item there are $j,k<i$ that $!A_j$ is $!A_k \lif !A_i$. 
+\end{itemize}
 \end{defn}
 
-\begin{explain}
-The last clause just says that $!A_i$ can be obtained from
-previously occurring $!A_k$ and $!A_k \lif !A_i$ by
-\emph{modus ponens} (MP). 
+\begin{explain} The last clause just says that $!A_i$ can be obtained from
+previously occurring $!A_k$ and $!A_k \lif !A_i$ by \emph{modus ponens}
+(MP). 
 \end{explain}
 
-\begin{prop}\ollabel{prop:easyproofs}
- The following are !!{derivable}:
-  \begin{enumerate}
-  \item \emph{Transitivity}: $\{!A\lif !B, !B\lif !C\} \Proves
-    !A\lif!C$\ollabel{prop:easyproofs:trans}
-  \item $\Proves !A \lif !A$. \ollabel{prop:easyproofs:refl}
-  \end{enumerate}
+\begin{prop}\ollabel{prop:easyproofs} The following are !!{derivable}:
+\begin{enumerate} 
+\item \emph{Transitivity}: $\{!A\lif !B, !B\lif !C\}
+\Proves !A\lif!C$\ollabel{prop:easyproofs:trans} 
+\item $\Proves !A \lif !A$. \ollabel{prop:easyproofs:refl} 
+\end{enumerate} 
 \end{prop}
 
-\begin{proof}
-  For part \olref{prop:easyproofs:trans}, the following instances
-  of \textbf{Ax1.} and \textbf{Ax2.} are needed:
-  \begin{eqnarray*}
-    &&(!B \lif !C) \lif (!A \lif (!B \lif !C)); \\
-    && (!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif
-    (!A \lif !C)).
-  \end{eqnarray*}
-For part \olref{prop:easyproofs:refl}, consider the instance of
-\textbf{Ax1.}: $!A \lif ((!A \lif !A) \lif
-!A)$ and distribute the outermost implication by \textbf{Ax2.}
+\begin{proof} For part \olref[fol][axd][rul]{prop:easyproofs:trans}, the
+following instances of \textbf{Ax0.} are needed: 
+\begin{enumerate} 
+\item $(!B \lif !C) \lif (!A \lif (!B \lif !C));$ 
+\item $(!A \lif (!B \lif !C))\lif ((!A \lif !B) \lif (!A \lif !C))$. 
+\end{enumerate} 
+For part \olref[fol][axd][rul]{prop:easyproofs:refl}, consider the instance of
+\textbf{Ax0.}: $!A \lif ((!A \lif !A) \lif !A)$ and distribute the
+outermost implication by the second instance of \textbf{Ax0.} 
 \end{proof}
 
-\begin{prop}\ollabel{prop:contain}
-  For any set $\Gamma$ of !!{formula}s:
-  \begin{enumerate}
-  \item If $!A$ is an axiom then $\Gamma \Proves !A$;
-  \item If $!A$ is in $\Gamma$ then $\Gamma \Proves
-    !A$;\ollabel{prop:contain:reflex}
-  \item \emph{Monotony}: if $\Gamma \subseteq \Delta$ and $\Gamma
-    \Proves !A$ then also $\Delta \Proves
-    !A$;\ollabel{prop:contain:monotony} 
-  \item $\Gamma \Proves !A$ if and only if there is a
-    \emph{finite} !!{subset} $\Gamma_0$ of $\Gamma$ such that $\Gamma_0
-    \Proves !A$.
-  \end{enumerate}
+\begin{prop}\ollabel{prop:contain} For any set $\Gamma$ of !!{formula}s:
+\begin{enumerate} 
+\item If $!A$ is an axiom then $\Gamma \Proves !A$; 
+\item If $!A$ is in $\Gamma$ then $\Gamma \Proves
+!A$;\ollabel{prop:contain:reflex}
+\item \emph{Monotony}: if $\Gamma
+\subseteq \Delta$ and $\Gamma \Proves !A$ then also $\Delta \Proves
+!A$;\ollabel{prop:contain:monotony} 
+\item $\Gamma \Proves !A$ if and only
+if there is a \emph{finite} subset $\Gamma_0$ of $\Gamma$ such that
+$\Gamma_0 \Proves !A$. 
+\end{enumerate} 
 \end{prop}
 
-\begin{thm}\ollabel{thm:deduction-thm}
-  \emph{Deduction Theorem}: $\Gamma \cup \{!A\} \Proves !B$ if
-  and only if $\Gamma \Proves !A \lif !B$.
-\end{thm}
-\begin{proof}
-For this proof we rely on the following instances of \textbf{Ax0}:
-\begin{enumerate}
-  \item $!A \lif (!B \lif !A)$;
-  \item $(!A \lif (!B \lif !C)) \lif
-    ((!A \lif !B) \lif (!A \lif !C))$;
+\begin{thm}\ollabel{thm:deduction-thm} \emph{Deduction Theorem}: $\Gamma
+\cup \{!A\} \Proves !B$ if and only if $\Gamma \Proves !A \lif !B$.
+\end{thm} 
+
+\begin{proof} For this proof we rely on the following instances
+of \textbf{Ax0}: 
+\begin{enumerate} 
+\item $!A \lif (!B \lif !A)$; 
+\item $(!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C))$; 
 \end{enumerate}
 
-  The ``if'' direction is immediate; if $\Gamma \Proves !A \lif
-  !B$ then also $\Gamma \cup \{!A\}\Proves !A \lif
-  !B$, so there is !!a{derivation} of $!A\lif !B$ from $\Gamma \cup
-  \{!A\}$, and one more application of \emph{modus ponens} gives
-  $\Gamma \cup \{!A\} \Proves !B$.
+The ``if'' direction is immediate; if $\Gamma \Proves !A \lif !B$ then also
+$\Gamma \cup \{!A\}\Proves !A \lif !B$, so there is !!a{derivation} of
+$!A\lif !B$ from $\Gamma \cup \{!A\}$, and one more application of
+\emph{modus ponens} gives $\Gamma \cup \{!A\} \Proves !B$.
 
-  For the converse, proceed by induction on theorems. If $!B \in
-  \Gamma$ or $!B$ is an axiom then also $\Gamma \Proves !B \lif
-  (!A \lif !B)$ by 1, and \emph{modus ponens}
-  gives $\Gamma\cup \Proves !A \lif !B$; and if $!B \in \{
-  !A\}$ then $\Gamma \Proves !A \lif !B$ because the
-  last !!{sentence} is the same as $!A \lif !A$.
+For the converse, proceed by induction on theorems. If $!B \in \Gamma$ or
+$!B$ is an axiom then also $\Gamma \Proves !B \lif (!A \lif !B)$ by 1, and
+\emph{modus ponens} gives $\Gamma\cup \Proves !A \lif !B$; and if $!B \in
+\{ !A\}$ then $\Gamma \Proves !A \lif !B$ because the last !!{sentence} is
+the same as $!A \lif !A$.
 
-  For the inductive step, suppose $!B$ is obtained by \emph{modus
-    ponens} from $!C \lif !B$ and $!C$. Then $\Gamma \cup
-  \{ !A\} \Proves !C \lif !B$ and $\Gamma \cup \{
-  !A\} \Proves !C$. By inductive hypothesis, both 
-  \begin{align*}
-   & \Gamma \Proves !A \lif (!C \lif !B); \\
-   & \Gamma \Proves !A \lif !C.
-  \end{align*}
-But also
-\[
-\Gamma \Proves (!A \lif (!C \lif !B)) \lif
-((!A\lif !C)  \lif (!A \lif !B)),
-\]
-by 2, and two applications of \emph{modus ponens} give
-$\Gamma \Proves !A \lif !B$, as required.
+For the inductive step, suppose $!B$ is obtained by \emph{modus ponens}
+from $!C \lif !B$ and $!C$. Then $\Gamma \cup \{ !A\} \Proves !C \lif !B$
+and $\Gamma \cup \{ !A\} \Proves !C$. By inductive hypothesis, both
+\begin{align*} 
+& \Gamma \Proves !A \lif (!C \lif !B); \\ 
+& \Gamma \Proves !A \lif !C. 
+\end{align*} 
+But also \[ \Gamma \Proves (!A \lif (!C \lif !B))
+\lif ((!A\lif !C) \lif (!A \lif !B)), \] by 2, and two applications of
+\emph{modus ponens} give $\Gamma \Proves !A \lif !B$, as required.
 \end{proof}
 
-\begin{prop}\ollabel{prop:derivfacts}
-  The following are all !!{derivable}:
-  \begin{enumerate}
-  \item $\Proves (!A \lif !B) \lif ((!B \lif !C)
-    \lif (!A \lif !C)$; \ollabel{derivfacts:a}
-  \item \emph{Contraposition}: if $\Gamma \cup \{ \lnot !A\}
-    \Proves \lnot !B$ then $\Gamma \cup \{ !B\} \Proves
-    !A$; \ollabel{derivfacts:b}
-  \item \emph{Ex Falso Quodlibet}: $\{ !A, \lnot!A\} \Proves
-    !B$; \ollabel{derivfacts:c}
-  \item \emph{Double Negation}: $\{ \lnot\lnot!A\} \Proves
-    !A$;\ollabel{derivfacts:d}
-  \item if $\Gamma \Proves \lnot\lnot!A$ then $\Gamma \Proves
-    !A$;\ollabel{derivfacts:e}
-\end{enumerate}
-\end{prop}
+\begin{prop}\ollabel{prop:derivfacts} The following are all !!{derivable}:
+\begin{enumerate} 
+\item $\Proves (!A \lif !B) \lif ((!B \lif !C) \lif (!A
+\lif !C)$; \ollabel{derivfacts:a} 
+\item \emph{Contraposition}: if $\Gamma
+\cup \{ \lnot !A\} \Proves \lnot !B$ then $\Gamma \cup \{ !B\} \Proves !A$;
+\ollabel{derivfacts:b} 
+\item \emph{Ex Falso Quodlibet}: $\{ !A, \lnot!A\}
+\Proves !B$; \ollabel{derivfacts:c} 
+\item \emph{Double Negation}: $\{
+\lnot\lnot!A\} \Proves !A$;\ollabel{derivfacts:d} 
+\item if $\Gamma \Proves
+\lnot\lnot!A$ then $\Gamma \Proves !A$;\ollabel{derivfacts:e}
+\end{enumerate} \end{prop}
 
 
-\begin{proof}
-Part \olref{derivfacts:a} follows from Prop. \olref{prop:easyproofs}, part
-\olref{prop:easyproofs:trans} by two applications of the Deduction
-Theorem. For part \olref{derivfacts:b}:
+\begin{proof} Part \olref[fol][axd][rul]{derivfacts:a} follows from Prop.
+\olref[fol][axd][rul]{prop:easyproofs}, part
+\olref[fol][axd][rul]{prop:easyproofs:trans} by two applications of the
+Deduction Theorem. For part \olref[fol][axd][rul]{derivfacts:b}:
 
-\begin{tabular}{rll}
-  1. & $\Gamma \cup \{ \lnot !A\} \Proves \lnot !B$ & hyp. \\
-  2. & $\Gamma \cup \Proves \lnot !A \lif \lnot !B$ & Ded. Thm.\\
-  3. & $\Gamma \Proves (\lnot !A \lif \lnot !B) \lif (!B
-  \lif !A)$ & \textbf{Ax3.} and monotony \\
-  4. & $\Gamma \Proves !B \lif !A$ & MP \\
-  5. & $\Gamma \cup \{ !B\} \Proves !A$ & Ded. Thm.
+\begin{tabular}{rll} 
+1. & $\Gamma \cup \{ \lnot !A\} \Proves \lnot !B$ &
+hyp. \\ 
+2. & $\Gamma \cup \Proves \lnot !A \lif \lnot !B$ & Ded. Thm.\\ 
+3. & $\Gamma \Proves (\lnot !A \lif \lnot !B) \lif (!B \lif !A)$ &
+\textbf{Ax3.} and monotony \\ 
+4. & $\Gamma \Proves !B \lif !A$ & MP \\ 
+5. & $\Gamma \cup \{ !B\} \Proves !A$ & Ded. Thm. 
 \end{tabular}
   
-\noindent For part \olref{derivfacts:c} we have $\{\lnot !A,
-\lnot !B \} \Proves \lnot !A$ by Prop \olref{prop:contain}, part
-\olref{prop:contain:reflex}, and $\{ !A, \lnot!A\} \Proves
-!B$ follows by \olref{derivfacts:b}. Part  \olref{derivfacts:d}: since
-$\{\lnot\lnot !A, \lnot !A \} \Proves \lnot \lnot\lnot
-!A$ by \emph{ex falso quodlibet}, apply  \olref{derivfacts:b}. Now
-for part  \olref{derivfacts:e}, $\Gamma \Proves \lnot\lnot !A
-\supset !A$ by the previous part, the deduction theorem, and
-monotony, so if $\Gamma \Proves \lnot\lnot!A$ also $\Gamma \Proves
-!A$ by MP. 
+\noindent For part \olref[fol][axd][rul]{derivfacts:c} we have $\{\lnot !A,
+\lnot !B \} \Proves \lnot !A$ by Prop \olref[fol][axd][rul]{prop:contain},
+part \olref[fol][axd][rul]{prop:contain:reflex}, and $\{ !A, \lnot!A\}
+\Proves !B$ follows by \olref[fol][axd][rul]{derivfacts:b}. Part
+\olref[fol][axd][rul]{derivfacts:d}: since $\{\lnot\lnot !A, \lnot !A \}
+\Proves \lnot \lnot\lnot !A$ by \emph{ex falso quodlibet}, apply
+\olref[fol][axd][rul]{derivfacts:b}. Now for part
+\olref[fol][axd][rul]{derivfacts:e}, $\Gamma \Proves \lnot\lnot !A \supset
+!A$ by the previous part, the deduction theorem, and monotony, so if
+$\Gamma \Proves \lnot\lnot!A$ also $\Gamma \Proves !A$ by MP. 
 \end{proof}
 
-\begin{thm}
-  \emph{Cut:} if $\Gamma \Proves !A$ and $\Delta, !A \Proves
-  !C$ then $\Gamma \cup \Delta \Proves !C$. 
+\begin{thm} \emph{Cut:} if $\Gamma \Proves !A$ and $\Delta, !A \Proves !C$
+then $\Gamma \cup \Delta \Proves !C$. 
 \end{thm}
 
-\begin{proof}
-The following shows that the conclusion is !!{derivable}:
+\begin{proof} The following shows that the conclusion is !!{derivable}:
 
-\begin{tabular}{rll}
-1. & $\Gamma \Proves !A$ & hyp. \\
-2. & $\Gamma\cup\Delta \Proves !A$ & monotony, 1.\\
-3. & $\Delta, !A \Proves !C$ & hyp. \\
-4. & $\Gamma \cup \Delta, !A \Proves !C$ & monotony, 3.\\
-5. & $\Gamma \cup \Delta \Proves !A \lif !C$ & Ded. Thm., 4.\\
-6. &  $\Gamma \cup \Delta \Proves !C$ & MP 2, 5.
+\begin{tabular}{rll} 
+1. & $\Gamma \Proves !A$ & hyp. \\ 
+2. &$\Gamma\cup\Delta \Proves !A$ & monotony, 1.\\ 
+3. & $\Delta, !A \Proves !C$ & hyp. \\ 
+4. & $\Gamma \cup \Delta, !A \Proves !C$ & monotony, 3.\\ 
+5. & $\Gamma \cup \Delta \Proves !A \lif !C$ & Ded. Thm., 4.\\ 
+6. & $\Gamma \cup \Delta \Proves !C$ & MP 2, 5. 
 \end{tabular}
 
-\smallskip\noindent
-``Monotony'' refers to Prop. \olref{prop:contain}, part
-\olref{prop:contain:monotony}.
+\smallskip\noindent ``Monotony'' refers to Prop.
+\olref[fol][axd][rul]{prop:contain}, part
+\olref[fol][axd][rul]{prop:contain:monotony}. 
 \end{proof}
 
-\begin{def}\ollabel{def:trivial}
-  $!A \lif !B, !A \Proves !B$.
+\begin{def}\ollabel{def:trivial} $!A \lif !B, !A \Proves !B$. 
 \end{def}
-
-\begin{proof}
-  Clearly $!A \lif !B \Proves !A\lif !B$. Apply the
-  Deduction Theorem.
+\begin{proof} Clearly $!A \lif !B \Proves !A\lif !B$. Apply the Deduction
+Theorem. 
 \end{proof}
 
-\begin{def}\ollabel{def:notphi}
-  $!A \lif \lnot !A \Proves \lnot !A$.
+\begin{def}\ollabel{def:notphi} $!A \lif \lnot !A \Proves \lnot !A$.
 \end{def}
 
 \begin{proof} The following shows the conclusion is !!{derivable}.
   
-  \begin{tabular}{rll}
-    1. & $\lnot\lnot!A \Proves !A$ & Double negation \\
-    2. & $\lnot\lnot \lnot\lnot!A \Proves \lnot\lnot!A$
-    & Double negation \\ 
-    3. & $\lnot\lnot(!A \lif \lnot !A) \Proves !A
-    \lif \lnot !A$ & Double negation\\
-    4. & $\lnot!A \Proves \lnot\lnot\lnot !A$ &
-    contraposition, 2\\ 
-    5. & $\lnot\lnot(!A \lif \lnot !A), !A
-    \Proves \lnot !A$ & Deduction theorem, 3 \\
-    6. & $\lnot\lnot!A, \lnot\lnot(!A \lif \lnot
-    !A) \Proves  \lnot !A$ & Cut, 1, 5 \\
-    7. &  $\lnot\lnot!A, \lnot\lnot(!A \lif \lnot
-    !A) \Proves  \lnot\lnot\lnot !A$ & Cut 4, 6 \\
-    8. & $\lnot \lnot !A \Proves \lnot (!A \lif \lnot
-    !A)$ & Contraposition, 7 \\
-    9. & $(!A \lif \lnot !A) \Proves \lnot !A$ &
-    contraposition, 8. 
- \end{tabular}
+\begin{tabular}{rll} 
+1. & $\lnot\lnot!A \Proves !A$ & Double negation \\ 
+2. & $\lnot\lnot \lnot\lnot!A \Proves \lnot\lnot!A$ & Double negation \\ 
+3. & $\lnot\lnot(!A \lif \lnot !A) \Proves !A \lif \lnot !A$ & Double negation\\
+4. & $\lnot!A \Proves \lnot\lnot\lnot !A$ & contraposition, 2\\ 
+5. & $\lnot\lnot(!A \lif \lnot !A), !A \Proves \lnot !A$ & Deduction theorem, 3 \\
+6. & $\lnot\lnot!A, \lnot\lnot(!A \lif \lnot !A) \Proves \lnot !A$ & Cut, 1, 5 \\ 
+7. & $\lnot\lnot!A, \lnot\lnot(!A \lif \lnot !A) \Proves \lnot\lnot\lnot !A$ & Cut 4, 6 \\ 
+8. & $\lnot \lnot !A \Proves \lnot (!A \lif \lnot !A)$ & Contraposition, 7 \\ 
+9. & $(!A \lif \lnot !A) \Proves \lnot !A$ & contraposition, 8. 
+\end{tabular}
 
-\begin{prop} \ollabel{prop:consistent} 
-The following hold:
-  \begin{enumerate}
-  \item $!B \Proves \lnot \lnot !B$\ollabel{prop:consistent:0}
-  \item $!A \lif \lnot !B, !B \Proves \lnot!A$
-     \ollabel{prop:consistent:1}
-  \item $!A\lif !B,!A\lif\lnot !B  \Proves
-    \lnot!A$.    \ollabel{prop:consistent:2}
-  \item if $\Gamma \cup \{ !A \}\Proves !B$ and $\Gamma
-    \cup \{ !A\} \Proves \lnot !B$ then $\Gamma \Proves
-    \lnot!A$.    \ollabel{prop:consistent:3}
-  \end{enumerate}
+\begin{prop} \ollabel{prop:consistent} The following hold:
+\begin{enumerate} 
+\item $!B \Proves \lnot \lnot !B$\ollabel{prop:consistent:0} 
+\item $!A \lif \lnot !B, !B \Proves \lnot!A$ \ollabel{prop:consistent:1} 
+\item $!A\lif !B,!A\lif\lnot !B \Proves \lnot!A$. \ollabel{prop:consistent:2} 
+\item if $\Gamma \cup \{ !A \}\Proves !B$ and $\Gamma \cup \{ !A\} 
+\Proves \lnot !B$ then $\Gamma \Proves \lnot!A$. \ollabel{prop:consistent:3} 
+\end{enumerate} 
 \end{prop}
 
-\begin{proof}
-For part \olref{prop:consistent:0}, we have $\lnot\lnot\lnot!B
-\Proves \lnot !B$ by double negation, whence  $!B \Proves \lnot
-\lnot !B$ by Prop. \olref{prop:derivfacts}, part
-\olref{derivfacts:b}.  For part \olref{prop:consistent:1} we have:
+\begin{proof} For part \olref[fol][axd][rul]{prop:consistent:0}, we have
+$\lnot\lnot\lnot!B \Proves \lnot !B$ by double negation, whence $!B \Proves
+\lnot \lnot !B$ by Prop. \olref[fol][axd][rul]{prop:derivfacts}, part
+\olref[fol][axd][rul]{derivfacts:b}. For part
+\olref[fol][axd][rul]{prop:consistent:1} we have:
 
-\begin{tabular}{rll}
- 1. & $\Proves (\lnot\lnot !A \lif \lnot\lnot\lnot !B)
- \lif (\lnot\lnot !B \lif \lnot !A)$ & \textbf{Ax3} \\
- 2. & $\lnot\lnot !A \lif \lnot\lnot\lnot !B,
- \lnot\lnot !B \Proves \lnot!A$ & 1, Ded. Thm., twice \\ 
- 3. & $!B \Proves \lnot\lnot !B$ & Double Neg. \\
- 4. & $\lnot\lnot !A \lif \lnot\lnot\lnot !B,
-  !B \Proves \lnot!A$ & 2, 3, Cut \\
- 5. & $\lnot !B \lif \lnot\lnot\lnot !B, !A\lif
- \lnot !B \Proves !A \lif \lnot\lnot\lnot!B$ &
- Transitivity (Prop. \olref{prop:easyproofs}, part
- \olref{prop:easyproofs:trans}) \\
- 6. & $\Proves \lnot!B \lif \lnot\lnot\lnot!B$ & Double
- Neg. + Ded. Thm. \\
- 7. & $!A\lif \lnot !B \Proves !A \lif
- \lnot\lnot\lnot !B$ & 5, 6, Cut \\
- 8. & $\Proves \lnot\lnot !A \lif !A$ & Double. Neg +
- Ded. Thm. \\
- 9. & $\lnot\lnot!A \lif !A, !A \lif
- \lnot\lnot\lnot !B \Proves \lnot\lnot !A \lif
- \lnot\lnot\lnot !B$ & Transitivity \\
- 10. & $!A \lif \lnot\lnot\lnot !B \Proves
- \lnot\lnot!A \lif \lnot\lnot\lnot!B$ & 8, 9, Cut \\
- 11. & $!A \lif \lnot!B \Proves \lnot\lnot !A\lif
- \lnot\lnot\lnot!B$ & 7, 10, Cut \\
- 12. & $!A \lif \lnot !B, !B \Proves \lnot !A$ & 4,
- 11, Cut.
+\begin{tabular}{rll} 
+1. & $\Proves (\lnot\lnot !A \lif \lnot\lnot\lnot !B)
+\lif (\lnot\lnot !B \lif \lnot !A)$ & \textbf{Ax3} \\ 
+2. & $\lnot\lnot !A \lif \lnot\lnot\lnot !B, \lnot\lnot !B 
+\Proves \lnot!A$ & 1, Ded. Thm., twice \\ 
+3. & $!B \Proves \lnot\lnot !B$ & Double Neg. \\ 
+4. & $\lnot\lnot !A \lif \lnot\lnot\lnot !B, !B \Proves \lnot!A$ & 2, 3, Cut \\ 
+5. & $\lnot !B \lif \lnot\lnot\lnot !B, !A\lif \lnot !B \Proves !A \lif
+\lnot\lnot\lnot!B$ & Transitivity (Prop. \olref[fol][axd][rul]{prop:easyproofs}, 
+part \olref[fol][axd][rul]{prop:easyproofs:trans}) \\ 
+6. & $\Proves \lnot!B \lif \lnot\lnot\lnot!B$ & Double Neg. + Ded. Thm. \\ 
+7. & $!A\lif \lnot !B \Proves !A \lif \lnot\lnot\lnot !B$ & 5, 6, Cut \\ 
+8. & $\Proves \lnot\lnot !A \lif !A$ & Double. Neg + Ded. Thm. \\ 
+9. & $\lnot\lnot!A \lif !A, !A \lif \lnot\lnot\lnot !B \Proves \lnot\lnot !A 
+\lif \lnot\lnot\lnot !B$ & Transitivity \\ 
+10. & $!A \lif \lnot\lnot\lnot !B \Proves \lnot\lnot!A \lif 
+\lnot\lnot\lnot!B$ & 8, 9, Cut \\ 
+11. & $!A \lif \lnot!B \Proves \lnot\lnot !A\lif \lnot\lnot\lnot!B$ & 7, 10, Cut \\ 
+12. & $!A \lif \lnot !B, !B \Proves \lnot !A$ & 4, 11, Cut. 
 \end{tabular}
 
-\smallskip\noindent 
-Part \olref{prop:consistent:2} follows because:
+\smallskip\noindent Part \olref[fol][axd][rul]{prop:consistent:2} follows
+because:
 
-\begin{tabular}{rll}
-  1. & $!A \lif !B, !A \Proves !B $ &lemma \olref{lemma:trivial} \\
-  2. & $ !A \lif \lnot !B, !B \Proves \lnot!A$ & part
-  \olref{prop:consistent:1} \\ 
-  3. & $!A \lif !B, !A \lif \lnot !B, !A
-  \Proves \lnot !A$ & 1, 2, Cut. \\
-  4. &  $!A \lif !B, !A \lif \lnot !B
-  \Proves  !A\lif \lnot !A$ & deduction theorem \\
-  5. &  $!A \lif \lnot !A \Proves \lnot !A$   &
-  lemma \olref{lemma:notphi} \\
-  6. & $!A \lif !B, !A \lif \lnot !B
-  \Proves \lnot !A$ & 4, 5, Cut.
+\begin{tabular}{rll} 
+1. & $!A \lif !B, !A \Proves !B $ &lemma
+\olref[fol][axd][rul]{lemma:trivial} \\ 
+2. & $ !A \lif \lnot !B, !B \Proves
+\lnot!A$ & part \olref[fol][axd][rul]{prop:consistent:1} \\ 
+3. & $!A \lif !B, !A \lif \lnot !B, !A \Proves \lnot !A$ & 1, 2, Cut. \\ 
+4. & $!A \lif !B, !A \lif \lnot !B \Proves !A\lif \lnot !A$ & deduction theorem \\ 
+5. & $!A \lif \lnot !A \Proves \lnot !A$ & lemma
+\olref[fol][axd][rul]{lemma:notphi} \\ 
+6. & $!A \lif !B, !A \lif \lnot !B \Proves \lnot !A$ & 4, 5, Cut. 
 \end{tabular}
 
-\smallskip\noindent
-Finally, for part \olref{prop:consistent:3}: from the hypotheses by the
-deduction theorem, $\Gamma \Proves !A \lif !B$ and $\Gamma
-\Proves !A \lif \lnot !B$; from part \olref{prop:consistent:2}
-and monotony, $\Gamma, !A \lif !B, !A \lif \lnot !B
-  \Proves \lnot !A$; two applications of Cut give the desired result. 
-\end{proof}
-
-
-\end{proof}
-
-
-
+\smallskip\noindent Finally, for part
+\olref[fol][axd][rul]{prop:consistent:3}: from the hypotheses by the
+deduction theorem, $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !A \lif
+\lnot !B$; from part \olref[fol][axd][rul]{prop:consistent:2} and monotony,
+$\Gamma, !A \lif !B, !A \lif \lnot !B \Proves \lnot !A$; two applications
+of Cut give the desired result. \end{proof} \end{proof}
 
 \end{document}
