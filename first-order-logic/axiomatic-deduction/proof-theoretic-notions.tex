@@ -20,42 +20,44 @@ That they do is the content of the \emph{completeness theorem}.
 \end{explain}
 
 \begin{defn}[Theorems]
-  $\mathsf{Thm}_\Gamma = \{ !A :  \Gamma \Proves !A\}$. 
-
- $\mathsf{Thm}_\Gamma$ is the smallest set of !!{formula}s containing
- $\Gamma$, the axioms, and closed under \emph{modus
-   ponens}. Accordingly, we have a principle of proof by
- \emph{induction on the theorem of $\Gamma$}.  
+$\Thms{\Gamma} = \Setabs{!A}{\Gamma \Proves !A}$. 
 \end{defn}
 
+$\Thms{\Gamma}$ is the smallest set of !!{formula}s containing
+$\Gamma$, the axioms, and closed under \emph{modus
+  ponens}. Accordingly, we have a principle of proof by
+\emph{induction on the theorem of $\Gamma$}.
+
+
 \begin{proof}
-  We know from Proposition \olref[fol][axd][rul]{prop:contain} that
-  $\mathsf{Thm}(\Gamma)$ has the desired properties; so we need to
-  show that it is the smallest such. Let $A$ be any other set of
-  !!{formula}s containing the axioms and $\Gamma$ and closed under
-  \emph{modus ponens}. Prove that $\mathsf{Thm}(\Gamma) \subseteq A$
-  by induction on the length of a proof of $!A$ from $\Gamma$.
+We know from \olref[rul]{prop:contain} that $\Thms{\Gamma}$ has the
+desired properties; so we need to show that it is the smallest
+such. Let $A$ be any other set of !!{formula}s containing the axioms
+and $\Gamma$ and closed under \emph{modus ponens}. Prove that
+$\Thms{\Gamma} \subseteq A$ by induction on the length of a proof of
+$!A$ from~$\Gamma$.
 \end{proof}
 
-\begin{cor}\ollabel{cor:induction-thms}
-  \emph{Principle of induction on theorems}: any property $P$ that
-  holds of the axioms, of !!{formula}s in $\Gamma$, and is preserved by
-  \emph{modus ponens} holds of every !!{formula} in
-  $\mathsf{Thm}(\Gamma)$.
+\begin{cor}[Principle of induction on theorems]
+\ollabel{cor:induction-thms} 
+Any property $P$ that holds of the axioms, of !!{formula}s in
+$\Gamma$, and is preserved by \emph{modus ponens} holds of every
+!!{formula} in $\Thms{\Gamma}$.
 \end{cor}
 
 \begin{defn}[!!^{derivability}]
- A !!{formula}
-  $!A$ is \emph{{!!derivable}} from $\Gamma$, written $\Gamma \Proves
-  !A$, if there is a !!{derivation} from $\Gamma$ ending in $!A$. 
+A !!{formula} $!A$ is \emph{!!{derivable}} from $\Gamma$, written
+$\Gamma \Proves !A$, if there is a !!{derivation} from $\Gamma$ ending
+in $!A$.
 \end{defn}
 
 \begin{defn}[Consistency]
-  A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if 
-  $\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
+A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if
+$\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
 \end{defn}
 
-\begin{prop} \ollabel{prop:prov-incons}
+\begin{prop} 
+\ollabel{prop:prov-incons}
 $\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 \end{prop}
 
@@ -88,7 +90,13 @@ If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
 \end{prop}
 
 \begin{proof}
-Follows immediately from the definion of~$\Proves$.
+If $\Gamma \Proves !A$, then there is a finite sequence of
+!!{formula}s $!A_1$, \dots,~$!A_n$ so that $!A \ident !A_n$ and each
+$!A_i$ is either a logical axiom, !!a{element} of~$\Gamma$ or follows
+from previous !!{formula}s by modus ponens.  Take $\Gamma_0$ to be
+those $!A_i$ which are in~$\Gamma$.  Then the !!{derivation} is
+likewise a !!{derivation} from~$\Gamma_0$, and so $\Gamma_0 \Proves
+!A$.  The other direction is obvious.
 \end{proof}
 
 \end{document}
