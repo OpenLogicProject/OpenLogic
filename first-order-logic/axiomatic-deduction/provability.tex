@@ -1,6 +1,6 @@
 % Part: first-order-logic 
 % Chapter: axiomatic-deduction 
-% Section:provability
+% Section: provability
 
 % verification of properties of provability needed for maximally 
 % consistent sets in the completeness chapter.
@@ -9,17 +9,18 @@
 
 \begin{document}
 
-\olfileid{fol}{axd}{prv} \olsection{Properties of
-\usetoken{S}{derivability}}
+\olfileid{fol}{axd}{prv} 
 
-\begin{prop}[Monotony] if $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$
+\olsection{Properties of \usetoken{S}{derivability}}
+
+\begin{prop}[Monotony] If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$
 then also $\Delta \Proves !A$ \end{prop}
 
 \begin{proof} Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite
 subset of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Proves !A$ also shows
 $\Delta \Proves !A$. \end{proof}
 
-\begin{prop}\ollabel{prop:provability} $\Gamma \Proves!A$ if and only if
+\begin{prop}\ollabel{prop:provability} $\Gamma \Proves !A$ if and only if
 $\Gamma\cup \{\lnot!A \}$ is inconsistent. \end{prop}
 
 \begin{prop} \begin{enumerate}
@@ -201,21 +202,23 @@ that the !!{constant} $c$ no longer occurs in the new sequence. Now let
 $\Gamma'$ comprise those !!{formula}s from $\Gamma$ that appear in the
 !!{derivation} of $\Subst{!A}{x}{c}$; then $x$ is not free in any
 !!{formula} in $\Gamma'$ and $\Gamma' \Proves \Subst{!A}{x}{c}$. By
-generalization (Theorem \olref[fol][axd][prv]{thm:Generalization}) $\Gamma'
+generalization (\olref{thm:Generalization}) $\Gamma'
 \Proves \lforall[x][\Subst{!A}{x}{c}]$, whence by monotony $\Gamma \Proves
 \lforall[x][\Subst{!A}{x}{c}]$, as desired. 
 \end{proof}
 
 \begin{explain}
-Our goal is to replace the requirement in Theorem
-\olref[fol][axd][prv]{thm:WeakGen} that $x$ does not occur in $!A$ (at all)
-by the weaker requirements that $x$ is not free in $!A$ and it is !!{free
-for} $c$ in $!A$. Clearly this can be accomplished by a change of bound
-!!{variable} --- so that is what we set out to prove first.
+Our goal is to replace the requirement in \olref{thm:WeakGen} that $x$
+does not occur in $!A$ (at all) by the weaker requirements that $x$ is
+not free in $!A$ and it is !!{free for} $c$ in $!A$. Clearly this can
+be accomplished by a change of bound !!{variable} --- so that is what
+we set out to prove first.
 \end{explain}
 
-\begin{lem}\ollabel{lem:8.19} If $x$ is free for $c$ in $!A$ and $y$ is not
-free in $!A$, then $x$ is !!{free for} $y$ in $\Subst{!A}{y}{c}$. 
+\begin{lem}
+\ollabel{lem:free-for} 
+If $x$ is free for $c$ in $!A$ and $y$ is not free in $!A$, then $x$
+is !!{free for} $y$ in $\Subst{!A}{y}{c}$.
 \end{lem}
 
 \begin{proof} If $x$ is not !!{free for} $y$ in $\Subst{!A}{y}{x}$, then
@@ -226,37 +229,43 @@ occurrence of $c$ falls within the scope of $\lforall[x]$ and $x$ is not
 !!{free for} $c$ in $!A$. 
 \end{proof}
 
-\begin{lem}\ollabel{lem:ChangeBdVar} (\emph{Change of Bound Variable}) If
-$x$ and $y$ are not free in $!A$ and they are both !!{free for} $c$ in
-$!A$, then $\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
+\begin{lem}[Change of Bound Variable]
+\ollabel{lem:ChangeBdVar} 
+If $x$ and $y$ are not free in $!A$ and they are both !!{free for} $c$
+in $!A$, then $\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
 \lforall[y][\Subst{!A}{y}{c}]$ (and the proof does not involve $c$).
 \end{lem}
 
-\begin{proof} From the hypotheses, $y$ is !!{free for} $c$ in $!A$ and $x$
-is not free in $!A$, so by the previous lemma
-\olref[fol][axd][prv]{lemma:8.19}, $y$ is !!{free for} $x$ in
-$\Subst{!A}{x}{c}$. It follows that $\lforall[x][\Subst{!A}{x}{c} \lif
-\Subst{!A}{x}{c} \Subst{}{y}{x}]$ is an axiom (\textbf{Ax1}). Since $x$ is
-not free in $!A$, we have $\Subst{!A}{x}{c} \Subst{}{y}{x} =
-\Subst{!A}{y}{c}$, so that \[ \Proves \lforall[x][\Subst{!A}{x}{c}] \lif
-\Subst{!A}{y}{c}, \] and by the Deduction Theorem
-$\lforall[x][\Subst{!A}{x}{c}] \Proves \Subst{!A}{y}{c}$. Since $y$ is not
-free in $!A$, it also not free in $\lforall[x][\Subst{!A}{x}{c}]$, so that
-by Generalization $\lforall[x][\Subst{!A}{x}{c}] \Proves
-\lforall[y][\Subst{!A}{y}{c}]$, and the Deduction Theorem again gives
-$\Proves \lforall[x][\Subst{!A}{x}{c}] \lif \lforall[y][\Subst{!A}{y}{c}]$.
+\begin{proof} 
+From the hypotheses, $y$ is !!{free for} $c$ in $!A$ and $x$ is not
+free in $!A$, so by the previous \olref{lem:free-for}, $y$ is
+!!{free for} $x$ in $\Subst{!A}{x}{c}$. It follows that
+$\lforall[x][\Subst{!A}{x}{c} \lif \Subst{!A}{x}{c} \Subst{}{y}{x}]$
+is an axiom (\textbf{Ax1}). Since $x$ is not free in $!A$, we have
+$\Subst{!A}{x}{c} \Subst{}{y}{x} = \Subst{!A}{y}{c}$, so that 
+\[
+\Proves \lforall[x][\Subst{!A}{x}{c}] \lif \Subst{!A}{y}{c}, 
+\] 
+and by the Deduction Theorem $\lforall[x][\Subst{!A}{x}{c}] \Proves
+\Subst{!A}{y}{c}$. Since $y$ is not free in $!A$, it also not free in
+$\lforall[x][\Subst{!A}{x}{c}]$, so that by Generalization
+$\lforall[x][\Subst{!A}{x}{c}] \Proves \lforall[y][\Subst{!A}{y}{c}]$,
+and the Deduction Theorem again gives $\Proves
+\lforall[x][\Subst{!A}{x}{c}] \lif \lforall[y][\Subst{!A}{y}{c}]$.
 The proof of $\Proves \lforall[y][\Subst{!A}{y}{c}] \lif \lforall[x]
-[\Subst{!A}{x}{c}]$ is perfectly symmetric, so that the conclusion follows
-by Proposition T. 
+[\Subst{!A}{x}{c}]$ is perfectly symmetric, so that the conclusion
+follows by Proposition~T.
 \end{proof}
 
-\begin{thm}\ollabel{thm:StrongGen} (\emph{Strong Generalization on
-Constants}) If $\Gamma \Proves !A$, the !!{constant} $c$ does not occur in
+\begin{thm}[Strong Generalization on Constants]
+\ollabel{thm:StrongGen} 
+If $\Gamma \Proves !A$, the !!{constant} $c$ does not occur in
 $\Gamma$, and $x$ is not free in $!A$ but it is !!{free for} $c$ in $!A$,
 then $\Gamma \Proves \lforall[x][\Subst{!A}{x}{c}]$. 
 \end{thm}
 
-\begin{proof} Since $\Gamma \Proves !A$ and $c$ is not in $\Gamma$, then by
+\begin{proof} 
+Since $\Gamma \Proves !A$ and $c$ is not in $\Gamma$, then by
 Weak Generalization there is !!a{variable} $y$ not in $!A$ such that
 $\Gamma \Proves \lforall[y][\Subst{!A}{y}{c}]$. Since $y$ is not in $!A$
 (at all), it is not free in $!A$ and it is also !!{free for} $c$ in $!A$;
@@ -267,19 +276,20 @@ $\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
 \lforall[x][\Subst{!A}{x}{c}]$. 
 \end{proof}
 
-\begin{thm} \ollabel{thm:provability-quantifiers}
-\begin{tagenumerate}{prvEx,prvAll} \tagitem{prvEx}{If $\Gamma \Proves
-!A(t)$ then $\Gamma \Proves \lexists[x][!A(x)]$.}{}
-
+\begin{thm} 
+\ollabel{thm:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll} 
+\tagitem{prvEx}{If $\Gamma \Proves !A(t)$ then $\Gamma \Proves
+  \lexists[x][!A(x)]$.}{} 
 \tagitem{prvAll}{If $\Gamma \Proves \lforall[x][!A(x)]$ then $\Gamma
-\Proves !A(t)$.}{} 
+  \Proves !A(t)$.}{}
 \end{tagenumerate} 
 \end{thm}
 
-\begin{proof} \begin{tagenumerate}{prvEx,prvAll} 
+\begin{proof} 
+\begin{tagenumerate}{prvEx,prvAll} 
 %%Need axioms for exists
 \tagitem{prvEx}{Exercise.}{}
-
 \tagitem{prvAll} {Assume that  $\Gamma_0 \Proves \lforall[x][!A(x)]$.
 
 \begin{tabular}{rll} 
@@ -290,4 +300,5 @@ $\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
 
 \end{tagenumerate} 
 \end{proof}
+
 \end{document}

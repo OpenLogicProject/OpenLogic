@@ -202,6 +202,18 @@
         { \vdash_{#2} }}
 }
 
+% - `\Thms{X}`: theorems a set of formulas
+
+\DeclareDocumentCommand \Thms { m } {\mathrm{Thm}(#1)}
+
+% - `\PAx`: the set of propositional axioms
+
+\DeclareDocumentMacro \PAx { \mathrm{Ax}_0 }
+
+% - `\Ax`: the set of logical axioms
+
+\DeclareDocumentMacro \Ax { \mathrm{Ax} }
+
 % ### The semantic consequence relation relation
 
 % `\Entails` is the semantic counterpart of `\Proves`. 
@@ -553,9 +565,13 @@
 % to, e.g., typeset the parameters as subscripts (e.g.,
 % $\mathrm{Frm}_\mathcal{L}$.
 
-% - `\Var`: the set of propositional variables
+% - `\Var`: the set of individual variables
 
-\def\Var{\mathrm{Var}}
+\DeclareDocumentMacro \Var { \mathrm{Var} }
+
+% - `\PVar`: the set of propositional variables
+
+\DeclareDocumentMacro \PVar { \mathrm{At}_0 }
 
 % - `\Trm[L]`: the set of terms (of a language)
 
