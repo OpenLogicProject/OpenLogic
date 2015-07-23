@@ -1,6 +1,6 @@
-% Part: propositional-logic 
+% Part: proof-theory
 % Chapter: propositional-logic 
-% Section: axiomatic-deduction
+% Section: proof-theory
 
 \documentclass[../../include/open-logic-section]{subfiles}
 
@@ -8,7 +8,7 @@
 
 \olfileid{prp}{prp}{axd}
 
-\olsection{Axiomatic Deduction}
+\olsection{Proof Theory}
 
 \begin{defn}[Axioms]
 The set of $\PAx$ of \emph{axioms} of propositional logic comprises
@@ -329,82 +329,51 @@ and monotony, $\Gamma, !A \lif !B, !A \lif \lnot !B
 
 \begin{defn}[Consistency]
 A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if
-there is a !!{formula} $!A$ such that $\Gamma \Proves/ !A$; it is
-\emph{inconsistent} otherwise.
+$\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
 \end{defn}
 
-\begin{prop}
-$\Gamma$ is inconsistent if and only if there is a formula $!A$ such
-  that both $\Gamma \Proves !A$ and $\Gamma \Proves \lnot !A$.
+\begin{prop} 
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 \end{prop}
 
 \begin{proof}
-The ``only if'' direction is obvious. For the converse, suppose that
-$\Gamma \Proves !A$ and $\Gamma\Proves\lnot !A$. Then by
-\olref{prop:derivfacts}, part (c) and monotony, $\Gamma \cup
-\{!A,\lnot!A \} \Proves !B$ for any !!{formula} $!B$, and now two
-applications of Cut give $\Gamma\Proves!B$ for any $!B$, so $\Gamma$
-is inconsistent.
+Exercise.
 \end{proof}
-
-\begin{prop}
-\ollabel{prop:proves}
-$\Gamma \Proves!A$ if and only if $\Gamma\cup \{\lnot!A \}$ is
-inconsistent.
-\end{prop}
-
-\begin{proof}
-If $\Gamma \Proves !A$ then also $\Gamma, \lnot !A \Proves !A$ by
-monotony, and $\Gamma, \lnot !A \Proves \lnot !A$ by reflexivity, so
-$\Gamma\cup\{\lnot !A\}$ is inconsistent.  Conversely, suppose
-$\Gamma\cup\{\lnot !A\}$ is inconsistent. Then $\Gamma \lnot !A
-\Proves !C$ and $\Gamma \lnot !A \Proves \lnot !C$ for some $!C$. By
-\olref{prop:consistent} part \olref{prop:consistent:3}, $\Gamma
-\Proves \lnot \lnot !A$. But also $\lnot\lnot!A \Proves !A$, by double
-negation so that by cut $\Gamma \Proves !A$.
-\end{proof}
-
-\begin{prop}
-\ollabel{prop:phi}
-If $\Gamma$ is consistent, then for any !!{formula} $!A$, either
-$\Gamma \cup\{!A\}$ is consistent or $\Gamma \cup\{\lnot !A\}$ is
-consistent.
-\end{prop}
-
-\begin{proof}
-From \olref{prop:proves} we have that if $\Gamma \cup \{\lnot !A\}$ is
-inconsistent, then $\Gamma \Proves !A$; if $\Gamma \cup \{ !A\}$ is
-also inconsistent, then $\Gamma \cup \{!A\} \Proves !B$ for any
-$!B$. But then by Cut $\Gamma \Proves !B$ for any $!B$, so $\Gamma$ is
-inconsistent.
-\end{proof}
-
-\begin{prop}
-  $\Gamma$ is consistent if and only if every finite subset
-  $\Gamma_0\subseteq \Gamma$ is consistent.
-\end{prop}
-
-\begin{proof}
-For the non-trivial direction: if $\Gamma$ is inconsistent, then
-$\Gamma \Proves !B$ and $\Gamma \Proves \lnot !B$ for some $!B$; each
-!!{derivation} involves only finitely many !!{formula}s from $\Gamma$;
-collect the ones occurring in the first !!{derivation} into the finite
-set $\Gamma_1$, and those occurring in the second proof into the
-finite set $\Gamma_2$. Then $\Gamma_0 = \Gamma_1 \cup \Gamma_2$ is a
-finite subset of $\Gamma$ that is a inconsistent.
-\end{proof}
-
 
 \begin{prob}
-Show that the following hold by \emph{exhibiting} !!{derivation}s from the
-axioms (i.e., without using meta-theoretic facts such as Cut,
-  Monotony, the Deduction Theorem, etc.):
-\begin{enumerate}
-\item $\{!A\lif !B, !B\lif !C\} \Proves !A\lif !C$;
-\item $\Proves !A \lif !A$;
-\item $\Proves \lnot !A \lif (!A \lif !B)$;
-\item $\Proves !A \supset (\lnot !A \lif !B)$.
-\end{enumerate}
+Prove \olref[fol][axd][ptn]{prop:prov-incons}
 \end{prob}
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
+  sentence~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][axd][ptn]{prop:incons}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:proves-compact}
+If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
+\Gamma$, $\Gamma_0 \Proves !A$.
+\end{prop}
+
+\begin{proof}
+If $\Gamma \Proves !A$, then there is a finite sequence of
+!!{formula}s $!A_1$, \dots,~$!A_n$ so that $!A \ident !A_n$ and each
+$!A_i$ is either a logical axiom, !!a{element} of~$\Gamma$ or follows
+from previous !!{formula}s by modus ponens.  Take $\Gamma_0$ to be
+those $!A_i$ which are in~$\Gamma$.  Then the !!{derivation} is
+likewise a !!{derivation} from~$\Gamma_0$, and so $\Gamma_0 \Proves
+!A$.  The other direction is obvious.
+\end{proof}
+
 
 \end{document}
