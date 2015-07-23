@@ -1,0 +1,80 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proof-theoretic-notions
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{ptn}
+\olsection{Proof-Theoretic Notions}
+
+\begin{explain}
+Just as we've defined a number of important semantic notions
+(validity, entailment, satisfiabilty), we now define corresponding
+\emph{proof-theoretic notions}.  These are not defined by appeal to
+satisfaction of sentences in !!{structure}s, but by appeal to the
+!!{derivability} or !!{nonderivability} of certain !!{formula}s.  It was
+an important discovery, due to G\"odel, that these notions coincide.
+That they do is the content of the \emph{completeness theorem}.
+\end{explain}
+
+\begin{defn}[Theorems]
+A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation}
+ of the !!{formula} $!A$ from the null set.  We write
+$\Proves !A$ if $!A$ is a theorem and $\Proves/
+!A$ if it is not.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+A !!{formula} $!A$ is \emph{!!{derivable} from} a set of
+!!{formula}s~$\Gamma$, $\Gamma \Proves !A$, if there is a
+finite subset~$\Gamma_0 \subseteq \Gamma$ such that
+$!A$ can be derived from $\Gamma_0$.  If $!A$ is not !!{derivable} 
+from $\Gamma$ we write $\Gamma \Proves/ !A$.
+\end{defn}
+
+\begin{defn}[Consistency]
+A set of sentences~$\Gamma$ is \emph{consistent} iff $\Gamma
+\Proves/ \lfalse$.  If $\Gamma$ is not consistent, i.e., if
+$\Gamma \Proves \lfalse$, we say it is \emph{inconsistent}.
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][ntd][ptn]{prop:prov-incons}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
+  sentence~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][ntd][ptn]{prop:incons}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:proves-compact}
+If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
+\Gamma$, $\Gamma_0 \Proves !A$.
+\end{prop}
+
+\begin{proof}
+Follows immediately from the definion of~$\Proves$.
+\end{proof}
+
+\end{document}
