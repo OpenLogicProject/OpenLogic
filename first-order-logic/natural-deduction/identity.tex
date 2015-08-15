@@ -38,6 +38,23 @@
 where $t_1$ and $t_2$ are closed terms. The $\eq$ Intro
 rule allows us to assume an identity statement.
 
+\begin{ex}
+If $s$ and $t$ are ground terms, then $!A(s), \eq[s][t] \Proves !A(t)$:
+\[
+\AxiomC{[$!A(s)$]}
+\AxiomC{[$\eq[s][t]$]}
+\RightLabel{$\eq$ Elim}
+\BinaryInfC{$!A(t)$}
+\DisplayProof
+\]
+This may be familiar as the principle of substitutability of
+identicals, or Leibniz' Law.
+\end{ex}
+
+\begin{prob}
+Prove that $=$ is both transitive and symmetric
+\end{prob}
+
 \begin{prob}
 Give !!{derivation}s of the following !!{formula}s:
 \begin{enumerate}
@@ -60,7 +77,7 @@ so variable assignments are irrelevant).
 Suppose the last inference in a !!{derivation} is $=$. Then the
 premises contain $\eq[t_1][t_2]$ and $!A(t_1)$. Consider a 
 !!{structure}~$\Struct M$. $\Struct M$ satisfies the two premises
-by induction hypothesis.So, $\Sat{M}{\eq[t_1][t_2]}$. Therefore, 
+by induction hypothesis. So, $\Sat{M}{\eq[t_1][t_2]}$. Therefore, 
 $\Value{t_1}{M} = \Value{t_2}{M}$. Let $s$ be any variable assignment, 
 and $s'$ be the $x$-variant given by $s'(x) = \Value{t_1}{M} = \Value
 {t_2}{M}$. By \olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_2)}
