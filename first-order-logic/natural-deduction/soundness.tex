@@ -77,9 +77,8 @@ So, $\Sat{M}{\lnot !A}$.
 \item The last inference is $\forall$~Intro: We assume that the derivation of
 $!A(a)$ from $\Gamma$ is sound, and therefore $\Sat{M}{!A(a)}$.
 
-%%Under Construction
   Let $\Struct{M'}$ be exactly like $\Struct M$ except that
-  $\Assign{a}{M} \neq \Assign{a}{M'}$, $\Struct{M'}$. Since
+  $\Assign{a}{M} \neq \Assign{a}{M'}$, $\Struct{M'}$. We
   must have $\Sat{M'}{!A(a)}$.
 
   We now show that $\Sat{M}{\lforall[x][!A(x)]}$.  To do this, we have
@@ -87,9 +86,9 @@ $!A(a)$ from $\Gamma$ is sound, and therefore $\Sat{M}{!A(a)}$.
   $\Sat{M}{\lforall[x][!A(x)]}[s]$.  This in turn means that for every
   $x$-variant $s'$ of $s$, we must have $\Sat{M}{!A(x)}[s']$.  So
   consider any variable assignment~$s$ and let $s'$ be an $x$-variant
-  of~$s$.  Since $\Gamma'$ and $\Delta'$ consist entirely of sentences,
+  of~$s$.  Since $\Gamma$ consists entirely of sentences,
   $\Sat{M}{!E}[s]$ iff $\Sat{M}{!E}[s']$ iff $\Sat{M}{!E}$ for all
-  $!E \in \Gamma' \cup \Delta'$.  Let $\Struct M'$ be like $\Struct M$
+  $!E \in \Gamma$.  Let $\Struct M'$ be like $\Struct M$
   except that $\Assign{a}{M'} = s'(x)$.  Then $\Sat{M}{!A(x)}[s']$ iff
   $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$).  Since we've
   already established that $\Sat{M'}{!A(a)}$ for all $\Struct M'$
@@ -102,11 +101,11 @@ $!A(a)$ from $\Gamma$ is sound, and therefore $\Sat{M}{!A(a)}$.
   
 \item The last inference is $\lexists$~Intro: Exercise.
 
-\item The last inference is $\forall$~Elim: 
+\item The last inference is $\forall$~Elim: Exercise.
 
 
 \end{enumerate}
-Now let's consider the possible inferences with several premises: cut,
+Now let's consider the possible inferences with several premises:
 $\lor$~Elim, $\land$~Intro, and $\lif$~Elim.
 \begin{enumerate}
 
@@ -115,22 +114,11 @@ $\lor$~Elim, $\land$~Intro, and $\lif$~Elim.
   hypothesis, $\Sat{M}{!A}$ and $\Sat{M}{!B}$. So, $\Sat{M}
   {!A \land !B}$.
   
-\item The last inference is $\lor$~left: Exercise.
+\item The last inference is $\lor$~Elim: Exercise.
 
-\item The last inference is $\lif$~left.  The premises are $\Gamma
-  \Sequent \Delta'$ and $\Gamma' \Sequent \Delta$, where $!A \in
-  \Delta'$ an $!B \in \Gamma'$.  By induction hypothesis, both are
-  valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
-  (a) $\Sat/{M}{!A \lif !B}$ or (b) $\Sat{M}{!A \lif !B}$.  In case
-  (a), either $\Sat/{M}{!A}$ or $\Sat{M}{!B}$.  In the former case, in
-  order for $\Struct M$ to satisfy $\Gamma \Sequent \Delta'$, it must
-  already satisfy $\Gamma \Sequent \Delta' \setminus \{!A\}$.  In the
-  latter case, it must satisfy $\Gamma' \setminus \{!B\} \Sequent
-  \Delta$.  But since both $\Delta' \setminus \{!A\} \subseteq \Delta$
-  and $\Gamma' \setminus \{!B\} \subseteq \Gamma$, that means $\Struct
-  M$ satisfies $\Gamma \Sequent \Delta$.  In case (b), $\Struct M$
-  satisfies $\Gamma \Sequent \Delta$ since $!A \lif !B \in \Gamma$.
-  
+\item The last inference is $\lif$~Elim. Consider a !!{structure}
+~$\Struct M$. By hypothesis, $\Sat{M}{!A \lif !B}$ and $\Sat{M}{!A}$. 
+ So, $\Sat{M}{!B}$, by definition.
     
 \item The last inference is $\lexists$~Elim: Exercise.
 \end{enumerate}
