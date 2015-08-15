@@ -1,47 +1,32 @@
 % Part: turing-machines
 % Chapter: undecidability
 % Section: outline-of-proof
-
 \documentclass[../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
 \olfileid{tms}{und}{out}
-\olsection{Outline of Proof}
+\olsection{Outline of the Proof}
 
 \begin{explain}
-The proof of undecidability is complex, and it will be beneficial to
-outline the proof first. 
-
 We know that first-order logic is decidable iff there is an effective mechanical
-method for determining whether or not a sentence is valid. We also know, from
+method for determining whether or not a !!{sentence} is valid. We also know, from
 the Chruch-Turing thesis, that every function which is computable is 
 Turing-computable. We have proved that the function~$h(m,w)$, that halts with
 an output $\TMstroke$ if the Turing-machine described by $m$ halts on input $w$ 
 and outputs $\TMblank$ otherwise, is not Turing-computable. Via the Church-Turing
 thesis,~$h$ is not computable. 
 
-What we need to show is that if first-order logic is decidable, then~$h$
-is computable. By doing so, we show that first-order logic is not decidable.
+In order to show that first-order logic is undecidable, we prove the following.
 
-We will proceed in five parts. First, we show that
-if first-order-logic with identity and terms ($\Lang{L_T}$) is decidable,
-then the halting problem is solvable (i.e., we reduce the halting problem to the
-decision problem). We then show that for any sentence $!A$ of $L_T$,
-$\Sat{}{\lforall[x]\lexists[y][\Atom{R}{x}{y}]\lif !A'}$ if, and only if,
-$\Sat{}{!A}$. From these two things, it follows that if first-order
-logic with identity ($\Lang{L_=}$) is decidable, then the halting problem
- is also solvable. We then prove that for any sentence $!A$ of $\Lang{L_=} , 
-\Sat{}{(!E \land !D) \lif !A(=/!E)}$. Finally, we can then show that if firsr-order
-logic without identity and terms is decidable, then the halting problem is 
-solvable.
+\emph{Lemma:} Given input~$n$ and a Turing machine~$M$ we can effectively 
+describe a set of !!{sentence}s $\Delta$ and a !!{sentence} H such that:
 
-This proof proves our main claim, that first-order logic is not decidable. However,
-we also get the corrolaries that both first-order logic without identity and terms,
-as well as first-order logic without identity, are not decidable.
-
-
+$\Delta \Entails H$ iff $M$ halts for input $n$.
 \end{explain}
 
+This gives us the theorem that if first-order logic is deciadble, then the halting problem
+is solvable. However, we already know that the halting problem is not solvable. And
+therefore, first-order logic is not decidable.
 
 \end{document}
