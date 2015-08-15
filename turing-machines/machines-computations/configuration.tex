@@ -49,6 +49,12 @@ The \emph{initial configuration} of $M$ for input $I \in \Sigma^*$ is
 \]
 \end{defn}
 
+\begin{explain}
+The~$\frown$ symbol is for \emph{concatenation} - we want to
+ensure that there are no blanks between the left end marker and
+the beginning of the input.
+\end{explain}
+
 \begin{defn}
 We say that a configuration $\langle C, n, q\rangle$ \emph{yields
   $\langle C', n', q'\rangle$ in one step} (according to $M$), iff
@@ -79,6 +85,66 @@ We say that $M$ \emph{halts on input $I$ after $k$ steps} if $C_k =
 \emph{output} of $M$ for input $I$ is $O$.
 \end{defn}
 
+\begin{ex}
+For any machine and input, it is possible to trace through the configurations
+to determine the output. we will first run the even machine on an input of $4$ 
+strokes, in which case, the machine will halt. We will then run the machine on 
+an input of ~$3$ strokes, where the machine will loop infinitely (and thus reject
+the input). 
+
+The machine starts in state~$q_1$, scanning the leftmost stroke.
+The initial configuration of the machine is thus:
+\[
+\TMendtape \TMstroke_1 \TMstroke \TMstroke \TMstroke \TMblank \ldots
+\]
+The above configuration is straightforward. As can be seen, the machine starts
+in state one, scanning the leftmost stroke. This is represented by a subscript of
+the state name on the first stroke. The applicable instruction at this point is $\langle
+q_1, \TMstroke, q_2, \TMstroke, \TMright \rangle$, and so the machine moves
+right on the tape and changes to state $q_2$.
+\[
+\TMendtape \TMstroke \TMstroke_2 \TMstroke \TMstroke \TMblank \ldots
+\]
+Since the machine is now in state 2 scanning a stroke, we have the instruction
+$\langle q_2, \TMstroke, q_2, \TMstroke, \TMright \rangle$. This results in the
+configuration
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_1 \TMstroke \TMblank \ldots
+\]
+As the machine loops, the rules are applied again in the same order, resulting
+in the following two configurations:
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke_2 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
+\]
+The machine is now in state~$q_1$ scanning a blank. Based on the flow
+chart, we can easily see that there is no instruction to carry out, and thus the
+machine has halted. This means that the input has been accepted.
+
+Suppose next we start the machine with an input of three strokes. The
+first few configurations are similar, as the same instructions are carried, with
+only a small difference of the tape input:
+\[
+\TMendtape \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke_2 \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_1 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
+\]
+The machine has now traversed past all the strokes, and is reading
+a blank in state~$q_2$. As shown in the diagram, there is an instruction
+of the form $\langle q_2, \TMblank, q_2, \TMblank, \TMright \rangle$.
+Since the tape is inifinitely blank to the right, the machine will continue to
+execute this instruction \emph{ad infinitum}. The machine will never halt,
+and does not accept the input.
+\end{ex}
 
 
 \end{document}
