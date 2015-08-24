@@ -12,8 +12,8 @@
 Since, in our construction, $\fn{Un}(k,x)$ is defined if and only if
 the computation of the function coded by~$k$ produces a value for
 input~$x$, it is natural to ask if we can decide whether this is the
-case.  And in fact, it is not.  For the Turing machine model of
-computation, this means that the question as to whether a given Turing
+case. And in fact, it is not. For the Turing machine model of
+computation, this means that whether a given Turing
 machine halts on a given input is computationally undecidable. The
 following theorem is therefore known as the ``undecidability of the
 halting problem.'' I will provide two proofs below. The first
@@ -24,7 +24,7 @@ more direct.
 \ollabel{thm:halting-problem}
 Let
 \[
-h(k, x)  = 
+h(k, x)  =
 \begin{cases}
 1 & \text{if $\fn{Un}(k,x)$ is defined} \\
 0 & \text{otherwise.}
@@ -37,7 +37,7 @@ Then $h$ is not computable.
 If $h$ were computable, we would have a universal computable function,
 as follows. Suppose $h$ is computable, and define
 \[
-\fn{Un'}(k,x) = 
+\fn{Un'}(k,x) =
 \begin{cases}
 fn{Un}(k,x) & \text{if $h(k,x) = 1$} \\
 0 & \text{otherwise.}
@@ -48,8 +48,8 @@ is.  For instance, we could define $g$ using primitive recursion, by
 \begin{align*}
 g(0, k, x) & \simeq 0 \\
 g(y+1, k, x) & \simeq \fn{Un}(k,x);
-\end{align*} 
-then 
+\end{align*}
+then
 \[
 \fn{Un'}(k,x) \simeq g(h(k,x),k,x).
 \]
@@ -62,7 +62,7 @@ computable functions that happen to be total.  But this contradicts
 \begin{proof}
 Suppose $h(k,x)$ were computable. Define the function $g$ by
 \[
-g(x) = 
+g(x) =
 \begin{cases}
   0                & \text{if $h(x,x) = 0$} \\
   \text{undefined} & \text{otherwise.}
@@ -76,7 +76,7 @@ $\fn{Un}(k, k)$ is undefined; but by our assumption that $g(k) \simeq
 \fn{Un}(k, x)$ for every $x$, this means that $g(k)$ is undefined, a
 contradiction. On the other hand, if $g(k)$ is undefined, then $h(k,k)
 \neq 0$, and so $h(k,k) = 1$. But this means that $\fn{Un}(k, k)$ is
-defined, i.e., that $g(k)$ is defined. 
+defined, i.e., that $g(k)$ is defined.
 \end{proof}
 
 \begin<TMs>{explain}

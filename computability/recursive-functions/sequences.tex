@@ -11,7 +11,7 @@
 
 The set of primitive recursive functions is
 remarkably robust. But we will be able to do even more once we have
-developed an adequate means of handling \emph{sequences}.  We will
+developed an adequate means of handling \emph{sequences}. We will
 identify finite sequences of natural numbers with natural numbers in
 the following way: the sequence $\langle a_0, a_1, a_2, \dots, a_k \rangle$
 corresponds to the number
@@ -28,8 +28,8 @@ Let us define the following functions:
 \begin{enumerate}
 \item $\len{s}$, which returns the length of the sequence $s$:
 \[
-\len{s} = 
-\begin{cases} 
+\len{s} =
+\begin{cases}
 0 & \text{if $s = 0$ or $s = 1$} \\
 \bmin{i < s}{(p_i \mid s \land \lforall[j < s][(j > i \lif
     p_j \mathrel{\not\mid} s)])}+1 & \text{otherwise}
@@ -41,7 +41,7 @@ acceptable bound.
 \item $\fn{append}(s,a)$, which returns the result of appending $a$ to
   the sequence $s$:
 \[
-\fn{append}(s,a) = 
+\fn{append}(s,a) =
 \begin{cases}
   2^{a+1} & \text{if $s = 0$ or $s = 1$} \\
 s \cdot p_{\len{s}}^{a+1} & \text{otherwise}
@@ -51,7 +51,7 @@ s \cdot p_{\len{s}}^{a+1} & \text{otherwise}
   (where the initial element is called the $0$th), or $0$ if $i$ is
   greater than or equal to the length of $s$:
 \[
-\fn{element}(s,i) = 
+\fn{element}(s,i) =
 \begin{cases}
   0 & \mbox{if $i \geq \len{s}$} \\
   \fn{min} \; {j < s} \; (p_i^{j+2} \not | s) - 1 & \text{otherwise}
@@ -60,7 +60,7 @@ s \cdot p_{\len{s}}^{a+1} & \text{otherwise}
 \end{enumerate}
 
 Instead of using the official names for the functions defined above,
-we introduce a more compact notation.  We will use $(s)_i$ instead of
+we introduce a more compact notation. We will use $(s)_i$ instead of
 $\fn{element}(s,i)$, and $\tuple{s_0, \dots, s_k}$ to abbreviate
 $\fn{append}(\fn{append}(\dots \fn{append}(\emptyseq,s_0)
 \dots),s_k)$. Note that if $s$ has length~$k$, the elements of $s$ are
@@ -89,7 +89,7 @@ follows:
 \item $\fn{hconcat}(s,t,0) = s$
 \item $\fn{hconcat}(s,t,n+1) = \fn{append}(\fn{hconcat}(s,t,n),(t)_n)$
 \end{enumerate}
-Then we can define $\fn{concat}$ by 
+Then we can define $\fn{concat}$ by
 \[
 \fn{concat}(s,t) = \fn{hconcat}(s,t,\len{t}).
 \]

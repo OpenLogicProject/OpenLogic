@@ -1,4 +1,4 @@
-% Part: first-order-logic
+% Part: turing-machines
 % Chapter: undecidability
 % Section: representing-tms
 
@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{fol}{und}{rep}
+\olfileid{tms}{und}{rep}
 \olsection{Representing Turing Machines}
 
 \begin{explain}
@@ -70,10 +70,10 @@ input $w$ are the following:
 \item The first $n$ squares contain the symbols $\triangleright$,
   $\sigma_{i_1}$, \dots, $\sigma_{i_n}$:
 \[
-\Obj S_\triangleright(\Obj 0, \Obj 0) \land 
-\Obj S_{i_1}(\overline 1, \Obj 0) \land 
+\Obj S_\triangleright(\Obj 0, \Obj 0) \land
+\Obj S_{i_1}(\overline 1, \Obj 0) \land
 \dots \land
-\Obj S_{i_n}(\overline n, \Obj 0) 
+\Obj S_{i_n}(\overline n, \Obj 0)
 \]
 \item Otherwise, the tape is empty:
 \[
@@ -88,7 +88,7 @@ For the following, let $A(x, y)$ be the conjunction of all sentences
 of the form
 \[
 \forall \Obj z(
-(\Obj z < \Obj x \lor \Obj x < \Obj z \land \Obj S_\sigma(\Obj z, \Obj y)) 
+(\Obj z < \Obj x \lor \Obj x < \Obj z \land \Obj S_\sigma(\Obj z, \Obj y))
 \lif \Obj S_\sigma(\Obj z, \Obj y'))
 \]
 where $\sigma \in \Sigma$.
@@ -97,7 +97,7 @@ where $\sigma \in \Sigma$.
 \[
 \lforall[\Obj x] \lforall[\Obj y](
    (\Obj Q_{q_i}(\Obj x', \Obj y) \land \Obj S_{\sigma}(\Obj x, \Obj y)) \lif
-   (\Obj Q_{q_j}(\Obj x, \Obj y) \land \Obj S_{\sigma'}(\Obj x, \Obj y) \land 
+   (\Obj Q_{q_j}(\Obj x, \Obj y) \land \Obj S_{\sigma'}(\Obj x, \Obj y) \land
 A(\Obj x, \Obj y)))
 \]
 \item For every instruction $\langle q_i, \sigma, q_j, \sigma',
@@ -105,7 +105,7 @@ A(\Obj x, \Obj y)))
 \[
 \lforall[\Obj x]\lforall[\Obj y](
    (\Obj Q_{q_i}(\Obj x, \Obj y) \land \Obj S_{\sigma}(\Obj x, \Obj y)) \lif
-   (\Obj Q_{q_j}(\Obj x', \Obj y) \land \Obj S_{\sigma'}(\Obj x, \Obj y) \land 
+   (\Obj Q_{q_j}(\Obj x', \Obj y) \land \Obj S_{\sigma'}(\Obj x, \Obj y) \land
 A(\Obj x, \Obj y)))
 \]
 \end{enumerate}

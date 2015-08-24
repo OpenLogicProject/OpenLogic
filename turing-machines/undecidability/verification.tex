@@ -1,4 +1,4 @@
-% Part: first-order-logic
+% Part: turing-machines
 % Chapter: undecidability
 % Section: verification
 
@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{fol}{und}{ver}
+\olfileid{tms}{und}{ver}
 \olsection{Verifying the Representation}
 
 \begin{explain}
@@ -17,7 +17,7 @@ descriptin of the configuration of $M$ for each step of the execution
 of $M$ on input $w$.  If $M$ halts on input $w$, then for some $n$,
 $M$ will be in a halting configuration at step $n$ (and be scanning
 square~$m$, for some $m$).  Hence, $T(M, w)$ implies $\Obj
-Q_h(\overline m, \overline n)$.  
+Q_h(\overline m, \overline n)$.
 \end{explain}
 
 \begin{defn}
@@ -55,7 +55,7 @@ $\sigma_k$.
 \begin{explain}
 To complete the verification of our clam, we also have to establish
 the reverse direction: if $T(M, w) \lif H(M, w)$ is valid, then $M$
-does in fact halt when started on input~$m$.  
+does in fact halt when started on input~$m$.
 \end{explain}
 
 \begin{lem}
@@ -73,13 +73,13 @@ $\Obj S_\sigma$ as follows:
 \Assign{\Obj S_\sigma}{M} & = \{(m, n) : \text{after $n$ steps, $M$ started
   on $w$ has symbol~$\sigma$ on square~$m$}\} \\
 \end{align*}
-Clearly, $\Sat{M}{T(M, w)}$. If $T(M, w)$ implies $H(M, w)$, then
+Clearly, $\Sat{M}{T(M, w)}$.  If $T(M, w)$ implies $H(M, w)$, then
 $\Sat{M}{H(M, w)}$, i.e.,
 \[
 \Sat{M}{\lexists[\Obj x]\lexists[\Obj y][\Obj{Q}_h(\Obj x, \Obj y)]}.
 \]
 As $\Domain{M} = \Nat$, there must be $m$, $n \in \Nat$ so that
-$\Sat{M}{\Obj Q_h(\overline{n}, \overline{m})}$. By the definition of
+$\Sat{M}{\Obj Q_h(\overline{n}, \overline{m})}$.  By the definition of
 $\Struct M$, this means that $M$ started on input~$w$ is in state~$h$
 after $m$ steps, i.e., has halted.
 \end{proof}
