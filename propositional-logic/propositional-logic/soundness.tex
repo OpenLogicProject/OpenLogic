@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{prp}{prp}{sou}
+\olfileid{prp}{prp}{snd}
 
 \olsection{Soundness of Propositional Logic}
 
@@ -29,35 +29,5 @@ in \olref[sem]{prop:semanticalfacts} gives the desired result.
 If $\Gamma$ is satisfiable, then $\Gamma$ is consistent. Hence,
 propositional logic is consistent. 
 \end{cor}
-
-\begin{defn} 
-\ollabel{def:MaxCon} 
-A set $\Gamma$ of !!{formula}s is \emph{maximally consistent} if it is
-consistent and if $\Delta$ is a consistent set such that $\Gamma
-\subseteq \Delta$ then $\Gamma = \Delta$.
-\end{defn}
-
-\begin{prop}[Truth Lemma] 
-Let $\Gamma$ be maximally consistent; then: 
-\begin{enumerate} 
-\item $\Gamma\Proves!A$ if and only if $!A\in\Gamma$; 
-\item $!A\in\Gamma$ if and only if $\lnot!A\notin\Gamma$;
-\item $!A\lif!B \in\Gamma$ if and only if either $!A\notin\Gamma$ or
-$!B\in\Gamma$. 
-\end{enumerate} 
-\end{prop} 
-
-
-\begin{proof} 
-By the way of example, let $!A\in\Gamma$; if also $\lnot!A\in\Gamma$,
-then $\Gamma$ is inconsistent; and if neither $!A$ nor $\lnot!A$ is in
-$\Gamma$ then by \olref{prop:phi} one of $\Gamma\cup\{!A\}$
-and $\Gamma\cup\{\lnot!A\}$ is consistent, which means that $\Gamma$
-is not maximal. 
-\end{proof}
-
-The left-to-right of item $(a)$ of the Truth Lemma is the
-\emph{deductive closure} of $\Gamma$, i.e., if $\Gamma \Proves !A$ then $!A
-\in \Gamma$.
 
 \end{document}

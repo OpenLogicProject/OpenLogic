@@ -35,14 +35,15 @@ $\Struct{M}$ and assignment~$s$.
 \begin{proof}
 We first verify that the schemas \textbf{Ax0}--\textbf{Ax5} are
 valid. For instance, here is the case for \textbf{Ax1}: suppose $t$ is
-!!{free for} $x$ in $!A$, and assume $\Sat{M}{\lforall[x][!A]}[s]$. Then
-by definition of satisfaction, for each $a \in \Domain{M}$, also
-$\Sat{M}{!A}[\Subst{s}{a}{x}]$, and in particular this holds when $a =
-\Value{t}{M}[s]$, i.e., $\Sat{M}{!A}[\Subst{s}{\Value{t}{M}[s]}{x}]$. By
-the Substitution Theorem, $\Sat{M}{\Subst{!A}{t}{x}}[s]$. This shows
-that $\Sat{M}{(\lforall[x][!A] \lif \Subst{!A}{t}{x})}[s]$. After
-verifying the schemas, we see that their universal closures are also
-valid, by~\ref{cor:valid}.
+!!{free for} $x$ in $!A$, and assume
+$\Sat{M}{\lforall[x][!A]}[s]$. Then by definition of satisfaction, for
+each $s' \sim_x s$, also $\Sat{M}{!A}[s']$, and in particular this
+holds when $s'(x) = \Value{t}{M}[s]$. By
+\olref[syn][ext]{prop:ext-formulas},
+$\Sat{M}{\Subst{!A}{t}{x}}[s]$. This shows that
+$\Sat{M}{(\lforall[x][!A] \lif \Subst{!A}{t}{x})}[s]$. After verifying
+the schemas, we see that their universal closures are also valid, by
+repeated application of~\olref[syn][sat]{prop:sat-quant}.
 \end{proof}
 
 \begin{thm}[Soundness]
