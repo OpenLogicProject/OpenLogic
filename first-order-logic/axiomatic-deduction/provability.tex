@@ -62,35 +62,35 @@ $\Gamma \Proves !B$.}{}
 \begin{enumerate}
 \item Assume that $\Gamma_0 \cup \{!A\} \Proves \lfalse$.
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \cup \{!A\} \Proves \lfalse$ & hyp. \\
 2. & $\Gamma_1 \Proves !A$ & hyp.\\ 
 3. & $\Gamma_0 \cup \Gamma_1 \Proves \lfalse$ & cut \\ 
-\end{tabular}
+\end{derivation}
 
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma \Proves \lfalse$.
 
 \item We assume that $\Gamma_0 \cup\{\lnot !A\} \Proves \lfalse$.
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \cup\{\lnot !A\} \Proves \lfalse$ & hyp. \\ 
 2. & $\Gamma_0 \Proves \lnot !A \lif \lfalse$ & Deduction Theorem\\
 3. & $\Gamma_0 \Proves (\lnot !A \lif \lfalse) \lif !A$ & Ax0\\ 
 4. & $\Gamma_0 \Proves !A$ & MP 2, 3 \\ 
-\end{tabular}
+\end{derivation}
 
 \item We assume that $\Gamma \cup \{ !A \} \Proves \lfalse$ and that
 $\Gamma_1 \cup \{\lnot !A \} \Proves \lfalse$.
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \cup\{!A\} \Proves \lfalse$ & hyp. \\
 2. & $\Gamma_0 \Proves !A \lif \lfalse$ & Deduction Theorem \\ 
 3. & $\Gamma_1 \cup \{\lnot !A \} \Proves \lfalse$ & hyp\\ 
 4. & $\Gamma_0 \Proves (!A \lif \lfalse) \lif \lnot !A$ & Ax0\\ 
 5. & $\Gamma_0 \Proves \lnot !A$ & MP 2, 4\\ 
 6. & $\Gamma_0 \cup \Gamma_1 \Proves \lfalse$ & Cut 3, 5 \\
-\end{tabular}
+\end{derivation}
 
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma \Proves \lfalse$.
@@ -103,11 +103,11 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma \Proves \lfalse$.
 \tagitem{defOr}{}{ \iftag{probOr}{Exercise.}{
 We assume that $\Gamma_0 \Proves !A$.
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \Proves !A$ & hyp \\ 
 2. & $\Gamma_0 \Proves !A \lif (!A \lor !B)$ & Ax0\\ 
 3. & $\Gamma_0 \Proves !A \lor !B$ & MP 1, 2 \\
-\end{tabular}
+\end{derivation}
 
 Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma \Proves
 !B$ is similar.}}
@@ -116,11 +116,11 @@ Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma \Proves
 \tagitem{defAnd}{}{ \iftag{probAnd}{Exercise}{
 Assume that $\Gamma_0 \Proves !A \land !B$
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \Proves !A \land !B$ & hyp \\ 
 2. & $\Gamma_0 \Proves (!A\land !B) \lif !A $ & Ax0\\ 
 3. & $\Gamma_0 \Proves !A \lor !B$ & MP 1, 2 \\
-\end{tabular}
+\end{derivation}
 
 Hence, $\Gamma \Proves !A$. A similar !!{derivation} starting shows that
 $\Gamma \Proves !B$.}}
@@ -132,11 +132,11 @@ $\Gamma \Proves !B$.}}
 \tagitem{defIf}{}{ \iftag{probIf}{Exercise.}{ We
 assume both that $\Gamma_0 \Proves !A$ and $\Gamma_0 \Proves !A \lif !B $.
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \Proves !A$ & hyp \\ 
 2. & $\Gamma_0 \Proves !A \lif !B $ & hyp\\ 
 3. & $\Gamma_0 \Proves !B$ & MP 1, 2\\
-\end{tabular}
+\end{derivation}
 
 Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, this means that $\Gamma
 \Proves !B$.}}
@@ -145,19 +145,19 @@ Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, this means that $\Gamma
 \tagitem{defIf}{}{\iftag{probIf}{Exercise.}{First
 suppose $\Gamma \Proves \lnot !A$.
     
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \Proves \lnot !A$ & hyp \\ 
 2. & $\Gamma_0 \Proves \lnot !A \lif (!A \lif !B) $ & Ax0\\ 
 3. & $\Gamma_0 \Proves !A \lif !B$ & MP 1,
-2\\ \end{tabular}
+2\\ \end{derivation}
 
 The proof for $\Gamma \Proves !B$ is similar:
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \Proves !B$ & hyp \\ 
 2. & $\Gamma_0 \Proves !B \lif (!A \lif !B) $ & Ax0\\ 
 3. & $\Gamma_0 \Proves !A \lif !B$ & MP 1, 2\\
-\end{tabular}}}
+\end{derivation}}}
 
 \end{enumerate} 
 \end{proof}
@@ -254,7 +254,7 @@ and the Deduction Theorem again gives $\Proves
 \lforall[x][\Subst{!A}{x}{c}] \lif \lforall[y][\Subst{!A}{y}{c}]$.
 The proof of $\Proves \lforall[y][\Subst{!A}{y}{c}] \lif \lforall[x]
 [\Subst{!A}{x}{c}]$ is perfectly symmetric, so that the conclusion
-follows by Proposition~T.
+follows by Taut.
 \end{proof}
 
 \begin{thm}[Strong Generalization on Constants]
@@ -292,11 +292,11 @@ $\Proves \lforall[x][\Subst{!A}{x}{c}] \equiv
 \tagitem{prvEx}{Exercise.}{}
 \tagitem{prvAll} {Assume that  $\Gamma_0 \Proves \lforall[x][!A(x)]$.
 
-\begin{tabular}{rll} 
+\begin{derivation} 
 1. & $\Gamma_0 \Proves \lforall[x][!A(x)]$ & hyp. \\
 2. & $\Gamma_0 \Proves \lforall[x][!A(x)] \lif \Subst{!A}{t}{x}$ & Ax1 \\ 
 3. & $\Gamma_0 \Proves \Subst{!A}{t}{x}$ & MP 1, 2 \\ 
-\end{tabular}}{}
+\end{derivation}}{}
 
 \end{tagenumerate} 
 \end{proof}
