@@ -36,12 +36,12 @@ and halts if, and only if, there is an even number of strokes. We call it an
 \begin{explain}
 Specific machines can be represented by instruction sets, state diagrams,
 and machine tables. Each representation can be easily converted to a
-different representation form. Consider the following three representatons
+different representation form. Consider the following three representations
 of our addition machine:
 
-Machine tables are not a common form of representation for turing machines,
+Machine tables are not a common form of representation for Turing machines,
 but they have one major advantage over state diagrams and instruction sets:
-they show in what sate, and for what symbol, the machine halts for. Whenever
+they show in what state, and for what symbol, the machine halts. Whenever
 there is a gap in the table is a possible point for the machine to halt. Unlike
 state diagrams and instruction sets, where you have to comb through to check
 if there is an instruction missing for a specific symbol, any halting points are
@@ -57,7 +57,6 @@ $q_1$ &  & $\TMstroke, q_2, \TMright$         &  &  \\
 $q_2$ &            &             &  &  \\
      &            &             &  & 
 \end{tabular}
-
 \end{ex}
 
 \begin{ex}
@@ -166,11 +165,24 @@ tracing through the configurations with two different inputs.
 
 
 \begin{explain}
-Although it is possible to represent Turing machines using only the language we have mentioned, it may be useful to have a visual representation of the machines available. Such visual, or diagrammatic, representations of Turing machines are called \emph{state diagrams}. The diagrams are composed of state cells connected by arrows. The state cells represent the various states of the machine. Each arrow represents a possible instruction to be carried out from that state. Above each arrow is written the instruction. For example, the instruction $\TMblank :\TMstroke :\TMright$ on an arrow leading from state $q_0$ can be read as \emph{if reading $\TMblank$ in state $q_0$, write $\TMstroke$, move right and go to state $q_1$}. This is equivalent to the instruction $\tuple{q_0, \TMblank, \TMstroke, q_1}$.
+Although it is possible to represent Turing machines using only the
+language we have mentioned, it may be useful to have a visual
+representation of the machines available. Such visual, or
+diagrammatic, representations of Turing machines are called
+\emph{state diagrams}. The diagrams are composed of state cells
+connected by arrows. The state cells represent the various states of
+the machine. Each arrow represents a possible instruction to be
+carried out from that state. Above each arrow is written the
+instruction. For example, the instruction $\TMblank :\TMstroke
+:\TMright$ on an arrow leading from state $q_0$ can be read as
+\emph{if reading $\TMblank$ in state $q_0$, write $\TMstroke$, move
+  right and go to state $q_1$}. This is equivalent to the instruction
+$\tuple{q_0, \TMblank, \TMstroke, q_1}$.
 
-It is easy to convert between state diagrams and instruction sets. The following instruction set is for a Turing machine $T_Z$ that takes all of the $\TMstroke$s on the tape and converts them to $\TMblank$s (i.e., it computes the function  $f(n) = 0$). The diagram. 
-
-
+It is easy to convert between state diagrams and instruction sets. The
+following instruction set is for a Turing machine $T_Z$ that takes all
+of the $\TMstroke$s on the tape and converts them to $\TMblank$s
+(i.e., it computes the function $f(n) = 0$). The diagram.
 \end{explain}
 
 \end{document}
