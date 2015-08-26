@@ -61,13 +61,22 @@ $\sqrt{2}^{\sqrt{2}}$, and let $b$ be~$\sqrt 2$.
 Does this constitute a valid proof? Most mathematicians feel that it
 does. But again, there is something a little bit unsatisfying here: we
 have proved the existence of a pair of real numbers with a certain
-property, without being able to say \emph{which} pair of numbers it is.
+property, without being able to say \emph{which} pair of numbers it
+is.  It is possible to prove the same result, but in such a way that
+the pair $a$, $b$ \emph{is} given in the proof: take $a = \sqrt{3}$
+and $b = \log_3 4$. Then
+\[
+a^b = \sqrt{3}^{\log_3 4} = 3^{1/2 \cdot \log_3 4} = (3^{\log_3
+  4})^{1/2} = 4^{1/2}= 2,
+\]
+since $3^{\log_3 x} = x$.
 
 Intuitionistic logic is designed to model a kind of reasoning where
-moves like this are disallowed. Proving the existence of an $x$
-satisfying~$!A(x)$ means that you have a specific~$x$, and a proof
-that it satisfies $!A$; proving that $!A$ or $!B$ holds means that
-you can prove one or the other.
+moves like the one in the first proof are disallowed. Proving the
+existence of an $x$ satisfying~$!A(x)$ means that you have to give a
+specific~$x$, and a proof that it satisfies $!A$, like in the second
+proof. Proving that $!A$ or $!B$ holds requires that you can prove one
+or the other.
 
 Formally speaking, intuitionistic first-order logic is what you get if
 you omit restrict a proof system for first-order logic in a certain
