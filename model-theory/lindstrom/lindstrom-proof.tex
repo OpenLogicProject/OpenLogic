@@ -12,61 +12,61 @@
 
 \begin{lem}
 \ollabel{lem:lindstrom}
-Suppose $!A \in L(\Lang{L})$, with $\Lang{L}$ finite, and assume
+Suppose $!E \in L(\Lang{L})$, with $\Lang{L}$ finite, and assume
 also that there is $n \in \Nat$ such that for any two
 !!{structure}s $\Struct{M}$ and~$\Struct{N}$, if $\Struct{M} \equiv_n
-\Struct{N}$ and $\Struct{M} \models_L !A$ then also $\Struct{N}
-\models_L !A$. Then $!A$ is equivalent to a first-order
+\Struct{N}$ and $\Struct{M} \models_L !E$ then also $\Struct{N}
+\models_L !E$. Then $!E$ is equivalent to a first-order
 !!{sentence}, i.e., there is a first-order $!D$ such that
-$\Mod(L){!A} = \Mod(L){!D}$.
+$\Mod(L){!E} = \Mod(L){!D}$.
 \end{lem}
 
 \begin{proof} 
 Let $n$ be such that any two $n$-equivalent !!{structure}s
-$\Struct{M}$ and $\Struct{N}$ agree on the value assigned to~$!A$.
+$\Struct{M}$ and $\Struct{N}$ agree on the value assigned to~$!E$.
 Recall that there are only finitely many first-order !!{sentence}s in
 a finite !!{language} that have quantifier rank no greater than~$n$,
 up to logical equivalence. Now, for each fixed !!{structure}
 $\Struct{M}$ let $!D_{\Struct{M}}$ be the conjunction of all
-first-order !!{sentence}s~$!A$ true in~$\Struct{M}$ with
-$\QuantRank{!A} \le n$ (this conjunction is finite), so that
+first-order !!{sentence}s~$!E$ true in~$\Struct{M}$ with
+$\QuantRank{!E} \le n$ (this conjunction is finite), so that
 $\Struct{N} \models !D_{\Struct{M}}$ if and only if $\Struct{N}
 \equiv_n \Struct{M}$. Then put $!D = \textstyle\bigvee
-\Setabs{!D_{\Struct{M}}}{\Struct{M} \models_L !A}$; this disjunction
+\Setabs{!D_{\Struct{M}}}{\Struct{M} \models_L !E}$; this disjunction
 is also finite (up to logical equivalence).
 
-The conclusion $\Mod(L){!A} = \Mod(L){!D}$ follows. In fact, if
+The conclusion $\Mod(L){!E} = \Mod(L){!D}$ follows. In fact, if
 $\Struct{N} \models_L !D$ then for some $\Struct{M} \models_L
-!A$ we have $\Struct{N} \models !D_{\Struct{M}}$, whence also
-$\Struct{N} \models_L !A$ (by the hypothesis of the
-lemma). Conversely, if $\Struct{N} \models_L !A$ then
+!E$ we have $\Struct{N} \models !D_{\Struct{M}}$, whence also
+$\Struct{N} \models_L !E$ (by the hypothesis of the
+lemma). Conversely, if $\Struct{N} \models_L !E$ then
 $!D_\Struct{N}$ is a disjunct in $!D$, and since $\Struct{N}
 \models !D_\Struct{N}$, also $\Struct{N} \models_L !D$.
 \end{proof}
 
 \begin{thm}[Lindst\"om's Theorem]
-\ollabel{thm:lindstrom} 
-Suppose $\tuple{L, \models_L}$ has the Compactness and the
-L\"owenheim-Skolem Properties. Then $\tuple{L, \models_L} \le
-\tuple{F, \models}$ (where the latter is first-order logic).
+  \ollabel{thm:lindstrom} Suppose $\tuple{L, \models_L}$ has the
+  Compactness and the L\"owenheim-Skolem Properties. Then
+  $\tuple{L, \models_L} \le \tuple{F, \models}$ (so
+  $\tuple{L, \models_L}$ is equivalent to first-order logic).
 \end{thm}
 
 \begin{proof}
-By \olref{lem:lindstrom}, it suffices to show that for any $!A
+By \olref{lem:lindstrom}, it suffices to show that for any $!E
 \in L(\Lang{L})$, with $\Lang{L}$ finite, there is $n \in \Nat$
 such that for any two !!{structure}s $\Struct{M}$ and~$\Struct{N}$: if
 $\Struct{M} \equiv_n \Struct{N}$ then $\Struct{M}$ and $\Struct{N}$
-agree on~$!A$. For then $!A$ is equivalent to a first-order
+agree on~$!E$. For then $!E$ is equivalent to a first-order
 !!{sentence}, from which $\tuple{L, \models_L} \le \tuple{F, \models}$
 follows. Since we are working in a finite, purely relational
 !!{language}, by \olref[bas][pis]{thm:b-n-f} we can replace the statement
 that $\Struct{M} \equiv_n \Struct{N}$ by the corresponding algebraic
 statement that $I_n(\emptyset,\emptyset)$.
 
-Given $!A$, suppose towards a contradiction that for each $n$
+Given $!E$, suppose towards a contradiction that for each $n$
 there are !!{structure}s $\Struct{M}_n$ and $\Struct{N}_n$ such that
 $I_n(\emptyset, \emptyset)$, but (say) $\Struct{M}_n \models_L
-!A$ whereas $\Struct{M}_n \not\models_L !A$. By the
+!E$ whereas $\Struct{N}_n \not\models_L !E$. By the
 Isomorphism Property we can assume that all the $\Struct{M}_n$'s
 interpret the constants of the language by the same objects;
 furthermore, since there are only finitely many atomic !!{sentence}s in
@@ -85,7 +85,7 @@ universes of $\Struct{M}^*$ and $\Struct{N}^*$ as well as the natural
 numbers~$\Nat$ along with their natural ordering~$\le$, in the
 !!{language} with extra predicates representing the universes
 $\Domain{M}$, $\Domain{N}$, $\Domain{M}^{<\omega}$ and
-$\\Domain{N}^{<\omega}$ as well as predicates coding the domains of
+$\Domain{N}^{<\omega}$ as well as predicates coding the domains of
 $\Struct{M}_n$ and $\Struct{N}_n$ in the sense that:
 \begin{align*}
   \Domain{M_n} & = \Setabs{a \in \Domain{M}}{R(a, n)}; & 
@@ -100,7 +100,7 @@ $I_n(\mathbf{a}, \mathbf{b})$.
 Now there is a !!{sentence}~$!D$ is the language $\Lang{L}$ augmented
 by $R$, $S$, $J$, etc., saying that $\le$ is a discrete linear ordering
 with first but no last element and such that $\Struct{M}_n \models
-!A$, $\Struct{N}_n \not\models !A$, and for each $n$ in the
+!E$, $\Struct{N}_n \not\models !E$, and for each $n$ in the
 ordering $J(n, \mathbf{a}, \mathbf{b})$ holds if and only if
 $I_n(\mathbf{a}, \mathbf{b})$.
 
@@ -108,7 +108,7 @@ Using the Compactness Property, we can find a model $\Struct{M}^*$ of
 $!D$ in which the ordering contains a non-standard element~$n^*$. In
 particular then $\Struct{M^*}$ will contain substructures
 $\Struct{M_{n^*}}$ and $\Struct{N_{n^*}}$ such that $\Struct{M_{n^*}}
-\models_L !A$ and $\Struct{N_{n^*}} \not\models_L !A$. But now we can
+\models_L !E$ and $\Struct{N_{n^*}} \not\models_L !E$. But now we can
 define a set $\mathcal{I}$ of pairs of $k$-tuples from
 $\Domain{M_{n^*}}$ and $\Domain{N_{n^*}}$ by putting
 $\tuple{\mathbf{a}, \mathbf{b}} \in \mathcal{I}$ if and only if
