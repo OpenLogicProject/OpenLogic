@@ -10,137 +10,13 @@
 \olsection{Drawing State Diagrams}
 
 
-\begin{ex}
-We will begin by demonstrating several Turing machines and the
-functions that they can compute. Although fairly simple in configuration,
-the computing power of Turing machines is large. We will start with a 
-simple machine, one that reads the input on a tape and accepts
-it if it is of a certain form. Specifically, this machine reads a block of strokes
-and halts if, and only if, there is an even number of strokes. We call it an
-\emph{even machine}:
-\[
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
-                    semithick]
-  \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)                     {$q_1$};
-  \node[state]         (B) [right of=A] {$q_2$};
-
-  \path (A) edge                      node {1,1,R} (B)
-            (B) edge [loop above] node {0,0,R} (B)
-                  edge                      node {1,1,R} (A);
-\end{tikzpicture}
-\]
-\end{ex}
-
-\begin{explain}
-Specific machines can be represented by instruction sets, state diagrams,
-and machine tables. Each representation can be easily converted to a
-different representation form. Consider the following three representations
-of our addition machine:
-
-Machine tables are not a common form of representation for Turing machines,
-but they have one major advantage over state diagrams and instruction sets:
-they show in what state, and for what symbol, the machine halts. Whenever
-there is a gap in the table is a possible point for the machine to halt. Unlike
-state diagrams and instruction sets, where you have to comb through to check
-if there is an instruction missing for a specific symbol, any halting points are
-quickly identified by finding the gaps.
-\end{explain}
-
-\begin{ex}
-The machine table for the even machine is:
-\centering
-\begin{tabular}{lllll}
-           & $\TMblank$ & $\TMstroke$ &  &  \\
-$q_1$ &  & $\TMstroke, q_2, \TMright$         &  &  \\
-$q_2$ &            &             &  &  \\
-     &            &             &  & 
-\end{tabular}
-\end{ex}
-
-\begin{ex}
-The above machine halts only when the input is an even number of strokes.
-Otherwise, the machine (theoretically) continues to operate until infinity. Not
-all machines have to halt. If we concepualize halting as the machine running
-out of instructions to execute, then we can create a machine that never halts
-simply by ensuring that there is an outgoing arrow for each symbol at each
-state cell. The above machine can be modified to run infnitely by adding an
-instruction for scanning a blank at~$q_1$. The following machine never halts:
-\[
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
-                    semithick]
-  \tikzstyle{every state}=[fill=none,draw=black,text=black]
-
-  \node[state]         (A)                     {$q_1$};
-  \node[state]         (B) [right of=A] {$q_2$};
-
-  \path (A) edge                      node {1,1,R} (B)
-                  edge [loop above] node {0,0,R} (A)
-            (B) edge [loop above] node {0,0,R} (B)
-                  edge                      node {1,1,R} (A);
-\end{tikzpicture}
-\]
-\end{ex}
 
 How do we know the machine works? One way is to check it by tracking
 its behaviour through several different inputs. We can do this by defining
 the \emph{configuration} of the macine at a specific time.
 
-\begin{ex}
-So far we have only considered machines that read input, and have not 
-given any thought to machines that both read and write. An example of
-such a machine (although there are many, many examples) is a \emph{doubler}.
-A doubler, when started with a block of~$n$ strokes on the tape, outputs
-a block of~$2n$ strokes.
 
-Before building such a machine, it is important to come up with a 
-\emph{strategy} for solving the problem. Since the machine, as we have 
-formulated it, cannot remember how many strokes it has read, we need to
-come up with a way to ensure that we are keeping track of all the strokes
-on the tape. One such way is to erase the first stroke from the input, then
-traverse over all the others, leaving a blank, and writing two new strokes.
-The machine will then go back and find the second stroke in the input, and
-double that one as well. By repeating this process until there are no more
-strokes left from the original input, the machine has successfully doubled
-the input. Here is one such formualtion of the machine:
-\[
-\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
-                    semithick]
-  \tikzstyle{every state}=[fill=none,draw=black,text=black]
-
-  \node[state]         (1)                     {$q_1$};
-  \node[state]         (2) [right of=1] {$q_2$};
-  \node[state]         (3) [right of=2] {$q_3$};
-  \node[state]         (4) [below of=3] {$q_4$};
-  \node[state]         (5) [left of=4]       {$q_5$};
-  \node[state]         (6) [left of=5]       {$q_6$};
-
-  \path (1) edge              node {1,0,R} (2)
-            (2) edge [loop above] node {1,1,R} (2)
-                 edge              node {0,0,L} (3)
-            (3) edge [loop above] node {1,1,R} (3)
-                 edge  node {0,1,R} (4)
-            (4) edge [loop below] node {0,1,L} (4)
-                 edge              node {1,1,L} (5)
-            (5) edge [loop below]  node {1,1,L} (5)
-                 edge              node {0,0,L} (6)
-            (6) edge [loop below] node {1,1,L} (6)
-                 edge              node {0,0,R} (1);
-\end{tikzpicture}
-\]
-\end{ex}
-
-\begin{prob}
-Choose an arbitary input and trace through the configurations of the
-above machine.
-\end{prob}
-
-\begin{prob}
-Come up with a new method for solving the doubler problem, then build
-a machine that executes your method. Check that your machine works by
-tracing through the configurations with two different inputs.
-\end{prob}
 
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
