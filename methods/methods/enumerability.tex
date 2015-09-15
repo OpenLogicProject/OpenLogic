@@ -1,0 +1,68 @@
+% Part: methods
+% Chapter: methods 
+% Section: enumerability
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{mth}{enu}
+\olsection{Enumerability}
+
+A set can be shown to be !!{enumerable} by giving an enumeration, either in
+the form of a list or a function. But how might one generate such a list?
+Arrays can play an important role in generating new enumerations out of
+given ones.
+
+Consider, for example, the set $\mathbb{Q}^{+}$ of all positive rational
+numbers. Construct an array as follows:
+
+\begin{tabular}{c|c|c|c} 
+1/1 & 1/2 & 1/3 & ... \\\hline
+2/1 & 2/2 & 2/3 & ... \\\hline
+3/1 & 3/2 & 3/3 & ... \\\hline
+... & ... & ... & ... \\
+\end{tabular}
+
+Clearly every rational number appears at at least one point in the array,
+since an arbitrary rational m/n will appear at the $m^{th}$ row and $n^{th}$
+column. Indeed, it will also appear at the $2m^{th}$ row and $2n^{th}$ column,
+the $3m^{th}$ row and $3n^{th}$ column, and so on. But of course to show that
+$\mathbb{Q}^{+}$ is enumberable we must arrange the rationals in the array
+into a single list. The pattern in the array below represents one way to do
+this.
+
+\begin{tabular}{c|c|c|c|c} 
+1 & 2 & 4 & 7 &  ... \\\hline
+3 & 5 & 8 &  ...& ... \\\hline
+6 & 9 &  ... & ... & ... \\\hline
+10&  ... & ...& ... & ... \\\hline
+... & ... & ... & ... & ...\\
+\end{tabular}
+
+This pattern is called \emph{Cantor's zig-zag} method. Together these
+arrays determine the enumeration 1/1, 1/2, 2/2, 2/1, 1/3, 2/3, 3/3, 3/2,
+3/1, ...
+
+A perfectly parallel technique can be used to enumerate the ordered pairs
+of positive integers, giving the enumeration $\langle1,1\rangle,
+\langle1,2\rangle, \langle2,2\rangle, \langle2,1\rangle, \langle1,3\rangle,
+\langle2,3\rangle, \langle3,3\rangle,$ $\langle3,2\rangle,
+\langle3,1\rangle, ...$ With that in place we can then use an array to
+enumerate the triples by treating the columns as corresponding to the
+enumeration of the pairs and the rows to the enumeration of the positive
+integers and combining to produce the triple $\langle k,n,m\rangle$, as in
+the following array:
+
+\begin{tabular}{c|c|c|c} 
+1,1,1 & 1,1,2 & 1,1,3 & ... \\\hline
+2,2,1 & 2,2,2 & 2,2,3 & ... \\\hline
+3,3,1 & 3,3,2 & 3,3,3 & ... \\\hline
+... & ... & ... & ... \\
+\end{tabular}
+
+For any arbitrary triple $\langle k,n,m\rangle$ it will appear at row k and
+column $\langle n,m\rangle$. The list is then determined by following the
+same pattern through the array as before.
+
+\end{document}
