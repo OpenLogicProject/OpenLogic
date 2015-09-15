@@ -1,0 +1,119 @@
+% Part: methods
+% Chapter: methods 
+% Section: induction
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{mth}{ind}
+\olsection{Induction}
+
+\begin{explain}
+Induction is a proof technique of mathematics and logic (one which
+you'll use over and over again).You may be familiar with it from math, in
+which you do induction on natural numbers. But as it turns out, there are
+lots of different kinds of mathematical/logical sets of objects that lend
+themselves to induction. In general, what it lets you do is prove a
+universal claim. You show that every object of a certain kind has some
+property. And it lets you do this in cases where universal intro would be
+too tricky. But induction only works on mathematical objects which are
+constructed in special ways.
+If every element in the set is either basic or built up from basic
+elementsusing certain operations, then we can use induction on it.
+
+Induction on complexity starts with the basis cases showing that some
+property holds for the two simplest kinds of sentences\textemdash the
+atomic sentences. It then shows that it holds for each of the more complex
+kinds of sentences if it holds for sentences that are less complex than
+them.
+
+When it comes to sentences of \emph{FOL}, less complex just means having
+fewer logical operators.
+
+All inductions on complexity have this general form: an argument for the
+basis case or cases, and then, on the inductive hypothesis that it holds
+for less complex cases, an argument that it holds for the various complex
+cases.
+
+\emph{Induction Principle (wffs)} If every !!{sentence} symbol has
+property$P$ and $P$ is preserved under the formula building functions, then
+every
+wff has property $P$.
+
+This gives us a ``recipe'' for inductive proofs on wffs.
+
+\emph{Recipe:} Show that every wff has property $P$.
+
+\emph{Base Case:} Let $A$ be a !!{sentence} symbol.
+
+[...]
+
+Therefore, $A$ has property $P$.
+
+\textbf{Inductive Step:} Let $!A$ and $!B$ be wffs, both of which have
+property $P$.
+
+Case $\lnot$: [...] Therefore, $\lnot !A$ has property $P$.
+
+Case $\land$: [...] Therefore, $!A \land !B$ has property $P$.
+
+Case $\lor$: [...] Therefore, $!A \lor !B$ has property $P$.
+
+Case $\lif$: [...] Therefore, $!A \lif !B$ has property $P$.
+
+Case $\liff$: [...] Therefore, $!A \liff !B$ has
+property $P$.
+
+Therefore, every wff has property $P$.
+
+Sometimes some cases can be combined, but if you want to make sure you
+haveeverything covered, especially when you start off, you might want to
+make
+sure you do all the cases. The main set of objects which we'll be using
+induction on is the set of wffs. But basically, we can do induction on any
+set of objects which is constructed according to specific rules out of an
+initial set of objects.
+If we wanted to prove something about the set of all wffs that do not
+contain a negation symbol, we could do induction on that set. We'd just
+omit the negation case from our induction on wffs. When you're starting an
+inductive proof, the first thing to identify is often the property $P$
+thatyou're trying to prove holds for every wff.
+\end{explain}
+
+\begin{ex}
+Let $!A$ be a wff, and let $c_{!A}$ be the number of
+    places where binary !!{operator}s appear in $!A$. Let
+    $s_{!A}$ be the number of places where !!{sentence} symbols appear
+in $!A$. We will show that $s_{!A} = c_{!A} + 1$.\\
+
+What is the property you're trying to show holds for all wffs?
+
+That the number of !!{sentence} symbols is one more than the number of
+binary !!{operator}s. So this is property $P$. The more concise way to
+state property $P$ for a wff $!A$ is to say $s_{!A} = c_{!A} + 1$.
+
+\textbf{Base case:} Let $!A$ be a !!{sentence} symbol. Then $c_{!A} = 0$
+and $s_{!A} = 1$, so we have $1 = 0 + 1$.\\
+\textbf{Inductive step:} Let $!A$ and $!B$ be wffs such that
+$s_{!A}
+= c_{!A} + 1$ and $s_{!B} = c_{!B} + 1$.\\
+\textsc{Case $\lnot$:} Consider $(\lnot !A)$. $s_{(\lnot !A)} =
+s_{!A}$, since no new !!{sentence} symbols appear. Also, $c_{(\lnot !A)} =
+c_{!A}$, since no new binary !!{operator}s appear. Then since $s_{!A} =
+c_{!A} + 1$, we also have $s_{(\lnot !A)} = c_{(\lnot !A)} +
+1$.
+
+We can also use a trick by combining all the binary !!{operator} cases
+into one case.
+
+\textsc{Case $\square$:} Now consider $(!A \square !B)$, where
+$\square$ is a binary !!{operator}. $s_{(!A \square !B)} = s_{!A} +
+s_{!B}$, since we add no !!{sentence} symbols beyond what were already in
+$!A$ and $!B$. Also, $c_{(!A \square !B)} = c_{!A} +
+c_{!B} + 1$, since we are adding one new binary !!{operator}. So $s_{(!A
+\square !B)} = s_{!A} + s_{!B} = c_{!A} + 1 + c_{!B} + 1 =
+c_{(!A \square !B)} + 1$.
+\end{ex}
+
+\end{document}

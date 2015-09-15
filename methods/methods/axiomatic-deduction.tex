@@ -1,0 +1,71 @@
+% Part: methods
+% Chapter: methods 
+% Section: axiomatic-deduction
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{mth}{axd}
+\olsection{Axiomatic Deduction}
+
+\begin{explain}
+
+    The derived rules are generally useful for simplifying the problem
+    you have to deal with. Look at the form of the problem you're dealing
+with, and try to match it to the available rules. Ask yourself what you
+would have to show in order to prove something of that form.
+
+    For instance, if you need to show something of the form $\Sigma
+\Proves \lforall[x][!A]$ (with $x$ not free in $\Sigma$) then you might
+want to work backwards using the generalization theorem, and say that
+    it would suffice to show $\Sigma \Proves !A$.
+
+    In order to avoid confusing yourself, work backwards to reduce the
+    problem to the simplest form possible, and then solve that problem.
+
+    Intuitively, think of it like being given directions to find a place.
+To get to my office, it suffices to find the Philosophy Department main
+office. To find the main office, it suffices to find the 3rd floor of
+    Clearihue B wing. To find that floor, it suffices to find the B
+    building. To find that building, it suffices to find the university
+    centre. And if you know how to get there, then you're done.
+
+    This is just the same pattern that you follow when you're working
+    backwards in a !!{derivation}.
+
+    But there are generally several different !!{derivation}s of any given
+    !!{formula}, so there won't necessarily be a unique place when you stop
+    working backwards. Practice will help you.
+\end{explain}
+
+\begin{ex}
+We can show $\lexists[x]\lforall[y][R(x,y)] \Proves
+\lforall[y]\lexists[x][R(x,y)]$.
+
+First, it suffices to show that $\lexists[x]\lforall[y][R(x,y)] \Proves
+\lexists[x][R(x,y)]$, by the generalisation theorem. Then we can fill
+    in equivalences:\\
+$\lnot \lforall[x] \lnot \lforall[y][R(x,y)] \Proves \lnot
+\lforall[x][\lnot R(x,y)]$.
+
+And then we can apply contraposition, so it suffices to show:\\ 
+$\lforall[x][\lnot R(x,y)] \Proves \lforall[x]\lnot \lforall[y][R(x,y)]$. 
+
+Then by generalisation, again, it suffices to show:\\
+$\lforall[x][\lnot R(x,y)] \Proves \lnot \lforall[y][R(x,y)]$. 
+
+But then by reductio, we can just show that $\Sigma = \{\lforall[x][\lnot
+R(x,y)], \lforall[y][R(x,y)]
+\}$ is inconsistent by deriving a contradiction from that set. This is
+whatwe do below.
+
+First, $\Proves \lforall[x][\lnot R(x,y)] \rightarrow \lnot R(x,y)$ by
+axiom
+group one, so $\lforall[x][\lnot R(x,y)] \Proves \lnot R(x,y)$. And for thesame
+reason, we have $\lforall[y][ R(x,y)] \Proves R(x,y)$. So we have shown
+that the
+set is inconsistent. So we are done.
+\end{ex}
+
+\end{document}

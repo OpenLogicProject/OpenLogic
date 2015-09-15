@@ -1,0 +1,98 @@
+% Part: methods
+% Chapter: methods 
+% Section: proof-recipes
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{mth}{rec}
+\olsection{Recipes for Proofs}
+
+\begin{enumerate}
+
+\item Question: Show that $\Sigma \Entails !A$.
+
+Proof outline: Let $v$ be a truth assignment satisfying all of $\Sigma$. Wewill show that $Val(!A) = T$.
+
+    [...]
+
+Thus $Val(!A) = T$. So any truth assignment satisfying all of $\Sigma$ alsosatisfies $!A$, which implies that $\Sigma \Entails !A$.
+
+\item Question: Show that $\Sigma \Entails/ !A$.
+
+Answer: Specify a truth assignment $v$ satisfying all of $\Sigma$ such that$Val(!A) = F$. Just give the truth values $v$ assigns to all relevant
+!!{sentence} symbols.
+
+\item Question: Show that $S \subseteq T$.
+
+Proof outline: Let $a \in S$. We will show that $a \in T$.
+
+[...]
+
+Therefore, $a \in T$. Since every element of $S$ is also an element of $T$,this means $S \subseteq T$.
+
+\item Question: Show that $S = T$ (where $S$ and $T$ are sets).
+
+Answer: First show that $S \subseteq T$ and then show that $T \subseteq S$.
+\item Question (Conditional Proof): Show that if $X$, then $Y$.
+
+Proof: Suppose that $X$.
+
+[...]
+
+Therefore, $Y$. So if $X$ is true, then $Y$ must also be true.
+
+\item Question (Biconditional Proof): Show that $X$ if and only if (iff)
+$Y$.
+
+Proof: Suppose that $X$.
+
+[...]
+
+Therefore, $Y$.
+
+Now instead suppose $Y$.
+
+[...]
+
+Therefore, $X$.
+
+So we conclude that $X$ if and only if $Y$.
+
+\item Question (Proof by Cases.): We know that either $X$ or $Y$ is true.
+Prove that $Z$.
+
+Proof: Suppose $X$.
+
+[...]
+
+Therefore, $Z$.
+
+Now instead suppose $Y$.
+
+[...]
+
+Therefore, $Z$.
+
+Since $Z$ follows from both cases, $Z$ must be true.
+
+\item Question (Proof by Contradiction): Show that $X$ is not true.
+
+Proof: Suppose that $X$ is true.
+
+[...]
+
+But this is a contradiction. Therefore $X$ must be false.
+
+\item Question (Universal Intro): Show that for every $a \in S$, it is $P$.
+Take an arbitrary $a \in S$.
+
+[...]
+
+Therefore, $a$ is $P$. Since any arbitrary object in $S$ is $P$, then all
+of $S$ is $P$.
+
+\end{enumerate}
+
+\end{document}
