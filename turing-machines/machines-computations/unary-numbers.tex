@@ -45,9 +45,9 @@ former example.
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)                     {$q_1$};
-  \node[state]         (B) [right of=A] {$q_2$};
-  \node[state]         (C) [right of=B] {$q_3$};
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [right of=B] {$q_2$};
 
   \path (A) edge                      node {0,1,R} (B)
                   edge [loop above] node {1,1,R} (B)
@@ -59,13 +59,13 @@ former example.
 \end{ex}
 
 \begin{prob}
-Show all the configurations of the machine for input $\tuple{3,5}$.
+Trace throughl the configurations of the machine for input $\tuple{3,5}$.
 \end{prob}
 
 \begin{prob}
 \emph{Subtraction:} Design a Turing machine that when given an input of two non-empty 
-strings of strokes of length \emph{n} and \emph{m}, where $n > m$, outputs a string of 
-strokes of length \emph{n-m}. 
+strings of strokes of length \emph{n} and \emph{m}, where $n > m$, computes the 
+function $f(n,m) = n + m$. 
 \end{prob}
 
 \begin{prob}
