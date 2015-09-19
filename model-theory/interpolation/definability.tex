@@ -10,16 +10,49 @@
 
 \olsection{The Definability Theorem}
 
+One important application of the interpolation theorem is Beth's
+definability theorem.  To define an $n$-place relation~$R$ we can give
+a !!{formula}~$!C$ with $n$ free !!{variable}s which does not
+involve~$R$. This would be an \emph{explicit} definition of~$R$ in
+terms of~$!C$.  We can then say also that a theory~$\Sigma(P)$ in a
+!!{language} containing the $n$-place !!{predicate}~$P$ explicitly
+defines~$P$ if it contains (or at least entails) a formalized explicit
+definition, i.e.,
+\[
+\Sigma(P) \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1, \dots,
+    x_n))]].
+\]
+But an explicit definition is only one way of defining---in the sense
+of determining completely---a relation.  A theory may also be such
+that the interpretation of~$P$ is fixed by the interpretation of the
+rest of the !!{language} in any model.  The definability theorem
+states that whenever a theory fixes the interpretation of~$P$ in this
+way---whenever it \emph{implicitly defines}~$P$---then it also
+explicitly defines it.
+
 \begin{defn}
-Given a language $\Lang{L}$ and !!{predicate}s $P$ and $P'$ not in
-$\Lang{L}$, a set $\Sigma(P)$ of !!{sentence}s of $\Lang{L} \cup\{P\}$
-\emph{implicitly defines} $P$ if and only if
+Suppose $\Lang{L}$ is !!a{language} not containing the
+!!{predicate}~$P$.  A set $\Sigma(P)$ of !!{sentence}s of $\Lang{L}
+\cup \{P\}$ \emph{explicitly defines}~$P$ if and only if there is a
+!!{formula} $!C(x_1, \dots, x_n)$ of $\Lang{L}$ such that
+\[
+\Sigma(P) \Entails \lforall[x_1][\dots
+  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1, \dots,
+    x_n))]].
+\]
+\end{defn}
+
+\begin{defn}
+Suppose $\Lang{L}$ is !!a{language} not containing the
+!!{predicate}s~$P$ and~$P'$.  A set $\Sigma(P)$ of !!{sentence}s of
+$\Lang{L} \cup \{P\}$ \emph{implicitly defines} $P$ if and only if
 \[
 \Sigma(P) \cup \Sigma(P') \Entails \lforall[x_1][\dots
   \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff \Atom{P'}{x_1,\dots,
       x_n})]],
 \]
-where $\Sigma(P')$ is the result of uniformly replacing $P'$ for $P$
+where $\Sigma(P')$ is the result of uniformly replacing $P$ with $P'$
 in $\Sigma(P)$.
 \end{defn}
 
@@ -29,18 +62,6 @@ $\Expan{M}{R'} \Entails \Sigma(P')$, then $R=R'$; where
 $\Expan{M}{R}$ is the !!{structure}~$\Struct{M'}$ for the
 expansion of $\Lang{L}$ to $\Lang{L} \cup \{P\}$ such that
 $\Assign{P}{M'} = R$, and similarly for $\Expan{M}{R'}$.
-
-\begin{defn}
-Given a language $\Lang{L}$ and a !!{predicate} $P$ not in $\Lang{L}$,
-a set $\Sigma(P)$ of !!{sentence}s of $\Lang{L} \cup\{P\}$
-\emph{explicitly defines} $P$ if and only if there is a !!{formula}
-$!C(x_1, \dots, x_n)$ of $\Lang{L}$ such that
-\[
-\Sigma(P) \Entails \lforall[x_1][\dots
-  \lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff !C(x_1, \dots,
-    x_n))]].
-\]
-\end{defn}
 
 \begin{thm}[Beth Definability Theorem] A set $\Sigma(P)$ of $\Lang{L}
   \cup\{P\}$-!!{formula}s implicitly defines $P$ if and only $\Sigma(P)$
@@ -59,24 +80,27 @@ and the conclusion follows. For the converse: assume that $\Sigma(P)$
 implicitly defines $P$, and add countably many new !!{constant}s to
 $\Lang{L}$. Then
 \[
-\Sigma(P) \cup \Sigma(P') \Entails \Atom{P}{c_1, \dots, c_n} \to  \Atom{P'}{c_1, \dots, c_n}.
+\Sigma(P) \cup \Sigma(P') \Entails
+\Atom{P}{c_1, \dots, c_n} \to  \Atom{P'}{c_1, \dots, c_n}.
 \]
 By compactness, there are finite sets $\Delta_0 \subseteq \Sigma(P)$
 and $\Delta_1 \subseteq \Sigma(P')$ such that
 \[
-\Delta_0 \cup \Delta_1 \Entails \Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
+\Delta_0 \cup \Delta_1 \Entails
+\Atom{P}{c_1, \dots, c_n} \to \Atom{P'}{c_1, \dots, c_n}.
 \]
-Let $!D(P)$ be the conjunction of all !!{sentence}s $!A(P)$ such
-that either $!A(P) \in \Delta_0$ or $!A(P') \in \Delta_1$ and let
-$!D(P')$ be the conjunction of all !!{sentence}s $!A(P')$ such
-that either $!A(P) \in \Delta_0$ or $!A(P') \in \Delta_1$. Then
-$!D(P) \land !D(P') \Entails \Atom{P}{c_1, \dots, c_n} \to P'c_1\dots
-c_n$. Re-arranging such that each !!{predicate} occurs on one side of
+Let $!D(P)$ be the conjunction of all !!{sentence}s $!A(P)$ such that
+either $!A(P) \in \Delta_0$ or $!A(P') \in \Delta_1$ and let $!D(P')$
+be the conjunction of all !!{sentence}s $!A(P')$ such that either
+$!A(P) \in \Delta_0$ or $!A(P') \in \Delta_1$. Then $!D(P) \land
+!D(P') \Entails \Atom{P}{c_1, \dots, c_n} \to P'c_1\dots c_n$. We can
+re-arrange this so that each !!{predicate} occurs on one side of
 $\Entails$:
 \[
-!D(P) \land \Atom{P}{c_1, \dots, c_n} \Entails !D(P') \to \Atom{P'}{c_1, \dots, c_n}.
+!D(P) \land \Atom{P}{c_1, \dots, c_n} \Entails
+!D(P') \to \Atom{P'}{c_1, \dots, c_n}.
 \]
-By Craig's Interpolation there is a !!{sentence} $!C(c_1,\dots, c_n)$
+By Craig's Interpolation Theorem there is a !!{sentence} $!C(c_1,\dots, c_n)$
 not containing $P$ or $P'$ such that:
 \begin{align*}
   !D(P) \land \Atom{P}{c_1, \dots, c_n} & \Entails !C(c_1,\dots, c_n); &
@@ -99,7 +123,6 @@ Putting the two together, $!D(P) \Entails \Atom{P}{c_1,\dots, c_n}
 \lforall[x_1][\dots\lforall[x_n][(\Atom{P}{x_1,\dots, x_n} \liff
     !C(x_1,\dots, x_n))]].\qedhere
 \]
-
 \end{proof}
 
 \end{document}

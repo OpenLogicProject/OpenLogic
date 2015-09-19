@@ -13,7 +13,7 @@
 \begin{lem}
 \ollabel{lem:lindstrom}
 Suppose $!E \in L(\Lang{L})$, with $\Lang{L}$ finite, and assume
-also that there is $n \in \Nat$ such that for any two
+also that there is an $n \in \Nat$ such that for any two
 !!{structure}s $\Struct{M}$ and~$\Struct{N}$, if $\Struct{M} \equiv_n
 \Struct{N}$ and $\Struct{M} \models_L !E$ then also $\Struct{N}
 \models_L !E$. Then $!E$ is equivalent to a first-order
@@ -24,12 +24,12 @@ $\Mod(L){!E} = \Mod(L){!D}$.
 \begin{proof} 
 Let $n$ be such that any two $n$-equivalent !!{structure}s
 $\Struct{M}$ and $\Struct{N}$ agree on the value assigned to~$!E$.
-Recall that there are only finitely many first-order !!{sentence}s in
-a finite !!{language} that have quantifier rank no greater than~$n$,
-up to logical equivalence. Now, for each fixed !!{structure}
-$\Struct{M}$ let $!D_{\Struct{M}}$ be the conjunction of all
-first-order !!{sentence}s~$!E$ true in~$\Struct{M}$ with
-$\QuantRank{!E} \le n$ (this conjunction is finite), so that
+Recall \olref[bas][pis]{prop:qr-finite}: there are only finitely many
+first-order !!{sentence}s in a finite !!{language} that have
+quantifier rank no greater than~$n$, up to logical equivalence. Now,
+for each fixed !!{structure} $\Struct{M}$ let $!D_{\Struct{M}}$ be the
+conjunction of all first-order !!{sentence}s~$!E$ true in~$\Struct{M}$
+with $\QuantRank{!E} \le n$ (this conjunction is finite), so that
 $\Struct{N} \models !D_{\Struct{M}}$ if and only if $\Struct{N}
 \equiv_n \Struct{M}$. Then put $!D = \textstyle\bigvee
 \Setabs{!D_{\Struct{M}}}{\Struct{M} \models_L !E}$; this disjunction
@@ -44,7 +44,7 @@ $!D_\Struct{N}$ is a disjunct in $!D$, and since $\Struct{N}
 \models !D_\Struct{N}$, also $\Struct{N} \models_L !D$.
 \end{proof}
 
-\begin{thm}[Lindst\"om's Theorem]
+\begin{thm}[Lindstr\"om's Theorem]
   \ollabel{thm:lindstrom} Suppose $\tuple{L, \models_L}$ has the
   Compactness and the L\"owenheim-Skolem Properties. Then
   $\tuple{L, \models_L} \le \tuple{F, \models}$ (so
@@ -63,27 +63,27 @@ follows. Since we are working in a finite, purely relational
 that $\Struct{M} \equiv_n \Struct{N}$ by the corresponding algebraic
 statement that $I_n(\emptyset,\emptyset)$.
 
-Given $!E$, suppose towards a contradiction that for each $n$
-there are !!{structure}s $\Struct{M}_n$ and $\Struct{N}_n$ such that
-$I_n(\emptyset, \emptyset)$, but (say) $\Struct{M}_n \models_L
-!E$ whereas $\Struct{N}_n \not\models_L !E$. By the
-Isomorphism Property we can assume that all the $\Struct{M}_n$'s
-interpret the constants of the language by the same objects;
-furthermore, since there are only finitely many atomic !!{sentence}s in
-the language, we may also assume that they satisfy the same atomic
-!!{sentence}s (we can take a subsequence of the $\Struct{M}$'s
-otherwise). Let $\Struct{M}$ be the union of all the $\Struct{M}_n$'s,
-i.e., the unique minimal !!{structure} having each $\Struct{M}_n$ as a
-substructure.  As in the proof of \olref[lsp]{thm:abstract-p-isom}, let
-$\Struct{M}^*$ be the extension of $\Struct{M}$ with universe $\Domain{M} \cup
-\Domain{M}^{<\omega}$, in the expanded language comprising concatenation
-predicates $P$ and~$Q$.
+Given $!E$, suppose towards a contradiction that for each $n$ there
+are !!{structure}s $\Struct{M}_n$ and $\Struct{N}_n$ such that
+$I_n(\emptyset, \emptyset)$, but (say) $\Struct{M}_n \models_L !E$
+whereas $\Struct{N}_n \not\models_L !E$. By the Isomorphism Property
+we can assume that all the $\Struct{M}_n$'s interpret the constants of
+the language by the same objects; furthermore, since there are only
+finitely many atomic !!{sentence}s in the language, we may also assume
+that they satisfy the same atomic !!{sentence}s (we can take a
+subsequence of the $\Struct{M}$'s otherwise). Let $\Struct{M}$ be the
+union of all the $\Struct{M}_n$'s, i.e., the unique minimal
+!!{structure} having each $\Struct{M}_n$ as a substructure.  As in the
+proof of \olref[lsp]{thm:abstract-p-isom}, let $\Struct{M}^*$ be the
+extension of $\Struct{M}$ with !!{domain} $\Domain{M} \cup
+\Domain{M}^{<\omega}$, in the expanded !!{language} comprising the
+concatenation predicates $P$ and~$Q$.
 
 Similarly, define $\Struct{N}_n$, $\Struct{N}$ and $\Struct{N}^*$. Now
-let $\Struct{M}$ be the !!{structure} whose universe comprises the
-universes of $\Struct{M}^*$ and $\Struct{N}^*$ as well as the natural
+let $\Struct{M}$ be the !!{structure} whose !!{domain} comprises the
+!!{domain}s of $\Struct{M}^*$ and $\Struct{N}^*$ as well as the natural
 numbers~$\Nat$ along with their natural ordering~$\le$, in the
-!!{language} with extra predicates representing the universes
+!!{language} with extra predicates representing the !!{domain}s
 $\Domain{M}$, $\Domain{N}$, $\Domain{M}^{<\omega}$ and
 $\Domain{N}^{<\omega}$ as well as predicates coding the domains of
 $\Struct{M}_n$ and $\Struct{N}_n$ in the sense that:
@@ -97,16 +97,16 @@ The !!{structure} $\Struct{M}$ also has a ternary relation $J$ such
 that $J(n, \mathbf{a}, \mathbf{b})$ holds if and only if
 $I_n(\mathbf{a}, \mathbf{b})$.
 
-Now there is a !!{sentence}~$!D$ is the language $\Lang{L}$ augmented
+Now there is a !!{sentence}~$!D$ in the !!{language}~$\Lang{L}$ augmented
 by $R$, $S$, $J$, etc., saying that $\le$ is a discrete linear ordering
 with first but no last element and such that $\Struct{M}_n \models
 !E$, $\Struct{N}_n \not\models !E$, and for each $n$ in the
-ordering $J(n, \mathbf{a}, \mathbf{b})$ holds if and only if
+ordering, $J(n, \mathbf{a}, \mathbf{b})$ holds if and only if
 $I_n(\mathbf{a}, \mathbf{b})$.
 
 Using the Compactness Property, we can find a model $\Struct{M}^*$ of
 $!D$ in which the ordering contains a non-standard element~$n^*$. In
-particular then $\Struct{M^*}$ will contain substructures
+particular then $\Struct{M^*}$ will contain sub!!{structure}s
 $\Struct{M_{n^*}}$ and $\Struct{N_{n^*}}$ such that $\Struct{M_{n^*}}
 \models_L !E$ and $\Struct{N_{n^*}} \not\models_L !E$. But now we can
 define a set $\mathcal{I}$ of pairs of $k$-tuples from

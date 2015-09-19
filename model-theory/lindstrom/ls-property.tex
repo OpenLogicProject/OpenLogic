@@ -47,15 +47,14 @@ partially isomorphic are elementarily equivalent in $\tuple{L,
 \end{thm}
 
 \begin{proof}
-  Suppose $\Struct{M} \simeq_p \Struct{N}$, but for some $!E$ also
-  $\Struct{M} \models_L !E$ while $\Struct{N} \not\models_L !E$. By
-  the Isomorphism Property we can assume that $M$ and $N$ are
-  disjoint, and by the Expansion Property we can assume that
-  $!E \in L(\Lang{L})$ for a finite !!{language}~$\Lang{L}$. Let
-  $\mathcal{I}$ be a set of partial isomorphisms between $\Struct{M}$
-  and $\Struct{N}$, and with no loss of generality also assume
-  that if $p \in \mathcal{I}$ and $q \subseteq p$ then also
-  $q \in \mathcal{I}$.
+Suppose $\Struct{M} \simeq_p \Struct{N}$, but for some $!E$ also
+$\Struct{M} \models_L !E$ while $\Struct{N} \not\models_L !E$. By the
+Isomorphism Property we can assume that $\Domain{M}$ and $\Domain{N}$
+are disjoint, and by the Expansion Property we can assume that $!E \in
+L(\Lang{L})$ for a finite !!{language}~$\Lang{L}$. Let $\mathcal{I}$
+be a set of partial isomorphisms between $\Struct{M}$ and
+$\Struct{N}$, and with no loss of generality also assume that if $p
+\in \mathcal{I}$ and $q \subseteq p$ then also $q \in \mathcal{I}$.
 
 $\Domain{M}^{<\omega}$ is the set of finite sequences of !!{element}s
 of~$\Domain{M}$. Let $S$ be the ternary relation over $\Domain{M}^{<\omega}$
@@ -77,13 +76,13 @@ $\Struct{N}^*$ analogously. Since by hypothesis $\Struct{M} \simeq_p
 \Struct{N}$, there is a relation $I$ between $\Domain{M}^{<\omega}$
 and $\Domain{N}^{<\omega}$ such that $I(\mathbf{a}, \mathbf{b})$
 holds if and only if $\mathbf{a}$ and $\mathbf{b}$ are isomorphic and
-satisfying the back-and-forth condition of Definition
+satisfy the back-and-forth condition of
 \olref[bas][pis]{defn:partialisom}.  Now, let $\Struct{M}$ be the
-!!{structure} whose universe is the union of the universes of
+!!{structure} whose !!{domain} is the union of the !!{domain}s of
 $\Struct{M}^*$ and $\Struct{N}^*$, having $\Struct{M}^*$ and
-$\Struct{N}^*$ as substructures, in the !!{language} with one extra
+$\Struct{N}^*$ as sub!!{structure}s, in the !!{language} with one extra
 binary !!{predicate}~$R$ interpreted by the relation~$I$ and
-!!{predicate}s denoting the universes $\Domain{M}^*$
+!!{predicate}s denoting the !!{domain}s $\Domain{M}^*$
 and~$\Domain{N}*$.
 
 \begin{figure}[h]
@@ -103,21 +102,21 @@ and~$\Domain{N}*$.
     \node (Irng) at (5.2,2) {};
     \draw[<->, bend left] (Idom) to node {\large $I$} (Irng) ;
   \end{tikzpicture} 
-  \legend{Figure: the !!{structure} $\Struct{M}$ with the internal
+  \caption{The !!{structure} $\Struct{M}$ with the internal
     partial isomorphism.}
 \end{figure}
 
-The crucial observation is that in the language of the
-!!{structure}~$\Struct{M}$ there is a first-order !!{sentence} $!D_1$
+The crucial observation is that in the !!{language} of the
+!!{structure}~$\Struct{M}$ there is a \emph{first-order} !!{sentence} $!D_1$
 true in $\Struct{M}$ saying that $\Struct{M} \models_L !E$ and
 $\Struct{N} \not\models_L !E$ (this requires the Relativization
 Property), as well as a \emph{first-order} !!{sentence} $!D_2$ true in
 $\Struct{M}$ saying that $\Struct{M} \simeq_p \Struct{N}$ via the
 partial isomorphism~$I$. By the L\"owenheim-Skolem Property, $!D_1$
-and $!D_2$ are jointly true in a countable model $\Struct{M}_0$
+and $!D_2$ are jointly true in !!a{enumerable} model $\Struct{M}_0$
 containing partially isomorphic substructures $\Struct{M}_0$ and
 $\Struct{N}_0$ such that $\Struct{M}_0 \models_L !E$ and $\Struct{N}_0
-\not\models_L !E$. But countable partially isomorphic !!{structure}s are
+\not\models_L !E$. But !!{enumerable} partially isomorphic !!{structure}s are
 in fact isomorphic by \olref[bas][pis]{thm:p-isom1}, contradicting the
 Isomorphism Property of normal abstract logics.
 \end{proof}
