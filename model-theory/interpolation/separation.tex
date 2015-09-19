@@ -10,15 +10,27 @@
 
 \olsection{Separation of !!^{sentence}s}
 
-A bit of groundwork is needed before we can proceed with the proof.
+A bit of groundwork is needed before we can proceed with the proof of
+the interpolation theorem. An interpolant for $!A$ and $!B$ is
+!!a{sentence}~$!C$ such that $!A \Entails !C$ and $!C \Entails !B$.
+By contraposition, the latter is true iff $\lnot !B \Entails \lnot
+!C$. !!^a{sentence}~$!C$ with this property is said to \emph{separate}
+$!A$ and $\lnot !B$.  So finding an interpolant for $!A$ and $!B$
+amounts to finding !!a{sentence} that separates $!A$ and $\lnot !B$.
+As so often, it will be useful to consider a generalization: a
+sentence that separates two \emph{sets} of !!{sentence}s.
 
 \begin{defn}
 A sentence $!C$ \emph{separates} sets of sentences $\Gamma$ and
 $\Delta$ if and only if $\Gamma \Entails !C$ and $\Delta \Entails
-\lnot !C$. If no such !!{sentence} exists, then $\Gamma$ and $\Delta$ are
-\emph{inseparable}. The inclusion relations between the classes of
+\lnot !C$. If no such !!{sentence} exists, then $\Gamma$ and $\Delta$
+are \emph{inseparable}.
+\end{defn}
+
+The inclusion relations between the classes of
 models of $\Gamma$, $\Delta$ and $!C$ are represented below:
 \begin{figure}[h]
+  \ollabel{fig:sep}
   \centering
   \begin{tikzpicture}[node distance=2cm, auto, thick]
     \draw [rounded corners] (0,0) -- (6,0) -- (6,3) -- (0,3) --  cycle;
@@ -30,17 +42,17 @@ models of $\Gamma$, $\Delta$ and $!C$ are represented below:
     \path node at (3.4,0.4) {\Large $\lnot \formula{C}$};
     \draw (2.5,0) .. controls (2.5,1.5) and (3.5,1.5) .. (3.5,3);
   \end{tikzpicture}
-  \legend{Figure: $!C$ separates $\Gamma$ and $\Delta$}
+  \caption{$!C$ separates $\Gamma$ and $\Delta$}
 \end{figure}
-\end{defn}
+
 
 \begin{lem}\ollabel{lem:sep1}
 Suppose $\Lang{L}_0$ is the language containing every !!{constant},
 !!{function} and !!{predicate} (other than $\doteq$) that occurs in
 \emph{both} $\Gamma$ and $\Delta$, and let $\Lang{L}'_0$ be obtained
 by the addition of infinitely many new !!{constant}s $\Obj c_n$ for $n
-\ge 0$. Then if $\Gamma$ and $\Delta$ are inseparable in $\Lang{L}_0$
-then they are also inseparable in $\Lang{L}'_0$.
+\ge 0$. Then if $\Gamma$ and $\Delta$ are inseparable in $\Lang{L}_0$,
+they are also inseparable in $\Lang{L}'_0$.
 \end{lem}
 
 \begin{proof}

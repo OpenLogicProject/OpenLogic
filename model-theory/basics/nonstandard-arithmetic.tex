@@ -10,16 +10,16 @@
 \section{Non-standard Models of Arithmetic}
 
 \begin{defn}
-Let $\Lang{L_N}$ be the language of arithmetic, comprising a
+Let $\Lang{L_N}$ be the !!{language} of arithmetic, comprising a
 !!{constant} $\Obj{0}$, a 2-place !!{predicate} $<$, a 1-place
 !!{function} $\prime$, and 2-place !!{function}s $+$ and $\times$.
 \begin{enumerate}
 \item The \emph{standard model} of arithmetic is the !!{structure}
   $\Struct{N}$ for $\Lang{L_N}$ having $\Nat = \{ 0, 1, 2, \dots\}$
   and interpreting $\Obj{0}$ as $0$, $<$ as the less-than relation
-  over $\Nat$, and $\prime$, $+$ and $\times$ as successor, addition,
+  over~$\Nat$, and $\prime$, $+$ and $\times$ as successor, addition,
   and multiplication over $\Nat$, respectively.
-\item \emph{True arithmetic} is the theory $\Theory{N})$.
+\item \emph{True arithmetic} is the theory $\Theory{N}$.
 \end{enumerate}
 \end{defn}
 
@@ -67,7 +67,7 @@ irreflexive. So $\Struct{M}$ is non-standard.
 A relation $R$ over a set $X$ is \emph{well-founded} if and only if
 there are no infinite descending chains in~$R$, i.e., if there are no
 $x_0$, $x_1$, $x_2$,~\dots in $X$ such that $\dots x_2Rx_1Rx_0$.  Assuming
-Zermelo-Fr\"ankel set theory~$ZF$, is consistent, show that there are
+Zermelo-Fraenkel set theory~$ZF$ is consistent, show that there are
 non-well-founded models of $ZF$, i.e., models $\mathfrak{M}$ such that
 $\dots x_2 \in x_1 \in x_0$.
 \end{prob}
@@ -76,7 +76,7 @@ Since the non-standard model $\Struct{M}$ from \olref{thm:non-std} is
 elementarily equivalent to the standard one, a number of properties of
 $\Struct{M}$ can be derived. The rest of this section is devoted to
 such a task, which will allow us to obtain a precise characterization
-of !!{enumerable} non-standard models of $\Theory{N})$.
+of !!{enumerable} non-standard models of $\Theory{N}$.
 
 \begin{enumerate}
 \item No member of $\Domain{M}$ is $\prec$-less than itself: the sentence
@@ -114,35 +114,40 @@ of !!{enumerable} non-standard models of $\Theory{N})$.
   apart. If $n$ and $m$ are standard then $n \approx m$. Define the
   \emph{block} of $x$ to be the equivalence class $[x] = \Setabs{y}{x
   \approx y}$.
-\item Suppose that $x \prec y$ where $x \not\approx y$; then either
-  $x^* \prec y$ or $x^* = y$; the latter is impossible because it
-  implies $x \approx y$, so $x \prec y$. Similarly, if $x \prec y$ and
-  $x \not\approx y$, then $x \prec {^*y}$. Therefore if $x \prec y$
-  and $x \not\approx y$, then every $w \approx x$ is $\prec$-less than
-  every $v \approx y$. Accordingly, each block $[x]$ forms a doubly
-  infinite chain
+\item Suppose that $x \prec y$ where $x \not\approx y$. Since
+  $\Sat{N}{\lforall[x][\lforall[y][(x < y \lif (x' < y \lor x' =
+      y))]]}$, either $x^* \prec y$ or $x^* = y$. The latter is
+  impossible because it implies $x \approx y$, so $x \prec
+  y$. Similarly, if $x \prec y$ and $x \not\approx y$, then $x \prec
+  {^*y}$. Therefore if $x \prec y$ and $x \not\approx y$, then every
+  $w \approx x$ is $\prec$-less than every $v \approx y$. Accordingly,
+  each block $[x]$ forms a doubly infinite chain
   \[
   \cdots \prec  {^{**}x} \prec {^*}x \prec x \prec x^* \prec x^{**}
   \prec \cdots
   \]
   which is referred to as a $Z$-chain because it has the order type of
   the integers.
-\item The $\prec$ ordering can be lifted up the blocks: if $x \prec y$
+\item The $\prec$ ordering can be lifted up to the blocks: if $x \prec y$
   then the block of $x$ is less than the block of $y$. A block is
   \emph{non-standard} if it contains a non-standard element. The
   standard block is the least block. 
 \item There is no least non-standard block: if $y$ is non-standard
   then there is a $x \prec y$ where $x$ is also non-standard and $x
   \not\approx y$. Proof: in the standard model $\Struct{N}$, every
-  number is divisible by two, possibly with remainder one. By
-  elementary equivalence, for every $y \in \Domain{M}$ there is $x \in
-  \Domain{M}$ such that either $x \oplus x = y$ or $x \oplus x \oplus
-  \mathbf{z}^*= y$. If $x$ were standard, then so would be $y$; so $x$
-  is non-standard. And $x \not\approx y$ for if $x \oplus n = y$ for
-  some standard $n$ then (say) $x \oplus n = x \oplus x$, whence $x =
-  n$ by the cancellation law for addition (which holds in $\Struct{N}$
-  and therefore in $\Struct{M}$ as well), and $x$ would be standard
-  after all. (Similarly if $x \oplus x \oplus \mathbf{z}^*= y$.)
+  number is divisible by two, possibly with remainder one, i.e.,
+  $\Sat{N}{\lforall[y][\lforall[x][(y = x + x \lor y = x + x +
+        \Obj{0}')]]}$. By elementary equivalence, for every $y \in
+  \Domain{M}$ there is $x \in \Domain{M}$ such that either $x \oplus x
+  = y$ or $x \oplus x \oplus \mathbf{z}^*= y$. If $x$ were standard,
+  then so would be $y$; so $x$ is non-standard. Furthermore, $x$ and
+  $y$ belong to different blocks, i.e, $x \not\approx y$.  To see
+  this, assume they did belong to the same block, i.e., $x \oplus n =
+  y$ for some standard $n$. If $y = x \oplus x$, then $x \oplus n = x
+  \oplus x$, whence $x = n$ by the cancellation law for addition
+  (which holds in $\Struct{N}$ and therefore in $\Struct{M}$ as well),
+  and $x$ would be standard after all. Similarly if $y = x \oplus x
+  \oplus \mathbf{z}^*$.
 \item By a similar argument, there is no greatest block. 
 \item The ordering of the blocks is dense: if $[x]$ is less than $[y]$
   (where $x \not\approx y$), then there is a block $[z]$ distinct from
@@ -161,9 +166,9 @@ of !!{enumerable} non-standard models of $\Theory{N})$.
   argument gives $u \not\approx y$.
 \end{enumerate}
 The non-standard blocks are therefore ordered like the rationals: they
-form a !!{enumerable} linear ordering without endpoints.  It follows
-that for any two !!{enumerable} non-standard models, $\Struct{M}_1$
-and $\Struct{M_2}$ of true arithmetic, their reducts to the language
+form !!a{enumerable} linear ordering without endpoints.  It follows
+that for any two !!{enumerable} non-standard models $\Struct{M}_1$ and
+$\Struct{M_2}$ of true arithmetic, their reducts to the language
 containing $<$ and $=$ only are isomorphic. Indeed, an isomorphism $h$
 can be defined as follows: the standard parts of $\Struct{M_1}$ and
 $\Struct{M_2}$ are isomorphic to the standard model $\Struct{N}$ and
@@ -177,20 +182,25 @@ $x$ in $\Struct{M_2}$. Note that it does \emph{not} follow that
 $\mathfrak{M}_1$ and $\mathfrak{M}_2$ are isomorphic in the full
 language of arithmetic (indeed, isomorphism is always relative to a
 signature), as there are non-isomorphic ways to define addition and
-multiplication over $M_1$ and $M_2$. (This also follows from a famous
-theorem of Vaught's that the number of countable models of a complete
-theory cannot be 2.)
+multiplication over $\Domain{M_1}$ and $\Domain{M_2}$. (This also
+follows from a famous theorem due to Vaught that the number of
+countable models of a complete theory cannot be~2.)
 
+
+\begin{prob}
+Show that there can be no greatest block in a non-standard model of
+arithmetic.
+\end{prob}
 
 \begin{prob} 
-Let $\Lang{L}$ be the first-order language containing $<$ as its only
-predicate symbol (besides $\eq$), and let $\Struct{N} = (\Nat,
+Let $\Lang{L}$ be the first-order !!{language} containing $<$ as its
+only !!{predicate} (besides $\eq$), and let $\Struct{N} = (\Nat,
 <)$. All the finite or cofinite subsets of $\Struct{N}$ are
 definable. Show that these are the \emph{only} definable subsets of
 $\Struct{N}$.
  
 (Hint: First, let $\Obj{prc}(x,y)$ be the
-$\mathcal{L}$-formula abbreviating ``$x$ is the immediate predecessor
+$\Lang{L}$-formula abbreviating ``$x$ is the immediate predecessor
 of $y$:''
 \[
 x<y \land \lnot \lexists[z][(x<z \land z < y)].

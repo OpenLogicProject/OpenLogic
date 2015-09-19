@@ -10,15 +10,15 @@
 \olsection{Abstract Logics}
 
 \begin{defn}
-An \emph{abstract logic} is a pair $\tuple{L, \models_L}$, where $L$ is a
-function that assigns to each !!{language}~$\Lang{L}$ a set
+An \emph{abstract logic} is a pair $\tuple{L, \models_L}$, where $L$
+is a function that assigns to each !!{language}~$\Lang{L}$ a set
 $L(\Lang{L})$ of !!{sentence}s, and $\models_L$ is a relation between
-!!{structure}s for the !!{language} $\Lang{L}$ and !!{element}s of
-$L(\Lang{L})$. In particular, $\tuple{F, \models}$ is ordinary forst
-order logic, i.e., $F$ is the function assigning to the
-!!{language}~$\Lang{L}$ the set of first-order sentences built from
-the constants in $\Lang{L}$, and $\models$ is the consequence relation of
-first-order logic.
+!!{structure}s for the !!{language}~$\Lang{L}$ and !!{element}s of
+$L(\Lang{L})$. In particular, $\tuple{F, \models}$ is ordinary
+first-order logic, i.e., $F$ is the function assigning to the
+!!{language}~$\Lang{L}$ the set of first-order !!{sentence}s built from
+the constants in $\Lang{L}$, and $\models$ is the satisfaction relation
+of first-order logic.
 \end{defn}
 
 Notice that we are still employing the same notion of !!{structure}
@@ -34,7 +34,7 @@ that \dots''), or perhaps infinitely long quantifier prefixes. To
 emphasize that ``!!{sentence}s'' in $L(\Lang{L})$ need not be ordinary
 !!{sentence}s of first-order logic, in this chapter we use !!{variable}s $!E$,
 $!F$,~\dots to range over them, and reserve $!A$, $!B$,~\dots for
-ordinary formulas.
+ordinary first-order !!{formula}s.
 
 \begin{defn}
 Let $\Mod(L){!E}$ denote the class $\Setabs{\Struct{M}}{\Struct{M}
@@ -96,8 +96,8 @@ is \emph{normal} if it satisfies the following properties:
   \Expan{M}{X, b_1, \ldots, b_n} \models_L !F) \text{ if and
     only if } \Struct{N} \models_L !E,
   \]
-  where $\Struct{N}$ is the substructure of $\Struct{M}$ with universe
-  $N = \Setabs{a\in \Domain{M}}{\Assign{R}{M}(a, b_1, \dots, b_n)}$
+  where $\Struct{N}$ is the substructure of $\Struct{M}$ with !!{domain}
+  $\Domain{N} = \Setabs{a\in \Domain{M}}{\Assign{R}{M}(a, b_1, \dots, b_n)}$
   (see \olref[bas][sub]{rem:substructure}), and $\Expan{M}{X, b_1, \ldots,
     b_n}$ is the expansion of $\Struct{M}$ interpreting $R$, $c_1$,
   \dots, $c_n$ by $X$, $b_1,$ \dots, $b_n$, respectively (with $X
@@ -122,7 +122,7 @@ $\tuple{L_2, \models_{L_2}}$ are \emph{equivalent} if $\tuple{L_1,
   First-order logic, i.e., the abstract logic $\tuple{F, \models}$, is
   normal. In fact, the above properties are mostly straightforward for
   first-order logic. We just remark that the expansion property comes
-  down to local determination, and that the relativization of
+  down to extensionality, and that the relativization of
   !!a{sentence} $!E$ to $\Atom{R}{x, c_1, \dots, c_n}$ is obtained by
   replacing each !!{subformula} $\lforall[x][!F]$ by
   $\lforall[x][(\Atom{R}{x, c_1, \dots, c_n} \lif \ !F)]$. Moreover,
