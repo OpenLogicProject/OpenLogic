@@ -6,19 +6,19 @@
 
 \begin{document}
 
-\olfileid{fol}{mod}{pis}
+\olfileid{mod}{bas}{pis}
 \section{Partial Isomorphisms}
 
 \begin{defn}
   Given two !!{structure}s $\Struct{M}$ and $\Struct{N}$, a
   \emph{partial isomorphism} from $\Struct{M}$ to $\Struct{N}$ is a
-  finite function $p$ taking arguments in $\Domain M$ and returning
-  values in $\Domain N$, satisfying the isomorphism conditions from
+  finite partial function $p$ taking arguments in $\Domain M$ and returning
+  values in $\Domain N$, which satisfies the isomorphism conditions from
   \olref[iso]{defn:isomorphism} on its domain:
   \begin{enumerate}
-  \item $p$ is one-one;
-  \item for every !!{constant}~$c$: if $\Assign c M$ is in the domain
-    of $p$, then $p(\Assign c M) = \Assign c N$;
+  \item $p$ is !!{injective};
+  \item for every !!{constant}~$c$: if $p(\Assign{c}{M})$ is defined,
+    then $p(\Assign{c}{M}) = \Assign{c}{N}$;
   \item for every $n$-place !!{predicate} $P$: if $a_1$, \dots, $a_n$
     are in the domain of $p$, then $\langle a_1, \dots, a_n\rangle \in
     \Assign P M$ if and only if $\langle p(a_1), \dots, p(a_n) \rangle
@@ -27,10 +27,11 @@
     are in the domain of $p$, then $p(\Assign f M (a_1, \dots,a_n))
     = \Assign f N (p(a_1), \ dots, p(a_n))$.
   \end{enumerate}
+  That $p$ is finite means that $\dom{p}$ is finite.
 \end{defn}
 
-Notice that the empty map $\emptyset$ is a partial isomorphism
-between any two !!{structure}s.
+Notice that the empty function~$\emptyset$ is always a partial
+isomorphism between any two !!{structure}s.
 
 \begin{defn}\ollabel{defn:partialisom}
   Two !!{structure}s $\Struct{M}$ and $\Struct{N}$, are
@@ -55,8 +56,8 @@ between any two !!{structure}s.
 \end{thm}
 
 \begin{proof}
-  Since $\Struct{M}$ and $\Struct{N}$ are !!{enumerable}, let $\Domain A =
-  \{a_0, a_1, \ldots \}$ and $\Domain B = \{b_0, b_1, \ldots \}$. Starting
+  Since $\Struct{M}$ and $\Struct{N}$ are !!{enumerable}, let $\Domain{M} =
+  \{a_0, a_1, \ldots \}$ and $\Domain{N} = \{b_0, b_1, \ldots \}$. Starting
   with an arbitrary $p_0 \in I$, we define an increasing
   sequence of partial isomorphisms $p_0 \subseteq p_1 \subseteq p_2
   \subseteq \cdots$ as follows:
@@ -72,15 +73,21 @@ If we now put:
 \[
 p = \bigcup_{n\ge 0} p_n,
 \]
-We have that $p$ is a an isomorphism of $\Struct{M}$ onto
+we have that $p$ is a an isomorphism between $\Struct{M}$ and
 $\Struct{N}$.
 \end{proof}
 
+\begin{prob}
+  Show in detail that $p$ as defined in
+  \olref[mod][bas][pis]{thm:p-isom1} is in fact an isomorphism.
+\end{prob}
+
 \begin{thm}\ollabel{thm:p-isom2}
-  Suppose $\Struct{M}$ and $\Struct{N}$ are !!{structure}s for a purely
-  relational language (a language containing only !!{predicate}s,
-  and no !!{function}s or constants). Then if $\Struct{M} \iso[p]
-  \Struct{N}$, also $\Struct{M} \elemequiv \Struct{N}$.
+  Suppose $\Struct{M}$ and $\Struct{N}$ are !!{structure}s for a
+  purely relational !!{language} (!!a{language} containing only
+  !!{predicate}s, and no !!{function}s or constants). Then if
+  $\Struct{M} \iso[p] \Struct{N}$, also $\Struct{M} \elemequiv
+  \Struct{N}$.
 \end{thm}
 
 \begin{proof}
@@ -113,10 +120,10 @@ how many times the relevant partial isomorphisms can be extended.
 \end{defn}
 
 \begin{prop}\ollabel{prop:qr-finite}
-  Let $\Lang{L}$ be a finite purely relational language, i.e., a
-  language containing finitely many !!{predicate}s and !!{constant}s,
+  Let $\Lang{L}$ be a finite purely relational !!{language}, i.e., a
+  !!{language} containing finitely many !!{predicate}s and !!{constant}s,
   and no !!{function}s. Then for each $n \in \Nat$ there are
-  only finitely many first-order sentences in the language
+  only finitely many first-order !!{sentence}s in the !!{language}
   $\Lang{L}$ that have quantifier rank no greater than $n$, up to
   logical equivalence.
 \end{prop}
@@ -127,10 +134,10 @@ how many times the relevant partial isomorphisms can be extended.
 
 \begin{defn}
   Given a !!{structure} $\Struct{M}$, let $\Domain M^{<\omega}$ be the set of
-  all finite sequences over $\Domain{M}$. We use !!{variable}s $\mathbf{a},
+  all finite sequences over $\Domain{M}$. We use $\mathbf{a},
   \mathbf{b}, \mathbf{c}, \ldots$ to range over finite sequences of
-  elements. If $\mathbf{a} \in \Domain A^{<\omega}$ and $a \in \Domain A$, then
-  $\mathbf{a}a$ represents the concatenation of $\mathbf{a}$ with $a$.
+  elements. If $\mathbf{a} \in \Domain{M}^{<\omega}$ and $a \in \Domain{M}$, then
+  $\mathbf{a}a$ represents the \emph{concatenation} of $\mathbf{a}$ with $a$.
 \end{defn}
 
 \begin{defn}
@@ -142,8 +149,8 @@ how many times the relevant partial isomorphisms can be extended.
      $\mathbf{b}$ satisfy the same atomic !!{formula}s in  $\Struct{M}$
      and  $\Struct{N}$; i.e., if $s_1(x_i) = a_i$ and $s_2(x_i) =
      b_i$ and $!A$ is atomic with all !!{variable}s among
-     $x_1,\ldots,x_n$, then $\Sat{M}{!A}[s_1]$ if and
-     only if $\Sat{N}{!A}[s_2]$.
+     $x_1$, \dots,~$x_n$, then $\Sat{M}{!A}[s_1]$ if and
+     only if~$\Sat{N}{!A}[s_2]$.
    \item $I_{n+1} (\mathbf{a},\mathbf{b})$ if and only if for every
      $a\in A$ there is a $b\in B$ such that $I_n
      (\mathbf{a}a,\mathbf{b}b)$, and vice-versa.
@@ -153,12 +160,12 @@ how many times the relevant partial isomorphisms can be extended.
 
 \begin{defn}
   Write $\Struct{M} \approx_n \Struct{N}$ if
-  $I_n(\varnothing,\varnothing)$ holds of $\Struct{M}$ and
-  $\Struct{N}$ (where $\varnothing$ is the empty sequence).
+  $I_n(\emptyseq,\emptyseq)$ holds of $\Struct{M}$ and
+  $\Struct{N}$ (where $\emptyseq$ is the empty sequence).
 \end{defn}
 
 \begin{thm}\ollabel{thm:b-n-f}
-  Let $\Lang{L}$ be a purely relational language. Then $I_n
+  Let $\Lang{L}$ be a purely relational !!{language}. Then $I_n
   (\mathbf{a},\mathbf{b})$ implies that for every $!A$ such that
   $\QuantRank{!A} \le n$, we have $\Sat{M}{!A}[\mathbf{a}]$ if and
   only if $\Sat{N}{!A}[\mathbf{b}]$ (where again $\mathbf{a}$
@@ -177,7 +184,7 @@ how many times the relevant partial isomorphisms can be extended.
 
   For $n=0$ the hypothesis that $\mathbf{a}$ and $\mathbf{b}$ satisfy
   the same quantifier-free !!{formula}s gives that they satisfy the same
-  atomics, so that $I_0(\mathbf{a},\mathbf{b})$.
+  atomic ones, so that $I_0(\mathbf{a},\mathbf{b})$.
 
   For the $n+1$ case, suppose that $\mathbf{a}$ and $\mathbf{b}$
   satisfy the same !!{formula}s of quantifier rank no greater than
@@ -207,7 +214,7 @@ how many times the relevant partial isomorphisms can be extended.
 
 \begin{cor}\ollabel{cor:b-n-f}
   If $\Struct{M}$ and $\Struct{N}$ are purely relational !!{structure}s
-  in a finite signature then $\Struct{M} \approx_n\Struct{N}$ if and
+  in a finite !!{language}, then $\Struct{M} \approx_n\Struct{N}$ if and
   only if $\Struct{M} \elemequiv[n] \Struct{N}$. In particular
   $\Struct{M} \elemequiv \Struct{N}$ if and only if for each $n$,
   $\Struct{M} \approx_n \Struct{N}$ .

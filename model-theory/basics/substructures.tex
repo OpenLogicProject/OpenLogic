@@ -6,15 +6,22 @@
 
 \begin{document}
 
-\olfileid{fol}{mod}{sub}
-\olsection{Substructures}
+\olfileid{mod}{bas}{sub}
+\olsection{Sub\printtoken{p}{structure}}
+
+The !!{domain} of !!a{structure}~$\Struct{M}$ may be a subset of
+another~$\Struct{M'}$.  But we should obviously only consider
+$\Struct{M}$ a ``part'' of $\Struct{M'}$ if not only $\Domain{M}
+\subseteq \Domain{M'}$, but $\Struct{M}$ and $\Struct{M'}$ ``agree''
+in how they interpret the symbols of the language at least on the
+shared part~$\Domain{M}$.
 
 \begin{defn}
-\ollabel{substructure}
-Given !!{structure}s $\Struct M$ and $\Struct M'$ for the same language~$\Lang L$,
-we say that $\Struct M$ is a \emph{substructure} of $\Struct M'$, and
-$\Struct M'$ an \emph{extension} of $\Struct M$, written $\Struct M
-\substruct \Struct M'$, iff
+\ollabel{defn:substructure}
+Given !!{structure}s $\Struct M$ and $\Struct M'$ for the same
+language~$\Lang L$, we say that $\Struct M$ is a \emph{sub!!{structure}}
+of $\Struct M'$, and $\Struct M'$ an \emph{extension} of $\Struct M$,
+written $\Struct M \substruct \Struct M'$, iff
 \begin{enumerate}
 \item $\Domain{M} \subseteq \Domain{M'}$,
 \item For each constant $c \in \Lang L$, $\Assign{c}{M} =
@@ -30,9 +37,10 @@ $\Struct M'$ an \emph{extension} of $\Struct M$, written $\Struct M
 \end{defn}
 
 \begin{rem}
+\ollabel{rem:substructure}
 If the language contains no constant or !!{function}s, then any $N
-\subseteq \Domain{M}$ determines a substructure $\Struct N$ of
-$\Struct M$ with universe $N$ by putting $\Assign{R}{N} =
+\subseteq \Domain{M}$ determines a sub!!{structure}~$\Struct{N}$ of
+$\Struct M$ with !!{domain}~$\Domain{N} = N$ by putting $\Assign{R}{N} =
 \Assign{R}{M} \cap N^n$.
 \end{rem}
 
