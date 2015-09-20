@@ -1,0 +1,175 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: state-diagrams
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{tms}{dia}
+\olsection{Drawing State Diagrams}
+
+\begin{explain}
+Although it is possible to represent Turing machines using only the  formal
+definition, it is useful to have a visual representation of the
+machines. Such visual, or diagrammatic, representations of Turing
+machines are called \emph{state diagrams}. The diagrams are composed of
+state cells connected by arrows. Unsurprisingly, each state cell represents
+a state of the machine. Each arrow represents an instruction that can be
+carried out from that state, with the specifics of the instruction written above
+the appropriate arrow. Consider the following machine, which has only two
+internal states, $q_0$ and $q_1$ and one instruction:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge                      node {$\TMblank$,$\TMstroke$,R} (B);
+\end{tikzpicture}
+\]
+The instruction can be read as \emph{if reading a blank in
+state $q_0$, write a stroke, move right, and move to state $q_1$}. This is
+equivalent to the instruction $\tuple{q_0, \TMblank, q_1, \TMstroke, 
+\TMright}$.
+\end{explain}
+
+\begin{ex}
+\emph{Even Machine}: We've seen what the formal representation of the
+even machine looks like, and we now have the tools necessary to build the
+corresponding state diagram. Based on the formal definition, we
+can determine what the state diagram looks like. All we need to do is 
+ensure that each state is represented in a state cell, and that there
+ is an arrow corresponding to each member of the instruction set.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge                      node {$\TMstroke$,$\TMstroke$,R} (B)
+            (B) edge [loop above] node {$\TMblank$,$\TMblank$,R} (B)
+                  edge                      node {$\TMstroke$,$\TMstroke$,R} (A);
+\end{tikzpicture}
+\]
+%% This machine has a double arrow between the states instead of two 
+%% separate arrows. I'm not sure how to change it, but I think it would 
+%% be better to have two separate arrows (for clarity).
+\end{ex}
+
+\begin{ex}
+The above machine halts only when the input is an even number of strokes.
+Otherwise, the machine (theoretically) continues to operate until infinity. 
+
+This brings us to an important point: Not all machines will halt. If we concepualize 
+halting as the machine running out of instructions to execute, then we can 
+create a machine that never halts simply by ensuring that there is an outgoing 
+arrow for each symbol at each state cell. The above machine can be modified 
+to run infnitely by adding an instruction for scanning a blank at~$q_0$:
+
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge                      node {$\TMstroke$,$\TMstroke$,R} (B)
+                  edge [loop above] node {$\TMblank$,$\TMblank$,R} (A)
+            (B) edge [loop above] node {$\TMblank$,$\TMblank$,R} (B)
+                  edge                      node {1,1,R} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+Machine tables are another way of representing Turing machines. Machine
+tables have the tape alphabet displayed on the x-axis, and the set of machine
+states across the y-axis. Inside the table, at the intersection of each state
+ and symbol, is written the rest of the instruction - the new state, new symbol,
+ and direction of movement. Machine tables make it easy to determine in what 
+ state, and for what symbol, the machine halts. Whenever there is a gap in the 
+ table is a possible point for the machine to halt. Unlike state diagrams and 
+ instruction sets, where the points at which the machine halts
+are not always immediately obvious, any halting points are quickly identified by 
+finding the gaps in the machine table.
+\end{explain}
+
+\begin{ex}
+The machine table for the even machine is:
+\[
+\centering
+\begin{tabular}{lllll}
+\cline{2-3}
+\multicolumn{1}{l|}{}      & \multicolumn{1}{l|}{$\TMblank$}                
+& \multicolumn{1}{l|}{$\TMstroke$}                &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{$q_0$} & \multicolumn{1}{l|}{}                          
+& \multicolumn{1}{l|}{$\TMstroke, q_1, \TMright$} &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{$\TMblank, q_1, \TMblank$} 
+& \multicolumn{1}{l|}{$\TMstroke, q_0, \TMright$} &  &  \\ \cline{1-3}
+                           &                                                &                                                 &  & 
+\end{tabular}
+\]
+As we can see, the machine halts when scanning a blank in state $q_0$.
+\end{ex}
+
+\begin{ex}
+So far we have only considered machines that read and accept input. However, 
+Turing machines have the capacity to both read and write. An example of
+such a machine (although there are many, many examples) is a \emph{doubler}.
+A doubler, when started with a block of~$n$ strokes on the tape, outputs
+a block of~$2n$ strokes.
+
+Before building such a machine, it is important to come up with a 
+\emph{strategy} for solving the problem. Since the machine, as we have 
+formulated it, cannot remember how many strokes it has read, we need to
+come up with a way to ensure that we are keeping track of all the strokes
+on the tape. One such way is to separate the output from the input with a
+blank. The machine can then erase the first stroke from the input,
+traverse over the rest of the unput, leave a blank, and write two new strokes.
+The machine will then go back and find the second stroke in the input, and
+double that one as well. By erasing the input as the machine goes, we can guarantee
+that no stroke is missed or doubled twice. Here is one such formualtion of the machine:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[state]         (1)                     {$q_0$};
+  \node[state]         (2) [right of=1] {$q_1$};
+  \node[state]         (3) [right of=2] {$q_2$};
+  \node[state]         (4) [below of=3] {$q_3$};
+  \node[state]         (5) [left of=4]       {$q_4$};
+  \node[state]         (6) [left of=5]       {$q_5$};
+
+  \path (1) edge              node {1,0,R} (2)
+            (2) edge [loop above] node {1,1,R} (2)
+                 edge              node {0,0,L} (3)
+            (3) edge [loop above] node {1,1,R} (3)
+                 edge  node {0,1,R} (4)
+            (4) edge [loop below] node {0,1,L} (4)
+                 edge              node {1,1,L} (5)
+            (5) edge [loop below]  node {1,1,L} (5)
+                 edge              node {0,0,L} (6)
+            (6) edge [loop below] node {1,1,L} (6)
+                 edge              node {0,0,R} (1);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{prob}
+Choose an arbitary input and trace through the configurations of the
+above machine.
+\end{prob}
+
+\begin{prob}
+Come up with a new method for solving the doubler problem, then build
+a machine that executes your method. Check that your machine works by
+tracing through the configurations with two different inputs.
+\end{prob}
+\end{document}

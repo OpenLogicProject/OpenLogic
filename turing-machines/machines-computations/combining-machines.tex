@@ -1,0 +1,120 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: combining-machines
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{cmb}
+\olsection{Combining Turing Machines}
+
+\begin{explain}
+As mentioned before, Turing machines have the same computing
+power as a modern-day computer. The examples we have shown
+so far have been fairly simple in nature. Sometimes, when computing
+a complex function, it is beneficial to break the problem down into 
+separate parts.
+
+One of the key features of Turing machines is the ability for them to
+be combined or hooked together. If we can find a natural way to break
+a complex problem down into its constituent parts, we can tackle the
+problem in several stages, creating several simple Turing machines and
+combining then into one machine that can solve the problem. This point
+is especially important when tackling the Halting Problem.
+\end{explain}
+
+\begin{ex}
+\emph{Combining Machines:} Design a machine that computes the function
+$f(m,n) = 2(m+n)$.
+
+In order to build this machine, we can combine two machines we are already
+familiar with: the addition machine, and the doubler. We begin by drawing 
+up a state diagram for the addition machine.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [right of=B] {$q_2$};
+
+  \path (A) edge                      node {0,1,R} (B)
+                  edge [loop above] node {1,1,R} (B)
+            (B) edge [loop above] node {1,1,R} (B)
+                  edge                      node {0,0,L} (C)
+            (C) edge [loop above] node {1,0,N} (C);
+\end{tikzpicture}
+\]
+Instead of halting at state $q_2$, we want to continue operation in
+order to double the output. Recall that the doubler machine erases
+the first stroke in the input and writes two strokes in a separate
+output. Let's add an instruction to made sure the tape head is reading 
+the first stroke of the output of the addition machine.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [right of=B] {$q_2$};
+  \node[state]         (D) [right of=C] {$q_3$};
+  \node[state]         (E) [right of=D] {$q_4$};
+
+  \path (A) edge                      node {0,1,R} (B)
+                  edge [loop above] node {1,1,R} (B)
+            (B) edge [loop above] node {1,1,R} (B)
+                  edge                      node {0,0,L} (C)
+            (C) edge [loop above] node {1,0,L} (C)
+                  edge                      node {1,1,L} (D)
+            (D) edge [loop above] node {1,1,L} (D)
+                  edge                      node {0,0,R} (E);
+\end{tikzpicture}
+\]
+It is now easy to double the input - all we have to do is connect the
+doubler machine onto state $q_4$! This means renaming the states 
+of the doubler machine so that they start at $q_4$ instead of $q_0$
+- this way we don't end up with two starting states. The final diagram
+should look like:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+  \node[state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [right of=B] {$q_2$};
+  \node[state]         (D) [right of=C] {$q_3$};
+  \node[state]         (E) [right of=D] {$q_4$};
+  \node[state]         (F) [below of=E] {$q_5$};
+  \node[state]         (G) [left of=F]    {$q_6$};
+  \node[state]         (H) [left of=G]   {$q_7$};
+  \node[state]         (I) [left of=H]       {$q_8$};
+  \node[state]         (J) [left of=I]       {$q_9$};
+
+    \path (A) edge                      node {0,1,R} (B)
+                  edge [loop above] node {1,1,R} (B)
+            (B) edge [loop above] node {1,1,R} (B)
+                  edge                      node {0,0,L} (C)
+            (C) edge [loop above] node {1,0,L} (C)
+                  edge                      node {1,1,L} (D)
+            (D) edge [loop above] node {1,1,L} (D)
+                  edge                      node {0,0,R} (E)
+ 	 (E) edge              node {1,0,R} (F)
+            (F) edge [loop below] node {1,1,R} (F)
+                 edge              node {0,0,L} (G)
+            (G) edge [loop below] node {1,1,R} (G)
+                 edge  node {0,1,R} (H)
+            (H) edge [loop below] node {0,1,L} (H)
+                 edge              node {1,1,L} (I)
+            (I) edge [loop below]  node {1,1,L} (I)
+                 edge              node {0,0,L} (J)
+            (J) edge [loop below] node {1,1,L} (J)
+                 edge              node {0,0,R} (A);
+\end{tikzpicture}
+\]
+
+\end{ex}
+
+\end{document}

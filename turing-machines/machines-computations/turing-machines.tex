@@ -1,12 +1,12 @@
-% Part: computability
-% Chapter: tm-computations
+% Part: turing-machines
+% Chapter: machines-computations
 % Section: turing-machines
 
 \documentclass[../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{cmp}{tur}{tur}
+\olfileid{tur}{mac}{tur}
 \olsection{Turing Machines}
 
 \begin{explain}
@@ -22,12 +22,12 @@ set of the machine is.
 \begin{defn}
 A \emph{Turing machine} $T = \langle Q, \Sigma, s, I\rangle$ consists of
 \begin{enumerate}
-\item a finite set of states $Q$ which includes the \emph{halting state}~$h$,
+\item a finite set of states $Q$,
 \item a finite alphabet $\Sigma$ which includes $\TMendtape$ and
   $\TMblank$,
-\item an initial state $s \in Q$,
+\item an initial state $q_0 \in Q$,
 \item a finite instruction set~$I \subseteq Q \times \Sigma \times Q
-  \times \Sigma \times \{L, R, N\}$.
+  \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$.
 \end{enumerate}
 \end{defn}
 
@@ -36,11 +36,31 @@ We assume that the tape is infinite in one direction only. For this
 reason it is useful to designate a special symbol~$\TMendtape$ as
 a marker for the left end of the tape. This makes it easier for
 Turing machne programs to tell when they're ``in danger'' of running
-off the tape. Other definitions of Turing machines are possible,
-including one where the tape is infinite in both directions. In that
-case, marker for the left end of the tape is not necessary.
+off the tape. 
+
+Classical Turing machines make use of only two symbols: $\TMblank$ and
+$\TMstroke$. While it is common to consider Turing machines that use additional
+symbols, no extra computing power is gained by this. Anything computable by
+a Turing machine is computable by a classical Turing machine. Other
+definitions of Turing machines are possible,
+including one where the tape is infinite in both directions. In such cases,
+the marker for the left end of the tape is not necessary.
 \end{explain}
 
+\begin{ex}
+\emph{Even Machine:} Define a Turing machine that, given an input of $n$
+strokes, halts if, and only if, $n$ is even.
 
+$Q =  \{ q_0, q_1 \}$
+
+$\Sigma = \{ \TMendtape, \TMblank, \TMstroke \}$
+
+$I = \{ \langle q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle$
+
+	  $\langle q_1, \TMstroke, q_0, \TMstroke, \TMright \rangle$
+	  
+	  $\langle q_0, \TMblank, q_0, \TMblank, \TMright \rangle \}$
+
+\end{ex}
 
 \end{document}

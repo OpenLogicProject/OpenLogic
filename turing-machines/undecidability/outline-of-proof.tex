@@ -1,0 +1,32 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: outline-of-proof
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{und}{out}
+\olsection{Outline of the Proof}
+
+\begin{explain}
+We know that first-order logic is decidable iff there is an effective mechanical
+method for determining whether or not a !!{sentence} is valid. We also know, from
+the Chruch-Turing thesis, that every function which is computable is 
+Turing-computable. We have proved that the function~$h(m,w)$, that halts with
+an output $\TMstroke$ if the Turing-machine described by $m$ halts on input $w$ 
+and outputs $\TMblank$ otherwise, is not Turing-computable. Via the Church-Turing
+thesis,~$h$ is not computable. 
+
+In order to show that first-order logic is undecidable, we prove the following.
+
+\emph{Lemma:} Given input~$n$ and a Turing machine~$M$ we can effectively 
+describe a set of !!{sentence}s $\Delta$ and a !!{sentence} H such that:
+
+$\Delta \Entails H$ iff $M$ halts for input $n$.
+\end{explain}
+
+This gives us the theorem that if first-order logic is deciadble, then the halting problem
+is solvable. However, we already know that the halting problem is not solvable. And
+therefore, first-order logic is not decidable.
+
+\end{document}

@@ -1,43 +1,58 @@
-% Part: first-order-logic
-% Chapter: completeness
+% Part: turing-machines 
+% Chapter: machines-computations 
 % Section: introduction
 
 \documentclass[../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{cmp}{tur}{int}
+\olfileid{tur}{mac}{int} 
 \olsection{Introduction}
-
 \begin{explain}
-Even though the term ``Turing machine'' evokes the image of a physical
-machine with moving parts, strictly speaking a Turing machine is a
-purely mathematical construct.  It is perhaps best to think of a
-Turing machine as a program for a special kind of imaginary mechanism.
-This mechanism consists of a \emph{tape} and a \emph{read-write head}.
-In our version of Turing machines, the tape is infinite in one
-direction (to the right), and it is divided into \emph{squares}, each
-of which may contain a symbol from a finite \emph{alphabet}.  Such
-alphabets can contain any number of different symbols, but we will
-mainly make do with three: $\TMendtape$, $\TMblank$, and
-$\mid$.  When he mechanism is started, the tape is empty (i.e., each
-square contains the symbol $\TMblank$) except for the
-leftmost square, which contains $\TMendtape$, and a finite number
-of squares which contain the \emph{input}.  At any time, the mechanism
-is in one of a finite number of \emph{states}.  At the outset, the
-head scans the leftmost square and in a specified \emph{initial
-  state}.  At each step of the mechanism's run, the content of the
-square currently scanned together with the state the mechanism is in
-and the Turing machine program determine what happens next.  The Turing
-machine program consists of a list of 5-tuples $\langle q_i, \sigma,
-q_j, \sigma', D\rangle$.  Whenever the mechanism is in state $q_i$ and
-reads symbol $\sigma$, it replaces the symbol on the current square
-with $\sigma'$, the head moves left, right, or stays put according to
-whether $D$ is $L$, $R$, or $N$, and the mechanism goes into
-state~$q_j$.  When the mechanism enters state~$h$ we say it
-\emph{halts}, and the contents of the tape at that point is its
-\emph{output}.
-\end{explain}
+ Even though the term ``Turing machine'' evokes the image of
+a physical machine with moving parts, strictly speaking a Turing machine is
+a purely mathematical construct. It is perhaps best to think of a Turing
+machine as a program for a special kind of imaginary mechanism. This
+mechanism consists of a \emph{tape} and a \emph{read-write head}. In our
+version of Turing machines, the tape is infinite in one direction (to the
+right), and it is divided into \emph{squares}, each of which may contain a
+symbol from a finite \emph{alphabet}. Such alphabets can contain any number
+of different symbols, but we will mainly make do with three: $\TMendtape$,
+$\TMblank$, and $\TMstroke$. When the mechanism is started, the tape is
+empty (i.e., each square contains the symbol $\TMblank$) except for the
+leftmost square, which contains $\TMendtape$, and a finite number of
+squares which contain the \emph{input}. At any time, the mechanism is in
+one of a finite number of \emph{states}. At the outset, the head scans the
+leftmost square and in a specified \emph{initial state}. At each step of
+the mechanism's run, the content of the square currently scanned together
+with the state the mechanism is in and the Turing machine program determine
+what happens next. The Turing machine program consists of a list of
+5-tuples $\langle q_i, \sigma, q_j, \sigma', D\rangle$. Whenever the
+mechanism is in state $q_i$ and reads symbol $\sigma$, it replaces the
+symbol on the current square with $\sigma'$, the head moves left, right, or
+stays put according to whether $D$ is $\TMleft$, $\TMright$, or $\TMstay$,
+and the mechanism goes into state~$q_j$. We say that the machine halts when
+it encounters some state, ~$q_n$, and symbol, $\sigma$ such that there is
+no instruction beginning $\langle q_n, \sigma\rangle$. In other words, the
+machine has no instruction to carry out, and at that point, it ceases
+operation. Halting is sometimes represented by a specific halt state~$h$.
+This will be demonstrated in more detail later on.
+%% We should have a picture of the tape with the read/write head
+%% somewhere in this intro section.
+
+Alan Turing invented Turing machines in 1936. While his interest at the
+time was the decidability of first-order logic, the paper has been
+described as a definitive paper on the foundations of computer design
+(Copeland 1993, 10). Notice that this was a full five years before the
+first working general purpose computer was built in 1941 (by the German
+Konrad Zuse in his parents living room), seven years before Turing and his
+colleagues at Bletchley Park built the code-breaking Colossus (1943), nine
+years before the American ENIAC (1945), twelve years before the first
+British general purpose computer the Manchester Mark I was built in
+Manchester (1948) and thirteen years before the Americans first tested the
+BINAC (1949). The Manchester Mark I has the distinction of being the first
+stored-program computer - previous machines had to be rewired by hand for
+each new task. \end{explain}
 
 
 \end{document}
