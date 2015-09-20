@@ -6,12 +6,12 @@
 
 \begin{document}
 
-\olfileid{fol}{mod}{dlo}
+\olfileid{mod}{bas}{dlo}
 \section{Dense Linear Orders}
 
 \begin{defn}
-  A \emph{dense linear ordering without endpoints} is a !!{structure}
-  $\Struct{M}$ for the language containg a single 2-place
+  A \emph{dense linear ordering without endpoints} is !!a{structure}
+  $\Struct{M}$ for the !!{language} containg a single 2-place
   !!{predicate}~$<$ satisfying the following sentences:
   \begin{enumerate}
   \item $\lforall[x] \ x < x$;
@@ -26,21 +26,23 @@
 \end{defn}
 
 \begin{thm}\ollabel{thm:cantorQ}
-  (\emph{Cantor}) Any two !!{enumerable} dense linear orderings without
+  Any two !!{enumerable} dense linear orderings without
   endpoints are isomorphic.
 \end{thm}
 
 \begin{proof}
   Let $\Struct{M_1}$ and $\Struct{M_2}$ be !!{enumerable} dense linear
-  orderings without endpoints, with $<_1 = \Assign{<}{M_1}$ and $<_2 =
+  orderings without endpoints, with ${<_1} = \Assign{<}{M_1}$ and ${<_2} =
   \Assign{<}{M_2}$, and let $\PIso{I}$ be the set of all partial
   isomorphisms between them. $\PIso{I}$ is not empty since at least
-  $\emptyset \in \PIso{I}$. Suffices to show that $\PIso{I}$ satisfies
-  the Back-and-Forth property.
+  $\emptyset \in \PIso{I}$. We show that $\PIso{I}$ satisfies the
+  Back-and-Forth property.  Then $\Struct{M_1} \iso[p] \Struct{M_2}$,
+  and the theorem follows by \olref[pis]{thm:p-isom1}.
 
-  Let $p \in \PIso{I}$ and let $p(a_i) = b_i$ for $i = 1$, \dots,~$n$,
-  and without loss of generality suppose $a_1 <_1 a_2 <_1 \cdots <_1
-  a_n$ . Given $a \in \Domain{M_1}$, find $b \in \Domain{M_2}$ as
+  To show $\PIso{I}$ satisifes the Forth property, let $p \in
+  \PIso{I}$ and let $p(a_i) = b_i$ for $i = 1$, \dots,~$n$, and
+  without loss of generality suppose $a_1 <_1 a_2 <_1 \cdots <_1
+  a_n$. Given $a \in \Domain{M_1}$, find $b \in \Domain{M_2}$ as
   follows:
   \begin{enumerate}
   \item if $a <_2 a_1$ let $b \in \Domain{M_2}$ be such that $b <_2
@@ -54,9 +56,14 @@
   $q = p \cup \{ \langle a, b \rangle \}$ so that $q \in \PIso{I}$ is
   the desired extension of $p$. This establishes the Forth
   property. The Back property is similar. So $\Struct{M_1} \iso[p]
-  \Struct{M_2}$ and by \olref[pis]{thm:p-isom1} also
-  $\Struct{M_1} \iso \Struct{M_2}$.
+  \Struct{M_2}$; by \olref[pis]{thm:p-isom1}, $\Struct{M_1} \iso
+  \Struct{M_2}$.
 \end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][bas][dlo]{thm:cantorQ} by
+  verifying that $\PIso{I}$ satisfies the Back property.
+\end{prob}
 
 \begin{rem}
   Let $\Struct{S}$ be any !!{enumerable} dense linear ordering without
@@ -64,13 +71,14 @@
   \Struct{Q}$, where $\Struct{Q} = (\Rat, <)$ is the !!{enumerable}
   dense linear ordering having the set $\Rat$ of the rational numbers
   as its domain. Now consider again the !!{structure} $\Struct{R} =
-  (\Real, <)$ from \olref[thm]{remark:R}. We saw that there is a
-  !!{enumerable} !!{structure} $\Struct{S}$ such that $\Struct{R}
-  \elemequiv \Struct{S}$. But $\Struct{S}$ is a !!{enumerable} dense
+  (\Real, <)$ from \olref[thm]{remark:R}. We saw that there is
+  !!a{enumerable} !!{structure} $\Struct{S}$ such that $\Struct{R}
+  \elemequiv \Struct{S}$. But $\Struct{S}$ is !!a{enumerable} dense
   linear ordering without endpoints, and so it is isomorphic (and
-  hence equivalent) to the !!{structure} $\Struct{Q}$. By transitivity
-  of elementary equivalence, $\Struct{R} \elemequiv \Struct{Q}$. (We could
-  have shown this directly by establishing $\Struct{R} \iso[p]
-  \Struct{Q}$ by the same back-and-forth argument.)
+  hence elementarily equivalent) to the !!{structure}~$\Struct{Q}$. By
+  transitivity of elementary equivalence, $\Struct{R} \elemequiv
+  \Struct{Q}$. (We could have shown this directly by establishing
+  $\Struct{R} \iso[p] \Struct{Q}$ by the same back-and-forth
+  argument.)
 \end{rem}
 \end{document}
