@@ -1,0 +1,80 @@
+% Part: first-order-logic
+% Chapter: model-theory
+% Section: isomorphism
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{bas}{iso}
+\olsection{Isomorphic Structures}
+
+\begin{defn}
+\ollabel{defn:elem-equiv} 
+Given two !!{structure}s $\Struct{M}$ and $\Struct M'$ for the same
+!!{language}~$\Lang{L}$, we say that $\Struct{M}$ is \emph{elementarily
+  equivalent to} $\Struct M'$, written $\Struct{M} \equiv \Struct M'$,
+if and only if for every !!{sentence}~$!A$ of~$\Lang{L}$,
+$\Sat{M}{!A}$ iff $\Sat{M'}{!A}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:isomorphism} Given two !!{structure}s $\Struct{M}$ and
+$\Struct M'$ for the same !!{language}~$\Lang L$, we say that
+$\Struct{M}$ is \emph{isomorphic to}~$\Struct M'$, written $\Struct{M}
+\simeq \Struct M'$, if and only if there is a function $h \colon
+\Domain{M} \to \Domain{M'}$ such that:
+\begin{enumerate}
+\item $h$ is !!{injective}: if $h(x) =
+  h(y)$ then $x = y$; 
+\item $h$ is !!{surjective}: for every $y \in \Domain{M'}$ there
+  is $x \in \Domain{M}$ such that $h(x) = y$;
+\item for every constant $c$: $h(\Assign{c}{M}) = \Assign{c}{M'}$;
+\item for every $n$-place !!{predicate}~$P$: $\tuple{a_1, \dots,
+  a_n}\in \Assign{P}{M}$ if and only if $\tuple{h(a_1), \dots, h(a_n)}
+    \in \Assign{P}{M'}$;
+\item for every $n$-place !!{function} $f$:
+  \[
+  h(\Assign{f}{M}(a_1, \dots, a_n)) =
+  \Assign{f}{M'}(h(a_1), \dots, h(a_n)).
+  \]
+\end{enumerate}
+\end{defn}
+
+\begin{thm}
+\ollabel{thm:isom}
+If $\Struct{M} \iso \Struct M'$ then $\Struct{M} \elemequiv
+\Struct{M'}$.
+\end{thm}
+
+\begin{proof}
+Let $h$ be an isomorphism of $\Struct{M}$ onto $\Struct M'$. For any
+assignment~$s$, $h \circ s$ is the composition of $h$ and $s$, i.e.,
+the assignment in $\Struct{M'}$ such that $(h \circ s)(x) = h(s(x))$.
+By induction on $t$ and $!A$ one can prove the stronger claims:
+\begin{align*}
+  &  h(\Value{t}{M}[s]) = \Value{t}{M'}[h\circ s];\\
+  &  \Sat{M}{!A}[s] \text{ if and only if }
+  \Sat{M'}{!A}[h \circ s].
+\end{align*}
+\end{proof}
+
+\begin{prob}
+Carry out the proof of \olref[mod][bas][iso]{thm:isom} in detail. Make
+sure to take note at each step of how each of the five properties
+characterizing isomorphisms is used.
+\end{prob}
+
+\begin{defn}
+An \emph{automorphism} of a structure $\mathfrak{M}$ is an isomorphism
+of $\mathfrak{M}$ onto itself.
+\end{defn}
+
+\begin{prob}
+Show that for any structure $\Struct{M}$, if $X$ is a definable subset
+of $\Struct{M}$, and $h$ is an automorphism of $\Struct{M}$, then $X
+= \Setabs{h(x)}{x \in X}$ (i.e., $X$ is fixed under $h$).
+\end{prob}
+
+
+\end{document}
