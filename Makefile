@@ -21,6 +21,11 @@ all: open-logic-debug.pdf open-logic-complete.pdf
 
 everything: $(ALLPDFFILES) open-logic-config.pdf
 
+courses: FORCE_MAKE
+	for course in courses/* ; do \
+		make -C $$course ;\
+	done
+
 branches: FORCE_MAKE
 	for branch in `git branch --list --no-column |grep -v master` ; do \
 		git checkout $$branch ;\
