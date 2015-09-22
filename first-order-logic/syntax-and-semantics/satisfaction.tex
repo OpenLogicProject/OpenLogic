@@ -8,8 +8,8 @@
 
 \olfileid{fol}{syn}{sat}
 
-\olsection{Satisfaction of a \printtoken{S}{formula} in a
-  \printtoken{S}{structure}}
+\olsection{Satisfaction of \article{formula} \printtoken{S}{formula}
+  in \article{structure} \printtoken{S}{structure}}
 
 \begin{explain}
 The basic notion that relates expressions such as terms and
@@ -191,8 +191,8 @@ We use induction on the complexity of $!A$. For the base case, where
 $!A$ is atomic, $!A$ can be:
 \iftag{prvTrue}{$\ltrue$,}{}
 \iftag{prvFalse}{$\lfalse$,}{}
-$R(t_1 \ldots t_k)$ for a $k$-place predicate $R$ and terms
-$t_1,\ldots,t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and $t_2$.
+$\Atom{R}{t_1, \dots, t_k}$ for a $k$-place predicate $R$ and terms
+$t_1$, \dots,~$t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and~$t_2$.
 
 \begin{enumerate}
 \tagitem{prvTrue}{%
@@ -206,7 +206,7 @@ $t_1,\ldots,t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and $t_2$.
 \item
   \indcase{!A}{\Atom{R}{t_1, \ldots, t_k}}{let $\Sat{M}{\indfrm}[s]$. Then
     $\langle \Value{t_1}{M}[s], \ldots, \Value{t_k}{M}[s] \rangle \in
-    \Assign{R}{M}$. For $1 \eq i \eq k$, if $t_i$ is a constant, then
+    \Assign{R}{M}$. For $i = 1$, \dots,~$k$, if $t_i$ is a constant, then
     $\Value{t_i}{M}[s] = \Value{t_i}{M} = \Value{t_i}{M}[s']$. If
     $t_i$ is a free !!{variable}, then since the mappings $s$ and $s'$
     agree on all free !!{variable}s, $\Value{t_i}{M}[s] = s(t_i) =
@@ -290,7 +290,7 @@ of the reverse direction is symmetrical.
 \end{enumerate}
 By induction, we get that $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$
 whenever $x_1$, \dots, $x_n$ are the only free !!{variable}s in $!A$ and
-$s(x_i)=s'(x_i)$ for $i=1$, \dots,~$n$.
+$s(x_i)=s'(x_i)$ for $i = 1$, \dots,~$n$.
 \end{proof}
 
 \begin{probtag}{probNot,probOr,probAnd,probIf,probEx,probAll}
