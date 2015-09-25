@@ -46,14 +46,9 @@
   style=definition, numbered=yes,
   name={Problem}]{probd}
 
-% \probch holds the chapter number
-
-\newcommand*{\probch}{0}
-
 % Print the chapter number with the problem number
 
-\renewcommand*{\theprobd}{\probch.\arabic{probd}}
-
+\def\theprobd{\probch.\arabic{probd}}
 
 % make sure the .prb file is open
 \Opensolutionfile{\jobname}
@@ -68,13 +63,13 @@
   \Closesolutionfile{\jobname}
   \Opensolutionfile{\jobname}
   \Writetofile{\jobname}{
-    \string\section*{Problems}
-    \string\renewcommand*{\string\probch}{\thechapter}
-    \string\setcounter{probd}{0}}}
+    \protect\section*{Problems}
+    \protect\def\protect\probch{\thechapter}
+    \protect\setcounter{probd}{0}}}
   % at the end of every chapter, close the .prb file and print it
   \appto\OLEndChapterHook{%
     \Closesolutionfile{\jobname}
-    \renewcommand*{\probch}{\thechapter}
+    \def\probch{\thechapter}
     \Readsolutionfile{\jobname}}}
 
 % - `\collectproblems`: execute this in the preamble to arrange for
@@ -85,9 +80,9 @@
 % the .prb file and reset counters
 \renewcommand\memendofchapterhook{%
   \Writetofile{\jobname}{
-    \string\section*{Problems for Chapter~\thechapter}
-    \string\renewcommand*{\string\probch}{\thechapter}
-    \string\setcounter{probd}{0}}}}
+    \protect\section*{Problems for Chapter~\thechapter}
+    \protect\def\protect\probch{\thechapter}
+    \protect\setcounter{probd}{0}}}}
 
 % \collectproblems is the default, so we execute it right away
 
