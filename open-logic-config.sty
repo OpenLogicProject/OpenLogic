@@ -30,6 +30,8 @@
 % default, `!A`, `!B`, ... are typeset as $\varphi$, $\psi$, $\chi$,
 % ... if you use the command `\olgreekformulas`. If this is not desired,
 % and you'd like $A$, $B$, $C$, ... instead, use `\ollatinformulas`.
+% If you issue `\olalphagreekformulas`, you'll get $\alpha$, $\beta$,
+% $\gamma$, \dots.
 
 \olgreekformulas
 
@@ -67,7 +69,7 @@
 
 % `\DeclareDocumentMacro \land {\mathbin{\&}}`
 
-% - Disjunction `\lor` and defaults to $\lor$.
+% - Disjunction is `\lor` and defaults to $\lor$.
 
 % - Conditional is `\lif` and defaults to $\rightarrow$.  To use a
 % different symbol, replace `\rightarrow` in the definition, e.g., by
@@ -91,7 +93,7 @@
 % variable. The second optional argument producesthe
 % quantifier/variable combination plus the formula in the scope of the
 % formula with appropriate spacing.  For instance,
-% `\lexists[x][!A(x)]` will, bydefault, produce $\exists
+% `\lexists[x][!A(x)]` will, by default, produce $\exists
 % x\,\varphi(x)$.
 
 % - The existential quantifier is `\lexists`.  Replace `\exists` with
@@ -137,7 +139,7 @@
 
 \DeclareDocumentMacro \Sequent {\Rightarrow}
 
-% The sequent symbol in proofs displays as the above sequent symbol
+% The sequent symbol in proofs displays as the above sequent symbol.
 
 \DeclareDocumentMacro \fCenter {\ensuremath{\,\Sequent\,}}
 
@@ -154,9 +156,10 @@
 
 % ### Substitution
 
-% `Subst{!A}{t}{x}`: The operation of substituting a term for a (free)
-% variable in another term or in a formula.  Common notations are
-% $\varphi^t_x$, $\varphi(t/x)$, $\varphi[x/t]$, or $S^t_x \varphi$.
+% `\Subst{!A}{t}{x}`: The operation of substituting a term for a
+% (free) variable in another term or in a formula.  The default is
+% $\varphi[x/t]$, other common notations are $\varphi^t_x$,
+% $\varphi\{t \rightarrow x\}$, or $S^t_x \varphi$.
 
 \DeclareDocumentCommand \Subst { m m m } {
   #1[#2/#3]}
@@ -165,8 +168,8 @@
 
 % ### The satisfaction/truth relation 
 
-% `\Sat[/]{M}{!A}[s]` is the relation of being satisfied in a
-% structure (relative to an assignment) isprovided as the command
+% `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
+% structure (relative to an assignment), is provided as the command
 % `\Sat` with two mandatory arguents (the structure and the formula)
 % and one optional argument (the assignment).  Use `\Sat/` to create
 % the negated relation.  By default, `\Sat{M}{!A}[s]` is typeset as
@@ -187,9 +190,10 @@
 
 % ### The derivability relation
 
-% `\Proves` is used to create the symbol for the derivability
+% `\Proves[L]` is used to create the symbol for the derivability
 % relation, `\Proves/` for the negation. By default this creates
-% $\vdash$. The optional argument is used for the calculusor logic
+% $\vdash$; e.g., `\Gamma \Proves !A` yields $\Gamma \vdash
+% \varphi$. An optional argument may be used for the calculus or logic
 % relative to which the provability relation is defined; by default it
 % creates a subscript on the turnstile.
 
@@ -205,7 +209,9 @@
 
 % ### The semantic consequence relation relation
 
-% `\Entails` is the semantic counterpart of `\Proves`. 
+% `\Entails` is the semantic counterpart of `\Proves` and defaults to
+% $\models$. It also takes an optional `/` for $\not\models$ and an
+% optional argument for a subscript.
 
 \DeclareDocumentCommand \Entails { t{/} o } {
   \IfBooleanTF {#1}{
@@ -220,13 +226,13 @@
 
 % ### Model-theoretic notions and symbols
 
-% - `\Domain{M}` - domain of a structure, e.g., `\Domain M` gives
+% - `\Domain{M}` - domain of a structure, e.g., `\Domain{M}` gives
 % $\left|\mathfrak M\right|$.
 
 \DeclareDocumentCommand \Domain { m }{\left| \Struct #1 \right|}
 
 % - `\Assign{R}{M}` - Assignment (value of) of a constant/predicate symbol
-% in a structure; e.g., `\Assign R M` produces $R^\mathfrak{M}$.
+% in a structure; e.g., `\Assign{R}{M}` produces $R^\mathfrak{M}$.
 
 \DeclareDocumentCommand \Assign { m m }{#1^{\Struct #2}}
 
@@ -252,7 +258,7 @@
 \DeclareDocumentCommand \Theory { m } {\mathrm{Th}(\Struct{#1})}
 
 % - `\Mod[L](L'){T}`: class of models of a theory/sentence $T$ in a
-% language $L$ and logic $L'$.
+% language $\mathcal{L}$ and logic $L'$.
 
 \DeclareDocumentCommand \Mod { o d() m } {
   \IfNoValueTF {#2} {
@@ -279,7 +285,7 @@
         { \equiv_{#2} }}
 }
 
-% - `\iso[/]`: relation of (partial) isomorphism
+% - `\iso[/][p]`: relation of being (partially) isomorphic
 
 \DeclareDocumentCommand \iso { t{/} o } {
   \IfBooleanTF {#1}{
@@ -297,11 +303,11 @@
 
 \DeclareDocumentMacro \ident {\equiv}
 
-% - `\QuantRank`: quantifier rank of a formula
+% - `\QuantRank{!A}`: quantifier rank of a formula
 
 \DeclareDocumentCommand \QuantRank { m } {\mathrm{qr}(#1)}
 
-% `\Expan{M}{R}`: expansion of a structure by a relation (etc.)
+% - `\Expan{M}{R}`: expansion of a structure by a relation (etc.)
 
 \DeclareDocumentCommand \Expan { m m } {(\Struct{#1}, #2)}
 
@@ -382,7 +388,10 @@
 
 \DeclareDocumentCommand \Gn { m } {\#(#1)}
 
-% - `\mSat{M}{!A}[w]`: modal stasfaction relation
+% Modal Logic 
+% -----------
+
+% - `\mSat{M}{!A}[w]`: modal satisfaction relation
 
 \DeclareDocumentCommand \mSat { t{/} m m o } {
   \IfBooleanTF{#1}{
@@ -554,11 +563,11 @@
 
 \DeclareDocumentCommand \PIso { m }{\mathcal{#1}}
 
-% `\fn{func}` -- typeset a function name
+% - `\fn{func}` -- typeset a function name
 
 \DeclareDocumentCommand \fn { m } {\mathrm{#1}}
 
-% `\Th{T}` -- typeset name of a theory
+% - `\Th{T}` -- typeset name of a theory
 
 \DeclareDocumentCommand \Th { m } {\mathbf{#1}}
 
@@ -625,7 +634,7 @@
 % iff $\models B$ and $\models C$" or, alternatively and more
 % succinctly: "$\models B \land C$ iff $\models B$ and $\models C$".
 % Use the starred version for the atomic case, and a ! instead of the
-% star for a case you to leave as an exercise.
+% star for a case you want to leave as an exercise.
 
 \DeclareDocumentCommand \indcase { s t{!} m m +m }{%
   \DeclareDocumentMacro \indfrm {#3}%
@@ -657,7 +666,7 @@
 % `!!{token}s`.  In sentence-initial position, OLP texts would use
 % `!!^{token}` and `!!^{token}s` to create capitalized versions of
 % these token replacements.  By default, they are generated from
-% `singluar` and `plural` by capitalizing the first chracter, but can
+% `singluar` and `plural` by capitalizing the first character, but can
 % be provided explicitly to `\settexttoken` as optional arguments.
 % `!!a{token}` produces an indefinite article plus the token
 % replacement. This is usually "a" unless the settexttoken command is
@@ -667,12 +676,12 @@
 % element".  `\article{token}` and `\Article{token}` produce just the
 % article by itself (lower or uppercase, respectively).
 
-% - `language`: defaults to ``language'', redefine for
-% ``signature''
+% - `language`: defaults to "language", redefine for, e.g.,
+% "signature"
 
 \settexttoken{language}{language}{languages}
 
-% - `formula`: defaults to "formula/formuls", redefine for
+% - `formula`: defaults to "formula/formulas", redefine for
 % plural "formulae," or for "wff".
 
 \settexttoken{formula}{formula}{formulas}
@@ -693,7 +702,7 @@
 \settexttoken{variable}{variable}{variables}
 
 % - `constant`: defaults to "constant", redefine for "individual
-% constant'', "constant symbol."
+% constant", "constant symbol."
 
 \settexttoken{constant}{constant symbol}{constant symbols}
 
@@ -724,21 +733,23 @@
 
 \settexttoken{identity}*{identity predicate}{identity predicates}
 
-% - `conditional`: defaults to "conditional", redefine for "implication."
+% - `conditional`: defaults to "conditional", redefine for
+% "implication."
 
 \settexttoken{conditional}{conditional}{conditionals}
 
-% - `biconditional`: defaults to "biconditional", redefine for "equivalence."
+% - `biconditional`: defaults to "biconditional", redefine for
+% "equivalence."
 
 \settexttoken{biconditional}{biconditional}{biconditionals}
 
-% - `falsity`: the falsity symbol, defaults to "falsity", redefine for
-% "absurdity."
+% - `falsity`: name of the falsity symbol, defaults to "falsity",
+% redefine for "absurdity."
 
 \settexttoken{falsity}{falsity}{falsities}
 
-% - `truth`: the falsity symbol, defaults to "truth", redefine for
-% "verum" or "top".
+% - `truth`: name of the truth symbol, defaults to "truth", redefine
+% for "verum" or "top".
 
 \settexttoken{truth}{truth}{truth}
 
@@ -747,34 +758,33 @@
 
 \settexttoken{structure}{structure}{structures}
 
-% `domain`: domain of a structure
+% - `domain`: domain of a structure
 
 \settexttoken{domain}{domain}{domains}
 
-% `\value`: value (denotation) of a term
+% - `\value`: value (denotation) of a term
 
 \settexttoken{value}{value}{values}
 
-% `derivation`: derivation in a calculus, proof
+% - `derivation`: derivation in a calculus, proof
 
 \settexttoken{derivation}{derivation}{derivations}
 
-% `derive`: derive in a calculus, prove
+% - `derive`: derive in a calculus, prove
 
 \settexttoken{derive}{derive}{derives}
 
-% `derivable`: derivable in a calculus, provable
+% - `derivable`: derivable in a calculus, provable
 
 \settexttoken{derivable}{derivable}{derivable}
 
-% `derivability`: derivability in a calculus, provability
+% - `derivability`: derivability in a calculus, provability
 
 \settexttoken{derivability}{derivability}{derivabilities}
 
-% `nonderivability`: derivability in a calculus, unprovability
+% - `nonderivability`: derivability in a calculus, unprovability
 
 \settexttoken{nonderivability}{non-derivability}{non-derivabilities}
-
 
 % - `enumerable`: term for finite or countably infinite; defaults to
 % "enumerable", redefine for "countable".
@@ -786,7 +796,8 @@
 
 \settexttoken{nonenumerable}{non-enumerable}{non-enumerable}
 
-% - `denumerable`: term for countably infinite; defaults to "denumerable". 
+% - `denumerable`: term for countably infinite; defaults to
+% "denumerable".
 
 \settexttoken{denumerable}{denumerable}{denumerable}
 
@@ -794,17 +805,19 @@
 
 \settexttoken{element}*{element}{elements}
 
-% - `injective`, `injection`: redefine for "one-one"
+% - `injective`, `injection`: redefine for "one-one" and "one-one
+% function"
 
 \settexttoken{injective}*{injective}{injective}
 \settexttoken{injection}*{injection}{injections}
 
-% - `surjective`, `surjection`: redefine for "onto"
+% - `surjective`, `surjection`: redefine for "onto" and "onto function"
 
 \settexttoken{surjective}{surjective}{surjective}
 \settexttoken{surjection}{surjection}{surjections}
 
-% - `bijective`, `bijection`: redefine for "one-one onto"
+% - `bijective`, `bijection`: redefine for "one-one onto" and "one-one
+% onto function" or "correspondence"
 
 \settexttoken{bijective}{bijective}{bijective}
 \settexttoken{bijection}{bijection}{bijections}
@@ -816,40 +829,45 @@
 % `sty/open-logic-selective.sty`.  Tags are initialized using
 % `\tagtrue` and `\tagfalse`, which also initialize, for each `tag`
 % given as argument, a corresponding tag `nottag` with opposite truth
-% value is automatically provided. 
+% value.
 
-% - Primitives: tags for (sets of) operators which are treated as
-%   primitives. Default: all as primitives. 
+% - `prvNot`, `prvOr`, `prvAnd`, `prvIf`, `prvIff`, `prvTrue`,
+%   `prvFalse`, `prvEx`, `prvAll` - Primitives: tags for (sets of)
+%   operators which are treated as primitives. Default: all as
+%   primitives.
 
 \tagtrue{prvNot,prvOr,prvAnd,prvIf,prvIff,prvTrue,prvFalse,prvEx,prvAll}
 
-% - Defined operators: tags for operators which are defined, not
-%  primitive. Default: none.  Note: Not all combinations of
-%  primitive/defined operators will result in complete definitions!
+% - `defNot`, `defOr`, `defAnd`, `defIf`, `defIff`, `defTrue`,
+%  `defFalse`, `defEx`, `defAll` - Defined operators: tags for
+%  operators which are defined, not primitive. Default: none.  Note:
+%  Not all combinations of primitive/defined operators will result in
+%  complete definitions!
 
 \tagfalse{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
 
-% - Cases in proofs: tags for (sets of) operators for which cases are
-%   proved; if the corresponding tag is off then the case is added as
-%   a problem. Default: prove all cases. Note: propositional constants
-%   are part of induction base case and are always treated, if
-%   included.
+% - `probNot`, `probOr`, `probAnd`, `probIf`, `probIff`, `probEx`,
+%   `probAll` - Cases in proofs: tags for (sets of) operators for
+%   which cases are proved; if the corresponding tag is off then the
+%   case is added as a problem. Default: prove all cases. Note:
+%   propositional constants are part of induction base case and are
+%   always treated, if included.
 
 \tagfalse{probNot,probOr,probAnd,probIf,probIff,probEx,probAll}
 
-% - Limit clause in inductive definitions: do you want inductive
-% definitions to have a "Nothing else is a ..." clause?
+% - `limitclause` - Limit clause in inductive definitions: do you want
+% inductive definitions to have a "Nothing else is a ..." clause?
 
 \tagtrue{limitClause}
 
-% tagTrue - a true tag respectively.
+% - `tagTrue` - a true tag respectively.
 
 \tagtrue{tagTrue}
 
-% TMs - Turing machines have been discussed
+% - `TMs` - Turing machines have been discussed
 
 \tagtrue{TMs}
 
-% lambda - Lambda calculus has been discussed
+% - `lambda` - Lambda calculus has been discussed
 
 \tagtrue{lambda}
