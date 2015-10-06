@@ -28,35 +28,28 @@ An \emph{inference} is an expression of the form
 \BinaryInfC{$S$}
 \DisplayProof
 \]
-where $S, S_1$, and $S_2$ are !!{formula}s. $S_1$ and $S_2$ are called the
-\emph{upper !!{formula}s} and $S$ the \emph{lower !!{formula}s} of the
-inference.
-
-Inferences represent the idea that whenever the upper !!{formula} (or 
-!!{formula}s) is (are) asserted, we may logically infer the lower !!{formula}s.
+where $S, S_1$, and $S_2$ are !!{formula}s. $S_1$ and $S_2$ are called
+the \emph{upper !!{formula}s} or \emph{premises} and $S$ the
+\emph{lower !!{formula}s} or \emph{conclusion} of the inference.
 \end{defn}
 
 The rules for natural deduction are divided into two main types:
- \emph{propositional} rules (quantifier-free) and \emph{quantifier} rules.
+\emph{propositional} rules (quantifier-free) and \emph{quantifier}
+rules.  The rules come in pairs, an introduction and an elimination
+rule for each !!{operator}. The designations ``Intro'' and ``Elim''
+indicate whether the !!{operator} has been introduced in the
+conclusion or removed from a premise of the rule.  Some of the rules
+allow an assumption of a certain type to be discharged. This is
+indicated by putting the assumption formula in square brackets:
+$[!A]$. To indicate which assumtpion is discharged by which inference,
+we also assign labels to both the assumption and the inference.
 
-\paragraph{Inference rules:}
-
-The designations ``Intro'' and ``Elim''
-indicate whether the logical symbol has been introduced to the
-conclusion or removed from the premise of the rule.
-
-\emph{Propositional Rules:}
+\subsection{Propositional Rules}
 
 \[
 \AxiomC{[$!A$]$^n$}
 \noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$\lfalse$}
+\DeduceC{$\lfalse$}
 \RightLabel{$\lnot$ Intro$_n$}
 \UnaryInfC{$\lnot !A$}
 \DisplayProof
@@ -111,23 +104,9 @@ conclusion or removed from the premise of the rule.
 \quad
 \AxiomC{$!A \lor !B$}
 \AxiomC{[$!A$]$^n$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!C$}
+\DeduceC{$!C$}
 \AxiomC{[$!B$]$^n$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!C$}
+\DeduceC{$!C$}
 \RightLabel{$\lor$ Elim$_n$}
 \TrinaryInfC{$!C$}
 \DisplayProof
@@ -135,14 +114,7 @@ conclusion or removed from the premise of the rule.
 
 \[
 \AxiomC{[$!A$]$^n$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!B$}
+\DeduceC{$!B$}
 \RightLabel{$\lif$ Intro$_n$}
 \UnaryInfC{$!A \lif !B$}
 \DisplayProof
@@ -154,7 +126,7 @@ conclusion or removed from the premise of the rule.
 \DisplayProof
 \]
 
-\emph{Quantifier Rules:}
+\subsection{Quantifier Rules}
 
 \[
 \AxiomC{$\Atom{!A}{a}$}
@@ -167,10 +139,9 @@ conclusion or removed from the premise of the rule.
 \UnaryInfC{$\Atom{!A}{t}$}
 \DisplayProof
 \]
-
 where $t$ is a ground term, and $a$ is a constant which does not occur
 in $!A$, or in any assumption on which $!A$ depends in the $\lforall$ 
-intro rule. We call $a$ the \emph{eigenvariable} of the $\forall$ intro
+intro rule. We call $a$ the \emph{eigenvariable} of the $\forall$Intro
  inference.
 
 \[
@@ -181,15 +152,8 @@ intro rule. We call $a$ the \emph{eigenvariable} of the $\forall$ intro
 \quad
 \AxiomC{$\lexists[x][\Atom{!A}{x}]$}
 \AxiomC{[$\Atom{!A}{a}$]$^n$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!C$}
-\RightLabel{$\lexists$ Elim$_n$}
+\DeduceC{$!C$}
+\RightLabel{$\lexists$Elim$_n$}
 \BinaryInfC{$!C$}
 \DisplayProof
 \]
@@ -206,7 +170,7 @@ the $\lforall$ intro or $\lexists$ elim inference is called the
 We use the term ``eigenvariable'' even though $a$ in the above rules
 is a constant. This has historical reasons.
 
-In $\lexists$ intro and $\lforall$ elim there are no restrictions, and
+In $\lexists$ Intro and $\lforall$ Elim there are no restrictions, and
 the term~$t$ can be anything, so we do not have to worry about any
 conditions. However, because the $t$ may appear elsewhere in the
 sequent, the values of~$t$ for which the !!{formula} is satisfied are
@@ -219,31 +183,31 @@ independent of~$a$.
 
 \begin{explain}
 Natural deduction systems are meant to closely parallel the informal
-reasoning used in mathematical proof (hence it is somewhat 
-``natural''). Natural deduction proofs begin with assumptions, which 
-we place in square brackets with a numerical label. Inference rules are then
-applied. Assumptions are ``discharged'' by the $\lnot$Intro, $\lif$ 
-Intro, $\lor$ Elim and $\exists$ Elim inference rules, and the 
-label of the discharged assumption is placed beside the rule label for
-clarity.
+reasoning used in mathematical proof (hence it is somewhat
+``natural''). Natural deduction proofs begin with assumptions.
+Inference rules are then applied. Assumptions are ``discharged'' by
+the $\lnot$ Intro, $\lif$ Intro, $\lor$ Elim and $\exists$ Elim
+inference rules, and the label of the discharged assumption is placed
+beside the rule label for clarity.
 \end{explain}
 
 \begin{defn}[Initial !!^{formula}]
-An \emph{initial !!{formula}} is any assumption, written [$!A$] that
-is located in the topmost position of any branch.
+An \emph{initial !!{formula}} or \emph{assumption} is any !!{formula}
+in the topmost position of any branch.
 \end{defn}
 
 \begin{defn}[!!^{derivation}]
-A \emph{!!{derivation}} of !!a{formula} $S$ is a tree of !!{formula}s
-satisfying the following conditions:
+A \emph{!!{derivation}} of !!a{formula} $!A$ from assumptions $\Gamma$
+is a tree of !!{formula}s satisfying the following conditions:
 \begin{enumerate}
-\item The topmost !!{formula}s of the tree are initial !!{formula}s.
-\item Every !!{formula} in the tree (except $S$) is an upper !!{formula} of an
+\item The topmost !!{formula}s of the tree are either in $\Gamma$ or
+  are discharged by an inference in the tree.
+\item Every !!{formula} in the tree is an upper !!{formula} of an
   inference whose lower !!{formula} stands directly below that !!{formula} in
   the tree.
 \end{enumerate}
-We then say that $S$ is the \emph{end-!!{formula}} of the !!{derivation} and
-that $S$ is \emph{!!{derivable}}.
+We then say that $!A$ is the \emph{end-!!{formula}} of the
+!!{derivation} and that $!A$ is \emph{!!{derivable}} from~$\Gamma$.
 \end{defn}
 
 \begin{defn}[Theorem]

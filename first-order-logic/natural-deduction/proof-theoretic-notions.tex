@@ -19,19 +19,18 @@ an important discovery, due to G\"odel, that these notions coincide.
 That they do is the content of the \emph{completeness theorem}.
 \end{explain}
 
-\begin{defn}[Theorems]
-A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation}
- of the !!{formula} $!A$ from the null set.  We write
-$\Proves !A$ if $!A$ is a theorem and $\Proves/
-!A$ if it is not.
-\end{defn}
-
 \begin{defn}[!!^{derivability}]
 A !!{formula} $!A$ is \emph{!!{derivable} from} a set of
 !!{formula}s~$\Gamma$, $\Gamma \Proves !A$, if there is a
-finite subset~$\Gamma_0 \subseteq \Gamma$ such that
-$!A$ can be derived from $\Gamma_0$.  If $!A$ is not !!{derivable} 
-from $\Gamma$ we write $\Gamma \Proves/ !A$.
+!!{derivation} with end-!!{formula}~$!A$ and in which every assumption
+is either discharged or is in~$\Gamma$. If $!A$ is not
+!!{derivable} from $\Gamma$ we write $\Gamma \Proves/ !A$.
+\end{defn}
+
+\begin{defn}[Theorems]
+A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation} of
+$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a theorem
+and $\Proves/ !A$ if it is not.
 \end{defn}
 
 \begin{defn}[Consistency]
@@ -74,7 +73,11 @@ If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
 \end{prop}
 
 \begin{proof}
-Follows immediately from the definion of~$\Proves$.
+Any derivation of $!A$ from $\Gamma$ can only contain finitely many
+undischarged assumtions.  If all these undischarged assumptions are
+in~$\Gamma$, then the set of them is a finite subset of~$\Gamma$.  The
+other direction is trivial, since a derivation from a subset of
+$\Gamma$ is also a derivation from~$\Gamma$.
 \end{proof}
 
 \end{document}

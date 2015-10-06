@@ -20,9 +20,8 @@ If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
 \end{prop}
 
 \begin{proof}
-Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
-of~$\Delta$, so !!a{derivation} of $!A$ from $\Gamma$ also shows
-$\Delta \Proves !A$.
+Any !!{derivation} of $!A$ from $\Gamma$ is also a !!{derivation} of
+$!A$ from~$\Delta$.
 \end{proof}
 
 \begin{prop}\ollabel{prop:provability}
@@ -67,98 +66,57 @@ $\Delta \Proves !A$.
 
 \begin{proof}
 \begin{enumerate}
-\item Let the !!{derivation} of $!A$ from $\Gamma_0$ be
-  $\Pi_0$ and the !!{derivation} of $\lfalse$ from $\Gamma_1 \cup \lnot !A$
+\item Let the !!{derivation} of $!A$ from $\Gamma$ be
+  $\Pi_0$ and the !!{derivation} of $\lfalse$ from $\Gamma \cup \{!A\}$
   be $\Pi_1$. We can then !!{derive}:
-
 \[
-\AxiomC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!A$}
+\DeduceC{$!A$}
 \AxiomC{[$!A$]$^1$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
 \RightLabel{$\Pi_1$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$\lfalse$}
+\DeduceC{$\lfalse$}
 \RightLabel{$\lnot$ Intro$_1$}
 \UnaryInfC{$\lnot !A$}
 \RightLabel{$\lnot$ Elim}
 \BinaryInfC{$\lfalse$}
 \DisplayProof
 \]
-Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
-$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
-\Proves \lfalse$.
+In the new !!{derivation}, the assumption $!A$ is discharged, so it is
+!!a{derivation} from $\Gamma$.
 
-\item Suppose that $\Gamma \cup \{!A\} \Proves
-  \lfalse$. Then there is a finite set $\Gamma_0 \subseteq \Gamma$
-  such that there is a derivation of $\lfalse$ from  $\Gamma_0 \cup \{!A\}$.  Let
-  $\Pi_0$ be the !!{derivation} of $\lfalse$, and consider
-
+\item Suppose that $\Gamma \cup \{!A\} \Proves \lfalse$. Then there is a
+  derivation of $\lfalse$ from $\Gamma \cup \{!A\}$.  Let $\Pi_0$ be
+  the !!{derivation} of $\lfalse$, and consider
 \[
-\AxiomC{[$!A$]$^1$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{$[!A]^1$}
 \RightLabel{$\Pi_1$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$\lfalse$}
+\DeduceC{$\lfalse$}
 \RightLabel{$\lnot$ Intro$_1$}
 \UnaryInfC{$\lnot !A$}
 \DisplayProof
 \]
 
-\item There are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1
-  \subseteq \Gamma$ and !!{derivation}s $\Pi_0$ and $\Pi_1$ of
-  $\lfalse$ from $\Gamma_0, !A$ and $\lfalse$ from $\Gamma_1, \lnot !A$,
-  respectively. We can then !!{derive}
-
+\item There are !!{derivation}s $\Pi_0$ and $\Pi_1$ of $\lfalse$ from
+  $\Gamma \cup,\{ !A \}$ and $\lfalse$ from $\Gamma \cup \{ \lnot !A
+  \}$, respectively. We can then !!{derive}
 \[
-\AxiomC{[$!A$]$^1$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{$[!A]^1$}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$\lfalse$}
+\DeduceC{$\lfalse$}
 \RightLabel{$\lnot$ Intro$_1$}
 \UnaryInfC{$\lnot !A$}
-\AxiomC{[$\lnot !A$]$^2$}
-\noLine
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{$[\lnot !A]^2$}
 \RightLabel{$\Pi_1$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$\lfalse$}
+\DeduceC{$\lfalse$}
 \RightLabel{$\lnot$ Intro$_2$}
 \UnaryInfC{$\lnot \lnot !A$}
 \RightLabel{$\lnot$ Elim}
 \BinaryInfC{$\lfalse$}
 \DisplayProof
 \]
-
-Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
-$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
-\Proves \lfalse$.
+Since the assumptions $!A$ and $\lnot !A$ are discharged, this is a
+derivation from~$\Gamma$ alone. Hence $\Gamma \Proves \lfalse$.
 
 % prop:provability-lor-left
 \tagitem{defOr}{}{
@@ -166,133 +124,82 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
 
 % prop:provability-lor-right
 \tagitem{defOr}{}{
-\iftag{probOr}{Exercise.}{
-There is a !!{derivation} $\Pi_0$ and a finite set $\Gamma_0
-\subseteq \Gamma$ such that we can !!{derive}
-
+\iftag{probOr}{Exercise.}{%
+Suppose $\Gamma \Proves !A$. There is a !!{derivation} $\Pi_0$ of $!$
+from~$\Gamma$. We can !!{derive}
 \[
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!A$}
+\DeduceC{$!A$}
 \RightLabel{$\lor$ Intro}
 \UnaryInfC{$!A \lor !B$}
 \DisplayProof
 \]
-
 Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
 \Proves !B$ is similar.}}
 
 % prop:provability-land-left
 \tagitem{defAnd}{}{
 \iftag{probAnd}{Exercise}{
-If $\Gamma \Proves !A \land !B$, there is a finite set
-$\Gamma_0 \subseteq \Gamma$ and a !!{derivation} $\Pi_0$ of
+If $\Gamma \Proves !A \land !B$, there is !!a{derivation} $\Pi$ of
 $!A \land !B$ from $\Gamma$. Consider
 \[
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!A \land !B$}
+\DeduceC{$!A \land !B$}
 \RightLabel{$\land$ Elim}
 \UnaryInfC{$!A$}
 \DisplayProof
 \]
-
 Hence, $\Gamma \Proves !A$.  A similar !!{derivation} 
 shows that $\Gamma \Proves !B$.}}
 
 % prop:provability-land-right
-\tagitem{defAnd}{}{\iftag{probAnd}{Exercise.}{If $\Gamma
-    \Proves !A$ as well as $\Gamma \Proves !B$,
-    there are finite sets $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$ and
-    !!a{derivation} $\Pi_0$ of $!A$ and
-    $\Pi_1$ of $!B$ from $\Gamma_0$ and $\Gamma_1$, respectively.
-     Consider
-
+\tagitem{defAnd}{}{\iftag{probAnd}{Exercise.}{If $\Gamma \Proves !A$
+    as well as $\Gamma \Proves !B$, there are !!{derivation}s $\Pi_0$
+    of $!A$ and $\Pi_1$ of $!B$ from $\Gamma$.  Consider
 \[
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!A$}
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\DeduceC{$!A$}
+\AxiomC{}
 \RightLabel{$\Pi_1$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!B$}
+\DeduceC{$!B$}
 \RightLabel{$\land$ Intro}
 \BinaryInfC{$!A \land !B$}
 \DisplayProof
 \]
-
-Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, we have $\Gamma
-\Proves !A \land !B$.}}
+The undischarged assumptions of the new !!{derivation} are all
+in~$\Gamma$, so we have $\Gamma \Proves !A \land !B$.}}
 
 % prop:provability-mp
-\tagitem{defIf}{}{
-\iftag{probIf}{Exercise.}{
-Suppose that $\Gamma \Proves !A$ and $\Gamma
-\Proves !A \lif !B$.  There are finite sets $\Gamma_0$,
-$\Gamma_1 \subseteq \Gamma$ such that there are !!{derivation}s
-$\Pi_0$ of $!A$ from $\Gamma_0$ and $\Pi_1$ of $!A
-\lif !B$ from $\Gamma_1$. Consider:
-
+\tagitem{defIf}{}{\iftag{probIf}{Exercise.}{Suppose that $\Gamma
+    \Proves !A$ and $\Gamma \Proves !A \lif !B$.  There are
+    !!{derivation}s $\Pi_0$ of $!A$ from $\Gamma$ and $\Pi_1$ of $!A
+    \lif !B$ from $\Gamma$. Consider:
 \[
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!A$}
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\DeduceC{$!A$}
+\AxiomC{}
 \RightLabel{$\Pi_1$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!A \lif !B$}
+\DeduceC{$!A \lif !B$}
 \RightLabel{$\lif$ Elim}
 \BinaryInfC{$!B$}
 \DisplayProof
 \]
-Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, this
-means that $\Gamma \Proves !B$.}}
+This means that $\Gamma \Proves !B$.}}
 
 % prop:provability-lif
 \tagitem{defIf}{}{\iftag{probIf}{Exercise.}{First suppose $\Gamma
-    \Proves \lnot !A$.  Then from some finite $\Gamma_0
-    \subseteq \Gamma$ there is a !!{derivation} of $\lnot !A$. 
-    The following !!{derivation} shows that $\Gamma
+    \Proves \lnot !A$.  Then there is a !!{derivation} of $\lnot !A$
+    from~$\gamma$.  The following !!{derivation} shows that $\Gamma
     \Proves !A \lif !B$:
-    
 \[
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$\lnot !A$}
-\AxiomC{[$!A$]$^1$}
+\DeduceC{$\lnot !A$}
+\AxiomC{$[!A]^1$}
 \RightLabel{$\lnot$ Elim}
 \UnaryInfC{$\lfalse$}
 \RightLabel{$\lfalse$ Elim}
@@ -302,21 +209,14 @@ means that $\Gamma \Proves !B$.}}
 \DisplayProof
 \]
 
-Now suppose $\Gamma \Proves !B$.  Then from some finite
-$\Gamma_0 \subseteq \Gamma$ there is a !!{derivation} of
-$!B$. The following !!{derivation} shows that $\Gamma
+Now suppose $\Gamma \Proves !B$.  Then there is a !!{derivation} of
+$!B$ from~$\Gamma$. The following !!{derivation} shows that $\Gamma
 \Proves !A \lif !B$:
-
 \[
-\AxiomC{.}
-\noLine
-\UnaryInfC{.}
-\noLine
+\AxiomC{}
 \RightLabel{$\Pi_0$}
-\UnaryInfC{.}
-\noLine
-\UnaryInfC{$!B$}
-\AxiomC{[$!A$]$^{(1)}$}
+\DeduceC{$!B$}
+\AxiomC{$[!A]^1$}
 \RightLabel{$\land$ Intro}
 \BinaryInfC{$!A \land !B$}
 \RightLabel{$\land$ Elim}
