@@ -21,24 +21,36 @@ like to know for instance, that
   consequence of them;
 \item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
 \end{enumerate}
-These are important properties of a !!{derivation} system.  If any of them do
-not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
-Consequently, establishing the soundness of a !!{derivation} system is of the
+These are important properties of a !!{derivation} system. If any of them
+do
+not hold, the !!{derivation} system is deficient---it would !!{derive} too
+much.
+Consequently, establishing the soundness of a !!{derivation} system is of
+the
 utmost importance.
 \end{explain}
 
 \begin{thm}[Soundness]
-\ollabel{ntd-soundness} If $!A$ is !!{derivable} from $\Gamma$,
- then if $\Sat{M}{\Gamma}$, then $\Sat{M}{!A}$.
+\ollabel{ntd-soundness} If $!A$ is !!{derivable} from the open assumptions
+$!C_1, ... !C_n$, then if $\Sat{M}{\{!C_1, ... !C_n\}}$, then
+$\Sat{M}{!A}$.
 \end{thm}
 
 \begin{proof}
+\emph{Inductive Hypothesis}: The premises of an inference rule follow
+fromthe open assumptions of the subproofs ending in those premises.
+ 
+\emph{Inductive Step}: Show that $!A$ follows from the open assumptions of
+the entire
+proof.
+
 Let $\Pi$ be a !!{derivation} of $!A$. We proceed by
 induction on the number of inferences in~$\Pi$.
 
 If the number of inferences is~0, then $\Pi$ consists only of an
-initial !!{formula}. Every initial !!{formula} $!A$ is in $\Gamma$,
-so if $\Gamma$ is satisfied by $\Struct M$, then $\Sat{M}{!A}$.
+initial !!{formula}. Every initial !!{formula} $!A$ is an open assumption,
+and as such, any !!{structure} $\Struct{M}$ that satisfies all of the
+open assumptions of the proof satisfies $!A$.
 
 If the number of inferences is greater than~0, we distinguish cases
 according to the type of the lowermost inference. By induction
@@ -48,47 +60,65 @@ valid.
 First, we consider the possible inferences with only one premise.
 
 \begin{enumerate}
-\item The last inference is $\lnot$~Intro: We assume that the proof
-of $\lfalse$ from $!A$ is sound. So, if $\Sat{M}{!A}$, then $\Sat{M}
-{\lfalse}$. Since $\lfalse$ can never be satisfied, $\Sat/{M}{!A}$.
-So, $\Sat{M}{\lnot !A}$.
+\item Suppose that the last inference is $\lnot$~Intro: 
+By inductive hypothesis, $\lfalse$ follows from the open assumptions
+$!C_1,...,!C_n$ and $!A$. Consider a !!{structure}~$\Struct M$. We need to
+show that, if $\Sat{M}{\{!C_1,...,!C_n\}}$,
+then $\Sat{M}{\lnot !A}$. Suppose for reductio that
+$\Sat{M}{\{!C_1,...,!C_n\}}$,
+and $\Sat/{M}{\lnot !A}$. But this would mean that $\Sat{M}{!C_1,...,!C_n,
+!A}$. But this is contrary to our inductive hypothesis. So, $\Sat{M}{\lnot !A}$.
   
 \item The last inference is $\lnot$~Elim: Exercise.
 
-\item The last inference is $\land$~Elim: There are two variants: $!A$ or $!B$
-  may be inferred from the premise $!A \land !B$.  In the first case,
-  consider a !!{structure}~$\Struct M$. Let $\Sat{M}{!A \land !B}$. If this
-  is the case, then $\Sat{M}{!A}$. The case where $!B$ is inferred from $!A 
-  \land !B$ is handled the same, changing $!A$ to $!B$.
+\item The last inference is $\land$~Elim: There are two variants: $!A$ or
+$!B$ may be inferred from the premise $!A \land !B$. Consider the first
+case.
+By inductive hypothesis, $!A \land !B$ follows from the open assumptions 
+$!C_1,...,!C_n$. Consider a !!{structure}~$\Struct M$. We need to show
+that, if $\Sat{M}{\{!C_1,...,!C_n\}}$,
+then $\Sat{M}{!A}$. By our inductive hypothesis, we know that
+$\Sat{M}{!A\land !B}$. So, $\Sat{M}{!A}$.
+  The case where $!B$ is inferred from $!A \land !B$ is handled similarly.
   
-\item The last inference is $\lor$~Intro: There are two variants: $!A
-  \lor !B$ may be inferred from $!A$ or $!B$. In the first case,
-  Consider a !!{structure}~$\Struct M$. We assume that $\Sat{M}
-  {!A}$. But by definition, if $\Sat{M}{!A}$, then $\Sat{M}{!A \lor !B}$.
-  The case where $!A \lor !B$ is inferred from $!B$ is
-  handled the same, changing $!A$ to $!B$.
+\item The last inference is $\lor$~Intro: There are two variants: $!A \lor
+!B$ may be inferred from the premise $!A$ or the premise $!B$. Consider
+the first case. By inductive hypothesis, $!A$ follows from the open 
+assumptions $!C_1,...,!C_n$.
+Consider a !!{structure}~$\Struct M$. We need to show that, if
+$\Sat{M}{\{!C_1,...,!C_n\}}$,
+then $\Sat{M}{!A \lor !B}$. It must be the case that $\Sat{M}{!A}$, by
+inductive hypothesis.So it must be the case that $\Sat{M}{!A \lor !B}$.
+  The case where $!A \lor !B$ is inferred from $!B$ is handled similarly.
   
-\item The last inference is $\lif$~Intro: We assume that the derivation
-  of $!B$ from $!A$ is sound. So, if $\Sat{M}{!A}$ then $\Sat{M}{!B}$.
-  There are then two cases. (1) $\Sat{M}{!A}$. If $\Sat{M}{!A}$, then 
-  $\Sat{M}{!B}$, by assumption. So, $\Sat{M}{!A \lif !B}$. (2) $\Sat/{M}
-  {!A}$. Then, $\Sat{M}{!A \lif !B}$. So in either case, $\Sat{M}{!A \lif !B}$
+\item The last inference is $\lif$~Intro: $!A \lif !B$ is inferred from a
+subproof with assumption $!A$ and conclusion $!B$. By inductive
+hypothesis, $!B$ follows from the open assumptions $!C_1,...,!C_n$ 
+and $!A$. Consider a !!{structure}~$\Struct M$.We need to show 
+that, if $\Sat{M}{\{!C_1,...,!C_n\}}$, then $\Sat{M}{!A \lif !B}$.
+For reductio, suppose that $!A \lif !B$ does not follow from
+$!C_1,...,!C_n$. This means that some !!{structure}
+$\Struct M$, $\Sat{M}{\{!C_1,...,!C_n\}}$, and $\Sat/{M}{!A \lif !B}$. So,
+$\Sat{M}{!A}$ and $\Sat/{M}{!B}$. But
+by hypothesis, $!B$ is a consequence of $!C_1,...,!C_n$ and $!A$. So,
+$\Sat{M}{!A \lif !B}$.
   
-\item The last inference is $\forall$~Intro: We assume that the derivation of
-$!A(a)$ from $\Gamma$ is sound, and therefore $\Sat{M}{!A(a)}$.
-
-  Let $\Struct{M'}$ be exactly like $\Struct M$ except that
-  $\Assign{a}{M} \neq \Assign{a}{M'}$, $\Struct{M'}$. We
-  must have $\Sat{M'}{!A(a)}$.
+\item The last inference is $\forall$~Intro: .
+ 
+$!A(a)$ is a consequence of the open assumptions $!C_1,...,!C_n$.
+Consider some structure, $\Struct{M}$, such that $\Sat{M}{!C_1,...!C_n}$.
+By inductive hypothesis, $\Sat{M}{!A(a)}$.
+ Let $\Struct{M'}$ be exactly like $\Struct M$ except
+that$\Assign{a}{M} \neq \Assign{a}{M'}$. We must have $\Sat{M'}{!A(a)}$.
 
   We now show that $\Sat{M}{\lforall[x][!A(x)]}$.  To do this, we have
   to show that for every variable assignment~$s$,
   $\Sat{M}{\lforall[x][!A(x)]}[s]$.  This in turn means that for every
   $x$-variant $s'$ of $s$, we must have $\Sat{M}{!A(x)}[s']$.  So
   consider any variable assignment~$s$ and let $s'$ be an $x$-variant
-  of~$s$.  Since $\Gamma$ consists entirely of sentences,
+  of~$s$.  Since $!C_1,...,!C_n$ consists entirely of sentences,
   $\Sat{M}{!E}[s]$ iff $\Sat{M}{!E}[s']$ iff $\Sat{M}{!E}$ for all
-  $!E \in \Gamma$.  Let $\Struct M'$ be like $\Struct M$
+  $!E \in \{!C_1,...,!C_n\}$.  Let $\Struct M'$ be like $\Struct M$
   except that $\Assign{a}{M'} = s'(x)$.  Then $\Sat{M}{!A(x)}[s']$ iff
   $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$).  Since we've
   already established that $\Sat{M'}{!A(a)}$ for all $\Struct M'$
@@ -109,16 +139,27 @@ Now let's consider the possible inferences with several premises:
 $\lor$~Elim, $\land$~Intro, and $\lif$~Elim.
 \begin{enumerate}
 
-\item The last inference is $\land$~Intro.  The premises are $!A$
-  and $!B$. Consider a !!{structure}~$\Struct M$. By induction 
-  hypothesis, $\Sat{M}{!A}$ and $\Sat{M}{!B}$. So, $\Sat{M}
-  {!A \land !B}$.
+\item The last inference is $\land$~Intro. $!A \land !B$ is inferred from
+the premises $!A$
+and $!B$. By induction hypothesis, $!A$ follows from the open assumptions
+$!C_1,...,!C_n$ and $!B$ follows from the open assumptions
+$!D_1,...,!D_n$.Consider a !!{structure}~$\Struct M$. We need to show that, 
+if $\Sat{M}{\{!C_1,...,!C_n,!D_1,...,!D_n\}}$, then $\Sat{M}{!A \land !B}$.
+It must be the case that $\Sat{M}{!A}$, and $\Sat{M}{!B}$, by inductive
+hypothesis.
+So by definition, it must be the case that $\Sat{M}{!A \land !B}$.
   
 \item The last inference is $\lor$~Elim: Exercise.
 
-\item The last inference is $\lif$~Elim. Consider a !!{structure}
-~$\Struct M$. By hypothesis, $\Sat{M}{!A \lif !B}$ and $\Sat{M}{!A}$. 
- So, $\Sat{M}{!B}$, by definition.
+\item The last inference is $\lif$~Elim. $!B$ is inferred from the
+premises $!A \lif !B$ and $!A$. By induction hypothesis, $!A \lif !B$ 
+follows from the open assumptions $!C_1,...,!C_n$
+and $!A$ follows from the open assumptions $!D_1,...,!D_n$. Consider a
+!!{structure}~$\Struct M$. We need to show that, if
+$\Sat{M}{\{!C_1,...,!C_n,!D_1,...,!D_n\}}$, then $\Sat{M}{!B}$.
+It must be the case that $\Sat{M}{!A \lif !B}$, and $\Sat{M}{!A}$, by
+inductive hypothesis.
+So by definition, it must be the case that $\Sat{M}{!B}$.
     
 \item The last inference is $\lexists$~Elim: Exercise.
 \end{enumerate}
