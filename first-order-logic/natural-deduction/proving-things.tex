@@ -23,14 +23,14 @@ We begin by writing the desired end-!!{formula} at the bottom of the derivation.
 Next, we need to figure out what kind of inference could result in
 !!a{formula} of this form. The !!{main operator} of the
 end-!!{formula} is $\lif$, so we'll try to arrive at the
-end-!!{formula} using the $\lif$ Intro rule. It is best to write down
+end-!!{formula} using the \Intro{\lif} rule. It is best to write down
 the assumptions involved and label the inference rules as you
 progress, so it is easy to see whether all assumptions have been
-discharged at the end of the proof.
+!!{discharged} at the end of the proof.
 \[
-\AxiomC{$[!A \land !B]^1$}
+\AxiomC{$\Discharge{!A \land !B}{1}$}
 \DeduceC{$!A$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(!A\land !B) \lif !A$}
 \DisplayProof
 \]
@@ -39,10 +39,10 @@ We now need to fill in the steps from the assumption $!A \land !B$ to $!A$.
 Since we only have one connective to deal with, $\land$, we must
 use the $\land$ elim rule. This gives us the following proof:
 \[
-\AxiomC{$[!A \land !B]^1$}
-\RightLabel{$\land$ Elim}
+\AxiomC{$\Discharge{!A \land !B}{1}$}
+\RightLabel{\Elim{\land}}
 \UnaryInfC{$!A$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(!A\land !B) \lif !A$}
 \DisplayProof
 \]
@@ -62,59 +62,59 @@ derivation.
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
-To find a logical rule that could give us this end-!!{formula}, we look at
-the logical connectives in the end-!!{formula}: $\lnot$, $\lor$, and
-$\lif$. We only care at the moment about  the first occurence
-of $\lif$ because it is the !!{main operator} of the !!{sentence}
- in the end-sequent, while $\lnot$, $\lor$ and the second occurence of 
- $\lif$ are inside the scope of another connective, so we will
-take care of those later. We therefore start with the $\lif$ Intro rule. 
-A correct application must look as follows:
+To find a logical rule that could give us this end-!!{formula}, we
+look at the logical connectives in the end-!!{formula}: $\lnot$,
+$\lor$, and $\lif$. We only care at the moment about the first
+occurence of $\lif$ because it is the !!{main operator} of the
+!!{sentence} in the end-sequent, while $\lnot$, $\lor$ and the second
+occurence of $\lif$ are inside the scope of another connective, so we
+will take care of those later. We therefore start with the
+\Intro{\lif} rule.  A correct application must look as follows:
 \[
-\AxiomC{$[\lnot !A \lor !B]^1$}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \DeduceC{$!A \lif !B$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
 
 This leaves us with two possibilities to continue. Either we can
-continue working from the bottom up and look for another application
-of the $\lif$ Intro rule, or we can work from the top down and apply a
-$\lor$ Elim rule. Let us apply the latter. We will use the assumption
-$\lnot !A \lor B$ as the leftmost premise of $\lor$ Elim.  For a valid
-application of $\lor$ Elim, the other two premises must be identical
+keep working from the bottom up and look for another application
+of the \Intro{\lif} rule, or we can work from the top down and apply a
+\Elim{\lor} rule. Let us apply the latter. We will use the assumption
+$\lnot !A \lor !B$ as the leftmost premise of \Elim{\lor}.  For a valid
+application of \Elim{\lor}, the other two premises must be identical
 to the conclusion $!A \lif !B$, but each may be derived in turn from
 another assumption, namely the two disjuncts of $\lnot !A \lor !B$.
 So our !!{derivation} will look like this:
 \[
-\AxiomC{$[\lnot !A \lor !B]^1$}
-\AxiomC{$[\lnot !A]^2$}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
 \DeduceC{$!A \lif !B$}
-\AxiomC{$[!B]^2$}
+\AxiomC{$\Discharge{!B}{2}$}
 \DeduceC{$!A \lif !B$}
-\RightLabel{$\lor$ Elim$_2$}
+\DischargeRule{\Elim{\lor}}{2}
 \TrinaryInfC{$!A \lif !B$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
 
 In each of the two branches on the right, we want to !!{derive} $!A
-\lif !B$, which is best done using $\lif$ Intro.
+\lif !B$, which is best done using \Intro{\lif}.
 \[
-\AxiomC{$[\lnot !A \lor !B]^1$}
-\AxiomC{$[\lnot !A]^2, [!A]^3$}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}, \Discharge{!A}{3}$}
 \DeduceC{$!B$}
-\RightLabel{$\lif$ Intro$_3$}
+\DischargeRule{\Intro{\lif}}{3}
 \UnaryInfC{$!A \lif !B$}
-\AxiomC{$[!B]^2, [!A]^4$}
+\AxiomC{$\Discharge{!B}{2}, \Discharge{!A}{4}$}
 \DeduceC{$!B$}
-\RightLabel{$\lif$ Intro$_4$}
+\DischargeRule{\Intro{\lif}}{4}
 \UnaryInfC{$!A \lif !B$}
-\RightLabel{$\lor$ Elim$_2$}
+\DischargeRule{\Elim{\lor}}{2}
 \TrinaryInfC{$!A \lif !B$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
@@ -122,34 +122,34 @@ In each of the two branches on the right, we want to !!{derive} $!A
 For the two missing parts of the !!{derivation}, we need
 !!{derivation}s of $!B$ from $\lnot !A$ and $!A$ in the middle, and
 from $!A$ and $!B$ on the left.  Let's take the former first. $\lnot
-!A$ and $!A$ are the two premises of $\lfalse$ Intro:
+!A$ and $!A$ are the two premises of \Intro{\lfalse}:
 \[
-\AxiomC{$[\lnot !A]^2$}
-\AxiomC{$[!A]^3$}
-\RightLabel{$\lfalse$ Intro}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Intro{\lfalse}}
 \BinaryInfC{$\lfalse$}
 \DeduceC{$!B$}
 \DisplayProof
 \]
-By using $\lfalse$ Elim, we can obtain $!B$ as a conclusion and
+By using \Elim{\lfalse}, we can obtain $!B$ as a conclusion and
 complete the branch.
 \[
-\AxiomC{$[\lnot !A \lor !B]^1$}
-\AxiomC{$[\lnot !A]^2$}
-\AxiomC{$[!A]^3$}
-\RightLabel{$\lfalse$ Intro}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Intro{\lfalse}}
 \BinaryInfC{$\lfalse$}
-\RightLabel{$\lfalse$ Elim}
+\RightLabel{\Elim{\lfalse}}
 \UnaryInfC{$!B$}
-\RightLabel{$\lif$ Intro$_3$}
+\DischargeRule{\Intro{\lif}}{3}
 \UnaryInfC{$!A \lif !B$}
-\AxiomC{$[!B]^2, [!A]^4$}
+\AxiomC{$\Discharge{!B}{2}, \Discharge{!A}{4}$}
 \DeduceC{$!B$}
-\RightLabel{$\lif$ Intro$_4$}
+\DischargeRule{\Intro{\lif}}{4}
 \UnaryInfC{$!A \lif !B$}
-\RightLabel{$\lor$ Elim$_2$}
+\DischargeRule{\Elim{\lor}}{2}
 \TrinaryInfC{$!A \lif !B$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
@@ -162,25 +162,25 @@ without using the other, that's ok.  And to !!{derive} $!B$ from $!B$
 is trivial: $!B$ by itself is such a !!{derivation}, and no inferences
 are needed.  So we can simply delete the assumtion $!A$.
 \[
-\AxiomC{$[\lnot !A \lor !B]^1$}
-\AxiomC{$[\lnot !A]^2$}
-\AxiomC{$[!A]^3$}
-\RightLabel{$\lfalse$ Intro}
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Intro{\lfalse}}
 \BinaryInfC{$\lfalse$}
-\RightLabel{$\lfalse$ Elim}
+\RightLabel{\Elim{\lfalse}}
 \UnaryInfC{$!B$}
-\RightLabel{$\lif$ Intro$_3$}
+\DischargeRule{\Intro{\lif}}{3}
 \UnaryInfC{$!A \lif !B$}
-\AxiomC{$[!B]^2$}
-\RightLabel{$\lif$ Intro}
+\AxiomC{$\Discharge{!B}{2}$}
+\RightLabel{\Intro{\lif}}
 \UnaryInfC{$!A \lif !B$}
-\RightLabel{$\lor$ Elim$_2$}
+\DischargeRule{\Elim{\lor}}{2}
 \TrinaryInfC{$!A \lif !B$}
-\RightLabel{$\lif$ Intro$_1$} 
+\DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
-Note that in the finished !!{derivation}, the rightmost $\lif$ Intro
+Note that in the finished !!{derivation}, the rightmost \Intro{\lif}
 inference does not actually discharge any assumptions.
 \end{ex}
 
@@ -200,66 +200,66 @@ Starting as usual, we write
 \DisplayProof
 \]
 We start by writing down what it would take to justify that last step
-using the $\lif$ Intro rule.
+using the \Intro{\lif} rule.
 \[
-\AxiomC{$[\lexists[x][\lnot !A(x)]]^1$}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
 \DeduceC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lif$ Intro}
+\RightLabel{\Intro{\lif}}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
 Since there is no obvious rule to apply to $\lnot \lforall[x][!A(x)]$,
 we will proceed by setting up the !!{derivation} so we can use the
-$\lexists$ Elim rule. Here we must pay attention to the eigenvariable
+\Elim{\lexists} rule. Here we must pay attention to the eigenvariable
 condition, and choose a constant that does not appear in
-$\lexists[x][\Atom{!A}{x}]$ or any assumptions that it depends on.
+$\lexists[x][!A(x)]$ or any assumptions that it depends on.
 (Since no !!{constant}s appear, however, any choice will do fine.)
 \[
-\AxiomC{$[\lexists[x][\lnot !A(x)]]^1$}
-\AxiomC{$[\lnot !A(a)]^2$}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
 \DeduceC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lexists$ Elim$_2$}
+\DischargeRule{\Elim{\lexists}}{2}
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lif$ Intro}
-\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
 In order to derive $\lnot \lforall[x][!A(x)]$, we will attempt to use
-the $\lnot$ Intro rule: this requires that we derive a contradiction,
+the \Intro{\lnot} rule: this requires that we derive a contradiction,
 possibly using $\lforall[x][!A(x)]$ as an additional assumption. Of
 coursem, this contradiction may involve the assumption $\lnot !A(a)$
-which will be discharged by the $\lif$ Intro inference. We can set it
+which will be discharged by the \Intro{\lif} inference. We can set it
 up as follows:
 \[
-\AxiomC{$[\lexists[x][\lnot !A(x)]]^1$}
-\AxiomC{$[\lnot !A(a)]^2, [\lforall[x][!A(x)]]^3$}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}, \Discharge{\lforall[x][!A(x)]}{3}$}
 \DeduceC{$\lfalse$}
-\RightLabel{$\lnot$ Intro$_3$}
+\DischargeRule{\Intro{\lnot}}{3}
 \UnaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lexists$ Elim$_2$}
+\DischargeRule{\Elim{\lexists}}{2}
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lif$ Intro}
+\RightLabel{\Intro{\lif}}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
 It looks like we are close to getting a contradiction. The easiest
-rule to apply is the $\lforall$ Elim, which has no eigenvariable
+rule to apply is the \Elim{\lforall}, which has no eigenvariable
 conditions. Since we can use any term we want to replace the
-universally qauntified~$x$, it makes the most sense to continue
+universally quantified~$x$, it makes the most sense to continue
 using~$a$ so we can reach a contradiction.
 \[
-\AxiomC{$[\lexists[x][\lnot !A(x)]^1$}
-\AxiomC{$[\lnot !A(a)]^2$}
-\AxiomC{$[\lforall[x][!A(x)]]^3$}
-\RightLabel{$\lforall$ Elim}
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{3}$}
+\RightLabel{\Elim{\lforall}}
 \UnaryInfC{$!A(a)$}
-\RightLabel{$\lfalse$ Intro}
+\RightLabel{\Intro{\lfalse}}
 \BinaryInfC{$\lfalse$}
-\RightLabel{$\lnot$ Intro$_3$}
+\DischargeRule{\Intro{\lnot}}{3}
 \UnaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lexists$ Elim$_2$}
+\DischargeRule{\Elim{\lexists}}{2}
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{$\lif$ Intro}
+\RightLabel{\Intro{\lif}}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
@@ -267,7 +267,7 @@ using~$a$ so we can reach a contradiction.
 It is important, especially when dealing with quantifiers, to double
 check at this point that the eigenvariable condition has not been
 violated. Since the only rule we applied that is subject to the
-eigenvariable condition was $\exists$ Elim, and the eigenvariable~$a$
+eigenvariable condition was \Elim{\exists}, and the eigenvariable~$a$
 does not occur in any assumptions it depends on, this is a
 correct derivation.
 \end{ex}

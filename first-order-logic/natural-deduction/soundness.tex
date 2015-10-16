@@ -21,187 +21,160 @@ like to know for instance, that
   consequence of them;
 \item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
 \end{enumerate}
-These are important properties of a !!{derivation} system. If any of them
-do
-not hold, the !!{derivation} system is deficient---it would !!{derive} too
-much.
-Consequently, establishing the soundness of a !!{derivation} system is of
-the
-utmost importance.
+These are important properties of a !!{derivation} system. If any of
+them do not hold, the !!{derivation} system is deficient---it would
+!!{derive} too much.  Consequently, establishing the soundness of a
+!!{derivation} system is of the utmost importance.
 \end{explain}
 
 \begin{thm}[Soundness]
-\ollabel{ntd-soundness} If $!A$ is !!{derivable} from the open assumptions
-$!C_1, ... !C_n$, then if $\Sat{M}{\{!C_1, ... !C_n\}}$, then
-$\Sat{M}{!A}$.
+\ollabel{thm:soundness}
+If $!A$ is !!{derivable} from the !!{undischarged} assumptions
+$\Gamma$, then $\Gamma \Entails !A$.
 \end{thm}
 
 \begin{proof}
 \emph{Inductive Hypothesis}: The premises of an inference rule follow
-fromthe open assumptions of the subproofs ending in those premises.
+from the !!{undischarged} assumptions of the subproofs ending in those premises.
  
-\emph{Inductive Step}: Show that $!A$ follows from the open assumptions of
-the entire
-proof.
+\emph{Inductive Step}: Show that $!A$ follows from the
+!!{undischarged} assumptions of the entire proof.
 
-Let $\Pi$ be a !!{derivation} of $!A$. We proceed by
-induction on the number of inferences in~$\Pi$.
+Let $\delta$ be a !!{derivation} of $!A$. We proceed by
+induction on the number of inferences in~$\delta$.
 
-If the number of inferences is~0, then $\Pi$ consists only of an
-initial !!{formula}. Every initial !!{formula} $!A$ is an open assumption,
-and as such, any !!{structure} $\Struct{M}$ that satisfies all of the
-open assumptions of the proof satisfies $!A$.
+If the number of inferences is~0, then $\delta$ consists only of an
+initial !!{formula}. Every initial !!{formula} $!A$ is an
+!!{undischarged} assumption, and as such, any !!{structure}
+$\Struct{M}$ that satisfies all of the !!{undischarged} assumptions of
+the proof also satisfies~$!A$.
 
 If the number of inferences is greater than~0, we distinguish cases
 according to the type of the lowermost inference. By induction
-hypothesis, we can assume that the premises of that inference are
-valid.
+hypothesis, we can assume that the premises of that inference follow
+from the !!{undischarged} assumptions of the sub-!!{derivation}s
+ending in those premises, respectively.
 
 First, we consider the possible inferences with only one premise.
 
 \begin{enumerate}
-\item Suppose that the last inference is $\lnot$~Intro: 
-By inductive hypothesis, $\lfalse$ follows from the open assumptions
-$!C_1,...,!C_n$ and $!A$. Consider a !!{structure}~$\Struct M$. We need to
-show that, if $\Sat{M}{\{!C_1,...,!C_n\}}$,
-then $\Sat{M}{\lnot !A}$. Suppose for reductio that
-$\Sat{M}{\{!C_1,...,!C_n\}}$,
-and $\Sat/{M}{\lnot !A}$. But this would mean that $\Sat{M}{!C_1,...,!C_n,
-!A}$. But this is contrary to our inductive hypothesis. So, $\Sat{M}{\lnot !A}$.
+\item Suppose that the last inference is \Intro{\lnot}: By inductive
+  hypothesis, $\lfalse$ follows from the !!{undischarged} assumptions
+  $\Gamma \cup \{!A\}$. Consider a !!{structure}~$\Struct M$. We need
+  to show that, if $\Sat{M}{\Gamma}$, then $\Sat{M}{\lnot
+    !A}$. Suppose for reductio that $\Sat{M}{\Gamma}$, but
+  $\Sat/{M}{\lnot !A}$, i.e., $\Sat{M}{!A}$. This would mean that
+  $\Sat{M}{\Gamma \cup \{!A\}}$. This is contrary to our inductive
+  hypothesis. So, $\Sat{M}{\lnot !A}$.
   
-\item The last inference is $\lnot$~Elim: Exercise.
+\item The last inference is \Elim{\lnot}: Exercise.
 
-\item The last inference is $\land$~Elim: There are two variants: $!A$ or
-$!B$ may be inferred from the premise $!A \land !B$. Consider the first
-case.
-By inductive hypothesis, $!A \land !B$ follows from the open assumptions 
-$!C_1,...,!C_n$. Consider a !!{structure}~$\Struct M$. We need to show
-that, if $\Sat{M}{\{!C_1,...,!C_n\}}$,
-then $\Sat{M}{!A}$. By our inductive hypothesis, we know that
-$\Sat{M}{!A\land !B}$. So, $\Sat{M}{!A}$.
-  The case where $!B$ is inferred from $!A \land !B$ is handled similarly.
+\item The last inference is \Elim{\land}: There are two variants: $!A$
+  or $!B$ may be inferred from the premise $!A \land !B$. Consider the
+  first case.  By inductive hypothesis, $!A \land !B$ follows from the
+  !!{undischarged} assumptions $\Gamma$. Consider a
+  !!{structure}~$\Struct M$. We need to show that, if
+  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A}$. By our inductive
+  hypothesis, we know that $\Sat{M}{!A\land !B}$. So, $\Sat{M}{!A}$.
+  The case where $!B$ is inferred from $!A \land !B$ is handled
+  similarly.
   
-\item The last inference is $\lor$~Intro: There are two variants: $!A \lor
-!B$ may be inferred from the premise $!A$ or the premise $!B$. Consider
-the first case. By inductive hypothesis, $!A$ follows from the open 
-assumptions $!C_1,...,!C_n$.
-Consider a !!{structure}~$\Struct M$. We need to show that, if
-$\Sat{M}{\{!C_1,...,!C_n\}}$,
-then $\Sat{M}{!A \lor !B}$. It must be the case that $\Sat{M}{!A}$, by
-inductive hypothesis.So it must be the case that $\Sat{M}{!A \lor !B}$.
-  The case where $!A \lor !B$ is inferred from $!B$ is handled similarly.
+\item The last inference is \Intro{\lor}: There are two variants: $!A
+  \lor !B$ may be inferred from the premise $!A$ or the premise
+  $!B$. Consider the first case. By inductive hypothesis, $!A$ follows
+  from the !!{undischarged} assumptions~$\Gamma$.  Consider a
+  !!{structure}~$\Struct M$. We need to show that, if
+  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A \lor !B}$. Since
+  $\Sat{M}{\Gamma}$, it must be the case that $\Sat{M}{!A}$, by
+  inductive hypothesis. So it must also be the case that $\Sat{M}{!A \lor
+    !B}$.  The case where $!A \lor !B$ is inferred from $!B$ is
+  handled similarly.
   
-\item The last inference is $\lif$~Intro: $!A \lif !B$ is inferred from a
-subproof with assumption $!A$ and conclusion $!B$. By inductive
-hypothesis, $!B$ follows from the open assumptions $!C_1,...,!C_n$ 
-and $!A$. Consider a !!{structure}~$\Struct M$.We need to show 
-that, if $\Sat{M}{\{!C_1,...,!C_n\}}$, then $\Sat{M}{!A \lif !B}$.
-For reductio, suppose that $!A \lif !B$ does not follow from
-$!C_1,...,!C_n$. This means that some !!{structure}
-$\Struct M$, $\Sat{M}{\{!C_1,...,!C_n\}}$, and $\Sat/{M}{!A \lif !B}$. So,
-$\Sat{M}{!A}$ and $\Sat/{M}{!B}$. But
-by hypothesis, $!B$ is a consequence of $!C_1,...,!C_n$ and $!A$. So,
-$\Sat{M}{!A \lif !B}$.
+\item The last inference is \Intro{\lif}: $!A \lif !B$ is inferred
+  from a subproof with assumption~$!A$ and conclusion~$!B$. By
+  inductive hypothesis, $!B$ follows from the !!{undischarged}
+  assumptions $\Gamma$ and~$!A$. Consider a
+  !!{structure}~$\Struct{M}$. We need to show that, if $\Gamma
+  \Entails !A \lif !B$.  For reductio, suppose that for some
+  !!{structure}~$\Struct{M}$, $\Sat{M}{\Gamma}$ but $\Sat/{M}{!A \lif
+    !B}$. So, $\Sat{M}{!A}$ and $\Sat/{M}{!B}$. But by hypothesis,
+  $!B$ is a consequence of $\Gamma \cup \{!A\}$. So, $\Sat{M}{!A \lif
+    !B}$.
   
-\item The last inference is $\forall$~Intro: .
- 
-$!A(a)$ is a consequence of the open assumptions $!C_1,...,!C_n$.
-Consider some structure, $\Struct{M}$, such that $\Sat{M}{!C_1,...!C_n}$.
-By inductive hypothesis, $\Sat{M}{!A(a)}$.
- Let $\Struct{M'}$ be exactly like $\Struct M$ except
-that$\Assign{a}{M} \neq \Assign{a}{M'}$. We must have $\Sat{M'}{!A(a)}$.
+\item The last inference is \Intro{\lforall}: The premise $!A(a)$ is a
+  consequence of the !!{undischarged} assumptions $\Gamma$ by
+  induction hypothesis.  Consider some structure, $\Struct{M}$, such
+  that $\Sat{M}{\Gamma}$. Let $\Struct{M'}$ be exactly like $\Struct{M}$
+  except that $\Assign{a}{M} \neq \Assign{a}{M'}$. We must have
+  $\Sat{M'}{!A(a)}$.
 
-  We now show that $\Sat{M}{\lforall[x][!A(x)]}$.  To do this, we have
-  to show that for every variable assignment~$s$,
-  $\Sat{M}{\lforall[x][!A(x)]}[s]$.  This in turn means that for every
-  $x$-variant $s'$ of $s$, we must have $\Sat{M}{!A(x)}[s']$.  So
-  consider any variable assignment~$s$ and let $s'$ be an $x$-variant
-  of~$s$.  Since $!C_1,...,!C_n$ consists entirely of sentences,
-  $\Sat{M}{!E}[s]$ iff $\Sat{M}{!E}[s']$ iff $\Sat{M}{!E}$ for all
-  $!E \in \{!C_1,...,!C_n\}$.  Let $\Struct M'$ be like $\Struct M$
-  except that $\Assign{a}{M'} = s'(x)$.  Then $\Sat{M}{!A(x)}[s']$ iff
-  $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$).  Since we've
-  already established that $\Sat{M'}{!A(a)}$ for all $\Struct M'$
-  which differ from $\Struct M$ at most in what they assign to~$a$,
-  this means that $\Sat{M}{!A(x)}[s']$.  Thus we've shown that
-  $\Sat{M}{\lforall[x][!A(x)]}[s]$.  Since $s$ is an arbitrary variable
-  assignment and $\lforall[x][!A(x)]$ is a sentence, then
+  We now show that $\Sat{M}{\lforall[x][!A(x)]}$. Since
+  $\lforall[x][!A(x)]$ is a !!{sentence}, this means we have to show
+  that for every variable assignment~$s$, $\Sat{M}{!A(x)}[s]$. Since
+  $\Gamma$ consists entirely of sentences, $\Sat{M}{!B}[s]$ for all
+  $!B \in \Gamma$.  Let $\Struct{M'}$ be like $\Struct{M}$ except that
+  $\Assign{a}{M'} = s(x)$.  Then $\Sat{M}{!A(x)}[s]$ iff
+  $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$).  Since $a$ also
+  does not occur in~$\Gamma$, $\Sat{M'}{\Gamma}$. Since $\Gamma
+  \Entails !A(a)$, $\Sat{M'}{!A(a)}$. This means that
+  $\Sat{M}{!A(x)}[s]$.  Since $s$ is an arbitrary variable assignment,
   $\Sat{M}{\lforall[x][!A(x)]}$.
-
   
-\item The last inference is $\lexists$~Intro: Exercise.
+\item The last inference is \Intro{\lexists}: Exercise.
 
-\item The last inference is $\forall$~Elim: Exercise.
-
-
+\item The last inference is \Elim{\forall}: Exercise.
 \end{enumerate}
+
 Now let's consider the possible inferences with several premises:
-$\lor$~Elim, $\land$~Intro, and $\lif$~Elim.
+\Elim{\lor}, \Intro{\land}, \Elim{\lif}, and \Elim{\lexists}.
 \begin{enumerate}
 
-\item The last inference is $\land$~Intro. $!A \land !B$ is inferred from
-the premises $!A$
-and $!B$. By induction hypothesis, $!A$ follows from the open assumptions
-$!C_1,...,!C_n$ and $!B$ follows from the open assumptions
-$!D_1,...,!D_n$.Consider a !!{structure}~$\Struct M$. We need to show that, 
-if $\Sat{M}{\{!C_1,...,!C_n,!D_1,...,!D_n\}}$, then $\Sat{M}{!A \land !B}$.
-It must be the case that $\Sat{M}{!A}$, and $\Sat{M}{!B}$, by inductive
-hypothesis.
-So by definition, it must be the case that $\Sat{M}{!A \land !B}$.
+\item The last inference is \Intro{\land}. $!A \land !B$ is inferred
+  from the premises $!A$ and $!B$. By induction hypothesis, $!A$
+  follows from the !!{undischarged} assumptions~$\Gamma$ and $!B$
+  follows from the !!{undischarged} assumptions~$\Delta$. We have to
+  show that $\Gamma \cup \Delta \Entails !A \land !B$. Consider a
+  !!{structure}~$\Struct M$ with $\Sat{M}{\Gamma \cup \Delta}$. Since
+  $\Sat{M}{\Gamma}$, it must be the case that $\Sat{M}{!A}$, and ince
+  $\Sat{M}{\Delta}$, $\Sat{M}{!B}$, by inductive hypothesis.
+  Together, $\Sat{M}{!A \land !B}$.
   
-\item The last inference is $\lor$~Elim: Exercise.
+\item The last inference is \Elim{\lor}: Exercise.
 
-\item The last inference is $\lif$~Elim. $!B$ is inferred from the
-premises $!A \lif !B$ and $!A$. By induction hypothesis, $!A \lif !B$ 
-follows from the open assumptions $!C_1,...,!C_n$
-and $!A$ follows from the open assumptions $!D_1,...,!D_n$. Consider a
-!!{structure}~$\Struct M$. We need to show that, if
-$\Sat{M}{\{!C_1,...,!C_n,!D_1,...,!D_n\}}$, then $\Sat{M}{!B}$.
-It must be the case that $\Sat{M}{!A \lif !B}$, and $\Sat{M}{!A}$, by
-inductive hypothesis.
-So by definition, it must be the case that $\Sat{M}{!B}$.
+\item The last inference is \Elim{\lif}. $!B$ is inferred from the
+  premises $!A \lif !B$ and $!A$. By induction hypothesis, $!A \lif
+  !B$ follows from the !!{undischarged} assumptions~$\Gamma$ and $!A$
+  follows from the !!{undischarged} assumptions~$\Delta$. Consider a
+  !!{structure}~$\Struct M$. We need to show that, if $\Sat{M}{\Gamma
+    \cup \Delta}$, then $\Sat{M}{!B}$.  It must be the case that
+  $\Sat{M}{!A \lif !B}$, and $\Sat{M}{!A}$, by inductive hypothesis.
+  Thus it must be the case that $\Sat{M}{!B}$.
     
-\item The last inference is $\lexists$~Elim: Exercise.
+\item The last inference is \Elim{\lexists}: Exercise.
 \end{enumerate}
 \end{proof}
 
 \begin{prob}
-Complete the proof of \olref[fol][seq][sou]{sequent-soundness}.
+Complete the proof of \olref[fol][ntd][sou]{thm:soundness}.
 \end{prob}
 
 \begin{cor}
-\ollabel{weak-soundness}
-If $\Proves !A$ then $!A$ is valid.
+\ollabel{cor:weak-soundness}
+If $\Proves !A$, then $!A$ is valid.
 \end{cor}
 
 \begin{cor}
-\ollabel{entailment-soundness}
-If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
-\end{cor}
-
-\begin{proof}
-If $\Gamma \Proves !A$ then for some finite subset $\Gamma_0 \subseteq
-\Gamma$, there is !!a{derivation} of $!A$ from $\Gamma_0$.  By
-\olref{ntd-soundness}, every !!{structure} $\Struct M$ either
-makes some $!B \in \Gamma_0$ false or makes $!A$ true.  Hence, if
-$\Sat{M}{\Gamma_0}$ then also $\Sat{M}{!A}$.
-\end{proof}
-
-\begin{cor}
-\ollabel{consistency-soundness}
+\ollabel{cor:consistency-soundness}
 If $\Gamma$ is satisfiable, then it is consistent.
 \end{cor}
 
 \begin{proof}
-We prove the contrapositive.  Suppose that $\Gamma$ is not
-consistent.  Then $\Gamma \Proves \lfalse$, i.e., there is a finite
-$\Gamma_0 \subseteq \Gamma$ and !!a{derivation} of $\lfalse$
-from $\Gamma_0$. By \olref{ntd-soundness}, any !!{structure} 
-$\Struct M$ that satisfies $\Gamma_0$ must satisfy $\lfalse$.  
-Since $\Sat/{M}{\lfalse}$ for every !!{structure}~$\Struct M$,
-there must be an $!E \in \Gamma_0$ so that $\Sat/{M}{!E}$, 
-and since $\Gamma_0 \subseteq \Gamma$, that $!E$ is also
-in~$\Gamma$.  In other words, no $\Struct M$ satisfies $\Gamma$, 
+We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
+Then $\Gamma \Proves \lfalse$, i.e., there is !!a{derivation} of
+$\lfalse$ from !!{undischarged} assumptions in~$\Gamma$. By
+\olref{thm:soundness}, any !!{structure} $\Struct{M}$ that satisfies
+$\Gamma$ must satisfy $\lfalse$.  Since $\Sat/{M}{\lfalse}$ for every
+!!{structure}~$\Struct{M}$, no $\Struct{M}$ can satisfy $\Gamma$,
 i.e., $\Gamma$ is not satisfiable.
 \end{proof}
 

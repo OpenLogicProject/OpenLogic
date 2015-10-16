@@ -132,6 +132,9 @@
     { \IfBooleanTF{#1}{ #2 \neq #3}{#2 = #3} }
 }
 
+% Proofs and Derivations
+% ----------------------
+
 % - The sequent symbol `\Sequent` produces $\Rightarrow$ by
 % default. Change the definition for $\vdash$, or another symbol.
 
@@ -141,6 +144,26 @@
 
 \DeclareDocumentMacro \fCenter {\ensuremath{\,\Sequent\,}}
 
+% - Rule names: `\Intro{Op}` typesets the name of an intro rule for
+% operator `Op`, e.g., `\Intro{\land}` produces `$\land$Intro`.
+% `\Elim{Op}` does the same for elimination rules.
+
+\DeclareDocumentCommand \Intro { m } {\ensuremath{#1\mathrm{Intro}}}
+
+\DeclareDocumentCommand \Elim { m } {\ensuremath{#1\mathrm{Elim}}}
+
+% - `\Discharge{!A}{n}`: typesets a discharged assumption with label
+% $n$, e.g., $[!A]^n$.
+
+\DeclareDocumentCommand \Discharge { m m }{[#1]^{#2}}
+
+% - `\DischargeRule{Rule}{n}`: used in a `prooftree` environment to
+% provide the labels for an inference that discharges an assumption.
+
+\DeclareDocumentCommand \DischargeRule { m m }{
+  \RightLabel{#1}
+  \LeftLabel{\scriptsize #2}
+}
 
 % Metalogical Relations
 % ---------------------
@@ -775,6 +798,12 @@
 
 \settexttoken{nonderivability}{non-derivability}{non-derivabilities}
 
+% `discharge`: discharge an assumption in a natural deduction proof,
+% cancel, close. Also: undischarged, non-cancelled, open.
+
+\settexttoken{discharge}{discharge}{discharges}
+\settexttoken{discharged}{discharged}{discharged}
+\settexttoken{undischarged}{undischarged}{undischarged}
 
 % - `enumerable`: term for finite or countably infinite; defaults to
 % "enumerable", redefine for "countable".
