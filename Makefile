@@ -37,6 +37,7 @@ branches: FORCE_MAKE
 	done 
 	git checkout master
 	latexmk -pdf -dvi- -ps- open-logic-debug
+	latexmk -pdf -dvi- -ps- open-logic-complete
 
 open-logic-config.pdf: open-logic-config.sty
 	grep -e "^%" -e "^$$" open-logic-config.sty | cut --bytes=3-|pandoc -f markdown -M date="`git log --format=format:"%ad %h" --date=short -1 open-logic-config.sty`" -o open-logic-config.pdf
@@ -47,6 +48,6 @@ open-logic-config.pdf: open-logic-config.sty
 clean:	
 	latexmk -c $(ALLTEXFILES)
 
-upload: everything branches courses FORCE_MAKE
+upload: FORCE_MAKE
 	rsync -avz --delete --include "[^\.]*/" --include '*.pdf' --exclude '*'  . rzach@c1.ucalgary.ca:webdisk/public_html/static/open-logic/
 
