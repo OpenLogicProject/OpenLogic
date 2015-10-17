@@ -108,22 +108,24 @@ We prove both directions simultaneously, and by induction on $!A$.
   have $\indfrm \in \Gamma^*$.
 
 Conversely, suppose that $\lforall[x][!B(x)] \in \Gamma^*$. By
-\olref[seq][prv]{thm:provability-quantifiers} and
-\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, $!B(t) \in
-\Gamma^*$ for every term~$t \in \Domain{M(\Gamma^*)}$. By inductive
-hypothesis, $\Sat{M(\Gamma^*)}{!B(t)}$ for every term~$t \in
+\tagrefs{prfSC/{fol:seq:prv:thm:provability-quantifiers},prfND/{fol:ntd:prv:thm:provability-quantifiers}}
+together with \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},
+$!B(t) \in \Gamma^*$ for every term~$t \in \Domain{M(\Gamma^*)}$. By
+inductive hypothesis, $\Sat{M(\Gamma^*)}{!B(t)}$ for every term~$t \in
 \Domain{M(\Gamma^*)}$. Let $s$ be the variable assigment with $s(x) =
 t$. Then $\Sat{M(\Gamma^*)}{!B(x)}[s]$ for any such~$s$, hence
 $\Sat{M(\Gamma^*)}{\indfrm}$.}}}{}
 
 \tagitem{prvEx}{%
-\iftag{probEx}{%
-\indcase!{!A}{\lexists[x][!B(x)]}{}}{%
-\indcase{!A}{\lexists[x][!B(x)]}{First suppose that $\Sat{M(\Gamma^*)}{\indfrm}$. By the definition of satisfaction, for
-  some variable assignment $s$, $\Sat{M(\Gamma^*)}{!B(x)}[s]$. The
-  value $s(x)$ is some term~$t \in \Domain{M(\Gamma^*)}$. Thus,
-    $\Sat{M(\Gamma^*)}{!B(t)}$, and by our induction hypothesis,
-    $!B(t) \in \Gamma^*$. By \olref[seq][prv]{thm:provability-quantifiers}
+  \iftag{probEx}{%
+  \indcase!{!A}{\lexists[x][!B(x)]}{}}{%
+  \indcase{!A}{\lexists[x][!B(x)]}{First suppose that
+    $\Sat{M(\Gamma^*)}{\indfrm}$. By the definition of satisfaction,
+    for some variable assignment $s$,
+    $\Sat{M(\Gamma^*)}{!B(x)}[s]$. The value $s(x)$ is some term~$t
+    \in \Domain{M(\Gamma^*)}$. Thus, $\Sat{M(\Gamma^*)}{!B(t)}$, and
+    by our induction hypothesis, $!B(t) \in \Gamma^*$. By
+    \tagrefs{prfSC/{fol:seq:prv:thm:provability-quantifiers},prfND/{fol:ntd:prv:thm:provability-quantifiers}}
     we have $\Gamma^* \Proves \lexists[x][!B(x)]$. Then, by
     \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, we can
     conclude that $\indfrm \in \Gamma^*$.
@@ -131,12 +133,12 @@ $\Sat{M(\Gamma^*)}{\indfrm}$.}}}{}
 Conversely, suppose that $\lexists[x][!B(x)] \in \Gamma^*$. Because
 $\Gamma^*$ is saturated, $(\lexists[x][!B(x)] \lif !B(c)) \in
 \Gamma^*$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-mp}
-and \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, $!B(c) \in
-\Gamma^*$. By inductive hypothesis, $\Sat{M(\Gamma^*)}{!B(c)}$. Now
-consider the variable assignment with $s(x) =
-\Assign{c}{M(\Gamma^*)}$. Then $\Sat{M(\Gamma^*)}{!B(x)}[s]$. By
-definition of satisfaction,
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
+together with \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},
+$!B(c) \in \Gamma^*$. By inductive hypothesis,
+$\Sat{M(\Gamma^*)}{!B(c)}$. Now consider the variable assignment with
+$s(x) = \Assign{c}{M(\Gamma^*)}$. Then
+$\Sat{M(\Gamma^*)}{!B(x)}[s]$. By definition of satisfaction,
 $\Sat{M(\Gamma^*)}{\lexists[x][!B(x)]}$.}}}{}
 \end{enumerate}
 \end{proof}
@@ -144,6 +146,5 @@ $\Sat{M(\Gamma^*)}{\lexists[x][!B(x)]}$.}}}{}
 \begin{probtag}{probOr,probAnd,probIf,probEx,probAll}
 Complete the proof of \olref[fol][com][mod]{lem:truth}.
 \end{probtag}
-
 
 \end{document}
