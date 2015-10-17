@@ -81,7 +81,7 @@ Suppose that $\Gamma \Proves !A$. Suppose to the contrary that $!A
 \notin \Gamma$: then since $\Gamma$ is maximally consistent, $\Gamma
 \cup \{!A\}$ is inconsistent, hence $\Gamma \cup \{!A\} \Proves
 \lfalse$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-contr}
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-contr},prfND/{fol:ntd:prv:prop:provability-contr}},
 $\Gamma$ is inconsistent. This contradicts the assumption that
 $\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
 \Gamma$, so $!A \in \Gamma$.
@@ -93,7 +93,7 @@ $\lnot !A \notin \Gamma$. Since $\Gamma$ is maximally consistent,
 $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
 inconsistent, so $\Gamma \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup
 \{\lnot !A\} \Proves \lfalse$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-exhaustive},
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-exhaustive},prfND/{fol:ntd:prv:prop:provability-exhaustive}},
 $\Gamma$ is inconsistent, a contradiction. Hence there cannot be such
 a !!{sentence}~$!A$ and, for every $!A$, $!A \in \Gamma$ or $\lnot !A
 \in \Gamma$.
@@ -104,14 +104,14 @@ $(!A \land !B) \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
 
 For the forward direction, suppose $(!A \land !B) \in \Gamma$. Then
 $\Gamma \Proves !A \land !B$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-left},
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-left},prfND/{fol:ntd:prv:prop:provability-land-left}},
 $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
 \olref{prop:mcs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
 required.
 
 For the reverse direction, let $!A \in \Gamma$ and $!B \in
 \Gamma$. Then $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-land-right},
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-right},prfND/{fol:ntd:prv:prop:provability-land-right}},
 $\Gamma \Proves !A \land !B$. By \olref{prop:mcs-prov-in}, $(!A \land
 !B) \in \Gamma$.}}
 
@@ -124,39 +124,39 @@ For the contrapositive of the forward direction, suppose that $!A
 !B) \notin \Gamma$. Since $\Gamma$ is maximally consistent, $\Gamma
 \cup \{!A\} \Proves \lfalse$ and $\Gamma \cup \{!B\} \Proves \lfalse$.
 By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-left},
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-left},prfND/{fol:ntd:prv:prop:provability-lor-left}},
 $\Gamma \cup \{(!A \lor !B)\}$ is inconsistent. Hence, $(!A \lor !B)
 \notin \Gamma$, as required.
 
 For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
 \Gamma$. Then $\Gamma \Proves !A$ or $\Gamma \Proves !B$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lor-right},
-$\Gamma \Proves !A \lor !B$. By \olref{prop:mcs-prov-in}, $(!A \lor !B)
-\in \Gamma$, as required.}}
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-right},prfND/{fol:ntd:prv:prop:provability-lor-right}},
+$\Gamma \Proves !A \lor !B$. By \olref{prop:mcs-prov-in}, $(!A \lor
+!B) \in \Gamma$, as required.}}
 
 \tagitem{defIf}{}{%
 \iftag{probIf}{Exercise.}{%
 $(!A \lif !B) \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in \Gamma$:
 
-For the forward direction, let $(!A \lif !B) \in \Gamma$, and suppose to the
-contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
+For the forward direction, let $(!A \lif !B) \in \Gamma$, and suppose
+to the contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
 assumptions, $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !A$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-mp},
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}},
 $\Gamma \Proves !B$. But then by \olref{prop:mcs-prov-in}, $!B \in
 \Gamma$, contradicting the assumption that $!B \notin \Gamma$.
 
 For the reverse direction, first consider the case where $!A \notin
 \Gamma$. By \olref{prop:mcs-either-or}, $\lnot !A \in \Gamma$ and
 hence $\Gamma \Proves \lnot !A$. By
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lif},
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}},
 $\Gamma \Proves !A \lif !B$. Again by \olref{prop:mcs-prov-in}, we get
 that $(!A \lif !B) \in \Gamma$, as required.
 
 Now consider the case where $!B \in \Gamma$. Then $\Gamma \Proves !B$
 and by
-\olref[seq][prv]{prop:provability}\olref[seq][prv]{prop:provability-lif},
-$\Gamma \Proves !A \lif !B$. By \olref{prop:mcs-prov-in}, $(!A \lif !B)
-\in \Gamma$.}}
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}},
+$\Gamma \Proves !A \lif !B$. By \olref{prop:mcs-prov-in}, $(!A \lif
+!B) \in \Gamma$.}}
 \end{enumerate}
 \end{proof}
 

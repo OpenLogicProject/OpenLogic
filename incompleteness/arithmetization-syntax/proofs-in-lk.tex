@@ -7,7 +7,17 @@
 \begin{document}
 
 \olfileid{inc}{art}{plk}
-\olsection{Proofs in $\Log{LK}$}
+\olsection{\usetoken{P}{derivation} in $\Log{LK}$}
+
+\begin{explain}
+In order to arithmetize !!{derivation}s, we must represent
+!!{derivation}s as numbers. Since !!{derivation}s are trees of sequents
+where each inference carries also a label, a recursive
+representation is the most obvious approach: we represent a
+!!{derivation} as a tuple, the components of which are the
+end-sequent, the label, and the representations of the
+sub-!!{derivation}s leading to the premises of the last inference.
+\end{explain}
 
 \begin{defn}
 If $\Gamma$ is a finite set of !!{sentence}s, $\Gamma = \{!A_1, \dots,
@@ -19,14 +29,14 @@ $\Gamma \Sequent \Delta$ is
 \Gn{\Gamma \Sequent \Delta} = \tuple{\Gn{\Gamma}, \Gn{\Delta}}
 \]
 
-If $\Pi$ is a !!{derivation} in $\Log{LK}$, then $\Gn{\Pi}$ is
+If $\pi$ is a !!{derivation} in $\Log{LK}$, then $\Gn{\pi}$ is
 \begin{enumerate}
-\item $\tuple{0, \Gn{\Gamma \Sequent \Delta}}$ if $\Pi$ consists only
+\item $\tuple{0, \Gn{\Gamma \Sequent \Delta}}$ if $\pi$ consists only
   of the initial sequent $\Gamma \Sequent \Delta$.
-\item $\tuple{1, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\Pi'}}$ if $\Pi$
+\item $\tuple{1, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\pi'}}$ if $\pi$
   ends in an inference with one premise, $k$ is given by the following
   table according to which rule was used in the last inference, and
-  $\Pi'$ is the immediate subproof ending in the premise of the last
+  $\pi'$ is the immediate subproof ending in the premise of the last
   inference.
 
 \begin{tabular}{lccccccc}
@@ -37,10 +47,10 @@ $k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
    $\lforall$ right & $\lexists$ left & $\lexists$ right & = \\
 $k$: & 7 & 8 & 9 & 10 & 11
 \end{tabular}
-\item $\tuple{2, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\Pi'},
-  \Gn{\Pi''}}$ if $\Pi$ ends in an inference with two premises, $k$ is
+\item $\tuple{2, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\pi'},
+  \Gn{\pi''}}$ if $\pi$ ends in an inference with two premises, $k$ is
   given by the following table according to which rule was used in the
-  last inference, and $\Pi'$, $\Pi''$ are the immediate subproof
+  last inference, and $\pi'$, $\pi''$ are the immediate subproof
   ending in the left and right premise of the last inference,
   respectively.
 
@@ -51,6 +61,18 @@ $k$: & 1 & 2 & 3 & 4
 \end{enumerate}
 \end{defn}
 
+\begin{explain}
+Having settled on a representation of !!{derivation}s, we must also
+show that we can manipulate such derivations primite recursively, and
+express their essential properties and relations so.  Some operations
+are simple: e.g., given a G\"odel number~$d$ of a !!{derivation},
+$(s)_1$ gives us the G\"odel number of its end-sequent.  Some are
+much harder.  We'll at least sketch how to do this.  The goal is to
+show that the relation ``$\pi$ is !!a{derivation} of~$!A$
+from~$\Gamma$'' is primitive recursive on the G\"odel numbers of
+$\pi$ and~$!A$.
+\end{explain}
+
 \begin{prop}
 \ollabel{prop:followsby}
 The following relations are primitive recursive:
@@ -60,7 +82,7 @@ The following relations are primitive recursive:
 \item $\Gamma \Sequent \Delta$ is an initial sequent.
 \item $\Gamma \Sequent \Delta$ follows from $\Gamma' \Sequent \Delta'$
   (and $\Gamma'' \Sequent \Delta''$) by a rule of $\Log{LK}$.
-\item $\Pi$ is a correct $\Log{LK}$-!!{derivation}.
+\item $\pi$ is a correct $\Log{LK}$-!!{derivation}.
 \end{enumerate}
 \end{prop}
 
@@ -132,27 +154,27 @@ of a sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
   default.  Otherwise, $\fn{hDeriv}(s, n+1)$ iff either $s$ consists
   just of an initial sequent, or it ends in a correct inference and
   the codes of the immediate sub!!{derivation}s satisfy
-  $\fn{nDeriv}(s, n)$.
+  $\fn{hDeriv}(s, n)$.
 \begin{align*}
-\fn{nDeriv}(s, 0) \defiff {} & \True\\
-\fn{nDeriv}(s, n+1) \defiff {} & ((s)_0 = 0 \land \fn{InitialSeq}((s)_1)) \lor{}\\
+\fn{hDeriv}(s, 0) \defiff {} & \True\\
+\fn{hDeriv}(s, n+1) \defiff {} & ((s)_0 = 0 \land \fn{InitialSeq}((s)_1)) \lor{}\\
 & ((s)_0 = 1 \land {}\\
 & \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\text{Contr}}((s)_1, ((s)_3)_1)) \lor{}\\
 & \qquad \vdots\\
 & \quad ((s)_2 = 11 \land \fn{FollowsBy}_{=}((s)_1, ((s)_3)_1)) \land {}\\
-& \quad \fn{nDeriv}((s)_3, n)) \lor {}\\
+& \quad \fn{hDeriv}((s)_3, n)) \lor {}\\
 & ((s)_0 = 2 \land {}\\
 & \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\text{Cut}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \lor{}\\
 & \qquad \vdots\\
 & \quad ((s)_2 = 4 \land \fn{FollowsBy}_{\lif\text{left}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \land {}\\
-& \quad \fn{nDeriv}((s)_3, n) \land \fn{nDeriv}((s)_4, n))
+& \quad \fn{hDeriv}((s)_3, n) \land \fn{hDeriv}((s)_4, n))
 \end{align*}
 This is a primitive recursive definition.  If the number~$n$ is large
 enough, e.g., larger than the maximum number of inferences between an
 initial sequent and the end sequent in~$s$, it holds of $s$ iff $s$ is
 the G\"odel number of a correct !!{derivation}.  The number $s$ itself
 is larger than that maximum number of inferences.  So we can now define
-$\fn{Deriv}(s)$ by $\fn{nDeriv}(s,s)$.
+$\fn{Deriv}(s)$ by $\fn{hDeriv}(s,s)$.
 \end{enumerate}
 \end{proof}
 
@@ -169,7 +191,7 @@ Define the following relations as in
 \begin{prop}
 Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
 the relation $\fn{Pr}_\Gamma(x, y)$ expressing ``$x$ is the code of
-!!a{derivation}~$\Pi$ of $\Gamma_0 \Sequent !A$ for some finite
+!!a{derivation}~$\pi$ of $\Gamma_0 \Sequent !A$ for some finite
 $\Gamma_0 \subseteq \Gamma$ and $x$ is the G\"odel number of~$!A$'' is
 primitive recursive.
 \end{prop}
@@ -182,13 +204,13 @@ $x$~is the code of an $\Log{LK}$-!!{derivation} with end sequent
 $\Gamma_0 \Sequent !A$ is primitive recursive.
 
 By the previous proposition, the property $\fn{Deriv}()$ which holds
-iff $x$ is the code of a correct derivation~$\Pi$ in $\Log{LK}$ is
+iff $x$ is the code of a correct derivation~$\pi$ in $\Log{LK}$ is
 primitive recursive.  If $x$ is such a code, then $(x)_1$ is the code
-of the end sequent of~$\Pi$, and so $((x)_1)_0$ is the code of the
+of the end sequent of~$\pi$, and so $((x)_1)_0$ is the code of the
 left side of the end sequent and $((x)_1)_1$ the right side.  So we can
-express ``the right side of the end sequent of~$\Pi$ is~$!A$'' as
+express ``the right side of the end sequent of~$\pi$ is~$!A$'' as
 $\len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x$.  The left side of the
-end sequent of $\Pi$ is of course automatically finite, we just have
+end sequent of $\pi$ is of course automatically finite, we just have
 to express that every sentence in it is in~$\Gamma$.  Thus we can
 define $\fn{Pr}_\Gamma(x, y)$ by
 \begin{align*}

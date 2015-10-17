@@ -1,0 +1,283 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proving-things
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{pro}
+
+\olsection{Examples of \usetoken{P}{derivation}}
+
+\begin{ex}
+Let's give a !!{derivation} of the !!{formula} $(!A \land !B) \lif !A$.
+
+We begin by writing the desired end-!!{formula} at the bottom of the derivation.
+\[
+\AxiomC{}
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\DisplayProof
+\]
+
+Next, we need to figure out what kind of inference could result in
+!!a{formula} of this form. The !!{main operator} of the
+end-!!{formula} is $\lif$, so we'll try to arrive at the
+end-!!{formula} using the \Intro{\lif} rule. It is best to write down
+the assumptions involved and label the inference rules as you
+progress, so it is easy to see whether all assumptions have been
+!!{discharged} at the end of the proof.
+\[
+\AxiomC{$\Discharge{!A \land !B}{1}$}
+\DeduceC{$!A$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\DisplayProof
+\]
+
+We now need to fill in the steps from the assumption $!A \land !B$ to $!A$.
+Since we only have one connective to deal with, $\land$, we must
+use the $\land$ elim rule. This gives us the following proof:
+\[
+\AxiomC{$\Discharge{!A \land !B}{1}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\DisplayProof
+\]
+
+We now have a correct !!{derivation} of the formula $(!A \land
+!B) \lif !A$.
+\end{ex}
+
+\begin{ex}
+Now let's give a !!{derivation} of the !!{formula} $(\lnot !A \lor !B)
+\lif (!A \lif !B)$.
+
+We begin by writing the desired end-!!{formula} at the bottom of the 
+derivation.
+\[
+\AxiomC{}
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+To find a logical rule that could give us this end-!!{formula}, we
+look at the logical connectives in the end-!!{formula}: $\lnot$,
+$\lor$, and $\lif$. We only care at the moment about the first
+occurence of $\lif$ because it is the !!{main operator} of the
+!!{sentence} in the end-sequent, while $\lnot$, $\lor$ and the second
+occurence of $\lif$ are inside the scope of another connective, so we
+will take care of those later. We therefore start with the
+\Intro{\lif} rule.  A correct application must look as follows:
+\[
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\DeduceC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+This leaves us with two possibilities to continue. Either we can
+keep working from the bottom up and look for another application
+of the \Intro{\lif} rule, or we can work from the top down and apply a
+\Elim{\lor} rule. Let us apply the latter. We will use the assumption
+$\lnot !A \lor !B$ as the leftmost premise of \Elim{\lor}.  For a valid
+application of \Elim{\lor}, the other two premises must be identical
+to the conclusion $!A \lif !B$, but each may be derived in turn from
+another assumption, namely the two disjuncts of $\lnot !A \lor !B$.
+So our !!{derivation} will look like this:
+\[
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\DeduceC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}$}
+\DeduceC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+In each of the two branches on the right, we want to !!{derive} $!A
+\lif !B$, which is best done using \Intro{\lif}.
+\[
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}, \Discharge{!A}{3}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}, \Discharge{!A}{4}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{4}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+For the two missing parts of the !!{derivation}, we need
+!!{derivation}s of $!B$ from $\lnot !A$ and $!A$ in the middle, and
+from $!A$ and $!B$ on the left.  Let's take the former first. $\lnot
+!A$ and $!A$ are the two premises of \Intro{\lfalse}:
+\[
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Intro{\lfalse}}
+\BinaryInfC{$\lfalse$}
+\DeduceC{$!B$}
+\DisplayProof
+\]
+By using \Elim{\lfalse}, we can obtain $!B$ as a conclusion and
+complete the branch.
+\[
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Intro{\lfalse}}
+\BinaryInfC{$\lfalse$}
+\RightLabel{\Elim{\lfalse}}
+\UnaryInfC{$!B$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}, \Discharge{!A}{4}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{4}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+Let's now look at the rightmost branch.  Here it's important to
+realize that the definition of !!{derivation} \emph{allows assumptions
+  to be discharged} but \emph{does not require} them to be.  In other
+words, if we can derive $!B$ from one of the assumptions $!A$ and $!B$
+without using the other, that's ok.  And to !!{derive} $!B$ from $!B$
+is trivial: $!B$ by itself is such a !!{derivation}, and no inferences
+are needed.  So we can simply delete the assumtion $!A$.
+\[
+\AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
+\AxiomC{$\Discharge{\lnot !A}{2}$}
+\AxiomC{$\Discharge{!A}{3}$}
+\RightLabel{\Intro{\lfalse}}
+\BinaryInfC{$\lfalse$}
+\RightLabel{\Elim{\lfalse}}
+\UnaryInfC{$!B$}
+\DischargeRule{\Intro{\lif}}{3}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!B}{2}$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lor}}{2}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Intro{\lif}}{1} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+Note that in the finished !!{derivation}, the rightmost \Intro{\lif}
+inference does not actually discharge any assumptions.
+\end{ex}
+
+\begin{ex}
+When dealing with quantifiers, we have to make sure not to violate the
+eigenvariable condition, and sometimes this requires us to play around
+with the order of carrying out certain inferences. In general, it
+helps to try and take care of rules subject to the eigenvariable
+condition first (they will be lower down in the finished proof).
+
+Let's see how we'd give a !!{derivation} of the !!{formula}
+$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$.
+Starting as usual, we write
+\[
+\AxiomC{}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+We start by writing down what it would take to justify that last step
+using the \Intro{\lif} rule.
+\[
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\DeduceC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+Since there is no obvious rule to apply to $\lnot \lforall[x][!A(x)]$,
+we will proceed by setting up the !!{derivation} so we can use the
+\Elim{\lexists} rule. Here we must pay attention to the eigenvariable
+condition, and choose a constant that does not appear in
+$\lexists[x][!A(x)]$ or any assumptions that it depends on.
+(Since no !!{constant}s appear, however, any choice will do fine.)
+\[
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
+\DeduceC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+In order to derive $\lnot \lforall[x][!A(x)]$, we will attempt to use
+the \Intro{\lnot} rule: this requires that we derive a contradiction,
+possibly using $\lforall[x][!A(x)]$ as an additional assumption. Of
+coursem, this contradiction may involve the assumption $\lnot !A(a)$
+which will be discharged by the \Intro{\lif} inference. We can set it
+up as follows:
+\[
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}, \Discharge{\lforall[x][!A(x)]}{3}$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{3}
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+It looks like we are close to getting a contradiction. The easiest
+rule to apply is the \Elim{\lforall}, which has no eigenvariable
+conditions. Since we can use any term we want to replace the
+universally quantified~$x$, it makes the most sense to continue
+using~$a$ so we can reach a contradiction.
+\[
+\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
+\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{3}$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(a)$}
+\RightLabel{\Intro{\lfalse}}
+\BinaryInfC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{3}
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{\Intro{\lif}}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+
+It is important, especially when dealing with quantifiers, to double
+check at this point that the eigenvariable condition has not been
+violated. Since the only rule we applied that is subject to the
+eigenvariable condition was \Elim{\exists}, and the eigenvariable~$a$
+does not occur in any assumptions it depends on, this is a
+correct derivation.
+\end{ex}
+
+\begin{prob}
+Give !!{derivation}s of the following !!{formula}s:
+\begin{enumerate}
+\item $\lnot(!A \lif !B) \lif (!A \land \lnot !B)$
+\item $\lforall[x][(!A(x) \lif !B)] \lif (\lexists[y][!A(y)] \lif !B)$
+\end{enumerate}
+\end{prob}
+
+\end{document}
