@@ -1,0 +1,74 @@
+% Part:sets-functions-relations
+% Chapter: sets
+% Section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{red}
+
+\olsection{Reduction}
+
+We showed $\Pow{\Int^+}$ to be !!{nonenumerable} by a diagonalization
+argument. However, with the proof of the non-enumerability of
+$\Bin^\omega$, the set of all infinite sequences of 0s and 1s, in
+place, we could have instead showed $\Pow{\Int^+}$ to be
+!!{nonenumerable} by showing that \emph{if $\Pow{\Int^+}$ is
+  enumerable then $\Bin^\omega$ is also enumerable}. This called
+\emph{reducing} one problem to another.
+
+\begin{proof}[Proof of {\olref[nen]{thm-nonenum-pownat}} by reduction]
+Suppose, for reductio, $\Pow{\Int^+}$ is enumerable, and thus that
+there is an enumeration of it $Z_{1}$, $Z_{2}$, $Z_{3}$, \dots
+
+Define the function $f \colon \Pow{\Int^+} \to \Bin^\omega$ by letting
+$f(Z)$ be the sequence $s_{k}$ such that $s_{k}(j) = 1$ iff $j \in Z$.
+
+Every sequence of 0s and 1s corresponds to some set of positive
+integers, namely the one which has as its members those integers
+corresponding to the places where the sequence has 1s. In other
+words, this is !!a{surjective} function.
+
+Now consider the list
+\[
+f(Z_1), f(Z_2), f(Z_3), \dots
+\]
+Since $f$ is !!{surjective}, every member of $\Bin^\omega$ must
+appear as a value of~$f$ for some argument, and so must appear on the
+list. So this list must enumerate~$\Bin^\omega$.
+
+So if $\Pow{\Int^+}$ were !!{enumerable}, $\Bin^\omega$ would be enumerable.
+But $\Bin^\omega$ is !!{nonenumerable} (\olref[nen]{thm-nonenum-bin-omega}).
+\end{proof}
+
+\begin{prob}
+Show that the set of all sets of pairs of positive integers is
+!!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+Show that $\Nat^\omega$, the set of infinite sequences of
+natural numbers, is !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+Let $P$ be the set of total functions from the set of positive
+integers to the set $\{0\}$, and let $Q$ be the set of partial
+functions from the set of positive integers to the set $\{0\}$. Show
+that $P$ is !!{enumerable} and $Q$ is not.
+\end{prob}
+
+\begin{prob}
+Let $S$ be the set of all total !!{surjective} functions from the set
+of positive integers to the set \{0,1\}. Show that $S$ is
+!!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+Show that the set~$\Real$ of all real numbers is !!{nonenumerable}.
+\end{prob}
+
+
+
+\end{document}

@@ -1,0 +1,48 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: inseparability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{ins}
+
+\olsection{Sentences Provable and Refutable in $\Th{Q}$ are Computably
+  Inseparable}
+
+
+Let $\Th{\bar Q}$ be the set of sentences whose {\em negations} are
+provable in $\Th{Q}$, i.e., $\Th{\bar Q} = \Setabs{!A}{\Th{Q} \Proves
+  \lnot !A}$. Remember that disjoint sets $A$ and $B$ are said to be
+computably inseparable if there is no computable set $C$ such that $A
+\subseteq C$ and $B \subseteq \Complement{C}$.
+
+\begin{lem}
+$\Th{Q}$ and $\Th{\bar Q}$ are computably inseparable. 
+\end{lem}
+
+\begin{proof}
+Suppose $C$ is a computable set such that $\Th{Q} \subseteq C$ and
+$\Th{\bar Q} \subseteq \Complement{C}$. Let $R(x,y)$ be the relation
+\begin{quote}
+$x$ codes a formula $!D(u)$ and $!D(\num y)$ is in $C$.
+\end{quote}
+We will show that $R(x,y)$ is a universal computable relation, yielding
+a contradiction.
+
+Suppose $S(y)$ is computable, represented by $!D_S(u)$ in $\Th{Q}$. Then
+\begin{eqnarray*}
+S(\num n) & \lif & \Th{Q} \Proves !D_S(\num n) \\
+& \lif & !D_S(\num n) \in C
+\end{eqnarray*}
+and 
+\begin{eqnarray*}
+\lnot S(\num n) & \lif & \Th{Q} \Proves \lnot !D_S(\num n) \\
+& \lif & !D_S(\num n) \in \Th{\bar Q} \\
+& \lif & !D_S(\num n) \not\in C
+\end{eqnarray*}
+So $S(y)$ is equivalent to $R(\#(!D_S(\num u)),y)$. 
+\end{proof}
+
+\end{document}

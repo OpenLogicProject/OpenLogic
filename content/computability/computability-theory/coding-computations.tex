@@ -1,0 +1,45 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: coding-computations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{cod}
+\olsection{Coding Computations}
+
+In every model of computation, it is possible to do the following:
+\begin{enumerate}
+\item Describe the \emph{definitions} of computable functions in a
+  systematic way. For instance, you can think of Turing machine
+  specifications, recursive definitions, or programs in a programming
+  language as providing these definitions.
+\item Describe the complete record of the computation of a function
+  given by some definition for a given input. For instance, a Turing
+  machine computation can be described by the sequence of
+  configurations (state of the machine, contents of the tape) for each
+  step of computation.
+\item Test whether a putative record of a computation is in fact the
+  record of how a computable function with a given definition would be
+  computed for a given input.
+\item Extract from such a description of the complete record of a
+  computation the value of the function for a given input. For
+  instance, the contents of the tape in the very last step of a
+  halting Turing machine computation is the value.
+\end{enumerate}
+
+Using coding, it is possible to assign to each description of a
+computable function a numerical \emph{index} in such a way that the
+instructions can be recovered from the index in a computable way.
+Similarly, the complete record of a computation can be coded by a
+single number as well. The resulting arithmetical relation ``$s$
+codes the record of computation of the function with index~$e$ for
+input~$x$'' and the function ``output of computation sequence with
+code~$s$'' are then computable; in fact, they are primitive recursive.
+
+This fundamental fact is very powerful, and allows us to prove a
+number of striking and important results about computability,
+independently of the model of computation chosen.
+
+\end{document}

@@ -1,0 +1,125 @@
+% Part: first-order-logic
+% Chapter: beyond
+% Section: higher-order-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{byd}{hol}
+
+\olsection{Higher-Order logic}
+
+Passing from first-order logic to second-order logic enabled us to
+talk about sets of objects in the first-order !!{domain}, within the
+formal language. Why stop there? For example, third-order logic should
+enable us to deal with sets of sets of objects, or perhaps even sets
+which contain both objects and sets of objects. And fourth-order logic
+will let us talk about sets of objects of that kind. As you may have
+guessed, one can iterate this idea arbitrarily.
+
+In practice, higher-order logic is often !!{formula}ted in terms of
+functions instead of relations. (Modulo the natural identifications,
+this difference is inessential.) Given some basic ``sorts'' $A$, $B$,
+$C$,~\dots (which we will now call ``types''), we can create new ones
+by stipulating
+\begin{quote}
+If $\sigma$ and $\tau$ are finite types then so is $\sigma \to \tau$.
+\end{quote}
+Think of types as syntactic ``labels,'' which classify the objects we
+want in our !!{domain}; $\sigma \to \tau$ describes those objects that
+are functions which take objects of type~$\sigma$ to objects of
+type~$\tau$. For example, we might want to have a type $\Omega$ of
+truth values, ``true'' and ``false,'' and a type $\Nat$ of natural
+numbers. In that case, you can think of objects of type $\Nat \to
+\Omega$ as unary relations, or subsets of $\Nat$; objects of type
+$\Nat \to \Nat$ are functions from natural numers to natural numbers;
+and objects of type $(\Nat \to \Nat) \to \Nat$ are ``functionals,''
+that is, higher-type functions that take functions to numbers.
+
+As in the case of second-order logic, one can think of higher-order
+logic as a kind of many-sorted logic, where there is a sort for each
+type of object we want to consider. But it is usually clearer just to
+define the syntax of higher-type logic from the ground up. For
+example, we can define a set of finite types inductively, as follows:
+\begin{enumerate}
+\item $\Nat$ is a finite type.
+\item If $\sigma$ and $\tau$ are finite types, then so is $\sigma
+  \to \tau$.
+\item If $\sigma$ and $\tau$ are finite types, so is $\sigma \times
+  \tau$.
+\end{enumerate}
+Intuitively, $\Nat$ denotes the type of the natural numbers,
+$\sigma \to \tau$ denotes the type of functions from $\sigma$ to
+$\tau$, and $\sigma \times \tau$ denotes the type of pairs of objects,
+one from $\sigma$ and one from $\tau$. We can then define a set of
+terms inductively, as follows:
+\begin{enumerate}
+\item For each type $\sigma$, there is a stock of variables $x$, $y$,
+  $z$, \dots of type $\sigma$
+\item $\Obj 0$ is a term of type $\Nat$
+\item $\Obj S$ (successor) is a term of type $\Nat \to \Nat$
+\item If $s$ is a term of type $\sigma$, and $t$ is a term of type
+  $\Nat \to (\sigma \to \sigma)$, then $\Obj{R}_{st}$ is a term of type
+  $\Nat \to \sigma$
+\item If $s$ is a term of type $\tau \to \sigma$ and $t$ is a
+  term of type~$\tau$, then $s(t)$ is a term of type $\sigma$
+\item If $s$ is a term of type~$\sigma$ and $x$ is a variable of
+  type~$\tau$, then $\lambd[x][s]$ is a term of type $\tau \to \sigma$.
+\item If $s$ is a term of type~$\sigma$ and $t$ is a term of
+  type~$\tau$, then $\tuple{s, t}$ is a term of type $\sigma \times
+  \tau$.
+\item If $s$ is a term of type~$\sigma \times \tau$ then $p_1(s)$ is a
+  term of type~$\sigma$ and $p_2(s)$ is a term of type~$\tau$.
+\end{enumerate}
+Intuitively, $\Obj{R}_{st}$ denotes the function defined recursively by
+\begin{align*}
+\Obj{R}_{st}(0) & = s \\
+\Obj{R}_{st}(x+1) & = t(x, R_{st}(x)),
+\end{align*}
+$\tuple{s, t}$ denotes the pair whose first component is~$s$ and whose
+second component is~$t$, and $p_1(s)$ and~$p_2(s)$ denote the first
+and second elements (``projections'') of~$s$. Finally, $\lambd[x][s]$
+denotes the function~$f$ defined by
+\[
+f(x) = s
+\]
+for any~$x$ of type~$\sigma$; so item (6) gives us a form of
+comprehension, enabling us to define functions using
+terms. !!^{formula}s are built up from !!{identity} statements $\eq[s][t]$
+between terms of the same type, the usual propositional connectives,
+and higher-type quantification. One can then take the axioms of the
+system to be the basic equations governing the terms defined above,
+together with the usual rules of logic with quantifiers and !!{identity}.
+
+If one augments the finite type system with a type $\Omega$ of truth
+values, one has to include axioms which govern its use as well. In
+fact, if one is clever, one can get rid of complex !!{formula}s
+entirely, replacing them with terms of type $\Omega$!{} The proof
+system can then be modified accordingly. The result is essentially the
+\emph{simple theory of types} set forth by Alonzo Church in the 1930s.
+
+As in the case of second-order logic, there are different versions of
+higher-type semantics that one might want to use. In the full version,
+variables of type $\sigma \to \tau$ range over the set of \emph{all}
+functions from the objects of type~$\sigma$ to objects of type~$\tau$.
+As you might expect, this semantics is too strong to admit a complete,
+effective proof system. But one can consider a weaker semantics, in
+which a !!{structure} consists of sets of elements $T_\tau$ for each
+type $\tau$, together with appropriate operations for application,
+projection, etc. If the details are carried out correctly, one can
+obtain completeness theorems for the kinds of proof systems described
+above.
+
+Higher-type logic is attractive because it provides a framework in
+which we can embed a good deal of mathematics in a natural way:
+starting with $\Nat$, one can define real numbers, continuous
+functions, and so on. It is also particularly attractive in the
+context of intuitionistic logic, since the types have clear
+``constructive'' intepretations. In fact, one can develop constructive
+versions of higher-type semantics (based on intuitionistic, rather
+than classical logic) that clarify these constructive interpretations
+quite nicely, and are, in many ways, more interesting than the
+classical counterparts.
+
+\end{document}

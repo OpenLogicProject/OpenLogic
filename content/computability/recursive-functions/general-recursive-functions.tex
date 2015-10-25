@@ -1,0 +1,42 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: general-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{gen}
+\olsection{General Recursive Functions}
+
+There is another way to obtain a set of total functions. Say a total
+function $f(x,\vec z)$ is \emph{regular} if for every sequence of
+natural numbers $\vec z$, there is an $x$ such that $f(x,\vec z) = 0$.
+In other words, the regular functions are exactly those functions to
+which one can apply unbounded search, and end up with a total
+function. One can, conservatively, restrict unbounded search to
+regular functions:
+
+\begin{defn}
+\ollabel{defn:general-recursive}
+The set of \emph{general recursive functions} is the smallest set of
+functions from the natural numbers to the natural numbers (of various
+arities) containing zero, successor, and projections, and closed under
+composition, primitive recursion, and unbounded search applied to
+\emph{regular} functions.
+\end{defn}
+
+Clearly every general recursive function is total. The difference
+between \olref{defn:general-recursive} and
+\olref[par]{defn:recursive-fn} is that in the latter one is allowed to
+use partial recursive functions along the way; the only requirement is
+that the function you end up with at the end is total. So the word
+``general,'' a historic relic, is a misnomer; on the surface,
+\olref{defn:general-recursive} is \emph{less} general than
+\olref[par]{defn:recursive-fn}. But, fortunately, the difference is
+illusory; though the definitions are different, the set of general
+recursive functions and the set of recursive functions are one and the
+same.
+
+\end{document}
+

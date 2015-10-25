@@ -1,0 +1,62 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: complement-ce
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{cmp}
+\olsection{Computably Enumerable Sets not Closed under Complement}
+
+Suppose $A$ is computably enumerable. Is the complement of $A$,
+$\Complement{A} = \Nat \setminus A$, necessarily computably enumerable
+as well? The following theorem and corollary show that the answer is
+``no.''
+
+\begin{thm}
+\ollabel{thm:ce-comp}
+Let $A$ be any set of natural numbers. Then $A$ is computable if and
+only if both $A$ and $\Complement{A}$ are computably enumerable.
+\end{thm}
+
+\begin{proof}
+The forwards direction is easy: if $A$ is computable, then
+$\Complement{A}$ is computable as well ($\Char{A} = 1 \tsub
+\Char{\Complement{A}}$), and so both are computably enumerable.
+
+In the other direction, suppose $A$ and $\Complement{A}$ are both
+computably enumerable. Let $A$ be the domain of $\cfind{d}$, and let
+$\Complement{A}$ be the domain of $\cfind{e}$. Define $h$ by
+\[
+h(x) = \umin{s}{(T(d,x,s) \lor T(e,x,s))}.
+\]
+In other words, on input $x$, $h$ searches for either a halting
+computation of~$\cfind{d}$ or a halting computation
+of~$\cfind{e}$. Now, if $x \in A$, it will succeed in the first case,
+and if $x \in \Complement{A}$, it will succeed in the second case. So,
+$h$~is a total computable function. But now we have that for every
+$x$, $x \in A$ if and only if $T(e, x, h(x))$, i.e., if $\cfind{e}$ is
+the one that is defined. Since $T(e, x, h(x))$ is a computable relation,
+$A$~is computable.
+\end{proof}
+
+\begin{explain}
+It is easier to understand what is going on in informal computational
+terms: to decide $A$, on input $x$ search for halting computations of
+$\cfind{e}$ and $\cfind{f}$. One of them is bound to halt; if it is $\cfind{e}$,
+then $x$ is in~$A$, and otherwise, $x$ is in~$\Complement{A}$.
+\end{explain}
+
+\begin{cor}
+\ollabel{cor:comp-k}
+$\Complement{K_0}$ is not computably enumerable.
+\end{cor}
+
+\begin{proof}
+We know that $K_0$ is computably enumerable, but not computable. If
+$\Complement{K_0}$ were computably enumerable, then $K_0$ would be
+computable by \olref{thm:ce-comp}.
+\end{proof}
+
+\end{document}

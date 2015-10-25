@@ -1,0 +1,66 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: rosser-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{ros}
+
+\olsection{Rosser's Theorem}
+
+Can we modify G\"odel's proof to get a stronger result, replacing
+``$\omega$-consistent'' with simply ``consistent''? The answer is
+``yes,'' using a trick discovered by Rosser. Let $\fn{not}(x)$ be the
+primitive recursive function which does the following: if $x$ is the
+code of a formula $!A$, $\fn{not}(x)$ is a code of $\lnot !A$.  To
+simplify matters, assume $\Th{T}$ has a function symbol $\Obj{not}$
+such that for any formula $!A$, $\Th{T}$ proves $\Obj{not}(\gn{!A}) =
+\gn{\lnot !A}$. This is not a major assumption; since $\fn{not}(x)$ is
+computable, it is represented in $\Th{T}$ by some formula
+$!D_{\fn{not}}(x,y)$, and we could eliminate the reference to the
+function symbol in the same way that we avoided using a function
+symbol $\Obj{diag}$ in the proof of the fixed-point lemma.
+
+Rosser's trick is to use a ``modified'' provability predicate
+$\ORProv_T(y)$, defined to be
+\[
+\lexists[x][(\OPrf[T](x,y) \land \lforall[z][(z < x \lif \lnot
+  \OPrf[T](z,{\Obj{not}}(y)))])].
+\]
+Roughly, $\ORProv[T](y)$ says ``there is a proof of $y$ in $\Th{T}$,
+and there is no shorter proof of the negation of $y$.'' (You might
+find it convenient to read $\ORProv[T](y)$ as ``$y$ is shmovable.'')
+Assuming $\Th{T}$ is consistent, $\ORProv[T](y)$ is true of the same
+numbers as $\OProv[T](y)$; but from the point of view of {\em
+  provability} in $\Th{T}$ (and we now know that there is a difference
+between truth and provability!) the two have different properties.
+
+By the fixed-point lemma, there is a formula $!R_\Th{T}$ such that $\Th{T}$
+proves
+\[
+!R_\Th{T} \liff \lnot \ORProv[T](\gn{!R_\Th{T}}).
+\]
+In contrast to the proof above, here we claim that if $\Th{T}$ is
+consistent, $\Th{T}$ doesn't prove $!R_\Th{T}$, and $\Th{T}$ also
+doesn't prove $\lnot !R_\Th{T}$. (In other words, we don't need the
+assumption of $\omega$-consistency.)
+
+
+\end{document}
+
+% Following digression should only be included if
+% incompleteness/theories-computability/first-incompleteness.tex also
+% compiled.
+
+\begin{digress}
+% This comment doesn't make much sense, what are you trying to get at?
+By comparison to the proof of
+\olref[inc][tcp][inc]{thm:first-incompleteness}, the proofs of
+\olref[inc][inp][1in]{thm:first-incompleteness} and its improvement by Rosser
+explicitly exhibit a statement $!A$ that is independent of $\Th{T}$.
+In the former, you have to dig to extract it from the argument. The
+G\"odel-Rosser methods therefore have the advantage of making the
+independent statement perfectly clear.
+\end{digress}
