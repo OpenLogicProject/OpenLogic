@@ -1,0 +1,55 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{int}
+\olsection{Introduction}
+
+In order to develop a mathematical theory of computability, one has to
+first of all develop a \emph{model} of computability.  We now think of
+computability as the kind of thing that computers do, and computers
+work with symbols.  But at the beginning of the development of
+theories of computability, the paradigmatic example of computation was
+\emph{numerical} computation.  Mathematicians were always interested
+in number-theoretic functions, i.e., functions $f\colon \Nat^n \to
+\Nat$ that can be computed. So it is not surprising that at the
+beginning of the theory of computability, it was such functions that
+were studied.  The most familiar examples of computable numerical
+functions, such as addition, multiplication, exponentiation (of
+natural numbers) share an interesting feature: they can be defined
+\emph{recursively}.  It is thus quite natural to attempt a general
+definition of \emph{computable function} on the basis of recursive
+definitions.  Among the many possible ways to define number-theoretic
+functions recursively, one particulalry simple pattern of definition
+here becomes central: so-called \emph{primitive recursion}.
+
+In addition to computable functions, we might be interested in
+computable sets and relations. A set is computable if we can compute
+the answer to whether or not a given number is an !!{element} of the
+set, and a relation is computable iff we can compute whether or not a
+tuple $\tuple{n_1, \dots, n_k}$ is an !!{element} of the relation.  By
+considering the \emph{characteristic function} of a set or relation,
+discussion of computable sets and relations can be subsumed under that
+of computable functions.  Thus we can define primitive recursive
+relations as well, e.g., the relation ``$n$ evenly divides $m$'' is a
+primitive recursive relation.
+
+Primitive recursive functions---those that can be defined using just
+primitive recursion---are not, however, the only computable
+number-theoretic functions. Many generalizations of primitive
+recursion have been considered, but the most powerful and
+widely-accepted additional way of computing functions is by unbounded
+search.  This leads to the definition of \emph{partial recursive
+  functions}, and a related definition to \emph{general recursive
+  functions}.  General recursive functions are computable and total,
+and the definition characterizes exactly the partial recursive
+functions that happen to be total.  Recursive functions can simulate
+every other model of computation (Turing machines, lambda calculus,
+etc.) and so represent one of the many accepted models of computation.
+
+
+\end{document}

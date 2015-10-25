@@ -1,0 +1,159 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: equiv-ce-defs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{eqc}
+
+\olsection[Definitions of C. E. Sets]{Equivalent Defininitions of
+  Computably Enumerable Sets}
+
+
+The following gives a number of important equivalent statements of
+what it means to be computably enumerable.
+
+\begin{thm}
+\ollabel{thm:ce-equiv}
+Let $S$ be a set of natural numbers. Then the following are
+equivalent:
+\begin{enumerate}
+\item $S$ is computably enumerable.
+\item $S$ is the range of a \emph{partial} computable function.
+\item $S$ is empty or the range of a primitive recursive function.
+\item $S$ is the \emph{domain} of a partial computable function.
+\end{enumerate}
+\end{thm}
+
+\begin{explain}
+The first three clauses say that we can equivalently take any nonempty
+computably enumerable set to be enumerated by either a computable
+function, a partial computable function, or a primitive recursive
+function. The fourth clause tells us that if $S$ is computably
+enumerable, then for some index $e$,
+\[
+S = \Setabs{x}{\cfind{e}(x) \defined}.
+\]
+In other words, $S$ is the set of inputs on for which the computation
+of $\cfind{e}$ halts. For that reason, computably enumerable sets are
+sometimes called \emph{semi-decidable}: if a number is in the set, you
+eventually get a ``yes,'' but if it isn't, you never get a ``no''!{}
+\end{explain}
+
+\begin{proof}
+Since every primitive recursive function is computable and every
+computable function is partial computable, (3) implies (1) and (1)
+implies~(2). (Note that if $S$ is empty, $S$ is the range of the
+partial computable function that is nowhere defined.) If we show that
+(2) implies (3), we will have shown the first three clauses
+equivalent.
+
+So, suppose $S$ is the range of the partial computable function
+$\cfind{e}$. If $S$ is empty, we are done. Otherwise, let $a$ be any
+element of~$S$. By Kleene's normal form theorem, we can write
+\[
+\cfind{e}(x) = U (\umin{s}{T(e, x, s)}).
+\]
+In particular, $\cfind{e}(x) \defined$ and $= y$ if and only if there
+is an $s$ such that $T(e, x, s)$ and $U(s) = y$. Define $f(z)$ by
+\[
+f(z) = \begin{cases}
+U((z)_1) & \text{if $T(e, (z)_0, (z)_1)$} \\
+a        & \text{otherwise.}
+\end{cases}
+\]
+Then $f$ is primitive recursive, because $T$ and $U$
+are. \iftag{TMs}{Expressed in terms of Turing machines, if $z$ codes a
+  pair $\tuple{(z)_0, (z)_1}$ such that $(z)_1$ is a halting
+  computation of machine $e$ on input $(z)_0$, then $f$ returns the
+  output of the computation; otherwise, it returns $a$.}
+
+We need to show that $S$ is the range of $f$, i.e., for any natural
+number $y$, $y \in S$ if and only if it is in the range of~$f$. In the
+forwards direction, suppose $y \in S$. Then $y$ is in the range of
+$\cfind{e}$, so for some $x$ and $s$, $T(e,x,s)$ and $U(s) = y$; but then
+$y = f(\tuple{x,s})$. Conversely, suppose $y$ is in the range of
+$f$. Then either $y = a$, or for some $z$, $T(e,(z)_0,(z)_1)$ and
+$U((z)_1) = y$. Since, in the latter case, $\cfind{e}(x) \defined = y$,
+either way, $y$ is in $S$.
+
+(The notation $\cfind{e}(x) \defined = y$ means ``$\cfind{e}(x)$ is
+defined and equal to $y$.'' We could just as well use $\cfind{e}(x) =
+y$, but the extra arrow is sometimes helpful in reminding us that we
+are dealing with a partial function.)
+
+To finish up the proof of \olref{thm:ce-equiv}, it suffices to show
+that (1) and (4) are equivalent. First, let us show that (1) implies
+(4). Suppose $S$ is the range of a computable function~$f$, i.e.,
+\[
+S = \Setabs{y}{\text{for some $x$,} f(x) = y}.
+\]
+Let
+\[
+g(y) = \umin{x}{f(x) = y}.
+\]
+Then $g$ is a partial computable function, and $g(y)$ is defined if
+and only if for some $x$, $f(x) = y$. In other words, the domain of
+$g$~is the range of~$f$. \iftag{TMs}{Expressed in terms of Turing
+  machines: given a Turing machine $F$ that enumerates the elements of
+  $S$, let $G$ be the Turing machine that semi-decides $S$ by
+  searching through the outputs of~$F$ to see if a given element is in
+  the set.}{}
+
+Finally, to show (4) implies (1), suppose that $S$~is the domain of the
+partial computable function~$\cfind{e}$, i.e.,
+\[
+S = \Setabs{x}{\cfind{e}(x) \defined}.
+\]
+If $S$ is empty, we are done; otherwise, let $a$ be any element
+of~$S$. Define $f$ by
+\[
+f(z) = \begin{cases}
+(z)_0 & \text{if $T(e,(z)_0,(z)_1)$} \\
+a & \text{otherwise.}
+\end{cases}
+\]
+Then, as above, a number $x$ is in the range of~$f$ if and only if
+$\cfind{e}(x) \defined$, i.e., if and only if $x \in S$. \iftag{TMs}{Expressed
+in terms of Turing machines: given a machine $M_e$ that semi-decides
+$S$, enumerate the elements of $S$ by running through all possible
+Turing machine computations, and returning the inputs that correspond
+to halting computations.}{}
+\end{proof}
+
+The fourth clause of \olref{thm:ce-equiv} provides us with a
+convenient way of enumerating the computably enumerable sets: for each
+$e$, let $W_e$ denote the domain of $\cfind{e}$. Then if $A$ is any
+computably enumerable set, $A = W_e$, for some $e$.
+
+The following provides yet another characterization of the computably
+enumerable sets.
+
+\begin{thm}
+\ollabel{thm:exists-char}
+A set $S$ is computably enumerable if and only if there is a
+computable relation $\Atom{R}{x,y}$ such that
+\[
+S = \Setabs{ x }{ \lexists[y][\Atom{R}{x,y}] }.
+\]
+\end{thm}
+
+\begin{proof}
+In the forward direction, suppose $S$ is computably
+enumerable. Then for some $e$, $S = W_e$. For this value of $e$
+we can write $S$ as
+\[
+S = \Setabs{ x }{ \lexists[y][T(e, x, y)] }.
+\]
+In the reverse direction, suppose $S = \Setabs{ x }{
+  \lexists[y][\Atom{R}{x, y}] }$. Define $f$~by
+\[
+f(x) \simeq \umin{y}{Atom{R}{x,y}}.
+\]
+Then $f$ is partial computable, and $S$ is the domain of~$f$.
+\end{proof}
+
+
+\end{document}

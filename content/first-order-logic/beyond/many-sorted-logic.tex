@@ -1,0 +1,67 @@
+% Part: first-order-logic
+% Chapter: beyond
+% Section: many-sorted-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{byd}{msl}
+
+\olsection{Many-Sorted Logic}
+
+In first-order logic, variables and quantifiers range over a single
+!!{domain}. But it is often useful to have multiple (disjoint)
+!!{domain}s: for example, you might want to have a !!{domain} of numbers,
+a !!{domain} of geometric objects, a !!{domain} of functions from
+numbers to numbers, a !!{domain} of abelian groups, and so on.
+
+Many-sorted logic provides this kind of framework. One starts with a
+list of ``sorts''---the ``sort'' of an object indicates the
+``!!{domain}'' it is supposed to inhabit. One then has !!{variable}s
+and quantifiers for each sort, and (usually) an !!{identity} for each
+sort. Functions and relations are also ``typed'' by the sorts of
+objects they can take as arguments. Otherwise, one keeps the usual
+rules of first-order logic, with versions of the quantifier-rules
+repeated for each sort.
+
+For example, to study international relations we might choose a
+language with two sorts of objects, French citizens and German
+citizens. We might have a unary relation, ``drinks wine,'' for objects
+of the first sort; another unary relation, ``eats wurst,'' for objects
+of the second sort; and a binary relation, ``forms a multinational
+married couple,'' which takes two arguments, where the first argument
+is of the first sort and the second argument is of the second sort. If
+we use variables $a$, $b$, $c$ to range over French citizens and $x$, $y$, $z$
+to range over German citizens, then
+\[
+\lforall[a][\lforall x][(\Atom{\Obj{MarriedTo}}{a,x} \lif
+(\Atom{\Obj{DrinksWine}}{a} \lor \lnot \Atom{\Obj{EatsWurst}}{x})]]
+\]
+asserts that if any French person is married to a German, either the
+French person drinks wine or the German doesn't eat wurst.
+
+Many-sorted logic can be embedded in first-order logic in a natural
+way, by lumping all the objects of the many-sorted !!{domain}s together
+into one first-order !!{domain}, using unary !!{predicate}s to keep track of
+the sorts, and relativizing quantifiers. For example, the first-order
+language corresponding to the example above would have unary !!{predicate}ss
+``$\Obj{German}$'' and ``$\Obj{French}$,'' in addition to the other relations
+described, with the sort requirements erased. A sorted quantifier $\lforall[x][!A]$, where $x$ is a !!{variable} of the German sort, translates to
+\[
+\lforall[x][(\Atom{\Obj{German}}{x} \lif !A)].
+\]
+We need to add axioms that insure that the sorts are separate---e.g.,
+$\lforall[x][\lnot (\Atom{\Obj{German}}{x} \land
+  \Atom{\Obj{French}}{x})]$---as well as axioms that guarantee that
+``drinks wine'' only holds of objects satisfying the predicate
+$\Atom{\Obj{French}}{x}$, etc. With these conventions and axioms, it
+is not difficult to show that many-sorted !!{sentence}s translate to
+first-order !!{sentence}s, and many-sorted !!{derivation}s translate
+to first-order !!{derivation}s. Also, many-sorted !!{structure}s
+``translate'' to corresponding first-order !!{structure}s and
+vice-versa, so we also have a completeness theorem for many-sorted
+logic.
+
+\end{document}
+

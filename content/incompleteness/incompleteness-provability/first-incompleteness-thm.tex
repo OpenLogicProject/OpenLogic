@@ -1,0 +1,97 @@
+% Part: incompleteness
+% Chapter: incompleteness-provability
+% Section: first-incompleteness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{inp}{1in}
+
+\olsection{The First Incompleteness Theorem}
+
+We can now describe G\"odel's original proof of the first
+incompleteness theorem. Let $\Th{T}$ be any computably axiomatized theory
+in a language extending the language of arithmetic, such that $\Th{T}$
+includes the axioms of $\Th{Q}$. This means that, in particular, $\Th{T}$
+represents computable functions and relations.
+
+We have argued that, given a reasonable coding of formulas and proofs
+as numbers, the relation $\Prf[T](x,y)$ is computable, where $\Prf[T](x,y)$
+holds if and only if $x$ is a proof of formula $y$ in $\Th{T}$. In fact,
+for the particular theory that G\"odel had in mind, G\"odel was able
+to show that this relation is primitive recursive, using the list of
+45 functions and relations in his paper. The 45th relation, $x B y$,
+is just $\Prf[T](x,y)$ for his particular choice of $\Th{T}$. Remember that
+where G\"odel uses the word ``recursive'' in his paper, we would now
+use the phrase ``primitive recursive.''
+
+Since $\Prf[T](x,y)$ is computable, it is representable in $\Th{T}$. We
+will use $\OPrf[T](x,y)$ to refer to the formula that represents
+it. Let $\OProv[T](y)$ be the formula
+$\lexists[x][\OPrf[T](x,y)]$. This describes the 46th relation,
+$\fn{Bew}(y)$, on G\"odel's list. As G\"odel notes, this is the only
+relation that ``cannot be asserted to be recursive.''  What he
+probably meant is this: from the definition, it is not clear that it
+is computable; and later developments, in fact, show that it isn't.
+
+\begin{defn}
+\ollabel{thm:oconsis-q}
+A theory $\Th{T}$ is $\omega$-consistent if the following holds: if
+$\lexists[x][!A(x)]$ is any sentence and $\Th{T}$ proves $\lnot
+!A(\num 0)$, $\lnot !A(\num 1)$, $\lnot !A(\num 2)$, \dots then $\Th{T}$
+does not prove $\lexists[x][!A(x)]$.
+\end{defn}
+
+We can now prove the following.
+\begin{thm}
+\ollabel{thm:first-incompleteness}
+Let $\Th{T}$ be any $\omega$-consistent, computably axiomatized theory
+extending $\Th{Q}$. Then $\Th{T}$ is not complete.
+\end{thm}
+
+\begin{proof}
+Let $\Th{T}$ be any computably axiomatized theory containing $\Th{Q}$,
+and let $\OProv[T](y)$ be the formula we described above. By the
+fixed-point lemma, there is a formula $!G_\Th{T}$ such that $\Th{T}$ proves
+\begin{equation}
+\ollabel{eqn:qpf}
+!G_\Th{T} \liff \lnot \OProv[T](\gn{!G_\Th{T}}).
+\end{equation}
+Note that $!A$ says, in essence, ``I am not provable.''
+
+We claim that
+\begin{enumerate}
+\item If $\Th{T}$ is consistent, $\Th{T}$ doesn't prove $!G_\Th{T}$
+\item If $\Th{T}$ is $\omega$-consistent, $\Th{T}$ doesn't prove
+  $\lnot !G_\Th{T}$.
+\end{enumerate}
+This means that if $\Th{T}$ is $\omega$-consistent, it is incomplete,
+since it proves neither $!G_\Th{T}$ nor $\lnot !G_\Th{T}$. Let us take
+each claim in turn.
+
+Suppose $\Th{T}$ proves $!G_\Th{T}$. Then there {\em is} a proof, and
+so, for some number $m$, the relation $\Prf[T](m, \Gn{!G_\Th{T}})$
+holds. But then $\Th{T}$ proves the sentence $\OPrf[T](\num m,
+\gn{!G_\Th{T}})$. So $\Th{T}$ proves
+$\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$, which is, by definition,
+$\OProv[T](\gn{!G_\Th{T}})$. By \olref{eqn:qpf}, $\Th{T}$ proves $\lnot
+!G_\Th{T}$. We have shown that if $\Th{T}$ proves $!G_\Th{T}$, then it
+also proves $\lnot !G_\Th{T}$, and hence it is inconsistent.
+
+For the second claim, let us show that if $\Th{T}$ proves $\lnot
+!G_\Th{T}$, then it is $\omega$-inconsistent. Suppose $\Th{T}$ proves
+$\lnot !G_\Th{T}$. If $\Th{T}$ is inconsistent, it is
+$\omega$-inconsistent, and we are done. Otherwise, $\Th{T}$ is
+consistent, so it does not prove $!G_\Th{T}$. Since there is no proof
+of $!G_\Th{T}$ in $\Th{T}$, $\Th{T}$ proves
+\[
+\lnot \OPrf[T](\num 0, \gn{!G_\Th{T}}), \lnot \OPrf[T](\num 1,
+\gn{!G_\Th{T}}), \lnot \OPrf[T](\num 2, \gn{!G_\Th{T}}), \dots
+\]
+On the other hand, by \olref{eqn:qpf}, $\lnot !G_\Th{T}$
+is equivalent to $\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$. So $\Th{T}$
+is $\omega$-inconsistent.
+\end{proof}
+
+\end{document}

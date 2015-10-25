@@ -1,0 +1,41 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: no-universal-function
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{nou}
+\olsection{No Universal Computable Function}
+
+\begin{thm}
+\ollabel{thm:no-univ}
+There is no universal computable function. In other words, the
+universal function $\fn{Un'}(k, x) = \cfind{k}(x)$ is not
+computable.
+\end{thm}
+
+\begin{proof}
+This theorem says that there is no {\em total} computable
+function that is universal for the total computable functions. The
+proof is a simple diagonalization: if $\fn{Un}'(k,x)$ were total and
+computable, then
+\[
+d(x) = \fn{Un}'(x, x) + 1
+\]
+would also be total and computable. However, for every $k$, $d(k)$ is
+not equal to $\fn{Un}'(k,k)$.
+\end{proof}
+
+\begin{explain}
+Theorem~\olref[uni]{thm:univ-comp} above shows that we can get around
+this diagonalization argument, but only at the expense of allowing
+partial functions. It is worth trying to understand what goes wrong
+with the diagonalization argument, when we try to apply it in the
+partial case. In particular, the function $h(x) = \fn{Un}(x,x)+1$
+\emph{is} partial recursive. Suppose $h$ is the $k$-th function in the
+enumeration; what can we say about~$h(k)$?
+\end{explain}
+
+\end{document}

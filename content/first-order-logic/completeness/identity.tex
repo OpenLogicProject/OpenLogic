@@ -1,0 +1,175 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{ide}
+\olsection{Identity}
+
+\begin{explain}
+The construction of the term model given in the preceding section is
+enough to establish completeness for first-order logic for
+sets~$\Gamma$ that do not contain~$\eq$.  The term model satisfies
+every $!A \in \Gamma^*$ which does not contain~$\eq$ (and hence all
+$!A \in \Gamma$).  It does not work, however, if $\eq$ is present.
+The reason is that $\Gamma^*$ then may contain
+!!a{sentence}~$\eq[t][t']$, but in the term model the value of any
+term is that term itself.  Hence, if $t$ and $t'$ are different terms,
+their values in the term model---i.e., $t$ and $t'$,
+respectively---are different, and so $\eq[t][t']$ is false.  We can
+fix this, however, using a construction known as ``factoring.''
+\end{explain}
+
+\begin{defn}
+Let $\Gamma^*$ be a maximally consistent set of sentences in~$\Lang
+L$.  We define the relation $\approx$ on the set of closed terms
+of~$\Lang L$ by
+\[
+t \approx t' \text{\quad iff \quad} \eq[t][t'] \in \Gamma^*
+\]
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:approx-equiv}
+The relation $\approx$ has the following properties:
+\begin{enumerate}
+\item $\approx$ is reflexive.
+\item $\approx$ is symmetric.
+\item  $\approx$ is transitive.
+\item If $t \approx t'$, $f$ is !!a{function}, and $t_1$, \dots,
+  $t_{i-1}$, $t_{i+1}$, \dots, $t_n$ are terms, then
+\[
+\Atom{f}{t_1,\dots, t_{i-1}, t, t_{i+1}, \dots, t_n} \approx
+\Atom{f}{t_1,\dots, t_{i-1}, t', t_{i+1}, \dots, t_n}.
+\]
+\item If $t \approx t'$, $R$ is !!a{function}, and $t_1$, \dots,
+  $t_{i-1}$, $t_{i+1}$, \dots, $t_n$ are terms, then
+\[
+\Atom{R}{t_1,\dots, t_{i-1}, t, t_{i+1}, \dots, t_n} \in \Gamma^* \text{ iff }
+\Atom{R}{t_1,\dots, t_{i-1}, t', t_{i+1}, \dots, t_n} \in \Gamma^*.
+\]
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Since $\Gamma^*$ is maximally consistent, $\eq[t][t'] \in \Gamma^*$
+iff $\Gamma^* \Proves \eq[t][t']$.  Thus it is enough to show the
+following:
+\begin{enumerate}
+\item $\Gamma^* \Proves \eq[t][t]$ for all terms~$t$.
+\item If $\Gamma^* \Proves \eq[t][t']$ then $\Gamma^* \Proves \eq[t'][t]$.
+\item If $\Gamma^* \Proves \eq[t][t']$ and $\Gamma^* \Proves
+  \eq[t'][t'']$, then $\Gamma^* \Proves \eq[t][t'']$.
+\item If $\Gamma^* \Proves \eq[t][t']$, then
+\[
+\Gamma^* \Proves
+\eq[\Atom{f}{t_1,\dots,t_{i-1},t,t_{i+1},,\dots,t_n}][\Atom{f}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}]
+\]
+for every $n$-place !!{function}~$f$ and terms $t_1$, \dots,
+$t_{i-1}$, $t_{i+1}$, \dots,~$t_n$.
+\item If $\Gamma^* \Proves \eq[t][t']$ and
+$\Gamma^* \Proves
+\Atom{R}{t_1,\dots,t_{i-1},t,t_{i+1},\dots,t_n}$, then
+$\Gamma^* \Proves \Atom{R}{t_1,\dots,t_{i-1},t',t_{i+1},\dots,t_n}$
+for every $n$-place !!{predicate}~$R$ and terms $t_1$, \dots,
+$t_{i-1}$, $t_{i+1}$, \dots,~$t_n$.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+Complete the proof of~\olref[fol][com][ide]{prop:approx-equiv}.
+\end{prob}
+
+\begin{defn}
+Suppose $\Gamma^*$ is a maximally consistent set in a language~$\Lang
+L$, $t$ is a term, and $\approx$ as in the previous definition.  Then:
+\[
+[t]_\approx = \Setabs{t'}{t'\in \Trm[L], t \approx t'}
+\]
+and $\Trm[L]/_\approx = \Setabs{[t]_\approx}{t \in \Trm[L]}$.
+\end{defn}
+
+\begin{defn}
+\ollabel{defn:term-model-factor}
+Let $\Struct M = \Struct M(\Gamma^*)$ be the term model for~$\Gamma^*$.  Then
+$\Struct M/_\approx$ is the following !!{structure}:
+\begin{enumerate}
+\item $\Domain{M/_\approx} = \Trm[L]/_\approx$.
+\item $\Assign{c}{M/_\approx} = [c]_\approx$
+\item $\Assign{f}{M/_\approx}([t_1]_\approx, \dots,
+  [t_n]_\approx) = [\Atom{f}{t_1,\dots, t_n}]_\approx$
+\item $\tuple{[t_1]_\approx, \dots, [t_n]_\approx} \in
+  \Assign{R}{M/_\approx}$ iff $\Sat{M}{\Atom{R}{t_1,\dots, t_n}}$.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+Note that we have defined $\Assign{f}{M/_\approx}$ and
+$\Assign{R}{M/_\approx}$ for elements of $\Trm[L]/_\approx$ by
+referring to them as $[t]_\approx$, i.e., via
+\emph{representatives}~$t \in [t]_\approx$.  We have to make sure that
+these definitions do not depend on the choice of these
+representatives, i.e., that for some other choices~$t'$ which
+determine the same equivalence classes ($[t]_\approx = [t']_\approx$),
+the definitions yield the same result.  For instance, if $R$ is a
+one-place !!{predicate}, the last clause of the definition says that
+$[t]_\approx \in \Assign{R}{M/_\approx}$ iff $\Sat{M}{\Atom{R}{t}}$.
+If for some other term~$t'$ with $t \approx t'$,
+$\Sat/{M}{\Atom{R}{t}}$, then the definition would require
+$[t']_\approx \notin \Assign{R}{M/_\approx}$.  If $t \approx t'$,
+then $[t]_\approx = [t']_\approx$, but we can't have both $[t]_\approx
+\in \Assign{R}{M/_\approx}$ and $[t]_\approx \notin
+\Assign{R}{M/_\approx}$.  However, \olref{prop:approx-equiv}
+guarantees that this cannot happen.
+\end{explain}
+
+\begin{prop}
+$\Struct M/_\approx$ is well defined, i.e., if $t_1$, \dots, $t_n$,
+  $t_1'$, \dots, $t_n'$ are terms, and $t_i \approx t_i'$ then
+\begin{enumerate}
+\item $[\Atom{f}{t_1,\dots, t_n}]_\approx = [\Atom{f}{t_1',\dots,
+    t_n'}]_\approx$, i.e., $\Atom{f}{t_1,\dots, t_n} \approx
+  \Atom{f}{t_1',\dots, t_n'}$ and
+\item $\Sat{M}{\Atom{R}{t_1,\dots, t_n}}$ iff
+  $\Sat{M}{\Atom{R}{t_1',\dots, t_n'}}$, i.e., $\Atom{R}{t_1,\dots,
+  t_n} \in \Gamma^*$ iff $\Atom{R}{t_1',\dots, t_n'} \in \Gamma^*$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Follows from \olref{prop:approx-equiv}.
+\end{proof}
+
+\begin{lem}
+\ollabel{lem:truth}
+$\Sat{M/_\approx}{!A}$ iff $!A \in \Gamma^*$ for all
+  sentences~$!A$.
+\end{lem}
+
+\begin{proof}
+By induction on~$!A$, just as in the proof of \olref[mod]{lem:truth}.
+The only case that needs additional attention is when $!A \ident
+\eq[t][t']$.
+\begin{align*}
+\Sat{M/_\approx}{\eq[t][t']} & \text{ iff } [t]_\approx = [t']_\approx
+\text{ (by definition of $\Struct{M/_\approx}$)}\\
+& \text{ iff } t \approx t' \text{ (by definition of $[t]_\approx$)}\\
+& \text{ iff } \eq[t][t'] \in \Gamma^* \text{ (by definition of $\approx$).}
+\end{align*}
+\end{proof}
+
+\begin{digress}
+Note that while $\Struct{M(\Gamma^*)}$ is always !!{enumerable} and
+infinite, $\Struct{M/_\approx}$ may be finite, since it may turn out
+that there are only finitely many classes $[t]_\approx$.  This is to
+be expected, since $\Gamma$ may contain !!{sentence}s which require
+any !!{structure} in which they are true to be finite.  For instance,
+$\lforall[x][\lforall[y][x = y]]$ is a consistent !!{sentence}, but is
+satisfied only in !!{structure}s with a !!{domain} that contains
+exactly one !!{element}.
+\end{digress}
+
+\end{document}

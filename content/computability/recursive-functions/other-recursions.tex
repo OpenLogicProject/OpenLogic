@@ -1,0 +1,83 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: other-recursions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{ore}
+\olsection{Other Recursions}
+
+Using pairing and sequencing, we can justify more exotic (and
+useful) forms of primitive recursion. For example, it is often useful
+to define two functions simultaneously, such as in the following
+definition:
+\begin{eqnarray*}
+f_0(0,\vec z) & = & k_0(\vec z) \\
+f_1(0,\vec z) & = & k_1(\vec z) \\
+f_0(x+1,\vec z) & = & h_0(x,f_0(x,\vec z),f_1(x,\vec z),\vec z) \\
+f_1(x+1,\vec z) & = & h_1(x,f_0(x,\vec z),f_1(x,\vec z),\vec z)
+\end{eqnarray*}
+This is an instance of \emph{simultaneous recursion}. Another useful
+way of defining functions is to give the value of $f(x+1,\vec z)$ in
+terms of \emph{all} the values $f(0,\vec z)$, \dots,~$f(x,\vec z)$, as in
+the following definition:
+\begin{eqnarray*}
+f(0,\vec z) & = & g(\vec z) \\
+f(x+1,\vec z) & = & h(x, \tuple{f(0,\vec z), \dots, f(x,\vec z)},
+\vec z).
+\end{eqnarray*}
+The following schema captures this idea more succinctly:
+\[
+f(x,\vec z) = h(x,\tuple{f(0,\vec z), \dots, f(x-1,\vec z)})
+\]
+with the understanding that the second argument to $h$ is just the
+empty sequence when $x$ is $0$. In either formulation, the idea is
+that in computing the ``successor step,'' the function $f$ can make
+use of the entire sequence of values computed so far.
+This is known as a \emph{course-of-values} recursion. For a particular
+example, it can be used to justify the following type of definition:
+\begin{eqnarray*}
+f(x,\vec z) & = & \left\{
+\begin{array}{ll}
+  h(x,f(k(x,\vec z),\vec z),\vec z) & \text{if $k(x,\vec z) < x$} \\
+  g(x,\vec z) & \text{otherwise}
+\end{array}\right.
+\end{eqnarray*}
+In other words, the value of $f$ at $x$ can be computed in terms of
+the value of $f$ at \emph{any} previous value, given by $k$.
+
+You should think about how to obtain these functions using ordinary
+primitive recursion. One final version of primitive recursion is more
+flexible in that one is allowed to change the \emph{parameters} (side
+values) along the way:
+\begin{eqnarray*}
+f(0,\vec z) & = & g(\vec z) \\
+f(x+1,\vec z) & = & h(x,f(x,k(\vec z)),\vec z)
+\end{eqnarray*}
+This, too, can be simulated with ordinary primitive recursion. (Doing
+so is tricky. For a hint, try unwinding the computation by hand.)
+
+Finally, notice that we can always extend our ``universe'' by defining
+additional objects in terms of the natural numbers, and defining
+primitive recursive functions that operate on them. For example, we
+can take an integer to be given by a pair $\langle m, n \rangle$ of natural
+numbers, which, intuitively, represents the integer $m-n$. In other
+words, we say
+\[
+\fn{Integer}(x) \defiff \fn{length}(x) = 2
+\]
+and then we define the following:
+\begin{enumerate}
+\item $\fn{iequal}(x,y)$
+\item $\fn{iplus}(x,y)$
+\item $\fn{iminus}(x,y)$
+\item $\fn{itimes}(x,y)$
+\end{enumerate}
+Similarly, we can define a rational number to be a pair $\langle x, y \rangle$
+of integers with $y \neq 0$, representing the value $x / y$. And we
+can define $\fn{qequal}$, $\fn{qplus}$, $\fn{qminus}$, $\fn{qtimes}$,
+$\fn{qdivides}$, and so on.
+
+\end{document}

@@ -1,0 +1,72 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: reducibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{red}
+\olsection{Reducibility}
+
+\begin{explain}
+We now know that there is at least one set, $K_0$, that is computably
+enumerable but not computable. It should be clear that there are
+others. The method of reducibility provides a powerful method of
+showing that other sets have these properties, without constantly
+having to return to first principles.
+
+Generally speaking, a ``reduction'' of a set $A$ to a set $B$ is a
+method of transforming answers to whether or not elements are in~$B$
+into answers as to whether or not elements are in~$A$. We will focus
+on a notion called ``many-one reducibility,'' but there are many other
+notions of reducibility available, with varying properties. Notions of
+reducibility are also central to the study of computational
+complexity, where efficiency issues have to be considered as well. For
+example, a set is said to be ``NP-complete'' if it is in NP and every
+NP problem can be reduced to it, using a notion of reduction that is
+similar to the one described below, only with the added requirement
+that the reduction can be computed in polynomial time.
+
+We have already used this notion implicitly. Define the set $K$ by
+\[
+K = \Setabs{x}{\cfind{x}(x) \defined},
+\]
+i.e., $K = \Setabs{x}{x \in W_x}$. Our proof that the halting problem
+in unsolvable, \olref[hlt]{thm:halting-problem}, shows most directly
+that $K$ is not computable. Recall that $K_0$ is the set
+\[
+K_0 = \Setabs{\tuple{e, x}}{\cfind{e}(x) \defined }.
+\]
+i.e. $K_0 = \Setabs{\tuple{x,e}}{x \in W_e}$. It is easy to extend any
+proof of the uncomputability of $K$ to the uncomputability of $K_0$:
+if $K_0$ were computable, we could decide whether or not an element
+$x$ is in $K$ simply by asking whether or not the pair $\tuple{x, x}$
+is in $K_0$. The function $f$ which maps $x$ to $\tuple{x, x}$ is an
+example of a \emph{reduction} of $K$ to $K_0$.
+\end{explain}
+
+\begin{defn}
+Let $A$ and $B$ be sets. Then $A$ is said to be \emph{many-one
+  reducible} to~$B$, written $A \leq_m B$, if there is a computable
+function~$f$ such that for every natural number~$x$,
+\[
+x \in A \quad \text{if and only if} \quad f(x) \in B.
+\]
+If $A$ is many-one reducible to $B$ and vice-versa, then $A$ and $B$
+are said to be \emph{many-one equivalent}, written $A \equiv_m B$.
+\end{defn}
+
+If the function $f$ in the definition above happens to be injective,
+$A$ is said to be \emph{one-one reducible} to $B$. Most of the
+reductions described below meet this stronger requirement, but we will
+not use this fact.
+
+\begin{digress}
+It is true, but by no means obvious, that one-one reducibility really
+is a stronger requirement than many-one reducibility. In other words,
+there are infinite sets $A$ and $B$ such that $A$ is many-one
+reducible to $B$ but not one-one reducible to $B$.
+\end{digress}
+
+\end{document}
