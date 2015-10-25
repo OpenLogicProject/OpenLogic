@@ -1,0 +1,124 @@
+% Part: first-order-logic
+% Chapter: lindstrom
+% Section: ls-property
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{lin}{lsp}
+
+\olsection{Compactness and L\"owenheim-Skolem Properties}
+
+We now give the obvious extensions of compactness and
+L\"owenheim-Skolem to the case of abstract logics. 
+
+\begin{defn}
+An abstract logic $\tuple{L, \models_L}$ has the \emph{Compactness
+  Property} if each set $\Gamma$ of $L(\Lang{L})$-!!{sentence}s is
+satisfiable whenever each finite $\Gamma_0 \subseteq \Gamma$ is
+satisfiable.
+\end{defn}
+
+\begin{defn}
+$\tuple{L, \models_L}$ has the \emph{Downward L\"owenheim-Skolem
+  property} if any satisfiable $\Gamma$ has !!a{enumerable} model.
+\end{defn}
+
+
+The notion of partial isomorphism from
+\olref[bas][pis]{defn:partialisom} is purely ``algebraic'' (i.e.,
+given without reference to the !!{sentence}s of the language but only
+to the constants provided by the !!{language}~$\Lang{L}$ of the
+!!{structure}s), and hence it applies to the case of abstract
+logics. In case of first-order logic, we know from
+\olref[bas][pis]{thm:p-isom2} that if two !!{structure}s are partially
+isomorphic then they are elementarily equivalent. That proof does not
+carry over to abstract logics, for induction on !!{formula}s need not
+be available for arbitrary $!E \in L(\Lang{L})$, but the theorem is
+true nonetheless, provided the L\"owenheim-Skolem property holds.
+
+\begin{thm}
+\ollabel{thm:abstract-p-isom}
+Suppose $\tuple{L, \models_L}$ is a normal logic with the
+L\"owenheim-Skolem property. Then any two !!{structure}s that are
+partially isomorphic are elementarily equivalent in $\tuple{L,
+  \models_L}$.
+\end{thm}
+
+\begin{proof}
+Suppose $\Struct{M} \simeq_p \Struct{N}$, but for some $!E$ also
+$\Struct{M} \models_L !E$ while $\Struct{N} \not\models_L !E$. By the
+Isomorphism Property we can assume that $\Domain{M}$ and $\Domain{N}$
+are disjoint, and by the Expansion Property we can assume that $!E \in
+L(\Lang{L})$ for a finite !!{language}~$\Lang{L}$. Let $\mathcal{I}$
+be a set of partial isomorphisms between $\Struct{M}$ and
+$\Struct{N}$, and with no loss of generality also assume that if $p
+\in \mathcal{I}$ and $q \subseteq p$ then also $q \in \mathcal{I}$.
+
+$\Domain{M}^{<\omega}$ is the set of finite sequences of !!{element}s
+of~$\Domain{M}$. Let $S$ be the ternary relation over $\Domain{M}^{<\omega}$
+representing concatenation, i.e., if $\mathbf{a}, \mathbf{b},
+\mathbf{c} \in \Domain{M}^{<\omega}$ then $S(\mathbf{a}, \mathbf{b},
+\mathbf{c})$ holds if and only if $\mathbf{c}$ is the concatenation of
+$\mathbf{a}$ and $\mathbf{b}$; and let $T$ be the ternary relation
+such that $T(\mathbf{a}, b, \mathbf{c})$ holds for $b \in M$ and
+$\mathbf{a}, \mathbf{c} \in \Domain{M}^{<\omega}$ if and only if $\mathbf{a} =
+a_1, \dots a_n$ and $\mathbf{c} = a_1, \dots a_n, b$.  Pick new
+3-place !!{predicate}s $P$ and $Q$ and form the !!{structure}
+$\Struct{M}^*$ having the universe $\Domain{M} \cup \Domain{M}^{<\omega}$, having
+$\Struct{M}$ as a substructure, and interpreting $P$ and $Q$ by the
+concatenation relations $S$ and $T$ (so $\Struct{M}^*$ is in the
+!!{language} $\Lang{L} \cup \{ P, Q\}$).
+
+Define $\Domain{N}^{<\omega}$, $S'$, $T'$, $P'$, $Q'$ and
+$\Struct{N}^*$ analogously. Since by hypothesis $\Struct{M} \simeq_p
+\Struct{N}$, there is a relation $I$ between $\Domain{M}^{<\omega}$
+and $\Domain{N}^{<\omega}$ such that $I(\mathbf{a}, \mathbf{b})$
+holds if and only if $\mathbf{a}$ and $\mathbf{b}$ are isomorphic and
+satisfy the back-and-forth condition of
+\olref[bas][pis]{defn:partialisom}.  Now, let $\Struct{M}$ be the
+!!{structure} whose !!{domain} is the union of the !!{domain}s of
+$\Struct{M}^*$ and $\Struct{N}^*$, having $\Struct{M}^*$ and
+$\Struct{N}^*$ as sub!!{structure}s, in the !!{language} with one extra
+binary !!{predicate}~$R$ interpreted by the relation~$I$ and
+!!{predicate}s denoting the !!{domain}s $\Domain{M}^*$
+and~$\Domain{N}*$.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[node distance=2cm, auto, thick, >=stealth']
+    \draw [rounded corners] (0,0) -- (8,0) -- (8,4) -- (0,4) --  cycle;
+    \draw (2,2) circle (0.5cm);
+    \draw (2,2) circle (1.25cm);
+    \draw (6,2) circle (0.5cm);
+    \draw (6,2) circle (1.25cm);
+    \path node at (0.75,3.5) {\large $\Struct{M}$};
+    \path node at (2,2) {\large $\Struct{M}$};
+    \path node at (6,2) {\large $\Struct{N}$};
+    \path node at (3.5,1) {\large $\Struct{M}^*$};
+    \path node at (7.5,1) {\large $\Struct{N}^*$};
+    \node (Idom) at (2.8,2) {};
+    \node (Irng) at (5.2,2) {};
+    \draw[<->, bend left] (Idom) to node {\large $I$} (Irng) ;
+  \end{tikzpicture} 
+  \caption{The !!{structure} $\Struct{M}$ with the internal
+    partial isomorphism.}
+\end{figure}
+
+The crucial observation is that in the !!{language} of the
+!!{structure}~$\Struct{M}$ there is a \emph{first-order} !!{sentence} $!D_1$
+true in $\Struct{M}$ saying that $\Struct{M} \models_L !E$ and
+$\Struct{N} \not\models_L !E$ (this requires the Relativization
+Property), as well as a \emph{first-order} !!{sentence} $!D_2$ true in
+$\Struct{M}$ saying that $\Struct{M} \simeq_p \Struct{N}$ via the
+partial isomorphism~$I$. By the L\"owenheim-Skolem Property, $!D_1$
+and $!D_2$ are jointly true in !!a{enumerable} model $\Struct{M}_0$
+containing partially isomorphic substructures $\Struct{M}_0$ and
+$\Struct{N}_0$ such that $\Struct{M}_0 \models_L !E$ and $\Struct{N}_0
+\not\models_L !E$. But !!{enumerable} partially isomorphic !!{structure}s are
+in fact isomorphic by \olref[bas][pis]{thm:p-isom1}, contradicting the
+Isomorphism Property of normal abstract logics.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,79 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: minimization-lambda
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{mla}
+\olsection{Minimization with Lambda Terms}
+
+When it comes to the lambda calculus, we've shown the following:
+\begin{enumerate}
+\item Every primitive recursive function is represented by a lambda term.
+\item There is a lambda term $Y$ such that for any lambda term~$G$,
+  $YG \red G(YG)$.
+\end{enumerate}
+To show that every partial computable function is represented by some
+lambda term, we only need to show the following.
+
+\begin{lem}
+Suppose $f(x,y)$ is primitive recursive. Let $g$ be defined by
+\[
+g(x) \simeq \umin{y}{f(x,y) = 0}.
+\]
+Then $g$ is represented by a lambda term.
+\end{lem}
+
+\begin{proof}
+The idea is roughly as follows. Given $x$, we will use the
+fixed-point lambda term $Y$ to define a function $h_x(n)$ which searches
+for a $y$ starting at~$n$; then $g(x)$ is just
+$h_x(0)$. The function $h_x$ can be expressed as the solution of a
+fixed-point equation:
+\[
+h_x(n) \simeq
+\begin{cases}
+n & \text{if $f(x,n) = 0$} \\
+h_x(n+1) & \text{otherwise.}
+\end{cases}
+\]
+
+Here are the details. Since $f$ is primitive recursive, it is
+represented by some term $F$. Remember that we also have a lambda
+term~$D$ such that $D(M,N,\num{0}) \red M$ and $D(M,N,\num{1}) \red N$.
+Fixing $x$ for the moment, to represent $h_x$ we want to find a term
+$H$ (depending on~$x$) satisfying
+\[
+H(\num{n}) \equiv D(\num{n},H(S(\num{n})),F(x, \num{n})).
+\]
+We can do this using the fixed-point term~$Y$. First, let $U$ be the
+term
+\[
+\lambd[h][\lambd[z][D(z, (h(Sz)), F(x,z))]],
+\]
+and then let $H$ be the term $YU$. Notice that the only free variable
+in $H$ is $x$. Let us show that $H$ satisfies the equation above.
+
+By the definition of $Y$, we have
+\[
+H = YU \equiv U(YU) = U(H).
+\]
+In particular, for each natural number~$n$, we have
+\begin{align*}
+H(\num{n}) & \equiv U(H,\num{n}) \\
+& \red D(\num{n}, H(S(\num{n})), F(x,\num{n})),
+\end{align*}
+as required. Notice that if you substitute a numeral $\num{m}$ for $x$
+in the last line, the expression reduces to $\num{n}$ if $F(\num{m},
+\num{n})$ reduces to $\num{0}$, and it reduces to $H(S(\num{n}))$ if
+$F(\num{m},\num{n})$ reduces to any other numeral.
+
+To finish off the proof, let $G$ be $\lambd[x][H(\num{0})]$. Then $G$
+represents~$g$; in other words, for every $m$, $G(\num{m})$ reduces to
+reduces to $\num{g(m)}$, if $g(m)$ is defined, and has no
+normal form otherwise.
+\end{proof}
+
+\end{document}

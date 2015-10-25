@@ -1,0 +1,150 @@
+% Part: computability
+% Chapter: tm-computations
+% Section: turing-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{tur}{con}
+\olsection{Configurations and Computations}
+
+\begin{explain}
+The imaginary mechanism consisting of tape, read/write head, and
+Turing machine program is really just in intuitive way of visualizing
+what a Turing machine computation is.  Formally, we can define the
+computation of a Turing machine on a given input as a sequence of
+\emph{configurations}---and a configuration in turn is a sequence of
+symbols (corresponding to the contents of the tape at a given point in
+the computation), a number indicating the position of the read/write
+head, and a state.  Using these, we can define what the Turing machine
+$M$ computes on a given input.
+\end{explain}
+
+\begin{defn}
+A \emph{configuration} of Turing machine $M = \langle Q, \Sigma, s,
+I\rangle$ is a triple $\langle C, n, q\rangle$ where
+\begin{enumerate}
+\item $C \in \Sigma^*$ is a finite sequence of symbols from $\Sigma$,
+\item $n \in \Nat$ is a number $\le \len{C}$, and
+\item $q \in Q$
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+The potential input for a Turing machine is a sequence of symbols,
+usually a sequence that encodes a number in some form.  The initial
+configuration of the Turing machine is that configuration in which we
+start the Turing machine to work on that input: the tape contains the
+tape end marker immediately followed by the input written on the
+squares to the right, the read/write head is scanning the leftmost
+square of the tape (i.e., the left end marker), and the mechanism is
+in the designated start state~$s$.
+\end{explain}
+
+\begin{defn}
+The \emph{initial configuration} of $M$ for input $I \in \Sigma^*$ is
+\[
+\langle \TMendtape \frown I, 0, s\rangle
+\]
+\end{defn}
+
+\begin{explain}
+The~$\frown$ symbol is for \emph{concatenation} - we want to
+ensure that there are no blanks between the left end marker and
+the beginning of the input.
+\end{explain}
+
+\begin{defn}
+We say that a configuration $\langle C, n, q\rangle$ \emph{yields
+  $\langle C', n', q'\rangle$ in one step} (according to $M$), iff
+\begin{enumerate}
+\item the $n$-th symbol of $C$ is $\sigma$,
+\item the instruction set of $M$ contains a tuple $\langle q, \sigma,
+  q', \sigma', D\rangle$,
+\item the $n$-th symbol of $C'$ is $\sigma'$,
+\item
+\begin{enumerate}
+\item $D = L$ and $n' = n -1$, or
+\item $D = R$ and $n' = n$, or
+\item $D = N$ and $n' = n$,
+\end{enumerate}
+\item for all $i \neq n$, $C'(i) = C(i)$,
+\item if $n' > \len{C}$, then $\len{C'} = \len{C} + 1$ and the $n'$-th
+  symbol of $C'$ is $\TMblank$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+A \emph{run of $M$ on input~$I$} is a sequence $C_i$ of configurations
+of $M$, where $C_0$ is the initial configuration of $M$ for input $I$,
+and each $C_i$ yields $C_{i+1}$ in one step.
+
+We say that $M$ \emph{halts on input $I$ after $k$ steps} if $C_k =
+\langle \TMendtape \frown O, n, h\rangle$.  In that case the
+\emph{output} of $M$ for input $I$ is $O$.
+\end{defn}
+
+\begin{ex}
+For any machine and input, it is possible to trace through the configurations
+to determine the output. we will first run the even machine on an input of $4$ 
+strokes, in which case, the machine will halt. We will then run the machine on 
+an input of ~$3$ strokes, where the machine will loop infinitely (and thus reject
+the input). 
+
+The machine starts in state~$q_1$, scanning the leftmost stroke.
+The initial configuration of the machine is thus:
+\[
+\TMendtape \TMstroke_1 \TMstroke \TMstroke \TMstroke \TMblank \ldots
+\]
+The above configuration is straightforward. As can be seen, the machine starts
+in state one, scanning the leftmost stroke. This is represented by a subscript of
+the state name on the first stroke. The applicable instruction at this point is $\langle
+q_1, \TMstroke, q_2, \TMstroke, \TMright \rangle$, and so the machine moves
+right on the tape and changes to state $q_2$.
+\[
+\TMendtape \TMstroke \TMstroke_2 \TMstroke \TMstroke \TMblank \ldots
+\]
+Since the machine is now in state 2 scanning a stroke, we have the instruction
+$\langle q_2, \TMstroke, q_2, \TMstroke, \TMright \rangle$. This results in the
+configuration
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_1 \TMstroke \TMblank \ldots
+\]
+As the machine loops, the rules are applied again in the same order, resulting
+in the following two configurations:
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke_2 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
+\]
+The machine is now in state~$q_1$ scanning a blank. Based on the flow
+chart, we can easily see that there is no instruction to carry out, and thus the
+machine has halted. This means that the input has been accepted.
+
+Suppose next we start the machine with an input of three strokes. The
+first few configurations are similar, as the same instructions are carried, with
+only a small difference of the tape input:
+\[
+\TMendtape \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke_2 \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_1 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
+\]
+The machine has now traversed past all the strokes, and is reading
+a blank in state~$q_2$. As shown in the diagram, there is an instruction
+of the form $\langle q_2, \TMblank, q_2, \TMblank, \TMright \rangle$.
+Since the tape is inifinitely blank to the right, the machine will continue to
+execute this instruction \emph{ad infinitum}. The machine will never halt,
+and does not accept the input.
+\end{ex}
+
+
+\end{document}

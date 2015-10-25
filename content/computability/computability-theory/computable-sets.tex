@@ -1,0 +1,42 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: computable-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{cps}
+\olsection{Computable Sets}
+
+We can extend the notion of computability from computable functions to
+computable sets:
+
+\begin{defn}
+  Let $S$ be a set of natural numbers. Then $S$ is \emph{computable}
+  iff its characteristic function is. In other words, $S$ is
+  computable iff the function
+\[
+\Char{S}(x) =
+\begin{cases}
+1 & \text{if $x \in S$} \\
+0 & \text{otherwise}
+\end{cases}
+\]
+is computable. Similarly, a relation $\Atom{R}{x_0, \dots, x_{k-1}}$ is
+computable if and only if its characteristic function is.
+\end{defn}
+
+\begin{explain}
+Computable sets are also called \emph{decidable}.
+
+Notice that we now have a number of notions of computability: for
+partial functions, for functions, and for sets. Do not get them
+confused!{} \iftag{TMs}{The Turing machine computing a partial function
+  returns the output of the function, for input values at which the
+  function is defined; the Turing machine computing a set returns
+  either 1 or 0, after deciding whether or not the input value is in
+  the set or not.}{}
+\end{explain}
+
+\end{document}

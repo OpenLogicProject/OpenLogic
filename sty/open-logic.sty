@@ -78,7 +78,7 @@
 % olimport -- import a text. First optional argument is subdirectory,
 % if present subimport #1/#2, no optional argument: just \subfile it.
 % Starred version interprets #1 as relative to main O-L directory
-% \olpath.  When asking for a file from a subdirectory, change
+% \olpath/content/.  When asking for a file from a subdirectory, change
 % \olfilepath accordingly. This happens within a gorup, so \olfilepath
 % reverts to its original content after the \subfile.  Second optional
 % argument is name of sectioning command to use for \olsection.  Use
@@ -99,7 +99,7 @@
 }{%
     \def\olfilename{#3.tex}%
     \IfBooleanTF{#1}{%
-      \edef\olfilebase{\olpath #2/}}{%
+      \edef\olfilebase{\olpath content/#2/}}{%
       \edef\olfilebase{\olfilebase #2/}}%
     \subfile{\olfilebase #3}}
   \endgroup}

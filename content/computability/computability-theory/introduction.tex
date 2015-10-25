@@ -1,0 +1,69 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{int}
+\olsection{Introduction}
+
+The branch of logic known as \emph{Computability Theory} deals with
+issues having to do with the computability, or relative computability,
+of functions and sets. It is a evidence of Kleene's influence
+that the subject used to be known as \emph{Recursion Theory}, and
+today, both names are commonly used.
+
+Let us call a function~$f\colon \Nat \pto \Nat$ \emph{partial
+  computable} if it can be computed in some model of computation. If
+$f$ is total we will simply say that $f$ is \emph{computable}. A
+relation $R$ with computable characteristic function~$\Char{R}$ is
+also called computable. If $f$ and $g$ are partial functions, we will
+write $f(x) \defined$ to mean that $f$ is defined at $x$, i.e., $x$ is
+in the domain of $f$; and $f(x) \undefined$ to mean the opposite,
+i.e., that $f$ is not defined at~$x$. We will use $f(x) \simeq g(x)$
+to mean that either $f(x)$ and $g(x)$ are both undefined, or they are
+both defined and equal.
+
+One can explore the subject without having to refer to a specific
+model of computation. To do this, one shows that there is a universal
+partial computable function, $\fn{Un}(k, x)$. This allows us to
+enumerate the partial computable functions. We will adopt the notation
+$\cfind{k}$ to denote the $k$-th unary partial computable function,
+defined by $\cfind{k}(x) \simeq \fn{Un}(k, x)$. (Kleene used $\{ k \}$
+for this purpose, but this notation has not been used as much
+recently.)  Slightly more generally, we can uniformly enumerate the
+partial computable functions of arbitrary arities, and we will use
+$\cfind{k}[n]$ to denote the $k$-th $n$-ary partial recursive
+function.
+
+Recall that if $f(\vec x, y)$ is a total or partial function, then
+$\umin{y}{f (\vec x, y)}$ is the function of $\vec x$ that returns the
+least $y$ such that $f(\vec x, y) = 0$, assuming that all of $f(\vec
+x, 0), \ldots, f(\vec x, y-1)$ are defined; if there is no such $y$,
+$\umin{y}{f (\vec x, y)}$ is undefined. If $R(\vec x, y)$ is a
+relation, $\umin{y}{R(\vec x, y)}$ is defined to be the least $y$ such
+that $R(\vec x, y)$ is true; in other words, the least $y$ such that
+{\em one minus} the characteristic function of $R$ is equal to zero at
+$\vec x, y$.
+
+To show that a function is computable, there are
+two ways one can proceed:
+\begin{enumerate}
+\item Rigorously: describe a Turing machine or partial recursive
+  function explicitly, and show that it computes the function you have
+  in mind;
+\item Informally: describe an algorithm that computes it, and appeal to
+  Church's thesis.
+\end{enumerate}
+There is no fine line between the two; a detailed description of
+an algorithm should provide enough information so that it is
+relatively clear how one could, in principle, design the right Turing
+machine or sequence of partial recursive definitions. Fully rigorous
+definitions are unlikely to be informative, and we will try to find a
+happy medium between these two approaches; in short, we will try to
+find intuitive yet rigorous proofs that the precise definitions could
+be obtained.
+
+\end{document}
