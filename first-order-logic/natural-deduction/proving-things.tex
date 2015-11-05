@@ -1,0 +1,437 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: proving-things
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{pro}
+
+\olsection{Examples of \usetoken{P}{derivation}}
+
+\begin{ex}
+Give a derivation for the !!{formula} $(!A \land !B) \lif !A$.
+
+We begin by writing the desired end-!!{formula} at the bottom of the derivation.
+\[
+\AxiomC{}
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\DisplayProof
+\]
+
+Next, we need to figure out what kind of inference could 
+result in !!a{formula} of this form. The !!{main operator}
+of the end-!!{formula} is $\lif$, so we're looking for a 
+$\lif$ rule. Since we are introducing a $\lif$ 
+into the end-!!{formula}, we will set ourselves up to
+use the $\lif$ intro rule. It is best to write down the assumptions
+involved and label the inference rules as you progress, so it is easy to see
+whether all assumptions have been discharged at the end of
+the proof.
+
+
+\[
+\AxiomC{[$!A \land !B$]$^1$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{$!A$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\DisplayProof
+\]
+
+We now need to fill in the steps from the assumption $!A \land !B$ to $!A$.
+Since we only have one connective to deal with, $\land$, we must
+use the $\land$ elim rule. This gives us the following proof:
+
+\[
+\AxiomC{[$!A \land !B$]$^1$}
+\RightLabel{$\land$ Elim}
+\UnaryInfC{$!A$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(!A\land !B) \lif !A$}
+\DisplayProof
+\]
+
+We now have a correct !!{derivation} of the formula $(!A \land
+!B) \lif !A$.
+\end{ex}
+
+\begin{ex}
+Give a !!{derivation} of the !!{formula} $(\lnot !A \lor !B)
+\lif (!A \lif !B)$.
+
+Begin by writing the desired end-!!{formula} at the bottom of the 
+derivation.
+\[
+\AxiomC{}
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+To find a logical rule that could give us this end-!!{formula}, we look at
+the logical connectives in the end-!!{formula}: $\lnot$, $\lor$, and
+$\lif$. We only care at the moment about  the first occurence
+of $\lif$ because it is the !!{main operator} of the !!{sentence}
+ in the end-sequent, while $\lnot$, $\lor$ and the second occurence of 
+ $\lif$ are inside the scope of another connective, so we will
+take care of those later. We therefore start with the $\lif$ intro rule. 
+This must look like:
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^1$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+This leaves us with two possibilities to continue. Either we can
+continue working from the bottom up and do another application
+of the $\lif$ intro rule, or we can work from the top down and apply
+a $\lor$ elim rule. Let us apply the latter.
+
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^1$}
+\AxiomC{[$\lnot !A$]$^2$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{[$!B$]$^2$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{$\lor$ Elim$_2$}
+\TrinaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+Next, we will apply $\lif$ Intro to the two rightmost branches.
+
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^{(1)}$}
+\AxiomC{[$\lnot !A$]$^{(2)}$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\AxiomC{[$!A$]$^3$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lif$ Intro$_3$}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{[$!B$]$^{(2)}$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\AxiomC{[$!A$]$^4$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lif$ Intro$_4$}
+\BinaryInfC{$!A \lif !B$}
+\RightLabel{$\lor$ Elim$_2$}
+\TrinaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+The middle branch of the tree presents a contradiction, so
+we should use one of the $\lfalse$ rules. 
+
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^{(1)}$}
+\AxiomC{[$\lnot !A$]$^{(2)}$}
+\AxiomC{[$!A$]$^3$}
+\RightLabel{$\lfalse$ Intro}
+\BinaryInfC{$\lfalse$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lif$ Intro$_3$}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{[$!B$]$^{(2)}$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\AxiomC{[$!A$]$^4$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lif$ Intro$_4$}
+\BinaryInfC{$!A \lif !B$}
+\RightLabel{$\lor$ Elim$_2$}
+\TrinaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+By using $\lfalse$ Elim, we can introduce $!B$ and
+complete the branch.
+
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^{(1)}$}
+\AxiomC{[$\lnot !A$]$^{(2)}$}
+\AxiomC{[$!A$]$^3$}
+\RightLabel{$\lfalse$ Intro}
+\BinaryInfC{$\lfalse$}
+\RightLabel{$\lfalse$ Elim}
+\UnaryInfC{$!B$}
+\RightLabel{$\lif$ Intro$_3$}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{[$!B$]$^{(2)}$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\AxiomC{[$!A$]$^4$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lif$ Intro$_4$}
+\BinaryInfC{$!A \lif !B$}
+\RightLabel{$\lor$ Elim$_2$}
+\TrinaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+
+Now looking at the rightmost branch, we have no connectives
+to apply Elim rules to, so we must use an Intro rule. Since we have
+both $!B$ and $!A$ as assumptions, we can apply $\land$ Intro.
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^{(1)}$}
+\AxiomC{[$\lnot !A$]$^{(2)}$}
+\AxiomC{[$!A$]$^3$}
+\RightLabel{$\lfalse$ Intro}
+\BinaryInfC{$\lfalse$}
+\RightLabel{$\lfalse$ Elim}
+\UnaryInfC{$!B$}
+\RightLabel{$\lif$ Intro$_3$}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{[$!B$]$^{(2)}$}
+\AxiomC{[$!A$]$^4$}
+\RightLabel{$\land$ Intro}
+\BinaryInfC{$!A \land !B$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lif$ Intro$_4$}
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{$\lor$ Elim$_2$}
+\TrinaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+Since our goal of the rightmost branch is to get $!B$,
+we can apply $\land$ elim and finish the proof.
+
+\[
+\AxiomC{[$\lnot !A \lor !B$]$^{(1)}$}
+\AxiomC{[$\lnot !A$]$^{(2)}$}
+\AxiomC{[$!A$]$^3$}
+\RightLabel{$\lfalse$ Intro}
+\BinaryInfC{$\lfalse$}
+\RightLabel{$\lfalse$ Elim}
+\UnaryInfC{$!B$}
+\RightLabel{$\lif$ Intro$_3$}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{[$!B$]$^{(2)}$}
+\AxiomC{[$!A$]$^4$}
+\RightLabel{$\land$ Intro}
+\BinaryInfC{$!A \land !B$}
+\RightLabel{$\land$ Elim}
+\UnaryInfC{$!B$}
+\RightLabel{$\lif$ Intro$_4$}
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{$\lor$ Elim$_2$}
+\TrinaryInfC{$!A \lif !B$}
+\RightLabel{$\lif$ Intro$_1$} 
+\UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
+\DisplayProof
+\]
+\end{ex}
+
+\begin{ex}
+Give a !!{derivation} of the !!{formula} $\lexists[x][\lnot !A(x)]
+\lif \lnot \lforall[x][!A(x)]$.
+
+When dealing with quantifiers, we have to make sure not to violate the
+eigenvariable condition, and sometimes this requires us to play around
+with the order of carrying out certain inferences. In general, it
+helps to try and take care of rules subject to the eigenvariable
+condition first (they will be lower down in the finished proof).
+
+Starting as usual, we write
+
+\[
+\AxiomC{}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+
+We start by applying the $\lif$ intro rule.
+
+\[
+\AxiomC{[$\lexists[x][\lnot !A(x)]$]$^1$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{$\lif$ Intro}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+
+Since there is no obvious rule to apply to $\lnot \lforall[x][!A(x)]$,
+we will proceed by setting up the $\lexists$ Elim rule. We must be aware
+of the eigenvariable condition, and choose a constant that does not appear
+in $\lexists[x][\Atom{!A}{x}]$ or any assumptions that it depends on.
+
+\[
+\AxiomC{[$\lexists[x][\lnot !A(x)]$]$^1$}
+\AxiomC{[$\lnot !A(a)$]$^2$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lexists$ Elim$_2$}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{$\lif$ Intro}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+
+At this point, our only option is to carry out a $\lnot$ elim rule on
+$\lnot \lforall[x][!A(x)]$, which requires that we derive a contradiction with
+$\lforall[x][!A(x)]$ as the assumption. We can set it up as follows:
+
+\[
+\AxiomC{[$\lexists[x][\lnot !A(x)]$]$^1$}
+\AxiomC{[$\lnot !A(a)$]$^2$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\AxiomC{[$\lforall[x][!A(x)]$]$^3$}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\noLine
+\UnaryInfC{.}
+\RightLabel{$\lfalse$ Intro}
+\BinaryInfC{$\lfalse$}
+\RightLabel{$\lnot$ Intro$_3$}
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{$\lexists$ Elim$_2$}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{$\lif$ Intro}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+
+It looks like we are close to getting a contradiction. The easiest
+rule to apply is the $\lforall$ Elim, which has no eigenvariable
+conditions. Since we can use any eigenvariable we want, it makes
+the most sense to continue using~$a$ so we can reach a contradiction.
+
+\[
+\AxiomC{[$\lexists[x][\lnot !A(x)]$]$^1$}
+\AxiomC{[$\lnot !A(a)$]$^2$}
+\AxiomC{[$\lforall[x][!A(x)]$]$^3$}
+\RightLabel{$\lforall$ Elim}
+\UnaryInfC{$\Atom{!A}{a}$}
+\RightLabel{$\lfalse$ Intro}
+\BinaryInfC{$\lfalse$}
+\RightLabel{$\lnot$ Intro$_3$}
+\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{$\lexists$ Elim$_2$}
+\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
+\RightLabel{$\lif$ Intro}
+\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
+\DisplayProof
+\]
+
+It is important, especially when dealing with quantifiers, to double
+check at this point that the eigenvariable condition has not been
+violated. Since the only rule we applied that is subject to the
+eigenvariable condition was $\exists$ Elim, and the eigenvariable~$a$
+does not occur in any assumptions it depends on, this is a
+correct derivation.
+\end{ex}
+
+\begin{prob}
+Give !!{derivation}s of the following !!{formula}s:
+\begin{enumerate}
+\item $\lnot(!A \lif !B) \lif (!A \land \lnot !B)$
+\item $\lforall[x][(!A(x) \lif !B)] \lif (\lexists[y][!A(y)] \lif !B)$
+\end{enumerate}
+\end{prob}
+
+\end{document}

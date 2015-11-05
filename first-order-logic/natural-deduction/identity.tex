@@ -1,0 +1,88 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: identity
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{ide}
+
+\olsection{\usetoken{P}{derivation} with \usetoken{S}{identity}}
+
+!!^{derivation}s with the !!{identity} require additional inference rules.
+
+\paragraph{Rules for $\eq$:}
+
+\[
+\AxiomC{[$\eq[t][t]$]$^n$}
+\UnaryInfC{}
+\DisplayProof
+\]
+
+\[
+\AxiomC{$\eq[t_1][t_2]$}
+\AxiomC{$!A(t_1)$}
+\RightLabel{$\eq Elim$}
+\BinaryInfC{$!A(t_2)$}
+\DisplayProof
+\quad
+\textrm{  and  }
+\quad
+\AxiomC{$\eq[t_1][t_2]$}
+\AxiomC{$!A(t_2)$}
+\RightLabel{$\eq Elim$}
+\BinaryInfC{$!A(t_1)$}
+\DisplayProof
+\]
+where $t_1$ and $t_2$ are closed terms. The $\eq$ Intro
+rule allows us to assume an identity statement.
+
+\begin{ex}
+If $s$ and $t$ are ground terms, then $!A(s), \eq[s][t] \Proves !A(t)$:
+\[
+\AxiomC{[$!A(s)$]}
+\AxiomC{[$\eq[s][t]$]}
+\RightLabel{$\eq$ Elim}
+\BinaryInfC{$!A(t)$}
+\DisplayProof
+\]
+This may be familiar as the principle of substitutability of
+identicals, or Leibniz' Law.
+\end{ex}
+
+\begin{prob}
+Prove that $=$ is both transitive and symmetric
+\end{prob}
+
+\begin{prob}
+Give !!{derivation}s of the following !!{formula}s:
+\begin{enumerate}
+\item $\lforall[x][\lforall[y][((x = y \land !A(x)) \lif !A(y))]]$
+\item $\lexists[x][!A(x)] \land \lforall[y][\lforall[z][((!A(y) \land !A(z)) \lif y = z)]] \lif {}$\\
+\hskip 1em$\lexists[x][(!A(x) \land \lforall[y][(!A(y) \lif y = x)])]$
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+Natural deduction with rules for identity is sound.
+\end{prop}
+
+\begin{proof}
+Any !!{formula} of the form $\eq[t][t]$ are valid, since
+for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
+we assume the term $t$ to be ground, i.e., it contains no variables,
+so variable assignments are irrelevant).
+
+Suppose the last inference in a !!{derivation} is $=$. Then the
+premises contain $\eq[t_1][t_2]$ and $!A(t_1)$. Consider a 
+!!{structure}~$\Struct M$. $\Struct M$ satisfies the two premises
+by induction hypothesis. So, $\Sat{M}{\eq[t_1][t_2]}$. Therefore, 
+$\Value{t_1}{M} = \Value{t_2}{M}$. Let $s$ be any variable assignment, 
+and $s'$ be the $x$-variant given by $s'(x) = \Value{t_1}{M} = \Value
+{t_2}{M}$. By \olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_2)}
+[s]$ iff $\Sat{M}{!A(x)}[s']$ iff $\Sat{M}{!A(t_1)}[s]$. Since $\Sat{M}
+{!A(t_1)}$ therefore $\Sat{M}{!A(t_2)}$.
+\end{proof}
+
+\end{document}
