@@ -1,0 +1,121 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: axiomatic-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{pax}
+\olsection{Axiomatic \usetoken{P}{derivation}}
+
+\begin{explain}
+In order to arithmetize !!{derivation}s, we must represent
+!!{derivation}s as numbers. Since !!{derivation}s are lists of
+!!{formula}s, we can represent a !!{derivation} simply using the code
+of the list of codes of the corresponding !!{formula}s.
+\end{explain}
+
+\begin{defn}
+If $\Gamma$ is a finite set of !!{sentence}s, $\Gamma = \{!A_1, \dots,
+!A_n\}$, then $\Gn{\Gamma} = \tuple{\Gn{!A_1}, \dots, \Gn{!A_n}}$.
+
+If $\delta$ is !!a{derivation}, i.e., a sequence of !!{sentence}s,
+$!A_1$, \dots,~$!A_n$, then $\Gn{\delta} = \tuple{\Gn{!A_1}, \dots,
+  \Gn{!A_n}}$.
+\end{defn}
+
+\begin{explain}
+Having settled on a representation of !!{derivation}s, we must also
+show that we can manipulate such !!{derivation}s primite recursively,
+and express their essential properties and relations so.  Some
+operations are simple: e.g., given a G\"odel number~$d$ of a
+!!{derivation}, $(p)_{(\len{d}-1)}$ gives us the G\"odel number of its
+end-!!{formula}.  Some are much harder.  We'll at least sketch how to
+do this.  The goal is to show that the relation ``$\delta$ is
+!!a{derivation} of~$!A$ from~$\Gamma$'' is primitive recursive in the
+G\"odel numbers of $\delta$ and~$!A$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:followsby}
+The following relations are primitive recursive:
+\begin{enumerate}
+\item $!A$ is a logical axiom.
+\item $!A$ follows from $!B$ and $!C$ by modus ponens.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+We have to show that the corresponding relations between G\"odel
+numbers of !!{formula}s, sequences of G\"odel numbers of !!{formula}s
+(which code sets of !!{formula}s), and G\"odel numbers of !!{derivation}s 
+are primitive recursive.
+\begin{enumerate}
+\item $!A$ is a logical axiom iff it is of the form of one of Ax1--3.
+  Take, for example, Ax1: $!A$ would have to be of the form
+  $\lforall[x][!B] \lif \Subst{!B}{t}{x}$, where $t$ is !!{free for}
+  $x$ in $!B$. In other words, $!A$ is of he form of Ax1 iff there is
+  a !!{formula}~$!B$, a variable~$x$, and a term~$t$ which is !!{free
+    for}~$x$ in $!B$ so that $\lforall[x][!B] \lif \Subst{!B}{t}{x}$
+  is identical to~$!A$. In terms of G\"odel numbers, this can be
+  expressed as:
+  \begin{align*}
+    \fn{Ax1}(z) \defiff {} & \lexists[y<z][\lexists[v<z][\lexists[t<z][(
+          \fn{Frm}(y) \land \fn{Term}(t) \land \fn{Var}(v)  \land {} ]]] \\
+    & \fn{FreeFor}(y,t,v) \land
+    \#(\lforall) \concat y \concat \#(\lif) \concat \fn{Subst}(y,t,v) = z)
+  \end{align*}
+  We can similarly give definitions for ``is an instance of Ax2,'' and
+  similarly for Ax3.  Then
+  \[
+  \fn{LogAx}(x) \defiff \fn{Ax1}(x) \lor \fn{Ax2}(x) \lor \fn{Ax3}(x).
+  \]
+\item $!A$ follows by modus ponens from $!B$ and $!C$ iff $!C \ident
+  !B \lif !A$ (or $!B \ident !C \lif !A$, although we can disregard
+  this). So,
+  \begin{align*}
+    \fn{FollowsMP}(x, y, z) \defiff {} &
+      \fn{Sent}(x) \land \fn{Sent}(y) \land\fn{Sent}(z) \land {}\\
+      & z = y \concat \#(\lif) \concat x 
+    \end{align*}
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Show that ``is the G\"odel number of an instance of Ax2'' is
+  primitive recursive.
+\end{prob}
+
+\begin{prob}
+  Show that ``is the G\"odel number of an instance of Ax3'' is
+  primitive recursive.
+\end{prob}
+
+\begin{prop}
+Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
+the relation $\fn{Pr}_\Gamma(x, y)$ expressing ``$x$ is the code of
+!!a{derivation}~$\delta$ of $!A$ from nonlogical axioms in $\Gamma$
+and $y$ is the G\"odel number of~$!A$'' is
+primitive recursive.
+\end{prop}
+
+\begin{proof}
+Suppose ``$y \in \Gamma$'' is given by the primitive recursive
+predicate~$R_\Gamma(y)$.  We have to show that $\fn{Pr}_\Gamma(x, y)$
+which holds iff $y$ is the G\"odel number of a sentence~$!A$ and
+$x$~is the code of a !!{derivation} with end
+!!{formula} $!A$ and all non-logical axioms in~$\Gamma$ is
+primitive recursive.
+
+\begin{align*}
+\fn{Pr}_\Gamma(x, y) \defiff {}&
+\fn{Sent}(y) \land \land (x)_{(\len{x}-1)} = y \land {} \\
+& \lforall[i < \len{x}](\fn{Sent}((x)_i) \land {}\\
+& (\fn{LogAx}(x_i) \lor
+\lexists[j<i][\lexists[k<i][\fn{FollowsMP}((x)_i, (x)_j, (x)_k)]] \lor
+R_\Gamma(x_i)))
+\end{align*}
+\end{proof}
+
+\end{document}
