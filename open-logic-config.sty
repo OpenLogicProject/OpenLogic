@@ -146,6 +146,20 @@
 
 \DeclareDocumentMacro \fCenter {\ensuremath{\,\Sequent\,}}
 
+% - Rule names: `\LeftR{Op}` typesets the name of a left rule for
+% operator `Op`, e.g., `\LeftR{\land}` produces `$\land$L`.
+% `\RightR{Op}` does the same for right rules.
+
+\DeclareDocumentCommand \LeftR { m } {\ensuremath{#1\mathrm{L}}}
+
+\DeclareDocumentCommand \RightR { m } {\ensuremath{#1\mathrm{R}}}
+
+% - `\Weakening`: produces name or abbreviation for weakening rule,
+% e.g., ``W''.
+
+\DeclareDocumentMacro \Weakening {\text{W}}
+
+
 % - Rule names: `\Intro{Op}` typesets the name of an intro rule for
 % operator `Op`, e.g., `\Intro{\land}` produces `$\land$Intro`.
 % `\Elim{Op}` does the same for elimination rules.
@@ -223,8 +237,8 @@
 \DeclareDocumentCommand \Proves { t{/} o } {
   \IfBooleanTF {#1}{
     \IfNoValueTF {#2} 
-        { \not\vdash }
-        { \not\vdash_{#2} }}{
+        { \nvdash }
+        { \nvdash_{#2} }}{
     \IfNoValueTF {#2} 
         { \vdash }
         { \vdash_{#2} }}
@@ -245,17 +259,17 @@
 % ### The semantic consequence relation relation
 
 % `\Entails` is the semantic counterpart of `\Proves` and defaults to
-% $\models$. It also takes an optional `/` for $\not\models$ and an
+% $\vDash$. It also takes an optional `/` for $\nvDash$ and an
 % optional argument for a subscript.
 
 \DeclareDocumentCommand \Entails { t{/} o } {
   \IfBooleanTF {#1}{
     \IfNoValueTF {#2} 
-        { \not\models }
-        { \not\models_{#2} }}{
+        { \nvDash }
+        { \nvDash_{#2} }}{
     \IfNoValueTF {#2} 
-        { \models }
-        { \models_{#2} }}
+        { \vDash }
+        { \vDash_{#2} }}
 }
 
 
@@ -558,7 +572,7 @@
 % OLP texts use special commands which carry out the
 % typesetting. Thus, e.g., all structures, which appear in the texts,
 % say, as `\Struct{M}`, can be typeset according to preference. By
-% default, they are typeset in fraktur (e.g., $\mathfrak M $) but this
+% default, they are typeset in fraktur (e.g., $\mathfrak{M}$) but this
 % can be configured by changing the definition of the `\Struct`
 % command.  Note that often the default behavior is to only apply the
 % typeface command to the first token in the argument, e.g., `\Struct

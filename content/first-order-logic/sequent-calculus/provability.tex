@@ -52,6 +52,9 @@ and the $\Log{LK}$-!!{derivation} of $\Gamma_1 \cup\{!A\} \Sequent
 \RightLabel{cut}
 \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter \lfalse $
 \end{prooftree}
+(Recall that double inference lines indicate several weakening
+inferences.)
+
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
 \Proves[\Log{LK}] \lfalse$.
@@ -72,7 +75,7 @@ $\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \cup \{!A\}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
 \Deduce$\Gamma_0, !A \fCenter \lfalse$
-\RightLabel{$\lnot$ right}
+\RightLabel{\RightR{\lnot}}
 \UnaryInf$ \Gamma_0 \fCenter \lnot !A$
 \end{prooftree}
 \end{proof}
@@ -93,7 +96,7 @@ of $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent
 \AxiomC{}
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_0, !A \fCenter \lfalse $
-\RightLabel{$\lnot$ right}
+\RightLabel{\RightR{\lnot}}
 \UnaryInf$ \Gamma_0 \fCenter \lnot !A$
 \AxiomC{}
 \RightLabel{$\Pi_1$}
@@ -128,7 +131,7 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
 \Deduce$ \Gamma_1, !B \fCenter \lfalse $
 \doubleLine
 \UnaryInf$ \Gamma_0, \Gamma_1, !B \fCenter \lfalse$
-\RightLabel{$\lor$ left}
+\RightLabel{\LeftR{\lor}}
 \BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter \lfalse $
 \end{prooftree}
 Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
@@ -153,7 +156,7 @@ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \AxiomC{}
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A $
-\RightLabel{$\lor$ right}
+\RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma_0 \fCenter !A \lor !B$
 \end{prooftree}
 Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
@@ -180,7 +183,7 @@ Prove \olref[fol][seq][prv]{prop:provability-lor-right}.
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_0, \fCenter !A \land !B$
 \Axiom$!A \fCenter !A$
-\RightLabel{$\land$ left}
+\RightLabel{\LeftR{\land}}
 \UnaryInf$!A \land !B \fCenter !A$
 \RightLabel{cut}
 \BinaryInf$\Gamma_0 \fCenter !A$
@@ -213,7 +216,7 @@ and $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \AxiomC{}
 \RightLabel{$\Pi_1$}
 \Deduce$ \Gamma_1, \fCenter !B$
-\RightLabel{$\land$ right}
+\RightLabel{\RightR{\land}}
 \BinaryInf$\Gamma_0, \Gamma_1 \fCenter !A \land !B $
 \end{prooftree}
 Since $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, we have $\Gamma
@@ -249,7 +252,7 @@ $\Gamma \Proves[\Log{LK}] !A \lif !B$, then $\Gamma \Proves[\Log{LK}]
 \AxiomC{$!B \fCenter !B$}
 \doubleLine
 \UnaryInf$ \Gamma_0, !B \fCenter !B$
-\RightLabel{$\lif$ left}
+\RightLabel{\LeftR{\lif}}
 \BinaryInf$\Gamma_0, !A \lif !B \fCenter !B$
 \RightLabel{cut}
 \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter !B$
@@ -283,7 +286,7 @@ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \UnaryInf$\lnot !A, !A \fCenter$
 \doubleLine
 \UnaryInf$!A, \lnot !A \fCenter !B$
-\RightLabel{$\lif$ right}
+\RightLabel{\RightR{\lif}}
 \UnaryInf$\lnot !A \fCenter !A \lif !B$
 \RightLabel{cut}
 \BinaryInf$\Gamma_0 \fCenter !A \lif !B$
@@ -300,7 +303,7 @@ $\Gamma_0 \Sequent !B$. The following !!{derivation} shows that $\Gamma
 \Axiom$!B \fCenter !B$
 \doubleLine
 \UnaryInf$!A, !B \fCenter !B$
-\RightLabel{$\lif$ right}
+\RightLabel{\RightR{\lif}}
 \UnaryInf$!B \fCenter !A \lif !B$
 \RightLabel{cut}
 \BinaryInf$\Gamma_0 \fCenter !A \lif !B$
@@ -314,7 +317,7 @@ Prove \olref[fol][seq][prv]{prop:provability-lif}.
 \begin{thm}
 \ollabel{thm:strong-generalization} If $c$ is a constant not occurring
 in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
-\Proves \lforall[x][!A(c)]$.
+\Proves \lforall[x][!A(x)]$.
 \end{thm}
 
 \begin{proof}
@@ -340,7 +343,7 @@ and thus the eigenvariable condition is satisfied.
 \begin{tagenumerate}{prvEx,prvAll}
 \tagitem{prvEx}{Suppose $\Gamma \Proves !A(t)$. Then for some
   finite~$\Gamma_0 \subseteq \Gamma$, $\Log{LK}$ !!{derive}s $\Gamma_0
-  \Sequent !A(t)$. Add an $\lexists$ right inference to get
+  \Sequent !A(t)$. Add an \RightR{\lexists} inference to get
   !!a{derivation} of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
 
 \tagitem{prvAll}{Suppose $\Gamma \Proves \lnot !A(t)$. Then there is a
@@ -353,7 +356,7 @@ and thus the eigenvariable condition is satisfied.
 \RightLabel{$\Pi$}
 \Deduce$\Gamma_0 \fCenter \lforall[x][!A(x)]$
 \Axiom$!A(t) \fCenter !A(t)$
-\RightLabel{$\lforall$ left}
+\RightLabel{\LeftR{\lforall}}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(t)$
 \RightLabel{cut}
 \BinaryInf$\Gamma_0 \fCenter  !A(t)$
