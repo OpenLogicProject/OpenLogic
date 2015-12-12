@@ -1,5 +1,5 @@
 % Part: computability
-% Chapter: tm-computations
+% Chapter: machines-computations
 % Section: halting-problem
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -43,7 +43,7 @@ h(m,w) =
 
 \begin{defn}
 The \emph{Halting Problem} is the problem of determining (for any m, w)
-whether the Turing machine~$M_m$ halts for an input of~$w$ $\TMstroke$s.
+whether the Turing machine~$M_m$ halts for an input of~$w$ strokes.
 \end{defn}
 
 \begin{explain}
@@ -66,22 +66,23 @@ s(w) =
 
 \begin{proof}
 We suppose, for contradiction, that the function~$s$ is Turing-computable.
-Then there would be a Turing machine that computes~$s$. Call it $S$. This
+Then there would be a Turing machine that computes~$s$. Call this machine
+ $S$. This
 machine can be hooked up to another machine $J$, where $J$ halts iff it is
 started on a blank tape. $S-J$, the machine created from hooking $S$ to
 $J$, is a
 Turing machine, so it is $M_w$ for some~$w$ (i.e., it appears in the
-enumeration). Start $S-J$ on an input of~$w \TMstroke$s. There are two
-possibilities: either $S-J$ (i.e. $M_w$) halts or it does not halt.
+enumeration). Start $M_w$ on an input of~$w \TMstroke$s. There are two
+possibilities: either $M_w$ halts or it does not halt.
 \begin{enumerate}
-\item Suppose $S-J$/$M_w$ halts for an input of w $\TMstroke$s. Then
+\item Suppose $M_w$ halts for an input of w $\TMstroke$s. Then
   $s(w) = 1$. So $S$ halts with a $\TMstroke$ on the tape.  $J$ starts
-  with a $\TMstroke$ on the tape. So $J$ does not halt. So $S-J$/$M_w$
+  with a $\TMstroke$ on the tape. So $J$ does not halt. So $M_w$
   does not halt for an input of w $\TMstroke$'s.
 
-\item Suppose $S-J$/$M_w$ does not halt for an input of $w$
+\item Suppose $M_w$ does not halt for an input of $w$
   $\TMstroke$s.  Then $s(w) = 0$, and $S$ halts with a blank tape. So
-  $J$ starts with a blank tape.  So $J$ halts. So $S-J$/$M_w$ does
+  $J$ starts with a blank tape.  So $J$ halts. So $M_w$ does
   halt for an input of $w$ $\TMstroke$'s.
 \end{enumerate}
 
