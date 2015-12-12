@@ -136,11 +136,11 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 The variable assignments are important in the last
 \iftag{notprvEx,notprvAll}{clause}{two clauses}.  \iftag{prvAll}{We
   cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $a
-  \in \Domain{M}$, $\Sat{M}{!B(a)}$.}{} \iftag{prvEx}{We cannot define
+  \in \Domain{M}$, $\Sat{M}{!B(a)}$.''}{} \iftag{prvEx}{We cannot define
   satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $a \in
-  \Domain{M}$, $\Sat{M}{!B(a)}$.}{} The reason is that $a$ is not
+  \Domain{M}$, $\Sat{M}{!B(a)}$.''}{} The reason is that $a$ is not
 symbol of the language, and so $!B(a)$ is not a !!{formula} (that is,
-$\Subst{!B}{a}{x}$ is undefined).  We can also not assume that we have
+$\Subst{!B}{a}{x}$ is undefined).  We also cannot assume that we have
 !!{constant}s or terms available that name every !!{element}
 of~$\Struct{M}$, since there is nothing in the definition of
 !!{structure}s that requires it.  Even in the standard language the
@@ -301,6 +301,9 @@ Complete the proof of \olref[fol][syn][sat]{prop:satindep}.
 If $!A$ is a sentence, we say that a !!{structure}~$\Struct M$
 \emph{satisfies}~$!A$, $\Sat{M}{!A}$, iff $\Sat{M}{!A}[s]$ for all
 !!{variable} assignments~$s$.
+
+If $\Sat{M}{!A}$, we also say that \emph{$!A$ is true
+  in~$\Struct{M}$.}
 \end{defn}
 
 \begin{prob}
