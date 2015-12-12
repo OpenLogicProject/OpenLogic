@@ -8,8 +8,9 @@
 
 \olfileid{tur}{mac}{int} 
 \olsection{Introduction}
+
 \begin{explain}
- Even though the term ``Turing machine'' evokes the image of
+Even though the term ``Turing machine'' evokes the image of
 a physical machine with moving parts, strictly speaking a Turing machine is
 a purely mathematical construct. It is perhaps best to think of a Turing
 machine as a program for a special kind of imaginary mechanism. This
@@ -27,19 +28,61 @@ leftmost square and in a specified \emph{initial state}. At each step of
 the mechanism's run, the content of the square currently scanned together
 with the state the mechanism is in and the Turing machine program determine
 what happens next. The Turing machine program consists of a list of
-5-tuples $\langle q_i, \sigma, q_j, \sigma', D\rangle$. Whenever the
+5-tuples $\tuple{q_i, \sigma, q_j, \sigma', D}$. Whenever the
 mechanism is in state $q_i$ and reads symbol $\sigma$, it replaces the
 symbol on the current square with $\sigma'$, the head moves left, right, or
 stays put according to whether $D$ is $\TMleft$, $\TMright$, or $\TMstay$,
-and the mechanism goes into state~$q_j$. We say that the machine halts when
-it encounters some state, ~$q_n$, and symbol, $\sigma$ such that there is
-no instruction beginning $\langle q_n, \sigma\rangle$. In other words, the
-machine has no instruction to carry out, and at that point, it ceases
-operation. Halting is sometimes represented by a specific halt state~$h$.
-This will be demonstrated in more detail later on.
-%% We should have a picture of the tape with the read/write head
-%% somewhere in this intro section.
- \end{explain}
+and the mechanism goes into state~$q_j$.
+
+For instance, consider the situation below:
+
+\begin{center}
+  \usetikzlibrary{calc, chains, shapes, decorations.pathmorphing}
+  \begin{tikzpicture}
+  \tikzstyle{tmhead}=[arrow box,draw,minimum size=3ex,arrow box
+arrows={east:.25cm, west:.25cm}]
+
+  \tikzset{tape/.style={minimum size=3ex, draw}}
+  \begin{scope}[start chain=0 going right, node distance=0pt]
+    \foreach \x [count=\i] in
+             {$\TMendtape$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMblank$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMblank$,$\TMblank$,$\TMblank$} {
+    \ifnum\i=12 % if last node reset outer sep to 0pt
+      \node [on chain=0, tape, outer sep=0pt] (n\i) {\x};
+      \draw (n\i.north east) -- ++(.2,0) decorate [decoration={zigzag, segment length=.5ex, amplitude=.3ex}] {-- ($(n\i.south east)+(+.2,0)$)} -- (n\i.south east) -- cycle;
+     \else
+      \node [on chain=0, tape] (n\i) {\x};
+     \fi
+     \ifnum\i=1 % if first node draw a thick line at the left
+      \draw [line width=2pt] (n\i.north west) -- (n\i.south west);
+     \fi
+             }
+             \node [tmhead,yshift=-.3cm] at (n3.south) (head) {$q_1$};
+
+%   \node [right=.25cm of n12] {$\cdots$};
+%   \node [tape, above left=.25cm and 1cm of n1] (q3) {$q_3$};
+%   \draw [>=latex, ->] (q3) -| (n5);
+  \end{scope}
+ \end{tikzpicture}
+\end{center}
+
+The tape of the Turing machine contains the end-of-tape symbol
+$\TMendtape$ on the leftmost square, followed by three $\TMstroke$'s,
+a $\TMblank$, four more $\TMstroke$'s, and the rest of the tape is
+filled with $\TMblank$'s.  The head is reading the third square from
+the left, which contains a $\TMstroke$, and is in state~$q_1$---we say
+``the machine is reading a $\TMstroke$ in state~$q_1$.''  If the
+program of the turing machine contains, say, the tuple $\tuple{q_1,
+\TMstroke, q_5, \TMblank, \TMright}$, we would now replace the
+$\TMstroke$ on the third square with a~$\TMblank$, move right to the
+fourth square, and change the state of the machine to~$q_5$.
+
+We say that the machine \emph{halts} when it encounters some state,
+$q_n$, and symbol, $\sigma$ such that there is no instruction
+$\tuple{q_n, \sigma, \quad, \quad, \quad}$. In other words, the machine
+has no instruction to carry out, and at that point, it ceases
+operation. Halting is sometimes represented by a specific halt
+state~$h$.  This will be demonstrated in more detail later on.
+\end{explain}
 
 
 \end{document}

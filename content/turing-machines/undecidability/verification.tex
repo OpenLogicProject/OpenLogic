@@ -27,7 +27,7 @@ Let $C(M, w, n)$ be the sentence
 \land \Obj S_{\sigma_k}(\overline k, \overline n) 
 \] 
 where $q$ is the state
-of $M$ at time~$n$, $M$ is scanning sqare~$m$ at time~$n$, square $i$
+of $M$ at time~$n$, $M$ is scanning square~$m$ at time~$n$, square $i$
 contains symbol~$\sigma_i$ at time~$n$ for $0 \le i \le k$ and $k$ is the
 right-most non-blank square of the tape at time~$m$. 
 \end{defn}
@@ -121,7 +121,9 @@ is an element of $T(M,w)$, which implies the following sentence:
 (\Obj Q_{q}(\overline
 m', \overline n) \land \Obj S_{\sigma_m}(\overline m, \overline n) \lif
 (\Obj Q_{q'}(\overline m, \overline n') \land \Obj S_{\sigma'_m}(\overline
-m, \overline n') \land A(\Obj x, \Obj y))) \] Which in turn implies \[ \Obj
+m, \overline n') \land A(\Obj x, \Obj y))),
+\]
+which in turn implies \[ \Obj
 Q_{q'}(\overline m, \overline n')\land \Obj S_{\sigma'_m}(\overline m,
 \overline n') \land \Obj S_{\sigma_0}(\overline 0, \overline n')\dots \land
 \Obj S_{\sigma_k}(\overline k, \overline n') 
@@ -140,29 +142,37 @@ H(M, w)$ is valid.
 \end{proof}
 
 \begin{explain} 
-To complete the verification of our clam, we also have to
+To complete the verification of our claim, we also have to
 establish the reverse direction: if $T(M, w) \lif H(M, w)$ is valid, then
 $M$ does in fact halt when started on input~$m$. 
 \end{explain}
 
 \begin{lem}
- If $T(M, w)$ entails $H(M, w)$, then $M$ halts on input~$w$.
+If $T(M, w)$ entails $H(M, w)$, then $M$ halts on input~$w$.
 \end{lem}
 
 \begin{proof} 
 Consider the $\Lang L_M$-!!{structure} $\Struct M$ with
 domain $\Nat$ which inerprets $\Obj 0$ as $0$, $'$ as the successor
 function, and $<$ as the lest-than relation, and the predicates $\Obj Q_q$
-and $\Obj S_\sigma$ as follows: \begin{align*} \Assign{\Obj Q_q}{M} & =
+and $\Obj S_\sigma$ as follows:
+\begin{align*}
+  \Assign{\Obj Q_q}{M} & =
 \{(m, n) : \text{after $n$ steps, $M$ started on $w$ is in state $q$
-scanning square~$m$}\} \\ \Assign{\Obj S_\sigma}{M} & = \{(m, n) :
+  scanning square~$m$}\} \\
+\Assign{\Obj S_\sigma}{M} & = \{(m, n) :
 \text{after $n$ steps, $M$ started on $w$ has symbol~$\sigma$ on
-square~$m$}\} \\ \end{align*} Clearly, $\Sat{M}{T(M, w)}$. If $T(M, w)$
-implies $H(M, w)$, then $\Sat{M}{H(M, w)}$, i.e., \[ \Sat{M}{\lexists[\Obj
-x]\lexists[\Obj y][\Obj{Q}_h(\Obj x, \Obj y)]}. \] As $\Domain{M} = \Nat$,
-there must be $m$, $n \in \Nat$ so that $\Sat{M}{\Obj Q_h(\overline{n},
-\overline{m})}$. By the definition of $\Struct M$, this means that $M$
-started on input~$w$ is in state~$h$ after $m$ steps, i.e., has halted.
+  square~$m$}\}
+\end{align*}
+Clearly, $\Sat{M}{T(M, w)}$. If $T(M, w)$
+implies $H(M, w)$, then $\Sat{M}{H(M, w)}$, i.e.,
+\[
+\Sat{M}{\lexists[\Obj x]\lexists[\Obj y][\Obj{Q}_h(\Obj x, \Obj y)]}.
+\]
+As $\Domain{M} = \Nat$, there must be $m$, $n \in \Nat$ so that
+$\Sat{M}{\Obj Q_h(\overline{n}, \overline{m})}$. By the definition of
+$\Struct M$, this means that $M$ started on input~$w$ is in state~$h$
+after~$m$ steps, i.e., has halted.
 \end{proof}
 
 \end{document}

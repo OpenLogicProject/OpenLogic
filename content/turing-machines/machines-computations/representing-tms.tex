@@ -22,10 +22,10 @@ only two internal states, $q_0$ and $q_1$, and one instruction:
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)                     {$q_0$};
-  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]   (A)              {$q_0$};
+  \node[state]   (B) [right of=A] {$q_1$};
 
-  \path (A) edge                      node {$\TMblank$,$\TMstroke$, $\TMright$} (B);
+  \path (A) edge  node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B);
 \end{tikzpicture}
 \]
 Recall that the Turing machine has a read/write head and a tape with the
@@ -36,58 +36,64 @@ equivalent to the instruction tuple $\tuple{q_0, \TMblank, q_1, \TMstroke,
 \end{explain}
 
 \begin{ex}
-\emph{Even Machine}: Create a Turing machine that halts if, and only if, there 
+\emph{Even Machine}: The following Turing machine halts if, and only if, there 
 are an even number of strokes on the tape.
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)                     {$q_0$};
+  \node[state]         (A)              {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
 
-  \path (A) edge                      node {$\TMstroke$,$\TMstroke$,$\TMright$} (B)
-            (B) edge [loop above] node {$\TMblank$,$\TMblank$,$\TMright$} (B)
-                  edge                      node {$\TMstroke$,$\TMstroke$,$\TMright$} (A);
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
 \end{tikzpicture}
 \]
-%% This machine has a double arrow between the states instead of two 
-%% separate arrows. I'm not sure how to change it, but I think it would 
-%% be better to have two separate arrows (for clarity).
+
+The state diagram corresponds to the following instruction set,
+written as 5-tuples:
+\begin{align*}
+  & \tuple{q_0, \TMstroke, q_1, \TMstroke, \TMright},\\
+  & \tuple{q_1, \TMblank, q_1, \TMblank, \TMright},\\
+  & \tuple{q_1, \TMstroke, q_0, \TMstroke, \TMright} 
+\end{align*}
 \end{ex}
 
 \begin{explain}
 The above machine halts only when the input is an even number of strokes.
-Otherwise, the machine (theoretically) continues to operate until infinity. 
+Otherwise, the machine (theoretically) continues to operate indefinitely. 
 For any machine and input, it is possible to trace through the 
 \emph{configurations} of the machine in order to determine the output. 
-A formal definition of configurations is given later in the chapter. For now,
+We will give a formal definition of configurations later. For now,
 we can intuitively think of configurations as a series of diagrams showing the 
 state of the machine at any point in time during operation.
 Configurations show the content of the tape, the state of the machine and the
 location of the read/write head.
 
-Let us trace through the configurations of the even machine if it is started with
- an input of $4$ strokes. In this case, we expect that the machine will halt. 
- We will then run the machine on an input of ~$3$ strokes, where the machine will
-  get caught in a loop. 
+Let us trace through the configurations of the even machine if it is
+started with an input of $4$ $\TMstroke$s. In this case, we expect that the
+machine will halt.  We will then run the machine on an input of ~$3$
+$\TMstroke$s, where the machine will get caught in a loop.
 
-The machine starts in state~$q_0$, scanning the leftmost stroke.
+The machine starts in state~$q_0$, scanning the leftmost~$\TMstroke$.
 We can represent the initial state of the machine as follows:
 \[
 \TMendtape \TMstroke_0 \TMstroke \TMstroke \TMstroke \TMblank \ldots
 \]
-The above configuration is straightforward. As can be seen, the machine starts
-in state one, scanning the leftmost stroke. This is represented by a subscript of
-the state name on the first stroke. The applicable instruction at this point is $\langle
-q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle$, and so the machine moves
-right on the tape and changes to state $q_1$.
+The above configuration is straightforward. As can be seen, the
+machine starts in state one, scanning the leftmost~$\TMstroke$. This
+is represented by a subscript of the state name on the
+first~$\TMstroke$. The applicable instruction at this point is
+$\langle q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle$, and so the
+machine moves right on the tape and changes to state~$q_1$.
 \[
 \TMendtape \TMstroke \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
 \]
-Since the machine is now in state 2 scanning a stroke, we have the instruction
-$\langle q_1, \TMstroke, q_1, \TMstroke, \TMright \rangle$. This results in the
-configuration
+Since the machine is now in state~$q_1$ scanning a stroke, we have to
+``follow'' the instruction $\langle q_1, \TMstroke, q_0, \TMstroke,
+\TMright \rangle$. This results in the configuration
 \[
 \TMendtape \TMstroke \TMstroke \TMstroke_0 \TMstroke \TMblank \ldots
 \]
@@ -99,9 +105,10 @@ in the following two configurations:
 \[
 \TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
 \]
-The machine is now in state~$q_0$ scanning a blank. Based on the flow
-chart, we can easily see that there is no instruction to carry out, and thus the
-machine has halted. This means that the input has been accepted.
+The machine is now in state~$q_0$ scanning a blank. Based on the
+transition diagram, we can easily see that there is no instruction to be
+carry out, and thus the machine has halted. This means that the input
+has been accepted.
 
 Suppose next we start the machine with an input of three strokes. The
 first few configurations are similar, as the same instructions are carried, with
@@ -120,7 +127,7 @@ only a small difference of the tape input:
 \]
 The machine has now traversed past all the strokes, and is reading
 a blank in state~$q_1$. As shown in the diagram, there is an instruction
-of the form $\langle q_1, \TMblank, q_1, \TMblank, \TMright \rangle$.
+of the form $\tuple{q_1, \TMblank, q_1, \TMblank, \TMright}$.
 Since the tape is inifinitely blank to the right, the machine will continue to
 execute this instruction \emph{ad infinitum}. The machine will never halt,
 and does not accept the input.
@@ -130,7 +137,7 @@ and does not accept the input.
 It is important to note that not all machines will halt. If halting means that the
 machine runs out of instructions to execute, then we can 
 create a machine that never halts simply by ensuring that there is an outgoing 
-arrow for each symbol at each state cell. The even machine can be modified 
+arrow for each symbol at each state. The even machine can be modified 
 to run infnitely by adding an instruction for scanning a blank at~$q_0$.
 \end{explain}
 
@@ -143,25 +150,26 @@ to run infnitely by adding an instruction for scanning a blank at~$q_0$.
   \node[state]         (A)                     {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
 
-  \path (A) edge                      node {$\TMstroke$,$\TMstroke$,$\TMright$} (B)
-                  edge [loop above] node {$\TMblank$,$\TMblank$,$\TMright$} (A)
-            (B) edge [loop above] node {$\TMblank$,$\TMblank$,$\TMright$} (B)
-                  edge                      node {$\TMstroke$,$\TMstroke$,$\TMright$} (A);
+  \path (A) edge [bend left] node {$\TMstroke$,$\TMstroke$,$\TMright$} (B)
+            edge [loop above] node {$\TMblank$,$\TMblank$,$\TMright$} (A)
+        (B) edge [loop above] node {$\TMblank$,$\TMblank$,$\TMright$} (B)
+            edge [bend left] node {$\TMstroke$,$\TMstroke$,$\TMright$} (A);
 \end{tikzpicture}
 \]
 \end{ex}
 
 \begin{explain}
-Machine tables are another way of representing Turing machines. Machine
-tables have the tape alphabet displayed on the x-axis, and the set of machine
-states across the y-axis. Inside the table, at the intersection of each state
- and symbol, is written the rest of the instruction - the new state, new symbol,
- and direction of movement. Machine tables make it easy to determine in what 
- state, and for what symbol, the machine halts. Whenever there is a gap in the 
- table is a possible point for the machine to halt. Unlike state diagrams and 
- instruction sets, where the points at which the machine halts
-are not always immediately obvious, any halting points are quickly identified by 
-finding the gaps in the machine table.
+Machine tables are another way of representing Turing
+machines. Machine tables have the tape alphabet displayed on the
+$x$-axis, and the set of machine states across the $y$-axis. Inside the
+table, at the intersection of each state and symbol, is written the
+rest of the instruction---the new state, new symbol, and direction of
+movement. Machine tables make it easy to determine in what state, and
+for what symbol, the machine halts. Whenever there is a gap in the
+table is a possible point for the machine to halt. Unlike state
+diagrams and instruction sets, where the points at which the machine
+halts are not always immediately obvious, any halting points are
+quickly identified by finding the gaps in the machine table.
 \end{explain}
 
 \begin{ex}
@@ -176,7 +184,6 @@ The machine table for the even machine is:
 & \multicolumn{1}{l|}{$\TMstroke, q_1, \TMright$} &  &  \\ \cline{1-3}
 \multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{$\TMblank, q_1, \TMblank$} 
 & \multicolumn{1}{l|}{$\TMstroke, q_0, \TMright$} &  &  \\ \cline{1-3}
-                           &                                                &                                                 &  & 
 \end{tabular}
 \]
 As we can see, the machine halts when scanning a blank in state $q_0$.

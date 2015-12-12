@@ -29,31 +29,32 @@ with output $\TMstroke^{f(k_1, \dots, k_n)}$.
 \end{defn}
 
 \begin{ex} \emph{Addition:}
-Build a machine that, when given an input of two non-empty strings of strokes~$n$ and
-$m$, computes the function $f(n,m) = n + m$.
+Build a machine that, when given an input of two non-empty strings of
+strokes~$n$ and $m$, computes the function $f(n,m) = n + m$.
 
-We want to come up with a machine that starts with two blocks of strokes on the tape
-and halts with one block of strokes. We first need a method to carry out. 
-The input strokes are separated by a blank, so one method would be to write a stroke on
-the square containing the blank, and erase the first (or last) stroke. This would result in
-a block of~$n + m$ strokes. Alternatively, we could proceed in a similar way to the
-doubler, by erasing a stroke from the first block, and adding one to the second block of 
-strokes until the first block has been removed completely. We will proceed with the
-former example.
+We want to come up with a machine that starts with two blocks of
+strokes on the tape and halts with one block of strokes. We first need
+a method to carry out.  The input strokes are separated by a blank, so
+one method would be to write a stroke on the square containing the
+blank, and erase the first (or last) stroke. This would result in a
+block of~$n + m$ strokes. Alternatively, we could proceed in a similar
+way to the doubler, by erasing a stroke from the first block, and
+adding one to the second block of strokes until the first block has
+been removed completely. We will proceed with the former example.
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)                     {$q_0$};
+  \node[state]         (A)              {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
   \node[state]         (C) [right of=B] {$q_2$};
 
-  \path (A) edge                      node {$\TMblank$,$\TMstroke$,$\TMright$} (B)
-                  edge [loop above] node {$\TMstroke$,$\TMstroke$,$\TMright$} (B)
-            (B) edge [loop above] node {$\TMstroke$,$\TMstroke$,$\TMright$} (B)
-                  edge                      node {$\TMblank$,$\TMblank$,$\TMleft$} (C)
-            (C) edge [loop above] node {$\TMstroke$,$\TMblank$,$\TMstay$} (C);
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
+           edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
+        (C) edge [loop above] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (C);
 \end{tikzpicture}
 \]
 \end{ex}
@@ -63,9 +64,9 @@ Trace through the configurations of the machine for input $\tuple{3,5}$.
 \end{prob}
 
 \begin{prob}
-\emph{Subtraction:} Design a Turing machine that when given an input of two non-empty 
-strings of strokes of length \emph{n} and \emph{m}, where $n > m$, computes the 
-function $f(n,m) = n + m$. 
+\emph{Subtraction:} Design a Turing machine that when given an input
+of two non-empty strings of strokes of length \emph{n} and \emph{m},
+where $n > m$, computes the function $f(n,m) = n - m$.
 \end{prob}
 
 \begin{prob}

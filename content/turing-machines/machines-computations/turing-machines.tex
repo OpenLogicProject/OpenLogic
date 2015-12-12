@@ -8,6 +8,7 @@
 
 \olfileid{tur}{mac}{tur}
 \olsection{Turing Machines}
+
 \begin{explain}
 The formal definition of what constitutes a Turing machine looks
 abstract, but is actually simple: it merely packs into one
@@ -21,11 +22,11 @@ set of the machine is.
 \begin{defn}
 A \emph{Turing machine} $T = \langle Q, \Sigma, s, I\rangle$ consists of
 \begin{enumerate}
-\item a finite set of states $Q$,
-\item a finite alphabet $\Sigma$ which includes $\TMendtape$ and
+\item a finite set of \emph{states}~$Q$,
+\item a finite \emph{alphabet} $\Sigma$ which includes $\TMendtape$ and
   $\TMblank$,
-\item an initial state $q_0 \in Q$,
-\item a finite instruction set~$I \subseteq Q \times \Sigma \times Q
+\item an \emph{initial state}~$q_0 \in Q$,
+\item a finite \emph{instruction set}~$I \subseteq Q \times \Sigma \times Q
   \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$.
 \end{enumerate}
 \end{defn}
@@ -50,16 +51,13 @@ the marker for the left end of the tape is not necessary.
 \emph{Even Machine:} The even machine can be represented formally
 in the following way:
 
-$Q =  \{ q_0, q_1 \}$
-
-$\Sigma = \{ \TMendtape, \TMblank, \TMstroke \}$
-
-$I = \{ \langle q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle$
-
-	  $\langle q_1, \TMstroke, q_0, \TMstroke, \TMright \rangle$
-	  
-	  $\langle q_0, \TMblank, q_0, \TMblank, \TMright \rangle \}$
-
+\begin{align*}
+Q = \{ & q_0, q_1 \} \\
+\Sigma = \{ & \TMendtape, \TMblank, \TMstroke \} \\
+I = \{ & \langle q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle,\\
+&\langle q_1, \TMstroke, q_0, \TMstroke, \TMright \rangle,\\
+& \langle q_0, \TMblank, q_0, \TMblank, \TMright \rangle \}
+\end{align*}
 \end{ex}
 
 \end{document}
