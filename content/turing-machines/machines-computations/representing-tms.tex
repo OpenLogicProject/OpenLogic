@@ -7,7 +7,7 @@
 \begin{document}
 
 \olfileid{tms}{tms}{dia}
-\olsection{representing-tms}
+\olsection{Representing Turing Machines}
 
 \begin{explain}
 Turing machines can be represented visually by \emph{state diagrams}. 
@@ -36,7 +36,8 @@ equivalent to the instruction tuple $\tuple{q_0, \TMblank, q_1, \TMstroke,
 \end{explain}
 
 \begin{ex}
-\emph{Even Machine}: Create a Turing machine that, when started.
+\emph{Even Machine}: Create a Turing machine that halts if, and only if, there 
+are an even number of strokes on the tape.
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -58,13 +59,81 @@ equivalent to the instruction tuple $\tuple{q_0, \TMblank, q_1, \TMstroke,
 \begin{explain}
 The above machine halts only when the input is an even number of strokes.
 Otherwise, the machine (theoretically) continues to operate until infinity. 
+For any machine and input, it is possible to trace through the 
+\emph{configurations} of the machine in order to determine the output. 
+A formal definition of configurations is given later in the chapter. For now,
+we can intuitively think of configurations as a series of diagrams showing the 
+state of the machine at any point in time during operation.
+Configurations show the content of the tape, the state of the machine and the
+location of the read/write head.
 
-This brings us to an important point: Not all machines will halt. If we concepualize 
-halting as the machine running out of instructions to execute, then we can 
+Let us trace through the configurations of the even machine if it is started with
+ an input of $4$ strokes. In this case, we expect that the machine will halt. 
+ We will then run the machine on an input of ~$3$ strokes, where the machine will
+  get caught in a loop. 
+
+The machine starts in state~$q_0$, scanning the leftmost stroke.
+We can represent the initial state of the machine as follows:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMstroke \TMblank \ldots
+\]
+The above configuration is straightforward. As can be seen, the machine starts
+in state one, scanning the leftmost stroke. This is represented by a subscript of
+the state name on the first stroke. The applicable instruction at this point is $\langle
+q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle$, and so the machine moves
+right on the tape and changes to state $q_1$.
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
+\]
+Since the machine is now in state 2 scanning a stroke, we have the instruction
+$\langle q_1, \TMstroke, q_1, \TMstroke, \TMright \rangle$. This results in the
+configuration
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMstroke \TMblank \ldots
+\]
+As the machine loops, the rules are applied again in the same order, resulting
+in the following two configurations:
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke_1 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
+\]
+The machine is now in state~$q_0$ scanning a blank. Based on the flow
+chart, we can easily see that there is no instruction to carry out, and thus the
+machine has halted. This means that the input has been accepted.
+
+Suppose next we start the machine with an input of three strokes. The
+first few configurations are similar, as the same instructions are carried, with
+only a small difference of the tape input:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
+\]
+The machine has now traversed past all the strokes, and is reading
+a blank in state~$q_1$. As shown in the diagram, there is an instruction
+of the form $\langle q_1, \TMblank, q_1, \TMblank, \TMright \rangle$.
+Since the tape is inifinitely blank to the right, the machine will continue to
+execute this instruction \emph{ad infinitum}. The machine will never halt,
+and does not accept the input.
+\end{explain}
+
+\begin{explain}
+It is important to note that not all machines will halt. If halting means that the
+machine runs out of instructions to execute, then we can 
 create a machine that never halts simply by ensuring that there is an outgoing 
-arrow for each symbol at each state cell. The above machine can be modified 
+arrow for each symbol at each state cell. The even machine can be modified 
 to run infnitely by adding an instruction for scanning a blank at~$q_0$.
 \end{explain}
+
 \begin{ex}
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
@@ -113,7 +182,7 @@ The machine table for the even machine is:
 As we can see, the machine halts when scanning a blank in state $q_0$.
 \end{ex}
 
-\begin{ex}
+\begin{explain}
 So far we have only considered machines that read and accept input. However, 
 Turing machines have the capacity to both read and write. An example of
 such a machine (although there are many, many examples) is a \emph{doubler}.
@@ -121,15 +190,18 @@ A doubler, when started with a block of~$n$ strokes on the tape, outputs
 a block of~$2n$ strokes.
 
 Before building such a machine, it is important to come up with a 
-\emph{strategy} for solving the problem. Since the machine, as we have 
-formulated it, cannot remember how many strokes it has read, we need to
-come up with a way to ensure that we are keeping track of all the strokes
+\emph{strategy} for solving the problem. Since the machine (as we have 
+formulated it) cannot remember how many strokes it has read, we need to
+come up with a way to keep track of all the strokes
 on the tape. One such way is to separate the output from the input with a
 blank. The machine can then erase the first stroke from the input,
-traverse over the rest of the unput, leave a blank, and write two new strokes.
+traverse over the rest of the input, leave a blank, and write two new strokes.
 The machine will then go back and find the second stroke in the input, and
 double that one as well. By erasing the input as the machine goes, we can guarantee
-that no stroke is missed or doubled twice. Here is one such formualtion of the machine:
+that no stroke is missed or doubled twice.
+\end{explain}
+
+\begin{ex}\emph{The Doubler}
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -165,6 +237,6 @@ above machine.
 \begin{prob}
 Come up with a new method for solving the doubler problem, then build
 a machine that executes your method. Check that your machine works by
-tracing through the configurations with two different inputs.
+tracing through the configurations.
 \end{prob}
 \end{document}
