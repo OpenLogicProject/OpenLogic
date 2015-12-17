@@ -12,6 +12,7 @@
 \RequirePackage{xparse}
 \RequirePackage{mfirstuc}
 \RequirePackage{subfiles}
+\RequirePackage{framed}
 \RequirePackage{bussproofs}
 \RequirePackage{graphicx}
 \usepackage{tikz}
@@ -172,6 +173,10 @@
 \copypagestyle{openlogic}{plain}
 \makeevenfoot{openlogic}{\thepage}{}{\shortollicense}
 \makeoddfoot{openlogic}{\shortollicense}{}{\thepage}
+
+\newcommand\gitissue[1]
+  {\href{https://github.com/OpenLogicProject/OpenLogic/issues/#1}{issue
+    \##1}}
 
 \setlength{\cftpartnumwidth}{2.2em}
 \setlength{\cftchapternumwidth}{2.2em}
