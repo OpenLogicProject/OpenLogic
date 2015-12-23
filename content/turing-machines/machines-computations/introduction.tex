@@ -9,30 +9,44 @@
 \olfileid{tur}{mac}{int} 
 \olsection{Introduction}
 
+Turing machines are an example of \emph{a model of computation}---they
+are a mathematically precise way of defining the idea of a
+computational procedure.  What exactly a computational procedure is in
+general is debated, but it is widely agreed that Turing machines are
+one way of specifying computational procedures.  Even though the term
+``Turing machine'' evokes the image of a physical machine with moving
+parts, strictly speaking a Turing machine is a purely mathematical
+construct, and it idealizes the idea of a computational procedure.
+For instance, we place no restriction on either the time or memory
+requirements of a Turing machine: Turing machines can compute
+something even if the computation would require more storage space or
+more steps than there are atoms in the universe.
+
 \begin{explain}
-Even though the term ``Turing machine'' evokes the image of
-a physical machine with moving parts, strictly speaking a Turing machine is
-a purely mathematical construct. It is perhaps best to think of a Turing
+It is perhaps best to think of a Turing
 machine as a program for a special kind of imaginary mechanism. This
-mechanism consists of a \emph{tape} and a \emph{read-write head}. In our
-version of Turing machines, the tape is infinite in one direction (to the
-right), and it is divided into \emph{squares}, each of which may contain a
-symbol from a finite \emph{alphabet}. Such alphabets can contain any number
-of different symbols, but we will mainly make do with three: $\TMendtape$,
-$\TMblank$, and $\TMstroke$. When the mechanism is started, the tape is
-empty (i.e., each square contains the symbol $\TMblank$) except for the
-leftmost square, which contains $\TMendtape$, and a finite number of
-squares which contain the \emph{input}. At any time, the mechanism is in
-one of a finite number of \emph{states}. At the outset, the head scans the
-leftmost square and in a specified \emph{initial state}. At each step of
-the mechanism's run, the content of the square currently scanned together
-with the state the mechanism is in and the Turing machine program determine
-what happens next. The Turing machine program consists of a list of
-5-tuples $\tuple{q_i, \sigma, q_j, \sigma', D}$. Whenever the
-mechanism is in state $q_i$ and reads symbol $\sigma$, it replaces the
-symbol on the current square with $\sigma'$, the head moves left, right, or
-stays put according to whether $D$ is $\TMleft$, $\TMright$, or $\TMstay$,
-and the mechanism goes into state~$q_j$.
+mechanism consists of a \emph{tape} and a \emph{read-write head}. In
+our version of Turing machines, the tape is infinite in one direction
+(to the right), and it is divided into \emph{squares}, each of which
+may contain a symbol from a finite \emph{alphabet}. Such alphabets can
+contain any number of different symbols, but we will mainly make do
+with three: $\TMendtape$, $\TMblank$, and $\TMstroke$. When the
+mechanism is started, the tape is empty (i.e., each square contains
+the symbol $\TMblank$) except for the leftmost square, which contains
+$\TMendtape$, and a finite number of squares which contain the
+\emph{input}. At any time, the mechanism is in one of a finite number
+of \emph{states}. At the outset, the head scans the leftmost square
+and in a specified \emph{initial state}. At each step of the
+mechanism's run, the content of the square currently scanned together
+with the state the mechanism is in and the Turing machine program
+determine what happens next. The Turing machine program is given by a
+partial function which takes as input a state~$q$ and a
+symbol~$\sigma$ and outputs a triple~$\tuple{q', \sigma',
+  D}$. Whenever the mechanism is in state $q$ and reads symbol
+$\sigma$, it replaces the symbol on the current square with $\sigma'$,
+the head moves left, right, or stays put according to whether $D$ is
+$\TMleft$, $\TMright$, or $\TMstay$, and the mechanism goes into
+state~$q'$.
 
 For instance, consider the situation below:
 
@@ -71,18 +85,35 @@ a $\TMblank$, four more $\TMstroke$'s, and the rest of the tape is
 filled with $\TMblank$'s.  The head is reading the third square from
 the left, which contains a $\TMstroke$, and is in state~$q_1$---we say
 ``the machine is reading a $\TMstroke$ in state~$q_1$.''  If the
-program of the turing machine contains, say, the tuple $\tuple{q_1,
-\TMstroke, q_5, \TMblank, \TMright}$, we would now replace the
-$\TMstroke$ on the third square with a~$\TMblank$, move right to the
-fourth square, and change the state of the machine to~$q_5$.
+program of the Turing machine returns, for input $\tuple{q_1,
+  \TMstroke}$, the triple $\tuple{q_5, \TMblank, \TMright}$, we would
+now replace the $\TMstroke$ on the third square with a~$\TMblank$,
+move right to the fourth square, and change the state of the machine
+to~$q_5$.
 
 We say that the machine \emph{halts} when it encounters some state,
-$q_n$, and symbol, $\sigma$ such that there is no instruction
-$\tuple{q_n, \sigma, \quad, \quad, \quad}$. In other words, the machine
-has no instruction to carry out, and at that point, it ceases
+$q_n$, and symbol, $\sigma$ such that there is no instruction for
+$\tuple{q_n, \sigma}$, i.e., the transition function for input
+$\tuple{q_n,\sigma}$ is undefined. In other words, the machine has no
+instruction to carry out, and at that point, it ceases
 operation. Halting is sometimes represented by a specific halt
 state~$h$.  This will be demonstrated in more detail later on.
 \end{explain}
 
+\begin{history}
+Alan Turing invented Turing machines in 1936. While his interest at the
+time was the decidability of first-order logic, the paper has been
+described as a definitive paper on the foundations of computer design
+(Copeland 1993, 10). Notice that this was a full five years before the
+first working general purpose computer was built in 1941 (by the German
+Konrad Zuse in his parents living room), seven years before Turing and his
+colleagues at Bletchley Park built the code-breaking Colossus (1943), nine
+years before the American ENIAC (1945), twelve years before the first
+British general purpose computer the Manchester Mark I was built in
+Manchester (1948) and thirteen years before the Americans first tested the
+BINAC (1949). The Manchester Mark I has the distinction of being the first
+stored-program computer - previous machines had to be rewired by hand for
+each new task.
+\end{history}
 
 \end{document}

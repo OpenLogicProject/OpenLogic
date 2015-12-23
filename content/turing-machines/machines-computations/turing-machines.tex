@@ -20,22 +20,23 @@ set of the machine is.
 \end{explain}
 
 \begin{defn}
-A \emph{Turing machine} $T = \langle Q, \Sigma, s, I\rangle$ consists of
+A \emph{Turing machine} $T = \langle Q, \Sigma, q_0, \delta\rangle$ consists of
 \begin{enumerate}
 \item a finite set of \emph{states}~$Q$,
 \item a finite \emph{alphabet} $\Sigma$ which includes $\TMendtape$ and
   $\TMblank$,
 \item an \emph{initial state}~$q_0 \in Q$,
-\item a finite \emph{instruction set}~$I \subseteq Q \times \Sigma \times Q
-  \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$.
+\item a finite \emph{instruction set}~$\delta\colon Q \times \Sigma
+  \pto Q \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$.
 \end{enumerate}
+The function~$\delta$ is also called the \emph{transition function} of~$T$.
 \end{defn}
 
 \begin{explain}
 We assume that the tape is infinite in one direction only. For this
 reason it is useful to designate a special symbol~$\TMendtape$ as
 a marker for the left end of the tape. This makes it easier for
-Turing machne programs to tell when they're ``in danger'' of running
+Turing machine programs to tell when they're ``in danger'' of running
 off the tape. 
 
 Classical Turing machines make use of only two symbols: $\TMblank$ and
@@ -54,9 +55,9 @@ in the following way:
 \begin{align*}
 Q = \{ & q_0, q_1 \} \\
 \Sigma = \{ & \TMendtape, \TMblank, \TMstroke \} \\
-I = \{ & \langle q_0, \TMstroke, q_1, \TMstroke, \TMright \rangle,\\
-&\langle q_1, \TMstroke, q_0, \TMstroke, \TMright \rangle,\\
-& \langle q_0, \TMblank, q_0, \TMblank, \TMright \rangle \}
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_0, \TMblank)  & = \tuple{q_0, \TMblank, \TMright}
 \end{align*}
 \end{ex}
 

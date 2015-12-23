@@ -6,30 +6,42 @@
 
 \begin{document}
 
-\olfileid{cmp}{tur}{ctt}
-\olsection{Church-Turing Thesis}
+\olfileid{tur}{mac}{ctt}
+\olsection{The Church-Turing Thesis}
 
-Turing machines are supposed to be a precise replacement for the concept
-of an effective procedure. Turing took it that anyone who grasped the
-concept
-of an effective procedure and the concept of a Turing machine would have
-the intuition that anything that could be done via an effective procedure
-could be done by Turing machine. This claim is given support by the fact
-that all the other proposed precise replacements for the concept of an
-effective procedure turn out to be extensionally equivalent to the concept
-of a Turing machine---that is, they can perform exactly the same set of
-tasks. This claim is called the Church-Turing thesis, since Church
-formulated the same claim with respect to the lambda calculus in the same
-year.
+Turing machines are supposed to be a precise replacement for the
+concept of an effective procedure. Turing took it that anyone who
+grasped the concept of an effective procedure and the concept of a
+Turing machine would have the intuition that anything that could be
+done via an effective procedure could be done by Turing machine. This
+claim is given support by the fact that all the other proposed precise
+replacements for the concept of an effective procedure turn out to be
+extensionally equivalent to the concept of a Turing machine---that is,
+they can compute exactly the same set of functions. This claim is
+called the \emph{Church-Turing thesis}.
 
 \begin{defn}
 \emph{The Church-Turing Thesis}: Anything computable via an effective
-procedure is Turing-computable.
+procedure is Turing computable.
 \end{defn}
 
-Given the thesis, it follows from the fact that~$\fn{h}$ is not
-Turing-computable that there is no effective procedure for
-computing~$\fn{h}$, and thus that the halting problem is unsolvable.
+The Church-Turing thesis is appealed to in two ways.  The first kind
+of use of the Church-Turing thesis is an excuse for laziness.  Suppose
+we have a description of an effective procedure to compute something,
+say, in ``pseudo-code.''  Then we can invoke the Church-Turing thesis
+to justify the claim that the same function is computed by some Turing
+machine, eve if we have not in fact constructed it.
 
+The other use of the Church-Turing thesis is more philosophically
+interesting.  It can be shown that there are functions whch cannoth be
+computed by a Turing machines.  From this, using the Church-Turing
+thesis, one can conclude that it cannot be effectively computed, using
+any procedure whatsoever.  For if there were such a procedure, by the
+Church-Turing thesis, it would follow that there would be a Turing
+machine.  So if we can prove that there is no Turing machine that
+computes it, there also can't be an effective procedure.  In
+particular, the Church-Turing thesis is invoked to claim that the
+so-called halting problem not only cannot be solved by Turing
+machines, it cannot be effectively solved at all.
 
 \end{document}

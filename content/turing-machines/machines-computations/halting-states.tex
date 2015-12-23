@@ -37,14 +37,14 @@ into a halt state.
   \node[state]         (B) [right of=A] {$q_1$};
   \node[state]         (C) [left of=A] {$h$};
 
-  \path (A) edge [bend left] node {$\TMstroke$,$\TMstroke$,R} (B)
-  	    edge node {$\TMblank$,$\TMblank$,N} (C)
-        (B) edge [loop above] node {$\TMblank$,$\TMblank$,R} (B)
-            edge [bend left] node {$\TMstroke$,$\TMstroke$,R} (A);
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+  	    edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{R}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
 \end{tikzpicture}
 \]
 
-Let us further the example. When the machine determines that the input
+Let us further expand the example. When the machine determines that the input
 is odd, it never halts. We can alter the machine to
 include a \emph{reject} state by replacing the looping instruction with an
 instruction to go to a reject state, $r$.
@@ -59,10 +59,10 @@ instruction to go to a reject state, $r$.
   \node[state]         (C) [left of=A] {$h$};
   \node[state]         (D) [right of=B] {$r$};
 
-  \path (A) edge [bend left] node {$\TMstroke$,$\TMstroke$,R} (B)
-  	    edge node {$\TMblank$,$\TMblank$,N} (C)
-        (B) edge node {$\TMblank$,$\TMblank$,N} (D)
-            edge [bend left] node {$\TMstroke$,$\TMstroke$,R} (A);
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+  	    edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge node {\TMtrans{\TMblank}{\TMblank}{N}} (D)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
 \end{tikzpicture}
 \]
 \end{ex}

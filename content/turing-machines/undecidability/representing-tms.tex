@@ -10,116 +10,142 @@
 \olsection{Representing Turing Machines}
 
 \begin{explain}
-In order to represent Turing machines and their behavior by a sentence
+In order to represent Turing machines and their behavior by a !!{sentence}
 of first-order logic, we have to define a suitable language. The
-language consists of two parts: predicates for describing
+language consists of two parts: !!{predicate}s for describing
 configurations of the machine, and expressions for counting execution
 steps (``moments'') and positions on the tape. The latter require an
 initial moment, $\Obj 0$, a ``successor'' function which is
-traditionally written as a postfix $\Obj{'}$, and an ordering $x
-\Obj{<} y$ of ``before.''
+traditionally written as a postfix $\prime$, and an ordering $x
+< y$ of ``before.''
 \end{explain}
 
 \begin{defn}
-Given a Turing machine $M = \tuple{Q, \Sigma, \delta, s}$, the
+Given a Turing machine $M = \tuple{Q, \Sigma, q_0, \delta}$, the
 language~$\Lang L_M$ consists of:
 \begin{enumerate}
-\item A two-place predicate $\Obj Q_q(x, y)$ for every state~$q \in Q$.
-\item A two-place predicate $\Obj S_\sigma(x, y)$ for every
-  symbol~$\sigma\in \Sigma$
+\item A two-place !!{predicate} $\Obj Q_q(x, y)$ for every state~$q \in
+  Q$.  Intuitively, $\Obj Q_q(\num{n}, \num{m})$ expresses ``after $m$
+  steps, $M$ is in state~$q$ scanning the $n$th square.''
+\item A two-place !!{predicate} $\Obj S_\sigma(x, y)$ for every
+  symbol~$\sigma\in \Sigma$.  Intuitively, $\Obj S_\sigma(\num{n},
+  \num{m})$ expresses ``after $m$ steps, the $n$th square contains
+  symbol~$\sigma$.''
 \item A constant $\Obj 0$
-\item A one-place function $\Obj{'}$
-\item A two-place predicate $\Obj <$
+\item A one-place function $\prime$
+\item A two-place predicate $<$
 \end{enumerate}
 \end{defn}
 
-For each number $n$ there is a canonical term $\overline n$, the
-\emph{numeral} for $n$, which represents it in~$\Lang L_M$. $\overline
-0$ is $\Obj 0$, $\overline 1$ is $\Obj 0'$, $\overline 2$ is $\Obj
-0''$, and so on. More formally:
+For each number $n$ there is a canonical term $\num{n}$, the
+\emph{numeral} for~$n$, which represents it in~$\Lang L_M$. $\num{0}$
+is $\Obj 0$, $\num{1}$ is $\Obj 0'$, $\num{2}$ is $\Obj 0''$, and so
+on. More formally:
 \begin{align*}
-\overline 0 & = \Obj 0 \\
-\overline{n+1} &= \overline{n}'
+\num{0} & = \Obj 0 \\
+\num{n+1} &= \num{n}'
 \end{align*}
 
-The sentences describing the operation of the Turing machine~$M$ on
-input $w$ are the following:
+The !!{sentence}s describing the operation of the Turing machine~$M$ on
+input $w = \sigma_{i_1}\dots\sigma_{i_n}$ are the following:
 \begin{enumerate}
-\item[I] Axioms describing numbers:
+\item Axioms describing numbers:
 \begin{enumerate}
-\item A sentence that says that the successor function is injective:
+\item A !!{sentence} that says that the successor function is injective:
 \[
-\forall \Obj x \forall \Obj y(\eq[\Obj x'][\Obj y'] \lif \eq[\Obj x][\Obj y])
+\lforall[x][\lforall[y][
+    (\eq[x'][y'] \lif \eq[x][y])]]
 \]
-\item A sentence that says that every number is less than its successor:
+\item A !!{sentence} that says that every number is less than its successor:
 \[
-\forall \Obj x(\Obj x < \Obj x')
+\lforall[x][(x < x')]
 \]
-\item A sentence that ensures that $<$ is transitive:
+\item A !!{sentence} that ensures that $<$ is transitive:
 \[
-\forall \Obj x\forall \Obj y\forall \Obj z(
-(\Obj x < \Obj y \land \Obj y < \Obj z) \lif \Obj x < \Obj z)
+\lforall[x][\lforall[y][\lforall[z][
+      ((x < y \land y < z) \lif x < z)]]]
 \]
 \end{enumerate}
-\item[II.] Axioms describing the input configuration:
+\item Axioms describing the input configuration:
 \begin{enumerate}
-\item $M$ is in the inital state~$s$ at time~0, scanning square 0:
+\item $M$ is in the inital state~$q_0$ at time~0, scanning square~1:
 \[
-\Obj Q_s(\Obj 0, \Obj 0)
+\Obj Q_{q_0}(\num{1}, \num{0})
 \]
-\item The first $n$ squares contain the symbols $\triangleright$,
-  $\sigma_{i_1}$, \dots, $\sigma_{i_n}$:
+\item The first $n+1$ squares contain the symbols $\TMendtape$,
+  $\sigma_{1}$, \dots, $\sigma_{n}$:
 \[
-\Obj S_\triangleright(\Obj 0, \Obj 0) \land
-\Obj S_{i_1}(\overline 1, \Obj 0) \land
+\Obj S_\TMendtape(\num{0}, \num{0}) \land
+\Obj S_{\sigma_1}(\num{1}, \num{0}) \land
 \dots \land
-\Obj S_{i_n}(\overline n, \Obj 0)
+\Obj S_{\sigma_n}(\num{n}, \num{0})
 \]
 \item Otherwise, the tape is empty:
 \[
-\forall \Obj x(\overline{n} < x \lif \Obj
-S_\text{\TMblank}(\Obj x, \Obj 0)
+\lforall[x][(\num{n} < x \lif \Obj S_\TMblank(x, \num{0}))]
 \]
 \end{enumerate}
-\item[III.] Axioms describing the transition from one configuration to
+\item Axioms describing the transition from one configuration to
   the next:
 
-For the following, let $A(x, y)$ be the conjunction of all sentences
+For the following, let $A(x, y)$ be the conjunction of all !!{sentence}s
 of the form
 \[
-\forall \Obj z(
-(\Obj z < \Obj x \lor \Obj x < \Obj z \land \Obj S_\sigma(\Obj z, \Obj y))
-\lif \Obj S_\sigma(\Obj z, \Obj y'))
+\lforall[z][
+  (((z < x \lor x < z) \land \Obj S_\sigma(z, y))
+  \lif \Obj S_\sigma(z, y'))]
 \]
-where $\sigma \in \Sigma$.
-\item For every instruction $\langle q_i, \sigma, q_j, \sigma',
-  L\rangle$, the sentence:
+where $\sigma \in \Sigma$.  We use $A(\num{n},\num{m})$ to express
+``other than at square~$n$, the tape after $m+1$ steps is the same as
+after $m$ steps.''
+\begin{enumerate}
+\item For every instruction $\delta(q_i, \sigma) = \tuple{q_j,
+  \sigma', \TMleft}$, the !!{sentence}:
 \[
-\lforall[\Obj x] \lforall[\Obj y](
-   (\Obj Q_{q_i}(\Obj x', \Obj y) \land \Obj S_{\sigma}(\Obj x, \Obj y)) \lif
-   (\Obj Q_{q_j}(\Obj x, \Obj y) \land \Obj S_{\sigma'}(\Obj x, \Obj y) \land
-A(\Obj x, \Obj y)))
+\lforall[x][\lforall[y][
+    ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x, y)) \lif
+   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
+A(x, y)))]]
 \]
-\item For every instruction $\langle q_i, \sigma, q_j, \sigma',
-  R\rangle$, the sentence:
+\item For every instruction $\delta(q_i, \sigma) = \tuple{q_j,
+  \sigma', \TMright}$, the !!{sentence}:
 \[
-\lforall[\Obj x]\lforall[\Obj y](
-   (\Obj Q_{q_i}(\Obj x, \Obj y) \land \Obj S_{\sigma}(\Obj x, \Obj y)) \lif
-   (\Obj Q_{q_j}(\Obj x', \Obj y) \land \Obj S_{\sigma'}(\Obj x, \Obj y) \land
-A(\Obj x, \Obj y)))
+\lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif
+   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
+A(x, y)))]]
 \]
+\item For every instruction $\delta(q_i, \sigma) = \tuple{q_j,
+  \sigma', \TMstay}$, the !!{sentence}:
+\[
+\lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif
+   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
+A(x, y)))]]
+\]
+\end{enumerate}
 \end{enumerate}
 %%(Probably also need axioms saying every square as exactly one symbol on
 %%it at all times, machine always in exactly one state.)
 
-
-Let $T(M, w)$ be the conjunction of all the above sentences for Turing
+Let $!T(M, w)$ be the conjunction of all the above !!{sentence}s for Turing
 machine~$M$ and input~$w$
 
-The sentence $H(M, w)$:
+In order to express that $M$ eventualy halts, we have to find a
+!!{sntence} that says ``after some number of steps, the transition
+function will not be undefined.''  Let $X$ be the set of all pairs
+$\tuple{q, \sigma}$ such that $\delta(q, \sigma)$ is undefined.  Let
+$!H(M, w)$ then be the !!{sentence}
 \[
-\lexists[\Obj x]\lexists[\Obj y][\Obj Q_h(\Obj x, \Obj y)]
+\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
+      X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]
 \]
-expresses that the Turing machine~$M$ halts on input~$w$.
+
+If we use a Turing machne with a designated with halting state~$h$, it
+is even easier: then the !!{sentence} $!H(M, w)$
+\[
+\lexists[x][\lexists[y][\Obj Q_h(x, y)]]
+\]
+expresses that the machine eventually halts.
 
 \end{document}
