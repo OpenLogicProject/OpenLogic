@@ -79,8 +79,24 @@
              \let\verbatim@addtoline\@gobble
              \let\verbatim@processline\relax
              \let\verbatim@finish\relax
-             \def\@currenvir{#1}
+             \def\@currenvir{#1}%
              \verbatim@}
+
+% \excludeenv -- make the specified environment into a comment environment
+% \includeenv -- restore a previously excluded environment
+
+\def\excludeenv#1{%
+  \expandafter\let\csname orig@#1\expandafter
+  \endcsname\csname #1\endcsname
+  \expandafter\let\csname orig@end#1\expandafter
+  \endcsname\csname end#1\endcsname
+  \expandafter\def\csname #1\endcsname{\supressenv{#1}}
+  \expandafter\let\csname end#1\endcsname\endgroup}
+\def\includeenv#1{%
+  \expandafter\let\csname #1\expandafter
+  \endcsname\csname orig@#1\endcsname
+  \expandafter\let\csname end#1\expandafter
+  \endcsname\csname orig@end#1\endcsname}
 
 % \tagitem<tags><tagged text><untagged text>: typeset an \item if tags active
 
