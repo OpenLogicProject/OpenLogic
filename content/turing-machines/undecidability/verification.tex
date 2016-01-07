@@ -25,7 +25,8 @@ some~$q$ and $\sigma$ such that $\delta(q, \sigma)$ is undefined.
 Let $!C(M, w, n)$ be the !!{sentence}
 \[ 
 \Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma_0}(\num{0}, \num{n})
-\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n})
+\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land
+\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]
 \] 
 where $q$ is the state
 of $M$ at time~$n$, $M$ is scanning square~$m$ at time~$n$, square~$i$
@@ -36,7 +37,8 @@ right-most non-blank square of the tape at time~$m$.
 Suppose that $M$ does halt for input~$w$. Then there is some
 time~$n$, state~$q$, square~$m$, and symbol~$\sigma$ such that:
 \begin{enumerate} 
-\item At time $n$ the machine is in state~$q'$ scanning square~$m$ on which~$\sigma'$ appears. 
+\item At time $n$ the machine is in state~$q'$ scanning square~$m$ on
+  which~$\sigma'$ appears.
 \item There transition function $\delta(q, \sigma)$ is undefined.
 \end{enumerate}
 
@@ -65,9 +67,8 @@ For each $n$, $!T(M, w) \Entails !C(M, w, n)$.
 \end{lem}
 
 \begin{proof}
-By induction on $n$.
-
-If $n = 0$, then $!C(M, w, n)$ is a conjunct of $!T(M, w)$, so implied by it.
+If $n = 0$, then the conjuncts of $!C(M, w, 0)$ are also conjuncts of
+$!T(M, w)$, so implied by it.
 
 Inductive hypothesis: If $M$ has not halted before time $n$, then
 $!T(M,w) \Entails !C(M, w, n)$.
@@ -93,7 +94,8 @@ following three forms in the program of~$M$:
 \item $\delta(q, \sigma) = \tuple{q', \sigma', \TMstay}$
 \end{enumerate}
 
-We will consider each of these three cases in turn.
+We will consider each of these three cases in turn.  First, assume
+that $m \le k$.
 
 \begin{enumerate} 
 \item Suppose there is an instruction of the form of (1).
@@ -101,22 +103,29 @@ This means that
 \[ 
 \lforall[x][\lforall[y][((\Obj Q_{q}(x,
 y) \land \Obj S_\sigma(x, y)) \lif (\Obj Q_{q'}(x',
-y') \land \Obj S_{\sigma'}(x, y') \land A(x, \Obj
-y)))]]
+y') \land \Obj S_{\sigma'}(x, y') \land A(x, y)))]]
 \] 
 is a conjunct of $!T(M,w)$. This entails the following
 !!{sentence}, through universal instantiation: 
 \[ 
 (\Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n})) \lif (\Obj
-Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land A(x, y))).
+Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land A(m, n))).
 \]
 This in turn entails,
-\[
+\begin{multline*}
 \Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
-\num{n}') \land \Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land \Obj
-S_{\sigma_k}(\num{k}, \num{n}')
-\] 
-But this just is $C(M, w, n')$.
+\num{n}') \land {}\\
+\Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land
+\Obj S_{\sigma_k}(\num{k}, \num{n}') \land {}\\
+\lforall[x][(\num{k} < x
+  \lif \Obj S_\TMblank(x, \num{n}'))]
+\end{multline*}
+The first line comes directly from the consequent of the preceding
+conditional. The each conjunct in the middle line---which excludes
+$S_{\sigma_m}(\num{m},\num{n'})$---follows from the corresponding
+conjunct in~$!C(M, w, n)$ together with $A(m, n)$. The last line
+follows from the corresponding conjunct in $C!(M, w, n)$, $\num{m} < x
+\lif \num{k} < x$, and $A(m, n)$.  Together, this just is $!C(M, w, n')$.
 
 \item Suppose there is an instruction of the form of~$2$. So, 
 \[
@@ -129,14 +138,43 @@ is a conjunct of $!T(M,w)$, which entails the following !!{sentence}:
 (\Obj Q_{q}(\num{m}', \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n}) \lif
 (\Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land A(x, y))),
 \]
-which in turn implies \[ \Obj
-Q_{q'}(\num{m}, \num{n}')\land \Obj S_{\sigma'_m}(\num{m},
-\num{n}') \land \Obj S_{\sigma_0}(\num{0}, \num{n}')\dots \land
-\Obj S_{\sigma_k}(\num{k}, \num{n}') 
-\] 
-But this just is $!C(M, w, n')$.
+which in turn implies
+\begin{multline*}
+  \Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'_m}(\num{m},
+  \num{n}') \land {}\\
+  \Obj S_{\sigma_0}(\num{0}, \num{n}')\dots \land
+  \Obj S_{\sigma_k}(\num{k}, \num{n}')  \land {} \\
+  \lforall[x][(\num{k} < x
+  \lif \Obj S_\TMblank(x, \num{n}'))]
+\end{multline*}
+as before. But this just is $!C(M, w, n')$.
 
 \item This case is left as an exercise.
+\end{enumerate}
+If $m > k$ and $\sigma' \neq \TMblank$, the last instruction has
+written a non-blank symbol to the right of the right-most non-blank
+square~$k$ at time~$n$. In this case, $!C(M, w, n')$ has the form
+\begin{multline*}
+\Obj Q_{q'}(\num{m}', \num{n}') \land {}\\
+\Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land
+\Obj S_{\sigma_k}(\num{k}, \num{n}') \land {}\\
+\Obj S_{\TMblank}(\num{k+1}, \num{n}') \land \dots \land
+\Obj S_{\TMblank}(\num{m-1}, \num{n}') \land {}\\
+\Obj S_{\sigma'}(\num{m},
+\num{n}') \land {}\\
+\lforall[x][(\num{m} < x
+  \lif \Obj S_\TMblank(x, \num{n}'))]
+\end{multline*}
+For $k < i < m$, $\Obj S_{\TMblank}(\num{i}, \num{n})$ follows from
+the conjunct $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x,
+  \num{n}))]$ of $!C(M, w, n)$ and the fact that $!T(M, w) \Entails
+\num{k} < \num{i}$ if $k < i$. $\Obj S_{\TMblank}(\num{i}, \num{n}')$
+then follows from $A(m, n)$ and $\num{i} < \num{m}$.  From
+$\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]$ we get
+$\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x, \num{n}))]$ since
+$\num{k}<\num{m}$ and $<$ is transitive.  From that plus $A(m, n)$ we
+get $\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x, \num{n}'))].$
+Similarly for cases (2) and (3).
 
 Given the above cases, we have shown that for any $n$, $!T(M, w) \lif !C(M,
 w, n)$.
@@ -144,7 +182,7 @@ w, n)$.
 Based on this lemma, we know that, for any time~$n$, the description of
 time~$n$ is a consequence of $!T(M, w)$, and therefore, that $T(M, w) \lif
 !H(M, w)$ is valid.
-\end{enumerate} 
+
 \end{proof}
 
 \begin{explain} 
