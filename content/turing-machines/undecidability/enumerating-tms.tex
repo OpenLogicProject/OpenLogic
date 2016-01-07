@@ -30,22 +30,22 @@ $q_0$, $q_1$, \dots. Then any Turing machine can be specified by some
 finite string of symbols from this alphabet (though not every finite
 string of symbols specifies a Turing machine). For instance, suppose
 we have a Turing machine $M = \tuple{Q, \Sigma, q, \delta}$ where $Q =
-\{q'_0, \dots, q'_n\} \subseteq \{q_0, q_1, \dots, q'_n\}$ and $\Sigma
+\{q'_0, \dots, q'_n\} \subseteq \{q_0, q_1, \dots \}$ and $\Sigma
 = \{\TMendtape, \sigma'_1, \sigma'_2, \dots, \sigma'_m\}
 \subseteq \{\sigma_0, \sigma_1, \dots\}$. We could specify it by
 the string
 \[
 q'_0 q'_1 \dots q'_n \TMendtape \sigma'_1 \dots \sigma'_m \TMendtape q
-\TMendtape S(\sigma'_0,q'_0) \dots S(\sigma'_m, q'_n)
+\TMendtape S(\sigma'_0,q'_0)\TMendtape \dots \TMendtape S(\sigma'_m, q'_n)
 \]
 where $S(\sigma'_i, q'_j) $ is the string $\sigma'_i q'_j
 \delta(\sigma'_i, q'_j)$ if $\delta(\sigma'_i,q'_j)$ is defined, and
-$\sigma'_i q'_j \TMendtape$ otherwise.
+$\sigma'_i q'_j$ otherwise.
 \end{explain}
 
 \begin{thm}
-  There are functions from $\Nat$ to $\Nat$ which are not Turing
-  computable.
+There are functions from $\Nat$ to $\Nat$ which are not Turing
+computable.
 \end{thm}
 
 \begin{proof}
