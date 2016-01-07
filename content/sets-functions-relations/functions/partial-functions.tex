@@ -11,28 +11,40 @@
 
 \olsection{Partial Functions}
 
+\begin{explain}
 It is sometimes useful to relax the definition of function so that it
 is not required that the output of the function is defined for all
 possible inputs. Such mappings are called \emph{partial functions}.
+\end{explain}
 
 \begin{defn}
 A \emph{partial function} $f \colon X \pto Y$ is a mapping which
 assigns to every !!{element} of~$X$ at most one !!{element} of~$Y$.
 If $f$ assigns an element of~$Y$ to $x \in X$, we say $f(x)$ is
-\emph{defined}, and otherwise undefined. If $f(x)$ is defined, we
-write $f(x) \defined$, otherwise $f(x) \undefined$. The \emph{domain}
-of a partial function~$f$ is the subset of~$X$ where it is defined,
-i.e., $\dom{f} = \Setabs{x}{f(x) \defined}$.
+\emph{defined}, and otherwise \emph{undefined}. If $f(x)$ is defined,
+we write $f(x) \defined$, otherwise $f(x) \undefined$. The
+\emph{domain} of a partial function~$f$ is the subset of~$X$ where it
+is defined, i.e., $\dom{f} = \Setabs{x}{f(x) \defined}$.
 \end{defn}
 
 \begin{ex}
 Every function $f\colon X \to Y$ is also a partial function. Partial
-functions that are defined everywhere on $X$ are called \emph{total}.
+functions that are defined everywhere on $X$---i.e., what we so far
+have simply called a function---are also called \emph{total}
+functions.
 \end{ex}
 
 \begin{ex}
 The partial function $f \colon \Real \pto \Real$ given by $f(x) = 1/x$
 is undefined for $x = 0$, and defined everywhere else.
 \end{ex}
+
+\begin{prob}
+Given $f\colon X \pto Y$, define the partial function $g\colon Y \pto
+X$ by: for any $y \in Y$, if there is a unique $x \in X$ such that
+$f(x) = y$, then $g(y) = x$; otherwise $g(y) \undefined$.  Show that
+if $f$ is injective, then $g(f(x)) = x$ for all $x \in \dom{f}$, and
+$f(g(y)) = y$ for all $y \in \ran{f}$.
+\end{prob}
 
 \end{document}
