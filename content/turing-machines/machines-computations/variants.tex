@@ -1,0 +1,50 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: variants
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{var}
+\olsection{Variants of Turing Machines}
+
+There are in fact many possible ways to define Turing machines, of
+which ours is only one.  We allow arbitrary finite alphabets, a more
+restricted definition might allow only two tape symbols, $\TMstroke$
+and $\TMblank$.  We allow the machine to write a symbol to the tape
+and move at the same time, other definitions allow either writing or
+moving.  We allow the possibility of writing without moving the tape
+head, other definitions leave out the $\TMstay$ ``instruction.''  Our
+definition assumes that the tape is infinite in one direction only,
+other definitions allow the tape to be infinite both to the left and
+the right. In fact, we might even allow any number of separate tapes,
+or even an infinite grid of squares.  We represent the instruction set
+of the Turing machine by a transition function; other definitions use
+a transition relation.
+
+This last relaxation of the definition is particularly interesting.
+In our definition, when the machine is in state~$q$ reading
+symbol~$\sigma$, $\delta(q, \sigma)$ determines what the new symbol,
+state, and tape head position is.  But if we allow the instruction set
+to be a relation between current state-symbol pairs $\tuple{q,
+  \sigma}$ and new state-symbol-direction triples $\tuple{q', \sigma',
+  D}$, the action of the Turing machine may not be uniquely
+determined---the instruction relation may contain both $\tuple{q,
+  \sigma, q', \sigma', D}$ and $\tuple{q, \sigma, q'', \sigma'', D'}$.
+In this case we have a \emph{non-deterministic} Turing machine.  These
+play an important role in computational complexity theory.
+
+There are also different conventions for when a Turing machine halts:
+we say it halts when the transition function is undefined, other
+definitions require the machine to be in a special designated halting
+state.  And there are differnt ways of representing numbers: we use
+unary representation, but you can also use binary representation (this
+requires two symbols in addition to $\TMblank$).
+
+Now here is an interesting fact: none of these variations matters as
+to which functions are Turing computable. If a function is Turing
+computable according to one definition, it is Turing computable
+according to all of them.
+
+\end{document}

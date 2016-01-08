@@ -17,7 +17,7 @@ receives an \emph{index}: its place in the enumeration $M_1$, $M_2$,
 $M_3$, \dots of Turing machine descriptions.
 
 We know that there must be non-Turing-computable functions: the set of
-Turing machine descritions---and hence the set of Turing machines---is
+Turing machine descriptions---and hence the set of Turing machines---is
 enumerable, but the set of all functions from $\Nat$ to $\Nat$ is
 not. But we can find specific examples of non-computable function as
 well. One such function is the halting function.
@@ -64,8 +64,8 @@ halts, it does so while scanning the first square.  This machine can
 be ``hooked up'' to another machine~$J$, which halts if it is started on a
 blank tape (i.e., if it reads $\TMblank$ in the initial state while
 scanning the square to the right of the end-of-tape symbol), and
-otherwise wanders off to the right, never halting. $S \ concat J$, the
-machine created from hooking $S$ to $J$, is a Turing machine, so it is
+otherwise wanders off to the right, never halting. $S \concat J$, the
+machine created by hooking $S$ to $J$, is a Turing machine, so it is
 $M_w$ for some~$w$ (i.e., it appears somewhere in the enumeration). Start $M_w$
 on an input of~$w$ $\TMstroke$s. There are two possibilities: either
 $M_w$ halts or it does not halt.
@@ -108,6 +108,17 @@ tape. Prove that the 3-Halt problem is unsolvable.
 Show that if the halting problem is solvable for Turing machine and
 input pairs $M_m$ and $w$ where $m\neq w$ then it is also solvable
 for the cases where $m = w$.
+\end{prob}
+
+\begin{prob}
+We proved that the halting problem is unsolvable if the input is a
+number~$m$, which identifies a Turing machine~$M_m$ via an enumaration
+of all Turing machines.  What if we allow the description of Turing
+machines from \olref[tur][und][enu]{sec} directly as input? (This
+would require a larger alphabet of course.)  Can there be a Turing
+machine which decides the halting problem but takes as input
+descriptions of Turing machines rather than indices?  Explain why or
+why not.
 \end{prob}
 
 \end{document}
