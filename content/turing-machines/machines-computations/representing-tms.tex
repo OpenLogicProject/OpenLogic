@@ -22,7 +22,7 @@ only two internal states, $q_0$ and $q_1$, and one instruction:
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]   (A)              {$q_0$};
+  \node[initial,state]   (A)              {$q_0$};
   \node[state]   (B) [right of=A] {$q_1$};
 
   \path (A) edge  node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B);
@@ -43,7 +43,7 @@ are an even number of strokes on the tape.
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)              {$q_0$};
+  \node[initial,state]         (A)              {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
 
   \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
@@ -148,7 +148,7 @@ blank at~$q_0$.
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (A)                     {$q_0$};
+  \node[initial,state] (A)              {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
 
   \path
@@ -218,12 +218,12 @@ a block of~$2n$ strokes.
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
 
-  \node[state]         (1)                     {$q_0$};
+  \node[initial,state] (1)              {$q_0$};
   \node[state]         (2) [right of=1] {$q_1$};
   \node[state]         (3) [right of=2] {$q_2$};
   \node[state]         (4) [below of=3] {$q_3$};
-  \node[state]         (5) [left of=4]       {$q_4$};
-  \node[state]         (6) [left of=5]       {$q_5$};
+  \node[state]         (5) [left of=4]  {$q_4$};
+  \node[state]         (6) [left of=5]  {$q_5$};
 
   \path (1) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (2)
     (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)

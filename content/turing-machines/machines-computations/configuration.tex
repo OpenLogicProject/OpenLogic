@@ -77,7 +77,7 @@ We say that a configuration $\tuple{C, n, q}$ \emph{yields
 \end{enumerate}
 \item if $n' > \len{C}$, then $\len{C'} = \len{C} + 1$ and the $n'$-th
   symbol of $C'$ is $\TMblank$.
-\item for all $i < len{C'}$ and $\neq n$, $C'(i) = C(i)$,
+\item for all $i$ such that $i < \len{C'}$ and $i \neq n$, $C'(i) = C(i)$,
 \end{enumerate}
 \end{defn}
 
@@ -88,8 +88,17 @@ and each $C_i$ yields $C_{i+1}$ in one step.
 
 We say that $M$ \emph{halts on input $I$ after $k$ steps} if $C_k =
 \tuple{C, n, q}$, the $n$th symbol of $C$ is~$\sigma$, and $\delta(q,
-\sigma)$ is undefined.  In that case, if $C = \TMendtape \concat O$,
-the \emph{output} of~$M$ for input $I$ is~$O$.
+\sigma)$ is undefined.  In that case, the \emph{output} of~$M$ for
+input $I$ is~$O$, where $O$ is a string of symbols not beginning or
+ending in~$\TMblank$ such that $C = \TMendtape \concat \TMblank^i
+\concat O \concat \TMblank^j$ for some~$i, j \in \Nat$.
 \end{defn}
+
+\begin{explain}
+According to this definition, the output~$O$ of~$M$ always begins and
+ends in a symbol other than~$\TMblank$, or, if at time~$k$ the entire
+tape is filled with~$\TMblank$ (except for the leftmost~$\TMendtape$),
+$O$ is the empty string.
+\end{explain}
 
 \end{document}

@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{tur}{und}{hal}
+\olfileid{tms}{und}{hal}
 \olsection{The Halting Problem}
 
 \begin{explain}
@@ -25,17 +25,17 @@ well. One such function is the halting function.
 
 \begin{defn} The \emph{halting function}~$h$ is defined as
 \[
-h(m,w) =
+h(e,n) =
 \begin{cases}
-  \text{0} & \text{if machine~$M_m$ does not halt for input $w$} \\
-  \text{1} & \text{if machine~$M_m$ halts for input $w$}
+  \text{0} & \text{if machine~$M_e$ does not halt for input $n$} \\
+  \text{1} & \text{if machine~$M_e$ halts for input $n$}
 \end{cases}
 \]
 \end{defn}
 
 \begin{defn}
 The \emph{Halting Problem} is the problem of determining (for any $m$, $w$)
-whether the Turing machine~$M_m$ halts for an input of~$w$ strokes.
+whether the Turing machine~$M_e$ halts for an input of~$n$ strokes.
 \end{defn}
 
 \begin{explain}
@@ -48,13 +48,17 @@ Turing machines can be hooked together to create a single machine.
 
 \begin{defn} The function~$s$ is defined as
 \[
-s(w) =
+s(e) =
 \begin{cases}
-  \text{0} & \text{if machine~$M_w$ does not halt for input $w$} \\
-  \text{1} & \text{if machine~$M_w$ halts for input $w$}
+  \text{0} & \text{if machine~$M_e$ does not halt for input $e$} \\
+  \text{1} & \text{if machine~$M_e$ halts for input $e$}
 \end{cases}
 \]
 \end{defn}
+
+\begin{lem}
+The function~$s$ is not Turing computable.
+\end{lem}
 
 \begin{proof}
 We suppose, for contradiction, that the function~$s$ is
@@ -66,33 +70,40 @@ blank tape (i.e., if it reads $\TMblank$ in the initial state while
 scanning the square to the right of the end-of-tape symbol), and
 otherwise wanders off to the right, never halting. $S \concat J$, the
 machine created by hooking $S$ to $J$, is a Turing machine, so it is
-$M_w$ for some~$w$ (i.e., it appears somewhere in the enumeration). Start $M_w$
-on an input of~$w$ $\TMstroke$s. There are two possibilities: either
-$M_w$ halts or it does not halt.
+$M_e$ for some~$e$ (i.e., it appears somewhere in the enumeration). Start $M_e$
+on an input of~$e$ $\TMstroke$s. There are two possibilities: either
+$M_e$ halts or it does not halt.
 \begin{enumerate}
-\item Suppose $M_w$ halts for an input of $w$ $\TMstroke$s. Then $s(w)
-  = 1$. So $S$, when started on $w$, halts with a single $\TMstroke$
+\item Suppose $M_e$ halts for an input of $e$ $\TMstroke$s. Then $s(e)
+  = 1$. So $S$, when started on~$e$, halts with a single $\TMstroke$
   as output on the tape.  Then $J$ starts with a $\TMstroke$ on the
-  tape. In that case $J$ does not halt. But $M_w$ is the machine $S
+  tape. In that case $J$ does not halt. But $M_e$ is the machine $S
   \concat J$, so it should do exactly what $S$ followed by $J$ would
-  do.  So $M_w$ cannot halt for an input of $w$ $\TMstroke$'s.
+  do.  So $M_e$ cannot halt for an input of $e$ $\TMstroke$'s.
 
-\item Now suppose $M_w$ does not halt for an input of $w$
-  $\TMstroke$s.  Then $s(w) = 0$, and $S$, when started on input~$w$,
+\item Now suppose $M_e$ does not halt for an input of $e$
+  $\TMstroke$s.  Then $s(e) = 0$, and $S$, when started on input~$e$,
   halts with a blank tape.  $J$, when started on a blank tape,
-  immediately halts.  Again, $M_w$ does what $S$ followed by~$J$ would
-  do, so $M_w$ must halt for an input of $w$ $\TMstroke$'s.
+  immediately halts.  Again, $M_e$ does what $S$ followed by~$J$ would
+  do, so $M_e$ must halt for an input of $e$ $\TMstroke$'s.
 \end{enumerate}
 This shows there cannot be a Turing machine~$S$: $s$ is not Turing
 computable.
+\end{proof}
 
-Now suppose $h$ were Turing computable, say, by a Turing machine~$H$.
+\begin{thm}[Unsolvability of the Halting Problem]
+\ollabel{thm:halting-problem} The halting problem is unsolvable, i.e.,
+the function~$h$ is not Turing computable.
+\end{thm}
+
+\begin{proof}
+Suppose $h$ were Turing computable, say, by a Turing machine~$H$.
 We could use $H$ to build a Turing machine that computes~$s$: First,
 make a copy of the input (separated by a blank). Then move back to the
 beginning, and run $H$.  We can clearly make a machine that does the
 former, and if $H$ existed, we would be able to ``hook it up'' to such
 a modified doubling machine to get a new machine which would determine
-if $M_w$ halts on input~$w$, i.e., computes~$s$. But we've already
+if $M_e$ halts on input~$e$, i.e., computes~$s$. But we've already
 shown that no such machine can exist. Hence, $h$ is also not Turing
 computable.
 \end{proof}
@@ -106,13 +117,13 @@ tape. Prove that the 3-Halt problem is unsolvable.
 
 \begin{prob}
 Show that if the halting problem is solvable for Turing machine and
-input pairs $M_m$ and $w$ where $m\neq w$ then it is also solvable
-for the cases where $m = w$.
+input pairs $M_e$ and $n$ where $e \neq n$, then it is also solvable
+for the cases where $e = n$.
 \end{prob}
 
 \begin{prob}
 We proved that the halting problem is unsolvable if the input is a
-number~$m$, which identifies a Turing machine~$M_m$ via an enumaration
+number~$e$, which identifies a Turing machine~$M_e$ via an enumaration
 of all Turing machines.  What if we allow the description of Turing
 machines from \olref[tur][und][enu]{sec} directly as input? (This
 would require a larger alphabet of course.)  Can there be a Turing

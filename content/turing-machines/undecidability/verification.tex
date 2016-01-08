@@ -11,12 +11,12 @@
 
 \begin{explain}
 In order to verify that our representation works, we first have to
-make sure that if $M$ halts on input~$w$, then $!T(M, w) \lif !H(M,
-w)$ is valid. We can do this simply by proving that $T(M, w)$ implies
+make sure that if $M$ halts on input~$w$, then $!T(M, w) \lif !E(M,
+w)$ is valid. We can do this simply by proving that $!T(M, w)$ implies
 a description of the configuration of $M$ for each step of the
-execution of $M$ on input~$w$. If $M$ halts on input~$w$, then for
+execution of~$M$ on input~$w$. If $M$ halts on input~$w$, then for
 some~$n$, $M$ will be in a halting configuration at step~$n$ (and be
-scanning square~$m$, for some $m$). Hence, $T(M, w)$ implies $\Obj
+scanning square~$m$, for some $m$). Hence, $!T(M, w)$ implies $\Obj
 Q_q(\num{m}, \num{n}) \land \Obj S_\sigma(\num{m}, \num{n})$ for
 some~$q$ and $\sigma$ such that $\delta(q, \sigma)$ is undefined.
 \end{explain}
@@ -37,16 +37,15 @@ right-most non-blank square of the tape at time~$m$.
 Suppose that $M$ does halt for input~$w$. Then there is some
 time~$n$, state~$q$, square~$m$, and symbol~$\sigma$ such that:
 \begin{enumerate} 
-\item At time $n$ the machine is in state~$q'$ scanning square~$m$ on
-  which~$\sigma'$ appears.
+\item At time $n$ the machine is in state~$q$ scanning square~$m$ on
+  which~$\sigma$ appears.
 \item There transition function $\delta(q, \sigma)$ is undefined.
 \end{enumerate}
 
 $!C(M, w, n)$ will be the description of this time and will include
-the clauses $\Obj Q_{q'}(\num{m}, \num{n})$ and $\Obj
-S_{\sigma'}(\num{m}, \num{n})$.
-
-These clauses together imply $!H(M, w)$:
+the clauses $\Obj Q_{q}(\num{m}, \num{n})$ and $\Obj
+S_{\sigma}(\num{m}, \num{n})$. These clauses together imply $!E(M,
+w)$:
 \[
 \lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
       X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]
@@ -57,18 +56,19 @@ since $\Obj Q_{q'}(\num{m}, \num{n}) \land S_{\sigma'}(\num{m},
 $\tuple{q',\sigma'} \in X$.
 
 So if $M$ halts for input $w$, then there is some time $n$ such that
-$!C(M, w, n) \Entails !H(M,w)$
+$!C(M, w, n) \Entails !E(M,w)$
 
 Since consequence is transitive, it is sufficient to show that for any
 time~$n$, $!T(M, w) \Entails !C(M, w, n)$.
 
-\begin{lem} 
+\begin{lem}
+\ollabel{lem:config}
 For each $n$, $!T(M, w) \Entails !C(M, w, n)$. 
 \end{lem}
 
 \begin{proof}
 If $n = 0$, then the conjuncts of $!C(M, w, 0)$ are also conjuncts of
-$!T(M, w)$, so implied by it.
+$!T(M, w)$, so entailed by it.
 
 Inductive hypothesis: If $M$ has not halted before time $n$, then
 $!T(M,w) \Entails !C(M, w, n)$.
@@ -87,29 +87,30 @@ Since $M$ does not halt at~$n$, there must be an instruction of one of the
 following three forms in the program of~$M$: 
 
 \begin{enumerate} 
-\item $\delta(q, \sigma) = \tuple{q', \sigma', \TMright}$
+\item \ollabel{right} $\delta(q, \sigma) = \tuple{q', \sigma', \TMright}$
 
-\item $\delta(q, \sigma) = \tuple{q', \sigma', \TMleft}$
+\item \ollabel{left} $\delta(q, \sigma) = \tuple{q', \sigma', \TMleft}$
 
-\item $\delta(q, \sigma) = \tuple{q', \sigma', \TMstay}$
+\item \ollabel{stay} $\delta(q, \sigma) = \tuple{q', \sigma', \TMstay}$
 \end{enumerate}
 
 We will consider each of these three cases in turn.  First, assume
 that $m \le k$.
 
 \begin{enumerate} 
-\item Suppose there is an instruction of the form of (1).
-This means that 
+\item Suppose there is an instruction of the form~\olref{right}.
+  By \olref[rep]{defn:tm-descr}, \olref[rep]{rep-right}, this means that
 \[ 
 \lforall[x][\lforall[y][((\Obj Q_{q}(x,
 y) \land \Obj S_\sigma(x, y)) \lif (\Obj Q_{q'}(x',
-y') \land \Obj S_{\sigma'}(x, y') \land A(x, y)))]]
+y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y)))]]
 \] 
 is a conjunct of $!T(M,w)$. This entails the following
 !!{sentence}, through universal instantiation: 
 \[ 
-(\Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n})) \lif (\Obj
-Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land A(m, n))).
+(\Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n}))
+\lif (\Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
+\num{n}') \land !A(m, n)).
 \]
 This in turn entails,
 \begin{multline*}
@@ -123,20 +124,22 @@ This in turn entails,
 The first line comes directly from the consequent of the preceding
 conditional. The each conjunct in the middle line---which excludes
 $S_{\sigma_m}(\num{m},\num{n'})$---follows from the corresponding
-conjunct in~$!C(M, w, n)$ together with $A(m, n)$. The last line
+conjunct in~$!C(M, w, n)$ together with $!A(m, n)$. The last line
 follows from the corresponding conjunct in $C!(M, w, n)$, $\num{m} < x
-\lif \num{k} < x$, and $A(m, n)$.  Together, this just is $!C(M, w, n')$.
+\lif \num{k} < x$, and $!A(m, n)$.  Together, this just is $!C(M, w, n')$.
 
-\item Suppose there is an instruction of the form of~$2$. So, 
+\item Suppose there is an instruction of the form~\olref{left}.
+  Then, by \olref[rep]{defn:tm-descr}, \olref[rep]{rep-left},
 \[
 \lforall[x][\lforall[y][((\Obj Q_{q}(x', y) \land \Obj
-S_{\sigma}(x, y)) \lif (\Obj Q_{q'}(x, y') \land \Obj
-S_{\sigma'}(x, y') \land A(x, y)))]] 
+S_{\sigma}(x', y)) \lif (\Obj Q_{q'}(x, y') \land \Obj
+S_{\sigma'}(x', y') \land !A(x, y)))]] 
 \] 
 is a conjunct of $!T(M,w)$, which entails the following !!{sentence}: 
 \[ 
-(\Obj Q_{q}(\num{m}', \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n}) \lif
-(\Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'}(\num{m}, \num{n}') \land A(x, y))),
+(\Obj Q_{q}(\num{m}', \num{n}) \land \Obj S_{\sigma}(\num{m}', \num{n})
+\lif (\Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'}(\num{m}',
+\num{n}') \land !A(x, y)),
 \]
 which in turn implies
 \begin{multline*}
@@ -149,7 +152,7 @@ which in turn implies
 \end{multline*}
 as before. But this just is $!C(M, w, n')$.
 
-\item This case is left as an exercise.
+\item Case \olref{stay} is left as an exercise.
 \end{enumerate}
 If $m > k$ and $\sigma' \neq \TMblank$, the last instruction has
 written a non-blank symbol to the right of the right-most non-blank
@@ -172,44 +175,63 @@ the conjunct $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x,
 then follows from $A(m, n)$ and $\num{i} < \num{m}$.  From
 $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]$ we get
 $\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x, \num{n}))]$ since
-$\num{k}<\num{m}$ and $<$ is transitive.  From that plus $A(m, n)$ we
+$\num{k}<\num{m}$ and $<$ is transitive.  From that plus $!A(m, n)$ we
 get $\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x, \num{n}'))].$
 Similarly for cases (2) and (3).
 
-Given the above cases, we have shown that for any $n$, $!T(M, w) \lif !C(M,
-w, n)$.
-
-Based on this lemma, we know that, for any time~$n$, the description of
-time~$n$ is a consequence of $!T(M, w)$, and therefore, that $T(M, w) \lif
-!H(M, w)$ is valid.
-
+We have shown that for any~$n$, $!T(M, w) \Entails !C(M, w, n)$.
 \end{proof}
+
+\begin{lem}
+\ollabel{lem:valid-if-halt}
+If $M$ halts on input~$w$, then $!T(M, w) \lif
+!E(M, w)$ is valid.
+\end{lem}
+
+\begin{proof}
+By \olref{lem:config}, we know that, for any time~$n$, the
+description~$!C(M, w, n)$ of the configuration of $M$ at time~$n$ is a
+consequence of $!T(M, w)$.  Suppose $M$ halts after $k$ steps. It will
+be scanning square~$m$, say. Then $!C(M, w, k)$ contains as conjuncts
+both $\Obj Q_q(\num{m}, \num{k})$ and $\Obj S_\sigma(\num{m},
+\num{k})$ with $\delta(q,\sigma)$ undefined. Thus, $!C(M, w, k)
+\Entails !E(M, w)$. But then $!T(M, w) \Entails !E(M, w)$ and
+therefore $!T(M, w) \lif !E(M, w)$ is valid.
+\end{proof}
+
+\begin{prob}
+Complete case~\olref[tms][und][ver]{stay} of the proof of
+\olref[tms][und][ver]{lem:config}.
+\end{prob}
 
 \begin{explain} 
 To complete the verification of our claim, we also have to
-establish the reverse direction: if $!T(M, w) \lif !H(M, w)$ is valid, then
+establish the reverse direction: if $!T(M, w) \lif !E(M, w)$ is valid, then
 $M$ does in fact halt when started on input~$m$. 
 \end{explain}
 
 \begin{lem}
-If $!T(M, w) \Entails !H(M, w)$, then $M$ halts on input~$w$.
+\ollabel{lem:halt-if-valid}
+If $\Entails !T(M, w) \lif !E(M, w)$, then $M$ halts on input~$w$.
 \end{lem}
 
 \begin{proof} 
 Consider the $\Lang L_M$-!!{structure} $\Struct M$ with
-domain $\Nat$ which inerprets $\Obj 0$ as $0$, $'$ as the successor
+domain $\Nat$ which interprets $\Obj 0$ as $0$, $'$ as the successor
 function, and $<$ as the less-than relation, and the predicates $\Obj Q_q$
 and $\Obj S_\sigma$ as follows:
 \begin{align*}
   \Assign{\Obj Q_q}{M} & =
-\Setabs{\tuple{m, n}}{\text{after $n$ steps, $M$ started on $w$ is in state $q$
+\Setabs{\tuple{m, n}}{\text{started on~$w$, at step~$n$ $M$ is in state $q$
   scanning square~$m$}} \\
 \Assign{\Obj S_\sigma}{M} & = \{(m, n) :
-\text{after $n$ steps, $M$ started on $w$ has symbol~$\sigma$ on
-  square~$m$}\}
+\text{started on~$w$ after $n$ steps, square~$m$ of $M$ contains
+  symbol~$\sigma$}\}
 \end{align*}
-Clearly, $\Sat{M}{!T(M, w)}$. If $!T(M, w)$
-implies $!H(M, w)$, then $\Sat{M}{!H(M, w)}$, i.e.,
+In other words, we construct the !!{structure}~$\Struct{M}$ so that it
+describes what $M$ started on input~$w$ actually does, step by step.
+Clearly, $\Sat{M}{!T(M, w)}$. If $\Entails !T(M, w) \lif !E(M, w)$,
+then also $\Sat{M}{!E(M, w)}$, i.e.,
 \[
 \Sat{M}{\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
       X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]}.
