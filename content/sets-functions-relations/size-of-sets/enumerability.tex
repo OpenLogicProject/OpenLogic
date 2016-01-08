@@ -20,7 +20,6 @@ infinite, we say $X$ is !!{denumerable}.
 
 \begin{explain}
 A couple of points about enumerations:
-
 \begin{enumerate}
 \item The order of !!{element}s of $X$ in the enumeration does not
   matter, as long as every !!{element} appears: $4$, $1$, $2$5,
@@ -155,19 +154,20 @@ patterns are perfectly permissible, as long as they ``zig-zag''
 through every cell of the array. By Cantor's zig-zag method, the
 enumeration for $\Nat^2$ according to this scheme would be:
 \[
-\tuple{1,1}, \tuple{1,2}, \tuple{2,1}, \tuple{1,3}, \tuple{2,2}, \tuple{3,1}, \tuple{1,4}, \tuple{2,3}, \tuple{3,2}, \tuple{4,1}, \dots
+\tuple{1,1}, \tuple{1,2}, \tuple{2,1}, \tuple{1,3}, \tuple{2,2},
+\tuple{3,1}, \tuple{1,4}, \tuple{2,3}, \tuple{3,2}, \tuple{4,1}, \dots
 \]
 
 What ought we do about enumerating, say, the set of ordered triples
 of natural numbers?
 \[
-\Nat^3 = \Nat \times \Nat \times \Nat = \{ (n,m,k) : n,m,k \in \Nat \}
+\Nat^3 = \Nat \times \Nat \times \Nat = \Setabs{\tuple{n,m,k}}{n,m,k \in \Nat}
 \]
 We can think of $\Nat^3$ as the Cartesian product of
 $\Nat^2$ and $\Nat$, that is,
 \[
-\Nat^3 = \Nat^2 \times \Nat = \Setabs{(\vec a,
-k)}{\vec a \in \Nat^2, k \in \Nat }
+\Nat^3 = \Nat^2 \times \Nat =
+\Setabs{\tuple{\tuple{n,m},k}}{\tuple{n,m} \in \Nat^2, k \in \Nat }
 \]
 and thus we can enumerate $\Nat^3$ with an array by
 labelling one axis with the enumeration of $\Nat$, and the
@@ -197,10 +197,10 @@ rational numbers.
 \end{prob}
 
 \begin{prob}
-Recall from your introductory logic course that each possible in a
-truth table expresses a truth function. In other words, the truth
-functions are all functions from $\Bin^k \to \Bin$ for some~$k$. Prove
-that the set of all truth functions is enumerable.
+Recall from your introductory logic course that each possible truth
+table expresses a truth function. In other words, the truth functions
+are all functions from $\Bin^k \to \Bin$ for some~$k$. Prove that the
+set of all truth functions is enumerable.
 \end{prob}
 
 \begin{prob}

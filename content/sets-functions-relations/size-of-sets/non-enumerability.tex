@@ -30,16 +30,16 @@ $\Bin^\omega$~is !!{nonenumerable}.
 Suppose, for reductio, that $\Bin^\omega$ is !!{enumerable}, so that
 there is a list $s_{1}$, $s_{2}$, $s_{3}$, $s_{4}$, \dots{} of all the
 !!{element}s of~$\Bin^\omega$. We may arrange this list, and the
-elements of each sequence $s_i$ in it vertically in an array with the
+elements of each sequence $s_i$ in it, in an array with the
 positive integers on the horizontal axis, as so:
 \[
-\begin{array}{c|c|c|c|c}
-1 & 2 & 3 & 4 & \dots \\\hline
-s_{1}(1) & s_{1}(2) & s_{1}(3) & s_1(4) & \dots \\\hline
-s_{2}(1)& s_{2}(2) & s_2(3) & s_2(4) & \dots \\\hline
-s_{3}(1)& s_{3}(2) & s_3(3) & s_3(4) & \dots \\\hline
-s_{4}(1)& s_{4}(2) & s_4(3) & s_4(4) & \dots \\\hline
-\vdots & \vdots & \vdots & \vdots & \ddots
+\begin{array}{c|c|c|c|c|c}
+& 1 & 2 & 3 & 4 & \dots \\\hline
+1 & \mathbf{s_{1}(1)} & s_{1}(2) & s_{1}(3) & s_1(4) & \dots \\\hline
+2 & s_{2}(1)& \mathbf{s_{2}(2)} & s_2(3) & s_2(4) & \dots \\\hline
+3 & s_{3}(1)& s_{3}(2) & \mathbf{s_3(3)} & s_3(4) & \dots \\\hline
+4 & s_{4}(1)& s_{4}(2) & s_4(3) & \mathbf{s_4(4)} & \dots \\\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
 \end{array}
 \]
 Here $s_{1}(1)$ is a name for whatever number, a $0$ or a~$1$, is the
@@ -55,28 +55,36 @@ $\overline{s}$ is set to
 0 & \text{if $s_{n}(n) = 1$}.
 \end{cases}
 \]
-In other words, $\overline{s}(n)$ has the opposite value to~$s_{n}(n)$.
+In other words, $\overline{s}(n)$ has the opposite value
+to~$s_{n}(n)$. To get $\overline{s}(n)$, take the $0$'s and $1$'s in
+the diagonal of the array, and swicth every $0$ to a~$1$ and every $1$
+to a~$0$.
 
 Clearly $\overline{s}$ is a non-gappy infinite sequence of $0$s and
 $1$s, since it is just the mirror sequence to the sequence of $0$s and
 $1$s that appear on the diagonal of our array. So $\overline{s}$ is
 !!a{element} of~$\Bin^\omega$. Since it is !!a{element}
 of~$\Bin^\omega$, it must appear somewhere in the enumeration
-of~$\Bin^\omega$, that is, $\overline{s} = s_{n}$ for some~$n$.
+of~$\Bin^\omega$, that is, $\overline{s} = s_{k}$ for some~$k$.
 
-If $\overline{s} = s_{n}$, then for any~$m$, $\overline{s}(m) =
-s_{n}(m)$. (This is just the criterion of identity for
+If $\overline{s} = s_{k}$, then for any~$m$, $\overline{s}(m) =
+s_{k}(m)$. (This is just the criterion of identity for
 sequences---sequences are identical when they agree at every place.)
 
-So in particular, $\overline{s}(n) = s_{n}(n)$. $\overline{s}(n)$ must
+So in particular, $\overline{s}(k) = s_{k}(k)$. $\overline{s}(k)$ must
 be either an 0 or a~1. If it is a 0 then (given the definition of
-$\overline{s}$) $s_{n}(n)$ must be a~$1$. But if it is a~1 then
-$s_{n}(n)$ must be a~0. In either case $\overline{s}(n) \neq
-s_{n}(n)$.
+$\overline{s}$) $s_{k}(k)$ must be a~$1$. But if it is a~1 then
+$s_{k}(k)$ must be a~0. In either case $\overline{s}(k) \neq
+s_{k}(k)$.
 \end{proof}
 
-Diagonalization need not involve the presence of an array, though the
-array method is where it takes its name.
+\begin{explain}
+This proof method is called ``diagonalization'' because it uses the
+diagonal of the array to define $\overline{s}$. Diagonalization need
+not involve the presence of an array: we can show that sets are not
+!!{enumerable} by using a similar idea even when no array and no
+actual diagonal is involved.
+\end{explain}
 
 \begin{thm}
 \ollabel{thm-nonenum-pownat}
@@ -89,13 +97,11 @@ it has an enumeration, i.e., a list of all subsets of~$\Int^+$:
 \[
 Z_{1}, Z_{2}, Z_{3}, \dots
 \]
-
 We now define a set $\overline{Z}$ such that for any positive
 integer~$i$, $i \in \overline{Z}$ iff $i \notin Z_{i}$:
 \[
 \overline{Z} = \Setabs{i \in \Int^+}{i \notin Z_i}
 \]
-
 $\overline{Z}$ is clearly a set of positive integers, and thus $\overline{Z}
 \in \Pow{\Int^+}$. So $\overline{Z}$ must be $= Z_k$ for some~$k \in
 \Int^+$. And if that is the case, i.e., $\overline{Z} = Z_k$, then $i

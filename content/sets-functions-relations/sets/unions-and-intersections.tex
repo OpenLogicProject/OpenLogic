@@ -11,14 +11,14 @@
 
 \begin{defn}
 The \emph{union} of two sets $X$ and $Y$, written $X \cup Y$, is the
-set of all things which are members of $X$, $Y$, or both.
+set of all things which are !!{element}s of $X$, $Y$, or both.
 \[
 X \cup Y = \Setabs{x}{x \in X \lor x\in Y}
 \]
 \end{defn}
 
 \begin{ex}
-Since the multiplicity of elements doesn't matter, the union of two
+Since the multiplicity of !!{element}s doesn't matter, the union of two
 sets which have !!a{element} in common contains that !!{element} only once,
 e.g., $\{ a, b, c\} \cup \{ a, 0, 1\} = \{a, b, c, 0, 1\}$.
 
@@ -28,6 +28,10 @@ b, c \} \cup \{a \} = \{a, b, c\}$.
 The union of a set with the empty set is identical to the set: $\{a,
 b, c \} \cup \emptyset = \{a, b, c \}$.
 \end{ex}
+
+\begin{prob}
+Prove rigorously that if $X \subseteq Y$, then $X \cup Y = Y$.
+\end{prob}
 
 \begin{defn}
 The \emph{intersection} of two sets $X$ and $Y$, written $X \cap Y$, is
@@ -52,6 +56,11 @@ set: $\{a, b, c\} \cap \{a, b\} = \{a, b\}$.
 The intersection of any set with the empty set is empty: $\{a, b, c \}
 \cap \emptyset = \emptyset$.
 \end{ex}
+
+\begin{prob}
+Prove rigorously that if $X \subseteq Y$, then $X \cap Y = X$.
+\end{prob}
+
 
 \begin{explain}
 We can also form the union or intersection of more than two
@@ -78,7 +87,8 @@ If $C$ is a set of sets, then $\bigcup C$ is the set of !!{element}s of
 If $C$ is a set of sets, then $\bigcap C$ is the set of objects which
 all elements of $C$ have in common:
 \begin{align*}
-\bigcap C & = \Setabs{x}{x \text{ belongs to every element of } C}, \text{i.e.,}
+\bigcap C & = \Setabs{x}{x \text{ belongs to every element of } C},
+\text{ i.e.,}\\
 \bigcap C & = \Setabs{x}{\text{for all } y \in C, x \in y}
 \end{align*}
 \end{defn}
@@ -101,6 +111,5 @@ $X$ which are not also !!{element}s of~$Y$, i.e.,
 X\setminus Y = \Setabs{x}{x\in X \text{ and } x \notin Y}.
 \]
 \end{defn}
-
 
 \end{document}
