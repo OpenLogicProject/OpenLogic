@@ -9,15 +9,19 @@
 \olfileid{tur}{mac}{int} 
 \olsection{Introduction}
 
+What does it mean for a function, say, from $\Nat$ to $\Nat$ to be
+\emph{computable}? Among the first answers, and the most well known
+one, is that a function is computable if it can be computed by a
+Turing machine. This notion was set out by Alan Turing in 1936.
 Turing machines are an example of \emph{a model of computation}---they
 are a mathematically precise way of defining the idea of a
-computational procedure.  What exactly a computational procedure is in
-general is debated, but it is widely agreed that Turing machines are
-one way of specifying computational procedures.  Even though the term
-``Turing machine'' evokes the image of a physical machine with moving
-parts, strictly speaking a Turing machine is a purely mathematical
-construct, and it idealizes the idea of a computational procedure.
-For instance, we place no restriction on either the time or memory
+``computational procedure.''  What exactly that means is debated, but
+it is widely agreed that Turing machines are one way of specifying
+computational procedures.  Even though the term ``Turing machine''
+evokes the image of a physical machine with moving parts, strictly
+speaking a Turing machine is a purely mathematical construct, and as
+such it idealizes the idea of a computational procedure.  For
+instance, we place no restriction on either the time or memory
 requirements of a Turing machine: Turing machines can compute
 something even if the computation would require more storage space or
 more steps than there are atoms in the universe.
@@ -100,20 +104,48 @@ operation. Halting is sometimes represented by a specific halt
 state~$h$.  This will be demonstrated in more detail later on.
 \end{explain}
 
+\begin{digress}
+The beauty of Turing's paper, ``On computable numbers,'' is that he
+presents not only a formal definition, but also an argument that the
+definition captures the intuitive notion of computability.
+From the definition, it should be clear that any function computable
+by a Turing machine is computable in the intuitive sense. Turing
+offers three types of argument that the converse is true, i.e., that
+any function that we would naturally regard as computable is
+computable by such a machine. They are (in Turing's words):
+\begin{enumerate}
+\item A direct appeal to intuition.
+\item A proof of the equivalence of two definitions (in case the new
+  definition has a greater intuitive appeal).
+\item Giving examples of large classes of numbers which are
+  computable.
+\end{enumerate}
+Our goal is to try to define the notion of computability ``in
+principle,'' i.e., without taking into account practical limitations
+of time and space. Of course, with the broadest definition of
+computability in place, one can then go on to consider computation
+with bounded resources; this forms the heart of the subject known as
+``computational complexity.''
+\end{digress}
+
 \begin{history}
-Alan Turing invented Turing machines in 1936. While his interest at the
-time was the decidability of first-order logic, the paper has been
-described as a definitive paper on the foundations of computer design
-(Copeland 1993, 10). Notice that this was a full five years before the
-first working general purpose computer was built in 1941 (by the German
-Konrad Zuse in his parents living room), seven years before Turing and his
-colleagues at Bletchley Park built the code-breaking Colossus (1943), nine
-years before the American ENIAC (1945), twelve years before the first
-British general purpose computer the Manchester Mark I was built in
-Manchester (1948) and thirteen years before the Americans first tested the
-BINAC (1949). The Manchester Mark I has the distinction of being the first
-stored-program computer - previous machines had to be rewired by hand for
-each new task.
+Alan Turing invented Turing machines in 1936. While his interest at
+the time was the decidability of first-order logic, the paper has been
+described as a definitive paper on the foundations of computer
+design. In the paper, Turing focuses on computable real numbers, i.e.,
+real numbers whose decimal expansions are computable; but he notes
+that it is not hard to adapt his notions to computable functions on
+the natural numbers, and so on.  Notice that this was a full five
+years before the first working general purpose computer was built in
+1941 (by the German Konrad Zuse in his parents living room), seven
+years before Turing and his colleagues at Bletchley Park built the
+code-breaking Colossus (1943), nine years before the American ENIAC
+(1945), twelve years before the first British general purpose computer
+the Manchester Mark I was built in Manchester (1948) and thirteen
+years before the Americans first tested the BINAC (1949). The
+Manchester Mark~I has the distinction of being the first
+stored-program computer---previous machines had to be rewired by hand
+for each new task.
 \end{history}
 
 \end{document}
