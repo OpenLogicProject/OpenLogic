@@ -18,9 +18,11 @@
 \RequirePackage{natbib}
 \setcitestyle{authoryear}
 
-\usepackage{tikz}
+\RequirePackage{tikz}
 \usetikzlibrary{arrows}
 
+\RequirePackage{wrapfig}
+\RequirePackage{catchfile}
 
 \RequirePackage{xcolor}
 \definecolor{dark-gray}{gray}{0.2}
@@ -192,3 +194,30 @@
 \setlength{\cftsectionnumwidth}{2.8em}
 
 \makeatother
+
+% Photos
+
+% Photo credits
+\newlistof{photocredits}{pcr}{Photo Credits}
+
+\newlength{\olphotowidth}
+\setlength{\olphotowidth}{.5\textwidth}
+\setlength{\intextsep}{0pt}
+\setlength{\columnsep}{0pt}
+
+\tagtrue{olphotos} % include photos
+\tagtrue{olphotos-lowres} % pick low-res images for smaller file size
+
+\newcommand*{\olphoto}[2]{%
+  \iftag{olphotos}{%
+    \IfFileExists{\olpath/assets/photos/#1.png}{%
+      \begin{wrapfigure}{R}{\olphotowidth}
+        \hfil
+        \iftag{olphotos-lowres}{%
+          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1-lowres}}{
+          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1}}
+        \caption{#2}
+      \IfFileExists{\olpath/assets/photos/#1-credit.tex}{%
+        \CatchFileDef{\photocredit}{\olpath/assets/photos/#1-credit.tex}{}%
+        \addtocontents{pcr}{#2, p.~\thepage: \photocredit\par}}{}
+\end{wrapfigure}}}{}}
