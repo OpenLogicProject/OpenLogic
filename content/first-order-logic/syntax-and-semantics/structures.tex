@@ -102,8 +102,10 @@ defined as follows:
 \begin{enumerate}
 \item If $t$ is just the !!{constant}~$c$, then $\Value{c}{M} = \Assign{c}{M}$.
 \item If $t$ is of the form $\Atom{f}{t_1, \ldots, t_n}$, then
-  $\Value{t}{M}$ is $\Assign{f}{M}(\Value{t_1}{M}, \ldots,
-  \Value{t_n}{M})$.
+  \[
+  \Value{t}{M} = \Assign{f}{M}(\Value{t_1}{M}, \ldots,
+  \Value{t_n}{M}).
+  \]
 \end{enumerate}
 \end{defn}
 
@@ -130,18 +132,20 @@ binary !!{function} $\times$. Hence, the !!{value} of $\Obj{four}$
 is just 4, and the !!{value} of $\times(\Obj{two},
 +(\Obj{three},\Obj{zero}))$ (or in infix notation, $\Obj{two}
 \times (\Obj{three} + \Obj{zero})$ ) is
-\begin{align*}
-\Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero})}{M}&=
-\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{\Obj{two},
+\begin{multline*}
+\Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero})}{M} =\\
+\begin{aligned}
+& =\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{\Obj{two},
 +(\Obj{three}, \Obj{zero})}{M})\\
-&= \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M},
+& = \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M},
 \Value{\Obj{zero}}{M})) \\
-&= \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M},
+& = \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M},
 \Assign{\Obj{zero}}{M})) \\
-&= \Assign{\times}{M}(2, \Assign{+}{M}(3, 0)) \\
-&= \Assign{\times}{M}(2, 3) \\
-&= 6
-\end{align*}
+& = \Assign{\times}{M}(2, \Assign{+}{M}(3, 0)) \\
+& = \Assign{\times}{M}(2, 3) \\
+& = 6
+\end{aligned}
+\end{multline*}
 \end{ex}
 
 \begin{prob}

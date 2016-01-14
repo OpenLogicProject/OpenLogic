@@ -100,11 +100,12 @@ that $m \le k$.
 \begin{enumerate} 
 \item Suppose there is an instruction of the form~\olref{right}.
   By \olref[rep]{defn:tm-descr}, \olref[rep]{rep-right}, this means that
-\[ 
+\begin{multline*} 
 \lforall[x][\lforall[y][((\Obj Q_{q}(x,
-y) \land \Obj S_\sigma(x, y)) \lif (\Obj Q_{q'}(x',
-y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y)))]]
-\] 
+    y) \land \Obj S_\sigma(x, y)) \lif {}]]\\
+(\Obj Q_{q'}(x',
+y') \land \Obj S_{\sigma'}(x, y') \land !A(x, y)))
+\end{multline*} 
 is a conjunct of $!T(M,w)$. This entails the following
 !!{sentence}, through universal instantiation: 
 \[ 
@@ -130,11 +131,12 @@ follows from the corresponding conjunct in $C!(M, w, n)$, $\num{m} < x
 
 \item Suppose there is an instruction of the form~\olref{left}.
   Then, by \olref[rep]{defn:tm-descr}, \olref[rep]{rep-left},
-\[
+\begin{multline*} 
 \lforall[x][\lforall[y][((\Obj Q_{q}(x', y) \land \Obj
-S_{\sigma}(x', y)) \lif (\Obj Q_{q'}(x, y') \land \Obj
-S_{\sigma'}(x', y') \land !A(x, y)))]] 
-\] 
+    S_{\sigma}(x', y)) \lif {}]]\\
+(\Obj Q_{q'}(x, y') \land \Obj
+S_{\sigma'}(x', y') \land !A(x, y)))
+\end{multline*} 
 is a conjunct of $!T(M,w)$, which entails the following !!{sentence}: 
 \[ 
 (\Obj Q_{q}(\num{m}', \num{n}) \land \Obj S_{\sigma}(\num{m}', \num{n})
@@ -222,11 +224,11 @@ function, and $<$ as the less-than relation, and the predicates $\Obj Q_q$
 and $\Obj S_\sigma$ as follows:
 \begin{align*}
   \Assign{\Obj Q_q}{M} & =
-\Setabs{\tuple{m, n}}{\text{started on~$w$, at step~$n$ $M$ is in state $q$
-  scanning square~$m$}} \\
-\Assign{\Obj S_\sigma}{M} & = \{(m, n) :
-\text{started on~$w$ after $n$ steps, square~$m$ of $M$ contains
-  symbol~$\sigma$}\}
+\Setabs{\tuple{m, n}}{\begin{array}{ll}\text{started on~$w$, after~$n$ steps,}\\ \text{$M$ is in state $q$
+  scanning square~$m$}\end{array}} \\
+\Assign{\Obj S_\sigma}{M} & = \Setabs{\tuple{m, n}}{\begin{array}{ll}
+\text{started on~$w$, after $n$ steps,}\\ \text{square~$m$ of $M$ contains
+  symbol~$\sigma$}\end{array}}
 \end{align*}
 In other words, we construct the !!{structure}~$\Struct{M}$ so that it
 describes what $M$ started on input~$w$ actually does, step by step.
