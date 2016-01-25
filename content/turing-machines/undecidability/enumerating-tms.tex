@@ -1,0 +1,70 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: enumerating-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{enu}
+\olsection{Enumerating Turing Machines}
+
+\begin{explain}
+We can show that the set of all Turing-machines is
+!!{enumerable}. This follows from the fact that each Turing machine
+can be finitely described.  The set of states and the tape vocabulary
+are finite sets.  The transition function is a partial function from
+$Q \times \Sigma$ to $Q \times \Sigma \times \{\TMleft, \TMright,
+\TMstay\}$, and so likewise can be specified by listing its values for
+the finitely many argument pairs for which it is defined.  Of course,
+strictly speaking, the states and vocabulary can be anything; but the
+\emph{behavior} of the Turing machine is independent of which objects
+serve as states and vocabulary. So we may assume, for instance, that
+the states and vocabulary symbols are natural numbers, or that the
+states and vocabulary are all strings of letters and digits.
+
+Suppose we fix a !!{denumerable} vocabulary for specifying Turing
+machines: $\sigma_0 = \TMendtape$, $\sigma_1 = \TMblank$, $\sigma_2 =
+\TMstroke$, $\sigma_3$, \dots, $\TMright$, $\TMleft$, $\TMstay$,
+$q_0$, $q_1$, \dots. Then any Turing machine can be specified by some
+finite string of symbols from this alphabet (though not every finite
+string of symbols specifies a Turing machine). For instance, suppose
+we have a Turing machine $M = \tuple{Q, \Sigma, q, \delta}$ where $Q =
+\{q'_0, \dots, q'_n\} \subseteq \{q_0, q_1, \dots \}$ and $\Sigma
+= \{\TMendtape, \sigma'_1, \sigma'_2, \dots, \sigma'_m\}
+\subseteq \{\sigma_0, \sigma_1, \dots\}$. We could specify it by
+the string
+\[
+q'_0 q'_1 \dots q'_n \TMendtape \sigma'_1 \dots \sigma'_m \TMendtape q
+\TMendtape S(\sigma'_0,q'_0)\TMendtape \dots \TMendtape S(\sigma'_m, q'_n)
+\]
+where $S(\sigma'_i, q'_j) $ is the string $\sigma'_i q'_j
+\delta(\sigma'_i, q'_j)$ if $\delta(\sigma'_i,q'_j)$ is defined, and
+$\sigma'_i q'_j$ otherwise.
+\end{explain}
+
+\begin{thm}
+There are functions from $\Nat$ to $\Nat$ which are not Turing
+computable.
+\end{thm}
+
+\begin{proof}
+We know that the set of finite strings of symbols from
+!!a{denumerable} alphabet is !!{enumerable}. This gives us that the
+set of descriptions of Turing machines, as a subset of the finite
+strings from the !!{enumerable} vocabulary $\{q_0, q_1, \dots,
+\TMendtape, \sigma_1, \sigma_2, \dots\}$, is itself enumerable.  Since
+every Turing computable function is computed by some (in fact, many)
+Turing machines, this means that the set of all Turing computable
+functions from $\Nat$ to $\Nat$ is also enumerable.
+
+On the other hand, the set of all functions from $\Nat$ to $\Nat$ is
+not !!{enumerable}. This follows immediately from the fact that not
+even the set of all functions of one argument from $\Nat$
+to the set $\{0,1\}$ is !!{enumerable}.  If all functions
+were computable by some Turing machine we could enumerate the set of
+all functions. So there are some functions that are not
+Turing-computable. 
+\end{proof}
+
+\end{document}
