@@ -35,15 +35,17 @@ $\Delta \Proves[\Log{LK}] !A$.
 \end{prop}
 
 \begin{proof}
-Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A$ be $\Pi_0$
-and the $\Log{LK}$-!!{derivation} of $\Gamma_1 \cup\{!A\} \Sequent
-\lfalse$ be $\Pi_1$. We can then !!{derive}
+There are finite $\Gamma_0$ and $\Gamma_1 \subseteq \Gamma$ such that
+$\Log{LK}$ !!{derive}s $\Gamma_0 \Sequent !A$ and $\Gamma_1, !A
+\Sequent \lfalse$.  Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent
+!A$ be $\Pi_0$ and the $\Log{LK}$-!!{derivation} of $\Gamma_1, !A
+\Sequent \lfalse$ be $\Pi_1$. We can then !!{derive}
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A $
 \doubleLine
-\UnaryInf$ \Gamma_0,\Gamma_1 \fCenter !A $
+\UnaryInf$ \Gamma_0, \Gamma_1 \fCenter !A $
 \AxiomC{}
 \RightLabel{$\Pi_1$}
 \Deduce$ \Gamma_1, !A \fCenter \lfalse$
@@ -67,10 +69,10 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
 
 \begin{proof}
 Suppose that $\Gamma \cup \{!A\} \Proves[\Log{LK}] \lfalse$. Then
-there is a finite set $\Gamma_0 \subseteq \Gamma$ with
-$\Gamma_0 \cup \{!A\} \Proves[\Log{LK}] \lfalse$.  Let
-$\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0, !A
-\Sequent \lfalse$, and consider
+there is a finite set $\Gamma_0 \subseteq \Gamma$ such that $\Log{LK}$
+!!{derive}s $\Gamma_0, !A \Sequent \lfalse$.  Let $\Pi_0$ be an
+$\Log{LK}$-!!{derivation} of $\Gamma_0, !A \Sequent \lfalse$, and
+consider
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
