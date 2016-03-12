@@ -18,14 +18,14 @@ role in the proof of the completeness theorem.
 
 \begin{prop}[Monotony]
 \ollabel{prop:monotony}
-If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
-\Proves !A$.
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves[\Log{LK}] !A$, then $\Delta
+\Proves[\Log{LK}] !A$.
 \end{prop}
 
 \begin{proof}
 Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
 of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
-$\Delta \Proves !A$.
+$\Delta \Proves[\Log{LK}] !A$.
 \end{proof}
 
 \begin{prop}
@@ -135,7 +135,7 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
 \BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter \lfalse $
 \end{prooftree}
 Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
-!B\} \Proves \lfalse$.}
+!B\} \Proves[\Log{LK}] \lfalse$.}
 \end{proof}
 
 \begin{probtag}{probOr}
@@ -159,7 +159,7 @@ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma_0 \fCenter !A \lor !B$
 \end{prooftree}
-Therefore $\Gamma \Proves !A \lor !B$. The proof for when $\Gamma
+Therefore $\Gamma \Proves[\Log{LK}] !A \lor !B$. The proof for when $\Gamma
 \Proves[\Log{LK}] !B$ is similar.}
 \end{proof}
 
@@ -316,8 +316,8 @@ Prove \olref[fol][seq][prv]{prop:provability-lif}.
 
 \begin{thm}
 \ollabel{thm:strong-generalization} If $c$ is a constant not occurring
-in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
-\Proves \lforall[x][!A(x)]$.
+in $\Gamma$ or $!A(x)$ and $\Gamma \Proves[\Log{LK}] !A(c)$, then $\Gamma
+\Proves[\Log{LK}] \lforall[x][!A(x)]$.
 \end{thm}
 
 \begin{proof}
@@ -331,22 +331,22 @@ and thus the eigenvariable condition is satisfied.
 \begin{thm}
 \ollabel{thm:provability-quantifiers}
 \begin{tagenumerate}{prvEx,prvAll}
-\tagitem{prvEx}{If $\Gamma \Proves !A(t)$ then $\Gamma \Proves
+\tagitem{prvEx}{If $\Gamma \Proves[\Log{LK}] !A(t)$ then $\Gamma \Proves
   \lexists[x][!A(x)]$.}{}
 
-\tagitem{prvAll}{If $\Gamma \Proves \lforall[x][!A(x)]$ then $\Gamma \Proves
+\tagitem{prvAll}{If $\Gamma \Proves[\Log{LK}] \lforall[x][!A(x)]$ then $\Gamma \Proves
   !A(t)$.}{}
 \end{tagenumerate}
 \end{thm}
 
 \begin{proof}
 \begin{tagenumerate}{prvEx,prvAll}
-\tagitem{prvEx}{Suppose $\Gamma \Proves !A(t)$. Then for some
+\tagitem{prvEx}{Suppose $\Gamma \Proves[\Log{LK}] !A(t)$. Then for some
   finite~$\Gamma_0 \subseteq \Gamma$, $\Log{LK}$ !!{derive}s $\Gamma_0
   \Sequent !A(t)$. Add an \RightR{\lexists} inference to get
   !!a{derivation} of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
 
-\tagitem{prvAll}{Suppose $\Gamma \Proves \lnot !A(t)$. Then there is a
+\tagitem{prvAll}{Suppose $\Gamma \Proves[\Log{LK}] \lnot !A(t)$. Then there is a
   finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation}
   $\Pi$ of $\Gamma_0 \Sequent \lforall[x][!A(x)]$.  Then
 % for some reason, prooftree env sometimes doesn't work here
@@ -363,7 +363,7 @@ and thus the eigenvariable condition is satisfied.
 %\end{prooftree}
 \DisplayProof
 \]
-shows that $\Gamma_0 \Proves !A(t)$.}{}
+shows that $\Gamma_0 \Proves[\Log{LK}] !A(t)$.}{}
 \end{tagenumerate}
 \end{proof}
 \end{document}
