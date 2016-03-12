@@ -41,9 +41,9 @@ $\Delta = \{ \Delta_1, \dots, \Delta_n\}$, then $\Gamma \Sequent
 
 When $m=0$, $\quad \Sequent \Delta$ holds iff $\Delta_1 \lor \dots
 \lor \Delta_n$ holds. When $n=0$, $\Gamma \Sequent \quad$ holds iff
-$\Gamma_1 \land \dots \land \Gamma_m$ does not. An empty succedent is
-sometimes filled with the $\lfalse$ symbol. The empty sequent
-$\quad \Sequent \quad$ canonically represents a
+$\Gamma_1 \land \dots \land \Gamma_m$ does not. \tagitem{prvFalse}{An
+  empty succedent is sometimes filled with the $\lfalse$ symbol. }The
+empty sequent $\quad \Sequent \quad$ canonically represents a
 contradiction.
 \end{defn}
 
@@ -69,7 +69,7 @@ where $S, S_1$, and $S_2$ are sequents. $S_1$ and $S_2$ are called the
 inference.
 \end{defn}
 
-In sequent calculus !!{derivation}s, a correct inference yields valid
+In sequent calculus !!{derivation}s, a correct inference yields 
 a valid sequent, provided the upper sequents are valid.
 
 For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite
@@ -233,8 +233,14 @@ independent of~$a$.
 \end{explain}
 
 \begin{defn}[Initial Sequent]
-An \emph{initial sequent} is a sequent of the form $!A \Sequent !A$
-or $\quad \Sequent \ltrue$ or $\lfalse \Sequent \quad$ for any !!{sentence} $!A$ in the language.
+An \emph{initial sequent} is a sequent
+\iftag{prvFalse,prvTrue}{of one of the following forms:
+  \begin{enumerate}
+    \item $!A \Sequent !A$
+    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
+    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
+  \end{enumerate}}
+{of the form $!A \Sequent !A$} for any !!{sentence} $!A$ in the language.
 \end{defn}
 
 \begin{defn}[LK !!{derivation}]
