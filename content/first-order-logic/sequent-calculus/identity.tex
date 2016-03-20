@@ -37,7 +37,7 @@ where $t_1$ and $t_2$ are closed terms.
 If $s$ and $t$ are ground terms, then $!A(s), \eq[s][t] \Proves[\Log{LK}] !A(t)$:
 \begin{prooftree}
 \Axiom$ !A(s) \fCenter !A(s)$
-\RightLabel{weak}
+\RightLabel{\LeftR{\Weakening}}
 \UnaryInf$ !A(s), \eq[s][t] \fCenter !A(s)$
 \RightLabel{$\eq$}
 \UnaryInf$ !A(s), \eq[s][t] \fCenter !A(t)$
@@ -48,21 +48,20 @@ identicals, or Leibniz' Law.
 $\Log{LK}$ proves that $\eq$ is symmetric and transitive:
 \[
 \Axiom$ \fCenter \eq[t_1][t_1] $
-\RightLabel{weak}
+\RightLabel{\LeftR{\Weakening}}
 \UnaryInf$ \eq[t_1][t_2] \fCenter \eq[t_1][t_1] $
 \RightLabel{$\eq$}
 \UnaryInf$ \eq[t_1][t_2] \fCenter \eq[t_2][t_1]$
 \DisplayProof
 \qquad
 \Axiom$ \eq[t_1][t_2] \fCenter \eq[t_1][t_2] $
-\RightLabel{weak}
+\RightLabel{\LeftR{\Weakening}}
 \UnaryInf$ \eq[t_1][t_2], \eq[t_2][t_3] \fCenter \eq[t_1][t_2] $
 \RightLabel{$\eq$}
 \UnaryInf$ \eq[t_1][t_2], \eq[t_2][t_3] \fCenter \eq[t_1][t_3]$
 \DisplayProof
 \]
-In the proof on the left, the !!{formula}~$\eq[x][t_1]$ is our $!A(x)$,
-and correspondingly, $!A(t_2) \ident \eq[\Subst{x}{t_2}{x}][t_1]$. On the
+In the proof on the left, the !!{formula}~$\eq[x][t_1]$ is our $!A(x)$. On the 
 right, we take $!A(x)$ to be $\eq[t_1][x]$.
 \end{ex}
 

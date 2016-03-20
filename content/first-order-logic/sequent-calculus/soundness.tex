@@ -51,17 +51,17 @@ satisfies it.
 
 \begin{proof}
 Let $\Pi$ be a !!{derivation} of $\Gamma \Sequent \Delta$. We proceed by
-induction on the number of inferences in~$\Pi$.
+induction on the height of the proof tree $\Pi$.
 
-If the number of inferences is~0, then $\Pi$ consists only of an
+If the height is~1, then $\Pi$ consists only of an
 initial sequent. Every initial sequent $!A \Sequent !A$ is obviously
 valid, since for every $\Struct M$, either $\Sat/{M}{!A}$ or
 $\Sat{M}{!A}$.
 
-If the number of inferences is greater than~0, we distinguish cases
-according to the type of the lowermost inference. By induction
+If the height $n$ is greater than~$1$, we distinguish cases
+according to the type of the inference at the root. By induction
 hypothesis, we can assume that the premises of that inference are
-valid.
+valid, since the height of the proof of any premise is smaller than $n$.
 
 First, we consider the possible inferences with only one premise
 $\Gamma' \Sequent \Delta'$.
@@ -77,7 +77,7 @@ $\Gamma' \Sequent \Delta'$.
   $\Sat{M}{!E}$ for some $!E \in \Delta$.  Since $\Gamma' \Sequent
   \Delta'$ is valid, one of these cases obtains for every~$\Struct
   M$. Consequently, $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is $\lnot$~left: Then for some $!A \in
+\item The last inference is \LeftR{\lnot}: Then for some $!A \in
   \Delta'$, $\lnot !A \in \Gamma$.  Also, $\Gamma' \subseteq \Gamma$,
   and $\Delta' \setminus \{!A\} \subseteq \Delta$.
 
@@ -89,8 +89,8 @@ $\Gamma' \Sequent \Delta'$.
   for some $!E \in \Gamma$ (since $\Gamma' \subseteq \Gamma$) or
   $\Sat{M}{!E}$ for some $!E \in \Delta'$ different from~$!A$ (since
   $\Delta' \setminus \{!A\} \subseteq \Delta$).
-\item The last inference is $\lnot$~right: Exercise.
-\item The last inference is $\land$~left: There are two variants: $!A
+\item The last inference is \RightR{\lnot}: Exercise.
+\item The last inference is \LeftR{\land}: There are two variants: $!A
   \land !B$ may be inferred on the left from $!A$ or from $!B$ on the
   left side of the premise.  In the first case, $!A \in \Gamma'$.
   Consider a !!{structure}~$\Struct M$.  Since $\Gamma' \Sequent
@@ -105,7 +105,7 @@ $\Gamma' \Sequent \Delta'$.
   $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$ is valid.  The
   case where $!A \land !B$ is inferred from $!B$ is handled the same,
   changing $!A$ to $!B$.
-\item The last inference is $\lor$~right: There are two variants: $!A
+\item The last inference is \RightR{\lor}: There are two variants: $!A
   \lor !B$ may be inferred on the right from $!A$ or from $!B$ on the
   right side of the premise.  In the first case, $!A \in \Delta'$.
   Consider a !!{structure}~$\Struct M$.  Since $\Gamma' \Sequent
@@ -119,7 +119,7 @@ $\Gamma' \Sequent \Delta'$.
   \Delta$.  Since $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$
   is valid.  The case where $!A \lor !B$ is inferred from $!B$ is
   handled the same, changing $!A$ to $!B$.
-\item The last inference is $\lif$~right: Then $!A \in \Gamma'$, $!B
+\item The last inference is \RightR{\lif}: Then $!A \in \Gamma'$, $!B
   \in \Delta'$, $\Gamma' \setminus \{!A\} \subseteq \Gamma$ and
   $\Delta' \setminus \{!B\} \subseteq \Delta$.  Since $\Gamma'
   \Sequent \Delta'$ is valid, for any !!{structure}~$\Struct M$, (a)
@@ -130,7 +130,7 @@ $\Gamma' \Sequent \Delta'$.
   case (d), for some $!E \in \Delta$, $\Sat{M}{!E}$.  In each case,
   $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  Since $\Struct M$
   was arbitrary, $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is $\forall$~left: Then there is a
+\item The last inference is \LeftR{\lforall}: Then there is a
   !!{formula}~$!A(x)$ and a ground term~$t$ such that $!A(t) \in
   \Gamma'$, $\lforall[x][!A(x)] \in \Gamma$, and $\Gamma' \setminus
   \{!A(t)\} \subseteq \Gamma$.  Consider a !!{structure}~$\Struct
@@ -143,8 +143,8 @@ $\Gamma' \Sequent \Delta'$.
   $\Sat{M}{!E}$, as $\Delta = \Delta'$.  So in each case, $\Struct M$
   satisfies $\Gamma \Sequent \Delta$.  Since $\Struct M$ was arbitrary,
   $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is $\lexists$~right: Exercise.
-\item The last inference is $\forall$~right: Then there is a
+\item The last inference is \RightR{\lexists}: Exercise.
+\item The last inference is \RightR{\lforall}: Then there is a
   !!{formula}~$!A(x)$ and a !!{constant}~$a$ such that $!A(a) \in
   \Delta'$, $\lforall[x][!A(x)] \in \Delta$, and $\Delta' \setminus
   \{!A(a)\} \subseteq \Delta$.  Furthermore, $a \notin \Gamma \cup
@@ -187,10 +187,9 @@ $\Gamma' \Sequent \Delta'$.
   an $!E \in \Delta' \setminus \{!A(a)\}$ such that $\Sat{M}{!E}$.  So
   in each case, $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  Since
   $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is $\lexists$~left: Exercise.
+\item The last inference is \LeftR{\lexists}: Exercise.
 \end{enumerate}
-Now let's consider the possible inferences with two premises: cut,
-$\lor$~left, $\land$~right, and $\lif$~left.
+Now let's consider the possible inferences with two premises.
 \begin{enumerate}
 \item The last inference is a cut: Suppose the premises are $\Gamma'
   \Sequent \Delta'$ and $\Pi' \Sequent \Lambda'$ and the cut formula
@@ -205,7 +204,7 @@ $\lor$~left, $\land$~right, and $\lif$~left.
   \setminus \{!A\} \Sequent \Lambda'$.  But $\Pi' \setminus \{!A\}
   \subseteq \Gamma$ and $\Lambda' \subseteq \Delta$, so $\Struct M$
   also satisfies $\Gamma \Sequent \Delta$.
-\item The last inference is $\land$~right.  The premises are $\Gamma
+\item The last inference is \RightR{\land}.  The premises are $\Gamma
   \Sequent \Delta'$ and $\Gamma \Sequent \Delta''$, where $!A \in
   \Delta'$ an $!B \in \Delta''$.  By induction hypothesis, both are
   valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
@@ -219,8 +218,8 @@ $\lor$~left, $\land$~right, and $\lif$~left.
   $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  In case (b),
   $\Struct M$ satisfies $\Gamma \Sequent \Delta$ since $!A \land !B
   \in \Delta$.
-\item The last inference is $\lor$~left: Exercise.
-\item The last inference is $\lif$~left.  The premises are $\Gamma
+\item The last inference is \LeftR{\lor}: Exercise.
+\item The last inference is \LeftR{\lif}.  The premises are $\Gamma
   \Sequent \Delta'$ and $\Gamma' \Sequent \Delta$, where $!A \in
   \Delta'$ and $!B \in \Gamma'$.  By induction hypothesis, both are
   valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
@@ -255,7 +254,7 @@ If $\Gamma \Proves[\Log{LK}] !A$ then for some finite subset $\Gamma_0 \subseteq
 \Gamma$, there is !!a{derivation} of $\Gamma_0 \Sequent !A$.  By
 \olref{sequent-soundness}, every !!{structure} $\Struct M$ either
 makes some $!B \in \Gamma_0$ false or makes $!A$ true.  Hence, if
-$\Sat{M}{\Gamma_0}$ then also $\Sat{M}{!A}$.
+$\Sat{M}{\Gamma}$ then also $\Sat{M}{!A}$.
 \end{proof}
 
 \begin{cor}

@@ -44,18 +44,12 @@ $\Log{LK}$ !!{derive}s $\Gamma_0 \Sequent !A$ and $\Gamma_1, !A
 \AxiomC{}
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A $
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1 \fCenter !A $
 \AxiomC{}
 \RightLabel{$\Pi_1$}
 \Deduce$ \Gamma_1, !A \fCenter \lfalse$
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter \lfalse $
 \RightLabel{cut}
 \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter \lfalse $
 \end{prooftree}
-(Recall that double inference lines indicate several weakening
-inferences.)
 
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
@@ -78,7 +72,10 @@ consider
 \RightLabel{$\Pi_0$}
 \Deduce$\Gamma_0, !A \fCenter \lfalse$
 \RightLabel{\RightR{\lnot}}
-\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+\UnaryInf$ \Gamma_0 \fCenter \lfalse, \lnot !A$
+\AxiomC{$\lfalse \fCenter \quad$}
+\RightLabel{cut}
+\BinaryInf$ \Gamma_0 \fCenter \lnot !A$
 \end{prooftree}
 \end{proof}
 
@@ -99,7 +96,7 @@ of $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_0, !A \fCenter \lfalse $
 \RightLabel{\RightR{\lnot}}
-\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+\UnaryInf$ \Gamma_0 \fCenter \lfalse, \lnot !A$
 \AxiomC{}
 \RightLabel{$\Pi_1$}
 \Deduce$ \Gamma_1, \lnot !A \fCenter \lfalse $
@@ -136,6 +133,9 @@ $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
 \RightLabel{\LeftR{\lor}}
 \BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter \lfalse $
 \end{prooftree}
+(Recall that double inference lines indicate several weakening
+inferences.)
+
 Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
 !B\} \Proves[\Log{LK}] \lfalse$.}
 \end{proof}
@@ -183,7 +183,7 @@ Prove \olref[fol][seq][prv]{prop:provability-lor-right}.
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, \fCenter !A \land !B$
+\Deduce$ \Gamma_0 \fCenter !A \land !B$
 \Axiom$!A \fCenter !A$
 \RightLabel{\LeftR{\land}}
 \UnaryInf$!A \land !B \fCenter !A$
@@ -214,10 +214,14 @@ and $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, \fCenter !A$
+\Deduce$ \Gamma_0 \fCenter !A$
+\doubleLine
+\UnaryInf$ \Gamma_0, \Gamma_1 \fCenter !A$
 \AxiomC{}
 \RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, \fCenter !B$
+\Deduce$ \Gamma_1 \fCenter !B$
+\doubleLine
+\UnaryInf$ \Gamma_0, \Gamma_1 \fCenter !B$
 \RightLabel{\RightR{\land}}
 \BinaryInf$\Gamma_0, \Gamma_1 \fCenter !A \land !B $
 \end{prooftree}
@@ -246,14 +250,10 @@ $\Gamma \Proves[\Log{LK}] !A \lif !B$, then $\Gamma \Proves[\Log{LK}]
 \AxiomC{}
 \RightLabel{$\Pi_0$}
 \Deduce$ \Gamma_1 \fCenter !A \lif !B$
-\doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, \Gamma_2 \fCenter !A \lif !B$
 \AxiomC{}
 \RightLabel{$\Pi_1$}
 \Deduce$\Gamma_0 \fCenter !A $
 \AxiomC{$!B \fCenter !B$}
-\doubleLine
-\UnaryInf$ \Gamma_0, !B \fCenter !B$
 \RightLabel{\LeftR{\lif}}
 \BinaryInf$\Gamma_0, !A \lif !B \fCenter !B$
 \RightLabel{cut}
@@ -286,7 +286,7 @@ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \Axiom$!A \fCenter !A$
 \RightLabel{\RightR{\lnot}}
 \UnaryInf$\lnot !A, !A \fCenter$
-\doubleLine
+\RightLabel{\RightR{\Weakening}}
 \UnaryInf$!A, \lnot !A \fCenter !B$
 \RightLabel{\RightR{\lif}}
 \UnaryInf$\lnot !A \fCenter !A \lif !B$
@@ -303,7 +303,7 @@ $\Gamma_0 \Sequent !B$. The following !!{derivation} shows that $\Gamma
 \RightLabel{$\Pi_0$}
 \Deduce$\Gamma_0 \fCenter !B$
 \Axiom$!B \fCenter !B$
-\doubleLine
+\RightLabel{\LeftR{\Weakening}}
 \UnaryInf$!A, !B \fCenter !B$
 \RightLabel{\RightR{\lif}}
 \UnaryInf$!B \fCenter !A \lif !B$
@@ -324,8 +324,8 @@ in $\Gamma$ or $!A(x)$ and $\Gamma \Proves[\Log{LK}] !A(c)$, then $\Gamma
 
 \begin{proof}
 Let $\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A(c)$
-for some finite $\Gamma_0 \subseteq \Gamma$.  By adding a $\lforall$
-right inference, we obtain a proof of $\Gamma \Sequent
+for some finite $\Gamma_0 \subseteq \Gamma$.  By adding a
+$\RightR{\lforall}$ inference, we obtain a proof of $\Gamma \Sequent
 \lforall[x][!A(x)]$, since $c$ does not occur in $\Gamma$ or $!A(x)$
 and thus the eigenvariable condition is satisfied.
 \end{proof}
@@ -348,7 +348,7 @@ and thus the eigenvariable condition is satisfied.
   \Sequent !A(t)$. Add an \RightR{\lexists} inference to get
   !!a{derivation} of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
 
-\tagitem{prvAll}{Suppose $\Gamma \Proves[\Log{LK}] \lnot !A(t)$. Then there is a
+\tagitem{prvAll}{Suppose $\Gamma \Proves[\Log{LK}] \lforall[x][!A(x)]$. Then there is a
   finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation}
   $\Pi$ of $\Gamma_0 \Sequent \lforall[x][!A(x)]$.  Then
 % for some reason, prooftree env sometimes doesn't work here
@@ -365,7 +365,7 @@ and thus the eigenvariable condition is satisfied.
 %\end{prooftree}
 \DisplayProof
 \]
-shows that $\Gamma_0 \Proves[\Log{LK}] !A(t)$.}{}
+shows that $\Gamma \Proves[\Log{LK}] !A(t)$.}{}
 \end{tagenumerate}
 \end{proof}
 \end{document}
