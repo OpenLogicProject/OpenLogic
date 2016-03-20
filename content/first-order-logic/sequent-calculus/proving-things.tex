@@ -23,8 +23,8 @@ sequent of this form. This could be a structural rule, but it is a
 good idea to start by looking for a logical rule. The only logical
 connective occurring in a !!{formula} in the lower sequent is $\land$,
 so we're looking for an $\land$ rule, and since the $\land$ symbol
-occurs in the antecedent !!{formula}s, we're looking at the $\land$
-left rule.
+occurs in the antecedent !!{formula}s, we're looking at the \LeftR{\land}
+rule.
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{\LeftR{\land}} \UnaryInf$!A\land !B \fCenter !A$
@@ -58,8 +58,8 @@ they are !!{main operator}s of !!{sentence}s in the end-sequent,
 while $\lnot$ is inside the scope of another connective, so we will
 take care of it later. Our options for logical rules for the final
 inference are therefore the \LeftR{\lor} rule and the \RightR{\lif}
-rule. We could pick either rule, really, but let's pick the $\lif$
-right rule (if for no reason other than it allows us to put off
+rule. We could pick either rule, really, but let's pick the \RightR{\lif}
+rule (if for no reason other than it allows us to put off
 splitting into two branches). According to the form of \RightR{\lif}
 inferences which can yield the lower sequent, this must look like:
 \begin{prooftree}
@@ -142,8 +142,8 @@ branches for a moment:
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 Now we have a choice of whether to look at the \LeftR{\land} or the
-\LeftR{\lor} rule. Let's see what happens when we apply the $\land$
-left rule: we have a choice to start with either the sequent $!A,
+\LeftR{\lor} rule. Let's see what happens when we apply the \LeftR{\land}
+rule: we have a choice to start with either the sequent $!A,
 \lnot !A \lor !B \Sequent \hspace{1em}$ or the sequent $!B, \lnot !A
 \lor !B \Sequent \hspace{1em}$. Since the proof is symmetric with
 regards to $!A$ and $!B$, let's go with the former:
@@ -239,14 +239,13 @@ later, so we'll do that one first.
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
-Applying the \LeftR{\lnot} and right rules to eliminate the $\lnot$ signs, we get
+Applying the \LeftR{\lnot} and \RightR{\lnot} rules and then eliminating
+the double $\lnot$ signs on both sides---the reader may do this as an 
+exercise---we get
 \begin{prooftree}
 \AxiomC{}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\RightLabel{\RightR{\lnot}}
-\UnaryInf$ \fCenter \lnot \lforall[x][!A(x)], !A(a)$
-\RightLabel{\LeftR{\lnot}}
-\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
+\Deduce$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
 \end{prooftree}
@@ -259,10 +258,7 @@ as our argument for $!A$ when we apply the rule.
 \Axiom$!A(a) \fCenter !A(a)$
 \RightLabel{\LeftR{\lforall}}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\RightLabel{\RightR{\lnot}}
-\UnaryInf$ \fCenter \lnot \lforall[x][!A(x)], !A(a)$
-\RightLabel{\LeftR{\lnot}}
-\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\Deduce$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
