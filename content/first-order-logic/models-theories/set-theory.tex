@@ -130,12 +130,12 @@ where $\mathrm{maps}(f, x, y)$ abbreviates $\lexists[v][(v \in f \land
 
 It is now also not hard to express that $f\colon X \to Y$ is
 !!{injective}, for instance:
-\begin{align*}
-& f \colon X \to Y \land {}\\
-& \lforall[x][\lforall[x'][((x \in X \land x' \in
-    X \land \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
-        x', y))]) \lif x = x')]]
-\end{align*}
+\begin{multline*}
+ f \colon X \to Y \land \lforall[x][\lforall[x'][((x \in X \land x' \in
+     X \land {}]] \\
+ \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
+        x', y))]) \lif x = x')
+\end{multline*}
 A function~$f\colon X \to Y$ is !!{injective} iff, whenever $f$ maps $x, x'
 \in X$ to a single~$y$, $x = x'$.  If we abbreviate this formula as
 $\mathrm{inj}(f, X, Y)$, we're already in a position to state in the

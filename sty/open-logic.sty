@@ -210,14 +210,14 @@
 
 \newcommand*{\olphoto}[2]{%
   \iftag{olphotos}{%
-    \IfFileExists{\olpath/assets/photos/#1.png}{%
+    \IfFileExists{\olpath/assets/photos/#1/#1-large.png}{%
       \begin{wrapfigure}{R}{\olphotowidth}
         \hfil
         \iftag{olphotos-lowres}{%
-          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1-lowres}}{
-          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1}}
+          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1/#1-small}}{
+          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1/#1-large}}
         \caption{#2}
-      \IfFileExists{\olpath/assets/photos/#1-credit.tex}{%
-        \CatchFileDef{\photocredit}{\olpath/assets/photos/#1-credit.tex}{}%
+      \IfFileExists{\olpath/assets/photos/#1/#1-credit.tex}{%
+        \CatchFileDef{\photocredit}{\olpath/assets/photos/#1/#1-credit.tex}{}%
         \addtocontents{pcr}{#2, p.~\thepage: \photocredit\par}}{}
 \end{wrapfigure}}}{}}

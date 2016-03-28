@@ -102,20 +102,20 @@ after $m$ steps.''
 \begin{enumerate}
 \item \ollabel{rep-right} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMright}$, the !!{sentence}:
-\[
+\begin{multline*}
 \lforall[x][\lforall[y][(
-   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
    (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
-!A(x, y)))]]
-\]
+!A(x, y)))
+\end{multline*}
 \item \ollabel{rep-left} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMleft}$, the !!{sentence}:
-\[
+\begin{multline*}
 \lforall[x][\lforall[y][
-    ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif
+    ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\
    (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
-!A(x, y)))]]
-\]
+!A(x, y)))
+\end{multline*}
 Take a moment to think about how this works: now we don't start with
 ``if scanning square~$x$ \dots'' but: ``if scanning square $x+1$
 \dots'' A move to the left means that in the next step the machine is
@@ -124,12 +124,12 @@ do it this way since we don't have subtraction or a predecessor
 function.
 \item \ollabel{rep-stay} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMstay}$, the !!{sentence}:
-\[
+\begin{multline*}
 \lforall[x][\lforall[y][(
-   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
    (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
-!A(x, y)))]]
-\]
+!A(x, y)))
+\end{multline*}
 \end{enumerate}
 \end{enumerate}
 Let $!T(M, w)$ be the conjunction of all the above !!{sentence}s for Turing
