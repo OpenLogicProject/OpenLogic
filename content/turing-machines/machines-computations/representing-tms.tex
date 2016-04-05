@@ -56,7 +56,7 @@ The state diagram corresponds to the following transition function:
 \begin{align*}
 \delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
 \delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
-\delta(q_0, \TMblank)  & = \tuple{q_0, \TMblank, \TMright}
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}
 \end{align*}
 \end{ex}
 
@@ -227,7 +227,7 @@ a block of~$2n$ strokes.
 
   \path (1) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (2)
     (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
-      edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (3)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
     (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (3)
         edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (4)
     (4) edge [loop below] node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (4)
