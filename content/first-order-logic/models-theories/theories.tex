@@ -77,7 +77,7 @@ pure sets:
 & \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff (u =
           x \lor u = y))]]]]\\
 & \lforall[x][\lexists[y][\lforall[z][(z \in y \liff \lexists[u][(z \in
-        u \lor u \in x)])]]]\\
+        u \land u \in x)])]]]\\
 \intertext{plus all sentences of the form} &
 \lexists[x][\lforall[y][(y \in x \liff !A(y))]]
 \end{align*}
@@ -124,10 +124,10 @@ neither reflexive nor transitive.
       \lif x = y)]], \\
 & \lforall[x][\lforall[y][\lforall[z][((\Part{x}{y} \land
         \Part{y}{z}) \lif \Part{x}{z})]]],\\
-\intertext{Moreover, any two objects have a fusion (an object that has
-  only these two objects and all their parts as parts).}  &
-\lforall[x][\lforall[y][\lexists[z][\lforall[u][(\Part{u}{z} \liff
-        (\Part{u}{x} \land \Part{u}{y}))]]]]
+\intertext{Moreover, any two objects have a mereological sum (an object that has
+  these two objects as parts, and is minimal in this respect).}  &
+\lforall[x][\lforall[y][\lexists[z][\lforall[u][(\Part{z}{u} \liff
+        (\Part{x}{u} \land \Part{y}{u}))]]]]
 \end{align*}
 These are only some of the basic principles of parthood considered by
 metaphysicians.  Further principles, however, quickly become hard to

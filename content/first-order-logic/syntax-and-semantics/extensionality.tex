@@ -56,19 +56,21 @@ By induction on~$t$.
   $\Value{x}{M}[s'] = \Value{t'}{M}[s]$ by definition of~$s'$.
 
 \item If $t \ident \Atom{f}{t_1,\dots,t_n}$ then we have:
-\begin{align*}
-\Value{\Subst{t}{t'}{x}}{M}[s] & =
-\Value{\Atom{f}{\Subst{t_1}{t'}{x}, \dots, \Subst{t_n}{t'}{x}}}{M}[s]
-    \text{ by definition of $\Subst{t}{t'}{x}$}\\
+\begin{multline*}
+  \Value{\Subst{t}{t'}{x}}{M}[s]  = \\
+  \begin{aligned}
+& = \Value{\Atom{f}{\Subst{t_1}{t'}{x}, \dots, \Subst{t_n}{t'}{x}}}{M}[s]\\
+& \qquad    \text{ by definition of $\Subst{t}{t'}{x}$}\\
 & = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots,
-   \Value{\Subst{t_n}{t'}{x}}{M}[s])
-    \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s]$}\\
+    \Value{\Subst{t_n}{t'}{x}}{M}[s])\\
+    & \qquad  \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s]$}\\
 & = \Assign{f}{M}(\Value{t_1}{M}[s'], \dots,
-   \Value{t_n}{M}[s'])
-    \text{ by induction hypothesis}\\
+   \Value{t_n}{M}[s'])\\
+& \qquad    \text{ by induction hypothesis}\\
 & = \Value{t}{M}[s']
     \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s']$}
-\end{align*}
+  \end{aligned}
+\end{multline*}
 \end{enumerate}
 \end{proof}
 
