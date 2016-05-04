@@ -10,9 +10,9 @@
 \olsection{Proof-Theoretic Notions}
 
 \begin{editorial}
-  This section collects the properties of the provability relation
-  required for the completeness theorem.  If you find the location
-  unmotivated, include it instead in the chapter on completeness.
+This section collects the properties of the provability relation
+required for the completeness theorem.  If you find the location
+unmotivated, include it instead in the chapter on completeness.
 \end{editorial}
 
 \begin{explain}
@@ -29,14 +29,16 @@ That they do is the content of the \emph{completeness theorem}.
 A !!{formula} $!A$ is \emph{!!{derivable} from} a set of
 !!{formula}s~$\Gamma$, $\Gamma \Proves !A$, if there is a
 !!{derivation} with end-!!{formula}~$!A$ and in which every assumption
-is either discharged or is in~$\Gamma$. If $!A$ is not
+is either !!{discharged} or is in~$\Gamma$. If $!A$ is not
 !!{derivable} from $\Gamma$ we write $\Gamma \Proves/ !A$.
 \end{defn}
 
 \begin{defn}[Theorems]
 A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation} of
-$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a theorem
-and $\Proves/ !A$ if it is not.
+$!A$ from the empty set, i.e., a !!{derivation} with
+end-!!{formula}~$!A$ in which all assumptions are !!{discharged}.  We
+write $\Proves !A$ if $!A$ is a theorem and $\Proves/ !A$ if it is
+not.
 \end{defn}
 
 \begin{defn}[Consistency]
@@ -80,7 +82,7 @@ If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
 
 \begin{proof}
 Any derivation of $!A$ from $\Gamma$ can only contain finitely many
-undischarged assumtions.  If all these undischarged assumptions are
+!!{undischarged} assumtions.  If all these !!{undischarged} assumptions are
 in~$\Gamma$, then the set of them is a finite subset of~$\Gamma$.  The
 other direction is trivial, since a derivation from a subset of
 $\Gamma$ is also a derivation from~$\Gamma$.

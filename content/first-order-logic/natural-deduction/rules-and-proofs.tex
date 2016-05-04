@@ -44,8 +44,8 @@ the \emph{upper !!{formula}s} or \emph{premises} and $!C$ the
 The rules for natural deduction are divided into two main types:
 \emph{propositional} rules (quantifier-free) and \emph{quantifier}
 rules.  The rules come in pairs, an introduction and an elimination
-rule for each !!{operator}. They introduced an !!{operator} in the
-conclusion or remove and !!{operator} from a premise of the rule.
+rule for each !!{operator}. They introduced !!a{operator} in the
+conclusion or remove !!a{operator} from a premise of the rule.
 Some of the rules allow an assumption of a certain type to be
 \emph{!!{discharged}}. To indicate which assumption is !!{discharged}
 by which inference, we also assign labels to both the assumption and
@@ -170,7 +170,7 @@ in $!A$, or in any assumption which is !!{undischarged} in the
 \paragraph{Rules for $\lexists$}
 
 \[
-\AxiomC{$\Atom{!A}{a}$}
+\AxiomC{$\Atom{!A}{t}$}
 \RightLabel{\Intro{\lexists}}
 \UnaryInfC{$\lexists[x][\Atom{!A}{x}]$}
 \DisplayProof
@@ -178,7 +178,7 @@ in $!A$, or in any assumption which is !!{undischarged} in the
 \AxiomC{$\lexists[x][\Atom{!A}{x}]$}
 \AxiomC{[$\Atom{!A}{a}$]$^n$}
 \DeduceC{$!C$}
-\RightLabel{$\lexists$Elim$_n$}
+\DischargeRule{\Elim{\lexists}}{n}
 \BinaryInfC{$!C$}
 \DisplayProof
 \]
@@ -234,11 +234,6 @@ is a tree of !!{formula}s satisfying the following conditions:
 \end{enumerate}
 We then say that $!A$ is the \emph{end-!!{formula}} of the
 !!{derivation} and that $!A$ is \emph{!!{derivable}} from~$\Gamma$.
-\end{defn}
-
-\begin{defn}[Theorem]
-!!^a{sentence} $!A$ is a \emph{theorem} if it is !!{derivable}
-from the empty set.
 \end{defn}
 
 \end{document}

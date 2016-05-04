@@ -48,7 +48,7 @@ or for a given !!{formula} $!A$,
 \]
 More generally, we might want to allow inferences of the form
 \[
-\Subst{!A}{\lambd[\vec x][!B(\vec x)]}{R}
+\Subst{!A}{\lambd[\vec x][!B(\vec x)]}{R} \Proves
 \lexists[R][!A]
 \]
 where $\Subst{!A}{\lambd[\vec x][!B(\vec x)]}{R}$ denotes the result
@@ -140,9 +140,9 @@ behavior:
 \begin{enumerate}
 \item $\lforall[x][\lnot x' = \Obj 0]$
 \item $\lforall[x][\lforall[y][(s(x) = s(y) \lif x = y)]]$
-\item $\lforall[x][(x + 0) = x]$
+\item $\lforall[x][(x + \Obj 0) = x]$
 \item $\lforall[x][\lforall[y][(x + y') = (x + y)']]$
-\item $\lforall[x][(x \times 0) = 0]$
+\item $\lforall[x][(x \times \Obj 0) = \Obj 0]$
 \item $\lforall[x][\lforall[y][(x \times y') = ((x \times y) + x)]]$
 \item $\lforall[x][\lforall[y][(x < y \liff \lexists[z][y = (x + z')])]]$
 \end{enumerate}
@@ -193,7 +193,7 @@ saying that there is no nontrivial separation of the vertices into
 disconnected parts:
 \[
 \lnot \lexists[A][(\lexists[x][A(x)] \land \lexists[y][\lnot A(y)]
-  \land \forall[w][\lforall[z][((\Atom{A}{w} \land \lnot \Atom{A}{z})
+  \land \lforall[w][\lforall[z][((\Atom{A}{w} \land \lnot \Atom{A}{z})
       \lif \lnot \Atom{R}{w,z})]])].
 \]
 For yet another example, you might try as an exercise to define the
