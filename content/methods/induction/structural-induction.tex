@@ -1,0 +1,70 @@
+% Part: methods
+% Chapter: induction
+% Section: structural-induction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{ind}{sti}
+
+\olsection{Structural Induction}
+
+So far we have used induction to establish results about all natural
+numbers. But a corresponding principle can be used directly to prove
+results about all !!{element}s of an inductively defined set.  This
+often called \emph{structural} induction, because it depends on the
+structure of the inductively defined objects.
+
+Generally, an inductive definition is given by (a) a list of
+``initial'' !!{element}s of the set and (b) a list of operations which
+produce new !!{element}s of the set from old ones. In the case of
+parexpressions, for instance, the initial object is~$\emptyseq$ and
+the operations are
+\begin{align*}
+  o_1(p) = & (p) \\
+  o_2(q, q') = & qq'
+\end{align*}
+You can even think of the natural numbers~$\Nat$ themselves as being
+given be an inductive definition: the initial object is~$0$, and the
+operation is the successor function~$x + 1$.
+
+In order to prove something about all elements of an inductively
+defined set, i.e., that every !!{element} of the set has a
+property~$P$, we must:
+\begin{enumerate}
+\item Prove that the initial objects have~$P$
+\item Prove that for each operation~$o$, if the arguments have~$P$,
+  so does the result.
+\end{enumerate}
+For instance, in order to prove something about all parexpressions, we
+would prove that it is true about $\emptyseq$, that it is true of
+$(p)$ provided it is true of $p$, and that it is true about $qq'$
+provided it is true of $q$ and $q'$ individually.
+
+\begin{prop}
+  The number of $($ equals the number of $)$ in any parexpression $p$.
+\end{prop}
+
+\begin{proof}
+We use structural induction.  Parexpressions are inductively defined,
+with initial object $\emptyseq$ and the operations $o_1$ and $o_2$.
+\begin{enumerate}
+\item The claim is true for $\emptyset$, since the number of $($ in
+  $\emptyseq = 0$ and the number of $)$ in $\emptyseq$ also $= 0$.
+\item Suppose the number of $($ in $p$ equals the number of $)$ in
+  $p$. We have to show that this is also true for $(p)$, i.e.,
+  $o_1(p)$.  But the number of $($ in $(p)$ is $1 + {}$ the number of
+  $($ in $p$.  And the number of $)$ in $(p)$ is $1 + {}$ the number
+  of $)$ in $p$, so the claim also holds for $(p)$.
+\item Suppose the number of $($ in $q$ equals the number of $)$, and
+  the same is true for $q'$. The number of $($ in $o_2(p, p')$, i.e.,
+  in $pp'$, is the sum of the number $($ in $p$ and $p'$. The number
+  of $)$ in $o_2(p, p')$, i.e., in $pp'$, is the sum of the number of
+  $)$ in $p$ and $p'$. The number of $($ in $o_2(p, p')$ equals the
+  number of $)$ in $o_2(p,p')$.
+\end{enumerate}
+The result follows by structural induction.
+\end{proof}
+
+\end{document}
