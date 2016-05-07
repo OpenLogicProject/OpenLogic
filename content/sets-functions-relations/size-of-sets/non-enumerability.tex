@@ -15,11 +15,28 @@ far we've seen examples of infinite sets which were all
 !!{enumerable}. However, there are also infinite sets which do not
 have this property. Such sets are called \emph{!!{nonenumerable}}.
 
-Cantor's method of diagonalization shows a set to be !!{nonenumerable}
-via a reductio proof. We start with the assumption that the set is
-!!{enumerable}, and show that a contradiction results from this
-assumption. Our first example is the set~$\Bin^\omega$ of all
-infinite, non-gappy sequences of $0$'s and $1$'s.
+First of all, it is perhaps already surprising that there are
+!!{nonenumerable} sets.  For any !!{enumerable} set~$X$ there is
+!!a{surjective} function $f \colon \Nat \to X$.  If a set is
+!!{nonenumerable} there is no such function.  That is, no function
+mapping the infinitely many !!{element}s of~$\Nat$ to~$X$ can exhaust
+all of~$X$.  So there are ``more'' !!{element}s of~$X$ than the
+infinitely many natural numbers.
+
+How would one prove that a set is !!{nonenumerable}? You have to show
+that no such surjective function can exist. Equivalently, you have to
+show that the elements of~$X$ cannot be enumerated in a one way
+infinite list.  The only way to do this is \emph{indirectly,} by
+supposing hypothetically that such an enumeration exists and then
+showing that a contradiction follows from this assumption.  The best
+way of doing this is Cantor's \emph{diagonal method}.  From the
+assumption that the elements of $X$ can be enumerated as, say, $x_1$,
+$x_2$, \dots, we construct another element of~$X$ which, by its
+construction, cannot possibly be on that list---which was, by
+assumption, an exhaustive list of all of~$X$, hence the contradiction.
+
+Our first example is the set~$\Bin^\omega$ of all infinite, non-gappy
+sequences of $0$'s and $1$'s.
 
 \begin{thm}
 \ollabel{thm-nonenum-bin-omega}
@@ -27,11 +44,14 @@ $\Bin^\omega$~is !!{nonenumerable}.
 \end{thm}
 
 \begin{proof}
-Suppose, for reductio, that $\Bin^\omega$ is !!{enumerable}, so that
-there is a list $s_{1}$, $s_{2}$, $s_{3}$, $s_{4}$, \dots{} of all the
-!!{element}s of~$\Bin^\omega$. We may arrange this list, and the
-elements of each sequence $s_i$ in it, in an array with the
-positive integers on the horizontal axis, as so:
+Suppose that $\Bin^\omega$ is !!{enumerable}, so that there is a list
+$s_{1}$, $s_{2}$, $s_{3}$, $s_{4}$, \dots{} of all the !!{element}s
+of~$\Bin^\omega$.  Each of these $s_i$ is itself an infinite sequence
+of $0$'s and $1$'s.  Let's call the $j$-th element of the $i$-th
+sequence in this list $s_i(j)$.
+
+We may arrange this list, and the elements of each sequence $s_i$ in
+it, in an array:
 \[
 \begin{array}{c|c|c|c|c|c}
 & 1 & 2 & 3 & 4 & \dots \\\hline
@@ -42,12 +62,26 @@ positive integers on the horizontal axis, as so:
 \vdots & \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
 \end{array}
 \]
-Here $s_{1}(1)$ is a name for whatever number, a $0$ or a~$1$, is the
-first member in the sequence $s_{1}$, and so on.
+The labels down the side give the number of the sequence in the list
+$s_1$, $s_2$, \dots; the numbers across the top label the !!{element}s
+of the individual sequences. For instance, $s_{1}(1)$ is a name for
+whatever number, a $0$ or a~$1$, is the first !!{element} in the
+sequence $s_{1}$, and so on.
 
-Now define $\overline{s}$ as follows: The $n$th member
-$\overline{s}(n)$ of the sequence
-$\overline{s}$ is set to
+Now we construct an infinite sequence, $\overline{s}$, of $0$'s and
+$1$'s which cannot possibly be on this list.  The definition of
+$\overline{s}$ will depend on the list $s_1$, $s_2$, \dots.  Any
+infinite list of infinite sequences of $0$'s and $1$'s, hypothetical
+or otherwise, gives rise to an infinite sequence~$\overline{s}$ which
+is guaranteed to not appear on the list.
+
+To define $\overline{s}$, we specify what all its !!{element}s are,
+i.e., we specify $\overline{s}(n)$ for all $n \in \Int^+$.  We do this
+by reading down the diagonal of the array above (hence the name
+``diagonal method'') and then changing every $1$ to a $0$ and every
+$1$ to a~$0$. More abstractly, we define $\overline{s}(n)$ to be $0$
+or $1$ according to whether the $n$-th !!{element} of the diagonal,
+$s_n(n)$, is $1$ or $0$.
 \[
 \overline{s}(n) =
 \begin{cases}
@@ -55,27 +89,39 @@ $\overline{s}$ is set to
 0 & \text{if $s_{n}(n) = 1$}.
 \end{cases}
 \]
-In other words, $\overline{s}(n)$ has the opposite value
-to~$s_{n}(n)$. To get $\overline{s}(n)$, take the $0$'s and $1$'s in
-the diagonal of the array, and switch every~$0$ to a~$1$ and every~$1$
-to a~$0$.
+If you like formulas better than definitions by cases, you could also
+define $\overline{s}(n) = 1 - s_n(n)$.
 
-Clearly $\overline{s}$ is a non-gappy infinite sequence of $0$s and
-$1$s, since it is just the mirror sequence to the sequence of $0$s and
-$1$s that appear on the diagonal of our array. So $\overline{s}$ is
-!!a{element} of~$\Bin^\omega$. Since it is !!a{element}
-of~$\Bin^\omega$, it must appear somewhere in the enumeration
-of~$\Bin^\omega$, that is, $\overline{s} = s_{k}$ for some~$k$.
+Clearly $\overline{s}$ is a non-gappy infinite sequence of $0$'s and
+$1$'s, since it is just the mirror sequence to the sequence of $0$'s
+and $1$'s that appear on the diagonal of our array.  So $\overline{s}$
+is !!a{element} of~$\Bin^\omega$.  But it cannot be on the list $s_1$,
+$s_2$, \dots{} Why not?
 
-If $\overline{s} = s_{k}$, then for any~$m$, $\overline{s}(m) =
-s_{k}(m)$. (This is just the criterion of identity for
-sequences---sequences are identical when they agree at every place.)
+It can't be the first sequence in the list, $s_1$, because it differs from
+$s_1$ in the first !!{element}.  Whatever $s_1(1)$ is, we defined
+$\overline{s}(1)$ to be the opposite.  It can't be the second
+sequence in the list, because $\overline{s}$ differs from $s_2$ in the second
+element: if $s_2(2)$ is $0$, $\overline{s}(2)$ is $1$, and vice
+versa. And so on.
 
-So in particular, $\overline{s}(k) = s_{k}(k)$. $\overline{s}(k)$ must
-be either an 0 or a~1. If it is a 0 then (given the definition of
-$\overline{s}$) $s_{k}(k)$ must be a~$1$. But if it is a~1 then
-$s_{k}(k)$ must be a~0. In either case $\overline{s}(k) \neq
-s_{k}(k)$.
+More precisely: if $\overline{s}$ were on the list, there would be
+some $k$ so that $\overline{s} = s_{k}$.  Two sequences are identical
+iff they agree at every place, i.e., for any~$n$, $\overline{s}(n) =
+s_{k}(n)$.  So in particular, taking $n = k$ as a special case,
+$\overline{s}(k) = s_{k}(k)$ would have to hold. $s_k(k)$ is either
+$0$ or~$1$. If it is $0$ then $\overline{s}(k)$ must be~$1$---that's
+how we defined $\overline{s}$. But if $s_k(k) = 1$ then, again because
+of the way we defined $\overline{s}$, $\overline{s}(k) = 0$. In either
+case $\overline{s}(k) \neq s_{k}(k)$.
+
+We now have our contradiction: we started by assuming that there is a
+way to list all of $\Bin^\omega$ in a single list $s_1$, $s_2$,
+\dots{} From this list we constructed a sequence~$\overline{s}$ which
+we proved cannot be on the list.  But it definitely is a sequence of
+$0$'s and $1$'s if all the $s_i$ are sequences of $0$'s and $1$'s,
+i.e., $\overline{s} \in \Bin^\omega$. This contradicts the assumption
+that every list in~$\Bin^\omega$ appears on the list.
 \end{proof}
 
 \begin{explain}
@@ -92,22 +138,25 @@ $\Pow{\Int^+}$ is not enumerable.
 \end{thm}
 
 \begin{proof}
-Suppose, for reductio, that $\Pow{\Int^+}$ is !!{enumerable}, and so
-it has an enumeration, i.e., a list of all subsets of~$\Int^+$:
+
+We proceed indirectly again: Suppose that $\Pow{\Int^+}$ is
+!!{enumerable}, and so it has an enumeration, i.e., a list of all
+subsets of~$\Int^+$:
 \[
 Z_{1}, Z_{2}, Z_{3}, \dots
 \]
-We now define a set $\overline{Z}$ such that for any positive
-integer~$i$, $i \in \overline{Z}$ iff $i \notin Z_{i}$:
+We now define a set $\overline{Z}$ such that for any $n \in \Int^+$,
+$n \in \overline{Z}$ iff $n \notin Z_{n}$:
 \[
-\overline{Z} = \Setabs{i \in \Int^+}{i \notin Z_i}
+\overline{Z} = \Setabs{n \in \Int^+}{n \notin Z_n}
 \]
-$\overline{Z}$ is clearly a set of positive integers, and thus $\overline{Z}
-\in \Pow{\Int^+}$. So $\overline{Z}$ must be $= Z_k$ for some~$k \in
-\Int^+$. And if that is the case, i.e., $\overline{Z} = Z_k$, then $i
-\in \overline{Z}$ iff $i \in Z_k$ for all~$i \in \Int^+$.
+$\overline{Z}$ is clearly a set of positive integers, since by
+assumption each~$Z_n$ is, and thus $\overline{Z} \in \Pow{\Int^+}$. So
+$\overline{Z}$ must be $Z_k$ for some~$k \in \Int^+$. And if that is
+the case, i.e., $\overline{Z} = Z_k$, then, for each~$n \in \Int^+$,
+$n \in \overline{Z}$ iff $n \in Z_k$.
 
-In particular, $k \in \overline{Z}$ iff $k \in Z_k$.
+In particular, taking $n=k$, $k \in \overline{Z}$ iff $k \in Z_k$.
 
 Now either $k \in Z_{k}$ or $k \notin Z_{k}$. In the first case, by
 the previous line, $k \in \overline{Z}$. But we've defined
@@ -126,7 +175,7 @@ Show that $\Pow{\Nat}$ is !!{nonenumerable}.
 
 \begin{prob}
 Show that the set of functions $f \colon \Int^+ \to \Int^+$ is
-!!{nonenumerable} by a direct diagonal argument.
+!!{nonenumerable} by an explicit diagonal argument.
 \end{prob}
 
 \end{document}
