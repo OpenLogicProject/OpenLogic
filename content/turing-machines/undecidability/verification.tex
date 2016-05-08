@@ -67,24 +67,23 @@ For each $n$, $!T(M, w) \Entails !C(M, w, n)$.
 \end{lem}
 
 \begin{proof}
-If $n = 0$, then the conjuncts of $!C(M, w, 0)$ are also conjuncts of
-$!T(M, w)$, so entailed by it.
+Inductive basis: If $n = 0$, then the conjuncts of $!C(M, w, 0)$ are
+also conjuncts of $!T(M, w)$, so entailed by it.
 
-Inductive hypothesis: If $M$ has not halted before time $n$, then
-$!T(M,w) \Entails !C(M, w, n)$.
+Inductive hypothesis: If $M$ has not halted before the $n$th step,
+then $!T(M,w) \Entails !C(M, w, n)$.
 
-Suppose $n > 0$ and at time~$n$, $M$ started on $w$ is in state~$q$
-scanning square~$m$, and the content of the tape is $\sigma_0$, \dots,
-$\sigma_k$.
+Suppose $n > 0$ and after $n$ steps, $M$ started on $w$ is in state~$q$
+scanning square~$m$.
 
-Suppose that $M$ has not halted before time $n+1$. If $!T(M,n)$ is
-true in !!a{structure}~$\Struct M$, the inductive hypothesis tells us
-that $!C(M, w, n)$ is true in $\Struct M$ also. In particular, $\Obj
-Q_q(\num{m}, \num{n})$ and $\Obj S_\sigma(\num{m}, \num{n})$ are true
-in $\Struct M$.
+Suppose that $M$ has not just halted, i.e., it has not halted before
+the $(n+1)$st step. If $!T(M,n)$ is true in !!a{structure}~$\Struct
+M$, the inductive hypothesis tells us that $!C(M, w, n)$ is true in
+$\Struct M$ also. In particular, $\Obj Q_q(\num{m}, \num{n})$ and
+$\Obj S_\sigma(\num{m}, \num{n})$ are true in $\Struct M$.
 
-Since $M$ does not halt at~$n$, there must be an instruction of one of the
-following three forms in the program of~$M$: 
+Since $M$ does not halt after~$n$ steps, there must be an instruction
+of one of the following three forms in the program of~$M$:
 
 \begin{enumerate} 
 \item \ollabel{right} $\delta(q, \sigma) = \tuple{q', \sigma', \TMright}$
@@ -111,7 +110,7 @@ is a conjunct of $!T(M,w)$. This entails the following
 \[ 
 (\Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m}, \num{n}))
 \lif (\Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
-\num{n}') \land !A(m, n)).
+\num{n}') \land !A(\num{m}, \num{n})).
 \]
 This in turn entails,
 \begin{multline*}
@@ -123,11 +122,12 @@ This in turn entails,
   \lif \Obj S_\TMblank(x, \num{n}'))]
 \end{multline*}
 The first line comes directly from the consequent of the preceding
-conditional. The each conjunct in the middle line---which excludes
-$S_{\sigma_m}(\num{m},\num{n'})$---follows from the corresponding
-conjunct in~$!C(M, w, n)$ together with $!A(m, n)$. The last line
-follows from the corresponding conjunct in $C!(M, w, n)$, $\num{m} < x
-\lif \num{k} < x$, and $!A(m, n)$.  Together, this just is $!C(M, w, n')$.
+conditional. Each conjunct in the middle line---which excludes
+$S_{\sigma_m}(\num{m},\num{n}')$---follows from the corresponding
+conjunct in~$!C(M, w, n)$ together with $!A(\num{m}, \num{n})$. The
+last line follows from the corresponding conjunct in $C!(M, w, n)$,
+$\num{m} < x \lif \num{k} < x$, and $!A(\num{m}, \num{n})$.  Together,
+this just is $!C(M, w, n+1)$.
 
 \item Suppose there is an instruction of the form~\olref{left}.
   Then, by \olref[rep]{defn:tm-descr}, \olref[rep]{rep-left},
@@ -139,9 +139,9 @@ S_{\sigma'}(x', y') \land !A(x, y)))
 \end{multline*} 
 is a conjunct of $!T(M,w)$, which entails the following !!{sentence}: 
 \[ 
-(\Obj Q_{q}(\num{m}', \num{n}) \land \Obj S_{\sigma}(\num{m}', \num{n})
+(\Obj Q_{q}(\num{m}', \num{n}) \land \Obj S_{\sigma}(\num{m}', \num{n}))
 \lif (\Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'}(\num{m}',
-\num{n}') \land !A(x, y)),
+\num{n}') \land !A(\num{m}, \num{n})),
 \]
 which in turn implies
 \begin{multline*}
@@ -152,13 +152,13 @@ which in turn implies
   \lforall[x][(\num{k} < x
   \lif \Obj S_\TMblank(x, \num{n}'))]
 \end{multline*}
-as before. But this just is $!C(M, w, n')$.
+as before. But this just is $!C(M, w, n+1)$.
 
 \item Case \olref{stay} is left as an exercise.
 \end{enumerate}
 If $m > k$ and $\sigma' \neq \TMblank$, the last instruction has
 written a non-blank symbol to the right of the right-most non-blank
-square~$k$ at time~$n$. In this case, $!C(M, w, n')$ has the form
+square~$k$ at time~$n$. In this case, $!C(M, w, n+1)$ has the form
 \begin{multline*}
 \Obj Q_{q'}(\num{m}', \num{n}') \land {}\\
 \Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land
@@ -177,9 +177,9 @@ the conjunct $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x,
 then follows from $A(m, n)$ and $\num{i} < \num{m}$.  From
 $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]$ we get
 $\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x, \num{n}))]$ since
-$\num{k}<\num{m}$ and $<$ is transitive.  From that plus $!A(m, n)$ we
-get $\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x, \num{n}'))].$
-Similarly for cases (2) and (3).
+$\num{k}<\num{m}$ and $<$ is transitive.  From that plus $!A(\num{m},
+\num{n})$ we get $\lforall[x][(\num{m} < x \lif \Obj S_\TMblank(x,
+  \num{n}'))].$ Similarly for cases (2) and (3).
 
 We have shown that for any~$n$, $!T(M, w) \Entails !C(M, w, n)$.
 \end{proof}

@@ -66,6 +66,10 @@ input $w = \sigma_{i_1}\dots\sigma_{i_n}$ are the following:
 \lforall[x][\lforall[y][\lforall[z][
       ((x < y \land y < z) \lif x < z)]]]
 \]
+\item A !!{sentence} that connects $<$ and~$=$:
+\[
+\lforall[x][\lforall[y][(x < y \lif \eq/[x][y])]]
+\]
 \end{enumerate}
 \item Axioms describing the input configuration:
 \begin{enumerate}
@@ -74,12 +78,12 @@ input $w = \sigma_{i_1}\dots\sigma_{i_n}$ are the following:
 \Obj Q_{q_0}(\num{1}, \num{0})
 \]
 \item The first $n+1$ squares contain the symbols $\TMendtape$,
-  $\sigma_{1}$, \dots, $\sigma_{n}$:
+  $\sigma_{i_1}$, \dots, $\sigma_{i_n}$:
 \[
 \Obj S_\TMendtape(\num{0}, \num{0}) \land
-\Obj S_{\sigma_1}(\num{1}, \num{0}) \land
+\Obj S_{\sigma_{i_1}}(\num{1}, \num{0}) \land
 \dots \land
-\Obj S_{\sigma_n}(\num{n}, \num{0})
+\Obj S_{\sigma_{i_n}}(\num{n}, \num{0})
 \]
 \item Otherwise, the tape is empty:
 \[
@@ -108,6 +112,12 @@ after $m$ steps.''
    (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
 !A(x, y)))
 \end{multline*}
+This says that if, after~$y$ steps, the machine is in state~$q_i$
+scanning square~$x$ which contains symbol~$\sigma$, then after $y+1$
+steps it is scanning square~$x+1$, is in state~$q_j$, square~$x$ now
+contains~$\sigma'$, and every square other than~$x$ contains the
+same symbol as it did after~$y$ steps.
+
 \item \ollabel{rep-left} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMleft}$, the !!{sentence}:
 \begin{multline*}
@@ -135,7 +145,7 @@ function.
 Let $!T(M, w)$ be the conjunction of all the above !!{sentence}s for Turing
 machine~$M$ and input~$w$
 
-In order to express that $M$ eventualy halts, we have to find a
+In order to express that $M$ eventually halts, we have to find a
 !!{sentence} that says ``after some number of steps, the transition
 function will be undefined.''  Let $X$ be the set of all pairs
 $\tuple{q, \sigma}$ such that $\delta(q, \sigma)$ is undefined.  Let
