@@ -288,105 +288,84 @@ important to keep track of our assumptions as well
 as the end goal.
 
 Let's see how we'd give a !!{derivation} of the !!{formula}
-$\lexists[x][R(x,b)]$ from the assumptions $\lexists[x][P(x) 
-\land Q(x)]$ and $\lforall[x][Q(x) \lif R(x,b)]$.
+$\lexists[x][!C(x,b)]$ from the assumptions $\lexists[x][(!A(x) 
+\land !B(x))]$ and $\lforall[x][(!B(x) \lif !C(x,b)]$.
 Starting as usual, we write the end-!!{formula} at the
 bottom.
 \[
 \AxiomC{}
-\UnaryInfC{$\lexists[x][R(x,b)]$}
+\UnaryInfC{$\lexists[x][!C(x,b)]$}
 \DisplayProof
 \]
 
-Since we have premises to work with, let's start with them. The 
-\Elim{\lexists} rule has an eigenvariable condition, so let's apply that
-rule first. We get the following:
+We have two premises to work with. To use the first, i.e., try to find
+a !!{derivation} of $\lexists[x][!C(x, b)]$ from $\lexists[x][(!A(x)
+  \land !B(x))]$ we would use the \Elim{\lexists} rule. Since it has
+an eigenvariable condition, we will apply that rule first. We get the
+following:
 \[
-\AxiomC{$\lexists[x][P(x) 
-\land Q(x)]$}
-\AxiomC{$\Discharge{P(a) 
-\land Q(a)}{1}$}
-\DeduceC{$\lexists[x][R(x,b)]$}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\Discharge{!A(a) \land !B(a)}{1}$}
+\DeduceC{$\lexists[x][!C(x,b)]$}
 \DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][R(x,b)]$}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
 \DisplayProof
 \]
-
-The two assumptions we are working with share the !!{predicate} $Q$.
-It may be useful at this point to apply \Elim{\land} to separate $Q(a)$.
-
+The two assumptions we are working with share~$!B$.  It may be useful
+at this point to apply \Elim{\land} to separate out~$!B(a)$.
 \[
-\AxiomC{$\lexists[x][P(x) 
-\land Q(x)]$}
-\AxiomC{$\Discharge{P(a) 
-\land Q(a)}{1}$}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x)])$}
+\AxiomC{$\Discharge{!A(a) 
+\land !B(a)}{1}$}
 \RightLabel{\Elim{\land}}
-\UnaryInfC{$Q(a)$}
-\DeduceC{$\lexists[x][R(x,b)]$}
+\UnaryInfC{$!B(a)$}
+\DeduceC{$\lexists[x][!C(x,b)]$}
 \DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][R(x,b)]$}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
 \DisplayProof
 \]
 
-Let us now apply \Elim{\lforall} to our second assumption. Since there
-is no eigenvariable condition we can instantiate $x$ with the !!{constant symbol}
-$a$.
+The second assumption we have to work with is~$\lforall[x][(!B(x) \lif
+  !C(x,b)]$. Since there is no eigenvariable condition we can
+instantiate $x$ with the !!{constant}~$a$ using \Elim{\lforall} to get
+$!B(a) \lif !C(a, b)$.  We now have $!B(a)$ and $!B(a) \lif !C(a,b)$. Our
+next move should be a straightforward application of the \Elim{\lif}
+rule.
 \[
-\AxiomC{$\lexists[x][P(x) 
-\land Q(x)]$}
-\AxiomC{$\Discharge{P(a) 
-\land Q(a)}{1}$}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\Discharge{!A(a) 
+\land !B(a)}{1}$}
 \RightLabel{\Elim{\land}}
-\UnaryInfC{$Q(a)$}
-\DeduceC{$\lexists[x][R(x,b)]$}
-\AxiomC{$\lforall[x][Q(x) \lif R(x,b)]$}
+\UnaryInfC{$!B(a)$}
+\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
 \RightLabel{\Elim{\lforall}}
-\UnaryInfC{$Q(a) \lif R(a,b)$}
-\DeduceC{}
-\DischargeRule{\Elim{\lexists}}{1}
-\TrinaryInfC{$\lexists[x][R(x,b)]$}
-\DisplayProof
-\]
-We now have $Q(a)$ and $Q(a) \lif R(a,b)$. Our next move should be
-a straightforward application of the \Elim{\lif} rule.
-\[
-\AxiomC{$\lexists[x][P(x) 
-\land Q(x)]$}
-\AxiomC{$\Discharge{P(a) 
-\land Q(a)}{1}$}
-\RightLabel{\Elim{\land}}
-\UnaryInfC{$Q(a)$}
-\AxiomC{$\lforall[x][Q(x) \lif R(x,b)]$}
-\RightLabel{\Elim{\lforall}}
-\UnaryInfC{$Q(a) \lif R(a,b)$}
+\UnaryInfC{$!B(a) \lif !C(a,b)$}
 \RightLabel{\Elim{\lif}}
-\BinaryInfC{$R(a,b)$}
-\DeduceC{$\lexists[x][R(x,b)]$}
+\BinaryInfC{$!C(a,b)$}
+\DeduceC{$\lexists[x][!C(x,b)]$}
 \DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][R(x,b)]$}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
 \DisplayProof
 \]
-We are so close!~One application of \Intro{\lexists} and we
+We are so close!{} One application of \Intro{\lexists} and we
 have reached our goal.
 \[
-\AxiomC{$\lexists[x][P(x) 
-\land Q(x)]$}
-\AxiomC{$\Discharge{P(a) 
-\land Q(a)}{1}$}
+\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\Discharge{!A(a) 
+\land !B(a)}{1}$}
 \RightLabel{\Elim{\land}}
-\UnaryInfC{$Q(a)$}
-\AxiomC{$\lforall[x][Q(x) \lif R(x,b)]$}
+\UnaryInfC{$!B(a)$}
+\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
 \RightLabel{\Elim{\lforall}}
-\UnaryInfC{$Q(a) \lif R(a,b)$}
+\UnaryInfC{$!B(a) \lif !C(a,b)$}
 \RightLabel{\Elim{\lif}}
-\BinaryInfC{$R(a,b)$}
+\BinaryInfC{$!C(a,b)$}
 \RightLabel{\Intro{\lexists}}
-\UnaryInfC{$\lexists[x][R(x,b)]$}
+\UnaryInfC{$\lexists[x][!C(x,b)]$}
 \DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][R(x,b)]$}
+\BinaryInfC{$\lexists[x][!C(x,b)]$}
 \DisplayProof
 \]
-
 Since we ensured at each step that the eigenvariable
 conditions were not violated, we can be confident that this
 is a correct derivation.
@@ -402,7 +381,6 @@ Starting as usual, we write the target !!{formula} at the bottom.
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
 \DisplayProof
 \]
-
 The last line of the !!{derivation} is a negation, so let's try using
 \Intro{\lnot}. This will require that we figure out how to !!{derive}
 a contradiction.
@@ -413,7 +391,6 @@ a contradiction.
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
 \DisplayProof
 \]
-
 So far so good. We can use \Elim{\lforall} but it's not obvious
 if that will help us get to our goal. Instead, let's use one of our 
 assumptions. $\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$ together
@@ -428,8 +405,6 @@ with $\lforall[x][!A(x)]$ will allow us to use the \Elim{\lif} rule.
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
 \DisplayProof
 \]
-
-
 We now have one final assumption to work with,
 and it looks like this will help us reach a contradiction
 by using \Intro{\lfalse}.
@@ -450,7 +425,6 @@ by using \Intro{\lfalse}.
 \begin{ex}
 Give a !!{derivation} of the !!{formula}
 $!A(x) \lor \lnot!A(x)$.
-
 \[
 \AxiomC{}
 \UnaryInfC{$!A(x) \lor \lnot!A(x)$}
@@ -463,8 +437,6 @@ Since we don't want any !!{undischarged} assumptions in
 our proof, our best bet is to use \Intro{\lnot} with the
 assumption $\lnot(!A(x) \lor \lnot!A(x))$. This will allow us to
 discharge the assumption at the end.
-
-
 \[
 \AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
 \DeduceC{$\lfalse$}
@@ -474,17 +446,15 @@ discharge the assumption at the end.
 \UnaryInfC{$!A(x) \lor \lnot!A(x)$}
 \DisplayProof
 \]
-
 Note that a straightforward application of the \Intro{\lnot} rule
 leaves us with two negations. We can remove them with the 
 \Elim{\lnot} rule.
 
 We appear to be stuck again, since the assumption we introduced
-has a negation as the!!{main operator}. So let's try to derive another
-contradiction!~Let's assume $!A(x)$ for another \Intro{\lnot}. From
+has a negation as the !!{main operator}. So let's try to derive another
+contradiction!{} Let's assume $!A(x)$ for another \Intro{\lnot}. From
 there we can derive $!A(x) \lor \lnot!A(x)$ and get our first
 contradiction.
-
 \[
 \AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
 \AxiomC{$\Discharge{!A(x)}{2}$}
@@ -501,15 +471,11 @@ contradiction.
 \UnaryInfC{$!A(x) \lor \lnot!A(x)$}
 \DisplayProof
 \]
-
-
-Our second assumption is now !!{discharged}. We
-only need to !!{derive} one more contradiction in order
-to !!{discharge} our first assumption. Now we have something to
-work with - $\lnot !A(x)$. We can use the same strategy as
-last time (\Intro{\lor}) to !!{derive} a contradiction with our
- first assumption.
-
+Our second assumption is now !!{discharged}. We only need to
+!!{derive} one more contradiction in order to !!{discharge} our first
+assumption. Now we have something to work with---$\lnot !A(x)$. We can
+use the same strategy as last time (\Intro{\lor}) to !!{derive} a
+contradiction with our first assumption.
 \[
 \AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
 \AxiomC{$\Discharge{!A(x)}{2}$}
@@ -528,7 +494,6 @@ last time (\Intro{\lor}) to !!{derive} a contradiction with our
 \UnaryInfC{$!A(x) \lor \lnot!A(x)$}
 \DisplayProof
 \]
-
 And the proof is done!
 \end{ex}
 
