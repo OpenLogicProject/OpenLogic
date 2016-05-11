@@ -29,10 +29,13 @@ have allowed this:
 If $!A$ and $!B$ are !!{formula}s, then so is $!A \lif !B$.
 \end{quote}
 Starting from an atomic formula $!D$, this would allow us to form $!D
-\lif !D$, and from this, together with $!D$, we would get $!D \lif !D
-\lif !D$.  But there are two ways to do this: one where we take $!D$
-to be $!A$ and $!D \lif !D$ to be $!B$, and the other where $!A$ is
-$!D \lif !D$ and $!B$ is~$!D$.  Correspondingly, there are two ways to
+\lif !D$. From this, together with $!D$, we would get $!D \lif !D
+\lif !D$.  But there are two ways to do this:
+\begin{enumerate}
+\item We take $!D$ to be $!A$ and $!D \lif !D$ to be $!B$.
+\item We take $!A$ to be $!D \lif !D$ and $!B$ is~$!D$.  
+\end{enumerate}
+Correspondingly, there are two ways to
 ``read'' the !!{formula}~$!D \lif !D \lif !D$. It is of the form $!B
 \lif !C$ where $!B$ is $!D$ and $!C$ is $!D \lif !D$, but \emph{it is
   also} of the form $!B \lif !C$ with $!B$ being $!D \lif !D$ and $!C$
@@ -104,8 +107,8 @@ proof that for any term~$t$, $l(t) = r(t)$ as an exercise.
 \end{enumerate}
 \end{proof}
 
-\begin{defn}
-A string of symbols $!B$ is a proper prefix of a string of symbols~$!A$ if
+\begin{defn}[Proper prefix]
+A string of symbols $!B$ is a \emph{proper prefix} of a string of symbols~$!A$ if
 concatenating $!B$ and a non-empty string of symbols yields~$!A$.
 \end{defn}
 
