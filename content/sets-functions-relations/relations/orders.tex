@@ -73,27 +73,66 @@ A strict partial order which is also connected is called a \emph{strict linear
   order.}
 \end{defn}
 
-A strict partial order $R$ on $X$ can be turned into a weak partial
-order $R'$ by adding the identity relation on $X$: $R' = R \cup \Id{X}$.
+A strict partial order on~$X$ can be turned into a weak partial order
+by adding the diagonal $\Id{X}$, i.e., adding all the pairs~$\tuple{x,
+  x}$.  (This is called the \emph{reflexive closure} of~$R$.)
 Conversely, starting from a weak partial order, one can get a strict
-partial order by removing~$\Id{X}$, i.e., $R' = R \setminus \Id{X}$.
+partial order by removing~$\Id{X}$.
 
 \begin{prop}
-$R$ is a strict partial (linear) order on $X$ iff $R'$ is a weak
-  partial (linear) order. Moreover, $Rxy$ iff $R'xy$ for all $x \neq
-  y$.
+  \ollabel{strict-weak}
+  \begin{enumerate}
+  \item If $R$ is a strict partial (linear) order on~$X$, then $R^+ = R
+    \cup \Id{X}$ is a weak partial (linear) order.
+  \item If $R$ is a weak partial (linear) order on~$X$, then $R^- = R
+    \setminus \Id{X}$ is a strict partial (linear) order.
+  \end{enumerate}
 \end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Suppose $R$ is a strict partial order, i.e., $R \subseteq
+      X^2$ and $R$ is irreflexive, asymmetric, and transitive. Let $R^+
+      = R \cup \Id{X}$. We have to show that $R^+$ is reflexive,
+      antisymmetric, and transitive.
+
+      $R^+$ is clearly reflexive, since for all $x \in X$, $\tuple{x,
+        x} \in \Id{X} \subseteq R^+$.
+
+      To show $R^+$ is antisymmetric, suppose $R^+xy$ and $R^+yx$,
+      i.e., $\tuple{x,y}$ and $\tuple{y, x} \in R^+$, and $x \neq y$.
+      Since $\tuple{x,y} \in R \cup \Id{X}$, but $\tuple{x, y} \notin
+      \Id{X}$, we must have $\tuple{x, y} \in R$, i.e.,
+      $Rxy$. Similarly we get that~$Ryx$. But this contradicts the
+      assumption that $R$ is asymmetric.
+
+      Now suppose that $R^+xy$ and $R^+yz$. If both $\tuple{x, y} \in
+      R$ and $\tuple{y,z} \in R$, it follows that $\tuple{x, z} \in R$
+      since $R$~is transitive. Otherwise, either $\tuple{x, y} \in
+      \Id{X}$, i.e., $x = y$, or $\tuple{y, z} \in \Id{X}$, i.e., $y =
+      z$. In the first case, we have that $R^+yz$ by assumption, $x =
+      y$, hence $R^+xz$. Similarly in the second case. In either case, $R^+xz$,
+      thus, $R^+$ is also transitive.
+
+      If $R$ is linear, then for all $x \neq y$, either $Rxy$
+      or~$Ryx$, i.e., either $\tuple{x, y} \in R$ or $\tuple{y, x} \in
+      R$. Since $R \subseteq R^+$, this remains true of $R^+$, so
+      $R^+$ is linear as well.
+    \item Exercise.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[sfr][rel][ord]{strict-weak}, i.e.,
+  prove that if $R$ is a weak partial order on~$X$, then $R^- =
+  R \setminus \Id{X}$ is a strict partial order. 
+\end{prob}
+
 
 \begin{ex}
 $\le$ is the weak linear order corresponding to the strict linear
-  order $<$. $\subseteq$ is the weak partial order corresponding to the
-  strict partial order $\subsetneq$.
+  order~$<$. $\subseteq$ is the weak partial order corresponding to the
+  strict partial order~$\subsetneq$.
 \end{ex}
-
-\begin{prob}
-Show that if $R$ is a weak partial order on $X$, then
-$R^{-}=R \setminus \Id{X}$ is a strict partial order and $Rxy$ iff
-$R^{-}xy$ for all $x \neq y$.
-\end{prob}
 
 \end{document}
