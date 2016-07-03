@@ -1,0 +1,35 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: eta
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{eta}
+\olsection{$\eta$-conversion}
+
+There is another relation on $\lambda$ terms. In
+\olref[lc][int][fv] we use the example $\lambd[g][\lambd[m][\times g
+m]]$. If we look at it carefully it's a function that accepts two~!!{argument}s
+$g$ and $m$, and applies $\times$ on them. It seems to be another
+multiplying function. We use $\eta$-reduction (and $\eta$-extension) to
+capture this idea.
+
+\begin{defn}[$\eta$-reduction]
+  If a term $P$ contains an occurrence of $\lambda[x][M x]$, and $x
+  \notin FV(M)$, then replacing this occurrence by $M$ resulting in
+  $P'$ is called \emph{$\eta$-contraction}. If $P$ can be changed to
+  $Q$ by a finite (possibly empty) series of such steps, then we say
+  $P ~\alpha\text{-reduces to}~Q$.
+\end{defn}
+
+\begin{prob}
+  There is a notion of \emph{$\eta$-extension} kind of symmetric to
+  $eta$-reduction, define it.
+\end{prob}
+
+The smallest transitive relation containing both $\eta$-reduction and
+$\eta$-extension is called $\eta$-conversion.
+
+\end{document}

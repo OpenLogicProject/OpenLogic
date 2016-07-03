@@ -1,0 +1,72 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{sub}
+\olsection{Substitution}
+
+As mentioned earlier, free variables are references to environment variables
+, thus it makes sense to actually use a specific value in the place of free
+variables. For example, we may want to replace $g$ in
+$\lambd[m][\times m g]$ by $9.8$, resulting in $\lambd[m][\times m
+9.8]$ to actually use the function on earth. This is
+called substitution.
+
+We define the subtitution as follows:
+
+\begin{defn}[Substitution]
+  The substitution of term $N$ for a variable $x$ in a term $t$, or
+  $\Subst{t}{N}{x}$,  is defined inductively by:
+  \begin{align}
+    \Subst{x}{N}{x}       &= N \label{eq:1} \\
+    \Subst{y}{N}{x}       &= y, \text{if} x \neq y \label{eq:2} \\
+    \Subst{PQ}{N}{x} &= (\Subst{P}{N}{x}) (\Subst{Q}{N}{x}) \label{eq:3} \\
+    \Subst{(\lambd[x][P])}{N}{x}  &= \lambd[x][P] \label{eq:4} \\
+    \Subst{(\lambd[y][P])}{N}{x}  &= \lambd[y][\Subst{P}{N}{x}], \text{if} x \neq y,
+    \text{provided} y \notin FV(N) \text{or} x \notin FV(P) \label{eq:5}
+  \end{align}
+  otherwise it's undefined.
+\end{defn}
+
+\eqref{eq:1} through~\eqref{eq:3} are routine. The last two equations are
+the meat. When we say ``let $m$ be $5$'' the term
+$\lambda[m][\times g m]$ won't be affected for a obvious reason, which
+is~\eqref{eq:4} all about. 
+
+On the other hand if we say ``let $g$ be $9.8$'' then we actually need
+to replace the $g$ in $\lambd[m][\times g m]$ by $9.8$. Note there are
+some conditions only under which
+\eqref{eq:5} can be applied. Why $y \notin FV(N)$? Because in this
+case $N$ contains references to the environment variable $y$, which,
+after $N$ replaces $x$ in $P$, will be bound by the abstraction over
+$y$. That will result in a term with different meaning (if there is any
+meaning), as these $y$
+no longer refer to the environment variables but instead the argument
+of that abstraction. 
+
+For example, we cannot do $(\lambd[y][x])[y/x]$ because
+otherwise it results in $\lambd[y][y]$, a term accepts an argument and
+returns it directly. But $y$ in $[y/x]$ is not likely refering
+to the $y$ bound by $\lambd[y]$, but instead, more likely another
+environment variable named $y$! So the result we actually want is a
+function that accepts an argument, drop it, and returns the
+environment variable $y$ anyway.
+
+Now what about $x \notin FV(P)$? Well, if there is no free occurrences
+of $x$ in $P$, then there is nothing to replace, the substitution does
+nothing and it's fine even if $y \in FV(N)$.
+
+\begin{prob}
+  Do the following substitution.
+  \begin{enumerate}
+    \item $\Subst{\lambd[y][x(\lambd[w][vwx])]}{(uv)}{x}$
+    \item $\Subst{\lambd[y][x(\lambd[x][x])]}{(\lambd[y][xy])}{x}$
+    \item $\Subst{y(\lambd[v][xv])}{(\lambd[y][vy])}{x}$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

@@ -1,0 +1,70 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: beta
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{bet}
+\olsection{$\beta$-reduction}
+
+When we see $(\lambd[m][\times g m]) 9.8$, it's natural to
+conjecture that it has some connection with $\times g 9.8$,
+namely  $\times g 9.8$ should be the result of ``simplifying'' the first term, if
+``simplify'' means anything. The $\beta$-reduction captures this
+intuition formally.
+
+\begin{defn}[$\beta$-reduction]
+  If a term $P$ contains an occurrence of $(\lambd[x][M])N$ (called \emph{redex}), and $\Subst{M}{N}{x}$
+  is defined, then replacing this occurrences by 
+  \begin{equation*}
+    \Subst{M}{N}{x}
+  \end{equation*}
+  which results in $Q$, is called \emph{contracting the redex}, and we
+  say $P ~\beta\text{-contracts to} ~Q$, or $P \redone Q$.  If $P$ can
+  be changed to $Q$ by a finite (possibly empty) series of
+  $\beta$-contractions and $\alpha$-conversions, then we say $P
+  ~\beta\text{-reduces to}~Q$, or $P \red Q$.
+\end{defn}
+
+A term that cannot be $\beta$-reduced any further is called \emph{$\beta$-irreducible}, or
+$\beta$-normal. We will say ``reduces'' instead of ``$\beta$-reduces,''
+etc., when the context is clear.
+
+Let us consider some examples.
+\begin{enumerate}
+\item We have
+\begin{align*}
+(\lambd[x][xxy]) \lambd[z][z] & \redone (\lambd[z][z])(\lambd[z][z]) y \\
+& \redone (\lambd[z][z]) y \\
+& \redone y
+\end{align*}
+\item ``Simplifying'' a term can make it more complex:
+\begin{align*}
+(\lambd[x][xxy])(\lambd[x][xxy]) & \redone (\lambd[x][xxy])(\lambd[x][xxy])y \\
+& \redone (\lambd[x][xxy])(\lambd[x][xxy])yy \\
+& \redone \dots
+\end{align*}
+\item It can also leave a term unchanged:
+\[
+(\lambd[x][xx])(\lambd[x][xx]) \redone (\lambd[x][xx])(\lambd[x][xx])
+\]
+\item Also, some terms can be reduced in more than one way; for
+  example,
+\[
+(\lambd[x][(\lambd[y][yx]) z)] v \redone (\lambd[y][yv]) z
+\]
+by contracting the outermost application; and
+\[
+(\lambd[x][(\lambd[y][yx]) z)] v \redone (\lambd[x][zx]) v
+\]
+by contracting the innermost one. Note, in this case, however, that
+both terms further reduce to the same term, $zv$.
+\end{enumerate}
+
+The final outcome in the last example is not a coincidence, but rather
+illustrates a deep and important property of the lambda calculus, known as the
+``Church-Rosser property.''
+
+\end{document}

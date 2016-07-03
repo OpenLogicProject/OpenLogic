@@ -1,0 +1,108 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: free-variable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{fv}
+\olsection{Free Variables}
+
+As mentioned earlier, $\lambda$-calculus is about functions, and
+$\lambda$ abstraction is where functins arises. When we
+write $\lambd[x][M]$, we can refer to the~!!{argument} $x$ in $\lambd[x]$ by
+occurrences of variable $x$ in $M$. $M$ is called the
+scope of $\lambd[x]$, and these occurrences are said to be \emph{bound} by this
+$\lambd[x]$. 
+
+\begin{defn}[Scope]
+For a particular occurrence of $\lambd[x][M]$ in a term $P$, the
+occurrence of $M$ is called the scope of the occurrence of $\lambd[x]$
+on the left.
+\end{defn}
+
+\begin{prob}
+  Point out scopes in this term: $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$.
+\end{prob}
+
+\begin{defn}[Bound occurrences of a variable]
+  An occurrence of variable $x$ is bound if it's in the scope of a $\lambd[x]$.
+\end{defn}
+
+\begin{ex}
+  In $\lambd[x][x x]$, both occurrences of $x$ is bound by $\lambd[x]$.
+\end{ex}
+
+\begin{prob}
+  In $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$, are all
+  occurrences of variables bound? By which abstractions are they
+  bound recpectively?
+\end{prob}
+
+Note that not all occurrences of $x$ in the subterm necessarily refers to this particular argument,
+since there can be another but inner $\lambd[x]$, as shown in the
+following example. 
+\begin{ex}
+In $\lambd[x][\lambd[x][x]]$, while the variable $x$ is in the
+scopes of both $\lambd[x]$, it only refers to the inner one, as one
+might expect. We may say the inner abstraction shadows the outer
+abstraction.
+\end{ex}
+
+We have only seen examples only using variable $x$ in the scope of $\lambd[x]$, 
+what happens when we break it?
+\begin{ex}
+  $\lambd[x][x y]$, while the occurrence of $x$ refers to the~!!{argument} of $\lambd[x]$, $y$ is not in a scope
+  of any $\lambd[y]$. 
+\end{ex}
+
+In the last example, $y$ is called \emph{free}. 
+\begin{defn}[Free occurrences of a variable]
+  An occurrence of a variable $x$ in a term $P$ is free if it's not bound, i.e., not in the scope of any
+  $\lambd[x]$ in $P$.
+\end{defn}
+
+
+For a term $P$, we can check all variable occurrences in it and get a set of free
+variables. This set is denoted by $FV(P)$ with a natural definition
+as follows:
+
+\begin{defn}[Free variables]
+  The set of free variables of a term is defined inductively by:
+  \begin{align} 
+     FV(x) &= \{x\} \label{eq:1} \\
+     FV(t_0 t_1) &= FV(t_0) \cup FV(t_1) \label{eq:2} \\
+    FV(\lambd[x][t]) &= FV(t) \setminus \{x\}     \label{eq:3} 
+  \end{align}
+\end{defn}
+
+\begin{prob}
+  Run the above definition on $\lambd[x][(\lambd[y][(\lambd[z][x y]) z]) y]$
+\end{prob}
+
+A free variable is like a reference to outside world (\emph{environment}), and a term
+containing free variables can be seen as a partially specified term,
+since its behaviour is kind of dependent on how we setup the
+environment. For example, the term $\lambd[m][\times g m]$ which
+accepts a variable (hopefully a real) and returns the gravity applied
+on a object with that mass, refers to an environment variable $g$. If we
+setup $g$ to be $9.8$  then this function is for use on earth,
+while on mars we may want a different factor.
+So informally speaking this term is dependent on the environment
+it's in, in particular the setting of $g$ in that environment.
+
+Continuing the last example, if we wrap this term by an abstraction, we get
+$\lambd[g][\lambd[m][\times g m]]$. Now it's no longer dependent on
+the outside variable $g$, because essentially it's a function that
+accepts a gravity factor and a mass, and returns the gravity applied
+on that mass; Our changing $g$ in the environment won't have any
+effect on the behavior of this term, as the term will only use the $g$
+passed by~!!{argument} anyway and not the one in environment. The term
+in this case is called a \emph{closed term}.
+
+\begin{defn}[Closed term]
+  A term with no free variable is a closed term.
+\end{defn}
+
+\end{document}
