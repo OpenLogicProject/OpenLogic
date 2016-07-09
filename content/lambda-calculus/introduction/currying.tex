@@ -1,0 +1,41 @@
+% Part: lambda-calculus % Chapter: introduction % Section: currying
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{cur} 
+\olsection{Currying}
+
+The last of the above expansion rules is not only for compactness, but
+also a hint of multiple parameter functions. Reader may have noticed
+that functions given by \rule[ABS] seem to only accept one argument, which
+is quite a limit when we want to define function accepting multiple
+arguents.
+
+Recall that in set theory, we use $A \times B$ (the Cartesian product
+of $A$ and $B$, \olref[sfr][set][pai]) to denote the domain of functions accepting two
+arguments from sets $A$ and $B$ respectively, so the functions accept
+a pair containing two arguments. While in lambda calculus we can mimic
+this method by encoding pairs (as shown in \olref[lc][rep][pai]), it's
+more convention to do this by \emph{currying}.
+
+Let's see some examples. If we want to define a function that accepts
+two arguments and returns the first, we write
+$\lambd[x][\lambd[y][x]]$, which literally is a function that accepts
+an argument and returns a function that, accepts another argument and
+returns the first dropping the second. 
+
+We haven't introduced reduction (\olref[lc][int][bet]) but intuition
+of lambda abstraction and application is enough. If we apply the above
+term to some argument $@M$ and ``simplify'' it, we should get $\lambd[y][@M]$; apply this new function to $@N$
+we should get $@M$. Thus, $(\lambd[x][\lambd[y][x]])MN$ can be
+simplified to $@M$, as we expect.
+
+In general, to write a function with parameters $@x_1, \ldots, @x_n$
+and function body $@P$, we can write
+$\lambd[@x_1][\lambd[\ldots\lambd[@x_n][@P]]]$. Let's denote it by $@F$,
+then $@F@M_1\ldots @M_n$ can be simplified to
+$\Subst{\Subst{@P}{@M_1}{@x_1}\ldots}{@M_n}{@x_n}$, as we expect.
+\end{document}
+

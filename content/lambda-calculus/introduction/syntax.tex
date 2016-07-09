@@ -12,77 +12,35 @@
 \begin{defn}{Terms}
 The set of \emph{terms} of lambda calculus is defined inductively by:
 \begin{enumerate}
-  \item[Variable] \label{form:1} Each variable is a term. 
-  \item[Abstraction] \label{form:2} If $x$ is a variable and $t$ is a term, then $(\lambd[x][t])$ is
-    a term. The $x$ in $\lambd[x]$ is called \emph{binding} or \emph{!!{argument}}.
-  \item[Application] \label{form:3} If both $t_0$ and $t_1$ are terms, then $(t_0t_1)$ is a term.
+  \item[\rule{VAR}] \ollabel{form:var} If $x$ is a variable, then $x$ is a
+    term called \emph{Variable}.
+  \item[\rule{ABS}] \ollabel{form:abs} If $x$ is a variable and $M$ is a term, then $(\lambd[x][M])$ is
+    a term called an \emph{abstraction}. The $x$ in
+    $\lambd[x]$ is called a \emph{parameter}, or \emph{binding variable}.
+  \item[\rule{APP}] \ollabel{form:app} If both $M$ and $N$ are terms, then
+    $(MN)$ is a term, called an \emph{application}.
 \end{enumerate}
 \end{defn}
 
-Let's call the terms defined above \emph{cumbersome terms} because they
-are fully parenthesized, which can get rather
-cumbersome as the term $(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$ demostrates.
-
-A neater way to look at lambda terms is to think of them as
-a description of a formation process. For
+The terms defined above are fully parenthesized, which can get rather
+cumbersome as the term $(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$ demostrates. A neater way to look at lambda terms is to think of them as
+a description of formation. For
 example, the last step of forming the term $(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$
-must be abstraction where the !!{argument} is $x$, before which it's
+must be abstraction where the !!{parameter} is $x$, before which it's
 an application of two terms, the last step of forming both of which is
 abstraction, etc.. 
 
 \begin{prob}
-  Describe the formation process of $(\lambd[g][(\lambd[x][(g (x x))]) (\lambd[x][(g (x x))])])$.
+  Describe the formation of $(\lambd[g][(\lambd[x][(g (x x))]) (\lambd[x][(g (x x))])])$.
 \end{prob}
 
-Intead of plain English, we can make it more intuitive by drawing a tree. 
+Intead of plain English, we can make it more intuitive by drawing a
+\emph{formation tree}.
 
 \begin{prob}
   Draw the formation tree of $(\lambd[g][(\lambd[x][(g (x x))]) (\lambd[x][(g (x x))])])$.
 \end{prob}
 
-It's obvious there is a~!!{bijection} from terms to such trees. Thus
-we can say the terms and the trees are essentially the same thing, while
-term is written version and tree is drawn version. It would be
-helpful to think of such trees when you read or write lambda terms. 
-
-\begin{prob}
-  Prove there is a unique reading for each term, as we do for formulas in \olref[fol][syn][unq].
-\end{prob}
-
-Since term is just a written version of tree, and since terms defined
-above are cumbersome, we may wonder if
-there exists a more concise written version. Luckily such a
-representation, called \emph{abbreviated terms},  exists, as shown by
-the following expansion rules from the
-abbreviated terms to the cumbersome terms.
-
-\begin{enumerate}
-\item When parentheses are left out, application takes place from left
-  to right. For example, if $M$, $N$, $P$, and $Q$ are terms, then
-  $MNPQ$ abbreviates $(((MN)P)Q)$.
-\item Again, when parentheses are left out, lambda abstraction is to
-  be given the widest scope possible. From example, $\lambd[x][MNP]$ is
-  read $\lambd[x][(MNP)]$.
-\item A lambda can be used to abstract multiple variables. For
-  example, $\lambd[xyz][M]$ is short for
-  $\lambd[x][\lambd[y][\lambd[z][M]]]$.
-\end{enumerate}
-
-For example,
-\[
-\lambd[xy][xxyx \lambd[z][xz]]
-\]
-abbreviates
-\[
-(\lambd[x][(\lambd[y][((((xx)y)x)(\lambd[z][(xz)]))])]).
-\]
-
-\begin{prob}
-  Expand this abbreviated term: $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$.
-\end{prob}
-
-We can now think of abbreviated terms, cumbersome terms and trees as the same
-thing. We will only use the abbreviated terms in the rest of the
-text, since it's the most compact, and when we say ``terms'' we mean
-abbreviated ones.
+We may wonder if for each term there is a unique formation, and there
+is. We now formalize this intuition.
 \end{document}

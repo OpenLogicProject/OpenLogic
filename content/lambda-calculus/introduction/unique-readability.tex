@@ -1,0 +1,79 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: unique-readability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{unq}
+\olsection{Unique Readability}
+
+As in \olref[fol][syn][unq], for each lambda term there is only one
+way to construct and interpret it. The most of the part makes
+sense only if this property holds.
+
+In the following discussion, a \emph{formation} is the procedure of
+constructing a term using formation rules (one or several times), \emph{rules} is short for
+formation rules. 
+
+\begin{lem}\ollabel{lem:term-start}
+  A term starts with either a variable or a parenthesis.
+\end{lem}
+\begin{proof}
+  Left as exercise.
+\end{proof}
+
+\begin{lem}\ollabel{lem:app-start}
+  The resulting term of APP starts with either two parenthesis or a
+  parenthesis and a variable.
+\end{lem}
+\begin{proof}
+  Left as exercise; you may want to use \olref{lem:term-start}.
+\end{proof}
+
+\begin{prop}[Unique Readability]
+There is a unique formation for each term. In other words, if a term
+$@M$ is formed by a formation, then it's the only formation that can form this term.
+\end{prop}
+
+\begin{proof}
+  We prove this by induction on the formation of terms. 
+
+  \begin{enumerate}
+    \item[\rule{VAR}] $@M$ must be of the form
+      $@x$, where $@x$ is some variable. Since the results of other two
+      formations always start with parentheses, they cannot be used to
+      construct $@M$; Thus, the formation of $@M$ must be a single step
+      of \rule{VAR}, which is this very formation.
+    \item[\rule{ABS}] $@M$ must be of the
+      form $(\lambd[@x][@N])$, where $@x$ is some variable and $@N$ is a
+      term constructed from rules. By I.H. we know that formation of
+      $@N$ is unique. Variable couldn't have construct it
+      because the result of that rule is a single variable;
+      Neither could \rule{APP} because of \olref{app-start}. Thus
+      this formation of $@M$, namely the unique formation of $@N$
+      followed by \rule{ABS}, is unique.
+
+    \item[\rule{APP}] $@M$ must be of the form
+      $(@P@Q)$, where $@P$ and $@Q$ are terms constructed from rules. By
+      I.H. we know that formations of $@P$ and $@Q$ is unique. \rule{VAR} and
+      \rule{ABS} couldn't have construct it with the same reason in the 
+      last case. Thus this formation of $@M$, namely the unique
+      formations of $@P$ and $@Q$ followed by \rule{APP}, is unique.
+  \end{enumerate}
+\end{proof}
+
+A more readable paraphrase of the above proposition is as follows:
+\begin{prop}[Unique Readability (readable)]
+  A term $@M$ can only be one of the following forms:
+  \begin{enumerate}
+    \item[\rule{VAR}] $@x$, where $@x$ is a variable uniquely determined by $@M$.
+    \item[\rule{ABS}] $(\lambd[@x][@N])$, where $@x$ is a variable and $@N$ is
+      another term, both of which is uniquely determined by $@M$.
+    \item[\rule{APP}] $(@P@Q)$, where $@P$ and $@Q$ are two terms uniquely
+      determined by $@M$.
+  \end{enumerate}
+\end{prop}
+
+\end{document}

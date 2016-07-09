@@ -1,0 +1,21 @@
+% OpenLogic Project
+% lambda
+
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesFile{open-logic-lambda}
+
+
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage[OMLmathsfit]{isomath}
+
+\def\at{\text{@}}
+
+% make ! active in math mode for formula meta variables
+
+{\catcode`@=\active
+\gdef@{\mvar}
+\let\mvar\relax % default: do nothing
+}
+\mathcode`\@="8000 % set ! active in math mode

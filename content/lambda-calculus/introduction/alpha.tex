@@ -9,21 +9,24 @@
 \olfileid{lc}{int}{alp}
 \olsection{$\alpha$-conversion}
 
+What's the relation between $\lambd[x][x]$ and $\lambd[y][y]$? They
+both seem to be the identity function. Here is the $\alpha$-conversion:
+
 \begin{defn}[$\alpha$-conversion]
-  If a term contains an occurrences of $\lambd[x][M]$, $y \notin
-  FV(M)$, and $M[y/x]$ is defined, then replacing this occurrences
+  If a term contains an occurrences of $\lambd[@x][@M]$, $@y \notin
+  FV(@M)$, and $@M[@y/@x]$ is defined, then replacing this occurrences
   by 
   \begin{equation*}
-    \lambd[y][M[y/x]]
+    \lambd[@y][@M[@y/@x]]
   \end{equation*}
   is called a \emph{change of bound
-    variable}. If $P$ can be changed to $Q$ by a finite (possibly
-  empty) series of such steps, then we say $P ~\alpha\text{-converts to}~ Q$,
-  or $P \aconv Q$.
+    variable}. If $@P$ can be changed to $@Q$ by a finite (possibly
+  empty) series of such steps, then we say $@P ~\alpha\text{-converts to}~ @Q$,
+  or $@P \aconv @Q$.
 \end{defn}
 
 \begin{ex}
-  $\lambd[m][\times m g]$ $\alpha$-converts to $\lambd[M][\times M
+  $\lambd[m][\times m g]$ $\alpha$-converts to $\lambd[mass][\times mass
   g]$, and the other way around too. Informally
   speaking, they are both functions that accpets an argument and
   returns the gravity applied on the object with mass of that argument,

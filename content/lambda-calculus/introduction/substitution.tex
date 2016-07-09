@@ -19,15 +19,15 @@ called substitution.
 We define the subtitution as follows:
 
 \begin{defn}[Substitution]
-  The substitution of term $N$ for a variable $x$ in a term $t$, or
-  $\Subst{t}{N}{x}$,  is defined inductively by:
+  The substitution of term $@N$ for a variable $@x$ in a term $@M$, or
+  $\Subst{@M}{@N}{@x}$,  is defined inductively by:
   \begin{align}
-    \Subst{x}{N}{x}       &= N \label{eq:1} \\
-    \Subst{y}{N}{x}       &= y, \text{if} x \neq y \label{eq:2} \\
-    \Subst{PQ}{N}{x} &= (\Subst{P}{N}{x}) (\Subst{Q}{N}{x}) \label{eq:3} \\
-    \Subst{(\lambd[x][P])}{N}{x}  &= \lambd[x][P] \label{eq:4} \\
-    \Subst{(\lambd[y][P])}{N}{x}  &= \lambd[y][\Subst{P}{N}{x}], \text{if} x \neq y,
-    \text{provided} y \notin FV(N) \text{or} x \notin FV(P) \label{eq:5}
+    \Subst{@x}{@N}{@x}       &= @N \label{eq:1} \\
+    \Subst{@y}{@N}{@x}       &= @y, \text{if} @x \neq @y \label{eq:2} \\
+    \Subst{@P@Q}{@N}{@x} &= (\Subst{@P}{@N}{@x}) (\Subst{@Q}{@N}{@x}) \label{eq:3} \\
+    \Subst{(\lambd[@x][@P])}{@N}{@x}  &= \lambd[@x][@P] \label{eq:4} \\
+    \Subst{(\lambd[@y][@P])}{@N}{@x}  &= \lambd[@y][\Subst{@P}{@N}{@x}], \text{if} @x \neq @y,
+    \text{provided} @y \notin FV(@N) \text{or} @x \notin FV(@P) \label{eq:5}
   \end{align}
   otherwise it's undefined.
 \end{defn}
@@ -40,25 +40,24 @@ is~\eqref{eq:4} all about.
 On the other hand if we say ``let $g$ be $9.8$'' then we actually need
 to replace the $g$ in $\lambd[m][\times g m]$ by $9.8$. Note there are
 some conditions only under which
-\eqref{eq:5} can be applied. Why $y \notin FV(N)$? Because in this
-case $N$ contains references to the environment variable $y$, which,
-after $N$ replaces $x$ in $P$, will be bound by the abstraction over
-$y$. That will result in a term with different meaning (if there is any
-meaning), as these $y$
-no longer refer to the environment variables but instead the argument
+\eqref{eq:5} can be applied. Why $@y \notin FV(@N)$? Because in this
+case $@N$ contains references to the environment variable $@y$, which,
+after $@N$ replaces $@x$ in $@P$, will be bound by the abstraction over
+$@y$. That will result in a term with different meaning (if there is any
+meaning), as these $@y$ no longer refer to the environment variables but instead the argument
 of that abstraction. 
 
-For example, we cannot do $(\lambd[y][x])[y/x]$ because
+For example, we cannot do $\Subst{\lambd[y][x]}{y}{x}$ because
 otherwise it results in $\lambd[y][y]$, a term accepts an argument and
-returns it directly. But $y$ in $[y/x]$ is not likely refering
+returns it directly. But the substitute $y$ is not likely refering
 to the $y$ bound by $\lambd[y]$, but instead, more likely another
 environment variable named $y$! So the result we actually want is a
 function that accepts an argument, drop it, and returns the
 environment variable $y$ anyway.
 
-Now what about $x \notin FV(P)$? Well, if there is no free occurrences
-of $x$ in $P$, then there is nothing to replace, the substitution does
-nothing and it's fine even if $y \in FV(N)$.
+Now what about $@x \notin FV(@P)$? If there is no free occurrences
+of $@x$ in $@P$, then there is nothing to replace, the substitution does
+nothing and it's fine even if $@y \in FV(@N)$.
 
 \begin{prob}
   Do the following substitution.
