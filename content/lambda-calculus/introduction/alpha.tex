@@ -48,5 +48,60 @@ both seem to be the identity function. Here is the $\alpha$-conversion:
   \end{enumerate}
 \end{prob}
 
+\begin{lem}{lem:cobv-inv}
+  If by change of a bound variable $@P$ can be changed to $@Q$, then $@Q$
+  can be changed to $@P$ too.
+\end{lem}
+\begin{proof}
+  Suppose the change from $@P$ to $@Q$ is done by replacing an
+  occurrence of $\lambd[@x][@M]$ in $@P$ by
+  $\lambd[@y][\Subst{@M}{@y}{@x}]$. Then clearly $\Subst{@M}{@y}{@x}$
+  is defined and $@y \notin FV(@M)$ by the requirement of change of
+  bound variables. Then by \olref[sub]{thm:inv}
+  $\Subst{\Subst{@M}{@y}{@x}}{@x}{@y}$ is defined and
+  equals to $@M$; Also, $@x \notin FV(\Subst{@M}{@y}{@x})$ by
+  \olref[fv]{thm:clr}. So we can replace $\lambd[@y][\Subst{@M}{@y}{@x}]$ in
+  $@Q$ by $\lambd[@x][\Subst{\Subst{@M}{@y}{@x}}{@x}{@y}]$ which equals
+  $\lambd[@x][@M]$, resulting in $@P$.
+\end{proof}
+
+\begin{thm}
+  $\alpha$-conversion is a equivalence relation (\olref[sfr][rel][prp]{sec}) on terms.
+\end{thm}
+\begin{proof}
+  
+  \begin{enumerate}
+    \item[reflexive] For each term $@M$, $@M$ can be changed to $M$ by
+      \emph{zero} steps of change of bound variables.
+    \item[symmetric] If $@P$ is changed to $@Q$ by a series of change
+      of bound variables, then from $@Q$ we can just inverse these changes(by \olref{lem:cobv-inv}) in
+      opposite order and we should get $@P$.
+    \item[transitive] If $@P$ is changed to $@Q$ by a series of
+      change, and $@Q$ to $@R$ by another series, then we can change
+      $@P$ to $@R$ by first applying the first series and then the
+      second series.
+  \end{enumerate}
+\end{proof}
+
+\begin{digress}
+  Because the $\alpha$-conversion comes so naturally, some syntax has
+  been invented that doesn't distinguish terms that can be
+  $\alpha$-converted to each other, among which the most famous is the
+  \emph{De Bruijn index}.
+  
+  When we write $\lamd[@x][@M]$, we explicitly state that $@x$ is the
+  parameter of the function, so that we can use $@x$ in $@M$ to refer
+  to this parameter. In De Bruijn index, however, parameters have no
+  name and reference to them in function body is denoted by the number of levels of
+  abstraction between them. For example, instead of $\lambd[x][lambd[y][y
+  x]]$, we write $\lambd[][lambd[][0 1]]$, since there is zero
+  abstraction between the variable $y$ and the abstraction where the
+  parameter $y$ is stated, while $x$ is $1$ since there is one level
+  of abstraction (namely the abstraction of $y$) between.
+
+  The De Bruijn index is almost unreadable to human race, but it's
+  much more convenient when we try to implement lambda calculus in
+  computer. 
+\end{digress}
 \end{document}
 

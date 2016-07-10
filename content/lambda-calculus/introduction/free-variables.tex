@@ -71,9 +71,9 @@ as follows:
 \begin{defn}[Free variables]
   The set of free variables of a term is defined inductively by:
   \begin{align} 
-    FV(@x) &= \{@x\} \tag{\rule{VAR}} \label{eq:1} \\
-    FV(\lambd[@x][@N]) &= FV(@N) \setminus \{@x\}   \tag{\rule{ABS}}  \label{eq:2} \\
-    FV(@P@Q) &= FV(P) \cup FV(Q) \tag{\rule{APP}} \label{eq:3}
+    FV(@x) &= \{@x\} \tag{\rule{VAR}} \ollabel{eq:1} \\
+    FV(\lambd[@x][@N]) &= FV(@N) \setminus \{@x\}   \tag{\rule{ABS}}  \ollabel{eq:2} \\
+    FV(@P@Q) &= FV(P) \cup FV(Q) \tag{\rule{APP}} \ollabel{eq:3}
   \end{align}
 \end{defn}
 
@@ -107,7 +107,7 @@ in this case is called a \emph{closed term}.
   A term with no free variable is a closed term.
 \end{defn}
 
-\begin{editorial}
+\begin{ex}
   Reader may find the term $\lambd[m][\times g m]$ exotic as it's not
   a term at all: we can't have the $\times$ symbol in terms, and also,
   how can we have variables representing real numbers? But we will see
@@ -115,6 +115,18 @@ in this case is called a \emph{closed term}.
   numbers can be defined in the forms of terms. Thus it's not a big
   problem and reader should pretend that they are replaced by very
   long closed terms.
-\end{editorial}
+\end{ex}
+
+\begin{lem}
+  \begin{enumerate}
+    \item \ollabel{lem:abs} If $@y \neq @x$, then $@y \in FV(\lambd[@x][@N])$ iff $@y \in
+    FV(@N)$.
+    \item \ollabel{lem:app} $@y \in FV(@P@Q)$ iff $@y \in FV(@P)$ or
+      $@y \in FV(@Q)$.
+    \end{enumerate}
+\end{lem}
+\begin{proof}
+  Left as exercise.
+\end{proof}
 
 \end{document}

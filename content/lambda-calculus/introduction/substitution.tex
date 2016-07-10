@@ -22,12 +22,12 @@ We define the subtitution as follows:
   The substitution of term $@N$ for a variable $@x$ in a term $@M$, or
   $\Subst{@M}{@N}{@x}$,  is defined inductively by:
   \begin{align}
-    \Subst{@x}{@N}{@x}       &= @N \label{eq:1} \\
-    \Subst{@y}{@N}{@x}       &= @y, \text{if} @x \neq @y \label{eq:2} \\
-    \Subst{@P@Q}{@N}{@x} &= (\Subst{@P}{@N}{@x}) (\Subst{@Q}{@N}{@x}) \label{eq:3} \\
-    \Subst{(\lambd[@x][@P])}{@N}{@x}  &= \lambd[@x][@P] \label{eq:4} \\
+    \Subst{@x}{@N}{@x}       &= @N \ollabel{eq:1} \\
+    \Subst{@y}{@N}{@x}       &= @y, \text{if} @x \neq @y \ollabel{eq:2} \\
+    \Subst{@P@Q}{@N}{@x} &= (\Subst{@P}{@N}{@x}) (\Subst{@Q}{@N}{@x}) \ollabel{eq:3} \\
+    \Subst{(\lambd[@x][@P])}{@N}{@x}  &= \lambd[@x][@P] \ollabel{eq:4} \\
     \Subst{(\lambd[@y][@P])}{@N}{@x}  &= \lambd[@y][\Subst{@P}{@N}{@x}], \text{if} @x \neq @y,
-    \text{provided} @y \notin FV(@N) \text{or} @x \notin FV(@P) \label{eq:5}
+                                        \text{provided} @y \notin FV(@N) \text{or} @x \notin FV(@P) \ollabel{eq:5}
   \end{align}
   otherwise it's undefined.
 \end{defn}
@@ -62,10 +62,104 @@ nothing and it's fine even if $@y \in FV(@N)$.
 \begin{prob}
   Do the following substitution.
   \begin{enumerate}
-    \item $\Subst{\lambd[y][x(\lambd[w][vwx])]}{(uv)}{x}$
-    \item $\Subst{\lambd[y][x(\lambd[x][x])]}{(\lambd[y][xy])}{x}$
-    \item $\Subst{y(\lambd[v][xv])}{(\lambd[y][vy])}{x}$
+  \item $\Subst{\lambd[y][x(\lambd[w][vwx])]}{(uv)}{x}$
+  \item $\Subst{\lambd[y][x(\lambd[x][x])]}{(\lambd[y][xy])}{x}$
+  \item $\Subst{y(\lambd[v][xv])}{(\lambd[y][vy])}{x}$
   \end{enumerate}
 \end{prob}
+
+\begin{thm}\ollabel{thm:notinfv}
+  If $@x \notin FV(@M)$, then $\Subst{@M}{@S}{@x}$ is defined and identical to $@M$.
+\end{thm}
+\begin{proof}
+  By induction on the formation of $@M$.
+  \begin{enumerate}
+  \item[\rule{VAR}] $@M$ is just a variable $@y$. Since $@x \notin
+    FV(@M)=FV(@y)=\{@y\}$ we know $@x \neq @y$. Thus we apply
+    \eqref{eq:2} and get $@y$ unchanged.
+  \item[\rule{ABS}] $@M$ is of the form $\lambd[@y][@N]$. 
+    \begin{enumerate}
+    \item If $@x \eq @y$ then we apply \eqref{eq:4} and get $\lambd[@y][@N]$
+      unchanged.
+    \item If $@x \neq @y$ then $@x \notin FV(@N)$ by
+      \olref[fv]{eq:2}, then by I.H. we get $\Subst{@N}{@S}{@x}$
+      is defined and is identical to $@N$. We now can apply
+      \eqref{eq:5} and get $\lambd[@y][\Subst{@N}{@S}{@x}]$, which
+      is $@N$.
+    \end{enumerate}
+  \item[\rule{APP}] $@M$ is of the form $@P@Q$, then $@x \notin
+    FV(P)$ and $@x \notin FV(Q)$ by \olref[fv]{eq:3}. We then
+    apply \eqref{eq:3} and get
+    $(\Subst{@P}{@S}{@x})(\Subst{@Q}{@S}{@x})$, where
+    $\Subst{@P}{@S}{@x}$ is defined and identical to $@P$ by I.H.,
+    and similar for $\Subst{@Q}{@S}{@x}$. Thus it's identical to $PQ$.
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}\ollabel{thm:clr}
+  $@x \notin FV(\Subst{@M}{@y}{@x})$, if $\Subst{@M}{@y}{@x}$ is defined.
+\end{thm}
+\begin{proof}
+  Left as exercise.
+\end{proof}
+
+\begin{thm}\ollabel{thm:inv}
+  If $\Subst{@M}{@y}{@x}$ is defined and $@y \notin FV(@M)$, then $\Subst{\Subst{@M}{@y}{@x}}{@x}{@y} \eq @M$.
+\end{thm}
+\begin{proof}
+  By induction on formation of $@M$.
+  \begin{enumerate}
+    \item[\rule{VAR}] $@M$ is just a variable $@z$.
+      \begin{enumerate}
+        \item[$@z \eq @x$] Then $\Subst{\Subst{@x}{@y}{@x}}{@x}{@y}$
+          equals $\Subst{@y}{@x}{@y}$ equals $@x$ equals $@z$.
+        \item[$@z \neq @x$] Then $\Subst{\Subst{z}{@y}{@x}}{@x}{@y}$
+          equals $\Subst{@z}{@x}{@y}$. We know $@z \neq @y$ since $@y
+          \notin FV(@z)$. So RHS equals $@z$.
+      \end{enumerate}
+    \item[\rule{ABS}] $@M$ is of the form $\lambd[@z][@N]$.
+      \begin{enumerate}
+        \item[$@z \eq @x$] Then $\Subst{\Subst{(\lambd[@x][@N])}{@y}{@x}}{@x}{@y}$
+          equals $\Subst{(\lambd[@x][@N])}{@x}{@y}$. Depending on
+          whether or not $x=y$:
+          \begin{enumerate}
+            \item[$@x = @y$] Then RHS equals
+              $\Subst{(\lambd[@x][@N])}{@x}{@x}$ equals $\lambd[@x][@N]$.
+            \item[$@x \neq @y$] 
+              RHS equals $\lambd[@x][\Subst{@N}{@x}{@y}]$ since $@y
+              \notin FV(@N)$ by \olref[fv]{lem:abs}; equals
+              $\lambd[@x][@N]$ by \olref[fv]{lem:notinfv}.
+          \end{enumerate}
+        \item[$@z \neq @x$] then $\Subst{\Subst{(\lambd[@z][@N])}{@y}{@x}}{@x}{@y}$ equals 
+          $\Subst{(\lambd[@z][\Subst{@N}{@y}{@x}])}{@x}{@y}$ 
+          simply becuase $\Subst{(\lambd[@z][@N])}{@y}{@x}$ is
+          defined (by premise) and 
+            $\lambd[@z][\Subst{@N}{@y}{@x}]$ is the only possible result.
+            Further we know that $\Subst{@N}{@y}{@x}$ is defined. Now
+            we consider whether or not $@y = @z$.
+            \begin{enumerate}
+              \item[$@y = @z$] Now $@z \in FV(@y)$ so it must be the
+                case that $@x \notin FV(@N)$. So it equals
+                $\Subst{(\lambd[@z][@N])}{@x}{@y}$ equals
+                $\lambd[@z][@N]$.
+              \item[$@y \neq @z$] Then it equals
+                $\lambd[@z][\Subst{\Subst{@N}{@y}{@x}}{@x}{@y}]$ since
+                $@z \notin FV(@x)$. Now by I.H., since
+                $\Subst{@N}{@y}{@x}$ is defined, and $@y \notin
+                FV(@N)$ by \olref[fv]{abs}, we have
+                $\Subst{\Subst{@N}{@y}{@x}}{@x}{@y}$ equals $@N$, so
+                the origin expression equals $\lambd[@z][@N]$.
+              \end{enumerate} 
+      \end{enumerate}
+      \item[\rule{APP}] $@M$ is of the form $@P@Q$. Then
+        $\Subst{\Subst{(@P@Q)}{@y}{@x}}{@x}{@y}$ equals
+        $\Subst{((\Subst{@P}{@y}{@x})(\Subst{@Q}{@y}{@x}))}{@x}{@y}$ equals
+        $(\Subst{\Subst{@P}{@y}{@x}}{@x}{@y})(\Subst{\Subst{@Q}{@y}{@x}}{@x}{@y})$.
+        We also know that $\Subst{@P}{@y}{@x}$ is defined and $@y
+        \notin FV(@P)$ by \olref[fv][app], so by I.H. we get
+        $\Subst{\Subst{@P}{@y}{@x}}{@x}{@y}$ equals $@P$ and similar
+        for $@Q$. So finally it equals $@P@Q$.
+  \end{enumerate}
+\end{proof}
 
 \end{document}
