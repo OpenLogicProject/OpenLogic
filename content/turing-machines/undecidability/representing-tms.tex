@@ -1,0 +1,165 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: representing-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{und}{rep}
+\olsection{Representing Turing Machines}
+
+\begin{explain}
+In order to represent Turing machines and their behavior by a !!{sentence}
+of first-order logic, we have to define a suitable language. The
+language consists of two parts: !!{predicate}s for describing
+configurations of the machine, and expressions for counting execution
+steps (``moments'') and positions on the tape. The latter require an
+initial moment, $\Obj 0$, a ``successor'' function which is
+traditionally written as a postfix $\prime$, and an ordering $x
+< y$ of ``before.''
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:tm-descr}
+Given a Turing machine $M = \tuple{Q, \Sigma, q_0, \delta}$, the
+language~$\Lang L_M$ consists of:
+\begin{enumerate}
+\item A two-place !!{predicate} $\Obj Q_q(x, y)$ for every state~$q \in
+  Q$.  Intuitively, $\Obj Q_q(\num{n}, \num{m})$ expresses ``after $m$
+  steps, $M$ is in state~$q$ scanning the $n$th square.''
+\item A two-place !!{predicate} $\Obj S_\sigma(x, y)$ for every
+  symbol~$\sigma\in \Sigma$.  Intuitively, $\Obj S_\sigma(\num{n},
+  \num{m})$ expresses ``after $m$ steps, the $n$th square contains
+  symbol~$\sigma$.''
+\item A constant $\Obj 0$
+\item A one-place function $\prime$
+\item A two-place predicate $<$
+\end{enumerate}
+\end{defn}
+
+For each number $n$ there is a canonical term $\num{n}$, the
+\emph{numeral} for~$n$, which represents it in~$\Lang L_M$. $\num{0}$
+is $\Obj 0$, $\num{1}$ is $\Obj 0'$, $\num{2}$ is $\Obj 0''$, and so
+on. More formally:
+\begin{align*}
+\num{0} & = \Obj 0 \\
+\num{n+1} &= \num{n}'
+\end{align*}
+
+The !!{sentence}s describing the operation of the Turing machine~$M$ on
+input $w = \sigma_{i_1}\dots\sigma_{i_n}$ are the following:
+\begin{enumerate}
+\item Axioms describing numbers:
+\begin{enumerate}
+\item A !!{sentence} that says that the successor function is injective:
+\[
+\lforall[x][\lforall[y][
+    (\eq[x'][y'] \lif \eq[x][y])]]
+\]
+\item A !!{sentence} that says that every number is less than its successor:
+\[
+\lforall[x][(x < x')]
+\]
+\item A !!{sentence} that ensures that $<$ is transitive:
+\[
+\lforall[x][\lforall[y][\lforall[z][
+      ((x < y \land y < z) \lif x < z)]]]
+\]
+\item A !!{sentence} that connects $<$ and~$=$:
+\[
+\lforall[x][\lforall[y][(x < y \lif \eq/[x][y])]]
+\]
+\end{enumerate}
+\item Axioms describing the input configuration:
+\begin{enumerate}
+\item $M$ is in the inital state~$q_0$ at time~0, scanning square~1:
+\[
+\Obj Q_{q_0}(\num{1}, \num{0})
+\]
+\item The first $n+1$ squares contain the symbols $\TMendtape$,
+  $\sigma_{i_1}$, \dots, $\sigma_{i_n}$:
+\[
+\Obj S_\TMendtape(\num{0}, \num{0}) \land
+\Obj S_{\sigma_{i_1}}(\num{1}, \num{0}) \land
+\dots \land
+\Obj S_{\sigma_{i_n}}(\num{n}, \num{0})
+\]
+\item Otherwise, the tape is empty:
+\[
+\lforall[x][(\num{n} < x \lif \Obj S_\TMblank(x, \num{0}))]
+\]
+\end{enumerate}
+\item Axioms describing the transition from one configuration to
+  the next:
+
+For the following, let $!A(x, y)$ be the conjunction of all !!{sentence}s
+of the form
+\[
+\lforall[z][
+  (((z < x \lor x < z) \land \Obj S_\sigma(z, y))
+  \lif \Obj S_\sigma(z, y'))]
+\]
+where $\sigma \in \Sigma$.  We use $!A(\num{n},\num{m})$ to express
+``other than at square~$n$, the tape after $m+1$ steps is the same as
+after $m$ steps.''
+\begin{enumerate}
+\item \ollabel{rep-right} For every instruction $\delta(q_i, \sigma) =
+  \tuple{q_j, \sigma', \TMright}$, the !!{sentence}:
+\begin{multline*}
+\lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
+   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
+!A(x, y)))
+\end{multline*}
+This says that if, after~$y$ steps, the machine is in state~$q_i$
+scanning square~$x$ which contains symbol~$\sigma$, then after $y+1$
+steps it is scanning square~$x+1$, is in state~$q_j$, square~$x$ now
+contains~$\sigma'$, and every square other than~$x$ contains the
+same symbol as it did after~$y$ steps.
+
+\item \ollabel{rep-left} For every instruction $\delta(q_i, \sigma) =
+  \tuple{q_j, \sigma', \TMleft}$, the !!{sentence}:
+\begin{multline*}
+\lforall[x][\lforall[y][
+    ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\
+   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
+!A(x, y)))
+\end{multline*}
+Take a moment to think about how this works: now we don't start with
+``if scanning square~$x$ \dots'' but: ``if scanning square $x+1$
+\dots'' A move to the left means that in the next step the machine is
+scanning square~$x$.  But the square that is written on is~$x+1$.  We
+do it this way since we don't have subtraction or a predecessor
+function.
+\item \ollabel{rep-stay} For every instruction $\delta(q_i, \sigma) =
+  \tuple{q_j, \sigma', \TMstay}$, the !!{sentence}:
+\begin{multline*}
+\lforall[x][\lforall[y][(
+   (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
+   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
+!A(x, y)))
+\end{multline*}
+\end{enumerate}
+\end{enumerate}
+Let $!T(M, w)$ be the conjunction of all the above !!{sentence}s for Turing
+machine~$M$ and input~$w$
+
+In order to express that $M$ eventually halts, we have to find a
+!!{sentence} that says ``after some number of steps, the transition
+function will be undefined.''  Let $X$ be the set of all pairs
+$\tuple{q, \sigma}$ such that $\delta(q, \sigma)$ is undefined.  Let
+$!E(M, w)$ then be the !!{sentence}
+\[
+\lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
+      X}(\Obj Q_q(x, y) \land \Obj S_\sigma(x, y)))]]
+\]
+
+If we use a Turing machine with a designated halting state~$h$, it
+is even easier: then the !!{sentence}~$!E(M, w)$
+\[
+\lexists[x][\lexists[y][\Obj Q_h(x, y)]]
+\]
+expresses that the machine eventually halts.
+
+\end{document}

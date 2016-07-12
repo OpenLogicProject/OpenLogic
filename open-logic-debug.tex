@@ -7,10 +7,12 @@
 % Lives in main directory
 \newcommand*{\olpath}{.}
 
-\usepackage{gitinfo}
+\usepackage{gitinfo2}
 
 \input{\olpath/sty/open-logic.sty}
 \input{\olpath/sty/open-logic-debug.sty}
+
+\includeenv{editorial}
 
 % all files included with \olimport will have filename & link to GitHub printed
 
@@ -43,7 +45,7 @@ Debug Build
 \textbf{\href{http://openlogicproject.org/}{Open Logic Project}}
 \vskip 4ex
 \Large
-Revision\gitVtags: \gitAbbrevHash\\
+Revision\gitRel: \gitAbbrevHash{} (\gitBranch)\\
 \gitAuthorDate
 
 \end{raggedleft}
@@ -57,11 +59,12 @@ Revision\gitVtags: \gitAbbrevHash\\
 % make links red green
 \hypersetup{urlcolor=[rgb]{0.5,0,0}}
 
+\pagestyle{giheadings}
 
 \tableofcontents*
 
 % include complete text
-\olimport{open-logic}
+\olimport[content]{open-logic}
 
 \end{document}
 

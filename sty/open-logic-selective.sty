@@ -52,6 +52,18 @@
    \docsvlist{#1}%
    \iftagtext}
 
+% \tagrefs - output a list depending on tags.
+\def\startcsvcomma{\def\csvcomma{}}
+\def\tagpair#1/#2{\iftoggle{#1}{\edef\taglist@result{\taglist@result\csvcomma
+      #2}\def\csvcomma{,}}{}}
+  
+\newcommand{\tagrefs}[1]{\startcsvcomma%
+  \def\taglist@input{#1}%
+  \def\taglist@result{}%
+  \def\do##1{\tagpair##1}%
+  \docsvlist{#1}\cref{\taglist@result}}
+  
+  
 % change \begin to take optional tags in <...>
 % if one of the tags is active, behave as \begin otherwise would
 % if one of them is, supress everything until the end of the environment
@@ -67,8 +79,24 @@
              \let\verbatim@addtoline\@gobble
              \let\verbatim@processline\relax
              \let\verbatim@finish\relax
-             \def\@currenvir{#1}
+             \def\@currenvir{#1}%
              \verbatim@}
+
+% \excludeenv -- make the specified environment into a comment environment
+% \includeenv -- restore a previously excluded environment
+
+\def\excludeenv#1{%
+  \expandafter\let\csname orig@#1\expandafter
+  \endcsname\csname #1\endcsname
+  \expandafter\let\csname orig@end#1\expandafter
+  \endcsname\csname end#1\endcsname
+  \expandafter\def\csname #1\endcsname{\supressenv{#1}}
+  \expandafter\let\csname end#1\endcsname\endgroup}
+\def\includeenv#1{%
+  \expandafter\let\csname #1\expandafter
+  \endcsname\csname orig@#1\endcsname
+  \expandafter\let\csname end#1\expandafter
+  \endcsname\csname orig@end#1\endcsname}
 
 % \tagitem<tags><tagged text><untagged text>: typeset an \item if tags active
 

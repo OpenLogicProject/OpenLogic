@@ -1,0 +1,142 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: henkin-expansion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{hen}
+
+\olsection{Henkin Expansion}
+
+\begin{explain}
+Part of the challenge in proving the completeness theorem is that the
+model we construct from a maximally consistent set~$\Gamma$ must make
+all the quantified !!{formula}s in~$\Gamma$ true.  In order to
+guarantee this, we use a trick due to Leon Henkin.  In essence, the
+trick consists in expanding the language by infinitely many constants
+and adding, for each !!{formula} with one free !!{variable} $!A(x)$ a
+formula of the form
+\iftag{prvEx}
+      {$\lexists[x][!A] \lif !A(c)$}
+      {$\lnot\lforall[x][!A] \lif \lnot !A(c)$},
+where $c$ is one of the new !!{constant}s.  When we construct the
+!!{structure} satisfying~$\Gamma$, this will guarantee that each
+\iftag{prvEx}
+{true existential sentence has a witness}
+{false universal sentence has a counterexample}
+among the new constants.
+\end{explain}
+
+\begin{lem}
+\ollabel{defn:lang-exp}
+If $\Gamma$ is consistent in $\Lang L$ and $\Lang L'$ is obtained from
+$\Lang L$ by adding !!a{denumerable} set of new !!{constant}s $\Obj d_1$,
+$\Obj d_2$, \dots, then $\Gamma$ is consistent in~$\Lang L'$.
+\end{lem}
+
+\begin{defn}[Saturated set]
+A set $\Gamma$ of !!{formula}s of a language $\Lang {L}$ is
+\emph{saturated} if and only if for each !!{formula} $!A \in \Frm[L]$
+and !!{variable}~$x$ there is a !!{constant} $c$ such that
+\iftag{prvEx}
+      {$\lexists[x][!A] \lif !A(c) \in \Gamma$}
+      {$\lnot\lforall[x][!A] \lif \lnot !A(c) \in \Gamma$}.
+\end{defn}
+
+The following definition will be used in the proof of the next theorem.
+
+\begin{defn}
+Let $\Lang L'$ be as in \olref{defn:lang-exp}.  Fix an enumeration
+$\tuple{!A_1, x_1}$, $\tuple{!A_2, x_2}$, \dots of all
+!!{formula}-!!{variable} pairs of~$\Lang L'$.  We define the
+!!{sentence}s~$!D_n$ by recursion on~$n$. Assuming that $!D_1$,
+\dots,~$!D_n$ have already been defined, let $c_{n+1}$ be the first
+new !!{constant} among the~$\Obj d_i$ that does not occur in $!D_1$,
+\dots,~$!D_n$, and let $!D_{n+1}$ be the !!{formula} \iftag{prvEx}
+     {$\lexists[x_{n+1}][!A_{n+1}(x_{n+1})] \lif !A_{n+1}(c_{n+1})$}
+     {$\lnot\lforall[x_{n+1}][!A_{n+1}(x_{n+1})] \lif \lnot
+       !A_{n+1}(c_{n+1})$}.  This includes the case where $n = 0$ and
+     the list of previous $!D_i$'s is empty, i.e., $!D_1$ is
+     \iftag{prvEx} {$\lexists[x_1][!A_1] \lif !A_1(c_1)$}
+           {$\lnot\lforall[x_1][!A_1] \lif \lnot !A_1(c_1)$}.
+\end{defn}
+
+\begin{thm}
+\ollabel{thm:henkin}
+Every consistent set~$\Gamma$ can be extended to a saturated
+consistent set~$\Gamma'$.
+\end{thm}
+
+\begin{proof}
+Given a consistent set of sentences~$\Gamma$ in a language~$\Lang{L}$,
+expand the language by adding !!a{denumerable} set of new
+!!{constant}s to form~$\Lang{L'}$.  By the previous Lemma, $\Gamma$ is still
+consistent in the richer language.  Further, let $!D_i$ be as in the
+previous definition: then $\Gamma \cup \{!D_1, !D_2, \dots\}$ is
+saturated by construction.  Let
+\begin{align*}
+\Gamma_0 & = \Gamma \\
+\Gamma_{n+1} & = \Gamma_n \cup \{!D_{n+1} \}
+\end{align*}
+i.e., $\Gamma_n = \Gamma \cup \{ !D_1, \dots, !D_n \}$, and let
+$\Gamma' = \bigcup_{n} \Gamma_n$.  To show that $\Gamma'$ is
+consistent it suffices to show, by induction on~$n$, that each
+set~$\Gamma_n$ is consistent.
+
+The induction basis is simply the claim that $\Gamma_0 = \Gamma$ is
+consistent, which is the hypothesis of the theorem.  For the induction
+step, suppose that $\Gamma_{n-1}$ is consistent but $\Gamma_n =
+\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent.  Recall that $!D_n$~is
+\iftag{prvEx}
+{$\lexists[x_{n}][!A_{n}(x_n)] \lif !A_{n}(c_{n})$}
+{$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$}.
+where $!A(x)$ is a !!{formula} of $\Lang{L'}$ with only the
+variable~$x_n$ free and not containing any !!{constant}s~$c_i$ where
+$i \ge n$.
+
+If $\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent, then $\Gamma_{n-1}
+\Proves \lnot !D_n$, and hence both of the following hold:
+\iftag{prvEx}{
+\[
+\Gamma_{n-1} \Proves \lexists[x_n][!A_n(x_n)]
+\qquad
+\Gamma_{n-1} \Proves \lnot !A_n(c_n)
+\]}{
+\[
+\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n(x_n)]
+\qquad
+\Gamma_{n-1} \Proves !A_n(c_n)
+\]}
+Here $c_n$ does not occur in $\Gamma_{n-1}$ or $!A_n(x_n)$ (remember,
+it was added only with~$!D_n$).  By
+\tagrefs{prfSC/{fol:seq:prv:thm:strong-generalization},prfND/{fol:ntd:prv:thm:strong-generalization}},
+from \iftag{prvEx}
+{$\Gamma \Proves \lnot !A_n(c_n)$}
+{$\Gamma \Proves !A_n(c_n)$},
+we obtain
+\iftag{prvEx}
+{$\Gamma \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
+{$\Gamma \Proves \lforall[x_n][!A_n(x_n)]$}.
+Thus we have that both
+\iftag{prvEx}
+{$\Gamma_{n-1} \Proves \lexists[x_n][!A_n]$ and
+$\Gamma_{n-1} \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
+{$\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n(x_n)]$ and
+$\Gamma_{n-1} \Proves \lforall[x_n][!A_n(x_n)]$},
+so $\Gamma$ itself is inconsistent.
+\iftag{prvEx}
+{(Note that
+\iftag{prvAll}
+{$\lforall[x_n][\lnot !A_n(x_n)] \Proves
+  \lnot\lexists[x_n][!A_n(x_n)]$}
+{$\lforall[x_n][\lnot !A_n]$ is defined as
+  $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)]$ and
+  $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)] \Proves
+  \lnot\lexists[x_n][!A_n(x_n)]$}.)}{}
+Contradiction: $\Gamma_{n-1}$ was supposed to be consistent.  Hence
+$\Gamma_n \cup \{ !D_n\}$ is consistent.
+\end{proof}
+
+\end{document}

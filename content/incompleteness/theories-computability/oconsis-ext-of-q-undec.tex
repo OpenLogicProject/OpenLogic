@@ -1,0 +1,50 @@
+% Part: incompleteness
+% Chapter: theories-computability
+% Section: oconsis-ext-of-q-undec
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{tcp}{oqn}
+
+\olsection{$\omega$-Consistent Extensions of $\Th{Q}$ are Undecidable}
+
+\begin{explain}
+The proof that $\Th{Q}$ is c.e.-complete relied on the fact that any
+sentence provable in $\Th{Q}$ is ``true'' of the natural numbers. The
+next definition and theorem strengthen this theorem, by pinpointing
+just those aspects of ``truth'' that were needed in the proof
+above. Don't dwell on this theorem too long, though, because we will
+soon strengthen it even further. We include it mainly for
+historical purposes: G\"odel's original paper used the notion of
+$\omega$-consistency, but his result was strengthened by replacing
+$\omega$-consistency with ordinary consistency soon after.
+\end{explain}
+
+\begin{defn}
+\ollabel{thm:oconsis-q}
+A theory $\Th{T}$ is $\omega$-consistent if the following holds: if
+$\lexists[x][!A(x)]$ is any sentence and $\Th{T}$ proves $\lnot
+!A(\num 0)$, $\lnot !A(\num 1)$, $\lnot !A(\num 2)$, \dots then $\Th{T}$
+does not prove $\lexists[x][!A(x)]$.
+\end{defn}
+
+\begin{thm}
+  Let $\Th{T}$ be any $\omega$-consistent theory that includes $\Th{Q}$. Then
+  $\Th{T}$ is not decidable.
+\end{thm}
+
+\begin{proof}
+If $\Th{T}$ includes $\Th{Q}$, then $\Th{T}$ represents the computable
+functions and relations. We need only modify the previous proof. As
+above, if $x \in K$, then $\Th{T}$ proves $\lexists[s][!A_T(\num
+  x,\num x, s)]$. Conversely, suppose $\Th{T}$ proves
+$\lexists[s][!A_T(\num x, \num x, s)]$. Then $x$ must be in $K$:
+otherwise, there is no halting computation of machine $x$ on input
+$x$; since $!A_T$ represents Kleene's $T$ relation, $\Th{T}$
+proves $\lnot !A_T(\num x, \num x, \num 0)$, $\lnot !A_T(\num x, \num
+x, \num 1)$, \dots, making $\Th{T}$ $\omega$-inconsistent. 
+\end{proof}
+
+\end{document}

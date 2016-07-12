@@ -1,0 +1,39 @@
+% Part: first-order logic
+
+\documentclass[../../include/open-logic-part]{subfiles}
+
+\begin{document}
+
+\part{First-order Logic}
+
+\begin{editorial}
+  This part covers the metatheory of first-order logic through
+  completeness.  Currently it does not rely on a separate treatment of
+  propositional logic.  It is planned, however, to separate the
+  propositional and quantifier material on semantics and proof theory
+  so that propositional logic can be covered independently.  This will
+  become important especially when material on propositional modal
+  logic will be added, since then one might \emph{not} want to cover
+  quantifiers.  Currently two different proof systems are offered as
+  alternatives, (a version of) sequent calculus and natural deduction.
+  A third alternative treatment based on Enderton-style axiomatic
+  deduction is available in experimental form in the branch
+  ``axiomatic-deduction''.  In particular, this part needs an
+  introduction (\gitissue{69}).
+\end{editorial}
+
+\olimport[syntax-and-semantics]{syntax-and-semantics}
+
+\olimport[models-theories]{models-theories}
+
+\iftag{prfSC}{\olimport[sequent-calculus]{sequent-calculus}}{}
+
+\iftag{prfND}{\olimport[natural-deduction]{natural-deduction}}{}
+
+\olimport[completeness]{completeness}
+
+\olimport[beyond]{beyond}
+
+\OLEndPartHook
+
+\end{document}

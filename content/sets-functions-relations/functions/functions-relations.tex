@@ -1,0 +1,54 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: functions-relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid{sfr}{fun}{rel}
+
+\olsection{Functions and Relations}
+
+\begin{explain}
+A function which maps !!{element}s of~$X$ to !!{element}s of~$Y$
+obviously defines a relation between $X$ and $Y$, namely the relation
+which holds between $x$ and $y$ iff $f(x) = y$.  In fact, we might
+even---if we are interested in reducing the building blocks of
+mathematics for instance---\emph{identify} the function $f$ with this
+relation, i.e., with a set of pairs.  This then raises the question:
+which relations define functions in this way?
+\end{explain}
+
+\begin{defn}[Graph of a function]
+Let $f\colon X \pto Y$ be a partial function. The \emph{graph} of~$f$
+is the relation $R_f \subseteq X \times Y$ defined by
+\[
+R_f = \Setabs{\tuple{x,y}}{f(x) = y}.
+\]
+\end{defn}
+
+\begin{prop}
+Suppose $R \subseteq X \times Y$ has the property that whenever $Rxy$
+and $Rxy'$ then $y = y'$.  Then $R$ is the graph of the partial
+function $f\colon X \pto Y$ defined by: if there is a $y$ such that
+$Rxy$, then $f(x) = y$, otherwise $f(x) \undefined$.  If $R$ is also 
+\emph{serial}, i.e., for each $x \in X$ there is a $y \in Y$ such that
+$Rxy$, then $f$ is total.
+\end{prop}
+
+\begin{proof}
+Suppose there is a $y$ such that $Rxy$.  If there were another $y'
+\neq y$ such that $Rxy'$, the condition on $R$ would be
+violated. Hence, if there is a $y$ such that $Rxy$, that $y$ is
+unique, and so $f$ is well-defined.  Obviously, $R_f = R$ and $f$ is
+total if~$R$ is serial.
+\end{proof}
+
+\begin{prob}
+Suppose $f \colon X \to Y$ and $g \colon Y \to Z$. Show that the graph
+of $(g \circ f)$ is $R_f \mid R_g$.
+\end{prob}
+
+\end{document}

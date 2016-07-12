@@ -1,0 +1,44 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: s-m-n
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{smn}
+\olsection{The $s$-$m$-$n$ Theorem}
+
+\begin{explain}
+The next theorem is known as the ``$s$-$m$-$n$ theorem,'' for a reason
+that will be clear in a moment. The hard part is understanding just
+what the theorem says; once you understand the statement, it will seem
+fairly obvious.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:s-m-n}
+  For each pair of natural numbers $n$ and $m$, there is a primitive
+  recursive function $s^m_n$ such that for every sequence
+  $x$, $a_0$, \dots, $a_{m-1}$, $y_0$ ,\dots, $y_{n-1}$, we have
+  \[
+  \cfind{s^m_n(x, a_0, \dots, a_{m-1})}[n](y_0, \dots, y_{n-1}) \simeq
+  \cfind{x}[m+n](a_0, \dots, a_{m-1}, y_0, \dots, y_{n-1}).
+\]
+\end{thm}
+
+\begin{explain}
+It is helpful to think of $s^m_n$ as acting on \emph{programs}. That
+is, $s^m_n$ takes a program, $x$, for an $(m+n)$-ary function, as well
+as fixed inputs $a_0$, \dots, $a_{m-1}$; and it returns a program,
+$s^m_n(x, a_0, \dots, a_{m-1})$, for the $n$-ary function of the
+remaining arguments. \iftag{TMs}{It you think of $x$ as the description of a
+Turing machine, then $s^m_n(x, a_0, \dots, a_{m-1})$ is the Turing
+machine that, on input $y_0$, \dots,~$y_{n-1}$, prepends
+$a_0$, \dots,~$a_{m-1}$ to the input string, and runs $x$. Each $s^m_n$
+is then just a primitive recursive function that finds a code for the
+appropriate Turing machine.}{}
+\end{explain}
+
+\end{document}
+

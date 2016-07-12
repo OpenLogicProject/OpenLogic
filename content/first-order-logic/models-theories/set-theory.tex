@@ -1,0 +1,150 @@
+% Part: first-order-logic
+% Chapter: models-theories
+% Section: set-theory
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{mat}{set}
+
+\olsection{The Theory of Sets}
+
+Almost all of mathematics can be developed in the theory of sets.
+Developing mathematics in this theory involves a number of things.
+First, it requires a set of axioms for the relation~$\in$.  A number
+of different axiom systems have been developed, sometimes with
+conflicting properties of~$\in$.  The axiom system known as
+$\Log{ZFC}$, Zermelo-Fraenkel set theory with the axiom of choice
+stands out: it is by far the most widely used and studied, because it
+turns out that its axioms suffice to prove almost all the things
+mathematicians expect to be able to prove.  But before that can be
+established, it first is necessary to make clear how we can even
+\emph{express} all the things mathematicians would like to express.
+For starters, the language contains no !!{constant}s or !!{function}s,
+so it seems at first glance unclear that we can talk about particular
+sets (such as $\emptyset$ or $\Nat$), can talk about operations on
+sets (such as $X \cup Y$ and $\Pow{X}$), let alone other
+constructions which involve things other than sets, such as relations
+and functions.
+
+To begin with, ``is an element of'' is not the only relation we are
+interested in: ``is a subset of'' seems almost as important.  But we
+can \emph{define} ``is a subset of'' in terms of ``is an element of.''
+To do this, we have to find a !!{formula}~$!A(x, y)$ in
+the language of set theory which is satisfied by a pair of
+sets~$\tuple{X, Y}$ iff $X \subseteq Y$.  But $X$ is a subset of $Y$
+just in case all !!{element}s of~$X$ are also !!{element}s of~$Y$.  So
+we can define $\subseteq$ by the formula
+\[
+\lforall[z][(z \in x \lif z \in y)]
+\]
+Now, whenever we want to use the relation~$\subseteq$ in a formula, we
+could instead use that formula (with $x$ and $y$ suitably replaced,
+and the bound variable~$z$ renamed if necessary).  For instance,
+extensionality of sets means that if any sets~$x$ and $y$ are
+contained in each other, then $x$ and $y$ must be the same set. This
+can be expressed by $\lforall[x][\lforall[y][((x \subseteq y \land y
+    \subseteq x) \lif x = y)]]$, or, if we replace $\subseteq$ by the
+above definition, by
+\[
+\lforall[x][\lforall[y][((\lforall[z][(z \in x \lif z \in y)] \land
+    \lforall[z][(z \in y \lif z \in x)]) \lif x = y)]].
+\]
+This is in fact one of the axioms of $\Log{ZFC}$, the ``axiom of
+extensionality.''
+
+There is no !!{constant} for $\emptyset$, but we can express ``$x$ is
+empty'' by $\lnot \lexists[y][y \in x]$.  Then ``$\emptyset$ exists''
+becomes the !!{sentence}~$\lexists[x][\lnot \lexists[y][y \in
+    x]]$. This is another axiom of~$\Log{ZFC}$.  (Note that the axiom
+of extensionality implies that there is only one empty set.)  Whenever
+we want to talk about $\emptyset$ in the language of set theory, we
+would write this as ``there is a set that's empty and \dots'' As an
+example, to express the fact that $\emptyset$ is a subset of every
+set, we could write
+\[
+\lexists[x][(\lnot\lexists[y][y \in x] \land \lforall[z][x \subseteq
+    z])]
+\]
+where, of course, $x \subseteq z$ would in turn have to be replaced by
+its definition.
+
+To talk about operations on sets, such has $X \cup Y$ and $\Pow{X}$, we
+have to use a similar trick.  There are no function symbols in the
+language of set theory, but we can express the functional relations $X
+\cup Y = Z$ and $\Pow{X} = Y$ by
+\begin{align*}
+& \lforall[u][((u \in x \lor u \in y) \liff u \in z)]\\
+& \lforall[u][(u \subseteq x \liff u \in y )]
+\end{align*}
+since the !!{element}s of $X \cup Y$ are exactly the sets that are
+either !!{element}s of~$X$ or !!{element}s of~$Y$, and the
+!!{element}s of $\Pow{X}$ are exactly the subsets of~$X$.  However,
+this doesn't allow us to use $x \cup y$ or $\Pow{x}$ as if they were
+terms: we can only use the entire !!{formula}s that define the
+relations $X \cup Y = Z$ and $\Pow{X} = Y$. In fact, we do not know
+that these relations are ever satisfied, i.e., we do not know that
+unions and power sets always exist. For instance, the !!{sentence}
+$\lforall[x][\lexists[y][\Pow{x} = y]]$ is another axiom
+of~$\Log{ZFC}$ (the power set axiom).
+
+Now what about talk of ordered pairs or functions?  Here we have to
+explain how we can think of ordered pairs and functions as special
+kinds of sets.  One way to define the ordered pair $\tuple{x, y}$ is
+as the set $\{\{x\}, \{x, y\}\}$.  But like before, we cannot
+introduce a !!{function} that names this set; we can only define the
+relation $\tuple{x, y} = z$, i.e., $\{\{x\}, \{x, y\}\} = z$:
+\[
+\lforall[u][(u \in z \liff (\lforall[v][(v \in u \liff v = x)] \lor
+  \lforall[v][(v \in u \liff (v = x \lor v = y))]))]
+\]
+This says that the !!{element}s~$u$ of~$z$ are exactly those sets which
+either have $x$ as its only !!{element} or have $x$ and~$y$ as its
+only !!{element}s (in other words, those sets that are either identical
+to $\{x\}$ or identical to $\{x, y\}$).  Once we have this, we can say
+further things, e.g., that $X \times Y = Z$:
+\[
+\lforall[z][(z \in Z \liff \lexists[x][\lexists[y][(x \in
+        X \land y \in Y \land \tuple{x, y} = z)]])]
+\]
+
+A function $f \colon X \to Y$ can be thought of as the relation $f(x)
+= y$, i.e., as the set of pairs~$\Setabs{\tuple{x,y}}{f(x) = y}$. We
+can then say that a set~$f$ is a function from $X$ to $Y$ if (a) it is
+a relation $\subseteq X \times Y$, (b) it is total, i.e., for all $x
+\in X$ there is some $y \in Y$ such that $\tuple{x, y} \in f$ and (c)
+it is functional, i.e., whenever $\tuple{x, y}, \tuple{x, y'} \in f$,
+$y = y'$ (because values of functions must be unique). So ``$f$ is a
+function from $X$ to $Y$'' can be written as:
+\begin{align*}
+ \lforall[u][(u \in f \lif {}] & \lexists[x][\lexists[y][(x \in X \land y \in
+      Y \land \tuple{x, y} = u)]]) \land {}\\
+ \lforall[x][(x \in X \lif {}] &
+      (\lexists[y][(y \in Y \land \mathrm{maps}(f, x, y))] \land {}\\
+& (\lforall[y][\lforall[y'][((\mathrm{maps}(f, x, y) \land
+    \mathrm{maps}(f, x, y')) \lif y = y')]]))
+\end{align*}
+where $\mathrm{maps}(f, x, y)$ abbreviates $\lexists[v][(v \in f \land
+  \tuple{x, y} = v)]$ (this !!{formula} expresses ``$f(x) = y$'').
+
+It is now also not hard to express that $f\colon X \to Y$ is
+!!{injective}, for instance:
+\begin{multline*}
+ f \colon X \to Y \land \lforall[x][\lforall[x'][((x \in X \land x' \in
+     X \land {}]] \\
+ \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
+        x', y))]) \lif x = x')
+\end{multline*}
+A function~$f\colon X \to Y$ is !!{injective} iff, whenever $f$ maps $x, x'
+\in X$ to a single~$y$, $x = x'$.  If we abbreviate this formula as
+$\mathrm{inj}(f, X, Y)$, we're already in a position to state in the
+language of set theory something as non-trivial as Cantor's theorem:
+there is no !!{injective} function from $\Pow{X}$ to $X$:
+\[
+\lforall[X][\lforall[Y][(\Pow{X} = Y \lif
+    \lnot\lexists[f][\mathrm{inj}(f, Y, X)])]]
+\]
+
+
+\end{document}

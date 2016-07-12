@@ -1,0 +1,104 @@
+% Part: computability
+% Chapter: machines-computations
+% Section: configuration
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{tur}{con}
+\olsection{Configurations and Computations}
+
+\begin{explain}
+Recall tracing through the configurations of the even machine earlier.
+The imaginary mechanism consisting of tape, read/write head, and
+Turing machine program is really just in intuitive way of visualizing
+what a Turing machine computation is.  Formally, we can define the
+computation of a Turing machine on a given input as a sequence of
+\emph{configurations}---and a configuration in turn is a sequence of
+symbols (corresponding to the contents of the tape at a given point in
+the computation), a number indicating the position of the read/write
+head, and a state.  Using these, we can define what the Turing machine
+$M$ computes on a given input.
+\end{explain}
+
+\begin{defn}[Configuration]
+A \emph{configuration} of Turing machine $M = \tuple{Q, \Sigma, q_0,
+\delta}$ is a triple $\tuple{C, n, q}$ where
+\begin{enumerate}
+\item $C \in \Sigma^*$ is a finite sequence of symbols from $\Sigma$,
+\item $n \in \Nat$ is a number $< \len{C}$, and
+\item $q \in Q$
+\end{enumerate}
+Intuitively, the sequence~$C$ is the content of the tape (symbols of
+all squares from the leftmost square to the last non-blank or
+previously visited square), $n$ is the number of the square the
+read/write head is scanning (beginning with $0$ being the number of
+the leftmost square), and $q$ is the current state of the machine.
+\end{defn}
+
+\begin{explain}
+The potential input for a Turing machine is a sequence of symbols,
+usually a sequence that encodes a number in some form.  The initial
+configuration of the Turing machine is that configuration in which we
+start the Turing machine to work on that input: the tape contains the
+tape end marker immediately followed by the input written on the
+squares to the right, the read/write head is scanning the leftmost
+square of the input (i.e., the square to the right of the left end
+marker), and the mechanism is in the designated start state~$q_0$.
+\end{explain}
+
+\begin{defn}[Initial configuration]
+The \emph{initial configuration} of $M$ for input $I \in \Sigma^*$ is
+\[
+\tuple{\TMendtape \frown I, 1, q_0}
+\]
+\end{defn}
+
+\begin{explain}
+The~$\frown$ symbol is for \emph{concatenation}---we want to
+ensure that there are no blanks between the left end marker and
+the beginning of the input.
+\end{explain}
+
+\begin{defn}
+We say that a configuration $\tuple{C, n, q}$ \emph{yields
+  $\tuple{C', n', q'}$ in one step} (according to $M$), iff
+\begin{enumerate}
+\item the $n$-th symbol of $C$ is $\sigma$,
+\item the instruction set of $M$ specifies $\delta(q, \sigma) =
+  \tuple{q', \sigma', D}$,
+\item the $n$-th symbol of $C'$ is $\sigma'$, and 
+\item
+\begin{enumerate}
+\item $D = L$ and $n' = n - 1$, or
+\item $D = R$ and $n' = n + 1$, or
+\item $D = N$ and $n' = n$,
+\end{enumerate}
+\item if $n' > \len{C}$, then $\len{C'} = \len{C} + 1$ and the $n'$-th
+  symbol of $C'$ is $\TMblank$.
+\item for all $i$ such that $i < \len{C'}$ and $i \neq n$, $C'(i) = C(i)$,
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+A \emph{run of $M$ on input~$I$} is a sequence $C_i$ of configurations
+of $M$, where $C_0$ is the initial configuration of $M$ for input~$I$,
+and each $C_i$ yields $C_{i+1}$ in one step.
+
+We say that $M$ \emph{halts on input $I$ after $k$ steps} if $C_k =
+\tuple{C, n, q}$, the $n$th symbol of $C$ is~$\sigma$, and $\delta(q,
+\sigma)$ is undefined.  In that case, the \emph{output} of~$M$ for
+input $I$ is~$O$, where $O$ is a string of symbols not beginning or
+ending in~$\TMblank$ such that $C = \TMendtape \concat \TMblank^i
+\concat O \concat \TMblank^j$ for some~$i, j \in \Nat$.
+\end{defn}
+
+\begin{explain}
+According to this definition, the output~$O$ of~$M$ always begins and
+ends in a symbol other than~$\TMblank$, or, if at time~$k$ the entire
+tape is filled with~$\TMblank$ (except for the leftmost~$\TMendtape$),
+$O$ is the empty string.
+\end{explain}
+
+\end{document}

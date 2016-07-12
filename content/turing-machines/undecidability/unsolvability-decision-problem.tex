@@ -1,0 +1,39 @@
+% Part: turing-machines 
+% Chapter: undecidability 
+% Section: unsolvability-decision-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{und}{uns} 
+\olsection{The Decision Problem is Unsolvable}
+
+\begin{thm}
+\ollabel{thm:decision-prob}
+The decision problem is unsolvable.  
+\end{thm}
+
+\begin{proof}
+Suppose the decision problem were solvable, i.e., suppose there were a
+Turing machine~$D$ of the following sort. Whenever $D$ is started on a
+tape that contains a !!{sentence}~$!B$ of first-order logic as input,
+$D$ eventually halts, and outputs $1$ iff $!B$ is valid and $0$
+otherwise.  Then we could solve the halting problem as follows. We
+construct a Turing machine~$E$ that, given as input the number~$e$ of
+Turing machine~$M_e$ and input~$w$, computes the corresponding
+!!{sentence}~$!T(M_e, w) \lif !E(M_e, w)$ and halts, scanning the
+leftmost square on the tape.  The machine $E \concat D$ would then,
+given input $e$ and $w$, first compute~$!T(M_e, w) \lif !E(M_e, w)$
+and then run the decision problem machine~$D$ on that input.  $D$
+halts with output~$1$ iff $!T(M_e, w) \lif !E(M_e, w)$ is valid and
+outputs~$0$ otherwise. By \olref[ver]{lem:halt-if-valid} and
+\olref[ver]{lem:valid-if-halt}, $!T(M_e, w) \lif !E(M_e, w)$ is valid
+iff $M_e$ halts on input~$w$. Thus, $E\concat D$, given input $e$ and
+$w$ halts with output~$1$ iff $M_e$ halts on input~$w$ and halts with
+output~$0$ otherwise. In other words, $E \concat D$ would solve the
+halting problem.  But we know, by \olref[hal]{thm:halting-problem},
+that no such Turing machine can exist.
+\end{proof}
+
+\end{document}

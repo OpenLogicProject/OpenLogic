@@ -1,0 +1,73 @@
+% Part: computability
+% Chapter: lambda-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{lam}{int}
+\olsection{Introduction}
+
+The lambda calculus was originally designed by Alonzo Church in the
+early 1930s as a basis for constructive logic, and \emph{not} as a
+model of the computable functions. But soon after the Turing
+computable functions, the recursive functions, and the general
+recursive functions were shown to be equivalent, lambda computability
+was added to the list. The fact that this initially came as a small
+surprise makes the characterization all the more interesting.
+
+Lambda notation is a convenient way of referring to a function
+directly by a symbolic expression which defines it, instead of
+defining a name for it. Instead of saying ``let $f$ be the function
+defined by $f(x) = x + 3$,'' one can say, ``let $f$ be the function
+$\lambd[x][(x + 3)]$.''  In other words, $\lambd[x][(x+3)]$ is just a
+\emph{name} for the function that adds three to its argument. In this
+expression, $x$ is a dummy variable, or a placeholder: the same
+function can just as well be denoted by $\lambd[y][(y + 3)]$. The
+notation works even with other parameters around. For example, suppose
+$g(x, y)$ is a function of two variables, and $k$ is a natural
+number. Then $\lambd[x][g(x,k)]$ is the function which maps any~$x$
+to~$g(x, k)$.
+
+This way of defining a function from a symbolic expression is known as
+\emph{lambda abstraction}. The flip side of lambda abstraction is
+\emph{application}: assuming one has a function $f$ (say, defined on
+the natural numbers), one can \emph{apply} it to any value, like 2. In
+conventional notation, of course, we write~$f(2)$ for the result.
+
+What happens when you combine lambda abstraction with application?
+Then the resulting expression can be simplified, by ``plugging'' the
+applicand in for the abstracted variable. For example,
+\[
+(\lambd[x][(x + 3)])(2)
+\]
+can be simplified to~$2 + 3$.
+
+Up to this point, we have done nothing but introduce new notations for
+conventional notions. The lambda calculus, however, represents a more
+radical departure from the set-theoretic viewpoint. In this framework:
+\begin{enumerate}
+\item Everything denotes a function.
+\item Functions can be defined using lambda abstraction.
+\item Anything can be applied to anything else.
+\end{enumerate}
+For example, if $F$ is a term in the lambda calculus, $F(F)$ is always
+assumed to be meaningful. This liberal framework is known as the
+\emph{untyped} lambda calculus, where ``untyped'' means ``no
+restriction on what can be applied to what.''
+
+\begin{digress}
+There is also a \emph{typed} lambda calculus, which is an important
+variation on the untyped version. Although in many ways the typed
+lambda calculus is similar to the untyped one, it is much easier to
+reconcile with a classical set-theoretic framework, and has some very
+different properties.
+
+Research on the lambda calculus has proved to be central in
+theoretical computer science, and in the design of programming
+languages. LISP, designed by John McCarthy in the 1950s, is an early
+example of a language that was influenced by these ideas.
+\end{digress}
+
+\end{document}

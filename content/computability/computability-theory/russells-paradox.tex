@@ -1,0 +1,75 @@
+% Part: computability
+% Chapter: computability-theory
+% Section: russells-paradox
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{thy}{rus}
+\olsection{Comparison with Russell's Paradox}
+
+It is instructive to compare and contrast the arguments in
+this section with Russell's paradox:
+\begin{enumerate}
+\item Russell's paradox: let $S = \Setabs{x}{x \notin x}$. Then $x
+  \in S$ if and only if $x \notin S$, a contradiction.
+
+  \emph{Conclusion:} There is no such set~$S$. Assuming the existence of a
+  ``set of all sets'' is inconsistent with the other axioms of set
+  theory.
+
+\item A modification of Russell's paradox: let $F$ be the ``function''
+  from the set of all functions to $\{ 0, 1 \}$, defined by
+  \[
+  F(f) =
+  \begin{cases}
+    1 & \text{if $f$ is in the domain of $f$, and $f(f) = 0$} \\
+    0 & \text{otherwise}
+  \end{cases}
+  \]
+  A similar argument shows that $F(F) = 0$ if and only if $F(F) = 1$,
+  a contradiction.
+
+  \emph{Conclusion:} $F$ is not a function. The ``set of all
+  functions'' is too big to be the domain of a function.
+
+\item The diagonalization argument: let $f_0$, $f_1$, \dots be the
+  enumeration of the partial computable functions, and let $G \colon \Nat \to
+  \{ 0, 1 \}$ be defined by
+  \[
+  G(x) =
+  \begin{cases}
+    1 & \text{if $f_x(x)\downarrow = 0$} \\
+    0 & \text{otherwise}
+  \end{cases}
+  \]
+  If $G$ is computable, then it is the function $f_k$ for some
+  $k$. But then $G(k) = 1$ if and only if $G(k) = 0$, a contradiction.
+
+  \emph{Conclusion:} $G$ is not computable. Note that according to the
+  axioms of set theory, $G$ is still a function; there is no paradox
+  here, just a clarification.
+\end{enumerate}
+
+That talk of partial functions, computable functions,
+partial computable functions, and so on can be confusing. The set of
+all partial functions from $\Nat$ to $\Nat$ is a big collection of
+objects. Some of them are total, some of them are computable, some are
+both total and computable, and some are neither. Keep in mind that
+when we say ``function,'' by default, we mean a total function. Thus we
+have:
+\begin{enumerate}
+\item computable functions
+\item partial computable functions that are not total
+\item functions that are not computable
+\item partial functions that are neither total nor computable
+\end{enumerate}
+To sort this out, it might help to draw a big square representing all
+the partial functions from $\Nat$ to $\Nat$, and then mark off two
+overlapping regions, corresponding to the total functions and the
+computable partial functions, respectively. It is a good exercise to
+see if you can describe an object in each of the resulting regions in
+the diagram.
+
+\end{document}
