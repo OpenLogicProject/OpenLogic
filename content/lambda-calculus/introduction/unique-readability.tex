@@ -32,47 +32,47 @@ formation rules.
   Left as exercise; you may want to use \olref{lem:term-start}.
 \end{proof}
 
-\begin{prop}[Unique Readability]
+\begin{prop}[Unique Readability] \ollabel{prop:unq}
 There is a unique formation for each term. In other words, if a term
-$@M$ is formed by a formation, then it's the only formation that can form this term.
+$M$ is formed by a formation, then it's the only formation that can form this term.
 \end{prop}
 
 \begin{proof}
   We prove this by induction on the formation of terms. 
 
   \begin{enumerate}
-    \item[\rule{VAR}] $@M$ must be of the form
-      $@x$, where $@x$ is some variable. Since the results of other two
+    \item[\rule{VAR}] $M$ must be of the form
+      $x$, where $x$ is some variable. Since the results of other two
       formations always start with parentheses, they cannot be used to
-      construct $@M$; Thus, the formation of $@M$ must be a single step
+      construct $M$; Thus, the formation of $M$ must be a single step
       of \rule{VAR}, which is this very formation.
-    \item[\rule{ABS}] $@M$ must be of the
-      form $(\lambd[@x][@N])$, where $@x$ is some variable and $@N$ is a
+    \item[\rule{ABS}] $M$ must be of the
+      form $(\lambd[x][N])$, where $x$ is some variable and $N$ is a
       term constructed from rules. By I.H. we know that formation of
-      $@N$ is unique. Variable couldn't have construct it
+      $N$ is unique. Variable couldn't have construct it
       because the result of that rule is a single variable;
-      Neither could \rule{APP} because of \olref{app-start}. Thus
-      this formation of $@M$, namely the unique formation of $@N$
+      Neither could \rule{APP} because of \olref{lem:app-start}. Thus
+      this formation of $M$, namely the unique formation of $N$
       followed by \rule{ABS}, is unique.
 
-    \item[\rule{APP}] $@M$ must be of the form
-      $(@P@Q)$, where $@P$ and $@Q$ are terms constructed from rules. By
-      I.H. we know that formations of $@P$ and $@Q$ is unique. \rule{VAR} and
+    \item[\rule{APP}] $M$ must be of the form
+      $(PQ)$, where $P$ and $Q$ are terms constructed from rules. By
+      I.H. we know that formations of $P$ and $Q$ is unique. \rule{VAR} and
       \rule{ABS} couldn't have construct it with the same reason in the 
-      last case. Thus this formation of $@M$, namely the unique
-      formations of $@P$ and $@Q$ followed by \rule{APP}, is unique.
+      last case. Thus this formation of $M$, namely the unique
+      formations of $P$ and $Q$ followed by \rule{APP}, is unique.
   \end{enumerate}
 \end{proof}
 
 A more readable paraphrase of the above proposition is as follows:
 \begin{prop}[Unique Readability (readable)]
-  A term $@M$ can only be one of the following forms:
+  A term $M$ can only be one of the following forms:
   \begin{enumerate}
-    \item[\rule{VAR}] $@x$, where $@x$ is a variable uniquely determined by $@M$.
-    \item[\rule{ABS}] $(\lambd[@x][@N])$, where $@x$ is a variable and $@N$ is
-      another term, both of which is uniquely determined by $@M$.
-    \item[\rule{APP}] $(@P@Q)$, where $@P$ and $@Q$ are two terms uniquely
-      determined by $@M$.
+    \item[\rule{VAR}] $x$, where $x$ is a variable uniquely determined by $M$.
+    \item[\rule{ABS}] $(\lambd[x][N])$, where $x$ is a variable and $N$ is
+      another term, both of which is uniquely determined by $M$.
+    \item[\rule{APP}] $(PQ)$, where $P$ and $Q$ are two terms uniquely
+      determined by $M$.
   \end{enumerate}
 \end{prop}
 

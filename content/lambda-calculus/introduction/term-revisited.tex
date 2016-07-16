@@ -1,0 +1,98 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: term-revisited
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{int}{tr}
+\olsection{Term Revisited}
+
+Because the $\alpha$-equivalence comes nearly as granted, we now
+identify terms that are $\alpha$-equivalent, as follows:
+
+From now on, when we write a term, what we mean is the
+$\alpha$-equivalance class (\olref[sfr][rel][prp]{sec}) it's in. For
+example, we write $\lambd[a][\lambd[b][a c]]$ for the
+$\alpha$-equivalence class containing terms like
+$\lambd[a][\lambd[b][a c]]$, $\lambd[b][\lambd[a][b z]]$, etc.
+
+Also, while in previous sections letters such as $N, Q$ are used to
+denote a term, from now on we use them to denote a class,
+and it's these classes instead of terms that
+will be our subjects of study in the rest of the part. Letters such as
+$x, y$ continues to denote a variable.
+
+We also adopt a notation $\rep{M}$ to denote a random member in the
+class $M$ (the selection does not matter), and $\rep{M}[0], \rep{M}[1], etc. $ if we need more than
+one member.
+
+Besides, we reuse the notations from terms to simplify our wording. We
+have following definition on classes:
+\begin{defn}
+  \begin{enumerate}
+  \item $\lambd[x][N]$ is defined to the class containing
+    $\lambd[x][\rep{N}]$.
+  \item $PQ$ is defined to be the class containing $\rep{P}\rep{Q}$.
+  \end{enumerate}
+\end{defn}
+
+It's not hard to see that they are well defined, because
+$\alpha$-conversion is compatible.
+
+\begin{defn} \ollabel{def:fv}
+  The free variable of an $\alpha$-equivalence class $M$, or $FV(M)$, is defined to be $FV(\rep{M})$.
+\end{defn}
+
+This definition is well defined because $FV(\rep{M}[0]) = FV(\rep{M}[1])$, as shown in \olref[alp]{thm:fv}.
+
+We also reuse the notation of substition into classes:
+\begin{defn} \ollabel{def:sub}
+  The substitution of $R$ for $y$ in $M$, or $\Subst{M}{R}{y}$, is
+  defined to be $\Subst{\rep{M}}{\rep{R}}{y}$, for any $\rep{M}$ and
+  $\rep{R}$ making the substition defined.
+\end{defn}
+
+This definition is well defined as shown in \olref[alp]{cor:sub}.
+
+Note how this definition significantly simplifies our reasoning. For
+example:
+\begin{align}
+  &\Subst{\lambd[x][x]}{y}{x} \ollabel{eq:1}\\
+  =&\Subst{\lambd[z][z]}{y}{x} \ollabel{eq:2}\\
+  =&\lambd[z][\Subst{z}{y}{x}] \\
+  =&\lambd[z][z]
+\end{align}
+
+\olref{eq:1} is undefined if we still regard it as substitution on
+terms; but as mentioned earlier in this section, we now consider a
+written term as the classes it's in, so it's actually a substitution
+on classes, which is why \olref{eq:2} can happen: we can replace
+$\lambd[x][x]$ with $\lambd[z][z]$ because they belong to the same
+class, so the meaning is not damaged.
+
+For the same reason, from now on we will assume that the
+representatives we choose always satisfies the conditions needed for
+substitution. For example, when we see $\Subst{\lambd[x][N]}{R}{y}$,
+we will assume the representative $\lambd[x][N]$ is well chosen that
+$x \neq y$ and $x \notin FV(R)$ - because otherwise we can choose another
+representative satisfying these conditions and it's still the same
+class we are reasoning about.
+
+Now we can say goodbye to terms and embrace classes. It's a bit
+strange to call $\lambd[x][x]$ a ``class'', let's call them
+$\Lambda$-terms (or simply ``terms'' in the rest of the part) from now on,
+to distinguish them from $\lambda$-terms that we are familiar with. 
+
+\begin{editorial}
+  We cannot say goodbye to terms yet: the whole definition of
+  $\Lambda$-terms is based on $\lambda$-terms, and we haven't provided
+  a method to define functions on $\Lambda$-terms, which means all
+  such functions have to be firstly defined  on $\lambda$-terms, and
+  then ``projected'' to $\Lambda$-terms, as we did for substitutions.
+  However we assume the reader can intuitively understand how we can
+  define functions on $\Lambda$-terms, which is why we will give a
+  recursive definition in \olref[cr][pr]{cd}.
+\end{editorial}
+\end{document}

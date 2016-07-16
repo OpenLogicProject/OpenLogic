@@ -15,34 +15,26 @@ namely  $\times g 9.8$ should be the result of ``simplifying'' the first term, i
 ``simplify'' means anything. The $\beta$-reduction captures this
 intuition formally.
 
-\begin{defn}[$\beta$-contraction]
-  If a term $@P$ contains an occurrence of $(\lambd[@x][@M])N$ (called \emph{redex}), and $\Subst{@M}{@N}{@x}$
-  is defined, then replacing this occurrences by 
-  \begin{equation*}
-    \Subst{@M}{@N}{@x}
-  \end{equation*}
-  which results in $@Q$, is called \emph{contracting the redex}, and we
-  say $@P ~\beta\text{-contracts to} ~@Q$, or $@P \redone @Q$. 
+\begin{defn}[$\beta$-contraction, $\redone$] \ollabel{def}
+  The $\beta$-contraction ($\redone$) is the smallest compatible
+  relation on terms, satisfying the following condition:
+  \begin{align*}
+    (\lambd[x][N])Q \redone \Subst{N}{Q}{x}
+  \end{align*}
 \end{defn}
 
-\begin{defn}[$\beta$-reduction]
- If $@P$ can be changed to $@Q$ by a finite (possibly empty) series of
-  $\beta$-contractions and $\alpha$-conversions, then we say $@P
-  ~\beta\text{-reduces to}~@Q$, or $@P \red @Q$.
+\begin{prob}
+  Spell out the equivalent induction definitions of $\beta$-contraction as we
+  did for Change of bound variable in \olref[alp]{def}.
+\end{prob}
+  
+\begin{defn}[$\beta$-reduction, $\red$] \ollabel{def}
+  $\beta$-reduction ($\red$) is the smallest reflexitive, transitive
+  relation on terms containing $\redone$.
 \end{defn}
-
-Note that a $\beta$-reduction contains not only $\beta$-contractions,
-but also $\alpha$-conversions. The reason is that we can't contract
-some redex with only $\beta$-contraction because $\Subst{@M}{@N}{@x}$ is
-undefined (but it still makes sense to contract them); but we can $\alpha$-conversion is allowed. For example,
-$(\lambd[x][\lambd[y][x]])y$ is such a redex since
-$\Subst{\lambd[y][x]}{y}{x}$ is undefined. However, we can first
-$\alpha$-convert it to $(\lambd[x][\lambd[z][x]])y$, whose contraction
-$\Subst{\lambd[z][x]}{y}{x}$ is defined and the result is
-$\lambd[z][y]$. 
 
 \begin{defn}[$beta$-normal]
-A term that cannot be $\beta$-reduced any further is called \emph{$\beta$-irreducible}, or
+A term that cannot be $\beta$-contracted any further is called \emph{$\beta$-irreducible}, or
 $\beta$-normal. We will say ``reduces'' instead of ``$\beta$-reduces,''
 etc., when the context is clear.
 \end{defn}
@@ -68,11 +60,11 @@ Let us consider some examples.
 \item Also, some terms can be reduced in more than one way; for
   example,
 \[
-(\lambd[x][(\lambd[y][yx]) z)] v \redone (\lambd[y][yv]) z
+(\lambd[x][(\lambd[y][yx]) z]) v \redone (\lambd[y][yv]) z
 \]
 by contracting the outermost application; and
 \[
-(\lambd[x][(\lambd[y][yx]) z)] v \redone (\lambd[x][zx]) v
+(\lambd[x][(\lambd[y][yx]) z]) v \redone (\lambd[x][zx]) v
 \]
 by contracting the innermost one. Note, in this case, however, that
 both terms further reduce to the same term, $zv$.
@@ -85,14 +77,14 @@ illustrates a deep and important property of the lambda calculus, known as the
 \begin{digress}
   In general cases there is more than one way to $\beta$-reduce a
   term, thus many reduction strategies have been invented, among which
-  the most common is \emph{natural}.
+  the most common is \emph{natural strategy}.
   
   Natural strategy always contracts the \emph{left-most}
   redex, where the position of a redex is defined as its starting
   point in the term.
 
   Natural strategy has a useful property that if a term can be reduced
-  to normal form in some order iff it can be reduced to normal form in
+  to normal form by some strategy iff it can be reduced to normal form in
   natural strategy. In the rest of the text we will use natural
   reduction unless otherwise specified. 
 \end{digress}

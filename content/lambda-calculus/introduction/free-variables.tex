@@ -11,14 +11,14 @@
 
 As mentioned earlier, $\lambda$-calculus is about functions, and
 lambda abstraction is where functins arises. When we
-write $\lambd[@x][@M]$, we can refer to the~!!{parameter} $@x$ in $\lambd[@x]$ by
-occurrences of variable $@x$ in $@M$. $@M$ is called the
-scope of $\lambd[@x]$, and these occurrences are said to be \emph{bound} by this
-$\lambd[@x]$. 
+write $\lambd[x][M]$, we can refer to the~!!{parameter} $x$ in $\lambd[x]$ by
+occurrences of variable $x$ in $M$. $M$ is called the
+scope of $\lambd[x]$, and these occurrences are said to be \emph{bound} by this
+$\lambd[x]$. 
 
 \begin{defn}[Scope]
-For a particular occurrence of $\lambd[@x][@M]$ in a term $@P$, the
-occurrence of $@M$ is called the scope of the occurrence of $\lambd[@x]$
+For a particular occurrence of $\lambd[x][M]$ in a term $P$, the
+occurrence of $M$ is called the scope of the occurrence of $\lambd[x]$
 on the left.
 \end{defn}
 
@@ -27,7 +27,7 @@ on the left.
 \end{prob}
 
 \begin{defn}[Bound occurrences of a variable]
-  An occurrence of variable $@x$ is bound if it's in the scope of a $\lambd[@x]$.
+  An occurrence of variable $x$ is bound if it's in the scope of a $\lambd[x]$.
 \end{defn}
 
 \begin{ex}
@@ -40,8 +40,8 @@ on the left.
   bound recpectively?
 \end{prob}
 
-Note that not all occurrences of $@x$ in the subterm necessarily refers to this particular argument,
-since there can be another but inner $\lambd[@x]$, as shown in the
+Note that not all occurrences of $x$ in the subterm necessarily refers to this particular argument,
+since there can be another but inner $\lambd[x]$, as shown in the
 following example. 
 \begin{ex}
 In $\lambd[x][\lambd[x][x]]$, while the variable $x$ is in the
@@ -50,7 +50,7 @@ might expect. We may say the inner abstraction shadows the outer
 abstraction.
 \end{ex}
 
-We have only seen examples only using variable $@x$ in the scope of $\lambd[@x]$, 
+We have only seen examples only using variable $x$ in the scope of $\lambd[x]$, 
 what happens when we break it?
 \begin{ex}
   $\lambd[x][x y]$, while the occurrence of $x$ refers to the~!!{argument} of $\lambd[x]$, $y$ is not in a scope
@@ -59,21 +59,21 @@ what happens when we break it?
 
 In the last example, $y$ is called \emph{free}. 
 \begin{defn}[Free occurrences of a variable]
-  An occurrence of a variable $@x$ in a term $@P$ is free if it's not bound, i.e., not in the scope of any
-  $\lambd[@x]$ in $@P$.
+  An occurrence of a variable $x$ in a term $P$ is free if it's not bound, i.e., not in the scope of any
+  $\lambd[x]$ in $P$.
 \end{defn}
 
 
-For a term $@P$, we can check all variable occurrences in it and get a set of free
-variables. This set is denoted by $FV(@P)$ with a natural definition
+For a term $P$, we can check all variable occurrences in it and get a set of free
+variables. This set is denoted by $FV(P)$ with a natural definition
 as follows:
 
-\begin{defn}[Free variables]
+\begin{defn}[Free variables] \ollabel{def}
   The set of free variables of a term is defined inductively by:
   \begin{align} 
-    FV(@x) &= \{@x\} \tag{\rule{VAR}} \ollabel{eq:1} \\
-    FV(\lambd[@x][@N]) &= FV(@N) \setminus \{@x\}   \tag{\rule{ABS}}  \ollabel{eq:2} \\
-    FV(@P@Q) &= FV(P) \cup FV(Q) \tag{\rule{APP}} \ollabel{eq:3}
+    FV(x) &= \{x\} \ollabel{def:1} \\
+    FV(\lambd[x][N]) &= FV(N) \setminus \{x\}    \ollabel{def:2} \\
+    FV(PQ) &= FV(P) \cup FV(Q) \ollabel{def:3}
   \end{align}
 \end{defn}
 
@@ -107,22 +107,22 @@ in this case is called a \emph{closed term}.
   A term with no free variable is a closed term.
 \end{defn}
 
-\begin{ex}
+\begin{explain}
   Reader may find the term $\lambd[m][\times g m]$ exotic as it's not
   a term at all: we can't have the $\times$ symbol in terms, and also,
   how can we have variables representing real numbers? But we will see
-  in \olref[lc][rep] that both multiplication function and real
+  in the next chapter that both multiplication function and real
   numbers can be defined in the forms of terms. Thus it's not a big
   problem and reader should pretend that they are replaced by very
   long closed terms.
-\end{ex}
+\end{explain}
 
 \begin{lem}
   \begin{enumerate}
-    \item \ollabel{lem:abs} If $@y \neq @x$, then $@y \in FV(\lambd[@x][@N])$ iff $@y \in
-    FV(@N)$.
-    \item \ollabel{lem:app} $@y \in FV(@P@Q)$ iff $@y \in FV(@P)$ or
-      $@y \in FV(@Q)$.
+    \item \ollabel{lem:abs} If $y \neq x$, then $y \in FV(\lambd[x][N])$ iff $y \in
+    FV(N)$.
+    \item \ollabel{lem:app} $y \in FV(PQ)$ iff $y \in FV(P)$ or
+      $y \in FV(Q)$.
     \end{enumerate}
 \end{lem}
 \begin{proof}

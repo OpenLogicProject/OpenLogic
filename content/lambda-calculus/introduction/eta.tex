@@ -10,24 +10,32 @@
 \olsection{$\eta$-conversion}
 
 There is another relation on $\lambda$ terms. In
-\olref[lc][int][fv] we used the example $\lambd[g][\lambd[m][\times g
+\olref[fv]{sec} we used the example $\lambd[g][\lambd[m][\times g
 m]]$. If we look at it carefully it's a function that accepts two~!!{argument}s
 $g$ and $m$, and applies $\times$ on them. It seems to be another
 multiplication function. We use $\eta$-reduction (and $\eta$-extension) to
 capture this idea.
 
-\begin{defn}[$\eta$-reduction]
-  If a term $@P$ contains an occurrence of $\lambda[@x][@M @x]$, and $@x
-  \notin FV(@M)$, then replacing this occurrence by $@M$ is called \emph{$\eta$-contraction}. If $@P$ can be changed to
-  $@Q$ by a finite (possibly empty) series of such steps, then we say
-  $@P ~\alpha\text{-reduces to}~@Q$.
+\begin{defn}[$\eta$-contraction, $\eredone$]
+  $\eta$-contraction ($\eredone$) is the smallest compatible relation
+  on terms satisfying the following condition:
+  \begin{align*}
+    &\lambd[x][f x] \eredone f
+  \end{align*}
+\end{defn}
+
+\begin{defn}[$\eta$-reduction, $\ered$]
+  $eta$-reduction, $\ered$ is the smallest transitive relation on terms
+  containing $eredone$.
 \end{defn}
 
 \begin{prob}
   There is a notion of \emph{$\eta$-expansion} kind of symmetric to
-  $eta$-reduction, define it. The title of the section,
-  \emph{$\eta$-conversion} is the combination of both, define it.
+  $eta$-reduction, define it.
 \end{prob}
 
+\begin{defn}[$\eta$-equivalence, $\eeq$]
+  $\eta$-equivalence is the smallest reflexive, symmetric, transitive, compatible relation on terms containing $\eredone$.
+\end{defn}
 
 \end{document}
