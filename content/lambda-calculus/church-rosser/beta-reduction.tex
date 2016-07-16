@@ -1,0 +1,84 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{cr}{bet}
+
+\olsection{$\beta$-reduction}
+
+In this section we will prove $\beta$-reduction ($\red$) also has
+Church-Rosser property based on conclusions in last section.
+
+\begin{lem}\ollabel{lem:one-par}
+  If $M \redone M'$, then $M \redpar M'$.
+\end{lem}
+\begin{proof} By induction on the derivation of $M \redone M'$.
+  \begin{enumerate}
+  \item If the last rule is \olref[int][bet]{def:4}, then $M$ is
+    $(\lambd[x][N])Q$, $M'$ is $\Subst{N}{Q}{x}$, for some
+    $x, N, Q$. Since $N \redpar N$ and $Q \redpar Q$ by
+    \olref[par]{thm:refl}, we immediately have $(\lambd[x][N])Q
+    \redpar \Subst{N}{Q}{x}$ by \olref[par]{def:4}.
+  \item The other cases are left as exercises.
+  \end{enumerate}
+\end{proof}
+
+\begin{lem}\ollabel{lem:par-red}
+  If $M \redpar M'$, then $M \red M'$.
+\end{lem}
+\begin{proof} Induction on the derivation of $M \redpar M'$.
+  \begin{enumerate}
+  \item Left as exercise.
+  \item If the last rule is \olref[pr]{def:2}, then $M$ is 
+    $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ for some $x, N, N'$, where
+    $N \redpar N'$. By I.H. we have $N \red N'$, then obviously
+    $\lambd[x][N] \red \lambd[x][N']$ (by the same series of
+    $\redone$ as $N \red N'$).
+  \item If the last rule is \olref[pr]{def:3}, then $M$ is 
+    $PQ$ and $M'$ is $P'Q'$ for some $P, Q, P', Q'$, where $P \redpar P'$
+    and $Q \redpar Q'$. Now by I.H. we have $P \red P'$ and $Q \red
+    Q'$, then $PQ \red P'Q'$ by the series of $P \red P'$ followed
+    by the series of $Q \red Q'$.
+  \item If the last rule is \olref[pr]{def:4}, then $M$ is
+    $(\lambd[x][N])Q$ and $M'$ is  $\Subst{N'}{Q'}{x}$ for some
+    $x, N, M', Q, Q'$, where $N \redpar N'$ and $Q \redpar Q'$. By I.H. we get $Q \red
+    Q'$ and $N \red N'$, then $(\lambd[x][N])Q \red
+    \Subst{N'}{Q'}{x}$ by the series of $N \red N'$ followed by the
+    series of $Q \red Q'$ and finally contraction of
+    $(\lambd[x][N'])Q'$.
+  \end{enumerate}
+\end{proof}
+
+
+\begin{thm}[Church-Rosser property of  $\red$]
+  $\red$ satisfies Church-Rosser property.
+\end{thm}
+\begin{proof}
+  If $M \red P$ by $m$ steps, and $M \red Q$ by $n$ steps.  Suppose $M \redone P_1 \redone \ldots \redone P_m$, $M \redone Q_1
+  \redone \ldots \redone Q_n$. By \olref{lem:one-par} we can replace
+  $\redone$ with $\redpar$.
+  
+  we will prove this theorem by constructing a grid $N$ of terms, whose height is $m + 1$ and width $n + 1$. We use $N_{i,j}$ to denote the terms
+  on the $i$-th row and $j$-th column.
+
+  $N_{i,j}$ is defined as follows:
+  \begin{align*}
+    N_{0,0} &= M \\
+    N_{i,0} &= P_i && 1 \le i \le m \\
+    N_{0,j} &= Q_j && 1 \le j \le n \\
+    otherwise: & \\
+    N_{i,j} &= R && N_{i-1,j} \redpar R, N_{i,j-1} \redpar R \\
+    & && \text{by \olref[par]{thm:cr}}
+  \end{align*}
+
+  Now we have $N_{m,0} \redpar \ldots \redpar N_{m,n}$ and $N_{0,n}
+  \redpar \ldots \redpar N_{m,n}$. Note $N_{m,0}$ is $P$ and $N_{0,n}$
+  is $Q$, also we can replace $\redpar$ with $\red$ by
+  \olref{lem:par-red}. By transitivity of $\red$ the theorem follows.
+\end{proof}
+
+\end{document}
