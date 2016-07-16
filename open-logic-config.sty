@@ -201,6 +201,11 @@
 \DeclareDocumentCommand \Subst { m m m } {
   #1[#2/#3]}
 
+% ### pre-Substitution
+
+\DeclareDocumentCommand \pSubst { m m m } {
+  #1[#2/#3]^{-}
+}
 
 
 % ### The satisfaction/truth relation 
@@ -322,6 +327,18 @@
         { \equiv_{#2} }}
 }
 
+\DeclareDocumentCommand \eqc { m o } {
+  \IfNoValueTF {#2}
+  {[#1]}
+  {[#1]_{#2}}
+}
+
+\DeclareDocumentCommand \rep { m o } {
+  \IfNoValueTF {#2}
+  {\underline{#1}}
+  {{\underline{#1}}_{#2}}
+}
+
 % - `\iso[/][p]`: relation of being (partially) isomorphic
 
 \DeclareDocumentCommand \iso { t{/} o } {
@@ -396,11 +413,45 @@
 
 % - `\redone`: one-step reduction
 
-\DeclareDocumentMacro \redone {\mathrel{\triangleright_1}}
+\DeclareDocumentCommand \redone { o } {
+  \IfNoValueTF {#1}
+  {\xrightarrow{}}
+  {\xrightarrow{#1}}
+}
+
+\DeclareDocumentMacro \aconvone {\redone[\alpha]}
+
+\DeclareDocumentMacro \eredone {\redone[\eta]}
 
 % - `\red`: reduction
 
-\DeclareDocumentMacro \red {\triangleright}
+\DeclareDocumentCommand \xrightarrowdbl { o m } {
+  \IfNoValueTF {#1}
+  {\xrightarrow{#2} \mathrel{\mkern-14mu}\rightarrow}
+  {\xrightarrow[#1]{#2} \mathrel{\mkern-14mu}\rightarrow}
+}
+
+\DeclareDocumentCommand \red { o } {
+  \IfNoValueTF {#1}
+  {\xrightarrowdbl{}}
+  {\xrightarrowdbl{#1}}
+}
+
+\DeclareDocumentMacro \aconv {\red [\alpha]}
+
+\DeclareDocumentMacro \ered {\red [\eta]}
+
+% - '\redpar': parallel reduction
+
+\DeclareDocumentMacro \redpar {\Rightarrow}
+
+\DeclareDocumentMacro \aeq {=_{\alpha}}
+
+\DeclareDocumentMacro \eeq {=_{\eta}}
+
+% - '\cd': complete development
+
+%\DeclareDocumentMacro \cd { m } { { #1 }^* }
 
 % - `\lambd[x][!A]`: lambda abstract
 
@@ -417,10 +468,6 @@
 \DeclareDocumentCommand \mvar { m } {\mathfrak{#1}}
 
 \DeclareDocumentCommand \rule { m } {#1}
-
-% - `\aconv`: alpha conversion
-
-\DeclareDocumentMacro \aconv {=_\alpha}
 
 % - `\num{n}` : numeral corresponding to a number
 
