@@ -140,9 +140,13 @@ by the transitivity, and $\aconvone$, which leads to the following equivalent de
         =&FV(\lambd[x][N])
       \end{align*}
     \end{enumerate}
-  \item The other three cases are left as exercises.
+  \item The other three cases are left as exercises. \ollabel{lem:fv-one:2}.
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Finish \olref{lem:fv-one:2}.
+\end{prob}
 
 \begin{lem}\ollabel{lem:inv}
   If $P \aconvone Q$ then $Q \aconvone P$.
@@ -160,9 +164,13 @@ by the transitivity, and $\aconvone$, which leads to the following equivalent de
     also equal to $N$. Then by \olref{def:4} we have
     $\lambd[y][\Subst{N}{y}{x}] \aconvone
     \lambd[x][\Subst{\Subst{N}{y}{x}}{x}{y}] = \lambd[x][N]$.
-  \item The other three cases are left as exercises.
+  \item The other three cases are left as exercises. \ollabel{lem:inv:2}
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Prove \olref{lem:inv:2}.
+\end{prob}
 
 \begin{thm}
   $\alpha$-conversion is an equivalence relation (\olref[sfr][rel][prp]{sec}) on terms.
@@ -201,6 +209,10 @@ $\alpha$-conversion.
   Left as exercise.
 \end{proof}
 
+\begin{prob}
+  Prove \olref{lem:sub:R}.
+\end{prob}
+
 Recall that in \olref[sub]{sec} substitution is
 undefined in some cases; however, by some
 $\alpha$-conversion on terms, we can make the substitution defined,
@@ -213,7 +225,7 @@ and the results preserve the $\alpha$-equivalence, as shown in this theorem:
 \begin{proof}
   By induction on the formation of $M$:
   \begin{enumerate}
-  \item[\rule{ABS}] Then $M$ is of the form $\lambd[x][N]$, then we:
+  \item $M$ is of the form $\lambd[x][N]$, then we:
     \begin{enumerate}
     \item Select $z$ such that $z \notin FV(xyNR)$.
     \item By I.H., we can have $N'$ such that $N' \aeq N$
@@ -237,10 +249,14 @@ and the results preserve the $\alpha$-equivalence, as shown in this theorem:
         =&\Subst{(\lambd[z][\Subst{N'}{z}{x}])}{R}{y}
       \end{align*}
     \end{enumerate}
-  \item[\rule{VAR},\rule{APP}] The other two cases are left as
-    exercises.
+  \item The other two cases are left as
+    exercises. \ollabel{thm:sub:2}
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Prove \olref{thm:sub:2}.
+\end{prob}
 
 \begin{cor}\ollabel{cor:sub}
   For any $M$, for any $R, y$, there exists a pair of $M'$ and $R'$

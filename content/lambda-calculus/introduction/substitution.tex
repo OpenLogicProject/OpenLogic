@@ -69,7 +69,7 @@ environment variable $y$ anyway.
 \begin{proof}
   By induction on the formation of $M$.
   \begin{enumerate}
-    \item[\rule{ABS}] Then $M$ is of the form $\lambd[y][N]$, and
+    \item $M$ is of the form $\lambd[y][N]$, and
       since $\Subst{\lambd[y][N]}{Q}{x}$ is defined, it has to be
       $\lambd[y][\Subst{N}{Q}{x}]$; then $\Subst{N}{Q}{x}$ has
       to be defined; also, $x \neq y$ and $x \notin FV(Q)$. Then:
@@ -82,9 +82,13 @@ environment variable $y$ anyway.
         =&FV(N) \setminus \{y\} && \text{by I.H.} \\
         =&FV(\lambd[y][N]) && \text{by \olref[fv]{def:2}}
       \end{align*}
-    \item The other two cases are easy and left as exercises.
+    \item The other two cases are easy and left as exercises. \ollabel{thm:notinfv:2}
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Prove \olref{thm:notinfv:2}.
+\end{prob}
 
 \begin{thm} \ollabel{thm:infv}
   If $y \in FV(M)$, then $FV(\Subst{M}{R}{y}) = (FV(M) \setminus
@@ -93,8 +97,8 @@ environment variable $y$ anyway.
 \begin{proof}
   By induction on the formation of $M$.
   \begin{enumerate}
-  \item[\rule{VAR}] Left as exercise.
-  \item[\rule{ABS}] Then $M$ is of the form $\lambd[x][N]$. Since
+  \item If it's a varialbe, left as exercise. \ollabel{thm:infv:1}
+  \item $M$ is of the form $\lambd[x][N]$. Since
     $\Subst{\lambd[x][N]}{R}{y}$ is defined, it has to be
     $\lambd[x][\Subst{N}{R}{y}]$, with $\Subst{N}{R}{y}$
     defined, $x \neq y$ and $x \notin FV(N)$; also, since $y \in
@@ -110,7 +114,7 @@ environment variable $y$ anyway.
       =&(FV(N) \setminus \{x\} \setminus \{y\}) \cup FV(R) \\
       =& (FV(\lambd[x][N]) \setminus \{y\}) \cup FV(R)
     \end{align*}
-  \item[\rule{APP}] Then $M$ is of the form $PQ$. Since
+  \item If $M$ is of the form $PQ$. Since
     $\Subst{(PQ)}{R}{y}$ is defined, it has to be
     $(\Subst{P}{R}{y})(\Subst{Q}{R}{y})$ with both substitution
     defined; also, since $y \in FV(PQ)$, either $y \in FV(P)$ or
@@ -118,6 +122,10 @@ environment variable $y$ anyway.
     we will left to the reader.
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Prove \olref{thm:infv:1}.
+\end{prob}
 
 \begin{thm}\ollabel{thm:clr}
   $x \notin FV(\Subst{M}{N}{x})$, if right hand is
@@ -127,6 +135,9 @@ environment variable $y$ anyway.
   Left as exercise.
 \end{proof}
 
+\begin{prob}
+  Prove \ollabel{thm:clr}.
+\end{prob}
 
 
 \begin{thm}\ollabel{thm:inv}
@@ -135,8 +146,8 @@ environment variable $y$ anyway.
 \begin{proof}
   By induction on formation of $M$.
   \begin{enumerate}
-  \item[\rule{VAR}] $M$ is just a variable $z$. Left as exercise.
-  \item[\rule{ABS}] $M$ is of the form $\lambd[z][N]$. Because
+  \item $M$ is just a variable $z$. Left as exercise. \ollabel{thm:inv:var}
+  \item $M$ is of the form $\lambd[z][N]$. Because
     $\Subst{\lambd[z][N]}{y}{x}$ is defined, we are pretty sure
     that $z \neq x$ and $z \neq y$. So:
     \begin{align*}
@@ -147,7 +158,7 @@ environment variable $y$ anyway.
        && \text{by \olref{def:4}} \\
       =&\lambd[z][N] && \text{by I.H.} 
     \end{align*}
-  \item[\rule{APP}] $M$ is of the form $PQ$. Then:
+  \item $M$ is of the form $PQ$. Then:
     \begin{align*}
       &\Subst{\Subst{(PQ)}{y}{x}}{x}{y} \\
       =&\Subst{((\Subst{P}{y}{x})(\Subst{Q}{y}{x}))}{x}{y}
@@ -158,4 +169,7 @@ environment variable $y$ anyway.
     \end{align*}
   \end{enumerate}
 \end{proof}
+\begin{prob}
+  Prove \olref{thm:inv:var}.
+\end{prob}
 \end{document}
