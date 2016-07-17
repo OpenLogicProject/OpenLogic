@@ -18,7 +18,7 @@ $\lambd[x]$.
 
 \begin{defn}[Scope]
 For a particular occurrence of $\lambd[x][M]$ in a term $P$, the
-occurrence of $M$ is called the scope of the occurrence of $\lambd[x]$
+occurrence of $M$ is called the \emph{scope} of the occurrence of $\lambd[x]$
 on the left.
 \end{defn}
 
@@ -27,7 +27,7 @@ on the left.
 \end{prob}
 
 \begin{defn}[Bound occurrences of a variable]
-  An occurrence of variable $x$ is bound if it's in the scope of a $\lambd[x]$.
+  An occurrence of variable $x$ is \emph{bound} if it's in the scope of a $\lambd[x]$.
 \end{defn}
 
 \begin{ex}
@@ -59,7 +59,7 @@ what happens when we break it?
 
 In the last example, $y$ is called \emph{free}. 
 \begin{defn}[Free occurrences of a variable]
-  An occurrence of a variable $x$ in a term $P$ is free if it's not bound, i.e., not in the scope of any
+  An occurrence of a variable $x$ in a term $P$ is \emph{free} if it's not bound, i.e., not in the scope of any
   $\lambd[x]$ in $P$.
 \end{defn}
 
@@ -69,7 +69,7 @@ variables. This set is denoted by $FV(P)$ with a natural definition
 as follows:
 
 \begin{defn}[Free variables] \ollabel{def}
-  The set of free variables of a term is defined inductively by:
+  The set of \emph{free variables} of a term is defined inductively by:
   \begin{align} 
     FV(x) &= \{x\} \ollabel{def:1} \\
     FV(\lambd[x][N]) &= FV(N) \setminus \{x\}    \ollabel{def:2} \\
@@ -104,7 +104,7 @@ in this case is called a \emph{closed term}.
 \end{explain}
 
 \begin{defn}[Closed term]
-  A term with no free variable is a closed term.
+  A term with no free variable is a \emph{closed term}.
 \end{defn}
 
 \begin{explain}

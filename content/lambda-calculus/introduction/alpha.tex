@@ -26,9 +26,10 @@ both seem to be the identity function. Here is the $\alpha$-conversion:
 
 We used the word ``occurrence'' in above definition, which is not very
 standard but captures the idea. It's mostly known as
-\emph{compatibility}. A relation $R$ on terms is said to be compatible
-if it satisfies following conditions:
+\emph{compatibility}. 
 \begin{defn}[Compatibility of relation]
+  A relation $R$ on terms is said to be \emph{compatible}
+  if it satisfies following conditions:
   \begin{enumerate}
   \item If $R N N'$ then $R \lambd[x][N] \lambd[x][N']$
   \item If $R P P'$ then $R (PQ) (P'Q)$
@@ -71,13 +72,13 @@ interested readers, but from now on we will use the later one as our
 definition.
 
 \begin{defn}[$\alpha$-conversion, $\aconv$]
-  $\alpha$-conversion ($\aconv$) is the smallest reflexitive, transitive relation on terms containing $\aconvone$.
+  \emph{$\alpha$-conversion} ($\aconv$) is the smallest reflexitive, transitive relation on terms containing $\aconvone$.
 \end{defn}
 
 As above, ``smallest'' means the relation only contains pairs required
 by the transitivity, and $\aconvone$, which leads to the following equivalent definition:
 \begin{defn}[$\alpha$-conversion, $\aconv$]
-  $\alpha$-conversion ($\aconv$) is inductively defined as follows:
+  \emph{$\alpha$-conversion} ($\aconv$) is inductively defined as follows:
   \begin{enumerate}
   \item If $P \aconv Q$ and $Q \aconv R$, then $P \aconv R$.
     \ollabel{aconv:1}
