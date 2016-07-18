@@ -1,0 +1,53 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: definitions-and-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{cr}{dap}
+
+\olsection{Definition and Properties}
+
+In this chapter we introduce the concept of Church-Rosser property and
+some common properties of this property.
+
+\begin{defn}[Church-Rosser property, CR]
+  A relation $\xredone$ on terms is said to satisfy \emph{Church-Rosser
+    property} iff:
+  
+    If $M \xredone P$ and $M \xredone Q$, then there exsits some $N$
+    such that $P \xredone N$ and $Q \xredone N$.
+  \end{center}
+\end{defn}
+
+\begin{thm} \ollabel{thm:str}
+  If a relation $\xredone$ satisfies Church-Rosser property, and $\xred$ is the
+  smallest transitive relation containing $\xredone$, then $\xred$ satisfies
+  Church-Rosser property too.
+\end{thm}
+\begin{proof}
+  Suppose $M \xredone P_1 \xredone \ldots \xredone P_m$, $M \xredone Q_1
+  \xredone \ldots \xredone Q_n$.
+  
+  we will prove this theorem by constructing a grid $N$ of terms, whose height is $m + 1$ and width $n + 1$. We use $N_{i,j}$ to denote the terms
+  on the $i$-th row and $j$-th column.
+  
+  We construct $N$ in such a way that $N_{i,j} \xredone N_{i+1,j}$ and
+  $N_{i,j} \xredone N_{i,j+1}$. It's defined as follows:
+  \begin{align*}
+    N_{0,0} &= M \\
+    N_{i,0} &= P_i && 1 \le i \le m \\
+    N_{0,j} &= Q_j && 1 \le j \le n \\
+    otherwise: & \\
+    N_{i,j} &= R && N_{i-1,j} \xredone R, N_{i,j-1} \xredone R \\
+            & && \text{by CR of $\xredone$}
+  \end{align*}
+
+  Now we have $N_{m,0} \xredone \ldots \xredone N_{m,n}$ and $N_{0,n}
+  \xredone \ldots \xredone N_{m,n}$. Note $N_{m,0}$ is $P$ and $N_{0,n}$
+  is $Q$. By definition of $\xred$ the theorem follows.
+\end{proof}
+
+\end{document}

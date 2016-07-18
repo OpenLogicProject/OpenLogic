@@ -6,80 +6,74 @@
 
 \begin{document}
 
-\olfileid{lc}{cr}{bet}
+\olfileid{lc}{cr}{b}
 
 \olsection{$\beta$-reduction}
 
-In this section we will prove $\beta$-reduction ($\red$) also has
+In this section we will prove $\beta$-reduction ($\bred$) also has
 Church-Rosser property based on conclusions in last section.
 
 \begin{lem}\ollabel{lem:one-par}
-  If $M \redone M'$, then $M \redpar M'$.
+  If $M \bredone M'$, then $M \bredpar M'$.
 \end{lem}
-\begin{proof} By induction on the derivation of $M \redone M'$.
+\begin{proof} By induction on the derivation of $M \bredone M'$.
   \begin{enumerate}
-  \item If the last rule is \olref[int][bet]{def:4}, then $M$ is
+  \item If the last rule is the contraction, then $M$ is
     $(\lambd[x][N])Q$, $M'$ is $\Subst{N}{Q}{x}$, for some
-    $x, N, Q$. Since $N \redpar N$ and $Q \redpar Q$ by
-    \olref[par]{thm:refl}, we immediately have $(\lambd[x][N])Q
-    \redpar \Subst{N}{Q}{x}$ by \olref[par]{def:4}.
+    $x, N, Q$. Since $N \bredpar N$ and $Q \bredpar Q$ by
+    \olref[pb]{thm:refl}, we immediately have $(\lambd[x][N])Q
+    \bredpar \Subst{N}{Q}{x}$ by \olref[pb]{def:4}.
   \item The other cases are left as exercises.
   \end{enumerate}
 \end{proof}
 
 \begin{lem}\ollabel{lem:par-red}
-  If $M \redpar M'$, then $M \red M'$.
+  If $M \bredpar M'$, then $M \bred M'$.
 \end{lem}
-\begin{proof} Induction on the derivation of $M \redpar M'$.
+\begin{proof} Induction on the derivation of $M \bredpar M'$.
   \begin{enumerate}
   \item Left as exercise.
-  \item If the last rule is \olref[pr]{def:2}, then $M$ is 
+  \item If the last rule is \olref[pb]{def:2}, then $M$ is 
     $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ for some $x, N, N'$, where
-    $N \redpar N'$. By I.H. we have $N \red N'$, then obviously
-    $\lambd[x][N] \red \lambd[x][N']$ (by the same series of
-    $\redone$ as $N \red N'$).
-  \item If the last rule is \olref[pr]{def:3}, then $M$ is 
-    $PQ$ and $M'$ is $P'Q'$ for some $P, Q, P', Q'$, where $P \redpar P'$
-    and $Q \redpar Q'$. Now by I.H. we have $P \red P'$ and $Q \red
-    Q'$, then $PQ \red P'Q'$ by the series of $P \red P'$ followed
-    by the series of $Q \red Q'$.
-  \item If the last rule is \olref[pr]{def:4}, then $M$ is
+    $N \bredpar N'$. By I.H. we have $N \bred N'$, then obviously
+    $\lambd[x][N] \bred \lambd[x][N']$ (by the same series of
+    $\bredone$ as $N \bred N'$).
+  \item If the last rule is \olref[pb]{def:3}, then $M$ is 
+    $PQ$ and $M'$ is $P'Q'$ for some $P, Q, P', Q'$, where $P \bredpar P'$
+    and $Q \bredpar Q'$. Now by I.H. we have $P \bred P'$ and $Q \bred
+    Q'$, then $PQ \bred P'Q'$ by the series of $P \bred P'$ followed
+    by the series of $Q \bred Q'$.
+  \item If the last rule is \olref[pb]{def:4}, then $M$ is
     $(\lambd[x][N])Q$ and $M'$ is  $\Subst{N'}{Q'}{x}$ for some
-    $x, N, M', Q, Q'$, where $N \redpar N'$ and $Q \redpar Q'$. By I.H. we get $Q \red
-    Q'$ and $N \red N'$, then $(\lambd[x][N])Q \red
-    \Subst{N'}{Q'}{x}$ by the series of $N \red N'$ followed by the
-    series of $Q \red Q'$ and finally contraction of
+    $x, N, M', Q, Q'$, where $N \bredpar N'$ and $Q \bredpar Q'$. By I.H. we get $Q \bred
+    Q'$ and $N \bred N'$, then $(\lambd[x][N])Q \bred
+    \Subst{N'}{Q'}{x}$ by the series of $N \bred N'$ followed by the
+    series of $Q \bred Q'$ and finally contraction of
     $(\lambd[x][N'])Q'$.
   \end{enumerate}
 \end{proof}
 
 
-\begin{thm}[Church-Rosser property of  $\red$]
-  $\red$ satisfies Church-Rosser property.
-\end{thm}
+\begin{lem}\ollabel{lem:str}
+  $\bred$ is the smallest transitive relation containing $\bredpar$.
+\end{lem}
 \begin{proof}
-  If $M \red P$ by $m$ steps, and $M \red Q$ by $n$ steps.  Suppose $M \redone P_1 \redone \ldots \redone P_m$, $M \redone Q_1
-  \redone \ldots \redone Q_n$. By \olref{lem:one-par} we can replace
-  $\redone$ with $\redpar$.
+  Let $\xred$ be the smallest transitive relation containing $\bredpar$.
+  Recall that it can be inductively defined by the rules of transitivity, plus the rule ``if
+  $M \bredpar N$ then $M \xred N$. Now we prove $\bred = \xred$:
   
-  we will prove this theorem by constructing a grid $N$ of terms, whose height is $m + 1$ and width $n + 1$. We use $N_{i,j}$ to denote the terms
-  on the $i$-th row and $j$-th column.
-  
-  We construct $N$ in such a way that $N_{i,j} \redpar N_{i+1,j}$ and
-  $N_{i,j} \redpar N_{i,j+1}$. It's defined as follows:
-  \begin{align*}
-    N_{0,0} &= M \\
-    N_{i,0} &= P_i && 1 \le i \le m \\
-    N_{0,j} &= Q_j && 1 \le j \le n \\
-    otherwise: & \\
-    N_{i,j} &= R && N_{i-1,j} \redpar R, N_{i,j-1} \redpar R \\
-    & && \text{by \olref[par]{thm:cr}}
-  \end{align*}
+  $\bred \in \xred$. For any $M \bred M'$, we can extract a series of
+  $\bredone$ from it and, by \olref{lem:one-par}, we can change it
+  into a series of $\bredpar$, which is $\xred$ by its definition.
 
-  Now we have $N_{m,0} \redpar \ldots \redpar N_{m,n}$ and $N_{0,n}
-  \redpar \ldots \redpar N_{m,n}$. Note $N_{m,0}$ is $P$ and $N_{0,n}$
-  is $Q$, also we can replace $\redpar$ with $\red$ by
-  \olref{lem:par-red}. By transitivity of $\red$ the theorem follows.
+  $\xred \in \bred$. Similar to the above case, except that we will
+  use \olref{lem:par-red} and definition of $\bred$ instead.
 \end{proof}
 
+\begin{thm}{thm:cr}
+  $\bred$ satisfies Church-Rosser property.
+\end{thm}
+\begin{proof}
+  Immediate from \olref[dap]{thm:str}, \olref[pb]{thm:cr} and \olref{lem:str}.
+\end{proof}
 \end{document}

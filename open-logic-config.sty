@@ -421,7 +421,13 @@
 
 \DeclareDocumentMacro \aconvone {\redone[\alpha]}
 
+\DeclareDocumentMacro \bredone {\redone[\beta]}
+
 \DeclareDocumentMacro \eredone {\redone[\eta]}
+
+\DeclareDocumentMacro \beredone {\redone[\beta\eta]}
+
+\DeclareDocumentMacro \xredone {\redone[X]}
 
 % - `\red`: reduction
 
@@ -439,11 +445,26 @@
 
 \DeclareDocumentMacro \aconv {\red [\alpha]}
 
+\DeclareDocumentMacro \bred {\red [\beta]}
+
 \DeclareDocumentMacro \ered {\red [\eta]}
+
+\DeclareDocumentMacro \bered {\red [\beta\eta]}
+
+\DeclareDocumentMacro \xred {\red [X]}
 
 % - '\redpar': parallel reduction
 
-\DeclareDocumentMacro \redpar {\Rightarrow}
+\DeclareDocumentCommand \redpar { o } {
+  \IfNoValueTF {#1}
+  {\xRightarrow{}}
+  {\xRightarrow{#1}}
+}
+
+\DeclareDocumentMacro \bredpar {\redpar [\beta]}
+
+\DeclareDocumentMacro \beredpar {\redpar [\beta\eta]}
+
 
 \DeclareDocumentMacro \aeq {=_{\alpha}}
 
@@ -451,7 +472,19 @@
 
 % - '\cd': complete development
 
-\DeclareDocumentCommand \cd { m } { { #1 }^* }
+\DeclareDocumentCommand \cd { o m } {
+  \IfNoValueTF {#1}
+  {{ #2 }^*}
+  {{ #2 }^{* {#1} }}
+}
+
+\DeclareDocumentCommand \bcd { m } {
+  \cd[\beta]{#1}
+}
+
+\DeclareDocumentCommand \becd { m } {
+  \cd[\beta\eta]{#1}
+}
 
 % - `\lambd[x][!A]`: lambda abstract
 

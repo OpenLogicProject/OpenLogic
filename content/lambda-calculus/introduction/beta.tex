@@ -15,23 +15,27 @@ namely  $\times g 9.8$ should be the result of ``simplifying'' the first term, i
 ``simplify'' means anything. The $\beta$-reduction captures this
 intuition formally.
 
-\begin{defn}[$\beta$-contraction, $\redone$] \ollabel{def}
-  \emph{The $\beta$-contraction} ($\redone$) is the smallest compatible
+\begin{defn}[$\beta$-contraction, $\bredone$] \ollabel{def}
+  \emph{The $\beta$-contraction} ($\bredone$) is the smallest compatible
   relation on terms, satisfying the following condition:
   \begin{align*}
-    (\lambd[x][N])Q \redone \Subst{N}{Q}{x}
+    (\lambd[x][N])Q \bredone \Subst{N}{Q}{x} 
   \end{align*}
+  We say $P$ is $\beta$-contracted to $Q$ if $P \bredone Q$. 
 \end{defn}
 
-\begin{prob}
-  Spell out the equivalent induction definitions of $\beta$-contraction as we
+\begin{prob} \ollabel{prob:def}
+  Spell out the equivalent inductive definitions of $\beta$-contraction as we
   did for Change of bound variable in \olref[alp]{def}.
 \end{prob}
   
-\begin{defn}[$\beta$-reduction, $\red$] \ollabel{def}
-  \emph{$\beta$-reduction} ($\red$) is the smallest reflexitive, transitive
-  relation on terms containing $\redone$.
+\begin{defn}[$\beta$-reduction, $\bred$] \ollabel{def}
+  \emph{$\beta$-reduction} ($\bred$) is the smallest reflexive, transitive
+  relation on terms containing $\bredone$.
+  We say $P$ is $\beta$-reduced to $Q$ if $P \bred Q$.
 \end{defn}
+We will write $\redone$ instead of $\bredone$, $\red$ instead of
+$\bred$ when context is clear.
 
 \begin{defn}[$beta$-normal]
 A term that cannot be $\beta$-contracted any further is called 

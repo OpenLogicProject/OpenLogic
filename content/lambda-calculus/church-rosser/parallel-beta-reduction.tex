@@ -1,0 +1,124 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{cr}{pb}
+
+\olsection{Parallel $\beta$-reduction}
+
+In this section we introduce \emph{parallel $\beta$-reduction}, and prove it satisfying CR.
+
+\begin{defn}[parallel $\beta$-reduction, $\bredpar$] \ollabel{def}
+  Parallel reduction ($\bredpar$) of terms is inductively defined as follows:
+  \begin{enumerate}
+    \item \ollabel{def:1} $x \bredpar x$.
+    \item \ollabel{def:2} If $N \xrightarrow{\beta} N'$ then $\lambd[x][N] \bredpar
+      \lambd[x][N']$.
+    \item \ollabel{def:3} If $P \bredpar P'$ and $Q \bredpar Q'$ then $PQ \bredpar
+      P'Q'$.
+    \item \ollabel{def:4} If $N \bredpar N'$ and $Q \bredpar Q'$ then
+      $(\lambd[x][N])Q \bredpar \Subst{N'}{Q'}{x}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:refl}
+  $M \bredpar M$.
+\end{thm}
+\begin{proof}
+  Left as exercise, you only need the first three rules.
+\end{proof}
+
+\begin{defn}[$\beta$-complete development]\ollabel{bcd}
+  The \emph{$\beta$-complete development} of $M$, or $\bcd{M}$, is defined
+  as follows:
+  \begin{align}
+    \bcd{x} &= x \ollabel{bcd:1} \\
+    \bcd{\lambd[x][N]} &= \lambd[x][\bcd{N}] \ollabel{bcd:2}\\
+    \bcd{PQ} &= \bcd{P}\bcd{Q} && \text{if $P$ is not abstraction} \ollabel{bcd:3} \\
+    \bcd{(\lambd[x][N])Q} &= \Subst{\bcd{N}}{\bcd{Q}}{x} \ollabel{bcd:4}
+  \end{align}
+\end{defn}
+
+\begin{editorial}
+  This definition has the problem that we haven't introduced how to
+  define functions on ($\Lambda$-)terms recursively. Will fix in future.
+\end{editorial}
+
+\begin{lem}\ollabel{lem:comp}
+  If $M \bredpar M'$ and $R \bredpar R'$, then $\Subst{M}{P}{y}
+  \bredpar \Subst{M'}{P'}{y}$.
+\end{lem}
+\begin{proof}
+  By induction on the derivation of $M \bredpar M'$.
+  \begin{enumerate}
+    \item If the last step is \olref{def:1}, left as exercise.
+    \item If the last step is \olref{def:2}, then $M$ is 
+      $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$,
+      where $N \bredpar N'$. What we want to prove is
+      $\Subst{(\lambd[x][N])}{R}{y} \bredpar
+      \Subst{(\lambd[x][N'])}{R'}{y}$, which is
+      $\lambd[x][\Subst{N}{R}{y}] \bredpar
+      \lambd[x][\Subst{N'}{R}{y}]$, which is immediate by
+      \olref{def:2} and I.H.
+    \item If the last step is \olref{def:3}, left as exercise.
+    \item If the last step is \olref{def:4}, then $M$ is
+      $(\lambd[x][N])Q$ and $M'$ is $\Subst{N'}{Q'}{x}$. What
+      we want to prove is $\Subst{((\lambd[x][N])Q)}{R}{y}
+      \bredpar \Subst{\Subst{N'}{Q'}{x}}{R'}{y}$, which is
+      $(\lambd[x][\Subst{N}{R}{y}])\Subst{Q}{R}{y} \bredpar
+      \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$, which
+      can be derived by \olref{def:4} with I.H.
+  \end{enumerate}
+\end{proof}
+
+\begin{lem}\ollabel{lem:cont}
+  If $M \bredpar M'$ then $M' \bredpar \bcd{M}$.
+\end{lem}
+\begin{proof}
+  By induction on the derivation of $M \bredpar M'$.
+  \begin{enumerate}
+    \item If the last rule is \olref{def:1}, left as exercise.
+    \item If the last rule is \olref{def:2} then $M$ is 
+      $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ with
+      $N \bredpar N'$. We want $\lambd[x][N'] \bredpar
+      \bcd{(\lambd[x][N])}$, which is $\lambd[x][N'] \bredpar
+      \lambd[x][\bcd{N}]$ by \olref{bcd:2}, which is immediate by
+      \olref{def:2} and I.H.. 
+    \item If the last rule is \olref{def:3} then $M$ is 
+      $PQ$ and $M'$ is $P'Q'$ for some $P$, $Q$, $P'$ and $Q'$, with $P \bredpar P'$
+      and $Q \bredpar Q'$. By I.H. we have $P' \bredpar \bcd{P}$ and
+      $Q' \bredpar \bcd{Q}$.  Depending on whether $P$ is 
+      $\lambd[x][N]$ for some $x$ and $N$:
+      \begin{enumerate}
+        \item $P$ is not, then $P'Q' \bredpar \bcd{P}\bcd{Q}$ by
+          \olref{def:3}, and the right-hand is $\bcd{PQ}$ by \olref{bcd:3}.
+        \item $P$ is $\lambd[x][N]$ for some $x$ and $N$, then
+          $P'$ must be $\lambd[x][N']$ for some $N'$ with 
+          $N \bredpar N'$. By I.H. we have $N' \bredpar \bcd{N}$ and
+          $Q' \bredpar \bcd{Q}$, then $(\lambd[x][N'])Q' \bredpar
+          \Subst{\bcd{N}}{\bcd{Q}}{x}$ by \olref{def:4} which is what
+          we want.
+      \end{enumerate}
+    \item If the last rule is \olref{def:4} then $M$ is 
+      $(\lambd[x][N])Q$  and $M'$ is $\Subst{N'}{Q'}{x}$
+      for some $x, N, Q, N', Q'$, with $N \bredpar N'$ and $Q
+      \bredpar Q'$. By I.H. we know $N' \bredpar \bcd{N}$ and $Q'
+      \bredpar \bcd{Q}$, further by \olref{lem:comp} we have
+      $\Subst{N'}{Q'}{x} \bredpar \Subst{\bcd{N}}{\bcd{Q}}{x}$, the
+      right hand of which is exactly $\bcd{((\lambd[x][N])Q)}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  $\bredpar$ has Church-Rosser property.
+\end{thm}
+\begin{proof}
+  Immediate from \olref{lem:cont}.
+\end{proof}
+
+\end{document}
+
