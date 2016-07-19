@@ -9,7 +9,7 @@
 \olfileid{lc}{int}{alp}
 \olsection{$\alpha$-conversion}
 
-What's the relation between $\lambd[x][x]$ and $\lambd[y][y]$? They
+What's the relation between $\lambd[@x][@x]$ and $\lambd[@y][@y]$? They
 both seem to be the identity function. Here is the $\alpha$-conversion:
 
 \begin{defn}[Change of bound variable, $\aconvone$]
@@ -88,25 +88,24 @@ by the transitivity, and $\aconvone$, which leads to the following equivalent de
 \end{defn}
 
 \begin{ex}
-  $\lambd[m][\times m g]$ $\alpha$-converts to $\lambd[mass][\times mass
-  g]$, and the other way around too. Informally
+  $\lambd[@x][@f @x]$ $\alpha$-converts to $\lambd[@y][@f
+  @y]$, and the other way around too. Informally
   speaking, they are both functions that accpets an argument and
-  returns the gravity applied on the object with mass of that argument,
-  refering to the free variable $g$.
+  return $@f$ of that argument, refering to the environment variable $@f$.
 \end{ex}
 \begin{ex}
-  $\lambd[m][\times m g]$ cannot $\alpha$-converts $\lambd[m][\times m
-  G]$. Informally speaking, they refers to the environment variables $g$ and $G$ respectively,
+  $\lambd[@x][@f @x]$ cannot $\alpha$-converts $\lambd[@x][@g
+  @x]$. Informally speaking, they refers to the environment variables $@f$ and $@g$ respectively,
   making them different functions: they behave differently in
-  environment where $g$ and $G$ is different.
+  environment where $@f$ and $@g$ is different.
 \end{ex}
 
 \begin{prob}
   Tell if the following pairs of terms are $\alpha$-convertable.
   \begin{enumerate}
-  \item $\lambd[x][\lambd[y][x]]$ and $\lambd[y][\lambd[x][y]]$
-  \item $\lambd[x][\lambd[y][x]]$ and $\lambd[c][\lambd[b][a]]$
-  \item $\lambd[x][\lambd[y][x]]$ and $\lambd[c][\lambd[b][a]]$
+  \item $\lambd[@x][\lambd[@y][@x]]$ and $\lambd[@y][\lambd[@x][@y]]$
+  \item $\lambd[@x][\lambd[@y][@x]]$ and $\lambd[@c][\lambd[@b][@a]]$
+  \item $\lambd[@x][\lambd[@y][@x]]$ and $\lambd[@c][\lambd[@b][@a]]$
   \end{enumerate}
 \end{prob}
 

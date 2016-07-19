@@ -23,7 +23,7 @@ on the left.
 \end{defn}
 
 \begin{prob}
-  Point out scopes in this term: $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$.
+  Point out scopes in this term: $\lambd[@g][(\lambd[@x][@g (@x @x)]) \lambd[@x][@g (@x @x)]]$.
 \end{prob}
 
 \begin{defn}[Bound occurrences of a variable]
@@ -31,21 +31,21 @@ on the left.
 \end{defn}
 
 \begin{ex}
-  In $\lambd[x][x x]$, both occurrences of $x$ is bound by $\lambd[x]$.
+  In $\lambd[@x][@x @x]$, both occurrences of $@x$ is bound by $\lambd[@x]$.
 \end{ex}
 
 \begin{prob}
-  In $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$, are all
+  In $\lambd[@g][(\lambd[@x][@g (@x @x)]) \lambd[@x][@g (@x @x)]]$, are all
   occurrences of variables bound? By which abstractions are they
   bound recpectively?
 \end{prob}
 
-Note that not all occurrences of $x$ in the subterm necessarily refers to this particular argument,
+Note that not all occurrences of $x$ in the subterm necessarily refers to this particular parameter,
 since there can be another but inner $\lambd[x]$, as shown in the
 following example. 
 \begin{ex}
-In $\lambd[x][\lambd[x][x]]$, while the variable $x$ is in the
-scopes of both $\lambd[x]$, it only refers to the inner one, as one
+In $\lambd[@x][\lambd[@x][@x]]$, while the variable $@x$ is in the
+scopes of both $\lambd[@x]$, it only refers to the inner one, as one
 might expect. We may say the inner abstraction shadows the outer
 abstraction.
 \end{ex}
@@ -53,11 +53,11 @@ abstraction.
 We have only seen examples only using variable $x$ in the scope of $\lambd[x]$, 
 what happens when we break it?
 \begin{ex}
-  $\lambd[x][x y]$, while the occurrence of $x$ refers to the~!!{argument} of $\lambd[x]$, $y$ is not in a scope
-  of any $\lambd[y]$. 
+  $\lambd[@x][@x @y]$, while the occurrence of $@x$ refers to the~!!{parameter} of $\lambd[@x]$, $@y$ is not in a scope
+  of any $\lambd[@y]$. 
 \end{ex}
 
-In the last example, $y$ is called \emph{free}. 
+In the last example, $@y$ is called \emph{free}. 
 \begin{defn}[Free occurrences of a variable]
   An occurrence of a variable $x$ in a term $P$ is \emph{free} if it's not bound, i.e., not in the scope of any
   $\lambd[x]$ in $P$.
@@ -78,44 +78,31 @@ as follows:
 \end{defn}
 
 \begin{prob}
-  Run the above definition on $\lambd[x][(\lambd[y][(\lambd[z][x y]) z]) y]$
+  Run the above definition on $\lambd[@x][(\lambd[@y][(\lambd[@z][@x @y]) @z]) @y]$
 \end{prob}
 
 \begin{explain}
 A free variable is like a reference to outside world (\emph{environment}), and a term
 containing free variables can be seen as a partially specified term,
 since its behaviour is kind of dependent on how we setup the
-environment. For example, the term $\lambd[m][\times g m]$ which
-accepts a variable (hopefully a real) and returns the gravity applied
-on a object with that mass, refers to an environment variable $g$. If we
-setup $g$ to be $9.8$  then this function is for use on earth,
-while on mars we may want a different factor.
-So informally speaking this term is dependent on the environment
-it's in, in particular the setting of $g$ in that environment.
+environment. For example, the term $\lambd[@x][@f @x]$ which
+accepts an argument and returns $f$ of that argument, refers to the environment variable
+$@f$. So informally speaking this term is dependent on the environment
+it's in, in particular the setting of $@f$ in that environment.
 
 Continuing the last example, if we wrap this term by an abstraction, we get
-$\lambd[g][\lambd[m][\times g m]]$. Now it's no longer dependent on
-the outside variable $g$, because essentially it's a function that
-accepts a gravity factor and a mass, and returns the gravity applied
-on that mass; Our changing $g$ in the environment won't have any
-effect on the behavior of this term, as the term will only use the $g$
-passed by~!!{argument} anyway and not the one in environment. The term
+$\lambd[@f][\lambd[@x][@f @x]]$. Now it's no longer dependent on
+the environment variable $@f$, because essentially it's a function that
+accepts two arguments, and returns the result of applying the first to
+the second; Our changing $@f$ in the environment won't have any
+effect on the behavior of this term, as the term will only use the $@f$
+passed as argument anyway and not the one in environment. The term
 in this case is called a \emph{closed term}.
 \end{explain}
 
 \begin{defn}[Closed term]
   A term with no free variable is a \emph{closed term}.
 \end{defn}
-
-\begin{explain}
-  Reader may find the term $\lambd[m][\times g m]$ exotic as it's not
-  a term at all: we can't have the $\times$ symbol in terms, and also,
-  how can we have variables representing real numbers? But we will see
-  in the next chapter that both multiplication function and real
-  numbers can be defined in the forms of terms. Thus it's not a big
-  problem and reader should pretend that they are replaced by very
-  long closed terms.
-\end{explain}
 
 \begin{lem}
   \begin{enumerate}
@@ -132,6 +119,5 @@ in this case is called a \emph{closed term}.
 \begin{prob}
   Prove \olref{lem:abs} and \olref{lem:app}.
 \end{prob}
-
 
 \end{document}
