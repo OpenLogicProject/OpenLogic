@@ -24,29 +24,29 @@ The set of \emph{terms} of lambda calculus is defined inductively by:
 
 We will distinguish meta-variables and variables by typeface. $x, y,
 z, etc$ are meta-variables for variables, and $M, N, P, Q, etc$ are
-meta-variables for terms. Moreover,  $@x, @y, @z, etc$ are variables
+meta-variables for terms. Moreover,  $x, y, z, etc$ are variables
 we will use. For example, when we mention $\lambd[x][M]$, it can be
 any term starts with abstraction followed by anything, like
-$\lambd[@x][x x]$ where $x$ is $@x$ and $M$ is $x x$.
+$\lambd[x][x x]$ where $x$ is $x$ and $M$ is $x x$.
 
 
 The terms defined above are fully parenthesized, which can get rather
-cumbersome as the term $(\lambd[@x][((\lambd[@x][@x])(\lambd[@x][(@x@x)]))])$ demostrates. A neater way to look at lambda terms is to think of them as
+cumbersome as the term $(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$ demostrates. A neater way to look at lambda terms is to think of them as
 a description of formation. For
-example, the last step of forming the term $(\lambd[@x][((\lambd[@x][@x])(\lambd[@x][(@x@x)]))])$
-must be abstraction where the !!{parameter} is $@x$, before which it's
+example, the last step of forming the term $(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$
+must be abstraction where the !!{parameter} is $x$, before which it's
 an application of two terms, the last step of forming both of which is
 abstraction, etc.. 
 
 \begin{prob}
-  Describe the formation of $(\lambd[@g][(\lambd[@x][(@g (@x @x))]) (\lambd[@x][(@g (@x @x))])])$.
+  Describe the formation of $(\lambd[g][(\lambd[x][(g (x x))]) (\lambd[x][(g (x x))])])$.
 \end{prob}
 
 Intead of plain English, we can make it more intuitive by drawing a
 \emph{formation tree}.
 
 \begin{prob}
-  Draw the formation tree of $(\lambd[@g][(\lambd[@x][(@g (@x @x))]) (\lambd[@x][(@g (@x @x))])])$.
+  Draw the formation tree of $(\lambd[g][(\lambd[x][(g (x x))]) (\lambd[x][(g (x x))])])$.
 \end{prob}
 
 We may wonder if for each term there is a unique formation, and there

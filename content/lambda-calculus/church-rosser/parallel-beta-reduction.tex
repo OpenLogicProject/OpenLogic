@@ -30,8 +30,8 @@ Informal interpretation of the above definition: Parallel reduction allows us to
 term in one step. It's different from reduction in the sense that we
 can only contract redices that's in the original term, but not redices
 arising in current parallel reduction. For example, the term
-$(\lambd[@f][@f@x])(\lambd[@y][@y])$ can be only be parallel reduced
-to itself or $(\lambd[@y][@y])@x$, but not further to $@x$ (reduction can do
+$(\lambd[f][fx])(\lambd[y][y])$ can be only be parallel reduced
+to itself or $(\lambd[y][y])x$, but not further to $x$ (reduction can do
 that), because this redex arises in this step of parallel reduction,
 so we can't contract it. However we can perform another parallel
 reduction      to get it.
@@ -58,8 +58,8 @@ Complete development, as its name suggests, is a ``
 complete parallel reduction''. While for parallel reduction we still can choose
 to not contract a redex, for complete development we have no choice
 but to contract all. Thus the complete
-development of $(\lambd[@f][@f@x])(\lambd[@y][@y])$ is
-$(\lambd[@y][@y])@x$, not itself.
+development of $(\lambd[f][fx])(\lambd[y][y])$ is
+$(\lambd[y][y])x$, not itself.
 
 \begin{editorial}
   This definition has the problem that we haven't introduced how to

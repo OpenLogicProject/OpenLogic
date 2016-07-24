@@ -22,14 +22,14 @@ more convention to do this by \emph{currying}.
 
 Let's see some examples. If we want to define a function that accepts
 two arguments and returns the first, we write
-$\lambd[@x][\lambd[@y][@x]]$, which literally is a function that accepts
+$\lambd[x][\lambd[y][x]]$, which literally is a function that accepts
 an argument and returns a function that, accepts another argument and
 returns the first dropping the second. 
 
 We haven't introduced reduction (\olref[lc][int][bet]{def} ) but intuition
 of lambda abstraction and application is enough. If we apply the above
 term to some argument $M$ and ``simplify'' it, we should get $\lambd[y][M]$; apply this new function to $N$
-we should get $M$. Thus, $(\lambd[@x][\lambd[@y][@x]])MN$ can be
+we should get $M$. Thus, $(\lambd[x][\lambd[y][x]])MN$ can be
 simplified to $M$, as we expect.
 
 In general, to write a function with parameters $x_1, \ldots, x_n$
