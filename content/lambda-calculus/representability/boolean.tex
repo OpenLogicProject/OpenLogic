@@ -1,0 +1,57 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: booleans
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{bool}
+\olsection{Boolean}
+
+We can encode booleans in pure lambda calculus as following:
+
+\begin{align*}
+  {true} &= \lambd[x][\lambd[y][x]]\\
+  {false} &= \lambd[x][\lambd[y][y]]
+\end{align*}
+
+The intuition is that a boolean is selector, in the sense that it's a function accepting two arguments
+arnd returns either of them, depending on whether it represents true or
+false.
+
+\begin{explain}
+  For those wondering why these two terms represent true and false:
+  you may know that in electrical circuits a boolean is represented by
+  a voltage: high for true and low for false. Then why can a voltage
+  represent a boolean? Because assuming this, we can then design
+  electrical components that can be interpreted in this way as conjuction or
+  disjunction, etc. For the same reason, if we inter
+\end{explain}
+
+
+By this intuition we can further define some boolean functions. Here
+are some of them:
+
+\begin{align*}
+  {and} &= \lambd[a][\lambd[b][a ~ b ~ {false}]]
+\end{align*}
+
+The function ``and'' accepts two booleans as argument; knowing the
+Boolean will always behave as described above, it passes $b$ and ${false}$
+to $a$, which will evaluated to $b$ if $a$ is ${true}$, or ${false}$ if $a$ is ${false}$,
+which is exactly how conjuction is defined.
+
+Note that we always assume the user is careful enough to pass only booleans to these functions; in the
+case of being passed other terms, the result (normal form, if exists) may be wierd and it's
+out of our scope.
+
+\begin{prob}
+  Try to define these functions on our boolean encoding:
+  \begin{enumerate}
+  \item Negation
+  \item Disjunction
+  \item Exclusive disjuction
+  \end{enumerate}
+\end{prob}
+\end{document}

@@ -1,0 +1,40 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: list
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{lst}
+\olsection{List}
+
+The list $[M_1, M_2, \ldots, M_n]$ is defined to be:
+\begin{align*}
+  [M_1, M_2, \ldots, M_n] &= \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
+\end{align*}
+
+Informally speaking it's the accumulator of the list, in the sense
+that it's a function accepting two terms; the first is a function that receives accumulated value
+along with a new element and returns the new accumulated value; the
+second is the initial accumulated value; it accumulate elements one by
+one and finally returns the result.
+
+We can easily define some useful functions based on this encoding; 
+\begin{align*}
+  {sum} &= \lambd[l][l ~ (\lambd[xa][add ~ x ~ a])~  0]\\
+  len &= \lambd[l][l ~ (\lambd[xa][add ~ a ~ 1]) ~ 0]
+\end{align*}
+
+$sum$ calculates the sum of a list of church numerals. It works by
+doing an accumulation on the list, where the initial value is $0$ and
+for each element, with $x$ to be the element and $a$ to be the
+accumulator, return $add ~ x ~ a$ as the new accumulator. The result
+is the sum. In addition, you can $\eta$-reduce this term (we keep this form for
+easier understanding).
+
+\begin{prob}
+  What does $len$ do? Explain.
+\end{prob}
+\end{document}
+

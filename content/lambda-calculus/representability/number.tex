@@ -1,0 +1,105 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: number
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{num}
+\olsection{Number}
+
+We can also encode natural numbers in lambda calculus. Let
+$\num{n}$ be the term for the number $n$, which is defined as:
+\begin{align*}
+  n &= \lambd[fx][f^n(x)]\\
+\end{align*}
+where $f^n(x)$ stand for $x$ applied by $f$ for $n$ times. For
+example, $\num{3}$ is defined to be $f(f(f(x)))$. 
+
+As you can see, the natural number $n$ is encoded as a function
+accepting two arguments $f$ and $x$, returning $f^n(x)$. This encoding
+of natural numbers is called \emph{church numeral}.
+
+In the rest
+of the part for terms involving church numerals we won't distinguish
+$n$ and $\num{n}$; both $n$ and
+$\num{n}$ are addressed as $n$. We may use $n$ as a variable in the
+terms and use $n$ as the represented number in the explanations. 
+
+Successor is then defined to be
+\begin{align*}
+  {succ} &= \lambd[{n}][\lambd[fx][f ({n} f x)]]
+\end{align*}
+
+To understand this: we first accept as argument a number ${n}$, and we want to return another number,
+which should be a function that accepts
+two arguments $f$ and $x$, and returns $f^{n+1}(x)$
+which is done by first using ${n}$ to get $f^n(x)$, and then applying $f$ once more.
+
+There's another definition of successor:
+\begin{align*}
+  {succ} &= \lambd[{n}][\lambd[fx][{n} f (f x)]]
+\end{align*}
+
+\begin{prob}
+  Explain why this successor also works, as we did for the first successor.
+\end{prob}
+
+Now we define the addition function:
+\begin{align*}
+  {add} &= \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
+\end{align*}
+or alternatively:
+\begin{align*}
+  {add} &= \lambd[{a}{b}][{a} ~ {succ} ~ {b}]
+\end{align*}
+
+The first addition works as follows: we first accept two numbers ${a}$ and
+${b}$, and want to return another number, which is a function that accepts
+$f$ and $x$ and returns $f^{a+b}(x)$, which is equal to
+$f^{a}(f^{b}(x))$, which is exactly what we are doing.
+
+The second addition is simpler, as $succ^a(b)$ is equal to ${a + b}$.
+
+And the multiplication:
+\begin{align*}
+  {mult} &= \lambd[{a}{b}][\lambd[fx][{a} ({b} f) x]]
+\end{align*}
+
+Note what we get by ${b} f$: it's a function applying $f$
+to the argument for $b$ times. Thus what we are doing by ${a} ({b} f) x$ is applying ``applying
+$f$ for $b$ times'' for $a$ times to $x$, which is applying $f$ for $a
+\times b$ times to $x$. We can actually simplify this term further by
+$\eta$-reduction:
+\begin{align*}
+  {mult} &= \lambd[ab][\lambd[f][a (b f)]]
+\end{align*}
+
+We can also make it by $add$:
+\begin{align*}
+  {mult} &= \lambd[ab][a (add ~ a) 0]
+\end{align*}
+
+\begin{prob}
+  Explain why does this definition also work.
+\end{prob}
+
+We can even calculate exponentiation in lambda calculus, and it's
+(surprisingly) rather simple:
+\begin{align*}
+  {pow} &= \lambd[be][e b]
+\end{align*}
+where $b$ stands for base and $e$ stand for exponent. 
+This definition is kind of magical and hard to explain, but
+intuitively $e f$ is $f^e$ by our encoding of numbers. If you find it
+hard to understand, fortunately we can
+also define it by multiplication:
+\begin{align*}
+  {pow} &= \lambd[be][e ({mult}~ b) 1]
+\end{align*}
+
+Predecessor and subtraction on church numeral is that simple as we might think: it
+requires encoding of pairs which is introduced in next section,
+at the end of which we define both.
+\end{document}
