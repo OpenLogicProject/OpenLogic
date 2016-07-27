@@ -23,16 +23,20 @@ Church-Rosser property based on conclusions in last section.
     $x, N, Q$. Since $N \bredpar N$ and $Q \bredpar Q$ by
     \olref[pb]{thm:refl}, we immediately have $(\lambd[x][N])Q
     \bredpar \Subst{N}{Q}{x}$ by \olref[pb]{def:4}.
-  \item The other cases are left as exercises.
+  \item The other cases are left as exercises. \ollabel{lem:one-par:2}
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Finish the proof of \olref{lem:one-par:2}.
+\end{prob}
 
 \begin{lem}\ollabel{lem:par-red}
   If $M \bredpar M'$, then $M \bred M'$.
 \end{lem}
 \begin{proof} Induction on the derivation of $M \bredpar M'$.
   \begin{enumerate}
-  \item If the last rule is \olref[pb]{def:1}, left as exercise.
+  \item If the last rule is \olref[pb]{def:1}, left as exercise. \ollabel{lem:par-red:1}
   \item If the last rule is \olref[pb]{def:2}, then $M$ is 
     $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ for some $x, N, N'$, where
     $N \bredpar N'$. By I.H. we have $N \bred N'$, then obviously
@@ -53,6 +57,9 @@ Church-Rosser property based on conclusions in last section.
   \end{enumerate}
 \end{proof}
 
+\begin{prob}
+  Finish the proof of \olref{lem:par-red:1}.
+\end{prob}
 
 \begin{lem}\ollabel{lem:str}
   $\bred$ is the smallest transitive relation containing $\bredpar$.
