@@ -13,9 +13,9 @@
 In this section we will prove the Church-Rosser property of parallel
 $\beta\eta$-reduction, which is basically $\beta$-reduction plus
 $\eta$. Since most things are copy-and-paste, we have omitted some
-duplicated parts of definitions and proofs here.
+duplicated definitions and proofs here.
 
-\begin{defn}[parallel $\beta\eta$-reduction, $\beredpar$] \ollabel{def}
+\begin{defn}[Parallel $\beta\eta$-reduction, $\beredpar$] \ollabel{def}
   \emph{Parallel $\beta\eta$-reduction} ($\beredpar$) on terms is inductively defined as follows:
   \begin{enumerate}
     \item The first four cases are exactly those from \olref[pb]{def}.
@@ -36,11 +36,11 @@ duplicated parts of definitions and proofs here.
   as follows:
   \begin{align}
     \becd{x} &= x \ollabel{cd:1} \\
-    \becd{\lambd[x][N]} &= \lambd[x][\becd{N}] \ollabel{cd:2}\\
-    \becd{PQ} &= \becd{P}\becd{Q} && \text{if $P$ is not abstraction} \ollabel{cd:3} \\
-    \becd{(\lambd[x][N])Q} &= \Subst{\becd{N}}{\becd{Q}}{x}
+    \becd{(\lambd[x][N])} &= \lambd[x][\becd{N}] \ollabel{cd:2}\\
+    \becd{(PQ)} &= \becd{P}\becd{Q} && \text{if $P$ is not abstraction} \ollabel{cd:3} \\
+    \becd{((\lambd[x][N])Q)} &= \Subst{\becd{N}}{\becd{Q}}{x}
                              \ollabel{cd:4} \\
-    \becd{\lambd[x][Nx]} &= \becd{N} \ollabel{cd:5} &7 \text{if $x
+    \becd{(\lambd[x][Nx])} &= \becd{N} \ollabel{cd:5} & \text{if $x
                                                       \notin FV(N)$}
   \end{align}
 \end{defn}

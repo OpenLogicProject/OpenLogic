@@ -30,9 +30,9 @@ Informal interpretation of the above definition: Parallel reduction allows us to
 term in one step. It's different from reduction in the sense that we
 can only contract redices that's in the original term, but not redices
 arising in current parallel reduction. For example, the term
-$(\lambd[f][fx])(\lambd[y][y])$ can be only be parallel reduced
+$(\lambd[f][fx])(\lambd[y][y])$ can only be parallel reduced
 to itself or $(\lambd[y][y])x$, but not further to $x$ (reduction can do
-that), because this redex arises in this step of parallel reduction,
+that though), because this redex arises in this step of parallel reduction,
 so we can't contract it. However we can perform another parallel
 reduction      to get it.
 
@@ -48,16 +48,16 @@ reduction      to get it.
   as follows:
   \begin{align}
     \bcd{x} &= x \ollabel{bcd:1} \\
-    \bcd{\lambd[x][N]} &= \lambd[x][\bcd{N}] \ollabel{bcd:2}\\
-    \bcd{PQ} &= \bcd{P}\bcd{Q} && \text{if $P$ is not abstraction} \ollabel{bcd:3} \\
-    \bcd{(\lambd[x][N])Q} &= \Subst{\bcd{N}}{\bcd{Q}}{x} \ollabel{bcd:4}
+    \bcd{(\lambd[x][N])} &= \lambd[x][\bcd{N}] \ollabel{bcd:2}\\
+    \bcd{(PQ)} &= \bcd{P}\bcd{Q} && \text{if $P$ is not abstraction} \ollabel{bcd:3} \\
+    \bcd{((\lambd[x][N])Q)} &= \Subst{\bcd{N}}{\bcd{Q}}{x} \ollabel{bcd:4}
   \end{align}
 \end{defn}
 
 Complete development, as its name suggests, is a ``
 complete parallel reduction''. While for parallel reduction we still can choose
 to not contract a redex, for complete development we have no choice
-but to contract all. Thus the complete
+but to contract all of them. Thus the complete
 development of $(\lambd[f][fx])(\lambd[y][y])$ is
 $(\lambd[y][y])x$, not itself.
 
@@ -67,8 +67,8 @@ $(\lambd[y][y])x$, not itself.
 \end{editorial}
 
 \begin{lem}\ollabel{lem:comp}
-  If $M \bredpar M'$ and $R \bredpar R'$, then $\Subst{M}{P}{y}
-  \bredpar \Subst{M'}{P'}{y}$.
+  If $M \bredpar M'$ and $R \bredpar R'$, then $\Subst{M}{R}{y}
+  \bredpar \Subst{M'}{R'}{y}$.
 \end{lem}
 \begin{proof}
   By induction on the derivation of $M \bredpar M'$.
@@ -88,7 +88,7 @@ $(\lambd[y][y])x$, not itself.
       we want to prove is $\Subst{((\lambd[x][N])Q)}{R}{y}
       \bredpar \Subst{\Subst{N'}{Q'}{x}}{R'}{y}$, which is
       $(\lambd[x][\Subst{N}{R}{y}])\Subst{Q}{R}{y} \bredpar
-      \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$, which
+      \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$ (Why?), which
       can be derived by \olref{def:4} with I.H.
   \end{enumerate}
 \end{proof}

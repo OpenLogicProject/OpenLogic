@@ -10,7 +10,7 @@
 
 \olsection{$\beta$-reduction}
 
-In this section we will prove $\beta$-reduction ($\bred$) also has
+In this section we will prove that $\beta$-reduction ($\bred$) also has
 Church-Rosser property based on conclusions in last section.
 
 \begin{lem}\ollabel{lem:one-par}
@@ -32,7 +32,7 @@ Church-Rosser property based on conclusions in last section.
 \end{lem}
 \begin{proof} Induction on the derivation of $M \bredpar M'$.
   \begin{enumerate}
-  \item Left as exercise.
+  \item If the last rule is \olref[pb]{def:1}, left as exercise.
   \item If the last rule is \olref[pb]{def:2}, then $M$ is 
     $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ for some $x, N, N'$, where
     $N \bredpar N'$. By I.H. we have $N \bred N'$, then obviously
@@ -60,14 +60,15 @@ Church-Rosser property based on conclusions in last section.
 \begin{proof}
   Let $\xred$ be the smallest transitive relation containing $\bredpar$.
   Recall that it can be inductively defined by the rules of transitivity, plus the rule ``if
-  $M \bredpar N$ then $M \xred N$. Now we prove $\bred = \xred$:
+  $M \bredpar N$ then $M \xred N$''. Now we prove $\bred = \xred$:
   
   $\bred \in \xred$. For any $M \bred M'$, we can extract a series of
   $\bredone$ from it and, by \olref{lem:one-par}, we can change it
   into a series of $\bredpar$, which is $\xred$ by its definition.
 
-  $\xred \in \bred$. Similar to the above case, except that we will
-  use \olref{lem:par-red} and definition of $\bred$ instead.
+  $\xred \in \bred$. For any $M \xred M'$, we can extract a series of
+  $\bredpar$ and by \olref{lem:par-red} we can change it into a series
+  of $\bred$, which, combined, is another $\bred$.
 \end{proof}
 
 \begin{thm}{thm:cr}
