@@ -51,5 +51,5 @@ clean:
 	latexmk -c $(ALLTEXFILES)
 
 upload: FORCE_MAKE
-	rsync -avz --delete --include "[^\.]*/" --include '*.pdf' --exclude '*'  . rzach@c1.ucalgary.ca:webdisk/public_html/static/open-logic/
+	rsync -avz --delete --include "[^\.]*/" --include '*.pdf' --include '*.png' --exclude '*'  . rzach@c1.ucalgary.ca:webdisk/public_html/static/open-logic/
 
