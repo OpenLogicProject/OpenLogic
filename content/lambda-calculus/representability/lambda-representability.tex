@@ -1,0 +1,38 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: lambda-representability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{lr}
+\olsection{Lambda representability}
+
+We introduce the concept of lambda representability(or
+lambda definability) as folllws:
+\begin{defn}
+Let $f(x_0, \dots, x_{n-1})$ be an $n$-ary partial function from $\Nat$
+to $\Nat$. We say a lambda term $M$ \emph{represents} $f$ if for every
+sequence of natural numbers $m_0$, \dots,~$m_{n-1}$,
+\[
+M \num{m_0} \num{m_1} \dots \num{m_{n-1}} \red \num{f(m_0, m_1, \dots,
+  m_{n-1})}
+\]
+if $f(m_0, \dots, m_{n-1})$ is defined, and $M \num{m_0} \num{m_1}
+\dots \num{m_{n-1}}$ has no normal form otherwise. 
+\end{defn}
+
+As we use $\num{n}$ for the term representing the number $n$, we will
+use $\num{f(x_0, \dots, x_{n-1})}$ for terms representing this
+function $f$.
+
+Note that there is more than one definition of representing functions in lambda
+calculus, among which the above one is the earliest and most natural,
+due to Kleene and Church. However, as we will see, this definition has
+some limitations, leading to other definitions, such as
+Barendregt (undefined being unsolvable) and Statman (undefined belonging
+to a co-Viser set). However we adopt this definition as it requires
+minimal prerequisite.
+
+\end{document}

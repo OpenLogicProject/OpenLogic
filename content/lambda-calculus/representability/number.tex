@@ -25,9 +25,19 @@ In the rest
 of the part for terms involving church numerals we won't distinguish
 $n$ and $\num{n}$; both $n$ and
 $\num{n}$ are addressed as $n$. We may use $n$ as a variable in the
-terms and use $n$ as the represented number in the explanations. 
+terms and use $n$ as the represented number in the explanations.
 
-Successor is then defined to be
+We first define the predicate $iszero$, which accepts a number and
+returns a boolean depending on if the number is zero:
+\begin{align*}
+  iszero &= \lambd[n][n (\lambd[x][false]) true]
+\end{align*}
+How does it work? We pass a function returning $false$ whatever the
+argument is, and the initial value $true$, to $n$. Thus the function
+will be applied on this initial value $true$ for $n$ times, and
+obviously the result is true only when $n$ is zero and $false$ otherwise.
+
+Successor is defined to be
 \begin{align*}
   {succ} &= \lambd[{n}][\lambd[fx][f ({n} f x)]]
 \end{align*}

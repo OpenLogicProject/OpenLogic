@@ -1,0 +1,73 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: general-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{gen}
+\olsection{General recursive functions}
+
+Although we haven't stated it, but analogous to Kleene's Normal Form
+Theorem for partial recursive functions, general recursive functions
+can also be written in normal forms as follows:
+\begin{align*}
+  f(x) \simeq U(\mu s \; T(e,x,s))
+\end{align*}
+except that $T$ should be a regular function such that $\mu s \; T(e,x,s)$
+is total. Thus, to prove all general recursive functions
+representable in lambda calculus, it suffice to prove:
+
+\begin{enumerate}
+\item All primitive recursive functions is representable.
+\item Composition of a primitive recursive function after a
+  unbounded search on a regular primitive recursive function
+  is representable, given the representation of both.
+\end{enumerate}
+
+The first was proved in the last section, we will prove the second in
+this section.
+
+Given the representation of a regular primitive recursive
+$T(e,x,s)$ and a primitive recursive $U(x)$, the representation of
+$\mu s \; T(e,x,s)$ can be:
+\begin{align*}
+  \num{\mu x \; f(x,z)} &= (Y ~ search) \num{f} \num{0} \num{z} \\
+  search &= \lambd[g][\lambd[fxz][iszero (\num{f} x z) x (g (succ ~ x)
+           z)]]
+\end{align*}
+where $Y$ is any fixpoint combinator. Informally speaking, $search$ is
+a self-referencing function: starting with $\num{x}$, test whether $\num{f} x
+z$ is zero: if so return $x$ instantly, otherwise call itself
+with $succ ~ x$. Thus $(Y ~ search) \num{f} \num{0} \num{z}$ returns
+the least $x$ for which $f(x,z)$ is zero.
+
+We now prove the correctness of this representation:
+\begin{lem}
+  The above representation indeed represents the unbound search for
+  a regular primitive recursive function, that is,
+  If $f(x,z) = 0$ for some $x$ and $f(x',z) > 0$ for all $x' < x$,
+    then $(Y ~ search) \num{f} \num{0} \num{z} \red \num{x}$.
+\end{lem}
+\begin{proof}
+  We observe that $(Y ~ search) \num{f} \num{x} \num{z}$ reduces to $\num{x}$ if
+  $f(x,z)=0$, or reduces to $(Y ~ search) \num{f} \num{x+1} \num{z}$
+  otherwise. The lemma follows immediately.
+\end{proof}
+
+The composition of a primitive recursive function $U(x)$ and an
+unbounded search on regular primitive recursive function is simply
+defined as:
+\begin{align*}
+  \num{U(\mu s \; T(e,x,s))} &= \lambd[x][\num{U} \num{\mu s \; T(e,x,s)}]
+\end{align*}
+
+The proof of the correctness is left to the reader.
+
+\begin{prob}
+  Justify the above representation; you don't have to worry if the
+  search is undefined as $T$ is regular.
+\end{prob}
+
+\end{document}

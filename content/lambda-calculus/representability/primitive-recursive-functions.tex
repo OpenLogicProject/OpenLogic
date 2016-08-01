@@ -1,0 +1,81 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: primitive-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{prim}
+\olsection{Primitive recursive functions}
+
+In this section we will give representation of primitive recursive
+functions which is relatively easier as they are all total, thus we don't have to worry about cases where they are
+undefined.
+
+Basic primitive recursive functions can be represented as follows:
+\begin{align*}
+  \num{0} &= \lambd[fx][x]\\
+  \num{S} &= \lambd[n][\lambd[fx][n f (f x)]] \\
+  \num{P^n_i} &= \lambd[x_0\dots x_{n-1}][x_i] \\
+\end{align*}
+
+We omit the proof of justifying the above representations as it should
+be immediate.
+
+Composition of primitive recursive functions is represented as
+follows: given $f$ an $k$-ary function and $g_0, \dots, g_{k-1}$ some
+$l$-ary function, along with their representations, the composition $h$ an $l$-ary function is
+represented as:
+\begin{align}
+  \num{h} &= \lambd[x_0 \dots x_{l-1}][\num{f} (\num{g_0} x_0 \dots
+            x_{l-1}) \dots (\num{g_{k-1}} x_0 \dots x_{l-1})]
+\end{align}
+
+\begin{prob}
+  Justify the above representation; you only have to consider the
+  cases where all subroutine functions are defined as they are primitive
+  recursive.
+\end{prob}
+
+
+Now we try to represent primitive recursion. Recall that a primitive recursion $h$ is defined from a $k$-ary function $f$ and a $k+2$-ary function
+$g$; informally speaking, the recursion is basically a iteration
+maintaining two things: the current $x$ and current value of $h$. This
+reminds us of the definition of church numerals, which is defined as a
+iterator. Here comes the representations($z$ is abbreviation for $z_0
+\dots z_{k-1}$ for simplicity):
+\begin{align*}
+  \num{h} &= \lambd[x][\lambd[z][fst (x (\lambd[p].\tuple{succ (fst ~ p),
+            (\num{g} (fst ~ p) (snd ~ p) z)}) \tuple{\num{0}, \num{f} z})]]
+\end{align*}
+The iteration state we maintain is a pair, the first of which is the
+current $x$ and the second is current $h$ value. For every step of
+iteration we create a pair of new values of $x$ and $h$; after the
+iteration is done we return the second part of the pair and that's the
+final $h$ value. We now prove this is indeed a representation of
+primitive recursion.
+
+\begin{lem}
+  Given $\num{g},\num{h}$ as representation of two primitive recursive
+  functions $g,f$ respectively, the
+  term $\num{h}$ defined above is representation of the primitive
+  recursion $h$ formed from $g,f$.
+\end{lem}
+\begin{proof}
+  We want to prove that for any $x$ and $z$, $\num{h(x,z)} = \num{h}
+  \num{x} \num{z}$. We prove it by induction on $x$.
+
+  If $x$ is zero, then $\num{x}$ is $\lambd[ab][b]$, then $\num{h} \num{x}
+  \num{z} \red \num{f} z$. If $f(z)$ is defined then $\num{f} z =
+  \num{f(z)}$ (by definition of $\num{f}$), so $\num{h} \num{x} \num{z}
+  = \num{h(x,z)}$;
+  
+  If $x$ is $x'+1$, then $\num{h} \num{x}
+  \num{z} \red \num{g} \num{x'} (\num{h} \num{x'} z) z$. By I.H.
+  $\num{h} \num{x'} z \simeq \num{h(x',z)}$, thus everything should
+  follows and 
+\end{proof}
+
+\end{document}
+
