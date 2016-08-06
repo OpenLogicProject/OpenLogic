@@ -28,13 +28,12 @@ definition of $fac$? Note that recursive definition (self-reference)
 is not part of lambda calculus. When we write definition of $true$,
 $false$, numbers and functions, for example:
 \begin{align*}
-    {succ} &= \lambd[{n}][\lambd[fx][f ({n} f x)]]
+    {mult} &= \lambd[ab][a (add ~ a) 0]
 \end{align*}
-, what we really try to express is that successor is representable in
-lambda calculus, and whenever we need to use successor in other
-terms, we can just plug the right hand of the definition in the place
-of the name $succ$. Do this recursively and finally in all definitions
-no reference to other terms will exists. 
+, we can always plug the definition of $add$ in the place of the
+reference of $add$ in $mult$, and do it recursively if there are still
+references in $add$ definition, until we have a reference-free $mult$ definition, which
+is a pure lambda term, meaning this is indeed something in lambda calculus.
 
 However this is not true in the case of self-reference; if we plug the
 definition of $fac$ itself in the place of $fac$ in the right hand, we
@@ -48,7 +47,7 @@ and again and the definition can keep growing. Thus this way of
 defining factorial (or more generally self-reference functions) is not
 feasible.
 
-However, if someone could pass to us the function being defined, that
+However, if someone could give us the function being defined, that
 would be great. That is, we can define factorial as follows:
 \begin{align*}
   fac' = \lambd[f][\lambd[n][iszero ~ n ~ 0 ~ (mult n (f (pred n)))]]
@@ -56,7 +55,6 @@ would be great. That is, we can define factorial as follows:
 and expect someone will pass the real factorial as parameter $f$ to $fac'$, then
 the returning function is another factorial. Moreover, the factorial
 being passed and the factorial being returns should be same.
-
 
 That is, if we regard $fac'$ as a function accepting a function and
 returning a function, then the fixpoint of $fac'$ would be the
@@ -82,20 +80,24 @@ and we will get:
         &\ldots \\
         &= g (g (\ldots ))
 \end{align*}
-Note how the last term is similar to fixed-point iteration, a method used to
-compute the fixpoint of a real value function. Thus intuitively
-speaking $g$ applied on any term for infinite times should be the
+Note how the last term is analogous to fixed-point iteration, a method used to
+compute the fixpoint of a real-valued function. Thus intuitively
+speaking $g$ applied on any term for infinite times should be a
 fixpoint of $g$. To get a concrete feeling, we can try out some terms;
 take the factorial for instance:
 \begin{align*}
   fac &= Y ~ fac'\\
   fac 3 &= Y ~ fac' ~ 3 \\
       &=fac' (Y ~ fac') 3 \\
-      &=(\lambd[f][\lambd[n][iszero ~ n ~ 0 ~ (mult n (f (pred n)))]])
+      &=(\lambd[f][\lambd[n][iszero ~ n ~ 0 ~ (mult ~ n (f (pred ~ n)))]])
   fac ~ 3\\
-      &= mult 3 (fac 2) \\
+      &= mult ~ 3 ~ (fac ~ 2) \\
       \ldots
 \end{align*}
+
+\begin{prob}
+  Finish the above equation to the result of $6$.
+\end{prob}
 
 \end{document}
 

@@ -29,12 +29,16 @@ We can easily define some useful functions based on this encoding;
 $sum$ calculates the sum of a list of church numerals. It works by
 doing an accumulation on the list, where the initial value is $0$ and
 for each element, with $x$ to be the element and $a$ to be the
-accumulator, return $add ~ x ~ a$ as the new accumulator. The result
-is the sum. In addition, you can $\eta$-reduce this term (we keep this form for
-easier understanding).
+accumulated value, return $add ~ x ~ a$ as the new value. The result
+is the sum. Also you can $\eta$-reduce this term (we keep this form for
+easier understanding) into $\lambd[l][l ~ add ~ 0]$.
 
 \begin{prob}
   What does $len$ do? Explain.
+\end{prob}
+
+\begin{prob}
+  Define a function that reverses a list.
 \end{prob}
 \end{document}
 

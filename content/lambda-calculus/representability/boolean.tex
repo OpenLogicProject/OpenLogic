@@ -9,16 +9,17 @@
 \olfileid{lc}{rep}{bool}
 \olsection{Boolean}
 
-We can encode booleans in pure lambda calculus as following:
+We can encode booleans in pure lambda calculus as follows:
 
 \begin{align*}
   {true} &= \lambd[x][\lambd[y][x]]\\
   {false} &= \lambd[x][\lambd[y][y]]
 \end{align*}
 
-The intuition is that a boolean is selector, in the sense that it's a function accepting two arguments
-arnd returns either of them, depending on whether it represents true or
-false.
+The intuition is that a boolean is a selector, in the sense that it's a function accepting two arguments
+and returning either of them, depending on whether it represents true or
+false. For example, $true ~ M ~ N$ always reduces to $M$, while $false
+~ M ~ N$ always reduces to $N$.
 
 \begin{explain}
   For those wondering why these two terms represent true and false:
@@ -26,7 +27,7 @@ false.
   a voltage: high for true and low for false. Then why can a voltage
   represent a boolean? Because assuming this, we can then design
   electrical components that can be interpreted in this way as conjuction or
-  disjunction, etc. For the same reason, if we inter
+  disjunction, etc. The boolean encoding is analogous as we will see.
 \end{explain}
 
 
@@ -38,7 +39,7 @@ are some of them:
 \end{align*}
 
 The function ``and'' accepts two booleans as argument; knowing the
-Boolean will always behave as described above, it passes $b$ and ${false}$
+booleans will always behave as described above, it passes $b$ and ${false}$
 to $a$, which will evaluated to $b$ if $a$ is ${true}$, or ${false}$ if $a$ is ${false}$,
 which is exactly how conjuction is defined.
 

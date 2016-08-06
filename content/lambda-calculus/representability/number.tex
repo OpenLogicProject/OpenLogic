@@ -12,30 +12,34 @@
 We can also encode natural numbers in lambda calculus. Let
 $\num{n}$ be the term for the number $n$, which is defined as:
 \begin{align*}
-  n &= \lambd[fx][f^n(x)]\\
+  \num{n} &= \lambd[fx][f^n(x)]
 \end{align*}
-where $f^n(x)$ stand for $x$ applied by $f$ for $n$ times. For
+where $f^n(x)$ stands for $x$ applied by $f$ for $n$ times. For
 example, $\num{3}$ is defined to be $f(f(f(x)))$. 
 
-As you can see, the natural number $n$ is encoded as a function
+As we can see, the natural number $n$ is encoded as a function
 accepting two arguments $f$ and $x$, returning $f^n(x)$. This encoding
-of natural numbers is called \emph{church numeral}.
+of natural numbers is called \emph{church numeral}, invented by Alonzo
+Church.
 
-In the rest
-of the part for terms involving church numerals we won't distinguish
-$n$ and $\num{n}$; both $n$ and
-$\num{n}$ are addressed as $n$. We may use $n$ as a variable in the
-terms and use $n$ as the represented number in the explanations.
+In the rest of the chapter there will be terms involving church
+numerals, which will be written in the form of $n$ instead of
+$\num{n}$ for simplicity. In the explanation of such terms, there will
+also be $n$, which stands for the actual number the church numeral in
+the term represents.
+
 
 We first define the predicate $iszero$, which accepts a number and
 returns a boolean depending on if the number is zero:
 \begin{align*}
   iszero &= \lambd[n][n (\lambd[x][false]) true]
 \end{align*}
-How does it work? We pass a function returning $false$ whatever the
-argument is, and the initial value $true$, to $n$. Thus the function
-will be applied on this initial value $true$ for $n$ times, and
-obviously the result is true only when $n$ is zero and $false$ otherwise.
+How does it work? As church numerals are defined as iterators (of $n$
+times), we set the initial value to be $true$, and for every step of
+iteration, we return $false$ whatever the result of last iteration is.
+This step will be applied on the initial value for $n$ times, and the
+result will be $true$ if and only if the step is not applied at all,
+meaning $n$ is zero.
 
 Successor is defined to be
 \begin{align*}
@@ -92,7 +96,7 @@ We can also make it by $add$:
 \end{align*}
 
 \begin{prob}
-  Explain why does this definition also work.
+  Explain why this definition also work.
 \end{prob}
 
 We can even calculate exponentiation in lambda calculus, and it's
@@ -103,13 +107,12 @@ We can even calculate exponentiation in lambda calculus, and it's
 where $b$ stands for base and $e$ stand for exponent. 
 This definition is kind of magical and hard to explain, but
 intuitively $e f$ is $f^e$ by our encoding of numbers. If you find it
-hard to understand, fortunately we can
-also define it by multiplication:
+hard to understand, we can still define it by multiplication:
 \begin{align*}
   {pow} &= \lambd[be][e ({mult}~ b) 1]
 \end{align*}
 
-Predecessor and subtraction on church numeral is that simple as we might think: it
-requires encoding of pairs which is introduced in next section,
+Predecessor and subtraction on church numeral is not that simple as we might think: it
+requires encoding of pairs which is introduced in the next section,
 at the end of which we define both.
 \end{document}

@@ -57,24 +57,29 @@ final $h$ value. We now prove this is indeed a representation of
 primitive recursion.
 
 \begin{lem}
-  Given $\num{g},\num{h}$ as representation of two primitive recursive
+  Given $\num{f},\num{g}$ as representation of two primitive recursive
   functions $g,f$ respectively, the
   term $\num{h}$ defined above is representation of the primitive
   recursion $h$ formed from $g,f$.
 \end{lem}
 \begin{proof}
   We want to prove that for any $x$ and $z$, $\num{h(x,z)} = \num{h}
-  \num{x} \num{z}$. We prove it by induction on $x$.
+  \num{x} \num{z}$. By induction on $x$.
 
-  If $x$ is zero, then $\num{x}$ is $\lambd[ab][b]$, then $\num{h} \num{x}
-  \num{z} \red \num{f} z$. If $f(z)$ is defined then $\num{f} z =
-  \num{f(z)}$ (by definition of $\num{f}$), so $\num{h} \num{x} \num{z}
-  = \num{h(x,z)}$;
+  If $x$ is zero, we want $\num{h(0,z)} = \num{h} \num{0} \num{z}$,
+  which is $\num{f(z)} = \num{f} \num{z}$, which holds by definition
+  of $\num{f}$.
   
-  If $x$ is $x'+1$, then $\num{h} \num{x}
-  \num{z} \red \num{g} \num{x'} (\num{h} \num{x'} z) z$. By I.H.
-  $\num{h} \num{x'} z \simeq \num{h(x',z)}$, thus everything should
-  follows and 
+  If $x$ is $x'+1$, then
+  \begin{align*}
+    &\num{h(x'+1,z)} = \num{h} \num{x'+1} \num{z} \\
+    \Leftarrow & \num{g(x',h(x',z),z)} = \num{g} \num{x'} (\num{h}
+                 \num{x'} \num{z}) \num{z} \\
+    \Leftarrow & \num{g} \num{x'} \num{h(x',z)} \num{z} = \num{g}
+                 \num{x'} (\num{h}, \num{x'}, \num{z}) \num{z} \\
+    \Leftarrow & \num{h(x',z)} = \num{h} \num{x'} \num{z}
+  \end{align*}
+  The last of which is exactly the I.H.
 \end{proof}
 
 \end{document}
