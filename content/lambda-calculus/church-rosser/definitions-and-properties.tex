@@ -21,6 +21,31 @@ some common properties of this property.
   such that $P \xredone N$ and $Q \xredone N$.
 \end{defn}
 
+Viewing lambda calculus as a computation model, term can be viewed as
+``expressions'', and a relation on it is then some ``calculation
+rules'', what Church-Rosser property states is that when there is more
+than one way to ``calculate'' a ``expression'', the ``expression'' after
+any calculation represents essentially the
+same thing no matter which way is chosen, in the sense that both
+``expression'' can be further ``calculated'' to a single expression.
+
+As an analogous example in elementary algebra, there's more than one way to calculate $4*(1+2)+3$:
+either to $4*3+3$ or to $4*1+4*2+3$; both of which, however, can be
+further calculated to $12+3$.
+
+Moreover, an immediate corollary of the property in the case of $\beta$-reduction is that if a term has
+a normal form, then it's unique: If $M$ can be
+reduced to $P$ and $Q$, both of which are normal forms, then by
+Church-Rosser property, there exists some $N$ such that both $P$ and
+$Q$ reduce to it. But $P$ and $Q$ are normal forms, thus the
+reduction to $N$ can only be the trivial case, i.e.: $P$ is $Q$ is
+$N$. This justifies our speaking of \emph{the} normal form of a term.
+
+Continuing our viewing lambda calculus as a computation model, normal form of
+a term can be thought of as ``final result'' of the term, then the above
+corollary means there's only one, if any, ``result'' of a term, just
+like there is only result of $4*(1+2)+3$: $16$.
+
 \begin{thm} \ollabel{thm:str}
   If a relation $\xredone$ satisfies Church-Rosser property, and $\xred$ is the
   smallest transitive relation containing $\xredone$, then $\xred$ satisfies
