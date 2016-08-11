@@ -9,65 +9,50 @@
 \olfileid{lc}{rep}{gen}
 \olsection{General recursive functions}
 
-Although we haven't stated it, but analogous to Kleene's Normal Form
-Theorem for partial recursive functions, general recursive functions
-can also be written in normal forms as follows:
-\begin{align*}
-  f(x) \simeq U(\mu s \; T(e,x,s))
-\end{align*}
-except that $T$ should be a regular function such that $\mu s \; T(e,x,s)$
-is total. Thus, to prove all general recursive functions
-representable in lambda calculus, it suffices to prove:
-
-\begin{enumerate}
-\item All primitive recursive functions are representable.
-\item Composition of a primitive recursive function after a
-  unbounded search on a regular primitive recursive function
-  is representable, given the representation of both.
-\end{enumerate}
-
-The first was proved in the last section, we will prove the second in
-this section.
-
-Given the representation of a regular primitive recursive
-$T(e,x,s)$ and a primitive recursive $U(x)$, the representation of
-$\mu s \; T(e,x,s)$ can be:
-\begin{align*}
-  \num{\mu x \; f(x,z)} &= (Y ~ search) \num{f} \num{0} \num{z} \\
-  search &= \lambd[g][\lambd[fxz][iszero (\num{f} x z) x (g (succ ~ x)
-           z)]]
-\end{align*}
-where $Y$ is any fixpoint combinator. Informally speaking, $search$ is
-a self-referencing function: starting with $\num{x}$, test whether $\num{f} x
-z$ is zero: if so return $x$ instantly, otherwise call itself
-with $succ ~ x$. Thus $(Y ~ search) \num{f} \num{0} \num{z}$ returns
-the least $x$ for which $f(x,z)$ is zero.
-
-We now prove the correctness of this representation:
-\begin{lem}
-  The above representation indeed represents the unbound search for
-  a regular primitive recursive function, that is,
-  If $f(x,z) = 0$ for some $x$ and $f(x',z) > 0$ for all $x' < x$,
-    then $(Y ~ search) \num{f} \num{0} \num{z} \red \num{x}$.
-\end{lem}
+In this chapter we prove the representability of general recursive
+functions. The formation of them has one more case than primitive
+recursive functions: unbounded search on regular functions. Other
+cases is similar, since the lemmas used, only requiring functions to be
+total, can be applied here again. 
+\begin{prop}
+  Every general recursive function is representable.
+\end{prop}
 \begin{proof}
-  We observe that $(Y ~ search) \num{f} \num{x} \num{z}$ reduces to $\num{x}$ if
-  $f(x,z)=0$, or reduces to $(Y ~ search) \num{f} \num{x+1} \num{z}$
-  otherwise. The lemma follows immediately.
+  \begin{enumerate}
+  \item The first three cases are omitted.
+  \item If it's formed by an unbounded search on a regular general
+    recursive function $f$, with the I.H. that $f$ is representable,
+    we hope the unbounded search $\mu x \; f(x, \vec z)$ is also
+    representable. 
+  \end{enumerate}
 \end{proof}
 
-The composition of a primitive recursive function $U(x)$ and an
-unbounded search on regular primitive recursive function is simply
-defined as:
-\begin{align*}
-  \num{U(\mu s \; T(e,x,s))} &= \lambd[x][\num{U} \num{\mu s \; T(e,x,s)}]
-\end{align*}
+The missing piece in the last case is what we will prove in this
+section:
 
-The proof of the correctness is left to the reader.
-
-\begin{prob}
-  Justify the above representation; you don't have to worry if the
-  search is undefined as $T$ is regular.
-\end{prob}
-
+\begin{lem}
+  If a regular function is representable, then the unbounded search on
+  it is also representable.
+\end{lem}
+\begin{proof}
+  Given the representation of a regular function $f(x,\vec z)$, the
+  representation of an unbounded search on it with parameters $\vec
+  z$, $\num{\mu x  f(x,\vec z)}$ can be defined as:
+  \begin{align*}
+    \num{\mu x  f(x,\vec{z})} &= (Y ~ search) \num{f} \num{0}
+                                 \vec{\num{z}} \\
+    search &= \lambd[g][\lambd[fx \vec{z}][iszero (\num{f} x \vec{z}) x (g (succ ~ x)
+             \vec{z})]]
+  \end{align*}
+  where $Y$ is any fixpoint combinator. Informally speaking, $search$ is
+  a self-referencing function: starting with $\num{x}$, test whether $\num{f} x
+  \vec z$ is zero: if so return $x$ instantly, otherwise call itself
+  with $succ ~ x$. Thus $(Y ~ search) \num{f} \num{0} \vec{\num{z}}$ returns
+  the least $x$ for which $f(x,\vec{\num{z}})$ is zero.
+  
+  We observe that $(Y ~ search) \num{f} \num{x} \vec{\num{z}}$ reduces to $\num{x}$ if
+  $f(x,\vec z)=0$, or reduces to $(Y ~ search) \num{f} \num{x+1} \vec{\num{z}}$
+  otherwise. It follows that if $f(x,z) = 0$ for some $x$ and $f(x',z) > 0$ for all $x' < x$,
+  then $(Y ~ search) \num{f} \num{0} \vec{\num{z}} \red \num{x}$.
+\end{proof}
 \end{document}

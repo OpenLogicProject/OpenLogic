@@ -10,23 +10,21 @@
 \olsection{Partial recursive functions}
 
 In this section we will discuss the representation of partial
-recursive functions. As in the last section of general recursive
-functions, we can again use Kleene's Normal Theorem to simplify our
-reasoning. The only difference is that the primitive recursive
-function $T(e,x,s)$ that the unbounded search applied on is no longer
-necessary regular, bringing us troubles. For example, we may want to
-reuse the representation for composition of primitive recursive
-functions after unbounded search:
+recursive functions. It differs from general recursive function in
+that the functions in unbounded search are not necessarily
+regular, removing the total-ness and bringing us troubles. For example, we may want to
+reuse the representation of composition of total
+functions; for simplicity let's only consider the case of one inner
+function of one argument:
 \begin{align*}
-  \num{U(\mu s \; T(e,x,s))} &= \lambd[x][\num{U} \num{\mu s \; T(e,x,s)}]
+  \num{f(g(x))} &= \lambd[x][\num{f} (\num{g} x)]
 \end{align*}
-however this is problematic: consider when $\mu s \; T(e,x,s)$ is
-undefined, meaning $\num{\mu s \; T(e,x,s)}$ has no normal
-form (assume our previous representation of unbounded search works
-here); In most cases this makes $\num{U} \num{\mu s \; T(e,x,s)}$ has
-no normal forms either, which is what we want; but consider when
-$\num{U}$ is $\lambd[x][\lambd[y][y]]$, in which case $\num{U}
-\num{\mu s \; T(e,x,s)}$ has normal form of $\lambd[y][y]$, not
+however this is problematic: consider when $g(x)$ is
+undefined, meaning $\num{g} x$ has no normal
+form (assuming representation of $g$ works); In most cases this makes
+$\num{f} (\num{g} x)$ has no normal forms either, which is what we want; but consider when
+$\num{f}$ is $\lambd[x][\lambd[y][y]]$, in which case $\num{f}
+(\num{g} x)$ has normal form of $\lambd[y][y]$, not
 satisfying our definition of representability.
 
 This problem has been studied and some workarounds has be invented, 

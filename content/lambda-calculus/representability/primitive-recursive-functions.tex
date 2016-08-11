@@ -13,24 +13,62 @@ In this section we will give representation of primitive recursive
 functions which is relatively easier as they are all total, thus we don't have to worry about cases where they are
 undefined.
 
-Basic primitive recursive functions can be represented as follows:
-\begin{align*}
-  \num{0} &= \lambd[fx][x]\\
-  \num{S} &= \lambd[n][\lambd[fx][n f (f x)]] \\
-  \num{P^n_i} &= \lambd[x_0\dots x_{n-1}][x_i] \\
-\end{align*}
+\begin{prop}
+  Every primitive recursive function is representable.
+\end{prop}
+\begin{proof}
+  For each primitive recursive functions, Prove by induction on
+  the formation of it:
+  \begin{enumerate}
+  \item If it's just a basic recursive function, it's representable by
+    \olref{lem:basic}
+  \item If it's formed by composition, with the I.H. that all
+    subroutine primitive recursive functions, we
+    conclude that the composition is also representable by
+    \olref{lem:comp}
+  \item If it's formed by primitive recursion, with the I.H. that the
+    two subroutine primitive recursive functions is representable, the
+    primitive recursion is also representable, by \olref{lem:prim}
+  \end{enumerate}
+\end{proof}
 
-We omit the proof of justifying the above representations as it should
-be immediate.
+Now we prove the lemmas used in the above proof:
 
-Composition of primitive recursive functions is represented as
-follows: given $f$ an $k$-ary function and $g_0, \dots, g_{k-1}$ some
-$l$-ary function, along with their representations, the composition $h$ an $l$-ary function is
-represented as:
-\begin{align}
-  \num{h} &= \lambd[x_0 \dots x_{l-1}][\num{f} (\num{g_0} x_0 \dots
-            x_{l-1}) \dots (\num{g_{k-1}} x_0 \dots x_{l-1})]
-\end{align}
+\begin{lem}\ollabel{lem:basic}
+  Basic primitive recursive functions, including zero, successor and
+  projection are representable.
+\end{lem}
+\begin{proof}
+  They can be represented as follows:
+  \begin{align*}
+    \num{0} &= \lambd[fx][x]\\
+    \num{S} &= \lambd[n][\lambd[fx][n f (f x)]] \\
+    \num{P^n_i} &= \lambd[x_0\dots x_{n-1}][x_i] \\
+  \end{align*}
+
+  We omit the proof of justifying the above representations as it should
+  be immediate.
+\end{proof}
+
+\begin{lem}\ollabel{lem:comp}
+  Given the representation of $f$, an $k$-ary total function and $g_0,
+  \dots, g_{k-1}$, some $l$-ary functions, the composition $h$, an
+  $l$-ary, the composition $h$, and $l$-ary function is also representable.
+\end{lem}
+Note that in the above proposition all subroutine functions don't have
+to be primitive recursive: total is enough. By loosening the premise
+of the proposition, we get a stronger proposition (which should be no harder
+to prove) that will be used again in next section.
+
+\begin{proof}
+  $h$ can be represented as follows:
+  \begin{align}
+    \num{h} &= \lambd[x_0 \dots x_{l-1}][\num{f} (\num{g_0} x_0 \dots
+              x_{l-1}) \dots (\num{g_{k-1}} x_0 \dots x_{l-1})]
+  \end{align}
+
+  The rest of the proof is left to the reader.
+\end{proof}
 
 \begin{prob}
   Justify the above representation; you only have to consider the
@@ -38,31 +76,32 @@ represented as:
   recursive.
 \end{prob}
 
-
-Now we try to represent primitive recursion. Recall that a primitive recursion $h$ is defined from a $k$-ary function $f$ and a $k+2$-ary function
-$g$; informally speaking, the recursion is basically a iteration
-maintaining two things: the current $x$ and current value of $h$. This
-reminds us of the definition of church numerals, which is defined as a
-iterator. Here comes the representations($z$ is abbreviation for $z_0
-\dots z_{k-1}$ for simplicity):
-\begin{align*}
-  \num{h} &= \lambd[x][\lambd[z][fst (x (\lambd[p].\tuple{succ (fst ~ p),
-            (\num{g} (fst ~ p) (snd ~ p) z)}) \tuple{\num{0}, \num{f} z})]]
-\end{align*}
-The iteration state we maintain is a pair, the first of which is the
-current $x$ and the second is current $h$ value. For every step of
-iteration we create a pair of new values of $x$ and $h$; after the
-iteration is done we return the second part of the pair and that's the
-final $h$ value. We now prove this is indeed a representation of
-primitive recursion.
-
-\begin{lem}
-  Given $\num{f},\num{g}$ as representation of two primitive recursive
-  functions $g,f$ respectively, the
-  term $\num{h}$ defined above is representation of the primitive
-  recursion $h$ formed from $g,f$.
+Now we try to represent primitive recursion; again,
+$g$ and $f$ does not have to be primitive recursive - they are just
+total.
+\begin{lem}\ollabel{lem:prim}
+  Given $\num{f},\num{g}$ as representation of two total
+  functions $g,f$ respectively, the primitive recursion defined by
+  these two functions is also representable.
 \end{lem}
 \begin{proof}
+  Recall that a primitive recursion $h$ is defined from a $k$-ary function $f$ and a $k+2$-ary function
+  $g$; informally speaking, the recursion is basically a iteration
+  maintaining two things: the current $x$ and current value of $h$. This
+  reminds us of the definition of church numerals, which is defined as a
+  iterator. Here comes the representations($z$ is abbreviation for $z_0
+  \dots z_{k-1}$ for simplicity):
+  \begin{align*}
+    \num{h} &= \lambd[x][\lambd[z][fst (x (\lambd[p].\tuple{succ (fst ~ p),
+              (\num{g} (fst ~ p) (snd ~ p) z)}) \tuple{\num{0}, \num{f} z})]]
+  \end{align*}
+  The iteration state we maintain is a pair, the first of which is the
+  current $x$ and the second is current $h$ value. For every step of
+  iteration we create a pair of new values of $x$ and $h$; after the
+  iteration is done we return the second part of the pair and that's the
+  final $h$ value. We now prove this is indeed a representation of
+  primitive recursion.
+
   We want to prove that for any $x$ and $z$, $\num{h(x,z)} = \num{h}
   \num{x} \num{z}$. By induction on $x$.
 
@@ -81,6 +120,5 @@ primitive recursion.
   \end{align*}
   The last of which is exactly the I.H.
 \end{proof}
-
 \end{document}
 
