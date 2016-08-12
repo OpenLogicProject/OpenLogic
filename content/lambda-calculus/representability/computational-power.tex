@@ -1,0 +1,56 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: lambda-computable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{cp}
+\olsection{Computational power}
+
+Not only partial recursive functions are representable by lambda
+terms, the inverse is true too. That is, lambda-representable
+functions are partial recursive.
+
+\begin{thm}
+\ollabel{thm:lambda-computable}
+If a partial function $f$ is represented by a lambda term, it is
+partial recursive.
+\end{thm}
+\begin{proof}
+  Suppose a function~$f$ is represented by a lambda term~$M$. A 
+  rigid proof would go like this:
+  
+  First we invent a method of encoding lambda terms into natural
+  numbers.
+
+  Then we define a partial recursive function $normalize(t)$ operating on
+  a lambda term (encoded as a number as above) accepted as argument, trying to
+  normalize it, returning the normal form if it has, undefined otherwise.
+
+  Then define two partial recursive functions $toChurch$ and $fromChurch$ that's able to translate a
+  natural number to and from the corresponding church numeral (the
+  church numeral is again encoded into a natural number as above).
+
+  Finally we define the partial recursive function $f$ from $M$: it accepts
+  arguments $\vec x$, which are translated to church numerals
+  $toChurch(\vec x)$, appended to
+  $M$ forming a new term $M \vec{\num{x}}$; call
+  $normalize$ on this new term and wait for it to be normalized;
+  finally call $fromChurch$ on the normalized term and return the
+  result.
+
+  We assume the reader is convinced of the computational power of
+  partial recursive functions and that all the mentioned functions
+  above are indeed representable by partial recursive functions. We
+  omitted details here because including them would be
+  too tedious and of little educational value.
+\end{proof}
+
+This theorem, along with the theorem we didn't prove in the last
+section, establishes lambda calculus as a
+computational model equally powerful as partial recursive functions
+and other models like Turing Machine, of each of which the set of
+definable functions is known as ``computable functions''.
+\end{document}
