@@ -12,8 +12,8 @@
 We can encode booleans in pure lambda calculus as follows:
 
 \begin{align*}
-  {true} &= \lambd[x][\lambd[y][x]]\\
-  {false} &= \lambd[x][\lambd[y][y]]
+  {true} &\eqs \lambd[x][\lambd[y][x]]\\
+  {false} &\eqs \lambd[x][\lambd[y][y]]
 \end{align*}
 
 The intuition is that a boolean is a selector, in the sense that it's a function accepting two arguments
@@ -35,7 +35,7 @@ By this intuition we can further define some boolean functions. Here
 are some of them:
 
 \begin{align*}
-  {and} &= \lambd[a][\lambd[b][a ~ b ~ {false}]]
+  {and} &\eqs \lambd[a][\lambd[b][a ~ b ~ {false}]]
 \end{align*}
 
 The function ``and'' accepts two booleans as argument; knowing the

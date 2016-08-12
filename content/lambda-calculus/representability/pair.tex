@@ -11,21 +11,21 @@
 
 The pair of $M$ and $N$ (written $\tuple{M,N}$) is defined as follows:
 \begin{align*}
-  \lambd[f][fMN]
+  \tuple{M,N} &\eqs \lambd[f][fMN]
 \end{align*}
 Intuitively it's a function that accepts a function, passes to it the
 two inner terms and returns the result of it. Following this idea we
 have this constructor, receiving two terms and returns the pair
 containing them:
 \begin{align*}
-  {pair} &= \lambd[mn][\lambd[f][fmn]]
+  {pair} &\eqs \lambd[mn][\lambd[f][fmn]]
 \end{align*}
 
 And its counterpart: two access functions, receiving a pair and
 returning the first or second elements in it:
 \begin{align*}
-  {fst} &= \lambd[p][p(\lambd[mn][m])]\\
-  {snd} &= \lambd[p][p(\lambd[mn][n])]
+  {fst} &\eqs \lambd[p][p(\lambd[mn][m])]\\
+  {snd} &\eqs \lambd[p][p(\lambd[mn][n])]
 \end{align*}
 
 \begin{prob}
@@ -34,7 +34,7 @@ returning the first or second elements in it:
 
 Now with pairs we can write out the predecessor:
 \begin{align*}
-  {pred} &= \lambd[n][{fst}(n (\lambd[p][\tuple{{snd}~ {p}, {succ}({snd} ~{p})}]) \tuple{0, 0})]
+  {pred} &\eqs \lambd[n][{fst}(n (\lambd[p][\tuple{{snd}~ {p}, {succ}({snd} ~{p})}]) \tuple{0, 0})]
 \end{align*}
 Remember that $n f x$ is defined to be $f^{n}(x)$; in this
 case $f$ is a function that accepts a pair $p$ and returns a new
@@ -45,6 +45,6 @@ otherwise. And we only return the first component of the result.
 
 And now the subtraction, defined as $pred$ applied on $a$ for $b$ times:
 \begin{align*}
-  {sub} &= \lambd[ab][b {pred} ~ a]
+  {sub} &\eqs \lambd[ab][b {pred} ~ a]
 \end{align*}
 \end{document}

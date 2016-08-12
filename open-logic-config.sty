@@ -453,6 +453,18 @@
 
 \DeclareDocumentMacro \xred {\red [X]}
 
+% - '\eq': equivalence relation with some letter over the sign
+\DeclareDocumentCommand \eq { o } {
+  \IfNoValueTF {#1}
+  {=}
+  {\stackrel{#1}{\eq}}
+}
+
+\DeclareDocumentMacro \eqb {\eq [\beta]}
+
+% - '\eqs': syntactic equivalent
+\DeclareDocumentMacro \eqs {\equiv}
+
 % - '\redpar': parallel reduction
 
 \DeclareDocumentCommand \redpar { o } {

@@ -12,7 +12,7 @@
 We can also encode natural numbers in lambda calculus. Let
 $\num{n}$ be the term for the number $n$, which is defined as:
 \begin{align*}
-  \num{n} &= \lambd[fx][f^n(x)]
+  \num{n} &\eqs \lambd[fx][f^n(x)]
 \end{align*}
 where $f^n(x)$ stands for $x$ applied by $f$ for $n$ times. For
 example, $\num{3}$ is defined to be $f(f(f(x)))$. 
@@ -32,7 +32,7 @@ the term represents.
 We first define the predicate $iszero$, which accepts a number and
 returns a boolean depending on if the number is zero:
 \begin{align*}
-  iszero &= \lambd[n][n (\lambd[x][false]) true]
+  iszero &\eqs \lambd[n][n (\lambd[x][false]) true]
 \end{align*}
 How does it work? As church numerals are defined as iterators (of $n$
 times), we set the initial value to be $true$, and for every step of
@@ -53,7 +53,7 @@ which is done by first using ${n}$ to get $f^n(x)$, and then applying $f$ once m
 
 There's another definition of successor:
 \begin{align*}
-  {succ} &= \lambd[{n}][\lambd[fx][{n} f (f x)]]
+  {succ} &\eqs \lambd[{n}][\lambd[fx][{n} f (f x)]]
 \end{align*}
 
 \begin{prob}
@@ -62,11 +62,11 @@ There's another definition of successor:
 
 Now we define the addition function:
 \begin{align*}
-  {add} &= \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
+  {add} &\eqs \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
 \end{align*}
 or alternatively:
 \begin{align*}
-  {add} &= \lambd[{a}{b}][{a} ~ {succ} ~ {b}]
+  {add} &\eqs \lambd[{a}{b}][{a} ~ {succ} ~ {b}]
 \end{align*}
 
 The first addition works as follows: we first accept two numbers ${a}$ and
@@ -78,7 +78,7 @@ The second addition is simpler, as $succ^a(b)$ is equal to ${a + b}$.
 
 And the multiplication:
 \begin{align*}
-  {mult} &= \lambd[{a}{b}][\lambd[fx][{a} ({b} f) x]]
+  {mult} &\eqs \lambd[{a}{b}][\lambd[fx][{a} ({b} f) x]]
 \end{align*}
 
 Note what we get by ${b} f$: it's a function applying $f$
@@ -87,12 +87,12 @@ $f$ for $b$ times'' for $a$ times to $x$, which is applying $f$ for $a
 \times b$ times to $x$. We can actually simplify this term further by
 $\eta$-reduction:
 \begin{align*}
-  {mult} &= \lambd[ab][\lambd[f][a (b f)]]
+  {mult} &\eqs \lambd[ab][\lambd[f][a (b f)]]
 \end{align*}
 
 We can also make it by $add$:
 \begin{align*}
-  {mult} &= \lambd[ab][a (add ~ a) 0]
+  {mult} &\eqs \lambd[ab][a (add ~ a) 0]
 \end{align*}
 
 \begin{prob}
@@ -102,14 +102,14 @@ We can also make it by $add$:
 We can even calculate exponentiation in lambda calculus, and it's
 (surprisingly) rather simple:
 \begin{align*}
-  {pow} &= \lambd[be][e b]
+  {pow} &\eqs \lambd[be][e b]
 \end{align*}
 where $b$ stands for base and $e$ stand for exponent. 
 This definition is kind of magical and hard to explain, but
 intuitively $e f$ is $f^e$ by our encoding of numbers. If you find it
 hard to understand, we can still define it by multiplication:
 \begin{align*}
-  {pow} &= \lambd[be][e ({mult}~ b) 1]
+  {pow} &\eqs \lambd[be][e ({mult}~ b) 1]
 \end{align*}
 
 Predecessor and subtraction on church numeral is not that simple as we might think: it

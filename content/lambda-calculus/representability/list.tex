@@ -9,9 +9,9 @@
 \olfileid{lc}{rep}{lst}
 \olsection{List}
 
-The list $[M_1, M_2, \ldots, M_n]$ is defined to be:
+The list $[M_1, M_2, \ldots, M_n]$ can be defined to be:
 \begin{align*}
-  [M_1, M_2, \ldots, M_n] &= \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
+  [M_1, M_2, \ldots, M_n] &\eqs \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
 \end{align*}
 
 Informally speaking it's the accumulator of the list, in the sense
@@ -20,10 +20,16 @@ along with a new element and returns the new accumulated value; the
 second is the initial accumulated value; it accumulate elements one by
 one and finally returns the result.
 
+\begin{digress}
+  Readers familiar with functional programming should find the
+  definition similar to \emph{right fold}. And yes, a list is defined
+  to the right fold function of the elements it contains.
+\end{digress}
+
 We can easily define some useful functions based on this encoding; 
 \begin{align*}
-  {sum} &= \lambd[l][l ~ (\lambd[xa][add ~ x ~ a])~  0]\\
-  len &= \lambd[l][l ~ (\lambd[xa][add ~ a ~ 1]) ~ 0]
+  {sum} &\eqs \lambd[l][l ~ (\lambd[xa][add ~ x ~ a])~  0]\\
+  len &\eqs \lambd[l][l ~ (\lambd[xa][add ~ a ~ 1]) ~ 0]
 \end{align*}
 
 $sum$ calculates the sum of a list of church numerals. It works by

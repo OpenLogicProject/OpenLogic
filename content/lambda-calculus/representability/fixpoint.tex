@@ -14,7 +14,7 @@ Now we're able to represent natural numbers, pairs and
 lists by terms, we can do lots of fun stuff; for instance we can
 define the factorial function:
 \begin{align*}
-  fac = \lambd[n][iszero ~ n ~ 0 ~ (mult ~ n (fac (pred ~ n)))]
+  fac &\eqs \lambd[n][iszero ~ n ~ 0 ~ (mult ~ n (fac (pred ~ n)))]
 \end{align*}
 All the referenced functions are defined in previous sections.
 Recall that $iszero n$ returns a boolean, which is a function
@@ -28,7 +28,7 @@ definition of $fac$? Note that recursive definition (self-reference)
 is not part of lambda calculus. When we write definition of $true$,
 $false$, numbers and functions, for example:
 \begin{align*}
-    {mult} &= \lambd[ab][a (add ~ a) 0]
+    {mult} &\eqs \lambd[ab][a (add ~ a) 0]
 \end{align*}
 , we can always plug the definition of $add$ in the place of the
 reference of $add$ in $mult$, and do it recursively if there are still
@@ -39,7 +39,7 @@ However this is not true in the case of self-reference; if we plug the
 definition of $fac$ itself in the place of $fac$ in the right hand, we
 get:
 \begin{align*}
-  fac = \lambd[n][iszero ~ n ~ 0 ~ (mult ~ n ((\lambd[n][iszero ~ n ~
+  fac &\eqs \lambd[n][iszero ~ n ~ 0 ~ (mult ~ n ((\lambd[n][iszero ~ n ~
   0 ~ (mult ~ n (fac (pred ~ n)))]) (pred ~ n)))]
 \end{align*}
 and we still haven't gotten rid of the reference. We can do this again
@@ -50,7 +50,7 @@ feasible.
 However, if someone could give us the function being defined, that
 would be great. That is, we can define factorial as follows:
 \begin{align*}
-  fac' = \lambd[f][\lambd[n][iszero ~ n ~ 0 ~ (mult n (f (pred n)))]]
+  fac' &\eqs \lambd[f][\lambd[n][iszero ~ n ~ 0 ~ (mult n (f (pred n)))]]
 \end{align*}
 and expect someone will pass the real factorial as parameter $f$ to $fac'$, then
 the returning function is another factorial. Moreover, the factorial
@@ -63,7 +63,7 @@ fixpoint of a term. And indeed there are some terms doing such things,
 among which the best-known is the \emph{Y-combinator}, which is
 defined as follows:
 \begin{align*}
-  Y &=  \lambd[f][(\lambd[x][f (x x)]) (\lambd[x][f (x x)])]
+  Y &\eqs  \lambd[f][(\lambd[x][f (x x)]) (\lambd[x][f (x x)])]
 \end{align*}
 , which has the fancy property that:
 \begin{align*}
@@ -86,7 +86,7 @@ speaking $g$ applied on any term for infinite times should be a
 fixpoint of $g$. To get a concrete feeling, we can try out some terms;
 take the factorial for instance:
 \begin{align*}
-  fac &= Y ~ fac'\\
+  fac &\eqs Y ~ fac'\\
   fac 3 &= Y ~ fac' ~ 3 \\
       &=fac' (Y ~ fac') 3 \\
       &=(\lambd[f][\lambd[n][iszero ~ n ~ 0 ~ (mult ~ n (f (pred ~ n)))]])

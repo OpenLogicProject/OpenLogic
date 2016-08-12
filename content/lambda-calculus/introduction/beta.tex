@@ -37,13 +37,28 @@ intuition formally.
 We will write $\redone$ instead of $\bredone$, $\red$ instead of
 $\bred$ when context is clear.
 
-\begin{defn}[$beta$-normal]
+Informally speaking, $M \bred N$  if and only if $M$ can be changed to
+$N$ by zero or several steps of $\beta$-contraction.
+
+\begin{defn}[$\beta$-normal]
 A term that cannot be $\beta$-contracted any further is said to be
 \emph{$\beta$-normal}. 
 \end{defn}
 If $M \bred N$ and $N$ is $\beta-normal$, then we say $N$ is normal
 form of $M$. One may ask if normal form of a term is unique, and the
 answer is yes, as we will see in the next chapter.
+
+\begin{defn}[$\beta$-equivalence, $\eqb$]
+  \emph{$\beta$-equivalence} ($\eqb$) is the smallest equivalence (reflexive,
+  symmetric, transitive) relation containing $\bredone$.
+\end{defn}
+Informally speaking, two terms are $\beta$-equivalent if and only if
+one of them can be changed to the other in zero or more steps of
+$\beta$-contraction, or ``inverse'' of $\beta$-contraction. Inverse of
+$\beta$-contraction is defined so that $M$ inverse-$\beta$-contracts to $N$
+iff $N$ $\beta$-contracts to $M$.
+
+We will write $\eq$ instead of $\eqb$ when the context is clear.
 
 Let us consider some examples.
 \begin{enumerate}

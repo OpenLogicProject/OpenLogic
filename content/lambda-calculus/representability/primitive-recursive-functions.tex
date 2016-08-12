@@ -41,9 +41,9 @@ Now we prove the lemmas used in the above proof:
 \begin{proof}
   They can be represented as follows:
   \begin{align*}
-    \num{0} &= \lambd[fx][x]\\
-    \num{S} &= \lambd[n][\lambd[fx][n f (f x)]] \\
-    \num{P^n_i} &= \lambd[x_0\dots x_{n-1}][x_i] \\
+    \num{0} &\eqs \lambd[fx][x]\\
+    \num{S} &\eqs \lambd[n][\lambd[fx][n f (f x)]] \\
+    \num{P^n_i} &\eqs \lambd[x_0\dots x_{n-1}][x_i] \\
   \end{align*}
 
   We omit the proof of justifying the above representations as it should
@@ -63,7 +63,7 @@ to prove) that will be used again in next section.
 \begin{proof}
   $h$ can be represented as follows:
   \begin{align}
-    \num{h} &= \lambd[x_0 \dots x_{l-1}][\num{f} (\num{g_0} x_0 \dots
+    \num{h} &\eqs \lambd[x_0 \dots x_{l-1}][\num{f} (\num{g_0} x_0 \dots
               x_{l-1}) \dots (\num{g_{k-1}} x_0 \dots x_{l-1})]
   \end{align}
 
@@ -92,7 +92,7 @@ total.
   iterator. Here comes the representations($z$ is abbreviation for $z_0
   \dots z_{k-1}$ for simplicity):
   \begin{align*}
-    \num{h} &= \lambd[x][\lambd[z][fst (x (\lambd[p].\tuple{succ (fst ~ p),
+    \num{h} &\eqs \lambd[x][\lambd[z][fst (x (\lambd[p].\tuple{succ (fst ~ p),
               (\num{g} (fst ~ p) (snd ~ p) z)}) \tuple{\num{0}, \num{f} z})]]
   \end{align*}
   The iteration state we maintain is a pair, the first of which is the
