@@ -27,7 +27,7 @@ prove it satisfying Church-Rosser property.
 \end{defn}
 
 Informal interpretation of the above definition: Parallel reduction allows us to reduce any number of redices in the
-term in one step. It's different from reduction in the sense that we
+term in one step. It is different from reduction in the sense that we
 can only contract redices that's in the original term, but not redices
 arising in current parallel reduction. For example, the term
 $(\lambd[f][fx])(\lambd[y][y])$ can only be parallel reduced
@@ -85,7 +85,7 @@ $(\lambd[y][y])x$, not itself.
       \Subst{(\lambd[x][N'])}{R'}{y}$, which is
       $\lambd[x][\Subst{N}{R}{y}] \bredpar
       \lambd[x][\Subst{N'}{R}{y}]$, which is immediate by
-      \olref{def:2} and I.H.
+      \olref{def:2} and inductive hypothesis.
     \item If the last step is \olref{def:3}, left as exercise. \ollabel{lem:comp:3}
     \item If the last step is \olref{def:4}, then $M$ is
       $(\lambd[x][N])Q$ and $M'$ is $\Subst{N'}{Q'}{x}$. What
@@ -93,7 +93,7 @@ $(\lambd[y][y])x$, not itself.
       \bredpar \Subst{\Subst{N'}{Q'}{x}}{R'}{y}$, which is
       $(\lambd[x][\Subst{N}{R}{y}])\Subst{Q}{R}{y} \bredpar
       \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$ (Why?), which
-      can be derived by \olref{def:4} with I.H.
+      can be derived by \olref{def:4} with inductive hypothesis.
   \end{enumerate}
 \end{proof}
 
@@ -113,10 +113,10 @@ $(\lambd[y][y])x$, not itself.
       $N \bredpar N'$. We want $\lambd[x][N'] \bredpar
       \bcd{(\lambd[x][N])}$, which is $\lambd[x][N'] \bredpar
       \lambd[x][\bcd{N}]$ by \olref{bcd:2}, which is immediate by
-      \olref{def:2} and I.H.. 
+      \olref{def:2} and inductive hypothesis.
     \item If the last rule is \olref{def:3} then $M$ is 
       $PQ$ and $M'$ is $P'Q'$ for some $P$, $Q$, $P'$ and $Q'$, with $P \bredpar P'$
-      and $Q \bredpar Q'$. By I.H. we have $P' \bredpar \bcd{P}$ and
+      and $Q \bredpar Q'$. By inductive hypothesis we have $P' \bredpar \bcd{P}$ and
       $Q' \bredpar \bcd{Q}$.  Depending on whether $P$ is 
       $\lambd[x][N]$ for some $x$ and $N$:
       \begin{enumerate}
@@ -124,7 +124,7 @@ $(\lambd[y][y])x$, not itself.
           \olref{def:3}, and the right-hand is $\bcd{PQ}$ by \olref{bcd:3}.
         \item $P$ is $\lambd[x][N]$ for some $x$ and $N$, then
           $P'$ must be $\lambd[x][N']$ for some $N'$ with 
-          $N \bredpar N'$. By I.H. we have $N' \bredpar \bcd{N}$ and
+          $N \bredpar N'$. By inductive hypothesis we have $N' \bredpar \bcd{N}$ and
           $Q' \bredpar \bcd{Q}$, then $(\lambd[x][N'])Q' \bredpar
           \Subst{\bcd{N}}{\bcd{Q}}{x}$ by \olref{def:4} which is what
           we want.
@@ -132,7 +132,7 @@ $(\lambd[y][y])x$, not itself.
     \item If the last rule is \olref{def:4} then $M$ is 
       $(\lambd[x][N])Q$  and $M'$ is $\Subst{N'}{Q'}{x}$
       for some $x, N, Q, N', Q'$, with $N \bredpar N'$ and $Q
-      \bredpar Q'$. By I.H. we know $N' \bredpar \bcd{N}$ and $Q'
+      \bredpar Q'$. By inductive hypothesis we know $N' \bredpar \bcd{N}$ and $Q'
       \bredpar \bcd{Q}$, further by \olref{lem:comp} we have
       $\Subst{N'}{Q'}{x} \bredpar \Subst{\bcd{N}}{\bcd{Q}}{x}$, the
       right hand of which is exactly $\bcd{((\lambd[x][N])Q)}$.

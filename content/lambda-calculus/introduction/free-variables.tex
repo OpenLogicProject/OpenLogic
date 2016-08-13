@@ -27,7 +27,7 @@ on the left.
 \end{prob}
 
 \begin{defn}[Bound occurrences of a variable]
-  An occurrence of variable $x$ is \emph{bound} if it's in the scope of a $\lambd[x]$.
+  An occurrence of variable $x$ is \emph{bound} if it is in the scope of a $\lambd[x]$.
 \end{defn}
 
 \begin{ex}
@@ -59,7 +59,7 @@ what happens when we break it?
 
 In the last example, $y$ is called \emph{free}. 
 \begin{defn}[Free occurrences of a variable]
-  An occurrence of a variable $x$ in a term $P$ is \emph{free} if it's not bound, i.e., not in the scope of any
+  An occurrence of a variable $x$ in a term $P$ is \emph{free} if it is not bound, i.e., not in the scope of any
   $\lambd[x]$ in $P$.
 \end{defn}
 
@@ -88,11 +88,11 @@ since its behaviour is kind of dependent on how we setup the
 environment. For example, the term $\lambd[x][f x]$ which
 accepts an argument and returns $f$ of that argument, refers to the environment variable
 $f$. So informally speaking this term is dependent on the environment
-it's in, in particular the setting of $f$ in that environment.
+it is in, in particular the setting of $f$ in that environment.
 
 Continuing the last example, if we wrap this term by an abstraction, we get
-$\lambd[f][\lambd[x][f x]]$. Now it's no longer dependent on
-the environment variable $f$, because essentially it's a function that
+$\lambd[f][\lambd[x][f x]]$. Now it is no longer dependent on
+the environment variable $f$, because essentially it is a function that
 accepts two arguments, and returns the result of applying the first to
 the second; Our changing $f$ in the environment won't have any
 effect on the behavior of this term, as the term will only use the $f$

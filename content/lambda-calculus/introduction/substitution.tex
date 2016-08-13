@@ -28,7 +28,7 @@ We define the subtitution as follows:
     \Subst{(\lambd[y][P])}{N}{x}  &= \lambd[y][\Subst{P}{N}{x}], \text{if} x \neq y
                                         \text{and} y \notin FV(N) \ollabel{def:4}
   \end{align}
-  otherwise it's undefined.
+  otherwise it is undefined.
 \end{defn}
 
 \olref{def:1} through \olref{def:3} are routine. The last line,
@@ -79,7 +79,7 @@ environment variable $y$ anyway.
         =&FV(\Subst{N}{Q}{x}) \setminus \{y\} && \text{by
                                                      \olref[fv]{def:2}}
         \\
-        =&FV(N) \setminus \{y\} && \text{by I.H.} \\
+        =&FV(N) \setminus \{y\} && \text{by inductive hypothesis} \\
         =&FV(\lambd[y][N]) && \text{by \olref[fv]{def:2}}
       \end{align*}
     \item The other two cases are easy and left as exercises. \ollabel{thm:notinfv:2}
@@ -97,7 +97,7 @@ environment variable $y$ anyway.
 \begin{proof}
   By induction on the formation of $M$.
   \begin{enumerate}
-  \item If it's a varialbe, left as exercise. \ollabel{thm:infv:1}
+  \item If it is a varialbe, left as exercise. \ollabel{thm:infv:1}
   \item $M$ is of the form $\lambd[x][N]$. Since
     $\Subst{\lambd[x][N]}{R}{y}$ is defined, it has to be
     $\lambd[x][\Subst{N}{R}{y}]$, with $\Subst{N}{R}{y}$
@@ -108,7 +108,7 @@ environment variable $y$ anyway.
       =&FV(\lambd[x][\Subst{N}{R}{y}]) \\
       =&FV(\Subst{N}{R}{y}) \setminus \{x\} \\
       =&((FV(N) \setminus \{y\}) \cup FV(R)) \setminus \{x\}
-       && \text{by I.H.} \\
+       && \text{by inductive hypothesis} \\
       =&(FV(N) \setminus \{y\} \setminus \{x\}) \cup FV(R)
        && x \notin FV(R) \\
       =&(FV(N) \setminus \{x\} \setminus \{y\}) \cup FV(R) \\
@@ -156,7 +156,7 @@ environment variable $y$ anyway.
        && \text{by \olref{def:4}} \\
       =&\lambd[z][\Subst{\Subst{N}{y}{x}}{x}{y}]
        && \text{by \olref{def:4}} \\
-      =&\lambd[z][N] && \text{by I.H.} 
+      =&\lambd[z][N] && \text{by inductive hypothesis} 
     \end{align*}
   \item $M$ is of the form $PQ$. Then:
     \begin{align*}
@@ -165,7 +165,7 @@ environment variable $y$ anyway.
          && \text{by \olref{def:3}} \\
       =&(\Subst{\Subst{P}{y}{x}}{x}{y})(\Subst{\Subst{Q}{y}{x}}{x}{y})
          && \text{by \olref{def:3}} \\
-      =&PQ &&\text{by I.H.}
+      =&PQ &&\text{by inductive hypothesis}
     \end{align*}
   \end{enumerate}
 \end{proof}

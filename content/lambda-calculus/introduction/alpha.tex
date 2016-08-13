@@ -25,7 +25,7 @@ both seem to be the identity function. Here is the $\alpha$-conversion:
 
 
 We used the word ``occurrence'' in above definition, which is not very
-standard but captures the idea. It's mostly known as
+standard but captures the idea. It is mostly known as
 \emph{compatibility}. 
 \begin{defn}[Compatibility of relation]
   A relation $R$ on terms is said to be \emph{compatible}
@@ -227,7 +227,7 @@ and the results preserve the $\alpha$-equivalence, as shown in this theorem:
   \item $M$ is of the form $\lambd[x][N]$, then we:
     \begin{enumerate}
     \item Select $z$ such that $z \notin FV(xyNR)$.
-    \item By I.H., we can have $N'$ such that $N' \aeq N$
+    \item By inductive hypothesis, we can have $N'$ such that $N' \aeq N$
       and $\Subst{N'}{z}{x}$ is defined. Then $\lambd[x][N] \aeq
       \lambd[x][N']$ too, by \olref{def:1}.
     \item Now $\lambd[x][N'] \aeq \lambd[z][\Subst{N'}{z}{x}]$ by \olref{def:4}.
@@ -244,7 +244,7 @@ and the results preserve the $\alpha$-equivalence, as shown in this theorem:
         =&\lambd[z][\Subst{\Subst{N''}{z}{x}}{R}{y}]
          && \text{by \olref{lem:sub:R}}\\
         =&\lambd[z][\Subst{\Subst{N'}{z}{x}}{R}{y}]
-         && \text{by I.H.}\\
+         && \text{by inductive hypothesis}\\
         =&\Subst{(\lambd[z][\Subst{N'}{z}{x}])}{R}{y}
       \end{align*}
     \end{enumerate}
@@ -283,7 +283,7 @@ and the results preserve the $\alpha$-equivalence, as shown in this theorem:
   parameter $y$ is stated, while $x$ is $1$ since there is one level
   of abstraction (namely the abstraction of $y$) between.
 
-  The De Bruijn index is almost unreadable to human, but it's
+  The De Bruijn index is almost unreadable to human, but it is
   much more convenient when we are implementing lambda calculus in
   computer.
 \end{digress}
