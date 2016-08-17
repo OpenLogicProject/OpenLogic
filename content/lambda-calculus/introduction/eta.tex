@@ -12,20 +12,17 @@
 There is another relation on $\lambda$ terms. In
 \olref[fv]{sec} we used the example $[\lambd[x][fx]]$, which
 accepts an argument and apply $f$ to it. 
-It seems to be another $f$ if we ``look from outside''.  We use $\eta$-reduction (and $\eta$-extension) to
+It seems to be another $f$ if we ``look from outside''.
+Indeed, applied with any term $N$, both will reduce to $fN$.
+We use $\eta$-reduction (and $\eta$-extension) to
 capture this idea.
 
 \begin{defn}[$\eta$-contraction, $\eredone$]
   \emph{$\eta$-contraction} ($\eredone$) is the smallest compatible relation
   on terms satisfying the following condition:
   \begin{align*}
-    &\lambd[x][f x] \eredone f
+    &\lambd[x][M x] \eredone M && \text{provided} x \notin FV(M)
   \end{align*}
-\end{defn}
-
-\begin{defn}[$\eta$-reduction, $\ered$]
-  \emph{$eta$-reduction} ($\ered$) is the smallest transitive relation on terms
-  containing $eredone$.
 \end{defn}
 
 \begin{defn}[$\beta\eta$-reduction, $\bered$] \ollabel{def:bered}
@@ -40,13 +37,51 @@ capture this idea.
     
 \end{defn}
 
-\begin{prob}
-  There is a notion of \emph{$\eta$-expansion} kind of symmetric to
-  $eta$-reduction, define it.
-\end{prob}
-
-\begin{defn}[$\eta$-equivalence, $\eeq$]
-  $\eta$-equivalence is the smallest reflexive, symmetric, transitive, compatible relation on terms containing $\eredone$.
+\begin{defn}
+  We extend the equivalence relation $\equal$ with $\eta$-conversion rule:
+  \begin{enumerate}
+  \item $\lambd[x][f x] \equal f$
+  \end{enumerate}
+  and denote the extended relation as $\equal[\eta]$.
 \end{defn}
+
+$\eta$-equivalence is important because it's related to extensionality
+of lambda terms:
+\begin{defn}[Extensionality]
+  We extend the equivalence relation $\equal$ with $ext$ rule:
+  \begin{enumerate}
+  \item If $Mx \equal Nx$ then $M \equal N$, provided $x \notin FV(MN)$.
+  \end{enumerate}
+  and denote the extended relation as $\equal[ext]$.
+\end{defn}
+roughly speaking, the rule stating that two terms, viewed as functions, should be
+considered equal if they behave the same for same argument.
+
+We now prove that the $\eta$ rule provides exactly the extensionality,
+and nothing else.
+\begin{thm}
+  $M \equal[ext] N$ if and only if $M \equal[\eta] N$.
+\end{thm}
+\begin{proof}
+  First we prove that $\equal[\eta]$ is closed under the 
+  extensionality rule. That is, $ext$ rule doesn't add any 
+  to $\equal[\eta]$, which means $\equal[\eta]$ is identical
+  to $\equal[\eta,ext]$, which contains
+  $\equal[ext]$. So we have $\equal[\eta]$ contains
+  $\equal[ext]$, so if $M \equal[ext] N$, then $M
+  \equal[\eta] N$.
+
+  To prove the closeness, we note that for any $M \equal
+  N$ derived by the extensionality rule, we have $Mx \equal[\eta]
+  Nx$ as premise, then we have $\lambd[x][Mx] \equal[\eta]
+  \lambd[x][Nx]$ by a rule of $\equal$, applying $\eta$ on both side gives us $M
+  \equal[\eta] N$.
+
+
+  Similarly we prove that the $\eta$ rule is contained in
+  $\equal[ext]$. For any $\lambd[x][Mx]$ and $M$ with $x \notin FV(M)$, we always
+  observe that $(\lambd[x][Mx])x \equal[ext] Mx$, giving us
+  $\lambd[x][Mx] \equiv[ext] M$ by $ext$ rule.
+\end{proof}
 
 \end{document}

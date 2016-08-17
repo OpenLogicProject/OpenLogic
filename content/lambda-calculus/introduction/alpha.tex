@@ -267,29 +267,5 @@ and the results preserve the $\alpha$-equivalence, as shown in this theorem:
   Immediate from \olref{thm:sub}.
 \end{proof}
 
-\begin{digress}
-  Because the $\alpha$-equivalence comes so naturally, some syntax has
-  been invented that doesn't distinguish terms that can be
-  $\alpha$-converted to each other, among which the most known is the
-  \emph{De Bruijn index}.
-  
-  When we write $\lambd[x][M]$, we explicitly state that $x$ is the
-  parameter of the function, so that we can use $x$ in $M$ to refer
-  to this parameter. In De Bruijn index, however, parameters have no
-  name and reference to them in function body is denoted by the number of levels of
-  abstraction between them. For example, instead of $\lambd[x][lambd[y][y
-  x]]$, we write $\lambd[][lambd[][0 1]]$, since there is zero
-  abstraction between the variable $y$ and the abstraction where the
-  parameter $y$ is stated, while $x$ is $1$ since there is one level
-  of abstraction (namely the abstraction of $y$) between.
-
-  The De Bruijn index is almost unreadable to human, but it is
-  much more convenient when we are implementing lambda calculus in
-  computer.
-\end{digress}
-
-Besides the De Bruijn index, we can also utilize $\alpha$-equivalence
-by $\alpha$-equivalence class (\olref[sfr][rel][prp]{sec}), and this is
-the approach we will see in next section and use in rest of the part.
 \end{document}
 

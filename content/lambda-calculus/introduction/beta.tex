@@ -48,18 +48,6 @@ If $M \bred N$ and $N$ is $\beta-normal$, then we say $N$ is normal
 form of $M$. One may ask if normal form of a term is unique, and the
 answer is yes, as we will see in the next chapter.
 
-\begin{defn}[$\beta$-equivalence, $\eqb$]
-  \emph{$\beta$-equivalence} ($\eqb$) is the smallest equivalence (reflexive,
-  symmetric, transitive) relation containing $\bredone$.
-\end{defn}
-Informally speaking, two terms are $\beta$-equivalent if and only if
-one of them can be changed to the other in zero or more steps of
-$\beta$-contraction, or ``inverse'' of $\beta$-contraction. Inverse of
-$\beta$-contraction is defined so that $M$ inverse-$\beta$-contracts to $N$
-iff $N$ $\beta$-contracts to $M$.
-
-We will write $\eq$ instead of $\eqb$ when the context is clear.
-
 Let us consider some examples.
 \begin{enumerate}
 \item We have
@@ -109,5 +97,32 @@ illustrates a deep and important property of the lambda calculus, known as the
   natural strategy. In the rest of the text we will use natural
   reduction unless otherwise specified. 
 \end{digress}
+
+\begin{defn}[$\beta$-equivalence, $\equal$]
+  \emph{$\beta$-equivalence} ($\equal$) is the relation inductively
+  defined as follows:
+  \begin{enumerate}
+  \item $M \equal M$.
+  \item If $M \equal N$, then $N \equal M$.
+  \item If $M \equal N$, $N \equal O$, then $M \equal O$.
+  \item If $M \equal N$, then $PM \equal PN$.
+  \item If $M \equal N$, then $MQ \equal NQ$.
+  \item If $M \equal N$, then $\lambd[x][M] \equal \lambd[x][N]$.
+  \item $(\lambd[x][N])Q \equal \Subst{N}{Q}{x}$.
+  \end{enumerate}
+\end{defn}
+The first three rules makes the relation an equivalence relation; the
+next three makes it compatible and containing $\beta$-contraction
+along with the last rule.
+
+Informally speaking, two terms are $\beta$-equivalent if and only if
+one of them can be changed to the other in zero or more steps of
+$\beta$-contraction, or ``inverse'' of $\beta$-contraction. Inverse of
+$\beta$-contraction is defined so that $M$ inverse-$\beta$-contracts to $N$
+iff $N$ $\beta$-contracts to $M$.
+
+Besides the above four rules, we will extend the relation with more
+rules, and denote the extended equivalence relation as $\equal[X]$,
+where $X$ is the extending rule.
 
 \end{document}

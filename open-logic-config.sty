@@ -327,11 +327,19 @@
         { \equiv_{#2} }}
 }
 
+% - '\eqc': the equivalence class the element(first argument) belongs
+% to; second argument is used to mark the equivalence relation if
+% there's more than one
+
 \DeclareDocumentCommand \eqc { m o } {
   \IfNoValueTF {#2}
   {[#1]}
   {[#1]_{#2}}
 }
+
+% - '\rep': the representative of an equivalence class, the second
+% argument is used to mark the equivalence relation if there's more
+% than one
 
 \DeclareDocumentCommand \rep { m o } {
   \IfNoValueTF {#2}
@@ -453,14 +461,14 @@
 
 \DeclareDocumentMacro \xred {\red [X]}
 
-% - '\eq': equivalence relation with some letter over the sign
-\DeclareDocumentCommand \eq { o } {
+% - '\eq': equivalence relation with some letter over the symbol
+\DeclareDocumentCommand \equal { o } {
   \IfNoValueTF {#1}
-  {=}
+  {\eq}
   {\stackrel{#1}{\eq}}
 }
 
-\DeclareDocumentMacro \eqb {\eq [\beta]}
+\DeclareDocumentMacro \aeq {\equal [\alpha]}
 
 % - '\eqs': syntactic equivalent
 \DeclareDocumentMacro \eqs {\equiv}
@@ -478,9 +486,9 @@
 \DeclareDocumentMacro \beredpar {\redpar [\beta\eta]}
 
 
-\DeclareDocumentMacro \aeq {=_{\alpha}}
+\DeclareDocumentMacro \eqa {\equal{\alpha}}
 
-\DeclareDocumentMacro \eeq {=_{\eta}}
+\DeclareDocumentMacro \eqe {\equal{\eta}}
 
 % - '\cd': complete development
 
