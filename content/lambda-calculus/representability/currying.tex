@@ -1,0 +1,54 @@
+% Part: lambda-calculus % Chapter: introduction % Section: currying
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lc}{rep}{cur} 
+\olsection{Currying}
+
+Before we move on to the representation for natural numbers, pairs,
+functions, we first have to resolve a practical problem:
+the reader may have noticed that functions given by \olref[syn]{def:2} seem to only accept one argument, which
+is quite a limitation when we want to define function accepting multiple
+arguments.
+
+Recall that in set theory, we use $A \times B$ (the Cartesian product
+of $A$ and $B$, \olref[sfr][set][pai]) to denote the domain of functions accepting two
+arguments from sets $A$ and $B$ respectively, so the functions accepts
+a pair containing two arguments. While in lambda calculus we can mimic
+this method by encoding pairs (as shown in \olref[lc][rep][pai]{sec}),
+it is more a convention to do this by \emph{currying}.
+
+Let's see some examples. If we want to define a function that accepts
+two arguments and returns the first, we write
+$\lambd[x][\lambd[y][x]]$, which literally is a function that accepts
+an argument and returns a function that, accepts another argument and 
+returns the first argument while drops the second. Let's see what
+happens when we apply two arguments to it:
+\begin{align*}
+  &(\lambd[x][\lambd[y][x]])MN \\
+  \bredone&(\lambd[y][M])N \\
+  \bredone&M
+\end{align*}
+
+In general, to write a function with parameters $x_1, \ldots, x_n$
+(assuming all distinct to each other)
+and function body $N$, we can write
+$\lambd[x_1][\lambd[\ldots\lambd[x_n][N]]]$. If we apply $n$ arguments
+to it:
+
+\begin{align*}
+  &(\lambd[x_1][\lambd[\ldots\lambd[x_n][N]]]) M_1 \dots M_n \\
+  \bredone&(\Subst{(\lambd[x_2][\ldots\lambd[x_n][N]])}{M_1}{x_1}) M_2
+  \dots M_n\\
+  \eqs&(\lambd[x_2][\ldots\lambd[x_n][\Subst{N}{M_1}{x_1}]]) M_2
+            \dots M_n \\
+  \ldots \\
+  \bredone&\Subst{\Subst{P}{M_1}{x_1}\ldots}{M_n}{x_n}
+\end{align*}
+the last line literally means substituting $M_i$ for $x_i$ in the body
+of the function definition, which is exactly what we want when
+applying a multiple arguments function.
+\end{document}
+
