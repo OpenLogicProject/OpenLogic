@@ -9,6 +9,20 @@
 \olfileid{fol}{com}{com}
 \olsection{The Compactness Theorem}
 
+One important consequence of the completeness theorem is the
+compactness theorem.  The compactness theorem states that if each
+\emph{finite} subset of a set of !!{sentence}s is satisfiable, the
+entire set is satisfiable---even if the set itself is infinite. This
+is far from obvious. There is nothing that seems to rule out, at first
+glance at least, the possibility of there being infinite sets of
+!!{sentence}s which are contradictory, but the contradiction only
+arises, so to speak, from the infinite number.  The compactness
+theorem says that such a scenario can be ruled out: there are no
+unsatisfiable infinite sets of !!{sentence}s each finite subset of
+which is satisfiable. Like the copmpleteness theorem, it has a version
+related to entailment: if an infinite set of !!{sentence}s entails
+something, already a finite subset does.
+
 \begin{defn}
   A set $\Gamma$ of !!{formula}s is \emph{finitely satisfiable} if and
   only if every finite $\Gamma_0 \subseteq \Gamma$ is satisfiable.
@@ -45,5 +59,74 @@ completeness, since $\Gamma$ is consistent, it is satisfiable.
 \begin{prob}
 Prove (1) of \olref[fol][com][com]{thm:compactness}.
 \end{prob}
+
+\begin{ex}
+In every model~$\Struct{M}$ of a theory~$\Gamma$, each term~$t$ of
+course picks out !!a{element} of~$\Domain{M}$. Can we guarantee that
+it is also true that every !!{element} of~$\Domain{M}$ is picked out
+by some term or other? In other words, are there theories~$\Gamma$ all
+models of which are covered?  The compactness theorem shows that this
+is not the case if $\Gamma$ has infinite models. Here's how to see
+this: Let $\Struct{M}$ be an infinite model of~$\Gamma$, and let $c$
+be !!a{constant} not in the language of~$\Gamma$. Let $\Delta$ be the
+set of all sentences $\eq/[c][t]$ for $t$ a term in the
+language~$\Lang{L}$ of~$\Gamma$, i.e.,
+  \[
+  \Delta = \Setabs{\eq/[c][t]}{t \in \Trm[L]}.
+  \]
+A finite subset of $\Gamma \cup \Delta$ can be written as $\Gamma'
+\cup \Delta'$, with $\Gamma' \subseteq \Gamma$ and $\Delta' \subseteq
+\Delta$. Since $\Delta'$ is finite, it can contain only finitely many
+terms. Let $a \in \Domain{M}$ be !!a{element} of $\Domain{M}$ not
+picked out by any of them, and let $\Struct{M'}$ be the !!{structure}
+that is just like $\Struct{M}$, but also $\Assign{c}{M'} = a$. Since
+$a \neq \Value{t}{M}$ for all~$t$ occuring in~$\Delta'$,
+$\Sat{M'}{\Delta'}$. Since $\Sat{M}{\Gamma}$, $\Gamma' \subseteq
+\Gamma$, and $c$ does not occur in~$\Gamma$, also
+$\Sat{M'}{\Gamma'}$. Together, $\Sat{M'}{\Gamma' \cup \Delta'}$ for
+every finite subset $\Gamma' \cup \Delta'$ of $\Gamma \cup \Delta$. So
+every finite subset of $\Gamma \cup \Delta$ is satisfiable. By
+compactness, $\Gamma \cup \Delta$ itself is satisfiable. So there are
+models~$\Sat{M}{\Gamma \cup \Delta}$. Every such $\Struct{M}$ is a
+model of~$\Gamma$, but is not covered, since $\Value{c}{M} \neq
+\Value{t}{M}$ for all terms~$t$ of~$\Lang{L}$.
+\end{ex}
+
+\begin{prob}
+Use the compactness theorem to show that any set of sentences in the
+language of arithmetic which are true in the standard model of
+arithmetic $\Struct{N}$ are also true in !!a{structure}~$\Struct{N'}$
+that contains an element greater than all natural
+numbers~$\Assign{\num{n}}{N'}$ ($\num{n}$ is
+$\Obj{0}^{\prime\dots\prime}$ with $n$ $\prime$'s).
+\end{prob}
+
+\begin{ex}
+We know that first-order logic with !!{identity} can express that the
+size of the !!{domain} must have some minimal size: The
+sentence~$!A_{\ge n}$ (which says ``there are at least $n$ distinct
+objects'') is true only in structures where $\Domain{M}$ has at
+least~$n$ objects. So if we take
+  \[
+  \Delta = \Setabs{!A_{\ge n}}{n \ge 1}
+  \]
+then any model of $\Delta$ must be infinite. Thus, we can guarantee
+that a theory only has infinite models by adding~$\Delta$ to it: the
+models of $\Gamma \cup \Delta$ are all and only the infinite models
+of~$\Gamma$.
+
+So first-order logic can express infinitude. The compactness theorem
+shows that it cannot express finitude, however. For suppose some set
+of sentences $\Lambda$ were satisfied in all and only finite
+!!{structure}s. Then $\Delta \cup \Lambda$ is finitely
+satisfiable. Why? Suppose $\Delta' \cup \Lambda' \subseteq \Delta \cup
+\Lambda$ is finite with $\Delta' \subseteq \Delta$ and $\Lambda'
+\subseteq \Lambda$. Let $n$ be the largest number such that $A_{\ge n}
+\in \Delta'$. $\Lambda$, being satisfied in all finite structures, has
+a model~$\Struct{M}$ with finitely many but $\ge n$ !!{element}s. But
+then $\Sat{M}{\Delta' \cup \Lambda'}$.  By compactness, $\Delta \cup
+\Lambda$ has an infinite model, contradicting the assumption that
+$\Lambda$ is satisfied only in finite !!{structure}s.
+\end{ex}
 
 \end{document}
