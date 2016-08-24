@@ -11,24 +11,55 @@
 \olsection{Reduction}
 
 We showed $\Pow{\Int^+}$ to be !!{nonenumerable} by a diagonalization
-argument. However, with the proof that $\Bin^\omega$, the set of all
-infinite sequences of $0$s and $1$s, is !!{nonenumerable} in place, we
-could have instead showed $\Pow{\Int^+}$ to be !!{nonenumerable} by
-showing that \emph{if $\Pow{\Int^+}$ is !!{enumerable} then
-  $\Bin^\omega$ is also !!{enumerable}}. This called \emph{reducing}
-one problem to another.
+argument. We already had a proof that $\Bin^\omega$, the set of all
+infinite sequences of $0$s and $1$s, is !!{nonenumerable}.  Here's
+another way we can prove that $\Pow{\Int^+}$ is !!{nonenumerable}:
+Show that \emph{if $\Pow{\Int^+}$ is !!{enumerable} then $\Bin^\omega$
+  is also !!{enumerable}}.  Since we know $\Bin^\omega$ is not
+!!{enumerable}, $\Pow{\Int^+}$ can't be either.  This is called
+\emph{reducing} one problem to another---in this case, we reduce the
+problem of enumerating $\Bin^\omega$ to the problem of enumerating
+$\Pow{\Int^+}$.  A solution to the latter---an enumeration of
+$\Pow{\Int^+}$---would yield a solution to the former---an enumeration
+of $\Bin^\omega$.
+
+How do we reduce the problem of enumerating a set~$Y$ to that of
+enumerating a set~$X$?  We provide a way of turning an enumeration
+of~$X$ into an enumeration of~$Y$.  The easiest way to do that is to
+define !!a{surjective} function $f\colon X \to Y$.  If $x_1$, $x_2$,
+\dots{} enumerates~$X$, then $f(x_1)$, $f(x_2)$, \dots{} would
+enumerate~$Y$.  In our case, we are looking for a surjective
+function $f\colon \Pow{\Int^+} \to \Bin^\omega$.
+
+\begin{prob}
+Show that if there is an !!{injective} function $g\colon Y \to X$, and
+$Y$~is !!{nonenumerable}, then so is~$X$. Do this by showing how you
+can use~$g$ to turn an enumeration of~$X$ into one of~$Y$.
+\end{prob}
 
 \begin{proof}[Proof of {\olref[nen]{thm-nonenum-pownat}} by reduction]
-Suppose, for reductio, that $\Pow{\Int^+}$ is !!{enumerable}, and thus that
-there is an enumeration of it $Z_{1}$, $Z_{2}$, $Z_{3}$, \dots
+Suppose that $\Pow{\Int^+}$ were !!{enumerable}, and thus that
+there is an enumeration of it, $Z_{1}$, $Z_{2}$, $Z_{3}$, \dots
 
 Define the function $f \colon \Pow{\Int^+} \to \Bin^\omega$ by letting
-$f(Z)$ be the sequence $s_{k}$ such that $s_{k}(j) = 1$ iff $j \in Z$.
+$f(Z)$ be the sequence $s_{k}$ such that $s_{k}(n) = 1$ iff $n \in Z$,
+and $s_k(n) = 0$ otherwise.  This clearly defines a function, since
+whenever $Z \subseteq \Int^+$, any $n \in \Int^+$ either is
+!!a{element} of $Z$ or isn't.  For instance, the set $2\Int^+ = \{2,
+4, 6, \dots\}$ of positive even numbers gets mapped to the sequence
+$010101\dots$, the empty set gets mapped to $0000\dots$ and the set
+$\Int^+$ itself to $1111\dots$.
 
-Every sequence of $0$s and $1$s corresponds to some set of positive
-integers, namely the one which has as its members those integers
-corresponding to the places where the sequence has~$1$s. In other
-words, this is !!a{surjective} function.
+It also is !!{surjective}: Every sequence of $0$s and $1$s corresponds
+to some set of positive integers, namely the one which has as its
+members those integers corresponding to the places where the sequence
+has~$1$s. More precisely, suppose $s \in \Bin^\omega$.  Define $Z
+\subseteq \Int^+$ by:
+\[
+Z = \Setabs{n \in \Int^+}{s(n) = 1}
+\]
+Then $f(Z) = s$, as can be verified by consulting the definition
+of~$f$.
 
 Now consider the list
 \[
@@ -36,27 +67,45 @@ f(Z_1), f(Z_2), f(Z_3), \dots
 \]
 Since $f$ is !!{surjective}, every member of $\Bin^\omega$ must
 appear as a value of~$f$ for some argument, and so must appear on the
-list. So this list must enumerate~$\Bin^\omega$.
+list. This list must therefore enumerate all of~$\Bin^\omega$.
 
-So if $\Pow{\Int^+}$ were !!{enumerable}, $\Bin^\omega$ would be !!{enumerable}.
-But $\Bin^\omega$ is !!{nonenumerable} (\olref[nen]{thm-nonenum-bin-omega}).
+So if $\Pow{\Int^+}$ were !!{enumerable}, $\Bin^\omega$ would be
+!!{enumerable}.  But $\Bin^\omega$ is !!{nonenumerable}
+(\olref[nen]{thm-nonenum-bin-omega}). Hence $\Pow{\Int^+}$ is
+!!{nonenumerable}.
 \end{proof}
+
+\begin{explain}
+It is easy to be confused about the direction the reduction goes in.
+For instance, !!a{surjective} function $g \colon \Bin^\omega \to X$
+does \emph{not} establish that $X$ is !!{nonenumerable}.  (Consider $g
+\colon \Bin^\omega \to \Bin$ defined by $g(s) = s(1)$, the function
+that maps a sequence of $0$'s and $1$'s to its first !!{element}.  It
+is surjective, because some sequences start with $0$ and some start
+with $1$. But $\Bin$ is finite.)  Note also that the function $f$ must
+be surjective, or otherwise the argument does not go through:
+$f(x_1)$, $f(x_2)$, \dots{} would then not be guaranteed to include
+all the !!{element}s of~$Y$. For instance, $h\colon \Nat \to
+\Bin^\omega$ defined by $h(n) = 0000\dots$ is a function, but $\Nat$
+is !!{enumerable}.
+\end{explain}
 
 \begin{prob}
 Show that the set of all sets of pairs of positive integers is
-!!{nonenumerable}.
+!!{nonenumerable} by a reduction argument.
 \end{prob}
 
 \begin{prob}
 Show that $\Nat^\omega$, the set of infinite sequences of
-natural numbers, is !!{nonenumerable}.
+natural numbers, is !!{nonenumerable} by a reduction argument.
 \end{prob}
 
 \begin{prob}
 Let $P$ be the set of total functions from the set of positive
 integers to the set $\{0\}$, and let $Q$ be the set of partial
 functions from the set of positive integers to the set $\{0\}$. Show
-that $P$ is !!{enumerable} and $Q$ is not.
+that $P$~is !!{enumerable} and $Q$~is not. (Hint: reduce the problem
+of enumerating $\Bin^\omega$ to enumerating~$Q$).
 \end{prob}
 
 \begin{prob}
