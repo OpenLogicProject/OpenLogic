@@ -9,6 +9,17 @@
 \olfileid{sfr}{rel}{ord}
 \olsection{Orders}
 
+\begin{explain}
+Very often we are interested in comparisons between objects, where one
+object may be less or equal or greater than another in a certain
+respect.  Size is the most obvious example of such a comparative
+relation, or \emph{order}. But not all such relations are alike in all
+their properties. For instance, some comparative relations require any
+two objects to be comparable, others don't. (If they do, we call them
+\emph{total}.) Some include sameness (like $\le$) and some exclude it
+(like $<$). Let's get some order into all this.
+\end{explain}
+
 \begin{defn}[Preorder]
 A relation which is both reflexive and transitive is called a
 \emph{preorder.}  
@@ -19,11 +30,9 @@ A preorder which is also anti-symmetric is called a
 \emph{partial order}.
 \end{defn}
 
-\begin{defn}[Total order]
- A partial order which is also connected is called a
-\emph{total order} or \emph{linear order.} (If we want to emphasize
-that the order is reflexive, we add the adjective ``weak''---see
-below).
+\begin{defn}[Linear order]
+A partial order which is also connected is called a
+\emph{total order} or \emph{linear order.}
 \end{defn}
 
 \begin{ex}
@@ -34,7 +43,7 @@ are not partial orders, because they are not anti-symmetric (if $X$
 has more than one element). For a somewhat less silly example,
 consider the \emph{no longer than} relation $\preccurlyeq$
 on~$\Bin^*$: $x \preccurlyeq y$ iff $\len{x} \le \len{y}$. This is a
-preorder, even a linear preorder, but not a partial order.
+preorder, even a connected preorder, but not a partial order.
 
 The relation of \emph{divisibility without remainder} gives us an
 example of a partial order which isn't a linear order: for integers
@@ -63,35 +72,35 @@ A relation $R$ on $X$ is called \emph{asymmetric} if for no pair $x,y\in
 X$ we have $Rxy$ and $Ryx$. 
 \end{defn}
 
-\begin{defn}[Strict partial order]
-A \emph{strict partial order} is a relation which is irreflexive, 
-asymmetric, and transitive. 
+\begin{defn}[Strict order]
+A \emph{strict order} is a relation which is irreflexive, asymmetric,
+and transitive.
 \end{defn}
 
 \begin{defn}[Strict linear order]
-A strict partial order which is also connected is called a \emph{strict linear
-  order.}
+A strict partial order which is also connected is called a
+\emph{strict linear order.}
 \end{defn}
 
-A strict partial order on~$X$ can be turned into a weak partial order
+A strict order on~$X$ can be turned into a partial order
 by adding the diagonal $\Id{X}$, i.e., adding all the pairs~$\tuple{x,
   x}$.  (This is called the \emph{reflexive closure} of~$R$.)
-Conversely, starting from a weak partial order, one can get a strict
-partial order by removing~$\Id{X}$.
+Conversely, starting from a partial order, one can get a strict
+order by removing~$\Id{X}$.
 
 \begin{prop}
-  \ollabel{strict-weak}
+  \ollabel{strict-partial}
   \begin{enumerate}
-  \item If $R$ is a strict partial (linear) order on~$X$, then $R^+ = R
-    \cup \Id{X}$ is a weak partial (linear) order.
-  \item If $R$ is a weak partial (linear) order on~$X$, then $R^- = R
-    \setminus \Id{X}$ is a strict partial (linear) order.
+  \item If $R$ is a strict (linear) order on~$X$, then $R^+ = R
+    \cup \Id{X}$ is a partial order (linear order).
+  \item If $R$ is a partial order (linear order) on~$X$, then $R^- = R
+    \setminus \Id{X}$ is a strict (linear) order.
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
   \begin{enumerate}
-    \item Suppose $R$ is a strict partial order, i.e., $R \subseteq
+    \item Suppose $R$ is a strict order, i.e., $R \subseteq
       X^2$ and $R$ is irreflexive, asymmetric, and transitive. Let $R^+
       = R \cup \Id{X}$. We have to show that $R^+$ is reflexive,
       antisymmetric, and transitive.
@@ -111,28 +120,28 @@ partial order by removing~$\Id{X}$.
       since $R$~is transitive. Otherwise, either $\tuple{x, y} \in
       \Id{X}$, i.e., $x = y$, or $\tuple{y, z} \in \Id{X}$, i.e., $y =
       z$. In the first case, we have that $R^+yz$ by assumption, $x =
-      y$, hence $R^+xz$. Similarly in the second case. In either case, $R^+xz$,
-      thus, $R^+$ is also transitive.
+      y$, hence $R^+xz$. Similarly in the second case. In either case,
+      $R^+xz$, thus, $R^+$ is also transitive.
 
-      If $R$ is linear, then for all $x \neq y$, either $Rxy$
+      If $R$ is connected, then for all $x \neq y$, either $Rxy$
       or~$Ryx$, i.e., either $\tuple{x, y} \in R$ or $\tuple{y, x} \in
       R$. Since $R \subseteq R^+$, this remains true of $R^+$, so
-      $R^+$ is linear as well.
+      $R^+$ is connected as well.
     \item Exercise.
   \end{enumerate}
 \end{proof}
 
 \begin{prob}
-  Complete the proof of \olref[sfr][rel][ord]{strict-weak}, i.e.,
-  prove that if $R$ is a weak partial order on~$X$, then $R^- =
-  R \setminus \Id{X}$ is a strict partial order. 
+  Complete the proof of \olref[sfr][rel][ord]{strict-partial}, i.e.,
+  prove that if $R$~is a partial order on~$X$, then $R^- =
+  R \setminus \Id{X}$ is a strict order. 
 \end{prob}
 
 
 \begin{ex}
-$\le$ is the weak linear order corresponding to the strict linear
-  order~$<$. $\subseteq$ is the weak partial order corresponding to the
-  strict partial order~$\subsetneq$.
+$\le$ is the linear order corresponding to the strict linear
+  order~$<$. $\subseteq$ is the partial order corresponding to
+  the strict order~$\subsetneq$.
 \end{ex}
 
 \end{document}
