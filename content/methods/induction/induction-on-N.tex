@@ -53,41 +53,37 @@ highest you can throw (all $6$'s).
 \end{thm}
 
 \begin{proof}
-To prove that this holds for any number of dice, we use induction: we
-prove, (1) that the number of different throws with $0$ dice
-is~$5\cdot0 + 1 = 1$, and (2) that if we can throw all $5n+1$ values
-between $n$ and $6n$ with $n$ dice, then with $n+1$ dice we can
-throw all $5(n+1)+1 = 5n+6$ possible values between $n+1$ and
-$6(n+1)$.  We've already established (1): If you have no dice,
-there's only one possible outcome: you throw all $0$ dice, and the
-number of dots visible is~$0$.
+Let $P(n)$ be the claim: ``It is possible to throw any number between
+$n$ and~$6n$ using $n$~dice.''  To use induction, we prove:
+\begin{enumerate}
+\item The \emph{induction basis} $P(1)$, i.e., with just one die,
+  you can throw any number between $1$ and $6$.
+\item The \emph{induction step}, for all $k$, if $P(k)$ then~$P(k+1)$.
+\end{enumerate}
 
-Now let's see how many possible total values you can throw with $n+1$
-dice: we're going to show that it's all $5n+6$ different sums between
-$n+1$ and $6n+6$, assuming that you can throw all $5n+1$ different
-sums between $n$ and $6n$ with $n$~dice. This assumption is called the
-induction hypothesis.  So: assume that you can throw all $5n+1$
-different sums between $n$ and $6n$ with $n$~dice
+(1) Is proved by inspecting a $6$-sided die. It has all 6 sides, and
+every number between $1$ and~$6$ shows up one on of the sides. So it
+is possible to throw any number between $1$ and~$6$ using a single
+die.
 
-Suppose you have $n$ dice.  Each possible throw sums to some number
-between $n$ (all $n$ dice show $1$'s) and $6n$ (all $6$'s).  Now throw
-another die.  You get another number between $1$ and $6$.  If your
-total is less than $6n$ you could have thrown the same total with your
-original $n$ dice, by induction hypothesis.  Only the possible totals
-$6n+1$ through $6n+6$ are totals you couldn't have thrown with just
-$n$ dice---and these are new possible totals, which you'd get, e.g.,
-by throwing $n$ $6$'s plus whatever your new die shows. So there are
-$6$ new possible totals.  You can still throw any of the old totals,
-except one. With $n+1$ dice you can't roll just~$n$. But any other
-value you can throw with $n$ dice you can also throw with $n+1$ dice:
-just imagine one of your $n$ dice showed one eye fewer (and at least
-one of them must show at least a $2$) and your $(n+1)$st die shows
-a~$1$. With an additional die we lose only one possible
-total ($n$) and gain $6$ new possible totals ($6n+1$ through $6n+6$).
-So the number of possible totals with $n+1$ dice is $5n+1$, minus~$1$,
-plus~$6$, i.e., $5n+6$.  So we have proved that, assuming the number
-of totals we can throw with $n$ dice is $5n+1$, the number of totals
-we can throw with $n+1$ dice is $5n+6 = 5(n+1) + 1$.
+To prove (2), we assume the antecedent of the conditional, i.e.,
+$P(k)$. This assumption is called the \emph{inductive hypothesis}.  We
+use it to prove~$P(k+1)$. The hard part is to find a way of thinking
+about the possible values of a throw of $k+1$ dice in terms of the
+possible values of throws of $k$~dice plus of throws of the extra
+$k+1$-st die---this is what we have to do, though, if we want to use
+the inductive hypothesis.
+
+The inductive hypothesis says we can get any number between $k$
+and~$6k$ using $k$~dice.  If we throw a~$1$ with our $(k+1)$-st die,
+this adds $1$ to the total. So we can throw any value between $k+1$
+and $6k+1$ by throwing $5$~dice and then rolling a~$1$ with the
+$(k+1)$-st die.  What's left?  The values $6k+2$ through $6k+6$.  We
+can get these by rolling $k$ $6$s and then a number between $2$ and
+$6$ with our $(k+1)$-st die. Together, this means that with $k+1$ dice
+we can throw any of the numbers between $k+1$ and $6(k+1)$, i.e.,
+we've proved~$P(k+1)$ using the assumption~$P(k)$, the inductive
+hypothesis.
 \end{proof}
 
 Very often we use induction when we want to prove something about a
@@ -96,15 +92,15 @@ series of objects (numbers, sets, etc.) that is itself defined
 the $n$-th.  For instance, we can define the sum~$s_n$ of the natural
 numbers up to~$n$ by
 \begin{align*}
-  s_0 = 0\\
+  s_0 & = 0\\
   s_{n+1} & = s_n + (n+1)
 \end{align*}
 This definition gives:
 \begin{align*}
   s_0 & = 0,\\
-  s_1 & = s_0 + 1 & = 1,\\
-  s_2 & = s_1 + 2 & = 1 + 2 = 3\\
-  s_3 & = s_s + 3 & = 1 + 2 + 3 = 6, \text{ etc.}
+  s_1 & = s_0 + 1 && = 1,\\
+  s_2 & = s_1 + 2 && = 1 + 2 = 3\\
+  s_3 & = s_2 + 3 && = 1 + 2 + 3 = 6, \text{ etc.}
 \end{align*}
 Now we can prove, by induction, that $s_n = n(n+1)/2$.
 
