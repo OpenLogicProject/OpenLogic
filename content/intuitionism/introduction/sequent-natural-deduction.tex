@@ -1,0 +1,122 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olsection{Sequent Natural Deduction}
+
+Let us write $\Gamma \fCenter !A$ if there is a deduction tree with
+$\Gamma$ (a set of formulas) as assumptions and $!A$ as conclusion;
+, or $\fCenter!A$ for empty $\Gamma$.
+
+We write $\Gamma, !A_1, \dots, !A_n$ for $\Gamma \cup
+\{!A_1,\dots,!A_n\}$; $\Gamma, \Delta$ for $\Gamma \cup \Delta$.
+
+Observe that when we have $\Gamma \fCenter !A_1 \land !A_2$, meaning we
+have a derivation tree with $\Gamma$ as premises and $!A_1 \land !A_2$ as
+conclusion, then by applying $\Elim{\land}$ at the bottom, we can always get a
+derivation tree with the same premises and $!A_1$ as conclusion; thus
+$\Gamma \fCenter !A_1$.
+\begin{gather*}
+  \def\fCenter{\ \Proves \ }
+  \Axiom$\Gamma \fCenter !A_1 \land !A_2$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf$\Gamma \fCenter !A_i$
+  \DisplayProof
+  \;
+  i \in \{1,2\}
+\end{gather*}
+The right label $\Elim{\land}$ hints its relation with the rule of
+the same name in natural deduction.
+
+Likewise, if we have $\Gamma, !A \fCenter !B$, meaning we have a
+derivation tree with premises $\Gamma$ and $!A$,  and conclusion $!B$;
+now if we apply the $\Intro{\lif}$ rule, we have a tree with $\Gamma$
+as premises and $!A \lif !B$ as the conclusion; Thus $\Gamma \fCenter
+!A \lif !B$. Note how this has made discharging more explicit.
+\begin{gather*}
+  \def\fCenter{\ \Proves \ }
+  \Axiom $\Gamma, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf $\Gamma \fCenter !A \lif !B$
+  \DisplayProof
+\end{gather*}
+
+We can draw conclusions from other rules in the same fashion, which is
+spelled out as follows:
+\begin{gather*}
+  \def\fCenter{\ \Proves \ }
+  \Axiom $\Gamma \fCenter !A_1$
+  \Axiom $\Delta \fCenter !A_2$
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInf $\Gamma,\Delta \fCenter !A_1 \land !A_2$
+  \DisplayProof
+  \quad
+  \Axiom $\Gamma \fCenter !A_1 \land !A_2$
+  \RightLabel{$\Elim{\land}_i$}
+  \UnaryInf $\Gamma \fCenter !A_i$
+  \DisplayProof
+  \;
+  i \in \{1,2\}
+  \\
+  \def\fCenter{\ \Proves \ }
+  \Axiom $\Gamma \fCenter !A_i$
+  \RightLabel{$\Intro{\lor}_i$}
+  \UnaryInf $\Gamma \fCenter !A_1 \lor !A_2$
+  \DisplayProof
+  \;
+  i \in \{1,2\}
+  \quad
+  \Axiom $\Gamma \fCenter !A_1 \lor !A_2$
+  \Axiom $\Delta, !A_1 \fCenter !C$
+  \Axiom $\Delta', !A_2 \fCenter !C$
+  \RightLabel{$\Elim{\lor}$}
+  \TrinaryInf $\Gamma, \Delta, \Delta' \fCenter !C$
+  \DisplayProof
+  \\
+  \def\fCenter{\ \Proves \ }
+  \Axiom $\Gamma, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf $\Gamma \fCenter !A \lif !B$
+  \DisplayProof
+  \quad
+  \Axiom $\Gamma \fCenter !A$
+  \Axiom $\Delta \fCenter !A \lif !B$
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInf $\Gamma, \Delta \fCenter !B$
+  \DisplayProof
+  \\
+  \def\fCenter{\ \Proves \ }
+  \Axiom $\Gamma \fCenter \lfalse$
+  \RightLabel{$\Elim{\lfalse}$}
+  \UnaryInf $\Gamma \fCenter !A$
+  \DisplayProof
+\end{gather*}
+
+Note that all the above observations require existing derivation(s),
+but where does the first derivation comes from? Consider when the
+derivation tree is trivial, i.e., without any deduction (horizontal
+line); in such cases the premise is exactly the conclusion, which
+leads to the following observation:
+
+\begin{prooftree}
+  \AxiomC{$ $}
+  \UnaryInfC{$!A \Proves !A$}
+\end{prooftree}
+
+Let's now redo some proofs in this fashion:
+\begin{gather*}
+  \def\fCenter{\ \Proves \ }
+  \Axiom$!A \fCenter !A$
+  \UnaryInf $!A \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom $!B \fCenter !B$
+  \BinaryInf$!A, !B\lif \fCenter \lfalse$
+  \UnaryInf$(!B \fCenter !A \lif \lfalse$
+  \UnaryInf$( !B \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom$(!B \fCenter !B$
+  \BinaryInf$(!B \fCenter \lfalse$
+  \UnaryInf$\fCenter !B \lif \lfalse$
+  \DisplayProof
+\end{gather*}
+where $!B$ is short for $(!A \lor (!A \lif \lfalse))\lif \lfalse$.
+
+\end{document}

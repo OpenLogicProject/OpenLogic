@@ -1,0 +1,119 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olsection{Kripke Model}
+
+\begin{defn}
+  A Keipke model for intuitionistic propositional logic is a tuple
+  $\tuple{W, R, V}$, where $W$ is a non-empty
+  set, $R$ is a reflexive and transitive binary relation on $W$, and
+  $V$ is function assigning to each propositional variable $p$ for each $w
+  \in W$ a binary($0$ or $1$), such that $V$ is monotone with respect
+  to $R$, i.e.
+  \begin{gather*}
+    V(w,p) \le V(w',p) if R w w'
+  \end{gather*}
+\end{defn}
+
+\begin{defn}
+  We extend the function $V$ to composite formulas as follows:
+  \begin{enumerate}
+  \item $V(\lfalse, w) = 0$
+  \item $V(!A \land !B, w) = min(V(!A, w), V(!B, w))$
+  \item $V(!A \lor !B, w) = max(V(!A, w), V(!B, w))$
+  \item $V(!A \lif !B, w) = 1$ \text{iff}
+    \begin{gather*}
+      V(!A, w')=1 implies V(!B, w')=1 \text{for all} w' \text{such
+        that} R w w'
+    \end{gather*}
+  \end{enumerate}
+\end{defn}
+
+By the above definition we have immediately $V(\lnot !A, w)=1$ iff
+$V(!A, w')=0$ for all $w'$ such that $R w w'$. Roughly speaking, a
+refutation of $!A$ is the exclusion of proof of $!A$ in any future,
+coinciding the intuition we have been following.
+
+\begin{defn}
+  $!A$ is valid in a world (written $\Entails[w] !A$) iff $V(!A,
+  w) = 1$, valid in a model $\tuple{W,R,V}$ (written $\Entails[W] !A$) iff $\Entails[w] !A$ for all $w
+  \in W$. Finally $!A$ is valid (written $\Entails !A$) iff it's valid
+  in all models. For convenience, we also define $\Gamma \Entails !A$
+  as the corresponding formula, i.e., $\Entails \cap \Gamma \lif !A$.
+\end{defn}
+
+We now prove the soundness and completeness of NJp with respect to
+Kripke model.
+
+\begin{lem}[Soundness]
+  If $\Gamma \Proves !A$, then $ \Gamma \Entails !A$.
+\end{lem}
+\begin{proof}
+  We prove that for every Kripke model $\tuple{W,R,V}$ and a world $w
+  \in W$, if $\Gamma \Proves !A$, then $\Gamma \Entails[w] !A$. Proof
+  by induction on the derivation of $\Gamma \Proves[w] !A$.
+  
+  \begin{enumerate}
+    \item[] if it's of the form $!A \Proves !A$, we have to
+      prove $\Entails[w] !A \lif !A$, which is to say
+      for all $R w w'$, $\Entails[w'] !A$ implies
+      $\Entails[w'] !A$, which is trivial.
+    \item[$\Intro{\land}$] if it's of the form $\Gamma,\Delta \Proves !A
+      \land !B$ , we want that $\Entails[w]
+      \land(\Gamma \cup \Delta) \lif !A \land !B$, which means $\Entails[w'] \land(\Gamma \cup \Delta)$
+      implies $\Entails[w'] !A \land !B$ for all $R w w'$. Note if
+      $\Entails[w'] \land(\Gamma \cup \Delta)$ then it must be the
+      case that $\Entails[w'] \land\Gamma$, thus by inductive
+      hypotheses we have $\Entails[w'] !A$. Similarly we have
+      $\Entails[w'] !B$. Thus by definition we have $\Entails[w'] !A
+      \land !B$, as required.
+    \item[$\Elim{\land}!A$] If it's of the form $\Gamma \Proves !A$,
+      derived from $\Gamma \Proves !A \land !B$, we
+      want that $\Entails[w'] \land\Gamma$ implies
+      $\Entails[w'] !A$ for all $R w w'$. By I.H. we have
+      $\Entails[w'] !A \land !B$, which, by definition, forces
+      $\Entails[w'] !A$ to hold. 
+    \item[$\Intro{\lor}!A$] if it's of the form $\Gamma \Proves !A \lor
+      !B$, we need to prove that $\Entails[w'] \land \Gamma$ implies
+      $\Entails[w'] !A \lor !B$ for all $R w w'$. By I.H. we have
+      $\Entails[w'] !A$, and by definition we have $\Entails[w'] !A
+      \lor !B$ as required.
+    \item[$\Elim{\lor}$] if it's of the form $\Gamma, \Delta, \Delta'
+      \Proves !C$, derived from $\Gamma \Proves !A \lor !B$, $\Delta,
+      !A \Proves !C$ and $\Delta', !B \Proves !C$. For all $R w w'$,
+      if $\Entails[w'] \land(\Gamma \cup \Delta \cup \Delta')$, then
+      by first inductive hypotheses  we have $\Entails[w'] !A \lor !B$,
+      which, by definition, forces $\Entails[w'] !A$ or $\Entails[w']
+      !B$. Let's assume it's the first without losing generality. So
+      now we have $\Entails[w'] \Delta \land !A$, which by
+      second inductive hypotheses gives us $\Entails[w'] !C$ as
+      required.
+    \item[$\Intro{\lif}$] if it's of the form $\Gamma \Proves !A \lif
+      !B$ derived from $\Gamma, !A \Proves !B$. For all $R w w'$, if
+      $\Entails[w'] \land\Gamma$, we hope that for all $R w' w''$,
+      $\Entails[w''] !A$ implies $\Entails[w''] !B$. Note that $R w
+      w''$ by transitivity, and $\Entails[w''] \Gamma$ by
+      monotonicity. Now we can apply the inductive hypotheses and get
+      $\Entails[w''] !B$ as as required.
+    \item[$\Elim{\lif}$] if it's of the form $\Gamma, \Delta \Proves
+      !B$, derived from $\Gamma \Proves !A$ and $\Delta \Proves !A
+      \lif !B$. For all $R w w'$, if $\Entails[w'] \land(\Gamma \cup
+      \Delta)$, then $\Entails[w'] \land\Gamma$ and $\Entails[w']
+      \land\Delta$, allowing us to use the two inductive hypotheses to
+      get $\Entails[w'] !A$ and $\Entails[w'] !A \lif !B$. The later
+      means that, for all $R w' w''$, $\Entails[w''] !A$ implies
+      $\Entails[w''] !B$. Let $w''$ be $w'$ by reflexivity, along with
+      the fact $\Entails[w'] !A$, we get $\Entails[w'] !B$.
+    \item[$\Elim{\lfalse}$] if it's of the form $\Gamma \Proves !A$
+      derived from $\Gamma \Proves \lfalse$. For all $R w w'$, if
+      $\Entails[w'] \land\Gamma$, by inductive hypotheses we have
+      $\Entails[w'] \lfalse$. But recall that we couldn't have this,
+      thus it vacuously holds.
+  \end{enumerate}
+\end{proof}
+
+We postpone the proof of completeness until we introduce sequent
+calculus.
+
+\end{document}
