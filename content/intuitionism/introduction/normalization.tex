@@ -94,25 +94,29 @@ redex in it, and $0$ if it's normal:
 \end{lem}
 \begin{proof}
   Proof by cases.
+  \begin{enumerate}
+  \item
+    If $M$ is of the form $p_i(pair(M_1, M_2))$, then $M'$ is of the
+    form $M_i$; since any sub-term of $M_i$ is also proper sub-term of $M$,
+    it follows immediately.
 
-  If $M$ is of the form $p_i(pair(M_1, M_2))$, then $M'$ is of the
-  form $M_i$; since any sub-term of $M_i$ is also proper sub-term of $M$,
-  it follows immediately.
-
-  If $M$ is of the form $(\lambd[x^{!A}][N])Q^{!A}$, then $M'$ is of the form
-  $\Subst{N}{Q^{!A}}{x^{!A}}$ (after the substitution is done); consider each of
-  the redices in $M'$, either there is corresponding redex in $N$ with
-  equal $cutrank$, which is less than $cutrank(M)$ by assumption; or the $cutrank$ equals to $len(!A)$, which by
-  definition is less than $cutrank((\lambd[x^{!A}][N])Q)$.
-
-  If $M$ is of the form $case(in_i N^{!A_i}, x_1^{!A_1}.N_1^{!C}, x_2^{!A_2}.N_2^{!C})$, then $M'$ is
-  of the form $\Subst{N_i}{N}{x_i^{!A_i}}$ (after the substitution is
-  down); with similar arguments, for each of the recides in $M'$,
-  either there is corresponding redex in $N_i$ with equal $cutrank$,
-  which is less than $cutrank(M)$ by assumption; or the $cutrank$
-  equals to $len(!A_i)$, which by definition is less than
-  $cutrank(case(in_i N^{!A_i}, x_1^{!A_1}.N_1^{!C},
-  x_2^{!A_2}.N_2^{!C}))$.
+  \item
+    If $M$ is of the form $(\lambd[x^{!A}][N])Q^{!A}$, then $M'$ is of the form
+    $\Subst{N}{Q^{!A}}{x^{!A}}$ (after the substitution is done); consider each of
+    the redices in $M'$, either there is corresponding redex in $N$ with
+    equal $cutrank$, which is less than $cutrank(M)$ by assumption; or the $cutrank$ equals to $len(!A)$, which by
+    definition is less than $cutrank((\lambd[x^{!A}][N])Q)$.
+    
+  \item
+    If $M$ is of the form $case(in_i N^{!A_i}, x_1^{!A_1}.N_1^{!C}, x_2^{!A_2}.N_2^{!C})$, then $M'$ is
+    of the form $\Subst{N_i}{N}{x_i^{!A_i}}$ (after the substitution is
+    down); with similar arguments, for each of the recides in $M'$,
+    either there is corresponding redex in $N_i$ with equal $cutrank$,
+    which is less than $cutrank(M)$ by assumption; or the $cutrank$
+    equals to $len(!A_i)$, which by definition is less than
+    $cutrank(case(in_i N^{!A_i}, x_1^{!A_1}.N_1^{!C},
+    x_2^{!A_2}.N_2^{!C}))$.
+  \end{enumerate}
 \end{proof}
 
 \begin{thm}
@@ -122,24 +126,32 @@ redex in it, and $0$ if it's normal:
 \begin{proof}
   The second follows from the first immediately. Prove the first by
   complete induction on $m=maxrank(M)$, where $M$ is a proof term.
+  \begin{enumerate}
 
-  For $m=0$, $M$ is already normal.
+  \item
+    For $m=0$, $M$ is already normal.
+    
+  \item
+    Otherwise, we do another deeper induction on $n$, the number of sub-redices of
+    $M$ with $cutrank$ equal to $m$.
+    \begin{enumerate}
+    \item
+      For the base case($n=1$) we select the redex to contract as follows: select any
+      redex $N$ such that $m = cutrank(N) > cutrank(P)$ for any proper
+      sub-term $P$ (which is also a redex of course); we can find such a redex since we can just select $P$
+      if its $cutrank$ is greater.
 
-  Otherwise, we do a induction on $n$, the number of sub-redices of
-  $M$ with $cutrank$ equal to $m$.
+      Let $N'$ denote the reductum of $N$. Now by lemma $maxrank(N') <
+      maxrank(N)$, thus we can see that $n$, the number of redices with
+      $cutrank=m$ is decreased. So $m$ is decreased (by $1$ or more), and
+      we can apply the outer inductive hypothesis;
 
-  We prove the base case($n=1$) and induction case($n>1$) with the same
-  arguments. We select the redex to contract as follows: select any
-  redex $N$ such that $m = cutrank(N) > cutrank(P)$ for any proper
-  sub-term $P$ (which is also a redex of course); we can find such a redex since we can just select $P$
-  if its $cutrank$ is greater.
-
-  Let $N'$ denote the reductum of $N$. Now by lemma $maxrank(N') <
-  maxrank(N)$, thus we can see that the number of redices with
-  $cutrank=m$ is decreased. If $n=1$ then after the reduction $m$ is
-  decreased (by $1$ or more), and we can apply the outer inductive hypothesis;
-  otherwise $n$ is decreased and we can apply the inner inductive
-  hypothesis.
+    \item
+      For induction case($n>1$) the process is similar, except that $n$
+      is only decreased to a positive number and thus $m$ does not change. We simply
+      apply the inner inductive hypothesis.
+    \end{enumerate}
+\end{enumerate}
 \end{proof}
 
 Actually the normalization of terms is not specific to the reduction
