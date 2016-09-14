@@ -168,10 +168,17 @@ cut at bottom, we would of course like to extend it to deductions with
 cuts at any position. Note that, however, the conclusion of the
 reduction does not change after reduction, thus we are free to
 continue applying rules to both sides of $\redone$, the resulted pairs
-of trees being our extended notion of reduction; it's analogous
+of trees being our extended notion of reduction; it is analogous
 to compatibility in untyped lambda calculus.
 
-As we did in lambda calculus, the notion of normal-form term and normal
+It's easy to see that the context $\Gamma$ does not change during the
+reduction (both the original and the extended version), thus it's unnecessary to mention the
+context when we are discussing reductions. In the rest of the chapter
+we would assume that every term is accompanied by a context which
+does no change during reduction; and when we say ``proof term'', we
+mean a proof term accompanied by a context which make it well typed.
+
+As in lambda calculus, the notion of normal-form term and normal
 deduction is given:
 \begin{defn}
   A proof term with no redex is said to be in \emph{normal form};
