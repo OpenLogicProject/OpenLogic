@@ -24,22 +24,22 @@ the function has at least as many elements as the domain, since no two
 \end{explain}
 
 \begin{defn}
-$\card{X} \leq \card{Y}$ if and only if there is an !!{injective}
-  function~$f \colon X \to Y$.
+$X$ is \emph{no larger than}~$Y$, $\cardle{X}{Y}$, if and only if there
+  is an !!{injective} function~$f \colon X \to Y$.
 \end{defn}
 
 \begin{thm}[Schr\"oder-Bernstein]
-Let $X$ and $Y$ be sets. If $\card{X} \leq \card{Y}$ and $\card{Y}
-\leq \card{X}$, then $\card{X} = \card{Y}$.
+  Let $X$ and $Y$ be sets. If $\cardle{X}{Y}$ and $\cardle{Y}{X}$,
+  then $\cardeq{X}{Y}$.
 \end{thm}
 
 \begin{explain}
 In other words, if there is a total !!{injective} function from $X$ to
-$Y$, and if there is a total !!{injective} function from $Y$ back to $X$,
-then there is a total !!{bijection} from $X$ to $Y$. Sometimes, it can be
+$Y$, and if there is a total !!{injective} function from $Y$ back to~$X$,
+then there is a total !!{bijection} from $X$ to~$Y$. Sometimes, it can be
 difficult to think of a !!{bijection} between two equinumerous sets, so
 the Schr\"oder-Bernstein theorem allows us to break the comparison
-down into cases so we only have to think of an !!{injection} from the
+down into cases so we only have to think of !!a{injection} from the
 first to the second, and vice-versa. The Schr\"oder-Bernstein theorem,
 apart from being convenient, justifies the act of discussing the
 ``sizes'' of sets, for it tells us that set cardinalities have the
@@ -47,12 +47,14 @@ familiar anti-symmetric property that numbers have.
 \end{explain}
 
 \begin{defn}
-$\card{X} < \card{Y}$ if and only if there is !!a{injective}
-  function~$f\colon X \to Y$ but no !!{bijective}~$g\colon X \to Y$.
+$X$ is \emph{smaller than}~$Y$, $\cardless{X}{Y}$, if and only if
+  there is !!a{injective} function~$f\colon X \to Y$ but no
+  !!{bijective}~$g\colon X \to Y$.
 \end{defn}
 
 \begin{thm}[Cantor]
-For all $X$, $\card{X} < \card{\Pow{X}}$.
+  \ollabel{thm:cantor}
+For all $X$, $\cardless{X}{\Pow{X}}$.
 \end{thm}
 
 \begin{proof}
@@ -61,18 +63,52 @@ singleton~$\{x\}$ is !!{injective}, since if $x \neq y$ then also $f(x) =
 \{x\} \neq \{y\} = f(y)$.
 
 There cannot be !!a{surjective} function~$g\colon X \to \Pow{X}$, let
-alone a !!{bijective} one. For assume that a surjective $g\colon X \to
-\Pow{X}$ exists.  Then let $Y = \Setabs{x \in X}{x \notin g(x)}$. If
-$g(x)$ is defined for all $x \in X$, then $Y$ is clearly a
-well-defined subset of~$X$.  If $g$ is !!{surjective}, $Y$ must be the
-value of~$g$ for some $x_0 \in X$, i.e., $Y = g(x_0)$.  Now consider
-$x_0$: it cannot be !!a{element} of $Y$, since if $x_0 \in Y$ then
-$x_0 \in g(x_0)$, and the definition of~$Y$ then would have $x_0
-\notin Y$.  On the other hand, it must be !!a{element} of~$Y$, since
-if it were not, then $x_0 \notin Y = g(x_0)$.  But then $x_0$
-satisfies the defining condition of~$Y$, and so $x_0 \in Y$. In either
-case, we have a contradiction.
+alone a !!{bijective} one. For suppose that $g\colon X \to \Pow{X}$.
+Since $g$ is total, every $x \in X$ is mapped to a subset $g(x)
+\subseteq X$. We show that $g$ cannot be surjective. To do this, we
+define a subset~$Y \subseteq X$ which by definition cannot be in the
+range of~$g$. Let
+\[
+\overline{Y} = \Setabs{x \in X}{x \notin g(x)}.
+\]
+Since $g(x)$ is defined for all $x \in X$, $\overline{Y}$ is clearly a
+well-defined subset of~$X$.  But, it cannot be in the range
+of~$g$. Let $x \in X$ be arbitrary, we show that $\overline{Y} \neq
+g(x)$.  If $x \in g(x)$, then it does not satisfy $x \notin g(x)$, and
+so by the definition of~$\overline{Y}$, we have $x \notin
+\overline{Y}$.  If $x \in \overline{Y}$, it must satisfy the defining
+property of~$\overline{Y}$, i.e., $x \notin g(x)$.  Since $x$ was
+arbitrary this shows that for each $x \in X$, $x \in g(x)$ iff $x
+\notin \overline{Y}$, and so $g(x) \neq \overline{Y}$.  So
+$\overline{Y}$ cannot be in the range of~$g$, contradicting the
+assumption that~$g$ is surjective.
 \end{proof}
 
+\begin{explain}
+  It's instructive to compare the proof of \olref{thm:cantor} to that
+  of \olref[nen]{thm-nonenum-pownat}. There we showed that for any
+  list $Z_1$, $Z_2$, \dots, of subsets of~$\Int^+$ one can construct a
+  set~$\overline{Z}$ of numbers guaranteed not to be on the list. It
+  was guaranteed not to be on the list because, for every $n \in
+  \Int^+$, $n \in Z_n$ iff $n \notin \overline{Z}$. This way, there is
+  always some number that is !!a{element} of one of $Z_n$ and
+  $\overline{Z}$ but not the other. We follow the same idea here,
+  except the indices~$n$ are now !!{element}s of~$X$ instead
+  of~$\Int^+$. The set $\overline{Y}$ is defined so that it is
+  different from~$g(x)$ for each $x \in X$, because $x \in g(x)$ iff
+  $x \notin \overline{Y}$. Again, there is always !!a{element} of~$X$
+  which is !!a{element} of one of $g(x)$ and $\overline{Y}$ but not
+  the other. And just as $\overline{Z}$ therefore cannot be on the
+  list $Z_1$, $Z_2$, \dots, $\overline{Y}$ cannot be in the range
+  of~$g$.
+\end{explain}
+
+\begin{prob}
+  Show that there cannot be !!a{injective} function $g\colon \wp(X) \to
+  X$, for any set $X$. Hint: Suppose $g\colon \wp(X) \to X$ is
+  !!{injective}. Then for each $x \in X$ there is at most one $Y \subseteq
+  X$ such that $g(Y) = x$. Define a set $\overline{Y}$ such that for
+  every $x \in X$, $g(\overline{Y}) \neq x$.
+\end{prob}
 
 \end{document}
