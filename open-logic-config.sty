@@ -480,11 +480,20 @@
 % - `\card{X}`: cardinality of a set
 \DeclareDocumentCommand \card { m } {\left| #1 \right|}
 
+% - `\cardle{X}{Y}`: X is no larger than Y
+\DeclareDocumentCommand \cardle { m m } {#1 \preceq #2}
+
+% - `\cardless{X}{Y}`: X is smaller than Y
+\DeclareDocumentCommand \cardless { m m } {#1 \prec #2}
+
+% - `\cardle{X}{Y}`: X is equinumerous with Y
+\DeclareDocumentCommand \cardeq { m m } {#1 \approx #2}
+
 % - `\tuple{x,y}`: pairs, tuples, sequences
 \DeclareDocumentCommand \tuple { m } {\langle #1 \rangle}
 
 % - `\comp{f}{g}`: composition of f with g, defaults to $g \circ f$
-\DeclareDocumentCommand \comp { m m }{g \circ f}
+\DeclareDocumentCommand \comp { m m }{#2 \circ #1}
 
 % - `\pto`: partial function arrow
 
