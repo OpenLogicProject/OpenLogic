@@ -34,9 +34,8 @@ In other words, we want equinumerosity to be an
 \end{intro}
 
 \begin{defn}
-A set $X$ is \emph{equinumerous} with a set $Y$ if and only if there
-is a total bijection $f$ from $X$ to $Y$ (that is, $f \colon X
-\to Y$).
+A set $X$ is \emph{equinumerous} with a set $Y$, $\cardeq{X}{Y}$, if
+and only if there is !!a{bijective} $f \colon X \to Y$.
 \end{defn}
 
 \begin{prop}
@@ -47,23 +46,23 @@ Equinumerosity defines an equivalence relation.
 
 \begin{description}
 
-\item[Reflexivity:] Using the identity map $1_X \colon X \rightarrow
-  X$, where $1_X (x) = x$ for all $x \in X$, we see
-  that $X$ is equinumerous with itself (clearly, $1_X$ is bijective).
+\item[Reflexivity:] Using the identity map $1_X \colon X \to X$, where
+  $1_X (x) = x$ for all $x \in X$, we see that $X$ is equinumerous
+  with itself (clearly, $1_X$ is !!{bijective}).
 
-\item[Symmetry:] Suppose that $X$ is equinumerous with $Y$. Then there
-  is a bijection $f\colon X \rightarrow Y$. Since $f$ is bijective,
-  its inverse $f^{-1}$ is also a bijection. Since $f$ is !!{surjective},
-  $f^{-1}$ is total. Hence, $f^{-1}\colon Y \rightarrow X$ is a total
-  !!{bijection} from $Y$ to~$X$, so $Y$ is also equinumerous with $X$.
+\item[Symmetry:] Suppose that $X$ is equinumerous with~$Y$. Then there
+  is !!a{bijective} $f\colon X \rightarrow Y$. Since $f$ is
+  !!{bijective}, its inverse $f^{-1}$ exists and also
+  !!{bijective}. Hence, $f^{-1}\colon Y \to X$ is a !!{bijective}
+  function from $Y$ to~$X$, so $Y$ is also equinumerous with~$X$.
 
 \item[Transitivity:] Suppose that $X$ is equinumerous with $Y$ via the
-  total bijection~$f$ and that $Y$ is equinumerous with $Z$ via the
-  total bijection~$g$. Then the composition of $g \circ f \colon X
-  \rightarrow Z$ is a total bijection, and $X$ is thus equinumerous
-  with $Z$.
+  !!{bijective} function~$f\colon X \to Y$ and that $Y$ is
+  equinumerous with $Z$ via the !!{bijective} function~$g\colon Y \to
+  Z$. Then the composition of $\comp{f}{g}\colon X \to Z$ is
+  !!{bijective}, and $X$ is thus equinumerous with~$Z$.
 \end{description}
-Therefore, equinumerosity is an equivalence relation by the given definition.
+Therefore, equinumerosity is an equivalence relation.
 \end{proof}
 
 \begin{thm}
@@ -73,21 +72,21 @@ and only if $Y$ is.
 
 \begin{proof}
 Let $X$ and $Y$ be equinumerous.  Suppose that $X$ is
-!!{enumerable}. Then there is a possibly partial, !!{surjective}
-function $f\colon \Nat \to X$. Since $X$ and $Y$ are equinumerous,
-there is a total bijection $g\colon X \to Y$. Claim: $g \circ f \colon
-\Nat \rightarrow Y$ is !!{surjective}. Clearly, $g \circ f$ is a
-function (since functions are closed under composition). To see $g
-\circ f$ is !!{surjective}, let $y \in Y$. Since $g$ is
-!!{surjective}, there is an $x \in X$ such that $g(x) = y$. Since $f$
-is !!{surjective}, there is an $n \in \Nat$ such that $f(n) =
-x$. Hence,
+!!{enumerable}. Then either $X = \emptyset$ or there is
+!!a{surjective} function $f\colon \Int^+ \to X$. Since $X$ and $Y$ are
+equinumerous, there is !!a{bijective} $g\colon X \to Y$. If $X =
+\emptyset$, then $Y = \emptyset$ also (otherwise there would be
+!!a{element}~$y \in Y$ but no $x \in X$ with $g(x) = y$).  If, on the
+other hand, $f\colon \Int^+ \to X$ is !!{surjective}, then
+$\comp{f}{g} \colon \Int^+ \to Y$ is !!{surjective}. To see this, let
+$y \in Y$. Since $g$ is !!{surjective}, there is an $x \in X$ such
+that $g(x) = y$. Since $f$ is !!{surjective}, there is an $n \in \Int^+$
+such that $f(n) = x$. Hence,
 \[
-(g \circ f)(n) = g(f(n)) = g(x) = y
+(\comp{f}{g})(n) = g(f(n)) = g(x) = y
 \]
-and thus $g \circ f$ is !!{surjective}. Since $g \circ f\colon \Nat
-\to Y$ is !!{surjective}, it is an enumeration of~$Y$, and so $Y$~is
-!!{enumerable}.
+and thus $\comp{f}{g}$ is !!{surjective}. We have that $\comp{f}{g}$
+is an enumeration of~$Y$, and so $Y$~is !!{enumerable}.
 \end{proof}
 
 \begin{prob}
@@ -97,8 +96,8 @@ then the unions $X \cup Y$ and $U \cup V$ are equinumerous.
 \end{prob}
 
 \begin{prob}
-Given an enumeration of a set $X$, show that if $X$ is not finite then
-it is equinumerous with the positive integers~$\Int^+$.
+Show that if $X$ is infinite and !!{enumerable}, then it is
+equinumerous with the positive integers~$\Int^+$.
 \end{prob}
 
 \end{document}
