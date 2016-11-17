@@ -28,11 +28,10 @@ that no such surjective function can exist. Equivalently, you have to
 show that the elements of~$X$ cannot be enumerated in a one way
 infinite list.  The best way to do this is to show that every list of
 !!{element}s of~$X$ must leave at least one element out; or that no
-function $f\colon \Int^+ \to X$ can be surjective.  The best way of
-doing this is Cantor's \emph{diagonal method}.  Given a list of
-!!{element}s of $X$, say, $x_1$, $x_2$, \dots, we construct another
-element of~$X$ which, by its construction, cannot possibly be on that
-list.
+function $f\colon \Int^+ \to X$ can be surjective.  We can do this
+using Cantor's \emph{diagonal method}.  Given a list of !!{element}s
+of $X$, say, $x_1$, $x_2$, \dots, we construct another element of~$X$
+which, by its construction, cannot possibly be on that list.
 
 Our first example is the set~$\Bin^\omega$ of all infinite, non-gappy
 sequences of $0$'s and $1$'s.
@@ -46,7 +45,11 @@ $\Bin^\omega$~is !!{nonenumerable}.
 Suppose that there is a list $s_{1}$, $s_{2}$, $s_{3}$, $s_{4}$,
 \dots{} of !!{element}s of~$\Bin^\omega$.  Each of these $s_i$ is
 itself an infinite sequence of $0$'s and $1$'s.  Let's call the $j$-th
-element of the $i$-th sequence in this list $s_i(j)$.
+element of the $i$-th sequence in this list $s_i(j)$. Then the $i$-th
+sequence~$s_i$ is
+\[
+s_i(1), s_i(2), s_i(3), \dots
+\]
 
 We may arrange this list, and the elements of each sequence $s_i$ in
 it, in an array:
@@ -121,12 +124,13 @@ sequences of $0$'s and $1$'s, i.e., $\overline{s} \in
 \Bin^\omega$. This shows in particular that there can be no list of
 \emph{all} !!{element}s of~$\Bin^\omega$, since for any such list we
 could also construct a sequence~$\overline{s}$ guaranteed to not be on
-the list.
+the list, so the assumption that there is a list of all sequences
+in~$\Bin^\omega$ leads to a contradiction.
 \end{proof}
 
 \begin{explain}
 This proof method is called ``diagonalization'' because it uses the
-diagonal of the array to define $\overline{s}$. Diagonalization need
+diagonal of the array to define~$\overline{s}$. Diagonalization need
 not involve the presence of an array: we can show that sets are not
 !!{enumerable} by using a similar idea even when no array and no
 actual diagonal is involved.
