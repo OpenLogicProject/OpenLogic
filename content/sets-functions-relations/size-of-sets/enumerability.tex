@@ -33,7 +33,9 @@ A couple of points about enumerations:
   in which every !!{element} other than the first has a single
   !!{element} immediately preceding it.  In other words, there are
   only finitely many elements between the first !!{element} of the
-  list and any other !!{element}.
+  list and any other !!{element}. In particular, this means that every
+  !!{element} of an enumeration has a finite position: the first
+  !!{element} has position~$1$, the second position~$2$, etc.
 \item We can have different enumerations of the same set~$X$ which
   differ by the order in which the !!{element}s appear: $4$, $1$,
   $25$, $16$,~$9$ enumerates the (set of the) first five square
@@ -71,21 +73,21 @@ A couple of points about enumerations:
   from an enumeration by replacing repeated !!{element}s by gaps. For
   instance, we can turn the enumeration into a new one in which $x_i'$
   is $x_i$ if $x_i$ is !!a{element} of~$X$ that is not among $x_1$,
-  \dots, $x_{i-1}$ or is $-$ if it is. We can remove gaps by closing up
-  the elements in the list. To make precise what ``closing up''
-  amounts to is a bit difficult to describe. For instance, we can
-  generate a new enumeration $x_1''$, $x_2''$, \dots, where each
+  \dots, $x_{i-1}$ or is $-$ if it is. We can remove gaps by closing
+  up the elements in the list. To make precise what ``closing up''
+  amounts to is a bit difficult to describe. Roughly, it means that we
+  can generate a new enumeration $x_1''$, $x_2''$, \dots, where each
   $x_i''$ is the first !!{element} in the enumeration $x_1'$, $x_2'$,
-  \dots{} after $x_{i-1}''$.
+  \dots{} after $x_{i-1}''$ (if there is one).
 \end{proof}
 
-The last proof shows that in order to give precise definitions and
-proofs about enumerations and !!{enumerable} sets, we need a more
-precise definition.  The following provides it.
+The last argument shows that in order to get a good handle on
+enumerations and !!{enumerable} sets and to prove things about them,
+we need a more precise definition.  The following provides it.
 
 \begin{defn}[Enumeration]
-An \emph{enumeration} of a set $X$ is any !!{surjective} function $f:
-\Int^+ \to X$.
+An \emph{enumeration} of a set $X$ is any !!{surjective} function
+$f \colon \Int^+ \to X$.
 \end{defn}
 
 \begin{explain}
@@ -101,7 +103,7 @@ list. Since the function may not be !!{injective}, the list may be
 redundant, but that is acceptable (as noted above).
 
 On the other hand, given a list that enumerates all !!{element}s
-of~$X$, we can define !!a{surjective} function $f\colon \Int \to X$ by
+of~$X$, we can define !!a{surjective} function $f\colon \Int^+ \to X$ by
 letting $f(n)$ be the $n$th !!{element} of the list that is not a gap,
 or the last !!{element} of the list if there is no $n$th !!{element}.
 There is one case in which this does not produce !!a{surjective}
@@ -135,14 +137,18 @@ natural numbers $\Nat$ is the function $g(n) = n - 1$.
 \begin{ex}
 The functions $f\colon \Int^+ \to \Int^+$ and $g \colon \Int^+ \to
 \Int^+$ given by
-\begin{align}
+\begin{align*}
 f(n) & = 2n \text{ and}\\
 g(n) & = 2n+1
-\end{align}
+\end{align*}
 enumerate the even natural numbers and the odd positive integers,
 respectively. However, neither function is an enumeration of
 $\Int^+$, since neither is !!{surjective}.
 \end{ex}
+
+\begin{prob}
+Define an enumeration of the positive squares $4$, $9$, $16$, \dots
+\end{prob}
 
 \begin{ex}
 The function $f(n) = (-1)^{n} \lceil \frac{(n-1)}{2}\rceil$ (where
@@ -169,7 +175,7 @@ f(n) = \begin{cases}
 \end{ex}
 
 \begin{prob}
-  Show that if $X$ and $Y$ are !!{enumerable}, so is $X \cup Y$.
+Show that if $X$ and $Y$ are !!{enumerable}, so is $X \cup Y$.
 \end{prob}
 
 \begin{prob}
@@ -273,6 +279,10 @@ $n/m$ with $n, m \in \Int^+$).
 \begin{prob}
 Show that $\Rat$ is !!{enumerable}. (A rational number is one that can
 be written as a fraction $z/m$ with $z \in \Int$, $m \in \Int^+$).
+\end{prob}
+
+\begin{prob}
+Define an enumeration of $\Bin^*$.
 \end{prob}
 
 \begin{prob}
