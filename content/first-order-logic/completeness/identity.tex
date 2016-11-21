@@ -24,12 +24,14 @@ fix this, however, using a construction known as ``factoring.''
 \end{explain}
 
 \begin{defn}
-Let $\Gamma^*$ be a maximally consistent set of sentences in~$\Lang
-L$.  We define the relation $\approx$ on the set of closed terms
-of~$\Lang L$ by
-\[
-t \approx t' \text{\quad iff \quad} \eq[t][t'] \in \Gamma^*
-\]
+  Let $\Gamma^*$ be a
+  \iftag{cmplMCS}{maximally consistent}{}
+  \iftag{cmplCCS}{consistent and !!{complete}}{}
+  set of sentences in~$\Lang L$.  We define the relation $\approx$ on
+  the set of closed terms of~$\Lang L$ by
+  \[
+  t \approx t' \text{\quad iff \quad} \eq[t][t'] \in \Gamma^*
+  \]
 \end{defn}
 
 \begin{prop}
@@ -55,9 +57,11 @@ The relation $\approx$ has the following properties:
 \end{prop}
 
 \begin{proof}
-Since $\Gamma^*$ is maximally consistent, $\eq[t][t'] \in \Gamma^*$
-iff $\Gamma^* \Proves \eq[t][t']$.  Thus it is enough to show the
-following:
+  Since $\Gamma^*$ is
+  \iftag{cmplMCS}{maximally consistent,}{}
+  \iftag{cmplCCS}{consistent and complete,}{}
+  $\eq[t][t'] \in \Gamma^*$ iff $\Gamma^* \Proves \eq[t][t']$.  Thus
+  it is enough to show the following:
 \begin{enumerate}
 \item $\Gamma^* \Proves \eq[t][t]$ for all terms~$t$.
 \item If $\Gamma^* \Proves \eq[t][t']$ then $\Gamma^* \Proves \eq[t'][t]$.
@@ -84,7 +88,10 @@ Complete the proof of~\olref[fol][com][ide]{prop:approx-equiv}.
 \end{prob}
 
 \begin{defn}
-Suppose $\Gamma^*$ is a maximally consistent set in a language~$\Lang
+  Suppose $\Gamma^*$ is a
+  \iftag{cmplMCS}{maximally consistent}{}
+  \iftag{cmplCCS}{consistent and !!{complete}}{}
+  set in a language~$\Lang
 L$, $t$ is a term, and $\approx$ as in the previous definition.  Then:
 \[
 [t]_\approx = \Setabs{t'}{t'\in \Trm[L], t \approx t'}

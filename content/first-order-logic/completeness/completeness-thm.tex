@@ -19,7 +19,9 @@ $\Gamma$ is consistent, it is satisfiable.
 
 \begin{proof}
 Suppose $\Gamma$ is consistent.  By \olref[lin]{lem:lindenbaum}, there
-is a $\Gamma^* \supseteq \Gamma$ which is maximally consistent and
+is a $\Gamma^* \supseteq \Gamma$ which is
+\iftag{cmplMCS}{maximally consistent}{}
+\iftag{cmplCCS}{consistent, !!{complete},}{} and
 saturated.  If $\Gamma$ does not contain~$\eq$, then by
 \olref[mod]{lem:truth}, $\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$.
 From this it follows in particular that for all $!A \in \Gamma$,

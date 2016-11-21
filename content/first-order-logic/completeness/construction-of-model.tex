@@ -11,14 +11,19 @@
 \olsection{Construction of a Model}
 
 We will begin by showing how to construct !!a{structure} which
-satisfies a maximally consistent, saturated set of !!{sentence}s in a
-language~$\Lang L$ without~$\eq$.
+satisfies a
+\iftag{cmplMCS}{maximally consistent,}{}
+\iftag{cmplCCS}{!!{complete} and consistent,}{}
+saturated set of !!{sentence}s in a language~$\Lang L$ without~$\eq$.
 
 \begin{defn}[Term model]
 \ollabel{termmodel}
-Let $\Gamma^*$ be a maximally consistent, saturated set of !!{sentence}s
-in a language~$\Lang L$. The \emph{term model}~$\Struct M(\Gamma^*)$
-of $\Gamma^*$ is the !!{structure} defined as follows:
+Let $\Gamma^*$ be a
+\iftag{cmplMCS}{maximally consistent}{}
+\iftag{cmplCCS}{!!{complete} and consistent}{},
+saturated set of !!{sentence}s in a language~$\Lang L$. The \emph{term
+  model}~$\Struct M(\Gamma^*)$ of $\Gamma^*$ is the !!{structure}
+defined as follows:
 \begin{enumerate}
 \item The !!{domain}~$\Domain{M(\Gamma^*)}$ is the set of all closed terms
   of~$\Lang L$.
@@ -53,7 +58,9 @@ We prove both directions simultaneously, and by induction on $!A$.
 \indcase{!A}{\lnot !B}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff
   $\Sat/{M(\Gamma^*)}{!B}$ (by definition of satisfaction). By
   induction hypothesis, $\Sat/{M(\Gamma^*)}{!B}$ iff $!B \notin
-  \Gamma^*$. By \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-either-or},
+  \Gamma^*$. By
+  \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-either-or},}{}
+  \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-either-or},}{}
   $\lnot !B \in \Gamma^*$ if $!B \notin \Gamma^*$; and $\lnot !B
   \notin \Gamma^*$ if $!B \in \Gamma^*$ since $\Gamma^*$ is
   consistent.}}{}
@@ -65,8 +72,9 @@ We prove both directions simultaneously, and by induction on $!A$.
   both $\Sat{M(\Gamma^*)}{!B}$ and $\Sat{M(\Gamma^*)}{!C}$ (by
   definition of satisfaction) iff both $!B \in \Gamma^*$ and $!C \in
   \Gamma^*$ (by the induction hypothesis). By
-  \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-and}, this is the case
-  iff $(!B \land !C) \in \Gamma^*$.}}}{}
+  \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-and},}{}
+  \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-and},}{}
+  this is the case iff $(!B \land !C) \in \Gamma^*$.}}}{}
 
 \tagitem{prvOr}{%
 \iftag{probOr}{%
@@ -75,7 +83,9 @@ We prove both directions simultaneously, and by induction on $!A$.
   $\Sat{M(\Gamma^*)}{!B}$ or $\Sat{M(\Gamma^*)}{!C}$ (by definition of
   satisfaction) iff $!B \in \Gamma^*$ or $!C \in \Gamma^*$ (by
   induction hypothesis). This is the case iff $(!B \lor !C) \in
-  \Gamma^*$ (by \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-or}).}}}{}
+  \Gamma^*$ (by
+  \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-or}).}{}
+  \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-or}).}{}}}}{}
 
 \tagitem{prvIf}{%
 \iftag{probIf}{%
@@ -84,7 +94,9 @@ We prove both directions simultaneously, and by induction on $!A$.
   $\Sat/{M(\Gamma^*}{!B}$ or $\Sat{M (\Gamma^*)}{!C}$ (by definition
   of satisfaction) iff $!B \notin \Gamma^*$ or $!C \in \Gamma^*$ (by
   induction hypothesis). This is the case iff $(!B \lif !C) \in
-  \Gamma^*$ (by \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-if}).}}}{}
+  \Gamma^*$ (by
+  \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-if}).}{}
+  \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-if}).}{}}}}{}
 
 \tagitem{prvAll}{%
 \iftag{probAll}{%
@@ -92,24 +104,28 @@ We prove both directions simultaneously, and by induction on $!A$.
 \indcase{!A}{\lforall[x][!B(x)]}{Suppose that
   $\Sat{M(\Gamma^*)}{\indfrm}$, then for every variable assignment $s$,
   $\Sat{M(\Gamma^*)}{!B(x)}[s]$. Suppose to the contrary that
-  $\lforall[x][!B(x)]\notin \Gamma^*$: Then by
-  \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-either-or},
+  $\lforall[x][!B(x)]\notin \Gamma^*$: Then
+  \iftag{cmplMCS}{by \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-either-or},}{}
+  \iftag{cmplCCS}{since $\Gamma^*$ is !!{complete},}{}
   $\lnot\lforall[x][!B(x)] \in \Gamma^*$. By saturation,
-\iftag{prvEx}
+  \iftag{prvEx}
       {$(\lexists[x][\lnot !B(x)] \lif \lnot !B(c)) \in \Gamma^*$}
       {$(\lnot\lforall[x][!B(x)] \lif \lnot !B(c)) \in \Gamma^*$}
   for some $c$, so by
-  \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, $\lnot !B(c) \in
-  \Gamma^*$. Since $\Gamma^*$ is consistent, $!B(c) \notin
-  \Gamma^*$. By induction hypothesis, $\Sat/{M(\Gamma^*)}{!B(c)}$.
-  Therefore, if $s'$ is the variable assignment such that $s(x)=c$,
-  then $\Sat/{M(\Gamma^*)}{!B(x)}[s']$, contradicting the earlier
-  result that $\Sat{M(\Gamma^*)}{!B(x)}[s]$ for all~$s$. Thus, we
-  have $\indfrm \in \Gamma^*$.
+  \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},}{}
+  \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},}{}
+  $\lnot !B(c) \in \Gamma^*$. Since $\Gamma^*$ is consistent, $!B(c)
+  \notin \Gamma^*$. By induction hypothesis,
+  $\Sat/{M(\Gamma^*)}{!B(c)}$.  Therefore, if $s'$ is the variable
+  assignment such that $s(x)=c$, then $\Sat/{M(\Gamma^*)}{!B(x)}[s']$,
+  contradicting the earlier result that $\Sat{M(\Gamma^*)}{!B(x)}[s]$
+  for all~$s$. Thus, we have $\indfrm \in \Gamma^*$.
 
 Conversely, suppose that $\lforall[x][!B(x)] \in \Gamma^*$. By
 \tagrefs{prfSC/{fol:seq:prv:thm:provability-quantifiers},prfND/{fol:ntd:prv:thm:provability-quantifiers}}
-together with \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},
+together with
+\iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},}{}
+\iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},}{}
 $!B(t) \in \Gamma^*$ for every term~$t \in \Domain{M(\Gamma^*)}$. By
 inductive hypothesis, $\Sat{M(\Gamma^*)}{!B(t)}$ for every term~$t \in
 \Domain{M(\Gamma^*)}$. Let $s$ be the variable assigment with $s(x) =
@@ -127,19 +143,22 @@ $\Sat{M(\Gamma^*)}{\indfrm}$.}}}{}
     by our induction hypothesis, $!B(t) \in \Gamma^*$. By
     \tagrefs{prfSC/{fol:seq:prv:thm:provability-quantifiers},prfND/{fol:ntd:prv:thm:provability-quantifiers}}
     we have $\Gamma^* \Proves \lexists[x][!B(x)]$. Then, by
-    \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, we can
-    conclude that $\indfrm \in \Gamma^*$.
+    \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},}{}
+    \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},}{}
+    we can conclude that $\indfrm \in \Gamma^*$.
 
-Conversely, suppose that $\lexists[x][!B(x)] \in \Gamma^*$. Because
-$\Gamma^*$ is saturated, $(\lexists[x][!B(x)] \lif !B(c)) \in
-\Gamma^*$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
-together with \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},
-$!B(c) \in \Gamma^*$. By inductive hypothesis,
-$\Sat{M(\Gamma^*)}{!B(c)}$. Now consider the variable assignment with
-$s(x) = \Assign{c}{M(\Gamma^*)}$. Then
-$\Sat{M(\Gamma^*)}{!B(x)}[s]$. By definition of satisfaction,
-$\Sat{M(\Gamma^*)}{\lexists[x][!B(x)]}$.}}}{}
+    Conversely, suppose that $\lexists[x][!B(x)] \in
+    \Gamma^*$. Because $\Gamma^*$ is saturated, $(\lexists[x][!B(x)]
+    \lif !B(c)) \in \Gamma^*$. By
+    \tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
+    together with
+    \iftag{cmplMCS}{\olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},}{}
+    \iftag{cmplCCS}{\olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},}{}
+    $!B(c) \in \Gamma^*$. By inductive hypothesis,
+    $\Sat{M(\Gamma^*)}{!B(c)}$. Now consider the variable assignment
+    with $s(x) = \Assign{c}{M(\Gamma^*)}$. Then
+    $\Sat{M(\Gamma^*)}{!B(x)}[s]$. By definition of satisfaction,
+    $\Sat{M(\Gamma^*)}{\lexists[x][!B(x)]}$.}}}{}
 \end{enumerate}
 \end{proof}
 

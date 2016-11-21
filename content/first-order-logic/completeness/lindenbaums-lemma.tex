@@ -11,7 +11,9 @@
 
 We now prove a lemma that shows that any consistent set of
 !!{sentence}s is contained in some set of sentences which is not just
-consistent, but maximally so, and moreover, is saturated. The proof
+consistent, but
+\iftag{cmplMCS}{maximally consistent}{}
+\iftag{cmplCCS}{also !!{complete}}{}, and moreover, is saturated. The proof
 works by first extending the set to a saturated set, and then adding
 one sentence at a time, guaranteeing at each step
 that the set remains consistent. The union of all stages in that
@@ -20,8 +22,10 @@ its negation~$\lnot !A$, is saturated, and is also consistent.
 
 \begin{lem}[Lindenbaum's Lemma]
 \ollabel{lem:lindenbaum}
-Every consistent set~$\Gamma$ can be extended to a maximally
-consistent saturated set~$\Gamma^*$.
+Every consistent set~$\Gamma$ can be extended to a
+\iftag{cmplMCS}{maximally consistent}{}
+\iftag{cmplCCS}{!!{complete} and consistent}{},
+saturated set~$\Gamma^*$.
 \end{lem}
 
 \begin{proof}
@@ -54,13 +58,16 @@ the latter is consistent.  If it isn't, $\Gamma_{n+1} = \Gamma_n \cup
 \{!\lnot !A\}$, which must be consistent.  If it weren't, i.e., both
 $\Gamma_n \cup \{!A\}$ and $\Gamma_n \cup \{\lnot !A\}$ are
 inconsistent, then $\Gamma_n \Proves \lnot !A$ and $\Gamma_n \Proves
-!A$, so $\Gamma_n$ would be inconsistent contrary to induction
+!A$, so $\Gamma_n$ would be inconsistent contrary to the induction
 hypothesis.
 
 Every !!{formula} of $\Frm[L']$ appears on the list used to
-define~$\Gamma^*$.  If $!A_n \notin \Gamma^*$, then that is because
-$\Gamma_n \cup \{!A_n\}$ was inconsistent.  But that means that
-$\Gamma^*$ is maximally consistent.
+define~$\Gamma^*$. If $!A_n \notin \Gamma^*$, then that is because
+$\Gamma_n \cup \{!A_n\}$ was inconsistent.
+\iftag{cmplMCS}{But that means that $\Gamma^*$ is maximally
+  consistent.}
+\iftag{cmplCCS}{But then $\lnot !A_n \notin \Gamma^*$, so $\Gamma^*$
+  is !!{complete}.}
 \end{proof}
 
 \end{document}

@@ -1,0 +1,159 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{dcp}
+\olsection{A Direct Proof of the Compactness Theorem}
+
+We can prove the Compactness Theorem directly, without appealing to
+the Completeness Theorem, using the same ideas as in the proof of the
+completeness theorem.  In the proof of the Completeness Theorem we
+started with a consistent set~$\Gamma$ of !!{sentence}s, expanded it to a
+consistent, saturated, and !!{complete} set~$\Gamma^*$ of
+!!{sentence}s, and then showed that in the term
+model~$\Struct{M(\Gamma^*)}$ constructed from $\Gamma^*$, all
+!!{sentence}s of~$\Gamma$ are true, so $\Gamma$ is satisfiable.
+
+We can use the same method to show that a finitely satisfiable set of
+sentences is satisfiable. We just have to prove the corresponding
+versions of \olref[ccs]{prop:ccs} and \olref[lin]{lem:lindenbaum}
+where we replace ``consistent'' with ``finitely satisfiable.''
+
+\begin{thm}
+  \ollabel{thm:fsat-henkin}
+  Every finitely satisfiable set~$\Gamma$ can be extended to a
+  saturated finitely satisfiable set~$\Gamma'$.
+\end{thm}
+
+
+\begin{lem}
+  \ollabel{lem:fsat-lindenbaum}
+  Every finitely satisfiable set~$\Gamma$ can be extended to a
+  !!{complete} and finitely satisfiable, saturated set~$\Gamma^*$.
+\end{lem}
+
+\begin{prop}
+\ollabel{prop:fsat-ccs}
+Suppose $\Gamma$ is !!{complete} and finitely satisfiable. Then:
+\begin{enumerate}
+\item \ollabel{prop:complete-prov-in} If $\Gamma \Proves !A$, then $!A \in
+  \Gamma$.
+
+\tagitem{prvAnd}{\ollabel{prop:complete-and} $(!A \land !B) \in \Gamma$
+  iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:complete-or} $(!A \lor !B) \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:complete-if} $(!A \lif !B) \in \Gamma$ iff
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
+\end{enumerate}
+\end{prop}
+
+
+\begin{thm}[Compactness Theorem]
+\ollabel{thm:compactness}
+The following hold for any sentences $\Gamma$ and $!A$:
+\begin{enumerate}
+  \item $\Gamma \Entails !A$ iff there is a finite $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Entails !A$.
+  \item $\Gamma$ is satisfiable if and only if it is finitely
+    satisfiable.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+We prove (2).  If $\Gamma$ is satisfiable, then there is a
+!!{structure}~$\Struct{M}$ such that $\Sat{M}{!A}$ for all $!A \in
+\Gamma$.  Of course, this $\Struct M$ also satisfies every finite
+subset of~$\Gamma$, so $\Gamma$ is finitely satisfiable.
+
+Now suppose that $\Gamma$ is finitely satisfiable.  Then every finite
+subset~$\Gamma_0 \subseteq \Gamma$ is satisfiable.  By soundness,
+every finite subset is consistent.  Then $\Gamma$ itself must be
+consistent.  For assume it is not, i.e., $\Gamma \Proves \bot$.  But
+!!{derivation}s are finite, and so already some finite
+subset~$\Gamma_0 \subseteq \Gamma$ must be inconsistent
+(cf.\ \tagrefs{prfSC/{fol:seq:ptn:prop:proves-compact},prfND/{fol:ntd:ptn:prop:proves-compact}}).
+But we just showed they are all consistent, a contradiction.  Now by
+completeness, since $\Gamma$ is consistent, it is satisfiable.
+\end{proof}
+
+\begin{prob}
+Prove (1) of \olref[fol][com][com]{thm:compactness}.
+\end{prob}
+
+\begin{ex}
+In every model~$\Struct{M}$ of a theory~$\Gamma$, each term~$t$ of
+course picks out !!a{element} of~$\Domain{M}$. Can we guarantee that
+it is also true that every !!{element} of~$\Domain{M}$ is picked out
+by some term or other? In other words, are there theories~$\Gamma$ all
+models of which are covered?  The compactness theorem shows that this
+is not the case if $\Gamma$ has infinite models. Here's how to see
+this: Let $\Struct{M}$ be an infinite model of~$\Gamma$, and let $c$
+be !!a{constant} not in the language of~$\Gamma$. Let $\Delta$ be the
+set of all sentences $\eq/[c][t]$ for $t$ a term in the
+language~$\Lang{L}$ of~$\Gamma$, i.e.,
+  \[
+  \Delta = \Setabs{\eq/[c][t]}{t \in \Trm[L]}.
+  \]
+A finite subset of $\Gamma \cup \Delta$ can be written as $\Gamma'
+\cup \Delta'$, with $\Gamma' \subseteq \Gamma$ and $\Delta' \subseteq
+\Delta$. Since $\Delta'$ is finite, it can contain only finitely many
+terms. Let $a \in \Domain{M}$ be !!a{element} of $\Domain{M}$ not
+picked out by any of them, and let $\Struct{M'}$ be the !!{structure}
+that is just like $\Struct{M}$, but also $\Assign{c}{M'} = a$. Since
+$a \neq \Value{t}{M}$ for all~$t$ occuring in~$\Delta'$,
+$\Sat{M'}{\Delta'}$. Since $\Sat{M}{\Gamma}$, $\Gamma' \subseteq
+\Gamma$, and $c$ does not occur in~$\Gamma$, also
+$\Sat{M'}{\Gamma'}$. Together, $\Sat{M'}{\Gamma' \cup \Delta'}$ for
+every finite subset $\Gamma' \cup \Delta'$ of $\Gamma \cup \Delta$. So
+every finite subset of $\Gamma \cup \Delta$ is satisfiable. By
+compactness, $\Gamma \cup \Delta$ itself is satisfiable. So there are
+models~$\Sat{M}{\Gamma \cup \Delta}$. Every such $\Struct{M}$ is a
+model of~$\Gamma$, but is not covered, since $\Value{c}{M} \neq
+\Value{t}{M}$ for all terms~$t$ of~$\Lang{L}$.
+\end{ex}
+
+\begin{prob}
+Use the compactness theorem to show that any set of sentences in the
+language of arithmetic which are true in the standard model of
+arithmetic $\Struct{N}$ are also true in !!a{structure}~$\Struct{N'}$
+that contains an element greater than all natural
+numbers~$\Assign{\num{n}}{N'}$ ($\num{n}$ is
+$\Obj{0}^{\prime\dots\prime}$ with $n$ $\prime$'s).
+\end{prob}
+
+\begin{ex}
+We know that first-order logic with !!{identity} can express that the
+size of the !!{domain} must have some minimal size: The
+sentence~$!A_{\ge n}$ (which says ``there are at least $n$ distinct
+objects'') is true only in structures where $\Domain{M}$ has at
+least~$n$ objects. So if we take
+  \[
+  \Delta = \Setabs{!A_{\ge n}}{n \ge 1}
+  \]
+then any model of $\Delta$ must be infinite. Thus, we can guarantee
+that a theory only has infinite models by adding~$\Delta$ to it: the
+models of $\Gamma \cup \Delta$ are all and only the infinite models
+of~$\Gamma$.
+
+So first-order logic can express infinitude. The compactness theorem
+shows that it cannot express finitude, however. For suppose some set
+of sentences $\Lambda$ were satisfied in all and only finite
+!!{structure}s. Then $\Delta \cup \Lambda$ is finitely
+satisfiable. Why? Suppose $\Delta' \cup \Lambda' \subseteq \Delta \cup
+\Lambda$ is finite with $\Delta' \subseteq \Delta$ and $\Lambda'
+\subseteq \Lambda$. Let $n$ be the largest number such that $A_{\ge n}
+\in \Delta'$. $\Lambda$, being satisfied in all finite structures, has
+a model~$\Struct{M}$ with finitely many but $\ge n$ !!{element}s. But
+then $\Sat{M}{\Delta' \cup \Lambda'}$.  By compactness, $\Delta \cup
+\Lambda$ has an infinite model, contradicting the assumption that
+$\Lambda$ is satisfied only in finite !!{structure}s.
+\end{ex}
+
+\end{document}
