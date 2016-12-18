@@ -1,0 +1,103 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olsection{BHK interpretation}
+
+There is an informal constructive interpretation of the intuitionist
+connectives, usually known as the Brouwer-Heyting-Kolmogorov
+interpretation. Assuming our language ranges over natural numbers, it says:
+\begin{enumerate}
+\item We assume that we know what constitute a proof of an atomic statement.
+\item A proof of $!A_1 \land !A_2$ is a pair $andi{M_1}{M_2}$ where $M_1$ is a
+  proof of $!A_1$ and $M_2$ is a proof of $A_2$.
+\item A proof of $!A_1 \lor !A_2$ is a pair $andi{s}{M}$ where $s$ is $1$
+  and $M$ is a proof of $!A_1$, or $s$ is $2$ and $M$ is a proof of
+  $!A_2$.
+\item A proof of $!A \lif !B$ is a function that converts a proof
+  of $!A$ into a proof of $!B$.
+\item A proof of $(\lforall x ) !A(x)$ is a function that converts
+  a natural number $n$ to a proof of $!A(n)$.
+\item A proof of $(\lexists x) !A(x)$ is a pair $\andi{n}{M}$
+  where $n$ is a natural number, and $M$ is a proof of $!A(M)$.
+\item There is no proof for $\lfalse$ (absurdity).
+\item $\lnot !A$ is defined as synonym for $!A \lif \lfalse$.
+\end{enumerate}
+
+Note how the negation of a proposition $!A$ is handled: it's defined to
+be $!A \lif \lfalse$, which is a function converting a proof of $!A$
+into $\lfalse$.
+
+\begin{ex}
+Take $\lnot 0=1$ for example. The reader may recall that $\lfalse$ has no
+proof, which is not a problem as no one can provide a proof of $0=1$ in the
+first place; thus we may use the identify function (or any other
+function) as the proof, and our criteria for a function to be a proof
+(returning $\lfalse$ given proof of $0=1$) vacuously holds.
+\end{ex}
+
+General speaking, $\lnot !A$ means ``A proof of $!A$ is impossible''.
+
+\begin{ex}
+  Let us prove $!A \lif \lnot \lnot !A$ for any proposition $!A$, which is  $!A \lif ((!A
+\lif \lfalse) \lif \lfalse)$. The proof should be a function that,
+given a proof of $!A$, returns a proof of $(!A \lif \lfalse) \lif
+\lfalse$. Here is how we construct $(!A \lif \lfalse) \lif
+\lfalse$: it's a function that accepts a proof of $!A \lif
+\lfalse$, applies it to the proof of $!A$ (that we received earlier) to
+get $\lfalse$, return the $\lfalse$ as required.
+\end{ex}
+
+Note in the above example we can't use the same trick when proving $\lnot (0=1)$,
+since it's possible that the skeptic of the proposition indeed has
+the proof of $!A$ or $\lnot !A$. Is it possible that $!A$ and $\lnot
+!A$ is both provable? We prove the following formula:
+
+\begin{ex}
+Let us prove $\lnot(!A \land \lnot !A)$, which is $(!A \land (!A \lif \lfalse))
+\lif \lfalse$. First we receive a proof of $!A \land (!A \lif \lfalse)$
+which should be a pair whose first element is proof of $!A$ and second
+proof is $!A \lif \lfalse$. Applying the second to the first, we get
+$\lfalse$ as required.
+\end{ex}
+
+\begin{ex}
+Let us prove $(!A \land !B \lif !C) \lif (!A \lif !B \lif !C)$: given $!A \land !B
+\lif !C$ we give $!A \lif !B \lif !C$, which we construct as
+follows: given $!A$ we give $!B \lif !C$, which we construct
+as follows: given $!B$ we give $!C$, which we construct as follows:
+construct $!A \land !B$ from the given $!A$ and $!B$, pass it to the
+given $!A \land !B \lif !C$ and we get $!C$ as required.
+\end{ex}
+
+Note how this is related to currying we introduced in lambda
+calculus: if we consider the actual proof terms, we will find our
+proof a function currying functions; the converse of the formula is also
+provable (the proof is left to the reader) and corresponds to uncurrying.
+
+The statement $!A \lor \lnot !A$ is called LEM (Law of Excluded
+Middle). We can prove it for some specific $!A$(say,
+$0=1$ or $0=0$), but not in general because the
+intuitionistic disjunction requires a proof of either side, but there
+are statements neither proved or refuted(say, Goldbach's conjecture as
+of 2016). However, you can't refute LEM either: that is, $\lnot
+\lnot (!A \lor \lnot !A)$.
+
+\begin{ex}
+  Here is how we prove it:given $(!A \lor (!A \lif \lfalse))\lif \lfalse$, we are expected to give $\lfalse$. We
+now try to construct $!A \lor (!A \lif \lfalse)$ so we can apply the given
+function to get $\lfalse$.
+
+But wait, haven't we just established that $!A \lor (!A \lif \lfalse)$
+is not provable in general? But note that we are in a
+position different from the general case: now we have $(!A \lor (!A \lif \lfalse))\lif \lfalse$
+as premise, which is enough for us to derive LEM: we will construct the right side of the
+disjunction, $!A \lif \lfalse$: we are given $!A$ and expected to give
+$\lfalse$. Attention! From $!A$ we can derive $!A \lor (!A \lif
+\lfalse)$; applying the mentioned premise to it we get 
+$\lfalse$, as required.
+\end{ex}
+
+This kind of proving soon gets too twisted to construct and understand;
+we thus need a more formal language to construct such proofs.
+\end{document}

@@ -1,0 +1,161 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+\olsection{Normalization}
+
+In this section we prove that, via some reduction order, any
+deduction can be reduced to a normal deduction, which is called the
+\emph{normalization property}. As we already noted, we will adopt proof
+terms to make the proofs more formal; once we prove the normalization
+for proof terms, the normalization for natural deductions follows
+immediately by ``propositions as types''.
+
+Firstly we define some functions; complexity of formulas is measured by
+length:
+\begin{align*}
+  len(p) &= 0\\
+  len(!A \land !B) &= len(!A) + len(!B) + 1\\
+  len(!A \lor !B) &= len(!A) + len(!B) + 1 \\
+  len(!A \lif !B) &= len(!A) + len(!B) + 1
+\end{align*}
+
+and a function to  measure complexity of redices:
+\begin{align*}
+  cutrank((\lambd[\typeof{x}{!A}][\typeof{N}{!B}])Q) &= len(!A) + len(!B) + 1 \\
+  cutrank(\ande{i}{\andi{\typeof{M}{!A}}{\typeof{N}{!B}}}) &= len(!A) + len(!B) + 1 \\
+  cutrank(\ore{\ori{i}{!A_{\bar{i}}}{\typeof{M}{!A_i}}}{\typeof{x_1}{!A_1}}{\typeof{N_1}{!C}}{\typeof{x_2}{!A_2}}{\typeof{N_2}{!C}}) &=
+  len(!A) + len(!B) + 1
+\end{align*}
+it should really be called $redexrank$, but we follow the convention
+in other texts.
+
+And the complexity of a proof term is measured by the most complex
+redex in it, and $0$ if it's normal:
+\begin{equation*}
+  maxrank(M) = max(\{cutrank{N} | N \text{is a sub term of} M \text{and
+    a redex}\} \cup \{0\})
+\end{equation*}
+
+\begin{lem}\ollabel{lem:subst}
+  If $\Subst{M}{N^{!A}}{x^{!A}}$ is a redex and $M \not\equiv x$, then one of the
+  following cases is true:
+  \begin{enumerate}
+  \item $M$ is a redex,
+  \item $M$ is of the form $\ande{i}{x}$, and $N$ is of the form
+    $\andi{P}{Q}$
+  \item $M$ is of the form $\ore{x}{x_1}{P_1}{x_2}{P_2}$, and $N$ is of
+    the form $\ori{i}{}{Q}$
+  \item $M$ is of the form $x Q$, and $N$ is of the form $\lambd[x][P]$
+  \end{enumerate}
+  also, for the first case, $cutrank(\Subst{M}{N}{x}) = cutrank(M)$;
+  for the other cases, $cutrank(\Subst{M}{N}{x}) = len(!A)$.
+\end{lem}
+\begin{proof}
+  Proof by cases.
+
+  \begin{enumerate}
+  \item
+    If $M$ is a single variable $y$, either $y \equiv x$,  or $y \not\equiv x$
+    and $\Subst{y}{N}{x}$ can't be a redex; both cases violate
+    the assumption and vacuously justify the lemma.
+    
+  \item
+    If $M$ is of the form $\andi{N_1}{N_2}$, or $\lambd[x][N]$, or
+    $\ori{i}{N}$, the substitution cannot be a redex in any case.
+
+  \item If $M$ is of the form $\ande{i}{P}$, we consider two cases. If $P$ is of
+    the form $\andi{P_1}{P_2}$, then $M$ is a redex, and apparently
+    $\Subst{M}{N}{x}$ is also a redex, and both $cutrank$ should be
+    equal. If $P$ is a single variable, it must be $x$ to make the
+    substitution a redex, and $N$ must be of the form $\andi{Q_1}{Q_2}$; now
+    consider $\Subst{P_i(x)}{pair(P,Q)}{x}$, which is $P_i(pair(P,Q))$,
+    whose $cutrank$ equal to $cutrank(x)$, which is $len(!A)$.
+    
+  \end{enumerate}
+  The cases of $\ore{N}{x_1}{N_1}{x_2}{N_2}$ and $P Q$ are similar.
+\end{proof}
+
+\begin{rem}
+  Recall there are two sides: logic and program. The above lemma, which
+  is stated on program side, would be more apparent if we observe from logic
+  side; that is, think substitution as replacing assumptions with
+  deductions: if a deduction with assumptions replaced has a cut at
+  bottom, either the cut exists before the replacing, or there was
+  an assumption as a premise of an elimination rule, which is
+  replaced by a deduction whose last rule is the corresponding
+  introduction rule.
+\end{rem}
+
+\begin{lem}
+  If $M$ contracts to $M'$, and $cutrank(M) > cutrank(N)$ for all 
+  proper sub-term $N$ of $M$ ($N$ is also a redex of course), then
+  $cutrank(M) > maxrank(M')$.
+\end{lem}
+\begin{proof}
+  Proof by cases.
+  \begin{enumerate}
+  \item
+    If $M$ is of the form $p_i(pair(M_1, M_2))$, then $M'$ is of the
+    form $M_i$; since any sub-term of $M_i$ is also proper sub-term of $M$,
+    it follows immediately.
+
+  \item
+    If $M$ is of the form $(\lambd[x^{!A}][N])Q^{!A}$, then $M'$ is of the form
+    $\Subst{N}{Q^{!A}}{x^{!A}}$ (after the substitution is done); consider each of
+    the redices in $M'$, either there is corresponding redex in $N$ with
+    equal $cutrank$, which is less than $cutrank(M)$ by assumption; or the $cutrank$ equals to $len(!A)$, which by
+    definition is less than $cutrank((\lambd[x^{!A}][N])Q)$.
+    
+  \item
+    If $M$ is of the form $case(in_i N^{!A_i}, x_1^{!A_1}.N_1^{!C}, x_2^{!A_2}.N_2^{!C})$, then $M'$ is
+    of the form $\Subst{N_i}{N}{x_i^{!A_i}}$ (after the substitution is
+    down); with similar arguments, for each of the recides in $M'$,
+    either there is corresponding redex in $N_i$ with equal $cutrank$,
+    which is less than $cutrank(M)$ by assumption; or the $cutrank$
+    equals to $len(!A_i)$, which by definition is less than
+    $cutrank(case(in_i N^{!A_i}, x_1^{!A_1}.N_1^{!C},
+    x_2^{!A_2}.N_2^{!C}))$.
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}
+  All proof terms reduces to normal form; all deduction reduces to
+  normal deduction.
+\end{thm}
+\begin{proof}
+  The second follows from the first immediately. Prove the first by
+  complete induction on $m=maxrank(M)$, where $M$ is a proof term.
+  \begin{enumerate}
+
+  \item
+    For $m=0$, $M$ is already normal.
+    
+  \item
+    Otherwise, we do another deeper induction on $n$, the number of sub-redices of
+    $M$ with $cutrank$ equal to $m$.
+    \begin{enumerate}
+    \item
+      For the base case($n=1$) we select the redex to contract as follows: select any
+      redex $N$ such that $m = cutrank(N) > cutrank(P)$ for any proper
+      sub-term $P$ (which is also a redex of course); we can find such a redex since we can just select $P$
+      if its $cutrank$ is greater.
+
+      Let $N'$ denote the reductum of $N$. Now by lemma $maxrank(N') <
+      maxrank(N)$, thus we can see that $n$, the number of redices with
+      $cutrank=m$ is decreased. So $m$ is decreased (by $1$ or more), and
+      we can apply the outer inductive hypothesis;
+
+    \item
+      For induction case($n>1$) the process is similar, except that $n$
+      is only decreased to a positive number and thus $m$ does not change. We simply
+      apply the inner inductive hypothesis.
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
+
+Actually the normalization of terms is not specific to the reduction
+order we gave; we can prove that, whatever order we chose, the term
+can always be reduced to normal form; this property is called
+\emph{strong normalization}.
+\end{document}

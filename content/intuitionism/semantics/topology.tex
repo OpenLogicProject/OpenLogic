@@ -1,0 +1,63 @@
+\begin{document}
+\begin{defn}[Topology]
+  A \emph{topology space} is a pair $\tuple{X, \mathcal{O}}$ where
+  $\mathcal{O}$ is a collection of subsets of $X$, such that
+  \begin{enumerate}
+  \item $\emptyset, X \in \mathcal{O}$
+  \item if $U,V \in \mathcal{O}$ then $U \cap V \in \mathcal{O}$
+  \item if $U_i \in \mathcal{O}$ for $i \in I$, then $\cup\{U_i | i \in 
+    I_i\} \in \mathcal{O}$
+  \end{enumerate}
+\end{defn}
+
+In plain English, a topology is a set $X$ endowed with a collection
+$\mathcal{O}$ of subsets (called open sets), that closed under finite
+intersections and arbitrary unions.
+
+We may write $X$ for a topology if the collection of open sets can be
+inferred from the context; note that, still, only after $X$ is endowed
+with open sets can it be called a topology.
+
+\begin{defn}
+  An interpretation of IPC in a topology $X$ is a function $V$ assigning
+  an open set in $X$ to each propositional variable, extended to composite
+  formulas as follows:
+  \begin{enumerate}
+  \item $V(!A \land !B) = V(!A) \cap V(!B)$
+  \item $V(!A \lor !B) = V(!A) \cup V(!B)$
+  \item $V(\lfalse) = \emptyset$
+  \item $V(!A \lif !B) = Int((X - V(!A)) \cup V(!B))$
+  \end{enumerate}
+\end{defn}
+
+Note how we preserve the property that subsets assigned to formulas are
+always open sets. The $Int()$ in the last rule is a function converting a
+subset into its interior, which is defined as the union of all open
+sets contained in it (thus also an open set).
+
+We now give some intuitions of this definition; the final
+justification is, of course, left to formal proofs. We maintain the
+invariant that, $!A \Proves !B$ iff $V(!A) \subset V(!B)$, rendering
+the definition for $\land$ and $\lor$ immediate. $\lfalse$ is mapped
+to $\emptyset$, because $\emptyset$ is subset of every subset, just
+like every formula is derivable from $\lfalse$. The definition for
+$\lif$ is tricky: by our intuition of $!A \lif !B$, it is like the ``weakest''
+formula such that, along with $!A$, can prove $!B$, that is $(!A
+\lif !B) \land !A \Proves !B $. So $V(!A \lif !B)$ should be the
+greatest open set such that $V(!A \lif !B) \cap V(!A)
+\subset V(!B)$, leading to our definition.
+
+\begin{defn}
+  
+\end{defn}
+
+\begin{proof}
+\end{proof}
+
+\begin{defn}
+  An interpretation of IQC in a topology $X$ is an interpretation of
+  the IPC fragment, plus for each predicate a function assigning an
+  open set in $X$ to each 
+\end{defn}
+
+\end{document}

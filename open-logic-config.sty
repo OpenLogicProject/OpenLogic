@@ -168,6 +168,12 @@
 
 \DeclareDocumentCommand \Elim { m } {\ensuremath{#1\mathrm{Elim}}}
 
+\DeclareDocumentCommand \Deduce { m o } {\ensuremath{
+    \IfNoValueTF {#2}
+    {\mathcal{#1}}
+    {\mathcal{#1}_{#2}}
+  }}
+
 % - `\Discharge{!A}{n}`: typesets a discharged assumption with label
 % $n$, e.g., $[!A]^n$.
 
@@ -180,6 +186,19 @@
   \RightLabel{#1}
   \LeftLabel{\scriptsize $#2$}
 }
+
+% Proof Terms
+% ---------------------
+%
+% Proof terms used in intuitionistic logic
+
+\DeclareDocumentCommand \typeof { m m } {#1^{#2}}
+
+\DeclareDocumentCommand \andi { m m } {\tuple{#1, #2}}
+\DeclareDocumentCommand \ande { m m } {\fn{p}_{#1}(#2)}
+\DeclareDocumentCommand \ori { m m m } {\fn{in}_{#1}^{#2}(#3)}
+\DeclareDocumentCommand \ore { m m m m m } {\fn{case}(#1, #2.#3, #4.#5)}
+\DeclareDocumentCommand \falsee { m m } {\fn{contr}_{#1}(#2)}
 
 % Metalogical Relations
 % ---------------------
