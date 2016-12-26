@@ -92,13 +92,39 @@ model of~$\Gamma$, but is not covered, since $\Value{c}{M} \neq
 \Value{t}{M}$ for all terms~$t$ of~$\Lang{L}$.
 \end{ex}
 
+\begin{ex}
+Consider a language $\Lang{L}$ containing the !!{predicate}~$<$,
+!!{constant}s $\Obj{0}$, $\Obj{1}$, and !!{function}s $+$, $\times$,
+$-$, $\div$. Let $\Gamma$ be the set of all !!{sentence}s in this
+language true in $\Struct{Q}$ with domain $\Rat$ and the obvious
+interpretations.  $\Gamma$ is the set of all !!{sentence}s
+of~$\Lang{L}$ true about the rational numbers. Of course, in $\Rat$
+(and even in $\Real$), there are no numbers which are greater than~$0$
+but less than $1/k$ for all $k \in \Int^+$.  Such a number, if it
+existed, would be an \emph{infinitesimal:} non-zero, but infinitely
+small.  The compactness theorem shows that there are models
+of~$\Gamma$ in which infinitesimals exist: Let $\Delta$ be $\{0<c\}
+\cup \Setabs{c < (\Obj{1} \div \num{k})}{k \in \Int^+}$ (where
+$\num{k} = (\Obj{1} + (\Obj{1} + \dots + (\Obj{1} + \Obj{1})\dots))$
+with $k$ $\Obj{1}$'s). For any finite subset~$\Delta_0$ of~$\Delta$
+there is a $K$ such that all the !!{sentence}s $c < \num{k}$ in
+$\Delta_0$ have $k < K$. If we expand $\Struct{Q}$ to $\Struct{Q'}$
+with $\Assign{c}{Q'} = 1/K$ we have that $\Sat{Q'}{\Gamma \cup
+  \Delta_0}$, and so $\Gamma \cup \Delta$ is finitely satisfiable
+(Exercise: prove this in detail). By compactness, $\Gamma \cup \Delta$
+is satisfiable. Any model~$\Struct{S}$ of $\Gamma \cup \Delta$
+contains an infinitesimal, namely~$\Assign{c}{S}$.
+\end{ex}
+
 \begin{prob}
-Use the compactness theorem to show that any set of sentences in the
-language of arithmetic which are true in the standard model of
-arithmetic $\Struct{N}$ are also true in !!a{structure}~$\Struct{N'}$
-that contains an element greater than all natural
-numbers~$\Assign{\num{n}}{N'}$ ($\num{n}$ is
-$\Obj{0}^{\prime\dots\prime}$ with $n$ $\prime$'s).
+In the standard model of arithmetic~$\Struct{N}$, there is no
+!!{element}~$k \in \Domain{N}$ which satisfies every formula $\num{n}
+< x$ (where $\num{n}$ is $\Obj{0}^{\prime\dots\prime}$ with $n$
+$\prime$'s).  Use the compactness theorem to show that the set of
+sentences in the language of arithmetic which are true in the standard
+model of arithmetic $\Struct{N}$ are also true in
+!!a{structure}~$\Struct{N'}$ that contains an !!{element} which
+\emph{does} satisfy every formula $\num{n} < x$.
 \end{prob}
 
 \begin{ex}
