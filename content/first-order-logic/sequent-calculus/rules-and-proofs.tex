@@ -244,13 +244,11 @@ An \emph{initial sequent} is a sequent
 \end{defn}
 
 \begin{defn}[LK !!{derivation}]
-An \emph{$\Log{LK}$-!!{derivation}} of a sequent $S$ is a tree of sequents
-satisfying the following conditions:
+An \emph{$\Log{LK}$-!!{derivation}} of a sequent $S$ is a tree of sequents 
+with $S$ at the root satisfying the following conditions:
 \begin{enumerate}
-\item The topmost sequents of the tree are initial sequents.
-\item Every sequent in the tree (except $S$) is an upper sequent of an
-  inference whose lower sequent stands directly below that sequent in
-  the tree.
+\item The leaves of the tree are initial sequents.
+\item The children of a node infer the parent using one of the inference rules.
 \end{enumerate}
 We then say that $S$ is the \emph{end-sequent} of the !!{derivation} and
 that $S$ is \emph{!!{derivable} in $\Log{LK}$} (or $\Log{LK}$-!!{derivable}).

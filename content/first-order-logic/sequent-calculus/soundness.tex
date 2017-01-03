@@ -51,15 +51,15 @@ satisfies it.
 
 \begin{proof}
 Let $\Pi$ be a !!{derivation} of $\Gamma \Sequent \Delta$. We proceed by
-induction on the number of inferences in~$\Pi$.
+induction on the height of the proof tree $\Pi$.
 
-If the number of inferences is~0, then $\Pi$ consists only of an
+If the height is~1, then $\Pi$ consists only of an
 initial sequent. Every initial sequent $!A \Sequent !A$ is obviously
 valid, since for every $\Struct M$, either $\Sat/{M}{!A}$ or
 $\Sat{M}{!A}$.
 
-If the number of inferences is greater than~0, we distinguish cases
-according to the type of the lowermost inference. By induction
+If the height $n$ is greater than~$1$, we distinguish cases
+according to the type of the inference at the root. By induction
 hypothesis, we can assume that the premises of that inference are
 valid, since the height of the proof of any premise is smaller than $n$.
 
