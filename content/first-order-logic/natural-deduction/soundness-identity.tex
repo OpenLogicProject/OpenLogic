@@ -1,0 +1,37 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{sid}
+
+\olsection{Soundness of \usetoken{S}{identity} Rules}
+
+\begin{prop}
+Natural deduction with rules for identity is sound.
+\end{prop}
+
+\begin{proof}
+Any !!{formula} of the form $\eq[t][t]$ is valid, since
+for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
+we assume the term $t$ to be ground, i.e., it contains no variables,
+so variable assignments are irrelevant).
+
+Suppose the last inference in a !!{derivation} is \Elim{\eq}. Then the
+premises are $\eq[t_1][t_2]$ and $!A(t_1)$; they are !!{derive}d from
+!!{undischarged} assumptions~$\Gamma$ and $\Delta$, respectively.  We
+want to show that $!A(s)$ follows from $\Gamma \cup \Delta$.  Consider
+a !!{structure}~$\Struct{M}$ with $\Sat{M}{\Gamma \cup \Delta}$. By induction
+hypothesis, $\Struct{M}$ satisfies the two premises by induction
+hypothesis. So, $\Sat{M}{\eq[t_1][t_2]}$. Therefore, $\Value{t_1}{M} =
+\Value{t_2}{M}$. Let $s$ be any variable assignment, and $s'$ be the
+$x$-variant given by $s'(x) = \Value{t_1}{M} = \Value {t_2}{M}$. By
+\olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_2)}[s]$ iff
+$\Sat{M}{!A(x)}[s']$ iff $\Sat{M}{!A(t_1)}[s]$. Since $\Sat{M}
+      {!A(t_1)}$ therefore $\Sat{M}{!A(t_2)}$.
+\end{proof}
+
+\end{document}
