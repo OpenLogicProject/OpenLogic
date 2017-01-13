@@ -91,67 +91,6 @@ is the !!{structure} $\Struct{{HF}}$ of \emph{hereditarily finite sets}:
 \end{enumerate}
 \end{ex}
 
-\begin{explain}
-Recall that a term is \emph{closed} if it contains no !!{variable}s.
-\end{explain}
-
-\begin{defn}[!!^{value} of closed terms]
-If $t$ is a closed term of the langage~$\Lang L$ and $\Struct M$ is a
-!!{structure} for~$\Lang L$, the \emph{!!{value}}~$\Value{t}{M}$ is
-defined as follows:
-\begin{enumerate}
-\item If $t$ is just the !!{constant}~$c$, then $\Value{c}{M} = \Assign{c}{M}$.
-\item If $t$ is of the form $\Atom{f}{t_1, \ldots, t_n}$, then
-  \[
-  \Value{t}{M} = \Assign{f}{M}(\Value{t_1}{M}, \ldots,
-  \Value{t_n}{M}).
-  \]
-\end{enumerate}
-\end{defn}
-
-\begin{defn}[Covered !!{structure}]
-A !!{structure} is \emph{covered} if every element of the domain is the
-!!{value} of some closed term.
-\end{defn}
-
-\begin{ex}
-Let ~$\Lang L$ be the language with !!{constant}s $\Obj{zero},
-\Obj{one}, \Obj{two}, \ldots$, the binary predicate symbols $=$
-and $<$, and the binary !!{function}s $+$ and $\times$.  Then a
-!!{structure} $\Struct M$ for $\Lang L$ is the one with domain
-$\Domain M = \{0, 1, 2, \ldots \}$ and name assignment
-$\Assign{\Obj{zero}}{M} = 0$, $\Assign{\Obj{one}}{M} = 1$,
-$\Assign{\Obj{two}}{M} = 2$, and so forth. For the binary relation
-symbol $<$, the set $\Assign{<}{M}$ is the set of all pairs $\langle
-c_1, c_2 \rangle \in \Domain{M}^2$ such that the integer $c_1$ is less
-than the integer $c_2$: for example, $\langle 1, 3 \rangle \in
-\Assign{<}{M}$ but $\langle 2, 2 \rangle \notin \Assign{<}{M}$. For the
-binary !!{function} $+$, define $\Assign{+}{M}$ in the usual way---for
-example, $\Assign{+}{M}(2,3)$ maps to $5$, and similarly for the
-binary !!{function} $\times$. Hence, the !!{value} of $\Obj{four}$
-is just 4, and the !!{value} of $\times(\Obj{two},
-+(\Obj{three},\Obj{zero}))$ (or in infix notation, $\Obj{two}
-\times (\Obj{three} + \Obj{zero})$ ) is
-\begin{multline*}
-\Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero})}{M} =\\
-\begin{aligned}
-& =\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{\Obj{two},
-+(\Obj{three}, \Obj{zero})}{M})\\
-& = \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M},
-\Value{\Obj{zero}}{M})) \\
-& = \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M},
-\Assign{\Obj{zero}}{M})) \\
-& = \Assign{\times}{M}(2, \Assign{+}{M}(3, 0)) \\
-& = \Assign{\times}{M}(2, 3) \\
-& = 6
-\end{aligned}
-\end{multline*}
-\end{ex}
-
-\begin{prob}
-Is $\Struct N$, the standard model of arithmetic, covered? Explain.
-\end{prob}
-
 \begin{digress}
 The stipulations we make as to what counts as a !!{structure} impact
 our logic. For example, the choice to prevent empty domains ensures,
