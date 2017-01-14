@@ -15,7 +15,7 @@ of first-order logic, we have to define a suitable language. The
 language consists of two parts: !!{predicate}s for describing
 configurations of the machine, and expressions for counting execution
 steps (``moments'') and positions on the tape. The latter require an
-initial moment, $\Obj 0$, a ``successor'' function which is
+initial moment, $\Obj 0$, a ``successor'' !!{function} which is
 traditionally written as a postfix $\prime$, and an ordering $x
 < y$ of ``before.''
 \end{explain}
@@ -26,15 +26,15 @@ Given a Turing machine $M = \tuple{Q, \Sigma, q_0, \delta}$, the
 language~$\Lang L_M$ consists of:
 \begin{enumerate}
 \item A two-place !!{predicate} $\Obj Q_q(x, y)$ for every state~$q \in
-  Q$.  Intuitively, $\Obj Q_q(\num{n}, \num{m})$ expresses ``after $m$
+  Q$.  Intuitively, $\Obj Q_q(\num{m}, \num{n})$ expresses ``after $n$
   steps, $M$ is in state~$q$ scanning the $n$th square.''
 \item A two-place !!{predicate} $\Obj S_\sigma(x, y)$ for every
-  symbol~$\sigma\in \Sigma$.  Intuitively, $\Obj S_\sigma(\num{n},
-  \num{m})$ expresses ``after $m$ steps, the $n$th square contains
+  symbol~$\sigma\in \Sigma$.  Intuitively, $\Obj S_\sigma(\num{m},
+  \num{n})$ expresses ``after $n$ steps, the $m$th square contains
   symbol~$\sigma$.''
-\item A constant $\Obj 0$
-\item A one-place function $\prime$
-\item A two-place predicate $<$
+\item A !!{constant} $\Obj 0$
+\item A one-place !!{function} $\prime$
+\item A two-place !!{predicate} $<$
 \end{enumerate}
 \end{defn}
 
@@ -48,7 +48,7 @@ on. More formally:
 \end{align*}
 
 The !!{sentence}s describing the operation of the Turing machine~$M$ on
-input $w = \sigma_{i_1}\dots\sigma_{i_n}$ are the following:
+input $w = \sigma_{i_1}\dots\sigma_{i_k}$ are the following:
 \begin{enumerate}
 \item Axioms describing numbers:
 \begin{enumerate}
@@ -77,17 +77,17 @@ input $w = \sigma_{i_1}\dots\sigma_{i_n}$ are the following:
 \[
 \Obj Q_{q_0}(\num{1}, \num{0})
 \]
-\item The first $n+1$ squares contain the symbols $\TMendtape$,
-  $\sigma_{i_1}$, \dots, $\sigma_{i_n}$:
+\item The first $m+1$ squares contain the symbols $\TMendtape$,
+  $\sigma_{i_1}$, \dots, $\sigma_{i_k}$:
 \[
 \Obj S_\TMendtape(\num{0}, \num{0}) \land
 \Obj S_{\sigma_{i_1}}(\num{1}, \num{0}) \land
 \dots \land
-\Obj S_{\sigma_{i_n}}(\num{n}, \num{0})
+\Obj S_{\sigma_{i_k}}(\num{n}, \num{0})
 \]
 \item Otherwise, the tape is empty:
 \[
-\lforall[x][(\num{n} < x \lif \Obj S_\TMblank(x, \num{0}))]
+\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{0}))]
 \]
 \end{enumerate}
 \item Axioms describing the transition from one configuration to
@@ -100,9 +100,9 @@ of the form
   (((z < x \lor x < z) \land \Obj S_\sigma(z, y))
   \lif \Obj S_\sigma(z, y'))]
 \]
-where $\sigma \in \Sigma$.  We use $!A(\num{n},\num{m})$ to express
-``other than at square~$n$, the tape after $m+1$ steps is the same as
-after $m$ steps.''
+where $\sigma \in \Sigma$.  We use $!A(\num{m},\num{n})$ to express
+``other than at square~$m$, the tape after $n+1$ steps is the same as
+after $n$ steps.''
 \begin{enumerate}
 \item \ollabel{rep-right} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMright}$, the !!{sentence}:

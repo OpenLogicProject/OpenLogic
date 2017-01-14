@@ -28,10 +28,11 @@ Let $!C(M, w, n)$ be the !!{sentence}
 \land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land
 \lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]
 \] 
-where $q$ is the state
-of $M$ at time~$n$, $M$ is scanning square~$m$ at time~$n$, square~$i$
-contains symbol~$\sigma_i$ at time~$n$ for $0 \le i \le k$ and $k$ is the
-right-most non-blank square of the tape at time~$m$. 
+where $q$ is the state of $M$ at time~$n$, $M$ is scanning square~$m$
+at time~$n$, square~$i$ contains symbol~$\sigma_i$ at time~$n$ for $0
+\le i \le k$ and $k$ is the right-most non-blank square of the tape at
+time~$0$, or the right-most square the tape head has visited after $n$
+steps (if $n >0$).
 \end{defn}
 
 Suppose that $M$ does halt for input~$w$. Then there is some
@@ -39,7 +40,7 @@ time~$n$, state~$q$, square~$m$, and symbol~$\sigma$ such that:
 \begin{enumerate} 
 \item At time $n$ the machine is in state~$q$ scanning square~$m$ on
   which~$\sigma$ appears.
-\item There transition function $\delta(q, \sigma)$ is undefined.
+\item The transition function $\delta(q, \sigma)$ is undefined.
 \end{enumerate}
 
 $!C(M, w, n)$ will be the description of this time and will include
@@ -63,11 +64,12 @@ time~$n$, $!T(M, w) \Entails !C(M, w, n)$.
 
 \begin{lem}
 \ollabel{lem:config}
-For each $n$, $!T(M, w) \Entails !C(M, w, n)$. 
+For each $n$, if $M$ has not halted after $n$ steps, $!T(M, w)
+\Entails !C(M, w, n)$.
 \end{lem}
 
 \begin{proof}
-Inductive basis: If $n = 0$, then the conjuncts of $!C(M, w, 0)$ are
+Induction basis: If $n = 0$, then the conjuncts of $!C(M, w, 0)$ are
 also conjuncts of $!T(M, w)$, so entailed by it.
 
 Inductive hypothesis: If $M$ has not halted before the $n$th step,
@@ -145,7 +147,7 @@ is a conjunct of $!T(M,w)$, which entails the following !!{sentence}:
 \]
 which in turn implies
 \begin{multline*}
-  \Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'_m}(\num{m},
+  \Obj Q_{q'}(\num{m}, \num{n}') \land \Obj S_{\sigma'}(\num{m}',
   \num{n}') \land {}\\
   \Obj S_{\sigma_0}(\num{0}, \num{n}')\dots \land
   \Obj S_{\sigma_k}(\num{k}, \num{n}')  \land {} \\
