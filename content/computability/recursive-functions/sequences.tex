@@ -27,12 +27,18 @@ sequence; for concreteness, let $\emptyseq$ denote~$0$.
 Let us define the following functions:
 \begin{enumerate}
 \item $\len{s}$, which returns the length of the sequence $s$:
+Let $R(i, s)$ be the relation defined by
+\[
+R(i, s) \text{ iff }
+p_i \mid s \land \lforall[j < s][(j > i \lif
+  p_j \mathrel{\not\mid} s)]
+\]
+$R$ is primitive recursive. Now let
 \[
 \len{s} =
 \begin{cases}
 0 & \text{if $s = 0$ or $s = 1$} \\
-\bmin{i < s}{(p_i \mid s \land \lforall[j < s][(j > i \lif
-    p_j \mathrel{\not\mid} s)])}+1 & \text{otherwise}
+1 + \bmin{i < s}{R(i, s)} & \text{otherwise}
 \end{cases}
 \]
 Note that we need to bound the search on $i$; clearly $s$ provides an
@@ -62,8 +68,11 @@ s \cdot p_{\len{s}}^{a+1} & \text{otherwise}
 Instead of using the official names for the functions defined above,
 we introduce a more compact notation. We will use $(s)_i$ instead of
 $\fn{element}(s,i)$, and $\tuple{s_0, \dots, s_k}$ to abbreviate
-$\fn{append}(\fn{append}(\dots \fn{append}(\emptyseq,s_0)
-\dots),s_k)$. Note that if $s$ has length~$k$, the elements of $s$ are
+\[
+\fn{append}(\fn{append}(\dots \fn{append}(\emptyseq,s_0)
+\dots),s_k).
+\]
+Note that if $s$ has length~$k$, the elements of $s$ are
 $(s)_0$, \dots,~$(s)_{k-1}$.
 
 It will be useful for us to be able to bound the numeric code of a

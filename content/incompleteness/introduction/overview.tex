@@ -1,0 +1,101 @@
+% Part: incompleteness
+% Chapter: introduction
+% Section: overview
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{int}{ovr}
+
+\olsection{Overview of Incompleteness Results}
+
+Hilbert expected that mathematics could be formalized in an
+!!{axiomatizable} theory which it would be possible to prove
+!!{complete} and !!{decidable}. Moreover, he aimed to prove the
+consistency of this theory with very weak, ``finitary,'' means, which
+would defend classical mathematics agianst the challenges of
+intuitionism.  G\"odel's incompleteness theorems showed that these
+goals cannot be achieved.
+
+G\"odel's first incompleteness theorem showed that a version of
+Russell and Whitehead's \emph{Principia Mathematica} is not
+!!{complete}.  But the proof was actually very general and applies to
+a wide variety of theories.  This means that it wasn't just that
+\emph{Principia Mathematica} did not manage to completely capture
+mathematics, but that \emph{no} acceptable theory does.  It took a
+while to isolate the features of theories that suffice for the
+incompleteness theorems to apply, and to generalize G\"odel's proof to
+apply make it depend only on these features.  But we are now in a
+position to state a very general version of the first incompleteness
+theorem for theories in the language $\Lang L_A$ of arithmetic.
+
+\begin{thm}
+If $\Gamma$ is a consistent and !!{axiomatizable} theory in~$\Lang
+L_A$ which !!{represents} all computable functions and !!{decidable}
+relations, then $\Gamma$ is not !!{complete}.
+\end{thm}
+
+To say that $\Gamma$ is not !!{complete} is to say that for at least
+one !!{sentence}~$!A$, $\Gamma \Proves/ !A$ and $\Gamma \Proves/ \lnot
+!A$.  Such !!a{sentence} is called \emph{independent} (of~$\Gamma)$.
+We can in fact relatively quickly prove that there must be independent
+sentences. But the power of G\"odel's proof of the theorem lies in the
+fact that it exhibits a \emph{specific example} of such an independent
+!!{sentence}. The intriguing construction produces
+!!a{sentence}~$G_\Gamma$, called a \emph{G\"odel sentence}
+for~$\Gamma$, which is unprovable because in $\Gamma$, $G_\Gamma$ is
+equivalent to the claim that $G_\Gamma$ is unprovable in~$\Gamma$.  It
+does so \emph{constructively}, i.e., given an axiomatization
+of~$\Gamma$ and a description of the proof system, the proof gives a
+method for actually writing down~$G_\Gamma$.
+
+The construction in G\"odel's proof requires that we find a way to
+express in $\Lang L_A$ the properties of and operations on terms and
+!!{formula}s of $\Lang L_A$ itself. These include properties such as
+``$!A$ is a !!{sentence},'' ``$\delta$ is !!a{derivation} of~$!A$,''
+and operations such as $\Subst{!A}{t}{x}$.  This way must (a) express
+these properties and relations via a ``coding'' of symbols and
+sequences thereof (which is what terms, !!{formula}s, !!{derivation}s,
+etc. are) as natural numbers (which is what $\Lang L_A$ can talk
+about). It must (b) do this in such a way that $\Gamma$ will prove the
+relevant facts, so we must show that these properties are coded by
+!!{decidable} properties of natural numbers and the operations
+correspond to computable functions on natural numbers. This is called
+``arithmetization of syntax.''
+
+Before we investigate how syntax can be arithmetized, however, we will
+consider the condition that~$\Gamma$ is ``strong enough,'' i.e.,
+!!{represents} all computable functions and !!{decidable} relations.
+This requires that we give a precise definition of ``computable.''
+This can be done in a number of ways, e.g., via the model of Turing
+machines, or as those functions computable by programs in some
+general-purpose programming language.  Since our aim is to
+!!{represents}s these functions and relations in a theory in the
+language~$\Lang L_A$, however, it is best to pick a simple definition
+of computability of just numerical functions.  This is the notion of
+\emph{recursive function}.  So we will first discuss the recursive
+functions. We will then show that $\Th{Q}$ already !!{represents} all
+recursive functions and relations.  This will allow us to apply the
+incompleteness theorem to specific theories such as $\Th{Q}$ and
+$\Th{PA}$, since we will have established that these are examples of
+theories that are ``strong enough.''
+
+The end result of the arithmetization of syntax is
+!!a{formula}~$\OProv[\Gamma](x)$ which, via the coding of !!{formula}s
+as numbers, expresses provability from the axioms of~$\Gamma$.
+Specifically, if $!A$ is coded by the number~$n$, and $\Gamma \Proves
+!A$, then $\Gamma \Proves \Prov[\Gamma](\num{n})$.  This ``provability
+predicate'' for $\Gamma$ allows us also to express, in a certain
+sense, the consistency of $\Gamma$ as a !!{sentence} of~$\Lang L_A$:
+let the ``consistency statemetn'' for~$\Gamma$ be the !!{sentence}
+$\lnot \Prov[\Gamma](\num{n})$, where we take $n$ to be the code of a
+contradiction, e.g., of~$\lfalse$.  The second incompleteness theorem
+states that consistent !!{axiomatizable} theories also do not prove
+their own consistency statements.  The conditions required for this
+theorem to apply are a bit more stringent than just that the theory
+represents all computable functions and !!{decidable} relations, but
+we will show that $\Th{PA}$ satisifes them.
+
+
+\end{document}
