@@ -69,13 +69,18 @@ satisfied in every !!{structure} which satisfies $\Th{TA}$. Since
 $\Sat{M}{\Th{TA}}$, $\Sat{M}{!A}$, and so $!A \in \Th{TA}$.
 
 The other way to specify a theory~$\Gamma$ is as the set of
-!!{sentence}s entailed by some explicitly specified set of
-sentences~$\Gamma_0$.  In that case, we call the !!{sentence}s
+!!{sentence}s entailed by some set of sentences~$\Gamma_0$. In that
+case, $\Gamma$ is the ``closure'' of $\Gamma_0$ under entailment.
+Specifying a theory this way is only interesting if $\Gamma_0$ is
+explicitly specified, e.g., if the !!{element}s of~$\Gamma_0$ are
+listed. At the very least, $\Gamma_0$ has to be decidable, i.e., there
+has to be a computable test for when a !!{sentence} counts as an
+element of~$\Gamma_0$ or not. We call the !!{sentence}s
 in~$\Gamma_0$ \emph{axioms} for~$\Gamma$, and $\Gamma$
 \emph{axiomatized} by~$\Gamma_0$.
 
 \begin{defn}
-A theory~$\Gamma$ is \emph{axiomatized} by~$\Gamma_0$, iff
+A theory~$\Gamma$ is \emph{axiomatized} by~$\Gamma_0$ iff
 \[
 \Gamma = \Setabs{!A}{\Gamma_0 \Entails !A}
 \]
@@ -159,8 +164,8 @@ language, either $\Gamma \Proves !A$ or $\Gamma \Proves \lnot !A$.
 \end{explain}
 
 Another question we are led to ask is this: Is there a computational
-procedure we can use to test if a sentence is in $\Th{TA}$, in
-$\Th{PA}$, or even just in $\Th{Q}$?  We can make this more precise
+procedure we can use to test if !!a{sentence} is in~$\Th{TA}$, in
+$\Th{PA}$, or even just in~$\Th{Q}$?  We can make this more precise
 by defining when a set (e.g., a set of !!{sentence}s) is
 !!{decidable}.
 

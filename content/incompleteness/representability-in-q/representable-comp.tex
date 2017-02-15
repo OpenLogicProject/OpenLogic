@@ -14,20 +14,26 @@ Every function that is representable in $\Th{Q}$ is computable.
 \end{lem}
 
 \begin{proof}
-All we need to know is that we can code terms, formulas, and proofs in
-such a way that the relation ``$d$ is a proof of $!A$ in the theory
-$\Th{Q}$'' is computable, as well as the function
-$\fn{SubNumeral}(!A,n,v)$ which returns (a numerical code of) the
-result of substituting the numeral corresponding to $n$ for the
-variable (coded by) $v$ in the formula (coded by) $!A$. Assuming this,
-suppose the function $f$ is represented by
-$!A_f(x_0,\dots,x_{k},y)$. Then the algorithm for computing $f$ is as
-follows: on input $n_0,\dots,n_{k}$, search for a number $m$ and a
-proof of the formula $!A_f(\bar n_0,\dots,\bar n_{k},\bar m)$; when
-you find one, output $m$. In other words,
+All we need to know is that we can code terms, !!{formula}s, and
+!!{derivation}s in such a way that the relation ``$d$ is
+!!a{derivation} of~$!A$ from the axioms of~$\Th{Q}$'' is computable,
+as well as the function which returns the result of substituting the
+numeral corresponding to~$n$ for the variable $x$ in the
+!!{formula}~$!A$. In terms of G\"odel numbers,
+$\fn{SubNumeral}(\Gn{!A},n, \Gn{x})$,
+returns~$\Gn{\Subst{!A}{\num{n}}{x}}$.
+
+Assuming this, suppose the function~$f$ is represented
+by $!A_f(x_0, \dots, x_{k}, y)$. Then the algorithm for computing~$f$
+is as follows: on input $n_0$, \dots, $n_{k}$, search for a number $m$
+and !!a{derivation} of the !!{formula}~$!A_f(\num{n_0}, \dots, \num{n_k},
+\num{m})$; when you find one, output~$m$. Since $f$ is represented
+by~$!A_f(x_0, \dots, x_k, y)$, such an $m$ exists, namely, $m = f(n_0,
+\dots, n_k)$. Using sequences and minimization, we can write $f$ as
 \[
-f(n_0,\dots,n_{k}) = (\mu s (\mbox{``$(s)_0$ is a proof of $!A(\bar
-  n_0,\dots,\bar n_{k},\bar{(s)_1})$ in $\Th{Q}$''}))_1.
+f(n_0,\dots,n_{k}) = (\umin{s}{\text{``$(s)_0$ is !!a{derivation}
+    of~$!A_f(\num{n_0}, \dots, \num{n_k}, \num{(s)_1})$ in
+    $\Th{Q}$''}})_1.
 \]
 This completes the proof, modulo the (involved but routine) details of
 coding and defining the function and relation above.

@@ -190,7 +190,7 @@ Define the following relations as in
 
 \begin{prop}
 Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
-the relation $\fn{Pr}_\Gamma(x, y)$ expressing ``$x$ is the code of
+the relation $\Prf[\Gamma](x, y)$ expressing ``$x$ is the code of
 !!a{derivation}~$\pi$ of $\Gamma_0 \Sequent !A$ for some finite
 $\Gamma_0 \subseteq \Gamma$ and $x$ is the G\"odel number of~$!A$'' is
 primitive recursive.
@@ -198,12 +198,12 @@ primitive recursive.
 
 \begin{proof}
 Suppose ``$y \in \Gamma$'' is given by the primitive recursive
-predicate~$R_\Gamma(y)$.  We have to show that $\fn{Pr}_\Gamma(x, y)$
+predicate~$R_\Gamma(y)$.  We have to show that $\Prf[\Gamma](x, y)$
 which holds iff $y$ is the G\"odel number of a sentence~$!A$ and
 $x$~is the code of an $\Log{LK}$-!!{derivation} with end sequent
 $\Gamma_0 \Sequent !A$ is primitive recursive.
 
-By the previous proposition, the property $\fn{Deriv}()$ which holds
+By the previous proposition, the property $\fn{Deriv}(x)$ which holds
 iff $x$ is the code of a correct derivation~$\pi$ in $\Log{LK}$ is
 primitive recursive.  If $x$ is such a code, then $(x)_1$ is the code
 of the end sequent of~$\pi$, and so $((x)_1)_0$ is the code of the
@@ -212,9 +212,9 @@ express ``the right side of the end sequent of~$\pi$ is~$!A$'' as
 $\len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x$.  The left side of the
 end sequent of $\pi$ is of course automatically finite, we just have
 to express that every sentence in it is in~$\Gamma$.  Thus we can
-define $\fn{Pr}_\Gamma(x, y)$ by
+define $\Prf[\Gamma](x, y)$ by
 \begin{align*}
-\fn{Pr}_\Gamma(x, y) \defiff {}&
+\Prf[\Gamma](x, y) \defiff {}&
 \fn{Sent}(y) \land \fn{Deriv}(x) \land {} \\
 & \lforall[i <
   \len{((x)_1)_0}][(((x)_1)_0)_i \in \Gamma] \land {}\\

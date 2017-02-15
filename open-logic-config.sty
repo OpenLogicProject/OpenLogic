@@ -356,6 +356,30 @@
 
 \DeclareDocumentCommand \Proj { m m } {P^{#1}_{#2}}
 
+% - `\Zero`: the constant zero function
+
+\DeclareDocumentMacro \Zero {\fn{zero}}
+
+% - `\Succ`: the successor function
+
+\DeclareDocumentMacro \Succ {\fn{succ}}
+
+% - `\Add`: the addition function
+
+\DeclareDocumentMacro \Add {\fn{add}}
+
+% - `\Mult`: the multiplication function
+
+\DeclareDocumentMacro \Mult {\fn{mult}}
+
+% - `\Exp`: the exponentiation function
+
+\DeclareDocumentMacro \Exp {\fn{exp}}
+
+% - `\Pred`: the successor function
+
+\DeclareDocumentMacro \Pred {\fn{pred}}
+
 % - `\tsub`: truncated subtraction function
 
 \DeclareDocumentMacro \tsub {\mathbin{\dot-}}
@@ -423,7 +447,7 @@
 
 % - `\Gn{!A}`: G\"odel number of a string of symbols
 
-\DeclareDocumentCommand \Gn { m } {\#(#1)}
+\DeclareDocumentCommand \Gn { m } {{^{\reflectbox{\tiny\#}}}{#1}{^{\mbox{\tiny\#}}}}
 
 % Modal Logic 
 % -----------
@@ -849,9 +873,10 @@
 
 \settexttoken{complete}{complete}{complete}
 
-% -`axiomatizable`
+% -`axiomatizable`: effectively/recursively axiomatizable
 
 \settexttoken{axiomatizable}{axiomatizable}{axiomatizable}
+\settexttoken{axiomatized}{axiomatized}{axiomatized}
 \settexttoken{axiomatizability}{axiomatizability}{axiomatizability}
 
 % -`represents`, `representable`

@@ -26,7 +26,7 @@ x = \Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)}.
 \item There are $z_1, z_2 < x$ such that $\fn{Term}(z_1)$,
   $\fn{Term}(z_2)$, and
 \[
-x = z_1 \concat \Gn{\eq} \concat z_2.
+x = \Gn{\eq(} \concat z_1 \concat \Gn{,} \concat z_2 \concat{)}.
 \]
   \tagitem{prvFalse}{$x = \Gn{\lfalse}$.}{}
   \tagitem{prvTrue}{$x = \Gn{\ltrue}$.}{}
@@ -34,6 +34,7 @@ x = z_1 \concat \Gn{\eq} \concat z_2.
 \end{proof}
 
 \begin{prop}
+\ollabel{prop:frm-primrec}
 The relation $\fn{Frm}(x)$ which holds iff $x$ is the G\"odel number
 of !!a{formula} is primitive recursive.
 \end{prop}
@@ -46,5 +47,49 @@ formation rules.  The code for each $s_i$ (and indeed of the code of
 the sequence $\tuple{s_0, \dots, s_{k-1}}$ is less than the code~$x$
 of~$s$.
 \end{proof}
+
+\begin{prob}
+Give a detailed proof of \olref[inc][art][frm]{prop:frm-primrec} along
+the lines of the first proof of
+\olref[inc][art][trm]{prop:term-primrec}
+\end{prob}
+
+\begin{prob}
+Give a detailed proof of \olref[inc][art][frm]{prop:frm-primrec} along
+the lines of the alternate proof of
+\olref[inc][art][trm]{prop:term-primrec}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:freeocc-primrec}
+The relation $\fn{FreeOcc}(x, z, i)$, which holds if the $i$-th
+symbols of the formula with G\"odel number~$x$ is a free occurrence of
+the variable with G\"odel number~$z$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[inc][art][frm]{prop:freeocc-primrec}.  You may make use
+of the fact that any substring of !!a{formula} which is !!a{formula}
+is a sub-!!{formula} of it.
+\end{prob}
+
+\begin{prop}
+The property $\fn{Sent}(x)$ which holds iff $x$~is the G\"odel
+number of a !!{sentence} is primitive recursive.
+\end{prop}
+
+\begin{proof}
+A !!{sentence} is !!a{formula} without free occurrences of
+!!{variable}s. So $\fn{Sent}(x)$ holds iff
+\[
+\forall i<\len{x}\forall z<x(\exists j<z\, z=\Gn{\Obj v_j}
+\lif \lnot\fn{FreeOcc}(x,z,i)).
+\]
+\end{proof}
+
 
 \end{document}

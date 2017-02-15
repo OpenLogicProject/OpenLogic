@@ -1,0 +1,219 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: minimization-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{min}
+\olsection{Regular Minimization is Representable in $\Th{Q}$}
+
+Let's consider unbounded search. Suppose $g(x, z)$ is regular and
+representable in $\Th{Q}$, say by the !!{formula}~$!A_g(x, z, y)$. Let
+$f$ be defined by $f(z) = \umin{x}{[g(x, z) = 0]}$. We would like to find
+!!a{formula}~$!A_f(z, y)$ representing~$f$.  The value of~$f(z)$ is
+that number~$x$ which (a) satisfies $g(x, z) = 0$ and (b) is the least
+such, i.e., for any $w < x$, $g(w, z) \neq 0$.  So the following is a
+natural choice:
+\[
+!A_f(z,y) \ident !A_g(y, z, 0) \land \lforall[w][(w < y \lif \lnot
+  !A_g(w, z, 0))].
+\]
+In the general case, of course, we would have to replace $z$ with
+$z_0$, \dots, $z_k$.
+
+The proof, again, will involve some lemmas about things $\Th{Q}$ is
+strong enough to prove.
+
+\begin{lem}
+\ollabel{lem:succ} For every variable $x$ and every natural
+number~$n$,
+\[
+\Th{Q} \Proves \eq[(x' + \num n)][(x + \num n)'].
+\]
+\end{lem}
+
+\begin{proof}
+The proof is, as usual, by induction on $n$. In the base case, $n =
+0$, we need to show that $\Th{Q}$ proves $\eq[(x'+0)][(x+0)']$. But we have:
+\begin{align}
+  \Th{Q} & \Proves \eq[(x' + 0)][x'] \quad \text{by axiom $Q_4$}
+  \ollabel{step1}\\
+  \Th{Q} & \Proves  \eq[(x + 0)][x] \quad \text{by axiom $Q_4$}
+  \ollabel{step2} \\
+  \Th{Q} & \Proves \eq[(x + 0)'][x'] \quad \text{by \olref{step2}}
+  \ollabel{step3} \\
+  \Th{Q} & \Proves \eq[(x' + 0)][(x + 0)'] \quad
+  \text{by \olref{step1} and \olref{step3}}\notag
+\end{align}
+In the induction step, we can assume that we have shown that $\Th{Q}
+\Proves \eq[(x' + \num n)][(x + \num n)']$. Since
+$\num{n+1}$ is $\num{n}'$, we need to show that $\Th{Q}$ proves
+$\eq[(x' + \num{n}')][(x + \num{n}')']$. We have:
+\begin{align}
+  \Th{Q} & \Proves \eq[(x' + \num n')][(x' + \num n)'] \quad
+  \text{by axiom $Q_5$} \ollabel{step5}\\
+  \Th{Q} & \Proves \eq[(x' + \num n')][(x + \num n')'] \quad
+  \text{inductive hypothesis} \ollabel{step6}\\
+  \Th{Q} & \Proves \eq[(x' + \num n)'][(x + \num n')'] \quad
+  \text{by \olref{step5} and \olref{step6}.} \notag
+\end{align}
+\end{proof}
+
+It is again worth mentioning that this is weaker than saying that
+$\Th{Q}$ proves $\lforall[x][\lforall[y][(x' + y) = (x + y)']]$.
+Although this !!{sentence} is true in~$\Struct{N}$, $\Th{Q}$ does not
+prove it.
+
+\begin{lem}
+\ollabel{lem:less}
+\begin{enumerate}
+\item $\Th{Q} \Proves \lforall[x][\lnot x < \Obj 0]$.
+\item For every natural number~$n$, 
+  \[
+  \Th{Q} \Proves
+  \lforall[x][(x < \num {n+1} \lif (\eq[x][\Obj 0] \lor \dots \lor
+    \eq[x][\num n]))].
+  \]
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+Let us do 1 and part of 2, informally (i.e., only giving hints as to
+how to construct the formal derivation).
+
+For part 1, by the definition of $<$, we need to prove $\lnot
+\lexists[y][\eq[(y'+x)][\Obj 0]]$ in $\Th{Q}$, which is equivalent
+(using the axioms and rules of first-order logic) to
+$\lforall[y][\eq/[(y' + x)][0]]$. Here is the idea: suppose
+$\eq[(y'+x)][\Obj 0]$. If $\eq[x][\Obj 0]$, we have $\eq[(y' + \Obj
+  0)][\Obj 0]$. But by axiom~$Q_4$ of $\Th{Q}$, we have $\eq[(y' +
+  \Obj 0)][y']$, and by axiom~$Q_2$ we have $\eq/[y'][\Obj 0]$, a
+contradiction. So $\lforall[y][\eq/[(y' +x)][\Obj 0]]$. If
+$\eq/[x][\Obj 0]$, by axiom~$Q_3$, there is a $z$ such that
+$\eq[x][z']$. But then we have $\eq[(y' + z')][0]$. By axiom~$Q_5$, we
+have $\eq[(y' + z)'][\Obj 0]$, again contradicting axiom~$Q_2$.
+
+For part 2, use induction on~$n$. Let us consider the base case, when
+$n = 0$. In that case, we need to show $x < \num 1 \lif \eq[x][\Obj
+  0]$. Suppose $x < \num 1$. Then by the defining axiom for $<$, we
+have $\lexists[y][\eq[(y'+x)][\Obj 0']]$. Suppose $y$ has that property; so
+we have $\eq[y'+x][\Obj 0']$.
+
+We need to show $\eq[x][\Obj 0]$. By axiom~$Q_3$, if $\eq/[x][\Obj 0]$,
+we get $\eq[x][z']$ for some~$z$. Then we have $\eq[(y' + z')][\Obj
+  0']$. By axiom~$Q_5$ of $\Th{Q}$, we have $\eq[(y'+z)'][\Obj
+  0']$. By axiom~$Q_1$, we have $\eq[(y' + z)][\Obj 0]$. But this means, by
+definition, $z < \Obj 0$, contradicting part~1.
+\end{proof}
+
+\begin{lem}
+  \ollabel{lem:trichotomy} For every $m \in \Nat$,
+  \[
+  \Th{Q} \Proves
+  \lforall[y][((y < \num{m} \lor \num{m} < y) \lor \eq[y][\num{m}])].
+  \]
+\end{lem}
+
+\begin{proof}
+By induction on~$m$. First, consider the case $m=0$. $\Th{Q} \Proves
+\lforall[y][(\eq/[y][\Obj 0] \lif \lexists[z][\eq[y][z']])]$ by $!Q_3$.
+But if $\eq[y][z']$, then $\eq[(z' + \Obj 0)][(y + \Obj 0)]$ by the
+logic of~$\eq$. By $!Q_4$, $\eq[(y + \Obj 0)][y]$, so we have $\eq[(z'
+  + \Obj 0)][y]$, and hence $\lexists[z][\eq[(z' + \Obj 0)][y]]$. By
+the definition of $<$ in $!Q_8$, $\Obj 0 < y$.  If $\Obj 0 < y$, then also
+$\Obj 0 < y \lor y < \Obj 0$. We obtain: $\eq/[y][\Obj 0] \lif (\Obj 0
+< y \lor y < \Obj 0)$, which is equivalent to $(\Obj 0 < y \lor y <
+\Obj 0) \lor \eq[y][\Obj 0]$.
+
+Now suppose we have
+\begin{align*}
+  \Th{Q} & \Proves \lforall[y][((y < \num{m} \lor \num{m} < y) \lor
+    \eq[y][\num{m}])] \intertext{and we want to show} \Th{Q} & \Proves
+  \lforall[y][((y < \num{m+1} \lor \num{m+1} < y) \lor
+    \eq[y][\num{m+1}])]
+\end{align*}
+The first disjunct $y < \num{m}$ is equivalent (by $!Q_8$) to
+$\lexists[z][\eq[(z' + y)][\num{m}]]$. If $\eq[(z' + y)][\num{m}]$,
+then also $\eq[(z' + y)'][\num{m}']$. By $Q_4$, $\eq[(z' + y)'][(z'' +
+  y)]$. Hence, $\eq[(z'' + y)][\num{m}']$. We get $\lexists[u][\eq[(u'
+    + y)][\num{m+1}]]$ by existentially generalizing on~$z'$ and
+keeping in mind that $\num{m}'$ is $\num{m+1}$. Hence, if $y <
+\num{m}$ then $y < \num{m+1}$.
+
+Now suppose $\num{m} < y$, i.e., $\lexists[z][\eq[(z' +
+    \num{m})][y]]$.  By $Q_3$ and some logic, we have $\eq[z][\Obj 0]
+\lor \lexists[u][\eq[z][u']]$.  If $\eq[z][\Obj 0]$, we have
+$\eq[(\Obj 0' + \num{m})][y]$. Since $\Th{Q} \Proves \eq[(\Obj
+  0'+\num{m})][\num{m+1}]$, we have $\eq[y][\num{m+1}]$. Now suppose
+$\lexists[u][\eq[z][u']]$. Then:
+\begin{align*}
+  y & \eq (z' + \num{m}) \quad \text{by assumption}\\
+  (z' + \num{m}) & \eq (u'' + \num{m}) \quad \text{from $\eq[z][u']$}\\
+  (u'' + \num{m}) & \eq (u' + \num{m})' \quad \text{by \olref{lem:succ}}\\
+  (u' + \num{m})' & \eq (u' + \num{m}') \quad \text{by $Q_5$, so}\\
+  y & = (u' + \num{m+1}) 
+\end{align*}
+By existential generalization, $\lexists[u][\eq[(u' + \num{m+1})][y]]$,
+  i.e., $\num{m+1} < y$. So, if $\num{m} < y$, then $\num{m+1} < y
+  \lor \eq[y][\num{m+1}]$.
+
+Finally, assume $\eq[y][\num{m}]$. Then, since $\Th{Q} \Proves
+\eq[(\Obj 0' + \num{m})][\num{m+1}]$, $\eq[(\Obj 0' +
+  y)][\num{m+1}]$. From this we get $\lexists[z][\eq[(z' +
+    y)][\num{m+1}]]$, or $y < \num{m+1}$.
+
+Hence, from each disjunct of the case for~$m$, we can obtain the case
+for~$m+1$.
+\end{proof}
+  
+\begin{prop}
+\ollabel{prop:rep-minimization}
+If $!A_g(x, z, y)$ represents $g(x, y)$ in~$\Th{Q}$, then
+\[
+!A_f(z,y) \ident !A_g(y, z, \Obj 0) \land \lforall[w][(w < y \lif \lnot
+  !A_g(w, z, \Obj 0))].
+\]
+represents $f(z) = \umin{x}{[g(x, z) = 0]}$.
+\end{prop}
+
+\begin{proof}
+First we show that if $f(n) = m$, then $\Th{Q} \Proves !A_f(\num n, \num m)$,
+i.e.,  
+\begin{align}
+  \Th{Q} & \Proves !A_g(\num{m}, \num{n}, \Obj 0) \land \lforall[w][(w <
+    \num{m} \lif \lnot !A_g(w, \num{n}, \Obj 0))]. \notag
+  \intertext{Since $!A_g(x, z, y)$ represents $g(x, z)$ and $g(m, n) =
+    0$ if $f(n) = m$, we have}
+\Th{Q} & \Proves !A_g(\num{m}, \num{n}, \Obj 0). \notag
+\intertext{If $f(n) = m$, then for every $k < m$, $g(k, n) \neq 0$. So}
+\Th{Q} & \Proves \lnot !A_g(\num{k}, \num{n}, \Obj 0). \notag
+\intertext{We get that}
+\Th{Q} & \Proves \lforall[w][(w < \num{m} \lif \lnot
+  !A_g(w, \num{n}, \Obj 0))]. \ollabel{rep-less}
+\end{align}
+by \olref{lem:less} (by (1) in case $m = 0$ and by (2) otherwise).
+
+Now let's show that if $f(n) = m$, then $\Th{Q} \Proves
+\lforall[y][(!A_f(\num{n}, y) \lif \eq[y][\num{m}])]$.  We again
+sketch the argument informally, leaving the formalization to the
+reader.
+
+Suppose $!A_f(\num{n}, y)$. From this we get (a) $!A_g(y, \num{n},
+\Obj 0)$ and (b) $\lforall[w][(w < y \lif \lnot !A_g(w, \num{n}, \Obj
+  0))]$.  By \olref{lem:trichotomy}, $(y < \num{m} \lor \num{m} < y)
+\lor \eq[y][\num{m}]$. We'll show that both $y < \num{m}$ and $\num{m}
+< y$ leads to a contradiction.
+
+If $\num{m} < y$, then $\lnot !A_g(\num{m}, \num{n}, \Obj 0)$ from
+(b). But $m = f(n)$, so $g(m, n) = 0$, and so $\Th{Q} \Proves
+!A_g(\num{m}, \num{n}, \Obj 0)$ since $!A_g$ represents~$g$. So we
+have a contradiction.
+
+Now suppose $y < \num{m}$. Then since $\Th{Q} \Proves \lforall[w][(w <
+  \num{m} \lif \lnot !A_g(w, \num{n}, \Obj 0))]$ by \olref{rep-less}, we
+get $\lnot !A_g(y, \num{n}, \Obj 0)$. This again contradicts~(a).
+\end{proof}
+
+\end{document}
