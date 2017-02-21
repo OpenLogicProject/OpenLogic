@@ -11,7 +11,8 @@
 
 The basic language~$\Lang L$ of first order logic makes use of the symbols
 \[
-\lnot, \lor, \land, \lif, \lforall, \lexists, \eq, (, )
+\lfalse \quad \lnot \quad \lor \quad \land \quad \lif \quad \lforall
+\quad \lexists \quad \eq \quad ( \quad ) \quad ,
 \]
 together with !!{enumerable} sets of variables and !!{constant}s, and
 !!{enumerable} sets of !!{function}s and !!{predicate}s of arbitrary
@@ -35,10 +36,12 @@ defined as follows:
   following table:
 \[
 \begin{array}{cccccccccc}
-\lnot & \lor & \land & \lif & \lforall & \lexists & \eq & ( & ) & ,\\
+  \lfalse & \lnot & \lor & \land & \lif & \lforall \\
 \tuple{0, 0} & \tuple{0, 1} & \tuple{0, 2} & \tuple{0, 3} &
-\tuple{0, 4} & \tuple{0, 5} & \tuple{0, 6} & \tuple{0, 7} &
-\tuple{0, 8} & \tuple{0, 9}
+\tuple{0, 4} & \tuple{0, 5} \\
+\lexists & \eq & ( & ) & ,\\
+\tuple{0, 6} & \tuple{0, 7} &
+\tuple{0, 8} & \tuple{0, 9} & \tuple{0, 10}
 \end{array}
 \]
 \item If $s$ is the $i$-th variable $\Obj x_i$, then $\scode s = \tuple{1, i}$.
@@ -63,8 +66,37 @@ The following relations are primitive recursive:
 \end{prop}
 
 \begin{defn}
-If $s_0, \dots, s_n$ is a sequence of symbols, its
-\emph{G\"odel number} is $\tuple{\scode{s_0}, \dots, \scode{s_n}}$.
+If $s_0, \dots, s_{n-1}$ is a sequence of symbols, its \emph{G\"odel
+  number} is $\tuple{\scode{s_0}, \dots, \scode{s_{n-1}}}$.
 \end{defn}
+
+\begin{ex}
+Recall that if $k_0$, \dots, $k_{n-1}$ is a sequence of numbers, then
+the code of the sequence $\tuple{k_0, \dots, k_{n-1}}$ in the
+power-of-primes coding is
+\[
+2^{k_0+1}\cdot3^{k_1+1}\cdot \dots \cdot p_{n-1}^{k_{n-1}},
+\]
+where $p_i$ is the $i$-th prime (starting with $p_0 = 2$). So for
+instance, the formula $\eq[\Obj v_0][\Obj 0]$, or, more explicitly,
+${\eq}(\Obj v_0,\Obj c_0)$, has the G\"odel number
+\[
+\tuple{\scode{\eq},\scode{(},\scode{\Obj v_0},\scode{,}, \scode{\Obj
+    c_0},\scode{)}}.
+\]
+Here, $\scode{\eq}$ is $\tuple{0,7} = 2^{0+1}\cdot
+3^{7=1}$, $\scode{\Obj v_0}$ is $\tuple{1,0} = 2^{1+1}\cdot3^{0+1}$,
+etc. So $\Gn{=(\Obj v_0,\Obj c_0)}$ is
+\begin{multline*}
+2^{\scode{=} + 1}\cdot 3^{\scode{(}+1}\cdot 5^{\scode{\Obj v_0}+1}
+\cdot 7^{\scode{,} + 1} \cdot 11^{\scode{\Obj c_0}+1} \cdot
+13^{\scode{)}+1} = \\
+2^{2^1\cdot 3^8 + 1}\cdot 3^{2^1\cdot 3^9+1}\cdot 5^{2^2\cdot 3^1+1}
+\cdot 7^{2^1\cdot 3^{11} + 1} \cdot 11^{2^3\cdot3^1+1} \cdot
+13^{2^1\cdot3^{10}+1} = \\
+2^{13\,123}\cdot 3^{39\,367}\cdot 5^{13}\cdot 7^{354\,295}\cdot11^{25}\cdot13^{118\,099}.
+\end{multline*}
+
+\end{ex}
 
 \end{document}

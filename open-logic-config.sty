@@ -582,10 +582,15 @@
 
 % - `\Prf`: the proof relation
 
-\DeclareDocumentCommand \Prf { o } { \mathrm{Pr}\IfNoValueTF {#1} {} {_\Th{#1}}}
-\DeclareDocumentCommand \OPrf { o } { \mathsf{Pr}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \Prf { o } { \mathrm{Prf}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \OPrf { o } { \mathsf{Prf}\IfNoValueTF {#1} {} {_\Th{#1}}}
 
-% - `\Prov`: the provability relation
+% - `\Refut`: the refutation relation
+
+\DeclareDocumentCommand \Refut { o } { \mathrm{Ref}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \ORefut { o } { \mathsf{Ref}\IfNoValueTF {#1} {} {_\Th{#1}}}
+
+% - `\Prov`: the provability predicate
 
 \DeclareDocumentCommand \Prov { o } { \mathrm{Prov}\IfNoValueTF {#1} {} {_\Th{#1}}}
 \DeclareDocumentCommand \OProv { o } { \mathsf{Prov}\IfNoValueTF {#1} {} {_\Th{#1}}}

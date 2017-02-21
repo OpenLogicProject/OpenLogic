@@ -22,30 +22,30 @@ sub-!!{derivation}s leading to the premises of the last inference.
 \begin{defn}
 If $\delta$ is a !!{derivation} in natural deduction, then $\Gn{\delta}$ is
 \begin{enumerate}
-\item $\tuple{0, \Gn{!A}, n}$ if $\delta$ consists only of the initial
-  formula~$!A$. The number $n$ is $0$ if it is an !!{undischarged}
+\item $\tuple{0, \Gn{!A}, n}$ if $\delta$ consists only of the
+  assumption~$!A$. The number~$n$ is~$0$ if it is an !!{undischarged}
   assumption, and the numerical label otherwise.
 \item $\tuple{1, \Gn{!A}, n, k, \Gn{\delta_1}}$ if $\delta$
-  ends in an inference with one premise, $k$ is given by the following
+  ends in an inference with one premise, $k$~is given by the following
   table according to which rule was used in the last inference, and
   $\delta_1$ is the immediate subproof ending in the premise of the last
-  inference. $n$ is the label of the inference, or $0$
+  inference. $n$~is the label of the inference, or~$0$
   if the inference does not !!{discharge} any assumptions.
 
 \begin{tabular}{lccccccc}
 \text{Rule:} & \Elim{\lfalse} & \Intro{\lnot} & \Elim{\lnot} &
-   \Elim{\land} & \Intro{\lor} & \Intro{\lif} \\
-$k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
-\text{Rule:} & \Intro{\lforall} &
+   \Elim{\land} & \Intro{\lor}  \\
+$k$: & 1 & 2 & 3 & 4 & 5  \\[2ex]
+\text{Rule:} & \Intro{\lif} & \Intro{\lforall} &
    \Elim{\lforall} & \Intro{\lexists} & \Intro{\eq} \\
-$k$: & 7 & 8 & 9 & 10 
+$k$: & 6 & 7 & 8 & 9 & 10 
 \end{tabular}
-\item $\tuple{2, \Gn{!A}, n, k, \Gn{\delta_1}, \Gn{\delta_2}}$ if $\delta$
-  ends in an inference with two premises, $k$ is given by the
+\item $\tuple{2, \Gn{!A}, n, k, \Gn{\delta_1}, \Gn{\delta_2}}$ if
+  $\delta$ ends in an inference with two premises, $k$~is given by the
   following table according to which rule was used in the last
   inference, and $\delta_1$, $\delta_2$ are the immediate
   sub!!{derivation}s ending in the left and right premise of the last
-  inference, respectively. $n$ is the label of the inference, or $0$
+  inference, respectively. $n$~is the label of the inference, or $0$
   if the inference does not !!{discharge} any assumptions.
 
 \begin{tabular}{lcccc}
@@ -61,9 +61,30 @@ $k$: & 1 & 2 & 3
 \end{enumerate}
 \end{defn}
 
+\begin{ex}
+  Consider the very simple derivation
+  \begin{prooftree}
+    \AxiomC{$\Discharge{(!A \land !B)}{1}$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A!$}
+    \DischargeRule{\Intro{\lif}}{1}
+    \UnaryInfC{$(!A \lif !B)$}
+  \end{prooftree}
+  The G\"odel number of the assumption would be $d_0 = \tuple{0,
+    \Gn{(!A \land !B)}, 1}$.  The G\"odel number of the derivation ending
+  in the premise of~$\Intro{\lif}$ would be $d_1 = \tuple{1, \Gn{!A},
+    0, 4, d_0}$. The G\"odel number of the entire derivation then is
+  $\tuple{1, \Gn{(!A \lif !B)}, 1, 6, d_1}$, i.e.,
+  \[
+  2^2\cdot 3^{\Gn{(!A \lif !B)}+1}\cdot 5^2\cdot 7^7\cdot
+  11^{(2^2\cdot 3^{\Gn{!A}+1}\cdot 5^1 \cdot 7^5 \cdot
+    11^{(2^1\cdot 3^{\Gn{(!A \land !B)}+1} \cdot 5^2)})}.
+  \]
+\end{ex}
+
 \begin{explain}
 Having settled on a representation of !!{derivation}s, we must also
-show that we can manipulate such derivations primite recursively, and
+show that we can manipulate such !!{derivation}s primite recursively, and
 express their essential properties and relations so.  Some operations
 are simple: e.g., given a G\"odel number~$d$ of a !!{derivation},
 $(d)_1$ gives us the G\"odel number of its end-!!{formula}.  Some are
@@ -95,62 +116,42 @@ numbers of !!{formula}s, sequences of G\"odel numbers of !!{formula}s
 (which code sets of !!{formula}s), and G\"odel numbers of !!{derivation}s 
 are primitive recursive.
 \begin{enumerate}
-\item For this we need a helper relation $\fn{hInitFrm}(x, d, n, i)$
-  which holds if the !!{formula}~$!A$ with G\"odel number~$x$ occurs
-  as an initial !!{formula} with label~$n$ in the !!{derivation} with
-  G\"odel number~$d$ within~$i$ inferences up from the
-  end-!!{formula}.
+\item We want to show that $\fn{Assum}(x, d, n)$, which holds if $x$
+  is the G\"odel number of an assumption of the !!{derivation} with
+  G\"odel number~$d$ labelled~$n$, is primitive recursive. For this we
+  need a helper relation $\fn{hAssum}(x, d, n, i)$ which holds if
+  the !!{formula}~$!A$ with G\"odel number~$x$ occurs as an initial
+  !!{formula} with label~$n$ in the !!{derivation} with G\"odel
+  number~$d$ within~$i$ inferences up from the end-!!{formula}.
   \begin{multline*}
     \begin{aligned}
-    \fn{hInitFrm}(x, d, n, 0) \defiff {} & \True\\   
-    \fn{hInitFrm}(x, d, n, i+1) \defiff {} &
+    \fn{hAssum}(x, d, n, 0) \defiff {} & \True\\   
+    \fn{hAssum}(x, d, n, i+1) \defiff {} &
     \end{aligned}\\
     \begin{aligned}
-&  \fn{Sent}(x) \land (d = \tuple{0, x, n} \lor {}\\
-      & ((d)_0 = 1 \land \fn{hInitFrm}(x, (d)_4, n, i)) \lor {}\\
-      & ((d)_0 = 2 \land (\fn{hInitFrm}(x, (d)_4, n, i) \lor {}\\
-      & \qquad\fn{hInitFrm}(x, (d)_5, n, i))) \lor {}\\
-      & ((d)_0 = 3 \land (\fn{hInitFrm}(x, (d)_3, n, i) \lor {}\\
-      & \qquad \fn{hInitFrm}(x, (d)_2, n, i)) \lor
-      \fn{hInitFrm}(x, (d)_3, n, i))
-\end{aligned}
-  \end{multline*}
-   If the number~$i$ is large enough, e.g., larger than the maximum
-   number of inferences between an initial !!{formula} and the
-   end-!!{formula} of~$\delta$, it holds of $x$, $d$, $n$, and $i$ iff
-   $!A$ is an initial formula in $\delta$ labelled~$n$.  The
-   number~$d$ itself is larger than that maximum number of inferences.
-   So we can define
-   \[
-   \fn{InitFrm}(x, d, n) = \fn{hInitFrm}(x, d, n, d).
-   \]
-\item For this we also need a helper relation $\fn{hDischarge}(x, d,
-  n, i)$ which holds if the initial !!{formula} with label~$n$ in the
-  !!{derivation} with G\"odel number~$d$ within~$i$ inferences up from
-  the end-!!{formula} are all the !!{formula}~$!A$ with G\"odel
-  number~$x$.
-  \begin{multline*}
-    \begin{aligned}
-    \fn{hDischarge}(x, d, n, 0) \defiff {} & \True\\   
-    \fn{hDischarge}(x, d, n, i+1) \defiff {} &
-    \end{aligned}\\
-    \begin{aligned}
-      &  ((d)_0 = 0 \land ((d)_2 = n \lif (d_1) = x)) \lor {}\\
-      & ((d)_0 = 1 \land \fn{hDischarge}(x, (d)_4, n, i)) \lor {}\\
-      & ((d)_0 = 2 \land (\fn{hDischarge}(x, (d)_4, n, i) \land {}\\
-      & \qquad\fn{hDischarge}(x, (d)_5, n, i))) \lor {}\\
-      & ((d)_0 = 3 \land (\fn{hDischarge}(x, (d)_3, n, i) \land {}\\
-      & \qquad \fn{hDischarge}(x, (d)_4, n, i)) \land
-      \fn{hDischarge}(x, (d)_5, n, i))
+      &  \fn{Sent}(x) \land (d = \tuple{0, x, n} \lor {}\\
+      & ((d)_0 = 1 \land \fn{hAssum}(x, (d)_4, n, i)) \lor {}\\
+      & ((d)_0 = 2 \land (\fn{hAssum}(x, (d)_4, n, i) \lor {}\\
+      & \qquad\fn{hAssum}(x, (d)_5, n, i))) \lor {}\\
+      & ((d)_0 = 3 \land (\fn{hAssum}(x, (d)_3, n, i) \lor {}\\
+      & \qquad \fn{hAssum}(x, (d)_2, n, i)) \lor
+      \fn{hAssum}(x, (d)_3, n, i))
     \end{aligned}
   \end{multline*}
-   Again, if the number~$i$ is large enough, e.g., larger than the
-   maximum number of inferences between an initial !!{formula} and the
-   end-!!{formula} of~$\delta$, it holds of $x$, $d$, $n$, and $i$ iff
-   all assumptions of $\delta$ labelled~$n$ are of the form~$!A$.  The
-   number~$d$ itself is larger than that maximum number of inferences.
-   So we can define $\fn{Discharge}(x, d, n)$ as $\fn{hDischarge}(x,
-   d, n, d)$.
+  If the number~$i$ is large enough, e.g., larger than the maximum
+  number of inferences between an initial !!{formula} and the
+  end-!!{formula} of~$\delta$, it holds of $x$, $d$, $n$, and~$i$ iff
+  $!A$ is an initial formula in $\delta$ labelled~$n$.  The number~$d$
+  itself is larger than that maximum number of inferences.  So we can
+  define
+   \[
+   \fn{Assum}(x, d, n) = \fn{hAssum}(x, d, n, d).
+   \]
+\item We want to show that $\fn{Discharge}(x, d, n)$, which holds if
+  all assumptions with label~$n$ in the !!{derivation} with G\"odel
+  number~$d$ all are the !!{formula} with G\"odel number~$x$.  But
+  this relation holds iff $\forall y<d(\fn{Assum}(y, d, n) \lif y =
+  x)$.
 \item An occurrence of an assumption is not open if it occurs
   with label~$n$ in a subderivation that ends in a rule with discharge
   label~$n$. Define the helper relation $\fn{hNotOpen}(x, d, n, i)$
@@ -178,8 +179,11 @@ are primitive recursive.
   A !!{formula}~$!A$ is an open assumption of~$\delta$ iff it is an
   initial formula of~$\delta$ (with label~$n$) and is not
   !!{discharged} in~$\delta$ (by a rule with lable~$n$). We can then
-  define $\fn{OpenAssum}(x, d)$ as $\exists n<d(\fn{InitFrm}(x,d,n,d)
-  \land \lnot\fn{hNotOpen}(x, d, n, d))$.
+  define $\fn{OpenAssum}(x, d)$ as
+  \[
+  \exists n<d(\fn{Assum}(x,d,n,d)
+  \land \lnot\fn{hNotOpen}(x, d, n, d)).
+  \]
 \item Here we have to show that for each rule of inference~$R$ the
   relation $\fn{FollowsBy}_R(x, d_1, n)$ which holds if $x$ is the
   G\"odel number of the conclusion and $d_1$~is the G\"odel number of a
@@ -227,9 +231,8 @@ x = \Gn{\lexists} \concat v \concat z)
   holds if $d$ codes a correct derivation at least to $i$ inferences
   up from the end sequent.  $\fn{hDeriv}(d, 0)$ holds always.
   Otherwise, $\fn{hDeriv}(d, i+1)$ iff either $d$ just codes an
-  initial !!{formula} or $d$ ends in a correct inference with
-  and the codes of the immediate sub-!!{derivation}s satisfy
-  $\fn{hDeriv}(d', i)$.
+  assumption or $d$ ends in a correct inference and the codes of the
+  immediate sub-!!{derivation}s satisfy $\fn{hDeriv}(d', i)$.
 \begin{multline*}
   \begin{aligned}
 \fn{hDeriv}(d, 0) \defiff {} & \True \\
@@ -296,7 +299,7 @@ primitive recursive.
 By the previous proposition, the property $\fn{Deriv}(x)$ which holds
 iff $x$ is the code of a correct derivation~$\delta$ in natural
 deduction is primitive recursive. If $x$ is such a code, then $(x)_1$
-is the code of the end !!{formula} of~$\delta$. Thus we can define
+is the code of the end-!!{formula} of~$\delta$. Thus we can define
 $\Prf[\Gamma](x, y)$ by
 \begin{align*}
 \Prf[\Gamma](x, y) \defiff {} &
