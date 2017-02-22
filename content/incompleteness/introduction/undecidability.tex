@@ -65,7 +65,7 @@ $\Th{TA}$, also do, and hence also are not !!{decidable}.
 
 We can also use this result to obtain a weak version of the first
 incompleteness theorem.  Any theory that is !!{axiomatizable} and
-!!{complete} is decidable.  Consistent theories that are
+!!{complete} is !!{decidable}.  Consistent theories that are
 !!{axiomatizable} and !!{represents}s all !!{decidable} properties
 then cannot be !!{complete}.
 \end{explain}
@@ -79,20 +79,20 @@ Any inconsistent theory is !!{decidable}, since inconsistent theories
 contain all !!{sentence}s, so the answer to the question ``is $!A \in
 \Gamma$'' is always ``yes,'' i.e., can be decided.
 
-Suppose $\Gamma$ is consistent, !!{axiomatizable}, and
-!!{complete}. Since $\Gamma$ is !!{axiomatizable}, it is !!{computably
-enumerable}. For we can enumerate all the correct !!{derivation}s from
-the axioms of~$\Gamma$ by a computable function. From a correct
-!!{derivation} we can compute the !!{sentence} it !!{derive}s, and so
-together there is a computable function that enumerates all theorems
-of~$\Gamma$.  A !!{sentence} is a theorem of~$\Gamma$ iff $\lnot !A$
-is not a theorem, since $\Gamma$ is consistent and !!{complete}.  We
-can therefore decide if $!A \in \Gamma$ as follows. Enumerate all
-theorems of $\Gamma$. When $!A$ appears on this list, we know that
-$\Gamma \Proves !A$. When $\lnot !A$ appears on this list, we know
-that $\Gamma \Proves/ !A$.  Since $\Gamma$ is !!{complete}, one of
-these cases eventually obtains, so the procedure eventually produces
-and answer.
+So suppose $\Gamma$ is consistent, and furthermore is
+!!{axiomatizable}, and !!{complete}. Since $\Gamma$ is
+!!{axiomatizable}, it is !!{computably enumerable}. For we can
+enumerate all the correct !!{derivation}s from the axioms of~$\Gamma$
+by a computable function. From a correct !!{derivation} we can compute
+the !!{sentence} it !!{derive}s, and so together there is a computable
+function that enumerates all theorems of~$\Gamma$.  A !!{sentence} is
+a theorem of~$\Gamma$ iff $\lnot !A$ is not a theorem, since $\Gamma$
+is consistent and !!{complete}.  We can therefore decide if $!A \in
+\Gamma$ as follows. Enumerate all theorems of $\Gamma$. When $!A$
+appears on this list, we know that $\Gamma \Proves !A$. When $\lnot
+!A$ appears on this list, we know that $\Gamma \Proves/ !A$.  Since
+$\Gamma$ is !!{complete}, one of these cases eventually obtains, so
+the procedure eventually produces and answer.
 \end{proof}
 
 \begin{cor}
@@ -107,6 +107,12 @@ previous theorem (since it is !!{axiomatizable} and consistent). But
 since $\Gamma$ !!{represents} every !!{decidable} property, it is not
 !!{decidable}, by the first theorem.
 \end{proof}
+
+\begin{prob}
+Show that $\Th{TA} = \Setabs{!A}{\Sat{N}{!A}}$ is not
+!!{axiomatizable}. You may assume that $\Th{TA}$ represents all
+decidable properties.
+\end{prob}
 
 Once we have established that, e.g., $\Th{Q}$, !!{represents} all
 !!{decidable} properties, the corollary tells us that $\Th{Q}$ must be

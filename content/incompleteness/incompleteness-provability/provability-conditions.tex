@@ -28,10 +28,10 @@ number-theoretic and combinatorial arguments can be carried out in
 $\Th{PA}$.
 
 Since $\Th{PA}$ is computably axiomatized, the provability predicate
-$\Prf[PA](x,y)$ is computable and hence represented in $\Th{Q}$ (and
-so, in $\Th{PA}$). As before, I will take $\OPrf[PA](x,y)$ to denote
-the formula representing the relation.  Let $\OProv[PA](y)$ be the
-formula $\lexists[x][\Prf[PA](x,y)]$, which, intuitively says, ``$y$ is
+$\Prf[\Th{PA}](x,y)$ is computable and hence represented in $\Th{Q}$ (and
+so, in $\Th{PA}$). As before, I will take $\OPrf[\Th{PA}](x,y)$ to denote
+the formula representing the relation.  Let $\OProv[\Th{PA}](y)$ be the
+formula $\lexists[x][\Prf[\Th{PA}](x,y)]$, which, intuitively says, ``$y$ is
 provable from the axioms of $\Th{PA}$.''  The reason we need a little
 bit more than the axioms of $\Th{Q}$ is we need to know that the
 theory we are using is strong enough to prove a few basic facts about
@@ -39,23 +39,23 @@ this provability predicate. In fact, what we need are the following
 facts:
 \begin{enumerate}
 \item If $\Th{PA} \Proves !A$, then $\Th{PA} \Proves
-  \OProv[PA](\gn{!A})$
+  \OProv[\Th{PA}](\gn{!A})$
 \item For every formula $!A$ and $!B$, $\Th{PA} \Proves
-  \OProv[PA](\gn{!A \lif !B}) \lif (\OProv[PA](\gn{!A}) \lif
-  \OProv[PA](\gn{!B}))$
-\item For every formula $!A$, $\Th{PA} \Proves \OProv[PA](\gn{!A})
-\lif \OProv[PA](\gn{\OProv[PA](\gn{!A})})$.
+  \OProv[\Th{PA}](\gn{!A \lif !B}) \lif (\OProv[\Th{PA}](\gn{!A}) \lif
+  \OProv[\Th{PA}](\gn{!B}))$
+\item For every formula $!A$, $\Th{PA} \Proves \OProv[\Th{PA}](\gn{!A})
+\lif \OProv[\Th{PA}](\gn{\OProv[\Th{PA}](\gn{!A})})$.
 \end{enumerate}
 The only way to verify that these three properties hold is to describe
-the formula $\OProv[PA](y)$ carefully and use the axioms of $\Th{PA}$ to
+the formula $\OProv[\Th{PA}](y)$ carefully and use the axioms of $\Th{PA}$ to
 describe the relevant formal proofs. Clauses 1 and 2 are easy; it is
 really clause 3 that requires work. (Think about what kind of work it
 entails\dots) Carrying out the details would be tedious and
 uninteresting, so here we will ask you to take it on faith that
 $\Th{PA}$ has the three properties listed above. A reasonable choice
-of $\OProv[PA](y)$ will also satisfy
+of $\OProv[\Th{PA}](y)$ will also satisfy
 \begin{enumerate}
-\item[4.] If $\Th{PA}$ proves $\OProv[PA](\gn{!A})$, then $\Th{PA}$ proves
+\item[4.] If $\Th{PA}$ proves $\OProv[\Th{PA}](\gn{!A})$, then $\Th{PA}$ proves
   $!A$.
 \end{enumerate}
 But we will not need this fact.

@@ -238,12 +238,26 @@ A set $X$ is called \emph{!!{computably enumerable}} (!!{c.e.} for
 short) iff it is empty or it has a computable enumeration.
 \end{defn}
 
-In addition to !!{axiomatizability} another condition on theories to
+In addition to !!{axiomatizability}, another condition on theories to
 which the incompleteness theorems apply will be that they are strong
 enough to prove basic facts about computable functions and
-!!{decidable} relations. By ``basic facts,'' we mean that the theories
-in question count among its theorems !!{sentence}s which express what
-the values of computable functions are for each of their arguments.
+!!{decidable} relations. By ``basic facts,'' we mean !!{sentence}s
+which express what the values of computable functions are for each of
+their arguments.  And by ``strong enough'' we mean that the theories
+in question count these sentences among its theorems. For instance,
+consider a prototypical computable function: addition.  The value of
+$+$ for arguments $2$ and $3$ is~$5$, i.e., $2+3 = 5$. A sentence in
+the language of arithmetic that expresses that the value of $+$ for
+arguments $2$ and $3$ is~$5$ is: $(\num{2} + \num{3}) = \num{5}$.
+And, e.g., $\Th{Q}$ proves this sentence.  More generally, we would
+like there to be, for each computable function $f(x_1, x_2)$
+!!a{formula}~$!A_f(x_1, x_2, y)$ in~$\Lang{L_A}$ such that $\Th{Q}
+\Proves !A_f(\num{n_1}, \num{n_2}, \num{m})$ whenever $f(n_1, n_2) =
+m$. In this way, $\Th{Q}$ proves that the value of~$f$ for arguments
+$n_1$, $n_2$ is~$m$. In fact, we require that it proves a bit more,
+namely that no other number is the value of~$f$ for arguments
+$n_1$,~$n_2$. And the same goes for !!{decidable} relations. This is
+made precise in the following two definitions.
 
 \begin{defn}
 A !!{formula}~$!A(x_1, \dots, x_k, y)$ \emph{!!{represents}} the
@@ -269,11 +283,24 @@ relation $R \subset \Nat^k$ iff,
 
 A theory is be ``strong enough'' for the incompleteness theorems to
 apply if it !!{represents} all computable functions and all
-!!{decidable} relations. $\Th{Q}$ and its extensions satisfy this
-condition. $\Th{Q}$ is a very weak theory, so the condition is
-realltively easily met. Certainly, any theory aiming to formalize
-``all of mathematics'' must satisfy it, since it should at the very
-least be able to capture the results of elementary computations.
+!!{decidable} relations. $\Th{Q}$~and its extensions satisfy this
+condition, but it will take us a while to establish this---it's a
+non-trivial fact about the kinds of things $\Th{Q}$ can prove, and
+it's hard to show because $\Th{Q}$ has only a few axioms from which
+we'll have to prove all these facts. However, $\Th{Q}$ is a very weak
+theory. So although it's hard to prove that $\Th{Q}$ represents all
+computable functions, most interesting theories are stronger
+than~$\Th{Q}$, i.e., prove more than $\Th{Q}$ does. And if $\Th{Q}$
+proves something, any stronger theory does; since $\Th{Q}$ represents
+all computable functions, every stronger theory does. This means that
+many interesting theories meet this condition of the incompleteness
+theorems. So our hard work will pay off, since it shows that the
+incompletess theorems apply to a wide range of theories. Certainly,
+any theory aiming to formalize ``all of mathematics'' must prove
+everything that $\Th{Q}$ proves, since it should at the very least be
+able to capture the results of elementary computations.  So any theory
+that is a candidate for a theory of ``all of mathematics'' will be one
+to which the incompleteness theorems apply.
 
 
 \end{document}
