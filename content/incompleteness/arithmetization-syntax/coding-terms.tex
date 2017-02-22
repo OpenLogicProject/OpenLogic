@@ -117,10 +117,10 @@ and the code~$z$ of the sequence~$\tuple{z_1, \dots, z_n}$, in (3) are
 all less than~$x$. So we get a primitive recursive definition by:
 \begin{align*}
 \fn{lTerm}(x, 0) = {}& \fn{Var}(x) \lor \fn{Const}(x)\\
-\fn{lTerm}(x, l+1) = {}&\fn{Var}(x) \lor \fn{Const}(x) \lor {}\\
-& \exists z<x(\forall i<\len{z}\, \fn{lTerm}((z)_i, l) \land \\
-& \exists j<x \,x = \Gn{\Obj f^{\len{z}}_j(} \concat
-\fn{flatten}(z) \concat \Gn{)})
+\fn{lTerm}(x, l+1) = {} & \fn{Var}(x) \lor \fn{Const}(x) \lor {}\\
+& \quad \bexists{z<x}{(\bforall{i<\len{z}}{\fn{lTerm}((z)_i, l)} \land {}}\\
+& \qquad \bexists{j<x}{x = (\Gn{\Obj f^{\len{z}}_j(} \concat
+\fn{flatten}(z) \concat \Gn{)})})
 \end{align*}
 We can now define $\fn{Term}(x)$ by $\fn{lTerm}(x, x)$, since the level
 of a term is always less than the G\"odel number of the term.

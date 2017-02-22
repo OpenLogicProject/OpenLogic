@@ -19,14 +19,14 @@ The number $x$ is the G\"odel number of an atomic !!{formula} iff
 one of the following holds:
 \begin{enumerate}
 \item There are $n$, $j < x$, and $z < x$ such that for each $i < n$,
-  $\fn{Term}((z)_i)$ and
+  $\fn{Term}((z)_i)$ and $x = $
 \[
-x = \Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)}.
+\Gn{\Obj P^n_j(} \concat \fn{flatten}(z) \concat \Gn{)}.
 \]
 \item There are $z_1, z_2 < x$ such that $\fn{Term}(z_1)$,
-  $\fn{Term}(z_2)$, and
+  $\fn{Term}(z_2)$, and $x = $
 \[
-x = \Gn{\eq(} \concat z_1 \concat \Gn{,} \concat z_2 \concat{)}.
+\Gn{{\eq}(} \concat z_1 \concat \Gn{,} \concat z_2 \concat{\Gn{)}}.
 \]
   \tagitem{prvFalse}{$x = \Gn{\lfalse}$.}{}
   \tagitem{prvTrue}{$x = \Gn{\ltrue}$.}{}
@@ -86,8 +86,8 @@ number of a !!{sentence} is primitive recursive.
 A !!{sentence} is !!a{formula} without free occurrences of
 !!{variable}s. So $\fn{Sent}(x)$ holds iff
 \[
-\forall i<\len{x}\forall z<x(\exists j<z\, z=\Gn{\Obj v_j}
-\lif \lnot\fn{FreeOcc}(x,z,i)).
+\bforall{i<\len{x}}{\bforall{z<x}{(\bexists{j<z}{z=\Gn{\Obj v_j}}
+\lif \lnot\fn{FreeOcc}(x,z,i))}}.
 \]
 \end{proof}
 

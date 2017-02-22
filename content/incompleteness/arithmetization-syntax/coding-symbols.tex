@@ -44,7 +44,7 @@ defined as follows:
 \tuple{0, 8} & \tuple{0, 9} & \tuple{0, 10}
 \end{array}
 \]
-\item If $s$ is the $i$-th variable $\Obj x_i$, then $\scode s = \tuple{1, i}$.
+\item If $s$ is the $i$-th variable $\Obj v_i$, then $\scode s = \tuple{1, i}$.
 \item If $s$ is the $i$-th !!{constant}~$\Obj c_i^n$, then
   $\scode s = \tuple{2, i}$.
 \item If $s$ is the $i$-th $n$-ary !!{function}~$\Obj f_i^n$, then
@@ -69,6 +69,16 @@ The following relations are primitive recursive:
 If $s_0, \dots, s_{n-1}$ is a sequence of symbols, its \emph{G\"odel
   number} is $\tuple{\scode{s_0}, \dots, \scode{s_{n-1}}}$.
 \end{defn}
+
+\begin{explain}
+Note that \emph{codes} and \emph{G\"odel numbers} are different
+things. For instance, the variable~$\Obj v_5$ has a code~$\scode{\Obj
+  v_5} = \tuple{1, 5} = 2^2\cdot 3^6$. But the variable~$\Obj v_5$
+considered as a term is also a sequence of symbols (of
+length~$1$). The \emph{G\"odel number}~$\Gn{\Obj v_5}$ of the
+\emph{term}~$\Obj v_5$ is $\tuple{\scode{\Obj v_5}} = 2^{\scode{\Obj
+    v_5} + 1} = 2^{2^2\cdot 3^6 + 1}$.
+\end{explain}
 
 \begin{ex}
 Recall that if $k_0$, \dots, $k_{n-1}$ is a sequence of numbers, then
@@ -96,7 +106,6 @@ etc. So $\Gn{=(\Obj v_0,\Obj c_0)}$ is
 13^{2^1\cdot3^{10}+1} = \\
 2^{13\,123}\cdot 3^{39\,367}\cdot 5^{13}\cdot 7^{354\,295}\cdot11^{25}\cdot13^{118\,099}.
 \end{multline*}
-
 \end{ex}
 
 \end{document}

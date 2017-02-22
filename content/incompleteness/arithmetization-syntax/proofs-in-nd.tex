@@ -11,9 +11,9 @@
 
 \begin{explain}
 In order to arithmetize !!{derivation}s, we must represent
-!!{derivation}s as numbers. Since !!{derivation}s are trees of formula
-where each inference carries one or two labels, a recursive
-representation is the most obvious approach: we represent a
+!!{derivation}s as numbers. Since !!{derivation}s are trees of
+!!{formula}s where each inference carries one or two labels, a
+recursive representation is the most obvious approach: we represent a
 !!{derivation} as a tuple, the components of which are the
 end-!!{formula}, the labels, and the representations of the
 sub-!!{derivation}s leading to the premises of the last inference.
@@ -150,8 +150,8 @@ are primitive recursive.
 \item We want to show that $\fn{Discharge}(x, d, n)$, which holds if
   all assumptions with label~$n$ in the !!{derivation} with G\"odel
   number~$d$ all are the !!{formula} with G\"odel number~$x$.  But
-  this relation holds iff $\forall y<d(\fn{Assum}(y, d, n) \lif y =
-  x)$.
+  this relation holds iff $\bforall{y<d}{(\fn{Assum}(y, d, n) \lif y =
+  x)}$.
 \item An occurrence of an assumption is not open if it occurs
   with label~$n$ in a subderivation that ends in a rule with discharge
   label~$n$. Define the helper relation $\fn{hNotOpen}(x, d, n, i)$
@@ -181,8 +181,8 @@ are primitive recursive.
   !!{discharged} in~$\delta$ (by a rule with lable~$n$). We can then
   define $\fn{OpenAssum}(x, d)$ as
   \[
-  \exists n<d(\fn{Assum}(x,d,n,d)
-  \land \lnot\fn{hNotOpen}(x, d, n, d)).
+  \bexists{n<d}{(\fn{Assum}(x,d,n,d)
+  \land \lnot\fn{hNotOpen}(x, d, n, d))}.
   \]
 \item Here we have to show that for each rule of inference~$R$ the
   relation $\fn{FollowsBy}_R(x, d_1, n)$ which holds if $x$ is the
@@ -196,8 +196,8 @@ are primitive recursive.
   $\eq[t][t]$, for a closed term~$t$. Here, a primitive recursive
   definition is
   \[
-  \lexists[t<x][(\fn{ClTerm}(t) \land x = 
-    \Gn{\eq(} \concat t \concat \Gn{,} \concat t \concat \Gn{)})]
+  \bexists{t<x}{(\fn{ClTerm}(t) \land x = 
+    (\Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)}))}
   \land d_1 = 0).
   \]
 
@@ -206,11 +206,12 @@ are primitive recursive.
   end-!!{formula} of $\delta$ is~$!C$, and any initial formula
   in~$\delta$ labelled~$n$ is of the form~$!B$.  We can express this
   primitive recursively by
-  \begin{align*}
-  \exists y<x\exists z<x &(x = \Gn{(} \concat y \concat \Gn{\lif}
-  \concat z\concat \Gn{)} \land {} \\
-  & \quad(d)_1 = z \land \fn{Discharge}(y, d_1))
-  \end{align*}
+  \begin{multline*}
+    \bexists{y<x}{(\fn{Sent}(y) \land \fn{Discharge}(y, d_1) \land {}}\\
+      \bexists{z<x}{(\fn{Sent}(y)  \land  (d)_1 = z) \land {}}\\
+      x = (\Gn{(} \concat y \concat \Gn{\lif}
+  \concat z\concat \Gn{)}))
+  \end{multline*}
   (Think of $y$ as the G\"odel number of~$!B$ and $z$ as that
   of~$!C$.)
 
@@ -220,12 +221,12 @@ are primitive recursive.
   !!a{variable}~$x$ such that $\Subst{!B}{t}{x}$ is the
   end-!!{formula} of the upper derivation and $\lexists[x][!B]$
   is the conclusion~$!A$, i.e., the formula with G\"odel number~$x$.
+  So $\fn{FollowsBy}_{\Intro{\lexists}}(x, d_1, n)$ holds iff
 \begin{multline*}
-\fn{FollowsBy}_{\Intro{\lexists}}(x, d_1, n) \defiff {} \\
-\fn{Sent}(x) \land \exists y < x\exists v<x\exists t<d
-(\fn{Frm}(y) \land \fn{Term}(t) \land \fn{Var}(v)  \land {}\\
+\fn{Sent}(x) \land \bexists{y < x}{\bexists{v<x}{\bexists{t<d}{
+(\fn{Frm}(y) \land \fn{Term}(t) \land \fn{Var}(v)  \land {}}}}\\
 \fn{FreeFor}(y, t, v) \land \fn{Subst}(y,t,v) = (d_1)_1 \land
-x = \Gn{\lexists} \concat v \concat z)
+x = (\Gn{\lexists} \concat v \concat z))
 \end{multline*}
 \item We first define a helper relation $\fn{hDeriv}(d, i)$ which
   holds if $d$ codes a correct derivation at least to $i$ inferences
@@ -239,7 +240,7 @@ x = \Gn{\lexists} \concat v \concat z)
 \fn{hDeriv}(d, i+1) \defiff {} &
   \end{aligned}\\
   \begin{aligned}
-& \exists x<d\exists n<d(\fn{Sent}(x) \land d = \tuple{0, x, n}) \lor {}\\
+& \bexists{x<d}{\bexists{n<d}{(\fn{Sent}(x) \land d = \tuple{0, x, n}) \lor {}}}\\
 & ((d)_0 = 1 \land {}\\
 & \quad ((d)_3 = 1 \land
 \fn{FollowsBy}_{\Elim{\lfalse}}((d)_1, (d)_4, (d)_2) \lor{}\\
@@ -304,7 +305,7 @@ $\Prf[\Gamma](x, y)$ by
 \begin{align*}
 \Prf[\Gamma](x, y) \defiff {} &
 \fn{Deriv}(x) \land (x)_1 = y \land {} \\
-& \lforall[z < x](\fn{OpenAssum}(z, x) \lif R_\Gamma(z))
+& \bforall{z < x}{(\fn{OpenAssum}(z, x) \lif R_\Gamma(z))}
 \end{align*}
 \end{proof}
 

@@ -63,10 +63,10 @@ f(g_0(x_0,\dots,x_{l-1}),\dots,g_{k-1}(x_0,\dots,x_{l-1})) .
 \end{defn}
 
 \begin{defn}
-If $f(z_0,\dots,z_{k-1})$ is a $k$-ary function and
-$g(x,y,z_0,\dots,z_{k-1})$ is a $k+2$-ary function, then the function
+If $f$ is a $k$-ary function and
+$g$ is a $(k+2)$-ary function, then the function
 defined by \emph{primitive recursion from $f$ and $g$} is the
-$k+1$-ary function $h$, defined by the equations
+$(k+1)$-ary function~$h$ defined by the equations
 \begin{eqnarray*}
 h(0,z_0,\dots,z_{k-1}) & = & f(z_0,\dots,z_{k-1}) \\
 h(x+1,z_0,\dots,z_{k-1}) & = & g(x,h(x,z_0,\dots,z_{k-1}),z_0,\dots,z_{k-1})
@@ -143,28 +143,28 @@ For another example, let us again consider addition. This is
 described recursively by the following two equations:
 \begin{eqnarray*}
 x + 0 & = & x \\
-x + (y+1) & = & S(x+y).
+x + (y+1) & = & \Succ(x+y).
 \end{eqnarray*}
-In other words, addition is the function $g$ defined recursively by
+In other words, addition is the function $\Add$ defined recursively by
 the equations
 \begin{eqnarray*}
-g(0,x) & = & x \\
-g(y+1,x) & = & S(g(y,x)).
+\Add(0,x) & = & x \\
+\Add(y+1,x) & = & \Succ(\Add(y,x)).
 \end{eqnarray*}
 But even this is not a strict primitive recursive definition; we need
 to put it in the form
 \begin{eqnarray*}
-g(0,x) & = & k(x) \\
-g(y+1,x) & = & h(y,g(y,x),x)
+\Add(0,x) & = & f(x) \\
+\Add(y+1,x) & = & g(y,\Add(y,x),x)
 \end{eqnarray*}
-for some 1-ary primitive recursive function $k$ and some 3-ary
-primitive recursive function $h$. We can take $k$ to be $\Proj{1}{0}$, and
-we can define $h$ using composition,
+for some 1-ary primitive recursive function~$f$ and some 3-ary
+primitive recursive function~$g$. We can take $f$ to be $\Proj{1}{0}$, and
+we can define $g$ using composition,
 \[
-h(y,w,x) = S(\Proj{3}{1}(y,w,x)).
+g(y,w,x) = \Succ(\Proj{3}{1}(y,w,x)).
 \]
-The function $h$, being the composition of basic primitive recursive
-functions, is primitive recursive; and hence so is~$g$. (Note that,
+The function $g$, being the composition of basic primitive recursive
+functions, is primitive recursive; and hence so is~$h$. (Note that,
 strictly speaking, we have defined the function $g(y, x)$ meeting the
 recursive specification of $x + y$; in other words, the variables are
 in a different order. Luckily, addition is commutative, so here the

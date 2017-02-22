@@ -406,7 +406,15 @@
 
 % - `\bmin{x < y}{!A}`: bounded minimization
 
-\DeclareDocumentCommand \bmin { m m } {\fn{min} \; #1 \; #2}
+\DeclareDocumentCommand \bmin { m m } {(\fn{min} \; #1)\, #2}
+
+% - `\bexists{x < y}{!A}`: bounded existential quantification
+
+\DeclareDocumentCommand \bexists { m m } {(\exists #1)\; #2}
+
+% - `\bforall{x < y}{!A}`: bounded univeral quantification
+
+\DeclareDocumentCommand \bforall { m m } {(\forall #1)\; #2}
 
 % - `\cfind{e}[n]`: partial computable function with index $e$
 
@@ -443,7 +451,7 @@
 
 % - `\scode{s}`: code for a symbol
 
-\DeclareDocumentCommand \scode { m } {\fn{c}(#1)}
+\DeclareDocumentCommand \scode { m } {\fn{c}_{#1}}
 
 % - `\Gn{!A}`: G\"odel number of a string of symbols
 

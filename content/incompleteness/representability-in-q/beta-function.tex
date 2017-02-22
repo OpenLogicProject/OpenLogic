@@ -108,15 +108,15 @@ j < j\fac < x_i$.
 
 Now let us prove the $\beta$ function lemma. Remember that we can use
 $0$, successor, plus, times, $\Char{=}$, projections, and any function
-defined from them using composition and $\mu$ applied to regular
-functions. We can also use a relation if its characteristic function
-is so definable. As before we can show that these relations are
-closed under boolean combinations and bounded quantification; for
+defined from them using composition and minimization applied to
+regular functions. We can also use a relation if its characteristic
+function is so definable. As before we can show that these relations
+are closed under boolean combinations and bounded quantification; for
 example:
 \begin{enumerate}
 \item $\fn{not}(x) \defis \Char{=}(x,0)$
-\item $\mu{x \leq z} \; R(x,y) \defis \mu x \; (R(x,y) \lor x = z)$
-\item $\lexists[x \leq z][R(x,y)] \defiff R(\mu {x \leq z} \; R(x,y), y)$
+\item $\bmin{x \leq z}{R(x,y)} \defis \umin{x}{(R(x,y) \lor x = z)}$
+\item $\bexists{x \leq z}{R(x,y)} \defiff R(\bmin{x \leq z}{R(x,y)}, y)$
 \end{enumerate}
 We can then show that all of the following are also definable without
 primitive recursion:
@@ -125,11 +125,11 @@ primitive recursion:
 % maybe explain more what is going on here, a bit confusing.
 \item Projections
 \[
-K(z) = \mu {x \leq q} \; (\lexists[y \leq z] \, [z = J(x,y)])
+K(z) = \bmin{x \leq q}{(\lexists[y \leq z] \, [z = J(x,y)])}
 \]
 and
 \[
-L(z) = \mu {y \leq q} \; (\lexists[x \leq z]\, [z = J(x,y)]).
+L(z) = \bmin{y \leq q}{(\lexists[x \leq z]\, [z = J(x,y)])}.
 \]
 \item $x < y$
 \item $x \mid y$

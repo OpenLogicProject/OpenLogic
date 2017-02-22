@@ -61,30 +61,31 @@ One can also define relations using bounded quantification:
 \item Bounded universal quantification: if $R(x, \vec z)$ is a
 primitive recursive relation, then so is the relation
 \[
-\lforall[x < y][R(x, \vec z)]
+\bforall{x < y}{R(x, \vec z)}
 \]
-which holds if and only if $R(x,\vec z)$ holds for every $x$ less than
-$y$.
+which holds if and only if $R(x,\vec z)$ holds for every~$x$ less
+than~$y$.
 \item Bounded existential quantification: if $R(x, \vec z)$ is a
 primitive recursive relation, then so is
 \[
-\lexists[x < y][R(x, \vec z)].
+\bexists{x < y}{R(x, \vec z)}.
 \]
 \end{enumerate}
-By convention, we take expressions of the form $\lforall[x < 0][R(x,\vec
-z)]$ to be true (for the trivial reason that there \emph{are} no $x$
-less than $0$) and $\lexists[x < 0][R(x,\vec z)]$ to be false. A universal
-quantifier functions just like a finite product; it can also be
-defined directly by
+By convention, we take $\bforall{x < 0}{R(x,\vec z)}$ to be true (for
+the trivial reason that there \emph{are} no $x$ less than $0$) and
+$\bexists{x < 0}{R(x,\vec z)}$ to be false. A universal quantifier
+functions just like a finite product; it can also be defined directly
+by
 \[
 g(0,\vec z) = 1, \quad g(y+1,\vec z) =
 \fn{and}(g(y,\vec z),\Char{R}(y,\vec z)).
 \]
 Bounded existential quantification can similarly be defined using
 $\fn{or}$. Alternatively, it can be defined from bounded universal
-quantification, using the equivalence, $\lexists[x < y][!A(x)] \liff \lnot
-\lforall[x < y][\lnot !A(x)]$. Note that, for example, a bounded quantifier
-of the form $\lexists[x \leq y]$ is equivalent to $\lexists[x < y+1]$.
+quantification, using the equivalence, $\bexists{x < y}{!A(x)} \liff
+\lnot \bforall{x < y}{\lnot !A(x)}$. Note that, for example, a bounded
+quantifier of the form $\bexists{x \leq y}{\dots x\dots}$ is
+equivalent to $\bexists{x < y+1}{\dots x \dots}$.
 
 Another useful primitive recursive function is:
 \begin{enumerate}

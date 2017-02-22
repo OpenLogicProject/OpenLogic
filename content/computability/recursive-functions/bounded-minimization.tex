@@ -33,7 +33,7 @@ $m_R(y+1, \vec{z}) = y$. (c) There is no $x < y+1$ such that $R(x,
 m_R(0, \vec{z}) & = 0\\
 m_R(y+1, \vec{z}) & =
 \begin{cases}
-m_R(y, \vec{z}) & \text{if $\lexists[x < y][R(x, \vec{z})]$} \\
+m_R(y, \vec{z}) & \text{if $\bexists{x < y}{R(x, \vec{z})}$} \\
 y & \text{otherwise, provided $R(y, \vec{z})$}\\
 0 & \text{otherwise.}
 \end{cases}
@@ -59,14 +59,14 @@ the following are all primitive recursive:
 \begin{enumerate}
 \item The relation ``$x$ divides $y$'', written $x \mid y$, defined by
 \[
-x \mid y \defiff \lexists[z \leq y][(x \cdot z) = y].
+x \mid y \defiff \bexists{z \leq y}{(x \cdot z) = y}.
 \]
 
 \item The relation $\fn{Prime}(x)$, which holds iff $x$ is prime,
   defined by
 \[
-\fn{Prime}(x) \defiff (x \geq 2 \land \lforall[y \leq x][(y \mid x \lif y
-  = 1 \lor y = x))].
+\fn{Prime}(x) \defiff (x \geq 2 \land \bforall{y \leq x}{(y \mid x \lif y
+  = 1 \lor y = x))}.
 \]
 \item The function $\fn{nextPrime(x)}$, which returns the first prime
   number larger than $x$, defined by
