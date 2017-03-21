@@ -1,0 +1,200 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: non-standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{mdq}
+\section{Models of $\Th{Q}$}
+
+\begin{explain}
+We know that there are non-standard !!{structure}s that make the same
+!!{sentence}s true as~$\Struct{N}$ does, i.e., is a model
+of~$\Th{TA}$. Since $\Sat{N}{\Th{Q}}$, any model of~$\Th{TA}$ is also
+a model of~$\Th{Q}$. $\Th{Q}$ is much weaker than~$\Th{TA}$, e.g.,
+$\Th{Q} \Proves/ \lforall[x][\lforall[y][\eq[(x +
+      y)][(y+x)]]]$. Weaker theories are easier to satisfy: they have
+more models. E.g., $\Th{Q}$ has models which make
+$\lforall[x][\lforall[y][\eq[(x + y)][(y+x)]]]$ false, but those
+cannot also be models of~$\Th{TA}$, or $\Th{PA}$ for that matter.
+Models of $\Th{Q}$ are also relatively simple: we can specify them
+explicitly.
+\end{explain}
+
+\begin{ex}
+\ollabel{ex:model-K-of-Q}
+Consider the !!{structure}~$\Struct{K}$ with domain $\Domain{K} = \Nat
+\cup \{a\}$ and interpretations
+\begin{align*}
+  \Assign{\Obj{0}}{K} & = 0\\
+  \Assign{\prime}{K}(x) & =
+  \begin{cases}
+    x+1 & \text{if $x\in \Nat$}\\
+    a & \text{if $x = a$}
+  \end{cases}\\
+  \Assign{+}{K}(x, y) & =
+  \begin{cases}
+    x+y & \text{if $x$, $y \in\Nat$}\\
+    a & \text{otherwise}
+  \end{cases}\\
+  \Assign{\times}{K}(x, y) & =
+  \begin{cases}
+    xy & \text{if $x$, $y \in\Nat$}\\
+    a & \text{otherwise}\\
+  \end{cases}\\
+  \Assign{<}{K} & =
+  \Setabs{\tuple{x,y}}{x, y \in \Nat \text{ and } x<y} \cup
+  \Setabs{\tuple{x,a}}{n \in \Domain{K}}
+\end{align*}
+To show that $\Sat{K}{\Th{Q}}$ we have to verify that all axioms
+of~$\Th{Q}$ are true in~$\Struct{K}$.  For convenience, let's write
+$x^\nssucc$ for $\Assign{\prime}(x)$ (the ``successor'' of $x$
+in~$\Struct{K}$), $x \nsplus y$ for $\Assign{+}{K}(x, y)$ (the ``sum''
+of $x$ and $y$ in~$\Struct{K}$, $x \nstimes y$ for
+$\Assign{\times}{K}(x, y)$ (the ``product'' of $x$ and~$y$
+in~$\Struct{K}$), and $x \nsless y$ for $\tuple{x,y} \in
+\Assign{<}{K}$. With these abbreviations, we can give the operations
+in~$\Struct{K}$ more perspicuously as
+\[
+\begin{array}{c|c}
+  x & x^\nssucc \\
+  \hline
+  n & n+1 \\
+  a & a
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  x \nsplus y & m & a \\
+  \hline
+  n & n+m & a \\
+  a & a & a \\
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  x \nstimes y & m & a \\
+  \hline
+  n & nm & a \\
+  a & a & a \\
+\end{array}
+\]
+We have $n \nsless m$ iff $n<m$ for $n$, $m \in \Nat$ and $x \nsless
+a$ for all~$x \in \Domain{K}$.
+
+$\Sat{K}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}$
+since $\nssucc$ is !!{injective}. $\Sat{K}{\lforall[x][\eq/[\Obj 0][x']]}$
+since $0$ is not a $\nssucc$-successor
+in~$\Struct{K}$. $\Sat{N}{\lforall[x][(\eq/[x][\Obj 0] \lif
+    \lexists[y][\eq[x][y']])]}$ since for every $n>0$, $n = (n-1)^\nssucc$,
+and $a = a^\nssucc$.
+
+$\Sat{K}{\lforall[x][\eq[(x + \Obj 0)][x]]}$ since $n \nsplus 0 = n+0 =
+n$, and $a\nsplus 0 = a$ by definition
+of~$\nsplus$. $\Sat{K}{\lforall[x][\lforall[y][\eq[(x + y')][(x +
+        y)']]]}$ is a bit trickier.  If $n$, $m$ are both standard, we have:
+\begin{align*}
+(n \nsplus m^\nssucc) & = (n+m') = (n+m)' = (n \nsplus m)^\nssucc  
+\intertext{since $\nsplus$ and $^\nssucc$ agree with $+$ and $\prime$ on
+  standard numbers.  Now suppose $x \in \Domain{K}$. Then}
+(x \nsplus a^\nssucc) & = (x \nsplus a) = a = a^\nssucc = (x \nsplus a)^\nssucc
+\intertext{The remaining case is if $y \in \Domain{K}$ but $x =
+  a$. Here we also have to distinguish cases according to whether $y =
+  n$ is standard or $y = b$:}
+(a \nsplus n^\nssucc) & = (a \nsplus (n+1)) = a = a^\nssucc = (x \nsplus n)^\nssucc\\
+(a \nsplus a^\nssucc) & = (a \nsplus a) = a = a^\nssucc = (x \nsplus a)^\nssucc
+\end{align*}
+This is of course a bit more detailed than needed. For instance, since
+$a \nsplus z = a$ whatever $z$ is, we can immediately conclude $a \nsplus
+a^\nssucc = a$. The remaining axioms can be verified the same way.
+
+$\Struct{K}$ is thus a model of~$\Th{Q}$. Its ``addition''~$\nsplus$
+is also commutative. But there are other sentences true
+in~$\Struct{N}$ but false in~$\Struct{K}$, and vice versa. For
+instance, $a \nsless a$, so $\Sat{K}{\lexists[x][x < x]}$ and
+$\Sat/{K}{\lforall[x][\lnot x<x]}$. This shows that $\Th{Q} \Proves/
+\lforall[x][\lnot x < x]$.
+\end{ex}
+
+\begin{prob}
+Prove that $\Struct{K}$ from \olref[mod][mar][mdq]{ex:model-K-of-Q}
+satisifies the remaining axioms of~$\Th{Q}$,
+\begin{align*}
+  & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\
+  & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]] \tag{$!Q_7$}\\
+  & \lforall[x][\lforall[y][(x < y \liff \lexists[z][(x + z' = y)])]] \tag{$!Q_8$}
+\end{align*}
+Find !!a{sentence} only involving~$\prime$ true in~$\Struct{N}$ but
+false in~$\Struct{K}$.
+\end{prob}
+
+\begin{ex}
+\ollabel{ex:model-L-of-Q} Consider the !!{structure}~$\Struct{L}$ with
+domain $\Domain{L} = \Nat \cup \{a, b\}$ and interpretations
+$\Assign{\prime}{L} = \nssucc$, $\Assign{+}{L} = \nsplus$ given by
+\[
+\begin{array}{c|c}
+  x & x^\nssucc \\
+  \hline
+  n & n+1 \\
+  a & a\\
+  b & b
+\end{array}
+\qquad
+\begin{array}{c|ccc}
+  x \nsplus y & m & a & b\\
+  \hline
+  n & n+m & b & a\\
+  a & a & b & a\\
+  b & b & a & b
+\end{array}
+\]
+Since $\nssucc$ is !!{injective}, $0$ is not in its range, and every $x
+\in \Domain{L}$ other than~$0$ is, axioms $!Q_1$--$!Q_3$ are true
+in~$\Struct{L}$. For any $x$, $x \nsplus 0 = x$, so $!Q_4$ is true as
+well.  For $!Q_5$, consider $x \nsplus y^\nssucc$ and $(x \nsplus
+y)^\nssucc$. They are equal if $x$ and $y$ are both standard, since
+then $\nssucc$ and $\nsplus$ agree with $\prime$ and $+$. If $x$ is
+non-standard, we have
+\begin{align*}
+  a \nsplus y^\nssucc & = a = a^\nssucc = (a \nsplus y)^\nssucc\\
+  b \nsplus y^\nssucc & = b = b^\nssucc = (b \nsplus y)^\nssucc
+  \intertext{If $x$ is standard, but $y$ is non-standard, we have}
+  n \nsplus a^\nssucc & = n \nsplus a = b = b^\nssucc = (n \nsplus a)^\nssucc\\
+  n \nsplus b^\nssucc & = n \nsplus b = a = a^\nssucc = (n \nsplus b)^\nssucc
+\end{align*}
+So, $\Sat{L}{!Q_5}$. However, $a \nsplus 0 \neq 0 \nsplus a$, so
+$\Sat/{L}{\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]}$.
+\end{ex}
+
+\begin{prob}
+Expand $\Struct{L}$ of \olref[mod][mar][mdq]{ex:model-L-of-Q} to
+include $\nstimes$ and $\nsless$ that interpret~$\times$ and $<$. Show
+that your structure satisifies the remaining axioms of~$\Th{Q}$,
+\begin{align*}
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\ &
+  \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]
+  \tag{$!Q_7$}\\ & \lforall[x][\lforall[y][(x < y \liff \lexists[z][(x
+        + z' = y)])]] \tag{$!Q_8$}
+\end{align*}
+\end{prob}
+
+\begin{prob}
+In $\Struct{L}$ of \olref[mod][mar][mdq]{ex:model-L-of-Q}, $a^\nssucc
+= a$ and $b^\nssucc = b$. Is there a model of~$\Th{Q}$ in which
+$a^\nssucc = b$ and $b^\nssucc = a$?
+\end{prob}
+
+\begin{explain}
+We've explicitly constructed models of~$\Th{Q}$ in which the
+non-standard !!{element}s live ``beyond'' the standard elements. In
+fact, that much is required by the axioms. A non-standard
+!!{element}~$x$ cannot be $\nsless 0$. Otherwise, for some $z$, $x
+\nsplus z^\nssucc = 0$ by~$!Q8$. But then $0 = x \nsplus z^\nssucc =
+(x \nsplus z)^\nssucc$ by~$!Q_5$, contradicting~$!Q_2$. Also, for
+every $n$, $\Th{Q} \Proves \lforall[x][(x < \num{n}' \lif
+  (\eq[x][\num{0}] \lor \eq[x][\num{1}] \lor \dots \lor
+  \eq[x][\num{n}]))]$, so we can't have $a \nsless n$ for any~$n>0$.
+\end{explain}
+
+\end{document}

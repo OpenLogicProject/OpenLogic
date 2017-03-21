@@ -271,7 +271,7 @@
 % - `\Assign{R}{M}` - Assignment (value of) of a constant/predicate symbol
 % in a structure; e.g., `\Assign{R}{M}` produces $R^\mathfrak{M}$.
 
-\DeclareDocumentCommand \Assign { m m }{#1^{\Struct #2}}
+\DeclareDocumentCommand \Assign { m m }{\mathord{#1^{\Struct #2}}}
 
 % - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
 % arguments (term and structure) and one optional argument (variable
@@ -347,6 +347,16 @@
 % - `\Expan{M}{R}`: expansion of a structure by a relation (etc.)
 
 \DeclareDocumentCommand \Expan { m m } {(\Struct{#1}, #2)}
+
+% `\nssucc`, `\nsplus`, `\nstimes`, `\nsless`: non-standard
+% arithmetical operations
+
+\DeclareDocumentMacro \nszero {\mathbf{z}}
+\DeclareDocumentMacro \nssucc {*}
+\DeclareDocumentMacro \nsplus {\oplus}
+\DeclareDocumentMacro \nstimes {\otimes}
+\RequirePackage{stmaryrd}
+\DeclareDocumentMacro \nsless {\varolessthan}
 
 
 % Recursion-theoretic Notions and Symbols
@@ -696,6 +706,21 @@
     \IfNoValueTF {#1} 
         { \mathrm{Frm} }
         { \mathrm{Frm}({\Lang #1}) }
+}
+
+% - `\Trm2[L]`: the set of second-order terms (of a language)
+
+\DeclareDocumentCommand \Trm { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Trm}^2 }
+        { \mathrm{Trm}^2({\Lang #1}) }
+}
+
+% - `\Frm2[L]`: the set of second-order formulas (of a language)
+\DeclareDocumentCommand \Frm { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Frm}^2 }
+        { \mathrm{Frm}^2({\Lang #1}) }
 }
 
 % - `\SubFrm{!A}`: the set of subformulas of a formula (mandatory

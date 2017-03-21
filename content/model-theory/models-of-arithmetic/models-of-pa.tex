@@ -1,0 +1,260 @@
+% Part: first-order-logic
+% Chapter: models-of-arithmetic
+% Section: models-of-pa
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{mpa}
+\section{Models of $\Th{PA}$}
+
+\begin{explain}
+Any non-standard model of~$\Th{TA}$ is also one of~$\Th{PA}$. We know
+that non-standard models of~$\Th{TA}$ and hence of~$\Th{PA}$ exist. We
+also know that such non-standard models contain non-standard
+``numbers,'' i.e., !!{element}s of the domain that are ``beyond'' all
+the standard ``numbers.''  But how are they arranged? How many are
+there? We've seen that models of the weaker theory~$\Th{Q}$ can
+contain as few as a single non-standard number. But these simple
+!!{structure}s are not models of $\Th{PA}$ or $\Th{TA}$.
+
+The key to understanding the structure of models of $\Th{PA}$ or
+$\Th{TA}$ is to see what facts are !!{derivable} in these theories.
+For instance, already $\Th{PA}$ proves that $\lforall[x][\eq/[x][x']]$
+and $\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]$, so this rules out
+simple structures (in which these !!{sentence}s are false) as models
+of~$\Th{PA}$.
+
+Suppose~$\Struct{M}$ is a model of~$\Th{PA}$. Then if $\Th{PA} \Proves
+!A$, $\Sat{M}{!A}$.  Let's again use $\nszero$ for
+$\Assign{\Obj{0}}{M}$, $\nssucc$ for $\Assign{\prime}{M}$, $\nsplus$
+for $\Assign{+}{M}$, $\nstimes$ for $\Assign{\times}{M}$, and
+$\nsless$ for $\Assign{<}{M}$. Any !!{sentence}~$!A$ then states some
+condition about $\nszero$, $\nssucc$, $\nsplus$, $\nstimes$, and
+$\nsless$, and if $\Sat{M}{!A}$ that condition must be satisfied. For
+instance, if $\Sat{M}{!Q_1}$, i.e.,
+$\Sat{M}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}$,
+then $\nssucc$ must be !!{injective}.
+\end{explain}
+
+\begin{prop}
+In $\Struct{M}$, $\nsless$ is a linear strict order, i.e., it
+satisfies:
+\begin{enumerate}
+\item Not $x \nsless x$ for any~$x \in \Domain{M}$.
+\item If $x \nsless y$ and $y \nsless z$ then $x \nsless z$.
+\item For any $x \neq y$, $x \nsless y$ or $y \nsless x$
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+$\Th{PA}$ proves:
+\begin{enumerate}
+\item $\lforall[x][\lnot x < x]$
+\item $\lforall[x][\lforall[y][\lforall[z][((x < y \land y < z) \lif x < z)]]]$
+\item $\lforall[x][\lforall[y][((x < y \lor y < x) \lor \eq[x][y]))]]$
+\end{enumerate}
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:M-discrete} $\nszero$ is the least !!{element}
+of~$\Domain{M}$ in the $\nsless$-ordering. For any $x$, $x \nsless
+x^\nssucc$, and $x^\nssucc$ is the $\nsless$-least !!{element} with
+that property.  For any $x$, there is a unique $y$ such that
+$y^\nssucc = x$. (We call $y$ the ``predecessor'' of~$x$
+in~$\Struct{M}$, and denote it by~$^\nssucc x$.)
+\end{prop}
+
+\begin{proof}
+Exercise.  
+\end{proof}
+
+\begin{prob}
+Find !!{sentence}s in~$\Lang{L_A}$ !!{derivable} in~$\Th{PA}$ (and
+hence true in~$\Struct{N}$) which guarantee the properties of
+$\nszero$, $\nssucc$, and $\nsless$ in
+\olref[mod][mar][mpa]{prop:M-discrete}
+\end{prob}
+
+\begin{prop}
+All standard !!{element}s of~$\Struct{M}$ are less than (according
+to~$\nsless$) than all non-standard !!{element}s.
+\end{prop}
+
+\begin{proof}
+We'll use $n$ as short for $\Value{\num{n}}{M}$, a standard
+!!{element} of~$\Struct{M}$.  Already $\Th{Q}$ proves that, for any~$n
+\in \Nat$, $\lforall[x][(x < \num{n}' \lif (\eq[x][\num{0}] \lor
+  \eq[x][\num{1}] \lor \dots \lor \eq[x][\num{n}]))]$. There are no
+!!{element}s that are $\nsless \nszero$. So if $n$ is standard and $x$
+is non-standard, we cannot have $x \nsless n$. By definition, a
+non-standard element is one that isn't $\Value{\num{n}}{M}$ for any~$n
+\in \Nat$, so $x \neq n$ as well. Since $\nsless$ is a linear order,
+we must have $n \nsless x$.
+\end{proof}
+
+\begin{prop}
+Every nonstandard !!{element}~$x$ of~$\Domain{M}$ is an element of the subset
+\[
+\dots ^{\nssucc\nssucc\nssucc}x \nsless ^{\nssucc\nssucc}x \nsless
+^{\nssucc}x \nsless x \nsless x^{\nssucc} \nsless x^{\nssucc\nssucc}
+\nsless x^{\nssucc\nssucc\nssucc} \nsless \dots
+\]
+We call this subset the \emph{block of~$x$} and write it as $[x]$. It
+has no least and no greatest !!{element}. It can be characterized as
+the set of those $y \in \Domain{M}$ such that, for some standard~$n$,
+$x \nsplus n = y$ or $y \nsplus n = x$.
+\end{prop}
+
+\begin{proof}
+Clearly, such a set~$[x]$ always exists since every !!{element}~$y$ of
+$\Domain{M}$ has a unique successor~$y^\nssucc$ and unique
+predecessor~$^\nssucc y$. For successive !!{element}s $y$, $y^\nssucc$
+we have $y \nsless y^\nssucc$ and $y^\nssucc$ is the $\nsless$-least
+!!{element} of~$\Domain{M}$ such that $y$ is $\nsless$-less than it.
+Since always $^\nssucc y \nsless y$ and $y \nsless y^\nssucc$, $[x]$
+has no least or greatest !!{element}. If $y \in [x]$ then $x \in [y]$,
+for then either $y^{\nssucc\dots\nssucc} = x$ or
+$x^{\nssucc\dots\nssucc} = y$.  If $y^{\nssucc\dots\nssucc} = x$ (with
+$n$ $\nssucc$'s), then $y \nsplus n = x$ and conversely, since
+$\Th{PA} \Proves \lforall[x][\eq[x^{\prime\dots\prime}][(x +
+    \num{n})]]$ (if $n$ is the number of~$\prime$'s).
+\end{proof}
+
+\begin{prop}
+If $[x] \neq [y]$ and $x \nsless y$, then for any $u \in [x]$ and any
+$v \in [y]$, $u \nsless v$.
+\end{prop}
+
+\begin{proof}
+Note that $\Th{PA} \Proves \lforall[x][\lforall[y][(x < y \lif (x' < y
+    \lor x' = y))]]$. Thus, if $u \nsless v$, we also have $u \nsplus
+n^\nssucc \nsless v$ for any~$n$ if $[u] \neq [v]$.
+
+Any $u \in [x]$ is $\nsless y$: $x \nsless y$ by assumption. If $u
+\nsless x$, $u \nsless y$ by transitivity. And if $x \nsless u$ but $u
+\in [x]$, we have $u = x\nsplus n^\nssucc$ for some~$n$, and so $u
+\nsless y$ by the fact just proved.
+  
+Now suppose that $v \in [y]$ is $\nsless y$, i.e., $v \nsplus
+m^\nssucc = y$ for some standard~$m$. This rules out $v \nsless x$,
+otherwise $y = v \nsplus m^\nssucc \nsless x$. Clearly also, $x \neq
+v$, otherwise $x \nsplus m^\nssucc = v \nsplus m^\nssucc = y$ and we
+would have $[x] = [y]$. So, $x \nsless v$. But then also $x \nsplus
+n^\nssucc \nsless v$ for any~$n$. Hence, if $x \nsless u$ and $u \in
+[x]$, we have $u \nsless v$. If $u \nsless x$ then $u \nsless v$ by
+transitivity.
+
+Lastly, if $y \nsless v$, $u \nsless v$ since, as we've shown, $u
+\nsless y$ and $y \nsless v$.
+\end{proof}
+
+\begin{cor}
+If $[x] \neq [y]$, $[x] \cap [y] = \emptyset$.
+\end{cor}
+
+\begin{proof}
+Suppose $z \in [x]$ and $x \nsless y$. Then $z \nsless u$ for all $u
+\in [y]$. If $z \in [y]$, we would have $z \nsless z$. Similarly if $y
+\nsless x$.
+\end{proof}
+
+\begin{explain}
+This means that the blocks themselves can be ordered in a way that
+respects $\nsless$: $[x] \nsless [y]$ iff $x \nsless y$, or,
+equivalently, if $u \nsless v$ for any $u \in [x]$ and $v \in [y]$.
+Clearly, the standard block $[0]$ is the least block. It intersects
+with no non-standard block, and no two non-standard blocks intersect
+either. Specifically, you cannot ``reach'' a different block by taking
+repeated successors or predecessors.
+\end{explain}
+
+\begin{prop}
+If $x$ and $y$ are non-standard, then $x \nsless x \nsplus y$ and $x
+\nsplus y \notin [x]$.
+\end{prop}
+
+\begin{proof}
+If $y$ is nonstandard, then $y \neq \nszero$. $\Th{PA} \Proves
+\lforall[x][(y \neq \Obj{0} \lif x < (x+y))]$.  Now suppose $x
+\nsplus y \in [x]$. Since $x \nsless x \nsplus y$, we would have $x
+\nsplus n^\nssucc = x \nsplus y$. But $\Th{PA} \Proves
+\lforall[x][\lforall[y][\lforall[z][(\eq[(x+y)][(x+z)] \lif y = z)]]]$
+(the cancellation law for addition). This would mean $y = n^\nssucc$
+for some standard~$n$; but $y$ is assumed to be non-standard.
+\end{proof}
+
+\begin{prop}
+There is no least non-standard block.
+\end{prop}
+
+\begin{proof}
+$\Th{PA} \Proves \lforall[x][\lexists[y][(\eq[(y+y)][x] \lor
+      \eq[(y+y)'][x])]]$, i.e., that every $x$ is divisible by~$2$
+  (possibly with remainder~$1$. If $x$ is non-standard, so is~$y$. By
+  the preceding proposition, $y \nsless y \nsplus y$ and $y \nsplus y
+  \notin [y]$. Then also $y \nsless (y \nsplus y)^\nssucc$ and $(y
+  \nsplus y)^\nssucc \notin [y]$. But $x = y \nsplus y$ or $x = (y
+  \nsplus y)^\nssucc$, so $y \nsless x$ and $y \notin [x]$.
+\end{proof}
+
+\begin{prop}
+There is no largest block.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Show that in a non-standard model of~$\Th{PA}$, there is no largest
+block.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:blocks-dense}
+The ordering of the blocks is dense. That is, if $x \nsless y$ and
+$[x] \neq [y]$, then there is a block $[z]$ distinct from both that is
+between them.
+\end{prop}
+
+\begin{proof}
+Suppose $x \nsless y$. As before, $x \nsplus y$ is divisible by two
+(possibly with remainder): there is a $z \in \Domain{M}$ such that
+either $x \oplus y = z \oplus z$ or $x \oplus y = (z \oplus
+z)^\nssucc$. The element $z$ is the ``average'' of $x$ and~$y$, and $x
+\nsless z$ and $z \nsless y$.
+\end{proof}
+
+\begin{prob}
+Write out a detailed proof of
+\olref[mod][mar][mpa]{prop:blocks-dense}. Which !!{sentence} must
+$\Th{PA}$ !!{derive} in to guarantee the existence of~$z$? Why is $x
+\nsless z$ and $z \nsless y$, and why is $[x] \neq [z]$ and $[z] \neq
+        [y]$?
+\end{prob}
+
+\begin{explain}
+The non-standard blocks are therefore ordered like the rationals: they
+form !!a{denumerable} linear ordering without endpoints.  One can show
+that any two such !!{denumerable} orderings are isomorphic. It follows
+that for any two !!{enumerable} non-standard models $\Struct{M}_1$ and
+$\Struct{M_2}$ of true arithmetic, their reducts to the language
+containing $<$ and $=$ only are isomorphic. Indeed, an isomorphism $h$
+can be defined as follows: the standard parts of $\Struct{M_1}$ and
+$\Struct{M_2}$ are isomorphic to the standard model $\Struct{N}$ and
+hence to each other. The blocks making up the non-standard part are
+themselves ordered like the rationals and therefore isomorphic; an
+isomorphism of the blocks can be extended to an isomorphism
+\emph{within} the blocks by matching up arbitrary elements in each,
+and then taking the image of the successor of $x$ in $\Struct{M_1}$ to
+be the successor of the image of $x$ in $\Struct{M_2}$. Note that it
+does \emph{not} follow that $\mathfrak{M}_1$ and $\mathfrak{M}_2$ are
+isomorphic in the full language of arithmetic (indeed, isomorphism is
+always relative to !!a{language}), as there are non-isomorphic ways to
+define addition and multiplication over $\Domain{M_1}$ and
+$\Domain{M_2}$. (This also follows from a famous theorem due to Vaught
+that the number of countable models of a complete theory cannot be~2.)
+\end{explain}
+\end{document}

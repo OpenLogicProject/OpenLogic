@@ -1,0 +1,161 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{stm}
+\section{Standard Models}
+
+\begin{defn}
+A !!{structure} for $\Lang{L_A}$ is \emph{standard} if it is
+isomorphic to~$\Struct{N}$.
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:standard-domain} If !!a{structure}~$\Struct{M}$ standard,
+its domain is the set of values of the standard numerals, i.e.,
+\[
+\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}
+\]
+\end{prop}
+
+\begin{proof}
+Clearly, every $\Value{\num{n}}{M} \in \Domain{M}$. We just have to
+show that every $x \in \Domain{M}$ is equal to $\Value{\num{n}}{M}$
+for some~$n$.  Since $\Struct{M}$ is standard, it is isomorphic
+to~$\Struct{N}$. Suppose $g\colon \Nat \to \Domain{M}$ is an
+isomorphism. Then $g(n) = g(\Value{\num{n}}{N}) =
+\Value{\num{n}}{M}$. But for every $x \in \Domain{M}$, there is an~$n
+\in \Nat$ such that $g(n) = x$, since $g$ is !!{surjective}.
+\end{proof}
+
+\begin{explain}
+If a structure~$\Struct{M}$ for $\Lang{L_A}$ is standard, the elements
+of its !!{domain} can all be named by the standard numerals $\num{0}$,
+$\num{1}$, $\num{2}$, \dots, i.e., the terms $\Obj{0}$, $\Obj{0}'$,
+$\Obj{0}''$, etc. Of course, this does not mean that the !!{element}s
+of $\Domain{M}$ \emph{are} the numbers, just that we can pick them out
+the same way we can pick out the numbers in~$\Domain{N}$.
+\end{explain}
+
+\begin{prob}
+Show that the converse of \olref[mod][mar][stm]{prop:standard-domain}
+is false, i.e., give an example of !!a{structure}~$\Struct{M}$ with
+$\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$ that is not
+isomorphic to~$\Struct{N}$.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:thq-standard}
+If $\Sat{M}{\Th{Q}}$, and $\Domain{M} = \Setabs{\Value{\num{n}}{M}}{n
+  \in \Nat}$, then $\Struct{M}$ is standard.
+\end{prop}
+
+\begin{proof}
+We have to show that $\Struct{M}$ is isomorphic
+to~$\Struct{N}$. Consider the function $g\colon \Nat \to \Domain{M}$
+defined by $g(n) = \Value{\num{n}}{M}$. By the hypothesis, $g$ is
+!!{surjective}.  It is also !!{injective}: $\Th{Q} \Proves
+\eq/[\num{n}][\num{m}]$ whenever $n \neq m$. Thus, since
+$\Sat{M}{\Th{Q}}$, $\Sat{M}{\eq/[\num{n}][\num{m}]}$, whenever $n \neq
+m$. Thus, if $n \neq m$, then $\Value{\num{n}}{M} \neq
+\Value{\num{m}}{M}$, i.e., $g(n) \neq g(m)$.
+
+We also have to verify that $g$ is an isomorphism.
+\begin{enumerate}
+\item We have $g(\Assign{\Obj{0}}{N}) = g(0)$ since,
+  $\Assign{\Obj{0}}{N} = 0$. By definition of~$g$, $g(0) =
+  \Value{\num{0}}{M}$. But $\num{0}$ is just $\Obj{0}$, and the value
+  of a term which happens to be a !!{constant} is given by what the
+  !!{structure} assigns to that !!{constant}, i.e.,
+  $\Value{\Obj{0}}{M} = \Assign{\Obj{0}}{M}$. So we have
+  $g(\Assign{\Obj{0}}{N}) = \Assign{\Obj{0}}{M}$ as required.
+\item $g(\Assign{\prime}{N}(n)) = g(n+1)$, since $\prime$ in
+  $\Struct{N}$ is the successor function on~$\Nat$. Then, $g(n+1) =
+  \Value{\num{n+1}}{M}$ by definition of~$g$. But $\num{n+1}$ is the
+  same term as $\num{n}'$, so $\Value{\num{n+1}}{M} =
+  \Value{\num{n}'}{M}$. By the definition of the value function, this
+  is $= \Assign{\prime}{M}(\Value{\num{n}}{M})$. Since
+    $\Value{\num{n}}{M} = g(n)$ we get $g(\Assign{\prime}{N}(n)) =
+  \Assign{\prime}{M}(g(n))$.
+\item $g(\Assign{+}{N}(n,m)) = g(n+m)$, since $+$ in $\Struct{N}$ is
+  the addition function on~$\Nat$. Then, $g(n+m) =
+  \Value{\num{n+m}}{M}$ by definition of~$g$. But $\Th{Q} \Proves
+  \num{n+m} = (\num{n} + \num{m})$, so $\Value{\num{n+m}}{M} =
+  \Value{\num{n}+\num{m}}{M}$. By the definition of the value
+  function, this is $=
+  \Assign{+}{M}(\Value{\num{n}}{M},\Value{\num{m}}{M})$. Since
+    $\Value{\num{n}}{M} = g(n)$ and $\Value{\num{m}}{M} = g(m)$, we
+    get $g(\Assign{+}{N}(n, m)) = \Assign{+}{M}(g(n), g(m))$.
+\item $g(\Assign{\times}{N}(n, m)) = \Assign{\times}{M}(g(n), g(m))$:
+  Exercise.
+\item $\tuple{n,m} \in \Assign{<}{N}$ iff $n < m$. If $n < m$, then
+  $\Th{Q} \Proves \num{n} < \num{m}$, and also $\Sat{M}{\num{n} <
+  \num{m}}$. Thus $\tuple{\Value{\num{n}}{M}, \Value{\num{m}}{M}} \in
+  \Assign{<}{M}$, i.e., $\tuple{g(n), g(m)} \in \Assign{<}{M}$. If $n
+  \not< m$, then $\Th{Q} \Proves \lnot \num{n} < \num{m}$, and
+  consequently $\Sat/{M}{\num{n} < \num{m}}$. Thus, as before,
+  $\tuple{g(n), g(m)} \notin \Assign{<}{M}$. Together, we get:
+  $\tuple{n,m} \in \Assign{<}{N}$ iff $\tuple{g(n), g(m)} \in
+  \Assign{<}{M}$.
+\end{enumerate}
+\end{proof}
+
+\begin{explain}
+The function~$g$ is the most obvious way of defining a mapping from
+$\Nat$ to the domain of any other !!{structure}~$\Struct{M}$ for
+$\Lang{L_A}$, since every such $\Struct{M}$ contains !!{element}s named
+by $\num{0}$, $\num{1}$, $\num{2}$, etc. So it isn't surprising that
+if $\Struct{M}$ makes at least some basic statements about the
+$\num{n}$'s true in the same way that~$\Struct{N}$ does, and $g$ is
+also bijective, then $g$ will turn into an isomorphism.  In fact, if
+$\Domain{M}$ contains no !!{element}s other than what the $\num{n}$'s
+name, it's the only one.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:thq-unique-iso} If $\Struct{M}$ is standard, then $g$ from
+the proof of \olref{prop:thq-standard} is the only isomorphism from $\Struct{N}$ to~$\Struct{M}$.
+\end{prop}
+
+\begin{proof}
+Suppose $h\colon \Nat \to \Domain{M}$ is an isomorphism between
+$\Struct{N}$ and~$\Struct{M}$. We show that $g = h$ by induction
+on~$n$. If $n = 0$, then $g(0) = \Assign{\Obj{0}}{M}$ by definition
+of~$g$. But since $h$ is an isomorphism, $h(0) =
+h(\Assign{\Obj{0}}{N}) =\Assign{\Obj{0}}{M}$, so $g(0) = h(0)$.
+
+Now consider the case for $n+1$. We have
+\begin{align*}
+  g(n+1) & = \Value{\num{n+1}}{M} \text{ by definition of~$g$}\\
+  & = \Value{\num{n}'}{M}\\
+  & = \Assign{\prime}{M}(\Value{\num{n}}{M}) \\
+  & = \Assign{\prime}{M}(g(n))  \text{ by definition of~$g$}\\
+  & = \Assign{\prime}{M}(h(n)) \text{ by induction hypothesis}\\
+  & = h(\Assign{\prime}{N}(n)) \text{ since $h$ is an isomorphism}\\
+  & = h(n+1)
+\end{align*}
+\end{proof}
+
+\begin{explain}
+For any !!{denumerable} set~$X$, there's a !!{bijection} between
+$\Nat$ and $X$, so every such set~$X$ is potentially the !!{domain} of
+a standard model. In fact, once you pick an object $z \in X$ and a
+suitable function $s\colon X \to X$ as $\Assign{\Obj{0}}{X}$ and
+$\Assign{\prime}{X}$, the interpretation of $+$, $\times$, and $<$ is
+already fixed.  Only functions~$s = \Assign{\prime}{X}$ that are both
+!!{injective} and !!{surjective} are suitable in a standard model.  It
+has to be !!{injective} since the successor function in~$\Struct{N}$
+is, and that $\prime$ is !!{injective} is expressed by !!a{sentence}
+true in $\Struct{N}$ which $\Struct{X}$ thus also has to make true. It
+has to be !!{surjective} because otherwise there would be some $x \in
+X$ not in the domain of~$s$, i.e., the !!{sentence}
+$\lforall[x][\lexists[y][\eq[y'][x]]]$ would be false---but it is true
+in~$\Struct{N}$.
+\end{explain}
+
+
+\end{document}

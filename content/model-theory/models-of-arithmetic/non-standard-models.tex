@@ -1,0 +1,115 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: non-standard-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{nst}
+\section{Non-Standard Models}
+
+\begin{explain}
+We call a !!{structure} for $\Lang{L_A}$ standard if it is isomorphic
+to~$\Struct{N}$. If a !!{structure} isn't isomorphic to~$\Struct{N}$,
+it is called non-standard.
+\end{explain}
+
+\begin{defn}
+A !!{structure}~$\Struct{M}$ for $\Lang{L_A}$ is \emph{non-standard}
+if it is not isomorphic to~$\Struct{N}$. The !!{element}s $x \in
+\Domain{M}$ which are equal to $\Value{M}{\num{n}}$ for some $n \in
+\Nat$ are called \emph{standard numbers} (of $\Struct{M}$), and those
+not, \emph{non-standard numbers}.
+\end{defn}
+
+\begin{explain}
+By \olref[stm]{prop:standard-domain}, any standard !!{structure}
+for~$\Lang{L_A}$ contains only standard !!{element}s. Consequently, a
+non-standard !!{structure} must contain at least one non-standard
+element. In fact, the existence of a non-standard !!{element}
+guarantees that the !!{structure} is non-standard.
+\end{explain}
+
+\begin{prop}
+If !!a{structure}~$\Struct{M}$ for $\Lang{L_A}$ contains a
+non-standard number, $\Struct{M}$ is non-standard.
+\end{prop}
+
+\begin{proof}
+Suppose not, i.e., suppose $\Struct{M}$ standard but contains a
+non-standard number~$x$. Let $g\colon \Nat \to \Domain{M}$ be an
+isomorphism. It is easy to see (by induction on~$n$) that
+$g(\Value{N}{\num{n}}) = \Value{M}{\num{n}}$. In other words, $g$ maps
+standard numbers of~$\Struct{N}$ to standard numbers
+of~$\Struct{M}$. If $\Struct{M}$ contains a non-standard number, $g$
+cannot be !!{surjective}, contrary to hypothesis.
+\end{proof}
+
+\begin{prob}
+Recall that $\Th{Q}$ contains the axioms
+\begin{align*}
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]] \tag{$!Q_1$}\\
+& \lforall[x][\eq/[\Obj 0][x']] \tag{$!Q_2$}\\
+& \lforall[x][(\eq/[x][\Obj 0] \lif \lexists[y][\eq[x][y']])] \tag{$!Q_3$}
+\end{align*}
+Give !!{structure}s~$\Struct{M_1}$, $\Struct{M_2}$, $\Struct{M_3}$ such that
+\begin{enumerate}
+\item $\Sat{M_1}{!Q_1}$, $\Sat{M_1}{!Q_2}$, $\Sat/{M_1}{!Q_3}$;
+\item $\Sat{M_2}{!Q_1}$, $\Sat/{M_2}{!Q_2}$, $\Sat{M_2}{!Q_3}$; and
+\item $\Sat/{M_3}{!Q_1}$, $\Sat{M_3}{!Q_2}$, $\Sat{M_3}{!Q_3}$;
+\end{enumerate}
+Obviously, you just have to specify~$\Assign{\Obj{0}}{M_i}$ and
+$\Assign{\prime}{M_i}$ for each.
+\end{prob}
+
+\begin{explain}
+It is easy enough to specify non-standard !!{structure}s for
+$\Lang{L_A}$. For instance, take the structure with !!{domain}~$\Int$
+and interpret all non-logical symbols as usual. Since negative numbers
+are not values of $\num{n}$ for any~$n$, this structure is
+non-standard. Of course, it will not be a \emph{model} of arithmetic
+in the sense that it makes the same sentences true
+as~$\Struct{N}$. For instance, $\lforall[x][\eq/[x'][\Obj{0}]]$ is
+false.  However, we can prove that non-standard models of arithmetic
+exist easily enough, using the compactness theorem.
+\end{explain}
+
+\begin{prop}
+Let $\Th{TA} = \Setabs{!A}{\Sat{N}{!A}}$ be the theory
+of~$\Th{N}$. $\Th{TA}$ has !!a{enumerable} non-standard model.
+\end{prop}
+
+\begin{proof}
+Expand $\Lang{L_A}$ by a new !!{constant}~$c$ and consider the set of
+!!{sentence}s
+\[
+\Gamma = \Th{TA} \cup \{\eq/[c][\num{0}], \eq/[c][\num{1}],
+\eq/[c][\num{2}], \dots\}
+\]
+Any model~$\Struct{M^c}$ of~$\Gamma$ would contain !!a{element}~$x =
+\Assign{c}{M}$ which is non-standard, since $x \neq
+\Value{M}{\num{n}}$ for all $n \in \Nat$. Also, obviously,
+$\Sat{M^c}{\Th{TA}}$, since $\Th{TA} \subseteq \Gamma$. If we turn
+$\Struct{M^c}$ into a !!{structure}~$\Struct{M}$ for $\Lang{L_A}$
+simply by forgetting about~$c$, its domain still contains the
+non-standard~$x$, and also~$\Sat{M}{\Th{TA}}$. The latter is
+guaranteed since $c$ does not occur in~$\Th{TA}$. So, it suffices to
+show that $\Gamma$ has a model.
+
+We use the compactness theorem to show that~$\Gamma$ has a model. If
+every finite subset of~$\Gamma$ is satisfiable, so
+is~$\Gamma$. Consider any finite subset $\Gamma_0 \subseteq
+\Gamma$. $\Gamma_0$ includes some !!{sentence}s of~$\Th{TA}$ and some
+of the form~$\eq/[c][\num{n}]$, but only finitely many. Suppose $k$ is
+the largest number so that $\eq/[c][\num{k}] \in \Gamma_0$. Define
+$\Struct{N_k}$ by expanding~$\Struct{N}$ to include the
+interpretation~$\Assign{c}{N_k} = k+1$. $\Sat{N_k}{\Gamma_0}$: if $!A
+\in \Th{TA}$, $\Sat{N_k}{!A}$ since $\Struct{N_k}$ is just
+like~$\Struct{N}$ in all respects except~$c$, and $c$ does not occur
+in~$!A$. And $\Sat{N_k}{\eq/[c][\num{n}]}$, since $n \le k$, and
+$\Value{c}{N_k} = k+1$. Thus, every finite subset of~$\Gamma$ is
+satisfiable.
+\end{proof}
+
+\end{document}
