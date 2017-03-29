@@ -1,0 +1,129 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: size-of-domain
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{siz}
+
+\olsection{Describing Infinite and \usetoken{S}{enumerable}
+  \usetoken{P}{domain}}
+
+A set~$M$ is infinite iff there is !!a{injective} function~$f\colon M
+\to M$ with $\dom{f} \subsetneq M$. In first-order logic, we can
+consider a one-place !!{function}~$f$ and say that the
+function~$\Assign{f}{M}$ assigned to it in !!a{structure}~$\Struct{M}$
+is !!{injective} and $\dom{f} \subsetneq \Domain{M}$:
+\[
+\lforall[x][\lforall[y][(\eq[f(x)][f(y)] \to \eq[x][y])]] \land
+\lexists[y][\lforall[x][\eq/[y][f(x)]]]
+\]
+If $\Struct{M}$ satisfies this !!{sentence}, $\Assign{f}{M}:
+\Domain{M} \to \Domain{M}$ is !!{injective}, and so $\Domain{M}$ must
+be infinite. If $\Domain{M}$ is infinite, and hence such a function
+exists, we can let $\Assign{f}{M}$ be that function and $\Struct{M}$
+will satisfy the sentence.  However, this requires that our language
+contains the non-logical symbol~$f$ we use for this purpose. In
+second-order logic, we can simply say that such a function
+\emph{exists}. This no-longer requires~$f$, and we have the
+!!{sentence} in pure second-order logic
+\[
+\fn{Inf} \ident \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
+      \lif \eq[x][y])]] \land \lexists[y][\lforall[x][\eq/[y][u(x)]]])]
+\]
+$\Sat{M}{\fn{Inf}}$ iff $\Domain{M}$ is infinite.  We can then define
+$\fn{Fin} \ident \lnot \fn{Inf}$; $\Sat{M}{\fn{Fin}}$ iff $\Domain{M}$
+is finite. No single !!{sentence} of pure first-order logic can
+express that the !!{domain} is infinite although an infinite set of
+them can. There is no set of !!{sentence}s of pure first-order logic
+that is satisfied in !!a{structure} iff its domain is finite.
+
+\begin{prop}
+$\Sat{M}{\fn{Inf}}$ iff $\Domain{M}$ is infinite.
+\end{prop}
+
+\begin{proof}
+$\Sat{M}{\fn{Inf}}$ iff
+  $\Sat{M}{\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif \eq[x][y])]]
+    \land \lexists[y][\lforall[x][\eq/[y][u(x)]]]}[s]$ for
+  some~$s$. If it does, $s(u)$ is !!a{injective} function, and some $y
+  \in \Domain{M}$ is not in the domain of~$s(u)$. Conversely, if there
+  is !!a{injective} $f\colon \Domain{M} \to \Domain{M}$ with $\dom{f}
+  \subsetneq \Domain{M}$, then $s(u) = f$ is such a variable
+  assignment.
+\end{proof}
+
+A set $M$ is !!{enumerable} if there is an enumeration
+\[
+m_0, m_1, m_2, \dots
+\]
+of its !!{element}s (without repetitions).  Such an enumeration exists
+iff there is !!a{element} $z \in M$ and a function $f\colon M \to M$
+such that $z$, $f(z)$, $f(f(z))$ are all the !!{element}s of~$M$. For
+if the enumeration exists, $z = m_0$ and $f(m_k) = m_{k+1}$ (or
+$f(m_k) = m_k$ if $m_k$ is the last !!{element} of the enumeration)
+are the requisite !!{element} and function. On the other hand, if such
+a $z$ and $f$ exist, then $z$, $f(z)$, $f(f(z))$, \dots, is an
+enumeration of~$M$, and $M$ is !!{enumerable}.  We can express the
+existence of $z$ and $f$ in second-order logic to produce a
+!!{sentence} true in !!a{structure} iff the structure is
+!!{enumerable}:
+\[
+\fn{Count} \ident
+\lexists[z][\lexists[u][\lforall[X][((X(z) \land
+      \lforall[x][(X(x) \lif X(u(x)))]) \lif \lforall[x][X(x)])]]]
+\]
+
+\begin{prop}
+$\Sat{M}{\fn{Count}}$ iff $\Domain{M}$ is !!{enumerable}.
+\end{prop}
+
+\begin{proof}
+Suppose $\Domain{M}$ is enumerable, and let $m_0$, $m_1$, \dots, be an
+enumeration. By removing repetions we can guarantee that no $m_k$
+appears twice. Define $f(m_k) = m_{k+1}$ and let $s(z) = m_0$ and
+$s(u) = f$. We show that
+\[
+\Sat{M}{\lforall[X][((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
+    \lif \lforall[x][X(x)])]}[s]
+\]
+Suppose $s' \sim_X s$, and $M = s'(X)$. Suppose further that
+$\Sat{M}{(X(z) \land \lforall[x][(X(x) \lif X(u(x)))])}[s']$. Then
+$s'(z) \in M$ and whenever $x \in M$, also $s'(u)(x) \in M$. In other
+words, since $s' \sim_X s$, $m_0 \in M$ and if $x \in M$ then $f(x)
+\in M$, so $m_0 \in M$, $m_1 = f(m_0) \in M$, $m_2 = f(f(m_0)) \in M$,
+etc. Thus, $M = \Domain{M}$, and
+$\Sat{M}{\lforall[x][X(x)]}{s'}$. Since $s'$ was an arbitrary
+$X$-variant of~$s$, we are done.
+
+Now assume that
+\[
+\Sat{M}{\lforall[X][((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
+    \lif \lforall[x][X(x)])]}[s]
+\]
+for some~$s$. Let $m = s(z)$ and $f = s(u)$ and consider $M = \{m,
+f(m), f(f(m)), \dots\}$. Let $s'$ be the $X$-variant of $s$ with $s(X)
+= M$. Then
+\[
+\Sat{M}{((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
+    \lif \lforall[x][X(x)])}[s']
+\]
+by assumption. Also, $\Sat{M}{X(z)}[s']$ since $s'(X) = M \ni m =
+s'(z)$, and also $\Sat{M}{\lforall[x][(X(x) \lif X(u(x)))]}[s']$ since
+whenever $x \in M$ also $f(x) \in M$. So, since both antecedent an
+conditional are satisfied, the consequent must also be:
+$\Sat{M}{\lforall[x][X(x)]}[s']$. But that means that $M =
+\Domain{M}$, and so $\Domain{M}$ is !!{enumerable}.
+\end{proof}
+
+\begin{prob}
+The sentence $\fn{Inf} \land \fn{Count}$ is true in all and only
+!!{denumerable} domains.  Adjust the definition of $\fn{Count}$ to
+give a different !!{sentence} that directly expresses that the domain
+is !!{denumerable}, and prove that it does.
+\end{prob}
+
+\end{document}
+

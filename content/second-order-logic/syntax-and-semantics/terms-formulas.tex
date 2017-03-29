@@ -1,0 +1,85 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: terms-formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{frm}
+
+\olsection{Terms and \printtoken{P}{formula}}
+
+Like in first-order logic, expressions of second-order logic are built
+up from a basic vocabulary containing \emph{!!{variable}s},
+\emph{!!{constant}s}, \emph{!!{predicate}s} and sometimes
+\emph{!!{function}s}.  From them, together with logical connectives,
+quantifiers, and punctuation symbols such as parentheses and commas,
+\emph{terms} and \emph{!!{formula}s} are formed.  The difference is
+that in addition to varaibles for objects, second-order logic also
+contains variables for relations and functions, and allows
+quantification over them. So the logical symbols of second-order logic
+are those of first-order logic, plus:
+
+\begin{enumerate}
+\item A !!{denumerable}s set of second-order relation !!{variable}s of
+  every arity~$n$: $\Obj V_0^n$, $\Obj V_1^n$, $\Obj V_2^n$, \dots
+\item A !!{denumerable}s set of second-order function !!{variable}s:
+  $\Obj u_0^n$, $\Obj u_1^n$, $\Obj u_2^n$, \dots
+\end{enumerate}
+
+\begin{explain}
+The non-logical symbols of a second-order language are specified the
+same way a first-order language is: by listing its !!{constant}s,
+!!{function}s, and !!{predicate}s
+
+In first-order logic, the !!{identity}~$\eq$ is usually included. In
+first-order logic, the non-logical symbols of a language~$\Lang{L}$
+are crucial to allow us to express anything interesting. There are of
+course !!{sentence}s that use no non-logical symbols, but with
+only~$\eq$ it is hard to say anything interesting.  In second-order
+logic, since we have an unlimited supply of relation and function
+variables, we can say anything we can say in a first-order language
+even without a special supply of non-logical symbols.
+\end{explain}
+
+\begin{defn}[Second-order Terms]
+The set of \emph{second-order terms}~$\TrmSOL[L]$ of~$\Lang L$ is
+defined adding to \olref[fol][syn][frm]{defn:terms} the clause
+\begin{enumerate}
+\item If $u$ is an $n$-place function variable and $t_1$, \dots, $t_n$
+  are terms, then $\Atom{u}{t_1, \ldots, t_n}$ is a term.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+So, a second-order term looks just like a first-order term, except
+that where a first-order term contains a !!{function}~$\Obj{f^n_i}$, a
+second-order term may contain a function variable~$\Obj{u^n_i}$ in its
+place.
+\end{explain}
+
+\begin{defn}[Second-order \usetoken{s}{formula}]
+The set of \emph{second-order !!{formula}s}~$\FrmSOL[L]$ of the
+language~$\Lang L$ is defined by adding to
+\olref[fol][syn][frm]{defn:terms} the clauses
+\begin{enumerate}
+\item If $X$ is an $n$-place predicate variable and $t_1$, \dots,
+  $t_n$ are second-order terms of~$\Lang L$, then
+  $\Atom{X}{t_1,\ldots, t_n}$ is an atomic !!{formula}.
+
+\tagitem{prvAll}{If $!A$ is a !!{formula} and $u$ is a function variable,
+  then $\lforall[u][!A]$ is a !!{formula}.}{}
+
+\tagitem{prvAll}{If $!A$ is a !!{formula} and $X$ is a predicate variable,
+  then $\lforall[X][!A]$ is a !!{formula}.}{}
+
+\tagitem{prvEx}{If $!A$ is a !!{formula} and $u$ is a function variable,
+  then $\lexists[u][!A]$ is a !!{formula}.}{}
+
+\tagitem{prvEx}{If $!A$ is a !!{formula} and $X$ is a predicate variable,
+  then $\lexists[u][!A]$ is a !!{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+\end{document}

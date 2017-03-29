@@ -1,0 +1,80 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: second-order-arithmetic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{spa}
+
+\olsection{Second-order Arithmetic}
+
+Recall that the theory $\Th{PA}$ of Peano arithmetic includes the
+eight axioms of~$\Th{Q}$,
+\begin{align*}
+& \lforall[x][\eq/[x'][\Obj 0]]\\
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(x + z')][y]])]]\\
+& \lforall[x][\eq[(x + \Obj 0)][x]]\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+\intertext{plus all sentences of the form}
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
+\end{align*}
+The latter is a ``schema,'' i.e., a pattern that generates infinitely
+many !!{sentence}s of the language of arithmetic, one for each
+!!{formula}~$!A(x)$. \emph{Second-order} Peano arithmetic~$\Th{PA^2}$
+consists of the first eight axioms plus the single !!{sentence}
+\[
+\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])]
+\]
+It says that if a subset~$X$ of the !!{domain}
+contains~$\Assign{\Obj{0}}{M}$ and with any~$x \in \Domain{M}$ also
+contains~$\Assign{\prime}{M}(x)$ (i.e., it is ``closed under
+successor'') it contains everything in the !!{domain} (i.e., $X =
+\Domain{M})$.
+
+The induction axiom guarantees that any !!{structure} satisfying it
+contains only those !!{element}s of~$\Domain{M}$ the axioms require to
+be there, i.e., the values of~$\num{n}$ for $n \in \Nat$. A model of
+$\Th{PA^2}$ contains no non-standard numbers.
+
+\begin{thm}
+\ollabel{thm:sol-pa-standard}
+If $\Sat{M}{\Th{PA^2}}$ then $\Domain{M} =
+\Setabs{\Value{M}{\num{n}}}{n \in \Nat}$.
+\end{thm}
+
+\begin{proof}
+Suppose $\Sat{M}{\Th{PA^2}}$ Of course, for any $n \in \Nat$,
+$\Value{\num{n}}{M} \in \Domain{M}$, so $N \subseteq \Domain{M}$. Let
+$N = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$ and $s(X) = N$. By
+assumption, $\Sat{M}{\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x)
+      \lif X(x'))]) \lif \lforall[x][X(x)]]}$ and so $\Sat{M}{(X(\Obj
+  0) \land \lforall[x][(X(x) \lif X(x'))]) \lif
+  \lforall[x][X(x)]}[s]$. $\Value{\Obj{0}}{M} \in N$, and so
+$\Sat{M}{X(\Obj{0})}[s]$. Also, since if $x \in N$ then also
+$\Assign{\prime}{M}(x) \in N$, since $x = \Value{\num{n}}{M}$ for
+some~$n$ and then $\Assign{\prime}{M}(x) = \Value{\num{n+1}}{M} \in
+N$. So, $\Sat{M}{\lforall[x][(X(x) \lif X(x'))]}[s]$. Thus,
+$\Sat{M}{\lforall[x][X(x)]}[s]$. But that means that for every $x \in
+\Domain{M}$ we have $x \in s(X) = N$. So, $\Domain{M} \subseteq N$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:sol-pa-categorical}
+Any two models of~$\Th{PA^2}$ are isomorphic.
+\end{cor}
+
+\begin{proof}
+By \olref{thm:sol-pa-standard}, the domain of any model of $\Th{PA^2}$
+is exhausted by $\Value{\num{n}}{M}$. Any such model is also a model
+of~$\Th{Q}$. By \olref[mod][mar][stm]{prop:thq-standard}, any such
+model is standard, i.e., isomorphic to~$\Struct{N}$.
+\end{proof}
+
+
+
+\end{document}

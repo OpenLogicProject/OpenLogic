@@ -1,0 +1,51 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: undecidability-and-axiomatizability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{nax}
+
+\olsection{Second-order Logic is not Axiomatizable}
+
+
+\begin{thm}
+\ollabel{thm:sol-undecidable}
+Second-order logic is undecidable.
+\end{thm}
+
+\begin{proof}
+A first-order !!{sentence} is valid in first-order logic iff it is
+valid in second-order logic, and first-order logic is undecidable.
+\end{proof}
+
+\begin{thm}
+\ollabel{cor:sol-not-axiomatizable}
+There is no sound and complete proof system for second-order logic.
+\end{thm}
+
+\begin{proof}
+Let $!A$ be !!a{sentence} in the language of arihmetic.  $\Sat{N}{!A}$
+iff $\Th{PA^2} \Entails !A$. Let $!P$ be the conjunction of the nine
+axioms of~$\Th{PA^2}$. $\Th{PA^2} \Entails !A$ iff $\Entails !P \lif
+!A$, i.e., $\Sat{M}{!P \lif !A$}. Now consider the !!{sentence}
+$\lforall[z][\lforall[u][\lforall[L][(!P' \lif !A')]]]$ resulting by
+replacing $\Obj{0}$ by $z$, $\prime$ by the one-place function
+variable $u$, and $<$ by the two-place relation variable~$L$ and
+universally quantifying.  It is a valid sentence of pure second-order
+logic iff the original sentence was valid iff $\Th{PA^2} \Entails !A$
+iff $\Sat{N}{!A}$.  Thus if there were a sound and complete proof
+system for second-order logic, we could use it to define a computable
+enumeration $f\colon \Nat \to \Sent[L_A]$ of the !!{sentence}s true
+in~$\Struct{N}$. This function would be representable in~$\Th{Q}$ by
+some first-order formula~$!B_f(x, y)$. Then the
+!!{formula}~$\lexists[x][!B_f(x, y)]$ would define the set of true
+first-order !!{sentence}s of~$\Struct{N}$, contradicting Tarski's
+Theorem.
+\end{proof}
+
+
+
+\end{document}

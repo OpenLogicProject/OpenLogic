@@ -1,0 +1,64 @@
+% Part: second-order-logic
+% Chapter: sol-and-sets
+% Section: cardinalities
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{crd}
+
+\olsection{Cardinalities of Sets}
+
+\begin{explain}
+Just as we can express that the domain is finite or infinite,
+!!{enumerable} or !!{nonenumerable}, we can define the property of a
+subset of~$\Domain{M}$ being finite or infinite, !!{enumerable} or
+!!{nonenumerable}.
+\end{explain}
+
+\begin{prop}
+The formula $\fn{Inf}(X) \ident$
+\begin{multline*}
+\lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif 
+      \eq[x][y])]] \land {} \\\lexists[y][(X(y) \land \lforall[x][(X(x)
+      \lif \eq/[y][u(x)])]])]
+\end{multline*}
+is satisfied with respect to a variable assignment~$s$ iff $s(X)$ is
+infinite.
+\end{prop}
+
+\begin{prop}
+The formula $\fn{Count}(X) \ident $
+\begin{multline*}
+\lexists[z][\lexists[u][(X(z) \land 
+    \lforall[x][(X(x) \lif X(u(x)))] \land {} \\ \lforall[Y][(Y(z) \land
+      \lforall[x][(Y(x) \lif Y(u(x)))]) \lif X = Y])]]
+\end{multline*}
+is satisfied with respect to a variable assignment~$s$ iff $s(X)$ is
+!!{enumerable}
+\end{prop}
+
+We know from Cantor's Theorem that there are !!{nonenumerable} sets,
+and in fact, that there are infinitely many different levels of
+infinite sizes.  Set theory develops an entire arithmetic of sizes of
+sets, and assigns infinite cardinal numbers to sets.  The natural
+numbers serve as the cardinal numbers measuring the sizes of finite
+sets. The cardinality of !!^{denumerable} sets is the first infinite
+cardinality, called~$\aleph_0$ (``aleph-nought'' or
+``aleph-zero''). The next infinite size is~$\aleph_1$. It is the
+smallest size a set can be without being countable (i.e., of
+size~$\aleph_0$).  We can define ``$X$ has size $\aleph_0$'' as
+$\fn{Aleph}_0(X) \liff \fn{Inf}(X) \land \fn{Count}(X)$.  $X$ has size
+$\aleph_1$ iff all its subsets are finite or have size~$\aleph_0$, but
+is not itself of size~$\aleph_0$. Hence we can express this by the
+formula $\fn{Aleph_1}(X) \ident \lforall[Y][(Y \subseteq X \lif
+  (\lnot\fn{Inf}(Y) \lor \fn{Aleph}_0(Y)))] \land \lnot
+\fn{Aleph}_0(X)$. Being of size $\aleph_2$ is defined similarly, etc.
+
+There is one size of special interest, the so-called cardinality of
+the continuum.  It is the size of $\Pow{\Nat}$, or, equivalently, the
+size of~$\Real$. That a set is the size of the continuum can also be
+expressed in second-order logic, but requires a bit more work.
+
+\end{document}
