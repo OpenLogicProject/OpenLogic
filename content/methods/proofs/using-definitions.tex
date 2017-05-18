@@ -1,0 +1,90 @@
+% Part: methods
+% Chapter: proofs
+% Section: using-definitions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{prf}{def}
+
+\olsection{Using Definitions}
+
+We mentioned that you must be familiar with all definitions that may
+be used in the proof, and that you can properly apply them. This is a
+really important point, and it is worth looking at in a bit more
+detail. Definitions are used to abbreviate properties and relations so
+we can talk about them more succinctly. The introduced abbreviation is
+called the \emph{definiendum}, and what it abbreviates is the
+\emph{definiens}.  In proofs, we often have to go back to how the
+definiendum was introduced, because we have to exploit the logical
+structure of the definiens (the long version of which the defined term
+is the abbreviation) to get through our proof.  By unpacking
+definitions, you're ensuring that you're getting to the heart of where
+the logical action is.
+
+Later on we will prove that $X \cup (Y \cap Z) = (X \cup Y) \cap (X
+\cup Z)$. In order to even start the proof, we need to know what it
+means for two sets to be identical; i.e., we need to know what the
+``$=$'' in that equation means for sets.  (Later on, we'll also have
+to use the definitions of $\cup$ and $\cap$, of course).  Sets are
+defined to be identical whenever they have the same !!{element}s.  So
+the definition we have to unpack is:
+
+\begin{defn}
+Sets $X$ and $Y$ are \emph{identical}, $X = Y$, if every !!{element}
+of~$X$ is an !!{element} of~$Y$, and vice versa.
+\end{defn}
+
+This definition uses $X$ and~$Y$ as placeholders for arbitrary
+sets. What it defines---the definiendum---is the expression ``$X =
+Y$'' by giving the condition under which $X = Y$ is true.  This
+condition---``every !!{element} of~$X$ is an !!{element} of~$Y$, and
+vice versa''---is the definiens.\footnote{In this particular
+  case---and very confusingly!---when $X = Y$, the sets $X$ and $Y$
+  are just one and the same set, even though we use different letters
+  for it on the left and the right side.  But the ways in which that
+  set is picked out may be different.}
+
+When you apply the definition, you have to match the $X$ and $Y$ in
+the definition to the case you're dealing with.  So, say, if you're
+asked to show that $U = W$, the definition tells you that in order to
+do so, you have to show that every !!{element} of~$U$ is an
+!!{element} of~$W$, and vice versa.  In our case, it means that order
+for $X \cup (Y \cap Z) = (X \cup Y) \cap (X \cup Z)$, each $z \in X
+\cup (Y \cap Z)$ must also be in $(X \cup Y) \cap (X \cup Z)$, and
+vice versa.  The expression $X \cup (Y \cap Z)$ plays the role of~$X$
+in the definition, and $(X \cup Y) \cap (X \cup Z)$ that of~$Y$. Since
+$X$ is used both in the definition and in the statement of the theorem
+to be proved, but in different uses, you have to be careful to make
+sure you don't mix up the two.  For instance, it would be a mistake to
+think that you could prove the claim by showing that every !!{element}
+of~$X$ is an !!{element} of~$Y$, and vice versa---that would show that
+$X = Y$, not that $X \cup (Y \cap Z) = (X \cup Y) \cap (X \cup Z)$.
+
+Within the proof we are dealing with set-theoretic notions like union
+and intersection, and so we must also know the meanings of the symbols
+$\cup$ and $\cap$ in order to understand how the proof should
+proceed. And sometimes, unpacking the definition gives rise to further
+definitions to unpack. For instance, $X \cup Y$ is defined as
+$\Setabs{z}{z \in X \text{ or } z \in Y}$. So if you want to prove
+that $x \in X \cup Y$, unpacking the definition of $\cup$ tells you
+that you have to prove $x \in \Setabs{z}{z \in X \text{ or } z \in
+  Y}$.  Now you also have to remember that $x \in \Setabs{z}{\dots
+  z\dots}$ iff $\dots x\dots$.  So, further unpacking the definition
+of the $\Setabs{z}{\dots z \dots}$ notation, what you have to show is:
+$x \in X$ or $x \in Y$.
+
+In order to be successful, you must know what the question is asking
+and what all the terms used in the question mean---you will often need
+to unpack more than one definition.  In simple proofs such as the ones
+below, the solution follows almost immediately from the definitions
+themselves. Of course, it won't always be this simple.
+
+\begin{prob}
+Suppose you are asked to prove that $X \cap Y \neq \emptyset$. Unpack
+all the definitions occuring here, i.e., restate this in a way that
+does not mention ``$\cap$'', ``='', or ``$\emptyset$.
+\end{prob}
+
+\end{document}
