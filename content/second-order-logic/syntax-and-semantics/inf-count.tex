@@ -12,10 +12,11 @@
   \usetoken{P}{domain}}
 
 A set~$M$ is infinite iff there is !!a{injective} function~$f\colon M
-\to M$ with $\dom{f} \subsetneq M$. In first-order logic, we can
-consider a one-place !!{function}~$f$ and say that the
-function~$\Assign{f}{M}$ assigned to it in !!a{structure}~$\Struct{M}$
-is !!{injective} and $\dom{f} \subsetneq \Domain{M}$:
+\to M$ which is not !!{surjective}, i.e., with $\dom{f} \neq M$. In
+first-order logic, we can consider a one-place !!{function}~$f$ and
+say that the function~$\Assign{f}{M}$ assigned to it in
+!!a{structure}~$\Struct{M}$ is !!{injective} and $\dom{f} \neq
+\Domain{M}$:
 \[
 \lforall[x][\lforall[y][(\eq[f(x)][f(y)] \to \eq[x][y])]] \land
 \lexists[y][\lforall[x][\eq/[y][f(x)]]]
@@ -51,7 +52,7 @@ $\Sat{M}{\fn{Inf}}$ iff
   some~$s$. If it does, $s(u)$ is !!a{injective} function, and some $y
   \in \Domain{M}$ is not in the domain of~$s(u)$. Conversely, if there
   is !!a{injective} $f\colon \Domain{M} \to \Domain{M}$ with $\dom{f}
-  \subsetneq \Domain{M}$, then $s(u) = f$ is such a variable
+  \neq \Domain{M}$, then $s(u) = f$ is such a variable
   assignment.
 \end{proof}
 
@@ -112,7 +113,7 @@ f(m), f(f(m)), \dots\}$. Let $s'$ be the $X$-variant of $s$ with $s(X)
 \]
 by assumption. Also, $\Sat{M}{X(z)}[s']$ since $s'(X) = M \ni m =
 s'(z)$, and also $\Sat{M}{\lforall[x][(X(x) \lif X(u(x)))]}[s']$ since
-whenever $x \in M$ also $f(x) \in M$. So, since both antecedent an
+whenever $x \in M$ also $f(x) \in M$. So, since both antecedent and
 conditional are satisfied, the consequent must also be:
 $\Sat{M}{\lforall[x][X(x)]}[s']$. But that means that $M =
 \Domain{M}$, and so $\Domain{M}$ is !!{enumerable}.
@@ -120,9 +121,9 @@ $\Sat{M}{\lforall[x][X(x)]}[s']$. But that means that $M =
 
 \begin{prob}
 The sentence $\fn{Inf} \land \fn{Count}$ is true in all and only
-!!{denumerable} domains.  Adjust the definition of $\fn{Count}$ to
-give a different !!{sentence} that directly expresses that the domain
-is !!{denumerable}, and prove that it does.
+!!{denumerable} domains.  Adjust the definition of $\fn{Count}$ so
+that it becomes a different !!{sentence} that directly expresses that
+the domain is !!{denumerable}, and prove that it does.
 \end{prob}
 
 \end{document}

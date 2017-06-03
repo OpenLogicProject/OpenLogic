@@ -9,6 +9,20 @@
 \olfileid{mod}{bas}{iso}
 \olsection{Isomorphic Structures}
 
+First-order !!{structure}s can be alike in one of two ways. One way in
+which the can be alike is that they make the same !!{sentence}s
+true. We call such !!{structure}s \emph{elementarily equivalent}. But
+structures can be very different and still make the same !!{sentence}s
+true---for instance, one can be !!{enumerable} and the other not.
+This is because there are lots of features of !!a{structure} that
+cannot be expressed in first-order languages, either because the
+language is not rich enough, or because of fundamental limitations of
+first-order logic such as the L\"owenheim-Skolem theorem. So another,
+stricter, aspect in which !!{structure}s can be alike is if they are
+fundamentally the same, in the sense that they only differ in the
+objects that make them up, but not in their structural features. A way
+of making this precise is by the notion of an \emph{isomorphism}.
+
 \begin{defn}
 \ollabel{defn:elem-equiv} 
 Given two !!{structure}s $\Struct{M}$ and $\Struct M'$ for the same
@@ -29,11 +43,14 @@ $\Struct{M}$ is \emph{isomorphic to}~$\Struct M'$, written $\Struct{M}
   h(y)$ then $x = y$; 
 \item $h$ is !!{surjective}: for every $y \in \Domain{M'}$ there
   is $x \in \Domain{M}$ such that $h(x) = y$;
-\item for every constant $c$: $h(\Assign{c}{M}) = \Assign{c}{M'}$;
-\item for every $n$-place !!{predicate}~$P$: $\tuple{a_1, \dots,
-  a_n}\in \Assign{P}{M}$ if and only if $\tuple{h(a_1), \dots, h(a_n)}
-    \in \Assign{P}{M'}$;
-\item for every $n$-place !!{function} $f$:
+\item \ollabel{defn:iso-const}for every !!{constant} $c$:
+  $h(\Assign{c}{M}) = \Assign{c}{M'}$;
+\item \ollabel{defn:iso-pred}for every $n$-place !!{predicate}~$P$:
+  \[
+  \tuple{a_1, \dots, a_n}\in \Assign{P}{M} \quad\text{iff}\quad
+  \tuple{h(a_1), \dots, h(a_n)} \in \Assign{P}{M'};
+  \]
+\item \ollabel{defn:iso-func}for every $n$-place !!{function} $f$:
   \[
   h(\Assign{f}{M}(a_1, \dots, a_n)) =
   \Assign{f}{M'}(h(a_1), \dots, h(a_n)).
@@ -52,17 +69,51 @@ Let $h$ be an isomorphism of $\Struct{M}$ onto $\Struct M'$. For any
 assignment~$s$, $h \circ s$ is the composition of $h$ and $s$, i.e.,
 the assignment in $\Struct{M'}$ such that $(h \circ s)(x) = h(s(x))$.
 By induction on $t$ and $!A$ one can prove the stronger claims:
-\begin{align*}
-  &  h(\Value{t}{M}[s]) = \Value{t}{M'}[h\circ s];\\
-  &  \Sat{M}{!A}[s] \text{ if and only if }
-  \Sat{M'}{!A}[h \circ s].
-\end{align*}
+\begin{enumerate}
+  \item[a.] $h(\Value{t}{M}[s]) = \Value{t}{M'}[h\circ s]$.
+  \item[b.] $\Sat{M}{!A}[s]$ iff $\Sat{M'}{!A}[h \circ s]$.
+\end{enumerate}
+The first is proved by induction on the complexity of~$t$.
+\begin{enumerate}
+\item If $t \ident c$, then $\Value{c}{M}[s] = \Assign{c}{M}$ and
+  $\Value{c}{M'}[h \circ s] = \Assign{c}{M'}$. Thus,
+  $h(\Value{t}{M}[s]) = h(\Assign{c}{M}) = \Assign{c}{M'}$ (by
+  \olref{defn:iso-const} of \olref{defn:isomorphism}) $=
+  \Value{t}{M'}[h \circ s]$.
+\item If $t \ident x$, then $\Value{x}{M}[s] = s(x)$ and
+  $\Value{x}{M'}[h \circ s] = h(s(x))$. Thus, $h(\Value{x}{M}[s]) =
+  h(s(x)) = \Value{x}{M'}[h \circ s]$.
+\item If $t \ident f(t_1, \dots, t_n)$, then
+  \begin{align*}
+    \Value{t}{M}[s] & = \Assign{f}{M}(\Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s]) \quad\text{and}\\
+  \Value{t}{M'}[h \circ s] & = \Assign{f}{M}(\Value{t_1}{M'}[h \circ
+    s], \dots, \Value{t_n}{M'}[h \circ s]).
+  \end{align*}
+  The induction hypothesis is that for each $i$, $h(\Value{t_i}{M}[s])
+  = \Value{t_i}{M'}[h\circ s]$. So,
+  \begin{align}
+    h(\Value{t}{M}[s]) 
+    & = h(\Assign{f}{M}(\Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s]) \notag\\
+    & = h(\Assign{f}{M}(\Value{t_1}{M'}[h \circ s], \dots,
+    \Value{t_n}{M'}[h \circ s]) \ollabel{iso-1}\\
+    & = \Assign{f}{M'}(\Value{t_1}{M'}[h \circ s], \dots,
+    \Value{t_n}{M'}[h \circ s]) \ollabel{iso-2}\\
+    & = \Value{t}{M'}[h\circ s] \notag
+  \end{align}
+  Here, \olref{iso-1} follows by induction hypothesis and \olref{iso-2} by
+  \olref{defn:iso-func} of \olref{defn:isomorphism}.
+\end{enumerate}
+Part (2) is left as an exercise.
+
+If $!A$ is a sentence, the assignments~$s$ and $h \circ s$ are
+irrelevant, and we have $\Sat{M}{!A}$ iff $\Sat{M'}{!A}$.
 \end{proof}
 
 \begin{prob}
-Carry out the proof of \olref[mod][bas][iso]{thm:isom} in detail. Make
-sure to take note at each step of how each of the five properties
-characterizing isomorphisms is used.
+Carry out the proof of (b) of \olref[mod][bas][iso]{thm:isom} in
+detail. Make sure to note where each of the five properties
+characterizing isomorphisms of \olref[mod][bas][iso]{defn:isomorphism}
+is used.
 \end{prob}
 
 \begin{defn}

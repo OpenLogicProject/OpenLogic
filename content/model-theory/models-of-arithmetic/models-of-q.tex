@@ -46,11 +46,11 @@ Consider the !!{structure}~$\Struct{K}$ with domain $\Domain{K} = \Nat
   \end{cases}\\
   \Assign{<}{K} & =
   \Setabs{\tuple{x,y}}{x, y \in \Nat \text{ and } x<y} \cup
-  \Setabs{\tuple{x,a}}{n \in \Domain{K}}
+  \Setabs{\tuple{x,a}}{x \in \Domain{K}}
 \end{align*}
 To show that $\Sat{K}{\Th{Q}}$ we have to verify that all axioms
 of~$\Th{Q}$ are true in~$\Struct{K}$.  For convenience, let's write
-$x^\nssucc$ for $\Assign{\prime}(x)$ (the ``successor'' of $x$
+$x^\nssucc$ for $\Assign{\prime}{K}(x)$ (the ``successor'' of $x$
 in~$\Struct{K}$), $x \nsplus y$ for $\Assign{+}{K}(x, y)$ (the ``sum''
 of $x$ and $y$ in~$\Struct{K}$, $x \nstimes y$ for
 $\Assign{\times}{K}(x, y)$ (the ``product'' of $x$ and~$y$
@@ -94,7 +94,7 @@ n$, and $a\nsplus 0 = a$ by definition
 of~$\nsplus$. $\Sat{K}{\lforall[x][\lforall[y][\eq[(x + y')][(x +
         y)']]]}$ is a bit trickier.  If $n$, $m$ are both standard, we have:
 \begin{align*}
-(n \nsplus m^\nssucc) & = (n+m') = (n+m)' = (n \nsplus m)^\nssucc  
+(n \nsplus m^\nssucc) & = (n+(m+1)) = (n+m)+1 = (n \nsplus m)^\nssucc  
 \intertext{since $\nsplus$ and $^\nssucc$ agree with $+$ and $\prime$ on
   standard numbers.  Now suppose $x \in \Domain{K}$. Then}
 (x \nsplus a^\nssucc) & = (x \nsplus a) = a = a^\nssucc = (x \nsplus a)^\nssucc
@@ -146,22 +146,26 @@ $\Assign{\prime}{L} = \nssucc$, $\Assign{+}{L} = \nsplus$ given by
   \hline
   n & n+m & b & a\\
   a & a & b & a\\
-  b & b & a & b
+  b & b & b & a
 \end{array}
 \]
-Since $\nssucc$ is !!{injective}, $0$ is not in its range, and every $x
-\in \Domain{L}$ other than~$0$ is, axioms $!Q_1$--$!Q_3$ are true
+Since $\nssucc$ is !!{injective}, $0$ is not in its range, and every
+$x \in \Domain{L}$ other than~$0$ is, axioms $!Q_1$--$!Q_3$ are true
 in~$\Struct{L}$. For any $x$, $x \nsplus 0 = x$, so $!Q_4$ is true as
 well.  For $!Q_5$, consider $x \nsplus y^\nssucc$ and $(x \nsplus
 y)^\nssucc$. They are equal if $x$ and $y$ are both standard, since
 then $\nssucc$ and $\nsplus$ agree with $\prime$ and $+$. If $x$ is
-non-standard, we have
+non-standard, and $y$ is standard, we have $x \nsplus y^\nssucc = x =
+x^\nssucc = (x \nsplus y)^\nssucc$. If $x$ and $y$ are both
+non-standard, we have four cases:
 \begin{align*}
-  a \nsplus y^\nssucc & = a = a^\nssucc = (a \nsplus y)^\nssucc\\
-  b \nsplus y^\nssucc & = b = b^\nssucc = (b \nsplus y)^\nssucc
-  \intertext{If $x$ is standard, but $y$ is non-standard, we have}
-  n \nsplus a^\nssucc & = n \nsplus a = b = b^\nssucc = (n \nsplus a)^\nssucc\\
-  n \nsplus b^\nssucc & = n \nsplus b = a = a^\nssucc = (n \nsplus b)^\nssucc
+&  a \nsplus a^\nssucc  = b = b^\nssucc = (a \nsplus a)^\nssucc\\
+&  b \nsplus b^\nssucc  = a = a^\nssucc = (b \nsplus b)^\nssucc\\
+&  b \nsplus a^\nssucc  = b = b^\nssucc = (b \nsplus y)^\nssucc\\
+&  a \nsplus b^\nssucc  = a = a^\nssucc = (a \nsplus b)^\nssucc\\
+\intertext{If $x$ is standard, but $y$ is non-standard, we have}
+&  n \nsplus a^\nssucc  = n \nsplus a = b = b^\nssucc = (n \nsplus a)^\nssucc\\
+&  n \nsplus b^\nssucc  = n \nsplus b = a = a^\nssucc = (n \nsplus b)^\nssucc
 \end{align*}
 So, $\Sat{L}{!Q_5}$. However, $a \nsplus 0 \neq 0 \nsplus a$, so
 $\Sat/{L}{\lforall[x][\lforall[y][\eq[(x+y)][(y+x)]]]}$.
