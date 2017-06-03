@@ -21,7 +21,7 @@ representing $h$.
 
 Let's start with a simple case, where all functions are $1$-place,
 i.e., consider $h(x) = f(g(x))$. If $!A_f(y, z)$ represents~$f$, and
-$!A_g(x, y)$ represents~$g$, we need a formula~$!A_h(x, z)$ that
+$!A_g(x, y)$ represents~$g$, we need !!a{formula}~$!A_h(x, z)$ that
 represents~$h$.  Note that $h(x) = z$ iff there is a~$y$ such that
 both $z = f(y)$ and $y = g(x)$. (If $h(x) = z$, then $g(x)$ is such
 a~$y$; if such a $y$ exists, then since $y = g(x)$ and $z = f(y)$, $z
@@ -30,6 +30,7 @@ a~$y$; if such a $y$ exists, then since $y = g(x)$ and $z = f(y)$, $z
 that $\Th{Q}$ proves the relevant !!{formula}s.
 
 \begin{prop}
+\ollabel{prop:rep1}
 If $h(n) = m$, then $\Th{Q} \Proves !A_h(\num{n}, \num{m})$.
 \end{prop}
 
@@ -48,6 +49,7 @@ i.e., $\Th{Q} \Proves !A_h(n, m)$.
 \end{proof}
 
 \begin{prop}
+\ollabel{prop:rep2}
 If $h(n) = m$, then $\Th{Q} \Proves \lforall[z][(!A_h(\num{n}, z) \lif
   z = \num{m})]$.
 \end{prop}
@@ -76,8 +78,8 @@ in~$\Th{Q}$, and $!A_{g_i}(x_0, \dots, x_{l-1}, y)$ represents
 $g_i(x_0, \dots, x_{l-1})$ in~$\Th{Q}$, then
 \begin{multline*}
   \lexists[y_0,\dots][\lexists[y_{k-1}][(!A_{g_0}(x_0,\dots,x_{l-1},y_0) \land
-  \dots \land !A_{g_{k-1}}(x_0,\dots,x_{l-1},y_{k-1}) \land]]\\
-  !A_f(y_0,\dots,y_{k-1},z))
+      \dots \land {}]]\\
+  !A_{g_{k-1}}(x_0,\dots,x_{l-1},y_{k-1}) \land !A_f(y_0,\dots,y_{k-1},z))
 \end{multline*}
 represents
 \[
@@ -85,5 +87,15 @@ h(x_0, \dots, x_{k-1}) = f(g_0(x_0, \dots, x_{k-1}), \dots, g_0(x_0,
 \dots, x_{k-1})).
 \]
 \end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Using the proofs of \olref[inc][req][cmp]{prop:rep2} and
+\olref[inc][req][cmp]{prop:rep2} as a guide, carry out the proof of
+\olref[inc][req][cmp]{prop:rep-composition} in detail.
+\end{prob}
 
 \end{document}

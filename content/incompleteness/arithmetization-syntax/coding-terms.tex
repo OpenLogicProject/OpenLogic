@@ -132,4 +132,16 @@ $\tuple{\Gn{t_1}, \dots, \Gn{t_n}}$ into $\Gn{t_1, \dots, t_n}$, is
 primitive recursive.
 \end{prob}
 
+\begin{prop}\ollabel{prop:num-primrec}
+  The function $\fn{num}(n) = \Gn{\num{n}}$ is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  We define $\fn{num}(n)$ by primitive recursion:
+  \begin{align*}
+    \fn{num}(0) & = \Gn{\Obj 0}\\
+    \fn{num}(n+1) & = \Gn{\prime(} \concat \fn{num}(n) \concat \Gn{)}.
+  \end{align*}
+\end{proof}
+
 \end{document}
