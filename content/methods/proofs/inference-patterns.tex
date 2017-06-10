@@ -99,7 +99,13 @@ prove an ``iff'' statement by chaining together a bunch of other
 ``$q$''---but in that case you have to make sure that each step really
 is an ``iff.''
 
-\subsection{Proving a Universal Claim}
+\subsection{Universal Claims}
+
+Using a universal claim is simple: if something is true for anything,
+it's true for each particular thing.  So if, say, the hypothesis of
+your proof is $X \subseteq Y$, that means (unpacking the definition
+of~$\subseteq$), that, for every $x \in X$, $x \in Y$. Thus, if you
+already know that $z \in X$, you can conclude $z \in Y$.
 
 Proving a universal claim may seem a little bit tricky. Usually these
 statements take the following form: ``If $x$ has~$P$, then it
@@ -236,5 +242,76 @@ simple example.
   also !!a{element} of~$Y$. By definition of~$\subseteq$, $X \subseteq
   Y$.
 \end{proof}
+
+\subsection{Using Existence Claims}
+
+Suppose you know that some existence claim is true (you've proved it,
+or it's a hypothesis you can use), say, ``for some~$x$, $x \in X$'' or
+``there is an $x \in X$.''  If you want to use it in your proof, you
+can just pretend that you have a name for one of the things in your
+hypothesis says exit. Since $X$ contains at least one thing, there are
+things to which that name might refer. You might of course not be able
+to pick one or describe it further (other than that $x \in X$). But
+for the purpose of the proof, you can pretend that you have picked it
+out and give a name to it. (It's important to pick a name that you
+haven't already used (or that appears in your hypotheses, otherwise
+things can go wrong.) You might go form ``for some $x$, $x \in X$''
+to ``Let $a \in X$.''  Now you reason about~$a$, use some other
+hypotheses, etc., and come to a conclusion, $p$. If $p$ no longer
+mentions~$a$, $p$ is independent of the asusmption that $a \in X$, and
+you've shown that it follows just from the assumption ``for some $x$,
+$x \in X$.''
+
+\begin{prop}
+If $X \neq \emptyset$, then $X \cup Y \neq \emptyset$.
+\end{prop}
+
+\begin{proof}
+Here the hypothesis that $X \neq \emptyset$ hides an existential
+claim, which you get to only by unpacking a few definitions. The
+definition of $=$ tells us that $X = \emptyset$ iff every $x \in X$ is
+also in $\emptyset$ and every $x \in \emptyset$ is also $\in
+X$. Negating both sides, we get: $X \neq \emptyset$ iff either some $x
+\in X$ is $\notin \emptyset$ or some $x \in \emptyset$ is $\notin
+X$. Since nothing is $\in \emptyset$, the second disjunct can never be
+true, and ``$x \in X$ and $x \notin \emptyset$'' reduces to just $x
+\in X$. So $x \neq \emptyset$ iff for some $x$, $x \in X$. That's an
+existence claim.
+\begin{quote}
+Suppose $X \neq \emptyset$, i.e., for some $x$, $x \in X$. Let $a \in
+X$.
+\end{quote}
+Now we've introduced a name for one of the things~$\in X$. We'll use
+it, only assuming that $a \in X$:
+\begin{quote}
+Since $a \in X$, $a \in X \cup Y$, by definition of~$\cup$. So for
+some $x$, $x \in X \cup Y$, i.e., $X \cup Y \neq \emptyset$.
+\end{quote}
+In that last step, we went from ``$a \in X \cup Y$'' to ``for some
+$x$, $x \in X \cup Y$.'' That didn't mention $a$ anymore, so we know
+that ``for some $x$, $x \in X \cup Y$'' follows from ``for some $x$, $x
+\in X$ alone.''
+\end{proof}
+
+It's maybe good practice to keep bound variables like ``$x$'' separate
+from hypothtical names like $a$, like we did. In practice, however, we
+often don't and just use $x$, like so:
+\begin{quote}
+Suppose $X \neq \emptyset$, i.e., there is an $x \in X$. By definition
+of $\cup$, $x \in X \cup Y$. So $X \cup Y \neq \emptyset$.
+\end{quote}
+However, when you do this, you have to be extra careful that you use
+different $x$'s and $y$'s for different existential claims. For
+instance, the following is \emph{not} a correct proof of ``If $X \neq
+\emptyset$ and $Y \neq \emptyset$ then $X \cap Y \neq \emptyset$''
+(which is not true).
+\begin{quote}
+Suppose $X \neq \emptyset$ and $Y \neq \emptyset$. So for some $x$, $x
+\in X$ and also for some $x$, $x \in Y$. Since $x \in X$ and $x \in
+Y$, $x \in X \cap Y$, by definition of~$\cap$. So $X \cap Y \neq
+\emptyset$.
+\end{quote}
+Can you spot where the incorrect step occurs and explain why the
+result does not hold?
 
 \end{document}
