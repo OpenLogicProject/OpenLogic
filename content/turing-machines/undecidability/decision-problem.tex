@@ -37,10 +37,11 @@ decides validity either.
 
 The first step in this strategy is to show that for every input~$w$
 and a Turing machine~$M$, we can effectively describe !!a{sentence}
-$!T$ representing~$M$ and~$w$ and !!a{sentence}~$!E$ expressing ``$M$
-eventually halts'' such that:
+$!T(M, w)$ representing the instruction set of~$M$ and the input~$w$
+and !!a{sentence}~$!E(M, w)$ expressing ``$M$ eventually halts'' such
+that:
 \begin{quote}
-  $\Entails !T \lif !E$ iff $M$ halts for input~$w$.
+  $\Entails !T(M, w) \lif !E(M,w)$ iff $M$ halts for input~$w$.
 \end{quote}
 The bulk of our proof will consist in describing these sentences
 $!T(M, w)$ and $!E(M, w)$ and verifying that $!T(M, w) \lif !E(M, w)$

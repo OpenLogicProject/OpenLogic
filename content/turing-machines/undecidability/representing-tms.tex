@@ -10,14 +10,37 @@
 \olsection{Representing Turing Machines}
 
 \begin{explain}
-In order to represent Turing machines and their behavior by a !!{sentence}
+In order to represent Turing machines and their behavior by !!a{sentence}
 of first-order logic, we have to define a suitable language. The
 language consists of two parts: !!{predicate}s for describing
-configurations of the machine, and expressions for counting execution
-steps (``moments'') and positions on the tape. The latter require an
-initial moment, $\Obj 0$, a ``successor'' !!{function} which is
-traditionally written as a postfix $\prime$, and an ordering $x
-< y$ of ``before.''
+configurations of the machine, and expressions for numbering execution
+steps (``moments'') and positions on the tape.
+
+We introduce two kinds of !!{predicate}s, both of them 2-place: For
+each state~$q$, !!a{predicate}~$\Obj Q_q$, and for each tape
+symbol~$\sigma$, !!a{predicate}~$\Obj S_\sigma$. The former allow us
+to describe the state of~$M$ and the position of its tape head, the
+latter allow us to describe the contents of the tape.  
+
+In order to express the positions of the tape head and the number of
+steps executed, we need a way to express numbers. This is done using
+!!a{constant}~$\Obj 0$, and a $1$-place function~$\prime$, the
+successor function. By convention it is written \emph{after} its
+argument (and we leave out the parentheses). So $\Obj 0$ names the
+leftmost position on the tape as well as the time before the first
+execution step (the initial configuration), $\Obj 0'$ names the square
+to the right of the leftmost square, and the time after the first
+execution step, and so on. We also introduce !!a{predicate}~$<$ to
+express both the ordering of tape positions (when it means ``to the
+left of'') and execution steps (then it means ``before'').
+
+Once we have the language in place, we list the ``axioms'' of $!T(M,
+w)$, i.e., the !!{sentence}s which, taken together, describe the
+behavior of~$M$ when run on input~$w$.  There will be !!{sentence}s
+which lay down conditions on $\Obj 0$, $\prime$, and $<$,
+!!{sentence}s that describes the input configuration, and
+!!{sentence}s that describe what the configuration of $M$ is after it
+executes a particular instruction.
 \end{explain}
 
 \begin{defn}
@@ -52,32 +75,33 @@ input $w = \sigma_{i_1}\dots\sigma_{i_k}$ are the following:
 \begin{enumerate}
 \item Axioms describing numbers:
 \begin{enumerate}
-\item A !!{sentence} that says that the successor function is injective:
+\item \ollabel{tm-rep-a} !!^a{sentence} that says that the successor function is injective:
 \[
 \lforall[x][\lforall[y][
     (\eq[x'][y'] \lif \eq[x][y])]]
 \]
-\item A !!{sentence} that says that every number is less than its successor:
+\item !!^a{sentence} that says that every number is less than its successor:
 \[
-\lforall[x][(x < x')]
+\lforall[x][x < x']
 \]
-\item A !!{sentence} that ensures that $<$ is transitive:
+\item !!^a{sentence} that ensures that $<$ is transitive:
 \[
 \lforall[x][\lforall[y][\lforall[z][
       ((x < y \land y < z) \lif x < z)]]]
 \]
-\item A !!{sentence} that connects $<$ and~$=$:
+\item !!^a{sentence} that connects $<$ and~$=$:
 \[
 \lforall[x][\lforall[y][(x < y \lif \eq/[x][y])]]
 \]
 \end{enumerate}
 \item Axioms describing the input configuration:
 \begin{enumerate}
-\item $M$ is in the inital state~$q_0$ at time~0, scanning square~1:
+\item After after $0$~steps---before the machine starts---$M$ is in
+  the inital state~$q_0$, scanning square~$1$:
 \[
 \Obj Q_{q_0}(\num{1}, \num{0})
 \]
-\item The first $m+1$ squares contain the symbols $\TMendtape$,
+\item The first $k+1$ squares contain the symbols $\TMendtape$,
   $\sigma_{i_1}$, \dots, $\sigma_{i_k}$:
 \[
 \Obj S_\TMendtape(\num{0}, \num{0}) \land
@@ -106,12 +130,12 @@ after $n$ steps.''
 \begin{enumerate}
 \item \ollabel{rep-right} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMright}$, the !!{sentence}:
-\begin{multline*}
-\lforall[x][\lforall[y][(
+\begin{align*}
+& \lforall[x][\lforall[y][(
    (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
-   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
+&\qquad   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
 !A(x, y)))
-\end{multline*}
+\end{align*}
 This says that if, after~$y$ steps, the machine is in state~$q_i$
 scanning square~$x$ which contains symbol~$\sigma$, then after $y+1$
 steps it is scanning square~$x+1$, is in state~$q_j$, square~$x$ now
@@ -120,26 +144,40 @@ same symbol as it did after~$y$ steps.
 
 \item \ollabel{rep-left} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMleft}$, the !!{sentence}:
-\begin{multline*}
-\lforall[x][\lforall[y][
+\begin{align*}
+& \lforall[x][\lforall[y][
     ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\
-   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
-!A(x, y)))
-\end{multline*}
+& \qquad   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
+!A(x, y))) \land {}\\
+& \lforall[y][((\Obj Q_{q_i}(\Obj 0, y) \land \Obj S_{\sigma}(\Obj 0,
+    y)) \lif {}]\\
+& \qquad (\Obj Q_{q_j}(\Obj 0, y') \land \Obj S_{\sigma'}(\Obj 0,
+  y') \land !A(\Obj 0, y)))
+\end{align*}
 Take a moment to think about how this works: now we don't start with
 ``if scanning square~$x$ \dots'' but: ``if scanning square $x+1$
 \dots'' A move to the left means that in the next step the machine is
 scanning square~$x$.  But the square that is written on is~$x+1$.  We
 do it this way since we don't have subtraction or a predecessor
 function.
+
+Note that numbers of the form $x+1$ are $1$, $2$, \dots, i.e., this
+doesn't cover the case where the machine is scanning square~$0$ and is
+supposed to move left (which of course it can't---it just stays
+put). That special case is covered by the second conjunction: it says
+that if, after $y$ steps, the machine is scanning square~$0$ in state
+$q_i$ and square~$0$ contains symbol~$\sigma$, then after $y+1$ steps
+it's still scanning square~$0$, is now in state~$q_j$, the symbol on
+square~$0$ is $\sigma'$, and the squares other than square~$0$ contain
+the same symbols they contained ofter $y$~steps.
 \item \ollabel{rep-stay} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMstay}$, the !!{sentence}:
-\begin{multline*}
-\lforall[x][\lforall[y][(
+\begin{align*}
+& \lforall[x][\lforall[y][(
    (\Obj Q_{q_i}(x, y) \land \Obj S_{\sigma}(x, y)) \lif {}]] \\
-   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
+&\qquad   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x, y') \land
 !A(x, y)))
-\end{multline*}
+\end{align*}
 \end{enumerate}
 \end{enumerate}
 Let $!T(M, w)$ be the conjunction of all the above !!{sentence}s for Turing
@@ -161,5 +199,10 @@ is even easier: then the !!{sentence}~$!E(M, w)$
 \lexists[x][\lexists[y][\Obj Q_h(x, y)]]
 \]
 expresses that the machine eventually halts.
+
+\begin{prob}
+Show that, if $i < k$, then $!T(M, w) \Entails \num{i} < \num{k}$
+(Hint: use induction on $k-i$).
+\end{prob}
 
 \end{document}
