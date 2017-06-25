@@ -166,7 +166,7 @@ where $t$ is a ground term (a term that does not contain any
 variables), and $a$~is a !!{constant} which does not occur
 in~$!A$, or in any assumption which is !!{undischarged} in the
 !!{derivation} ending with the premise~$!A$. We call $a$ the
-\emph{eigenvariable} of the \Intro{\forall} inference.
+\emph{eigenvariable} of the \Intro{\lforall} inference.
 
 \paragraph{Rules for $\lexists$}
 
@@ -189,9 +189,10 @@ is !!{undischarged} in the !!{derivation}s ending with the two
 premises~$!C$ (other than the assumptions $!A(a)$).  We call $a$ the
 \emph{eigenvariable} of the \Elim{\lexists} inference.
 
-The condition that an eigenvariable not occur in the upper sequent of
-the $\lforall$ intro or $\lexists$ elim inference is called the
-\emph{eigenvariable condition}.
+The condition that an eigenvariable neither occur in the premises nor in
+any assumption that is !!{undischarged} in the !!{derivation}s leading 
+to the premises for the \Intro{\lforall} or \Elim{\lexists} inference is 
+called the \emph{eigenvariable condition}.
 
 \begin{explain}
 We use the term ``eigenvariable'' even though $a$ in the above rules
@@ -199,10 +200,8 @@ is a constant. This has historical reasons.
 
 In \Intro{\lexists} and \Elim{\lforall} there are no restrictions, and
 the term~$t$ can be anything, so we do not have to worry about any
-conditions. However, because the $t$ may appear elsewhere in the
-!!{derivation}, the values of~$t$ for which the !!{formula} is satisfied are
-constrained. On the other hand, in the \Elim{\lexists} and $\lforall$
-intro rules, the eigenvariable condition requires that $a$ does not
+conditions. On the other hand, in the \Elim{\lexists} and \Intro{\lforall}
+rules, the eigenvariable condition requires that $a$ does not
 occur anywhere else in the formula. Thus, if the upper !!{formula} is
 valid, the truth values of the formulas other than $\Atom{!A}{a}$ are
 independent of~$a$.
