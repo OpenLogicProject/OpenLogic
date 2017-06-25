@@ -45,6 +45,8 @@ If $!A$ is a !!{formula}, $x$ is a !!{variable}, and $t$ is a term
 !!{free for}~$x$ in $!A$, then $\Subst{!A}{t}{x}$ is the result of substituting
 $t$ for all free occurrences of $x$ in~$!A$.
 \begin{enumerate}
+\item \indcase{!A}{\lfalse \ \textup{or} \ !A \ident \ltrue}{$\Subst{\indfrm}{t}{x}$ is $\indfrm$}
+
 \item \indcase{!A}{\Atom{P}{t_1,\dots,
     t_n}}{$\Subst{\indfrm}{t}{x}$ is $\Atom{P}{\Subst{t_1}{t}{x},
     \dots, \Subst{t_n}{t}{x}}$.}
