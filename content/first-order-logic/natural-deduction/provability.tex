@@ -228,19 +228,19 @@ Prove \olref[fol][ntd][prv]{prop:provability-mp}.
 
 \begin{proof}
 \iftag{probIf}{Exercise.}{First suppose $\Gamma \Proves \lnot !A$.
-  Then there is a !!{derivation} of $\lnot !A$ from~$\gamma$.  The
+  Then there is a !!{derivation}~$\delta$ of $\lnot !A$ from~$\Gamma$.  The
   following !!{derivation} shows that $\Gamma \Proves !A \lif !B$:
 \[
-\AxiomC{}
-\RightLabel{$\delta_0$}
-\DeduceC{$\lnot !A$}
 \AxiomC{$\Discharge{!A}{1}$}
-\RightLabel{\Elim{\lnot}}
-\UnaryInfC{$\lfalse$}
+\AxiomC{}
+\RightLabel{$\delta$}
+\DeduceC{$\lnot !A$}
+\RightLabel{\Intro{\lfalse}}
+\BinaryInfC{$\lfalse$}
 \RightLabel{\Elim{\lfalse}}
 \UnaryInfC{$!B$}
 \DischargeRule{\Intro{\lif}}{1}
-\BinaryInfC{$!A \lif !B$}
+\UnaryInfC{$!A \lif !B$}
 \DisplayProof
 \]
 
@@ -248,10 +248,10 @@ Now suppose $\Gamma \Proves !B$.  Then there is a !!{derivation}~$\delta$ of
 $!B$ from~$\Gamma$. The following !!{derivation} shows that $\Gamma
 \Proves !A \lif !B$:
 \[
+\AxiomC{$\Discharge{!A}{1}$}
 \AxiomC{}
 \RightLabel{$\delta$}
 \DeduceC{$!B$}
-\AxiomC{$\Discharge{!A}{1}$}
 \RightLabel{\Intro{\land}}
 \BinaryInfC{$!A \land !B$}
 \RightLabel{\Elim{\land}}
@@ -269,7 +269,7 @@ Prove \olref[fol][ntd][prv]{prop:provability-lif}.
 \begin{thm}
 \ollabel{thm:strong-generalization} If $c$ is a constant not occurring
 in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
-\Proves \lforall[x][!A(c)]$.
+\Proves \lforall[x][!A(x)]$.
 \end{thm}
 
 \begin{proof}
