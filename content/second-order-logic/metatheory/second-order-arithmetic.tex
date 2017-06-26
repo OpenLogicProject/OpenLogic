@@ -25,8 +25,12 @@ eight axioms of~$\Th{Q}$,
 \end{align*}
 The latter is a ``schema,'' i.e., a pattern that generates infinitely
 many !!{sentence}s of the language of arithmetic, one for each
-!!{formula}~$!A(x)$. \emph{Second-order} Peano arithmetic~$\Th{PA^2}$
-consists of the first eight axioms plus the single !!{sentence}
+!!{formula}~$!A(x)$. We call this schema the (first-order)
+\emph{axiom schema of induction}. 
+In \emph{second-order} Peano arithmetic~$\Th{PA^2}$, induction
+can be stated as a single sentence. $\Th{PA^2}$
+consists of the first eight axioms above plus the (second-order)
+\emph{induction axiom}:
 \[
 \lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])]
 \]
@@ -85,6 +89,33 @@ of~$\Th{Q}$. By \olref[mod][mar][stm]{prop:thq-standard}, any such
 model is standard, i.e., isomorphic to~$\Struct{N}$.
 \end{proof}
 
+Above we defined $\Th{PA^2}$ as the theory that contains the first eight 
+arithmetical axioms plus the second-order induction axiom.  In fact, thanks
+to the expressive power of second-order logic, only the \emph{first two} 
+of the arithmetical axioms plus induction are needed for second-order Peano 
+arithmetic.
+
+\begin{prop}\ollabel{prop:sol-pa-definable}
+Let $\Th{PA^{2\dagger}}$ be the second-order theory containing the first 
+two arithmetical axioms (the successor axioms) and the second-order
+induction axiom. $>$, $+$, and $\times$ are definable in $\Th{PA^{2\dagger}}$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{prob}
+
+\begin{cor}
+$\Sat{M}{\Th{PA^2}}$ iff $\Sat{M}{\Th{PA^{2\dagger}}}$.
+\end{cor}
+
+\begin{proof}
+Immediate from \olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{proof}
 
 
 \end{document}
