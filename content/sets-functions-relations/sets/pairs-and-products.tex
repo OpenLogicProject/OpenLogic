@@ -12,7 +12,17 @@
 \begin{explain}
 Sets have no order to their elements. We just think of them as an
 unordered collection. So if we want to represent order, we use
-\emph{ordered pairs} $\tuple{x, y}$, or more generally,
+\emph{ordered pairs} $\tuple{x, y}$. In an unordered pair $\{x, y\}$,
+the order does not matter: $\{x, y\} = \{y, x\}$. In an ordered pair,
+it does: if $x \neq y$, then $\tuple{x, y} \neq \tuple{y, x}$.
+
+Sometimes we also want ordered sequences of more than two objects,
+e.g., \emph{triples} $\tuple{x, y, z}$, \emph{quadruples} $\tuple{x,
+  y, z, u}$, and so on.  In fact, we can think of triples as special
+ordered pairs, where the first element is itself an ordered pair:
+$\tuple{x, y, z}$ is short for $\tuple{\tuple{x, y},z}$. The same is
+true for quadruples: $\tuple{x,y,z,u}$ is short for
+$\tuple{\tuple{\tuple{x,y},z},u}$, and so on. In general, we talk of
 \emph{ordered $n$-tuples} $\tuple{x_1, \dots, x_n}$.
 \end{explain}
 
@@ -33,16 +43,47 @@ X \times Y = \{ \tuple{0, 1}, \tuple{0, a}, \tuple{0, b},
 If $X$ is a set, the product of $X$ with itself, $X \times X$, is also
 written~$X^2$. It is the set of \emph{all} pairs $\tuple{x, y}$ with
 $x, y \in X$. The set of all triples $\tuple{x, y, z}$ is $X^3$, and
-so on.
+so on. We can give an inductive definition:
+\begin{align*}
+  X^1 & = X\\
+  X^{k+1} & = X^k \times X
+\end{align*}
 \end{ex}
 
 \begin{prob}
 List all !!{element}s of $\{1, 2, 3\}^3$.
 \end{prob}
 
+\begin{prop}
+If $X$ has $n$ !!{element}s and $Y$ has $m$ !!{element}s, then $X
+\times Y$ has $n\cdot m$ elements.
+\end{prop}
+
+\begin{proof}
+For every !!{element}~$x$ in~$X$, there are $m$ !!{element}s of the
+form $\tuple{x, y} \in X \times Y$. Let $Y_x = \Setabs{\tuple{x, y}}{y
+  \in Y}$. Since whenever $x_1 \neq x_2$, $\tuple{x_1, y} \neq
+\tuple{x_2, y}$, $Y_{x_1} \cap Y_{x_2} = \emptyset$. But if $X = \{x_1,
+\dots, x_n\}$, then $Y = Y_{x_1} \cup \dots \cup Y_{x_n}$, so has
+$n\cdot m$ !!{element}s.
+
+To visualize this, arrange the !!{element}s of~$X \times Y$ in a grid:
+\[
+\begin{array}{rcccc}
+  Y_{x_1} = & \{\tuple{x_1, y_1} & \tuple{x_1, y_2} & \dots & \tuple{x_1, y_m}\}\\
+  Y_{x_2} = & \{\tuple{x_2, y_1} & \tuple{x_2, y_2} & \dots & \tuple{x_2, y_m}\}\\
+  \vdots & & \vdots\\
+  Y_{x_n} = & \{\tuple{x_n, y_1} & \tuple{x_n, y_2} & \dots & \tuple{x_n, y_m}\}
+\end{array}
+\]
+Since the $x_i$ are all different, and the $y_j$ are all different, no
+two of the pairs in this grid are the same, and there are $n\cdot m$
+of them.
+\end{proof}
+
 \begin{prob}
-Show that if $X$ has $n$ !!{element}s, then $X^k$ has $n^k$
-!!{element}s.
+Show, by induction on~$k$, that for all $k \ge 1$, if $X$ has $n$
+!!{element}s, then $X^k$ has $n^k$ !!{element}s.
 \end{prob}
 
 \begin{ex}
