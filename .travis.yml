@@ -2,6 +2,6 @@ sudo: required
 services:
 - docker
 before_install:
-- docker pull dpollet/texlive:base
+- docker pull dpollet/texlive:full
 script:
 - docker run --tty --interactive --volume $PWD:/work dpollet/texlive:base latexmk -dvi- -pdf --pdflatex="pdflatex -interaction nonstopmode -halt-on-error" open-logic-debug.tex
