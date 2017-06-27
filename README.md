@@ -1,6 +1,8 @@
 The Open Logic Project
 ======================
 
+[![Build Status](https://travis-ci.org/rzach/OpenLogic.svg?branch=master)](https://travis-ci.org/rzach/OpenLogic)
+
 The OLP is an open source, open access textbook on advanced logic, aimed at philosophers, but also suitable for computer scientists and mathematicians. The text is a template from which custom books can be produced, depending on the aim of the course and the preferences of the instructor. It is written in LaTeX.
 
 For more information, see the <a href="http://openlogicproject.org/">project website</a> and <a href="https://github.com/OpenLogicProject/OpenLogic/wiki">Open Logic wiki</a>.
