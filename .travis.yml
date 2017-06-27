@@ -1,7 +1,8 @@
 sudo: required
-services:
-- docker
+dist: trusty
 before_install:
-- docker pull dpollet/texlive:full
+- sudo add-apt-repository ppa:jonathonf/texlive-2016 -y
+- sudo apt-get -qq update
+- sudo apt-get install -y --no-install-recommends texlive-base texlive-fonts-recommended texlive-latex-recommended texlive-latex-extra latexmk
 script:
-- docker run --tty --interactive --volume $PWD:/work dpollet/texlive:base latexmk -dvi- -pdf --pdflatex="pdflatex -interaction nonstopmode -halt-on-error" open-logic-debug.tex
+- latexmk -dvi- -pdf --pdflatex="pdflatex -interaction nonstopmode -halt-on-error" open-logic-debug.tex
