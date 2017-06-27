@@ -25,15 +25,40 @@ of the language appearing in a sentence~$!A$ and have the same domain,
 \end{explain}
 
 \begin{prop}[Extensionality]
-Let $!A$ be a sentence, and $\Struct M$ and $\Struct M'$ be !!{structure}s.
-If $\Assign{c}{M} = \Assign{c}{M'}$, $\Assign{R}{M}=\Assign{R}{M'}$, and
-$\Assign{f}{M} = \Assign{f}{M'}$ for every !!{constant}~$c$, relation
-symbol~$R$, and !!{function} $f$ occurring in~$!A$, then $\Sat{M}{!A}$
-iff $\Sat{M'}{!A}$.
+  \ollabel{prop:extensionality}
+  Let $!A$ be !!a{formula}, and $\Struct M_1$ and $\Struct M_2$ be
+  !!{structure}s with $\Domain{M_1} = \Domain{M_2}$, and $s$ a
+  variable assignment on $\Domain{M_1} = \Domain{M_2}$.  If
+  $\Assign{c}{M_1} = \Assign{c}{M_2}$, $\Assign{R}{M_1}=\Assign{R}{M_2}$,
+  and $\Assign{f}{M_1} = \Assign{f}{M_2}$ for every !!{constant}~$c$,
+  relation symbol~$R$, and !!{function} $f$ occurring in~$!A$, then
+  $\Sat{M_1}{!A}[s]$ iff $\Sat{M_2}{!A}[s]$.
 \end{prop}
 
-Moreover, the value of a term, and whether or not a !!{structure}
-satisfies a !!{formula}, only depends on the values of its subterms.
+\begin{proof}
+  First prove (by induction on~$t$) that for every term,
+  $\Value{t}{M_1}[s] = \Value{t}{M_2}[s]$.  Then prove the proposition
+  by induction on~$!A$, making use of the claim just proved for the
+  induction basis (where $!A$ is atomic).
+\end{proof}
+
+\begin{prob}
+Carry out the proof of \olref[fol][syn][ext]{prop:extensionality} in
+detail.
+\end{prob}
+
+\begin{cor}[Extensionality]
+  \ollabel{cor:extensionality-sent}
+  Let $!A$ be !!a{sentence} and $\Struct{M_1}$, $\Struct{M_2}$ as in
+  \olref{prop:extensionality}. Then $\Sat{M_1}{!A}$ iff $\Sat{M_2}{!A}$.
+\end{cor}
+
+\begin{proof}
+  Follows from \olref{prop:extensionality} by \olref[sat]{cor:sat-sentence}.
+\end{proof}
+
+Moreover, the value of a term, and whether or not !!a{structure}
+satisfies !!a{formula}, only depends on the values of its subterms.
 
 \begin{prop}\ollabel{prop:ext-terms}
 Let $\Struct M$ be a !!{structure}, $t$ and $t'$ terms, and $s$ a

@@ -10,18 +10,18 @@
 \olsection{Soundness}
 
 \begin{explain}
-A !!{derivation} system, such as natural deduction, is \emph{sound}
+!!^a{derivation} system, such as natural deduction, is \emph{sound}
 if it cannot !!{derive} things that do not actually follow.  Soundness is
 thus a kind of guaranteed safety property for !!{derivation} systems.
 Depending on which proof theoretic property is in question, we would
 like to know for instance, that
 \begin{enumerate}
 \item every !!{derivable} !!{sentence} is valid;
-\item if a !!{sentence} is !!{derivable} from some others, it is also a
+\item if !!a{sentence} is !!{derivable} from some others, it is also a
   consequence of them;
 \item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
 \end{enumerate}
-These are important properties of a !!{derivation} system. If any of
+These are important properties of !!a{derivation} system. If any of
 them do not hold, the !!{derivation} system is deficient---it would
 !!{derive} too much.  Consequently, establishing the soundness of a
 !!{derivation} system is of the utmost importance.
@@ -40,14 +40,14 @@ from the !!{undischarged} assumptions of the subproofs ending in those premises.
 \emph{Inductive Step}: Show that $!A$ follows from the
 !!{undischarged} assumptions of the entire proof.
 
-Let $\delta$ be a !!{derivation} of $!A$. We proceed by
+Let $\delta$ be !!a{derivation} of $!A$. We proceed by
 induction on the number of inferences in~$\delta$.
 
 If the number of inferences is~0, then $\delta$ consists only of an
-initial !!{formula}. Every initial !!{formula} $!A$ is an
-!!{undischarged} assumption, and as such, any !!{structure}
-$\Struct{M}$ that satisfies all of the !!{undischarged} assumptions of
-the proof also satisfies~$!A$.
+initial !!{formula}. Every initial !!{formula}~$!A$ is 
+!!a{undischarged} assumption, and as such, any
+!!{structure}~$\Struct{M}$ that satisfies all of the !!{undischarged}
+assumptions of the proof also satisfies~$!A$.
 
 If the number of inferences is greater than~0, we distinguish cases
 according to the type of the lowermost inference. By induction
@@ -58,67 +58,110 @@ ending in those premises, respectively.
 First, we consider the possible inferences with only one premise.
 
 \begin{enumerate}
-\item Suppose that the last inference is \Intro{\lnot}: By inductive
-  hypothesis, $\lfalse$ follows from the !!{undischarged} assumptions
-  $\Gamma \cup \{!A\}$. Consider a !!{structure}~$\Struct M$. We need
-  to show that, if $\Sat{M}{\Gamma}$, then $\Sat{M}{\lnot
-    !A}$. Suppose for reductio that $\Sat{M}{\Gamma}$, but
-  $\Sat/{M}{\lnot !A}$, i.e., $\Sat{M}{!A}$. This would mean that
-  $\Sat{M}{\Gamma \cup \{!A\}}$. This is contrary to our inductive
-  hypothesis. So, $\Sat{M}{\lnot !A}$.
+\item Suppose that the last inference is \Intro{\lnot}: The
+  !!{derivation} has the form
+  \begin{prooftree}
+    \AxiomC{$\Gamma, \Discharge{!A}{n}$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$\lfalse$}
+    \DischargeRule{\Intro{\lnot}}{n}
+    \UnaryInfC{$\lnot !A$}
+  \end{prooftree}
+  By inductive hypothesis, $\lfalse$ follows from the !!{undischarged}
+  assumptions $\Gamma \cup \{!A\}$ of~$\delta_1$. Consider
+  !!a{structure}~$\Struct M$. We need to show that, if
+  $\Sat{M}{\Gamma}$, then $\Sat{M}{\lnot !A}$. Suppose for reductio
+  that $\Sat{M}{\Gamma}$, but $\Sat/{M}{\lnot !A}$, i.e.,
+  $\Sat{M}{!A}$. This would mean that $\Sat{M}{\Gamma \cup
+    \{!A\}}$. This is contrary to our inductive hypothesis. So,
+  $\Sat{M}{\lnot !A}$.
   
 \item The last inference is \Elim{\lnot}: Exercise.
 
 \item The last inference is \Elim{\land}: There are two variants: $!A$
   or $!B$ may be inferred from the premise $!A \land !B$. Consider the
-  first case.  By inductive hypothesis, $!A \land !B$ follows from the
-  !!{undischarged} assumptions $\Gamma$. Consider a
-  !!{structure}~$\Struct M$. We need to show that, if
-  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A}$. By our inductive
-  hypothesis, we know that $\Sat{M}{!A\land !B}$. So, $\Sat{M}{!A}$.
-  The case where $!B$ is inferred from $!A \land !B$ is handled
-  similarly.
+  first case. The derivation~$\delta$ looks like this:
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A \land !B$}
+    \RightLabel{\Elim{\land}}
+    \UnaryInfC{$!A$}
+  \end{prooftree}
+  By inductive hypothesis, $!A \land !B$ follows from the
+  !!{undischarged} assumptions~$\Gamma$ of~$\delta_1$. Consider 
+  !!a{structure}~$\Struct M$. We need to show that, if
+  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A}$. Suppose $\Sat{M}{\Gamma}$. By
+  our inductive hypothesis ($\Gamma \Entails !A \lor !B$), we know
+  that $\Sat{M}{!A \land !B}$. By definition, $\Sat{M}{!A \land !B}$
+  iff $\Sat{M}{!A}$ and $\Sat{M}{!B}$.  (The case where $!B$ is
+  inferred from $!A \land !B$ is handled similarly.)
   
 \item The last inference is \Intro{\lor}: There are two variants: $!A
-  \lor !B$ may be inferred from the premise $!A$ or the premise
-  $!B$. Consider the first case. By inductive hypothesis, $!A$ follows
-  from the !!{undischarged} assumptions~$\Gamma$.  Consider a
-  !!{structure}~$\Struct M$. We need to show that, if
-  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A \lor !B}$. Since
-  $\Sat{M}{\Gamma}$, it must be the case that $\Sat{M}{!A}$, by
-  inductive hypothesis. So it must also be the case that $\Sat{M}{!A \lor
-    !B}$.  The case where $!A \lor !B$ is inferred from $!B$ is
-  handled similarly.
+  \lor !B$ may be inferred from the premise~$!A$ or the
+  premise~$!B$. Consider the first case. The derivation has the form
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A$}
+    \RightLabel{\Intro{\lor}}
+    \UnaryInfC{$!A \lor !B$}
+  \end{prooftree}
+  By inductive hypothesis, $!A$ follows from the !!{undischarged}
+  assumptions~$\Gamma$ of~$\delta_1$.  Consider 
+  !!a{structure}~$\Struct M$. We need to show that, if
+  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A \lor !B}$. Suppose
+  $\Sat{M}{\Gamma}$; then $\Sat{M}{!A}$ since $\Gamma \Entails !A$
+  (the inductive hypothesis). So it must also be the case that
+  $\Sat{M}{!A \lor !B}$.  (The case where $!A \lor !B$ is inferred
+  from~$!B$ is handled similarly.)
   
 \item The last inference is \Intro{\lif}: $!A \lif !B$ is inferred
-  from a subproof with assumption~$!A$ and conclusion~$!B$. By
-  inductive hypothesis, $!B$ follows from the !!{undischarged}
-  assumptions $\Gamma$ and~$!A$. Consider a
-  !!{structure}~$\Struct{M}$. We need to show that, if $\Gamma
-  \Entails !A \lif !B$.  For reductio, suppose that for some
+  from a subproof with assumption~$!A$ and conclusion~$!B$, i.e.,
+  \begin{prooftree}
+    \AxiomC{$\Gamma, \Discharge{!A}{n}$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!B$}
+    \DischargeRule{\Intro{\lif}}{n}
+    \UnaryInfC{$!A \lif !B$}
+  \end{prooftree}
+  By inductive hypothesis, $!B$ follows from the !!{undischarged}
+  assumptions of~$\delta_1$, i.e., $\Gamma \cup \{!A\} \Entails
+  !B$. Consider !!a{structure}~$\Struct{M}$. The !!{undischarged}
+  assumptions of~$\delta$ are just $\Gamma$, since $!A$ is discharged
+  at the last inference. So we need to show that $\Gamma \Entails !A
+  \lif !B$.  For reductio, suppose that for some
   !!{structure}~$\Struct{M}$, $\Sat{M}{\Gamma}$ but $\Sat/{M}{!A \lif
     !B}$. So, $\Sat{M}{!A}$ and $\Sat/{M}{!B}$. But by hypothesis,
-  $!B$ is a consequence of $\Gamma \cup \{!A\}$. So, $\Sat{M}{!A \lif
-    !B}$.
+  $!B$ is a consequence of $\Gamma \cup \{!A\}$, i.e., $\Sat{M}{!B}$,
+  which is a contradiction. So, $\Gamma \Entails !A \lif !B$.
   
-\item The last inference is \Intro{\lforall}: The premise $!A(a)$ is a
-  consequence of the !!{undischarged} assumptions $\Gamma$ by
-  induction hypothesis.  Consider some structure, $\Struct{M}$, such
-  that $\Sat{M}{\Gamma}$. Let $\Struct{M'}$ be exactly like $\Struct{M}$
-  except that $\Assign{a}{M} \neq \Assign{a}{M'}$. We must have
-  $\Sat{M'}{!A(a)}$.
-
-  We now show that $\Sat{M}{\lforall[x][!A(x)]}$. Since
-  $\lforall[x][!A(x)]$ is a !!{sentence}, this means we have to show
-  that for every variable assignment~$s$, $\Sat{M}{!A(x)}[s]$. Since
-  $\Gamma$ consists entirely of sentences, $\Sat{M}{!B}[s]$ for all
-  $!B \in \Gamma$.  Let $\Struct{M'}$ be like $\Struct{M}$ except that
-  $\Assign{a}{M'} = s(x)$.  Then $\Sat{M}{!A(x)}[s]$ iff
-  $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$).  Since $a$ also
-  does not occur in~$\Gamma$, $\Sat{M'}{\Gamma}$. Since $\Gamma
-  \Entails !A(a)$, $\Sat{M'}{!A(a)}$. This means that
-  $\Sat{M}{!A(x)}[s]$.  Since $s$ is an arbitrary variable assignment,
-  $\Sat{M}{\lforall[x][!A(x)]}$.
+\item The last inference is \Intro{\lforall}: Then $\delta$ has the form
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A(a)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][A(x)]$}
+  \end{prooftree}
+  The premise $!A(a)$ is a consequence of the !!{undischarged}
+  assumptions $\Gamma$ by induction hypothesis.  Consider some
+  structure, $\Struct{M}$, such that $\Sat{M}{\Gamma}$.  We need to
+  show that $\Sat{M}{\lforall[x][!A(x)]}$. Since $\lforall[x][!A(x)]$
+  is !!a{sentence}, this means we have to show that for every
+  variable assignment~$s$, $\Sat{M}{!A(x)}[s]$
+  (\olref[syn][sat]{prop:sat-quant}). Since $\Gamma$ consists entirely
+  of sentences, $\Sat{M}{!B}[s]$ for all $!B \in \Gamma$ by
+  \olref[syn][sat]{defn:satisfaction}.  Let $\Struct{M'}$ be like
+  $\Struct{M}$ except that $\Assign{a}{M'} = s(x)$.  Since $a$ does
+  not occur in~$\Gamma$, $\Sat{M'}{\Gamma}$ by
+  \olref[syn][ext]{cor:extensionality-sent}. Since $\Gamma \Entails A(a)$,
+  $\Sat{M'}{A(a)}$.  $\Sat{M'}{!A(x)}[s]$ iff $\Sat{M'}{!A(a)}$ by
+  \olref[syn][ext]{prop:ext-formulas} (recall that $!A(a)$ is just
+  $\Subst{!A(x)}{a}{x}$). So, $\Sat{M'}{!A(x)}[s]$. Since $a$ does not
+  occur in~$!A(x)$, by \olref[syn][ext]{prop:extensionality},
+  $\Sat{M}{!A(x)}[s]$. But $s$ was an arbitrary variable assignment,
+  so $\Sat{M}{\lforall[x][!A(x)]}$.
   
 \item The last inference is \Intro{\lexists}: Exercise.
 
@@ -130,25 +173,52 @@ Now let's consider the possible inferences with several premises:
 \begin{enumerate}
 
 \item The last inference is \Intro{\land}. $!A \land !B$ is inferred
-  from the premises $!A$ and $!B$. By induction hypothesis, $!A$
-  follows from the !!{undischarged} assumptions~$\Gamma$ and $!B$
-  follows from the !!{undischarged} assumptions~$\Delta$. We have to
-  show that $\Gamma \cup \Delta \Entails !A \land !B$. Consider a
-  !!{structure}~$\Struct M$ with $\Sat{M}{\Gamma \cup \Delta}$. Since
-  $\Sat{M}{\Gamma}$, it must be the case that $\Sat{M}{!A}$, and since
-  $\Sat{M}{\Delta}$, $\Sat{M}{!B}$, by inductive hypothesis.
-  Together, $\Sat{M}{!A \land !B}$.
+  from the premises $!A$ and $!B$ and $\delta$ has the form
+  \begin{prooftree}
+    \AxiomC{$\Gamma_1$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A$}
+    \AxiomC{$\Gamma_2$}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!B$}
+    \RightLabel{\Intro{\land}}
+    \BinaryInfC{$!A \land !B$}
+  \end{prooftree}
+  By induction hypothesis, $!A$ follows from the !!{undischarged}
+  assumptions~$\Gamma_1$ of~$\delta_1$ and $!B$ follows from the
+  !!{undischarged} assumptions~$\Gamma_2$ of~$\delta_2$. The
+  !!{undischarged} assumptions of~$\delta$ are $\Gamma_1 \cup
+  \gamma_2$, so we have to show that $\Gamma_1 \cup \Gamma_2 \Entails
+  !A \land !B$. Consider !!a{structure}~$\Struct M$ with
+  $\Sat{M}{\Gamma_1 \cup \Gamma_2}$. Since $\Sat{M}{\Gamma_1}$, it
+  must be the case that $\Sat{M}{!A}$ as $\Gamma_1 \Entails !A$, and
+  since $\Sat{M}{\Gamma_2}$, $\Sat{M}{!B}$ since $\Gamma_2 \Entails
+  !B$. Together, $\Sat{M}{!A \land !B}$.
   
 \item The last inference is \Elim{\lor}: Exercise.
 
 \item The last inference is \Elim{\lif}. $!B$ is inferred from the
-  premises $!A \lif !B$ and $!A$. By induction hypothesis, $!A \lif
-  !B$ follows from the !!{undischarged} assumptions~$\Gamma$ and $!A$
-  follows from the !!{undischarged} assumptions~$\Delta$. Consider a
-  !!{structure}~$\Struct M$. We need to show that, if $\Sat{M}{\Gamma
-    \cup \Delta}$, then $\Sat{M}{!B}$.  It must be the case that
-  $\Sat{M}{!A \lif !B}$, and $\Sat{M}{!A}$, by inductive hypothesis.
-  Thus it must be the case that $\Sat{M}{!B}$.
+  premises $!A \lif !B$ and~$!A$. The derivation~$\delta$ looks like this:
+  \begin{prooftree}
+    \AxiomC{$\Gamma_1$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A \lif !B$}
+    \AxiomC{$\Gamma_2$}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!A$}
+    \RightLabel{\Elim{\lif}}
+    \BinaryInfC{$!B$}
+  \end{prooftree}
+  By induction hypothesis, $!A \lif !B$ follows from the
+  !!{undischarged} assumptions~$\Gamma_1$ of~$\delta_1$ and $!A$
+  follows from the !!{undischarged} assumptions~$\Gamma_2$
+  of~$\delta_2$. Consider !!a{structure}~$\Struct M$. We need to show
+  that, if $\Sat{M}{\Gamma_1 \cup \Gamma_2}$, then
+  $\Sat{M}{!B}$. Suppose $\Sat{M}{\Gamma_1 \cup \Gamma_2}$. Since
+  $\Gamma_1 \Entails !A \lif !B$, $\Sat{M}{!A \lif !B}$. Since
+  $\Gamma_2 \Entails !A$, we have $\Sat{M}{!A}$. This means that
+  $\Sat{M}{!B}$ (For if $\Sat/{M}{!B}$, since $\Sat{M}{!A}$, we'd have
+  $\Sat/{M}{!A \lif !B}$, contradicting~$\Sat{M}{!A \lif !B}$).
     
 \item The last inference is \Elim{\lexists}: Exercise.
 \end{enumerate}

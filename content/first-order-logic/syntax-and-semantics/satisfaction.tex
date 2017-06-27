@@ -336,11 +336,23 @@ and $s(x_i)=s'(x_i)$ for $i = 1$, \dots,~$n$.
 Complete the proof of \olref[fol][syn][sat]{prop:satindep}.
 \end{probtag}
 
+\begin{cor}
+  \ollabel{cor:sat-sentence}
+  If $!A$ is a sentence, then $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$
+  for every~$s'$.
+\end{cor}
+
+\begin{proof}
+  Let $s'$ be any variable assignment. Since $!A$ is !!a{sentence}, it
+  has no free variables, so the condition of \olref{prop:satindep} is
+  satisfied, and we have $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$.
+\end{proof}
+
 \begin{defn}
 \olref{defn:satisfaction}
-If $!A$ is a sentence, we say that a !!{structure}~$\Struct M$
+If $!A$ is !!a{sentence}, we say that !!a{structure}~$\Struct M$
 \emph{satisfies}~$!A$, $\Sat{M}{!A}$, iff $\Sat{M}{!A}[s]$ for all
-!!{variable} assignments~$s$.
+variable assignments~$s$.
 
 If $\Sat{M}{!A}$, we also say that \emph{$!A$ is true
   in~$\Struct{M}$.}
