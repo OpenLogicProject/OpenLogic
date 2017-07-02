@@ -14,14 +14,14 @@
 Extensionality, sometimes called relevance, can be expressed
 informally as follows: the only thing that bears upon the satisfaction
 of !!{formula}~$!A$ in a !!{structure}~$\Struct M$ relative to a
-!!{variable} assignment~$s$, are the assignments made by ~$\Struct M$
-and ~$s$ to the elements of the language that actually appear in
-~$!A$.
+!!{variable} assignment~$s$, are the assignments made by~$\Struct M$
+and~$s$ to the elements of the language that actually appear in~$!A$.
 
 One immediate consequence of extensionality is that where two
-!!{structure}s~$\Struct M$ and ~$\Struct M'$ agree on all the elements
-of the language appearing in a sentence~$!A$ and have the same domain,
-~$\Struct M$ and ~$\Struct M'$ must also agree on~$!A$ itself.
+!!{structure}s~$\Struct M$ and~$\Struct M'$ agree on all the elements
+of the language appearing in a sentence~$!A$ and have the same
+domain,~$\Struct M$ and~$\Struct M'$ must also agree on whether or not
+$!A$ itself is true.
 \end{explain}
 
 \begin{prop}[Extensionality]
@@ -54,7 +54,7 @@ detail.
 \end{cor}
 
 \begin{proof}
-  Follows from \olref{prop:extensionality} by \olref[sat]{cor:sat-sentence}.
+Follows from \olref{prop:extensionality} by \olref[ass]{cor:sat-sentence}.
 \end{proof}
 
 Moreover, the value of a term, and whether or not !!a{structure}
@@ -100,7 +100,7 @@ By induction on~$t$.
 \end{proof}
 
 \begin{prop}\ollabel{prop:ext-formulas}
-Let $\Struct M$ be a !!{structure}, $!A$ a !!{formula}, $t$ a term,
+Let $\Struct M$ be a !!{structure}, $!A$ !!a{formula}, $t$ a term,
 and $s$ a variable assignment. Let $s' \sim_x s$ be the $x$-variant of
 $s$ given by~$s'(x) = \Value{t}{M}[s]$. Then
 $\Sat{M}{\Subst{!A}{t}{x}}[s]$ iff $\Sat{M}{!A}[s']$.
