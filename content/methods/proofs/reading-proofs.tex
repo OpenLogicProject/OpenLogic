@@ -1,0 +1,112 @@
+% Part: methods
+% Chapter: proofs
+% Section: reading-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{prf}{rea}
+\olsection{Reading Proofs}
+
+Proofs you find in textbooks and articles very seldom give all the
+details we have so far included in our examples. Authors ofen do not
+draw attention to when they distinguish cases, when they give an
+indirect proof, or don't mention that they use a definition.  So when
+you read a proof in a textbook, you will often have to fill in those
+details for yourself in order to understand the proof. Doing this is
+also good practice to get the hang of the various moves you have to
+make in a proof. Let's look at an example.
+
+\begin{prop}[Absorption]
+For all sets $X$, $Y$,
+\[
+X \cap (X \cup Y) = X
+\]
+\end{prop}
+
+\begin{proof}
+If $z \in X \cap (X \cup Y)$, then $z \in X$, so $X \cap (X \cup Y)
+\subseteq X$. Now suppose $z \in X$. Then also $z \in X \cup Y$, and
+therefore also $z \in X \cap (X \cup Y)$.
+\end{proof}
+
+The preceding proof of the absorption law is very condensed. There is
+no mention of any definitions used, no ``we have to prove that''
+before we prove it, etc. Let's unpack it.  The proposition proved is a
+general claim about any sets $X$ and $Y$, and when the proof mentions
+$X$ or $Y$, these are variables for arbitrary sets.  The general
+claims the proof establishes is what's required to prove identity of
+sets, i.e., that every !!{element} of the left side of the identity is
+!!a{element} of the right and vice versa.  
+
+\begin{quote}
+``If $z \in X \cap (X \cup Y)$, then $z \in X$, so $X \cap (X \cup Y)
+  \subseteq X$.''
+\end{quote}
+
+This is the first half of the proof of the identity: it estabishes
+that if an arbitrary~$z$ is !!a{element} of the left side, it is also
+!!a{element} of the right, i.e., $X \cap (X \cup Y) \subseteq X$.
+Assume that $z \in X \cap (X \cup Y)$. Since $z$ is an !!{element} of
+the intersection of two sets iff it is an !!{element} of both sets, we
+can conclude that $z \in X$ and also $z \in X \cup Y$. In particular,
+$z \in X$, which is what we wanted to show.  Since that's all that has
+to be done for the first half, we know that the rest of the proof must
+be a proof of the second half, i.e., a proof that $X \subseteq X \cap
+(X \cup Y)$.
+
+\begin{quote}
+``Now suppose $z \in X$. Then also $z \in X \cup Y$, and
+therefore also $z \in X \cap (X \cup Y)$.''
+\end{quote}
+
+We start by assuming that $z \in X$, since we are showing that, for
+any~$z$, if $z \in X$ then $z \in X \cap (X \cup Y)$.  To show that $z
+\in X \cap (X \cup Y)$, we have to show (by definition of ``$\cap$'')
+that (i) $z \in X$ and also (ii) $z \in X \cup Y$. Here (i) is just
+our assumption, so there is nothing further to prove, and that's why
+the proof does not mention it again. For (ii), recall that $z$ is
+!!a{element} of a union of sets iff it is an !!{element} of at least
+one of those sets. Since $z \in X$, and $X \cup Y$ is the union of $X$
+and $Y$, this is the case here. So $z \in X \cup Y$. We've shown both
+(i) $z \in X$ and (ii) $z \in X \cup Y$, hence, by definition of
+``$\cap$,'' $z \in X \cap (X \cup Y)$.  The proof doesn't mention
+those definitions; it's assumed the reader has already internalized
+them.  If you haven't, you'll have to go back and remind yourself what
+they are. Then you'll also have to recognize why it follows from $z
+\in X$ that $z \in X \cup Y$, and from $z \ in X$ and $z \in X \cup Y$
+that $z \in X \cap (X \cup Y)$.
+
+Here's another version of the proof above, with everything made
+explicit:
+\begin{proof}{}
+[By definition of $=$ for sets, $X \cap (X \cup Y) = X$ we have to
+  show (a) $X \cap (X \cup Y) \subseteq X$ and (b) $X \cap (X \cup Y)
+  \subseteq X$. (a): By definition of $\subseteq$, we have to show
+  that if $z \in X \cap (X \cup Y)$, then $z \in X$.]  If $z \in X
+\cap (X \cup Y)$, then $z \in X$ [using a conjunction, since by
+  definition of $\cap$, $z \in X \cap (X \cup Y)$ iff $z \in X$ and $z
+  \in X \cup Y$], so $X \cap (X \cup Y) \subseteq X$. [(b): By
+  definition of $\subseteq$, we have to show that if $z \in X$, then
+  $z \in X \cap (X \cup Y)$.] Now suppose [(1)] $z \in X$. Then also
+     [(2)] $z \in X \cup Y$ [since by (1) $z \in X$ or $z \in Y$,
+       which by definition of $\cup$ means $z \in X \cup Y$], and
+     therefore also $z \in X \cap (X \cup Y)$ [since the definition of
+       $\cap$ requires that $z \in X$, i.e., (1), and $z \in X \cup
+       Y)$, i.e., (2)].
+\end{proof}
+
+\begin{prob}
+Expand the following proof of $X \cup (X \cap Y) = X$, where you
+mention all the inference patterns used, why each step follows from
+assumptions or claims established before it, and where we have to
+appeal o which definitions.
+\begin{proof}
+  If $z \in X \cup (X \cap Y)$ then $z \in X$ or $z \in X \cap Y$. If
+  $z \in X \cap Y$, $z \in X$. Any $z \in X$ is also $\in X \cup (X
+  \cap Y)$.
+\end{proof}
+\end{prob}
+
+\end{document}
