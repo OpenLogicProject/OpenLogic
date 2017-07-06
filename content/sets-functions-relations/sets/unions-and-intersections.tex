@@ -9,6 +9,17 @@
 \olfileid{sfr}{set}{uni}
 \olsection{Unions and Intersections}
 
+\begin{explain}
+We can define new sets by abstraction, and the property used to define
+the new set can mention sets we've already defined. So for instance,
+if $X$ and $Y$ are sets, the set $\Setabs{x}{x \in X \lor x \in Y}$
+defines a set which consists of all those objects which are
+!!{element}s of either $X$ or~$Y$, i.e., it's the set that combines
+the !!{element}s of $X$ and $Y$. This operation on sets---combining
+them---is very useful and common, and so we give it a name and a
+define a symbol.
+\end{explain}
+
 \begin{defn}[Union]
 The \emph{union} of two sets $X$ and $Y$, written $X \cup Y$, is the
 set of all things which are !!{element}s of $X$, $Y$, or both.
@@ -16,6 +27,13 @@ set of all things which are !!{element}s of $X$, $Y$, or both.
 X \cup Y = \Setabs{x}{x \in X \lor x\in Y}
 \]
 \end{defn}
+
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/union.tikz}}
+  \caption{The union $X \cup Y$ of two sets is set of !!{element}s of
+    $X$ together with those of~$Y$.}
+\end{figure}
 
 \begin{ex}
 Since the multiplicity of !!{element}s doesn't matter, the union of two
@@ -33,6 +51,11 @@ b, c \} \cup \emptyset = \{a, b, c \}$.
 Prove rigorously that if $X \subseteq Y$, then $X \cup Y = Y$.
 \end{prob}
 
+\begin{explain}
+The operation that forms the set of all !!{element}s that $X$ and $Y$
+have in common is called their \emph{intersection}.
+\end{explain}
+
 \begin{defn}[Intersection]
 The \emph{intersection} of two sets $X$ and $Y$, written $X \cap Y$, is
 the set of all things which are !!{element}s of both $X$ and~$Y$.
@@ -42,6 +65,13 @@ X \cap Y = \Setabs{x}{x \in X \land x\in Y}
 Two sets are called \emph{disjoint} if their intersection is
 empty. This means they have no !!{element}s in common.
 \end{defn}
+
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/intersection.tikz}}
+  \caption{The intersection $X \cap Y$ of two sets is the set of
+    !!{element}s they have in common.}
+\end{figure}
 
 \begin{ex}
 If two sets have no !!{element}s in common, their intersection is empty:
@@ -111,5 +141,13 @@ $X$ which are not also !!{element}s of~$Y$, i.e.,
 X\setminus Y = \Setabs{x}{x\in X \text{ and } x \notin Y}.
 \]
 \end{defn}
+
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/difference.tikz}}
+  \caption{The difference $X \setminus Y$ of two sets is the set of
+    those !!{element}s of~$X$ which are not also elements of~$Y$.}
+\end{figure}
+
 
 \end{document}
