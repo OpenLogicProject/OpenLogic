@@ -159,7 +159,7 @@ We will consider each of these three cases in turn.
   so this entails:}
 & \Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m},
    \num{n}))
-\intertext{We get}
+\intertext{We now get}
 & \Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
   \num{n}') \land {}\\
 & \qquad\Obj S_{\sigma_0}(\num{0}, \num{n}') \land \dots \land
@@ -170,9 +170,15 @@ as follows: The first line comes directly from the consequent of the
 preceding conditional, by modus ponens. Each conjunct in the middle
 line---which excludes $S_{\sigma_m}(\num{m},\num{n}')$---follows from
 the corresponding conjunct in~$!C(M, w, n)$ together with $!A(\num{m},
-\num{n})$. The last line follows from the corresponding conjunct in
-$C!(M, w, n)$, $\num{k} < x \lif \num{m} < x$, and $!A(\num{m},
-\num{n})$.  Since we assumed $m<k$, this just is $!C(M, w, n+1)$.
+\num{n})$.
+
+If $m < k$, $!T(M,w) \Proves \num{m} < \num {k}$
+(\olref[rep]{prop:mlessk}) and by transitivity of~$<$, we have
+$\lforall[x][(\num{k} < x \lif \num{m} < x)]$.  If $m = k$, then
+$\lforall[x][(\num{k} < x \lif \num{m} < x)]$ by logic alone.  The
+last line then follows from the corresponding conjunct in $!C(M, w,
+n)$, $\lforall[x][(\num{k} < x \lif \num{m} < x)]$, and $!A(\num{m},
+\num{n})$.  If $m<k$, this already is $!C(M, w, n+1)$.
 
 Now suppose $m=k$. In that case, after $n+1$ steps, the tape head has
 also visited square~$k+1$, which now is the right-most square
@@ -183,14 +189,14 @@ have to verify that these two !!{sentence}s are also implied.
 
 We already have $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x,
   \num{n}'))]$. In particular, this gives us $\num{k} < \num{k'} \lif
-\Obj S_\TMblank(\num{k}', \num{n}'))$. From the axiom $\lforall[x][x <
+\Obj S_\TMblank(\num{k}', \num{n}')$. From the axiom $\lforall[x][x <
   x']$ we get $\num{k} < \num{k'}$. By modus ponens, $\Obj
 S_\TMblank(\num{k}',\num{n}')$ follows.
 
-Also, if $\num{k}' < x$, then $\num{k} < x$, by the axiom for
-transitivity of~$<$. This means that $\lforall[x][(\num{k}' < x \lif
-  \Obj S_\TMblank(x, \num{n}'))]$ follows as well. (We leave the
-verification of this as an exercise.)
+Also, since $!T(M,w) \Proves \num{k} < \num{k}'$, the axiom for
+transitivity of~$<$ gives us $\lforall[x][(\num{k}' < x \lif \Obj
+  S_\TMblank(x, \num{n}'))]$. (We leave the verification of this as an
+exercise.)
 
 \item Suppose there is an instruction of the form~\olref{left}.
   Then, by \olref[rep]{defn:tm-descr}, \olref[rep]{rep-left},
