@@ -1,0 +1,139 @@
+% Part: second-order-logic
+% Chapter: sol-and-sets
+% Section: power-of-continuum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{pow}
+
+\olsection{The Power of the Continuum}
+
+\begin{explain}
+In second-order logic we can quantify over subsets of the !!{domain},
+but not over sets of subsets of the !!{domain}. To do this directly,
+we would need \emph{third-order} logic.  For instance, if we wanted to
+state Cantor's Theorem that there is no !!{injective} function from
+the power set of a set to the set itself, we might try to formulate it
+as ``for every set~$X$, and every set~$P$, if $P$ is the power set
+of~$X$, then not $\cardle{P}{X}$. And to say that $P$ is the power set
+of~$X$ would require formalizing that the !!{element}s of $P$ are all
+and only the subsets of~$X$, so something like $\lforall[Y][(P(Y)
+  \liff Y \subseteq X)]$. The problem lies in $P(Y)$: that is not
+!!a{formula} of second-order logic, since only terms can be arguments
+to one-place relation variables like~$P$.
+
+We can, however, \emph{simulate} quantification over sets of sets, if
+the domain is large enough.  The idea is to make use of the fact that
+two-place relations~$R$ relates !!{element}s of the !!{domain} to
+!!{element}s of the !!{domain}. Given such an~$R$, we can collect all
+the !!{element}s to which some~$x$ is $R$-related: $\Setabs{y \in
+  \Domain{M}}{R(x,y)}$ is the set ``coded by''~$x$.  Converseley, if
+$Z \subseteq \Pow{\Domain{M}}$ is some collection of subsets
+of~$\Domain{M}$, and there are at least as many !!{element}s
+of~$\Domain{M}$ as there are sets in~$Z$, then there is also a
+relation~$R \subseteq \Domain{M}^2$ such that every $Y \in Z$ is coded
+by some~$x$ using~$R$.
+\end{explain}
+
+\begin{defn}
+If $R \subseteq \Domain{M}^2$, then \emph{$x$ $R$-codes} $\Setabs{y
+  \in \Domain{M}}{R(x, y)}$. $Y$ $R$-codes $\Pow{X}$ iff for every $Z
+\subseteq X$, some $x \in Y$ $R$-codes~$Y$, and every $x \in Y$
+$R$-codes some~$Y \in Z$.
+\end{defn}
+
+\begin{prop}
+  The !!{formula}
+  \[
+  \fn{Codes}(x, R, Y) \ident \lforall[y][(Y(y) \liff
+    R(x, y))]
+  \]
+  expresses that $s(x)$ $s(R)$-codes $s(Y)$.  The
+!!{formula} 
+\begin{multline*}
+  \fn{Pow}(Y, R, X) \ident \\
+  \lforall[Z][(Z \subseteq X \lif \lexists[x][(Y(x) \land
+    \fn{Codes}(x, R, Z))])] \land {} \\ \lforall[x][(Y(x) \lif
+  \lforall[Z][(\fn{Codes}(x, R, Z) \lif Z \subseteq X)]]
+\end{multline*}
+expresses that $s(Y)$ $s(R)$-codes the power set of~$s(X)$.
+\end{prop}
+
+\begin{explain}
+With this trick, we can express statements about the power set by
+quantifying over the codes of subsets rather than the subsets
+themselves.  For instance, Cantor's Theorem can now be expressed
+by saying that there is no !!{injective} function from the domain
+of any relation that codes the power set of~$X$ to~$X$ itself.
+\end{explain}
+
+\begin{prop}
+The sentence
+\begin{multline*}
+  \lforall[X][\lforall[R][(\fn{Pow}(R, X) \lif \\
+      \lnot \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
+            \eq[x][y])]] \land \\
+        \lforall[Y][(\fn{Codes}(x, R, Y) \lif
+        X(u(x)))])])]]
+\end{multline*}
+is valid.
+\end{prop}
+
+\begin{explain}
+The power set of !!a{denumerable} set is !!{nonenumerable}, and so its
+cardinality is larger than that of any !!{denumerable} set (which is
+$\aleph_0$).  The size of $\Pow{\Real}$ is called the ``power of the
+continuum,'' since it is the same size as the points on the real
+number line,~$\Real$. If the !!{domain} is large enough to code the
+power set of !!a{denumerable} set, we can express that a set is the
+size of the continuum by saying that it is equinumerous with any
+set~$Y$ that codes the power set of set~$X$ of size~$\aleph_0$. (If the
+domain is not large enough, i.e., it contains no subset equinumerous
+with~$\Real$, then there can also be no relation that codes~$\Pow{X}$.)
+\end{explain}
+
+\begin{prop}
+If $\cardle{\Real}{\Domain{M}}$, then the !!{formula}
+\[
+\fn{Cont}(X) \ident
+\lforall[X][\lforall[Y][\lforall[R][((\fn{Aleph}_0(X) \land
+      \fn{Pow}(Y, R, X)) \lif \lnot \cardle{Y}{X})]]]
+\]
+expresses that $\cardeq{s(X)}{\Real}$.
+\end{prop}
+
+\begin{prop}
+$\cardeq{\Domain{M}}{\Real}$ iff
+\begin{multline*}
+  \Sat{M}{\lexists[X][\lexists[Y][\lexists[R][(\fn{Aleph}_0(X) \land \fn{Pow}(Y, R, X) \land \\
+          \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif \eq[x][y])]] \land {} \\\lforall[y][(Y(y) \lif \lexists[x][\eq[y][u(x)]])])])]]] }
+        \end{multline*}
+  \end{prop}
+
+\begin{explain}
+The Continuum Hypothesis is the statement that the size of the
+continuum is the first !!{nonenumerable} cardinality, i.e, that
+$\Pow{\Nat}$ has size~$\aleph_1$. 
+\end{explain}
+
+\begin{prop}
+The Continuum Hypothesis is true iff \[\fn{CH} \ident
+\lforall[X][(\fn{Aleph}_1(X) \liff \fn{Cont}(x))]\] is valid.
+\end{prop}
+
+Note that it isn't true that $\lnot \fn{CH}$ is valid iff the
+Continuum Hypothesis is false. In !!a{enumerable} domain, there are no
+subsets of size~$\aleph_1$ and also no subsets of the size of the
+continuum, so $\fn{CH}$ is always true in !!a{enumerable}
+domain. However, we can give a different sentence that is valid iff
+the Continuum Hypothesis is false:
+
+\begin{prop}
+The Continuum Hypothesis is false iff \[\fn{NCH} \ident
+\lforall[X][(\fn{Cont}(X) \lif \lexists[Y][(Y \subseteq X \land \lnot
+    \fn{Count}(X) \land \lnot \cardeq{X}{Y})])]\] is valid.
+\end{prop}
+
+\end{document}

@@ -9,26 +9,31 @@
 \olfileid{sfr}{set}{prf}
 \olsection{Proofs about Sets}
 
+\begin{editorial}
+This section is superceded by \verb|content/method/proofs| and has
+been removed from this chapter by default.
+\end{editorial}
+
 \begin{explain}
 Sets and the notations we've introduced so far provide us with
 convenient shorthands for specifying sets and expressing relationships
-between them.  Often it will also be necessary to prove claims about
-such relationships.  If you're not familiar with mathematical proofs,
-this may be new to you.  So we'll walk through a simple example.  We'll
+between them. Often it will also be necessary to prove claims about
+such relationships. If you're not familiar with mathematical proofs,
+this may be new to you. So we'll walk through a simple example. We'll
 prove that for any sets $X$ and $Y$, it's always the case that $X \cap
-(X \cup Y) = X$.  How do you prove an identity between sets like this?
+(X \cup Y) = X$. How do you prove an identity between sets like this?
 Recall that sets are determined solely by their !!{element}s, i.e.,
-sets are identical iff they have the same !!{element}s.  So in this
+sets are identical iff they have the same !!{element}s. So in this
 case we have to prove that (a) every !!{element} of $X \cap (X \cup
 Y)$ is also an !!{element} of $X$ and, conversely, that (b) every
-!!{element} of $X$ is also an !!{element} of $X \cap (X \cup Y)$.  In
+!!{element} of $X$ is also an !!{element} of $X \cap (X \cup Y)$. In
 other words, we show that both (a) $X \cap (X \cup Y) \subseteq X$ and
 (b) $X \subseteq X \cap (X \cup Y)$.
 
 A proof of a general claim like ``every !!{element}~$z$ of $X \cap (X
 \cup Y)$ is also an !!{element} of $X$'' is proved by first assuming
 that an arbitrary $z \in X \cap (X \cup Y)$ is given, and proving from
-this assumtion that $z \in X$.  You may know this pattern as ``general
+this assumtion that $z \in X$. You may know this pattern as ``general
 conditional proof.''  In this proof we'll also have to make use of the
 definitions involved in the assumption and conclusion, e.g., in this
 case of ``$\cap$'' and ``$\cup$.''  So case (a) would be argued as
@@ -37,37 +42,38 @@ follows:
 \begin{quote}
 (a) We first want to show that $X \cap (X \cup Y) \subseteq X$, i.e.,
 by definition of $\subseteq$, that if $z \in X \cap (X \cup Y)$ then
-$z \in X$, for any~$z$.  So assume that $z \in X \cap (X \cup
+$z \in X$, for any~$z$. So assume that $z \in X \cap (X \cup
 Y)$. Since $z$ is an !!{element} of the intersection of two sets iff
 it is an !!{element} of both sets, we can conclude that $z \in X$ and
-also $z \in X \cup Y$.  In particular, $z \in X$.  But this is what
+also $z \in X \cup Y$. In particular, $z \in X$, which is what
 we wanted to show.
 \end{quote}
 
-This completes the first half of the proof.  Note that in the last
+This completes the first half of the proof. Note that in the last
 step we used the fact that if a conjunction ($z \in X$ and $z \in X
 \cup Y$) follows from an assumption, each conjunct follows from that
-same assumption.  You may know this rule as ``conjunction
-elimination,'' or $\land$Elim.  Now let's prove (b):
+same assumption. You may know this rule as ``conjunction
+elimination,'' or $\land$Elim. Now let's prove (b):
 
 \begin{quote}
 (b) We now prove that $X \subseteq X \cap (X \cup Y)$, i.e., by
 definition of $\subseteq$, that if $z \in X$ then also $z \in X \cap
-(X \cup Y)$, for any~$z$.  Assume $z \in X$.  To show that $z \in X
+(X \cup Y)$, for any~$z$. Assume $z \in X$. To show that $z \in X
 \cap (X \cup Y)$, we have to show (by definition of ``$\cap$'') that
-(i) $z \in X$ and also (ii) $z \in X \cup Y$.  Here (i) is just our
-assumption, so there is nothing further to prove.  For (ii), recall that $z$
+(i) $z \in X$ and also (ii) $z \in X \cup Y$. Here (i) is just our
+assumption, so there is nothing further to prove. For (ii), recall that $z$
 is an !!{element} of a union of sets iff it is an !!{element} of at least
-one of those sets.  Since $z \in X$, and $X \cup Y$ is the union of
-$X$ and $Y$, this is the case here.  So $z \in X \cup Y$.  We've shown
+one of those sets. Since $z \in X$, and $X \cup Y$ is the union of
+$X$ and $Y$, this is the case here. So $z \in X \cup Y$. We've shown
 both (i) $z \in X$ and (ii) $z \in X \cup Y$, hence, by definition of
 ``$\cap$,'' $z \in X \cap (X \cup Y)$.
 \end{quote}
 
 This was somewhat long-winded, but it illustrates how we reason about
-sets and their relationships.  We usually aren't this explicit; in
-particular, we might not repeat all the definitions.  A ``textbook''
-proof of our result would look something like this.
+sets and their relationships. We usually aren't this explicit; in
+particular, we might not repeat all the definitions. A proof of our
+result in a more advanced text would be much more compressed. It might
+look something like this.
 \end{explain}
 
 
@@ -79,17 +85,17 @@ X \cap (X \cup Y) = X
 \end{prop}
 
 \begin{proof}
-(a) Suppose $z \in X \cap (X \cup Y)$.  Then $z \in X$, so $X \cap (X
+(a) Suppose $z \in X \cap (X \cup Y)$. Then $z \in X$, so $X \cap (X
   \cup Y) \subseteq X$.
 
-(b) Now suppose $z \in X$.  Then also $z \in X \cup Y$, and therefore
-  also $z \in X \cap (X \cup Y)$.  Thus, $X \subseteq X \cap (X \cup
+(b) Now suppose $z \in X$. Then also $z \in X \cup Y$, and therefore
+  also $z \in X \cap (X \cup Y)$. Thus, $X \subseteq X \cap (X \cup
   Y)$.
 \end{proof}
 
 \begin{prob}
-Prove in detail that $X \cup (X \cap Y) = X$.  Then compress it into a
-``textbook proof.'' (Hint: for the $X \cup (X \cap Y) \subseteq X$
+Prove in detail that $X \cup (X \cap Y) = X$. Then give a shortened,
+compressed proof. (Hint: for the $X \cup (X \cap Y) \subseteq X$
 direction you will need proof by cases, aka $\lor$Elim.)
 \end{prob}
 

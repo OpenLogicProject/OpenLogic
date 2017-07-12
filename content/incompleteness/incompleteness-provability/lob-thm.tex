@@ -10,24 +10,53 @@
 
 \olsection{L\"ob's Theorem}
 
-\newcommand{\pt}{\fn{Prov}_T}
+The G\"odel sentence for a theory~$\Th{T}$ is a fixed point of $\lnot
+\OProv[T](x)$, i.e., !!a{sentence}~$!G$ such that
+\[
+\Th{T} \Proves \lnot \OProv[T](\gn{!G}) \liff !G.
+\]
+It is not provable, because if $\Th{T} \Proves !G$, (a) by provability
+condition~(1), $\Th{T} \Proves \OProv[T](\gn{!G})$, and (b) $\Th{T}
+\Proves !G$ together with $\Th{T} \Proves \lnot \OProv[T](\gn{!G})
+\liff !G$ gives $\Th{T} \Proves \lnot \OProv[T](\gn{!G})$, and so
+$\Th{T}$ would be inconsistent.  Now it is natural to ask about the
+status of a fixed point of $\OProv[T](x)$, i.e., !!a{sentence}~$!H$
+such that
+\[
+\Th{T} \Proves \OProv[T](\gn{!H}) \liff !H.
+\]
+If it were provable, $\Th{T} \Proves \OProv[T](\gn{!H})$ by
+condition~(1), but the same conclusion follows if we apply modus
+ponens to the equivalence above. Hence, we don't get that $\Th{T}$ is
+inconsistent, at least not by the same argument as in the case of the
+G\"odel sentence. This of course does not show that $\Th{T}$
+\emph{does} prove~$!H$.
 
-In this section, we will consider a fun application of the fixed-point
-lemma. We now know that any ``reasonable'' theory of arithmetic is
-incomplete, which is to say, there are sentences $!A$ that are neither
-provable nor refutable in the theory. One can ask whether, in general,
-a theory can prove ``If I can prove $!A$, then it must be true.'' The
-answer is that, in general, it can't. More precisely, we have:
+We can make headway on this question if we generalize it a bit. The
+left-to-right direction of the fixed point equivalence,
+$\OProv[T](\gn{!H}) \lif !H$, is an instance of a general schema
+called a \emph{reflection principle}: $\OProv[T](\gn{!A}) \lif !A$.
+It is called that because it expresses, in a sense, that $\Th{T}$ can
+``reflect'' about what it can prove; basically it says, ``If $\Th{T}$
+can prove~$!A$, then~$!A$ is true,'' for any~$!A$.  This is true for
+sound theories only, of course, and this suggests that theories will
+in general not prove every instance of it.  So which instances can a
+theory (strong enough, and satisfying the provability conditions)
+prove?  Certainly all those where $!A$ itself is provable. And that's
+it, as the next result shows.
 
 \begin{thm}
-  Let $\Th{T}$ be any theory extending $\Th{Q}$, and suppose
-  $\OProv[T](y)$ is a formula satisfying conditions 1--3 from
-  \olref[2in]{sec}. If $\Th{T}$ proves $\OProv[T](\gn{!A}) \lif !A$,
-  then in fact $\Th{T}$ proves $!A$.
+Let $\Th{T}$ be !!a{axiomatizable} theory extending $\Th{Q}$, and
+suppose $\OProv[T](y)$ is a formula satisfying conditions P1--P3 from
+\olref[2in]{sec}. If $\Th{T}$ proves $\OProv[T](\gn{!A}) \lif !A$,
+then in fact $\Th{T}$ proves $!A$.
 \end{thm}
-Put differently, if $!A$ is not provable in $\Th{T}$, $\Th{T}$ can't
-prove $\OProv[T](\gn{!A}) \lif !A$. This is known as L\"ob's theorem.
 
+Put differently, if $\Th{T} \Proves/ !A$, then $\Th{T} \Proves/
+\OProv[T](\gn{!A}) \lif !A$. This result is known as L\"ob's
+theorem.
+
+\begin{explain}
 The heuristic for the proof of L\"ob's theorem is a clever proof that
 Santa Claus exists. (If you don't like that conclusion, you are free
 to substitute any other conclusion you would like.) Here it is:
@@ -35,47 +64,74 @@ to substitute any other conclusion you would like.) Here it is:
 \item Let $X$ be the sentence, ``If $X$ is true, then Santa Claus
   exists.''
 \item Suppose $X$ is true.
-\item Then what it says is true; i.e., if $X$ is true, then
+\item Then what it says holds; i.e., we have: if $X$ is true, then
   Santa Claus exists.
 \item Since we are assuming $X$ is true, we can conclude that
-  Santa Claus exists.
-\item So, we have shown: ``If $X$ is true, then Santa Claus exists.''
-\item But this is just the statement $X$. So we have shown that $X$ is
+  Santa Claus exists, by modus ponens from (2) and~(3).
+\item We have succeeded in deriving (4), ``Santa Claus exists,'' from
+  the assumption~(2), ``$X$ is true.'' By conditional proof, we have
+  shown: ``If $X$ is true, then Santa Claus exists.''
+\item But this is just the sentence~$X$. So we have shown that $X$ is
   true.
-\item But then, by the argument above, Santa Claus exists.
+\item But then, by the argument (2)--(4) above, Santa Claus exists.
 \end{enumerate}
 A formalization of this idea, replacing ``is true'' with ``is
-provable,'' yields the proof of L\"ob's theorem. 
+provable,'' and ``Santa Claus exists'' with~$!A$, yields the proof of
+L\"ob's theorem. The trick is to apply the fixed-point lemma to the
+!!{formula}~$\OProv[T](y) \lif !A$. The fixed point of that
+corresponds to the sentence~$X$ in the preceding sketch.
+\end{explain}
 
 \begin{proof}
-Suppose $!A$ is a sentence such that $\Th{T}$ proves
-$\OProv[T](\gn{!A}) \lif !A$. Let $!B(y)$ be the formula $\OProv[T](y)
-\lif !A$, and use the fixed-point lemma to find a sentence $!D$
+Suppose $!A$ is !!a{sentence} such that $\Th{T}$ proves
+$\OProv[T](\gn{!A}) \lif !A$. Let $!B(y)$ be the !!{formula}~$\OProv[T](y)
+\lif !A$, and use the fixed-point lemma to find !!a{sentence}~$!D$
 such that $\Th{T}$ proves $!D \liff !B(\gn{!D})$. Then each of the
 following is provable in $\Th{T}$:
-\begin{align*}
-& !D \lif (\OProv[T](\gn{!D}) \lif !A) \\
-& \OProv[T](\gn{!D \lif (\OProv[T](\gn{!D}) \lif !A)}) && \text{by 1} \\
-& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D}) \lif !A})
-  && \text{using 2} \\
-& \OProv[T](\gn{!D}) \lif \\
-&\qquad(\OProv[T](\gn{\OProv[T](\gn{!D})}) \lif \OProv[T](\gn{!A}))
-  && \text{using 2} \\
-& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D})}) 
-  && \text{by 3} \\
-& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{!A})  \\
-& \OProv[T](\gn{!A}) \lif !A && \text{by assumption} \\
-& \OProv[T](\gn{!D}) \lif !A \\
-& !D && \text{def of $!D$} \\
-& \OProv[T](\gn{!D}) && \text{by 1} \\
-& !A
-\end{align*}
+\begin{align}
+  & !D \liff (\OProv[T](\gn{!D}) \lif !A) \ollabel{L-1}\\
+  & \qquad \text{$!D$ is a fixed point of~$!B(y)$}\notag \\
+  & !D \lif (\OProv[T](\gn{!D}) \lif !A) \ollabel{L-2}\\
+  & \qquad\text{from \olref{L-1}}\notag\\
+  & \OProv[T](\gn{!D \lif (\OProv[T](\gn{!D}) \lif !A)}) \ollabel{L-3}\\
+  & \qquad \text{from \olref{L-2} by condition P1}\notag \\
+  & \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D}) \lif !A})
+  \ollabel{L-4}\\
+  &\qquad \text{from \olref{L-3} using condition P2}\notag \\
+  & \OProv[T](\gn{!D}) \lif (\OProv[T](\gn{\OProv[T](\gn{!D})}) \lif \OProv[T](\gn{!A})) \ollabel{L-5}\\
+  &\qquad \text{from \olref{L-4} using P2 again} \notag\\
+& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D})}) \ollabel{L-6}\\
+  & \qquad\text{by provability condition P3} \notag\\
+  & \OProv[T](\gn{!D}) \lif \OProv[T](\gn{!A}) \ollabel{L-7} \\
+  &\qquad\text{from \olref{L-5} and \olref{L-6}}\notag\\
+  & \OProv[T](\gn{!A}) \lif !A \ollabel{L-8}\\
+  &\qquad\text{by assumption of the theorem} \notag\\
+  & \OProv[T](\gn{!D}) \lif !A \ollabel{L-9}\\
+  &\qquad\text{from \olref{L-7} and \olref{L-8}}\notag\\
+  & (\OProv[T](\gn{!D}) \lif !A) \lif !D \ollabel{L-10}\\
+  & \qquad \text{from \olref{L-1}}\notag \\
+  & !D \ollabel{L-11}\\
+  & \qquad\text{from \olref{L-9} and \olref{L-10}}\notag \\
+  & \OProv[T](\gn{!D}) \ollabel{L-12}\\
+  & \qquad\text{from \olref{L-11} by condition~P1}\notag \\
+  & !A \qquad\qquad\text{from \olref{L-8} and \olref{L-12}}\notag
+\end{align}
 \end{proof}
 
 With L\"ob's theorem in hand, there is a short proof of the first
 incompleteness theorem (for theories having a provability predicate
-satisfying 1--3): if a theory proves $\OProv[T](\gn{\eq[0][1]}) \lif
-\eq[0][1]$, it proves $\eq[0][1]$. 
+satisfying conditions P1--P3: if $\Th{T} \Proves
+\OProv[T](\gn{\lfalse}) \lif \lfalse$, then $\Th{T} \Proves \lfalse$.
+If $\Th{T}$ is consistent, $\Th{T} \Proves/ \lfalse$. So, $\Th{T}
+\Proves/ \OProv[T](\gn{\lfalse}) \lif \lfalse$, i.e., $\Th{T} \Proves/
+\OCon[\Th{T}]$.  We can also apply it to show that~$!H$, the fixed
+point of $\OProv[T](x)$, is provable. For since
+\begin{align*}
+  \Th{T} & \Proves \OProv[T](\gn{!H}) \liff !H\\
+  \intertext{in particular}
+    \Th{T} & \Proves \OProv[T](\gn{!H}) \lif !H
+\end{align*}
+and so by L\"ob's theorem, $\Th{T} \Proves !H$.
 
 % Going in the other direction, for homework I
 % may ask you to work through a short proof of L\"ob's theorem, using

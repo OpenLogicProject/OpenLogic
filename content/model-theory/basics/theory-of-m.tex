@@ -7,7 +7,13 @@
 \begin{document}
 
 \olfileid{mod}{bas}{thm}
+
 \section{The Theory of a \printtoken{S}{structure}}
+
+Every !!{structure}~$\Struct{M}$ makes some !!{sentence}s true, and
+some false. The set of all the !!{sentence}s it makes true is called
+its \emph{theory}. That set is in fact a theory, since anything it
+entails must be true in all its models, including~$\Struct{M}$.
 
 \begin{defn}
   Given a !!{structure}~$\Struct M$, the \emph{theory} of
@@ -20,19 +26,26 @@ We also use the term ``theory'' informally to refer to sets
 of !!{sentence}s having an intended interpretation, whether deductively
 closed or not.
 
-\begin{prop}\ollabel{prop:equiv}
-  For any $\Struct{M}$,  $\Theory{M}$ is maximally
-  consistent. Hence, if $\Struct{N} \models !A$ for every $!A
-  \in \Theory{M}$, then $\Struct{M} \elemequiv
-  \Struct{N}$.
+\begin{prop}
+For any $\Struct{M}$, $\Theory{M}$ is complete.
 \end{prop}
 
 \begin{proof}
-  $\Theory{M}$ is consistent because satisfiable (by definition). It
-  is maximal since for any \emph{sentence} $!A$ either $!A$ is true in
-  $\Struct{M}$ or its negation is. It immediately follows that
-  $\Theory{M} \subseteq \Theory{N}$ and $\Theory{N} \subseteq
-  \Theory{M}$, whence $\Struct{M} \elemequiv \Struct{N}$.
+For any !!{sentence}~$!A$ either $\Sat{M}{!A}$ or $\Sat{M}{\lnot !A}$,
+so either $!A \in \Theory{M}$ or $\lnot !A \in \Theory{M}$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:equiv}
+  If $\Struct{N} \models !A$ for every $!A \in \Theory{M}$, then
+  $\Struct{M} \elemequiv \Struct{N}$.
+\end{prop}
+
+\begin{proof}
+Since $\Sat{N}{!A}$ for all $!A \in \Theory{M}$, $\Theory{M} \subseteq
+\Theory{N}$. If $\Sat{N}{!A}$, then $\Sat/{N}{\lnot !A}$, so $\lnot !A
+\notin \Theory{M}$. Since $\Theory{M}$ is complete, $!A \in
+\Theory{M}$. So, $\Theory{N} \subseteq \Theory{M}$, and we have
+$\Struct{M} \elemequiv \Struct{N}$.
 \end{proof}
 
 \begin{rem}\ollabel{remark:R}

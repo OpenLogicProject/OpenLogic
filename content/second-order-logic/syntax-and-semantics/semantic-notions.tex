@@ -1,0 +1,38 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{sem}
+\olsection{Semantic Notions}
+
+\begin{explain}
+The central logical notions of \emph{validity}, \emph{entailment}, and
+\emph{satisfiability} are defined the same way for second-order logic
+as they are for first-order logic, except that the underlying
+satisfaction relation is now that for second-order !!{formula}s.  A
+second-order !!{sentence}, of course, is !!a{formula} in which all
+variables, including predicate and function variables, are bound.
+\end{explain}
+
+\begin{defn}[Validity]
+A sentence $!A$ is \emph{valid}, $\Entails !A$, iff $\Sat{M}{!A}$ for every
+!!{structure}~$\Struct M$.
+\end{defn}
+
+\begin{defn}[Entailment]
+A set of sentences~$\Gamma$ \emph{entails} a sentence~$!A$, $\Gamma
+\Entails !A$, iff for every !!{structure}~$\Struct M$ with
+$\Sat{M}{\Gamma}$, $\Sat{M}{!A}$.
+\end{defn}
+
+\begin{defn}[Satisfiability]
+A set of sentences~$\Gamma$ is \emph{satisfiable} if $\Sat{M}{\Gamma}$
+for some !!{structure}~$\Struct M$.  If $\Gamma$ is not satisfiable it is
+called \emph{unsatisfiable}.
+\end{defn}
+
+\end{document}

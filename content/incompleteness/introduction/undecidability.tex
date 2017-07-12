@@ -1,0 +1,125 @@
+% Part: incompleteness
+% Chapter: introduction
+% Section: decidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{int}{dec}
+
+\olsection{Undecidability and Incompleteness}
+
+G\"odel's proof of the incompleteness theorems require arithmetization
+of syntax. But even without that we can obtain some nice results just
+on the assumtion that a theory !!{represents} all !!{decidable}
+relations.  The proof is a diagonal argument similar to the proof of
+the undecidability of the halting problem.
+
+\begin{thm}
+If $\Gamma$ is a consistent theory that !!{represents} every
+!!{decidable} relation, then $\Gamma$ is not !!{decidable}.
+\end{thm}
+
+\begin{proof}
+Suppose $\Gamma$ were !!{decidable}. We show that if $\Gamma$
+!!{represents} every !!{decidable} relation, it must be inconsistent.
+
+!!^{decidable} properties (one-place relations) are represented by
+!!{formula}s with one free variable. Let $!A_0(x)$, $!A_1(x)$, \dots,
+be a computable enumeration of all such !!{formula}s.  Now consider
+the following set $D \subseteq \Nat$:
+\[
+D = \Setabs{n}{\Gamma \Proves \lnot !A_n(\num{n})}
+\]
+The set $D$ is !!{decidable}, since we can test if $n \in D$ by first
+computing $!A_n(x)$, and from this $\lnot !A_n(\num{n})$. Obviously,
+substituting the term $\num{n}$ for every free occurrence of $x$ in
+$!A_n(x)$ and prefixing $!A(\num{n})$ by $\lnot$ is a mechanical
+matter.  By assumption, $\Gamma$ is !!{decidable}, so we can test if
+$\lnot !A(\num{n}) \in \Gamma$. If it is, $n \in D$, and if it isn't,
+$n \notin D$. So $D$ is likewise !!{decidable}.
+
+Since $\Gamma$ !!{represents} all !!{decidable} properties, it
+!!{represents}~$D$.  And the !!{formula}s which !!{represents}s $D$ in
+$\Gamma$ are all among $!A_0(x)$, $!A_1(x)$, \dots. So let $d$ be a
+number such that $!A_d(x)$ !!{represents} $D$ in~$\Gamma$.  If $d
+\notin D$, then, since $!A_d(x)$ !!{represents}~$D$, $\Gamma \Proves
+\lnot !A_d(\num{d})$. But that means that $d$ meets the defining
+condition of~$D$, and so $d \in D$. This contradicts $d \notin D$. So
+by indirect proof, $d \in D$.
+
+Since $d \in D$, by the definition of~$D$, $\Gamma \Proves \lnot
+!A_d(\num{d})$. On the other hand, since $!A_d(x)$ !!{represents}~$D$
+in $\Gamma$, $\Gamma \Proves !A_d(\num{d})$. Hence, $\Gamma$ is
+inconsistent.
+\end{proof}
+
+\begin{explain}
+The preceding theorem shows that no theory that !!{represents} all
+!!{decidable} relations can be !!{decidable}. We will show that
+$\Th{Q}$ does !!{represents}s all !!{decidable} relations; this means
+that all theories that include $\Th{Q}$, such as $\Th{PA}$ and
+$\Th{TA}$, also do, and hence also are not !!{decidable}.
+
+We can also use this result to obtain a weak version of the first
+incompleteness theorem.  Any theory that is !!{axiomatizable} and
+!!{complete} is !!{decidable}.  Consistent theories that are
+!!{axiomatizable} and !!{represents}s all !!{decidable} properties
+then cannot be !!{complete}.
+\end{explain}
+
+\begin{thm}
+If $\Gamma$ is !!{axiomatizable} and !!{complete} it is !!{decidable}.
+\end{thm}
+
+\begin{proof}
+Any inconsistent theory is !!{decidable}, since inconsistent theories
+contain all !!{sentence}s, so the answer to the question ``is $!A \in
+\Gamma$'' is always ``yes,'' i.e., can be decided.
+
+So suppose $\Gamma$ is consistent, and furthermore is
+!!{axiomatizable}, and !!{complete}. Since $\Gamma$ is
+!!{axiomatizable}, it is !!{computably enumerable}. For we can
+enumerate all the correct !!{derivation}s from the axioms of~$\Gamma$
+by a computable function. From a correct !!{derivation} we can compute
+the !!{sentence} it !!{derive}s, and so together there is a computable
+function that enumerates all theorems of~$\Gamma$.  A !!{sentence} is
+a theorem of~$\Gamma$ iff $\lnot !A$ is not a theorem, since $\Gamma$
+is consistent and !!{complete}.  We can therefore decide if $!A \in
+\Gamma$ as follows. Enumerate all theorems of $\Gamma$. When $!A$
+appears on this list, we know that $\Gamma \Proves !A$. When $\lnot
+!A$ appears on this list, we know that $\Gamma \Proves/ !A$.  Since
+$\Gamma$ is !!{complete}, one of these cases eventually obtains, so
+the procedure eventually produces and answer.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:incompleteness}
+If $\Gamma$ is consistent, !!{axiomatizable}, and !!{represents} every
+!!{decidable} property, it is not !!{complete}.
+\end{cor}
+
+\begin{proof}
+If $\Gamma$ were !!{complete}, it would be !!{decidable} by the
+previous theorem (since it is !!{axiomatizable} and consistent). But
+since $\Gamma$ !!{represents} every !!{decidable} property, it is not
+!!{decidable}, by the first theorem.
+\end{proof}
+
+\begin{prob}
+Show that $\Th{TA} = \Setabs{!A}{\Sat{N}{!A}}$ is not
+!!{axiomatizable}. You may assume that $\Th{TA}$ represents all
+decidable properties.
+\end{prob}
+
+Once we have established that, e.g., $\Th{Q}$, !!{represents} all
+!!{decidable} properties, the corollary tells us that $\Th{Q}$ must be
+incomplete. However, its proof does not provide an example of an
+independent !!{sentence}; it merely shows that such a !!{sentence}
+must exist. For this, we have to arithmetize syntax and follow
+G\"odel's original proof idea.  And of course, we still have to show
+the first claim, namely that $\Th{Q}$ does, in fact, !!{represents}s
+all !!{decidable} properties.
+
+\end{document}

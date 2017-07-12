@@ -1,0 +1,80 @@
+% Part: second-order-logic
+% Chapter: sol-and-sets
+% Section: comparing-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{set}{cmp}
+
+\olsection{Comparing Sets}
+
+\begin{prop}
+The formula $\lforall[x][(X(x) \lif Y(x))]$ defines the subset
+relation, i.e., $\Sat{M}{\lforall[x][(X(x) \lif Y(x))]}[s]$ iff $s(X)
+\subseteq S(y)$.
+\end{prop}
+
+\begin{prop}
+The formula $\lforall[x][(X(x) \liff Y(x))]$ defines the identity
+relation on sets, i.e., $\Sat{M}{\lforall[x][(X(x) \liff Y(x))]}[s]$
+iff $s(X) = S(y)$.
+\end{prop}
+
+\begin{prop}
+The formula $\lexists[x][X(x)]$ defines the property of being
+non-empty, i.e., $\Sat{M}{\lexists[x][X(x)]}[s]$ iff $s(X) \neq
+\emptyset$.
+\end{prop}
+
+A set~$X$ is no larger than a set~$Y$, $\cardle{X}{Y}$, iff there is
+!!a{injective} function $f\colon X \to Y$.  Since we can express that
+a function is injective, and also that its values for arguments in~$X$
+are in~$Y$, we can also define the relation of being no larger than on
+subsets of the domain.
+
+\begin{prop}
+The formula
+\[
+\lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
+      \eq[x][y])]])]
+\]
+defines the relation of being no larger than.
+\end{prop}
+
+Two sets are the same size, or ``equinumerous,'' $\cardeq{X}{Y}$, iff
+there is !!a{bijective} function~$f\colon X \to Y$.
+
+\begin{prop}
+The formula
+\begin{multline*}
+  \lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land {}\\
+    \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif \eq[x][y])]]
+  \land {} \\\lforall[y][(Y(y) \lif \lexists[x][(X(x)
+      \land \eq[y][u(x)])])])]
+\end{multline*}
+defines the relation of being equinumerous with.
+\end{prop}
+
+We will abbreviate these formulas, respectively, as $X \subseteq Y$,
+$X = Y$, $X \neq \emptyset$, $\cardle{X}{Y}$, and
+$\cardeq{X}{Y}$. (This may be slightly confusing, since we use the
+same notation when we speak informally about sets $X$ and $Y$---but
+here the notation is an abbreviation for !!{formula}s in second-order
+logic involving one-place relation variables $X$ and~$Y$.)
+
+\begin{prop}
+The !!{sentence} $\lforall[X][\lforall[Y][((\cardle{X}{Y} \land
+    \cardle{Y}{X}) \lif \cardeq{X}{Y})]]$ is valid.
+\end{prop}
+
+\begin{proof}
+The is satisfied in a structure~$\Struct{M}$ if, for any subsets $X
+\subseteq \Domain{X}$ and $Y \subseteq \Domain{M}$, if $\cardle{X}{Y}$
+and $\cardle{Y}{X}$ then $\cardeq{X}{Y}$.  But this holds for
+\emph{any} sets $X$ and $Y$---it is the Schr\"oder-Bernstein Theorem.
+\end{proof}
+
+
+\end{document}

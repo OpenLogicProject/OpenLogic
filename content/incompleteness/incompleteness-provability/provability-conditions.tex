@@ -11,12 +11,12 @@
 \olsection{The Provability Conditions for $\Th{PA}$}
 
 Peano arithmetic, or $\Th{PA}$, is the theory extending $\Th{Q}$ with
-induction axioms for all formulas. In other words, one adds to $\Th{Q}$
+induction axioms for all !!{formula}s. In other words, one adds to $\Th{Q}$
 axioms of the form
 \[
 (!A(0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
 \]
-for every formula $!A$. Notice that this is really a {\em schema},
+for every !!{formula}~$!A$. Notice that this is really a {\em schema},
 which is to say, infinitely many axioms (and it turns out that
 $\Th{PA}$ is {\em not} finitely axiomatizable). But since one can
 effectively determine whether or not a string of symbols is an
@@ -24,39 +24,44 @@ instance of an induction axiom, the set of axioms for $\Th{PA}$ is
 computable. $\Th{PA}$ is a much more robust theory than $\Th{Q}$. For
 example, one can easily prove that addition and multiplication are
 commutative, using induction in the usual way. In fact, most finitary
-number-theoretic and combinatorial arguments can be carried out in
-$\Th{PA}$.
+number-theoretic and combinatorial arguments can be carried out
+in~$\Th{PA}$.
 
 Since $\Th{PA}$ is computably axiomatized, the provability predicate
-$\Prf[PA](x,y)$ is computable and hence represented in $\Th{Q}$ (and
-so, in $\Th{PA}$). As before, I will take $\OPrf[PA](x,y)$ to denote
-the formula representing the relation.  Let $\OProv[PA](y)$ be the
-formula $\lexists[x][\Prf[PA](x,y)]$, which, intuitively says, ``$y$ is
+$\Prf[\Th{PA}](x,y)$ is computable and hence represented in~$\Th{Q}$ (and
+so, in~$\Th{PA}$). As before, I will take $\OPrf[\Th{PA}](x,y)$ to denote
+the formula representing the relation.  Let $\OProv[\Th{PA}](y)$ be the
+formula $\lexists[x][\Prf[\Th{PA}](x,y)]$, which, intuitively says, ``$y$ is
 provable from the axioms of $\Th{PA}$.''  The reason we need a little
 bit more than the axioms of $\Th{Q}$ is we need to know that the
 theory we are using is strong enough to prove a few basic facts about
 this provability predicate. In fact, what we need are the following
 facts:
 \begin{enumerate}
-\item If $\Th{PA} \Proves !A$, then $\Th{PA} \Proves
-  \OProv[PA](\gn{!A})$
-\item For every formula $!A$ and $!B$, $\Th{PA} \Proves
-  \OProv[PA](\gn{!A \lif !B}) \lif (\OProv[PA](\gn{!A}) \lif
-  \OProv[PA](\gn{!B}))$
-\item For every formula $!A$, $\Th{PA} \Proves \OProv[PA](\gn{!A})
-\lif \OProv[PA](\gn{\OProv[PA](\gn{!A})})$.
+\item[P1.] If $\Th{PA} \Proves !A$, then $\Th{PA} \Proves
+  \OProv[\Th{PA}](\gn{!A})$
+\item[P2.] For all !!{formula}s $!A$ and $!B$,
+  \[
+  \Th{PA} \Proves \OProv[\Th{PA}](\gn{!A \lif !B}) \lif
+  (\OProv[\Th{PA}](\gn{!A}) \lif \OProv[\Th{PA}](\gn{!B}))
+  \]
+\item[P3.] For every !!{formula}~$!A$,
+  \[
+  \Th{PA} \Proves \OProv[\Th{PA}](\gn{!A})
+  \lif \OProv[\Th{PA}](\gn{\OProv[\Th{PA}](\gn{!A})}).
+  \]
 \end{enumerate}
 The only way to verify that these three properties hold is to describe
-the formula $\OProv[PA](y)$ carefully and use the axioms of $\Th{PA}$ to
-describe the relevant formal proofs. Clauses 1 and 2 are easy; it is
-really clause 3 that requires work. (Think about what kind of work it
-entails\dots) Carrying out the details would be tedious and
-uninteresting, so here we will ask you to take it on faith that
-$\Th{PA}$ has the three properties listed above. A reasonable choice
-of $\OProv[PA](y)$ will also satisfy
+the !!{formula} $\OProv[\Th{PA}](y)$ carefully and use the axioms of
+$\Th{PA}$ to describe the relevant formal proofs. Conditions (1)
+and~(2) are easy; it is really condition~(3) that requires
+work. (Think about what kind of work it entails\dots) Carrying out the
+details would be tedious and uninteresting, so here we will ask you to
+take it on faith that $\Th{PA}$ has the three properties listed
+above. A reasonable choice of $\OProv[\Th{PA}](y)$ will also satisfy
 \begin{enumerate}
-\item[4.] If $\Th{PA}$ proves $\OProv[PA](\gn{!A})$, then $\Th{PA}$ proves
-  $!A$.
+\item[P4.] If $\Th{PA} \Proves \OProv[\Th{PA}](\gn{!A})$, then
+  $\Th{PA} \Proves !A$.
 \end{enumerate}
 But we will not need this fact.
 

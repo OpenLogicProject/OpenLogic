@@ -23,7 +23,7 @@ If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
 \end{prop}
 
 \begin{proof}
-Any !!{derivation} of $!A$ from $\Gamma$ is also a !!{derivation} of
+Any !!{derivation} of $!A$ from $\Gamma$ is also !!a{derivation} of
 $!A$ from~$\Delta$.
 \end{proof}
 
@@ -123,7 +123,7 @@ Prove \olref[fol][ntd][prv]{prop:provability-lor-left}
 
 \begin{proof}
 \iftag{probOr}{Exercise.}{%
-Suppose $\Gamma \Proves !A$. There is a !!{derivation} $\delta$ of $!A$
+Suppose $\Gamma \Proves !A$. There is !!a{derivation} $\delta$ of $!A$
 from~$\Gamma$. We can !!{derive}
 \[
 \AxiomC{}
@@ -228,30 +228,30 @@ Prove \olref[fol][ntd][prv]{prop:provability-mp}.
 
 \begin{proof}
 \iftag{probIf}{Exercise.}{First suppose $\Gamma \Proves \lnot !A$.
-  Then there is a !!{derivation} of $\lnot !A$ from~$\gamma$.  The
+  Then there is a !!{derivation}~$\delta$ of $\lnot !A$ from~$\Gamma$.  The
   following !!{derivation} shows that $\Gamma \Proves !A \lif !B$:
 \[
-\AxiomC{}
-\RightLabel{$\delta_0$}
-\DeduceC{$\lnot !A$}
 \AxiomC{$\Discharge{!A}{1}$}
-\RightLabel{\Elim{\lnot}}
-\UnaryInfC{$\lfalse$}
+\AxiomC{}
+\RightLabel{$\delta$}
+\DeduceC{$\lnot !A$}
+\RightLabel{\Intro{\lfalse}}
+\BinaryInfC{$\lfalse$}
 \RightLabel{\Elim{\lfalse}}
 \UnaryInfC{$!B$}
 \DischargeRule{\Intro{\lif}}{1}
-\BinaryInfC{$!A \lif !B$}
+\UnaryInfC{$!A \lif !B$}
 \DisplayProof
 \]
 
-Now suppose $\Gamma \Proves !B$.  Then there is a !!{derivation}~$\delta$ of
+Now suppose $\Gamma \Proves !B$.  Then there is !!a{derivation}~$\delta$ of
 $!B$ from~$\Gamma$. The following !!{derivation} shows that $\Gamma
 \Proves !A \lif !B$:
 \[
+\AxiomC{$\Discharge{!A}{1}$}
 \AxiomC{}
 \RightLabel{$\delta$}
 \DeduceC{$!B$}
-\AxiomC{$\Discharge{!A}{1}$}
 \RightLabel{\Intro{\land}}
 \BinaryInfC{$!A \land !B$}
 \RightLabel{\Elim{\land}}
@@ -269,11 +269,11 @@ Prove \olref[fol][ntd][prv]{prop:provability-lif}.
 \begin{thm}
 \ollabel{thm:strong-generalization} If $c$ is a constant not occurring
 in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
-\Proves \lforall[x][!A(c)]$.
+\Proves \lforall[x][!A(x)]$.
 \end{thm}
 
 \begin{proof}
-Let $\delta$ be an !!{derivation} of $!A(c)$ from $\Gamma$.  By adding a
+Let $\delta$ be !!a{derivation} of $!A(c)$ from $\Gamma$.  By adding a
 \Intro{\lforall} inference, we obtain a proof of
 $\lforall[x][!A(x)]$. Since $c$ does not occur in $\Gamma$ or $!A(x)$,
 the eigenvariable condition is satisfied.
@@ -292,8 +292,8 @@ the eigenvariable condition is satisfied.
 
 \begin{proof}
 \begin{tagenumerate}{prvEx,prvAll}
-\tagitem{prvEx}{Suppose $\Gamma \Proves !A(t)$. Then there is a
-  !!{derivation}~$\delta$ of $!A(t)$ from~$\Gamma$. The !!{derivation}
+\tagitem{prvEx}{Suppose $\Gamma \Proves !A(t)$. Then there is
+  !!a{derivation}~$\delta$ of $!A(t)$ from~$\Gamma$. The !!{derivation}
 \[
 \AxiomC{}
 \RightLabel{$\delta$}

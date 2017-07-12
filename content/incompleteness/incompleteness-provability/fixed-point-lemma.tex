@@ -10,13 +10,55 @@
 
 \olsection{The Fixed-Point Lemma}
 
-Let $\fn{diag}(y)$ be the computable (in fact, primitive recursive)
-function that does the following: if $y$ is the G\"odel number of a
-formula~$!B(x)$, $\fn{diag}(y)$ returns the G\"odel number
-of~$!B(\gn{!B(x)})$. ($\gn{!B(x)}$ is the standard numeral of the
-G\"odel number of~$!B(x)$, i.e., $\num{\Gn{!B(x)}}$). If $\Obj{diag}$
-were a function symbol in $\Th{T}$ representing the function
-$\fn{diag}$, we could take $!A$ to be the formula
+\begin{explain}
+The fixed-point lemma says that for any !!{formula}~$!B(x)$, there is
+!!a{sentence}~$!A$ such that $\Th{T} \Proves !A \liff !B(\gn{!A})$,
+provided $\Th{T}$ extends~$\Th{Q}$.  In the case of the liar sentence,
+we'd want $!A$ to be equivalent (provably in~$\Th{T}$) to~``$\gn{!A}$
+is false,'' i.e., the statement that $\Gn{!A}$ is the G\"odel number
+of a false !!{sentence}. To understand the idea of the proof, it will
+be useful to compare it with Quine's informal gloss of~$!A$ as,
+``{}`yields a falsehood when preceded by its own quotation' yields a
+falsehood when preceded by its own quotation.''  The operation of
+taking an expression, and then forming a sentence by preceding this
+expression by its own quotation may be called \emph{diagonalizing} the
+expression, and the result its diagonalization. So, the
+diagonalization of `yields a falsehood when preceded by its own
+quotation' is ``{}`yields a falsehood when preceded by its own
+quotation' yields a falsehood when preceded by its own quotation.''
+Now note that Quine's liar sentence is not the diagonalization of
+`yields a falsehood' but of `yields a falsehood when preceded by its
+own quotation.' So the property being diagonalized to yield the liar
+sentence itself involves diagonalization!{}
+
+In the language of arithmetic, we form quotations of !!a{formula} with
+one free variable by computing its G\"odel numbers and then
+substituting the standard numeral for that G\"odel number into the
+free variable. The diagonalization of~$!E(x)$ is $!E(\num{n})$, where
+$n = \Gn{!E(x)}$. (From now on, let's abbreviate $\num{\Gn{!E(x)}}$ as
+$\gn{!E(x)}$.)  So if $!B(x)$ is ``is a falsehood,'' then ``yields a
+falsehood if preceded by its own quotation,'' would be ``yields a
+falsehood when applied to the G\"odel number of its diagonalization.''
+If we had a symbol~$\Obj{diag}$ for the function $\fn{diag}(n)$ which
+computes the G\"odel number of the diagonalization of the !!{formula}
+with G\"odel number~$n$, we could write $!E(x)$ as
+$!B(\Obj{diag}(x))$. And Quine's version of the liar sentence would
+then be the diagonalization of it, i.e., $!E(\gn{!E})$ or
+$!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$.  Of course, $!B(x)$ could now
+be any other property, and the same construction would work. For the
+incompleteness theorem, we'll take $!B(x)$ to be ``$x$ is unprovable
+in~$\Th{T}$.'' Then $!E(x)$ would be ``yields !!a{sentence} unprovable
+in~$\Th{T}$ when applied to the G\"odel number of its
+diagonalization.''
+
+To formalize this in~$\Th{T}$, we have to find a way to formalize
+$\fn{diag}$. The function $\fn{diag}(n)$ is computable, in fact, it is
+primitive recursive: if $n$ is the G\"odel number of a
+formula~$!E(x)$, $\fn{diag}(n)$ returns the G\"odel number
+of~$!E(\gn{!E(x)})$. (Recall, $\gn{!E(x)}$ is the standard numeral of
+the G\"odel number of~$!E(x)$, i.e., $\num{\Gn{!E(x)}}$). If
+$\Obj{diag}$ were a function symbol in $\Th{T}$ repqresenting the
+function $\fn{diag}$, we could take $!A$ to be the formula
 $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$. Notice that
 \begin{align*}
 \fn{diag}(\Gn{!B(\Obj{diag}(x))}) & = 
@@ -29,56 +71,59 @@ Assuming $\Th{T}$ can prove
 \]
 it can prove $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))
 \liff !B(\gn{!A})$. But the left hand side is, by
-definition, $!A$.
+definition,~$!A$.
 
-In general, $\Obj{diag}$ will not be a function symbol of
-$\Th{T}$. But since $\Th{T}$ extends $\Th{Q}$, the function
-$\fn{diag}$ will be {\em represented} in $\Th{T}$ by some formula
+Of course, $\Obj{diag}$ will in general not be a function symbol of
+$\Th{T}$, and certainly is not one of~$\Th{Q}$. But, since $\fn{diag}$
+is computable, it is \emph{representable} in~$\Th{Q}$ by some formula
 $!D_{\fn{diag}}(x,y)$. So instead of writing $!B(\Obj{diag}(x))$ we
-will have to write $\lexists[y][(!D_{\fn{diag}}(x,y) \land
-  !B(y))]$. Otherwise, the proof sketched above goes through.
+can write $\lexists[y][(!D_{\fn{diag}}(x,y) \land !B(y))]$. Otherwise,
+the proof sketched above goes through, and in fact, it goes through
+already in~$\Th{Q}$.
+\end{explain}
 
 \begin{lem}
-  Let $\Th{T}$ be any theory extending $\Th{Q}$, and let $!B(x)$ be any
-  formula with free variable $x$. Then there is a sentence $!A$ such
-  that $\Th{T}$ proves $!A \liff !B(\gn{!A})$.
+\ollabel{lem:fixed-point} Let $!B(x)$ be any formula with one free
+variable~$x$. Then there is a sentence~$!A$ such that $\Th{Q} \Proves
+!A \liff !B(\gn{!A})$.
 \end{lem}
 
 
 \begin{proof}
 Given $!B(x)$, let $!E(x)$ be the formula
-$\lexists[y][(!D_{\fn{diag}}(x,y) \land !B(y))]$ and let $!A$ be the
-formula $!E(\gn{!E(x)})$.
+$\lexists[y][(!D_{\fn{diag}}(x,y) \land !B(y))]$ and let $!A$~be its
+diagonalization, i.e., the formula $!E(\gn{!E(x)})$.
 
-Since $!D_{\fn{diag}}$ represents $\fn{diag}$, $\Th{T}$ can prove
-\[
-\lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \liff
-  \eq[y][\num{\fn{diag}(\gn{!E(x)})}])].
-\]
-But by definition, 
-$\fn{diag}(\Gn{!E(x)}) = \Gn{!E(\gn{!E(x)})} =
-\Gn{!A}$, so $\Th{T}$ can prove
-\[
-\lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \liff \eq[y][\gn{!A}])].
-\]
-Going back to the definition of $!E(x)$, we see
-$!E(\gn{!E(x)})$ is just the formula
+Since $!D_{\fn{diag}}$ represents $\fn{diag}$, and
+$\fn{diag}(\Gn{!E(x)}) = \Gn{!A}$, $\Th{Q}$ can prove
+\begin{align}
+  & !D_{\fn{diag}}(\gn{!E(x)}, \gn{!A}) \ollabel{repdiag1} \\
+  & \lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \lif
+  \eq[y][\gn{!A}])]. \ollabel{repdiag2}
+\end{align}
+Now we show that $\Th{Q} \Proves !A \liff !B(\gn{!A})$. We argue
+informally, using just logic and facts provable in~$\Th{Q}$.
+
+First, suppose~$!A$, i.e., $!E(\gn{!E(x)})$. Going back to the
+definition of $!E(x)$, we see that $!E(\gn{!E(x)})$ just is
 \[
 \lexists[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \land !B(y))].
 \]
-Using the last two sentences and ordinary first-order logic, one can
-then prove
-\[
-!E(\gn{!E(x)}) \liff !B(\gn{!A}).
-\]
-But the left-hand side is just $!A$. 
+Consider such a~$y$. Since $!D_{\fn{diag}}(\gn{!E(x)},y)$, by
+\olref{repdiag2}, $y = \gn{!A}$. So, from $!B(y)$ we have
+$!B(\gn{!A})$.
+
+Now suppose $!B(\gn{!A})$. By \olref{repdiag1}, we have
+$!D_{\fn{diag}}(\gn{!E(x)}, \gn{!A}) \land !B(\gn{!A})$. It follows
+that $\lexists[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \land !B(y))]$. But
+that's just $!E(\gn{!E})$, i.e., $!A$.
 \end{proof}
 
 \begin{digress}
 You should compare this to the proof of the fixed-point lemma in
 computability theory. The difference is that here we want to define a
-{\em statement} in terms of itself, whereas there we wanted to define
-a {\em function} in terms of itself; this difference aside, it is
+\emph{statement} in terms of itself, whereas there we wanted to define
+a \emph{function} in terms of itself; this difference aside, it is
 really the same idea.
 \end{digress}
 

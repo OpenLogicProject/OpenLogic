@@ -7,46 +7,56 @@
 \begin{document}
 
 \olfileid{inc}{req}{rel}
+
 \olsection{Representing Relations}
+
 Let us say what it means for a \emph{relation} to be representable.
 
 \begin{defn}
-\ollabel{defn:representing-relations}
-  A relation $R(x_0,\dots,x_k)$ on the natural numbers is {\em
-    representable in $\Th{Q}$} if there is a formula
-  $!A_R(x_0,\dots,x_k)$ such that whenever $R(n_0,\dots,n_k)$ is
-  true, $\Th{Q}$ proves $!A_R(\num n_0,\dots,\num n_k)$, and whenever
-  $R(n_0,\dots,n_k)$ is false, $\Th{Q}$ proves $\lnot !A_R(\num
-  n_0,\dots,\num n_k)$.
+\ollabel{defn:representing-relations} A relation $R(x_0,\dots,x_k)$ on
+the natural numbers is {\em representable in $\Th{Q}$} if there is a
+formula $!A_R(x_0,\dots,x_k)$ such that whenever $R(n_0,\dots,n_k)$ is
+true, $\Th{Q}$ proves $!A_R(\num{n_0},\dots,\num{n_k})$, and whenever
+$R(n_0,\dots,n_k)$ is false, $\Th{Q}$ proves $\lnot !A_R(\num{n_0},
+\dots, \num{n_k})$.
 \end{defn}
 
 \begin{thm}
-\ollabel{thm:representing-rels}
-  A relation is representable in $\Th{Q}$ if and only if it is computable.
+\ollabel{thm:representing-rels} A relation is representable in
+$\Th{Q}$ if and only if it is computable.
 \end{thm}
 
 \begin{proof}
 For the forwards direction, suppose $R(x_0,\dots,x_k)$ is
 represented by the formula $!A_R(x_0,\dots,x_k)$. Here is an
-algorithm for computing $R$: on input $n_0,\dots,n_k$, simultaneously
-search for a proof of $!A_R(\num n_0,\dots,\num n_k)$ and a proof of
-$\lnot !A_R(\num n_0,\dots,\num n_k)$. By our hypothesis, the search
-is bound to find one of the other; if it is the first, report ``yes,''
+algorithm for computing $R$: on input $n_0$, \dots,~$n_k$, simultaneously
+search for a proof of $!A_R(\num{n_0}, \dots, \num{n_k})$ and a proof of
+$\lnot !A_R(\num{n_0}, \dots, \num{n_k})$. By our hypothesis, the search
+is bound to find one or the other; if it is the first, report ``yes,''
 and otherwise, report ``no.''
 
-In the other direction, suppose $R(x_0,\dots,x_k)$ is computable. By
-definition, this means that the function $\chi_R(x_0,\dots,x_k)$ is
-computable. By \olref[int]{thm:representable-iff-comp}, $\chi_R$ is
-represented by a formula, say $!A_{\chi_R}(x_0,\dots,x_k,y)$. Let
-$!A_R(x_0,\dots,x_k)$ be the formula $!A_{\chi_R}(x_0,\dots,x_k,\num
-1)$. Then for any $n_0,\dots,n_k$, if $R(n_0,\dots,n_k)$ is true, then
-$\chi_R(n_0,\dots,n_k) = 1$, in which case $\Th{Q}$ proves
-$!A_{\chi_R}(\num n_0,\dots,\num n_k,\num 1)$, and so $\Th{Q}$ proves
-$!A_R(\num n_0,\dots,\num n_k)$. On the other hand if
-$R(n_0,\dots,n_k)$ is false, then $\chi_R(n_0,\dots,n_k) = 0$. This
-means that $\Th{Q}$ proves $!A_{\chi_R}(\num n_0,\dots,\num n_k,y)
-\lif y = \num 0$. Since $\Th{Q}$ proves $\lnot (\num 0 = \num 1)$,
-$\Th{Q}$ proves $\lnot !A_{\chi_R}(\num n_0,\dots,\num n_k,\num 1)$,
-and so it proves $\lnot !A_R(\num n_0,\dots,\num n_k)$.
+In the other direction, suppose $R(x_0, \dots, x_k)$ is computable. By
+definition, this means that the function $\Char{R}(x_0, \dots, x_k)$
+is computable. By \olref[int]{thm:representable-iff-comp}, $\Char{R}$
+is represented by a formula, say $!A_{\Char{R}}(x_0, \dots, x_k,
+y)$. Let $!A_R(x_0, \dots, x_k)$ be the formula $!A_{\Char{R}}(x_0,
+\dots, x_k, \num{1})$. Then for any $n_0$, \dots,~$n_k$, if $R(n_0,
+\dots, n_k)$ is true, then $\Char{R}(n_0, \dots, n_k) = 1$, in which
+case $\Th{Q}$ proves $!A_{\Char{R}}(\num{n_0}, \dots, \num{n_k},
+\num{1})$, and so $\Th{Q}$ proves $!A_R(\num{n_0}, \dots,
+\num{n_k})$. On the other hand, if $R(n_0, \dots, n_k)$ is false, then
+$\Char{R}(n_0, \dots, n_k) = 0$. This means that $\Th{Q}$ proves
+\[
+\lforall[y][(!A_{\Char{R}}(\num{n_0}, \dots, \num{n_k}, y) \lif y =
+  \num{0})].
+\]
+Since $\Th{Q}$ proves $\eq/[\num{0}][\num{1}]$, $\Th{Q}$ proves
+$\lnot !A_{\Char{R}}(\num{n_0}, \dots, \num{n_k}, \num{1})$, and so it
+proves $\lnot !A_R(\num{n_0}, \dots, \num{n_k})$.
 \end{proof}
+
+\begin{prob}
+Show that if $R$ is representable in~$\Th{Q}$, so is~$\Char{R}$.
+\end{prob}
+
 \end{document}

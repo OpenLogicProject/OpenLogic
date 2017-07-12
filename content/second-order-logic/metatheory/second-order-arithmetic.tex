@@ -1,0 +1,121 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: second-order-arithmetic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{spa}
+
+\olsection{Second-order Arithmetic}
+
+Recall that the theory $\Th{PA}$ of Peano arithmetic includes the
+eight axioms of~$\Th{Q}$,
+\begin{align*}
+& \lforall[x][\eq/[x'][\Obj 0]]\\
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(x + z')][y]])]]\\
+& \lforall[x][\eq[(x + \Obj 0)][x]]\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+\intertext{plus all sentences of the form}
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
+\end{align*}
+The latter is a ``schema,'' i.e., a pattern that generates infinitely
+many !!{sentence}s of the language of arithmetic, one for each
+!!{formula}~$!A(x)$. We call this schema the (first-order)
+\emph{axiom schema of induction}. 
+In \emph{second-order} Peano arithmetic~$\Th{PA^2}$, induction
+can be stated as a single sentence. $\Th{PA^2}$
+consists of the first eight axioms above plus the (second-order)
+\emph{induction axiom}:
+\[
+\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])]
+\]
+It says that if a subset~$X$ of the !!{domain}
+contains~$\Assign{\Obj{0}}{M}$ and with any~$x \in \Domain{M}$ also
+contains~$\Assign{\prime}{M}(x)$ (i.e., it is ``closed under
+successor'') it contains everything in the !!{domain} (i.e., $X =
+\Domain{M})$.
+
+The induction axiom guarantees that any !!{structure} satisfying it
+contains only those !!{element}s of~$\Domain{M}$ the axioms require to
+be there, i.e., the values of~$\num{n}$ for $n \in \Nat$. A model of
+$\Th{PA^2}$ contains no non-standard numbers.
+
+\begin{thm}
+\ollabel{thm:sol-pa-standard}
+If $\Sat{M}{\Th{PA^2}}$ then $\Domain{M} =
+\Setabs{\Value{M}{\num{n}}}{n \in \Nat}$.
+\end{thm}
+
+\begin{proof}
+Let $N = \Setabs{\Value{\num{n}}{M}}{n \in \Nat}$, and suppose
+$\Sat{M}{\Th{PA^2}}$. Of course, for any $n \in \Nat$,
+$\Value{\num{n}}{M} \in \Domain{M}$, so $N \subseteq \Domain{M}$.
+
+Now for inclusion in the other direction. Consider a variable
+assignment $s$ with $s(X) = N$. By assumption,
+\begin{align*}
+\Sat{M}{\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x)
+      \lif X(x'))]) \lif \lforall[x][X(x)]]}, & \text{ thus}\\
+\Sat{M}{(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif
+  \lforall[x][X(x)]}[s]. & 
+\end{align*}
+Consider the antecedent of this conditional.  $\Value{\Obj{0}}{M} \in
+N$, and so $\Sat{M}{X(\Obj{0})}[s]$.  The second conjunct,
+$\lforall[x][(X(x) \lif X(x'))]$ is also satisfied. For suppose $x \in
+N$. By definition of~$N$, $x = \Value{\num{n}}{M}$ for some~$n$.  That
+gives $\Assign{\prime}{M}(x) = \Value{\num{n+1}}{M} \in N$. So,
+$\Assign{\prime}{M}(x) \in N$.
+
+We have that $\Sat{M}{X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]}[s]$.
+Consequently, $\Sat{M}{\lforall[x][X(x)]}[s]$. But that means that for
+every $x \in \Domain{M}$ we have $x \in s(X) = N$. So, $\Domain{M}
+\subseteq N$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:sol-pa-categorical}
+Any two models of~$\Th{PA^2}$ are isomorphic.
+\end{cor}
+
+\begin{proof}
+By \olref{thm:sol-pa-standard}, the domain of any model of $\Th{PA^2}$
+is exhausted by $\Value{\num{n}}{M}$. Any such model is also a model
+of~$\Th{Q}$. By \olref[mod][mar][stm]{prop:thq-standard}, any such
+model is standard, i.e., isomorphic to~$\Struct{N}$.
+\end{proof}
+
+Above we defined $\Th{PA^2}$ as the theory that contains the first eight 
+arithmetical axioms plus the second-order induction axiom.  In fact, thanks
+to the expressive power of second-order logic, only the \emph{first two} 
+of the arithmetical axioms plus induction are needed for second-order Peano 
+arithmetic.
+
+\begin{prop}\ollabel{prop:sol-pa-definable}
+Let $\Th{PA^{2\dagger}}$ be the second-order theory containing the first 
+two arithmetical axioms (the successor axioms) and the second-order
+induction axiom. $>$, $+$, and $\times$ are definable in $\Th{PA^{2\dagger}}$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{prob}
+
+\begin{cor}
+$\Sat{M}{\Th{PA^2}}$ iff $\Sat{M}{\Th{PA^{2\dagger}}}$.
+\end{cor}
+
+\begin{proof}
+Immediate from \olref[sol][met][spa]{prop:sol-pa-definable}.
+\end{proof}
+
+
+\end{document}

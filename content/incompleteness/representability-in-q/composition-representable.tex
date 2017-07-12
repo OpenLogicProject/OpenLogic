@@ -1,0 +1,101 @@
+% Part: incompleteness
+% Chapter: representability-in-q
+% Section: composition-representable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{req}{cmp}
+\olsection{Composition is Representable in $\Th{Q}$}
+
+Suppose $h$ is defined by
+\[
+h(x_0,\dots,x_{l-1}) = f(g_0(x_0,\dots,x_{l-1}), \dots,
+g_{k-1}(x_0,\dots,x_{l-1})).
+\]
+where we have already found !!{formula}s $!A_f, !A_{g_0}, \dots,
+!A_{g_{k-1}}$ representing the functions $f$, and $g_0$,
+\dots,~$g_{k-1}$, respectively. We have to find !!a{formula}~$!A_h$
+representing $h$.
+
+Let's start with a simple case, where all functions are $1$-place,
+i.e., consider $h(x) = f(g(x))$. If $!A_f(y, z)$ represents~$f$, and
+$!A_g(x, y)$ represents~$g$, we need !!a{formula}~$!A_h(x, z)$ that
+represents~$h$.  Note that $h(x) = z$ iff there is a~$y$ such that
+both $z = f(y)$ and $y = g(x)$. (If $h(x) = z$, then $g(x)$ is such
+a~$y$; if such a $y$ exists, then since $y = g(x)$ and $z = f(y)$, $z
+= f(g(x))$.) This suggests that $\lexists[y][(!A_g(x, y) \land !A_f(y,
+  z))]$ is a good candidate for~$!A_h(x, z)$. We just have to verify
+that $\Th{Q}$ proves the relevant !!{formula}s.
+
+\begin{prop}
+\ollabel{prop:rep1}
+If $h(n) = m$, then $\Th{Q} \Proves !A_h(\num{n}, \num{m})$.
+\end{prop}
+
+\begin{proof}
+Suppose $h(n) = m$, i.e., $f(g(n)) = m$.  Let $k = g(n)$. Then
+\begin{align*}
+  \Th{Q} & \Proves !A_g(\num{n}, \num{k})
+  \intertext{since $!A_g$ represents~$g$, and}
+  \Th{Q} & \Proves !A_f(\num{k}, \num{m})
+  \intertext{since $!A_f$ represents~$f$. Thus,}
+  \Th{Q} & \Proves !A_g(\num{n}, \num{k}) \land !A_f(\num{k}, \num{m})
+  \intertext{and consequently also}
+  \Th{Q} & \Proves \lexists[y][(!A_g(\num{n}, y) \land !A_f(y, \num{m}))],
+\end{align*}
+i.e., $\Th{Q} \Proves !A_h(n, m)$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:rep2}
+If $h(n) = m$, then $\Th{Q} \Proves \lforall[z][(!A_h(\num{n}, z) \lif
+  z = \num{m})]$.
+\end{prop}
+
+\begin{proof}
+Suppose $h(n) = m$, i.e., $f(g(n)) = m$.  Let $k = g(n)$. Then
+\begin{align*}
+  \Th{Q} & \Proves \lforall[y][(!A_g(\num{n}, y) \lif \eq[y][\num{k}])]
+  \intertext{since $!A_g$ represents~$g$, and}
+  \Th{Q} & \Proves \lforall[z][(!A_f(\num{k}, z) \lif \eq[z][\num{m}])]
+  \intertext{since $!A_f$ represents~$f$. Using just a little bit of
+    logic, we can show that also}
+  \Th{Q} & \Proves \lforall[z][(\lexists[y][(!A_g(\num{n}, y) \land
+      !A_f(y, z))] \lif \eq[z][\num{m}])].
+\end{align*}
+i.e., $\Th{Q} \Proves \lforall[y][(!A_h(\num n, y) \lif \eq[y][\num m])]$.
+\end{proof}
+
+The same idea works in the more complex case where $f$ and $g_i$ have
+arity greater than~$1$.
+
+\begin{prop}
+\ollabel{prop:rep-composition}
+If $!A_f(y_0, \dots, y_{k-1}, z)$ represents $f(y_0, \dots, y_{k-1})$
+in~$\Th{Q}$, and $!A_{g_i}(x_0, \dots, x_{l-1}, y)$ represents
+$g_i(x_0, \dots, x_{l-1})$ in~$\Th{Q}$, then
+\begin{multline*}
+  \lexists[y_0,\dots][\lexists[y_{k-1}][(!A_{g_0}(x_0,\dots,x_{l-1},y_0) \land
+      \dots \land {}]]\\
+  !A_{g_{k-1}}(x_0,\dots,x_{l-1},y_{k-1}) \land !A_f(y_0,\dots,y_{k-1},z))
+\end{multline*}
+represents
+\[
+h(x_0, \dots, x_{k-1}) = f(g_0(x_0, \dots, x_{k-1}), \dots, g_0(x_0,
+\dots, x_{k-1})).
+\]
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Using the proofs of \olref[inc][req][cmp]{prop:rep2} and
+\olref[inc][req][cmp]{prop:rep2} as a guide, carry out the proof of
+\olref[inc][req][cmp]{prop:rep-composition} in detail.
+\end{prob}
+
+\end{document}

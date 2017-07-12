@@ -11,15 +11,14 @@
 \olsection{Consistent Extensions of $\Th{Q}$ are Undecidable}
 
 \begin{explain}
-Remember that a theory is {\em consistent} if it does not prove $!A$
-and $\lnot !A$ for any formula $!A$. Since anything follows from a
-contradiction, an inconsistent theory is trivial: every sentence is
+Remember that a theory is \emph{consistent} if it does not prove both
+$!A$ and $\lnot !A$ for any formula~$!A$. Since anything follows from
+a contradiction, an inconsistent theory is trivial: every sentence is
 provable. Clearly, if a theory if $\omega$-consistent, then it is
 consistent. But being consistent is a weaker requirement (i.e., there
-are theories that are consistent but not $\omega$-consistent --- we
-will see an example soon). We can weaken the assumption in
-\olref[oqn]{thm:oconsis-q} to simple consistency to obatin a stronger
-theorem.
+are theories that are consistent but not $\omega$-consistent.). We can
+weaken the assumption in \olref[oqn]{thm:oconsis-q} to simple
+consistency to obtain a stronger theorem.
 \end{explain}
 
 \begin{lem}
@@ -59,17 +58,17 @@ it is representable in $\Th{Q}$ (and hence $\Th{T}$) by a formula
 $!D_S(u)$. Then for every $n$, we have
 \begin{eqnarray*}
 S(\num n) & \lif & T \vdash !D_S(\num n) \\
-& \lif & R(\#(!D_S(u)), n)
+& \lif & R(\Gn{!D_S(u)}, n)
 \end{eqnarray*}
 and
 \begin{eqnarray*}
 \lnot S(\num n) & \lif & T \vdash \lnot !D_S(\num n) \\
 & \lif & T \not\vdash !D_S(\num n) \quad \text{(since $\Th{T}$ is
   consistent)} \\
-& \lif & \lnot R(\#(!D_S(u)),n).
+& \lif & \lnot R(\Gn{!D_S(u)}, n).
 \end{eqnarray*}
 That is, for every $y$, $S(y)$ is true if and only if
-$R(\#(!D_S(u)),y)$ is. So $R$ is universal, and we have the
+$R(\Gn{!D_S(u)}, y)$ is. So $R$ is universal, and we have the
 contradiction we were looking for.
 \end{proof}
 

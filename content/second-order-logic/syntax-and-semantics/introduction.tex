@@ -1,0 +1,59 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{int}
+
+\olsection{Introduction}
+
+In first-order logic, we combine the non-logical symbols of a given
+language, i.e., its !!{constant}s, !!{function}s, and !!{predicate}s,
+with the logical symbols to express things about first-order
+!!{structure}s.  This is done using the notion of satisfaction, which
+relates !!a{structure}~$\Struct{M}$, together with a variable
+assignment~$s$, and !!a{formula}~$!A$: $\Sat{M}{!A}[s]$ holds iff what
+$!A$ expresses when its !!{constant}s, !!{function}s, and
+!!{predicate}s are interpreted as $\Struct{M}$ says, and its free
+variables are interpreted as~$s$ says, is true.  The interpretation of
+the !!{identity}~$\eq$ is built into the definition of
+$\Sat{M}{!A}[s]$, as is the interpretation of~$\lforall$ and
+$\lexists$. The former is always interpreted as the identity relation
+on the !!{domain}~$\Domain{M}$ of the structure, and the quantifiers
+are always interpreted as ranging over the entire !!{domain}.  But,
+crucially, quantification is only allowed over elements of the
+!!{domain}, and so only object !!{variable}s are allowed to follow a
+quantifier.
+
+In second-order logic, both the language and the definition of
+satisfaction are extended to include free and bound function and
+predicate variables, and quantification over them.  These variables
+are related to !!{function}s and !!{predicate}s the same way that
+object variables are related to !!{constant}s.  They play the same
+role in the formation of terms and !!{formula}s of second-order logic,
+and quantification over them is handled in a similar way.  In the
+\emph{standard} semantics, the second-order quantifiers range over all
+possible objects of the right type ($n$-place functions from
+$\Domain{M}$ to~$\Domain{M}$ for function variables, $n$-place
+relations for predicate variables).  For instance, while
+$\lforall[\Obj{v_0}][(\Obj{P^1_0}(\Obj v_0) \lor \lnot
+  \Obj{P^1_0}(v_0))]$ is a formula in both first- and second-order
+logic, in the latter we can also consider
+$\lforall[\Obj{V^1_0}][\lforall[\Obj{v_0}][(\Obj{V^1_0}(\Obj v_0) \lor
+    \lnot \Obj{V^1_0}(v_0))]]$ and
+$\lexists[\Obj{V^1_0}][\lforall[\Obj{v_0}][(\Obj{V^1_0}(\Obj v_0) \lor
+    \lnot \Obj{V^1_0}(v_0))]]$. Since these contain no free varaibles,
+they are !!{sentence}s of second-order logic. Here, $\Obj{V^1_0}$ is a
+second-order $1$-place predicate variable.  The allowable
+interpretations of $\Obj{V^1_0}$ are the same that we can assign to a
+$1$-place !!{predicate} like $\Obj{P^1_0}$, i.e., subsets
+of~$\Domain{M}$.  Quantification over them then amounts to saying that
+$\lforall[\Obj{v_0}][(\Obj{V^1_0}(\Obj v_0) \lor \lnot
+  \Obj{V^1_0}(v_0))]$ holds for all ways of assigning a subset
+of~$\Domain{M}$ as the value of $\Obj{V^1_0}$, or for at least one.
+Since every set either contains or fails to contain a given object,
+both are true in any !!{structure}.
+\end{document}

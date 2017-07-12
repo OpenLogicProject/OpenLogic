@@ -12,7 +12,6 @@
 .PHONY : FORCE_MAKE
 
 ALLTEXFILES = open-logic-debug.tex open-logic-complete.tex \
-	courses/*/*.tex \
 	$(shell grep 'INPUT content/.*/.*\.tex' open-logic-debug.fls | uniq | sed 's/INPUT //g' )
 
 ALLPDFFILES = $(ALLTEXFILES:.tex=.pdf)
@@ -21,7 +20,7 @@ all: open-logic-debug.pdf open-logic-complete.pdf
 
 content/open-logic.pdf:
 
-everything: $(ALLPDFFILES) open-logic-config.pdf
+everything: $(ALLPDFFILES) open-logic-config.pdf courses
 
 courses: FORCE_MAKE
 	for course in courses/* ; do \

@@ -93,24 +93,23 @@ numbers of !!{formula}s, sequences of G\"odel numbers of !!{formula}s
 are primitive recursive.
 \begin{enumerate}
 \item $!A \in \Gamma$ iff $\Gn{!A}$ occurs in the
-  sequence~$\Gn{\Gamma}$, i.e, $\fn{IsIn}(x, g) \defiff \lexists[i <
-    \len{g}][(g)_i = x]$.  We'll abbreviate this as $x \in g$.
+  sequence~$\Gn{\Gamma}$, i.e, $\fn{IsIn}(x, g) \defiff \bexists{i <
+    \len{g}}{(g)_i = x}$.  We'll abbreviate this as $x \in g$.
 \item $\Gamma \subseteq \Delta$ iff every element of $\Gn{\Gamma}$ is
   also an an element of $\Gn{\Delta}$, i.e., $\fn{SubSet}(g, d)
-  \defiff \lforall[i < \len{g}][(g)_i \in d]$.  We'll abbreviate this
+  \defiff \bforall{i < \len{g}}{(g)_i \in d}$.  We'll abbreviate this
   as $g \subseteq d$.
 \item $\Gamma \Sequent \Delta$ is an initial sequent if either there
   is a !!{sentence}~$!A$ such that $\Gamma \Sequent \Delta$ is $!A
   \Sequent !A$, or there is a term~$t$ such that $\Gamma \Sequent
   \Delta$ is $\emptyset \Sequent \eq[t][t]$.  In terms of G\"odel
-  numbers,
+  numbers, $\fn{InitSeq}(s)$ holds iff
 \begin{align*}
-\fn{InitSeq}(s) \defiff &
-\lexists[x < s][(\fn{Sent}(x) \land
-s = \tuple{\tuple{x},\tuple{x}})]
+\bexists{x < s}{} (\fn{Sent}(x) & \land
+s = \tuple{\tuple{x},\tuple{x}})
 \lor {}\\
-& \lexists[t<s][(\fn{Term}(t)  \land
-s = \tuple{0, t\concat \Gn{\eq} \concat t})].
+\bexists{t<s}{} (\fn{Term}(t) & \land
+s = \tuple{0, \tuple{\Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)}}}).
 \end{align*}
 \item Here we have to show that for each rule of inference~$R$ the
   relation $\fn{FollowsBy}_R(s, s')$ which holds if $s$ and $s'$ are
@@ -126,18 +125,18 @@ every $!B \in \Delta$, either $!B = \lexists[x][!A]$ or $!B \in
 \Delta'$, and for every $!B \in \Delta'$, $!B = \Subst{!A}{t}{x}$ or
 $!B \in \Delta$.  We just have to translate this into G\"odel numbers.
 If $s = \Gn{\Gamma \Sequent \Delta}$ then $(s)_0 = \Gn{\Gamma}$ and
-$(s)_1 = \Gn{\Delta}$.  So:
+$(s)_1 = \Gn{\Delta}$.  So, $\fn{FollowsBy}_{\lexists \text{right}}(s,
+s')$ holds iff
 \begin{align*}
-\fn{FollowsBy}_{\lexists \text{right}}(s, s') \defiff {} &
-(s)_0 \subseteq (s')_0 \land (s')_0 \subseteq (s)_0 \land {}\\
+& (s)_0 \subseteq (s')_0 \land (s')_0 \subseteq (s)_0 \land {}\\
 &
-\lexists[f<s][\lexists[x<s][\lexists[t<s'][(\fn{Frm}(f) \land \fn{Var}(x) \land \fn{Term}(t) \land {}]]] \\
-& \fn{Subst}(f,t,x) \in (s')_1 \land \#(\lexists) \concat x \concat f \in (s)_1 \land {}\\
-& \lforall[i < \len{(s)_1}][(((s)_1)_i = \#(\lexists) \concat x \concat f \lor ((s)_1)_i \in (s')_1)] \land {} \\
-& \lforall[i < \len{(s')_1}][(((s)_1')_i = \fn{Subst}(f, t, x) \lor ((s')_1)_i \in (s)_1)])
+\bexists{f<s}{\bexists{x<s}{\bexists{t<s'}{(\fn{Frm}(f) \land \fn{Var}(x) \land \fn{Term}(t) \land {}}}} \\
+& \quad \fn{Subst}(f,t,x) \in (s')_1 \land \#(\lexists) \concat x \concat f \in (s)_1 \land {}\\
+& \quad \bforall{i < \len{(s)_1}}{(((s)_1)_i = \#(\lexists) \concat x \concat f \lor ((s)_1)_i \in (s')_1)} \land {} \\
+& \quad \bforall{i < \len{(s')_1}}{(((s)_1')_i = \fn{Subst}(f, t, x) \lor ((s')_1)_i \in (s)_1)})
 \end{align*}
 The individual lines express, respectively, ``$\Gamma \subseteq
-\Gamma' \land \Gamma' \subseteq \Gamma$,'' ``there is a !!{formula}
+\Gamma' \land \Gamma' \subseteq \Gamma$,'' ``there is !!a{formula}
 with G\"odel number~$f$, a variable with G\"odel number $x$, and a
 term with G\"odel number~$t$,'' ``$\Subst{!A}{t}{x} \in \Delta' \land
 \lexists[x][!A] \in \Delta$,'' ``for all $!B \in \Delta$, either $!B =
@@ -155,9 +154,13 @@ of a sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
   just of an initial sequent, or it ends in a correct inference and
   the codes of the immediate sub!!{derivation}s satisfy
   $\fn{hDeriv}(s, n)$.
-\begin{align*}
-\fn{hDeriv}(s, 0) \defiff {} & \True\\
-\fn{hDeriv}(s, n+1) \defiff {} & ((s)_0 = 0 \land \fn{InitialSeq}((s)_1)) \lor{}\\
+\begin{multline*}
+\begin{aligned}
+\fn{hDeriv}(s, 0) \defiff {} & \text{true}\\
+\fn{hDeriv}(s, n+1) \defiff {}
+\end{aligned}\\
+\begin{aligned}
+& ((s)_0 = 0 \land \fn{InitialSeq}((s)_1)) \lor{}\\
 & ((s)_0 = 1 \land {}\\
 & \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\text{Contr}}((s)_1, ((s)_3)_1)) \lor{}\\
 & \qquad \vdots\\
@@ -168,7 +171,8 @@ of a sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
 & \qquad \vdots\\
 & \quad ((s)_2 = 4 \land \fn{FollowsBy}_{\lif\text{left}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \land {}\\
 & \quad \fn{hDeriv}((s)_3, n) \land \fn{hDeriv}((s)_4, n))
-\end{align*}
+\end{aligned}
+\end{multline*}
 This is a primitive recursive definition.  If the number~$n$ is large
 enough, e.g., larger than the maximum number of inferences between an
 initial sequent and the end sequent in~$s$, it holds of $s$ iff $s$ is
@@ -190,7 +194,7 @@ Define the following relations as in
 
 \begin{prop}
 Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
-the relation $\fn{Pr}_\Gamma(x, y)$ expressing ``$x$ is the code of
+the relation $\Prf[\Gamma](x, y)$ expressing ``$x$ is the code of
 !!a{derivation}~$\pi$ of $\Gamma_0 \Sequent !A$ for some finite
 $\Gamma_0 \subseteq \Gamma$ and $x$ is the G\"odel number of~$!A$'' is
 primitive recursive.
@@ -198,12 +202,12 @@ primitive recursive.
 
 \begin{proof}
 Suppose ``$y \in \Gamma$'' is given by the primitive recursive
-predicate~$R_\Gamma(y)$.  We have to show that $\fn{Pr}_\Gamma(x, y)$
+predicate~$R_\Gamma(y)$.  We have to show that $\Prf[\Gamma](x, y)$
 which holds iff $y$ is the G\"odel number of a sentence~$!A$ and
 $x$~is the code of an $\Log{LK}$-!!{derivation} with end sequent
 $\Gamma_0 \Sequent !A$ is primitive recursive.
 
-By the previous proposition, the property $\fn{Deriv}()$ which holds
+By the previous proposition, the property $\fn{Deriv}(x)$ which holds
 iff $x$ is the code of a correct derivation~$\pi$ in $\Log{LK}$ is
 primitive recursive.  If $x$ is such a code, then $(x)_1$ is the code
 of the end sequent of~$\pi$, and so $((x)_1)_0$ is the code of the
@@ -212,12 +216,12 @@ express ``the right side of the end sequent of~$\pi$ is~$!A$'' as
 $\len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x$.  The left side of the
 end sequent of $\pi$ is of course automatically finite, we just have
 to express that every sentence in it is in~$\Gamma$.  Thus we can
-define $\fn{Pr}_\Gamma(x, y)$ by
+define $\Prf[\Gamma](x, y)$ by
 \begin{align*}
-\fn{Pr}_\Gamma(x, y) \defiff {}&
+\Prf[\Gamma](x, y) \defiff {}&
 \fn{Sent}(y) \land \fn{Deriv}(x) \land {} \\
-& \lforall[i <
-  \len{((x)_1)_0}][(((x)_1)_0)_i \in \Gamma] \land {}\\
+& \bforall{i <
+  \len{((x)_1)_0}}{R_\Gamma((((x)_1)_0)_i)} \land {}\\
 & \len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x
 \end{align*}
 \end{proof}

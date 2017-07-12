@@ -20,12 +20,12 @@ the !!{domain} of $\Struct M$ is a set of objects.  The !!{constant}s,
 some objects in$\Domain M$, functions on~$\Domain M$, and relations
 on~$\Domain M$.  For instance, if $\Obj A^2_0$ is in $\Lang L$, then
 $\Struct M$ assigns to it a relation~$R = \Assign{{\Obj
-  A^2_0}}{M}$. Then the formula $\Atom{\Obj A^2_0}{\Obj x_1, \Obj x_2}$
+  A^2_0}}{M}$. Then the formula $\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}$
 \emph{expresses} that very relation, in the following sense: if a
-variable assignment~$s$ maps $\Obj x_1$ to $a \in \Domain{M}$ and
-$\Obj x_2$ to $b \in \Domain M$, then
+variable assignment~$s$ maps $\Obj v_1$ to $a \in \Domain{M}$ and
+$\Obj v_2$ to $b \in \Domain M$, then
 \[
-Rab \text{\quad iff\quad} \Sat{M}{\Atom{\Obj A^2_0}{\Obj x_1, \Obj x_2}}[s].
+Rab \text{\quad iff\quad} \Sat{M}{\Atom{\Obj A^2_0}{\Obj v_1, \Obj v_2}}[s].
 \]
 Note that we have to involve variable assignments here: we can't just
 say ``$Rab$ iff $\Sat{M}{\Atom{\Obj A^2_0}{a, b}}$'' because $a$ and
@@ -40,32 +40,33 @@ specifically, which relations we can define in !!a{structure}.
 \end{explain}
 
 \begin{defn}
-Let $!A(\Obj x_1,\dots, \Obj x_n)$ be a !!{formula} of $\Lang L$ in
-which only $\Obj x_1$,\dots, $\Obj x_n$ occur free, and let $\Struct
-M$ be !!a{structure} for~$\Lang L$. $!A(\Obj x_1,\dots, \Obj x_n)$
+Let $!A(\Obj v_1,\dots, \Obj v_n)$ be a !!{formula} of $\Lang L$ in
+which only $\Obj v_1$,\dots, $\Obj v_n$ occur free, and let $\Struct
+M$ be !!a{structure} for~$\Lang L$. $!A(\Obj v_1,\dots, \Obj v_n)$
 \emph{expresses the relation}~$R \subseteq \Domain M^n$ iff
 \[
 Ra_1\dots a_n \text{\quad iff\quad} \Sat{M}{\Atom{!A}{\Obj
-    x_1,\dots, \Obj x_n}}[s]
+    v_1,\dots, \Obj v_n}}[s]
 \]
-for any variable assignment~$s$ with $s(\Obj x_i) = a_i$ ($i = 1,
+for any variable assignment~$s$ with $s(\Obj v_i) = a_i$ ($i = 1,
 \dots, n$).
 \end{defn}
 
 \begin{ex}
 In the standard model of arithmetic~$\Struct N$, the !!{formula} $\Obj
-x_1 < \Obj x_2 \lor \Obj x_1 = \Obj x_2$ expresses the $\le$ relation
-on~$\Nat$. The !!{formula} $\Obj x_2 = \Obj x_1'$ expresses the
-successor relation, i.e., the relation $R \subseteq \Nat^2$ where
-$Rnm$ holds if $m$ is the successor of~$n$. The formula $\Obj x_1 =
-\Obj x_2'$ expresses the predecessor relation.  The !!{formula}s
-$\lexists[\Obj x_3][(\eq/[\Obj x_3][\Obj 0] \land \eq[\Obj x_2][(\Obj
-    x_1 + \Obj x_3)])]$ and $\lexists[\Obj x_3][\eq[(\Obj x_1 + {\Obj
-      x_3}')][x_2]]$ both express the $\Obj <$ relation.  This means
-that the predicate symbol~$<$ is actually superfluous in the language
-of arithmetic; it can be defined.
+v_1 < \Obj v_2 \lor \eq[\Obj v_1][\Obj v_2]$ expresses the $\le$
+relation on~$\Nat$. The !!{formula} $\eq[\Obj v_2][\Obj v_1']$
+expresses the successor relation, i.e., the relation $R \subseteq
+\Nat^2$ where $Rnm$ holds if $m$ is the successor of~$n$. The formula
+$\eq[\Obj v_1][\Obj v_2']$ expresses the predecessor relation.  The
+!!{formula}s $\lexists[\Obj v_3][(\eq/[\Obj v_3][\Obj 0] \land
+  \eq[\Obj v_2][(\Obj v_1 + \Obj v_3)])]$ and $\lexists[\Obj
+  v_3][\eq[(\Obj v_1 + {\Obj v_3}')][v_2]]$ both express the $\Obj <$
+relation.  This means that the predicate symbol~$<$ is actually
+superfluous in the language of arithmetic; it can be defined.
 \end{ex}
 
+\begin{explain}
 This idea is not just interesting in specific !!{structure}s, but
 generally whenever we use a language to describe an intended model or
 models, i.e., when we consider theories.  These theories often only
@@ -74,6 +75,7 @@ are used to describe often many other relations play an important
 role.  If these other relations can be systematically expressed by the
 relations that interpret the basic !!{predicate}s of the language, we
 say we can \emph{define} them in the language.
+\end{explain}
 
 \begin{prob}
 Find !!{formula}s in $\Lang L_A$ which define the following relations:
@@ -86,7 +88,7 @@ Find !!{formula}s in $\Lang L_A$ which define the following relations:
 \end{prob}
 
 \begin{prob}
-Suppose the formula $!A(\Obj x_1, \Obj x_2)$ expresses the relation $R
+Suppose the formula $!A(\Obj v_1, \Obj v_2)$ expresses the relation $R
 \subseteq \Domain M^2$ in a !!{structure}~$\Struct M$.  Find formulas
 that express the following relations:
 \begin{enumerate}

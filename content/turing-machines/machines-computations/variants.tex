@@ -10,18 +10,21 @@
 \olsection{Variants of Turing Machines}
 
 There are in fact many possible ways to define Turing machines, of
-which ours is only one.  We allow arbitrary finite alphabets, a more
-restricted definition might allow only two tape symbols, $\TMstroke$
-and $\TMblank$.  We allow the machine to write a symbol to the tape
-and move at the same time, other definitions allow either writing or
+which ours is only one.  In some ways, our definition is more liberal
+than others. We allow arbitrary finite alphabets, a more restricted
+definition might allow only two tape symbols, $\TMstroke$ and
+$\TMblank$.  We allow the machine to write a symbol to the tape and
+move at the same time, other definitions allow either writing or
 moving.  We allow the possibility of writing without moving the tape
-head, other definitions leave out the $\TMstay$ ``instruction.''  Our
-definition assumes that the tape is infinite in one direction only,
-other definitions allow the tape to be infinite both to the left and
-the right. In fact, we might even allow any number of separate tapes,
-or even an infinite grid of squares.  We represent the instruction set
-of the Turing machine by a transition function; other definitions use
-a transition relation.
+head, other definitions leave out the $\TMstay$ ``instruction.''  In
+other ways, our definition is more restrictive. We assumed that the
+tape is infinite in one direction only, other definitions allow the
+tape to be infinite both to the left and the right. In fact, one can
+even even allow any number of separate tapes, or even an infinite grid
+of squares.  We represent the instruction set of the Turing machine by
+a transition function; other definitions use a transition relation
+where the machine has more than one possible instruction in any given
+situation.
 
 This last relaxation of the definition is particularly interesting.
 In our definition, when the machine is in state~$q$ reading
@@ -38,13 +41,19 @@ play an important role in computational complexity theory.
 There are also different conventions for when a Turing machine halts:
 we say it halts when the transition function is undefined, other
 definitions require the machine to be in a special designated halting
-state.  And there are differnt ways of representing numbers: we use
+state. Since the tapes of our turing machines are infinite in one
+direction only, there ae cases where a Turing machine can't properly
+carry out an instruction: if it reads the leftmost square and is
+supposed to move left. According to our definition, it just stays put
+instead, but we could have defined it so that it halts when that
+happens.  There are also different ways of representing numbers (and
+hence the input-output function computed by a Turing machine): we use
 unary representation, but you can also use binary representation (this
 requires two symbols in addition to $\TMblank$).
 
 Now here is an interesting fact: none of these variations matters as
-to which functions are Turing computable. If a function is Turing
+to which functions are Turing computable. \emph{If a function is Turing
 computable according to one definition, it is Turing computable
-according to all of them.
+according to all of them.}  
 
 \end{document}
