@@ -28,9 +28,29 @@ of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
 $\Delta \Proves[\Log{LK}] !A$.
 \end{proof}
 
+\begin{prop}[Compactness]
+  \ollabel{prop:compact-proves}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If $\Gamma$ is consistent, every finite subset of~$\Gamma$ is
+    consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is a finite subset
+      $\Gamma_0 \subseteq \Gamma$ such that the sequent $\Gamma_0
+      \Sequent !A$ has !!a{derivation}. Consequently, $\Gamma_0
+      \Proves !A$.
+    \item Follows from (1) by taking $!A \ident \lfalse$.
+  \end{enumerate}
+\end{proof}
+
 \begin{prop}
   \ollabel{prop:provability-contr} If $\Gamma \Proves[\Log{LK}] !A$
-  and $\Gamma \cup \{ !A\} \Proves[\Log{LK}] \lfalse$, then $\Gamma$
+  and $\Gamma \cup \{!A\} \Proves[\Log{LK}] \lfalse$, then $\Gamma$
   is inconsistent.
 \end{prop}
 

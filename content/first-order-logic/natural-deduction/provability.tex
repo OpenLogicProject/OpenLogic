@@ -27,6 +27,28 @@ Any !!{derivation} of $!A$ from $\Gamma$ is also !!a{derivation} of
 $!A$ from~$\Delta$.
 \end{proof}
 
+\begin{prop}[Compactness]
+  \ollabel{prop:compact-proves}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If $\Gamma$ is consistent, every finite subset of~$\Gamma$ is
+    consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is !!a{derivation}
+      of~$!A$ from~$\Gamma$. But any !!{derivation} is finite, so can
+      only contain finitely many !!{undischarged} assumptions. Let
+      $\Gamma_0$ be the set of !!{undischarged} assumptions of the
+      !!{derivation}; it is !!a{derivation} of~$!A$ from a
+      finite~$\Gamma_0 \subseteq \Gamma$.
+    \item Follows from (1) by taking $!A \ident \lfalse$.
+  \end{enumerate}
+\end{proof}
+
 \begin{prop}
 \ollabel{prop:provability-contr} If $\Gamma \Proves
   !A$ and $\Gamma \cup \{!A\} \Proves \lfalse$, then

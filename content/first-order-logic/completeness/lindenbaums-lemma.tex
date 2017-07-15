@@ -51,10 +51,21 @@ Each $\Gamma_n$ is consistent: $\Gamma_0$ is consistent by definition.
 If $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$, this is because the latter
 is consistent.  If it isn't, $\Gamma_{n+1} = \Gamma_n \cup \{\lnot
 !A_n\}$. We have to verify that $\Gamma_n \cup \{\lnot !A_n\}$ is
-consistent. Suppose it's not. Then \emph{both} $\Gamma_n \cup \{!A_n\}$
-and $\Gamma_n \cup \{\lnot !A_n\}$ are inconsistent. So $\Gamma_n
-\Proves \lnot !A_n$ and $\Gamma_n \Proves !A_n$, and $\Gamma_n$ would be
-inconsistent contrary to the induction hypothesis.
+consistent. Suppose it's not. Then \emph{both} $\Gamma_n \cup
+\{!A_n\}$ and $\Gamma_n \cup \{\lnot !A_n\}$ are inconsistent. So
+$\Gamma_n \Proves \lnot !A_n$ and $\Gamma_n \Proves \lnot\lnot !A_n$
+by
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lnot},prfND/{fol:ntd:prv:prop:provability-lnot}}. This
+means that $\Gamma_n$ would be inconsistent by
+\tagrefs{prfSC/{fol:seq:prv:prop:explicit-inc},prfND/{fol:ntd:prv:prop:explicit-inc}},
+contrary to the induction hypothesis.
+
+Every finite subset of $\Gamma^*$ is a subset of~$\Gamma_n$ for
+some~$n$, since each $!B \in \Gamma^*$ not already in~$\Gamma$ is
+added at some stage~$i$. If $n$ is the last one of these, then all
+$!B$ in the finite subset are in~$\Gamma_n$. So, by
+\tagrefs{prfSC/{fol:seq:prv:prop:compact-proves},prfND/{fol:ntd:prv:prop:compact-proves}},
+$\Gamma^*$ is consistent.
 
 Every !!{sentence} of $\Frm[L']$ appears on the list used to
 define~$\Gamma^*$. If $!A_n \notin \Gamma^*$, then that is because
