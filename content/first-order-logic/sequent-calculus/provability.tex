@@ -29,7 +29,7 @@ $\Delta \Proves[\Log{LK}] !A$.
 \end{proof}
 
 \begin{prop}[Compactness]
-  \ollabel{prop:compact-proves}
+  \ollabel{prop:proves-compact}
   \begin{enumerate}
   \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
     \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
@@ -44,76 +44,74 @@ $\Delta \Proves[\Log{LK}] !A$.
       $\Gamma_0 \subseteq \Gamma$ such that the sequent $\Gamma_0
       \Sequent !A$ has !!a{derivation}. Consequently, $\Gamma_0
       \Proves !A$.
-    \item Follows from (1) by taking $!A \ident \lfalse$.
+    \item If some finite subset $\Gamma_0 \subseteq \Gamma$ is
+      inconsistent, then $\Log{LK}$ !!{derive}s $\Gamma_0 \Sequent
+      \quad$. Since $\Gamma_0 \subseteq \Gamma$, this means $\Gamma$
+      itself is inconsistent.
   \end{enumerate}
 \end{proof}
 
 \begin{prop}
   \ollabel{prop:provability-contr} If $\Gamma \Proves[\Log{LK}] !A$
-  and $\Gamma \cup \{!A\} \Proves[\Log{LK}] \lfalse$, then $\Gamma$
+  and $\Gamma \cup \{!A\}$ is inconsistent, then $\Gamma$
   is inconsistent.
 \end{prop}
 
 \begin{proof}
 There are finite $\Gamma_0$ and $\Gamma_1 \subseteq \Gamma$ such that
-$\Log{LK}$ !!{derive}s $\Gamma_0 \Sequent !A$ and $\Gamma_1, !A
-\Sequent \lfalse$.  Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent
-!A$ be $\Pi_0$ and the $\Log{LK}$-!!{derivation} of $\Gamma_1, !A
-\Sequent \lfalse$ be $\Pi_1$. We can then !!{derive}
+$\Log{LK}$ !!{derive}s $\Gamma_0 \Sequent !A$ and $!A, \Gamma_1
+\Sequent \quad$.  Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent
+!A$ be $\pi_0$ and the $\Log{LK}$-!!{derivation} of $\Gamma_1, !A
+\Sequent \quad$ be $\pi_1$. We can then !!{derive}
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A $
 \AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, !A \fCenter \lfalse$
-\RightLabel{cut}
-\BinaryInf$ \Gamma_0,\Gamma_1 \fCenter \lfalse $
+\RightLabel{$\pi_1$}
+\Deduce$!A, \Gamma_1 \fCenter $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_0,\Gamma_1 \fCenter $
 \end{prooftree}
 
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
-$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma
-\Proves[\Log{LK}] \lfalse$.
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma$~is inconsistent.
 \end{proof}
 
 \begin{prop}
-\ollabel{prop:provability-lnot} $\Gamma \cup \{!A\}
-  \Proves[\Log{LK}] \lfalse$ iff $\Gamma \Proves[\Log{LK}] \lnot !A$.
+\ollabel{prop:provability-lnot} $\Gamma \cup \{!A\}$ is inconsistent
+iff $\Gamma \Proves[\Log{LK}] \lnot !A$.
 \end{prop}
 
 \begin{proof}
-For the forward direction, suppose that $\Gamma \cup \{!A\}
-\Proves[\Log{LK}] \lfalse$. Then there is a finite set $\Gamma_0
-\subseteq \Gamma$ such that $\Log{LK}$ !!{derive}s $\Gamma_0, !A
-\Sequent \lfalse$.  Let $\Pi_0$ be an $\Log{LK}$-!!{derivation} of
-$\Gamma_0, !A \Sequent \lfalse$, and consider
+For the forward direction, suppose that $\Gamma \cup \{!A\}$ is
+inconsistent. Then there is a finite set $\Gamma_0 \subseteq \Gamma$
+such that $\Log{LK}$ !!{derive}s $!A, \Gamma_0 \Sequent \quad$.  Let
+$\pi_0$ be an $\Log{LK}$-!!{derivation} of $!A, \Gamma_0 \Sequent
+\quad$ and consider
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$\Gamma_0, !A \fCenter \lfalse$
+\RightLabel{$\pi_0$}
+\Deduce$!A, \Gamma_0 \fCenter \quad$
 \RightLabel{\RightR{\lnot}}
-\UnaryInf$ \Gamma_0 \fCenter \lfalse, \lnot !A$
-\AxiomC{$\lfalse \fCenter \quad$}
-\RightLabel{cut}
-\BinaryInf$ \Gamma_0 \fCenter \lnot !A$
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
 \end{prooftree}
 
 For the reverse direction, suppose that $\Gamma \Proves[\Log{LK}]
 \lnot !A$. Then for some finite $\Gamma_1 \subseteq \Gamma$,
 $\Log{LK}$ !!{derive}s $\Gamma_1 \Sequent \lnot !A$, say, using
-!!a{derivation}~$\Pi_1$. Now consider
+!!a{derivation}~$\pi_1$. Now consider
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_1$}
+\RightLabel{$\pi_1$}
 \Deduce$\Gamma_1 \fCenter \lnot !A$
 \AxiomC{$!A \fCenter !A$}
 \RightLabel{\LeftR{\lnot}}
 \UnaryInf$\lnot !A, !A \fCenter $
-\RightLabel{\RightR{\Weakening}}
-\UnaryInf$\lnot !A, !A \fCenter \lfalse$
-\RightLabel{cut}
-\BinaryInf$ \Gamma_1, !A \fCenter \lfalse$
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_1, !A \fCenter $
 \end{prooftree}
+Since $\Gamma_1 \subseteq \Gamma$, $\Gamma$ is inconsistent.
 \end{proof}
 
 \begin{prop}
@@ -124,85 +122,82 @@ $\Log{LK}$ !!{derive}s $\Gamma_1 \Sequent \lnot !A$, say, using
 \begin{proof}
   Suppose $\Gamma \Proves[\Log{LK}] !A$ and $\Gamma \Proves[\Log{LK}]
   \lnot !A$. Then there are finite subsets $\Gamma_0$ and $\Gamma_1
-  \subseteq \Gamma$ and !!{derivation}s $\Pi_0$ and $\Pi_1$ of
+  \subseteq \Gamma$ and !!{derivation}s $\pi_0$ and $\pi_1$ of
   $\Gamma_0 \Sequent !A$ and $\Gamma_1 \Sequent \lnot !A$. Consider
   the derivation
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$\Gamma_0 \fCenter !A$
-\AxiomC{}
-\RightLabel{$\Pi_1$}
+\RightLabel{$\pi_1$}
 \Deduce$\Gamma_1 \fCenter \lnot !A$
-\AxiomC{$!A \fCenter !A$}
+\AxiomC{}
+\RightLabel{$\pi_0$}
+\Deduce$\Gamma_0 \fCenter !A$
 \RightLabel{\LeftR{\lnot}}
-\UnaryInf$\lnot !A, !A \fCenter $
-\RightLabel{cut}
-\BinaryInf$!A, \Gamma_1 \fCenter$
-\RightLabel{cut}
+\UnaryInf$\lnot !A, \Gamma_0 \fCenter$
+\RightLabel{\Cut}
 \BinaryInf$\Gamma_0, \Gamma_1 \fCenter$
-\RightLabel{\RightR{\Weakening}}
-\UnaryInf$\Gamma_0, \Gamma_1 \fCenter \lfalse$
 \end{prooftree}
-  
+Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma$ is
+inconsistent.
 \end{proof}
 
 \begin{prop}
-\ollabel{prop:provability-exhaustive} If $\Gamma \cup \{!A\}
-\Proves[\Log{LK}] \lfalse$ and $\Gamma \cup \{\lnot !A\}
-\Proves[\Log{LK}] \lfalse$, then $\Gamma \Proves[\Log{LK}] \lfalse$.
+\ollabel{prop:provability-exhaustive} If $\Gamma \cup \{!A\}$ and
+$\Gamma \cup \{\lnot !A\}$ are both inconsistent, then $\Gamma$ is
+inconsistent.
 \end{prop}
 
 \begin{proof}
 There are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1
-\subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$
-of $\Gamma_0, !A \Sequent \lfalse$ and $\Gamma_1, \lnot !A \Sequent
-\lfalse$, respectively. We can then !!{derive}
+\subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\pi_0$ and $\pi_1$
+of $!A, \Gamma_0 \Sequent \quad$ and $\lnot !A, \Gamma_1 \Sequent
+\quad$, respectively. We can then !!{derive}
 
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, !A \fCenter \lfalse $
+\RightLabel{$\pi_0$}
+\Deduce$ !A, \Gamma_0 \fCenter $
 \RightLabel{\RightR{\lnot}}
-\UnaryInf$ \Gamma_0 \fCenter \lfalse, \lnot !A$
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
 \AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, \lnot !A \fCenter \lfalse $
-\RightLabel{cut}
-\BinaryInf$ \Gamma_0, \Gamma_1 \fCenter \lfalse $
+\RightLabel{$\pi_1$}
+\Deduce$\lnot !A, \Gamma_1 \fCenter  $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_0, \Gamma_1 \fCenter $
 \end{prooftree}
 Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
-$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma
-\Proves[\Log{LK}] \lfalse$.
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma$ is
+inconsistent.
 \end{proof}
 
 
 \begin<prvOr>{prop}
 \ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}
-\Proves[\Log{LK}] C$ and $\Gamma \cup \{!B\} \Proves[\Log{LK}]
-C$, then $\Gamma \cup \{!A \lor !B\} \Proves[\Log{LK}] C$.
+\Proves[\Log{LK}] !C$ and $\Gamma \cup \{!B\} \Proves[\Log{LK}]
+!C$, then $\Gamma \cup \{!A \lor !B\} \Proves[\Log{LK}] !C$.
 \end{prop}
 
 \begin<prvOr>{proof}
 \iftag{probOr}{Exercise.}{There are finite sets $\Gamma_0,\Gamma_1
-  \subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\Pi_0$ and $\Pi_1$
+  \subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\pi_0$ and $\pi_1$
   such that
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
-\Deduce$ \Gamma_0, !A \fCenter C$
+\RightLabel{$\pi_0$}
+\Deduce$!A, \Gamma_0 \fCenter !C$
 \doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, !A \fCenter C$
+\UnaryInf$!A, \Gamma_0, \Gamma_1 \fCenter !C$
 \AxiomC{}
-\RightLabel{$\Pi_1$}
-\Deduce$ \Gamma_1, !B \fCenter C$
+\RightLabel{$\pi_1$}
+\Deduce$!B, \Gamma_1 \fCenter !C$
 \doubleLine
-\UnaryInf$ \Gamma_0, \Gamma_1, !B \fCenter C$
+\UnaryInf$!B, \Gamma_0, \Gamma_1 \fCenter !C$
 \RightLabel{\LeftR{\lor}}
-\BinaryInf$ \Gamma_0, \Gamma_1, !A \lor !B \fCenter C$
+\BinaryInf$ !A \lor !B, \Gamma_0, \Gamma_1 \fCenter !C$
 \end{prooftree}
-(Recall that double inference lines indicate several weakening
-inferences.)
+(Recall that double inference lines indicate several weakening,
+contraction, and exchange inferences.)
 
 Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
 !B\} \Proves[\Log{LK}] C$.}
@@ -220,11 +215,11 @@ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 
 \begin<prvOr>{proof}
 \iftag{probOr}{Exercise.}{There is an $\Log{LK}$-!!{derivation}
-  $\Pi_0$ and a finite set $\Gamma_0 \subseteq \Gamma$ such that we
+  $\pi_0$ and a finite set $\Gamma_0 \subseteq \Gamma$ such that we
   can !!{derive}
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A $
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma_0 \fCenter !A \lor !B$
@@ -246,16 +241,16 @@ Prove \olref[fol][seq][prv]{prop:provability-lor-right}.
 \begin<prvAnd>{proof}
 \iftag{probAnd}{Exercise}{If $\Gamma \Proves[\Log{LK}] !A \land !B$,
   there is a finite set $\Gamma_0 \subseteq \Gamma$ and an
-  $\Log{LK}$-!!{derivation} $\Pi_0$ of $\Gamma_0 \Sequent !A \land
+  $\Log{LK}$-!!{derivation} $\pi_0$ of $\Gamma_0 \Sequent !A \land
   !B$. Consider
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A \land !B$
 \Axiom$!A \fCenter !A$
 \RightLabel{\LeftR{\land}}
 \UnaryInf$!A \land !B \fCenter !A$
-\RightLabel{cut}
+\RightLabel{\Cut}
 \BinaryInf$\Gamma_0 \fCenter !A$
 \end{prooftree}
 Hence, $\Gamma \Proves[\Log{LK}] !A$.  A similar !!{derivation} starting
@@ -277,16 +272,16 @@ and $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \iftag{probAnd}{Exercise.}{If $\Gamma \Proves[\Log{LK}] !A$ as well as
   $\Gamma \Proves[\Log{LK}] !B$, there are finite sets $\Gamma_0$,
   $\Gamma_1 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation}s
-  $\Pi_0$ of $\Gamma_0 \Sequent !A$ and $\Pi_1$ of $\Gamma_1 \Sequent
+  $\pi_0$ of $\Gamma_0 \Sequent !A$ and $\pi_1$ of $\Gamma_1 \Sequent
   !A$. Consider
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_0$}
 \Deduce$ \Gamma_0 \fCenter !A$
 \doubleLine
 \UnaryInf$ \Gamma_0, \Gamma_1 \fCenter !A$
 \AxiomC{}
-\RightLabel{$\Pi_1$}
+\RightLabel{$\pi_1$}
 \Deduce$ \Gamma_1 \fCenter !B$
 \doubleLine
 \UnaryInf$ \Gamma_0, \Gamma_1 \fCenter !B$
@@ -311,19 +306,19 @@ $\Gamma \Proves[\Log{LK}] !A \lif !B$, then $\Gamma \Proves[\Log{LK}]
 \iftag{probIf}{Exercise.}{Suppose that $\Gamma \Proves[\Log{LK}] !A$
   and $\Gamma \Proves[\Log{LK}] !A \lif !B$.  There are finite sets
   $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$ such that there are
-  $\Log{LK}$-!!{derivation}s $\Pi_0$ of $\Gamma_0 \Sequent !A$ and
-  $\Pi_1$ of $\Gamma_1 \Sequent !A \lif !B$. Consider:
+  $\Log{LK}$-!!{derivation}s $\pi_0$ of $\Gamma_0 \Sequent !A$ and
+  $\pi_1$ of $\Gamma_1 \Sequent !A \lif !B$. Consider:
 
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_0$}
 \Deduce$ \Gamma_1 \fCenter !A \lif !B$
 \AxiomC{}
-\RightLabel{$\Pi_1$}
+\RightLabel{$\pi_1$}
 \Deduce$\Gamma_0 \fCenter !A $
 \AxiomC{$!B \fCenter !B$}
 \RightLabel{\LeftR{\lif}}
-\BinaryInf$\Gamma_0, !A \lif !B \fCenter !B$
+\BinaryInf$!A \lif !B, \Gamma_0  \fCenter !B$
 \RightLabel{cut}
 \BinaryInf$ \Gamma_0,\Gamma_1 \fCenter !B$
 \end{prooftree}
@@ -344,38 +339,40 @@ or $\Gamma \Proves[\Log{LK}] !B$, then $\Gamma \Proves[\Log{LK}] !A
 \begin<prvIf>{proof}
 \iftag{probIf}{Exercise.}{First suppose $\Gamma \Proves[\Log{LK}]
   \lnot !A$.  Then for some finite $\Gamma_0 \subseteq \Gamma$ there
-  is a $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent \lnot !A$. The
+  is a $\Log{LK}$-!!{derivation}~$\pi_0$ of $\Gamma_0 \Sequent \lnot !A$. The
   following !!{derivation} shows that $\Gamma \Proves[\Log{LK}] !A
   \lif !B$:
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_0$}
 \Deduce$ \Gamma_0 \fCenter \lnot !A$
 \Axiom$!A \fCenter !A$
-\RightLabel{\RightR{\lnot}}
+\RightLabel{\LeftR{\lnot}}
 \UnaryInf$\lnot !A, !A \fCenter$
-\RightLabel{\RightR{\Weakening}}
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A, \lnot !A \fCenter$
+\RightLabel{\LeftR{\Weakening}}
 \UnaryInf$!A, \lnot !A \fCenter !B$
 \RightLabel{\RightR{\lif}}
 \UnaryInf$\lnot !A \fCenter !A \lif !B$
-\RightLabel{cut}
+\RightLabel{\Cut}
 \BinaryInf$\Gamma_0 \fCenter !A \lif !B$
 \end{prooftree}
 
 Now suppose $\Gamma \Proves[\Log{LK}] !B$.  Then for some finite
-$\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-!!{derivation} of
+$\Gamma_0 \subseteq \Gamma$ there is a $\Log{LK}$-!!{derivation}~$\pi_1$ of
 $\Gamma_0 \Sequent !B$. The following !!{derivation} shows that $\Gamma
 \Proves[\Log{LK}] !A \lif !B$:
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{$\Pi_0$}
+\RightLabel{$\pi_1$}
 \Deduce$\Gamma_0 \fCenter !B$
 \Axiom$!B \fCenter !B$
 \RightLabel{\LeftR{\Weakening}}
 \UnaryInf$!A, !B \fCenter !B$
 \RightLabel{\RightR{\lif}}
 \UnaryInf$!B \fCenter !A \lif !B$
-\RightLabel{cut}
+\RightLabel{\Cut}
 \BinaryInf$\Gamma_0 \fCenter !A \lif !B$
 \end{prooftree}}
 \end{proof}
@@ -416,19 +413,20 @@ and thus the eigenvariable condition is satisfied.
   \Sequent !A(t)$. Add an \RightR{\lexists} inference to get
   !!a{derivation} of $\Gamma_0 \Sequent \lexists[x][!A(x)]$.}{}
 
-\tagitem{prvAll}{Suppose $\Gamma \Proves[\Log{LK}] \lforall[x][!A(x)]$. Then there is a
-  finite $\Gamma_0 \subseteq \Gamma$ and an $\Log{LK}$-!!{derivation}
-  $\Pi$ of $\Gamma_0 \Sequent \lforall[x][!A(x)]$.  Then
+\tagitem{prvAll}{Suppose $\Gamma \Proves[\Log{LK}]
+  \lforall[x][!A(x)]$. Then there is a finite $\Gamma_0 \subseteq
+  \Gamma$ and an $\Log{LK}$-!!{derivation} $\pi$ of $\Gamma_0 \Sequent
+  \lforall[x][!A(x)]$.  Then
 % for some reason, prooftree env sometimes doesn't work here
 % \begin{prooftree}
 \[
 \AxiomC{}
-\RightLabel{$\Pi$}
+\RightLabel{$\pi$}
 \Deduce$\Gamma_0 \fCenter \lforall[x][!A(x)]$
 \Axiom$!A(t) \fCenter !A(t)$
 \RightLabel{\LeftR{\lforall}}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(t)$
-\RightLabel{cut}
+\RightLabel{\Cut}
 \BinaryInf$\Gamma_0 \fCenter  !A(t)$
 %\end{prooftree}
 \DisplayProof

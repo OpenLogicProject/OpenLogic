@@ -34,16 +34,44 @@ $\Proves[\Log{LK}] !A$ if $!A$ is a theorem and $\Proves/[\Log{LK}]
 
 \begin{defn}[!!^{derivability}]
 A sentence $!A$ is \emph{!!{derivable} from} a set of
-sentences~$\Gamma$, $\Gamma \Proves[\Log{LK}] !A$, if there is a
-finite subset~$\Gamma_0 \subseteq \Gamma$ such that $\Log{LK}$
-!!{derive}s $\Gamma_0 \Sequent !A$.  If $!A$ is not !!{derivable} from
-$\Gamma$ we write $\Gamma \Proves/[\Log{LK}] !A$.
+sentences~$\Gamma$, $\Gamma \Proves[\Log{LK}] !A$, iff there is a
+finite subset~$\Gamma_0 \subseteq \Gamma$ and a sequence $\Gamma_0'$
+of the !!{formula}s in~$\Gamma_0$ such that $\Log{LK}$ !!{derive}s
+$\Gamma_0' \Sequent !A$.  If $!A$ is not !!{derivable} from $\Gamma$
+we write $\Gamma \Proves/[\Log{LK}] !A$.
 \end{defn}
 
+Because of the contraction, weakening, and exchange rules, the order
+and number of !!{formula}s in~$\Gamma_0'$ does not matter: if a
+sequent $\Gamma_0' \Sequent !A$ is !!{derivable}, then so is
+$\Gamma_0'' \Sequent !A$ for any $\Gamma_0''$ that contans the same
+!!{formula}s as~$\Gamma_0'$.  For instance, if $\Gamma_0 = \{!B, !C\}$
+then both $\Gamma_0' = \tuple{!B, !B, !C}$ and $\Gamma_0'' =
+\tuple{!C, !C, !B}$ are sequences containing just the !!{formula}s
+in~$\Gamma_0$. If a sequent containing one is !!{derivable}, so is the
+other, e.g.:
+\begin{prooftree}
+  \AxiomC{}
+  \Deduce$!B, !B, !C \fCenter !A$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!B, !C \fCenter !A$
+  \RightLabel{\LeftR{\Exchange}}
+  \UnaryInf$!C, !B \fCenter !A$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!C, !C, !B \fCenter !A$
+\end{prooftree}
+From now on we'll say that if $\Gamma_0$ is a finite set of
+!!{formula}s then $\Gamma_0 \Sequent !A$ is any sequent where the
+antecedent is a sequence of !!{formula}s in~$\Gamma_0$ and tacitly include
+contractions, exchanges, and weakenings if necessary.
+
 \begin{defn}[Consistency]
-A set of sentences~$\Gamma$ is \emph{consistent} iff $\Gamma
-\Proves/[\Log{LK}] \lfalse$.  If $\Gamma$ is not consistent, i.e., if
-$\Gamma \Proves[\Log{LK}] \lfalse$, we say it is \emph{inconsistent}.
+A set of sentences~$\Gamma$ is \emph{inconsistent} iff there is a
+finite subset~$\Gamma_0 \subseteq \Gamma$ such that $\Log{LK}$
+!!{derive}s $\Gamma_0 \Sequent \quad$. If $\Gamma$ is not
+inconsistent, i.e., if for every finite $\Gamma_0 \subseteq \Gamma$,
+$\Log{LK}$ does not !!{derive} $\Gamma_0 \Sequent \quad$, we say it is
+\emph{consistent}.
 \end{defn}
 
 \begin{prop}
@@ -73,14 +101,25 @@ Exercise.
 Prove \olref[fol][seq][ptn]{prop:incons}
 \end{prob}
 
-\begin{prop}
-\ollabel{prop:proves-compact}
-$\Gamma \Proves[\Log{LK}] !A$ iff for some finite $\Gamma_0 \subseteq
-\Gamma$, $\Gamma_0 \Proves[\Log{LK}] !A$.
+\begin<prvFalse>{prop}
+\ollabel{prop:incons-lfalse}
+$\Gamma$ is inconsistent iff $\Gamma_0 \Proves[\Log{LK}] \lfalse$.
 \end{prop}
 
 \begin{proof}
-Follows immediately from the definion of~$\Proves[\Log{LK}]$.
+Suppose $\Gamma$ is inconsistent, i.e., $\Log{LK}$ !!{derive}s
+$\Gamma_0 \Sequent \quad$ for some finite $\Gamma_0 \subseteq
+\Gamma$. Then, using \RightR{\Weakening}, it also !!{derive}s
+$\Gamma_0 \Sequent \lfalse$.  If, on the other hand, $\Log{LK}$
+!!{derive}s $\Gamma_0 \Sequent \lfalse$, we obtain !!a{derivation} of
+$\Gamma_0 \Sequent \quad$ using cut and an initial sequent:
+\begin{prooftree}
+  \AxiomC{}
+  \Deduce$\Gamma_0 \fCenter \lfalse$
+  \Axiom$\lfalse \fCenter$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma_0 \fCenter$
+\end{prooftree}
 \end{proof}
 
 \end{document}

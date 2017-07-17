@@ -34,27 +34,26 @@ $\Gamma$, then $\Gamma \Entails !A$.
 \end{thm}
 
 \begin{proof}
-\emph{Inductive Hypothesis}: The premises of an inference rule follow
-from the !!{undischarged} assumptions of the subproofs ending in those premises.
- 
-\emph{Inductive Step}: Show that $!A$ follows from the
-!!{undischarged} assumptions of the entire proof.
-
 Let $\delta$ be !!a{derivation} of $!A$. We proceed by
 induction on the number of inferences in~$\delta$.
 
-If the number of inferences is~0, then $\delta$ consists only of an
-initial !!{formula}. Every initial !!{formula}~$!A$ is 
-!!a{undischarged} assumption, and as such, any
-!!{structure}~$\Struct{M}$ that satisfies all of the !!{undischarged}
-assumptions of the proof also satisfies~$!A$.
+For the induction basis we show the claim if the number of inferences
+is~$0$. In this case, $\delta$ consists only of an initial
+!!{formula}. Every initial !!{formula}~$!A$ is !!a{undischarged}
+assumption, and as such, any !!{structure}~$\Struct{M}$ that satisfies
+all of the !!{undischarged} assumptions of the proof also
+satisfies~$!A$.
 
-If the number of inferences is greater than~0, we distinguish cases
-according to the type of the lowermost inference. By induction
-hypothesis, we can assume that the premises of that inference follow
-from the !!{undischarged} assumptions of the sub-!!{derivation}s
-ending in those premises, respectively.
+Now for the inductive step. Suppose that $\delta$ contains~$n$
+inferences. The premise(s) of the lowermost inference are !!{derive}d using
+sub-!!{derivation}s, each of which contains fewer than~$n$ inferences.
+We assume the induction hypothesis: The premises of the last
+inference follow from the !!{undischarged} assumptions of the
+sub-!!{derivation}s ending in those premises.  We have to show that
+$!A$ follows from the !!{undischarged} assumptions of the entire
+proof.
 
+We distinguish cases according to the type of the lowermost inference.
 First, we consider the possible inferences with only one premise.
 
 \begin{enumerate}
@@ -148,20 +147,23 @@ First, we consider the possible inferences with only one premise.
   assumptions $\Gamma$ by induction hypothesis.  Consider some
   structure, $\Struct{M}$, such that $\Sat{M}{\Gamma}$.  We need to
   show that $\Sat{M}{\lforall[x][!A(x)]}$. Since $\lforall[x][!A(x)]$
-  is !!a{sentence}, this means we have to show that for every
-  variable assignment~$s$, $\Sat{M}{!A(x)}[s]$
+  is !!a{sentence}, this means we have to show that for every variable
+  assignment~$s$, $\Sat{M}{!A(x)}[s]$
   (\olref[syn][ass]{prop:sat-quant}). Since $\Gamma$ consists entirely
   of sentences, $\Sat{M}{!B}[s]$ for all $!B \in \Gamma$ by
   \olref[syn][sat]{defn:satisfaction}.  Let $\Struct{M'}$ be like
   $\Struct{M}$ except that $\Assign{a}{M'} = s(x)$.  Since $a$ does
   not occur in~$\Gamma$, $\Sat{M'}{\Gamma}$ by
-  \olref[syn][ext]{cor:extensionality-sent}. Since $\Gamma \Entails A(a)$,
-  $\Sat{M'}{A(a)}$.  $\Sat{M'}{!A(x)}[s]$ iff $\Sat{M'}{!A(a)}$ by
-  \olref[syn][ext]{prop:ext-formulas} (recall that $!A(a)$ is just
-  $\Subst{!A(x)}{a}{x}$). So, $\Sat{M'}{!A(x)}[s]$. Since $a$ does not
-  occur in~$!A(x)$, by \olref[syn][ext]{prop:extensionality},
-  $\Sat{M}{!A(x)}[s]$. But $s$ was an arbitrary variable assignment,
-  so $\Sat{M}{\lforall[x][!A(x)]}$.
+  \olref[syn][ext]{cor:extensionality-sent}. Since $\Gamma \Entails
+  A(a)$, $\Sat{M'}{A(a)}$.  Since $!A(a)$ is !!a{sentence},
+  $\Sat{M}{!A(a)}[s]$ by
+  \olref[syn][ass]{prop:sentence-sat-true}. $\Sat{M'}{!A(x)}[s]$ iff
+  $\Sat{M'}{!A(a)}$ by \olref[syn][ext]{prop:ext-formulas} (recall
+  that $!A(a)$ is just $\Subst{!A(x)}{a}{x}$). So,
+  $\Sat{M'}{!A(x)}[s]$. Since $a$ does not occur in~$!A(x)$, by
+  \olref[syn][ext]{prop:extensionality}, $\Sat{M}{!A(x)}[s]$. But $s$
+  was an arbitrary variable assignment, so
+  $\Sat{M}{\lforall[x][!A(x)]}$.
   
 \item The last inference is \Intro{\lexists}: Exercise.
 
