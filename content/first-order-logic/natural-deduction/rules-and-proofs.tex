@@ -57,21 +57,6 @@ those (if any) that we consider as defined.
 
 \subsection{Propositional Rules}
 
-\paragraph{Rules for $\lfalse$}
-
-\[
-\AxiomC{$!A$}
-\AxiomC{$\lnot !A$}
-\RightLabel{\Intro{\lfalse}}
-\BinaryInfC{$\lfalse$}
-\DisplayProof
-\quad
-\AxiomC{$\lfalse$}
-\RightLabel{\Elim{\lfalse}}
-\UnaryInfC{$!A$}
-\DisplayProof
-\]
-
 \paragraph{Rules for $\land$}
 
 \[
@@ -125,10 +110,10 @@ those (if any) that we consider as defined.
 \UnaryInfC{$\lnot !A$}
 \DisplayProof
 \quad
-\AxiomC{$\lnot \lnot !A$}
+\AxiomC{$\lnot !A$}
+\AxiomC{$!A$}
 \RightLabel{\Elim{\lnot}}
-\UnaryInfC{$!A$}
-\DisplayProof
+\BinaryInfC{$\lfalse$}
 \]
 
 \paragraph{Rules for $\lif$}
@@ -140,11 +125,25 @@ those (if any) that we consider as defined.
 \UnaryInfC{$!A \lif !B$}
 \DisplayProof
 \quad
-\AxiomC{$!A$}
 \AxiomC{$!A \lif !B$}
+\AxiomC{$!A$}
 \RightLabel{\Elim{\lif}}
 \BinaryInfC{$!B$}
 \DisplayProof
+\]
+
+\paragraph{Rules for $\lfalse$}
+
+\[
+\AxiomC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!A$}
+\DisplayProof
+\quad
+\AxiomC{$\Discharge{\lnot !A}{n}$}
+\AxiomC{$\lfalse$}
+\RightLabel{\FalseCl}
+\UnaryInfC{$!A$}
 \]
 
 \subsection{Quantifier Rules}

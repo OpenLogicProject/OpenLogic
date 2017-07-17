@@ -178,9 +178,15 @@
 % operator `Op`, e.g., `\Intro{\land}` produces `$\land$Intro`.
 % `\Elim{Op}` does the same for elimination rules.
 
-\DeclareDocumentCommand \Intro { m } {\ensuremath{#1\mathrm{Intro}}}
+\DeclareDocumentCommand \Intro { m } {\ensuremath{{#1}\mathrm{Intro}}}
 
-\DeclareDocumentCommand \Elim { m } {\ensuremath{#1\mathrm{Elim}}}
+\DeclareDocumentCommand \Elim { m } {\ensuremath{{#1}\mathrm{Elim}}}
+
+% - `\FalseInt`, `\FalseCl`: produces name or abbreviation for intuitionistic and classical absurdity rule,
+% e.g., ``$\lfalse_I$,'' ``$\lfalse_C$''.
+
+\DeclareDocumentMacro \FalseInt {\ensuremath{\lfalse_I}}
+\DeclareDocumentMacro \FalseCl {\ensuremath{\lfalse_C}}
 
 % - `\Discharge{!A}{n}`: typesets a discharged assumption with label
 % $n$, e.g., $[!A]^n$.

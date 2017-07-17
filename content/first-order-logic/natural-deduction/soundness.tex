@@ -74,8 +74,6 @@ First, we consider the possible inferences with only one premise.
   $\Sat{M}{!A}$. This would mean that $\Sat{M}{\Gamma \cup
     \{!A\}}$. This is contrary to our inductive hypothesis. So,
   $\Sat{M}{\lnot !A}$.
-  
-\item The last inference is \Elim{\lnot}: Exercise.
 
 \item The last inference is \Elim{\land}: There are two variants: $!A$
   or $!B$ may be inferred from the premise $!A \land !B$. Consider the
@@ -134,6 +132,22 @@ First, we consider the possible inferences with only one premise.
     !B}$. So, $\Sat{M}{!A}$ and $\Sat/{M}{!B}$. But by hypothesis,
   $!B$ is a consequence of $\Gamma \cup \{!A\}$, i.e., $\Sat{M}{!B}$,
   which is a contradiction. So, $\Gamma \Entails !A \lif !B$.
+
+\item The last inference is \FalseInt: Here, $\delta$ ends in
+  \begin{prooftree}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$\lfalse$}
+    \RightLabel{\FalseInt}
+    \UnaryInfC{$!A$}
+  \end{prooftree}
+  By induction hypothesis, $\Gamma \Entails \lfalse$. We have to show
+  that $\Gamma \Entails !A$. Suppose not; then for some $\Struct{M}$
+  we have $\Sat{M}{\Gamma}$ and $\Sat/{M}{!A}$. But we always have
+  $\Sat/{M}{\lfalse}$, so this would mean that $\Gamma \Entails/
+  \lfalse$, contrary to the induction hypothesis.
+
+\item The last inference is \FalseCl: Exercise.
   
 \item The last inference is \Intro{\lforall}: Then $\delta$ has the form
   \begin{prooftree}
@@ -221,7 +235,9 @@ Now let's consider the possible inferences with several premises:
   $\Gamma_2 \Entails !A$, we have $\Sat{M}{!A}$. This means that
   $\Sat{M}{!B}$ (For if $\Sat/{M}{!B}$, since $\Sat{M}{!A}$, we'd have
   $\Sat/{M}{!A \lif !B}$, contradicting~$\Sat{M}{!A \lif !B}$).
-    
+
+\item The last inference is \Elim{\lnot}: Exercise.
+  
 \item The last inference is \Elim{\lexists}: Exercise.
 \end{enumerate}
 \end{proof}
