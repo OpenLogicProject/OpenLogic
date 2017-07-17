@@ -55,24 +55,21 @@ is to show that if $\Gamma_n$ is finitely satisfiable, so is $\Gamma_n
 
 \begin{prop}\ollabel{prop:fsat-instances}
 Suppose $\Gamma$ is complete, finitely satisfiable, and saturated.
-\iftag{defAll,defEx}{}{\begin{enumerate}\item}
-\iftag{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
-  for all closed terms~$t$.}{}
-\iftag{defAll,defEx}{}{\item}
-\iftag{prvEx}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
   for at least one closed term~$t$.}{}
-\iftag{defAll,defEx}{}{\end{enumerate}}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+  for all closed terms~$t$.}{}
+\end{tagenumerate}
 \end{prop}
 
 \begin{prob}
-Prove \olref[fol][com][cpd]{lem:fsat-henkin}. (Hint: The crucial step
-is to show that if $\Gamma_n$ is finitely satisfiable, so is
-$\Gamma_{n+1}$, without any appeal to !!{derivation}s or consistency.)
+Prove \olref[fol][com][cpd]{prop:fsat-instances}.
 \end{prob}
 
 \begin{lem}
-\ollabel{lem:fsat-lindenbaum} Every finitely satisfiable set~$\Gamma$
-can be extended to a !!{complete} and finitely satisfiable, saturated
+\ollabel{lem:fsat-lindenbaum} Every finitely satisfiable set~$\Gamma'$
+can be extended to a !!{complete} and finitely satisfiable
 set~$\Gamma^*$.
 \end{lem}
 
@@ -83,22 +80,22 @@ either $\Gamma_n \cup \{!A_n\}$ or $\Gamma_n \cup \{\lnot !A_n\}$ is
 finitely satisfiable.)
 \end{prob}
 
-\begin{thm}
+\begin{thm}[Compactness]
 \ollabel{thm:compactness-direct} $\Gamma$ is satisfiable if and only
 if it is finitely satisfiable.
 \end{thm}
 
 \begin{proof}
-If $\Gamma$ is satisfiable, then there is a
-!!{structure}~$\Struct{M}$ such that $\Sat{M}{!A}$ for all $!A \in
+If $\Gamma$ is satisfiable, then there is 
+!!a{structure}~$\Struct{M}$ such that $\Sat{M}{!A}$ for all $!A \in
 \Gamma$.  Of course, this $\Struct M$ also satisfies every finite
 subset of~$\Gamma$, so $\Gamma$ is finitely satisfiable.
 
 Now suppose that $\Gamma$ is finitely satisfiable. By
 \olref{lem:fsat-henkin}, there is a finitely satisfiable, saturated
 set $\Gamma' \supseteq \Gamma$. By \olref{lem:fsat-lindenbaum},
-$\Gamma'$ can be extended to a !!{complete}, finitely satisfiable,
-saturated set~$\Gamma^*$. Construct the term
+$\Gamma'$ can be extended to a !!{complete} and finitely satisfiable
+set~$\Gamma^*$, and $\Gamma^*$ is still saturated. Construct the term
 model~$\Struct{M(\Gamma^*)}$ as in \olref[mod]{defn:termmodel}.  Note
 that \olref[mod]{prop:quant-termmodel} did not rely on the fact that
 $\Gamma^*$ is consistent (or !!{complete} or saturated, for that

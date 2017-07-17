@@ -154,7 +154,7 @@ First, we consider the possible inferences with only one premise.
   such that $\Sat/{M}{!C}$.  In case (c), there is $!C \in \Delta$
   such that $\Sat{M}{!C}$. So in each case, $\Struct M$ satisfies
   $\Gamma \Sequent \Delta, !A \lor !B$, i.e., $\Theta \Sequent \Xi$.
-  Since $\Struct M$ was arbitrary, $\\Theta \Sequent \Xi$ is valid.
+  Since $\Struct M$ was arbitrary, $\Theta \Sequent \Xi$ is valid.
   The case where $!A \lor !B$ is inferred from $!B$ is handled the
   same, changing $!A$ to $!B$.
 \item The last inference is \RightR{\lif}: Then $\pi$ ends in
@@ -221,13 +221,13 @@ First, we consider the possible inferences with only one premise.
   $\Sat{M}{!A(x)}[s]$ for all variable assignments~$s$.  So let $s$ be
   an arbitrary variable assignment. Consider the
   structure~$\Struct{M'}$ which is just like~$\Struct{M}$ except
-  $\Assign{a}{M} = s(x)$. By
+  $\Assign{a}{M'} = s(x)$. By
   \olref[syn][ext]{cor:extensionality-sent}, for any $!C \in \Gamma$,
-  $\Struct{M'}{!C}$ since $a$ does not occur in~$\Gamma$, and for any
-  $!C \in \Delta$, $\Struct/{M'}{!C}$. But the premise is valid, so
+  $\Sat{M'}{!C}$ since $a$ does not occur in~$\Gamma$, and for any
+  $!C \in \Delta$, $\Sat/{M'}{!C}$. But the premise is valid, so
   $\Sat{M'}{!A(a)}$. By \olref[syn][ass]{prop:sentence-sat-true},
   $\Sat{M'}{!A(a)}[s]$, since $!A(a)$ is a sentence. Now $s \sim_x s$
-  with $s(x) = \Value{a}{M}[s]$, since we've defined $\Struct{M'}$ in
+  with $s(x) = \Value{a}{M'}[s]$, since we've defined $\Struct{M'}$ in
   just this way. So \olref[syn][ext]{prop:ext-formulas} applies, and
   we get $\Sat{M'}{!A(x)}[s]$. Since $a$ does not occur in~$A(x)$, by
   \olref[syn][ext]{prop:extensionality}, $\Sat{M}{!A(x)}[s]$. Since
@@ -318,13 +318,13 @@ If $\Gamma$ is satisfiable, then it is consistent.
 
 \begin{proof}
 We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
-Then $\Gamma \Proves[\Log{LK}] \quad$, i.e., there is a finite
-$\Gamma_0 \subseteq \Gamma$ and !!a{derivation} of $\Gamma_0 \Sequent
-\quad$.  By \olref{thm:sequent-soundness}, $\Gamma_0 \Sequent \quad$
-is valid.  In other words, for every !!{structure}~$\Struct M$, there
-is $!C \in \Gamma_0$ so that $\Sat/{M}{!C}$, and since $\Gamma_0
-\subseteq \Gamma$, that $!C$ is also in~$\Gamma$.  Thus, no $\Struct
-M$ satisfies $\Gamma$, and $\Gamma$ is not satisfiable.
+Then there is a finite $\Gamma_0 \subseteq \Gamma$ and !!a{derivation}
+of $\Gamma_0 \Sequent \quad$.  By \olref{thm:sequent-soundness},
+$\Gamma_0 \Sequent \quad$ is valid.  In other words, for every
+!!{structure}~$\Struct M$, there is $!C \in \Gamma_0$ so that
+$\Sat/{M}{!C}$, and since $\Gamma_0 \subseteq \Gamma$, that $!C$ is
+also in~$\Gamma$.  Thus, no $\Struct M$ satisfies $\Gamma$, and
+$\Gamma$ is not satisfiable.
 \end{proof}
 
 \end{document}

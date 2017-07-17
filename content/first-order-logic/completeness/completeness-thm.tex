@@ -18,16 +18,18 @@ is satisfiable.
 \end{thm}
 
 \begin{proof}
-Suppose $\Gamma$ is consistent.  By \olref[lin]{lem:lindenbaum}, there
-is a $\Gamma^* \supseteq \Gamma$ which is consistent, !!{complete},
-and saturated.  If $\Gamma$ does not contain~$\eq$, then by
-\olref[mod]{lem:truth}, $\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$.
-From this it follows in particular that for all $!A \in \Gamma$,
-$\Sat{M(\Gamma^*)}{!A}$, so $\Gamma$ is satisfiable.  If $\Gamma$ does
-contain~$\eq$, then by \olref[ide]{lem:truth}, $\Sat{M/_\approx}{!A}$
-iff $!A \in \Gamma^*$ for all sentences~$!A$.  In particular,
-$\Sat{M/_\approx}{!A}$ for all $!A \in \Gamma$, so $\Gamma$ is
-satisfiable.
+Suppose $\Gamma$ is consistent.  By \olref[hen]{lem:henkin}, there is
+a saturated consistent set $\Gamma' \supseteq \Gamma$. By
+\olref[lin]{lem:lindenbaum}, there is a $\Gamma^* \supseteq \Gamma'$
+which is consistent and !!{complete}. Clearly, $\Gamma^*$ is also
+saturated, and $\Gamma \subseteq \Gamma^*$.  If $\Gamma$ does not
+contain~$\eq$, then by \olref[mod]{lem:truth}, $\Sat{M(\Gamma^*)}{!A}$
+iff $!A \in \Gamma^*$.  From this it follows in particular that for
+all $!A \in \Gamma$, $\Sat{M(\Gamma^*)}{!A}$, so $\Gamma$ is
+satisfiable.  If $\Gamma$ does contain~$\eq$, then by
+\olref[ide]{lem:truth}, $\Sat{M/_\approx}{!A}$ iff $!A \in \Gamma^*$
+for all sentences~$!A$.  In particular, $\Sat{M/_\approx}{!A}$ for all
+$!A \in \Gamma$, so $\Gamma$ is satisfiable.
 \end{proof}
 
 \begin{cor}[Completeness Theorem, Second Version]

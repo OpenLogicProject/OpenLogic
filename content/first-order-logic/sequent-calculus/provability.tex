@@ -111,7 +111,8 @@ $\Log{LK}$ !!{derive}s $\Gamma_1 \Sequent \lnot !A$, say, using
 \RightLabel{\Cut}
 \BinaryInf$ \Gamma_1, !A \fCenter $
 \end{prooftree}
-Since $\Gamma_1 \subseteq \Gamma$, $\Gamma$ is inconsistent.
+Since $\Gamma_1 \subseteq \Gamma$, we get that $\Gamma \cup \{!A\}$ is
+inconsistent.
 \end{proof}
 
 \begin{prop}
@@ -200,7 +201,7 @@ inconsistent.
 contraction, and exchange inferences.)
 
 Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
-!B\} \Proves[\Log{LK}] C$.}
+!B\} \Proves[\Log{LK}] !C$.}
 \end{proof}
 
 \begin{probtag}{probOr}
@@ -388,9 +389,9 @@ in $\Gamma$ or $!A(x)$ and $\Gamma \Proves[\Log{LK}] !A(c)$, then $\Gamma
 \end{thm}
 
 \begin{proof}
-Let $\Pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A(c)$
+Let $\pi_0$ be an $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent !A(c)$
 for some finite $\Gamma_0 \subseteq \Gamma$.  By adding a
-$\RightR{\lforall}$ inference, we obtain a proof of $\Gamma \Sequent
+$\RightR{\lforall}$ inference, we obtain a proof of $\Gamma_0 \Sequent
 \lforall[x][!A(x)]$, since $c$ does not occur in $\Gamma$ or $!A(x)$
 and thus the eigenvariable condition is satisfied.
 \end{proof}

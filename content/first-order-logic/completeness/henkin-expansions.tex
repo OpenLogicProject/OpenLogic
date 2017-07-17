@@ -159,18 +159,30 @@ quantified sentences true.
 
 \begin{prop}\ollabel{prop:saturated-instances}
 Suppose $\Gamma$ is complete, consistent, and saturated.
-\iftag{defAll,defEx}{}{\begin{enumerate}\item}
-\iftag{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
-  for all closed terms~$t$.}{}
-\iftag{defAll,defEx}{}{\item}
-\iftag{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
   for at least one closed term~$t$.}{}
-\iftag{defAll,defEx}{}{\end{enumerate}}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+  for all closed terms~$t$.}{}
+\end{tagenumerate}
 \end{prop}
 
 \begin{proof}
-  \iftag{defAll,defEx}{}{\begin{enumerate}\item}
-  \iftag{prvAll}{%
+  \begin{tagenumerate}{prvEx,prvAll}
+  \tagitem{prvEx}{%
+    \iftag{probEx}{Exercise.}{First suppose that $\lexists[x][!A(x)]
+      \in \Gamma$.  Because $\Gamma$ is saturated,
+      $(\lexists[x][!A(x)] \lif !A(c)) \in \Gamma$ for some
+      !!{constant}~$c$. By
+      \tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
+      and \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in}, $!A(c)
+      \in \Gamma$.
+
+    For the other direction, satisfaction is not necessary: Suppose
+    $!A(t) \in \Gamma$. Then $!A(t) \Proves \lexists[x][!A(x)]$ and by
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},
+    $\lexists[x][!A(x)] \in \Gamma$.}}{}
+  \tagitem{prvAll}{%
     \iftag{probAll}{Exercise.}{Suppose that $!A(t) \in \Gamma$ for
       all closed terms~$t$. By way of contradiction, assume
       $\lforall[x][!A(x)] \notin \Gamma$. Since $\Gamma$ is complete,
@@ -191,21 +203,7 @@ Suppose $\Gamma$ is complete, consistent, and saturated.
       For the reverse direction, we do not need saturation: Suppose
       $\lforall[x][!A(x)] \in \Gamma$. Since $\lforall[x][!A(x)]
       \Proves !A(t)$, $!A(t) \in \Gamma$ by \olref[ccs]{prop:ccs}.}}{}
-  \iftag{defAll,defEx}{}{\item}
-  \iftag{prvEx}{%
-    \iftag{probEx}{Exercise.}{First suppose that $\lexists[x][!A(x)]
-      \in \Gamma$.  Because $\Gamma$ is saturated,
-      $(\lexists[x][!A(x)] \lif !A(c)) \in \Gamma$ for some
-      !!{constant}~$c$. By
-      \tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
-      and \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in}, $!A(c)
-      \in \Gamma$.
-
-    For the other direction, satisfaction is not necessary: Suppose
-    $!A(t) \in \Gamma$. Then $!A(t) \Proves \lexists[x][!A(x)]$ and by
-    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},
-    $\lexists[x][!A(x)] \in \Gamma$.}}{}
-
-  \iftag{defAll,defEx}{}{\end{enumerate}}
+  \end{tagenumerate}
 \end{proof}
+
 \end{document}

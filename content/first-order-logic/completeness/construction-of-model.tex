@@ -71,30 +71,17 @@ defined as follows:
 \begin{prop}
 \ollabel{prop:quant-termmodel}
 Let $\Struct M(\Gamma^*)$ be the term model of \olref{defn:termmodel}.
-\iftag{defEx,defAll}{}{\begin{enumerate}\item}%
-\iftag{prvEx}{$\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff
-  $\Sat{M}{!A(t)}$ for at least one term~$t$.}{}%
-\iftag{defEx,defAll}{}{\item}%
-\iftag{prvAll}{$\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff
-  $\Sat{M}{!A(t)}$ for all terms~$t$.}{}%
-\iftag{defEx,defAll}{}{\end{enumerate}}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff
+  $\Sat{M}{!A(t)}$ for at least one term~$t$.}{}
+\tagitem{prvAll}{$\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff
+  $\Sat{M}{!A(t)}$ for all terms~$t$.}{}
+\end{tagenumerate}
 \end{prop}
 
 \begin{proof}
-\iftag{defEx,defAll}{}{\begin{enumerate}\item}%
-\iftag{prvAll}{%
-  \iftag{probAll}{Exercise.}{By \olref[syn][ass]{prop:sat-quant},
-    $\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff for every variable
-    assignment $s$, $\Sat{M(\Gamma^*)}{!A(x)}[s]$. Recall that
-    $\Domain{M(\Gamma^*)}$ consists of the closed terms of~$\Lang{L}$,
-    so for every closed term~$t$, $s(x) = t$ is such a variable
-    assignment, and for any variable assignment, $s(x)$ is some closed
-    term~$t$.  By \olref[fol][syn][ext]{prop:ext-formulas},
-    $\Sat{M(\Gamma^*)}{!A(x)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}[s]$,
-    where $s(x) = t$.  By \olref[fol][syn][ass]{prop:sentence-sat-true},
-    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}$,
-    since $!A(t)$ is a sentence.}}{} \iftag{defAll,defEx}{}{\item}
-\iftag{prvEx}{%
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{%
   \iftag{probEx}{Exercise.}{By \olref[syn][ass]{prop:sat-quant},
     $\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff for at least one
     variable assignment~$s$, $\Sat{M(\Gamma^*)}{!A(x)}[s]$. As
@@ -106,12 +93,24 @@ Let $\Struct M(\Gamma^*)$ be the term model of \olref{defn:termmodel}.
     where $s(x) = t$.  By \olref[fol][syn][ass]{prop:sentence-sat-true},
     $\Sat{M(\Gamma^*)}{!A(t)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}$,
     since $!A(t)$ is a sentence.}}{}
-\iftag{defEx,defAll}{}{\end{enumerate}}
+\tagitem{prvAll}{%
+  \iftag{probAll}{Exercise.}{By \olref[syn][ass]{prop:sat-quant},
+    $\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff for every variable
+    assignment $s$, $\Sat{M(\Gamma^*)}{!A(x)}[s]$. Recall that
+    $\Domain{M(\Gamma^*)}$ consists of the closed terms of~$\Lang{L}$,
+    so for every closed term~$t$, $s(x) = t$ is such a variable
+    assignment, and for any variable assignment, $s(x)$ is some closed
+    term~$t$.  By \olref[fol][syn][ext]{prop:ext-formulas},
+    $\Sat{M(\Gamma^*)}{!A(x)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}[s]$,
+    where $s(x) = t$.  By \olref[fol][syn][ass]{prop:sentence-sat-true},
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}$,
+    since $!A(t)$ is a sentence.}}{}
+\end{tagenumerate}
 \end{proof}
 
-\begin{prob}
+\begin{probtag}{probEx,probAll}
 Complete the proof of \olref[fol][com][mod]{prop:quant-termmodel}.
-\end{prob}
+\end{probtag}
 
 \begin{lem}[Truth Lemma]
 \ollabel{lem:truth} Suppose $!A$ does not contain~$\eq$. Then
