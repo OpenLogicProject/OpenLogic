@@ -329,13 +329,16 @@ later, so we'll do that one first.
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}
-Applying the \LeftR{\lnot} and \RightR{\lnot} rules and then eliminating
-the double $\lnot$ signs on both sides---the reader may do this as an 
-exercise---we get
+Applying the \LeftR{\lnot} and \RightR{\lnot} rules backwards, we get
 \begin{prooftree}
 \AxiomC{}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\Deduce$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
 \end{prooftree}
@@ -348,7 +351,12 @@ as our argument for $!A$ when we apply the rule.
 \Axiom$!A(a) \fCenter !A(a)$
 \RightLabel{\LeftR{\lforall}}
 \UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\Deduce$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
 \end{prooftree}

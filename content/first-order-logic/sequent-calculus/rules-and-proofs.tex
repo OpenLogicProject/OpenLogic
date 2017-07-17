@@ -101,7 +101,7 @@ Weakening:
 \]
 where $!A$ is called the \emph{weakening !!{formula}}.
 
-Contraction
+Contraction:
 \[
 \Axiom$ !A, !A, \Gamma \fCenter \Delta $
 \RightLabel{\LeftR{\Contraction}}
@@ -148,71 +148,67 @@ Cut:
 
 The rules are named for the !!{main operator} of the \emph{principal
   !!{formula}} of the inference (the formula containing $!A$ and/or
-$!B$ in the lower sequent). The designations ``left'' and ``right''
-indicate whether the logical symbol has been introduced in an
-antecedent formula or a succedent formula (to the left or to the right
-of the sequent symbol).
+$!B$ in the lower sequent). Each one comes in two versions, one for
+inferring a sequent with the principal formula on the left, and one
+with the principal formula on the right.
 
 \paragraph{Propositional Rules}
+
 \[
+\begin{array}{cc}
 \Axiom$ \Gamma \fCenter \Delta, !A $
 \RightLabel{\LeftR{\lnot}}
 \UnaryInf$ \lnot !A, \Gamma \fCenter \Delta$
 \DisplayProof
-\quad
+&
 \Axiom$!A, \Gamma \fCenter \Delta$
 \RightLabel{\RightR{\lnot}}
 \UnaryInf$ \Gamma \fCenter \Delta, \lnot !A $
 \DisplayProof
-\]
-
-\[
+\\[3ex]
 \Axiom$ !A, \Gamma \fCenter \Delta$
 \RightLabel{\LeftR{\land}}
 \UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
 \DisplayProof
-\quad
-\Axiom$!B, \Gamma \fCenter \Delta$
-\RightLabel{\LeftR{\land}}
-\UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
-\DisplayProof
-\quad
+&
 \Axiom$\Gamma \fCenter \Delta, !A$
 \Axiom$ \Gamma \fCenter \Delta, !B$
 \RightLabel{\RightR{\land}}
 \BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
 \DisplayProof
-\]
-
-\[
+\\[3ex]
+\Axiom$!B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\\[3ex]
 \Axiom$!A, \Gamma \fCenter \Delta$
 \Axiom$!B, \Gamma \fCenter \Delta$
 \RightLabel{\LeftR{\lor}}
 \BinaryInf$!A \lor !B, \Gamma \fCenter \Delta$
 \DisplayProof
-\quad
+&
 \Axiom$\Gamma \fCenter \Delta, !A$
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
 \DisplayProof
-\quad
+\\[3ex] &
 \Axiom$ \Gamma \fCenter \Delta, !B$
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
 \DisplayProof
-\]
-
-\[
+\\[3ex]
 \Axiom$ \Gamma \fCenter \Delta, !A$
 \Axiom$ !B, \Pi \fCenter \Lambda$
 \RightLabel{\LeftR{\lif}}
 \BinaryInf$ !A \lif !B, \Gamma, \Pi \fCenter \Delta, \Lambda$
 \DisplayProof
-\quad
+&
 \Axiom$ !A, \Gamma \fCenter \Delta, !B$
 \RightLabel{\RightR{\lif}}
 \UnaryInf$ \Gamma \fCenter \Delta, !A \lif !B $
 \DisplayProof
+\end{array}
 \]
 
 \paragraph{Quantifier Rules}
@@ -222,7 +218,7 @@ of the sequent symbol).
 \RightLabel{\LeftR{\lforall}}
 \UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
 \DisplayProof
-\quad
+\qquad
 \Axiom$ \Gamma \fCenter \Delta, !A(a) $
 \RightLabel{\RightR{\lforall}}
 \UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
@@ -240,15 +236,15 @@ The rules for $\lexists$ are symmetric:
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x][!A(x)], \Gamma \fCenter \Delta$
 \DisplayProof
-\quad
+\qquad
 \Axiom$ \Gamma \fCenter \Delta, !A(t) $
 \RightLabel{\RightR{\lexists}}
 \UnaryInf$ \Gamma \fCenter \Delta, \lexists[x][!A(x)]$
 \DisplayProof
 \]
-where again $t$~is a closed term, and $a$~is !!a{constant} which does not occur
-in the lower sequent of the \LeftR{\lexists} rule. We call $a$
-the \emph{eigenvariable} of the \LeftR{\lexists} inference.
+where again $t$~is a closed term, and $a$~is !!a{constant} which does
+not occur in the lower sequent of the \LeftR{\lexists} rule. We call
+$a$ the \emph{eigenvariable} of the \LeftR{\lexists} inference.
 
 The condition that an eigenvariable not occur in the lower sequent of
 the \RightR{\lforall} or \LeftR{\lexists} inference is called the
@@ -261,7 +257,7 @@ is !!a{constant}. This has historical reasons.
 In \RightR{\lexists} and \LeftR{\lforall} there are no restrictions on
 the term~$t$. On the other hand, in the \LeftR{\lexists} and
 \RightR{\lforall} rules, the eigenvariable condition requires that the
-eigenvariable $a$~does not occur anywhere outside of~$!A(a)$ in the
+!!{constant}~$a$ does not occur anywhere outside of~$!A(a)$ in the
 upper sequent. It is necessary to ensure that the system is sound,
 i.e., only !!{derive}s sequents that are valid. Without this
 condition, the following would be allowed:
