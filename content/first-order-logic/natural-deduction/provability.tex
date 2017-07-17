@@ -32,8 +32,8 @@ $!A$ from~$\Delta$.
   \begin{enumerate}
   \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
     \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
-  \item If $\Gamma$ is consistent, every finite subset of~$\Gamma$ is
-    consistent.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
   \end{enumerate}
 \end{prop}
 
@@ -45,7 +45,8 @@ $!A$ from~$\Delta$.
       $\Gamma_0$ be the set of !!{undischarged} assumptions of the
       !!{derivation}; it is !!a{derivation} of~$!A$ from a
       finite~$\Gamma_0 \subseteq \Gamma$.
-    \item Follows from (1) by taking $!A \ident \lfalse$.
+    \item This is the contrapositive of (1) for the special case $!A
+      \ident \lfalse$.
   \end{enumerate}
 \end{proof}
 
@@ -77,14 +78,14 @@ In the new !!{derivation}, the assumption $!A$ is !!{discharged}, so it is
 \end{proof}
 
 \begin{prop}
-\ollabel{prop:provability-lnot} If $\Gamma \cup \{!A\}$ is
-inconsistent, then $\Gamma \Proves \lnot !A$.
+\ollabel{prop:provability-lnot} $\Gamma \cup \{!A\}$ is
+inconsistent iff $\Gamma \Proves \lnot !A$.
 \end{prop}
 
 \begin{proof}
-Suppose that $\Gamma \cup \{!A\}$ is inconsistent. Then there is
-!!a{derivation} of $\lfalse$ from $\Gamma \cup \{!A\}$.  Let $\delta$
-be the !!{derivation} of $\lfalse$, and consider
+For the forward directions, suppose that $\Gamma \cup \{!A\}$ is
+inconsistent. Then there is !!a{derivation}~$\delta_0$ of $\lfalse$
+from $\Gamma \cup \{!A\}$.  Consider
 \[
 \AxiomC{$\Discharge{!A}{1}$}
 \RightLabel{$\delta$}
@@ -93,6 +94,19 @@ be the !!{derivation} of $\lfalse$, and consider
 \UnaryInfC{$\lnot !A$}
 \DisplayProof
 \]
+This shows that $\Gamma \Proves \lnot !A$.
+
+Conversely, suppose $\Gamma \Proves \lnot !A$ by
+!!a{derivation}~$\delta_1$. Then
+\[
+\AxiomC{$\Gamma$}
+\RightLabel{$\delta_1$}
+\DeduceC{$\lnot !A$}
+\AxiomC{$\!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\]
+shows that $\Gamma \cup \{!A\}$ is inconsistent.
 \end{proof}
 
 \begin{prop}
@@ -106,8 +120,8 @@ be the !!{derivation} of $\lfalse$, and consider
 
 
 \begin{prop}
-\ollabel{prop:provability-exhaustive} If $\Gamma \cup \{!A\}$ is
-inconsistent and $\Gamma \cup \{\lnot !A\}$ is inconsistent, then
+\ollabel{prop:provability-exhaustive} If $\Gamma \cup \{!A\}$
+and $\Gamma \cup \{\lnot !A\}$ are both inconsistent, then
 $\Gamma$ is inconsistent.
 \end{prop}
 

@@ -35,24 +35,14 @@ $\Gamma_0 = \Gamma'$, and
 \Gamma_n \cup \{ \lnot !A_n \} & \textrm{otherwise.}
 \end{cases}
 \]
-
-Let $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$. Since $\Gamma' \subseteq
-\Gamma^*$, for each !!{formula}~$!A$, $\Gamma^*$ contains a
-!!{formula} of the form
-\iftag{prvEx}
-{$\lexists[x][!A] \lif !A(c)$}
-{$\lnot\lforall[x][!A] \lif \lnot !A(c)$}
-and thus is saturated.
+Let $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$.
 
 Each $\Gamma_n$ is consistent: $\Gamma_0$ is consistent by definition.
 If $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$, this is because the latter
 is consistent.  If it isn't, $\Gamma_{n+1} = \Gamma_n \cup \{\lnot
 !A_n\}$. We have to verify that $\Gamma_n \cup \{\lnot !A_n\}$ is
 consistent. Suppose it's not. Then \emph{both} $\Gamma_n \cup
-\{!A_n\}$ and $\Gamma_n \cup \{\lnot !A_n\}$ are inconsistent. So
-$\Gamma_n \Proves \lnot !A_n$ and $\Gamma_n \Proves \lnot\lnot !A_n$
-by
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-lnot},prfND/{fol:ntd:prv:prop:provability-lnot}}. This
+\{!A_n\}$ and $\Gamma_n \cup \{\lnot !A_n\}$ are inconsistent.  This
 means that $\Gamma_n$ would be inconsistent by
 \tagrefs{prfSC/{fol:seq:prv:prop:explicit-inc},prfND/{fol:ntd:prv:prop:explicit-inc}},
 contrary to the induction hypothesis.
@@ -60,7 +50,8 @@ contrary to the induction hypothesis.
 Every finite subset of $\Gamma^*$ is a subset of~$\Gamma_n$ for
 some~$n$, since each $!B \in \Gamma^*$ not already in~$\Gamma$ is
 added at some stage~$i$. If $n$ is the last one of these, then all
-$!B$ in the finite subset are in~$\Gamma_n$. So, by
+$!B$ in the finite subset are in~$\Gamma_n$. So, every finite subset
+of~$\Gamma^*$ is consistent. By
 \tagrefs{prfSC/{fol:seq:prv:prop:proves-compact},prfND/{fol:ntd:prv:prop:proves-compact}},
 $\Gamma^*$ is consistent.
 

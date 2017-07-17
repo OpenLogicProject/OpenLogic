@@ -174,9 +174,9 @@ inconsistent.
 
 
 \begin<prvOr>{prop}
-\ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}
-\Proves[\Log{LK}] !C$ and $\Gamma \cup \{!B\} \Proves[\Log{LK}]
-!C$, then $\Gamma \cup \{!A \lor !B\} \Proves[\Log{LK}] !C$.
+\ollabel{prop:provability-lor-left} If $\Gamma \cup \{!A\}$ and
+$\Gamma \cup \{!B\}$ are both inconsistent, then $\Gamma \cup \{!A
+\lor !B\}$ is inconsistent.
 \end{prop}
 
 \begin<prvOr>{proof}
@@ -186,22 +186,22 @@ inconsistent.
 \begin{prooftree}
 \AxiomC{}
 \RightLabel{$\pi_0$}
-\Deduce$!A, \Gamma_0 \fCenter !C$
+\Deduce$!A, \Gamma_0 \fCenter $
 \doubleLine
-\UnaryInf$!A, \Gamma_0, \Gamma_1 \fCenter !C$
+\UnaryInf$!A, \Gamma_0, \Gamma_1 \fCenter $
 \AxiomC{}
 \RightLabel{$\pi_1$}
-\Deduce$!B, \Gamma_1 \fCenter !C$
+\Deduce$!B, \Gamma_1 \fCenter $
 \doubleLine
-\UnaryInf$!B, \Gamma_0, \Gamma_1 \fCenter !C$
+\UnaryInf$!B, \Gamma_0, \Gamma_1 \fCenter $
 \RightLabel{\LeftR{\lor}}
-\BinaryInf$ !A \lor !B, \Gamma_0, \Gamma_1 \fCenter !C$
+\BinaryInf$ !A \lor !B, \Gamma_0, \Gamma_1 \fCenter $
 \end{prooftree}
 (Recall that double inference lines indicate several weakening,
 contraction, and exchange inferences.)
 
-Since $\Gamma_0,\Gamma_1\subseteq \Gamma$ and $\Gamma \cup \{!A \lor
-!B\} \Proves[\Log{LK}] !C$.}
+Since $\Gamma_0$, $\Gamma_1 \subseteq \Gamma$ and $\Gamma \cup \{!A \lor
+!B\}$ is inconsistent.}
 \end{proof}
 
 \begin{probtag}{probOr}
