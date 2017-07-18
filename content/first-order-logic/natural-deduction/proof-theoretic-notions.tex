@@ -10,9 +10,8 @@
 \olsection{Proof-Theoretic Notions}
 
 \begin{editorial}
-This section collects the properties of the provability relation
-required for the completeness theorem.  If you find the location
-unmotivated, include it instead in the chapter on completeness.
+This section collects the definitions the provability relation
+and consistency for LK.
 \end{editorial}
 
 \begin{explain}
@@ -20,31 +19,32 @@ Just as we've defined a number of important semantic notions
 (validity, entailment, satisfiabilty), we now define corresponding
 \emph{proof-theoretic notions}.  These are not defined by appeal to
 satisfaction of sentences in !!{structure}s, but by appeal to the
-!!{derivability} or !!{nonderivability} of certain !!{formula}s.  It was
-an important discovery, due to G\"odel, that these notions coincide.
-That they do is the content of the \emph{completeness theorem}.
+!!{derivability} or !!{nonderivability} of certain !!{formula}s from
+others.  It was an important discovery, due to G\"odel, that these
+notions coincide.  That they do is the content of the
+\emph{completeness theorem}.
 \end{explain}
 
+
+\begin{defn}[Theorems]
+A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation}
+of~$!A$ in natural deduction in which all assumptions are
+!!{discharged}.  We write $\Proves !A$ if $!A$ is a theorem and
+$\Proves/ !A$ if it is not.
+\end{defn}
+
 \begin{defn}[!!^{derivability}]
-A !!{formula} $!A$ is \emph{!!{derivable} from} a set of
-!!{formula}s~$\Gamma$, $\Gamma \Proves !A$, if there is a
+!!^a{sentence} $!A$ is \emph{!!{derivable} from} a set of
+!!{sentence}s~$\Gamma$, $\Gamma \Proves !A$, if there is a
 !!{derivation} with end-!!{formula}~$!A$ and in which every assumption
 is either !!{discharged} or is in~$\Gamma$. If $!A$ is not
 !!{derivable} from $\Gamma$ we write $\Gamma \Proves/ !A$.
 \end{defn}
 
-\begin{defn}[Theorems]
-A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation} of
-$!A$ from the empty set, i.e., a !!{derivation} with
-end-!!{formula}~$!A$ in which all assumptions are !!{discharged}.  We
-write $\Proves !A$ if $!A$ is a theorem and $\Proves/ !A$ if it is
-not.
-\end{defn}
-
 \begin{defn}[Consistency]
-A set of sentences~$\Gamma$ is \emph{consistent} iff $\Gamma
-\Proves/ \lfalse$.  If $\Gamma$ is not consistent, i.e., if
-$\Gamma \Proves \lfalse$, we say it is \emph{inconsistent}.
+A set of sentences~$\Gamma$ is \emph{inconsistent} iff $\Gamma
+\Proves \lfalse$.  If $\Gamma$ is not inconsistent, i.e., if
+$\Gamma \Proves/ \lfalse$, we say it is \emph{consistent}.
 \end{defn}
 
 \begin{prop}
@@ -53,12 +53,31 @@ $\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 \end{prop}
 
 \begin{proof}
-Exercise.
-\end{proof}
+First suppose $\Gamma \Proves !A$, i.e., there is
+!!a{derivation}~$\delta_0$ of~$!A$ from !!{undischarged}
+assumptions~$\Gamma$. We obtain !!a{derivation} of $\lfalse$ from
+$\Gamma \cup \{\lnot !A\}$ as follows:
+\begin{prooftree}
+  \AxiomC{$\lnot !A$}
+  \AxiomC{$\Gamma$}
+  \RightLabel{$\delta_0$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
 
-\begin{prob}
-Prove \olref[fol][ntd][ptn]{prop:prov-incons}
-\end{prob}
+Now assume $\Gamma \cup \{\lnot !A\}$ is inconsistent, and let
+$\delta_1$ be the corresponding derivation of $\lfalse$ from
+!!{undischarged} assumptions in~$\Gamma \cup \{\lnot !A\}$. We obtain
+!!a{derivation} of~$!A$ from~$\Gamma$ alone by using $\FalseCl$:
+\begin{prooftree}
+  \AxiomC{$\Gamma, \Discharge{\lnot !A}{1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\lfalse$}
+  \RightLabel{\FalseCl}
+  \UnaryInfC{$!A$}
+\end{prooftree}
+\end{proof}
 
 \begin{prop}
 \ollabel{prop:incons}
@@ -73,5 +92,92 @@ Exercise.
 \begin{prob}
 Prove \olref[fol][ntd][ptn]{prop:incons}
 \end{prob}
+
+\begin{prop}[Reflexivity]
+\ollabel{prop:reflexivity}
+If $!A \in \Gamma$, then $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+The assumption $!A$ by itself is !!a{derivation} of~$!A$ where every
+!!{undischarged} assumption (i.e., $!A$) is in~$\Gamma$.
+\end{proof}
+  
+
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any !!{derivation} of $!A$ from $\Gamma$ is also !!a{derivation} of
+$!A$ from~$\Delta$.
+\end{proof}
+
+\begin{prop}[Transitivity]
+\ollabel{prop:transitivity}
+If $\Gamma \Proves !A$ for every $!A \in \Delta$ and $\Delta \Proves
+!B$, then $\Gamma \Proves !B$.
+\end{prop}
+
+\begin{proof}
+If $\Delta \Proves !B$, then there is !!a{derivation}~$\delta_0$
+of~$!B$ with all !!{undischarged} assumptions in~$\Delta$.  We show
+that $\Gamma \Proves !B$ by induction on the number~$n$ of
+!!{undischarged} assumptions in~$\delta_0$.
+
+If $n=0$, then $\delta_0$ has no !!{undischarged} assumptions, and so
+also counts as !!a{derivation} of~$!B$ from~$\Gamma$.
+
+Otherwise, pick !!a{undischarged} assumption~$!A$ in~$\delta_0$ and
+let $\Delta_1$ be the remaining !!{undischarged} assumptions. We
+obtain the !!{derivation}~$\delta_1$:
+\begin{prooftree}
+  \AxiomC{$\Delta_1, \Discharge{!A}{1}$}
+  \RightLabel{$\delta_0$}
+  \DeduceC{$!B$}
+  \RightLabel{\Intro{\lif}}
+  \UnaryInfC{$!A \lif !B$}
+\end{prooftree}
+Since the number of !!{undischarged} assumptions in $\delta_1$ is $n-1$, the
+inductive hypothesis applies: there is a !!{derivation}~$\delta_2$ of
+$!A \lif !B$ from~$\Gamma$. Since $\Gamma \Proves !A$ there is also
+!!a{derivation}~$\delta_3$ of $!A$ from~$\Gamma$. Now consider:
+\begin{prooftree}
+  \AxiomC{$\Gamma$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A \lif !B$}
+  \AxiomC{$\Gamma$}
+  \RightLabel{$\delta_3$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lif}}
+  \BinaryInfC{$!B$}
+\end{prooftree}
+This shows $\Gamma \Proves !B$.
+\end{proof}
+
+\begin{prop}[Compactness]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is !!a{derivation}
+      of~$!A$ from~$\Gamma$. But any !!{derivation} is finite, so can
+      only contain finitely many !!{undischarged} assumptions. Let
+      $\Gamma_0$ be the set of !!{undischarged} assumptions of the
+      !!{derivation}; it is !!a{derivation} of~$!A$ from a
+      finite~$\Gamma_0 \subseteq \Gamma$.
+    \item This is the contrapositive of (1) for the special case $!A
+      \ident \lfalse$.
+  \end{enumerate}
+\end{proof}
 
 \end{document}

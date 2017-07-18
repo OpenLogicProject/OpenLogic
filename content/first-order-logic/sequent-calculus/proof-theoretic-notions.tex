@@ -7,9 +7,8 @@
 \begin{document}
 
 \begin{editorial}
-  This section collects the properties of the provability relation
-  required for the completeness theorem.  If you find the location
-  unmotivated, include it instead in the chapter on completeness.
+  This section collects the definitions of the provability relation and
+  consistency for natural deduction.
 \end{editorial}
 
 \olfileid{fol}{seq}{ptn}
@@ -28,26 +27,26 @@ That they do is the content of the \emph{completeness theorem}.
 \begin{defn}[Theorems]
 A sentence~$!A$ is a \emph{theorem} if there is a !!{derivation}
 in~$\Log{LK}$ of the sequent $\quad \Sequent !A$.  We write
-$\Proves[\Log{LK}] !A$ if $!A$ is a theorem and $\Proves/[\Log{LK}]
+$\Proves !A$ if $!A$ is a theorem and $\Proves/
 !A$ if it is not.
 \end{defn}
 
 \begin{defn}[!!^{derivability}]
-A sentence $!A$ is \emph{!!{derivable} from} a set of
-sentences~$\Gamma$, $\Gamma \Proves[\Log{LK}] !A$, iff there is a
+!!^a{sentence}~$!A$ is \emph{!!{derivable} from} a set of
+!!{sentence}s~$\Gamma$, $\Gamma \Proves !A$, iff there is a
 finite subset~$\Gamma_0 \subseteq \Gamma$ and a sequence $\Gamma_0'$
-of the !!{formula}s in~$\Gamma_0$ such that $\Log{LK}$ !!{derive}s
+of the !!{sentence}s in~$\Gamma_0$ such that $\Log{LK}$ !!{derive}s
 $\Gamma_0' \Sequent !A$.  If $!A$ is not !!{derivable} from $\Gamma$
-we write $\Gamma \Proves/[\Log{LK}] !A$.
+we write $\Gamma \Proves/ !A$.
 \end{defn}
 
 Because of the contraction, weakening, and exchange rules, the order
-and number of !!{formula}s in~$\Gamma_0'$ does not matter: if a
+and number of !!{sentence}s in~$\Gamma_0'$ does not matter: if a
 sequent $\Gamma_0' \Sequent !A$ is !!{derivable}, then so is
-$\Gamma_0'' \Sequent !A$ for any $\Gamma_0''$ that contans the same
-!!{formula}s as~$\Gamma_0'$.  For instance, if $\Gamma_0 = \{!B, !C\}$
+$\Gamma_0'' \Sequent !A$ for any $\Gamma_0''$ that contains the same
+!!{sentence}s as~$\Gamma_0'$.  For instance, if $\Gamma_0 = \{!B, !C\}$
 then both $\Gamma_0' = \tuple{!B, !B, !C}$ and $\Gamma_0'' =
-\tuple{!C, !C, !B}$ are sequences containing just the !!{formula}s
+\tuple{!C, !C, !B}$ are sequences containing just the !!{sentence}s
 in~$\Gamma_0$. If a sequent containing one is !!{derivable}, so is the
 other, e.g.:
 \begin{prooftree}
@@ -61,8 +60,8 @@ other, e.g.:
   \UnaryInf$!C, !C, !B \fCenter !A$
 \end{prooftree}
 From now on we'll say that if $\Gamma_0$ is a finite set of
-!!{formula}s then $\Gamma_0 \Sequent !A$ is any sequent where the
-antecedent is a sequence of !!{formula}s in~$\Gamma_0$ and tacitly include
+!!{sentence}s then $\Gamma_0 \Sequent !A$ is any sequent where the
+antecedent is a sequence of !!{sentence}s in~$\Gamma_0$ and tacitly include
 contractions, exchanges, and weakenings if necessary.
 
 \begin{defn}[Consistency]
@@ -76,20 +75,33 @@ $\Log{LK}$ does not !!{derive} $\Gamma_0 \Sequent \quad$, we say it is
 
 \begin{prop}
 \ollabel{prop:prov-incons}
-$\Gamma \Proves[\Log{LK}] !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 \end{prop}
 
 \begin{proof}
-Exercise.
-\end{proof}
+First suppose $\Gamma \Proves !A$, i.e., there is
+!!a{derivation}~$\pi_0$ of $\Gamma \Sequent !A$. By adding a
+$\LeftR{\lnot}$ rule, we obtain !!a{derivation} of~$\lnot !A, \Gamma
+\Sequent \quad$, i.e., $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 
-\begin{prob}
-Prove \olref[fol][seq][ptn]{prop:prov-incons}
-\end{prob}
+If $\Gamma \cup \{\lnot A\}$ is inconsistent, there is
+!!a{derivation}~$\pi_1$ of $\lnot !A, \Gamma \Sequent \quad$. The
+following is !!a{derivation} of $\Gamma \Sequent !A$:
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\fCenter !A, \lnot !A$
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\lnot !A, \Gamma \fCenter$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma \fCenter !A$
+\end{prooftree}
+\end{proof}
 
 \begin{prop}
 \ollabel{prop:incons}
-$\Gamma$ is inconsistent iff $\Gamma \Proves[\Log{LK}] {!A}$ for every
+$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
   sentence~$!A$.
 \end{prop}
 
@@ -101,25 +113,95 @@ Exercise.
 Prove \olref[fol][seq][ptn]{prop:incons}
 \end{prob}
 
-\begin<prvFalse>{prop}
-\ollabel{prop:incons-lfalse}
-$\Gamma$ is inconsistent iff $\Gamma_0 \Proves[\Log{LK}] \lfalse$.
+\begin{prop}[Reflexivity]
+\ollabel{prop:reflexivity}
+If $!A \in \Gamma$, then $\Gamma \Proves !A$.
 \end{prop}
 
 \begin{proof}
-Suppose $\Gamma$ is inconsistent, i.e., $\Log{LK}$ !!{derive}s
-$\Gamma_0 \Sequent \quad$ for some finite $\Gamma_0 \subseteq
-\Gamma$. Then, using \RightR{\Weakening}, it also !!{derive}s
-$\Gamma_0 \Sequent \lfalse$.  If, on the other hand, $\Log{LK}$
-!!{derive}s $\Gamma_0 \Sequent \lfalse$, we obtain !!a{derivation} of
-$\Gamma_0 \Sequent \quad$ using cut and an initial sequent:
+The initial sequent $!A \Sequent !A$ is !!{derivable}, and $\{!A\}
+\subseteq \Gamma$.
+\end{proof}
+  
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
+of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
+$\Delta \Proves !A$.
+\end{proof}
+
+\begin{prop}[Transitivity]
+\ollabel{prop:transitivity}
+If $\Gamma \Proves !A$ for every $!A \in \Delta$ and $\Delta \Proves
+!B$, then $\Gamma \Proves !B$.
+\end{prop}
+
+\begin{proof}
+If $\Delta \Proves !B$, then for some finite subset $\Delta_0
+\subseteq \Delta$, there is !!a{derivation} of $\Delta_0 \Sequent !B$.
+We show that $\Gamma \Proves !B$ by induction on the number~$n$ of
+!!{sentence}s in~$\Delta_0$.
+
+If $n=0$, then $\Delta_0$ is empty, and $\Sequent !B$ is
+provable. Since $\emptyset \subseteq \Gamma$, $\Gamma \Proves !A$.
+
+Otherwise, pick $!A \in \Delta_0$ and let $\Delta_1 = \Delta_0
+\setminus \{!A\}$. There is !!a{derivation}~$\pi_0$ of $!A, \Delta_1
+\Sequent !B$. We obtain the !!{derivation}~$\pi_1$:
 \begin{prooftree}
   \AxiomC{}
-  \Deduce$\Gamma_0 \fCenter \lfalse$
-  \Axiom$\lfalse \fCenter$
-  \RightLabel{\Cut}
-  \BinaryInf$\Gamma_0 \fCenter$
+  \RightLabel{$\pi$}
+  \Deduce$!A, \Delta_1 \fCenter !B$
+  \RightLabel{\RightR{\lif}}
+  \UnaryInf$\Delta_1 \fCenter !A \lif !B$
 \end{prooftree}
+Since the number of !!{sentence}s in $\Delta_1$ is $n-1$, the
+inductive hypothesis applies: there is a !!{derivation}~$\pi_2$ of
+$\Gamma_0 \Sequent !A \lif !B$ for some $\Gamma_0 \subseteq
+\Gamma$. Since $\Gamma \Proves !A$ there is also
+!!a{derivation}~$\pi_3$ of $\Gamma_1 \Sequent !A$. Now consider:
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$\Gamma_0 \fCenter !A \lif !B$
+  \AxiomC{}
+  \RightLabel{$\pi_3$}
+  \Deduce$\Gamma_1 \fCenter !A$
+  \Axiom$!B \fCenter !B$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!A \lif !B, \Gamma_1 \fCenter !B$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma_0, \Gamma_1 \fCenter !B$
+\end{prooftree}
+This shows $\Gamma \Proves !B$.
+\end{proof}
+
+\begin{prop}[Compactness]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is a finite subset
+      $\Gamma_0 \subseteq \Gamma$ such that the sequent $\Gamma_0
+      \Sequent !A$ has !!a{derivation}. Consequently, $\Gamma_0
+      \Proves !A$.
+    \item If $\Gamma$ is inconsistent, there is a finite
+      subset~$\Gamma_0 \subseteq \Gamma$ such that $\Log{LK}$
+      !!{derive}s $\Gamma_0 \Sequent \quad$. But then $\Gamma_0$ is a
+      finite subset of~$\Gamma$ that is inconsistent.
+  \end{enumerate}
 \end{proof}
 
 \end{document}

@@ -174,12 +174,13 @@ Suppose $\Gamma$ is complete, consistent, and saturated.
       \in \Gamma$.  Because $\Gamma$ is saturated,
       $(\lexists[x][!A(x)] \lif !A(c)) \in \Gamma$ for some
       !!{constant}~$c$. By
-      \tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
+      \tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}, item~(1),
       and \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in}, $!A(c)
       \in \Gamma$.
 
     For the other direction, satisfaction is not necessary: Suppose
-    $!A(t) \in \Gamma$. Then $!A(t) \Proves \lexists[x][!A(x)]$ and by
+    $!A(t) \in \Gamma$. Then $\Gamma \Proves \lexists[x][!A(x)]$ by
+      \tagrefs{prfSC/{fol:seq:prv:prop:provability-quantifiers},prfND/{fol:ntd:prv:prop:provability-quantifiers}}, item~(1). By
     \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},
     $\lexists[x][!A(x)] \in \Gamma$.}}{}
   \tagitem{prvAll}{%
@@ -201,8 +202,11 @@ Suppose $\Gamma$ is complete, consistent, and saturated.
       is inconsistent.)
 
       For the reverse direction, we do not need saturation: Suppose
-      $\lforall[x][!A(x)] \in \Gamma$. Since $\lforall[x][!A(x)]
-      \Proves !A(t)$, $!A(t) \in \Gamma$ by \olref[ccs]{prop:ccs}.}}{}
+      $\lforall[x][!A(x)] \in \Gamma$.  Then $\Gamma \Proves !A(t)$
+      by
+      \tagrefs{prfSC/{fol:seq:prv:prop:provability-quantifiers},prfND/{fol:ntd:prv:prop:provability-quantifiers}},
+      item~(2). We get $!A(t) \in \Gamma$ by
+      \olref[ccs]{prop:ccs}.}}{}
   \end{tagenumerate}
 \end{proof}
 

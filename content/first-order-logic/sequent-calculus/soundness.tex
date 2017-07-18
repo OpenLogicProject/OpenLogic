@@ -229,7 +229,7 @@ First, we consider the possible inferences with only one premise.
   $\Sat{M'}{!A(a)}[s]$, since $!A(a)$ is a sentence. Now $s \sim_x s$
   with $s(x) = \Value{a}{M'}[s]$, since we've defined $\Struct{M'}$ in
   just this way. So \olref[syn][ext]{prop:ext-formulas} applies, and
-  we get $\Sat{M'}{!A(x)}[s]$. Since $a$ does not occur in~$A(x)$, by
+  we get $\Sat{M'}{!A(x)}[s]$. Since $a$ does not occur in~$!A(x)$, by
   \olref[syn][ext]{prop:extensionality}, $\Sat{M}{!A(x)}[s]$. Since
   $s$ was arbitrary, we've completed the proof that
   $\Sat{M}{!A(x)}[s]$ for all variable assignments.
@@ -264,7 +264,7 @@ Now let's consider the possible inferences with two premises.
     \BinaryInf$\Gamma \fCenter \Delta, !A \land !B$
   \end{prooftree}
   Consider a !!{structure}~$\Struct M$. If $\Struct{M}$ satisfies
-  $\Gamma \Sequent Delta$, we are done. So suppose it doesn't. Since
+  $\Gamma \Sequent \Delta$, we are done. So suppose it doesn't. Since
   $\Gamma \fCenter \Delta, !A$ is valid by induction hypothesis,
   $\Sat{M}{!A}$. Similarly, since $\Gamma \Sequent \Delta, !B$ is
   valid, $\Sat{M}{!B}$. But then $\Sat{M}{!A \land !B}$.\item The last
@@ -295,16 +295,16 @@ Complete the proof of \olref[fol][seq][sou]{thm:sequent-soundness}.
 
 \begin{cor}
 \ollabel{cor:weak-soundness}
-If $\Proves[\Log{LK}] !A$ then $!A$ is valid.
+If $\Proves !A$ then $!A$ is valid.
 \end{cor}
 
 \begin{cor}
 \ollabel{cor:entailment-soundness}
-If $\Gamma \Proves[\Log{LK}] !A$ then $\Gamma \Entails !A$.
+If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
 \end{cor}
 
 \begin{proof}
-If $\Gamma \Proves[\Log{LK}] !A$ then for some finite subset $\Gamma_0
+If $\Gamma \Proves !A$ then for some finite subset $\Gamma_0
 \subseteq \Gamma$, there is !!a{derivation} of $\Gamma_0 \Sequent !A$.
 By \olref{thm:sequent-soundness}, every !!{structure} $\Struct M$
 either makes some $!B \in \Gamma_0$ false or makes $!A$ true.  Hence,

@@ -44,6 +44,10 @@ in~$\Gamma$) true. The proof of this latter fact requires that $\lnot
 iff $!A \in \Gamma^*$ or $!B \in \Gamma^*$, etc.
 \end{explain}
 
+In what follows, we will often tacitly use the properties of
+reflexivity, monotonicity, and transitivity of $\Proves$ (see
+\tagrefs{prfSC/{fol:seq:ptn:sec},prfND/{fol:ntd:ptn:sec}}).
+
 \begin{prop}
 \ollabel{prop:ccs}
 Suppose $\Gamma$ is !!{complete} and consistent. Then:
@@ -51,13 +55,13 @@ Suppose $\Gamma$ is !!{complete} and consistent. Then:
 \item \ollabel{prop:ccs-prov-in} If $\Gamma \Proves !A$, then $!A \in
   \Gamma$.
 
-\tagitem{prvAnd}{\ollabel{prop:ccs-and} $(!A \land !B) \in \Gamma$
+\tagitem{prvAnd}{\ollabel{prop:ccs-and} $!A \land !B \in \Gamma$
   iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
 
-\tagitem{prvOr}{\ollabel{prop:ccs-or} $(!A \lor !B) \in \Gamma$ iff
+\tagitem{prvOr}{\ollabel{prop:ccs-or} $!A \lor !B \in \Gamma$ iff
   either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
 
-\tagitem{prvIf}{\ollabel{prop:ccs-if} $(!A \lif !B) \in \Gamma$ iff
+\tagitem{prvIf}{\ollabel{prop:ccs-if} $!A \lif !B \in \Gamma$ iff
   either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
 \end{enumerate}
 \end{prop}
@@ -78,64 +82,56 @@ $\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
 
 \tagitem{defAnd}{}{%
 \iftag{probAnd}{Exercise.}{%
-$(!A \land !B) \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
+$!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
 
-For the forward direction, suppose $(!A \land !B) \in \Gamma$. Then
-$\Gamma \Proves !A \land !B$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-left},prfND/{fol:ntd:prv:prop:provability-land-left}},
+For the forward direction, suppose $!A \land !B \in \Gamma$. Then
+by
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land},prfND/{fol:ntd:prv:prop:provability-land}}, item~(1),
 $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
 \olref{prop:ccs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
 required.
 
 For the reverse direction, let $!A \in \Gamma$ and $!B \in
-\Gamma$. Then $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-land-right},prfND/{fol:ntd:prv:prop:provability-land-right}},
-$\Gamma \Proves !A \land !B$. By \olref{prop:ccs-prov-in}, $(!A \land
-!B) \in \Gamma$.}}
+\Gamma$. By
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-land},prfND/{fol:ntd:prv:prop:provability-land}}, item~(2),
+$\Gamma \Proves !A \land !B$. By \olref{prop:ccs-prov-in}, $!A \land
+!B \in \Gamma$.}}
 
 \tagitem{defOr}{}{%
 \iftag{probOr}{Exercise.}{%
-$(!A \lor !B) \in \Gamma$ iff either $!A \in \Gamma$ or $!B \in \Gamma$.
-
-For the contrapositive of the forward direction, suppose that $!A
-\notin \Gamma$ and $!B \notin \Gamma$. We want to show that $(!A \lor
-!B) \notin \Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in
-\Gamma$ and $\lnot !B \in \Gamma$.  By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-lnot},prfND/{fol:ntd:prv:prop:provability-lnot}},
-$\Gamma \cup \{!A\}$ and $\Gamma \cup \{!B\}$ are both inconsistent.  By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-left},prfND/{fol:ntd:prv:prop:provability-lor-left}},
-$\Gamma \cup \{(!A \lor !B)\}$ is inconsistent. Hence, $(!A \lor !B)
-\notin \Gamma$, as required.
+First we show that if $!A \lor !B \in \Gamma$, then either $!A \in
+\Gamma$ or $!B \in \Gamma$. Suppose $!A \lor !B \in \Gamma$ but $!A
+\notin \Gamma$ and $!B \notin \Gamma$.  Since $\Gamma$ is
+!!{complete}, $\lnot !A \in \Gamma$ and $\lnot !B \in \Gamma$. By
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor},prfND/{fol:ntd:prv:prop:provability-lor}},
+item (1), $\Gamma$ is inconsistent, a contradiction. Hence, either $!A
+\in \Gamma$ or $!B \in \Gamma$.
 
 For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
-\Gamma$. Then $\Gamma \Proves !A$ or $\Gamma \Proves !B$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor-right},prfND/{fol:ntd:prv:prop:provability-lor-right}},
-$\Gamma \Proves !A \lor !B$. By \olref{prop:ccs-prov-in}, $(!A \lor
-!B) \in \Gamma$, as required.}}
+\Gamma$. By
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lor},prfND/{fol:ntd:prv:prop:provability-lor}}, item (2),
+$\Gamma \Proves !A \lor !B$. By \olref{prop:ccs-prov-in}, $!A \lor
+!B \in \Gamma$, as required.}}
 
 \tagitem{defIf}{}{%
 \iftag{probIf}{Exercise.}{%
-$(!A \lif !B) \in \Gamma$ iff either $!A \notin \Gamma$ or $!B \in \Gamma$:
-
-For the forward direction, let $(!A \lif !B) \in \Gamma$, and suppose
+For the forward direction, suppose $!A \lif !B \in \Gamma$, and suppose
 to the contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
-assumptions, $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !A$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}},
+assumptions, $!A \lif !B \in \Gamma$ and $!A \in \Gamma$. By
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}, item (1),
 $\Gamma \Proves !B$. But then by \olref{prop:ccs-prov-in}, $!B \in
 \Gamma$, contradicting the assumption that $!B \notin \Gamma$.
 
 For the reverse direction, first consider the case where $!A \notin
-\Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$ and
-hence $\Gamma \Proves \lnot !A$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}},
+\Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$.  By
+\tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}}, item (2),
 $\Gamma \Proves !A \lif !B$. Again by \olref{prop:ccs-prov-in}, we get
-that $(!A \lif !B) \in \Gamma$, as required.
+that $!A \lif !B \in \Gamma$, as required.
 
-Now consider the case where $!B \in \Gamma$. Then $\Gamma \Proves !B$
-and by
+Now consider the case where $!B \in \Gamma$.  By
 \tagrefs{prfSC/{fol:seq:prv:prop:provability-lif},prfND/{fol:ntd:prv:prop:provability-lif}},
-$\Gamma \Proves !A \lif !B$. By \olref{prop:ccs-prov-in}, $(!A \lif
-!B) \in \Gamma$.}}
+item (2) again, $\Gamma \Proves !A \lif !B$. By
+\olref{prop:ccs-prov-in}, $!A \lif !B \in \Gamma$.}}
 \end{enumerate}
 \end{proof}
 
