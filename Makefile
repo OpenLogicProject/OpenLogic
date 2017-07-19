@@ -49,6 +49,8 @@ open-logic-config.pdf: open-logic-config.sty
 clean:	
 	latexmk -c $(ALLTEXFILES)
 
+clean-all:
+	latexmk -C $(ALLTEXFILES)
+
 upload: FORCE_MAKE
 	rsync -avz --delete --include "[^\.]*/" --include '*.pdf' --include '*.png' --exclude '*'  . rzach@136.159.35.88:webdisk/public_html/static/open-logic/
-
