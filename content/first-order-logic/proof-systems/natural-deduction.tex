@@ -24,7 +24,9 @@ natural inferences.  Each of the logical connectives and quantifiers
 comes with two rules, an introduction and an elimination rule, and
 they each correspond to one such natural inference pattern. For
 instance, $\Intro{\lif}$ corresponds to conditional proof, and
-$\Elim{\lor}$ to proof by cases.
+$\Elim{\lor}$ to proof by cases.  A particularly simple rule is
+$\Elim{\land}$ which allows the inference from $!A \land !B$ to~$!A$
+(or $!B$).
 
 One feature that distinguishes natural deduction from other
 !!{derivation} systems is its use of assumptions. !!^a{derivation} in
@@ -43,16 +45,21 @@ and then doing away with them in the service of establishing an
 intermediate step is a hallmark of natural deduction. The formulas at
 the leaves of a natural deduction !!{derivation} are called
 assumptions, and some of the rules of inference may ``!!{discharge}''
-them.  An assumption that remains !!{undischarged} at the end of the
-!!{derivation} is (usually) essential to the truth of the conclusion,
-and so !!a{derivation} establishes that its !!{undischarged}
-assumptions entail its conclusion.
+them.  For instance, if we have !!a{derivation} of~$!B$ from some
+assumptions which include~$!A$, then the $\Intro{\lif}$ rule allows us
+to infer~$!A \lif !B$ and discharge any assumption of the form~$!A$.
+(To keep track of which assumptions are discharged at which
+inferences, we label the inference and the assumptions it discharges
+with a number.)  The assumptions that remain !!{undischarged} at the
+end of the !!{derivation} are together sufficient for the truth of the
+conclusion, and so !!a{derivation} establishes that its
+!!{undischarged} assumptions entail its conclusion.
 
 The relation $\Gamma \Proves !A$ based on natural deduction holds iff
-there is !!a{derivation} in which $!A$ is the last !!{sentence} in the
-tree, and every leaf which is !!{undischarged} is in~$\Gamma$. $!A$ is
+there is !!a{derivation} in which $!A$~is the last !!{sentence} in the
+tree, and every leaf which is !!{undischarged} is in~$\Gamma$. $!A$~is
 a theorem in natural deduction iff there is !!a{derivation} in which
-$!A$ is the last !!{sentence} and all assumptions are !!{discharged}.
+$!A$~is the last !!{sentence} and all assumptions are !!{discharged}.
 For instance, here is !!a{derivation} that shows that $\Proves (!A
 \land !B) \lif !A$:
 \begin{prooftree}
@@ -75,7 +82,7 @@ Prawitz and Frederic Fitch. Because its inferences mirror natural
 methods of proof, it is favored by philosophers. The versions
 developed by Fitch are often used in introductory logic textbooks. In
 the philosophy of logic, the rules of natural deduction have sometimes
-been taken to give the meanings of the logical operator
+been taken to give the meanings of the logical operators
 (``proof-theoretic semantics'').
 
 \end{document}

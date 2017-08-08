@@ -25,9 +25,12 @@ immediately above it by one of the rules of inference. The rules of
 inference either manipulate the !!{sentence}s in the sequents (adding,
 removing, or rearranging them on either the left or the right), or
 they introduce a complex !!{formula} in the conclusion of the rule.
-For instance, the $\RightR{\Contraction}$ allows the inference from $!A
-\Sequent !B, !B$ to $!A \Sequent !B$, and the $\RightR{\lif}$ allows
-the inference from $!A \Sequent !B$ to $\Sequent !A \lif !B$.
+For instance, the $\LeftR{\land}$ rule allows the inference from $!A,
+\Gamma \Sequent \Delta$ to $\!A \land !B, \Gamma \Sequent \Delta$, and
+the $\RightR{\lif}$ allows the inference from $!A, \Gamma \Sequent
+\Delta, !B$ to $\Gamma \Sequent \Delta, !A \lif !B$, for any $\Gamma$,
+$\Delta$, $!A$, and~$!B$. (In particular, $\Gamma$ and~$\Delta$ may be
+empty.)
 
 The $\Proves$ relation based on the sequent calculus is defined as
 follows: $\Gamma \Proves !A$ iff there is some sequence $\Gamma_0$
@@ -43,10 +46,11 @@ that $\Proves (!A \land !B) \lif !A$:
   \RightLabel{\RightR{\lif}}
   \UnaryInf$\fCenter (!A \land !B) \lif !A$
 \end{prooftree}
+
 A set $\Gamma$ is inconsistent in the sequent calculus if there is
 !!a{derivation} of $\Gamma_0 \Sequent$ (where every $!A \in \Gamma_0$
-is in~$\Gamma$ and the right side is empty).  Using the rule
-\RightR{\Weakening}, any !!{sentence} can be !!{derive}d from an
+is in~$\Gamma$ and the right side of the sequent is empty).  Using the
+rule \RightR{\Weakening}, any !!{sentence} can be !!{derive}d from an
 inconsistent set.
 
 The sequent calculus was invented in the 1930 by Gerhard Gentzen.

@@ -52,9 +52,9 @@ for !!a{sentence} to be a \emph{theorem} and what it means for
 done (via axiomatic !!{derivation}s, natural deductions, sequent
 !!{derivation}s, truth trees, resolution refutations), we want these
 relations to match the semantic notions of validity and
-entailment. Let's write $\Proves !A$ for ``$!A$ is a theorem'' and
-``$\Gamma \Proves !A$'' for ``$!A$ is !!{derivable} from~$\Gamma$.''
-However $\Proves$ is defined, we want it to match up with $\Entails$,
+entailment. Let's write $\Proves !A$ for ``$!A$~is a theorem'' and
+``$\Gamma \Proves !A$'' for ``$!A$~is !!{derivable} from~$\Gamma$.''
+However $\Proves$~is defined, we want it to match up with $\Entails$,
 that is:
 \begin{enumerate}
 \item $\Proves !A$ if and only if $\Entails !A$
@@ -70,8 +70,8 @@ for the !!{derivation} systems we present.
 
 The converse ``if'' direction is also important: it is called
 \emph{completeness}. A complete !!{derivation} system is strong enough
-to verify that $\Gamma \Entails !A$ whenever this holds, and that
-there is $\Gamma \Proves !A$ whenever $\Gamma \Entails !A$.
+to show that $!A$~is a theorem whenever $!A$~is valid, and that
+there $\Gamma \Proves !A$ whenever $\Gamma \Entails !A$.
 Completeness is harder to establish, and some logics have no complete
 !!{derivation} systems. First-order logic does. Kurt G\"odel was the
 first one to prove completeness for a !!{derivation} system of
@@ -85,14 +85,15 @@ unsatisfiablity: like unsatisfiable sets, inconsistent sets of
 !!{sentence}s do not make good theories, they are defective in a
 fundamental way. Consistent sets of !!{sentence}s may not be true or
 useful, but at least they pass that minimal threshold of logical
-usefulness.  Different !!{derivation} systems will give different
-specific definitions of consistency of sets of !!{sentence}s, but like
-$\Proves$, we want them to coincide with their semantic counterpart:
-we want it to always be the case that $\Gamma$ is consistent if and
-only if it is satisfiable. Here, the ``if'' direction amounts to
-completeness (consistency guarantees satisfiability), and the ``only
-if'' direction amounts to soundness (satisfiability guarantees
-consistency).  In fact, for first-order logic, the two versions of
-soundness and completeness are equivalent.
+usefulness.  For different !!{derivation} systems the specific
+definition of consistency of sets of !!{sentence}s might differ, but
+like $\Proves$, we want consistency to coincide with its semantic
+counterpart, satisfiability. We want it to always be the case that
+$\Gamma$ is consistent if and only if it is satisfiable. Here, the
+``if'' direction amounts to completeness (consistency guarantees
+satisfiability), and the ``only if'' direction amounts to soundness
+(satisfiability guarantees consistency).  In fact, for classical
+first-order logic, the two versions of soundness and completeness are
+equivalent.
 
 \end{document}
