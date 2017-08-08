@@ -9,26 +9,26 @@
 \olfileid{fol}{com}{lin}
 \olsection{Lindenbaum's Lemma}
 
+\begin{explain}
 We now prove a lemma that shows that any consistent set of
 !!{sentence}s is contained in some set of sentences which is not just
-consistent, but maximally so, and moreover, is saturated. The proof
-works by first extending the set to a saturated set, and then adding
-one sentence at a time, guaranteeing at each step
-that the set remains consistent. The union of all stages in that
-construction then contains, for each !!{sentence}~$!A$, either it or
-its negation~$\lnot !A$, is saturated, and is also consistent.
+consistent, but also !!{complete}. The proof works by adding one
+sentence at a time, guaranteeing at each step that the set remains
+consistent. We do this so that for every $!A$, either $!A$ or $\lnot
+!A$ gets added at some stage. The union of all stages in that
+construction then contains either $!A$ or its negation~$\lnot !A$ and
+is thus complete. It is also consistent, since we made sure at each
+stage not to introduce an inconsistency.
+\end{explain}
 
 \begin{lem}[Lindenbaum's Lemma]
-\ollabel{lem:lindenbaum}
-Every consistent set~$\Gamma$ can be extended to a maximally
-consistent saturated set~$\Gamma^*$.
+\ollabel{lem:lindenbaum} Every consistent set~$\Gamma'$ in a
+language~$\Lang{L'}$ can be extended to a !!{complete} and consistent
+set~$\Gamma^*$.
 \end{lem}
 
 \begin{proof}
-Let $\Gamma$ be consistent, and let $\Gamma'$ be as in the proof of
-\olref[hen]{thm:henkin}: we proved there that $\Gamma'$
-is a consistent saturated set in the richer language $\Lang L'$ (with
-the !!{denumerable} set of new constants).  Let $!A_0$, $!A_1$, \dots{}
+Let $\Gamma'$ be consistent.  Let $!A_0$, $!A_1$, \dots{}
 be an enumeration of all the !!{formula}s of~$\Lang L'$.  Define
 $\Gamma_0 = \Gamma'$, and
 \[
@@ -39,28 +39,30 @@ $\Gamma_0 = \Gamma'$, and
 \Gamma_n \cup \{ \lnot !A_n \} & \textrm{otherwise.}
 \end{cases}
 \]
+Let $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$.
 
-Let $\Gamma^* = \bigcup_{n \geq 0} \Gamma_n$. Since $\Gamma' \subseteq
-\Gamma^*$, for each !!{formula}~$!A$, $\Gamma^*$ contains a
-!!{formula} of the form
-\iftag{prvEx}
-{$\lexists[x][!A] \lif !A(c)$}
-{$\lnot\lforall[x][!A] \lif \lnot !A(c)$}
-and thus is saturated.
+Each $\Gamma_n$ is consistent: $\Gamma_0$ is consistent by definition.
+If $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$, this is because the latter
+is consistent.  If it isn't, $\Gamma_{n+1} = \Gamma_n \cup \{\lnot
+!A_n\}$. We have to verify that $\Gamma_n \cup \{\lnot !A_n\}$ is
+consistent. Suppose it's not. Then \emph{both} $\Gamma_n \cup
+\{!A_n\}$ and $\Gamma_n \cup \{\lnot !A_n\}$ are inconsistent.  This
+means that $\Gamma_n$ would be inconsistent by
+\tagrefs{prfSC/{fol:seq:prv:prop:explicit-inc},prfND/{fol:ntd:prv:prop:explicit-inc}},
+contrary to the induction hypothesis.
 
-Each $\Gamma_n$ is consistent: $\Gamma_0$ is consistent by
-definition.  If $\Gamma_{n+1} = \Gamma_n \cup \{!A\}$, this is because
-the latter is consistent.  If it isn't, $\Gamma_{n+1} = \Gamma_n \cup
-\{!\lnot !A\}$, which must be consistent.  If it weren't, i.e., both
-$\Gamma_n \cup \{!A\}$ and $\Gamma_n \cup \{\lnot !A\}$ are
-inconsistent, then $\Gamma_n \Proves \lnot !A$ and $\Gamma_n \Proves
-!A$, so $\Gamma_n$ would be inconsistent contrary to induction
-hypothesis.
+Every finite subset of $\Gamma^*$ is a subset of~$\Gamma_n$ for
+some~$n$, since each $!B \in \Gamma^*$ not already in~$\Gamma$ is
+added at some stage~$i$. If $n$ is the last one of these, then all
+$!B$ in the finite subset are in~$\Gamma_n$. So, every finite subset
+of~$\Gamma^*$ is consistent. By
+\tagrefs{prfSC/{fol:seq:ptn:prop:proves-compact},prfND/{fol:ntd:ptn:prop:proves-compact}},
+$\Gamma^*$ is consistent.
 
-Every !!{formula} of $\Frm[L']$ appears on the list used to
-define~$\Gamma^*$.  If $!A_n \notin \Gamma^*$, then that is because
-$\Gamma_n \cup \{!A_n\}$ was inconsistent.  But that means that
-$\Gamma^*$ is maximally consistent.
+Every !!{sentence} of $\Frm[L']$ appears on the list used to
+define~$\Gamma^*$. If $!A_n \notin \Gamma^*$, then that is because
+$\Gamma_n \cup \{!A_n\}$ was inconsistent.  But then $\lnot !A_n
+\in \Gamma^*$, so $\Gamma^*$ is !!{complete}.
 \end{proof}
 
 \end{document}

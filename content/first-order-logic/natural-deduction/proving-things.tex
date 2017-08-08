@@ -123,16 +123,16 @@ In each of the two branches on the right, we want to !!{derive} $!A
 For the two missing parts of the !!{derivation}, we need
 !!{derivation}s of $!B$ from $\lnot !A$ and $!A$ in the middle, and
 from $!A$ and $!B$ on the left.  Let's take the former first. $\lnot
-!A$ and $!A$ are the two premises of \Intro{\lfalse}:
+!A$ and $!A$ are the two premises of \Elim{\lnot}:
 \[
 \AxiomC{$\Discharge{\lnot !A}{2}$}
 \AxiomC{$\Discharge{!A}{3}$}
-\RightLabel{\Intro{\lfalse}}
+\RightLabel{\Elim{\lnot}}
 \BinaryInfC{$\lfalse$}
 \DeduceC{$!B$}
 \DisplayProof
 \]
-By using \Elim{\lfalse}, we can obtain $!B$ as a conclusion and
+By using \FalseInt, we can obtain $!B$ as a conclusion and
 complete the branch.
 \[
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
@@ -140,7 +140,7 @@ complete the branch.
 \AxiomC{$\Discharge{!A}{3}$}
 \RightLabel{\Intro{\lfalse}}
 \BinaryInfC{$\lfalse$}
-\RightLabel{\Elim{\lfalse}}
+\RightLabel{\FalseInt}
 \UnaryInfC{$!B$}
 \DischargeRule{\Intro{\lif}}{3}
 \UnaryInfC{$!A \lif !B$}
@@ -159,16 +159,16 @@ Let's now look at the rightmost branch.  Here it's important to
 realize that the definition of !!{derivation} \emph{allows assumptions
   to be discharged} but \emph{does not require} them to be.  In other
 words, if we can derive $!B$ from one of the assumptions $!A$ and $!B$
-without using the other, that's ok.  And to !!{derive} $!B$ from $!B$
+without using the other, that's ok.  And to !!{derive} $!B$ from~$!B$
 is trivial: $!B$ by itself is such a !!{derivation}, and no inferences
 are needed.  So we can simply delete the assumtion $!A$.
 \[
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \AxiomC{$\Discharge{\lnot !A}{2}$}
 \AxiomC{$\Discharge{!A}{3}$}
-\RightLabel{\Intro{\lfalse}}
+\RightLabel{\Elim{\lnot}}
 \BinaryInfC{$\lfalse$}
-\RightLabel{\Elim{\lfalse}}
+\RightLabel{\FalseInt}
 \UnaryInfC{$!B$}
 \DischargeRule{\Intro{\lif}}{3}
 \UnaryInfC{$!A \lif !B$}
@@ -183,6 +183,95 @@ are needed.  So we can simply delete the assumtion $!A$.
 \]
 Note that in the finished !!{derivation}, the rightmost \Intro{\lif}
 inference does not actually discharge any assumptions.
+\end{ex}
+
+\begin{ex}
+So far we have not needed the \FalseCl{} rule. It is special in that
+it allows us to discharge !!a{formula} that isn't a sub-!!{formula} of
+the conclusion of the rule.  It is closely related to the \FalseInt{}
+rule; in fact, the \FalseInt{} rule is a special case of the
+\FalseCl{} rule---there is a logic called ``intuitionistic logic'' in
+which only \FalseInt{} is allowed.  The \FalseCl{} rule is a last
+resort when nothing else works.  For instance, suppose we want to
+!!{derive} $!A \lor \lnot !A$. Our usual strategy would be to attempt
+to !!{derive} $!A \lor \lnot !A$ using $\Intro{\lor}$. But this would
+require us to !!{derive} either $!A$ or $\lnot !A$ from no
+assumptions, and this can't be done. \FalseCl{} to the rescue!
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+Now we're looking for !!a{derivation} of $\lfalse$ from $\lnot(!A \lor
+\lnot !A)$. Since $\lfalse$ is the conclusion of $\Elim{\lnot}$ we
+might try that:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+Our strategy for finding a !!{derivation} of~$\lnot !A$ calls for an
+application of~$\Intro{\lnot}$:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}, \Discharge{!A}{2}$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\Intro{\lnot}}{2}
+  \UnaryInfC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+Here, we can get $\lfalse$ easily by applying $\Elim{\lnot}$ to the
+assumption $\lnot(!A \lor \lnot !A)$ and $!A \lor \lnot !A$ which
+follows from our new assumption $!A$ by~$\Intro{\lor}$:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \AxiomC{$\Discharge{!A}{2}$}
+  \RightLabel{\Intro{\lor}}
+  \UnaryInfC{$!A \lor \lnot !A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro{\lnot}}{2}
+  \UnaryInfC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
+On the right side we use the same strategy, except we get $!A$ by \FalseCl:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \AxiomC{$\Discharge{!A}{2}$}
+  \RightLabel{\Intro{\lor}}
+  \UnaryInfC{$!A \lor \lnot !A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro{\lnot}}{2}
+  \UnaryInfC{$\lnot !A$}
+  \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
+  \AxiomC{$\Discharge{\lnot !A}{3}$}
+  \RightLabel{\Intro{\lor}}
+  \UnaryInfC{$!A \lor \lnot !A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{3}
+  \UnaryInfC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\FalseCl}{1}
+  \UnaryInfC{$!A \lor \lnot !A$}
+\end{prooftree}
 \end{ex}
 
 \begin{ex}
@@ -254,7 +343,7 @@ using~$a$ so we can reach a contradiction.
 \AxiomC{$\Discharge{\lforall[x][!A(x)]}{3}$}
 \RightLabel{\Elim{\lforall}}
 \UnaryInfC{$!A(a)$}
-\RightLabel{\Intro{\lfalse}}
+\RightLabel{\Elim{\lnot}}
 \BinaryInfC{$\lfalse$}
 \DischargeRule{\Intro{\lnot}}{3}
 \UnaryInfC{$\lnot \lforall[x][!A(x)]$}
@@ -328,18 +417,18 @@ at this point to apply \Elim{\land} to separate out~$!B(a)$.
 The second assumption we have to work with is~$\lforall[x][(!B(x) \lif
   !C(x,b)]$. Since there is no eigenvariable condition we can
 instantiate $x$ with the !!{constant}~$a$ using \Elim{\lforall} to get
-$!B(a) \lif !C(a, b)$.  We now have $!B(a)$ and $!B(a) \lif !C(a,b)$. Our
-next move should be a straightforward application of the \Elim{\lif}
-rule.
+$!B(a) \lif !C(a, b)$.  We now have both $!B(a) \lif !C(a,b)$ and
+$!B(a)$. Our next move should be a straightforward application of the
+\Elim{\lif} rule.
 \[
 \AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(a) \lif !C(a,b)$}
 \AxiomC{$\Discharge{!A(a) 
 \land !B(a)}{1}$}
 \RightLabel{\Elim{\land}}
 \UnaryInfC{$!B(a)$}
-\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
-\RightLabel{\Elim{\lforall}}
-\UnaryInfC{$!B(a) \lif !C(a,b)$}
 \RightLabel{\Elim{\lif}}
 \BinaryInfC{$!C(a,b)$}
 \DeduceC{$\lexists[x][!C(x,b)]$}
@@ -351,13 +440,13 @@ We are so close!{} One application of \Intro{\lexists} and we
 have reached our goal.
 \[
 \AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
+\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(a) \lif !C(a,b)$}
 \AxiomC{$\Discharge{!A(a) 
 \land !B(a)}{1}$}
 \RightLabel{\Elim{\land}}
 \UnaryInfC{$!B(a)$}
-\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
-\RightLabel{\Elim{\lforall}}
-\UnaryInfC{$!B(a) \lif !C(a,b)$}
 \RightLabel{\Elim{\lif}}
 \BinaryInfC{$!C(a,b)$}
 \RightLabel{\Intro{\lexists}}
@@ -396,8 +485,8 @@ if that will help us get to our goal. Instead, let's use one of our
 assumptions. $\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$ together
 with $\lforall[x][!A(x)]$ will allow us to use the \Elim{\lif} rule.
 \[
-\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
 \AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
 \RightLabel{\Elim{\lif}}
 \BinaryInfC{$\lexists[y][!B(y)]$}
 \DeduceC{$\lfalse$}
@@ -407,94 +496,19 @@ with $\lforall[x][!A(x)]$ will allow us to use the \Elim{\lif} rule.
 \]
 We now have one final assumption to work with,
 and it looks like this will help us reach a contradiction
-by using \Intro{\lfalse}.
+by using \Elim{\lnot}.
 \[
-\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
+\AxiomC{$\lnot\lexists[y][!B(y)]$}
 \AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
+\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
 \RightLabel{\Elim{\lif}}
 \BinaryInfC{$\lexists[y][!B(y)]$}
-\AxiomC{$\lnot\lexists[y][!B(y)]$}
-\RightLabel{\Intro{\lfalse}}
+\RightLabel{\Elim{\lnot}}
 \BinaryInfC{$\lfalse$}
 \DischargeRule{\Intro{\lnot}}{1}
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
 \DisplayProof
 \]
-\end{ex}
-
-\begin{ex}
-Give a !!{derivation} of the !!{formula}
-$!A(x) \lor \lnot!A(x)$.
-\[
-\AxiomC{}
-\UnaryInfC{$!A(x) \lor \lnot!A(x)$}
-\DisplayProof
-\]
-
-The main connective of the !!{formula} is a disjunction. Since
-we have no assumptions to work from, we can't use \Intro{\lor}.
-Since we don't want any !!{undischarged} assumptions in
-our proof, our best bet is to use \Intro{\lnot} with the
-assumption $\lnot(!A(x) \lor \lnot!A(x))$. This will allow us to
-discharge the assumption at the end.
-\[
-\AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
-\DeduceC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{1}
-\UnaryInfC{$\lnot\lnot(!A(x) \lor \lnot!A(x))$}
-\RightLabel{\Elim{\lnot}}
-\UnaryInfC{$!A(x) \lor \lnot!A(x)$}
-\DisplayProof
-\]
-Note that a straightforward application of the \Intro{\lnot} rule
-leaves us with two negations. We can remove them with the 
-\Elim{\lnot} rule.
-
-We appear to be stuck again, since the assumption we introduced
-has a negation as the !!{main operator}. So let's try to derive another
-contradiction!{} Let's assume $!A(x)$ for another \Intro{\lnot}. From
-there we can derive $!A(x) \lor \lnot!A(x)$ and get our first
-contradiction.
-\[
-\AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
-\AxiomC{$\Discharge{!A(x)}{2}$}
-\RightLabel{\Intro{\lor}}
-\UnaryInfC{$!A(x) \lor \lnot!A(x)$}
-\RightLabel{\Intro{\lfalse}}
-\BinaryInfC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{2}
-\UnaryInfC{$\lnot!A(x)$}
-\DeduceC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{1}
-\UnaryInfC{$\lnot\lnot(!A(x) \lor \lnot!A(x))$}
-\RightLabel{\Elim{\lnot}}
-\UnaryInfC{$!A(x) \lor \lnot!A(x)$}
-\DisplayProof
-\]
-Our second assumption is now !!{discharged}. We only need to
-!!{derive} one more contradiction in order to !!{discharge} our first
-assumption. Now we have something to work with---$\lnot !A(x)$. We can
-use the same strategy as last time (\Intro{\lor}) to !!{derive} a
-contradiction with our first assumption.
-\[
-\AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
-\AxiomC{$\Discharge{!A(x)}{2}$}
-\RightLabel{\Intro{\lor}}
-\UnaryInfC{$!A(x) \lor \lnot!A(x)$}
-\RightLabel{\Intro{\lfalse}}
-\BinaryInfC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{2}
-\UnaryInfC{$\lnot!A(x)$}
-\RightLabel{\Intro{\lor}}
-\UnaryInfC{$!A(x) \lor \lnot !A(x)$}
-\AxiomC{$\Discharge{\lnot(!A(x) \lor \lnot!A(x))}{1}$}
-\DischargeRule{\Intro{\lnot}}{1}
-\BinaryInfC{$\lnot\lnot(!A(x) \lor \lnot!A(x))$}
-\RightLabel{\Elim{\lnot}}
-\UnaryInfC{$!A(x) \lor \lnot!A(x)$}
-\DisplayProof
-\]
-And the proof is done!
 \end{ex}
 
 \end{document}

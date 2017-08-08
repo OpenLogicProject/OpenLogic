@@ -20,8 +20,9 @@ sub-!!{derivation}s leading to the premises of the last inference.
 \end{explain}
 
 \begin{defn}
-If $\Gamma$ is a finite set of !!{sentence}s, $\Gamma = \{!A_1, \dots,
-!A_n\}$, then $\Gn{\Gamma} = \tuple{\Gn{!A_1}, \dots, \Gn{!A_n}}$.
+If $\Gamma$ is a finite sequence of !!{sentence}s, $\Gamma =
+\tuple{!A_1, \dots, !A_n}$, then $\Gn{\Gamma} = \tuple{\Gn{!A_1},
+  \dots, \Gn{!A_n}}$.
 
 If $\Gamma \Sequent \Delta$ is a sequent, then a G\"odel number of
 $\Gamma \Sequent \Delta$ is
@@ -40,12 +41,18 @@ If $\pi$ is a !!{derivation} in $\Log{LK}$, then $\Gn{\pi}$ is
   inference.
 
 \begin{tabular}{lccccccc}
-\text{Rule:} & \text{Contr} & $\lnot$ left & $\lnot$ right &
-   $\land$ left  & $\lor$ right & $\lif$ right \\
-$k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
-\text{Rule:} & $\lforall$ left &
-   $\lforall$ right & $\lexists$ left & $\lexists$ right & = \\
-$k$: & 7 & 8 & 9 & 10 & 11
+  \text{Rule:} & \LeftR{\Weakening} & \RightR{\Weakening} &
+  \LeftR{\Contraction} & \RightR{\Contraction} &
+  \LeftR{\Exchange} & \RightR{\Exchange} \\
+  $k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
+  \text{Rule:} &   \LeftR{\lnot} & \RightR{\lnot} &
+  \LeftR{\land} & 
+  \RightR{\lor} &
+  \RightR{\lif} \\
+$k$: & 7 & 8 & 9 & 10 & 11 \\[2ex]
+\text{Rule:} & \LeftR{\lforall} & \RightR{\lforall} &
+   \LeftR{\lexists} & \RightR{\lexists} & = \\
+$k$: & 12 & 13 & 14 & 15 & 16
 \end{tabular}
 \item $\tuple{2, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\pi'},
   \Gn{\pi''}}$ if $\pi$ ends in an inference with two premises, $k$ is
@@ -55,7 +62,7 @@ $k$: & 7 & 8 & 9 & 10 & 11
   respectively.
 
 \begin{tabular}{lcccc}
-\text{Rule:} & \text{Cut} & $\land$ right & $\lor$ left & $\lif$ left \\
+\text{Rule:} & \Cut & \RightR{\land} & \LeftR{\lor} & \LeftR{\lif} \\
 $k$: & 1 & 2 & 3 & 4
 \end{tabular}
 \end{enumerate}
@@ -66,19 +73,17 @@ Having settled on a representation of !!{derivation}s, we must also
 show that we can manipulate such derivations primite recursively, and
 express their essential properties and relations so.  Some operations
 are simple: e.g., given a G\"odel number~$d$ of a !!{derivation},
-$(s)_1$ gives us the G\"odel number of its end-sequent.  Some are
-much harder.  We'll at least sketch how to do this.  The goal is to
-show that the relation ``$\pi$ is !!a{derivation} of~$!A$
-from~$\Gamma$'' is primitive recursive on the G\"odel numbers of
-$\pi$ and~$!A$.
+$(s)_1$ gives us the G\"odel number of its end-sequent.  Some are much
+harder.  We'll at least sketch how to do this.  The goal is to show
+that the relation ``$\pi$ is !!a{derivation} of~$!A$ from~$\Gamma$''
+is a primitive recursive relation of the G\"odel numbers of $\pi$
+and~$!A$.
 \end{explain}
 
 \begin{prop}
 \ollabel{prop:followsby}
 The following relations are primitive recursive:
 \begin{enumerate}
-\item $!A \in \Gamma$.
-\item $\Gamma \subseteq \Delta$.
 \item $\Gamma \Sequent \Delta$ is an initial sequent.
 \item $\Gamma \Sequent \Delta$ follows from $\Gamma' \Sequent \Delta'$
   (and $\Gamma'' \Sequent \Delta''$) by a rule of $\Log{LK}$.
@@ -89,18 +94,11 @@ The following relations are primitive recursive:
 \begin{proof}
 We have to show that the corresponding relations between G\"odel
 numbers of !!{formula}s, sequences of G\"odel numbers of !!{formula}s
-(which code sets of !!{formula}s), and G\"odel numbers of sequents,
+(which code sequences of !!{formula}s), and G\"odel numbers of sequents,
 are primitive recursive.
 \begin{enumerate}
-\item $!A \in \Gamma$ iff $\Gn{!A}$ occurs in the
-  sequence~$\Gn{\Gamma}$, i.e, $\fn{IsIn}(x, g) \defiff \bexists{i <
-    \len{g}}{(g)_i = x}$.  We'll abbreviate this as $x \in g$.
-\item $\Gamma \subseteq \Delta$ iff every element of $\Gn{\Gamma}$ is
-  also an an element of $\Gn{\Delta}$, i.e., $\fn{SubSet}(g, d)
-  \defiff \bforall{i < \len{g}}{(g)_i \in d}$.  We'll abbreviate this
-  as $g \subseteq d$.
 \item $\Gamma \Sequent \Delta$ is an initial sequent if either there
-  is a !!{sentence}~$!A$ such that $\Gamma \Sequent \Delta$ is $!A
+  is !!a{sentence}~$!A$ such that $\Gamma \Sequent \Delta$ is $!A
   \Sequent !A$, or there is a term~$t$ such that $\Gamma \Sequent
   \Delta$ is $\emptyset \Sequent \eq[t][t]$.  In terms of G\"odel
   numbers, $\fn{InitSeq}(s)$ holds iff
@@ -118,37 +116,32 @@ s = \tuple{0, \tuple{\Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{
   $\fn{FollowsBy}_R$ of course has three arguments.
 
 For instance, $\Gamma \Sequent \Delta$ follows correctly from $\Gamma'
-\Sequent \Delta'$ by $\lexists$right iff $\Gamma = \Gamma'$ and there
-is a formula~$!A$, a variable~$x$ and a closed term~$t$ such that
-$\Subst{!A}{t}{x} \in \Delta'$ and $\lexists[x][!A] \in \Delta$, for
-every $!B \in \Delta$, either $!B = \lexists[x][!A]$ or $!B \in
-\Delta'$, and for every $!B \in \Delta'$, $!B = \Subst{!A}{t}{x}$ or
-$!B \in \Delta$.  We just have to translate this into G\"odel numbers.
-If $s = \Gn{\Gamma \Sequent \Delta}$ then $(s)_0 = \Gn{\Gamma}$ and
-$(s)_1 = \Gn{\Delta}$.  So, $\fn{FollowsBy}_{\lexists \text{right}}(s,
-s')$ holds iff
+\Sequent \Delta'$ by \RightR{\lexists} iff $\Gamma = \Gamma'$ and
+there is a sequence of !!{formula}s~$\Delta''$, !!a{formula}~$!A$, a
+variable~$x$ and a closed term~$t$ such that $\Delta' = \Delta'',
+\Subst{!A}{t}{x}$ and $\Delta = \Delta'', \lexists[x][!A]$. We just
+have to translate this into G\"odel numbers.  If $s = \Gn{\Gamma
+  \Sequent \Delta}$ then $(s)_0 = \Gn{\Gamma}$ and $(s)_1 =
+\Gn{\Delta}$.  So, $\fn{FollowsBy}_{\RightR{\lexists}}(s, s')$
+holds iff
 \begin{align*}
-& (s)_0 \subseteq (s')_0 \land (s')_0 \subseteq (s)_0 \land {}\\
+& (s)_0 = (s')_0 \land {}\\
 &
-\bexists{f<s}{\bexists{x<s}{\bexists{t<s'}{(\fn{Frm}(f) \land \fn{Var}(x) \land \fn{Term}(t) \land {}}}} \\
-& \quad \fn{Subst}(f,t,x) \in (s')_1 \land \#(\lexists) \concat x \concat f \in (s)_1 \land {}\\
-& \quad \bforall{i < \len{(s)_1}}{(((s)_1)_i = \#(\lexists) \concat x \concat f \lor ((s)_1)_i \in (s')_1)} \land {} \\
-& \quad \bforall{i < \len{(s')_1}}{(((s)_1')_i = \fn{Subst}(f, t, x) \lor ((s')_1)_i \in (s)_1)})
+  \bexists{d<s}{\bexists{f<s}{\bexists{x<s}{\bexists{t<s'}{
+          (\fn{Frm}(f) \land \fn{Var}(y) \land \fn{Term}(t) \land {}}}}} \\
+  & \qquad (s')_1 = d \concat \tuple{\fn{Subst}(f,t,x)} \land {} \\
+  & \qquad (s)_1 = d \concat \tuple{\#(\lexists) \concat y \concat f}
 \end{align*}
-The individual lines express, respectively, ``$\Gamma \subseteq
-\Gamma' \land \Gamma' \subseteq \Gamma$,'' ``there is !!a{formula}
-with G\"odel number~$f$, a variable with G\"odel number $x$, and a
-term with G\"odel number~$t$,'' ``$\Subst{!A}{t}{x} \in \Delta' \land
-\lexists[x][!A] \in \Delta$,'' ``for all $!B \in \Delta$, either $!B =
-\lexists[x][!A]$ or $!B \in \Delta'$,'' ``for all $!B \in \Delta'$,
-either $!B = \Subst{!A}{t}{x}$ or $!B \in \Delta$.  Note that in the
-last two lines, we quantify over the elements~$!B$ of~$\Delta$ and
-$\Delta'$ not directly, but via their place~$i$ in the G\"odel numbers
-of $\Delta$ and $\Delta'$. (Remember that $\Gn{\Delta}$ is the number
-of a sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
+The individual lines express, respectively, ``$\Gamma = \Gamma$,''
+``there is a sequence~($\Delta''$) with G\"odel number~$d$,
+!!a{formula}~($!A$) with G\"odel number~$f$, a variable with G\"odel
+number~$x$, and a term with G\"odel number~$t$,'' ``$\Delta' =
+\Delta'', \Subst{!A}{t}{x}$,'' and ``$\Delta = \Delta'',
+\lexists[x][!A]$''. (Remember that $\Gn{\Delta}$ is the number of a
+sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
 
 \item We first define a helper relation $\fn{hDeriv}(s,n)$ which holds
-  if $s$ codes a correct derivation at least to $n$ inferences up from
+  if $s$ codes a correct derivation to at least~$n$ inferences up from
   the end sequent.  If $n=0$ we let the relation be satisfied by
   default.  Otherwise, $\fn{hDeriv}(s, n+1)$ iff either $s$ consists
   just of an initial sequent, or it ends in a correct inference and
@@ -162,14 +155,14 @@ of a sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
 \begin{aligned}
 & ((s)_0 = 0 \land \fn{InitialSeq}((s)_1)) \lor{}\\
 & ((s)_0 = 1 \land {}\\
-& \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\text{Contr}}((s)_1, ((s)_3)_1)) \lor{}\\
+& \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\LeftR{\Contraction}}((s)_1, ((s)_3)_1)) \lor{}\\
 & \qquad \vdots\\
-& \quad ((s)_2 = 11 \land \fn{FollowsBy}_{=}((s)_1, ((s)_3)_1)) \land {}\\
+& \quad ((s)_2 = 16 \land \fn{FollowsBy}_{=}((s)_1, ((s)_3)_1)) \land {}\\
 & \quad \fn{hDeriv}((s)_3, n)) \lor {}\\
 & ((s)_0 = 2 \land {}\\
-& \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\text{Cut}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \lor{}\\
+& \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\Cut}((s)_1, ((s)_3)_1), ((s)_4)_1)) \lor{}\\
 & \qquad \vdots\\
-& \quad ((s)_2 = 4 \land \fn{FollowsBy}_{\lif\text{left}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \land {}\\
+& \quad ((s)_2 = 4 \land \fn{FollowsBy}_{\LeftR{\lif}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \land {}\\
 & \quad \fn{hDeriv}((s)_3, n) \land \fn{hDeriv}((s)_4, n))
 \end{aligned}
 \end{multline*}
@@ -186,9 +179,9 @@ $\fn{Deriv}(s)$ by $\fn{hDeriv}(s,s)$.
 Define the following relations as in
 \olref[inc][art][plk]{prop:followsby}:
 \begin{enumerate}
-\item $\fn{FollowsBy}_{\land\text{right}}(s, s', s'')$,
+\item $\fn{FollowsBy}_{\RightR{\land}}(s, s', s'')$,
 \item $\fn{FollowsBy}_{\eq}(s, s')$,
-\item $\fn{FollowsBy}_{\lforall\text{right}}(s, s')$.
+\item $\fn{FollowsBy}_{\RightR{\lforall}}(s, s')$.
 \end{enumerate}
 \end{prob}
 

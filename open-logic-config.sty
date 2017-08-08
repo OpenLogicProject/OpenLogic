@@ -150,23 +150,43 @@
 % operator `Op`, e.g., `\LeftR{\land}` produces `$\land$L`.
 % `\RightR{Op}` does the same for right rules.
 
-\DeclareDocumentCommand \LeftR { m } {\ensuremath{#1\mathrm{L}}}
+\DeclareDocumentCommand \LeftR { m } {\ensuremath{{#1}\mathrm{L}}}
 
-\DeclareDocumentCommand \RightR { m } {\ensuremath{#1\mathrm{R}}}
+\DeclareDocumentCommand \RightR { m } {\ensuremath{{#1}\mathrm{R}}}
 
 % - `\Weakening`: produces name or abbreviation for weakening rule,
 % e.g., ``W''.
 
 \DeclareDocumentMacro \Weakening {\text{W}}
 
+% - `\Contraction`: produces name or abbreviation for contraction rule,
+% e.g., ``C''.
+
+\DeclareDocumentMacro \Contraction {\text{C}}
+
+% - `\Exchange`: produces name or abbreviation for exchange rule,
+% e.g., ``X''.
+
+\DeclareDocumentMacro \Exchange {\text{X}}
+
+% - `\Cut`: produces name or abbreviation for cut rule,
+% e.g., ``Cut''.
+
+\DeclareDocumentMacro \Cut {\text{Cut}}
 
 % - Rule names: `\Intro{Op}` typesets the name of an intro rule for
 % operator `Op`, e.g., `\Intro{\land}` produces `$\land$Intro`.
 % `\Elim{Op}` does the same for elimination rules.
 
-\DeclareDocumentCommand \Intro { m } {\ensuremath{#1\mathrm{Intro}}}
+\DeclareDocumentCommand \Intro { m } {\ensuremath{{#1}\mathrm{Intro}}}
 
-\DeclareDocumentCommand \Elim { m } {\ensuremath{#1\mathrm{Elim}}}
+\DeclareDocumentCommand \Elim { m } {\ensuremath{{#1}\mathrm{Elim}}}
+
+% - `\FalseInt`, `\FalseCl`: produces name or abbreviation for intuitionistic and classical absurdity rule,
+% e.g., ``$\lfalse_I$,'' ``$\lfalse_C$''.
+
+\DeclareDocumentMacro \FalseInt {\ensuremath{\lfalse_I}}
+\DeclareDocumentMacro \FalseCl {\ensuremath{\lfalse_C}}
 
 % - `\Discharge{!A}{n}`: typesets a discharged assumption with label
 % $n$, e.g., $[!A]^n$.
@@ -929,6 +949,10 @@
 \settexttoken{discharged}{discharged}{discharged}
 \settexttoken{undischarged}*{undischarged}{undischarged}
 
+% - `complete`: syntactic completeness of a set of sentences
+
+\settexttoken{complete}{complete}{complete}
+
 % - `enumerable`: term for finite or countably infinite; defaults to
 % "enumerable", redefine for "countable".
 
@@ -1022,10 +1046,16 @@
 
 \tagtrue{lambda}
 
-% - prfND, prfSC - alternative coverage of proof systems. Set `prfND` to
+% - `prfND`, `prfSC` - alternative coverage of proof systems. Set `prfND` to
 % true if you want to include material on natural deduction, and
 % `prfSC` for the sequent calculus.  By default, we include both.
 
 \tagtrue{prfSC}
 \tagtrue{prfND}
 
+% - `cmplCCS` - prove completeness via generating a complete
+% consistent set
+% - `cmplMCS` - prove completeness via maximally consistent sets
+
+\tagtrue{cmplCCS}
+\tagtrue{cmplMCS}
