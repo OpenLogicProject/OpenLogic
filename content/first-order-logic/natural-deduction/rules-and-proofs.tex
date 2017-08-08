@@ -18,9 +18,20 @@
   (\gitissue{77}).
 \end{editorial}
 
-Let $\Lang L$ be a first-order language with the usual !!{constant}s,
-!!{variable}s, logical symbols, and auxiliary symbols (parentheses and
-the comma).
+\begin{explain}
+Natural deduction systems are meant to closely parallel the informal
+reasoning used in mathematical proof (hence it is somewhat
+``natural''). Natural deduction proofs begin with assumptions.
+Inference rules are then applied. Assumptions are ``!!{discharged}''
+by the \Intro{\lnot}, \Intro{\lif}, \Elim{\lor} and \Elim{\lexists}
+inference rules, and the label of the !!{discharged} assumption is
+placed beside the inference for clarity.
+\end{explain}
+
+\begin{defn}[Initial !!^{formula}]
+An \emph{initial !!{formula}} or \emph{assumption} is any !!{formula}
+in the topmost position of any branch.
+\end{defn}
 
 \begin{defn}[Inference]
 An \emph{inference} is an expression of the form
@@ -45,11 +56,11 @@ The rules for natural deduction are divided into two main types:
 \emph{propositional} rules (quantifier-free) and \emph{quantifier}
 rules.  The rules come in pairs, an introduction and an elimination
 rule for each !!{operator}. They introduced !!a{operator} in the
-conclusion or remove !!a{operator} from a premise of the rule.
-Some of the rules allow an assumption of a certain type to be
+conclusion or remove !!a{operator} from a premise of the rule.  Some
+of the rules allow an assumption of a certain type to be
 \emph{!!{discharged}}. To indicate which assumption is !!{discharged}
 by which inference, we also assign labels to both the assumption and
-the inference.  This is indicated by writing the assumption formula as
+the inference.  This is indicated by writing the assumption as
 ``$\Discharge{!A}{n}$''.
 
 It is customary to consider rules for all !!{operator}s, even for
@@ -57,39 +68,43 @@ those (if any) that we consider as defined.
 
 \subsection{Propositional Rules}
 
-\paragraph{Rules for $\land$}
+\subsubsection{Rules for $\land$}
 
-\[
+\begin{defish}
 \AxiomC{$!A$}
 \AxiomC{$!B$}
 \RightLabel{\Intro{\land}}
 \BinaryInfC{$!A \land !B$}
 \DisplayProof
-\quad
+\hfill
+\begin{tabular}{r}
 \AxiomC{$!A \land !B$}
 \RightLabel{\Elim{\land}}
 \UnaryInfC{$!A$}
 \DisplayProof
-\quad
+\\[3ex]
 \AxiomC{$!A \land !B$}
 \RightLabel{\Elim{\land}}
 \UnaryInfC{$!B$}
 \DisplayProof
-\]
+\end{tabular}
+\end{defish}
 
-\paragraph{Rules for $\lor$}
+\subsubsection{Rules for $\lor$}
 
-\[
+\begin{defish}
+\begin{tabular}{r}
 \AxiomC{$!A$}
 \RightLabel{\Intro{\lor}}
 \UnaryInfC{$!A \lor !B$}
 \DisplayProof
-\quad
+\\[3ex]
 \AxiomC{$!B$}
 \RightLabel{\Intro{\lor}}
 \UnaryInfC{$!A \lor !B$}
 \DisplayProof
-\quad
+\end{tabular}
+\hfill
 \AxiomC{$!A \lor !B$}
 \AxiomC{$\Discharge{!A}{n}$}
 \DeduceC{$!C$}
@@ -98,91 +113,95 @@ those (if any) that we consider as defined.
 \DischargeRule{\Elim{\lor}}{n}
 \TrinaryInfC{$!C$}
 \DisplayProof
-\]
+\end{defish}
 
-\paragraph{Rules for $\lnot$}
+\subsubsection{Rules for $\lif$}
 
-\[
+\begin{defish}
+\AxiomC{$\Discharge{!A}{n}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{n}
+\UnaryInfC{$!A \lif !B$}
+\DisplayProof
+\hfill
+\AxiomC{$!A \lif !B$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\end{defish}
+
+\subsubsection{Rules for $\lnot$}
+
+\begin{defish}
 \AxiomC{$\Discharge{!A}{n}$}
 \noLine
 \DeduceC{$\lfalse$}
 \DischargeRule{\Intro{\lnot}}{n}
 \UnaryInfC{$\lnot !A$}
 \DisplayProof
-\quad
+\hfill
 \AxiomC{$\lnot !A$}
 \AxiomC{$!A$}
 \RightLabel{\Elim{\lnot}}
 \BinaryInfC{$\lfalse$}
-\]
-
-\paragraph{Rules for $\lif$}
-
-\[
-\AxiomC{$\Discharge{!A}{n}$}
-\DeduceC{$!B$}
-\DischargeRule{\Intro{\lif}}{n}
-\UnaryInfC{$!A \lif !B$}
 \DisplayProof
-\quad
-\AxiomC{$!A \lif !B$}
-\AxiomC{$!A$}
-\RightLabel{\Elim{\lif}}
-\BinaryInfC{$!B$}
-\DisplayProof
-\]
+\end{defish}
 
-\paragraph{Rules for $\lfalse$}
+\subsubsection{Rules for $\lfalse$}
 
-\[
+\begin{defish}
 \AxiomC{$\lfalse$}
 \RightLabel{\FalseInt}
 \UnaryInfC{$!A$}
 \DisplayProof
-\quad
+\hfill
 \AxiomC{$\Discharge{\lnot !A}{n}$}
-\AxiomC{$\lfalse$}
-\RightLabel{\FalseCl}
+\DeduceC{$\lfalse$}
+\DischargeRule{\FalseCl}{n}
 \UnaryInfC{$!A$}
-\]
+\DisplayProof
+\end{defish}
 
 \subsection{Quantifier Rules}
 
-\paragraph{Rules for $\lforall$}
+\subsubsection{Rules for $\lforall$}
 
-\[
+\begin{defish}
 \AxiomC{$!A(a)$}
 \RightLabel{\Intro{\lforall}}
 \UnaryInfC{$\lforall[x][!A(x)]$}
 \DisplayProof
-\quad
+\hfill
 \AxiomC{$\lforall[x][!A(x)]$}
 \RightLabel{\Elim{\lforall}}
 \UnaryInfC{$!A(t)$}
 \DisplayProof
-\]
-where $t$ is a ground term (a term that does not contain any
-variables), and $a$~is a !!{constant} which does not occur
-in~$!A$, or in any assumption which is !!{undischarged} in the
+\end{defish}
+
+In the rules for~$\lforall$, $t$ is a ground term (a term that does
+not contain any variables), and $a$~is a !!{constant} which does not
+occur in~$!A$, or in any assumption which is !!{undischarged} in the
 !!{derivation} ending with the premise~$!A$. We call $a$ the
 \emph{eigenvariable} of the \Intro{\lforall} inference.
 
-\paragraph{Rules for $\lexists$}
+\subsubsection{Rules for $\lexists$}
 
-\[
+\begin{defish}
 \AxiomC{$\Atom{!A}{t}$}
 \RightLabel{\Intro{\lexists}}
 \UnaryInfC{$\lexists[x][\Atom{!A}{x}]$}
 \DisplayProof
-\quad
+\hfill
 \AxiomC{$\lexists[x][\Atom{!A}{x}]$}
 \AxiomC{[$\Atom{!A}{a}$]$^n$}
 \DeduceC{$!C$}
 \DischargeRule{\Elim{\lexists}}{n}
 \BinaryInfC{$!C$}
 \DisplayProof
-\]
-where $t$ is a ground term, and $a$ is a constant which does not occur
+\end{defish}
+
+Again, $t$ is a ground term, and $a$ is a constant which does not occur
 in the premise $\lexists[x][!A(x)]$, in $!C$, or any assumption which
 is !!{undischarged} in the !!{derivation}s ending with the two
 premises~$!C$ (other than the assumptions $!A(a)$).  We call $a$ the
@@ -206,20 +225,7 @@ valid, the truth values of the formulas other than $\Atom{!A}{a}$ are
 independent of~$a$.
 \end{explain}
 
-\begin{explain}
-Natural deduction systems are meant to closely parallel the informal
-reasoning used in mathematical proof (hence it is somewhat
-``natural''). Natural deduction proofs begin with assumptions.
-Inference rules are then applied. Assumptions are ``!!{discharged}''
-by the \Intro{\lnot}, \Intro{\lif}, \Elim{\lor} and \Elim{\lexists}
-inference rules, and the label of the !!{discharged} assumption is
-placed beside the inference for clarity.
-\end{explain}
-
-\begin{defn}[Initial !!^{formula}]
-An \emph{initial !!{formula}} or \emph{assumption} is any !!{formula}
-in the topmost position of any branch.
-\end{defn}
+\subsection{!!^{derivation}s}
 
 \begin{defn}[!!^{derivation}]
 A \emph{!!{derivation}} of !!a{formula} $!A$ from assumptions~$\Gamma$

@@ -53,6 +53,17 @@ the result of appending $!A$ to the right end of~$\Gamma$ (and $!A,
 of~$\Gamma$). If $\Delta$ is a sequence of !!{formula}s also, then $\Gamma,
 \Delta$ is the concatenation of the two sequences.
 
+\begin{defn}[Initial Sequent]
+An \emph{initial sequent} is a sequent
+\iftag{prvFalse,prvTrue}{of one of the following forms:
+  \begin{enumerate}
+    \item $!A \Sequent !A$
+    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
+    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
+  \end{enumerate}}
+{of the form $!A \Sequent !A$} for any !!{sentence} $!A$ in the language.
+\end{defn}
+
 \begin{defn}[Inference]
 An \emph{inference} is an expression of the form
 \[
@@ -83,68 +94,7 @@ The rules for $\Log{LK}$ are divided into two main types:
 are further divided into \emph{propositional} rules (quantifier-free)
 and \emph{quantifier} rules.
 
-\subsection{Structural rules}
-
-Weakening:
-\[
-\Axiom$ \Gamma \fCenter \Delta $
-\RightLabel{\LeftR{\Weakening}}
-\UnaryInf$ !A, \Gamma \fCenter \Delta$
-\DisplayProof
-\quad
-\textrm{  and  }
-\quad
-\Axiom$ \Gamma \fCenter \Delta$
-\RightLabel{\RightR{\Weakening}}
-\UnaryInf$ \Gamma \fCenter \Delta, !A$
-\DisplayProof
-\]
-where $!A$ is called the \emph{weakening !!{formula}}.
-
-Contraction:
-\[
-\Axiom$ !A, !A, \Gamma \fCenter \Delta $
-\RightLabel{\LeftR{\Contraction}}
-\UnaryInf$ !A, \Gamma \fCenter \Delta$
-\DisplayProof
-\quad
-\textrm{  and  }
-\quad
-\Axiom$ \Gamma \fCenter \Delta, !A, !A$
-\RightLabel{\RightR{\Contraction}}
-\UnaryInf$ \Gamma \fCenter \Delta, !A$
-\DisplayProof
-\]
-where $!A$ is called the \emph{contracted !!{formula}}.
-
-Exchange:
-\[
-\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
-\RightLabel{\LeftR{\Exchange}}
-\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta$
-\DisplayProof
-\quad
-\textrm{  and  }
-\quad
-\Axiom$ \Gamma \fCenter \Delta, !A, !B, \Lambda$
-\RightLabel{\RightR{\Exchange}}
-\UnaryInf$ \Gamma \fCenter \Delta, !B, !A, \Lambda$
-\DisplayProof
-\]
-
-
-A series of weakening, contraction, and exchange inferences will often
-be indicated by double inference lines.
-
-Cut:
-\[
-\Axiom$ \Gamma \fCenter \Delta, !A$
-\Axiom$ !A, \Pi \fCenter \Lambda $
-\BinaryInf$ \Gamma, \Pi \fCenter \Delta, \Lambda$
-\DisplayProof
-\]
-
-\subsection{Logical rules}
+\subsection{Propositional Rules}
 
 The rules are named for the !!{main operator} of the \emph{principal
   !!{formula}} of the inference (the formula containing $!A$ and/or
@@ -152,97 +102,116 @@ $!B$ in the lower sequent). Each one comes in two versions, one for
 inferring a sequent with the principal formula on the left, and one
 with the principal formula on the right.
 
-\paragraph{Propositional Rules}
+\subsubsection{Rules for $\lnot$}
 
-\[
-\begin{array}{cc}
+\begin{defish}
 \Axiom$ \Gamma \fCenter \Delta, !A $
 \RightLabel{\LeftR{\lnot}}
 \UnaryInf$ \lnot !A, \Gamma \fCenter \Delta$
 \DisplayProof
-&
+\hfill
 \Axiom$!A, \Gamma \fCenter \Delta$
 \RightLabel{\RightR{\lnot}}
 \UnaryInf$ \Gamma \fCenter \Delta, \lnot !A $
 \DisplayProof
-\\[3ex]
+\end{defish}
+
+\subsubsection{Rules for $\land$}
+
+\begin{defish}\noindent
+\begin{tabular}{l}
 \Axiom$ !A, \Gamma \fCenter \Delta$
 \RightLabel{\LeftR{\land}}
 \UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
-\DisplayProof
-&
-\Axiom$\Gamma \fCenter \Delta, !A$
-\Axiom$ \Gamma \fCenter \Delta, !B$
-\RightLabel{\RightR{\land}}
-\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
 \DisplayProof
 \\[3ex]
 \Axiom$!B, \Gamma \fCenter \Delta$
 \RightLabel{\LeftR{\land}}
 \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
 \DisplayProof
-\\[3ex]
+\end{tabular}
+\hfill
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\DisplayProof
+\end{defish}
+
+\subsubsection{Rules for $\lor$}
+
+\begin{defish}
 \Axiom$!A, \Gamma \fCenter \Delta$
 \Axiom$!B, \Gamma \fCenter \Delta$
 \RightLabel{\LeftR{\lor}}
 \BinaryInf$!A \lor !B, \Gamma \fCenter \Delta$
 \DisplayProof
-&
+\hfill
+\begin{tabular}{r}
 \Axiom$\Gamma \fCenter \Delta, !A$
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
 \DisplayProof
-\\[3ex] &
+\\[3ex]
 \Axiom$ \Gamma \fCenter \Delta, !B$
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
 \DisplayProof
-\\[3ex]
+\end{tabular}
+\end{defish}
+
+\subsubsection{Rules for $\lif$}
+
+\begin{defish}
 \Axiom$ \Gamma \fCenter \Delta, !A$
 \Axiom$ !B, \Pi \fCenter \Lambda$
 \RightLabel{\LeftR{\lif}}
 \BinaryInf$ !A \lif !B, \Gamma, \Pi \fCenter \Delta, \Lambda$
 \DisplayProof
-&
+\hfill
 \Axiom$ !A, \Gamma \fCenter \Delta, !B$
 \RightLabel{\RightR{\lif}}
 \UnaryInf$ \Gamma \fCenter \Delta, !A \lif !B $
 \DisplayProof
-\end{array}
-\]
+\end{defish}
 
-\paragraph{Quantifier Rules}
+\subsection{Quantifier Rules}
 
-\[
+\subsubsection{Rules for $\lforall$}
+
+\begin{defish}
 \Axiom$ !A(t), \Gamma \fCenter \Delta$
 \RightLabel{\LeftR{\lforall}}
 \UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
 \DisplayProof
-\qquad
+\hfill
 \Axiom$ \Gamma \fCenter \Delta, !A(a) $
 \RightLabel{\RightR{\lforall}}
 \UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
 \DisplayProof
-\]
-where $t$ is a closed term (i.e., one without variables), and $a$~is 
-!!a{constant} which does not occur anywhere in the lower sequent of the
-\RightR{\lforall} rule. We call $a$ the \emph{eigenvariable} of the
-\RightR{\forall} inference.
+\end{defish}
 
+In \LeftR{\lforall}, $t$ is a closed term (i.e., one without
+variables). In \RightR{\lforall}, $a$~is !!a{constant} which must
+not occur anywhere in the lower sequent of the \RightR{\lforall}
+rule. We call $a$ the \emph{eigenvariable} of the \RightR{\forall}
+inference.
 
-The rules for $\lexists$ are symmetric:
-\[
+\subsubsection{Rules for $\lexists$}
+
+\begin{defish}
 \Axiom$ !A(a), \Gamma \fCenter \Delta $
 \RightLabel{\LeftR{\lexists}}
 \UnaryInf$ \lexists[x][!A(x)], \Gamma \fCenter \Delta$
 \DisplayProof
-\qquad
+\hfill
 \Axiom$ \Gamma \fCenter \Delta, !A(t) $
 \RightLabel{\RightR{\lexists}}
 \UnaryInf$ \Gamma \fCenter \Delta, \lexists[x][!A(x)]$
 \DisplayProof
-\]
-where again $t$~is a closed term, and $a$~is !!a{constant} which does
+\end{defish}
+
+Again, $t$~is a closed term, and $a$~is !!a{constant} which does
 not occur in the lower sequent of the \LeftR{\lexists} rule. We call
 $a$ the \emph{eigenvariable} of the \LeftR{\lexists} inference.
 
@@ -266,6 +235,7 @@ condition, the following would be allowed:
   \RightLabel{*\LeftR{\lexists}}
   \UnaryInf$\lexists[x][!A(x)] \fCenter !A(a)$
   \DisplayProof
+  \qquad
   \Axiom$!A(a) \fCenter !A(a)$
   \RightLabel{*\RightR{\lforall}}
   \UnaryInf$!A(a) \fCenter \lforall[x][!A(x)]$
@@ -273,16 +243,73 @@ condition, the following would be allowed:
 Neither sequent is valid!{}
 \end{explain}
 
-\begin{defn}[Initial Sequent]
-An \emph{initial sequent} is a sequent
-\iftag{prvFalse,prvTrue}{of one of the following forms:
-  \begin{enumerate}
-    \item $!A \Sequent !A$
-    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
-    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
-  \end{enumerate}}
-{of the form $!A \Sequent !A$} for any !!{sentence} $!A$ in the language.
-\end{defn}
+\subsection{Structural rules}
+
+Finally, we also need a few rules that allow us to rearrange
+!!{sentence}s in the left and right side of a sequent.  Since the
+logical rules require that the !!{sentence}s in the premise which the
+rule acts upon stand either to the far left or to the far right, we
+need an ``exchange'' rule that allows us to move !!{sentence}s to the
+right position.  It's also important sometimes to be able to combine
+two identical !!{sentence}s into one, and to add !!a{sentence} on
+either side.
+
+\subsubsection{Weakening}
+
+\begin{defish}
+\Axiom$ \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\end{defish}
+
+\subsubsection{Contraction}
+
+\begin{defish}
+\Axiom$ !A, !A, \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Contraction}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A, !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\end{defish}
+
+\subsubsection{Exchange}
+
+\begin{defish}
+\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A, !B, \Lambda$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ \Gamma \fCenter \Delta, !B, !A, \Lambda$
+\DisplayProof
+\end{defish}
+
+A series of weakening, contraction, and exchange inferences will often
+be indicated by double inference lines.
+
+The following rule, called ``cut,'' is not strictly speaking
+necessary, but makes it a lot easier to reuse and combine derivations.
+\begin{defish}
+\[
+\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !A, \Pi \fCenter \Lambda $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+\end{defish}
 
 \begin{defn}[$\Log{LK}$ !!{derivation}]
 An \emph{$\Log{LK}$-!!{derivation}} of a sequent $S$ is a tree of sequents
