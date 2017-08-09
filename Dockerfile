@@ -1,14 +1,6 @@
 # Use ubuntu trusty as the base image
 FROM ubuntu:trusty
 
-# Add metadata to the docker iamge
-LABEL vendor="The Open Logic Project"
-LABEL description="Docker image for running the LaTeX build, test and diff generation"
-LABEL org.openlogic.is-production="true"
-LABEL org.openlogic.version="1.0.0"
-# [TODO] Set to date of pull request merge.
-LABEL org.openlogic.release-date="2017-08-15"
-
 # Add a backport of TeX Live 2016 packages, for LTS releases, to the apt sources
 RUN echo -e '\ndeb http://ppa.launchpad.net/jonathonf/texlive-2016/ubuntu trusty main\ndeb-src http://ppa.launchpad.net/jonathonf/texlive-2016/ubuntu trusty main' /etc/apt/sources.list
 
