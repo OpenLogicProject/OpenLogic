@@ -9,25 +9,35 @@
 \olfileid{fol}{com}{cth}
 \olsection{The Completeness Theorem}
 
-Let's combine our results: we arrive at the G\"odel's completeness theorem.
+\begin{explain}
+Let's combine our results: we arrive at G\"odel's completeness theorem.
+\end{explain}
 
 \begin{thm}[Completeness Theorem]
 \ollabel{thm:completeness}
-Let $\Gamma$ be a set of !!{sentence}s.  If
-$\Gamma$ is consistent, it is satisfiable.
+Let $\Gamma$ be a set of !!{sentence}s.  If $\Gamma$ is consistent, it
+is satisfiable.
 \end{thm}
 
 \begin{proof}
-Suppose $\Gamma$ is consistent.  By \olref[lin]{lem:lindenbaum}, there
-is a $\Gamma^* \supseteq \Gamma$ which is maximally consistent and
-saturated.  If $\Gamma$ does not contain~$\eq$, then by
-\olref[mod]{lem:truth}, $\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$.
-From this it follows in particular that for all $!A \in \Gamma$,
-$\Sat{M(\Gamma^*)}{!A}$, so $\Gamma$ is satisfiable.  If $\Gamma$ does
-contain~$\eq$, then by \olref[ide]{lem:truth}, $\Sat{M/_\approx}{!A}$
-iff $!A \in \Gamma^*$ for all sentences~$!A$.  In particular,
-$\Sat{M/_\approx}{!A}$ for all $!A \in \Gamma$, so $\Gamma$ is
-satisfiable.
+Suppose $\Gamma$ is consistent.  By \olref[hen]{lem:henkin}, there is
+a saturated consistent set $\Gamma' \supseteq \Gamma$. By
+\olref[lin]{lem:lindenbaum}, there is a $\Gamma^* \supseteq \Gamma'$
+which is consistent and !!{complete}.  Since $\Gamma' \subseteq
+\Gamma^*$, for each !!{formula}~$!A$, $\Gamma^*$ contains a
+!!{formula} of the form
+\iftag{prvEx}
+{$\lexists[x][!A] \lif !A(c)$}
+{$\lnot\lforall[x][!A] \lif \lnot !A(c)$}
+and so $\Gamma^*$ is saturated.
+
+If $\Gamma$ does not contain~$\eq$, then by \olref[mod]{lem:truth},
+$\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$.  From this it follows
+in particular that for all $!A \in \Gamma$, $\Sat{M(\Gamma^*)}{!A}$,
+so $\Gamma$ is satisfiable.  If $\Gamma$ does contain~$\eq$, then by
+\olref[ide]{lem:truth}, $\Sat{M/_\approx}{!A}$ iff $!A \in \Gamma^*$
+for all sentences~$!A$.  In particular, $\Sat{M/_\approx}{!A}$ for all
+$!A \in \Gamma$, so $\Gamma$ is satisfiable.
 \end{proof}
 
 \begin{cor}[Completeness Theorem, Second Version]
@@ -63,10 +73,10 @@ formulations of the completeness theorem are equivalent.
 \begin{prob}
 In order for a !!{derivation} system to be complete, its rules must be
 strong enough to prove every unsatisfiable set inconsistent.  Which of
-the rules of $\Log{LK}$ were necessary to prove completeness?  Are any
+the rules of !!{derivation} were necessary to prove completeness?  Are any
 of these rules not used anywhere in the proof?  In order to answer
 these questions, make a list or diagram that shows which of the rules
-of $\Log{LK}$ were used in which results that lead up to the proof of
+of !!{derivation} were used in which results that lead up to the proof of
 \olref[fol][com][cth]{thm:completeness}.  Be sure to note any tacit
 uses of rules in these proofs.
 \end{prob}

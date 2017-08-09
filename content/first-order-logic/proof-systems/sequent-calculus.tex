@@ -1,0 +1,65 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: seqeunt-calculus
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{prf}{seq}
+
+\olsection{The Sequent Calculus}
+
+While many !!{derivation} systems operate with arrangements of
+!!{sentence}s, the sequent calculus operates with \emph{sequents}. A
+sequent is an expression of the form
+\[
+!A_1, \dots, !A_m \Sequent !B_1, \dots, !B_m,
+\]
+that is a pair of sequences of !!{sentence}s, separated by the sequent
+symbol~$\Sequent$. Either sequence may be empty.  !!^a{derivation} in
+the sequent calculus is a tree of sequents, where the topmost sequents
+are of a special form (they are called ``initial sequents'' or
+``axioms'') and every other sequent follows from the sequents
+immediately above it by one of the rules of inference. The rules of
+inference either manipulate the !!{sentence}s in the sequents (adding,
+removing, or rearranging them on either the left or the right), or
+they introduce a complex !!{formula} in the conclusion of the rule.
+For instance, the $\LeftR{\land}$ rule allows the inference from $!A,
+\Gamma \Sequent \Delta$ to $\!A \land !B, \Gamma \Sequent \Delta$, and
+the $\RightR{\lif}$ allows the inference from $!A, \Gamma \Sequent
+\Delta, !B$ to $\Gamma \Sequent \Delta, !A \lif !B$, for any $\Gamma$,
+$\Delta$, $!A$, and~$!B$. (In particular, $\Gamma$ and~$\Delta$ may be
+empty.)
+
+The $\Proves$ relation based on the sequent calculus is defined as
+follows: $\Gamma \Proves !A$ iff there is some sequence $\Gamma_0$
+such that every $!A$ in $\Gamma_0$ is in~$\Gamma$ and there is a
+!!{derivation} with the sequent~$\Gamma_0 \Sequent !A$ at its root.
+$!A$ is a theorem in the sequent calculus if the sequent~$\Sequent !A$
+has !!a{derivation}. For instance, here is !!a{derivation} that shows
+that $\Proves (!A \land !B) \lif !A$:
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B \fCenter !A$
+  \RightLabel{\RightR{\lif}}
+  \UnaryInf$\fCenter (!A \land !B) \lif !A$
+\end{prooftree}
+
+A set $\Gamma$ is inconsistent in the sequent calculus if there is
+!!a{derivation} of $\Gamma_0 \Sequent$ (where every $!A \in \Gamma_0$
+is in~$\Gamma$ and the right side of the sequent is empty).  Using the
+rule \RightR{\Weakening}, any !!{sentence} can be !!{derive}d from an
+inconsistent set.
+
+The sequent calculus was invented in the 1930 by Gerhard Gentzen.
+Because of its systematic and symmetric design, it is a very useful
+formalism for developing a theory of !!{derivation}s. It is relatively
+easy to find !!{derivation}s in the sequent calculus, but these
+!!{derivation}s are often hard to read and their connection to proofs
+are sometimes not easy to see. It has proved to be a very elegant
+approach to !!{derivation} systems, however, and many logics have
+sequent calculus systems.
+
+\end{document}

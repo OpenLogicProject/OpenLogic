@@ -53,14 +53,17 @@ least one of them true, i.e., proceed as if one of them was in~$\Gamma$.
 This suggests the following idea: we add additional sentences to
 $\Gamma$ so as to (a) keep the resulting set consistent and (b) make
 sure that for every possible atomic sentence $!A$, either $!A$ is in
-the resulting set, or $\lnot !A$, and (c) such that, whenever $!A \land
-!B$ is in the set, so are both $!A$ and $!B$, if $!A \lor !B$ is in
-the set, at least one of $!A$ or $!B$ is also, etc.  We keep doing this
-(potentially forever).  Call the set of all sentences so
+the resulting set, or $\lnot !A$, and (c) such that, whenever $!A
+\land !B$ is in the set, so are both $!A$ and $!B$, if $!A \lor !B$ is
+in the set, at least one of $!A$ or $!B$ is also, etc.  We keep doing
+this (potentially forever).  Call the set of all sentences so
 added~$\Gamma^*$.  Then our construction above would provide us with a
 structure for which we could prove, by induction, that all sentences
 in~$\Gamma^*$ are true in~$\Struct M$, and hence also all sentence
-in~$\Gamma$ since $\Gamma \subseteq \Gamma^*$.
+in~$\Gamma$ since $\Gamma \subseteq \Gamma^*$.  It turns out that
+guaranteeing (a) is enough. A set of sentences for which (a) holds is
+called \emph{complete}. So our task will be to extend the consistent
+set~$\Gamma$ to a consistent and complete set~$\Gamma^*$.
 
 There is one wrinkle in this plan: if $\lexists[x][!A(x)] \in \Gamma$
 we would hope to be able to pick some !!{constant}~$c$ and add $!A(c)$
@@ -113,5 +116,35 @@ and it will turn out that this set is also the value of all the terms
 in it, e.g., also of $(\Obj 0 + \Obj 0)$.  Therefore, the sentence
 $\eq[(\Obj 0+ \Obj 0)][\Obj 0]$ will be true in this revised
 !!{structure}.
+
+So here's what we'll do. First we investigate the properties of
+!!{complete} consistent sets, in particular we prove that
+!!a{complete} consistent set contains $!A \land !B$ iff it contains
+both $!A$ and~$!B$, $!A \lor !B$ iff it contains at least one of them,
+etc. (\olref[ccs]{prop:ccs}). Then we define and investigate
+``saturated'' sets of sentences. A saturated set is one which contains
+conditionals that link each quantified !!{sentence} to instances of it
+(\olref[hen]{defn:henkin-exp}). We show that any consistent
+set~$\Gamma$ can always be extended to a saturated set~$\Gamma'$
+(\olref[hen]{lem:henkin}). If a set is consistent, saturated, and
+!!{complete} it also has the property that it contains
+\iftag{prvEx}{$\lexists[x][!A(x)]$ iff it contains $!A(t)$ for some
+  closed term~$t$}{}\iftag{defEx,defAll}{}{ and
+}\iftag{prvAll}{$\lforall[x][!A(x)]$ iff it contains $!A(t)$ for all
+  closed terms~$t$}{} (\olref[hen]{prop:saturated-instances}).  We'll
+then take the saturated consistent set~$\Gamma'$ and show that it can
+be extended to a saturated, consistent, and !!{complete}
+set~$\Gamma^*$ (\olref[lin]{lem:lindenbaum}). This set $\Gamma^*$ is
+what we'll use to define our term model~$\Struct{M(\Gamma^*)}$.  The
+term model has the set of closed terms as its domain, and the
+interpretation of its !!{predicate}s is given by the atomic
+!!{sentence}s in~$\Gamma^*$ (\olref[mod]{defn:termmodel}).  We'll use
+the properties of consistent, complete, saturated sets to show that
+indeed $\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$
+(\olref[mod]{lem:truth}), and thus in particular,
+$\Sat{M(\Gamma^*)}{\Gamma}$.  Finally, we'll consider how to define a
+term model if $\Gamma$ contains~$\eq$ as well
+(\olref[ide]{defn:term-model-factor}) and show that it
+satisfies~$\Gamma^*$ (\olref[ide]{lem:truth}).
 
 \end{document}

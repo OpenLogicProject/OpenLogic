@@ -1,0 +1,115 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: compactness-direct
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{cpd}
+\olsection{A Direct Proof of the Compactness Theorem}
+
+We can prove the Compactness Theorem directly, without appealing to
+the Completeness Theorem, using the same ideas as in the proof of the
+completeness theorem.  In the proof of the Completeness Theorem we
+started with a consistent set~$\Gamma$ of !!{sentence}s, expanded it to a
+consistent, saturated, and !!{complete} set~$\Gamma^*$ of
+!!{sentence}s, and then showed that in the term
+model~$\Struct{M(\Gamma^*)}$ constructed from $\Gamma^*$, all
+!!{sentence}s of~$\Gamma$ are true, so $\Gamma$ is satisfiable.
+
+We can use the same method to show that a finitely satisfiable set of
+sentences is satisfiable. We just have to prove the corresponding
+versions of the results leading to the truth lemma where we replace
+``consistent'' with ``finitely satisfiable.''
+
+\begin{prop}
+\ollabel{prop:fsat-ccs}
+Suppose $\Gamma$ is !!{complete} and finitely satisfiable. Then:
+\begin{enumerate}
+\tagitem{prvAnd}{$(!A \land !B) \in \Gamma$
+  iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{$(!A \lor !B) \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{$(!A \lif !B) \in \Gamma$ iff
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{prop}
+Prove \olref[fol][com][cpd]{prop:fsat-ccs}. Avoid the use of $\Proves$.
+\end{prop}
+
+\begin{lem}
+\ollabel{lem:fsat-henkin} Every finitely satisfiable set~$\Gamma$ can
+be extended to a saturated finitely satisfiable set~$\Gamma'$.
+\end{lem}
+
+\begin{prob}
+Prove \olref[fol][com][cpd]{lem:fsat-henkin}. (Hint: The crucial step
+is to show that if $\Gamma_n$ is finitely satisfiable, so is $\Gamma_n
+\cup \{!D_n\}$, without any appeal to !!{derivation}s or consistency.)
+\end{prob}
+
+\begin{prop}\ollabel{prop:fsat-instances}
+Suppose $\Gamma$ is complete, finitely satisfiable, and saturated.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+  for at least one closed term~$t$.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+  for all closed terms~$t$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{prob}
+Prove \olref[fol][com][cpd]{prop:fsat-instances}.
+\end{prob}
+
+\begin{lem}
+\ollabel{lem:fsat-lindenbaum} Every finitely satisfiable set~$\Gamma'$
+can be extended to a !!{complete} and finitely satisfiable
+set~$\Gamma^*$.
+\end{lem}
+
+\begin{prob}
+Prove \olref[fol][com][cpd]{lem:fsat-lindenbaum}.  (Hint: the crucial
+step is to show that if $\Gamma_n$ is finitely satisfiable, then
+either $\Gamma_n \cup \{!A_n\}$ or $\Gamma_n \cup \{\lnot !A_n\}$ is
+finitely satisfiable.)
+\end{prob}
+
+\begin{thm}[Compactness]
+\ollabel{thm:compactness-direct} $\Gamma$ is satisfiable if and only
+if it is finitely satisfiable.
+\end{thm}
+
+\begin{proof}
+If $\Gamma$ is satisfiable, then there is 
+!!a{structure}~$\Struct{M}$ such that $\Sat{M}{!A}$ for all $!A \in
+\Gamma$.  Of course, this $\Struct M$ also satisfies every finite
+subset of~$\Gamma$, so $\Gamma$ is finitely satisfiable.
+
+Now suppose that $\Gamma$ is finitely satisfiable. By
+\olref{lem:fsat-henkin}, there is a finitely satisfiable, saturated
+set $\Gamma' \supseteq \Gamma$. By \olref{lem:fsat-lindenbaum},
+$\Gamma'$ can be extended to a !!{complete} and finitely satisfiable
+set~$\Gamma^*$, and $\Gamma^*$ is still saturated. Construct the term
+model~$\Struct{M(\Gamma^*)}$ as in \olref[mod]{defn:termmodel}.  Note
+that \olref[mod]{prop:quant-termmodel} did not rely on the fact that
+$\Gamma^*$ is consistent (or !!{complete} or saturated, for that
+matter), but just on the fact that $\Struct{M(\Gamma^*)}$ is covered.
+The proof of the Truth Lemma (\olref[mod]{lem:truth}) goes through if
+we replace references to \olref[ccs]{prop:ccs} and
+\olref[hen]{prop:saturated-instances} by references to
+\olref{prop:fsat-ccs} and \olref{prop:fsat-instances}.
+\end{proof}
+
+\begin{prob}
+Write out the complete proof of the Truth Lemma
+(\olref[fol][com][mod]{lem:truth}) in the version required for the
+proof of \olref[fol][com][cpd]{thm:compactness-direct}.
+\end{prob}
+
+\end{document}

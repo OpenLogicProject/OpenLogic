@@ -37,23 +37,23 @@ result.
 
 \begin{defn}
 A !!{structure}~$\Struct M$ \emph{satisfies} a sequent $\Gamma
-\Sequent \Delta$ iff either $\Sat/{M}{!E}$ for some $!E
-\in \Gamma$ or $\Sat{M}{!E}$ for some $!E \in \Delta$.
+\Sequent \Delta$ iff either $\Sat/{M}{!A}$ for some $!A
+\in \Gamma$ or $\Sat{M}{!A}$ for some $!A \in \Delta$.
 
 A sequent is \emph{valid} iff every !!{structure}~$\Struct M$
 satisfies it.
 \end{defn}
 
 \begin{thm}[Soundness]
-\ollabel{sequent-soundness} If $\Log{LK}$ !!{derive}s $\Gamma \Sequent
-\Delta$, then $\Gamma \Sequent \Delta$ is valid.
+\ollabel{thm:sequent-soundness} If $\Log{LK}$ !!{derive}s $\Theta \Sequent
+\Xi$, then $\Theta \Sequent \Xi$ is valid.
 \end{thm}
 
 \begin{proof}
-Let $\Pi$ be a !!{derivation} of $\Gamma \Sequent \Delta$. We proceed by
-induction on the number of inferences in~$\Pi$.
+Let $\pi$ be a !!{derivation} of $\Theta \Sequent \Xi$. We proceed by
+induction on the number of inferences~$n$ in~$\pi$.
 
-If the number of inferences is~0, then $\Pi$ consists only of an
+If the number of inferences is~$0$, then $\pi$ consists only of an
 initial sequent. Every initial sequent $!A \Sequent !A$ is obviously
 valid, since for every $\Struct M$, either $\Sat/{M}{!A}$ or
 $\Sat{M}{!A}$.
@@ -61,217 +61,270 @@ $\Sat{M}{!A}$.
 If the number of inferences is greater than~0, we distinguish cases
 according to the type of the lowermost inference. By induction
 hypothesis, we can assume that the premises of that inference are
-valid, since the height of the proof of any premise is smaller than $n$.
+valid, since the number of inferences in the proof of any premise is
+smaller than~$n$.
 
-First, we consider the possible inferences with only one premise
-$\Gamma' \Sequent \Delta'$.
+First, we consider the possible inferences with only one premise.
 \begin{enumerate}
-\item The last inference is a weakening.  Then $\Gamma' \subseteq
-  \Gamma$ and $\Delta = \Delta'$ if it's a weakening on the left, or
-  $\Gamma = \Gamma'$ and $\Delta' \subseteq \Delta$ if it's a weaking
-  on the right.  In either case, $\Delta' \subseteq \Delta$ and
-  $\Gamma' \subseteq \Gamma$.  If $\Sat/{M}{!E}$ for some $!E \in
-  \Gamma'$, then, since $\Gamma' \subseteq \Gamma$, $!E \in \Gamma$ as
-  well, and so $\Sat/{M}{!E}$ for the same $!E \in \Gamma$.  Similarly,
-  if $\Sat{M}{!E}$ for some $!E \in \Delta'$, as $!E \in \Delta$,
-  $\Sat{M}{!E}$ for some $!E \in \Delta$.  Since $\Gamma' \Sequent
-  \Delta'$ is valid, one of these cases obtains for every~$\Struct
-  M$. Consequently, $\Gamma \Sequent \Delta$ is valid.
-\item The last inference is \LeftR{\lnot}: Then for some $!A \in
-  \Delta'$, $\lnot !A \in \Gamma$.  Also, $\Gamma' \subseteq \Gamma$,
-  and $\Delta' \setminus \{!A\} \subseteq \Delta$.
+\item The last inference is a weakening.  Then $\Theta \Sequent \Xi$
+  is either $\!A, \Gamma \Sequent \Delta$ (if the last inference is
+  \LeftR{\Weakening}) or $\Gamma \Sequent \Delta, !A$ (if it's
+  \RightR{\Weakening}), and the !!{derivation} ends in one of
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\Weakening}}
+    \UnaryInf$!A, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \qquad
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf$\Gamma \fCenter \Delta, !A$
+  \end{prooftree}
+  By induction hypothesis, $\Gamma \Sequent \Delta$ is valid, i.e.,
+  for every !!{structure}~$\Struct{M}$, either there is some $!C \in
+  \Gamma$ such that $\Sat/{M}{!C}$ or there is some $!C \in \Delta$
+  such that $\Sat{M}{!C}$. 
+  
+  If $\Sat/{M}{!C}$ for some $!C \in \Gamma$, then $!C \in \Theta$ as
+  well since $\Theta = !A, \Gamma$, and so $\Sat/{M}{!C}$ for some
+  $!C \in \Theta$.  Similarly, if $\Sat{M}{!C}$ for some $!C \in
+  \Delta$, as $!C \in \Xi$, $\Sat{M}{!C}$ for some $!C \in
+  \Xi$. Consequently, $\Theta \Sequent \Xi$ is valid.
+\item The last inference is \LeftR{\lnot}: Then the premise of the
+  last inference is $\Gamma \Sequent \Delta, !A$ and the conclusion is
+  $\lnot !A, \Gamma \Sequent \Delta$, i.e., the !!{derivation} ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, \Gamma \fCenter \Delta$
+  \end{prooftree}
+  and $\Theta = \lnot !A, \Gamma$ while $\Xi = \Delta$.
 
-  If $\Sat{M}{!A}$, then $\Sat/{M}{\lnot !A}$, and since $\lnot !A
-  \in \Gamma$, $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  Since
-  $\Gamma' \Sequent \Delta'$ is valid, if $\Sat/{M}{!A}$, then either
-  $\Sat/{M}{!E}$ for some $!E \in \Gamma'$ or $\Sat{M}{!E}$ for some
-  $!E \in \Delta'$ different from~$!A$.  Consequently, $\Sat/{M}{!E}$
-  for some $!E \in \Gamma$ (since $\Gamma' \subseteq \Gamma$) or
-  $\Sat{M}{!E}$ for some $!E \in \Delta'$ different from~$!A$ (since
-  $\Delta' \setminus \{!A\} \subseteq \Delta$).
+  The induction hypothesis tells us that $\Gamma \Sequent \Delta, !A$
+  is valid, i.e., for every $\Struct{M}$, either (a) for some $!C \in
+  \Gamma$, $\Sat/{M}{!C}$, or (b) for some $!C \in \Delta$,
+  $\Sat{M}{!C}$, or (c) $\Sat{M}{!A}$. We want to show that $\Theta
+  \Sequent \Xi$ is also valid.  Let $\Struct{M}$ be !!a{structure}. If
+  (a) holds, then there is $!C \in \Gamma$ so that $\Sat/{M}{!A}$, but
+  $!A \in \Theta$ as well. If (b) holds, there is $!C \in \Delta$ such
+  that $\Sat{M}{!C}$, but $!C \in \Xi$ as well. Finally, if
+  $\Sat{M}{!A}$, then $\Sat/{M}{\lnot !A}$. Since $\lnot !A \in
+  \Theta$, there is $!C \in \Theta$ such that
+  $\Sat/{M}{!C}$. Consequently, $\Theta \Sequent \Xi$ is valid.
 \item The last inference is \RightR{\lnot}: Exercise.
 \item The last inference is \LeftR{\land}: There are two variants: $!A
   \land !B$ may be inferred on the left from $!A$ or from $!B$ on the
-  left side of the premise.  In the first case, $!A \in \Gamma'$.
-  Consider a !!{structure}~$\Struct M$.  Since $\Gamma' \Sequent
-  \Delta'$ is valid, (a) $\Sat/{M}{!A}$, (b) $\Sat/{M}{!E}$ for some
-  $!E \in \Gamma' \setminus \{!A\}$, or (c)~$\Sat{M}{!E}$ for some $!E
-  \in \Delta'$.  In case (a), $\Sat/{M}{!A \land !B}$.  In case (b),
-  there is an $!E \in \Gamma \setminus \{!A \land !B\}$ such that
-  $\Sat/{M}{!E}$, since $\Gamma' \setminus \{!A\} \subseteq \Gamma
-  \setminus \{!A \land !B\}$.  In case (c), there is a $!E \in \Delta$
-  such that $\Sat{M}{!E}$, as $\Delta = \Delta'$.  So in each case,
-  $\Struct M$ satisfies $!A \land !B, \Gamma \Sequent \Delta$.  Since
-  $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$ is valid.  The
-  case where $!A \land !B$ is inferred from $!B$ is handled the same,
-  changing $!A$ to $!B$.
+  left side of the premise.  In the first case, the $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+  \end{prooftree}
+  and $\Theta = !A \land !B, \Gamma$ while $\Xi = \Delta$.  Consider a
+  !!{structure}~$\Struct M$.  Since by induction hypothesis, $!A,
+  \Gamma \Sequent \Delta$ is valid, (a) $\Sat/{M}{!A}$, (b)
+  $\Sat/{M}{!C}$ for some $!C \in \Gamma$, or (c)~$\Sat{M}{!C}$ for
+  some $!C \in \Delta$.  In case (a), $\Sat/{M}{!A \land !B}$, so
+  there is $!C \in \Theta$ (namely, $!A \land !B$) such that
+  $\Sat/{M}{!C}$.  In case (b), there is $!C \in \Gamma$ such that
+  $\Sat/{M}{!E}$, and $!C \in \Theta$ as well. In case (c), there is
+  $!C \in \Delta$ such that $\Sat{M}{!C}$, and $!C \in \Xi$ as well
+  since $\Xi = \Delta$. So in each case, $\Struct M$ satisfies $!A
+  \land !B, \Gamma \Sequent \Delta$.  Since $\Struct M$ was arbitrary,
+  $\Gamma \Sequent \Delta$ is valid.  The case where $!A \land !B$ is
+  inferred from $!B$ is handled the same, changing $!A$ to $!B$.
 \item The last inference is \RightR{\lor}: There are two variants: $!A
   \lor !B$ may be inferred on the right from $!A$ or from $!B$ on the
-  right side of the premise.  In the first case, $!A \in \Delta'$.
-  Consider a !!{structure}~$\Struct M$.  Since $\Gamma' \Sequent
-  \Delta'$ is valid, (a) $\Sat{M}{!A}$, (b) $\Sat/{M}{!E}$ for some
-  $!E \in \Gamma'$, or (c)~$\Sat{M}{!E}$ for some $!E \in \Delta'
-  \setminus \{!A\}$.  In case (a), $\Sat{M}{!A \lor !B}$.  In case (b),
-  there is $!E \in \Gamma$ such that $\Sat/{M}{!E}$, as $\Gamma =
-  \Gamma'$.  In case (c), there is an $!E \in \Delta$ such that
-  $\Sat{M}{!E}$, since $\Delta' \setminus \{!A\} \subseteq \Delta$.  So
-  in each case, $\Struct M$ satisfies $!A \land !B, \Gamma \Sequent
-  \Delta$.  Since $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$
-  is valid.  The case where $!A \lor !B$ is inferred from $!B$ is
-  handled the same, changing $!A$ to $!B$.
-\item The last inference is \RightR{\lif}: Then $!A \in \Gamma'$, $!B
-  \in \Delta'$, $\Gamma' \setminus \{!A\} \subseteq \Gamma$ and
-  $\Delta' \setminus \{!B\} \subseteq \Delta$.  Since $\Gamma'
-  \Sequent \Delta'$ is valid, for any !!{structure}~$\Struct M$, (a)
-  $\Sat/{M}{!A}$, (b) $\Sat{M}{!B}$, (c) $\Sat/{M}{!E}$ for some~$~!E
-  \in \Gamma' \setminus \{!A\}$, or $\Sat{M}{!E}$ for some $!E \in
-  \Delta' \setminus \{!B\}$.  In cases (a) and (b), $\Sat{M}{!A \lif
-    !B}$.  In case (c), for some $!E \in \Gamma$, $\Sat/{M}{!E}$. In
-  case (d), for some $!E \in \Delta$, $\Sat{M}{!E}$.  In each case,
-  $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  Since $\Struct M$
-  was arbitrary, $\Gamma \Sequent \Delta$ is valid.
+  right side of the premise.  In the first case, $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B$
+  \end{prooftree}
+  Now $\Theta = \Gamma$ and $\Xi = \Delta, !A \lor !B$.  Consider a
+  !!{structure}~$\Struct M$.  Since $\Gamma \Sequent \Delta, !A$ is
+  valid, (a) $\Sat{M}{!A}$, (b) $\Sat/{M}{!C}$ for some $!C \in
+  \Gamma$, or (c)~$\Sat{M}{!C}$ for some $!C \in \Delta$.  In case
+  (a), $\Sat{M}{!A \lor !B}$.  In case (b), there is $!C \in \Gamma$
+  such that $\Sat/{M}{!C}$.  In case (c), there is $!C \in \Delta$
+  such that $\Sat{M}{!C}$. So in each case, $\Struct M$ satisfies
+  $\Gamma \Sequent \Delta, !A \lor !B$, i.e., $\Theta \Sequent \Xi$.
+  Since $\Struct M$ was arbitrary, $\Theta \Sequent \Xi$ is valid.
+  The case where $!A \lor !B$ is inferred from $!B$ is handled the
+  same, changing $!A$ to $!B$.
+\item The last inference is \RightR{\lif}: Then $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A, \Gamma \fCenter \Delta, !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\Gamma \fCenter \Delta, !A \lif !B$
+  \end{prooftree}
+  Again, the induction hypothesis says that the premise is valid; we
+  want to show that the conclusion is valid as well. Let $\Struct{M}$
+  be arbitrary. Since $!A, \Gamma \Sequent \Delta, !B$ is valid, at
+  least one of the following cases obtains: (a) $\Sat/{M}{!A}$, (b)
+  $\Sat{M}{!B}$, (c) $\Sat/{M}{!C}$ for some~$~!C \in \Gamma$, or (c)
+  $\Sat{M}{!C}$ for some $!C \in \Delta$.  In cases (a) and (b),
+  $\Sat{M}{!A \lif !B}$ and so there is a $!C \in \Delta, !A \lif !B$
+  such that $\Sat{M}{!C}$.  In case (c), for some $!C \in \Gamma$,
+  $\Sat/{M}{!C}$. In case (d), for some $!C \in \Delta$,
+  $\Sat{M}{!C}$.  In each case, $\Struct M$ satisfies $\Gamma \Sequent
+  \Delta, !A \lif !B$.  Since $\Struct M$ was arbitrary, $\Gamma
+  \Sequent \Delta, !A \lif !B$ is valid.
 \item The last inference is \LeftR{\lforall}: Then there is a
-  !!{formula}~$!A(x)$ and a ground term~$t$ such that $!A(t) \in
-  \Gamma'$, $\lforall[x][!A(x)] \in \Gamma$, and $\Gamma' \setminus
-  \{!A(t)\} \subseteq \Gamma$.  Consider a !!{structure}~$\Struct
-  M$.  Since $\Gamma' \Sequent \Delta'$ is valid, (a)
-  $\Sat/{M}{!A(t)}$, (b) $\Sat/{M}{!E}$ for some $!E \in \Gamma'
-  \setminus \{!A(t)\}$, or (c)~$\Sat{M}{!E}$ for some $!E \in
-  \Delta'$.  In case (a), $\Sat/{M}{\lforall[x][!A(x)]}$. In case (b),
-  there is an $!E \in \Gamma \setminus \{!A(t)\}$ such that
-  $\Sat/{M}{!E}$.  In case (c), there is a $!E \in \Delta$ such that
-  $\Sat{M}{!E}$, as $\Delta = \Delta'$.  So in each case, $\Struct M$
-  satisfies $\Gamma \Sequent \Delta$.  Since $\Struct M$ was arbitrary,
-  $\Gamma \Sequent \Delta$ is valid.
+  !!{formula}~$!A(x)$ and a closed term~$t$ such that $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$!A(t), \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x)], \Gamma \fCenter \Delta$
+  \end{prooftree}
+  We want to show that the conclusion $\lforall[x][!A(x)], \Gamma
+  \Sequent \Delta$ is valid.  Consider a !!{structure}~$\Struct M$.
+  Since the premise $!A(t), \Gamma \Sequent \Delta$ is valid, (a)
+  $\Sat/{M}{!A(t)}$, (b) $\Sat/{M}{!C}$ for some $!C \in \Gamma$, or
+  (c)~$\Sat{M}{!C}$ for some $!C \in \Delta$.  In case (a), by
+  \olref[syn][sem]{prop:quant-terms}, if
+  $\Sat{M}{\lforall[x][!A(x)]}$, then $\Sat{M}{!A(t)}$. Since
+  $\Sat/{M}{!A(t)}$, $\Sat/{M}{\lforall[x][!A(x)]}$ . In case (b) and
+  (c), $\Struct{M}$ also satisfies $\lforall[x][!A(x)], \Gamma
+  \Sequent \Delta$.  Since $\Struct M$ was arbitrary,
+  $\lforall[x][!A(x)], \Gamma \Sequent \Delta$ is valid.
 \item The last inference is \RightR{\lexists}: Exercise.
 \item The last inference is \RightR{\lforall}: Then there is a
-  !!{formula}~$!A(x)$ and a !!{constant}~$a$ such that $!A(a) \in
-  \Delta'$, $\lforall[x][!A(x)] \in \Delta$, and $\Delta' \setminus
-  \{!A(a)\} \subseteq \Delta$.  Furthermore, $a \notin \Gamma \cup
-  \Delta$.  Consider a !!{structure}~$\Struct M$.  Since $\Gamma'
-  \Sequent \Delta'$ is valid, (a) $\Sat{M}{!A(a)}$, (b) $\Sat/{M}{!E}$
-  for some $!E \in \Gamma'$, or (c)~$\Sat{M}{!E}$ for some $!E \in
-  \Delta' \setminus \{!A(a)\}$.
+  !!{formula}~$!A(x)$ and a !!{constant}~$a$ such that $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A(a)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+  \end{prooftree}
+  where the eigenvariable condition is satisfied, i.e., $a$ does not
+  occur in $!A(x)$, $\Gamma$, or $\Delta$.  By induction hypothesis,
+  the premise of the last inference is valid.  We have to show that
+  the conclusion is valid as well, i.e., that for any
+  !!{structure}~$\Struct M$, (a) $\Sat{M}{\lforall[x][!A(x)]}$, (b)
+  $\Sat/{M}{!C}$ for some $!C \in \Gamma$, or (c)~$\Sat{M}{!C}$ for
+  some $!C \in \Delta$.
 
-  First, suppose (a) is the case but neither (b) nor (c), i.e.,
-  $\Sat{M}{!E}$ for all $!E \in \Gamma'$ and $\Sat/{M}{!E}$ for all
-  $!E \in \Delta'\setminus \{!A(a)\}$.  In other words, assume
-  $\Sat{M}{!A(a)}$ and that $\Struct M$ does not satisfy $\Gamma'
-  \Sequent \Delta' \setminus \{!A(a)\}$.  Since $a \notin \Gamma \cup
-  \Delta$, also $a \notin \Gamma' \cup (\Delta' \setminus
-  \{!A(a)\})$.  Thus, if $\Struct{M'}$ is like $\Struct M$ except that
-  $\Assign{a}{M} \neq \Assign{a}{M'}$, $\Struct{M'}$ also does not
-  satisfy $\Gamma' \Sequent \Delta' \setminus \{!A(a)\}$ by
-  extensionality.  But since $\Gamma' \Sequent \Delta'$ is valid, we
-  must have $\Sat{M'}{!A(a)}$.
-
-  We now show that $\Sat{M}{\lforall[x][!A(x)]}$.  To do this, we have
-  to show that for every variable assignment~$s$,
-  $\Sat{M}{\lforall[x][!A(x)]}[s]$.  This in turn means that for every
-  $x$-variant $s'$ of $s$, we must have $\Sat{M}{!A(x)}[s']$.  So
-  consider any variable assignment~$s$ and let $s'$ be an $x$-variant
-  of~$s$.  Since $\Gamma'$ and $\Delta'$ consist entirely of sentences,
-  $\Sat{M}{!E}[s]$ iff $\Sat{M}{!E}[s']$ iff $\Sat{M}{!E}$ for all
-  $!E \in \Gamma' \cup \Delta'$.  Let $\Struct M'$ be like $\Struct M$
-  except that $\Assign{a}{M'} = s'(x)$.  Then $\Sat{M}{!A(x)}[s']$ iff
-  $\Sat{M'}{!A(a)}$ (as $!A(x)$ does not contain~$a$).  Since we've
-  already established that $\Sat{M'}{!A(a)}$ for all $\Struct M'$
-  which differ from $\Struct M$ at most in what they assign to~$a$,
-  this means that $\Sat{M}{!A(x)}[s']$.  Thus weve shown that
-  $\Sat{M}{\lforall[x][!A(x)]}[s]$.  Since $s$ is an arbitrary variable
-  assignment and $\lforall[x][!A(x)]$ is a sentence, then
-  $\Sat{M}{\lforall[x][!A(x)]}$.
-
-  If (b) is the case, there is a $!E \in \Gamma$ such that
-  $\Sat/{M}{!E}$, as $\Gamma = \Gamma'$.  If (c) is the case, there is
-  an $!E \in \Delta' \setminus \{!A(a)\}$ such that $\Sat{M}{!E}$.  So
-  in each case, $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  Since
-  $\Struct M$ was arbitrary, $\Gamma \Sequent \Delta$ is valid.
+  Suppose $\Struct{M}$ is an arbitrary !!{structure}. If (b) or (c)
+  holds, we are done, so suppose neither holds: for all $!C \in
+  \Gamma$, $\Sat{M}{!C}$, and for all $!C \in \Delta$,
+  $\Sat/{M}{!C}$. We have to show that (a) holds, i.e.,
+  $\Sat{M}{\lforall[x][!A(x)]}$.  By
+  \olref[syn][ass]{prop:sat-quant}, if suffices to show that
+  $\Sat{M}{!A(x)}[s]$ for all variable assignments~$s$.  So let $s$ be
+  an arbitrary variable assignment. Consider the
+  structure~$\Struct{M'}$ which is just like~$\Struct{M}$ except
+  $\Assign{a}{M'} = s(x)$. By
+  \olref[syn][ext]{cor:extensionality-sent}, for any $!C \in \Gamma$,
+  $\Sat{M'}{!C}$ since $a$ does not occur in~$\Gamma$, and for any
+  $!C \in \Delta$, $\Sat/{M'}{!C}$. But the premise is valid, so
+  $\Sat{M'}{!A(a)}$. By \olref[syn][ass]{prop:sentence-sat-true},
+  $\Sat{M'}{!A(a)}[s]$, since $!A(a)$ is a sentence. Now $s \sim_x s$
+  with $s(x) = \Value{a}{M'}[s]$, since we've defined $\Struct{M'}$ in
+  just this way. So \olref[syn][ext]{prop:ext-formulas} applies, and
+  we get $\Sat{M'}{!A(x)}[s]$. Since $a$ does not occur in~$!A(x)$, by
+  \olref[syn][ext]{prop:extensionality}, $\Sat{M}{!A(x)}[s]$. Since
+  $s$ was arbitrary, we've completed the proof that
+  $\Sat{M}{!A(x)}[s]$ for all variable assignments.
 \item The last inference is \LeftR{\lexists}: Exercise.
 \end{enumerate}
 Now let's consider the possible inferences with two premises.
 \begin{enumerate}
-\item The last inference is a cut: Suppose the premises are $\Gamma'
-  \Sequent \Delta'$ and $\Pi' \Sequent \Lambda'$ and the cut formula
-  $!A$ is in both $\Delta'$ and $\Pi'$.  Since each is valid, every
-  !!{structure}~$\Struct M$ satisfies both premises.  We distinguish
-  two cases: (a) $\Sat/{M}{!A}$ and (b) $\Sat{M}{!A}$.  In case (a), in
-  order for $\Struct M$ to satisfy the left premise, it must satisfy
-  $\Gamma' \Sequent \Delta' \setminus \{!A\}$.  But $\Gamma' \subseteq
-  \Gamma$ and $\Delta' \setminus \{!A\} \subseteq \Delta$, so $\Struct
-  M$ also satisfies $\Gamma \Sequent \Delta$.  In case (b), in order
-  for $\Struct M$ to satisfy the right premise, it must satisfy $\Pi'
-  \setminus \{!A\} \Sequent \Lambda'$.  But $\Pi' \setminus \{!A\}
-  \subseteq \Gamma$ and $\Lambda' \subseteq \Delta$, so $\Struct M$
-  also satisfies $\Gamma \Sequent \Delta$.
-\item The last inference is \RightR{\land}.  The premises are $\Gamma
-  \Sequent \Delta'$ and $\Gamma \Sequent \Delta''$, where $!A \in
-  \Delta'$ an $!B \in \Delta''$.  By induction hypothesis, both are
-  valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
-  (a) $\Sat/{M}{!A \land !B}$ or (b) $\Sat{M}{!A \land !B}$. In case
-  (a), either $\Sat/{M}{!A}$ or $\Sat/{M}{!B}$.  In the former case,
-  in order for $\Struct M$ to satisfy $\Gamma \Sequent \Delta'$, it
-  must already satisfy $\Gamma \Sequent \Delta' \setminus \{!A\}$.  In
-  the latter case, it must satisfy $\Gamma \Sequent \Delta'' \setminus
-  \{!B\}$.  But since both $\Delta' \setminus \{!A\} \subseteq \Delta$
-  and $\Delta'' \setminus \{!B\} \subseteq \Delta$, that means
-  $\Struct M$ satisfies $\Gamma \Sequent \Delta$.  In case (b),
-  $\Struct M$ satisfies $\Gamma \Sequent \Delta$ since $!A \land !B
-  \in \Delta$.
-\item The last inference is \LeftR{\lor}: Exercise.
-\item The last inference is \LeftR{\lif}.  The premises are $\Gamma
-  \Sequent \Delta'$ and $\Gamma' \Sequent \Delta$, where $!A \in
-  \Delta'$ and $!B \in \Gamma'$.  By induction hypothesis, both are
-  valid.  Consider a !!{structure}~$\Struct M$.  We have two cases:
-  (a) $\Sat{M}{!A \lif !B}$ or (b) $\Sat/{M}{!A \lif !B}$.  In case
-  (a), either $\Sat/{M}{!A}$ or $\Sat{M}{!B}$.  In the former case, in
-  order for $\Struct M$ to satisfy $\Gamma \Sequent \Delta'$, it must
-  already satisfy $\Gamma \Sequent \Delta' \setminus \{!A\}$.  In the
-  latter case, it must satisfy $\Gamma' \setminus \{!B\} \Sequent
-  \Delta$.  But since both $\Delta' \setminus \{!A\} \subseteq \Delta$
-  and $\Gamma' \setminus \{!B\} \subseteq \Gamma$, that means $\Struct
-  M$ satisfies $\Gamma \Sequent \Delta$.  In case (b), $\Struct M$
-  satisfies $\Gamma \Sequent \Delta$ since $!A \lif !B \in \Gamma$.
+\item The last inference is a cut: then $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \AxiomC{}
+    \Deduce$!A, \Pi \fCenter \Lambda$
+    \RightLabel{\Cut}
+    \BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+  \end{prooftree}
+  Let $\Struct{M}$ be !!a{structure}.  By induction hypothesis, the
+  premises are valid, so $\Struct M$ satisfies both premises.  We
+  distinguish two cases: (a) $\Sat/{M}{!A}$ and (b) $\Sat{M}{!A}$.  In
+  case (a), in order for $\Struct M$ to satisfy the left premise, it
+  must satisfy $\Gamma \Sequent \Delta$.  But then it also satisfies
+  the conclusion.  In case (b), in order for $\Struct M$ to satisfy
+  the right premise, it must satisfy $\Pi \setminus \Lambda$.  Again,
+  $\Struct{M}$ satisfies the conclusion.
+\item The last inference is \RightR{\land}.  Then $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !B$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\Gamma \fCenter \Delta, !A \land !B$
+  \end{prooftree}
+  Consider a !!{structure}~$\Struct M$. If $\Struct{M}$ satisfies
+  $\Gamma \Sequent \Delta$, we are done. So suppose it doesn't. Since
+  $\Gamma \fCenter \Delta, !A$ is valid by induction hypothesis,
+  $\Sat{M}{!A}$. Similarly, since $\Gamma \Sequent \Delta, !B$ is
+  valid, $\Sat{M}{!B}$. But then $\Sat{M}{!A \land !B}$.\item The last
+  inference is \LeftR{\lor}: Exercise.
+\item The last inference is \LeftR{\lif}.  Then $\pi$ ends in
+  \begin{prooftree}
+    \AxiomC{}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    \AxiomC{}
+    \Deduce$!B, \Pi \fCenter \Lambda$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \Gamma, \Pi \fCenter \Delta, \Lambda$
+  \end{prooftree}
+  Again, consider !!a{structure}~$\Struct{M}$ and suppose $\Struct{M}$
+  doesn't satisfy $\Gamma, \Pi \Sequent \Lambda, \Pi$. We have to show
+  that $\Sat/{M}{!A \lif !B}$. If $\Struct{M}$ doesn't satisfy
+  $\Gamma, \Pi \Sequent \Lambda, \Pi$, it satisfies neither $\Gamma
+  \Sequent \Delta$ nor $\Pi \Sequent \Lambda$. Since, $\Gamma \Sequent
+  \Delta, !A$ is valid, we have $\Sat{M}{!A}$. Since $!B, \Pi \Sequent
+  \Lambda$ is valid, we have $\Sat/{M}{!B}$. But then $\Sat/{M}{!A
+    \lif !B}$, which is what we wanted to show.
 \end{enumerate}
 \end{proof}
 
 \begin{prob}
-Complete the proof of \olref[fol][seq][sou]{sequent-soundness}.
+Complete the proof of \olref[fol][seq][sou]{thm:sequent-soundness}.
 \end{prob}
 
 \begin{cor}
-\ollabel{weak-soundness}
-If $\Proves[\Log{LK}] !A$ then $!A$ is valid.
+\ollabel{cor:weak-soundness}
+If $\Proves !A$ then $!A$ is valid.
 \end{cor}
 
 \begin{cor}
-\ollabel{entailment-soundness}
-If $\Gamma \Proves[\Log{LK}] !A$ then $\Gamma \Entails !A$.
+\ollabel{cor:entailment-soundness}
+If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
 \end{cor}
 
 \begin{proof}
-If $\Gamma \Proves[\Log{LK}] !A$ then for some finite subset $\Gamma_0 \subseteq
-\Gamma$, there is !!a{derivation} of $\Gamma_0 \Sequent !A$.  By
-\olref{sequent-soundness}, every !!{structure} $\Struct M$ either
-makes some $!B \in \Gamma_0$ false or makes $!A$ true.  Hence, if
-$\Sat{M}{\Gamma}$ then also $\Sat{M}{!A}$.
+If $\Gamma \Proves !A$ then for some finite subset $\Gamma_0
+\subseteq \Gamma$, there is !!a{derivation} of $\Gamma_0 \Sequent !A$.
+By \olref{thm:sequent-soundness}, every !!{structure} $\Struct M$
+either makes some $!B \in \Gamma_0$ false or makes $!A$ true.  Hence,
+if $\Sat{M}{\Gamma}$ then also $\Sat{M}{!A}$.
 \end{proof}
 
 \begin{cor}
-\ollabel{consistency-soundness}
+\ollabel{cor:consistency-soundness}
 If $\Gamma$ is satisfiable, then it is consistent.
 \end{cor}
 
 \begin{proof}
-We prove the contrapositive.  Suppose that $\Gamma$ is not
-consistent.  Then $\Gamma \Proves[\Log{LK}] \lfalse$, i.e., there is a finite
-$\Gamma_0 \subseteq \Gamma$ and !!a{derivation} of $\Gamma_0 \Sequent
-\lfalse$.  By \olref{sequent-soundness}, $\Gamma_0 \Sequent \lfalse$ is
-valid.  Since $\Sat/{M}{\lfalse}$ for every !!{structure}~$\Struct M$,
-for $\Struct M$ to satisfy $\Gamma_0 \Sequent \lfalse$ there must be
-an $!E \in \Gamma_0$ so that $\Sat/{M}{!E}$, and since $\Gamma_0
-\subseteq \Gamma$, that $!E$ is also in~$\Gamma$.  In other words, no
-$\Struct M$ satisfies $\Gamma$, i.e., $\Gamma$ is not satisfiable.
+We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
+Then there is a finite $\Gamma_0 \subseteq \Gamma$ and !!a{derivation}
+of $\Gamma_0 \Sequent \quad$.  By \olref{thm:sequent-soundness},
+$\Gamma_0 \Sequent \quad$ is valid.  In other words, for every
+!!{structure}~$\Struct M$, there is $!C \in \Gamma_0$ so that
+$\Sat/{M}{!C}$, and since $\Gamma_0 \subseteq \Gamma$, that $!C$ is
+also in~$\Gamma$.  Thus, no $\Struct M$ satisfies $\Gamma$, and
+$\Gamma$ is not satisfiable.
 \end{proof}
 
 \end{document}
