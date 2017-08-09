@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
     # Additionally install these to packages to fix a bug saying tikz.sty is missing
     texlive-pictures \
-    pgf \
+    pgf 
     
 # Set the working directory to wd and copy the git repository into it
 WORKDIR /wd
