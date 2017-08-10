@@ -11,9 +11,9 @@
 \olsection{Examples of \usetoken{P}{derivation}}
 
 \begin{ex}
-Let's give a !!{derivation} of the !!{formula} $(!A \land !B) \lif !A$.
+Let's give a !!{derivation} of the !!{sentence} $(!A \land !B) \lif !A$.
 
-We begin by writing the desired end-!!{formula} at the bottom of the 
+We begin by writing the desired conclusion at the bottom of the 
 !!{derivation}.
 \[
 \AxiomC{}
@@ -22,9 +22,9 @@ We begin by writing the desired end-!!{formula} at the bottom of the
 \]
 
 Next, we need to figure out what kind of inference could result in
-!!a{formula} of this form. The !!{main operator} of the
-end-!!{formula} is $\lif$, so we'll try to arrive at the
-end-!!{formula} using the \Intro{\lif} rule. It is best to write down
+!!a{sentence} of this form. The !!{main operator} of the
+conclusion is $\lif$, so we'll try to arrive at the
+conclusion using the \Intro{\lif} rule. It is best to write down
 the assumptions involved and label the inference rules as you
 progress, so it is easy to see whether all assumptions have been
 !!{discharged} at the end of the proof.
@@ -48,23 +48,23 @@ use the $\land$ elim rule. This gives us the following proof:
 \DisplayProof
 \]
 
-We now have a correct !!{derivation} of the formula $(!A \land
+We now have a correct !!{derivation} of $(!A \land
 !B) \lif !A$.
 \end{ex}
 
 \begin{ex}
-Now let's give a !!{derivation} of the !!{formula} $(\lnot !A \lor !B)
+Now let's give a !!{derivation} of $(\lnot !A \lor !B)
 \lif (!A \lif !B)$.
 
-We begin by writing the desired end-!!{formula} at the bottom of the 
+We begin by writing the desired conclusion at the bottom of the 
 derivation.
 \[
 \AxiomC{}
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
 \DisplayProof
 \]
-To find a logical rule that could give us this end-!!{formula}, we
-look at the logical connectives in the end-!!{formula}: $\lnot$,
+To find a logical rule that could give us this conclusion, we
+look at the logical connectives in the conclusion: $\lnot$,
 $\lor$, and $\lif$. We only care at the moment about the first
 occurence of $\lif$ because it is the !!{main operator} of the
 !!{sentence} in the end-sequent, while $\lnot$, $\lor$ and the second
@@ -187,9 +187,9 @@ inference does not actually discharge any assumptions.
 
 \begin{ex}
 So far we have not needed the \FalseCl{} rule. It is special in that
-it allows us to discharge !!a{formula} that isn't a sub-!!{formula} of
+it allows us to discharge an assumption that isn't a sub-!!{formula} of
 the conclusion of the rule.  It is closely related to the \FalseInt{}
-rule; in fact, the \FalseInt{} rule is a special case of the
+rule. In fact, the \FalseInt{} rule is a special case of the
 \FalseCl{} rule---there is a logic called ``intuitionistic logic'' in
 which only \FalseInt{} is allowed.  The \FalseCl{} rule is a last
 resort when nothing else works.  For instance, suppose we want to
@@ -274,241 +274,14 @@ On the right side we use the same strategy, except we get $!A$ by \FalseCl:
 \end{prooftree}
 \end{ex}
 
-\begin{ex}
-When dealing with quantifiers, we have to make sure not to violate the
-eigenvariable condition, and sometimes this requires us to play around
-with the order of carrying out certain inferences. In general, it
-helps to try and take care of rules subject to the eigenvariable
-condition first (they will be lower down in the finished proof).
-
-Let's see how we'd give a !!{derivation} of the !!{formula}
-$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$.
-Starting as usual, we write
-\[
-\AxiomC{}
-\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
-We start by writing down what it would take to justify that last step
-using the \Intro{\lif} rule.
-\[
-\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
-\DeduceC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
-\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
-Since there is no obvious rule to apply to $\lnot \lforall[x][!A(x)]$,
-we will proceed by setting up the !!{derivation} so we can use the
-\Elim{\lexists} rule. Here we must pay attention to the eigenvariable
-condition, and choose a constant that does not appear in
-$\lexists[x][!A(x)]$ or any assumptions that it depends on.
-(Since no !!{constant}s appear, however, any choice will do fine.)
-\[
-\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
-\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
-\DeduceC{$\lnot \lforall[x][!A(x)]$}
-\DischargeRule{\Elim{\lexists}}{2}
-\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
-\UnaryInfC{$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
-In order to derive $\lnot \lforall[x][!A(x)]$, we will attempt to use
-the \Intro{\lnot} rule: this requires that we derive a contradiction,
-possibly using $\lforall[x][!A(x)]$ as an additional assumption. Of
-coursem, this contradiction may involve the assumption $\lnot !A(a)$
-which will be discharged by the \Intro{\lif} inference. We can set it
-up as follows:
-\[
-\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
-\AxiomC{$\Discharge{\lnot !A(a)}{2}, \Discharge{\lforall[x][!A(x)]}{3}$}
-\DeduceC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{3}
-\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
-\DischargeRule{\Elim{\lexists}}{2}
-\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
-\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
-It looks like we are close to getting a contradiction. The easiest
-rule to apply is the \Elim{\lforall}, which has no eigenvariable
-conditions. Since we can use any term we want to replace the
-universally quantified~$x$, it makes the most sense to continue
-using~$a$ so we can reach a contradiction.
-\[
-\AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
-\AxiomC{$\Discharge{\lnot !A(a)}{2}$}
-\AxiomC{$\Discharge{\lforall[x][!A(x)]}{3}$}
-\RightLabel{\Elim{\lforall}}
-\UnaryInfC{$!A(a)$}
-\RightLabel{\Elim{\lnot}}
-\BinaryInfC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{3}
-\UnaryInfC{$\lnot \lforall[x][!A(x)]$}
-\DischargeRule{\Elim{\lexists}}{2}
-\BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
-\UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
-
-It is important, especially when dealing with quantifiers, to double
-check at this point that the eigenvariable condition has not been
-violated. Since the only rule we applied that is subject to the
-eigenvariable condition was \Elim{\exists}, and the eigenvariable~$a$
-does not occur in any assumptions it depends on, this is a
-correct derivation.
-\end{ex}
-
 \begin{prob}
-Give !!{derivation}s of the following !!{formula}s:
+Give !!{derivation}s of the following:
 \begin{enumerate}
 \item $\lnot(!A \lif !B) \lif (!A \land \lnot !B)$
-\item $\lforall[x][(!A(x) \lif !B)] \lif (\lexists[y][!A(y)] \lif !B)$
+\item $(!A \lif !C) \lor (!B \lif !C)$ from the assumption $(!A \land
+  !B) \lif !C$
 \end{enumerate}
 \end{prob}
 
-\begin{ex}
-Sometimes we may derive a !!{formula} from other !!{formula}s.
-In these cases, we may have undischarged assumptions. It is 
-important to keep track of our assumptions as well
-as the end goal.
-
-Let's see how we'd give a !!{derivation} of the !!{formula}
-$\lexists[x][!C(x,b)]$ from the assumptions $\lexists[x][(!A(x) 
-\land !B(x))]$ and $\lforall[x][(!B(x) \lif !C(x,b)]$.
-Starting as usual, we write the end-!!{formula} at the
-bottom.
-\[
-\AxiomC{}
-\UnaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
-
-We have two premises to work with. To use the first, i.e., try to find
-a !!{derivation} of $\lexists[x][!C(x, b)]$ from $\lexists[x][(!A(x)
-  \land !B(x))]$ we would use the \Elim{\lexists} rule. Since it has
-an eigenvariable condition, we will apply that rule first. We get the
-following:
-\[
-\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
-\AxiomC{$\Discharge{!A(a) \land !B(a)}{1}$}
-\DeduceC{$\lexists[x][!C(x,b)]$}
-\DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
-The two assumptions we are working with share~$!B$.  It may be useful
-at this point to apply \Elim{\land} to separate out~$!B(a)$.
-\[
-\AxiomC{$\lexists[x][(!A(x) \land !B(x)])$}
-\AxiomC{$\Discharge{!A(a) 
-\land !B(a)}{1}$}
-\RightLabel{\Elim{\land}}
-\UnaryInfC{$!B(a)$}
-\DeduceC{$\lexists[x][!C(x,b)]$}
-\DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
-
-The second assumption we have to work with is~$\lforall[x][(!B(x) \lif
-  !C(x,b)]$. Since there is no eigenvariable condition we can
-instantiate $x$ with the !!{constant}~$a$ using \Elim{\lforall} to get
-$!B(a) \lif !C(a, b)$.  We now have both $!B(a) \lif !C(a,b)$ and
-$!B(a)$. Our next move should be a straightforward application of the
-\Elim{\lif} rule.
-\[
-\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
-\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
-\RightLabel{\Elim{\lforall}}
-\UnaryInfC{$!B(a) \lif !C(a,b)$}
-\AxiomC{$\Discharge{!A(a) 
-\land !B(a)}{1}$}
-\RightLabel{\Elim{\land}}
-\UnaryInfC{$!B(a)$}
-\RightLabel{\Elim{\lif}}
-\BinaryInfC{$!C(a,b)$}
-\DeduceC{$\lexists[x][!C(x,b)]$}
-\DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
-We are so close!{} One application of \Intro{\lexists} and we
-have reached our goal.
-\[
-\AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
-\AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
-\RightLabel{\Elim{\lforall}}
-\UnaryInfC{$!B(a) \lif !C(a,b)$}
-\AxiomC{$\Discharge{!A(a) 
-\land !B(a)}{1}$}
-\RightLabel{\Elim{\land}}
-\UnaryInfC{$!B(a)$}
-\RightLabel{\Elim{\lif}}
-\BinaryInfC{$!C(a,b)$}
-\RightLabel{\Intro{\lexists}}
-\UnaryInfC{$\lexists[x][!C(x,b)]$}
-\DischargeRule{\Elim{\lexists}}{1}
-\BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
-Since we ensured at each step that the eigenvariable
-conditions were not violated, we can be confident that this
-is a correct derivation.
-\end{ex}
-
-\begin{ex}
-Give a !!{derivation} of the !!{formula}
-$\lnot\lforall[x][!A(x)]$ from the assumptions $\lforall[x][!A(x)] 
-\lif \lexists[y][!B(y)]$ and $\lnot\lexists[y][!B(y)]$.
-Starting as usual, we write the target !!{formula} at the bottom.
-\[
-\AxiomC{}
-\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
-The last line of the !!{derivation} is a negation, so let's try using
-\Intro{\lnot}. This will require that we figure out how to !!{derive}
-a contradiction.
-\[
-\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
-\DeduceC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{1}
-\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
-So far so good. We can use \Elim{\lforall} but it's not obvious
-if that will help us get to our goal. Instead, let's use one of our 
-assumptions. $\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$ together
-with $\lforall[x][!A(x)]$ will allow us to use the \Elim{\lif} rule.
-\[
-\AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
-\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
-\RightLabel{\Elim{\lif}}
-\BinaryInfC{$\lexists[y][!B(y)]$}
-\DeduceC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{1}
-\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
-We now have one final assumption to work with,
-and it looks like this will help us reach a contradiction
-by using \Elim{\lnot}.
-\[
-\AxiomC{$\lnot\lexists[y][!B(y)]$}
-\AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
-\AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
-\RightLabel{\Elim{\lif}}
-\BinaryInfC{$\lexists[y][!B(y)]$}
-\RightLabel{\Elim{\lnot}}
-\BinaryInfC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{1}
-\UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
-\end{ex}
 
 \end{document}

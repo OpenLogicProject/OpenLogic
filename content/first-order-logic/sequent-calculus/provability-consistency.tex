@@ -1,0 +1,131 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{prv}
+
+\olsection{\usetoken{S}{derivability} and Consistency}
+
+We will now establish a number of properties of the !!{derivability}
+relation.  They are independently interesting, but each will play a
+role in the proof of the completeness theorem.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  If $\Gamma \Proves !A$ and $\Gamma \cup \{!A\}$ is
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+There are finite $\Gamma_0$ and $\Gamma_1 \subseteq \Gamma$ such that
+$\Log{LK}$ !!{derive}s $\Gamma_0 \Sequent !A$ and $!A, \Gamma_1
+\Sequent \quad$.  Let the $\Log{LK}$-!!{derivation} of $\Gamma_0 \Sequent
+!A$ be~$\pi_0$ and the $\Log{LK}$-!!{derivation} of $\Gamma_1, !A
+\Sequent \quad$ be~$\pi_1$. We can then !!{derive}
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\pi_0$}
+\Deduce$ \Gamma_0 \fCenter !A $
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!A, \Gamma_1 \fCenter $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_0,\Gamma_1 \fCenter $
+\end{prooftree}
+
+Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma$~is inconsistent.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lnot}
+  $\Gamma \cup \{!A\}$ is inconsistent iff $\Gamma \Proves \lnot !A$.
+\end{prop}
+
+\begin{proof}
+For the forward direction, suppose that $\Gamma \cup \{!A\}$ is
+inconsistent. Then there is a finite set $\Gamma_0 \subseteq \Gamma$
+such that $\Log{LK}$ !!{derive}s $!A, \Gamma_0 \Sequent \quad$.  Let
+$\pi_0$ be an $\Log{LK}$-!!{derivation} of $!A, \Gamma_0 \Sequent
+\quad$ and consider
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\pi_0$}
+\Deduce$!A, \Gamma_0 \fCenter \quad$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+\end{prooftree}
+
+For the reverse direction, suppose that $\Gamma \Proves \lnot
+!A$. Then for some finite $\Gamma_1 \subseteq \Gamma$, $\Log{LK}$
+!!{derive}s $\Gamma_1 \Sequent \lnot !A$, say, using
+!!a{derivation}~$\pi_1$. Now consider
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma_1 \fCenter \lnot !A$
+\AxiomC{$!A \fCenter !A$}
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, !A \fCenter $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_1, !A \fCenter $
+\end{prooftree}
+Since $\Gamma_1 \subseteq \Gamma$, we get that $\Gamma \cup \{!A\}$ is
+inconsistent.
+\end{proof}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is
+  inconsistent.
+\end{prop}
+
+\begin{proof}
+  Suppose $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$.  Then there
+  is !!a{derivation}~$\pi$ of a sequent $\Gamma_0 \Sequent !A$. The
+  sequent $\lnot !A, \Gamma_0 \Sequent \quad$ is also !!{derivable}:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\pi$}
+    \Deduce$\Gamma_0 \fCenter !A$
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, !A \fCenter$
+    \RightLabel{\LeftR{\Exchange}}
+    \UnaryInf$!A, \lnot !A \fCenter$
+    \RightLabel{\Cut}
+    \BinaryInf$\Gamma, \lnot !A \fCenter$
+  \end{prooftree}
+  Since $\lnot !A \in \Gamma$ and $\Gamma_0 \subseteq \Gamma$, this
+  shows that $\Gamma$ is inconsistent.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  If $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+There are finite sets $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1
+\subseteq \Gamma$ and $\Log{LK}$-!!{derivation}s $\pi_0$ and $\pi_1$
+of $!A, \Gamma_0 \Sequent \quad$ and $\lnot !A, \Gamma_1 \Sequent
+\quad$, respectively. We can then !!{derive}
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{$\pi_0$}
+\Deduce$ !A, \Gamma_0 \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\lnot !A, \Gamma_1 \fCenter  $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma_0, \Gamma_1 \fCenter $
+\end{prooftree}
+Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
+$\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$. Hence $\Gamma$ is
+inconsistent.
+\end{proof}
+
+\end{document}

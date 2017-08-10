@@ -18,8 +18,8 @@ and consistency for LK.
 Just as we've defined a number of important semantic notions
 (validity, entailment, satisfiabilty), we now define corresponding
 \emph{proof-theoretic notions}.  These are not defined by appeal to
-satisfaction of sentences in !!{structure}s, but by appeal to the
-!!{derivability} or !!{nonderivability} of certain !!{formula}s from
+satisfaction of !!{sentence}s in !!{structure}s, but by appeal to the
+!!{derivability} or !!{nonderivability} of certain !!{sentence}s from
 others.  It was an important discovery, due to G\"odel, that these
 notions coincide.  That they do is the content of the
 \emph{completeness theorem}.
@@ -27,7 +27,7 @@ notions coincide.  That they do is the content of the
 
 
 \begin{defn}[Theorems]
-A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation}
+A !!{sentence}~$!A$ is a \emph{theorem} if there is a !!{derivation}
 of~$!A$ in natural deduction in which all assumptions are
 !!{discharged}.  We write $\Proves !A$ if $!A$ is a theorem and
 $\Proves/ !A$ if it is not.
@@ -36,13 +36,13 @@ $\Proves/ !A$ if it is not.
 \begin{defn}[!!^{derivability}]
 !!^a{sentence} $!A$ is \emph{!!{derivable} from} a set of
 !!{sentence}s~$\Gamma$, $\Gamma \Proves !A$, if there is a
-!!{derivation} with end-!!{formula}~$!A$ and in which every assumption
+!!{derivation} with conclusion~$!A$ and in which every assumption
 is either !!{discharged} or is in~$\Gamma$. If $!A$ is not
 !!{derivable} from $\Gamma$ we write $\Gamma \Proves/ !A$.
 \end{defn}
 
 \begin{defn}[Consistency]
-A set of sentences~$\Gamma$ is \emph{inconsistent} iff $\Gamma
+A set of !!{sentence}s~$\Gamma$ is \emph{inconsistent} iff $\Gamma
 \Proves \lfalse$.  If $\Gamma$ is not inconsistent, i.e., if
 $\Gamma \Proves/ \lfalse$, we say it is \emph{consistent}.
 \end{defn}
@@ -82,7 +82,7 @@ $\delta_1$ be the corresponding derivation of $\lfalse$ from
 \begin{prop}
 \ollabel{prop:incons}
 $\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
-  sentence~$!A$.
+  !!{sentence}~$!A$.
 \end{prop}
 
 \begin{proof}
@@ -169,12 +169,12 @@ This shows $\Gamma \Proves !B$.
 
 \begin{proof}
   \begin{enumerate}
-    \item If $\Gamma \Proves !A$, then there is !!a{derivation}
-      of~$!A$ from~$\Gamma$. But any !!{derivation} is finite, so can
-      only contain finitely many !!{undischarged} assumptions. Let
-      $\Gamma_0$ be the set of !!{undischarged} assumptions of the
-      !!{derivation}; it is !!a{derivation} of~$!A$ from a
-      finite~$\Gamma_0 \subseteq \Gamma$.
+    \item If $\Gamma \Proves !A$, then there is
+      !!a{derivation}~$\delta$ of~$!A$ from~$\Gamma$. Let $\Gamma_0$
+      be the set of !!{undischarged} assumptions of~$\delta$.  Since
+      any !!{derivation} is finite, $\Gamma_0$ can only contain
+      finitely many !!{sentence}s.  So, $\delta$ is !!a{derivation}
+      of~$!A$ from a finite~$\Gamma_0 \subseteq \Gamma$.
     \item This is the contrapositive of (1) for the special case $!A
       \ident \lfalse$.
   \end{enumerate}

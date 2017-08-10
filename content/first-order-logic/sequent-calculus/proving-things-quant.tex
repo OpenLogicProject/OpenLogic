@@ -1,0 +1,93 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{prq}
+
+\olsection{\usetoken{P}{derivation} with Quantifiers}
+
+\begin{ex}
+Give an $\Log{LK}$-derivation of the sequent $\lexists[x][\lnot !A(x)]
+\Sequent \lnot \lforall[x][!A(x)]$.
+
+When dealing with quantifiers, we have to make sure not to violate the
+eigenvariable condition, and sometimes this requires us to play around
+with the order of carrying out certain inferences. In general, it
+helps to try and take care of rules subject to the eigenvariable
+condition first (they will be lower down in the finished proof). Also,
+it is a good idea to try and look ahead and try to guess what the
+initial sequent might look like. In our case, it will have to be
+something like $!A(a) \Sequent !A(a)$. That means that when we are
+``reversing'' the quantifier rules, we will have to pick the same
+term---what we will call $a$---for both the $\lforall$ and the
+$\lexists$ rule. If we picked different terms for each rule, we would
+end up with something like $!A(a) \Sequent !A(b)$, which, of course,
+is not derivable.
+
+Starting as usual, we write
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+We could either carry out the \LeftR{\exists} rule or the \RightR{\lnot}
+rule. Since the \LeftR{\exists} rule is subject to the eigenvariable
+condition, it's a good idea to take care of it sooner rather than
+later, so we'll do that one first.
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+Applying the \LeftR{\lnot} and \RightR{\lnot} rules backwards, we get
+\begin{prooftree}
+\AxiomC{}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(a), \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A(a) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
+\end{prooftree}
+At this point, our only option is to carry out the \LeftR{\forall}
+rule. Since this rule is not subject to the eigenvariable restriction,
+we're in the clear. Remember, we want to try and obtain an initial
+sequent (of the form $!A(a) \Sequent !A(a)$), so we should choose $a$
+as our argument for $!A$ when we apply the rule.
+\begin{prooftree}
+\Axiom$!A(a) \fCenter !A(a)$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A(a), \lforall[x][!A(x)] \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\lforall[x][!A(x)], \lnot !A(a) \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\end{prooftree}
+It is important, especially when dealing with quantifiers, to double
+check at this point that the eigenvariable condition has not been
+violated. Since the only rule we applied that is subject to the
+eigenvariable condition was \LeftR{\exists}, and the eigenvariable~$a$
+does not occur in its lower sequent (the end-sequent), this is a
+correct derivation.
+\end{ex}
+
+\begin{prob}
+Give !!{derivation}s of the following sequents:
+\begin{enumerate}
+\item $\lforall[x][(!A(x) \lif !B)] \Sequent (\lexists[y][!A(y)] \lif !B)$
+\item $\lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$
+\end{enumerate}
+\end{prob}
+
+\end{document}

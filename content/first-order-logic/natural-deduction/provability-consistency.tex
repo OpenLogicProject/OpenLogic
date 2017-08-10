@@ -1,0 +1,122 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{prv}
+\olsection{\usetoken{S}{derivability} and Consistency}
+
+We will now establish a number of properties of the !!{derivability}
+relation.  They are independently interesting, but each will play a
+role in the proof of the completeness theorem.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  If $\Gamma \Proves !A$ and $\Gamma \cup \{!A\}$ is inconsistent,
+  then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+Let the !!{derivation} of~$!A$ from~$\Gamma$ be~$\delta_1$ and the
+!!{derivation} of~$\lfalse$ from $\Gamma \cup \{!A\}$
+be~$\delta_2$. We can then !!{derive}:
+\begin{prooftree}
+\AxiomC{$\Gamma, \Discharge{!A}{1}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\AxiomC{$\Gamma$}
+\RightLabel{$\delta_1$}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+In the new !!{derivation}, the assumption~$!A$ is !!{discharged}, so it is
+!!a{derivation} from~$\Gamma$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lnot}
+  $\Gamma \cup \{!A\}$ is inconsistent iff $\Gamma \Proves \lnot !A$.
+\end{prop}
+
+\begin{proof}
+For the forward directions, suppose that $\Gamma \cup \{!A\}$ is
+inconsistent. Then there is !!a{derivation}~$\delta_0$ of $\lfalse$
+from $\Gamma \cup \{!A\}$.  Consider
+\[
+\AxiomC{$\Gamma, \Discharge{!A}{1}$}
+\RightLabel{$\delta$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\DisplayProof
+\]
+This shows that $\Gamma \Proves \lnot !A$.
+
+Conversely, suppose $\Gamma \Proves \lnot !A$ by
+!!a{derivation}~$\delta_1$. Then
+\begin{prooftree}
+\AxiomC{$\Gamma$}
+\RightLabel{$\delta_1$}
+\DeduceC{$\lnot !A$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+shows that $\Gamma \cup \{!A\}$ is inconsistent.
+\end{proof}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is
+  inconsistent.
+\end{prop}
+
+\begin{proof}
+  Suppose $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$.  Then there
+  is !!a{derivation}~$\delta$ of~$!A$ from~$\Gamma$. Consider this
+    simple application of the $\Elim{\lnot}$ rule:
+  \begin{prooftree}
+    \AxiomC{$\lnot !A$}
+    \AxiomC{$\Gamma$}
+    \RightLabel{$\delta$}
+    \DeduceC{$!A$}
+    \RightLabel{\Elim{\lnot}}
+    \BinaryInfC{$\lfalse$}
+  \end{prooftree}
+  Since $\lnot !A \in \Gamma$, all !!{undischarged} assumptions are
+  in~$\Gamma$, this shows that $\Gamma \Proves \lfalse$.
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  If $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+There are !!{derivation}s $\delta_1$ and $\delta_2$ of~$\lfalse$ from
+  $\Gamma \cup \{ !A \}$ and $\lfalse$ from $\Gamma \cup \{ \lnot !A
+  \}$, respectively. We can then !!{derive}
+\begin{prooftree}
+\AxiomC{$\Gamma, \Discharge{\lnot !A}{2}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{2}
+\UnaryInfC{$\lnot \lnot !A$}
+\AxiomC{$\Gamma, \Discharge{!A}{1}$}
+\RightLabel{$\delta_1$}
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{1}
+\UnaryInfC{$\lnot !A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\end{prooftree}
+Since the assumptions $!A$ and $\lnot !A$ are !!{discharged}, this is
+!!a{derivation} of~$\lfalse$ from~$\Gamma$ alone. Hence $\Gamma$ is
+inconsistent.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,89 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{der}
+
+\olsection{\usetoken{P}{derivation}}
+
+\begin{explain}
+We've said what an assumption is, and we've given the rules of
+inference.  !!^{derivation}s in the sequent calculus are inductively
+generated from these: each !!{derivation} either is an assumption
+on its own, or consists of one, two, or three !!{derivation}s followed
+by a correct inference.
+\end{explain}
+
+\begin{defn}[!!^{derivation}]
+A \emph{!!{derivation}} of !!a{sentence}~$!A$ from assumptions~$\Gamma$
+is a tree of !!{sentence}s satisfying the following conditions:
+\begin{enumerate}
+\item The topmost !!{sentence}s of the tree are either in $\Gamma$ or
+  are !!{discharged} by an inference in the tree.
+\item The bottommost !!{sentence} of the tree is~$!A$.
+\item Every !!{sentence} in the tree except~$!A$ is a premise of a correct
+  application of am inference rule whose conclusion stands directly
+  below that !!{sentence} in the tree.
+\end{enumerate}
+We then say that $!A$ is the \emph{conclusion} of the
+!!{derivation} and that $!A$ is \emph{!!{derivable}} from~$\Gamma$.
+\end{defn}
+
+\begin{ex}
+Every assumption on its own is !!a{derivation}. So, e.g., $!C$ by
+itself is !!a{derivation}, and so is $!D$ by itself.  We can obtain a
+new !!{derivation} from these by applying, say, the $\Intro{\land}$
+rule,
+\begin{prooftree}
+\AxiomC{$!A$}
+\AxiomC{$!B$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !B$}
+\end{prooftree}
+These rules are meant to be general: we can replace the $!A$ and~$!B$
+in it with any !!{sentence}s, e.g., by $!C$ and~$!D$. Then the
+conclusion would be $!C \land !D$, and so
+\begin{prooftree}
+\AxiomC{$!C$}
+\AxiomC{$!D$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\end{prooftree}
+is a correct !!{derivation}. Of course, we can also switch the
+assumptions, so that $!D$ plays the role of~$!A$ and $!C$ that
+of~$!B$. Thus,
+\begin{prooftree}
+\AxiomC{$!D$}
+\AxiomC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!D \land !C$}
+\end{prooftree}
+is also a correct derivation.
+
+We can now apply another rule, say, $\Intro{\lif}$, which allows us to
+conclude a conditional and allows us to !!{discharge} any assumption
+that is identical to the conclusion of that conditional. So both of
+the following would be correct !!{derivation}s:
+\begin{prooftree}
+\AxiomC{$\Discharge{!C}{1}$}
+\AxiomC{$!D$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$!C \lif (!C \land !D)$}
+\DisplayProof
+\AxiomC{$!C$}
+\AxiomC{$\Discharge{!D}{1}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!C \land !D$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$!D \lif (!C \land !D)$}
+\end{prooftree}
+
+\end{ex}
+
+\end{document}
