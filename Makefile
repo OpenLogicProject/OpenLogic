@@ -49,6 +49,9 @@ open-logic-config.pdf: open-logic-config.sty
 clean:	
 	latexmk -c $(ALLTEXFILES)
 
+clean-all:
+	latexmk -C $(ALLTEXFILES)
+
 index.html: FORCE_MAKE
 	git checkout master
 	cp misc/index.start.html index.html
