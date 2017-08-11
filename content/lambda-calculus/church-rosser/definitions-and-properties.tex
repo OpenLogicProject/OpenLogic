@@ -1,0 +1,77 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: definitions-and-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{dap}
+
+\olsection{Definition and Properties}
+
+In this chapter we introduce the concept of Church-Rosser property and
+some common properties of this property.
+
+\begin{defn}[Church-Rosser property, CR]
+  A relation $\xredone$ on terms is said to satisfy \emph{Church-Rosser
+    property} iff:
+  
+  If $M \xredone P$ and $M \xredone Q$, then there exsits some $N$
+  such that $P \xredone N$ and $Q \xredone N$.
+\end{defn}
+
+Viewing lambda calculus as a computation model, term can be viewed as
+``expressions'', and a relation on it is then some ``calculation
+rules'', what Church-Rosser property states is that when there is more
+than one way to ``calculate'' a ``expression'', the ``expression'' after
+any calculation represents essentially the
+same thing no matter which way is chosen, in the sense that both
+``expression'' can be further ``calculated'' to a single expression.
+
+As an analogous example in elementary algebra, there's more than one way to calculate $4*(1+2)+3$:
+either to $4*3+3$ or to $4*1+4*2+3$; both of which, however, can be
+further calculated to $12+3$.
+
+Moreover, an immediate corollary of the property in the case of $\beta$-reduction is that if a term has
+a normal form, then it is unique: If $M$ can be
+reduced to $P$ and $Q$, both of which are normal forms, then by
+Church-Rosser property, there exists some $N$ such that both $P$ and
+$Q$ reduce to it. But $P$ and $Q$ are normal forms, thus the
+reduction to $N$ can only be the trivial case, i.e.: $P$ is $Q$ is
+$N$. This justifies our speaking of \emph{the} normal form of a term.
+
+Continuing our viewing lambda calculus as a computation model, normal form of
+a term can be thought of as ``final result'' of the term, then the above
+corollary means there's only one, if any, ``result'' of a term, just
+like there is only result of $4*(1+2)+3$: $16$.
+
+\begin{thm} \ollabel{thm:str}
+  If a relation $\xredone$ satisfies Church-Rosser property, and $\xred$ is the
+  smallest transitive relation containing $\xredone$, then $\xred$ satisfies
+  Church-Rosser property too.
+\end{thm}
+\begin{proof}
+  Suppose $M \xredone P_1 \xredone \ldots \xredone P_m$, $M \xredone Q_1
+  \xredone \ldots \xredone Q_n$.
+  
+  We will prove this theorem by constructing a grid $N$ of terms, whose height is $m + 1$ and width $n + 1$. We use $N_{i,j}$ to denote the terms
+  on the $i$-th row and $j$-th column.
+  
+  We construct $N$ in such a way that $N_{i,j} \xredone N_{i+1,j}$ and
+  $N_{i,j} \xredone N_{i,j+1}$. It is defined as follows:
+  \begin{align*}
+    N_{0,0} &= M \\
+    N_{i,0} &= P_i && 1 \le i \le m \\
+    N_{0,j} &= Q_j && 1 \le j \le n \\
+    otherwise: & \\
+    N_{i,j} &= R && N_{i-1,j} \xredone R, N_{i,j-1} \xredone R \\
+            & && \text{by CR of $\xredone$}
+  \end{align*}
+
+  Now we have $N_{m,0} \xredone \ldots \xredone N_{m,n}$ and $N_{0,n}
+  \xredone \ldots \xredone N_{m,n}$. Note $N_{m,0}$ is $P$ and $N_{0,n}$
+  is $Q$. By definition of $\xred$ the theorem follows.
+\end{proof}
+
+\end{document}

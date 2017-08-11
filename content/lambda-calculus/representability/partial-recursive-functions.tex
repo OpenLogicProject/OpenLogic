@@ -1,0 +1,43 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: partial-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{rep}{par}
+\olsection{Partial recursive functions}
+
+In this section we will discuss the representation of partial
+recursive functions. It differs from general recursive function in
+that the functions in unbounded search are not necessarily
+regular, removing the total-ness and bringing us troubles. For example, we may want to
+reuse the representation of composition of total
+functions; for simplicity let's only consider the case of one inner
+function of one argument:
+\begin{align*}
+  \num{f(g(x))} &\eqs \lambd[x][\num{f} (\num{g} x)]
+\end{align*}
+however this is problematic: consider when $g(x)$ is
+undefined, meaning $\num{g} x$ has no normal
+form (assuming representation of $g$ works); In most cases this makes
+$\num{f} (\num{g} x)$ has no normal forms either, which is what we want; but consider when
+$\num{f}$ is $\lambd[x][\lambd[y][y]]$, in which case $\num{f}
+(\num{g} x)$ has normal form of $\lambd[y][y]$, not
+satisfying our definition of representability.
+
+This problem has been studied and some workarounds has be invented, 
+which are, however, somewhat more complicated and less intuitive than the
+approach we have taken. As this is a introductory text, we only hope to
+give the reader a taste of how lambda calculus represents things, thus
+these workarounds are omitted here. Interested reader can find other
+reference texts for the actual working method.
+
+Still, we present the theorem here without proof:
+\begin{thm}
+  All partial recursive functions are lambda representable.
+\end{thm}
+
+\end{document}
+

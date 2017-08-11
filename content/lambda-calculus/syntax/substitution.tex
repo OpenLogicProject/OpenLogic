@@ -1,0 +1,175 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: pre-substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{sub}
+\olsection{Substitution}
+
+As mentioned earlier, free variables are references to environment variables
+, thus it makes sense to actually use a specific value in the place of free
+variables. For example, we may want to replace $f$ in
+$\lambd[x][f x]$ with a specific term like the identity
+$\lambd[y][y]$ resulting in $\lambd[x][(\lambd[y][y]) x]$. This is
+called substitution.
+
+We define the subtitution as follows:
+
+\begin{defn}[Substitution] \ollabel{def}
+  The \emph{substitution} of term $N$ for a variable $x$ in a term $M$, or
+  $\Subst{M}{N}{x}$,  is defined inductively by:
+  \begin{align}
+    \Subst{x}{N}{x}       &= N \ollabel{def:1} \\
+    \Subst{y}{N}{x}       &= y, \text{if} x \neq y \ollabel{def:2} \\
+    \Subst{PQ}{N}{x} &= (\Subst{P}{N}{x}) (\Subst{Q}{N}{x}) \ollabel{def:3} \\
+    \Subst{(\lambd[y][P])}{N}{x}  &= \lambd[y][\Subst{P}{N}{x}], \text{if} x \neq y
+                                        \text{and} y \notin FV(N) \ollabel{def:4}
+  \end{align}
+  otherwise it is undefined.
+\end{defn}
+
+\olref{def:1} through \olref{def:3} are routine. The last line,
+especially the conditions, is the meat. 
+
+$x \neq y$ because we don't want to replace reference to parameters.
+For example, if we force the substitution
+$\Subst{\lambd[x][x]}{y}{x}$ we finally get $\lambd[x][y]$ which
+is not what we want.
+
+$y \notin FV(N)$? Because in this case $N$ contains references to the environment variable $y$, which,
+after $N$ replaces $x$ in $P$, will be bound by the abstraction over
+$y$. That will result in a term with different intuitive meaning, as
+these $y$ no longer refer to the environment variables but instead
+the parameter of that abstraction. 
+
+For example, we cannot do $\Subst{\lambd[y][x]}{y}{x}$ because
+otherwise it results in $\lambd[y][y]$, a term accepts an argument and
+returns it directly. But the substitute $y$ is not likely refering
+to the $y$ bound by $\lambd[y]$, but instead, more likely another
+environment variable named $y$! So the result we actually want is a
+function that accepts an argument, drop it, and returns the
+environment variable $y$ anyway.
+
+\begin{prob}
+  Do the following substitution.
+  \begin{enumerate}
+  \item $\Subst{\lambd[y][x(\lambd[w][vwx])]}{(uv)}{x}$
+  \item $\Subst{\lambd[y][x(\lambd[x][x])]}{(\lambd[y][xy])}{x}$
+  \item $\Subst{y(\lambd[v][xv])}{(\lambd[y][vy])}{x}$
+  \end{enumerate}
+\end{prob}
+
+\begin{thm} \ollabel{thm:notinfv}
+  If $x \notin FV(M)$, then $FV(\Subst{M}{Q}{x}) = FV(M)$, if
+  the left hand is defined.
+\end{thm}
+\begin{proof}
+  By induction on the formation of $M$.
+  \begin{enumerate}
+    \item $M$ is of the form $\lambd[y][N]$, and
+      since $\Subst{\lambd[y][N]}{Q}{x}$ is defined, it has to be
+      $\lambd[y][\Subst{N}{Q}{x}]$; then $\Subst{N}{Q}{x}$ has
+      to be defined; also, $x \neq y$ and $x \notin FV(Q)$. Then:
+      \begin{align*}
+        &FV(\Subst{\lambd[y][N]}{Q}{x}) \\
+        =&FV(\lambd[y][\Subst{N}{Q}{x}]) && \text{by \olref{def:4}}\\
+        =&FV(\Subst{N}{Q}{x}) \setminus \{y\} && \text{by
+                                                     \olref[fv]{def:2}}
+        \\
+        =&FV(N) \setminus \{y\} && \text{by inductive hypothesis} \\
+        =&FV(\lambd[y][N]) && \text{by \olref[fv]{def:2}}
+      \end{align*}
+    \item The other two cases are easy and left as exercises. \ollabel{thm:notinfv:2}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Prove \olref{thm:notinfv:2}.
+\end{prob}
+
+\begin{thm} \ollabel{thm:infv}
+  If $y \in FV(M)$, then $FV(\Subst{M}{R}{y}) = (FV(M) \setminus
+  {y}) \cup FV(R)$, provided the left hand is defined.
+\end{thm}
+\begin{proof}
+  By induction on the formation of $M$.
+  \begin{enumerate}
+  \item If it is a varialbe, left as exercise. \ollabel{thm:infv:1}
+  \item $M$ is of the form $\lambd[x][N]$. Since
+    $\Subst{\lambd[x][N]}{R}{y}$ is defined, it has to be
+    $\lambd[x][\Subst{N}{R}{y}]$, with $\Subst{N}{R}{y}$
+    defined, $x \neq y$ and $x \notin FV(N)$; also, since $y \in
+    FV(\lambd[x][N])$, we have $y \in FV(N)$ too; then:
+    \begin{align*}
+      &FV(\Subst{(\lambd[x][N])}{R}{y}) \\
+      =&FV(\lambd[x][\Subst{N}{R}{y}]) \\
+      =&FV(\Subst{N}{R}{y}) \setminus \{x\} \\
+      =&((FV(N) \setminus \{y\}) \cup FV(R)) \setminus \{x\}
+       && \text{by inductive hypothesis} \\
+      =&(FV(N) \setminus \{y\} \setminus \{x\}) \cup FV(R)
+       && x \notin FV(R) \\
+      =&(FV(N) \setminus \{x\} \setminus \{y\}) \cup FV(R) \\
+      =& (FV(\lambd[x][N]) \setminus \{y\}) \cup FV(R)
+    \end{align*}
+  \item If $M$ is of the form $PQ$. Since
+    $\Subst{(PQ)}{R}{y}$ is defined, it has to be
+    $(\Subst{P}{R}{y})(\Subst{Q}{R}{y})$ with both substitution
+    defined; also, since $y \in FV(PQ)$, either $y \in FV(P)$ or
+    $y \in FV(Q)$ or both. We have to examine all three cases, which
+    we will left to the reader.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Prove \olref{thm:infv:1}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:clr}
+  $x \notin FV(\Subst{M}{N}{x})$, if right hand is
+  defined and $x \notin FV(N)$.
+\end{thm}
+\begin{proof}
+  Left as exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \ollabel{thm:clr}.
+\end{prob}
+
+
+\begin{thm}\ollabel{thm:inv}
+  If $\Subst{M}{y}{x}$ is defined and $y \notin FV(M)$, then $\Subst{\Subst{M}{y}{x}}{x}{y} \eq M$.
+\end{thm}
+\begin{proof}
+  By induction on formation of $M$.
+  \begin{enumerate}
+  \item $M$ is just a variable $z$. Left as exercise. \ollabel{thm:inv:var}
+  \item $M$ is of the form $\lambd[z][N]$. Because
+    $\Subst{\lambd[z][N]}{y}{x}$ is defined, we are pretty sure
+    that $z \neq x$ and $z \neq y$. So:
+    \begin{align*}
+      &\Subst{\Subst{(\lambd[z][N])}{y}{x}{y}{x}}{x}{y}\\
+      =&\Subst{(\lambd[z][\Subst{N}{y}{x}])}{x}{y}
+       && \text{by \olref{def:4}} \\
+      =&\lambd[z][\Subst{\Subst{N}{y}{x}}{x}{y}]
+       && \text{by \olref{def:4}} \\
+      =&\lambd[z][N] && \text{by inductive hypothesis} 
+    \end{align*}
+  \item $M$ is of the form $PQ$. Then:
+    \begin{align*}
+      &\Subst{\Subst{(PQ)}{y}{x}}{x}{y} \\
+      =&\Subst{((\Subst{P}{y}{x})(\Subst{Q}{y}{x}))}{x}{y}
+         && \text{by \olref{def:3}} \\
+      =&(\Subst{\Subst{P}{y}{x}}{x}{y})(\Subst{\Subst{Q}{y}{x}}{x}{y})
+         && \text{by \olref{def:3}} \\
+      =&PQ &&\text{by inductive hypothesis}
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+\begin{prob}
+  Prove \olref{thm:inv:var}.
+\end{prob}
+\end{document}

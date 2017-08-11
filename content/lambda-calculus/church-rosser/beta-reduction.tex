@@ -1,0 +1,88 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{b}
+
+\olsection{$\beta$-reduction}
+
+In this section we will prove that $\beta$-reduction ($\bred$) also has
+Church-Rosser property based on conclusions in last section.
+
+\begin{lem}\ollabel{lem:one-par}
+  If $M \bredone M'$, then $M \bredpar M'$.
+\end{lem}
+\begin{proof} By induction on the derivation of $M \bredone M'$.
+  \begin{enumerate}
+  \item If the last rule is the contraction, then $M$ is
+    $(\lambd[x][N])Q$, $M'$ is $\Subst{N}{Q}{x}$, for some
+    $x, N, Q$. Since $N \bredpar N$ and $Q \bredpar Q$ by
+    \olref[pb]{thm:refl}, we immediately have $(\lambd[x][N])Q
+    \bredpar \Subst{N}{Q}{x}$ by \olref[pb]{def:4}.
+  \item The other cases are left as exercises. \ollabel{lem:one-par:2}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Finish the proof of \olref{lem:one-par:2}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:par-red}
+  If $M \bredpar M'$, then $M \bred M'$.
+\end{lem}
+\begin{proof} Induction on the derivation of $M \bredpar M'$.
+  \begin{enumerate}
+  \item If the last rule is \olref[pb]{def:1}, left as exercise. \ollabel{lem:par-red:1}
+  \item If the last rule is \olref[pb]{def:2}, then $M$ is 
+    $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ for some $x, N, N'$, where
+    $N \bredpar N'$. By inductive hypothesis we have $N \bred N'$, then obviously
+    $\lambd[x][N] \bred \lambd[x][N']$ (by the same series of
+    $\bredone$ as $N \bred N'$).
+  \item If the last rule is \olref[pb]{def:3}, then $M$ is 
+    $PQ$ and $M'$ is $P'Q'$ for some $P, Q, P', Q'$, where $P \bredpar P'$
+    and $Q \bredpar Q'$. Now by inductive hypothesis we have $P \bred P'$ and $Q \bred
+    Q'$, then $PQ \bred P'Q'$ by the series of $P \bred P'$ followed
+    by the series of $Q \bred Q'$.
+  \item If the last rule is \olref[pb]{def:4}, then $M$ is
+    $(\lambd[x][N])Q$ and $M'$ is  $\Subst{N'}{Q'}{x}$ for some
+    $x, N, M', Q, Q'$, where $N \bredpar N'$ and $Q \bredpar Q'$. By
+    inductive hypothesis we get $Q \bred
+    Q'$ and $N \bred N'$, then $(\lambd[x][N])Q \bred
+    \Subst{N'}{Q'}{x}$ by the series of $N \bred N'$ followed by the
+    series of $Q \bred Q'$ and finally contraction of
+    $(\lambd[x][N'])Q'$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Finish the proof of \olref{lem:par-red:1}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:str}
+  $\bred$ is the smallest transitive relation containing $\bredpar$.
+\end{lem}
+\begin{proof}
+  Let $\xred$ be the smallest transitive relation containing $\bredpar$.
+  Recall that it can be inductively defined by the rules of transitivity, plus the rule ``if
+  $M \bredpar N$ then $M \xred N$''. Now we prove $\bred = \xred$:
+  
+  $\bred \in \xred$. For any $M \bred M'$, we can extract a series of
+  $\bredone$ from it and, by \olref{lem:one-par}, we can change it
+  into a series of $\bredpar$, which is $\xred$ by its definition.
+
+  $\xred \in \bred$. For any $M \xred M'$, we can extract a series of
+  $\bredpar$ and by \olref{lem:par-red} we can change it into a series
+  of $\bred$, which, combined, is another $\bred$.
+\end{proof}
+
+\begin{thm}{thm:cr}
+  $\bred$ satisfies Church-Rosser property.
+\end{thm}
+\begin{proof}
+  Immediate from \olref[dap]{thm:str}, \olref[pb]{thm:cr} and \olref{lem:str}.
+\end{proof}
+\end{document}

@@ -1,0 +1,50 @@
+% Part: lambda-calculus
+% Chapter: representability
+% Section: pair
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{rep}{pai}
+\olsection{Pair}
+
+The pair of $M$ and $N$ (written $\tuple{M,N}$) is defined as follows:
+\begin{align*}
+  \tuple{M,N} &\eqs \lambd[f][fMN]
+\end{align*}
+Intuitively it is a function that accepts a function, passes to it the
+two inner terms and returns the result of it. Following this idea we
+have this constructor, receiving two terms and returns the pair
+containing them:
+\begin{align*}
+  {pair} &\eqs \lambd[mn][\lambd[f][fmn]]
+\end{align*}
+
+And its counterpart: two access functions, receiving a pair and
+returning the first or second elements in it:
+\begin{align*}
+  {fst} &\eqs \lambd[p][p(\lambd[mn][m])]\\
+  {snd} &\eqs \lambd[p][p(\lambd[mn][n])]
+\end{align*}
+
+\begin{prob}
+  Explain how the two access functions works.
+\end{prob}
+
+Now with pairs we can write out the predecessor:
+\begin{align*}
+  {pred} &\eqs \lambd[n][{fst}(n (\lambd[p][\tuple{{snd}~ {p}, {succ}({snd} ~{p})}]) \tuple{0, 0})]
+\end{align*}
+Remember that $n f x$ is defined to be $f^{n}(x)$; in this
+case $f$ is a function that accepts a pair $p$ and returns a new
+pair containing the second component of $p$ and successor of the
+second component; $x$ is the pair $\tuple{0,0}$. Thus, the
+result is $\tuple{0,0}$ for $n=0$, and $\tuple{{n-1}, n}$
+otherwise. And we only return the first component of the result.
+
+And now the subtraction, defined as $pred$ applied on $a$ for $b$ times:
+\begin{align*}
+  {sub} &\eqs \lambd[ab][b {pred} ~ a]
+\end{align*}
+\end{document}
