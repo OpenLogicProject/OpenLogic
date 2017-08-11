@@ -64,4 +64,4 @@ index.html: FORCE_MAKE
 	echo "<p>Generated from Git revision <code>" >> index.html
 	grep shash .git/gitHeadInfo.gin |sed 's/[^{]*{\([^}]*\)},/\1/' >>index.html
 	grep authsdate .git/gitHeadInfo.gin |sed 's/[^{]*{\([^}]*\)},/(\1)/' >> index.html
-	echo "</code></p></body></html>" >> index.html
+	echo "</code></p></div></div></div></body></html>" >> index.html

@@ -1,13 +1,14 @@
 % Part: lambda-calculus
-% Chapter: introduction
-% Section: alpha
+% Chapter: syntax
+% Section: de-bruijn
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{lam}{int}{alp}
-\olsection{De Bruijn index}
+\olfileid{lam}{syn}{deb}
+
+\olsection{The De Bruijn Index}
 
 Because the $\alpha$-equivalence comes so naturally, some syntax has
 been invented that doesn't distinguish terms that can be
@@ -16,8 +17,8 @@ $\alpha$-converted to each other, among which the most well-known is the
 
 When we write $\lambd[x][M]$, we explicitly state that $x$ is the
 parameter of the function, so that we can use $x$ in $M$ to refer
-to this parameter. In De Bruijn index, however, parameters have no
-name and reference to them in function body is denoted by a number
+to this parameter. In the de Bruijn index, however, parameters have no
+name and reference to them in the function body is denoted by a number
 denoting the levels of abstraction between them. For example, consider
 the example of $\lambd[x][lambd[y][y x]]$: the outer  abstraction
 is on level $0$ and the binding variable is $x$; the inner abstraction
@@ -26,7 +27,7 @@ lies in the inner abstraction whose level is $1$. Thus we
 write $0 1$ for $y x$.
 
 \begin{defn}
-  De Bruijn terms is inductively defines as follows:
+  De Bruijn terms are inductively defines as follows:
   \begin{enumerate}
   \item $n$, where $n$ is any natural number.
   \item $PQ$, where $P$ and $Q$ are both De Bruijn terms.
@@ -52,7 +53,9 @@ terms is as follows:
   $w,\Gamma$ is $w,x,y,z$.
 \end{defn}
 
-Recovering from De Bruijn term to a normal term is as follows:
+Recovering a standard lambda term from a de Bruijn term is done as
+follows:
+
 \begin{defn}
   \begin{align*}
     G_\Gamma(n) &= \Gamma[n] \\
@@ -68,12 +71,12 @@ Recovering from De Bruijn term to a normal term is as follows:
 \end{defn}
 
 Here we give some results without proving them:
+
 \begin{prop}
-  If $M \aconvone M'$, and $\Gamma$ is any list containing $FV(M)$, then
+  If $M \aconvone M'$, and $\Gamma$ is any list containing $\FV{M}$, then
   $F_\Gamma(M) \eqs F_\Gamma(M')$.
 \end{prop}
 
-Besides the De Bruijn index, we can also utilize $\alpha$-equivalence
-by $\alpha$-equivalence class (\olref[sfr][rel][prp]{sec}), which is
-the approach we will see in next section and use in rest of the part.
+Instead of using de Bruijn terms, we can also identify terms with their
+by equivalence class under $\aeq$ (\olref[sfr][rel][prp]{sec}).
 \end{document}
