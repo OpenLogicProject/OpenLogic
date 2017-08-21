@@ -15,15 +15,17 @@
 \RequirePackage{framed}
 \RequirePackage{bussproofs}
 \RequirePackage{graphicx}
+
 \RequirePackage{natbib}
 \setcitestyle{authoryear}
 
 \RequirePackage{tikz}
-\usetikzlibrary{arrows}
 \RequirePackage{tikzscale}
+\usetikzlibrary{arrows,automata}
 
 \RequirePackage{wrapfig}
 \RequirePackage{catchfile}
+\RequirePackage{tocloft}
 
 \RequirePackage{xcolor}
 \definecolor{dark-gray}{gray}{0.2}
@@ -40,9 +42,7 @@
 \RequirePackage{thmtools}
 \RequirePackage[nameinlink]{cleveref} % always after hyperref!
 
-\usepackage{pgf}
-\usepackage{tikz}
-\usetikzlibrary{arrows,automata}
+%\usepackage{pgf}
 
 \makeatletter
 
@@ -68,6 +68,10 @@
 % DeclareDocumentMacro -- for macros (no argument), doesn't check if defined
 
 \newcommand*{\DeclareDocumentMacro}[2]{\def#1{#2}}
+
+% We loading \oljobname-config.sty and \oljobname-envs.sty. Initialize
+% \oljobname to \jobname -- this way you can use the same config files
+% for differnt jobs.
 
 \ifdefined\oljobname\relax\else\let\oljobname\jobname\fi
 
@@ -165,7 +169,6 @@
   \ifgitinfo\ by \href{http://openlogicproject.org/}{OLP} /
   \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
 
-
 \newcommand*{\oluselicense}[2]{%
 \begin{minipage}[b]{.9cm}
 \includegraphics[width=.9cm]{\olpath/assets/logos/by}
@@ -187,17 +190,14 @@
 \hfill
 \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}}
 
-\copypagestyle{openlogic}{plain}
-\makeevenfoot{openlogic}{\thepage}{}{\shortollicense}
-\makeoddfoot{openlogic}{\shortollicense}{}{\thepage}
+\newcommand*{\shortoluselicense}[2]{\ollicensefont
+  \textit{#1}
+  by #2 based on \href{http://openlogicproject.org/}{OLP} /
+  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
 
 \newcommand\gitissue[1]
   {\href{https://github.com/OpenLogicProject/OpenLogic/issues/#1}{issue
     \##1}}
-
-\setlength{\cftpartnumwidth}{2.2em}
-\setlength{\cftchapternumwidth}{2.2em}
-\setlength{\cftsectionnumwidth}{2.8em}
 
 \makeatother
 
