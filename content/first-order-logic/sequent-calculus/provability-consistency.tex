@@ -40,41 +40,35 @@ Since $\Gamma_0 \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$,
 $\Gamma_0 \cup \Gamma_1 \subseteq \Gamma$, hence $\Gamma$~is inconsistent.
 \end{proof}
 
-\begin{prop}\ollabel{prop:provability-lnot}
-  $\Gamma \cup \{!A\}$ is inconsistent iff $\Gamma \Proves \lnot !A$.
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 \end{prop}
 
 \begin{proof}
-For the forward direction, suppose that $\Gamma \cup \{!A\}$ is
-inconsistent. Then there is a finite set $\Gamma_0 \subseteq \Gamma$
-such that $\Log{LK}$ !!{derive}s $!A, \Gamma_0 \Sequent \quad$.  Let
-$\pi_0$ be an $\Log{LK}$-!!{derivation} of $!A, \Gamma_0 \Sequent
-\quad$ and consider
-\begin{prooftree}
-\AxiomC{}
-\RightLabel{$\pi_0$}
-\Deduce$!A, \Gamma_0 \fCenter \quad$
-\RightLabel{\RightR{\lnot}}
-\UnaryInf$ \Gamma_0 \fCenter \lnot !A$
-\end{prooftree}
+First suppose $\Gamma \Proves !A$, i.e., there is
+!!a{derivation}~$\pi_0$ of $\Gamma \Sequent !A$. By adding a
+$\LeftR{\lnot}$ rule, we obtain !!a{derivation} of~$\lnot !A, \Gamma
+\Sequent \quad$, i.e., $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 
-For the reverse direction, suppose that $\Gamma \Proves \lnot
-!A$. Then for some finite $\Gamma_1 \subseteq \Gamma$, $\Log{LK}$
-!!{derive}s $\Gamma_1 \Sequent \lnot !A$, say, using
-!!a{derivation}~$\pi_1$. Now consider
+If $\Gamma \cup \{\lnot A\}$ is inconsistent, there is
+!!a{derivation}~$\pi_1$ of $\lnot !A, \Gamma \Sequent \quad$. The
+following is !!a{derivation} of $\Gamma \Sequent !A$:
 \begin{prooftree}
-\AxiomC{}
-\RightLabel{$\pi_1$}
-\Deduce$\Gamma_1 \fCenter \lnot !A$
-\AxiomC{$!A \fCenter !A$}
-\RightLabel{\LeftR{\lnot}}
-\UnaryInf$\lnot !A, !A \fCenter $
-\RightLabel{\Cut}
-\BinaryInf$ \Gamma_1, !A \fCenter $
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\fCenter !A, \lnot !A$
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\lnot !A, \Gamma \fCenter$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma \fCenter !A$
 \end{prooftree}
-Since $\Gamma_1 \subseteq \Gamma$, we get that $\Gamma \cup \{!A\}$ is
-inconsistent.
 \end{proof}
+
+\begin{prob}
+Prove that $\Gamma \Proves \lnot !A$ iff $\Gamma \cup \{!A\}$ is inconsistent.
+\end{prob}
 
 \begin{prop}\ollabel{prop:explicit-inc}
   If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is

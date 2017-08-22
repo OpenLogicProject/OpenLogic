@@ -72,46 +72,6 @@ $\Log{LK}$ does not !!{derive} $\Gamma_0 \Sequent \quad$, we say it is
 \emph{consistent}.
 \end{defn}
 
-\begin{prop}
-\ollabel{prop:prov-incons}
-$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
-\end{prop}
-
-\begin{proof}
-First suppose $\Gamma \Proves !A$, i.e., there is
-!!a{derivation}~$\pi_0$ of $\Gamma \Sequent !A$. By adding a
-$\LeftR{\lnot}$ rule, we obtain !!a{derivation} of~$\lnot !A, \Gamma
-\Sequent \quad$, i.e., $\Gamma \cup \{\lnot !A\}$ is inconsistent.
-
-If $\Gamma \cup \{\lnot A\}$ is inconsistent, there is
-!!a{derivation}~$\pi_1$ of $\lnot !A, \Gamma \Sequent \quad$. The
-following is !!a{derivation} of $\Gamma \Sequent !A$:
-\begin{prooftree}
-  \Axiom$!A \fCenter !A$
-  \RightLabel{\RightR{\lnot}}
-  \UnaryInf$\fCenter !A, \lnot !A$
-  \AxiomC{}
-  \RightLabel{$\pi_1$}
-  \Deduce$\lnot !A, \Gamma \fCenter$
-  \RightLabel{\Cut}
-  \BinaryInf$\Gamma \fCenter !A$
-\end{prooftree}
-\end{proof}
-
-\begin{prop}
-\ollabel{prop:incons}
-$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
-  sentence~$!A$.
-\end{prop}
-
-\begin{proof}
-Exercise.
-\end{proof}
-
-\begin{prob}
-Prove \olref[fol][seq][ptn]{prop:incons}
-\end{prob}
-
 \begin{prop}[Reflexivity]
 \ollabel{prop:reflexivity}
 If $!A \in \Gamma$, then $\Gamma \Proves !A$.
@@ -179,6 +139,20 @@ $\Gamma_0 \Sequent !A \lif !B$ for some $\Gamma_0 \subseteq
 \end{prooftree}
 This shows $\Gamma \Proves !B$.
 \end{proof}
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
+  sentence~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][seq][ptn]{prop:incons}
+\end{prob}
 
 \begin{prop}[Compactness]
   \ollabel{prop:proves-compact}

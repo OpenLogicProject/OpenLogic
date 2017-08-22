@@ -38,36 +38,42 @@ In the new !!{derivation}, the assumption~$!A$ is !!{discharged}, so it is
 !!a{derivation} from~$\Gamma$.
 \end{proof}
 
-\begin{prop}\ollabel{prop:provability-lnot}
-  $\Gamma \cup \{!A\}$ is inconsistent iff $\Gamma \Proves \lnot !A$.
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
 \end{prop}
 
 \begin{proof}
-For the forward directions, suppose that $\Gamma \cup \{!A\}$ is
-inconsistent. Then there is !!a{derivation}~$\delta_0$ of $\lfalse$
-from $\Gamma \cup \{!A\}$.  Consider
-\[
-\AxiomC{$\Gamma, \Discharge{!A}{1}$}
-\RightLabel{$\delta$}
-\DeduceC{$\lfalse$}
-\DischargeRule{\Intro{\lnot}}{1}
-\UnaryInfC{$\lnot !A$}
-\DisplayProof
-\]
-This shows that $\Gamma \Proves \lnot !A$.
-
-Conversely, suppose $\Gamma \Proves \lnot !A$ by
-!!a{derivation}~$\delta_1$. Then
+First suppose $\Gamma \Proves !A$, i.e., there is
+!!a{derivation}~$\delta_0$ of~$!A$ from !!{undischarged}
+assumptions~$\Gamma$. We obtain !!a{derivation} of $\lfalse$ from
+$\Gamma \cup \{\lnot !A\}$ as follows:
 \begin{prooftree}
-\AxiomC{$\Gamma$}
-\RightLabel{$\delta_1$}
-\DeduceC{$\lnot !A$}
-\AxiomC{$!A$}
-\RightLabel{\Elim{\lnot}}
-\BinaryInfC{$\lfalse$}
+  \AxiomC{$\lnot !A$}
+  \AxiomC{$\Gamma$}
+  \RightLabel{$\delta_0$}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim{\lnot}}
+  \BinaryInfC{$\lfalse$}
 \end{prooftree}
-shows that $\Gamma \cup \{!A\}$ is inconsistent.
+
+Now assume $\Gamma \cup \{\lnot !A\}$ is inconsistent, and let
+$\delta_1$ be the corresponding derivation of $\lfalse$ from
+!!{undischarged} assumptions in~$\Gamma \cup \{\lnot !A\}$. We obtain
+!!a{derivation} of~$!A$ from~$\Gamma$ alone by using~$\FalseCl$:
+\begin{prooftree}
+  \AxiomC{$\Gamma, \Discharge{\lnot !A}{1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\lfalse$}
+  \RightLabel{\FalseCl}
+  \UnaryInfC{$!A$}
+\end{prooftree}
 \end{proof}
+
+\begin{prob}
+Prove that $\Gamma \Proves \lnot !A$ iff $\Gamma \cup \{!A\}$ is
+inconsistent.
+\end{prob}
 
 \begin{prop}\ollabel{prop:explicit-inc}
   If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is
