@@ -81,6 +81,18 @@ will find that, after unpacking the definition of~$=$, you have to
 prove: every !!{element} of~$U$ is !!a{element} of~$V$
 \emph{and} every !!{element} of~$V$ is !!a{element} of~$U$).
 
+\subsection{Proving a Disjunction}
+
+When what you are proving takes the form of a disjunction (i.e., it is
+an statement of the form ``$p$ or $q$''), it is enough to show that
+one of the disjuncts is true.  However, it basically never happens
+that either disjunct just follows from the assumptions of your
+theorem. More often, the assumptions of your theorem are themselves
+disjunctive, or you're showing that all things of a certain kind have
+one of two properties, but some of the things have the one and others
+have the other property.  This is where proof by cases is
+useful (see below).
+
 \subsection{Conditional Proof}
 
 Many theorems you will encounter are in conditional form (i.e., show
@@ -132,17 +144,20 @@ $x$ is specifically, other that it has the property $P$, then you can
 assert that all every $P$ has the property~$Q$. In short, $x$ is a
 stand-in for \emph{all} things with property~$P$.
 
-\subsection{Proving a Disjunction}
+\begin{prop}
+  For all sets $X$ and $Y$, $X \subseteq X \cup Y$.
+\end{prop}
 
-When what you are proving takes the form of a disjunction (i.e., it is
-an statement of the form ``$p$ or $q$''), it is enough to show that
-one of the disjuncts is true.  However, it basically never happens
-that either disjunct just follows from the assumptions of your
-theorem. More often, the assumptions of your theorem are themselves
-disjunctive, or you're showing that all things of a certain kind have
-one of two properties, but some of the things have the one and others
-have the other property.  This is where proof by cases is
-useful.
+\begin{proof}
+  Let $X$ and $Y$ be arbitrary sets.  We want to show that $X
+  \subseteq X \cup Y$. By definition of $\subseteq$, this amounts to:
+  for every $x$, if $x \in X$ then $x \in X \cup Y$. So let $x \in X$
+  be an arbitrary !!{element} of~$X$. We have to show that $x \in X
+  \cup Y$. Since $x \in X$, $x \in X$ or $x \in Y$. Thus, $x \in
+  \Setabs{x}{x \in X \lor x \in Y}$. But that, by definition of $\cup
+  $, means $x \in X \cup Y$.
+\end{proof}
+
 
 \subsection{Proof by Cases}
 
