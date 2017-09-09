@@ -65,10 +65,10 @@ arrows={east:.25cm, west:.25cm}]
     \foreach \x [count=\i] in
              {$\TMendtape$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMblank$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMblank$,$\TMblank$,$\TMblank$} {
     \ifnum\i=12 % if last node reset outer sep to 0pt
-      \node [on chain=0, tape, outer sep=0pt] (n\i) {\x};
+      \node [on chain=0, tape, outer sep=0pt] (n\i) {\x\vphantom{\TMstroke}};
       \draw (n\i.north east) -- ++(.2,0) decorate [decoration={zigzag, segment length=.5ex, amplitude=.3ex}] {-- ($(n\i.south east)+(+.2,0)$)} -- (n\i.south east) -- cycle;
      \else
-      \node [on chain=0, tape] (n\i) {\x};
+      \node [on chain=0, tape] (n\i) {\x\vphantom{\TMstroke}};
      \fi
      \ifnum\i=1 % if first node draw a thick line at the left
       \draw [line width=2pt] (n\i.north west) -- (n\i.south west);
