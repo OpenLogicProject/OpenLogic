@@ -10,6 +10,31 @@
 
 \olsection{Examples of \usetoken{P}{derivation}}
 
+\begin{prop}
+\ollabel{prop:easyproofs}
+The following are !!{derivable}:
+\begin{enumerate}
+\item \ollabel{prop:easyproofs:trans}
+\emph{Transitivity}: $\{!A \lif !B, !B \lif !C\} \Proves
+  !A \lif !C$.
+\item \ollabel{prop:easyproofs:refl}
+  $\Proves !A \lif !A$. 
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+For part \olref{prop:easyproofs:trans}, the following instances
+of \textbf{Ax1} and \textbf{Ax2} are needed:
+\begin{align*}
+  (!B \lif !C) & \lif (!A \lif (!B \lif !C)); \\
+  (!A \lif (!B \lif !C)) & \lif ((!A \lif !B) \lif
+    (!A \lif !C)).
+\end{align*}
+For part \olref{prop:easyproofs:refl}, consider the instance of
+\textbf{Ax1}: $!A \lif ((!A \lif !A) \lif
+!A)$ and distribute the outermost implication by \textbf{Ax2}.
+\end{proof}
+
 Let us show that $\lforall[x][!B] \Proves \lexists[x][!B]$
 (where the !!{formula} on the right of the turnstile is just an
 abbreviation for $\lnot \lforall[x][\lnot !B]$):

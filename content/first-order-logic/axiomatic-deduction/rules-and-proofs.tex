@@ -10,70 +10,30 @@
 
 \olsection{Rules and \usetoken{P}{derivation}}
 
-Let $\Lang L$ be a first-order language with the usual constants,
-!!{variable}s, logical symbols, and auxiliary symbols (parentheses and the
-comma).
-
-\begin{defn}[Tautological Instance] 
-A !!{formula} $!A$ is a \emph{tautological instance} if and only if
-there is a tautology $!B(p_1, \dots, p_n)$ of propositional logic and
-first-order !!{formula}s $!C_1$,~\dots,~$!C_n$ such that $!A \ident
-\Subst{!B}{!C_1}{p_1},\dots,\Subst{}{!C_n}{p_n}$.
-\end{defn}
-
-\begin{defn}[Axioms] 
-
-The set $\Ax$ of \emph{axioms} of first-order logic
-comprises all !!{formula}s obtained by prefixing any number of
-universal quantifiers to the following:
-\begin{description}
-\item[{[\textbf{Ax0}]}] $!A$, where $!A$ is a tautological instance;
-\item[{[\textbf{Ax1}]}] $\lforall[x][!B] \lif \Subst{!B}{t}{x}$, if $t$ is
-!!{free for} $x$ in $!B$; 
-\item[{[\textbf{Ax2}]}] $\lforall[x][(!A \lif
-!B)] \lif (\lforall[x][!A] \lif \lforall[x][!B])$; 
-\item[{[\textbf{Ax3}]}]
-$!B \lif \lforall[x][!B]$, if $x$ is \emph{not} free in $!B$;
-\item[{[\textbf{Ax4}]}] $\eq[x][x]$; \item[{[\textbf{Ax5}]}] $\eq[x][y]
-\lif (\Subst{!B}{x}{z} \lif \Subst{!B}{y}{z})$, if both $x$ and $y$ are
-!!{free for} $z$ in $!B$. 
-\end{description} 
-\end{defn}
-
-\begin{defn}[!!^{derivation}] 
-  \emph{!!^a{derivation}} from $\Gamma$ is a finite sequence of !!{formula}s, each
-  one of which is either an axiom, or a member of $\Gamma$, or
-  obtained by previous !!{formula}s by \emph{modus ponens}. A !!{formula}
-  $\varphi$ is \emph{!!{derivable}} from $\Gamma$, written $\Gamma \vdash
-  \varphi$, if there is a !!{derivation} from $\Gamma$ ending in $\varphi$. 
-\end{defn}
-
 \begin{explain}
-  Since the axioms for predicate logic comprise all the propositional
-  axioms, and the only rule (\emph{viz.}, MP) is the same, all the
-  propositional proof-theoretic properties such the Deduction Theorem,
-  Cut, Monotony, etc., carry over from the propositional case.
+  Axiomatic !!{derivation}s are perhaps the simplest proof system for
+  logic. A !!{derivation} is just a sequence of !!{formula}s.  To
+  count as !!a{derivation}, every !!{formula} in the sequence must
+  either be an instance of an axiom, or must follow from one or more
+  !!{formula}s that precede it in the sequence by a rule of inference.
+  A !!{derivation} !!{derive}s its last !!{formula}.
 \end{explain}
 
-\begin{explain}
-Since tautological instances are all axioms, the following proposition
-follows immediately by $n$ applications of \emph{modus
-  ponens}. Accordingly, from now on we freely employ purely
-propositional steps in proofs and justify them by reference to
-``Taut.''
-\end{explain}
-
-\begin{prop}\ollabel{prop:T}
-  If $\Gamma \vdash \varphi_1 ,\ldots \Gamma \vdash \varphi_n$ and
-  $\varphi_1 \supset (\varphi_2 \supset \cdots \supset(\varphi_n
-  \supset \psi) \cdots )$ is a tautological instance, then $\Gamma
-  \vdash \psi$.
-\end{prop}
-
-\begin{proof}
-  The formula   $\varphi_1 \supset (\varphi_2 \supset \cdots \supset(\varphi_n
-  \supset \psi) \cdots )$ is a tautological instance and hence an
-  axiom; $n$ applications of MP give the desired result.
-\end{proof}
+\begin{defn}[!!^{derivability}]
+If $\Gamma$ is a set of !!{formula}s of $\Lang L$ and $!A$ a
+!!{formula}, then a \emph{!!{derivation}} of $!A$ from $\Gamma$ is a
+finite sequence $!A_1$, \dots,~$!A_n$ of !!{formula}s such that $!A_n
+= !A$ and for each $i \le n$ one of the following holds:
+\begin{enumerate}
+\item $!A_i \in \Gamma$; or
+\item $!A_i$ is an axiom; or
+\item $!A_i$ follows from some $!A_j$ (and $!A_k$) with $j < i$ (and $k < i$)
+  by a rule of inference.
+\end{enumerate}
+We write $\Gamma \Proves !A$ (``$\Gamma$ !!{derive}s $!A$,'' or ``$!A$
+is !!{derivable} from $\Gamma$'') to mean that there is a
+!!{derivation} of $!A$ from $\Gamma$. When $\Gamma$ is empty, we write
+$\Proves !A$ to mean $\emptyset \Proves !A$.
+\end{defn}
 
 \end{document}

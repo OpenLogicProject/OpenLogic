@@ -21,37 +21,16 @@ That they do is the content of the \emph{completeness theorem}.
 The proof-theoretic notions for propositional logic are similar.
 \end{explain}
 
-\begin{defn}[Theorems]
-$\Thms{\Gamma} = \Setabs{!A}{\Gamma \Proves !A}$. 
-\end{defn}
-
-\begin{prop}
-$\Thms{\Gamma}$ is the smallest set of !!{formula}s containing
-$\Gamma$, the axioms, and is closed under \emph{modus
-  ponens}. Accordingly, we have a principle of proof by
-\emph{induction on the theorem of $\Gamma$}.
-\end{prop}
-
-\begin{proof}
-We know from \olref[prp][prp][axd]{prop:contain} that $\Thms{\Gamma}$ has the
-desired properties; so we need to show that it is the smallest
-such. Let $A$ be any other set of !!{formula}s containing the axioms
-and $\Gamma$ and closed under \emph{modus ponens}. Prove that
-$\Thms{\Gamma} \subseteq A$ by induction on the length of a proof of
-$!A$ from~$\Gamma$.
-\end{proof}
-
-\begin{cor}[Principle of induction on theorems]
-\ollabel{cor:induction-thms} 
-Any property $P$ that holds of the axioms, of !!{formula}s in
-$\Gamma$, and is preserved by \emph{modus ponens} holds of every
-!!{formula} in $\Thms{\Gamma}$.
-\end{cor}
-
 \begin{defn}[!!^{derivability}]
 A !!{formula} $!A$ is \emph{!!{derivable}} from $\Gamma$, written
 $\Gamma \Proves !A$, if there is a !!{derivation} from $\Gamma$ ending
 in $!A$.
+\end{defn}
+
+\begin{defn}[Theorems]
+A !!{formula}~$!A$ is a \emph{theorem} if there is a !!{derivation} of
+$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a theorem
+and $\Proves/ !A$ if it is not.
 \end{defn}
 
 \begin{defn}[Consistency]
@@ -74,7 +53,7 @@ Prove \olref[fol][axd][ptn]{prop:prov-incons}
 
 \begin{prop}
 \ollabel{prop:incons}
-$\Gamma$ is inconsistent iff $\Gamma \Proves {!A}$ for every
+$\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every
   sentence~$!A$.
 \end{prop}
 
@@ -101,5 +80,6 @@ those $!A_i$ which are in~$\Gamma$.  Then the !!{derivation} is
 likewise a !!{derivation} from~$\Gamma_0$, and so $\Gamma_0 \Proves
 !A$.  The other direction is obvious.
 \end{proof}
+
 
 \end{document}
