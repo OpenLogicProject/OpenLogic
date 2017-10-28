@@ -33,7 +33,7 @@ mechanism consists of a \emph{tape} and a \emph{read-write head}. In
 our version of Turing machines, the tape is infinite in one direction
 (to the right), and it is divided into \emph{squares}, each of which
 may contain a symbol from a finite \emph{alphabet}. Such alphabets can
-contain any number of different symbols, but we will mainly make do
+contain any number of different symbols, say, but we will mainly make do
 with three: $\TMendtape$, $\TMblank$, and $\TMstroke$. When the
 mechanism is started, the tape is empty (i.e., each square contains
 the symbol $\TMblank$) except for the leftmost square, which contains
@@ -52,48 +52,26 @@ the head moves left, right, or stays put according to whether $D$ is
 $\TMleft$, $\TMright$, or $\TMstay$, and the mechanism goes into
 state~$q'$.
 
-For instance, consider the situation below:
-
-\begin{center}
-  \usetikzlibrary{calc, chains, shapes, decorations.pathmorphing}
-  \begin{tikzpicture}
-  \tikzstyle{tmhead}=[arrow box,draw,minimum size=3ex,arrow box
-arrows={east:.25cm, west:.25cm}]
-
-  \tikzset{tape/.style={minimum size=3ex, draw}}
-  \begin{scope}[start chain=0 going right, node distance=0pt]
-    \foreach \x [count=\i] in
-             {$\TMendtape$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMblank$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMstroke$,$\TMblank$,$\TMblank$,$\TMblank$} {
-    \ifnum\i=12 % if last node reset outer sep to 0pt
-      \node [on chain=0, tape, outer sep=0pt] (n\i) {\x\vphantom{\TMstroke}};
-      \draw (n\i.north east) -- ++(.2,0) decorate [decoration={zigzag, segment length=.5ex, amplitude=.3ex}] {-- ($(n\i.south east)+(+.2,0)$)} -- (n\i.south east) -- cycle;
-     \else
-      \node [on chain=0, tape] (n\i) {\x\vphantom{\TMstroke}};
-     \fi
-     \ifnum\i=1 % if first node draw a thick line at the left
-      \draw [line width=2pt] (n\i.north west) -- (n\i.south west);
-     \fi
-             }
-             \node [tmhead,yshift=-.3cm] at (n3.south) (head) {$q_1$};
-
-%   \node [right=.25cm of n12] {$\cdots$};
-%   \node [tape, above left=.25cm and 1cm of n1] (q3) {$q_3$};
-%   \draw [>=latex, ->] (q3) -| (n5);
-  \end{scope}
- \end{tikzpicture}
-\end{center}
-
-The tape of the Turing machine contains the end-of-tape symbol
-$\TMendtape$ on the leftmost square, followed by three $\TMstroke$'s,
-a $\TMblank$, four more $\TMstroke$'s, and the rest of the tape is
-filled with $\TMblank$'s.  The head is reading the third square from
-the left, which contains a $\TMstroke$, and is in state~$q_1$---we say
-``the machine is reading a $\TMstroke$ in state~$q_1$.''  If the
-program of the Turing machine returns, for input $\tuple{q_1,
-  \TMstroke}$, the triple $\tuple{q_5, \TMblank, \TMright}$, we would
-now replace the $\TMstroke$ on the third square with a~$\TMblank$,
-move right to the fourth square, and change the state of the machine
-to~$q_5$.
+For instance, consider the situation in \olref{fig:tm}.
+\begin{figure}
+  \ollabel{fig:tm}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/turing-machine.tikz}}
+  \caption{A Turing machine executing its program.}
+\end{figure}
+The visible part of the tape of the Turing machine contains the
+end-of-tape symbol $\TMendtape$ on the leftmost square, followed by
+three $1$'s, a $0$, and four more $1$'s.  The head is reading the
+third square from the left, which contains a~$1$, and is in
+state~$q_1$---we say ``the machine is reading a $1$ in state~$q_1$.''
+If the program of the Turing machine returns, for input $\tuple{q_1,
+  1}$, the triple $\tuple{q_2, 0, \TMstay}$, the machine would now
+replace the $1$ on the third square with a~$0$, leave the read/write
+head where it is, and switch to state~$q_2$.  If then the program
+returns $\tuple{q_3, 0, \TMright}$ for input $\tuple{q_2, 0}$, the
+machine would now overwrite the $0$ with another~$0$ (effectively,
+leaving the content of the tape under the read/write head unchanged),
+move one square to the right, and enter state~$q_3$. And so on.
 
 We say that the machine \emph{halts} when it encounters some state,
 $q_n$, and symbol, $\sigma$ such that there is no instruction for
