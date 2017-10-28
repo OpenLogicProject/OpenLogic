@@ -1,46 +1,56 @@
-% Part: computability
-% Chapter: tm-computations
+% Part: turing-machines
+% Chapter: machines-computations
 % Section: turing-machines
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{cmp}{tur}{tur}
+\olfileid{tur}{mac}{tur}
 \olsection{Turing Machines}
 
 \begin{explain}
 The formal definition of what constitutes a Turing machine looks
 abstract, but is actually simple: it merely packs into one
-mathematical !!{structure} all the information needed to specify the
+mathematical structure all the information needed to specify the
 workings of a Turing machine. This includes (1) which states the
 machine can be in, (2) which symbols are allowed to be on the tape, (3)
 which state the machine should start in, and (4) what the instruction
 set of the machine is.
 \end{explain}
 
-\begin{defn}
-A \emph{Turing machine} $T = \langle Q, \Sigma, s, I\rangle$ consists of
+\begin{defn}[Turing machine]
+A \emph{Turing machine} $T = \langle Q, \Sigma, q_0, \delta\rangle$ consists of
 \begin{enumerate}
-\item a finite set of states $Q$ which includes the \emph{halting state}~$h$,
-\item a finite alphabet $\Sigma$ which includes $\TMendtape$ and
+\item a finite set of \emph{states}~$Q$,
+\item a finite \emph{alphabet} $\Sigma$ which includes $\TMendtape$ and
   $\TMblank$,
-\item an initial state $s \in Q$,
-\item a finite instruction set~$I \subseteq Q \times \Sigma \times Q
-  \times \Sigma \times \{L, R, N\}$.
+\item an \emph{initial state}~$q_0 \in Q$,
+\item a finite \emph{instruction set}~$\delta\colon Q \times \Sigma
+  \pto Q \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$.
 \end{enumerate}
+The partial function~$\delta$ is also called the \emph{transition function}
+of~$T$.
 \end{defn}
 
 \begin{explain}
 We assume that the tape is infinite in one direction only. For this
 reason it is useful to designate a special symbol~$\TMendtape$ as
 a marker for the left end of the tape. This makes it easier for
-Turing machne programs to tell when they're ``in danger'' of running
-off the tape. Other definitions of Turing machines are possible,
-including one where the tape is infinite in both directions. In that
-case, marker for the left end of the tape is not necessary.
+Turing machine programs to tell when they're ``in danger'' of running
+off the tape. 
 \end{explain}
 
-
+\begin{ex}
+\emph{Even Machine:} The even machine is formally
+the quadruple $\tuple{Q, \Sigma, q_0, \delta}$ where
+\begin{align*}
+Q & = \{ q_0, q_1 \} \\
+\Sigma & = \{ \TMendtape, \TMblank, \TMstroke \}, \\
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}.
+\end{align*}
+\end{ex}
 
 \end{document}

@@ -30,6 +30,11 @@
 \Newassociation{prob}{probdeferred}{\jobname}
 \Newassociation{probtag}{probdeferredtag}{\jobname}
 
+% every prob environment, execute \ifproblems\ifproblemswrite
+
+\pretocmd{\prob}{\ifproblems\ifproblemswrite}{}{}
+\pretocmd{\probtag}{\ifproblems\ifproblemswrite}{}{}
+
 % probdeferred and probdeferredtag are just wrappers for theorem
 % environments which do the actual typesetting.  answers.sty writes
 % the number of the problem into the .prb file, but we throw them away
@@ -53,41 +58,69 @@
 % Print the chapter number with the problem number
 
 \renewcommand*{\theprobd}{\probch.\arabic{probd}}
+\renewcommand{\theHprobd}{\probch.\arabic{probd}}
 
 
 % make sure the .prb file is open
 \Opensolutionfile{\jobname}
 
+% for problems per chapter, we want \ifproblems to be
+% \makeifproblemsprint at the beginning of each chapter. If there are
+% no problems in the chapter, it isn't called and so \ifproblems is
+% not redefined. In the end-of-chapter hook it will gobble its
+% argument if there were no problems.
+
+\def\makeifproblemsprint#1{\global\let\ifproblems\relax}
+
+% for collected problems, we want \ifproblems to be
+% \makeifproblemsgobble at the beginning of a chapter. The first prob
+% environment will call it and execute its argument \ifproblemwrite,
+% which writes ``Problems for Chapter \thechapter'' into the problems
+% file, and then redefine \ifproblem to be \@gobble. Subsequent probs
+% in the chapter will then gobble the argument \ifproblemwrite and so
+% only one heading is written per chapter.
+
+\def\makeifproblemsgobble#1{#1\global\let\ifproblems\@gobble}
+
 % - `\problemsperchapter`: execute this in the preamble to print the
 % - problem file at the end of every chapter
 
 \newcommand{\problemsperchapter}{% 
-% after each chapter command, open the .prb file and write a section
-% header into it
-\renewcommand\memendofchapterhook{%
-  \Closesolutionfile{\jobname}
-  \Opensolutionfile{\jobname}
-  \Writetofile{\jobname}{
-    \string\section*{Problems}
-    \string\renewcommand*{\string\probch}{\thechapter}
-    \string\setcounter{probd}{0}}}
-  % at the end of every chapter, close the .prb file and print it
+  % after each chapter command, open the .prb file and write a section
+  % header into it
+  \let\ifproblems\makeifproblemsprint
+  \let\ifproblemswrite\relax
+  \renewcommand{\memendofchapterhook}{%
+    \Closesolutionfile{\jobname}
+    \Opensolutionfile{\jobname}
+    \Writetofile{\jobname}{
+      \string\renewcommand*{\string\probch}{\thechapter}
+      \string\setcounter{probd}{0}}
+    \let\ifproblems\makeifproblemsprint}
+    % at the end of every chapter, close the .prb file and print it
   \appto\OLEndChapterHook{%
     \Closesolutionfile{\jobname}
     \renewcommand*{\probch}{\thechapter}
-    \Readsolutionfile{\jobname}}}
+    \ifproblems{% print problems if there are any
+      \section*{Problems}
+      \addcontentsline{toc}{section}{Problems}
+      \Readsolutionfile{\jobname}}}}
 
 % - `\collectproblems`: execute this in the preamble to arrange for
 % the printing of problems explicitly, e.g., at the end of the book
 
 \newcommand{\collectproblems}{%
-% at the end of every \chapter command, write a section header into
-% the .prb file and reset counters
-\renewcommand\memendofchapterhook{%
-  \Writetofile{\jobname}{
-    \string\section*{Problems for Chapter~\thechapter}
-    \string\renewcommand*{\string\probch}{\thechapter}
-    \string\setcounter{probd}{0}}}}
+  % at the end of every \chapter command, write a section header into
+  % the .prb file and reset counters
+  \let\ifproblems\makeifproblemsgobble
+  \def\ifproblemswrite{%
+      \Writetofile{\jobname}{%
+        \string\section*{Problems for Chapter~\thechapter}}}
+  \renewcommand\memendofchapterhook{%
+    \let\ifproblems\makeifproblemsgobble
+    \Writetofile{\jobname}{
+      \string\renewcommand*{\string\probch}{\thechapter}
+      \string\setcounter{probd}{0}}}}
 
 % \collectproblems is the default, so we execute it right away
 

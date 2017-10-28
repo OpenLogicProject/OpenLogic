@@ -1,0 +1,40 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{int}
+
+\olsection{Introduction}
+
+First-order logic has a number of nice properties. We know it is not
+decidable, but at least it is axiomatizable. That is, there are proof
+systems for first-order logic which are sound and complete, i.e., they
+give rise to a !!{derivability} relation~$\Proves$ with the property
+that for any set of !!{sentence}s~$\Gamma$ and !!{sentence}~$!Q$,
+$\Gamma \Entails !A$ iff $\Gamma \Proves !A$.  This means in
+particular that the validities of first-order logic are !!{computably
+  enumerable}. There is a computable function~$f\colon \Nat \to
+\Sent[L]$ such that the values of~$f$ are all and only the valid
+!!{sentence}s of~$\Lang{L}$. This is so because !!{derivation}s can be
+enumerated, and those that !!{derive} a single~!!{sentence} are then
+mapped to that !!{sentence}.  Second-order logic is more expressive
+than first-order logic, and so it is in general more complicated to
+capture its validities.  In fact, we'll show that second-order logic
+is not only undecidable, but its validities are not even !!{computably
+  enumerable}. This means there can be no sound and complete proof
+system for second-order logic (although sound, but incomplete proof
+systems are available and in fact are important objects of research).
+
+First-order logic also has two more properties: it is compact (if
+every finite subset of a set~$\Gamma$ of !!{sentence}s is satisfiable,
+$\Gamma$ itself is satisfiable) and the L\"owenheim-Skolem Theorem
+holds for it (if $\Gamma$ has an infinite model it has
+!!a{denumerable} model). Both of these results fail for second-order
+logic. Again, the reason is that second-order logic can express facts
+about the size of !!{domain}s that first-order logic cannot.
+
+\end{document}

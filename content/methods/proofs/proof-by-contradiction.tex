@@ -1,0 +1,220 @@
+% Part: methods
+% Chapter: proofs
+% Section: proof-by-contradiction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{prf}{con}
+
+\olsection{Proof by Contradiction} 
+
+In the first instance, proof by contradiction is an inference pattern
+that is used to prove negative claims.  Suppose you want to show that
+some claim~$p$ is \emph{false}, i.e., you want to show~$\lnot p$.  The
+most promising strategy is to (a) suppose that $p$~is true, and (b)
+show that this assumption leads to something you know to be false.
+``Something known to be false'' may be a result that conflicts
+with---contradicts---$p$ itself, or some other hypothesis of the
+overall claim you are considering.  For instance, a proof of ``if $q$
+then $\lnot p$'' involves assuming that $q$~is true and proving~$\lnot
+p$ from it. If you prove $\lnot p$ by contradiction, that means
+assuming $p$ in addition to~$q$. If you can prove $\lnot q$ from $p$,
+you have shown that the assumption~$p$ leads to something that
+contradicts your other assumption~$q$, since $q$~and $\lnot q$ cannot
+both be true.  Of course, you have to use other inference patterns in
+your proof of the contradiction, as well as unpacking definitions.
+Let's consider an example.
+
+\begin{prop}
+  If $X \subseteq Y$ and $Y = \emptyset$, then $X$ has no !!{element}s.
+\end{prop}
+
+\begin{proof}
+  Suppose $X \subseteq Y$ and $Y = \emptyset$. We want to show that
+  $X$ has no !!{element}s.
+  \begin{quote}
+    Since this is a conditional claim, we assume the antecedent and
+    want to prove the consequent. The consequent is: $X$ has no
+    !!{element}s. We can make that a bit more explicit: it's not the
+    case that there is an~$x \in X$.
+  \end{quote}
+  $X$ has no !!{element}s iff it's not the case that there is an~$x$
+  such that $x \in X$.
+  \begin{quote}
+    So we've determined that what we want to prove is really a
+    negative claim~$\lnot p$, namely: it's not the case that there is
+    an $x \in X$.  To use proof by contradiction, we have to assume the
+    corresponding positive claim~$p$, i.e., there is an $x \in X$, and
+    prove a contradiction from it.  We indicate that we're doing a
+    proof by contradiction by writing ``by way
+    of contradiction, assume'' or even just ``suppose not,'' and then state
+    the assumption~$p$.
+  \end{quote}
+  Suppose not: there is an $x \in X$.
+  \begin{quote}
+    This is now the new assumption we'll use to obtain a
+    contradiction. We have two more assumptions: that $X \subseteq Y$
+    and that $Y = \emptyset$. The first gives us that $x \in Y$:
+  \end{quote}
+  Since $X \subseteq Y$, $x \in Y$.
+  \begin{quote}
+    But since $Y = \emptyset$, every !!{element} of $Y$ (e.g., $x$)
+    must also be !!a{element} of~$\emptyset$.
+  \end{quote}
+  Since $Y = \emptyset$, $x \in \emptyset$. This is a contradiction,
+  since by definition $\emptyset$ has no !!{element}s.
+  \begin{quote}
+    This already completes the proof: we've arrived at what we need (a
+    contradiction) from the assumptions we've set up, and this means
+    that the assumptions can't all be true. Since the first two
+    assumptions ($X \subseteq Y$ and $Y = \emptyset$) are not
+    contested, it must be the last assumption introduced (there is an
+    $x \in X$) that must be false. But if we want to be thorough, we
+    can spell this out.
+  \end{quote}
+  Thus, our assumption that there is an $x \in X$ must be false, hence,
+  $X$ has no !!{element}s by proof by contradiction.
+\end{proof}
+
+Every positive claim is trivially equivalent to a negative claim: $p$
+iff $\lnot\lnot p$.  So proofs by contradiction can also be used to
+establish positive claims ``indirectly,'' as follows: To prove~$p$,
+read it as the negative claim $\lnot\lnot p$. If we can prove a
+contradiction from $\lnot p$, we've established $\lnot\lnot p$ by
+proof by contradiction, and hence~$p$.
+
+In the last example, we aimed to prove a negative claim, namely that
+$X$ has no !!{element}s, and so the assumption we made for the purpose
+of proof by contradiction (i.e., that there is an $x \in X$) was a
+positive claim. It gave us something to work with, namely the
+hypothetical $x \in X$ about which we continued to reason until we got
+to $x \in \emptyset$.
+
+When proving a positive claim indirectly, the assumption you'd make
+for the purpose of proof by contradiction would be negative. But very
+often you can easily reformulate a positive claim as a negative claim,
+and a negative claim as a positive claim.  Our previous proof would
+have been essentially the same had we proved ``$X = \emptyset$''
+instead of the negative consequent ``$X$ has no !!{element}s.'' (By
+definition of $=$, ``$X = \emptyset$'' is a general claim, since it
+unpacks to ``every !!{element} of~$X$ is an !!{element} of~$\emptyset$
+and vice versa''.) But it is easily seen to be equivalent to the
+negative claim ``not: there is an $x \in X$.''
+
+So it is sometimes easier to work with $\lnot p$ as an assumption than
+it is to prove~$p$ directly.  Even when a direct proof is just as
+simple or even simpler (as in the next example), some people prefer to
+proceed indirectly.  If the double negation confuses you, think of a
+proof by contradiction of some claim as a proof of a contradiction
+from the \emph{opposite} claim. So, a proof by contradiction of $\lnot
+p$ is a proof of a contradiction from the assumption~$p$; and proof by
+contradiction of~$p$ is a proof of a contradiction from~$\lnot p$.
+
+\begin{prop}
+$X \subseteq X \cup Y$.
+\end{prop}
+
+\begin{proof}
+  We want to show that $X \subseteq X \cup Y$.
+  \begin{quote}
+    On the face of it, this is a positive claim: every $x \in X$ is
+    also in $X \cup Y$.  The negation of that is: some $x \in X$ is
+    $\notin X \cup Y$. So we can prove the claim indirectly by
+    assuming this negated claim, and showing that it leads to a
+    contradiction.
+    \end{quote}
+  Suppose not, i.e., $X \nsubseteq X \cup Y$.
+  \begin{quote}
+    We have a definition of $X \subseteq X \cup Y$: every $x \in X$ is
+    also $\in X \cup Y$.  To understand what $X \nsubseteq X \cup Y$
+    means, we have to use some elementary logical manipulation on the
+    unpacked definition: it's false that every $x \in X$ is also $\in
+    X \cup Y$ iff there is \emph{some}~$x \in X$ that is $\notin Z$.
+    (This is a place where you want to be very careful: many students'
+    attempted proofs by contradiction fail because they analyze the
+    negation of a claim like ``all $A$s are $B$s'' incorrectly.) In
+    other words, $X \nsubseteq X \cup Y$ iff there is an $x$ such that
+    $x \in X$ and $x \notin X \cup Y$. From then on, it's easy.
+  \end{quote}
+  So, there is an $x \in X$ such that $x \notin X \cup Y$.  By
+  definition of $\cup$, $x \in X \cup Y$ iff $x \in X$ or $x \in
+  Y$. Since $x \in X$, we have $x \in X \cup Y$. This contradicts the
+  assumption that $x \notin X \cup Y$. 
+\end{proof}
+
+\begin{prob}
+Prove \emph{indirectly} that $X \cap Y \subseteq X$.
+\end{prob}
+
+\begin{prop}
+If $X \subseteq Y$ and $Y \subseteq Z$ then $X \subseteq Z$.
+\end{prop}
+
+\begin{proof}
+  Suppose $X \subseteq Y$ and $Y \subseteq Z$. We want to show $X
+  \subseteq Z$.
+  \begin{quote}
+    Let's proceed indirectly: we assume the negation of what we want
+    to etablish.
+  \end{quote}
+  Suppose not, i.e., $X \nsubseteq Z$.
+  \begin{quote}
+    As before, we reason that $X \nsubseteq Z$ iff not every $x \in X$
+    is also $\in Z$, i.e., some $x \in X$ is $\notin Z$.  Don't worry,
+    with practice you won't have to think hard anymore to unpack
+    negations like this.
+  \end{quote}
+  In other words, there is an~$x$ such that $x \in X$ and $x \notin Z$.
+  \begin{quote}
+    Now we can use this to get to our contradiction. Of course, we'll
+    have to use the other two assumptions to do it.
+  \end{quote}
+  Since $X \subseteq Y$, $x \in Y$. Since $Y \subseteq Z$, $x \in
+  Z$. But this contradicts $x \notin Z$.
+\end{proof}
+
+\begin{prop}
+If $X \cup Y = X \cap Y$ then $X = Y$.
+\end{prop}
+
+\begin{proof}
+  Suppose $X \cup Y = X \cap Y$. We want to show that $X = Y$.
+  \begin{quote}
+    The beginning is now routine:
+  \end{quote}
+  Assume, by way of contradiction, that $X \neq Y$.
+  \begin{quote}
+    Our assumption for the proof by contradiction is that $X \neq
+    Y$. Since $X = Y$ iff $X \subseteq Y$ an $Y \subseteq X$, we get
+    that $X \neq Y$ iff $X \nsubseteq Y$ \emph{or} $Y \nsubseteq
+    X$. (Note how important it is to be careful when manipulating
+    negations!{}) To prove a contradiction from this disjunction, we
+    use a proof by cases and show that in each case, a contradiction
+    follows.
+  \end{quote}
+  $X \neq Y$ iff $X \nsubseteq Y$ or $Y \nsubseteq X$. We distinguish
+  cases.
+  \begin{quote}
+    In the first case, we assume $X \nsubseteq Y$, i.e., for some $x$,
+    $x \in X$ but $\notin Y$. $X \cap Y$ is defined as those
+    !!{element}s that $X$ and $Y$ have in common, so if something
+    isn't in one of them, it's not in the intersection. $X \cup Y$ is
+    $X$ together with $Y$, so anything in either is also in the
+    union. This tells us that $x \in X \cup Y$ but $x \notin X \cap
+    Y$, and hence that $X \cap Y \neq Y \cap X$.
+  \end{quote}
+  
+  Case 1: $X \nsubseteq Y$. Then for some $x$, $x \in X$ but $x \notin
+  Y$. Since $x \notin Y$, then $x \notin X \cap Y$. Since $x \in X$,
+  $x \in X \cup Y$. So, $X \cap Y \neq Y \cap X$, contradicting the
+  assumption that $X \cap Y = X \cup Y$.
+
+  Case 2: $Y \nsubseteq X$. Then for some $y$, $y \in Y$ but $y \notin
+  X$. As before, we have $y \in X \cup Y$ but $y \notin X \cap Y$, and
+  so $X \cap Y \neq X \cup Y$, again contradicting $X \cap Y = X \cup
+  Y$. 
+\end{proof}
+
+\end{document}

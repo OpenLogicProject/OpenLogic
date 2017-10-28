@@ -9,6 +9,7 @@
 \olfileid{inc}{tcp}{con}
 
 \olsection{Theories Consistent with $\Th{Q}$ are Undecidable}
+
 The following theorem says that not only is $\Th{Q}$ undecidable, but, in
 fact, any theory that does not disagree with $\Th{Q}$ is undecidable.
 
@@ -19,11 +20,11 @@ consistent). Then $\Th{T}$ is undecidable.
 \end{thm}
 
 \begin{proof}
-Remember that $\Th{Q}$ has a finite set of axioms, $!A_1$, \dots,
-$!A_8$. We can even replace these by a single axiom, $!E = !A_1 \land
-\dots \land !A_8$.
+Remember that $\Th{Q}$ has a finite set of axioms, $!Q_1$, \dots,
+$!Q_8$. We can even replace these by a single axiom, $!E = !Q_1 \land
+\dots \land !Q_8$.
 
-Suppose $\Th{T}$ is a decidable theory consistent with $\Th{Q}$. Let
+Suppose $\Th{T}$ is a decidable theory consistent with~$\Th{Q}$. Let
 \[
 C = \Setabs{!A}{\Th{T} \Proves !E \lif !A}.
 \]
@@ -31,18 +32,18 @@ We show that $C$ would be a computable separation of $\Th{Q}$ and
 $\Th{\bar Q}$, a contradiction. First, if $!A$ is in $\Th{Q}$, then
 $!A$ is provable from the axioms of $\Th{Q}$; by the deduction
 theorem, there is a proof of $!E \lif !A$ in first-order logic. So
-$!A$ is in $C$.
+$!A$ is in~$C$.
 
 On the other hand, if $!A$ is in $\Th{\bar Q}$, then there is a proof
 of $!E \lif \lnot !A$ in first-order logic. If $\Th{T}$ also proves
 $!E \lif !A$, then $\Th{T}$ proves $\lnot !E$, in which case $\Th{T}
 \cup \Th{Q}$ is inconsistent. But we are assuming $\Th{T} \cup \Th{Q}$
 is consistent, so $\Th{T}$ does not prove $!E \lif !A$, and so $!A$
-is not in $C$.
+is not in~$C$.
 
-We've shown that if $!A$ is in $\Th{Q}$, then it is in $C$, and if $!A$
-is in $Q'$, then it is in $\num C$. So $C$ is a computable separation,
-which is the contradiction we were looking for.
+We've shown that if $!A$ is in $\Th{Q}$, then it is in $C$, and if
+$!A$ is in $\Th{\bar Q}$, then it is in $\Complement{C}$. So $C$ is a
+computable separation, which is the contradiction we were looking for.
 \end{proof}
 
 This theorem is very powerful. For example, it implies:
@@ -55,7 +56,7 @@ This theorem is very powerful. For example, it implies:
 
 \begin{proof}
 First-order logic is the set of consequences of $\emptyset$,
-which is consistent with $\Th{Q}$.
+which is consistent with~$\Th{Q}$.
 \end{proof}
 
 \end{document}

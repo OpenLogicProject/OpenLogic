@@ -1,0 +1,83 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{qrl}
+
+\olsection{Quantifier Rules}
+
+\subsection{Rules for $\lforall$}
+
+\begin{defish}
+\Axiom$ !A(t), \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A(a) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+\DisplayProof
+\end{defish}
+
+In \LeftR{\lforall}, $t$ is a closed term (i.e., one without
+variables). In \RightR{\lforall}, $a$~is !!a{constant} which must
+not occur anywhere in the lower sequent of the \RightR{\lforall}
+rule. We call $a$ the \emph{eigenvariable} of the \RightR{\forall}
+inference.
+
+\subsection{Rules for $\lexists$}
+
+\begin{defish}
+\Axiom$ !A(a), \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$ \lexists[x][!A(x)], \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A(t) $
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lexists[x][!A(x)]$
+\DisplayProof
+\end{defish}
+
+Again, $t$~is a closed term, and $a$~is !!a{constant} which does
+not occur in the lower sequent of the \LeftR{\lexists} rule. We call
+$a$ the \emph{eigenvariable} of the \LeftR{\lexists} inference.
+
+The condition that an eigenvariable not occur in the lower sequent of
+the \RightR{\lforall} or \LeftR{\lexists} inference is called the
+\emph{eigenvariable condition}.
+
+\begin{explain}
+We use the term ``eigenvariable'' even though $a$ in the above rules
+is !!a{constant}. This has historical reasons.
+
+In \RightR{\lexists} and \LeftR{\lforall} there are no restrictions on
+the term~$t$. On the other hand, in the \LeftR{\lexists} and
+\RightR{\lforall} rules, the eigenvariable condition requires that the
+!!{constant}~$a$ does not occur anywhere outside of~$!A(a)$ in the
+upper sequent. It is necessary to ensure that the system is sound,
+i.e., only !!{derive}s sequents that are valid. Without this
+condition, the following would be allowed:
+\begin{prooftree}
+  \Axiom$!A(a) \fCenter !A(a)$
+  \RightLabel{*\LeftR{\lexists}}
+  \UnaryInf$\lexists[x][!A(x)] \fCenter !A(a)$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$\lexists[x][!A(x)] \fCenter \lforall[x][!A(x)]$
+  \DisplayProof
+  \qquad
+  \Axiom$!A(a) \fCenter !A(a)$
+  \RightLabel{*\RightR{\lforall}}
+  \UnaryInf$!A(a) \fCenter \lforall[x][!A(x)]$
+  \RightLabel{\LeftR{\lexists}}
+  \UnaryInf$\lexists[x][!A(x)] \fCenter \lforall[x][!A(x)]$
+\end{prooftree}
+However, $\lexists[x][!A(x)] \Sequent \lforall[x][!A(x)]$ is not valid.
+\end{explain}
+
+\end{document}

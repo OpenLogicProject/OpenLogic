@@ -1,0 +1,135 @@
+% Part: methods
+% Chapter: induction
+% Section: induction-on-N
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{ind}{inN}
+
+\olsection{Induction on~$\Nat$}
+
+In its simplest form, induction is a technique used to prove results
+for all natural numbers. It uses the fact that by starting from $0$
+and repeatedly adding~$1$ we eventually reach every natural number.  So
+to prove that something is true for every number, we can (1) establish
+that it is true for $0$ and (2) show that whenever a number has it,
+the next number has it too.  If we abbreviate ``number~$n$ has
+property $P$'' by $P(n)$, then a proof by induction that $P(n)$ for
+all $n \in \Nat$ consists of:
+\begin{enumerate}
+\item a proof of $P(0)$, and
+\item a proof that, for any~$n$, if $P(n)$ then $P(n+1)$.
+\end{enumerate}
+To make this crystal clear, suppose we have both (1) and (2).  Then
+(1) tells us that $P(0)$ is true.  If we also have (2), we know in
+particular that if $P(0)$ then $P(0+1)$, i.e., $P(1)$. (This follows
+from the general statement ``for any~$n$, if $P(n)$ then $P(n+1)$'' by
+putting~$0$ for~$n$.  So by modus ponens, we have that $P(1)$.  From
+(2) again, now taking $1$ for~$n$, we have: if $P(1)$ then $P(2)$.
+Since we've just established $P(1)$, by modus ponens, we
+have~$P(2)$. And so on.  For any number $k$, after doing this $k$
+steps, we eventually arrive at~$P(k)$.  So (1) and (2) together
+established~$P(k)$ for any $k \in \Nat$.
+
+Let's look at an example.  Suppose we want to find out how many
+different sums we can throw with $n$ dice.  Although it might seem
+silly, let's start with $0$ dice.  If you have no dice there's only one
+possible sum you can ``throw'': no dots at all, which sums to~$0$. So
+the number of different possible throws is~$1$. If you have only one
+die, i.e., $n=1$, there are six possible values, $1$ through~$6$. With
+two dice, we can throw any sum from $2$ through $12$, that's $11$
+possibilities.  With three dice, we can throw any number from $3$ to
+$18$, i.e., $16$ different possibilities.  $1$, $6$, $11$, $16$: looks
+like a pattern: maybe the answer is $5n+1$?  Of course, $5n+1$ is the
+maximum possible, because there are only $5n+1$ numbers between $n$,
+the lowest value you can throw with $n$ dice (all $1$'s) and $6n$, the
+highest you can throw (all $6$'s).
+
+\begin{thm}
+  With $n$ dice one can throw all $5n+1$ possible values between $n$
+  and $6n$.
+\end{thm}
+
+\begin{proof}
+Let $P(n)$ be the claim: ``It is possible to throw any number between
+$n$ and~$6n$ using $n$~dice.''  To use induction, we prove:
+\begin{enumerate}
+\item The \emph{induction basis} $P(1)$, i.e., with just one die,
+  you can throw any number between $1$ and $6$.
+\item The \emph{induction step}, for all $k$, if $P(k)$ then~$P(k+1)$.
+\end{enumerate}
+
+(1) Is proved by inspecting a $6$-sided die. It has all 6 sides, and
+every number between $1$ and~$6$ shows up one on of the sides. So it
+is possible to throw any number between $1$ and~$6$ using a single
+die.
+
+To prove (2), we assume the antecedent of the conditional, i.e.,
+$P(k)$. This assumption is called the \emph{inductive hypothesis}.  We
+use it to prove~$P(k+1)$. The hard part is to find a way of thinking
+about the possible values of a throw of $k+1$ dice in terms of the
+possible values of throws of $k$~dice plus of throws of the extra
+$k+1$-st die---this is what we have to do, though, if we want to use
+the inductive hypothesis.
+
+The inductive hypothesis says we can get any number between $k$
+and~$6k$ using $k$~dice.  If we throw a~$1$ with our $(k+1)$-st die,
+this adds $1$ to the total. So we can throw any value between $k+1$
+and $6k+1$ by throwing $5$~dice and then rolling a~$1$ with the
+$(k+1)$-st die.  What's left?  The values $6k+2$ through $6k+6$.  We
+can get these by rolling $k$ $6$s and then a number between $2$ and
+$6$ with our $(k+1)$-st die. Together, this means that with $k+1$ dice
+we can throw any of the numbers between $k+1$ and $6(k+1)$, i.e.,
+we've proved~$P(k+1)$ using the assumption~$P(k)$, the inductive
+hypothesis.
+\end{proof}
+
+Very often we use induction when we want to prove something about a
+series of objects (numbers, sets, etc.) that is itself defined
+``inductively,'' i.e., by defining the $(n+1)$-st object in terms of
+the $n$-th.  For instance, we can define the sum~$s_n$ of the natural
+numbers up to~$n$ by
+\begin{align*}
+  s_0 & = 0\\
+  s_{n+1} & = s_n + (n+1)
+\end{align*}
+This definition gives:
+\begin{align*}
+  s_0 & = 0,\\
+  s_1 & = s_0 + 1 && = 1,\\
+  s_2 & = s_1 + 2 && = 1 + 2 = 3\\
+  s_3 & = s_2 + 3 && = 1 + 2 + 3 = 6, \text{ etc.}
+\end{align*}
+Now we can prove, by induction, that $s_n = n(n+1)/2$.
+
+\begin{prop}
+  $s_n = n(n+1)/2$.
+\end{prop}
+
+\begin{proof}
+  We have to prove (1) that $s_0 = 0\cdot(0 + 1)/2$ and (2) if $s_n =
+  n(n+1)/2$ then $s_{n+1} = (n+1)(n+2)/2$.  (1) is obvious. To prove
+  (2), we assume the inductive hypothesis: $s_n = n(n+1)/2$. Using it,
+  we have to show that $s_{n+1} = (n+1)(n+2)/2$.
+
+  What is $s_{n+1}$?  By the definition, $s_{n+1} = s_n + (n+1)$.  By
+  inductive hypothesis, $s_n = n(n+1)/2$. We can substitute this into
+  the previous equation, and then just need a bit of arithmetic of
+  fractions:
+  \begin{align*}
+    s_{n+1} & = \frac{n(n+1)}{2} + (n+1) = {}\\
+    & = \frac{n(n+1)}{2} + \frac{2(n+1)}{2} = {}\\
+    & = \frac{n(n+1) + 2(n+1)}{2} = {}\\
+    & = \frac{(n+2)(n+1)}{2}.
+  \end{align*}
+\end{proof}
+
+The important lesson here is that if you're proving something about
+some inductively defined sequence $a_n$, induction is the obvious way
+to go. And even if it isn't (as in the case of the possibilities of
+dice throws), you can use induction if you can somehow relate the case
+for~$n+1$ to the case for~$n$.
+
+\end{document}

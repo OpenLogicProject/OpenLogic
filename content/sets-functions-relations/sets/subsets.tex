@@ -18,7 +18,7 @@ of even numbers is also a part of the set of integers. It's important
 to keep those two senses of being part of a set separate.
 \end{explain}
 
-\begin{defn}
+\begin{defn}[Subset]
 If every element of a set $X$ is also an element of
     $Y$, then we say that $X$ is a \emph{subset} of $Y$, and write $X
     \subseteq Y$.
@@ -33,16 +33,28 @@ But $\{ a, b, e \}$ is not a subset of $\{ a, b, c \}$.
 \end{ex}
 
 \begin{explain}
-Note that a set may contain other sets!{} In particular, a set may
-happen to \emph{both} be an !!{element} and a subset of another, e.g.,
-$\{0\} \in \{0, \{0\}\}$ and also $\{0\} \subseteq \{0, \{0\}\}$.
+Note that a set may contain other sets, not just as subsets but as
+!!{element}s!{} In particular, a set may happen to \emph{both} be 
+!!a{element} and a subset of another, e.g., $\{0\} \in \{0, \{0\}\}$
+and also $\{0\} \subseteq \{0, \{0\}\}$.
 \end{explain}
 
+\begin{explain}
+Extensionality gives a criterion of identity for sets: $X = Y$ iff
+every !!{element} of~$X$ is also !!a{element} of~$Y$ and vice versa.
+The definition of ``subset'' defines $X \subseteq Y$ precisely as the first
+half of this criterion: every !!{element} of~$X$ is also !!a{element}
+of~$Y$. Of course the definition also applies if we switch $X$ and
+$Y$: $Y \subseteq X$ iff every !!{element} of $Y$ is also !!a{element}
+of~$X$. And that, in turn, is exactly the ``vice versa'' part of
+extensionality. In other words, extensionality amounts to: $X = Y$
+iff $X \subseteq Y$ and $Y \subseteq X$.
+\end{explain}
 
-\begin{defn}
+\begin{defn}[Power Set]
 The set consisting of all subsets of a set~$X$ is called the
 \emph{power set of}~$X$, written $\Pow{X}$.
-    \[\Pow{X} = \Setabs{x}{x \subseteq X} \]
+    \[\Pow{X} = \Setabs{Y}{Y \subseteq X} \]
 \end{defn}
 
 \begin{ex}
@@ -58,6 +70,11 @@ $\Pow{\{a,b,c\}}$:
 
 \begin{prob}
 List all subsets of $\{a, b, c, d\}$.
+\end{prob}
+
+\begin{prob}
+Show that if $X$ has $n$ !!{element}s, then $\Pow{X}$ has $2^n$
+!!{element}s.
 \end{prob}
 
 \end{document}

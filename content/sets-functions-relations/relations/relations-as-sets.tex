@@ -48,7 +48,7 @@ numbers, namely, the relationship $n$ bears to $m$ if and only if
 $\tuple{n, m} \in S$. This justifies the following definition:
 \end{explain}
 
-\begin{defn}
+\begin{defn}[Binary relation]
 A \emph{binary relation} on a set $X$ is a subset of~$X^{2}$. If
 $R\subseteq X^{2}$ is a binary relation on~$X$ and $x, y \in X$,
 we write $Rxy$ (or $xRy$) for $\tuple{x, y} \in R$.
@@ -72,25 +72,32 @@ this:
 \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
 \end{array}
 \]
-The subset consisting of the pairs lying on the diagonal, $\{\tuple{
-0,0 }, \tuple{ 1,1 }, \tuple{ 2,2 }, \dots\}$, is the
-\emph{identity relation on}~$\mathbb{N}$. (Since the identity
+The subset consisting of the pairs lying on the diagonal, i.e.,
+\[
+\{\tuple{0,0 }, \tuple{ 1,1 }, \tuple{ 2,2 }, \dots\},
+\]
+is the \emph{identity relation on}~$\mathbb{N}$. (Since the identity
 relation is popular, let's define $\Id{X}=\Setabs{\tuple{ x,x }}{x \in
-X}$ for any set $X$.) The subset of all pairs lying above the
-diagonal, $L = \{\tuple{ 0,1 },\tuple{ 0,2 },\ldots,\tuple{
-1,2 }, \tuple{ 1,3 }, \dots, \tuple{ 2,3 }, \tuple{ 2,4
-},\ldots\}$ is the \emph{less than} relation, i.e., $Lnm$ iff
-$n<m$. The subset of pairs below the diagonal, $G=\{ \tuple{ 1,0
-},\tuple{ 2,0 },\tuple{ 2,1 }, \tuple{ 3,0
-},\tuple{ 3,1 },\tuple{ 3,2 }, \dots\}$ is the
-\emph{greater than} relation, i.e., $Gnm$ iff $n>m$. The union of $L$
-with $I$, $K=L\cup I$, is the \emph{less than or equal to} relation:
-$Knm$ iff $n \le m$. Similarly, $H=G \cup I$ is the \emph{greater than
-  or equal to relation.} $L$, $G$, $K$, and $H$ are special kinds of
-relations called \emph{orders}. $L$ and $G$ have the property that no
-number bears $L$ or $G$ to itself (i.e., for all $n$, neither $Lnn$
-nor $Gnn$). Relations with this property are called
-\emph{antireflexive}, and, if they also happen to be orders, they are
+  X}$ for any set $X$.) The subset of all pairs lying above the
+diagonal, i.e.,
+\[
+L = \{\tuple{ 0,1 },\tuple{ 0,2 },\ldots,\tuple{ 1,2 },
+\tuple{ 1,3 }, \dots, \tuple{ 2,3 }, \tuple{ 2,4 },\ldots\},
+\]
+is the \emph{less than} relation, i.e., $Lnm$ iff $n<m$. The subset of
+pairs below the diagonal, i.e.,
+\[
+G=\{ \tuple{ 1,0 },\tuple{ 2,0 },\tuple{
+  2,1 }, \tuple{ 3,0 },\tuple{ 3,1 },\tuple{ 3,2 }, \dots\},
+\]
+is the \emph{greater than} relation, i.e., $Gnm$ iff $n>m$. The union
+of $L$ with $I$, $K=L\cup I$, is the \emph{less than or equal to}
+relation: $Knm$ iff $n \le m$. Similarly, $H=G \cup I$ is the
+\emph{greater than or equal to relation.} $L$, $G$, $K$, and $H$ are
+special kinds of relations called \emph{orders}. $L$ and $G$ have the
+property that no number bears $L$ or $G$ to itself (i.e., for all $n$,
+neither $Lnn$ nor $Gnn$). Relations with this property are called
+\emph{irreflexive}, and, if they also happen to be orders, they are
 called \emph{strict orders.}
 \end{ex}
 
@@ -98,11 +105,12 @@ called \emph{strict orders.}
 Although orders and identity are important and natural relations, it
 should be emphasized that according to our definition \emph{any}
 subset of $X^{2}$ is a relation on~$X$, regardless of how unnatural or
-contrived it seems. In particular, $\emptyset$ is a relation on any set
-(the \emph{empty relation}, which no pair of elements bears), and
-$X^{2}$~itself is a relation on $X$ as well (one which every pair
-bears). But also something like $E=\Setabs{\tuple{n, m}}{n>5 \text{ or
-  } m \times n \ge 34}$ counts as a relation.
+contrived it seems. In particular, $\emptyset$ is a relation on any
+set (the \emph{empty relation}, which no pair of elements bears), and
+$X^{2}$~itself is a relation on~$X$ as well (one which every pair
+bears), called the \emph{universal relation}. But also something like
+$E=\Setabs{\tuple{n, m}}{n>5 \text{ or } m \times n \ge 34}$ counts as
+a relation.
 \end{explain}
 
 \begin{prob}

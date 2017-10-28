@@ -1,5 +1,5 @@
 % % The Default OLP Configuration File `open-logic-config.sty`
-% % OpenLogic Project
+% % Open Logic Project
 %
 % Description
 % ===========
@@ -12,8 +12,8 @@
 % master files) will include `myversion-config.sty` if it exists. It
 % will do so after it loads this file, so your `myversion-config.sty`
 % will redefine the defaults.  This means you won't have to include
-% everythng, e.g., you can just change some tags and nothing else. You
-% may copy and paste edfinitions you want to change into that file, or
+% everything, e.g., you can just change some tags and nothing else. You
+% may copy and paste definitions you want to change into that file, or
 % copy thi file, rename it `myversion-config.sty` and delete anything
 % you'd like to leave as the default.
 
@@ -150,23 +150,44 @@
 % operator `Op`, e.g., `\LeftR{\land}` produces `$\land$L`.
 % `\RightR{Op}` does the same for right rules.
 
-\DeclareDocumentCommand \LeftR { m } {\ensuremath{#1\mathrm{L}}}
+\DeclareDocumentCommand \LeftR { m } {\ensuremath{{#1}\mathrm{L}}}
 
-\DeclareDocumentCommand \RightR { m } {\ensuremath{#1\mathrm{R}}}
+\DeclareDocumentCommand \RightR { m } {\ensuremath{{#1}\mathrm{R}}}
 
 % - `\Weakening`: produces name or abbreviation for weakening rule,
 % e.g., ``W''.
 
 \DeclareDocumentMacro \Weakening {\text{W}}
 
+% - `\Contraction`: produces name or abbreviation for contraction rule,
+% e.g., ``C''.
+
+\DeclareDocumentMacro \Contraction {\text{C}}
+
+% - `\Exchange`: produces name or abbreviation for exchange rule,
+% e.g., ``X''.
+
+\DeclareDocumentMacro \Exchange {\text{X}}
+
+% - `\Cut`: produces name or abbreviation for cut rule,
+% e.g., ``Cut''.
+
+\DeclareDocumentMacro \Cut {\text{Cut}}
 
 % - Rule names: `\Intro{Op}` typesets the name of an intro rule for
 % operator `Op`, e.g., `\Intro{\land}` produces `$\land$Intro`.
 % `\Elim{Op}` does the same for elimination rules.
 
-\DeclareDocumentCommand \Intro { m } {\ensuremath{#1\mathrm{Intro}}}
+\DeclareDocumentCommand \Intro { m } {\ensuremath{{#1}\mathrm{Intro}}}
 
-\DeclareDocumentCommand \Elim { m } {\ensuremath{#1\mathrm{Elim}}}
+\DeclareDocumentCommand \Elim { m } {\ensuremath{{#1}\mathrm{Elim}}}
+
+% - `\FalseInt`, `\FalseCl`: produces name or abbreviation for
+% intuitionistic and classical absurdity rule, e.g., ``$\bot_I$,''
+% ``$\bot_C$''.
+
+\DeclareDocumentMacro \FalseInt {\ensuremath{\lfalse_I}}
+\DeclareDocumentMacro \FalseCl {\ensuremath{\lfalse_C}}
 
 % - `\Discharge{!A}{n}`: typesets a discharged assumption with label
 % $n$, e.g., $[!A]^n$.
@@ -178,7 +199,7 @@
 
 \DeclareDocumentCommand \DischargeRule { m m }{
   \RightLabel{#1}
-  \LeftLabel{\scriptsize #2}
+  \LeftLabel{\scriptsize $#2$}
 }
 
 % Metalogical Relations
@@ -283,7 +304,7 @@
 % - `\Assign{R}{M}` - Assignment (value of) of a constant/predicate symbol
 % in a structure; e.g., `\Assign{R}{M}` produces $R^\mathfrak{M}$.
 
-\DeclareDocumentCommand \Assign { m m }{#1^{\Struct #2}}
+\DeclareDocumentCommand \Assign { m m }{\mathord{#1^{\Struct #2}}}
 
 % - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
 % arguments (term and structure) and one optional argument (variable
@@ -360,6 +381,16 @@
 
 \DeclareDocumentCommand \Expan { m m } {(\Struct{#1}, #2)}
 
+% `\nssucc`, `\nsplus`, `\nstimes`, `\nsless`: non-standard
+% arithmetical operations
+
+\DeclareDocumentMacro \nszero {\mathbf{z}}
+\DeclareDocumentMacro \nssucc {*}
+\DeclareDocumentMacro \nsplus {\oplus}
+\DeclareDocumentMacro \nstimes {\otimes}
+\RequirePackage{stmaryrd}
+\DeclareDocumentMacro \nsless {\varolessthan}
+
 
 % Recursion-theoretic Notions and Symbols
 % ---------------------------------------
@@ -367,6 +398,30 @@
 % - `\Proj{n}{i}`: projection functions
 
 \DeclareDocumentCommand \Proj { m m } {P^{#1}_{#2}}
+
+% - `\Zero`: the constant zero function
+
+\DeclareDocumentMacro \Zero {\fn{zero}}
+
+% - `\Succ`: the successor function
+
+\DeclareDocumentMacro \Succ {\fn{succ}}
+
+% - `\Add`: the addition function
+
+\DeclareDocumentMacro \Add {\fn{add}}
+
+% - `\Mult`: the multiplication function
+
+\DeclareDocumentMacro \Mult {\fn{mult}}
+
+% - `\Exp`: the exponentiation function
+
+\DeclareDocumentMacro \Exp {\fn{exp}}
+
+% - `\Pred`: the successor function
+
+\DeclareDocumentMacro \Pred {\fn{pred}}
 
 % - `\tsub`: truncated subtraction function
 
@@ -394,7 +449,15 @@
 
 % - `\bmin{x < y}{!A}`: bounded minimization
 
-\DeclareDocumentCommand \bmin { m m } {\fn{min} \; #1 \; #2}
+\DeclareDocumentCommand \bmin { m m } {(\fn{min} \; #1)\, #2}
+
+% - `\bexists{x < y}{!A}`: bounded existential quantification
+
+\DeclareDocumentCommand \bexists { m m } {(\exists #1)\; #2}
+
+% - `\bforall{x < y}{!A}`: bounded univeral quantification
+
+\DeclareDocumentCommand \bforall { m m } {(\forall #1)\; #2}
 
 % - `\cfind{e}[n]`: partial computable function with index $e$
 
@@ -431,11 +494,11 @@
 
 % - `\scode{s}`: code for a symbol
 
-\DeclareDocumentCommand \scode { m } {\fn{c}(#1)}
+\DeclareDocumentCommand \scode { m } {\fn{c}_{#1}}
 
 % - `\Gn{!A}`: G\"odel number of a string of symbols
 
-\DeclareDocumentCommand \Gn { m } {\#(#1)}
+\DeclareDocumentCommand \Gn { m } {{^{\reflectbox{\tiny\#}}}{#1}{^{\mbox{\tiny\#}}}}
 
 % Modal Logic 
 % -----------
@@ -492,22 +555,31 @@
 % - `\card{X}`: cardinality of a set
 \DeclareDocumentCommand \card { m } {\left| #1 \right|}
 
+% - `\cardle{X}{Y}`: X is no larger than Y
+\DeclareDocumentCommand \cardle { m m } {#1 \preceq #2}
+
+% - `\cardless{X}{Y}`: X is smaller than Y
+\DeclareDocumentCommand \cardless { m m } {#1 \prec #2}
+
+% - `\cardle{X}{Y}`: X is equinumerous with Y
+\DeclareDocumentCommand \cardeq { m m } {#1 \approx #2}
+
 % - `\tuple{x,y}`: pairs, tuples, sequences
 \DeclareDocumentCommand \tuple { m } {\langle #1 \rangle}
 
 % - `\comp{f}{g}`: composition of f with g, defaults to $g \circ f$
-\DeclareDocumentCommand \comp { m m }{g \circ f}
+\DeclareDocumentCommand \comp { m m }{#2 \circ #1}
 
 % - `\pto`: partial function arrow
 
 \DeclareDocumentMacro \pto {\mathrel{\ooalign{\hfil$\mapstochar\mkern
       5mu$\hfil\cr$\to$}}}
 
-% - `\defined`, `\undefined`: postfix for defined, undefined
+% - `\fdefined`, `\fundefined`: postfix for defined, undefined
 % functions
 
-\DeclareDocumentMacro \defined {\downarrow}
-\DeclareDocumentMacro \undefined {\uparrow}
+\DeclareDocumentMacro \fdefined {\downarrow}
+\DeclareDocumentMacro \fundefined {\uparrow}
 
 % ### Particular sets
 
@@ -535,10 +607,23 @@
 \DeclareDocumentMacro \TMendtape {\triangleright}
 
 % - `\TMblank` - symbol for a blank
-\DeclareDocumentMacro \TMblank {\mathord{\text{\textvisiblespace}}}
+\DeclareDocumentMacro \TMblank {0}
 
 % - `\TMstroke` - single stroke symbol on tape
-\DeclareDocumentMacro \TMstroke {\mid}
+\DeclareDocumentMacro \TMstroke {1}
+
+% - `\TMright` - symbol for move right instruction
+\DeclareDocumentMacro \TMright {R}
+
+% - `\TMleft` - symbol for move left instruction
+\DeclareDocumentMacro \TMleft {L}
+
+% - `\TMstay` - symbol for the stay instruction
+\DeclareDocumentMacro \TMstay {N}
+
+% - `\TMtrans` - typeset a TM transition
+
+\DeclareDocumentCommand \TMtrans { m m m } {\ensuremath{#1, #2, #3}}
 
 % ### Functions and Function/Relation symbols
 
@@ -548,22 +633,27 @@
 
 % - `\Prf`: the proof relation
 
-\DeclareDocumentCommand \Prf { o } { \mathrm{Pr}\IfNoValueTF {#1} {} {_\Th{#1}}}
-\DeclareDocumentCommand \OPrf { o } { \mathsf{Pr}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \Prf { o } { \mathrm{Prf}\IfNoValueTF {#1} {} {_{#1}}}
+\DeclareDocumentCommand \OPrf { o } { \mathsf{Prf}\IfNoValueTF {#1} {} {_{#1}}}
 
-% - `\Prov`: the provability relation
+% - `\Refut`: the refutation relation
 
-\DeclareDocumentCommand \Prov { o } { \mathrm{Prov}\IfNoValueTF {#1} {} {_\Th{#1}}}
-\DeclareDocumentCommand \OProv { o } { \mathsf{Prov}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \Refut { o } { \mathrm{Ref}\IfNoValueTF {#1} {} {_{#1}}}
+\DeclareDocumentCommand \ORefut { o } { \mathsf{Ref}\IfNoValueTF {#1} {} {_{#1}}}
+
+% - `\Prov`: the provability predicate
+
+\DeclareDocumentCommand \Prov { o } { \mathrm{Prov}\IfNoValueTF {#1} {} {_{#1}}}
+\DeclareDocumentCommand \OProv { o } { \mathsf{Prov}\IfNoValueTF {#1} {} {_{#1}}}
 
 % - `\RProv`: the Rosser provability relation
 
-\DeclareDocumentCommand \RProv { o } { \mathrm{RProv}\IfNoValueTF {#1} {} {_\Th{#1}}}
-\DeclareDocumentCommand \ORProv { o } { \mathsf{RProv}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \RProv { o } { \mathrm{RProv}\IfNoValueTF {#1} {} {_{#1}}}
+\DeclareDocumentCommand \ORProv { o } { \mathsf{RProv}\IfNoValueTF {#1} {} {_{#1}}}
 
 % - `\OCon`: the consistency statement
 
-\DeclareDocumentCommand \OCon { o } { \mathsf{Con}\IfNoValueTF {#1} {} {_\Th{#1}}}
+\DeclareDocumentCommand \OCon { o } { \mathsf{Con}\IfNoValueTF {#1} {} {_{#1}}}
 
 % Typesetting commands for logical concepts
 % =========================================
@@ -653,6 +743,21 @@
     \IfNoValueTF {#1} 
         { \mathrm{Frm} }
         { \mathrm{Frm}({\Lang #1}) }
+}
+
+% - `\Trm2[L]`: the set of second-order terms (of a language)
+
+\DeclareDocumentCommand \TrmSOL { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Trm}^2 }
+        { \mathrm{Trm}^2({\Lang #1}) }
+}
+
+% - `\Frm2[L]`: the set of second-order formulas (of a language)
+\DeclareDocumentCommand \FrmSOL { o } {
+    \IfNoValueTF {#1} 
+        { \mathrm{Frm}^2 }
+        { \mathrm{Frm}^2({\Lang #1}) }
 }
 
 % - `\SubFrm{!A}`: the set of subformulas of a formula (mandatory
@@ -839,12 +944,31 @@
 
 \settexttoken{nonderivability}{non-derivability}{non-derivabilities}
 
+% - `complete`: negation complete, syntactically complete (of theories)
+
+\settexttoken{complete}{complete}{complete}
+
+% - `axiomatizable`: effectively/recursively axiomatizable
+
+\settexttoken{axiomatizable}*{axiomatizable}{axiomatizable}
+\settexttoken{axiomatized}*{axiomatized}{axiomatized}
+\settexttoken{axiomatizability}*{axiomatizability}{axiomatizability}
+
+% - `represents`, `representable`
+
+\settexttoken{represents}{represents}{represent}
+\settexttoken{representable}{representable}{representable}
+
 % - `discharge`: discharge an assumption in a natural deduction proof,
 % cancel, close. Also: undischarged, non-cancelled, open.
 
 \settexttoken{discharge}{discharge}{discharges}
 \settexttoken{discharged}{discharged}{discharged}
-\settexttoken{undischarged}{undischarged}{undischarged}
+\settexttoken{undischarged}*{undischarged}{undischarged}
+
+% - `complete`: syntactic completeness of a set of sentences
+
+\settexttoken{complete}{complete}{complete}
 
 % - `enumerable`: term for finite or countably infinite; defaults to
 % "enumerable", redefine for "countable".
@@ -881,6 +1005,13 @@
 
 \settexttoken{bijective}{bijective}{bijective}
 \settexttoken{bijection}{bijection}{bijections}
+
+% - `decidable`:
+
+\settexttoken{decidable}{decidable}{decidable}
+
+\settexttoken{computably enumerable}{computably enumerable}{computably enumerable}
+\settexttoken{c.e.}{c.e.}{c.e.}
 
 % Tags
 % ====
@@ -941,3 +1072,9 @@
 \tagtrue{prfND}
 \tagtrue{prfAX}
 
+% - `cmplCCS` - prove completeness via generating a complete
+% consistent set
+% - `cmplMCS` - prove completeness via maximally consistent sets
+
+\tagtrue{cmplCCS}
+\tagtrue{cmplMCS}

@@ -1,0 +1,108 @@
+% Part: methods
+% Chapter: induction
+% Section: inductive-definitions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{ind}{idf}
+
+\olsection{Inductive Definitions}
+
+In logic we very often define kinds of objects \emph{inductively},
+i.e., by specifying rules for what counts as an object of the kind to
+be defined which explain how to get new objects of that kind from old
+objects of that kind.  For instance, we often define special kinds of
+sequences of symbols, such as the terms and !!{formula}s of a
+language, by induction.  For a simpler example, consider strings of
+parentheses, such as ``(()('' or ``()(())''.  In the second string,
+the parentheses ``balance,'' in the first one, they don't.  The
+shortest such expression is ``()''. Actually, the very shortest string
+of parentheses in which every opening parenthesis has a matching
+closing parenthesis is ``'', i.e., the empty sequence~$\emptyseq$.  If
+we already have a parenthesis expression~$p$, then putting matching
+parentheses around it makes another balanced parenthesis
+expression. And if $p$ and $p'$ are two balanced parentheses
+expressions, writing one after the other, ``$pp'$'' is also a balanced
+parenthesis expression.  In fact, any sequence of balanced parentheses
+can be generated in this way, and we might use these operations to
+\emph{define} the set of such expressions.  This is an \emph{inductive
+  definition}.
+
+\begin{defn}[Paraexpressions]
+  The set of \emph{parexpressions} is inductively defined as follows:
+  \begin{enumerate}
+  \item $\emptyseq$ is a parexpression.
+  \item If $p$ is a parexpression, then so is $(p)$.
+  \item If $p$ and $p'$ are parexpressions $\neq \emptyseq$, then so
+    is $pp'$.
+  \item Nothing else is a parexpression.
+  \end{enumerate}
+\end{defn}
+
+(Note that we have not yet proved that every balanced parenthesis
+expression is a parexpression, although it is quite clear that every
+parexpression is a balanced parenthesis expression.)
+
+The key feature of inductive definitions is that if you want to prove
+something about all parexpressions, the definition tells you which
+cases you must consider.  For instance, if you are told that $q$ is a
+parexpression, the inductive definition tells you what $q$ can look
+like: $q$ can be $\emptyseq$, it can be $(p)$ for some other
+parexpression~$p$, or it can be $pp'$ for two parexpressions~$p$ and
+$p' \neq \emptyseq$. Because of clause (4), those are all the
+possibilities.
+
+When proving claims about all of an inductively defined set, the
+strong form of induction becomes particularly important. For instance,
+suppose we want to prove that for every parexpression of length~$n$,
+the number of $($ in it is~$n/2$.  This can be seen as a claim about
+all~$n$: for every $n$, the number of $($ in any parexpression of
+length~$n$ is $n/2$.
+
+\begin{prop}
+  For any $n$, the number of $($ in a parexpression of length~$n$ is
+  $n/2$.
+\end{prop}
+
+\begin{proof}
+To prove this result by (strong) induction, we have to show that the
+following conditional claim is true:
+\begin{quote}
+  If for every $k < n$, any parexpression of length $k$ has $k/2$
+  $($'s, then any parexpression of length~$n$ has $n/2$ $($'s.
+\end{quote}
+To show this conditional, assume that its antecedent is true, i.e.,
+assume that for any $k<n$, parexpressions of length $k$ contain $k$
+$($'s.  We call this assumption the inductive hypothesis. We want to
+show the same is true for parexpressions of length~$n$.
+
+So suppose $q$ is a parexpression of length~$n$.  Because
+parexpressions are inductively defined, we have three cases: (1) $q$
+is $\emptyseq$, (2) $q$ is $(p)$ for some parexpression~$p$, or (3)
+$q$ is $pp'$ for some parexpressions $p$ and $p' \neq \emptyseq$.
+\begin{enumerate}
+\item $q$ is $\emptyseq$.  Then $n = 0$, and the number of $($ in
+$q$ is also $0$. Since $0 = 0/2$, the claim holds.
+\item $q$ is $(p)$ for some parexpression~$p$.  Since $q$ contains two
+  more symbols than $p$, $\len{p} = n - 2$, in particular, $\len{p} <
+  n$, so the inductive hypothesis applies: the number of $($ in $p$ is
+  $\len{p}/2$. The number of $($ in $q$ is $1 + {}$ the number of $($
+  in $p$, so $= 1 + \len{p}/2$, and since $\len{p} = n - 2$, this
+  gives $1 + (n-2)/2 = n/2$.
+\item $q$ is $pp'$ for some parexpression~$p$ and $p' \neq \emptyseq$.
+  Since neither $p$ nor $p' =\emptyseq$, both $\len{p}$ and $\len{p'}
+  < n$. Thus the inductive hypothesis applies in each case: The number
+  of $($ in $p$ is $\len{p}/2$, and the number of $($ in $p'$ is
+  $\len{p'}/2$.  On the other hand, the number of $($ in $q$ is
+  obviously the sum of the numbers of $($ in $p$ and $p'$, since $q =
+  pp'$.  Hence, the number of $($ in $q$ is $\len{p}/2 + \len{p'}/2 =
+  (\len{p}+\len{p'})/2 = \len{pp'}/2 = n/2$.
+\end{enumerate}
+In each case, we've shown that teh number of $($ in $q$ is $n/2$ (on
+the basis of the inductive hypothesis). By strong induction, the
+proposition follows.
+\end{proof}
+
+\end{document}

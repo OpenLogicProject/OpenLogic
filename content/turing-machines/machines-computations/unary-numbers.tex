@@ -1,12 +1,12 @@
-% Part: computability
-% Chapter: tm-computations
+% Part: turing-machines
+% Chapter: machines-computations
 % Section: unary-numbers
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{cmp}{tur}{una}
+\olfileid{tur}{mac}{una}
 \olsection{Unary Representation of Numbers}
 
 \begin{explain}
@@ -14,12 +14,14 @@ Turing machines work on sequences of symbols written on their tape.
 Depending on the alphabet a Turing machine uses, these sequences of
 symbols can represent various inputs and outputs.  Of particular
 interest, of course, are Turing machines which compute
-\emph{arithmetical} functions, i.e., functions of natural numbers.
-A simple way to represent positive integers is by coding them
-as sequences of a single symbol~$\TMstroke$.
+\emph{arithmetical} functions, i.e., functions of natural numbers.  A
+simple way to represent positive integers is by coding them as
+sequences of a single symbol~$\TMstroke$.  If $n \in \Nat$, let
+$\TMstroke^n$ be the empty sequence if $n = 0$, and otherwise the
+sequence consisting of exactly $n$ $\TMstroke$'s.
 \end{explain}
 
-\begin{defn}
+\begin{defn}[Computation]
 A Turing machine~$M$ \emph{computes} the function $f\colon \Nat^n \to \Nat$ iff
 $M$ halts on input
 \[
@@ -28,6 +30,69 @@ $M$ halts on input
 with output $\TMstroke^{f(k_1, \dots, k_n)}$.
 \end{defn}
 
-% need examples!
+\begin{ex} \emph{Addition:}
+Build a machine that, when given an input of two non-empty strings of
+$\TMstroke$'s of length~$n$ and $m$, computes the function $f(n,m) = n
++ m$.
+
+We want to come up with a machine that starts with two blocks of
+strokes on the tape and halts with one block of strokes. We first need
+a method to carry out.  The input strokes are separated by a blank, so
+one method would be to write a stroke on the square containing the
+blank, and erase the first (or last) stroke. This would result in a
+block of~$n + m$ $\TMstroke$'s. Alternatively, we could proceed in a
+similar way to the doubler machine, by erasing a stroke from the first
+block, and adding one to the second block of strokes until the first
+block has been removed completely. We will proceed with the former
+example.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [right of=B] {$q_2$};
+
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
+           edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
+        (C) edge [loop above] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (C);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{prob}
+Trace through the configurations of the machine for input $\tuple{3,5}$.
+\end{prob}
+
+\begin{prob}
+\emph{Subtraction:} Design a Turing machine that when given an input
+of two non-empty strings of strokes of length $n$ and~$m$, where $n >
+m$, computes the function $f(n,m) = n - m$.
+\end{prob}
+
+\begin{prob}
+\emph{Equality:} Design a Turing machine to compute the following function:
+\[
+\fn{equality}(x,y) = 
+\begin{cases}
+  \text{1} & \text{if~$x = y$} \\
+  \text{0} & \text{if~$x \neq y$}
+\end{cases}
+\]
+where~$x$ and~$y$ are integers greater than~$0$.
+\end{prob}
+
+\begin{prob}
+Design a Turing machine to compute the function $\min(x,y)$ where $x$
+and $y$ are positive integers represented on the tape by strings of
+$\TMstroke$'s separated by a $\TMblank$. You may use additional
+symbols in the alphabet of the machine.
+
+The function $\min$ selects the smallest value from its arguments, so
+$\min(3,5)=3$, $\min(20,16)=16$, and $\min(4,4)=4$, and so on.
+\end{prob}
 
 \end{document}

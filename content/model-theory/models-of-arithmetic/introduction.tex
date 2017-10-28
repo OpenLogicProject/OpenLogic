@@ -1,0 +1,72 @@
+% Part: model-theory
+% Chapter: models-of-arithmetic
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{mar}{int}
+\section{Introduction}
+
+The \emph{standard model} of aritmetic is the
+!!{structure}~$\Struct{N}$ with $\Domain{N} = \Nat$ in which
+$\Obj{0}$, $\prime$, $+$, $\times$, and $<$ are interpreted as you
+would expect. That is, $\Obj{0}$ is $0$, $\prime$ is the successor
+function, $+$ is interpeted as addition and $\times$ as multiplication
+of the numbers in~$\Nat$. Specifically,
+\begin{align*}
+  \Assign{\Obj{0}}{N} & = 0\\
+  \Assign{\prime}{N}(n) & = n + 1\\
+  \Assign{+}{N}(n, m) & = n + m\\
+  \Assign{\times}{N}(n, m) & = nm
+\end{align*}
+Of course, there are structures for $\Lang{L_A}$ that have domains
+other than~$\Nat$. For instance, we can take $\Struct{M}$ with domain
+$\Domain{M} = \{a\}^*$ (the finite sequences of the single
+symbol~$a$, i.e., $\emptyset$, $a$, $aa$, $aaa$, \dots), and
+interpretations
+\begin{align*}
+  \Assign{\Obj{0}}{M} & = \emptyset\\
+  \Assign{\prime}{M}(s) & = s \concat a\\
+  \Assign{+}{M}(n, m) & = a^{n + m}\\
+  \Assign{\times}{M}(n, m) & = a^{nm}
+\end{align*}
+These two structures are ``essentially the same'' in the sense that
+the only difference is the !!{element}s of the !!{domain}s but not how
+the !!{element}s of the !!{domain}s are related among each other by
+the interpretation functions. We say that the two !!{structure}s are
+\emph{isomorphic}.
+
+It is an easy consequence of the compactness theorem that any theory
+true in~$\Struct{N}$ also has models that are not isomorphic
+to~$\Struct{N}$.  Such structures are called \emph{non-standard}.  The
+interesting thing about them is that while the !!{element}s of a
+standard model (i.e., $\Struct{N}$, but also all !!{structure}s
+isomorphic to it) are exhausted by the values of the standard
+numerals~$\num{n}$, i.e.,
+\[
+\Domain{N} = \Setabs{\Value{\num{n}}{N}}{n \in \Nat}
+\]
+that isn't the case in non-standard models: if $\Struct{M}$ is
+non-standard, then there is at least one $x \in \Domain{M}$ such that
+$x \neq \Value{\num{n}}{M}$ for all~$n$.
+
+These non-standard elements are pretty neat: they are ``infinite
+natural numbers.'' But their existence also explains, in a sense, the
+incompleteness phenomena.  Cconsider an example, e.g., the consistency
+statement for Peano arithmetic, $\OCon[\Th{PA}]$, i.e., $\lnot
+\lexists[x][\OPrf[\Th{PA}](x, \gn{\lfalse})]$. Since $\Th{PA}$ neither
+proves $\OCon[\Th{PA}]$ nor $\lnot \OCon[\Th{PA}]$, either can be
+consistently added to $\Th{PA}$. Since $\Th{PA}$ is consistent,
+$\Sat{N}{\OCon[\Th{PA}]}$, and consequently $\Sat/{N}{\lnot
+  \OCon[\Th{PA}]}$.  So $\Struct{N}$ is \emph{not} a model of $\Th{PA}
+\cup \{\lnot \OCon[\Th{PA}]\}$, and all its models must be
+nonstandard. Models of $\Th{PA} \cup \{\lnot \OCon[\Th{PA}]\}$ must
+contain some !!{element} that serves as the witness that makes
+$\lexists[x][\OPrf[\Th{PA}](\gn{\lfalse})]$ true, i.e., a G\"odel
+number of a !!{derivation} of a contradiction from~$\Th{PA}$.  Such
+!!a{element} can't be standard---since $\Th{PA} \Proves \lnot
+\OPrf[\Th{PA}](\num{n}, \gn{\lfalse})$ for every~$n$.
+
+\end{document}

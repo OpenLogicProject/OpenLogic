@@ -7,34 +7,53 @@
 \begin{document}
 
 \olfileid{inc}{req}{pri}
-\olsection{Primitive Recursion in $C$}
+\olsection{Simulating Primitive Recursion}
 
-Now we can show that $C$ is closed under primitive recursion. Suppose
-$f(\vec z)$ and $g(u,v,\vec z)$ are both in $C$. Let $h(x,\vec z)$ be
-the function defined by
+Now we can show that definition by primitive recursion can be
+``simulated'' by regular minimization using the beta function. Suppose
+we have $f(\vec z)$ and $g(u,v,\vec z)$. Then the function~$h(x,\vec
+z)$ defined from $f$ and~$g$ by primitive recursion is
 \begin{eqnarray*}
 h(0,\vec z) & = & f(\vec z) \\
 h(x+1,\vec z) & = & g(x,h(x,\vec z),\vec z).
 \end{eqnarray*}
-We need to show that $h$ is in $C$.
+We need to show that $h$ can be defined from $f$ and~$g$ using just
+composition and regular minimization, using the basic functions and
+functions defined from them using composition and regular minimization
+(such as~$\beta$).
 
+\begin{lem}
+\ollabel{lem:prim-rec}
+If $h$ can be defined from $f$ and $g$ using primitive recursion, it
+can be defined from $f$, $g$, the functions $\Zero$, $\Succ$,
+$\Proj{n}{i}$, $\Add$, $\Mult$, $\Char{=}$, using composition and
+regular minimization.
+\end{lem}
+
+\begin{proof}
 First, define an auxiliary function $\hat h(x,\vec z)$ which returns
-the least number $d$ such that $d$ codes a sequence satisfying
+the least number~$d$ such that $d$ codes a sequence which satisfies
 \begin{enumerate}
 \item $(d)_0 = f(\vec z)$, and
 \item for each $i < x$, $(d)_{i+1} = g(i,(d)_i,\vec z)$,
 \end{enumerate}
 where now $(d)_i$ is short for $\beta(d,i)$. In other words, $\hat h$
-returns a sequence that begins $\langle h(0,\vec z), h(1,\vec z), \dots,
-h(x,\vec z)\rangle$. $\hat h$ is in $C$, because we can write it as
+returns the sequence $\tuple{h(0,\vec z), h(1,\vec z), \dots, h(x,\vec
+  z)}$. We can write $\hat h$ as
 \[
-\hat h(x,z) = \mu d \; (\beta(d,0) = f(\vec z) \land \lforall[i <
-  x][\beta(d,i+1) = g(i,\beta(d,i),\vec z)]).
+\hat h(x,z) = \umin{d}{(\beta(d,0) = f(\vec z) \land \lforall[i <
+  x][\beta(d,i+1) = g(i,\beta(d,i),\vec z)])}.
 \]
-But then we have
+Note: no primitive recursion is needed here, just minimization. The
+function we minimize is regular because of the beta function lemma
+\olref[bet]{lem:beta}.
+
+But now we have
 \[
 h(x,\vec z) = \beta(\hat h(x,\vec z),x),
 \]
-so $h$ is in $C$ as well.
+so $h$ can be defined from the basic functions using just composition
+and regular minimization.
+\end{proof}
 
 \end{document}

@@ -1,0 +1,58 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: provability-quantifiers
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{qpr}
+
+\olsection{\usetoken{S}{derivability} and the Quantifiers}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} If $c$ is a constant not occurring
+in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
+\Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+Let $\delta$ be !!a{derivation} of $!A(c)$ from $\Gamma$.  By adding a
+\Intro{\lforall} inference, we obtain a proof of
+$\lforall[x][!A(x)]$. Since $c$ does not occur in $\Gamma$ or $!A(x)$,
+the eigenvariable condition is satisfied.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{The following is a !!{derivation}
+  of~$\lexists[x][!A(x)]$ from~$!A(t)$:
+\begin{prooftree}
+\AxiomC{$!A(t)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!A(x)]$}
+\end{prooftree}}{}
+
+\tagitem{prvAll}{The following is a !!{derivation} of~$!A(t)$
+  from~$\lforall[x][!A(x)]$:
+\begin{prooftree}
+\AxiomC{$\lforall[x][!A(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(t)$}
+\end{prooftree}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

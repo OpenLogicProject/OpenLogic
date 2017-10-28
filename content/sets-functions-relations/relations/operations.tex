@@ -24,7 +24,7 @@ considered as sets of pairs). Here are some other ways:
 \item The \emph{restriction}~$R \restrict Y$ of $R$ to $Y$ is $R \cap Y^2$
 \item The \emph{application}~$R[Y]$ of $R$ to $Y$ is
 \[
-R[Y] = \{y : \text{for some } x \in X, Rxy\}
+R[Y] = \{y : \text{for some } x \in Y, Rxy\}
 \]
 \end{enumerate}
 \end{defn}
@@ -46,13 +46,13 @@ the set of pairs $\tuple{x, y}$ where $x + 1 = y$, for $x, y \in
 
 \end{ex}
 
-\begin{defn}
+\begin{defn}[Transitive closure]
 The \emph{transitive closure}~$R^+$ of a relation $R \subseteq X^2$ is
 $R^+ = \bigcup_{i=1}^\infty R^i$ where $R^1 = R$ and $R^{i+1} = R^i
 \mid R$.
 
 The \emph{reflexive transitive closure} of $R$ is $R^* = R^+ \cup
-I_X$.
+\Id{X}$.
 \end{defn}
 
 \begin{ex}

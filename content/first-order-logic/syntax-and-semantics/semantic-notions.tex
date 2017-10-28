@@ -82,13 +82,12 @@ $\Struct M$ with $\Sat{M}{\Gamma}$, $\Sat{M}{!A}$, so $\Gamma \Entails
 \begin{prob}
 \begin{enumerate}
 \item Show that $\Gamma \Entails \bot$ iff $\Gamma$ is unsatisfiable.
-\item Show that $\Gamma, !A \Entails \bot$ iff $\Gamma \Entails \lnot !A$.
+\item Show that $\Gamma \cup \{!A\} \Entails \bot$ iff $\Gamma \Entails \lnot !A$.
 \item Suppose $c$ does not occur in $!A$ or $\Gamma$.  Show that
   $\Gamma \Entails \lforall[x][!A]$ iff $\Gamma \Entails
   \Subst{!A}{c}{x}$.
 \end{enumerate}
 \end{prob}
-
 
 \begin{prop}
 If $\Gamma \subseteq \Gamma'$ and $\Gamma \Entails !A$, then $\Gamma'
@@ -104,6 +103,7 @@ whenever $\Sat{M}{\Gamma'}$, $\Sat{M}{!A}$, so $\Gamma' \Entails !A$.
 
 
 \begin{thm}[Semantic Deduction Theorem]
+\ollabel{thm:sem-deduction}
 $\Gamma \cup \{!A\} \Entails !B$ iff $\Gamma \Entails !A \lif !B$.
 \end{thm}
 
@@ -121,5 +121,37 @@ $\Sat{M}{!A}$, $\Sat{M}{!B}$. Hence, whenever $\Sat{M}{\Gamma \cup \{
   !A \} }$, $\Sat{M}{!B}$, so $\Gamma \cup \{ !A \} \Entails !B$.
 \end{proof}
 
+\begin{prop}\ollabel{prop:quant-terms}
+  Let $\Struct{M}$ be !!a{structure}, and $!A(x)$ !!a{formula} with
+  one free variable~$x$, and $t$~a closed term. Then:
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{$!A(t) \Entails \lexists[x][!A(x)]$}{}
+    \tagitem{prvAll}{$\lforall[x][!A(x)] \Entails !A(t)$}{}
+  \end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{%
+      \iftag{probEx}{Exercise.}{Suppose $\Sat{M}{!A(t)}$. Let $s$ be a
+        variable assignment with $s(x) = \Value{t}{M}$. Then
+        $\Sat{M}{!A(t)}[s]$ since $!A(t)$ is !!a{sentence}. By
+        \olref[ext]{prop:ext-formulas}, $\Sat{M}{!A(x)}[s]$. By
+        \olref[ass]{prop:sat-quant},
+        $\Sat{M}{\lexists[x][!A(x)]}$.}}{}
+    \tagitem{prvAll}{%
+      \iftag{probAll}{Exercise.}{Suppose
+        $\Sat{M}{\lforall[x][!A(x)]}$. Let $s$ be a variable
+        assignment with $s(x) = \Value{t}{M}$. By
+        \olref[ass]{prop:sat-quant}, $\Sat{M}{!A(x)}[s]$.  By
+        \olref[ext]{prop:ext-formulas}, $\Sat{M}{!A(t)}[s]$. By
+        \olref[ass]{prop:sentence-sat-true}, $\Sat{M}{!A(t)}$ since
+        $!A(t)$ is !!a{sentence}.}}{}
+  \end{tagenumerate}
+\end{proof}
+
+\begin{probtag}{probEx,probAll}
+  Complete the proof of \olref[fol][syn][sem]{prop:quant-terms}.
+\end{probtag} 
 
 \end{document}

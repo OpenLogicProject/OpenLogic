@@ -12,21 +12,37 @@
 \RequirePackage{xparse}
 \RequirePackage{mfirstuc}
 \RequirePackage{subfiles}
+\RequirePackage{framed}
 \RequirePackage{bussproofs}
 \RequirePackage{graphicx}
-\usepackage{tikz}
-\usetikzlibrary{arrows}
 
+\RequirePackage{natbib}
+\setcitestyle{authoryear}
+
+\RequirePackage{tikz}
+\RequirePackage{tikzscale}
+\usetikzlibrary{arrows,automata}
+
+\RequirePackage{wrapfig}
+\RequirePackage{catchfile}
+\RequirePackage{tocloft}
 
 \RequirePackage{xcolor}
 \definecolor{dark-gray}{gray}{0.2}
 \definecolor{reflex-blue}{RGB}{12, 28, 140}
+
+\colorlet{oldiagcolorA}{black}
+\colorlet{oldiagcolorB}{gray}
+\definecolor{oldiagcolorC}{HTML}{a81c21}
+\definecolor{oldiagcolorD}{HTML}{1973ba}
+
 \RequirePackage[pdftex,breaklinks,bookmarks,bookmarksopen,bookmarksopenlevel=1,colorlinks,urlcolor=dark-gray,linkcolor=reflex-blue]{hyperref}
 
-\RequirePackage{hyperref}
 \RequirePackage{amsthm}
 \RequirePackage{thmtools}
 \RequirePackage[nameinlink]{cleveref} % always after hyperref!
+
+%\usepackage{pgf}
 
 \makeatletter
 
@@ -52,6 +68,10 @@
 % DeclareDocumentMacro -- for macros (no argument), doesn't check if defined
 
 \newcommand*{\DeclareDocumentMacro}[2]{\def#1{#2}}
+
+% We loading \oljobname-config.sty and \oljobname-envs.sty. Initialize
+% \oljobname to \jobname -- this way you can use the same config files
+% for differnt jobs.
 
 \ifdefined\oljobname\relax\else\let\oljobname\jobname\fi
 
@@ -124,7 +144,7 @@
 \end{minipage}
 \hspace{.3cm}
 \begin{minipage}[b]{3.5cm}
-\sffamily
+\ollicensefont
 \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
     Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
   Project} is licensed under a
@@ -142,11 +162,12 @@
        {\gitAbbrevHash}
   (\gitAuthorDate)\else\relax\fi}
 
-\newcommand*{\shortollicense}{\sffamily\footnotesize
+\newcommand*{\ollicensefont}{\sffamily\fontsize{9pt}{12pt}\selectfont}
+
+\newcommand*{\shortollicense}{\ollicensefont
   \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{\jobname}}
   \ifgitinfo\ by \href{http://openlogicproject.org/}{OLP} /
   \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
-
 
 \newcommand*{\oluselicense}[2]{%
 \begin{minipage}[b]{.9cm}
@@ -156,7 +177,7 @@
 \end{minipage}
 \hspace{.3cm}
 \begin{minipage}[b]{5cm}
-\sffamily\small
+\ollicensefont
 \textit{#1} by #2 is licensed under a
 \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
   Attribution 4.0 International License}. It is based on
@@ -169,10 +190,40 @@
 \hfill
 \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}}
 
-\copypagestyle{openlogic}{plain}
-\makeevenfoot{openlogic}{\thepage}{}{\shortollicense}
-\makeoddfoot{openlogic}{\shortollicense}{}{\thepage}
+\newcommand*{\shortoluselicense}[2]{\ollicensefont
+  \textit{#1}
+  by #2 based on \href{http://openlogicproject.org/}{OLP} /
+  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
 
-\setlength{\cftsectionnumwidth}{2.8em}
+\newcommand\gitissue[1]
+  {\href{https://github.com/OpenLogicProject/OpenLogic/issues/#1}{issue
+    \##1}}
 
 \makeatother
+
+% Photos
+
+% Photo credits
+\newlistof{photocredits}{pcr}{Photo Credits}
+
+\newlength{\olphotowidth}
+\setlength{\olphotowidth}{.5\textwidth}
+\setlength{\intextsep}{0pt}
+\setlength{\columnsep}{0pt}
+
+\tagtrue{olphotos} % include photos
+\tagtrue{olphotos-lowres} % pick low-res images for smaller file size
+
+\newcommand*{\olphoto}[2]{%
+  \iftag{olphotos}{%
+    \IfFileExists{\olpath/assets/photos/#1/#1-large.png}{%
+      \begin{wrapfigure}{R}{\olphotowidth}
+        \hfil
+        \iftag{olphotos-lowres}{%
+          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1/#1-small}}{
+          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1/#1-large}}
+        \caption{#2}
+      \IfFileExists{\olpath/assets/photos/#1/#1-credit.tex}{%
+        \CatchFileDef{\photocredit}{\olpath/assets/photos/#1/#1-credit.tex}{}%
+        \addtocontents{pcr}{#2, p.~\thepage: \photocredit\par}}{}
+\end{wrapfigure}}}{}}

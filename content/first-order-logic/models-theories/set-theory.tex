@@ -130,12 +130,12 @@ where $\mathrm{maps}(f, x, y)$ abbreviates $\lexists[v][(v \in f \land
 
 It is now also not hard to express that $f\colon X \to Y$ is
 !!{injective}, for instance:
-\begin{align*}
-& f \colon X \to Y \land {}\\
-& \lforall[x][\lforall[x'][((x \in X \land x' \in
-    X \land \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
-        x', y))]) \lif x = x')]]
-\end{align*}
+\begin{multline*}
+ f \colon X \to Y \land \lforall[x][\lforall[x'][((x \in X \land x' \in
+     X \land {}]] \\
+ \lexists[y][(\mathrm{maps}(f, x, y) \land \mathrm{maps}(f,
+        x', y))]) \lif x = x')
+\end{multline*}
 A function~$f\colon X \to Y$ is !!{injective} iff, whenever $f$ maps $x, x'
 \in X$ to a single~$y$, $x = x'$.  If we abbreviate this formula as
 $\mathrm{inj}(f, X, Y)$, we're already in a position to state in the
@@ -146,5 +146,37 @@ there is no !!{injective} function from $\Pow{X}$ to $X$:
     \lnot\lexists[f][\mathrm{inj}(f, Y, X)])]]
 \]
 
+One might think that set theory requires another axiom that guarantees
+the existence of a set for every defining property. If $!A(x)$ is a
+formula of set theory with the variable~$x$ free, we can consider the
+!!{sentence}
+\[
+\lexists[y][\lforall[x][(x \in y \liff !A(x))]].
+\]
+This !!{sentence} states that there is a set~$y$ whose !!{element}s
+are all and only those $x$ that satisfy~$!A(x)$. This schema is called
+the ``comprehension principle.''  It looks very useful; unfortunately
+it is inconsistent.  Take $!A(x) \ident \lnot x \in x$, then the
+comprehension principle states
+\[
+\lexists[y][\lforall[x][(x \in y \liff x \notin x)]],
+\]
+i.e., it states the existence of a set of all sets that are not
+!!{element}s of themselves. No such set can exist---this is Russell's
+Paradox.  $\Log{ZFC}$, in fact, contains a restricted---and
+consistent---version of this principle, the separation principle:
+\[
+\lforall[z][\lexists[y][\lforall[x][(x \in y \liff (x \in z \land
+      !A(x))]]].
+\]
 
+\begin{prob}
+Show that the comprehension principle is inconsistent by giving
+!!a{derivation} that shows
+\[
+\lexists[y][\lforall[x][(x \in y \liff x \notin x)]] \Proves \lfalse.
+\]
+It may help to first show $(A \lif \lnot A) \land (\lnot A \lif A)
+\Proves \lfalse$.
+\end{prob}
 \end{document}

@@ -1,0 +1,50 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: unsolvability-decision-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{und}{dec}
+\olsection{The Decision Problem}
+
+We say that first-order logic is \emph{decidable} iff there is an
+effective method for determining whether or not a given !!{sentence}
+is valid. As it turns out, there is no such method: the problem of
+deciding validity of first-order sentences is unsolvable.
+
+In order to establish this important negative result, we prove that
+the decision problem cannot be solved by a Turing machine.  That is,
+we show that there is no Turing machine which, whenever it is started
+on a tape that contains a first-order !!{sentence}, eventually halts
+and outputs either $1$ or $0$ depending on whether the
+!!{sentence} is valid or not. By the Church-Turing thesis, every
+function which is computable is Turing computable. So if if this
+``validity function'' were effectively computable at all, it would be
+Turing computable. If it isn't Turing computable, then, it also cannot
+be effectively computable.
+
+Our strategy for proving that the decision problem is unsolvable is to
+reduce the halting problem to it.  This means the following: We have
+proved that the function~$h(e,w)$ that halts with output~$1$ if the
+Turing-machine described by~$e$ halts on input~$w$ and outputs~$0$
+otherwise, is not Turing-computable.  We will show that if there were
+a Turing machine that decides validity of first-order sentences, then
+there is also Turing machine that computes~$h$.  Since $h$ cannot be
+computed by a Turing machine, there cannot be a Turing machine that
+decides validity either.
+
+The first step in this strategy is to show that for every input~$w$
+and a Turing machine~$M$, we can effectively describe !!a{sentence}
+$!T(M, w)$ representing the instruction set of~$M$ and the input~$w$
+and !!a{sentence}~$!E(M, w)$ expressing ``$M$ eventually halts'' such
+that:
+\begin{quote}
+  $\Entails !T(M, w) \lif !E(M,w)$ iff $M$ halts for input~$w$.
+\end{quote}
+The bulk of our proof will consist in describing these sentences
+$!T(M, w)$ and $!E(M, w)$ and verifying that $!T(M, w) \lif !E(M, w)$
+is valid iff $M$ halts on input~$w$.
+
+\end{document}

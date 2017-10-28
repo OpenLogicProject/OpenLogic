@@ -1,0 +1,79 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: halting-states
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{tur}{tur}
+\olsection{Halting States}
+
+\begin{explain}
+Although we have defined our machines to halt only when there
+is no instruction to carry out, common representations of Turing
+machines have a dedicated \emph{halting state}, $h$, such that
+$h \in Q$.
+
+The idea behind a halting state is simple: when the machine has
+finished operation (it is ready to accept input, or has finished writing
+the output), it goes into a state $h$ where it halts. Some
+machines have two halting states, one that accepts input and one
+that rejects input. 
+\end{explain}
+
+\begin{ex}\emph{Halting States}.
+To elucidate this concept, let us begin with an alteration of the
+even machine. Instead of having the machine halt in state $q_0$
+if the input is even, we can add an instruction to send the machine
+into a halt state.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial, state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [below of=A] {$h$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+  	    edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{R}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
+\end{tikzpicture}
+\]
+
+Let us further expand the example. When the machine determines that the input
+is odd, it never halts. We can alter the machine to
+include a \emph{reject} state by replacing the looping instruction with an
+instruction to go to a reject state~$r$.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)                     {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [below of=A] {$h$};
+  \node[state]         (D) [below of=B] {$r$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (B)
+  	    edge node {\TMtrans{\TMblank}{\TMblank}{N}} (C)
+        (B) edge node {\TMtrans{\TMblank}{\TMblank}{N}} (D)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{R}} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+Adding a dedicated halting state can be advantageous in cases like
+this, where it makes explicit when the machine accepts/rejects certain
+inputs.  However, it is important to note that no computing power is
+gained by adding a dedicated halting state. Similarly, a less
+formal notion of halting has its own advantages. The definition of
+halting used so far in this chapter makes the proof of the
+\emph{Halting Problem} intuitive and easy to demonstrate. For this
+reason, we continue with our original definition.
+\end{explain}
+
+\end{document}

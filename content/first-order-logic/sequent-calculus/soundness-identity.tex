@@ -1,0 +1,44 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{sid}
+
+\olsection{Soundness with \usetoken{S}{identity}}
+
+\begin{prop}
+$\Log{LK}$ with initial sequents and rules for identity is sound.
+\end{prop}
+
+\begin{proof}
+Initial sequents of the form ${} \Sequent \eq[t][t]$ are valid, since
+for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
+we assume the term $t$ to be closed, i.e., it contains no variables,
+so variable assignments are irrelevant).
+
+Suppose the last inference in !!a{derivation} is $=$. Then the premise
+is $\eq[t_1][t_2], \Gamma \Sequent \Delta, !A(t_1)$ and the conclusion
+is $\eq[t_1][t_2], \Gamma \Sequent \Delta, !A(t_2)$. Consider
+!!a{structure}~$\Struct M$. We need to show that the conclusion is
+valid, i.e., if $\Sat{M}{\eq[t_1][t_2]}$ and $\Sat{M}{\Gamma}$, then
+either $\Sat{M}{!C}$ for some $!C \in \Delta$ or $\Sat{M}{!A(t_2)}$.
+
+By induction hypothesis, the premise is valid. This means that if
+$\Sat{M}{\eq[t_1][t_2]}$ and $\Sat{M}{\Gamma}$ either (a) for some $!C
+\in \Delta$, $\Sat{M}{!C}$ or (b) $\Sat{M}{!A(t_1)}$. In case (a) we
+are done. Consider case (b).  Let $s$ be a variable assignment with
+$s(x) = \Value{t_1}{M}$.  By \olref[syn][ass]{prop:sentence-sat-true},
+$\Sat{M}{!A(t_1)}[s]$. Since $s \sim_x s$, by
+\olref[syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(x)}[s]$. since
+$\Sat{M}{\eq[t_1][t_2]}$, we have $\Value{t_1}{M} = \Value{t_2}{M}$,
+and hence $s(x) = \Value{t_2}{M}$.  By applying
+\olref[syn][ext]{prop:ext-formulas} again, we also have
+$\Sat{M}{!A(t_2)}[s]$.  By \olref[syn][ass]{prop:sentence-sat-true},
+$\Sat{M}{!A(t_2)}$.
+\end{proof}
+
+\end{document}

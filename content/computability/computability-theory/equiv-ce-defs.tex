@@ -28,13 +28,13 @@ equivalent:
 \end{thm}
 
 \begin{explain}
-The first three clauses say that we can equivalently take any nonempty
+The first three clauses say that we can equivalently take any non-empty
 computably enumerable set to be enumerated by either a computable
 function, a partial computable function, or a primitive recursive
 function. The fourth clause tells us that if $S$ is computably
 enumerable, then for some index $e$,
 \[
-S = \Setabs{x}{\cfind{e}(x) \defined}.
+S = \Setabs{x}{\cfind{e}(x) \fdefined}.
 \]
 In other words, $S$ is the set of inputs on for which the computation
 of $\cfind{e}$ halts. For that reason, computably enumerable sets are
@@ -56,7 +56,7 @@ element of~$S$. By Kleene's normal form theorem, we can write
 \[
 \cfind{e}(x) = U (\umin{s}{T(e, x, s)}).
 \]
-In particular, $\cfind{e}(x) \defined$ and $= y$ if and only if there
+In particular, $\cfind{e}(x) \fdefined$ and $= y$ if and only if there
 is an $s$ such that $T(e, x, s)$ and $U(s) = y$. Define $f(z)$ by
 \[
 f(z) = \begin{cases}
@@ -76,10 +76,10 @@ forwards direction, suppose $y \in S$. Then $y$ is in the range of
 $\cfind{e}$, so for some $x$ and $s$, $T(e,x,s)$ and $U(s) = y$; but then
 $y = f(\tuple{x,s})$. Conversely, suppose $y$ is in the range of
 $f$. Then either $y = a$, or for some $z$, $T(e,(z)_0,(z)_1)$ and
-$U((z)_1) = y$. Since, in the latter case, $\cfind{e}(x) \defined = y$,
+$U((z)_1) = y$. Since, in the latter case, $\cfind{e}(x) \fdefined = y$,
 either way, $y$ is in $S$.
 
-(The notation $\cfind{e}(x) \defined = y$ means ``$\cfind{e}(x)$ is
+(The notation $\cfind{e}(x) \fdefined = y$ means ``$\cfind{e}(x)$ is
 defined and equal to $y$.'' We could just as well use $\cfind{e}(x) =
 y$, but the extra arrow is sometimes helpful in reminding us that we
 are dealing with a partial function.)
@@ -105,7 +105,7 @@ $g$~is the range of~$f$. \iftag{TMs}{Expressed in terms of Turing
 Finally, to show (4) implies (1), suppose that $S$~is the domain of the
 partial computable function~$\cfind{e}$, i.e.,
 \[
-S = \Setabs{x}{\cfind{e}(x) \defined}.
+S = \Setabs{x}{\cfind{e}(x) \fdefined}.
 \]
 If $S$ is empty, we are done; otherwise, let $a$ be any element
 of~$S$. Define $f$ by
@@ -116,7 +116,7 @@ a & \text{otherwise.}
 \end{cases}
 \]
 Then, as above, a number $x$ is in the range of~$f$ if and only if
-$\cfind{e}(x) \defined$, i.e., if and only if $x \in S$. \iftag{TMs}{Expressed
+$\cfind{e}(x) \fdefined$, i.e., if and only if $x \in S$. \iftag{TMs}{Expressed
 in terms of Turing machines: given a machine $M_e$ that semi-decides
 $S$, enumerate the elements of $S$ by running through all possible
 Turing machine computations, and returning the inputs that correspond

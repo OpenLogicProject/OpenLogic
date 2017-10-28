@@ -1,0 +1,118 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{seq}{der}
+
+\olsection{\usetoken{P}{derivation}}
+
+\begin{explain}
+We've said what an initial sequent looks like, and we've given the
+rules of inference.  !!^{derivation}s in the sequent calculus are
+inductively generated from these: each !!{derivation} either is an
+initial sequent on its own, or consists of one or two !!{derivation}s
+followed by an inference.
+\end{explain}
+
+\begin{defn}[$\Log{LK}$ !!{derivation}]
+An \emph{$\Log{LK}$-!!{derivation}} of a sequent~$S$ is a tree of
+sequents satisfying the following conditions:
+\begin{enumerate}
+\item The topmost sequents of the tree are initial sequents.
+\item The bottommost sequent of the tree is~$S$.
+\item Every sequent in the tree except $S$ is a premise of a correct
+  application of an inference rule whose conclusion stands directly
+  below that sequent in the tree.
+\end{enumerate}
+We then say that $S$ is the \emph{end-sequent} of the !!{derivation} and
+that $S$ is \emph{!!{derivable} in $\Log{LK}$} (or $\Log{LK}$-!!{derivable}).
+\end{defn}
+
+\begin{ex}
+Every initial sequent, e.g., $!C \Sequent !C$ is !!a{derivation}. We
+can obtain a new !!{derivation} from this by applying, say, the
+$\LeftR{\Weakening}$ rule,
+\begin{prooftree}
+\Axiom$ \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\end{prooftree}
+The rule, however, is meant to be general: we can replace the $!A$ in
+the rule with any !!{sentence}, e.g., also with~$!D$. If the premise
+matches our initial sequent $!C \Sequent !C$, that means that both
+$\Gamma$ and $\Delta$ are just~$!C$, and the conclusion would then be
+$!D, !C \Sequent !C$. So, the following is !!a{derivation}:
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\end{prooftree}
+We can now apply another rule, say $\LeftR{\Exchange}$, which allows
+us to switch two !!{sentence}s on the left. So, the following is also
+a correct !!{derivation}:
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\end{prooftree}
+In this application of the rule, which was given as
+\begin{prooftree}
+\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta,$
+\end{prooftree}
+both $\Gamma$ and $\Pi$ were empty, $\Delta$ is $!C$, and the roles of
+$!A$ and $!B$ are played by $!D$ and~$!C$, respectively. In much the
+same way, we also see that
+\begin{prooftree}
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\end{prooftree}
+is !!a{derivation}. Now we can take these two derivations, and combine
+them using $\RightR{\land}$. That rule was
+\begin{prooftree}
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\end{prooftree}
+In our case, the premises must match the last sequents of the
+!!{derivation}s ending in the premises. That means that $\Gamma$ is
+$!C, !D$, $\Delta$ is empty, $!A$ is $!C$ and $!B$ is $!D$. So the
+conclusion, if the inference should be correct, is $!C, !D \Sequent !C
+\land !D$.  Of course, we can also reverse the premises, then $!A$
+would be $!D$ and $!B$ would be~$!C$. So both of the following are
+correct !!{derivation}s.
+\begin{prooftree}
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ !C, !D \fCenter !C \land !D $
+\DisplayProof
+\Axiom$ !D \fCenter !D $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !C, !D \fCenter !D$
+\Axiom$ !C \fCenter !C $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !D, !C \fCenter !C$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ !C, !D \fCenter !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ !C, !D \fCenter !D \land !C $
+\end{prooftree}
+\end{ex}
+
+\end{document}

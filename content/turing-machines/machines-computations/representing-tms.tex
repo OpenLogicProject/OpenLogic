@@ -1,0 +1,292 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: representing-tms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tms}{tms}{rep}
+\olsection{Representing Turing Machines}
+
+\begin{explain}
+Turing machines can be represented visually by \emph{state diagrams}. 
+The diagrams are composed of
+state cells connected by arrows. Unsurprisingly, each state cell represents
+a state of the machine. Each arrow represents an instruction that can be
+carried out from that state, with the specifics of the instruction written above
+or below the appropriate arrow. Consider the following machine, which has 
+only two internal states, $q_0$ and $q_1$, and one instruction:
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]   (A)              {$q_0$};
+  \node[state]   (B) [right of=A] {$q_1$};
+
+  \path (A) edge  node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B);
+\end{tikzpicture}
+\]
+Recall that the Turing machine has a read/write head and a tape with
+the input written on it. The instruction can be read as \emph{if
+  reading a blank in state $q_0$, write a stroke, move right, and move
+  to state $q_1$}. This is equivalent to the transition function
+mapping $\tuple{q_0, \TMblank}$ to $\tuple{q_1, \TMstroke, \TMright}$.
+\end{explain}
+
+\begin{ex}
+\emph{Even Machine}: The following Turing machine halts if, and only if, there 
+are an even number of strokes on the tape.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}
+\]
+
+The state diagram corresponds to the following transition function:
+\begin{align*}
+\delta(q_0, \TMstroke) & = \tuple{q_1, \TMstroke, \TMright},\\
+\delta(q_1, \TMstroke) & = \tuple{q_0, \TMstroke, \TMright},\\
+\delta(q_1, \TMblank)  & = \tuple{q_1, \TMblank, \TMright}
+\end{align*}
+\end{ex}
+
+\begin{explain}
+The above machine halts only when the input is an even number of strokes.
+Otherwise, the machine (theoretically) continues to operate indefinitely. 
+For any machine and input, it is possible to trace through the 
+\emph{configurations} of the machine in order to determine the output. 
+We will give a formal definition of configurations later. For now,
+we can intuitively think of configurations as a series of diagrams showing the 
+state of the machine at any point in time during operation.
+Configurations show the content of the tape, the state of the machine and the
+location of the read/write head.
+
+Let us trace through the configurations of the even machine if it is
+started with an input of $4$ $\TMstroke$s. In this case, we expect that the
+machine will halt.  We will then run the machine on an input of~$3$
+$\TMstroke$s, where the machine will run forever.
+
+The machine starts in state~$q_0$, scanning the leftmost~$\TMstroke$.
+We can represent the initial state of the machine as follows:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMstroke \TMblank \ldots
+\]
+The above configuration is straightforward. As can be seen, the
+machine starts in state one, scanning the leftmost~$\TMstroke$. This
+is represented by a subscript of the state name on the
+first~$\TMstroke$. The applicable instruction at this point is
+$\delta(q_0, \TMstroke) = \tuple{q_1, \TMstroke, \TMright}$, and so
+the machine moves right on the tape and changes to state~$q_1$.
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
+\]
+Since the machine is now in state~$q_1$ scanning a stroke, we have to
+``follow'' the instruction $\delta(q_1, \TMstroke) = \tuple{q_0,
+  \TMstroke, \TMright}$. This results in the configuration
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMstroke \TMblank \ldots
+\]
+As the machine continues, the rules are applied again in the same
+order, resulting in the following two configurations:
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke_1 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
+\]
+The machine is now in state~$q_0$ scanning a blank. Based on the
+transition diagram, we can easily see that there is no instruction to be
+carried out, and thus the machine has halted. This means that the input
+has been accepted.
+
+Suppose next we start the machine with an input of three strokes. The
+first few configurations are similar, as the same instructions are
+carried out, with only a small difference of the tape input:
+\[
+\TMendtape \TMstroke_0 \TMstroke \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke_1 \TMstroke \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke_0 \TMblank \ldots
+\]
+\[
+\TMendtape \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
+\]
+The machine has now traversed past all the strokes, and is reading a
+blank in state~$q_1$. As shown in the diagram, there is an instruction
+of the form $\delta(q_1, \TMblank) =\tuple{q_1, \TMblank, \TMright}$.
+Since the tape is infinitely blank to the right, the machine will
+continue to execute this instruction \emph{forever}, staying in
+state~$q_1$ and moving ever further to the right. The machine will
+never halt, and does not accept the input.
+\end{explain}
+
+\begin{explain}
+It is important to note that not all machines will halt. If halting
+means that the machine runs out of instructions to execute, then we
+can create a machine that never halts simply by ensuring that there is
+an outgoing arrow for each symbol at each state. The even machine can
+be modified to run infinitely by adding an instruction for scanning a
+blank at~$q_0$.
+\end{explain}
+
+\begin{ex}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path
+  (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+      edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (A)
+  (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+      edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{explain}
+Machine tables are another way of representing Turing
+machines. Machine tables have the tape alphabet displayed on the
+$x$-axis, and the set of machine states across the $y$-axis. Inside the
+table, at the intersection of each state and symbol, is written the
+rest of the instruction---the new state, new symbol, and direction of
+movement. Machine tables make it easy to determine in what state, and
+for what symbol, the machine halts. Whenever there is a gap in the
+table is a possible point for the machine to halt. Unlike state
+diagrams and instruction sets, where the points at which the machine
+halts are not always immediately obvious, any halting points are
+quickly identified by finding the gaps in the machine table.
+\end{explain}
+
+\begin{ex}
+The machine table for the even machine is:
+\[
+\centering
+\begin{tabular}{lllll}
+\cline{2-3}
+\multicolumn{1}{l|}{}      & \multicolumn{1}{l|}{$\TMblank$}                
+& \multicolumn{1}{l|}{$\TMstroke$}                &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{$q_0$} & \multicolumn{1}{l|}{}                          
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_1}{\TMright}} &  &  \\ \cline{1-3}
+\multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{\TMtrans{\TMblank}{q_1}{\TMblank}} 
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_0}{\TMright}} &  &  \\ \cline{1-3}
+\end{tabular}
+\]
+As we can see, the machine halts when scanning a blank in state $q_0$.
+\end{ex}
+
+\begin{explain}
+So far we have only considered machines that read and accept input. However, 
+Turing machines have the capacity to both read and write. An example of
+such a machine (although there are many, many examples) is a \emph{doubler}.
+A doubler, when started with a block of~$n$ strokes on the tape, outputs
+a block of~$2n$ strokes.
+\end{explain}
+
+\begin{ex}
+  \ollabel{ex:doubler} Before building a doubler machine, it is
+  important to come up with a \emph{strategy} for solving the
+  problem. Since the machine (as we have formulated it) cannot
+  remember how many strokes it has read, we need to come up with a way
+  to keep track of all the strokes on the tape. One such way is to
+  separate the output from the input with a blank. The machine can
+  then erase the first stroke from the input, traverse over the rest
+  of the input, leave a blank, and write two new strokes.  The machine
+  will then go back and find the second stroke in the input, and
+  double that one as well. For each one stroke of input, it will write
+  two strokes of output.  By erasing the input as the machine goes, we
+  can guarantee that no stroke is missed or doubled twice. When the
+  entire input is erased, there will be $2n$ strokes left on the tape.
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (1)              {$q_0$};
+  \node[state]         (2) [right of=1] {$q_1$};
+  \node[state]         (3) [right of=2] {$q_2$};
+  \node[state]         (4) [below of=3] {$q_3$};
+  \node[state]         (5) [left of=4]  {$q_4$};
+  \node[state]         (6) [left of=5]  {$q_5$};
+
+  \path (1) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (2)
+    (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
+    (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (3)
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (4)
+    (4) edge [loop below] node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (4)
+        edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+    (5) edge [loop below]  node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (6)
+    (6) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (6)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (1);
+\end{tikzpicture}
+\]
+\end{ex}
+
+\begin{prob}
+Choose an arbitary input and trace through the configurations of the
+doubler machine in \olref[tms][tms][rep]{ex:doubler}.
+\end{prob}
+
+\begin{prob}
+The double machine in \olref[tms][tms][rep]{ex:doubler} writes its
+output to the right of the input.  Come up with a new method for
+solving the doubler problem which generates its output immediately to
+the right of the end-of-tape marker. Build a machine that executes
+your method. Check that your machine works by tracing through the
+configurations.
+\end{prob}
+
+\begin{prob}
+Design a Turing-machine with alphabet $\{\TMblank, A, B\}$ that
+accepts any string of $A$s and $B$s where the number of $A$s is the
+same as the number of $B$s \emph{and} all the $A$s precede all the
+$B$s, and rejects any string where the number of $A$s is not equal to
+the number of $B$s or the $A$s do not precede all the $B$s. (E.g., the
+machine should accept $AABB$, and $AAABBB$, but reject both $AAB$ and
+$AABBAABB$.)
+\end{prob}
+
+\begin{prob}
+Design a Turing-machine with alphabet $\{\TMblank, A, B\}$ that takes
+as input any string $\alpha$ of $A$s and $B$s and duplicates them to
+produce an output of the form $\alpha\alpha$. (E.g. input $ABBA$
+should result in output $ABBAABBA$).
+\end{prob}
+
+\begin{prob}
+\emph{Alphabetical?:} Design a Turing-machine with alphabet
+$\{\TMblank, A, B\}$ that when given as input a finite sequence of As
+and Bs checks to see if all the As appear left of all the Bs or
+not. The machine should leave the input string on the tape, and output
+either halt if the string is ``alphabetical'', or loop forever if the
+string is not.
+\end{prob}
+
+\begin{prob}
+\emph{Alphabetizer:} Design a Turing-machine with alphabet
+$\{\TMblank, A, B\}$ that takes as input a finite sequence of $A$s and
+$B$s rearranges them so that all the $A$s are to the left of all
+the~$B$s. (e.g., the sequence $BABAA$ should become the sequence
+$AAABB$, and the sequence $ABBABB$ should become the sequence
+$AABBBB$).
+\end{prob}
+
+\end{document}

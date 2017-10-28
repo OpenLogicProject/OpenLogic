@@ -10,39 +10,38 @@
 
 \olsection{\usetoken{P}{derivation} with \usetoken{S}{identity}}
 
-!!^{derivation}s with the !!{identity} require additional inference rules.
+!!^{derivation}s with !!{identity} require additional inference rules.
 
-\paragraph{Rules for $\eq$:}
-
-\[
+\begin{defish}
 \AxiomC{}
 \RightLabel{\Intro{\eq}}
 \UnaryInfC{$\eq[t][t]$}
 \DisplayProof
-\qquad
+\hfill
+\begin{tabular}{r}
 \AxiomC{$\eq[t_1][t_2]$}
 \AxiomC{$!A(t_1)$}
 \RightLabel{\Elim{\eq}}
 \BinaryInfC{$!A(t_2)$}
 \DisplayProof
-\quad
-\textrm{  and  }
-\quad
+\\[3ex]
 \AxiomC{$\eq[t_1][t_2]$}
 \AxiomC{$!A(t_2)$}
 \RightLabel{\Elim{\eq}}
 \BinaryInfC{$!A(t_1)$}
 \DisplayProof
-\]
-where $t_1$ and $t_2$ are closed terms. The \Intro{\eq} rule allows us
-to !!{derive} any identity statement of teh form $\eq[t][t]$
-outright.
+\end{tabular}
+\end{defish}
+
+In the above rules, $t$, $t_1$, and $t_2$ are closed terms. The
+\Intro{\eq} rule allows us to !!{derive} any identity statement of the
+form $\eq[t][t]$ outright, from no assumptions.
 
 \begin{ex}
 If $s$ and $t$ are closed terms, then $!A(s), \eq[s][t] \Proves !A(t)$:
 \[
-\AxiomC{$!A(s)$}
 \AxiomC{$\eq[s][t]$}
+\AxiomC{$!A(s)$}
 \RightLabel{$\Elim{\eq}$}
 \BinaryInfC{$!A(t)$}
 \DisplayProof
@@ -58,6 +57,61 @@ Prove that $=$ is both symmetric and transitive, i.e., give
     \land \eq[y][z]) \lif \eq[x][z])]]$
 \end{prob}
 
+\begin{ex}
+We !!{derive} the !!{sentence}
+\begin{align*}
+& \lforall[x][\lforall[y][((!A(x) \land !A(y)) \lif \eq[x][y])]]
+\intertext{from the !!{sentence}}
+& \lexists[x][\lforall[y][(!A(y) \lif \eq[y][x])]]
+\end{align*}
+We develop the !!{derivation} backwards:
+\begin{prooftree}
+\AxiomC{$\lexists[x][\lforall[y][(!A(y) \lif \eq[y][x])]]
+\quad \Discharge{!A(a) \land !A(b)}{1}$}
+\DeduceC{$\eq[a][b]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$((!A(a) \land !A(b)) \lif \eq[a][b])$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[y][((!A(a) \land !A(y)) \lif \eq[a][y])]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][\lforall[y][((!A(x) \land !A(y)) \lif \eq[x][y])]]$}
+\end{prooftree}
+We'll now have to use the main assumption: since it is an existential
+!!{formula}, we use \Elim{\lexists} to !!{derive} the intermediary
+conclusion $\eq[a][b]$.
+\begin{prooftree}
+\AxiomC{$\lexists[x][\lforall[y][(!A(y) \lif \eq[y][x])]]$}
+\AxiomC{$\Discharge{\lforall[y][(!A(y) \lif \eq[y][c]])}{2}$}
+\noLine
+\UnaryInfC{$\Discharge{!A(a) \land !A(b)}{1}$}
+\DeduceC{$\eq[a][b]$}
+\DischargeRule{\Elim{\lexists}}{2}
+\BinaryInfC{$\eq[a][b]$}
+\DischargeRule{\Intro{\lif}}{1}
+\UnaryInfC{$((!A(a) \land !A(b)) \lif \eq[a][b])$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[y][((!A(a) \land !A(y)) \lif \eq[a][y])]$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][\lforall[y][((!A(x) \land !A(y)) \lif \eq[x][y])]]$}
+\end{prooftree}
+The sub-!!{derivation} on the top right is completed by using its
+assumptions to show that $\eq[a][c]$ and $\eq[b][c]$. This requies two
+separate !!{derivation}s. The derivation for $\eq[a][c]$ is as
+follows:
+\begin{prooftree}
+\AxiomC{$\Discharge{\lforall[y][(!A(y) \lif \eq[y][c]])}{2}$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(a) \lif \eq[a][c]$}
+\AxiomC{$\Discharge{!A(a) \land !A(b)}{1}$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A(a)$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$\eq[a][c]$}
+\end{prooftree}
+From $\eq[a][c]$ and $\eq[b][c]$ we !!{derive} $\eq[a][b]$ by
+\Elim{\eq}.
+\end{ex}
+
 \begin{prob}
 Give !!{derivation}s of the following !!{formula}s:
 \begin{enumerate}
@@ -67,29 +121,5 @@ Give !!{derivation}s of the following !!{formula}s:
   \lforall[y][(!A(y) \lif \eq[y][x])])]$
 \end{enumerate}
 \end{prob}
-
-\begin{prop}
-Natural deduction with rules for identity is sound.
-\end{prop}
-
-\begin{proof}
-Any !!{formula} of the form $\eq[t][t]$ is valid, since
-for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
-we assume the term $t$ to be ground, i.e., it contains no variables,
-so variable assignments are irrelevant).
-
-Suppose the last inference in a !!{derivation} is \Elim{\eq}. Then the
-premises are $\eq[t_1][t_2]$ and $!A(t_1)$; they are !!{derive}d from
-!!{undischarged} assumptions~$\Gamma$ and $\Delta$, respectively.  We
-want to show that $!A(s)$ follows from $\Gamma \cup \Delta$.  Consider
-a !!{structure}~$\Struct{M}$ with $\Sat{M}{\Gamma \cup \Delta}$. By induction
-hypothesis, $\Struct{M}$ satisfies the two premises by induction
-hypothesis. So, $\Sat{M}{\eq[t_1][t_2]}$. Therefore, $\Value{t_1}{M} =
-\Value{t_2}{M}$. Let $s$ be any variable assignment, and $s'$ be the
-$x$-variant given by $s'(x) = \Value{t_1}{M} = \Value {t_2}{M}$. By
-\olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_2)}[s]$ iff
-$\Sat{M}{!A(x)}[s']$ iff $\Sat{M}{!A(t_1)}[s]$. Since $\Sat{M}
-      {!A(t_1)}$ therefore $\Sat{M}{!A(t_2)}$.
-\end{proof}
 
 \end{document}

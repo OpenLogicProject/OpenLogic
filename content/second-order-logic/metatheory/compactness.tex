@@ -1,0 +1,70 @@
+% Part: second-order-logic
+% Chapter: metatheory
+% Section: compactness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{met}{com}
+
+\olsection{Second-order Logic is not Compact}
+
+\begin{explain}
+Call a set of sentences~$\Gamma$ \emph{finitely satisfiable} if every
+one of its finite subsets is satisfiable.  First-order logic has the
+property that if a set of !!{sentence}s~$\Gamma$ is finitely
+satisfiable, it is satisfiable.  This property is called
+\emph{compactness}.  It has an equivalent version involving
+entailment: if $\Gamma \Entails !A$, then already $\Gamma_0 \Entails
+!A$ for some finite subset~$\Gamma_0 \subseteq \Gamma$. In this
+version it is an immediate corollary of the completeness theorem: for
+if $\Gamma \Entails !A$, by completeness $\Gamma \Proves !A$. But a
+!!{derivation} can only make use of finitely many !!{sentence}s
+of~$\Gamma$.
+
+Compactness is not true for second-order logic. There are sets of
+second-order !!{sentence}s that are finitely satisfiable but not
+satisfiable, and that entail some~$!A$ without a finite subset
+entailing~$!A$.  
+\end{explain}
+
+
+\begin{thm}
+\ollabel{thm:sol-undecidable}
+Second-order logic is not compact.
+\end{thm}
+
+\begin{proof}
+Recall that 
+\[
+\fn{Inf} \ident \lexists[u][\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
+      \to \eq[x][y])]]]
+\]
+is satisfied in !!a{structure} iff its domain is infinite. Let
+$!A^{\ge n}$ be a sentence that asserts that the domain has at least
+$n$ !!{element}s, e.g.,
+\[
+!A^{\ge n} \ident \lexists[x_1][\dots\lexists[x_n][(\eq/[x_1][x_2]
+    \land \eq/[x_1][x_3] \land \dots \land \eq/[x_{n-1}][x_n])]]
+\]
+Consider
+\[
+\Gamma = \{\lnot \fn{Inf}, !A^{\ge 1}, !A^{\ge 2}, !A^{\ge 3}, \dots\}
+\]
+It is finitely satisfiable, since for any finite subset~$\Gamma_0$
+there is some $k$ so that $!A^{\ge k} \in \Gamma$ but no $!A^{\ge n}
+\in \Gamma$ for $n>k$. If $\Domain{M}$ has $k$ !!{element}s,
+$\Sat{M}{\Gamma_0}$. But, $\Gamma$ is not satisfiable: if
+$\Sat{M}{\lnot \fn{Inf}}$, $\Domain{M}$ must be finite, say, of
+size~$k$. Then $\Sat/{M}{!A^{\ge k+1}}$.
+\end{proof}
+
+\begin{prob}
+Give an example of a set~$\Gamma$ and !!a{sentence}~$!A$ so that
+$\Gamma \Entails !A$ but for every finite subset~$\Gamma_0 \subseteq
+\Gamma$, $\Gamma_0 \Entails/ !A$.
+\end{prob}
+
+
+\end{document}

@@ -13,18 +13,26 @@
 \begin{defn}[Axioms]
 The set of $\PAx$ of \emph{axioms} for the propositional connectives comprises
 all !!{formula}s of the following forms:
-\begin{description}
-\item[{[Ax1]}] $!A \lif (!B \lif !A)$;
-\item[{[Ax2]}] $(!A \lif (!B \lif !C)) \lif
-    ((!A \lif !B) \lif (!A \lif !C))$;
-\item[{[Ax3]}] $(\lnot !A \lif \lnot !B) \lif (!B
-    \lif !A)$.
-\end{description}
+\begin{align}
+  & (!A \land !B) \lif !A \tag{Ax1}\\
+  & (!A \land !B) \lif !B \tag{Ax2}\\
+  & !A \lif (!B \lif (!A \land !B)) \tag{Ax3}\\
+  & !A \lif (!A \lor !B) \tag{Ax4}\\
+  & !A \lif (!B \lor !A) \tag{Ax5}\\
+  & (!A \lif !C) \lif ((!B \lif !C) \lif ((!A \lor !B) \lif !C)) \tag{Ax6}\\
+  & !A \lif (!B \lif !A) \tag{Ax7}\\
+  & (!A \lif (!B \lif !C)) \lif
+  ((!A \lif !B) \lif (!A \lif !C)) \tag{Ax8}\\
+  & !A \lif (\lnot !A \lif \lfalse) \tag{Ax9}\\
+  & (!A \lif \lfalse) \lif \lnot !A \tag{Ax10}\\
+  & \lfalse \lif !A \tag{Ax11}\\
+  & \lnot\lnot !A \lif !A \tag{Ax12}
+\end{align}
 \end{defn}
 
 \begin{defn}[Modus ponens]
-  If $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !A$ then $\Gamma
-  \Proves !B$.
+  If $!B$ and $!B \lif !A$ already occur in a derivation, then $!A$ is
+  a correct inference step.
 \end{defn}
 
 

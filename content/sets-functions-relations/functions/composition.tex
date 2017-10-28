@@ -1,0 +1,60 @@
+% Part: sets-functions-relations
+% Chapter: functions
+% Section: composition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid{sfr}{fun}{cmp}
+\olsection{Composition of Functions}
+
+\begin{explain}
+We have already seen that the inverse~$f^{-1}$ of a !!{bijective}
+function~$f$ is itself a function. It is also possible to compose
+functions $f$ and~$g$ to define a new function by first applying $f$
+and then $g$. Of course, this is only possible if the ranges and
+domains match, i.e., the range of~$f$ must be a subset of the
+domain of~$g$.
+\end{explain}
+
+\begin{defn}[Composition]
+Let $f\colon X \to Y$ and $g\colon Y \to Z$. The \emph{composition} of
+$f$ with $g$ is the function $(g \circ f) \colon X \rightarrow Z$,
+where $(g \circ f)(x) = g(f(x))$.
+\end{defn}
+
+\begin{figure}
+  \centerline{\includegraphics[width=1.5\olphotowidth]
+    {\olpath/assets/diagrams/composition.tikz}}
+  \caption{The composition $g \circ f$ of two functions $f$ and~$g$.}
+\end{figure}
+
+\begin{explain}
+The function $(g \circ f) \colon X \rightarrow Z$ pairs each member of
+$X$ with a member of~$Z$. We specify which member of $Z$ a member of
+$X$ is paired with as follows---given an input $x \in X$, first apply
+the function $f$ to~$x$, which will output some $y \in Y$. Then apply
+the function $g$ to~$y$, which will output some $z \in Z$.
+\end{explain}
+
+\begin{ex}
+Consider the functions $f(x) = x + 1$, and $g(x) = 2x$. What function
+do you get when you compose these two? $(g \circ f)(x) = g(f(x))$. So
+that means for every natural number you give this function, you first
+add one, and then you multiply the result by two. So their composition
+is $(g \circ f)(x) = 2(x+1)$.
+\end{ex}
+
+\begin{prob}
+Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
+!!{injective}, then $g \circ f \colon X \to Z$ is !!{injective}.
+\end{prob}
+
+\begin{prob}
+Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
+!!{surjective}, then $g \circ f \colon X \to Z$ is !!{surjective}.
+\end{prob}
+
+\end{document}

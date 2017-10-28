@@ -4,17 +4,23 @@
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
-
 \begin{document}
 
-\olfileid{sfr}{fun}{kind}
+\olfileid{sfr}{fun}{kin}
 \olsection{Kinds of Functions}
 
-\begin{defn}
+\begin{defn}[!!^{surjective} function]
 A function $f \colon X \rightarrow Y$ is \emph{!!{surjective}} iff $Y$
 is also the range of~$f$, i.e., for every $y \in Y$ there is at least
 one $x \in X$ such that~$f(x) = y$.
 \end{defn}
+
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/surjective.tikz}}
+  \caption{!!^a{surjective} function has every !!{element} of the
+    codomain as a value.}
+\end{figure}
 
 \begin{explain}
 If you want to show that a function is !!{surjective}, then you need
@@ -22,21 +28,28 @@ to show that every object in the codomain is the output of the
 function given some input or other.
 \end{explain}
 
-\begin{defn}
+\begin{defn}[!!^{injective} function]
 A function $f \colon X \rightarrow Y$ is \emph{!!{injective}} iff for
 each $y \in Y$ there is at most one $x \in X$ such that~$f(x) = y$.
 \end{defn}
 
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/injective.tikz}}
+  \caption{!!^a{injective} function never maps two different
+    arguments to the same value.}
+\end{figure}
+
 \begin{explain}
-Any function pairs each input with a unique output. !!^a{injective}
+Any function pairs each possible input with a unique output. !!^a{injective}
 function has a unique input for each possible output. If you want to
 show that a function $f$ is !!{injective}, you need to show that for
-any element $y$ of the codomain, if $f(x)=y$ and $f(w)=y$, then $x=w$.
+any !!{element}s $x$ and $x'$ of the domain, if $f(x)=f(x')$, then $x=x'$.
 
-A function which is neither !!{injective}, nor !!{surjective}, is the
+An example of a function which is neither !!{injective}, nor !!{surjective}, is the
 constant function $f\colon \Nat \rightarrow \Nat$ where $f(x) = 1$.
 
-A function which is both !!{injective} and !!{surjective} is the
+An example of a function which is both !!{injective} and !!{surjective} is the
 identity function $f\colon \Nat \rightarrow \Nat$ where $f(x) = x$.
 
 The successor function $f \colon \Nat \rightarrow \Nat$ where $f(x) =
@@ -51,34 +64,20 @@ f(x) =
 \end{cases}
 \]
 is !!{surjective}, but not !!{injective}.
-
 \end{explain}
 
-\begin{defn}
+\begin{defn}[!!^{bijection}]
 A function $f \colon X \to Y$ is \emph{!!{bijective}} iff it is both
 !!{surjective} and !!{injective}.  We call such a function
 \article{bijection} \emph{!!{bijection}} from $X$ to~$Y$ (or between
 $X$ and~$Y$).
 \end{defn}
 
-\begin{prob}
-Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
-!!{injective}, then $g \circ f \colon X \to Z$ is !!{injective}.
-\end{prob}
-
-\begin{prob}
-Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
-!!{surjective}, then $g \circ f \colon X \to Z$ is !!{surjective}.
-\end{prob}
-
-\begin{prob}
-A function $g \colon Y \to X$ is the \emph{inverse} of a function $f
-\colon X \to Y$ if $f(g(y)) = y$ and $g(f(x)) = x$ for all $x \in X$
-and $y \in Y$.
-
-Show that if $f$ is bijective, such a function~$g$ exists, i.e.,
-define such a function and show that it is a function. Then show that
-it is also bijective.
-\end{prob}
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/bijective.tikz}}
+  \caption{!!^a{bijective} function uniquely pairs the elements of the
+    codomain with those of the domain.}
+\end{figure}
 
 \end{document}

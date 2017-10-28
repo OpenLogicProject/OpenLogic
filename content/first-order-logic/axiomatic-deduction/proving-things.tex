@@ -35,33 +35,4 @@ For part \olref{prop:easyproofs:refl}, consider the instance of
 !A)$ and distribute the outermost implication by \textbf{Ax2}.
 \end{proof}
 
-Let us show that $\lforall[x][!B] \Proves \lexists[x][!B]$
-(where the !!{formula} on the right of the turnstile is just an
-abbreviation for $\lnot \lforall[x][\lnot !B]$):
-
-\begin{derivation}
- 1. & $\lforall[x][\lnot !B] \lif \lnot \Subst{!B}{c}{x}$ &
- \textbf{Ax1}: $c$ !!{free for} $x$ in $\lnot !B$ \\
- 2. &  $(\lforall[x][\lnot !B] \lif \lnot \Subst{!B}{c}{x}) \lif
- (\Subst{!B}{c}{x} \lif \lnot\lforall[x][\lnot !B]))$ & \textbf{Ax0}\\
- 3. & $\Subst{!B}{c}{x} \lif \lnot\lforall[x][\lnot !B]$ & 1, 2, MP\\
- 4. & $\lforall[x][!B] \lif \Subst{!B}{c}{x}$ & \textbf{Ax1}: $c$ free
- for $x$ in $!B$ \\
- 5. & $\lforall[x][!B]$ & hyp. \\
- 6. & $\Subst{!B}{c}{x}$ & 4, 5, MP \\
- 7. & $\lnot \lforall[x][\lnot !B]$ & 3, 6, MP
-\end{derivation}
-
-\begin{prob} 
-Show that the following hold by \emph{exhibiting}
-!!{derivation}s from the axioms (i.e., without using meta-theoretic facts
-such as Cut, Monotony, the Deduction Theorem, etc.): 
-\begin{enumerate} 
-\item $\{!A\lif !B, !B\lif !C\} \Proves !A\lif !C$;
-\item $\Proves !A \lif !A$;
-\item $\Proves \lnot !A \lif (!A \lif !B)$;
-\item $\Proves !A \lif (\lnot !A \lif !B)$.
-\end{enumerate} 
-\end{prob}
-
 \end{document}
