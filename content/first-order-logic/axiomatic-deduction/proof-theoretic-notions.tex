@@ -38,19 +38,50 @@ A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if
 $\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
 \end{defn}
 
-\begin{prop} 
-\ollabel{prop:prov-incons}
-$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+\begin{prop}[Reflexivity]
+\ollabel{prop:reflexivity}
+If $!A \in \Gamma$, then $\Gamma \Proves !A$.
 \end{prop}
 
 \begin{proof}
-Exercise.
+  The !!{formula}~$!A$ by itself is !!a{derivation} of~$!A$ from~$\Gamma$.
 \end{proof}
 
-\begin{prob}
-Prove \olref[fol][axd][ptn]{prop:prov-incons}
-\end{prob}
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
 
+\begin{proof}
+Any !!{derivation} of $!A$ from $\Gamma$ is also !!a{derivation} of
+$!A$ from~$\Delta$.
+\end{proof}
+
+\begin{prop}[Transitivity]
+\ollabel{prop:transitivity}
+If $\Gamma \Proves !A$ for every $!A \in \Delta$ and $\Delta \Proves
+!B$, then $\Gamma \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  Suppose $\Delta \Proves !A$. Then there is !!a{derivation} $!A_1$, \dots, $!A_l = !A$
+  from~$\Delta$. Some of the steps in that derivation will be correct
+  because of a rule which refers to a prior line~$!A_i$ that includes
+  !!a{formula}~$!B \in \Delta$. Let $B_1$, \dots, $B_n$ be all the
+  !!{formula}s in~$\Delta$ so referenced. For each one of them, by
+  hypothesis, there is !!a{derivation} of~$!B_i$ from~$\Gamma$, i.e.,
+  !!a{derivation}~$!B_i^1$, \dots, $B_i^{k_i} = B_i$ where every $B_i^j$
+  is an axiom, !!a{element} of~$\Gamma$, or correct by a rule of
+  inference. Now consider the sequence
+  \[
+  !B_1^1, \dots, !B_1^{k_1}, \dots, !B_n^1, \dots, !B_n^{k_n}, !A_1, \dots, !A_l = !A.
+  \]
+  This is a correct !!{derivation} of~$!A$ from $\Gamma$ since each
+  $!B_i \in \Delta$ needed to justify the inferences in the part
+  $!A_1$, \dots, $!A_l$ is now justified itself.
+\end{proof}
+  
 \begin{prop}
 \ollabel{prop:incons}
 $\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every
@@ -65,21 +96,28 @@ Exercise.
 Prove \olref[fol][axd][ptn]{prop:incons}
 \end{prob}
 
-\begin{prop}
+\begin{prop}[Compactness]
 \ollabel{prop:proves-compact}
-If $\Gamma \Proves !A$ iff for some finite $\Gamma_0 \subseteq
-\Gamma$, $\Gamma_0 \Proves !A$.
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
+  \end{enumerate}
 \end{prop}
 
 \begin{proof}
-If $\Gamma \Proves !A$, then there is a finite sequence of
-!!{formula}s $!A_1$, \dots,~$!A_n$ so that $!A \ident !A_n$ and each
-$!A_i$ is either a logical axiom, !!a{element} of~$\Gamma$ or follows
-from previous !!{formula}s by modus ponens.  Take $\Gamma_0$ to be
-those $!A_i$ which are in~$\Gamma$.  Then the !!{derivation} is
-likewise a !!{derivation} from~$\Gamma_0$, and so $\Gamma_0 \Proves
-!A$.  The other direction is obvious.
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is a finite sequence of
+      !!{formula}s $!A_1$, \dots,~$!A_n$ so that $!A \ident !A_n$ and
+      each $!A_i$ is either a logical axiom, !!a{element} of~$\Gamma$
+      or follows from previous !!{formula}s by modus ponens.  Take
+      $\Gamma_0$ to be those $!A_i$ which are in~$\Gamma$.  Then the
+      !!{derivation} is likewise a !!{derivation} from~$\Gamma_0$, and
+      so $\Gamma_0 \Proves !A$.
+    \item This is the contrapositive of~(1) for the special case $!A
+      \ident \lfalse$.
+\end{enumerate}
 \end{proof}
-
 
 \end{document}
