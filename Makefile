@@ -52,6 +52,9 @@ clean:
 clean-all:
 	latexmk -C $(ALLTEXFILES)
 
+upload: FORCE_MAKE
+	rsync -avz --delete --include "[^\.]*/" --include '*.pdf' --include '*.png' --exclude '*'  . rzach@136.159.35.88:webdisk/public_html/static/open-logic/
+
 index.html: FORCE_MAKE
 	git checkout master
 	cp misc/index.start.html index.html
