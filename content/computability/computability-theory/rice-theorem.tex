@@ -68,7 +68,7 @@ function
 \[
 h(x,y) \simeq
 \begin{cases}
-\text{undefined} & \text{if $\cfind{x}(x) \undefined$} \\
+\text{undefined} & \text{if $\cfind{x}(x) \fundefined$} \\
 g(y) & \text{otherwise.}
 \end{cases}
 \]
@@ -98,7 +98,7 @@ More formally, since $h$~is partial computable, it is equal to the
 function $\cfind{k}$ for some index~$k$. By the $s$-$m$-$n$ theorem
 there is a primitive recursive function $s$ such that for each $x$,
 $\cfind{s(k,x)}(y) = h_x(y)$. Now we have that for each $x$, if
-$\cfind{x}(x) \defined$, then $\cfind{s(k,x)}$ is the same function
+$\cfind{x}(x) \fdefined$, then $\cfind{s(k,x)}$ is the same function
 as~$g$, and so $s(k,x)$ is in $A$. On the other hand, if $\cfind{x}(x)
 \uparrow$, then $\cfind{s(k,x)}$ is the same function as $f$, and so
 $s(k,x)$ is not in $A$. In other words we have that for every $x$, $x
@@ -114,8 +114,8 @@ The following sets are undecidable.
 \item $\Setabs{x}{\text{17 is in the range of $\cfind{x}$}}$
 \item $\Setabs{x}{\text{$\cfind{x}$ is constant}}$
 \item $\Setabs{x}{\text{$\cfind{x}$ is total}}$
-\item $\Setabs{x}{\text{whenever $y < y'$, $\cfind{x}(y) \defined$, and
-    if $\cfind{x}(y') \defined$, then $\cfind{x}(y) < \cfind{x}(y')$}}$
+\item $\Setabs{x}{\text{whenever $y < y'$, $\cfind{x}(y) \fdefined$, and
+    if $\cfind{x}(y') \fdefined$, then $\cfind{x}(y) < \cfind{x}(y')$}}$
 \end{enumerate}
 \end{cor}
 

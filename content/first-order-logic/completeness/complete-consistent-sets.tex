@@ -1,0 +1,142 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: complete-sets
+
+% Definition of complete consistent sets. Properties of complete sets required
+% for completeness proved are in provability.tex in the
+% chapter on the proof system used.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{ccs}
+\olsection{Complete Consistent Sets of \usetoken{P}{sentence}}
+
+\begin{defn}[Complete set]
+\ollabel{def:complete-set} A set~$\Gamma$ of !!{sentence}s is
+\emph{!!{complete}} iff for any !!{sentence}~$!A$, either $!A \in
+\Gamma$ or $\lnot !A \in \Gamma$.
+\end{defn}
+
+\begin{explain}
+!!^{complete} sets of sentences leave no questions unanswered. For
+any !!{sentence}~$A$, $\Gamma$ ``says'' if $!A$ is true or false.  The
+importance of !!{complete} sets extends beyond the proof of the
+completeness theorem. A theory which is !!{complete} and
+axiomatizable, for instance, is always decidable.
+\end{explain}
+
+\begin{explain}
+!!^{complete} consistent sets are important in the completeness proof
+since we can guarantee that every consistent set of
+!!{sentence}s~$\Gamma$ is contained in a !!{complete} consistent
+set~$\Gamma^*$.  !!^a{complete} consistent set contains, for each
+!!{sentence}~$!A$, either $!A$ or its negation $\lnot !A$, but not
+both. This is true in particular for atomic !!{sentence}s, so from
+!!a{complete} consistent set in a language suitably expanded by
+!!{constant}s, we can construct a !!{structure} where the
+interpretation of !!{predicate}s is defined according to which atomic
+!!{sentence}s are in~$\Gamma^*$. This !!{structure} can then be shown
+to make all !!{sentence}s in~$\Gamma^*$ (and hence also all those
+in~$\Gamma$) true. The proof of this latter fact requires that $\lnot
+!A \in \Gamma^*$ iff $!A \notin \Gamma^*$, $(!A \lor !B) \in \Gamma^*$
+iff $!A \in \Gamma^*$ or $!B \in \Gamma^*$, etc.
+\end{explain}
+
+In what follows, we will often tacitly use the properties of
+reflexivity, monotonicity, and transitivity of $\Proves$ (see
+\tagrefs{prfSC/{fol:seq:ptn:sec},prfND/{fol:ntd:ptn:sec}}).
+
+\begin{prop}
+\ollabel{prop:ccs}
+Suppose $\Gamma$ is !!{complete} and consistent. Then:
+\begin{enumerate}
+\item \ollabel{prop:ccs-prov-in} If $\Gamma \Proves !A$, then $!A \in
+  \Gamma$.
+
+\tagitem{prvAnd}{\ollabel{prop:ccs-and} $!A \land !B \in \Gamma$
+  iff both $!A \in \Gamma$ and $!B \in \Gamma$.}{}
+
+\tagitem{prvOr}{\ollabel{prop:ccs-or} $!A \lor !B \in \Gamma$ iff
+  either $!A \in \Gamma$ or $!B \in \Gamma$.}{}
+
+\tagitem{prvIf}{\ollabel{prop:ccs-if} $!A \lif !B \in \Gamma$ iff
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.}{}
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Let us suppose for all of the following that $\Gamma$ is !!{complete} and
+consistent.
+\begin{enumerate}
+\item If $\Gamma \Proves !A$, then $!A \in \Gamma$.
+
+Suppose that $\Gamma \Proves !A$. Suppose to the contrary that $!A
+\notin \Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$.
+By
+\tagrefs{prfSC/{fol:seq:prv:prop:explicit-inc},prfND/{fol:ntd:prv:prop:explicit-inc}},
+$\Gamma$ is inconsistent. This contradicts the assumption that
+$\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
+\Gamma$, so $!A \in \Gamma$.
+
+\tagitem{defAnd}{}{%
+\iftag{probAnd}{Exercise.}{%
+$!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
+
+For the forward direction, suppose $!A \land !B \in \Gamma$. Then
+by
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-land},prfND/{fol:ntd:ppr:prop:provability-land}}, item~(1),
+$\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
+\olref{prop:ccs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
+required.
+
+For the reverse direction, let $!A \in \Gamma$ and $!B \in
+\Gamma$. By
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-land},prfND/{fol:ntd:ppr:prop:provability-land}}, item~(2),
+$\Gamma \Proves !A \land !B$. By \olref{prop:ccs-prov-in}, $!A \land
+!B \in \Gamma$.}}
+
+\tagitem{defOr}{}{%
+\iftag{probOr}{Exercise.}{%
+First we show that if $!A \lor !B \in \Gamma$, then either $!A \in
+\Gamma$ or $!B \in \Gamma$. Suppose $!A \lor !B \in \Gamma$ but $!A
+\notin \Gamma$ and $!B \notin \Gamma$.  Since $\Gamma$ is
+!!{complete}, $\lnot !A \in \Gamma$ and $\lnot !B \in \Gamma$. By
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lor},prfND/{fol:ntd:ppr:prop:provability-lor}},
+item (1), $\Gamma$ is inconsistent, a contradiction. Hence, either $!A
+\in \Gamma$ or $!B \in \Gamma$.
+
+For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
+\Gamma$. By
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lor},prfND/{fol:ntd:ppr:prop:provability-lor}}, item (2),
+$\Gamma \Proves !A \lor !B$. By \olref{prop:ccs-prov-in}, $!A \lor
+!B \in \Gamma$, as required.}}
+
+\tagitem{defIf}{}{%
+\iftag{probIf}{Exercise.}{%
+For the forward direction, suppose $!A \lif !B \in \Gamma$, and suppose
+to the contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
+assumptions, $!A \lif !B \in \Gamma$ and $!A \in \Gamma$. By
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item (1),
+$\Gamma \Proves !B$. But then by \olref{prop:ccs-prov-in}, $!B \in
+\Gamma$, contradicting the assumption that $!B \notin \Gamma$.
+
+For the reverse direction, first consider the case where $!A \notin
+\Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$.  By
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item (2),
+$\Gamma \Proves !A \lif !B$. Again by \olref{prop:ccs-prov-in}, we get
+that $!A \lif !B \in \Gamma$, as required.
+
+Now consider the case where $!B \in \Gamma$.  By
+\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}},
+item (2) again, $\Gamma \Proves !A \lif !B$. By
+\olref{prop:ccs-prov-in}, $!A \lif !B \in \Gamma$.}}
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+Complete the proof of \olref[fol][com][ccs]{prop:ccs}.
+\end{prob}
+
+\end{document}

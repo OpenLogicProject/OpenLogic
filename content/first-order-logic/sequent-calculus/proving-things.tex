@@ -21,13 +21,14 @@ We begin by writing the desired end-sequent at the bottom of the derivation.
 Next, we need to figure out what kind of inference could have a lower
 sequent of this form. This could be a structural rule, but it is a
 good idea to start by looking for a logical rule. The only logical
-connective occurring in a !!{formula} in the lower sequent is $\land$,
+connective occurring in the lower sequent is $\land$,
 so we're looking for an $\land$ rule, and since the $\land$ symbol
-occurs in the antecedent !!{formula}s, we're looking at the \LeftR{\land}
+occurs in the antecedent, we're looking at the \LeftR{\land}
 rule.
 \begin{prooftree}
 \AxiomC{}
-\RightLabel{\LeftR{\land}} \UnaryInf$!A\land !B \fCenter !A$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A\land !B \fCenter !A$
 \end{prooftree}
 There are two options for what could have been the upper sequent of
 the \LeftR{\land} inference: we could have an upper sequent of $!A
@@ -36,7 +37,8 @@ initial sequent (which is a good thing), while $!B \Sequent !A$ is not
 derivable in general. We fill in the upper sequent:
 \begin{prooftree}
 \Axiom$!A \fCenter !A$
-\RightLabel{\LeftR{\land}} \UnaryInf$!A\land !B \fCenter !A$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A\land !B \fCenter !A$
 \end{prooftree}
 We now have a correct $\Log{LK}$-derivation of the sequent $!A \land
 !B \Sequent !A$.
@@ -67,27 +69,39 @@ inferences which can yield the lower sequent, this must look like:
 \UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
 \RightLabel{\RightR{\lif}} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
-Now we can apply the \LeftR{\lor} rule. According to the schema, this
-must split into two upper sequents as follows:
+
+If we move $\lnot !A \lor !B$ to the outside of the antecedent, we can
+apply the \LeftR{\lor} rule. According to the schema, this must split
+into two upper sequents as follows:
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$!A, \lnot !A \fCenter !B$
+\UnaryInf$\lnot !A, !A \fCenter !B$
 \AxiomC{}
-\UnaryInf$!A, !B \fCenter !B$
-\RightLabel{\LeftR{\lor}} \BinaryInf$ !A, \lnot !A \lor !B \fCenter !B $
-\RightLabel{\RightR{\lif}} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$ \lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
 Remember that we are trying to wind our way up to initial sequents; we
-seem to be pretty close!{} The right branch is just one weakening away
-from an initial sequent and then it is done:
+seem to be pretty close!{} The right branch is just one weakening and
+one exchange away from an initial sequent and then it is done:
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$!A, \lnot !A \fCenter !B$
+\UnaryInf$\lnot !A, !A \fCenter !B$
 \Axiom$!B \fCenter !B$
 \RightLabel{\LeftR{\Weakening}}
 \UnaryInf$!A, !B \fCenter !B$
-\RightLabel{\LeftR{\lor}} \BinaryInf$ !A, \lnot !A \lor !B \fCenter !B $
-\RightLabel{\RightR{\lif}} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
 
 Now looking at the left branch, the only logical connective in any
@@ -97,26 +111,40 @@ we're looking at an instance of the \LeftR{\lnot} rule.
 \AxiomC{}
 \UnaryInf$ !A \fCenter !B, !A$
 \RightLabel{\LeftR{\lnot}}
-\UnaryInf$!A, \lnot !A \fCenter !B$
+\UnaryInf$\lnot !A, !A \fCenter !B$
 \Axiom$!B \fCenter !B$
 \RightLabel{\LeftR{\Weakening}}
 \UnaryInf$!A, !B \fCenter !B$
-\RightLabel{\LeftR{\lor}} \BinaryInf$ !A, \lnot !A \lor !B \fCenter !B $
-\RightLabel{\RightR{\lif}} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
 Similarly to how we finished off the right branch, we are just one
-weakening away from finishing off this left branch as well.
+weakening and one exchange away from finishing off this left branch as well.
 \begin{prooftree}
 \Axiom$!A \fCenter !A$
 \RightLabel{\RightR{\Weakening}}
+\UnaryInf$ !A \fCenter !A, !B$
+\RightLabel{\RightR{\Exchange}}
 \UnaryInf$ !A \fCenter !B, !A$
 \RightLabel{\LeftR{\lnot}}
-\UnaryInf$!A, \lnot !A \fCenter !B$
+\UnaryInf$\lnot !A, !A \fCenter !B$
 \Axiom$!B \fCenter !B$
 \RightLabel{\LeftR{\Weakening}}
 \UnaryInf$!A, !B \fCenter !B$
-\RightLabel{\LeftR{\lor}} \BinaryInf$ !A, \lnot !A \lor !B \fCenter !B $
-\RightLabel{\RightR{\lif}} \UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!B, !A \fCenter !B$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$\lnot !A \lor !B, !A \fCenter !B $
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ !A, \lnot !A \lor !B \fCenter !B $
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \lnot !A \lor !B \fCenter !A \lif !B $
 \end{prooftree}
 \end{ex}
 
@@ -144,8 +172,8 @@ branches for a moment:
 Now we have a choice of whether to look at the \LeftR{\land} or the
 \LeftR{\lor} rule. Let's see what happens when we apply the \LeftR{\land}
 rule: we have a choice to start with either the sequent $!A,
-\lnot !A \lor !B \Sequent \hspace{1em}$ or the sequent $!B, \lnot !A
-\lor !B \Sequent \hspace{1em}$. Since the proof is symmetric with
+\lnot !A \lor !B \Sequent \quad$ or the sequent $!B, \lnot !A
+\lor !B \Sequent \quad$. Since the proof is symmetric with
 regards to $!A$ and $!B$, let's go with the former:
 \begin{prooftree}
 \AxiomC{}
@@ -158,13 +186,17 @@ regards to $!A$ and $!B$, let's go with the former:
 Continuing to fill in the derivation, we see that we run into a problem:
 \begin{prooftree}
 \Axiom$!A \fCenter !A$
-\RightLabel{\LeftR{\lnot}} \UnaryInf$ !A, \lnot !A \fCenter$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !A, !A \fCenter$
 \AxiomC{}
-\RightLabel{?} \UnaryInf$!A \fCenter !B$
-\RightLabel{\LeftR{\lnot}} \UnaryInf$ !A, \lnot !B \fCenter$
-
+\RightLabel{?}
+\UnaryInf$!A \fCenter !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !B, !A \fCenter$
 \RightLabel{\LeftR{\lor}}
-\BinaryInf$!A, \lnot !A \lor \lnot !B \fCenter $
+\BinaryInf$\lnot !A \lor \lnot !B, !A \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A, \lnot !A \lor \lnot !B \fCenter $
 \RightLabel{\LeftR{\land}}
 \UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
 \RightLabel{\RightR{\lnot}}
@@ -177,28 +209,36 @@ mistake to apply the \LeftR{\land} rule above. Going back to what we
 had before and carrying out the \LeftR{\lor} rule instead, we get
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$!A \land !B, \lnot !A \fCenter $
+\UnaryInf$\lnot !A, !A \land !B \fCenter $
 
 \AxiomC{}
-\UnaryInf$!A \land !B, \lnot !B \fCenter $
+\UnaryInf$\lnot !B, !A \land !B \fCenter $
 
 \RightLabel{\LeftR{\lor}}
-\BinaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\BinaryInf$\lnot !A \lor \lnot !B, !A \land !B \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
 \RightLabel{\RightR{\lnot}}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
 Completing each branch as we've done before, we get
 \begin{prooftree}
 \Axiom$ !A \fCenter!A$
-\RightLabel{\LeftR{\land}} \UnaryInf$!A \land !B \fCenter !A$
-\RightLabel{\LeftR{\lnot}} \UnaryInf$!A \land !B, \lnot !A \fCenter $
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B \fCenter !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !A, !A \land !B \fCenter $
 
 \Axiom$ !B \fCenter !B$
-\RightLabel{\LeftR{\land}} \UnaryInf$!A \land !B \fCenter !B$
-\RightLabel{\LeftR{\lnot}} \UnaryInf$!A \land !B, \lnot !B \fCenter $
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B \fCenter !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B, !A \land !B \fCenter $
 
 \RightLabel{\LeftR{\lor}}
-\BinaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
+\BinaryInf$\lnot !A \lor \lnot !B, !A \land !B \fCenter $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$!A \land !B, \lnot !A \lor \lnot !B \fCenter $
 \RightLabel{\RightR{\lnot}}
 \UnaryInf$\lnot !A \lor \lnot !B \fCenter \lnot (!A \land !B)$
 \end{prooftree}
@@ -207,74 +247,59 @@ rules in these steps and still obtained a correct derivation).
 \end{ex}
 
 \begin{ex}
-Give an $\Log{LK}$-derivation of the sequent $\lexists[x][\lnot !A(x)]
-\Sequent \lnot \lforall[x][!A(x)]$.
-
-When dealing with quantifiers, we have to make sure not to violate the
-eigenvariable condition, and sometimes this requires us to play around
-with the order of carrying out certain inferences. In general, it
-helps to try and take care of rules subject to the eigenvariable
-condition first (they will be lower down in the finished proof). Also,
-it is a good idea to try and look ahead and try to guess what the
-initial sequent might look like. In our case, it will have to be
-something like $!A(a) \Sequent !A(a)$. That means that when we are
-``reversing'' the quantifier rules, we will have to pick the same
-term---what we will call $a$---for both the $\lforall$ and the
-$\lexists$ rule. If we picked different terms for each rule, we would
-end up with something like $!A(a) \Sequent !A(b)$, which, of course,
-is not derivable.
-
-Starting as usual, we write
+So far we haven't used the contraction rule, but it is sometimes
+required. Here's an example where that happens.  Suppose we want to
+prove $\quad \Sequent A \lor \lnot !A$. Applying $\RightR{\lor}$
+backwards would give us one of these two !!{derivation}s:
+\[
+\AxiomC{}
+\UnaryInf$ \fCenter !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
+\DisplayProof\qquad
+\AxiomC{}
+\UnaryInf$!A \fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \fCenter \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
+\DisplayProof
+\]
+Neither of these of course ends in an initial sequent.  The trick is
+to realize that the contraction rule allows us to combine two copies
+of !!a{sentence} into one---and when we're searching for a proof,
+i.e., going from bottom to top, we can keep a copy of $!A \lor \lnot
+!A$ in the premise, e.g.,
 \begin{prooftree}
 \AxiomC{}
-\UnaryInf$\lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
 \end{prooftree}
-We could either carry out the \LeftR{\exists} rule or the \RightR{\lnot}
-rule. Since the \LeftR{\exists} rule is subject to the eigenvariable
-condition, it's a good idea to take care of it sooner rather than
-later, so we'll do that one first.
+Now we can apply $\RightR{\lor}$ a second time, and also get~$\lnot
+!A$, which leads to a complete !!{derivation}.
 \begin{prooftree}
-\AxiomC{}
-\UnaryInf$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
-\RightLabel{\LeftR{\lexists}}
-\UnaryInf$ \lexists[x][\lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
+\Axiom$!A \fCenter !A$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !A, \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\fCenter !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \fCenter !A \lor \lnot !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \fCenter !A \lor \lnot !A$
 \end{prooftree}
-Applying the \LeftR{\lnot} and \RightR{\lnot} rules and then eliminating
-the double $\lnot$ signs on both sides---the reader may do this as an 
-exercise---we get
-\begin{prooftree}
-\AxiomC{}
-\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\Deduce$ \lnot !A(a) \fCenter \lnot \lforall[x] !A(x)$
-\RightLabel{\LeftR{\lexists}}
-\UnaryInf$ \lexists[x] \lnot !A(x) \fCenter \lnot \lforall[x] !A(x)$
-\end{prooftree}
-At this point, our only option is to carry out the \LeftR{\forall}
-rule. Since this rule is not subject to the eigenvariable restriction,
-we're in the clear. Remember, we want to try and obtain an initial
-sequent (of the form $!A(a) \Sequent !A(a)$), so we should choose $a$
-as our argument for $!A$ when we apply the rule.
-\begin{prooftree}
-\Axiom$!A(a) \fCenter !A(a)$
-\RightLabel{\LeftR{\lforall}}
-\UnaryInf$\lforall[x][!A(x)] \fCenter !A(a)$
-\Deduce$ \lnot !A(a) \fCenter \lnot \lforall[x][!A(x)]$
-\RightLabel{\LeftR{\lexists}}
-\UnaryInf$ \lexists[x][ \lnot !A(x)] \fCenter \lnot \lforall[x][!A(x)]$
-\end{prooftree}
-It is important, especially when dealing with quantifiers, to double
-check at this point that the eigenvariable condition has not been
-violated. Since the only rule we applied that is subject to the
-eigenvariable condition was \LeftR{\exists}, and the eigenvariable~$a$
-does not occur in its lower sequent (the end-sequent), this is a
-correct derivation.
 \end{ex}
 
 \begin{prob}
 Give !!{derivation}s of the following sequents:
 \begin{enumerate}
 \item $\Sequent \lnot(!A \lif !B) \lif (!A \land \lnot !B)$
-\item $\lforall[x][(!A(x) \lif !B)] \Sequent (\lexists[y][!A(y)] \lif !B)$
+\item $(!A \land !B) \lif !C \Sequent (!A \lif !C) \lor (!B \lif !C)$
 \end{enumerate}
 \end{prob}
 

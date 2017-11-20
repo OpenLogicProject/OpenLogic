@@ -40,11 +40,11 @@ is defined by
 \[
 h(e, x) =
 \begin{cases}
-1 & \text{if $\cfind{e}(x) \defined$}\\
+1 & \text{if $\cfind{e}(x) \fdefined$}\\
 0 & \text{otherwise.}
 \end{cases}
 \]
-Note that $h(e, x) = 0$ if $\cfind{e}(x) \undefined$, but also
+Note that $h(e, x) = 0$ if $\cfind{e}(x) \fundefined$, but also
 when~$e$ is not the index of a partial recursive function at all.
 
 \begin{thm}
@@ -64,22 +64,22 @@ d(y) =
 \]
 From this definition it follows that
 \begin{enumerate}
-\item $d(y) \defined$ iff $\cfind{y}(y) \undefined$ or $y$ is
+\item $d(y) \fdefined$ iff $\cfind{y}(y) \fundefined$ or $y$ is
   not the index of a partial recursive function.
-\item $d(y) \undefined$ iff $\cfind{y}(y) \defined$.
+\item $d(y) \fundefined$ iff $\cfind{y}(y) \fdefined$.
 \end{enumerate}
 If $h$ were partial recursive, then $d$ would be partial recursive as
 well.  Thus, by the Kleene normal form theorem, it has an index
 $e_d$. Consider the value of $h(e_d, e_d)$. There are two
 possible cases, 0 and 1.
 \begin{enumerate}
-\item If $h(e_d, e_d) = 1$ then $\cfind{e_d}(e_d) \defined$.  But
+\item If $h(e_d, e_d) = 1$ then $\cfind{e_d}(e_d) \fdefined$.  But
   $\cfind{e_d} \simeq d$, and $d(e_d)$ is defined iff $h(e_d, e_d) = 0$.
   So $h(e_d, e_d) \neq 1$.
 \item If $h(e_d, e_d) = 0$ then either $e_d$ is not the index of a
   partial recursive function, or it is and $\cfind{e_d}(e_d)
-  \undefined$. But again, $\cfind{e_d} \simeq d$, and $d(e_d)$ is undefined
-  iff $\cfind{e_d}(e_d) \defined$.
+  \fundefined$. But again, $\cfind{e_d} \simeq d$, and $d(e_d)$ is undefined
+  iff $\cfind{e_d}(e_d) \fdefined$.
 \end{enumerate}
 The upshot is that $e_d$ cannot, after all, be the index of a partial
 recursive function.  But if $h$ were partial recursive, $d$ would be

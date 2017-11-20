@@ -15,100 +15,91 @@ If $X \subseteq Z$, then $X \cup (Z \setminus X) = Z$.
 \end{prop}  
 
 \begin{proof}
-We begin by observing that this is a conditional statement. It is
-tacitly universally quantified: the proposition holds for all sets $X$
-and $Z$. So $X$ and $Z$ are variables for arbitrary sets. To prove
-such a statement, we assume the antecedent and prove the consequent.
+  Suppose that $X \subseteq Z$.  We want to show that $X \cup (Z
+  \setminus X) = Z$.
+  \begin{quote}
+    We begin by observing that this is a conditional statement. It is
+    tacitly universally quantified: the proposition holds for all sets
+    $X$ and $Z$. So $X$ and $Z$ are variables for arbitrary sets. To
+    prove such a statement, we assume the antecedent and prove the
+    consequent.
 
-\begin{quote}  
-Suppose that $X \subseteq Z$. We want to show that $X \cup (Z \setminus
-X) = Z$.
-\end{quote}
-
-What do we know? We know that $X \subseteq Z$. Let's unpack the
-definition of~$\subseteq$: the assumption means that all !!{element}s
-of~$X$ are also elements of~$Z$. Let's write this down---it's an
-important fact that we'll use throughout the proof.
-
-\begin{quote}
-By the definition of~$\subseteq$, since $X \subseteq Z$, for all $z$,
-if $z \in X$, then $z \in Z$.
-\end{quote}
-
-We've unpacked all the definitions that are given to us in the
-assumption. Now we can move onto the conclusion. We want to show that
-$X \cup (Z \setminus X) = Z$, and so we set up a proof similarly to
-the last example: we show that every !!{element} of $X \cup (Z
-\setminus X)$ is also !!a{element} of~$Z$ and, conversely, every
-!!{element} of $Z$ is !!a{element} of $X \cup (Z \setminus X)$. We can
-shorten this to: $X \cup (Z \setminus X) \subseteq Z$ and $Z \subseteq
-X \cup (Z \setminus X)$. (Here were doing the opposite of unpacking a
-definition, but it makes the proof a bit easier to read.)  Since this
-is a conjunction, we have to prove both parts. To show the first part,
-i.e., that every !!{element} of $X \cup (Z \setminus X)$ is also
-!!a{element} of~$Z$, we assume that for an arbitrary $z$ that $z \in X
-\cup (Z \setminus X)$ and show that $z \in Z$. By the definition of
-$\cup$, we can conclude that $z \in X$ or $z \in Z \setminus X$ from
-$z \in X \cup (Z \setminus X)$. You should now be getting the hang of
-this.
-
-\begin{quote}
-$X \cup (Z \setminus X) = Z$ iff $X \cup (Z \setminus X) \subseteq Z$
-  and $Z \subseteq (X \cup (Z \setminus X)$.  First we prove that $X
-  \cup (Z \setminus X) \subseteq Z$.  Let $z \in X \cup (Z \setminus
-  X)$. So, either $z \in X$ or $z \in (Z \setminus X)$.
-\end{quote}
-
-We've arrived at a disjunction, and from it we want to prove that $z
-\in Z$. We do this using proof by cases.
-
-\begin{quote}
-Case 1: $z \in X$. Since for all $z$, if $z \in X$, $z
-\in Z$, we have that $z \in Z$.
-\end{quote}
-
-Here we've used the fact recorded earlier which followed from the
-hypothesis of the proposition that $X \subseteq Z$.  The first case is
-complete, and we turn to the second case, $z \in (Z \setminus X)$.
-Recall that $Z \setminus X$ denotes the \emph{difference} of the two
-sets, i.e., the set of all !!{element}s of $Z$ which are not
-!!{element}s of $X$.  Let's use state what the definition gives
-us. But an element of $Z$ not in~$X$ is in particular !!a{element}
-of~$Z$.
-
-\begin{quote}
-Case 2: $z \in (Z \setminus X)$.  This means that $z \in Z$ and $z
-\notin X$. So, in particular, $z \in Z$.
-\end{quote}
-
-Great, we've solved the first direction. Now for the second
-direction. Here we prove that $Z \subseteq X \cup (Z \setminus X)$.
-So we assume that $z \in Z$ and prove that $z \in X \cup (Z \setminus
-X)$.
-
-\begin{quote}
-Now let $z \in Z$. We want to show that $z \in X$ or $z \in Z
-\setminus X$.
-\end{quote}
-
-Since all elements of $X$ are also elements of $Z$, and $Z \setminus
-X$ is the set of all things that are elements of $Z$ but not $X$, it
-follows that $z$ is either in $X$ or $Z \setminus X$.  But this may be
-a bit unclear if you don't already know why the result is true.  It
-would be better to prove it step-by-step.  It will help to use a
-simple fact which we can state without proof: $z \in X$ or $z \notin
-X$. This is called the principle of excluded middle: for any
-statement~$p$, either $p$ is true or its negation is true. (Here, $p$
-is the statement that $z \in X$.)  Since this is a disjunction, we can
-again use proof-by-cases.
-
-\begin{quote}
-Either $z \in X$ or $z \notin X$. In the former case, $z \in X \cup (Z
-\setminus X)$. In the latter case, $z \in Z$ and $z \notin X$, so $z
-\in Z \setminus X$.  But then $z \in X \cup (Z \setminus X)$.
-\end{quote}
-
-Our proof is complete: we have shown that $X \cup (Z \setminus X) = Z$.
+    We continue by using the assumption that $X \subseteq Z$. Let's
+    unpack the definition of~$\subseteq$: the assumption means that
+    all !!{element}s of~$X$ are also !!{element}s of~$Z$. Let's write
+    this down---it's an important fact that we'll use throughout the
+    proof.
+  \end{quote}
+  By the definition of~$\subseteq$, since $X \subseteq Z$, for all
+  $z$, if $z \in X$, then $z \in Z$.
+  \begin{quote}
+    We've unpacked all the definitions that are given to us in the
+    assumption. Now we can move onto the conclusion. We want to show
+    that $X \cup (Z \setminus X) = Z$, and so we set up a proof
+    similarly to the last example: we show that every !!{element} of
+    $X \cup (Z \setminus X)$ is also !!a{element} of~$Z$ and,
+    conversely, every !!{element} of $Z$ is !!a{element} of $X \cup (Z
+    \setminus X)$. We can shorten this to: $X \cup (Z \setminus X)
+    \subseteq Z$ and $Z \subseteq X \cup (Z \setminus X)$. (Here we're
+    doing the opposite of unpacking a definition, but it makes the
+    proof a bit easier to read.)  Since this is a conjunction, we have
+    to prove both parts. To show the first part, i.e., that every
+    !!{element} of $X \cup (Z \setminus X)$ is also !!a{element}
+    of~$Z$, we assume that $z \in X \cup (Z \setminus X)$ for an
+    arbitrary~$z$ and show that $z \in Z$. By the definition of
+    $\cup$, we can conclude that $z \in X$ or $z \in Z \setminus X$
+    from $z \in X \cup (Z \setminus X)$. You should now be getting the
+    hang of this.
+    \end{quote}
+  $X \cup (Z \setminus X) = Z$ iff $X \cup (Z \setminus X) \subseteq
+  Z$ and $Z \subseteq (X \cup (Z \setminus X)$.  First we prove that
+  $X \cup (Z \setminus X) \subseteq Z$.  Let $z \in X \cup (Z
+  \setminus X)$. So, either $z \in X$ or $z \in (Z \setminus X)$.
+  \begin{quote}
+    We've arrived at a disjunction, and from it we want to prove that
+    $z \in Z$. We do this using proof by cases.
+  \end{quote}
+  Case 1: $z \in X$. Since for all $z$, if $z \in X$, $z \in Z$, we
+  have that $z \in Z$.
+  \begin{quote}
+    Here we've used the fact recorded earlier which followed from the
+    hypothesis of the proposition that $X \subseteq Z$.  The first
+    case is complete, and we turn to the second case, $z \in (Z
+    \setminus X)$.  Recall that $Z \setminus X$ denotes the
+    \emph{difference} of the two sets, i.e., the set of all
+    !!{element}s of~$Z$ which are not !!{element}s of~$X$.  But any
+    !!{element} of $Z$ not in~$X$ is in particular !!a{element} of~$Z$.
+  \end{quote}
+  Case 2: $z \in (Z \setminus X)$.  This means that $z \in Z$ and $z
+  \notin X$. So, in particular, $z \in Z$.
+  \begin{quote}
+    Great, we've proved the first direction. Now for the second
+    direction. Here we prove that $Z \subseteq X \cup (Z \setminus
+    X)$.  So we assume that $z \in Z$ and prove that $z \in X \cup (Z
+    \setminus X)$.
+  \end{quote}
+  Now let $z \in Z$. We want to show that $z \in X$ or $z \in Z
+  \setminus X$.
+  \begin{quote}
+    Since all !!{element}s of $X$ are also !!{element}s of $Z$, and $Z
+    \setminus X$ is the set of all things that are !!{element}s of $Z$
+    but not $X$, it follows that $z$ is either in $X$ or in $Z
+    \setminus X$.  This may be a bit unclear if you don't already know
+    why the result is true.  It would be better to prove it
+    step-by-step.  It will help to use a simple fact which we can
+    state without proof: $z \in X$ or $z \notin X$. This is called the
+    ``principle of excluded middle:'' for any statement~$p$, either
+    $p$ is true or its negation is true. (Here, $p$ is the statement
+    that $z \in X$.)  Since this is a disjunction, we can again use
+    proof-by-cases.
+  \end{quote}
+  Either $z \in X$ or $z \notin X$. In the former case, $z \in X \cup
+  (Z \setminus X)$. In the latter case, $z \in Z$ and $z \notin X$, so
+  $z \in Z \setminus X$.  But then $z \in X \cup (Z \setminus X)$.
+  \begin{quote}
+    Our proof is complete: we have shown that $X \cup (Z \setminus X) = Z$.
+    \qedhere
+  \end{quote}
 \end{proof}
 
 \end{document}

@@ -33,10 +33,9 @@ If $\delta$ is a !!{derivation} in natural deduction, then $\Gn{\delta}$ is
   if the inference does not !!{discharge} any assumptions.
 
 \begin{tabular}{lccccccc}
-\text{Rule:} & \Elim{\lfalse} & \Intro{\lnot} & \Elim{\lnot} &
-   \Elim{\land} & \Intro{\lor}  \\
+\text{Rule:} & \Elim{\land} & \Intro{\lor} & \Intro{\lif} & \Intro{\lnot} & \FalseInt \\
 $k$: & 1 & 2 & 3 & 4 & 5  \\[2ex]
-\text{Rule:} & \Intro{\lif} & \Intro{\lforall} &
+\text{Rule:} & \FalseCl  & \Intro{\lforall} &
    \Elim{\lforall} & \Intro{\lexists} & \Intro{\eq} \\
 $k$: & 6 & 7 & 8 & 9 & 10 
 \end{tabular}
@@ -49,7 +48,7 @@ $k$: & 6 & 7 & 8 & 9 & 10
   if the inference does not !!{discharge} any assumptions.
 
 \begin{tabular}{lcccc}
-\text{Rule:} & \Intro{\lfalse} & \Intro{\land} & \Elim{\lif} \\
+\text{Rule:}  & \Intro{\land} & \Elim{\lif} & \Elim{\lnot} \\
 $k$: & 1 & 2 & 3 
 \end{tabular}
 \item $\tuple{3, \Gn{!A}, n, \Gn{\delta_1}, \Gn{\delta_2},
@@ -71,13 +70,16 @@ $k$: & 1 & 2 & 3
     \UnaryInfC{$(!A \lif !B)$}
   \end{prooftree}
   The G\"odel number of the assumption would be $d_0 = \tuple{0,
-    \Gn{(!A \land !B)}, 1}$.  The G\"odel number of the derivation ending
-  in the premise of~$\Intro{\lif}$ would be $d_1 = \tuple{1, \Gn{!A},
-    0, 4, d_0}$. The G\"odel number of the entire derivation then is
-  $\tuple{1, \Gn{(!A \lif !B)}, 1, 6, d_1}$, i.e.,
+    \Gn{(!A \land !B)}, 1}$.  The G\"odel number of the derivation
+  ending in the conclusion of~$\Elim{\land}$ would be $d_1 = \tuple{1,
+    \Gn{!A}, 0, 1, d_0}$ ($1$ since $\Elim{\land}$ has one premise,
+  G\"odel number of conclusion~$!A$, $0$ because no assumption is
+  discharged, $1$ is the number coding $\Elim{\land}$). The G\"odel
+  number of the entire derivation then is $\tuple{1, \Gn{(!A \lif
+      !B)}, 1, 3, d_1}$, i.e.,
   \[
-  2^2\cdot 3^{\Gn{(!A \lif !B)}+1}\cdot 5^2\cdot 7^7\cdot
-  11^{(2^2\cdot 3^{\Gn{!A}+1}\cdot 5^1 \cdot 7^5 \cdot
+  2^2\cdot 3^{\Gn{(!A \lif !B)}+1}\cdot 5^2\cdot 7^4\cdot
+  11^{(2^2\cdot 3^{\Gn{!A}+1}\cdot 5^1 \cdot 7^2 \cdot
     11^{(2^1\cdot 3^{\Gn{(!A \land !B)}+1} \cdot 5^2)})}.
   \]
 \end{ex}
@@ -243,17 +245,17 @@ x = (\Gn{\lexists} \concat v \concat z))
 & \bexists{x<d}{\bexists{n<d}{(\fn{Sent}(x) \land d = \tuple{0, x, n}) \lor {}}}\\
 & ((d)_0 = 1 \land {}\\
 & \quad ((d)_3 = 1 \land
-\fn{FollowsBy}_{\Elim{\lfalse}}((d)_1, (d)_4, (d)_2) \lor{}\\
+\fn{FollowsBy}_{\Elim{\land}}((d)_1, (d)_4, (d)_2) \lor{}\\
 & \qquad \vdots\\
 & \quad ((d)_3 = 10 \land
 \fn{FollowsBy}_{\Intro{\eq}}((d)_1, (d)_4, (d)_2)) \land {}\\
 & \quad \fn{nDeriv}((d)_4, i)) \lor {}\\
 & ((d)_0 = 2 \land {}\\
 & \quad ((d)_3 = 1 \land 
-\fn{FollowsBy}_{\Intro{\lfalse}}((d)_1, (d)_4, (d)_5, (d)_2)) \lor{}\\
+\fn{FollowsBy}_{\Intro{\land}}((d)_1, (d)_4, (d)_5, (d)_2)) \lor{}\\
 & \qquad \vdots\\
 & \quad ((d)_3 = 3 \land
-\fn{FollowsBy}_{\Elim{\lif}}((d)_1, (d)_4, (d)_5, (d)_2)) \land {}\\
+\fn{FollowsBy}_{\Elim{\lnot}}((d)_1, (d)_4, (d)_5, (d)_2)) \land {}\\
 & \quad \fn{hDeriv}((d)_4, i) \land \fn{hDeriv}((d)_5, i)) \lor {}\\
 & ((d)_0 = 3 \land {}\\
 & \quad \fn{FollowsBy}_{\Elim{\lor}}((d)_1, (d)_3, (d)_4, (d)_5, (d)_2) \land{}\\

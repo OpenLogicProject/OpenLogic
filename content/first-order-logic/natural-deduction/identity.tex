@@ -10,39 +10,38 @@
 
 \olsection{\usetoken{P}{derivation} with \usetoken{S}{identity}}
 
-!!^{derivation}s with the !!{identity} require additional inference rules.
+!!^{derivation}s with !!{identity} require additional inference rules.
 
-\paragraph{Rules for $\eq$:}
-
-\begin{gather*}
+\begin{defish}
 \AxiomC{}
 \RightLabel{\Intro{\eq}}
 \UnaryInfC{$\eq[t][t]$}
 \DisplayProof
-\\
+\hfill
+\begin{tabular}{r}
 \AxiomC{$\eq[t_1][t_2]$}
 \AxiomC{$!A(t_1)$}
 \RightLabel{\Elim{\eq}}
 \BinaryInfC{$!A(t_2)$}
 \DisplayProof
-\quad
-\textrm{  and  }
-\quad
+\\[3ex]
 \AxiomC{$\eq[t_1][t_2]$}
 \AxiomC{$!A(t_2)$}
 \RightLabel{\Elim{\eq}}
 \BinaryInfC{$!A(t_1)$}
 \DisplayProof
-\end{gather*}
-where $t_1$ and $t_2$ are closed terms. The \Intro{\eq} rule allows us
-to !!{derive} any identity statement of the form $\eq[t][t]$
-outright, from no assumptions.
+\end{tabular}
+\end{defish}
+
+In the above rules, $t$, $t_1$, and $t_2$ are closed terms. The
+\Intro{\eq} rule allows us to !!{derive} any identity statement of the
+form $\eq[t][t]$ outright, from no assumptions.
 
 \begin{ex}
 If $s$ and $t$ are closed terms, then $!A(s), \eq[s][t] \Proves !A(t)$:
 \[
-\AxiomC{$!A(s)$}
 \AxiomC{$\eq[s][t]$}
+\AxiomC{$!A(s)$}
 \RightLabel{$\Elim{\eq}$}
 \BinaryInfC{$!A(t)$}
 \DisplayProof

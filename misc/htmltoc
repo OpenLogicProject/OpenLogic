@@ -1,0 +1,16 @@
+#!/bin/bash
+echo "<a href="$1/$2.pdf">$2</a>"
+echo "<ol>"
+if grep -q 'olimport\[' $1/$2.tex ; then
+    for f in `grep olimport $1/$2.tex | sed "s/^.*\olimport\[[^]]*\]{\([^}]*\)}/\1/"` ; do
+	echo "<li>"
+	$0 $1/$f $f
+	echo "</li>"
+   done
+   fi
+if grep -q 'olimport{' $1/$2.tex ; then
+    for f in `grep olimport $1/$2.tex | sed "s/^.*\olimport{\([^}]*\)}/\1/"` ; do
+	echo "<li><a href="$1/$f.pdf">$f</a></li>"
+   done
+   fi
+echo "</ol>"

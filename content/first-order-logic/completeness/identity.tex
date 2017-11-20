@@ -24,12 +24,12 @@ fix this, however, using a construction known as ``factoring.''
 \end{explain}
 
 \begin{defn}
-Let $\Gamma^*$ be a maximally consistent set of sentences in~$\Lang
-L$.  We define the relation $\approx$ on the set of closed terms
-of~$\Lang L$ by
-\[
-t \approx t' \text{\quad iff \quad} \eq[t][t'] \in \Gamma^*
-\]
+  Let $\Gamma^*$ be a consistent and !!{complete} set of sentences
+  in~$\Lang L$.  We define the relation $\approx$ on the set of closed
+  terms of~$\Lang L$ by
+  \[
+  t \approx t' \text{\quad iff \quad} \eq[t][t'] \in \Gamma^*
+  \]
 \end{defn}
 
 \begin{prop}
@@ -55,9 +55,9 @@ The relation $\approx$ has the following properties:
 \end{prop}
 
 \begin{proof}
-Since $\Gamma^*$ is maximally consistent, $\eq[t][t'] \in \Gamma^*$
-iff $\Gamma^* \Proves \eq[t][t']$.  Thus it is enough to show the
-following:
+Since $\Gamma^*$ is consistent and !!{complete}, $\eq[t][t'] \in
+\Gamma^*$ iff $\Gamma^* \Proves \eq[t][t']$.  Thus it is enough to
+show the following:
 \begin{enumerate}
 \item $\Gamma^* \Proves \eq[t][t]$ for all terms~$t$.
 \item If $\Gamma^* \Proves \eq[t][t']$ then $\Gamma^* \Proves \eq[t'][t]$.
@@ -84,8 +84,9 @@ Complete the proof of~\olref[fol][com][ide]{prop:approx-equiv}.
 \end{prob}
 
 \begin{defn}
-Suppose $\Gamma^*$ is a maximally consistent set in a language~$\Lang
-L$, $t$ is a term, and $\approx$ as in the previous definition.  Then:
+Suppose $\Gamma^*$ is a consistent and !!{complete} set in a
+language~$\Lang L$, $t$ is a term, and $\approx$ as in the previous
+definition.  Then:
 \[
 [t]_\approx = \Setabs{t'}{t'\in \Trm[L], t \approx t'}
 \]
@@ -94,8 +95,9 @@ and $\Trm[L]/_\approx = \Setabs{[t]_\approx}{t \in \Trm[L]}$.
 
 \begin{defn}
 \ollabel{defn:term-model-factor}
-Let $\Struct M = \Struct M(\Gamma^*)$ be the term model for~$\Gamma^*$.  Then
-$\Struct M/_\approx$ is the following !!{structure}:
+Let $\Struct M = \Struct M(\Gamma^*)$ be the term model
+for~$\Gamma^*$.  Then $\Struct M/_\approx$ is the following
+!!{structure}:
 \begin{enumerate}
 \item $\Domain{M/_\approx} = \Trm[L]/_\approx$.
 \item $\Assign{c}{M/_\approx} = [c]_\approx$
@@ -119,9 +121,9 @@ one-place !!{predicate}, the last clause of the definition says that
 $[t]_\approx \in \Assign{R}{M/_\approx}$ iff $\Sat{M}{\Atom{R}{t}}$.
 If for some other term~$t'$ with $t \approx t'$,
 $\Sat/{M}{\Atom{R}{t}}$, then the definition would require
-$[t']_\approx \notin \Assign{R}{M/_\approx}$.  If $t \approx t'$,
-then $[t]_\approx = [t']_\approx$, but we can't have both $[t]_\approx
-\in \Assign{R}{M/_\approx}$ and $[t]_\approx \notin
+$[t']_\approx \notin \Assign{R}{M/_\approx}$.  If $t \approx t'$, then
+$[t]_\approx = [t']_\approx$, but we can't have both $[t]_\approx \in
+\Assign{R}{M/_\approx}$ and $[t]_\approx \notin
 \Assign{R}{M/_\approx}$.  However, \olref{prop:approx-equiv}
 guarantees that this cannot happen.
 \end{explain}

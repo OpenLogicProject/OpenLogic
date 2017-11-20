@@ -12,10 +12,10 @@
 
 \begin{explain}
 Part of the challenge in proving the completeness theorem is that the
-model we construct from a maximally consistent set~$\Gamma$ must make
+model we construct from a complete consistent set~$\Gamma$ must make
 all the quantified !!{formula}s in~$\Gamma$ true.  In order to
 guarantee this, we use a trick due to Leon Henkin.  In essence, the
-trick consists in expanding the language by infinitely many constants
+trick consists in expanding the language by infinitely many !!{constant}s
 and adding, for each !!{formula} with one free !!{variable} $!A(x)$ a
 formula of the form
 \iftag{prvEx}
@@ -29,103 +29,110 @@ where $c$ is one of the new !!{constant}s.  When we construct the
 among the new constants.
 \end{explain}
 
-\begin{lem}
-\ollabel{defn:lang-exp}
+\begin{prop}
+\ollabel{prop:lang-exp}
 If $\Gamma$ is consistent in $\Lang L$ and $\Lang L'$ is obtained from
-$\Lang L$ by adding !!a{denumerable} set of new !!{constant}s $\Obj d_1$,
-$\Obj d_2$, \dots, then $\Gamma$ is consistent in~$\Lang L'$.
-\end{lem}
+$\Lang L$ by adding !!a{denumerable} set of new !!{constant}s $\Obj d_0$,
+$\Obj d_1$, \dots, then $\Gamma$ is consistent in~$\Lang L'$.
+\end{prop}
 
 \begin{defn}[Saturated set]
 A set $\Gamma$ of !!{formula}s of a language $\Lang {L}$ is
-\emph{saturated} if and only if for each !!{formula} $!A \in \Frm[L]$
-and !!{variable}~$x$ there is a !!{constant} $c$ such that
+\emph{saturated} iff for each !!{formula} $!A(x) \in \Frm[L]$ with one
+free !!{variable}~$x$ there is a !!{constant}~$c \in \Lang{L}$ such
+that
 \iftag{prvEx}
-      {$\lexists[x][!A] \lif !A(c) \in \Gamma$}
-      {$\lnot\lforall[x][!A] \lif \lnot !A(c) \in \Gamma$}.
+      {$\lexists[x][!A(x)] \lif !A(c) \in \Gamma$}
+      {$\lnot\lforall[x][!A(x)] \lif \lnot !A(c) \in \Gamma$}.
 \end{defn}
 
 The following definition will be used in the proof of the next theorem.
 
 \begin{defn}
-Let $\Lang L'$ be as in \olref{defn:lang-exp}.  Fix an enumeration
-$\tuple{!A_1, x_1}$, $\tuple{!A_2, x_2}$, \dots of all
-!!{formula}-!!{variable} pairs of~$\Lang L'$.  We define the
-!!{sentence}s~$!D_n$ by recursion on~$n$. Assuming that $!D_1$,
-\dots,~$!D_n$ have already been defined, let $c_{n+1}$ be the first
-new !!{constant} among the~$\Obj d_i$ that does not occur in $!D_1$,
-\dots,~$!D_n$, and let $!D_{n+1}$ be the !!{formula} \iftag{prvEx}
-     {$\lexists[x_{n+1}][!A_{n+1}(x_{n+1})] \lif !A_{n+1}(c_{n+1})$}
-     {$\lnot\lforall[x_{n+1}][!A_{n+1}(x_{n+1})] \lif \lnot
-       !A_{n+1}(c_{n+1})$}.  This includes the case where $n = 0$ and
-     the list of previous $!D_i$'s is empty, i.e., $!D_1$ is
-     \iftag{prvEx} {$\lexists[x_1][!A_1] \lif !A_1(c_1)$}
-           {$\lnot\lforall[x_1][!A_1] \lif \lnot !A_1(c_1)$}.
+\ollabel{defn:henkin-exp}
+Let $\Lang L'$ be as in \olref{prop:lang-exp}.  Fix an enumeration
+$!A_0(x_0)$, $!A_1(x_1)$, \dots of all !!{formula}s~$!A_i(x_i)$
+of~$\Lang L'$ in which one variable ($x_i$) occurs free.  We define
+the !!{sentence}s~$!D_n$ by induction on~$n$.
+
+Let $c_0$ be the first !!{constant} among the $\Obj d_i$ we added
+to~$\Lang{L}$ which does not occur in~$!A_0(x_0)$.  Assuming that
+$!D_0$, \dots,~$!D_{n-1}$ have already been defined, let $c_n$ be the
+first among the new !!{constant}s~$\Obj d_i$ that occurs neither in
+$!D_0$, \dots,~$!D_{n-1}$ nor in~$!A_n(x_n)$.
+
+Now let $!D_{n}$ be the !!{formula} \iftag{prvEx}
+{$\lexists[x_{n}][!A_{n}(x_{n})] \lif
+  !A_{n}(c_{n})$}{$\lnot\lforall[x_{n}][!A_{n}(x_{n})] \lif \lnot
+  !A_{n}(c_{n})$}.
 \end{defn}
 
-\begin{thm}
-\ollabel{thm:henkin}
+\begin{lem}
+\ollabel{lem:henkin}
 Every consistent set~$\Gamma$ can be extended to a saturated
 consistent set~$\Gamma'$.
-\end{thm}
+\end{lem}
 
 \begin{proof}
 Given a consistent set of sentences~$\Gamma$ in a language~$\Lang{L}$,
 expand the language by adding !!a{denumerable} set of new
-!!{constant}s to form~$\Lang{L'}$.  By the previous Lemma, $\Gamma$ is still
-consistent in the richer language.  Further, let $!D_i$ be as in the
-previous definition: then $\Gamma \cup \{!D_1, !D_2, \dots\}$ is
-saturated by construction.  Let
+!!{constant}s to form~$\Lang{L'}$.  By \olref{prop:lang-exp}, $\Gamma$
+is still consistent in the richer language.  Further, let $!D_i$ be as
+in \olref{defn:henkin-exp}.  Let
 \begin{align*}
 \Gamma_0 & = \Gamma \\
-\Gamma_{n+1} & = \Gamma_n \cup \{!D_{n+1} \}
+\Gamma_{n+1} & = \Gamma_n \cup \{!D_n \}
 \end{align*}
-i.e., $\Gamma_n = \Gamma \cup \{ !D_1, \dots, !D_n \}$, and let
-$\Gamma' = \bigcup_{n} \Gamma_n$.  To show that $\Gamma'$ is
+i.e., $\Gamma_{n+1} = \Gamma \cup \{ !D_0, \dots, !D_n \}$, and let
+$\Gamma' = \bigcup_{n} \Gamma_n$.  $\Gamma'$ is clearly saturated.
+
+If $\Gamma'$ were inconsistent, then for some $n$, $\Gamma_n$ would be
+inconsistent (Exercise: explain why).  So to show that $\Gamma'$ is
 consistent it suffices to show, by induction on~$n$, that each
 set~$\Gamma_n$ is consistent.
 
 The induction basis is simply the claim that $\Gamma_0 = \Gamma$ is
 consistent, which is the hypothesis of the theorem.  For the induction
-step, suppose that $\Gamma_{n-1}$ is consistent but $\Gamma_n =
-\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent.  Recall that $!D_n$~is
+step, suppose that $\Gamma_{n}$ is consistent but $\Gamma_{n+1} =
+\Gamma_n \cup \{!D_n\}$ is inconsistent.  Recall that $!D_n$~is
 \iftag{prvEx}
 {$\lexists[x_{n}][!A_{n}(x_n)] \lif !A_{n}(c_{n})$}
-{$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$}.
-where $!A(x)$ is a !!{formula} of $\Lang{L'}$ with only the
-variable~$x_n$ free and not containing any !!{constant}s~$c_i$ where
-$i \ge n$.
+{$\lnot\lforall[x_{n}][!A_{n}(x_n)] \lif \lnot !A_{n}(c_{n})$},
+where $!A_n(x_n)$ is a !!{formula} of $\Lang{L'}$ with only the
+variable~$x_n$ free. By the way we've chosen the~$c_n$ (see
+\olref{defn:henkin-exp}), $c_n$ does not occur in~$A_n(x_n)$ nor
+in~$\Gamma_n$.
 
-If $\Gamma_{n-1} \cup \{!D_n\}$ is inconsistent, then $\Gamma_{n-1}
+If $\Gamma_n \cup \{!D_n\}$ is inconsistent, then $\Gamma_n
 \Proves \lnot !D_n$, and hence both of the following hold:
 \iftag{prvEx}{
 \[
-\Gamma_{n-1} \Proves \lexists[x_n][!A_n(x_n)]
+\Gamma_n \Proves \lexists[x_n][!A_n(x_n)]
 \qquad
-\Gamma_{n-1} \Proves \lnot !A_n(c_n)
+\Gamma_n \Proves \lnot !A_n(c_n)
 \]}{
 \[
-\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n(x_n)]
+\Gamma_n \Proves \lnot\lforall[x_n][!A_n(x_n)]
 \qquad
-\Gamma_{n-1} \Proves !A_n(c_n)
+\Gamma_n \Proves !A_n(c_n)
 \]}
-Here $c_n$ does not occur in $\Gamma_{n-1}$ or $!A_n(x_n)$ (remember,
-it was added only with~$!D_n$).  By
-\tagrefs{prfSC/{fol:seq:prv:thm:strong-generalization},prfND/{fol:ntd:prv:thm:strong-generalization}},
-from \iftag{prvEx}
-{$\Gamma \Proves \lnot !A_n(c_n)$}
-{$\Gamma \Proves !A_n(c_n)$},
+Since $c_n$ does not occur in
+$\Gamma_n$ or in~$!A_n(x_n)$, 
+\tagrefs{prfSC/{fol:seq:qpr:thm:strong-generalization},prfND/{fol:ntd:qpr:thm:strong-generalization}} applies.
+From \iftag{prvEx}
+{$\Gamma_n \Proves \lnot !A_n(c_n)$}
+{$\Gamma_n \Proves !A_n(c_n)$},
 we obtain
 \iftag{prvEx}
-{$\Gamma \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
-{$\Gamma \Proves \lforall[x_n][!A_n(x_n)]$}.
+{$\Gamma_n \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
+{$\Gamma_n \Proves \lforall[x_n][!A_n(x_n)]$}.
 Thus we have that both
 \iftag{prvEx}
-{$\Gamma_{n-1} \Proves \lexists[x_n][!A_n]$ and
-$\Gamma_{n-1} \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
-{$\Gamma_{n-1} \Proves \lnot\lforall[x_n][!A_n(x_n)]$ and
-$\Gamma_{n-1} \Proves \lforall[x_n][!A_n(x_n)]$},
-so $\Gamma$ itself is inconsistent.
+{$\Gamma_n \Proves \lexists[x_n][!A_n]$ and
+$\Gamma_n \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
+{$\Gamma_n \Proves \lnot\lforall[x_n][!A_n(x_n)]$ and
+$\Gamma_n \Proves \lforall[x_n][!A_n(x_n)]$},
+so $\Gamma_n$ itself is inconsistent.
 \iftag{prvEx}
 {(Note that
 \iftag{prvAll}
@@ -135,8 +142,72 @@ so $\Gamma$ itself is inconsistent.
   $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)]$ and
   $\lnot\lexists[x_n][\lnot\lnot !A_n(x_n)] \Proves
   \lnot\lexists[x_n][!A_n(x_n)]$}.)}{}
-Contradiction: $\Gamma_{n-1}$ was supposed to be consistent.  Hence
+Contradiction: $\Gamma_n$ was supposed to be consistent.  Hence
 $\Gamma_n \cup \{ !D_n\}$ is consistent.
+\end{proof}
+
+\begin{explain}
+We'll now show that \emph{complete}, consistent sets which are
+saturated have the property that \iftag{prvAll}{it contains a
+  universally quantified !!{sentence} iff it contains all its
+  instances}{}\iftag{defAll,defEx}{}{ and }\iftag{prvAll}{it contains an
+  existentially quantified !!{sentence} iff it contains at least one
+  instance}{}. We'll use this to show that the !!{structure} we'll
+generate from a complete, consistent, saturated set makes all its
+quantified sentences true.
+\end{explain}
+
+\begin{prop}\ollabel{prop:saturated-instances}
+Suppose $\Gamma$ is complete, consistent, and saturated.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\lexists[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+  for at least one closed term~$t$.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \in \Gamma$ iff $!A(t) \in \Gamma$
+  for all closed terms~$t$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{tagenumerate}{prvEx,prvAll}
+  \tagitem{prvEx}{%
+    \iftag{probEx}{Exercise.}{First suppose that $\lexists[x][!A(x)]
+      \in \Gamma$.  Because $\Gamma$ is saturated,
+      $(\lexists[x][!A(x)] \lif !A(c)) \in \Gamma$ for some
+      !!{constant}~$c$. By
+      \tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item~(1),
+      and \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in}, $!A(c)
+      \in \Gamma$.
+
+    For the other direction, saturation is not necessary: Suppose
+    $!A(t) \in \Gamma$. Then $\Gamma \Proves \lexists[x][!A(x)]$ by
+      \tagrefs{prfSC/{fol:seq:qpr:prop:provability-quantifiers},prfND/{fol:ntd:qpr:prop:provability-quantifiers}}, item~(1). By
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-prov-in},
+    $\lexists[x][!A(x)] \in \Gamma$.}}{}
+  \tagitem{prvAll}{%
+    \iftag{probAll}{Exercise.}{Suppose that $!A(t) \in \Gamma$ for
+      all closed terms~$t$. By way of contradiction, assume
+      $\lforall[x][!A(x)] \notin \Gamma$. Since $\Gamma$ is complete,
+      $\lnot\lforall[x][!A(x)] \in \Gamma$. By saturation,
+      \iftag{prvEx}{$(\lexists[x][\lnot !A(x)] \lif \lnot !A(c)) \in
+        \Gamma$}{$(\lnot\lforall[x][!A(x)] \lif \lnot !A(c)) \in
+        \Gamma$} for some !!{constant}~$c$. By assumption, since $c$
+      is a closed term, $!A(c) \in \Gamma$. But this would make
+      $\Gamma$ inconsistent. (Exercise: give the derivation that shows
+      \[
+      \lnot \lforall[x][!A(x)],
+      \iftag{prvEx}{\lexists[x][\lnot !A(x)] \lif \lnot
+        !A(c)}{\lnot\lforall[x][!A(x)] \lif \lnot
+        !A(c)}, !A(c)
+      \]
+      is inconsistent.)
+
+      For the reverse direction, we do not need saturation: Suppose
+      $\lforall[x][!A(x)] \in \Gamma$.  Then $\Gamma \Proves !A(t)$
+      by
+      \tagrefs{prfSC/{fol:seq:qpr:prop:provability-quantifiers},prfND/{fol:ntd:qpr:prop:provability-quantifiers}},
+      item~(2). We get $!A(t) \in \Gamma$ by
+      \olref[ccs]{prop:ccs}.}}{}
+  \end{tagenumerate}
 \end{proof}
 
 \end{document}

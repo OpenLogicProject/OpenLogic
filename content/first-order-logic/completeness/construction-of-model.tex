@@ -10,18 +10,31 @@
 
 \olsection{Construction of a Model}
 
-We will begin by showing how to construct !!a{structure} which
-satisfies a maximally consistent, saturated set of !!{sentence}s in a
-language~$\Lang L$ without~$\eq$.
+\begin{explain}
+Right now we are not concerned about $\eq$, i.e., we only want to show
+that a consistent set~$\Gamma$ of !!{sentence}s not containing~$\eq$
+is satisfiable. We first extend~$\Gamma$ to a consistent,
+!!{complete}, and saturated set~$\Gamma^*$.  In this case, the
+definition of a model~$\Struct{M(\Gamma^*)}$ is simple: We take the
+set of closed terms of~$\Lang{L'}$ as the domain. We assign every
+!!{constant} to itself, and make sure that more generally, for every
+closed term~$t$, $\Value{t}{M(\Gamma^*)} = t$.  The !!{predicate}s are
+assigned extensions in such a way that an atomic !!{sentence} is true
+in $\Struct{M(\Gamma^*)}$ iff it is in~$\Gamma^*$.  This will
+obviously make all the atomic !!{sentence}s in~$\Gamma^*$ true in
+$\Struct{M(\Gamma^*)}$. The rest are true provided the $\Gamma^*$ we
+start with is consistent, complete, and saturated.
+\end{explain}
 
 \begin{defn}[Term model]
-\ollabel{termmodel}
-Let $\Gamma^*$ be a maximally consistent, saturated set of !!{sentence}s
-in a language~$\Lang L$. The \emph{term model}~$\Struct M(\Gamma^*)$
-of $\Gamma^*$ is the !!{structure} defined as follows:
+\ollabel{defn:termmodel}
+Let $\Gamma^*$ be a !!{complete} and consistent,
+saturated set of !!{sentence}s in a language~$\Lang L$. The \emph{term
+  model}~$\Struct M(\Gamma^*)$ of $\Gamma^*$ is the !!{structure}
+defined as follows:
 \begin{enumerate}
-\item The !!{domain}~$\Domain{M(\Gamma^*)}$ is the set of all closed terms
-  of~$\Lang L$.
+\item The !!{domain}~$\Domain{M(\Gamma^*)}$ is the set of all closed
+  terms of~$\Lang L$.
 \item The interpretation of !!a{constant} $c$ is $c$ itself:
   $\Assign{c}{M(\Gamma^*)} = c$.
 \item The !!{function}~$f$ is assigned the function which, given as
@@ -30,11 +43,74 @@ of $\Gamma^*$ is the !!{structure} defined as follows:
 \[
 \Assign{f}{M(\Gamma^*)}(t_1, \dots, t_n) = f(t_1,\dots, t_n)
 \]
-\item If $R$ is an $n$-place !!{predicate}, then $\tuple{t_1, \dots,
-  t_n} \in \Assign{R}{M(\Gamma^*)}$ iff $\Atom{R}{t_1, \dots,
-    t_n} \in \Gamma^*$.
+\item If $R$ is an $n$-place !!{predicate}, then
+  \[
+  \tuple{t_1, \dots,
+  t_n} \in \Assign{R}{M(\Gamma^*)} \text{ iff } \Atom{R}{t_1, \dots,
+    t_n} \in \Gamma^*.
+  \]
 \end{enumerate}
 \end{defn}
+
+\begin{explain}
+  \iftag{prvEx}{!!^a{structure}~$\Struct{M}$ may make an existentially
+    quantified !!{sentence}~$\lexists[x][!A(x)]$ true without there
+    being an instance~$!A(t)$ that it makes true.}{}
+  \iftag{prvAll}{!!^a{structure}~$\Struct{M}$ may make all
+    instances~$!A(t)$ of a universally quantified
+    !!{sentence}~$\lforall[x][!A(x)]$ true, without
+    making~$\lforall[x][!A(x)]$ true.}{} This is because in general
+  not every !!{element} of~$\Domain{M}$ is the value of a closed term
+  ($\Struct{M}$ may not be covered).  This is the reason the
+  satisfaction relation is defined via variable assignments. However,
+  for our term model~$\Struct{M(\Gamma^*)}$ this wouldn't be
+  necessary---because it is covered. This is the content of the next
+  result.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:quant-termmodel}
+Let $\Struct M(\Gamma^*)$ be the term model of \olref{defn:termmodel}.
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff
+  $\Sat{M}{!A(t)}$ for at least one term~$t$.}{}
+\tagitem{prvAll}{$\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff
+  $\Sat{M}{!A(t)}$ for all terms~$t$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{%
+  \iftag{probEx}{Exercise.}{By \olref[syn][ass]{prop:sat-quant},
+    $\Sat{M(\Gamma^*)}{\lexists[x][!A(x)]}$ iff for at least one
+    variable assignment~$s$, $\Sat{M(\Gamma^*)}{!A(x)}[s]$. As
+    $\Domain{M(\Gamma^*)}$ consists of the closed terms of~$\Lang{L}$,
+    this is the case iff there is at least one closed term~$t$ such
+    that $s(x) = t$ and $\Sat{M(\Gamma^*)}{!A(x)}[s]$.  By
+    \olref[fol][syn][ext]{prop:ext-formulas},
+    $\Sat{M(\Gamma^*)}{!A(x)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}[s]$,
+    where $s(x) = t$.  By \olref[fol][syn][ass]{prop:sentence-sat-true},
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}$,
+    since $!A(t)$ is a sentence.}}{}
+\tagitem{prvAll}{%
+  \iftag{probAll}{Exercise.}{By \olref[syn][ass]{prop:sat-quant},
+    $\Sat{M(\Gamma^*)}{\lforall[x][!A(x)]}$ iff for every variable
+    assignment $s$, $\Sat{M(\Gamma^*)}{!A(x)}[s]$. Recall that
+    $\Domain{M(\Gamma^*)}$ consists of the closed terms of~$\Lang{L}$,
+    so for every closed term~$t$, $s(x) = t$ is such a variable
+    assignment, and for any variable assignment, $s(x)$ is some closed
+    term~$t$.  By \olref[fol][syn][ext]{prop:ext-formulas},
+    $\Sat{M(\Gamma^*)}{!A(x)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}[s]$,
+    where $s(x) = t$.  By \olref[fol][syn][ass]{prop:sentence-sat-true},
+    $\Sat{M(\Gamma^*)}{!A(t)}[s]$ iff $\Sat{M(\Gamma^*)}{!A(t)}$,
+    since $!A(t)$ is a sentence.}}{}
+\end{tagenumerate}
+\end{proof}
+
+\begin{probtag}{probEx,probAll}
+Complete the proof of \olref[fol][com][mod]{prop:quant-termmodel}.
+\end{probtag}
 
 \begin{lem}[Truth Lemma]
 \ollabel{lem:truth} Suppose $!A$ does not contain~$\eq$. Then
@@ -50,24 +126,23 @@ We prove both directions simultaneously, and by induction on $!A$.
     $\Gamma^*$ is consistent.}}{}
 
 \tagitem{prvTrue}{%
-  \indcase{!A}{\ltrue}{$\Sat{M(\Gamma^*)}{\ltrue}$ by definition of
-    satisfaction. On the other hand, $\ltrue \in \Gamma^*$ since
-    $\Gamma^*$ is maximally consistent and $\Gamma^* \Proves \ltrue$.}}{}
+  \indcase{!A}{\ltrue}{$\Sat{M(\Gamma^*)}{\ltrue}$
+  by definition of satisfaction. On the other hand, $\ltrue \in
+  \Gamma^*$ since $\Gamma^*$ is consistent and !!{complete}, and
+  $\Gamma^* \Proves \ltrue$.}}{}
 
 \item \indcase{!A}{R(t_1, \dots,
   t_n)}{$\Sat{M(\Gamma^*)}{\Atom{R}{t_1, \dots, t_n}}$ iff
   $\tuple{t_1, \dots, t_n} \in \Assign{R}{M(\Gamma^*)}$ (by the
   definition of satisfaction) iff $R(t_1, \dots, t_n) \in \Gamma^*$
-  (the construction of $\Struct M(\Gamma^*)$.}
+  (by the construction of $\Struct M(\Gamma^*)$).}
 
 \tagitem{prvNot}{%
 \indcase{!A}{\lnot !B}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff
   $\Sat/{M(\Gamma^*)}{!B}$ (by definition of satisfaction). By
   induction hypothesis, $\Sat/{M(\Gamma^*)}{!B}$ iff $!B \notin
-  \Gamma^*$. By \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-either-or},
-  $\lnot !B \in \Gamma^*$ if $!B \notin \Gamma^*$; and $\lnot !B
-  \notin \Gamma^*$ if $!B \in \Gamma^*$ since $\Gamma^*$ is
-  consistent.}}{}
+  \Gamma^*$. Since $\Gamma^*$ is consistent and !!{complete},
+  $!B \notin \Gamma^*$ iff $\lnot !B \in \Gamma^*$.}}{}
 
 \tagitem{prvAnd}{%
 \iftag{probAnd}{%
@@ -76,8 +151,8 @@ We prove both directions simultaneously, and by induction on $!A$.
   both $\Sat{M(\Gamma^*)}{!B}$ and $\Sat{M(\Gamma^*)}{!C}$ (by
   definition of satisfaction) iff both $!B \in \Gamma^*$ and $!C \in
   \Gamma^*$ (by the induction hypothesis). By
-  \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-and}, this is the case
-  iff $(!B \land !C) \in \Gamma^*$.}}}{}
+  \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-and}, this is the case iff
+  $(!B \land !C) \in \Gamma^*$.}}}{}
 
 \tagitem{prvOr}{%
 \iftag{probOr}{%
@@ -86,7 +161,8 @@ We prove both directions simultaneously, and by induction on $!A$.
   $\Sat{M(\Gamma^*)}{!B}$ or $\Sat{M(\Gamma^*)}{!C}$ (by definition of
   satisfaction) iff $!B \in \Gamma^*$ or $!C \in \Gamma^*$ (by
   induction hypothesis). This is the case iff $(!B \lor !C) \in
-  \Gamma^*$ (by \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-or}).}}}{}
+  \Gamma^*$ (by
+  \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-or}).}}}{}
 
 \tagitem{prvIf}{%
 \iftag{probIf}{%
@@ -95,63 +171,28 @@ We prove both directions simultaneously, and by induction on $!A$.
   $\Sat/{M(\Gamma^*}{!B}$ or $\Sat{M (\Gamma^*)}{!C}$ (by definition
   of satisfaction) iff $!B \notin \Gamma^*$ or $!C \in \Gamma^*$ (by
   induction hypothesis). This is the case iff $(!B \lif !C) \in
-  \Gamma^*$ (by \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-if}).}}}{}
+  \Gamma^*$ (by
+  \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-if}).}}}{}
 
 \tagitem{prvAll}{%
-\iftag{probAll}{%
-\indcase!{!A}{\lforall[x][!B(x)]}{}}{%
-\indcase{!A}{\lforall[x][!B(x)]}{Suppose that
-  $\Sat{M(\Gamma^*)}{\indfrm}$, then for every variable assignment $s$,
-  $\Sat{M(\Gamma^*)}{!B(x)}[s]$. Suppose to the contrary that
-  $\lforall[x][!B(x)]\notin \Gamma^*$: Then by
-  \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-either-or},
-  $\lnot\lforall[x][!B(x)] \in \Gamma^*$. By saturation,
-\iftag{prvEx}
-      {$(\lexists[x][\lnot !B(x)] \lif \lnot !B(c)) \in \Gamma^*$}
-      {$(\lnot\lforall[x][!B(x)] \lif \lnot !B(c)) \in \Gamma^*$}
-  for some $c$, so by
-  \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, $\lnot !B(c) \in
-  \Gamma^*$. Since $\Gamma^*$ is consistent, $!B(c) \notin
-  \Gamma^*$. By induction hypothesis, $\Sat/{M(\Gamma^*)}{!B(c)}$.
-  Therefore, if $s'$ is the variable assignment such that $s(x)=c$,
-  then, by \olref[fol][syn][ext]{prop:ext-formulas},
-  $\Sat/{M(\Gamma^*)}{!B(x)}[s']$, contradicting the earlier
-  result that $\Sat{M(\Gamma^*)}{!B(x)}[s]$ for all~$s$. Thus, we
-  have $\indfrm \in \Gamma^*$.
-
-Conversely, suppose that $\lforall[x][!B(x)] \in \Gamma^*$. By
-\tagrefs{prfSC/{fol:seq:prv:thm:provability-quantifiers},prfND/{fol:ntd:prv:thm:provability-quantifiers}}
-together with \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},
-$!B(t) \in \Gamma^*$ for every term~$t \in \Domain{M(\Gamma^*)}$. By
-inductive hypothesis, $\Sat{M(\Gamma^*)}{!B(t)}$ for every term~$t \in
-\Domain{M(\Gamma^*)}$. Let $s$ be the variable assigment with $s(x) =
-t$. Then $\Sat{M(\Gamma^*)}{!B(x)}[s]$ for any such~$s$, hence
-$\Sat{M(\Gamma^*)}{\indfrm}$.}}}{}
+  \iftag{probAll}{%
+    \indcase!{!A}{\lforall[x][!B(x)]}{}}{%
+    \indcase{!A}{\lforall[x][!B(x)]}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff
+      $\Sat{M(\Gamma^*)}{!B(t)}$ for all terms~$t$
+      (\olref{prop:quant-termmodel}).  By induction hypothesis, this
+      is the case iff $!B(t) \in \Gamma^*$ for all terms~$t$, by
+      \olref[hen]{prop:saturated-instances}, this in turn is the case
+      iff $\lforall[x][!A(x)] \in \Gamma^*$.}}}{}
 
 \tagitem{prvEx}{%
   \iftag{probEx}{%
-  \indcase!{!A}{\lexists[x][!B(x)]}{}}{%
-  \indcase{!A}{\lexists[x][!B(x)]}{First suppose that
-    $\Sat{M(\Gamma^*)}{\indfrm}$. By the definition of satisfaction,
-    for some variable assignment $s$,
-    $\Sat{M(\Gamma^*)}{!B(x)}[s]$. The value $s(x)$ is some term~$t
-    \in \Domain{M(\Gamma^*)}$. Thus, $\Sat{M(\Gamma^*)}{!B(t)}$, and
-    by our induction hypothesis, $!B(t) \in \Gamma^*$. By
-    \tagrefs{prfSC/{fol:seq:prv:thm:provability-quantifiers},prfND/{fol:ntd:prv:thm:provability-quantifiers}}
-    we have $\Gamma^* \Proves \lexists[x][!B(x)]$. Then, by
-    \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in}, we can
-    conclude that $\indfrm \in \Gamma^*$.
-
-Conversely, suppose that $\lexists[x][!B(x)] \in \Gamma^*$. Because
-$\Gamma^*$ is saturated, $(\lexists[x][!B(x)] \lif !B(c)) \in
-\Gamma^*$. By
-\tagrefs{prfSC/{fol:seq:prv:prop:provability-mp},prfND/{fol:ntd:prv:prop:provability-mp}}
-together with \olref[mcs]{prop:mcs}\olref[mcs]{prop:mcs-prov-in},
-$!B(c) \in \Gamma^*$. By inductive hypothesis,
-$\Sat{M(\Gamma^*)}{!B(c)}$. Now consider the variable assignment with
-$s(x) = \Assign{c}{M(\Gamma^*)}$. Then
-$\Sat{M(\Gamma^*)}{!B(x)}[s]$. By definition of satisfaction,
-$\Sat{M(\Gamma^*)}{\lexists[x][!B(x)]}$.}}}{}
+    \indcase!{!A}{\lexists[x][!B(x)]}{}}{%
+    \indcase{!A}{\lexists[x][!B(x)]}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff
+      $\Sat{M(\Gamma^*)}{!B(t)}$ for at least one term~$t$
+      (\olref{prop:quant-termmodel}).  By induction hypothesis, this
+      is the case iff $!B(t) \in \Gamma^*$ for at least one term~$t$.
+      By \olref[hen]{prop:saturated-instances}, this in turn is the
+      case iff $\lexists[x][!A(x)] \in \Gamma^*$.}}}{}
 \end{enumerate}
 \end{proof}
 

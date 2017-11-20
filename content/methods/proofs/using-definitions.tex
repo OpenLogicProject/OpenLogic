@@ -23,62 +23,80 @@ is the abbreviation) to get through our proof.  By unpacking
 definitions, you're ensuring that you're getting to the heart of where
 the logical action is.
 
-Later on we will prove that $X \cup (Y \cap Z) = (X \cup Y) \cap (X
-\cup Z)$. In order to even start the proof, we need to know what it
-means for two sets to be identical; i.e., we need to know what the
-``$=$'' in that equation means for sets.  (Later on, we'll also have
-to use the definitions of $\cup$ and $\cap$, of course).  Sets are
-defined to be identical whenever they have the same !!{element}s.  So
-the definition we have to unpack is:
+We'll start with an example. Suppose you want to prove the following:
+
+\begin{prop}
+For any sets $X$ and $Y$, $X \cup Y = Y \cup X$.
+\end{prop}
+
+In order to even start the proof, we need to know what it means for
+two sets to be identical; i.e., we need to know what the ``$=$'' in
+that equation means for sets.  Sets are defined to be identical
+whenever they have the same !!{element}s.  So the definition we have
+to unpack is:
 
 \begin{defn}
 Sets $X$ and $Y$ are \emph{identical}, $X = Y$, if every !!{element}
-of~$X$ is an !!{element} of~$Y$, and vice versa.
+of~$X$ is !!a{element} of~$Y$, and vice versa.
 \end{defn}
 
 This definition uses $X$ and~$Y$ as placeholders for arbitrary
-sets. What it defines---the definiendum---is the expression ``$X =
-Y$'' by giving the condition under which $X = Y$ is true.  This
-condition---``every !!{element} of~$X$ is an !!{element} of~$Y$, and
-vice versa''---is the definiens.\footnote{In this particular
+sets. What it defines---the \emph{definiendum}---is the expression
+``$X = Y$'' by giving the condition under which $X = Y$ is true.  This
+condition---``every !!{element} of~$X$ is !!a{element} of~$Y$, and
+vice versa''---is the \emph{definiens}.\footnote{In this particular
   case---and very confusingly!---when $X = Y$, the sets $X$ and $Y$
   are just one and the same set, even though we use different letters
   for it on the left and the right side.  But the ways in which that
-  set is picked out may be different.}
+  set is picked out may be different, and that makes the definition
+  non-trivial.}
 
 When you apply the definition, you have to match the $X$ and $Y$ in
-the definition to the case you're dealing with.  So, say, if you're
-asked to show that $U = W$, the definition tells you that in order to
-do so, you have to show that every !!{element} of~$U$ is an
-!!{element} of~$W$, and vice versa.  In our case, it means that order
-for $X \cup (Y \cap Z) = (X \cup Y) \cap (X \cup Z)$, each $z \in X
-\cup (Y \cap Z)$ must also be in $(X \cup Y) \cap (X \cup Z)$, and
-vice versa.  The expression $X \cup (Y \cap Z)$ plays the role of~$X$
-in the definition, and $(X \cup Y) \cap (X \cup Z)$ that of~$Y$. Since
-$X$ is used both in the definition and in the statement of the theorem
-to be proved, but in different uses, you have to be careful to make
-sure you don't mix up the two.  For instance, it would be a mistake to
-think that you could prove the claim by showing that every !!{element}
-of~$X$ is an !!{element} of~$Y$, and vice versa---that would show that
-$X = Y$, not that $X \cup (Y \cap Z) = (X \cup Y) \cap (X \cup Z)$.
+the definition to the case you're dealing with.  In our case, it means
+that in order for $X \cup Y = Y \cup X$ to be true, each $z \in X \cup
+Y$ must also be in $Y \cup X$, and vice versa.  The expression $X \cup
+Y$ in the proposition plays the role of~$X$ in the definition, and $Y
+\cup X$ that of~$Y$. Since $X$ and $Y$ are used both in the definition
+and in the statement of the proposition we're proving, but in
+different uses, you have to be careful to make sure you don't mix up
+the two.  For instance, it would be a mistake to think that you could
+prove the proposition by showing that every !!{element} of~$X$ is
+!!a{element} of~$Y$, and vice versa---that would show that $X = Y$,
+not that $X \cup Y = Y \cup X$. (Also, since $X$ and $Y$ may be any
+two sets, you won't get very far, because if nothing is assumed about
+$X$ and~$Y$ they may well be different sets.)
 
-Within the proof we are dealing with set-theoretic notions like union
-and intersection, and so we must also know the meanings of the symbols
-$\cup$ and $\cap$ in order to understand how the proof should
-proceed. And sometimes, unpacking the definition gives rise to further
-definitions to unpack. For instance, $X \cup Y$ is defined as
-$\Setabs{z}{z \in X \text{ or } z \in Y}$. So if you want to prove
-that $x \in X \cup Y$, unpacking the definition of $\cup$ tells you
-that you have to prove $x \in \Setabs{z}{z \in X \text{ or } z \in
-  Y}$.  Now you also have to remember that $x \in \Setabs{z}{\dots
-  z\dots}$ iff $\dots x\dots$.  So, further unpacking the definition
-of the $\Setabs{z}{\dots z \dots}$ notation, what you have to show is:
-$x \in X$ or $x \in Y$.
+Within the proof we are dealing with set-theoretic notions such as
+union, and so we must also know the meanings of the symbol $\cup$ in
+order to understand how the proof should proceed. And sometimes,
+unpacking the definition gives rise to further definitions to
+unpack. For instance, $X \cup Y$ is defined as $\Setabs{z}{z \in X
+  \text{ or } z \in Y}$. So if you want to prove that $x \in X \cup
+Y$, unpacking the definition of $\cup$ tells you that you have to
+prove $x \in \Setabs{z}{z \in X \text{ or } z \in Y}$.  Now you also
+have to remember that $x \in \Setabs{z}{\dots z\dots}$ iff $\dots
+x\dots$.  So, further unpacking the definition of the
+$\Setabs{z}{\dots z \dots}$ notation, what you have to show is: $x \in
+X$ or $x \in Y$. So, ``every !!{element} of $X \cup Y$ is also
+!!a{element} of $Y \cup X$'' really means: ``for every $x$, if $x \in
+X$ or $x \in Y$, then $x \in Y$ or $x \in X$.''  If we fully
+unpack the definitions in the proposition, we see that what we have to
+show is this:
 
-In order to be successful, you must know what the question is asking
-and what all the terms used in the question mean---you will often need
-to unpack more than one definition.  In simple proofs such as the ones
-below, the solution follows almost immediately from the definitions
+\begin{prop}
+For any sets $X$ and $Y$: (a) for every $x$, if $x \in X$ or $x \in
+Y$, then $x \in Y$ or $x \in X$, and (b) for every $x$, if $x \in Y$
+or $x \in X$, then $x \in X$ or $x \in Y$.
+\end{prop}
+
+What's important is that unpacking definitions is a necessary part of
+constructing a proof. Properly doing it is sometimes difficult: you
+must be careful to distinguish and match the variables in the
+definition and the terms in the claim you're proving.  In order to be
+successful, you must know what the question is asking and what all the
+terms used in the question mean---you will often need to unpack more
+than one definition.  In simple proofs such as the ones below, the
+solution follows almost immediately from the definitions
 themselves. Of course, it won't always be this simple.
 
 \begin{prob}
