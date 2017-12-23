@@ -1,0 +1,45 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-quantifiers
+
+% verification of properties of provability needed for maximally
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{qpr}
+
+\olsection{\usetoken{S}{derivability} and the Quantifiers}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} If $c$ is !!a{constant} not occurring
+in $\Gamma$ or $!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
+\Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+By the deduction theorem, $\Gamma \Proves \ltrue \lif !A(c)$. Since
+$c$ does not occur in $\Gamma$ or~$\top$, we get $\Gamma \Proves
+\ltrue \lif !A(c)$. By the deduction theorem again, $\Gamma \Proves
+\lforall[x][!A(x)]$.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{By \olref[qua]{ax:q2} and the deduction theorem.}{}
+\tagitem{prvAll}{By \olref[qua]{ax:q1} and the deduction theorem.}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

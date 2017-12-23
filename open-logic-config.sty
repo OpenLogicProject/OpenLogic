@@ -202,6 +202,18 @@
   \LeftLabel{\scriptsize $#2$}
 }
 
+% - `\MP`: produces abbreviation for Modus Ponens.
+
+\DeclareDocumentMacro \MP {\textsc{mp}}
+
+% - `\QR`: produces abbreviation for Quantifier Rule.
+
+\DeclareDocumentMacro \QR {\textsc{qr}}
+
+% - `\Hyp`: produces abbreviation for Hypothesis.
+
+\DeclareDocumentMacro \Hyp {\textsc{Hyp}}
+
 % Metalogical Relations
 % ---------------------
 %
@@ -264,6 +276,18 @@
         { \vdash }
         { \vdash_{#2} }}
 }
+
+% - `\Thms{X}`: theorems a set of formulas
+
+\DeclareDocumentCommand \Thms { m } {\mathrm{Thm}(#1)}
+
+% - `\PAx`: the set of propositional axioms
+
+\DeclareDocumentMacro \PAx { \mathrm{Ax}_0 }
+
+% - `\Ax`: the set of logical axioms
+
+\DeclareDocumentMacro \Ax { \mathrm{Ax} }
 
 % ### The semantic consequence relation relation
 
@@ -710,9 +734,13 @@
 % to, e.g., typeset the parameters as subscripts (e.g.,
 % $\mathrm{Frm}_\mathcal{L}$.
 
-% - `\Var`: the set of propositional variables
+% - `\Var`: the set of individual variables
 
-\def\Var{\mathrm{Var}}
+\DeclareDocumentMacro \Var { \mathrm{Var} }
+
+% - `\PVar`: the set of propositional variables
+
+\DeclareDocumentMacro \PVar { \mathrm{At}_0 }
 
 % - `\Trm[L]`: the set of terms (of a language)
 
@@ -1047,12 +1075,14 @@
 
 \tagtrue{lambda}
 
-% - `prfND`, `prfSC` - alternative coverage of proof systems. Set `prfND` to
-% true if you want to include material on natural deduction, and
-% `prfSC` for the sequent calculus.  By default, we include both.
+% - prfND, prfSC, prfAX - alternative coverage of proof systems. Set
+% `prfND` to true if you want to include material on natural
+% deduction, `prfSC` for the sequent calculus, and `prfAX` for
+% axiomatic deduction.  By default, we include all.
 
 \tagtrue{prfSC}
 \tagtrue{prfND}
+\tagtrue{prfAX}
 
 % - `cmplCCS` - prove completeness via generating a complete
 % consistent set

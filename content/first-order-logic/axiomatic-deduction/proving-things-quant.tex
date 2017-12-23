@@ -1,0 +1,36 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
+% Section: proving-things-quant
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{prq}
+
+\olsection{\usetoken{P}{derivation} with Quantifiers}
+
+\begin{ex}
+Let us give a derivation of $(\lforall[x][!A(x)] \land
+\lforall[y][!B(y)]) \lif \lforall[x][(!A(x) \land !B(x))]$.
+
+First, note that
+\begin{align*}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[x][!A(x)]\\
+  \intertext{is an instance of \olref[prp]{ax:land1}, and}
+  \lforall[x][!A(x)] & \lif !A(a) \\
+  \intertext{of \olref[qua]{ax:q1}. So, by \olref[pro]{prop:chain}, we know that}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif !A(a) \\
+  \intertext{is !!{derivable}. Likewise, since}
+  (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[y][!B(y)] \qquad\text{and}\\
+    \lforall[y][!B(y)] & \lif !B(a)\\
+    \intertext{are instances of \olref[prp]{ax:land2} and \olref[qua]{ax:q1}, respectively,}
+    (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif !B(a)\\
+    \intertext{is derivable by \olref[pro]{prop:chain}. Using an appropriate instance of \olref[prp]{ax:land3} and two applications of~\MP, we see that}
+    (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif (!A(a) \land !B(a))\\
+    \intertext{is derivable. We can now apply \QR{} to obtain}
+(\lforall[x][!A(x)] \land \lforall[y][!B(y)]) & \lif \lforall[x][(!A(x) \land !B(x))].
+\end{align*}
+\end{ex}
+
+\end{document}

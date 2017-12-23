@@ -1,0 +1,214 @@
+% Part: incompleteness
+% Chapter: arithmetization-syntax
+% Section: proofs-in-ax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{art}{pax}
+\olsection{Axiomatic \usetoken{P}{derivation}}
+
+\begin{explain}
+In order to arithmetize axiomatic !!{derivation}s, we must represent
+!!{derivation}s as numbers. Since !!{derivation}s are simply sequences
+of !!{formula}s, the obvious approach is to code every !!{derivation}
+as the code of the sequence of codes of !!{formula}s in it.
+\end{explain}
+
+\begin{defn}
+If $\delta$ is an axiomatic !!{derivation} consisting of !!{formula}s
+$!A_1$, \dots,~$!A_n$, then $\Gn{\delta}$ is
+\[
+\tuple{\Gn{!A_1}, \dots, \Gn{!A_n}}.
+\]
+\end{defn}
+
+\begin{ex}
+  Consider the very simple !!{derivation}
+  \begin{derivation}
+  1. & $!B \lif (!B \lor !A)$ \\
+  2. & $(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))$\\
+  3. & $!A  \lif (!B \lif (!B \lor !A))$
+  \end{derivation}
+  The G\"odel number of this derivation would simply be
+  \[
+  \tuple{\Gn{!B \lif (!B \lor !A)}, 
+  \Gn{(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))},
+  \Gn{!A  \lif (!B \lif (!B \lor !A))}}.
+  \]
+\end{ex}
+
+\begin{explain}
+Having settled on a representation of !!{derivation}s, we must also
+show that we can manipulate such !!{derivation}s primitive recursively, and
+express their essential properties and relations so.  Some operations
+are simple: e.g., given a G\"odel number~$d$ of a !!{derivation},
+$(d)_{\len{d}-1}$ gives us the G\"odel number of its end-!!{formula}.  Some are
+much harder.  We'll at least sketch how to do this.  The goal is to
+show that the relation ``$\delta$ is !!a{derivation} of~$!A$
+from~$\Gamma$'' is primitive recursive on the G\"odel numbers of
+$\delta$ and~$!A$.
+\end{explain}
+
+\begin{prop}
+\ollabel{prop:followsby}
+The following relations are primitive recursive:
+\begin{enumerate}
+\item $!A$ is an axiom.
+\item The $i$th line in $\delta$ is justified by modus ponens
+\item The $i$th line in $\delta$ is justified by \QR.
+\item $\delta$ is a correct !!{derivation}.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+We have to show that the corresponding relations between G\"odel
+numbers of !!{formula}s and  G\"odel numbers of !!{derivation}s 
+are primitive recursive.
+\begin{enumerate}
+\item We have a given list of axiom schemas, and $!A$ is an axiom if
+  it is of the form given by one of these schemas.  Since the list of
+  schemas is finite, it suffices to show that we can test primitive
+  recursively, for each axiom schema, if $!A$ is of that form. For
+  instance, consider the axiom schema
+  \[
+  !B \lif (!C \lif !B).
+  \]
+  $!A$ is an instance of this axiom schema if there are !!{formula}s
+  $!B$ and $!C$ such that we obtain $!A$ when we concatenate $($ with
+  $!B$ with $\lif$ with $($ with $!C$ with $\lif$ with $!B$ and with
+  $))$. We can test the corresponding property of the G\"odel number
+  $n$ of~$!A$, since concatenation of sequences is primitive
+  recursive, and the G\"odel numbers of $!B$ and $C$ must be smaller
+  than the G\"odel number of~$!A$, since when the relation holds, both
+  $!B$ and $!C$ are sub-!!{formula}s of~$!A$. Hence, we can define
+  \begin{multline*}
+  \fn{IsAx}_{!B \lif (!C \lif !B)}(n) \defiff \bexists{b< n}{
+    \bexists{c < n}{(\fn{Sent}(b) \land \fn{Sent}(c) \land {}}}\\ n =
+  \Gn{(} \concat b \concat \Gn{\lif} \concat \Gn{(} \concat c \concat
+  \Gn{\lif} \concat b \concat \Gn{))}).
+  \end{multline*}
+  If we have such a definition for each axiom schema, their
+  disjunction defines the property $\fn{IsAx}(n)$, ``$n$ is the
+  G\"odel number of an axiom.''
+\item The $i$th line in $\delta$ is justified by modus ponens iff there
+  are lines $j$ and $k < i$ where the !!{sentence} on line $j$ is some
+  formula $!A$, the sentence on line~$k$ is $!A \lif !B$, and the
+  sentence on line~$i$ is~$!B$.
+  \begin{multline*}
+    \fn{MP}(d, i) \defiff \bexists{j < i}{\bexists{k < i}{}}\\
+    (d)_k = \Gn{(} \concat (d)_j
+      \concat \Gn{\lif} \concat (d)_i \concat \Gn{)}
+  \end{multline*}
+  Since bounded quantification, concatenation, and $=$ are primitive
+  recursive, this defines a primitive recursive relation. 
+\item A line in $\delta$ is justified by \QR{} if it is of the form
+  $!B \lif \lforall[x][!A(x)]$, a preceding line is $!B \lif !A(c)$
+  for some !!{constant}~$c$, and $c$ does on occur in~$!B$. This is
+  the case iff
+  \begin{enumerate}
+  \item there is !!a{sentence}~$!B$ and
+  \item !!a{formula}~$!A(x)$ with a single variable~$x$ free so that
+  \item line $i$ contains $!B \lif \lforall[x][!A(x)]$
+  \item some line $j < i$ contains $!B \lif \Subst{!A}{c}{x}$ for a constant~$c$
+  \item which does not occur in~$!B$.
+  \end{enumerate}
+  All of these can be tested primitive recursively, since the G\"odel
+  numbers of $!B$, $!A(x)$, and $x$ are less than the G\"odel number of the
+  formula on line~$i$, and that of $a$ less than the G\"odel number of the
+  formula on line~$j$:
+  \begin{multline*}
+    \fn{QR}_1(d, i) \defiff \bexists{b < (d)_i}{\bexists{x <
+        (d)_i}{\bexists{a < (d)_i}{\bexists{c < (d)_j}{(}}}}
+    \\ \fn{Var}(x) \land \fn{Const}(c) \land {} \\
+    (d)_i = \Gn{(} \concat
+    b \concat \Gn{\lif} \concat \Gn{\lforall} \concat x \concat a
+    \concat \Gn{)} \land {}\\
+    (d)_j = \Gn{(} \concat b \concat
+    \Gn{\lif} \concat \fn{Subst}(a,c,x) \concat \Gn{)} \land {}\\ \fn{Sent}(b)
+    \land \fn{Sent}(\fn{Subst}(a,c,x)) \land {} \bforall{k <
+      \len{b}}{(b)_k \neq (c)_0})
+  \end{multline*}
+  Here we assume that $c$ and $x$ are the G\"odel numbers of the
+  variable and constant considered as terms (i.e., not their symbol
+  codes).  We test that $x$ is the only free variable of~$!A(x)$ by
+  testing if $\Subst{!A(x)}{c}{x}$ is !!a{sentence}, and ensure that
+  $c$ does not occur in $!B$ by requiring that every symbol of~$!B$ is
+  different from~$c$.
+
+  We leave the other version of \QR{} as an exercise.
+\item $d$ is the G\"odel number of a correct !!{derivation} iff every
+  line in it is an axiom, or justified by modus ponens or \QR. Hence:
+  \[
+  \fn{Deriv}(d) \defiff \bforall{i < \len{d}}{(\fn{IsAx}((d)_i) \lor
+    \fn{MP}(d,i) \lor \fn{QR}(d, i))}
+  \]
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+Define the following relations as in
+\olref[inc][art][pax]{prop:followsby}:
+\begin{enumerate}
+\item $\fn{IsAx}_{!A \lif (!B \lif (!A \land !B))}(n)$,
+\item $\fn{IsAx}_{\lforall[x][!A(x)] \lif !A(t)}(n)$,
+\item $\fn{QR}_{2}(d, i)$ (for the other version of \QR).
+\end{enumerate}
+\end{prob}
+
+\begin{prop}
+Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
+the relation $\Prf[\Gamma](x, y)$ expressing ``$x$ is the code of
+!!a{derivation}~$\delta$ of $!A$ from~$\Gamma$ and $y$ is the G\"odel
+number of~$!A$'' is primitive recursive.
+\end{prop}
+
+\begin{proof}
+Suppose ``$y \in \Gamma$'' is given by the primitive recursive
+predicate~$R_\Gamma(y)$.  We have to show that the relation
+$\Prf[\Gamma](x, y)$ is primitive recursive, where $\Prf[\Gamma](x,
+y)$ holds iff $y$ is the G\"odel number of !!a{sentence}~$!A$ and
+$x$~is the code of !!a{derivation} of~$!A$ from $\Gamma$.
+
+By the previous proposition, the property $\fn{Deriv}(x)$ which holds
+iff $x$ is the code of a correct !!{derivation}~$\delta$ is primitive
+recursive. However, that definition did not take into account the set
+$\Gamma$ as an additional way to justify lines in the derivation. Our
+primitive recursive test of whether a line is justified by \QR{} also
+left out of consideration the requirement that the constant~$c$ is not
+allowed to occur in~$\Gamma$. It is possible to amend our definition so
+that it takes into account $\Gamma$ directly, but it is easier to use
+$\fn{Deriv}$ and the deduction theorem. $\Gamma \Proves !A$ iff
+there is some finite list of !!{sentence}s $!B_1$, \dots, $!B_n \in
+\Gamma$ such that $\{!B_1, \dots, !B_n\} \Proves !A$. And by the
+deduction theorem, this is the case if $\Proves (!B_1 \lif (!B_2 \lif
+\cdots (!B_n \lif !A)\cdots))$. Whether !!a{sentence} with G\"odel
+number~$z$ is of this form can be tested primitive recursively.  So,
+instead of considering $x$ as the G\"odel number of !!a{derivation} of
+the !!{sentence} with G\"odel number~$y$ \emph{from $\Gamma$}, we consider
+$x$ as the G\"odel number of !!a{derivation} of a nested conditional
+of the above form from~$\emptyset$.
+
+First, if we have a sequence of !!{sentence}s, we can primitive
+recursively form the conditional with all these sentences as
+antecedents and given !!{sentence} as consequent:
+\begin{align*}
+  \fn{hCond}(s, y, 0) & = y \\
+  \fn{hCond}(s, y, n+1) & = \Gn{(} \concat (s)_{n} \concat \Gn{\lif}
+  \concat \fn{Cond}(s, y, n) \concat \Gn{)}\\
+  \fn{Cond}(s, y) & = \fn{hCond}(s, y, \len{s})\\
+  \intertext{So we can define $\Prf[\Gamma](x, y)$ by}
+  \Prf[\Gamma](x, y) & \defiff \bexists{s < \fn{sequenceBound}(x,x)}{(} \\
+  &\qquad (x)_{\len{x}-1} = \fn{Cond}(s,y) \land {} \\
+  &\qquad\bforall{i<\len{s}}{(s)_i \in \Gamma} \land {} \\
+  &\qquad\fn{Deriv}(x)).
+\end{align*}
+The bound on~$s$ is given by considering that each $(s)_i$ is the
+G\"odel number of a subformula of the last line of the derivation,
+i.e., is less than $(x)_{\len{x}-1}$. The number of antecedents $!B
+\in \Gamma$, i.e., the length of~$s$, is less than the length of the
+last line of~$x$.
+\end{proof}
+
+\end{document}

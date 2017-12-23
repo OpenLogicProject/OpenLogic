@@ -1,0 +1,127 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: soundness
+
+\documentclass[../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{sou}
+\olsection{Soundness}
+
+\begin{explain}
+!!^a{derivation} system, such as axiomatic deduction, is \emph{sound}
+if it cannot !!{derive} things that do not actually hold.  Soundness is
+thus a kind of guaranteed safety property for !!{derivation} systems.
+Depending on which proof theoretic property is in question, we would
+like to know for instance, that
+\begin{enumerate}
+\item every !!{derivable} !!{sentence} is valid;
+\item if a !!{sentence} is !!{derivable} from some others, it is also a
+  consequence of them;
+\item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
+\end{enumerate}
+These are important properties of !!a{derivation} system.  If any of them do
+not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
+Consequently, establishing the soundness of !!a{derivation} system is of the
+utmost importance.
+\end{explain}
+
+\begin{prop}
+If $!A$ is an axiom, then $\Sat{M}{!A}[s]$ for each !!{structure}
+$\Struct{M}$ and assignment~$s$.
+\end{prop}
+
+\begin{proof}
+We first verify that all the axioms are
+valid. For instance, here is the case for \olref[qua]{ax:q1}: suppose $t$ is
+!!{free for} $x$ in $!A$, and assume
+$\Sat{M}{\lforall[x][!A]}[s]$. Then by definition of satisfaction, for
+each $s' \sim_x s$, also $\Sat{M}{!A}[s']$, and in particular this
+holds when $s'(x) = \Value{t}{M}[s]$. By
+\olref[syn][ext]{prop:ext-formulas},
+$\Sat{M}{\Subst{!A}{t}{x}}[s]$. This shows that
+$\Sat{M}{(\lforall[x][!A] \lif \Subst{!A}{t}{x})}[s]$.
+\end{proof}
+
+\begin{thm}[Soundness]
+\ollabel{thm:soundness}
+If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+By induction on the length of the !!{derivation} of $!A$ from
+$\Gamma$. If there are no steps justified by inferences, then all
+!!{formula}s in the derivation are either instances of axioms or are
+in~$\Gamma$. By the previous proposition, all the axioms are valid,
+and hence if $!A$ is an axiom then $\Gamma \Entails !A$. If $!A \in
+\Gamma$, then trivially $\Gamma \Entails !A$.
+
+If the last step of the derivation of~$!A$ is justified by modus ponens,
+then there are !!{formula}s $!B$ and $!B \lif !A$ in the
+!!{derivation}, and the induction hypothesis applies to the part of
+the !!{derivation} ending in those !!{formula}s (since they contain at
+least one fewer steps justified by an inference).  So, by induction
+hypothesis, $\Gamma \Entails !B$ and $\Gamma \Entails !B \lif !A$. Then
+$\Gamma \Entails !A$ by \olref[syn][sem]{thm:sem-deduction}.
+
+Now suppose the last step is justified by
+\QR. Then that step has the form $!C \lif \lforall[x][B(x)]$ and
+there is a preceding step $!C \lif !B(c)$ with $c$ not in $\Gamma$,
+$!C$, or $\lforall[x][B(x)]$. By induction hypothesis, $\Gamma
+\Entails !C \lif \lforall[x][B(x)]$. By
+\olref[syn][sem]{thm:sem-deduction}, $\Gamma \cup \{!C\} \Entails
+!B(c)$.
+
+Consider some structure~$\Struct{M}$ such that $\Sat{M}{\Gamma \cup
+  \{!C\}}$.  We need to show that $\Sat{M}{\lforall[x][!B(x)]}$. Since
+$\lforall[x][!B(x)]$ is !!a{sentence}, this means we have to show that
+for every variable assignment~$s$, $\Sat{M}{!B(x)}[s]$
+(\olref[syn][ass]{prop:sat-quant}). Since $\Gamma \cup \{!C\}$
+consists entirely of sentences, $\Sat{M}{!D}[s]$ for all $!D \in
+\Gamma$ by \olref[syn][sat]{defn:satisfaction}.  Let $\Struct{M'}$ be
+like $\Struct{M}$ except that $\Assign{c}{M'} = s(x)$.  Since $c$ does
+not occur in~$\Gamma$ or~$!C$, $\Sat{M'}{\Gamma \cup \{!C\}}$ by
+\olref[syn][ext]{cor:extensionality-sent}. Since $\Gamma \cup \{!C\}
+\Entails !B(c)$, $\Sat{M'}{B(c)}$.  Since $!B(c)$ is !!a{sentence},
+$\Sat{M}{!B(c)}[s]$ by
+\olref[syn][ass]{prop:sentence-sat-true}. $\Sat{M'}{!B(x)}[s]$ iff
+$\Sat{M'}{!B(c)}$ by \olref[syn][ext]{prop:ext-formulas} (recall that
+$!B(c)$ is just $\Subst{!B(x)}{c}{x}$). So,
+$\Sat{M'}{!B(x)}[s]$. Since $c$ does not occur in~$!B(x)$, by
+\olref[syn][ext]{prop:extensionality}, $\Sat{M}{!B(x)}[s]$. But $s$
+was an arbitrary variable assignment, so
+$\Sat{M}{\lforall[x][!B(x)]}$. Thus $\Gamma \cup \{!C\} \Entails
+\lforall[x][!B(x)]$. By \olref[syn][sem]{thm:sem-deduction}, $\Gamma
+\Entails !C \lif \lforall[x][!B(x)]$.
+
+The case where $!A$ is justified by \QR{} but is of the form
+$\lexists[x][!B(x)] \lif !C$ is left as an exercise.
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[fol][axd][sou]{thm:soundness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+If $\Proves !A$, then $!A$ is valid.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+If $\Gamma$ is satisfiable, then it is consistent.
+\end{cor}
+
+\begin{proof}
+We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
+Then $\Gamma \Proves \lfalse$, i.e., there is !!a{derivation} of
+$\lfalse$ from~$\Gamma$. By
+\olref{thm:soundness}, any !!{structure} $\Struct{M}$ that satisfies
+$\Gamma$ must satisfy $\lfalse$.  Since $\Sat/{M}{\lfalse}$ for every
+!!{structure}~$\Struct{M}$, no $\Struct{M}$ can satisfy $\Gamma$,
+i.e., $\Gamma$ is not satisfiable.
+\end{proof}
+
+
+\end{document}
