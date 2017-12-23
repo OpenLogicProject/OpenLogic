@@ -46,7 +46,7 @@ iff $!A \in \Gamma^*$ or $!B \in \Gamma^*$, etc.
 
 In what follows, we will often tacitly use the properties of
 reflexivity, monotonicity, and transitivity of $\Proves$ (see
-\tagrefs{prfSC/{fol:seq:ptn:sec},prfND/{fol:ntd:ptn:sec}}).
+\tagrefs{prfAX/{fol:axd:ptn:sec},prfSC/{fol:seq:ptn:sec},prfND/{fol:ntd:ptn:sec}}).
 
 \begin{prop}
 \ollabel{prop:ccs}
@@ -75,7 +75,7 @@ consistent.
 Suppose that $\Gamma \Proves !A$. Suppose to the contrary that $!A
 \notin \Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$.
 By
-\tagrefs{prfSC/{fol:seq:prv:prop:explicit-inc},prfND/{fol:ntd:prv:prop:explicit-inc}},
+\tagrefs{prfAX/{fol:axd:prv:prop:explicit-inc},prfSC/{fol:seq:prv:prop:explicit-inc},prfND/{fol:ntd:prv:prop:explicit-inc}},
 $\Gamma$ is inconsistent. This contradicts the assumption that
 $\Gamma$ is consistent. Hence, it cannot be the case that $!A \notin
 \Gamma$, so $!A \in \Gamma$.
@@ -86,14 +86,14 @@ $!A \land !B \in \Gamma$ iff both $!A \in \Gamma$ and $!B \in \Gamma$:
 
 For the forward direction, suppose $!A \land !B \in \Gamma$. Then
 by
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-land},prfND/{fol:ntd:ppr:prop:provability-land}}, item~(1),
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-land},prfSC/{fol:seq:ppr:prop:provability-land},prfND/{fol:ntd:ppr:prop:provability-land}}, item~(1),
 $\Gamma \Proves !A$ and $\Gamma \Proves !B$. By
 \olref{prop:ccs-prov-in}, $!A \in \Gamma$ and $!B \in \Gamma$, as
 required.
 
 For the reverse direction, let $!A \in \Gamma$ and $!B \in
 \Gamma$. By
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-land},prfND/{fol:ntd:ppr:prop:provability-land}}, item~(2),
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-land},prfSC/{fol:seq:ppr:prop:provability-land},prfND/{fol:ntd:ppr:prop:provability-land}}, item~(2),
 $\Gamma \Proves !A \land !B$. By \olref{prop:ccs-prov-in}, $!A \land
 !B \in \Gamma$.}}
 
@@ -103,13 +103,13 @@ First we show that if $!A \lor !B \in \Gamma$, then either $!A \in
 \Gamma$ or $!B \in \Gamma$. Suppose $!A \lor !B \in \Gamma$ but $!A
 \notin \Gamma$ and $!B \notin \Gamma$.  Since $\Gamma$ is
 !!{complete}, $\lnot !A \in \Gamma$ and $\lnot !B \in \Gamma$. By
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lor},prfND/{fol:ntd:ppr:prop:provability-lor}},
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-lor},prfSC/{fol:seq:ppr:prop:provability-lor},prfND/{fol:ntd:ppr:prop:provability-lor}},
 item (1), $\Gamma$ is inconsistent, a contradiction. Hence, either $!A
 \in \Gamma$ or $!B \in \Gamma$.
 
 For the reverse direction, suppose that $!A \in \Gamma$ or $!B \in
 \Gamma$. By
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lor},prfND/{fol:ntd:ppr:prop:provability-lor}}, item (2),
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-lor},prfSC/{fol:seq:ppr:prop:provability-lor},prfND/{fol:ntd:ppr:prop:provability-lor}}, item (2),
 $\Gamma \Proves !A \lor !B$. By \olref{prop:ccs-prov-in}, $!A \lor
 !B \in \Gamma$, as required.}}
 
@@ -118,18 +118,18 @@ $\Gamma \Proves !A \lor !B$. By \olref{prop:ccs-prov-in}, $!A \lor
 For the forward direction, suppose $!A \lif !B \in \Gamma$, and suppose
 to the contrary that $!A \in \Gamma$ and $!B \notin \Gamma$. On these
 assumptions, $!A \lif !B \in \Gamma$ and $!A \in \Gamma$. By
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item (1),
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-lif},prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item (1),
 $\Gamma \Proves !B$. But then by \olref{prop:ccs-prov-in}, $!B \in
 \Gamma$, contradicting the assumption that $!B \notin \Gamma$.
 
 For the reverse direction, first consider the case where $!A \notin
 \Gamma$. Since $\Gamma$ is !!{complete}, $\lnot !A \in \Gamma$.  By
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item (2),
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-lif},prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}}, item (2),
 $\Gamma \Proves !A \lif !B$. Again by \olref{prop:ccs-prov-in}, we get
 that $!A \lif !B \in \Gamma$, as required.
 
 Now consider the case where $!B \in \Gamma$.  By
-\tagrefs{prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}},
+\tagrefs{prfAX/{fol:axd:ppr:prop:provability-lif},prfSC/{fol:seq:ppr:prop:provability-lif},prfND/{fol:ntd:ppr:prop:provability-lif}},
 item (2) again, $\Gamma \Proves !A \lif !B$. By
 \olref{prop:ccs-prov-in}, $!A \lif !B \in \Gamma$.}}
 \end{enumerate}

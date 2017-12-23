@@ -10,7 +10,7 @@
 \olsection{Soundness}
 
 \begin{explain}
-A !!{derivation} system, such as axiomatic deduction, is \emph{sound}
+!!^a{derivation} system, such as axiomatic deduction, is \emph{sound}
 if it cannot !!{derive} things that do not actually hold.  Soundness is
 thus a kind of guaranteed safety property for !!{derivation} systems.
 Depending on which proof theoretic property is in question, we would
@@ -21,9 +21,9 @@ like to know for instance, that
   consequence of them;
 \item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
 \end{enumerate}
-These are important properties of a !!{derivation} system.  If any of them do
+These are important properties of !!a{derivation} system.  If any of them do
 not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
-Consequently, establishing the soundness of a !!{derivation} system is of the
+Consequently, establishing the soundness of !!a{derivation} system is of the
 utmost importance.
 \end{explain}
 
@@ -66,14 +66,14 @@ hypothesis, $\Gamma \Entails !B$ and $\Gamma \Entails !B \lif !A$. Then
 $\Gamma \Entails !A$ by \olref[syn][sem]{thm:sem-deduction}.
 
 Now suppose the last step is justified by
-QR$_1$. Then that step has the form $!C \lif \lforall[x][B(x)]$ and
+\QR. Then that step has the form $!C \lif \lforall[x][B(x)]$ and
 there is a preceding step $!C \lif !B(c)$ with $c$ not in $\Gamma$,
 $!C$, or $\lforall[x][B(x)]$. By induction hypothesis, $\Gamma
 \Entails !C \lif \lforall[x][B(x)]$. By
 \olref[syn][sem]{thm:sem-deduction}, $\Gamma \cup \{!C\} \Entails
 !B(c)$.
 
-Consider some structure, $\Struct{M}$, such that $\Sat{M}{\Gamma \cup
+Consider some structure~$\Struct{M}$ such that $\Sat{M}{\Gamma \cup
   \{!C\}}$.  We need to show that $\Sat{M}{\lforall[x][!B(x)]}$. Since
 $\lforall[x][!B(x)]$ is !!a{sentence}, this means we have to show that
 for every variable assignment~$s$, $\Sat{M}{!B(x)}[s]$
@@ -93,9 +93,10 @@ $\Sat{M'}{!B(x)}[s]$. Since $c$ does not occur in~$!B(x)$, by
 was an arbitrary variable assignment, so
 $\Sat{M}{\lforall[x][!B(x)]}$. Thus $\Gamma \cup \{!C\} \Entails
 \lforall[x][!B(x)]$. By \olref[syn][sem]{thm:sem-deduction}, $\Gamma
-\Entails !C \lif \lforall[x][B(x)]$.
+\Entails !C \lif \lforall[x][!B(x)]$.
 
-The case where $!A$ is justified by QR$_2$ is left as an exercise.
+The case where $!A$ is justified by \QR{} but is of the form
+$\lexists[x][!B(x)] \lif !C$ is left as an exercise.
 \end{proof}
 
 \begin{prob}
