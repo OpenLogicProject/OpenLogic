@@ -226,19 +226,28 @@
 
 % ### Substitution
 
-% `\Subst{!A}{t}{x}`: The operation of substituting a term for a
+% -`\subst{t}{x}`: typeset the substitution notation
+
+\DeclareDocumentCommand \subst { m m } {#1/#2}
+
+% - `\SSubst{A}{s}`: typeset simultaneous substitution (expects $s$ to
+% be a list of `\subst{t}{x}` expressions, say)
+
+\DeclareDocumentCommand \SSubst { m m } {
+  #1[#2]}
+
+% - `\Subst{!A}{t}{x}`: The operation of substituting a term for a
 % (free) variable in another term or in a formula.  The default is
 % $\varphi[x/t]$, other common notations are $\varphi^t_x$,
 % $\varphi\{t \rightarrow x\}$, or $S^t_x \varphi$.
 
 \DeclareDocumentCommand \Subst { m m m } {
-  #1[#2/#3]}
-
+  #1[\subst{#2}{#3}]}
 
 
 % ### The satisfaction/truth relation 
 
-% `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
+% - `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
 % structure (relative to an assignment), is provided as the command
 % `\Sat` with two mandatory arguents (the structure and the formula)
 % and one optional argument (the assignment).  Use `\Sat/` to create
@@ -256,7 +265,6 @@
         { \Struct #2 \models #3 }
         { \Struct #2, #4 \models #3 }}
 }
-
 
 % ### The derivability relation
 
@@ -284,10 +292,6 @@
 % - `\PAx`: the set of propositional axioms
 
 \DeclareDocumentMacro \PAx { \mathrm{Ax}_0 }
-
-% - `\Ax`: the set of logical axioms
-
-\DeclareDocumentMacro \Ax { \mathrm{Ax} }
 
 % ### The semantic consequence relation relation
 
@@ -330,6 +334,26 @@
         % optional argument present
         { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
 }
+
+% - `\pAssign{v}` - Typeset a truth-value assignment
+
+\DeclareDocumentCommand \pAssign { m } {#1}
+
+% - `\pValue{A}{v}` - Truth value of a formula under a truth-value assignment.
+
+\DeclareDocumentCommand \pValue { m m }{\mathrm{TV}^{\pAssign{#2}}{#1}}
+
+% - `\pSat[/]{v}{!A}`, the relation of being satisfied by a
+% truth-value assignment
+
+\DeclareDocumentCommand \pSat { t{/} m m } {
+  \IfBooleanTF{#1}{
+    % negated
+        \pAssign #2 \not\models #3}{
+    % not negated
+        \pAssign #2 \models #3}
+}
+
 
 % - `\substruct`: symbol for the substructure relation
 
@@ -529,6 +553,33 @@
         { \Struct #2, #4 \Vdash #3 }}
 }
 
+% - `\mClass{C}` --- typeset class of models
+
+\DeclareDocumentCommand \mClass { m }{\mathcal{#1}}
+
+% - `\Nec`: produces abbreviation for Necessitation.
+
+\DeclareDocumentMacro \Nec {\textsc{nec}}
+
+% - `\RK`: produces abbreviation for Rule K
+
+\DeclareDocumentMacro \RK {\textsc{rk}}
+
+% - `\PL`: produces abbreviation for ``Propositional Logic''
+
+\DeclareDocumentMacro \PL {\textsc{pl}}
+
+% - `\Prop{A}{M}`: the proposition defined by $A$ in $\mModel{M}$
+
+\DeclareDocumentCommand \Prop { m m } {
+  {[\!\![} #1 {]\!\!]_{\mModel #2}}
+}
+
+% `\strictif`: strict conditional
+
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
+
 
 % Special Sets and Mathematical Symbols
 % -------------------------------------
@@ -685,11 +736,6 @@
 
 \DeclareDocumentCommand \Struct { m }{\mathfrak #1}
 
-% - `\mStruct{M}` - modal structures; default: set first token in
-% Fraktur
-
-\DeclareDocumentCommand \mStruct { m }{\mathfrak #1}
-
 % - `\Lang{L}` - Languages; default: set first token in callgraphic
 % font
 
@@ -697,7 +743,7 @@
 
 % - `\Log{L}` - Logics; default: set entirely in boldface
 
-\DeclareDocumentCommand \Log { m }{\mathbf{#1}}
+\DeclareDocumentCommand \Log { m }{\ensuremath{\mathbf{#1}}}
 
 % - `\Obj` - Object-language symbols; default: set entirely in
 % sans-serif italics
@@ -709,6 +755,10 @@
 %  parentheses. Some prefer no parentheses around the arguments.
 
 \DeclareDocumentCommand \Atom { m m }{ \mathord{#1}(#2) }
+
+% - `\Ax{A}`: typeset an axiom
+
+\DeclareDocumentCommand \Ax { m } {\ensuremath{\mathrm{#1}}}
 
 % - `\PIso` - Set of all partial isomorphisms
 
@@ -785,6 +835,35 @@
         { \mathrm{Sent} }
         { \mathrm{Sent}({\Lang #1}) }
 }
+
+% Modal logic
+% ===========
+
+% - `\mModel{M}` - modal structures; default: set first token in
+% Fraktur
+
+\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
+
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$.
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    % negated
+    \IfNoValueTF {#4} 
+        { \mModel #2 \not\models #3 }
+        { \mModel #2, #4 \not\models #3}}{
+    % not negated
+    \IfNoValueTF {#4} 
+        { \mModel #2 \models #3 }
+        { \mModel #2, #4 \models #3 }}
+}
+
+
 
 % Commands for uniform formulations
 % =================================
@@ -870,6 +949,12 @@
 % specific, e.g., "individual variable", "object veriable".
 
 \settexttoken{variable}{variable}{variables}
+
+% - `propositional variable`: defaults to "propositional
+% variable/variables", redefine for, e.g., "sentence
+% letter"
+
+\settexttoken{propositional variable}{propositional variable}{propositional variables}
 
 % - `constant`: defaults to "constant", redefine for "individual
 % constant", "constant symbol."

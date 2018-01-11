@@ -1,0 +1,127 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: schemas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{sch}
+
+\olsection{Schemas}
+
+\begin{defn}
+  A \emph{schema} is a set of !!{formula}s comprising all
+  and only the substitution instances of some modal !!{formula}~$!C$, i.e.,
+  \[
+  \Setabs{!B}{\exists !D_1, \dots, \exists !D_n \left(!B =
+  \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \right) }.
+  \]
+  The !!{formula} $!C$ is called the \emph{characteristic} !!{formula} of
+  the schema, and it is unique up to a renaming of the propositional
+  variables. !!^a{formula} $!A$ is an \emph{instance} of a schema if
+  it is a member of the set.
+\end{defn}
+
+It is convenient to denote a schema by the meta-linguistic expression
+obtained by substituting `$!A$', `$!B$',~\dots, for the atomic
+components of~$!C$. So, for instance, the following denote schemas:
+`$!A$', `$!A \lif \Box!A$', `$!A \lif (!B \lif !A)$', etc. The schema
+`$!A$' denotes the set of \emph{all} !!{formula}s. However, we will
+also use $!A$ as a meta-linguistic variable for schemas themselves.
+
+\begin{defn}
+  A schema is \emph{true} in a model if and only if all of its instances
+  are; and a schema is \emph{valid} if and only if it is true in every
+  model. 
+\end{defn}
+
+\begin{thm}\ollabel{thm:Kvalid}
+  The following schema \Ax{K} is valid
+  \[
+  \Box(!A \lif !B) \lif (\Box !A \lif \Box !B). \tag{\Ax{K}}
+  \]
+\end{thm}
+
+\begin{proof}
+  We need to show that all instances of the schema are true at every
+  world in every model. So let $\mModel{M} = \tuple{W,R,V}$ and $w \in
+  W$ be arbitrary. To show that a conditional is true at a world we
+  assume the antecedent is true to show that consequent is true as
+  well. In this case, let $\mSat{M}{\Box(!A \lif !B)}[w]$ and
+  $\mSat{M}{\Box !A}[w]$. We need to show $\mSat{M}{\Box !B}$. So let
+  $w'$ be arbitrary such that $Rww'$. Then by the first assumption
+  $\mSat{M}{!A \lif !B}[w']$ and by the second assumption
+  $\mSat{M}{!A}[w']$. It follows that $\mSat{M}{!B}[w']$. Since $w'$
+  was arbitrary, $\mSat{M}{\Box !B}[w]$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:soundMP}
+  Show that if $!A$ and $!A \lif !B$ are true at a world in a model
+  then so is $!B$. Hence, the valid !!{formula}s are closed under
+  modus ponens.
+\end{prop}
+
+\begin{prob}
+  Show that none of the following schemas are valid:
+  \begin{enumerate}
+    \item[\Ax{D}:] \quad $\Box !A \lif \Diamond !A$;
+    \item[\Ax{T}:] \quad $\Box !A \lif !A$;
+    \item[\Ax{B}:] \quad $!A \lif \Box\Diamond !A$;
+    \item[\Ax{4}:] \quad $\Box !A \lif \Box \Box !A$;
+    \item[\Ax{5}:] \quad $\Diamond !A \lif \Box \Diamond
+      !A$.
+  \end{enumerate}
+\end{prob}
+
+\begin{figure}[t]
+    \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{Valid Schemas}} & {\emph{Invalid Schemas}} \\
+      \hline\hline
+      $\Box(!A \lif !B) \lif (\Diamond !A \lif \Diamond !B)$
+      & $\Box (!A \lor !B) \lif (\Box !A \lor \Box !B)$ \\
+      $\Diamond (!A \lif !B) \lif (\Box !A \lif \Diamond
+      !B)$ 
+      & $(\Diamond !A \land \Diamond !B) \lif \Diamond (!A
+      \land !B)$\\
+      $\Box (!A \land !B) \liff (\Box !A \land \Box !B)$
+      & $!A \lif \Box !A$ \\
+      $\Box !A \lif \Box (!B \lif !A)$ 
+      & $\Box \Diamond !A \lif !B$ \\
+      $\lnot \Diamond !A \lif \Box (!A \lif !B)$
+      & $\Box \Box !A \lif \Box !A$ \\
+      $\Diamond (!A \lor !B) \liff (\Diamond !A \lor
+      \Diamond !B)$
+      & $\Box \Diamond !A \lif \Diamond \Box !A$. \\
+      \hline
+    \end{tabular}
+    \caption{Valid and (or?) invalid schemas.}\ollabel{fig:valid-invalidSchemas}
+\end{figure}
+
+\begin{prob}%\ollabel{ex:in/validSchemas}
+  Prove that the schemas in the first column of
+  \olref[mod][syn][sch]{fig:valid-invalidSchemas} are valid and those in
+  the second column are not valid.
+\end{prob}
+
+\begin{prob}
+  Decide whether the following schemas are valid or invalid:
+  \begin{enumerate}
+  \item $(\Diamond !A \lif \Box !B) \lif (\Box !A \lif \Box
+    !B)$;
+  \item $\Diamond(!A \lif !B) \lor \Box(!B \lif !A)$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  For each of the following schemas find a model $\mModel{M}$ such
+  that every instance of the schema is true in $\mModel{M}$:
+  \begin{enumerate}
+  \item $!A \lif \Diamond\Diamond !A$;
+  \item $\Diamond !A \lif \Box !A$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

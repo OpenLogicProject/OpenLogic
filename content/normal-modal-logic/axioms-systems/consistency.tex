@@ -1,0 +1,55 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{con}
+
+\olsection{Consistency}
+
+\begin{defn}
+  A set $\Gamma$ is \emph{consistent} relatively to a system
+  $\Sigma$ or, as we wil say, $\Sigma$-consistent, if and only if
+  $\Gamma \Proves/[\Sigma] \lfalse$.
+\end{defn}
+
+So for instance, the set $\{ \Box(p \lif q), \Box p, \lnot\Box q \}$ is
+consistent relatively to propositional logic, but not
+\Log{K}-consistent. Similarly, the set $\{ \Diamond p, \Box\Diamond
+p \lif q, \lnot q \}$ is not \Log{K5}-consistent.
+
+\begin{prop}\ollabel{prop:consistencyfacts}
+  Let $\Gamma$ be a set of !!{formula}s. Then:
+  \begin{enumerate}
+  \item A set $\Gamma$ is $\Sigma$-consistent if and only if there is
+    some !!{formula} $!A$ such that $\Gamma \Proves/[\Sigma]
+    !A$.
+  \item \ollabel{prop:consistencyfacts-b}%
+    $\Gamma \Proves[\Sigma] !A$ if and only if $\Gamma \cup \{
+    \lnot!A \}$ is not $\Sigma$-consistent.
+  \item \ollabel{prop:consistencyfacts-c}%
+    If $\Gamma$ is $\Sigma$-consistent, then for any !!{formula}
+    $!A$, either $\Gamma \cup \{ !A \}$ is
+    $\Sigma$-consistent or $\Gamma \cup \{ \lnot!A \}$ is
+    $\Sigma$-consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  These fact follow easily using classical propositional logic. We
+  give the argument for $(c)$. Proceed contrapositively and suppose
+  neither $\Gamma \cup \{ !A \}$ nor $\Gamma \cup \{ \lnot!A \}$ is
+  $\Sigma$-consistent. Then by $(b)$ both $\Gamma, !A \Proves[\Sigma]
+  \lfalse$ and $\Gamma, \lnot !A \Proves[\Sigma] \lfalse$. By the
+  deduction theorem $\Gamma \Proves[\Sigma] !A \to \lfalse$ and
+  $\Gamma \Proves[\Sigma] \lnot!A \lif \lfalse$. But $(!A \lif
+  \lfalse) \lif ((\lnot!A \lif \lfalse) \lif \lfalse)$ is a
+  tautological instance, hence by
+  \olref[prp]{prop:derivabilityfacts}\olref[prp]{prop:derivabilityfacts-ruleT},
+  $\Gamma \Proves[\Sigma] \lfalse$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,57 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{sub}
+
+\olsection{Simultaneous Substitution}
+
+\begin{defn}\label{def:subst-inst}
+  Where $!A$ is a modal !!{formula} all of whose !!{propositional
+    variable}s are among $p_1$, \dots, $p_n$, and $!C_1$, \dots,
+  $!C_n$ are also modal !!{formula}s, we define
+  $\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}}$ as the
+    result of simultaneously substituting each $!C_i$ for $p_i$ in
+    $\!A$. Formally, this is a definition by induction on~$!A$:
+  \begin{enumerate}
+  \item If $!A$ is the !!{propositional variable}~$q$, then
+    $\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} = !C_i$
+    if $Q$ is $p_i$ for some $i \le n$, and
+    $\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} = Q$
+    otherwise.
+  \item If $\!A = \lnot!B$, then $\SSubst{!A}{\subst{!C_1}{p_1},
+    \dots, \subst{!C_n}{p_n}} = \lnot \SSubst{!B}{\subst{!C_1}{p_1},
+    \dots, \subst{!C_n}{p_n}}$.
+  \item If $!A = (!B \land !D)$, then
+    \[\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} =
+    (\SSubst{!B}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} \land
+    \SSubst{!D}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}}).\]
+  \item If $!A = (!B \lor !D)$, then
+    \[\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} =
+    (\SSubst{!B}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} \lor
+    \SSubst{!D}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}}).\]
+  \item If $!A = (!B \lif !D)$, then
+    \[\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} =
+    (\SSubst{!B}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} \lif
+    \SSubst{!D}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}}).\]
+  \item If $!A = (!B \liff !D)$, then
+    \[\SSubst{!A}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} =
+    (\SSubst{!B}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}} \liff
+    \SSubst{!D}{\subst{!C_1}{p_1}, \dots, \subst{!C_n}{p_n}}).\]
+  \item If $!A = \Box !B$, then $\SSubst{!A}{\subst{!C_1}{p_1}, \dots,
+    \subst{!C_n}{p_n}} = \Box \SSubst{!B}{\subst{!C_1}{p_1}, \dots,
+    \subst{!C_n}{p_n}}$.
+  \item If $!A = \Diamond !B$, then $\SSubst{!A}{\subst{!C_1}{p_1}, \dots,
+    \subst{!C_n}{p_n}} = \Diamond \SSubst{!B}{\subst{!C_1}{p_1}, \dots,
+    \subst{!C_n}{p_n}}$.
+  \end{enumerate}
+  The !!{formula} $\SSubst{!A}{\subst{!C_1}{p_1}, \dots,
+    \subst{!C_n}{p_n}}$ is called a \emph{substitution instance}
+  of~$!A$.
+\end{defn}
+
+\end{document}

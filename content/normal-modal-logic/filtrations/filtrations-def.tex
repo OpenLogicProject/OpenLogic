@@ -1,0 +1,77 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: filtrations-def
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{fil}
+
+\olsection{Filtrations}
+
+\begin{defn}\ollabel{def:filtration}
+  Let $\Gamma$ be closed under subformulas and $\mModel{M} = \tuple{W,
+    R, V}$. A \emph{filtration of $\mModel{M}$ through $\Gamma$} is
+  any model $\mModel{M^*} = \tuple{W^*,R^*,V^*}$, where:
+  \begin{enumerate}
+  \item $W^* = \Setabs{[w]}{w \in W}$;
+  \item \ollabel{def:filtration-R}%
+    For any $u,v \in W$:
+    \begin{enumerate}
+    \item \ollabel{def:filtration-R1}%
+      If $Ruv$ then $R^*[u][v]$;
+    \item \ollabel{def:filtration-R2}%
+      If $R^*[u][v]$ then for any $\Box !A \in \Gamma$, if
+      $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$;
+    \item \ollabel{def:filtration-R3}%
+      If $R^*[u][v]$ then for any $\Diamond !A \in \Gamma$, if
+      $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$.
+    \end{enumerate}
+  \item $V^*(p) = \Setabs{[u]}{u \in V(p)}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:filtrations}
+  If $\mModel{M^*}$ is a filtration of $\mModel{M}$ through $\Gamma$,
+  then for every $!A \in \Gamma$ and $w \in W$, we have
+  $\mSat{M}{!A}[w]$ if and only if $\mSat{M^*}{!A}[{[w]}]$.
+\end{thm}
+
+\begin{proof}
+  By induction on $!A$, using the fact that $\Gamma$ is closed under
+  subformulas. For $!A$ atomic, say $p$: the left-to-right direction
+  is immediate, as $\mSat{M}{p}[w]$ only if $w \in V(p)$, which
+  implies $[w] \in V^*(p)$, i.e., $\mSat{M^*}{p}[{[w]}]$. Conversely,
+  suppose $\mSat{M^*}{p}[{[w]}]$, i.e., $[w] \in V^*(p)$; then $w
+  \equiv w' \in V(p)$, and since $p \in \Gamma$, also $w \in V(p)$, so
+  that $\mSat{M}{p}[w]$. The cases for the Boolean connectives follow
+  immediately from the inductive hypothesis and closure of $\Gamma$
+  under subformulas.
+
+  So we do the case for $\Box!A \in \Gamma$.  Suppose
+  $\mSat{M}{\Box!A}[u]$; to show that $\mSat{M^*}{!A}[{[u]}]$, let $v$
+  be such that $R^*[u][v]$. From \olref{def:filtration}\olref{def:filtration-R2}, we have that $\mSat{M}{!A}[v]$, and by inductive
+  hypothesis $\mSat{M^*}{!A}[{[v]}]$. Since $v$ was arbitrary,
+  $\mSat{M^*}{\Box!A}[{[u]}]$ follows. Conversely, suppose
+  $\mSat{M^*}{\Box!A}[{[u]}]$ and let $v$ be arbitrary such that
+  $Ruv$. From \olref{def:filtration}\olref{def:filtration-R1}, we have
+  $R^*[u][v]$, so that $\mSat{M^*}{!A}[{[v]}]$; by inductive
+  hypothesis $\mSat{M}{!A}[v]$, and since $v$ was arbitrary,
+  $\mSat{M}{\Box!A}[u]$.
+\end{proof}
+
+\begin{cor}
+  Let $\Gamma$ be closed under subformulas. Then:
+  \begin{enumerate}
+  \item If $\mModel{M^*}$ is a filtration of $\mModel{M}$ through
+    $\Gamma$ then for any $!A \in \Gamma$: $\mSat{M}{!A}$ if and only
+    if $\mSat{M^*}{!A}$.
+  \item If $\mClass{C}$ is a class of models and $\Gamma(\mClass{C})$
+    is the class of $\Gamma$-filtrations of models in $\mClass{C}$,
+    then any !!{formula} $!A \in \Gamma$ is valid in $\mClass{C}$ if
+    and only if it is valid in $\Gamma(\mClass{C})$.
+  \end{enumerate}
+\end{cor}
+
+\end{document}

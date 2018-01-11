@@ -1,0 +1,32 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: canonical-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{cmd}
+
+\olsection{Canonical Models}
+
+\begin{defn}
+  A model $\mModel{M}$ is said to \emph{determine} a normal modal
+  logic~$\Sigma$ precisely when $\mSat{M}{!A}$ if and only if $\Sigma
+  \Proves !A$, for all !!{formula}s~$!A$.
+\end{defn}
+
+\begin{defn}
+  Let $\Sigma$ be a normal modal logic. The \emph{canonical model} for
+  $\Sigma$ is $\mModel{M}^\Sigma = \tuple{W^\Sigma, R^\Sigma,
+    V^\Sigma}$, where:
+  \begin{enumerate}
+  \item $\mModel{M}^\Sigma = \Setabs{ w \subseteq \Frm[L] }{w \text{
+      is complete $\Sigma$-consistent} }$.
+  \item $R^\Sigma ww'$ holds if and only if $\Setabs{!A}{\Box!A \in w}
+    \subseteq w'$.
+  \item $V^\Sigma(p) = \Setabs{w}{p \in w}$.
+  \end{enumerate}
+\end{defn}
+
+\end{document}

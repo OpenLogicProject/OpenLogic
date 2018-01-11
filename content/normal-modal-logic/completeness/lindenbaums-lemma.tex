@@ -1,0 +1,55 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: lindenbaums-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{lin}
+
+\olsection{Lindenbaum's Lemma}
+
+\begin{thm}[Lindenbaum's Lemma]\ollabel{thm:lindenbaum}
+  If $\Gamma$ is $\Sigma$-consistent then there is a complete
+  $\Sigma$-consistent set $\Delta$ extending $\Gamma$.
+\end{thm}
+
+\begin{proof}
+Let $!A_0$, $!A_1$, \dots{} be an exhaustive listing of all formulas
+of the language (repetitions are allowed). For instance, start by
+listing $\Obj p_0$, and at each stage $n$ list the finitely many
+formulas of length $n$ using only variables among $\Obj p_0$,
+\dots,~$\Obj p_n$. We define sets of !!{formula}s $\Delta_n$ by
+induction on~$n$, and we then set $\Delta = \bigcup_n \Delta_n$. We
+first put $\Delta_0 = \Gamma$, then supposing that $\Delta_n$ has been
+defined:
+\[
+\Delta_{n+1} =
+\begin{cases}
+  \Delta_n \cup \{!A_n\}, & \text{if $\Delta_n \cup \{ !A_n\}$
+    is consistent;} \\
+  \Delta_n \cup \{ \lnot !A_n\}, & \text{otherwise.}
+\end{cases}
+\]
+If we now let $\Delta = \bigcup_n \Delta_n$, we can show the
+following:
+\begin{enumerate}
+\item For each $n$, $\Delta_n \subseteq \Delta$ (immediate from the
+  definition).
+\item $\Gamma \subseteq \Delta$ (from $(a)$).
+\item If $n \le m$ then $\Delta_n \subseteq \Delta_m$ (by induction on
+  $m-n$).
+\item $\Delta$ is maximal (by construction).
+\item For each $m$, $\Delta_m$ is consistent (by induction on $m$,
+  using
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-c})
+\item If $\Delta' \subseteq \Delta$ is finite, then there is $m$ such
+  that $\Delta' \subseteq \Delta_m$.
+\item $\Delta$ is consistent. 
+\end{enumerate}
+It follows that $\Delta$ is a complete $\Sigma$-consistent set
+extending~$\Gamma$.
+\end{proof}
+
+\end{document}

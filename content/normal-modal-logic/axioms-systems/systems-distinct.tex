@@ -1,0 +1,157 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: systems-distinct
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{dis}
+
+\olsection{Showing Systems are Distinct}
+
+In \olref[prs]{sec} we saw how to prove that two systems of modal
+logic are in fact the same system. \olref[snd]{thm:soundness} allows
+us to show that two modal systems $\Sigma$ and $\Sigma'$ are distinct,
+by finding a formula $!A$ such that $\Sigma' \Proves !A$ that fails in
+a model of $\Sigma$.
+
+\begin{prop}
+  $\Log{KD} \subsetneq \Log{KT}$
+\end{prop}
+
+\begin{proof} This is the syntactic counterpart to the semantic fact
+  that all reflexive relations are serial. To show $\Log{KD} \subseteq
+  \Log{KT}$ we need to see that $\Log{KD} \Proves !B$ implies
+  $\Log{KT} \Proves !B$, which follows from $\Log{KT} \Proves
+  \Log{D}$, as shown in
+  \olref[prs]{prop:S5facts}\olref[prs]{prop:S5facts-KT-D}.  To show
+  that the inclusion is proper, by Soundness
+  (\olref[snd]{thm:soundness}), it suffices to exhibit a model of
+  \Log{KD} where some instance $\Box !A \lif !A$ of \Ax{T} fails (an
+  easy task left as an exercise), for then by Soundness $\Log{KD}
+  \Proves/ \Box !A \lif !A$.
+\end{proof}
+
+\begin{prop}
+  $\Log{KB} \neq \Log{K4}$. 
+\end{prop}
+
+\begin{proof}
+  We construct a symmetric model where some instance of \Ax{4} fails;
+  since obviously the instance is !!{derivable} for \Log{K4} but not
+  in \Log{KB}, it will follow $\Log{K4} \nsubseteq \Log{KB}$.
+  Consider the symmetric model $\mModel{M}$ of \olref{fig:Bnot4} Since
+  the model is symmetric, \Ax{K} and \Ax{B} are true in $\mModel{M}$
+  (by \olref[syn][sch]{thm:Kvalid} and
+  \olref[syn][acc]{thm:soundschemas}, respectively). However,
+  $\mSat/{M}{\Box p \lif \Box\Box p}[w]$.
+\end{proof}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[node distance=2cm, auto, thick]
+    \node (w1) at (0, 0) [label=180:$w$, label=below:$\lnot p$]{$\bullet$}; 
+%      \node (w2) at (2, 0) [label=0:$w'$, label=-45:{$p, \lnot\Box  p$}]{$\bullet$}; 
+    \node (w2) at (2, 0) [label=0:$w'$]{$\bullet$}; 
+    \path node at (2.2,-0.5) {$p, \lnot\Box p$};
+%      \node (w3) at (1.5, 0) [label=270:$w_3$] {$\bullet$}; \draw[->] (w1) to node {} (w2);
+%      \draw[->] (w1) to node {} (w3);
+    \draw[->, bend left] (w1) to node {$R$} (w2); 
+    \draw[->, bend left] (w2) to node {} (w1); 
+    \draw [rounded corners] (-1,-1) -- ++(0,2)  -- ++(4.25,0) -- ++(0,-2) --  cycle;
+    \path node at (2.75,0.75) {$\mModel{M}$};
+%      \path node at (-0.6, 0) {$\Box\Diamond!A$};
+  \end{tikzpicture}
+  \caption{A symmetric model falsifying an instance of \Ax{4}.}\ollabel{fig:Bnot4}
+\end{figure}
+ 
+\begin{thm}\ollabel{thm:KTBnot45}
+  $\Log{KTB} \Proves/ \Log{4}$ and $\Log{KTB} \Proves/ \Log{5}$.
+\end{thm}
+
+\begin{proof}
+  By \olref[syn][acc]{thm:soundschemas} we know that all instances of
+  \Ax{T} and \Ax{B} are true in each reflexive symmetric model
+  (respectively). So by Soundness it suffices to find a reflexive
+  symmetric model containing a world at which some instance of
+  \Ax{4} fails, and similarly for \Ax{5}.  We use the same
+  model for both claims. Consider the symmetric, reflexive model in
+  Figure~\olref{fig:KTBnot45}.  Then $\mSat/{M}{\Box p \to \Box \Box
+    p}[w_1]$, so the instance of \Ax{4} with $!A =p$ fails at
+  $w_1$. Similarly, $\mSat/{M}{\Diamond \lnot p \lif \Box \Diamond
+    \lnot p}[w_2]$, so the instance of \Ax{5} with $!A = \lnot p$
+  fails at $w_2$.
+\end{proof}
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[node distance=2cm, auto, thick]
+    \node (w1) at (0, 0) [label=180:$w_1$,
+      label=below:$p$]{$\bullet$} edge [in=60,out=120,loop] (); 
+    \node (w2) at (2, 0) [label=180:$w_2$,
+      label=below:$p$]{$\bullet$} edge [in=60,out=120,loop] (); 
+    \node (w3) at (4, 0) [label=0:$w_3$, label=below:$\lnot
+      p$]{$\bullet$}  edge [in=60,out=120,loop] ();  
+    \draw[->, bend left] (w1) to node {} (w2);  
+    \draw[->, bend left] (w2) to node {} (w3);  
+    \draw[->, bend left] (w3) to node {} (w2);  
+    \draw[->, bend left] (w2) to node {} (w1);  
+    \path node at (0,-1) {$\Box p$} ;
+    \path node at (2,-1) {$\Diamond \lnot p$} ;
+    \path node at (2,-1.5) {$\lnot\Box\Diamond \lnot p$} ;
+    \path node at (0,-1.5) {$\lnot\Box\Box p$} ;
+    \path node at (0,-2) {$\lnot\Diamond\lnot p$} ;
+    \path node at (4.5,-2) {$\mModel{M}$} ;
+    \draw [rounded corners] (-1,-2.5) -- ++(0,4)  -- ++(6,0) -- ++(0,-4) --  cycle;
+  \end{tikzpicture}
+  \caption{The model for \olref{thm:KTBnot45}.}
+  \ollabel{fig:KTBnot45}
+\end{figure}
+
+\begin{thm}\ollabel{thm:KD5not4}
+  $\Log{KD5} \neq \Log{KT4} = \Log{S4}$.
+\end{thm}
+
+\begin{proof}
+  By \olref[syn][acc]{thm:soundschemas} we know that all instances of
+  \Ax{D} and \Ax{5} to be true in all serial euclidean models.
+  So  it suffices to find a serial euclidean model containing a world
+  at which some instance of \Ax{4} fails.  Consider the model of
+  \olref{fig:KD5not4}, and notice that $\mSat/{M}{\Box p
+  \lif \Box\Box p}[w_1]$. 
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[node distance=2cm, auto, thick]
+    \node (w1) at (0.5, 2) [label=135:$w_2$,
+      label=225:$p$]{$\bullet$} edge [in=150,out=210,loop] ();
+    \node (w2) at (2, 0) [label=0:$w_1$,label=below:{$\Box p, \lnot\Box\Box p$}]{$\bullet$};
+    \node (w3) at (2, 4) [label=0:$w_4$, label=180:$\lnot p$]{$\bullet$}  edge [in=60,out=120,loop] (); 
+    \node (w4) at (3.5, 2) [label=45:$w_3$,
+      label=-45:$p$]{$\bullet$}  edge [in=30,out=-30,loop] ();
+    \draw[->] (w2) to node {} (w1);  
+    \draw[->] (w2) to node {} (w4);  
+    \draw[<->] (w1) to node {} (w3);  
+    \draw[<->] (w4) to node {} (w3);  
+    \draw[<->] (w1) to node {} (w4);  
+    \draw [rounded corners] (-1,-1) -- ++(0,6)  -- ++(6,0) --
+    ++(0,-6) --  cycle;
+    \path node at (4.35,-0.5) {$\mModel{M}$} ;
+  \end{tikzpicture}
+  \caption{The model for \olref{thm:KD5not4}.}
+  \ollabel{fig:KD5not4}
+\end{figure}
+
+\begin{prob}
+  Give an alternative proof of \olref[mod][prf][dis]{thm:KD5not4} using a model
+  with $3$ worlds.
+\end{prob}
+
+\begin{prob}
+  Provide a single reflexive transitive model showing that both
+  $\Log{KT4} \Proves/ \Ax{B}$ and $\Log{KT4} \Proves/ \Ax{5}$.
+\end{prob}
+
+\end{document}

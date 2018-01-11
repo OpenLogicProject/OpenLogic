@@ -1,0 +1,42 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: logics-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{prf}
+
+\olsection{Logics Defined by Proofs}
+
+\begin{defn}
+  Given a modal system $\Log{K} !A_1 \dots !A_n$
+  and !!a{formula} $!B$ we say that $!B$ is \emph{!!{derivable}} in
+  $\Log{K} !A_1 \dots !A_n$, written $\Log{K}
+  !A_1 \dots !A_n \Proves !B$, if and only if
+  there are !!{formula}s $!C_1$, \dots, $!C_k$ such that $!C_k
+  = !B$ and each $!C_i$ is either a tautological instance,
+  or an instance of the schemas $\Ax{K}$, $!A_1$, \dots,
+  $!A_n$, or it follows from previous !!{formula}s by means of the
+  rules \MP{} or~\Nec.
+\end{defn}
+
+The following proposition allows us to show that $!B \in \Sigma$
+by exhibiting a $\Sigma$-proof of~$!B$.
+
+\begin{prop}
+  $\Log{K} !A_1 \dots !A_n = \Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B}$.
+\end{prop}
+
+\begin{proof}
+  We use induction on the length of proofs to show that
+  $\Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B} \subseteq \Log{K}
+  !A_1 \dots !A_n$. The converse inclusion follows by showing that
+  $\Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !A }$ is a normal
+  modal logic containing all the instances of the schemas $!A_1$,
+  \dots, $!A_n$, and the observation that $\Log{K} !A_1 \dots !A_n$
+  is, by definition, the smallest such logic.
+\end{proof}
+
+\end{document}

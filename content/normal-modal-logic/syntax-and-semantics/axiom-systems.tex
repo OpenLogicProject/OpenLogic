@@ -1,0 +1,71 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: axiom-systems
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{axs}
+
+\olsection{Axiom Systems for Normal Modal Logics}
+
+One way of specifying normal modal logics as the set of !!{formula}s
+!!{derivable} in certain !!{derivation} systems.  The simplest and
+historically oldest !!{derivation} systems are so-called Hilbert-type
+or axiomatic !!{derivation} systems.  Hilbert-type !!{derivation} systems
+for many normal modal logics are relatively easy to construct: they
+are simple as objects of metatheoretical study (e.g., to prove
+soundness and completeness), but they are much harder to use to prove
+!!{formula}s in than, say, natural deduction systems.
+
+In Hilbert-type !!{derivation} systems, a derivation of !!a{formula}
+is a sequence of !!{formula}s leading from certain axioms, via a
+handful of inference rules, to the !!{formula} in question.  For
+normal modal logics, there are only two inference rules that need to
+be assumed: modus ponens and necessitation.  As axioms we take all
+(substitution instances) of tautologies, and, depending on the modal
+logic we deal with, a number of modal axioms. In order to generate a
+normal modal logic, all substitution instances of $\Ax{K}$ and $\Ax{Dual}$
+count as axioms. This alone generates the minimal normal modal
+logic~$\Log K$.  Additional axioms generate other normal modal logics.
+
+\begin{defn}
+The rule of \emph{modus ponens} is the inference schema
+\begin{prooftree}
+\AxiomC{$!A$}
+\AxiomC{$!A \lif !B$}
+\RightLabel{\MP}
+\BinaryInfC{$!B$}
+\end{prooftree}
+We say !!a{formula}~$!B$ \emph{follows from}~!!{formula}s $!A$, $!C$
+by modus ponens iff $!C \ident !A \lif !B$.
+\end{defn}
+
+\begin{defn}
+The rule of \emph{necessitation} is the inference schema
+\begin{prooftree}
+\AxiomC{$!A$}
+\RightLabel{\Nec}
+\UnaryInfC{$\Box !A$}
+\end{prooftree}
+We say the !!{formula} $!B$ follows from the !!{formula}s $!A$ by
+necessitation iff $!B \ident \Box !A$.
+\end{defn}
+
+\begin{defn}
+A \emph{!!{derivation}} from a set of axioms~$\Sigma$ is a sequence of
+!!{formula}s $!B_1$, $!B_2$, \dots, $!B_n$, where each $!B_i$ is
+either
+\begin{enumerate}
+\item a substitution instance of a tautology, or
+\item a substitution instance of !!a{formula} in~$\Sigma$, or
+\item follows from two !!{formula}s $!B_j$, $!B_k$ with $j$, $k < i$
+  by modus ponens, or
+\item follows from !!a{formula} $!B_j$ with $j < i$ by necessitation.
+\end{enumerate}
+If there is such !!a{derivation} with $!B_n \ident !A$, we say that
+$!A$ is \emph{!!{derivable} from $\Sigma$}, in symbols $\Sigma \Proves !A$.
+\end{defn}
+
+\end{document}

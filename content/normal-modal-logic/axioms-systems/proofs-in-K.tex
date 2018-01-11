@@ -1,0 +1,162 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: proofs-in-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{prk}
+
+\olsection{Proofs in \Log{K}}
+
+In order to practice proofs in the smallest modal system, we show the
+valid !!{formula}s on the left-hand side of the table of
+\olref[syn][sch]{fig:valid-invalidSchemas} can all be given
+\Log{K}-proofs. Justifications for steps that are either
+tautological instances or follow by tautological implication from
+previous one are just marked ``\PL'' (for ``Propositional Logic'').
+
+\begin{prop}
+  $\Log{K} \Proves \Box (!A \lif !B) \lif (\Diamond !A \lif \Diamond
+  !B)$
+\end{prop}
+
+\begin{proof}
+\begin{derivation}
+1. & $(!A \lif !B) \lif (\lnot !B \lif \lnot !A)$ & \PL \\
+2. &  $\Box[(!A \lif !B) \lif (\lnot!B \lif \lnot!A)$ & \Nec{} \\
+3. & $\Box(!A \lif !B) \lif \Box(\lnot!B \lif \lnot!A)$ &
+\Ax{K}, \MP{} \\
+4. & $\Box(\lnot!B \lif \lnot !A) \lif (\Box\lnot!B \lif \Box\lnot!A)$ &
+\Ax{K} \\
+5. &  $\Box(!A \lif !B) \lif (\Box\lnot!B \lif \Box\lnot!A)$ & \PL, 3,4 \\
+6. & $(\Box\lnot!B \lif \Box\lnot!A) \lif (\lnot
+\Box\lnot!A \lif \lnot\Box\lnot!B)$ & \PL \\
+7. &  $\Box(!A \lif !B) \lif (\lnot
+\Box\lnot!A \lif \lnot\Box\lnot!B)$ & \PL, 5, 6 \\
+8. &  $\Box(!A \lif !B) \lif (\Diamond!A \lif \Diamond!B)$ & re-writing. \\
+\end{derivation}
+\end{proof}
+  
+\begin{prop}
+$\Log{K}\Proves \Box!A \lif (\Diamond(!A \lif !B) \lif
+  \Diamond !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+  1. & $!A \lif (\lnot!B \lif \lnot (!A\lif !B))$ & PL \\
+  2. & $\Box[!A \lif (\lnot!B \lif \lnot (!A\lif !B))]$ & \Nec{}
+  \\
+  3. & $\Box!A \lif \Box(\lnot!B \lif \lnot (!A\lif !B))$ &
+  \Ax{K} \\
+  4. & $\Box!A \lif  (\Box\lnot!B \lif \Box\lnot (!A\lif !B))$ &
+  \Ax{K} \\
+  5. &  $\Box!A \lif (\lnot \Box\lnot (!A\lif !B) \lif \lnot
+  \Box\lnot!B)$ & \PL \\
+  6. & $\Box!A \lif (\Diamond(!A \lif !B) \lif
+  \Diamond !B)$ & re-writing.
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves \Box(!A \land !B) \lif (\Box !A \land \Box!B)$
+\end{prop}
+
+\begin{proof}
+\begin{derivation}
+  1. & $\lnot(!A \lif \lnot!B) \lif !A$ & \PL \\
+  2. & $\Box\lnot(!A \lif \lnot!B) \lif \Box!A$ & \Nec{}, \Ax{K} \\
+  3. & $\Box(!A \land !B) \lif \Box!A$ & re-writing \\
+  4. & $\Box(!A \land !B) \lif \Box!B$ & similarly\\
+  5. & $\Box(!A \land !B) \lif (\Box !A \land \Box!B)$ & \PL, 3,4.
+\end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K}\Proves (\Box!A \land \Box!B) \lif \Box (!A \land !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $!A \lif (!B \lif (!A \land !B))$ & \PL \\
+    2. &  $\Box!A \lif (\Box!B \lif \Box(!A \land !B))$ & \Nec{}, \Ax{K} \\
+    3. & $(\Box!A \land \Box!B) \lif \Box(!A \land !B)$ & \PL, 2
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves \Box!A \lif \Box (!B\lif !A)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $!A \lif (!B \lif !A)$ & \PL \\
+    2. & $\Box!A \lif \Box (!B\lif !A)$ & \Nec{}, \Ax{K}.
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves \lnot \Diamond !A \lif \Box(!A \lif !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $\lnot!A \lif (!A \lif !B)$ & \PL \\
+    2. & $\Box\lnot!A \lif \Box(!A \lif !B)$ & \Nec{}, \Ax{K} \\
+    3. & $\lnot\lnot \Box\lnot!A \lif \Box(!A \lif !B)$ & \PL\\
+    4. & $ \lnot \Diamond !A \lif \Box(!A \lif !B)$ & re-writing.
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves (\Diamond!A \lor \Diamond!B) \lif \Diamond(!A \lor !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $\lnot(\lnot!A \lif !B) \lif \lnot!A$ & \PL \\
+    2. & $\lnot(!A \lor !B) \lif \lnot!A$ & \PL, 1 \\
+    3. & $\Box\lnot(!A \lor !B) \lif \Box\lnot!A$ & \Nec{},
+    \Ax{K} \\
+    4. & $\lnot\Box\lnot !A \lif \lnot\Box\lnot(!A \lor!B)$ &
+    \PL\\
+    5. & $\Diamond!A \lif \Diamond(!A \lor !B)$ & re-writing\\
+    6. & $\Diamond!B \lif \Diamond(!A \lor !B)$ & similarly\\
+    7. & $(\Diamond!A \lor\Diamond!B) \lif \Diamond(!A \lor !B)$
+    & \PL, 5, 6.
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves \Diamond(!A \lor!B) \lif (\Diamond!A \lor \Diamond!B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $\lnot !A \lif (\lnot !B \lif \lnot (!A \lor !B)$ & \PL \\
+    2. & $\Box\lnot !A \lif
+    (\Box\lnot!B \lif \Box \lnot (!A \lor !B)$ & \Nec{}, \Ax{K}\\
+    3. & $\Box\lnot !A \lif (\lnot \Box \lnot (!A \lor!B)
+    \lif \lnot\Box\lnot !B))$ & \PL, 2\\
+    4. & $\lnot \Box \lnot(!A \lor !B) \lif (\Box \lnot !A \lif 
+    \lnot\Box\lnot !B)$  & \PL\\
+    5. & $\lnot \Box \lnot(!A\lor!B) \lif (\lnot
+    \lnot\Box\lnot!B \lif \lnot\Box\lnot!A)$ & \PL\\
+    6. & $\Diamond(!A \lor !B) \lif (\lnot
+    \Diamond!B \lif \Diamond!A)$ & re-writing \\
+    7. & $\Diamond(!A\lor!B) \lif (\Diamond!B \lor \Diamond!A)$ & \PL. \\
+  \end{derivation}
+\end{proof}
+
+\begin{prob}
+  Provide $\Log{K}$-proofs of the following:
+  \begin{enumerate}
+  \item $\Diamond \lnot \lfalse \lif (\Box !A \lif \Diamond !A)$;
+  \item $\Box(!A \lor !B) \lif (\Diamond !A \lor \Box !B)$;
+  \item $(\Diamond !A \lif \Box !B) \lif \Box(!A \lif !B)$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

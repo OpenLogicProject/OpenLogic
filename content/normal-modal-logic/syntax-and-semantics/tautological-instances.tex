@@ -1,0 +1,79 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: tautological-instances
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{tau}
+
+\olsection{Tautological Instances}
+
+\begin{defn}
+  A modal !!{formula} $!B$ is a \emph{tautological instance} if and
+  only if there is a modal-free tautology~$!A$ and !!{formula}s
+  $!D_1$, \dots, $!D_n$ such that $!B = \Subst{!A}{\subst{!D_1}{p_1},
+    \dots, \subst{!D_n}{p_n}}$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:valid-taut}
+  Suppose $!A$ is a modal-free !!{formula} all of whose propositional
+  variables are among $p_1$, \dots, $p_n$, and let $!D_1$, \dots,
+  $!D_n$ be modal !!{formula}s. Then for any assignment $\pAssign{v}$,
+  any model $\mModel{M} = \tuple{W, R, V}$, and any $w \in W$ such
+  that $v(p_i) = \True$ if and only if $\mSat{M}{!D_i}[w]$ we have
+  that $\pSat{v}{!A}$ if and only if
+  $\mSat{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
+      \subst{!D_n}{p_n}}}[w]$.
+\end{lem}
+
+\begin{proof}
+  By induction on $!A$.
+  \begin{enumerate}
+    \item $!A$ is atomic: then by the hypothesis it must be some
+      $p_i$, whence:
+      \begin{align*}
+        \pSat{v}{p_i} \Leftrightarrow v(p_i) = \True 
+        & \Leftrightarrow \mSat{M}{!D_i}[w] \\
+        & \Leftrightarrow \mSat{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w].
+      \end{align*}
+    \item $!A \ident \lnot !B$:
+      \begin{align*}
+        \pSat{v}{\lnot !B} & \Leftrightarrow 
+        \pSat/{v}{!B}
+        && \text{by definition of $\pSat{v}{\lnot !B}$};\\
+        & \Leftrightarrow  \mSat/{M}{!B}[w] && \text{by induction hypothesis};\\
+        & \Leftrightarrow  \mSat{M}{\lnot !B}[w]
+        && \text{by definition of $\pSat{v}{\lnot !B}$}.
+      \end{align*}
+    \item $!A \ident !B \lif !C$:
+      \begin{align*}
+        \pSat{v}{!B \lif !C} & \Leftrightarrow
+        \pSat/{v}{!B} \text{ or } \pSat{v}{!C}
+        && \text{by definition of $\pSat{v}{!B \lif !C}$};\\
+        & \Leftrightarrow \mSat/{M}{!B}[w] \text{ or } \mSat{M}{!C}[w],
+        && \text{by induction hypothesis}; \\
+        & \Leftrightarrow \mSat{M}{!B \lif !C}[w]
+        && \text{by definition of $\mSat{M}{!B \lif !C}[w]$}.\qedhere
+      \end{align*}
+  \end{enumerate}
+  \end{proof}
+
+\begin{thm}\ollabel{thm:valid-taut}
+  All tautological instances are valid.
+\end{thm}
+
+\begin{proof}
+  Contrapositively, suppose $!A$ is such that
+  $\mSat/{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
+      \subst{!D_n}{p_n}}}[w]$, for some model $\mModel{M}$ and
+  world~$w$. Define an assignment $v$ such that $v(p_i) = \True$ if and
+  only if $\mSat{M}{!D_i}[w]$ (and $v$ assigns arbitrary values to $q
+  \notin \{p_1, \dots, p_n \}$).  Then by \olref{lem:valid-taut},
+  $\pSat/{v}{!A}$, so $!A$ is not a tautology.
+\end{proof}
+
+
+\end{document}

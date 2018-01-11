@@ -1,0 +1,56 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: modal-validity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{val}
+
+\olsection{Validity}
+
+\begin{defn}
+  !!^a{formula} $!A$ is \emph{valid} in a class $\mClass{C}$ of
+  models if it is true in every model in $\mClass{C}$ (i.e., true at
+  every world in every model in $\mClass{C}$). If $!A$ is valid
+  in $\mClass{C}$ we write $\mClass{C} \Entails !A$, and we
+  write $\Entails !A$ if $!A$ is valid in the class of
+  \emph{all} models.
+\end{defn}
+
+\begin{prop}
+  If $!A$ is valid in $\mClass{C}$ it is also valid in each class
+  $\mClass{C}' \subseteq \mClass{C}$.
+\end{prop}
+
+\begin{prop}\ollabel{prop:Nec-rule}
+  If $!A$ is valid, then so is $\Box!A$. 
+\end{prop}
+
+\begin{proof}
+  Assume $\Entails !A$. To show $\Entails \Box!A$ let $\mModel{M} =
+  \tuple{W, R, V}$ be a model and $w \in W$. If $Rww'$ then
+  $\mSat{M}{!A}[w']$, since $!A$ is valid, and so also
+  $\mSat{M}{\Box\varphi}[w]$. Since $\mModel{M}$ and $w$ were
+  arbitrary, $\Entails \Box!A$.
+\end{proof}
+
+\begin{prob}
+  Show that the following are valid:
+  \begin{enumerate}
+  \item $\Entails \Box p \lif \Box (q \lif p)$;
+  \item $\Entails \Box \lnot \lfalse$;
+  \item $\Entails \Box p \lif (\Box q \lif \Box p)$.
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  Show that $!A \lif \Box!A$ is valid in the class $\mClass{C}$ of
+  models $\mModel{M} = \tuple{W, R, V}$ where $W = \{w\}$. Similarly,
+  show that $!B \lif \Box !A$ and $\Diamond !A \lif !B$ are valid in
+  the class of models $\mModel{M} = \tuple{W, R, V}$ where
+  $R = \emptyset$.
+\end{prob}
+
+\end{document}

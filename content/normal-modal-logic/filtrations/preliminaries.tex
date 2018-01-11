@@ -1,0 +1,37 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: preliminaries
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{pre}
+
+\olsection{Preliminaries}
+
+Filtrations allow us to establish the decidability of our systems of
+modal logic by showing that they have the \emph{finite model
+  property}, i.e., that any !!{formula} that is true (false) in a
+model is also true (false) in a \emph{finite} model.
+
+\begin{defn}\ollabel{def:modallyclosed}
+  A set $\Gamma$ of !!{formula}s is \emph{closed under subformulas} if it
+  contains every subformula of !!a{formula} in $\Gamma$. Further,
+  $\Gamma$ is \emph{modally closed} if it is closed under subformulas
+  and moreover $!A \in \Gamma$ implies $\Box!A,
+  \Diamond!A \in \Gamma$. 
+\end{defn}
+
+\begin{defn}
+Let $\mModel{M} =\tuple{W, R, V}$ and suppose $\Gamma$ is closed under
+subformulas. Define a relation $\equiv$ on $W$ to hold of any two
+worlds that make true the same !!{formula}s from $\Gamma$, i.e.:
+\[
+u \equiv v \quad \text{if and only if }\quad \forall !A \in \Gamma : \mSat{M}{!A}[u] \Leftrightarrow \mSat{N}{!A}[v].
+\]
+Clearly, $\equiv$ is an equivalence relation over $W$. Standardly, for
+any $w \in W$, the equivalence class of $w$ is denoted by $[w]$.
+\end{defn}
+
+\end{document}

@@ -1,0 +1,112 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{acc}
+
+\olsection{Properties of Accessibility Relations}
+
+\begin{defn}
+  We single out the following five potential properties of an
+  accessibility relation:
+ \begin{center}
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{$R$ is called \dots}} & {\emph{\dots if it satisfies:}} \\
+      \hline \hline
+      ``serial''   & $\forall u \exists v\, Ruv$; \\
+      \hline
+      ``reflexive'' & $\forall w \, Rww$; \\
+      \hline
+      ``symmetric'' & $\forall u\forall v(Ruv \lif Rvu)$; \\
+      \hline
+      ``transitive'' & $ \forall u \forall v \forall w (Ruv \land Rvw
+      \lif Ruw)$; \\
+      \hline 
+      ``euclidean'' & $ \forall w \forall u \forall v (Rwu \land Rwv
+      \lif Ruv)$.\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{defn}
+
+\begin{thm}\ollabel{thm:soundschemas}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model. Then:
+ \begin{enumerate}
+ \item If $R$ is serial then schema \Ax{D}, i.e., $\Box !A \lif
+   \Diamond !A$, is true in $\mModel{M}$;
+ \item If $R$ is reflexive then schema \Ax{T}, i.e., $\Box !A \lif
+   !A$, is true in $\mModel{M}$;
+ \item If $R$ is symmetric then schema \Ax{B}, i.e., $!A \lif
+   \Box\Diamond !A$, is true in $\mModel{M}$;
+ \item If $R$ is transitive then schema \Ax{4}, i.e., $\Box
+   !A \lif \Box \Box !A$, is true in $\mModel{M}$;
+ \item If $R$ is euclidean then schema \Ax{5}, i.e., $\Diamond
+   !A \lif \Box \Diamond !A$, is true in $\mModel{M}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Here is the case for \Ax{B}: to show that the schema is true in a
+  model we need to show that all of its instances are true all worlds
+  in the model. So let $!A \lif \Box\Diamond !A$ be a given instance
+  of \Ax{B}, and let $w \in W$ be an arbitrary world. Suppose the
+  antecedent $!A$ is true at $w$, in order to show that $\Box \Diamond
+  !A$ is true at $w$. So we need to show that $\Diamond !A$ is true at
+  all $w'$ accessible from $w$. Now, for any $w'$ such that $Rww'$ we
+  have, using the hypothesis of symmetry, that also $Rw'w$ (see
+  \olref{fig:Bsymm}). Since $\mSat{M}{!A}[w]$, we have
+  $\mSat{M}{\Diamond !A}[w']$. Since $w'$ was an arbitrary world such
+  that $Rww'$, we have $\mSat{M}{\Box\Diamond!A}[w]$.
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][syn][acc]{thm:soundschemas}
+\end{prob}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[node distance=2cm, auto, thick]
+      \node (w1) at (0, 0) [label=90:$w$, label=below:$\formula{A}$]{$\bullet$}; 
+      \node (w2) at (2, 0) [label=45:$w'$, label=below:{$\Diamond\formula{A}$}]{$\bullet$}; 
+      \draw[->, bend left] (w1) to node {$R$} (w2); 
+      \draw[->, bend left] (w2) to node {} (w1); 
+      \draw [rounded corners] (-1.25,-1) -- ++(0,3)  -- ++(4.25,0) -- ++(0,-3) --  cycle;
+      \path node at (-0.6,1.5) {$\mModel{M}$};
+      \path node at (-0.6, 0) {$\Box\Diamond\formula{A}$};
+    \end{tikzpicture}
+  \end{center}
+\caption{The argument from symmetry.}\ollabel{fig:Bsymm}
+\end{figure}
+
+Notice that the converse implications of \olref{thm:soundschemas} do
+not hold: it's not true that if a model verifies a schema, then the
+accessibility relation of that model has the corresponding property (a
+counterexample is provided by \olref{ex:reflexive}).
+
+\begin{ex}\ollabel{ex:reflexive}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model such that $W = \{u, v
+  \}$, where worlds $u$ and $v$ are related by $R$: i.e., both $Ruv$
+  and $Rvu$.  Suppose that for all $p$: $u \in V(p) \Leftrightarrow v
+  \in V(p)$. Then:
+  \begin{enumerate}
+  \item For all $!A$: $\mSat{M}{!A}[u]$ if and only if
+    $\mSat{M}{!A}[v]$ (use induction on $!A$).
+  \item Schema \Ax{T} is true in $\mModel{M}$.
+  \end{enumerate}
+  Since $\mModel{M}$ is not reflexive (it is, in fact,
+  \emph{irreflexive}), the converse of \olref{thm:soundschemas}
+  fails in the case of \Ax{T} (similar arguments can be given for
+  some---though not all---the other schemas mentioned in
+  \olref{thm:soundschemas}).
+\end{ex}
+
+\begin{prob}
+  Prove the claims in \olref[mod][syn][acc]{ex:reflexive}.
+\end{prob}
+
+\end{document}

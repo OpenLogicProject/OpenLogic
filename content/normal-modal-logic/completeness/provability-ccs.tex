@@ -1,0 +1,34 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: provability-ccs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{pcc}
+
+\olsection{\usetoken{S}{derivability} and Complete Consistent Sets}
+
+\begin{cor}\ollabel{cor:provability-characterization}
+  $\Gamma \Proves[\Sigma] !A$ if and only if $!A \in \Delta$ for
+  each  complete $\Sigma$-consistent set $\Delta$ extending $\Gamma$
+  (including when $\Gamma = \emptyset$, in which case we get another
+  characterization of the modal system $\Sigma$.)
+\end{cor}
+
+\begin{proof}
+  Suppose $\Gamma \Proves[\Sigma] !A$, and let $\Delta$ be any
+  complete $\Sigma$-consistent set extending $\Gamma$. If $!A
+  \notin \Delta$ then by maximality $\lnot!A \in \Delta$ and so
+  $\Delta \Proves[\Sigma] !A$ (by monotony) and $\Delta
+  \Proves[\Sigma] \lnot!A$ (by reflexivity), and so $\Delta$ is
+  inconsistent. Conversely if $\Gamma \Proves/[\Sigma] !A$, then
+  $\Gamma \cup \{ \lnot!A\}$ is $\Sigma$-consistent, and by
+  Lindenbaum's Lemma there is a complete consistent set $\Delta$
+  extending $\Gamma \cup \{ \lnot!A \}$. By consistency, $!A
+  \notin \Delta$.
+\end{proof}
+
+\end{document}
+

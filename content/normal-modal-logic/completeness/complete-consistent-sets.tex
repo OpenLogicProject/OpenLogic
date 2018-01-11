@@ -1,0 +1,52 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: complete-consistent-sets
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{ccs}
+
+\olsection{Complete Consistent Sets}
+
+\begin{defn}
+  A set $\Gamma$ is \emph{complete $\Sigma$-consistent} if and
+  only if it is $\Sigma$-consistent and for every~$!A$, either
+  $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:completeconsproperties}
+  Suppose $\Gamma$ is complete $\Sigma$-consistent. Then:
+  \begin{enumerate}
+  \item $\Gamma$ is deductively closed in $\Sigma$.
+  \item \ollabel{prop:completeconsproperties-b}%
+    $\Sigma \subseteq \Gamma$.
+  \item \ollabel{prop:completeconsproperties-c}%
+    $\lnot!A \in \Gamma$ if and only if $!A \notin
+    \Gamma$.
+  \item \ollabel{prop:completeconsproperties-d}%
+    $!A \lif !B \in \Gamma$ if and only if $!A \in
+    \Gamma$ implies $!B \in \Gamma$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item If $\Gamma \Proves[\Sigma] !A$ but $!A \notin \Gamma$ then by
+    maximality $\lnot!A \in \Gamma$, and $\Gamma$ is inconsistent.
+  \item If $!A \in \Sigma$ then $\Gamma \Proves[\Sigma] !A$, and $!A
+    \in \Gamma$ by deductive closure.
+  \item If $\lnot!A \in \Gamma$, then by consistency $!A \notin
+    \Gamma$; and if $!A \notin \Gamma$ then by maximality $!A \in
+    \Gamma$.
+  \item Suppose $!A \lif !B \in \Gamma$ and $!A \in \Gamma$; then
+    $\Gamma \Proves[\Sigma] !B$, whence $!B \in \Gamma$ by deductive
+    closure. Conversely, if $!A \lif !B \notin \Gamma$ then by
+    maximality $\lnot (!A \lif !B) \in \Gamma$, so by Rule T,
+    deductive closure, and consistency both $!A \in \Gamma$ and $!B
+    \notin \Gamma$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

@@ -1,0 +1,80 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: examples-of-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{exf}
+
+\olsection{Examples of Filtrations}
+
+We have not yet shown that there are any filtrations. But indeed, for
+any model $\mModel{M}$, there are many filtrations of $\mModel{M}$
+through $\Gamma$. We identify two, in particular: the finest and
+coarsest filtrations. Filtrations of the same models will differ in
+their accessibility relation (as \olref[fil]{def:filtration} stipulates
+directly what $W^*$ and $V^*$ should be like). The finest filtration
+will have as few related worlds as possible, whereas the coarsest will
+have as many as possible.
+
+\begin{defn}
+  Where $\Gamma$ is closed under subformulas, the \emph{finest}
+  filtration $\mModel{M^*}$ of a model $\mModel{M}$ is defined by putting:
+  \[
+  R^*[u][v] \quad \text{if and only if} \quad \exists u'\in [u] \;
+  \exists v' \in [v] : Ru'v'.
+  \]
+\end{defn}
+
+\begin{prop}
+  The finest filtration $\mModel{M^*}$ is indeed a filtration. 
+\end{prop}
+
+\begin{proof}
+  We need to check that $R^*$, so defined, satisfies
+  \olref[fil]{def:filtration}\olref[fil]{def:filtration-R}. We check
+  the three conditions in turn.
+
+  If $Ruv$ then by reflexivity of $\equiv$, also $R^*[u][v]$, so
+  \olref[fil]{def:filtration-R1} is satisfied.
+  
+  For \olref[fil]{def:filtration-R2}, suppose $\Box!A \in \Gamma$,
+  $R^*[u][v]$, and $\mSat{M}{\Box!A}[u]$. By definition of $R^*$,
+  there are $u' \equiv u$ an $v' \equiv v$ such that $Ru'v'$. Since
+  $u$ and $u'$ agree on $\Gamma$, also $\mSat{M}{\Box!A}[u']$, so that
+  $\mSat{M}{!A}[v']$. By closure of $\Gamma$, $v$ and $v'$ agree on
+  $!A$, so $\mSat{M}{!A}[v]$, as desired.
+  
+  To verify \olref[fil]{def:filtration-R3}, suppose $\Diamond!A \in
+  \Gamma$, $R^*[u][v]$, and $\mSat{M}{!A}[v]$. Arguing similarly to
+  the previous case, $\mSat{M}{\Diamond!A}[u]$.
+\end{proof}
+
+\begin{defn}
+  Where $\Gamma$ is closed under subformulas, the \emph{coarsest}
+  filtration $\mModel{M^*}$ of a model $\mModel{M}$ is defined by
+  putting $R^*[u][v]$ if and only if \emph{both} of the following
+  conditions are met:
+  \begin{enumerate}
+  \item If $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[u]$ then
+    $\mSat{M}{!A}[v]$;
+  \item If $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$ then
+    $\mSat{M}{\Diamond!A}[u]$.
+  \end{enumerate}
+\end{defn}
+
+\begin{prop}
+  The coarsest filtration $\mModel{M^*}$ is indeed a filtration. 
+\end{prop}
+
+\begin{proof}
+  Given the definition of $R^*$, the only condition that is left to
+  verify is the implication from $Ruv$ to $R^*[u][v]$. Assuming $Ruv$,
+  suppose $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[u]$; then
+  obviously $\mSat{M}{!A}[v]$. Similarly if $\Diamond!A \in
+  \Gamma$ and $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$. 
+\end{proof}
+
+\end{document}

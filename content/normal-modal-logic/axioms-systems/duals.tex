@@ -1,0 +1,36 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: duals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{dua}
+
+\olsection{Dual Schemas}
+
+\begin{defn}\ollabel{def:duals}
+  Each of the schemas \Ax{T}, \Ax{B}, \Ax{4}, and
+  \Ax{5} has a \emph{dual}, denoted by a subscripted diamond, as
+  follows:
+
+  \begin{tabular}{p{1cm}l}%@{\hspace{1cm}}l}
+    $\Ax{T_\Diamond}$ : & $!A \lif \Diamond!A$\\
+    $\Ax{B_\Diamond}$ : & $\Diamond\Box!A \lif !A$\\
+    $\Ax{4_\Diamond}$ : & $\Diamond\Diamond!A \lif \Diamond!A$\\
+    $\Ax{5_\Diamond}$ : & $\Diamond\Box!A \lif \Box!A$
+    \end{tabular}
+\end{defn}
+
+Each of the dual above schemas is obtained from the corresponding
+schema by replacing $\lnot !A$ for $!A$, contraposing, and
+re-writing. Schema \Ax{D} is its own dual (modulo the replacement
+of $\lnot \Diamond \lnot$ by $\Box$). 
+
+\begin{prob}
+  Show that for each schema $!A$ in \olref[mod][prf][dua]{def:duals}:
+  $\Log{K} \Proves !A \liff !A_\Diamond$.
+\end{prob}
+
+\end{document}

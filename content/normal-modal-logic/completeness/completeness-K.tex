@@ -1,0 +1,42 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: completeness-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{cmk}
+
+\olsection{Completeness for \Log{K}}
+
+\begin{thm}[Determination]\ollabel{thm:determination}
+   For every normal modal logic $\Sigma$: $\mSat{M^\Sigma}{!A}$ if and
+   only if $\Sigma \Proves !A$.
+\end{thm}
+
+\begin{proof}
+  If $\mSat{M^\Sigma}{!A}$, then for every complete
+  $\Sigma$-consistent $w$, we have $\mSat{M^\Sigma}{!A}[w]$. Hence, by
+  the Truth Lemma, $!A \in w$ for every complete $\Sigma$-consistent
+  $w$, whence by \olref[pcc]{cor:provability-characterization} (with
+  $\Gamma = \emptyset$), $\Sigma \Proves !A$. Conversely, if $\Sigma
+  \Proves !A$ then by
+  \olref[ccs]{prop:completeconsproperties}\olref[ccs]{prop:completeconsproperties-b},
+  every complete $\Sigma$-consistent $w$ contains $!A$, and hence by
+  the Truth Lemma $\mSat{M^\Sigma}{!A}[w]$ for every~$w$, i.e.,
+  $\mSat{M^\Sigma}{!A}$.
+\end{proof}
+
+\begin{cor}\ollabel{cor:Kcomplete}
+  The basic modal logic \Log{K} is complete with respect to the
+  class of all models, i.e., if $\Entails !A$ then $\Log{K}
+  \Proves !A$.
+\end{cor}
+
+\begin{proof}
+  Contrapositively, if $\Log{K} \Proves/ !A$ then by Determination
+  $\mSat/{M^\Log{K}}{!A}$ and hence $!A$ is not valid.
+\end{proof}
+
+\end{document}

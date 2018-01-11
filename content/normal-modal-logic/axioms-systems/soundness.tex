@@ -1,0 +1,47 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{snd}
+
+\olsection{Soundness}
+
+\begin{thm}[Soundness Theorem]\ollabel{thm:soundness}
+  If schemas $!A_1$, \dots, $!A_n$ are valid in the
+  classes of models $\mClass{C}_n$, \dots, $\mClass{C}_n$,
+  respectively, then $\Log{K}!A_1\dots !A_n
+  \Proves !B$ implies that $!B$ is valid in the class of
+  models $\mClass{C}_n \cap \dots \cap \mClass{C}_n$.
+\end{thm}
+
+\begin{proof}
+  By induction on length of proofs. For brevity, put $\mClass{C} =
+  \mClass{C}_n \cap \dots \cap \mClass{C}_n$.
+  \begin{enumerate}
+  \item Induction Basis: If $!B$ has a proof of length~$1$, then it is
+    either a tautological instance or an instance of \Ax{K}, or an
+    instance of one of the schemas. In the first case, $!B$ is valid
+    in $\mClass{C}$, since tautological instance are valid in
+    \emph{any} class of models, by
+    \olref[syn][tau]{thm:valid-taut}. Similarly in the second case, by
+    \olref[syn][sch]{thm:Kvalid}. Finally in the third case, since
+    $!B$ is valid in $\mClass{C}_i$ and $\mClass{C} \subseteq
+    \mClass{C}_i$, we have that $!B$ is valid in $\mClass{C}$ as well.
+  \item Inductive step: Suppose $!B$ has a proof of length $k>1$. If
+    $!B$ is a tautological instance or an instance of one of the
+    schemas, we proceed as in the previous step. So suppose $!B$ is
+    obtained by \MP{} from previous !!{formula}s $!C \lif !B$ and
+    $!C$. Then $!C \lif !B$ and $!C$ have proofs of length $<k$, and
+    by inductive hypothesis they are valid in~$\mClass{C}$. By
+    \olref[syn][sch]{prop:soundMP}, $!B$ is valid in $\mClass{C}$ as
+    well. Finally suppose $!B$ is obtained by \Nec{} from $!C$ (so
+    that $!B = \Box!C$). By inductive hypothesis, $!C$ is valid in
+    $\mClass{C}$, and by \olref[syn][val]{prop:Nec-rule} so is~$!A$. \qedhere
+  \end{enumerate}
+\end{proof}
+
+\end{document}

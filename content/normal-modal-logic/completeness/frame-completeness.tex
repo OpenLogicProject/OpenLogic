@@ -1,0 +1,203 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: frame-completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{fra}
+
+\olsection{Frame Completeness}
+
+The completeness theorem for Log{K} can be extended to other modal
+systems, once we show that the canonical model for a given logic has
+the corresponding frame property.
+
+\begin{thm}\ollabel{thm:completeframeprops}
+  If a normal modal logic $\Sigma$ contains one of the schemas on the
+  left-hand side of the table of \olref{fig:correspondencetable},
+  then the canonical model for $\Sigma$ has the corresponding property
+  on the right-hand side.
+\end{thm}
+
+\begin{figure}[htp]
+  \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      \emph{If $\Sigma$ contains \dots} & \emph{\dots the canonical
+        model for $\Sigma$ is:} \\
+      \hline \hline
+      \Ax{D}:\;\; $\Box!A \lif \Diamond !A$ & \quad serial; \\
+      \hline
+      \Ax{T}:\;\; $\Box!A \lif !A$ &\quad  reflexive;\\
+      \hline
+      \Ax{B}: \;\;$!A \lif \Box\Diamond!A$ &\quad  symmetric; \\
+      \hline
+      \Ax{4}: \;\; $\Box!A \lif \Box\Box!A$ & \quad transitive; \\
+      \hline 
+      \Ax{5}: \;\; $\Diamond !A \lif \Box\Diamond!A$& \quad euclidean.\\
+      \hline
+    \end{tabular}
+    \caption{Basic correspondence facts.}\ollabel{fig:correspondencetable}
+\end{figure}
+
+\begin{proof}
+  We take each of these up in turn. Suppose $\Sigma$ contains \Ax{D},
+  and let $w \in W^\Sigma$; we need to show that there is a $w'$ such
+  that $R^\Sigma ww'$. It suffices to show that $\Setabs{!B}{\Box!B \in
+  w}$ is $\Sigma$-consistent, for then by Lindenbaum's Lemma, there
+  is a complete $\Sigma$-consistent set $w' \supseteq \Setabs{!B}{\Box!B
+  \in w}$, and by definition of $R^\Sigma$ we have $R^\Sigma
+  ww'$. So, suppose for contradiction that $\Setabs{!B}{\Box!B \in w}$ is
+  \emph{not} $\Sigma$-consistent, i.e., $\Setabs{!B}{\Box!B \in w}
+  \Proves[\Sigma] \lfalse$. By \olref[mod]{lem:Gamma-proves2}, $w
+  \Proves[\Sigma] \Box\lfalse$, and since $\Sigma$ contains \Ax{D},
+  also $w \Proves[\Sigma] \Diamond\lfalse$. But $\Sigma$ is normal, so
+  $\Sigma \Proves \lnot\Diamond \lfalse$
+  (\olref[prf][nor]{prop:notDiamondBot}), whence also $w \Proves[\Sigma]
+  \lnot\Diamond \lfalse$, against the consistency of $w$.
+
+  Now suppose $\Sigma$ contains \Ax{T}, and let $w \in W^\Sigma$. We
+  want to show $R^\Sigma ww$, i.e., $\Setabs{!A}{\Box !A \in w} \subseteq
+  w$. But if $\Box!A \in w$ then by \Ax{T} also $!A \in w$, as
+  desired.
+
+  Now suppose $\Sigma$ contains \Ax{B}, and suppose $R^\Sigma uv$ for
+  $u,v \in W^\Sigma$. We need to show that $R^\Sigma vu$, i.e.,
+  $\Setabs{!A }{\Box!A \in v} \subseteq u$. By
+  \olref[mod]{lem:Gamma-proves3}, this is equivalent to
+  $\Setabs{\Diamond!A}{!A \in u} \subseteq v$. So suppose $!A \in
+  u$. By \Ax{B}, also $\Box\Diamond!A \in u$. By the hypothesis that
+  $R^\Sigma uv$, we have that $\Setabs{!B}{\Box !B \in u} \subseteq
+  v$, and hence $\Diamond!A \in v$, as required.
+
+  Now suppose $\Sigma$ contains \Ax{4}, and suppose $R^\Sigma uv$ and
+  $R^\Sigma vw$. We need to show $R^\Sigma uw$. From the hypothesis we
+  have both $\Setabs{!B}{\Box!B \in u} \subseteq v$ and
+  $\Setabs{!B}{\Box!B \in v} \subseteq w$. In order to show $R^\Sigma
+  uw$ it suffices to show $\Setabs{!B}{\Box!B \in u} \subseteq w$. So
+  let $\Box!B \in u$; by \Ax{4}, also $\Box\Box!B \in u$ and by
+  hypothesis we get, first, that $\Box!B \in v$ and, second, that $!B
+  \in w$, as desired.
+
+  Now suppose $\Sigma$ contains \Ax{5}, suppose $R^\Sigma uv$ and
+  $R^\Sigma uw$. We need to show $R^\Sigma vw$. The first hypothesis
+  give $\Setabs{!A}{\Box!A \in u} \subseteq v$, and the second
+  hypothesis is equivalent to $\Setabs{\Diamond!A}{!A \in w} \subseteq
+  u$, by \olref[mod]{lem:Gamma-proves3}.  To show $R^\Sigma vw$, by
+  \olref[mod]{lem:Gamma-proves3}, it suffices to show
+  $\Setabs{\Diamond!A}{!A \in w } \subseteq v$. So let $!A \in w$; by
+  the second hypothesis $\Diamond!A \in u$ and by \Ax{5},
+  $\Box\Diamond!A \in u$ as well. But now the first hypothesis give
+  $\Diamond!A \in v$, as desired.
+  \end{proof}
+
+As a corollary we obtain completeness results for a number of
+systems. For instance, we know that $\Log{S5} = \Log{KT5} =
+\Log{KTB4}$ is complete with respect to the class of all reflexive
+euclidean models, which is the same as the class of all reflexive,
+symmetric and transitive models.
+
+\begin{thm}\ollabel{thm:generaldet}
+  Let $\mClass{C}_\Ax{D}$, $\mClass{C}_\Ax{T}$,
+  $\mClass{C}_\Ax{B}$, $\mClass{C}_\Ax{4}$, and
+  $\mClass{C}_\Ax{5}$ be the class of all serial, reflexive,
+  symmetric, transitive, and euclidean models (respectively). Then for
+  any schemas $!A_1$, \dots, $!A_n$ among \Ax{D},
+  \Ax{T}, \Ax{B}, \Ax{4}, and \Ax{5}, the system
+  $\Log{K}!A_1 \dots !A_n$ is determined by the
+  class of models $\mClass{C} = \mClass{C}_{!A_1} \cap \dots
+  \cap \mClass{C}_{!A_n}$. 
+\end{thm}
+
+\begin{prop}
+  Let $\Sigma$ be a normal modal logic; then:
+  \begin{enumerate}
+  \item\ollabel{prop:anotherfive-a}%
+    If $\Sigma$ contains the schema $\Diamond!A \lif \Box 
+    !A$ then the canonical model for $\Sigma$ is partially functional. 
+  \item If $\Sigma$ contains the schema $\Diamond!A \liff \Box 
+    !A$ then the canonical model for $\Sigma$ is functional. 
+  \item If $\Sigma$ contains the schema $\Box\Box!A \lif \Box 
+    !A$ then the canonical model for $\Sigma$ is weakly dense. 
+  \end{enumerate}
+(see \olref[syn][cor]{fig:anotherfive} for definitions of these frame
+  properties).
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item suppose that $\Sigma$ contains the schema $\Diamond
+  !A \lif \Box !A$, to show that $R^\Sigma$ is partialy
+  functional we need to prove that for any $u,v,w \in W^\Sigma$, if
+  $R^\Sigma wu$ and $R^\Sigma wv$ then $u=v$. Since $R^\Sigma wu$ we
+  have $\Setabs{ !A}{\Box!A \in w } \subseteq u$ and since
+  $R^\Sigma wv$ also $\Setabs{ !A}{\Box!A \in w } \subseteq
+  v$. The identity $u=v$ will follow if we can establish the two
+  inclusions $u \subseteq v$ and $v \subseteq u$. For the first
+  inclusion, let $!A \in u$; then $\Diamond!A \in w$, and by
+  the schema and deductive closure of $w$ also $\Box!A \in w$,
+  whence by the hypothesis that $R^\Sigma wv$, $!A \in v$. The
+  second inclusion is similar, so this establishes part $(a)$.
+
+  \item This follows immediately from part \olref{prop:anotherfive-a}
+    and the seriality proof in \olref{thm:completeframeprops}.
+
+  \item Suppose $\Sigma$ contains the schema $\Box\Box!A \lif \Box!A$
+    and to show that $R^\Sigma$ is weakly dense, let $R^\Sigma uv$. We
+    need to show that there is a complete $\Sigma$-consistent set $w$
+    such that $R^\Sigma uw$ and $R^\Sigma wv$. Let:
+    \[
+    \Gamma = \Setabs{!A}{\Box!A \in u } \cup \Setabs{\Diamond!B}{!B
+      \in v}.
+    \]
+    It suffices to show that $\Gamma$ is $\Sigma$-consistent, for then
+    by Lindenbaum's Lemma it can be extendend to a complete
+    $\Sigma$-consistent set~$w$ such that $\Setabs{!A}{\Box!A \in u}
+    \subseteq w$ and $\Setabs{\Diamond!B}{!B \in v} \subseteq w$,
+    i.e., $R^\Sigma uw$ and $R^\Sigma wv$.
+
+    Suppose for contradiction that $\Gamma$ is not consistent. Then
+    there are !!{formula}s $\Box!A_1$, \dots, $\Box!A_n \in u$ and $!B_1$,
+    \dots,~$!B_m \in v$ such that $!A_1, \dots, !A_n, \Diamond!B_1,
+    \dots, \Diamond!B_m \Proves[\Sigma] \lfalse$. Since $\Diamond
+    (!B_1 \land \dots \land !B_m) \to (\Diamond!B_1 \land \dots \land
+    \Diamond!B_m)$ is !!{derivable} in every normal modal logic, we
+    argue as follows, contradicting the consistency of~$v$:
+    \begin{align*}
+      !A_1, \dots, !A_n, \Diamond!B_1, \dots,
+      \Diamond!B_m\Proves[\Sigma] \lfalse & \quad \Rightarrow\quad
+      !A_1, \dots,!A_n \Proves[\Sigma] (\Diamond!B_1 \land
+      \dots \land \Diamond!B_m) \lif \lfalse,
+      && \text{deduction theorem;} \\
+      & \quad \Rightarrow\quad !A_1, \dots,!A_n \Proves[\Sigma]
+      \Diamond(!B_1 \land
+      \dots \land !B_m) \lif \lfalse, && \Sigma \text{ is normal}; \\
+      & \quad \Rightarrow\quad !A_1, \dots,!A_n \Proves[\Sigma]
+      \Box \lnot (!B_1 \land \dots \land !B_m), && \text{PL, re-writing}; \\
+      & \quad \Rightarrow\quad \Box!A_1, \dots,\Box!A_n
+      \Proves[\Sigma] \Box\Box \lnot (!B_1 \land \dots \land !B_m), &&
+      \text{\olref[mod]{lem:Gamma-proves1}}; \\
+      & \quad \Rightarrow\quad \Box!A_1, \dots,\Box!A_n
+      \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{ by the
+        schema}; \\
+      & \quad \Rightarrow\quad u \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{ Monotony}; \\
+      & \quad \Rightarrow\quad 
+      \Box\lnot (!B_1 \land \dots \land !B_m) \in u, && \text{ deductive closure}; \\
+      & \quad \Rightarrow\quad 
+      \lnot (!B_1 \land \dots \land !B_m) \in v, && \text{ since }
+      R^\Sigma uv. \qedhere
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+On the strength of these examples, one might think that every
+system~$\Sigma$ of modal logic is \emph{complete}, in the sense that
+it proves every formula which is valid in every frame in which every
+theorem of $\Sigma$ is valid. Unfortunately, there are many systems
+that are not complete in this sense.
+
+\end{document}

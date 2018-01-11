@@ -1,0 +1,95 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: more-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{acc}
+
+\olsection{Filtrations and Properties of Accessibility}
+
+\begin{defn}
+  Let $\Gamma$ be closed under subformulas and $\mModel{M} =\tuple{W, R, V}$ a
+  model. Then we can define conditions on pairs of worlds $u,v$ as given in
+  the table of \olref{fig:Cn-filtrations}. 
+\end{defn}
+
+  \begin{figure}[ht]
+    \centering
+    \begin{tabular}{|ll|}
+      \hline
+      \multirow{2}{*}{$C_1(u,v)$:}  &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$; and \\
+      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$; \\
+      \hline
+      \multirow{2}{*}{$C_2(u,v)$:} &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[v]$ then $\mSat{M}{!A}[u]$; and \\
+      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$; \\
+      \hline
+      \multirow{2}{*}{$C_3(u,v)$:} &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{\Box!A}[v]$; and \\
+      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{\Diamond!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$; \\
+      \hline
+      \multirow{2}{*}{$C_4(u,v)$:} &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[v]$ then $\mSat{M}{\Box!A}[u]$; and \\
+      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{\Diamond!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$; \\
+      \hline
+    \end{tabular}
+    \caption{Conditions on possible worlds for defining
+      filtrations.}\ollabel{fig:Cn-filtrations}
+\end{figure}
+
+\begin{thm}\ollabel{thm:more-filtrations}
+  Let $\mModel{M} =\tuple{W,R,P}$ be a model, $\Gamma$ closed under
+  subformulas. Let $W^*$ and $V^*$ be defined as in
+  \olref[fil]{def:filtration}. Then:
+  \begin{enumerate}
+  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
+    \land C_2(u,v)$ then $R^*$ is symmetric, and
+    $\mModel{M^*} = \tuple{W^*,R^*,V^*}$ is a filtration if $\mModel{M}$
+    is symmetric.
+  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
+    \land C_3(u,v)$ then $R^*$ is transitive, and
+    $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ is a filtration if $\mModel{M}$
+    is transitive.
+  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
+    \land C_2(u,v) \land C_3(u,v) \land C_4(u,v)$ then $R^*$ is
+    symmetric and transitive, and $\mModel{M^*}=\tuple{W^*,R^*,V^*}$
+    is a filtration if $\mModel{M}$ is symmetric and transitive.
+  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
+    \land C_3(u,v) \land C_4(u,v)$ then $R^*$ is transitive and
+    euclidean, and $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ is a filtration
+    if $\mModel{M}$ is transitive and euclidean.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item It's immediate that $R^*$ is symmetric, since $C_1(u,v)
+      \Leftrightarrow C_2(v,u)$ and $C_2(u,v) \Leftrightarrow
+      C_1(v,u)$. So it's left to show that if $\mModel{M}$ is
+      symmetric then $\mModel{M^*}$ is a filtration through
+      $\Gamma$. By condition $C_1(u,v)$ we get that: if $\Box!A \in
+      \Gamma$ and $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$, and if
+      $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$ then
+      $\mSat{M}{\Diamond!A}[u]$. So all we need is that $Ruv$ implies
+      $R^*[u][v]$.
+
+      So suppose $Ruv$, to show $R^*[u][v]$ we need $C_1(u,v) \land
+      C_2(u,v)$. For $C_1$: if $\Box!A \in\Gamma$ and
+      $\mSat{M}{\Box!A}[u]$ then also $\mSat{M}{!A}[v]$ (since $Ruv$);
+      and similarly if $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$
+      then $\mSat{M}{\Diamond!A}[u]$. For $C_2$: if $\Box!A \in
+      \Gamma$ and $\mSat{M}{\Box!A}[v]$ then $Ruv$ implies $Rvu$ by
+      symmetry, so that $\mSat{M}{!A}[u]$; similarly if $\Diamond!A
+      \in\Gamma$ and $\mSat{M}{!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$
+      (since $Rvu$ by symmetry).
+    \item Exercise.
+    \item Exercise.
+    \item Exercise.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][fil][acc]{thm:more-filtrations}.
+\end{prob}
+
+\end{document}

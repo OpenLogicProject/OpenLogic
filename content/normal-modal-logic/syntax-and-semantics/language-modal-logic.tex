@@ -1,0 +1,41 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: language-modal-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{lan}
+
+\olsection{The Language of Basic Modal Logic}
+
+The basic language of modal logic contains a set $\Var$ of
+!!{propositional variable}s $\Obj p_1$, $\Obj p_2$, \dots, the
+familiar logical connectives $\lnot$ (``not''), $\land$ (``and''),
+$\lor$ (``or''), $\lif$, (``if \dots then''), the symbols $\ltrue$
+(the truth symbol) and $\lfalse$ (the falsity symbol), as well as the
+two basic modalities $\Box$ and $\Diamond$.
+
+\begin{defn}
+\emph{!!^{formula}s} of the basic modal language are inductively
+  defined as follows:
+\begin{enumerate}
+\item Every propositional variable $\Obj p_i$ is an (atomic) !!{formula}.
+\item $\ltrue$ is an (atomic) !!{formula}
+\item $\lfalse$ is an (atomic) !!{formula}.
+\item If $!A$ is a formula, so is $\lnot !A$.
+\item If $!A$ and $!B$ are formulas, so are $(!A \land !B)$, $(!A \lor
+  !B)$, $(!A \lif !B)$, and $(!A \liff !B)$.
+\item If $!A$ is a formula, so is $\Box !A$.
+\item Nothing else is !!a{formula}.
+\end{enumerate}
+If a !!{formula}~$!A$ does not contain $\Box$, we say
+it is \emph{modal-free}. 
+\end{defn}
+
+$\Diamond A$ abbreviates $\lnot \Box \lnot !A$. So for instance,
+$\Diamond\Box p \lif \Diamond\Diamond p$ is short for
+$\lnot\Box\lnot\Box p \lif \lnot\Box\lnot\lnot \Box\lnot p$.
+
+\end{document}

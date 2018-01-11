@@ -1,0 +1,54 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: truth-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{tru}
+
+\olsection{The Truth Lemma}
+
+\begin{prop}[Truth Lemma]
+  \ollabel{prop:truthlemma}
+  For every !!{formula} $!A$, $\mSat{M^\Sigma}{!A}[w]$ if and only if
+  $!A \in w$.
+\end{prop}
+
+\begin{proof}
+  By induction on $!A$. \emph{Basis}: if $!A$ is a
+  propositional variable, say $p$, then:
+  \[
+  \mSat{M^\Sigma}{p}[w] \Leftrightarrow w \in V^\Sigma(p)
+  \Leftrightarrow p \in w.
+  \]
+  If $!A$ is $\lfalse$ then both $\mSat/{M^\Sigma}{\lfalse}[w]$ and
+  $\lfalse \notin w$ (by consistency of $w$). The cases for $\lnot !A$
+  and $!A \lif !B$ follow from the inductive hypothesis and
+  \olref[ccs]{prop:completeconsproperties}, parts
+  \olref[ccs]{prop:completeconsproperties}
+  and~\olref[ccs]{prop:completeconsproperties}. Here is the case for
+  $\Box!A$; in one direction:
+  \begin{align*}
+    \mSat{M^\Sigma}{\Box!A}[w] & \quad \Rightarrow\quad \forall w'
+    \in W^\Sigma (R^\Sigma ww' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
+    && \text{def. } \Entails; \\
+    & \quad \Rightarrow\quad \forall w' \in W^\Sigma (\{!B :
+    \Box!B \in w\}\subseteq w' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
+    && \text{def. } R^\Sigma; \\
+    & \quad \Rightarrow\quad \forall w' \in W^\Sigma (\{!B :
+    \Box!B \in w\}\subseteq w' \Rightarrow !A \in w'),
+    && \text{ind. hyp.}; \\
+    & \quad \Rightarrow\quad \Box!A \in w, &&
+    \text{\olref[mod]{thm:box-phiGamma}}. 
+  \end{align*}
+  Conversely, assume $\Box!A \in w$, and let $w'$ be an arbitrary
+  world in $W^\Sigma$ such that $R^\Sigma ww'$. By definition of
+  $R^\Sigma$, we have $\{ !B : \Box!B \in w\} \subseteq w'$, which
+  immediately gives $!A \in w'$. By induction hypothesis,
+  $\mSat{M^\Sigma}{!A}[w']$, and since $w'$ was arbitrary,
+  $\mSat{M^\Sigma}{\Box!A}[w]$.
+\end{proof}
+
+\end{document}

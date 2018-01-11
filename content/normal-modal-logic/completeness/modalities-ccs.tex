@@ -1,0 +1,126 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: modalities-ccs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{mod}
+
+\olsection{Modalities and Complete Consistent Sets}
+  
+When we construct a model whose set of worlds is given by the complete
+consistent sets in some normal modal logic $\Sigma$, we will also need
+to define an accessibility relation between such ``worlds.'' The next
+few lemmas give us the tools to do so. As noted, $\Sigma$ will be a
+normal modal logic throughout.
+
+\begin{lem}\ollabel{lem:Gamma-proves1}
+  If $\Gamma \Proves[\Sigma] !A$ then $\Setabs{\Box !B}{!B \in
+  \Gamma} \Proves[\Sigma] \Box !A$.
+\end{lem}
+
+\begin{proof}
+  If $\Gamma \Proves[\Sigma] !A$ then there are $!B_1$, \dots, $!B_k
+  \in \Gamma$ such that $\Sigma \Proves !B_1 \lif (!B_2 \lif \cdots
+  (!B_n \lif !A)\cdots)$. Since $\Sigma$ is normal, by rule \RK{},
+  $\Sigma \Proves \Box!B_1 \lif (\Box!B_2 \lif \cdots (\Box!B_n \lif
+  \Box!A)\cdots)$, where obviously $\Box!B_1$, \dots, $\Box!B_k \in
+  \Setabs{\Box!B}{!B \in\Gamma}$. Hence, by definition, $\Setabs{\Box
+      !B}{!B \in \Gamma} \Proves[\Sigma] \Box !A$.
+\end{proof}
+
+\begin{lem}\ollabel{lem:Gamma-proves2}
+  If $\Setabs{!B}{\Box !B \in \Gamma} \Proves[\Sigma] !A$ then
+  $\Gamma \Proves[\Sigma] \Box!A$.
+\end{lem}
+
+\begin{proof}
+  Let $\Delta = \Setabs{!B}{\Box !B \in \Gamma}$, so that $\Delta
+  \Proves[\Sigma] !A$; then by \olref{lem:Gamma-proves1},
+  $\Setabs{\Box !B}{!B \in \Delta} \Proves \Box!A$. But obviously
+  $\Setabs{\Box !B}{!B \in \Delta} \subseteq \Gamma$, so also $\Gamma
+  \Proves[\Sigma] \Box!A$ by Monotony.
+\end{proof}
+
+\begin{thm}\ollabel{thm:box-phiGamma}
+  If $\Gamma$ is complete $\Sigma$-consistent, then $\Box !A \in
+  \Gamma$ if and only if for every complete $\Sigma$-consistent
+  $\Delta$ such that $\Setabs{!B}{\Box !B \in \Gamma} \subseteq
+  \Delta$, it holds that $!A \in \Delta$.
+\end{thm}
+
+\begin{proof}
+  The left-to-right half of the theorem is obvious. For the converse,
+  suppose $\Box!A \notin \Gamma$. Since $\Gamma$ is deductively
+  closed, $\Gamma \Proves/[\Sigma] \Box !A$, and by
+  \olref{lem:Gamma-proves2} $\{ !B : \Box!B \in \Gamma\}
+  \Proves/[\Sigma] !A$. By
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b},
+  $\Setabs{!B}{\Box!B \in \Gamma} \cup \{ \lnot!A \}$ is
+  $\Sigma$-consistent, so that by Lindenbaum's Lemma there is a
+  complete $\Sigma$-consistent set~$\Delta$ such that
+  $\Setabs{!B}{\Box!B \in \Gamma} \cup \{ \lnot!A \} \subseteq
+  \Delta$. By consistency, $!A \notin \Delta$, and the theorem is
+  proved.
+\end{proof}
+
+\begin{lem}\ollabel{lem:Gamma-proves3}
+  Suppose $\Gamma$ and $\Delta$ are complete
+  $\Sigma$-consistent. Then: $\Setabs{!A}{\Box!A \in \Gamma}
+    \subseteq \Delta$ if and only if $\Setabs{\Diamond!A}{!A \in
+      \Delta} \subseteq \Gamma$.
+\end{lem}
+
+\begin{proof}
+  ``Only if'' direction: Assume $\Setabs{!A}{\Box!A \in \Gamma}
+  \subseteq \Delta$ and suppose $!A \in \Delta$.  In order to
+  show $\Diamond!A \in \Gamma$ it suffices to show $\Box\lnot!A
+  \notin \Gamma$ for then by maximality $\lnot\Box\lnot !A \in
+  \Gamma$. Now, if $\Box\lnot!A \in \Gamma$ then by hypothesis
+  $\lnot!A \in \Delta$, against the consistency of $\Delta$
+  (since $!A \in \Delta$). Hence  $\Box\lnot!A \notin
+  \Gamma$, as required.
+
+  ``If'' direction: Assume $\Setabs{\Diamond!A}{!A \in \Delta}
+  \subseteq \Gamma$. We argue contrapositively: suppose $!A
+  \notin \Delta$ in order to show $\Box!A \notin \Gamma$. If
+  $!A \notin \Delta$ then by maximality $\lnot!A \in \Delta$
+  and so by hypothesis $\Diamond\lnot!A \in\Gamma$. But in a
+  normal modal logic $\Diamond\lnot!A$ is equivalent to
+  $\lnot\Box !A$, and if the latter is in $\Gamma$ by consistency
+  $\Box!A \notin\Gamma$, as required.
+\end{proof}
+
+\begin{cor}
+  If $\Gamma$ is complete $\Sigma$-consistent, then $\Diamond !A \in
+  \Gamma$ if and only if for some complete $\Sigma$-consistent
+  $\Delta$ such that $\Setabs{\Diamond!B}{!B \in \Delta} \subseteq
+  \Gamma$, it holds that $!A \in \Delta$.
+\end{cor}
+
+\begin{proof}
+Suppose $\Gamma$ is complete $\Sigma$-consistent, and argue as
+follows:
+\begin{align*}
+  \Diamond!A \in \Gamma & \quad \Leftrightarrow\quad \lnot\Box\lnot !A \in
+  \Gamma, && \text{re-writing}; \\
+  & \quad \Leftrightarrow\quad \Box\lnot!A \notin \Gamma, && \Gamma
+  \text{ is complete $\Sigma$-consistent}; \\ 
+  & \quad \Leftrightarrow\quad \exists\Delta \left[ \Delta \text{ is
+    complete $\Sigma$-consistent} {} \land {\,} \{ !B : \Box !B \in \Gamma \}
+  \subseteq \Delta  {} \land {\,} \lnot!A \notin\Delta\right], &&
+   \text{\olref{thm:box-phiGamma}}; \\
+ & \quad \Leftrightarrow\quad \exists\Delta \left[ \Delta \text{ is
+    complete $\Sigma$-consistent} {} \land {\,} \{\Diamond !B : !B \in \Delta \}
+  \subseteq \Gamma  {} \land {\,} \lnot!A \notin\Delta\right], && 
+   \text{\olref{lem:Gamma-proves3}}; \\
+& \quad \Leftrightarrow\quad \exists\Delta \left[ \Delta \text{ is
+    complete $\Sigma$-consistent} {} \land {\,} \{\Diamond !B : !B \in \Delta \}
+  \subseteq \Gamma  {} \land {\,} !A \in\Delta\right], && \Delta
+\text{ is complete}. \qedhere  
+\end{align*}
+\end{proof}
+
+\end{document}

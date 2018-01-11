@@ -1,0 +1,27 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: entailment
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{ent}
+
+\olsection{Entailment}
+
+\begin{defn}
+  If $\Gamma$ is a set of !!{formula}s and $!A$ !!a{formula}, then
+  $\Gamma$ \emph{entails} $!A$---in symbols: $\Gamma \Entails !A$---if
+  and only if for every model $\mModel{M} = (W, R, V)$ and world $w \in W$, if
+  $\mSat{M}{!B}[w]$ for every $!B \in \Gamma$, then
+  $\mSat{M}{!A}[w]$. If $\Gamma$ contains a single !!{formula} $!B$,
+  then we write $!B \Entails !A$.
+\end{defn}
+
+\begin{prob}
+  Show that $\Box (p \lif q) \Entails/ p \lif \Box q$ and $p \lif \Box
+  q \Entails/\Box (p \lif q)$.
+\end{prob}
+
+\end{document}

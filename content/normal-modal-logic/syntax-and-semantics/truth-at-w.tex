@@ -1,0 +1,71 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: truth-at-w
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{trw}
+
+\olsection{Truth at a World}
+
+\begin{defn}\ollabel{defn:mmodels}
+  \emph{Truth of !!a{formula}~$!A$ at~$w$} in a~$\mModel M$,
+  $\mSat{M}{!A}[w]$, is defined inductively as follows:
+  \begin{enumerate}
+  \item $\mSat{M}{p}[w]$ iff $w \in V(p)$
+  \item $\mSat{M}{\ltrue}[w]$
+  \item $\mSat/{M}{\lfalse}[w]$
+  \item $\mSat{M}{\lnot !B}[w]$ iff $\mSat/{M}{!B}[w]$
+  \item $\mSat{M}{!A \land !B}[w]$ iff $\mSat{M}{!A}[w]$ and
+    $\mSat{M}{!B}[w]$
+  \item $\mSat{M}{!A \lor !B}[w]$ iff $\mSat{M}{!A}[w]$ or
+    $\mSat{M}{!B}[w]$ (or both)
+  \item $\mSat{M}{!A \lif !B}[w]$ iff $\mSat/{M}{!A}[w]$ or
+    $\mSat{M}{!B}[w]$
+  \item\ollabel{defn:sub:mmodels-box} $\mSat{M}{\Box !A}[w]$ iff
+    $\mSat{M}{!A}[w']$ for all $w' \in W$ with $wRw'$
+  \end{enumerate} 
+\end{defn}
+
+Note that by clause~\olref{defn:sub:mmodels-box}, !!a{formula}~$\Box
+!B$ is satisfied at~$w$ whenever there are no~$w'$ with $wRw'$. In
+such a case $\Box !B$ is \emph{vacuously} satisfied at~$w$. Also,
+$\Box !B$ may be satisifed at~$w$ even if $!B$ is not, and the truth
+of~$!B$ at~$w$ does not guarantee the truth of~$\Diamond !B$
+there---this holds if $wRw$, e.g., if $R$ is reflexive.
+
+\begin{prob}
+  Consider the model of \olref[mod][syn][rel]{fig:simple}. Which of the
+  following hold?
+    \begin{enumerate}
+    \item $\mSat{M}{q}[w_1]$;
+    \item $\mSat{M}{\lnot q}[w_3]$;
+    \item $\mSat{M}{p \lor q}[w_1]$;
+    \item $\mSat{M}{\Box (p \lor q)}[w_1]$;
+    \item $\mSat{M}{\Box q}[w_3]$;
+    \item $\mSat{M}{\Box \bot}[w_3]$;
+    \item $\mSat{M}{\Diamond q}[w_1]$;
+    \item $\mSat{M}{\Box q}[w_1]$;
+    \item $\mSat{M}{\lnot \Box\Box \lnot q}[w_1]$. 
+    \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model, and suppose $u, v \in
+  W$ are such that:
+  \begin{enumerate}
+  \item $u \in V(p)$ if and only if $v \in V(p)$; and
+  \item for all $w \in W$: $Ruw$ if and only if $Rvw$.
+  \end{enumerate}
+  Using induction on !!{formula}s, show that for all !!{formula}s $!A$:
+  $\mSat{M}{!A}[u]$ if and only if $\mSat{M}{!A}[v]$.
+\end{prob}
+
+\begin{prob}
+  Let $\mModel{M} = \tuple{M, R, V}$. Show that $\mSat{M}{\Diamond !A}[w]$ if
+  and only if, for some $w'$ with $Rww'$, $\mSat{M}{!A\bigr]}[w']$.
+\end{prob}
+
+\end{document}

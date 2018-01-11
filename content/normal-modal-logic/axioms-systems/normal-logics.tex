@@ -1,0 +1,62 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: normal-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{nor}
+
+\olsection{Normal Modal Logics}
+
+\begin{defn}
+  A modal logic $\Sigma$ is \emph{normal} if it is closed under the
+  rule~\RK:
+  \begin{prooftree}
+    \AxiomC{$!A_1 \lif (!A_2 \lif \cdots (!A_{n-1} \lif !A_n)\cdots)$}
+    \RightLabel{\RK}
+    \UnaryInfC{$\Box!A_1 \lif (\Box!A_2 \lif \cdots (\Box!A_{n-1}
+      \lif \Box!A_n)\cdots)$}
+  \end{prooftree}
+\end{defn}
+
+Observe that while tautological implication is ``fine-grained'' enough
+to preserve \emph{truth at a world}, the rule \RK{} only preserves
+\emph{truth in a model} (and hence also validity in a frame or in a
+class of frames).
+
+\begin{prop}
+  Every normal modal logic $\Sigma$ is closed under the rule of
+  \emph{Necessitation}: 
+  \begin{prooftree}
+    \AxiomC{$!A$}
+    \RightLabel{\Nec}
+    \UnaryInfC{$\Box!A$}
+  \end{prooftree}
+\end{prop}
+
+\begin{proof}
+  \Nec{} is just the special case of \RK{} when $n=1$.
+\end{proof}
+
+\begin{prop}
+  Every normal modal logic $\Sigma$ contains every instance of~\Ax{K}.
+\end{prop}
+
+\begin{proof}
+  In fact, \Ax{K} follows from rule \RK{}: $(!A \lif !B) \lif
+  (!A \lif !B)$ is in $\Sigma$ since it is a tautological
+  instance; one application of \RK{} gives that $\Box(!A \lif !B) \lif
+  (\Box!A \lif \Box!B)$ is in $\Sigma$ as well.
+\end{proof}
+
+\begin{prop}\ollabel{prop:notDiamondBot}
+  Every normal modal logic $\Sigma$ contains~$\lnot\Diamond\lfalse$.
+\end{prop}
+
+\begin{prob}
+  Prove \olref[mod][prf][nor]{prop:notDiamondBot}.
+\end{prob}
+
+\end{document}

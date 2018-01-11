@@ -1,0 +1,171 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: frame-correspondence
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{cor}
+
+\olsection{Frame Correspondence}
+
+Even though the converse implications of \olref[acc]{thm:soundschemas}
+fail, they hold if we replace ``model'' by ``frame'': for the
+properties considered in \olref[acc]{thm:soundschemas}, it \emph{is} true
+that if a schema is valid in a \emph{frame} then the accessibility
+relation of that frame has the corresponding property. In fact, even
+more is true in the case of~\Ax{D}.
+
+\begin{ex}\ollabel{ex:D.complete.for.models}
+  Any model where schema \Ax{D} is true is serial.
+\end{ex}
+
+\begin{prob}
+  Prove \olref[mod][syn][cor]{ex:D.complete.for.models} (Hint:
+  take $!A = \lnot\lfalse$).
+\end{prob}
+
+Although we will focus on the five classical schemas \Ax{D}, \Ax{T},
+\Ax{B}, \Ax{4}, and \Ax{5}, we record in \olref{fig:anotherfive} a few
+more correspondences.
+
+\begin{figure}[t]
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{If $R$ is \dots}} & {\emph{\dots the following schema
+          is true in
+          $\mModel{M}$:}} \\
+      \hline \hline
+      \emph{partially functional}: & 
+      \multirow{2}{*}{$\Diamond !A \lif \Box  !A$;} \\
+      $ \forall w \forall u \forall v (Rwu \land Rwv  \Rightarrow u =v )$ & \\
+      \hline
+      \multirow{2}{*}{\emph{functional}: $\forall u \exists! v Ruv$} 
+      & \multirow{2}{*}{$\Diamond !A \liff \Box !A$;} \\
+      & \\
+      \hline
+      \emph{weakly dense}: &  \multirow{2}{*}{$\Box \Box !A \lif
+        \Box!A$;} \\
+      $\forall u\forall v(Ruv \Rightarrow \exists w(Ruw \land Rwv))$ & \\
+      \hline
+      \emph{weakly connected}: & \multirow{2}{*}{\Ax{L}: $\Box ((!A \land \Box!A) \lif
+        !B) \lor \Box ((!B \land \Box!B) \lif!A)$; } \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \Rightarrow (Ruv
+      \lor u=v \lor Rvu))$ & \\
+      \hline 
+      \emph{weakly directed}: & \multirow{2}{*}{\Ax{G}: $\Diamond\Box !A \lif
+        \Box\Diamond !A $;} \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \Rightarrow
+      \exists t (Rut \land Rvt)$ & \\
+      \hline
+    \end{tabular}
+    \caption{Five more correspondence facts.}\ollabel{fig:anotherfive}
+  \end{figure} 
+
+\begin{prob}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model. Show that if $R$
+  satisfies the left-hand properties of
+  \olref[mod][syn][cor]{fig:anotherfive}, the corresponding
+  right-hand schemas are true in~$\mModel{M}$.
+\end{prob}
+
+We now proceed to establish the full correspondence results for
+frames. We will consider \Ax{T}, \Ax{B}, \Ax{4} and \Ax{5}, as the case
+for \Ax{D} already follows from \olref{ex:D.complete.for.models}.
+
+\begin{thm}\ollabel{thm:fullCorrespondence}
+  Recall that a schema \Ax{S} is valid in a frame  if each of
+  its instances is true in every model based on that frame. Then:
+  \begin{enumerate}
+  \item If \Ax{T} is valid in a frame $\mModel{F}$, then
+    $\mModel{F}$ is reflexive.
+  \item If \Ax{B} is valid in a frame $\mModel{F}$, then
+    $\mModel{F}$ is symmetric.
+  \item If \Ax{4} is valid in a frame $\mModel{F}$, then
+    $\mModel{F}$ is transitive.
+  \item If \Ax{5} is valid in a frame $\mModel{F}$, then
+    $\mModel{F}$ is euclidean.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  The strategy is to devise, for each frame $\mModel{F}$, a valuation
+  that will ensure that the frame has the desired property (provided
+  the corresponding schema is true).
+  \begin{enumerate}
+  \item Suppose \Ax{T} is valid in $\mModel{F} =\tuple{W, R}$, let $w \in W$ be
+    an arbitrary world; we need to show $Rww$. Fix a propositional
+    variable $p$ and let $u \in V(p)$ if and only if $Rwu$ (when $q$
+    is other than $p$, $V(q)$ is arbitrary, say $V(q) =
+    \emptyset)$. Let $\mModel{M}=\tuple{W, R, V}$. By construction,
+    for all $u$ such that $Rwu$: $\mSat{M}{p}[u]$, and hence
+    $\mSat{M}{\Box p}[w]$. But by hypothesis $\Box p \lif p$, an
+    instance of \Ax{T}, is true at~$w$, so that $\mSat{M}{p}[w]$, but
+    by definition of $V$ this is possible only if $Rww$.
+  \item Suppose \Ax{B} is valid in $\mModel{F}= \tuple{W,R}$, and let
+    $u,v \in W$ be arbitrary worlds such that $Ruv$; we need to show
+    that $Rvu$. Fix a propositional variable $p$, define $V$ such that
+    $w \in V(p)$ if and only if $Rvw$ (and $V$ is arbitrary
+    otherwise). Let $\mModel{M} =\tuple{W, R, V}$. Notice that the
+    following instance of \Ax{B}: $\lnot p \lif \Box\Diamond \lnot p$,
+    is equivalent to $\Diamond \Box p \lif p$. Now, by definition of
+    $V$, $\mSat{M}{p}[w]$ for all $w$ such that $Rvw$, and hence
+    $\mSat{M}{\Box p}[v]$. Since $Ruv$, also $\mSat{M}{\Diamond\Box
+      p}[u]$, and since \Ax{B} is valid in $\mModel{F}$, also
+    $\mSat{M}{\Diamond\Box p \lif p}[u]$. It follows that
+    $\mSat{M}{p}[u]$, whence $Rvu$, as required.
+  \item Suppose \Ax{4} is valid in $\mModel{F} = \tuple{W,R}$, and let
+    $u,v,w \in W$ be arbitrary worlds such that $Ruv$ and $Rvw$; we
+    need to show that $Ruw$. Fix a propositional variable $p$, define
+    $V$ such that $z \in V(p)$ if and only if $Ruz$ (and $V$ is
+    arbitrary otherwise). Let $\mModel{M} =\tuple{W, R, V}$. By
+    definition of $V$, $\mSat{M}{p}[z]$ for all $z$ such that $Ruz$,
+    and hence $\mSat{M}{\Box p}[u]$. But by hypothesis $\Box p \lif
+    \Box \Box p$, an instance of \Ax{4}, is true at $u$, so that
+    $\mSat{M}{\Box \Box p}[u]$. Since $Ruv$ and $Rvw$, we have
+    $\mSat{M}{p}[w]$, but by definition of $V$ this is possible only
+    if $Ruw$, as desired.
+  \item We proceed contrapositively, assuming that the frame
+    $\mModel{F} = \tuple{W, R}$ is not euclidean, and falsifying an
+    instance of \Ax{5}. Suppose there are worlds $u, v, w$ such that
+    $Rwu$ and $Rwv$ but not $Ruv$. Fix a propositional variable $p$
+    and define $V$ such that for all worlds $z$, $z \in V(p)$ if and
+    only if it is \emph{not} the case that $Ruz$. Let $\mModel{M}
+    =\tuple{W, R, V}$. Then by hypothesis $\mSat{M}{p}[v]$ and since
+    $Rwv$ also $\mSat{M}{\Diamond p}[w]$. However, there is no world
+    $y$ such that $Ruy$ and $\mSat{M}{p}[y]$ so $\mSat{M}{\lnot
+      \Diamond p}[u]$. Since $Rwu$, it follows that
+    $\mSat/{M}{\Box\Diamond p}[w]$, so that the instance of \Ax{5},
+    $\Diamond p \lif \Box\Diamond p$ fails at $w$.
+  \end{enumerate}
+\end{proof}
+
+\olref{thm:fullCorrespondence} also shows that the properties can be
+combined: for instance if both \Ax{B} and \Ax{4} are valid in
+$\mModel{F}$ then the frame is both symmetric and transitive,
+etc. This is useful because the classical systems \Log{S4} and
+\Log{S5} are, in fact, just the systems characterized as \Log{KT4} and
+\Log{KTB4}.
+  
+We now record some properties of accessibility relations (in fact,
+these notions apply to arbitrary binary relations).
+
+\begin{prop}\ollabel{prop:relation-facts}
+  Let $R$ be a binary relation on a set $W$; then:
+  \begin{enumerate}
+  \item If $R$ is reflexive, then it is serial.
+  \item If $R$ is symmetric, then it is transitive if and only if it
+    is euclidean.
+  \item If $R$ is symmetric or euclidean then it is weakly directed
+    (it has the ``diamond property'').
+  \item If $R$ is euclidean then it is weakly connected.
+  \item If $R$ is functional then it is serial.  
+  \end{enumerate}
+\end{prop}
+
+\begin{prob}
+  Prove \olref[mod][syn][cor]{prop:relation-facts}.
+\end{prob}
+
+\end{document}
