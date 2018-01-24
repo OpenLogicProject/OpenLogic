@@ -10,31 +10,47 @@
 
 \olsection{Truth at a World}
 
+Every modal model determines which modal !!{formula}s count as true at
+which worlds in it. The relation ``model $\mModel{M}$ makes
+!!{formula}~$!A$ true at world~$w$'' is the basic notion of relational
+semantics. The relation is defined inductively and coincides with the
+usual characterization using truth tables for the non-modal operators.
+
 \begin{defn}\ollabel{defn:mmodels}
-  \emph{Truth of !!a{formula}~$!A$ at~$w$} in a~$\mModel M$,
+  \emph{Truth of !!a{formula}~$!A$ at~$w$} in a~$\mModel M$, in symbols:
   $\mSat{M}{!A}[w]$, is defined inductively as follows:
   \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{Never $\mSat{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Always $\mSat{M}{\ltrue}[w]$}.}{}
   \item $\mSat{M}{p}[w]$ iff $w \in V(p)$
-  \item $\mSat{M}{\ltrue}[w]$
-  \item $\mSat/{M}{\lfalse}[w]$
-  \item $\mSat{M}{\lnot !B}[w]$ iff $\mSat/{M}{!B}[w]$
-  \item $\mSat{M}{!A \land !B}[w]$ iff $\mSat{M}{!A}[w]$ and
-    $\mSat{M}{!B}[w]$
-  \item $\mSat{M}{!A \lor !B}[w]$ iff $\mSat{M}{!A}[w]$ or
-    $\mSat{M}{!B}[w]$ (or both)
-  \item $\mSat{M}{!A \lif !B}[w]$ iff $\mSat/{M}{!A}[w]$ or
-    $\mSat{M}{!B}[w]$
-  \item\ollabel{defn:sub:mmodels-box} $\mSat{M}{\Box !A}[w]$ iff
-    $\mSat{M}{!A}[w']$ for all $w' \in W$ with $wRw'$
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat/{M}{!B}[w]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ or $\mSat{M}{!C}[w]$} (or both).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat/{M}{!B}[w]$ or $\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    either both $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$ or
+    neither $\mSat{M}{!B}[w]$ nor $\mSat{M}{!C}[w]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Box !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w']$ for all $w' \in W$ with $Rww'$}
+  \item\ollabel{defn:sub:mmodels-diamond}
+    \indcase{!A}{\Diamond !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w']$ for at least one $w' \in W$ with $Rww'$}
   \end{enumerate} 
 \end{defn}
 
 Note that by clause~\olref{defn:sub:mmodels-box}, !!a{formula}~$\Box
-!B$ is satisfied at~$w$ whenever there are no~$w'$ with $wRw'$. In
-such a case $\Box !B$ is \emph{vacuously} satisfied at~$w$. Also,
-$\Box !B$ may be satisifed at~$w$ even if $!B$ is not, and the truth
+!B$ is true at~$w$ whenever there are no~$w'$ with $wRw'$. In
+such a case $\Box !B$ is \emph{vacuously} true at~$w$. Also,
+$\Box !B$ may be satisfied at~$w$ even if $!B$ is not. The truth
 of~$!B$ at~$w$ does not guarantee the truth of~$\Diamond !B$
-there---this holds if $wRw$, e.g., if $R$ is reflexive.
+at~$w$. This holds, however, if $Rww$, e.g., if $R$ is reflexive.  If
+there is no $w'$ such that $Rww'$, then $\mSat/{M}{\Diamond !A}[w]$,
+for any~$!A$.
 
 \begin{prob}
   Consider the model of \olref[mod][syn][rel]{fig:simple}. Which of the
@@ -52,20 +68,56 @@ there---this holds if $wRw$, e.g., if $R$ is reflexive.
     \end{enumerate}
 \end{prob}
 
-\begin{prob}
-  Let $\mModel{M} = \tuple{W, R, V}$ be a model, and suppose $u, v \in
-  W$ are such that:
+\begin<prvDiamond>{prop}\ollabel{prop:dual}
   \begin{enumerate}
-  \item $u \in V(p)$ if and only if $v \in V(p)$; and
-  \item for all $w \in W$: $Ruw$ if and only if $Rvw$.
+  \item $\mSat{M}{\Box !A}[w]$ iff $\mSat{M}{\lnot\Diamond\lnot !A}[w]$.
+  \item $\mSat{M}{\Diamond !A}[w]$ iff $\mSat{M}{\lnot\Box\lnot !A}[w]$.
   \end{enumerate}
-  Using induction on !!{formula}s, show that for all !!{formula}s $!A$:
-  $\mSat{M}{!A}[u]$ if and only if $\mSat{M}{!A}[v]$.
-\end{prob}
+\end{prop}
+
+\begin<prvDiamond>{proof}
+  \begin{enumerate}
+    \item $\mSat{M}{\lnot\Diamond\lnot !A}[w]$ iff $\mSat/{M}{\Diamond\lnot
+      !A}$ by definition of $\mSat{M}{}[w]$. $\mSat{M}{\Diamond\lnot
+      !A}[w]$ iff for some $w'$ with $Rww'$, $\mSat{M}{\lnot
+      !A}[w']$. Hence, $\mSat/{M}{\Diamond\lnot !A}[w]$ iff for all
+    $w'$ with $Rww'$, $\mSat/{M}{\lnot !A}[w']$. We also have
+    $\mSat/{M}{\lnot !A}[w']$ iff $\mSat{M}{!A}[w']$. Together we have
+    $\mSat{M}{\lnot\Diamond\lnot !A}[w]$ iff for all $w'$ with $Rww'$,
+    $\mSat{M}{!A}[w']$. Again by definition of $\mSat{M}{}[w]$, that
+      is the case iff $\mSat{M}{\Box !A}[w]$.
+    \item \iftag{probDiamond}{Exercise.}{$\mSat{M}{\lnot\Box\lnot !A}[w]$ iff
+      $\mSat/{M}{\Box\lnot !A}$. $\mSat{M}{\Box\lnot !A}[w]$ iff for all
+      $w'$ with $Rww'$, $\mSat{M}{\lnot !A}[w']$. Hence,
+      $\mSat/{M}{\Box\lnot !A}[w]$ iff for some $w'$ with $Rww'$,
+      $\mSat/{M}{\lnot !A}[w']$. We also have $\mSat/{M}{\lnot
+        !A}[w']$ iff $\mSat{M}{!A}[w']$. Together we have
+      $\mSat{M}{\lnot\Box\lnot !A}[w]$ iff for some~$w'$ with
+      $Rww'$, $\mSat{M}{!A}[w']$. Again by definition of
+      $\mSat{M}{}[w]$, that is the case iff $\mSat{M}{\Diamond
+        !A}[w]$.}
+  \end{enumerate}
+\end{proof}
+
+\begin{probtag}{probDiamond}
+  Complete the proof of \olref[mod][syn][trw]{prop:dual}.
+\end{probtag}
 
 \begin{prob}
-  Let $\mModel{M} = \tuple{M, R, V}$. Show that $\mSat{M}{\Diamond !A}[w]$ if
-  and only if, for some $w'$ with $Rww'$, $\mSat{M}{!A\bigr]}[w']$.
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model, and suppose $w_1, w_2 \in
+  W$ are such that:
+  \begin{enumerate}
+  \item $w_1 \in V(p)$ if and only if $w_2 \in V(p)$; and
+  \item for all $w \in W$: $Rw_1w$ if and only if $Rw_2w$.
+  \end{enumerate}
+  Using induction on !!{formula}s, show that for all !!{formula}s $!A$:
+  $\mSat{M}{!A}[w_1]$ if and only if $\mSat{M}{!A}[w_2]$.
 \end{prob}
+
+\begin{probtag}{prvDiamond}
+  Let $\mModel{M} = \tuple{M, R, V}$. Show that
+  $\mSat{M}{\lnot\Diamond !A}[w]$ if and only if
+  $\mSat{M}{\Box\lnot!A}[w]$.
+\end{probtag}
 
 \end{document}

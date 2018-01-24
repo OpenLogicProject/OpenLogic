@@ -10,16 +10,30 @@
 
 \olsection{Tautological Instances}
 
+\begin{explain}
+A modal-free formula is a tautology if it is true under every
+truth-value assignment. Clearly, every tautology is true at every
+world in every model. But for !!{formula}s involving $\Box$
+and~$\Diamond$, the notion of tautology is not defined. Is it the
+case, e.g., that $\Box p \lor \lnot \Box p$---an instance of the
+principle of excluded middle---is valid? The notion of a
+\emph{tautological instance} helps: !!a{formula} that is a
+substitution instance of a (non-modal) tautology. It is not
+surprising, but still requires proof, that every tautological instance
+is valid.
+\end{explain}
+
 \begin{defn}
   A modal !!{formula} $!B$ is a \emph{tautological instance} if and
-  only if there is a modal-free tautology~$!A$ and !!{formula}s
-  $!D_1$, \dots, $!D_n$ such that $!B = \Subst{!A}{\subst{!D_1}{p_1},
+  only if there is a modal-free tautology~$!A$ with !!{propositional
+    variable}s $p_1$, \dots,~$p_n$ and !!{formula}s $!D_1$,
+  \dots,~$!D_n$ such that $!B \ident \SSubst{!A}{\subst{!D_1}{p_1},
     \dots, \subst{!D_n}{p_n}}$.
 \end{defn}
 
 \begin{lem}\ollabel{lem:valid-taut}
-  Suppose $!A$ is a modal-free !!{formula} all of whose propositional
-  variables are among $p_1$, \dots, $p_n$, and let $!D_1$, \dots,
+  Suppose $!A$ is a modal-free !!{formula} whose propositional
+  variables are $p_1$, \dots, $p_n$, and let $!D_1$, \dots,
   $!D_n$ be modal !!{formula}s. Then for any assignment $\pAssign{v}$,
   any model $\mModel{M} = \tuple{W, R, V}$, and any $w \in W$ such
   that $v(p_i) = \True$ if and only if $\mSat{M}{!D_i}[w]$ we have
@@ -31,39 +45,105 @@
 \begin{proof}
   By induction on $!A$.
   \begin{enumerate}
-    \item $!A$ is atomic: then by the hypothesis it must be some
-      $p_i$, whence:
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{Both $\pSat/{v}{\lfalse}$
+      and $\mSat/{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Both $\pSat{v}{\ltrue}$
+      and $\mSat{M}{\ltrue}[w]$}.}{}
+  \item \indcase{!A}{p_i}{%
+    \begin{align*}
+      \pSat{v}{p_i} \Leftrightarrow {} & v(p_i) = \True &&
+      \text{by definition of $\pSat{v}{p_i}$};\\
+      \Leftrightarrow {} & \mSat{M}{!D_i}[w] && \text{by assumption}\\
+      \Leftrightarrow {} & \mSat{M}{\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]
+      && \text{since $\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}} \ident !D_i$}.
+      \end{align*}}
+  \tagitem{prvFalse}{\indcase{!A}{\lnot !B}{%
       \begin{align*}
-        \pSat{v}{p_i} \Leftrightarrow v(p_i) = \True 
-        & \Leftrightarrow \mSat{M}{!D_i}[w] \\
-        & \Leftrightarrow \mSat{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w].
-      \end{align*}
-    \item $!A \ident \lnot !B$:
+        \pSat{v}{\lnot !B} \Leftrightarrow & \pSat/{v}{!B}
+        && \text{by definition of $\pSat{v}{}$};\\
+        \Leftrightarrow {} & \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w] && \text{by induction hypothesis};\\
+        \Leftrightarrow {} &
+        \mSat{M}{\SSubst{\lnot !B}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]
+        && \text{by definition of $\pSat{v}{}$}.
+      \end{align*}}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{%
       \begin{align*}
-        \pSat{v}{\lnot !B} & \Leftrightarrow 
-        \pSat/{v}{!B}
-        && \text{by definition of $\pSat{v}{\lnot !B}$};\\
-        & \Leftrightarrow  \mSat/{M}{!B}[w] && \text{by induction hypothesis};\\
-        & \Leftrightarrow  \mSat{M}{\lnot !B}[w]
-        && \text{by definition of $\pSat{v}{\lnot !B}$}.
-      \end{align*}
-    \item $!A \ident !B \lif !C$:
-      \begin{align*}
-        \pSat{v}{!B \lif !C} & \Leftrightarrow
-        \pSat/{v}{!B} \text{ or } \pSat{v}{!C}
-        && \text{by definition of $\pSat{v}{!B \lif !C}$};\\
-        & \Leftrightarrow \mSat/{M}{!B}[w] \text{ or } \mSat{M}{!C}[w],
+        \pSat{v}{!B \land !C} \Leftrightarrow {} &
+        \pSat{v}{!B} \text{ and } \pSat{v}{!C}
+        && \text{by definition of $\pSat{v}{}$};\\
+        \Leftrightarrow {} &
+        \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ and } \\
+        & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w],
         && \text{by induction hypothesis}; \\
-        & \Leftrightarrow \mSat{M}{!B \lif !C}[w]
-        && \text{by definition of $\mSat{M}{!B \lif !C}[w]$}.\qedhere
-      \end{align*}
+        \Leftrightarrow{} &
+        \mSat{M}{\SSubst{(!B \land !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]
+        && \text{by definition of $\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \lor !C} \Leftrightarrow{} &
+        \pSat{v}{!B} \text{ or } \pSat{v}{!C}
+        && \text{by definition of $\pSat{v}{}$};\\
+        \Leftrightarrow{} & \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ or }\\
+        & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w],
+        && \text{by induction hypothesis}; \\
+        \Leftrightarrow{} &
+        \mSat{M}{\SSubst{(!B \lor !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]
+        && \text{by definition of $\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \lif !C} \Leftrightarrow{} &
+        \pSat/{v}{!B} \text{ or } \pSat{v}{!C}
+        && \text{by definition of $\pSat{v}{}$};\\
+        \Leftrightarrow{} &
+        \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ or }\\
+        & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w],
+        && \text{by induction hypothesis}; \\
+        \Leftrightarrow{} &
+        \mSat{M}{\SSubst{(!B \lif !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]
+        && \text{by definition of $\mSat{M}{}[w]$}.
+      \end{align*}}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{%
+      \begin{align*}
+        \pSat{v}{!B \lif !C} \Leftrightarrow {} &
+        \text{either } \pSat{v}{!B} \text{ and } \pSat{v}{!C}\\
+        & \text{or } \pSat/{v}{!B} \text{ and } \pSat/{v}{!C}
+        && \text{by definition of $\pSat{v}{}$};\\
+        \Leftrightarrow {} &
+        \text{either } \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ and }\\
+        & \qquad \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+        & \text{or } \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+            \subst{!D_n}{p_n}}}[w] \text{ and }\\
+        & \qquad \mSat/{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w],
+        && \text{by induction hypothesis}; \\
+        \Leftrightarrow {} &
+        \mSat{M}{\SSubst{(!B \liff !C)}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]
+        && \text{by definition of $\mSat{M}{}[w]$}.
+      \end{align*}}}{}
   \end{enumerate}
   \end{proof}
 
-\begin{thm}\ollabel{thm:valid-taut}
+\begin{prop}\ollabel{prop:valid-taut}
   All tautological instances are valid.
-\end{thm}
+\end{prop}
 
 \begin{proof}
   Contrapositively, suppose $!A$ is such that

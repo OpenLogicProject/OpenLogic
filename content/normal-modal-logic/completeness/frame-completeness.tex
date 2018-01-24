@@ -165,32 +165,35 @@ symmetric and transitive models.
     (!B_1 \land \dots \land !B_m) \to (\Diamond!B_1 \land \dots \land
     \Diamond!B_m)$ is !!{derivable} in every normal modal logic, we
     argue as follows, contradicting the consistency of~$v$:
-    \begin{align*}
+    \begin{multline*}
       !A_1, \dots, !A_n, \Diamond!B_1, \dots,
-      \Diamond!B_m\Proves[\Sigma] \lfalse & \quad \Rightarrow\quad
+      \Diamond!B_m\Proves[\Sigma] \lfalse \\
+    \begin{aligned}
+      & \Rightarrow
       !A_1, \dots,!A_n \Proves[\Sigma] (\Diamond!B_1 \land
       \dots \land \Diamond!B_m) \lif \lfalse,
       && \text{deduction theorem;} \\
-      & \quad \Rightarrow\quad !A_1, \dots,!A_n \Proves[\Sigma]
+      & \Rightarrow !A_1, \dots,!A_n \Proves[\Sigma]
       \Diamond(!B_1 \land
       \dots \land !B_m) \lif \lfalse, && \Sigma \text{ is normal}; \\
-      & \quad \Rightarrow\quad !A_1, \dots,!A_n \Proves[\Sigma]
-      \Box \lnot (!B_1 \land \dots \land !B_m), && \text{PL, re-writing}; \\
-      & \quad \Rightarrow\quad \Box!A_1, \dots,\Box!A_n
+      & \Rightarrow !A_1, \dots,!A_n \Proves[\Sigma]
+      \Box \lnot (!B_1 \land \dots \land !B_m), && \text{\PL, re-writing}; \\
+      & \Rightarrow \Box!A_1, \dots,\Box!A_n
       \Proves[\Sigma] \Box\Box \lnot (!B_1 \land \dots \land !B_m), &&
       \text{\olref[mod]{lem:Gamma-proves1}}; \\
-      & \quad \Rightarrow\quad \Box!A_1, \dots,\Box!A_n
+      & \Rightarrow \Box!A_1, \dots,\Box!A_n
       \Proves[\Sigma]
-      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{ by the
+      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{by the
         schema}; \\
-      & \quad \Rightarrow\quad u \Proves[\Sigma]
-      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{ Monotony}; \\
-      & \quad \Rightarrow\quad 
-      \Box\lnot (!B_1 \land \dots \land !B_m) \in u, && \text{ deductive closure}; \\
-      & \quad \Rightarrow\quad 
-      \lnot (!B_1 \land \dots \land !B_m) \in v, && \text{ since }
+      & \Rightarrow u \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{Monotony}; \\
+      & \Rightarrow 
+      \Box\lnot (!B_1 \land \dots \land !B_m) \in u, && \text{deductive closure}; \\
+      & \Rightarrow 
+      \lnot (!B_1 \land \dots \land !B_m) \in v, && \text{since }
       R^\Sigma uv. \qedhere
-    \end{align*}
+    \end{aligned}
+    \end{multline*}
   \end{enumerate}
 \end{proof}
 

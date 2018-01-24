@@ -10,8 +10,15 @@
 
 \olsection{Soundness}
 
+!!^a{derivation} system is called sound if everything that can be
+!!{derive}d is valid. When considering modal systems, i.e.,
+!!{derivation}s where in addition to \Ax{K} we can use instances of
+some !!{formula}s $!A_1$, \dots,~$!A_n$, we want every !!{derivable}
+formula to be true in any model in which $!A_1$, \dots, $!A_n$ are
+true.  
+
 \begin{thm}[Soundness Theorem]\ollabel{thm:soundness}
-  If schemas $!A_1$, \dots, $!A_n$ are valid in the
+  If $!A_1$, \dots, $!A_n$ are valid in the
   classes of models $\mClass{C}_n$, \dots, $\mClass{C}_n$,
   respectively, then $\Log{K}!A_1\dots !A_n
   \Proves !B$ implies that $!B$ is valid in the class of
@@ -23,24 +30,25 @@
   \mClass{C}_n \cap \dots \cap \mClass{C}_n$.
   \begin{enumerate}
   \item Induction Basis: If $!B$ has a proof of length~$1$, then it is
-    either a tautological instance or an instance of \Ax{K}, or an
-    instance of one of the schemas. In the first case, $!B$ is valid
-    in $\mClass{C}$, since tautological instance are valid in
-    \emph{any} class of models, by
-    \olref[syn][tau]{thm:valid-taut}. Similarly in the second case, by
-    \olref[syn][sch]{thm:Kvalid}. Finally in the third case, since
-    $!B$ is valid in $\mClass{C}_i$ and $\mClass{C} \subseteq
+    either a tautological instance, an instance of \Ax{K} or \Dual{},
+    or an instance of one of $!A_1$, \dots, $!A_n$. In the first case,
+    $!B$ is valid in $\mClass{C}$, since tautological instance are
+    valid in \emph{any} class of models, by
+    \olref[syn][tau]{prop:valid-taut}. Similarly in the second case, by
+    \olref[syn][sch]{prop:Kvalid} and
+    \olref[syn][sch]{prop:Dual-valid}. Finally in the third case,
+    since $!B$ is valid in $\mClass{C}_i$ and $\mClass{C} \subseteq
     \mClass{C}_i$, we have that $!B$ is valid in $\mClass{C}$ as well.
   \item Inductive step: Suppose $!B$ has a proof of length $k>1$. If
-    $!B$ is a tautological instance or an instance of one of the
-    schemas, we proceed as in the previous step. So suppose $!B$ is
+    $!B$ is a tautological instance or an instance of one of $!A_1$,
+    \dots, $!A_n$, we proceed as in the previous step. So suppose $!B$ is
     obtained by \MP{} from previous !!{formula}s $!C \lif !B$ and
     $!C$. Then $!C \lif !B$ and $!C$ have proofs of length $<k$, and
     by inductive hypothesis they are valid in~$\mClass{C}$. By
     \olref[syn][sch]{prop:soundMP}, $!B$ is valid in $\mClass{C}$ as
     well. Finally suppose $!B$ is obtained by \Nec{} from $!C$ (so
     that $!B = \Box!C$). By inductive hypothesis, $!C$ is valid in
-    $\mClass{C}$, and by \olref[syn][val]{prop:Nec-rule} so is~$!A$. \qedhere
+    $\mClass{C}$, and by \olref[syn][val]{prop:Nec-rule} so is~$!B$. \qedhere
   \end{enumerate}
 \end{proof}
 

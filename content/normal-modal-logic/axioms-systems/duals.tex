@@ -8,28 +8,27 @@
 
 \olfileid{mod}{prf}{dua}
 
-\olsection{Dual Schemas}
+\olsection{Dual \usetoken{P}{formula}}
 
 \begin{defn}\ollabel{def:duals}
-  Each of the schemas \Ax{T}, \Ax{B}, \Ax{4}, and
+  Each of the !!{formula}s \Ax{T}, \Ax{B}, \Ax{4}, and
   \Ax{5} has a \emph{dual}, denoted by a subscripted diamond, as
   follows:
-
-  \begin{tabular}{p{1cm}l}%@{\hspace{1cm}}l}
-    $\Ax{T_\Diamond}$ : & $!A \lif \Diamond!A$\\
-    $\Ax{B_\Diamond}$ : & $\Diamond\Box!A \lif !A$\\
-    $\Ax{4_\Diamond}$ : & $\Diamond\Diamond!A \lif \Diamond!A$\\
-    $\Ax{5_\Diamond}$ : & $\Diamond\Box!A \lif \Box!A$
-    \end{tabular}
+  \begin{align}
+    \tag{\Ax{T_\Diamond}} p & \lif \Diamond p\\
+    \tag{\Ax{B_\Diamond}} \Diamond\Box p & \lif p\\
+    \tag{\Ax{4_\Diamond}} \Diamond\Diamond p & \lif \Diamond p\\
+    \tag{\Ax{5_\Diamond}} \Diamond\Box p & \lif \Box p
+    \end{align}
 \end{defn}
 
-Each of the dual above schemas is obtained from the corresponding
-schema by replacing $\lnot !A$ for $!A$, contraposing, and
-re-writing. Schema \Ax{D} is its own dual (modulo the replacement
+Each of the above dual !!{formula}s is obtained from the corresponding
+!!{formula} by substituting $\lnot p$ for $p$, contraposing, and
+re-writing. \Ax{D} is its own dual (modulo the replacement
 of $\lnot \Diamond \lnot$ by $\Box$). 
 
 \begin{prob}
-  Show that for each schema $!A$ in \olref[mod][prf][dua]{def:duals}:
+  Show that for each !!{formula} $!A$ in \olref[mod][prf][dua]{def:duals}:
   $\Log{K} \Proves !A \liff !A_\Diamond$.
 \end{prob}
 

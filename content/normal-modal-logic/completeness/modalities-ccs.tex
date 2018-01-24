@@ -16,9 +16,17 @@ to define an accessibility relation between such ``worlds.'' The next
 few lemmas give us the tools to do so. As noted, $\Sigma$ will be a
 normal modal logic throughout.
 
+\begin{defn}
+  If $\Gamma$ is a set of !!{formula}s, let
+  \begin{align*}
+    \Box\Gamma & = \Setabs{\Box !B}{!B \in \Gamma}\\
+    \Diamond\Gamma & = \Setabs{\Diamond !B}{!B \in \Gamma}\\
+  \end{align*}
+\end{defn}
+
 \begin{lem}\ollabel{lem:Gamma-proves1}
-  If $\Gamma \Proves[\Sigma] !A$ then $\Setabs{\Box !B}{!B \in
-  \Gamma} \Proves[\Sigma] \Box !A$.
+  If $\Gamma \Proves[\Sigma] !A$ then $\Box\Gamma \Proves[\Sigma] \Box
+  !A$.
 \end{lem}
 
 \begin{proof}
@@ -27,8 +35,8 @@ normal modal logic throughout.
   (!B_n \lif !A)\cdots)$. Since $\Sigma$ is normal, by rule \RK{},
   $\Sigma \Proves \Box!B_1 \lif (\Box!B_2 \lif \cdots (\Box!B_n \lif
   \Box!A)\cdots)$, where obviously $\Box!B_1$, \dots, $\Box!B_k \in
-  \Setabs{\Box!B}{!B \in\Gamma}$. Hence, by definition, $\Setabs{\Box
-      !B}{!B \in \Gamma} \Proves[\Sigma] \Box !A$.
+  \Box\Gamma$. Hence, by definition, $\Box\Gamma \Proves[\Sigma] \Box
+  !A$.
 \end{proof}
 
 \begin{lem}\ollabel{lem:Gamma-proves2}
@@ -39,8 +47,8 @@ normal modal logic throughout.
 \begin{proof}
   Let $\Delta = \Setabs{!B}{\Box !B \in \Gamma}$, so that $\Delta
   \Proves[\Sigma] !A$; then by \olref{lem:Gamma-proves1},
-  $\Setabs{\Box !B}{!B \in \Delta} \Proves \Box!A$. But obviously
-  $\Setabs{\Box !B}{!B \in \Delta} \subseteq \Gamma$, so also $\Gamma
+  $\Box\Delta \Proves \Box!A$. But obviously
+  $\Box\Delta \subseteq \Gamma$, so also $\Gamma
   \Proves[\Sigma] \Box!A$ by Monotony.
 \end{proof}
 
@@ -55,7 +63,7 @@ normal modal logic throughout.
   The left-to-right half of the theorem is obvious. For the converse,
   suppose $\Box!A \notin \Gamma$. Since $\Gamma$ is deductively
   closed, $\Gamma \Proves/[\Sigma] \Box !A$, and by
-  \olref{lem:Gamma-proves2} $\{ !B : \Box!B \in \Gamma\}
+  \olref{lem:Gamma-proves2}, $\Setabs{!B}{\Box!B \in \Gamma}
   \Proves/[\Sigma] !A$. By
   \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b},
   $\Setabs{!B}{\Box!B \in \Gamma} \cup \{ \lnot!A \}$ is
@@ -69,8 +77,7 @@ normal modal logic throughout.
 \begin{lem}\ollabel{lem:Gamma-proves3}
   Suppose $\Gamma$ and $\Delta$ are complete
   $\Sigma$-consistent. Then: $\Setabs{!A}{\Box!A \in \Gamma}
-    \subseteq \Delta$ if and only if $\Setabs{\Diamond!A}{!A \in
-      \Delta} \subseteq \Gamma$.
+    \subseteq \Delta$ if and only if $\Diamond\Delta \subseteq \Gamma$.
 \end{lem}
 
 \begin{proof}
@@ -83,11 +90,11 @@ normal modal logic throughout.
   (since $!A \in \Delta$). Hence  $\Box\lnot!A \notin
   \Gamma$, as required.
 
-  ``If'' direction: Assume $\Setabs{\Diamond!A}{!A \in \Delta}
+  ``If'' direction: Assume $\Diamond\Delta
   \subseteq \Gamma$. We argue contrapositively: suppose $!A
   \notin \Delta$ in order to show $\Box!A \notin \Gamma$. If
   $!A \notin \Delta$ then by maximality $\lnot!A \in \Delta$
-  and so by hypothesis $\Diamond\lnot!A \in\Gamma$. But in a
+  and so by hypothesis $\Diamond\lnot!A \in \Gamma$. But in a
   normal modal logic $\Diamond\lnot!A$ is equivalent to
   $\lnot\Box !A$, and if the latter is in $\Gamma$ by consistency
   $\Box!A \notin\Gamma$, as required.
@@ -96,7 +103,7 @@ normal modal logic throughout.
 \begin{cor}
   If $\Gamma$ is complete $\Sigma$-consistent, then $\Diamond !A \in
   \Gamma$ if and only if for some complete $\Sigma$-consistent
-  $\Delta$ such that $\Setabs{\Diamond!B}{!B \in \Delta} \subseteq
+  $\Delta$ such that $\Diamond\Delta \subseteq
   \Gamma$, it holds that $!A \in \Delta$.
 \end{cor}
 
@@ -104,22 +111,22 @@ normal modal logic throughout.
 Suppose $\Gamma$ is complete $\Sigma$-consistent, and argue as
 follows:
 \begin{align*}
-  \Diamond!A \in \Gamma & \quad \Leftrightarrow\quad \lnot\Box\lnot !A \in
-  \Gamma, && \text{re-writing}; \\
-  & \quad \Leftrightarrow\quad \Box\lnot!A \notin \Gamma, && \Gamma
-  \text{ is complete $\Sigma$-consistent}; \\ 
-  & \quad \Leftrightarrow\quad \exists\Delta \left[ \Delta \text{ is
-    complete $\Sigma$-consistent} {} \land {\,} \{ !B : \Box !B \in \Gamma \}
-  \subseteq \Delta  {} \land {\,} \lnot!A \notin\Delta\right], &&
+  \Diamond!A \in \Gamma \Leftrightarrow &
+  \lnot\Box\lnot !A \in \Gamma, && \text{re-writing}; \\
+  \Leftrightarrow & \Box\lnot!A \notin \Gamma, && \Gamma
+  \text{ is $\Sigma$-consistent}; \\ 
+  \Leftrightarrow & \exists\Delta \left[ \Delta \text{ is
+      complete $\Sigma$-consistent} {} \land {}\right.\\
+    & \qquad \left.\Setabs{ !B }{ \Box !B \in \Gamma }
+  \subseteq \Delta  \land \lnot!A \notin\Delta\right], &&
    \text{\olref{thm:box-phiGamma}}; \\
- & \quad \Leftrightarrow\quad \exists\Delta \left[ \Delta \text{ is
-    complete $\Sigma$-consistent} {} \land {\,} \{\Diamond !B : !B \in \Delta \}
-  \subseteq \Gamma  {} \land {\,} \lnot!A \notin\Delta\right], && 
+ \Leftrightarrow & \exists\Delta \left[ \Delta \text{ is
+     complete $\Sigma$-consistent} \land {}\right.\\
+   & \qquad \left.\Diamond\Delta \subseteq \Gamma \land  \lnot!A \notin\Delta\right], && 
    \text{\olref{lem:Gamma-proves3}}; \\
-& \quad \Leftrightarrow\quad \exists\Delta \left[ \Delta \text{ is
-    complete $\Sigma$-consistent} {} \land {\,} \{\Diamond !B : !B \in \Delta \}
-  \subseteq \Gamma  {} \land {\,} !A \in\Delta\right], && \Delta
-\text{ is complete}. \qedhere  
+\Leftrightarrow & \exists\Delta \left[ \Delta \text{ is
+    complete $\Sigma$-consistent} {} \land {}\right.\\
+  & \qquad \left.\Diamond \Delta \subseteq \Gamma  \land !A \in\Delta\right], && \Delta \text{ is complete}. \qedhere  
 \end{align*}
 \end{proof}
 

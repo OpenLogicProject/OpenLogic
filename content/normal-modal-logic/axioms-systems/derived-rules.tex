@@ -1,0 +1,128 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: derived-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{der}
+
+\olsection{Derived Rules}
+
+Finding and writing !!{derivation}s is obviously difficult,
+cumbersome, and repetitive. For instance, very often we want to pass
+from $!A \lif !B$ to $\Box !A \lif \Box !B$, i.e., apply
+rule~\RK. That requires an application of \Nec, then recording the
+proper instance of~\Ax{K}, then applying~\MP. Passing from $!A \lif
+!B$ and $!B \lif !C$ to $!A \lif !C$ requires recording the (long)
+tautological instance
+\[
+(!A \lif !B) \lif ((!B \lif !C) \lif (!A \lif !C))
+\]
+and applying \MP{} twice. Often we want to replace a sub-!!{formula}
+by a formula we know to be equivalent, e.g., $\Diamond !A$ by
+$\lnot\Box\lnot !A$ or $\lnot\lnot !A$ by $!A$. So rather than write
+out the actual !!{derivation}, it is more convenient to simply record
+why the intermediate steps are !!{derivable}. For this purpose, let us
+collect some facts about !!{derivability}.
+
+\begin{prop}
+  If $\Log{K} \Proves !A_1$, \dots, $\Log{K} \Proves !A_n$, and $!B$
+  follows from $!A_1$, \dots, $!A_n$ by propositional logic, then
+  $\Log{K} \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  If $!B$ follows from $!A_1$, \dots,~$!A_n$ by propositional logic, then
+  \[
+  !A_1 \lif (!A_2 \lif \cdots (!A_n \lif !B)\dots)
+  \]
+  is a tautological instance. Applying \MP{} $n$ times gives a
+  !!{derivation} of~$!B$.
+\end{proof}
+
+We will indicate use of this proposition by~\PL.
+
+\begin{prop}
+  If $\Log{K} \Proves !A_1 \lif (!A_2 \lif \cdots (!A_{n-1} \lif
+  !A_n)\dots)$ then $\Log{K} \Proves \Box !A_1 \lif (\Box !A_2 \lif
+  \cdots (\Box !A_{n-1} \lif \Box !A_n)\dots)$.
+\end{prop}
+
+\begin{proof}
+  By induction on $n$, just as in the proof of \olref[nor]{prop:rk}.
+\end{proof}
+
+We will indicate use of this proposition by~\RK. Let's illustrate how
+these results help establishing !!{derivability} results more easily.
+
+\begin{prop}
+  $\Log{K} \Proves (\Box!A \land \Box!B) \lif \Box (!A \land !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $\Log{K} \Proves !A \lif (!B \lif (!A \land !B))$ & \Taut \\
+    2. & $\Log{K} \Proves \Box!A \lif (\Box !B \lif \Box(!A \land !B)))$ & \RK, 1\\
+    3. & $\Log{K} \Proves (\Box!A \land \Box!B) \lif \Box(!A \land !B)$ & \PL, 2
+  \end{derivation}
+\end{proof}
+
+\begin{prop}\ollabel{prop:rewriting}
+  If $\Log{K} \Proves !A \liff !B$ and $\Log{K} \Proves
+  \Subst{!C}{!A}{p}$ then $\Log{K} \Proves \Subst{!C}{B}{p}$
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[mod][prf][der]{prop:rewriting} by proving, by induction
+  on the complexity of~$!C$, that if $\Log{K} \Proves !A \liff !B$
+  then $\Log{K} \Proves \Subst{!C}{!A}{p} \liff \Subst{!C}{!B}{p}$.
+\end{prob}
+
+This proposition comes in handy especially when we want to convert
+$\Diamond$ into $\Box$ (or vice versa), or remove double negations
+inside a !!{formula}. For instance:
+
+\begin{prop}
+  $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $\Log{K} \Proves \Diamond \lnot p \liff \lnot\Box\lnot\lnot p$ &
+    \Dual\\
+    2. & $\Log{K} \Proves \lnot \Box \lnot\lnot p \lif \Diamond \lnot p$ & \PL, 1\\
+    3. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & re-write $p$ for $\lnot\lnot p$\\
+  \end{derivation}
+\end{proof}
+
+The following proposition justifies that we can establish
+!!{derivability} results schematically. E.g., the previous proposition
+does not just establish that $\Log{K} \Proves \lnot\Box p \lif
+\Diamond \lnot p$, but $\Log{K} \Proves \lnot\Box !A \lif \Diamond
+\lnot !A$ for arbitrary~$!A$.
+
+\begin{prop}
+  If $!A$ is a substitution instance of $!B$ and $\Log{K} \Proves !B$,
+  then $\Log{K} \Proves !A$.
+\end{prop}
+
+\begin{proof}
+  It is tedious but routine to verify (by induction on the length of
+  the !!{derivation} of~$!B$) that applying a substitution to an
+  entire !!{derivation} also results in a correct
+  !!{derivation}. Specifically, substitution instances of tautological
+  instances are themselves tautological instances, substitution
+  instances of instances of \Dual{} and~\Ax{K} are themselves
+  instances of \Dual{} and~\Ax{K}, and applications of \MP{}
+  and~\Nec{} remain correct when substituting !!{formula}s for
+  !!{propositional variable}s in both premise(s) and conclusion.
+\end{proof}
+
+
+\end{document}

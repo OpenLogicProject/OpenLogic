@@ -29,72 +29,79 @@ The following provability results obtain:
   \begin{enumerate}
     \item $\Log{KT5} \Proves \Ax{B}$:
       \begin{derivation}
-        1. & $\Diamond!A \lif \Box\Diamond!A$ & \Ax{5}\\
-        2. & $!A \lif \Diamond!A$ & $\Ax{T}\Diamond$\\
-        3. & $!A \lif \Box\Diamond!A$ & \PL.
+        1. & $\Log{KT5} \Proves \Diamond!A \lif \Box\Diamond!A$ & \Ax{5}\\
+        2. & $\Log{KT5} \Proves !A \lif \Diamond!A$ & $\Ax{T_\Diamond}$\\
+        3. & $\Log{KT5} \Proves !A \lif \Box\Diamond!A$ & \PL.
       \end{derivation}
     \item $\Log{KT5} \Proves \Ax{4}$:
       \begin{derivation}
-        1. &$\Diamond\Box!A \lif \Box\Diamond\Box!A$ & \Ax{5}
-        with $\Box!A$ for $!A$\\
-        2. & $\Box!A \lif \Diamond\Box!A$ & $\Ax{T_\Diamond}$
-        with $\Box!A$ for $!A$\\
-        3. & $\Box!A \lif \Box\Diamond\Box!A$ & \PL, 1, 2\\
-        4. & $\Diamond\Box!A \lif \Box!A$ & $\Ax{5_\Diamond}$\\
-        5. & $\Box\Diamond\Box!A \lif \Box\Box!A$ & \RK{}, 4 \\
-        6. & $\Box!A \lif \Box\Box!A$ & \PL, 3, 5. \\
+        1. &$\Log{KT5} \Proves \Diamond\Box!A \lif \Box\Diamond\Box!A$ & \Ax{5}
+        with $\Box!A$ for $p$\\
+        2. & $\Log{KT5} \Proves \Box!A \lif \Diamond\Box!A$ & $\Ax{T_\Diamond}$
+        with $\Box!A$ for $p$\\
+        3. & $\Log{KT5} \Proves \Box!A \lif \Box\Diamond\Box!A$ & \PL, 1, 2\\
+        4. & $\Log{KT5} \Proves \Diamond\Box!A \lif \Box!A$ & $\Ax{5_\Diamond}$\\
+        5. & $\Log{KT5} \Proves \Box\Diamond\Box!A \lif \Box\Box!A$ & \RK{}, 4 \\
+        6. & $\Log{KT5} \Proves \Box!A \lif \Box\Box!A$ & \PL, 3, 5. \\
       \end{derivation}
     \item $\Log{KDB4} \Proves \Ax{T}$:
       \begin{derivation}
-        1. & $\Diamond\Box!A \lif !A $ & $\Ax{B_\Diamond}$ \\
-        2. & $\Box\Box!A \lif \Diamond\Box!A$ & $\Ax{D}$
-        with $\Box!A$ for $!A$\\
-        3. & $\Box\Box!A \lif !A$ & \PL 1, 2\\
-        4. &  $\Box!A \lif \Box\Box!A$ & \Ax{4} \\
-        5. & $\Box!A \lif !A$ & \PL, 1, 4. \\
+        1. & $\Log{KDB4} \Proves \Diamond\Box!A \lif !A $ & $\Ax{B_\Diamond}$ \\
+        2. & $\Log{KDB4} \Proves \Box\Box!A \lif \Diamond\Box!A$ & $\Ax{D}$
+        with $\Box!A$ for $p$\\
+        3. & $\Log{KDB4} \Proves \Box\Box!A \lif !A$ & \PL 1, 2\\
+        4. &  $\Log{KDB4} \Proves \Box!A \lif \Box\Box!A$ & \Ax{4} \\
+        5. & $\Log{KDB4} \Proves \Box!A \lif !A$ & \PL, 1, 4. \\
       \end{derivation}
     \item $\Log{KB4} \Proves \Ax{5}$:
       \begin{derivation}
-        1. & $\Diamond!A \lif \Box \Diamond\Diamond!A$ & \Ax{B}
-        with $\Diamond!A$ for $!A$\\
-        2. & $\Diamond\Diamond !A \lif \Diamond !A$ &
+        1. & $\Log{KB4} \Proves \Diamond!A \lif \Box \Diamond\Diamond!A$ & \Ax{B}
+        with $\Diamond!A$ for $p$\\
+        2. & $\Log{KB4} \Proves \Diamond\Diamond !A \lif \Diamond !A$ &
         $\Ax{4_\Diamond}$ \\
-        3. & $\Box\Diamond\Diamond !A \lif \Box \Diamond!A$ &
+        3. & $\Log{KB4} \Proves \Box\Diamond\Diamond !A \lif \Box \Diamond!A$ &
         \RK{}, 2 \\
-        4. & $\Diamond!A \lif \Box\Diamond!A$ & \PL, 1, 3.
+        4. & $\Log{KB4} \Proves \Diamond!A \lif \Box\Diamond!A$ & \PL, 1, 3.
       \end{derivation}
     \item $\Log{KB5} \Proves \Ax{4}$:
       \begin{derivation}
-        1. & $\Box!A \lif \Box\Diamond\Box !A$ & \Ax{B} with
-        $\Box!A$ for $!A$ \\
-        2. & $\Diamond\Box!A \lif \Box !A$ &
+        1. & $\Log{KB5} \Proves \Box!A \lif \Box\Diamond\Box !A$ & \Ax{B} with
+        $\Box!A$ for $p$ \\
+        2. & $\Log{KB5} \Proves  \Diamond\Box!A \lif \Box !A$ &
         $\Ax{5_\Diamond}$\\
-        3. & $\Box\Diamond\Box!A \lif \Box\Box !A$ & \RK{}, 2 \\
-        4. & $\Box!A \lif \Box\Box!A$ & \PL, 1, 3.
+        3. & $\Log{KB5} \Proves  \Box\Diamond\Box!A \lif \Box\Box !A$ & \RK{}, 2 \\
+        4. & $\Log{KB5} \Proves  \Box!A \lif \Box\Box!A$ & \PL, 1, 3.
       \end{derivation}
     \item $\Log{KT} \Proves \Ax{D}$:
       \begin{derivation}
-        1. & $\Box !A \lif !A$ & \Ax{T} \\
-        2. & $!A \lif \Diamond!A$ & $\Ax{T_\Diamond}$ \\
-        3. & $\Box !A \lif \Diamond !A$ &  \PL, 1, 2
+        1. & $\Log{KT} \Proves \Box !A \lif !A$ & \Ax{T} \\
+        2. & $\Log{KT} \Proves !A \lif \Diamond!A$ & $\Ax{T_\Diamond}$ \\
+        3. & $\Log{KT} \Proves \Box !A \lif \Diamond !A$ &  \PL, 1, 2
       \end{derivation}
   \end{enumerate}
 \end{proof}
-
-\begin{prop}\ollabel{prop:S5}
-  $\Log{KTB4} = \Log{KT5} = \Log{KDB4} = \Log{KDB5}$.
-\end{prop}
-
-\begin{prob}
-  Prove \olref[mod][prf][prs]{prop:S5}.
-\end{prob}
 
 \begin{defn}
   Following tradition, we define \Log{S4} to be the system
   \Log{KT4}, and \Log{S5} the system \Log{KTB4}.
 \end{defn}
 
-\olref{prop:S5} shows that the classical system \Log{S5} has several
-equivalent axiomatizations (see \olref[syn][es5]{prop:equivalences}).
+The following proposition shows that the classical system \Log{S5} has
+several equivalent axiomatizations. This should not surprise, as the
+various combinations of axioms all characterize equivalence relations
+(see \olref[syn][es5]{prop:equivalences}).
+
+\begin{prop}\ollabel{prop:S5}
+  $\Log{KTB4} = \Log{KT5} = \Log{KDB4} = \Log{KDB5}$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[mod][prf][prs]{prop:S5}.
+\end{prob}
+
 
 \end{document}

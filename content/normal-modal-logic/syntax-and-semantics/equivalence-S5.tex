@@ -10,6 +10,15 @@
 
 \olsection{Equivalence Relations and \Log{S5}}
 
+The modal logic \Log{S5} is characterized as the set of !!{formula}s
+valid on all universal frames, i.e., every world is accessible from
+every world, including itself. In such a scenarion, $\Box$ corresponds
+to necessity and $\Diamond$ to possibility: $\Box !A$ is true if $!A$
+is true at \emph{every} world, and $\Diamond !A$ is true if $!A$ is
+true at \emph{some} world. It turns out that \Log{S5} can also be
+characterized as the !!{formula}s valid on all refelxive, symmetric,
+and transitive frames, i.e., on all \emph{equivalence relations}.
+
 \begin{defn}
   A binary relation $R$ on $W$ is an \emph{equivalence relation} if
   and only if it is reflexive, symmetric and transitive.  A relation
@@ -17,24 +26,52 @@
   W$.
 \end{defn}
 
+Since \Ax{T}, \Ax{B}, and \Ax{4} characterize the reflexive,
+symmetric, and transitive frames, the frames where the accessibility
+relation is an equivalence relation are exactly those in which all
+four !!{formula}s are valid. It turns out that the equivalence
+relations can also be characterized by other combinations of
+!!{formula}s, since the conditions with which we've defined
+equivalence relations are equivalent to combinations of other familiar
+conditions on~$R$.
+
 \begin{prop}\ollabel{prop:equivalences}
   The following are equivalent:
   \begin{enumerate}
   \item $R$ is an equivalence relation;
   \item $R$ is reflexive and euclidean;
-  \item $R$ is serial, symmetric, and transitive;
-  \item $R$ is serial, symmetric, and euclidean. 
+  \item $R$ is serial, symmetric, and euclidean;
+  \item $R$ is serial, symmetric, and transitive.
   \end{enumerate}
 \end{prop}
 
+\begin{proof}
+  Exercise.
+\end{proof}
+
 \begin{prob}
-  Prove \olref[mod][syn][es5]{prop:equivalences}
+  Prove \olref[mod][syn][es5]{prop:equivalences} by showing:
+  \begin{enumerate}
+  \item If $R$ is symmetric and transitive, it is euclidean.
+  \item If $R$ is reflexive, it is serial.
+  \item If $R$ is reflexive and euclidean, it is symmetric.
+  \item If $R$ is symmetric and euclidean, it is transitive.
+  \item If $R$ is serial, symmetric, and transitive, it is refelxive.
+  \end{enumerate}
+  Explain why this suffices for the proof that the conditions are
+  equivalent.
 \end{prob}
 
 \olref{prop:equivalences} is the semantic counterpart to
 \olref[prf][prs]{prop:S5}, in that it gives equivalent characterization of
 the modal logic of frames over which $R$ is an equivalence (the logic
 traditionally referred to as \Log{S5}).
+
+What is the relationship between universal and equivalence relations?
+Although every universal relation is an equivalence relation, clearly
+not every equivalence relation is universal. However, the !!{formula}s
+valid on all universal relations are exactly the same as those valid
+on all equivalence relations.
 
 \begin{prop}
   Let $R$ be an equivalence relation, and for each $w \in W$ define
@@ -56,7 +93,7 @@ traditionally referred to as \Log{S5}).
 \end{prop}
 
 \begin{proof}
-  It's immediate to verify that a universal relation $R$ on $W$ is an
+  It's immediate to verify that a universal relation~$R$ on~$W$ is an
   equivalence. Hence, if $!A$ is valid in all frames where $R$ is an
   equivalence it is valid in all universal frames. For the other
   direction, we argue contrapositively: suppose $!B$ is !!a{formula}

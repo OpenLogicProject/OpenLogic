@@ -27,12 +27,13 @@
   $\lfalse \notin w$ (by consistency of $w$). The cases for $\lnot !A$
   and $!A \lif !B$ follow from the inductive hypothesis and
   \olref[ccs]{prop:completeconsproperties}, parts
-  \olref[ccs]{prop:completeconsproperties}
-  and~\olref[ccs]{prop:completeconsproperties}. Here is the case for
+  \olref[ccs]{prop:completeconsproperties-c}
+  and~\olref[ccs]{prop:completeconsproperties-d}. Here is the case for
   $\Box!A$; in one direction:
-  \begin{align*}
-    \mSat{M^\Sigma}{\Box!A}[w] & \quad \Rightarrow\quad \forall w'
-    \in W^\Sigma (R^\Sigma ww' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
+  \begin{multline*}
+  \mSat{M^\Sigma}{\Box!A}[w] \\
+    \begin{aligned}
+    & \quad \Rightarrow\quad \forall w'\in W^\Sigma (R^\Sigma ww' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
     && \text{def. } \Entails; \\
     & \quad \Rightarrow\quad \forall w' \in W^\Sigma (\{!B :
     \Box!B \in w\}\subseteq w' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
@@ -42,7 +43,8 @@
     && \text{ind. hyp.}; \\
     & \quad \Rightarrow\quad \Box!A \in w, &&
     \text{\olref[mod]{thm:box-phiGamma}}. 
-  \end{align*}
+    \end{aligned}
+  \end{multline*}
   Conversely, assume $\Box!A \in w$, and let $w'$ be an arbitrary
   world in $W^\Sigma$ such that $R^\Sigma ww'$. By definition of
   $R^\Sigma$, we have $\{ !B : \Box!B \in w\} \subseteq w'$, which

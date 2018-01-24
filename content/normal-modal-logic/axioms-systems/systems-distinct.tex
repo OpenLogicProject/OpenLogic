@@ -13,8 +13,8 @@
 In \olref[prs]{sec} we saw how to prove that two systems of modal
 logic are in fact the same system. \olref[snd]{thm:soundness} allows
 us to show that two modal systems $\Sigma$ and $\Sigma'$ are distinct,
-by finding a formula $!A$ such that $\Sigma' \Proves !A$ that fails in
-a model of $\Sigma$.
+by finding !!a{formula}~$!A$ such that $\Sigma' \Proves !A$ that fails in
+a model of~$\Sigma$.
 
 \begin{prop}
   $\Log{KD} \subsetneq \Log{KT}$
@@ -28,9 +28,9 @@ a model of $\Sigma$.
   \olref[prs]{prop:S5facts}\olref[prs]{prop:S5facts-KT-D}.  To show
   that the inclusion is proper, by Soundness
   (\olref[snd]{thm:soundness}), it suffices to exhibit a model of
-  \Log{KD} where some instance $\Box !A \lif !A$ of \Ax{T} fails (an
+  \Log{KD} where \Ax{T}, i.e., $\Box p \lif p$, fails (an
   easy task left as an exercise), for then by Soundness $\Log{KD}
-  \Proves/ \Box !A \lif !A$.
+  \Proves/ \Box p \lif p$.
 \end{proof}
 
 \begin{prop}
@@ -43,7 +43,7 @@ a model of $\Sigma$.
   in \Log{KB}, it will follow $\Log{K4} \nsubseteq \Log{KB}$.
   Consider the symmetric model $\mModel{M}$ of \olref{fig:Bnot4} Since
   the model is symmetric, \Ax{K} and \Ax{B} are true in $\mModel{M}$
-  (by \olref[syn][sch]{thm:Kvalid} and
+  (by \olref[syn][sch]{prop:Kvalid} and
   \olref[syn][acc]{thm:soundschemas}, respectively). However,
   $\mSat/{M}{\Box p \lif \Box\Box p}[w]$.
 \end{proof}
@@ -72,16 +72,15 @@ a model of $\Sigma$.
 
 \begin{proof}
   By \olref[syn][acc]{thm:soundschemas} we know that all instances of
-  \Ax{T} and \Ax{B} are true in each reflexive symmetric model
+  \Ax{T} and \Ax{B} are true in every reflexive symmetric model
   (respectively). So by Soundness it suffices to find a reflexive
-  symmetric model containing a world at which some instance of
-  \Ax{4} fails, and similarly for \Ax{5}.  We use the same
-  model for both claims. Consider the symmetric, reflexive model in
-  Figure~\olref{fig:KTBnot45}.  Then $\mSat/{M}{\Box p \to \Box \Box
-    p}[w_1]$, so the instance of \Ax{4} with $!A =p$ fails at
-  $w_1$. Similarly, $\mSat/{M}{\Diamond \lnot p \lif \Box \Diamond
-    \lnot p}[w_2]$, so the instance of \Ax{5} with $!A = \lnot p$
-  fails at $w_2$.
+  symmetric model containing a world at which some instance of~\Ax{4}
+  fails, and similarly for~\Ax{5}.  We use the same model for both
+  claims. Consider the symmetric, reflexive model in
+  \olref{fig:KTBnot45}.  Then $\mSat/{M}{\Box p \to \Box \Box
+    p}[w_1]$, so \Ax{4} fails at $w_1$. Similarly, $\mSat/{M}{\Diamond
+    \lnot p \lif \Box \Diamond \lnot p}[w_2]$, so the instance
+  of~\Ax{5} with $!A = \lnot p$ fails at~$w_2$.
 \end{proof}
 
 \begin{figure}[htpb]
@@ -115,9 +114,9 @@ a model of $\Sigma$.
 
 \begin{proof}
   By \olref[syn][acc]{thm:soundschemas} we know that all instances of
-  \Ax{D} and \Ax{5} to be true in all serial euclidean models.
+  \Ax{D} and~\Ax{5} are true in all serial euclidean models.
   So  it suffices to find a serial euclidean model containing a world
-  at which some instance of \Ax{4} fails.  Consider the model of
+  at which some instance of~\Ax{4} fails.  Consider the model of
   \olref{fig:KD5not4}, and notice that $\mSat/{M}{\Box p
   \lif \Box\Box p}[w_1]$. 
 \end{proof}

@@ -8,7 +8,7 @@
 
 \olfileid{mod}{syn}{sch}
 
-\olsection{Schemas}
+\olsection{Schemas and Validity}
 
 \begin{defn}
   A \emph{schema} is a set of !!{formula}s comprising all
@@ -26,9 +26,10 @@
 It is convenient to denote a schema by the meta-linguistic expression
 obtained by substituting `$!A$', `$!B$',~\dots, for the atomic
 components of~$!C$. So, for instance, the following denote schemas:
-`$!A$', `$!A \lif \Box!A$', `$!A \lif (!B \lif !A)$', etc. The schema
-`$!A$' denotes the set of \emph{all} !!{formula}s. However, we will
-also use $!A$ as a meta-linguistic variable for schemas themselves.
+`$!A$', `$!A \lif \Box!A$', `$!A \lif (!B \lif !A)$'. They correspond
+to the characteristic !!{formula}s $p$, $p \lif \Box p$, $p \lif (q
+\lif p)$. The schema `$!A$' denotes the set of \emph{all}
+!!{formula}s.
 
 \begin{defn}
   A schema is \emph{true} in a model if and only if all of its instances
@@ -36,12 +37,12 @@ also use $!A$ as a meta-linguistic variable for schemas themselves.
   model. 
 \end{defn}
 
-\begin{thm}\ollabel{thm:Kvalid}
+\begin{prop}\ollabel{prop:Kvalid}
   The following schema \Ax{K} is valid
   \[
   \Box(!A \lif !B) \lif (\Box !A \lif \Box !B). \tag{\Ax{K}}
   \]
-\end{thm}
+\end{prop}
 
 \begin{proof}
   We need to show that all instances of the schema are true at every
@@ -56,21 +57,74 @@ also use $!A$ as a meta-linguistic variable for schemas themselves.
   was arbitrary, $\mSat{M}{\Box !B}[w]$.
 \end{proof}
 
+\begin{prop}\ollabel{prop:Dual-valid}
+  The following schema \Dual{} is valid
+  \[
+  \Diamond !A \liff \lnot\Box\lnot !A. \tag{\Dual}
+  \]
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[mod][syn][sch]{prop:Dual-valid}.
+\end{prob}
+
 \begin{prop}\ollabel{prop:soundMP}
-  Show that if $!A$ and $!A \lif !B$ are true at a world in a model
+  If $!A$ and $!A \lif !B$ are true at a world in a model
   then so is $!B$. Hence, the valid !!{formula}s are closed under
   modus ponens.
 \end{prop}
 
+\begin{prop}\ollabel{prop:valid-instances}
+  !!^a{formula}~$!A$ is valid iff all its substitutiuon instances
+  are. In other words, a schema is valid iff its characteristic
+  !!{formula} is.
+\end{prop}
+
+\begin{proof}
+  The ``if'' direction is obvious, since $!A$ is a substitution
+  instance of itself.
+
+  To prove the ``only if'' direction, we show the following: Suppose
+  $\mModel{M} = \tuple{W, R, V}$ is a modal model, and $!B \ident
+  \SSubst{!A}{\subst{D_1}{p_1},\dots,\subst{D_n}{p_n}}$ is a
+  substitution instance of~$!A$. Define $\mModel{M'} = \tuple{W, R,
+    V'}$ by $V(p_i) = \Setabs{w}{\mSat{M}{!D_i}{w}}$.  Then
+  $\mSat{M}{!B}{w}$ iff $\mSat{M'}{!A}{w}$, for any~$w \in W$. (We
+  leave the proof as an exercise.) Now suppose that $!A$ was valid,
+  but some substitution instance $!B$ of~$!A$ was not valid. Then for
+  some $\mModel{M} = \tuple{W, R, V}$ and some $w \in W$,
+  $\mSat/{M}{!B}{w}$. But then $\mSat/{M'}{!A}{w}$ by the claim, and
+  $!A$ is not valid, a contradiction.
+\end{proof}
+
 \begin{prob}
-  Show that none of the following schemas are valid:
+  Prove the claim in the ``only if'' part of the proof of
+  \olref[mod][syn][sch]{prop:valid-instances}. (Hint: use induction
+  on~$!A$.)
+\end{prob}
+
+Note, however, that it is not true that a schema is true in a model
+iff its characteristic formula is. Of course, the ``only if''
+direction holds: if every instance of $!A$ is true in~$\mModel{M}$,
+$!A$~itself is true in~$\mModel{M}$. But it may happen that $!A$ is
+true in~$\mModel{M}$ but some instance of~$!A$ is false at some world
+in~$\mModel{M}$. For a very simple counterexample consider~$p$ in a
+model with only one world~$w$ and $V(p) = \{w\}$, so that $p$ is true
+at~$w$. But $\lfalse$ is an instance of~$p$, and not true at~$w$.
+
+\begin{prob}
+  Show that none of the following !!{formula}s are valid:
   \begin{enumerate}
-    \item[\Ax{D}:] \quad $\Box !A \lif \Diamond !A$;
-    \item[\Ax{T}:] \quad $\Box !A \lif !A$;
-    \item[\Ax{B}:] \quad $!A \lif \Box\Diamond !A$;
-    \item[\Ax{4}:] \quad $\Box !A \lif \Box \Box !A$;
-    \item[\Ax{5}:] \quad $\Diamond !A \lif \Box \Diamond
-      !A$.
+    \item[\Ax{D}:] \quad $\Box p \lif \Diamond p$;
+    \item[\Ax{T}:] \quad $\Box p \lif p$;
+    \item[\Ax{B}:] \quad $p \lif \Box\Diamond p$;
+    \item[\Ax{4}:] \quad $\Box p \lif \Box \Box p$;
+    \item[\Ax{5}:] \quad $\Diamond p \lif \Box \Diamond
+      p$.
   \end{enumerate}
 \end{prob}
 
@@ -117,10 +171,10 @@ also use $!A$ as a meta-linguistic variable for schemas themselves.
 
 \begin{prob}
   For each of the following schemas find a model $\mModel{M}$ such
-  that every instance of the schema is true in $\mModel{M}$:
+  that every instance of the !!{formula} is true in $\mModel{M}$:
   \begin{enumerate}
-  \item $!A \lif \Diamond\Diamond !A$;
-  \item $\Diamond !A \lif \Box !A$.
+  \item $p \lif \Diamond\Diamond p$;
+  \item $\Diamond p \lif \Box p$.
   \end{enumerate}
 \end{prob}
 

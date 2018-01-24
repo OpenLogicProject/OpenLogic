@@ -8,7 +8,17 @@
 
 \olfileid{mod}{prf}{prf}
 
-\olsection{Logics Defined by Proofs}
+\olsection{\usetoken{P}{derivation} and Modal Systems}
+
+We first define what !!a{derivation} is for normal modal
+logics. Roughly, !!a{derivation} is a sequence of !!{formula}s in
+which every !!{element} is either (a substitution instance of) one of
+a number of \emph{axioms}, or follows from previous !!{element}s by
+one of a few inference rules. For normal modal logics, tautologies,
+\Ax{K}, and \Dual{} count as axioms. This results in the modal
+system~$\Log{K}$, the smallest normal modal logic. We may wish to add
+additional axioms to obtain other systems, however. The rules are
+always modus ponens~\MP{} and necessitation~\Nec.
 
 \begin{defn}
   Given a modal system $\Log{K} !A_1 \dots !A_n$
@@ -17,7 +27,7 @@
   !A_1 \dots !A_n \Proves !B$, if and only if
   there are !!{formula}s $!C_1$, \dots, $!C_k$ such that $!C_k
   = !B$ and each $!C_i$ is either a tautological instance,
-  or an instance of the schemas $\Ax{K}$, $!A_1$, \dots,
+  or an instance of one of $\Ax{K}$, $\Dual$, $!A_1$, \dots,
   $!A_n$, or it follows from previous !!{formula}s by means of the
   rules \MP{} or~\Nec.
 \end{defn}
@@ -30,13 +40,54 @@ by exhibiting a $\Sigma$-proof of~$!B$.
 \end{prop}
 
 \begin{proof}
-  We use induction on the length of proofs to show that
-  $\Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B} \subseteq \Log{K}
-  !A_1 \dots !A_n$. The converse inclusion follows by showing that
-  $\Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !A }$ is a normal
-  modal logic containing all the instances of the schemas $!A_1$,
+  We use induction on the length of !!{derivation}s to show that
+  $\Sigma \Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B} \subseteq
+  \Log{K} !A_1 \dots !A_n$.
+
+  If the !!{derivation} of~$!B$ has length~$1$, it contains a single
+  !!{formula}. That !!{formula} cannot follow from previous formulas
+  by \MP{} or \Nec, so must be a tautological instance, and instance
+  of \Ax{K}, or an instance of \Dual. But every modal logic contains
+  these as well, so $!B \in \Log{K}!A_1 \dots !A_n$.
+
+  If the !!{derivation} of $!B$ has length~$> 1$, then $!B$ may in
+  addition be obtained by \MP{} or \Nec{} from !!{formula}s not
+  occurring as the last line in the !!{derivation}. If $!B$ follows
+  from $!C$ and $!C \lif !B$ (by \MP), then $!C$ and $!C \lif !B \in
+  \Log{K}!A_1 \dots !A_n$ by induction hypothesis. But every modal
+  logic is closed under modus ponens, so $!B \in \Log{K}!A_1 \dots
+  !A_n$. If $!B \equiv \Box !C$ follows from $!C$ by \Nec, then $!C
+  \in \Log{K}!A_1 \dots !A_n$ by induction hypothesis. But every
+  normal modal logic is closed under $\Nec$, so $!B \in
+  \Log{K}!A_1\dots!A_n$.
+
+  The converse inclusion follows by showing that
+  $\Sigma = \Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B }$ is a normal
+  modal logic containing all the instances of $!A_1$,
   \dots, $!A_n$, and the observation that $\Log{K} !A_1 \dots !A_n$
   is, by definition, the smallest such logic.
+  \begin{enumerate}
+    \item Every tautology~$!B$ is a tautological instance, so $\Sigma$
+      contains all tautologies.
+    \item If $\Log{K}!A_1\dots!A_n \Proves !C$ and
+      $\Log{K}!A_1\dots!A_n \Proves !C \lif !B$, then
+      $\Log{K}!A_1\dots!A_n \Proves !B$: Combine the !!{derivation} of
+      $!C$ with that of $!C \lif !B$, and add the line~$!B$. The last
+      line is justified by \MP{}. So $\Sigma$ is closed under modus
+      ponens.
+    \item If $!B$ has !!a{derivation}, then every substitution
+      instance of~$!B$ also has a derivation: apply the substitution
+      to every !!{formula} in the !!{derivation}. (Exercise: prove by
+      induction on the length of !!{derivation}s that the result is
+      also a correct !!{derivation}). So $\Sigma$ is closed under
+      uniform substitution. (We have now established that $\Sigma$
+      satisfies all conditions of a modal logic.)
+    \item We have $\Log{K}!A_1\dots!A_n \Proves \Ax{K}$ and $\Proves
+      \Dual$, so $K$, $\Dual \in \Sigma$
+    \item If $\Log{K}!A_1\dots!A_n \Proves !C$, the additional
+      line~$\Box !C$ is justified by~\Nec. Consequently, $\Sigma$ is
+      closed under~\Nec. Thus, $\Sigma$ is normal.
+  \end{enumerate}
 \end{proof}
 
 \end{document}

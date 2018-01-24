@@ -10,6 +10,12 @@
 
 \olsection{Relational Models}
 
+The basic concept of semantics for normal modal logics is that of a
+\emph{relational model}. It consists of a set of worlds, which are
+related by a binary ``accessibility relation,'' together with an
+assignment which determines which !!{propositional variable}s count as
+``true'' at which worlds.
+
 \begin{defn}
   A \emph{model} for the basic modal language is a triple $\mModel{M}
   = \tuple{W, R, V}$, where
@@ -19,14 +25,18 @@
   \item $V$ is a function assigning to each !!{propositional
     variable}~$p$ a set $V(p)$ of possible worlds.
   \end{enumerate}
+  When $Rww'$ holds, we say that $w'$ is \emph{accessible
+    from}~$w$. When $w \in V(p)$ we say $p$ is \emph{true at}~$w$.
 \end{defn}
 
 The great advantage of relational semantics is that models can be
 represented by means of simple diagrams, such as the one in
-\olref{fig:simple}. Worlds are represented by nodes, and world
-$w'$ is accessible from $w$ precisely when there is an arrow from $w$
+\olref{fig:simple}. Worlds are represented by nodes, and world~$w'$ is
+accessible from $w$ precisely when there is an arrow from~$w$
 to~$w'$. Moreover, we write $p$ next to a world precisely when $w \in
-V(p)$. 
+V(p)$. \olref{fig:simple} represents the model with $W = \{w_1, w_2,
+w_3\}$, $R = \{\tuple{w_1, w_2},\tuple{w_1, w_3}\}$, $V(p) = \{w_1,
+w_2\}$, and $V(q) = \{w_2\}$.
 
 \begin{figure}
   \begin{center}
