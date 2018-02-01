@@ -8,7 +8,18 @@
 
 \olfileid{mod}{com}{ccs}
 
-\olsection{Complete Consistent Sets}
+\olsection{Complete $\Sigma$-Consistent Sets}
+
+Suppose $\Sigma$ is a set of modal !!{formula}s---think of them as the
+axioms or defining principles of a normal modal logic. A set $\Gamma$
+is $\Sigma$-consistent iff $\Gamma \Proves/[\Sigma] \lfalse$, i.e., if
+there is no !!{derivation} of~$!A_1 \lif (!A_2 \lif \cdots (!A_n \lif
+\lfalse)\dots)$ from $\Sigma$, where each $!A_i \in \Gamma$. We will
+construct a ``canonical'' model in which each world is taken to be a
+special kind of $\Sigma$-consistent set: one which is not just
+$\Sigma$-consistent, but maximally so, in the sense that it settles
+the truth value of every modal !!{formula}: for every $!A$, either $!A
+\in \Gamma$ or $\lnot !A \in \Gamma$:
 
 \begin{defn}
   A set $\Gamma$ is \emph{complete $\Sigma$-consistent} if and
@@ -16,37 +27,111 @@
   $!A \in \Gamma$ or $\lnot !A \in \Gamma$.
 \end{defn}
 
-\begin{prop}\ollabel{prop:completeconsproperties}
+Complete $\Sigma$-consistent sets $\Gamma$ have a number of useful
+properties. For one, they are deductively closed, i.e., if $\Gamma
+\Proves[\Sigma] !A$ then $!A \in \Gamma$. This means in particular
+that every instance of !!a{formula}~$!A \in \Sigma$ is also $\in
+\Gamma$. Moreover, membership in $\Gamma$ mirrors the truth conditions
+for the propositional connectives. This will be importnat when we
+define the canonical model'' model.
+
+\begin{prop}\ollabel{prop:ccs-properties}
   Suppose $\Gamma$ is complete $\Sigma$-consistent. Then:
   \begin{enumerate}
-  \item $\Gamma$ is deductively closed in $\Sigma$.
-  \item \ollabel{prop:completeconsproperties-b}%
+  \item \ollabel{prop:ccs-closed}%
+    $\Gamma$ is deductively closed in~$\Sigma$.
+  \item \ollabel{prop:ccs-sigma}%
     $\Sigma \subseteq \Gamma$.
-  \item \ollabel{prop:completeconsproperties-c}%
+  \tagitem{prvFalse}{\ollabel{prop:ccs-lfalse}%
+    $\lfalse \notin \Gamma$}{}
+  \tagitem{prvTrue}{\ollabel{prop:ccs-ltrue}%
+    $\ltrue \in \Gamma$}{}
+  \item \ollabel{prop:ccs-lnot}%
     $\lnot!A \in \Gamma$ if and only if $!A \notin
     \Gamma$.
-  \item \ollabel{prop:completeconsproperties-d}%
-    $!A \lif !B \in \Gamma$ if and only if $!A \in
-    \Gamma$ implies $!B \in \Gamma$.
+  \tagitem{prvAnd}{\ollabel{prop:ccs-land}%
+    $!A \land !B \in \Gamma$ iff $!A \in \Gamma$ and $!B \in \Gamma$}{}
+  \tagitem{prvOr}{\ollabel{prop:ccs-lor}%
+    $!A \lor !B \in \Gamma$ iff $!A \in \Gamma$ or $!B \in \Gamma$}{}
+  \tagitem{prvIf}{\ollabel{prop:ccs-lif}%
+    $!A \lif !B \in \Gamma$ iff $!A \notin \Gamma$ or $!B \in \Gamma$}{}
+  \tagitem{prvIff}{\ollabel{prop:ccs-liff}%
+    $!A \liff !B \in \Gamma$ iff either $!A \in \Gamma$ and $!B \in
+    \Gamma$, or $!A \notin \Gamma$ and $!B \notin \Gamma$}{}
   \end{enumerate}
 \end{prop}
 
 \begin{proof}
   \begin{enumerate}
-  \item If $\Gamma \Proves[\Sigma] !A$ but $!A \notin \Gamma$ then by
-    maximality $\lnot!A \in \Gamma$, and $\Gamma$ is inconsistent.
+  \item Suppose $\Gamma \Proves[\Sigma] !A$ but $!A \notin
+    \Gamma$. Then since $\Gamma$ is complete $\Sigma$-consistent,
+    $\lnot!A \in \Gamma$. This would make $\Gamma$ inconsistent, since
+    $!A, \lnot !A \Proves[\Sigma] \lfalse$.
+    
   \item If $!A \in \Sigma$ then $\Gamma \Proves[\Sigma] !A$, and $!A
-    \in \Gamma$ by deductive closure.
-  \item If $\lnot!A \in \Gamma$, then by consistency $!A \notin
-    \Gamma$; and if $!A \notin \Gamma$ then by maximality $!A \in
-    \Gamma$.
-  \item Suppose $!A \lif !B \in \Gamma$ and $!A \in \Gamma$; then
-    $\Gamma \Proves[\Sigma] !B$, whence $!B \in \Gamma$ by deductive
-    closure. Conversely, if $!A \lif !B \notin \Gamma$ then by
-    maximality $\lnot (!A \lif !B) \in \Gamma$, so by Rule T,
-    deductive closure, and consistency both $!A \in \Gamma$ and $!B
-    \notin \Gamma$.
+    \in \Gamma$ by deductive closure, i.e.,
+    case~\olref{prop:ccs-closed}.
+    
+  \tagitem{prvFalse}{If $\lfalse \in \Gamma$, then $\Gamma
+    \Proves[\Sigma] \lfalse$, so $\Gamma$ would be
+    $\Sigma$-inconsistent.}{}
+  
+  \tagitem{prvTrue}{$\Gamma \Proves[\Sigma] \ltrue$, so $\ltrue \in
+    \Gamma$ by deductive closure, i.e.,
+    case~\olref{prop:ccs-closed}.}{}
+
+\item If $\lnot!A \in \Gamma$, then by consistency $!A \notin
+    \Gamma$; and if $!A \notin \Gamma$ then $!A \in \Gamma$ since
+    $\Gamma$ is complete $\Sigma$-consistent.
+    
+  \tagitem{prvAnd}{\iftag{probAnd}{Exercise.}{Suppose $!A \land !B \in
+      \Gamma$. Since $(!A \land !B) \lif !A$ is a tautological
+      instance, $!A \in \Gamma$ by deductive closure, i.e.,
+      case~\olref{prop:ccs-closed}. Similiarly for $!B \in \Gamma$. On
+      the other hand, suppose both $!A \in \Gamma$ and $!B \in
+      \Gamma$. Then deductive closure implies $(!A \land !B) \in
+      \Gamma$, since $!A \lif (!B \lif (!A \land !B))$ is a
+      tautological instance.}}{}
+
+  \tagitem{prvOr}{\iftag{probOr}{Exercise.}{Suppose $!A \lor !B \in
+      \Gamma$, and $!A \notin \Gamma$ and $!B \notin \Gamma$. Since
+      $\Gamma$ is complete $\Sigma$-consistent, $\lnot!A \in \Gamma$
+      and $\lnot !B \in \Gamma$. Then $\lnot(!A \lor !B) \in \Gamma$
+      since $\lnot !A \lif (\lnot !B \lif \lnot (!A \lor !B))$ is a
+      tautological instance. This would mean that $\Gamma$ is
+      $\Sigma$-inconsistent, a contradiction.}}{}
+  
+  \tagitem{prvIf}{\iftag{probIf}{Exercise.}{Suppose $!A \lif !B \in
+      \Gamma$ and $!A \in \Gamma$; then $\Gamma \Proves[\Sigma] !B$,
+      whence $!B \in \Gamma$ by deductive closure. Conversely, if $!A
+      \lif !B \notin \Gamma$ then since $\Gamma$ is complete
+      $\Sigma$-consistent, $\lnot (!A \lif !B) \in \Gamma$. Since
+      $\lnot(!A \lif !B) \lif !A$ is a tautological instance, $!A \in
+      \Gamma$ by deductive closure. Since $\lnot(!A \lif !B) \lif
+      \lnot !B$ is a tautological instance, $\lnot !B \in
+      \Gamma$. Then $!B \notin \Gamma$ since $\Gamma$ is
+      $\Sigma$-consistent.}}{}
+  
+  \tagitem{prvIff}{\iftag{probIff}{Exercise.}{Suppose $!A \liff !B \in
+      \Gamma$. If $!A \in \Gamma$, then $!B \in \Gamma$, since $(!A
+      \liff !B) \lif (!A \lif !B)$ is a tautological
+      instance. Similarly, if $!B \in \Gamma$, then $!A \in \Gamma$.
+      So either both $!A \in \Gamma$ and $!B \in \Gamma$, or neither
+      $!A \in \Gamma$ nor $!B \in \Gamma$.
+      
+      Conversely, suppose $!A \lif !B \notin \Gamma$. Since $\Gamma$
+      is complete $\Sigma$-consistent, $\lnot (!A \liff !B) \in
+      \Gamma$. Since $\lnot(!A \liff !B) \lif (!A \lif \lnot !B)$ is a
+      tautological instance, if $!A \in \Gamma$ then $\lnot !B \in
+      \Gamma$, and since $\Gamma$ is $\Sigma$-consistent, $!B \notin
+      \Gamma$. Similarly, if $!B \in \Gamma$ then $!A \notin \Gamma$.
+      So neither $!A \in \Gamma$ and $!B \in \Gamma$, nor $!A \notin
+      \Gamma$ and $!B \notin \Gamma$.}}{}
   \end{enumerate}
 \end{proof}
+
+\begin{probtag}{probAnd,probOr,probIf,probIff}
+  Complete the proof of \olref[mod][com][ccs]{prop:ccs-properties}.
+\end{probtag}
 
 \end{document}

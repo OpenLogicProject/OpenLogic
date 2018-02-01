@@ -10,23 +10,26 @@
 
 \olsection{Canonical Models}
 
-\begin{defn}
-  A model $\mModel{M}$ is said to \emph{determine} a normal modal
-  logic~$\Sigma$ precisely when $\mSat{M}{!A}$ if and only if $\Sigma
-  \Proves !A$, for all !!{formula}s~$!A$.
-\end{defn}
+The \emph{canonical model} for a modal system~$\Sigma$ is a specific
+model~$\mModel{M^\Sigma}$ in which the worlds are all complete
+$\Sigma$-consistent sets. Its accessibility relation~$R^\Sigma$ and
+valuation $V^\Sigma$ are defined so as to guarantee that the
+!!{formula}s true at a world~$\Delta$ are exactly the !!{formula}s
+making up~$\Delta$.
 
 \begin{defn}
   Let $\Sigma$ be a normal modal logic. The \emph{canonical model} for
   $\Sigma$ is $\mModel{M}^\Sigma = \tuple{W^\Sigma, R^\Sigma,
     V^\Sigma}$, where:
   \begin{enumerate}
-  \item $\mModel{M}^\Sigma = \Setabs{ w \subseteq \Frm[L] }{w \text{
+  \item $\mModel{M}^\Sigma = \Setabs{ \Delta }{\Delta \text{
       is complete $\Sigma$-consistent} }$.
-  \item $R^\Sigma ww'$ holds if and only if $\Setabs{!A}{\Box!A \in w}
-    \subseteq w'$.
-  \item $V^\Sigma(p) = \Setabs{w}{p \in w}$.
+  \item $R^\Sigma \Delta\Delta'$ holds if and only if
+    \iftag{prvBox}{$\Box^{-1}\Delta \subseteq
+      \Delta'$}{$\Diamond\Delta' \subseteq \Delta$}.
+  \item $V^\Sigma(p) = \Setabs{\Delta}{p \in \Delta}$.
   \end{enumerate}
 \end{defn}
+
 
 \end{document}

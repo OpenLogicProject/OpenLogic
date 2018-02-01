@@ -10,47 +10,138 @@
 
 \olsection{The Truth Lemma}
 
+The canonical model~$\mModel{M^\Sigma}$ is defined in such a way that
+$\mSat{M^\Sigma}{!A}[\Delta]$ iff $!A \in \Delta$. For propositional
+variables, the definition of $V^\Sigma$ yields this directly. We have
+to verify that the equivalence holds for all !!{formula}s, however. We
+do this by induction. The inductive step involves proving the
+equivalence for !!{formula}s involving propositional operators (where
+we have to use \olref[ccs]{prop:ccs-properties}) and the modal
+operators (where we invoke the results of \olref[mod]{sec}).
+
 \begin{prop}[Truth Lemma]
   \ollabel{prop:truthlemma}
-  For every !!{formula} $!A$, $\mSat{M^\Sigma}{!A}[w]$ if and only if
-  $!A \in w$.
+  For every !!{formula} $!A$, $\mSat{M^\Sigma}{!A}[\Delta]$ if and only if
+  $!A \in \Delta$.
 \end{prop}
 
 \begin{proof}
-  By induction on $!A$. \emph{Basis}: if $!A$ is a
-  propositional variable, say $p$, then:
-  \[
-  \mSat{M^\Sigma}{p}[w] \Leftrightarrow w \in V^\Sigma(p)
-  \Leftrightarrow p \in w.
-  \]
-  If $!A$ is $\lfalse$ then both $\mSat/{M^\Sigma}{\lfalse}[w]$ and
-  $\lfalse \notin w$ (by consistency of $w$). The cases for $\lnot !A$
-  and $!A \lif !B$ follow from the inductive hypothesis and
-  \olref[ccs]{prop:completeconsproperties}, parts
-  \olref[ccs]{prop:completeconsproperties-c}
-  and~\olref[ccs]{prop:completeconsproperties-d}. Here is the case for
-  $\Box!A$; in one direction:
-  \begin{multline*}
-  \mSat{M^\Sigma}{\Box!A}[w] \\
-    \begin{aligned}
-    & \quad \Rightarrow\quad \forall w'\in W^\Sigma (R^\Sigma ww' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
-    && \text{def. } \Entails; \\
-    & \quad \Rightarrow\quad \forall w' \in W^\Sigma (\{!B :
-    \Box!B \in w\}\subseteq w' \Rightarrow \mSat{M^\Sigma}{!A}[w']),
-    && \text{def. } R^\Sigma; \\
-    & \quad \Rightarrow\quad \forall w' \in W^\Sigma (\{!B :
-    \Box!B \in w\}\subseteq w' \Rightarrow !A \in w'),
-    && \text{ind. hyp.}; \\
-    & \quad \Rightarrow\quad \Box!A \in w, &&
-    \text{\olref[mod]{thm:box-phiGamma}}. 
-    \end{aligned}
-  \end{multline*}
-  Conversely, assume $\Box!A \in w$, and let $w'$ be an arbitrary
-  world in $W^\Sigma$ such that $R^\Sigma ww'$. By definition of
-  $R^\Sigma$, we have $\{ !B : \Box!B \in w\} \subseteq w'$, which
-  immediately gives $!A \in w'$. By induction hypothesis,
-  $\mSat{M^\Sigma}{!A}[w']$, and since $w'$ was arbitrary,
-  $\mSat{M^\Sigma}{\Box!A}[w]$.
+  By induction on~$!A$.
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\mSat/{M^\Sigma}{\lfalse}[\Delta]$
+        by \olref[syn][trw]{defn:mmodels}, and $\lfalse \notin \Delta$
+        by
+        \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lfalse}.}}{}
+
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{$\mSat{M^\Sigma}{\ltrue}[\Delta]$
+        by \olref[syn][trw]{defn:mmodels}, and $\ltrue \in \Delta$ by
+        \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-ltrue}.}}{}
+
+    \item \indcase{!A}{p}{$\mSat{M^\Sigma}{p}[\Delta]$ iff $\Delta \in
+      V^\Sigma(p)$ by \olref[syn][trw]{defn:mmodels}.  Also, $\Delta
+      \in V^\Sigma(p)$ iff $p \in \Delta$ by definition
+      of~$V^\Sigma$.}
+
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}{%
+        \iftag{probNot}{Exercise.}{$\mSat{M^\Sigma}{\lnot !B}[\Delta]$
+          iff $\mSat/{M^\Sigma}{!B}[\Delta]$
+          (\olref[syn][trw]{defn:mmodels}) iff $!B \notin \Delta$ (by
+          inductive hypothesis) iff $\lnot !B \in \Delta$ (by
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}).}}}{}
+
+    \tagitem{prvAnd}{\indcase{!A}{!B \land !C}{%
+        \iftag{probAnd}{Exercise.}{$\mSat{M^\Sigma}{!B \land
+            !C}[\Delta]$ iff $\mSat{M^\Sigma}{!B}[\Delta]$ and
+          $\mSat{M^\Sigma}{!C}[\Delta]$ (by
+          \olref[syn][trw]{defn:mmodels}) iff $!B \in \Delta$ and $!C
+          \in \Delta$ (by inductive hypothesis) iff $!B \land !C \in
+          \Delta$ (by
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-land}).}}}{}
+
+    \tagitem{prvOr}{\indcase{!A}{!B \lor !C}{%
+        \iftag{probOr}{Exercise.}{$\mSat{M^\Sigma}{!B \lor
+            !C}[\Delta]$ iff $\mSat{M^\Sigma}{!B}[\Delta]$ or
+          $\mSat{M^\Sigma}{!C}[\Delta]$ (by
+          \olref[syn][trw]{defn:mmodels}) iff $!B \in \Delta$ or $!C
+          \in \Delta$ (by inductive hypothesis) iff $!B \lor !C \in
+          \Delta$ (by
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lor}).}}}{}
+
+    \tagitem{prvIf}{\indcase{!A}{!B \lif !C}{%
+        \iftag{probIf}{Exercise.}{$\mSat{M^\Sigma}{!B \lif
+            !C}[\Delta]$ iff $\mSat/{M^\Sigma}{!B}[\Delta]$ or
+          $\mSat{M^\Sigma}{!C}[\Delta]$ (by
+          \olref[syn][trw]{defn:mmodels}) iff $!B \notin \Delta$ or
+          $!C \in \Delta$ (by inductive hypothesis) iff $!B \lif !C
+          \in \Delta$ (by
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lif}).}}}{}
+
+    \tagitem{prvIff}{\indcase{!A}{!B \liff !C}{%
+        \iftag{probIff}{Exercise.}{$\mSat{M^\Sigma}{!B \liff
+            !C}[\Delta]$ iff either $\mSat{M^\Sigma}{!B}[\Delta]$ and
+          $\mSat{M^\Sigma}{!C}[\Delta]$ or
+          $\mSat/{M^\Sigma}{!B}[\Delta]$ and
+          $\mSat/{M^\Sigma}{!C}[\Delta]$ (by
+          \olref[syn][trw]{defn:mmodels}) iff either $!B \in \Delta$
+          and $!C \in \Delta$ or $!B \notin \Delta$ and $!C \notin
+          \Delta$ (by inductive hypothesis) iff $!B \liff !C \in
+          \Delta$ (by
+          \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-liff}).}}}{}
+
+    \tagitem{prvBox}{\indcase{!A}{\Box !B}{%
+        \iftag{probBox}{Exercise.}{First suppose that
+          $\mSat{M^\Sigma}{\Box !B}[\Delta]$. By
+          \olref[syn][trw]{defn:mmodels}, for every $\Delta'$ such
+          that $R^\Sigma \Delta\Delta'$,
+          $\mSat{M^\Sigma}{!B}[\Delta']$. By inductive hypothesis, for
+          every $\Delta'$ such that $R^\Sigma \Delta\Delta'$, $!B \in
+          \Delta'$. By definition of $R^\Sigma$, for every $\Delta'$
+          such that $\Box^{-1} \Delta \subseteq \Delta'$, $!B \in
+          \Delta'$. By \olref[mod]{prop:box}, $\Box !B \in
+          \Delta$.
+
+          Now assume $\Box !B \in \Delta$. Let $\Delta' \in W^\Sigma$
+          be such that $R^\Sigma \Delta\Delta'$, i.e., $\Box^{-1}\Delta
+          \subseteq \Delta'$. Since $\Box !B \in \Delta$, $!B \in
+          \Box^{-1} \Delta$. Consequently, $!B \in \Delta'$. By
+          inductive hypothesis, $\mSat{M^\Sigma}{!B}[\Delta']$. Since
+          $\Delta'$ is arbitrary with $R^\Sigma \Delta\Delta'$, for
+          all $\Delta' \in W^\Sigma$ such that $R^\Sigma
+          \Delta\Delta'$, $\mSat{M^\Sigma}{!B}[\Delta']$. By
+          \olref[syn][trw]{defn:mmodels}, $\mSat{M^\Sigma}{\Box
+            !B}[\Delta]$.}}}{}
+
+    \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{%
+        \iftag{probDiamond}{Exercise.}{First suppose that
+          $\mSat{M^\Sigma}{\Diamond !B}[\Delta]$.  By
+          \olref[syn][trw]{defn:mmodels}, for some $\Delta'$ such that
+          $R^\Sigma \Delta\Delta'$, $\mSat{M^\Sigma}{!B}[\Delta']$.
+          By inductive hypothesis, for some $\Delta'$ such that
+          $R^\Sigma \Delta\Delta'$, $!B \in \Delta'$. By definition of
+          $R^\Sigma$,\iftag{prvBox}{ for some $\Delta'$ such that
+            $\Box^{-1} \Delta \subseteq \Delta'$, $!B \in \Delta'$.
+            By \olref[mod]{prop:diamond},}{} for some $\Delta'$ such
+          that $\Diamond \Delta' \subseteq \Delta$, $!B \in
+          \Delta'$. Since $!B \in \Delta'$, $\Diamond !B \in \Diamond
+          \Delta'$, so $\Diamond !B \in \Delta$.
+
+          Now assume $\Diamond !B \in \Delta$. By
+          \olref[mod]{prop:diamond}, there is a complete
+          $\Sigma$-consistent $\Delta' \in W^\Sigma$ be such that
+          $\Diamond \Delta' \subseteq \Delta$ and $!B \in
+          \Delta'$.\iftag{prvBox}{ By \olref[mod]{lem:box-iff-diamond},
+            there is a $\Delta' \in W^\Sigma$ such that $\Box^{-1}
+            \Delta \subseteq \Delta'$, and $!B \in \Delta'$.}{} By
+          definition of $R^\Sigma$, $R^\Sigma \Delta\Delta'$, so there
+          is a $\Delta' \in W^\Sigma$ such that $R^\Sigma
+          \Delta\Delta'$ and $!B \in \Delta'$. By
+          \olref[syn][trw]{defn:mmodels}, $\mSat{M^\Sigma}{\Diamond
+            !B}[\Delta]$.}}}{}
+  \end{enumerate}
 \end{proof}
+
+\begin{probtag}{probFalse,probTrue,probNot,proband,probor,probIf,probIff,probBox,probDiamond}
+  Complete the proof of \olref[mod][com][tru]{prop:truthlemma}
+\end{probtag}
 
 \end{document}

@@ -9,22 +9,82 @@
 \olfileid{mod}{com}{mod}
 
 \olsection{Modalities and Complete Consistent Sets}
-  
-When we construct a model whose set of worlds is given by the complete
-consistent sets in some normal modal logic $\Sigma$, we will also need
-to define an accessibility relation between such ``worlds.'' The next
-few lemmas give us the tools to do so. As noted, $\Sigma$ will be a
-normal modal logic throughout.
+
+\begin{explain}
+When we construct a model~$\mModel{M^\Sigma}$ whose set of worlds is
+given by the complete $\Sigma$-consistent sets~$\Delta$ in some normal
+modal logic~$\Sigma$, we will also need to define an accessibility
+relation~$R^\Sigma$ between such ``worlds.'' We want it to be the case
+that the accessibility relation (and the assignment $V^\Sigma)$ are
+defined in such a way that $\mSat{M^\Sigma}{!A}[\Delta]$ iff $!A \in
+\Delta$. How should we do this?
+
+Once the accessibility relation is defined, the definition of truth at
+a world ensures that \iftag{prvBox}{$\mSat{M^\Sigma}{\Box!A}[\Delta]$
+  iff $\mSat{M^\Sigma}{!A}[\Delta']$ for all $\Delta'$ such that
+  $R^\Sigma\Delta\Delta'$}{$\mSat{M^\Sigma}{\Diamond!A}[\Delta]$ iff
+  $\mSat{M^\Sigma}{!A}[\Delta']$ for at least one $\Delta'$ such that
+  $R^\Sigma\Delta\Delta'$}.  The proof that
+$\mSat{M^\Sigma}{!A}[\Delta]$ iff $!A \in \Delta$ requires that this
+is true in particular for !!{formula}s starting with a modal operator,
+i.e., \iftag{prvBox}{$\mSat{M^\Sigma}{\Box!A}[\Delta]$ iff $\Box !A
+  \in \Delta$}{$\mSat{M^\Sigma}{\Diamond!A}[\Delta]$ iff $\Diamond !A
+  \in \Delta$}. Combining this requirement with the definition of
+truth at a world for \iftag{prvBox}{$\Box !A$}{$\Diamond !A$} yields:
+\[
+\iftag{prvBox}{%
+  \Box!A \in \Delta \text{ iff } !A \in \Delta' \text{
+    for all $\Delta'$ with } R^\Sigma\Delta\Delta'}{%
+  \Diamond!A \in \Delta \text{ iff } !A \in \Delta' \text{ for at
+    least one } \Delta' \text{ with } R^\Sigma\Delta\Delta'}
+\]
+\iftag{prvBox}{Consider the left-to-right direction: it says that if
+  $\Box !A \in \Delta$, then $!A \in \Delta'$ for any $!A$ and any
+  $\Delta'$ with $R^\Sigma\Delta\Delta'$. If we stipulate that
+  $R^\Sigma\Delta\Delta'$ iff $!A \in \Delta'$ for all $\Box!A \in
+  \Delta$, then this holds. We can write the condition on the right of
+  the ``iff'' more compactly as: $\Setabs{!A}{\Box!A \in \Delta}
+  \subseteq \Delta'$.}{Consider the right-to-left direction: it says
+  that if $!A \in \Delta'$ then $\Diamond!A \in \Delta$, for any $!A$
+  and $\Delta'$ with $R^\Sigma\Delta\Delta'$. If we stipulate that
+  $R^\Sigma\Delta\Delta'$ holds whenever $\Diamond!A \in \Delta$ for
+  all $!A \in \Delta'$, then this holds.  We can write the condition
+  on the right of the ``iff'' more compactly as:
+  $\Setabs{\Diamond!A}{!A \in \Delta'} \subseteq \Delta$.}
+
+So the question is: does this definition of $R^\Sigma$ in fact
+guarantee that \iftag{prvBox}{$\Box !A \in \Delta$ iff
+  $\mSat{M^\Sigma}{\Box !A}[\Delta]$? \iftag{prvDiamond}{Does it also
+    guarantee that }{}}{}\iftag{prvDiamond}{$\Diamond !A \in \Delta$
+  iff $\mSat{M^\Sigma}{\Diamond !A}[\Delta]$?}{} The next few results
+will establish this.
+\end{explain}
 
 \begin{defn}
   If $\Gamma$ is a set of !!{formula}s, let
   \begin{align*}
     \Box\Gamma & = \Setabs{\Box !B}{!B \in \Gamma}\\
     \Diamond\Gamma & = \Setabs{\Diamond !B}{!B \in \Gamma}\\
+    \intertext{and}
+    \Box^{-1}\Gamma & = \Setabs{!B}{\Box !B \in \Gamma}\\
+    \Diamond^{-1}\Gamma & = \Setabs{!B}{\Diamond !B \in \Gamma}\\
   \end{align*}
 \end{defn}
 
-\begin{lem}\ollabel{lem:Gamma-proves1}
+In other words, $\Box\Gamma$ is $\Gamma$ with $\Box$ in front of every
+!!{formula} in~$\Gamma$; $\Box^{-1}\Gamma$ is all the $\Box$'ed
+!!{formula}s of~$\Gamma$ with the initial $\Box$'s removed.  This
+definition is not terribly important on its own, but will simplify the
+notation considerably.
+
+Note that $\Box\Box^{-1}\Gamma \subseteq \Gamma$:
+\[
+\Box\Box^{-1}\Gamma = \Setabs{\Box!B}{\Box!B \in \Gamma}
+\]
+i.e., it's just the set of all those !!{formula}s of~$\Gamma$ that
+start with~$\Box$.
+
+\begin{lem}\ollabel{lem:box1}
   If $\Gamma \Proves[\Sigma] !A$ then $\Box\Gamma \Proves[\Sigma] \Box
   !A$.
 \end{lem}
@@ -39,56 +99,97 @@ normal modal logic throughout.
   !A$.
 \end{proof}
 
-\begin{lem}\ollabel{lem:Gamma-proves2}
-  If $\Setabs{!B}{\Box !B \in \Gamma} \Proves[\Sigma] !A$ then
-  $\Gamma \Proves[\Sigma] \Box!A$.
+\begin{lem}\ollabel{lem:box2}
+  If $\Box^{-1} \Gamma \Proves[\Sigma] !A$ then $\Gamma
+  \Proves[\Sigma] \Box!A$.
 \end{lem}
 
 \begin{proof}
-  Let $\Delta = \Setabs{!B}{\Box !B \in \Gamma}$, so that $\Delta
-  \Proves[\Sigma] !A$; then by \olref{lem:Gamma-proves1},
-  $\Box\Delta \Proves \Box!A$. But obviously
-  $\Box\Delta \subseteq \Gamma$, so also $\Gamma
-  \Proves[\Sigma] \Box!A$ by Monotony.
+  Suppose $\Box^{-1}\Gamma \Proves[\Sigma] !A$; then by
+  \olref{lem:box1}, $\Box\Box^{-1}\Gamma \Proves \Box!A$. But since
+  $\Box\Box^{-1}\Gamma \subseteq \Gamma$, also $\Gamma \Proves[\Sigma]
+  \Box!A$ by Monotony.
 \end{proof}
 
-\begin{thm}\ollabel{thm:box-phiGamma}
+\iftag{prvBox}{%
+% Box is primitive
+  
+\begin{prop}\ollabel{prop:box}
   If $\Gamma$ is complete $\Sigma$-consistent, then $\Box !A \in
   \Gamma$ if and only if for every complete $\Sigma$-consistent
-  $\Delta$ such that $\Setabs{!B}{\Box !B \in \Gamma} \subseteq
-  \Delta$, it holds that $!A \in \Delta$.
-\end{thm}
+  $\Delta$ such that $\Box^{-1} \Gamma \subseteq \Delta$, it holds
+  that $!A \in \Delta$.
+\end{prop}
 
 \begin{proof}
-  The left-to-right half of the theorem is obvious. For the converse,
-  suppose $\Box!A \notin \Gamma$. Since $\Gamma$ is deductively
-  closed, $\Gamma \Proves/[\Sigma] \Box !A$, and by
-  \olref{lem:Gamma-proves2}, $\Setabs{!B}{\Box!B \in \Gamma}
-  \Proves/[\Sigma] !A$. By
-  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b},
-  $\Setabs{!B}{\Box!B \in \Gamma} \cup \{ \lnot!A \}$ is
-  $\Sigma$-consistent, so that by Lindenbaum's Lemma there is a
-  complete $\Sigma$-consistent set~$\Delta$ such that
-  $\Setabs{!B}{\Box!B \in \Gamma} \cup \{ \lnot!A \} \subseteq
-  \Delta$. By consistency, $!A \notin \Delta$, and the theorem is
-  proved.
-\end{proof}
+  Suppose $\Gamma$ is complete $\Sigma$-consistent. The ``only if''
+  direction is easy: Suppose $\Box !A \in \Gamma$ and that
+  $\Box^{-1}\Gamma \subseteq \Delta$. Since $\Box!A \in \Gamma$, $!A
+  \in \Box^{-1}\Gamma \subseteq \Delta$, so $!A \in \Delta$.
 
-\begin{lem}\ollabel{lem:Gamma-proves3}
+  For the ``if'' direction, we prove the contrapositive: Suppose
+  $\Box!A \notin \Gamma$. Since $\Gamma$ is complete
+  $\Sigma$-consistent, it is deductively closed, and hence $\Gamma
+  \Proves/[\Sigma] \Box !A$. By \olref{lem:box2},
+  $\Box^{-1}\Gamma \Proves/[\Sigma] !A$. By
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b},
+  $\Box^{-1}\Gamma \cup \{ \lnot!A \}$ is $\Sigma$-consistent. By
+  Lindenbaum's Lemma, there is a complete $\Sigma$-consistent
+  set~$\Delta$ such that $\Box^{-1}\Gamma \cup \{ \lnot!A \} \subseteq
+  \Delta$. By consistency, $!A \notin \Delta$.
+\end{proof}
+}{%
+% Box is not primitive, only Diamond is
+
+\begin{prop}\ollabel{prop:diamond}
+  If $\Gamma$ is complete $\Sigma$-consistent, then $\Diamond !A \in
+  \Gamma$ if and only if for some complete $\Sigma$-consistent
+  $\Delta$ such that $\Diamond\Delta \subseteq
+  \Gamma$, it holds that $!A \in \Delta$.
+\end{prop}
+
+\begin{proof}
+  Suppose $\Gamma$ is complete $\Sigma$-consistent. The right-to-left
+  part is easy: Let $\Delta$ be complete $\Sigma$-consistent such that
+  $\Diamond\Delta \subseteq \Gamma$ and $!A \in \Delta$.  Then
+  $\Diamond!A \in \Diamond\Delta \subseteq \Gamma$, i.e., $\Diamond!A
+  \in \Gamma$.
+
+  For the left-to-right direction, assume $\Diamond !A \in \Gamma$. We
+  have to show that there is a complete $\Sigma$-consistent $\Delta$
+  with $!A \in \Delta$ and $\Diamond\Delta \subseteq \Gamma$.  Since
+  $\Diamond !A \in \Gamma$, and $\Gamma$ is $\Sigma$-consistent,
+  $\Box\lnot !A \notin \Gamma$. Since $\Gamma$ is complete
+  $\Sigma$-consistent, it is deductively closed, so $\Gamma
+  \Proves/[\Sigma] \Box\lnot !A$.  By \olref{lem:box2},
+  $\Box^{-1}\Gamma \Proves/[\Sigma] \lnot !A$. By
+  \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-b},
+  $\Box^{-1}\Gamma \cup \{ !A \}$ is $\Sigma$-consistent. By
+  Lindenbaum's Lemma, there is a complete $\Sigma$-consistent
+  set~$\Delta$ such that $\Box^{-1}\Gamma \cup \{ !A \} \subseteq
+  \Delta$. Clearly, $!A \in \Delta$.  To see that $\Diamond\Delta
+  \subseteq \Gamma$, assume it weren't: For some $!B \in \Delta$,
+  $\Diamond !B \notin \Gamma$. Then, since $\Gamma$ is complete
+  $\Sigma$-consistent, $\Box\lnot !B \in \Gamma$. But then also $\lnot
+  !B \in \Box^{-1}\Gamma \subseteq \Delta$, which would make $\Delta$
+  inconsistent.
+\end{proof}
+}
+
+\begin{lem}\ollabel{lem:box-iff-diamond}
   Suppose $\Gamma$ and $\Delta$ are complete
-  $\Sigma$-consistent. Then: $\Setabs{!A}{\Box!A \in \Gamma}
-    \subseteq \Delta$ if and only if $\Diamond\Delta \subseteq \Gamma$.
+  $\Sigma$-consistent. Then: $\Box^{-1}\Gamma \subseteq \Delta$ if and
+  only if $\Diamond\Delta \subseteq \Gamma$.
 \end{lem}
 
 \begin{proof}
-  ``Only if'' direction: Assume $\Setabs{!A}{\Box!A \in \Gamma}
-  \subseteq \Delta$ and suppose $!A \in \Delta$.  In order to
-  show $\Diamond!A \in \Gamma$ it suffices to show $\Box\lnot!A
-  \notin \Gamma$ for then by maximality $\lnot\Box\lnot !A \in
-  \Gamma$. Now, if $\Box\lnot!A \in \Gamma$ then by hypothesis
-  $\lnot!A \in \Delta$, against the consistency of $\Delta$
-  (since $!A \in \Delta$). Hence  $\Box\lnot!A \notin
-  \Gamma$, as required.
+  ``Only if'' direction: Assume $\Box^{-1}\Gamma \subseteq \Delta$ and
+  suppose $\Diamond!A \in \Diamond\Delta$ (i.e., $!A \in \Delta$).  In
+  order to show $\Diamond!A \in \Gamma$ it suffices to show
+  $\Box\lnot!A \notin \Gamma$ for then by maximality $\lnot\Box\lnot
+  !A \in \Gamma$. Now, if $\Box\lnot!A \in \Gamma$ then by hypothesis
+  $\lnot!A \in \Delta$, against the consistency of $\Delta$ (since $!A
+  \in \Delta$). Hence $\Box\lnot!A \notin \Gamma$, as required.
 
   ``If'' direction: Assume $\Diamond\Delta
   \subseteq \Gamma$. We argue contrapositively: suppose $!A
@@ -96,38 +197,50 @@ normal modal logic throughout.
   $!A \notin \Delta$ then by maximality $\lnot!A \in \Delta$
   and so by hypothesis $\Diamond\lnot!A \in \Gamma$. But in a
   normal modal logic $\Diamond\lnot!A$ is equivalent to
-  $\lnot\Box !A$, and if the latter is in $\Gamma$ by consistency
+  $\lnot\Box !A$, and if the latter is in $\Gamma$, by consistency
   $\Box!A \notin\Gamma$, as required.
 \end{proof}
 
-\begin{cor}
+\iftag{prvBox}{%
+  \iftag{prvDiamond}{%
+% Box and Diamond are both primitive; prove
+% prop:diamond using lem:box-iff-diamond
+  
+\begin{prop}\ollabel{prop:diamond}
   If $\Gamma$ is complete $\Sigma$-consistent, then $\Diamond !A \in
   \Gamma$ if and only if for some complete $\Sigma$-consistent
   $\Delta$ such that $\Diamond\Delta \subseteq
   \Gamma$, it holds that $!A \in \Delta$.
-\end{cor}
+\end{prop}
 
 \begin{proof}
-Suppose $\Gamma$ is complete $\Sigma$-consistent, and argue as
-follows:
-\begin{align*}
-  \Diamond!A \in \Gamma \Leftrightarrow &
-  \lnot\Box\lnot !A \in \Gamma, && \text{re-writing}; \\
-  \Leftrightarrow & \Box\lnot!A \notin \Gamma, && \Gamma
-  \text{ is $\Sigma$-consistent}; \\ 
-  \Leftrightarrow & \exists\Delta \left[ \Delta \text{ is
-      complete $\Sigma$-consistent} {} \land {}\right.\\
-    & \qquad \left.\Setabs{ !B }{ \Box !B \in \Gamma }
-  \subseteq \Delta  \land \lnot!A \notin\Delta\right], &&
-   \text{\olref{thm:box-phiGamma}}; \\
- \Leftrightarrow & \exists\Delta \left[ \Delta \text{ is
-     complete $\Sigma$-consistent} \land {}\right.\\
-   & \qquad \left.\Diamond\Delta \subseteq \Gamma \land  \lnot!A \notin\Delta\right], && 
-   \text{\olref{lem:Gamma-proves3}}; \\
-\Leftrightarrow & \exists\Delta \left[ \Delta \text{ is
-    complete $\Sigma$-consistent} {} \land {}\right.\\
-  & \qquad \left.\Diamond \Delta \subseteq \Gamma  \land !A \in\Delta\right], && \Delta \text{ is complete}. \qedhere  
-\end{align*}
+Suppose $\Gamma$ is complete $\Sigma$-consistent.  $\Diamond!A \in
+\Gamma$ iff $\lnot\Box\lnot !A \in \Gamma$ by \Dual{} and closure.
+$\lnot\Box\lnot !A \in \Gamma$ iff $\Box\lnot !A \notin \Gamma$ by
+\olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot} since
+$\Gamma$ is complete $\Sigma$-consistent.  By \olref{prop:box},
+$\Box\lnot !A \notin \Gamma$ iff, for some complete
+$\Sigma$-consistent $\Delta$ with $\Box^{-1}\Gamma \subseteq \Delta$,
+$\lnot!A \notin \Delta$.  Now consider any such~$\Delta$. By
+\olref{lem:box-iff-diamond}, $\Box^{-1}\Gamma \subseteq \Delta$ iff
+$\Diamond\Delta \subseteq \Gamma$. Also, $\lnot !A \notin \Delta$ iff
+$!A \in \Delta$ by
+\olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-lnot}.  So
+$\Diamond!A \in \Gamma$ iff, for some complete $\Sigma$-consistent
+$\Delta$ with $\Diamond\Delta \subseteq \Gamma$, $!A \in \Delta$.
 \end{proof}
+
+}{}}{}
+  
+\begin{prob}
+  Show that if $\Gamma$ is complete $\Sigma$-consistent, then
+  \iftag{prvBox}{$\Diamond !A \in \Gamma$ if and only if for some
+    complete $\Sigma$-consistent $\Delta$ such that $\Box^{-1}\Delta'
+    \subseteq \Gamma$, it holds that $!A \in \Delta$.}{$\Box !A \in
+    \Gamma$ if and only if for every complete $\Sigma$-consistent
+    $\Delta$ such that $\Box^{-1} \Gamma \subseteq \Delta$, it holds
+    that $!A \in \Delta$.}  \emph{Do this without using
+    \olref[mod][com][mod]{lem:box-iff-diamond}}.
+\end{prob}
 
 \end{document}

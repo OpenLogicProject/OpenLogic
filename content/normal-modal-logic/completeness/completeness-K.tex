@@ -8,25 +8,41 @@
 
 \olfileid{mod}{com}{cmk}
 
-\olsection{Completeness for \Log{K}}
+\olsection{Determination and Completeness for  \Log{K}}
+
+We are now prepared to use the canonical model to establish
+completeness. Completeness follows from the fact that the !!{formula}s
+true in the canonical for~$\Sigma$ are exactly the
+$\Sigma$-!!{derivable} ones. Models with this property are said to
+\emph{determine}~$\Sigma$.
+
+\begin{defn}
+  A model $\mModel{M}$ \emph{determines} a normal modal
+  logic~$\Sigma$ precisely when $\mSat{M}{!A}$ if and only if $\Sigma
+  \Proves !A$, for all !!{formula}s~$!A$.
+\end{defn}
 
 \begin{thm}[Determination]\ollabel{thm:determination}
-   For every normal modal logic $\Sigma$: $\mSat{M^\Sigma}{!A}$ if and
-   only if $\Sigma \Proves !A$.
+   $\mSat{M^\Sigma}{!A}$ if and only if $\Sigma \Proves !A$.
 \end{thm}
 
 \begin{proof}
   If $\mSat{M^\Sigma}{!A}$, then for every complete
-  $\Sigma$-consistent $w$, we have $\mSat{M^\Sigma}{!A}[w]$. Hence, by
-  the Truth Lemma, $!A \in w$ for every complete $\Sigma$-consistent
-  $w$, whence by \olref[pcc]{cor:provability-characterization} (with
-  $\Gamma = \emptyset$), $\Sigma \Proves !A$. Conversely, if $\Sigma
-  \Proves !A$ then by
-  \olref[ccs]{prop:completeconsproperties}\olref[ccs]{prop:completeconsproperties-b},
-  every complete $\Sigma$-consistent $w$ contains $!A$, and hence by
-  the Truth Lemma $\mSat{M^\Sigma}{!A}[w]$ for every~$w$, i.e.,
-  $\mSat{M^\Sigma}{!A}$.
+  $\Sigma$-consistent $\Delta$, we have
+  $\mSat{M^\Sigma}{!A}[\Delta]$. Hence, by the Truth Lemma, $!A \in
+  \Delta$ for every complete $\Sigma$-consistent $\Delta$, whence by
+  \olref[lin]{cor:provability-characterization} (with $\Gamma =
+  \emptyset$), $\Sigma \Proves !A$.
+
+  Conversely, if $\Sigma \Proves !A$ then by
+  \olref[ccs]{prop:ccs-properties}\olref[ccs]{prop:ccs-closed}, every
+  complete $\Sigma$-consistent $\Delta$ contains~$!A$, and hence by
+  the Truth Lemma, $\mSat{M^\Sigma}{!A}[\Delta]$ for every~$\Delta \in
+  W^\Sigma$, i.e., $\mSat{M^\Sigma}{!A}$.
 \end{proof}
+
+Since the canonical model for \Log{K} determines~\Log{K}, we
+immediately have completeness of~\Log{K} as a corollary:
 
 \begin{cor}\ollabel{cor:Kcomplete}
   The basic modal logic \Log{K} is complete with respect to the
@@ -36,7 +52,14 @@
 
 \begin{proof}
   Contrapositively, if $\Log{K} \Proves/ !A$ then by Determination
-  $\mSat/{M^\Log{K}}{!A}$ and hence $!A$ is not valid.
+  $\mSat/{M^{\Log{K}}}{!A}$ and hence $!A$ is not valid.
 \end{proof}
+
+For the general case of completeness of a system $\Sigma$ with respect
+to a class of models, e.g., of \Log{KTB4} with respect to the class of
+reflexive, symmetric, transitive models, determination alone is not
+enough.  We must also show that the canonical model for the system
+$\Sigma$ is a member of the class, which does not follow obviously
+from the canoncial model construction---nor is it always true!
 
 \end{document}
