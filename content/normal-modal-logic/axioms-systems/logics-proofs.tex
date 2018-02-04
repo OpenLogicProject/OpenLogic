@@ -14,22 +14,22 @@ We first define what !!a{derivation} is for normal modal
 logics. Roughly, !!a{derivation} is a sequence of !!{formula}s in
 which every !!{element} is either (a substitution instance of) one of
 a number of \emph{axioms}, or follows from previous !!{element}s by
-one of a few inference rules. For normal modal logics, tautologies,
-\Ax{K}, and \Dual{} count as axioms. This results in the modal
-system~$\Log{K}$, the smallest normal modal logic. We may wish to add
-additional axioms to obtain other systems, however. The rules are
-always modus ponens~\MP{} and necessitation~\Nec.
+one of a few inference rules. For normal modal logics, all instances
+of tautologies\iftag{prvDiamond}{, \Ax{K}, and~\Dual{}}{ and~\Ax{K}}
+count as axioms. This results in the modal system~$\Log{K}$, the
+smallest normal modal logic. We may wish to add additional axioms to
+obtain other systems, however. The rules are always modus ponens~\MP{}
+and necessitation~\Nec.
 
 \begin{defn}
-  Given a modal system $\Log{K} !A_1 \dots !A_n$
-  and !!a{formula} $!B$ we say that $!B$ is \emph{!!{derivable}} in
-  $\Log{K} !A_1 \dots !A_n$, written $\Log{K}
-  !A_1 \dots !A_n \Proves !B$, if and only if
-  there are !!{formula}s $!C_1$, \dots, $!C_k$ such that $!C_k
-  = !B$ and each $!C_i$ is either a tautological instance,
-  or an instance of one of $\Ax{K}$, $\Dual$, $!A_1$, \dots,
-  $!A_n$, or it follows from previous !!{formula}s by means of the
-  rules \MP{} or~\Nec.
+  Given a modal system $\Log{K} !A_1 \dots !A_n$ and !!a{formula} $!B$
+  we say that $!B$ is \emph{!!{derivable}} in $\Log{K} !A_1 \dots
+  !A_n$, written $\Log{K} !A_1 \dots !A_n \Proves !B$, if and only if
+  there are !!{formula}s $!C_1$, \dots, $!C_k$ such that $!C_k = !B$
+  and each $!C_i$ is either a tautological instance, or an instance of
+  one of $\Ax{K}$,\iftag{prvDiamond}{ $\Dual$,}{} $!A_1$,
+  \dots, $!A_n$, or it follows from previous !!{formula}s by means of
+  the rules \MP{} or~\Nec.
 \end{defn}
 
 The following proposition allows us to show that $!B \in \Sigma$
@@ -41,13 +41,14 @@ by exhibiting a $\Sigma$-proof of~$!B$.
 
 \begin{proof}
   We use induction on the length of !!{derivation}s to show that
-  $\Sigma \Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B} \subseteq
+  $\Setabs{!B}{\Log{K} !A_1 \dots !A_n \Proves !B} \subseteq
   \Log{K} !A_1 \dots !A_n$.
 
   If the !!{derivation} of~$!B$ has length~$1$, it contains a single
   !!{formula}. That !!{formula} cannot follow from previous formulas
-  by \MP{} or \Nec, so must be a tautological instance, and instance
-  of \Ax{K}, or an instance of \Dual. But every modal logic contains
+  by \MP{} or \Nec, so must be a tautological instance, an instance of
+  \Ax{K},\iftag{prvDiamond}{ $\Dual$,}{} or an instance
+  of one of $!A_1$, \dots,~$!A_n$. But $\Log{K}!A_1\dots!A_n$ contains
   these as well, so $!B \in \Log{K}!A_1 \dots !A_n$.
 
   If the !!{derivation} of $!B$ has length~$> 1$, then $!B$ may in
@@ -67,8 +68,9 @@ by exhibiting a $\Sigma$-proof of~$!B$.
   \dots, $!A_n$, and the observation that $\Log{K} !A_1 \dots !A_n$
   is, by definition, the smallest such logic.
   \begin{enumerate}
-    \item Every tautology~$!B$ is a tautological instance, so $\Sigma$
-      contains all tautologies.
+    \item Every tautology~$!B$ is a tautological instance, so
+      $\Log{K}!A_1\dots!A_n \Proves !B$, so $\Sigma$ contains all
+      tautologies.
     \item If $\Log{K}!A_1\dots!A_n \Proves !C$ and
       $\Log{K}!A_1\dots!A_n \Proves !C \lif !B$, then
       $\Log{K}!A_1\dots!A_n \Proves !B$: Combine the !!{derivation} of
@@ -82,8 +84,9 @@ by exhibiting a $\Sigma$-proof of~$!B$.
       also a correct !!{derivation}). So $\Sigma$ is closed under
       uniform substitution. (We have now established that $\Sigma$
       satisfies all conditions of a modal logic.)
-    \item We have $\Log{K}!A_1\dots!A_n \Proves \Ax{K}$ and $\Proves
-      \Dual$, so $K$, $\Dual \in \Sigma$
+    \item We have $\Log{K}!A_1\dots!A_n \Proves \Ax{K}$, so $K \in \Sigma$.
+    \tagitem{prvDiamond}{We have
+      $\Log{K}!A_1\dots!A_n \Proves \Dual$, so $\Dual \in \Sigma$.}{}
     \item If $\Log{K}!A_1\dots!A_n \Proves !C$, the additional
       line~$\Box !C$ is justified by~\Nec. Consequently, $\Sigma$ is
       closed under~\Nec. Thus, $\Sigma$ is normal.

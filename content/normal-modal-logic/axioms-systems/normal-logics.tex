@@ -15,8 +15,10 @@ those !!{formula}s derivable from a set of axioms. We want modal
 logics to be well-behaved. First of all, everything we can !!{derive}
 in classical propositional logic should still be !!{derivable}, of
 course taking into account that the !!{formula}s may now contain also
-$\Box$ and~$\Diamond$. To this end, we require that a modal logic
-contain all tautological instances and be closed under modus ponens.
+\iftag{prvBox}{$\Box$\iftag{prvDiamond}{
+    and~}{}}{}\iftag{prvDiamond}{$\Diamond$}{}. To this end, we
+require that a modal logic contain all tautological instances and be
+closed under modus ponens.
 
 \begin{defn}
   A \emph{modal logic} is a set~$\Sigma$ of modal !!{formula}s which
@@ -35,19 +37,20 @@ contain all tautological instances and be closed under modus ponens.
 In order to use the relational semantics for modal logics, we also
 have to require that all !!{formula}s valid in all modal models are
 included. It turns out that this requirement is met as soon as all
-instances of \Ax{K} and~\Dual{} are !!{derivable}, and whenever a
-!!{formula}~$!A$ is !!{derivable}, so is~$\Box !A$. A modal logic that
-satisfies these conditions is called \emph{normal}. (Of course, there
-are also non-normal modal logics, but the usual relational models are
-not adequate for them.)
+instances of \Ax{K}\iftag{prvDiamond}{ and~\Dual{}}{} are
+!!{derivable}, and whenever !!a{formula}~$!A$ is !!{derivable}, so
+is~$\Box !A$. A modal logic that satisfies these conditions is called
+\emph{normal}. (Of course, there are also non-normal modal logics, but
+the usual relational models are not adequate for them.)
 
 \begin{defn}
   A modal logic $\Sigma$ is \emph{normal} if it contains
   \begin{align*}
-  \tag{\Ax{K}} & \Box(p \lif q) \lif (\Box p \lif \Box q),\\
-  \tag{\Dual} & \Diamond p \liff \lnot\Box\lnot p
+    \tag{\Ax{K}} & \Box(p \lif q) \lif (\Box p \lif \Box q),
+    \iftag{prvDiamond}{\\
+      \tag{\Dual} & \Diamond p \liff \lnot\Box\lnot p}{}
   \end{align*}
-  and is closed under the \emph{necessitation}, i.e., if $!A \in
+  and is closed under \emph{necessitation}, i.e., if $!A \in
   \Sigma$, then $\Box !A \in \Sigma$.
 \end{defn}
 

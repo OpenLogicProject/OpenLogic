@@ -21,11 +21,12 @@ tautological instance
 (!A \lif !B) \lif ((!B \lif !C) \lif (!A \lif !C))
 \]
 and applying \MP{} twice. Often we want to replace a sub-!!{formula}
-by a formula we know to be equivalent, e.g., $\Diamond !A$ by
-$\lnot\Box\lnot !A$ or $\lnot\lnot !A$ by $!A$. So rather than write
-out the actual !!{derivation}, it is more convenient to simply record
-why the intermediate steps are !!{derivable}. For this purpose, let us
-collect some facts about !!{derivability}.
+by a formula we know to be equivalent, e.g., \iftag{prvDiamond}{$\Diamond
+  !A$ by $\lnot\Box\lnot !A$}{$\Box !A$ by $\lnot\Diamond\lnot !A$}, or
+$\lnot\lnot !A$ by $!A$. So rather than write out the actual
+!!{derivation}, it is more convenient to simply record why the
+intermediate steps are !!{derivable}. For this purpose, let us collect
+some facts about !!{derivability}.
 
 \begin{prop}
   If $\Log{K} \Proves !A_1$, \dots, $\Log{K} \Proves !A_n$, and $!B$
@@ -86,19 +87,30 @@ these results help establishing !!{derivability} results more easily.
 
 This proposition comes in handy especially when we want to convert
 $\Diamond$ into $\Box$ (or vice versa), or remove double negations
-inside a !!{formula}. For instance:
+inside !!a{formula}. For instance:
 
 \begin{prop}
   $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$
 \end{prop}
 
 \begin{proof}
+  \iftag{prvDiamond}{% Diamond is primitive
   \begin{derivation}
     1. & $\Log{K} \Proves \Diamond \lnot p \liff \lnot\Box\lnot\lnot p$ &
     \Dual\\
     2. & $\Log{K} \Proves \lnot \Box \lnot\lnot p \lif \Diamond \lnot p$ & \PL, 1\\
     3. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & re-write $p$ for $\lnot\lnot p$\\
   \end{derivation}
+  }{% Diamond is defined
+  \begin{derivation}
+    1. & $\Log{K} \Proves \lnot \Box \lnot\lnot p \lif \Diamond \lnot p$ & \Taut\\
+    2. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & re-write $p$ for $\lnot\lnot p$\\
+  \end{derivation}
+  The formula on line~$1$ is an instance of $\lnot q \lif \lnot q$,
+  substituting $\Box\lnot\lnot p$ for~$q$. $\Diamond\lnot p$ and
+  $\lnot\Box\lnot\lnot p$ are identical, since $\Diamond$ is defined
+  as~$\lnot\Box\lnot$.
+  }
 \end{proof}
 
 The following proposition justifies that we can establish
@@ -118,10 +130,11 @@ does not just establish that $\Log{K} \Proves \lnot\Box p \lif
   entire !!{derivation} also results in a correct
   !!{derivation}. Specifically, substitution instances of tautological
   instances are themselves tautological instances, substitution
-  instances of instances of \Dual{} and~\Ax{K} are themselves
-  instances of \Dual{} and~\Ax{K}, and applications of \MP{}
-  and~\Nec{} remain correct when substituting !!{formula}s for
-  !!{propositional variable}s in both premise(s) and conclusion.
+  instances of instances of~\iftag{prvDiamond}{\Dual{} and~}{}\Ax{K}
+  are themselves instances of~\iftag{prvDiamond}{\Dual{}
+    and~}{}\Ax{K}, and applications of \MP{} and~\Nec{} remain correct
+  when substituting !!{formula}s for !!{propositional variable}s in
+  both premise(s) and conclusion.
 \end{proof}
 
 
