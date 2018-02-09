@@ -10,6 +10,9 @@
 
 \olsection{Truth in a Model}
 
+Sometimes we are interested which !!{formula}s are true at every world
+in a given model. Let's introduce a notation for this.
+
 \begin{defn}
   !!^a{formula} $!A$ is \emph{true in a model} $M = \tuple{W, R,
     V}$, written $\mSat{M}{!A}$, if and only if $\mSat{M}{!A}[w]$
@@ -30,15 +33,19 @@
   \item If $\mSat{M}{!A}$ then $!A$ is true at all worlds in $W$, and
     since $W \neq \emptyset$, it can't be that $\mSat{M}{\lnot!A}$, or
     else $!A$ would have to be both true and false at some
-    world. Conversely, if $\mSat/{M}{\lnot !A}$ then $!A$ is true at
-    some world $w \in W$; it does not follow that $\mSat{M}{!A}$. For
-    instance, in the model of \olref[rel]{fig:simple},
-    $\mSat/{M}{\lnot p}$, but it does not follow that $\mSat{M}{p}$.
+    world.
+
+    On the other hand, if $\mSat/{M}{\lnot !A}$ then $!A$ is true at
+    some world $w \in W$. It does not follow that $\mSat{M}{!A}[w]$
+    for \emph{every}~$w \in W$. For instance, in the model of
+    \olref[rel]{fig:simple}, $\mSat/{M}{\lnot p}$, and also $\mSat/{M}{p}$.
   \item Assume $\mSat{M}{!A \lif !B}$ and $\mSat{M}{!A}$; to show
     $\mSat{M}{!B}$ let $w \in W$ be an arbitrary world. Then
     $\mSat{M}{!A \lif !B}[w]$ and $\mSat{M}{!B}[w]$, so
-    $\mSat{M}{!A}[w]$, and since $w$ was arbitrary,
-    $\mSat{M}{!A}$. The converse fails: we need to find a model
+    $\mSat{M}{!B}[w]$, and since $w$ was arbitrary,
+    $\mSat{M}{!B}$.
+
+    To show that the converse fails, we need to find a model
     $\mModel{M}$ such that $\mSat{M}{!A}$ only if $\mSat{M}{!B}$, but
     $\mSat/{M}{!A \lif !B}$. Consider again the model of
     \olref[rel]{fig:simple}: $\mSat/{M}{p}$ and hence (vacuously)

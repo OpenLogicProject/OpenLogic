@@ -1,0 +1,90 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{}{axs}
+
+\olsection{Introduction}
+
+We have a semantics for the basic modal language in terms of modal
+models, and a notion of !!a{formula} being valid---true at all worlds
+in all models---or valid with respect to some class of models or
+frames---true at all worlds in all models in the class, or based on
+the frame. Logic usually connects such semantic characterizations of
+validity with a proof-theoretic notion of !!{derivability}. The aim is
+to define a notion of !!{derivability} in some system such that
+!!a{formula} is !!{derivable} iff it is valid.
+
+The simplest and historically oldest !!{derivation} systems are
+so-called Hilbert-type or axiomatic !!{derivation} systems.
+Hilbert-type !!{derivation} systems for many modal logics are
+relatively easy to construct: they are simple as objects of
+metatheoretical study (e.g., to prove soundness and
+completeness). However, they are much harder to use to prove
+!!{formula}s in than, say, natural deduction systems.
+
+In Hilbert-type !!{derivation} systems, a derivation of !!a{formula}
+is a sequence of !!{formula}s leading from certain axioms, via a
+handful of inference rules, to the !!{formula} in question.  Since we
+want the !!{derivation} system to match the semantics, we have to
+guarantee that the set of !!{derivable} formulas are true in all
+models (or true in all models in which all axioms are true). We'll
+first isolate some properties of modal logics that are necessary for
+this to work: the ``normal'' modal logics. For normal modal logics,
+there are only two inference rules that need to be assumed: modus
+ponens and necessitation.  As axioms we take all (substitution
+instances) of tautologies, and, depending on the modal logic we deal
+with, a number of modal axioms. Even if we are just interested in the
+class of all models, we must also count all substitution instances
+of~$\Ax{K}$\iftag{notprvDiamond}{}{ and~$\Ax{Dual}$} as axioms. This
+alone generates the minimal normal modal logic~$\Log K$.
+
+\begin{defn}
+The rule of \emph{modus ponens} is the inference schema
+\begin{prooftree}
+\AxiomC{$!A$}
+\AxiomC{$!A \lif !B$}
+\RightLabel{\MP}
+\BinaryInfC{$!B$}
+\end{prooftree}
+We say !!a{formula}~$!B$ \emph{follows from}~!!{formula}s $!A$, $!C$
+by modus ponens iff $!C \ident !A \lif !B$.
+\end{defn}
+
+\begin{defn}
+The rule of \emph{necessitation} is the inference schema
+\begin{prooftree}
+\AxiomC{$!A$}
+\RightLabel{\Nec}
+\UnaryInfC{$\Box !A$}
+\end{prooftree}
+We say the !!{formula} $!B$ follows from the !!{formula}s $!A$ by
+necessitation iff $!B \ident \Box !A$.
+\end{defn}
+
+\begin{defn}
+A \emph{!!{derivation}} from a set of axioms~$\Sigma$ is a sequence of
+!!{formula}s $!B_1$, $!B_2$, \dots, $!B_n$, where each $!B_i$ is
+either
+\begin{enumerate}
+\item a substitution instance of a tautology, or
+\item a substitution instance of !!a{formula} in~$\Sigma$, or
+\item follows from two !!{formula}s $!B_j$, $!B_k$ with $j$, $k < i$
+  by modus ponens, or
+\item follows from !!a{formula} $!B_j$ with $j < i$ by necessitation.
+\end{enumerate}
+If there is such !!a{derivation} with $!B_n \ident !A$, we say that
+$!A$ is \emph{!!{derivable} from $\Sigma$}, in symbols $\Sigma \Proves !A$.
+\end{defn}
+
+With this definition, it will turn out that the set of !!{derivable}
+formulas forms a normal modal logic, and that any !!{derivable}
+!!{formula} is true in every model in which every axiom is true. This
+property of !!{derivation}s is called \emph{soundness}. The converse,
+\emph{completeness}, is harder to prove.
+
+\end{document}
