@@ -25,25 +25,31 @@ p$ is supposed to be true at~$w_2$, while $p$ is false at~$w_5$.
 \begin{figure}[htpb]
   \centering
   \begin{tikzpicture}[modal]
-    \node[world] (w1)
-         [label={above: $w_1$}, label={below: $\mSat{}{\Box p}$}] {}; 
-    \node[world] (w2)
-         [label={above: $w_2$}, label = {below: $\mSat{}{\Box p}$},
-           right=of w1] {$p$}; 
-    \draw[->] (w1) to node {} (w2);
-    \node[world] (w3)
-         [label={above: $w_3$}, label={below: $\mSat{}{\Box p}$},
-           below=of w1] {}; 
-    \node[world] (w4)
-         [label={north west:$w_4$}, label={below: $\mSat/{}{\Box p}$},
-           right=of w3] {$p$};
-    \draw[->] (w3) to node {} (w4);
+    \node (w1)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{}{\Box p}$}] {$w_1$}; 
+    \node (w2)
+          [label={right: \mTrue{p}},
+            label = {below: $\mSat{}{\Box p}$},
+            right=of w1] {$w_2$}; 
+    \draw[->] (w1) to (w2);
+    \node (w3)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{}{\Box p}$},
+            below=of w1] {$w_3$}; 
+    \node (w4)
+          [label={right:\mTrue{p}},
+            label={below: $\mSat/{}{\Box p}$},
+            right=of w3] {$w_4$};
+    \draw[->] (w3) to (w4);
     \draw[reflexive above] (w4) to (w4);     
-    \node[world] (w5) [label={above: $w_5$},
-      label=below:$\mSat/{}{\Box p}$, right=of w4] {}; 
+    \node (w5)
+          [label={right: \mFalse{p}},
+            label=below:$\mSat/{}{\Box p}$,
+            right=of w4] {$w_5$}; 
     \draw[->, bend left] (w4) to (w5);
     \draw[->, bend left] (w5) to (w4);
-    \draw[reflexive right] (w5) to (w5);     
+    \draw[reflexive above] (w5) to (w5);     
   \end{tikzpicture}
   \caption{A serial and euclidean model.}\ollabel{fig:ser-eucl}
 \end{figure}
@@ -51,23 +57,28 @@ p$ is supposed to be true at~$w_2$, while $p$ is false at~$w_5$.
 \begin{figure}[ht]
   \centering
   \begin{tikzpicture}[modal,every text node part/.style={align=center}]
-    \node[world] (w1)
-         [label={right: $[w_1]=[w_3]$},
-           label={below: $\mSat{}{\Box p}$}] {}; 
+    \node (w1)
+          [label={left: \mFalse{p}},
+            label={right:$[w_1]=[w_3]$},
+            label={below: $\mSat{}{\Box p}$}] {$[w_1]$}; 
     \node[world] (w2)
-         [label={right: $[w_2]$}, label = {below: $\mSat{}{\Box p}$},
-           right=of w1, yshift=1.5cm] {$p$}; 
-    \draw[->] (w1) to node {} (w2);
+         [label={right: \mTrue{p}},
+           label = {below: $\mSat{}{\Box p}$},
+           right=of w1, yshift=1.5cm] {$[w_2]$}; 
+    \draw[->] (w1) to (w2);
     \node[world] (w4)
-         [label={left:$[w_4]$}, label={below: $\mSat/{}{\Box p}$},
-           right=of w1,yshift=-1.5cm] {$p$};
-    \draw[->] (w1) to node {} (w4);
+         [label={right:\mTrue{p}},
+           label={below: $\mSat/{}{\Box p}$},
+           right=of w1,yshift=-1.5cm] {$[w_4]$};
+    \draw[->] (w1) to (w4);
     \draw[reflexive above] (w4) to (w4);     
-    \node[world] (w5) [label={above: $[w_5]$},
-      label=below:$\mSat/{}{\Box p}$, right=of w4] {}; 
+    \node[world] (w5)
+         [label={right: \mFalse{p}},
+             label=below:$\mSat/{}{\Box p}$,
+             right=of w4] {$[w_5]$}; 
     \draw[->, bend left] (w4) to (w5);
     \draw[->, bend left] (w5) to (w4);
-    \draw[reflexive right] (w5) to (w5);     
+    \draw[reflexive above] (w5) to (w5);     
   \end{tikzpicture}
   \caption{The filtration of the model in \olref{fig:ser-eucl}.}
   \ollabel{fig:ser-eucl2}

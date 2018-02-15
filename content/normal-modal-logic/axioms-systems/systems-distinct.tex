@@ -41,20 +41,20 @@ a model of~$\Sigma$.
   We construct a symmetric model where some instance of \Ax{4} fails;
   since obviously the instance is !!{derivable} for \Log{K4} but not
   in \Log{KB}, it will follow $\Log{K4} \nsubseteq \Log{KB}$.
-  Consider the symmetric model $\mModel{M}$ of \olref{fig:Bnot4} Since
-  the model is symmetric, \Ax{K} and \Ax{B} are true in $\mModel{M}$
+  Consider the symmetric model $\mModel{M}$ of \olref{fig:Bnot4}. Since
+  the model is symmetric, \Ax{K} and~\Ax{B} are true in~$\mModel{M}$
   (by \olref[syn][sch]{prop:Kvalid} and
   \olref[frd][acc]{thm:soundschemas}, respectively). However,
-  $\mSat/{M}{\Box p \lif \Box\Box p}[w]$.
+  $\mSat/{M}{\Box p \lif \Box\Box p}[w_1]$.
 \end{proof}
 
 \begin{figure}[htpb]
   \centering
   \begin{tikzpicture}[modal]
-    \node[world] (w1) [label=left:$w$,
-    label={below:$\mSat{}{\Box p}$\\ $\mSat/{}{\Box\Box p}$}]{}; 
-    \node[world] (w2) [label=right:$w'$,
-      label=below:$\mSat/{}{\Box p}$,right=of w1]{$p$}; 
+    \node (w1) [label=above:\mFalse{p},
+    label={below:$\mSat{}{\Box p}$\\ $\mSat/{}{\Box\Box p}$}] {$w_1$}; 
+    \node (w2) [label=above:\mTrue{p},
+      label=below:$\mSat/{}{\Box p}$, right=of w1]{$w_2$}; 
     \draw[->, bend left] (w1) to (w2); 
     \draw[->, bend left] (w2) to (w1); 
   \end{tikzpicture}
@@ -85,20 +85,20 @@ a model of~$\Sigma$.
 \begin{figure}[htpb]
   \centering
   \begin{tikzpicture}[modal]
-    \node[world] (w1) [label={left:$w_1$}, label={below: $\mSat{}{\Box p}$\\
+    \node (w1) [label={right:\mTrue{p}}, label={below: $\mSat{}{\Box p}$\\
         $\mSat/{}{\Box\Box p}$\\
-        $\mSat/{}{\Diamond\lnot p}$}] {$p$};
+        $\mSat/{}{\Diamond\lnot p}$}] {$w_1$};
     \draw[reflexive above] (w1) to (w1);
-    \node[world] (w2) [label={below: $w_2$\\
+    \node (w2) [label={right:\mTrue{p}}, label={below:
         $\mSat{}{\Diamond\lnot p}$\\
-        $\mSat/{}{\Box\Diamond\lnot p}$}, right=of w1] {$p$} ;
+        $\mSat/{}{\Box\Diamond\lnot p}$}, right=of w1] {$w_2$} ;
     \draw[reflexive above] (w2) to (w2);
-    \node[world] (w3) at (4, 0) [label={right:$w_3$},right=of w2] {};
+    \node (w3) at (4, 0) [label={right:\mFalse{p}},right=of w2] {$w_3$};
     \draw[reflexive above] (w2) to (w2);
-    \draw[->, bend left] (w1) to node {} (w2);  
-    \draw[->, bend left] (w2) to node {} (w3);  
-    \draw[->, bend left] (w3) to node {} (w2);  
-    \draw[->, bend left] (w2) to node {} (w1);  
+    \draw[->, bend left] (w1) to (w2);  
+    \draw[->, bend left] (w2) to (w3);  
+    \draw[->, bend left] (w3) to (w2);  
+    \draw[->, bend left] (w2) to (w1);  
   \end{tikzpicture}
   \caption{The model for \olref{thm:KTBnot45}.}
   \ollabel{fig:KTBnot45}
@@ -119,13 +119,15 @@ a model of~$\Sigma$.
 
 \begin{figure}[t]
   \centering
-  \begin{tikzpicture}[node distance=2cm, auto, thick]
-    \node[world] (w2) [label=north west:$w_2$]{$p$} ;
+  \begin{tikzpicture}[modal]
+    \node (w2) [label=north west:\mTrue{p}]{$w_2$} ;
     \draw[reflexive left] (w2) to (w2);
-    \node[world] (w1) [label=right:$w_1$,label=below:{$\mSat{}{\Box p}, \mSat/{}{\Box\Box p}$},below right=of w2]{};
-    \node[world] (w3) [label=north east:$w_3$, above right=of w1]{$p$} ;
+    \node (w1) [label=right:\mFalse{p},
+      label=below:{$\mSat{}{\Box p}, \mSat/{}{\Box\Box p}$},
+      below right=of w2]{$w_1$};
+    \node (w3) [label=north east:\mTrue{p}, above right=of w1]{$w_3$} ;
     \draw[reflexive right] (w3) to (w3);
-    \node[world] (w4) [label=right:$w_4$,above right=of w2]{};
+    \node (w4) [label=right:\mFalse{p},above right=of w2]{$w_4$};
     \draw[reflexive above] (w4) to (w4);
     \draw[->] (w1) to (w2);  
     \draw[->] (w1) to (w3);  

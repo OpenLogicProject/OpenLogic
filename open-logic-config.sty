@@ -595,15 +595,26 @@
 % - TikZ style for modal models
 
 \tikzset{
-modal/.style={>=stealth',shorten >=1pt,shorten <=1pt,auto,node distance=1.5cm,
-semithick},
-world/.style={circle,draw,minimum size=0.5cm,fill=gray!15},
-point/.style={circle,draw,inner sep=0.5mm,fill=black},
-reflexive above/.style={->,loop,looseness=7,in=60,out=120},
-reflexive below/.style={->,loop,looseness=7,in=240,out=300},
-reflexive left/.style={->,loop,looseness=7,in=150,out=210},
-reflexive right/.style={->,loop,looseness=7,in=30,out=330}
-,every text node part/.style={align=center}}
+  modal/.style={>=stealth',
+    shorten >=1pt,
+    shorten <=1pt,
+    auto,
+    node distance=1.5cm,
+    label distance=2pt,
+    semithick},
+  world/.style = {circle,draw,minimum size=0.5cm,fill=gray!15},
+  every node/.style={world},
+  point/.style={circle,draw,inner sep=0.5mm,fill=black},
+  phantom/.style={rectangle,inner sep=0pt,draw=none,fill=none},
+  every label/.style={phantom,align=left},
+  reflexive above/.style={->,loop,looseness=7,in=60,out=120},
+  reflexive below/.style={->,loop,looseness=7,in=240,out=300},
+  reflexive left/.style={->,loop,looseness=7,in=150,out=210},
+  reflexive right/.style={->,loop,looseness=7,in=30,out=330}
+}
+
+\DeclareDocumentCommand \mTrue { m }{\ensuremath{\phantom{\lnot}#1}}
+\DeclareDocumentCommand \mFalse { m }{\ensuremath{\lnot #1}}
 
 % Special Sets and Mathematical Symbols
 % -------------------------------------
