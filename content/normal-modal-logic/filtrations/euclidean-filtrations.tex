@@ -12,94 +12,110 @@
 
 The approach of \olref[acc]{sec} does not work in the case of models
 that are euclidean or serial and euclidean. Consider the model at the
-top of \olref{fig:ser-eucl}, which is both euclidean and
-serial. Let $\Gamma = \{p, \Box p \}$. When taking a filtration
-through $\Gamma$, then $[w_1] = [w_3]$ since $w_1$ and $w_3$ are the
-only worlds that agree on $\Gamma$. Any filtration will also have the
-arrow inherited from $\mModel{M}$, as depicted in
-\olref{fig:ser-eucl2}. But we cannot add arrows to that model
-in order to make it euclidean, for then there would be a double arrow
-between $w_2$ and $w_4$, and hence also between $w_2$ and $w_5$. But
-$\Box p$ is true at $w_2$ while $p$ is false at~$w_5$.
+top of \olref{fig:ser-eucl}, which is both euclidean and serial. Let
+$\Gamma = \{p, \Box p \}$. When taking a filtration through $\Gamma$,
+then $[w_1] = [w_3]$ since $w_1$ and $w_3$ are the only worlds that
+agree on~$\Gamma$. Any filtration will also have the arrow inherited
+from $\mModel{M}$, as depicted in \olref{fig:ser-eucl2}. That model
+isn't euclidean. Moreover, we cannot add arrows to that model in order
+to make it euclidean. We would have to add double arrows between
+$[w_2]$ and $[w_4]$, and then also between $w_2$ and~$w_5$. But $\Box
+p$ is supposed to be true at~$w_2$, while $p$ is false at~$w_5$.
 
 \begin{figure}[htpb]
   \centering
-  \begin{tikzpicture}[node distance=2cm, auto, thick]
-    \node (w1) at (0, 0) [label=90:$w_1$, label=below:$\lnot p$]{$\bullet$}; 
-    \node (w2) at (2, 0) [label=90:$w_2$, label=below:$p$]{$\bullet$}; 
+  \begin{tikzpicture}[modal]
+    \node[world] (w1)
+         [label={above: $w_1$}, label={below: $\mSat{}{\Box p}$}] {}; 
+    \node[world] (w2)
+         [label={above: $w_2$}, label = {below: $\mSat{}{\Box p}$},
+           right=of w1] {$p$}; 
     \draw[->] (w1) to node {} (w2);
-    \path node at (0,-1) {$\Box p$};
-    \path node at (2,-1) {$\Box p$};
-    \node (w3) at (0, -2.5) [label=90:$w_3$, label=below:$\lnot p$]{$\bullet$}; 
-    \node (w4) at (2, -2.5) [label=135:$w_4$,
-      label=below:$p$]{$\bullet$}edge [in=60,out=120,loop] (); 
+    \node[world] (w3)
+         [label={above: $w_3$}, label={below: $\mSat{}{\Box p}$},
+           below=of w1] {}; 
+    \node[world] (w4)
+         [label={north west:$w_4$}, label={below: $\mSat/{}{\Box p}$},
+           right=of w3] {$p$};
     \draw[->] (w3) to node {} (w4);
-    \node (w5) at (4, -2.5) [label=90:$w_5$, label=below:$\lnot p$]{$\bullet$}; 
-    \draw[<->] (w4) to node {} (w5) edge [in=30,out=-30,loop] () ;
-    \path node at (0,-3.5) {$\Box p$};
-    \path node at (2,-3.5) {$\lnot\Box p$};
-    \path node at (4,-3.5) {$\lnot\Box p$};
-    \draw [rounded corners] (-1,-4) -- ++(6.25,0)  -- ++(0,5) -- ++(-6.25,0) --  cycle;
-    % \draw[->, bend left] (w1) to node {$R$} (w2); 
-    % \draw[->, bend left] (w2) to node {} (w1); 
-    % \draw [rounded corners] (-1,-1) -- ++(0,2)  -- ++(4.25,0) -- ++(0,-2) --  cycle;
-    % \path node at (2.75,0.75) {$\mModel{M}$};
+    \draw[reflexive above] (w4) to (w4);     
+    \node[world] (w5) [label={above: $w_5$},
+      label=below:$\mSat/{}{\Box p}$, right=of w4] {}; 
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive right] (w5) to (w5);     
   \end{tikzpicture}
   \caption{A serial and euclidean model.}\ollabel{fig:ser-eucl}
 \end{figure}
 
 \begin{figure}[ht]
   \centering
-  \begin{tikzpicture}[node distance=2cm, auto, thick]
-    \node (w1) at (-0.5, -1) [label=110:{$[w_1]=[w_3]$}, label=below:$\lnot
-      p$]{$\bullet$}; 
-    \path node at (-0.5,-2) {$\Box p$};
-    \node (w2) at (2, 0) [label=90:$w_2$,
-      label=0:{$p, \Box p$}]{$\bullet$}; 
-    \node (w4) at (2, -2.5) [label=210:$w_4$,
-      label=below:$p$]{$\bullet$}edge [in=60,out=120,loop] (); 
+  \begin{tikzpicture}[modal,every text node part/.style={align=center}]
+    \node[world] (w1)
+         [label={right: $[w_1]=[w_3]$},
+           label={below: $\mSat{}{\Box p}$}] {}; 
+    \node[world] (w2)
+         [label={right: $[w_2]$}, label = {below: $\mSat{}{\Box p}$},
+           right=of w1, yshift=1.5cm] {$p$}; 
     \draw[->] (w1) to node {} (w2);
+    \node[world] (w4)
+         [label={left:$[w_4]$}, label={below: $\mSat/{}{\Box p}$},
+           right=of w1,yshift=-1.5cm] {$p$};
     \draw[->] (w1) to node {} (w4);
-    \node (w5) at (4, -2.5) [label=90:$w_5$, label=below:$\lnot p$]{$\bullet$}; 
-    \draw[<->] (w4) to node {} (w5) edge [in=30,out=-30,loop] () ;
-    \path node at (2, -3.5) {$\lnot\Box p$};
-    \path node at (4, -3.5) {$\lnot\Box p$};
-    \draw [rounded corners] (-3,-4) -- ++(8.25,0)  -- ++(0,5) -- ++(-8.25,0) --  cycle;
+    \draw[reflexive above] (w4) to (w4);     
+    \node[world] (w5) [label={above: $[w_5]$},
+      label=below:$\mSat/{}{\Box p}$, right=of w4] {}; 
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive right] (w5) to (w5);     
   \end{tikzpicture}
   \caption{The filtration of the model in \olref{fig:ser-eucl}.}
   \ollabel{fig:ser-eucl2}
 \end{figure}
 
-In particular, it is not enough to consider filtrations through
-arbitrary $\Gamma$'s closed under subsentences. Instead we need to
-consider sets $\Gamma$ that are \emph{modally closed} (see
-\olref[pre]{def:modallyclosed}). Such sets of sentences are
-infinite, and therefore do not lead immediately to the decidability of
-the corresponding system.
+In particular, to obtain a euclidean flitration it is not enough to
+consider filtrations through arbitrary $\Gamma$'s closed under
+sub-!!{formula}s. Instead we need to consider sets $\Gamma$ that are
+\emph{modally closed} (see \olref[pre]{defn:modallyclosed}). Such sets
+of sentences are infinite, and therefore do not immediately yield a
+finite model property or the decidability of the corresponding system.
 
-\begin{thm}
-  Let $\Gamma$ be modally closed and $\mModel{M}=\tuple{W,R,V}$. If
-  $\mModel{M^*} = \tuple{W^*,R^*,V^*}$ is a coarsest filtration of
-  $\mModel{M}$, then $\mModel{M^*}$ is symmetric, transitive or
-  euclidean if $\mModel{M}$ is symmetric, transitive, or euclidean,
-  respectively.
+\begin{thm}\ollabel{thm:modal-closed-filt}
+  Let $\Gamma$ be modally closed, $\mModel{M}=\tuple{W,R,V}$, and
+  $\mModel{M^*} = \tuple{W^*,R^*,V^*}$ be a coarsest filtration of
+  $\mModel{M}$.
+  \begin{enumerate}
+  \item If $\mModel{M}$ is symmetric, so is $\mModel{M^*}$.
+  \item If $\mModel{M}$ is transitive, so is $\mModel{M^*}$.
+  \item If $\mModel{M}$ is euclidean, so is $\mModel{M^*}$.
+  \end{enumerate}
 \end{thm}
 
 \begin{proof}
-  The proof of transitivity uses the validity of both \Ax{4} and
-  $\Ax{4_\Diamond}$ in all transitive models, and likewise
-  euclideanness uses the fact that both \Ax{5} and
-  $\Ax{5_\Diamond}$ are valid in all euclidean models, and the
-  proof of symmetry likewise uses both \Ax{B} and
-  $\Ax{B_\Diamond}$.
-
-  If $\mModel{M^*}$ is a coarsest filtration, then by definition
-  $R^*[u][v]$ holds if and only if $C_1(u,v)$. For transitivity,
-  suppose $C_1(u,v)$ and $C_1(v,w)$: to show $C_1(u,w)$ suppose
-  $\mSat{M}{\Box !A}[u]$; then $\mSat{M}{\Box\Box!A}[u]$; since
-  $\Box\Box!A \in \Gamma$ by closure, also by $C_1(u,v)$,
-  $\mSat{M}{\Box!A}[v]$ and by $C_1(v,w)$, also $\mSat{M}{!A}[w]$. The
-  case for $\Diamond!A$ is similar.
+\begin{enumerate}
+  \item If $\mModel{M^*}$ is a coarsest filtration, then by definition
+    $R^*[u][v]$ holds if and only if $C_1(u,v)$. For transitivity,
+    suppose $C_1(u,v)$ and $C_1(v,w)$; we have to show show
+    $C_1(u,w)$. \iftag{prvBox}{Suppose $\mSat{M}{\Box !A}[u]$; then
+      $\mSat{M}{\Box\Box!A}[u]$ since \Ax{4} is valid in all
+      transitive models; since $\Box\Box!A \in \Gamma$ by closure,
+      also by $C_1(u,v)$, $\mSat{M}{\Box!A}[v]$ and by $C_1(v,w)$,
+      also $\mSat{M}{!A}[w]$. }{}\iftag{prvDiamond}{Suppose
+      $\mSat{M}{!A}[w]$; then $\mSat{M}{\Diamond !A}[v]$ by
+      $C_1(v,w)$, since $\Diamond !A \in \Gamma$ by modal closure. By
+      $C_1(u,v)$, we get $\mSat{M}{\Diamond\Diamond !A}[u]$ since
+      $\Diamond\Diamond!A \in \Gamma$ by modal closure. Since
+      $\Ax{4}_\Diamond$ is valid in all transitive models,
+      $\mSat{M}{\Diamond!A}[u]$.}{}
+  \item Exercise. Use the fact that both \Ax{5} and $\Ax{5_\Diamond}$
+    are valid in all euclidean models.
+  \item Exercise. Use the fact that \Ax{B} and $\Ax{B_\Diamond}$ are
+    valid in all symmetric models.
+\end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][fil][euc]{thm:modal-closed-filt}.
+\end{prob}
 
 \end{document}

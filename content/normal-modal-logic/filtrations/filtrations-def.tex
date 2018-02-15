@@ -10,27 +10,47 @@
 
 \olsection{Filtrations}
 
-\begin{defn}\ollabel{def:filtration}
+Rather than define ``the'' filtration of $\mModel{M}$ through
+$\Gamma$, we define when a model~$\mModel{M^*}$ counts as a filtration
+of~$\mModel{M}$. All filtrations have the same set of worlds~$W^*$ and
+the same valuation~$V^*$. But different filtrations may have different
+accessibility relations~$R^*$. To count as a filtration, $R^*$ has to
+satisfy a number of conditions, however. These conditions are exactly
+what we'll require to prove the main result, namely that
+$\mSat{M}{!A}[w]$ iff $\mSat{M^*}{!A}[{[w]}]$, provided $!A \in
+\Gamma$.
+
+\begin{defn}\ollabel{defn:filtration}
   Let $\Gamma$ be closed under subformulas and $\mModel{M} = \tuple{W,
     R, V}$. A \emph{filtration of $\mModel{M}$ through $\Gamma$} is
   any model $\mModel{M^*} = \tuple{W^*,R^*,V^*}$, where:
   \begin{enumerate}
   \item $W^* = \Setabs{[w]}{w \in W}$;
-  \item \ollabel{def:filtration-R}%
+  \item \ollabel{defn:filtration-R}%
     For any $u,v \in W$:
     \begin{enumerate}
-    \item \ollabel{def:filtration-R1}%
+    \item \ollabel{defn:filtration-R1}%
       If $Ruv$ then $R^*[u][v]$;
-    \item \ollabel{def:filtration-R2}%
+    \tagitem{prvBox}{\ollabel{defn:filtration-R2}%
       If $R^*[u][v]$ then for any $\Box !A \in \Gamma$, if
-      $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$;
-    \item \ollabel{def:filtration-R3}%
+      $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$}{};
+    \tagitem{prvDiamond}{\ollabel{defn:filtration-R3}%
       If $R^*[u][v]$ then for any $\Diamond !A \in \Gamma$, if
-      $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$.
+      $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$.}{}
     \end{enumerate}
   \item $V^*(p) = \Setabs{[u]}{u \in V(p)}$.
   \end{enumerate}
 \end{defn}
+
+It's worthwhile thinking about what $V^*(p)$ is: the set consisting of
+the equivalence classes~$[w]$ of all worlds~$w$ where $p$ is true
+in~$\mModel{M}$. On the one hand, if $w \in V(p)$, then $[w] \in
+V^*(p)$ by that definition. However, it is not necessarily the case
+that if $[w] \in V^*(p)$, then $w \in V(p)$. If $[w] \in V^*(p)$ we
+are only guaranteed that $[w] = [u]$ for \emph{some}~$u \in V(p)$. Of
+course, $[w] = [u]$ means that $w \equiv u$.  So, when $[w] \in
+V^*(p)$ we can (only) conclude that $w \equiv u$ for some $u \in
+V(p)$.
 
 \begin{thm}\ollabel{thm:filtrations}
   If $\mModel{M^*}$ is a filtration of $\mModel{M}$ through $\Gamma$,
@@ -40,26 +60,101 @@
 
 \begin{proof}
   By induction on $!A$, using the fact that $\Gamma$ is closed under
-  subformulas. For $!A$ atomic, say $p$: the left-to-right direction
-  is immediate, as $\mSat{M}{p}[w]$ only if $w \in V(p)$, which
-  implies $[w] \in V^*(p)$, i.e., $\mSat{M^*}{p}[{[w]}]$. Conversely,
-  suppose $\mSat{M^*}{p}[{[w]}]$, i.e., $[w] \in V^*(p)$; then $w
-  \equiv w' \in V(p)$, and since $p \in \Gamma$, also $w \in V(p)$, so
-  that $\mSat{M}{p}[w]$. The cases for the Boolean connectives follow
-  immediately from the inductive hypothesis and closure of $\Gamma$
-  under subformulas.
+  subformulas. Since $!A \in \Gamma$ and $\Gamma$ is closed under
+  sub-!!{formula}s, all sub-!!{formula}s of~$!A$ are also $\in
+  \Gamma$. Hence in each inductive step, the induction hypothesis
+  applies to the sub-!!{formula}s of~$!A$.
+  \begin{enumerate}
+    \tagitem{prvFalse}{\indcase{!A}{\lfalse}{Neither
+        $\mSat{M}{\indfrm}[w]$ nor $\mSat{M^*}{\indfrm}[w]$.}}{}
+    \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Both
+        $\mSat{M}{\indfrm}[w]$ and $\mSat{M^*}{\indfrm}[w]$.}}{}
+    \item \indcase{!A}{p}{The left-to-right direction is immediate, as
+      $\mSat{M}{\indfrm}[w]$ only if $w \in V(p)$, which implies $[w]
+      \in V^*(p)$, i.e., $\mSat{M^*}{\indfrm}[{[w]}]$. Conversely,
+      suppose $\mSat{M^*}{\indfrm}[{[w]}]$, i.e., $[w] \in
+      V^*(p)$. Then for some $v \in V(p)$, $w \equiv v$. Of course
+      then also $\mSat{M}{p}[v]$. Since $w \equiv v$, $w$ and $v$ make
+      the same !!{formula}s from~$\Gamma$ true. Since by assumption $p
+      \in \Gamma$ and $\mSat{M}{p}[v]$, $\mSat{M}{\indfrm}[w]$.}
 
-  So we do the case for $\Box!A \in \Gamma$.  Suppose
-  $\mSat{M}{\Box!A}[u]$; to show that $\mSat{M^*}{!A}[{[u]}]$, let $v$
-  be such that $R^*[u][v]$. From \olref{def:filtration}\olref{def:filtration-R2}, we have that $\mSat{M}{!A}[v]$, and by inductive
-  hypothesis $\mSat{M^*}{!A}[{[v]}]$. Since $v$ was arbitrary,
-  $\mSat{M^*}{\Box!A}[{[u]}]$ follows. Conversely, suppose
-  $\mSat{M^*}{\Box!A}[{[u]}]$ and let $v$ be arbitrary such that
-  $Ruv$. From \olref{def:filtration}\olref{def:filtration-R1}, we have
-  $R^*[u][v]$, so that $\mSat{M^*}{!A}[{[v]}]$; by inductive
-  hypothesis $\mSat{M}{!A}[v]$, and since $v$ was arbitrary,
-  $\mSat{M}{\Box!A}[u]$.
+    \tagitem{prvNot}{\iftag{probNot}{Exercise.}{\indcase{!A}{\lnot
+          !B}{$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w]$. By
+          induction hypothesis, $\mSat/{M}{!B}[w]$ iff
+          $\mSat/{M^*}{!B}[{[w]}]$.  Finally, $\mSat/{M^*}{!B}[{[w]}]$
+          iff $\mSat{M^*}{\indfrm}[{[w]}]$.}}}{}
+        
+    \tagitem{prvAnd}{\iftag{probAnd}{Exercise.}{\indcase{!A}{(!B \land
+          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ and
+          $\mSat{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
+          iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
+          $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
+          iff $\mSat{M^*}{!B}[{[w]}]$ and
+          $\mSat{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvOr}{\iftag{probOr}{Exercise.}{\indcase{!A}{(!B \lor
+          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ or
+          $\mSat{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
+          iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
+          $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
+          iff $\mSat{M^*}{!B}[{[w]}]$ or
+          $\mSat{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvIf}{\iftag{probIf}{Exercise.}{\indcase{!A}{(!B \lif
+          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w]$ or
+          $\mSat{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
+          iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
+          $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
+          iff $\mSat/{M^*}{!B}[{[w]}]$ or
+          $\mSat{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvIff}{\iftag{probIff}{Exercise.}{\indcase{!A}{(!B \liff
+          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ and
+          $\mSat{M}{!C}[w]$, or $\mSat/{M}{!B}[w]$ and
+          $\mSat/{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
+          iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
+          $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
+          iff $\mSat{M^*}{!B}[{[w]}]$ and
+          $\mSat{M^*}{!C}[{[w]}]$, or $\mSat/{M^*}{!B}[{[w]}]$ and
+          $\mSat/{M^*}{!C}[{[w]}]$.}}}{}
+
+    \tagitem{prvBox}{\iftag{probBox}{Exercise.}{\indcase{!A}{\Box
+          !B}{Suppose $\mSat{M}{\indfrm}[w]$; to show that
+          $\mSat{M^*}{\indfrm}[{[w]}]$, let $v$ be such that
+          $R^*[w][v]$. From
+          \olref{defn:filtration}\olref{defn:filtration-R2}, we have
+          that $\mSat{M}{!B}[v]$, and by inductive hypothesis
+          $\mSat{M^*}{!B}[{[v]}]$. Since $v$ was arbitrary,
+          $\mSat{M^*}{\indfrm}[{[w]}]$ follows.
+
+          Conversely, suppose $\mSat{M^*}{\indfrm}[{[w]}]$ and let $v$
+          be arbitrary such that $Rwv$. From
+          \olref{defn:filtration}\olref{defn:filtration-R1}, we have
+          $R^*[w][v]$, so that $\mSat{M^*}{!B}[{[v]}]$; by inductive
+          hypothesis $\mSat{M}{!B}[v]$, and since $v$ was arbitrary,
+          $\mSat{M}{\indfrm}[u]$.}}}{}
+    
+    \tagitem{prvDiamond}{\iftag{probDiamond}{Exercise.}{\indcase{!A}{\Diamond
+          !B}{Suppose $\mSat{M}{\indfrm}[w]$. Then for some $v \in W$,
+          $Rwv$ and $\mSat{M}{!B}[v]$.  By inductive hypothesis
+          $\mSat{M^*}{!B}[{[v]}]$, and by
+          \olref{defn:filtration}\olref{defn:filtration-R1}, we have
+          $R^*[w][v]$. Thus, $\mSat{M^*}{\indfrm}[{[w]}]$.
+
+          Now suppose $\mSat{M^*}{\indfrm}[{[w]}]$. Then for some $[v]
+          \in W^*$ with $R^*[w][v]$, $\mSat{M^*}{!B}[{[v]}]$.  By
+          inductive hypothesis $\mSat{M}{!B}[v]$.  By
+          \olref{defn:filtration}\olref{defn:filtration-R3}, we have
+          that $\mSat{M}{\indfrm}[w]$.}}}{}
+  \end{enumerate}
 \end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][fil][fil]{thm:filtrations}
+\end{prob}
+
+What holds for truth at worlds in a model also holds for truth in a
+model and validity in a class of models.
 
 \begin{cor}
   Let $\Gamma$ be closed under subformulas. Then:
@@ -73,5 +168,7 @@
     and only if it is valid in $\Gamma(\mClass{C})$.
   \end{enumerate}
 \end{cor}
+
+
 
 \end{document}

@@ -10,18 +10,34 @@
 
 \olsection{Filtrations are Finite}
 
+We've defined filtrations for any set~$\Gamma$ that is closed under
+sub-!!{formula}s. Nothing in the definition itself guarantees that
+filtrations are finite. In fact, when $\Gamma$ is infinite (e.g., is
+the set of all !!{formula}s), it may well be infinite. However, if
+$\Gamma$ is finite (e.g., when it is the set of sub-!!{formula}s of a
+given !!{formula}~$!A$), so is any filtration through~$\Gamma$.
+
 \begin{prop}\ollabel{prop:filt-are-finite}
   If $\Gamma$ is finite then any filtration $\mModel{M^*}$ of a model
   $\mModel{M}$ through $\Gamma$ is also finite.
 \end{prop}
 
 \begin{proof}
-  If $u \equiv v$ then, by \olref[fil]{thm:filtrations}, the set of
-  $!A \in \Gamma$ that are true at $u$ is the same as the set of
-  $!A \in \Gamma$ that are true at $v$. So to each $[u] \in W^*$
-  we can assign a \emph{distinct} subset of $\Gamma$. Hence if
-  $\Gamma$ contains $n$ sentences the cardinality of $W^*$ is no
-  greater than $2^n$.
+  The size of $W^*$ is the number of different classes~$[w]$ under the
+  equivalence relation~$\equiv$. Any two worlds $u$, $v$ in such
+  class---that is, any $u$ and $v$ such that~$u \equiv v$---agree on
+  all !!{formula}s~$!A$ in~$\Gamma$, $!A \in \Gamma$ either $!A$ is
+  true at both $u$ and $v$, or at neither. So each class~$[w]$
+  corresponds to subset of~$\Gamma$, namely the set of all $!A \in
+  \Gamma$ such that $!A$ is true at the worlds in~$[w]$. No two
+  different classes $[u]$ and $[v]$ correspond to the same subset
+  of~$\Gamma$. For if the set of !!{formula}s true at $u$ and that of
+  !!{formula}s true at $v$ are the same, then $u$ and $v$ agree on all
+  formulas in~$\Gamma$, i.e., $u \equiv v$. But then $[u] = [v]$.  So,
+  there is !!a{injective} function from $W^*$ to $\Pow{\Gamma}$, and
+  hence $\card{W^*} \le \card{\Pow{\Gamma}}$.  Hence if $\Gamma$
+  contains $n$ sentences, the cardinality of $W^*$ is no greater
+  than~$2^n$.
 \end{proof}
 
 \end{document}

@@ -50,20 +50,16 @@ a model of~$\Sigma$.
 
 \begin{figure}[htpb]
   \centering
-  \begin{tikzpicture}[node distance=2cm, auto, thick]
-    \node (w1) at (0, 0) [label=180:$w$, label=below:$\lnot p$]{$\bullet$}; 
-%      \node (w2) at (2, 0) [label=0:$w'$, label=-45:{$p, \lnot\Box  p$}]{$\bullet$}; 
-    \node (w2) at (2, 0) [label=0:$w'$]{$\bullet$}; 
-    \path node at (2.2,-0.5) {$p, \lnot\Box p$};
-%      \node (w3) at (1.5, 0) [label=270:$w_3$] {$\bullet$}; \draw[->] (w1) to node {} (w2);
-%      \draw[->] (w1) to node {} (w3);
-    \draw[->, bend left] (w1) to node {$R$} (w2); 
-    \draw[->, bend left] (w2) to node {} (w1); 
-    \draw [rounded corners] (-1,-1) -- ++(0,2)  -- ++(4.25,0) -- ++(0,-2) --  cycle;
-    \path node at (2.75,0.75) {$\mModel{M}$};
-%      \path node at (-0.6, 0) {$\Box\Diamond!A$};
+  \begin{tikzpicture}[modal]
+    \node[world] (w1) [label=left:$w$,
+    label={below:$\mSat{}{\Box p}$\\ $\mSat/{}{\Box\Box p}$}]{}; 
+    \node[world] (w2) [label=right:$w'$,
+      label=below:$\mSat/{}{\Box p}$,right=of w1]{$p$}; 
+    \draw[->, bend left] (w1) to (w2); 
+    \draw[->, bend left] (w2) to (w1); 
   \end{tikzpicture}
-  \caption{A symmetric model falsifying an instance of \Ax{4}.}\ollabel{fig:Bnot4}
+  \caption{A symmetric model falsifying an instance of \Ax{4}.}
+  \ollabel{fig:Bnot4}
 \end{figure}
  
 \begin{thm}\ollabel{thm:KTBnot45}
@@ -77,37 +73,32 @@ a model of~$\Sigma$.
 \end{proof}
 
 \begin{proof}
-
-  it suffices to find a reflexive
-  symmetric model containing a world at which some instance of~\Ax{4}
-  fails, and similarly for~\Ax{5}.  We use the same model for both
-  claims. Consider the symmetric, reflexive model in
-  \olref{fig:KTBnot45}.  Then $\mSat/{M}{\Box p \to \Box \Box
-    p}[w_1]$, so \Ax{4} fails at $w_1$. Similarly, $\mSat/{M}{\Diamond
-    \lnot p \lif \Box \Diamond \lnot p}[w_2]$, so the instance
-  of~\Ax{5} with $!A = \lnot p$ fails at~$w_2$.
+  It suffices to find a reflexive symmetric model containing a world
+  at which some instance of~\Ax{4} fails, and similarly for~\Ax{5}.
+  We use the same model for both claims. Consider the symmetric,
+  reflexive model in \olref{fig:KTBnot45}.  Then $\mSat/{M}{\Box p \to
+    \Box \Box p}[w_1]$, so \Ax{4} fails at $w_1$. Similarly,
+  $\mSat/{M}{\Diamond \lnot p \lif \Box \Diamond \lnot p}[w_2]$, so
+  the instance of~\Ax{5} with $!A = \lnot p$ fails at~$w_2$.
 \end{proof}
 
 \begin{figure}[htpb]
   \centering
-  \begin{tikzpicture}[node distance=2cm, auto, thick]
-    \node (w1) at (0, 0) [label=180:$w_1$,
-      label=below:$p$]{$\bullet$} edge [in=60,out=120,loop] (); 
-    \node (w2) at (2, 0) [label=180:$w_2$,
-      label=below:$p$]{$\bullet$} edge [in=60,out=120,loop] (); 
-    \node (w3) at (4, 0) [label=0:$w_3$, label=below:$\lnot
-      p$]{$\bullet$}  edge [in=60,out=120,loop] ();  
+  \begin{tikzpicture}[modal]
+    \node[world] (w1) [label={left:$w_1$}, label={below: $\mSat{}{\Box p}$\\
+        $\mSat/{}{\Box\Box p}$\\
+        $\mSat/{}{\Diamond\lnot p}$}] {$p$};
+    \draw[reflexive above] (w1) to (w1);
+    \node[world] (w2) [label={below: $w_2$\\
+        $\mSat{}{\Diamond\lnot p}$\\
+        $\mSat/{}{\Box\Diamond\lnot p}$}, right=of w1] {$p$} ;
+    \draw[reflexive above] (w2) to (w2);
+    \node[world] (w3) at (4, 0) [label={right:$w_3$},right=of w2] {};
+    \draw[reflexive above] (w2) to (w2);
     \draw[->, bend left] (w1) to node {} (w2);  
     \draw[->, bend left] (w2) to node {} (w3);  
     \draw[->, bend left] (w3) to node {} (w2);  
     \draw[->, bend left] (w2) to node {} (w1);  
-    \path node at (0,-1) {$\Box p$} ;
-    \path node at (2,-1) {$\Diamond \lnot p$} ;
-    \path node at (2,-1.5) {$\lnot\Box\Diamond \lnot p$} ;
-    \path node at (0,-1.5) {$\lnot\Box\Box p$} ;
-    \path node at (0,-2) {$\lnot\Diamond\lnot p$} ;
-    \path node at (4.5,-2) {$\mModel{M}$} ;
-    \draw [rounded corners] (-1,-2.5) -- ++(0,4)  -- ++(6,0) -- ++(0,-4) --  cycle;
   \end{tikzpicture}
   \caption{The model for \olref{thm:KTBnot45}.}
   \ollabel{fig:KTBnot45}
@@ -129,20 +120,21 @@ a model of~$\Sigma$.
 \begin{figure}[t]
   \centering
   \begin{tikzpicture}[node distance=2cm, auto, thick]
-    \node (w1) at (0.5, 2) [label=135:$w_2$,
-      label=225:$p$]{$\bullet$} edge [in=150,out=210,loop] ();
-    \node (w2) at (2, 0) [label=0:$w_1$,label=below:{$\Box p, \lnot\Box\Box p$}]{$\bullet$};
-    \node (w3) at (2, 4) [label=0:$w_4$, label=180:$\lnot p$]{$\bullet$}  edge [in=60,out=120,loop] (); 
-    \node (w4) at (3.5, 2) [label=45:$w_3$,
-      label=-45:$p$]{$\bullet$}  edge [in=30,out=-30,loop] ();
-    \draw[->] (w2) to node {} (w1);  
-    \draw[->] (w2) to node {} (w4);  
-    \draw[<->] (w1) to node {} (w3);  
-    \draw[<->] (w4) to node {} (w3);  
-    \draw[<->] (w1) to node {} (w4);  
-    \draw [rounded corners] (-1,-1) -- ++(0,6)  -- ++(6,0) --
-    ++(0,-6) --  cycle;
-    \path node at (4.35,-0.5) {$\mModel{M}$} ;
+    \node[world] (w2) [label=north west:$w_2$]{$p$} ;
+    \draw[reflexive left] (w2) to (w2);
+    \node[world] (w1) [label=right:$w_1$,label=below:{$\mSat{}{\Box p}, \mSat/{}{\Box\Box p}$},below right=of w2]{};
+    \node[world] (w3) [label=north east:$w_3$, above right=of w1]{$p$} ;
+    \draw[reflexive right] (w3) to (w3);
+    \node[world] (w4) [label=right:$w_4$,above right=of w2]{};
+    \draw[reflexive above] (w4) to (w4);
+    \draw[->] (w1) to (w2);  
+    \draw[->] (w1) to (w3);  
+    \draw[->, bend left=15] (w2) to (w3);
+    \draw[->, bend left=15] (w3) to (w2);  
+    \draw[->, bend left=15] (w2) to (w4);
+    \draw[->, bend left=15] (w4) to (w2);  
+    \draw[->, bend left=15] (w3) to (w4);
+    \draw[->, bend left=15] (w4) to (w3);  
   \end{tikzpicture}
   \caption{The model for \olref{thm:KD5not4}.}
   \ollabel{fig:KD5not4}

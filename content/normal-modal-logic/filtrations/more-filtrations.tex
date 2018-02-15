@@ -10,52 +10,82 @@
 
 \olsection{Filtrations and Properties of Accessibility}
 
-\begin{defn}
-  Let $\Gamma$ be closed under subformulas and $\mModel{M} =\tuple{W, R, V}$ a
-  model. Then we can define conditions on pairs of worlds $u,v$ as given in
-  the table of \olref{fig:Cn-filtrations}. 
-\end{defn}
+As noted, filtrations of universal, serial, and reflexive models are
+always also universal, serial, or reflexive. But not every filtration
+of a symmetric or transitive model is symmetric or transitive,
+respectively. In some cases, however, it is possible to define
+filtrations so that this does hold. In order to do so, we proceed as
+in the definition of the coarsest filtration, but add additional
+conditions to the definition of~$R^*$.  Let $\Gamma$ be closed under
+sub-!!{formula}s. Consider the relations~$C_i(u,v)$ in
+\olref{tab:Cn-filtrations} between worlds $u$, $v$ in a model
+$\mModel{M} =\tuple{W, R, V}$. We can define $R*[u][v]$ on the basis
+of combinations of these conditions. For instance, if we stipulate
+that $R^*[u][v]$ iff the condition $C_1(u,v)$ holds, we get exactly
+the coarsest filtration. If we stipulate $R^*[u][v]$ iff both
+$C_1(u,v)$ and $C_2(u, v)$ hold, we get a different filtration. It is
+``finer'' than the coarsest since fewer pairs of worlds satisfy
+$C_1(u,v)$ and $C_2(u,v)$ than $C_1(u,v)$ alone.
 
-  \begin{figure}[ht]
-    \centering
-    \begin{tabular}{|ll|}
-      \hline
-      \multirow{2}{*}{$C_1(u,v)$:}  &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$; and \\
-      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$; \\
-      \hline
-      \multirow{2}{*}{$C_2(u,v)$:} &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[v]$ then $\mSat{M}{!A}[u]$; and \\
-      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$; \\
-      \hline
-      \multirow{2}{*}{$C_3(u,v)$:} &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{\Box!A}[v]$; and \\
-      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{\Diamond!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$; \\
-      \hline
-      \multirow{2}{*}{$C_4(u,v)$:} &if $\Box!A \in \Gamma$  and $\mSat{M}{\Box!A}[v]$ then $\mSat{M}{\Box!A}[u]$; and \\
-      & if $\Diamond!A \in \Gamma$  and $\mSat{M}{\Diamond!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$; \\
-      \hline
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{|ll|}
+    \hline
+    \multirow{2}{*}{$C_1(u,v)$:}
+    \iftag{prvBox}{&
+      if $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[u]$
+      then $\mSat{M}{!A}[v]$;\iftag{prvDiamond}{ and}{}\\}{}
+    \iftag{prvDiamond}{&
+      if $\Diamond!A \in \Gamma$  and $\mSat{M}{!A}[v]$
+      then $\mSat{M}{\Diamond!A}[u]$; \\}{}
+    \hline
+    \multirow{2}{*}{$C_2(u,v)$:} 
+    \iftag{prvBox}{&
+      if $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[v]$
+      then $\mSat{M}{!A}[u]$;\iftag{prvDiamond}{ and}{}\\}{}
+    \iftag{prvDiamond}{&
+      if $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[u]$
+      then $\mSat{M}{\Diamond!A}[v]$; \\}{}
+    \hline
+    \multirow{2}{*}{$C_3(u,v)$:}
+    \iftag{prvBox}{&
+      if $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[u]$
+      then $\mSat{M}{\Box!A}[v]$;\iftag{prvDiamond}{ and}{}\\}{}
+    \iftag{prvDiamond}{&
+      if $\Diamond!A \in \Gamma$ and $\mSat{M}{\Diamond!A}[v]$
+      then $\mSat{M}{\Diamond!A}[u]$; \\}{}
+    \hline
+    \multirow{2}{*}{$C_4(u,v)$:}
+    \iftag{prvBox}{&
+      if $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[v]$
+      then $\mSat{M}{\Box!A}[u]$;\iftag{prvDiamond}{ and}{}\\}{}
+    \iftag{prvDiamond}{&
+      if $\Diamond!A \in \Gamma$ and $\mSat{M}{\Diamond!A}[u]$
+      then $\mSat{M}{\Diamond!A}[v]$; \\}{}
+    \hline
     \end{tabular}
-    \caption{Conditions on possible worlds for defining
-      filtrations.}\ollabel{fig:Cn-filtrations}
-\end{figure}
+  \caption{Conditions on possible worlds for defining
+    filtrations.}\ollabel{tab:Cn-filtrations}
+\end{table}
 
 \begin{thm}\ollabel{thm:more-filtrations}
   Let $\mModel{M} =\tuple{W,R,P}$ be a model, $\Gamma$ closed under
-  subformulas. Let $W^*$ and $V^*$ be defined as in
-  \olref[fil]{def:filtration}. Then:
+  sub-!!{formula}s. Let $W^*$ and $V^*$ be defined as in
+  \olref[fil]{defn:filtration}. Then:
   \begin{enumerate}
-  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
-    \land C_2(u,v)$ then $R^*$ is symmetric, and
-    $\mModel{M^*} = \tuple{W^*,R^*,V^*}$ is a filtration if $\mModel{M}$
-    is symmetric.
-  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
-    \land C_3(u,v)$ then $R^*$ is transitive, and
+  \item Suppose $R^*[u][v]$ if and only if $C_1(u, v) \land
+    C_2(u,v)$. Then $R^*$ is symmetric, and $\mModel{M^*} =
+    \tuple{W^*,R^*,V^*}$ is a filtration if $\mModel{M}$ is symmetric.
+  \item Suppose $R^*[u][v]$ if and only if $C_1(u, v)
+    \land C_3(u,v)$. Then $R^*$ is transitive, and
     $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ is a filtration if $\mModel{M}$
     is transitive.
-  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
-    \land C_2(u,v) \land C_3(u,v) \land C_4(u,v)$ then $R^*$ is
-    symmetric and transitive, and $\mModel{M^*}=\tuple{W^*,R^*,V^*}$
-    is a filtration if $\mModel{M}$ is symmetric and transitive.
-  \item If $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(uv)
-    \land C_3(u,v) \land C_4(u,v)$ then $R^*$ is transitive and
+  \item Suppose $R^*[u][v]$ if and only if $C_1(u, v) \land C_2(u,v)
+    \land C_3(u,v) \land C_4(u,v)$. Then $R^*$ is symmetric and
+    transitive, and $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ is a filtration
+    if $\mModel{M}$ is symmetric and transitive.
+  \item Suppose $R^*$ is defined as $R^*[u][v]$ if and only if $C_1(u,
+    v) \land C_3(u,v) \land C_4(u,v)$. Then $R^*$ is transitive and
     euclidean, and $\mModel{M^*}=\tuple{W^*,R^*,V^*}$ is a filtration
     if $\mModel{M}$ is transitive and euclidean.
   \end{enumerate}
@@ -66,22 +96,31 @@
     \item It's immediate that $R^*$ is symmetric, since $C_1(u,v)
       \Leftrightarrow C_2(v,u)$ and $C_2(u,v) \Leftrightarrow
       C_1(v,u)$. So it's left to show that if $\mModel{M}$ is
-      symmetric then $\mModel{M^*}$ is a filtration through
-      $\Gamma$. By condition $C_1(u,v)$ we get that: if $\Box!A \in
-      \Gamma$ and $\mSat{M}{\Box!A}[u]$ then $\mSat{M}{!A}[v]$, and if
-      $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$ then
-      $\mSat{M}{\Diamond!A}[u]$. So all we need is that $Ruv$ implies
-      $R^*[u][v]$.
+      symmetric then $\mModel{M^*}$ is a filtration
+      through~$\Gamma$. Condition $C_1(u,v)$ guarantees that
+      \iftag{prvBox}{%
+        \iftag{prvDiamond}{%
+          \olref[fil]{defn:filtration-R2} and
+          \olref[fil]{defn:filtration-R3} of
+          \olref[fil]{defn:filtration} are}{%
+          \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R2} is}}{%
+        \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R3} is}
+      satisfied. So we just have to verify
+      \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1},
+      i.e., that $Ruv$ implies $R^*[u][v]$.
 
-      So suppose $Ruv$, to show $R^*[u][v]$ we need $C_1(u,v) \land
-      C_2(u,v)$. For $C_1$: if $\Box!A \in\Gamma$ and
-      $\mSat{M}{\Box!A}[u]$ then also $\mSat{M}{!A}[v]$ (since $Ruv$);
-      and similarly if $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$
-      then $\mSat{M}{\Diamond!A}[u]$. For $C_2$: if $\Box!A \in
-      \Gamma$ and $\mSat{M}{\Box!A}[v]$ then $Ruv$ implies $Rvu$ by
-      symmetry, so that $\mSat{M}{!A}[u]$; similarly if $\Diamond!A
-      \in\Gamma$ and $\mSat{M}{!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$
-      (since $Rvu$ by symmetry).
+      So suppose $Ruv$. To show $R^*[u][v]$ we need to establish that
+      $C_1(u,v)$ and $C_2(u,v)$. For $C_1$: \iftag{prvBox}{if $\Box!A
+        \in\Gamma$ and $\mSat{M}{\Box!A}[u]$ then also
+        $\mSat{M}{!A}[v]$ (since $Ruv$).\iftag{prvDiamond}{ Similarly,
+        }{}}{}\iftag{prvDiamond}{if $\Diamond!A \in \Gamma$ and
+        $\mSat{M}{!A}[v]$ then $\mSat{M}{\Diamond!A}[u]$ since
+        $Ruv$.}{} For $C_2$: \iftag{prvBox}{if $\Box!A \in \Gamma$ and
+        $\mSat{M}{\Box!A}[v]$ then $Ruv$ implies $Rvu$ by symmetry, so
+        that $\mSat{M}{!A}[u]$.\iftag{prvDiamond}{ Similarly,
+        }{}}{}\iftag{prvDiamond}{if $\Diamond!A \in\Gamma$ and
+        $\mSat{M}{!A}[u]$ then $\mSat{M}{\Diamond!A}[v]$ (since $Rvu$
+        by symmetry).}{}
     \item Exercise.
     \item Exercise.
     \item Exercise.
