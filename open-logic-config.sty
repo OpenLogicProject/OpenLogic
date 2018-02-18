@@ -46,8 +46,8 @@
 %
 % - `\True` defaults to $1$ and `\False` to $0$.
 
-\DeclareDocumentMacro \True {1}
-\DeclareDocumentMacro \False {0}
+\DeclareDocumentMacro \True {\mathbb{T}}
+\DeclareDocumentMacro \False {\mathbb{F}}
 
 % ### Propositional Constants and Connectives
 %
@@ -213,6 +213,25 @@
 % - `\Hyp`: produces abbreviation for Hypothesis.
 
 \DeclareDocumentMacro \Hyp {\textsc{Hyp}}
+
+% - `\sFmla`: Signed (prefixed) formulas for tableaux
+
+\DeclareDocumentCommand \sFmla { m m o }{
+  \ensuremath{%
+    \IfNoValueTF{#3}{}{#3\,}%
+    \hbox to1em{\ensuremath{#1}} #2}}
+
+% - Tableau rule names: `\TRule{Sign}{Op}` typesets the name of a the
+% 'Sign' rule for operator `Op`, `\TFalse{Op}` does the same for
+% 'False' rules. The optional argument contains the line number to
+% which the rule is applied.
+
+\DeclareDocumentCommand \TRule { m m o }{%
+  \ensuremath{{#2}{#1}\IfNoValueTF{#3}{}{\, #3}}}
+
+% - `\TAss`: justification label for ``assumption''
+
+\DeclareDocumentMacro \TAss {Assumption}
 
 % Metalogical Relations
 % ---------------------
@@ -603,7 +622,7 @@
     label distance=2pt,
     semithick},
   world/.style = {circle,draw,minimum size=0.5cm,fill=gray!15},
-  every node/.style={world},
+  modal every node/.style={world},
   point/.style={circle,draw,inner sep=0.5mm,fill=black},
   phantom/.style={rectangle,inner sep=0pt,draw=none,fill=none},
   every label/.style={phantom,align=left},
@@ -1052,7 +1071,7 @@
 
 \settexttoken{domain}{domain}{domains}
 
-% - `\value`: value (denotation) of a term
+% - `value`: value (denotation) of a term
 
 \settexttoken{value}{value}{values}
 
@@ -1075,6 +1094,14 @@
 % - `nonderivability`: derivability in a calculus, unprovability
 
 \settexttoken{nonderivability}{non-derivability}{non-derivabilities}
+
+% - `tableau`: tableau, tableaux; or truth tree
+
+\settexttoken{tableau}{tableau}{tableaux}
+
+% - `signed formula`: signed formula in a tableau
+
+\settexttoken{signed formula}{signed formula}{signed formulas}
 
 % - `complete`: negation complete, syntactically complete (of theories)
 
@@ -1195,14 +1222,15 @@
 
 \tagtrue{lambda}
 
-% - prfND, prfSC, prfAX - alternative coverage of proof systems. Set
+% - prfND, prfSC, prfAX, prfTab - alternative coverage of proof systems. Set
 % `prfND` to true if you want to include material on natural
-% deduction, `prfSC` for the sequent calculus, and `prfAX` for
-% axiomatic deduction.  By default, we include all.
+% deduction, `prfSC` for the sequent calculus, `prfAX` for
+% axiomatic deduction, `prfTab` for tableaux.  By default, we include all.
 
 \tagtrue{prfSC}
 \tagtrue{prfND}
 \tagtrue{prfAX}
+\tagtrue{prfTab}
 
 % - `cmplCCS` - prove completeness via generating a complete
 % consistent set
