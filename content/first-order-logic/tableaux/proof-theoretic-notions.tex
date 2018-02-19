@@ -89,7 +89,7 @@ Any finite subset of~$\Gamma$ is also a finite subset of~$\Delta$.
 \begin{prop}[Transitivity]
 \ollabel{prop:transitivity}
 If $\Gamma \Proves !A$ and $\{!A\} \cup
-\Delta \Proves !B$, then $\Gamma \Proves !B$.
+\Delta \Proves !B$, then $\Gamma \cup \Delta \Proves !B$.
 \end{prop}
 
 \begin{proof}
@@ -107,9 +107,9 @@ has a closed !!{tableau}.
 
 Now consider the !!{tableau} with assumptions
 \[
-\{\sFmla{\False}{!B},
+\sFmla{\False}{!B},
 \sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_n},
-\sFmla{\True}{!D_1}, \dots, \sFmla{\True}{!C_m}
+\sFmla{\True}{!D_1}, \dots, \sFmla{\True}{!D_m}.
 \]
 Apply the \Cut{} rule on~$!A$. This generates two branches, one has
 $\sFmla{\True}{!A}$ in it, the other $\sFmla{\False}{!A}$. Thus,
@@ -126,8 +126,13 @@ $\sFmla{\True}{!A_1}$ closes. On the other branch, all of
 \sFmla{\True}{!D_m}\}
 \]
 are available, so we can also complete the other side to obtain a
-closed !!{tableau}.  This shows $\Gamma \Proves !B$.
+closed !!{tableau}.  This shows $\Gamma \cup \Delta \Proves !B$.
 \end{proof}
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
 
 \begin{prop}
 \ollabel{prop:incons}

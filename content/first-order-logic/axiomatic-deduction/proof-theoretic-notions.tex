@@ -60,28 +60,32 @@ $!A$ from~$\Delta$.
 
 \begin{prop}[Transitivity]
 \ollabel{prop:transitivity}
-If $\Gamma \Proves !A$ for every $!A \in \Delta$ and $\Delta \Proves
-!B$, then $\Gamma \Proves !B$.
+If $\Gamma \Proves !A$ and $\{!A\} \cup \Delta \Proves
+!B$, then $\Gamma \cup \Delta \Proves !B$.
 \end{prop}
 
 \begin{proof}
-  Suppose $\Delta \Proves !B$. Then there is !!a{derivation} $!B_1$, \dots, $!B_l = !B$
-  from~$\Delta$. Some of the steps in that derivation will be correct
-  because of a rule which refers to a prior line~$!B_i$ that includes
-  !!a{formula}~$!B_i \in \Delta$. Let $!A_1$, \dots, $!A_n$ be all the
-  !!{formula}s in~$\Delta$ so referenced. For each one of them, by
-  hypothesis, there is !!a{derivation} of~$!A_i$ from~$\Gamma$, i.e.,
-  !!a{derivation}~$!A_i^1$, \dots, $!A_i^{k_i} = !A_i$ where every $!A_i^j$
-  is an axiom, !!a{element} of~$\Gamma$, or correct by a rule of
+  Suppose $\{!A\} \cup \Delta \Proves !B$. Then there is
+  !!a{derivation} $!B_1$, \dots, $!B_l = !B$ from~$\{!A\} \cup
+  \Delta$. Some of the steps in that derivation will be correct
+  because of a rule which refers to a prior line~$!B_i = !A$. By
+  hypothesis, there is !!a{derivation} of~$!A$ from~$\Gamma$, i.e.,
+  !!a{derivation}~$!A_1$, \dots, $!A_k = !A$ where every $!A_i$ is an
+  axiom, !!a{element} of~$\Gamma$, or correct by a rule of
   inference. Now consider the sequence
   \[
-  !A_1^1, \dots, !A_1^{k_1}, \dots, !A_n^1, \dots, !A_n^{k_n}, !B_1, \dots, !B_l = !B.
+  !A_1, \dots, !A_k = !A, !B_1, \dots, !B_l = !B.
   \]
-  This is a correct !!{derivation} of~$!B$ from $\Gamma$ since each
-  $!B_i \in \Delta$ needed to justify the inferences in the part
-  $!B_1$, \dots, $!B_l$ is now justified itself.
+  This is a correct !!{derivation} of~$!B$ from $\Gamma \cup \Delta$
+  since every $B_i = !A$ is now justified by the same rule which
+  justifies~$!A_k = !A$.
 \end{proof}
-  
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
+
 \begin{prop}
 \ollabel{prop:incons}
 $\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every
