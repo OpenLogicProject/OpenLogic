@@ -1,8 +1,8 @@
 # Use ubuntu trusty as the base image
-FROM ubuntu:trusty
+FROM ubuntu:xenial
 
 # Add a backport of TeX Live 2016 packages, for LTS releases, to the apt sources
-RUN echo -e '\ndeb http://ppa.launchpad.net/jonathonf/texlive-2016/ubuntu trusty main\ndeb-src http://ppa.launchpad.net/jonathonf/texlive-2016/ubuntu trusty main' /etc/apt/sources.list
+# RUN echo -e '\ndeb http://ppa.launchpad.net/jonathonf/texlive-2016/ubuntu trusty main\ndeb-src http://ppa.launchpad.net/jonathonf/texlive-2016/ubuntu trusty main' /etc/apt/sources.list
 
 # Install dependencies for building the open-logic-debug.pdf file
 RUN apt-get update && apt-get install -y --no-install-recommends \
