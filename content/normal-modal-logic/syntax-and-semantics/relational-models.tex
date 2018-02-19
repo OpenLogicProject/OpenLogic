@@ -33,7 +33,7 @@ The great advantage of relational semantics is that models can be
 represented by means of simple diagrams, such as the one in
 \olref{fig:simple}. Worlds are represented by nodes, and world~$w'$ is
 accessible from~$w$ precisely when there is an arrow from~$w$
-to~$w'$. Moreover, we label a node by~$\mTrue{p}$ when $w \in V(p)$,
+to~$w'$. Moreover, we label a node[world] by~$\mTrue{p}$ when $w \in V(p)$,
 and otherwise by~\mFalse{p}. \olref{fig:simple} represents the model
 with $W = \{w_1, w_2, w_3\}$, $R = \{\tuple{w_1, w_2},\tuple{w_1,
   w_3}\}$, $V(p) = \{w_1, w_2\}$, and $V(q) = \{w_2\}$.
@@ -41,10 +41,10 @@ with $W = \{w_1, w_2, w_3\}$, $R = \{\tuple{w_1, w_2},\tuple{w_1,
 \begin{figure}
   \begin{center}
     \begin{tikzpicture}[modal]
-      \node (w1) [label={right:\mTrue{p}\\ \mFalse{q}}]{$w_1$}; 
-      \node (w2) [label={right:\mTrue{p}\\ \mTrue{q}},
+      \node[world] (w1) [label={right:\mTrue{p}\\ \mFalse{q}}]{$w_1$}; 
+      \node[world] (w2) [label={right:\mTrue{p}\\ \mTrue{q}},
         above right=of w1]{$w_2$}; 
-      \node (w3) [label={right:\mFalse{p}\\ \mFalse{q}},
+      \node[world] (w3) [label={right:\mFalse{p}\\ \mFalse{q}},
         below right=of w1] {$w_3$};
       \draw[->] (w1) to (w2);
       \draw[->] (w1) to (w3);

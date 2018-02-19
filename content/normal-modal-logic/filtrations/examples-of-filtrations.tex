@@ -106,10 +106,10 @@ have as many as possible.
   \begin{figure}
     \centering
     \begin{tikzpicture}[modal]
-      \node (1) [label=below:\mFalse{p}] {$1$};
-      \node (2) [label=below:\mTrue{p}, right=of 1] {$2$};
-      \node (3) [label=below:\mFalse{p}, right=of 2] {$3$};
-      \node (4) [label=below:\mTrue{p}, right=of 3] {$4$};
+      \node[world] (1) [label=below:\mFalse{p}] {$1$};
+      \node[world] (2) [label=below:\mTrue{p}, right=of 1] {$2$};
+      \node[world] (3) [label=below:\mFalse{p}, right=of 2] {$3$};
+      \node[world] (4) [label=below:\mTrue{p}, right=of 3] {$4$};
       \node[phantom] (5) [right=of 4] {};
       \draw[->] (1) to (2);
       \draw[->] (2) to (3);
@@ -118,13 +118,13 @@ have as many as possible.
     \end{tikzpicture}
 
     \begin{tikzpicture}[modal]
-      \node (1) [label=below:\mFalse{p}] {$[1]$};
-      \node (2) [label=below:\mTrue{p}, right=of 1] {$[2]$};
+      \node[world] (1) [label=below:\mFalse{p}] {$[1]$};
+      \node[world] (2) [label=below:\mTrue{p}, right=of 1] {$[2]$};
       \draw[->,bend left] (1) to (2);
       \draw[->,bend left] (2) to (1);
       
-      \node (3) [label=below:\mFalse{p},right=of 2] {$[1]$};
-      \node (4) [label=below:\mTrue{p}, right=of 3] {$[2]$};
+      \node[world] (3) [label=below:\mFalse{p},right=of 2] {$[1]$};
+      \node[world] (4) [label=below:\mTrue{p}, right=of 3] {$[2]$};
       \draw[->,bend left] (3) to (4);
       \draw[->,bend left] (4) to (3);
       \draw[->,reflexive above] (4) to (4);
@@ -176,14 +176,14 @@ have as many as possible.
         node distance=2cm
       ]
 
-      \node (0) [label={below:\mTrue{p}\\\mFalse{q}},font=\tiny] {$0$};
-      \node (00) [label={below:\mTrue{p}\\\mFalse{q}},
+      \node[world] (0) [label={below:\mTrue{p}\\\mFalse{q}},font=\tiny] {$0$};
+      \node[world] (00) [label={below:\mTrue{p}\\\mFalse{q}},
         above right=of 0,font=\tiny] {$00$};
-      \node (000) [label={below:\mTrue{p}\\\mFalse{q}},
+      \node[world] (000) [label={below:\mTrue{p}\\\mFalse{q}},
         right=of 00, yshift=.8cm, font=\tiny] {$000$};
       \node[phantom] (0000) [right=of 000, yshift=.5cm] {};
       \node[phantom] (0001) [right=of 000, yshift=-.5cm] {};
-      \node (001) [label={below:\mFalse{p}\\\mTrue{q}},
+      \node[world] (001) [label={below:\mFalse{p}\\\mTrue{q}},
         right=of 00, yshift=-.8cm, font=\tiny] {$001$};
       \node[phantom](0010) [right=of 001, yshift=.5cm] {};
       \node[phantom](0011) [right=of 001, yshift=-.5cm] {};
@@ -193,7 +193,7 @@ have as many as possible.
         right=of 01, yshift=.8cm,font=\tiny] {$010$};
       \node[phantom] (0100) [right=of 010, yshift=.5cm] {};
       \node[phantom] (0101) [right=of 010, yshift=-.5cm] {};
-      \node (011) [label={below:\mFalse{p}\\\mTrue{q}},
+      \node[world] (011) [label={below:\mFalse{p}\\\mTrue{q}},
         right=of 01, yshift=-.8cm,font=\tiny] {$011$};
       \node[phantom] (0110) [right=of 011, yshift=.5cm] {};
       \node[phantom] (0111) [right=of 011, yshift=-.5cm] {};

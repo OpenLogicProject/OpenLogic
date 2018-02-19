@@ -59,11 +59,11 @@ in a given model. Let's introduce a notation for this.
   comprising $p_1$, $p_2$, $p_3$ as the only propositional variables:
   \begin{center}
     \begin{tikzpicture}[modal]
-      \node (w1) [label={left:\mTrue{p_1}\\\mFalse{p_2}\\\mFalse{p_3}}]
+      \node[world] (w1) [label={left:\mTrue{p_1}\\\mFalse{p_2}\\\mFalse{p_3}}]
             {$w_1$} ; 
-      \node (w2) [label={right:\mTrue{p_1}\\\mTrue{p_2}\\\mFalse{p_3}},
+      \node[world] (w2) [label={right:\mTrue{p_1}\\\mTrue{p_2}\\\mFalse{p_3}},
         below right=of w1]  {$w_2$}; 
-      \node (w3) [label={right:\mTrue{p_1}\\\mTrue{p_2}\\\mTrue{p_3}},
+      \node[world] (w3) [label={right:\mTrue{p_1}\\\mTrue{p_2}\\\mTrue{p_3}},
         above right=of w2] {$w_3$};
       \draw[reflexive above] (w3) to (w3); 
       \draw[->] (w1) to (w2);
