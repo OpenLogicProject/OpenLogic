@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-latex-recommended \
     texlive-latex-extra \
     texlive-math-extra \
-    texlive-science \
     latexmk \
 
     # Additionally install these to packages to fix a bug saying tikz.sty is missing
@@ -27,6 +26,8 @@ COPY . .
 # This is used to fix a bug saying gitinfo2.sty cannot be found
 #ADD http://www.pirbot.com/mirrors/ctan/macros/latex/contrib/gitinfo2/gitinfo2.sty gitinfo2.sty
 ADD http://mirrors.ctan.org/graphics/pgf/contrib/prooftrees/prooftrees.sty prooftrees.sty
+ADD http://www.tug.org/texlive/devsrc/Master/texmf-dist/tex/latex/forest/forest.sty forest.sty
+
 
 # Try generating open-logic-debug.pdf
 CMD ["latexmk", "-dvi-", "-pdf", "-pdflatex=pdflatex -interaction nonstopmode -halt-on-error", "open-logic-debug.tex"]
