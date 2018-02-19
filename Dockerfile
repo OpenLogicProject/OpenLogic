@@ -26,7 +26,7 @@ COPY . .
 
 # This is used to fix a bug saying gitinfo2.sty cannot be found
 #ADD http://www.pirbot.com/mirrors/ctan/macros/latex/contrib/gitinfo2/gitinfo2.sty gitinfo2.sty
-#ADD http://mirrors.ctan.org/graphics/pgf/contrib/prooftrees/prooftrees.sty prooftrees.sty
+ADD http://mirrors.ctan.org/graphics/pgf/contrib/prooftrees/prooftrees.sty prooftrees.sty
 
 # Try generating open-logic-debug.pdf
 CMD ["latexmk", "-dvi-", "-pdf", "-pdflatex=pdflatex -interaction nonstopmode -halt-on-error", "open-logic-debug.tex"]
