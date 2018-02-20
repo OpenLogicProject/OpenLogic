@@ -1,0 +1,97 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{int}
+
+\olsection{Introduction}
+
+Modal Logic deals with \emph{modal propositions} and the entailment
+relations among them. Examples of modal propositions are the
+following:
+\begin{enumerate}
+\item It is necessary that $2+2=4$.
+\item It is necessarily possible that it will rain tomorrow.
+\item If it is necessarily possible that~$!A$ then it is possible
+  that~$!A$.
+\end{enumerate}
+Possibility and necessity are not the only modalities: other unary
+connectives are also classified as modalities, for instance, ``it
+ought to be the case that~$!A$,'' ``It will be the case that~$!A$,''
+``Dana knows that~$!A$,'' or ``Dana believes that~$!A$.''
+
+Modal logic makes its first appearance in Aristotle's \emph{De
+  Interpretatione}: he was the first to notice that necessity implies
+possibility, but not vice versa; that possibility and necessity are
+inter-definable; that If $!A \land !B$ is possibly true then
+$!A$ is possibly true and $!B$ is possibly true, but not
+conversely; and that if $!A \to !B$ is necessary, then if
+$!A$ is necessary, so is~$!B$.
+
+The first modern approach to modal logic was the work of C.~I. Lewis,
+culminating with Lewis and Langford, \emph{Symbolic Logic}
+(1932). Lewis \& Langford were unhappy with the representation of
+implication by means of the material conditional: $!A \lif !B$
+is a poor substitute for ``$!A$ implies $!B$.'' Instead, they
+proposed to characterize implication as ``Necessarily, if $!A$
+then $!B$,'' symbolized as $!A \strictif !B$. In trying to
+sort out the different properties, Lewis indentified five different
+modal systems, \Log{S1}, \ldots, \Log{S4}, \Log{S5}, the last
+two of which are still in use.
+
+The approach of Lewis and Langford was purely \emph{syntactical}: they
+identified reasonable axioms and rules and investigated wat was
+provable with those means. A semantic approach remained elusive for a
+long time, until a first attempt was made by Rudolf Carnap in
+\emph{Meaning and Necessity} (1947) using the notion of a \emph{state
+  description}, i.e., a collection of atomic sentences (those that are
+``true'' in that state description). After lifting the truth
+definition to arbitrary sentences $!A$, Carnap defines $!A$
+to be \emph{necessarily true} if it is true in all state
+descriptions. Carnap's approach could not handle \emph{iterated}
+modalities, in that sentences of the form ``Possibly necessarily
+\ldots possibly $!A$'' always reduce to the innermost modality.
+
+The major breakthrough in modal semantics came with Saul Kripke's
+article ``A Completeness Theorem in Modal Logic'' (JSL 1959). Kripke
+based his work on Leibniz's idea that a statement is necessarily true
+if it is true ``at all possible worlds.'' This idea, though, suffers
+from the same drawbacks as Carnap's, in that the truth of statement at
+a world $w$ (or a state description $s$) does not depend on $w$ at
+all. So Kripke assumed that worlds are related by an
+\emph{accessibility relation} $R$, and that a statement of the form
+``Necessarily $!A$'' is true at a world $w$ if and only if
+$!A$ is true at all worlds $w'$ \emph{accessible from}
+$w$. Semantics that provide some version of this approach are called
+Kripke semantics and made possible the tumultuous development of modal
+logics (in the plural).
+
+When interpreted by the Kripke semantics, modal logic shows us what
+\emph{relational structures} look like ``from the inside.'' A
+relational structure is just a set equipped with a binary relation
+(for instance, the set of students in the class ordered by their
+social security number is a relational structure). But in fact
+relational structures come in all sorts of domains: besides relative
+possibility of states of the world, we can have epistemic states of
+some agent related by epistemic possibility, or states of a dynamical
+system with their state transitions, etc. Modal logic can be used to
+model all of these: the first give us ordinary, alethic, modal logic;
+the others give us epistemic logic, dynamic logic, etc.
+
+We focus on one particular angle, known to modal logicians as
+``correspondence theory.'' One of the most significant early
+discoveries of Kripke's is that many properties of the accessibility
+relation~$R$ (whether it is transitive, symmetric, etc.)  can be
+characterized \emph{in the modal language} itself by means of
+appropriate ``modal schemas.'' Modal logicians say, for instance, that
+the reflexivity of $R$ ``corresponds'' to the schema ``If
+necessarily~$!A$, then~$!A$''. We explore mainly the correspondence
+theory of a number of classical systems of modal logic (e.g., \Log{S4}
+and \Log{S5}) obtained by a combination of the schemas \Ax{D}, \Ax{T},
+\Ax{B}, \Ax{4}, and~\Ax{5}.
+
+\end{document}

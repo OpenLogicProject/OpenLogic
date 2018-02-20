@@ -1,5 +1,5 @@
 % % The Default OLP Configuration File `open-logic-config.sty`
-% % OpenLogic Project
+% % Open Logic Project
 %
 % Description
 % ===========
@@ -12,8 +12,8 @@
 % master files) will include `myversion-config.sty` if it exists. It
 % will do so after it loads this file, so your `myversion-config.sty`
 % will redefine the defaults.  This means you won't have to include
-% everythng, e.g., you can just change some tags and nothing else. You
-% may copy and paste edfinitions you want to change into that file, or
+% everything, e.g., you can just change some tags and nothing else. You
+% may copy and paste definitions you want to change into that file, or
 % copy thi file, rename it `myversion-config.sty` and delete anything
 % you'd like to leave as the default.
 
@@ -46,8 +46,8 @@
 %
 % - `\True` defaults to $1$ and `\False` to $0$.
 
-\DeclareDocumentMacro \True {1}
-\DeclareDocumentMacro \False {0}
+\DeclareDocumentMacro \True {\mathbb{T}}
+\DeclareDocumentMacro \False {\mathbb{F}}
 
 % ### Propositional Constants and Connectives
 %
@@ -202,6 +202,37 @@
   \LeftLabel{\scriptsize $#2$}
 }
 
+% - `\MP`: produces abbreviation for Modus Ponens.
+
+\DeclareDocumentMacro \MP {\textsc{mp}}
+
+% - `\QR`: produces abbreviation for Quantifier Rule.
+
+\DeclareDocumentMacro \QR {\textsc{qr}}
+
+% - `\Hyp`: produces abbreviation for Hypothesis.
+
+\DeclareDocumentMacro \Hyp {\textsc{Hyp}}
+
+% - `\sFmla`: Signed (prefixed) formulas for tableaux
+
+\DeclareDocumentCommand \sFmla { m m o }{
+  \ensuremath{%
+    \IfNoValueTF{#3}{}{#3\,}%
+    \hbox to1em{\ensuremath{#1}} #2}}
+
+% - Tableau rule names: `\TRule{Sign}{Op}` typesets the name of a the
+% 'Sign' rule for operator `Op`, `\TFalse{Op}` does the same for
+% 'False' rules. The optional argument contains the line number to
+% which the rule is applied.
+
+\DeclareDocumentCommand \TRule { m m o }{%
+  \ensuremath{{#2}{#1}\IfNoValueTF{#3}{}{\, #3}}}
+
+% - `\TAss`: justification label for ``assumption''
+
+\DeclareDocumentMacro \TAss {Assumption}
+
 % Metalogical Relations
 % ---------------------
 %
@@ -214,12 +245,23 @@
 
 % ### Substitution
 
-% `\Subst{!A}{t}{x}`: The operation of substituting a term for a
+% -`\subst{t}{x}`: typeset the substitution notation
+
+\DeclareDocumentCommand \subst { m m } {#1/#2}
+
+% - `\SSubst{A}{s}`: typeset simultaneous substitution (expects $s$ to
+% be a list of `\subst{t}{x}` expressions, say)
+
+\DeclareDocumentCommand \SSubst { m m } {
+  #1[#2]}
+
+% - `\Subst{!A}{t}{x}`: The operation of substituting a term for a
 % (free) variable in another term or in a formula.  The default is
 % $\varphi[x/t]$, other common notations are $\varphi^t_x$,
 % $\varphi\{t \rightarrow x\}$, or $S^t_x \varphi$.
 
 \DeclareDocumentCommand \Subst { m m m } {
+<<<<<<< HEAD
   #1[#2/#3]}
 
 % ### pre-Substitution
@@ -227,11 +269,14 @@
 \DeclareDocumentCommand \pSubst { m m m } {
   #1[#2/#3]^{-}
 }
+=======
+  #1[\subst{#2}{#3}]}
+>>>>>>> master
 
 
 % ### The satisfaction/truth relation 
 
-% `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
+% - `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
 % structure (relative to an assignment), is provided as the command
 % `\Sat` with two mandatory arguents (the structure and the formula)
 % and one optional argument (the assignment).  Use `\Sat/` to create
@@ -249,7 +294,6 @@
         { \Struct #2 \models #3 }
         { \Struct #2, #4 \models #3 }}
 }
-
 
 % ### The derivability relation
 
@@ -269,6 +313,14 @@
         { \vdash }
         { \vdash_{#2} }}
 }
+
+% - `\Thms{X}`: theorems a set of formulas
+
+\DeclareDocumentCommand \Thms { m } {\mathrm{Thm}(#1)}
+
+% - `\PAx`: the set of propositional axioms
+
+\DeclareDocumentMacro \PAx { \mathrm{Ax}_0 }
 
 % ### The semantic consequence relation relation
 
@@ -311,6 +363,26 @@
         % optional argument present
         { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
 }
+
+% - `\pAssign{v}` - Typeset a truth-value assignment
+
+\DeclareDocumentCommand \pAssign { m } {#1}
+
+% - `\pValue{A}{v}` - Truth value of a formula under a truth-value assignment.
+
+\DeclareDocumentCommand \pValue { m m }{\mathrm{TV}^{\pAssign{#2}}{#1}}
+
+% - `\pSat[/]{v}{!A}`, the relation of being satisfied by a
+% truth-value assignment
+
+\DeclareDocumentCommand \pSat { t{/} m m } {
+  \IfBooleanTF{#1}{
+    % negated
+        \pAssign #2 \not\models #3}{
+    % not negated
+        \pAssign #2 \models #3}
+}
+
 
 % - `\substruct`: symbol for the substructure relation
 
@@ -609,6 +681,68 @@
         { \Struct #2, #4 \Vdash #3 }}
 }
 
+% - `\mClass{C}` --- typeset class of models
+
+\DeclareDocumentCommand \mClass { m }{\mathcal{#1}}
+
+% - `\Nec`: produces abbreviation for Necessitation.
+
+\DeclareDocumentMacro \Nec {\textsc{nec}}
+
+% - `\RK`: produces abbreviation for Rule K
+
+\DeclareDocumentMacro \RK {\textsc{rk}}
+
+% - `\Dual`: produces abbreviation for Dual
+
+\DeclareDocumentMacro \Dual {\textsc{dual}}
+
+% - `\Taut`: produces abbreviation for Dual
+
+\DeclareDocumentMacro \Taut {\textsc{taut}}
+
+% - `\PL`: produces abbreviation for ``Propositional Logic''
+
+\DeclareDocumentMacro \PL {\textsc{pl}}
+
+% - `\Prop{A}{M}`: the proposition defined by $A$ in $\mathfrak{M}$
+
+\DeclareDocumentCommand \Prop { m m } {
+  {[\!\![} #1 {]\!\!]_{\mModel #2}}
+}
+
+% - `\ST`: The standard translation
+
+\DeclareDocumentMacro \ST {\mathord{\mathrm{ST}}}
+
+% - `\strictif`: strict conditional
+
+\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
+\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
+
+% - TikZ style for modal models
+
+\tikzset{
+  modal/.style={>=stealth',
+    shorten >=1pt,
+    shorten <=1pt,
+    auto,
+    node distance=1.5cm,
+    label distance=2pt,
+    semithick},
+  every label/.style={phantom,align=left},
+  world/.style = {circle,draw,minimum size=0.5cm,fill=gray!15},
+  modal every node/.style={world},
+  point/.style={circle,draw,inner sep=0.5mm,fill=black},
+  phantom/.style={rectangle,inner sep=0pt,draw=none,fill=none},
+  reflexive above/.style={->,loop,looseness=7,in=60,out=120},
+  reflexive below/.style={->,loop,looseness=7,in=240,out=300},
+  reflexive left/.style={->,loop,looseness=7,in=150,out=210},
+  reflexive right/.style={->,loop,looseness=7,in=30,out=330}
+}
+
+\DeclareDocumentCommand \mTrue { m }{\ensuremath{\phantom{\lnot}#1}}
+\DeclareDocumentCommand \mFalse { m }{\ensuremath{\lnot #1}}
 
 % Special Sets and Mathematical Symbols
 % -------------------------------------
@@ -667,11 +801,11 @@
 \DeclareDocumentMacro \pto {\mathrel{\ooalign{\hfil$\mapstochar\mkern
       5mu$\hfil\cr$\to$}}}
 
-% - `\defined`, `\undefined`: postfix for defined, undefined
+% - `\fdefined`, `\fundefined`: postfix for defined, undefined
 % functions
 
-\DeclareDocumentMacro \defined {\downarrow}
-\DeclareDocumentMacro \undefined {\uparrow}
+\DeclareDocumentMacro \fdefined {\downarrow}
+\DeclareDocumentMacro \fundefined {\uparrow}
 
 % ### Particular sets
 
@@ -765,11 +899,6 @@
 
 \DeclareDocumentCommand \Struct { m }{\mathfrak #1}
 
-% - `\mStruct{M}` - modal structures; default: set first token in
-% Fraktur
-
-\DeclareDocumentCommand \mStruct { m }{\mathfrak #1}
-
 % - `\Lang{L}` - Languages; default: set first token in callgraphic
 % font
 
@@ -777,7 +906,7 @@
 
 % - `\Log{L}` - Logics; default: set entirely in boldface
 
-\DeclareDocumentCommand \Log { m }{\mathbf{#1}}
+\DeclareDocumentCommand \Log { m }{\ensuremath{\mathbf{#1}}}
 
 % - `\Obj` - Object-language symbols; default: set entirely in
 % sans-serif italics
@@ -789,6 +918,10 @@
 %  parentheses. Some prefer no parentheses around the arguments.
 
 \DeclareDocumentCommand \Atom { m m }{ \mathord{#1}(#2) }
+
+% - `\Ax{A}`: typeset an axiom
+
+\DeclareDocumentCommand \Ax { m } {\ensuremath{\mathrm{#1}}}
 
 % - `\PIso` - Set of all partial isomorphisms
 
@@ -814,9 +947,13 @@
 % to, e.g., typeset the parameters as subscripts (e.g.,
 % $\mathrm{Frm}_\mathcal{L}$.
 
-% - `\Var`: the set of propositional variables
+% - `\Var`: the set of individual variables
 
-\def\Var{\mathrm{Var}}
+\DeclareDocumentMacro \Var { \mathrm{Var} }
+
+% - `\PVar`: the set of propositional variables
+
+\DeclareDocumentMacro \PVar { \mathrm{At}_0 }
 
 % - `\Trm[L]`: the set of terms (of a language)
 
@@ -868,6 +1005,35 @@
         { \mathrm{Sent} }
         { \mathrm{Sent}({\Lang #1}) }
 }
+
+% Modal logic
+% ===========
+
+% - `\mModel{M}` - modal structures; default: set first token in
+% Fraktur
+
+\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
+
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$.
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    % negated
+    \IfNoValueTF {#4} 
+        { \mModel #2 \nVdash #3 }
+        { \mModel #2, #4 \nVdash #3}}{
+    % not negated
+    \IfNoValueTF {#4} 
+        { \mModel #2 \Vdash #3 }
+        { \mModel #2, #4 \Vdash #3 }}
+}
+
+
 
 % Commands for uniform formulations
 % =================================
@@ -954,6 +1120,12 @@
 
 \settexttoken{variable}{variable}{variables}
 
+% - `propositional variable`: defaults to "propositional
+% variable/variables", redefine for, e.g., "sentence
+% letter"
+
+\settexttoken{propositional variable}{propositional variable}{propositional variables}
+
 % - `constant`: defaults to "constant", redefine for "individual
 % constant", "constant symbol."
 
@@ -1015,7 +1187,7 @@
 
 \settexttoken{domain}{domain}{domains}
 
-% - `\value`: value (denotation) of a term
+% - `value`: value (denotation) of a term
 
 \settexttoken{value}{value}{values}
 
@@ -1039,17 +1211,25 @@
 
 \settexttoken{nonderivability}{non-derivability}{non-derivabilities}
 
-% -`complete`: negation complete, syntactically complete (of theories)
+% - `tableau`: tableau, tableaux; or truth tree
+
+\settexttoken{tableau}{tableau}{tableaux}
+
+% - `signed formula`: signed formula in a tableau
+
+\settexttoken{signed formula}{signed formula}{signed formulas}
+
+% - `complete`: negation complete, syntactically complete (of theories)
 
 \settexttoken{complete}{complete}{complete}
 
-% -`axiomatizable`: effectively/recursively axiomatizable
+% - `axiomatizable`: effectively/recursively axiomatizable
 
 \settexttoken{axiomatizable}*{axiomatizable}{axiomatizable}
 \settexttoken{axiomatized}*{axiomatized}{axiomatized}
 \settexttoken{axiomatizability}*{axiomatizability}{axiomatizability}
 
-% -`represents`, `representable`
+% - `represents`, `representable`
 
 \settexttoken{represents}{represents}{represent}
 \settexttoken{representable}{representable}{representable}
@@ -1126,7 +1306,7 @@
 %   operators which are treated as primitives. Default: all as
 %   primitives.
 
-\tagtrue{prvNot,prvOr,prvAnd,prvIf,prvIff,prvTrue,prvFalse,prvEx,prvAll}
+\tagtrue{prvNot,prvOr,prvAnd,prvIf,prvIff,prvTrue,prvFalse,prvEx,prvAll,prvBox,prvDiamond}
 
 % - `defNot`, `defOr`, `defAnd`, `defIf`, `defIff`, `defTrue`,
 %  `defFalse`, `defEx`, `defAll` - Defined operators: tags for
@@ -1134,16 +1314,16 @@
 %  Not all combinations of primitive/defined operators will result in
 %  complete definitions!
 
-\tagfalse{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+\tagfalse{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll,defBox,defDiamond}
 
 % - `probNot`, `probOr`, `probAnd`, `probIf`, `probIff`, `probEx`,
 %   `probAll` - Cases in proofs: tags for (sets of) operators for
-%   which cases are proved; if the corresponding tag is off then the
+%   which cases are proved; if the corresponding tag is on then the
 %   case is added as a problem. Default: prove all cases. Note:
 %   propositional constants are part of induction base case and are
 %   always treated, if included.
 
-\tagfalse{probNot,probOr,probAnd,probIf,probIff,probEx,probAll}
+\tagfalse{probNot,probOr,probAnd,probIf,probIff,probEx,probAll,probBox,probDiamond}
 
 % - `limitclause` - Limit clause in inductive definitions: do you want
 % inductive definitions to have a "Nothing else is a ..." clause?
@@ -1162,12 +1342,15 @@
 
 \tagtrue{lambda}
 
-% - `prfND`, `prfSC` - alternative coverage of proof systems. Set `prfND` to
-% true if you want to include material on natural deduction, and
-% `prfSC` for the sequent calculus.  By default, we include both.
+% - prfND, prfSC, prfAX, prfTab - alternative coverage of proof systems. Set
+% `prfND` to true if you want to include material on natural
+% deduction, `prfSC` for the sequent calculus, `prfAX` for
+% axiomatic deduction, `prfTab` for tableaux.  By default, we include all.
 
 \tagtrue{prfSC}
 \tagtrue{prfND}
+\tagtrue{prfAX}
+\tagtrue{prfTab}
 
 % - `cmplCCS` - prove completeness via generating a complete
 % consistent set

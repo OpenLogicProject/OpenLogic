@@ -1,0 +1,132 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: euclidean-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{euc}
+
+\olsection{Filtrations of Euclidean Models}
+
+The approach of \olref[acc]{sec} does not work in the case of models
+that are euclidean or serial and euclidean. Consider the model at the
+top of \olref{fig:ser-eucl}, which is both euclidean and serial. Let
+$\Gamma = \{p, \Box p \}$. When taking a filtration through $\Gamma$,
+then $[w_1] = [w_3]$ since $w_1$ and $w_3$ are the only worlds that
+agree on~$\Gamma$. Any filtration will also have the arrow inherited
+from $\mModel{M}$, as depicted in \olref{fig:ser-eucl2}. That model
+isn't euclidean. Moreover, we cannot add arrows to that model in order
+to make it euclidean. We would have to add double arrows between
+$[w_2]$ and $[w_4]$, and then also between $w_2$ and~$w_5$. But $\Box
+p$ is supposed to be true at~$w_2$, while $p$ is false at~$w_5$.
+
+\begin{figure}[htpb]
+  \centering
+  \begin{tikzpicture}[modal]
+    \node[world] (w1)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{}{\Box p}$}] {$w_1$}; 
+    \node[world] (w2)
+          [label={right: \mTrue{p}},
+            label = {below: $\mSat{}{\Box p}$},
+            right=of w1] {$w_2$}; 
+    \draw[->] (w1) to (w2);
+    \node[world] (w3)
+          [label={left: \mFalse{p}},
+            label={below: $\mSat{}{\Box p}$},
+            below=of w1] {$w_3$}; 
+    \node[world] (w4)
+          [label={right:\mTrue{p}},
+            label={below: $\mSat/{}{\Box p}$},
+            right=of w3] {$w_4$};
+    \draw[->] (w3) to (w4);
+    \draw[reflexive above] (w4) to (w4);     
+    \node[world] (w5)
+          [label={right: \mFalse{p}},
+            label=below:$\mSat/{}{\Box p}$,
+            right=of w4] {$w_5$}; 
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive above] (w5) to (w5);     
+  \end{tikzpicture}
+  \caption{A serial and euclidean model.}\ollabel{fig:ser-eucl}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[modal,every text node part/.style={align=center}]
+    \node[world] (w1)
+          [label={left: \mFalse{p}},
+            label={right:$[w_1]=[w_3]$},
+            label={below: $\mSat{}{\Box p}$}] {$[w_1]$}; 
+    \node[world] (w2)
+         [label={right: \mTrue{p}},
+           label = {below: $\mSat{}{\Box p}$},
+           right=of w1, yshift=1.5cm] {$[w_2]$}; 
+    \draw[->] (w1) to (w2);
+    \node[world] (w4)
+         [label={right:\mTrue{p}},
+           label={below: $\mSat/{}{\Box p}$},
+           right=of w1,yshift=-1.5cm] {$[w_4]$};
+    \draw[->] (w1) to (w4);
+    \draw[reflexive above] (w4) to (w4);     
+    \node[world] (w5)
+         [label={right: \mFalse{p}},
+             label=below:$\mSat/{}{\Box p}$,
+             right=of w4] {$[w_5]$}; 
+    \draw[->, bend left] (w4) to (w5);
+    \draw[->, bend left] (w5) to (w4);
+    \draw[reflexive above] (w5) to (w5);     
+  \end{tikzpicture}
+  \caption{The filtration of the model in \olref{fig:ser-eucl}.}
+  \ollabel{fig:ser-eucl2}
+\end{figure}
+
+In particular, to obtain a euclidean flitration it is not enough to
+consider filtrations through arbitrary $\Gamma$'s closed under
+sub-!!{formula}s. Instead we need to consider sets $\Gamma$ that are
+\emph{modally closed} (see \olref[pre]{defn:modallyclosed}). Such sets
+of sentences are infinite, and therefore do not immediately yield a
+finite model property or the decidability of the corresponding system.
+
+\begin{thm}\ollabel{thm:modal-closed-filt}
+  Let $\Gamma$ be modally closed, $\mModel{M}=\tuple{W,R,V}$, and
+  $\mModel{M^*} = \tuple{W^*,R^*,V^*}$ be a coarsest filtration of
+  $\mModel{M}$.
+  \begin{enumerate}
+  \item If $\mModel{M}$ is symmetric, so is $\mModel{M^*}$.
+  \item If $\mModel{M}$ is transitive, so is $\mModel{M^*}$.
+  \item If $\mModel{M}$ is euclidean, so is $\mModel{M^*}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+\begin{enumerate}
+  \item If $\mModel{M^*}$ is a coarsest filtration, then by definition
+    $R^*[u][v]$ holds if and only if $C_1(u,v)$. For transitivity,
+    suppose $C_1(u,v)$ and $C_1(v,w)$; we have to show show
+    $C_1(u,w)$. \iftag{prvBox}{Suppose $\mSat{M}{\Box !A}[u]$; then
+      $\mSat{M}{\Box\Box!A}[u]$ since \Ax{4} is valid in all
+      transitive models; since $\Box\Box!A \in \Gamma$ by closure,
+      also by $C_1(u,v)$, $\mSat{M}{\Box!A}[v]$ and by $C_1(v,w)$,
+      also $\mSat{M}{!A}[w]$. }{}\iftag{prvDiamond}{Suppose
+      $\mSat{M}{!A}[w]$; then $\mSat{M}{\Diamond !A}[v]$ by
+      $C_1(v,w)$, since $\Diamond !A \in \Gamma$ by modal closure. By
+      $C_1(u,v)$, we get $\mSat{M}{\Diamond\Diamond !A}[u]$ since
+      $\Diamond\Diamond!A \in \Gamma$ by modal closure. Since
+      $\Ax{4}_\Diamond$ is valid in all transitive models,
+      $\mSat{M}{\Diamond!A}[u]$.}{}
+  \item Exercise. Use the fact that both \Ax{5} and $\Ax{5_\Diamond}$
+    are valid in all euclidean models.
+  \item Exercise. Use the fact that \Ax{B} and $\Ax{B_\Diamond}$ are
+    valid in all symmetric models.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][fil][euc]{thm:modal-closed-filt}.
+\end{prob}
+
+\end{document}

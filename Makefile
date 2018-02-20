@@ -20,7 +20,7 @@ all: open-logic-debug.pdf open-logic-complete.pdf
 
 content/open-logic.pdf:
 
-everything: $(ALLPDFFILES) open-logic-config.pdf courses
+everything: $(ALLPDFFILES) open-logic-config.pdf courses index.html
 
 courses: FORCE_MAKE
 	for course in courses/* ; do \

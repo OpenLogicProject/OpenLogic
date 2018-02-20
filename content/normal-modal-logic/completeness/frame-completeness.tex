@@ -1,0 +1,228 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: frame-completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{fra}
+
+\olsection{Frame Completeness}
+
+The completeness theorem for \Log{K} can be extended to other modal
+systems, once we show that the canonical model for a given logic has
+the corresponding frame property.
+
+\begin{thm}\ollabel{thm:completeframeprops}
+  If a normal modal logic $\Sigma$ contains one of the !!{formula}s on the
+  left-hand side of \olref{tab:correspondencetable},
+  then the canonical model for~$\Sigma$ has the corresponding property
+  on the right-hand side.
+\end{thm}
+
+\begin{table}[htp]
+  \centering
+    \begin{tabular}{| l || l |}
+      \hline
+      \emph{If $\Sigma$ contains \dots} & \emph{\dots the canonical
+        model for $\Sigma$ is:} \\
+      \hline \hline
+      \Ax{D}:\;\; $\Box!A \lif \Diamond !A$ & \quad serial; \\
+      \hline
+      \Ax{T}:\;\; $\Box!A \lif !A$ &\quad  reflexive;\\
+      \hline
+      \Ax{B}: \;\;$!A \lif \Box\Diamond!A$ &\quad  symmetric; \\
+      \hline
+      \Ax{4}: \;\; $\Box!A \lif \Box\Box!A$ & \quad transitive; \\
+      \hline 
+      \Ax{5}: \;\; $\Diamond !A \lif \Box\Diamond!A$& \quad euclidean.\\
+      \hline
+    \end{tabular}
+    \caption{Basic correspondence facts.}\ollabel{tab:correspondencetable}
+\end{table}
+
+\begin{proof}
+  We take each of these up in turn.
+
+  Suppose $\Sigma$ contains \Ax{D}, and let $\Delta \in W^\Sigma$; we
+  need to show that there is a $\Delta'$ such that $R^\Sigma
+  \Delta\Delta'$. It suffices to show that $\Box^{-1}\Delta$ is
+  $\Sigma$-consistent, for then by Lindenbaum's Lemma, there is a
+  complete $\Sigma$-consistent set $\Delta' \supseteq
+  \Box^{-1}\Delta$, and by definition of $R^\Sigma$
+  \iftag{prvBox}{}{and \olref[mod]{lem:box-iff-diamond} }we have
+  $R^\Sigma \Delta\Delta'$. So, suppose for contradiction that
+  $\Box^{-1}\Delta$ is \emph{not} $\Sigma$-consistent, i.e.,
+  $\Box^{-1}\Delta \Proves[\Sigma] \lfalse$. By \olref[mod]{lem:box2},
+  $\Delta \Proves[\Sigma] \Box\lfalse$, and since $\Sigma$ contains
+  \Ax{D}, also $\Delta \Proves[\Sigma] \Diamond\lfalse$. But $\Sigma$
+  is normal, so $\Sigma \Proves \lnot\Diamond \lfalse$
+  (\olref[prf][nor]{prop:notDiamondBot}), whence also $\Delta
+  \Proves[\Sigma] \lnot\Diamond \lfalse$, against the consistency
+  of~$\Delta$.
+
+  Now suppose $\Sigma$ contains \Ax{T}, and let $\Delta \in
+  W^\Sigma$. We want to show $R^\Sigma \Delta\Delta$,
+  i.e.,\iftag{prvBox}{}{ by \olref[mod]{lem:box-iff-diamond},}
+  $\Box^{-1}\Delta \subseteq \Delta$. But if $\Box!A \in \Delta$ then
+  by \Ax{T} also $!A \in \Delta$, as desired.
+
+  Now suppose $\Sigma$ contains \Ax{B}, and suppose $R^\Sigma
+  \Delta\Delta'$ for $\Delta$, $\Delta' \in W^\Sigma$. We need to show
+  that $R^\Sigma \Delta'\Delta$, i.e.,\iftag{prvBox}{
+    $\Box^{-1}\Delta' \subseteq \Delta$. By
+    \olref[mod]{lem:box-iff-diamond}, this is equivalent to}{}
+  $\Diamond\Delta \subseteq \Delta'$. So suppose $!A \in \Delta$. By
+  \Ax{B}, also $\Box\Diamond!A \in \Delta$. By the hypothesis that
+  $R^\Sigma \Delta\Delta'$\iftag{prvBox}{}{ and
+    \olref[mod]{lem:box-iff-diamond}}, we have that $\Box^{-1}\Delta
+  \subseteq \Delta'$, and hence $\Diamond!A \in \Delta'$, as required.
+
+  Now suppose $\Sigma$ contains \Ax{4}, and suppose $R^\Sigma
+  \Delta_1\Delta_2$ and $R^\Sigma \Delta_2\Delta_3$. We need to show
+  $R^\Sigma \Delta_1\Delta_3$. From the hypothesis\iftag{prvBox}{}{ and
+    \olref[mod]{lem:box-iff-diamond}} we have both $\Box^{-1}\Delta_1
+  \subseteq \Delta_2$ and $\Box^{-1}\Delta_2 \subseteq \Delta_3$. In
+  order to show $R^\Sigma \Delta_1\Delta_3$ it suffices to show
+  $\Box^{-1}\Delta_1 \subseteq \Delta_3$. So let $!B \in
+  \Box^{-1}\Delta_1$, i.e., $\Box!B \in \Delta_1$. By \Ax{4}, also
+  $\Box\Box!B \in \Delta_1$ and by hypothesis we get, first, that
+  $\Box!B \in \Delta_2$ and, second, that $!B \in \Delta_3$, as
+  desired.
+
+  Now suppose $\Sigma$ contains \Ax{5}, suppose $R^\Sigma
+  \Delta_1\Delta_2$ and $R^\Sigma \Delta_1\Delta_3$. We need to show
+  $R^\Sigma \Delta_2\Delta_3$. The first hypothesis gives
+  $\Box^{-1}\Delta_1 \subseteq \Delta_2$\iftag{prvBox}{}{ by
+    \olref[mod]{lem:box-iff-diamond}}, and the second hypothesis is
+  equivalent to $\Diamond\Delta_3 \subseteq \Delta_2$\iftag{prvBox}{,
+    by \olref[mod]{lem:box-iff-diamond}}{}.  To show $R^\Sigma
+  \Delta_2\Delta_3$\iftag{prvBox}{, by
+    \olref[mod]{lem:box-iff-diamond}, it suffices to}{ we have to}
+  show $\Diamond\Delta_3 \subseteq \Delta_2$. So let $\Diamond!A \in
+  \Diamond\Delta_3$, i.e., $!A \in \Delta_3$. By the second hypothesis
+  $\Diamond!A \in \Delta_1$ and by \Ax{5}, $\Box\Diamond!A \in
+  \Delta_1$ as well. But now the first hypothesis gives $\Diamond!A \in
+  \Delta_2$, as desired.
+  \end{proof}
+
+As a corollary we obtain completeness results for a number of
+systems. For instance, we know that $\Log{S5} = \Log{KT5} =
+\Log{KTB4}$ is complete with respect to the class of all reflexive
+euclidean models, which is the same as the class of all reflexive,
+symmetric and transitive models.
+
+\begin{thm}\ollabel{thm:generaldet}
+  Let $\mClass{C}_\Ax{D}$, $\mClass{C}_\Ax{T}$,
+  $\mClass{C}_\Ax{B}$, $\mClass{C}_\Ax{4}$, and
+  $\mClass{C}_\Ax{5}$ be the class of all serial, reflexive,
+  symmetric, transitive, and euclidean models (respectively). Then for
+  any schemas $!A_1$, \dots, $!A_n$ among \Ax{D},
+  \Ax{T}, \Ax{B}, \Ax{4}, and \Ax{5}, the system
+  $\Log{K}!A_1 \dots !A_n$ is determined by the
+  class of models $\mClass{C} = \mClass{C}_{!A_1} \cap \dots
+  \cap \mClass{C}_{!A_n}$. 
+\end{thm}
+
+\begin{prop}
+  Let $\Sigma$ be a normal modal logic; then:
+  \begin{enumerate}
+  \item\ollabel{prop:anotherfive-a}%
+    If $\Sigma$ contains the schema $\Diamond!A \lif \Box 
+    !A$ then the canonical model for $\Sigma$ is partially functional. 
+  \item If $\Sigma$ contains the schema $\Diamond!A \liff \Box 
+    !A$ then the canonical model for $\Sigma$ is functional. 
+  \item If $\Sigma$ contains the schema $\Box\Box!A \lif \Box 
+    !A$ then the canonical model for $\Sigma$ is weakly dense. 
+  \end{enumerate}
+(see \olref[frd][acc]{tab:anotherfive} for definitions of these frame
+  properties).
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item suppose that $\Sigma$ contains the schema $\Diamond !A \lif
+    \Box !A$, to show that $R^\Sigma$ is partialy functional we need
+    to prove that for any $\Delta_1$, $\Delta_2$, $\Delta_3 \in
+    W^\Sigma$, if $R^\Sigma \Delta_1\Delta_2$ and $R^\Sigma
+    \Delta_1\Delta_3$ then $\Delta_2=\Delta_3$. Since $R^\Sigma
+    \Delta_1\Delta_2$ we have $\Box^{-1}\Delta_1 \subseteq \Delta_2$
+    and since $R^\Sigma \Delta_1\Delta_3$ also $\Box^{-1}\Delta_1
+    \subseteq \Delta_3$\iftag{prvBox}{}{, both by
+      \olref[mod]{lem:box-iff-diamond}}. The identity
+    $\Delta_2=\Delta_3$ will follow if we can establish the two
+    inclusions $\Delta_2 \subseteq \Delta_3$ and $\Delta_3 \subseteq
+    \Delta_2$. For the first inclusion, let $!A \in \Delta_2$; then
+    $\Diamond!A \in \Delta_1$, and by the schema and deductive closure
+    of $\Delta_1$ also $\Box!A \in \Delta_1$, whence by the hypothesis
+    that $R^\Sigma \Delta_1\Delta_3$, $!A \in \Delta_3$. The second
+    inclusion is similar.
+
+  \item This follows immediately from part~\olref{prop:anotherfive-a}
+    and the seriality proof in \olref{thm:completeframeprops}.
+
+  \item Suppose $\Sigma$ contains the schema $\Box\Box!A \lif \Box!A$
+    and to show that $R^\Sigma$ is weakly dense, let $R^\Sigma
+    \Delta_1\Delta_2$. We need to show that there is a complete
+    $\Sigma$-consistent set $\Delta_3$ such that $R^\Sigma
+    \Delta_1\Delta_3$ and $R^\Sigma \Delta_3\Delta_2$. Let:
+    \[
+    \Gamma = \Box^{-1}\Delta_1 \cup \Diamond\Delta_2.
+    \]
+    It suffices to show that $\Gamma$ is $\Sigma$-consistent, for then
+    by Lindenbaum's Lemma it can be extendend to a complete
+    $\Sigma$-consistent set~$\Delta_3$ such that $\Box^{-1}\Delta_1
+    \subseteq \Delta_3$ and $\Diamond\Delta_2 \subseteq \Delta_3$,
+    i.e., $R^\Sigma \Delta_1\Delta_3$\iftag{prvBox}{}{ (by
+      \olref[mod]{lem:box-iff-diamond})} and $R^\Sigma
+    \Delta_3\Delta_2$\iftag{prvBox}{ (by
+      \olref[mod]{lem:box-iff-diamond})}{}.
+
+    Suppose for contradiction that $\Gamma$ is not consistent. Then
+    there are !!{formula}s $\Box!A_1$, \dots, $\Box!A_n \in \Delta_1$
+    and $!B_1$, \dots,~$!B_m \in \Delta_2$ such that \[!A_1, \dots,
+    !A_n, \Diamond!B_1, \dots, \Diamond!B_m \Proves[\Sigma]
+    \lfalse.\] Since $\Diamond (!B_1 \land \dots \land !B_m) \to
+    (\Diamond!B_1 \land \dots \land \Diamond!B_m)$ is !!{derivable} in
+    every normal modal logic, we argue as follows, contradicting the
+    consistency of~$\Delta_2$:
+    \begin{multline*}
+      !A_1, \dots, !A_n, \Diamond!B_1, \dots,
+      \Diamond!B_m\Proves[\Sigma] \lfalse \\
+    \begin{aligned}
+      & \Rightarrow
+      !A_1, \dots,!A_n \Proves[\Sigma] (\Diamond!B_1 \land
+      \dots \land \Diamond!B_m) \lif \lfalse,
+      && \text{deduction theorem;} \\
+      & \Rightarrow !A_1, \dots,!A_n \Proves[\Sigma]
+      \Diamond(!B_1 \land
+      \dots \land !B_m) \lif \lfalse, && \Sigma \text{ is normal}; \\
+      & \Rightarrow !A_1, \dots,!A_n \Proves[\Sigma]
+      \Box \lnot (!B_1 \land \dots \land !B_m), && \text{\PL}; \\
+      & \Rightarrow \Box!A_1, \dots,\Box!A_n
+      \Proves[\Sigma] \Box\Box \lnot (!B_1 \land \dots \land !B_m), &&
+      \text{\olref[mod]{lem:box1}}; \\
+      & \Rightarrow \Box!A_1, \dots,\Box!A_n
+      \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{by the
+        schema}; \\
+      & \Rightarrow \Delta_1 \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{Monotony}; \\
+      & \Rightarrow 
+      \Box\lnot (!B_1 \land \dots \land !B_m) \in \Delta_1, && \text{deductive closure}; \\
+      & \Rightarrow 
+      \lnot (!B_1 \land \dots \land !B_m) \in \Delta_2, && \text{since }
+      R^\Sigma \Delta_1\Delta_2. 
+    \end{aligned}
+    \end{multline*}\qedhere
+  \end{enumerate}
+\end{proof}
+
+On the strength of these examples, one might think that every
+system~$\Sigma$ of modal logic is \emph{complete}, in the sense that
+it proves every formula which is valid in every frame in which every
+theorem of $\Sigma$ is valid. Unfortunately, there are many systems
+that are not complete in this sense.
+
+\end{document}

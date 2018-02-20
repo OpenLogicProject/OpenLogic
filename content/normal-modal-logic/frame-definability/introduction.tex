@@ -1,0 +1,59 @@
+% Part: normal-modal-logic
+% Chapter: frame-correspondence
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{frd}{int}
+
+\olsection{Introduction}
+
+One question that interests modal logicians is the relationship
+between the accessibility relation and the truth of certain
+!!{formula}s in models with that accessibility relation. For instance,
+suppose the accessibility relation is reflexive, i.e., for every $w
+\in W$, $Rww$. In other words, every world is accessible from
+itself. That means that when $\Box !A$ is true at a world~$w$, $w$
+itself is among the accessible worlds at which~$!A$ must therefore be
+true. So, if the accessibility relation~$R$ of~$\mModel{M}$ is
+reflexive, then whatever world $w$ and formula $!A$ we take, $\Box !A
+\lif !A$ will be true there (in other words, the schema $\Box p \lif
+p$ and all its substitution instances are true in~$\mModel{M}$).
+
+The converse, however, is false. It's not the case, e.g., that if
+$\Box p \lif p$ is true in~$\mModel{M}$, then $R$ is reflexive. For we
+can easily find a non-reflexive model~$\mModel{M}$ where $\Box p \lif
+p$ is true at all worlds: take the model with a single world~$w$, not
+accessible from itself, but with $w \in V(p)$. By picking the truth
+value of $p$ suitably, we can make $\Box !A \lif !A$ true in a model
+that is not reflexive.
+
+The solution is to remove the variable assignment~$V$ from the
+equation. If we require that $\Box p \lif p$ is true at all worlds
+in~$\mModel{M}$, regardless of which worlds are in~$V(p)$, then it is
+necessary that $R$ is reflexive. For in any non-reflexive model, there
+will be at least one world~$w$ such that not $Rww$. If we set $V(p) =
+W \setminus \{w\}$, then $p$ will be true at all worlds other
+than~$w$, and so at all worlds accessible from~$w$ (since $w$ is
+guaranteed not to be accessible from~$w$, and $w$ is the only world
+where~$p$ is false). On the other hand, $p$ is false at $w$, so $\Box
+p \lif p$ is false at~$w$.
+
+This suggests that we should introduce a notation for model structures
+without a valuation: we call these \emph{frames}. A frame $\mModel{F}$
+is simply a pair $\tuple{W, R}$ consisting of a set of worlds with an
+accessibility relation. Every model $\tuple{W, R, V}$ is then, as we
+say, \emph{based on} the frame $\tuple{W, R}$. Conversely, a frame
+determines the class of models based on it; and a class of frames
+determines the class of models which are based on any frame in the
+class. And we can define $\mSat{F}{!A}$, the notion of !!a{formula}
+being \emph{valid} in a frame as: $\mSat{M}{!A}$ for all $\mModel{M}$
+based on~$\mModel{F}$.
+
+With this notation, we can establish correspondence relations between
+!!{formula}s and classes of frames: e.g., $\mSat{F}{\Box p \lif p}$
+if, and only if, $\mModel{F}$ is reflexive.
+
+\end{document}

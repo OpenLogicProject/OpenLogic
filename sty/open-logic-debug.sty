@@ -5,6 +5,8 @@
 \RequirePackage{xparse}
 \RequirePackage{xcolor}
 
+% oldebugnote puts a note in the margin
+
 \DeclareDocumentCommand \oldebugnote { s o m } {
   \IfBooleanTF{#1}{\reversemarginpar}{}
   \marginnote{\tiny
@@ -32,3 +34,16 @@
   \photocredits
   \bibliographystyle{\olpath/bib/natbib-oup}
   \bibliography{\olpath/bib/open-logic}}
+
+% put file info in footer (depends on memoir)
+
+\copypagestyle{openlogic}{plain}
+\makeevenfoot{openlogic}{\thepage}{}{\shortollicense}
+\makeoddfoot{openlogic}{\shortollicense}{}{\thepage}
+
+% adjust section number widths (depends on memoir)
+
+\setlength{\cftpartnumwidth}{2.2em}
+\setlength{\cftchapternumwidth}{2.2em}
+\setlength{\cftsectionnumwidth}{2.8em}
+

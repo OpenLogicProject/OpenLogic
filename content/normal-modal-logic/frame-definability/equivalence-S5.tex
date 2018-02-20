@@ -1,0 +1,142 @@
+% Part: normal-modal-logic
+% Chapter: frame-correspondence
+% Section: equivalence-S5
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{frd}{es5}
+
+\olsection{Equivalence Relations and \Log{S5}}
+
+The modal logic \Log{S5} is characterized as the set of !!{formula}s
+valid on all universal frames, i.e., every world is accessible from
+every world, including itself. In such a scenarion, $\Box$ corresponds
+to necessity and $\Diamond$ to possibility: $\Box !A$ is true if $!A$
+is true at \emph{every} world, and $\Diamond !A$ is true if $!A$ is
+true at \emph{some} world. It turns out that \Log{S5} can also be
+characterized as the !!{formula}s valid on all reflexive, symmetric,
+and transitive frames, i.e., on all \emph{equivalence relations}.
+
+\begin{defn}
+  A binary relation $R$ on $W$ is an \emph{equivalence relation} if
+  and only if it is reflexive, symmetric and transitive.  A relation
+  $R$ on $W$ is \emph{universal} if and only if $Ruv$ for all $u,v \in
+  W$.
+\end{defn}
+
+Since \Ax{T}, \Ax{B}, and \Ax{4} characterize the reflexive,
+symmetric, and transitive frames, the frames where the accessibility
+relation is an equivalence relation are exactly those in which all
+four !!{formula}s are valid. It turns out that the equivalence
+relations can also be characterized by other combinations of
+!!{formula}s, since the conditions with which we've defined
+equivalence relations are equivalent to combinations of other familiar
+conditions on~$R$.
+
+\begin{prop}\ollabel{prop:equivalences}
+  The following are equivalent:
+  \begin{enumerate}
+  \item $R$ is an equivalence relation;
+  \item $R$ is reflexive and euclidean;
+  \item $R$ is serial, symmetric, and euclidean;
+  \item $R$ is serial, symmetric, and transitive.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[mod][frd][es5]{prop:equivalences} by showing:
+  \begin{enumerate}
+  \item If $R$ is symmetric and transitive, it is euclidean.
+  \item If $R$ is reflexive, it is serial.
+  \item If $R$ is reflexive and euclidean, it is symmetric.
+  \item If $R$ is symmetric and euclidean, it is transitive.
+  \item If $R$ is serial, symmetric, and transitive, it is reflexive.
+  \end{enumerate}
+  Explain why this suffices for the proof that the conditions are
+  equivalent.
+\end{prob}
+
+\olref{prop:equivalences} is the semantic counterpart to
+\olref[prf][prs]{prop:S5}, in that it gives equivalent characterization of
+the modal logic of frames over which $R$ is an equivalence (the logic
+traditionally referred to as \Log{S5}).
+
+What is the relationship between universal and equivalence relations?
+Although every universal relation is an equivalence relation, clearly
+not every equivalence relation is universal. However, the !!{formula}s
+valid on all universal relations are exactly the same as those valid
+on all equivalence relations.
+
+\begin{prop}
+  Let $R$ be an equivalence relation, and for each $w \in W$ define
+  the \emph{equivalence class} of $w$ as the set $[w] = \{w'\in W :
+  Rww'\}$. Then:
+  \begin{enumerate}
+  \item $w \in [w]$;
+  \item $R$ is universal on each equivalence class $[w]$;
+  \item The collection of equivalence classes partitions $W$ into mutually
+    exclusive and jointly exhaustive subsets.
+  \end{enumerate}
+\end{prop}
+
+\begin{prop}\ollabel{prop:S5=univ}
+  !!^a{formula} $!A$ is valid in all frames $\mModel{F} =\tuple{W,R}$
+  where $R$ is an equivalence relation, if and only if it is valid in
+  all frames $\mModel{F} =\tuple{W,R}$ where $R$ is universal. Hence,
+  the logic of universal frames is just \Log{S5}.
+\end{prop}
+
+\begin{proof}
+  It's immediate to verify that a universal relation~$R$ on~$W$ is an
+  equivalence. Hence, if $!A$ is valid in all frames where $R$ is an
+  equivalence it is valid in all universal frames. For the other
+  direction, we argue contrapositively: suppose $!B$ is !!a{formula}
+  that fails at a world $w$ in a model $\mModel{M} = \tuple{W, R, V}$
+  based on a frame $\tuple{W,R}$, where $R$ is an equivalence on
+  $W$. So $\mSat/{M}{!B}[w]$. Define a model $\mModel{M}' = \tuple{W',
+    R', V'}$ as follows:
+  \begin{enumerate}
+  \item $W' = [w]$;
+  \item $R'$ is universal on $W'$;
+  \item $V'(p) = V(p) \cap W'$. 
+  \end{enumerate}
+  (So the set $W'$ of worlds in $\mModel{M}'$ is represented by the
+  shaded area in \olref{fig:partition}.)  It is easy to see
+  that $R$ and $R'$ agree on $W'$. Then one can show by induction on
+  !!{formula}s that for all $w' \in W'$: $\mSat{M'}{!A}[w']$ if and
+  only if $\mSat{M}{!A}[w']$ for each $!A$ (this makes sense since $W'
+  \subseteq W$). In particular, $\mSat/{M'}{!B}[w]$, and $!B$ fails in
+  a model based on a universal frame.
+\end{proof}
+
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[node distance=2cm, auto, thick]
+    \clip [rounded corners] (0,0) -- (6,0) -- (6,4) -- (0,4) --  cycle;
+    \begin{scope}
+      \clip (0,0) -- (2,0)  .. controls (1.5,1.5) and (4.5,1.5)
+      .. (4,4) -- (0,4) -- (0,0) -- cycle;
+      \filldraw[fill=gray!40] (0,4) -- (0,2) .. controls (1.5,1.5)
+      and (4.5,1.5) .. (4.5,0) -- (6,0) -- (6,4) -- (0,4) --  cycle;
+    \end{scope}
+    \draw [name path=line1] (2,0) .. controls (1.5,1.5) and (4.5,1.5) .. (4,4);
+    \draw [name path=line2] (0,2)  .. controls (1.5,1.5) and (4.5,1.5) .. (4.5,0);
+    \path [name intersections={of=line1 and line2}];
+    \draw [rounded corners, use as bounding box, very thick] (0,0)
+    -- (6,0) -- (6,4) -- (0,4) --  cycle; 
+    \node at (2,3) {$[w]$} ;
+    \node at (1,1) {$[u]$} ;
+    \node at (3,0.75) {$[v]$} ;
+    \node at (4.75,2) {$[z]$} ;
+  \end{tikzpicture}
+  \caption{A partition of $W$ in equivalence classes.}\ollabel{fig:partition}
+\end{figure}
+
+\end{document}
+

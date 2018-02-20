@@ -81,6 +81,18 @@ will find that, after unpacking the definition of~$=$, you have to
 prove: every !!{element} of~$U$ is !!a{element} of~$V$
 \emph{and} every !!{element} of~$V$ is !!a{element} of~$U$).
 
+\subsection{Proving a Disjunction}
+
+When what you are proving takes the form of a disjunction (i.e., it is
+an statement of the form ``$p$ or $q$''), it is enough to show that
+one of the disjuncts is true.  However, it basically never happens
+that either disjunct just follows from the assumptions of your
+theorem. More often, the assumptions of your theorem are themselves
+disjunctive, or you're showing that all things of a certain kind have
+one of two properties, but some of the things have the one and others
+have the other property.  This is where proof by cases is
+useful (see below).
+
 \subsection{Conditional Proof}
 
 Many theorems you will encounter are in conditional form (i.e., show
@@ -132,17 +144,20 @@ $x$ is specifically, other that it has the property $P$, then you can
 assert that all every $P$ has the property~$Q$. In short, $x$ is a
 stand-in for \emph{all} things with property~$P$.
 
-\subsection{Proving a Disjunction}
+\begin{prop}
+  For all sets $X$ and $Y$, $X \subseteq X \cup Y$.
+\end{prop}
 
-When what you are proving takes the form of a disjunction (i.e., it is
-an statement of the form ``$p$ or $q$''), it is enough to show that
-one of the disjuncts is true.  However, it basically never happens
-that either disjunct just follows from the assumptions of your
-theorem. More often, the assumptions of your theorem are themselves
-disjunctive, or you're showing that all things of a certain kind have
-one of two properties, but some of the things have the one and others
-have the other property.  This is where proof by cases is
-useful.
+\begin{proof}
+  Let $X$ and $Y$ be arbitrary sets.  We want to show that $X
+  \subseteq X \cup Y$. By definition of $\subseteq$, this amounts to:
+  for every $x$, if $x \in X$ then $x \in X \cup Y$. So let $x \in X$
+  be an arbitrary !!{element} of~$X$. We have to show that $x \in X
+  \cup Y$. Since $x \in X$, $x \in X$ or $x \in Y$. Thus, $x \in
+  \Setabs{x}{x \in X \lor x \in Y}$. But that, by definition of $\cup
+  $, means $x \in X \cup Y$.
+\end{proof}
+
 
 \subsection{Proof by Cases}
 
@@ -184,13 +199,18 @@ U \cup V$.
   U$ or $x \in V$. So, we have to show: for any $x$, if $x \in Y$ or
   $x \in Z$, then $x \in U$ or $x \in V$.
 
-  (So far we've only unpacked definitions!{} We've reformulated our
+  \begin{quote}
+  So far we've only unpacked definitions!{} We've reformulated our
   proposition without $\subseteq$ and $\cup$ and are left with trying
   to prove a universal conditional claim. By what we've discussed
   above, this is done by assuming that $x$ is something about which we
   assume the ``if'' part is true, and we'll go on to show that the
   ``then'' part is true as well. In other words, we'll assume that $x
-  \in Y$ or $x \in Z$ and show that $x \in U$ or $x \in V$.)
+  \in Y$ or $x \in Z$ and show that $x \in U$ or $x \in
+  V$.\footnote{This paragraph just explains what we're doing---it's
+    not part of the proof, and you don't have to go into all this
+    detail when you write down your own proofs.}
+  \end{quote}
 
   Suppose that $x \in Y$ or $x \in Z$. We have to show that $x \in U$
   or $x \in V$. We distinguish cases.
@@ -229,18 +249,23 @@ simple example.
 \end{prop}
 
 \begin{proof}
-  Assume $x \in Y$. Let $X = \{x\}$. (Here we've defined the set~$X$
-  by enumerating its !!{element}s. Since we assume that $x$ is an
-  object, and we can always for the set containing any number of
-  objects by enumeration, we don't have to show that we've succeeded
-  in defining a set~$X$ here.  However, we still have to show that $X$
-  has the properties required by the proposition. The proof isn't
-  complete without that!) Since $x \in X$, $X \neq \emptyset$. (This
-  relies on the definition of $X$ as $\{x\}$ and the obvious facts
-  that $x \in \{x\}$ and $x \notin \emptyset$.) Since $x$ is the only
-  !!{element} of~$\{x\}$, and $x \in Y$, every !!{element} of~$X$ is
-  also !!a{element} of~$Y$. By definition of~$\subseteq$, $X \subseteq
-  Y$.
+  Assume $x \in Y$. Let $X = \{x\}$.
+  \begin{quote}
+    Here we've defined the set~$X$ by enumerating its
+    !!{element}s. Since we assume that $x$ is an object, and we can
+    always form a set by enumerating its !!{element}s, we don't have
+    to show that we've succeeded in defining a set~$X$ here.  However,
+    we still have to show that $X$ has the properties required by the
+    proposition. The proof isn't complete without that!{}
+  \end{quote}
+  Since $x \in X$, $X \neq \emptyset$.
+  \begin{quote}
+    This relies on the definition of $X$ as $\{x\}$ and the obvious
+    facts that $x \in \{x\}$ and $x \notin \emptyset$.
+  \end{quote}
+  Since $x$ is the only !!{element} of~$\{x\}$, and $x \in Y$, every
+  !!{element} of~$X$ is also !!a{element} of~$Y$. By definition
+  of~$\subseteq$, $X \subseteq Y$.
 \end{proof}
 
 \subsection{Using Existence Claims}
@@ -248,49 +273,56 @@ simple example.
 Suppose you know that some existence claim is true (you've proved it,
 or it's a hypothesis you can use), say, ``for some~$x$, $x \in X$'' or
 ``there is an $x \in X$.''  If you want to use it in your proof, you
-can just pretend that you have a name for one of the things in your
-hypothesis says exit. Since $X$ contains at least one thing, there are
-things to which that name might refer. You might of course not be able
-to pick one or describe it further (other than that $x \in X$). But
-for the purpose of the proof, you can pretend that you have picked it
-out and give a name to it. (It's important to pick a name that you
-haven't already used (or that appears in your hypotheses, otherwise
-things can go wrong.) You might go from ``for some $x$, $x \in X$''
-to ``Let $a \in X$.''  Now you reason about~$a$, use some other
-hypotheses, etc., and come to a conclusion, $p$. If $p$ no longer
-mentions~$a$, $p$ is independent of the asusmption that $a \in X$, and
-you've shown that it follows just from the assumption ``for some $x$,
-$x \in X$.''
+can just pretend that you have a name for one of the things which your
+hypothesis says exist. Since $X$ contains at least one thing, there
+are things to which that name might refer. You might of course not be
+able to pick one out or describe it further (other than that it is
+$\in X$). But for the purpose of the proof, you can pretend that you
+have picked it out and give a name to it. It's important to pick a
+name that you haven't already used (or that appears in your
+hypotheses), otherwise things can go wrong. In your proof, you
+indicate this by going from ``for some $x$, $x \in X$'' to ``Let $a
+\in X$.''  Now you can reason about~$a$, use some other hypotheses, etc.,
+until you come to a conclusion, $p$. If $p$ no longer mentions~$a$, $p$ is
+independent of the asusmption that $a \in X$, and you've shown that it
+follows just from the assumption ``for some $x$, $x \in X$.''
 
 \begin{prop}
 If $X \neq \emptyset$, then $X \cup Y \neq \emptyset$.
 \end{prop}
 
 \begin{proof}
-Here the hypothesis that $X \neq \emptyset$ hides an existential
-claim, which you get to only by unpacking a few definitions. The
-definition of $=$ tells us that $X = \emptyset$ iff every $x \in X$ is
-also in $\emptyset$ and every $x \in \emptyset$ is also $\in
-X$. Negating both sides, we get: $X \neq \emptyset$ iff either some $x
-\in X$ is $\notin \emptyset$ or some $x \in \emptyset$ is $\notin
-X$. Since nothing is $\in \emptyset$, the second disjunct can never be
-true, and ``$x \in X$ and $x \notin \emptyset$'' reduces to just $x
-\in X$. So $x \neq \emptyset$ iff for some $x$, $x \in X$. That's an
-existence claim.
-\begin{quote}
-Suppose $X \neq \emptyset$, i.e., for some $x$, $x \in X$. Let $a \in
-X$.
-\end{quote}
-Now we've introduced a name for one of the things~$\in X$. We'll use
-it, only assuming that $a \in X$:
-\begin{quote}
-Since $a \in X$, $a \in X \cup Y$, by definition of~$\cup$. So for
-some $x$, $x \in X \cup Y$, i.e., $X \cup Y \neq \emptyset$.
-\end{quote}
-In that last step, we went from ``$a \in X \cup Y$'' to ``for some
-$x$, $x \in X \cup Y$.'' That didn't mention $a$ anymore, so we know
-that ``for some $x$, $x \in X \cup Y$'' follows from ``for some $x$, $x
-\in X$ alone.''
+  Suppose $X \neq \emptyset$. So for some $x$, $x \in X$. 
+  \begin{quote}
+    Here we first just restated the hypothesis of the
+    proposition. This hypothesis, i.e., $X \neq \emptyset$, hides an
+    existential claim, which you get to only by unpacking a few
+    definitions. The definition of $=$ tells us that $X = \emptyset$
+    iff every $x \in X$ is also $\in \emptyset$ and every $x \in
+    \emptyset$ is also $\in X$. Negating both sides, we get: $X \neq
+    \emptyset$ iff either some $x \in X$ is $\notin \emptyset$ or some
+    $x \in \emptyset$ is $\notin X$. Since nothing is $\in \emptyset$,
+    the second disjunct can never be true, and ``$x \in X$ and $x
+    \notin \emptyset$'' reduces to just $x \in X$. So $x \neq
+    \emptyset$ iff for some $x$, $x \in X$. That's an existence
+    claim. Now we use that existence claim by introducing a name for
+    one of the !!{element}s of~$X$:
+  \end{quote}
+  Let $a \in X$.
+  \begin{quote}
+    Now we've introduced a name for one of the things~$\in X$. We'll
+    continue to argue about~$a$, but we'll be careful to only assume
+    that $a \in X$ and nothing else:
+  \end{quote}
+  Since $a \in X$, $a \in X \cup Y$, by definition of~$\cup$. So for
+  some $x$, $x \in X \cup Y$, i.e., $X \cup Y \neq \emptyset$.
+  \begin{quote}
+    In that last step, we went from ``$a \in X \cup Y$'' to ``for some
+    $x$, $x \in X \cup Y$.'' That doesn't mention $a$ anymore, so we
+    know that ``for some $x$, $x \in X \cup Y$'' follows from ``for
+    some $x$, $x \in X$ alone.'' But that means that $X \cup Y \neq
+    \emptyset$.
+  \end{quote}
 \end{proof}
 
 It's maybe good practice to keep bound variables like ``$x$'' separate

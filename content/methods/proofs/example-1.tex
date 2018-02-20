@@ -22,23 +22,23 @@ For any sets $X$, $Y$, and $Z$, $X \cup (Y \cap Z) = (X \cup Y)
 Let's prove it!{}
 
 \begin{proof}
-
+We want to show that for any sets $X$, $Y$, and $Z$, $X \cup (Y \cap
+Z) = (X \cup Y) \cap (X \cup Z)$
+\begin{quote}
 First we unpack the definition of ``$=$'' in the statement of the
-proposition. Recall that proving equality between sets means showing
-that the sets have the same elements. That is, all elements of $X \cup
-(Y \cap Z)$ are also elements of $(X \cup Y) \cap (X \cup Z)$, and
-vice versa.  The ``vice versa'' means that also every element of $(X
-\cup Y) \cap (X \cup Z)$ must be an !!{element} of $X \cup (Y \cap
+proposition. Recall that proving sets identical means showing that the
+sets have the same !!{element}s. That is, all !!{element}s of $X \cup
+(Y \cap Z)$ are also !!{element}s of $(X \cup Y) \cap (X \cup Z)$, and
+vice versa.  The ``vice versa'' means that also every !!{element} of $(X
+\cup Y) \cap (X \cup Z)$ must be !!a{element} of $X \cup (Y \cap
 Z)$.  So in unpacking the definition, we see that we have to prove a
 conjunction.  Let's record this:
-
-\begin{quote}
+\end{quote}
 By definition, $X \cup (Y \cap Z) = (X \cup Y) \cap (X \cup Z)$ iff
 every !!{element} of $X \cup (Y \cap Z)$ is also !!a{element} of $(X
 \cup Y) \cap (X \cup Z)$, and every !!{element} of $(X \cup Y) \cap (X
 \cup Z)$ is !!a{element} of $X \cup (Y \cap Z)$.
-\end{quote}
-
+\begin{quote}
 Since this is a conjunction, we must prove each conjunct
 separately. Lets start with the first: let's prove that every
 !!{element} of $X \cup (Y \cap Z)$ is also !!a{element} of $(X
@@ -48,13 +48,11 @@ This is a universal claim, and so we consider an arbitrary !!{element}
 of $X \cup (Y \cap Z)$ and show that it must also be !!a{element} of
 $(X \cup Y) \cap (X \cup Z)$. We'll pick a variable to call this
 arbitrary !!{element} by, say,~$z$.  Our proof continues:
-
-\begin{quote}
+\end{quote}
 First, we prove that every !!{element} of $X \cup (Y \cap Z)$ is also
 !!a{element} of $(X \cup Y) \cap (X \cup Z)$. Let $z \in X \cup (Y
 \cap Z)$. We have to show that $z \in (X \cup Y) \cap (X \cup Z)$.
-\end{quote}  
-
+\begin{quote}  
 Now it is time to unpack the definition of $\cup$ and~$\cap$. For
 instance, the definition of $\cup$ is: $X \cup Y = \Setabs{z}{z \in X
   \text{ or } z \in Y}$.  When we apply the definition to ``$X \cup (Y
@@ -64,62 +62,50 @@ instance, the definition of $\cup$ is: $X \cup Y = \Setabs{z}{z \in X
 amounts to: $z \in \Setabs{z}{z \in X \text{ or } z \in Y \cap
   Z}$. And $z \in \Setabs{z}{\dots z\dots}$ iff \dots $z$ \dots, i.e.,
 in this case, $z \in X$ or $z \in Y \cap Z$.
-
-\begin{quote}
+\end{quote}
 By the definition of $\cup$, either $z \in X$ or $z \in Y \cap Z$.
-\end{quote}
-
-Since this is a disjunction, it will be useful to apply proof by
-cases. So we take the two cases, and show that in each one, the
-conclusion we're aiming for (namely, ``$z \in (X \cup Y) \cap (X \cup
-Z)$) obtains.
-
 \begin{quote}
-Case 1: Suppose that $z \in X$.
+Since this is a disjunction, it will be useful to apply proof by
+cases. We take the two cases, and show that in each one, the
+conclusion we're aiming for (namely, ``$z \in (X \cup Y) \cap (X \cup
+Z)$'') obtains.
 \end{quote}
-
+Case 1: Suppose that $z \in X$.
+\begin{quote}
 There's not much more to work from based on our assumptions. So let's
 look at what we have to work with in the conclusion. We want to show
 that $z \in (X \cup Y) \cap (X \cup Z)$. Based on the definition of
 $\cap$, if we want to show that $z \in (X \cup Y) \cap (X \cup Z)$, we
-have to show that it's in both $(X \cup Y)$ and $(X \cup Z)$. The
-answer is immediate. But $z \in X \cup Y$ iff $z \in X$ or $z \in Y$,
-and we already have (as the assumption of case~1) that $z \in X$. By
-the same reasoning---switching $Z$ for $Y$---$z \in X \cup Z$. This
-argument went in the reverse direction, so let's record our reasoning
-in the direction needed in our proof.
-
-\begin{quote}
+have to show that it's in both $(X \cup Y)$ and $(X \cup Z)$. But $z
+\in X \cup Y$ iff $z \in X$ or $z \in Y$, and we already have (as the
+assumption of case~1) that $z \in X$. By the same
+reasoning---switching $Z$ for $Y$---$z \in X \cup Z$. This argument
+went in the reverse direction, so let's record our reasoning in the
+direction needed in our proof.
+\end{quote}
 Since $z \in X$, $z \in X$ or $z \in Y$, and hence, by definition
 of~$\cup$, $z \in X \cup Y$. Similarly, $z \in X \cup Z$.  But this
 means that $z \in (X \cup Y) \cap (X \cup Z)$, by definition
 of~$\cap$.
-\end{quote}
-
+\begin{quote}
 This completes the first case of the proof by cases. Now we want to
 derive the conclusion in the second case, where $z \in Y \cap Z$.
-
-\begin{quote}
+\end{quote}
 Case 2: Suppose that $z \in Y \cap Z$.
-\end{quote}
-
-Again, we are working with the intersection of two sets. Since $z \in
-Y \cap Z$, $z$ must be an element of both $Y$ and $Z$.
-
 \begin{quote}
-Since $z \in Y \cap Z$, $z$ must be an element of both $Y$ and $Z$, by
-definition of~$\cap$.
+Again, we are working with the intersection of two sets. Let's apply
+the definition of~$\cap$:
 \end{quote}
-
+Since $z \in Y \cap Z$, $z$ must be !!a{element} of both $Y$ and $Z$, by
+definition of~$\cap$.
+\begin{quote}
 It's time to look at our conclusion again. We have to show that $z$ is
 in both $(X \cup Y)$ and $(X \cup Z)$. And again, the solution is
 immediate.
-
-\begin{quote}
+\end{quote}
 Since $z \in Y$, $z \in (X \cup Y)$. Since $z \in Z$, also $z \in (X
 \cup Z)$.  So, $z \in (X \cup Y) \cap (X \cup Z)$.
-\end{quote}
-
+\begin{quote}
 Here we applied the definitions of $\cup$ and $\cap$ again, but since
 we've already recalled those definitions, and already showed that if
 $z$ is in one of two sets it is in their union, we don't have to be as
@@ -127,22 +113,18 @@ explicit in what we've done.
 
 We've completed the second case of the proof by cases, so now we can
 assert our first conclusion.
-
-\begin{quote}
-So, if $z \in X \cup (Y \cap Z)$ then $z \in (X \cup Y) \cap (X \cup Z)$.
 \end{quote}
-
+So, if $z \in X \cup (Y \cap Z)$ then $z \in (X \cup Y) \cap (X \cup Z)$.
+\begin{quote}
 Now we just want to show the other direction, that every !!{element}
 of $(X \cup Y) \cap (X \cup Z)$ is !!a{element} of $X \cup (Y \cap
 Z)$. As before, we prove this universal claim by assuming we have an
 arbitrary !!{element} of the first set and show it must be in the
 second set. Let's state what we're about to do.
-
-\begin{quote}
+\end{quote}
 Now, assume that $z \in (X \cup Y) \cap (X \cup Z)$. We want to show
 that $z \in X \cup (Y \cap Z)$.
-\end{quote}
-
+\begin{quote}
 We are now working from the hypothesis that $z \in (X \cup Y) \cap (X
 \cup Z)$. It hopefully isn't too confusing that we're using the
 same~$z$ here as in the first part of the proof.  When we finished
@@ -154,54 +136,42 @@ what follows.
 We know that $z$ is in both $X \cup Y$ and $X \cup Z$, by definition
 of~$\cap$. And by the definition of $\cup$, we can further unpack this
 to: either $z \in X$ or $z \in Y$, and also either $z \in X$ or $z \in
-Z$. This looks like a proof by cases again---except the ``and' makes
+Z$. This looks like a proof by cases again---except the ``and'' makes
 it confusing. You might think that this amounts to there being three
 possibilities: $z$ is either in $X$, $Y$ or $Z$. But that would be a
 mistake.  We have to be careful, so let's consider each disjunction in
 turn.
-
-\begin{quote}
+\end{quote}
 By definition of $\cap$, $z \in X \cup Y$ and $z \in X \cup Z$. By
 definition of $\cup$, $z \in X$ or $z \in Y$. We distinguish cases.
-\end{quote}
-
-Since we're focusing on the first disjunction, we haven't unpacked the
-second one yet. In fact, we don't need it. The first case is $z \in
-X$, and !!a{element} of a set is also !!a{element} of that union of
-that set with any other. So case~1 is easy:
-
 \begin{quote}
+Since we're focusing on the first disjunction, we haven't gotten our
+second disjunction (from unpacking $X \cup Z$) yet. In fact, we don't
+need it yet. The first case is $z \in X$, and !!a{element} of a set is
+also !!a{element} of the union of that set with any other. So case~1
+is easy:
+\end{quote}
 Case 1: Suppose that $z \in X$. It follows that $z \in X \cup (Y \cap
 Z)$.
-\end{quote}
-
+\begin{quote}
 Now for the second case, $z \in Y$. Here we'll unpack the second
 $\cup$ and do another proof-by-cases:
-
-\begin{quote}
+\end{quote}
 Case 2: Suppose that $z \in Y$. Since $z \in X \cup Z$, either $z \in
 X$ or $z \in Z$. We distinguish cases further:
 
 Case 2a: $z \in X$. Then, again, $z \in X \cup (Y \cap Z)$.
-\end{quote}
-
+\begin{quote}
 Ok, this was a bit weird. We didn't actually need the assumption
 that~$z \in Y$ for this case, but that's ok.
-
-\begin{quote}
+\end{quote}
 Case 2b: $z \in Z$. Then $z \in Y$ and $z \in Z$, so $z \in Y \cap Z$,
 and consequently, $z \in X \cup (Y \cap Z)$.
-\end{quote}
-
-This concludes both proof-by-cases and so we're done with the second
-half. Since we've proved both directions, the proof is complete.
-
 \begin{quote}
-So, if $z \in (X \cup Y) \cap (X \cup Z)$ then $z \in X \cup (Y \cap Z)$.
-  
-Together, we've showed that $X \cup (Y \cap Z) = (X \cup Y) \cap (X
-\cup Z)$.
+This concludes both proofs-by-cases and so we're done with the second
+half.
 \end{quote}
+So, if $z \in (X \cup Y) \cap (X \cup Z)$ then $z \in X \cup (Y \cap Z)$.
 \end{proof}
 
 \end{document}

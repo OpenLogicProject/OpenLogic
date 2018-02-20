@@ -1,0 +1,167 @@
+% Part: normal-modal-logic
+% Chapter: frame-definability
+% Section: definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{frd}{def}
+
+\olsection{Frame Definability}
+
+Even though the converse implications of \olref[acc]{thm:soundschemas}
+fail, they hold if we replace ``model'' by ``frame'': for the
+properties considered in \olref[acc]{thm:soundschemas}, it \emph{is}
+true that if !!a{formula} is valid in a \emph{frame} then the
+accessibility relation of that frame has the corresponding
+property. So, the !!{formula}s considered \emph{define} the classes of
+frames that have the corresponding property.
+
+\begin{defn}
+  If $\mClass{C}$ is a class of frames, we say $!A$
+  \emph{defines}~$\mClass{C}$ iff $\mSat{F}{!A}$ for all and only
+  frames~$\mModel{F} \in \mClass{C}$.
+\end{defn}
+
+We now proceed to establish the full definability results for
+frames.
+
+\begin{thm}\ollabel{thm:fullCorrespondence}
+If the !!{formula} on the right side of \olref[acc]{tab:five} is valid in a
+frame~$\mModel{F}$, then $\mModel{F}$ has the property on the left
+side.
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item Suppose \Ax{D} is valid in $\mModel{F} = \tuple{W, R}$, i.e.,
+    $\mSat{F}{\Box p \lif \Diamond p}$. Let $\mModel{M} = \tuple{W, R,
+    V}$ be a model based on~$\mModel{F}$, and $w \in W$. We have to
+    show that there is a $v$ such that~$Rwv$.  Suppose not: then both
+    $\mSat{M}{\Box !A}$ and $\mSat/{M}{\Diamond !A}[w]$ for any~$!A$,
+    including~$p$. But then $\mSat/{M}{\Box p \lif \Diamond p}[w]$,
+    contradicting the assumption that $\mSat{F}{\Box p \lif \Diamond
+      p}$.
+  \item Suppose \Ax{T} is valid in $\mModel{F}$, i.e., $\mSat{F}{\Box
+    p \lif p}$. Let $w \in W$ be an arbitrary world; we need to show
+    $Rww$. Let $u \in V(p)$ if and only if $Rwu$ (when $q$ is other
+    than $p$, $V(q)$ is arbitrary, say $V(q) = \emptyset)$. Let
+    $\mModel{M}=\tuple{W, R, V}$. By construction, for all $u$ such
+    that $Rwu$: $\mSat{M}{p}[u]$, and hence $\mSat{M}{\Box p}[w]$. But
+    by hypothesis $\Box p \lif p$ is true at~$w$, so that
+    $\mSat{M}{p}[w]$, but by definition of $V$ this is possible only
+    if~$Rww$.
+  \item We prove the contrapositive: Suppose $\mModel{F}$ is not
+    symmetric, we show that \Ax{B}, i.e., $p \lif \Box\Diamond p$ is
+    not valid in $\mModel{F}= \tuple{W, R}$. If $\mModel{F}$ is not
+    symmetric, there are $u$, $v \in W$ such that $Ruv$ but not
+    $Rvu$. Define $V$ such that $w \in V(p)$ if and only if not $Rvw$
+    (and $V$ is arbitrary otherwise). Let $\mModel{M} =\tuple{W, R,
+      V}$.  Now, by definition of $V$, $\mSat{M}{p}[w]$ for all $w$
+    such that not $Rvw$, in particular, $\mSat{M}{p}[u]$ since
+    not~$Rvu$. Also, since $Rvw$ iff $p \notin V(w)$, there is no~$w$
+    such that $Rvw$ and $\mSat{M}{p}[w]$, and hence
+    $\mSat/{M}{\Diamond p}[v]$. Since~$Ruv$, also
+    $\mSat/{M}{\Box\Diamond p}[u]$. It follows that $\mSat/{M}{p \lif
+      \Box\Diamond p}[u]$, and so $\Ax{B}$ is not valid
+    in~$\mModel{F}$.
+  \item Suppose \Ax{4} is valid in $\mModel{F} = \tuple{W,R}$, i.e.,
+    $\mSat{F}{\Box p \lif \Box\Box p}$, and let $u$, $v$, $w \in W$ be
+    arbitrary worlds such that $Ruv$ and $Rvw$; we need to show that
+    $Ruw$. Define $V$ such that $z \in V(p)$ if and only if $Ruz$ (and
+    $V$ is arbitrary otherwise). Let $\mModel{M} =\tuple{W, R, V}$. By
+    definition of $V$, $\mSat{M}{p}[z]$ for all $z$ such that $Ruz$,
+    and hence $\mSat{M}{\Box p}[u]$. But by hypothesis \Ax{4}, $\Box p
+    \lif \Box \Box p$, is true at $u$, so that $\mSat{M}{\Box \Box
+      p}[u]$. Since $Ruv$ and $Rvw$, we have $\mSat{M}{p}[w]$, but by
+    definition of~$V$ this is possible only if $Ruw$, as desired.
+  \item We proceed contrapositively, assuming that the frame
+    $\mModel{F} = \tuple{W, R}$ is not euclidean, and show that it
+    falsifies~\Ax{5}, i.e., i.e., $\mSat/{F}{\Diamond p \lif
+      \Box\Diamond p}$. Suppose there are worlds $u$, $v$, $w \in W$
+    such that $Rwu$ and $Rwv$ but not~$Ruv$. Define $V$ such that for
+    all worlds $z$, $z \in V(p)$ if and only if it is \emph{not} the
+    case that~$Ruz$. Let $\mModel{M} =\tuple{W, R, V}$. Then by
+    hypothesis $\mSat{M}{p}[v]$ and since $Rwv$ also
+    $\mSat{M}{\Diamond p}[w]$. However, there is no world $y$ such
+    that $Ruy$ and $\mSat{M}{p}[y]$ so $\mSat/{M}{\Diamond
+      p}[u]$. Since $Rwu$, it follows that $\mSat/{M}{\Box\Diamond
+      p}[w]$, so that \Ax{5}, $\Diamond p \lif \Box\Diamond p$, fails
+    at $w$.
+  \end{enumerate}
+\end{proof}
+
+You'll notice a difference between the proof for \Ax{D} and the other
+cases: no mention was made of the valuation~$V$. In effect, we proved
+that if $\mSat{M}{\Ax{D}}$ then $\mModel{M}$ is serial. So \Ax{D}
+defines the class of serial \emph{models}, not just frames.
+
+\begin{cor}\ollabel{prop:D-serial}
+  Any model where \Ax{D} is true is serial.
+\end{cor}
+
+\begin{cor}
+Each !!{formula} on the right side of \olref[acc]{tab:five} defines
+the class of frames which have the property on the left side.
+\end{cor}
+
+\begin{proof}
+  In \olref[acc]{thm:soundschemas}, we proved that if a model has the
+  property on the left, the !!{formula} on the right is true in
+  it. Thus, if a frame~$\mModel{F}$ has the property on the left, the
+  !!{formula} on the left is valid in~$\mModel{F}$. In
+  \olref{thm:fullCorrespondence}, we proved the converse implications:
+  if !!a{formula} on the right is valid in~$\mModel{F}$, $\mModel{F}$
+  has the property on the left.
+\end{proof}
+
+\begin{prob}
+Show that if the !!{formula} on the right side of
+\olref[mod][frd][acc]{tab:anotherfive} is valid in a frame~$\mModel{F}$, then
+$\mModel{F}$ has the property on the left side. To do this, consider a
+frame that does \emph{not} satisfy the property on the left, and
+define a suitable~$V$ such that the !!{formula} on the right is false
+at some world.
+\end{prob}
+
+\olref{thm:fullCorrespondence} also shows that the properties can be
+combined: for instance if both \Ax{B} and \Ax{4} are valid
+in~$\mModel{F}$ then the frame is both symmetric and transitive,
+etc. Many important modal logics are characterized as the set of
+!!{formula}s valid in all frames that combine some frame properties,
+and so we can characterize them as the set of !!{formula}s valid in
+all frames in which the corresponding defining !!{formula}s are valid.
+For instance, the classical system \Log{S4} is the set of all
+!!{formula}s valid in all reflexive and transitive frames, i.e., in
+all those where both \Ax{T} and~\Ax{4} are valid.  \Log{S5} is the set
+of all formulas valid in all reflexive, symmetric, and euclidean
+frames, i.e., all those where all of \Ax{T}, \Ax{B}, and \Ax{5} are
+valid.
+
+Logical relationships between properties of $R$ in general correspond
+to relationships between the corresponding defining !!{formula}s. For
+instance, every reflexive relation is serial; hence, whenever \Ax{T}
+is valid in a frame, so is~\Ax{D}. (Note that this relationship is
+\emph{not} that of entailment. It is not the case that whenever
+$\mSat{M}{\Ax{T}}[w]$ then $\mSat{M}{\Ax{D}}[w]$.) We record some such
+relationships.
+
+\begin{prop}\ollabel{prop:relation-facts}
+  Let $R$ be a binary relation on a set $W$; then:
+  \begin{enumerate}
+  \item If $R$ is reflexive, then it is serial.
+  \item If $R$ is symmetric, then it is transitive if and only if it
+    is euclidean.
+  \item If $R$ is symmetric or euclidean then it is weakly directed
+    (it has the ``diamond property'').
+  \item If $R$ is euclidean then it is weakly connected.
+  \item If $R$ is functional then it is serial.  
+  \end{enumerate}
+\end{prop}
+
+\begin{prob}
+  Prove \olref[mod][frd][def]{prop:relation-facts}.
+\end{prob}
+
+\end{document}

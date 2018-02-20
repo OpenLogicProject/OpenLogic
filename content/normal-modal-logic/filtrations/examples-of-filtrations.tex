@@ -1,0 +1,226 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: examples-of-filtrations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{exf}
+
+\olsection{Examples of Filtrations}
+
+We have not yet shown that there are any filtrations. But indeed, for
+any model $\mModel{M}$, there are many filtrations of $\mModel{M}$
+through $\Gamma$. We identify two, in particular: the finest and
+coarsest filtrations. Filtrations of the same models will differ in
+their accessibility relation (as \olref[fil]{defn:filtration} stipulates
+directly what $W^*$ and~$V^*$ should be). The finest filtration
+will have as few related worlds as possible, whereas the coarsest will
+have as many as possible.
+
+\begin{defn}
+  Where $\Gamma$ is closed under subformulas, the \emph{finest}
+  filtration $\mModel{M^*}$ of a model $\mModel{M}$ is defined by putting:
+  \[
+  R^*[u][v] \quad \text{if and only if} \quad \exists u'\in [u] \;
+  \exists v' \in [v] : Ru'v'.
+  \]
+\end{defn}
+
+\begin{prop}\ollabel{prop:finest}
+  The finest filtration $\mModel{M^*}$ is indeed a filtration. 
+\end{prop}
+
+\begin{proof}
+  We need to check that $R^*$, so defined, satisfies
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R}. We check
+  the three conditions in turn.
+
+  If $Ruv$ then since $u \in [u]$ and $v \in [v]$, also $R^*[u][v]$,
+  so \olref[fil]{defn:filtration-R1} is satisfied.
+  
+  \iftag{prvBox}{\iftag{probBox}{We leave the verification of
+      \olref[fil]{defn:filtration-R2} as an exercise.}{For
+        \olref[fil]{defn:filtration-R2}, suppose $\Box!A \in \Gamma$,
+        $R^*[u][v]$, and $\mSat{M}{\Box!A}[u]$. By definition of
+        $R^*$, there are $u' \equiv u$ and $v' \equiv v$ such that
+        $Ru'v'$. Since $u$ and $u'$ agree on $\Gamma$, also
+        $\mSat{M}{\Box!A}[u']$, so that $\mSat{M}{!A}[v']$. By closure
+        of $\Gamma$ under sub-!!{formula}s, $v$ and $v'$ agree on
+        $!A$, so $\mSat{M}{!A}[v]$, as desired.}}{}
+  
+  \iftag{prvDiamond}{\iftag{probDiamond}{We leave the verification of
+      \olref[fil]{defn:filtration-R3} as an exercise.}{To verify
+        \olref[fil]{defn:filtration-R3}, suppose $\Diamond!A \in
+        \Gamma$, $R^*[u][v]$, and $\mSat{M}{!A}[v]$.  By definition of
+        $R^*$, there are $u' \equiv u$ and $v' \equiv v$ such that
+        $Ru'v'$. Since $v$ and $v'$ agree on~$\Gamma$, and $\Gamma$ is
+        closed under sub-!!{formula}s, also $\mSat{M}{!A}[v']$, so
+        that $\mSat{M}{\Diamond !A}[u']$.  Since $u$ and $u'$ also
+        agree on $\Gamma$, $\mSat{M}{\Diamond !A}[u]$.}}{}
+\end{proof}
+
+\begin{probtag}{probBox,probDiamond}
+  Complete the proof of \olref[mod][fil][exf]{prop:finest}.
+\end{probtag}
+
+\begin{defn}
+  Where $\Gamma$ is closed under subformulas, the \emph{coarsest}
+  filtration~$\mModel{M^*}$ of a model~$\mModel{M}$ is defined by
+  putting $R^*[u][v]$ if and only if
+  \iftag{notprvBox,notprvDiamond}{the following condition is
+    met:}{\emph{both} of the following conditions are met:}
+  \begin{tagenumerate}{prvBox,prvDiamond}
+  \tagitem{prvBox}{\ollabel{defn:coarsest-Box}If $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[u]$ then
+    $\mSat{M}{!A}[v]$\iftag{prvDiamond}{;}{.}}{}
+  \tagitem{prvDiamond}{\ollabel{defn:coarsest-Diamond}If $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$ then
+    $\mSat{M}{\Diamond!A}[u]$.}{}
+  \end{tagenumerate}
+\end{defn}
+
+\begin{prop}
+  The coarsest filtration $\mModel{M^*}$ is indeed a filtration. 
+\end{prop}
+
+\begin{proof}
+  Given the definition of $R^*$, the only condition that is left to
+  verify is the implication from $Ruv$ to $R^*[u][v]$. So assume
+  $Ruv$. \iftag{prvBox}{Suppose $\Box!A \in \Gamma$ and
+    $\mSat{M}{\Box!A}[u]$; then obviously
+    $\mSat{M}{!A}[v]$\iftag{prvDiamond}{, and
+      \olref{defn:coarsest-Box} is
+      satisfied. }{.}}{}\iftag{prvDiamond}{Suppose $\Diamond!A \in
+    \Gamma$ and $\mSat{M}{!A}[v]$. Then $\mSat{M}{\Diamond!A}[u]$
+    since~$Ruv$\iftag{prvBox}{, and \olref{defn:coarsest-Diamond} is
+      satisfied}{}.}{}
+\end{proof}
+
+\begin{ex}
+  Let $W = \Int^+$, $Rnm$ iff $m = n + 1$, and $V(p) = \Setabs{2n}{n \in
+    \Nat}$. The model $\mModel{M} = \tuple{W, R, V}$ is depicted in
+  \olref{fig:ex-filtration}. The worlds are $1$, $2$, etc.; each
+  world can access exactly one other world---its successor, and $p$ is
+  true at all and only the even numbers.
+
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}[modal]
+      \node[world] (1) [label=below:\mFalse{p}] {$1$};
+      \node[world] (2) [label=below:\mTrue{p}, right=of 1] {$2$};
+      \node[world] (3) [label=below:\mFalse{p}, right=of 2] {$3$};
+      \node[world] (4) [label=below:\mTrue{p}, right=of 3] {$4$};
+      \node[phantom] (5) [right=of 4] {};
+      \draw[->] (1) to (2);
+      \draw[->] (2) to (3);
+      \draw[->] (3) to (4);
+      \draw[dotted] (4) to (5);
+    \end{tikzpicture}
+
+    \begin{tikzpicture}[modal]
+      \node[world] (1) [label=below:\mFalse{p}] {$[1]$};
+      \node[world] (2) [label=below:\mTrue{p}, right=of 1] {$[2]$};
+      \draw[->,bend left] (1) to (2);
+      \draw[->,bend left] (2) to (1);
+      
+      \node[world] (3) [label=below:\mFalse{p},right=of 2] {$[1]$};
+      \node[world] (4) [label=below:\mTrue{p}, right=of 3] {$[2]$};
+      \draw[->,bend left] (3) to (4);
+      \draw[->,bend left] (4) to (3);
+      \draw[->,reflexive above] (4) to (4);
+    \end{tikzpicture}
+    \caption{An infinite model and its filtrations.}
+    \ollabel{fig:ex-filtration}
+  \end{figure}
+  
+  Now let $\Gamma$ be the set of sub-!!{formula}s of~$\Box p \lif p$,
+  i.e., $\{p, \Box p, \Box p \lif p\}$. $p$ is true at all and only
+  the even numbers, $\Box p$ is true at all and only the odd numbers,
+  so $\Box p \lif p$ is true at all and only the even numbers. In
+  other words, every odd number makes $\Box p$ true and $p$ and $\Box
+  p \lif p$ false; every even number makes $p$ and $\Box p \lif p$
+  true, but $\Box p$ false. So $W^* = \{ [1], [2] \}$, where $[1] =
+  \{1, 3, 5, \dots\}$ and $[2] = \{2, 4, 6, \dots\}$. Since $2 \in
+  V(p)$, $[2] \in V^*(p)$; since $1 \notin V(p)$, $[1] \notin
+  V^*(p)$. So $V^*(p) = \{[2]\}$.
+
+  Any filtration based on $W^*$ must have an accessibility relation
+  that includes $\tuple{[1], [2]}, \tuple{[2],[1]}$: since $R12$, we
+  must have $R^*[1][2]$ by
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1}, and since $R23$ we
+  must have $R^*[2][3]$, and $[3]=[1]$. It cannot include
+  $\tuple{[1],[1]}$: if it did, we'd have $R^*[1][1]$, $\mSat{M}{\Box
+    p}[1]$ but $\mSat{M}{p}[1]$, contradicting
+  \olref[fil]{defn:filtration-R1}. Nothing requires or rules out that
+  $R^*[2][2]$. So, there are two possible filtrations of~$\mModel{M}$,
+  corresponding to the two accessibility relations
+  \[
+  \{\tuple{[1],[2]}, \tuple{[2],[1]}\} \text{ and }
+  \{\tuple{[1],[2]}, \tuple{[2],[1]}, \tuple{[2],[2]}\}.
+  \]
+  In either case, $p$ and $\Box p \lif p$ are false and $\Box p$ is
+  true at~$[1]$; $p$ and $\Box p \lif p$ are true and $\Box p$ is
+  false at~$[2]$.
+\end{ex}
+
+
+\begin{prob}
+  Consider the following model $\mModel{M} = \tuple{W, R, V}$ where
+  $W = \Bin^* \setminus \{1, \emptyseq\}$, the set of sequences of
+  $0$s and~$1$s starting with~$0$, with $R\sigma\sigma'$ iff $\sigma'
+  = \sigma 0$ or $\sigma' = \sigma 1$, and $V(p) = \Setabs{\sigma
+    0}{\sigma \in \Bin^*}$ and $V(q) = \Setabs{\sigma 1}{\sigma \in
+      \Bin^* \setminus \{1\}}$. Here's a picture:
+  \begin{center}
+    \begin{tikzpicture}[modal,
+        node distance=2cm
+      ]
+
+      \node[world] (0) [label={below:\mTrue{p}\\\mFalse{q}},font=\tiny] {$0$};
+      \node[world] (00) [label={below:\mTrue{p}\\\mFalse{q}},
+        above right=of 0,font=\tiny] {$00$};
+      \node[world] (000) [label={below:\mTrue{p}\\\mFalse{q}},
+        right=of 00, yshift=.8cm, font=\tiny] {$000$};
+      \node[phantom] (0000) [right=of 000, yshift=.5cm] {};
+      \node[phantom] (0001) [right=of 000, yshift=-.5cm] {};
+      \node[world] (001) [label={below:\mFalse{p}\\\mTrue{q}},
+        right=of 00, yshift=-.8cm, font=\tiny] {$001$};
+      \node[phantom](0010) [right=of 001, yshift=.5cm] {};
+      \node[phantom](0011) [right=of 001, yshift=-.5cm] {};
+      \node[world] (01) [label={below:\mFalse{p}\\\mTrue{q}},
+        below right=of 0,font=\tiny] {$01$};
+      \node[world] (010) [label={below:\mTrue{p}\\\mFalse{q}},
+        right=of 01, yshift=.8cm,font=\tiny] {$010$};
+      \node[phantom] (0100) [right=of 010, yshift=.5cm] {};
+      \node[phantom] (0101) [right=of 010, yshift=-.5cm] {};
+      \node[world] (011) [label={below:\mFalse{p}\\\mTrue{q}},
+        right=of 01, yshift=-.8cm,font=\tiny] {$011$};
+      \node[phantom] (0110) [right=of 011, yshift=.5cm] {};
+      \node[phantom] (0111) [right=of 011, yshift=-.5cm] {};
+
+      \draw[->] (0) to (00);
+      \draw[->] (0) to (01);
+      \draw[->] (00) to (000);
+      \draw[dotted] (000) to (0000);
+      \draw[dotted] (000) to (0001);
+      \draw[->] (00) to (001);
+      \draw[dotted] (001) to (0010);
+      \draw[dotted] (001) to (0011);
+      \draw[->] (01) to (010);
+      \draw[dotted] (010) to (0100);
+      \draw[dotted] (010) to (0101);
+      \draw[->] (01) to (011);
+      \draw[dotted] (011) to (0110);
+      \draw[dotted] (011) to (0111);
+    \end{tikzpicture}
+  \end{center}
+  We have $\mSat/{M}{\Box(p \lor q) \lif (\Box p \lor \Box q)}[w]$ for
+  every~$w$.
+
+  Let $\Gamma$ be the set of sub-!!{formula}s of~$\Box(p \lor q) \lif
+  (\Box p \lor \Box q)$. What are $W^*$ an $V^*$?  What is the
+  accessibility relation of the finest filtration of~$\mModel{M}$? Of the
+  coarsest?
+\end{prob}
+
+\end{document}

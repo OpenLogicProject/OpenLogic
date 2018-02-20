@@ -1,0 +1,86 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: truth-in-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{tru}
+
+\olsection{Truth in a Model}
+
+Sometimes we are interested which !!{formula}s are true at every world
+in a given model. Let's introduce a notation for this.
+
+\begin{defn}
+  !!^a{formula} $!A$ is \emph{true in a model} $M = \tuple{W, R,
+    V}$, written $\mSat{M}{!A}$, if and only if $\mSat{M}{!A}[w]$
+  for every $w \in W$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:truthfacts}
+  \begin{enumerate}
+  \item If $\mSat{M}{!A}$ then $\mSat/{M}{\lnot !A}$, but \emph{not}
+    vice-versa.
+  \item If $\mSat{M}{!A \lif !B}$ then $\mSat{M}{!A}$ only if
+    $\mSat{M}{!B}$, but \emph{not} vice-versa.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item If $\mSat{M}{!A}$ then $!A$ is true at all worlds in $W$, and
+    since $W \neq \emptyset$, it can't be that $\mSat{M}{\lnot!A}$, or
+    else $!A$ would have to be both true and false at some
+    world.
+
+    On the other hand, if $\mSat/{M}{\lnot !A}$ then $!A$ is true at
+    some world $w \in W$. It does not follow that $\mSat{M}{!A}[w]$
+    for \emph{every}~$w \in W$. For instance, in the model of
+    \olref[rel]{fig:simple}, $\mSat/{M}{\lnot p}$, and also $\mSat/{M}{p}$.
+  \item Assume $\mSat{M}{!A \lif !B}$ and $\mSat{M}{!A}$; to show
+    $\mSat{M}{!B}$ let $w \in W$ be an arbitrary world. Then
+    $\mSat{M}{!A \lif !B}[w]$ and $\mSat{M}{!B}[w]$, so
+    $\mSat{M}{!B}[w]$, and since $w$ was arbitrary,
+    $\mSat{M}{!B}$.
+
+    To show that the converse fails, we need to find a model
+    $\mModel{M}$ such that $\mSat{M}{!A}$ only if $\mSat{M}{!B}$, but
+    $\mSat/{M}{!A \lif !B}$. Consider again the model of
+    \olref[rel]{fig:simple}: $\mSat/{M}{p}$ and hence (vacuously)
+    $\mSat{M}{p}$ only if $\mSat{M}{q}$. However, $\mSat/{M}{p \lif
+      q}$, as $p$ is true but $q$ false at~$w_1$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Consider the following model $\mModel{M}$ for the language
+  comprising $p_1$, $p_2$, $p_3$ as the only propositional variables:
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={left:\mTrue{p_1}\\\mFalse{p_2}\\\mFalse{p_3}}]
+            {$w_1$} ; 
+      \node[world] (w2) [label={right:\mTrue{p_1}\\\mTrue{p_2}\\\mFalse{p_3}},
+        below right=of w1]  {$w_2$}; 
+      \node[world] (w3) [label={right:\mTrue{p_1}\\\mTrue{p_2}\\\mTrue{p_3}},
+        above right=of w2] {$w_3$};
+      \draw[reflexive above] (w3) to (w3); 
+      \draw[->] (w1) to (w2);
+      \draw[->] (w2) to (w3);
+      \draw[->] (w1) to (w3); 
+    \end{tikzpicture}
+  \end{center}
+  Are the following !!{formula}s and schemas true in the model $\mModel{M}$,
+  i.e., true at every world in $\mModel{M}$? Explain.
+  \begin{enumerate}
+  \item $p\lif \Diamond p$ (for $p$ atomic);
+  \item $!A\lif \Diamond !A$ (for $!A$ arbitrary);
+  \item $\Box p \lif p$ (for $p$ atomic);
+  \item $\lnot p \lif \Diamond \Box p$ (for $p$ atomic);
+  \item $\Diamond \Box !A$ (for $!A$ arbitrary);
+  \item $\Box \Diamond p$ (for $p$ atomic). 
+  \end{enumerate}
+\end{prob}
+
+\end{document}

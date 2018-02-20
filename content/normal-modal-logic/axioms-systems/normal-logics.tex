@@ -1,0 +1,121 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: normal-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{nor}
+
+\olsection{Normal Modal Logics}
+
+Not every set of modal !!{formula}s can easily be characterized as
+those !!{formula}s derivable from a set of axioms. We want modal
+logics to be well-behaved. First of all, everything we can !!{derive}
+in classical propositional logic should still be !!{derivable}, of
+course taking into account that the !!{formula}s may now contain also
+\iftag{prvBox}{$\Box$\iftag{prvDiamond}{
+    and~}{}}{}\iftag{prvDiamond}{$\Diamond$}{}. To this end, we
+require that a modal logic contain all tautological instances and be
+closed under modus ponens.
+
+\begin{defn}
+  A \emph{modal logic} is a set~$\Sigma$ of modal !!{formula}s which
+  \begin{enumerate}
+  \item contains all tautologies, and
+  \item is closed under substitution, i.e., if $!A \in \Sigma$, and
+    $!D_1$, \dots, $!D_n$ are !!{formula}s, then
+    \[
+    \SSubst{!A}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \in \Sigma,
+    \]
+    \item is closed under \emph{modus ponens}, i.e., if $!A$ and $!A
+      \lif !B \in \Sigma$, then $!B \in \Sigma$.
+  \end{enumerate}
+\end{defn}
+
+In order to use the relational semantics for modal logics, we also
+have to require that all !!{formula}s valid in all modal models are
+included. It turns out that this requirement is met as soon as all
+instances of \Ax{K}\iftag{prvDiamond}{ and~\Dual{}}{} are
+!!{derivable}, and whenever !!a{formula}~$!A$ is !!{derivable}, so
+is~$\Box !A$. A modal logic that satisfies these conditions is called
+\emph{normal}. (Of course, there are also non-normal modal logics, but
+the usual relational models are not adequate for them.)
+
+\begin{defn}
+  A modal logic $\Sigma$ is \emph{normal} if it contains
+  \begin{align*}
+    \tag{\Ax{K}} & \Box(p \lif q) \lif (\Box p \lif \Box q),
+    \iftag{prvDiamond}{\\
+      \tag{\Dual} & \Diamond p \liff \lnot\Box\lnot p}{}
+  \end{align*}
+  and is closed under \emph{necessitation}, i.e., if $!A \in
+  \Sigma$, then $\Box !A \in \Sigma$.
+\end{defn}
+
+Observe that while tautological implication is ``fine-grained'' enough
+to preserve \emph{truth at a world}, the rule \Nec{} only preserves
+\emph{truth in a model} (and hence also validity in a frame or in a
+class of frames).
+
+\begin{prop}\ollabel{prop:rk}
+  Every normal modal logic is closed under rule \RK,
+  \begin{prooftree}
+    \AxiomC{$!A_1 \lif (!A_2 \lif \cdots (!A_{n-1} \lif !A_n)\cdots)$}
+    \RightLabel{\RK}
+    \UnaryInfC{$\Box!A_1 \lif (\Box!A_2 \lif \cdots (\Box!A_{n-1}
+      \lif \Box!A_n)\cdots).$}
+  \end{prooftree}
+\end{prop}
+
+\begin{proof}
+  By induction on~$n$: If $n = 1$, then the rule is just \Nec, and
+  every normal modal logic is closed under \Nec.
+
+  Now suppose the result holds for $n-1$; we show it holds for~$n$.
+
+  Assume
+  \begin{align*}
+  & !A_1 \lif (!A_2 \lif \cdots (!A_{n-1} \lif !A_n)\cdots) \in \Sigma
+  \intertext{By the induction hypothesis, we have}
+  & \Box!A_1 \lif (\Box!A_2 \lif \cdots \Box(!A_{n-1} \lif !A_n)\cdots)
+  \in \Sigma
+  \intertext{Since $\Sigma$ is a normal modal logic, it contains all
+    instances of~$\Ax{K}$, in particular}
+  & \Box(!A_{n-1} \lif !A_n) \lif (\Box!A_{n-1} \lif \Box!A_n) \in \Sigma
+  \intertext{Using modus ponens and suitable tautological instances we get}
+  & \Box!A_1 \lif (\Box!A_2 \lif \cdots (\Box!A_{n-1}
+  \lif \Box!A_n)\cdots) \in \Sigma. \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{prop}\ollabel{prop:notDiamondBot}
+  Every normal modal logic $\Sigma$ contains~$\lnot\Diamond\lfalse$.
+\end{prop}
+
+\begin{prob}
+  Prove \olref[mod][prf][nor]{prop:notDiamondBot}.
+\end{prob}
+
+\begin{prop}
+  Let $!A_1$, \dots, $!A_n$ be !!{formula}s. Then there is a
+  smallest modal logic $\Sigma$ containing all instances of
+  $!A_1$, \dots, $!A_n$.
+\end{prop}
+
+\begin{proof}
+  Given $!A_1$, \dots, $!A_n$, define $\Sigma$ as the
+  intersection of all normal modal logics containing all instances of
+  $!A_1$, \dots, $!A_n$. The intersection is non-empty as
+  $\Frm[L]$, the set of all !!{formula}s, is such a modal
+  logic.
+\end{proof}
+
+\begin{defn}
+The smallest normal modal logic containing $!A_1$, \dots, $!A_n$ is
+called a \emph{modal system} and denoted by $\Log{K} !A_1 \dots
+!A_n$. The smallest normal modal logic is denoted by~\Log{K}.
+\end{defn}
+
+\end{document}
