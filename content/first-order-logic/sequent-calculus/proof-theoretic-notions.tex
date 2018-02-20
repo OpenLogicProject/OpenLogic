@@ -89,56 +89,43 @@ If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
 \end{prop}
 
 \begin{proof}
-Any finite $\Gamma_0 \subseteq \Gamma$ is also a finite subset
-of~$\Delta$, so !!a{derivation} of $\Gamma_0 \Sequent !A$ also shows
-$\Delta \Proves !A$.
+Suppose $\Gamma \Proves !A$, i.e., there is a finite $\Gamma_0
+\subseteq \Gamma$ such that $\Gamma_0 \Sequent !A$ is
+!!{derivable}. Since $\Gamma \subseteq \Delta$, then $\Gamma_0$ is
+also a finite subset of~$\Delta$. The !!{derivation} of $\Gamma_0
+\Sequent !A$ thus also shows $\Delta \Proves !A$.
 \end{proof}
 
 \begin{prop}[Transitivity]
 \ollabel{prop:transitivity}
-If $\Gamma \Proves !A$ for every $!A \in \Delta$ and $\Delta \Proves
-!B$, then $\Gamma \Proves !B$.
+If $\Gamma \Proves !A$ and $\{!A\} \cup \Delta \Proves
+!B$, then $\Gamma \cup \Delta \Proves !B$.
 \end{prop}
 
 \begin{proof}
-If $\Delta \Proves !B$, then for some finite subset $\Delta_0
-\subseteq \Delta$, there is !!a{derivation} of $\Delta_0 \Sequent !B$.
-We show that $\Gamma \Proves !B$ by induction on the number~$n$ of
-!!{sentence}s in~$\Delta_0$.
-
-If $n=0$, then $\Delta_0$ is empty, and $\Sequent !B$ is
-provable. Since $\emptyset \subseteq \Gamma$, $\Gamma \Proves !B$.
-
-Otherwise, pick $!A \in \Delta_0$ and let $\Delta_1 = \Delta_0
-\setminus \{!A\}$. There is !!a{derivation}~$\pi_0$ of $!A, \Delta_1
-\Sequent !B$. We obtain the !!{derivation}~$\pi_1$:
+If $\Gamma \Proves !A$, there is a finite $\Gamma_0 \subseteq \Gamma$
+and !!a{derivation}~$\pi_0$ of $\Gamma_0 \Sequent !A$.  If $\{!A\}
+\cup \Delta \Proves !B$, then for some finite subset $\Delta_0
+\subseteq \Delta$, there is !!a{derivation}~$\pi_1$ of $!A, \Delta_0
+\Sequent !B$. Consider the following !!{derivation}:
 \begin{prooftree}
   \AxiomC{}
-  \RightLabel{$\pi$}
-  \Deduce$!A, \Delta_1 \fCenter !B$
-  \RightLabel{\RightR{\lif}}
-  \UnaryInf$\Delta_1 \fCenter !A \lif !B$
-\end{prooftree}
-Since the number of !!{sentence}s in $\Delta_1$ is $n-1$, the
-inductive hypothesis applies: there is a !!{derivation}~$\pi_2$ of
-$\Gamma_0 \Sequent !A \lif !B$ for some $\Gamma_0 \subseteq
-\Gamma$. Since $\Gamma \Proves !A$ there is also
-!!a{derivation}~$\pi_3$ of $\Gamma_1 \Sequent !A$. Now consider:
-\begin{prooftree}
+  \RightLabel{$\pi_0$}
+  \Deduce$\Gamma_0 \fCenter !A$
   \AxiomC{}
-  \RightLabel{$\pi_2$}
-  \Deduce$\Gamma_0 \fCenter !A \lif !B$
-  \AxiomC{}
-  \RightLabel{$\pi_3$}
-  \Deduce$\Gamma_1 \fCenter !A$
-  \Axiom$!B \fCenter !B$
-  \RightLabel{\LeftR{\lif}}
-  \BinaryInf$!A \lif !B, \Gamma_1 \fCenter !B$
+  \RightLabel{$\pi_1$}
+  \Deduce$!A, \Delta_0 \fCenter !B$
   \RightLabel{\Cut}
-  \BinaryInf$\Gamma_0, \Gamma_1 \fCenter !B$
+  \BinaryInf$\Gamma_0, \Delta_0 \fCenter !B$
 \end{prooftree}
-This shows $\Gamma \Proves !B$.
+Since $\Gamma_0 \cup \Delta_0 \subseteq \Gamma \cup \Delta$, this
+shows $\Gamma \cup \Delta \Proves !B$.
 \end{proof}
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
 
 \begin{prop}
 \ollabel{prop:incons}

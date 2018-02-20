@@ -1,0 +1,87 @@
+% Part: normal-modal-logic
+% Chapter: frame-correspondence
+% Section: first-order-definability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{frd}{fol}
+
+\olsection{First-order Definability}
+
+We've seen that a number of properties of accessibility relations of
+frames can be defined by modal !!{formula}s. For instance, symmetry of
+frames can be defined by the !!{formula}~\Ax{B}, $p \lif \Box\Diamond
+p$. The conditions we've encountered so far can all be expressed by
+first-order !!{formula}s in !!a{language} involving a single two-place
+!!{predicate}. For instance, symmmetry is defined by
+$\lforall[x][\lforall[y][(\Atom{Q}{x,y} \lif \Atom{Q}{y, x})]]$ in the
+sense that a first-order !!{structure}~$\Struct{M}$ with $\Domain{M} =
+W$ and $\Assign{Q}{M} = R$ satisfies the preceding formula iff $R$ is
+symmetric. This suggests the following definition:
+
+\begin{defn}
+  A class~$\mClass{C}$ of frames is \emph{first-order definable} if there is
+  !!a{sentence}~$!A$ in the first-order language with a single
+  two-place !!{predicate}~$P$ such that $\mModel{F} =
+  \tuple{W, R} \in \mClass{C}$ iff $\Sat{M}{!A}$ in the first-order
+  !!{structure}~$\Struct{M}$ with $\Domain{M} = W$ and $\Assign{Q}{M}
+  = R$.
+\end{defn}
+
+It turns out that the properties and modal !!{formula}s that define
+them considered so far are exceptional. Not every !!{formula} defines
+a first-order definable class of frames, and not every first-order
+definable class of frames is definable by a modal formula.
+
+A counterexample to the first is given by the L\"ob formula:
+\[
+\Box(\Box p \lif p) \lif \Box p. \tag{\Ax{W}}
+\]
+\Ax{W} defines the class of transitive and converse well-founded
+frames. A relation is well-founded if there is no infinite sequence
+$w_1$, $w_2$, \dots{} such that $Rw_2w_1$, $Rw_3w_2$, \dots. For
+instance, the relation $<$ on~$\Nat$ is well-founded, whereas the
+relation $<$ on~$\Int$ is not. A relation is converse well-founded
+iff its converse is well-founded. So converse well-founded relations
+are those where there is no infinite sequence $w_1$, $w_2$, \dots{}
+such that $Rw_1w_2$, $Rw_2w_3$, \dots. 
+
+There is, however, no first-order !!{formula} defining transitive
+converse well-founded relations. For suppose~$\Sat{M}{!F}$ iff $R =
+\Assign{Q}{M}$ is transitive converse well-founded. Let $!A_n$ be the
+!!{formula}
+\[
+(\Atom{Q}{a_1,a_2} \land \dots \land
+    \Atom{Q}{a_{n-1},a_{n}})
+\]
+Now consider the set of !!{formula}s
+\[
+\Gamma = \{!F, !A_1, !A_2, \dots\}.
+\]
+Every finite subset of $\Gamma$ is satisfiable: Let $k$ be largest
+such that $!A_k$ is in the subset, $\Domain{M_k} = \{1, \dots, k\}$,
+$\Assign{a_i}{M_k} = i$, and $\Assign{P}{M_k} = <$. Since $<$ on $\{1,
+\dots, k\}$ is transitive and converse well-founded,
+$\Sat{M_k}{!F}$. $\Sat{M_k}{!A_i}$ by construction, for all $i \le k$.
+By the Compactness Theorem for first-order logic, $\Gamma$ is
+satisfiable in some !!{structure}~$\Struct{M}$. By hypothesis, since
+$\Sat{M}{!F}$, the relation $\Assign{Q}{M}$ is converse
+well-founded. But clearly, $\Assign{a_1}{M}$, $\Assign{a_2}{M}$,
+\dots{} would form an infinite sequence of the kind ruled out by
+converse well-foundedness.
+
+A counterexample to the second claim is given by the property of
+universality: for every $u$ and $v$, $Ruv$. Universal frames are
+first-order definable by the formula
+$\lforall[x][\lforall[y][\Atom{Q}{x,y}]]$.  However, no modal formula
+is valid in all and only the universal frames. This is a consequence
+of a result that is independently interesting: the formulas valid in
+universal frames are exactly the same as those valid in reflexive,
+symmetric, and transitive frames. There are reflexive, symmetric, and
+transitive frames that are not universal, hence every !!{formula}
+valid in all universal frames is also valid in some non-universal
+frames.
+
+\end{document}

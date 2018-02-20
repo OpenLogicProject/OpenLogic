@@ -1,0 +1,34 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: axioms-rules-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{qua}
+
+\olsection{Axioms and Rules for Quantifiers}
+
+\begin{defn}[Axioms for quantifiers]
+The \emph{axioms} governing quantifiers are
+all instances of the following:
+\begin{align}
+\ollabel{ax:q1} & \lforall[x][!B] \lif !B(t), \\
+\ollabel{ax:q2} & !B(t) \lif \lexists[x][!B].
+\end{align}
+for any ground term~$t$.
+\end{defn}
+
+\begin{defn}[Rules for quantifiers]
+\item If $!B \lif !A(a)$ already occurs in the !!{derivation} and $a$
+  does not occur in~$\Gamma$ or~$!B$, then $!B \lif
+  \lforall[x][!A(x)]$ is a correct inference step.
+\item If $!A(a) \lif !B$ already occurs in the !!{derivation} and $a$
+  does not occur in~$\Gamma$ or~$!B$, then $\lexists[x][!A(x)] \lif
+  !B$ is a correct inference step.
+\end{defn}
+
+We'll abbreviate either of these by ``\QR.''
+
+\end{document}

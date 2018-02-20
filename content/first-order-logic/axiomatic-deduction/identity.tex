@@ -1,0 +1,56 @@
+% Part: first-order-logic
+% Chapter: axiomatic-proofs
+% Section: identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{axd}{ide}
+
+\olsection{\usetoken{P}{derivation} with \usetoken{S}{identity}}
+
+In order to accommodate $\eq$ in !!{derivation}s, we simply add new
+axiom schemas. The definition of !!{derivation} and $\Proves$ remains
+the same, we just also allow the new axioms.
+
+\begin{defn}[Axioms for !!{identity}]
+\begin{align}
+\ollabel{ax:id1} & \eq[t][t], \\
+\ollabel{ax:id2} & \eq[t_1][t_2] \lif (!B(t_1) \lif
+  !B(t_2)),
+\end{align}
+for any ground terms $t$, $t_1$, $t_2$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sound}
+  The axioms \olref{ax:id1} and \olref{ax:id2} are valid.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][axd][ide]{prop:sound}.
+\end{prob}
+
+\begin{prop}\ollabel{prop:iden1}
+ $\Gamma \Proves \eq[t][t]$, for any term $t$ and set~$\Gamma$.
+\end{prop}
+
+\begin{prop}\ollabel{prop:iden2}
+  If $\Gamma \Proves !A(t_1)$ and $\Gamma \Proves
+  \eq[t_1][t_2]$, then $\Gamma \Proves !A(t_2)$.
+\end{prop}
+
+\begin{proof}
+The !!{formula}
+\[
+(\eq[t_1][t_2] \lif (!A(t_1) \lif !A(t_2)))
+\]
+is an instance of~\olref{ax:id2}. The conclusion follows by two applications
+of~\MP.
+\end{proof}
+
+\end{document}

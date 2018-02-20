@@ -1,5 +1,5 @@
 % Part: first-order-logic
-% Chapter: sequent-calculus
+% Chapter: natural-deduction
 % Section: proof-theoretic-notions
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -11,7 +11,7 @@
 
 \begin{editorial}
 This section collects the definitions the provability relation
-and consistency for LK.
+and consistency for natural deduction.
 \end{editorial}
 
 \begin{explain}
@@ -71,45 +71,36 @@ $!A$ from~$\Delta$.
 
 \begin{prop}[Transitivity]
 \ollabel{prop:transitivity}
-If $\Gamma \Proves !A$ for every $!A \in \Delta$ and $\Delta \Proves
-!B$, then $\Gamma \Proves !B$.
+If $\Gamma \Proves !A$ and $\{!A\} \cup \Delta \Proves
+!B$, then $\Gamma \cup \Delta \Proves !B$.
 \end{prop}
 
 \begin{proof}
-If $\Delta \Proves !B$, then there is !!a{derivation}~$\delta_0$
-of~$!B$ with all !!{undischarged} assumptions in~$\Delta$.  We show
-that $\Gamma \Proves !B$ by induction on the number~$n$ of
-!!{undischarged} assumptions in~$\delta_0$.
-
-If $n=0$, then $\delta_0$ has no !!{undischarged} assumptions, and so
-also counts as !!a{derivation} of~$!B$ from~$\Gamma$.
-
-Otherwise, pick !!a{undischarged} assumption~$!A$ in~$\delta_0$ and
-let $\Delta_1$ be the remaining !!{undischarged} assumptions. We
-obtain the !!{derivation}~$\delta_1$:
+If $\Gamma \Proves !A$, there is !!a{derivation}~$\delta_0$ of~$!A$
+with all !!{undischarged} assumptions in~$\Gamma$.  If $\{!A\} \cup
+\Delta \Proves !B$, then there is !!a{derivation}~$\delta_1$ of~$!B$
+with all !!{undischarged} assumptions in~$\{!A\} \cup \Delta$.
+Now consider:
 \begin{prooftree}
-  \AxiomC{$\Delta_1, \Discharge{!A}{1}$}
-  \RightLabel{$\delta_0$}
+  \AxiomC{$\Delta, \Discharge{!A}{1}$}
+  \RightLabel{$\delta_1$}
   \DeduceC{$!B$}
-  \RightLabel{\Intro{\lif}}
+  \DischargeRule{\Intro{\lif}}{1}
   \UnaryInfC{$!A \lif !B$}
-\end{prooftree}
-Since the number of !!{undischarged} assumptions in $\delta_1$ is $n-1$, the
-inductive hypothesis applies: there is a !!{derivation}~$\delta_2$ of
-$!A \lif !B$ from~$\Gamma$. Since $\Gamma \Proves !A$ there is also
-!!a{derivation}~$\delta_3$ of $!A$ from~$\Gamma$. Now consider:
-\begin{prooftree}
   \AxiomC{$\Gamma$}
-  \RightLabel{$\delta_2$}
-  \DeduceC{$!A \lif !B$}
-  \AxiomC{$\Gamma$}
-  \RightLabel{$\delta_3$}
+  \RightLabel{$\delta_0$}
   \DeduceC{$!A$}
   \RightLabel{\Elim{\lif}}
   \BinaryInfC{$!B$}
 \end{prooftree}
-This shows $\Gamma \Proves !B$.
+The !!{undischarged} assumptions are now all among $\Gamma \cup
+\Delta$, so this shows $\Gamma \cup \Delta \Proves !B$.
 \end{proof}
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
 
 \begin{prop}
 \ollabel{prop:incons}

@@ -1,0 +1,64 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: normal-modal-logics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{nor}
+
+\olsection{Normal Modal Logics}
+
+A modal logic can be seen as any suitably well-behaved set of
+!!{formula}s.  There are some modal logics which are of particular
+interest, both because they have interesting interpretations and
+applications, but mainly because they are theoretically well
+understood.  Those are the so-called normal modal logics.
+
+\begin{defn}\ollabel{defn:modal-logic}
+A \emph{modal logic}~$\Log L$ is a set of !!{formula}s of the basic
+modal language which 
+\begin{enumerate}
+\item contains all propositional tautologies, 
+\item is closed under uniform substitution, and 
+\item is closed under modus ponens, i.e., whenever $!A$ and $(!A \lif
+  !B) \in \Log L$ then also $!B \in \Log L$.
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+Some admittedly not very interesting sets of !!{formula}s which
+satisfy this definition and therefore count as modal logics are:
+\begin{enumerate}
+\item the set of all tautologies
+\item the set of all !!{formula}s (the inconsistent modal logic)
+\end{enumerate}
+\end{ex}
+
+\begin{defn}\label{defn:normal-modal-logic}
+A modal logic~$\Log L$ is \emph{normal} iff 
+\begin{enumerate}
+\item it contains both
+\begin{align}
+\tag{K} \Box(p \lif q) & \lif (\Box p \lif \Box q) \\
+\tag{Dual} \Diamond p & \liff \lnot \Box \lnot p
+\end{align}
+\item and it is closed under necessitation, i.e., whenever $!A \in
+  \Log L$, then also $\Box !A \in \Log L$.
+\end{enumerate}
+\end{defn}
+
+We will encounter two main ways of defining modal logics.  One is
+proof-theoretically, as the set of !!{formula}s that can be derived in
+certain !!{derivation} systems. The other is model-theoretically, as
+sets of !!{formula}s which are valid in certain classes of
+models. This mirrors the situation in ordinary propositional logic (or
+first-order logic, for that matter).  Here we can also single out a
+set of !!{formula}s in two different ways, e.g., as the set of
+tautologies which are true in all truth-value assignments and as the
+set of all !!{derivable} !!{formula}s in some !!{derivation} system.
+For normal modal logics, this two-fold way of specifying modal logics
+is possible using relational models and axiomatic (Hilbert-type) proof
+systems.
+\end{document}

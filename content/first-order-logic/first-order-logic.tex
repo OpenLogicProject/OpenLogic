@@ -14,12 +14,10 @@
   so that propositional logic can be covered independently.  This will
   become important especially when material on propositional modal
   logic will be added, since then one might \emph{not} want to cover
-  quantifiers.  Currently two different proof systems are offered as
-  alternatives, (a version of) sequent calculus and natural deduction.
-  A third alternative treatment based on Enderton-style axiomatic
-  deduction is available in experimental form in the branch
-  ``axiomatic-deduction''.  In particular, this part needs an
-  introduction (\gitissue{69}).
+  quantifiers.  Currently four different proof systems are offered as
+  alternatives, sequent calculus, natural deduction, signed tableaux,
+  and axiomatic proofs. This part still needs an introduction
+  (\gitissue{69}).
 \end{editorial}
 
 \olimport[syntax-and-semantics]{syntax-and-semantics}
@@ -34,6 +32,14 @@
 
 \iftag{prfND}{%
   \olimport[natural-deduction]{natural-deduction}
+}{}
+
+\iftag{prfTab}{%
+  \olimport[tableaux]{tableaux}
+}{}
+
+\iftag{prfAX}{%
+  \olimport[axiomatic-deduction]{axiomatic-deduction}
 }{}
 
 \olimport[completeness]{completeness}
