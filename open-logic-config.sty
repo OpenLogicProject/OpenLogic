@@ -356,11 +356,11 @@
 
 % - `\pAssign{v}` - Typeset a truth-value assignment
 
-\DeclareDocumentCommand \pAssign { m } {#1}
+\DeclareDocumentCommand \pAssign { m } {\mathfrak{#1}}
 
-% - `\pValue{A}{v}` - Truth value of a formula under a truth-value assignment.
+% - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
 
-\DeclareDocumentCommand \pValue { m m }{\mathrm{TV}^{\pAssign{#2}}{#1}}
+\DeclareDocumentCommand \pValue { m m }{\overline{\pAssign{#1}}(#2)}
 
 % - `\pSat[/]{v}{!A}`, the relation of being satisfied by a
 % truth-value assignment
@@ -1066,6 +1066,10 @@
 % "structure", redefine for "interpretation", "model".
 
 \settexttoken{structure}{structure}{structures}
+
+% - `valuation`: valuattion, truth-value assignment
+
+\settexttoken{valuation}{valuation}{valuations}
 
 % - `domain`: domain of a structure
 

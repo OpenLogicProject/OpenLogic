@@ -10,55 +10,74 @@
 
 \olsection{Semantics for Propositional Logic}
 
-\begin{defn}[Valuations] 
-Let $\{\True, \False\}$ be the set of the two truth
-values, ``true'' and ``false.'' A \emph{valuation} for $\Lang L_0$ is a
-function $v$ assigning either $\True$ or $\False$ to the propositional
-variables of the language, i.e., $v \colon \PVar \to \{\True, \False \}$.
+\begin{defn}[!!^{valuation}s] 
+Let $\{\True, \False\}$ be the set of the two truth values, ``true''
+and ``false.'' A \emph{!!{valuation}} for $\Lang[L_0]$ is a
+function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
+!!{propositional variable}s of the language, i.e., $\pAssign{v} \colon
+\PVar \to \{\True, \False \}$.
 \end{defn}
 
-\begin{thm} Every valuation $v$ can be ``lifted'' to a unique function
-$\overline{v} \colon \Frm[L_0] \to \{\True, \False \}$ such that: 
-\begin{align*}
-\overline{v}(p_n) & = v(p_n); \\ 
-\overline{v}(\lnot !A) & = \begin{cases}
-   \True & \text{if } \overline{v}(!A) = \False;\\ 
-   \False & \text{otherwise.} 
-\end{cases} \\ 
-\overline{v}(!A \lif !B) & = \begin{cases} 
-  \True & \text{if $\overline{v}(!A) = \False$ or $\overline{v}(!B) = \True$;}\\
-  \False & \text{if $\overline{v}(!A) = \True$ and 
-    $\overline{v}(!B) = \False$}. 
-\end{cases}
+\begin{defn}
+  Given a !!{valuation}~$v$, define the function $\pValue{v} \colon \Frm[L_0]
+  \to \{\True, \False \}$ inductively by:
+  \begin{align*}
+    \iftag{prvFalse}{\pValue{v}{\lfalse} & = \False; \\}{}
+    \iftag{prvTrue}{\pValue{v}{\ltrue} & = \True; \\}{}
+    \pValue{v}{\Obj p_n} & = \pAssign{v}(\Obj p_n); \\ 
+    \iftag{prvNot}{\pValue{v}{\lnot !A} & = \begin{cases}
+        \True & \text{if } \pValue{v}{!A} = \False;\\ 
+        \False & \text{otherwise.} 
+      \end{cases} \\ }{}
+    \iftag{prvAnd}{\pValue{v}{!A \land !B} & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}{!A} = \True$ and $\pValue{v}{!B} = \True$;}\\
+        \False &
+        \text{if $\pValue{v}{!A} = \False$ or $\pValue{v}{!B} = \False$}.
+      \end{cases}\\}{}
+    \iftag{prvOr}{\pValue{v}{!A \lor !B} & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}{!A} = \True$ or $\pValue{v}{!B} = \True$;}\\
+        \False &
+        \text{if $\pValue{v}{!A} = \False$ and $\pValue{v}{!B} = \False$}.
+      \end{cases}\\}{}
+    \iftag{prvIf}{\pValue{v}{!A \lif !B} & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}{!A} = \False$ or $\pValue{v}{!B} = \True$;}\\
+        \False &
+        \text{if $\pValue{v}{!A} = \True$ and $\pValue{v}{!B} = \False$}.
+      \end{cases}\\}{}
+    \iftag{prvIff}{\pValue{v}{!A \liff !B} & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}{!A} = \pValue{v}{!B}$;}\\
+        \False &
+        \text{if $\pValue{v}{!A} \neq \pValue{v}{!B}$}.
+      \end{cases}}{}
 \end{align*}
-\end{thm}
+\end{defn}
 
-\begin{proof} 
-Apply \olref[pre]{thm:rec}. 
-\end{proof}
 
-\begin{prob} 
-Show that the valuation clauses for $\lif$ and $\lnot$ give
-the right truth tables for $\land$ and $\lor$: 
+\begin{explain} 
+The !!{valuation} clauses the following truth tables:
 \begin{center}
-\begin{tabular}{|cc||c|c|} \hline 
-$!B$ & $!B$ & $!A \land !B$ & $!Ai \lor !B$ \\ 
+\begin{tabular}{|cc||c|c|c|c|} \hline 
+$!A$ & $!B$ & $!A \land !B$ & $!A \lor !B$ & $!A \lif !B$ & $!A \liff !B$\\ 
 \hline \hline 
-$\True$ & $\True$ & $\True$ & $\True$ \\ 
-$\True$ & $\False$ & $\False$ & $\True$ \\ 
-$\False$ & $\True$ & $\False$ & $\True$ \\
-$\False$ & $\False$ & $\False$ & $\False$ \\ 
+$\True$ & $\True$ & $\True$ & $\True$ & $\True$ & $\True$\\ 
+$\True$ & $\False$ & $\False$ & $\True$ & $\False$ & $\False$\\ 
+$\False$ & $\True$ & $\False$ & $\True$ & $\True$ & $\False$\\
+$\False$ & $\False$ & $\False$ & $\False$ & $\True$ & $\True$\\ 
 \hline 
 \end{tabular}
 \end{center} 
-\end{prob}
+\end{explain}
 
 \begin{thm} [Local Determination] 
-\ollabel{thm:LocalDetermination}  
-Suppose that $v_1$ and $v_2$ are valuations that agree on the
-propositional letters occurring in $!A$, i.e., $v_1(p_n) = v_2(p_n)$
-whenever $p_n$ occurs in~$!A$. Then they also agree on any~$!A$,
-i.e., $\overline{v}_1(!A) = \overline{v}_2(!A)$. 
+\ollabel{thm:LocalDetermination} Suppose that $\pAssign{v_1}$ and
+$\pAssign{v_2}$ are !!{valuation}s that agree on the propositional
+letters occurring in $!A$, i.e., $\pValue{v_1}{\Obj p_n} =
+\pValue{v_2}{\Obj p_n}$ whenever $\Obj p_n$ occurs in~$!A$. Then they
+also agree on any~$!A$, i.e., $\pValue{v_1}{!A} = \pValue{v_2}{!A}$.
 \end{thm}
 
 \begin{proof} 
@@ -68,21 +87,22 @@ By induction on $!A$.
 \begin{defn} 
 Define the following semantic notions:
 \begin{enumerate} 
-\item A !!{formula} $!A$ is \emph{satisfiable} if for some $v$,
-  $\overline{v}(!A) = \True$; it is \emph{unsatisfiable} if for no
-  $v$, $\overline{v}(!A) = \True$;
-\item A !!{formula} $!A$ is a \emph{tautology} if $\overline{v}(!A) =
-  \True$ for all valuations~$v$;
-\item A !!{formula} $!A$ is \emph{contingent} if it is satisfiable but
+\item !!^a{formula} $!A$ is \emph{satisfiable} if for
+  some~$\pAssign{v}$, $\pValue{v}{!A} = \True$; it is
+  \emph{unsatisfiable} if for no $\pAssign{v}$, $\pValue{v}{!A} =
+  \True$;
+\item !!^a{formula} $!A$ is a \emph{tautology} if $\pValue{v}{!A} =
+  \True$ for all !!{valuation}s~$v$;
+\item !!^a{formula} $!A$ is \emph{contingent} if it is satisfiable but
   not a tautology;
-\item if $\Gamma$ is a set of !!{formula}s, $\Gamma !A$ (``$\Gamma$
-  entails $!A$'') if and only if $\overline{v}(!A) = \True$ for every
-  valuation $v$ on which $\overline{v}(!B) = \True$ for every $!B \in
-  \Gamma$. 
+\item if $\Gamma$ is a set of !!{formula}s, $\Gamma \Entails !A$ (``$\Gamma$
+  entails $!A$'') if and only if $\pValue{v}{!A} = \True$ for every
+  !!{valuation}~$\pAssign{v}$ on which $\pValue{v}{!B} = \True$ for
+  every $!B \in \Gamma$.
 \item if $\Gamma$ is a set of !!{formula}s, $\Gamma$ is
-  \emph{satisfiable} if there is a valuation $v$ on which
-  $\overline{v}(!B) = \True$ for every $!B \in \Gamma$, and $\Gamma$
-  is unsatisfiable otherwise. 
+  \emph{satisfiable} if there is !!a{valuation}~$\pAssign{v}$ on which
+  $\pValue{v}{!B} = \True$ for every $!B \in \Gamma$, and $\Gamma$ is
+  unsatisfiable otherwise.
 \end{enumerate} 
 \end{defn}
 
@@ -92,8 +112,8 @@ The following can all be proved
 with little more than ``definition chasing'': 
 \begin{enumerate} 
 \item $!A$ is a tautology if and only if
-  $\varnothing \Entails !A$; 
-\item $\Gamma \Entails !A$ if and only if $\Gamma \cup \{ \lnot\!A\}$
+  $\emptyset \Entails !A$; 
+\item $\Gamma \Entails !A$ if and only if $\Gamma \cup \{ \lnot !A\}$
   is unsatisfiable; 
 \item if $\Gamma \Entails !A$ and $\Gamma \Entails !A \lif !B$ then
   $\Gamma \Entails !B$;
@@ -105,7 +125,7 @@ with little more than ``definition chasing'':
 !A\} \Entails !B$ then $\Gamma \cup \Delta \Entails !B$; 
 \item
 \ollabel{def:DeductionTheorem} Semantic deduction theorem: $\Gamma
-\Entails !A \supseteq !B$ if and only if $\Gamma \cup \{!A\} \Entails
+\Entails !A \lif !B$ if and only if $\Gamma \cup \{!A\} \Entails
 !B$.
 \end{enumerate}
 \end{prop}
