@@ -10,21 +10,23 @@
 
 \olsection{The De Bruijn Index}
 
-Because the $\alpha$-equivalence comes so naturally, some syntax has
-been invented that doesn't distinguish terms that can be
-$\alpha$-converted to each other, among which the most well-known is the
-\emph{De Bruijn index}.
+$\alpha$-Equivalence is very natural, as terms that are
+$\alpha$-equivalent ``mean the same.'' In fact, it is possible to give
+a syntax for lambda terms which does not distinguish terms that can be
+$\alpha$-converted to each other. The best known replaces variables by
+their \emph{De Bruijn index}.
 
 When we write $\lambd[x][M]$, we explicitly state that $x$ is the
-parameter of the function, so that we can use $x$ in $M$ to refer
-to this parameter. In the de Bruijn index, however, parameters have no
+parameter of the function, so that we can use $x$ in $M$ to refer to
+this parameter. In the de Bruijn index, however, parameters have no
 name and reference to them in the function body is denoted by a number
 denoting the levels of abstraction between them. For example, consider
-the example of $\lambd[x][lambd[y][y x]]$: the outer  abstraction
-is on level $0$ and the binding variable is $x$; the inner abstraction
-is on level $1$ and the binding variable is $y$; the sub-term $y x$
-lies in the inner abstraction whose level is $1$. Thus we
-write $0 1$ for $y x$.
+the example of $\lambd[x][\lambd[y][y x]]$: the outer abstraction is on
+binds the variable~$x$; the inner abstraction binds the variable
+is~$y$; the sub-term $y x$ lies in the scope of the inner abstraction:
+there is no abstraction between $y$ and its abstract~$\lambd[y]$, but
+one abstract between $x$ and its abstract~$\lambd[x]$. Thus we write
+$0\, 1$ for $y x$, and $\lambd[][\lambd[][01]]$ for the entire term.
 
 \begin{defn}
   De Bruijn terms are inductively defines as follows:
@@ -35,8 +37,8 @@ write $0 1$ for $y x$.
   \end{enumerate}
 \end{defn}
 
-A formalized translation from common lambda terms to De Bruijn indexed
-terms is as follows:
+A formalized translation from ordinary lambda terms to De Bruijn
+indexed terms is as follows:
 \begin{defn}
   \begin{align*}
     F_\Gamma(x) &= \Gamma(x) \\
@@ -44,8 +46,8 @@ terms is as follows:
     F_\Gamma(\lambd[x][N]) &= \lambd[][F_{x,\Gamma}(N)]
   \end{align*}
   where $\Gamma$ is a list of variables indexed from zero, and
-  $\Gamma(x)$ denotes the position of the variable $x$ in $\Gamma$;
-  for example, if $\Gamma$ is $x,y,z$, then $\Gamma(x)$ is $0$ and
+  $\Gamma(x)$ denotes the position of the variable $x$ in $\Gamma$.
+  For example, if $\Gamma$ is $x,y,z$, then $\Gamma(x)$ is $0$ and
   $\Gamma(z)$ is $2$.
   
   $x,\Gamma$ denotes the list resulted from pushing $x$ to the head of
@@ -63,7 +65,7 @@ follows:
     G_\Gamma(\lambd[][N]) &= \lambd[x][G_{x,\Gamma}(N)]
   \end{align*}
   where $\Gamma$ is again a list of variables indexed from zero, and
-  $\Gamma[n]$ denotes the variable on the position $n$; for example,
+  $\Gamma[n]$ denotes the variable in position~$n$. For example,
   if $\Gamma$ is $x,y,z$, then $\Gamma[1]$ is $y$.
 
   The variable $x$ in last equation is chosen to be any variable that
@@ -77,6 +79,4 @@ Here we give some results without proving them:
   $F_\Gamma(M) \eqs F_\Gamma(M')$.
 \end{prop}
 
-Instead of using de Bruijn terms, we can also identify terms with their
-by equivalence class under $\aeq$ (\olref[sfr][rel][prp]{sec}).
 \end{document}

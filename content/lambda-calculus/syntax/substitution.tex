@@ -21,19 +21,19 @@ free variables with lambda terms is called substitution.
 \begin{defn}[Substitution] \ollabel{defn:substitution}
   The \emph{substitution} of a term $N$ for a variable $x$ in a term
   $M$, $\Subst{M}{N}{x}$, is defined inductively by:
-  \begin{align}
-    \Subst{x}{N}{x} & = N \ollabel{defn:substitution-1} \\
-    \Subst{y}{N}{x} & = y, \text{if $x \neq y$} \ollabel{defn:substitution-2} \\
-    \Subst{PQ}{N}{x} & = (\Subst{P}{N}{x}) (\Subst{Q}{N}{x})
-    \ollabel{def:substitution-3} \\
-    \Subst{(\lambd[y][P])}{N}{x}  & = 
-      \lambd[y][\Subst{P}{N}{x}], \text{if $x \neq y$ and $y \notin \FV{N}$, otherwise undefined}
+  \begin{enumerate}
+    \item $\Subst{x}{N}{x} = N$. \ollabel{defn:substitution-1} 
+    \item $\Subst{y}{N}{x}  = y$ if $x \neq y$. \ollabel{defn:substitution-2} 
+    \item $\Subst{PQ}{N}{x}  = (\Subst{P}{N}{x}) (\Subst{Q}{N}{x})$.
+      \ollabel{def:substitution-3}
+    \item $\Subst{(\lambd[y][P])}{N}{x} = \lambd[y][\Subst{P}{N}{x}]$,
+      if $x \neq y$ and $y \notin \FV{N}$, otherwise undefined.
       \ollabel{defn:substitution-4}
-  \end{align}
+  \end{enumerate}
 \end{defn}
 
 \begin{explain}
-In \olref{defn:substitution}, \olref{defn:substitution-4}, we require $x
+In \olref{defn:substitution}\olref{defn:substitution-4}, we require $x
 \neq y$ because we don't want to replace \emph{bound} occurrences of
 the variable~$x$ in~$M$ by~$N$.  For example, if we compute the
 substitution $\Subst{\lambd[x][x]}{y}{x}$, the result should not be
@@ -74,15 +74,17 @@ environment variable~$y$. To do this properly, we would first have to
     $\Subst{\lambd[y][P]}{N}{x}$ is defined, it has to be
     $\lambd[y][\Subst{P}{N}{x}]$. Then $\Subst{P}{N}{x}$ has to be
     defined; also, $x \neq y$ and $x \notin \FV{Q}$. Then:
-    \begin{align*}
-      \FV{\Subst{\lambd[y][P]}{N}{x}}
+    \begin{multline*}
+      \FV{\Subst{\lambd[y][P]}{N}{x}} = \\
+    \begin{aligned}
       & = \FV{\lambd[y][\Subst{P}{N}{x}]} &&
       \text{by \olref{defn:substitution-4}}\\
       & = \FV{\Subst{P}{N}{x}} \setminus \{y\} &&
       \text{by \olref[fv]{def:fv}\olref[fv]{def:fv2}}\\
       & = \FV{P} \setminus \{y\} && \text{by inductive hypothesis} \\
       & = \FV{\lambd[y][P]} && \text{by \olref[fv]{def:fv}\olref[fv]{def:fv2}}
-    \end{align*}
+    \end{aligned}
+    \end{multline*}
   \end{enumerate}
 \end{proof}
 
@@ -109,8 +111,9 @@ environment variable~$y$. To do this properly, we would first have to
     $\lambd[y][\Subst{P}{N}{x}]$, with $\Subst{P}{N}{x}$
     defined, $x \neq y$ and $y \notin \FV{N}$; also, since $y \in
     \FV{\lambd[x][P]}$, we have $y \in \FV{P}$ too. Now:
-    \begin{align*}
-      \FV{\Subst{(\lambd[y][P])}{N}{x}}
+    \begin{multline*}
+      \FV{\Subst{(\lambd[y][P])}{N}{x}} = \\
+      \begin{aligned}
       & = \FV{\lambd[y][\Subst{P}{N}{x}]} \\
       & = \FV{\Subst{P}{N}{x}} \setminus \{y\} \\
       & = ((\FV{P} \setminus \{y\}) \cup (\FV{N} \setminus \{x\})
@@ -118,7 +121,8 @@ environment variable~$y$. To do this properly, we would first have to
       & = (\FV{P} \setminus \{x, y\}) \cup \FV{N}
        && x \notin \FV{N} \\
       & = (\FV{\lambd[y][P]} \setminus \{x\}) \cup \FV{N}
-    \end{align*}
+      \end{aligned}
+      \end{multline*}
   \end{enumerate}
 \end{proof}
 

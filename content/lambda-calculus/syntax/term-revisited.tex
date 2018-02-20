@@ -6,33 +6,29 @@
 
 \begin{document}
 
-\olfileid{lam}{int}{tr}
-\olsection{Term Revisited}
+\olfileid{lam}{syn}{tr}
+\olsection{Terms as $\alpha$-Equivalence Classes}
 
-Because the $\alpha$-equivalence comes nearly as granted, we now
-identify terms that are $\alpha$-equivalent, as follows:
-
-From now on, when we write a term, what we mean is the
-$\alpha$-equivalance class (\olref[sfr][rel][prp]{sec}) it is in. For
-example, we write $\lambd[a][\lambd[b][a c]]$ for the
-$\alpha$-equivalence class containing terms like
-$\lambd[a][\lambd[b][a c]]$, $\lambd[b][\lambd[a][b c]]$, etc.
+From now on, we will consider terms up to $\alpha$-equivalence.  That
+means when we write a term, we mean its $\alpha$-equivalance class it
+is in. For example, we write $\lambd[a][\lambd[b][a c]]$ for the set
+of all terms $\alpha$-equivalent to it, such as $\lambd[a][\lambd[b][a
+    c]]$, $\lambd[b][\lambd[a][b c]]$, etc.
 
 Also, while in previous sections letters such as $N, Q$ are used to
-denote a term, from now on we use them to denote a class,
-and it is these classes instead of terms that
-will be our subjects of study in the rest of the part. Letters such as
-$x, y$ continues to denote a variable.
+denote a term, from now on we use them to denote a class, and it is
+these classes instead of terms that will be our subjects of study in
+what follows. Letters such as $x, y$ continues to denote a variable.
 
-We also adopt a notation $\rep{M}$ to denote a random member in the
-class $M$ (the selection does not matter), and $\rep{M}[0], \rep{M}[1], etc. $ if we need more than
-one member.
+We also adopt the notation $\rep{M}$ to denote an arbitrary
+!!{element} of the class~$M$, and $\rep{M}[0], \rep{M}[1], etc. $ if
+we need more than one.
 
-Besides, we reuse the notations from terms to simplify our wording. We
+We reuse the notations from terms to simplify our wording. We
 have following definition on classes:
 \begin{defn}
   \begin{enumerate}
-  \item $\lambd[x][N]$ is defined to the class containing
+  \item $\lambd[x][N]$ is defined as the class containing
     $\lambd[x][\rep{N}]$.
   \item $PQ$ is defined to be the class containing $\rep{P}\rep{Q}$.
   \end{enumerate}
@@ -42,48 +38,47 @@ It is not hard to see that they are well defined, because
 $\alpha$-conversion is compatible.
 
 \begin{defn} \ollabel{def:fv}
-  The \emph{free variable} of an $\alpha$-equivalence class $M$, or $FV(M)$, is defined to be $FV(\rep{M})$.
+  The \emph{free variables} of an $\alpha$-equivalence class~$M$, or
+  $FV(M)$, is defined to be $FV(\rep{M})$.
 \end{defn}
 
-This definition is well defined because $FV(\rep{M}[0]) = FV(\rep{M}[1])$, as shown in \olref[alp]{thm:fv}.
+This is well defined since $FV(\rep{M}[0]) =
+FV(\rep{M}[1])$, as shown in \olref[alp]{thm:fv}.
 
-We also reuse the notation of substition into classes:
+We also reuse the notation for substition into classes:
 \begin{defn} \ollabel{def:sub}
   The \emph{substitution} of $R$ for $y$ in $M$, or $\Subst{M}{R}{y}$, is
   defined to be $\Subst{\rep{M}}{\rep{R}}{y}$, for any $\rep{M}$ and
   $\rep{R}$ making the substition defined.
 \end{defn}
 
-This definition is well defined as shown in \olref[alp]{cor:sub}.
+This is also well defined as shown in \olref[alp]{cor:sub}.
 
 Note how this definition significantly simplifies our reasoning. For
 example:
 \begin{align}
-  &\Subst{\lambd[x][x]}{y}{x} \ollabel{eq:1}\\
-  =&\Subst{\lambd[z][z]}{y}{x} \ollabel{eq:2}\\
-  =&\lambd[z][\Subst{z}{y}{x}] \\
-  =&\lambd[z][z]
+  \Subst{\lambd[x][x]}{y}{x} & =\ollabel{eq:1}\\
+  &= \Subst{\lambd[z][z]}{y}{x} \ollabel{eq:2}\\
+  &= \lambd[z][\Subst{z}{y}{x}] \\
+  &= \lambd[z][z]
 \end{align}
 
 \olref{eq:1} is undefined if we still regard it as substitution on
-terms; but as mentioned earlier in this section, we now consider a
-written term as the classes it is in, so it is actually a substitution
-on classes, which is why \olref{eq:2} can happen: we can replace
+terms; but as mentioned earlier, we now consider it a substitution on
+classes, which is why \olref{eq:2} can happen: we can replace
 $\lambd[x][x]$ with $\lambd[z][z]$ because they belong to the same
-class, so the meaning is not damaged.
+class.
 
 For the same reason, from now on we will assume that the
-representatives we choose always satisfies the conditions needed for
+representatives we choose always satisfy the conditions needed for
 substitution. For example, when we see $\Subst{\lambd[x][N]}{R}{y}$,
-we will assume the representative $\lambd[x][N]$ is well chosen that
-$x \neq y$ and $x \notin FV(R)$ - because otherwise we can choose another
-representative satisfying these conditions and it is still the same
-class we are reasoning about.
+we will assume the representative $\lambd[x][N]$ is chosen so that
+$x \neq y$ and $x \notin FV(R)$.
 
-Now we can say goodbye to terms and embrace classes. It is a bit
-strange to call $\lambd[x][x]$ a ``class'', let's call them
-$\Lambda$-terms (or simply ``terms'' in the rest of the part) from now on,
-to distinguish them from $\lambda$-terms that we are familiar with. 
+Since it is a bit strange to call $\lambd[x][x]$ a ``class'', let's
+call them $\Lambda$-terms (or simply ``terms'' in the rest of the
+part) from now on, to distinguish them from $\lambda$-terms that we
+are familiar with.
 
 \begin{editorial}
   We cannot say goodbye to terms yet: the whole definition of

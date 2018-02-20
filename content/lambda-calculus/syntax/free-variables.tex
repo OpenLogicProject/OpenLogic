@@ -9,19 +9,18 @@
 \olfileid{lam}{syn}{fv}
 \olsection{Free Variables}
 
-As mentioned earlier, lambda calculus is about functions, and lambda
-abstraction is where functions arise. Intuitively, $\lambd[x][M]$ is
-the function with values given by~$M$ when the argument to the
-function is assigned to~$x$. But not every occurrence of~$x$ in $M$ is
-relevant: if $M$ contains another abstract $\lambd[x][N]$ then the
-occurrrences of $x$ in $N$ are relevant to $\lambd[x][N]$ but not to
-$\lambd[x][M]$.  So, lambda abstract $\lambd[x]$ in $\lambd[x][M]$
-\emph{binds} those occurrences of $x$ in $M$ that are not already
-bound by another lambda abstract---the \emph{free} occurrences of $x$
-in~$M$.
+Lambda calculus is about functions, and lambda abstraction is how
+functions arise. Intuitively, $\lambd[x][M]$ is the function with
+values given by~$M$ when the argument to the function is assigned
+to~$x$. But not every occurrence of~$x$ in~$M$ is relevant: if $M$
+contains another abstract $\lambd[x][N]$ then the occurrences of $x$
+in~$N$ are relevant to $\lambd[x][N]$ but not to $\lambd[x][M]$.  So,
+a lambda abstract $\lambd[x]$ inside $\lambd[x][M]$ \emph{binds} those
+occurrences of $x$ in~$M$ that are not already bound by another lambda
+abstract---the \emph{free} occurrences of~$x$ in~$M$.
 
 \begin{defn}[Scope]
-If $\lambd[x][M]$ occurs inside a term~$N$, then the correspndong
+If $\lambd[x][M]$ occurs inside a term~$N$, then the corresponding
 occurrence of~$N$ is the \emph{scope} of the~$\lambd[x]$.
 \end{defn}
 
@@ -29,17 +28,17 @@ occurrence of~$N$ is the \emph{scope} of the~$\lambd[x]$.
 \begin{defn}[Free and bound occurrence]
   An occurrence of variable $x$ in a term~$M$ is \emph{free} if it is
   not in the scope of a $\lambd[x]$, and \emph{bound} otherwise. An
-  occurrence of a variable $x$ in $\lambd[x][M]$ is bound the initial
-  $\lambd[x]$ iff the occurrence of $x$ in $M$ is free.
+  occurrence of a variable~$x$ in $\lambd[x][M]$ is bound by the initial
+  $\lambd[x]$ iff the occurrence of $x$ in~$M$ is free.
 \end{defn}
 
 \begin{ex}
-  $\lambd[x][x y]$, both $x$ and $y$ are in the scope of $\lambd[x]$,
+  In $\lambd[x][x y]$, both $x$ and $y$ are in the scope of $\lambd[x]$,
   so $x$ is bound by $\lambd[x]$. Since $y$ is not in the scope of
   any $\lambd[y]$, it is free.  In $\lambd[x][x x]$, both occurrences
   of $x$ are bound by~$\lambd[x]$, since both are free in $xx$.  In
   $((\lambd[x][xx])x)$, the last occurrence of~$x$ is free, since it
-  is not in the scope of a $\lambd[x]$. In In
+  is not in the scope of a $\lambd[x]$. In
   $\lambd[x][(\lambd[x][x])x]$, the scope of the first $\lambd[x]$ is
   $(\lambd[x][x])x$ and the scope of the second $\lambd[x]$ is the
   second-to-last occurrence of~$x$. In $(\lambd[x][x])x$, the last
@@ -55,11 +54,11 @@ definition as follows:
 
 \begin{defn}[Free variables of a term] \ollabel{def:fv}
   The set of \emph{free variables} of a term is defined inductively by:
-  \begin{align} 
-    \FV{x} &= \{x\} \ollabel{def:fv1} \\
-    \FV{\lambd[x][N]} &= \FV{N} \setminus \{x\}    \ollabel{def:fv2} \\
-    \FV{PQ} &= \FV{P} \cup \FV{Q} \ollabel{def:fv3}
-  \end{align}
+  \begin{enumerate}
+    \item $\FV{x} = \{x\}$ \ollabel{def:fv1} 
+    \item $\FV{\lambd[x][N]} = \FV{N} \setminus \{x\}$    \ollabel{def:fv2}
+    \item $\FV{PQ} = \FV{P} \cup \FV{Q}$ \ollabel{def:fv3}
+  \end{enumerate}
 \end{defn}
 
 \begin{prob}
@@ -68,17 +67,17 @@ definition as follows:
     this term: $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$.
   \item In $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$, are
     all occurrences of variables bound? By which abstractions are they
-    bound recpectively?
+    bound respectively?
     \item Give $\FV{\lambd[x][(\lambd[y][(\lambd[z][x y]) z]) y]}$
   \end{enumerate}
 \end{prob}
 
 \begin{explain}
-A free variable is like a reference to outside world
-(\emph{environment}), and a term containing free variables can be seen
-as a partially specified term, since its behaviour dependents on how
-we setup the environment. For example, in the term $\lambd[x][f x]$
-which accepts an argument~$x$ and returns $f$ of that argument, the
+A free variable is like a reference to the outside world (the
+\emph{environment}), and a term containing free variables can be seen
+as a partially specified term, since its behaviour depends on how we
+set up the environment. For example, in the term $\lambd[x][f x]$, which
+accepts an argument~$x$ and returns $f$ of that argument, the
 variable~$f$ is free. This value of the term is dependent on the
 environment it is in, in particular the value of $f$ in that
 environment.
