@@ -1,0 +1,167 @@
+% Part: methods
+% Chapter: induction
+% Section: relations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mth}{ind}{rel}
+
+\olsection{Relations and Functions}
+
+When we have defined a set of objects (such as the natural numbers or
+the nice terms) inductively, we can also define \emph{relations on}
+these objects by induction.  For instance, consider the following
+idea: a nice term~$t$ is a subterm of a nice term~$t'$ if it occurs as
+a part of it.  Let's use a symbol for it: $t \sqsubseteq t'$. Every
+nice term is a subterm of itself, of course: $t \sqsubseteq t$. We can
+give an inductive definition of this relation as follows:
+
+\begin{defn}
+  The relation of a nice term~$t$ being a subterm of~$t'$, $t
+  \sqsubseteq t'$, is defined by induction on~$s'$ as follows:
+  \begin{enumerate}
+  \item If $t'$ is a letter, then $t \sqsubseteq t'$ iff $t = t'$.
+  \item If $t'$ is $[s \circ s']$, then $t \sqsubseteq t'$ iff $t =
+    t'$, $t \sqsubseteq s$, or $t \sqsubseteq s'$.
+  \end{enumerate}
+\end{defn}
+
+This definition, for instance, will tell us that $\mathrm{a}
+\sqsubseteq [\mathrm{b} \circ \mathrm{a}]$. For (2) says that
+$\mathrm{a} \sqsubseteq [\mathrm{b} \circ \mathrm{a}]$ iff $\mathrm{a}
+= [\mathrm{b} \circ \mathrm{a}]$, or $\mathrm{a} \sqsubseteq b$, or
+$\mathrm{a} \sqsubseteq \mathrm{a}$. The first two are false:
+$\mathrm{a}$ clearly isn't identical to $[\mathrm{b} \circ
+  \mathrm{a}]$, and by (1), $\mathrm{a} \sqsubseteq \mathrm{b}$ iff
+$\mathrm{a} = \mathrm{b}$, which is also false. However, also by (1),
+$\mathrm{a} \sqsubseteq \mathrm{a}$ iff $\mathrm{a} = \mathrm{a}$,
+which is true.
+
+It's important to note that the success of this definition depends on
+a fact that we haven't proved yet: every nice term~$t$ is either a
+letter by itself, or there are uniquely determined nice terms $s$ and
+$s'$ such that $t = [s \circ s']$.  ``Uniquely determined'' here means
+that if $t = [s \circ s']$ it isn't \emph{also} $= [r \circ r']$ with
+$s \neq r$ or $s' \neq r'$. If this were the case, then clause~(2) may
+come in conflict with itself: reading $t'$ as $[s \circ s']$ we might
+get $t \sqsubseteq t'$, but if we read $t'$ as $[r \circ r']$ we might
+get not $t \sqsubseteq t'$.  Before we prove that this can't happen,
+let's look at an example where it \emph{can} happen.
+
+\begin{defn}
+  Define \emph{bracketless terms} inductively by
+  \begin{enumerate}
+  \item Every letter is a bracketles term.
+    \item If $s$ and $s'$ are bracketless terms, then $s \circ s'$ is
+      a bracketless term.
+    \item Nothing else is a bracketless term.
+  \end{enumerate}
+\end{defn}
+
+Bracketless terms are, e.g., $\mathrm{a}$, $\mathrm{b} \circ
+\mathrm{d}$, $\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$. Now if we
+defined ``subterm'' for bracketless terms the way we did above, the
+second clause would read
+\begin{center}
+  If $t' = s \circ s'$, then $t \sqsubseteq t'$ iff $t = t'$, $t
+  \sqsubseteq s$, or $t \sqsubseteq s'$.
+\end{center}
+
+Now $\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$ is of the form $s
+\circ s'$ with $s = \mathrm{b}$ and $s' = \mathrm{a} \circ
+\mathrm{b}$. It is also of the form $r \circ r'$ with $r = \mathrm{b}
+\circ \mathrm{a}$ and $r' = \mathrm{b}$.  Now is $\mathrm{a} \circ
+\mathrm{b}$ a subterm of $\mathrm{b} \circ \mathrm{a} \circ
+\mathrm{b}$?  The answer is yes if we go by the first reading, and no
+if we go by the second.
+
+The property that the way a nice term is built up from other nice
+terms is unique is called \emph{unique readability}. Since inductive
+definitions of relations for such inductively defined objects are
+important, we have to prove that it holds.
+
+\begin{prop}
+  Suppose $t$ is a nice term. Then either $t$ is a letter by itself,
+  or there are uniquely determined nice terms $s$, $s'$ such that~$t =
+  [s \circ s']$.
+\end{prop}
+
+\begin{proof}
+  If $t$ is a letter by itself, the condition issatisfied. So assume
+  $t$ isn't a letter by itself. We can tell from the inductive
+  definition that then $t$ must be of the form $[s \circ s']$ for some
+  nice terms $s$ and~$s'$. It remains to show that these are uniquely
+  determined, i.e., if $t = [r \circ r']$, then $s = r$ and $s' = r'$.
+
+  So suppose $t = [s \circ s']$ and $t = [r \circ r']$ for nice terms
+  $s$, $s'$, $r$, $r'$. We have to show that $s = r$ and $s' = r'$.
+  First, $s$ and $r$ must be identical, for otherwise one is a proper
+  initial segment of the other. But by \olref[sti]{prop:initial}, that
+  is impossible if $s$ and~$r$ are both nice terms.  But if $s = r$,
+  then clearly also $s' = r'$.
+\end{proof}
+
+We can also define functions inductively: e.g., we can define the
+function~$f$ that maps any nice term to the maximum depth of nested
+$[\dots]$ in it as follows:
+
+\begin{defn}
+  \ollabel{defn:depth} The \emph{depth} of a nice term, $f(t)$, is
+  defined inductively as follows:
+\begin{align*}
+  f(s) & = 0 \text{ if $s$ is a letter}\\
+  f([s \circ s'] & = \max(f(s), f(s')) + 1
+\end{align*}
+\end{defn}
+
+For instance
+\begin{align*}
+  f([\mathrm{a} \circ \mathrm{b}]) & = 
+\max(f(\mathrm{a}),f(\mathrm{b})) + 1 = \\ &= \max(0, 0) + 1 = 1, \text{ and}\\
+f([[\mathrm{a} \circ \mathrm{b}] \circ \mathrm{c}]) & = 
+\max(f([\mathrm{a} \circ \mathrm{b}]), f(\mathrm{c})) + 1 = \\ &
+= \max(1,0) +
+1 = 2.
+\end{align*}
+
+Here, of course, we assume that $s$ an $s'$ are nice terms, and make
+use of the fact that every nice term is either a letter or of the form
+$[s \circ s']$. It is again important that it can be of this form in
+only one way. To see why, consider again the bracketless terms we
+defined earlier. The corresponding ``definition'' would be:
+\begin{align*}
+  g(s) & = 0 \text{ if $s$ is a letter}\\
+  g(s \circ s') & = \max(g(s), g(s')) + 1
+\end{align*}
+Now consider the bracketless term $\mathrm{a} \circ \mathrm{b} \circ
+\mathrm{c} \circ \mathrm{d}$. It can be read in more than one way,
+e.g., as $s \circ s'$ with $s = \mathrm{a}$ and $s' = \mathrm{b} \circ
+\mathrm{c} \circ \mathrm{d}$, or as $r \circ r'$ with $r = \mathrm{a}
+\circ b$ and $r' = \mathrm{c} \circ \mathrm{d}$. Calculating $g$
+according to the first way of reading it would give
+\begin{align*}
+  g(s \circ s') & =
+  \max(g(\mathrm{a}), g(\mathrm{b} \circ \mathrm{c} \circ \mathrm{d})) + 1 =\\ & =
+  \max(0,2) + 1 = 3
+  \intertext{while according to the other reading we get}
+  g(r \circ r') & =
+  \max(g(\mathrm{a} \circ \mathrm{b}), g(\mathrm{c} \circ \mathrm{d})) + 1=\\ &
+  = \max(1,1) + 1 = 2
+\end{align*}
+But a function must always yield a unique value; so our ``definition''
+of~$g$ doesn't define a function at all.
+
+\begin{prob}
+  Give an inductive definition of the function $l$, where $l(t)$ is
+  the number of symbols in the nice term~$t$.
+\end{prob}
+
+\begin{prob}
+  Prove by induction on nice terms $t$ that $f(t) < l(t)$ (where
+  $l(t)$ is the number of symbols in~$t$ and $f(t)$ is the depth of
+  $t$ as defined in \olref[mth][ind][rel]{defn:depth}).
+\end{prob}
+
+\end{document}

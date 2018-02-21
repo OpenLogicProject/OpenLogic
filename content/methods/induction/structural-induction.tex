@@ -18,12 +18,11 @@ structure of the inductively defined objects.
 
 Generally, an inductive definition is given by (a) a list of
 ``initial'' !!{element}s of the set and (b) a list of operations which
-produce new !!{element}s of the set from old ones. In the case of
-parexpressions, for instance, the initial object is~$\emptyseq$ and
-the operations are
+produce new !!{element}s of the set from old ones. In the case of nice
+terms, for instance, the initial objects are the letters. We only have
+one operation: the operations are
 \begin{align*}
-  o_1(p) = & (p) \\
-  o_2(q, q') = & qq'
+  o(s, s') = & [s \circ s']
 \end{align*}
 You can even think of the natural numbers~$\Nat$ themselves as being
 given be an inductive definition: the initial object is~$0$, and the
@@ -37,34 +36,72 @@ property~$P$, we must:
 \item Prove that for each operation~$o$, if the arguments have~$P$,
   so does the result.
 \end{enumerate}
-For instance, in order to prove something about all parexpressions, we
-would prove that it is true about $\emptyseq$, that it is true of
-$(p)$ provided it is true of $p$, and that it is true about $qq'$
-provided it is true of $q$ and $q'$ individually.
+For instance, in order to prove something about all nice terms, we
+would prove that it is true about all letters, and that it is true
+about $[s \circ s']$ provided it is true of $s$ and $s'$ individually.
 
 \begin{prop}
-  The number of $($ equals the number of $)$ in any parexpression $p$.
+  The number of $[$ equals the number of $]$ in any nice term~$t$.
 \end{prop}
 
 \begin{proof}
-We use structural induction.  Parexpressions are inductively defined,
-with initial object $\emptyseq$ and the operations $o_1$ and $o_2$.
+We use structural induction.  Nice terms are inductively defined, with
+letters as initial objects and the operations $o$ for constructing new
+nice terms out of old ones.
 \begin{enumerate}
-\item The claim is true for $\emptyset$, since the number of $($ in
-  $\emptyseq = 0$ and the number of $)$ in $\emptyseq$ also $= 0$.
-\item Suppose the number of $($ in $p$ equals the number of $)$ in
-  $p$. We have to show that this is also true for $(p)$, i.e.,
-  $o_1(p)$.  But the number of $($ in $(p)$ is $1 + {}$ the number of
-  $($ in $p$.  And the number of $)$ in $(p)$ is $1 + {}$ the number
-  of $)$ in $p$, so the claim also holds for $(p)$.
-\item Suppose the number of $($ in $q$ equals the number of $)$, and
-  the same is true for $q'$. The number of $($ in $o_2(p, p')$, i.e.,
-  in $pp'$, is the sum of the number $($ in $p$ and $p'$. The number
-  of $)$ in $o_2(p, p')$, i.e., in $pp'$, is the sum of the number of
-  $)$ in $p$ and $p'$. The number of $($ in $o_2(p, p')$ equals the
-  number of $)$ in $o_2(p,p')$.
+\item The claim is true for every letter, since the number of $[$ in a
+  letter by itself is~$0$ and the number of $]$ in it is also~$0$.
+\item Suppose the number of $[$ in $s$ equals the number of $]$, and
+  the same is true for $s'$. The number of $[$ in $o(s, s')$, i.e., in
+    $[s \circ s']$, is the sum of the number of $[$ in $s$ and
+      $s'$. The number of $]$ in $o(s, s')$ is the sum of the number
+    of $]$ in $s$ and $s'$. Thus, the number of $[$ in $o(s, s')$
+    equals the number of $]$ in $o(s,s')$.
 \end{enumerate}
-The result follows by structural induction.
+\end{proof}
+
+  
+\begin{prob}
+  Prove by structural induction that no nice term starts with~$]$.
+\end{prob}
+
+Let's give another proof by structural induction: a proper initial
+segment of a string of symbols~$t$ is any string~$t'$ that agrees with
+$t$ symbol by symbol, read from the left, but $t'$ is longer. So,
+e.g., $[a \circ {}$ is a proper initial segment of $[a \circ b]$, but
+neither are $[b \circ {}$ (they disagree at the second symbol) nor $[a
+\circ b]$ (they are the same length).
+
+\begin{prop}\ollabel{prop:initial}
+  Every proper initial segment of a nice term~$t$ has more $[$'s than
+    $]$'s.
+\end{prop}
+
+\begin{proof}
+  By induction on~$t$:
+  \begin{enumerate}
+  \item $t$ is a letter by itself: Then $t$ has no proper initial segments.
+  \item $t = [s \circ s']$ for some nice terms $s$ and $s'$. If $r$ is
+    a proper initial segment of $t$, there are a number of
+    possibilities:
+    \begin{enumerate}
+    \item $r$ is just $[$: Then $r$ has one more $[$ than it does~$]$.
+    \item $r$ is $[r'$ where $r'$ is a proper initial segment
+      of~$s$: Since $s$ is a nice term, by induction hypothesis, $r'$
+      has more $[$ than $]$ and the same is true for $[r'$.
+    \item $r$ is $[s$ or $[s \circ {}$: By the previous result, the
+      number of $[$ and $]$ in~$s$ is equal; so the number of $[$
+      in $[s$ or $[s \circ {}$ is one more than the number of~$]$.
+    \item $r$ is $[s \circ r'$ where $r'$ is a proper initial segment
+      of~$s'$:  By induction hypothesis, $r'$ contains more $[$ than
+      $]$. By the previous result, the number of $[$ and of
+      $]$ in~$s$ is equal. So the number of $[$ in $[s \circ r'$
+      is greater than the number of $]$.
+    \item $r$ is $[s \circ s'$: By the previous result, the number of
+      $[$ and $]$ in $s$ is equal, and the same for~$s'$. So there
+      is one more $[$ in $[s \circ s'$ than there are~$]$.
+    \end{enumerate}
+  \end{enumerate}
 \end{proof}
 
 \end{document}

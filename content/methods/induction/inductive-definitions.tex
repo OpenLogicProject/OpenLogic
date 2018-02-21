@@ -15,55 +15,87 @@ i.e., by specifying rules for what counts as an object of the kind to
 be defined which explain how to get new objects of that kind from old
 objects of that kind.  For instance, we often define special kinds of
 sequences of symbols, such as the terms and !!{formula}s of a
-language, by induction.  For a simpler example, consider strings of
-parentheses, such as ``(()('' or ``()(())''.  In the second string,
-the parentheses ``balance,'' in the first one, they don't.  The
-shortest such expression is ``()''. Actually, the very shortest string
-of parentheses in which every opening parenthesis has a matching
-closing parenthesis is ``'', i.e., the empty sequence~$\emptyseq$.  If
-we already have a parenthesis expression~$p$, then putting matching
-parentheses around it makes another balanced parenthesis
-expression. And if $p$ and $p'$ are two balanced parentheses
-expressions, writing one after the other, ``$pp'$'' is also a balanced
-parenthesis expression.  In fact, any sequence of balanced parentheses
-can be generated in this way, and we might use these operations to
-\emph{define} the set of such expressions.  This is an \emph{inductive
+language, by induction.  For a simple example, consider strings of
+consisting of letters $\mathrm{a}$, $\mathrm{b}$, $\mathrm{c}$,
+$\mathrm{d}$, the symbol~$\circ$, and brackets $[$ and $]$, such as
+``$[[\mathrm{c} \circ \mathrm{d}][$'', ``$[\mathrm{a}[]\circ]$'',
+``$\mathrm{a}$'' or ``$[[\mathrm{a} \circ \mathrm{b}]\circ
+\mathrm{d}]$''.  You probably feel that there's something
+``wrong'' with the first two strings: the brackets don't
+``balance'' at all in the first, and you might feel that the
+``$\circ$'' should ``connect'' expressions that themselves make
+sense. The third and fourth string look better: for every ``$[$''
+there's a closing ``$]$'' (if there are any at all), and for any
+$\circ$ we can find ``nice'' expressions on either side,
+surrounded by a pair of parenteses.
+
+We would like to precisely specify what counts as a ``nice term.''
+First of all, every letter by itself is nice.  Anything that's not
+just a letter by itself should be of the form ``$[t \circ s]$'' where
+$s$ and $t$ are themselves nice. Conversely, if $t$ and $s$ are nice,
+then we can form a new nice term by putting a $\circ$ between them and
+surround them by a pair of brackets.  We might use these operations
+to \emph{define} the set of nice terms.  This is an \emph{inductive
   definition}.
 
-\begin{defn}[Paraexpressions]
-  The set of \emph{parexpressions} is inductively defined as follows:
+\begin{defn}[Nice terms]
+  The set of \emph{nice terms} is inductively defined as follows:
   \begin{enumerate}
-  \item $\emptyseq$ is a parexpression.
-  \item If $p$ is a parexpression, then so is $(p)$.
-  \item If $p$ and $p'$ are parexpressions $\neq \emptyseq$, then so
-    is $pp'$.
-  \item Nothing else is a parexpression.
+  \item Any letter $\mathrm{a}$, $\mathrm{b}$, $\mathrm{c}$,
+    $\mathrm{d}$ is a nice term.
+  \item If $s$ and $s'$ are nice terms, then so
+    is $[s \circ s']$.
+  \item Nothing else is a nice term.
   \end{enumerate}
 \end{defn}
 
-(Note that we have not yet proved that every balanced parenthesis
-expression is a parexpression, although it is quite clear that every
-parexpression is a balanced parenthesis expression.)
+This definition tells us that something counts as a nice term iff it
+can be constructed according to the two conditions (1) and~(2) in some
+finite number of steps. In the first step, we construct all nice terms
+just consisting of letters by themselves, i.e.,
+\[
+\mathrm{a}, \mathrm{b}, \mathrm{c}, \mathrm{d}
+\]
+In the second step, we apply (2) to the terms we've constructed. We'll get
+\[
+[\mathrm{a} \circ \mathrm{a}], [\mathrm{a} \circ \mathrm{b}],
+[\mathrm{b} \circ \mathrm{a}], \dots, [\mathrm{d} \circ \mathrm{d}]
+\]
+for all combinations of two letters. In the third step, we apply (2)
+again, to any two nice terms we've constructed so far. We get new nice
+term such as $[\mathrm{a} \circ [\mathrm{a} \circ
+    \mathrm{a}]]$---where $t$ is $\mathrm{a}$ from step~1 and $s$ is
+$[\mathrm{a} \circ \mathrm{a}]$ from step~2---and $[[\mathrm{b} \circ
+    \mathrm{c}] \circ [\mathrm{d} \circ \mathrm{b}]]$ constructed out
+of the two terms $[\mathrm{b} \circ \mathrm{c}]$ and $[\mathrm{d}
+  \circ \mathrm{b}]$ from step~2. And so on.  Clause (3) rules out
+that anything not constructed in this way sneaks into the set of nice
+terms.
+
+Note that we have not yet proved that every sequence of symbols that
+``feels'' nice is nice according to this definition. However, it
+should be clear that everything we can construct does in fact ``feel
+nice:'' brackets are balanced, and $\circ$ connects parts that are
+themselves nice.
 
 The key feature of inductive definitions is that if you want to prove
-something about all parexpressions, the definition tells you which
-cases you must consider.  For instance, if you are told that $q$ is a
-parexpression, the inductive definition tells you what $q$ can look
-like: $q$ can be $\emptyseq$, it can be $(p)$ for some other
-parexpression~$p$, or it can be $pp'$ for two parexpressions~$p$ and
-$p' \neq \emptyseq$. Because of clause (4), those are all the
+something about all nice terms, the definition tells you which cases
+you must consider.  For instance, if you are told that $t$ is a nice
+term, the inductive definition tells you what $t$ can look like: $t$
+can be a letter, or it can be $[r \circ s]$ for some other pair of
+nice terms $r$ and~$s$. Because of clause (3), those are the only
 possibilities.
 
 When proving claims about all of an inductively defined set, the
 strong form of induction becomes particularly important. For instance,
-suppose we want to prove that for every parexpression of length~$n$,
-the number of $($ in it is~$n/2$.  This can be seen as a claim about
-all~$n$: for every $n$, the number of $($ in any parexpression of
-length~$n$ is $n/2$.
+suppose we want to prove that for every nice term of length~$n$, the
+number of $[$ in it is~$< n/2$.  This can be seen as a claim about
+all~$n$: for every $n$, the number of $[$ in any nice term of
+length~$n$ is $< n/2$.
 
 \begin{prop}
-  For any $n$, the number of $($ in a parexpression of length~$n$ is
-  $n/2$.
+  For any $n$, the number of $[$ in a nice term of length~$n$ is
+  $< n/2$.
 \end{prop}
 
 \begin{proof}
@@ -71,38 +103,53 @@ To prove this result by (strong) induction, we have to show that the
 following conditional claim is true:
 \begin{quote}
   If for every $k < n$, any parexpression of length $k$ has $k/2$
-  $($'s, then any parexpression of length~$n$ has $n/2$ $($'s.
+  $[$'s, then any parexpression of length~$n$ has $n/2$ $[$'s.
 \end{quote}
 To show this conditional, assume that its antecedent is true, i.e.,
-assume that for any $k<n$, parexpressions of length $k$ contain $k$
-$($'s.  We call this assumption the inductive hypothesis. We want to
+assume that for any $k<n$, parexpressions of length $k$ contain $< k/2$
+$[$'s.  We call this assumption the inductive hypothesis. We want to
 show the same is true for parexpressions of length~$n$.
 
-So suppose $q$ is a parexpression of length~$n$.  Because
-parexpressions are inductively defined, we have three cases: (1) $q$
-is $\emptyseq$, (2) $q$ is $(p)$ for some parexpression~$p$, or (3)
-$q$ is $pp'$ for some parexpressions $p$ and $p' \neq \emptyseq$.
+So suppose $t$ is a nice term of length~$n$.  Because
+parexpressions are inductively defined, we have three two cases: (1)
+$t$ is a letter by itself, or $t$ is $[r \circ s]$ for some nice terms
+$r$ and~$s$.
 \begin{enumerate}
-\item $q$ is $\emptyseq$.  Then $n = 0$, and the number of $($ in
-$q$ is also $0$. Since $0 = 0/2$, the claim holds.
-\item $q$ is $(p)$ for some parexpression~$p$.  Since $q$ contains two
-  more symbols than $p$, $\len{p} = n - 2$, in particular, $\len{p} <
-  n$, so the inductive hypothesis applies: the number of $($ in $p$ is
-  $\len{p}/2$. The number of $($ in $q$ is $1 + {}$ the number of $($
-  in $p$, so $= 1 + \len{p}/2$, and since $\len{p} = n - 2$, this
-  gives $1 + (n-2)/2 = n/2$.
-\item $q$ is $pp'$ for some parexpression~$p$ and $p' \neq \emptyseq$.
-  Since neither $p$ nor $p' =\emptyseq$, both $\len{p}$ and $\len{p'}
-  < n$. Thus the inductive hypothesis applies in each case: The number
-  of $($ in $p$ is $\len{p}/2$, and the number of $($ in $p'$ is
-  $\len{p'}/2$.  On the other hand, the number of $($ in $q$ is
-  obviously the sum of the numbers of $($ in $p$ and $p'$, since $q =
-  pp'$.  Hence, the number of $($ in $q$ is $\len{p}/2 + \len{p'}/2 =
-  (\len{p}+\len{p'})/2 = \len{pp'}/2 = n/2$.
+\item $t$ is a letter.  Then $n = 1$, and the number of $[$ in $t$ is
+  $0$. Since $0 < 1/2$, the claim holds.
+\item $t$ is $[s \circ s']$ for some nice terms~$s$ and~$s'$.  Let's
+  let $k$ be the length of~$s$ and $k'$ be the length of~$s'$.  Then
+  the length~$n$ of $t$ is $k+k'+3$ (the lengths of $s$ and $s'$ plus
+  three symbols $[$, $\circ$, $]$). Since $k+k'+3$ is always greater
+  than $k$, $k < n$. Similarly, $k' < n$. That means that the
+  induction hypothesis applies to the terms $s$ and~$s'$: the
+  number~$m$ of $[$ in $s$ is $< k/2$, and the number of $[$ in~$s'$ is
+  $< k'/2$.
+
+  The number of $[$ in $t$ is the number of $[$ in $s$, plus the
+  number of $[$ in $s'$, plus~$1$, i.e., it is $m + m' + 1$. Since $m
+  < k/2$ and $m' < k'/2$ we have:
+  \[
+  m + m' + 1 < \frac{k}{2} + \frac{k'}{2} + 1 = \frac{k+k'+2}{2} < \frac{k+k'+3}{2} = n/2.
+  \]
 \end{enumerate}
-In each case, we've shown that teh number of $($ in $q$ is $n/2$ (on
+In each case, we've shown that the number of $[$ in $t$ is $< n/2$ (on
 the basis of the inductive hypothesis). By strong induction, the
 proposition follows.
 \end{proof}
+
+\begin{prob}
+  Define the set of supernice terms by
+  \begin{enumerate}
+  \item Any letter $\mathrm{a}$, $\mathrm{b}$, $\mathrm{c}$,
+    $\mathrm{d}$ is a supernice term.
+  \item If $s$ is a supernice term, then so is $[s]$.
+  \item If $t$ and $s$ are supernice terms, then so
+    is $[t \circ s]$.
+  \item Nothing else is a supernice term.
+  \end{enumerate}
+  Show that the number of $[$ in a supernice term~$s$ of length~$n$ is
+    $\le n/2 +1$.
+\end{prob}
 
 \end{document}
