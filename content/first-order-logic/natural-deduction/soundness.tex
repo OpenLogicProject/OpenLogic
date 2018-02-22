@@ -6,7 +6,10 @@
 
 \begin{document}
 
-\olfileid{fol}{ntd}{sou}
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{sou}}
+      {\olfileid{pl}{ntd}{sou}}
+      
 \olsection{Soundness}
 
 \begin{explain}
@@ -16,7 +19,7 @@ thus a kind of guaranteed safety property for !!{derivation} systems.
 Depending on which proof theoretic property is in question, we would
 like to know for instance, that
 \begin{enumerate}
-\item every !!{derivable} !!{sentence} is valid;
+\item every !!{derivable} !!{sentence} is \iftag{FOL}{valid}{a tautology};
 \item if !!a{sentence} is !!{derivable} from some others, it is also a
   consequence of them;
 \item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
@@ -40,8 +43,9 @@ induction on the number of inferences in~$\delta$.
 For the induction basis we show the claim if the number of inferences
 is~$0$. In this case, $\delta$ consists only of an initial
 !!{formula}. Every initial !!{formula}~$!A$ is !!a{undischarged}
-assumption, and as such, any !!{structure}~$\Struct{M}$ that satisfies
-all of the !!{undischarged} assumptions of the proof also
+assumption, and as such, any
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$} that
+satisfies all of the !!{undischarged} assumptions of the proof also
 satisfies~$!A$.
 
 Now for the inductive step. Suppose that $\delta$ contains~$n$
@@ -68,12 +72,15 @@ First, we consider the possible inferences with only one premise.
   \end{prooftree}
   By inductive hypothesis, $\lfalse$ follows from the !!{undischarged}
   assumptions $\Gamma \cup \{!A\}$ of~$\delta_1$. Consider
-  !!a{structure}~$\Struct M$. We need to show that, if
-  $\Sat{M}{\Gamma}$, then $\Sat{M}{\lnot !A}$. Suppose for reductio
-  that $\Sat{M}{\Gamma}$, but $\Sat/{M}{\lnot !A}$, i.e.,
-  $\Sat{M}{!A}$. This would mean that $\Sat{M}{\Gamma \cup
-    \{!A\}}$. This is contrary to our inductive hypothesis. So,
-  $\Sat{M}{\lnot !A}$.
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}. We
+  need to show that, if $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, then
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !A}$. Suppose for reductio
+  that $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, but
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lnot !A}$, i.e.,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. This would mean that
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma \cup \{!A\}}$. This is
+  contrary to our inductive hypothesis. So,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !A}$.
 
 \item The last inference is \Elim{\land}: There are two variants: $!A$
   or $!B$ may be inferred from the premise $!A \land !B$. Consider the
@@ -86,12 +93,16 @@ First, we consider the possible inferences with only one premise.
     \UnaryInfC{$!A$}
   \end{prooftree}
   By inductive hypothesis, $!A \land !B$ follows from the
-  !!{undischarged} assumptions~$\Gamma$ of~$\delta_1$. Consider 
-  !!a{structure}~$\Struct M$. We need to show that, if
-  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A}$. Suppose $\Sat{M}{\Gamma}$. By
-  our inductive hypothesis ($\Gamma \Entails !A \lor !B$), we know
-  that $\Sat{M}{!A \land !B}$. By definition, $\Sat{M}{!A \land !B}$
-  iff $\Sat{M}{!A}$ and $\Sat{M}{!B}$.  (The case where $!B$ is
+  !!{undischarged} assumptions~$\Gamma$ of~$\delta_1$. Consider
+  !!a{structure}~\iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$}. We need to
+  show that, if $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, then
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$. By our inductive
+  hypothesis ($\Gamma \Entails !A \lor !B$), we know that
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$. By definition,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$ iff
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ and
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$.  (The case where $!B$ is
   inferred from $!A \land !B$ is handled similarly.)
   
 \item The last inference is \Intro{\lor}: There are two variants: $!A
@@ -105,13 +116,15 @@ First, we consider the possible inferences with only one premise.
     \UnaryInfC{$!A \lor !B$}
   \end{prooftree}
   By inductive hypothesis, $!A$ follows from the !!{undischarged}
-  assumptions~$\Gamma$ of~$\delta_1$.  Consider 
-  !!a{structure}~$\Struct M$. We need to show that, if
-  $\Sat{M}{\Gamma}$, then $\Sat{M}{!A \lor !B}$. Suppose
-  $\Sat{M}{\Gamma}$; then $\Sat{M}{!A}$ since $\Gamma \Entails !A$
-  (the inductive hypothesis). So it must also be the case that
-  $\Sat{M}{!A \lor !B}$.  (The case where $!A \lor !B$ is inferred
-  from~$!B$ is handled similarly.)
+  assumptions~$\Gamma$ of~$\delta_1$.  Consider
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}. We
+  need to show that, if $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, then
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lor !B}$. Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$; then
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ since $\Gamma \Entails !A$ (the
+  inductive hypothesis). So it must also be the case that
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lor !B}$.  (The case where $!A
+  \lor !B$ is inferred from~$!B$ is handled similarly.)
   
 \item The last inference is \Intro{\lif}: $!A \lif !B$ is inferred
   from a subproof with assumption~$!A$ and conclusion~$!B$, i.e.,
@@ -124,14 +137,19 @@ First, we consider the possible inferences with only one premise.
   \end{prooftree}
   By inductive hypothesis, $!B$ follows from the !!{undischarged}
   assumptions of~$\delta_1$, i.e., $\Gamma \cup \{!A\} \Entails
-  !B$. Consider !!a{structure}~$\Struct{M}$. The !!{undischarged}
-  assumptions of~$\delta$ are just $\Gamma$, since $!A$ is discharged
-  at the last inference. So we need to show that $\Gamma \Entails !A
-  \lif !B$.  For reductio, suppose that for some
-  !!{structure}~$\Struct{M}$, $\Sat{M}{\Gamma}$ but $\Sat/{M}{!A \lif
-    !B}$. So, $\Sat{M}{!A}$ and $\Sat/{M}{!B}$. But by hypothesis,
-  $!B$ is a consequence of $\Gamma \cup \{!A\}$, i.e., $\Sat{M}{!B}$,
-  which is a contradiction. So, $\Gamma \Entails !A \lif !B$.
+  !B$. Consider
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}. The
+  !!{undischarged} assumptions of~$\delta$ are just $\Gamma$, since
+  $!A$ is discharged at the last inference. So we need to show that
+  $\Gamma \Entails !A \lif !B$.  For reductio, suppose that for some
+  \iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$},
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$ but
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$. So,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ and
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$. But by hypothesis, $!B$ is a
+  consequence of $\Gamma \cup \{!A\}$, i.e.,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$, which is a contradiction. So,
+  $\Gamma \Entails !A \lif !B$.
 
 \item The last inference is \FalseInt: Here, $\delta$ ends in
   \begin{prooftree}
@@ -142,13 +160,17 @@ First, we consider the possible inferences with only one premise.
     \UnaryInfC{$!A$}
   \end{prooftree}
   By induction hypothesis, $\Gamma \Entails \lfalse$. We have to show
-  that $\Gamma \Entails !A$. Suppose not; then for some $\Struct{M}$
-  we have $\Sat{M}{\Gamma}$ and $\Sat/{M}{!A}$. But we always have
-  $\Sat/{M}{\lfalse}$, so this would mean that $\Gamma \Entails/
-  \lfalse$, contrary to the induction hypothesis.
+  that $\Gamma \Entails !A$. Suppose not; then for
+  some~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ we have
+    $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$ and
+    $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$. But we always have
+    $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lfalse}$, so this would mean
+    that $\Gamma \Entails/ \lfalse$, contrary to the induction
+    hypothesis.
 
 \item The last inference is \FalseCl: Exercise.
-  
+
+\iftag{FOL}{
 \item The last inference is \Intro{\lforall}: Then $\delta$ has the form
   \begin{prooftree}
     \AxiomC{$\Gamma$}
@@ -182,10 +204,12 @@ First, we consider the possible inferences with only one premise.
 \item The last inference is \Intro{\lexists}: Exercise.
 
 \item The last inference is \Elim{\forall}: Exercise.
+}{}
 \end{enumerate}
 
 Now let's consider the possible inferences with several premises:
-\Elim{\lor}, \Intro{\land}, \Elim{\lif}, and \Elim{\lexists}.
+\Elim{\lor}, \Intro{\land}, \iftag{FOL}{\Elim{\lif}, and
+  \Elim{\lexists}}{and \Elim{\lif}}.
 \begin{enumerate}
 
 \item The last inference is \Intro{\land}. $!A \land !B$ is inferred
@@ -205,11 +229,14 @@ Now let's consider the possible inferences with several premises:
   !!{undischarged} assumptions~$\Gamma_2$ of~$\delta_2$. The
   !!{undischarged} assumptions of~$\delta$ are $\Gamma_1 \cup
   \gamma_2$, so we have to show that $\Gamma_1 \cup \Gamma_2 \Entails
-  !A \land !B$. Consider !!a{structure}~$\Struct M$ with
-  $\Sat{M}{\Gamma_1 \cup \Gamma_2}$. Since $\Sat{M}{\Gamma_1}$, it
-  must be the case that $\Sat{M}{!A}$ as $\Gamma_1 \Entails !A$, and
-  since $\Sat{M}{\Gamma_2}$, $\Sat{M}{!B}$ since $\Gamma_2 \Entails
-  !B$. Together, $\Sat{M}{!A \land !B}$.
+  !A \land !B$. Consider
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
+  with $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1 \cup \Gamma_2}$. Since
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1}$, it must be the case that
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ as $\Gamma_1 \Entails !A$, and
+  since $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_2}$,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ since $\Gamma_2 \Entails
+  !B$. Together, $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \land !B}$.
   
 \item The last inference is \Elim{\lor}: Exercise.
 
@@ -228,27 +255,41 @@ Now let's consider the possible inferences with several premises:
   By induction hypothesis, $!A \lif !B$ follows from the
   !!{undischarged} assumptions~$\Gamma_1$ of~$\delta_1$ and $!A$
   follows from the !!{undischarged} assumptions~$\Gamma_2$
-  of~$\delta_2$. Consider !!a{structure}~$\Struct M$. We need to show
-  that, if $\Sat{M}{\Gamma_1 \cup \Gamma_2}$, then
-  $\Sat{M}{!B}$. Suppose $\Sat{M}{\Gamma_1 \cup \Gamma_2}$. Since
-  $\Gamma_1 \Entails !A \lif !B$, $\Sat{M}{!A \lif !B}$. Since
-  $\Gamma_2 \Entails !A$, we have $\Sat{M}{!A}$. This means that
-  $\Sat{M}{!B}$ (For if $\Sat/{M}{!B}$, since $\Sat{M}{!A}$, we'd have
-  $\Sat/{M}{!A \lif !B}$, contradicting~$\Sat{M}{!A \lif !B}$).
+  of~$\delta_2$. Consider
+  \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}. We
+  need to show that, if $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1 \cup
+    \Gamma_2}$, then $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$. Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma_1 \cup \Gamma_2}$. Since
+  $\Gamma_1 \Entails !A \lif !B$, $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A
+    \lif !B}$. Since $\Gamma_2 \Entails !A$, we have
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. This means that
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ (For if
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$, since
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$, we'd have
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$,
+  contradicting~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$).
 
 \item The last inference is \Elim{\lnot}: Exercise.
   
-\item The last inference is \Elim{\lexists}: Exercise.
+\tagitem{FOL}{The last inference is \Elim{\lexists}: Exercise.}{}
 \end{enumerate}
 \end{proof}
 
+\tagprob{FOL}
 \begin{prob}
 Complete the proof of \olref[fol][ntd][sou]{thm:soundness}.
 \end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+Complete the proof of \olref[pl][ntd][sou]{thm:soundness}.
+\end{prob}
+\tagendprob
 
 \begin{cor}
 \ollabel{cor:weak-soundness}
-If $\Proves !A$, then $!A$ is valid.
+If $\Proves !A$, then $!A$ is \iftag{FOL}{valid}{a tautology}.
 \end{cor}
 
 \begin{cor}
@@ -260,9 +301,12 @@ If $\Gamma$ is satisfiable, then it is consistent.
 We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
 Then $\Gamma \Proves \lfalse$, i.e., there is !!a{derivation} of
 $\lfalse$ from !!{undischarged} assumptions in~$\Gamma$. By
-\olref{thm:soundness}, any !!{structure} $\Struct{M}$ that satisfies
-$\Gamma$ must satisfy $\lfalse$.  Since $\Sat/{M}{\lfalse}$ for every
-!!{structure}~$\Struct{M}$, no $\Struct{M}$ can satisfy $\Gamma$,
+\olref{thm:soundness}, any
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+that satisfies $\Gamma$ must satisfy $\lfalse$.  Since
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{\lfalse}$ for every
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$},
+no \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} can satisfy $\Gamma$,
 i.e., $\Gamma$ is not satisfiable.
 \end{proof}
 

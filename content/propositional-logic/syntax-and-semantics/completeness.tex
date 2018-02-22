@@ -1,0 +1,123 @@
+% Part: propositional-logic
+% Chapter: propositional-logic 
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{prp}{com}
+
+\olsection{Completeness of Propositional Logic}
+
+\begin{defn} 
+\ollabel{def:MaxCon} 
+A set $\Gamma$ of !!{formula}s is \emph{maximally consistent} if it is
+consistent and if $\Delta$ is a consistent set such that $\Gamma
+\subseteq \Delta$ then $\Gamma = \Delta$.
+\end{defn}
+
+\begin{lem}[Truth Lemma]
+  \ollabel{lem:truth}
+Let $\Gamma$ be maximally consistent; then: 
+\begin{enumerate} 
+\item \ollabel{lem:truth-1} $!A \in \Gamma$ if and only if $\lnot !A
+  \notin \Gamma$;
+\item \ollabel{lem:truth-2} $\Gamma \Proves !A$ if and only if $!A \in \Gamma$; 
+\item \ollabel{lem:truth-3} $!A \lif !B \in \Gamma$ if and only if
+  either $!A \notin \Gamma$ or $!B \in \Gamma$.
+\end{enumerate} 
+\end{lem} 
+
+\begin{proof} 
+\begin{enumerate}
+\item Suppose $!A \in \Gamma$. If also $\lnot !A \in \Gamma$, then
+  $\Gamma$ is inconsistent; and if neither $!A$ nor $\lnot!A$ is in
+  $\Gamma$ then by \olref[axd]{prop:phi} one of $\Gamma\cup\{!A\}$ and
+  $\Gamma \cup \{\lnot !A\}$ is consistent, which means that $\Gamma$
+  is not maximal. The other direction is proved the same way.
+\item If $!A \in \Gamma$ then of course $\Gamma \Proves !A$.  On the
+  other hand, suppose $\Gamma \Proves !A$. If $!A \notin \Gamma$ then,
+  by \olref{lem:truth-1}, $\lnot !A \in \Gamma$.  So $\Gamma \Proves
+  !A$ and $\Gamma \Proves \lnot !A$, a contradiction.
+\item Exercise.
+\end{enumerate}
+\end{proof}
+
+The left-to-right direction of \olref{lem:truth}\olref{lem:truth-2} shows that
+$\Gamma$ is \emph{deductively closed}, i.e., if $\Gamma \Proves !A$ then $!A
+\in \Gamma$ for all~$!A$.
+
+\begin{prob}
+  Complete the proof of \olref{lem:truth}.
+\end{prob}
+
+\begin{thm}[Completeness] 
+\ollabel{thm:completeness} 
+If $\Gamma$ is consistent then $\Gamma$ is satisfiable.
+\end{thm}
+
+\begin{proof} 
+Let $!A_0$, $!A_1$,~\dots be an exhaustive listing of all the
+!!{formula}s of the language. We recursively define an increasing
+sequence of sets of !!{formula}s $\Gamma_0$, $\Gamma_1$,~\dots, by
+putting: 
+\begin{align*} 
+\Gamma_0 & = \Gamma\\ 
+\Gamma_{n+1} &  = 
+\begin{cases} 
+  \Gamma_n \cup \{!A_n\} & \text{if $\Gamma_n \cup \{!A_n\}$ is
+    consistent;}\\ 
+  \Gamma_n \cup \{\lnot !A_n\} & \text{otherwise}. 
+\end{cases} 
+\end{align*} 
+Then define: 
+\[ 
+\Gamma^* = \bigcup_{0\le n}\Gamma_n.
+\] 
+The proof now proceeds by establishing, in turn, the following
+facts: 
+\begin{enumerate} 
+\item For each $n$, the set $\Gamma_n$ is consistent (by induction on
+  $n$, using \olref[axd]{prop:phi});
+\item $\Gamma^*$ is consistent; 
+\item $\Gamma^*$ is maximal.
+\end{enumerate} 
+Then define a valuation $v$ by putting $v(p_i) = \True$ if and
+only if $p_i \in \Gamma^*$. By induction on $!A$ it is then shown that
+membership in $\Gamma^*$ coincides with truth according to $v$ also
+for more complex !!{sentence}s: $\overline{v}(!A) = \True$ if and
+only if $!A \in \Gamma^*$. In particular, $v$ satisfies $\Gamma^*$, and
+since $\Gamma \subseteq \Gamma^*$, also $\Gamma$ is satisfiable, as
+desired. 
+\end{proof}
+
+\begin{cor} 
+If $\Gamma \Entails !A$ then $\Gamma \Proves !A$. 
+\end{cor}
+
+\begin{proof} 
+If $\Gamma\Proves/ !A$ then $\Gamma \cup \{\lnot !A\}$ is consistent,
+by \olref[axd]{prop:prov-incons}. So by the completeness theorem, $\Gamma \cup
+\{\lnot !A\}$ is satisfiable, and $\Gamma \Entails/ !A$.
+\end{proof}
+
+\begin{prop}[Compactness Theorem] 
+\ollabel{prop:compactness} 
+$\Gamma$ is satisfiable if and only if every \emph{finite} subset
+$\Gamma_0$ of $\Gamma$ is satisfiable. 
+\end{prop}
+
+\begin{proof} 
+$\Gamma$ is unsatisfiable if and only if it is inconsistent, if and
+  only if some finite subset $\Gamma_0$ of $\Gamma$ is inconsistent,
+  if and only if some finite subset $\Gamma_0$ of $\Gamma$ is
+  unsatisfiable.
+\end{proof}
+
+\begin{cor} 
+$\Gamma \Entails !A$ if and only if for some finite subset
+$\Gamma_0$ of $\Gamma$, $\Gamma_0 \Entails !A$. 
+\end{cor} 
+
+\end{document}

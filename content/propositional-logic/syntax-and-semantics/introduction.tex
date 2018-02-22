@@ -1,0 +1,79 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{int}
+
+\olsection{Introduction}
+
+Propositional logic deals with !!{formula}s that are built from
+!!{propositional variable}s using the propositional connectives
+$\lnot$, $\land$, $\lor$, $\lif$, and $\liff$.  Intuitively,
+!!a{propositional variable}~$p$ stands for a sentence or proposition
+that is be true or false. Whenever the ``truth value'' of the
+!!{propositional variable} in !!a{formula} are determined, so is the
+truth value of any !!{formula}s formed from them using propositional
+connectives.  We say that propositional logic is \emph{truth
+  functional}, because its semantics is given by functions of truth
+values. In particular, in propositional logic we leave out of
+consideration any further determination of truth and falsity, e.g.,
+whether something is necessarily true rather than just contingently
+true, or whether something is known to be true, or whether something
+is true now rather than was true or will be true.  We only consider
+two truth values true ($\True$) and false ($\False$), and so exclude
+from discussion the possibility that a statement may be neither true
+nor false, or only half true. We also concentrate only on connectives where
+the truth value of !!a{formula} built from them is completely
+determined by the truth values of its parts (and not, say, on its
+meaning). In particular, whether the truth value of conditionals in
+English is truth functional in this sense is contentious. The material
+conditional~$\lif$ is; other logics deal with conditionals that are
+not truth functional.
+
+In order to develop the theory and metatheory of truth-functional
+propositional logic, we must first define the syntax and semantics of
+its expressions.  We will describe one way of constructing
+!!{formula}s from !!{propositional variable}s using the
+connectives. Alternative definitions are possible. Other systems will
+chose different symbols, will select different sets of connectives as
+primitive, will use parentheses differently (or even not at all, as in
+the case of so-called Polish notation).  What all approaches have in
+common, though, is that the formation rules define the set of
+!!{formula}s \emph{inductively}. If done properly, every expression
+can result essentially in only one way according to the formation
+rules.  The inductive definition resulting in expressions that are
+\emph{uniquely readable} means we can give meanings to these
+expressions using the same method---inductive definition.
+
+Giving the meaning of expressions is the domain of semantics.  The
+central concept in semantics for propositonal logic is that of
+satisfaction in !!a{valuation}. !!^a{valuation}~$\pAssign{v}$ assigns
+truth values $\True$, $\False$ to the !!{propositional variable}s. Any
+!!{valuation} determines a truth value $\pValue{v}{!A}$ for any
+!!{formula}~$!A$.  !!^a{formula} is satisfied in
+!!a{valuation}~$\pAssign{v}$ iff $\pValue{v}{!A} = \True$---we write
+this as $\pSat{v}{!A}$. This relation can also be defined by induction on
+the structure of~$!A$, using the truth functions for the logical
+connectives to define, say, satisfaction of $!A \land !B$ in terms of
+satisfaction (or not) of $!A$ and~$!B$.
+
+On the basis of the satisfaction relation $\pSat{v}{!A}$ for sentences
+we can then define the basic semantic notions of tautology,
+entailment, and satisfiability.  !!^a{formula} is a tautology,
+$\Entails !A$, if every !!{valuation} satisfies it, i.e.,
+$\pValue{v}{!A} = \True$ for any~$\pAssign{v}$. It is entailed by a
+set of !!{formula}s, $\Gamma \Entails !A$, if every !!{valuation} that
+satisfies all the !!{formula}s in~$\Gamma$ also satisfies~$!A$. And a
+set of !!{formula}s is satisfiable if some !!{valuation} satisfies all
+!!{formula}s in it at the same time.  Because !!{formula}s are
+inductively defined, and satisfaction is in turn defined by induction
+on the structure of !!{formula}s, we can use induction to prove
+properties of our semantics and to relate the semantic notions
+defined.
+
+
+\end{document}

@@ -6,7 +6,10 @@
 
 \begin{document}
 
-\olfileid{fol}{tab}{ptn}
+\iftag{FOL}
+      {\olfileid{fol}{tab}{ptn}}
+      {\olfileid{pl}{tab}{ptn}}
+      
 \olsection{Proof-Theoretic Notions}
 
 \begin{editorial}
@@ -20,8 +23,8 @@ Just as we've defined a number of important semantic notions
 \emph{proof-theoretic notions}.  These are not defined by appeal to
 satisfaction of !!{sentence}s in !!{structure}s, but by appeal to the
 existence of certain closed !!{tableau}x.  It was an important
-discovery, due to G\"odel, that these notions coincide.  That they do
-is the content of the \emph{completeness theorem}.
+discovery that these notions coincide.  That they do is the content of
+the \emph{soundness} and \emph{completeness theorems}.
 \end{explain}
 
 
@@ -144,9 +147,17 @@ $\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every
 Exercise.
 \end{proof}
 
+\tagprob{FOL}
 \begin{prob}
 Prove \olref[fol][tab][ptn]{prop:incons}
 \end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+Prove \olref[pl][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
 
 \begin{prop}[Compactness]
   \ollabel{prop:proves-compact}
