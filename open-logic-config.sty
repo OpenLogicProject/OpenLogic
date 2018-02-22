@@ -277,12 +277,12 @@
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \not\models #3 }
-        { \Struct #2, #4 \not\models #3}}{
+        { \Struct #2 \nvDash #3 }
+        { \Struct #2, #4 \nvDash #3}}{
     % not negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \models #3 }
-        { \Struct #2, #4 \models #3 }}
+        { \Struct #2 \vDash #3 }
+        { \Struct #2, #4 \vDash #3 }}
 }
 
 % ### The derivability relation
@@ -356,7 +356,7 @@
 
 % - `\pAssign{v}` - Typeset a truth-value assignment
 
-\DeclareDocumentCommand \pAssign { m } {\mathfrak{#1}}
+\DeclareDocumentCommand \pAssign { m } {\mathfrak #1}
 
 % - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
 
@@ -368,11 +368,10 @@
 \DeclareDocumentCommand \pSat { t{/} m m } {
   \IfBooleanTF{#1}{
     % negated
-        \pAssign #2 \not\models #3}{
+        \pAssign #2 \nvDash #3}{
     % not negated
-        \pAssign #2 \models #3}
+        \pAssign #2 \vDash #3}
 }
-
 
 % - `\substruct`: symbol for the substructure relation
 
@@ -558,18 +557,31 @@
 % Modal Logic 
 % -----------
 
-% - `\mSat{M}{!A}[w]`: modal satisfaction relation
+% Modal logic
+% ===========
+
+% - `\mModel{M}` - modal structures; default: set first token in
+% Fraktur
+
+\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
+
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$.
 
 \DeclareDocumentCommand \mSat { t{/} m m o } {
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \nVdash #3 }
-        { \Struct #2, #4 \nVdash #3}}{
+        { \mModel #2 \nVdash #3 }
+        { \mModel #2, #4 \nVdash #3}}{
     % not negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \Vdash #3 }
-        { \Struct #2, #4 \Vdash #3 }}
+        { \mModel #2 \Vdash #3 }
+        { \mModel #2, #4 \Vdash #3 }}
 }
 
 % - `\mClass{C}` --- typeset class of models
@@ -890,33 +902,6 @@
         { \mathrm{Sent}({\Lang #1}) }
 }
 
-% Modal logic
-% ===========
-
-% - `\mModel{M}` - modal structures; default: set first token in
-% Fraktur
-
-\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
-
-% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
-% model (at a world), is provided as the command
-% `\mSat` with two mandatory arguments (the model and the formula)
-% and one optional argument (the world).  Use `\mSat/` to create
-% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
-% $\mathfrak{M}, w \models \varphi$.
-
-\DeclareDocumentCommand \mSat { t{/} m m o } {
-  \IfBooleanTF{#1}{
-    % negated
-    \IfNoValueTF {#4} 
-        { \mModel #2 \nVdash #3 }
-        { \mModel #2, #4 \nVdash #3}}{
-    % not negated
-    \IfNoValueTF {#4} 
-        { \mModel #2 \Vdash #3 }
-        { \mModel #2, #4 \Vdash #3 }}
-}
-
 
 
 % Commands for uniform formulations
@@ -1235,6 +1220,10 @@
 \tagtrue{prfND}
 \tagtrue{prfAX}
 \tagtrue{prfTab}
+
+% - `FOL` - if true, we produce text for FOL, otherwise for PL
+
+\tagtrue{FOL}
 
 % - `cmplCCS` - prove completeness via generating a complete
 % consistent set

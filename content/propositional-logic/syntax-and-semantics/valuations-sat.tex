@@ -1,26 +1,26 @@
 % Part: propositional-logic
-% Chapter: propositional-logic
-% Section: semantics
+% Chapter: syntax-and-semantics
+% Section: valuations-sat
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{prp}{prp}{sem}
+\olfileid{pl}{syn}{val}
 
-\olsection{Semantics for Propositional Logic}
+\olsection{\usetoken{P}{valuation} and Satisfaction}
 
 \begin{defn}[!!^{valuation}s] 
 Let $\{\True, \False\}$ be the set of the two truth values, ``true''
-and ``false.'' A \emph{!!{valuation}} for $\Lang[L_0]$ is a
+and ``false.'' A \emph{!!{valuation}} for $\Lang{L_0}$ is a
 function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
 !!{propositional variable}s of the language, i.e., $\pAssign{v} \colon
 \PVar \to \{\True, \False \}$.
 \end{defn}
 
 \begin{defn}
-  Given a !!{valuation}~$v$, define the function $\pValue{v} \colon \Frm[L_0]
-  \to \{\True, \False \}$ inductively by:
+  Given a !!{valuation}~$v$, define the evaluation function
+  $\pValue{v} \colon \Frm[L_0] \to \{\True, \False \}$ inductively by:
   \begin{align*}
     \iftag{prvFalse}{\pValue{v}{\lfalse} & = \False; \\}{}
     \iftag{prvTrue}{\pValue{v}{\ltrue} & = \True; \\}{}
@@ -58,7 +58,7 @@ function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
 
 
 \begin{explain} 
-The !!{valuation} clauses the following truth tables:
+The !!{valuation} clauses correspond to the following truth tables:
 \begin{center}
 \begin{tabular}{|cc||c|c|c|c|} \hline 
 $!A$ & $!B$ & $!A \land !B$ & $!A \lor !B$ & $!A \lif !B$ & $!A \liff !B$\\ 
@@ -84,58 +84,57 @@ also agree on any~$!A$, i.e., $\pValue{v_1}{!A} = \pValue{v_2}{!A}$.
 By induction on $!A$. 
 \end{proof}
 
-\begin{defn} 
-Define the following semantic notions:
-\begin{enumerate} 
-\item !!^a{formula} $!A$ is \emph{satisfiable} if for
-  some~$\pAssign{v}$, $\pValue{v}{!A} = \True$; it is
-  \emph{unsatisfiable} if for no $\pAssign{v}$, $\pValue{v}{!A} =
-  \True$;
-\item !!^a{formula} $!A$ is a \emph{tautology} if $\pValue{v}{!A} =
-  \True$ for all !!{valuation}s~$v$;
-\item !!^a{formula} $!A$ is \emph{contingent} if it is satisfiable but
-  not a tautology;
-\item if $\Gamma$ is a set of !!{formula}s, $\Gamma \Entails !A$ (``$\Gamma$
-  entails $!A$'') if and only if $\pValue{v}{!A} = \True$ for every
-  !!{valuation}~$\pAssign{v}$ on which $\pValue{v}{!B} = \True$ for
-  every $!B \in \Gamma$.
-\item if $\Gamma$ is a set of !!{formula}s, $\Gamma$ is
-  \emph{satisfiable} if there is !!a{valuation}~$\pAssign{v}$ on which
-  $\pValue{v}{!B} = \True$ for every $!B \in \Gamma$, and $\Gamma$ is
-  unsatisfiable otherwise.
-\end{enumerate} 
+\begin{defn}[Satisfaction]
+\ollabel{defn:satisfaction} Using the evaluation function, we can
+define the notion of \emph{satisfaction of a !!{formula}~$!A$ by
+  !!a{valuation}~$\pAssign{v}$}, $\pSat{v}{!A}$, inductively as
+  follows. (We write $\pSat/{v}{!A}$ to mean ``not
+  $\pSat{v}{!A}$.'')
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{$\pSat/{v}{\indfrm}$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\pSat{v}{\indfrm}$.}}{}
+
+\item \indcase{!A}{\Obj p_i}{$\pSat{M}{\indfrm}$
+  iff $\pValue{v}{\Obj p_i} = \True$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\pSat{v}{\indfrm}$ iff
+    $\Sat/{v}{!B}$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\pSat{v}{\indfrm}$ iff $\pSat{v}{!B}$
+    and $\pSat{v}{!C}$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\pSat{v}{\indfrm}$ iff
+    $\pSat{v}{!A}$ or $\pSat{v}{!B}$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\pSat{v}{\indfrm}$ iff $\pSat/{v}{!B}$
+    or $\pSat{v}{!C}$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\pSat{v}{\indfrm}$ iff either both
+    $\pSat{v}{!B}$ and $\pSat{v}{!C}$, or neither $\pSat{v}{!B}$
+    nor $\pSat{v}{!C}$.}}{}
+\end{enumerate}
+If $\Gamma$ is a set of !!{formula}s, $\pSat{v}{\Gamma}$ iff
+$\pSat{v}{!A}$ for every~$!A \in \Gamma$.
 \end{defn}
 
-\begin{prop}
-\ollabel{prop:semanticalfacts} 
-The following can all be proved
-with little more than ``definition chasing'': 
-\begin{enumerate} 
-\item $!A$ is a tautology if and only if
-  $\emptyset \Entails !A$; 
-\item $\Gamma \Entails !A$ if and only if $\Gamma \cup \{ \lnot !A\}$
-  is unsatisfiable; 
-\item if $\Gamma \Entails !A$ and $\Gamma \Entails !A \lif !B$ then
-  $\Gamma \Entails !B$;
-\item if $\Gamma$ is satisfiable then every finite subset of $\Gamma$
-  is also satisfiable; 
-\item \ollabel{def:Monotony} Monotony: if $\Gamma \subseteq \Delta$
-  and $\Gamma \Entails !A$ then also $\Delta \Entails !A$;
-\item \ollabel{def:Cut} Cut: if $\Gamma \Entails !A$ and $\Delta \cup \{
-!A\} \Entails !B$ then $\Gamma \cup \Delta \Entails !B$; 
-\item
-\ollabel{def:DeductionTheorem} Semantic deduction theorem: $\Gamma
-\Entails !A \lif !B$ if and only if $\Gamma \cup \{!A\} \Entails
-!B$.
-\end{enumerate}
+\begin{prop}\ollabel{prop:sat-value}
+  $\pSat{v}{!A}$ iff $\pValue{v}{!A} = \True$.
 \end{prop}
 
 \begin{proof}
-Exercise.
+  By induction on~$!A$.
 \end{proof}
 
 \begin{prob}
-Prove \olref{prop:semanticalfacts}
+  Prove \olref[pl][syn][val]{prop:sat-value}
 \end{prob}
 
 \end{document}

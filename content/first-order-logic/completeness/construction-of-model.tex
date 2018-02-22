@@ -6,26 +6,34 @@
 
 \begin{document}
 
-\olfileid{fol}{com}{mod}
+\iftag{FOL}
+      {\olfileid{fol}{com}{mod}}
+      {\olfileid{pl}{com}{mod}}
 
 \olsection{Construction of a Model}
 
 \begin{explain}
-Right now we are not concerned about $\eq$, i.e., we only want to show
-that a consistent set~$\Gamma$ of !!{sentence}s not containing~$\eq$
-is satisfiable. We first extend~$\Gamma$ to a consistent,
-!!{complete}, and saturated set~$\Gamma^*$.  In this case, the
-definition of a model~$\Struct{M(\Gamma^*)}$ is simple: We take the
-set of closed terms of~$\Lang{L'}$ as the domain. We assign every
-!!{constant} to itself, and make sure that more generally, for every
-closed term~$t$, $\Value{t}{M(\Gamma^*)} = t$.  The !!{predicate}s are
-assigned extensions in such a way that an atomic !!{sentence} is true
-in $\Struct{M(\Gamma^*)}$ iff it is in~$\Gamma^*$.  This will
-obviously make all the atomic !!{sentence}s in~$\Gamma^*$ true in
-$\Struct{M(\Gamma^*)}$. The rest are true provided the $\Gamma^*$ we
-start with is consistent, complete, and saturated.
+\iftag{FOL}{Right now we are not concerned about $\eq$, i.e., we only
+  want to show that a consistent set~$\Gamma$ of !!{sentence}s not
+  containing~$\eq$ is satisfiable. We first extend~$\Gamma$ to a
+  consistent, !!{complete}, and saturated set~$\Gamma^*$.  In this
+  case, the definition of a model~$\Struct{M(\Gamma^*)}$ is simple: We
+  take the set of closed terms of~$\Lang{L'}$ as the domain. We assign
+  every !!{constant} to itself, and make sure that more generally, for
+  every closed term~$t$, $\Value{t}{M(\Gamma^*)} = t$.  The
+  !!{predicate}s are assigned extensions in such a way that an atomic
+  !!{sentence} is true in $\Struct{M(\Gamma^*)}$ iff it is
+  in~$\Gamma^*$.  This will obviously make all the atomic
+  !!{sentence}s in~$\Gamma^*$ true in $\Struct{M(\Gamma^*)}$. The rest
+  are true provided the $\Gamma^*$ we start with is consistent,
+  complete, and saturated.}{We are now ready to define !!a{valuation}
+  that makes all $!A \in \Gamma$ true. To do this, we first apply
+  Lindenbaum's Lemma: we get a complete consistent $\Gamma^* \supseteq
+  \Gamma$. We let the !!{propositional variable}s in~$\Gamma^*$
+  determine~$\pAssign v(\Gamma^*)$.}
 \end{explain}
 
+\iftag{FOL}{%
 \begin{defn}[Term model]
 \ollabel{defn:termmodel}
 Let $\Gamma^*$ be a !!{complete} and consistent,
@@ -51,7 +59,20 @@ defined as follows:
   \]
 \end{enumerate}
 \end{defn}
+}{%
+\begin{defn}
+\ollabel{defn:termmodel}
+Suppose $\Gamma^*$ is a complete consistent set of !!{formula}s. Then we let
+\[
+\pAssign v(\Gamma^*)(p) = \begin{cases}
+  \True & \text{if $p \in \Gamma^*$}\\
+  \False & \text{if $p \notin \Gamma^*$}
+  \end{cases}
+\]
+\end{defn}
+}
 
+\iftag{FOL}{%
 \begin{explain}
   \iftag{prvEx}{!!^a{structure}~$\Struct{M}$ may make an existentially
     quantified !!{sentence}~$\lexists[x][!A(x)]$ true without there
@@ -107,73 +128,88 @@ Let $\Struct M(\Gamma^*)$ be the term model of \olref{defn:termmodel}.
     since $!A(t)$ is a sentence.}}{}
 \end{tagenumerate}
 \end{proof}
+}{}
 
-\begin{probtag}{probEx,probAll}
+\tagprob[FOL]{probEx,probAll}
+\begin{prob}
 Complete the proof of \olref[fol][com][mod]{prop:quant-termmodel}.
-\end{probtag}
+\end{prob}
+\tagendprob
 
 \begin{lem}[Truth Lemma]
-\ollabel{lem:truth} Suppose $!A$ does not contain~$\eq$. Then
-$\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$.
+\ollabel{lem:truth} \iftag{FOL}{Suppose $!A$ does not contain~$\eq$. Then}{}
+$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$ iff $!A \in \Gamma^*$.
 \end{lem}
 
 \begin{proof}
 We prove both directions simultaneously, and by induction on $!A$.
 \begin{enumerate}
-\tagitem{prvFalse}{%
-  \indcase{!A}{\lfalse}{$\Sat/{M(\Gamma^*)}{\lfalse}$ by definition of
-    satisfaction. On the other hand, $\lfalse \notin \Gamma^*$ since
-    $\Gamma^*$ is consistent.}}{}
+\tagitem{prvFalse}{\indcase{!A}{\lfalse}
+  {$\iftag{FOL}{\Sat/{M(\Gamma^*)}{\lfalse}}{\pSat/{v(\Gamma^*)}{\lfalse}}$
+    by definition of satisfaction. On the other hand, $\lfalse \notin
+    \Gamma^*$ since $\Gamma^*$ is consistent.}}{}
 
-\tagitem{prvTrue}{%
-  \indcase{!A}{\ltrue}{$\Sat{M(\Gamma^*)}{\ltrue}$
-  by definition of satisfaction. On the other hand, $\ltrue \in
-  \Gamma^*$ since $\Gamma^*$ is consistent and !!{complete}, and
-  $\Gamma^* \Proves \ltrue$.}}{}
+\tagitem{prvTrue}{\indcase{!A}{\ltrue}
+  {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\ltrue}$
+    by definition of satisfaction. On the other hand, $\ltrue \in
+    \Gamma^*$ since $\Gamma^*$ is consistent and !!{complete}, and
+    $\Gamma^* \Proves \ltrue$.}}{}
 
-\item \indcase{!A}{R(t_1, \dots,
-  t_n)}{$\Sat{M(\Gamma^*)}{\Atom{R}{t_1, \dots, t_n}}$ iff
-  $\tuple{t_1, \dots, t_n} \in \Assign{R}{M(\Gamma^*)}$ (by the
-  definition of satisfaction) iff $R(t_1, \dots, t_n) \in \Gamma^*$
-  (by the construction of $\Struct M(\Gamma^*)$).}
+\tagitem{FOL}{\indcase{!A}{R(t_1, \dots, t_n)}
+  {$\Sat{M(\Gamma^*)}{\Atom{R}{t_1, \dots, t_n}}$ iff $\tuple{t_1,
+      \dots, t_n} \in \Assign{R}{M(\Gamma^*)}$ (by the definition of
+    satisfaction) iff $R(t_1, \dots, t_n) \in \Gamma^*$ (by the
+    construction of $\Struct
+    M(\Gamma^*)$).}}{\indcase{!A}{p}{$\pSat{v(\Gamma^*)}{p}$ iff
+    $\pAssign v(\Gamma^*)(p) = \True$ (by the definition of
+    satisfaction) iff $p \in \Gamma^*$ (by the construction of
+    $\pAssign v(\Gamma^*)$).}}
 
 \tagitem{prvNot}{%
-\indcase{!A}{\lnot !B}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff
-  $\Sat/{M(\Gamma^*)}{!B}$ (by definition of satisfaction). By
-  induction hypothesis, $\Sat/{M(\Gamma^*)}{!B}$ iff $!B \notin
-  \Gamma^*$. Since $\Gamma^*$ is consistent and !!{complete},
-  $!B \notin \Gamma^*$ iff $\lnot !B \in \Gamma^*$.}}{}
+  \indcase{!A}{\lnot !B}
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    iff $\Sat/{M(\Gamma^*)}{!B}$ (by definition of satisfaction). By
+    induction hypothesis, $\Sat/{M(\Gamma^*)}{!B}$ iff $!B \notin
+    \Gamma^*$. Since $\Gamma^*$ is consistent and !!{complete}, $!B
+    \notin \Gamma^*$ iff $\lnot !B \in \Gamma^*$.}}{}
 
 \tagitem{prvAnd}{%
 \iftag{probAnd}{%
-\indcase!{!A}{!B \land !C}{}}{%
-\indcase{!A}{!B \land !C}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff we have
-  both $\Sat{M(\Gamma^*)}{!B}$ and $\Sat{M(\Gamma^*)}{!C}$ (by
-  definition of satisfaction) iff both $!B \in \Gamma^*$ and $!C \in
-  \Gamma^*$ (by the induction hypothesis). By
-  \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-and}, this is the case iff
-  $(!B \land !C) \in \Gamma^*$.}}}{}
+  \indcase!{!A}{!B \land !C}{}}{%
+  \indcase{!A}{!B \land
+    !C}{$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    iff we have both
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!B}$ and
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ (by
+    definition of satisfaction) iff both $!B \in \Gamma^*$ and $!C \in
+    \Gamma^*$ (by the induction hypothesis). By
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-and}, this is the case
+    iff $(!B \land !C) \in \Gamma^*$.}}}{}
 
 \tagitem{prvOr}{%
 \iftag{probOr}{%
-\indcase!{!A}{!B \lor !C}{}}{%
-\indcase{!A}{!B \lor !C}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff at
-  $\Sat{M(\Gamma^*)}{!B}$ or $\Sat{M(\Gamma^*)}{!C}$ (by definition of
-  satisfaction) iff $!B \in \Gamma^*$ or $!C \in \Gamma^*$ (by
-  induction hypothesis). This is the case iff $(!B \lor !C) \in
-  \Gamma^*$ (by
-  \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-or}).}}}{}
-
+  \indcase!{!A}{!B \lor !C}{}}{%
+  \indcase{!A}{!B \lor !C}
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    iff at $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!B}$ or
+    $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ (by
+    definition of satisfaction) iff $!B \in \Gamma^*$ or $!C \in
+    \Gamma^*$ (by induction hypothesis). This is the case iff $(!B
+    \lor !C) \in \Gamma^*$ (by
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-or}).}}}{}
+  
 \tagitem{prvIf}{%
 \iftag{probIf}{%
-\indcase!{!A}{!B \lif !C}{}}{%
-\indcase{!A}{!B \lif !C}{$\Sat{M(\Gamma^*)}{\indfrm}$ iff
-  $\Sat/{M(\Gamma^*}{!B}$ or $\Sat{M (\Gamma^*)}{!C}$ (by definition
-  of satisfaction) iff $!B \notin \Gamma^*$ or $!C \in \Gamma^*$ (by
-  induction hypothesis). This is the case iff $(!B \lif !C) \in
-  \Gamma^*$ (by
-  \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-if}).}}}{}
+  \indcase!{!A}{!B \lif !C}{}}{%
+  \indcase{!A}{!B \lif !C}
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
+    iff $\Sat/{M(\Gamma^*)}{!B}$ or $\Sat{M (\Gamma^*)}{!C}$ (by
+    definition of satisfaction) iff $!B \notin \Gamma^*$ or $!C \in
+    \Gamma^*$ (by induction hypothesis). This is the case iff $(!B
+    \lif !C) \in \Gamma^*$ (by
+    \olref[ccs]{prop:ccs}\olref[ccs]{prop:ccs-if}).}}}{}
 
+\iftag{FOL}{%
 \tagitem{prvAll}{%
   \iftag{probAll}{%
     \indcase!{!A}{\lforall[x][!B(x)]}{}}{%
@@ -193,11 +229,25 @@ We prove both directions simultaneously, and by induction on $!A$.
       is the case iff $!B(t) \in \Gamma^*$ for at least one term~$t$.
       By \olref[hen]{prop:saturated-instances}, this in turn is the
       case iff $\lexists[x][!A(x)] \in \Gamma^*$.}}}{}
+}{}
 \end{enumerate}
 \end{proof}
 
-\begin{probtag}{probOr,probAnd,probIf,probEx,probAll}
+
+\tagprob[FOL]{probOr,probAnd,probIf,probEx,probAll}
+
+\begin{prob}
 Complete the proof of \olref[fol][com][mod]{lem:truth}.
-\end{probtag}
+\end{prob}
+
+\tagendprob
+
+\tagprob[notFOL]{probOr,probAnd,probIf}
+
+\begin{prob}
+Complete the proof of \olref[pl][com][mod]{lem:truth}.
+\end{prob}
+
+\tagendprob
 
 \end{document}

@@ -69,7 +69,8 @@ Text
 
 \olimport*[sets-functions-relations]{sets-functions-relations}
 
-% you can also import individual chapters
+% you can also import individual chapters, but then don't forget to
+% include part headings
 
 \part{First-order Logic}
 
@@ -77,41 +78,65 @@ Text
 
 \olimport*[first-order-logic/models-theories]{models-theories}
 
-% we leave out the sequent calculus, just do natural deduction
+% For a proof system, we'll do only natural deduction. But some of the
+% texts will refer to other proof systems unless you set some tags in
+% the config.sty file.  So make sure those are set. We'll include
+% these sections by hand so we can add a couple of sections from the
+% proof-systems chapter. Of course, if new sections are added or
+% sections are moved or renamed in the main repository, this may
+% break.
 
-\olimport*[first-order-logic/natural-deduction]{natural-deduction}
+\chapter{Natural Deduction}
 
-\olimport*[first-order-logic/completeness]{completeness}
+\olimport*[first-order-logic/proof-systems]{introduction}
 
-% This allows you to leave out individual chapters, e.g.:
+\olimport*[first-order-logic/proof-systems]{natural-deduction}
 
-% \olimport*[first-order-logic/beyond]{beyond}
+\olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
 
-% But you can even import individual sections, in case you want to
-% rearrange them or add text
+\olimport*[first-order-logic/natural-deduction]{propositional-rules}
 
-\chapter{Beyond First-order Logic}
+% We'll reorder things: let's do propositional examples first and then
+% go back to quantifiers
 
-\olimport*[first-order-logic/beyond]{introduction}
+\olimport*[first-order-logic/natural-deduction]{derivations}
 
-\olimport*[first-order-logic/beyond]{many-sorted-logic}
+\olimport*[first-order-logic/natural-deduction]{proving-things}
 
-\olimport*[first-order-logic/beyond]{second-order-logic}
+\olimport*[first-order-logic/natural-deduction]{quantifier-rules}
 
-\olimport*[first-order-logic/beyond]{higher-order-logic}
+\olimport*[first-order-logic/natural-deduction]{proving-things-quant}
 
-\olimport*[first-order-logic/beyond]{intuitionistic-logic}
+\olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
 
-\olimport*[first-order-logic/beyond]{modal-logics}
+\olimport*[first-order-logic/natural-deduction]{provability-consistency}
 
-\olimport*[first-order-logic/beyond]{other-logics}
+\olimport*[first-order-logic/natural-deduction]{provability-propositional}
 
-% OLEndChapterHook and OLEndPartHook should come at the end of each
-% chapter/part.
+\olimport*[first-order-logic/natural-deduction]{provability-quantifiers}
+
+\olimport*[first-order-logic/natural-deduction]{soundness}
+
+\olimport*[first-order-logic/natural-deduction]{identity}
+
+\olimport*[first-order-logic/natural-deduction]{soundness-identity}
+
+% Chapters should end with \OLEndChapterHook. They will automatically
+% if you include entire parts or chapters. Here we did a chapter ``by
+% hand'' so we should add \OLEndChapterHook by hand too
 
 \OLEndChapterHook
 
+\olimport*[first-order-logic/completeness]{completeness}
+
+\olimport*[first-order-logic/beyond]{beyond}
+
+% OLEndPartHook should come at the end of each
+% part.
+
 \OLEndPartHook
+
+% Include some more chapters and parts
 
 \olimport*[turing-machines]{turing-machines}
 
@@ -128,25 +153,41 @@ Text
 \olimport*[incompleteness/representability-in-q]{representability-in-q}
 
 % leave out this part -- it depends on computability theory chapter
-% \olimport[theories-computability]{theories-computability}
+% \olimport[incompleteness/theories-computability]{theories-computability}
 
 \olimport*[incompleteness/incompleteness-provability]{incompleteness-provability}
 
 \OLEndPartHook
 
-\end{document}
-
 \stopproblems
+
+% Ok, that's it. Now for the appendices
+
+\appendix
+
+\olimport*[methods]{methods}
+
+\olimport*[history]{history}
 
 % now typeset all the problems as an appendix. If you want problems at
 % the end of each chapter, delete this part and put
 % \problemsperchapter in the preamble
 
-\backmatter
-
 \chapter{Problems}
 
 \printproblems
+
+\backmatter
+
+% If you include any chapters from the history part, you have to print
+% the Photo Credits. 
+
+\photocredits
+
+% Include the bibliography
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic}
 
 \end{document}
 

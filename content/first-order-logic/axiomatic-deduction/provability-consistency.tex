@@ -6,7 +6,10 @@
 
 \begin{document}
 
-\olfileid{fol}{axd}{prv}
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prv}}
+      {\olfileid{pl}{axd}{prv}}
+
 \olsection{\usetoken{S}{derivability} and Consistency}
 
 We will now establish a number of properties of the !!{derivability}
@@ -74,9 +77,17 @@ inconsistent.
 Exercise.
 \end{proof}
 
+\tagprob{FOL}
 \begin{prob}
   Prove \olref[fol][axd][prv]{prop:provability-exhaustive}
 \end{prob}
-    
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  Prove \olref[pl][axd][prv]{prop:provability-exhaustive}
+\end{prob}
+\tagendprob
+
 
 \end{document}

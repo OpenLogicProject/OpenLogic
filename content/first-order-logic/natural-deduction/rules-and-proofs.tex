@@ -6,7 +6,9 @@
 
 \begin{document}
 
-\olfileid{fol}{ntd}{rul}
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{rul}}
+      {\olfileid{pl}{ntd}{rul}}
 
 \olsection{Rules and \usetoken{P}{derivation}}
 
@@ -15,9 +17,10 @@ Natural deduction systems are meant to closely parallel the informal
 reasoning used in mathematical proof (hence it is somewhat
 ``natural''). Natural deduction proofs begin with assumptions.
 Inference rules are then applied. Assumptions are ``!!{discharged}''
-by the \Intro{\lnot}, \Intro{\lif}, \Elim{\lor} and \Elim{\lexists}
-inference rules, and the label of the !!{discharged} assumption is
-placed beside the inference for clarity.
+by the \Intro{\lnot}, \Intro{\lif}, \iftag{FOL}{\Elim{\lor} and
+  \Elim{\lexists}}{ and \Elim{\lor}} inference rules, and the label of
+the !!{discharged} assumption is placed beside the inference for
+clarity.
 \end{explain}
 
 \begin{defn}[Initial !!^{formula}]

@@ -6,7 +6,39 @@
 
 \part{Propositional Logic}
 
+\begin{editorial}
+  This part contains material on classical propositional logic. The
+  first chapter is relatively rudimenatry and just lists definitions
+  and results, many proofs are not carried out but are left as
+  exercises. The material on proof systems and the completeness
+  theorem is included from the part on first-order logic, with the
+  ``FOL'' tag set to false. This leaves out everything related to
+  predicates, terms, and quantifiers, and replaces talk of
+  !!{structure}s~$\Struct{M}$ with talk about
+  !!{valuation}s~$\pAssign{v}$.
+
+  It is planned to expand this part to include
+  more detail, and to add further topics and results, such as
+  truth-functional completeness.
+\end{editorial}
+
 \olimport[syntax-and-semantics]{syntax-and-semantics}
+
+\tagfalse{FOL}
+
+\olimport[../first-order-logic/proof-systems]{proof-systems}
+
+\iftag{prfSC}{\olimport[../first-order-logic/sequent-calculus]{sequent-calculus}}{}
+
+\iftag{prfND}{\olimport[../first-order-logic/natural-deduction]{natural-deduction}}{}
+
+\iftag{prfTab}{\olimport[../first-order-logic/tableaux]{tableaux}}{}
+
+\iftag{prfAX}{\olimport[../first-order-logic/axiomatic-deduction]{axiomatic-deduction}}
+
+\olimport[../first-order-logic/completeness]{completeness}
+
+\tagtrue{FOL}
 
 \OLEndPartHook
 

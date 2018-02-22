@@ -7,14 +7,29 @@
 % we're compiling from example directory
 \newcommand{\olpath}{../../}
 
-\usepackage[mark]{gitinfo2}
+\usepackage{gitinfo2}
 
 \input{\olpath sty/open-logic.sty}
 \input{\olpath sty/open-logic-defer.sty}
 
-\title{OLP: Example \`a la Enderton}
+\problemsperchapter
+
+\title{An Open Mathematical Introduction to Logic\\
+Example OLP Text \`a la Enderton}
+
 \author{Open Logic Project}
-\date{Revision\gitVtags: \gitAbbrevHash{} (\gitAuthorDate)}
+\date{\shortollicense}
+
+% sections start with section symbol
+\setsecnumformat{\S\csname the#1\endcsname\quad}
+
+% section numbering starts with 0
+\appto{\memendofchapterhook}{\setcounter{section}{-1}}
+
+% Problems are numbered per chapter
+\renewcommand*{\theprobd}{\arabic{probd}}
+
+\pagestyle{giruled}
 
 \begin{document}
 
@@ -22,7 +37,13 @@
 
 \tableofcontents*
 
+\olimport*[propositional-logic]{propositional-logic}
+
 \olimport*[first-order-logic]{first-order-logic}
+
+\olimport*[computability]{computability}
+
+\olimport*[incompleteness]{incompleteness}
 
 \end{document}
 

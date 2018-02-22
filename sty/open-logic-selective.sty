@@ -122,5 +122,15 @@
 
 \def\startycommalist{\def\ycomma{\def\ycomma{, }}}
 
+\def\saveprob{\global\let\oldprob\prob
+  \global\let\oldendprob\endprob}
+\def\killprob{\global\let\prob\comment
+  \global\let\endprob\endcomment}
+\def\restoreprob{\global\let\prob\oldprob
+  \global\let\endprob\oldendprob}
+
+\newcommand{\tagprob}[2][tagTrue]{\saveprob\iftag{#1}{\iftag{#2}{}{\killprob}}{\killprob}}
+\newcommand{\tagendprob}{\restoreprob}
+
 \makeatother
 
