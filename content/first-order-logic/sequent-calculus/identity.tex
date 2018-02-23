@@ -10,37 +10,36 @@
 
 \olsection{\usetoken{P}{derivation} with \usetoken{S}{identity}}
 
-!!^{derivation}s with the !!{identity} require additional inference rules.
+!!^{derivation}s with !!{identity} require additional initial sequents
+and inference rules.
 
-\paragraph{Initial sequents for $\eq$:}
-
+\begin{defn}[Initial sequents for $\eq$]
 If $t$ is a closed term, then ${} \Sequent \eq[t][t]$ is an initial sequent.
+\end{defn}
 
-\paragraph{Rules for $\eq$:}
+The rules for $\eq$ are ($t_1$ and $t_2$ are closed terms):
 
-\[
-\Axiom$ \Gamma, \eq[t_1][t_2] \fCenter \Delta, !A(t_1) $
+\begin{defish}
+\Axiom$ \eq[t_1][t_2], \Gamma \fCenter \Delta, !A(t_1) $
 \RightLabel{$\eq$}
-\UnaryInf$ \Gamma, \eq[t_1][t_2] \fCenter \Delta, !A(t_2)$
+\UnaryInf$\eq[t_1][t_2], \Gamma \fCenter \Delta, !A(t_2)$
 \DisplayProof
-\quad
-\textrm{  and  }
-\quad
-\Axiom$ \Gamma, \eq[t_1][t_2] \fCenter \Delta, !A(t_2) $
+\hfill
+\Axiom$\eq[t_1][t_2], \Gamma \fCenter \Delta, !A(t_2) $
 \RightLabel{$\eq$}
-\UnaryInf$ \Gamma, \eq[t_1][t_2] \fCenter \Delta, !A(t_1)$
+\UnaryInf$\eq[t_1][t_2], \Gamma  \fCenter \Delta, !A(t_1)$
 \DisplayProof
-\]
-where $t_1$ and $t_2$ are closed terms.
+\end{defish}
 
 \begin{ex}
-If $s$ and $t$ are ground terms, then $!A(s), \eq[s][t] \Proves[\Log{LK}] !A(t)$:
+If $s$ and $t$ are closed terms, then $\eq[s][t], !A(s)
+\Proves !A(t)$:
 \begin{prooftree}
 \Axiom$ !A(s) \fCenter !A(s)$
 \RightLabel{\LeftR{\Weakening}}
-\UnaryInf$ !A(s), \eq[s][t] \fCenter !A(s)$
+\UnaryInf$\eq[s][t], !A(s)  \fCenter !A(s)$
 \RightLabel{$\eq$}
-\UnaryInf$ !A(s), \eq[s][t] \fCenter !A(t)$
+\UnaryInf$\eq[s][t], !A(s)  \fCenter !A(t)$
 \end{prooftree}
 This may be familiar as the principle of substitutability of
 identicals, or Leibniz' Law.
@@ -56,53 +55,25 @@ $\Log{LK}$ proves that $\eq$ is symmetric and transitive:
 \qquad
 \Axiom$ \eq[t_1][t_2] \fCenter \eq[t_1][t_2] $
 \RightLabel{\LeftR{\Weakening}}
-\UnaryInf$ \eq[t_1][t_2], \eq[t_2][t_3] \fCenter \eq[t_1][t_2] $
+\UnaryInf$\eq[t_2][t_3], \eq[t_1][t_2]  \fCenter \eq[t_1][t_2] $
 \RightLabel{$\eq$}
-\UnaryInf$ \eq[t_1][t_2], \eq[t_2][t_3] \fCenter \eq[t_1][t_3]$
+\UnaryInf$\eq[t_2][t_3], \eq[t_1][t_2]  \fCenter \eq[t_1][t_3]$
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$\eq[t_1][t_2], \eq[t_2][t_3]  \fCenter \eq[t_1][t_3]$
 \DisplayProof
 \]
-In the proof on the left, the !!{formula}~$\eq[x][t_1]$ is our $!A(x)$. On the 
-right, we take $!A(x)$ to be $\eq[t_1][x]$.
+In the proof on the left, the !!{formula}~$\eq[x][t_1]$ is our
+$!A(x)$. On the right, we take $!A(x)$ to be~$\eq[t_1][x]$.
 \end{ex}
 
 \begin{prob}
 Give !!{derivation}s of the following sequents:
 \begin{enumerate}
 \item $\Sequent \lforall[x][\lforall[y][((x = y \land !A(x)) \lif !A(y))]]$
-\item $\lexists[x][!A(x)] \land \lforall[y][\lforall[z][((!A(y) \land !A(z)) \lif y = z)]] \Sequent {}$\\
-\hskip 1em$\lexists[x][(!A(x) \land \lforall[y][(!A(y) \lif y = x)])]$
+\item $\lexists[x][!A(x)] \land \lforall[y][\lforall[z][((!A(y) \land
+    !A(z)) \lif y = z)]] \Sequent 
+\lexists[x][(!A(x) \land \lforall[y][(!A(y) \lif y = x)])]$
 \end{enumerate}
 \end{prob}
-
-\begin{prop}
-$\Log{LK}$ with initial sequents and rules for identity is sound.
-\end{prop}
-
-\begin{proof}
-Initial sequents of the form ${} \Sequent \eq[t][t]$ are valid, since
-for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
-we assume the term $t$ to be ground, i.e., it contains no variables,
-so variable assignments are irrelevant).
-
-Suppose the last inference in a !!{derivation} is $=$. Then the
-premise $\Gamma' \Sequent \Delta'$ contains $\eq[t_1][t_2]$ on the left
-and $!A(t_1)$ on the right, and the conclusion is $\Gamma \Sequent
-\Delta$ where $\Gamma = \Gamma'$ and $\Delta = (\Delta' \setminus
-\{!A(t_1)\}) \cup \{!A(t_2)\}$. Consider a !!{structure}~$\Struct
-M$. Since, by induction hypothesis, the premise $\Gamma' \Sequent
-\Delta'$ is valid, either (a) for some $!E \in \Gamma'$,
-$\Sat/{M}{!E}$, (b) for some $!E \in \Delta' \setminus \{!A(s)\}$,
-$\Sat{M}{!E}$, or (c) $\Sat{M}{!A(t_1)}$. In both cases cases (a) and
-(b), since $\Gamma = \Gamma'$, and $\Delta' \setminus \{!A(s)\}
-\subseteq \Delta$, $\Struct M$ satisfies $\Gamma \Sequent \Delta$. So
-assume cases (a) and (b) do not apply, but case (c) does. If (a) does
-not apply, $\Sat{M}{!E}$ for all $!E \in \Gamma'$, in particular,
-$\Sat{M}{\eq[t_1][t_2]}$. Therefore, $\Value{t_1}{M} = \Value{t_2}{M}$. Let
-$s$ be any variable assignment, and $s'$ be the $x$-variant given by
-$s'(x) = \Value{t_1}{M} = \Value{t_2}{M}$. By
-\olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_2)}[s]$ iff
-$\Sat{M}{!A(x)}[s']$ iff $\Sat{M}{!A(t_1)}[s]$. Since $\Sat{M}{!A(t_1)}$
-therefore $\Sat{M}{!A(t_2)}$.
-\end{proof}
 
 \end{document}

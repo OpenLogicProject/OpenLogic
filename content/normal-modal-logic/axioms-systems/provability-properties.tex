@@ -1,0 +1,48 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: provability-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{prp}
+
+\olsection{Properties of \usetoken{S}{derivability}}
+
+\begin{prop}\ollabel{prop:derivabilityfacts}
+  Let $\Sigma$ be a modal system and $\Gamma$ a set of modal
+  !!{formula}s. The following properties hold:
+  \begin{enumerate}
+  \item \emph{Monotony}: If $\Gamma \Proves[\Sigma] !A$ and $\Gamma \subseteq
+    \Delta$ then $\Delta \Proves[\Sigma] !A$;
+  \item \emph{Reflexivity}: If $!A \in \Gamma$ then $\Gamma
+    \Proves[\Sigma] !A$;
+    \item \emph{Cut}: If $\Gamma \Proves[\Sigma] !A$ and $\Delta \cup
+      \{!A\} \Proves[\Sigma] !B$ then $\Gamma \cup \Delta
+      \Proves[\Sigma] !B$;
+    \item \emph{Deduction theorem}: $\Gamma \cup \{!B\}
+      \Proves[\Sigma] !A$ if and only if $\Gamma \Proves[\Sigma] !B
+      \lif !A$;
+    \item \ollabel{prop:derivabilityfacts-ruleT}%
+      \emph{Rule T}: If $\Gamma \Proves[\Sigma] !A_1$ and
+      \dots and $\Gamma \Proves[\Sigma] !A_n$ and $!A_1 \to
+      (!A_2 \lif \cdots (!A_n \lif !B)\cdots)$ is a
+      tautological instance, then $\Gamma \Proves[\Sigma] !B$.
+  \end{enumerate}
+\end{prop}
+
+The proof is an easy exercise. Part
+\olref{prop:derivabilityfacts-ruleT} of \olref{prop:derivabilityfacts}
+gives us that, for instance, if $\Gamma \Proves[\Sigma] !A \lor !B$
+and $\Gamma \Proves[\Sigma] \lnot !A$, then $\Gamma \Proves[\Sigma]
+!B$. Also, in what follows, we write $\Gamma, !A \Proves[\Sigma] !B$
+instead of $\Gamma \cup \{ !A\} \Proves[\Sigma] !B$.
+
+\begin{defn}
+  A set $\Gamma$ is \emph{deductively closed} relatively to a system
+  $\Sigma$ if and only if $\Gamma \Proves[\Sigma] !A$ implies
+  $!A \in \Gamma$.
+\end{defn}
+
+\end{document}

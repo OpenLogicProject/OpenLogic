@@ -1,0 +1,100 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{ide}
+
+\olsection{\usetoken{P}{tableau} with \usetoken{S}{identity}}
+
+!!^{tableau}s with !!{identity} require additional inference rules.
+The rules for $\eq$ are ($t$, $t_1$, and $t_2$ are closed terms):
+
+\begin{defish}
+\AxiomC{}
+\RightLabel{$\eq$}
+\UnaryInfC{\sFmla{\True}{\eq[t][t]}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!A(t_1)}}
+\RightLabel{$\TRule{\True}{\eq}$}
+\UnaryInfC{\sFmla{\True}{!A(t_1)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!A(t_1)}}
+\RightLabel{$\TRule{\True}{\eq}$}
+\UnaryInfC{\sFmla{\False}{!A(t_1)}}
+\DisplayProof
+\end{defish}
+Note that in contrast to all the other rules, $\TRule{\True}{\eq}$ and
+$\TRule{\False}{\eq}$ require that \emph{two} signed !!{formula}s
+already appear on the branch, namely both $\sFmla{\True}{\eq[t_1][t_2]}$
+and $\sFmla{S}{!A(t_1)}$.
+
+\begin{ex}
+If $s$ and $t$ are closed terms, then $\eq[s][t], !A(s)
+\Proves !A(t)$:
+\begin{oltableau}
+  [\sFmla{\False}{\formula{A}(t)}, just = \TAss
+    [\sFmla{\True}{\eq[s][t]}, just = \TAss
+      [\sFmla{\True}{\formula{A}(s)}, just = \TAss
+        [\sFmla{\True}{\formula{A}(t)}, just={\TRule{\True}{\eq}[2, 3]}, close]
+      ]
+    ]
+  ]
+\end{oltableau}
+This may be familiar as the principle of substitutability of
+identicals, or Leibniz' Law.
+
+!!^{tableau}s prove that $\eq$ is symmetric:
+\begin{oltableau}
+  [\sFmla{\False}{\eq[t][s]}, just = \TAss
+    [\sFmla{\True}{\eq[s][t]}, just = \TAss
+      [\sFmla{\True}{\eq[s][s]}, just = {$\eq$}
+        [\sFmla{\True}{\eq[t][s]}, just = {\TRule{\True}{\eq}[2, 3]}, close]
+      ]
+    ]
+  ]
+\end{oltableau}
+Here, line $2$ is the first prerequisite
+!!{formula}~$\sFmla{\True}{\eq[s][t]}$ of $\TRule{\True}{\eq}$, and
+line~$3$ the second one, $\sFmla{\True}{!A(s)}$---think of $!A(x)$ as
+$\eq[x][s]$, then $!A(s)$ is $\eq[s][s]$ and $!A(t)$ is $\eq[t][s]$.
+
+They also prove that $\eq$ is transitive:
+\begin{oltableau}
+  [\sFmla{\False}{\eq[t_1][t_3]}, just = \TAss
+    [\sFmla{\True}{\eq[t_1][t_2]}, just = \TAss
+      [\sFmla{\True}{\eq[t_2][t_3]}, just = \TAss
+        [\sFmla{\True}{\eq[t_1][t_3]}, just = {\TRule{\True}{\eq}[3, 2]}, close]
+      ]
+    ]
+  ]
+\end{oltableau}
+In this !!{tableau}, the first prerequisite !!{formula} of
+$\TRule{\True}{\eq}$ is line~$3$, $\sFmla{\True}{\eq[t_2][t_3]}$. The
+second one, $\sFmla{\True}{!A(t_2)}$ is line~$2$. Think of $!A(x)$ as
+$\eq[t_1][x]$; that makes $!A(t_2)$ into $\eq[t_1][t_2]$ and $!A(t_3)$
+into $\eq[t_1][t_3]$.
+\end{ex}
+
+\begin{prob}
+Give closed !!{tableau}s for the following:
+\begin{enumerate}
+\item $\sFmla{\False}{\lforall[x][\lforall[y][((x = y \land !A(x))
+      \lif !A(y))]]}$
+\item $\sFmla{\False}{\lexists[x][(!A(x) \land
+    \lforall[y][(!A(y) \lif y = x)])]}$,\\
+  $\sFmla{\True}{\lexists[x][!A(x)] \land
+    \lforall[y][\lforall[z][((!A(y) \land !A(z)) \lif y = z)]]}$
+\end{enumerate}
+\end{prob}
+
+\end{document}

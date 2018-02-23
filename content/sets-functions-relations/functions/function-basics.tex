@@ -11,25 +11,38 @@
 \olsection{Basics}
 
 \begin{explain}
-A \emph{function} is a mapping of which pairs each object of a given
-set with a unique partner. For instance, the operation of adding~$1$
-defines a function: each number~$n$ is paired with a unique
-number~$n+1$. More generally, functions may take pairs, triples, etc.,
-of inputs and returns some kind of output. Many functions are familiar
-to us from basic arithmetic. For instance, addition and multiplication
-are functions. They take in two numbers and return a third.  In this
-mathematical, abstract sense, a function is a \emph{black box}: what
-matters is only what output is paired with what input, not the method
-for calculating the output.
+A \emph{function} is a mapping which pairs each object of a given
+set with a single partner in another set. For instance, the operation
+of adding~$1$ defines a function: each number~$n$ is paired with a
+unique number~$n+1$. More generally, functions may take pairs,
+triples, etc., of inputs and returns some kind of output. Many
+functions are familiar to us from basic arithmetic. For instance,
+addition and multiplication are functions. They take in two numbers
+and return a third.  In this mathematical, abstract sense, a function
+is a \emph{black box}: what matters is only what output is paired with
+what input, not the method for calculating the output.
 \end{explain}
 
 \begin{defn}[Function]
 A \emph{function} $f \colon X \to Y$ is a mapping of each !!{element}
 of~$X$ to an !!{element} of~$Y$. We call $X$ the \emph{domain} of~$f$
-and $Y$ the \emph{codomain} of~$f$. The \emph{range} $\ran{f}$ of~$f$
-is the subset of the codomain that is actually output by $f$ for some
-input.
+and $Y$ the \emph{codomain} of~$f$.  The !!{element}s of~$X$ are
+called inputs or \emph{arguments} of~$f$, and the !!{element} of~$Y$
+that is paired with an argument~$x$ by~$f$ is called the \emph{value
+  of~$f$} for argument~$x$, written~$f(x)$.
+
+The \emph{range} $\ran{f}$ of~$f$ is the subset of the codomain
+consisting of the values of~$f$ for some argument; $\ran{f} =
+\Setabs{f(x)}{x \in X}$.
 \end{defn}
+
+\begin{figure}
+  \centerline{\includegraphics[width=\olphotowidth]
+    {\olpath/assets/diagrams/function.tikz}}
+  \caption{A function is a mapping of each !!{element} of one set to
+    !!a{element} of another. An arrow points from an argument in the
+    domain to the corresponding value in the codomain.}
+\end{figure}
 
 \begin{ex}
 Multiplication takes pairs of natural numbers as inputs and maps them
@@ -50,7 +63,15 @@ their final grade is a function---no student can get two different
 final grades in the same class. The relation that pairs each student
 in a class with their parents is not a function---generally each
 student will have at least two parents.
+
+We can define functions by specifying in some precise way what the
+value of the function is for every possible argment. Different ways of
+doing this are by giving a formula, describing a method for computing
+the value, or listing the values for each argument. However functions
+are defined, we must make sure that for each argment we specify one,
+and only one, value.
 \end{explain}
+
 
 \begin{ex}
 Let $f \colon \Nat \to \Nat$ be defined such that $f(x) = x+1$. This
@@ -92,7 +113,8 @@ h(x) =
 Since every natural number is either even or odd, the output of this
 function will always be a natural number. Just remember that if you
 define a function by cases, every possible input must fall into
-exactly one case.
+exactly one case.  In some cases, this will require a a proof that the
+cases are exhaustive and exclusive.
 \end{ex}
 
 \end{document}

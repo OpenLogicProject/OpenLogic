@@ -9,11 +9,25 @@
 \olfileid{cmp}{rec}{bmi}
 \olsection{Bounded Minimization}
 
+\begin{explain}
+It is often useful to define a function as the least number satisfying
+some property or relation~$P$. If $P$ is decidable, we can compute
+this function simply by trying out all the possible numbers, $0$, $1$,
+$2$, \dots, until we find the least one satisfying~$P$.  This kind of
+unbounded search takes us out of the realm of primitive recursive
+functions. However, if we're only interested in the least number
+\emph{less than some indipendently given bound}, we stay primitive
+recursive. In other words, and a bit more generally, suppose we have a
+primitive recursive relation~$R(x,z)$. Consider the function that maps
+$y$ and~$z$ to the least $x < y$ such that $R(x, z)$. It, too, can be
+computed, by testing whether $R(0,z)$, $R(1, z)$, \dots, $R(y-1,z)$.
+But why is it primitive recursive?
+\end{explain}
 
 \begin{prop}
 If $R(x, \vec z)$ is primitive recursive, so is the function $m_R(y,
-\vec{z})$ which returns the least~$x$ less than $y$ such that
-$R(x,\vec{z})$ holds, if there is one, and 0 otherwise.  We will write
+\vec{z})$ which returns the least~$x$ less than~$y$ such that
+$R(x,\vec{z})$ holds, if there is one, and $0$ otherwise.  We will write
 the function~$m_R$ as
 \[
 \bmin{x < y}{R(x, \vec{z})},
@@ -33,7 +47,7 @@ $m_R(y+1, \vec{z}) = y$. (c) There is no $x < y+1$ such that $R(x,
 m_R(0, \vec{z}) & = 0\\
 m_R(y+1, \vec{z}) & =
 \begin{cases}
-m_R(y, \vec{z}) & \text{if $\lexists[x < y][R(x, \vec{z})]$} \\
+m_R(y, \vec{z}) & \text{if $\bexists{x < y}{R(x, \vec{z})}$} \\
 y & \text{otherwise, provided $R(y, \vec{z})$}\\
 0 & \text{otherwise.}
 \end{cases}
@@ -53,37 +67,11 @@ z)$. As with bounded quantification, $\bmin{x \leq y}{\dots}$
 can be understood as $\bmin{x < y + 1}{\dots}$.
 \end{explain}
 
-All this provides us with a good deal of machinery to show that
-natural functions and relations are primitive recursive. For example,
-the following are all primitive recursive:
-\begin{enumerate}
-\item The relation ``$x$ divides $y$'', written $x \mid y$, defined by
-\[
-x \mid y \defiff \lexists[z \leq y][(x \cdot z) = y].
-\]
-
-\item The relation $\fn{Prime}(x)$, which holds iff $x$ is prime,
-  defined by
-\[
-\fn{Prime}(x) \defiff (x \geq 2 \land \lforall[y \leq x][(y \mid x \lif y
-  = 1 \lor y = x))].
-\]
-\item The function $\fn{nextPrime(x)}$, which returns the first prime
-  number larger than $x$, defined by
-\[
-  \fn{nextPrime(x)} =
-  \bmin{y \leq x\fac+1}{(y > x \land \fn{Prime}(y))}
-\]
-Here we are relying on Euclid's proof of the fact that there is always
-a prime number between $x$ and $x\fac+1$.
-
-\item The function $p(x)$, returning the $x$th prime, defined by $p(0)
-  = 2, p(x+1) = \fn{nextPrime}(p(x))$. For convenience we will write
-  this as $p_x$ (starting with 0; i.e.\ $p_0=2$).
-\end{enumerate}
-
 \begin{prob}
-Define integer division $d(x, y)$ using bounded minimization.
+Suppose $R(x, \vec z)$ is primitive recursive. Define the function
+$m'_R(y, \vec{z})$ which returns the least~$x$ less than~$y$ such that
+$R(x,\vec{z})$ holds, if there is one, and $y+1$ otherwise, by
+primitive recursion from~$\Char{R}$.
 \end{prob}
 
 \end{document}

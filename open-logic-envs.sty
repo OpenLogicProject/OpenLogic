@@ -154,3 +154,14 @@
 
 \excludeenv{editorial} % exclude editorial remarks by default
 
+% - `defish`: for definition-like material, e.g., rules
+
+\newenvironment{defish}{\begin{oframed}\noindent}{\end{oframed}}
+
+% - `derivation`: for derivations, a tabular environment with three
+% colums for line number, formula, and justification.
+
+\newenvironment{derivation}{%
+  ~\begin{trivlist}
+  \item\begin{tabular}{@{}rll@{}}}{
+  \end{tabular}\end{trivlist}}

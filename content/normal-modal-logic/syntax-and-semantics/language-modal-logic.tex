@@ -1,0 +1,68 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: language-modal-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{syn}{lan}
+
+\olsection{The Language of Basic Modal Logic}
+
+\begin{defn}
+The basic language of modal logic contains
+\begin{enumerate}
+  \tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+  \item A !!{denumerable}s set of !!{propositional variable}s: $\Obj
+    p_0$, $\Obj p_1$, $\Obj p_2$, \dots
+  \item The propositional connectives: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \tagitem{prvBox}{The modal operator $\Box$.}{}
+  \tagitem{prvDiamond}{The modal operator $\Diamond$.}{}
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+\emph{!!^{formula}s} of the basic modal language are inductively
+  defined as follows:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+
+\tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+
+\item Every propositional variable $\Obj p_i$ is an (atomic) !!{formula}.
+
+  \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is a !!{formula}.}{}
+
+\tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
+  is a !!{formula}.}{}
+
+\item If $!A$ is a formula, so is $\Box !A$.
+
+\tagitem{prvDiamond}{If $!A$ is a formula, then $\Diamond !A$ is a
+  !!{formula}.}{}
+
+\tagitem{limitClause}{Nothing else is a !!{formula}.}{}
+\end{enumerate}
+
+\iftag{defBox}{$\Box !A$ abbreviates $\lnot\Diamond\lnot !A$. }{}%
+\iftag{defDiamond}{$\Diamond !A$ abbreviates $\lnot\Box\lnot !A$.}{}
+
+If a !!{formula}~$!A$ does not contain $\Box$ or $\Diamond$, we say it
+is \emph{modal-free}.
+\end{defn}
+
+\end{document}

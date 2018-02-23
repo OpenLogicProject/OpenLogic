@@ -1,0 +1,75 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: preliminaries
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{pre}
+
+\olsection{Preliminaries}
+
+Filtrations allow us to establish the decidability of our systems of
+modal logic by showing that they have the \emph{finite model
+  property}, i.e., that any !!{formula} that is true (false) in a
+model is also true (false) in a \emph{finite} model.  Filtrations are
+defined relative to sets of !!{formula}s which are closed under
+subformulas.
+
+\begin{defn}\ollabel{defn:modallyclosed}
+  A set $\Gamma$ of !!{formula}s is \emph{closed under subformulas} if it
+  contains every subformula of !!a{formula} in $\Gamma$. Further,
+  $\Gamma$ is \emph{modally closed} if it is closed under subformulas
+  and moreover $!A \in \Gamma$ implies $\Box!A,
+  \Diamond!A \in \Gamma$. 
+\end{defn}
+
+For instance, given a !!{formula}~$!A$, the set of all its
+sub-!!{formula}s is closed under sub-!!{formula}s. When we're defining
+a filtration of a model through the set of sub-!!{formula}s of~$!A$,
+it will have the property we're after: it makes $!A$ true (false) iff
+the original model does.
+
+The set of worlds of a filtration of~$\mModel{M}$ through~$\Gamma$ is
+defined as the set of all equivalence classes of the following
+equivalence relation.
+
+\begin{defn}
+Let $\mModel{M} =\tuple{W, R, V}$ and suppose $\Gamma$ is closed under
+sub-!!{formula}s. Define a relation $\equiv$ on $W$ to hold of any two
+worlds that make the same !!{formula}s from $\Gamma$ true, i.e.:
+\[
+u \equiv v \quad \text{if and only if }\quad \forall !A \in \Gamma : \mSat{M}{!A}[u] \Leftrightarrow \mSat{N}{!A}[v].
+\]
+The equivalence class~$[w]_\equiv$ of a world~$w$, or $[w]$ for short,
+is the set of all worlds $\equiv$-equivalent to~$w$:
+\[
+[w] = \Setabs{v}{v \equiv w}.
+\]
+\end{defn}
+
+\begin{prop}
+  Given $\mModel{M}$ and $\Gamma$, $\equiv$ as defined above is an
+  equivalence relation, i.e., it is reflexive, symmetric, and
+  transitive.
+\end{prop}
+
+\begin{proof}
+  The relation $\equiv$ is reflexive, since $w$ makes exactly the same
+  !!{formula}s from~$\Gamma$ true as itself. It is symmetric since if
+  $u$ makes the same !!{formula}s from~$\Gamma$ true as $v$, the same
+  holds for $v$ and~$u$. It is also transitive, since if $u$ makes the
+  same !!{formula}s from~$\Gamma$ true as~$v$, and $v$ as $w$, then
+  $u$ makes the same !!{formula}s from~$\Gamma$ true as~$w$.
+\end{proof}
+
+The relation $\equiv$, like any equivalence relation, divides~$W$ into
+\emph{partitions}, i.e., subsets of~$W$ which are pairwise disjoint,
+and together cover all of~$W$. Every $w \in W$ is !!a{element} of one
+of the partitions, namely of~$[w]$, since $w \equiv w$. So the
+partitions $[w]$ cover all of~$W$. They are pairwise disjoint, for if
+$u \in [w]$ and $u \in [v]$, then $u \equiv w$ and $u \equiv v$, and
+by symmetry and transitivity, $w \equiv v$, and so $[w] = [v]$.
+
+\end{document}

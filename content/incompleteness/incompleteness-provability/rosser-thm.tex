@@ -12,55 +12,106 @@
 
 Can we modify G\"odel's proof to get a stronger result, replacing
 ``$\omega$-consistent'' with simply ``consistent''? The answer is
-``yes,'' using a trick discovered by Rosser. Let $\fn{not}(x)$ be the
-primitive recursive function which does the following: if $x$ is the
-code of a formula $!A$, $\fn{not}(x)$ is a code of $\lnot !A$.  To
-simplify matters, assume $\Th{T}$ has a function symbol $\Obj{not}$
-such that for any formula $!A$, $\Th{T}$ proves $\Obj{not}(\gn{!A}) =
-\gn{\lnot !A}$. This is not a major assumption; since $\fn{not}(x)$ is
-computable, it is represented in $\Th{T}$ by some formula
-$!D_{\fn{not}}(x,y)$, and we could eliminate the reference to the
-function symbol in the same way that we avoided using a function
-symbol $\Obj{diag}$ in the proof of the fixed-point lemma.
+``yes,'' using a trick discovered by Rosser.  Rosser's trick is to use
+a ``modified'' provability predicate $\ORProv_T(y)$ instead of
+$\OProv[T](y)$.
 
-Rosser's trick is to use a ``modified'' provability predicate
-$\ORProv_T(y)$, defined to be
+\begin{thm}
+\ollabel{thm:rosser}
+Let $\Th{T}$ be any consistent, !!{axiomatizable} theory
+extending $\Th{Q}$. Then $\Th{T}$ is not complete.
+\end{thm}
+
+\begin{proof}
+Recall that $\OProv[T](y)$ is defined as $\lexists[x][\OPrf[T](x,
+  y)]$, where $\OPrf[T](x, y)$ represents the decidable relation which
+holds iff $x$ is the G\"odel number of a !!{derivation} of the
+!!{sentence} with G\"odel number~$y$. The relation that holds between
+$x$ and~$y$ if $x$~is the G\"odel number of a \emph{refutation} of the
+sentence with G\"odel number~$y$ is also decidable. Let $\fn{not}(x)$
+be the primitive recursive function which does the following: if $x$
+is the code of a formula $!A$, $\fn{not}(x)$ is a code of $\lnot
+!A$. Then $\Refut[T](x, y)$ holds iff $\Prf[T](x, \fn{not}(y))$.  Let
+$\ORefut[T](x, y)$ represent it.  Then, if $\Th{T} \Proves \lnot !A$
+and $\delta$ is a corresponding !!{derivation}, $\Th{Q} \Proves
+\ORefut[T](\gn{\delta}, \gn{!A})$.  We define $\ORProv[T](y)$ as
 \[
 \lexists[x][(\OPrf[T](x,y) \land \lforall[z][(z < x \lif \lnot
-  \OPrf[T](z,{\Obj{not}}(y)))])].
+  \ORefut[T](z,y))])].
 \]
 Roughly, $\ORProv[T](y)$ says ``there is a proof of $y$ in $\Th{T}$,
-and there is no shorter proof of the negation of $y$.'' (You might
-find it convenient to read $\ORProv[T](y)$ as ``$y$ is shmovable.'')
-Assuming $\Th{T}$ is consistent, $\ORProv[T](y)$ is true of the same
-numbers as $\OProv[T](y)$; but from the point of view of {\em
-  provability} in $\Th{T}$ (and we now know that there is a difference
-between truth and provability!) the two have different properties.
+and there is no shorter refutation of~$y$.'' (You might find it
+convenient to read $\ORProv[T](y)$ as ``$y$ is shmovable.'')  Assuming
+$\Th{T}$ is consistent, $\ORProv[T](y)$ is true of the same numbers as
+$\OProv[T](y)$; but from the point of view of \emph{provability}
+in~$\Th{T}$ (and we now know that there is a difference between truth
+and provability!) the two have different properties. (If $\Th{T}$ is
+\emph{in}consistent, then the two do \emph{not} hold of the same
+numbers!)
 
-By the fixed-point lemma, there is a formula $!R_\Th{T}$ such that $\Th{T}$
-proves
+By the fixed-point lemma, there is a formula $!R_\Th{T}$ such that
+\begin{equation}
+  \Th{Q} \Proves !R_\Th{T} \liff \lnot \ORProv[T](\gn{!R_\Th{T}}).
+  \ollabel{RT}
+\end{equation}
+In contrast to the proof of \olref[1in]{thm:first-incompleteness},
+here we claim that if $\Th{T}$ is consistent, $\Th{T}$ doesn't prove
+$!R_\Th{T}$, and $\Th{T}$ also doesn't prove $\lnot !R_\Th{T}$. (In
+other words, we don't need the assumption of $\omega$-consistency.)
+
+First, let's show that $\Th{T} \Proves/ !R_T$.  Suppose it did, so
+there is !!a{derivation} of~$!R_T$ from~$T$; let $n$ be its G\"odel
+number. Then $\Th{Q} \Proves \OPrf[T](\num{n}, \gn{!R_T})$, since
+$\OPrf[T]$ represents $\Prf[T]$ in~$\Th{Q}$. Also, for each $k < n$,
+$k$ is not the G\"odel number of $\lnot !R_T$, since $\Th{T}$ is
+consistent. So for each $k < n$, $\Th{Q} \Proves \lnot
+\ORefut[T](\num{k}, \gn{!R_T})$. By \olref[req][min]{lem:less}(2),
+$\Th{Q} \Proves \lforall[z][(z < \num{n} \lif \lnot \ORefut[T](z,
+  \gn{!R_T}))]$. Thus,
 \[
-!R_\Th{T} \liff \lnot \ORProv[T](\gn{!R_\Th{T}}).
+\Th{Q} \Proves \lexists[x][(\OPrf[T](x,\gn{!R_T}) \land \lforall[z][(z
+    < x \lif \lnot \ORefut[T](z,\gn{!R_T}))])],
 \]
-In contrast to the proof above, here we claim that if $\Th{T}$ is
-consistent, $\Th{T}$ doesn't prove $!R_\Th{T}$, and $\Th{T}$ also
-doesn't prove $\lnot !R_\Th{T}$. (In other words, we don't need the
-assumption of $\omega$-consistency.)
+but that's just $\ORProv[T](\gn{!R_T})$. By \olref{RT}, $\Th{Q}
+\Proves \lnot !R_T$. Since $\Th{T}$ extends $\Th{Q}$, also $\Th{T}
+\Proves \lnot !R_T$. We've assumed that $\Th{T} \Proves !R_T$, so
+$\Th{T}$ would be inconsistent, contrary to the assumption of the
+theorem.
 
+Now, let's show that $\Th{T} \Proves/ \lnot !R_T$. Again, suppose it
+did, and suppose $n$ is the G\"odel number of !!a{derivation}
+of~$\lnot !R_T$. Then $\Refut[T](n, \Gn{!R_T})$ holds, and since
+$\ORefut[T]$ represents $\Refut[T]$ in $\Th{Q}$, $\Th{Q} \Proves
+\ORefut[T](\num{n}, \gn{!R_T})$. We'll again show that $\Th{T}$ would
+then be inconsistent because it would also prove~$!R_T$.  Since
+$\Th{Q} \Proves !R_T \liff \lnot \ORProv[T](\gn{!R_T})$, and since
+$\Th{T}$ extends~$\Th{Q}$, it suffices to show that $\Th{Q} \Proves
+\lnot \ORProv[T](\gn{!R_T})$. The !!{sentence} $\lnot
+\ORProv[T](\gn{!R_T})$, i.e.,
+\begin{align*}
+  \lnot & \lexists[x][(\OPrf[T](x,\gn{!R_T}) \land
+    \lforall[z][(z < x \lif \lnot \ORefut[T](z,\gn{!R_T}))])]
+  \intertext{is logically equivalent to}
+  & \lforall[x][(\OPrf[T](x,\gn{!R_T}) \lif
+    \lexists[z][(z < x \land \ORefut[T](z,\gn{!R_T}))])]
+\end{align*}
+We argue informally using logic, making use of facts about what
+$\Th{Q}$ proves. Suppose $x$ is arbitrary and $\OPrf[T](x,
+\gn{!R_T})$. We already know that $\Th{T} \Proves/ !R_T$, and so for
+every $k$, $\Th{Q} \Proves \lnot \OPrf[T](\num{k}, \gn{!R_T})$. Thus,
+for every $k$ it follows that $\eq/[x][\num{k}]$. In particular, we
+have (a) that $\eq/[x][\num{n}]$.  We also have $\lnot(\eq[x][\num{0}]
+\lor \eq[x][\num{1}] \lor \dots \lor \eq[x][\num{n-1}])$ and so by
+\olref[req][min]{lem:less}(2), (b) $\lnot(x < \num{n})$. By
+\olref[req][min]{lem:trichotomy}, $\num{n} < x$. Since $\Th{Q} \Proves
+\ORefut[T](\num{n}, \gn{!R_T})$, we have $\num{n} < x \land
+\ORefut[T](\num{n}, \gn{!R_T})$, and from that $\lexists[z][(z < x
+  \land \ORefut[T](z,\gn{!R_T}))]$. Since $x$ was arbitrary we get
+\[
+\lforall[x][(\OPrf[T](x,\gn{!R_T}) \lif
+  \lexists[z][(z < x \land \ORefut[T](z,\gn{!R_T}))])]
+\]
+as required.
+\end{proof}
 
 \end{document}
-
-% Following digression should only be included if
-% incompleteness/theories-computability/first-incompleteness.tex also
-% compiled.
-
-\begin{digress}
-% This comment doesn't make much sense, what are you trying to get at?
-By comparison to the proof of
-\olref[inc][tcp][inc]{thm:first-incompleteness}, the proofs of
-\olref[inc][inp][1in]{thm:first-incompleteness} and its improvement by Rosser
-explicitly exhibit a statement $!A$ that is independent of $\Th{T}$.
-In the former, you have to dig to extract it from the argument. The
-G\"odel-Rosser methods therefore have the advantage of making the
-independent statement perfectly clear.
-\end{digress}

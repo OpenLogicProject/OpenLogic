@@ -1,0 +1,132 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proving-things
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{pro}}
+      {\olfileid{pl}{axd}{pro}}
+
+\olsection{Examples of \usetoken{P}{derivation}}
+
+
+\begin{ex}
+Suppose we want to prove $(\lnot !D \lor !E) \lif (!D \lif
+!E)$. Clearly, this is not an instance of any of our axioms, so we
+have to use the \MP{} rule to !!{derive} it. Our only rule is~MP, which
+given $!A$ and $!A \lif !B$ allows us to justify~$!B$. One
+strategy would be to use \olref[prp]{ax:lor3} with $!A$ being $\lnot
+!D$, $!B$ being $!E$, and $!C$ being $!D \lif !E$, i.e., the instance
+\[
+(\lnot !D \lif (!D \lif !E)) \lif ((!E \lif (!D \lif !E)) \lif ((\lnot
+!D \lor !E) \lif (!D \lif !E))).
+\]
+Why? Two applications of MP yield the last part, which is what we
+want.  And we easily see that $\lnot !D \lif (!D \lif !E)$ is an
+instance of \olref[prp]{ax:lnot2}, and $!E \lif (!D \lif !E)$ is an
+instance of \olref[prp]{ax:lif1}. So our derivation is:
+\begin{derivation}
+  1. &  $\lnot !D \lif (!D \lif !E)$ & \olref[prp]{ax:lif1} \\
+  2. & $(\lnot !D \lif (!D \lif !E)) \lif {}$\\
+  &\qquad $((!E \lif (!D \lif !E)) \lif ((\lnot !D \lor !E) \lif (!D \lif !E)))$ & \olref[prp]{ax:lor3}\\
+  3. & $((!E \lif (!D \lif !E)) \lif ((\lnot !D \lor !E) \lif (!D \lif !E))$ & 1, 2, \MP\\
+  4. & $!E \lif (!D \lif !E)$ & \olref[prp]{ax:lif1}\\
+  5. & $(\lnot !D \lor !E) \lif (!D \lif !E)$ & 3, 4, \MP
+\end{derivation}
+\end{ex}
+
+\begin{ex}\ollabel{ex:identity}
+Let's try to find !!a{derivation} of $!D \lif !D$.  It is not an
+instance of an axiom, so we have to use \MP{} to !!{derive} it.
+\olref[prp]{ax:lif1} is an axiom of the form~$!A \lif !B$ to which we
+could apply~\MP. To be useful, of course, the $!B$ which \MP{} would
+justify as a correct step in this case would have to be~$!D \lif !D$,
+since this is what we want to !!{derive}. That means $!A$ would also
+have to be $!D$, i.e., we might look at this instance of
+\olref[prp]{ax:lif1}:
+\[
+!D \lif (!D \lif !D)
+\]
+In order to apply \MP, we would also need to justify the corresponding
+second premise, namely~$!A$. But in our case, that would be~$!D$, and
+we won't be able to !!{derive}~$!D$ by itself. So we need a different
+strategy.
+
+The other axiom involving just~$\lif$ is \olref[prp]{ax:lif2}, i.e.,
+\[
+(!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C))
+\]
+We could get to the last nested conditional by applying \MP{}
+twice. Again, that would mean that we want an instance of
+\olref[prp]{ax:lif2} where $!A \lif !C$ is $!D \lif !D$, the !!{formula} we
+are aiming for. Then of course, $!A$ and $!C$ are both~$!D$. How
+should we pick~$!B$ so that both $!A \lif (!B \lif !C)$ and $!A \lif
+!B$, i.e., in our case $!D \lif (!B \lif !D)$ and $!D \lif !B$, are
+also !!{derivable}? Well, the first of these is already an instance of
+\olref[prp]{ax:lif1}, whatever we decide $!B$ to be. And $!D \lif !B$ would
+be another instance of \olref[prp]{ax:lif1} if $!B$ were $(!D \lif !D)$.
+So, our derivation is:
+\begin{derivation}
+  1. & $!D \lif ((!D \lif !D) \lif !D)$ & \olref[prp]{ax:lif1}\\
+  2. & $(!D \lif ((!D \lif !D) \lif !D)) \lif {}$\\
+  & \qquad $((!D \lif (!D \lif !D)) \lif (!D \lif !D))$ & \olref[prp]{ax:lif2}\\
+  3. & $(!D \lif (!D \lif !D)) \lif (!D \lif !D)$ & 1, 2, \MP\\
+  4. & $!D \lif (!D \lif !D)$ & \olref[prp]{ax:lif1}\\
+  5. & $!D \lif !D$ & 3, 4, \MP
+\end{derivation}
+\end{ex}
+
+\begin{ex}\ollabel{ex:chain}
+Sometimes we want to show that there is a derivation of some
+!!{formula} from some other !!{formula}s~$\Gamma$. For instance, let's
+show that we can !!{derive} $!A \lif !C$ from $\Gamma = \{!A \lif !B,
+!B \lif !C\}$.
+\begin{derivation}
+  1. & $!A \lif !B$ & \Hyp\\
+  2. & $!B \lif !C$ & \Hyp\\
+  3. & $(!B \lif !C) \lif (!A \lif (!B \lif !C))$ & \olref[prp]{ax:lif1} \\
+  4. & $!A \lif (!B \lif !C)$ & 2, 3, \MP\\
+  5. & $(!A \lif (!B \lif !C)) \lif {}$\\
+  & \qquad $((!A \lif !B) \lif (!A \lif !C))$ & \olref[prp]{ax:lif2}\\
+  6. & $((!A \lif !B) \lif (!A \lif !C))$ & 4, 5, \MP\\
+  7. & $!A \lif !C$ & 1, 6, \MP
+\end{derivation}
+The lines labelled ``\Hyp'' (for ``hypothesis'') indicate that the
+!!{formula} on that line is !!a{element} of~$\Gamma$.
+\end{ex}
+
+\begin{prop}
+  \ollabel{prop:chain} If $\Gamma \Proves !A \lif !B$ and $\Gamma
+  \Proves !B \lif !C$, then $\Gamma \Proves !A \lif !C$
+\end{prop}
+
+\begin{proof}
+  Suppose $\Gamma \Proves !A \lif !B$ and $\Gamma \Proves !B \lif
+  !C$. Then there is !!a{derivation} of $!A \lif !B$ from~$\Gamma$;
+  and a !!{derivation} of~$!B \lif !C$ from~$\Gamma$ as well. Combine
+  these into a single !!{derivation} by concatenating them. Now add
+  lines 3--7 of the !!{derivation} in the preceding example. This is
+  !!a{derivation} of $!A \lif !C$---which is the last line of the new
+  !!{derivation}---from~$\Gamma$. Note that the justifications of
+  lines 4 and~7 remain valid if the reference to line number~2 is
+  replaced by reference to the last line of the !!{derivation} of~$!A
+  \lif !B$, and reference to line number~1 by reference to the last
+  line of the !!{derivation} of~$B \lif !C$.
+\end{proof}
+
+\begin{prob} 
+Show that the following hold by exhibiting !!{derivation}s from the
+axioms:
+\begin{enumerate} 
+\item $(!A \land !B) \lif (!B \land !A)$
+\item $((!A \land !B) \lif !C) \lif (!A \lif (!B \lif !C))$
+\item $\lnot(!A \lor !B) \lif \lnot !A$
+\end{enumerate} 
+\end{prob}
+
+
+
+\end{document}

@@ -1,0 +1,89 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: S5-fmp
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{fmp}
+
+\olsection{\Log{K} and \Log{S5} have the Finite Model Property}
+
+\begin{defn}
+  A system $\Sigma$ of modal logic is said to have the \emph{finite
+    model property} if whenever !!a{formula}~$!A$ is true at a world
+  in a model of $\Sigma$ then $!A$ is true at a world in a
+  \emph{finite} model of~$\Sigma$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:K-fmp}
+  \Log{K} has the finite model property.
+\end{prop}
+
+\begin{proof}
+  \Log{K} is the set of valid !!{formula}s, i.e., any model is a model
+  of~\Log{K}.  By \olref[fil]{thm:filtrations}, if
+  $\mModel{M}{!A}[w]$, then $\mModel{M^*}{!A}[w]$ for any filtration
+  of~$\mModel{M}$ through the set $\Gamma$ of sub-!!{formula}s
+  of~$!A$. Any !!{formula} only has finitely many sub-!!{formula}s, so
+  $\Gamma$ is finite. By \olref[fin]{prop:filt-are-finite},
+  $\card{W^*} \le 2^n$, where $n$ is the number of !!{formula}s
+  in~$\Gamma$. And since \Log{K} imposes no restriction on models,
+  $\mModel{M^*}$ is a \Log{K}-model.
+\end{proof}
+
+To show that a logic~\Log{L} has the finite model property via
+filtrations it is essential that the filtration of an \Log{L}-model is
+itself a \Log{L}-model. Often this requires a fair bit of work, and
+not any filtration yields a \Log{L}-model. However, for universal
+models, this still holds.
+
+\begin{prop}\ollabel{prop:univ-fin}
+  Let $\mClass{U}$ be the class of universal models (see
+  \olref[frd][es5]{prop:S5=univ}) and $\mClass{U}_\mathrm{Fin}$ the
+  class of all finite universal models. Then any !!{formula} $!A$ is
+  valid in $\mClass{U}$ if and only if it is valid in
+  $\mClass{U}_\mathrm{Fin}$.
+\end{prop}
+
+\begin{proof}
+  Finite universal models are universal models, so the left-to-right
+  direction is trivial. For the right-to left direction, suppose
+  that~$!A$ is false at some world $w$ in a universal model
+  $\mModel{M}$. Let $\Gamma$ contain $!A$ as well as all of its
+  subformulas; clearly $\Gamma$ is finite. Take a filtration
+  $\mModel{M^*}$ of $\mModel{M}$; then $\mModel{M^*}$ is finite by
+  \olref[fin]{prop:filt-are-finite}, and by
+  \olref[fil]{thm:filtrations}, $!A$ is false at $[w]$ in
+  $\mModel{M^*}$. It remains to observe that $\mModel{M^*}$ is also
+  universal: given $u$ and $v$, by hypothesis $Ruv$ and by
+  Definition~\olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R},
+  also $R^*[u][v]$.
+\end{proof}
+
+\begin{cor}\ollabel{cor:S5fmp}
+  \Log{S5} has the finite model property.
+\end{cor}
+
+\begin{proof}
+  By \olref[frd][es5]{prop:S5=univ}, if $!A$ is true at a world in
+  some reflexive and euclidean model then it is true at a world in a
+  universal model. By \olref{prop:univ-fin}, it is true at a world in
+  a finite universal model (namely the filtration of the model through
+  the set of sub-!!{formula}s of~$!A$). Every universal model is also
+  reflexive and euclidean; so $!A$ is true at a world in a finite
+  reflexive euclidean model.
+\end{proof}
+
+\begin{prob}
+  Show that any filtration of a serial or reflexive model is also
+  serial or reflexive (respectively).
+\end{prob}
+
+\begin{prob}
+  Find a non-symmetric (non-transitive, non-euclidean) filtration of a
+  symmetric (transitive, euclidean) model.
+\end{prob}
+
+\end{document}

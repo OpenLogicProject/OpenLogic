@@ -12,8 +12,9 @@
 
 Here are some examples of primitive recursive functions:
 \begin{enumerate}
-\item Constants: for each natural number $n$, $n$ is a 0-ary primitive
-  recursive function, since it is equal to $S(S(\dots S(0)))$.
+\item Constants: for each natural number $n$, the function that always
+  returns~$n$ primitive recursive function, since it is equal to
+  $\Succ(\Succ(\dots \Succ(\Zero(x))))$.
 
 \item The identity function: $\fn{id}(x) = x$, i.e.\ $\Proj{1}{0}$
 
@@ -23,7 +24,7 @@ Here are some examples of primitive recursive functions:
 
 \item Exponentiation, $x^y$ (with $0^0$ defined to be $1$)
 
-\item Factorial, $x\fac$
+\item Factorial, $x\fac = 1 \cdot 2 \cdot 3 \cdot \cdots \cdot x$
 
 \item The predecessor function, $\fn{pred}(x)$, defined by
 \[
@@ -45,8 +46,30 @@ x \tsub 0 = x, \quad x \tsub (y+1) = \fn{pred}(x \tsub y)
 \item Distance between $x$ and $y$, $\left|x-y\right|$
 \end{enumerate}
 
+\begin{explain}
+In our definitions, we'll often use constants~$n$. This is ok because
+the constant function $\fn{const}_n(x)$ is primitive recursive
+(defined from $\Zero$ and $\Succ$). So if, e.g., we want to define the
+function $f(x) = 2 \cdot x$ can obtain it by composition from
+$\fn{const}_n(x)$ and multiplication as $f(x) = \fn{const}_2(x) \cdot
+\Proj{1}{0}(x)$. We'll make use of this trick from now on.
+  
+You'll also have noticed that the definition of $\fn{pred}$ does not,
+strictly speaking, fit into the pattern of definition by primitive
+recursion, since that pattern requires an extra argument. It is also
+odd in that it does not actually $\fn{pred}(x)$ in the definition of
+$\fn{pred}(x+1)$. But we can define $\fn{pred}'(x, y)$ by
+\begin{align*}
+  \fn{pred}'(0, y) & = \Zero(y) = 0\\
+  \fn{pred}'(x+1, y) & = \Proj{3}{0}(x, \fn{pred'}(x, y), y) = x
+\end{align*}
+and then define $\fn{pred}$ from it by composition, e.g., as $\fn{pred}(x) =
+\fn{pred}'(\Proj{1}{0}(x), \Zero(x))$.
+\end{explain}
+
 \begin{prob}
-Show that \[f(x, y) =
+Show that \[
+f(x, y) =
 2^{2^{\iddots^{2^{x}}}}\raisebox{1ex}{\bigg\rbrace}
 \raisebox{1ex}{\text {$y$ $2$'s}}\] is primitive recursive.
 \end{prob}
@@ -55,7 +78,7 @@ Show that \[f(x, y) =
 Show that $d(x, y) = \lfloor x/y \rfloor$ (i.e., division, where you
 disregard everything after the decimal point) is primitive
 recursive. When $y = 0$, we stipulate $d(x, y) = 0$. Give an explicit
-definifion of $d$ using primitive recursion and composition. You will
+definifion of~$d$ using primitive recursion and composition. You will
 have detour through an axiliary function---you cannot use recursion on
 the arguments $x$ or $y$ themselves.
 \end{prob}

@@ -1,0 +1,88 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: propositional-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{prl}}
+      {\olfileid{pl}{seq}{prl}}
+
+\olsection{Propositional Rules}
+
+\subsection{Rules for $\lnot$}
+
+\begin{defish}
+\Axiom$ \Gamma \fCenter \Delta, !A $
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$ \lnot !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$!A, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lnot !A $
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\land$}
+
+\begin{defish}\noindent
+\begin{tabular}{l}
+\Axiom$ !A, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\\[3ex]
+\Axiom$!B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\end{tabular}
+\hfill
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\lor$}
+
+\begin{defish}
+\Axiom$!A, \Gamma \fCenter \Delta$
+\Axiom$!B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!A \lor !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\begin{tabular}{r}
+\Axiom$\Gamma \fCenter \Delta, !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
+\DisplayProof
+\\[3ex]
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
+\DisplayProof
+\end{tabular}
+\end{defish}
+
+\subsection{Rules for $\lif$}
+
+\begin{defish}
+\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !B, \Pi \fCenter \Lambda$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !A \lif !B, \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\hfill
+\Axiom$ !A, \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lif !B $
+\DisplayProof
+\end{defish}
+
+\end{document}

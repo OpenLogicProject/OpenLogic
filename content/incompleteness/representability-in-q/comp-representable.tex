@@ -9,17 +9,52 @@
 \olfileid{inc}{req}{crq}
 \olsection{Computable Functions are Representable in $\Th{Q}$}
 
-\begin{lem}
+\begin{thm}
 Every computable function is representable in~$\Th{Q}$.
-\end{lem}
+\end{thm}
 
-\begin{enumerate}
-\item We will define a set of (total) functions, $C$.
-\item We will show that $C$ is the set of computable
-  functions, i.e.\ our definition provides another characterization of
-  computability.
-\item Then we will show that every function in $C$ can be represented in
-  $\Th{Q}$.
-\end{enumerate}
+\begin{proof}
+For definiteness, and using the Church-Turing Thesis, let's say that a
+function is computable iff it is general recursive. The general
+recursive functions are those which can be defined from the zero
+function~$\Zero$, the successor function~$\Succ$, and the projection
+function~$\Proj{n}{i}$ using composition, primitive recursion, and
+regular minimization. By \olref[pri]{lem:prim-rec}, any function~$h$
+that can be defined from $f$ and~$g$ can also be defined using
+composition and regular minimization from $f$, $g$, and $\Zero$,
+$\Succ$, $\Proj{n}{i}$, $\Add$, $\Mult$, $\Char{=}$. Consequently, a
+function is general recursive iff it can be defined from $\Zero$,
+$\Succ$, $\Proj{n}{i}$, $\Add$, $\Mult$, $\Char{=}$ using composition
+and regular minimization.
+
+We've furthermore shown that the basic functions in question are
+representable in~$\Th{Q}$
+(\cref{inc:req:bre:prop:rep-zero,inc:req:bre:prop:rep-succ,inc:req:bre:prop:rep-proj,inc:req:bre:prop:rep-id,inc:req:bre:prop:rep-add,inc:req:bre:prop:rep-mult}),
+and that any function defined from representable functions by
+composition or regular minimization
+(\olref[cmp]{prop:rep-composition},
+\olref[min]{prop:rep-minimization}) is also representable. Thus every
+general recursive function is representable in~$\Th{Q}$.
+\end{proof}
+
+\begin{explain}
+We have shown that the set of computable functions can be
+characterized as the set of functions representable in $\Th{Q}$. In
+fact, the proof is more general. From the definition of
+representability, it is not hard to see that any theory extending
+$\Th{Q}$ (or in which one can interpret $\Th{Q}$) can represent the
+computable functions. But, conversely, in any proof system in which
+the notion of proof is computable, every representable function is
+computable. So, for example, the set of computable functions can be
+characterized as the set of functions representable in Peano
+arithmetic, or even Zermelo-Fraenkel set theory. As G\"odel noted,
+this is somewhat surprising.  We will see that when it comes to
+provability, questions are very sensitive to which theory you
+consider; roughly, the stronger the axioms, the more you can
+prove. But across a wide range of axiomatic theories, the
+representable functions are exactly the computable ones; stronger
+theories do not represent more functions as long as they are
+axiomatizable.
+\end{explain}
 
 \end{document}

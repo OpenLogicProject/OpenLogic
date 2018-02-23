@@ -1,0 +1,306 @@
+% Part: incompleteness
+% Chapter: introduction
+% Section: definitions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{int}{def}
+
+\olsection{Definitions}
+
+In order to carry out Hilbert's project of formalizing mathematics and
+showing that such a formalization is consistent and complete, the
+first order of business would be that of picking a language, logical
+framework, and a system of axioms.  For our purposes, let us suppose
+that mathematics can be formalized in a first-order language, i.e.,
+that there is some set of !!{constant}s, !!{function}s, and
+!!{predicate}s which, together with the connectives and quatifiers of
+first-order logic, allow us to express the claims of mathematics.
+Most people agree that such a language exists: the language of set
+theory, in which $\in$ is the only non-logical symbol.  That such a
+simple language is so expressive is of course a very implausible claim
+at first sight, and it took a lot of work to establish that
+practically of all mathematics can be expressed in this very austere
+vocabulary.  To keep things simple, for now, let's restrict our
+discussion to arithmetic, so the part of mathematics that just deals
+with the natural numbers~$\Nat$.  The natural language in which to
+express facts of arithmetic is~$\Lang L_A$. $\Lang L_A$ contains a
+single two-place !!{predicate}~$<$, a single !!{constant}~$\Obj 0$,
+one one-place !!{function}~$\prime$, and two two-place
+!!{function}s~$+$ and~$\times$.
+
+\begin{defn}
+A set of !!{sentence}s~$\Gamma$ is a \emph{theory} if it is closed
+under entailment, i.e., if $\Gamma = \Setabs{!A}{\Gamma \Entails
+!A}$.
+\end{defn}
+
+There are two easy ways to specify theories. One is as the set of
+!!{sentence}s true in some !!{structure}.  For instance, consider the
+!!{structure} for $\Lang L_A$ in which the !!{domain} is~$\Nat$ and
+all non-logical symbols are interpreted as you would expect.
+
+\begin{defn}
+The \emph{standard model of arithmetic} is the !!{structure}~$\Struct
+N$ defined as follows:
+\begin{enumerate}
+\item $\Domain N = \Nat$
+\item $\Assign{\Obj 0}{N} = 0$
+\item $\Assign{\Obj \prime}{N}(n) = n + 1$ for all $n \in \Nat$
+\item $\Assign{\Obj +}{N}(n, m) = n + m$ for all $n, m \in \Nat$
+\item $\Assign{\Obj \times}{N}(n, m) = n\cdot m$ for all $n, m \in \Nat$
+\item $\Assign{\Obj <}{N} = \Setabs{\tuple{n, m}}{n \in \Nat, m \in
+  \Nat, n < m}$
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+The theory of \emph{true arithmetic} is the set of !!{sentence}s
+satisfied in the standard model of arithmetic, i.e.,
+\[
+\Th{TA} = \Setabs{!A}{\Sat{N}{!A}}.
+\]
+\end{defn}
+
+$\Th{TA}$ is a theory, for whenever $\Th{TA} \Entails !A$, $!A$ is
+satisfied in every !!{structure} which satisfies $\Th{TA}$. Since
+$\Sat{M}{\Th{TA}}$, $\Sat{M}{!A}$, and so $!A \in \Th{TA}$.
+
+The other way to specify a theory~$\Gamma$ is as the set of
+!!{sentence}s entailed by some set of sentences~$\Gamma_0$. In that
+case, $\Gamma$ is the ``closure'' of $\Gamma_0$ under entailment.
+Specifying a theory this way is only interesting if $\Gamma_0$ is
+explicitly specified, e.g., if the !!{element}s of~$\Gamma_0$ are
+listed. At the very least, $\Gamma_0$ has to be decidable, i.e., there
+has to be a computable test for when a !!{sentence} counts as an
+element of~$\Gamma_0$ or not. We call the !!{sentence}s
+in~$\Gamma_0$ \emph{axioms} for~$\Gamma$, and $\Gamma$
+\emph{axiomatized} by~$\Gamma_0$.
+
+\begin{defn}
+A theory~$\Gamma$ is \emph{axiomatized} by~$\Gamma_0$ iff
+\[
+\Gamma = \Setabs{!A}{\Gamma_0 \Entails !A}
+\]
+\end{defn}
+
+\begin{defn}
+The theory $\Th{Q}$ axiomatized by the following sentences is known
+as ``Robinson's $\Th{Q}$'' and is a very simple theory of arithmetic.
+\begin{align*}
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]] \tag{$!Q_1$}\\
+& \lforall[x][\eq/[\Obj 0][x']] \tag{$!Q_2$}\\
+& \lforall[x][(\eq/[x][\Obj 0] \lif \lexists[y][\eq[x][y']])] \tag{$!Q_3$}\\
+& \lforall[x][\eq[(x + \Obj 0)][x]] \tag{$!Q_4$}\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]] \tag{$!Q_5$}\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]] \tag{$!Q_6$}\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]] \tag{$!Q_7$}\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][(x + z' = y)])]] \tag{$!Q_8$}
+\end{align*}
+The set of !!{sentence}s $\{!Q_1, \dots, !Q_8\}$ are the axioms of
+$\Th{Q}$, so $\Th{Q}$ consists of all !!{sentence}s entailed by them:
+\[
+\Th{Q} = \Setabs{!A}{\{!Q_1, \dots, !Q_8\} \Entails !A}.
+\]
+\end{defn}
+
+\begin{defn}
+Suppose $!A(x)$ is !!a{formula} in $\Lang L_A$ with free variables~$x$
+and $y_1$, \dots, $y_n$. Then any !!{sentence} of the form
+\[
+\lforall[y_1][\dots\lforall[y_n][((!A(\Obj 0) \land \lforall[x][(!A(x)
+\lif !A(x'))]) \lif \lforall[x][!A(x)])]]
+\]
+is an instance of the \emph{induction schema}.
+
+\emph{Peano arithmetic}~$\Th{PA}$ is the theory axiomatized by the
+axioms of $\Th{Q}$ together with all instances of the induction
+schema.
+\end{defn}
+
+\begin{explain}
+Every instance of the induction schema is true in~$\Struct{N}$. This
+is easiest to see if the !!{formula}~$!A$ only has one free
+!!{variable}~$x$.  Then $!A(x)$ defines a subset~$X_A$ of~$\Nat$
+in~$\Struct{N}$.  $X_A$ is the set of all~$n \in \Nat$ such that
+$\Sat{N}{!A(x)}[s]$ when $s(x) = n$.  The corresponding instance of
+the induction schema is
+\[
+((!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)])
+\]
+If its antecedent is true in~$\Struct{N}$, then $0 \in X_A$ and,
+whenever $n \in X_A$, so is $n+1$.  Since $0 \in X_A$, we get $1 \in
+X_A$. With $1 \in X_A$ we get $2 \in X_A$. And so on. So for every $n
+\in \Nat$, $n \in X_A$. But this means that $\lforall[x][!A(x)]$ is
+satisfied in~$\Struct{N}$.
+\end{explain}
+
+Both $\Th{Q}$ and $\Th{PA}$ are axiomatized theories.  The big
+question is, how strong are they? For instance, can $\Th{PA}$ prove
+all the truths about~$\Nat$ that can be expressed in~$\Lang L_A$?
+Specifically, do the axioms of $\Th{PA}$ settle all the questions
+that can be formulated in~$\Lang L_A$?
+
+Another way to put this is to ask: Is $\Th{PA} = \Th{TA}$? For
+$\Th{TA}$ obviously does prove (i.e., it includes) all the truths
+about~$\Nat$, and it settles all the questions that can be formulated
+in~$\Lang L_A$, since if $!A$ is a !!{sentence} in $\Lang L_A$, then
+either $\Sat{N}{!A}$ or $\Sat{N}{\lnot !A}$, and so either $\Th{TA}
+\Entails !A$ or $\Th{TA} \Entails \lnot !A$.  Call such a theory
+!!{complete}.
+
+\begin{defn}
+A theory $\Gamma$ is \emph{!!{complete}} iff for every
+!!{sentence}~$!A$ in its language, either $\Gamma \Entails !A$ or
+$\Gamma \Entails \lnot !A$.
+\end{defn}
+
+\begin{explain}
+By the Completeness Theorem, $\Gamma \Entails !A$ iff $\Gamma \Proves
+!A$, so $\Gamma$ is complete iff for every !!{sentence}~$!A$ in its
+language, either $\Gamma \Proves !A$ or $\Gamma \Proves \lnot !A$.
+\end{explain}
+
+Another question we are led to ask is this: Is there a computational
+procedure we can use to test if !!a{sentence} is in~$\Th{TA}$, in
+$\Th{PA}$, or even just in~$\Th{Q}$?  We can make this more precise
+by defining when a set (e.g., a set of !!{sentence}s) is
+!!{decidable}.
+
+\begin{defn}
+A set $X$ is \emph{!!{decidable}} iff its characteristic function
+$\Char{X} \colon X \to \{0, 1\}$, with
+\[
+\Char{X}(x) =
+\begin{cases}
+1 & \text{if $x \in X$} \\
+0 & \text{if $x \notin X$}
+\end{cases}
+\]
+is computable.
+\end{defn}
+
+So our question becomes: Is $\Th{TA}$ ($\Th{PA}$, $\Th{Q}$) !!{decidable}?
+
+The answer to all these questions will be: no. None of these theories
+is decidable. However, this phenomenon
+is not specific to these particular theories. In fact, \emph{any}
+theory that satisfies certain conditions is subject to the same
+results. One of these conditions, which $\Th{Q}$ and $\Th{PA}$
+satisfy, is that they are axiomatized by !!a{decidable} set of axioms.
+
+\begin{defn}
+A theory is \emph{!!{axiomatizable}} if it is axiomatized
+by a !!{decidable} set of axioms.
+\end{defn}
+
+\begin{ex}
+Any theory axiomatized by a finite set of !!{sentence}s is
+!!{axiomatizable}, since any finite set is !!{decidable}.
+Thus, $\Th{Q}$, for instance, is !!{axiomatizable}.
+
+Schematically axiomatized theories like~$\Th{PA}$ are also
+!!{axiomatizable}. For to test if $!B$ is among the axioms
+of~$\Th{PA}$, i.e., to compute the function $\Char{X}$ where
+$\Char{X}(!B) = 1$ if $!B$ is an axiom of~$\Th{PA}$ and $= 0$
+otherwise, we can do the following: First, check if $!B$ is one of the
+axioms of~$\Th{Q}$. If it is, the answer is ``yes'' and the value of
+$\Char{X}(!B) = 1$. If not, test if it is an instance of the induction
+schema.  This can be done systematically; in this case, perhaps it's
+easiest to see that it can be done as follows: Any instance of the
+induction schema begins with a number of universal quantifiers, and
+then a sub-!!{formula} that is a conditional. The consequent of that
+conditional is $\lforall[x][!A(x, y_1, \dots, y_n)]$ where $x$ and
+$y_1$, \dots, $y_n$ are all the free variables of~$!A$ and the initial
+quantifiers of~$!B$ bind the variables~$y_1$, \dots,~$y_n$.  Once we
+have extracted this~$!A$ and checked that its free variables match the
+variables bound by the universal qauntifiers at the front
+and~$\lforall[x]$, we go on to check that the antecedent of the
+conditional matches
+\[
+!A(\Obj 0, y_1, \dots, y_n) \land \lforall[x][(!A(x, y_1, \dots, y_n)
+\lif !A(x', y_1, \dots, y_n))]
+\]
+Again, if it does, $!B$ is an instance of the induction schema, and if
+it doesn't, $!B$ isn't.
+\end{ex}
+
+In answering this question---and the more general question of which
+theories are complete or decidable---it will be useful to consider
+also the following definition. Recall that a set $X$ is !!{enumerable}
+iff it is empty or if there is !!a{surjective} function~$f \colon \Nat
+\to X$. Such a function is called an enumeration of~$X$.
+
+\begin{defn}
+A set $X$ is called \emph{!!{computably enumerable}} (!!{c.e.} for
+short) iff it is empty or it has a computable enumeration.
+\end{defn}
+
+In addition to !!{axiomatizability}, another condition on theories to
+which the incompleteness theorems apply will be that they are strong
+enough to prove basic facts about computable functions and
+!!{decidable} relations. By ``basic facts,'' we mean !!{sentence}s
+which express what the values of computable functions are for each of
+their arguments.  And by ``strong enough'' we mean that the theories
+in question count these sentences among its theorems. For instance,
+consider a prototypical computable function: addition.  The value of
+$+$ for arguments $2$ and $3$ is~$5$, i.e., $2+3 = 5$. A sentence in
+the language of arithmetic that expresses that the value of $+$ for
+arguments $2$ and $3$ is~$5$ is: $(\num{2} + \num{3}) = \num{5}$.
+And, e.g., $\Th{Q}$ proves this sentence.  More generally, we would
+like there to be, for each computable function $f(x_1, x_2)$
+!!a{formula}~$!A_f(x_1, x_2, y)$ in~$\Lang{L_A}$ such that $\Th{Q}
+\Proves !A_f(\num{n_1}, \num{n_2}, \num{m})$ whenever $f(n_1, n_2) =
+m$. In this way, $\Th{Q}$ proves that the value of~$f$ for arguments
+$n_1$, $n_2$ is~$m$. In fact, we require that it proves a bit more,
+namely that no other number is the value of~$f$ for arguments
+$n_1$,~$n_2$. And the same goes for !!{decidable} relations. This is
+made precise in the following two definitions.
+
+\begin{defn}
+A !!{formula}~$!A(x_1, \dots, x_k, y)$ \emph{!!{represents}} the
+function $f\colon \Nat^k \to \Nat$ in~$\Gamma$ iff whenever $f(n_1,
+\dots, n_k) = m$, then
+\begin{enumerate}
+\item $\Gamma \Proves !A(\num{n_1}, \dots, \num{n_k}, \num{m})$, and
+\item $\Gamma \Proves \lforall[y](!A(\num{n_1}, \dots, \num{n_k},
+\num{y}) \lif y = \num{m})$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+A !!{formula}~$!A(x_1, \dots, x_k)$ \emph{!!{represents}} the
+relation $R \subseteq \Nat^k$ iff,
+\begin{enumerate}
+\item whenever $R(n_1, \dots, n_k)$, $\Gamma \Proves !A(\num{n_1},
+\dots, \num{n_k})$, and
+\item whenever not $R(n_1, \dots, n_k)$, $\Gamma \Proves \lnot
+!A(\num{n_1}, \dots, \num{n_k})$.
+\end{enumerate}
+\end{defn}
+
+A theory is ``strong enough'' for the incompleteness theorems to
+apply if it !!{represents} all computable functions and all
+!!{decidable} relations. $\Th{Q}$~and its extensions satisfy this
+condition, but it will take us a while to establish this---it's a
+non-trivial fact about the kinds of things $\Th{Q}$ can prove, and
+it's hard to show because $\Th{Q}$ has only a few axioms from which
+we'll have to prove all these facts. However, $\Th{Q}$ is a very weak
+theory. So although it's hard to prove that $\Th{Q}$ represents all
+computable functions, most interesting theories are stronger
+than~$\Th{Q}$, i.e., prove more than $\Th{Q}$ does. And if $\Th{Q}$
+proves something, any stronger theory does; since $\Th{Q}$ represents
+all computable functions, every stronger theory does. This means that
+many interesting theories meet this condition of the incompleteness
+theorems. So our hard work will pay off, since it shows that the
+incompletess theorems apply to a wide range of theories. Certainly,
+any theory aiming to formalize ``all of mathematics'' must prove
+everything that $\Th{Q}$ proves, since it should at the very least be
+able to capture the results of elementary computations.  So any theory
+that is a candidate for a theory of ``all of mathematics'' will be one
+to which the incompleteness theorems apply.
+
+
+\end{document}

@@ -1,0 +1,83 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{qpr}
+\olsection{\usetoken{S}{derivability} and the Quantifiers}
+
+\begin{thm}
+\ollabel{thm:strong-generalization} If $c$ is a constant not occurring
+in $\Gamma$ or~$!A(x)$ and $\Gamma \Proves !A(c)$, then $\Gamma
+\Proves \lforall[x][!A(x)]$.
+\end{thm}
+
+\begin{proof}
+Suppose $\Gamma \Proves !A(c)$, i.e., there are $!B_1$, \dots, $!B_n
+\in \Gamma$ and a closed !!{tableau} for
+\begin{align*}
+\{ \sFmla{\False}{!A(c)}, &
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n} \}.
+\intertext{We have to show that there is also a closed !!{tableau} for}
+\{ \sFmla{\False}{\lforall[x][!A(x)]}, &
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n} \}.
+\end{align*}
+Take the closed !!{tableau} and replace the first assumption with
+$\sFmla{\False}{\lforall[x][!A(x)]}$, and insert
+$\sFmla{\False}{!A(c)}$ after the assumptions.
+\begin{center}
+\begin{tableau}{not line numbering}
+  [\sFmla{\False}{\formula{A}(c)}
+    [\sFmla{\True}{\formula{B}_1}
+      [\vdots
+      [\sFmla{\True}{\formula{B}_n}, 
+        [][][]]]]]
+\end{tableau}\qquad
+\begin{tableau}{not line numbering}
+  [\sFmla{\False}{\lforall[x][\formula{A}(x)]}
+    [\sFmla{\True}{\formula{B}_1}
+      [\vdots
+        [\sFmla{\True}{\formula{B}_n},
+          [\sFmla{\False}{\formula{A}(c)}
+        [][][]]]]]]
+\end{tableau}
+\end{center}
+The tableau is still closed, since all !!{sentence}s available as
+assumptions before are still available at the top of the
+!!{tableau}. The inserted line is the result of a correct application
+of $\TRule{\False}{\lforall}$, since the !!{constant}~$c$ does not
+occur in $!B_1$, \dots, $!B_n$ of $\lforall[x][!A(x)]$, i.e., it does
+not occur above the inserted line in the new !!{tableau}.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:provability-quantifiers}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{$!A(t) \Proves \lexists[x][!A(x)]$.}{}
+\tagitem{prvAll}{$\lforall[x][!A(x)] \Proves !A(t)$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvEx,prvAll}
+\tagitem{prvEx}{A closed !!{tableau} for
+  $\sFmla{\False}{\lexists[x][!A(x)]}, \sFmla{\True}{!A(t)}$ is:
+  \begin{oltableau}
+    [\sFmla{\False}{\lexists[x][\formula{A}(x)]}, just = \TAss
+      [\sFmla{\True}{\formula{A}(t)}, just = \TAss
+        [\sFmla{\False}{\formula{A}(t)}, just = {\TRule{\False}{\lexists}[1]}, close]]]
+    \end{oltableau}}{}
+\tagitem{prvAll}{A closed !!{tableau} for
+  $\sFmla{\False}{\formula{A}(t)}, \sFmla{\True}{\lforall[x][!A(x)]}, $ is:
+  \begin{oltableau}
+    [\sFmla{\False}{\formula{A}(t)}, just = \TAss
+      [\sFmla{\True}{\lforall[x][\formula{A}(x)]}, just = \TAss
+        [\sFmla{\True}{\formula{A}(t)}, just = {\TRule{\True}{\lforall}[2]}, close]]]
+    \end{oltableau}}{}
+\end{tagenumerate}
+\end{proof}
+
+\end{document}

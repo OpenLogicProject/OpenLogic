@@ -1,0 +1,85 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{sem}
+
+\olsection{Semantic Notions}
+
+We define the following semantic notions:
+
+\begin{defn} 
+\begin{enumerate}
+\item !!^a{formula} $!A$ is \emph{satisfiable} if for
+  some~$\pAssign{v}$, $\pSat{v}{!A}$; it is
+  \emph{unsatisfiable} if for no $\pAssign{v}$, $\pSat{v}{!A}$;
+\item !!^a{formula} $!A$ is a \emph{tautology} if $\pSat{v}{!A}$ for
+  all !!{valuation}s~$v$;
+\item !!^a{formula} $!A$ is \emph{contingent} if it is satisfiable but
+  not a tautology;
+\item If $\Gamma$ is a set of !!{formula}s, $\Gamma \Entails !A$ (``$\Gamma$
+  entails $!A$'') if and only if $\pSat{v}{!A}$ for every
+  !!{valuation}~$\pAssign{v}$ for which $\pSat{v}{\Gamma}$.
+\item If $\Gamma$ is a set of !!{formula}s, $\Gamma$ is
+  \emph{satisfiable} if there is !!a{valuation}~$\pAssign{v}$ for which
+  $\pSat{v}{\Gamma}$, and $\Gamma$ is
+  \emph{unsatisfiable} otherwise.
+\end{enumerate} 
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:semanticalfacts} 
+\begin{enumerate} 
+\item $!A$ is a tautology if and only if
+  $\emptyset \Entails !A$; 
+\item If $\Gamma \Entails !A$ and $\Gamma \Entails !A \lif !B$ then
+  $\Gamma \Entails !B$;
+\item If $\Gamma$ is satisfiable then every finite subset of $\Gamma$
+  is also satisfiable; 
+\item \ollabel{def:Monotony} Monotony: if $\Gamma \subseteq \Delta$
+  and $\Gamma \Entails !A$ then also $\Delta \Entails !A$;
+\item \ollabel{def:Cut} Transitivity: if $\Gamma \Entails !A$ and
+  $\Delta \cup \{ !A\} \Entails !B$ then $\Gamma \cup \Delta \Entails
+  !B$;
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][sem]{prop:semanticalfacts}
+\end{prob}
+
+\begin{prop}\ollabel{prop:entails-unsat}
+  $\Gamma \Entails !A$ if and only if $\Gamma \cup \{\lnot !A\}$
+  is unsatisfiable; 
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][sem]{prop:entails-unsat}
+\end{prob}
+
+\begin{thm}[Semantic Deduction Theorem]
+  \ollabel{thm:sem-deduction} $\Gamma \Entails !A \lif !B$ if and only
+  if $\Gamma \cup \{!A\} \Entails !B$.
+\end{thm}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][sem]{thm:sem-deduction}
+\end{prob}
+
+\end{document}

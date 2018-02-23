@@ -1,0 +1,35 @@
+% Part: normal-modal-logic
+% Chapter: completeness
+% Section: canonical-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{com}{cmd}
+
+\olsection{Canonical Models}
+
+The \emph{canonical model} for a modal system~$\Sigma$ is a specific
+model~$\mModel{M^\Sigma}$ in which the worlds are all complete
+$\Sigma$-consistent sets. Its accessibility relation~$R^\Sigma$ and
+valuation $V^\Sigma$ are defined so as to guarantee that the
+!!{formula}s true at a world~$\Delta$ are exactly the !!{formula}s
+making up~$\Delta$.
+
+\begin{defn}
+  Let $\Sigma$ be a normal modal logic. The \emph{canonical model} for
+  $\Sigma$ is $\mModel{M}^\Sigma = \tuple{W^\Sigma, R^\Sigma,
+    V^\Sigma}$, where:
+  \begin{enumerate}
+  \item $\mModel{M}^\Sigma = \Setabs{ \Delta }{\Delta \text{
+      is complete $\Sigma$-consistent} }$.
+  \item $R^\Sigma \Delta\Delta'$ holds if and only if
+    \iftag{prvBox}{$\Box^{-1}\Delta \subseteq
+      \Delta'$}{$\Diamond\Delta' \subseteq \Delta$}.
+  \item $V^\Sigma(p) = \Setabs{\Delta}{p \in \Delta}$.
+  \end{enumerate}
+\end{defn}
+
+
+\end{document}

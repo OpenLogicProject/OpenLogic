@@ -24,23 +24,22 @@ function,
 is primitive recursive.
 \end{defn}
 
-In other words, when one speaks of a primitive
-recursive relation $R(\vec x)$, one is referring to a relation of the
-form $\Char{R}(\vec x) = 1$, where $\Char{R}$ is a primitive recursive
-function which, on any input, returns either 1 or 0. For example, the
-relation $\fn{Zero}(x)$, which holds if and only if $x = 0$,
-corresponds to the function $\Char{\fn{Zero}}$, defined using primitive
-recursion by
+In other words, when one speaks of a primitive recursive relation
+$R(\vec x)$, one is referring to a relation of the form $\Char{R}(\vec
+x) = 1$, where $\Char{R}$ is a primitive recursive function which, on
+any input, returns either 1 or 0. For example, the relation
+$\fn{IsZero}(x)$, which holds if and only if $x = 0$, corresponds to the
+function $\Char{\fn{IsZero}}$, defined using primitive recursion by
 \[
-\Char{\fn{Zero}}(0) = 1, \quad \Char{\fn{Zero}}(x+1) = 0.
+\Char{\fn{IsZero}}(0) = 1, \quad \Char{\fn{IsZero}}(x+1) = 0.
 \]
 
 It should be clear that one can compose relations with other primitive
 recursive functions. So the following are also primitive recursive:
 \begin{enumerate}
-\item The equality relation, $x = y$, defined by $\fn{Zero}(\left|x -
+\item The equality relation, $x = y$, defined by $\fn{IsZero}(\left|x -
   y\right|)$
-\item The less-than relation, $x \leq y$, defined by $\fn{Zero}(x
+\item The less-than relation, $x \leq y$, defined by $\fn{IsZero}(x
   \tsub y)$
 \end{enumerate}
 Furthermore, the set of primitive recursive relations is closed under
@@ -49,39 +48,44 @@ boolean operations:
 \item Negation, $\lnot P$
 \item Conjunction, $P \land Q$
 \item Disjunction, $P \lor Q$
-\item Implication, $P \lif Q$
+\item If \dots then, $P \lif Q$
 \end{enumerate}
-are all primitive recursive, if $P$ and $Q$ are.
+are all primitive recursive, if $P$ and $Q$ are. For suppose
+$\Char{P}(\vec z)$ an $\Char{Q}(\vec z)$ are primitive recursive. Then
+the relation $R(\vec z)$ that holds iff both $P(\vec z)$ and $Q(\vec
+z)$ hold has the characteristic function $\Char{R}(\vec z) =
+\fn{and}(\Char{P}(\vec z), \Char{Q}(\vec z))$.
 
 One can also define relations using bounded quantification:
 \begin{enumerate}
 \item Bounded universal quantification: if $R(x, \vec z)$ is a
 primitive recursive relation, then so is the relation
 \[
-\lforall[x < y][R(x, \vec z)]
+\bforall{x < y}{R(x, \vec z)}
 \]
-which holds if and only if $R(x,\vec z)$ holds for every $x$ less than
-$y$.
+which holds if and only if $R(x,\vec z)$ holds for every~$x$ less
+than~$y$.
 \item Bounded existential quantification: if $R(x, \vec z)$ is a
 primitive recursive relation, then so is
 \[
-\lexists[x < y][R(x, \vec z)].
+\bexists{x < y}{R(x, \vec z)}.
 \]
 \end{enumerate}
-By convention, we take expressions of the form $\lforall[x < 0][R(x,\vec
-z)]$ to be true (for the trivial reason that there \emph{are} no $x$
-less than $0$) and $\lexists[x < 0][R(x,\vec z)]$ to be false. A universal
-quantifier functions just like a finite product; it can also be
-defined directly by
+By convention, we take $\bforall{x < 0}{R(x,\vec z)}$ to be true (for
+the trivial reason that there \emph{are} no $x$ less than $0$) and
+$\bexists{x < 0}{R(x,\vec z)}$ to be false. A universal quantifier
+functions just like a finite product; it can also be defined directly
+by
 \[
-g(0,\vec z) = 1, \quad g(y+1,\vec z) = \Char{\fn{and}}(g(y,\vec
-z),\Char{R}(y,\vec z)).
+g(0,\vec z) = 1, \quad g(y+1,\vec z) =
+\fn{and}(g(y,\vec z),\Char{R}(y,\vec z)).
 \]
 Bounded existential quantification can similarly be defined using
 $\fn{or}$. Alternatively, it can be defined from bounded universal
-quantification, using the equivalence, $\lexists[x < y][!A(x)] \liff \lnot
-\lforall[x < y][\lnot !A(x)]$. Note that, for example, a bounded quantifier
-of the form $\lexists[x \leq y]$ is equivalent to $\lexists[x < y+1]$.
+quantification, using the equivalence, $\bexists{x < y}{!A(x)} \liff
+\lnot \bforall{x < y}{\lnot !A(x)}$. Note that, for example, a bounded
+quantifier of the form $\bexists{x \leq y}{\dots x\dots}$ is
+equivalent to $\bexists{x < y+1}{\dots x \dots}$.
 
 Another useful primitive recursive function is:
 \begin{enumerate}

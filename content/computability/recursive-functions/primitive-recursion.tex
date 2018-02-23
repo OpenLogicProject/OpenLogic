@@ -40,22 +40,20 @@ k(x) & = & x^x + (x + 3) \cdot x \\
 & = & f(h(x,x),g(f(x,3),x)).
 \end{eqnarray*}
 
-Remember that the \emph{arity} of a function is the number of
-arguments. For convenience, we will consider a constant, like 7, to be
-a 0-ary function. (Send it zero arguments, and it returns 7.)  The set
-of \emph{primitive recursive functions} is the set of functions from
-$\Nat$ to $\Nat$ that you get if you start with $0$ and the successor
-function, $S(x) = x+1$, and iterate the two operations above,
-primitive recursion and composition. The idea is that primitive
-recursive functions are defined in a straightforward and explicit
-way, so that it is intuitively clear that each one can be computed
-using finite means.
+Let $\Zero(x)$ be the function that always returns~$0$, regardless of
+what $x$~is, and let $\Succ(x) = x+1$ be the successor function.  The
+set of \emph{primitive recursive functions} is the set of functions
+from $\Nat^n$ to $\Nat$ that you get if you start with $\Zero$ and
+$\Succ$ by iterating the two operations above, primitive recursion and
+composition. The idea is that primitive recursive functions are
+defined in a straightforward and explicit way, so that it is
+intuitively clear that each one can be computed using finite means.
 \end{explain}
 
 \begin{defn}
-If $f$ is a $k$-ary function and $g_0$, \dots,~$g_{k-1}$ are $l$-ary
+If $f$ is a $k$-place function and $g_0$, \dots,~$g_{k-1}$ are $l$-place
 functions on the natural numbers, the \emph{composition} of $f$ with
-$g_0$, \dots,~$g_{k-1}$ is the $l$-ary function $h$ defined by
+$g_0$, \dots,~$g_{k-1}$ is the $l$-place function $h$ defined by
 \[
 h(x_0,\dots,x_{l-1}) =
 f(g_0(x_0,\dots,x_{l-1}),\dots,g_{k-1}(x_0,\dots,x_{l-1})) .
@@ -63,137 +61,154 @@ f(g_0(x_0,\dots,x_{l-1}),\dots,g_{k-1}(x_0,\dots,x_{l-1})) .
 \end{defn}
 
 \begin{defn}
-If $f(z_0,\dots,z_{k-1})$ is a $k$-ary function and
-$g(x,y,z_0,\dots,z_{k-1})$ is a $k+2$-ary function, then the function
+If $f$ is a $k$-place function and
+$g$ is a $(k+2)$-place function, then the function
 defined by \emph{primitive recursion from $f$ and $g$} is the
-$k+1$-ary function $h$, defined by the equations
+$(k+1)$-place function~$h$ defined by the equations
 \begin{eqnarray*}
 h(0,z_0,\dots,z_{k-1}) & = & f(z_0,\dots,z_{k-1}) \\
 h(x+1,z_0,\dots,z_{k-1}) & = & g(x,h(x,z_0,\dots,z_{k-1}),z_0,\dots,z_{k-1})
 \end{eqnarray*}
 \end{defn}
 
-In addition to the constant, 0, and the successor function, $S(x)$, we
-will include among primitive recursive functions the projection
-functions,
+In addition to $\Zero$ and $\Succ$, we will include among primitive
+recursive functions the projection functions,
 \[
 \Proj{n}{i}(x_0,\dots,x_{n-1}) = x_i,
 \]
-for each natural number $n$ and $i < n$. In the end, we have the
-following:
+for each natural number $n$ and $i < n$. These are not terribly
+exciting in themselves: $\Proj{n}{i}$ is simply the $k$-place function
+that always returns its $i$th argument. But the allow us to define new
+functions by disregarding arguments or switching arguments, as we'll
+see later.
+
+In the end, we have the following:
 
 \begin{defn}
-  The set of primitive recursive functions is the set of functions of
-  various arities from the set of natural numbers to the set of
-  natural numbers, defined inductively by the following clauses:
+  The set of primitive recursive functions is the set of functions 
+  from $\Nat^n$ to $\Nat$, defined inductively by the
+  following clauses:
 \begin{enumerate}
-\item The constant, $0$, is primitive recursive.
-\item The successor function, $S$, is primitive recursive.
+\item $\Zero$ is primitive recursive.
+\item $\Succ$ is primitive recursive.
 \item Each projection function $\Proj{n}{i}$ is primitive recursive.
-\item If $f$ is a $k$-ary primitive recursive function and
-  $g_0$, \dots,~$g_{k-1}$ are $l$-ary primitive recursive functions, then
+\item If $f$ is a $k$-place primitive recursive function and
+  $g_0$, \dots,~$g_{k-1}$ are $l$-place primitive recursive functions, then
   the composition of $f$ with $g_0$, \dots,~$g_{k-1}$ is primitive
   recursive.
-\item If $f$ is a $k$-ary primitive recursive function and $g$ is a
-  $k+2$-ary primitive recursive function, then the function defined by
+\item If $f$ is a $k$-place primitive recursive function and $g$ is a
+  $k+2$-place primitive recursive function, then the function defined by
   primitive recursion from $f$ and $g$ is primitive recursive.
 \end{enumerate}
 \end{defn}
 
 \begin{explain}
 Put more concisely, the set of primitive recursive functions is the
-smallest set containing the constant 0, the successor function,
-and projection functions, and closed under composition and primitive
-recursion.
+smallest set containing $\Zero$, $\Succ$, and the projection
+functions~$\Proj{n}{j}$, and which is closed under composition and
+primitive recursion.
 
 Another way of describing the set of primitive recursive functions
 keeps track of the ``stage'' at which a function enters the set. Let
-$S_0$ denote the set of starting functions: zero, successor, and the
+$S_0$ denote the set of starting functions: $\Zero$, $\Succ$, and the
 projections. Once $S_i$ has been defined, let $S_{i+1}$ be the set of
 all functions you get by applying a single instance of composition or
-primitive recursion to functions in $S_i$. Then
+primitive recursion to functions in~$S_i$. Then
 \[
 S = \bigcup_{i \in \Nat} S_i
 \]
-is the set of primitive recursive functions
+is the set of all primitive recursive functions
 \end{explain}
 
-Our definition of composition may seem too rigid, since
-$g_0$, \dots,~$g_{k-1}$ are all required to have the same arity, $l$. But
-adding the projection functions provides the desired flexibility. For
-example, suppose $f$ and $g$ are ternary functions and $h$ is the
-binary function defined by
+Our definition of composition may seem too rigid, since $g_0$,
+\dots,~$g_{k-1}$ are all required to have the same
+arity~$l$. (Remember that the \emph{arity} of a function is the number
+of arguments; an $l$-place function has arity~$l$.) But adding the
+projection functions provides the desired flexibility. For example,
+suppose $f$ and~$g$ are $3$-place functions and $h$~is the $2$-place
+function defined by
 \[
 h(x,y) = f(x,g(x,x,y),y).
 \]
-Then the definition of $h$ can be rewritten with the projection
+The definition of~$h$ can be rewritten with the projection
 functions, as
 \[
 h(x,y) = f(\Proj{2}{0}(x,y), g(\Proj{2}{0}(x,y), \Proj{2}{0}(x,y),
 \Proj{2}{1}(x,y)), \Proj{2}{1}(x,y)).
 \]
-Then $h$ is the composition of $f$ with $\Proj{2}{0},l,\Proj{2}{1}$, where
+Then $h$ is the composition of $f$ with $\Proj{2}{0}$, $l$, and
+$\Proj{2}{1}$, where
 \[
 l(x,y) = g(\Proj{2}{0}(x,y),\Proj{2}{0}(x,y),\Proj{2}{1}(x,y)),
 \]
-i.e., $l$ is the composition of $g$ with $\Proj{2}{0},\Proj{2}{0},\Proj{2}{1}$.
+i.e., $l$ is the composition of $g$ with $\Proj{2}{0}$, $\Proj{2}{0}$,
+and~$\Proj{2}{1}$.
 
-For another example, let us consider one of the informal examples
-given above, namely, addition. This is
+For another example, let us again consider addition. This is
 described recursively by the following two equations:
 \begin{eqnarray*}
 x + 0 & = & x \\
-x + (y+1) & = & S(x+y).
+x + (y+1) & = & \Succ(x+y).
 \end{eqnarray*}
-In other words, addition is the function $g$ defined recursively by
+In other words, addition is the function $\Add$ defined recursively by
 the equations
 \begin{eqnarray*}
-g(0,x) & = & x \\
-g(y+1,x) & = & S(g(y,x)).
+\Add(0,x) & = & x \\
+\Add(y+1,x) & = & \Succ(\Add(y,x)).
 \end{eqnarray*}
 But even this is not a strict primitive recursive definition; we need
 to put it in the form
 \begin{eqnarray*}
-g(0,x) & = & k(x) \\
-g(y+1,x) & = & h(y,g(y,x),x)
+\Add(0,x) & = & f(x) \\
+\Add(y+1,x) & = & g(y,\Add(y,x),x)
 \end{eqnarray*}
-for some 1-ary primitive recursive function $k$ and some 3-ary
-primitive recursive function $h$. We can take $k$ to be $\Proj{1}{0}$, and
-we can define $h$ using composition,
+for some $1$-place primitive recursive function~$f$ and some $3$-place
+primitive recursive function~$g$. We can take $f$ to be $\Proj{1}{0}$, and
+we can define~$g$ using composition,
 \[
-h(y,w,x) = S(\Proj{3}{1}(y,w,x)).
+g(y,w,x) = \Succ(\Proj{3}{1}(y,w,x)).
 \]
-The function $h$, being the composition of basic primitive recursive
-functions, is primitive recursive; and hence so is $g$. (Note that,
-strictly speaking, we have defined the function $g(y,x)$ meeting the
+The function~$g$, being the composition of basic primitive recursive
+functions, is primitive recursive; and hence so is~$h$. (Note that,
+strictly speaking, we have defined the function $g(y, x)$ meeting the
 recursive specification of $x + y$; in other words, the variables are
 in a different order. Luckily, addition is commutative, so here the
-difference is not important; otherwise, we could define the function
-$g'$ by
+difference is not important; otherwise, we could define the
+function~$g'$ by
 \[
 g'(x,y) = g(\Proj{2}{1}(y,x)),\Proj{2}{0}(y,x)) = g(y,x),
 \]
-using composition.)
-
+using composition.
 
 \begin{explain}
 One advantage to having the precise description of the primitive
 recursive functions is that we can be systematic in describing them.
 For example, we can assign a ``notation'' to each such function, as
-follows. Use symbols $0$, $S$, and $\Proj{n}{i}$ for zero, successor, and
-the projections. Now suppose $f$ is defined by composition from a
-$k$-ary function $h$ and $l$-ary functions $g_0$, \dots,~$g_{k-1}$, and
-we have assigned notations $H,G_0$, \dots,~$G_{k-1}$ to the latter
-functions. Then, using a new symbol $\fn{Comp}_{k,l}$, we can denote
-the function $f$ by $\fn{Comp}_{k,l}[H,G_0,\dots,G_{k-1}]$. For the
-functions defined by primitive recursion, we can use analogous
-notations of the form $\fn{Rec}_k[G,H]$, where $k$ denotes that arity
-of the function being defined. With this setup, we can denote the
-addition function by
+follows. Use symbols $\Zero$, $\Succ$, and $\Proj{n}{i}$ for zero,
+successor, and the projections. Now suppose $f$ is defined by
+composition from a $k$-place function~$h$ and $l$-place functions $g_0$,
+\dots,~$g_{k-1}$, and we have assigned notations $H$, $G_0$,
+\dots,~$G_{k-1}$ to the latter functions. Then, using a new symbol
+$\fn{Comp}_{k,l}$, we can denote the function $f$ by
+$\fn{Comp}_{k,l}[H,G_0,\dots,G_{k-1}]$. For the functions defined by
+primitive recursion, we can use analogous notations of the form
+$\fn{Rec}_k[G,H]$, where $k$ denotes that arity of the function being
+defined. With this setup, we can denote the addition function by
 \[
-\fn{Rec}_2[\Proj{1}{0},\fn{Comp}_{1,3}[S,\Proj{3}{1}]].
+\fn{Rec}_2[\Proj{1}{0},\fn{Comp}_{1,3}[\Succ,\Proj{3}{1}]].
 \]
 Having these notations sometimes proves useful.
 \end{explain}
+
+\begin{prob}
+Multiplication satisfies the recursive equations
+\begin{align*}
+  0 \cdot y & = y\\
+  (x+1) \cdot y & = (x \cdot y) + x
+\end{align*}
+Give the explicit precise definition of the function $\Mult(x, y) =
+x\cdot y$, assuming that $\Add(x, y) = x + y$ is already defined. Give
+the complete notation for $\Mult$.
+\end{prob}
 
 \end{document}

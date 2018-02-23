@@ -1,0 +1,188 @@
+% Part: normal-modal-logic
+% Chapter: frame-correspondence
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{frd}{acc}
+
+\olsection{Properties of Accessibility Relations}
+
+Many modal !!{formula}s turn out to be characteristic of simple, and
+even familiar, properties of the accessibility relation. In one
+direction, that means that any model that has a given property makes a
+corresponding !!{formula} (and all its substitution instances)
+true. We begin with five classical examples of kinds of accessibility
+relations and the formulas the truth of which they guarantee.
+
+\begin{thm}\ollabel{thm:soundschemas}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model.  If $R$ has the
+  property on the left side of \olref{tab:five}, every instance of the
+  !!{formula} on the right side is true in~$\mModel{M}$.
+\end{thm}
+
+\begin{table}[t]
+    \begin{tabular}{| l || l |}
+      \hline
+      {\emph{If $R$ is \dots}} & {\emph{then \dots is true in~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{serial}: $\forall u \exists v Ruv$ & \hbox to.43\textwidth
+           {$\Box p \lif \Diamond p$ \hfill (\Ax{D})} \\
+      \hline
+      \emph{reflexive}: $\forall w Rww$  
+      & \hbox to.43\textwidth
+          {$\Box p \lif p$ \hfill (\Ax{T})} \\
+      \hline
+      \emph{symmetric}: &  \hbox to .43\textwidth
+           {$p \lif \Box\Diamond p$ \hfill (\Ax{B})} \\
+           $\forall u\forall v(Ruv \lif Rvu)$ & \\
+      \hline
+      \emph{transitive}: & \hbox to.43\textwidth
+           {$\Box p \lif \Box \Box p$ \hfill (\Ax{4})} \\
+      $\forall u \forall v \forall w ((Ruv \land Rvw) \lif Ruw)$ & \\
+      \hline 
+      \emph{euclidean}: & \hbox to .43\textwidth
+        {$\Diamond p \lif \Box\Diamond p$ \hfill (\Ax{B})} \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif Ruv$ &\\
+      \hline
+    \end{tabular}
+    \caption{Five correspondence facts.}\ollabel{tab:five}
+  \end{table} 
+
+
+\begin{proof}
+  Here is the case for \Ax{B}: to show that the schema is true in a
+  model we need to show that all of its instances are true all worlds
+  in the model. So let $!A \lif \Box\Diamond !A$ be a given instance
+  of \Ax{B}, and let $w \in W$ be an arbitrary world. Suppose the
+  antecedent $!A$ is true at $w$, in order to show that $\Box \Diamond
+  !A$ is true at $w$. So we need to show that $\Diamond !A$ is true at
+  all $w'$ accessible from $w$. Now, for any $w'$ such that $Rww'$ we
+  have, using the hypothesis of symmetry, that also $Rw'w$ (see
+  \olref{fig:Bsymm}). Since $\mSat{M}{!A}[w]$, we have
+  $\mSat{M}{\Diamond !A}[w']$. Since $w'$ was an arbitrary world such
+  that $Rww'$, we have $\mSat{M}{\Box\Diamond!A}[w]$.
+
+  We leave the other cases as exercises.
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[mod][frd][acc]{thm:soundschemas}
+\end{prob}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={below:$\mSat{}{\formula{A}}$\\
+          $\mSat{}{\Box\Diamond \formula{A}}$}] {$w$}; 
+      \node[world] (w2) [label=below:{$\mSat{}{\Diamond \formula{A}}$},
+        right=of w1] {$w'$}; 
+      \draw[->, bend left] (w1) to (w2); 
+      \draw[->, bend left] (w2) to (w1); 
+    \end{tikzpicture}
+  \end{center}
+\caption{The argument from symmetry.}\ollabel{fig:Bsymm}
+\end{figure}
+
+Notice that the converse implications of \olref{thm:soundschemas} do
+not hold: it's not true that if a model verifies a schema, then the
+accessibility relation of that model has the corresponding property.
+In the case of \Ax{T} and reflexive models, it is easy to give an
+example of a model in which \Ax{T} itself fails: let $W = \{w\}$ and
+$V(p) = \emptyset$. Then $R$ is not reflexive, but $\mSat{M}{\Box
+  p}[w]$ and $\mSat/{M}{p}[w]$. But here we have just a single
+instance of \Ax{T} that fails in~$\mModel{M}$, other instances, e.g.,
+$\Box \lnot p \lif \lnot p$ are true. It is harder to give examples
+where \emph{every substitution instance} of~\Ax{T} is true
+in~$\mModel{M}$ and $\mModel{M}$ is not reflexive. But there are such
+models, too:
+
+\begin{prop}\ollabel{prop:reflexive}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model such that $W = \{u, v
+  \}$, where worlds $u$ and $v$ are related by $R$: i.e., both $Ruv$
+  and $Rvu$.  Suppose that for all $p$: $u \in V(p) \Leftrightarrow v
+  \in V(p)$. Then:
+  \begin{enumerate}
+  \item For all $!A$: $\mSat{M}{!A}[u]$ if and only if
+    $\mSat{M}{!A}[v]$ (use induction on $!A$).
+  \item Every instance of~\Ax{T} is true in $\mModel{M}$.
+  \end{enumerate}
+  Since $\mModel{M}$ is not reflexive (it is, in fact,
+  \emph{irreflexive}), the converse of \olref{thm:soundschemas}
+  fails in the case of \Ax{T} (similar arguments can be given for
+  some---though not all---the other schemas mentioned in
+  \olref{thm:soundschemas}).
+\end{prop}
+
+\begin{prob}
+  Prove the claims in \olref[mod][frd][acc]{prop:reflexive}.
+\end{prob}
+
+Although we will focus on the five classical !!{formula}s \Ax{D},
+\Ax{T}, \Ax{B}, \Ax{4}, and \Ax{5}, we record in
+\olref{tab:anotherfive} a few more properties of accessibility
+relations. The accessibility relation $R$ is partially functional, if
+from every world at most one world is accessible. If it is the case
+that from every world exactly one world is accessibly, we call it
+functional. (Thus the functional relations are precisely those that
+are both serial and partially functional). They are called
+``functional'' because the accessibility relation operates like a
+(partial) function. A relation is weakly dense if whenever $Ruv$,
+there is a~$w$ ``between'' $u$ and~$v$. So weakly dense relations are
+in a sense the opposite of transitive relations: in a transitive
+relation, whenever you can reach $v$ from $u$ by a detour via~$w$, you
+can reach $v$ from $u$ directly; in a weakly dense relation, whenever
+you can reach $v$ from~$u$ directly, you can also reach it by a detour
+via some~$w$. A relation is weakly directed if whenever you can reach
+worlds $u$ and~$v$ from some world~$w$, you can reach a single
+world~$t$ from both $u$ and~$v$---this is sometimes called the
+``diamond property'' or ``confluence.''
+
+\begin{table}[t]
+    \begin{tabular}{| p{.50\textwidth} || p{.43\textwidth} |}
+      \hline
+      {\emph{If $R$ is \dots}} & {\emph{then \dots is true in~$\mModel{M}$:}} \\
+      \hline \hline
+      \emph{partially functional}: & 
+      \multirow{2}{*}{$\Diamond p \lif \Box p$} \\
+      $ \forall w \forall u \forall v ((Rwu \land Rwv) \lif u =v )$ & \\
+      \hline
+      \multirow{2}{*}{\emph{functional}: $\forall w \exists v \forall u(Rwu \liff \eq[u][v]) $} 
+      & \multirow{2}{*}{$\Diamond p \liff \Box p$} \\
+      & \\
+      \hline
+      \emph{weakly dense}: &  \multirow{2}{*}{$\Box \Box p \lif
+        \Box p$} \\
+      $\forall u\forall v(Ruv \lif \exists w(Ruw \land Rwv))$ & \\
+      \hline
+      \emph{weakly connected}: &
+      \multirow{3}{*}{\hbox to.43\textwidth{$
+        \begin{array}{@{}l@{}}
+          \Box ((p \land \Box p) \lif q) \lor {} \\
+          \qquad \Box ((q \land \Box q) \lif p)
+        \end{array}$ \hfill (\Ax{L})}
+      } \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif {}$ &\\
+      \qquad $(Ruv \lor u=v \lor Rvu))$ & \\
+      \hline 
+      \emph{weakly directed}: & \multirow{3}{*}{\hbox to .43\textwidth
+        {$\Diamond\Box p \lif \Box\Diamond p$\hfill (\Ax{G})}} \\
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif {}$ & \\
+      \qquad $\exists t (Rut \land Rvt)$ & \\
+      \hline
+    \end{tabular}
+    \caption{Five more correspondence facts.}\ollabel{tab:anotherfive}
+  \end{table} 
+
+\begin{prob}
+  Let $\mModel{M} = \tuple{W, R, V}$ be a model. Show that if $R$
+  satisfies the left-hand properties of
+  \olref[mod][frd][acc]{tab:anotherfive}, every instance of the
+  corresponding right-hand formula is true in~$\mModel{M}$.
+\end{prob}
+
+
+
+\end{document}

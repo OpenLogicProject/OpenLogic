@@ -12,7 +12,6 @@
 .PHONY : FORCE_MAKE
 
 ALLTEXFILES = open-logic-debug.tex open-logic-complete.tex \
-	courses/*/*.tex \
 	$(shell grep 'INPUT content/.*/.*\.tex' open-logic-debug.fls | uniq | sed 's/INPUT //g' )
 
 ALLPDFFILES = $(ALLTEXFILES:.tex=.pdf)
@@ -21,7 +20,7 @@ all: open-logic-debug.pdf open-logic-complete.pdf
 
 content/open-logic.pdf:
 
-everything: $(ALLPDFFILES) open-logic-config.pdf
+everything: $(ALLPDFFILES) open-logic-config.pdf courses index.html
 
 courses: FORCE_MAKE
 	for course in courses/* ; do \
@@ -50,6 +49,19 @@ open-logic-config.pdf: open-logic-config.sty
 clean:	
 	latexmk -c $(ALLTEXFILES)
 
-upload: FORCE_MAKE
-	rsync -avz --delete --include "[^\.]*/" --include '*.pdf' --include '*.png' --exclude '*'  . rzach@c1.ucalgary.ca:webdisk/public_html/static/open-logic/
+clean-all:
+	latexmk -C $(ALLTEXFILES)
 
+index.html: FORCE_MAKE
+	git checkout master
+	cp misc/index.start.html index.html
+	for branch in `git branch --list --no-column |grep -v master` ; do \
+		echo "<li>$$branch: <a href=\"branches/$$branch/open-logic-debug.pdf\">debug</a> | <a href=\"branches/$$branch/open-logic-complete.pdf\">complete</a></li>" >> index.html ;\
+	done 
+	echo "</ol>" >> index.html
+	echo "<h2>Parts, Chapters, Sections</h2>" >> index.html
+	misc/htmltoc content content | sed "1d" >> index.html
+	echo "<p>Generated from Git revision <code>" >> index.html
+	grep shash .git/gitHeadInfo.gin |sed 's/[^{]*{\([^}]*\)},/\1/' >>index.html
+	grep authsdate .git/gitHeadInfo.gin |sed 's/[^{]*{\([^}]*\)},/(\1)/' >> index.html
+	echo "</code></p></body></html>" >> index.html

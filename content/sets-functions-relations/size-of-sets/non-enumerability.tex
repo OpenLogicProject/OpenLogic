@@ -42,7 +42,7 @@ $\Bin^\omega$~is !!{nonenumerable}.
 \end{thm}
 
 \begin{proof}
-We proceed by indirect proof. Suppose that $\Bin^\omega$ were
+Suppose, by way of contradiction, that $\Bin^\omega$ is
 !!{enumerable}, i.e., suppose that there is a list $s_{1}$, $s_{2}$,
 $s_{3}$, $s_{4}$, \dots{} of all !!{element}s of~$\Bin^\omega$.  Each
 of these $s_i$ is itself an infinite sequence of $0$'s and~$1$'s.
@@ -139,7 +139,7 @@ actual diagonal is involved.
 
 \begin{thm}
 \ollabel{thm-nonenum-pownat}
-$\Pow{\Int^+}$ is not enumerable.
+$\Pow{\Int^+}$ is not !!{enumerable}.
 \end{thm}
 
 \begin{proof}
@@ -168,6 +168,29 @@ of one but not the other, and so $\overline{Z}$ and $Z_k$ have
 different !!{element}s. Since $k$ was arbitrary, $\overline{Z}$ is not
 on the list $Z_1$, $Z_2$, \dots
 \end{proof}
+
+\begin{explain}
+The preceding proof did not mention a diagonal, but you can think of
+it as involving a diagonal if you picture it this way: Imagine the
+sets $Z_1$, $Z_2$, \dots, written in an array, where each
+!!{element}~$j \in Z_i$ is listed in the~$j$-th column. Say the first
+four sets on that list are $\{1,2,3,\dots\}$, $\{2, 4, 6, \dots\}$,
+$\{1,2,5\}$, and $\{3,4,5,\dots\}$. Then the array would begin with
+\[
+\begin{array}{r@{}rrrrrrr}
+  Z_1 = \{ & \mathbf{1}, & 2, & 3, & 4, & 5, & 6, & \dots\}\\
+  Z_2 = \{ &  & \mathbf{2}, &  & 4, &  & 6, & \dots\}\\
+  Z_3 = \{ & 1, & 2, &  &  & 5\phantom{,} &  & \}\\
+  Z_4 = \{ &  &  & 3, & \mathbf{4}, & 5, & 6, & \dots\}\\
+  \vdots & & & & & \ddots
+\end{array}
+\]
+Then $\overline{Z}$ is the set obtained by going down the diagonal,
+leaving out any numbers that appear along the diagonal and include
+those $j$ where the array has a gap in the $j$-th row/column. In the
+above case, we would leave out $1$ and $2$, include~$3$, leave
+out~$4$, etc.
+\end{explain}
 
 \begin{prob}
 Show that $\Pow{\Nat}$ is !!{nonenumerable} by a diagonal argument.

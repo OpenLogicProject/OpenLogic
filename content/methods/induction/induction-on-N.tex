@@ -14,24 +14,24 @@ In its simplest form, induction is a technique used to prove results
 for all natural numbers. It uses the fact that by starting from $0$
 and repeatedly adding~$1$ we eventually reach every natural number.  So
 to prove that something is true for every number, we can (1) establish
-that it is true for $0$ and (2) show that whenever a number has it,
-the next number has it too.  If we abbreviate ``number~$n$ has
+that it is true for $0$ and (2) show that whenever it is true for a number~$n$,
+it is also true for the next number~$n+1$.  If we abbreviate ``number~$n$ has
 property $P$'' by $P(n)$, then a proof by induction that $P(n)$ for
 all $n \in \Nat$ consists of:
 \begin{enumerate}
 \item a proof of $P(0)$, and
 \item a proof that, for any~$n$, if $P(n)$ then $P(n+1)$.
 \end{enumerate}
-To make this crystal clear, suppose we have both (1) and (2).  Then
+To make this crystal clear, suppose we have both (1) and~(2).  Then
 (1) tells us that $P(0)$ is true.  If we also have (2), we know in
 particular that if $P(0)$ then $P(0+1)$, i.e., $P(1)$. (This follows
 from the general statement ``for any~$n$, if $P(n)$ then $P(n+1)$'' by
-putting~$0$ for~$n$.  So by modus ponens, we have that $P(1)$.  From
-(2) again, now taking $1$ for~$n$, we have: if $P(1)$ then $P(2)$.
-Since we've just established $P(1)$, by modus ponens, we
+putting~$0$ for~$n$.  So by modus ponens, we have that~$P(1)$.  From
+(2) again, now taking $1$ for~$n$, we have: if $P(1)$ then~$P(2)$.
+Since we've just established~$P(1)$, by modus ponens, we
 have~$P(2)$. And so on.  For any number $k$, after doing this $k$
 steps, we eventually arrive at~$P(k)$.  So (1) and (2) together
-established~$P(k)$ for any $k \in \Nat$.
+establish~$P(k)$ for any $k \in \Nat$.
 
 Let's look at an example.  Suppose we want to find out how many
 different sums we can throw with $n$ dice.  Although it might seem

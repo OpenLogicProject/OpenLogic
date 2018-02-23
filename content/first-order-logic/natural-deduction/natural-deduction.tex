@@ -8,23 +8,45 @@
 \chapter{Natural Deduction}
 
 \begin{editorial}
-  To include or exclude material relevant to the sequent calculus as a
-  proof system, use the ``prfLK'' tag.
+This chapter presents a natural deduction system in the style of
+Gentzen/Prawitz.
+  
+To include or exclude material relevant to natural deduction as a
+proof system, use the ``prfND'' tag.
 \end{editorial}
-
-\olimport{introduction}
 
 \olimport{rules-and-proofs}
 
+\olimport{propositional-rules}
+
+\iftag{FOL}{%
+  \olimport{quantifier-rules}
+}{}
+
+\olimport{derivations}
+
 \olimport{proving-things}
+
+\iftag{FOL}{%
+  \olimport{proving-things-quant}
+}{}
 
 \olimport{proof-theoretic-notions}
 
-\olimport{provability}
+\olimport{provability-consistency}
+
+\olimport{provability-propositional}
+
+\iftag{FOL}{%
+  \olimport{provability-quantifiers}
+}{}
 
 \olimport{soundness}
 
-\olimport{identity}
+\iftag{FOL}{%
+  \olimport{identity}
+  \olimport{soundness-identity}
+}{}
 
 \OLEndChapterHook
 

@@ -1,0 +1,48 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: soundness-identity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{sid}
+
+\olsection{Soundness with \usetoken{S}{identity}}
+
+\begin{prop}
+Natural deduction with rules for $\eq$ is sound.
+\end{prop}
+
+\begin{proof}
+Any !!{formula} of the form $\eq[t][t]$ is valid, since
+for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
+we assume the term $t$ to be ground, i.e., it contains no variables,
+so variable assignments are irrelevant).
+
+Suppose the last inference in !!a{derivation} is \Elim{\eq}, i.e., the
+derivation has the following form:
+\begin{prooftree}
+  \AxiomC{$\Gamma_1$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\eq[t_1][t_2]$}
+  \AxiomC{$\Gamma_2$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A(t_1)$}
+  \RightLabel{\Elim{\eq}}
+  \BinaryInfC{$!A(t_2)$}
+\end{prooftree}
+The premises $\eq[t_1][t_2]$ and $!A(t_1)$ are !!{derive}d from
+!!{undischarged} assumptions~$\Gamma_1$ and $\Gamma_2$, respectively.
+We want to show that $!A(t_2)$ follows from $\Gamma_1 \cup \Gamma_2$.
+Consider a !!{structure}~$\Struct{M}$ with $\Sat{M}{\Gamma_1 \cup
+  \Gamma_2}$. By induction hypothesis, $\Sat{M}{!A(t_1)}$ and
+$\Sat{M}{\eq[t_1][t_2]}$. Therefore, $\Value{t_1}{M} = \Value{t_2}{M}$. Let
+$s$ be any variable assignment, and $s'$ be the $x$-variant given by
+$s'(x) = \Value{t_1}{M} = \Value{t_2}{M}$. By
+\olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_1)}[s]$ iff
+$\Sat{M}{!A(x)}[s']$ iff $\Sat{M}{!A(t_2)}[s]$. Since
+$\Sat{M}{!A(t_1)}$, we have $\Sat{M}{!A(t_2)}$.
+\end{proof}
+
+\end{document}

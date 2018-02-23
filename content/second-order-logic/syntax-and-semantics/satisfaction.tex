@@ -1,0 +1,97 @@
+% Part: second-order-logic
+% Chapter: syntax-and-semantics
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sol}{syn}{sat}
+
+\olsection{Satisfaction}
+
+\begin{explain}
+To define the satisfaction relation $\Sat{M}{!A}[s]$ for second-order
+!!{formula}s, we have to extend the definitions to cover second-order
+variables.  
+\end{explain}
+
+\begin{defn}[Variable Assignment]
+A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
+function which maps each
+\begin{enumerate}
+\item object !!{variable}~$\Obj{v_i}$ to an element of~$\Domain M$,
+  i.e., $s(\Obj{v_i}) \in \Domain{M}$
+\item $n$-place relation variable~$\Obj{V_i^n}$ to an $n$-place
+  relation on~$\Domain{M}$, i.e., $s(\Obj{V_i^n}) \subseteq \Domain{M}^n$;
+\item $n$-place function variable~$\Obj{u_i^n}$ to an $n$-place
+  function from $\Domain{M}$ to $\Domain{M}$, i.e.,
+  $s(\Obj{u_i^n})\colon \Domain{M}^n \to \Domain{M}$;
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+A !!{structure} assigns a !!{value} to each !!{constant} and
+!!{function}, and a second-order variable assigns objects and
+functions to each object and function variable. Together, they let us
+assign a value to very term.
+\end{explain}
+
+\begin{defn}[\usetoken{S}{value} of a Term]
+If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
+!!{structure} for~$\Lang L$, and $s$ is a !!{variable} assignment
+for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
+for first-order terms, plus the following clause:
+\begin{quote}
+\indcase{t}{\Atom{u}{t_1, \ldots, t_n}}{
+\[
+\Value{\indfrm}{M}[s] = s(u)(\Value{t_1}{M}[s], \ldots,
+\Value{t_n}{M}[s]).
+\]}
+\end{quote}
+\end{defn}
+
+\begin{defn}[Satisfaction]
+For second-order !!{formula}s~$!A$, the definition of satisfaction is
+like \olref[fol][syn][sat]{defn:satisfaction} with the addition of:
+\begin{enumerate}
+\item \indcase{!A}{X^n{t_1, \dots, t_n}}{$\Sat{M}{\indfrm}[s]$
+  iff $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
+  s(X^n)$.}
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[X][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $X$-variant $s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[X][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $X$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[u][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
+    $u$-variant $s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[u][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
+    $u$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+$\Sat{M}{\lforall[z][(Xz \liff \lnot Yz)]}[s]$ whenever $s(Y) =
+  \Domain{M} \setminus s(X)$. So for instance, let $\Domain{M} = \{1,
+  2, 3\}$, $s(X) = \{1, 2\}$ and $s(Y) = \{3\}$.
+
+$\Sat{M}{\lexists[Y][(\lexists[y][Yy] \land \lforall[z][(Xz \liff
+        \lnot Yz)])]}[s]$ if there is an $s' \sim_Y s$ such that
+  $\Sat{M}{(\lexists[y][Yy] \land \lforall[z][(Xz \liff \lnot
+      Yz)])}[s]$. And that is the case iff $s'(Y) \neq \emptyset$ (so
+  that $\Sat{M}{\lexists[y][Yy]}[s']$) and, as before, $s'(Y) =
+  \Domain{M} \setminus s'(X)$. In other words,
+  $\Sat{M}{\lexists[Y][(\lexists[y][Yy] \land \lforall[z][(Xz \liff
+        \lnot Yz)])]}[s]$ iff $\Domain{M} \setminus s(X)$ is
+  non-empty, or, $s(X) \neq \Domain{M}$. So, the !!{formula} is
+  satisfied, e.g., if $s(X) = \{1, 2\}$ but not if $s(X) = \{1, 2,
+  3\}$.  
+\end{ex}
+
+\end{document}

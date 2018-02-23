@@ -10,117 +10,126 @@
 \olsection{The Beta Function Lemma}
 
 
-In order to show that $C$ can carry out primitive recursion, we need
-to develop functions that handle sequences. (If we had exponentiation
-as well, our task would be easier.) When we had primitive recursion,
-we could define things like the ``$n$th prime,'' and pick a fairly
-straightforward coding. But here we do not have primitive recursion,
-so we need to be more clever.
+In order to show that we can carry out primitive recursion if
+addition, multiplication, and $\Char{=}$ are available, we need to
+develop functions that handle sequences. (If we had exponentiation as
+well, our task would be easier.) When we had primitive recursion, we
+could define things like the ``$n$-th prime,'' and pick a fairly
+straightforward coding. But here we do not have primitive
+recursion---in fact we want to show that we can do primitive recursion
+using minimization---so we need to be more clever.  
 
 \begin{lem}
-\ollabel{beta:lemma}
-There is a function $\beta(d,i)$ in $C$ such that for every sequence
-$a_0$, \dots,~$a_n$ there is a number $d$, such that for every $i$ less
-than or equal to $n$, $\beta(d,i) = a_i$.
+\ollabel{lem:beta}
+There is a function $\beta(d,i)$ such that for every sequence $a_0$,
+\dots,~$a_n$ there is a number~$d$, such that for every $i \le n$,
+$\beta(d,i) = a_i$. Moreover, $\beta$ can be defined from the basic
+functions using just composition and regular minimization.
 \end{lem}
 
-Think of $d$ as coding the sequence $\langle a_0,\dots,a_n \rangle$, and
-$\beta(d,i)$ returning the $i$th element. The lemma is fairly minimal;
-it doesn't say we can concatenate sequences or append elements with
-functions in $C$, or even that we can \emph{compute} $d$ from
-$a_0,\dots,a_n$ using functions in $C$. All it says is that there is
-a ``decoding'' function such that every sequence is ``coded.''
+Think of $d$ as coding the sequence $\tuple{a_0, \dots, a_n}$, and
+$\beta(d,i)$ returning the $i$-th element. (Note that this ``coding''
+does \emph{not} use the prower-of-primes coding we're already familiar
+with!). The lemma is fairly minimal; it doesn't say we can concatenate
+sequences or append elements, or even that we can \emph{compute} $d$
+from $a_0$, \dots,~$a_n$ using functions definable by composition and
+regular minimization. All it says is that there is a ``decoding''
+function such that every sequence is ``coded.''
 
 The use of the notation $\beta$ is G\"odel's. To repeat, the hard part
 of proving the lemma is defining a suitable $\beta$ using the
-seemingly restricted resources in the definition of $C$. There are
-various ways to prove this lemma, but one of the cleanest is still
-G\"odel's original method, which used a number-theoretic fact called
-the Chinese Remainder theorem.
+seemingly restricted resources, i.e., using just composition and
+minimization---however, we're allowed to use addition, multiplication,
+and~$\Char{=}$. There are various ways to prove this lemma, but one of
+the cleanest is still G\"odel's original method, which used a
+number-theoretic fact called the Chinese Remainder theorem.
 
 \begin{defn}
-  Two natural numbers $a$ and $b$ are \emph{relatively prime} if their
-  greatest common divisor is 1; in other words, they have no other
-  divisors in common.
+Two natural numbers $a$ and $b$ are \emph{relatively prime} if their
+greatest common divisor is~$1$; in other words, they have no other
+divisors in common.
 \end{defn}
 
 \begin{defn}
-$a \equiv b \mod c$ means $c \mid (a-b)$, i.e.\ $a$ and $b$ have the
-same remainder when divided by $c$.
+$a \equiv b \mod c$ means $c \mid (a-b)$, i.e., $a$ and $b$ have the
+same remainder when divided by~$c$.
 \end{defn}
 
 Here is the \emph{Chinese Remainder theorem}:
 \begin{thm}
-Suppose $x_0,\dots,x_n$ are (pairwise) relatively prime. Let
-$y_0$, \dots, $y_n$ be any numbers. Then there is a number $z$ such that
-\begin{eqnarray*}
-z & \equiv & y_0 \mod x_0 \\
-z & \equiv & y_1 \mod x_1 \\
-& \vdots & \\
-z & \equiv & y_n \mod x_n.
-\end{eqnarray*}
+Suppose $x_0$, \dots,~$x_n$ are (pairwise) relatively prime. Let
+$y_0$, \dots,~$y_n$ be any numbers. Then there is a number $z$ such that
+\begin{align*}
+z & \equiv y_0 \mod x_0 \\
+z & \equiv y_1 \mod x_1 \\
+& \vdots  \\
+z & \equiv y_n \mod x_n.
+\end{align*}
 \end{thm}
 
-Here is how we will use the Chinese Remainder theorem: if
-$x_0,\dots,x_n$ are bigger than $y_0,\dots,y_n$ respectively, then
-we can take $z$ to code the sequence $\langle y_0,\dots,y_n\rangle$. To recover
-$y_i$, we need only divide $z$ by $x_i$ and take the remainder. To use
-this coding, we will need to find suitable values for $x_0,\dots,x_n$.
+Here is how we will use the Chinese Remainder theorem: if $x_0$,
+\dots,~$x_n$ are bigger than $y_0$, \dots,~$y_n$ respectively, then we
+can take $z$ to code the sequence $\tuple{y_0, \dots,y_n}$. To recover
+$y_i$, we need only divide $z$ by~$x_i$ and take the remainder. To use
+this coding, we will need to find suitable values for $x_0$,
+\dots,~$x_n$.
 
 A couple of observations will help us in this regard. Given
 $y_0$, \dots,~$y_n$, let
 \[
-j = \max(n,y_0,\dots,y_n)+1,
+j = \max(n, y_0, \dots, y_n) + 1,
 \]
 and let
-\begin{eqnarray*}
-x_0 & = & 1 + j\fac \\
-x_1 & = & 1 + 2\cdot j\fac \\
-x_2 & = & 1 + 3\cdot j\fac \\
-& \vdots & \\
-x_n & = & 1 + (n+1) \cdot j\fac
-\end{eqnarray*}
+\begin{align*}
+x_0 & = 1 + j\fac \\
+x_1 & = 1 + 2 \cdot j\fac \\
+x_2 & = 1 + 3 \cdot j\fac \\
+& \vdots  \\
+x_n & = 1 + (n+1) \cdot j\fac
+\end{align*}
 Then two things are true:
 \begin{enumerate}
 \item $x_0$, \dots,~$x_n$ are relatively prime.
 \item For each $i$, $y_i < x_i$.
 \end{enumerate}
-To see that clause 1 is true, note that if $p$ is a prime number and
-$p \mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) j\fac$ and $p \mid 1 + (k+1)
-j\fac$. But then $p$ divides their difference,
+To see that (1) is true, note that if $p$ is a prime number and $p
+\mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) j\fac$ and $p \mid
+1 + (k+1) j\fac$. But then $p$ divides their difference,
 \[
 (1 + (i+1)j\fac) - (1+ (k+1)j\fac) = (i-k) j\fac.
 \]
-Since $p$ divides $1 + (1+1)j\fac$, it can't divide $j\fac$ as well
-(otherwise, the first division would leave a remainder of 1). So $p$
-divides $i-k$. But $\left| i-k \right|$ is at most $n$, and we have
-chosen $j > n$, so this implies that $p \mid j\fac$, again a
-contradiction. So there is no prime number dividing both $x_i$ and
-$x_k$. Clause 2 is easy: we have $y_i < j < j\fac < x_i$.
+Since $p$ divides $1 + (i+1)j\fac$, it can't divide $j\fac$ as well
+(otherwise, the first division would leave a remainder of~$1$). So $p$
+divides $i-k$, since $p$ divides $(i-k)j\fac$. But $\left| i-k
+\right|$ is at most~$n$, and we have chosen $j > n$, so this implies
+that $p \mid j\fac$, again a contradiction. So there is no prime
+number dividing both $x_i$ and $x_k$. Clause (2) is easy: we have $y_i <
+j < j\fac < x_i$.
 
-Now let us prove the $\beta$ function lemma. Remember that $C$ is the
-smallest set containing $0$, successor, plus, times, $\Char{=}$,
-projections, and closed under composition and $\mu$ applied to regular
-functions. As usual, say a relation is in $C$ if its characteristic
-function is. As before we can show that the relations in $C$ are
-closed under boolean combinations and bounded quantification; for
+Now let us prove the $\beta$ function lemma. Remember that we can use
+$0$, successor, plus, times, $\Char{=}$, projections, and any function
+defined from them using composition and minimization applied to
+regular functions. We can also use a relation if its characteristic
+function is so definable. As before we can show that these relations
+are closed under boolean combinations and bounded quantification; for
 example:
 \begin{enumerate}
 \item $\fn{not}(x) \defis \Char{=}(x,0)$
-\item $\mu{x \leq z} \; R(x,y) \defis \mu x \; (R(x,y) \lor x = z)$
-\item $\lexists[x \leq z][R(x,y)] \defiff R(\mu {x \leq z} \; R(x,y), y)$
+\item $\bmin{x \leq z}{R(x,y)} \defis \umin{x}{(R(x,y) \lor x = z)}$
+\item $\bexists{x \leq z}{R(x,y)} \defiff R(\bmin{x \leq z}{R(x,y)}, y)$
 \end{enumerate}
-We can then show that all of the following are in $C$:
+We can then show that all of the following are also definable without
+primitive recursion:
 \begin{enumerate}
 \item The pairing function, $J(x,y) = \frac{1}{2}[(x+y)(x+y+1)] + x$
 % maybe explain more what is going on here, a bit confusing.
 \item Projections
 \[
-K(z) = \mu {x \leq q} \; (\lexists[y \leq z] \, [z = J(x,y)])
+K(z) = \bmin{x \leq q}{(\lexists[y \leq z] \, [z = J(x,y)])}
 \]
 and
 \[
-L(z) = \mu {y \leq q} \; (\lexists[x \leq z]\, [z = J(x,y)]).
+L(z) = \bmin{y \leq q}{(\lexists[x \leq z]\, [z = J(x,y)])}.
 \]
 \item $x < y$
 \item $x \mid y$
@@ -131,7 +140,7 @@ L(z) = \mu {y \leq q} \; (\lexists[x \leq z]\, [z = J(x,y)]).
 % \lforall[y \leq x][(y \mid x \lif y = 1 \lor y = x)].
 % \]
 \item The function $\fn{rem}(x,y)$ which returns the remainder when
-  $y$ is divided by $x$
+  $y$ is divided by~$x$
 \end{enumerate}
 Now define
 \[
@@ -148,7 +157,7 @@ j = \max(n,a_0,\dots,a_n)+1,
 and let $d_1 = j\fac$. By the observations above, we know that $1+d_1,
 1+2 d_1, \dots, 1+(n+1) d_1$ are relatively prime and all are bigger
 than $a_0,\dots,a_n$. By the Chinese Remainder theorem there is a
-value $d_0$ such that for each $i$,
+value $d_0$ such that for each~$i$,
 \[
 d_0 \equiv a_i \mod (1+(i+1)d_1)
 \]
@@ -156,7 +165,7 @@ and so (because $d_1$ is greater than $a_i$),
 \[
 a_i = \fn{rem}(1+(i+1)d_1,d_0).
 \]
-Let $d = J(d_0,d_1)$. Then for each $i$ from $0$ to $n$, we have
+Let $d = J(d_0,d_1)$. Then for each $i \le n$, we have
 \begin{eqnarray*}
 \beta(d,i) & = & \beta^*(d_0,d_1,i) \\
 & = & \fn{rem}(1+(i+1) d_1,d_0) \\

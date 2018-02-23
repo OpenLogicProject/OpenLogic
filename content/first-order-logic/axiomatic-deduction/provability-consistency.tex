@@ -1,0 +1,93 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prv}}
+      {\olfileid{pl}{axd}{prv}}
+
+\olsection{\usetoken{S}{derivability} and Consistency}
+
+We will now establish a number of properties of the !!{derivability}
+relation.  They are independently interesting, but each will play a
+role in the proof of the completeness theorem.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  If $\Gamma \Proves !A$ and $\Gamma \cup \{!A\}$ is inconsistent,
+  then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+  If $\Gamma \cup \{!A\}$ is inconsistent, then $\Gamma \cup \{!A\}
+  \Proves \lfalse$. By \olref[ptn]{prop:reflexivity}, $\Gamma \Proves
+  !B$ for every $!B \in \Gamma$. Since also $\Gamma \Proves !A$ by
+  hypothesis, $\Gamma \Proves !B$ for every $!B \in \Gamma \cup
+  \{!A\}$. By \olref[ptn]{prop:transitivity}, $\Gamma \Proves
+  \lfalse$, i.e., $\Gamma$ is inconsistent.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+First suppose $\Gamma \Proves !A$. Then $\Gamma \cup \{\lnot !A\}
+\Proves !A$ by \olref[ptn]{prop:monotony}. $\Gamma \cup \{\lnot
+!A\} \Proves \lnot !A$ by \olref[ptn]{prop:reflexivity}.  We also have
+$\Proves \lnot !A \lif (!A \lif \lfalse)$ by \olref[prp]{ax:lnot2}. So
+by two applications of \olref[ded]{prop:mp}, we have $\Gamma \cup \{\lnot
+!A\} \Proves \lfalse$.
+
+Now assume $\Gamma \cup \{\lnot !A\}$ is inconsistent, i.e., $\Gamma
+\cup \{\lnot !A\} \Proves \lfalse$. By the deduction theorem, $\Gamma
+\Proves \lnot !A \lif \lfalse$. $\Gamma \Proves (\lnot !A \lif
+\lfalse) \lif \lnot\lnot !A$ by \olref[prp]{ax:lfalse2}, so $\Gamma
+\Proves \lnot\lnot !A$ by \olref[ded]{prop:mp}. Since $\Gamma \Proves
+\lnot\lnot !A \lif !A$ (\olref[prp]{ax:dne}), we have $\Gamma
+\Proves !A$ by \olref[ded]{prop:mp} again.
+\end{proof}
+
+\begin{prob}
+Prove that $\Gamma \Proves \lnot !A$ iff $\Gamma \cup \{!A\}$ is
+inconsistent.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is
+  inconsistent.
+\end{prop}
+
+\begin{proof}
+  $\Gamma \Proves \lnot !A \lif (!A \lif \lfalse)$ by \olref[prp]{ax:lnot2}.
+  $\Gamma \Proves \lfalse$ by two applications of \olref[ded]{prop:mp}.
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  If $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+  Prove \olref[fol][axd][prv]{prop:provability-exhaustive}
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  Prove \olref[pl][axd][prv]{prop:provability-exhaustive}
+\end{prob}
+\tagendprob
+
+
+\end{document}

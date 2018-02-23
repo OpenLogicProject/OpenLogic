@@ -1,0 +1,132 @@
+% Part: first-order-logic 
+% Chapter: axiomatic-deduction 
+% Section: deduction-theorem
+
+% verification of properties of provability needed for maximally 
+% consistent sets in the completeness chapter.
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ded}}
+      {\olfileid{pl}{axd}{ded}}
+
+\olsection{The Deduction Theorem}
+
+As we've seen, giving !!{derivation}s in an axiomatic system is
+cumbersome, and !!{derivation}s may be hard to find. Rather than
+actually write out long lists of !!{formula}s, it is generally easier
+to argue that such !!{derivation}s exist, by making use of a few
+simple results. We've already established three such results:
+\olref[ptn]{prop:reflexivity} says we can always assert that $\Gamma
+\Proves !A$ when we know that $!A \in
+\Gamma$. \olref[ptn]{prop:monotony} says that if $\Gamma \Proves !A$
+then also $\Gamma \cup \{!B\} \Proves !A$. And
+\olref[ptn]{prop:transitivity} implies that if $\Gamma \Proves !A$ and
+$!A \Proves !B$, then $\Gamma \Proves !B$. Here's another simple
+result, a ``meta''-version of modus ponens:
+
+\begin{prop}
+  \ollabel{prop:mp} If $\Gamma \Proves !A$ and $\Gamma \Proves !A \lif
+  !B$, then $\Gamma \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  We have that $\{!A, !A \lif !B\} \Proves !B$:
+  \begin{derivation}
+    1. & $!A$ & Hyp.\\
+    2. & $!A \lif !B$ & Hyp.\\
+    3. & $!B$ & 1, 2, MP
+  \end{derivation}
+  By \olref[ptn]{prop:transitivity}, $\Gamma \Proves !B$.
+\end{proof}
+
+The most important result we'll use in this context is the deduction
+theorem:
+
+\begin{thm}[Deduction Theorem]
+\ollabel{thm:deduction-thm} $\Gamma \cup \{!A\} \Proves !B$ if and
+only if $\Gamma \Proves !A \lif !B$.
+\end{thm}
+
+\begin{proof}
+The ``if'' direction is immediate.  If $\Gamma \Proves !A \lif !B$
+then also $\Gamma \cup \{!A\} \Proves !A \lif !B$ by
+\olref[ptn]{prop:monotony}.  Also, $\Gamma \cup \{!A\} \Proves !A$ by
+\olref[ptn]{prop:reflexivity}. So, by \olref{prop:mp}, $\Gamma \cup
+\{!A\} \Proves !B$.
+
+For the ``only if'' direction, we proceed by induction on the length
+of the !!{derivation} of $!B$ from $\Gamma \cup \{!A\}$.
+
+For the induction basis, we prove the claim for every !!{derivation}
+of length~$1$. !!^a{derivation} of~$!B$ from $\Gamma \cup \{!A\}$ of
+length~$1$ consists of $!B$ by itself; and if it is correct $!B$ is
+either $\in \Gamma \cup \{!A\}$ or is an axiom.  If $!B \in \Gamma$ or
+is an axiom, then $\Gamma \Proves !B$. We also have that $\Gamma
+\Proves !B \lif (!A \lif !B)$ by \olref[prp]{ax:lif1}, and
+\olref{prop:mp} gives $\Gamma \Proves !A \lif !B$. If $!B \in \{ !A\}$
+then $\Gamma \Proves !A \lif !B$ because then last !!{sentence}~$!A
+\lif !B$ is the same as $!A \lif !A$, and we have !!{derive}d that in
+\olref[pro]{ex:identity}.
+
+For the inductive step, suppose !!a{derivation} of~$!B$ from
+$\Gamma \cup \{!A\}$ ends with a step~$!B$ which is justified by modus
+ponens. (If it is not justified by modus ponens, $!B \in \Gamma$, $!B
+\ident !A$, or $!B$ is an axiom, and the same reasoning as in the
+induction basis applies.) Then some previous steps in the
+!!{derivation} are $!C \lif !B$ and $!C$, for some !!{formula}~$!C$,
+i.e., $\Gamma \cup \{!A\} \Proves !C \lif !B$ and $\Gamma \cup \{!A\}
+\Proves !C$, and the respective derivations are shorter, so the
+inductive hypothesis applies to them. We thus have both:
+\begin{align*}
+  & \Gamma \Proves !A \lif (!C \lif !B); \\
+  & \Gamma \Proves !A \lif !C.
+\end{align*}
+But also
+\[
+\Gamma \Proves (!A \lif (!C \lif !B)) \lif
+((!A\lif !C)  \lif (!A \lif !B)),
+\]
+by \olref[prp]{ax:lif2}, and two applications of \olref{prop:mp} give
+$\Gamma \Proves !A \lif !B$, as required.
+\end{proof}
+
+Notice how \olref[prp]{ax:lif1} and \olref[prp]{ax:lif2} were chosen
+precisely so that the Deduction Theorem would hold.
+
+The following are some useful facts about !!{derivability}, which we
+leave as exercises.
+
+\begin{prop}
+  \ollabel{prop:derivfacts}
+\begin{enumerate}
+\item $\Proves (!A \lif !B) \lif ((!B \lif !C)
+  \lif (!A \lif !C)$; \ollabel{derivfacts:a}
+\item If $\Gamma \cup \{ \lnot !A\}
+  \Proves \lnot !B$ then $\Gamma \cup \{ !B\} \Proves
+  !A$ (Contraposition); \ollabel{derivfacts:b}
+\item  $\{ !A, \lnot!A\} \Proves
+    !B$ (Ex Falso Quodlibet, Explosion); \ollabel{derivfacts:c}
+\item  $\{ \lnot\lnot!A\} \Proves
+  !A$ (Double Negation Elimination);\ollabel{derivfacts:d}
+\item If $\Gamma \Proves \lnot\lnot!A$ then $\Gamma \Proves
+  !A$;\ollabel{derivfacts:e}
+\end{enumerate}
+\end{prop}
+
+\tagprob{FOL}
+\begin{prob}
+  Prove \olref[fol][axd][ded]{prop:derivfacts}
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+  Prove \olref[pl][axd][ded]{prop:derivfacts}
+\end{prob}
+\tagendprob
+
+\end{document}

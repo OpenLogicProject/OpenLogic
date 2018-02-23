@@ -1,0 +1,159 @@
+% Part: normal-modal-logic
+% Chapter: axioms-systems
+% Section: proofs-in-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{prf}{prk}
+
+\olsection{Proofs in \Log{K}}
+
+In order to practice proofs in the smallest modal system, we show the
+valid !!{formula}s on the left-hand side of
+\olref[syn][sch]{tab:valid-invalidSchemas} can all be given
+\Log{K}-proofs.
+
+\begin{prop}
+  $\Log{K} \Proves \Box!A \lif \Box (!B\lif !A)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $!A \lif (!B \lif !A)$ & \Taut \\
+    2. & $\Box(!A \lif (!B \lif !A))$ & \Nec, 1 \\
+    3. & $\Box(!A \lif (!B \lif !A)) \lif
+    (\Box!A \lif \Box(!B \lif !A))$ & \Ax{K}\\
+    4. & $\Box!A \lif \Box (!B\lif !A)$ & \MP, 2, 3
+  \end{derivation}
+\end{proof}
+
+\begin{prop}
+  $\Log{K} \Proves \Box(!A \land !B) \lif (\Box !A \land \Box!B)$
+\end{prop}
+
+\begin{proof}
+\begin{derivation}
+  1. & $(!A \land !B) \lif !A$ & \Taut \\
+  2. & $\Box((!A \land !B) \lif !A)$ & \Nec \\
+  3. & $\Box((!A \land !B) \lif !A) \lif (\Box(!A \land !B) \lif \Box!A$
+  & \Ax{K} \\
+  4. & $\Box(!A \land !B) \lif \Box!A$ & \MP, 2, 3 \\
+  5. & $(!A \land !B) \lif !B$ & \Taut \\
+  6. & $\Box((!A \land !B) \lif !B)$ & \Nec \\
+  7. & $\Box((!A \land !B) \lif !B) \lif (\Box(!A \land !B) \lif \Box!B$
+  & \Ax{K} \\
+  8. & $\Box(!A \land !B) \lif \Box!B$ & \MP, 6, 7 \\
+  9. & $(\Box(!A \land !B) \lif \Box!A) \lif{}$ \\
+  & \qquad $((\Box(!A \land !B) \lif \Box!A) \lif{}$ \\
+  & \qquad $(\Box(!A \land !B) \lif (\Box !A \land \Box!B))))$ & \Taut\\
+  10. &  $((\Box(!A \land !B) \lif \Box!A) \lif{}$ \\
+  & \qquad $(\Box(!A \land !B) \lif (\Box !A \land \Box!B)))$ & \MP, 4, 9\\
+  11. & $\Box(!A \land !B) \lif (\Box !A \land \Box!B)$ & \MP, 8, 10.
+\end{derivation}
+Note that the !!{formula} on line~$9$ is an instance of the tautology
+\[
+(p \lif q) \lif ((p \lif r) \lif (p \lif (q \land r))). \qedhere
+\]
+\end{proof}
+
+\begin{prop}
+  $\Log{K}\Proves (\Box!A \land \Box!B) \lif \Box (!A \land !B)$
+\end{prop}
+
+\begin{proof}
+  \begin{derivation}
+    1. & $!A \lif (!B \lif (!A \land !B))$ & \Taut \\
+    2. & $\Box(!A \lif (!B \lif (!A \land !B)))$ & \Nec, 1 \\
+    3. & $\Box(!A \lif (!B \lif (!A \land !B))) \lif (\Box!A \lif \Box(!B \lif (!A \land !B)))$ & \Ax{K}\\
+    4. & $\Box!A \lif \Box(!B \lif (!A \land !B))$ & \MP, 2, 3\\
+    5. & $\Box(!B \lif (!A \land !B)) \lif (\Box!B \lif \Box(!A \land !B))$ & \Ax{K} \\
+    6. & $(\Box!A \lif \Box(!B \lif (!A \land !B))) \lif {}$ \\
+    & \qquad $(\Box(!B \lif (!A \land !B)) \lif (\Box!B \lif \Box(!A \land !B))) \lif {}$\\
+    & \qquad $(\Box!A \lif (\Box !B \lif \Box(!A \land !B))))$ & \Taut\\
+    7. & $(\Box(!B \lif (!A \land !B)) \lif (\Box!B \lif \Box(!A \land !B))) \lif {}$\\
+    & \qquad $(\Box!A \lif (\Box !B \lif \Box(!A \land !B)))$ & \MP, 4, 6\\
+    8. & $\Box!A \lif (\Box !B \lif \Box(!A \land !B)))$ & \MP, 5, 7\\
+    9. & $(\Box!A \lif (\Box !B \lif \Box(!A \land !B)))) \lif {}$\\
+    & \qquad $((\Box!A \land \Box!B) \lif \Box(!A \land !B))$ & \Taut\\
+    10. & $(\Box!A \land \Box!B) \lif \Box(!A \land !B)$ & \MP, 8, 9
+  \end{derivation}
+  The !!{formula}s on lines $6$ and $9$ are instances of the tautologies
+  \begin{align*}
+    (p \lif q) & \lif ((q \lif r) \lif (p \lif r)) \\
+    (p \lif (q \lif r)) & \lif ((p \land q) \lif r)
+  \end{align*}
+\end{proof}
+
+\begin{prop}
+  \iftag{prvBox}{$\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot
+    p$}{$\Log{K} \Proves \Box\lnot p \lif \lnot\Diamond p$}
+\end{prop}
+
+\begin{proof}
+  \iftag{prvBox}{\iftag{prvDiamond}{% Box and Diamond are primitive
+  \begin{derivation}
+    1. & $\Diamond \lnot p \liff \lnot\Box\lnot\lnot p$ & \Dual\\
+    2. & $(\Diamond \lnot p \liff \lnot\Box\lnot\lnot p) \lif {}$ \\
+    & \qquad $(\lnot \Box \lnot\lnot p \lif \Diamond \lnot p)$& \Taut\\
+    3. & $\lnot \Box \lnot\lnot p \lif \Diamond \lnot p$ & \MP, 1, 2\\
+    4. & $\lnot\lnot p \lif p$ & \Taut\\
+    5. & $\Box(\lnot\lnot p \lif p)$ & \Nec, 4\\
+    6. & $\Box(\lnot\lnot p \lif p) \lif (\Box \lnot\lnot p \lif \Box p)$ & \Ax{K}\\
+    7. & $(\Box \lnot\lnot p \lif \Box p)$ & \MP, 5, 6\\
+    8. & $(\Box \lnot\lnot p \lif \Box p) \lif (\lnot \Box p \lif \lnot\Box\lnot\lnot p)$ & \Taut\\
+    9. & $\lnot \Box p \lif \lnot\Box\lnot\lnot p$ & \MP, 7, 8\\
+    10. & $(\lnot \Box p \lif \lnot\Box\lnot\lnot p) \lif {}$ \\
+    & \qquad $((\lnot \Box \lnot\lnot p \lif \Diamond \lnot p) \lif (\lnot \Box p \lif \Diamond\lnot p)$ & \Taut\\
+    11. & $(\lnot \Box \lnot\lnot p \lif \Diamond \lnot p) \lif (\lnot \Box p \lif \Diamond\lnot p)$ & \MP, 9, 10\\
+    12. & $\lnot\Box p \lif \Diamond \lnot p$ & \MP, 3, 11\\
+  \end{derivation}
+  The !!{formula}s on lines $8$ and $10$ are instances of the tautologies
+  \begin{align*}
+    & (p \lif q) \lif (\lnot q \lif \lnot p) \\
+    & (p \lif q) \lif ((q \lif r) \lif (p \lif r)).
+  \end{align*}
+  }{% Diamond is defined
+  \begin{derivation}
+    1. & $\lnot\lnot p \lif p$ & \Taut\\
+    2. & $\Box(\lnot\lnot p \lif p)$ & \Nec, 1\\
+    3. & $\Box(\lnot\lnot p \lif p) \lif (\Box \lnot\lnot p \lif \Box p)$ & \Ax{K}\\
+    4. & $(\Box \lnot\lnot p \lif \Box p)$ & \MP, 2, 3\\
+    5. & $(\Box \lnot\lnot p \lif \Box p) \lif (\lnot \Box p \lif \lnot\Box\lnot\lnot p)$ & \Taut\\
+    6. & $\lnot \Box p \lif \lnot\Box\lnot\lnot p$ & \MP, 4, 5\\
+    & $\lnot\Box p \lif \Diamond \lnot p$
+  \end{derivation}
+  The last line is $\lnot \Box p \lif \Diamond\lnot p$, since
+  $\Diamond$ is defined as $\lnot\Box\lnot$.  The !!{formula} on
+  line~$5$ is an instance of the tautology
+  \[
+    (p \lif q) \lif (\lnot q \lif \lnot p). \qedhere
+  \]
+  }}{% Box is defined
+  \begin{derivation}
+    1. & $\Diamond  p \liff \lnot\Box\lnot p$ & \Dual\\
+    2. & $(\Diamond p \liff \lnot\Box\lnot p) \lif
+    (\Diamond p \lif \lnot \Box \lnot p)$& \Taut\\
+    3. & $\Diamond p \lif \lnot \Box \lnot p$ & \MP, 1, 2\\
+    4. & $(\Diamond p \lif \lnot \Box \lnot p) \lif (\Box\lnot p \lif \lnot\Diamond p)$ & \Taut\\
+    5. & $\Box\lnot p \lif \lnot\Diamond p$ & \MP, 3, 4
+  \end{derivation}
+  The !!{formula} on
+  line~$4$ is an instance of the tautology
+  \begin{align*}
+    & (p \lif \lnot q) \lif (q \lif \lnot p). \qedhere
+  \end{align*}
+}
+\end{proof}
+
+\begin{prob}
+  Find !!{derivation}s in~$\Log{K}$ for the following !!{formula}s:
+  \begin{enumerate}
+    \item $\Box \lnot p \lif \Box(p \lif q)$
+    \item $(\Box p \lor \Box q) \lif \Box(p \lor q)$
+    \item $\Diamond p \lif \Diamond(p \lor q)$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

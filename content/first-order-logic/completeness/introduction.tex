@@ -6,7 +6,10 @@
 
 \begin{document}
 
-\olfileid{fol}{com}{int}
+\iftag{FOL}
+      {\olfileid{fol}{com}{int}}
+      {\olfileid{pl}{com}{int}}
+
 \olsection{Introduction}
 
 The completeness theorem is one of the most fundamental results about
@@ -16,21 +19,57 @@ the relationship between semantic consequence and our proof system: if
 a !!{sentence}~$!A$ follows from some !!{sentence}s $\Gamma$, then
 there is also a !!{derivation} that establishes $\Gamma \Proves !A$.
 Thus, the proof system is as strong as it can possibly be without
-proving things that don't actually follow.  In its second formulation,
-it can be stated as a model existence result: every consistent set of
-!!{sentence}s is satisfiable.
+proving things that don't actually follow.
+
+In its second formulation, it can be stated as a model existence
+result: every consistent set of !!{sentence}s is
+satisfiable. Consistency is a proof-theoretic notion: it says that our
+proof system is unable to produce certain !!{derivation}s. But who's
+to say that just because there are no !!{derivation}s of a certain
+sort from~$\Gamma$, it's guaranteed that there is
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!{valuation}{~$\pAssign{v}$}
+  with $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$}? Before the
+completeness theorem was first proved---in fact before we had the
+proof systems we now do---the great German mathematician David Hilbert
+held the view that consistency of mathematical theories guarantees the
+existence of the objects they are about. He put it as follows in a
+letter to Gottlob Frege:
+\begin{quote}
+  If the arbitrarily given axioms do not contradict one another with
+  all their consequences, then they are true and the things defined by
+  the axioms exist. This is for me the criterion of truth and
+  existence. 
+\end{quote}
+Frege vehemently disagreed. The second formulation of the completeness
+theorem shows that Hilbert was right in at least the sense that if the
+axioms are consistent, then \emph{some}
+\iftag{FOL}{!!{structure}}{!!{valuation}} exists that makes them all
+true.
 
 These aren't the only reasons the completeness theorem---or rather,
 its proof---is important.  It has a number of important consequences,
 some of which we'll discuss separately.  For instance, since any
 !!{derivation} that shows $\Gamma \Proves !A$ is finite and so can
 only use finitely many of the !!{sentence}s in~$\Gamma$, it follows by
-the completeness theorem that if $!A$ is a consequence of $\Gamma$, it
+the completeness theorem that if $!A$ is a consequence of~$\Gamma$, it
 is already a consequence of a finite subset of~$\Gamma$.  This is
 called \emph{compactness}.  Equivalently, if every finite subset of
-$\Gamma$ is consistent, then $\Gamma$ itself must be consistent.  It
-also follows from \emph{the proof of} the completeness theorem that
-any satisfiable set of !!{sentence}s has a finite or !!{denumerable}s
-model.  This result is called the L\"owenheim-Skolem theorem.
+$\Gamma$ is consistent, then $\Gamma$ itself must be consistent.
+
+Although the compactness theorem follows from the completeness theorem
+via the detour through !!{derivation}s, it is also possible to use the
+\emph{the proof of} the completeness theorem to establish it
+directly. For what the proof does is take a set of !!{sentence}s with
+a certain property---consistency---and constructs !!a{structure} out
+of this set that has certain properties (in this case, that it
+satisfies the set). Almost the very same construction can be used to
+directly establish compactness, by starting from ``finitely
+satisfiable'' sets of !!{sentence}s instead of consistent ones.
+\iftag{FOL}{The construction also yields other consequences, e.g.,
+  that any satisfiable set of !!{sentence}s has a finite or
+  !!{denumerable}s model.  (This result is called the
+  L\"owenheim-Skolem theorem.)  In general, the construction of
+  !!{structure}s from sets of !!{sentence}s is used often in logic,
+  and sometimes even in philosophy.}{}
 
 \end{document}

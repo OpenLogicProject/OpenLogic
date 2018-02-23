@@ -1,0 +1,88 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{tab}{qrl}
+
+\olsection{Quantifier Rules}
+
+\subsection{Rules for $\lforall$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\forall}}
+\UnaryInfC{\sFmla{\True}{!A(t)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lforall[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lforall}}
+\UnaryInfC{\sFmla{\False}{!A(a)}}
+\DisplayProof
+\end{defish}
+
+In \TRule{\True}{\lforall}, $t$ is a closed term (i.e., one without
+variables). In \TRule{\False}{\lforall}, $a$~is !!a{constant} which must
+not occur anywhere in the branch above \TRule{\False}{\lforall}
+rule. We call $a$ the \emph{eigenvariable} of the \TRule{\False}{\forall}
+inference.
+
+\subsection{Rules for $\lexists$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\True}{\lexists}}
+\UnaryInfC{\sFmla{\True}{!A(a)}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lexists[x][!A(x)]}}
+\RightLabel{\TRule{\False}{\lexists}}
+\UnaryInfC{\sFmla{\False}{!A(t)}}
+\DisplayProof
+\end{defish}
+
+Again, $t$~is a closed term, and $a$~is !!a{constant} which does
+not occur in the branch above the~\TRule{\False}{\lexists} rule. We call
+$a$ the \emph{eigenvariable} of the \TRule{\False}{\lexists} inference.
+
+The condition that an eigenvariable not occur in the branch above 
+the \TRule{\False}{\lforall} or \TRule{\True}{\lexists} inference is called the
+\emph{eigenvariable condition}.
+
+\begin{explain}
+We use the term ``eigenvariable'' even though $a$ in the above rules
+is !!a{constant}. This has historical reasons.
+
+In \TRule{\True}{\lforall} and \TRule{\False}{\lexists} there are no
+restrictions on the term~$t$. On the other hand, in the
+\TRule{\True}{\lexists} and \TRule{\False}{\lforall} rules, the
+eigenvariable condition requires that the !!{constant}~$a$ does not
+occur anywhere in the branches above the respective inference. It is
+necessary to ensure that the system is sound. Without this condition,
+the following would be a closed !!{tableau} for
+$\lexists[x][\formula{A}(x)] \lif \lforall[x][\formula{A}(x)]$:
+\begin{center}
+\begin{tableau}{}
+  [\sFmla{\False}{\lexists[x][\formula{A}(x)] \lif \lforall[x][\formula{A}(x)]}, just=\TAss
+    [\sFmla{\True}{\lexists[x][\formula{A}(x)]},
+      just={\TRule{\False}{\lif}[1]}
+      [\sFmla{\False}{\lforall[x][\formula{A}(x)]},
+        just={\TRule{\False}{\lif}[1]}
+        [\sFmla{\True}{\formula{A}(a)},
+          just={\TRule{\True}{\lexists}[2]}
+          [\sFmla{\False}{\formula{A}(a)},
+            just={\TRule{\False}{\lforall}[3]}, close]
+        ]
+      ]
+    ]
+  ]
+\end{tableau}
+\end{center}
+However, $\lexists[x][\formula{A}(x)] \lif
+\lforall[x][\formula{A}(x)]$ is not valid.
+\end{explain}
+
+\end{document}

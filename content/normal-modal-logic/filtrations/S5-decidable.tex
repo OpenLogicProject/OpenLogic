@@ -1,0 +1,48 @@
+% Part: normal-modal-logic
+% Chapter: filtrations
+% Section: S5-decidable
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{fil}{dec}
+
+\olsection{\Log{S5} is Decidable}
+The finite model property gives us an easy way to show that systems of
+modal logic given by schemas are \emph{decidable} (i.e., that there is
+a computable procedure to determine whether !!a{formula}s is !!{derivable} in
+the system or not).
+
+\begin{thm}
+  \Log{S5} is decidable.
+\end{thm}
+
+\begin{proof}
+  Let $!A$ be given, and suppose the propositional variables
+  occurring in $!A$ are among $p_1$, \dots, $p_k$.  Since for each
+  $n$ there are only finitely many models with $n$ worlds assigning a
+  value to $p_1$, \dots, $p_k$, we can enumerate, \emph{in parallel}, all
+  the theorems of \Log{S5} by generating proofs in some systematic
+  way; and all the models containing $1$, $2$, \dots worlds and checking
+  whether $!A$ fails at a world in some such model. Eventually
+  one of the two parallel processes will give an answer, as by
+  \olref[com][fra]{thm:generaldet} and \olref[fmp]{cor:S5fmp}, either
+  $!A$ is !!{derivable} or it fails in a finite universal model.
+\end{proof}
+
+The above proof works for \Log{S5} because filtrations of universal
+models are automatically universal. The same holds for reflexivity and
+seriality, but more work is needed for other properties.
+
+\begin{prob}
+  Show that any filtration of a serial or reflexive model is also
+  serial or reflexive (respectively).
+\end{prob}
+
+\begin{prob}
+  Find a non-symmetric (non-transitive, non-euclidean) filtration of a
+  symmetric (transitive, euclidean) model.
+\end{prob}
+
+\end{document}

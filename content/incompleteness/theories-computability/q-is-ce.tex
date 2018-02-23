@@ -8,21 +8,22 @@
 
 \olfileid{inc}{tcp}{qce}
 
-\olsection{$\Th{Q}$ is c.e.-complete}
+\olsection{$\Th{Q}$ is \printtoken{S}{c.e.}-Complete}
 
 
 \begin{thm}
-  $\Th{Q}$ is c.e.\ but not decidable. In fact, it is a complete c.e.\ set.
+$\Th{Q}$ is !!{c.e.} but not decidable. In fact, it is a complete
+  !!{c.e.} set.
 \end{thm}
 
 \begin{proof}
-It is not hard to see that $\Th{Q}$ is c.e., since it is the set of
+It is not hard to see that $\Th{Q}$ is !!{c.e.}, since it is the set of
 (codes for) sentences $y$ such that there is a proof $x$ of $y$ in
 $\Th{Q}$:
 \[
-Q = \Setabs{y}{\lexists[x][\fn{Pr}_\Th{Q}(x,y)]}.
+Q = \Setabs{y}{\lexists[x][\Prf[\Th{Q}](x,y)]}.
 \]
-But we know that $\fn{Pr}_\Th{Q}(x,y)$ is computable (in fact, primitive
+But we know that $\Prf[\Th{Q}](x,y)$ is computable (in fact, primitive
 recursive), and any set that can be written in the above form is c.e.
 
 Saying that it is a complete c.e.\ set is equivalent to saying that $K

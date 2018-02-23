@@ -16,22 +16,22 @@ prove~$!A$?'' for any sentence~$!A$ in the language of~$\Th{T}$.  So
 $\Th{Q}$ would be decidable iff there were a computational procedure
 which decides, given a sentence~$!A$ in the language of arithmetic,
 whether $\Th{Q} \Proves !A$ or not.  We can make this more precise by
-asking: Is the relation~$\fn{Prov}_{\Th{Q}}(y)$, which holds of~$y$
+asking: Is the relation~$\Prov[\Th{Q}](y)$, which holds of~$y$
 iff $y$ is the G\"odel number of a sentence provable in~$\Th{Q}$,
 recursive?  The answer is: no.
 
 \begin{thm}
 $\Th{Q}$ is undecidable, i.e., the relation
 \[
-\fn{Prov}_{\Th{Q}}(y) \defiff \fn{Sent}(y) \land
-\lexists[x][\fn{Pr}_{\Th{Q}}(x, y)]
+\Prov[\Th{Q}](y) \defiff \fn{Sent}(y) \land
+\lexists[x][\Prf[\Th{Q}](x, y)]
 \]
 is not recursive.
 \end{thm}
 
 \begin{proof}
 Suppose it were.  Then we could solve the halting problem as follows:
-Given $e$ and $n$, we know that $\cfind{e}(n) \defined$ iff there is
+Given $e$ and $n$, we know that $\cfind{e}(n) \fdefined$ iff there is
 an~$s$ such that $T(e, n, s)$, where $T$ is Kleene's predicate from
 \olref[cmp][rec][nft]{thm:kleene-nf}.  Since $T$ is primitive recursive
 it is representable in~$\Th{Q}$ by a formula $!B_T$, that is, $\Th{Q}
@@ -45,20 +45,20 @@ every~$s$.  But $\Th{Q}$ is $\omega$-consistent, i.e., if $\Th{Q}
 $\Th{Q}$ are true in the standard model~$\Struct{N}$.  So, $\Th{Q}
 \Proves/ \lexists[y][!B_T(\num{e}, \num{n}, y)]$.  In other words,
 $\Th{Q} \Proves \lexists[y][!B_T(\num{e}, \num{n}, y)]$ iff there is
-an $s$ such that $T(e, n, s)$, i.e., iff $\cfind{e}(n) \defined$.
+an $s$ such that $T(e, n, s)$, i.e., iff $\cfind{e}(n) \fdefined$.
 From $e$ and~$n$ we can compute $\Gn{\lexists[y][!B_T(\num{e},
     \num{n}, y)]}$, let $g(e, n)$ be the primitive recursive function
 which does that.  So
 \[
 h(e, n) =
 \begin{cases}
-1 & \text{if $\fn{Pr}_{\Th{Q}}(g(e, n))$}\\
+1 & \text{if $\Prov[\Th{Q}](g(e, n))$}\\
 0 & \text{otherwise}.
 \end{cases}
 \]
-This would show that $h$ is recursive if $\fn{Pr}_{\Th{Q}}$ is. But
-$h$ is not recursive, by \olref[cmp][rec][hlt]{thm:halting-problem},
-so $\fn{Pr}_{\Th{Q}}$ cannot be either.
+This would show that $h$ is recursive if $\Prov[\Th{Q}]$ is. But~$h$
+is not recursive, by \olref[cmp][rec][hlt]{thm:halting-problem}, so
+$\Prov[\Th{Q}]$ cannot be either.
 \end{proof}
 
 \begin{cor}

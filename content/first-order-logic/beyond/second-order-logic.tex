@@ -149,30 +149,30 @@ behavior:
 It is not difficult to show that these axioms, together with the axiom
 of induction above, provide a categorical description of the
 !!{structure} $\Struct{N}$, the standard model of arithmetic, provided
-we are using the full second-order semantics. Given any !!{structure}
-$\Struct{A}$ in which these axioms are true, define a function $f$
-from $\Nat$ to the !!{domain} of $\Struct{A}$ using ordinary recursion
-on $\Nat$, so that $f(0) = \Assign{\Obj 0}{A}$ and $f(x+1) =
-\Assign{\prime}{A}(f(x))$. Using ordinary induction on $\Nat$ and the
-fact that axioms (1) and~(2) hold in $\Struct A$, we see that $f$ is
-!!{injective}. To see that $f$ is !!{surjective}, let $P$ be the set
-of elements of $\Domain{A}$ that are in the range of~$f$. Since
-$\Struct A$ is full, $P$ is in the second-order !!{domain}. By the
-construction of~$f$, we know that $\Assign{\Obj 0}{A}$ is in~$P$, and
-that $P$~is closed under $\Assign{\prime}{A}$. The fact that the
-induction axiom holds in $\Struct A$ (in particular, for~$P$)
-guarantees that $P$~is equal to the entire first-order !!{domain} of
-$\Struct A$. This shows that $f$ is !!a{bijection}. Showing that $f$ is a
-homomorphism is no more difficult, using ordinary induction on
-$\Nat$ repeatedly.
+we are using the full second-order semantics. Given any
+!!{structure}~$\Struct{M}$ in which these axioms are true, define a
+function~$f$ from $\Nat$ to the !!{domain} of $\Struct{M}$ using
+ordinary recursion on $\Nat$, so that $f(0) = \Assign{\Obj 0}{M}$ and
+$f(x+1) = \Assign{\prime}{M}(f(x))$. Using ordinary induction
+on~$\Nat$ and the fact that axioms (1) and~(2) hold in~$\Struct M$, we
+see that $f$ is !!{injective}. To see that $f$ is !!{surjective},
+let~$P$ be the set of elements of~$\Domain{M}$ that are in the range
+of~$f$. Since $\Struct M$ is full, $P$ is in the second-order
+!!{domain}. By the construction of~$f$, we know that $\Assign{\Obj
+  0}{M}$ is in~$P$, and that $P$~is closed under
+$\Assign{\prime}{M}$. The fact that the induction axiom holds in
+$\Struct M$ (in particular, for~$P$) guarantees that $P$~is equal to
+the entire first-order !!{domain} of~$\Struct M$. This shows that $f$
+is !!a{bijection}. Showing that $f$ is a homomorphism is no more
+difficult, using ordinary induction on $\Nat$ repeatedly.
 
 In set-theoretic terms, a function is just a special kind of relation;
 for example, a unary function~$f$ can be identified with a binary
 relation~$R$ satisfying $\lforall[x][\lexists[\! y][R(x,y)]]$. As a result, one
 can quantify over functions too. Using the full semantics, one can
 then define the class of infinite !!{structure}s to be the class of
-!!{structure}s $\Struct A$ for which there is an injective function from the
-!!{domain} of $\Struct A$ to a proper subset of itself:
+!!{structure}s $\Struct M$ for which there is an injective function from the
+!!{domain} of $\Struct M$ to a proper subset of itself:
 \[
 \lexists[f][(\lforall[x][\lforall[y][(\eq[f(x)][f(y)] \lif \eq[x][y])]]
   \land \lexists[y][\lforall[x][\eq/[f(x)][y]]])].

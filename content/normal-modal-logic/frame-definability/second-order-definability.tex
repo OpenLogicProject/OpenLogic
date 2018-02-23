@@ -1,0 +1,155 @@
+% Part: normal-modal-logic
+% Chapter: frame-correspondence
+% Section: standard-translation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{frd}{st}
+
+\olsection{Second-order Definability}
+
+Not every frame property definable by modal formulas is first-order
+definable. However, if we allow quantification over one-place
+predicates (i.e., monadic second-order quantification), we define all
+modally definable frame properties. The trick is to exploit a
+systematic way in which the conditions under which a modal !!{formula}
+is true at a world are related to first-order !!{formula}s. This is
+the so-called standard translation of modal formulas into first-order
+formulas in a language containing not just a two-place
+!!{predicate}~$Q$ for the accessibility relation, but also a one-place
+!!{predicate}~$P_i$ for the !!{propositional variable}s~$\Obj p_i$
+occurring in~$!A$.
+
+\begin{defn}
+  The \emph{standard translation}~$\ST_x(!A)$ is inductively defined
+  as follows:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\ST_x(\indfrm) = \lfalse$.}}{}
+  \tagitem{prvTrue}{\indcase{!A}{\lfalse}{$\ST_x(\indfrm) = \ltrue$.}}{}
+  \item \indcase{!A}{\Obj p_i}{$\ST_x(\indfrm) = \Atom{P_i}{x}$.}
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\ST_x(\indfrm) = \lnot \ST_x(!B)$.}}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \land \ST_x(!C))$.}}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \lor \ST_x(!C))$.}}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \lif \ST_x(!C))$.}}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\ST_x(\indfrm) = (\ST_x(!B)
+      \liff \ST_x(!C))}$.}{}
+  \tagitem{prvBox}{\indcase{!A}{\Box !B}{$\ST_x(\indfrm) =
+      \lforall[y][(\Atom{Q}{x,y} \lif \ST_y(!B))]$.}}{}
+  \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}{$\ST_x(\indfrm) =
+      \lexists[y][(\Atom{Q}{x,y} \land \ST_y(!B))]$.}}{}
+  \end{enumerate}
+\end{defn}
+
+For instance, $\ST_x(\Box p \lif p)$ is $(\lforall[y][(\Atom{Q}{x,y}
+  \lif \Atom{P}{x})] \lif \Atom{P}{x}$. Any !!{structure} for the
+language of~$\ST_x(!A)$ requires a domain, a two-place relation
+assigned to~$Q$, and subsets of the domain assigned to the one-place
+!!{predicate}s~$P_i$. In other words, the components of such
+!!a{structure} are exactly those of a model for~$!A$: the domain is
+the set of worlds, the two-place relation assigned to~$Q$ is the
+accessibility relation, and the subsets assigned to~$P_i$ are just the
+assignments~$V(\Obj p_i)$. It won't surprise that satisfaction of $!A$
+in a modal model and of $\ST_x(!A)$ in the corresponding !!{structure}
+agree:
+
+\begin{prop}\ollabel{prop:st}
+  Let $\mModel{M} = \tuple{W, R, V}$, $\Struct{M'}$ be the first-order
+  !!{structure} with $\Domain{M'} = W$, $\Assign{Q}{M} = R$, and
+  $\Assign{P_i}{M'} = V(\Obj p_i)$, and $s(x) = w$. Then
+  \[
+  \mSat{M}{!A}[w] \text{ iff } \Sat{M'}{\ST_x(!A)}[s]
+  \]
+\end{prop}
+
+\begin{proof}
+  By induction on~$!A$.
+\end{proof}
+
+\begin{prop}
+  Suppose $!A$ is a modal !!{formula} and $\mModel{F} = \tuple{W, R}$
+  is a frame. Let $\Struct{F'}$ be the first-order !!{structure} with
+  $\Domain{F'} = W$ and $\Assign{Q}{F'} = R$, and let $!A'$ be the
+  second-order formula
+  \[
+  \lforall[X_1][\dots\lforall[X_n][\lforall[x][
+        \SSubst{\ST_x(!A)}{\subst{X_1}{P_1}, \dots,
+          \subst{X_n}{P_n}}]]],
+  \]
+  where $P_1$, \dots, $P_n$ are all one-place !!{predicate}s
+  in~$\ST_x(!A)$. Then
+  \[
+  \mSat{F}{!A} \text{ iff } \Sat{F'}{!A'}
+  \]
+\end{prop}
+
+\begin{proof}
+  $\Sat{F'}{!A'}$ iff for every !!{structure}~$\mModel{M'}$ where
+  $\Assign{P_i}{M'} \subseteq W$ for $i = 1$, \dots,~$n$, and for
+  every $s$ with $s(x) \in W$, $\Sat{M'}{\ST_x(!A)}[s]$. By
+  \olref{prop:st}, that is the case iff for all models~$\mModel{M}$
+  based on~$\mModel{F}$ and every world~$w \in W$, $\mSat{M}{!A}[w]$,
+  i.e., $\mSat{F}{!A}$.
+\end{proof}
+
+\begin{defn}
+  A class~$\mClass{C}$ of frames is \emph{second-order definable} if
+  there is !!a{sentence}~$!A$ in the second-order language with a
+  single two-place !!{predicate}~$P$ and quantifiers only over monadic
+  set variables such that $\mModel{F} = \tuple{W, R} \in \mClass{C}$
+  iff $\Sat{M}{!A}$ in the !!{structure}~$\Struct{M}$ with
+  $\Domain{M} = W$ and $\Assign{P}{M} = R$.
+\end{defn}
+
+\begin{cor}
+  If a class of frames is definable by !!a{formula}~$!A$, the
+  corresponding class of accessibility relations is definable by a
+  monadic second-order sentence.
+\end{cor}
+
+\begin{proof}
+  The monadic second-order sentence~$!A'$ of the preceding proof has
+  the required property.
+\end{proof}
+
+As an example, consider again the !!{formula}~$\Box p \lif p$. It
+defines reflexivity. Reflexivity is of course first-order definable by
+the !!{sentence}~$\Atom{Q}{x,x}$. But it is also definable by the
+monadic second-order !!{sentence}
+\[
+\lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif \Atom{X}{y})]
+    \lif \Atom{X}{x})]].
+\]
+This means, of course, that the two sentences are equivalent. Here's
+how you might convince yourself of this directly: First suppose the
+second-order sentence is true in !!a{structure}~$M$. Since $x$ and $X$
+is universally quantified, the remainder must hold for any $x \in W$
+and set~$X \subseteq W$, e.g, the set $\Setabs{z}{Rxz}$ where $R =
+\Assign{Q}{M}$. So, for any $s$ with $s(x) \in W$ and $s(X) =
+\Setabs{z}{Rzx}$ we have $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+    \Atom{X}{y})] \lif \Atom{X}{x}}$. But by the way we've picked
+$s(X)$ that means $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+    \Atom{Q}{x,y})] \lif \Atom{Q}{x,x}}[s]$, which is equivalent to
+$\Atom{Q}{x,x}$ since the antecedent is valid. Since $s(x)$ is
+arbitrary, we have $\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$.
+
+Now suppose that $\Sat{M}{\Atom{Q}{x,x}}$ and show that
+$\Sat{M}{\lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif
+        \Atom{X}{y})] \lif \Atom{X}{x})]]}$. Pick any assignment~$s$,
+and assume $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+    \Atom{X}{y})]}[s]$. Let $s'$ be the $y$-variant of~$s$ with $s'(y)
+= x$; we have $\Sat{M}{\Atom{Q}{x,y} \lif \Atom{X}{y})}[s']$, i.e.,
+$\Sat{M}{\Atom{Q}{x,x} \lif \Atom{X}{x})}[s]$. Since
+$\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$, the antecedent is true, and we
+have $\Sat{M}{\Atom{X}{x}}[s]$, which is what we needed to show.
+
+Since some definable classes of frames are not first-order definable,
+not every monadic-second order !!{sentence} of the form~$!A'$ is
+equivalent to a first-order !!{sentence}. There is no effective method
+to decide which ones are.
+
+\end{document}
