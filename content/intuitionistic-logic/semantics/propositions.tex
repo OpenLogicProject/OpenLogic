@@ -1,0 +1,52 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: propositionas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{pro}
+
+\olsection{Propositions}
+
+Sometimes it is useful to have a name for the set of worlds in
+!!a{relational model}~$\mModel{M}$ where !!a{formula}~$!A$ is true. We
+call it the \emph{propositon} defined by~$!A$, and write
+$\Prop{M}{!A}$. 
+
+\begin{defn}
+  We extend the function $V$ to a function $\Prop{M}{!A} \colon \Frm
+  \to \Pow{W}$ inductively as follows:
+  \begin{enumerate}
+  \item $\Prop{M}{\lfalse} = \emptyset$
+  \item $\Prop{M}{p} = V(p)$
+  \item $\Prop{M}{\lnot !B} = {}$
+    \[
+      \Setabs{w \in W}{\text{for every $w'$ such that $Rww'$, $w'
+          \notin \Prop{M}{!B}$}}.
+    \]
+  \item $\Prop{M}{!B \land !C} = \Prop{M}{!B} \cap \Prop{M}{!C}$.
+  \item $\Prop{M}{!B \lor !C} = \Prop{M}{!B} \cup \Prop{M}{!C}$.
+  \item $\Prop{M}{!B \lif !C} = {}$
+    \[
+      \Setabs{w \in W}{\text{for every $w'$ such that $Rww'$, if $w'
+          \in \Prop{M}{!B}$ then $w' \in \Prop{M}{!C}$}}.
+    \]
+  \end{enumerate}
+\end{defn}
+
+\begin{prop}
+  \ollabel{prop:propositions-true}
+  $\mModel{M}{!A}[w]$ iff $w \in \Prop{M}{!A}$
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[int][sem][pro]{prop:propositions-true}.
+\end{prob}
+
+\end{document}

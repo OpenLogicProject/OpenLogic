@@ -1,0 +1,59 @@
+% part: intuitionistic-logic
+% chapter: soundness-completeness
+% section: soundness-axd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{sax}
+
+\olsection{Soundness of Axiomatic \usetoken{P}{derivation}}
+
+\begin{editorial}
+  The soundness proof relies on the fact that all axioms are
+  intuitionistically valid; this still needs to be proved, e.g., in
+  the Semantics chapter.
+\end{editorial}
+
+\begin{thm}[Soundness]
+  \ollabel{thm:soundness}
+  If $\Gamma \Proves !A$, then $ \Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  We prove that if $\Gamma \Proves !A$, then $\Gamma \Entails !A$.
+  The proof is by induction on the number~$n$ of !!{formula}s in the
+  !!{derivation} of~$!A$ from~$\Gamma$.  We show that if $!A_1$,
+  \dots, $!A_n = !A$ is !!a{derivation} from~$\Gamma$, then $\Gamma
+  \Entails !A_n$. Note that if $!A_1$, \dots, $!A_n$ is
+  !!a{derivation}, so is $!A_1$, \dots, $!A_k$ for any $k<n$.
+
+  There are no !!{derivation}s of length~$0$, so for $n=0$ the claim
+  holds vacuously. So the claim holds for all !!{derivation}s of
+  length~$<n$. We distinguish cases according to the justification
+  of~$!A_n$.
+  
+  \begin{enumerate}
+  \item $!A_n$ is an axiom. All axioms are valid, so $\Gamma \Entails
+    !A_n$ for any~$\Gamma$.
+  \item $!A_n \in \Gamma$. Then for any $\mModel{M}$ and $w$, if
+    $\mSat{M}{\Gamma}[w]$, obviously $\mSat{M}{\Gamma}{!A_n}[w]$,
+    i.e., $\Gamma \Entails !A$.
+  \item $!A_n$ follows by \MP{} from $!A_i$ and $!A_j \ident !A_i \lif
+    !A_n$. $!A_1$, \dots, $!A_i$ and $!A_1$, \dots, $!A_j$ are
+    !!{derivation}s from~$\Gamma$, so by inductive hypothesis, $\Gamma
+    \Entails !A_i$ and $\Gamma \Entails !A_i \lif !A_n$.
+    
+    Suppose $\mSat{M}{\Gamma}[w]$. Since $\mSat{M}{\Gamma}[w]$ and
+    $\Gamma \Entails !A_i \lif !A_n$, $\mSat{M}{!A_i \lif
+      !A_n}[w]$. By definition, this means that for all $w'$ such that
+    $Rww'$, if $\mSat{M}{!A_i}[w']$ then $\mSat{M}{!A_n}[w']$. Since
+    $R$ is reflexive, $w$ is among the $w'$ such that $Rww'$, i.e., we
+    have that if $\mSat{M}{!A_i}[w]$ then $\mSat{M}{!A_n}[w]$. Since
+    $\Gamma \Entails !A_i$, $\mSat{M}{!A_i}[w]$. So,
+    $\mSat{M}{!A_n}[w]$, as we wanted to show.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

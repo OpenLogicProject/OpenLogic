@@ -1,0 +1,71 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: relational-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{rel}
+
+\olsection{\usetoken{P}{relational model}}
+
+In order to give a precise semantics for intuitionistic propositional
+logic, we have to give a definition of what counts as a model relative
+to which we can evaluate !!{formula}s. On the basis of such a
+definition it is then also possible to define semantics notions such
+as validity and entailment. One such semantics is given by
+!!{relational model}s.
+
+\begin{defn}
+  !!^a{relational model} for intuitionistic propositional logic is a
+  triple $\mModel{M} = \tuple{W, R, V}$, where
+  \begin{enumerate}
+  \item $W$ is a non-empty set,
+  \item $R$ is a reflexive and transitive binary relation on~$W$, and
+  \item $V$ is function assigning to each !!{propositional
+    variable}~$p$ a subset of~$W$, such that
+  \item $V$ is monotone with respect to $R$, i.e., if $w
+    \in V(p)$ and $Rww'$, then $w' \in V(p)$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}\ollabel{defn:true-at-w}
+  We define the notion of $!A$ \emph{being true at $w$ in
+    $\mModel{M}$}, $\mSat{M}{!A}[w]$, inductively as follows:
+  \begin{enumerate}
+  \item \indcase{!A}{\lfalse}{not $\mSat{M}{\indfrm}[w]$}.
+  \item \indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff for every
+    $w'$ such that $Rww'$, $\mSat/{M}{!B}[w]$}.
+  \item \indcase{!A}{!B \land !C}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$}.
+  \item \indcase{!A}{!B \lor !C}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ or $\mSat{M}{!C}[w]$ (or both)}.
+  \item \indcase{!A}{!B \lif !C}{$\mSat{M}{\indfrm}[w]$ iff for every
+    $w'$ such that $Rww'$, either not $\mSat{M}{!B}[w]$ or
+    $\mSat{M}{!C}[w]$}.
+  \end{enumerate}
+  We write $\mSat/{M}{!A}[w]$ if not $\mSat{M}{!A}[w]$. If $\Gamma$ is
+  a set of !!{formula}s, $\mSat{M}{\Gamma}[w]$ means $\mSat{M}{!B}[w]$
+  for all $!B \in \Gamma$.
+\end{defn}
+
+\begin{prob}
+  Show that according to \olref[int][sem][rel]{defn:true-at-w},
+  $\mSat{M}{\lnot !A}[w]$ iff $\mSat{M}{!A \lif \lfalse}[w]$.
+\end{prob}
+
+\begin{prop}\ollabel{prop:true-monotonic}
+  Truth at worlds is monotonic with respect to~$R$, i.e., if
+  $\mSat{M}{!A}[w]$ and $Rww'$, then $\mSat{M}{!A}[w']$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[int][sem][rel]{prop:true-monotonic}.
+\end{prob}
+
+\end{document}

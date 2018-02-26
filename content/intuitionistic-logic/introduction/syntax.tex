@@ -1,0 +1,76 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: syntax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{syn}
+
+\olsection{Syntax of Intuitionistic Logic}
+
+The syntax of intuitionistic logic is the same as that for
+propositional logic. In classical propositional logic it is possible
+to define connectives by others, e.g., one can define $!A \lif !B$ by
+$\lnot !A \lor !B$, or $!A \lor !B$ by $\lnot(\lnot !A \land \lnot
+!B)$. Thus, presentations of classical logic often introduce some
+connectives as abbreviations for these definitions. This is not so in
+intuitionistic logic, with two exceptions: $\lnot !A$ can be---and
+often is---defined as an abbreviation for $!A \lif \lfalse$. Then, of
+course, $\lfalse$ must not itself be defined!{} Also, $!A \liff !B$
+can be defined, as in classical logic, as $(!A \lif !B) \land (!B \lif
+!A)$.
+
+!!^{formula}s of propositional intuitionistic logic are built up from
+\emph{!!{propositional variable}s} and the propositional
+constant~$\lfalse$ using \emph{logical connectives}. We have:
+
+\begin{enumerate}
+\item !!^a{denumerable} set~$\PVar$ of !!{propositional variable}s $\Obj p_0$,
+  $\Obj p_1$, \dots
+  \item The propositional constant for !!{falsity}~$\lfalse$.
+\item The logical connectives: $\land$
+  (conjunction), $\lor$ (disjunction), $\lif$ (conditional)
+\item Punctuation marks: (, ), and the comma.
+\end{enumerate}
+
+\begin{defn}[Formula]
+\ollabel{defn:formulas} The set~$\Frm[L_0]$ of \emph{!!{formula}s} of
+propositional intuitionistic logic is defined inductively as follows:
+\begin{enumerate}
+\item $\lfalse$ is an atomic !!{formula}.
+
+\item Every !!{propositional variable}~$\Obj p_i$ is an atomic
+  !!{formula}.
+
+\item If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is !!a{formula}.
+
+\item If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+  is !!a{formula}.
+
+\item If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+  is !!a{formula}.
+
+\tagitem{limitClause}{Nothing else is a !!{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+In addition to the primitive connectives introduced above, we also use
+the following \emph{defined} symbols: $\lnot$ (negation) and $\liff$
+(!!{biconditional}).  Formulas constructed using the defined operators
+are to be understood as follows:
+\begin{enumerate}
+\item $\lnot !A$ abbreviates $!A \lif \lfalse$.
+
+\item $!A \liff !B$ abbreviates $(!A \lif !B) \land (!B
+  \lif !A)$.
+\end{enumerate}
+
+Although $\lnot$ is officially treated as an abbreviation, we will
+sometimes give explicit rules and clauses in definitions for~$\lnot$
+as if it were primitive. This is mostly so we can state practice
+problems.
+
+\end{document}

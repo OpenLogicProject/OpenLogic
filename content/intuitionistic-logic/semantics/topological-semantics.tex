@@ -1,0 +1,92 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: topological-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{top}
+
+\olsection{Topological Semantics}
+
+Another way to provide a semantics for intuitionistic logic is using
+the mathematical concept of a topology.
+
+\begin{defn}
+  Let $X$ be a set. A \emph{topology on~$X$} is a set $\Top{O}
+  \subseteq \Pow{X}$ that satisfies the properties below. The
+  !!{element}s of~$\Top{O}$ are called the \emph{open sets} of the
+  topology. The set $X$ together with $\Top{O}$ is called a
+  \emph{topological space}.
+  \begin{enumerate}
+  \item The empty set and the entire space open: $\emptyset$, $X \in
+    \Top{O}$.
+  \item Open sets are closed under finite intersections: if $U$, $V \in
+    \Top{O}$ then $U \cap V \in \Top{O}$
+  \item Open sets are closed under arbitrary unions: if $U_i \in
+    \Top{O}$ for all $i \in I$, then $\bigcup \Setabs{U_i}{i \in
+      I} \in \Top{O}$.
+  \end{enumerate}
+\end{defn}
+
+We may write $X$ for a topology if the collection of open sets can be
+inferred from the context; note that, still, only after $X$ is endowed
+with open sets can it be called a topology.
+
+\begin{defn}
+  A \emph{topological model} of intuitionistic propositional logic is
+  a triple $\mModel{X} = \tuple{X, \Top{O}, V}$ where $\Top{O}$ is a
+  topology on~$X$ and $V$ is a function assigning an open set in
+  $\Top{O}$ to each propositional variable.
+
+  Given a topological model~$\mModel{X}$, we can define $\Prop{X}{!A}$
+  inductively as follows:
+  \begin{enumerate}
+  \item $V(\lfalse) = \emptyset$
+  \item $\Prop{X}{p} = V(p)$
+  \item $\Prop{X}{!A \land !B} = \Prop{X}{!A} \cap \Prop{X}{!B}$
+  \item $\Prop{X}{!A \lor !B} = \Prop{X}{!A} \cup \Prop{X}{!B}$
+  \item $\Prop{X}{!A \lif !B} = \Interior{(X \setminus \Prop{X}{!A}) \cup
+    \Prop{X}{!B}}$
+  \end{enumerate}
+  Here, $\Interior{V}$ is the function that maps a set $V \subseteq X$
+  to its \emph{interior}, that is, the union of all open sets it
+  contains. In other words,
+  \[
+  \Interior{V} = \bigcup \Setabs{U}{U \subseteq V \text{ and } U \in \Top{O}}.
+  \]
+\end{defn}
+
+Note that the interior of any set is always open, since it is a union
+of open sets. Thus, $\Prop{X}{!A}$ is always an open set.
+
+Although topological semantics is highly abstract, there are ways to
+think about it that might motivate it. Suppose that the !!{element}s,
+or ``points,'' of $X$ are points at which statements can be
+evaluated. The set of all points where $!A$ is true is the proposition
+expressed by~$!A$. Not every set of points is a potential proposition;
+only the !!{element}s of $\Top{O}$ are.  $!A \Entails !B$ iff $!B$ is
+true at every point at which~$!A$ is true, i.e., $\Prop{X}{!A}
+\subseteq \Prop{X}{!B}$, for all~$X$. The absurd statement~$\lfalse$
+is never true, so $\Prop{X}{\lfalse} = \emptyset$. How must the
+propositions expressed by $!B \land !C$, $!B \lor !C$, and $!B \lif
+!C$ be related to those expressed by $!B$ and~$!C$ for the
+intuitionistically valid laws to hold, i.e., so that $!A \Proves !B$
+iff $\Prop{X}{!A} \subset \Prop{X}{!B}$. $\lfalse \Proves !A$ for any
+$!A$, and only $\emptyset \subseteq U$ for all $U$.  Since $!B \land
+!C \Proves !B$, $\Prop{X}{!B \land !C} \subseteq \Prop{X}{!B}$, and
+similarly $\Prop{X}{!B \land !C} \subseteq \Prop{X}{!C}$. The largest
+set satisfying $W \subseteq U$ and $W \subseteq V$ is $U \cap V$.
+Conversely, $!B \Proves !B \lor !C$ and $!C \Proves !B \lor !C$, and
+so $\Prop{X}{!B} \subseteq \Prop{X}{!B \lor !C}$ and $\Prop{X}{!C}
+\subseteq \Prop{X}{!B \lor !C}$. The smallest set~$W$ such that $U
+\subseteq W$ and $V \subseteq W$ is $U \cup V$.  The definition for
+$\lif$ is tricky: $!A \lif !B$ expresses the weakest proposition that,
+combined with $!A$, entails $!B$. That $!A \lif !B$ combined with $!A$
+entails~$!B$ is clear from $(!A \lif !B) \land !A \Proves !B $. So
+$\Prop{X}{!A \lif !B}$ should be the greatest open set such that
+$\Prop{X}{!A \lif !B} \cap \Prop{X}{!A} \subset \Prop{X}{!B}$, leading
+to our definition.
+
+\end{document}

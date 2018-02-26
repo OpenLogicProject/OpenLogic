@@ -1,0 +1,179 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: terms-to-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{tp}
+
+\olsection{Recovering \usetoken{P}{derivation} from Proof Terms}
+
+Now let us consider the other direction: translating terms back to
+natural deduction trees. We will use still use the double refutation of 
+the excluded middle as example, and let $S$ denote this term, i.e.,
+\[
+\lambd[\typeof{y}{(!A \lor (!A \lif \lfalse))\lif \lfalse}][y
+    (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y \ori{1}{!A \lif \lfalse}{x}]})] :
+  ((!A \lor (!A \lif \lfalse))\lif \lfalse)\lif \lfalse
+\]
+
+For each natural deduction rule, the term in the conclusion is always
+formed by wrapping some operator around the terms assigned to the
+premise(s). Rules correspond uniquely to such operators. For example,
+from the structure of the $S$ we infer that the last rule applied must
+be $\Intro{\lif}$, since it is of the form
+$\lambd[\typeof{y}{\dots}][\dots]$, and the $\lambd$ operator
+corresponds to $\Intro\lif$. In general we can recover the skeleton of
+the !!{derivation} solely by the structure of the term, e.g.,
+\begin{gather*}
+  \AxiomC{$\Discharge{y: }{2}$}
+  \AxiomC{$\Discharge{y: }{2}$}
+  \AxiomC{$\Discharge{x}{1}$}
+  \RightLabel{$\Intro\lor_1$}
+  \UnaryInfC{$\ori{1}{!A \lif \lfalse}{x} : $}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$y (\ori{1}{!A \lif \lfalse}{x}) : $}
+  \DischargeRule{\Intro\lif}{1}
+  \UnaryInfC{$\lambd[\typeof{x}{!A}][y (\ori{1}{!A \lif \lfalse}{x})] : $}
+  \RightLabel{$\Intro\lor_2$}
+  \UnaryInfC{$\ori{2}{!A}{\lambd[\typeof{x}{!A}][y
+        \ori{1}{!A \lif \lfalse}{x}]} : $}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$y (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y
+        \ori{1}{!A \lif \lfalse}{x}]}): $}
+  \DischargeRule{\Intro\lif}{2}
+  \UnaryInfC{$\lambd[\typeof{y}{(!A \lor (!A \lif \lfalse))\lif \lfalse}][y
+    (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y (\ori{1}{!A \lif \lfalse}{x})]})]$ :}
+  \DisplayProof
+\end{gather*}
+
+Our next step is to recover the !!{formula}s these terms witness. We
+define a function~$F(\Gamma,M)$ which denotes the !!{formula}
+witnessed by $M$ in context $\Gamma$, by induction on $M$ as follows:
+\begin{align*}
+  F(\Gamma, x) &= \Gamma(x) \\
+  F(\Gamma, \andi{N_1}{N_2} & = F(\Gamma, N_1) \land F(\Gamma, N_2)\\
+  F(\Gamma, \ande{i}{N} & = !A_i \text{ if } F(\Gamma, N) = !A_1 \land !A_2\\
+  F(\Gamma, \ori{i}{!A}{N} & = \begin{cases} F(N) \lor !A & \text{if } i = 1\\
+    !A \lor F(N) & \text{if } i = 2\end{cases}\\
+  F(\Gamma, \ore{M}{x_1}{N_1}{x_2}{N_2}) &= F(\Gamma \cup
+  \{x_i:F(\Gamma, M)\}, N_i) \\
+  F(\Gamma, \lambd[\typeof{x}{!A}][N]) &= !A \lif F(\Gamma \cup
+  \{x:!A\}, N) \\
+  F(\Gamma, NM) & = !B \text{ if } F(\Gamma, N) = !A \lif !B
+\end{align*}
+where $\Gamma(x)$ means the formula mapped to by $x$ in $\Gamma$
+and $\Gamma \cup \{x:!A\}$
+is a context exactly as $\Gamma$ except mapping $x$ to $!A$,
+whether or not $x$ is already in $\Gamma$.
+
+Note there are cases where $F(\Gamma, M)$ is not defined, for example:
+\begin{enumerate}
+\item In the first line, it is possible that $x$ is not in $\Gamma$.
+\item In recursive cases, the inner invocation may be undefined, making
+  the outer one undefined too.
+\item In the third line, its only defined when $F(\Gamma, M)$ is of
+  the form $!A_1 \lor !A_2$, and the right hand is independent on $i$.
+\end{enumerate}
+
+As we recursively compute $F(\Gamma, M)$, we work our way up the
+natural deduction !!{derivation}. The every step in the computation of
+$F(\Gamma, M)$ corresponds to a term in the !!{derivation} to which
+the !!{derivation}-to-term translation assigns~$M$, and the formula
+computed is the end-!!{formula} of the derivation. However, the result
+may not be defined for some choices of~$\Gamma$. We say that such
+pairs $\tuple{\Gamma, M}$ are \emph{ill-typed}, and otherwise
+\emph{well-typed}. However, if the term $M$ results from translating
+!!a{derivation}, and the !!{formula}s in $\Gamma$ correspond to the
+!!{undischarged} assumptions of the !!{derivation}, the pair
+$\tuple{\Gamma, M}$ will be well-typed.
+
+\begin{prop}
+  If $D$ is !!a{derivation} with !!{undischarged} assumptions~$!A_1$,
+  \dots, $!A_n$, $M$ is the proof term associated with~$D$ and $\Gamma
+  = \{x_1:!A_1, \dots, x_n:!A_n\}$, then the result of recovering
+  !!{derivation} from $M$ in context~$\Gamma$ is $D$.
+\end{prop}
+
+In the other direction, if we first translate a typing pair to natural
+deduction and then translate it back, we won't get the same pair back
+since the choice of variables for the !!{undischarged} assumptions is
+underdetermined. For example, consider the pair $\tuple{\{x:!A, y:!A
+  \lif !B\}, y x}$. The corresponding !!{derivation} is
+\begin{prooftree}
+  \AxiomC{$!A \lif !B$}
+  \AxiomC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+\end{prooftree}
+By assigning different variables to the !!{undischarged} assumptions,
+say, $u$ to $!A \lif !B$ and $v$ to $!A$, we would get the term $uv$
+rather than~$yx$.  There is a connection, though: the terms will be
+the same up to renaming of variables.
+
+Now we have established the correspondence between typing pairs and
+natural deduction, we can prove theorems for typing pairs and transfer
+the result to natural deduction !!{derivation}s.
+
+Similar to what we did in the natural deduction section, we can make
+some observations here too. Let $\Gamma \Proves M:!A$ denote that
+there is a pair $(\Gamma, M)$ witnessing the formula $!A$. Then always
+$\Gamma \Proves x:!A$ if $x:!A \in \Gamma$, and the following rules
+are valid:
+
+\begin{gather*}
+  \AxiomC{$\Gamma \Proves M_1:!A_1$}
+  \AxiomC{$\Delta \Proves M_2:!A_2$}
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInfC{$\Gamma,\Delta \Proves \tuple{M_1,M_2} : !A_1 \land !A_2 $}
+  \DisplayProof
+  \quad
+  \AxiomC{$\Gamma \Proves M:!A_1 \land !A_2$}
+  \RightLabel{$\Elim{\land}_i$}
+  \UnaryInfC{$\Gamma \Proves \ande{i}{M} : !A_i$}
+  \DisplayProof
+  \\
+  \AxiomC{$\Gamma \Proves M_1: !A_1$}
+  \RightLabel{$\Intro{\lor}_1$}
+  \UnaryInfC{$\Gamma \Proves \ori{1}{!A_2}M :  !A_1 \lor !A_2$}
+  \DisplayProof
+  \quad
+  \AxiomC{$\Gamma \Proves M_2: !A_2$}
+  \RightLabel{$\Intro{\lor}_2$}
+  \UnaryInfC{$\Gamma \Proves \ori{2}{!A_1}M :  !A_1 \lor !A_2$}
+  \DisplayProof
+  \\
+  \AxiomC{$\Gamma \Proves M : !A \lor !B$}
+  \AxiomC{$\Delta_1, x_1: !A_1 \Proves N_1 : !C$}
+  \AxiomC{$\Delta_2, x_2: !A_2 \Proves N_2 : !C$}
+  \RightLabel{$\Elim{\lor}$}
+  \TrinaryInfC{$\Gamma, \Delta, \Delta' \Proves \ore{M}{x_1}{N_1}{x_2}{N_2} : !C$}
+  \DisplayProof
+  \\
+  \AxiomC{$\Gamma, x : !A \Proves N : !B$}
+  \RightLabel{\Intro{\lif}}
+  \UnaryInfC{$\Gamma \Proves \lambd[\typeof{x}{!A}][N] : !A \lif !B$}
+  \DisplayProof
+  \quad
+  \AxiomC{$\Gamma \Proves Q : !A$}
+  \AxiomC{$\Delta \Proves P : !A \lif !B$}
+  \RightLabel{\Elim{\lif}}
+  \BinaryInfC{$\Gamma, \Delta \Proves P Q : !B$}
+  \DisplayProof
+  \\
+  \AxiomC{$\Gamma \Proves M : \lfalse$}
+  \RightLabel{\Elim{\lfalse}}
+  \UnaryInfC{$\Gamma  \Proves \falsee{!A}{M} : !A$}
+  \DisplayProof
+\end{gather*}
+
+These are the typing rules of the simply typed lambda calculus
+extended with product, sum and bottom.
+
+In addition, the $F(\Gamma, M)$ is actually a type checking algorithm;
+it returns the type of the term with respect to the context, or is
+undefined if the term is ill-typed with respect to the context.
+
+\end{document}

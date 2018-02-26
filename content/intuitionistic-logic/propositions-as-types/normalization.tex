@@ -1,0 +1,164 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: normalization
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{nor}
+
+\olsection{Normalization}
+
+In this section we prove that, via some reduction order, any deduction
+can be reduced to a normal deduction, which is called the
+\emph{normalization property}. We will make use of the
+propositions-as-types correspondence: we show that every proof term
+can be reduced to a normal form; normalization for natural deduction
+!!{derivation}s then follows.
+
+Firstly we define some functions that measure the complexity of terms.
+The \emph{length}~$\len{!A}$ of !!a{formula}s is defined by
+\begin{align*}
+  \len{p} &= 0\\
+  \len{!A \land !B} &= \len{!A} + \len{!B} + 1\\
+  \len{!A \lor !B} &= \len{!A} + \len{!B} + 1 \\
+  \len{!A \lif !B} &= \len{!A} + \len{!B} + 1.
+\end{align*}
+The complexity of a redex~$M$ is measured by its \emph{cut
+  rank}~$\cutrank{M}$:
+\begin{align*}
+  \cutrank{(\lambd[\typeof{x}{!A}][\typeof{N}{!B}])Q} &=
+  \len{!A} + \len{!B} + 1 \\
+  \cutrank{\ande{i}{\andi{\typeof{M}{!A}}{\typeof{N}{!B}}}} &=
+  \len{!A} + \len{!B} + 1 \\
+  \cutrank{\ore{\ori{i}{!A_{i}}{\typeof{M}{!A_i}}}
+    {\typeof{x_1}{!A_1}}{\typeof{N_1}{!C}}
+    {\typeof{x_2}{!A_2}}{\typeof{N_2}{!C}}} &=
+  \len{!A} + \len{!B} + 1
+\end{align*}
+The complexity of a proof term is measured by the most complex
+redex in it, and $0$ if it is normal:
+\[
+  \maxrank{M} = \max \{\cutrank{N} | N \text{ is a sub term of } M \text{
+    and is redex}\}
+\]
+
+\begin{lem}\ollabel{lem:subst}
+  If $\Subst{M}{\typeof{N}{!A}}{\typeof{x}{!A}}$ is a redex and $M
+  \not\ident x$, then one of the following cases holds:
+  \begin{enumerate}
+  \item $M$ is itself a redex, or
+  \item $M$ is of the form $\ande{i}{x}$, and $N$ is of the form
+    $\andi{P_1}{P_2}$
+  \item $M$ is of the form $\ore{i}{x_1}{P_1}{x_2}{P_2}$, and $N$ is
+    of the form $\ori{i}{}{Q}$
+  \item $M$ is of the form $x Q$, and $N$ is of the form
+    $\lambd[x][P]$
+  \end{enumerate}
+  In the first case, $\cutrank{\Subst{M}{N}{x}} = \cutrank{M}$; in the
+  other cases, $\cutrank{\Subst{M}{N}{x}} = \len{!A})$.
+\end{lem}
+\begin{proof}
+  Proof by induction on~$M$.
+  \begin{enumerate}
+  \item If $M$ is a single variable $y$ and $y \not\ident x$, then
+    $\Subst{y}{N}{x}$ is $y$, hence not a redex.
+  \item If $M$ is of the form $\andi{N_1}{N_2}$, or $\lambd[x][N]$, or
+    $\ori{i}{!A}{N}$, then $\Subst{M}{\typeof{N}{!A}}{\typeof{x}{!A}}$ is
+    also of that form, and so is not a redex.
+  \item If $M$ is of the form $\ande{i}{P}$, we consider two cases.
+    \begin{enumerate}
+      \item If $P$ is of the form $\andi{P_1}{P_2}$, then $M \ident
+        \ande{i}{\andi{P_1}{P_2}}$ is a redex, and clearly
+        \[
+        \Subst{M}{N}{x} \ident
+        \ande{i}{\andi{\Subst{P_1}{N}{x}}{\Subst{P_2}{N}{x}}}
+        \]
+        is also a redex. The cut ranks are equal.
+      \item If $P$ is a single variable, it must be $x$ to make the
+        substitution a redex, and $N$ must be of the form
+        $\andi{P_1}{P_2}$. Now consider
+        \[
+        \Subst{M}{N}{x} \ident \Subst{\ande{i}{x}}{\andi{P_1}{P_2}}{x},
+        \]
+        which is $\ande{i}{\andi{P_1}{P_2}}$. Its cut rank is equal to
+        $\cutrank{x}$, which is $\len{!A}$.
+    \end{enumerate}
+  \end{enumerate}
+  The cases of $\ore{N}{x_1}{N_1}{x_2}{N_2}$ and $P Q$ are similar.
+\end{proof}
+
+\begin{lem}
+  If $M$ contracts to $M'$, and $\cutrank{M} > \cutrank{N}$ for all
+  proper redex sub-terms $N$ of $M$, then $\cutrank{M} >
+  \maxrank{M'}$.
+\end{lem}
+
+\begin{proof}
+  Proof by cases.
+  \begin{enumerate}
+  \item If $M$ is of the form $\ande{i}{\andi{M_1}{M_2}}$, then $M'$ is
+    $M_i$; since any sub-term of $M_i$ is also proper
+    sub-term of $M$, the claim holds.
+  \item If $M$ is of the form
+    $(\lambd[\typeof{x}{!A}][N])\typeof{Q}{!A}$, then $M'$ is
+    $\Subst{N}{\typeof{Q}{!A}}{\typeof{x}{!A}}$.  Consider a redex in
+    $M'$.  Either there is corresponding redex in $N$ with equal cut
+    rank, which is less than $\cutrank{M}$ by assumption, or the cut
+    rank equals $\len{!A}$, which by definition is less than
+    $\cutrank{(\lambd[x^{!A}][N])Q}$.
+  \item If $M$ is of the form
+    \[
+    \ore{\ori{i}{}{\typeof{N}{!A_i}}}
+        {\typeof{x_1}{!A_1}}{\typeof{N_1}{!C}}
+        {\typeof{x_2}{!A_2}}{\typeof{N_2}{!C}},
+    \]
+    then $M' \ident \Subst{N_i}{N}{\typeof{x_i}{!A_i}}$.  Consider a
+    redex in~$M'$. Either there is corresponding redex in $N_i$ with
+    equal cut rank, which is less than $\cutrank{M}$ by assumption; or
+    the cut rank equals $\len{!A_i}$, which by definition is less than
+    $\cutrank{\ore{\ori{i}{}{\typeof{N}{!A_i}}}
+      {\typeof{x_1}{!A_1}}{\typeof{N_1}{!C}}
+      {\typeof{x_2}{!A_2}}{\typeof{N_2}{!C}}}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}
+  All proof terms reduce to normal form; all !!{derivation}s reduce to
+  normal !!{derivation}s.
+\end{thm}
+
+\begin{proof}
+  The second follows from the first. We prove the first by complete
+  induction on $m=\maxrank{M}$, where $M$ is a proof term.
+  \begin{enumerate}
+
+  \item If $m=0$, $M$ is already normal.
+  \item
+    Otherwise, we proceed by induction on~$n$, the number of
+    redexes in $M$ with cut rank equal to~$m$.
+    \begin{enumerate}
+    \item If $n=1$, select any redex $N$ such that $m = \cutrank{N} >
+      \cutrank{P}$ for any proper sub-term $P$ which is also a redex
+      of course. Such a redex must exist, since any term only has
+      finitely many subterms.
+
+      Let $N'$ denote the reductum of $N$. Now by the lemma
+      $\maxrank{N'} < \maxrank{N}$, thus we can see that $n$, the
+      number of redexes with $\cutrank=m$ is decreased. So $m$ is
+      decreased (by $1$ or more), and we can apply the inductive
+      hypothesis for~$m$.
+    \item For the induction step, assume $n>1$. the process is
+      similar, except that $n$ is only decreased to a positive number
+      and thus $m$ does not change. We simply apply the induction
+      hypothesis for~$n$.
+    \end{enumerate}
+\end{enumerate}
+\end{proof}
+
+The normalization of terms is actually not specific to the reduction
+order we chose. In fact, one can prove that regardless of the order in
+which redexes are reduced, the term always reduces to a normal
+form. This property is called \emph{strong normalization}.
+\end{document}

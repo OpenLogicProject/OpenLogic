@@ -189,12 +189,6 @@
 \DeclareDocumentMacro \FalseInt {\ensuremath{\lfalse_I}}
 \DeclareDocumentMacro \FalseCl {\ensuremath{\lfalse_C}}
 
-\DeclareDocumentCommand \Deduce { m o } {\ensuremath{
-    \IfNoValueTF {#2}
-    {\mathcal{#1}}
-    {\mathcal{#1}_{#2}}
-  }}
-
 % - `\Discharge{!A}{n}`: typesets a discharged assumption with label
 % $n$, e.g., $[!A]^n$.
 
@@ -634,10 +628,10 @@
 
 \DeclareDocumentMacro \PL {\textsc{pl}}
 
-% - `\Prop{A}{M}`: the proposition defined by $A$ in $\mathfrak{M}$
+% - `\Prop{M}{A}`: the proposition defined by $A$ in $\mathfrak{M}$
 
 \DeclareDocumentCommand \Prop { m m } {
-  {[\!\![} #1 {]\!\!]_{\mModel #2}}
+  {[\!\![} #2 {]\!\!]_{\mModel #1}}
 }
 
 % - `\ST`: The standard translation
@@ -699,7 +693,7 @@
 \DeclareDocumentCommand \len { m }{\fn{len}(#1)}
 
 % - `\emptyseq`: the empty sequence
-\DeclareDocumentMacro \emptyseq {\emptyset}
+\DeclareDocumentMacro \emptyseq {\Lambda}
 
 % - `\restrict`: restriction of a function to a set (infix operator)
 \DeclareDocumentMacro \restrict {\upharpoonright}
@@ -736,6 +730,14 @@
 \DeclareDocumentMacro \fdefined {\downarrow}
 \DeclareDocumentMacro \fundefined {\uparrow}
 
+% - `cutrank`: cut rank
+
+\DeclareDocumentCommand \cutrank { m }{\fn{cr}(#1)}
+
+% - `maxrank`: max rank
+
+\DeclareDocumentCommand \maxrank { m }{\fn{mr}(#1)}
+
 % ### Particular sets
 
 % - Natural numbers: `\Nat`
@@ -755,6 +757,17 @@
 
 % - Identity relation: `\Id{X}`
 \DeclareDocumentCommand \Id { m } {\mathord{\mathrm{Id}_{#1}}}
+
+% Topological notions
+% -------------------
+
+% - `\Top{O}`: Open sets
+
+\DeclareDocumentCommand \Top { m }{\mathcal{#1}}
+
+% - `\Interior{V}`: the interior of $V$
+
+\DeclareDocumentCommand \Interior { m }{\mathrm{Int}(#1)}
 
 % ### Symbols for Turing Machines
 
@@ -1078,7 +1091,7 @@
 
 \settexttoken{structure}{structure}{structures}
 
-% - `valuation`: valuattion, truth-value assignment
+% - `valuation`: valuation, truth-value assignment
 
 \settexttoken{valuation}{valuation}{valuations}
 
@@ -1089,6 +1102,11 @@
 % - `value`: value (denotation) of a term
 
 \settexttoken{value}{value}{values}
+
+% - `relational model`: term for modal structures, defaults to
+% "relational model", redefine for "Kripke model".
+
+\settexttoken{relational model}{relational model}{relational models}
 
 % - `derivation`: derivation in a calculus, proof
 
