@@ -202,6 +202,22 @@
   \LeftLabel{\scriptsize $#2$}
 }
 
+% Proof Terms
+% ---------------------
+%
+% Proof terms used in intuitionistic logic
+
+\DeclareDocumentCommand \typeof { m m } {#1^{#2}}
+
+\DeclareDocumentCommand \andi { m m } {\tuple{#1, #2}}
+\DeclareDocumentCommand \ande { m m } {\fn{p}_{#1}(#2)}
+\DeclareDocumentCommand \ori { m m m } {\fn{in}_{#1}^{#2}(#3)}
+\DeclareDocumentCommand \ore { m m m m m } {\fn{case}(#1, #2.#3, #4.#5)}
+\DeclareDocumentCommand \falsee { m m } {\fn{contr}_{#1}(#2)}
+
+% Axiomatic Derivations
+% ---------------------
+
 % - `\MP`: produces abbreviation for Modus Ponens.
 
 \DeclareDocumentMacro \MP {\textsc{mp}}
@@ -221,6 +237,9 @@
     \IfNoValueTF{#3}{}{#3\,}%
     \hbox to1em{\ensuremath{#1}} #2}}
 
+% Tableaux
+% --------
+
 % - Tableau rule names: `\TRule{Sign}{Op}` typesets the name of a the
 % 'Sign' rule for operator `Op`, `\TFalse{Op}` does the same for
 % 'False' rules. The optional argument contains the line number to
@@ -232,6 +251,7 @@
 % - `\TAss`: justification label for ``assumption''
 
 \DeclareDocumentMacro \TAss {Assumption}
+
 
 % Metalogical Relations
 % ---------------------
@@ -608,10 +628,10 @@
 
 \DeclareDocumentMacro \PL {\textsc{pl}}
 
-% - `\Prop{A}{M}`: the proposition defined by $A$ in $\mathfrak{M}$
+% - `\Prop{M}{A}`: the proposition defined by $A$ in $\mathfrak{M}$
 
 \DeclareDocumentCommand \Prop { m m } {
-  {[\!\![} #1 {]\!\!]_{\mModel #2}}
+  {[\!\![} #2 {]\!\!]_{\mModel #1}}
 }
 
 % - `\ST`: The standard translation
@@ -673,7 +693,7 @@
 \DeclareDocumentCommand \len { m }{\fn{len}(#1)}
 
 % - `\emptyseq`: the empty sequence
-\DeclareDocumentMacro \emptyseq {\emptyset}
+\DeclareDocumentMacro \emptyseq {\Lambda}
 
 % - `\restrict`: restriction of a function to a set (infix operator)
 \DeclareDocumentMacro \restrict {\upharpoonright}
@@ -710,6 +730,14 @@
 \DeclareDocumentMacro \fdefined {\downarrow}
 \DeclareDocumentMacro \fundefined {\uparrow}
 
+% - `cutrank`: cut rank
+
+\DeclareDocumentCommand \cutrank { m }{\fn{cr}(#1)}
+
+% - `maxrank`: max rank
+
+\DeclareDocumentCommand \maxrank { m }{\fn{mr}(#1)}
+
 % ### Particular sets
 
 % - Natural numbers: `\Nat`
@@ -729,6 +757,17 @@
 
 % - Identity relation: `\Id{X}`
 \DeclareDocumentCommand \Id { m } {\mathord{\mathrm{Id}_{#1}}}
+
+% Topological notions
+% -------------------
+
+% - `\Top{O}`: Open sets
+
+\DeclareDocumentCommand \Top { m }{\mathcal{#1}}
+
+% - `\Interior{V}`: the interior of $V$
+
+\DeclareDocumentCommand \Interior { m }{\mathrm{Int}(#1)}
 
 % ### Symbols for Turing Machines
 
@@ -1052,7 +1091,7 @@
 
 \settexttoken{structure}{structure}{structures}
 
-% - `valuation`: valuattion, truth-value assignment
+% - `valuation`: valuation, truth-value assignment
 
 \settexttoken{valuation}{valuation}{valuations}
 
@@ -1063,6 +1102,11 @@
 % - `value`: value (denotation) of a term
 
 \settexttoken{value}{value}{values}
+
+% - `relational model`: term for modal structures, defaults to
+% "relational model", redefine for "Kripke model".
+
+\settexttoken{relational model}{relational model}{relational models}
 
 % - `derivation`: derivation in a calculus, proof
 

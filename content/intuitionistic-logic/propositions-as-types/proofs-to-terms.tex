@@ -1,0 +1,195 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: proofs-to-terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{pt}
+
+\olsection{Converting \usetoken{P}{derivation} to Proof Terms}
+
+We will describe the process of converting natural deduction
+!!{derivation}s to pairs. We will write a proof term to the left of
+each formula in the !!{derivation}, resulting in expressions of the
+form $M : !A$.  We'll then say that, $M$ \emph{witnesses}~$!A$.  Let's
+call such an expression a \emph{judgment}.
+
+First let us assign to each assumption a variable, with the
+following constraints:
+\begin{enumerate}
+\item Assumptions !!{discharged} in the same step (that is, with the same
+  number on the square bracket) must be assigned the same variable.
+\item For assumptions not !!{discharged}, assumptions of different
+  !!{formula}s should be assigned different variables.
+\end{enumerate}
+Such an assignment translates all assumptions of the form
+\[
+!A \qquad \text{into}\qquad x : !A.
+\]
+With assumptions all associated with variables (which are terms),
+we can now inductively translate the rest of the deduction tree. The
+modified natural deduction rules taking into account context and proof
+terms are given below. Given the proof terms for the premise(s), we
+obtain the corresponding proof term for conclusion.
+
+\begin{gather*}
+  \AxiomC{$M_1 : !A_1$}
+  \AxiomC{$M_2 : !A_2$}
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInfC{$\andi{M_1}{M_2}: !A_1 \land !A_2$}
+  \DisplayProof\\
+  \AxiomC{$M : !A_1 \land !A_2$}
+  \RightLabel{$\Elim{\land}_1$}
+  \UnaryInfC{$\ande{i}{M} : !A_1$}
+  \DisplayProof
+  \qquad
+  \AxiomC{$M : !A_1 \land !A_2$}
+  \RightLabel{$\Elim{\land}_2$}
+  \UnaryInfC{$\ande{i}{M} : !A_2$}
+  \DisplayProof
+\end{gather*}
+
+In $\Intro\land$ we assume we have $!A_1$ witnessed by term $M_1$ and
+$!A_2$ witnessed by term $M_2$. We pack up the two terms into a pair
+$\andi{M_1}{M_2}$ which witnesses $!A_1 \land !A_2$.
+
+In $\Elim{\land}_i$ we assume that $M$ witnesses $!A_1 \land !A_2$.
+The term witnessing $!A_i$ is $\ande{i}{M}$. Note that $M$ is not
+necessary of the form $\andi{M_1}{M_2}$, so we cannot simply
+assign~$M_1$ to the conclusion~$!A_i$.
+
+Note how this coincides with the BHK interpretation. What the BHK
+interpretation does not specify is how the function used as proof for
+$!A \lif !B$ is supposed to be obtained. If we think of proof terms as
+proofs or functions of proofs, we can be more explicit.
+\begin{gather*}
+  \AxiomC{$\Discharge{x:!A}{}$}
+  \DeduceC{$N:!B$}
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInfC{$\lambd[\typeof{x}{!A}][N]:!A \lif !B$}
+  \DisplayProof
+  \qquad
+  \AxiomC{$P : !A \lif !B$}
+  \AxiomC{$Q : !A$}
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInfC{$PQ : !B$}
+  \DisplayProof
+\end{gather*}
+The $\lambda$ notation should be understood as the same as in the
+lambda calculus, and $PQ$ means applying $P$ to~$Q$.
+
+\begin{gather*}
+  \AxiomC{$M_1 : !A_1$}
+  \RightLabel{$\Intro{\lor}_1$}
+  \UnaryInfC{$\ori{1}{!A_1}{M_1} : !A_1 \lor !A_2$}
+  \DisplayProof
+  \qquad
+  \AxiomC{$M_2 : !A_2$}
+  \RightLabel{$\Intro{\lor}_2$}
+  \UnaryInfC{$\ori{2}{!A_2}{M_2} : !A_1 \lor !A_2$}
+  \DisplayProof
+\\
+  \AxiomC{$!M : A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{x_1 : !A_1}{}$}
+  \DeduceC{$N_1 : !C$}
+  \AxiomC{$\Discharge{x_2 : !A_2}{}$}
+  \DeduceC{$N_2 : !C$}
+  \RightLabel{$\Elim{\lor}$}
+  \TrinaryInfC{$\ore{M}{x_1}{N_1}{x_2}{N_2} : !C$}
+  \DisplayProof
+\end{gather*}
+The proof term $\ori{1}{!A_1}{M_1}$ is a term witnessing $!A_1 \lor
+!A_2$, where $M_1$ witnesses $!A_1$.
+
+The term $\ore{M}{x_1}{N_1}{x_2}{N_2}$ mimics the case clause in
+programming languages: we already have the !!{derivation} of $!A \lor
+!B$, !!a{derivation} of $!C$ assuming $!A$, and !!a{derivation} of
+$!C$ assuming $!B$. The $case$ operator thus select the appropriate
+proof depending on $M$; either way it's a proof of $!C$.
+
+\begin{gather*}
+  \AxiomC{$N : \lfalse$}
+  \RightLabel{$\FalseInt$}
+  \UnaryInfC{$\falsee{!A}{N} : !A$}
+  \DisplayProof
+\end{gather*}
+$\falsee{!A}{N}$ is a term witnessing $!A$, whenever $N$ is a term
+witnessing $\lfalse$.
+
+Now we have a natural deduction !!{derivation} with all formulas
+associated with a term. At each step, the relevant typing
+context~$\Gamma$ is given by the list of assumptions remaining
+!!{undischarged} at that step.  Note that $\Gamma$ is well defined:
+since we have forbidden assumptions of different !!{undischarged}
+assumptions to be assigned the same variable, there won't be any
+disagreement about the formulas mapped to which a variable is mapped.
+
+We now give some examples of such translations:
+
+Consider the !!{derivation} of $\lnot\lnot(!A \lor \lnot !A)$, i.e.,
+$((!A \lor (!A \lif \lfalse))\lif \lfalse)\lif \lfalse$. Its
+translation is:
+
+\begin{gather*}
+  \AxiomC{$\Discharge{y : (!A \lor (!A \lif \lfalse))\lif \lfalse}{2}$}
+  \AxiomC{$\Discharge{y: (!A \lor (!A \lif \lfalse))\lif \lfalse}{2}$}
+  \AxiomC{$\Discharge{x:!A}{1}$}
+  \UnaryInfC{$\ori{1}{!A \lif \lfalse}{x} : !A \lor (!A \lif \lfalse)$}
+  \BinaryInfC{$y (\ori{1}{!A \lif \lfalse}{x}) : \lfalse$}
+  \DischargeRule{}{1}
+  \UnaryInfC{$\lambd[\typeof{x}{!A}][y (\ori{1}{!A \lif \lfalse}{x})] :
+    !A \lif \lfalse$}
+  \UnaryInfC{$\ori{2}{!A}{\lambd[\typeof{x}{!A}][y (\ori{1}{!A \lif
+          \lfalse}{x})]} : !A \lor (!A \lif \lfalse)$}
+  \BinaryInfC{$y (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y \ori{1}{!A \lif
+      \lfalse}{x}])} : \lfalse$}
+  \DischargeRule{}{2}
+  \UnaryInfC{$\lambd[\typeof{y}{(!A \lor (!A \lif \lfalse))\lif \lfalse}][y
+      (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y \ori{1}{!A \lif \lfalse}{x}]})] :
+    ((!A \lor (!A \lif \lfalse))\lif \lfalse)\lif \lfalse$}
+  \DisplayProof
+\end{gather*}
+
+The tree has no assumptions, so the context is empty; we get:
+\begin{gather*}
+  \Proves \lambd[\typeof{y}{(!A \lor (!A \lif \lfalse))\lif \lfalse}][y
+    (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y \ori{1}{!A \lif \lfalse}{x}]})] :
+  ((!A \lor (!A \lif \lfalse))\lif \lfalse)\lif \lfalse
+\end{gather*}
+If we leave out the last $\Intro\lif$, the assumptions denoted by $y$
+would be in the context and we would get:
+\begin{gather*}
+  y: ((!A \lor (!A \lif \lfalse))\lif \lfalse) \Proves y
+  (\ori{2}{!A}{\lambd[\typeof{x}{!A}][y \ori{1}{!A \lif \lfalse}{x}]}) :
+  \lfalse
+  \end{gather*}
+
+Another example: $\Proves !A \lif (!A \lif \lfalse) \lif \lfalse$
+
+\begin{gather*}
+  \AxiomC{$\Discharge{x:!A}{2}$}
+  \AxiomC{$\Discharge{y:!A \lif \lfalse}{1}$}
+  \BinaryInfC{$y x : \lfalse$}
+  \DischargeRule{}{1}
+  \UnaryInfC{$\lambd[\typeof{y}{!A \lif \lfalse}][y x]:
+    (!A \lif \lfalse)\lif \lfalse$}
+  \DischargeRule{}{2}
+  \UnaryInfC{$\lambd[\typeof{x}{!A}][\lambd[\typeof{y}{!A \lif
+          \lfalse}][y x]] : !A \lif (!A \lif \lfalse) \lif \lfalse$}
+  \DisplayProof
+\end{gather*}
+Again all assumptions are !!{discharged} and thus the context is
+empty, the resulting term is
+\begin{gather*}
+  \Proves \lambd[\typeof{x}{!A}][\lambd[\typeof{y}{!A \lif \lfalse}][y x]] :
+  !A \lif (!A \lif \lfalse) \lif \lfalse
+\end{gather*}
+If we leave out the last two $\Intro\lif$ inferences, the assumptions
+denoted by both $x$ and $y$ would be in context and we would get
+\begin{gather*}
+  x:!A, y:!A \lif \lfalse \Proves y x : \lfalse
+\end{gather*}
+
+\end{document}

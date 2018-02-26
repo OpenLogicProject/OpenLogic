@@ -1,0 +1,69 @@
+% part: intuitionistic-logic
+% chapter: soundeness-completeness
+% section: truth-lemma
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{tru}
+
+\olsection{The Truth Lemma}
+
+\begin{lem}\ollabel{lem:truth}
+  If $\Delta$ is prime, then $\mSat{M(\Delta)}{!A}[\sigma]$ iff
+  $\Delta(\sigma) \Proves !A$.
+\end{lem}
+
+\begin{proof}
+  By induction on~$!A$.
+  \begin{enumerate}
+    \item \indcase{!A}{\lfalse}{Since $\Delta(\sigma)$ is prime, it
+      is consistent, so $\Delta(\sigma) \Proves/ \indfrm$. By
+      definition, $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}
+      \item \indcase{!A}{p}{By definition of $\mSat{}{}$,
+        $\mSat{M(\Delta)}{\indfrm}[\sigma]$ iff $\sigma \in V(p)$,
+        i.e., $\Delta(\sigma) \Proves \indfrm$.}
+      \item \indcase!{!A}{\lnot !B}{}
+      \item \indcase{!A}{!B \land
+        !C}{$\mSat{M(\Delta)}{\indfrm}[\sigma]$ iff
+        $\mSat{M(\Delta)}{!B}[\sigma]$ and
+        $\mSat{M(\Delta)}{!C}[\sigma]$. By induction hypothesis,
+        $\mSat{M(\Delta)}{!B}[\sigma]$ iff $\Delta(\sigma) \Proves
+        !B$, and similarly for~$!C$. But $\Delta(\sigma) \Proves !B$
+        and $\Delta(\sigma) \Proves !C$ iff $\Delta(\sigma)
+        \Proves \indfrm$.}
+      \item \indcase{!A}{!B \lor
+        !C}{$\mSat{M(\Delta)}{\indfrm}[\sigma]$ iff
+        $\mSat{M(\Delta)}{!B}[\sigma]$ or
+        $\mSat{M(\Delta)}{!C}[\sigma]$. By induction hypothesis,
+        this holds iff $\Delta(\sigma) \Proves !B$ of
+        $\Delta(\sigma) \Proves !C$. We have to show that this in
+        turn holds iff $\Delta(\sigma) \Proves \indfrm$. The
+        left-to-right direction is clear. The right-to-left direction
+        follows since $\Delta(\sigma)$ is prime.}
+      \item \indcase{!A}{!B \lif !C}{First the contrapositive of the
+        left-to-right direction: Assume $\Delta(\sigma) \Proves/ !B
+        \lif !C$. Then also $\Gamma*(\sigma) \cup \{!B\} \Proves/
+        !C$. Since $\tuple{!B, !C}$ is $\tuple{!B_n, !C_n}$ for
+        some~$n$, we have $\Delta(\sigma.n) = (\Delta(\sigma) \cup
+        \{!B\})^*$, and $\Delta(\sigma.n) \Proves !B$ but $\Proves/
+        !C$. By inductive hypothesis, $\mSat{M(\Delta)}{!B}[\sigma.n]$
+        and $\mSat/{M(\Delta)}{!C}[\sigma.n]$. Since
+        $R\sigma(\sigma.n)$, this means that
+        $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+        Now assume $\Delta(\sigma) \Proves !B \lif !C$, and let
+        $R\sigma\sigma'$. Since $\Delta(\sigma) \subseteq
+        \Delta(\sigma')$, we have: if $\Delta(\sigma') \Proves
+        !B$, then $\Delta(\sigma') \Proves !C$. In other words, for
+        every $\sigma'$ such that $R\sigma\sigma'$, either
+        $\Delta(\sigma') \Proves/ !B$ or $\Delta(\sigma') \Proves
+        !C$. By induction hypothesis, this means that whenever
+        $R\sigma\sigma'$, either $\mSat/{M(\Delta)}{!B}[\sigma']$ or
+        $\mSat{M(\Delta)}{!C}[\sigma']$, i.e.,
+        $\mSat{M(\Delta)}{\indfrm}[\sigma]$.}
+  \end{enumerate}
+\end{proof}
+
+\end{document}

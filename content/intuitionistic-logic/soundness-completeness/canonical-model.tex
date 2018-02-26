@@ -1,0 +1,65 @@
+% part: intuitionistic-logic
+% chapter: soundeness-completeness
+% section: canonical-model
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{mod}
+
+\olsection{The Canonical Model}
+
+The worls in our model will be finite sequences~$\sigma$ of natural
+numbers, i.e., $\sigma \in \Nat^*$. Note that $\Nat^*$ is inductively
+defined by:
+\begin{enumerate}
+\item $\emptyseq \in \Nat^*$.
+\item If $\sigma \in \Nat^*$ and $n \in \Sigma$, then $\sigma.n \in
+  \Nat^*$ (where $\sigma.n$ is $\sigma \concat \tuple{n}$).
+\item Nothing else is in $\Nat^*$.
+\end{enumerate}
+So we can use $\Nat^*$ to give inductive definitions.
+
+Let $\tuple{!B_1, !C_1}$, $\tuple{!B_2, !C_s}$, \dots, be an
+enumeration of all pairs of !!{formula}s. Given a set of
+!!{formula}s~$\Delta$, define $\Delta(\sigma)$ by induction as
+follows:
+\begin{enumerate}
+\item $\Delta(\emptyseq) = \Delta$
+\item $\Delta(\sigma.n) = {}$
+  \[
+  \begin{cases}
+    (\Delta(\sigma) \cup \{!B_n\})^* &
+    \text{if $\Delta(\sigma) \cup \{!B_n\} \Proves/ !C_n$} \\
+    \Delta(\sigma) & \text{otherwise}
+  \end{cases}
+  \]
+\end{enumerate}
+Here by $(\Delta(\sigma) \cup \{!B_n\})^*$ we mean the prime set of
+!!{formula}s which exists by \olref[lin]{lem:lindenbaum} applied to the
+set $\Delta(\sigma) \cup \{!B_n\}$. Note that by this definition, if
+$\Delta(\sigma) \cup \{!B_n\} \Proves/ !C_n$, then $\Delta(\sigma.n)
+\Proves !B_n$ and $\Delta(\sigma.n) \Proves/ !C_n$.  Note also that
+$\Delta(\sigma) \subseteq \Delta(\sigma.n)$ for any~$n$. If $\Delta$
+is prime, then $\Delta(\sigma)$ is prime for all~$\sigma$.
+
+\begin{defn}\ollabel{defn:canonical-model}
+  Suppose $\Delta$ is prime.  Then the \emph{canonical model} for
+  $\Delta$ is defined by:
+  \begin{enumerate}
+  \item $W = \Nat^*$, the set of finite sequences of natural numbers.
+  \item $R$ is the partial order according to which $R\sigma\sigma'$
+    iff $\sigma$ is an initial segment of~$\sigma'$ (i.e., $\sigma' =
+    \sigma \concat \sigma''$ for some sequence~$\sigma''$).
+  \item $V(p) = \Setabs{\sigma}{p \in \Delta(\sigma)}$.
+  \end{enumerate}
+\end{defn}
+
+It is easy to verify that $R$ is indeed a partial order. Also, the
+monotonicity condition on~$V$ is satisfied.  Since $\Delta(\sigma)
+\subseteq \Delta(\sigma.n)$ we get $\Delta(\sigma)
+\subseteq \Delta(\sigma')$ whenever $R\sigma\sigma'$ by induction
+on~$\sigma$.
+
+\end{document}

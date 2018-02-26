@@ -1,0 +1,128 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: sequent-natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{snd}
+
+\olsection{Sequent Natural Deduction}
+
+Let us write $\Gamma \Sequent !A$ if there is a natural deduction
+!!{derivation} with $\Gamma$ as !!{undischarged} assumptions and $!A$
+as conclusion; or $\Sequent !A$ if $\Gamma$ is empty.
+
+We write $\Gamma, !A_1, \dots, !A_n$ for $\Gamma \cup \{!A_1, \dots,
+!A_n\}$, and $\Gamma, \Delta$ for $\Gamma \cup \Delta$.
+
+Observe that when we have $\Gamma \Sequent !A \land !A$, meaning we
+have !!a{derivation} with $\Gamma$ as !!{undischarged} assumptions and
+$!A \land !A$ as end-!!{formula}, then by applying $\Elim{\land}$ at
+the bottom, we can get !!a{derivation} with the same !!{undischarged}
+assumptions and $!A$ as conclusion. In other words, if $\Gamma
+\Sequent !A \land !B$, then $\Gamma \Sequent !A$.
+\begin{prooftree}
+  \Axiom$\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf$\Gamma \fCenter !A$
+  \DisplayProof\qquad
+  \Axiom$\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}$}
+  \UnaryInf$\Gamma \fCenter !B$
+\end{prooftree}
+The label $\Elim{\land}$ hints at the relation with the rule of
+the same name in natural deduction.
+
+Likewise, suppose we have $\Gamma, !A \Sequent !B$, meaning we have
+!!a{derivation} with !!{undischarged} assumptions $\Gamma, !A$ and
+end-!!{formula} $!B$. If we apply the $\Intro{\lif}$ rule, we have
+!!a{derivation} with $\Gamma$ as !!{undischarged} assumptions and $!A
+\lif !B$ as the end-!!{formula}, i.e., $\Gamma \Sequent !A \lif
+!B$. Note how this has made the !!{discharge} of assumptions more
+explicit.
+\begin{prooftree}
+  \Axiom $\Gamma, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf $\Gamma \fCenter !A \lif !B$
+\end{prooftree}
+
+We can draw conclusions from other rules in the same fashion, which is
+spelled out as follows:
+\begin{gather*}
+  \Axiom $\Gamma \fCenter !A$
+  \Axiom $\Delta \fCenter !B$
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInf $\Gamma,\Delta \fCenter !A \land !B$
+  \DisplayProof\\
+  \Axiom $\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}_1$}
+  \UnaryInf $\Gamma \fCenter !A$
+  \DisplayProof
+  \qquad
+  \Axiom $\Gamma \fCenter !A \land !B$
+  \RightLabel{$\Elim{\land}_2$}
+  \UnaryInf $\Gamma \fCenter !B$
+  \DisplayProof
+  \\
+  \Axiom $\Gamma \fCenter !A$
+  \RightLabel{$\Intro{\lor}_1$}
+  \UnaryInf $\Gamma \fCenter !A \lor !B$
+  \DisplayProof\qquad
+  \Axiom $\Gamma \fCenter !B$
+  \RightLabel{$\Intro{\lor}_2$}
+  \UnaryInf $\Gamma \fCenter !A \lor !B$
+  \DisplayProof\\
+  \Axiom $\Gamma \fCenter !A \lor !B$
+  \Axiom $\Delta, !A \fCenter !C$
+  \Axiom $\Delta', !B \fCenter !C$
+  \RightLabel{$\Elim{\lor}$}
+  \TrinaryInf $\Gamma, \Delta, \Delta' \fCenter !C$
+  \DisplayProof
+  \\
+  \Axiom $\Gamma, !A \fCenter !B$
+  \RightLabel{$\Intro{\lif}$}
+  \UnaryInf $\Gamma \fCenter !A \lif !B$
+  \DisplayProof
+  \qquad
+  \Axiom $\Delta \fCenter !A \lif !B$
+  \Axiom $\Gamma \fCenter !A$
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInf $\Gamma, \Delta \fCenter !B$
+  \DisplayProof
+  \\
+  \Axiom $\Gamma \fCenter \lfalse$
+  \RightLabel{$\FalseInt$}
+  \UnaryInf $\Gamma \fCenter !A$
+  \DisplayProof
+\end{gather*}
+
+Any assumption by itself is !!a{derivation} of $!A$ from~$!A$, i.e.,
+we always have $!A \Sequent !A$.
+
+\begin{prooftree}
+  \AxiomC{$ $}
+  \UnaryInfC{$!A \fCenter !A$}
+\end{prooftree}
+
+Together, these rules can be taken as a calculus about what natural
+deduction !!{derivation}s exist. They can also be taken as a
+notational variant of natural deduction, in which each step records
+not only the !!{formula} !!{derive}d but also the !!{undischarged}
+assumptions from which it was !!{derive}d.
+
+\begin{prooftree}
+  \Axiom$!A \fCenter !A$
+  \UnaryInf $!A \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom $!B \fCenter !B$
+  \BinaryInf$!A, !B\lif \fCenter \lfalse$
+  \UnaryInf$(!B \fCenter !A \lif \lfalse$
+  \UnaryInf$( !B \fCenter !A \lor (!A \lif \lfalse)$
+  \Axiom$(!B \fCenter !B$
+  \BinaryInf$(!B \fCenter \lfalse$
+  \UnaryInf$\fCenter !B \lif \lfalse$
+\end{prooftree}
+where $!B$ is short for $(!A \lor (!A \lif \lfalse))\lif \lfalse$.
+
+\end{document}

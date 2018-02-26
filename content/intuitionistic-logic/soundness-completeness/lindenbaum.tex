@@ -1,0 +1,115 @@
+% part: intuitionistic-logic
+% chapter: soundeness-completeness
+% section: lindenbaum
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{lin}
+
+\olsection{Lindenbaum's Lemma}
+
+\begin{defn}\ollabel{defn:prime}
+  A set of !!{formula}s~$\Gamma$ is \emph{prime} iff 
+  \begin{enumerate}
+  \item\ollabel{defn:prime1} $\Gamma$ is consistent.
+  \item\ollabel{defn:prime2} If $\Gamma \Proves !A$ then $!A \in \Gamma$, and
+  \item\ollabel{defn:prime3} If $!A \lor !B \in \Gamma$ then $!A \in
+    \Gamma$ or $!B \in \Gamma$.
+  \end{enumerate}
+\end{defn}
+
+\begin{lem}[Lindenbaum's Lemma]
+  \ollabel{lem:lindenbaum} If $\Gamma \Proves/ !A$, there is a
+  $\Gamma^* \supseteq \Gamma$ such that $\Gamma^*$ is prime and
+  $\Gamma^* \Proves/ !A$.
+\end{lem}
+
+\begin{proof}
+  Let $!B_1 \lor !C_1$, $!B_2 \lor !C_2$, \dots, be an enumeration of
+  all !!{formula}s of the form~$!B \lor !C$.  We'll define an
+  increasing sequence of sets of !!{formula}s~$\Gamma_n$, where each
+  $\Gamma_{n+1}$ is defined as $\Gamma_n$ together with one new
+  !!{formula}. $\Gamma^*$ will be the union of all~$\Gamma_n$. The new
+  !!{formula}s are selected so as to ensure that $\Gamma^*$ is prime
+  and still $\Gamma^* \Proves/ !A$. This means that at each step we
+  should find the first disjunction~$!B_i \lor !C_i$ such that:
+  \begin{enumerate}
+  \item $\Gamma_n \Proves !B_i \lor !C_i$
+  \item $!B_i \notin \Gamma_n$ and $!C_i \notin \Gamma_n$
+  \end{enumerate}
+  We add to $\Gamma_n$ either $!B_i$ if $\Gamma_n \cup \{!B_i\}
+  \Proves/ !A$, or $!C_i$ otherwise. We'll have to show that this
+  works. For now, let's define $i(n)$ as the least $i$ such
+  that (1) and~(2) hold.
+  
+  Define $\Gamma_0 = \Gamma$ and
+  \[
+  \Gamma_{n+1} = \begin{cases}
+    \Gamma_n \cup \{!B_{i(n)}\} &
+    \text{if $\Gamma_n \cup \{!B_{i(n)}\} \Proves/ !A$} \\
+    \Gamma_n \cup \{!C_{i(n)}\} & \text{otherwise}
+    \end{cases}
+  \]
+  If $i(n)$ is undefined, i.e., whenever $\Gamma \Proves !B \lor !C$,
+  either $!B \in \gamma_n$ or $!C \in \Gamma_n$, we let $\Gamma_{n+1}
+  = \Gamma_n$.  Now let $\Gamma^* = \bigcup_{n=0}^\infty \Gamma_n$
+
+  First we show that for all $n$, $\Gamma_n \Proves/ !A$. We proceed
+  by induction on~$n$. For $n = 0$ the claim holds by the hypothesis
+  of the theorem, i.e., $\Gamma \Proves/ !A$. If $n>0$, we have to
+  show that if $\Gamma_n \Proves/ !A$ then $\Gamma_{n+1} \Proves/ !A$. If
+  $i(n)$ is undefined, $\Gamma_{n+1} = \Gamma_n$ and there is nothing
+  to prove. So suppose $i(n)$ is defined. For simplicity, let $i =
+  i(n)$.
+  
+  We'll prove the contrapositive of the claim. Suppose $\Gamma_{n+1}
+  \Proves !A$. By construction, $\Gamma_{n+1} = \Gamma_n \cup
+  \{!B_i\}$ if $\Gamma_n \cup \{!B_i\} \Proves/ !A$, or else
+  $\Gamma_{n+1} = \Gamma_n \cup \{!C_i\}$. It clearly can't be the
+  first, since then $\Gamma_{n+1} \Proves/ !A$.  Hence, $\Gamma_n \cup
+  \{!B_i\} \Proves !A$ and $\Gamma_{n+1} = \Gamma_n \cup \{!C_i\}$.
+  By definition of $i(n)$, we have that $\Gamma _n \Proves !B_i \lor
+  !C_i$. We have $\Gamma_n \cup \{!B_i\} \Proves !A$. We also have
+  $\Gamma_{n+1} = \Gamma_n \cup \{!C_i\} \Proves !A$. Hence, $\Gamma_n
+  \Proves !A$, which is what we wanted to show.
+
+  If $\Gamma^* \Proves !A$, there would be some finite subset $\Gamma'
+  \subseteq \Gamma^*$ such that $\Gamma' \Proves !A$. Each $!D \in
+  \Gamma'$ must be in $\Gamma_i$ for some~$i$.  Let $n$ be the largest
+  of these. Since $\Gamma_i \subseteq \Gamma_n$ if $i \le n$, $\Gamma'
+  \subseteq \Gamma_n$. But then $\Gamma_n \Proves !A$, contrary to our
+  proof above that $\Gamma_n \Proves/ !A$.
+
+  Lastly, we show that $\Gamma^*$ is prime, i.e., satisfies conditions
+  \olref{defn:prime1}, \olref{defn:prime2}, and~\olref{defn:prime3} of
+  \olref{defn:prime}.
+
+  First, $\Gamma^* \Proves/ !A$, so $\Gamma^*$ is
+  consistent, so \olref{defn:prime1} holds.
+
+  We now show that if $\Gamma^* \Proves !B \lor !C$, then either $!B
+  \in \Gamma^*$ or $!C \in \Gamma^*$. This proves \olref{defn:prime3},
+  since if $!B \in \Gamma^*$ then also $\Gamma^* \Proves !B$, and
+  similarly for~$!C$. So assume $\Gamma^* \Proves !B \lor !C$ but $!B
+  \notin \Gamma^*$ and $!C \notin \Gamma^*$. Since $\Gamma^* \Proves
+  !B \lor !C$, $\Gamma_n \Proves !B \lor !C$ for some~$n$. $!B \lor
+  !C$ appears on the enumeration of all disjunctions, say as $!B_j
+  \lor !C_j$. $!B_j \lor !C_j$ satisfies the properties in the
+  definition of $i(n)$, namely we have $\Gamma_n \Proves !B_j
+  \lor !C_j$, while $!B_j \notin \Gamma_n$ and $!C_j \notin \Gamma_n$. At
+  each stage, at least one fewer disjunction $!B_i \lor !C_i$
+  satisfies the conditions (since at each stage we add either $!B_i$
+  or $!C_i$), so at some stage~$m$ we will have $j = i(\Gamma_m)$. But
+  then either $!B \in \Gamma_{m+1}$ or $!C \in \Gamma_{m+1}$, contrary
+  to the assumption that $!B \notin \Gamma^*$ and $!C \notin
+  \Gamma^*$.
+
+  Now suppose $\Gamma^* \Proves !A$. Then $\Gamma^* \Proves !A \lor
+  !A$. But we've just proved that if $\Gamma^* \Proves !A \lor !A$
+  then $!A \in \Gamma^*$. Hence, $\Gamma^*$
+  satisfies~\olref{defn:prime1} of \olref{defn:prime}.
+\end{proof}
+
+\end{document}

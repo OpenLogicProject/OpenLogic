@@ -1,0 +1,158 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: bhk-interpretation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{bhk}
+
+\olsection{The Brouwer-Heyting-Kolmogorov Interpretation}
+
+\begin{editorial}
+  Proofs of validity of intuitionistic propositions using the BHK
+  interpretation are confusing; they have to be explained better.
+\end{editorial}
+
+There is an informal constructive interpretation of the intuitionist
+connectives, usually known as the Brouwer-Heyting-Kolmogorov
+interpretation. It uses the notion of a ``construction,'' which you
+may think of as a constructive proof. (We don't use ``proof'' in the
+BHK interpretation so as not to get confused with the notion of
+!!a{derivation} in a formal proof system.) Based on this intuitive
+notion, the BHK interpretation explains the meanings of the
+intuitionistic connectives.
+
+\begin{enumerate}
+\item We assume that we know what constitutes a construction of an atomic
+  statement.
+\item A construction of $!A_1 \land !A_2$ is a pair $\tuple{M_1, M_2}$
+  where $M_1$ is a construction of~$!A_1$ and $M_2$ is a construction
+  of $A_2$.
+\item A construction of $!A_1 \lor !A_2$ is a pair $\tuple{s, M}$
+  where $s$ is~$1$ and $M$ is a construction of~$!A_1$, or $s$ is~$2$
+  and $M$ is a construction of~$!A_2$.
+\item A construction of $!A \lif !B$ is a function that converts a
+  construction of~$!A$ into a construction of~$!B$.
+\item There is no construction for~$\lfalse$ (absurdity).
+\item $\lnot !A$ is defined as synonym for $!A \lif \lfalse$. That is,
+  a construction of $\lnot !A$ is a function converting a construction
+  of~$!A$ into a construction of~$\lfalse$.
+\end{enumerate}
+
+\begin{ex}
+Take $\lnot \lfalse$ for example. A construction of it is a function
+which, given any construction of $\lfalse$ as input, provides a
+construction of~$\lfalse$ as output. Obviously, the identity
+function~$\Id{}$ is such a construction: given a construction~$M$
+of~$\lfalse$, $\Id{}(M) = M$ yields a construction of~$\lfalse$.
+\end{ex}
+
+Generally speaking, $\lnot !A$ means ``A construction of $!A$ is impossible''.
+
+\begin{ex}
+Let us prove $!A \lif \lnot \lnot !A$ for any proposition~$!A$, which
+is $!A \lif ((!A \lif \lfalse) \lif \lfalse)$. The construction should
+be a function~$f$ that, given a construction~$M$ of $!A$, returns a
+construction~$f(M)$ of $(!A \lif \lfalse) \lif \lfalse$. Here is
+how~$f$ constructs the construction of $(!A \lif \lfalse) \lif
+\lfalse$: We have to define a function $g$ which, when given a
+construction~$h$ of $!A \lif \lfalse$ as input, outputs a construction
+of~$\lfalse$. We can define $g$ as follows: apply the input~$h$ to the
+construction~$M$ of $!A$ (that we received earlier). Since the
+output~$h(M)$ of $h$ is a construction of $\lfalse$, $f(M)(h) = h(M)$ is a
+construction of~$\lfalse$ if $M$ is a construction of~$!A$.
+\end{ex}
+
+\begin{ex}
+Let us give a construction for $\lnot(!A \land \lnot !A)$, i.e., $(!A
+\land (!A \lif \lfalse)) \lif \lfalse$. This is a function~$f$ which,
+given as input a construction~$M$ of $!A \land (!A \lif \lfalse)$,
+yields a construction of~$\lfalse$. A construction of a conjunction
+$!B_1 \land !B_2$ is a pair $\tuple{N_1, N_2}$ where $N_1$ is a
+construction of~$!B_1$ and $N_2$ is a construction of~$!B_2$. We can
+define functions $p_1$ and $p_2$ which recover from a construction of
+$!B_1 \land !B_2$ the constructions of $B_1$ and $!B_2$, respectively:
+\begin{align*}
+  p_1(\tuple{N_1, N_2}) &= N_1\\
+  p_2(\tuple{N_1, N_2}) &= N_2
+\end{align*}
+Here is what $f$ does: First it applies $p_1$ to its input~$M$. That
+yields a construction of~$!A$. Then it applies $p_2$ to~$M$, yielding
+a construction of~$!A \lif \lfalse$. Such a construction, in turn, is
+a function~$p_2(M)$ which, if given as input a construction of~$!A$,
+yields a construction of~$\lfalse$. In other words, if we apply
+$p_2(M)$ to $p_1(M)$, we get a construction of~$\lfalse$.  Thus, we
+can define $f(M) = p_2(p_1(M))$.
+\end{ex}
+
+\begin{ex}
+Let us give a construction of $((!A \land !B) \lif !C) \lif (!A \lif
+(!B \lif !C))$, i.e., a function $f$ which turns a construction~$g$ of
+$(!A \land !B) \lif !C$ into a construction of $(!A \lif (!B \lif
+!C))$. The construction $g$ is itself a function (from constructions
+of $!A \land !B$ to constructions of~$C$). And the output $f(g)$ is a
+function~$h_g$ from constructions of $!A$ to functions from constructions
+of~$!B$ to constructions of~$!C$.
+
+Ok, this is confusing.  We have to construct a certain function $h_g$,
+which will be the output of $f$ for input~$g$. The input of~$h_g$ is a
+construction~$M$ of~$!A$. The output of $h_g(M)$ should be a
+function~$k_M$ from constructions~$N$ of~$!B$ to constructions
+of~$!C$. Let $k_{g,M}(N) = g(\tuple{M, N})$. Remember that $\tuple{M,
+  N}$ is a construction of~$!A \land !B$. So $k_{g,M}$ is a
+construction of $!B \lif !C$: it maps constructions~$N$ of~$!B$ to
+constructions of~$!C$.  Now let $h_g(M) = k_{g,M}$. That's a function
+that maps constructions~$M$ of~$!A$ to constructions $k_{g,M}$ of $!B
+\lif !C$. Now let $f(g) = h_g$. That's a function that maps
+constructions $g$ of $(!A \land !B) \lif !C$ to constructions of $!A
+\lif (!B \lif !C)$. Whew!{}
+\end{ex}
+
+The statement $!A \lor \lnot !A$ is called the Law of Excluded
+Middle. We can prove it for some specific $!A$ (e.g., $\lfalse \lor
+\lnot \lfalse$), but not in general. This is because the
+intuitionistic disjunction requires a construction of one of the
+disjuncts, but there are statements which currently can neither be
+proved nor refuted (say, Goldbach's conjecture). However, you can't
+refute the law of excluded middle either: that is, $\lnot \lnot (!A
+\lor \lnot !A)$ holds.
+
+\begin{ex}
+To prove $\lnot \lnot (!A \lor \lnot !A)$, we need a function~$f$ that
+transforms a construction of $\lnot(!A \lor \lnot !A)$, i.e., of $(!A
+\lor (!A \lif \lfalse)) \lif \lfalse$, into a construction
+of~$\lfalse$.  In other words, we need a function $f$ such that $f(g)$
+is a construction of~$\lfalse$ if $g$ is a construction of $\lnot(!A
+\lor \lnot !A)$.
+
+Suppose $g$ is a construction of $\lnot(!A \lor \lnot !A)$, i.e., a
+function that transforms a construction of $!A \lor \lnot !A$ into a
+construction of~$\lfalse$.  A construction of $!A \lor \lnot !A$ is a
+pair $\tuple{s, M}$ where either $s = 1$ and $M$ is a construction of
+$!A$, or $s = 2$ and $M$ is a construction of $\lnot !A$. Let $h_1$ be
+the function mapping a construction~$M_1$ of $!A$ to a construction of
+$!A \lor \lnot !A$: it maps $M_1$ to $\tuple{1, M_2}$. And let $h_2$
+be the function mapping a construction~$M_2$ of $\lnot !A$ to a
+construction of $!A \lor \lnot !A$: it maps $M_2$ to $\tuple{2, M_2}$.
+
+Let $k$ be $\comp{h_1}{g}$: it is a function which, if given a
+construction of~$!A$, returns a construction of~$\lfalse$, i.e., it is
+a construction of~$!A \lif \lfalse$ or $\lnot !A$. Now let $l$ be
+$\comp{h_2}{g}$. It is a function which, given a construction of
+$\lnot !A$, provides a construction of~$\lfalse$. Since $k$ is a
+construction of $\lnot !A$, $l(k)$ is a construction of~$\lfalse$.
+
+Together, what we've done is describe how we can turn a
+construction~$g$ of $\lnot(!A \lor \lnot !A)$ into a construction
+of~$\lfalse$, i.e., the function $f$ mapping a construction~$g$ of
+$\lnot(!A \lor \lnot !A)$ to the construction $l(k)$ of~$\lfalse$ is a
+construction of $\lnot\lnot(!A \lor \lnot !A)$.
+\end{ex}
+
+As you can see, using the BHK interpretation to show the
+intuitionistic validity of !!{formula}s quickly becomes cumbersome
+and confusing. Luckily, there are better !!{derivation} systems for
+intuitionistic logic, and more precise semantic interpretations.
+\end{document}
