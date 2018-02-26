@@ -20,7 +20,7 @@ frames that have the corresponding property.
 
 \begin{defn}
   If $\mClass{C}$ is a class of frames, we say $!A$
-  \emph{defines}~$\mClass{C}$ iff $\mSat{F}{!A}$ for all and only
+  \emph{defines}~$\mClass{C}$ iff $\mModel{F} \Entails !A$ for all and only
   frames~$\mModel{F} \in \mClass{C}$.
 \end{defn}
 
@@ -36,18 +36,18 @@ side.
 \begin{proof}
   \begin{enumerate}
   \item Suppose \Ax{D} is valid in $\mModel{F} = \tuple{W, R}$, i.e.,
-    $\mSat{F}{\Box p \lif \Diamond p}$. Let $\mModel{M} = \tuple{W, R,
-    V}$ be a model based on~$\mModel{F}$, and $w \in W$. We have to
-    show that there is a $v$ such that~$Rwv$.  Suppose not: then both
-    $\mSat{M}{\Box !A}$ and $\mSat/{M}{\Diamond !A}[w]$ for any~$!A$,
-    including~$p$. But then $\mSat/{M}{\Box p \lif \Diamond p}[w]$,
-    contradicting the assumption that $\mSat{F}{\Box p \lif \Diamond
-      p}$.
-  \item Suppose \Ax{T} is valid in $\mModel{F}$, i.e., $\mSat{F}{\Box
-    p \lif p}$. Let $w \in W$ be an arbitrary world; we need to show
+    $\mModel{F} \Entails \Box p \lif \Diamond p$. Let $\mModel{M} =
+    \tuple{W, R, V}$ be a model based on~$\mModel{F}$, and $w \in
+    W$. We have to show that there is a $v$ such that~$Rwv$.  Suppose
+    not: then both $\mSat{M}{\Box !A}$ and $\mSat/{M}{\Diamond !A}[w]$
+    for any~$!A$, including~$p$. But then $\mSat/{M}{\Box p \lif
+      \Diamond p}[w]$, contradicting the assumption that $\mModel{F}
+    \Entails \Box p \lif \Diamond p$.
+  \item Suppose \Ax{T} is valid in $\mModel{F}$, i.e., $\mModel{F} \Entails \Box
+    p \lif p$. Let $w \in W$ be an arbitrary world; we need to show
     $Rww$. Let $u \in V(p)$ if and only if $Rwu$ (when $q$ is other
     than $p$, $V(q)$ is arbitrary, say $V(q) = \emptyset)$. Let
-    $\mModel{M}=\tuple{W, R, V}$. By construction, for all $u$ such
+    $\mModel{M} = \tuple{W, R, V}$. By construction, for all $u$ such
     that $Rwu$: $\mSat{M}{p}[u]$, and hence $\mSat{M}{\Box p}[w]$. But
     by hypothesis $\Box p \lif p$ is true at~$w$, so that
     $\mSat{M}{p}[w]$, but by definition of $V$ this is possible only
@@ -67,7 +67,7 @@ side.
       \Box\Diamond p}[u]$, and so $\Ax{B}$ is not valid
     in~$\mModel{F}$.
   \item Suppose \Ax{4} is valid in $\mModel{F} = \tuple{W,R}$, i.e.,
-    $\mSat{F}{\Box p \lif \Box\Box p}$, and let $u$, $v$, $w \in W$ be
+    $\mModel{F} \Entails \Box p \lif \Box\Box p$, and let $u$, $v$, $w \in W$ be
     arbitrary worlds such that $Ruv$ and $Rvw$; we need to show that
     $Ruw$. Define $V$ such that $z \in V(p)$ if and only if $Ruz$ (and
     $V$ is arbitrary otherwise). Let $\mModel{M} =\tuple{W, R, V}$. By
@@ -78,8 +78,8 @@ side.
     definition of~$V$ this is possible only if $Ruw$, as desired.
   \item We proceed contrapositively, assuming that the frame
     $\mModel{F} = \tuple{W, R}$ is not euclidean, and show that it
-    falsifies~\Ax{5}, i.e., i.e., $\mSat/{F}{\Diamond p \lif
-      \Box\Diamond p}$. Suppose there are worlds $u$, $v$, $w \in W$
+    falsifies~\Ax{5}, i.e., i.e., $\mModel{F} \Entails/ \Diamond p \lif
+      \Box\Diamond p$. Suppose there are worlds $u$, $v$, $w \in W$
     such that $Rwu$ and $Rwv$ but not~$Ruv$. Define $V$ such that for
     all worlds $z$, $z \in V(p)$ if and only if it is \emph{not} the
     case that~$Ruz$. Let $\mModel{M} =\tuple{W, R, V}$. Then by
@@ -88,7 +88,7 @@ side.
     that $Ruy$ and $\mSat{M}{p}[y]$ so $\mSat/{M}{\Diamond
       p}[u]$. Since $Rwu$, it follows that $\mSat/{M}{\Box\Diamond
       p}[w]$, so that \Ax{5}, $\Diamond p \lif \Box\Diamond p$, fails
-    at $w$.
+    at~$w$.
   \end{enumerate}
 \end{proof}
 

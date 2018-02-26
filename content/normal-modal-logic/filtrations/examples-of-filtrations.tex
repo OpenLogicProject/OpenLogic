@@ -72,9 +72,11 @@ have as many as possible.
   \iftag{notprvBox,notprvDiamond}{the following condition is
     met:}{\emph{both} of the following conditions are met:}
   \begin{tagenumerate}{prvBox,prvDiamond}
-  \tagitem{prvBox}{\ollabel{defn:coarsest-Box}If $\Box!A \in \Gamma$ and $\mSat{M}{\Box!A}[u]$ then
+  \tagitem{prvBox}{\ollabel{defn:coarsest-Box}If $\Box!A \in \Gamma$
+    and $\mSat{M}{\Box!A}[u]$ then
     $\mSat{M}{!A}[v]$\iftag{prvDiamond}{;}{.}}{}
-  \tagitem{prvDiamond}{\ollabel{defn:coarsest-Diamond}If $\Diamond!A \in \Gamma$ and $\mSat{M}{!A}[v]$ then
+  \tagitem{prvDiamond}{\ollabel{defn:coarsest-Diamond}If $\Diamond!A
+    \in \Gamma$ and $\mSat{M}{!A}[v]$ then
     $\mSat{M}{\Diamond!A}[u]$.}{}
   \end{tagenumerate}
 \end{defn}
@@ -147,10 +149,10 @@ have as many as possible.
   Any filtration based on $W^*$ must have an accessibility relation
   that includes $\tuple{[1], [2]}, \tuple{[2],[1]}$: since $R12$, we
   must have $R^*[1][2]$ by
-  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1}, and since $R23$ we
-  must have $R^*[2][3]$, and $[3]=[1]$. It cannot include
-  $\tuple{[1],[1]}$: if it did, we'd have $R^*[1][1]$, $\mSat{M}{\Box
-    p}[1]$ but $\mSat{M}{p}[1]$, contradicting
+  \olref[fil]{defn:filtration}\olref[fil]{defn:filtration-R1}, and
+  since $R23$ we must have $R^*[2][3]$, and $[3]=[1]$. It cannot
+  include $\tuple{[1],[1]}$: if it did, we'd have $R^*[1][1]$,
+  $\mSat{M}{\Box p}[1]$ but $\mSat{M}{p}[1]$, contradicting
   \olref[fil]{defn:filtration-R1}. Nothing requires or rules out that
   $R^*[2][2]$. So, there are two possible filtrations of~$\mModel{M}$,
   corresponding to the two accessibility relations
@@ -165,12 +167,13 @@ have as many as possible.
 
 
 \begin{prob}
-  Consider the following model $\mModel{M} = \tuple{W, R, V}$ where
-  $W = \Bin^* \setminus \{1, \emptyseq\}$, the set of sequences of
-  $0$s and~$1$s starting with~$0$, with $R\sigma\sigma'$ iff $\sigma'
-  = \sigma 0$ or $\sigma' = \sigma 1$, and $V(p) = \Setabs{\sigma
-    0}{\sigma \in \Bin^*}$ and $V(q) = \Setabs{\sigma 1}{\sigma \in
-      \Bin^* \setminus \{1\}}$. Here's a picture:
+  Consider the following model $\mModel{M} = \tuple{W, R, V}$ where $W
+  = \Bin^* \setminus \Setabs{1\sigma}{\sigma \in \Bin^*} \setminus
+  \{\emptyseq\}$, the set of sequences of $0$s and~$1$s starting
+  with~$0$, with $R\sigma\sigma'$ iff $\sigma' = \sigma 0$ or $\sigma'
+  = \sigma 1$, and $V(p) = \Setabs{\sigma 0}{\sigma \in \Bin^*}$ and
+  $V(q) = \Setabs{\sigma 1}{\sigma \in \Bin^* \setminus
+    \{1\}}$. Here's a picture:
   \begin{center}
     \begin{tikzpicture}[modal,
         node distance=2cm

@@ -592,17 +592,16 @@
 % the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
 % $\mathfrak{M}, w \models \varphi$.
 
-\DeclareDocumentCommand \mSat { t{/} m m o } {
-  \IfBooleanTF{#1}{
+\DeclareDocumentCommand \mSat { t{/} m m o } {%
+  \IfBooleanTF{#1}{%
     % negated
     \IfNoValueTF {#4} 
         { \mModel #2 \nVdash #3 }
-        { \mModel #2, #4 \nVdash #3}}{
+        { \mModel #2, #4 \nVdash #3}}{%
     % not negated
     \IfNoValueTF {#4} 
         { \mModel #2 \Vdash #3 }
-        { \mModel #2, #4 \Vdash #3 }}
-}
+        { \mModel #2, #4 \Vdash #3 }}}
 
 % - `\mClass{C}` --- typeset class of models
 
