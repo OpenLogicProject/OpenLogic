@@ -1,0 +1,96 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: proofs-in-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{tab}{prk}
+
+\olsection{\usetoken{P}{tableau} for \Log{K}}
+
+\iftag{prvBox}{
+
+\begin{ex}
+  We give a closed tableau that shows $\Proves (\Box!A \land \Box!B)
+  \lif \Box (!A \land !B)$.
+  \begin{oltableau}
+    [\pFmla{\False}{(\Box\formula{A} \land \Box\formula{B}) \lif
+        \Box (\formula{A} \land \formula{B})}{1},
+      just =\TAss
+      [\pFmla{\True}{\Box\formula{A} \land \Box\formula{B}}{1},
+        just = {\TRule{\True}{\lif}[1]}
+        [\pFmla{\False}{\Box(\formula{A} \land \formula{B})}{1},
+          just = {\TRule{\True}{\lif}[1]}
+          [\pFmla{\True}{\Box\formula{A}}{1},
+            just = {\TRule{\True}{\land}[2]}
+            [\pFmla{\True}{\Box\formula{B}}{1},
+              just = {\TRule{\True}{\land}[2]}
+              [\pFmla{\False}{\formula{A} \land \formula{B}}{1.1},
+                just = {\TRule{\False}{\Box}[3]}
+                [\pFmla{\False}{\formula{A}}{1.1}, 
+                  just = {\TRule{\False}{\land}[6]}
+                  [\pFmla{\True}{\formula{A}}{1.1},
+                    just= {\TRule{\True}{\Box}[4]}, close]]
+                [\pFmla{\False}{\formula{B}}{1.1}, 
+                  just = {\TRule{\False}{\land}[6]}
+                  [\pFmla{\True}{\formula{B}}{1.1},
+                    just= {\TRule{\True}{\Box}[5]}, close]]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+\end{ex}
+}{}
+
+\iftag{prvDiamond}{
+\begin{ex}
+  We give a closed tableau that shows $\Proves \Diamond(!A \lor !B)
+  \lif (\Diamond !A \lor \Diamond !B)$:
+  \begin{oltableau}
+    [\pFmla{\False}{\Diamond(\formula{A} \lor \formula{B}) \lif
+        (\Diamond \formula{A} \lor \Diamond \formula{B})}{1},
+      just =\TAss
+      [\pFmla{\True}{\Diamond(\formula{A} \lor \formula{B})}{1},
+        just = {\TRule{\True}{\lif}[1]}
+        [\pFmla{\False}{\Diamond\formula{A} \lor \Diamond\formula{B}}{1},
+          just = {\TRule{\True}{\lif}[1]}
+          [\pFmla{\False}{\Diamond\formula{A}}{1},
+            just = {\TRule{\False}{\lor}[3]}
+            [\pFmla{\False}{\Diamond\formula{B}}{1},
+              just = {\TRule{\False}{\lor}[3]}
+              [\pFmla{\True}{\formula{A} \lor \formula{B}}{1.1},
+                just = {\TRule{\True}{\Diamond}[2]},
+                [\pFmla{\True}{\formula{A}}{1.1}, 
+                  just = {\TRule{\True}{\lor}[6]}
+                  [\pFmla{\False}{\formula{A}}{1.1},
+                    just= {\TRule{\False}{\Diamond}[4]}, close]]
+                [\pFmla{\True}{\formula{B}}{1.1}, 
+                  just = {\TRule{\True}{\lor}[6]}
+                  [\pFmla{\False}{\formula{B}}{1.1},
+                    just= {\TRule{\False}{\Diamond}[5]}, close]]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+\end{ex}
+}{}
+
+
+\begin{prob}
+  Find closed !!{tableau}s in~$\Log{K}$ for the following !!{formula}s:
+  \begin{enumerate}
+    \item $\Box \lnot p \lif \Box(p \lif q)$
+    \item $(\Box p \lor \Box q) \lif \Box(p \lor q)$
+    \item $\Diamond p \lif \Diamond(p \lor q)$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

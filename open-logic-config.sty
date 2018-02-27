@@ -230,12 +230,19 @@
 
 \DeclareDocumentMacro \Hyp {\textsc{Hyp}}
 
-% - `\sFmla`: Signed (prefixed) formulas for tableaux
+% - `\sFmla`: Signed (prefixed) formulas in running text
 
 \DeclareDocumentCommand \sFmla { m m o }{
   \ensuremath{%
     \IfNoValueTF{#3}{}{#3\,}%
-    \hbox to1em{\ensuremath{#1}} #2}}
+    \hbox to.8em{\ensuremath{#1}} #2}}
+
+% - `\pFmla`: signed prefixed formulas for tableaux
+
+\DeclareDocumentCommand \pFmla { m m m }{
+  \ensuremath{%
+    \hskip 3em{\llap{$#3$}\,}%
+    \hbox to1.3em{\ensuremath{#1}} #2}}
 
 % Tableaux
 % --------

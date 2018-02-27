@@ -1,0 +1,228 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: more-soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{tab}{msn}
+      
+\olsection{Soundness for Additional Rules}
+
+We say a rule is sound for a class of models if, whenever a branch in
+!!a{tableau} is satisfiable in a model from that class, the branch
+resulting from applying the rule is also satisfiable in a model from
+that class.
+
+\begin{prop}
+  \ollabel{prop:soundness-T} 
+  \iftag{prvBox}{\Ax{T}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ and }%
+  \iftag{prvDiamond}{\Ax{T}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{is}{are}
+  sound for reflexive models.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{The branch is expanded by applying T$\Box$ to
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma]$ on the branch. Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat{M}{\Box
+      !B}[f(\sigma)]$. Since $R$ is reflexive, we know that
+    $Rf(\sigma)f(\sigma)$.  Hence, $\mSat{M}{!B}[f(\sigma)]$, i.e.,
+    $\mModel{M}, f$ satisfies $\sFmla{\True}{!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{The branch is expanded by applying T$\Diamond$ to
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.\qedhere}{This results in a new !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma]$ on the branch. Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat/{M}{\Diamond
+      !B}[f(\sigma)]$. Since $R$ is reflexive, we know that
+    $Rf(\sigma)f(\sigma)$.  Hence, $\mSat/{M}{!B}[f(\sigma)]$, i.e.,
+    $\mModel{M}, f$ satisfies $\sFmla{\False}{!B}[\sigma]$.\qedhere}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  Complete the proof of \olref[mod][tab][msn]{prop:soundness-T}
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-D} 
+  \iftag{prvBox}{\Ax{D}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ and }%
+  \iftag{prvDiamond}{\Ax{D}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{is}{are}
+  sound for serial models.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{The branch is expanded by applying D$\Box$ to
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{\Diamond !B}[\sigma]$ on the
+    branch. Suppose $\mSat{M}{\Gamma}[f]$, in particular,
+    $\mSat{M}{\Box !B}[f(\sigma)]$. Since $R$ is serial, there is a $w
+    \in W$ such that $Rf(\sigma)w$. Then $\mSat{M}{!B}[w]$, and hence
+    $\mSat{M}{\Diamond !B}[f(\sigma)]$.  So, $\mModel{M}, f$
+    satisfies $\sFmla{\True}{\Diamond!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{The branch is expanded by applying D$\Diamond$ to
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.\qedhere}{This results in a new !!{signed
+      formula}~$\sFmla{\False}{\Box !B}[\sigma]$ on the
+    branch. Suppose $\mSat{M}{\Gamma}[f]$, in particular,
+    $\mSat/{M}{\Diamond !B}[f(\sigma)]$. Since $R$ is serial, there is a $w
+    \in W$ such that $Rf(\sigma)w$. Then $\mSat/{M}{!B}[w]$, and hence
+    $\mSat/{M}{\Box !B}[f(\sigma)]$.  So, $\mModel{M}, f$
+    satisfies $\sFmla{\False}{\Box!B}[\sigma]$.\qedhere}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  Complete the proof of \olref[mod][tab][msn]{prop:soundness-D}
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-B} 
+  \iftag{prvBox}{\Ax{B}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ and }%
+  \iftag{prvDiamond}{\Ax{B}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{is}{are}
+  sound for symmetric models.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{The branch is expanded by applying B$\Box$ to
+  $\sFmla{\True}{\Box !B}[\sigma.n] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma]$ on the branch. Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat{M}{\Box
+      !B}[f(\sigma.n)]$. Since $f$ is an interpretation of prefixes on
+    the branch into~$\mModel{M}$, we know that
+    $Rf(\sigma)f(\sigma.n)$.  Since $R$ is symmetric,
+    $Rf(\sigma.n)f(\sigma)$.  Since $\mSat{M}{\Box !B}[f(\sigma.n)]$,
+    $\mSat{M}{!B}[f(\sigma)]$. Hence, $\mModel{M}, f$ satisfies
+    $\sFmla{\True}{!B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{The branch is expanded by applying B$\Diamond$ to
+  $\sFmla{\False}{\Diamond !B}[\sigma.n] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.\qedhere}{This results in a new !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma]$ on the branch. Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat/{M}{\Diamond
+      !B}[f(\sigma.n)]$. Since $f$ is an interpretation of prefixes on
+    the branch into~$\mModel{M}$, we know that
+    $Rf(\sigma)f(\sigma.n)$.  Since $R$ is symmetric,
+    $Rf(\sigma.n)f(\sigma)$.  Since $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$,
+    $\mSat/{M}{!B}[f(\sigma)]$. Hence, $\mModel{M}, f$ satisfies
+    $\sFmla{\False}{!B}[\sigma]$.\qedhere}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  Complete the proof of \olref[mod][tab][msn]{prop:soundness-B}
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-4} 
+  \iftag{prvBox}{\Ax{4}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ and }%
+  \iftag{prvDiamond}{\Ax{4}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{is}{are}
+  sound for transitive models.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{The branch is expanded by applying 4$\Box$ to
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma.n]$ on the
+    branch. Suppose $\mSat{M}{\Gamma}[f]$, in particular,
+    $\mSat{M}{\Box !B}[f(\sigma)]$. Since $f$ is an interpretation of
+    prefixes on the branch into~$\mModel{M}$ and $\sigma.n$ must be
+    used, we know that $Rf(\sigma)f(\sigma.n)$. Now let $w$ be any
+    world such that $Rf(\sigma.n)w$.  Since $R$ is transitive,
+    $Rf(\sigma)w$.  Since $\mSat{M}{\Box !B}[f(\sigma)]$,
+    $\mSat{M}{!B}[w]$. Hence, $\mSat{M}{\Box !B}[f(\sigma.n)]$, and
+    $\mModel{M}, f$ satisfies $\sFmla{\True}{\Box !B}[\sigma.n]$.}}{}
+\tagitem{prvDiamond}{The branch is expanded by applying 4$\Diamond$ to
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.\qedhere}{This results in a new !!{signed
+      formula}~$\sFmla{\False}{\Diamond!B}[\sigma.n]$ on the
+    branch. Suppose $\mSat{M}{\Gamma}[f]$, in particular,
+    $\mSat/{M}{\Diamond !B}[f(\sigma)]$. Since $f$ is an interpretation of
+    prefixes on the branch into~$\mModel{M}$ and $\sigma.n$ must be
+    used, we know that $Rf(\sigma)f(\sigma.n)$. Now let $w$ be any
+    world such that $Rf(\sigma.n)w$.  Since $R$ is transitive,
+    $Rf(\sigma)w$.  Since $\mSat/{M}{\Diamond !B}[f(\sigma)]$,
+    $\mSat/{M}{!B}[w]$. Hence, $\mSat/{M}{\Diamond !B}[f(\sigma.n)]$, and
+    $\mModel{M}, f$ satisfies $\sFmla{\False}{\Diamond !B}[\sigma.n]$.\qedhere}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  Complete the proof of \olref[mod][tab][msn]{prop:soundness-4}
+\end{prob}
+\tagendprob
+
+\begin{prop}
+  \ollabel{prop:soundness-4r} 
+  \iftag{prvBox}{\Ax{4r}$\Box$}{}%
+  \iftag{notprvBox,notprvDiamond}{}{ and }%
+  \iftag{prvDiamond}{\Ax{4r}$\Diamond$}{}
+  \iftag{notprvBox,notprvDiamond}{is}{are}
+  sound for euclidean models.
+\end{prop}
+
+\begin{proof}
+\begin{tagenumerate}{prvBox,prvDiamond}
+\tagitem{prvBox}{The branch is expanded by applying 4r$\Box$ to
+  $\sFmla{\True}{\Box !B}[\sigma.n] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma]$ on the branch. Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat{M}{\Box
+      !B}[f(\sigma.n)]$. Since $f$ is an interpretation of prefixes on
+    the branch into~$\mModel{M}$, we know that
+    $Rf(\sigma)f(\sigma.n)$. Now let $w$ be any world such that
+    $Rf(\sigma)w$.  Since $R$ is euclidean, $Rf(\sigma.n)w$.  Since
+    $\mSat{M}{\Box !B}[f(\sigma).n]$, $\mSat{M}{!B}[w]$. Hence,
+    $\mSat{M}{\Box !B}[f(\sigma)]$, and $\mModel{M}, f$ satisfies
+    $\sFmla{\True}{\Box !B}[\sigma]$.}}{}
+\tagitem{prvDiamond}{The branch is expanded by applying 4r$\Diamond$ to
+  $\sFmla{\False}{\Diamond !B}[\sigma.n] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.\qedhere}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{\Box!B}[\sigma]$ on the branch. Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat/{M}{\Diamond
+      !B}[f(\sigma.n)]$. Since $f$ is an interpretation of prefixes on
+    the branch into~$\mModel{M}$, we know that
+    $Rf(\sigma)f(\sigma.n)$. Now let $w$ be any world such that
+    $Rf(\sigma)w$.  Since $R$ is euclidean, $Rf(\sigma.n)w$.  Since
+    $\mSat/{M}{\Diamond !B}[f(\sigma).n]$, $\mSat/{M}{!B}[w]$. Hence,
+    $\mSat/{M}{\Diamond !B}[f(\sigma)]$, and $\mModel{M}, f$ satisfies
+    $\sFmla{\False}{\Diamond !B}[\sigma]$.\qedhere}}{}
+\end{tagenumerate}
+\end{proof}
+
+\tagprob{probBox,probDiamond}
+\begin{prob}
+  Complete the proof of \olref[mod][tab][msn]{prop:soundness-4r}
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:soundness-logics} The !!{tableau} systems given in
+\olref[mru]{tab:logics-rules} are sound for the respective classes of
+models.
+\end{cor}
+
+\end{document}
