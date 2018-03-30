@@ -75,12 +75,27 @@
 % different symbol, replace `\rightarrow` in the definition, e.g., by
 % `\supset`
 
-\DeclareDocumentMacro \lif {\rightarrow}
+\DeclareDocumentMacro \lif {\mathbin{\rightarrow}}
 
 % - The biconditional is `\liff` and defaults to $\leftrightarrow$.  To
 % use the triple bar $\equiv$ replace with `\equiv`.
 
-\DeclareDocumentMacro \liff {\leftrightarrow}
+\DeclareDocumentMacro \liff {\mathbin{\leftrightarrow}}
+
+% - additional symbols for conditionals
+
+\DeclareSymbolFont{symbolsC}{U}{ntxsyc}{m}{n}
+\DeclareMathSymbol{\boxright}{\mathbin}{symbolsC}{128}
+\DeclareMathSymbol{\diamondright}{\mathbin}{symbolsC}{132}
+\DeclareMathSymbol{\fishhookright}{\mathbin}{symbolsC}{74}
+
+% - The conditional `\cif` and defaults to $\boxright$.
+
+\DeclareDocumentMacro \cif {\boxright}
+
+% - The strict conditional `\strictif`
+
+\DeclareDocumentMacro \strictif {\fishhookright}
 
 % Quantifiers 
 % ----------- 
@@ -643,11 +658,6 @@
 % - `\ST`: The standard translation
 
 \DeclareDocumentMacro \ST {\mathord{\mathrm{ST}}}
-
-% - `\strictif`: strict conditional
-
-\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
-\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
 
 % - TikZ style for modal models
 

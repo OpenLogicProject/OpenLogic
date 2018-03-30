@@ -1,0 +1,71 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: agglomeration
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{agg}
+
+\olsection{Agglomeration}
+
+Agglomeration, or strengthening the antecedent, refers to the
+inference $!A \lif !C \Entails (!A \land !B) \lif !C$.  It is valid
+for the material conditional, but invalid for counterfactuals. Suppose
+if is true that if I were to strike this match, it would light. (That
+means, there is nothing wrong with the match or the matchbook surface,
+I will not break the match, etc.) But it is not true that if I were to
+light this match in outer space, it would light. So the following
+inference is invalid:
+\begin{quote}
+  I the match were struck, it would light.
+
+  Therefore, if the match were struck in outer space, it would light.
+\end{quote}
+
+The Lewis-Stalnaker account of conditionals explains this: the closest
+world where I light the match and I do so in outer space is much
+further removed from the actual world than the closes world where I
+light the match is. So although it's true that the match lights in the
+latter, it is not in the former. And that is as it schould be.
+
+\begin{ex}
+  The sphere semantics invalidates the inference, i.e., we have $p
+  \cif r \Entails/ (p \land q) \cif r$. Consider the model $\mModel{M}
+  = \tuple{W, O, V}$ where $W = \{w, w_1, w_2\}$, $O_w = \{\{w\}, \{w,
+  w_1\}, \{w, w_1, w_2\}\}$, $V(p) = \{w_1, w_2\}$, $V(q) = \{w_2\}$,
+  and $V(r) = \{w_1\}$. There is a $p$-admitting sphere $S = \{w,
+  w_1\}$ and $p \lif r$ is true at all worlds in it, so $\mSat{M}{p
+    \cif r}[w]$. There is also a $(p \land q)$-admitting sphere $S' =
+  \{w, w_1, w_2\}$ but $\mSat/{M}{(p \land q) \lif r}[w_2]$, so
+  $\mSat/{M}{(p \land q) \cif r}[w]$ (see \olref{fig:agglomeration}).
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[modal]
+  \draw[dotted] (0,0) circle (.8)  circle (2.2) circle (3.6);
+  \path (0,0) node[world] {$w$};
+  \begin{scope}
+    \draw[clip] plot [smooth,tension=1.5] coordinates { (5,.5) (2.2,-1) (5,-2.9)};
+    \fill[fill=lightgray] (0,0) circle (3.6);
+  \end{scope}
+  \begin{scope}
+    \draw[clip] plot [smooth,tension=1.5] coordinates { (1.5,3.6) (1,0) (5,-3.6)};
+    \fill[fill=lightgray] (0,0) circle (2.2);
+  \end{scope}
+  \draw plot [smooth,tension=1] coordinates { (4,3.6) (.9,.5) (5,1.2)};
+  \path (2.5,3.6) node[below] {$p$};
+  \path (5,2.5) node[left] {$r$};
+  \path (5,-.8) node[left] {$q$};
+  \path (5,-1.3) node[left] {$p \land q$};
+  \path (1.3,.8) node[world] {$w_1$};
+  \path (2.7,-1) node[world] {$w_2$};
+\end{tikzpicture}
+\caption{Counterexample to agglomeration}
+\ollabel{fig:agglomeration}
+\end{center}
+\end{figure}
+\end{ex}
+
+\end{document}
