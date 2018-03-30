@@ -51,14 +51,11 @@ to the world at the center as each other, those contained in a nested
 sphere are closer, and those in a surrounding sphere further away.
 \begin{center}
 \begin{tikzpicture}[scale=.7]\small
-  \draw[dotted] (0,0) node {$w$} circle (.5) circle (1)
-  circle (1.5) circle (2) circle (2.5);
-  \begin{scope}
-    \draw[clip] plot [smooth,tension=1.2] coordinates { (3,2) (1.15,0) (3,-2)};
-    \filldraw[fill=gray] (0,0) circle (1.5);
-  \end{scope}
-  \draw plot [smooth,tension=1.2] coordinates {(0, 3) (1.5,-1) (2.5,3)};
-  \path (1.25,3) node[below] {$\formula{B}$};
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \sphereproposition[(1.5,-1)]{90}{1}{30}{4}
+  \spherepropositionintersect{0}{3}{40}{3.5}
+  \path (1.5,3) node[below] {$\formula{B}$};
   \path (3,0) node {$\formula{A}$};
 \end{tikzpicture}
 \end{center}
