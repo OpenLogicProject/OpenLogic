@@ -1,0 +1,61 @@
+\ProvidesPackage{ptolemaicastronomy}
+
+\def\layerwidth{.5}
+
+\tikzset{
+  sphere/.style = {dotted},
+  sphere intersection/.style = {fill=lightgray},
+  sphere layer/.style = {fill=lightgray},
+  sphere proposition/.style={smooth,tension=1.7}
+ }
+
+% \spheresystem[center]{n} draws a sphere system centered at
+% center with n number of layers
+
+\newcommand{\spheresystem}[2][(0,0)]{
+  \foreach \i in {1,...,#2}{
+    \draw[sphere] #1 circle [radius=\i*\layerwidth] ;
+  }
+}
+
+% \spherelayer[center]{n} shades the n-th layer
+
+\newcommand{\spherelayer}[2][(0,0)]{
+  \begin{scope}[even odd rule]
+    \fill[sphere layer] #1 circle [radius=(#2-1)*\layerwidth]
+                    circle [radius=#2*\layerwidth];
+  \end{scope}
+}
+
+% \sphereintersect[center]{path}{n} draws the path and shades the area
+% of the path in the n th layer
+
+\newcommand{\sphereintersect}[3][(0,0)]{
+  \begin{scope}[even odd rule]
+    \draw[clip] #3;
+    \fill[sphere intersection] #1 circle [radius=#2*\layerwidth];
+  \end{scope}
+}
+
+% \sphereproposition[center]{direction}{n}{width}{length} draws a
+% proposition intersecting the n-th layer in direction away from the
+% center of the sphere system, with endpoints length away from the
+% vertex at an angle of width/2
+
+\newcommand{\sphereproposition}[5][(0,0)]{
+  \begin{scope}[shift={#1}]
+  \coordinate (proptip) at (#2:#3*\layerwidth-\layerwidth+.1);
+  \draw plot [sphere proposition] coordinates {(#2+#4/2:#5) (proptip) (#2-#4/2:#5)};
+  \end{scope}
+}
+
+% \spherepropositionintersect does the same as \sphereproposition but
+% also shades the are of intersection with the closest sphere
+
+\newcommand{\spherepropositionintersect}[5][(0,0)]{
+  \begin{scope}[shift={#1}]
+  \coordinate (proptip) at (#2:#3*\layerwidth-\layerwidth+.1);
+    \draw[clip] plot [sphere proposition] coordinates {(#2+#4/2:#5) (proptip) (#2-#4/2:#5)};
+  \fill[sphere intersection] (0,0) circle [radius=#3*\layerwidth];
+  \end{scope}
+}
