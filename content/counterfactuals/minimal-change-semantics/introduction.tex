@@ -53,8 +53,9 @@ sphere are closer, and those in a surrounding sphere further away.
 \begin{tikzpicture}[scale=.7]\small
   \spheresystem{5}
   \draw (0,0) node {$w$};
-  \sphereproposition[(1.5,-1)]{90}{1}{30}{4}
-  \spherepropositionintersect{0}{3}{40}{3.5}
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  \proposition[shift={(1.6,-1)}]{90}{1}{30}{4}}
   \path (1.5,3) node[below] {$\formula{B}$};
   \path (3,0) node {$\formula{A}$};
 \end{tikzpicture}

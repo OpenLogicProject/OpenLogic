@@ -60,32 +60,13 @@ traitor.\footnote{Of course, to appreciate the force of the example we
   w_1\}$ and $\mSat/{M}{q \lif r}$ is true at all worlds in it, so
   $\mSat{M}{q \cif r}[w]$. However, the $p$-admitting sphere $\{w,
   w_1, w_2\}$ contains a world, namely~$w_2$, where $\mSat/{M}{p \lif
-    r}[w_2]$ (see \olref{fig:transitivity}).
-\begin{figure}
-\begin{center}
-\begin{tikzpicture}[modal]
-  \draw[dotted] (0,0) circle (.8)  circle (2.2) circle (3.6);
-  \path (0,0) node[world] {$w$};
-  \begin{scope}
-    \draw[clip] plot [smooth,tension=1.5] coordinates { (5,.5) (2.2,-1) (5,-2.9)};
-    \fill[fill=lightgray] (0,0) circle (3.6);
-  \end{scope}
-  \begin{scope}
-    \draw[clip] plot [smooth,tension=1.5] coordinates { (1.5,3.6) (1,0) (5,-3.6)};
-    \fill[fill=lightgray] (0,0) circle (2.2);
-  \end{scope}
-  \draw plot [smooth,tension=1] coordinates { (4,3.6) (.9,.5) (5,1.2)};
-  \path (2.5,3.6) node[below] {$q$};
-  \path (5,2.5) node[left] {$r$};
-  \path (5,-1.2) node[left] {$p$};
-  \path (1.3,.8) node[world] {$w_1$};
-  \path (2.7,-1) node[world] {$w_2$};
-\end{tikzpicture}
-\caption{Counterexample to transitivity}
-\ollabel{fig:transitivity}
-\end{center}
-\end{figure}
+    r}[w_2]$.
 \end{ex}
+
+\begin{prob}
+Draw the sphere diagram corresponding to the counterexample in
+\olref[cnt][min][tra]{ex:trans-counterex}.
+\end{prob}
 
 \begin{prob}
   In \olref[cnt][min][tra]{ex:trans-counterex}, world $w_2$ is where

@@ -43,24 +43,23 @@ latter, it is not in the former. And that is as it schould be.
 
 \begin{figure}
 \begin{center}
-\begin{tikzpicture}[modal]
-  \draw[dotted] (0,0) circle (.8)  circle (2.2) circle (3.6);
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{-10}{3}{30}{5}
+  \begin{scope}
+    \clip plot[smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} -- (4.5,4.5) ;
+    \spherefill{2}
+  \end{scope}
+  \draw plot[smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} ;
+  \proposition{30}{2}{30}{5}
   \path (0,0) node[world] {$w$};
-  \begin{scope}
-    \draw[clip] plot [smooth,tension=1.5] coordinates { (5,.5) (2.2,-1) (5,-2.9)};
-    \fill[fill=lightgray] (0,0) circle (3.6);
-  \end{scope}
-  \begin{scope}
-    \draw[clip] plot [smooth,tension=1.5] coordinates { (1.5,3.6) (1,0) (5,-3.6)};
-    \fill[fill=lightgray] (0,0) circle (2.2);
-  \end{scope}
-  \draw plot [smooth,tension=1] coordinates { (4,3.6) (.9,.5) (5,1.2)};
-  \path (2.5,3.6) node[below] {$p$};
-  \path (5,2.5) node[left] {$r$};
-  \path (5,-.8) node[left] {$q$};
-  \path (5,-1.3) node[left] {$p \land q$};
-  \path (1.3,.8) node[world] {$w_1$};
-  \path (2.7,-1) node[world] {$w_2$};
+  \spherepos{30}{2}{node[world] {$w_1$}}
+  \spherepos{-10}{3}{node[world] {$w_2$}}
+  \spherepos{-10}{4}{node {$q$}}
+  \spherepos{30}{4}{node {$r$}}
+  \draw (1,4.5) node[below] {$p$};
 \end{tikzpicture}
 \caption{Counterexample to agglomeration}
 \ollabel{fig:agglomeration}

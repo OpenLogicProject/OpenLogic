@@ -44,21 +44,18 @@ are not just the individual layers.
 
 \begin{figure}
 \begin{center}
-\begin{tikzpicture}[modal]
-  \draw[dotted] (0,0) circle (.8)  circle (2.2) circle (3.6);
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{0}{3}{60}{6}
   \path (0,0) node[world] {$w$};
-  \path (1.3,.6) node[world] {$w_2$};
-  \path (-.4,-1.4) node[world] {$w_3$};
-  \path (0,1.5) node[world] {$w_1$};
-  \begin{scope}
-    \draw[clip] plot [smooth,tension=1.5] coordinates { (5,3) (2.3,0) (5,-3)};
-    \filldraw[fill=lightgray] (0,0) circle (3.6);
-  \end{scope}
+  \spherepos{-30}{2}{node[world] {$w_2$}}
+  \spherepos{220}{2}{node[world] {$w_3$}}
+  \spherepos{90}{2}{node[world] {$w_1$}}
+  \spherepos[shift={(.1,0)}]{10}{3}{node[world] {$w_5$}}
+  \spherepos[shift={(.1,0)}]{-10}{3}{node[world] {$w_6$}}
+  \spherepos{225}{3}{node[world] {$w_4$}}
+  \spherepos{20}{4}{node[world] {$w_7$}}
   \path (5,0) node[left] {$p$};
-  \path (2.9,.6) node[world] {$w_5$};
-  \path (2.9,-.6) node[world] {$w_6$};
-  \path (-2,-2) node[world] {$w_4$};
-  \path (4.2,1.5) node[world] {$w_7$};
 \end{tikzpicture}
 \caption{Diagram of a sphere model}
 \ollabel{fig:sphere-model}
@@ -70,7 +67,7 @@ model with $W = \{w, w_1, \dots, w_7\}$, $V(p) = \{w_5, w_6,
 w_7\}$. The innermost sphere $S_1 = \{w\}$. The closest worlds to $w$
 are $w_1, w_2, w_3$, so the next larger sphere is $S_2 = \{w, w_1,
 w_2, w_3\}$. The worlds further out are $w_4$, $w_5$, $w_6$, so the
-outermost sphere is $S_2 = \{w, w_1, \dots, w_6\}$. The system of
+outermost sphere is $S_3 = \{w, w_1, \dots, w_6\}$. The system of
 spheres around $w$ is $O_w = \{S_1, S_2, S_3\}$. The world~$w_7$ is
 not in any sphere around~$w$. The closest worlds in which $p$~is true
 are $w_5$ and~$w_6$, and so the smallest $p$-admitting sphere
