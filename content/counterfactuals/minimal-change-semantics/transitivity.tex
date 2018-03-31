@@ -1,0 +1,81 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: transitivity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{tra}
+
+\olsection{Transitivity}
+
+For the material conditional, the chain rule holds: $!A \lif !B, !B
+\lif !C \Entails !A \lif !C$. In other words, the material conditional
+is transitive. Is the same true for counterfactuals? Consider the
+following example due to Stalnaker.
+\begin{quote}
+  If J.~Edgar Hoover had been born a Russian, he would have been a Communist.
+
+  If J.~Edgar Hoover were a Communist, he would have been be a traitor.
+
+  Therefore, If J.~Edgar Hoover had been born a Russian, he would have
+  been be a traitor.
+\end{quote}
+If Hoover had been born (at the same time he actually did), not in the
+United States, but in Russia, he would have grown up in the Soviet
+Union and become a Communist (let's assume). So the first premise is
+true. Likewise, the second premise, considered in isolation is
+true. The conclusion, however, is false: in all likelihood, Hoover
+would have been a fervent Communist if he had been born in the USSR,
+and not been a traitor (to his country).  The intuitive assignment of
+truth values is borne out by the Stalnaker-Lewis account. The closest
+possible world to ours with the only change being Hoover's place of
+birth is the one where Hoover grows up to be a good citizen of the
+USSR. This is the closest possible world where the antecedent of the
+first premise and of the conclusion is true, and in that world Hoover
+is a loyal member of the Communist party, and so not a traitor. To
+evaluate the second premise, we have to look at a different world,
+however: the closest world where Hoover is a Communist, which is one
+where he was born in the United States, turned, and thus became a
+traitor.\footnote{Of course, to appreciate the force of the example we
+  have to take on board some metaphysical and political assumptions,
+  e.g., that it is possible that Hoover could have been born to
+  Russian parents, or that Communists in the US of the 1950s were
+  traitors to their country.}
+
+\begin{prob}
+  Find a convincing, intuitive example for the failure of transitivity
+  of counterfactuals.
+\end{prob}
+
+\begin{ex}\ollabel{ex:trans-counterex}
+  The sphere semantics invalidates the inference, i.e., we have $p
+  \cif q, q \cif r \Entails/ p \cif r$. Consider the model $\mModel{M}
+  = \tuple{W, O, V}$ where $W = \{w, w_1, w_2\}$, $O_w = \{\{w\}, \{w,
+  w_1\}, \{w, w_1, w_2\}\}$, $V(p) = \{w_2\}$, $V(q) = \{w_1, w_2\}$,
+  and $V(r) = \{w_1\}$. There is a $p$-admitting sphere $S = \{w, w_1,
+  w_2\}$ and $q \lif q$ is true at all worlds in it, so $\mSat{M}{p
+    \cif q}[w]$. There is also a $q$-admitting sphere $S' = \{w,
+  w_1\}$ and $\mSat/{M}{q \lif r}$ is true at all worlds in it, so
+  $\mSat{M}{q \cif r}[w]$. However, the $p$-admitting sphere $\{w,
+  w_1, w_2\}$ contains a world, namely~$w_2$, where $\mSat/{M}{p \lif
+    r}[w_2]$.
+\end{ex}
+
+\begin{prob}
+Draw the sphere diagram corresponding to the counterexample in
+\olref[cnt][min][tra]{ex:trans-counterex}.
+\end{prob}
+
+\begin{prob}
+  In \olref[cnt][min][tra]{ex:trans-counterex}, world $w_2$ is where
+  Hoover is born in Russia, is a communist, and not a traitor, and
+  $w_1$ is the world where Hoover is born in the US, is a communist,
+  and a traitor. In this model, $w_1$ is closer to~$w$ than $w_2$
+  is. Is this necessary? Can you give a counterexample that does
+  not assume that Hoover's being born in Russia is a more remote
+  possibility than him being a Communist?
+\end{prob}
+
+\end{document}
