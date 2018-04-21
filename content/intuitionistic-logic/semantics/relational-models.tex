@@ -34,16 +34,17 @@ as validity and entailment. One such semantics is given by
   We define the notion of $!A$ \emph{being true at $w$ in
     $\mModel{M}$}, $\mSat{M}{!A}[w]$, inductively as follows:
   \begin{enumerate}
+  \item \indcase{!A}{p}{$\mSat{M}{\indfrm}[w]$ iff $w \in V(p)$.}
   \item \indcase{!A}{\lfalse}{not $\mSat{M}{\indfrm}[w]$}.
-  \item \indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff for every
-    $w'$ such that $Rww'$, $\mSat/{M}{!B}[w]$}.
+  \item \indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff for no
+    $w'$ such that $Rww'$, $\mSat{M}{!B}[w']$}.
   \item \indcase{!A}{!B \land !C}{$\mSat{M}{\indfrm}[w]$ iff
     $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$}.
   \item \indcase{!A}{!B \lor !C}{$\mSat{M}{\indfrm}[w]$ iff
     $\mSat{M}{!B}[w]$ or $\mSat{M}{!C}[w]$ (or both)}.
   \item \indcase{!A}{!B \lif !C}{$\mSat{M}{\indfrm}[w]$ iff for every
-    $w'$ such that $Rww'$, either not $\mSat{M}{!B}[w]$ or
-    $\mSat{M}{!C}[w]$}.
+    $w'$ such that $Rww'$, not $\mSat{M}{!B}[w]$ or
+    $\mSat{M}{!C}[w]$} (or both).
   \end{enumerate}
   We write $\mSat/{M}{!A}[w]$ if not $\mSat{M}{!A}[w]$. If $\Gamma$ is
   a set of !!{formula}s, $\mSat{M}{\Gamma}[w]$ means $\mSat{M}{!B}[w]$

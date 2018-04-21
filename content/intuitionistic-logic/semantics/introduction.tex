@@ -22,7 +22,7 @@ The semantics based on !!{relational model}s, similar to the semantics
 for modal logics, is perhaps the most popular one.  In this semantics,
 !!{propositional variable}s are assigned to worlds, and these worlds
 are related by an accessibility relation. That relation is always a
-partial order, i.e., it is reflexive, symmetric, and
+partial order, i.e., it is reflexive, antisymmetric, and
 transitive.
 
 Intuitively, you might think of these worlds as states of knowledge or
@@ -34,8 +34,8 @@ and $Rww'$, $!A$ is known at $w'$ as well. So ``knowledge'' is
 monotonic with respect to the accessibility relation.
 
 If we define ``$!A$ is known'' as in epistemic logic as ``true in all
-epistemic alternatives,'' then $!A \land !B$ is known at $w$ if in all
-epistemic alternatives, both $!A$ and $!B$ are known. But since
+epistemic alternatives,'' then $!A \land !B$ is known at~$w$ if in all
+epistemic alternatives, both $!A$ and~$!B$ are known. But since
 knowledge is monotonic and $R$ is reflexive, that means that $!A \land
 !B$ is known at $w$ iff $!A$ and $!B$ are known at~$w$.  For the same
 reason, $!A \lor !B$ is known at $w$ iff at least one of them is
@@ -43,18 +43,18 @@ known. So for $\land$ and $\lor$, the truth conditions of the
 connectives coincide with those in classical logic.
 
 The truth conditions for the conditional, however, differ from
-classical logic. $!A \lif !B$ is known at $w$ iff at no $w'$ with
-$Rww'$, $!A$ is known without $!B$ also being known. This does not
-coincide with $!A \lif !B$ being known at $w$ iff $!A$ is unknown or
-$!B$ is known. For if we now know neither $!A$ nor $!B$, there might
-be future epistemic states where we come to know $!A$ without also
-coming to know~$!B$.
+classical logic. $!A \lif !B$ is known at~$w$ iff at no $w'$ with
+$Rww'$, $!A$ is known without $!B$ also being known. This is not the
+same as the condition that $!A$ is unknown or $!B$~is known
+at~$w$. For if we know neither $!A$ nor $!B$ at~$w$, there might be a
+future epistemic state~$w'$ with $Rww'$ such that at $w'$, $!A$ is
+known without also coming to know~$!B$.
 
-On this interpretation, we know $\lnot !A$ only if there is no
-possible future epistemic state in which we know~$!A$. Here the idea
-is that if $!A$ were knowable, then in some possible future epistemic
-state~$!A$ becomes known. Since we can't know $\lfalse$, in that
-future epistemic state, we would know $!A$ but not know~$\lfalse$. 
+We know $\lnot !A$ only if there is no possible future epistemic state
+in which we know~$!A$. Here the idea is that if $!A$ were knowable,
+then in some possible future epistemic state~$!A$ becomes known. Since
+we can't know $\lfalse$, in that future epistemic state, we would know
+$!A$ but not know~$\lfalse$.
 
 On this interpretation the principle of excluded middle fails. For
 there are some $!A$ which we don't yet know, but which we might come

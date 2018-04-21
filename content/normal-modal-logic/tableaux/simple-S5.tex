@@ -64,19 +64,19 @@ integers as prefixes. The simplified rules are given in
 
 \begin{ex}
   We give a simplified closed tableau that shows $\Log{S5} \Proves
-  \Ax{5}$, i.e., $\Box!A \lif \Box\Diamond!A$.
+  \Ax{5}$, i.e., $\Diamond!A \lif \Box\Diamond!A$.
   \begin{oltableau}
-    [\pFmla{\False}{\Box\formula{A} \lif \Box\Diamond \formula{A}}{1},
+    [\pFmla{\False}{\Diamond\formula{A} \lif \Box\Diamond \formula{A}}{1},
       just = \TAss
-      [\pFmla{\True}{\Box \formula{A}}{1}, just = {\TRule{\False}{\lif}[1]}
+      [\pFmla{\True}{\Diamond \formula{A}}{1}, just = {\TRule{\False}{\lif}[1]}
         [\pFmla{\False}{\Box\Diamond \formula{A}}{1},
           just = {\TRule{\False}{\lif}[1]}
           [\pFmla{\False}{\Diamond \formula{A}}{2},
             just = {\TRule{\False}{\Box}[3]}
-            [\pFmla{\False}{\formula{A}}{2},
-              just = {\TRule{\False}{\Diamond}[4]}
-                [\pFmla{\True}{\formula{A}}{2},
-                  just = {\TRule{\True}{\Box}[2]}, close]
+            [\pFmla{\True}{\formula{A}}{3},
+              just = {\TRule{\True}{\Diamond}[2]}
+                [\pFmla{\False}{\formula{A}}{3},
+                  just = {\TRule{\False}{\Diamond}[4]}, close]
             ]
           ]
         ]
