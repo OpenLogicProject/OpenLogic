@@ -41,8 +41,10 @@ corresponding rules to, we write a checkmark next to the
 sentence. However, \emph{only} write a checkmark if the rule has been
 applied to all open branches. Once !!a{signed formula} has had the
 corresponding rule applied in every open branch, we will not have to
-return to it and apply the rule again. (In this case, there is only
-one branch, so the rule only has to be applied once.)
+return to it and apply the rule again. In this case, there is only one
+branch, so the rule only has to be applied once. (Note that checkmarks
+are only a convenience for constructing tableaux and are not
+officially part of the syntax of tableaux.)
 
 There is one new !!{signed formula} to which we can apply a rule: the
 $\sFmla{\True}{!A \land !B}$ on line~$3$. Applying the
@@ -173,7 +175,7 @@ We can give !!{tableau}s for any number of !!{signed formula}s as
 assumptions.  Often it is also necessary to apply more than one rule
 that allows branching; and in general !!a{tableau} can have any number
 of branches. For instance, consider !!a{tableau} for
-$\{\sFmla{\True}{!A \lor (!B \land !A)}, \sFmla{\False}{(!A \lor !B) \land (!A
+$\{\sFmla{\True}{!A \lor (!B \land !C)}, \sFmla{\False}{(!A \lor !B) \land (!A
   \lor !C)}\}$. We start by applying the $\TRule{\True}{\lor}$ to the
 first assumption:
 \begin{oltableau}
