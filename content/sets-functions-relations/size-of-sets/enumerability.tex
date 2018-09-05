@@ -280,14 +280,14 @@ g(n,m) = \frac{(n + m - 2)(n + m - 1)}{2}+n
 Accordingly, the pair $\tuple{2,3}$ is in position $((2 + 3 - 2)(2 + 3 - 1) / 2) + 2 = (3 \cdot 4 / 2) + 2 = (12 / 2) + 2 = 8$; pair $\tuple{3,7}$ is in position $((3 + 7 - 2)(3 + 7 - 1) / 2) + 3 = 39$.
 \end{explain}
 
-Functions like $g$ above, i.e., inverses of enumerations of $(\Int^+)^2$, are called \emph{pairing functions}.
+Functions like $g$ above, i.e., inverses of enumerations of sets of pairs, are called \emph{pairing functions}.
 
 \begin{defn}[Pairing function]
-A function $f\colon (\Int^+)^2 \to \Int^+$ is an arithmetical \emph{pairing function} if $f$ is total and injective. We also say that $f$ \emph{encodes} $(\Int^+)^2$, and that for $f(\tuple{n,m})=k$, $k$ is the \emph{code} for $\tuple{n,m}$.
+A function $f\colon X \times Y \to \Int^+$ is an arithmetical \emph{pairing function} if $f$ is total and injective. We also say that $f$ \emph{encodes} $X \times Y$, and that for $f(\tuple{x,y})=n$, $n$ is the \emph{code} for $\tuple{x,y}$.
 \end{defn}
 
 \begin{explain}
-The idea is that we can use such functions to encode pairs of positive integers in $\Int^+$, or, in other words, represent pairs of positive integers as positive integers. Using the inverse of the pairing function, we can \emph{decode} the integer, i.e., find out which pair of positive integers is represented.
+The idea is that we can use such functions to encode, e.g., pairs of positive integers in $\Int^+$, or, in other words, represent pairs of positive integers as positive integers. Using the inverse of the pairing function, we can \emph{decode} the integer, i.e., find out which pair of positive integers is represented.
 
 There are other enumerations of $(\Int^+)^2$ that make it easier to figure out what their inverses are. Here is one. Instead of visualizing the enumeration in an array, start with the list of positive integers associated with (initially) empty spaces. Imagine filling these spaces successively with pairs $\tuple{n,m}$ as follow. Starting with the pairs that have 1 in  the first place (i.e., pairs $\tuple{1,m}$), put the first (i.e., $\tuple{1,1}$) in the first empty place, then skip an empty space, put the second (i.e., $\tuple{1,2}$) in the next empty place, skip one again, and so forth. The (incomplete) beginning of our enumeration now looks like this
 \[
@@ -354,7 +354,7 @@ is a pairing function for the set of pairs of positive integers $(\Int^+)^2$.
 \end{ex}
 
 \begin{explain}
-$j$ is injective, but nor surjective.  That means the inverse of $j$ is a partial, surjective function, and hence an enumeration of $(\Int^+)^2$.
+$j$ is injective, but nor surjective.  That means the inverse of $j$ is a partial, surjective function, and hence an enumeration of $(\Int^+)^2$. (Exercise.)
 \end{explain}
 
 \begin{prob}
@@ -396,6 +396,10 @@ Show that the !!{enumerable} union of !!{enumerable} sets is
 !!{enumerable}. That is, whenever $X_1$, $X_2$, \dots{} are sets, and
 each $X_i$ is !!{enumerable}, then the union $\bigcup_{i=1}^\infty
 X_i$ of all of them is also !!{enumerable}.
+\end{prob}
+
+\begin{prob}
+Let $f: X \times Y \to \Int^+$ be an arbitrary pairing function. Show that the inverse of $f$ is an enumeration of $X \times Y$.
 \end{prob}
 
 \begin{prob}
