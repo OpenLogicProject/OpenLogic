@@ -1,0 +1,78 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: trees
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{tre}
+\olsection{Trees}
+
+Sometimes it is useful to represent trees as natural numbers, just
+like we can represent sequences by numbers and properties of and
+operations on them by primitive recursive relations and functions on
+their codes.  We'll use sequences and their codes to do this. A tree
+can be either a single node (possibly with a label) or else a node
+(possibly with a label) connected to a number of subtrees. The node is
+called the \emph{root} of the tree, and the subtrees it is connected
+to its \emph{immediate subtrees}.
+
+We code trees recursively as a sequence $\tuple{k, d_1, \dots, d_k}$,
+where $k$ is the number of immediate subtrees and $d_1$, \dots,~$d_k$
+the codes of the immediate subtrees. If the nodes have labels, they
+can be included after the immediate subtrees. So a tree consisting
+just of a single node with label~$l$ would be coded by $\tuple{0,l}$,
+and a tree consisting of a root (labelled~$l_1$) connected to two
+single nodes (labelled $l_2$, $l_3$) would be coded by $\tuple{2,
+  \tuple{0, l_2}, \tuple{0, l_3}, l_1}$.
+
+\begin{prop}
+  \ollabel{prop:subtreeseq}
+  The function $\fn{SubtreeSeq}(t)$, which returns the code of a
+  sequence the elements of which are the codes of all subtrees of the
+  tree with code~$t$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  First note that $\fn{ISubtrees}(t) = \fn{subseq}(t, 1, (t)_0)$ is
+  primitive recursive and returns the codes of the immediate subtrees
+  of a tree~$t$. Now we can define a helper function
+  $\fn{hSubtreeSeq}(t,n)$ which computes the sequence of all subtrees
+  which are $n$ nodes remove from the root. The sequence of subtrees
+  of~$t$ which is $0$ nodes removed from the root---in other words,
+  begins at the root of~$t$---is the sequence consisting just
+  of~$t$. To obtain a sequence of all level~$n+1$ subtrees of $t$, we
+  concatenate the level $n$ subtrees with a sequence consisting of all
+  immediate subtrees of the level $n$ subtrees. To get a list of all
+  these, note that if $f(x)$ is a primitive recursive function
+  returning codes of sequences, then $g_f(s, k) = f((s)_0) \concat
+  \dots \concat f((s)_k)$ is also primivive recursive:
+    \begin{align*}
+      g(s, 0) & = f((s)_0)\\
+      g(s, k+1) & = g(s, k) \concat f((s)_{k+1})
+    \end{align*}
+    For instance, if $s$ is a sequence of trees, then
+    $h(s) = g_{\fn{ISubtrees}}(s, \len{s})$ gives the sequence of the
+    immediate subtrees of the elements of~$s$. We can use it to define
+    $\fn{hSubtreeSeq}$ by
+    \begin{align*}
+      \fn{hSubtreeSeq}(t, 0) & = \tuple{t} \\
+      \fn{hSubtreeSeq}(t, n+1) & = \fn{hSubtreeSeq}(t, n) \concat
+      h(\fn{hSubtree}(t, n)).
+    \end{align*}
+    The maximum level of subtrees in a tree coded by~$t$, i.e., the
+    maximum distance between the root and a leaf node, is bounded by
+    the code~$t$. So a sequence of codes of all subtrees of the tree
+    coded by~$t$ is given by $\fn{hSubtreeSeq}(t, t)$.
+\end{proof}
+
+\begin{prob}
+  The definition of $\fn{hSubtreeSeq}$ in the proof of
+  \olref[cmp][rec][tre]{prop:subtreeseq} in general includes
+  repetitions. Give an alternative definition which guarantees that
+  the code of a subtree occurs only once in the resulting list.
+\end{prob}
+
+\end{document}
+
