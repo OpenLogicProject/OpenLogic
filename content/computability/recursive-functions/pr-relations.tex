@@ -42,89 +42,117 @@ recursive functions. So the following are also primitive recursive:
 \item The less-than relation, $x \leq y$, defined by $\fn{IsZero}(x
   \tsub y)$
 \end{enumerate}
-Furthermore, the set of primitive recursive relations is closed under
-boolean operations:
-\begin{enumerate}
-\item Negation, $\lnot P$
-\item Conjunction, $P \land Q$
-\item Disjunction, $P \lor Q$
-\item If \dots then, $P \lif Q$
-\end{enumerate}
-are all primitive recursive, if $P$ and $Q$ are. For suppose
-$\Char{P}(\vec z)$ an $\Char{Q}(\vec z)$ are primitive recursive. Then
-the relation $R(\vec z)$ that holds iff both $P(\vec z)$ and $Q(\vec
-z)$ hold has the characteristic function $\Char{R}(\vec z) =
-\fn{and}(\Char{P}(\vec z), \Char{Q}(\vec z))$.
 
-One can also define relations using bounded quantification:
-\begin{enumerate}
-\item Bounded universal quantification: if $R(x, \vec z)$ is a
-primitive recursive relation, then so is the relation
-\[
-\bforall{x < y}{R(x, \vec z)}
-\]
-which holds if and only if $R(x,\vec z)$ holds for every~$x$ less
-than~$y$.
-\item Bounded existential quantification: if $R(x, \vec z)$ is a
-primitive recursive relation, then so is
-\[
-\bexists{x < y}{R(x, \vec z)}.
-\]
-\end{enumerate}
-By convention, we take $\bforall{x < 0}{R(x,\vec z)}$ to be true (for
-the trivial reason that there \emph{are} no $x$ less than $0$) and
-$\bexists{x < 0}{R(x,\vec z)}$ to be false. A universal quantifier
-functions just like a finite product; it can also be defined directly
-by
-\[
-g(0,\vec z) = 1, \quad g(y+1,\vec z) =
-\fn{and}(g(y,\vec z),\Char{R}(y,\vec z)).
-\]
-Bounded existential quantification can similarly be defined using
-$\fn{or}$. Alternatively, it can be defined from bounded universal
-quantification, using the equivalence, $\bexists{x < y}{!A(x)} \liff
-\lnot \bforall{x < y}{\lnot !A(x)}$. Note that, for example, a bounded
-quantifier of the form $\bexists{x \leq y}{\dots x\dots}$ is
-equivalent to $\bexists{x < y+1}{\dots x \dots}$.
 
-Another useful primitive recursive function is:
-\begin{enumerate}
-\item The conditional function, $\fn{cond}(x,y,z)$, defined by
+\begin{prop}
+  The set of primitive recursive relations is closed under boolean
+  operations, that is, 
+  if $P(\vec x)$ and $Q(\vec x)$ are primitive, so are
+  \begin{enumerate}
+  \item $\lnot R(\vec x)$
+  \item $P(\vec x) \land Q(\vec x)$
+  \item $P(\vec x) \lor Q(\vec x)$
+  \item $P(\vec x) \lif Q(\vec x)$
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  Suppose $P(\vec x)$ and $Q(\vec x)$ are primitive recursive, i.e.,
+  their characteristic functions $\Char{P}$ and $\Char{Q}$ are.  We
+  have to show that the characteristic functions of $\lnot R(\vec x)$,
+  etc., are also primitive recursive.
+  \[
+  \Char{\lnot P}(\vec x) = \begin{cases}
+    0 & \text{if $\Char{P}(\vec x) = 1$}\\
+    1 & \text{otherwise}
+  \end{cases}
+  \]
+  We can define $\Char{\lnot P}(\vec x)$ as $1 \tsub \Char{P}(\vec x)$.
+  \[
+  \Char{P \land Q}(\vec x) = \begin{cases}
+    1 & \text{if $\Char{P}(\vec x) = \Char{Q}(\vec x) = 1$}\\
+    0 & \text{otherwise}
+  \end{cases}
+  \]
+  We can define $\Char{P \land Q}(\vec x)$ as $\Char{P}(\vec x) \cdot
+  \Char{Q}(\vec x)$ or as $\fn{min}(\Char{P}(\vec x), \Char{Q}(\vec x))$.
+
+  Similarly, $\Char{P \lor Q}(\vec x) = \fn{max}(\Char{P}(\vec x),
+  \Char{Q}(\vec x))$ and $\Char{P \lor Q}(\vec x) = \fn{max}(1 \tsub
+  \Char{P}(\vec x), \Char{Q}(\vec x))$.
+\end{proof}
+
+\begin{prop}
+  The set of primitive recursive relations is closed under bounded
+  quantification, i.e., if $R(\vec x, z)$ is a primitive recursive
+  relation, then so are the relations $\bforall{z < y}{R(\vec x, z)}$
+  and $\bexists{z < y}{R(\vec x, z)}$.
+
+  ($\bforall{z < y}{R(\vec x, z)}$ holds of $\vec x$ and $y$ if and
+  only if $R(\vec x, z)$ holds for every~$z$ less than~$y$, and
+  similarly for $\bexists{z < y}{R(\vec x, z)}$.)
+\end{prop}
+
+\begin{proof}
+  By convention, we take $\bforall{z < 0}{R(\vec x, z)}$ to be true
+  (for the trivial reason that there are no $z$ less than $0$) and
+  $\bexists{z < 0}{R(\vec x, z)}$ to be false. A universal quantifier
+  functions just like a finite product or iterated minimum, i.e., if
+  $P(\vec x, y) \defiff \bforall{z < y}{R(\vec x, z)}$ then
+  $\Char{P}(\vec x, y)$ can be defined by
+  \begin{align*}
+    \Char{P}(\vec x, 0) & = 1\\
+    \Char{P}(\vec x, y+1) & =
+    \fn{min}(\Char{P}(\vec x, y), \Char{R}(\vec x, y+1))).
+  \end{align*}
+  Bounded existential quantification can similarly be defined using
+  $\fn{max}$. Alternatively, it can be defined from bounded universal
+  quantification, using the equivalence $\bexists{z < y}{R(\vec x, z)} \liff
+  \lnot \bforall{z < y}{\lnot R(\vec x, z)}$. Note that, for example, a
+  bounded quantifier of the form $\bexists{x \leq y}{\dots x\dots}$ is
+  equivalent to $\bexists{x < y+1}{\dots x \dots}$.
+\end{proof}
+  
+Another useful primitive recursive function is the conditional
+function, $\fn{cond}(x,y,z)$, defined by
 \[
-\fn{cond}(x,y,z) = \left\{ \begin{array}{ll}
-  y & \mbox{if $x$ = 0} \\
-  z & \mbox{otherwise}
-\end{array}\right.
+\fn{cond}(x,y,z) = \begin{cases}
+  y & \text{if $x = 0$} \\
+  z & \text{otherwise}.
+\end{cases}
 \]
-\end{enumerate}
 This is defined recursively by
 \[
 \fn{cond}(0,y,z) = y, \quad \fn{cond}(x+1,y,z) = z.
 \]
-One can use this to justify:
-\begin{enumerate}
-\item Definition by cases: if $g_0(\vec x), \dots, g_m(\vec x)$ are
-functions, and $R_1(\vec x), \dots, R_{m-1}(\vec x)$ are relations, then
+One can use this to justify definitions of primitive recursive functions
+by cases from primitive recursive relations:
+
+\begin{prop}
+If $g_0(\vec x)$, \dots,~$g_m(\vec x)$ are functions, and $R_1(\vec
+x)$, \dots,~$R_{m-1}(\vec x)$ are primitive recursive relations, then
 the function $f$ defined by
 \[
-f(\vec x) = \left\{\begin{array}{ll}
-    g_0(\vec x) & \mbox{if $R_0(\vec{x})$} \\
-    g_1(\vec x) & \mbox{if $R_1(\vec{x})$ and not $R_0(\vec{x})$} \\
+f(\vec x) = \begin{cases}
+    g_0(\vec x) & \text{if $R_0(\vec{x})$} \\
+    g_1(\vec x) & \text{if $R_1(\vec{x})$ and not $R_0(\vec{x})$} \\
     \vdots & \\
-    g_{m-1}(\vec x) & \mbox{if $R_{m-1}(\vec{x})$ and none of the
+    g_{m-1}(\vec x) & \text{if $R_{m-1}(\vec{x})$ and none of the
       previous hold}
     \\
     g_m(\vec x) & \mbox{otherwise}
-\end{array}\right.
+\end{cases}
 \]
 is also primitive recursive.
-\end{enumerate}
-When $m = 1$, this is just the function defined by
-\[
-f(\vec x) = \fn{cond}(\Char{\lnot R_0}(\vec x),g_0(\vec x),g_1(\vec
- x)).
-\]
-For $m$ greater than $1$, one can just compose definitions of this
-form.
+\end{prop}
 
+\begin{proof}
+  When $m = 1$, this is just the function defined by
+  \[
+  f(\vec x) = \fn{cond}(\Char{\lnot R_0}(\vec x),g_0(\vec x),g_1(\vec
+  x)).
+  \]
+  For $m$ greater than $1$, one can just compose definitions of this
+  form.
+\end{proof}
 \end{document}

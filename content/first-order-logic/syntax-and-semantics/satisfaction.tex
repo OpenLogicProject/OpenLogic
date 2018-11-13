@@ -152,7 +152,7 @@ object.
 
 \begin{ex}
 Let $\Lang = \{a, b, f, R\}$ where $a$ and $b$ are !!{constant}s, $f$
-is a two-place !!{function}, and $A$ is a two-place !!{predicate}.
+is a two-place !!{function}, and $R$ is a two-place !!{predicate}.
 Consider the !!{structure}~$\Struct{M}$ defined by:
 \begin{enumerate}
 \item $\Domain M = \{1, 2, 3, 4\}$
@@ -184,7 +184,7 @@ values of its arguments, i.e., $\tuple{\Value{t_1}{M}[s],
   \Value{t_2}{M}[s]}$, is !!a{element} of~$\Assign{R}{M}$. So, e.g., we
 have $\Sat{M}{R(b,f(a,b))}[s]$ since $\tuple{\Value{b}{M},
   \Value{f(a,b)}{M}} = \tuple{2, 3} \in \Assign{R}{M}$, but
-$\Sat/{M}{R(x, f(a,b))}$ since $\tuple{1, 3} \notin \Assign{R}{M}[s]$.
+$\Sat/{M}{R(x, f(a,b))}[s]$ since $\tuple{1, 3} \notin \Assign{R}{M}[s]$.
 
 To determine if a non-atomic formula~$!A$ is satisfied, you apply the
 clauses in the inductive definition that applies to the main
@@ -206,11 +206,11 @@ x) \lor R(x, b)$ is the~$\lif$, and
 Recall that an $x$-variant of~$s$ is a variable assignment that
 differs from $s$ at most in what it assigns to~$x$. For every
 !!{element} of~$\Domain{M}$, there is an $x$-variant of~$s$: $s_1(x) =
-1$, $s_2(x) = 2$, $s_3(x) = 3$, $s_4(s) = 4$, and with $s_i(y) = s(y)
-= 1$ for all variables~$y$ other than~$x$ are all the $x$-variants
-of~$s$ for the structure~$\Struct{M}$. Note, in particular, that $s_1
-= s$ is also an $x$-variant of~$s$, i.e., $s$~is an $x$-variant of
-itself.
+1$, $s_2(x) = 2$, $s_3(x) = 3$, $s_4(x) = 4$, and with $s_i(y) = s(y)
+= 1$ for all variables~$y$ other than~$x$. These are all the
+$x$-variants of~$s$ for the structure~$\Struct{M}$, since $\Domain{M}
+= \{1, 2, 3, 4\}$. Note, in particular, that $s_1 = s$ is also an
+$x$-variant of~$s$, i.e., $s$~is always an $x$-variant of itself.
 
 \iftag{prvEx}{To determine if an existentially quantified
   !!{formula}~$\lexists[x][!A(x)]$ is satisfied, we have to determine
@@ -233,7 +233,7 @@ itself.
   \Sat{M}{\lforall[x][(R(x,a) \lif R(a,x))]}[s],
   \]
   since $\Sat{M}{R(x,a) \lif R(a,x)}[s_i]$ for all $s_i$
-  ($\Sat{M}{R(a,x)}[s_1]$ and $\Sat/{M}{R(a,x)}[s_j]$ for $j = 2$,
+  ($\Sat{M}{R(a,x)}[s_1]$ and $\Sat/{M}{R(x,a)}[s_j]$ for $j = 2$,
   $3$, and~$4$).  But,
   \[
   \Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s]

@@ -9,12 +9,12 @@
 \olfileid{cmp}{rec}{seq}
 \olsection{Sequences}
 
-The set of primitive recursive functions is
-remarkably robust. But we will be able to do even more once we have
-developed an adequate means of handling \emph{sequences}. We will
-identify finite sequences of natural numbers with natural numbers in
-the following way: the sequence $\langle a_0, a_1, a_2, \dots, a_k \rangle$
-corresponds to the number
+The set of primitive recursive functions is remarkably robust. But we
+will be able to do even more once we have developed a adequate means
+of handling \emph{sequences}. We will identify finite sequences of
+natural numbers with natural numbers in the following way: the
+sequence $\langle a_0, a_1, a_2, \dots, a_k \rangle$ corresponds to
+the number
 \[
 p_0^{a_0+1} \cdot p_1^{a_1+1} \cdot p_2^{a_2+1} \cdot \dots \cdot
 p_k^{a_k+1}.
@@ -24,46 +24,87 @@ sequences $\langle 2, 7, 3\rangle$ and $\langle 2, 7, 3, 0, 0 \rangle$
 have distinct numeric codes. We can take both $0$ and~$1$ to code the
 empty sequence; for concreteness, let $\emptyseq$ denote~$0$.
 
-Let us define the following functions:
-\begin{enumerate}
-\item $\len{s}$, which returns the length of the sequence $s$:
-Let $R(i, s)$ be the relation defined by
+The reason that this coding of sequences works is the so-called
+Fundamental Theorem of Arithmetic: every natural number $n \ge 2$ can
+be written in one and only one way in the form
 \[
-R(i, s) \text{ iff }
-p_i \mid s \land \bforall{j < s}{(j > i \lif
-  p_j \mathrel{\not{\mid}} s)}
+n = p_0^{a_0} \cdot p_1^{a_1} \cdot \dots \cdot p_k^{a_k}
 \]
-$R$ is primitive recursive. Now let
-\[
-\len{s} =
-\begin{cases}
-0 & \text{if $s = 0$ or $s = 1$} \\
-1 + \bmin{i < s}{R(i, s)} & \text{otherwise}
-\end{cases}
-\]
-Note that we need to bound the search on $i$; clearly $s$ provides an
-acceptable bound.
+with $a_k \ge 1$. This guarantees that the mapping $\tuple{}(a_0,
+\dots, a_k) = \tuple{a_0, \dots, a_k}$ is injective: different
+sequences are mapped to different numbers; to each number only at most
+one sequence corresponds.
 
-\item $\fn{append}(s,a)$, which returns the result of appending $a$ to
-  the sequence $s$:
-\[
-\fn{append}(s,a) =
-\begin{cases}
-  2^{a+1} & \text{if $s = 0$ or $s = 1$} \\
-s \cdot p_{\len{s}}^{a+1} & \text{otherwise}
-\end{cases}
-\]
-\item $\fn{element}(s,i)$, which returns the $i$th element of $s$
+We'll now show that the operations of determining the length of a
+sequence, determining its $i$th element, appending an element to a
+sequence, and concatenating two sequences, are all primitive
+recursive.
+
+\begin{prop}
+  The function $\len{s}$, which returns the length of the sequence
+  $s$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  Let $R(i, s)$ be the relation defined by
+  \[
+  R(i, s) \text{ iff }
+  p_i \mid s \land p_{i+1} \nmid s.
+  \]
+  $R$ is clearly primitive recursive. Whenever $s$ is the code of a
+  non-empty sequence, i.e.,
+  \[
+  s = p_0^{a_0+1} \cdot \dots \cdot p_{k}^{a_{k}+1},
+  \]
+  $R(i,s)$ holds if $p_i$ is the largest prime such that
+  $p_i \mid s$, i.e., $i = k$. The length of $s$ thus is $i+1$ iff
+  $p_i$ is the largest prime that divides~$s$, so we can let
+  \[
+  \len{s} =
+  \begin{cases}
+    0 & \text{if $s = 0$ or $s = 1$} \\
+    1 + \bmin{i < s}{R(i, s)} & \text{otherwise}
+  \end{cases}
+  \]
+  We can use bounded minimization, since there is only one $i$ that
+  satisfies $R(s, i)$ when $s$ is a code of a sequence, and if $i$
+  exists it is less than~$s$ itself.
+\end{proof}
+
+\begin{prop}
+  The function $\fn{append}(s,a)$, which returns the result of appending $a$ to
+  the sequence $s$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  $\fn{append}$ can be defined by:
+  \[
+  \fn{append}(s,a) =
+  \begin{cases}
+    2^{a+1} & \text{if $s = 0$ or $s = 1$} \\
+    s \cdot p_{\len{s}}^{a+1} & \text{otherwise.}
+  \end{cases}
+  \]
+\end{proof}
+
+\begin{prop}
+  The function $\fn{element}(s,i)$, which returns the $i$th element of $s$
   (where the initial element is called the $0$th), or $0$ if $i$ is
-  greater than or equal to the length of $s$:
-\[
-\fn{element}(s,i) =
-\begin{cases}
-  0 & \mbox{if $i \geq \len{s}$} \\
-  \fn{min} \; {j < s} \; (p_i^{j+2} \mathrel{\not{\mid}} s) - 1 & \text{otherwise}
-\end{cases}
-\]
-\end{enumerate}
+  greater than or equal to the length of $s$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+Note that $a$ is the $i$th element of~$s$ iff $p_i^{a+1}$ is
+the largest power of~$p_i$ that divides~$s$, i.e., $p_i^{a+1} \mid s$
+but $p_i^{a+2} \nmid s$. So:
+  \[
+  \fn{element}(s,i) =
+  \begin{cases}
+    0 & \mbox{if $i \geq \len{s}$} \\
+    \bmin{a < s}{(p_i^{a+2} \nmid s)} & \text{otherwise.}
+  \end{cases}
+  \]
+\end{proof}
 
 Instead of using the official names for the functions defined above,
 we introduce a more compact notation. We will use $(s)_i$ instead of
@@ -75,12 +116,37 @@ $\fn{element}(s,i)$, and $\tuple{s_0, \dots, s_k}$ to abbreviate
 Note that if $s$ has length~$k$, the elements of $s$ are
 $(s)_0$, \dots,~$(s)_{k-1}$.
 
+\begin{prop}
+The function $\fn{concat}(s,t)$, which concatenates two
+sequences, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  We want a function $\fn{concat}$ with the property that
+  \[
+    \fn{concat}(\tuple{a_0, \dots, a_k}, \tuple{b_0, \dots, b_l}) =
+    \tuple{a_0, \dots, a_k, b_0, \dots, b_l}.
+  \]
+  We'll use a ``helper'' function
+  $\fn{hconcat}(s,t,n)$ which concatenates the first $n$ symbols of $t$
+  to~$s$. This function can be defined by primitive recursion as
+  follows:
+  \begin{align*}
+    \fn{hconcat}(s,t,0) & = s\\
+    \fn{hconcat}(s,t,n+1) & = \fn{append}(\fn{hconcat}(s,t,n),(t)_n)
+    \intertext{Then we can define $\fn{concat}$ by}
+    \fn{concat}(s,t) & = \fn{hconcat}(s,t,\len{t}).
+  \end{align*}
+\end{proof}
+
+We will write $s \concat t$ instead of $\fn{concat}(s,t)$.
+
 It will be useful for us to be able to bound the numeric code of a
 sequence in terms of its length and its largest element. Suppose $s$
-is a sequence of length $k$, each element of which is less than equal
-to some number $x$. Then $s$ has at most $k$ prime factors, each at
-most $p_{k-1}$, and each raised to at most $x+1$ in the prime
-factorization of $s$. In other words, if we define
+is a sequence of length~$k$, each element of which is less than equal
+to some number~$x$. Then $s$ has at most $k$ prime factors, each at
+most~$p_{k-1}$, and each raised to at most $x+1$ in the prime
+factorization of~$s$. In other words, if we define
 \[
 \fn{sequenceBound}(x,k) = p_{k-1}^{k \cdot (x+1)},
 \]
@@ -88,21 +154,11 @@ then the numeric code of the sequence~$s$ described above is at
 most~$\fn{sequenceBound}(x,k)$.
 
 Having such a bound on sequences gives us a way of defining new
-functions using bounded search. For example, suppose we want to
-define the function $\fn{concat}(s,t)$, which concatenates two
-sequences. One first option is to define a ``helper'' function
-$\fn{hconcat}(s,t,n)$ which concatenates the first $n$ symbols of $t$
-to~$s$. This function can be defined by primitive recursion, as
-follows:
-\begin{align*}
-\fn{hconcat}(s,t,0) & = s\\
-\fn{hconcat}(s,t,n+1) & = \fn{append}(\fn{hconcat}(s,t,n),(t)_n)
-\intertext{Then we can define $\fn{concat}$ by}
-\fn{concat}(s,t) & = \fn{hconcat}(s,t,\len{t}).
-\end{align*}
-But using bounded search, we can be lazy. All we need to do is write
-down a primitive recursive \emph{specification} of the object (number)
-we are looking for, and a bound on how far to look. The following works:
+functions using bounded search. For example, we can define
+$\fn{concat}$ using bounded search. All we need to do is write down a
+primitive recursive \emph{specification} of the object (number of the
+concatenated sequence) we are looking for, and a bound on how far to
+look. The following works:
 \begin{align*}
   \fn{concat}(s,t) = {} & \bmin{v < \fn{sequenceBound}(s+t,\len{s} +
     \len{t})}{} \\
@@ -110,14 +166,22 @@ we are looking for, and a bound on how far to look. The following works:
     & \qquad \bforall{i < \len{s}}{((v)_i = (s)_i) \land {} \\
       & \qquad \bforall{j < \len{t}}{((v)_{\len{s}+j} = (t)_j)})}
 \end{align*}
-We will write $s \concat t$ instead of $\fn{concat}(s,t)$.
 
 \begin{prob}
 Show that there is a primitive recursive function~$\fn{sconcat}(s)$
 with the property that
 \[
-\fn{sconcat}(\tuple{s_0, \dots, s_k}) = s_0 \concat \dots \dots \concat s_k.
+\fn{sconcat}(\tuple{s_0, \dots, s_k}) = s_0 \concat \dots \concat s_k.
 \]
+\end{prob}
+
+\begin{prob}
+Show that there is a primitive recursive function~$\fn{tail}(s)$
+with the property that
+\begin{align*}
+  \fn{tail}(\emptyseq) & = 0 \text{ and}\\
+  \fn{tail}(\tuple{s_0, \dots, s_{k}}) & = \tuple{s_1, \dots, s_{k}}.
+\end{align*}
 \end{prob}
 
 \end{document}

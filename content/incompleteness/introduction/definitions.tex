@@ -56,6 +56,20 @@ N$ defined as follows:
 \end{enumerate}
 \end{defn}
 
+Note the difference between $\times$ and $\cdot$: $\times$ is a symbol
+in the language of arithmetic. Of course, we've chosen it to remind us
+of multiplication, but $\times$ is not the multiplication operation
+but a two-place function symbol (officially, $\Obj f^2_1$. By
+contrast, $\cdot$ \emph{is} the ordinary multiplication function. When
+you see something like $n \cdot m$, we mean the product of the numbers
+$n$ and $m$; when you see something like $x \times y$ we are talking
+about a term in the language of arithmetic. In the standard model, the
+function symbol times is interpreted as the function $\cdot$ on the
+natural numbers. For addition, we use $+$ as both the function symbol
+of the language of arithmetic, and the addition function on the
+natural numbers. Here you have to use the context to determine what is
+meant.
+
 \begin{defn}
 The theory of \emph{true arithmetic} is the set of !!{sentence}s
 satisfied in the standard model of arithmetic, i.e.,
@@ -143,10 +157,10 @@ all the truths about~$\Nat$ that can be expressed in~$\Lang L_A$?
 Specifically, do the axioms of $\Th{PA}$ settle all the questions
 that can be formulated in~$\Lang L_A$?
 
-Another way to put this is to ask: Is $\Th{PA} = \Th{TA}$? For
+Another way to put this is to ask: Is $\Th{PA} = \Th{TA}$?
 $\Th{TA}$ obviously does prove (i.e., it includes) all the truths
 about~$\Nat$, and it settles all the questions that can be formulated
-in~$\Lang L_A$, since if $!A$ is a !!{sentence} in $\Lang L_A$, then
+in~$\Lang L_A$, since if $!A$ is !!a{sentence} in $\Lang L_A$, then
 either $\Sat{N}{!A}$ or $\Sat{N}{\lnot !A}$, and so either $\Th{TA}
 \Entails !A$ or $\Th{TA} \Entails \lnot !A$.  Call such a theory
 !!{complete}.
@@ -170,30 +184,22 @@ by defining when a set (e.g., a set of !!{sentence}s) is
 !!{decidable}.
 
 \begin{defn}
-A set $X$ is \emph{!!{decidable}} iff its characteristic function
-$\Char{X} \colon X \to \{0, 1\}$, with
-\[
-\Char{X}(x) =
-\begin{cases}
-1 & \text{if $x \in X$} \\
-0 & \text{if $x \notin X$}
-\end{cases}
-\]
-is computable.
+A set $X$ is \emph{!!{decidable}} iff there is a computational procedure
+which on input~$x$ returns~$1$ if $x \in X$ and $0$ otherwise.
 \end{defn}
 
 So our question becomes: Is $\Th{TA}$ ($\Th{PA}$, $\Th{Q}$) !!{decidable}?
 
 The answer to all these questions will be: no. None of these theories
-are decidable. However, this phenomenon
-is not specific to these particular theories. In fact, \emph{any}
-theory that satisfies certain conditions is subject to the same
-results. One of these conditions, which $\Th{Q}$ and $\Th{PA}$
-satisfy, is that they are axiomatized by !!a{decidable} set of axioms.
+are decidable. However, this phenomenon is not specific to these
+particular theories. In fact, \emph{any} theory that satisfies certain
+conditions is subject to the same results. One of these conditions,
+which $\Th{Q}$ and $\Th{PA}$ satisfy, is that they are axiomatized by
+!!a{decidable} set of axioms.
 
 \begin{defn}
 A theory is \emph{!!{axiomatizable}} if it is axiomatized
-by a !!{decidable} set of axioms.
+by !!a{decidable} set of axioms.
 \end{defn}
 
 \begin{ex}
@@ -266,7 +272,7 @@ function $f\colon \Nat^k \to \Nat$ in~$\Gamma$ iff whenever $f(n_1,
 \begin{enumerate}
 \item $\Gamma \Proves !A(\num{n_1}, \dots, \num{n_k}, \num{m})$, and
 \item $\Gamma \Proves \lforall[y](!A(\num{n_1}, \dots, \num{n_k},
-\num{y}) \lif y = \num{m})$.
+y) \lif y = \num{m})$.
 \end{enumerate}
 \end{defn}
 

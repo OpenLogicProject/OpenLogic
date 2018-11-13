@@ -1,0 +1,91 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: composition
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{com}
+\olsection{Composition}
+
+If $f$ and $g$ are two one-place functions of natural numbers, we can
+compose them: $h(x) = g(f(x)$. The new
+function~$h(x)$ is then defined by \emph{composition} from the
+functions $f$ and~$g$. We'd like to generalize this to functions of
+more than one argument.
+
+Here's one way of doing this: suppose $f$ is a $k$-place function,
+and $g_0$, \dots, $g_{k-1}$ are $k$ functions which are all
+$n$-place. Then we can define a new $n$-place function $h$ as follows:
+\[
+h(x_0, \dots, x_{n-1}) =
+f(g_0(x_0, \dots, x_{n-1}), \dots, g_{k-1}(x_0, \dots, x_{n-1})).
+\]
+If $f$ and all $g_i$ are computable, so is $h$: To compute $h(x_0,
+\dots, x_{n-1})$, first compute the values $y_i = g_i(x_0, \dots,
+x_{n-1})$ for each $i = 0$, \dots,~$k-1$. Then feed these values into
+$f$ to compute $h(x_0, \dots, x_{k-1}) = f(y_0, \dots, y_{k-1})$.
+
+This may seem like an overly restrictive characterization of what
+happens when we compute a new function using some existing ones. For
+one thing, sometimes we do not use all the arguments of a function, as
+when we defined $g(x, y, z) = \Succ(z)$ for use in the primitive
+recursive definition of~$\Add$. Suppose we are allowed use of the
+following functions:
+\[
+\Proj{n}{i}(x_0, \dots, x_{n-1}) = x_i.
+\]
+The functions~$\Proj{k}{i}$ are called \emph{projection} functions:
+$\Proj{n}{i}$ is an $n$-place function. Then $g$ can be defined as
+\[
+g(x, y, z) = \Succ(\Proj{3}{2})
+\]
+Here the role of $f$ is played by the $1$-place function $\Succ$, so
+$k=1$. And we have one $3$-place function $\Proj{3}{2}$ which plays
+the role of $g_0$. The result is a $3$-place function that returns the
+successor of the third argument.
+
+The projection functions also allow us to define new functions by
+reordering or identifying arguments. For instance, the function $h(x)
+= \Add(x, x)$ can be defined as
+\[
+h(x_0) = \Add(\Proj{1}{0}(x_0),\Proj{1}{0}(x_0))
+\]
+Here $k=2$, $n=1$, the role of $f(y_0,y_1)$ is played by $\Add$, and
+the roles of $g_0(x_0)$ and $g_1(x_0)$ are both played
+by~$\Proj{1}{0}(x_0)$, the one-place projection function (aka the
+identity function).
+
+If $f(y_0, y_1)$ is a function we already have, we can define the
+function $h(x_0, x_1) = f(x_1, x_0)$ by
+\[
+h(x_0, x_1) = f(\Proj{2}{1}(x_0, x_1),\Proj{2}{0}(x_0, x_1)).
+\]
+Here $k=2$, $n = 2$, and the roles of $g_0$ and $g_1$ are played by
+$\Proj{2}{1}$ and~$\Proj{2}{0}$, respectively.
+
+You may also worry that $g_0$, \dots,~$g_{k-1}$ are all required
+to have the same arity~$n$. (Remember that the \emph{arity} of a
+function is the number of arguments; an $n$-place function has
+arity~$n$.) But adding the projection functions provides the desired
+flexibility. For example, suppose $f$ and~$g$ are $3$-place functions
+and $h$~is the $2$-place function defined by
+\[
+h(x,y) = f(x,g(x,x,y),y).
+\]
+The definition of~$h$ can be rewritten with the projection
+functions, as
+\[
+h(x,y) = f(\Proj{2}{0}(x,y), g(\Proj{2}{0}(x,y), \Proj{2}{0}(x,y),
+\Proj{2}{1}(x,y)), \Proj{2}{1}(x,y)).
+\]
+Then $h$ is the composition of $f$ with $\Proj{2}{0}$, $l$, and
+$\Proj{2}{1}$, where
+\[
+l(x,y) = g(\Proj{2}{0}(x,y),\Proj{2}{0}(x,y),\Proj{2}{1}(x,y)),
+\]
+i.e., $l$ is the composition of $g$ with $\Proj{2}{0}$, $\Proj{2}{0}$,
+and~$\Proj{2}{1}$.
+
+\end{document}

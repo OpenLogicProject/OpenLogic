@@ -1,0 +1,163 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: pr-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{prf}
+\olsection{Primitive Recursion Functions}
+
+Let us record again how we can define new functions from existing ones
+using primitive recursion and composition.
+
+\begin{defn}
+  \ollabel{defn:primitive-recursion} Suppose $f$ is a $k$-place
+  function ($k\ge 1$) and $g$ is a $(k+2)$-place function. The
+  function defined by \emph{primitive recursion from $f$ and $g$} is
+  the $(k+1)$-place function~$h$ defined by the equations
+  \begin{align*}
+    h(x_0,\dots,x_{k-1},y) & =  f(x_0,\dots,x_{k-1}) \\
+    h(x_0,\dots,x_{k-1},y+1) & = g(x_0,\dots,x_{k-1}, y, h(x_0,\dots,x_{k-1}, y))
+  \end{align*}
+\end{defn}
+
+\begin{defn}
+  \ollabel{defn:composition} Suppose $f$ is a $k$-place function, and
+  $g_0$, \dots, $g_{k-1}$ are $k$ functions which are all
+  $n$-place. The function defined by \emph{composition from $f$ and
+    $g_0$, \dots,~$g_{k-1}$} is the $n$-place function~$h$ defined by
+  \[
+  h(x_0, \dots, x_{n-1}) =
+  f(g_0(x_0, \dots, x_{n-1}), \dots, g_{k-1}(x_0, \dots, x_{n-1})).
+  \]
+\end{defn}
+
+In addition to $\Succ$ and the projection functions
+\[
+\Proj{n}{i}(x_0,\dots,x_{n-1}) = x_i,
+\]
+for each natural number $n$ and $i < n$, we will include among the
+primitive recursive functions the function~$\Zero(x) = 0$.
+
+\begin{defn}
+  The set of primitive recursive functions is the set of functions 
+  from $\Nat^n$ to $\Nat$, defined inductively by the
+  following clauses:
+  \begin{enumerate}
+  \item $\Zero$ is primitive recursive.
+  \item $\Succ$ is primitive recursive.
+  \item Each projection function $\Proj{n}{i}$ is primitive recursive.
+  \item If $f$ is a $k$-place primitive recursive function and $g_0$,
+    \dots,~$g_{k-1}$ are $n$-place primitive recursive functions, then
+    the composition of $f$ with $g_0$, \dots,~$g_{k-1}$ is primitive
+    recursive.
+  \item If $f$ is a $k$-place primitive recursive function and $g$ is
+    a $k+2$-place primitive recursive function, then the function
+    defined by primitive recursion from $f$ and $g$ is primitive
+    recursive.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+Put more concisely, the set of primitive recursive functions is the
+smallest set containing $\Zero$, $\Succ$, and the projection
+functions~$\Proj{n}{j}$, and which is closed under composition and
+primitive recursion.
+
+Another way of describing the set of primitive recursive functions
+keeps track of the ``stage'' at which a function enters the set. Let
+$S_0$ denote the set of starting functions: $\Zero$, $\Succ$, and the
+projections. Once $S_i$ has been defined, let $S_{i+1}$ be the set of
+all functions you get by applying a single instance of composition or
+primitive recursion to functions in~$S_i$. Then
+\[
+S = \bigcup_{i \in \Nat} S_i
+\]
+is the set of all primitive recursive functions
+\end{explain}
+
+Let us verify that $\Add$ is a primitive recursive function.
+
+\begin{prop}
+  The addition function $\Add(x,y) = x+y$ is primitive recursive.
+\end{prop}
+
+\begin{proof}
+We already have a primitive recursive definition of $\Add$ in terms of
+two functions $f$ and~$g$ which matches the format of
+\olref{defn:primitive-recursion}:
+\begin{align*}
+  \Add(x_0, 0) & = f(x_0) = x_0\\
+  \Add(x_0, y+1) & = g(x_0, y, \Add(x_0, y)) =
+  \Succ(\Add(x_0, y))
+\end{align*}
+So $\Add$ is primitive recursive provided $f$ and $g$ are as
+well. $f(x_0) = x_0 = \Proj{1}{0}(x_0)$, and the projection functions
+count as primitive recursive, so $f$ is primitive recursive. The
+function $g$ is the three-place function $g(x_0, y, z)$ defined by
+\[
+g(x_0, y, z) = \Succ(z).
+\]
+This does not yet tell us that $g$ is primitive recursive, since $g$
+and $\Succ$ are not quite the same function: $\Succ$ is one-place, and
+$g$ has to be three-place. But we can define $g$ ``officially'' by
+composition as
+\[
+g(x_0, y, z) = \Succ(\Proj{3}{2}(x_0, y, z))
+\]
+Since $\Succ$ and $\Proj{3}{2}$ count as primitive recursive
+functions, $g$ does as well, since it can be defined by composition
+from primitive recursive functions.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:mult-pr}
+  The multiplication function $\Mult(x,y) = x \cdot y$ is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[cmp][rec][prf]{prop:mult-pr} by showing that the
+  primitive recursive definition of $\Mult$ is can be put into the
+  form required by \olref[cmp][rec][prf]{defn:primitive-recursion} and
+  showing that the corresponding functions $f$ and~$g$ are primitive
+  recursive.
+\end{prob}
+
+\begin{ex}
+Here's our very first example of a primitive recursive definition:
+\begin{align*}
+h(0) & =  1 \\
+h(y+1) & =  2 \cdot h(y).
+\end{align*}
+This function cannot fit into the form required by
+\olref{defn:primitive-recursion}, since $k=0$. The definition also
+involves the constants $1$ and $2$. To get around the first problem,
+let's introduce a dummy argument and define the function~$h'$:
+\begin{align*}
+h'(x_0, 0) & =  f(x_0) = 1 \\
+h'(x_0, y+1) & =  g(x_0, y, h'(x_0, y)) = 2 \cdot h'(x_0, y).
+\end{align*}
+The function $f(x_0) = 1$ can be defined from $\Succ$ and $\Zero$ by
+composition: $f(x_0) = \Succ(\Zero(x_0))$. The function $g$ can be
+defined by composition from $g'(z) = 2 \cdot z$ and projections:
+\begin{align*}
+g(x_0, y, z) & = g'(\Proj{3}{2}(x_0, y, z))
+\intertext{and $g'$ in turn can be defined by composition as}
+g'(z) & = \Mult(g''(z), \Proj{1}{0}(z))
+\intertext{and}
+g''(z) & = \Succ(f(z)),
+\end{align*}
+where $f$ is as above: $f(z) = \Succ(\Zero(z))$. Now that we have $h'$
+we can use composition again to let $h(y) =
+h'(\Proj{1}{0}(y),\Proj{1}{0}(y))$. This shows that $h$ can be defined
+from the basic functions using a sequence of compositions and
+primitive recursions, so $h$ is primitive recursive.
+\end{ex}
+
+\end{document}

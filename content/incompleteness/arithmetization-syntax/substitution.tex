@@ -9,6 +9,12 @@
 \olfileid{inc}{art}{sub}
 \olsection{Substitution}
 
+Recall that substitution is the operation of replacing all free
+occurrences of !!a{variable}~$u$ in !!a{formula}~$!A$ by a term~$t$,
+written $\Subst{!A}{t}{u}$. This operation, when carried out on
+G\"odel numbers of !!{variable}s, !!{formula}s, and terms, is
+primitive recursive.
+
 \begin{prop}\ollabel{prop:subst-primrec}
 There is a primitive recursive function $\fn{Subst}(x, y, z)$ with the
 property that
@@ -26,8 +32,8 @@ follows:
 \fn{hSubst}(x, y, z, i+1) & =
 \end{aligned}\\
 \begin{cases}
-\fn{hSubst}(x, y, z, i) \concat y & \text{if $\fn{FreeOcc}(x, z, i+1)$} \\
-\fn{append}(\fn{hSubst}(x, y, z, i), (x)_{i+1}) & \text{otherwise.}
+\fn{hSubst}(x, y, z, i) \concat y & \text{if $\fn{FreeOcc}(x, z, i)$} \\
+\fn{append}(\fn{hSubst}(x, y, z, i), (x)_{i}) & \text{otherwise.}
 \end{cases}
 \end{multline*}
 $\fn{Subst}(x, y, z)$ can now be defined as $\fn{hSubst}(x, y, z, \len{x})$.

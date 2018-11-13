@@ -1,0 +1,34 @@
+% Part: computability
+% Chapter: recursive-functions
+% Section: noations-pr-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cmp}{rec}{not}
+\olsection{Primitive Recursion Notations}
+
+One advantage to having the precise inductive description of the primitive
+recursive functions is that we can be systematic in describing them.
+For example, we can assign a ``notation'' to each such function, as
+follows. Use symbols $\Zero$, $\Succ$, and $\Proj{n}{i}$ for zero,
+successor, and the projections. Now suppose $f$ is defined by
+composition from a $k$-place function~$h$ and $n$-place functions $g_0$,
+\dots,~$g_{k-1}$, and we have assigned notations $H$, $G_0$,
+\dots,~$G_{k-1}$ to the latter functions. Then, using a new symbol
+$\fn{Comp}_{k,n}$, we can denote the function $f$ by
+$\fn{Comp}_{k,n}[H,G_0,\dots,G_{k-1}]$. For the functions defined by
+primitive recursion, we can use analogous notations of the form
+$\fn{Rec}_k[G,H]$, where $k+1$ is the arity of the function being
+defined. With this setup, we can denote the addition function by
+\[
+\fn{Rec}_2[\Proj{1}{0},\fn{Comp}_{1,3}[\Succ,\Proj{3}{2}]].
+\]
+Having these notations sometimes proves useful.
+
+\begin{prob}
+  Give the complete primitive recursive notation for $\Mult$.
+\end{prob}
+
+\end{document}

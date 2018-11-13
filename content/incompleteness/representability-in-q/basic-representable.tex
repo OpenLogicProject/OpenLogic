@@ -140,7 +140,7 @@ entails $\eq[y][\num{0}]$.
 
 \begin{prop}
 \ollabel{prop:rep-add}
-The addition function $\Add(x_0, x_1) = x_0+x_1$ is is represented
+The addition function $\Add(x_0, x_1) = x_0+x_1$ is represented
 in~$\Th{Q}$ by
 \[
 y = (x_0 + x_1).
@@ -178,7 +178,7 @@ We also have to show that if $\Add(n, m) = k$, then
 \Th{Q} \Proves \lforall[y][(!A_\Add(\num{n}, \num{m}, y) \lif
   \eq[y][\num{k}])].
 \]
-Suppose we have $\eq[\num{n} + \num{m}][y]$. Since
+Suppose we have $\eq[(\num{n} + \num{m})][y]$. Since
 \[
 \Th{Q} \Proves \eq[(\num{n}+\num{m})][\num{n+m}],
 \]
@@ -213,5 +213,19 @@ Use \olref[inc][req][bre]{lem:q-proves-mult} to prove
 \olref[inc][req][bre]{prop:rep-mult}.
 \end{prob}
 
+\begin{explain}
+  Recall that we use $\times$ for the function symbol of the language
+  of arithmetic, and $\cdot$ for the ordinary multiplication operation
+  on numbers. So $\cdot$ can appear between expressions for numbers
+  (such as in $m \cdot n$) while $\times$ appears only between terms
+  of the language of arithmetic (such as in $(\num{m} \times
+  \num{n})$).  EVen more confusingly, $+$ is used for both the
+  !!{function} and the addition operation. When it appears between
+  terms---e.g., in $(\num{n} + \num{m})$---it is the $2$-place
+  !!{function} of the language of arithmetic, and when it appears
+  between numbers---e.g., in $n+m$---it is the operation. This
+  includes the case $\num{n+m}$: this is the standard numeral
+  corresponding to the number~$n+m$.
+\end{explain}
 
 \end{document}

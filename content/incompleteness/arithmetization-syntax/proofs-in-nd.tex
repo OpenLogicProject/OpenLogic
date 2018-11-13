@@ -48,8 +48,8 @@ $k$: & 6 & 7 & 8 & 9 & 10
   if the inference does not !!{discharge} any assumptions.
 
 \begin{tabular}{lcccc}
-\text{Rule:}  & \Intro{\land} & \Elim{\lif} & \Elim{\lnot} \\
-$k$: & 1 & 2 & 3 
+\text{Rule:}  & \Intro{\land} & \Elim{\lif} & \Elim{\lnot} & \Elim{\lexists}\\
+$k$: & 1 & 2 & 3 & 4 
 \end{tabular}
 \item $\tuple{3, \Gn{!A}, n, \Gn{\delta_1}, \Gn{\delta_2},
   \Gn{\delta_3}}$ if $\delta$ ends in an \Elim{\lor} inference.
@@ -63,24 +63,24 @@ $k$: & 1 & 2 & 3
 \begin{ex}
   Consider the very simple derivation
   \begin{prooftree}
-    \AxiomC{$\Discharge{(!A \land !B)}{1}$}
+    \AxiomC{$\Discharge{!A \land !B}{1}$}
     \RightLabel{\Elim{\land}}
-    \UnaryInfC{$!A!$}
+    \UnaryInfC{$!A$}
     \DischargeRule{\Intro{\lif}}{1}
-    \UnaryInfC{$(!A \lif !B)$}
+    \UnaryInfC{$(!A \land B) \lif !B$}
   \end{prooftree}
   The G\"odel number of the assumption would be $d_0 = \tuple{0,
-    \Gn{(!A \land !B)}, 1}$.  The G\"odel number of the derivation
+    \Gn{!A \land !B}, 1}$.  The G\"odel number of the derivation
   ending in the conclusion of~$\Elim{\land}$ would be $d_1 = \tuple{1,
     \Gn{!A}, 0, 1, d_0}$ ($1$ since $\Elim{\land}$ has one premise,
   G\"odel number of conclusion~$!A$, $0$ because no assumption is
   discharged, $1$ is the number coding $\Elim{\land}$). The G\"odel
-  number of the entire derivation then is $\tuple{1, \Gn{(!A \lif
-      !B)}, 1, 3, d_1}$, i.e.,
+  number of the entire derivation then is $\tuple{1, \Gn{(!A \land !B) \lif
+      !A}, 1, 3, d_1}$, i.e.,
   \[
-  2^2\cdot 3^{\Gn{(!A \lif !B)}+1}\cdot 5^2\cdot 7^4\cdot
+  2^2\cdot 3^{\Gn{(!A \land !B) \lif A}+1}\cdot 5^2\cdot 7^4\cdot
   11^{(2^2\cdot 3^{\Gn{!A}+1}\cdot 5^1 \cdot 7^2 \cdot
-    11^{(2^1\cdot 3^{\Gn{(!A \land !B)}+1} \cdot 5^2)})}.
+    11^{(2^1\cdot 3^{\Gn{!A \land !B}+1} \cdot 5^2)})}.
   \]
 \end{ex}
 

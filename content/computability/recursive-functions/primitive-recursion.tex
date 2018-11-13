@@ -9,206 +9,124 @@
 \olfileid{cmp}{rec}{pre}
 \olsection{Primitive Recursion}
 
-\begin{explain}
-Suppose we specify that a certain function $l$ from $\Nat$ to $\Nat$
-satisfies the following two clauses:
-\begin{eqnarray*}
-l(0) & = & 1 \\
-l(x+1) & = & 2 \cdot l(x).
-\end{eqnarray*}
-It is pretty clear that there is only one function, $l$, that meets
-these two criteria. This is an instance of a \emph{definition by
-  primitive recursion}. We can define even more fundamental functions
-like addition and multiplication by
-\begin{eqnarray*}
-f(x,0) & = & x \\
-f(x,y+1) & = & f(x,y)+1
-\end{eqnarray*}
-and
-\begin{eqnarray*}
-g(x,0) & = & 0 \\
-g(x,y+1) & = & f(g(x,y),x).
-\end{eqnarray*}
-Exponentiation can also be defined recursively, by
-\begin{eqnarray*}
-h(x,0) & = & 1 \\
-h(x,y+1) & = & g(h(x,y),x).
-\end{eqnarray*}
-We can also compose functions to build more complex ones; for example,
-\begin{eqnarray*}
-k(x) & = & x^x + (x + 3) \cdot x \\
-& = & f(h(x,x),g(f(x,3),x)).
-\end{eqnarray*}
+A characteristic of the natural numbers is that every natural number
+can be reached from~$0$ by applying the successor operation~``$+1$''
+finitely many times---any natural number is either~$0$ or the
+successor of \dots the successor of~$0$. One way to specify a
+function~$f\colon\Nat \to \Nat$ that makes use of this fact is this:
+(a)~specify what the value of $f$ is for argument~$0$, and (b)~also
+specify how to, given the value of $f(x)$, compute the value of
+$f(x+1)$. For (a) tells us directly what $f(0)$ is, so $f$ is defined
+for~$0$. Now, using the instruction given by (b) for $x=0$, we can
+compute $f(1) = f(0+1)$ from $f(0)$. Using the same instructions for
+$x=1$, we compute $f(2) = f(1+1)$ from $f(1)$, and so on. For every
+natural number $x$, we'll eventually reach the step where we define
+$f(x)$ from $f(x+1)$, and so $f(x)$ is defined for all $x \in \Nat$.
 
-Let $\Zero(x)$ be the function that always returns~$0$, regardless of
-what $x$~is, and let $\Succ(x) = x+1$ be the successor function.  The
-set of \emph{primitive recursive functions} is the set of functions
-from $\Nat^n$ to $\Nat$ that you get if you start with $\Zero$ and
-$\Succ$ by iterating the two operations above, primitive recursion and
-composition. The idea is that primitive recursive functions are
-defined in a straightforward and explicit way, so that it is
-intuitively clear that each one can be computed using finite means.
-\end{explain}
-
-\begin{defn}
-If $f$ is a $k$-place function and $g_0$, \dots,~$g_{k-1}$ are $l$-place
-functions on the natural numbers, the \emph{composition} of $f$ with
-$g_0$, \dots,~$g_{k-1}$ is the $l$-place function $h$ defined by
-\[
-h(x_0,\dots,x_{l-1}) =
-f(g_0(x_0,\dots,x_{l-1}),\dots,g_{k-1}(x_0,\dots,x_{l-1})) .
-\]
-\end{defn}
-
-\begin{defn}
-If $f$ is a $k$-place function and
-$g$ is a $(k+2)$-place function, then the function
-defined by \emph{primitive recursion from $f$ and $g$} is the
-$(k+1)$-place function~$h$ defined by the equations
-\begin{eqnarray*}
-h(0,z_0,\dots,z_{k-1}) & = & f(z_0,\dots,z_{k-1}) \\
-h(x+1,z_0,\dots,z_{k-1}) & = & g(x,h(x,z_0,\dots,z_{k-1}),z_0,\dots,z_{k-1})
-\end{eqnarray*}
-\end{defn}
-
-In addition to $\Zero$ and $\Succ$, we will include among primitive
-recursive functions the projection functions,
-\[
-\Proj{n}{i}(x_0,\dots,x_{n-1}) = x_i,
-\]
-for each natural number $n$ and $i < n$. These are not terribly
-exciting in themselves: $\Proj{n}{i}$ is simply the $k$-place function
-that always returns its $i$th argument. But the allow us to define new
-functions by disregarding arguments or switching arguments, as we'll
-see later.
-
-In the end, we have the following:
-
-\begin{defn}
-  The set of primitive recursive functions is the set of functions 
-  from $\Nat^n$ to $\Nat$, defined inductively by the
-  following clauses:
-\begin{enumerate}
-\item $\Zero$ is primitive recursive.
-\item $\Succ$ is primitive recursive.
-\item Each projection function $\Proj{n}{i}$ is primitive recursive.
-\item If $f$ is a $k$-place primitive recursive function and
-  $g_0$, \dots,~$g_{k-1}$ are $l$-place primitive recursive functions, then
-  the composition of $f$ with $g_0$, \dots,~$g_{k-1}$ is primitive
-  recursive.
-\item If $f$ is a $k$-place primitive recursive function and $g$ is a
-  $k+2$-place primitive recursive function, then the function defined by
-  primitive recursion from $f$ and $g$ is primitive recursive.
-\end{enumerate}
-\end{defn}
-
-\begin{explain}
-Put more concisely, the set of primitive recursive functions is the
-smallest set containing $\Zero$, $\Succ$, and the projection
-functions~$\Proj{n}{j}$, and which is closed under composition and
-primitive recursion.
-
-Another way of describing the set of primitive recursive functions
-keeps track of the ``stage'' at which a function enters the set. Let
-$S_0$ denote the set of starting functions: $\Zero$, $\Succ$, and the
-projections. Once $S_i$ has been defined, let $S_{i+1}$ be the set of
-all functions you get by applying a single instance of composition or
-primitive recursion to functions in~$S_i$. Then
-\[
-S = \bigcup_{i \in \Nat} S_i
-\]
-is the set of all primitive recursive functions
-\end{explain}
-
-Our definition of composition may seem too rigid, since $g_0$,
-\dots,~$g_{k-1}$ are all required to have the same
-arity~$l$. (Remember that the \emph{arity} of a function is the number
-of arguments; an $l$-place function has arity~$l$.) But adding the
-projection functions provides the desired flexibility. For example,
-suppose $f$ and~$g$ are $3$-place functions and $h$~is the $2$-place
-function defined by
-\[
-h(x,y) = f(x,g(x,x,y),y).
-\]
-The definition of~$h$ can be rewritten with the projection
-functions, as
-\[
-h(x,y) = f(\Proj{2}{0}(x,y), g(\Proj{2}{0}(x,y), \Proj{2}{0}(x,y),
-\Proj{2}{1}(x,y)), \Proj{2}{1}(x,y)).
-\]
-Then $h$ is the composition of $f$ with $\Proj{2}{0}$, $l$, and
-$\Proj{2}{1}$, where
-\[
-l(x,y) = g(\Proj{2}{0}(x,y),\Proj{2}{0}(x,y),\Proj{2}{1}(x,y)),
-\]
-i.e., $l$ is the composition of $g$ with $\Proj{2}{0}$, $\Proj{2}{0}$,
-and~$\Proj{2}{1}$.
-
-For another example, let us again consider addition. This is
-described recursively by the following two equations:
-\begin{eqnarray*}
-x + 0 & = & x \\
-x + (y+1) & = & \Succ(x+y).
-\end{eqnarray*}
-In other words, addition is the function $\Add$ defined recursively by
-the equations
-\begin{eqnarray*}
-\Add(0,x) & = & x \\
-\Add(y+1,x) & = & \Succ(\Add(y,x)).
-\end{eqnarray*}
-But even this is not a strict primitive recursive definition; we need
-to put it in the form
-\begin{eqnarray*}
-\Add(0,x) & = & f(x) \\
-\Add(y+1,x) & = & g(y,\Add(y,x),x)
-\end{eqnarray*}
-for some $1$-place primitive recursive function~$f$ and some $3$-place
-primitive recursive function~$g$. We can take $f$ to be $\Proj{1}{0}$, and
-we can define~$g$ using composition,
-\[
-g(y,w,x) = \Succ(\Proj{3}{1}(y,w,x)).
-\]
-The function~$g$, being the composition of basic primitive recursive
-functions, is primitive recursive; and hence so is~$h$. (Note that,
-strictly speaking, we have defined the function $g(y, x)$ meeting the
-recursive specification of $x + y$; in other words, the variables are
-in a different order. Luckily, addition is commutative, so here the
-difference is not important; otherwise, we could define the
-function~$g'$ by
-\[
-g'(x,y) = g(\Proj{2}{1}(y,x)),\Proj{2}{0}(y,x)) = g(y,x),
-\]
-using composition.
-
-\begin{explain}
-One advantage to having the precise description of the primitive
-recursive functions is that we can be systematic in describing them.
-For example, we can assign a ``notation'' to each such function, as
-follows. Use symbols $\Zero$, $\Succ$, and $\Proj{n}{i}$ for zero,
-successor, and the projections. Now suppose $f$ is defined by
-composition from a $k$-place function~$h$ and $l$-place functions $g_0$,
-\dots,~$g_{k-1}$, and we have assigned notations $H$, $G_0$,
-\dots,~$G_{k-1}$ to the latter functions. Then, using a new symbol
-$\fn{Comp}_{k,l}$, we can denote the function $f$ by
-$\fn{Comp}_{k,l}[H,G_0,\dots,G_{k-1}]$. For the functions defined by
-primitive recursion, we can use analogous notations of the form
-$\fn{Rec}_k[G,H]$, where $k$ denotes that arity of the function being
-defined. With this setup, we can denote the addition function by
-\[
-\fn{Rec}_2[\Proj{1}{0},\fn{Comp}_{1,3}[\Succ,\Proj{3}{1}]].
-\]
-Having these notations sometimes proves useful.
-\end{explain}
-
-\begin{prob}
-Multiplication satisfies the recursive equations
+For instance, suppose we specify $h\colon \Nat \to \Nat$ by the following
+two equations:
 \begin{align*}
-  0 \cdot y & = y\\
-  (x+1) \cdot y & = (x \cdot y) + x
+h(0) & =  1 \\
+h(x+1) & =  2 \cdot h(x).
 \end{align*}
-Give the explicit precise definition of the function $\Mult(x, y) =
-x\cdot y$, assuming that $\Add(x, y) = x + y$ is already defined. Give
-the complete notation for $\Mult$.
-\end{prob}
+If we already know how to multiply, then these equations give us the
+information required for (a) and (b) above. Successively the second
+equation, we get that
+\begin{align*}
+  h(1) & = 2\cdot h(0) = 2,\\
+  h(2) & = 2\cdot h(1) = 2\cdot 2,\\
+  h(3) & = 2 \cdot h(2) = 2\cdot 2 \cdot 2,\\
+  & \vdots
+\end{align*}
+We see that the function~$h$ we have specified is $h(x) = 2^x$.
+
+The characteristic feature of the natural numbers guarantees that
+there is only one function~$d$ that meets these two criteria.  A pair
+of equations like these is called a \emph{definition by primitive
+  recursion} of the function~$d$. It is so-called because we define
+$f$ ``recursively,'' i.e., the definition, secifically the second
+equation, involves $f$ itself on the right-hand-side. It is
+``primitive'' because in defining $f(x+1)$ we only use the value
+$f(x)$, i.e., the immediately preceding value. This is the simplest
+way of defining a function on $\Nat$ recursively.
+
+We can define even more fundamental functions like addition and
+multiplication by primitive recursion. In these cases, however, the
+functions in question are $2$-place. We fix one of the argument
+places, and use the other for the recursion. E.g, to define
+$\Add(x, y)$ we can fix $x$ and define the value first for $y=0$
+and then for $y+1$ in terms of~$y$. Since $x$ is fixed, it will appear
+on the left and on the right side of the defining equations.
+\begin{align*}
+\Add(x,0) & =  x \\
+\Add(x,y+1) & =  \Add(x,y)+1
+\end{align*}
+These equations specify the value of $\Add$ for all $x$
+\emph{and}~$y$. To find $\Add(2,3)$, for instance, we apply the
+defining equations for $x = 2$, using the first to find
+$\Add(2,0) = 2$, then using the second to successively find
+$\Add(2,1) = 2 + 1 = 3$, $\Add(2, 2) = 3 + 1 = 4$, $\Add(2,
+3) = 4 + 1 = 5$.
+
+In the definition of $\Add$ we used $+$ on the right-hand-side of
+the second equation, but only to add~$1$. In other words, we used the
+successor function $\Succ(z) = z+1$ and applied it to the previous value
+$\Add(x,y)$ to define $\Add(x,y+1)$. So we can think of the
+recursive definition as given in terms of a single function which we
+apply to the previous value. However, it doesn't hurt---and sometimes
+is necessary---to allow the function to depend not just on the previous
+value but also on $x$ and~$y$. Consider:
+\begin{align*}
+  \Mult(x,0) & =  0 \\
+  \Mult(x,y+1) & =  \Add(\Mult(x,y),x).
+\end{align*}
+This is a primitive recursive definition of a function $\Mult$ by
+applying the function $\Add$ to both the preceding value
+$\Mult(x,y)$ and the first argument~$x$. It also defines the
+function~$\Mult(x,y)$ for all arguments $x$ and~$y$. For instance,
+$\Mult(2,3)$ is determined by successively computing $\Mult(2,0)$,
+$\Mult(2,1)$, $\Mult(2,2)$, and~$\Mult(2,3)$:
+\begin{align*}
+  \Mult(2,0) & = 0\\
+  \Mult(2,1) & = \Mult(2,0+1) =
+  \Add(\Mult(2,0), 2) = \Add(0, 2) = 2\\
+  \Mult(2,2) & = \Mult(2,1+1) =
+  \Add(\Mult(2,1), 2) = \Add(2, 2) = 4\\
+  \Mult(2,3) & = \Mult(2,2+1) =
+  \Add(\Mult(2,2), 2) = \Add(4, 2) = 6.
+\end{align*}
+
+The general pattern then is this: to give a primitive recursive
+definition of a function~$h(x_0, \dots, x_k, y)$, we provide two
+equations. The first defines the value of $h(x_0, \dots, x_k, 0)$
+without reference to~$f$. The second defines the value of $h(x_0,
+\dots, x_k, y+1)$ in terms of $h(x_0, \dots, x_k, y)$, the other
+arguments $x_0$, \dots,~$x_k$, and~$y$. Only the immediately preceding
+value of~$h$ may be used in that second equation.  If we think of the
+operations given by the right-hand-sides of these two equations as
+themselves being functions $f$ and~$g$, then the pattern to define a
+new function~$h$ by primitive recursion is this:
+\begin{align*}
+  h(x_0, \dots, x_k, 0) & = f(x_0, \dots, x_k)\\
+  h(x_0, \dots, x_k, y+1) & =
+  g(x_0, \dots, x_k, y, h(x_0, \dots, x_k, y)).
+\end{align*}  
+In the case of $\Add$, we have $k=0$ and $f(x_0) = x_0$ (the
+identity function), and $g(x_0, y, z) = z + 1$ (the $3$-place function
+that returns the successor of its third argument):
+\begin{align*}
+  \Add(x_0, 0) & = f(x_0) = x_0\\
+  \Add(x_0, y+1) & = g(x_0, y, \Add(x_0, y)) =
+  \Succ(\Add(x_0, y))
+\end{align*}
+In the case of $\Mult$, we have $f(x_0) = 0$ (the constant
+function always returning~$0$) and $g(x_0, y, z) = \Add(z,x_0)$
+(the $3$-place function that returns the sum of its first and last
+argument):
+\begin{align*}
+  \Mult(x_0,0) & =  f(x_0) = 0 \\
+  \Mult(x_0,y+1) & =  g(x_0, y, \Mult(x_0,y)) =
+  \Add(\Mult(x_0,y), x_0).
+\end{align*}
 
 \end{document}

@@ -16,61 +16,50 @@ this function simply by trying out all the possible numbers, $0$, $1$,
 $2$, \dots, until we find the least one satisfying~$P$.  This kind of
 unbounded search takes us out of the realm of primitive recursive
 functions. However, if we're only interested in the least number
-\emph{less than some indipendently given bound}, we stay primitive
+\emph{less than some independently given bound}, we stay primitive
 recursive. In other words, and a bit more generally, suppose we have a
 primitive recursive relation~$R(x,z)$. Consider the function that maps
-$y$ and~$z$ to the least $x < y$ such that $R(x, z)$. It, too, can be
-computed, by testing whether $R(0,z)$, $R(1, z)$, \dots, $R(y-1,z)$.
+$x$ and~$y$ to the least $z < y$ such that $R(x, z)$. It, too, can be
+computed, by testing whether $R(x, 0)$, $R(x, 1)$, \dots, $R(x, y-1)$.
 But why is it primitive recursive?
 \end{explain}
 
 \begin{prop}
-If $R(x, \vec z)$ is primitive recursive, so is the function $m_R(y,
-\vec{z})$ which returns the least~$x$ less than~$y$ such that
-$R(x,\vec{z})$ holds, if there is one, and $0$ otherwise.  We will write
-the function~$m_R$ as
+If $R(\vec x, z)$ is primitive recursive, so is the function
+$m_R(\vec{x}, y)$ which returns the least~$z$ less than~$y$ such that
+$R(\vec x, z)$ holds, if there is one, and $y$ otherwise.  We will
+write the function~$m_R$ as
 \[
-\bmin{x < y}{R(x, \vec{z})},
+\bmin{z < y}{R(\vec{x}, z)},
 \]
 \end{prop}
 
 \begin{proof}
-Note than there can be no~$x < 0$ such that $R(x, \vec{z})$ since
-there is no $x < 0$ at all.  So $m_R(x, 0) = 0$.
+Note than there can be no~$z < 0$ such that $R(\vec{x}, z)$ since
+there is no $z < 0$ at all.  So $m_R(\vec x, 0) = 0$.
 
-In case the bound is $y + 1$ we have three cases: (a) There is an $x <
-y$ such that $R(x, \vec{z})$, in which case $m_R(y+1, \vec{z}) =
-m_R(y, \vec{z})$. (b) There is no such~$x$ but $R(y, \vec{z})$ holds, then
-$m_R(y+1, \vec{z}) = y$. (c) There is no $x < y+1$ such that $R(x,
-\vec{z})$, then $m_R(y+1,\vec{z}) = 0$. So,
+In case the bound is of the form $y + 1$ we have three cases: (a)
+There is a $z < y$ such that $R(\vec{x}, z)$, in which case
+$m_R(\vec{x}, z) = m_R(\vec{x}, y)$. (b) There is no such~$z<y$ but
+$R(\vec{x}, y)$ holds, then $m_R(\vec x, y+1) = y$. (c) There is no $z
+< y+1$ such that $R(\vec{x}, z)$, then $m_R(\vec{z}, y+1) = y+1$.
+Note that there is a $z<y$ such that $R(\vec x, z)$ iff $m_R(\vec x,
+y) \neq y$.  So,
 \begin{align*}
-m_R(0, \vec{z}) & = 0\\
-m_R(y+1, \vec{z}) & =
+m_R(\vec{x}, 0) & = 0\\
+m_R(\vec{x}, y+1) & =
 \begin{cases}
-m_R(y, \vec{z}) & \text{if $\bexists{x < y}{R(x, \vec{z})}$} \\
-y & \text{otherwise, provided $R(y, \vec{z})$}\\
-0 & \text{otherwise.}
+m_R(\vec{z}, y) & \text{if $m_R(\vec x, y) \neq y$}\\
+y & \text{if $m_R(\vec x, y) = y$ and $R(\vec{x}, y)$}\\
+y+1 & \text{otherwise.}
 \end{cases}
 \end{align*}
 \end{proof}
 
-\begin{explain}
-The choice of ``$0$ otherwise'' is somewhat arbitrary. It is in fact
-even easier to recursively define the function~$m'_R$ which returns
-the least $x$ less than $y$ such that $R(x,\vec z)$ holds, and $y+1$
-otherwise.  When we use $\fn{min}$, however, we will always know that
-the least $x$ such that $R(x, \vec z)$ exists and is less
-than~$y$. Thus, in practice, we will not have to worry about the
-possibility that if $\bmin{x<y}{R(x, \vec{z})} = 0$ we do not know if that
-value indicates that $R(0, \vec z)$ or that for no $x < y$, $R(x, \vec
-z)$. As with bounded quantification, $\bmin{x \leq y}{\dots}$
-can be understood as $\bmin{x < y + 1}{\dots}$.
-\end{explain}
-
 \begin{prob}
-Suppose $R(x, \vec z)$ is primitive recursive. Define the function
-$m'_R(y, \vec{z})$ which returns the least~$x$ less than~$y$ such that
-$R(x,\vec{z})$ holds, if there is one, and $y+1$ otherwise, by
+Suppose $R(\vec x, z)$ is primitive recursive. Define the function
+$m'_R(\vec{x}, y)$ which returns the least~$z$ less than~$y$ such that
+$R(\vec{x}, z)$ holds, if there is one, and $0$ otherwise, by
 primitive recursion from~$\Char{R}$.
 \end{prob}
 
