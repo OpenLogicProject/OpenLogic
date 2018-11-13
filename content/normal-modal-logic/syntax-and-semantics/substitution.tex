@@ -42,22 +42,22 @@ therefore is useful to define the notion precisely.
         !C)}{$\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
           \subst{!D_n}{p_n}}$ is
         \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \land
-          \SSubst{!D}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
     \tagitem{prvOr}{\indcase{!A}{(!B \lor
           !C)}{$\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
           \subst{!D_n}{p_n}}$ is
         \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \lor
-          \SSubst{!D}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
     \tagitem{prvIf}{\indcase{!A}{(!B \lif
           !C)}{$\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
           \subst{!D_n}{p_n}}$ is
         \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \lif
-          \SSubst{!D}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
     \tagitem{prvIf}{\indcase{!A}{(!B \liff
           !C)}{$\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
           \subst{!D_n}{p_n}}$ is
         \[(\SSubst{!B}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}} \liff
-          \SSubst{!D}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
+          \SSubst{!C}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}).\]}}{}
     \item \indcase{!A}{\Box !B}{%
         $\SSubst{\indfrm}{\subst{!D_1}{p_1}, \dots, \subst{!D_n}{p_n}}$ is
         $\Box
@@ -74,7 +74,7 @@ therefore is useful to define the notion precisely.
 
 \begin{ex}
   Suppose $!A$ is $p_1 \lif \Box(p_1 \land p_2)$, $!D_1$ is
-  $\Diamond(p_2 \lif p_3)$ and $D_2$ is $\lnot\Box p_1$. Then
+  $\Diamond(p_2 \lif p_3)$ and $!D_2$ is $\lnot\Box p_1$. Then
   $\SSubst{!A}{\subst{!D_1}{p_1}, \subst{!D_2}{p_2}}$ is
   \begin{align*}
     \Diamond(p_2 \lif p_3) &
@@ -85,14 +85,16 @@ therefore is useful to define the notion precisely.
     \intertext{Note that simultaneous substitution is in general not
       the same as iterated substitution, e.g., compare
       $\SSubst{!A}{\subst{!D_1}{p_1}, \subst{!D_2}{p_2}}$ above with
-      $\Subst{\Subst{!A}{!D_1}{p_1}}{!D_2}{p_2}$:}
+      $\Subst{(\Subst{!A}{!D_1}{p_1})}{!D_2}{p_2}$, which is:}
+    \Diamond(p_2 \lif p_3) & \Subst{\lif \Box(\Diamond(p_2 \lif p_3) \land p_2)}{\lnot\Box p_1}{p_2}, \text{ i.e.,}\\
     \Diamond(\lnot\Box p_1 \lif p_3) &
     \lif \Box(\Diamond(\lnot\Box p_1
     \lif p_3) \land \lnot\Box p_1)\\
-    \intertext{and with $\Subst{\Subst{!A}{!D_2}{p_2}}{!D_1}{p_1}$:}
-    \Diamond(\lnot\Box p_1 \lif p_3) &
-    \lif \Box(\Diamond(\lnot\Box p_1
-    \lif p_3) \land \lnot\Box\Diamond(\lnot\Box p_1 \lif p_3))
+    \intertext{and with $\Subst{(\Subst{!A}{!D_2}{p_2})}{!D_1}{p_1}$:}
+    p_1 & \lif \Subst{\Box(p_1 \land \lnot\Box p_1)}{\Diamond(p_2 \lif p_3)}{p_1}, \text{ i.e.,}\\
+    \Diamond(p_2 \lif p_3) &
+    \lif \Box(\Diamond(p_2
+    \lif p_3) \land \lnot\Box\Diamond(p_2 \lif p_3)).
   \end{align*}
 \end{ex}
 
