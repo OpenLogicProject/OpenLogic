@@ -1,29 +1,29 @@
 % Part: lambda-calculus
-% Chapter: representability
-% Section: list
+% Chapter: lambda-definability
+% Section: lists
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{lam}{rep}{lst}
-\olsection{List}
+\olfileid{lam}{ldf}{lst}
+\olsection{Lists}
 
 The list $[M_1, M_2, \ldots, M_n]$ can be defined to be:
-\begin{align*}
-  [M_1, M_2, \ldots, M_n] &\eqs \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
-\end{align*}
-
-Informally speaking it is the accumulator of the list, in the sense
-that it is a function accepting two terms; the first is a function that receives accumulated value
-along with a new element and returns the new accumulated value; the
-second is the initial accumulated value; it accumulate elements one by
-one and finally returns the result.
+\[
+  [M_1, M_2, \ldots, M_n] \eqs \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
+\]
+Informally speaking, the term representing a list is the
+``accumulator'' function of the list: a function that accepts two
+terms; the first is a function that receives accumulated value along
+with a new element and returns the new accumulated value; the second
+is the initial accumulated value; it accumulates elements one by one
+and finally returns the result.
 
 \begin{digress}
-  Readers familiar with functional programming should find the
-  definition similar to \emph{right fold}. And yes, a list is defined
-  to the right fold function of the elements it contains.
+  If you are familiar with functional programming you will find the
+  definition similar to the \emph{right fold}: a list is defined as
+  the right fold function of the elements it contains.
 \end{digress}
 
 We can easily define some useful functions based on this encoding; 

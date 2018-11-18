@@ -1,0 +1,125 @@
+% Part: lambda-calculus
+% Chapter: lambda-definablity
+% Section: arithmetical-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{rep}{arf}
+\olsection{\usetoken{S}{lambda definable} Arithmetical Functions}
+
+\begin{prop}
+  \ollabel{prop:succ-ld}
+  The successor function~$\Succ$ is !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+A term that !!{lambda define}s the successor function is
+\begin{align*}
+  \fn{Succ} & \eqs \lambd[a][\lambd[fx][f ({a} f x)]]
+  \intertext{$\fn{Succ}$ is a function that accepts as argument a
+    number~$a$, and evaluates to another function, $\lambd[fx][f ({a}
+      f x)]$. That function is not itself a Church numeral. However,
+    if the argument $a$ is a Church numeral, it reduces to one. Consider:}
+   (\lambd[n][\lambd[fx][f ({n} f x)]])\,\num{n} & \redone
+   \lambd[fx][f ({\num{n}} f x)]
+   \intertext{The embedded term $\num{n}fx$ is a redex, since
+     $\num{n}$ is $\lambd[fx][f^nx]$. So $\num{n}fx \redone f^nx$ and
+     so, for the entire term we have}
+   \fn{Succ}\, \num n & \red \lambd[fx][f(f^n(x))]
+\end{align*}
+i.e., $\num{n+1}$.
+\end{proof}
+
+\begin{prob}
+  The term 
+  \begin{align*}
+    \fn{Succ}' &\eqs \lambd[{n}][\lambd[fx][{n} f (f x)]]
+  \end{align*}
+  !!{lambda define}s the successor function. Explain why.
+\end{prob}
+
+\begin{prop}
+  \ollabel{prop:add-ld}
+  The addition function~$\Add$ is !!{lambda definable}.
+\end{prop}
+
+\begin{proof}
+Addition is !!{lambda define}d by the terms  
+\begin{align*}
+  \fn{Add} &\eqs \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
+\intertext{or, alternatively,}
+  \fn{Add}' &\eqs \lambd[{a}{b}][{a}\, \fn{Succ} \, {b}]
+\intertext{The first addition works as follows: $\fn{Add}$ first
+  accept two numbers ${a}$ and ${b}$. The result is a function that
+  accepts $f$ and $x$ and returns $af(bfx)$. If $a$ and $b$ are Church
+  numerals $\num{n}$ and $\num{m}$, this reduces to $f^{n+m}(x)$,
+  which is identical to $f^{n}(f^{m}(x))$. Or, slowly:}
+  (\lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]])\num n\,\num m & \redone
+  \lambd[fx][\num{n}\, f (\num {m}\, f x)] \\
+  & \redone \lambd[fx][\num{n}\, f (f^m x)] \\
+  & \redone \lambd[fx][f^n (f^m x)] \eqs \num {n+m}
+\intertext{The second representation of addition $\fn{Add'}$ works
+  differently: Applied to two Church numerals $\num{n}$ and
+  $\num{m}$,}
+\fn{Add}' \num n \,\num m
+& \redone \num{n}\, \fn{Succ}\, \num{m}.
+\intertext{But $\num{n} f x$ always reduces to $f^n(x)$. So $\num{n}\,
+  \fn{Succ}\, \num{m}$ reduces to}
+\fn{Succ}^n(\num{m}).
+\end{align*}
+And since $\fn{Succ}$ !!{lambda define}s the successor function, and the
+successor function applied $n$ times to~$m$ gives $n+m$, this in turn
+reduces to~$\num{n+m}$.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:mult-ld}
+  Multiplication is !!{lambda definable} by the term
+  \[
+  \fn{Mult} \eqs \lambd[ab][\lambd[fx][a (b f) x]]
+  \]
+\end{prop}
+
+\begin{proof}
+  To see how this works, suppose we apply $\fn{Mult}$ to Church numerals
+  $\num{n}$ and $\num{m}$: $\fn{Mult} \, \num{n} \, \num{m}$ reduces to
+  $\lambd[fx][\num{n}(\num{m}\, f)x]$.  The term $\num{m} f$ defines a
+  function which applies $f$ to its argument $m$ times. Consequently,
+  $\num{n} (\num{m} f) x$ applies the function ``apply $f$ $m$ times''
+  itself $n$ times to~$x$. In other words, we apply $f$ to $x$, $n\cdot
+  m$ times. But the resulting normal term is just the Church numeral
+  $\num{nm}$.
+\end{proof}
+
+We can actually simplify this term further by $\eta$-reduction:
+\[
+  \fn{Mult} \eqs \lambd[ab][\lambd[f][a (b f)]]
+\]
+
+\begin{prob}
+Multiplication can be !!{lambda define}d by the term
+\[
+  \fn{Mult}' \eqs \lambd[ab][a (\fn{Add}\, a) \num{0}]
+\]
+Explain why this works.
+\end{prob}
+
+The definition of exponentiation as a $\lambd$-term is
+surprisingly simple:
+\[
+  \fn{Exp} \eqs \lambd[be][e b]
+\]
+The first argument $b$ is the base and the second~$e$ is the exponent.
+Intuitively, $e f$ is $f^e$ by our encoding of numbers. If you find it
+hard to understand, we can still define exponentiation also by
+iterated multiplication:
+\[
+  \fn{Exp}' \eqs \lambd[be][e (\fn{mult}\, b) \num{1}]
+\]
+
+Predecessor and subtraction on Church numeral is not as simple as we
+might think: it requires encoding of pairs.
+
+\end{document}

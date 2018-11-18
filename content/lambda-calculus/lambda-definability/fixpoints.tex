@@ -1,0 +1,98 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: fixpoints
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{fp}
+
+\olsection{Fixpoints}
+
+Suppose we wanted to define the factorial function by recursion as a
+term $\fn{Fac}$ with the following property:
+\[
+\fn{Fac} \eqs \lambd[n][\fn{IsZero}\, n\, \num 1 (\fn{Mult}\, n (\fn{Fac}(\fn{Pred} \, n)))]
+\]
+That is, the factorial of $n$ is $1$ if $n = 0$, and $n$ times the
+factorial of $n-1$ otherwise.  Of course, we cannot define the term
+$\fn{Fac}$ this way since $\fn{Fac}$ itself occurs in the right-hand
+side. Such recursive definitions involving self-reference
+are not part of lambda calculus. Defining a term, e.g., by
+\[
+\fn{Mult} \eqs \lambd[ab][a (\fn{Add}\, a) 0]
+\]
+only involves previosuly defined terms in the right-hand side, such as
+$\fn{Add}$. We can always remove $\fn{Add}$ by replacing it with its
+defining term.  This would give the term $\fn{Mult}$ as a pure lambda
+term; if $\fn{Add}$ itself involved defined terms (as, e.g.,
+$\fn{Add}'$ does), we woul continue this process and finally arrive at
+a pure lambda term.
+
+However this is not true in the case of recursive definitions like the
+one of $\fn{Fac}$ above. If we replace the occurrence of $\fn{Fac}$ on
+the right-hand side with the definition of $\fn{Fac}$ itself, we get:
+\[
+\fn{Fac} \eqs \lambd[n][\fn{IsZero}\, n\, \num{1}\, (\fn{Mult}\, n
+  ((\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult}\, n\, (\fn{Fac}
+    (\fn{Pred}\, n)))]) (\fn{Pred}\, n)))]
+\]
+and we still haven't gotten rid of $\fn{Fac}$ on the right-hand
+side. Clearly, if we repeat this process, the definition keeps growing
+longer and the process never results in a pure lambda term. Thus this
+way of defining factorial (or more generally recursive functions)
+is not feasible.
+
+The recursive definition does tell us something, though: If $f$ were a
+term representing the factorial function, then the term
+\[
+\fn{Fac}' \eqs \lambd[x][\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult} \, n\, (x (\fn{Pred} n)))]]
+\]
+applied to the term $f$, i.e., $\fn{Fac}'\,f$, also represents the
+factorial function.  That is, if we regard $\fn{Fac}'$ as a function
+accepting a function and returning a function, the value of
+$\fn{Fac'}\, f$ is just $f$, provided $f$ is the factorial. A function
+$f$ with the property that $\fn{Fac}' \, f \red f$ is called a
+\emph{fixpoint} of $\fn{Fac}'$. So, the factorial is a fixpoint of
+$\fn{Fac}'$.
+
+There are terms in the lambda calculus that compute the fixpoints of a
+given term, and these terms can then be used to turn a term like
+$\fn{Fac}'$ into the definition of the factorial.
+
+\begin{defn}
+The \emph{Y-combinator} is the term:
+\[
+Y \eqs  \lambd[f][(\lambd[x][f (x x)]) (\lambd[x][f (x x)])].
+\]
+\end{defn}
+
+$Y$ has the property that:
+\begin{align*}
+  Y g &= \lambd[f][(\lambd[x][f (x x)]) (\lambd[x][f (x x)])] g \\
+      &= (\lambd[x][g (x x)]) (\lambd[x][g (x x)]) \\
+      &= g ((\lambd[x][g (x x)]) (\lambd[x][g (x x)])) \\
+      &= g (Y g)
+\intertext{for any term $g$, in other words, $Yg$ is a fixpoint of~$g$. We can
+expand this term as many times as we want, and get:}
+    Y g &= g (Y g) \\
+        &= g (g (Y g)) \\
+        &\ldots \\
+        &= g (g (\ldots ))
+\end{align*}
+Intuitively speaking, $g$ applied to any term infinitely many times is
+a fixpoint of $g$. Of course, when $Yg$ is itself applied to a term,
+e.g., $Yg\, \num n$, this process may terminate in a normal term.
+
+Take the factorial for instance. Define $\fn{Fac}$ as $Y\, \fn{Fac}'$; then:
+\begin{align*}
+  \fn{Fac}\,\num 3 &\red Y\, \fn{Fac}' \, \num 3 \\
+      &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 3 \\
+      &\red (\lambd[f][\lambd[n][\fn{IsZero} \, n\, \num 1\, (\fn{Mult}\, n\, (f (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 3\\
+      &\red  \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2) \\
+      \ldots
+\end{align*}
+
+\end{document}
+

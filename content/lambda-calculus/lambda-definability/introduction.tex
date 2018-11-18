@@ -1,0 +1,81 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{int}
+\olsection{Introduction}
+
+At first glance, the lambda calculus is just a very abstract calculus
+of expressions that represent functions and applications of them to
+others. Nothing in the syntax of the lambda calculus suggests that
+these are functions of particular kinds of objects, in particular, the
+syntax includes no mention of natural numbers. Its basic
+operations---application and lambda abstractions---are operations that
+apply to any function, not just functions on natural
+numbers.
+
+Nevertheless, with some ingenuity, it is possible to define
+arithmetical functions, i.e., functions on the natural numbers, in the
+lambda calculus. To do this, we define, for each natural number~$n \in
+\Nat$, a special $\lambd$-term~$\num n$, the \emph{Church numeral}
+for~$n$. (Church numerals are named for Alonzo Church.)
+
+\begin{defn}
+  If $n \in \Nat$, the corresponding \emph{Church numeral} $\num{n}$
+  represents~$n$:
+  \[
+    \num{n} \eqs \lambd[fx][f^n(x)]
+  \]
+  Here, $f^n(x)$ stands for the result of applying $f$ to~$x$ $n$
+  times. For example, $\num{0}$ is $\lambd[fx][x]$, and $\num{3}$ is
+  $\lambd[fx][f(f(f(x)))]$.
+\end{defn}
+  
+The Church numeral $\num n$ is encoded as a lambda term which
+represents a function accepting two arguments $f$ and $x$, and
+returns $f^n(x)$. Church numerals are evidently in normal form.
+
+Once we have a representtion of natural numbers in the lambda
+calculus, it is natural to ask what happens when we apply a
+$\lambd$-term~$F$ to such a Church numeral, i.e., whether the combined
+term~$F\, \num n$ reduces to a normal form. If it does, and the normal
+form always is a Church numeral~$\num m$, we can think of~$F$ as
+defining a function $f\colon \Nat \to \Nat$, namely the function such
+that $f(n) = m$ iff $F\, \num n \red \num m$. Because of the
+Church-Rosser property, normal forms are unique if they exist. So if
+$F\, \num n \red \num m$, there can be no other term in normal form,
+in particular no other Church numeral, that $F \, \num n$ reduces to.
+
+Conversely, given a function $f\colon \Nat \to \Nat$,
+we can ask if there is a term $F$ that defines~$f$ in this way. In
+that case we say that $F$ \emph{!!{lambda define}s}~$f$, and that $f$ is
+!!{lambda definable}. We can generalize this to many-place and partial
+functions.
+
+\begin{defn}
+Suppose $f\colon \Nat^k \to \Nat$. We say that a lambda term~$F$
+\emph{!!{lambda define}s} $f$ if for all 
+$n_0$, \dots,~$n_{k-1}$,
+\[
+F \, \num{n_0} \, \num{m_1} \dots \num{n_{k-1}} \red \num{f(n_0, n_1, \dots,
+  n_{k-1})}
+\]
+if $f(n_0, \dots, n_{k-1})$ is defined, and $F \, \num{n_0} \,
+\num{n_1} \dots \num{n_{k-1}}$ has no normal form otherwise.
+\end{defn}
+
+A very simple example are the constant functions. The term $C_k \eqs
+\lambd[x][\num{k}]$ !!{lambda define}s the function $c_k\colon \Nat \to
+\Nat$ such that $c(n) = k$. For $C_k \, \num n \eqs
+(\lambd[x][\num{k}])\num n \red \num{k}$ for any~$n$. The identity
+function is !!{lambda defined} by $\lambd[x][x]$. More complex
+functions are of course harder to define, and often require a lot of
+ingenuity. So it is perhaps surprising that every computable function
+is !!{lambda definable}. The converse is also true: if a function is
+!!{lambda definable}, it is computable.
+
+\end{document}
