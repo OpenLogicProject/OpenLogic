@@ -1,13 +1,13 @@
 % Part: lambda-calculus
 % Chapter: introduction
-% Section: lambda-representability
+% Section: lambda-definability
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
 \olfileid{lam}{int}{rep}
-\olsection{Representability by Lambda Terms}
+\olsection{\usetoken{S}{lambda definable} Arithmetical Functions}
 
 How can the lambda calculus serve as a model of computation? At first,
 it is not even clear how to make sense of this statement. To talk
@@ -16,7 +16,7 @@ representation for such numbers. Here is one that works surprisingly
 well.
 
 \begin{defn}
-For each natural number~$n$, define the \emph{numeral} $\num{n}$ to be
+For each natural number~$n$, define the \emph{Church numeral} $\num{n}$ to be
 the lambda term $\lambd[x][\lambd[y][(x(x(x(\dots x(y)))))]]$, where
 there are $n$ $x$'s in all.
 \end{defn}
@@ -28,7 +28,7 @@ a function on the natural numbers.
 
 \begin{defn}
 Let $f(x_0, \dots, x_{n-1})$ be an $n$-ary partial function from $\Nat$
-to $\Nat$. We say a lambda term $X$ \emph{represents} $f$ if for every
+to $\Nat$. We say a lambda term $X$ \emph{!!{lambda define}s}~$f$ iff for every
 sequence of natural numbers $m_0$, \dots,~$m_{n-1}$,
 \[
 X \num{m_0} \num{m_1} \dots \num{m_{n-1}} \red \num{f(m_0, m_1, \dots,
@@ -39,9 +39,9 @@ if $f(m_0, \dots, m_{n-1})$ is defined, and $X \num{m_0} \num{m_1}
 \end{defn}
 
 \begin{thm}
-\ollabel{thm:lambda-rep}
+\ollabel{thm:lambda-def}
 A function $f$ is a partial computable function if and only if it is
-represented by a lambda term.
+!!{lambda defined} by a lambda term.
 \end{thm}
 
 \begin{explain}

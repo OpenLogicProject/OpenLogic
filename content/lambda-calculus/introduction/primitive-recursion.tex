@@ -7,12 +7,12 @@
 \begin{document}
 
 \olfileid{lam}{int}{pr}
-\olsection{Lambda Representable Functions Closed under Primitive Recursion}
+\olsection{\usetoken{S}{lambda definable} Functions are Closed under Primitive Recursion}
 
 When it comes to primitive recursion, we finally need to do some
 work. We will have to proceed in stages. As before, on the assumption
-that we already have terms $\num{g}$ and $\num{h}$ representing functions
-$g$ and~$h$, respectively, we want a term $\num{f}$ representing the
+that we already have terms $G$ and $H$ that !!{lambda define} functions
+$g$ and~$h$, respectively, we want a term $H$ that !!{lambda define}s the
 function~$f$ defined by
 \begin{align*}
 f(0, \vec z) & = g(\vec z) \\
@@ -21,10 +21,10 @@ f(x+1, \vec z) & = h(z, f(x,\vec z), \vec z).
 So, in general, given lambda terms $G'$ and~$H'$, it suffices to find
 a term~$F$ such that
 \begin{align*}
-F(\num{0}, \vec z) & \equiv G'(\vec z) \\
-F(\overline{n+1}, \vec z) & \equiv H'(\num{n}, F(\num{n}, \vec z), \vec z)
+F(\num{0}, \vec z) & \equiv G(\vec z) \\
+F(\overline{n+1}, \vec z) & \equiv H(\num{n}, F(\num{n}, \vec z), \vec z)
 \end{align*}
-for every natural number~$n$; the fact that $G'$ and~$H'$ represent
+for every natural number~$n$; the fact that $G'$ and~$H'$ !!{lambda define}
 $g$ and~$h$ means that whenever we plug in numerals $\num{\vec m}$
 for $\vec z$, $F(\num{n+1}, \num{\vec m})$ will normalize to the
 right answer.
@@ -72,7 +72,7 @@ represent the left and right projections, $(P)_0$ and $(P)_1$. We will
 use the latter notations.
 
 \begin{lem}
-The lambda representable functions are closed under primitive recursion.
+The !!{lambda definable} functions are closed under primitive recursion.
 \end{lem}
 
 \begin{proof}
