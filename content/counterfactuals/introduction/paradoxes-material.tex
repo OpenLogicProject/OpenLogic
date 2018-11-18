@@ -1,0 +1,57 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: paradoxes-material
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{par}
+
+\olsection{Paradoxes of the Material Conditional}
+
+One of the first to criticize the use of $!A \lif !B$ as a way to
+symbolize ``if \dots then \dots'' statements of English was
+C.~I. Lewis. Lewis was criticizing the use of the material condition
+in Whitehead and Russell's \emph{Principia Mathematica}, who
+pronounced $\lif$ as ``implies.''  Lewis rightly complained that if
+$\lif$ meant ``implies,'' then any false proposition~$p$ implies that
+$p$ implies~$q$, since $p \lif (p \lif q)$ is true if~$p$ is false,
+and that any true proposition~$q$ implies that $p$ implies~$q$, since
+$q \lif (p \lif q)$ is true if $q$~is true.
+
+Logicians of course know that \emph{implication}, i.e., logical
+entailment, is not a connective but a relation between !!{formula}s or
+statements. So we should just not read $\lif$ as ``implies'' to avoid
+confusion.\footnote{Reading ``$\lif$'' as ``implies'' is still widely
+  practised by mathematicians and computer scientists, although
+  philosophers try to avoid the confusions Lewis highlighted by
+  pronouncing it as ``only if.''} As long as we don't, the particular
+worry that Lewis had simply does not arise: $p$ does not ``imply'' $q$
+even if we think of $p$ as standing for a false English sentence. To
+determine if $p \Entails q$ we must consider \emph{all}
+!!{valuation}s, and $p \Entails/ q$ even when we use $p$ to symbolize
+a sentence which happens to be false.
+
+But there is still something odd about ``if \dots then\dots''
+statements such as Lewis's
+\begin{quote}
+If the moon is made of green cheese, then $2+2=4$.
+\end{quote}
+and about the inferences
+\begin{quote}
+  The moon is not made of green cheese. Therefore, if the moon is made
+  of green cheese, then $2+2=4$.
+
+  $2+2 = 4$. Therefore, if the moon is made
+  of green cheese, then $2+2=4$.
+\end{quote}
+Yet, if ``if \dots then \dots'' were just $\lif$, the sentence would
+be unproblematically true, and the inferences unproblematically valid.
+
+Another example of concerns the tautology $(!A \lif !B) \lor (!B \lif
+!A)$.  This would suggest that if you take two indicative
+sentences~$S$ and $T$ from the newspaper at random, the sentence ``If
+$S$ then $T$, or if $T$ then~$S$'' should be true.
+
+\end{document}

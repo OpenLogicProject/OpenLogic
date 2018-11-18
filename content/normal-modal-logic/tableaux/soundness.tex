@@ -1,0 +1,269 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{tab}{sou}
+      
+\olsection{Soundness}
+
+\begin{editorial}
+  This soundness proof reuses the soundness proof for classical
+  propositional logic, i.e., it proves everything from scratch. That's
+  ok if you want a self-contained soundness proof. If you already have
+  seen soundness for ordinary tableau this will be repetitive. It's
+  planned to make it possible to switch between self-contained version
+  and a version building on the non-modal case.
+\end{editorial}
+
+\begin{explain}
+  In order to show that prefixed !!{tableau} are sound, we have to
+  show that if
+  \[
+  \sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1], \sFmla{\False}{!A}[1]
+  \]
+  has a closed !!{tableau} then $!B_1, \dots, !B_n \Entails !A$. It is
+  easier to prove the contrapositive: if for some $\mModel{M}$ and
+  world~$w$, $\mSat{M}{!B_i}[w]$ for all $i=1$, \dots,~$n$ but
+  $\mSat{M}{!A}[w]$, then no !!{tableau} can close. Such a
+  countermodel shows that the initial assumptions of the !!{tableau}
+  are satisfiable. The strategy of the proof is to show that whenever
+  all the prefixed !!{formula}s on a !!{tableau} branch are
+  satisfiable, any application of a rule results in at least one
+  extended branch that is also satisfiable. Since closed branches are
+  unsatisfiable, any !!{tableau} for a satisfiable set of prefixed
+  !!{formula}s must have at least one open branch.
+
+  In order to apply this strategy in the modal case, we have to extend
+  our definition of ``satisfiable'' to modal modals and prefixes. With
+  that in hand, however, the proof is straightforward.
+\end{explain}
+
+\begin{defn}
+  Let $P$ be some set of prefixes, i.e., $P \subseteq (\Int^+)^*
+  \setminus \{\emptyseq\}$ and let $\mModel{M}$ be a model.  A
+  function~$f\colon P \to W$ is an \emph{interpretation of}~$P$
+  in~$\mModel{M}$ if, whenever $\sigma$ and $\sigma.n$ are both
+  in~$P$, then $Rf(\sigma)f(\sigma.n)$.
+
+  Relative to an interpretation of prefixes~$P$ we can define:
+  \begin{enumerate}
+  \item $\mModel{M}$ satisfies $\sFmla{\True}{!A}[\sigma]$ iff
+    $\mSat{M}{!A}[f(\sigma)]$.
+  \item $\mModel{M}$ satisfies $\sFmla{\False}{!A}[\sigma]$ iff
+    $\mSat/{M}{!A}[f(\sigma)]$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}
+  Let $\Gamma$ be a set of prefixed !!{formula}s, and let $P(\Gamma)$
+  be the set of prefixes that occur in it. If $f$ is an interpretation
+  of~$P(\Gamma)$ in $\mModel{M}$, we say that $\mModel{M}$ satisfies
+  $\Gamma$ with respect to~$f$, $\mSat{M}{\Gamma}[f]$, if $\mModel{M}$
+  satisfies every prefixed !!{formula} in~$\Gamma$ with respect
+  to~$f$. $\Gamma$ is \emph{satisfiable} iff there is a
+  model~$\mModel{M}$ and interpretation~$f$ of $P(\Gamma)$ such that
+  $\mSat{M}{\Gamma}[f]$.
+\end{defn}
+
+\begin{prop}
+  If $\Gamma$ contains both $\sFmla{\True}{!A}[\sigma]$ and
+  $\sFmla{\False}{!A}[\sigma]$, for some !!{formula}~$!A$ and
+  prefix~$\sigma$, then $\Gamma$ is unsatisfiable.
+\end{prop}
+
+\begin{proof}
+  There cannot be a model~$\mModel{M}$ and interpretation~$f$ of
+  $P(\Gamma)$ such that both $\mSat{M}{!A}[f(\sigma)]$ and
+  $\mSat/{M}{!A}[f(\sigma)]$.
+\end{proof}
+
+\begin{thm}[Soundness]
+  \ollabel{thm:tableau-soundness}
+  If $\Gamma$ has a closed !!{tableau}, $\Gamma$ is unsatisfiable.
+\end{thm}
+
+\begin{proof}
+We call a branch of !!a{tableau} satisfiable iff the set of
+!!{signed formula}s on it is satisfiable, and let's call a !!{tableau}
+satisfiable if it contains at least one satisfiable branch.
+
+We show the following: Extending a satisfiable !!{tableau} by one of
+the rules of inference always results in a satisfiable !!{tableau}.
+This will prove the theorem: any closed !!{tableau} results by
+applying rules of inference to the !!{tableau} consisting only of
+assumptions from~$\Gamma$. So if $\Gamma$ were satisfiable, any
+!!{tableau} for it would be satisfiable. A closed !!{tableau},
+however, is clearly not satisfiable, since all its branches are closed
+and closed branches are unsatisfiable.
+
+Suppose we have a satisfiable !!{tableau}, i.e., !!a{tableau} with at
+least one satisfiable branch. Applying a rule of inference either adds
+!!{signed formula}s to a branch, or splits a branch in two. If the
+!!{tableau} has a satisfiable branch which is not extended by the rule
+application in question, it remains a satisfiable branch in the
+extended !!{tableau}, so the extended tableau is satisfiable. So we
+only have to consider the case where a rule is applied to a
+satisfiable branch.
+
+Let $\Gamma$ be the set of !!{signed formula}s on that branch, and let
+$\sFmla{S}{!A}[\sigma] \in \Gamma$ be the !!{signed formula} to which
+the rule is applied. If the rule does not result in a split branch, we
+have to show that the extended branch, i.e., $\Gamma$ together with
+the conclusions of the rule, is still satisfiable. If the rule results
+in split branch, we have to show that at least one of the two
+resulting branches is satisfiable.
+\tagfalse{prvDiamond}  
+First, we consider the possible inferences with only one premise.
+\begin{enumerate}
+\item The branch is expanded by applying $\TRule{\True}{\lnot}$ to
+  $\sFmla{\True}{\lnot !B}[\sigma] \in \Gamma$. Then the extended
+  branch contains the !!{signed formula}s $\Gamma \cup
+  \{\sFmla{\False}{!B}[\sigma]\}$.  Suppose $\mSat{M}{\Gamma}[f]$. In
+  particular, $\mSat{M}{\lnot !B}[f(\sigma)]$. Thus,
+  $\mSat/{M}{!B}[f(\sigma)]$, i.e., $\mModel{M}$ satisfies
+  $\sFmla{\False}{!B}[\sigma]$ with respect to~$f$.
+\item The branch is expanded by applying $\TRule{\False}{\lnot}$ to
+  $\sFmla{\False}{\lnot !B}[\sigma] \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\True}{\land}$ to
+  $\sFmla{\True}{!B \land !C}[\sigma] \in \Gamma$, which results in
+  two new !!{signed formula}s on the branch:
+  $\sFmla{\True}{!B}[\sigma]$ and $\sFmla{\True}{!C}[\sigma]$. Suppose
+  $\mSat{M}{\Gamma}[f]$, in particular $\mSat{M}{!B \land
+    !C}[f(\sigma)]$. Then $\mSat{M}{!B}[f(\sigma)]$ and
+  $\mSat{M}{!C}[f(\sigma)]$. This means that $\mModel{M}$ satisfies
+  both $\sFmla{\True}{!B}[\sigma]$ and $\sFmla{\True}{!C}[\sigma]$
+  with respect to~$f$.
+\item The branch is expanded by applying $\TRule{\False}{\lor}$ to
+  $\sFmla{\True}{!B \lor !C} \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\False}{\lif}$ to
+  $\sFmla{\False}{!B \lif !C}[\sigma] \in \Gamma$: This results in two
+  new !!{signed formula}s on the branch: $\sFmla{\True}{!B}[\sigma]$ and
+  $\sFmla{\False}{!C}[\sigma]$. Suppose
+  $\mSat{M}{\Gamma}[f]$, in particular
+  $\mSat/{M}{!B \lif !C}[f(\sigma)]$. Then
+  $\mSat{M}{!B}[f(\sigma)]$ and
+  $\mSat/{M}{!C}[f(\sigma)]$. This means that
+  $\mModel{M}, f$ satisfies both
+  $\sFmla{\True}{!B}[\sigma]$ and $\sFmla{\False}{!C}[\sigma]$.
+
+\iftag{prvBox}{%
+\item The branch is expanded by applying $\TRule{\True}{\Box}$ to
+  $\sFmla{\True}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{!B}[\sigma.n]$ on the branch, for some
+    $\sigma.n \in P(\Gamma)$ (since $\sigma.n$ must be used).  Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat{M}{\Box
+      !B}[f(\sigma)]$. Since $f$ is an interpretation of prefixes and
+    both $\sigma$, $\sigma.n \in P(\Gamma)$, we know that
+    $Rf(\sigma)f(\sigma.n)$.  Hence, $\mSat{M}{!B}[f(\sigma.n)]$,
+    i.e., $\mModel{M}, f$ satisfies $\sFmla{\True}{!B}[\sigma.n]$.}
+
+\item The branch is expanded by applying $\TRule{\False}{\Box}$ to
+  $\sFmla{\False}{\Box !B}[\sigma] \in \Gamma$:
+  \iftag{probBox}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\False}{!A}[\sigma.n]$, where $\sigma.n$ is a
+    new prefix on the branch, i.e., $\sigma.n \notin P(\Gamma)$.
+    Since $\Gamma$ is satisfiable, there is a $\Struct{M}$ and
+    interpretation~$f$ of $P(\Gamma)$ such that $\Sat{M}{\Gamma}[f]$,
+    in particular $\mSat/{M}{\Box !B}[f(\sigma)]$. We have to show
+    that $\Gamma \cup \{\sFmla{\False}{!B}[\sigma.n]\}$ is
+    satisfiable. To do this, we define an interpretation of $P(\Gamma)
+    \cup \{\sigma.n\}$ as follows:
+
+  Since $\mSat/{M}{\Box !B}[f(\sigma)]$, there is a $w \in W$ such that
+  $Rf(\sigma)w$ and $\mSat/{M}{!B}[w]$. Let $f'$ be like $f$, except
+  that $f'(\sigma.n) = w$. Since $f'(\sigma) = f(\sigma)$ and
+  $Rf(\sigma)w$, we have $Rf'(\sigma)f'(\sigma.n)$, so $f'$ is an
+  interpretation of $P(\Gamma) \cup \{\sigma.n\}$.  Obviously
+  $\mSat/{M}{!B}[f'(\sigma.n)]$. Since $f(\sigma') = f'(\sigma')$ for
+  all prefixes $\sigma' \in P(\Gamma)$, $\mSat{M}{\Gamma}[f']$.  So,
+  $\mModel{M}, f'$ satisfies $\Gamma \cup
+  \{\sFmla{\False}{!B}[\sigma.n]\}$.}
+  }{}
+
+\iftag{prvDiamond}{%
+\item The branch is expanded by applying $\TRule{\True}{\Diamond}$ to
+  $\sFmla{\True}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\True}{!A}[\sigma.n]$, where $\sigma.n$ is a
+    new prefix on the branch, i.e., $\sigma.n \notin P(\Gamma)$.
+    Since $\Gamma$ is satisfiable, there is a $\Struct{M}$ and
+    interpretation~$f$ of $P(\Gamma)$ such that $\Sat{M}{\Gamma}[f]$,
+    in particular $\mSat{M}{\Diamond !B}[f(\sigma)]$. We have to show
+    that $\Gamma \cup \{\sFmla{\True}{!B}[\sigma.n]\}$ is
+    satisfiable. To do this, we define an interpretation of $P(\Gamma)
+    \cup \{\sigma.n\}$ as follows:
+
+  Since $\mSat{M}{\Diamond !B}[f(\sigma)]$, there is a $w \in W$ such that
+  $Rf(\sigma)w$ and $\mSat{M}{!B}[w]$. Let $f'$ be like $f$, except
+  that $f'(\sigma.n) = w$. Since $f'(\sigma) = f(\sigma)$ and
+  $Rf(\sigma)w$, we have $Rf'(\sigma)f'(\sigma.n)$, so $f'$ is an
+  interpretation of $P(\Gamma) \cup \{\sigma.n\}$.  Obviously
+  $\mSat{M}{!B}[f'(\sigma.n)]$. Since $f(\sigma') = f'(\sigma')$ for
+  all prefixes $\sigma' \in P(\Gamma)$, $\mSat{M}{\Gamma}[f']$.  So,
+  $\mModel{M}, f'$ satisfies $\Gamma \cup
+  \{\sFmla{\True}{!B}[\sigma.n]\}$.}
+\item The branch is expanded by applying $\TRule{\False}{\Diamond}$ to
+  $\sFmla{\False}{\Diamond !B}[\sigma] \in \Gamma$:
+  \iftag{probDiamond}{Exercise.}{This results in a new !!{signed
+      formula}~$\sFmla{\False}{!B}[\sigma.n]$ on the branch, for some
+    $\sigma.n \in P(\Gamma)$ (since $\sigma.n$ must be used).  Suppose
+    $\mSat{M}{\Gamma}[f]$, in particular, $\mSat/{M}{\Diamond
+      !B}[f(\sigma)]$. Since $f$ is an interpretation of prefixes and
+    both $\sigma$, $\sigma.n \in P(\Gamma)$, we know that
+    $Rf(\sigma)f(\sigma.n)$.  Hence, $\mSat/{M}{!B}[f(\sigma.n)]$,
+    i.e., $\mModel{M}, f$ satisfies $\sFmla{\False}{!B}[\sigma.n]$.}
+  }{}
+\end{enumerate}
+Now let's consider the possible inferences with two premises.
+\begin{enumerate}
+\item The branch is expanded by applying $\TRule{\False}{\land}$ to
+  $\sFmla{\False}{!B \land !C}[\sigma] \in \Gamma$, which results in
+  two branches, a left one continuing through
+  $\sFmla{\False}{!B}[\sigma]$ and a right one through
+  $\sFmla{\False}{!C}[\sigma]$. Suppose $\mSat{M}{\Gamma}[f]$, in
+  particular $\mSat/{M}{!B \land !C}[f(\sigma)]$.  Then
+  $\mSat/{M}{!B}[f(\sigma)]$ or $\mSat/{M}{!C}[f(\sigma)]$. In the
+  former case, $\mModel{M}, f$ satisfies $\sFmla{\False}{!B}[\sigma]$,
+  i.e., the left branch is satisfiable. In the latter, $\mModel{M}, f$
+  satisfies $\sFmla{\False}{!C}[\sigma]$, i.e., the right branch is
+  satisfiable.
+\item The branch is expanded by applying $\TRule{\True}{\lor}$ to
+  $\sFmla{\True}{!B \lor !C} \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\True}{\lif}$ to
+  $\sFmla{\True}{!B \lif !C} \in \Gamma$: Exercise.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+Complete the proof of \olref[mod][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  If $\Gamma \Proves !A$ then for some $!B_1$, \dots, $!B_n \in
+  \Gamma$, $\Delta = \{\sFmla{\False}{!A}[1], \sFmla{\True}{!B_1}[1],
+  \dots, \sFmla{\True}{!B_n}[1]\}$ has a closed !!{tableau}. We want
+  to show that $\Gamma \Entails !A$. Suppose not, so for some
+  $\mModel{M}$ and $w$, $\mSat{M}{!B_i}[w]$ for $i=1$, \dots,~$n$, but
+  $\mSat/{M}{!A}[w]$. Let $f(1) = w$; then $f$ is an interpretation
+  of~$P(\Delta)$ into~$\mModel{M}$, and $\mModel{M}$ satisfies~$\Delta$ with
+  respect to~$f$. But by \olref{thm:tableau-soundness}, $\Delta$ is
+  unsatisfiable since it has a closed !!{tableau}, a
+  contradiction. So we must have $\Gamma \Proves !A$ after all.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+If $\Proves !A$ then $!A$ is true in all models.
+\end{cor}
+
+\end{document}

@@ -1,0 +1,139 @@
+% part: intuitionistic-logic
+% chapter: soundeness-completeness
+% section: soundness-nd
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{snd}
+
+\olsection{Soundness of Natural Deduction}
+
+\begin{thm}[Soundness]
+  \ollabel{thm:soundness}
+  If $\Gamma \Proves !A$, then $ \Gamma \Entails !A$.
+\end{thm}
+
+\begin{proof}
+  We prove that if $\Gamma \Proves !A$, then $\Gamma \Entails !A$.
+  The proof is by induction on the !!{derivation} of~$!A$
+  from~$\Gamma$.
+  
+  \begin{enumerate}
+  \item If the !!{derivation} consists of just the assumption~$!A$, we
+    have $!A \Proves !A$, and want to show that $!A \Entails !A$.
+    Consider any model $\mModel{M}$ such that $\mSat{M}{!A}$. Then
+    trivially $\mSat{M}{!A}$.
+
+  \item The derivation ends in $\Intro{\land}$:
+    \iftag{probAnd}{Exercise.}{The !!{derivation}s of the premises
+      $!B$ from !!{undischarged} assumptions~$\Gamma$ and of~$!C$ from
+      !!{undischarged} assumptions~$\Delta$ show that $\Gamma \Proves
+      !B$ and $\Delta \Proves !C$. By induction hypothesis we have
+      that $\Gamma \Entails !B$ and $\Gamma \Entails !C$. We have to
+      show that $\Gamma \cup \Delta \Entails !A \land !B$, since the
+      !!{undischarged} assumptions of the entire derivation are
+      $\Gamma$ together with $\Delta$.  So suppose $\mSat{M}{\Gamma
+        \cup \Delta}$. Then also $\mSat{M}{\Gamma}$. Since $\Gamma
+      \Entails !B$, $\mSat{M}{!B}$. Similarly, $\mSat{M}{!C}$. So
+      $\mSat{M}{!B \land !C}$.}
+
+  \item The !!{derivation} ends in $\Elim{\land}$:
+    \iftag{probAnd}{Exercise.}{The !!{derivation} of the premise $!B
+        \land !C$ from !!{undischarged} assumptions $\Gamma$ shows
+        that $\Gamma \Proves !B \land !C$. By induction hypothesis,
+        $\Gamma \Entails !B \land !C$. We have to show that $\Gamma
+        \Entails !B$. So suppose $\mSat{\Gamma}$. Since $\Gamma
+        \Entails !B \land !C$, $\mSat{M}{!B \land !C}$. Then also
+        $\mSat{M}{!B}$. Similarly if $\Elim\land$ ends in~$!C$, then
+        $\Gamma \Entails !C$.}
+
+  \item The !!{derivation} ends in $\Intro{\lor}$:
+    \iftag{probOr}{Exercise.}{Suppose the premise is $!B$, and the
+      !!{undischarged} assumptions of the !!{derivation} ending
+      in~$!B$ are $\Gamma$. Then we have $\Gamma \Proves !B$ and by
+      inductive hypothesis, $\Gamma \Entails B$. We have to show that
+      $\Gamma \Entails !B \lor !C$. Suppose $\mSat{M}{\Gamma}$. Since
+      $\Gamma \Entails !B$, $\mSat{M}{!B}$. But then also $\mSat{M}{!B
+        \lor !C}$. Similarly, if the premise is~$!C$, we have that
+      $\Gamma \Entails !C$.}
+    
+  \item The !!{derivation} ends in~$\Elim{\lor}$:
+    \iftag{probOr}{Exercise.}{The !!{derivation}s ending in the
+      premises are of $!B \lor !C$ from !!{undischarged}
+      assumptions~$\Gamma$, of $!D$ from !!{undischarged} assumptions
+      $\Delta_1 \cup \{!B\}$, and of $!D$ from !!{undischarged}
+      assumptions~$\Delta_2 \cup \{!C\}$. So we have $\Gamma \Proves
+      !B \lor !C$, $\Delta_1 \cup \{!B\} \Proves !D$, and $\Delta_2
+      \cup \{!C\} \Proves !D$.  By induction hypothesis, $\Gamma
+      \Entails !B \lor !C$, $\Delta_1 \cup \{!B\} \Entails !D$, and
+      $\Delta_2 \cup \{!C\} \Entails !D$.  We have to prove that
+      $\Gamma \cup \Delta_1 \cup \Delta_2 \Entails !D$.
+
+    Suppose $\mSat{M}{\Gamma \cup \Delta_1 \cup \Delta_2}$. Then
+    $\mSat{M}{\Gamma}$ and since $\Gamma \Entails !B \lor !C$,
+    $\mSat{M}{!B \lor !C}$. By definition of $\mSat{M}{}$, either
+    $\mSat{M}{!B}$ or $\mSat{M}{!C}$. So we distinguish cases: (a)
+    $\mSat{M}{!B}$. Then $\mSat{M}{\Delta_1 \cup \{!B\}}$. Since
+    $\Delta_1 \cup !B \Entails !D$, we have $\mSat{M}{!D}$. (b)
+    $\mSat{M}{!C}$. Then $\mSat{M}{\Delta_2 \cup \{!C\}}$. Since
+    $\Delta_2 \cup !C \Entails !D$, we have $\mSat{M}{!D}$. So in
+    either case, $\mSat{M}{!D}$, as we wanted to show.}
+
+  \item The !!{derivation} ends with $\Intro{\lif}$ concluding~$!B\lif
+    !C$. Then the premise is~$!C$, and the !!{derivation} ending in
+    the premise has !!{undischarged} assumptions~$\Gamma \cup
+    \{!B\}$. So we have that $\Gamma \cup \{!B\} \Proves !C$, and by
+    induction hypothesis that $\Gamma \cup \{!B\} \Entails !C$. We
+    have to show that $\Gamma \Entails !B \lif !C$.
+
+    Suppose $\mSat{M}{\Gamma}[w]$. We want to show that that for all
+    $w'$ such that $Rww'$, if $\mSat{M}{!B}[w']$, then
+    $\mSat{M}{!C}[w']$. So assume that $Rww'$ and
+    $\mSat{M}{!B}[w']$. By \olref[sem][rel]{prop:true-monotonic},
+    $\mSat{M}{\Gamma}[w']$. Since $\Gamma \cup \{!B\} \Entails !C$,
+    $\mSat{M}{!C}[w']$, which is what we wanted to show. 
+
+  \item The !!{derivation} ends in $\Elim{\lif}$ and
+    conclusion~$!C$. The premises are $!B \lif !C$ amd $!B$, with
+    !!{derivation}s from !!{undischarged} assumptions $\Gamma$,
+    $\Delta$. So we have $\Gamma \Proves !B \lif !C$ and $\Delta
+    \Proves !B$. By inductive hypothesis, $\Gamma \Entails !B \lif !C$
+    and $\Delta \Entails !B$. We have to show that $\Gamma \cup \Delta
+    \Entails !C$.
+
+    Suppose $\mSat{M}{\Gamma \cup \Delta}[w]$. Since
+    $\mSat{M}{\Gamma}[w]$ and $\Gamma \Entails !B \lif !C$,
+    $\mSat{M}{!B \lif !C}[w]$. By definition, this means that for all
+    $w'$ such that $Rww'$, if $\mSat{M}{!B}[w']$ then
+    $\mSat{M}{!C}[w']$. Since $R$ is reflexive, $w$ is among the $w'$
+    such that $Rww'$, i.e., we have that if $\mSat{M}{!B}[w]$ then
+    $\mSat{M}{!C}[w]$. Since $\mSat{M}{\Delta}[w]$ and $\Delta
+    \Entails !B$, $\mSat{M}{!B}[w]$. So, $\mSat{M}{!C}[w]$, as we
+    wanted to show.
+
+  \item The !!{derivation} ends in $\FalseInt$, concluding~$!A$. The
+    premise is $\lfalse$ and the !!{undischarged} assumptions of the
+    !!{derivation} of the premise are~$\Gamma$. Then $\Gamma \Proves
+    \lfalse$. By inductive hypothesis, $\Gamma \Entails \lfalse$. We
+    have to show $\Gamma \Entails !A$.
+
+    We proceed indirectly. If $\Gamma \Entails/ !A$ there is a
+    model~$\mModel{M}$ and world~$w$ such that $\mSat{M}{\Gamma}[w]$
+    and $\mSat/{M}{!A}[w]$.  Since $\Gamma \Entails \lfalse$,
+    $\mSat{M}{\lfalse}[w]$. But that's impossible, since by
+    definition, $\mSat/{M}{\lfalse}[w]$. So $\Gamma \Entails !A$.
+  \item The derivation endss in $\Intro\lnot$: Exercise.
+  \item The derivation ends in $\Elim\lnot$: Exercise.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[int][sc][snd]{thm:soundness}. For the
+  cases for $\Intro\lnot$ and $\Elim\lnot$, use the definition of
+  $\mSat{M}{\lnot !A}[w]$ in \olref[int][sem][rel]{defn:true-at-w}, i.e.,
+  don't treat $\lnot !A$ as defined by $!A \lif \lfalse$.
+\end{prob}
+
+\end{document}

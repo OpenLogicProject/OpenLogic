@@ -1,0 +1,73 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{int}
+
+\olsection{Introduction}
+
+No logic is satisfactorily described without a semantics, and
+intuitionistic logic is no exception. Whereas for classical logic, the
+semantics based on !!{valuation}s is canonical, there are several
+competing semantics for intuitionistic logic. None of them are
+completely satisfactory in the sense that they give an
+intuitionistically acceptable account of the meanings of the
+connectives.
+
+The semantics based on !!{relational model}s, similar to the semantics
+for modal logics, is perhaps the most popular one.  In this semantics,
+!!{propositional variable}s are assigned to worlds, and these worlds
+are related by an accessibility relation. That relation is always a
+partial order, i.e., it is reflexive, antisymmetric, and
+transitive.
+
+Intuitively, you might think of these worlds as states of knowledge or
+``evidentiary situations.''  A state $w'$ is accessible from~$w$ iff,
+for all we know, $w'$ is a possible (future) state of knowledge, i.e.,
+one that is compatible with what's known at~$w$.  Once a proposition
+is known, it can't become un-known, i.e., whenever $!A$ is known at~$w$
+and $Rww'$, $!A$ is known at $w'$ as well. So ``knowledge'' is
+monotonic with respect to the accessibility relation.
+
+If we define ``$!A$ is known'' as in epistemic logic as ``true in all
+epistemic alternatives,'' then $!A \land !B$ is known at~$w$ if in all
+epistemic alternatives, both $!A$ and~$!B$ are known. But since
+knowledge is monotonic and $R$ is reflexive, that means that $!A \land
+!B$ is known at $w$ iff $!A$ and $!B$ are known at~$w$.  For the same
+reason, $!A \lor !B$ is known at $w$ iff at least one of them is
+known. So for $\land$ and $\lor$, the truth conditions of the
+connectives coincide with those in classical logic.
+
+The truth conditions for the conditional, however, differ from
+classical logic. $!A \lif !B$ is known at~$w$ iff at no $w'$ with
+$Rww'$, $!A$ is known without $!B$ also being known. This is not the
+same as the condition that $!A$ is unknown or $!B$~is known
+at~$w$. For if we know neither $!A$ nor $!B$ at~$w$, there might be a
+future epistemic state~$w'$ with $Rww'$ such that at $w'$, $!A$ is
+known without also coming to know~$!B$.
+
+We know $\lnot !A$ only if there is no possible future epistemic state
+in which we know~$!A$. Here the idea is that if $!A$ were knowable,
+then in some possible future epistemic state~$!A$ becomes known. Since
+we can't know $\lfalse$, in that future epistemic state, we would know
+$!A$ but not know~$\lfalse$.
+
+On this interpretation the principle of excluded middle fails. For
+there are some $!A$ which we don't yet know, but which we might come
+to know. For such an $!A$, both $!A$ and $\lnot !A$ are unknown, so
+$!A \lor \lnot !A$ is not known. But we do know, e.g., that $\lnot(!A
+\land \lnot !A)$. For no future state in which we know both $!A$ and
+$\lnot !A$ is possible, and we know this independently of whether or
+not we know~$!A$ or $\lnot !A$.
+
+!!^{relational model}s are not the only available semantics for
+intuitionistic logic. The topological semantics is another: here
+propositions are interpreted as open sets in a topological space, and
+the connectives are interpreted as operations on these sets (e.g.,
+$\land$ corresponds to intersection).
+
+\end{document}

@@ -11,34 +11,45 @@
   No effort has been made yet to ensure that the material in this
   chapter respects various tags indicating which connectives and
   quantifiers are primitive or defined: all are assumed to be
-  primitive.
+  primitive. If the FOL tag is true, we produce a version with
+  quantifiers, otherwise without.
 \end{editorial}
 
 \olimport{rules-and-proofs}
 
 \olimport{axioms-rules-propositional}
 
-\olimport{axioms-rules-quantifiers}
+\iftag{FOL}{%
+  \olimport{axioms-rules-quantifiers}
+}{}
 
 \olimport{proving-things}
 
-\olimport{proving-things-quant}
+\iftag{FOL}{%
+  \olimport{proving-things-quant}
+}{}
 
 \olimport{proof-theoretic-notions}
 
 \olimport{deduction-theorem}
 
-\olimport{deduction-theorem-quantifiers}
+\iftag{FOL}{%
+  \olimport{deduction-theorem-quantifiers}
+}{}
 
 \olimport{provability-consistency}
 
 \olimport{provability-propositional}
 
-\olimport{provability-quantifiers}
+\iftag{FOL}{%
+  \olimport{provability-quantifiers}
+}{}
 
 \olimport{soundness}
 
-\olimport{identity}
+\iftag{FOL}{
+  \olimport{identity}
+}{}
 
 \OLEndChapterHook
 

@@ -1,0 +1,88 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: simple-S5
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{tab}{s5}
+
+\olsection{Simple \usetoken{P}{tableau} for \Log{S5}}
+
+\Log{S5} is sound and complete with respect to the class of universal
+models, i.e., models where every world is accessible from every
+world. In universal models the accessibility relation doesn't matter:
+``there is a world~$w$ where $\mSat{M}{!A}[w]$'' is true if and only
+if there is such a $w$ that's accessible from~$u$. So in \Log{S5}, we
+can define models as simply a set of worlds and a valuation~$V$. This
+suggests that we should be able to simplify the !!{tableau} rules as
+well. In the general case, we take as prefixes sequences of positive
+integers, so that we can keep track of which such prefixes name worlds
+which are accessible from others: $\sigma.n$ names a world accessible
+from~$\sigma$. But in \Log{S5} any world is accessible from any world,
+so there is no need to so keep track. Instead, we can use positive
+integers as prefixes. The simplified rules are given in
+\olref{tab:rules-S5}.
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \begin{tabular}{|c|c|}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[n]}
+      \RightLabel{\TRule{\True}{\Box}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Box !A}[n]}
+      \RightLabel{\TRule{\False}{\Box}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ is used & $m$ is new
+      \\[1ex]
+      \hline}{}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\True}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\True}{\Diamond}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\False}{\Diamond}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ is new & $m$ is used
+      \\[1ex]
+      \hline}{}
+    \end{tabular}
+  \end{center}
+  \caption{Simplified rules for \Log{S5}.}
+  \ollabel{tab:rules-S5}
+\end{table}
+
+\begin{ex}
+  We give a simplified closed tableau that shows $\Log{S5} \Proves
+  \Ax{5}$, i.e., $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{oltableau}
+    [\pFmla{\False}{\Diamond\formula{A} \lif \Box\Diamond \formula{A}}{1},
+      just = \TAss
+      [\pFmla{\True}{\Diamond \formula{A}}{1}, just = {\TRule{\False}{\lif}[1]}
+        [\pFmla{\False}{\Box\Diamond \formula{A}}{1},
+          just = {\TRule{\False}{\lif}[1]}
+          [\pFmla{\False}{\Diamond \formula{A}}{2},
+            just = {\TRule{\False}{\Box}[3]}
+            [\pFmla{\True}{\formula{A}}{3},
+              just = {\TRule{\True}{\Diamond}[2]}
+                [\pFmla{\False}{\formula{A}}{3},
+                  just = {\TRule{\False}{\Diamond}[4]}, close]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+\end{ex}
+
+\end{document}

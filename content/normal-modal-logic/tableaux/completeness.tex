@@ -1,0 +1,230 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: completeness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{tab}{cpl}
+      
+\olsection{Completeness for \Log{K}}
+
+\begin{explain}
+  To show that the method of !!{tableau}s is complete, we have to show
+  that whenever there is no closed !!{tableau} to show $\Gamma \Proves
+  !A$, then $\Gamma \Entails/ !A$, i.e., there is a countermodel. But
+  ``there is no closed !!{tableau}'' means that every way we could try
+  to construct one has to fail to close. The trick is to see that if
+  every such way fails to close, then a specific, \emph{systematic and
+    exhaustive} way also fails to close. And this systematic and
+  exhaustive way would close if a closed !!{tableau} exists. The
+  single tableau will contain, among its open branches, all the
+  information required to define a countermodel. The countermodel
+  given by an open branch in this tableau will contain the all the
+  prefixes used on that branch as the worlds, and !!a{propositional
+    variable}~$p$ is true at $\sigma$ iff $\sFmla{\True}{p}[\sigma]$
+  occurs on the branch.
+\end{explain}
+
+\begin{defn}
+  A branch in !!a{tableau} is called complete if, whenever it contains
+  a prefixed !!{formula} $\sFmla{S}{!A}[\sigma]$ to which a rule can
+  be applied, it also contains
+  \begin{enumerate}
+    \item the prefixed !!{formula}s that are the corresponding
+      conclusions of the rule, in the case of propositional stacking
+      rules;
+    \item one of the corresponding conclusion !!{formula}s in the case
+      of propositional branching rules;
+    \item at least one possible conclusion in the case of modal rules
+      that require a new prefix;
+    \item the corresponding conclusion for every prefix occurring on
+      the branch in the case of modal rules that require a used
+      prefix.
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+For instance, a complete branch contains $\sFmla{\True}{!B}[\sigma]$
+and $\sFmla{\True}{!C}[\sigma]$ whenever it contains $\sFmla{\True}{!B
+  \land !C}$. If it contains $\sFmla{\True}{!B \lor !C}[\sigma]$ it
+contains at least one of $\sFmla{\False}{!B}[\sigma]$ and
+$\sFmla{\True}{!C}[\sigma]$. If it contains \iftag{prvBox}
+{$\sFmla{\False}{\Box}[\sigma]$} {$\sFmla{\True}{\Diamond}[\sigma]$}
+it also contains \iftag{prvBox} {$\sFmla{\False}{\Box}[\sigma.n]$}
+{$\sFmla{\True}{\Diamond}[\sigma.n]$} for at least one~$n$.  And
+whenever it contains \iftag{prvBox} {$\sFmla{\True}{\Box}[\sigma]$}
+{$\sFmla{\False}{\Diamond}[\sigma]$} it also contains \iftag{prvBox}
+{$\sFmla{\True}{\Box}[\sigma.n]$}
+{$\sFmla{\False}{\Diamond}[\sigma.n]$} for every~$n$ such that
+$\sigma.n$ is used on the branch.
+\end{explain}
+
+\begin{prop}\ollabel{prop:complete-tableau}
+  Every finite $\Gamma$ has a !!{tableau} in which every branch is complete.
+\end{prop}
+
+\begin{proof}
+  Consider an open branch in !!a{tableau} for~$\Gamma$. There are
+  finitely many prefixed !!{formula}s in the branch to which a rule
+  could be applied. In some fixed order (say, top to bottom), for each
+  of these prefixed !!{formula}s for which the conditions (1)--(4) do
+  not already hold, apply the rules that can be applied to it to
+  extend the branch. In some cases this will result in branching;
+  apply the rule at the tip of each resulting branch for all remaining
+  prefixed !!{formula}s. Since the number of prefixed !!{formula}s is
+  finite, and the number of used prefixes on the branch is finite,
+  this procedure eventually results in (possibly many) branches
+  extending the original branch. Apply the procedure to each, and
+  repeat. But by construction, every branch is closed.
+\end{proof}
+
+\begin{thm}[Completeness]
+  \ollabel{thm:tableau-completeness}
+  If $\Gamma$ has no closed !!{tableau}, $\Gamma$ is satisfiable.
+\end{thm}
+
+\begin{proof}
+By the proposition, $\Gamma$ has !!a{tableau} in which every branch is
+complete. Since it has no closed !!{tableau}, it thas has !!a{tableau} in
+which at least one branch is open and complete. Let $\Delta$ be the
+set of prefixed !!{formula}s on the branch, and $P(\Delta)$ the set of
+prefixes occurring in it.
+
+We define a model~$\mModel{M(\Delta)} = \tuple{P(\Delta), R, V}$ where
+the worlds are the prefixes occurring in~$\Delta$, the accessibility
+relation is given by:
+\[
+R\sigma\sigma' \quad \text{iff} \quad
+\sigma'=\sigma.n \quad \text{for some~$n$}
+\]
+and
+\[
+V(p) = \Setabs{\sigma}{\sFmla{\True}{p}[\sigma] \in \Delta}.
+\]
+We show by induction on~$!A$ that if $\sFmla{\True}{!A}[\sigma] \in
+\Delta$ then $\mSat{M(\Delta)}{!A}[\sigma]$, and if
+$\sFmla{\False}{!A}[\sigma] \in \Delta$ then
+$\mSat/{M(\Delta)}{!A}[\sigma]$.
+
+\begin{enumerate}
+  \item \indcase{!A}{p}{If $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$
+    then $\sigma \in V(p)$ (by definition of~$V$) and so
+    $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+    If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$ then
+    $\sFmla{\True}{\indfrm}[\sigma] \notin \Delta$, since the branch
+    would otherwise be closed. So $\sigma \notin V(p)$ and thus
+    $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}
+  \item \indcase{!A}{\lnot !B}{\iftag{probNot}{Exercise.}{If
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then
+      $\sFmla{\False}{!B}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis,
+      $\mSat/{M(\Delta)}{!B}[\sigma]$ and thus
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$, then
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis,
+      $\mSat{M(\Delta)}{!B}[\sigma]$ and thus
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \land !A}{\iftag{probAnd}{Exercise.}{If
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then both
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ and
+      $\sFmla{\True}{!C}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis,
+      $\mSat{M(\Delta)}{!B}[\sigma]$ and
+      $\mSat{M(\Delta)}{!C}[\sigma]$. Thus
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$, then either
+      $\sFmla{\False}{!B}[\sigma] \in \Delta$ or
+      $\sFmla{\False}{!C}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis, either
+      $\mSat/{M(\Delta)}{!B}[\sigma]$ or
+      $\mSat/{M(\Delta)}{!B}[\sigma]$. Thus
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \lor !A}{\iftag{probOr}{Exercise.}{If
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then either
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ or
+      $\sFmla{\True}{!C}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis, either
+      $\mSat{M(\Delta)}{!B}[\sigma]$ or
+      $\mSat{M(\Delta)}{!C}[\sigma]$. Thus
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$, then both
+      $\sFmla{\False}{!B}[\sigma] \in \Delta$ and
+      $\sFmla{\False}{!C}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis, both
+      $\mSat/{M(\Delta)}{!B}[\sigma]$ and
+      $\mSat/{M(\Delta)}{!B}[\sigma]$. Thus
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{!B \lif !A}{\iftag{probIf}{Exercise.}{If
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then either
+      $\sFmla{\False}{!B}[\sigma] \in \Delta$ or
+      $\sFmla{\True}{!C}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis, either
+      $\mSat/{M(\Delta)}{!B}[\sigma]$ or
+      $\mSat{M(\Delta)}{!C}[\sigma]$. Thus
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$, then both
+      $\sFmla{\True}{!B}[\sigma] \in \Delta$ and
+      $\sFmla{\False}{!C}[\sigma] \in \Delta$ since the branch is
+      complete. By induction hypothesis, both
+      $\mSat{M(\Delta)}{!B}[\sigma]$ and
+      $\mSat/{M(\Delta)}{!B}[\sigma]$. Thus
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{\Box !B}{\iftag{probBox}{Exercise.}{If
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then, since the
+      branch is complete, $\sFmla{\True}{!B}[\sigma.n] \in \Delta$ for
+      every $\sigma.n$ used on the branch, i.e., for every $\sigma'
+      \in P(\Delta)$ such that $R\sigma\sigma'$.  By induction
+      hypothesis, $\mSat{M(\Delta)}{!B}[\sigma']$ for every $\sigma'$
+      such that $R\sigma\sigma'$. Therefore,
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$, then for some
+      $\sigma.n$, $\sFmla{\False}{!B}[\sigma.n] \in \Delta$ since the
+      branch is complete.  By induction hypothesis,
+      $\mSat/{M(\Delta)}{!B}[\sigma.n]$.  Since $R\sigma(\sigma.n)$,
+      there is a~$\sigma'$ such that
+      $\mSat/{M(\Delta)}{!B}[\sigma']$. Thus
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+  \item \indcase{!A}{\Diamond !B}{\iftag{probDiamond}{Exercise.}{If
+      $\sFmla{\True}{\indfrm}[\sigma] \in \Delta$, then for some
+      $\sigma.n$, $\sFmla{\True}{!B}[\sigma.n] \in \Delta$ since the
+      branch is complete. By induction hypothesis,
+      $\mSat{M(\Delta)}{!B}[\sigma.n]$.  Since $R\sigma(\sigma.n)$,
+      there is a~$\sigma'$ such that
+      $\mSat{M(\Delta)}{!B}[\sigma']$. Thus
+      $\mSat{M(\Delta)}{\indfrm}[\sigma]$.
+
+      If $\sFmla{\False}{\indfrm}[\sigma] \in \Delta$, then, since the
+      branch is complete, $\sFmla{\False}{!B}[\sigma.n] \in \Delta$
+      for every $\sigma.n$ used on the branch, i.e., for every
+      $\sigma' \in P(\Delta)$ such that $R\sigma\sigma'$.  By
+      induction hypothesis, $\mSat/{M(\Delta)}{!B}[\sigma']$ for every
+      $\sigma'$ such that $R\sigma\sigma'$. Therefore,
+      $\mSat/{M(\Delta)}{\indfrm}[\sigma]$.}}
+\end{enumerate}
+Since $\Gamma \subseteq \Delta$, $\mSat{M(\Delta)}{\Gamma}$.
+\end{proof}
+
+\begin{prob}
+Complete the proof of \olref[mod][tab][cpl]{thm:tableau-completeness}.
+\end{prob}
+
+\begin{cor}
+\ollabel{cor:entailment-completeness}
+If $\Gamma \Entails !A$ then $\Gamma \Proves !A$.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:weak-completeness}
+If $!A$ is true in all models, then $\Proves !A$.
+\end{cor}
+
+\end{document}

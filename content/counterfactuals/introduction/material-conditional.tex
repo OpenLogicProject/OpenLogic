@@ -1,0 +1,71 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: material-conditional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{mat}
+
+\olsection{The Material Conditional}
+
+In its simplest form in English, a conditional is a sentence of the
+form ``If \dots then \dots,'' where the \dots{} are themselves
+sentences, such as ``If the butler did it, then the gardener is
+innocent.'' In introductory logic courses, we earn to symbolize
+conditionals using the $\lif$ connective: symbolize the parts
+indicated by \dots, e.g., by !!{formula}s $!A$ and~$!B$,
+and the entire conditional is symbolized by $!A \lif !B$.
+
+The connective $\lif$ is \emph{truth-functional}, i.e., the truth
+value---$\True$ or $\False$---of $!A \lif !B$ is determined by the truth
+values of $!A$ and~$!B$: $!A \lif !B$ is true iff $!A$~is false or
+$!B$~is true, and false otherwise. Relative to a truth value
+assignment~$\pAssign v$, we define $\pSat{v}{!A \lif !B}$ iff
+$\pSat/{v}{!A}$ or $\pSat{v}{!B}$. The connective $\lif$ with this
+semantics is called the \emph{material conditional}.
+
+This definition results in a number of elementary logical facts. First
+of all, the deduction theorem holds for the material conditional:
+\begin{align}
+  \text{If } \Gamma, !A \Entails !B \text{ then } \Gamma \Entails !A \lif !B
+\end{align}
+It is truth-functional: $!A \lif !B$ and $\lnot !A \lor !B$ are equivalent:
+\begin{align}
+  !A \lif !B & \Entails \lnot !A \lor !B\\
+  \lnot !A \lor !B & \Entails !A \lif !B
+  \intertext{A material conditional is entailed by its consequent and
+    by the negation of its antecedent:}
+  !B & \Entails !A \lif !B\\
+  \lnot !A & \Entails !A \lif !B
+  \intertext{A false material conditional is equivalent to the
+    conjunction of its antecedent and the negation of its consequent:
+    if $!A \lif !B$ is false, $!A \land \lnot !B$ is true, and vice versa:}
+  \lnot(!A \lif !B) & \Entails !A \land \lnot !B\\
+  !A \land \lnot !B & \Entails \lnot(!A \lif !B)
+  \intertext{The material conditional supports modus ponens:}
+  !A, !A \lif !B & \Entails !B
+  \intertext{The material conditional agglomerates:}
+  !A \lif !B,  !A \lif !C & \Entails !A \lif (!B \land !C)
+  \intertext{We can always strengthen the antecedent, i.e., the
+    conditional is \emph{monotonic}:}
+  !A \lif !B & \Entails (!A \land !C) \lif !B
+  \intertext{The material conditional is transitive, i.e., the chain
+    rule is valid:}
+  !A \lif !B, !B \lif !C & \Entails !A \lif !C
+  \intertext{The material conditional is equivalent to its
+    contrapositive:}
+  !A \lif !B & \Entails \lnot !B \lif \lnot !A\\
+  \lnot !B \lif \lnot !A & \Entails !A \lif !B
+\end{align}
+
+These are all useful and unproblematic inferences in mathematical
+reasoning. However, the philosophical and linguistic literature is
+replete with purported counterexamples to the equivalent inferences in
+non-mathematical contexts. These suggest that the material
+conditional~$\lif$ is not---or at least not always---the appropriate
+connective to use when symbolizing English ``if \dots then \dots''
+statements.
+
+\end{document}

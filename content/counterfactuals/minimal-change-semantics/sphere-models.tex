@@ -1,0 +1,113 @@
+% Part: conditional-logics
+% Chapter: minimal-change-semantics
+% Section: sphere-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{con}{min}{sph}
+
+\olsection{Sphere Models}
+
+One way of providing a formal semantics for counterfactuals is to turn
+Lewis's informal account into a mathematical structure. The spheres
+around a world~$w$ then are sets of worlds. Since the spheres are
+nested, the sets of worlds around~$w$ have to be linearly ordered by
+the subset relation.
+
+\begin{defn}
+  A \emph{sphere model} is a triple~$\mModel{M} = \tuple{W, O, V}$
+  where $W$ is a non-empty set of worlds, $V\colon \PVar \to \Pow{W}$
+  is a valuation, and $O\colon W \to \Pow{\Pow{W}}$ assigns to each
+  world~$w$ a \emph{system of spheres}~$O_w$. For each $w$, $O_w$ is a
+  set of sets of worlds, and must satisfy:
+  \begin{enumerate}
+  \item $O_w$ is \emph{centered} on~$w$: $\{w\} \in O_w$.
+  \item $O_w$ is \emph{nested}: whenever $S_1$, $S_2 \in O_w$, $S_1
+    \subseteq S_2$ or $S_2 \subseteq S_1$, i.e., $O_w$ is linearly
+    ordered by~$\subseteq$.
+  \item $O_w$ is closed under non-empty unions.
+  \item $O_w$ is closed under non-empty intersections.
+  \end{enumerate}
+\end{defn}
+
+The intuition behind $O_w$ is that the worlds ``around'' $w$ are
+stratified according to how far away they are from~$w$. The innermost
+sphere is just $w$ by itself, i.e., the set~$\{w\}$: $w$ is closer
+to~$w$ than the worlds in any other sphere. If $S \subsetneq S'$, then
+the worlds in $S' \setminus S$ are further way from $w$ than the
+worlds in~$S$: $S' \setminus S$ is the ``layer'' between the $S$ and
+the worlds outside of~$S'$. In particular, we have to think of the
+spheres as containing all the worlds within their outer surface; they
+are not just the individual layers.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{0}{3}{60}{6}
+  \path (0,0) node[world] {$w$};
+  \spherepos{-30}{2}{node[world] {$w_2$}}
+  \spherepos{220}{2}{node[world] {$w_3$}}
+  \spherepos{90}{2}{node[world] {$w_1$}}
+  \spherepos[shift={(.1,0)}]{10}{3}{node[world] {$w_5$}}
+  \spherepos[shift={(.1,0)}]{-10}{3}{node[world] {$w_6$}}
+  \spherepos{225}{3}{node[world] {$w_4$}}
+  \spherepos{20}{4}{node[world] {$w_7$}}
+  \path (5,0) node[left] {$p$};
+\end{tikzpicture}
+\caption{Diagram of a sphere model}
+\ollabel{fig:sphere-model}
+\end{center}
+\end{figure}
+
+The diagram in \olref{fig:sphere-model} corresponds to the sphere
+model with $W = \{w, w_1, \dots, w_7\}$, $V(p) = \{w_5, w_6,
+w_7\}$. The innermost sphere $S_1 = \{w\}$. The closest worlds to $w$
+are $w_1, w_2, w_3$, so the next larger sphere is $S_2 = \{w, w_1,
+w_2, w_3\}$. The worlds further out are $w_4$, $w_5$, $w_6$, so the
+outermost sphere is $S_3 = \{w, w_1, \dots, w_6\}$. The system of
+spheres around $w$ is $O_w = \{S_1, S_2, S_3\}$. The world~$w_7$ is
+not in any sphere around~$w$. The closest worlds in which $p$~is true
+are $w_5$ and~$w_6$, and so the smallest $p$-admitting sphere
+is~$S_3$.
+
+To define satisfaction of a formula~$!A$ at world~$w$ in a sphere
+model~$\mModel M$, $\mSat{M}{!A}[w]$, we expand the definition for
+modal !!{formula}s to include a clause for $!B \cif !C$:
+
+\begin{defn}
+  $\mSat{M}{!B \cif !C}[w]$ iff either
+  \begin{enumerate}
+  \item\ollabel{sphere-vac} For all $u \in \bigcup O_w$, $\mSat/{M}{!C}[u]$, or
+  \item\ollabel{sphere-nonvac} For some $S \in O_w$,
+    \begin{enumerate}
+      \item $\mSat{M}{!B}[u]$ for some $u \in
+        S$, and
+      \item for all $v \in S$, either
+        $\mSat/{M}{!B}[v]$ or $\mSat{M}{!C}[v]$.
+    \end{enumerate}
+  \end{enumerate}
+\end{defn}
+
+According to this definition, $\mSat{M}{!B \cif !C}[w]$ iff either the
+antecedent~$!B$ is false everywhere in the spheres around~$w$, or
+there is a sphere~$S$ where $!B$ is true, and the material conditional
+$!B \lif !C$ is true at all worlds in that ``$!B$-admitting''
+sphere. Note that we didn't require in the definition that $S$ is the
+\emph{innermost} $!B$-admitting sphere, contrary to what one might
+expect from the intuitive explanation. But if the condition
+in~\olref{sphere-nonvac} is satisfied for some sphere~$S$, then it is
+also satisfied for all spheres~$S$ contains, and hence in particular
+for the innermost sphere.
+
+Note also that the definition of sphere models does not require that
+there \emph{is} an innermost $!B$-admitting sphere: we may have an
+infinite sequence $S_1 \supsetneq S_2 \supsetneq \dots \supsetneq
+\{w\}$ of $!B$-admitting spheres, and hence no innermost
+$!B$-admitting spheres. In that case, $\mSat{M}{!B \cif !C}[w]$ iff
+$!B \lif !C$ holds throughout the spheres $S_i$, $S_{i+1}$, \dots, for
+some~$i$.
+
+\end{document}

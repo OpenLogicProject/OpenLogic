@@ -1,0 +1,109 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{int}
+
+\olsection{Introduction}
+
+Historically the lambda calculus and intuitionistic logic were
+developed separately. Haskell Curry and William Howard independently
+discovered a close similarity: types in a typed lambda calculus
+correspond to formulas in intuitionistic logic in such a way that
+!!a{derivation} of !!a{formula} corresponds directly to a typed lambda
+term with that !!{formula} as its type. Moreover, beta reduction in
+the typed lambda calculus corresponds to certain transformations of
+!!{derivation}s.
+
+For instance, !!a{derivation} of $!A \lif !B$ corresponds to a term
+$\lambd[\typeof{x}{!A}][\typeof{N}{!B}]$, which has the function type
+$!A \lif !B$. The inference rules of natural deduction correspond to
+typing rules in the typed lambda calculus, e.g.,
+\begin{prooftree}
+  \AxiomC{$\Discharge{!A}{x}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro\lif}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \DisplayProof
+  \quad\text{corresponds to}\quad
+  \Axiom$x: !A \fCenter N: !B$
+  \RightLabel{$\lambd$}
+  \UnaryInf$ \fCenter \lambd[\typeof{x}{!A}][\typeof{N}{!B}] : !A \lif !B$
+\end{prooftree}
+where the rule on the right means that if $x$ is of type~$!A$ and $N$
+is of type~$!B$, then $\lambd[\typeof{x}{!A}][N]$ is of type~$!A \lif
+!B$.
+
+The $\Elim\lif$ rule corresponds to the typing rule for composition
+terms, i.e.,
+\begin{prooftree}
+  \AxiomC{$!A \lif !B$}
+  \AxiomC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+  \quad\text{corresponds to}\quad
+  \Axiom$\fCenter P: !A \lif !B$
+  \Axiom$\fCenter Q: !A$
+  \RightLabel{app}
+  \BinaryInf$ \fCenter \typeof{P}{!A \lif !B}\typeof{Q}{!A} : !B$
+\end{prooftree}
+
+If a \Intro\lif{} rule is followed immediately by a \Elim\lif{} rule,
+the !!{derivation} can be simplified:
+\begin{gather*}
+  \AxiomC{$\Discharge{!A}{x}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro\lif}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+  \quad\redone\quad
+  \AxiomC{}
+  \DeduceC{$!A$}
+  \DeduceC{$!B$}
+  \DisplayProof
+\end{gather*}
+which corresponds to the beta reduction of lambda terms
+\[
+(\lambd[\typeof{x}{!A}][\typeof{P}{!B}])Q \quad\redone\quad
+\Subst{P}{Q}{x}.
+\]
+
+Similar correspondences hold between the rules for $\land$ and ``product''
+types, and between the rules for $\lor$ and ``sum'' types.
+
+This correspondence between terms in the simply typed lambda calculus
+and natural deduction !!{derivation}s is called the ``Curry-Howard'',
+or ``propositions as types'' correspondence.  In addition to
+!!{formula}s (propositions) corresponding to types, and proofs to
+terms, we can summarize the correspondences as follows:
+\begin{center}
+  \begin{tabular}{c c c}
+    logic & program \\
+    \hline
+    proposition & type \\
+    proof & term \\
+    assumption & variable \\
+    discharged assumption & bind variable \\
+    not discharged assumption & free variable \\
+    implication & function type \\
+    conjunction & product type \\
+    disjunction & sum type \\
+    absurdity & bottom type \\
+    \hline
+  \end{tabular}
+\end{center}
+
+The Curry-Howard correspondence is one of the cornerstones of
+automated proof assistants and type checkers for programs, since
+checking a proof witnessing a proposition (as we did above) amounts to
+checking if a program (term) has the declared type.
+\end{document}

@@ -6,7 +6,9 @@
 
 \begin{document}
 
-\olfileid{fol}{tab}{prl}
+\iftag{FOL}
+      {\olfileid{fol}{tab}{prl}}
+      {\olfileid{pl}{tab}{prl}}
 
 \olsection{Propositional Rules}
 
@@ -60,12 +62,12 @@
 
 \begin{defish}
 \AxiomC{\sFmla{\True}{!A \lif !B}}
-\RightLabel{\TRule{\True}{\lor}}
+\RightLabel{\TRule{\True}{\lif}}
 \UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
 \DisplayProof
 \hfill
 \AxiomC{\sFmla{\False}{!A \lif !B}}
-\RightLabel{\TRule{\False}{\lor}}
+\RightLabel{\TRule{\False}{\lif}}
 \UnaryInfC{\sFmla{\True}{!A}}
 \noLine
 \UnaryInfC{\sFmla{\False}{!B}}

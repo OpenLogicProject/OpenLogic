@@ -1,0 +1,64 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: transitivity
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{cpo}
+
+\olsection{Contraposition}
+
+Material and strict conditionals are equivalent to their
+contrapositives. Counterfactuals are not.  Here is an example due to
+Kratzer:
+\begin{quote}
+  If Goethe hadn't died in 1832, he would (still) be dead now.
+
+  If Goethe weren't dead now, he would have died in 1832.
+\end{quote}
+The first sentence is true: humans don't live hundreds of years.  The
+second is clearly false: if Goethe weren't dead now, he would be still
+alive, and so couldn't have died in 1832.
+
+\begin{ex}\ollabel{ex:contraposition-counterex}
+  The sphere semantics invalidates contraposition, i.e., we have $p
+  \cif q \Entails/ \lnot q \cif \lnot p$. Think of $p$ as ``Goethe
+  didn't die in 1832'' and $q$ as ``Goethe is dead now.'' We can
+  capture this in a model $\mModel{M_1} = \tuple{W, O, V}$ with $W =
+  \{w, w_1, w_2\}$, $O = \{\{w\}, \{w, w_1\}, \{w, w_1, w_2\}\}$,
+  $V(p) = \{w_1, w_2\}$ and $V(q) = \{w, w_1\}$. So $w$ is the actual
+  world where Goethe died in 1832 and is still dead; $w_1$ is the
+  (close) world where Goethe died in, say, 1833, and is still dead;
+  and $w_2$ is a (remote) world where Goethe is still alive.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.6,layerwidth=1.5]\tiny
+  \spheresystem{3}
+  \begin{scope}
+    \clip \propositionplot{0}{.8}{50}{4.5} -- (4.5,-4.5) -- (-4.5,-4.5) -- (-4.5,4.5) -- (4.5,4.5);
+    \spherelayer{3}
+  \end{scope}
+  \propositionintersect{0}{2}{110}{5.5}
+  \proposition{0}{.8}{50}{4.5}
+  \path (0,0) node[world] {$w$};
+  \spherepos{0}{2}{node[world] {$w_1$}}
+  \spherepos{-50}{3}{node[world] {$w_2$}}
+  \spherepos{28}{3}{node {$q$}}
+  \spherepos{42}{3}{node {$\lnot q$}}
+  \spherepos{-55}{4}{node {$p$}}
+  \spherepos{-67}{4}{node {$\lnot p$}}
+\end{tikzpicture}
+\caption{Counterexample to contraposition}
+\ollabel{fig:contraposition}
+\end{center}
+\end{figure}
+There is a $p$-admitting sphere $S =
+\{w, w_1\}$ and $p \lif q$ is true at all worlds in it, so $\mSat{M}{p
+  \cif q}[w]$. However, the $\lnot q$-admitting sphere $\{w, w_1,
+w_2\}$ contains a world, namely~$w_2$, where $q$ is false and $p$ is
+true, so $\mSat/{M}{\lnot q \lif \lnot p}[w_2]$.
+\end{ex}
+
+\end{document}

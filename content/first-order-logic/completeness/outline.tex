@@ -6,7 +6,9 @@
 
 \begin{document}
 
-\olfileid{fol}{com}{out}
+\iftag{FOL}
+      {\olfileid{fol}{com}{out}}
+      {\olfileid{pl}{com}{out}}
 
 \olsection{Outline of the Proof}
 
@@ -26,45 +28,55 @@ with the hypothesis that it is consistent to construct a model.  After
 all, we know what kind of model we are looking for: one that is as
 $\Gamma$ describes it!
 
-If $\Gamma$ contains only atomic sentences, it is easy
-to construct a model for it: for atomic sentences are all of the form
-$\Atom{P}{a_1,\dots,a_n}$ where the $a_i$ are !!{constant}s.  So all
-we have to do is come up with a !!{domain}~$\Domain{M}$ and an
-interpretation for $P$ so that
-$\Sat{M}{\Atom{P}{a_1,\ldots,a_n}}$. But nothing's easier than that:
-put $\Domain{M} = \Nat$, $\Assign{\Obj c_i}{M} = i$, and for every
-$\Atom{P}{a_1,\ldots,a_n} \in \Gamma$, put the tuple $\tuple{k_1,
-  \dots, k_n}$ into $\Assign{P}{M}$, where $k_i$ is the index of the
-constant symbol~$a_i$ (i.e., $a_i \ident \Obj c_{k_i}$).
+If $\Gamma$ contains only \iftag{FOL}{atomic
+  !!{sentence}s}{!!{propositional variable}s}, it is easy to construct
+a model for it.\iftag{FOL}{ Suppose the atomic !!{sentence}s are all
+  of the form $\Atom{P}{a_1,\dots,a_n}$ where the $a_i$ are
+  !!{constant}s.}{} All we have to do is come up with
+\iftag{FOL}{%
+  !!a{domain}~$\Domain{M}$ and an assignment for~$P$ so that
+  $\Sat{M}{\Atom{P}{a_1,\ldots,a_n}}$. But that's not very hard:
+  put $\Domain{M} = \Nat$, $\Assign{\Obj c_i}{M} = i$, and for every
+  $\Atom{P}{a_1,\ldots,a_n} \in \Gamma$, put the tuple $\tuple{k_1,
+    \dots, k_n}$ into $\Assign{P}{M}$, where $k_i$ is the index of the
+  constant symbol~$a_i$ (i.e., $a_i \ident \Obj c_{k_i}$).}{%
+  !!a{valuation}~$\pAssign{v}$ such that $\pSat{v}{p}$a for all $p \in
+  \Gamma$. Well, let $\pAssign{v}(p) = \True$ iff $p \in \Gamma$.}
 
-Now suppose $\Gamma$ contains some sentence $\lnot !B$, with $!B$
-atomic.  We might worry that the construction of $\Struct M$
-interferes with the possibility of making $\lnot !B$ true.  But here's
-where the consistency of $\Gamma$ comes in: if $\lnot !B \in \Gamma$,
-then $!B \notin \Gamma$, or else $\Gamma$ would be inconsistent.  And
-if $!B \notin \Gamma$, then according to our construction of~$\Struct M$,
-$\Sat/{M}{!B}$, so $\Sat{M}{\lnot !B}$.  So far so good.
+Now suppose $\Gamma$ contains some !!{formula}~$\lnot !B$, with $!B$
+atomic.  We might worry that the construction of
+$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ interferes with the possibility
+of making $\lnot !B$ true.  But here's where the consistency
+of~$\Gamma$ comes in: if $\lnot !B \in \Gamma$, then $!B \notin
+\Gamma$, or else $\Gamma$ would be inconsistent.  And if $!B \notin
+\Gamma$, then according to our construction
+of~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$,
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$, so
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !B}$.  So far so good.
 
-Now what if $\Gamma$ contains complex, non-atomic formulas? Say, it
-contains $!A \land !B$. Then we should proceed as if both $!A$ and $!B$ were
-in $\Gamma$.  And if $!A \lor !B \in \Gamma$, then we will have to make at
-least one of them true, i.e., proceed as if one of them was in~$\Gamma$.
+What if $\Gamma$ contains complex, non-atomic formulas? Say it
+contains $!A \land !B$. To make that true, we should proceed as if
+both $!A$ and $!B$ were in~$\Gamma$.  And if $!A \lor !B \in \Gamma$,
+then we will have to make at least one of them true, i.e., proceed as
+if one of them was in~$\Gamma$.
 
-This suggests the following idea: we add additional sentences to
-$\Gamma$ so as to (a) keep the resulting set consistent and (b) make
-sure that for every possible atomic sentence $!A$, either $!A$ is in
-the resulting set, or $\lnot !A$, and (c) such that, whenever $!A
-\land !B$ is in the set, so are both $!A$ and $!B$, if $!A \lor !B$ is
-in the set, at least one of $!A$ or $!B$ is also, etc.  We keep doing
-this (potentially forever).  Call the set of all sentences so
-added~$\Gamma^*$.  Then our construction above would provide us with a
-structure for which we could prove, by induction, that all sentences
-in~$\Gamma^*$ are true in~$\Struct M$, and hence also all sentence
-in~$\Gamma$ since $\Gamma \subseteq \Gamma^*$.  It turns out that
-guaranteeing (a) is enough. A set of sentences for which (a) holds is
-called \emph{complete}. So our task will be to extend the consistent
+This suggests the following idea: we add additional !!{formula}s
+to~$\Gamma$ so as to (a)~keep the resulting set consistent and
+(b)~make sure that for every possible atomic !!{sentence}~$!A$, either
+$!A$ is in the resulting set, or $\lnot !A$ is, and (c)~such that,
+whenever $!A \land !B$ is in the set, so are both $!A$ and $!B$, if
+$!A \lor !B$ is in the set, at least one of $!A$ or $!B$ is also, etc.
+We keep doing this (potentially forever).  Call the set of all
+!!{formula}s so added~$\Gamma^*$.  Then our construction above would
+provide us with !!a{structure}~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+for which we could prove, by induction, that all sentences
+in~$\Gamma^*$ are true in it, and hence also all sentence in~$\Gamma$
+since $\Gamma \subseteq \Gamma^*$.  It turns out that guaranteeing (a)
+and~(b) is enough. A set of sentences for which (b) holds is called
+\emph{complete}. So our task will be to extend the consistent
 set~$\Gamma$ to a consistent and complete set~$\Gamma^*$.
 
+\iftag{FOL}{%
 There is one wrinkle in this plan: if $\lexists[x][!A(x)] \in \Gamma$
 we would hope to be able to pick some !!{constant}~$c$ and add $!A(c)$
 in this process.  But how do we know we can always do that?  Perhaps we
@@ -115,36 +127,41 @@ one of these sets will contain: $\Obj 0$, $(\Obj 0 + \Obj 0)$, $(\Obj
 and it will turn out that this set is also the value of all the terms
 in it, e.g., also of $(\Obj 0 + \Obj 0)$.  Therefore, the sentence
 $\eq[(\Obj 0+ \Obj 0)][\Obj 0]$ will be true in this revised
-!!{structure}.
+!!{structure}.}{}
 
 So here's what we'll do. First we investigate the properties of
 !!{complete} consistent sets, in particular we prove that
 !!a{complete} consistent set contains $!A \land !B$ iff it contains
 both $!A$ and~$!B$, $!A \lor !B$ iff it contains at least one of them,
-etc. (\olref[ccs]{prop:ccs}). Then we define and investigate
-``saturated'' sets of sentences. A saturated set is one which contains
-conditionals that link each quantified !!{sentence} to instances of it
-(\olref[hen]{defn:henkin-exp}). We show that any consistent
-set~$\Gamma$ can always be extended to a saturated set~$\Gamma'$
-(\olref[hen]{lem:henkin}). If a set is consistent, saturated, and
-!!{complete} it also has the property that it contains
-\iftag{prvEx}{$\lexists[x][!A(x)]$ iff it contains $!A(t)$ for some
-  closed term~$t$}{}\iftag{defEx,defAll}{}{ and
-}\iftag{prvAll}{$\lforall[x][!A(x)]$ iff it contains $!A(t)$ for all
-  closed terms~$t$}{} (\olref[hen]{prop:saturated-instances}).  We'll
-then take the saturated consistent set~$\Gamma'$ and show that it can
-be extended to a saturated, consistent, and !!{complete}
-set~$\Gamma^*$ (\olref[lin]{lem:lindenbaum}). This set $\Gamma^*$ is
-what we'll use to define our term model~$\Struct{M(\Gamma^*)}$.  The
-term model has the set of closed terms as its domain, and the
-interpretation of its !!{predicate}s is given by the atomic
-!!{sentence}s in~$\Gamma^*$ (\olref[mod]{defn:termmodel}).  We'll use
-the properties of consistent, complete, saturated sets to show that
-indeed $\Sat{M(\Gamma^*)}{!A}$ iff $!A \in \Gamma^*$
-(\olref[mod]{lem:truth}), and thus in particular,
-$\Sat{M(\Gamma^*)}{\Gamma}$.  Finally, we'll consider how to define a
-term model if $\Gamma$ contains~$\eq$ as well
-(\olref[ide]{defn:term-model-factor}) and show that it
-satisfies~$\Gamma^*$ (\olref[ide]{lem:truth}).
+etc. (\olref[ccs]{prop:ccs}).\iftag{FOL}{ Then we define and
+  investigate ``saturated'' sets of sentences. A saturated set is one
+  which contains conditionals that link each quantified !!{sentence}
+  to instances of it (\olref[hen]{defn:henkin-exp}). We show that any
+  consistent set~$\Gamma$ can always be extended to a saturated
+  set~$\Gamma'$ (\olref[hen]{lem:henkin}). If a set is consistent,
+  saturated, and !!{complete} it also has the property that it
+  contains \iftag{prvEx}{$\lexists[x][!A(x)]$ iff it contains $!A(t)$
+    for some closed term~$t$}{}\iftag{defEx,defAll}{}{ and
+  }\iftag{prvAll}{$\lforall[x][!A(x)]$ iff it contains $!A(t)$ for all
+    closed terms~$t$}{} (\olref[hen]{prop:saturated-instances}).}{}
+We'll then take the\iftag{FOL}{ saturated}{} consistent
+set~$\iftag{FOL}{\Gamma'}{\Gamma}$ and show that it can be extended
+to a \iftag{FOL}{saturated, consistent, and}{consistent and}
+!!{complete} set~$\Gamma^*$ (\olref[lin]{lem:lindenbaum}). This set
+$\Gamma^*$ is what we'll use to define our \iftag{FOL}{term
+  model~$\Struct M(\Gamma^*)$}{!!{valuation}~$\pAssign v(\Gamma^*)$}.
+\iftag{FOL}{The term model has the set of closed terms as its domain,
+  and the interpretation of its !!{predicate}s is given by the atomic
+  !!{sentence}s}{The valuation is determined by the !!{propositional
+    variable}s} in~$\Gamma^*$ (\olref[mod]{defn:termmodel}).  We'll
+use the properties of\iftag{FOL}{ saturated,}{} complete consistent
+sets to show that indeed
+$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$ iff $!A \in
+\Gamma^*$ (\olref[mod]{lem:truth}), and thus in particular,
+$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\Gamma}$.
+\iftag{FOL}{Finally, we'll consider how to define a term model if
+  $\Gamma$ contains~$\eq$ as well
+  (\olref[ide]{defn:term-model-factor}) and show that it
+  satisfies~$\Gamma^*$ (\olref[ide]{lem:truth}).}{}
 
 \end{document}

@@ -1,0 +1,70 @@
+% Part: counterfactuals
+% Chapter: minimal-change-semantics
+% Section: antecedent-strengthening
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{min}{agg}
+
+\olsection{Antecedent Strengthenng}
+
+``Strengthening the antecedent'' refers to the
+inference $!A \lif !C \Entails (!A \land !B) \lif !C$.  It is valid
+for the material conditional, but invalid for counterfactuals. Suppose
+it is true that if I were to strike this match, it would light. (That
+means, there is nothing wrong with the match or the matchbook surface,
+I will not break the match, etc.) But it is not true that if I were to
+light this match in outer space, it would light. So the following
+inference is invalid:
+\begin{quote}
+  I the match were struck, it would light.
+
+  Therefore, if the match were struck in outer space, it would light.
+\end{quote}
+
+The Lewis-Stalnaker account of conditionals explains this: the closest
+world where I light the match and I do so in outer space is much
+further removed from the actual world than the closest world where I
+light the match is. So although it's true that the match lights in the
+latter, it is not in the former. And that is as it schould be.
+
+\begin{ex}
+  The sphere semantics invalidates the inference, i.e., we have $p
+  \cif r \Entails/ (p \land q) \cif r$. Consider the model $\mModel{M}
+  = \tuple{W, O, V}$ where $W = \{w, w_1, w_2\}$, $O_w = \{\{w\}, \{w,
+  w_1\}, \{w, w_1, w_2\}\}$, $V(p) = \{w_1, w_2\}$, $V(q) = \{w_2\}$,
+  and $V(r) = \{w_1\}$. There is a $p$-admitting sphere $S = \{w,
+  w_1\}$ and $p \lif r$ is true at all worlds in it, so $\mSat{M}{p
+    \cif r}[w]$. There is also a $(p \land q)$-admitting sphere $S' =
+  \{w, w_1, w_2\}$ but $\mSat/{M}{(p \land q) \lif r}[w_2]$, so
+  $\mSat/{M}{(p \land q) \cif r}[w]$ (see \olref{fig:antecedent-strengthening}).
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[layerwidth=1.5,scale=.6]\tiny
+  \spheresystem{3}
+  \propositionintersect{-10}{3}{30}{5}
+  \begin{scope}
+    \clip plot[smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} -- (4.5,4.5) ;
+    \spherefill{2}
+  \end{scope}
+  \draw plot[smooth,tension=1] coordinates
+          {(0,4.5) (30:.95) (4.5,-3.5)} ;
+  \proposition{30}{2}{30}{5}
+  \path (0,0) node[world] {$w$};
+  \spherepos{30}{2}{node[world] {$w_1$}}
+  \spherepos{-10}{3}{node[world] {$w_2$}}
+  \spherepos{-10}{4}{node {$q$}}
+  \spherepos{30}{4}{node {$r$}}
+  \draw (1,4.5) node[below] {$p$};
+\end{tikzpicture}
+\caption{Counterexample to antecedent strengthening}
+\ollabel{fig:antecedent-strengthening}
+\end{center}
+\end{figure}
+\end{ex}
+
+\end{document}

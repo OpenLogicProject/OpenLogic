@@ -6,7 +6,10 @@
 
 \begin{document}
 
-\olfileid{fol}{com}{com}
+\iftag{FOL}
+      {\olfileid{fol}{com}{com}}
+      {\olfileid{pl}{com}{com}}
+
 \olsection{The Compactness Theorem}
 
 One important consequence of the completeness theorem is the
@@ -40,25 +43,52 @@ The following hold for any sentences $\Gamma$ and $!A$:
 \end{thm}
 
 \begin{proof}
-We prove (2).  If $\Gamma$ is satisfiable, then there is a
-!!{structure}~$\Struct{M}$ such that $\Sat{M}{!A}$ for all $!A \in
-\Gamma$.  Of course, this $\Struct M$ also satisfies every finite
-subset of~$\Gamma$, so $\Gamma$ is finitely satisfiable.
+We prove (2).  If $\Gamma$ is satisfiable, then there is
+\iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
+such that $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$ for all $!A \in
+\Gamma$.  Of course, this $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ also
+satisfies every finite subset of~$\Gamma$, so $\Gamma$ is finitely
+satisfiable.
 
 Now suppose that $\Gamma$ is finitely satisfiable.  Then every finite
 subset~$\Gamma_0 \subseteq \Gamma$ is satisfiable.  By soundness
-(\tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},prfSC/{fol:seq:sou:cor:consistency-soundness},prfND/{fol:ntd:sou:cor:consistency-soundness},prfTab/{fol:tab:sou:cor:consistency-soundness}}),
+(\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},
+    prfSC/{fol:seq:sou:cor:consistency-soundness},
+    prfND/{fol:ntd:sou:cor:consistency-soundness},
+    prfTab/{fol:tab:sou:cor:consistency-soundness}}}{%
+  \tagrefs{prfAX/{pl:axd:sou:cor:consistency-soundness},
+    prfSC/{pl:seq:sou:cor:consistency-soundness},
+    prfND/{pl:ntd:sou:cor:consistency-soundness},
+    prfTab/{pl:tab:sou:cor:consistency-soundness}}}),
 every finite subset is consistent.  Then $\Gamma$ itself must be
 consistent by
-\tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},prfSC/{fol:seq:ptn:prop:proves-compact},prfND/{fol:ntd:ptn:prop:proves-compact},prfTab/{fol:tab:ptn:prop:proves-compact}}.
+\iftag{FOL}{%
+  \tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},
+    prfSC/{fol:seq:ptn:prop:proves-compact},
+    prfND/{fol:ntd:ptn:prop:proves-compact},
+    prfTab/{fol:tab:ptn:prop:proves-compact}}}{%
+  \tagrefs{prfAX/{pl:axd:ptn:prop:proves-compact},
+    prfSC/{pl:seq:ptn:prop:proves-compact},
+    prfND/{pl:ntd:ptn:prop:proves-compact},
+    prfTab/{pl:tab:ptn:prop:proves-compact}}}.
 By completeness (\olref[cth]{thm:completeness}), since $\Gamma$~is
 consistent, it is satisfiable.
 \end{proof}
 
+\tagprob{FOL}
 \begin{prob}
 Prove (1) of \olref[fol][com][com]{thm:compactness}.
 \end{prob}
+\tagendprob
 
+\tagprob{notFOL}
+\begin{prob}
+Prove (1) of \olref[pl][com][com]{thm:compactness}.
+\end{prob}
+\tagendprob
+
+\iftag{FOL}{%
 \begin{ex}
 In every model~$\Struct{M}$ of a theory~$\Gamma$, each term~$t$ of
 course picks out !!a{element} of~$\Domain{M}$. Can we guarantee that
@@ -114,18 +144,22 @@ with $\Assign{c}{Q'} = 1/K$ we have that $\Sat{Q'}{\Gamma \cup
 is satisfiable. Any model~$\Struct{S}$ of $\Gamma \cup \Delta$
 contains an infinitesimal, namely~$\Assign{c}{S}$.
 \end{ex}
+}{}
 
+\tagprob{FOL}
 \begin{prob}
 In the standard model of arithmetic~$\Struct{N}$, there is no
-!!{element}~$k \in \Domain{N}$ which satisfies every formula $\num{n}
+!!{element}~$k \in \Domain{N}$ which satisfies every formula~$\num{n}
 < x$ (where $\num{n}$ is $\Obj{0}^{\prime\dots\prime}$ with $n$
 $\prime$'s).  Use the compactness theorem to show that the set of
-sentences in the language of arithmetic which are true in the standard
+!!{sentence}s in the language of arithmetic which are true in the standard
 model of arithmetic $\Struct{N}$ are also true in
-!!a{structure}~$\Struct{N'}$ that contains an !!{element} which
+!!a{structure}~$\Struct{N'}$ that contains !!a{element} which
 \emph{does} satisfy every formula $\num{n} < x$.
 \end{prob}
+\tagendprob
 
+\iftag{FOL}{
 \begin{ex}
 We know that first-order logic with !!{identity} can express that the
 size of the !!{domain} must have some minimal size: The
@@ -146,12 +180,13 @@ of sentences $\Lambda$ were satisfied in all and only finite
 !!{structure}s. Then $\Delta \cup \Lambda$ is finitely
 satisfiable. Why? Suppose $\Delta' \cup \Lambda' \subseteq \Delta \cup
 \Lambda$ is finite with $\Delta' \subseteq \Delta$ and $\Lambda'
-\subseteq \Lambda$. Let $n$ be the largest number such that $A_{\ge n}
+\subseteq \Lambda$. Let $n$ be the largest number such that $!A_{\ge n}
 \in \Delta'$. $\Lambda$, being satisfied in all finite structures, has
 a model~$\Struct{M}$ with finitely many but $\ge n$ !!{element}s. But
 then $\Sat{M}{\Delta' \cup \Lambda'}$.  By compactness, $\Delta \cup
 \Lambda$ has an infinite model, contradicting the assumption that
 $\Lambda$ is satisfied only in finite !!{structure}s.
 \end{ex}
+}{}
 
 \end{document}

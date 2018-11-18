@@ -1,0 +1,159 @@
+% Part: normal-modal-logic
+% Chapter: tableaux
+% Section: more-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{tab}{mru}
+
+\olsection{Rules for Other Accessibility Relations}
+
+In order to deal with logics determined by special accessibility
+relations, we consider the additional rules in \olref{tab:more-rules}.
+
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \iftag{notprvBox,notprvDiamond}
+          {\begin{tabular}{|c|}}
+          {\begin{tabular}{|c|c|}}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{T$\Box$}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{T$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{D$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Diamond!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{D$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Box!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma.n]}
+      \RightLabel{B$\Box$}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma.n]}
+      \RightLabel{B$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{4$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Box!A}[\sigma.n]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{4$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Diamond!A}[\sigma.n]}
+      \DisplayProof}{}
+    \\
+    \iftag{notprvBox,notprvDiamond}
+         {$\sigma.n$ is used}
+         {$\sigma.n$ is used & $\sigma.n$ is used}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma.n]}
+      \RightLabel{4r$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Box!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma.n]}
+      \RightLabel{4r$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Diamond!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{More modal rules.}
+  \ollabel{tab:more-rules}
+\end{table}
+
+Adding these rules results in systems that are sound and complete for
+the logics given in \olref{tab:logics-rules}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{lll}
+      \hline
+      Logic & $R$ is \dots & Rules\\
+      \hline
+      $\Log{T} = \Log{KT}$ & reflexive &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}
+      \\ \hline
+      $\Log{D} = \Log{KD}$ & serial &
+      \iftag{prvBox}{D$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{D$\Diamond$}{}
+      \\ \hline
+      $\Log{K4}$ & transitive &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{B} = \Log{KTB}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & symmetric &
+      \iftag{prvBox}{B$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{B$\Diamond$}{}
+      \\ \hline
+      $\Log{S4} = \Log{KT4}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{},\\
+      & transitive &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{S5} = \Log{KT4B}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{},\\
+      & transitive, &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{},\\
+      &  euclidean &
+      \iftag{prvBox}{4r$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4r$\Diamond$}{}
+      \\ \hline
+    \end{tabular}
+  \end{center}
+  \ollabel{tab:logics-rules}
+  \caption{!!^{tableau} rules for various modal logics.}
+\end{table}
+  
+\end{document}

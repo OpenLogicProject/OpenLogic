@@ -6,7 +6,10 @@
 
 \begin{document}
 
-\olfileid{fol}{ntd}{prv}
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{prv}}
+      {\olfileid{pl}{ntd}{prv}}
+      
 \olsection{\usetoken{S}{derivability} and Consistency}
 
 We will now establish a number of properties of the !!{derivability}
@@ -95,7 +98,6 @@ inconsistent.
   Since $\lnot !A \in \Gamma$, all !!{undischarged} assumptions are
   in~$\Gamma$, this shows that $\Gamma \Proves \lfalse$.
 \end{proof}
-
 
 \begin{prop}\ollabel{prop:provability-exhaustive}
   If $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both

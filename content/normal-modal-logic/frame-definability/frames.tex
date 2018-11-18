@@ -18,20 +18,32 @@
 \end{defn}
 
 \begin{defn}
-  If $\mClass{F}$ is a class of frames, we write $\mClass{F} \Entails
-  !A$, ``$!A$ is valid in $\mClass{F}$,'' to mean that $!A$ is true in
-  every model $\mModel{M}$ based on a frame~$\mModel{F} \in
-  \mClass{F}$.
+  If $\mModel{F}$ is a frame, we say that $!A$ is \emph{valid in
+    $\mModel{F}$,} $\mModel{F} \Entails !A$, if $\mSat{M}{!A}$ for
+  every model~$\mModel{M}$ based on~$\mModel{F}$.
+  
+  If $\mClass{F}$ is a class of frames, we say $!A$ is \emph{valid in
+    $\mClass{F}$,} $\mClass{F} \Entails !A$, iff $\mModel{F} \Entails
+  !A$ for every frame~$\mModel{F} \in \mClass{F}$.
 \end{defn}
 
 The reason frames are interesting is that correspondence between
 schemas and properties of the accessibility relation~$R$ is at the
-level of frames, \emph{not of models}.
+level of frames, \emph{not of models}. For instance, although \Ax{T}
+is true in all reflexive models, not every model in which \Ax{T} is
+true is reflexive. However, it \emph{is} true that not only is \Ax{T}
+\emph{valid} on all reflexive \emph{frames}, also every frame in
+which \Ax{T} is valid is reflexive.
 
 \begin{rem}
-  Obviously, if !!a{formula} or a schema is valid, i.e., valid with
-  respect to the class of \emph{all} models, it is also valid with
-  respect to any  class~$\mClass{F}$ of frames.
+Validity in a class of frames is a special case of the notion of
+validity in a class of models: $\mClass{F} \Entails !A$ iff
+$\mClass{C} \Entails !A$ where $\mClass{C}$ is the class of all models
+based on a frame in~$\mClass{F}$.
+
+Obviously, if !!a{formula} or a schema is valid, i.e., valid with
+respect to the class of \emph{all} models, it is also valid with
+respect to any class~$\mClass{F}$ of frames.
 \end{rem}
 
 \end{document}

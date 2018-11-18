@@ -6,7 +6,9 @@
 
 \begin{document}
 
-\olfileid{fol}{ntd}{pro}
+\iftag{FOL}
+      {\olfileid{fol}{ntd}{pro}}
+      {\olfileid{pl}{ntd}{pro}}
 
 \olsection{Examples of \usetoken{P}{derivation}}
 
@@ -70,7 +72,7 @@ occurence of $\lif$ because it is the !!{main operator} of the
 !!{sentence} in the end-sequent, while $\lnot$, $\lor$ and the second
 occurence of $\lif$ are inside the scope of another connective, so we
 will take care of those later. We therefore start with the
-\Intro{\lif} rule.  A correct application must look as follows:
+\Intro{\lif} rule.  A correct application must look like this:
 \[
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \DeduceC{$!A \lif !B$}

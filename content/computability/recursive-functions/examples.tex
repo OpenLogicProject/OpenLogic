@@ -10,105 +10,183 @@
 \olsection{Examples of Primitive Recursive Functions}
 
 
-Here are some examples of primitive recursive functions:
-\begin{enumerate}
-\item Constants: for each natural number $n$, the function that always
-  returns~$n$ primitive recursive function, since it is equal to
-  $\Succ(\Succ(\dots \Succ(\Zero(x))))$.
+We already have some examples of primitive recursive functions: the
+addition and multiplication functions~$\Add$ and $\Mult$.  The
+identity function $\fn{id}(x) = x$ is primitive recursive, since it is
+just~$\Proj{1}{0}$. The constant functions $\fn{const}_n(x) = n$ are
+primitive recursive since they can be defined from $\Zero$ and $\Succ$
+by successive composition. This is useful when we want to use
+constants in primitive recursive definitions, e.g., if we want to
+define the function $f(x) = 2 \cdot x$ can obtain it by composition
+from $\fn{const}_n(x)$ and multiplication as $f(x) =
+\Mult(\fn{const}_2(x), \Proj{1}{0}(x))$. We'll make use of this trick
+from now on.
 
-\item The identity function: $\fn{id}(x) = x$, i.e.\ $\Proj{1}{0}$
+\begin{prop}
+  The exponentiation function $\fn{exp}(x, y) = x^y$ is primitive recursive.
+\end{prop}
 
-\item Addition, $x+y$
+\begin{proof}
+  We can define $\fn{exp}$ primitive recursively as
+  \begin{align*}
+    \fn{exp}(x, 0) & = 1\\
+    \fn{exp}(x, y+1) & = \Mult(x, \fn{exp}(x,y)).
+    \intertext{Strictly speaking, this is not a recursive definition
+      from primitive recursive functions. Officially, though, we
+      have:}
+    \fn{exp}(x, 0) & = f(x)\\
+    \fn{exp}(x, y+1) & = g(x, y, \fn{exp}(x,y)).
+    \intertext{where}
+    f(x) & = \Succ(\Zero(x)) = 1\\
+    g(x, y, z) & = \Mult(\Proj{3}{0}(x, y, z), \Proj{3}{2}(x, y, z) = x \cdot z
+  \end{align*}
+  and so $f$ and $g$ are defined from primitive recursive functions by
+  composition.
+\end{proof}
 
-\item Multiplication, $x \cdot y$
+\begin{prop}
+  The predecessor function $\fn{pred}(y)$ defined by
+  \[
+  \fn{pred}(y) = \begin{cases}
+    0 & \text{if $y=0$}\\
+    y-1 & \text{otherwise}
+  \end{cases}
+  \]
+  is primitive recursive.
+\end{prop}
 
-\item Exponentiation, $x^y$ (with $0^0$ defined to be $1$)
+\begin{proof}
+ Note that 
+ \begin{align*}
+   \fn{pred}(0) & = 0\\
+   \fn{pred}(y+1) & = y
+ \end{align*}
+ This is almost a primitive recursive definition.  It does not,
+ strictly speaking, fit into the pattern of definition by primitive
+ recursion, since that pattern requires at least one extra
+ argument~$x$. It is also odd in that it does not actually use
+ $\fn{pred}(y)$ in the definition of $\fn{pred}(y+1)$. But we can
+ first define $\fn{pred}'(x, y)$ by
+ \begin{align*}
+   \fn{pred}'(x, 0) & = \Zero(x) = 0\\
+   \fn{pred}'(x, y+1) & = \Proj{3}{1}(x, y, \fn{pred'}(x, y)) = y
+ \end{align*}
+and then define $\fn{pred}$ from it by composition, e.g., as
+$\fn{pred}(x) = \fn{pred}'(\Zero(x), \Proj{1}{0}(x))$.
+\end{proof}
 
-\item Factorial, $x\fac = 1 \cdot 2 \cdot 3 \cdot \cdots \cdot x$
+\begin{prop}
+  The factorial function $\fn{fac}(x) = x\fac = 1 \cdot 2 \cdot 3
+  \cdot \dots \cdot x$ is primitive recursive.
+\end{prop}
 
-\item The predecessor function, $\fn{pred}(x)$, defined by
-\[
-\fn{pred}(0) = 0, \quad \fn{pred}(x+1) = x
-\]
+\begin{proof}
+  The obvious primitive recursive definition is
+  \begin{align*}
+    \fn{fac}(0) = 1\\
+    \fn{fac}(y+1) & = \fac{y} \cdot (y+1)
+    \intertext{Officially, we have to first define a two-place function $h$}
+    h(x, 0) & = \fn{const}_1(x)\\
+    h(x, y) & = g(x, y, h(x, y))
+    \intertext{where $g(x, y, z) = \Mult(\Proj{3}{2}(x, y, z),
+      \Succ(\Proj{3}{1}(x, y, z)$ and then let}
+    \fn{fac}(y) & = h(\Proj{1}{0}(y), \Proj{1}{0}(y))
+  \end{align*}
+  From now on we'll be a bit more lessez-faire and not give the official
+  definitions by composition and primitive recursion.
+\end{proof}
 
-\item Truncated subtraction, $x \tsub y$, defined by
-\[
-x \tsub 0 = x, \quad x \tsub (y+1) = \fn{pred}(x \tsub y)
-\]
+\begin{prop}
+  Truncated subtraction, $x \tsub y$, defined by
+  \[
+  x \tsub y = \begin{cases}
+    0 & \text{if $x > y$}\\
+    x-y & \text{otherwise}
+  \end{cases}
+  \]
+  is primitive recursive.
+\end{prop}
 
-\item Maximum, $\fn{max}(x,y)$, defined by
-\[
-\fn{max}(x,y) \defis x + (y \tsub x)
-\]
+\begin{proof}
+  We have
+  \begin{align*}
+    x \tsub 0 & = x\\
+    x \tsub (y+1) & = \fn{pred}(x \tsub y)
+  \end{align*}
+\end{proof}
 
-\item Minimum, $\fn{min}(x,y)$
+\begin{prop}
+ The distance between $x$ and $y$, $\left|x-y\right|$, is primitive recursive.
+\end{prop}
 
-\item Distance between $x$ and $y$, $\left|x-y\right|$
-\end{enumerate}
+\begin{proof}
+  We have $\left| x-y \right| = (x \tsub y) + (y \tsub x)$, so
+  the distance can be defined by composition from $+$ and $\tsub$,
+  which are primitive recursive.
+\end{proof}
 
-\begin{explain}
-In our definitions, we'll often use constants~$n$. This is ok because
-the constant function $\fn{const}_n(x)$ is primitive recursive
-(defined from $\Zero$ and $\Succ$). So if, e.g., we want to define the
-function $f(x) = 2 \cdot x$ can obtain it by composition from
-$\fn{const}_n(x)$ and multiplication as $f(x) = \fn{const}_2(x) \cdot
-\Proj{1}{0}(x)$. We'll make use of this trick from now on.
-  
-You'll also have noticed that the definition of $\fn{pred}$ does not,
-strictly speaking, fit into the pattern of definition by primitive
-recursion, since that pattern requires an extra argument. It is also
-odd in that it does not actually $\fn{pred}(x)$ in the definition of
-$\fn{pred}(x+1)$. But we can define $\fn{pred}'(x, y)$ by
-\begin{align*}
-  \fn{pred}'(0, y) & = \Zero(y) = 0\\
-  \fn{pred}'(x+1, y) & = \Proj{3}{0}(x, \fn{pred'}(x, y), y) = x
-\end{align*}
-and then define $\fn{pred}$ from it by composition, e.g., as $\fn{pred}(x) =
-\fn{pred}'(\Proj{1}{0}(x), \Zero(x))$.
-\end{explain}
+\begin{prop}
+  The maximum of $x$ and $y$, $\fn{max}(x,y)$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  We can define $\fn{max}(x,y)$ by composition from $+$ and $\tsub$ by
+  \[
+  \fn{max}(x,y) \defis x + (y \tsub x).
+  \]
+  If $x$ is the maximum, i.e., $x \ge y$, then $y \tsub x = 0$, so $x
+  + (y \tsub x) = x + 0 = x$. If $y$ is the maximum, then $y \tsub x =
+  y - x$, and so $x + (y \tsub x) = x + (y - x) = y$.
+\end{proof}
+
+\begin{prop}
+  \ollabel{prop:min-pr}
+  The minimum of $x$ and $y$, $\fn{min}(x,y)$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  Prove \olref[cmp][rec][exa]{prop:min-pr}.
+\end{proof}
 
 \begin{prob}
 Show that \[
 f(x, y) =
-2^{2^{\iddots^{2^{x}}}}\raisebox{1ex}{\bigg\rbrace}
+2^{(2^{\iddots^{2^{x}}})}\raisebox{1ex}{\bigg\rbrace}
 \raisebox{1ex}{\text {$y$ $2$'s}}\] is primitive recursive.
 \end{prob}
 
 \begin{prob}
-Show that $d(x, y) = \lfloor x/y \rfloor$ (i.e., division, where you
-disregard everything after the decimal point) is primitive
-recursive. When $y = 0$, we stipulate $d(x, y) = 0$. Give an explicit
-definifion of~$d$ using primitive recursion and composition. You will
-have detour through an axiliary function---you cannot use recursion on
-the arguments $x$ or $y$ themselves.
+Show that integer division $d(x, y) = \lfloor x/y \rfloor$ (i.e.,
+division, where you disregard everything after the decimal point) is
+primitive recursive. When $y = 0$, we stipulate $d(x, y) = 0$. Give an
+explicit definition of~$d$ using primitive recursion and
+composition.
 \end{prob}
 
-The set of primitive recursive functions is further closed under the
+\begin{prop}
+The set of primitive recursive functions is closed under the
 following two operations:
 \begin{enumerate}
-\item Finite sums: if $f(x,\vec z)$ is primitive recursive, then so is the
+\item Finite sums: if $f(\vec x, z)$ is primitive recursive, then so is the
 function
 \[
-g(y,\vec z) \defis \sum_{x = 0}^y f(x,\vec z).
+g(\vec x, y) \defis \sum_{z = 0}^y f(\vec x, z).
 \]
-\item Finite products: if $f(x,\vec z)$ is primitive recursive, then so is the
+\item Finite products: if $f(\vec x, z)$ is primitive recursive, then so is the
 function
 \[
-h(y,\vec z) \defis \prod_{x = 0}^y f(x,\vec z).
+h(\vec x, y) \defis \prod_{z = 0}^y f(\vec x, z).
 \]
 \end{enumerate}
+\end{prop}
+
+\begin{proof}
 For example, finite sums are defined recursively by the equations
-\[
-g(0,\vec z) = f(0,\vec z), \quad g(y+1,\vec z) = g(y,\vec z) +
-f(y+1,\vec z).
-\]
-We can also define boolean operations, where $1$ stands for true, and
-$0$ for false:
-\begin{enumerate}
-\item Negation, $\fn{not}(x) \defis 1 \tsub x$
-\item Conjunction, $\fn{and}(x,y) \defis x \cdot y$
-\end{enumerate}
-Other classical boolean operations like $\fn{or}(x,y)$ and
-$\fn{ifthen}(x,y)$ can be defined from these in the usual way.
+\begin{align*}
+  g(\vec x, 0) & = f(\vec x, 0)\\
+  g(\vec x, y+1) = g(\vec x, y) + f(\vec x, y+1).
+\end{align*}
+\end{proof}
+
 
 \end{document}

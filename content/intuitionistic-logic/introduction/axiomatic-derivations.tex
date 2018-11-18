@@ -1,0 +1,70 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: axiomatic-derivations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{axd}
+
+\olsection{Axiomatic \usetoken{P}{derivation}}
+
+Axiomatic !!{derivation}s for intuitionistic propositional logic are
+the conceptually simplest, and historically first, !!{derivation}
+systems. They work just as in classical propositional logic.
+
+\begin{defn}[!!^{derivability}]
+If $\Gamma$ is a set of !!{formula}s of $\Lang L$ then a
+\emph{!!{derivation}} from $\Gamma$ is a finite sequence $!A_1$,
+\dots,~$!A_n$ of !!{formula}s where for each $i \le n$ one of the
+following holds:
+\begin{enumerate}
+\item $!A_i \in \Gamma$; or
+\item $!A_i$ is an axiom; or
+\item $!A_i$ follows from some $!A_j$ and $!A_k$ with $j < i$ and $k <
+  i$ by modus ponens, i.e., $!A_k \ident !A_j \lif !A_i$.
+\end{enumerate}
+\end{defn}
+
+\begin{defn}[Axioms]
+The set of $\PAx$ of \emph{axioms} for the intuitionistic propositional logic 
+are all !!{formula}s of the following forms:
+\begin{align}
+  & (!A \land !B) \lif !A \ollabel{ax:land1}\\
+  & (!A \land !B) \lif !B \ollabel{ax:land2}\\
+  & !A \lif (!B \lif (!A \land !B)) \ollabel{ax:land3}\\
+  & !A \lif (!A \lor !B) \ollabel{ax:lor1}\\
+  & !A \lif (!B \lor !A) \ollabel{ax:lor2}\\
+  & (!A \lif !C) \lif ((!B \lif !C) \lif ((!A \lor !B) \lif !C)) \ollabel{ax:lor3}\\
+  & !A \lif (!B \lif !A) \ollabel{ax:lif1}\\
+  & (!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C)) \ollabel{ax:lif2}\\
+  & \lfalse \lif !A \ollabel{ax:lfalse1}
+\end{align}
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+!!^a{formula} $!A$ is \emph{!!{derivable}} from $\Gamma$, written
+$\Gamma \Proves !A$, if there is !!a{derivation} from $\Gamma$ ending
+in $!A$.
+\end{defn}
+
+\begin{defn}[Theorems]
+!!^a{formula}~$!A$ is a \emph{theorem} if there is !!a{derivation}
+of~$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a
+theorem and $\Proves/ !A$ if it is not.
+\end{defn}
+
+\begin{prop}
+  If $\Gamma \Proves !A$ in intuitionistic logic, $\Gamma \Proves !A$ in
+  classical logic. In particular, if $!A$ is an intuitionistic
+  theorem, it is also a classical theorem.
+\end{prop}
+
+\begin{proof}
+  Every intuitionistic axiom is also a classical axiom, so every
+  !!{derivation} in intuitionistic logic is also !!a{derivation} in
+  classical logic.
+\end{proof}
+
+\end{document}

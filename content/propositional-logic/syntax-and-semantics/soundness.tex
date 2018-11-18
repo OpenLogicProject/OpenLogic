@@ -1,0 +1,33 @@
+% Part: propositional-logic
+% Chapter: propositional-logic 
+% Section: soundness
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{prp}{snd}
+
+\olsection{Soundness of Propositional Logic}
+
+\begin{thm}[Soundness] 
+\ollabel{thm:soundness} 
+If $\Gamma\Proves!A$ then
+$\Gamma \Entails !A$. 
+\end{thm}
+
+\begin{proof} 
+By induction on theorems. If $!A$ is an axiom then $\Entails
+!A$ and hence a fortiori $\Gamma \Entails!A$. Similarly if $!A \in \Gamma$,
+$\Gamma \Entails!A$. For the inductive step, suppose $!A$ is obtained by
+\emph{modus ponens} from $!C$ and $!C\lif!A$; also assume as inductive
+hypothesis that the theorem holds for $!C\lif !A$ and $!C$. The third item
+in \olref[sem]{prop:semanticalfacts} gives the desired result. 
+\end{proof}
+
+\begin{cor} 
+If $\Gamma$ is satisfiable, then $\Gamma$ is consistent. Hence,
+propositional logic is consistent. 
+\end{cor}
+
+\end{document}

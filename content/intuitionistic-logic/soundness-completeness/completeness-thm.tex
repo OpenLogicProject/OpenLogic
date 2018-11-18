@@ -1,0 +1,30 @@
+% part: intuitionistic-logic
+% chapter: soundeness-completeness
+% section: completeness-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{cpl}
+
+\olsection{The Completeness Theorem}
+
+\begin{thm}\ollabel{thm:completeness}
+  If $\Gamma \Entails !A$ then $\Gamma \Proves !A$.
+\end{thm}
+
+\begin{proof}
+  We prove the contrapositive: Suppose $\Gamma \Proves/ !A$. Then by
+  \olref[lin]{lem:lindenbaum}, there is a prime set~$\Gamma^*
+  \supseteq \Gamma$ such that $\Gamma^* \Proves/ !A$. Consider the
+  canonical model~$\mModel{M(\Gamma^*)}$ for $\Gamma^*$ as defined in
+  \olref[mod]{defn:canonical-model}. For any $!B \in \Gamma$, $\Gamma^*
+  \Proves !B$. Note that $\Gamma*(\emptyseq) = \Gamma*$. By the Truth
+  Lemma (\olref[tru]{lem:truth}), we have
+  $\mSat{M(\Gamma^*)}{!B}[\emptyseq]$ for all $!B \in \Gamma$ and
+  $\mSat/{M(\Gamma^*)}{!A}[\emptyseq]$. This shows that $\Gamma
+  \Entails/ !A$.
+\end{proof}
+
+\end{document}

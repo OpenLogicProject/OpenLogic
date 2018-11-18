@@ -1,0 +1,112 @@
+% Part: conditional-logics
+% Chapter: minimal-change-semantics
+% Section: true-false
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{con}{min}{tf}
+
+\olsection{Truth and Falsity of Counterfactuals}
+
+A counterfactual $!A \cif !B$ is (non-vacuously) true if the closest
+$!A$-worlds are all $!B$-worlds, as depicted in \olref{fig:true}.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  \proposition[shift={(1.6,-1)}]{90}{1}{30}{4}}
+  \path (1.5,3) node[below] {$\formula{B}$};
+  \path (3,0) node {$\formula{A}$};
+\end{tikzpicture}
+\caption{Non-vacuously true counterfactual}
+\ollabel{fig:true}
+\end{center}
+\end{figure}
+A counterfactual is also true at $w$ if the system of spheres
+around~$w$ has no $!A$-admitting spheres at all. In that case it is
+\emph{vacuously} true (see  \olref{fig:vacuous}).
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \proposition{0}{6.5}{40}{3.5}
+  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  \proposition[shift={(1.2,-1)}]{90}{1}{30}{4}}
+  \path (1.5,3) node[below] {$\formula{B}$};
+  \spherepos{0}{7}{node {$\formula{A}$}}
+\end{tikzpicture}
+\caption{Vacuously true counterfactual}
+\ollabel{fig:vacuous}
+\end{center}
+\end{figure}
+
+It can be false in two ways. One way is if the closest $!A$-worlds are
+not all $!B$-worlds, but some of them are. In this case, $!A \cif
+\lnot !B$ is also false (see \olref{fig:false}).
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  \proposition[shift={(1.6,0)}]{90}{1}{30}{3}}
+  \path (1.5,3) node[below] {$\formula{B}$};
+  \path (3,0) node {$\formula{A}$};
+\end{tikzpicture}
+\caption{False counterfactual, false opposite}
+\ollabel{fig:false}
+\end{center}
+\end{figure}
+If the closest $!A$-worlds do not overlap with the $!B$-worlds at all,
+then $!A \cif !B$. But, in this case all the closest $!A$-worlds are
+$\lnot !B$-worlds, and so $!A \cif \lnot !B$ is true (see
+\olref{fig:false-opposite}).
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.7]\small
+  \spheresystem{5}
+  \draw (0,0) node {$w$};
+  \propositionintersect{0}{4}{40}{3.5}
+  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  \proposition[shift={(-1,0)}]{90}{1}{30}{3}}
+  \path (-1,3) node[below] {$\formula{B}$};
+  \path (3,0) node {$\formula{A}$};
+\end{tikzpicture}
+\caption{False counterfactual, true opposite}
+\ollabel{fig:false-opposite}
+\end{center}
+\end{figure}
+
+In contrast to the strict conditional, counterfactuals may be
+contingent. Consider the sphere model in \olref{fig:contingent}. The
+$!A$-worlds closest to~$u$ are all $!B$-worlds, so $\mSat{M}{!A \cif
+  !B}[u]$. But there are $!A$-worlds closest to~$v$ which are not
+$!B$-worlds, so $\mSat/{M}{!A \cif !B}[v]$.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[scale=.6]\small
+  \spheresystem{7}
+  \spheresystem[shift={(0:3.1)},dashed]{4}
+  \propositionintersect{45}{4}{40}{4.5}
+  \begin{scope}
+    \clip \propositionplot{45}{4}{40}{4.5} ;
+    \spherelayer[shift={(0:3.1)}]{3}
+  \end{scope}
+  \proposition[shift={(1.4,-.5)}]{90}{1}{35}{5}
+  \path (0,0) node {$u$};
+  \path (0:3.1) node {$v$};
+  \spherepos{35}{9}{node {$\formula{A}$}};
+  \spherepos{80}{9}{node {$\formula{B}$}};
+\end{tikzpicture}
+\end{center}
+\caption{Contingent counterfactual}
+\ollabel{fig:contingent}
+\end{figure}
+\end{document}

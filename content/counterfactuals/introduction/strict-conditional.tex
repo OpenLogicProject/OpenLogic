@@ -1,0 +1,109 @@
+% Part: counterfactuals
+% Chapter: introduction
+% Section: strict-conditional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{cnt}{int}{str}
+
+\olsection{The Strict Conditional}
+
+Lewis introduced the \emph{strict conditional}~$\strictif$ and argued
+that it, not the material conditional, corresponds to implication.  In
+alethic modal logic, $!A \strictif !B$ can be defined as $\Box(!A \lif
+!B)$. A strict conditional is thus true (at a world) iff the
+corresponding material conditional is necessary.
+
+How does the strict conditional fare vis-a-vis the paradoxes of the
+material conditional?  A strict conditional with a false antecedent
+and one with a true consequent, may be true, or it may be
+false. Moreover, $(!A \strictif !B) \lor (!B \strictif !A)$ is not
+valid. The strict conditional $!A \strictif !B$ is also not equivalent
+to $\lnot !A \lor !B$, so it is not truth functional.
+
+We have:
+\begin{align}
+  !A \strictif !B & \Entails \lnot !A \lor !B
+  \text{ but:}\\
+  \lnot !A \lor !B & \Entails/ !A \strictif !B\\
+  !B & \Entails/ !A \strictif !B\\
+  \lnot !A & \Entails/ !A \strictif !B\\
+  \lnot(!A \lif !B) & \Entails/ !A \land \lnot !B
+  \text{ but:}\\
+  !A \land \lnot !B & \Entails \lnot(!A \strictif !B)
+  \intertext{However, the strict conditional still supports modus ponens:}
+  !A, !A \strictif !B & \Entails !B
+  \intertext{The strict conditional agglomerates:}
+  !A \strictif !B,  !A \strictif !C & \Entails !A \strictif (!B \land !C)
+  \intertext{Antecedent strengthening holds for the strict conditional:}
+  !A \strictif !B & \Entails (!A \land !C) \strictif !B
+  \intertext{The strict conditional is also transitive:}
+  !A \strictif !B, !B \strictif !C & \Entails !A \strictif !C
+  \intertext{Finally, the strict conditional is equivalent to its
+    contrapositive:}
+  !A \strictif !B & \Entails \lnot !B \strictif \lnot !A\\
+  \lnot !B \strictif \lnot !A & \Entails !A \strictif !B
+\end{align}
+
+\begin{prob}
+  Give \Log{S5}-counterexamples to the entailment relations which do not hold
+  for the strict conditional, i.e., for:
+  \begin{enumerate}
+  \item $\lnot p \Entails/ \Box(p \lif q)$
+  \item $q \Entails/ \Box(p \lif q)$
+  \item $\lnot\Box(p \lif q) \Entails/ p \land \lnot q$
+  \item $\Entails/ \Box(p \lif q) \lor \Box(q \lif p)$
+  \end{enumerate}
+\end{prob}
+
+\begin{prob}
+  Show that the valid entailment relations hold for the strict
+  conditional by giving \Log{S5}-proofs of:
+  \begin{enumerate}
+  \item  $\Box(!A \lif !B) \Entails \lnot !A \lor !B$
+  \item $!A \land \lnot !B \Entails \lnot\Box(!A \lif !B)$
+  \item $!A, \Box(!A \lif !B) \Entails !B$
+  \item $\Box(!A \lif !B), \Box(!A \lif !C) \Entails \Box(!A \lif (!B
+    \land !C))$
+  \item $\Box(!A \lif !B) \Entails \Box((!A \land !C) \lif !B)$
+  \item $\Box(!A \lif !B), \Box(!B \lif !C) \Entails \Box(!A
+    \lif !C)$
+  \item $\Box(!A \lif !B) \Entails \Box(\lnot !B \lif \lnot !A)$
+  \item $\Box(\lnot !B \lif \lnot !A) \Entails \Box(!A \lif !B)$
+  \end{enumerate}
+  \end{prob}
+
+However, the strict conditional still has its own ``paradoxes.'' Just
+as a material conditional with a false antecedent or a true consequent
+is true, a strict conditional with a \emph{necessarily} false
+antecedent or a necessarily true consequent is true. Moreover, any
+true strict conditional is necessarily true, and any false strict
+conditional is necessarily false. In other words, we have
+\begin{align}
+  \Box !A & \Entails !A \strictif !B\\
+  \Box \lnot !B & \Entails !A \strictif !B\\
+  !A \strictif !B& \Entails \Box(!A \strictif !B)\\
+  \lnot(!A \strictif !B) & \Entails \Box\lnot(!A \strictif !B)
+\end{align}
+These are not problems if you think of $\strictif$ as ``implies.''
+Logical entailment relationships are, after all, mathematical facts and so
+can't be contingent. But they do raise issues if you want to use
+$\strictif$ as a logical connective that is supposed to capture ``if
+\dots then \dots,'' especially the last two. For surely there are ``if
+\dots then \dots'' statements that are contingently true or
+contingently false---in fact, they generally are neither necessary nor
+impossible.
+
+\begin{prob}
+  Give proofs in \Log{S5} of:
+  \begin{enumerate}
+    \item  $\Box \lnot !B \Entails !A \strictif !B$
+    \item $!A \strictif !B \Entails \Box(!A \strictif !B)$
+    \item $\lnot(!A \strictif !B)  \Entails \Box\lnot(!A \strictif !B)$
+  \end{enumerate}
+  Use the definition of $\strictif$ to do so.
+\end{prob}
+
+\end{document}

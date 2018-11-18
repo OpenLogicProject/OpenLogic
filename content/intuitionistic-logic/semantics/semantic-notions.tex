@@ -1,0 +1,41 @@
+% part: intuitionistic-logic
+% chapter: semantics
+% section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sem}{sem}
+
+\olsection{Semantic Notions}
+
+\begin{defn}
+  We say $!A$ is \emph{true in the model $\mModel{M} = \tuple{W,R,V,
+      w_0}$,} $\mSat{M}{!A}$, iff $\mSat{M}{!A}[w]$ for all $w \in W$.
+  $!A$ is \emph{valid}, $\Entails !A$, iff it is true in all models.
+  We say a set of !!{formula}s~$\Gamma$ \emph{entails}~$!A$, $\Gamma
+  \Entails !A$, iff for every model~$\mModel{M}$ and every~$w$ such
+  that $\mSat{M}{\Gamma}[w]$, $\mSat{M}{!A}[w]$.
+\end{defn}
+
+\begin{prop}\ollabel{prop:sat-entails}
+  \begin{enumerate}
+  \item\ollabel{prop:sat-entails1} If $\mSat{M}{\Gamma}[w]$ and
+    $\Gamma \Entails !A$, then $\mSat{M}{!A}[w]$.
+  \item\ollabel{prop:sat-entails2} If $\mSat{M}{\Gamma}$ and $\Gamma
+    \Entails !A$, then $\mSat{M}{!A}$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item Suppose $\mSat{M}{\Gamma}$. Since $\Gamma \Entails !A$, we
+    know that if $\mSat{M}{\Gamma}[w]$, then $\mSat{M}{!A}[w]$. Since
+    $\mSat{M}{\Gamma}[u]$ for all every $u \in W$,
+    $\mSat{M}{\Gamma}[w]$. Hence $\mSat{M}{!A}[w]$.
+  \item Follows immediately from \olref{prop:sat-entails1}.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

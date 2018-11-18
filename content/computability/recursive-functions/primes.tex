@@ -12,14 +12,14 @@
 Bounded quantification and bounded minimization provide us with a good
 deal of machinery to show that natural functions and relations are
 primitive recursive. For example, consider the relation relation ``$x$
-divides $y$'', written $x \mid y$.  $x \mid y$ holds if division of
-$x$ by~$y$ is possible without remainder, i.e., if $y$ is an integer
-multiple of~$x$.  (If it doesn't hold, i.e., the remainder when
-dividing $x$ by $y$ is $> 0$, we write $x \nmid y$.) In other words,
-$x \mid y$ iff for some~$z$, $x \cdot z = y$.  Obviously, any such
-$z$, if it exists, must be $\leq y$. So, we have that $x \mid y$ iff
-for some $z \le y$, $x \cdot z = y$.  We can define the relation $x
-\mid y$ by bounded existential quantification from $=$ and
+divides $y$'', written $x \mid y$.  The relation $x \mid y$ holds if
+division of $y$ by~$x$ is possible without remainder, i.e., if $y$ is
+an integer multiple of~$x$.  (If it doesn't hold, i.e., the remainder
+when dividing $x$ by $y$ is $> 0$, we write $x \nmid y$.) In other
+words, $x \mid y$ iff for some~$z$, $x \cdot z = y$.  Obviously, any
+such $z$, if it exists, must be $\leq y$. So, we have that $x \mid y$
+iff for some $z \le y$, $x \cdot z = y$.  We can define the relation
+$x \mid y$ by bounded existential quantification from $=$ and
 multiplication by
 \[
 x \mid y \defiff \bexists{z \leq y}{(x \cdot z) = y}.

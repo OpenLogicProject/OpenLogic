@@ -1,11 +1,13 @@
-% % The Default OLP Configuration File `open-logic-config.sty`
-% % OpenLogic Project
+% Configuration File for courses/enderton/open-logic-enderton
+% OpenLogic Project
+
+% We copy the style of Enderton's Mathematical Introduction to Logic
 
 % Formulas are \alpha, \beta, etc.
 
 \olalphagreekformulas
 
-% Herb likes \mathfrak{A} for structures
+% Herb liked \mathfrak{A} for structures
 
 \DeclareDocumentCommand \Struct { m }{\mathfrak{\lookup{M/A,N/B}{#1}}}
 
@@ -28,7 +30,6 @@
         % optional argument present
         { \bar{#3}(#1) }
 }
-
 
 % object language: regular math italics
 
@@ -55,3 +56,8 @@
 % no limit clauses
 
 \tagfalse{limitClause}
+
+% Do only axiomatic deduction
+
+\tagtrue{prfAX}
+\tagfalse{prfND,prfSC,prfTab}

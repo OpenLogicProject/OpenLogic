@@ -75,12 +75,21 @@
 % different symbol, replace `\rightarrow` in the definition, e.g., by
 % `\supset`
 
-\DeclareDocumentMacro \lif {\rightarrow}
+\DeclareDocumentMacro \lif {\mathbin{\rightarrow}}
 
 % - The biconditional is `\liff` and defaults to $\leftrightarrow$.  To
 % use the triple bar $\equiv$ replace with `\equiv`.
 
-\DeclareDocumentMacro \liff {\leftrightarrow}
+\DeclareDocumentMacro \liff {\mathbin{\leftrightarrow}}
+
+% - The conditional `\cif` and defaults to `\boxright` which produces
+% - Lewis's box-arrow symbol.
+
+\DeclareDocumentMacro \cif {\boxright}
+
+% - The strict conditional `\strictif`
+
+\DeclareDocumentMacro \strictif {\fishhookright}
 
 % Quantifiers 
 % ----------- 
@@ -202,6 +211,22 @@
   \LeftLabel{\scriptsize $#2$}
 }
 
+% Proof Terms
+% ---------------------
+%
+% Proof terms used in intuitionistic logic
+
+\DeclareDocumentCommand \typeof { m m } {#1^{#2}}
+
+\DeclareDocumentCommand \andi { m m } {\tuple{#1, #2}}
+\DeclareDocumentCommand \ande { m m } {\fn{p}_{#1}(#2)}
+\DeclareDocumentCommand \ori { m m m } {\fn{in}_{#1}^{#2}(#3)}
+\DeclareDocumentCommand \ore { m m m m m } {\fn{case}(#1, #2.#3, #4.#5)}
+\DeclareDocumentCommand \falsee { m m } {\fn{contr}_{#1}(#2)}
+
+% Axiomatic Derivations
+% ---------------------
+
 % - `\MP`: produces abbreviation for Modus Ponens.
 
 \DeclareDocumentMacro \MP {\textsc{mp}}
@@ -214,12 +239,22 @@
 
 \DeclareDocumentMacro \Hyp {\textsc{Hyp}}
 
-% - `\sFmla`: Signed (prefixed) formulas for tableaux
+% - `\sFmla`: Signed (prefixed) formulas in running text
 
 \DeclareDocumentCommand \sFmla { m m o }{
   \ensuremath{%
     \IfNoValueTF{#3}{}{#3\,}%
-    \hbox to1em{\ensuremath{#1}} #2}}
+    \hbox to.8em{\ensuremath{#1}} #2}}
+
+% - `\pFmla`: signed prefixed formulas for tableaux
+
+\DeclareDocumentCommand \pFmla { m m m }{
+  \ensuremath{%
+    \hskip 3em{\llap{$#3$}\,}%
+    \hbox to1.3em{\ensuremath{#1}} #2}}
+
+% Tableaux
+% --------
 
 % - Tableau rule names: `\TRule{Sign}{Op}` typesets the name of a the
 % 'Sign' rule for operator `Op`, `\TFalse{Op}` does the same for
@@ -232,6 +267,7 @@
 % - `\TAss`: justification label for ``assumption''
 
 \DeclareDocumentMacro \TAss {Assumption}
+
 
 % Metalogical Relations
 % ---------------------
@@ -282,12 +318,12 @@
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \not\models #3 }
-        { \Struct #2, #4 \not\models #3}}{
+        { \Struct #2 \nvDash #3 }
+        { \Struct #2, #4 \nvDash #3}}{
     % not negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \models #3 }
-        { \Struct #2, #4 \models #3 }}
+        { \Struct #2 \vDash #3 }
+        { \Struct #2, #4 \vDash #3 }}
 }
 
 % ### The derivability relation
@@ -361,11 +397,11 @@
 
 % - `\pAssign{v}` - Typeset a truth-value assignment
 
-\DeclareDocumentCommand \pAssign { m } {#1}
+\DeclareDocumentCommand \pAssign { m } {\mathfrak #1}
 
-% - `\pValue{A}{v}` - Truth value of a formula under a truth-value assignment.
+% - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
 
-\DeclareDocumentCommand \pValue { m m }{\mathrm{TV}^{\pAssign{#2}}{#1}}
+\DeclareDocumentCommand \pValue { m m }{\overline{\pAssign{#1}}(#2)}
 
 % - `\pSat[/]{v}{!A}`, the relation of being satisfied by a
 % truth-value assignment
@@ -373,11 +409,10 @@
 \DeclareDocumentCommand \pSat { t{/} m m } {
   \IfBooleanTF{#1}{
     % negated
-        \pAssign #2 \not\models #3}{
+        \pAssign #2 \nvDash #3}{
     % not negated
-        \pAssign #2 \models #3}
+        \pAssign #2 \vDash #3}
 }
-
 
 % - `\substruct`: symbol for the substructure relation
 
@@ -663,19 +698,31 @@
 % Modal Logic 
 % -----------
 
-% - `\mSat{M}{!A}[w]`: modal satisfaction relation
+% Modal logic
+% ===========
 
-\DeclareDocumentCommand \mSat { t{/} m m o } {
-  \IfBooleanTF{#1}{
+% - `\mModel{M}` - modal structures; default: set first token in
+% Fraktur
+
+\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
+
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$.
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {%
+  \IfBooleanTF{#1}{%
     % negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \nVdash #3 }
-        { \Struct #2, #4 \nVdash #3}}{
+        { \mModel #2 \nVdash #3 }
+        { \mModel #2, #4 \nVdash #3}}{%
     % not negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \Vdash #3 }
-        { \Struct #2, #4 \Vdash #3 }}
-}
+        { \mModel #2 \Vdash #3 }
+        { \mModel #2, #4 \Vdash #3 }}}
 
 % - `\mClass{C}` --- typeset class of models
 
@@ -701,20 +748,15 @@
 
 \DeclareDocumentMacro \PL {\textsc{pl}}
 
-% - `\Prop{A}{M}`: the proposition defined by $A$ in $\mathfrak{M}$
+% - `\Prop{M}{A}`: the proposition defined by $A$ in $\mathfrak{M}$
 
 \DeclareDocumentCommand \Prop { m m } {
-  {[\!\![} #1 {]\!\!]_{\mModel #2}}
+  {[\!\![} #2 {]\!\!]_{\mModel #1}}
 }
 
 % - `\ST`: The standard translation
 
 \DeclareDocumentMacro \ST {\mathord{\mathrm{ST}}}
-
-% - `\strictif`: strict conditional
-
-\DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
-\DeclareMathSymbol{\strictif}{\mathrel}{symbolsC}{74}
 
 % - TikZ style for modal models
 
@@ -766,7 +808,7 @@
 \DeclareDocumentCommand \len { m }{\fn{len}(#1)}
 
 % - `\emptyseq`: the empty sequence
-\DeclareDocumentMacro \emptyseq {\emptyset}
+\DeclareDocumentMacro \emptyseq {\Lambda}
 
 % - `\restrict`: restriction of a function to a set (infix operator)
 \DeclareDocumentMacro \restrict {\upharpoonright}
@@ -803,6 +845,14 @@
 \DeclareDocumentMacro \fdefined {\downarrow}
 \DeclareDocumentMacro \fundefined {\uparrow}
 
+% - `cutrank`: cut rank
+
+\DeclareDocumentCommand \cutrank { m }{\fn{cr}(#1)}
+
+% - `maxrank`: max rank
+
+\DeclareDocumentCommand \maxrank { m }{\fn{mr}(#1)}
+
 % ### Particular sets
 
 % - Natural numbers: `\Nat`
@@ -822,6 +872,17 @@
 
 % - Identity relation: `\Id{X}`
 \DeclareDocumentCommand \Id { m } {\mathord{\mathrm{Id}_{#1}}}
+
+% Topological notions
+% -------------------
+
+% - `\Top{O}`: Open sets
+
+\DeclareDocumentCommand \Top { m }{\mathcal{#1}}
+
+% - `\Interior{V}`: the interior of $V$
+
+\DeclareDocumentCommand \Interior { m }{\mathrm{Int}(#1)}
 
 % ### Symbols for Turing Machines
 
@@ -1002,33 +1063,6 @@
         { \mathrm{Sent}({\Lang #1}) }
 }
 
-% Modal logic
-% ===========
-
-% - `\mModel{M}` - modal structures; default: set first token in
-% Fraktur
-
-\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
-
-% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
-% model (at a world), is provided as the command
-% `\mSat` with two mandatory arguments (the model and the formula)
-% and one optional argument (the world).  Use `\mSat/` to create
-% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
-% $\mathfrak{M}, w \models \varphi$.
-
-\DeclareDocumentCommand \mSat { t{/} m m o } {
-  \IfBooleanTF{#1}{
-    % negated
-    \IfNoValueTF {#4} 
-        { \mModel #2 \nVdash #3 }
-        { \mModel #2, #4 \nVdash #3}}{
-    % not negated
-    \IfNoValueTF {#4} 
-        { \mModel #2 \Vdash #3 }
-        { \mModel #2, #4 \Vdash #3 }}
-}
-
 
 
 % Commands for uniform formulations
@@ -1179,6 +1213,10 @@
 
 \settexttoken{structure}{structure}{structures}
 
+% - `valuation`: valuation, truth-value assignment
+
+\settexttoken{valuation}{valuation}{valuations}
+
 % - `domain`: domain of a structure
 
 \settexttoken{domain}{domain}{domains}
@@ -1186,6 +1224,11 @@
 % - `value`: value (denotation) of a term
 
 \settexttoken{value}{value}{values}
+
+% - `relational model`: term for modal structures, defaults to
+% "relational model", redefine for "Kripke model".
+
+\settexttoken{relational model}{relational model}{relational models}
 
 % - `derivation`: derivation in a calculus, proof
 
@@ -1353,6 +1396,10 @@
 \tagtrue{prfND}
 \tagtrue{prfAX}
 \tagtrue{prfTab}
+
+% - `FOL` - if true, we produce text for FOL, otherwise for PL
+
+\tagtrue{FOL}
 
 % - `cmplCCS` - prove completeness via generating a complete
 % consistent set

@@ -1,0 +1,100 @@
+\ProvidesPackage{ptolemaicastronomy}
+
+\tikzset{
+  sphere/.style = {dotted},
+  sphere intersection/.style = {fill=lightgray},
+  sphere layer/.style = {fill=lightgray},
+  proposition/.style={smooth,tension=1.7},
+}
+
+\pgfkeyssetvalue{/tikz/layerwidth}{.5}
+\pgfkeyssetvalue{/tikz/innerfactor}{.4}
+
+% \sphereplot{n} gives the plot codes for the nth sphere
+
+\newcommand{\sphereplot}[1]{
+  circle
+    [radius=(#1)*\pgfkeysvalueof{/tikz/layerwidth}-
+      \pgfkeysvalueof{/tikz/layerwidth}*\pgfkeysvalueof{/tikz/innerfactor}]
+}
+
+
+% \spheresystem[options]{n} draws a sphere system centered at
+% the origin with n number of layers
+
+\newcommand{\spheresystem}[2][]{
+  \foreach \i in {1,...,#2}{
+    \draw[sphere,#1] \sphereplot{\i} ;
+  }
+}
+
+% \spherelayer[options]{n} shades the n-th layer
+
+\newcommand{\spherelayer}[2][]{
+  \begin{scope}[even odd rule]
+    \fill[#1,sphere layer]
+    \sphereplot{#2-1} \sphereplot{#2} ;
+  \end{scope}
+}
+
+% \spherefill[options]{n} fills the nth sphere
+
+\newcommand{\spherefill}[2][]{
+    \fill[sphere intersection,#1]
+    \sphereplot{#2} ;
+}
+
+% \sphereintersect[options]{path}{n} draws the path and shades the area
+% of the path in the n th layer. Options only apply to the sphere layer
+
+\newcommand{\sphereintersect}[3][]{
+  \begin{scope}[even odd rule]
+    \path[clip] #3;
+    \spherefill[#1]{#2}
+  \end{scope}
+  \draw #3;
+}
+
+% \sphereproposition[options]{direction}{n}{width}{length} draws a
+% proposition intersecting the n-th layer in direction away from the
+% center of the sphere system, with endpoints length away from the
+% vertex at an angle of width/2. Note that options applies to \draw,
+% not to plot. To change the tension on the plot, e.g., say
+% \tikzset{proposition/.style={smooth,tension=2}} -- in a group to
+% make it apply only to a single proposition.
+
+\newcommand{\propositionplot}[4]{
+  plot [proposition]
+  coordinates {+(#1+#3/2:#4)
+    +(#1:#2*\pgfkeysvalueof{/tikz/layerwidth}-
+    \pgfkeysvalueof{/tikz/layerwidth}*.9
+    -\pgfkeysvalueof{/tikz/layerwidth}*\pgfkeysvalueof{/tikz/innerfactor})
+    +(#1-#3/2:#4)}
+}
+
+\newcommand{\proposition}[5][]{
+  \draw[proposition,#1] \propositionplot {#2}{#3}{#4}{#5} ;
+  }
+
+% \spherepropositionintersect does the same as \sphereproposition but
+% also shades the are of intersection with the closest sphere
+
+\newcommand{\propositionintersect}[5][]{
+  \begin{scope}
+  \path[clip] \propositionplot{#2}{#3}{#4}{#5};
+  \spherefill[#1]{#3}
+  \end{scope}
+  \draw[proposition,#1] \propositionplot{#2}{#3}{#4}{#5};
+}
+
+% \spherepos[options]{direction}{n}{code} shifts the scope to a
+% position in the center of the nth layer in direction angle from the
+% center -- and then puts code there.
+
+\newcommand{\spherepos}[4][]{
+  \begin{scope}[#1,shift=(#2:#3*\pgfkeysvalueof{/tikz/layerwidth}-
+      \pgfkeysvalueof{/tikz/layerwidth}/2-
+        \pgfkeysvalueof{/tikz/layerwidth}*\pgfkeysvalueof{/tikz/innerfactor})]
+    \path #4 ;
+  \end{scope}
+}

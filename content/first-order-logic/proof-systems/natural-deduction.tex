@@ -6,7 +6,9 @@
 
 \begin{document}
 
-\olfileid{fol}{prf}{ntd}
+\iftag{FOL}
+      {\olfileid{fol}{prf}{ntd}}
+      {\olfileid{pl}{prf}{ntd}}
 
 \olsection{Natural Deduction}
 
@@ -70,7 +72,7 @@ For instance, here is !!a{derivation} that shows that $\Proves (!A
   \UnaryInfC{$(!A \land !B) \lif !A$}
 \end{prooftree}
 The label~$1$ indicates that the assumption $!A \land !B$ is
-!!{discharged} at he \Intro{\lif} inference.
+!!{discharged} at the \Intro{\lif} inference.
   
 A set~$\Gamma$ is inconsistent iff $\Gamma \Proves \lfalse$ in natural
 deduction.  The rule \FalseInt{} makes it so that from an inconsistent

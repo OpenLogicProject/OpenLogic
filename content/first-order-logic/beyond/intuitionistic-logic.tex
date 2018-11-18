@@ -191,31 +191,31 @@ the meaning of the connectives. Though one can provide some intuitive
 motivation for Kripke semantics, the latter does not offer the same
 feeling of inevitability. In addition, the notion of a classical
 !!{structure} is a natural mathematical one, so we can either take the
-notion of a !!{structure} to be a tool for studying classical first-order
+notion of !!a{structure} to be a tool for studying classical first-order
 logic, or take classical first-order logic to be a tool for studying
 mathematical !!{structure}s. In contrast, Kripke !!{structure}s can only be
 viewed as a logical construct; they don't seem to have independent
 mathematical interest.
 
-A Kripke !!{structure} for a propositional langauge consists of a
-partial order $\Mod P$ with a least element, and an ``monotone''
-assignment of propositional variables to the elements of $\Mod P$. The
-intuition is that the elements of $\Mod P$ represent ``worlds,'' or
-``states of knowledge''; an element $p \geq q$ represents a ``possible
-future state'' of $q$; and the propositional variables assigned to $p$
-are the propositions that are known to be true in state~$p$. The
-forcing relation $\mSat{P}{!A}[p]$ then extends this relationship to
-arbitrary !!{formula}s in the language; read $\mSat{P}{!A}[p]$ as
-``$!A$ is true in state $p$.'' The relationship is defined
-inductively, as follows:
+A Kripke !!{structure}~$\mModel M = \tuple{W, R, V}$ for a propositional
+language consists of a set~$W$, partial order~$R$ on~$W$ with a least
+!!{element}, and an ``monotone'' assignment of propositional variables to
+the !!{element}s of~$W$. The intuition is that the !!{element}s of $W$
+represent ``worlds,'' or ``states of knowledge''; an element $v \geq
+u$ represents a ``possible future state'' of~$u$; and the
+propositional variables assigned to~$u$ are the propositions that are
+known to be true in state~$u$. The forcing relation $\mSat{M}{!A}[w]$
+then extends this relationship to arbitrary !!{formula}s in the
+language; read $\mSat{M}{!A}[w]$ as ``$!A$ is true in state~$w$.'' The
+relationship is defined inductively, as follows:
 \begin{enumerate}
-\item $\mSat{P}{p_i}[p]$ iff $p_i$ is one of the propositional variables
-  assigned to~$p$.
-\item $\mSat/{P}{\lfalse}[p]$.
-\item $\mSat{P}{(!A \land !B)}[p]$ iff $\mSat{P}{!A}[p]$ and $\mSat{P}{!B}[p]$.
-\item $\mSat{P}{(!A \lor !B)}[p]$ iff $\mSat{P}{!A}[p]$ or $\mSat{P}{!B}[p]$.
-\item $\mSat{P}{(!A \lif !B)}[p]$ iff, whenever $q \geq p$ and
-  $\mSat{P}{!A}[q]$, then $\mSat{P}{!B}[q]$.
+\item $\mSat{M}{\Obj p_i}[w]$ iff $\Obj p_i$ is one of the
+  propositional variables assigned to~$w$.
+\item $\mSat/{M}{\lfalse}[w]$.
+\item $\mSat{M}{(!A \land !B)}[w]$ iff $\mSat{M}{!A}[w]$ and $\mSat{M}{!B}[w]$.
+\item $\mSat{M}{(!A \lor !B)}[w]$ iff $\mSat{M}{!A}[w]$ or $\mSat{M}{!B}[w]$.
+\item $\mSat{M}{(!A \lif !B)}[w]$ iff, whenever $w' \geq w$ and
+  $\mSat{M}{!A}[w']$, then $\mSat{M}{!B}[w']$.
 \end{enumerate}
 It is a good exercise to try to show that $\lnot (p \land q) \lif
 (\lnot p \lor \lnot q)$ is not intuitionistically valid, by cooking up a

@@ -1,0 +1,235 @@
+% part: intuitionistic-logic
+% chapter: introduction
+% section: natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{int}{ntd}
+
+\olsection{Natural Deduction}
+
+Natural deduction without the $\FalseCl$ rules is a standard
+!!{derivation} system for intuitionistic logic. We repeat the rules
+here and indicate the motivation using the BHK interpretation.  In
+each case, we can think of a rule which allows us to conclude that if
+the premises have constructions, so does the conclusion.
+
+Since natural deduction !!{derivation}s have undischarged assumptions,
+we should consider such !!a{derivation}, say, of $!A$ from
+!!{undischarged} assumptions~$\Gamma$, as a function that turns
+constructions of all $!B \in \Gamma$ into a construction of~$!A$.  If
+there is !!a{derivation} of~$!A$ from no !!{undischarged} assumptions,
+then there is a construction of~$!A$ in the sense of the BHK
+interpretation. For the purpose of the discussion, however, we'll
+suppress the~$\Gamma$ when not needed.
+
+An assumption~$!A$ by itself is !!a{derivation} of~$!A$ from the
+!!{undischarged} assumption~$!A$. This agrees with the
+BHK-interpretation: the identity function on constructions turns any
+construction of~$!A$ into a construction of~$!A$.
+
+\subsection{Conjunction}
+
+\begin{defish}
+  \AxiomC{$!A_1$}
+  \AxiomC{$!A_2$}
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInfC{$!A_1 \land !A_2$}
+  \DisplayProof
+\hfill
+  \AxiomC{$!A_1 \land !A_2$}
+  \RightLabel{$\Elim{\land}_i$}
+  \UnaryInfC{$!A_i$}
+  \DisplayProof
+  \quad
+  $i \in \{1,2\}$
+\end{defish}
+
+Suppose we have constructions $N_1$, $N_2$ of $!A_1$ and $!A_2$,
+respectively.  Then we also have a construction $!A_1 \land !A_2$, namely the
+pair $\tuple{N_1, N_2}$.
+
+A construction of $!A_1 \land !A_1$ on the BHK interpretation is a pair
+$\tuple{N_1, N_2}$. So assume we have such a pair. Then we also have a
+construction of each conjunct: $N_1$ is a construction of~$!A_1$ and $N_2$ is a
+construction of $!A_2$.
+
+\subsection{Conditional}
+
+\begin{defish}
+  \AxiomC{$\Discharge{!A}{u}$}
+  \DeduceC{$!B$}
+  \DischargeRule{$\Intro{\lif}$}{$u$}
+  \UnaryInfC{$!A \lif !B$}
+  \DisplayProof
+\hfill
+  \AxiomC{$!A \lif !B$}
+  \AxiomC{$!A$}
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+\end{defish}
+
+If we have !!a{derivation} of~$!B$ from !!{undischarged}
+assumption~$!A$, then there is a function~$f$ that turns constructions
+of~$!A$ into constructions of~$!B$. That same function is a
+construction of $!A \lif !B$. So, if the premise of $\Intro\lif$ has a
+construction conditional on a construction of~$!A$, the conclusion $!A
+\lif !B$ has a construction.
+
+On the other hand, suppose there are constructions~$N$ of $!A$ and $f$
+of $!A \lif !B$. A construction of $!A \lif !B$ is a function that
+turns constructions of $!A$ into constructions of~$!B$. So, $f(N)$ is
+a construction of~$!B$, i.e., the conclusion of $\Elim\lif$ has a
+construction.
+
+\subsection{Disjunction}
+
+\begin{defish}
+  \AxiomC{$!A_i$}
+  \RightLabel{$\Intro{\lor}_i$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \DisplayProof\quad
+  $i \in \{1,2\}$
+\hfill
+  \AxiomC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{u}$}
+  \DeduceC{$!C$}
+  \AxiomC{$\Discharge{!A_2}{u}$}
+  \DeduceC{$!C$}
+  \DischargeRule{$\Elim{\lor}$}{u}
+  \TrinaryInfC{$!C$}
+  \DisplayProof
+\end{defish}
+If we have a construction~$N_i$ of~$!A_i$ we can turn it into a
+construction~$\tuple{i, N_i}$ of~$!A_1 \lor !A_2$. On the other hand, suppose
+we have a construction of~$!A_1 \lor !A_2$, i.e., a pair $\tuple{i, N_i}$
+where $N_i$ is a construction of~$!A_i$, and also functions $f_1$, $f_2$,
+which turn constructions of $!A_1$, $!A_2$, respectively, into constructions
+of~$!C$. Then $f_i(N_i)$ is a construction of~$!C$, the conclusion
+of~$\Elim\lor$.
+
+\subsection{Absurdity}
+
+\begin{defish}
+  \AxiomC{$\lfalse$}
+  \RightLabel{\FalseInt}
+  \UnaryInfC{$!A$}
+  \DisplayProof
+\end{defish}
+
+If we have !!a{derivation} of~$\lfalse$ from !!{undischarged}
+assumptions~$!B_1$, \dots, $!B_n$, then there is a function~$f(M_1,
+\dots, M_n)$ that turns constructions of $!B_1$, \dots, $!B_n$ into a
+construction of~$\lfalse$. Since $\lfalse$ has no construction, there
+cannot be any constructions of all of $!B_1$, \dots, $!B_n$
+either. Hence, $f$ also has the property that \emph{if} $M_1$, \dots,
+$M_n$ are constructions of $!B_1$, \dots, $!B_n$, respectively,
+\emph{then} $f(M_1, \dots, M_n)$ is a construction of~$!A$.
+
+\subsection{Rules for $\lnot$}
+
+Since $\lnot !A$ is defined as $!A \lif \lfalse$, we strictly speaking
+do not need rules for~$\lnot$. But if we did, this is what they'd look
+like:
+
+\begin{defish}
+\AxiomC{$\Discharge{!A}{n}$}
+\noLine
+\DeduceC{$\lfalse$}
+\DischargeRule{\Intro{\lnot}}{n}
+\UnaryInfC{$\lnot !A$}
+\DisplayProof
+\hfill
+\AxiomC{$\lnot !A$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lnot}}
+\BinaryInfC{$\lfalse$}
+\DisplayProof
+\end{defish}
+
+
+\subsection{Examples of \usetoken{P}{derivation}}
+
+\begin{enumerate}
+\item $\Proves !A \lif (\lnot !A \lif \lfalse)$, i.e., $\Proves !A
+  \lif ((!A \lif \lfalse) \lif \lfalse)$
+  \begin{prooftree}
+    \AxiomC{$\Discharge{!A}{2}$}
+    \AxiomC{$\Discharge{!A \lif \lfalse}{1}$}
+    \RightLabel{\Elim\lif}
+    \BinaryInfC{$\lfalse$}
+    \DischargeRule{\Intro\lif}{1}
+    \UnaryInfC{$(!A \lif \lfalse)\lif \lfalse$}
+    \DischargeRule{\Intro\lif}{2}
+    \UnaryInfC{$!A \lif (!A \lif \lfalse) \lif \lfalse$}
+  \end{prooftree}
+
+\item $\Proves ((!A \land !B) \lif !C) \lif (!A \lif (!B \lif !C))$
+  \begin{prooftree}
+    \AxiomC{$\Discharge{(!A \land !B) \lif !C}{3}$}
+    \AxiomC{$\Discharge{!A}{2}$}
+    \AxiomC{$\Discharge{!B}{1}$}
+    \RightLabel{\Intro\land}
+    \BinaryInfC{$!A \land !B$}
+    \RightLabel{\Elim\lif}
+    \BinaryInfC{$!C$}
+    \DischargeRule{\Intro\lif}{1}
+    \UnaryInfC{$!B \lif !C$}
+    \DischargeRule{\Intro\lif}{2}
+    \UnaryInfC{$!A \lif (!B \lif !C)$}
+    \DischargeRule{\Intro\lif}{3}
+    \UnaryInfC{$((!A \land !B) \lif !C) \lif (!A \lif (!B \lif !C))$}
+  \end{prooftree}
+
+\item $\Proves \lnot(!A \land \lnot !A)$, i.e., $\Proves (!A \land (!A
+  \lif \lfalse))\lif \lfalse$
+  \begin{prooftree}
+    \AxiomC{$\Discharge{!A \land (!A \lif \lfalse)}{1}$}
+    \RightLabel{\Elim\land}
+    \UnaryInfC{$!A \lif \lfalse$}
+    \AxiomC{$\Discharge{!A \land (!A \lif \lfalse)}{1}$}
+    \RightLabel{\Elim\land}
+    \UnaryInfC{$!A$}
+    \RightLabel{\Elim\lif}
+    \BinaryInfC{$\lfalse$}
+    \DischargeRule{\Intro\lif}{1}
+    \UnaryInfC{$(!A \land (!A \lif \lfalse))\lif \lfalse$}
+  \end{prooftree}
+
+\item $\Proves \lnot\lnot(!A \lor \lnot !A)$, i.e., $\Proves ((!A \lor
+  (!A \lif \lfalse))\lif \lfalse)\lif \lfalse$
+  \begin{prooftree}
+    \AxiomC{$\Discharge{(!A \lor (!A \lif \lfalse))\lif \lfalse}{2}$}
+    \AxiomC{$\Discharge{(!A \lor (!A \lif \lfalse))\lif \lfalse}{2}$}
+    \AxiomC{$\Discharge{!A}{1}$}
+    \RightLabel{\Intro\lor}
+    \UnaryInfC{$!A \lor (!A \lif \lfalse)$}
+    \RightLabel{\Elim\lif}
+    \BinaryInfC{$\lfalse$}
+    \DischargeRule{\Intro\lif}{1}
+    \UnaryInfC{$!A \lif \lfalse$}
+    \RightLabel{\Intro\lor}
+    \UnaryInfC{$!A \lor (!A \lif \lfalse)$}
+    \RightLabel{\Elim\lif}
+    \BinaryInfC{$\lfalse$}
+    \DischargeRule{\Intro\lif}{2}
+    \UnaryInfC{$((!A \lor (!A \lif \lfalse))\lif \lfalse)\lif \lfalse$}
+  \end{prooftree}
+\end{enumerate}
+
+\begin{prop}
+  If $\Gamma \Proves !A$ in intuitionistic logic, $\Gamma \Proves !A$ in
+  classical logic. In particular, if $!A$ is an intuitionistic
+  theorem, it is also a classical theorem.
+\end{prop}
+
+\begin{proof}
+  Every natural deduction rule is also a rule in classical natural
+  deduction, so every !!{derivation} in intuitionistic logic is also
+  !!a{derivation} in classical logic.
+\end{proof}
+
+\end{document}

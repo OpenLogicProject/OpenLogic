@@ -27,7 +27,8 @@
 
 \RequirePackage{bussproofs}
 \RequirePackage[tableaux]{prooftrees}
-\newenvironment{oltableau}{\center\tableau{}}
+
+\newenvironment{oltableau}{\center\tableau{}} %wff format={anchor = base west}}}
                {\endtableau\endcenter}
 
 
@@ -67,6 +68,7 @@
 \input{\olpath/sty/open-logic-tokenize.sty}
 \input{\olpath/sty/open-logic-selective.sty}
 \input{\olpath/sty/bpextra.sty} % load version supplied by OLP
+\input{\olpath/sty/ptolemaicastronomy.sty}
 
 % Hooks
 \def\OLEndChapterHook{}
@@ -147,6 +149,13 @@
 \else \advance \gnArgHgt by -\gnCornerHgt%
 \fi \raise\gnArgHgt\hbox{$\ulcorner$} \box\gnBoxA %
 \raise\gnArgHgt\hbox{$\urcorner$}}
+
+% Additional symbols
+
+\DeclareSymbolFont{symbolsC}{U}{ntxsyc}{m}{n}
+\DeclareMathSymbol{\boxright}{\mathbin}{symbolsC}{128}
+\DeclareMathSymbol{\diamondright}{\mathbin}{symbolsC}{132}
+\DeclareMathSymbol{\fishhookright}{\mathbin}{symbolsC}{74}
 
 % License boxes
 
