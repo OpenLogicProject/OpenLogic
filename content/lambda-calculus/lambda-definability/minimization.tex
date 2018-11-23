@@ -32,21 +32,27 @@ that any function defined by regular minimization from !!a{lambda
   \begin{align*}
     H & \eqs \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}]  \\
     \fn{Search} &\eqs \lambd[g][\lambd[f\,\vec{x}\,y][
-        \fn{IsZero} (F\, \vec{x}\, y)\, y\, (g \vec{x} (\fn{Succ}\, y)]]
+        \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, \vec{x} (\fn{Succ}\, y)]]
   \end{align*}
   where $Y$ is any fixpoint combinator. Informally speaking,
   $\fn{Search}$ is a self-referencing function: starting with $y$,
-  test whether $F \vec x y$ is zero: if so, return $y$, otherwise call
+  test whether $f\, \vec x\, y$ is zero: if so, return $y$, otherwise call
   itself with $\fn{Succ}\, y$. Thus $(Y \, \fn{Search}) F
   \num{n_1}\dots\num{n_k}\,\num{0}$ returns the least~$m$ for which $f(n_1,
   \dots, n_k) = 0$.
   
-  Specifically, observe that $(Y \, \fn{Search}) F \num{n_1}
-  \dots\num{n_k}\, \num{m}$ reduces to $\num{m}$ if $f(n_1, \dots,
-  n_k, m) = 0$, or reduces to $(Y \, \fn{Search}) F\, \num{n_1}
-  \dots\num{n_k}\, \num{m+1}$ otherwise. Since $f(n_1, \dots, n_k, y)
-  = 0$ for some $y$, $(Y \, \fn{Search}) F \num{n_1}
-  \dots\num{n_k}\,\num{0} \red \num{h(n_1, \dots, n_k)}$.
+  Specifically, observe that
+  \begin{align*}
+    (Y \, \fn{Search}) F \num{n_1}
+    \dots\num{n_k}\, \num{m} & \red \num{m}
+    \intertext{if $f(n_1, \dots,
+      n_k, m) = 0$, or}
+    & \red (Y \, \fn{Search}) F\, \num{n_1} \dots\num{n_k}\, \num{m+1}
+    \intertext{otherwise. Since $f$ is regular, $f(n_1, \dots, n_k, y)
+      = 0$ for some $y$, and so}
+    (Y \, \fn{Search}) F \num{n_1} \dots\num{n_k}\,\num{0}
+    & \red \num{h(n_1, \dots, n_k)}.
+    \end{align*}
 \end{proof}
 
 
@@ -61,7 +67,5 @@ that any function defined by regular minimization from !!a{lambda
  functions are closed under composition, primitive recursion, and
  regular minimization.
 \end{proof}
-
-
 
 \end{document}

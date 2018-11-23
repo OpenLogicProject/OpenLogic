@@ -9,26 +9,20 @@
 \olfileid{lam}{rep}{cur} 
 \olsection{Currying}
 
-Before we move on to the representation for natural numbers, pairs,
-functions, we first have to resolve a practical problem:
-$\lambd$-terms as defind in \olref[syn]{def:terms} represent functions
-of one argument, which is quite a limitation when we want to define
-function accepting multiple arguments.
+$\lambd$-abstracts $\lambd[x][M]$ represent functions of one argument,
+which is quite a limitation when we want to define function accepting
+multiple arguments.  One way to do this would be by extending the
+$\lambd$-calculus to allow the formation of pairs, triples, etc., in
+which case, say, a three-place function $\lambd[x][M]$ would expect
+its argument to be a triple.  However, it is more convenient to do
+this by \emph{Currying}.
 
-Recall that in set theory, we use $A \times B$ (the Cartesian product
-of $A$ and $B$, \olref[sfr][set][pai]{sec}) to denote the domain of
-functions accepting two arguments from sets $A$ and~$B$ respectively,
-so the functions accepts a pair containing two arguments. While in
-lambda calculus we can mimic this method by encoding pairs (as shown
-in \olref[rep][pai]{sec}), it is more convenient to do this by
-\emph{currying}.
-
-Let's see some examples. If we want to define a function that accepts
-two arguments and returns the first, we write
+Let's consider an example. If we want to define a function that
+accepts two arguments and returns the first, we write
 $\lambd[x][\lambd[y][x]]$, which literally is a function that accepts
 an argument and returns a function that accepts another argument and
 returns the first argument while it drops the second. Let's see what
-happens when we apply two arguments to it:
+happens when we apply it to two arguments:
 \begin{align*}
   (\lambd[x][\lambd[y][x]])MN 
   \bredone & (\lambd[y][M])N \\
@@ -37,10 +31,10 @@ happens when we apply two arguments to it:
 
 In general, to write a function with parameters $x_1$, \dots,~$x_n$
 defined by some term~$N$, we can write
-$\lambd[x_1][\lambd[\ldots\lambd[x_n][N]]]$. If we apply $n$ arguments
+$\lambd[x_1][\lambd[x_2][\ldots\lambd[x_n][N]]]$. If we apply $n$ arguments
 to it we get:
 \begin{multline*}
-  (\lambd[x_1][\lambd[\ldots\lambd[x_n][N]]]) M_1 \dots M_n \bredone\\
+  (\lambd[x_1][\lambd[x_2][\ldots\lambd[x_n][N]]]) M_1 \dots M_n \bredone\\
   \begin{aligned}
   \bredone {} & (\Subst{(\lambd[x_2][\ldots\lambd[x_n][N]])}{M_1}{x_1}) M_2
   \dots M_n\\

@@ -22,7 +22,7 @@ A term that !!{lambda define}s the successor function is
     number~$a$, and evaluates to another function, $\lambd[fx][f ({a}
       f x)]$. That function is not itself a Church numeral. However,
     if the argument $a$ is a Church numeral, it reduces to one. Consider:}
-   (\lambd[n][\lambd[fx][f ({n} f x)]])\,\num{n} & \redone
+   (\lambd[a][\lambd[fx][f ({a} f x)]])\,\num{n} & \redone
    \lambd[fx][f ({\num{n}} f x)]
    \intertext{The embedded term $\num{n}fx$ is a redex, since
      $\num{n}$ is $\lambd[fx][f^nx]$. So $\num{n}fx \redone f^nx$ and

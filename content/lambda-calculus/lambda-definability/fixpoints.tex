@@ -47,7 +47,7 @@ is not feasible.
 The recursive definition does tell us something, though: If $f$ were a
 term representing the factorial function, then the term
 \[
-\fn{Fac}' \eqs \lambd[x][\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult} \, n\, (x (\fn{Pred} n)))]]
+\fn{Fac}' = \lambd[x][\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult} \, n\, (x (\fn{Pred} n)))]]
 \]
 applied to the term $f$, i.e., $\fn{Fac}'\,f$, also represents the
 factorial function.  That is, if we regard $\fn{Fac}'$ as a function
@@ -59,40 +59,98 @@ $\fn{Fac}'$.
 
 There are terms in the lambda calculus that compute the fixpoints of a
 given term, and these terms can then be used to turn a term like
-$\fn{Fac}'$ into the definition of the factorial.
+$\fn{Fac}'$ into the definition of the factorial. 
 
 \begin{defn}
-The \emph{Y-combinator} is the term:
-\[
-Y \eqs  \lambd[f][(\lambd[x][f (x x)]) (\lambd[x][f (x x)])].
-\]
+  \ollabel{defn:Turing-Y}
+  The \emph{Y-combinator} is the term:
+  \[
+  Y = (\lambd[ux][x(uux)])(\lambd[ux][x(uux)])
+  \]
 \end{defn}
 
-$Y$ has the property that:
-\begin{align*}
-  Y g &= \lambd[f][(\lambd[x][f (x x)]) (\lambd[x][f (x x)])] g \\
-      &= (\lambd[x][g (x x)]) (\lambd[x][g (x x)]) \\
-      &= g ((\lambd[x][g (x x)]) (\lambd[x][g (x x)])) \\
-      &= g (Y g)
-\intertext{for any term $g$, in other words, $Yg$ is a fixpoint of~$g$. We can
-expand this term as many times as we want, and get:}
-    Y g &= g (Y g) \\
-        &= g (g (Y g)) \\
-        &\ldots \\
-        &= g (g (\ldots ))
-\end{align*}
-Intuitively speaking, $g$ applied to any term infinitely many times is
-a fixpoint of $g$. Of course, when $Yg$ is itself applied to a term,
-e.g., $Yg\, \num n$, this process may terminate in a normal term.
+\begin{prop}
+  $Y$ has the property that $Yg \red g(Yg)$ for any term $g$. In other
+  words, $Yg$ is a fixpoint of~$g$.
+\end{prop}
 
-Take the factorial for instance. Define $\fn{Fac}$ as $Y\, \fn{Fac}'$; then:
+\begin{proof}
+  Let's abbreviate $(\lambd[ux][x(uux)])$ by~$U$, so that $Y = UU$. Then
+  \begin{align*}
+    Y g &= (\lambd[ux][x(uux)])U\,g \\
+    &\red (\lambd[x][x(UUx)])g\\
+    & \red g(UUg) = g(Yg) \qedhere
+  \end{align*}
+\end{proof}
+
+Of course, since $Yg$ is a redex, the reduction can continue indefinetely:
 \begin{align*}
-  \fn{Fac}\,\num 3 &\red Y\, \fn{Fac}' \, \num 3 \\
-      &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 3 \\
-      &\red (\lambd[f][\lambd[n][\fn{IsZero} \, n\, \num 1\, (\fn{Mult}\, n\, (f (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 3\\
-      &\red  \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2) \\
-      \ldots
+  Y g &\red g (Y g) \\
+    &\red g (g (Y g)) \\
+    &\red g(g (g (Y g)))
+    &\ldots
 \end{align*}
+So we can think of $Yg$ as $g$ applied to itself infinitely many
+times. If we apply $g$ to it one additional time, we---so to
+speak---aren't doing anything extra; $g$ applied to $g$ applied
+infinitely many times to $Yg$ is still $g$ applied to $Yg$ infinitely
+many times. So $Yg$ is a fixpoint of $g$.
+
+Note that the above sequence of $\beta$-reduction steps starting
+with~$Yg$ is infinite. So if we apply $Yg$ to some term, i.e.,
+consider $(Yg)N$, that term will also reduce to infinitely many
+different terms, namely $(g(Yg))N$, $(g(g(Yg)))N$, \dots. It is
+nevertheless possible that some \emph{other} sequence of reduction
+steps does terminate in a normal form.
+
+Take the factorial for instance. Define $\fn{Fac}$ as $Y\, \fn{Fac}'$
+(i.e., a fixpoint of $\fn{Fac'}$). Then:
+\begin{align*}
+  \fn{Fac}\,\num 3
+  &\red Y\, \fn{Fac}' \, \num 3 \\
+  &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 3 \\
+  &= (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\,
+      (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 3\\
+  & \red \fn{IsZero} \, \num 3\, \num 1\,
+      (\fn{Mult}\, \num 3\, (\fn{Fac} (\fn{Pred}\, \num 3))) \\
+  &\red  \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2) 
+  \intertext{Similarly,}
+  \fn{Fac}\,\num 2
+  &\red  \fn{Mult}\, \num 2 \, (\fn{Fac} \, \num 1) \\
+  \fn{Fac}\,\num 1
+  &\red  \fn{Mult}\, \num 1 \, (\fn{Fac} \, \num 0)
+  \intertext{but}
+  \fn{Fac}\,\num 0
+  &\red \fn{Fac}' (Y \,\fn{Fac}') \, \num 0 \\
+  &= (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\,
+      (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 0\\
+  & \red \fn{IsZero} \, \num 0\, \num 1\,
+      (\fn{Mult}\, \num 0\, (\fn{Fac} (\fn{Pred}\, \num 0))) \\
+  &\red \num 1
+  \intertext{So together}
+  \fn{Fac}\,\num 3
+  &\red  \fn{Mult}\, \num 3 \,
+  (\fn{Mult} \, \num 2\, (\fn{Mult} \, \num 1\, \num 1)) 
+\end{align*}
+
+The $Y$ combinator of \olref{defn:Turing-Y} is due to Alan
+Turing. Alonzo Church had proposed a different version which we'll
+call~$Y_C$:
+\[
+Y_C = \lambd[g][(\lambd[x][g(xx)])(\lambd[x][g(xx)])] \\
+\]
+Church's combinator is a bit weaker than Turing's in that $Yg \equiv
+g(Yg)$ but not $Yg \bred g(Yg)$. Let $V$ be the term
+$\lambd[x][g(xx)]$, so that $Y_C = \lambd[g][VV]$. Consider
+\begin{align*}
+  VV & = (\lambd[x][g(xx)])V\\
+  & \red g(VV)
+  \intertext{and consequently}
+  (\lambd[g][VV])g & \red VV \red g(VV)\\
+  g((\lambd[g][VV])g) & \red g(VV)
+\end{align*}
+In other words, $Yg$ and $g(Yg)$ reduce to a common term; so $Yg
+\equiv_\beta g(Yg)$. This is often enough for applications.
 
 \end{document}
 
