@@ -108,8 +108,9 @@ such that $\Sat{N}{!A(\num n, \num m)}$ iff $n < m$. Consider the formula
 \[
 !B(x, Y) \ident Y(x) \land \lforall[y][(Y(y) \lif Y(y'))]
 \]
-Clearly, $!B(\num n, Y)$ defines the set $\Setabs{m}{n \le m}$, so we
-can take $!A_\le(x, y) \ident \lexists[Y][(!B(x, Y) \land Y(y))]$.
+Clearly, $!B(\num n, Y)$ is satisfied by a set $Y \subseteq \Nat$ iff
+$\Setabs{m}{n \le m} \subseteq Y$, so we can take $!A_\le(x, y) \ident
+\lforall[Y][(!B(x, Y) \lif Y(y))]$.
 \end{proof}
 
 \begin{prob}
