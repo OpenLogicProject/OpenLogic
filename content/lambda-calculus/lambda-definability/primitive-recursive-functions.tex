@@ -22,9 +22,9 @@ by composition and primitive recursion.
 \begin{proof}
 They are !!{lambda define}d by the following terms:
 \begin{align*}
-  \fn{Zero} & = \lambd[a][\lambd[fx][x]]\\
-  \fn{Succ} & = \lambd[a][\lambd[fx][f (a f x)]] \\
-  \fn{Proj}^n_i & = \lambd[x_0\dots x_{n-1}][x_i] \qedhere
+  \fn{Zero} & \ident \lambd[a][\lambd[fx][x]]\\
+  \fn{Succ} & \ident \lambd[a][\lambd[fx][f (a f x)]] \\
+  \fn{Proj}^n_i & \ident \lambd[x_0\dots x_{n-1}][x_i] \qedhere
 \end{align*}
 \end{proof}
 
@@ -38,7 +38,7 @@ They are !!{lambda define}d by the following terms:
 \begin{proof}
   $h$ can be !!{lambda define}d by the term
   \[
-  H = \lambd[x_0 \dots x_{n-1}][F\, (G_0 x_0 \dots
+  H \ident \lambd[x_0 \dots x_{n-1}][F\, (G_0 x_0 \dots
     x_{n-1}) \dots (G_{k-1} x_0 \dots x_{n-1})]
   \]
   We leave verification of this fact as an exercise.
@@ -75,29 +75,30 @@ they are total and !!{lambda definable}.
   For simplicity, we give the definition and proof for a single
   additional argument~$x$. The function $h$ is !!{lambda define}d by:
   \begin{align*}
-    H = & \lambd[x][\lambd[y][\fn{Snd} (y
+    H \ident & \lambd[x][\lambd[y][\fn{Snd} (y
         D \tuple{\num{0}, F x})]]
     \intertext{where }
-    D = & (\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G x
-          (\fn{Fst}\, p) (\fn{Snd}\, p))})
+    D \ident & \lambd[p][\tuple{\fn{Succ} (\fn{Fst}\, p), (G x
+          (\fn{Fst}\, p) (\fn{Snd}\, p))}]
   \end{align*}
   The iteration state we maintain is a pair, the first of which is the
-  current $y$ and the second is the correspondng value of~$h$. For
+  current $y$ and the second is the corresponding value of~$h$. For
   every step of iteration we create a pair of new values of $y$ and
   $h$; after the iteration is done we return the second part of the
   pair and that's the final $h$ value. We now prove this is indeed a
   representation of primitive recursion.
 
-  We want to prove that for any $n$ and $m$, $H\,\num{n}\,\num{m} =
-  \num{h(n,m)}$. To do this we first show that if $D_n =
+  We want to prove that for any $n$ and $m$, $H\,\num{n}\,\num{m} \red
+  \num{h(n,m)}$. To do this we first show that if $D_n \ident
   \Subst{D}{\num{n}}{x}$, then $D_n^m \tuple{\num{0}, F\, \num{n}} \red
   \tuple{\num{m}, \num{h(n, m)}}$ We proceed by induction on~$m$.
 
   If $m=0$, we want $D_n^0 \tuple{\num{0}, F\, \num{n}} \red
   \tuple{\num{0}, \num{h(n, 0)}}$. But $D_n^0 \tuple{\num{0}, F\,
     \num{n}}$ just is $\tuple{\num{0}, F\, \num{n}}$. Since $F$
-  !!{lambda define}s, this reduces to $\tuple{\num{0}, \num{f(n)}}$, and
-  $f(n) = h(n, 0)$.
+  !!{lambda define}s~$f$, this reduces to $\tuple{\num{0},
+    \num{f(n)}}$, and since $f(n) = h(n, 0)$, this is $\tuple{\num{0},
+    \num{h(n,0)}}$
 
   Now suppose that $D_n^m \tuple{\num{0}, F\, \num{n}} \red
   \tuple{\num{m}, \num{h(n, m)}}$. We want to
@@ -105,13 +106,15 @@ they are total and !!{lambda definable}.
   \tuple{\num{m+1}, \num{h(n, m+1)}}$.
   \begin{align*}
     D_n^{m+1} \tuple{\num{0}, F\, \num{n}}
-    & =     D_n(D_n^{m} \tuple{\num{0}, F\, \num{n}})\\
-    & \red D_n(\tuple{\num{m}, \num{h(n, m)}}) \text{ (by IH)}\\
-    & = (\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G \, \num{n}
-      (\fn{Fst}\, p) (\fn{Snd}\, p))}) \tuple{\num{m}, \num{h(n,m)}})\\
+    & \ident D_n(D_n^{m} \tuple{\num{0}, F\, \num{n}})\\
+    & \red D_n\,\tuple{\num{m}, \num{h(n, m)}} \text{\qquad (by IH)}\\
+    & \ident (\lambd[p][
+      \tuple{
+        \fn{Succ} (\fn{Fst}\, p), (G \, \num{n} (\fn{Fst}\, p) (\fn{Snd}\, p))
+    }]) \tuple{\num{m}, \num{h(n,m)}}\\
     & \redone
     \tuple{\fn{Succ} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}), (G \, \num{n}
-      (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}) (\fn{Snd}\, \tuple{\num{m}, \num{h(n,m)}}))}))\\
+      (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}) (\fn{Snd}\, \tuple{\num{m}, \num{h(n,m)}}))}\\
     & \red 
     \tuple{\fn{Succ}\, \num{m}, (G \, \num{n} \,\num{m} \, \num{h(n,m)})}\\
     & \red \tuple{\num{m+1}, \num{g(n, m, h(n, m))}}
@@ -120,16 +123,16 @@ they are total and !!{lambda definable}.
 
   Finally, consider
   \begin{align*}
-    H\,\num n\,\num m &= \lambd[x][\lambd[y][\fn{Snd} (y
+    H\,\num n\,\num m &\ident \lambd[x][\lambd[y][\fn{Snd} (y
         (\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G\, x\,
           (\fn{Fst}\, p)\, (\fn{Snd}\, p))}) \tuple{\num{0}, F x})]] \,\num n\, \num m\\
     & \red \fn{Snd} (\num m \,
     \underbrace{(\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G \,\num n\,
       (\fn{Fst}\, p) (\fn{Snd}\, p))})}_{D_n} \tuple{\num{0}, F \num n})\\
-    & = \fn{Snd} (\num m \, D_n\, \tuple{\num{0}, F \num n})\\
-    & \red \fn{Snd} \,D_n^m  \tuple{\num{0}, F \num n})\\
-    & \red \fn{Snd} \tuple{\num{m}, \num{h(n, m)}} \\
-    & \red \num{h(n,m)}. \qedhere
+    & \ident \fn{Snd} (\num m \, D_n\, \tuple{\num{0}, F \num n})\\
+    & \red \fn{Snd} \,(D_n^m  \tuple{\num{0}, F \num n})\\
+    & \red \fn{Snd} \,\tuple{\num{m}, \num{h(n, m)}} \\
+    & \red \num{h(n,m)}. 
   \end{align*}  
 \end{proof}
 

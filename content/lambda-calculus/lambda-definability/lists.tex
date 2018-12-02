@@ -11,7 +11,7 @@
 
 The list $[M_1, M_2, \ldots, M_n]$ can be defined to be:
 \[
-  [M_1, M_2, \ldots, M_n] \eqs \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
+  [M_1, M_2, \ldots, M_n] ident \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
 \]
 Informally speaking, the term representing a list is the
 ``accumulator'' function of the list: a function that accepts two
@@ -28,8 +28,8 @@ and finally returns the result.
 
 We can easily define some useful functions based on this encoding; 
 \begin{align*}
-  {sum} &\eqs \lambd[l][l ~ (\lambd[xa][add ~ x ~ a])~  0]\\
-  len &\eqs \lambd[l][l ~ (\lambd[xa][add ~ a ~ 1]) ~ 0]
+  {sum} &ident \lambd[l][l ~ (\lambd[xa][add ~ x ~ a])~  0]\\
+  len &ident \lambd[l][l ~ (\lambd[xa][add ~ a ~ 1]) ~ 0]
 \end{align*}
 
 $sum$ calculates the sum of a list of church numerals. It works by

@@ -17,7 +17,7 @@
 \begin{proof}
 A term that !!{lambda define}s the successor function is
 \begin{align*}
-  \fn{Succ} & \eqs \lambd[a][\lambd[fx][f ({a} f x)]]
+  \fn{Succ} & ident \lambd[a][\lambd[fx][f ({a} f x)]]
   \intertext{$\fn{Succ}$ is a function that accepts as argument a
     number~$a$, and evaluates to another function, $\lambd[fx][f ({a}
       f x)]$. That function is not itself a Church numeral. However,
@@ -35,7 +35,7 @@ i.e., $\num{n+1}$.
 \begin{prob}
   The term 
   \begin{align*}
-    \fn{Succ}' &\eqs \lambd[{n}][\lambd[fx][{n} f (f x)]]
+    \fn{Succ}' &ident \lambd[{n}][\lambd[fx][{n} f (f x)]]
   \end{align*}
   !!{lambda define}s the successor function. Explain why.
 \end{prob}
@@ -48,9 +48,9 @@ i.e., $\num{n+1}$.
 \begin{proof}
 Addition is !!{lambda define}d by the terms  
 \begin{align*}
-  \fn{Add} &\eqs \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
+  \fn{Add} &ident \lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]]
 \intertext{or, alternatively,}
-  \fn{Add}' &\eqs \lambd[{a}{b}][{a}\, \fn{Succ} \, {b}]
+  \fn{Add}' &ident \lambd[{a}{b}][{a}\, \fn{Succ} \, {b}]
 \intertext{The first addition works as follows: $\fn{Add}$ first
   accept two numbers ${a}$ and ${b}$. The result is a function that
   accepts $f$ and $x$ and returns $af(bfx)$. If $a$ and $b$ are Church
@@ -59,7 +59,7 @@ Addition is !!{lambda define}d by the terms
   (\lambd[{a}{b}][\lambd[fx][{a} f ({b} f x)]])\num n\,\num m & \redone
   \lambd[fx][\num{n}\, f (\num {m}\, f x)] \\
   & \redone \lambd[fx][\num{n}\, f (f^m x)] \\
-  & \redone \lambd[fx][f^n (f^m x)] \eqs \num {n+m}
+  & \redone \lambd[fx][f^n (f^m x)] ident \num {n+m}
 \intertext{The second representation of addition $\fn{Add'}$ works
   differently: Applied to two Church numerals $\num{n}$ and
   $\num{m}$,}
@@ -78,7 +78,7 @@ reduces to~$\num{n+m}$.
   \ollabel{prop:mult-ld}
   Multiplication is !!{lambda definable} by the term
   \[
-  \fn{Mult} \eqs \lambd[ab][\lambd[fx][a (b f) x]]
+  \fn{Mult} ident \lambd[ab][\lambd[fx][a (b f) x]]
   \]
 \end{prop}
 
@@ -95,13 +95,13 @@ reduces to~$\num{n+m}$.
 
 We can actually simplify this term further by $\eta$-reduction:
 \[
-  \fn{Mult} \eqs \lambd[ab][\lambd[f][a (b f)]]
+  \fn{Mult} ident \lambd[ab][\lambd[f][a (b f)]]
 \]
 
 \begin{prob}
 Multiplication can be !!{lambda define}d by the term
 \[
-  \fn{Mult}' \eqs \lambd[ab][a (\fn{Add}\, a) \num{0}]
+  \fn{Mult}' ident \lambd[ab][a (\fn{Add}\, a) \num{0}]
 \]
 Explain why this works.
 \end{prob}
@@ -109,14 +109,14 @@ Explain why this works.
 The definition of exponentiation as a $\lambd$-term is
 surprisingly simple:
 \[
-  \fn{Exp} \eqs \lambd[be][e b]
+  \fn{Exp} ident \lambd[be][e b]
 \]
 The first argument $b$ is the base and the second~$e$ is the exponent.
 Intuitively, $e f$ is $f^e$ by our encoding of numbers. If you find it
 hard to understand, we can still define exponentiation also by
 iterated multiplication:
 \[
-  \fn{Exp}' \eqs \lambd[be][e (\fn{mult}\, b) \num{1}]
+  \fn{Exp}' ident \lambd[be][e (\fn{mult}\, b) \num{1}]
 \]
 
 Predecessor and subtraction on Church numeral is not as simple as we

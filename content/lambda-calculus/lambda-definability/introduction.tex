@@ -28,18 +28,18 @@ for~$n$. (Church numerals are named for Alonzo Church.)
   If $n \in \Nat$, the corresponding \emph{Church numeral} $\num{n}$
   represents~$n$:
   \[
-    \num{n} \eqs \lambd[fx][f^n(x)]
+    \num{n} ident \lambd[fx][f^n(x)]
   \]
   Here, $f^n(x)$ stands for the result of applying $f$ to~$x$ $n$
   times. For example, $\num{0}$ is $\lambd[fx][x]$, and $\num{3}$ is
-  $\lambd[fx][f(f(f(x)))]$.
+  $\lambd[fx][f(f(f\,x))]$.
 \end{defn}
   
 The Church numeral $\num n$ is encoded as a lambda term which
 represents a function accepting two arguments $f$ and $x$, and
 returns $f^n(x)$. Church numerals are evidently in normal form.
 
-Once we have a representtion of natural numbers in the lambda
+Once we have a represention of natural numbers in the lambda
 calculus, it is natural to ask what happens when we apply a
 $\lambd$-term~$F$ to such a Church numeral, i.e., whether the combined
 term~$F\, \num n$ reduces to a normal form. If it does, and the normal
@@ -68,10 +68,10 @@ if $f(n_0, \dots, n_{k-1})$ is defined, and $F \, \num{n_0} \,
 \num{n_1} \dots \num{n_{k-1}}$ has no normal form otherwise.
 \end{defn}
 
-A very simple example are the constant functions. The term $C_k \eqs
+A very simple example are the constant functions. The term $C_k ident
 \lambd[x][\num{k}]$ !!{lambda define}s the function $c_k\colon \Nat \to
-\Nat$ such that $c(n) = k$. For $C_k \, \num n \eqs
-(\lambd[x][\num{k}])\num n \red \num{k}$ for any~$n$. The identity
+\Nat$ such that $c(n) = k$. For $C_k \, \num n ident
+(\lambd[x][\num{k}])\num n \redone \num{k}$ for any~$n$. The identity
 function is !!{lambda defined} by $\lambd[x][x]$. More complex
 functions are of course harder to define, and often require a lot of
 ingenuity. So it is perhaps surprising that every computable function

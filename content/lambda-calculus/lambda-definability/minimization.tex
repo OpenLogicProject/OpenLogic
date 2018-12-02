@@ -30,16 +30,16 @@ that any function defined by regular minimization from !!a{lambda
   function $f(\vec x, y)$. To !!{lambda define}~$h$ we use a search
   function and a fixpoint combinator.
   \begin{align*}
-    H & \eqs \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}]  \\
-    \fn{Search} &\eqs \lambd[g][\lambd[f\,\vec{x}\,y][
+    H & ident \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}]  \\
+    \fn{Search} &ident \lambd[g][\lambd[f\,\vec{x}\,y][
         \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, \vec{x} (\fn{Succ}\, y)]]
   \end{align*}
   where $Y$ is any fixpoint combinator. Informally speaking,
-  $\fn{Search}$ is a self-referencing function: starting with $y$,
-  test whether $f\, \vec x\, y$ is zero: if so, return $y$, otherwise call
+  $\fn{Search}$ is a self-referencing function: starting with~$y$,
+  test whether $f\, \vec x\, y$ is zero: if so, return~$y$, otherwise call
   itself with $\fn{Succ}\, y$. Thus $(Y \, \fn{Search}) F
   \num{n_1}\dots\num{n_k}\,\num{0}$ returns the least~$m$ for which $f(n_1,
-  \dots, n_k) = 0$.
+  \dots, n_k, m) = 0$.
   
   Specifically, observe that
   \begin{align*}
