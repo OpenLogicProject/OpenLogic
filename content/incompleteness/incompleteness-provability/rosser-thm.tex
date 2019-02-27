@@ -13,7 +13,7 @@
 Can we modify G\"odel's proof to get a stronger result, replacing
 ``$\omega$-consistent'' with simply ``consistent''? The answer is
 ``yes,'' using a trick discovered by Rosser.  Rosser's trick is to use
-a ``modified'' provability predicate $\ORProv_T(y)$ instead of
+a ``modified'' !!{derivability} predicate $\ORProv_T(y)$ instead of
 $\OProv[T](y)$.
 
 \begin{thm}
@@ -40,14 +40,18 @@ and $\delta$ is a corresponding !!{derivation}, $\Th{Q} \Proves
   \ORefut[T](z,y))])].
 \]
 Roughly, $\ORProv[T](y)$ says ``there is a proof of $y$ in $\Th{T}$,
-and there is no shorter refutation of~$y$.'' (You might find it
-convenient to read $\ORProv[T](y)$ as ``$y$ is shmovable.'')  Assuming
-$\Th{T}$ is consistent, $\ORProv[T](y)$ is true of the same numbers as
+and there is no shorter refutation of~$y$.''  Assuming $\Th{T}$ is
+consistent, $\ORProv[T](y)$ is true of the same numbers as
 $\OProv[T](y)$; but from the point of view of \emph{provability}
 in~$\Th{T}$ (and we now know that there is a difference between truth
-and provability!) the two have different properties. (If $\Th{T}$ is
+and provability!) the two have different properties. If $\Th{T}$ is
 \emph{in}consistent, then the two do \emph{not} hold of the same
-numbers!)
+numbers!{} ($\ORProv[T](y)$ is often read as ``$y$ is Rosser
+provable.'' Since, as just discussed, Rosser provability is not some
+special kind of provability---in inconsistent theories, there are
+!!{sentence}s that are provable but not Rosser provable---this may be
+confusing. To avoid the confusion, you could instead read it as
+``$y$ is shmovable.'')
 
 By the fixed-point lemma, there is a formula $!R_\Th{T}$ such that
 \begin{equation}
@@ -55,8 +59,8 @@ By the fixed-point lemma, there is a formula $!R_\Th{T}$ such that
   \ollabel{RT}
 \end{equation}
 In contrast to the proof of \olref[1in]{thm:first-incompleteness},
-here we claim that if $\Th{T}$ is consistent, $\Th{T}$ doesn't prove
-$!R_\Th{T}$, and $\Th{T}$ also doesn't prove $\lnot !R_\Th{T}$. (In
+here we claim that if $\Th{T}$ is consistent, $\Th{T}$ doesn't !!{derive}
+$!R_\Th{T}$, and $\Th{T}$ also doesn't !!{derive} $\lnot !R_\Th{T}$. (In
 other words, we don't need the assumption of $\omega$-consistency.)
 
 First, let's show that $\Th{T} \Proves/ !R_T$.  Suppose it did, so
@@ -83,7 +87,7 @@ did, and suppose $n$ is the G\"odel number of !!a{derivation}
 of~$\lnot !R_T$. Then $\Refut[T](n, \Gn{!R_T})$ holds, and since
 $\ORefut[T]$ represents $\Refut[T]$ in $\Th{Q}$, $\Th{Q} \Proves
 \ORefut[T](\num{n}, \gn{!R_T})$. We'll again show that $\Th{T}$ would
-then be inconsistent because it would also prove~$!R_T$.  Since
+then be inconsistent because it would also !!{derive}~$!R_T$.  Since
 $\Th{Q} \Proves !R_T \liff \lnot \ORProv[T](\gn{!R_T})$, and since
 $\Th{T}$ extends~$\Th{Q}$, it suffices to show that $\Th{Q} \Proves
 \lnot \ORProv[T](\gn{!R_T})$. The !!{sentence} $\lnot
@@ -96,7 +100,7 @@ $\Th{T}$ extends~$\Th{Q}$, it suffices to show that $\Th{Q} \Proves
     \lexists[z][(z < x \land \ORefut[T](z,\gn{!R_T}))])]
 \end{align*}
 We argue informally using logic, making use of facts about what
-$\Th{Q}$ proves. Suppose $x$ is arbitrary and $\OPrf[T](x,
+$\Th{Q}$ !!{derive}s. Suppose $x$ is arbitrary and $\OPrf[T](x,
 \gn{!R_T})$. We already know that $\Th{T} \Proves/ !R_T$, and so for
 every $k$, $\Th{Q} \Proves \lnot \OPrf[T](\num{k}, \gn{!R_T})$. Thus,
 for every $k$ it follows that $\eq/[x][\num{k}]$. In particular, we

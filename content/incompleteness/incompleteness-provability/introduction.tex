@@ -17,7 +17,7 @@ later interest in formal systems of deduction, this suggests that he
 thought that we should guarantee that, say, the formal systems we are
 using to reason about the natural numbers is not only consistent, but
 also \emph{complete}, i.e., every statement in its language is either
-provable or its negation is. G\"odel's first incompleteness theorem
+!!{derivable} or its negation is. G\"odel's first incompleteness theorem
 shows that no such system of axioms exists: there is no complete,
 consistent, !!{axiomatizable} formal system for arithmetic.  In fact,
 no ``sufficiently strong,'' consistent, !!{axiomatizable} mathematical
@@ -38,12 +38,16 @@ The idea behind G\"odel's original proof of the incompleteness theorem
 can be found in the Epimenides paradox. Epimenides, a Cretan, asserted
 that all Cretans are liars; a more direct form of the paradox is the
 assertion ``this sentence is false.'' Essentially, by replacing truth
-with provability, G\"odel was able to formalize a !!{sentence} which,
-in a roundabout way, asserts that it itself is not provable.  If that
-!!{sentence} were provable, the theory would then be
-inconsistent. Assuming $\omega$-consistency---a property stronger than
-consistency---G\"odel was able to show that this sentence is also not
-refutable from the system of axioms he was considering.
+with !!{derivability}, G\"odel was able to formalize !!a{sentence}
+which, in a roundabout way, asserts that it itself is not
+!!{derivable}.  If that !!{sentence} were !!{derivable}, the theory
+would then be inconsistent.  G\"odel showed that the negation of that
+sentence is also not !!{derivable} from the system of axioms he was
+considering. (For this second part, G\"odel had to assume that the
+theory~$\Th{T}$ is what's called ``$\omega$-consistent.''
+$\omega$-Consistency is related to consistency, but is a stronger
+property. A few years after G\"odel, Rosser showed that assuming
+simple consistency of $\Th{T}$ is enough.)
 
 The first challenge is to understand how one can construct a sentence
 that refers to itself. For every formula $!A$ in the language of $\Th{Q}$,
@@ -59,11 +63,12 @@ lemma is known as the fixed-point lemma.
 \begin{lem}
 Let $\Th{T}$ be any theory extending $\Th{Q}$, and let $!B(x)$ be any
 formula with only the variable~$x$ free. Then there is a sentence $!A$
-such that $\Th{T}$ proves $!A \liff !B(\gn{!A})$.
+such that $\Th{T} \Proves!A \liff !B(\gn{!A})$.
 \end{lem}
 
-The lemma asserts that given any property $!B(x)$, there is a
-sentence $!A$ that asserts ``$!B(x)$ is true of me.''
+The lemma asserts that given any property $!B(x)$, there is a sentence
+$!A$ that asserts ``$!B(x)$ is true of me,'' and $\Th{T}$ ``knows''
+this.
 
 How can we construct such a sentence? Consider the following version
 of the Epimenides paradox, due to Quine:

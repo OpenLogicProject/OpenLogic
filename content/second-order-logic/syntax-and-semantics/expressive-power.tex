@@ -14,7 +14,7 @@ Quantification over second-order variables is responsible for an
 immense increase in the expressive power of the language over that of
 first-order logic.  Second-order existential quantification lets us
 say that functions or relations with certain properties exists. In
-first-order logic, the only way to do that is to specify non-logical
+first-order logic, the only way to do that is to specify a non-logical
 symbol (i.e., !!a{function} or !!{predicate}) for this
 purpose. Second-order universal quantification lets us say that all
 subsets of, relations on, or functions from the !!{domain} to the
@@ -28,53 +28,58 @@ definable in first-order logic, and express properties of the domain
 not expressible in first-order logic.
 \end{explain}
 
-\begin{ex}
+\begin{defn}
 If $\Struct{M}$ is !!a{structure} for a language~$\Lang{L}$, a
-relation~$R \subseteq \Domain{M}^2$ is definable in~$\Lang{L}$ if
-there is some !!{formula}~$!A_R(\Obj{v_0}, \Obj{v_1})$ with only the
-variables $\Obj v_0$ and $\Obj v_1$ free, such that $R(x, y)$ holds
-(i.e., $\tuple{x,y} \in R$) iff $\Sat{M}{!A_R(\Obj{v_0},
-  \Obj{v_1})}[s]$ for $s(\Obj{v_0}) = x$ and $s(\Obj{v_1}) = y$.  For
-instance, in first-order logic we can define the identity
-relation~$\Id{\Domain{M}}$ (i.e., $\Setabs{\tuple{x,x}}{x \in
-  \Domain{M}}$) by the formula $\eq[\Obj v_0][\Obj v_1]$.  In
+relation~$R \subseteq \Domain{M}^2$ is \emph{definable} in~$\Lang{L}$
+if there is some !!{formula}~$!A_R(x, y)$ with only the variables $x$
+and~$y$ free, such that $R(a, b)$ holds (i.e., $\tuple{a,b} \in R$)
+iff $\Sat{M}{!A_R(x, y)}[s]$ for $s(x) = a$ and $s(y) = b$.
+\end{defn}
+
+
+
+\begin{ex}
+In first-order logic we can define the identity
+relation~$\Id{\Domain{M}}$ (i.e., $\Setabs{\tuple{a,a}}{a \in
+  \Domain{M}}$) by the formula $\eq[x][y]$.  In
 second-order logic, we can define this relation
-\emph{without~$\eq$}. For if $x$ and $y$ are the same !!{element}
+\emph{without~$\eq$}. For if $a$ and $b$ are the same !!{element}
 of~$\Domain{M}$, then they are !!{element}s of the same subsets
 of~$\Domain{M}$ (since sets are determined by their
-!!{element}s). Conversely, if $x$ and $y$ are different, then they are
-not !!{element}s of the same subsets: e.g., $x \in \{x\}$ but $y
-\notin \{x\}$ if $x \neq y$.  So ``being !!{element}s of the same
-subsets of~$\Domain{M}$'' is a relation that holds of $x$ and $y$ iff
-$x = y$. It is a relation that can be expressed in second-order logic,
+!!{element}s). Conversely, if $a$ and $b$ are different, then they are
+not !!{element}s of the same subsets: e.g., $a \in \{a\}$ but $b
+\notin \{a\}$ if $a \neq b$.  So ``being !!{element}s of the same
+subsets of~$\Domain{M}$'' is a relation that holds of $a$ and $b$ iff
+$a = b$. It is a relation that can be expressed in second-order logic,
 since we can quantify over all subsets of~$\Domain{M}$. Hence, the
 following !!{formula} defines $\Id{\Domain{M}}$:
 \[
-\lforall[X][(X(\Obj{v_0}) \liff X(\Obj{v_1}))]
+\lforall[X][(X(x) \liff X(y))]
 \]
 \end{ex}
 
 \begin{prob}
-Show that $\lforall[X][(X(\Obj{v_0}) \lif X(\Obj{v_1}))]$ (note:
+Show that $\lforall[X][(X(x) \lif X(y))]$ (note:
 $\lif$ not $\liff$!) defines $\Id{\Domain{M}}$.
 \end{prob}
 
 \begin{ex}
 If $R$ is a two-place !!{predicate}, $\Assign{R}{M}$ is a two-place
-relation on~$\Domain{M}$.  Its \emph{transitive closure}~$R^*$ is the
-relation that holds between $x$ and $y$ if for some $z_1$, \dots,
-$z_k$, $R(x,z_1)$, $R(z_1, z_2)$, \dots, $R(z_k,y)$ holds. This
-includes the case if $k = 0$, i.e., if $R(x,y)$ holds. This means that
-$R \subseteq R^*$. In fact, $R^*$ is the smallest relation that
-includes~$R$ and that is transitive.  We can say in second-order logic
-that $X$ is a transitive relation that includes~$R$:
+relation on~$\Domain{M}$.  Perhaps somewhat confusingly, we'll use $R$
+as the !!{predicate} for~$R$ and for the relation~$\Assign{R}{M}$
+itself.  The \emph{transitive closure}~$R^*$ of~$R$ is the relation
+that holds between $a$ and $b$ iff for some $c_1$, \dots, $c_k$,
+$R(a,c_1)$, $R(c_1, c_2)$, \dots, $R(c_k,b)$ holds. This includes the
+case if $k = 0$, i.e., if $R(a,b)$ holds, so does $R^*(a,b)$. This
+means that $R \subseteq R^*$. In fact, $R^*$ is the smallest relation
+that includes~$R$ and that is transitive.  We can say in second-order
+logic that $X$ is a transitive relation that includes~$R$:
 \begin{multline*}
   !B_R(X) \ident \lforall[x][\lforall[y][(R(x,y) \lif X(x, y))]] \land {}\\
 \lforall[x][\lforall[y][\lforall[z][((X(x,y) \land X(y,z)) \lif X(x,
       z))]]]
 \end{multline*}
-Here, somewhat confusingly, we use $R$ as the !!{predicate}
-for~$R$. The first conjunct says that $R \subseteq X$ and the second
+The first conjunct says that $R \subseteq X$ and the second
 that $X$ is transitive.
 
 To say that $X$ is the smallest such relation is to say that it is
@@ -85,9 +90,8 @@ transitive. So we can define the transitive closure of~$R$ by the
 R^*(X) \ident !B_R(X) \land \lforall[Y][(!B_R(Y) \lif
   \lforall[x][\lforall[y][(X(x, y) \lif Y(x,y))]])]
 \]
-$\Sat{M}{R^*(X)}[s]$ iff $s(X) = R^*$. The transitive closure of $R$
-cannot be expressed in first-order logic.
+We have $\Sat{M}{R^*(X)}[s]$ iff $s(X) = R^*$. The transitive closure
+of~$R$ cannot be expressed in first-order logic.
 \end{ex}
-
 
 \end{document}

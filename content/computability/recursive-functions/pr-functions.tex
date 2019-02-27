@@ -66,12 +66,13 @@ smallest set containing $\Zero$, $\Succ$, and the projection
 functions~$\Proj{n}{j}$, and which is closed under composition and
 primitive recursion.
 
-Another way of describing the set of primitive recursive functions
-keeps track of the ``stage'' at which a function enters the set. Let
-$S_0$ denote the set of starting functions: $\Zero$, $\Succ$, and the
-projections. Once $S_i$ has been defined, let $S_{i+1}$ be the set of
-all functions you get by applying a single instance of composition or
-primitive recursion to functions in~$S_i$. Then
+Another way of describing the set of primitive recursive functions is
+by defining it in terms of ``stages.'' Let $S_0$ denote the set of
+starting functions: $\Zero$, $\Succ$, and the projections. These are
+the primitive recursive functions of stage~$0$. Once a stage $S_i$ has
+been defined, let $S_{i+1}$ be the set of all functions you get by
+applying a single instance of composition or primitive recursion to
+functions already in~$S_i$. Then
 \[
 S = \bigcup_{i \in \Nat} S_i
 \]
