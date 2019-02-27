@@ -10,36 +10,36 @@
 
 \olsection{Preliminaries}
 
-\begin{thm} \ollabel{thm:induction}
-\emph{Principle of induction on !!{formula}s}: If some
-  property $P$ holds of all the atomic !!{formula}s and is such
-  that
+\begin{thm}[\emph{Principle of induction on !!{formula}s}]
+  \ollabel{thm:induction}  
+  If some property~$P$ holds for all the atomic !!{formula}s and is
+  such that
   \begin{enumerate}
     \tagitem{prvNot}{it holds for $\lnot !A$ whenever it holds
       for~$!A$;}{}
-    \tagitem{prvAnd}{if holds for and $(!A \land !B)$
-      whenever it holds for $!A$ and $!B$;}{}
-    \tagitem{prvOr}{if holds for and $(!A \lor !B)$
-      whenever it holds for $!A$ and $!B$;}{}
-    \tagitem{prvIf}{if holds for and $(!A \lif !B)$
-      whenever it holds for $!A$ and $!B$;}{}
-    \tagitem{prvIff}{if holds for and $(!A \liff !B)$
-      whenever it holds for $!A$ and $!B$;}{}
+    \tagitem{prvAnd}{it holds for $(!A \land !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+    \tagitem{prvOr}{it holds for $(!A \lor !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+    \tagitem{prvIf}{it holds for $(!A \lif !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+    \tagitem{prvIff}{it holds for $(!A \liff !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
   \end{enumerate}
-  then $P$ holds of all !!{formula}s.
+  then $P$ holds for all !!{formula}s.
 \end{thm}
 
 \begin{proof}
   Let $S$ be the collection of all !!{formula}s with
-  property~$P$. Clearly $S \subseteq \Frm[L_0]$. $S$ satisfies all the
+  property~$P$. Clearly $S \subseteq \Frm[L_0]$. $S$~satisfies all the
   conditions of \olref[fml]{defn:formulas}: it contains all atomic
   !!{formula}s and is closed under the !!{operator}s.  $\Frm[L_0]$ is
-  the smallest such class, so $\Frm \subseteq S$. So $\Frm = S$, and
+  the smallest such class, so $\Frm[L_0] \subseteq S$. So $\Frm[L_0] = S$, and
   every formula has propery~$P$.
 \end{proof}
 
 \begin{prop}\ollabel{prop:balanced}
-   Any !!{formula} in $\Frm[L_0]$ is \emph{balanced}, in that it has
+   Any !!{formula} in~$\Frm[L_0]$ is \emph{balanced}, in that it has
    as many left parentheses as right ones.
 \end{prop}
 
@@ -56,16 +56,16 @@ No proper initial segment of !!a{formula} is !!a{formula}.
 \end{prob}
 
 \begin{prop}[Unique Readability]
-Any !!{formula} $!A$ in $ \Frm[L_0]$ has exactly one parsing as one of
+Any !!{formula}~$!A$ in $ \Frm[L_0]$ has exactly one parsing as one of
 the following
 \begin{enumerate}
 \tagitem{prvFalse}{$\lfalse$.}{}
 
 \tagitem{prvTrue}{$\ltrue$.}{}
 
-\item $\Obj p_n$ for some $p_n \in  \PVar$.
+\item $\Obj p_n$ for some $\Obj p_n \in  \PVar$.
   
-\tagitem{prvNot}{$\lnot !B$ for some $!B$ in $\Frm[L_0]$.}{}
+\tagitem{prvNot}{$\lnot !B$ for some !!{formula}~$!B$.}{}
 
 \tagitem{prvAnd}{$(!B \land !C)$ for some !!{formula}s $!B$ and~$!C$.}{}
 
@@ -75,7 +75,7 @@ the following
 
 \tagitem{prvIff}{$(!B \liff !C)$ for some !!{formula}s $!B$ and~$!C$.}{}
 \end{enumerate}
-Moreover, such parsing is \emph{unique}.
+Moreover, this parsing is \emph{unique}.
 \end{prop}
 
 \begin{proof}
@@ -88,7 +88,7 @@ which is impossible by the inductive hypothesis.
 \end{proof}
 
 
-\begin{defn} [Uniform Substitution]
+\begin{defn}[Uniform Substitution]
 If $!A$ and $!B$ are !!{formula}s, and $p_i$ is a propositional
 !!{variable}, then $\Subst{!A}{!B}{p_i}$ denotes the result of
 replacing each occurrence of $p_i$ by an occurrence of $!B$ in $!A$;

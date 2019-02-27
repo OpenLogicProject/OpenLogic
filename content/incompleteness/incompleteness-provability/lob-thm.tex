@@ -15,7 +15,7 @@ The G\"odel sentence for a theory~$\Th{T}$ is a fixed point of $\lnot
 \[
 \Th{T} \Proves \lnot \OProv[T](\gn{!G}) \liff !G.
 \]
-It is not provable, because if $\Th{T} \Proves !G$, (a) by provability
+It is not !!{derivable}, because if $\Th{T} \Proves !G$, (a) by !!{derivability}
 condition~(1), $\Th{T} \Proves \OProv[T](\gn{!G})$, and (b) $\Th{T}
 \Proves !G$ together with $\Th{T} \Proves \lnot \OProv[T](\gn{!G})
 \liff !G$ gives $\Th{T} \Proves \lnot \OProv[T](\gn{!G})$, and so
@@ -25,31 +25,31 @@ such that
 \[
 \Th{T} \Proves \OProv[T](\gn{!H}) \liff !H.
 \]
-If it were provable, $\Th{T} \Proves \OProv[T](\gn{!H})$ by
+If it were !!{derivable}, $\Th{T} \Proves \OProv[T](\gn{!H})$ by
 condition~(1), but the same conclusion follows if we apply modus
 ponens to the equivalence above. Hence, we don't get that $\Th{T}$ is
 inconsistent, at least not by the same argument as in the case of the
 G\"odel sentence. This of course does not show that $\Th{T}$
-\emph{does} prove~$!H$.
+\emph{does} !!{derive}~$!H$.
 
 We can make headway on this question if we generalize it a bit. The
 left-to-right direction of the fixed point equivalence,
 $\OProv[T](\gn{!H}) \lif !H$, is an instance of a general schema
 called a \emph{reflection principle}: $\OProv[T](\gn{!A}) \lif !A$.
 It is called that because it expresses, in a sense, that $\Th{T}$ can
-``reflect'' about what it can prove; basically it says, ``If $\Th{T}$
-can prove~$!A$, then~$!A$ is true,'' for any~$!A$.  This is true for
+``reflect'' about what it can !!{derive}; basically it says, ``If $\Th{T}$
+can !!{derive}~$!A$, then~$!A$ is true,'' for any~$!A$.  This is true for
 sound theories only, of course, and this suggests that theories will
-in general not prove every instance of it.  So which instances can a
-theory (strong enough, and satisfying the provability conditions)
-prove?  Certainly all those where $!A$ itself is provable. And that's
+in general not !!{derive} every instance of it.  So which instances can a
+theory (strong enough, and satisfying the !!{derivability} conditions)
+!!{derive}?  Certainly all those where $!A$ itself is !!{derivable}. And that's
 it, as the next result shows.
 
 \begin{thm}
 Let $\Th{T}$ be !!a{axiomatizable} theory extending $\Th{Q}$, and
 suppose $\OProv[T](y)$ is a formula satisfying conditions P1--P3 from
-\olref[2in]{sec}. If $\Th{T}$ proves $\OProv[T](\gn{!A}) \lif !A$,
-then in fact $\Th{T}$ proves $!A$.
+\olref[2in]{sec}. If $\Th{T}$ !!{derive}s $\OProv[T](\gn{!A}) \lif !A$,
+then in fact $\Th{T}$ !!{derive}s $!A$.
 \end{thm}
 
 Put differently, if $\Th{T} \Proves/ !A$, then $\Th{T} \Proves/
@@ -76,18 +76,18 @@ to substitute any other conclusion you would like.) Here it is:
 \item But then, by the argument (2)--(4) above, Santa Claus exists.
 \end{enumerate}
 A formalization of this idea, replacing ``is true'' with ``is
-provable,'' and ``Santa Claus exists'' with~$!A$, yields the proof of
+!!{derivable},'' and ``Santa Claus exists'' with~$!A$, yields the proof of
 L\"ob's theorem. The trick is to apply the fixed-point lemma to the
 !!{formula}~$\OProv[T](y) \lif !A$. The fixed point of that
 corresponds to the sentence~$X$ in the preceding sketch.
 \end{explain}
 
 \begin{proof}
-Suppose $!A$ is !!a{sentence} such that $\Th{T}$ proves
+Suppose $!A$ is !!a{sentence} such that $\Th{T}$ !!{derive}s
 $\OProv[T](\gn{!A}) \lif !A$. Let $!B(y)$ be the !!{formula}~$\OProv[T](y)
 \lif !A$, and use the fixed-point lemma to find !!a{sentence}~$!D$
-such that $\Th{T}$ proves $!D \liff !B(\gn{!D})$. Then each of the
-following is provable in $\Th{T}$:
+such that $\Th{T}$ !!{derive}s $!D \liff !B(\gn{!D})$. Then each of the
+following is !!{derivable} in $\Th{T}$:
 \begin{align}
   & !D \liff (\OProv[T](\gn{!D}) \lif !A) \ollabel{L-1}\\
   & \qquad \text{$!D$ is a fixed point of~$!B(y)$}\notag \\
@@ -101,7 +101,7 @@ following is provable in $\Th{T}$:
   & \OProv[T](\gn{!D}) \lif (\OProv[T](\gn{\OProv[T](\gn{!D})}) \lif \OProv[T](\gn{!A})) \ollabel{L-5}\\
   &\qquad \text{from \olref{L-4} using P2 again} \notag\\
 & \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D})}) \ollabel{L-6}\\
-  & \qquad\text{by provability condition P3} \notag\\
+  & \qquad\text{by !!{derivability} condition P3} \notag\\
   & \OProv[T](\gn{!D}) \lif \OProv[T](\gn{!A}) \ollabel{L-7} \\
   &\qquad\text{from \olref{L-5} and \olref{L-6}}\notag\\
   & \OProv[T](\gn{!A}) \lif !A \ollabel{L-8}\\
@@ -119,13 +119,13 @@ following is provable in $\Th{T}$:
 \end{proof}
 
 With L\"ob's theorem in hand, there is a short proof of the first
-incompleteness theorem (for theories having a provability predicate
+incompleteness theorem (for theories having a !!{derivability} predicate
 satisfying conditions P1--P3: if $\Th{T} \Proves
 \OProv[T](\gn{\lfalse}) \lif \lfalse$, then $\Th{T} \Proves \lfalse$.
 If $\Th{T}$ is consistent, $\Th{T} \Proves/ \lfalse$. So, $\Th{T}
 \Proves/ \OProv[T](\gn{\lfalse}) \lif \lfalse$, i.e., $\Th{T} \Proves/
 \OCon[\Th{T}]$.  We can also apply it to show that~$!H$, the fixed
-point of $\OProv[T](x)$, is provable. For since
+point of $\OProv[T](x)$, is !!{derivable}. For since
 \begin{align*}
   \Th{T} & \Proves \OProv[T](\gn{!H}) \liff !H\\
   \intertext{in particular}
@@ -139,7 +139,7 @@ and so by L\"ob's theorem, $\Th{T} \Proves !H$.
 
 \begin{prob}
 Let $\Th{T}$ be a computably axiomatized theory, and
-let $\OProv[T]$ be a provability predicate for $\Th{T}$. Consider the
+let $\OProv[T]$ be !!a{derivability} predicate for $\Th{T}$. Consider the
 following four statements:
 \begin{enumerate}
 \item If $T \Proves !A$, then $T \Proves \OProv[T](\gn{!A})$.

@@ -46,8 +46,8 @@ $!B(\Obj{diag}(x))$. And Quine's version of the liar sentence would
 then be the diagonalization of it, i.e., $!E(\gn{!E})$ or
 $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$.  Of course, $!B(x)$ could now
 be any other property, and the same construction would work. For the
-incompleteness theorem, we'll take $!B(x)$ to be ``$x$ is unprovable
-in~$\Th{T}$.'' Then $!E(x)$ would be ``yields !!a{sentence} unprovable
+incompleteness theorem, we'll take $!B(x)$ to be ``$x$ is not !!{derivable}
+in~$\Th{T}$.'' Then $!E(x)$ would be ``yields !!a{sentence} not !!{derivable}
 in~$\Th{T}$ when applied to the G\"odel number of its
 diagonalization.''
 
@@ -57,7 +57,7 @@ primitive recursive: if $n$ is the G\"odel number of a
 formula~$!E(x)$, $\fn{diag}(n)$ returns the G\"odel number
 of~$!E(\gn{!E(x)})$. (Recall, $\gn{!E(x)}$ is the standard numeral of
 the G\"odel number of~$!E(x)$, i.e., $\num{\Gn{!E(x)}}$). If
-$\Obj{diag}$ were a function symbol in $\Th{T}$ repqresenting the
+$\Obj{diag}$ were a function symbol in $\Th{T}$ representing the
 function $\fn{diag}$, we could take $!A$ to be the formula
 $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$. Notice that
 \begin{align*}
@@ -65,11 +65,11 @@ $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$. Notice that
 \Gn{!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))})} \\
 & = \Gn{!A}.
 \end{align*}
-Assuming $\Th{T}$ can prove
+Assuming $\Th{T}$ can !!{derive}
 \[
 \Obj{diag}(\gn{!B(\Obj{diag}(x))}) = \gn{!A},
 \]
-it can prove $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))
+it can !!{derive} $!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))
 \liff !B(\gn{!A})$. But the left hand side is, by
 definition,~$!A$.
 
@@ -95,14 +95,14 @@ $\lexists[y][(!D_{\fn{diag}}(x,y) \land !B(y))]$ and let $!A$~be its
 diagonalization, i.e., the formula $!E(\gn{!E(x)})$.
 
 Since $!D_{\fn{diag}}$ represents $\fn{diag}$, and
-$\fn{diag}(\Gn{!E(x)}) = \Gn{!A}$, $\Th{Q}$ can prove
+$\fn{diag}(\Gn{!E(x)}) = \Gn{!A}$, $\Th{Q}$ can !!{derive}
 \begin{align}
   & !D_{\fn{diag}}(\gn{!E(x)}, \gn{!A}) \ollabel{repdiag1} \\
   & \lforall[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \lif
   \eq[y][\gn{!A}])]. \ollabel{repdiag2}
 \end{align}
 Now we show that $\Th{Q} \Proves !A \liff !B(\gn{!A})$. We argue
-informally, using just logic and facts provable in~$\Th{Q}$.
+informally, using just logic and facts !!{derivable} in~$\Th{Q}$.
 
 First, suppose~$!A$, i.e., $!E(\gn{!E(x)})$. Going back to the
 definition of $!E(x)$, we see that $!E(\gn{!E(x)})$ just is

@@ -15,7 +15,7 @@ In order to arithmetize !!{derivation}s, we must represent
 !!{formula}s where each inference carries one or two labels, a
 recursive representation is the most obvious approach: we represent a
 !!{derivation} as a tuple, the components of which are the number of
-immediate sub!!-{derivation}s leading to the premises of the last
+immediate sub-!!{derivation}s leading to the premises of the last
 inference, the representations of these sub-!!{derivation}s, and the
 end-!!{formula}, the discharge label of the last inference, and a
 number indicating the type of the last inference.
@@ -31,10 +31,14 @@ number indicating the type of the last inference.
     !!{undischarged} assumption, and the numerical label otherwise.
   \item 
     If $\delta$ ends in an inference with one, two, or three premises,
-    then $\Gn{\delta}$ is $\tuple{1, \Gn{\delta_1}, \Gn{!A}, n, k}$,
-    $\tuple{2, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{!A}, n, k}$, or
-    $\tuple{3, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{\delta_3}, \Gn{!A}, n,
-      k}$, respectively.  Here $\delta_1$, $\delta_2$, $\delta_3$ are the
+    then $\Gn{\delta}$ is
+    \begin{align*}
+      & \tuple{1, \Gn{\delta_1}, \Gn{!A}, n, k}, \\
+      & \tuple{2, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{!A}, n, k}, \text{ or}\\
+      & \tuple{3, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{\delta_3}, \Gn{!A}, n,
+        k},
+    \end{align*}
+    respectively.  Here $\delta_1$, $\delta_2$, $\delta_3$ are the
     sub-!!{derivation}s ending in the premise(s) of the last inference
     in $\delta$, $!A$ is the conclusion of the last inference
     in~$\delta$, $n$ is the discharge label of the last inference ($0$

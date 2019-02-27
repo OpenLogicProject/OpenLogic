@@ -37,59 +37,63 @@ relation that ``cannot be asserted to be recursive.''  What he
 probably meant is this: from the definition, it is not clear that it
 is computable; and later developments, in fact, show that it isn't.
 
-\begin{defn}
-\ollabel{thm:oconsis-q}
-A theory $\Th{T}$ is $\omega$-consistent if the following holds: if
-$\lexists[x][!A(x)]$ is any sentence and $\Th{T}$ proves $\lnot
-!A(\num 0)$, $\lnot !A(\num 1)$, $\lnot !A(\num 2)$, \dots then $\Th{T}$
-does not prove $\lexists[x][!A(x)]$.
-\end{defn}
-
-We can now prove the following.
-\begin{thm}
-\ollabel{thm:first-incompleteness} Let $\Th{T}$ be any
-$\omega$-consistent, !!{axiomatizable} theory extending~$\Th{Q}$. Then
-$\Th{T}$ is not complete.
-\end{thm}
-
-\begin{proof}
-Let $\Th{T}$ be an !!{axiomatizable} theory containing~$\Th{Q}$ Then
+Let $\Th{T}$ be an !!{axiomatizable} theory containing~$\Th{Q}$. Then
 $\Prf[T](x, y)$ is decidable, hence representable in~$\Th{Q}$ by
 !!a{formula}~$\OPrf[T](x, y)$. Let $\OProv[T](y)$ be the formula we
 described above. By the fixed-point lemma, there is a formula
-$!G_\Th{T}$ such that $\Th{Q}$ (and hence $\Th{T}$) proves
+$!G_\Th{T}$ such that $\Th{Q}$ (and hence $\Th{T}$) !!{derive}s
 \begin{equation}
 \ollabel{eqn:qpf}
 !G_\Th{T} \liff \lnot \OProv[T](\gn{!G_\Th{T}}).
 \end{equation}
-Note that $!A$ says, in essence, ``$!A$ is not provable.''
+Note that $!G_\Th{T}$ says, in essence, ``$!G_\Th{T}$ is not
+!!{derivable} in~$\Th{T}$.''
 
-We claim that
-\begin{enumerate}
-\item If $\Th{T}$ is consistent, $\Th{T}$ doesn't prove $!G_\Th{T}$
-\item If $\Th{T}$ is $\omega$-consistent, $\Th{T}$ doesn't prove
-  $\lnot !G_\Th{T}$.
-\end{enumerate}
-This means that if $\Th{T}$ is $\omega$-consistent, it is incomplete,
-since it proves neither $!G_\Th{T}$ nor $\lnot !G_\Th{T}$. Let us take
-each claim in turn.
+\begin{lem}\ollabel{lem:cons-G-unprov}
+If $\Th{T}$ is a consistent, !!{axiomatizable} theory
+extending~$\Th{Q}$, then $\Th{T} \Proves/ !G_\Th{T}$.
+\end{lem}
 
-Suppose $\Th{T}$ proves $!G_\Th{T}$. Then there \emph{is}
+\begin{proof}
+Suppose $\Th{T}$ !!{derive}s $!G_\Th{T}$. Then there \emph{is}
 !!a{derivation}, and so, for some number $m$, the relation $\Prf[T](m,
-\Gn{!G_\Th{T}})$ holds. But then $\Th{Q}$ proves the sentence
-$\OPrf[T](\num m, \gn{!G_\Th{T}})$. So $\Th{Q}$ proves
+\Gn{!G_\Th{T}})$ holds. But then $\Th{Q}$ !!{derive}s the sentence
+$\OPrf[T](\num m, \gn{!G_\Th{T}})$. So $\Th{Q}$ !!{derive}s
 $\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$, which is, by definition,
-$\OProv[T](\gn{!G_\Th{T}})$. By \olref{eqn:qpf}, $\Th{Q}$ proves
+$\OProv[T](\gn{!G_\Th{T}})$. By \olref{eqn:qpf}, $\Th{Q}$ !!{derive}s
 $\lnot !G_\Th{T}$, and since $\Th{T}$ extends $\Th{Q}$, so
-does~$\Th{T}$. We have shown that if $\Th{T}$ proves $!G_\Th{T}$, then
-it also proves $\lnot !G_\Th{T}$, and hence it would be inconsistent.
+does~$\Th{T}$. We have shown that if $\Th{T}$ !!{derive}s $!G_\Th{T}$, then
+it also !!{derive}s $\lnot !G_\Th{T}$, and hence it would be inconsistent.
+\end{proof}
 
-For the second claim, let us show that if $\Th{T}$ proves $\lnot
-!G_\Th{T}$, then it is $\omega$-inconsistent. Suppose $\Th{T}$ proves
-$\lnot !G_\Th{T}$. If $\Th{T}$ is inconsistent, it is
-$\omega$-inconsistent, and we are done. Otherwise, $\Th{T}$ is
-consistent, so it does not prove $!G_\Th{T}$. Since there is no proof
-of $!G_\Th{T}$ in $\Th{T}$, $\Th{Q}$ proves
+\begin{defn}
+\ollabel{thm:oconsis-q}
+A theory $\Th{T}$ is \emph{$\omega$-consistent} if the following holds: if
+$\lexists[x][!A(x)]$ is any sentence and $\Th{T}$ !!{derive}s $\lnot
+!A(\num 0)$, $\lnot !A(\num 1)$, $\lnot !A(\num 2)$, \dots then $\Th{T}$
+does not prove $\lexists[x][!A(x)]$.
+\end{defn}
+
+Note that every $\omega$-consistent theory is also consistent. This
+follows simply from the fact that if $\Th{T}$ is inconsistent, then
+$\Th{T} \Proves !A$ for every~$!A$. In particular, if $\Th{T}$ is
+inconsistent, it !!{derive}s both $\lnot !A(\num n)$ for every~$n$ and
+also !!{derive}s~$\lexists[x][!A(x)]$. So, if $\Th{T}$ is
+inconsistent, it is $\omega$-inconsistent. By contraposition, if
+$\Th{T}$ is $\omega$-consistent, it must be consistent.
+
+\begin{lem}\ollabel{lem:omega-cons-G-unref}
+If $\Th{T}$ is an $\omega$-consistent, !!{axiomatizable} theory
+extending~$\Th{Q}$, then $\Th{T} \Proves/ !G_\Th{T}$.
+\end{lem}
+
+\begin{proof}
+We show that if $\Th{T}$ !!{derive}s $\lnot !G_\Th{T}$, then it is
+$\omega$-inconsistent. Suppose $\Th{T}$ !!{derive}s $\lnot !G_\Th{T}$. If
+$\Th{T}$ is inconsistent, it is $\omega$-inconsistent, and we are
+done. Otherwise, $\Th{T}$ is consistent, so it does not !!{derive}
+$!G_\Th{T}$ by \olref{lem:cons-G-unprov}. Since there is no
+!!{derivation} of $!G_\Th{T}$ in $\Th{T}$, $\Th{Q}$ !!{derive}s
 \[
 \lnot \OPrf[T](\num 0, \gn{!G_\Th{T}}), \lnot \OPrf[T](\num 1,
 \gn{!G_\Th{T}}), \lnot \OPrf[T](\num 2, \gn{!G_\Th{T}}), \dots
@@ -98,6 +102,27 @@ and so does~$\Th{T}$.  On the other hand, by \olref{eqn:qpf}, $\lnot
 !G_\Th{T}$ is equivalent to
 $\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$. So $\Th{T}$ is
 $\omega$-inconsistent.
+\end{proof}
+
+\begin{prob}
+  Every $\omega$-consistent theory is consistent. Show that the
+  converse does not hold, i.e., that there are consistent but
+  $\omega$-inconsistent theories. Do this by showing that $\Th{Q} \cup
+  \{\lnot !G_\Th{Q}\}$ is consistent but $\omega$-inconsistent.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:first-incompleteness} Let $\Th{T}$ be any
+$\omega$-consistent, !!{axiomatizable} theory extending~$\Th{Q}$. Then
+$\Th{T}$ is not complete.
+\end{thm}
+
+\begin{proof}
+  If $\Th{T}$ is $\omega$-consistent, it is consistent, so $\Th{T}
+  \Proves/ !G_\Th{T}$ by \olref{lem:cons-G-unprov}.  By
+  \olref{lem:omega-cons-G-unref}, $\Th{T} \Proves/ \lnot !G_\Th{T}$.
+  This means that $\Th{T}$ is incomplete, since it !!{derive}s neither
+  $!G_\Th{T}$ nor $\lnot !G_\Th{T}$.
 \end{proof}
 
 \end{document}

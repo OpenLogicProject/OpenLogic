@@ -96,17 +96,25 @@ of the arithmetical axioms plus induction are needed for second-order Peano
 arithmetic.
 
 \begin{prop}\ollabel{prop:sol-pa-definable}
-Let $\Th{PA^{2\dagger}}$ be the second-order theory containing the first 
-two arithmetical axioms (the successor axioms) and the second-order
-induction axiom. $>$, $+$, and $\times$ are definable in $\Th{PA^{2\dagger}}$.
+Let $\Th{PA^{2\dagger}}$ be the second-order theory containing the
+first two arithmetical axioms (the successor axioms) and the
+second-order induction axiom. Then $\le$, $+$, and $\times$ are definable
+in $\Th{PA^{2\dagger}}$.
 \end{prop}
 
 \begin{proof}
-Exercise.
+To show that $\le$ is definable, we have to find a formula~$!A_\le(x, y)$
+such that $\Sat{N}{!A(\num n, \num m)}$ iff $n < m$. Consider the formula
+\[
+!B(x, Y) \ident Y(x) \land \lforall[y][(Y(y) \lif Y(y'))]
+\]
+Clearly, $!B(\num n, Y)$ is satisfied by a set $Y \subseteq \Nat$ iff
+$\Setabs{m}{n \le m} \subseteq Y$, so we can take $!A_\le(x, y) \ident
+\lforall[Y][(!B(x, Y) \lif Y(y))]$.
 \end{proof}
 
 \begin{prob}
-Prove \olref[sol][met][spa]{prop:sol-pa-definable}.
+Complete the proof of \olref[sol][met][spa]{prop:sol-pa-definable}.
 \end{prob}
 
 \begin{cor}

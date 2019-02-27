@@ -53,6 +53,21 @@
 % is `a` we want an article, if `{token}` followed by `s` we want
 % plural.
 
+\@ifpackagelater{xparse}{2018/04/17}{
+\DeclareDocumentCommand \@printtoken { t^ ta m !ts } {%
+  \IfBooleanTF {#1} 
+               {\IfBooleanTF {#2}{\printtoken{A}{#3}~% 
+                \IfBooleanTF {#4}
+                 {\printtoken{p}{#3}}
+                 {\printtoken{s}{#3}}}{%
+                \IfBooleanTF {#4}
+                 {\printtoken{P}{#3}}
+                 {\printtoken{S}{#3}}}}{%
+               {\IfBooleanTF {#2}{\printtoken{a}{#3}~}{}%
+                \IfBooleanTF {#4}
+                 {\printtoken{p}{#3}}
+                 {\printtoken{s}{#3}}}}}
+}{
 \DeclareDocumentCommand \@printtoken { t^ ta m ts } {%
   \IfBooleanTF {#1} 
                {\IfBooleanTF {#2}{\printtoken{A}{#3}~% 
@@ -66,6 +81,7 @@
                 \IfBooleanTF {#4}
                  {\printtoken{p}{#3}}
                  {\printtoken{s}{#3}}}}}
+}
 
 % `\printtoken{switch}{token}` - print switch/token if defined within
 % a `\tokenformat{...}`, produce warning if undefined defined, expand
