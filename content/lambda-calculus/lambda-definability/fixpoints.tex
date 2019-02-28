@@ -33,11 +33,12 @@ a pure lambda term.
 However this is not true in the case of recursive definitions like the
 one of $\fn{Fac}$ above. If we replace the occurrence of $\fn{Fac}$ on
 the right-hand side with the definition of $\fn{Fac}$ itself, we get:
-\[
-\fn{Fac} \ident \lambd[n][\fn{IsZero}\, n\, \num{1}\, (\fn{Mult}\, n
+\begin{align*}
+  \fn{Fac} & \ident \lambd[n][\fn{IsZero}\, n\, \num{1}] \\
+    & \qquad (\fn{Mult}\, n
   ((\lambd[n][\fn{IsZero} \, n \, \num 1\, (\fn{Mult}\, n\, (\fn{Fac}
-    (\fn{Pred}\, n)))]) (\fn{Pred}\, n)))]
-\]
+    (\fn{Pred}\, n)))]) (\fn{Pred}\, n)))
+\end{align*}
 and we still haven't gotten rid of $\fn{Fac}$ on the right-hand
 side. Clearly, if we repeat this process, the definition keeps growing
 longer and the process never results in a pure lambda term. Thus this

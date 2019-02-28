@@ -113,8 +113,8 @@ they are total and !!{lambda definable}.
         \fn{Succ} (\fn{Fst}\, p), (G \, \num{n} (\fn{Fst}\, p) (\fn{Snd}\, p))
     }]) \tuple{\num{m}, \num{h(n,m)}}\\
     & \redone
-    \tuple{\fn{Succ} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}), (G \, \num{n}
-      (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}) (\fn{Snd}\, \tuple{\num{m}, \num{h(n,m)}}))}\\
+    \tuple{\fn{Succ} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}),\\
+      & \qquad (G \, \num{n} (\fn{Fst}\, \tuple{\num{m}, \num{h(n,m)}}) (\fn{Snd}\, \tuple{\num{m}, \num{h(n,m)}}))}\\
     & \red 
     \tuple{\fn{Succ}\, \num{m}, (G \, \num{n} \,\num{m} \, \num{h(n,m)})}\\
     & \red \tuple{\num{m+1}, \num{g(n, m, h(n, m))}}
@@ -125,7 +125,8 @@ they are total and !!{lambda definable}.
   \begin{align*}
     H\,\num n\,\num m &\ident \lambd[x][\lambd[y][\fn{Snd} (y
         (\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G\, x\,
-          (\fn{Fst}\, p)\, (\fn{Snd}\, p))}) \tuple{\num{0}, F x})]] \,\num n\, \num m\\
+          (\fn{Fst}\, p)\, (\fn{Snd}\, p))}) \tuple{\num{0}, F x})]]\\
+    & \qquad\,\num n\, \num m\\
     & \red \fn{Snd} (\num m \,
     \underbrace{(\lambd[p].\tuple{\fn{Succ} (\fn{Fst}\, p), (G \,\num n\,
       (\fn{Fst}\, p) (\fn{Snd}\, p))})}_{D_n} \tuple{\num{0}, F \num n})\\

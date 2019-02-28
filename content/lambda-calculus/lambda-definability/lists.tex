@@ -11,7 +11,7 @@
 
 The list $[M_1, M_2, \ldots, M_n]$ can be defined to be:
 \[
-  [M_1, M_2, \ldots, M_n] ident \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
+  [M_1, M_2, \ldots, M_n] \ident \lambd[sz][s M_1 (s M_2 (\ldots (s M_n z)))]
 \]
 Informally speaking, the term representing a list is the
 ``accumulator'' function of the list: a function that accepts two
@@ -28,19 +28,20 @@ and finally returns the result.
 
 We can easily define some useful functions based on this encoding; 
 \begin{align*}
-  {sum} &ident \lambd[l][l ~ (\lambd[xa][add ~ x ~ a])~  0]\\
-  len &ident \lambd[l][l ~ (\lambd[xa][add ~ a ~ 1]) ~ 0]
+  \fn{Sum} & \ident
+  \lambd[l][l \, (\lambd[xa][\fn{Add} \, x \, a])\,  \num{0}]\\
+  \fn{Len} & \ident
+  \lambd[l][l \, (\lambd[xa][\fn{Add} \, a \, \num{1}]) \num{0}]
 \end{align*}
 
-$sum$ calculates the sum of a list of church numerals. It works by
-doing an accumulation on the list, where the initial value is $0$ and
-for each element, with $x$ to be the element and $a$ to be the
-accumulated value, return $add ~ x ~ a$ as the new value. The result
-is the sum. Also you can $\eta$-reduce this term (we keep this form for
-easier understanding) into $\lambd[l][l ~ add ~ 0]$.
+$\fn{Sum}$ calculates the sum of a list of church numerals. It works
+by doing an accumulation on the list, where the initial value is
+$\num{0}$ and for each element, return $\fn{Add} \, x\, a$ as the new
+value (where $x$ is the current element and $a$ is the the accumulated
+value). The result is the sum of all elements.
 
 \begin{prob}
-  What does $len$ do? Explain.
+  What does $\fn{Len}$ do? Explain.
 \end{prob}
 
 \begin{prob}
