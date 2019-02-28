@@ -31,14 +31,14 @@ partial recursive.
 
   Using these recursive functions, we can define the function~$f$ as a
   partial recursive function. There is a lambda term~$F$ that
-  !!{lambda define}s~$f$. To compute $f(n_1, \dots, n_k)$ first obtain
+  !!{lambda define}s~$f$. To compute $f(n_1, \dots, n_k)$, first obtain
   the G\"odel numbers of the corresponding Church numerals using
   $\fn{toChurch}(n_i)$, append these to $\Gn{F}$ to obtain the G\"odel
   number of the term $F \num{n_1}\dots\num{n_k}$. Now use
   $\fn{normalize}$ on this G\"odel number. If $f(n_1, \dots, n_k)$ is
   defined, $F \num{n_1}\dots\num{n_k}$ has a normal form (which must
   be a Church numeral), and otherwise it has no normal form (and so
-  $\fn{normalize}(\Gn{F\num{n_1}\dots\num{n_k}})$ is undefined).
+  \[\fn{normalize}(\Gn{F\num{n_1}\dots\num{n_k}})\] is undefined).
   Finally, use $\fn{fromChurch}$ on the G\"odel number of the
   normalized term.
 \end{proof}
