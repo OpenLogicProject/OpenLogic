@@ -27,9 +27,10 @@ is a tree of !!{sentence}s satisfying the following conditions:
 \item The topmost !!{sentence}s of the tree are either in $\Gamma$ or
   are !!{discharged} by an inference in the tree.
 \item The bottommost !!{sentence} of the tree is~$!A$.
-\item Every !!{sentence} in the tree except~$!A$ is a premise of a correct
-  application of an inference rule whose conclusion stands directly
-  below that !!{sentence} in the tree.
+\item Every !!{sentence} in the tree the except the sentence~$!A$ at
+  the bottom is a premise of a correct application of an inference
+  rule whose conclusion stands directly below that !!{sentence} in the
+  tree.
 \end{enumerate}
 We then say that $!A$ is the \emph{conclusion} of the
 !!{derivation} and that $!A$ is \emph{!!{derivable}} from~$\Gamma$.
@@ -68,7 +69,7 @@ is also a correct derivation.
 
 We can now apply another rule, say, $\Intro{\lif}$, which allows us to
 conclude a conditional and allows us to !!{discharge} any assumption
-that is identical to the conclusion of that conditional. So both of
+that is identical to the antecedent of that conditional. So both of
 the following would be correct !!{derivation}s:
 \begin{prooftree}
 \AxiomC{$\Discharge{!C}{1}$}
@@ -84,6 +85,17 @@ the following would be correct !!{derivation}s:
 \BinaryInfC{$!C \land !D$}
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$!D \lif (!C \land !D)$}
+\end{prooftree}
+
+Remember that discharging of assumptions is a permission, not a
+requirement: we don't have to discharge the assumptions. In
+particular, we can apply a rule even if the assumptions are not
+present in the derivation. For instance, the following is legal, even
+though there is no assumption~$!A$ to be !!{discharged}:
+\begin{prooftree}
+  \AxiomC{$!B$}
+  \DischargeRule{\Intro{\lif}}{1}
+  \UnaryInfC{$!A \lif !B$}
 \end{prooftree}
 \end{ex}
 

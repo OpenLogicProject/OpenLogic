@@ -41,21 +41,22 @@ Let $\delta$ be !!a{derivation} of $!A$. We proceed by
 induction on the number of inferences in~$\delta$.
 
 For the induction basis we show the claim if the number of inferences
-is~$0$. In this case, $\delta$ consists only of an initial
-!!{formula}. Every initial !!{formula}~$!A$ is !!a{undischarged}
-assumption, and as such, any
-\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$} that
-satisfies all of the !!{undischarged} assumptions of the proof also
-satisfies~$!A$.
+is~$0$. In this case, $\delta$ consists only of a single
+!!{sentence}~$!A$, i.e., an assumption. That assumption is
+!!{undischarged}, since assumptions can only be !!{discharged} by
+inferences, and there are no inferences.  So, any
+\iftag{FOL}{!!{structure}~$\Struct{M}$}{!!{valuation}~$\pAssign{v}$}
+that satisfies all of the !!{undischarged} assumptions of the proof
+also satisfies~$!A$.
 
 Now for the inductive step. Suppose that $\delta$ contains~$n$
-inferences. The premise(s) of the lowermost inference are !!{derive}d using
-sub-!!{derivation}s, each of which contains fewer than~$n$ inferences.
-We assume the induction hypothesis: The premises of the last
-inference follow from the !!{undischarged} assumptions of the
-sub-!!{derivation}s ending in those premises.  We have to show that
-$!A$ follows from the !!{undischarged} assumptions of the entire
-proof.
+inferences. The premise(s) of the lowermost inference are !!{derive}d
+using sub-!!{derivation}s, each of which contains fewer than~$n$
+inferences.  We assume the induction hypothesis: The premises of the
+lowermost inference follow from the !!{undischarged} assumptions of
+the sub-!!{derivation}s ending in those premises.  We have to show
+that the conclusion~$!A$ follows from the !!{undischarged} assumptions
+of the entire proof.
 
 We distinguish cases according to the type of the lowermost inference.
 First, we consider the possible inferences with only one premise.
@@ -192,7 +193,7 @@ First, we consider the possible inferences with only one premise.
   not occur in~$\Gamma$, $\Sat{M'}{\Gamma}$ by
   \olref[syn][ext]{cor:extensionality-sent}. Since $\Gamma \Entails
   A(a)$, $\Sat{M'}{A(a)}$.  Since $!A(a)$ is !!a{sentence},
-  $\Sat{M}{!A(a)}[s]$ by
+  $\Sat{M'}{!A(a)}[s]$ by
   \olref[syn][ass]{prop:sentence-sat-true}. $\Sat{M'}{!A(x)}[s]$ iff
   $\Sat{M'}{!A(a)}$ by \olref[syn][ext]{prop:ext-formulas} (recall
   that $!A(a)$ is just $\Subst{!A(x)}{a}{x}$). So,
