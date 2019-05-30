@@ -20,6 +20,8 @@
 % we want all the problems deferred to the end
 \input{\olpath/sty/open-logic-defer.sty}
 
+\problemsperchapter
+
 % let's set the whole thing in Palatino, with Helvetica for
 % sans-serif, and spread the lines a bit to make the text more
 % readable
@@ -66,10 +68,29 @@ Theory
 
 % olimport includes an entire part
 
-\olimport*[sets-functions-relations]{sets-functions-relations}
+%\olimport*[sets-functions-relations]{sets-functions-relations}
 
 % you can also import individual chapters, but then don't forget to
 % include part headings
+
+\part{Propositional Logic}
+
+%\olimport*[propositional-logic/{propositional-logic}
+
+\chapter{Syntax and Semantics}
+
+\olimport*[propositional-logic/syntax-and-semantics]{introduction}
+
+\olimport*[propositional-logic/syntax-and-semantics]{formulas}
+
+\olimport*[propositional-logic/syntax-and-semantics]{preliminaries}
+
+\olimport*[propositional-logic/syntax-and-semantics]{valuations-sat}
+
+\olimport*[propositional-logic/syntax-and-semantics]{semantic-notions}
+
+\OLEndChapterHook
+
 
 \part{First-order Logic}
 
@@ -172,9 +193,9 @@ Theory
 % the end of each chapter, delete this part and put
 % \problemsperchapter in the preamble
 
-\chapter{Problems}
+%\chapter{Problems}
 
-\printproblems
+%\printproblems
 
 \backmatter
 
