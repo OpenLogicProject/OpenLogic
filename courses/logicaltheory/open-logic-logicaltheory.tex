@@ -1,0 +1,193 @@
+% Open Logic Project
+%
+% driver file open-logic-sample.tex to produce text on letter-size paper
+% with standard layout and margins
+
+% We use the memoir class for maximal flexibility of layout, but any
+% class will do
+
+\documentclass[letterpaper]{memoir}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory courses/sample,
+% so the main directory is two levels up.
+\newcommand{\olpath}{../../}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in open-logic-sample-config.sty
+\input{\olpath/sty/open-logic.sty}
+
+% we want all the problems deferred to the end
+\input{\olpath/sty/open-logic-defer.sty}
+
+% let's set the whole thing in Palatino, with Helvetica for
+% sans-serif, and spread the lines a bit to make the text more
+% readable
+
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\linespread{1.05}
+
+\begin{document}
+
+% First we make a titlepage
+
+\begin{titlingpage}
+\begin{raggedleft}
+\fontsize{52pt}{2em}\selectfont\bfseries\sffamily
+Sample\\[.5ex] 
+Logic\\[.5ex] 
+Text
+\vskip 4ex
+\normalfont\Huge\textbf{\href{http://openlogicproject.org/}{Open Logic Project}}
+
+\end{raggedleft}
+
+\vfill
+
+% oluselicense generates a license mark that a) licenses the result
+% under a CC-BY licence and b) acknowledges the original source (the
+% OLP).  Acknowledgment of the source is a requirement under the
+% conditions of the CC-BY license used by the OLP, but you are not
+% required to license the product itself under CC-BY.
+
+\oluselicense
+% Title of this version of the OLT with link to source
+{\href{https://github.com/OpenLogicProject/OpenLogic/tree/master/courses/sample}{\textit{Sample Logic Text}}}
+% Author of this version
+{\href{http://openlogicproject.org/}{OLP}}
+\end{titlingpage}
+
+\frontmatter
+\pagestyle{ruled}
+
+\tableofcontents*
+
+\mainmatter
+
+% olimport includes an entire part
+
+\olimport*[sets-functions-relations]{sets-functions-relations}
+
+% you can also import individual chapters, but then don't forget to
+% include part headings
+
+\part{First-order Logic}
+
+\olimport*[first-order-logic/syntax-and-semantics]{syntax-and-semantics}
+
+\olimport*[first-order-logic/models-theories]{models-theories}
+
+% For a proof system, we'll do only natural deduction. But some of the
+% texts will refer to other proof systems unless you set some tags in
+% the config.sty file.  So make sure those are set. We'll include
+% these sections by hand so we can add a couple of sections from the
+% proof-systems chapter. Of course, if new sections are added or
+% sections are moved or renamed in the main repository, this may
+% break.
+
+\chapter{Natural Deduction}
+
+\olimport*[first-order-logic/proof-systems]{introduction}
+
+\olimport*[first-order-logic/proof-systems]{natural-deduction}
+
+\olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
+
+\olimport*[first-order-logic/natural-deduction]{propositional-rules}
+
+% We'll reorder things: let's do propositional examples first and then
+% go back to quantifiers
+
+\olimport*[first-order-logic/natural-deduction]{derivations}
+
+\olimport*[first-order-logic/natural-deduction]{proving-things}
+
+\olimport*[first-order-logic/natural-deduction]{quantifier-rules}
+
+\olimport*[first-order-logic/natural-deduction]{proving-things-quant}
+
+\olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
+
+\olimport*[first-order-logic/natural-deduction]{provability-consistency}
+
+\olimport*[first-order-logic/natural-deduction]{provability-propositional}
+
+\olimport*[first-order-logic/natural-deduction]{provability-quantifiers}
+
+\olimport*[first-order-logic/natural-deduction]{soundness}
+
+\olimport*[first-order-logic/natural-deduction]{identity}
+
+\olimport*[first-order-logic/natural-deduction]{soundness-identity}
+
+% Chapters should end with \OLEndChapterHook. They will automatically
+% if you include entire parts or chapters. Here we did a chapter ``by
+% hand'' so we should add \OLEndChapterHook by hand too
+
+\OLEndChapterHook
+
+\olimport*[first-order-logic/completeness]{completeness}
+
+\olimport*[first-order-logic/beyond]{beyond}
+
+% OLEndPartHook should come at the end of each
+% part.
+
+\OLEndPartHook
+
+% Include some more chapters and parts
+
+\olimport*[turing-machines]{turing-machines}
+
+% Part: incompleteness
+
+\part{Computability and Incompleteness}
+
+% include intro to recursive function from computability part
+
+\olimport*[computability/recursive-functions]{recursive-functions}
+
+\olimport*[incompleteness/arithmetization-syntax]{arithmetization-syntax}
+
+\olimport*[incompleteness/representability-in-q]{representability-in-q}
+
+% leave out this part -- it depends on computability theory chapter
+% \olimport[incompleteness/theories-computability]{theories-computability}
+
+\olimport*[incompleteness/incompleteness-provability]{incompleteness-provability}
+
+\OLEndPartHook
+
+\stopproblems
+
+% Ok, that's it. Now for the appendices
+
+\appendix
+
+\olimport*[methods]{methods}
+
+\olimport*[history]{history}
+
+% now typeset all the problems as an appendix. If you want problems at
+% the end of each chapter, delete this part and put
+% \problemsperchapter in the preamble
+
+\chapter{Problems}
+
+\printproblems
+
+\backmatter
+
+% If you include any chapters from the history part, you have to print
+% the Photo Credits. 
+
+\photocredits
+
+% Include the bibliography
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic}
+
+\end{document}
+

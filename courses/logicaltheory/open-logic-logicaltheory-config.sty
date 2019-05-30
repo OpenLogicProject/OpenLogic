@@ -1,0 +1,39 @@
+% For the sample text, let's redefine the logical connectives
+
+\DeclareDocumentMacro \lnot {\mathord{\sim}}
+
+\DeclareDocumentMacro \land {\mathbin{\&}}
+
+\DeclareDocumentMacro \lif {\supset}
+
+\DeclareDocumentMacro \liff {\equiv}
+
+% Set abstracts with a | instead of a :
+
+\DeclareDocumentCommand \Setabs { m m }{\{ #1 \mid #2 \}}
+
+% let's be pretentious about the plural of formula
+
+\settexttoken{formula}{formula}{formulae}
+
+\settexttoken{subformula}{subformula}{subformulae}
+
+\settexttoken{enumerable}{countable}{countable}
+
+\settexttoken{nonenumerable}*{uncountable}{uncountable}
+
+\settexttoken{denumerable}{countably infinite}{countably infinite}
+
+% make biconditional, verum defined
+
+\tagtrue{defIff,defTrue}
+\tagfalse{prvIff,prvTrue}
+
+% cases for conditional, universal quantifier left to reader
+
+\tagtrue{probIf,probAll}
+
+% do just natural deduction
+
+\tagtrue{prfND}
+\tagfalse{prfSC,prfAX,prfTab}
