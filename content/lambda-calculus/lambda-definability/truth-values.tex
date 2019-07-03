@@ -1,0 +1,75 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: truth-values
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{tvr}
+\olsection{Truth Values and Relations}
+
+We can encode truth values in the pure lambda calculus as follows:
+
+\begin{align*}
+  \fn{true} & \ident \lambd[x][\lambd[y][x]]\\
+  \fn{false} & \ident \lambd[x][\lambd[y][y]]
+\end{align*}
+
+Truth values are represented as \emph{selectors}, i.e., functions that
+accept two arguments and returning one of them. The truth value
+$\fn{true}$ selects its first argument, and $\fn{false}$ its
+second. For example, $\fn{true}\, M N$ always reduces to $M$, while
+$\fn{false}\, M N$ always reduces to~$N$.
+
+\begin{defn}
+We call a relation $R \subseteq \Nat^n$ !!{lambda definable} if there is
+a term~$R$ such that
+\begin{align*}
+  R\, \num{n_1} \dots \num{n_k} & \bred \fn{true}
+  \intertext{whenever $R(n_1, \dots, n_k)$ and}
+  R\, \num{n_1} \dots \num{n_k} & \bred \fn{false}
+\end{align*}
+otherwise.
+\end{defn}
+
+For instance, the relation $\fn{IsZero} = \{0\}$ which holds of $0$
+and $0$ only, is !!{lambda definable}.
+\[
+  \fn{IsZero} \ident \lambd[n][n (\lambd[x][\fn{false}])\, \fn{true}]
+\]
+How does it work? As Church numerals are defined as iterators
+(functions which apply their first argument $n$ times to the second),
+we set the initial value to be $\fn{true}$, and for every step of
+iteration, we return $\fn{false}$ whatever the result of last
+iteration is.  This step will be applied to the initial value $n$
+times, and the result will be $\fn{true}$ if and only if the step is
+not applied at all, i.e., when $n = 0$.
+
+On the basis of this representation of truth values, we can further
+define some truth functions. Here are two, the representations of
+negation and conjunction:
+\begin{align*}
+  \fn{Not} & \ident \lambd[x][x\, \fn{false}\, \fn{true}]\\
+  \fn{And} & \ident \lambd[x][\lambd[y][xy \,\fn{false}]]
+\end{align*}
+The function ``$\fn{Not}$'' accepts one argument, and returns
+$\fn{true}$ if the argument is $\fn{false}$, and $\fn{false}$ if the
+argument is~$\fn{true}$.  The function ``$\fn{And}$'' accepts two truth
+values as arguments, and should return $\fn{true}$ iff both arguments
+are~$\fn{true}$. Since we represent truth values as selectors
+(described above), $\fn{and}$ passes $y$ and $\fn{false}$ to $x$,
+which will evaluate to $y$ if $x$ is $\fn{true}$, or $\fn{false}$ if
+$x$ is $\fn{false}$, which is just what is desired.
+
+Note that we assume here that only truth values are used as arguments
+to $\fn{And}$. If it is passed other terms, the result (i.e., the
+normal form, if it exists) may well not be a truth value.
+
+\begin{prob}
+  Define the functions $\fn{Or}$ and $\fn{Xor}$ representing the truth
+  functions of inclusive and exclusive disjunction using the encoding
+  of truth values as $\lambd$-terms.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,156 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{pb}
+
+\olsection{Parallel $\beta$-reduction}
+
+We introduce the notion of \emph{parallel $\beta$-reduction}, and
+prove the it has the Church-Rosser property.
+
+\begin{defn}[parallel $\beta$-reduction, $\bredpar$] \ollabel{defn:bredpar}
+  Parallel reduction ($\bredpar$) of terms is inductively defined as follows:
+  \begin{enumerate}
+    \item \ollabel{defn:bredpar1} $x \bredpar x$.
+    \item \ollabel{defn:bredpar2} If $N \xrightarrow{\beta} N'$ then $\lambd[x][N] \bredpar
+      \lambd[x][N']$.
+    \item \ollabel{defn:bredpar3} If $P \bredpar P'$ and $Q \bredpar Q'$ then $PQ \bredpar
+      P'Q'$.
+    \item \ollabel{defn:bredpar4} If $N \bredpar N'$ and $Q \bredpar Q'$ then
+      $(\lambd[x][N])Q \bredpar \Subst{N'}{Q'}{x}$.
+  \end{enumerate}
+\end{defn}
+
+Parallel $\beta$-reduction allows us to reduce any number of redices in a
+term in one step. It is different from $\beta$-reduction in the sense that we
+can only contract redices that occur in the original term, but not redices
+arising from parallel $\beta$-reduction. For example, the term
+$(\lambd[f][fx])(\lambd[y][y])$ can only be parallel $\beta$-reduced
+to itself or to $(\lambd[y][y])x$, but not further to~$x$, although it
+$\beta$-reduces to~$x$, because this redex arises only after one step 
+of parallel $\beta$-reduction. A second parallel $\beta$-reduction
+step yields~$x$, though.
+
+\begin{thm}\ollabel{thm:refl}
+  $M \bredpar M$.
+\end{thm}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[lam][cr][pb]{thm:refl}.
+\end{prob}
+
+\begin{defn}[$\beta$-complete development]\ollabel{defn:bcd}
+  The \emph{$\beta$-complete development}~$\bcd{M}$ of $M$ is defined
+  inductively as follows:
+  \begin{align}
+    \bcd{x} &= x \ollabel{defn:bcd1} \\
+    \bcd{(\lambd[x][N])} &= \lambd[x][\bcd{N}] \ollabel{defn:bcd2}\\
+    \bcd{(PQ)} &= \bcd{P}\bcd{Q} && \text{if $P$ is not a $\lambd$-abstract} 
+    \ollabel{defn:bcd3} \\
+    \bcd{((\lambd[x][N])Q)} &= \Subst{\bcd{N}}{\bcd{Q}}{x} \ollabel{defn:bcd4}
+  \end{align}
+\end{defn}
+
+The $\beta$-complete development of a term, as its name suggests, is a
+``complete parallel reduction.'' While for parallel $\beta$-reduction we still
+can choose to not contract a redex, for complete development we have
+no choice but to contract all of them. Thus the complete development
+of $(\lambd[f][fx])(\lambd[y][y])$ is $(\lambd[y][y])x$, not itself.
+
+\begin{editorial}
+  This definition has the problem that we haven't introduced how to
+  define functions on ($\lambd$-)terms recursively. Will fix in future.
+\end{editorial}
+
+\begin{lem}\ollabel{lem:comp}
+  If $M \bredpar M'$ and $R \bredpar R'$, then $\Subst{M}{R}{y}
+  \bredpar \Subst{M'}{R'}{y}$.
+\end{lem}
+
+\begin{proof}
+  By induction on the derivation of $M \bredpar M'$.
+  \begin{enumerate}
+    \item The last step is \olref{defn:bredpar1}: Exercise.
+    \item The last step is \olref{defn:bredpar2}: Then $M$ is 
+      $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$,
+      where $N \bredpar N'$. We want to prove that
+      $\Subst{(\lambd[x][N])}{R}{y} \bredpar
+      \Subst{(\lambd[x][N'])}{R'}{y}$, i.e.,
+      $\lambd[x][\Subst{N}{R}{y}] \bredpar
+      \lambd[x][\Subst{N'}{R}{y}]$. This follows immediately by
+      \olref{defn:bredpar2} and the induction hypothesis.
+    \item The last step is \olref{defn:bredpar3}: Exercise.
+    \item The last step is \olref{defn:bredpar4}: $M$ is
+      $(\lambd[x][N])Q$ and $M'$ is $\Subst{N'}{Q'}{x}$. We want to
+      prove that $\Subst{((\lambd[x][N])Q)}{R}{y} \bredpar
+      \Subst{\Subst{N'}{Q'}{x}}{R'}{y}$, i.e.,
+      $(\lambd[x][\Subst{N}{R}{y}])\Subst{Q}{R}{y} \bredpar
+      \Subst{\Subst{N'}{R'}{y}}{\Subst{Q'}{R'}{y}}{x}$. This follows
+      by \olref{defn:bredpar4} and the induction hypothesis.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][cr][pb]{lem:comp}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:cont}
+  If $M \bredpar M'$ then $M' \bredpar \bcd{M}$.
+\end{lem}
+\begin{proof}
+  By induction on the derivation of $M \bredpar M'$.
+  \begin{enumerate}
+    \item The last rule is \olref{defn:bredpar1}: Exercise.
+    \item The last rule is \olref{defn:bredpar2}: $M$ is 
+      $\lambd[x][N]$ and $M'$ is $\lambd[x][N']$ with
+      $N \bredpar N'$. We want to show that $\lambd[x][N'] \bredpar
+      \bcd{(\lambd[x][N])}$, i.e., $\lambd[x][N'] \bredpar
+      \lambd[x][\bcd{N}]$ by \olref{defn:bcd2}. It follows by
+      \olref{defn:bredpar2} and the induction hypothesis.
+    \item The last rule is \olref{defn:bredpar3}:$M$ is $PQ$ and $M'$
+      is $P'Q'$ for some $P$, $Q$, $P'$ and $Q'$, with $P \bredpar P'$
+      and $Q \bredpar Q'$. By induction hypothesis, we have $P'
+      \bredpar \bcd{P}$ and $Q' \bredpar \bcd{Q}$.
+      \begin{enumerate}
+        \item If $P$ is $\lambd[x][N]$ for some $x$ and $N$, then
+          $P'$ must be $\lambd[x][N']$ for some $N'$ with 
+          $N \bredpar N'$. By induction hypothesis we have $N' \bredpar \bcd{N}$ and
+          $Q' \bredpar \bcd{Q}$. Then $(\lambd[x][N'])Q' \bredpar
+          \Subst{\bcd{N}}{\bcd{Q}}{x}$ by \olref{defn:bredpar4}.
+        \item If $P$ is not a $\lambd$-abstract, then $P'Q' \bredpar
+          \bcd{P}\bcd{Q}$ by \olref{defn:bredpar3}, and the right-hand
+          side is $\bcd{PQ}$ by \olref{defn:bcd3}.
+      \end{enumerate}
+    \item The last rule is \olref{defn:bredpar4}: $M$ is
+      $(\lambd[x][N])Q$  and $M'$ is $\Subst{N'}{Q'}{x}$ for some $x$,
+      $N$, $Q$, $N'$, and~$Q'$, with $N \bredpar N'$ and $Q \bredpar
+      Q'$. By induction hypothesis we know $N' \bredpar \bcd{N}$ and
+      $Q' \bredpar \bcd{Q}$. By \olref{lem:comp} we have
+      $\Subst{N'}{Q'}{x} \bredpar \Subst{\bcd{N}}{\bcd{Q}}{x}$, the
+      right-hand side of which is exactly $\bcd{((\lambd[x][N])Q)}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][cr][pb]{lem:cont}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:cr}
+  $\bredpar$ has the Church-Rosser property.
+\end{thm}
+
+\begin{proof}
+  Immediate from \olref{lem:cont}.
+\end{proof}
+
+\end{document}
+

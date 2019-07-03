@@ -299,6 +299,11 @@
 \DeclareDocumentCommand \Subst { m m m } {
   #1[\subst{#2}{#3}]}
 
+% ### pre-Substitution
+
+\DeclareDocumentCommand \pSubst { m m m } {
+  #1[#2/#3]^{-}
+}
 
 % ### The satisfaction/truth relation 
 
@@ -445,6 +450,26 @@
         { \equiv_{#2} }}
 }
 
+% - '\eqc': the equivalence class the element(first argument) belongs
+% to; second argument is used to mark the equivalence relation if
+% there's more than one
+
+\DeclareDocumentCommand \eqc { m o } {
+  \IfNoValueTF {#2}
+  {[#1]}
+  {[#1]_{#2}}
+}
+
+% - '\rep': the representative of an equivalence class, the second
+% argument is used to mark the equivalence relation if there's more
+% than one
+
+\DeclareDocumentCommand \rep { m o } {
+  \IfNoValueTF {#2}
+  {\underline{#1}}
+  {{\underline{#1}}_{#2}}
+}
+
 % - `\iso[/][p]`: relation of being (partially) isomorphic
 
 \DeclareDocumentCommand \iso { t{/} o } {
@@ -561,11 +586,91 @@
 
 % - `\redone`: one-step reduction
 
-\DeclareDocumentMacro \redone {\mathrel{\triangleright_1}}
+\DeclareDocumentCommand \redone { o } {
+  \IfNoValueTF {#1}
+  {\xrightarrow{}}
+  {\xrightarrow{#1}}
+}
+
+\DeclareDocumentMacro \aconvone {\redone[\alpha]}
+
+\DeclareDocumentMacro \bredone {\redone[\beta]}
+
+\DeclareDocumentMacro \eredone {\redone[\eta]}
+
+\DeclareDocumentMacro \beredone {\redone[\beta\eta]}
+
+\DeclareDocumentMacro \xredone {\redone[X]}
 
 % - `\red`: reduction
 
-\DeclareDocumentMacro \red {\triangleright}
+\DeclareDocumentCommand \xrightarrowdbl { o m } {
+  \IfNoValueTF {#1}
+  {\xrightarrow{#2} \mathrel{\mkern-14mu}\rightarrow}
+  {\xrightarrow[#1]{#2} \mathrel{\mkern-14mu}\rightarrow}
+}
+
+\DeclareDocumentCommand \red { o } {
+  \IfNoValueTF {#1}
+  {\xrightarrowdbl{}}
+  {\xrightarrowdbl{#1}}
+}
+
+\DeclareDocumentMacro \aconv {\red [\alpha]}
+
+\DeclareDocumentMacro \bred {\red [\beta]}
+
+\DeclareDocumentMacro \ered {\red [\eta]}
+
+\DeclareDocumentMacro \bered {\red [\beta\eta]}
+
+\DeclareDocumentMacro \xred {\red [X]}
+
+% - '\eq': equivalence relation with some letter over the symbol
+\DeclareDocumentCommand \equal { o } {
+  \IfNoValueTF {#1}
+  {\eq}
+  {\stackrel{#1}{\eq}}
+}
+
+\DeclareDocumentMacro \aeq {\equal [\alpha]}
+
+% - '\eqs': syntactic equivalent
+\DeclareDocumentMacro \eqs {\equiv}
+
+% - '\redpar': parallel reduction
+
+\DeclareDocumentCommand \redpar { o } {
+  \IfNoValueTF {#1}
+  {\xLongrightarrow{}}
+  {\xLongrightarrow{#1}}
+}
+
+\DeclareDocumentMacro \bredpar {\redpar [\beta]}
+
+\DeclareDocumentMacro \beredpar {\redpar [\beta\eta]}
+
+\DeclareDocumentMacro \eqa {\equal{\alpha}}
+
+\DeclareDocumentMacro \eqe {\equal{\eta}}
+
+\DeclareDocumentMacro \ext {\ensuremath{\mathit{ext}}}
+
+% - '\cd': complete development
+
+\DeclareDocumentCommand \cd { o m } {
+  \IfNoValueTF {#1}
+  {{ #2 }^*}
+  {{ #2 }^{* {#1} }}
+}
+
+\DeclareDocumentCommand \bcd { m } {
+  \cd[\beta]{#1}
+}
+
+\DeclareDocumentCommand \becd { m } {
+  \cd[\beta\eta]{#1}
+}
 
 % - `\lambd[x][!A]`: lambda abstract
 
@@ -944,6 +1049,13 @@
         \mathrm{SFrm}({#1})
 }
 
+% - `\FV{!A}`: set of free variables of a formula or term
+
+\DeclareDocumentCommand \FV { m } {
+        \mathrm{FV}({#1})
+}
+
+
 % - `\Sent[L]`: the set of sentences (of a language)
 \DeclareDocumentCommand \Sent { o } {
     \IfNoValueTF {#1} 
@@ -1214,6 +1326,16 @@
 
 \settexttoken{computably enumerable}{computably enumerable}{computably enumerable}
 \settexttoken{c.e.}{c.e.}{c.e.}
+
+\settexttoken{argument}*{argument}{arguments}
+\settexttoken{parameter}{parameter}{parameters}
+
+
+% - `lambda define`: Also: represent.
+
+\settexttoken{lambda define}{$\lambd$-define}{$\lambd$-defines}[$\lambd$-Define][$\lambd$-Defines]
+\settexttoken{lambda defined}{$\lambd$-defined}{$\lambd$-defined}[$\lambd$-Defined]
+\settexttoken{lambda definable}{$\lambd$-definable}{$\lambd$-definable}[$\lambd$-Definable]
 
 % Tags
 % ====

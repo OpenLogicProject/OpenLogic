@@ -1,0 +1,98 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: unique-readability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{unq}
+\olsection{Unique Readability}
+
+We may wonder if for each term there is a unique way of forming it,
+and there is.  For each lambda term there is only one way to construct
+and interpret it.  In the following discussion, a \emph{formation} is
+the procedure of constructing a term using the formation rules (one or
+several times) of \olref[trm]{defn:term}.
+
+\begin{lem}\ollabel{lem:term-start}
+A term starts with either a variable or a parenthesis.
+\end{lem}
+
+\begin{proof}
+Something counts as a term only if it is constructed according to
+\olref[trm]{defn:term}. If it is the result of
+\olref[trm]{defn:term-var}, it must be a variable. If it is the result
+of \olref[trm]{defn:term-abs} or \olref[trm]{defn:term-app}, it starts
+with a parenthesis.
+\end{proof}
+
+\begin{lem}\ollabel{lem:app-start}
+The result of an application starts with either two parentheses or a
+parenthesis and a variable.
+\end{lem}
+
+\begin{proof}
+If $M$ is the result of an application, it is of the form $(PQ)$, so
+it begins with a parenthesis. Since $P$ is a term, by
+\olref{lem:term-start}, it begins either with a parenthesis or a
+variable.
+\end{proof}
+
+\begin{lem}\ollabel{lem:initial}
+No proper initial part of a term is itself a term.
+\end{lem}
+
+\begin{prob}
+Prove \olref[lam][syn][unq]{lem:initial} by induction on the length
+of terms.
+\end{prob}
+
+\begin{prop}[Unique Readability] \ollabel{prop:unq}
+There is a unique formation for each term. In other words, if a term
+$M$ is formed by a formation, then it is the only formation that can
+form this term.
+\end{prop}
+
+\begin{proof}
+  We prove this by induction on the formation of terms. 
+  \begin{enumerate}
+    \item $M$ is of the form
+      $x$, where $x$ is some variable. Since the results of abstractions and applications always start with parentheses, they cannot have been used to
+      construct $M$; Thus, the formation of $M$ must be a single step
+      of \olref[trm]{defn:term}\olref[trm]{defn:term-var}.
+    \item $M$ is of the form $(\lambd[x][N])$, where $x$ is some
+      variable and $N$ is a term. It could not have been constructed
+      according to \olref[trm]{defn:term}\olref[trm]{defn:term-var},
+      because it is not a single variable.  It is not the result of an
+      application, by \olref{lem:app-start}. Thus $M$ can only be the
+      result of an abstraction on~$N$.  By inductive hypothesis we
+      know that formation of $N$ is itself unique.
+    \item $M$ is of the form $(PQ)$, where $P$ and $Q$ are terms.
+      Since it starts with a parentheses, it cannot also be
+      constructed by
+      \olref[trm]{defn:term}\olref[trm]{defn:term-var}.  By
+      \olref{lem:term-start}, $P$ cannot begin with $\lambd$, so
+      $(PQ)$ cannot be the result of an abstraction.  Now suppose
+      there were another way of constructing $M$ by application, e.g.,
+      it is also of the form $(P'Q')$. Then $P$ is a proper initial
+      segment of $P'$ (or vice versa), and this is impossible by
+      \olref{lem:initial}. So $P$ and $Q$ are uniquely
+      determined, and by inductive hypothesis we know that formations
+      of $P$ and $Q$ is unique.
+  \end{enumerate}
+\end{proof}
+
+A more readable paraphrase of the above proposition is as follows:
+\begin{prop}
+  A term $M$ can only be one of the following forms:
+  \begin{enumerate}
+    \item $x$, where $x$ is a variable uniquely determined by $M$.
+    \item $(\lambd[x][N])$, where $x$ is a variable and $N$ is
+      another term, both of which is uniquely determined by $M$.
+    \item $(PQ)$, where $P$ and $Q$ are two terms uniquely
+      determined by $M$.
+  \end{enumerate}
+\end{prop}
+
+\end{document}

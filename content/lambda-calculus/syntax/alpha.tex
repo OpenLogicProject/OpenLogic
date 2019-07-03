@@ -1,0 +1,283 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: alpha
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{alp}
+\olsection{$\alpha$-Conversion}
+
+What is the relation between $\lambd[x][x]$ and $\lambd[y][y]$? They
+both represent the identity function. They are, of course,
+syntactically different terms. They differ only in the name of the
+bound variable, and one is the result of ``renaming'' the bound
+variable in the other. This is called \emph{$\alpha$-conversion}.
+
+\begin{defn}[Change of bound variable, $\aconvone$]
+  If a term $M$ contains an occurrence of $\lambd[x][N]$, $y \notin
+  \FV{N}$, and $\Subst{N}{y}{x}$ is defined, then replacing this occurrence
+  by 
+  \begin{equation*}
+    \lambd[y][\Subst{N}{y}{x}]
+  \end{equation*}
+  resulting in $M'$ is called a \emph{change of bound variable}, written
+  as $M \redone[\alpha] M'$.
+\end{defn}
+
+\begin{defn}[Compatibility of relation]
+  A relation $R$ on terms is said to be \emph{compatible}
+  if it satisfies following conditions:
+  \begin{enumerate}
+  \item If $R N N'$ then $R \lambd[x][N] \lambd[x][N']$
+  \item If $R P P'$ then $R (PQ) (P'Q)$
+  \item If $R Q Q'$ then $R (PQ) (PQ')$
+  \end{enumerate}
+\end{defn}
+
+Thus let's rephrase the definition:
+\begin{defn}[Change of bound variable, $\aconvone$]
+  \emph{Change of bound variable} ($\redone[\alpha]$) is 
+  the smallest compatible relation on terms satisfying following
+  condition:
+  \begin{align*}
+    &\lambd[x][N] \redone[\alpha] \lambd[y][\Subst{N}{y}{x}] && \text{if
+      $x \neq y$, $y \notin \FV{N}$} \\
+    & &&\text{and $\Subst{N}{y}{x}$ is defined}
+  \end{align*}
+\end{defn}
+
+``Smallest'' here means the relation contains only pairs that are required by
+compatibility and the additional condition, and nothing else. Thus
+this relation can also be defined as follows:
+
+\begin{defn}[Change of bound variable, $\aconvone$] \ollabel{defn:aconvone}
+  \emph{Change of bound variable} ($\aconvone$) is inductively
+  defined as follows:
+  \begin{enumerate}
+  \item If $N \aconvone N'$ then $\lambd[x][N] \aconvone
+    \lambd[x][N']$ \ollabel{defn:aconvone1}
+  \item If $P \aconvone P'$ then $(PQ) \aconvone (P'Q)$ \ollabel{defn:aconvone2}
+  \item If $Q \aconvone Q'$ then $(PQ) \aconvone (PQ')$ \ollabel{defn:aconvone3}
+  \item If $x \neq y$, $y \notin \FV{N}$ and $\Subst{N}{y}{x}$ is defined, then
+    $\lambd[x][N] \redone[\alpha] \lambd[y][\Subst{N}{y}{x}]$.
+    \ollabel{defn:aconvone4}
+  \end{enumerate}
+\end{defn}
+
+The definitions are equivalent, but we leave the proof as an
+exercise. From now on we will use the inductive definition.
+
+\begin{defn}[$\alpha$-conversion, $\aconv$]
+  \emph{$\alpha$-conversion} ($\aconv$) is the smallest reflexitive
+  and transitive relation on terms containing $\aconvone$.
+\end{defn}
+
+As above, ``smallest'' means the relation only contains pairs required
+by transitivity, and $\aconvone$, which leads to the following
+equivalent definition:
+
+\begin{defn}[$\alpha$-conversion, $\aconv$] \ollabel{defn:aconv}
+  \emph{$\alpha$-conversion} ($\aconv$) is inductively defined as follows:
+  \begin{enumerate}
+  \item If $P \aconv Q$ and $Q \aconv R$, then $P \aconv R$.
+    \ollabel{defn:aconv1}
+  \item If $P \aconvone Q$, then $P \aconv Q$. \ollabel{defn:aconv2}
+  \item $P \aconv P$. \ollabel{defn:aconv3}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  $\lambd[x][f x]$ $\alpha$-converts to $\lambd[y][f
+  y]$, and conversely. Informally
+  speaking, they are both functions that accept an argument and
+  return $f$ of that argument, refering to the environment variable~$f$.
+
+  $\lambd[x][f x]$ does not $\alpha$-convert to $\lambd[x][g
+    x]$. Informally speaking, they refer to the environment variables
+  $f$ and~$g$ respectively, and this makes them different functions: they
+  behave differently in environments where $f$ and $g$ are different.
+\end{ex}
+
+\begin{prob}
+  Are the following pairs of terms $\alpha$-convertible?
+  \begin{enumerate}
+  \item $\lambd[x][\lambd[y][x]]$ and $\lambd[y][\lambd[x][y]]$
+  \item $\lambd[x][\lambd[y][x]]$ and $\lambd[c][\lambd[b][a]]$
+  \item $\lambd[x][\lambd[y][x]]$ and $\lambd[c][\lambd[b][a]]$
+  \end{enumerate}
+\end{prob}
+
+\begin{lem}\ollabel{lem:fv-one}
+  If $P \aconvone Q$ then $\FV{P} = \FV{Q}$.
+\end{lem}
+
+\begin{proof}
+  By induction on the derivation of $P \aconvone Q$.
+  \begin{enumerate}
+  \item If the last rule is \olref{defn:aconvone4}, then $P$ is of the
+    form $\lambd[x][N]$ and $Q$ of the form
+    $\lambd[y][\Subst{N}{y}{x}]$, with $x \neq y$, $y \notin \FV{N}$
+    and $\Subst{N}{y}{x}$ defined. We distinguish cases according to
+    whether $x \in \FV{N}$:
+    \begin{enumerate}
+    \item If $x \in FV(N)$, then:
+      \begin{align*}
+        \FV{\lambd[y][\Subst{N}{y}{x}]} &=
+        \FV{\Subst{N}{y}{x}} \setminus \{y\} \\
+        & = ((\FV{N} \setminus \{x\}) \cup \{y\}) \setminus \{y\}
+         && \text{ by \olref[sub]{thm:infv}} \\
+        & = \FV{N} \setminus \{x\} \\
+        & = \FV{\lambd[x][N]}
+      \end{align*}
+    \item If $x \notin FV(N)$, then:
+      \begin{align*}
+        \FV{\lambd[y][\Subst{N}{y}{x}]}
+        & = FV{\Subst{N}{y}{x}} \setminus \{y\} \\
+        & = \FV{N} \setminus \{x\}
+         && \text{by \olref[sub]{thm:notinfv}} \\
+        & = \FV{\lambd[x][N]}.
+      \end{align*}
+    \end{enumerate}
+  \item The other three cases are left as exercises. 
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][syn][alp]{lem:fv-one}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:inv}
+  If $P \aconvone Q$ then $Q \aconvone P$.
+\end{lem}
+
+\begin{proof}
+  Induction on the derivation of $P \aconvone Q$.
+  \begin{enumerate}
+  \item If the last rule is \olref{defn:aconvone4}, then $P$ is of the
+    form $\lambd[x][N]$ and $Q$ of the form
+    $\lambd[y][\Subst{N}{y}{x}]$, where $x \neq y$, $y \notin \FV{N}$
+    and $\Subst{N}{y}{x}$ defined. First, we have $y \notin
+    \FV{\Subst{N}{y}{x}}$ by \olref[sub]{thm:clr}. By
+    \olref[sub]{thm:inv} we have that $\Subst{\Subst{N}{y}{x}}{x}{y}$ is
+    not only defined, but also equal to~$N$. Then by
+    \olref{defn:aconvone4}, we have $\lambd[y][\Subst{N}{y}{x}]
+    \aconvone \lambd[x][\Subst{\Subst{N}{y}{x}}{x}{y}] =
+    \lambd[x][N]$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][syn][alp]{lem:inv}
+\end{prob}
+
+\begin{thm}
+  $\alpha$-Conversion is an equivalence relation on terms, i.e., it is
+  reflexive, symmetric, and transitive.
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+  \item For each term $M$, $M$ can be changed to $M$ by
+    \emph{zero} changes of bound variables.
+  \item If $P$ is $\alpha$-converts to $Q$ by a series of changes
+    of bound variables, then from $Q$ we can just inverse these
+    changes (by \olref{lem:inv}) in
+    opposite order to obtain~$P$.
+  \item If $P$ $\alpha$-converts to $Q$ by a series of changes of
+    bound variables, and $Q$ to $R$ by another series, then we can
+    change $P$ to $R$ by first applying the first series and then the
+    second series.
+  \end{enumerate}
+\end{proof}
+
+From now on we say that $M$ and $N$ are \emph{$\alpha$-equivalent}, $M
+\aeq N$, iff $M$ $\alpha$-converts to $N$ (which, as we've just shown,
+is the case iff $N$ $\alpha$-converts to~$M$).
+
+\begin{thm}\ollabel{thm:fv}
+  If $M \aeq N$, then $\FV{M} = \FV{N}$.
+\end{thm}
+
+\begin{proof}
+  Immediate from \olref{lem:fv-one}.
+\end{proof}
+
+\begin{lem}\ollabel{lem:sub:R}
+  If $R \aeq R'$ and $\Subst{M}{R}{y}$ is defined, then $\Subst{M}{R'}{y}$ is
+  defined and $\alpha$-equivalent to $\Subst{M}{R}{y}$.
+\end{lem}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[lam][syn][alp]{lem:sub:R}.
+\end{prob}
+
+Recall that in \olref[sub]{sec}, substitution is undefined in some
+cases; however, using $\alpha$-conversion on terms, we can make
+substitution always defined by renaming bound variables. The result
+preserves $\alpha$-equivalence, as shown in this theorem:
+
+\begin{thm}\ollabel{thm:sub}
+  For any $M$, $R$, and~$y$, there exists $M'$ such that $M \aeq M'$
+  and $\Subst{M'}{R}{y}$ is defined. Moreover, if there is another
+  pair $M'' \aeq M$ and $R''$ where $\Subst{M''}{R''}{y}$ is defined
+  and $R'' \aeq R$, then $\Subst{M'}{R}{y} \aeq \Subst{M''}{R''}{y}$.
+\end{thm}
+
+\begin{proof}
+  By induction on the formation of $M$:
+  \begin{enumerate}
+  \item $M$ is a variable~$z$: Exercise.
+  \item Suppose $M$ is of the form $\lambd[x][N]$.  Select a variable
+    $z$ other than $x$ and $y$ and such that $z \notin \FV{N}$ and $z
+    \notin \FV{R}$.  By inductive hypothesis, we there is $N'$ such
+    that $N' \aeq N$ and $\Subst{N'}{z}{x}$ is defined. Then
+    $\lambd[x][N] \aeq \lambd[x][N']$ too, by
+    \olref{defn:aconvone}\olref{defn:aconvone1}.  Now $\lambd[x][N']
+    \aeq \lambd[z][\Subst{N'}{z}{x}]$ by
+    \olref{defn:aconvone}\olref{defn:aconvone4}.  We can do this
+    because $z \ne x$, $z \notin FV(N')$ and $\Subst{N'}{z}{x}$ is
+    defined. Finally, $\Subst{\lambd[z][\Subst{N'}{z}{x}]}{R}{y}$ is
+    defined, because $z \neq y$ and $z \notin FV(R)$.
+
+    Moreover, if there is another $N''$ and $R''$ satisfying the same
+    conditions,
+    \begin{multline*}
+      \Subst{(\lambd[z][\Subst{N''}{z}{x}])}{R''}{y} =\\
+    \begin{aligned}
+      &= \lambd[z][\Subst{\Subst{N''}{z}{x}}{R''}{y}] \\
+      &= \lambd[z][\Subst{\Subst{N''}{z}{x}}{R}{y}] && \text{by
+        \olref{lem:sub:R}}\\
+      &=\lambd[z][\Subst{\Subst{N'}{z}{x}}{R}{y}]
+      && \text{by inductive
+        hypothesis}\\
+      &=\Subst{(\lambd[z][\Subst{N'}{z}{x}])}{R}{y}
+    \end{aligned}
+    \end{multline*}
+    \item $M$ is of the form $(PQ)$: Exercise.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][syn][alp]{thm:sub}.
+\end{prob}
+
+\begin{cor}\ollabel{cor:sub}
+  For any $M$, $R$, and~$y$, there exists a pair of $M'$ and $R'$
+  such that $M' \aeq M$, $R \aeq R'$ and $\Subst{M'}{R'}{y}$ is
+  defined. Moreover, if there is another pair $M'' \aeq M$ and $R''$
+  with $\Subst{M'}{R'}{y}$ defined, then $\Subst{M'}{R'}{y} \aeq
+  \Subst{M''}{R''}{y}$.
+\end{cor}
+
+\begin{proof}
+  Immediate from \olref{thm:sub}.
+\end{proof}
+
+\end{document}
+

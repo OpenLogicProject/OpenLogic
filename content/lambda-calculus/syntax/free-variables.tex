@@ -1,0 +1,116 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: free-variables
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{fv}
+\olsection{Free Variables}
+
+Lambda calculus is about functions, and lambda abstraction is how
+functions arise. Intuitively, $\lambd[x][M]$ is the function with
+values given by~$M$ when the argument to the function is assigned
+to~$x$. But not every occurrence of~$x$ in~$M$ is relevant: if $M$
+contains another abstract $\lambd[x][N]$ then the occurrences of $x$
+in~$N$ are relevant to $\lambd[x][N]$ but not to $\lambd[x][M]$.  So,
+a lambda abstract $\lambd[x]$ inside $\lambd[x][M]$ \emph{binds} those
+occurrences of $x$ in~$M$ that are not already bound by another lambda
+abstract---the \emph{free} occurrences of~$x$ in~$M$.
+
+\begin{defn}[Scope]
+If $\lambd[x][M]$ occurs inside a term~$N$, then the corresponding
+occurrence of~$N$ is the \emph{scope} of the~$\lambd[x]$.
+\end{defn}
+
+
+\begin{defn}[Free and bound occurrence]
+  An occurrence of variable $x$ in a term~$M$ is \emph{free} if it is
+  not in the scope of a $\lambd[x]$, and \emph{bound} otherwise. An
+  occurrence of a variable~$x$ in $\lambd[x][M]$ is bound by the initial
+  $\lambd[x]$ iff the occurrence of $x$ in~$M$ is free.
+\end{defn}
+
+\begin{ex}
+  In $\lambd[x][x y]$, both $x$ and $y$ are in the scope of $\lambd[x]$,
+  so $x$ is bound by $\lambd[x]$. Since $y$ is not in the scope of
+  any $\lambd[y]$, it is free.  In $\lambd[x][x x]$, both occurrences
+  of $x$ are bound by~$\lambd[x]$, since both are free in $xx$.  In
+  $((\lambd[x][xx])x)$, the last occurrence of~$x$ is free, since it
+  is not in the scope of a $\lambd[x]$. In
+  $\lambd[x][(\lambd[x][x])x]$, the scope of the first $\lambd[x]$ is
+  $(\lambd[x][x])x$ and the scope of the second $\lambd[x]$ is the
+  second-to-last occurrence of~$x$. In $(\lambd[x][x])x$, the last
+  occurrence of $x$ is free, and the second-to-last is bound.  Thus,
+  the second-to-last occurrence of $x$ in $\lambd[x][(\lambd[x][x])x]$
+  is bound by the second $\lambd[x]$, and the last occurrence by the
+  first $\lambd[x]$.
+\end{ex}
+
+For a term $P$, we can check all variable occurrences in it and get a
+set of free variables. This set is denoted by $\FV{P}$ with a natural
+definition as follows:
+
+\begin{defn}[Free variables of a term] \ollabel{def:fv}
+  The set of \emph{free variables} of a term is defined inductively by:
+  \begin{enumerate}
+    \item $\FV{x} = \{x\}$ \ollabel{def:fv1} 
+    \item $\FV{\lambd[x][N]} = \FV{N} \setminus \{x\}$    \ollabel{def:fv2}
+    \item $\FV{PQ} = \FV{P} \cup \FV{Q}$ \ollabel{def:fv3}
+  \end{enumerate}
+\end{defn}
+
+\begin{prob}
+  \begin{enumerate}
+  \item Identify the scopes of $\lambd[g]$ and the two $\lambd[x]$ in
+    this term: $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$.
+  \item In $\lambd[g][(\lambd[x][g (x x)]) \lambd[x][g (x x)]]$, are
+    all occurrences of variables bound? By which abstractions are they
+    bound respectively?
+    \item Give $\FV{\lambd[x][(\lambd[y][(\lambd[z][x y]) z]) y]}$
+  \end{enumerate}
+\end{prob}
+
+\begin{explain}
+A free variable is like a reference to the outside world (the
+\emph{environment}), and a term containing free variables can be seen
+as a partially specified term, since its behaviour depends on how we
+set up the environment. For example, in the term $\lambd[x][f x]$, which
+accepts an argument~$x$ and returns $f$ of that argument, the
+variable~$f$ is free. This value of the term is dependent on the
+environment it is in, in particular the value of $f$ in that
+environment.
+
+If we apply abstraction to this term, we get $\lambd[f][\lambd[x][f
+    x]]$. This term is no longer dependent on the environment variable
+$f$, because it now designates a function that accepts two arguments
+and returns the result of applying the first to the second. Changing
+$f$ in the environment won't have any effect on the behavior of this
+term, as the term will only use whatever is passed as an argument, and
+not the value of $f$ in the environment.
+\end{explain}
+
+\begin{defn}[Closed term, combinator]
+  A term with no free variables is called a \emph{closed term}, or a
+  \emph{combinator}.
+\end{defn}
+
+\begin{lem}\ollabel{lem:fv}
+  \begin{enumerate}
+    \item \ollabel{lem:fv-abs} If $y \neq x$, then $y \in
+      \FV{\lambd[x][N]}$ iff $y \in \FV{N}$.
+    \item \ollabel{lem:fv-app} $y \in \FV{PQ}$ iff $y \in \FV{P}$ or $y
+      \in \FV{Q}$.
+    \end{enumerate}
+\end{lem}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[lam][syn][fv]{lem:fv}.
+\end{prob}
+
+\end{document}

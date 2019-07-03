@@ -1,0 +1,54 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: pairs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{pai}
+\olsection{Pairs and Predecessor}
+
+\begin{defn}
+The pair of $M$ and $N$ (written $\tuple{M,N}$) is defined as follows:
+\[
+\tuple{M,N} \ident \lambd[f][fMN].
+\]
+\end{defn}
+  
+Intuitively it is a function that accepts a function, and applies that
+function to the two elements of the pair. Following this idea we have
+this constructor, which takes two terms and returns the pair containing
+them:
+\[
+  \fn{Pair} \ident \lambd[mn][\lambd[f][fmn]]
+\]
+Given a pair, we also want to recover its elements.
+For this we need two access functions, which accept a pair as argument and
+return the first or second elements in it:
+\begin{align*}
+  \fn{Fst} & \ident \lambd[p][p(\lambd[mn][m])]\\
+  \fn{Snd} & \ident \lambd[p][p(\lambd[mn][n])]
+\end{align*}
+
+\begin{prob}
+  Explain why the access functions $\fn{Fst}$ and $\fn{Snd}$ work.
+\end{prob}
+
+Now with pairs we can !!{lambda define} the predecessor function:
+\[
+  \fn{Pred} \ident \lambd[n][\fn{Fst}(n (\lambd[p][\tuple{\fn{Snd}\, {p}, \fn{Succ}(\fn{Snd}\, {p})}]) \tuple{\num 0, \num 0})]
+\]
+Remember that $\num n\, f x$ reduces to $f^{n}(x)$; in this
+case $f$ is a function that accepts a pair $p$ and returns a new
+pair containing the second component of $p$ and the successor of the
+second component; $x$ is the pair $\tuple{0,0}$. Thus, the
+result is $\tuple{0,0}$ for $n=0$, and $\tuple{\num{n-1}, \num n}$
+otherwise. $\fn{Pred}$ then returns the first component of the result.
+
+Subtraction can be defined as $\fn{Pred}$ applied to $a$, $b$ times:
+\[
+\fn{Sub} \ident \lambd[ab][b \fn{Pred}\, a].
+\]
+    
+\end{document}

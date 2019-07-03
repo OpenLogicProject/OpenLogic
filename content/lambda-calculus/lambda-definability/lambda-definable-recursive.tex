@@ -1,0 +1,46 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: lambda-definable-recursive
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{dfl}{ldr}
+\olsection{\usetoken{S}{lambda definable} Functions are Recursive}
+
+Not only are all partial recursive functions !!{lambda definable}, the
+converse is true, too. That is, all !!{lambda definable} functions are
+partial recursive.
+
+\begin{thm}
+  \ollabel{thm:lambda-computable} If a partial function $f$ is
+  !!{lambda definable}, it is partial recursive.
+\end{thm}
+
+\begin{proof}
+  We only sketch the proof. First, we arithmetize $\lambd$-terms,
+  i.e., systematially assign G\"odel numbers to $\lambd$-terms as
+  using the usual power-of-primes coding of sequences.  Then we define
+  a partial recursive function $\fn{normalize}(t)$ operating on the
+  G\"odel number~$t$ of a lambda term as argument, and which returns
+  the G\"odel number of the normal form if it has one, or is undefined
+  otherwise.  Then define two partial recursive functions
+  $\fn{toChurch}$ and $\fn{fromChurch}$ that maps natural numbers to
+  and from the G\"odel numbers of the corresponding Church numeral.
+
+  Using these recursive functions, we can define the function~$f$ as a
+  partial recursive function. There is a lambda term~$F$ that
+  !!{lambda define}s~$f$. To compute $f(n_1, \dots, n_k)$, first obtain
+  the G\"odel numbers of the corresponding Church numerals using
+  $\fn{toChurch}(n_i)$, append these to $\Gn{F}$ to obtain the G\"odel
+  number of the term $F \num{n_1}\dots\num{n_k}$. Now use
+  $\fn{normalize}$ on this G\"odel number. If $f(n_1, \dots, n_k)$ is
+  defined, $F \num{n_1}\dots\num{n_k}$ has a normal form (which must
+  be a Church numeral), and otherwise it has no normal form (and so
+  \[\fn{normalize}(\Gn{F\num{n_1}\dots\num{n_k}})\] is undefined).
+  Finally, use $\fn{fromChurch}$ on the G\"odel number of the
+  normalized term.
+\end{proof}
+
+\end{document}
