@@ -6,7 +6,7 @@
 % We use the memoir class for maximal flexibility of layout, but any
 % class will do
 
-\documentclass[letterpaper]{memoir}
+\documentclass[b5paper]{memoir}
 
 % \olpath has to point to the location of the OLP main
 % directory/folder.  We're compiling from subdirectory courses/sample,
@@ -30,6 +30,10 @@
 \usepackage[scaled=0.95]{helvet}
 \linespread{1.05}
 
+% e-book-friendly version:
+%\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}  % page geometry
+
+
 \begin{document}
 
 % First we make a titlepage
@@ -38,7 +42,8 @@
 \begin{raggedleft}
 \fontsize{52pt}{2em}\selectfont\bfseries\sffamily
 Logical\\[.5ex] 
-Theory
+Theory\\[.5ex] 
+Text
 \vskip 4ex
 \normalfont\Huge\textbf{\href{http://openlogicproject.org/}{Open Logic Project}}
 
@@ -189,13 +194,6 @@ Theory
 
 \olimport*[history]{history}
 
-% now typeset all the problems as an appendix. If you want problems at
-% the end of each chapter, delete this part and put
-% \problemsperchapter in the preamble
-
-%\chapter{Problems}
-
-%\printproblems
 
 \backmatter
 
