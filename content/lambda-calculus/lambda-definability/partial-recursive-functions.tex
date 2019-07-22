@@ -1,0 +1,43 @@
+% Part: lambda-calculus
+% Chapter: lambda-definability
+% Section: partial-recursive-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{ldf}{par}
+\olsection{Partial Recursive Functions are \usetoken{S}{lambda definable}}
+
+Partial recursive functions are those obtained from the basic
+functions by composition, primitive recursion, and unbounded
+minimization. They differ from general recursive function in that the
+functions used in unbounded search are not required to be regular.
+Not requiring regularity means that functions defined by minimization
+may sometimes not be defined. 
+
+At first glance it might seem that the same methods used to show that
+the (total) general recursive functions are all !!{lambda definable} can
+be used to prove that all partial recursive functions are
+!!{lambda definable}.  For instance, the composition of $f$ with $g$ is
+!!{lambda define}d by $\lambd[x][F (G x)]$ if $f$ and $g$ are
+!!{lambda define}d by terms $F$ and~$G$, respectively. However, when the
+functions are partial, this is problematic. When $g(x)$ is undefined,
+meaning $G x$ has no normal form. In most cases this means that $F (G
+x)$ has no normal forms either, which is what we want.  But consider
+when $F$ is $\lambd[x][\lambd[y][y]]$, in which case $F (G x)$ does
+have a normal form ($\lambd[y][y]$). 
+
+This problem is not insurmountable, and there are ways to
+!!{lambda define} all partial recursive functions in such a way that
+undefined values are represented by terms without a normal form.
+These ways are, however, somewhat more complicated and less intuitive
+than the approach we have taken for general recursive functions. We
+record the theorem here without proof:
+
+\begin{thm}
+  All partial recursive functions are !!{lambda definable}.
+\end{thm}
+
+\end{document}
+

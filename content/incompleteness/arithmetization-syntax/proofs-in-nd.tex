@@ -60,7 +60,7 @@ number indicating the type of the last inference.
 \end{defn}
 
 \begin{ex}
-  Consider the very simple derivation
+  Consider the very simple !!{derivation}
   \begin{prooftree}
     \AxiomC{$\Discharge{!A \land !B}{1}$}
     \RightLabel{\Elim{\land}}
@@ -69,12 +69,12 @@ number indicating the type of the last inference.
     \UnaryInfC{$(!A \land !B) \lif !A$}
   \end{prooftree}
   The G\"odel number of the assumption would be $d_0 = \tuple{0,
-    \Gn{!A \land !B}, 1}$.  The G\"odel number of the derivation
+    \Gn{!A \land !B}, 1}$.  The G\"odel number of the !!{derivation}
   ending in the conclusion of~$\Elim{\land}$ would be $d_1 = \tuple{1,
      d_0, \Gn{!A}, 0, 2}$ ($1$ since $\Elim{\land}$ has one premise,
   the G\"odel number of conclusion~$!A$, $0$ because no assumption is
   discharged, and $2$ is the number coding $\Elim{\land}$). The G\"odel
-  number of the entire derivation then is
+  number of the entire !!{derivation} then is
   $\tuple{1, d_1, \Gn{((!A \land !B) \lif
       !A)}, 1, 5}$, i.e.,
   \[
@@ -88,7 +88,7 @@ Having settled on a representation of !!{derivation}s, we must also
 show that we can manipulate G\"odel numbers of such !!{derivation}s
 primitive recursively, and express their essential properties and
 relations.  Some operations are simple: e.g., given a G\"odel
-number~$d$ of a !!{derivation}, $\fn{EndFmla}(d) = (d)_{(d)_0+1}$
+number~$d$ of !!a{derivation}, $\fn{EndFmla}(d) = (d)_{(d)_0+1}$
 gives us the G\"odel number of its end-!!{formula},
 $\fn{DischargeLabel}(d) = (d)_{(d)_0 + 2}$ gives us the discharge
 label and $\fn{LastRule}(d) = (d)_{(d)_0 + 3}$ the number indicating
@@ -99,7 +99,6 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
 \end{explain}
 
 \begin{prop}
-  \ollabel{prop:followsby}
   The following relations are primitive recursive:
   \begin{enumerate}
   \item $!A$ occurs as an assumption in~$\delta$ with label~$n$.
@@ -119,7 +118,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     G\"odel number~$d$ labelled~$n$, is primitive recursive.  This is
     the case if the !!{derivation} with G\"odel number~$\tuple{0, x,
       n}$ is a sub-!!{derivation} of~$d$. Note that the way we code
-    derivations is a special case of the coding of trees introduced in
+    !!{derivations} is a special case of the coding of trees introduced in
     \olref[cmp][rec][tre]{sec}, so the primitive recursive function
     $\fn{SubtreeSeq}(d)$ gives a sequence of G\"odel numbers of all
     sub-!!{derivation}s of~$d$ (of length a most $d$). So we can
@@ -137,8 +136,9 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
 \end{proof}
 
 \begin{prop}
-  The relation $\fn{Correct}(d)$ which holds if the last inference in
-  the derivation~$\delta$ with G\"odel number~$d$ is correct, is
+  \ollabel{prop:followsby}
+  The property $\fn{Correct}(d)$ which holds iff the last inference in
+  the !!{derivation}~$\delta$ with G\"odel number~$d$ is correct, is
   primitive recursive.
 \end{prop}
 
@@ -154,16 +154,18 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
   a correct $\Intro{\land}$ inference, it looks like this:
   \begin{prooftree}
     \AxiomC{}
-    \DeduceC{$A$}
+    \RightLabel{$\delta_1$}
+    \DeduceC{$!A$}
     
     \AxiomC{}
-    \DeduceC{$B$}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!B$}
 
     \RightLabel{\Intro\land}
-    \BinaryInfC{$A \land B$}
+    \BinaryInfC{$!A \land !B$}
   \end{prooftree}
   Then the G\"odel number~$d$ of~$\delta$ is $\tuple{2, d_1, d_2,
-    \Gn{(A \land B)}, 0, k}$ where $\fn{EndFmla}(d_1) = \Gn{A}$,
+    \Gn{(!A \land !B)}, 0, k}$ where $\fn{EndFmla}(d_1) = \Gn{!A}$,
   $\fn{EndFmla}(d_2) = \Gn{B}$, $n=0$, and $k=1$. So we can define
   $\fn{FollowsBy}_{\Intro\land}(d)$ as
   \begin{multline*}
@@ -173,7 +175,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
   \end{multline*}
 
   Another simple example if the $\Intro\eq$ rule. Here the premise is
-  an empty derivation, i.e., $(d)_1 = 0$, and no discharge label,
+  an empty !!{derivation}, i.e., $(d)_1 = 0$, and no discharge label,
   i.e., $n=0$.  However, $!A$ must be of the form $\eq[t][t]$, for a
   closed term~$t$. Here, a primitive recursive definition is
   \begin{multline*}
@@ -199,7 +201,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
   For another example, consider \Intro{\lexists}.  Here, the last
   inference in~$\delta$ is correct iff there is !!a{formula}~$!A$, a
   closed term~$t$ and !!a{variable}~$x$ such that $\Subst{!A}{t}{x}$
-  is the end-!!{formula} of the derivation~$\delta_1$ and
+  is the end-!!{formula} of the !!{derivation}~$\delta_1$ and
   $\lexists[x][!A]$ is the conclusion of the last inference.  So,
   $\fn{FollowsBy}_{\Intro{\lexists}}(d)$ holds iff
   \begin{multline*}
@@ -207,16 +209,16 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     \bexists{a < d}{\bexists{x<d}{\bexists{t<d}{
           (\fn{ClTerm}(t) \land \fn{Var}(x)  \land {}}}}\\
     \fn{Subst}(a,t,x) = \fn{EndFmla}((d)_1) \land
-    \fn{EndFmla}(d) = (\Gn{\lexists} \concat x \concat a))
+    \fn{EndFmla}(d) = (\Gn{\lexists} \concat x \concat a)).
   \end{multline*}
 
   We then define $\fn{Correct}(d)$ as
   \begin{multline*}
-    \fn{Sent}(\fn{EndFmla}(d)) \land {}
+    \fn{Sent}(\fn{EndFmla}(d)) \land {}\\
     (\fn{LastRule}(d) = 1 \land
     \fn{FollowsBy}_{\Intro\land}(d)) \lor \dots \lor {}\\
     (\fn{LastRule}(d) = 16 \land \fn{FollowsBy}_{\Elim\eq}(d)) \lor {}\\
-    \bexists{n<d}{\bexists{x<d}{(d = \tuple{0, x, n})}}
+    \bexists{n<d}{\bexists{x<d}{(d = \tuple{0, x, n})}}.
   \end{multline*}
   The first line ensures that the end-!!{formula} of~$d$ is a
   sentence. The last line covers the case where $d$ is just an
@@ -224,7 +226,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
 \end{proof}
 
 \begin{prob}
-  Define the following relations as in
+  Define the following properties as in
   \olref[inc][art][pnd]{prop:followsby}:
   \begin{enumerate}
   \item $\fn{FollowsBy}_{\Elim{\lif}}(d)$,
@@ -255,13 +257,14 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
   iff
   \[
   \bforall{i<\len{\fn{SubtreeSeq}(d)}}{\fn{Correct}((\fn{SubtreeSeq}(d))_i)}
+  \qedhere
   \]
 \end{proof}
 
 \begin{prop}
   \ollabel{prop:openassum} The relation $\fn{OpenAssum}(z, d)$ that
   holds if $z$ is the G\"odel number of !!a{undischarged} assumption~$!A$
-  of the derivation~$\delta$ with G\"odel number~$d$, is primitive
+  of the !!{derivation}~$\delta$ with G\"odel number~$d$, is primitive
   recursive.
 \end{prop}
 
@@ -294,7 +297,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
       \land (s)_0 = d \land {}} \\
     \bexists{n<d}{((s)_{\len{s} \tsub 1} = \tuple{0, z, n} \land {}}\\
       \bforall{i<(\len{s} \tsub 1)}{(\fn{Subderiv}((s)_i, (s)_{i+1})] \land {}}\\
-      \fn{DischargeLabel}((s)_{i+1}) \neq n))).
+      \fn{DischargeLabel}((s)_{i+1}) \neq n))).\qedhere
   \end{multline*}
 \end{proof}
 
@@ -318,10 +321,12 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
   $x$ is the G\"odel number of a correct derivation~$\delta$ in
   natural deduction is primitive recursive. Thus we can define
   $\Prf[\Gamma](x, y)$ by
-  \begin{multline*}
-    \fn{Deriv}(x) \land \fn{EndFmla}(x) = y \land {} \\
-    \bforall{z < x}{(\fn{OpenAssum}(z, x) \lif R_\Gamma(z))}
-  \end{multline*}
+  \begin{align*}
+    \Prf[\Gamma](x, y) \defiff {}
+    & \fn{Deriv}(x) \land \fn{EndFmla}(x) = y \land {} \\
+    & \bforall{z < x}{(\fn{OpenAssum}(z, x) \lif R_\Gamma(z))}
+    \qedhere
+  \end{align*}
 \end{proof}
 
 \end{document}

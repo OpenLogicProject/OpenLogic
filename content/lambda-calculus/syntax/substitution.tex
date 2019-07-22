@@ -1,0 +1,179 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{sub}
+\olsection{Substitution}
+
+\begin{explain}
+Free variables are references to environment variables, thus it makes
+sense to actually use a specific value in the place of a free
+variable. For example, we may want to replace $f$ in $\lambd[x][f x]$
+with a specific term, like the identity function $\lambd[y][y]$. This
+results in $\lambd[x][(\lambd[y][y]) x]$. The process of replacing
+free variables with lambda terms is called substitution.
+\end{explain}
+
+\begin{defn}[Substitution] \ollabel{defn:substitution}
+  The \emph{substitution} of a term $N$ for a variable $x$ in a term
+  $M$, $\Subst{M}{N}{x}$, is defined inductively by:
+  \begin{enumerate}
+    \item $\Subst{x}{N}{x} = N$. \ollabel{defn:substitution-1} 
+    \item $\Subst{y}{N}{x}  = y$ if $x \neq y$. \ollabel{defn:substitution-2} 
+    \item $\Subst{PQ}{N}{x}  = (\Subst{P}{N}{x}) (\Subst{Q}{N}{x})$.
+      \ollabel{def:substitution-3}
+    \item $\Subst{(\lambd[y][P])}{N}{x} = \lambd[y][\Subst{P}{N}{x}]$,
+      if $x \neq y$ and $y \notin \FV{N}$, otherwise undefined.
+      \ollabel{defn:substitution-4}
+  \end{enumerate}
+\end{defn}
+
+\begin{explain}
+In \olref{defn:substitution}\olref{defn:substitution-4}, we require $x
+\neq y$ because we don't want to replace \emph{bound} occurrences of
+the variable~$x$ in~$M$ by~$N$.  For example, if we compute the
+substitution $\Subst{\lambd[x][x]}{y}{x}$, the result should not be
+$\lambd[x][y]$ but simply $\lambd[x][x]$.
+
+When substituting $N$ for~$x$ in $\lambd[y][P]$, we also require that
+$y \notin \FV{N}$.  For example, we cannot substitute $y$ for $x$ in
+$\lambd[y][x]$, i.e., $\Subst{\lambd[y][x]}{y}{x}$, because it would
+result in $\lambd[y][y]$, a term that stands for the function that
+accepts an argument and returns it directly. But the term
+$\lambd[y][x]$ stands for a function that always returns the term~$x$
+(or whatever $x$ refers to). So the result we actually want is a
+function that accepts an argument, drop it, and returns the
+environment variable~$y$. To do this properly, we would first have to
+``rename'' the bound variable~$y$.
+\end{explain}
+
+\begin{prob}
+  What is the result of the following substitutions?
+  \begin{enumerate}
+  \item $\Subst{\lambd[y][x(\lambd[w][vwx])]}{(uv)}{x}$
+  \item $\Subst{\lambd[y][x(\lambd[x][x])]}{(\lambd[y][xy])}{x}$
+  \item $\Subst{y(\lambd[v][xv])}{(\lambd[y][vy])}{x}$
+  \end{enumerate}
+\end{prob}
+
+\begin{thm} \ollabel{thm:notinfv}
+  If $x \notin \FV{M}$, then $\FV{\Subst{M}{N}{x}} = \FV{M}$, if
+  the left-hand side is defined.
+\end{thm}
+
+\begin{proof}
+  By induction on the formation of $M$.
+  \begin{enumerate}
+  \item $M$ is a variable: exercise.
+  \item $M$ is of the form $(PQ)$: exercise.
+  \item $M$ is of the form $\lambd[y][P]$, and since
+    $\Subst{\lambd[y][P]}{N}{x}$ is defined, it has to be
+    $\lambd[y][\Subst{P}{N}{x}]$. Then $\Subst{P}{N}{x}$ has to be
+    defined; also, $x \neq y$ and $x \notin \FV{Q}$. Then:
+    \begin{multline*}
+      \FV{\Subst{\lambd[y][P]}{N}{x}} = \\
+    \begin{aligned}
+      & = \FV{\lambd[y][\Subst{P}{N}{x}]} &&
+      \text{by \olref{defn:substitution-4}}\\
+      & = \FV{\Subst{P}{N}{x}} \setminus \{y\} &&
+      \text{by \olref[fv]{def:fv}\olref[fv]{def:fv2}}\\
+      & = \FV{P} \setminus \{y\} && \text{by inductive hypothesis} \\
+      & = \FV{\lambd[y][P]} && \text{by \olref[fv]{def:fv}\olref[fv]{def:fv2}}
+    \end{aligned}
+    \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][syn][sub]{thm:notinfv}.
+\end{prob}
+
+\begin{thm} \ollabel{thm:infv}
+  If $x \in \FV{M})$, then $\FV{\Subst{M}{N}{x}} = (\FV{M} \setminus
+  \{x\}) \cup \FV{N}$, provided the left hand is defined.
+\end{thm}
+
+\begin{proof}
+  By induction on the formation of $M$.
+  \begin{enumerate}
+  \item $M$ is a variable: exercise.
+  \item $M$ is of the form $PQ$: Since
+    $\Subst{(PQ)}{N}{y}$ is defined, it has to be
+    $(\Subst{P}{N}{x})(\Subst{Q}{N}{x})$ with both substitution
+    defined. Also, since $x \in \FV{PQ}$, either $x \in \FV{P}$ or
+    $x \in \FV{Q}$ or both. The rest is left as an exercise.
+  \item $M$ is of the form $\lambd[y][P]$. Since
+    $\Subst{\lambd[y][P]}{N}{x}$ is defined, it has to be
+    $\lambd[y][\Subst{P}{N}{x}]$, with $\Subst{P}{N}{x}$
+    defined, $x \neq y$ and $y \notin \FV{N}$; also, since $y \in
+    \FV{\lambd[x][P]}$, we have $y \in \FV{P}$ too. Now:
+    \begin{multline*}
+      \FV{\Subst{(\lambd[y][P])}{N}{x}} = \\
+      \begin{aligned}
+      & = \FV{\lambd[y][\Subst{P}{N}{x}]} \\
+      & = \FV{\Subst{P}{N}{x}} \setminus \{y\} \\
+      & = ((\FV{P} \setminus \{y\}) \cup (\FV{N} \setminus \{x\})
+       && \text{by inductive hypothesis} \\
+      & = (\FV{P} \setminus \{x, y\}) \cup \FV{N}
+       && x \notin \FV{N} \\
+      & = (\FV{\lambd[y][P]} \setminus \{x\}) \cup \FV{N}
+      \end{aligned}
+      \end{multline*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][syn][sub]{thm:infv}.
+\end{prob}
+
+\begin{thm}\ollabel{thm:clr}
+  $x \notin \FV{\Subst{M}{N}{x}}$, if the right-hand side is
+  defined and $x \notin \FV{N}$.
+\end{thm}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[lam][syn][sub]{thm:clr}.
+\end{prob}
+
+
+\begin{thm}\ollabel{thm:inv}
+  If $\Subst{M}{y}{x}$ is defined and $y \notin \FV{M}$, then
+  $\Subst{\Subst{M}{y}{x}}{x}{y} = M$.
+\end{thm}
+
+\begin{proof}
+  By induction on the formation of $M$.
+  \begin{enumerate}
+  \item $M$ is a variable $z$: Exercise.
+  \item $M$ is of the form $(PQ)$. Then:
+    \begin{align*}
+      \Subst{\Subst{(PQ)}{y}{x}}{x}{y}
+      &=\Subst{((\Subst{P}{y}{x})(\Subst{Q}{y}{x}))}{x}{y} \\
+      &= (\Subst{\Subst{P}{y}{x}}{x}{y})(\Subst{\Subst{Q}{y}{x}}{x}{y}) \\
+      &= (PQ) \text{ by inductive hypothesis}
+    \end{align*}
+  \item $M$ is of the form $\lambd[z][N]$. Because
+    $\Subst{\lambd[z][N]}{y}{x}$ is defined, we know
+    that $z \neq y$. So:
+    \begin{align*}
+      \Subst{\Subst{(\lambd[z][N])}{y}{x}}{x}{y}\\
+      & = \Subst{(\lambd[z][\Subst{N}{y}{x}])}{x}{y} \\
+      & = \lambd[z][\Subst{\Subst{N}{y}{x}}{x}{y}] \\
+      &= \lambd[z][N] \text{ by inductive hypothesis} 
+    \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[lam][syn][sub]{thm:inv}.
+\end{prob}
+
+\end{document}

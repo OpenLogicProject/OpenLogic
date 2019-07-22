@@ -1,0 +1,52 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{trm}
+\olsection{Terms}
+
+The terms of the lambda calculus are built up inductively from an
+infinite supply of variables $\Obj{v_0}$, $\Obj{v_1}$, \dots, the
+symbol~``$\lambd$'', and parentheses. We will use $x$, $y$, $z$, \dots{}
+to designate variables, and $M$, $N$, $P$, \dots{} to desginate terms.
+
+\begin{defn}[Terms] \ollabel{defn:term}
+The set of \emph{terms} of the lambda calculus is defined inductively by:
+\begin{enumerate}
+  \item \ollabel{defn:term-var} If $x$ is a variable, then $x$ is a
+    term.
+  \item \ollabel{defn:term-abs} If $x$ is a variable and $M$ is a
+    term, then $(\lambd[x][M])$ is a term.
+  \item \ollabel{defn:term-app} If both $M$ and $N$ are terms, then
+    $(MN)$ is a term.
+\end{enumerate}
+\end{defn}
+
+If a term $(\lambd[x][M])$ is formed according to
+\olref{defn:term-abs} we say it is the result of an
+\emph{abstraction}, and the $x$ in $\lambd[x]$ is called a
+\emph{!!{parameter}}.  A term $(MN)$ formed according to
+\olref{defn:term-app} is the result of an \emph{application}.
+
+The terms defined above are fully parenthesized. This can get rather
+cumbersome, as the term
+$(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$ demnostrates. We will
+introduce conventions for avoiding parentheses.  However, the official
+definition makes it easy to determine how a term is constructed
+according to \olref{defn:term}. For example, the last step of forming
+the term $(\lambd[x][((\lambd[x][x])(\lambd[x][(xx)]))])$ must be
+abstraction where the !!{parameter} is~$x$. It results by abstraction
+from the term $((\lambd[x][x])(\lambd[x][(xx)]))$, which is an
+application of two terms. Each of these two terms is the result of an
+abstraction, and so on.
+
+\begin{prob}
+Describe the formation of $(\lambd[g][(\lambd[x][(g (x x))])
+  (\lambd[x][(g (x x))])])$.
+\end{prob}
+
+\end{document}
