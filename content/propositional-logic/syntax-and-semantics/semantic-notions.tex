@@ -84,6 +84,32 @@ Prove \olref[pl][syn][sem]{thm:sem-deduction}
 
 We write $!A \Entails !B$ for $\Gamma \Entails !B$ when $\Gamma = \{!A\}$ is a singleton and say that two !!{formula}s are semantically equivalent, $!A \cong !B$, if $!A \Entails !B$ and $!B \Entails !A$.
 
+By looking at the following equivalences, known as the De Morgan Laws, we can see that the connectives $\land$ and $\lor$ seem to behave in a similar way. 
+  \begin{align*}
+    ({!A} \land {!B}) &\cong \lnot(\lnot{!A} \lor \lnot{!B})\\
+    ({!A} \lor {!B}) &\cong \lnot(\lnot{!A} \land \lnot{!B})
+  \end{align*}
+We will now make this tight symmetry between conjunction and disjuntion precise in the following result.
 
+\begin{defn}
+Define, by recursion on formulas, the mapping that takes a !!{formula} with only occurrences of $\lnot$, $\land$, and $\lor$ to another such !!{formula} such that:
+\begin{itemize}
+  \item $!A^d \ident !A$ when $!A$ is atomic,
+  \item $(\lnot !A )^d \ident \lnot !A^d$,
+  \item $(!A \land !B)^d \ident !A^d \lor !B^d$,
+  \item $(!A \lor !B)^d \ident !A^d \land !B^d$.
+\end{itemize}
+\end{defn}
+
+\begin{prop}\ollabel{thm:dual}
+$!A \cong !B$ iff $!A^d \cong !B^d$ whenever the dual mapping is defined.
+\end{prop}
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][sem]{thm:dual} by introducting an axuilliary mapping $!A^n$ just as $!A^d$ except for atomic !!{formula}s where $!A^n$ is defined to be $\lnot !A$ and proving that $!A^n \cong \lnot !A$.
+\end{prob}
 
 \end{document}
