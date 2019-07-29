@@ -1,12 +1,21 @@
-%!TEX root = Metatheory.tex
-\chapter{Expressive adequacy}\label{ch:expression}
-In chapter \ref{ch:normalform}, we established two normal form theorems. In this chapter, we shall use them to demonstrate the expressive power of TFL.
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: normal-form
 
-\section{The expressive adequacy of TFL}
-In discussing duality (\S\ref{s:Duality}), I introduced the general idea of an $n$-place connective. We might, for example, define a three-place connective, `$\heartsuit$', into existence, by stipulating that it is to have the following characteristic truth table:
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{exp}
+
+\olsection{Expressive adequacy}
+
+We shall now demonstrate the expressive power of propositional logic.
+
+The only primitive connectives we have defined are one-place (i.e.\ `$\lnot$') and two-place (i.e.\ `$\land$', `$\lor$', `$\lif$' and `$\liff$'). But nothing stops us from introducing three-, four-, or five-place connectives; or, more generally, $n$-place connectives, for any number $n$ we like. We might, for example, define a three-place connective, `$\heartsuit$', into existence, by stipulating that it is to have the following characteristic truth table:
 \begin{center}
 \begin{tabular}{c c c | c}
-$\meta{A}$ & $\meta{B}$ & $\meta{C}$ & $\heartsuit(\meta{A},\meta{B},\meta{C})$\\
+${!A}$ & ${!B}$ & ${!C}$ & $\heartsuit({!A},{!B},{!C})$\\
 \hline
  T & T & T & F \\
  T & T & F & T \\
@@ -18,53 +27,51 @@ $\meta{A}$ & $\meta{B}$ & $\meta{C}$ & $\heartsuit(\meta{A},\meta{B},\meta{C})$\
  F & F & F & F
 \end{tabular}
 \end{center}
-Probably this new connective would not correspond with any natural English expression (in the way that `$\eand$' corresponds with `and'). But a question arises: if we wanted to employ a connective with this characteristic truth table, must we add a \emph{new} connective to TFL? Or can we get by with the connectives we \emph{already have}?
+Probably this new connective would not correspond with any natural English expression (in the way that `$\land$' corresponds with `and'). But a question arises: if we wanted to employ a connective with this characteristic truth table, must we add a \emph{new} connective? Or can we get by with the connectives we \emph{already have}?
 
-Let us make this question more precise. Say that some connectives are \define{jointly expressively adequate} \emph{iff}, for any possible truth function, there is a scheme containing only those connectives which expresses that truth function. Since we can represent truth functions using characteristic truth tables, we could equivalently say the following: some connectives are jointly expressively adequate \emph{iff}, for any possible truth table, there is a scheme containing only those connectives with that truth table.
+Let us make this question more precise. Say that some connectives are \emph{jointly expressively adequate} \emph{iff}, for any possible truth function, there is a scheme containing only those connectives which expresses that truth function. Since we can represent truth functions using characteristic truth tables, we could equivalently say the following: some connectives are jointly expressively adequate \emph{iff}, for any possible truth table, there is a scheme containing only those connectives with that truth table.
 
-I say `scheme' rather than `sentence', because we are not concerned with something as specific as a sentence (it might help to reread \forallxref{} \S7, and this book's \S\ref{s:SubstitutionLemmas}). To see why, consider the characteristic truth table for conjunction; this schematically encodes the information that a conjunction $(\meta{A} \eand \meta{B})$ is true iff both $\meta{A}$ and $\meta{B}$ are true (whatever $\meta{A}$ and $\meta{B}$ might be). When we discuss expressive adequacy, we are considering something at the same level of generality. 
+We say `scheme' rather than `sentence', because we are not concerned with something as specific as a sentence. To see why, consider the characteristic truth table for conjunction; this schematically encodes the information that a conjunction $({!A} \land {!B})$ is true iff both ${!A}$ and ${!B}$ are true (whatever ${!A}$ and ${!B}$ might be). When we discuss expressive adequacy, we are considering something at the same level of generality. 
 
-The general point is, when we are armed with some jointly expressively adequate connectives, no truth function lies beyond our grasp. And in fact, we are in luck.\footnote{This, and Theorem \ref{thm:Ampheck}, follow from a more general result, due to Emil Post in 1941. For a modern presentation of Post's result, see Pelletier and Martin  `Post's Functional Completeness Theorem' (1990, \emph{Notre Dame Journal of Formal Logic} 31.2).}
-	\begin{thm}\label{thm:ExpressiveAdequacy}\textbf{Expressive Adequacy Theorem.}
-		The connectives of TFL are jointly expressively adequate. Indeed, the following pairs of connectives are jointly expressively adequate:
-			\begin{earg}
-				\item\label{expressive:eor} `$\enot$' and `$\eor$'
-				\item\label{expressive:eand} `$\enot$' and `$\eand$'
-				\item\label{expressive:eif} `$\enot$' and `$\eif$'
-			\end{earg}
+The general point is, when we are armed with some jointly expressively adequate connectives, no truth function lies beyond our grasp. 
+	\begin{thm}\ollabel{thm:expressive}
+		The following pairs of connectives are jointly expressively adequate:
+			\begin{itemize}
+				\item `$\lnot$' and `$\lor$'
+				\item `$\lnot$' and `$\land$'
+				\item `$\lnot$' and `$\lif$'
+			\end{itemize}
 			\begin{proof}
-				Given any truth table, we can use the method of proving the DNF Theorem (or the CNF Theorem) via truth tables, to write down a scheme which has the same truth table. For example, employing the truth table method for proving the DNF Theorem, I can tell you that the following scheme has the same characteristic truth table as $\heartsuit(\meta{A},\meta{B},\meta{C})$, above:
-		$$(\meta{A} \eand \meta{B} \eand \enot \meta{C}) \eor (\meta{A} \eand \enot\meta{B} \eand \meta{C}) \eor (\enot \meta{A} \eand \meta{B} \eand \enot \meta{C})$$			
-			It follows that the connectives of TFL are jointly expressively adequate. I now prove each of the subsidiary results.
-	
-				\emph{Subsidiary Result \ref{expressive:eor}: expressive adequacy of `$\enot$' and `$\eor$'.} Observe that the scheme that we generate, using the truth table method of proving the DNF Theorem, will only contain the connectives `$\enot$', `$\eand$' and `$\eor$'. So it suffices to show that there is an equivalent scheme which contains only `$\enot$' and `$\eor$'. To show do this, we simply consider the following equivalence:
-		\begin{align*}
-		(\meta{A} \eand \meta{B}) &\tautequivalent \enot(\enot \meta{A} \eor\enot \meta{B})
-		\end{align*}
-		and reason as in \S\ref{lem:IntoDNFEquivalent} (I leave the details as an exercise).
+				Given any truth table, we can use the method of proving the DNF Theorem (or the CNF Theorem) via truth tables, to write down a scheme which has the same truth table. For example, employing the truth table method for proving the DNF Theorem, I can tell you that the following scheme has the same characteristic truth table as $\heartsuit({!A},{!B},{C})$, above:
+		$$({!A} \land {!B} \land \lnot {C}) \lor ({!A} \land \lnot{!B} \land {C}) \lor (\lnot {!A} \land {!B} \land \lnot {C})$$			
+			It follows that the connectives $\lnot$', `$\lor$' and `$\land$' are jointly expressively adequate. 
 
-		\emph{Subsidiary Result \ref{expressive:eand}: expressive adequacy of `$\enot$' and `$\eand$'.} Exactly as in Subsidiary Result \ref{expressive:eor}, making use of this equivalence instead:
+			We now show that there is an equivalent scheme which contains only `$\lnot$' and `$\lor$'. To show do this, we simply consider the following equivalence:
 		\begin{align*}
-		(\meta{A} \eor \meta{B}) &\tautequivalent \enot(\enot \meta{A} \eand\enot \meta{B})
+		({!A} \land {!B}) &\cong \lnot(\lnot {!A} \lor\lnot {!B})
+		\end{align*}
+		(The details are left as an exercise).
+
+		For the joint expressive adequacy of `$\lnot$' and `$\land$' we note that:
+		\begin{align*}
+		({!A} \lor {!B}) &\cong \lnot(\lnot {!A} \land\lnot {!B})
 		\end{align*}
 
-			\emph{Subsidiary Result \ref{expressive:eif}: expressive adequacy of `$\enot$' and `$\eif$'.} 		Exactly as in Subsidiary Result \ref{expressive:eor}, making use of these equivalences instead:
+		To get the last result we note that:
 		\begin{align*}
-		(\meta{A} \eor \meta{B}) &\tautequivalent (\enot \meta{A} \eif\meta{B})\\
-		(\meta{A} \eand \meta{B}) &\tautequivalent \enot(\meta{A} \eif \enot\meta{B})
+		({!A} \lor {!B}) &\cong (\lnot {!A} \lif{!B})\\
+		({!A} \land {!B}) &\cong \lnot({!A} \lif \lnot{!B})
 		\end{align*}
-		Alternatively, we could simply rely upon one of the other two subsidiary results, and (repeatedly) invoke only one of these two equivalences.
-		\end{proof}
+			\end{proof}
 	\end{thm}\noindent
-In short, there is never any \emph{need} to add new connectives to TFL. Indeed, there is already some redundancy among the connectives we have: we could have made do with just two connectives, if we had been feeling really austere.
+In short, there is never any \emph{need} to add new connectives. Indeed, there is already some redundancy among the connectives we have: we could have made do with just two connectives, if we had been feeling really austere.
 
-\section{Individually expressively adequate connectives}
-In fact, some two-place connectives are \emph{individually} expressively adequate. These connectives are not standardly included in TFL, since they are rather cumbersome to use. But their existence shows that, if we had wanted to, we could have defined a truth-functional language that was expressively adequate, which contained only a single primitive connective.
+In fact, some two-place connectives are \emph{individually} expressively adequate. These connectives are among the standrad ones, since they are rather cumbersome to use. But their existence shows that, if we had wanted to, we could have defined a truth-functional language that was expressively adequate, which contained only a single primitive connective.
 
 The first such connective we shall consider is `$\uparrow$', which has the following characteristic truth table. 
 \begin{center}
 \begin{tabular}{c c | c}
-$\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\uparrow} \meta{B}$\\
+${!A}$ & ${!B}$ & ${!A} \mathrel{\uparrow} {!B}$\\
 \hline
  T & T & F \\
  T & F & T \\
@@ -72,21 +79,20 @@ $\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\uparrow} \meta{B}$\\
  F & F & T
 \end{tabular}
 \end{center}
- This is often called `the Sheffer stroke', after Harry Sheffer, who used it to show how to reduce the number of logical connectives in Russell and Whitehead's \emph{Principia Mathematica}.\footnote{Sheffer, `A Set of Five Independent Postulates for Boolean Algebras, with application to logical constants,' (1913, \emph{Transactions of the American Mathematical Society} 14.4)} (In fact, Charles Sanders Peirce had anticipated Sheffer by about 30 years, but never published his results.)\footnote{See Peirce, `A Boolian Algebra with One Constant', which dates to c.1880; and Peirce's \emph{Collected Papers}, 4.264--5.} It is quite common, as well, to call it `nand', since its characteristic truth table is the negation of the truth table for `$\eand$'.
-\begin{prop}\label{prop:upexpressive}`$\uparrow$' is expressively adequate all by itself. 
+ This is often called `the Sheffer stroke', after Harry Sheffer, who used it to show how to reduce the number of logical connectives in Russell and Whitehead's \emph{Principia Mathematica}.\footnote{Sheffer, `A Set of Five Independent Postulates for Boolean Algebras, with application to logical constants,' (1913, \emph{Transactions of the American Mathematical Society} 14.4)} (In fact, Charles Sanders Peirce had anticipated Sheffer by about 30 years, but never published his results.)\footnote{See Peirce, `A Boolian Algebra with One Constant', which dates to c.1880; and Peirce's \emph{Collected Papers}, 4.264--5.} It is quite common, as well, to call it `nand', since its characteristic truth table is the negation of the truth table for `$\land$'.
+\begin{prop}\ollabel{prop:upexpressive}`$\uparrow$' is expressively adequate all by itself. 
 	\begin{proof}
-		Theorem \ref{thm:ExpressiveAdequacy} tells us that `$\enot$' and `$\eor$' are jointly expressively adequate. So it suffices to show that, given any scheme which contains only those two connectives, we can rewrite it as a tautologically equivalent scheme which contains only `$\uparrow$'. As in the proof of the subsidiary cases of Theorem \ref{thm:ExpressiveAdequacy}, then, we simply apply the following equivalences:
+		\Olref{thm:expressive} tells us that `$\lnot$' and `$\lor$' are jointly expressively adequate. So it suffices to show that, given any scheme which contains only those two connectives, we can rewrite it as a semantically equivalent scheme which contains only `$\uparrow$'. As in the proof of the subsidiary cases of \olref{thm:expressive}, then, we simply apply the following equivalences:
 		\begin{align*}
-			\enot \meta{A} &\tautequivalent (\meta{A} \uparrow \meta{A})\\
-			(\meta{A} \eor \meta{B}) & \tautequivalent ((\meta{A} \uparrow \meta{A}) \uparrow (\meta{B} \uparrow \meta{B}))
+			\lnot {!A} &\cong ({!A} \uparrow {!A})\\
+			({!A} \lor {!B}) & \cong (({!A} \uparrow {!A}) \uparrow ({!B} \uparrow {!B}))
 		\end{align*}
-		 to Subsidiary Result \ref{expressive:eor} of Theorem \ref{thm:ExpressiveAdequacy}.
 	\end{proof}
 \end{prop}\noindent
 Similarly, we can consider the connective `$\downarrow$':
 \begin{center}
 \begin{tabular}{c c | c}
-$\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\downarrow} \meta{B}$\\
+${!A}$ & ${!B}$ & ${!A} \mathrel{\downarrow} {!B}$\\
 \hline
  T & T & F \\
  T & F & F  \\
@@ -94,16 +100,15 @@ $\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\downarrow} \meta{B}$\\
  F & F & T
 \end{tabular}
 \end{center}
-This is sometimes called the `Peirce arrow' (Peirce himself called it `ampheck'). More often, though, it is called `nor', since its characteristic truth table is the negation of `$\eor$'.
-	\begin{prop}\label{prop:downexpressive}
+This is sometimes called the `Peirce arrow' (Peirce himself called it `ampheck'). More often, though, it is called `nor', since its characteristic truth table is the negation of `$\lor$'.
+	\begin{prop}\ollabel{prop:downexpressive}
 	`$\downarrow$' is expressively adequate all by itself. 
 	\begin{proof}
-	As in Proposition \ref{prop:upexpressive}, although invoking the dual equivalences:
+	As in \olref{prop:upexpressive}, although invoking the dual equivalences:
 		\begin{align*}
-			\enot \meta{A} &\tautequivalent (\meta{A} \downarrow \meta{A})\\
-			(\meta{A} \eand \meta{B}) & \tautequivalent ((\meta{A} \downarrow \meta{A}) \downarrow (\meta{B} \downarrow \meta{B}))
+			\lnot {!A} &\cong ({!A} \downarrow {!A})\\
+			({!A} \land {!B}) & \cong (({!A} \downarrow {!A}) \downarrow ({!B} \downarrow {!B}))
 		\end{align*}
-		and Subsidiary Result \ref{expressive:eand} of Theorem \ref{thm:ExpressiveAdequacy}.
 	\end{proof}
 \end{prop}
 
@@ -112,36 +117,37 @@ This is sometimes called the `Peirce arrow' (Peirce himself called it `ampheck')
  
 The obvious thing to do is to try to find some truth table which we \emph{cannot} express, using just the given connectives. But there is a bit of an art to this. Moreover, in the end, we shall have to rely upon induction; for we shall need to show that \emph{no} scheme -- no matter how \emph{long} -- is capable of expressing the target truth table. 
  
- To make this concrete, let's consider the question of whether `$\eor$' is expressively adequate all by itself. After a little reflection, it should be clear that it is not. In particular, it should be clear that any scheme which only contains disjunctions cannot have the same truth table as negation, i.e.:
+ To make this concrete, let's consider the question of whether `$\lor$' is expressively adequate all by itself. After a little reflection, it should be clear that it is not. In particular, it should be clear that any scheme which only contains disjunctions cannot have the same truth table as negation, i.e.:
 				\begin{center}
 				\begin{tabular}{c | c}
-				$\meta{A}$ & $\enot \meta{A}$\\
+				${!A}$ & $\lnot {!A}$\\
 				\hline
 				 T &  F \\
 				 F & T
 				\end{tabular}
 				\end{center}
 The intuitive reason, why this should be so, is simple: the top line of the desired truth table needs to have the value False; but the top line of any truth table for a scheme which \emph{only} contains disjunctions will always be True. But so far, this is just hand-waving. To make it rigorous, we need to reach for induction. Here, then, is our rigorous proof.
- 	\begin{prop}\label{prop:OrNotAdequate}
-		`$\eor$' is not expressively adequate by itself.
+ 	\begin{prop}\ollabel{prop:OrNotAdequate}
+		`$\lor$' is not expressively adequate by itself.
 		\begin{proof}
-			Let $\meta{A}$ by any scheme containing no connective other than disjunctions. Suppose, for induction on length, that every shorter scheme containing only disjunctions is true whenever all its atomic constituents are true. There are two cases to consider:
-				\begin{ebullet}
-					\item[\emph{Case 1: $\meta{A}$ is atomic.}] Then there is nothing to prove.
-					\item[\emph{Case 2: $\meta{A}$ is $(\meta{B} \eor \meta{C})$,}]\emph{for some schemes $\meta{B}$ and $\meta{C}$ containing only disjunctions.} Then, since $\meta{B}$ and $\meta{C}$ are both shorter than $\meta{A}$, by the induction hypothesis they are both true when all their atomic constituents are true. Now the atomic constituents of $\meta{A}$ are just the constituents of both $\meta{B}$ and $\meta{C}$, and $\meta{A}$ is true whenever $\meta{B}$ and $\meta{C}$. So $\meta{A}$ is true when all of its atomic constituents are true.
-				\end{ebullet}
-			It now follows, by induction on length, that any scheme containing no connective other than disjunctions is true whenever all of its atomic constituents are true. Consequently, no scheme containing only disjunctions has the same truth table as that of negation. Hence `$\eor$' is not expressively adequate by itself.
+			Let ${!A}$ by any scheme containing no connective other than disjunctions. Suppose, for induction on length, that every shorter scheme containing only disjunctions is true whenever all its atomic constituents are true. There are two cases to consider:
+				\begin{itemize}
+					\item ${!A}$ is atomic. Then there is nothing to prove.
+					\item ${!A}$ is $({!B} \lor {!C})$, for some schemes ${!B}$ and ${C}$ containing only disjunctions. Then, since ${!B}$ and ${C}$ are both shorter than ${!A}$, by the induction hypothesis they are both true when all their atomic constituents are true. Now the atomic constituents of ${!A}$ are just the constituents of both ${!B}$ and ${!C}$, and ${!A}$ is true whenever ${!B}$ and ${!C}$. So ${!A}$ is true when all of its atomic constituents are true.
+				\end{itemize}
+			It now follows, by induction on length, that any scheme containing no connective other than disjunctions is true whenever all of its atomic constituents are true. Consequently, no scheme containing only disjunctions has the same truth table as that of negation. Hence `$\lor$' is not expressively adequate by itself.
 		\end{proof}
 	\end{prop}\noindent
-In fact, we can generalise Proposition \ref{prop:OrNotAdequate}:
+
+In fact, we can generalise \olref{prop:OrNotAdequate}:
 	\begin{thm}\label{thm:Ampheck}The \emph{only} two-place connectives that are expressively adequate by themselves are `$\uparrow$' and `$\downarrow$'. 
 		\begin{proof}
 			There are sixteen distinct two-place connectives. We shall run through them all, considering whether or not they are individually expressively adequate, in four groups. 
 			
-			\emph{Group 1: the top line of the truth table is True.} Consider those connectives where the top line of the truth table is True. There are eight of  these, including `$\eand$', `$\eor$', `$\eif$' and `$\eiff$', but also the following:
+			\emph{Group 1: the top line of the truth table is True.} Consider those connectives where the top line of the truth table is True. There are eight of  these, including `$\land$', `$\lor$', `$\lif$' and `$\liff$', but also the following:
 	\begin{center}
 		\begin{tabular}{c c | c c c c}
-		$\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\circ_1} \meta{B}$ & $\meta{A} \mathrel{\circ_2} \meta{B}$ & $\meta{A} \mathrel{\circ_3} \meta{B}$ & $\meta{A} \mathrel{\circ_4} \meta{B}$\\
+		${!A}$ & ${!B}$ & ${!A} \mathrel{\circ_1} {!B}$ & ${!A} \mathrel{\circ_2} {!B}$ & ${!A} \mathrel{\circ_3} {!B}$ & ${!A} \mathrel{\circ_4} {!B}$\\
 		\hline
 			 T & T & T & T & T & T \\
 			 T & F & T & T & T & F\\
@@ -154,7 +160,7 @@ In fact, we can generalise Proposition \ref{prop:OrNotAdequate}:
 			\emph{Group 2: the bottom line of the truth table is False.} Having eliminated eight connectives, eight remain. Of these, four are false on the bottom line of their truth table, namely:
 	\begin{center}
 		\begin{tabular}{c c | c c c c}
-		$\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\circ_5} \meta{B}$ & $\meta{A} \mathrel{\circ_6} \meta{B}$ & $\meta{A} \mathrel{\circ_7} \meta{B}$ & $\meta{A} \mathrel{\circ_8} \meta{B}$\\
+		${!A}$ & ${!B}$ & ${!A} \mathrel{\circ_5} {!B}$ & ${!A} \mathrel{\circ_6} {!B}$ & ${!A} \mathrel{\circ_7} {!B}$ & ${!A} \mathrel{\circ_8} {!B}$\\
 		\hline
 			 T & T & F & F & F & F \\
 			 T & F & T & T & F & F\\
@@ -169,7 +175,7 @@ In fact, we can generalise Proposition \ref{prop:OrNotAdequate}:
 		
 	\begin{center}
 		\begin{tabular}{c c | c c}
-		$\meta{A}$ & $\meta{B}$ & $\meta{A} \mathrel{\circ_9} \meta{B}$ & $\meta{A} \mathrel{\circ_{10}} \meta{B}$\\
+		${!A}$ & ${!B}$ & ${!A} \mathrel{\circ_9} {!B}$ & ${!A} \mathrel{\circ_{10}} {!B}$\\
 		\hline
 			 T & T & F & F \\
 			 T & F & F & T\\
@@ -179,85 +185,30 @@ In fact, we can generalise Proposition \ref{prop:OrNotAdequate}:
 	\end{center}
 	These connectives have redundant positions, in the sense that the truth value of the overarching scheme only depends upon the truth value of one of the atomic constituents. More precisely:
 		\begin{align*}
-		 	\meta{A} \circ_9 \meta{B} &\tautequivalent \enot \meta{A}\\
-			\meta{A} \circ_{10} \meta{B} &\tautequivalent \enot \meta{B}
+		 	{!A} \circ_9 {!B} &\cong \lnot {!A}\\
+			{!A} \circ_{10} {!B} &\cong \lnot {!B}
 		\end{align*}
 		Consequently, there are many truth functions that they cannot express. In particular, they cannot express either the tautologous truth function (given by `$\circ_1$'), or the contradictory truth function (given by `$\circ_8$'). To show this, it suffices to prove that any scheme whose only connective is either `$\circ_9$' or `$\circ_{10}$' (perhaps several times) is contingent, i.e.\ it is true on at least one line and false on at least one other line. I leave the details of this proof as an exercise.
 		
-		\emph{Group 4.} Only two connectives now remain, namely `$\uparrow$' and `$\downarrow$', and 	Propositions \ref{prop:upexpressive} and \ref{prop:downexpressive} show that both are individually expressively adequate.
+		\emph{Group 4.} Only two connectives now remain, namely `$\uparrow$' and `$\downarrow$', and 	Propositions \olref{prop:upexpressive} and \olref{prop:downexpressive} show that both are individually expressively adequate.
 		\end{proof}
-	\end{thm}\noindent
-The above inductions on complexity were fairly routine. To close this chapter, I shall offer some similar results about expressive limitation that are only slightly more involved.
-	\begin{prop}\label{prop:Eiff4}
-		Exactly four 2-place truth functions can be expressed using schemes whose only connectives are biconditionals.
-		\begin{proof}
-			I claim that the four 2-place truth functions that can be so expressed are expressed by:
-			\begin{align*}
-				\meta{A} \eiff \meta{A}\\
-				\meta{A}\\
-				\meta{B}\\
-				\meta{A} \eiff \meta{B}
-			\end{align*}
-			It is clear that we can express all four, and that they are distinct. 
-			
-			To see that these are the \emph{only} functions which can be expressed, I shall perform an induction on the length of our scheme. Let $\meta{S}$ be any scheme containing only (arbitrarily many) biconditionals and the atomic constituents $\meta{A}$ and $\meta{B}$ (arbitrarily many times). Suppose that any such shorter scheme is equivalent to one of the four schemes listed above. There are two cases to consider:
-			\begin{ebullet}
-				\item[\emph{Case 1: $\meta{S}$ is atomic.}] Then certainly it is equivalent to either $\meta{A}$ or to $\meta{B}$. 
-				\item[\emph{Case 2: $\meta{S}$ is $(\meta{C} \eiff \meta{D})$,}]\emph{for some schemes $\meta{C}$ and $\meta{D}$.} Since $\meta{C}$ and $\meta{D}$ are both shorter than $\meta{S}$, by supposition they are  equivalent to one of the four mentioned schemes. And it is now easy to check, case-by-case, that, whichever of the four schemes each is  equivalent to, $(\meta{C} \eiff \meta{D})$ is also equivalent to one of those four schemes. (I leave the details as an exercise.)
-			\end{ebullet}
-		This completes the proof of my claim, by induction on length of scheme. 
-		\end{proof}
-	\end{prop}
-	\begin{prop}\label{prop:NotExpressiveNotBi}
-	Exactly eight 2-place truth functions can be expressed using schemes whose only connectives are negations and biconditionals.
-	\begin{proof}
-		Observe the following equivalences:
-			\begin{align*}
-				\enot \enot\meta{A} & \tautequivalent \meta{A}\\
-				(\enot \meta{A} \eiff \meta{B}) & \tautequivalent \enot(\meta{A} \eiff \meta{B}) \\
-				(\meta{A} \eiff \enot \meta{B}) & \tautequivalent \enot(\meta{A} \eiff \meta{B}) 
-			\end{align*}
-		We can use these tautological equivalences along the lines of Lemma \ref{lem:IntoDNFEquivalent} to show the following: for any scheme containing only biconditionals and negations, there is a tautologically equivalent scheme where no negation is inside the scope of any biconditional. (The details of this are left as an exercise.)
-		
-		So, given any scheme containing only the atomic constituents $\meta{A}$ and $\meta{B}$ (arbitrarily many times), and whose only connectives are biconditionals and negations, we can produce a tautologically equivalent scheme which contains at most \emph{one} negation, and that at the start of the scheme.  By Proposition \ref{prop:Eiff4}, the subscheme following the negation (if there is a negation) must be equivalent to one of only four schemes. Hence the original scheme must be equivalent to one of only eight schemes.
-	\end{proof}
-\end{prop}
+	\end{thm}
 
+\begin{prob}
+ Where `$\circ_7$' has the characteristic truth table defined in the proof of \olref{thm:Ampheck}, show that the following are jointly expressively adequate:
+	\begin{enumerate}
+		\item `$\circ_7$' and `$\lnot$'. % $\lnot (B \circledcirc A)$ expresses $A \lif B$.
+		\item `$\circ_7$' and `$\lif$'. % $A \circledcirc (B \lif A)$ expresses $A \downarrow B$.
+		\item `$\circ_7$' and `$\liff$'. % $A \circledcirc (A \liff B)$ expresses $A \downarrow B$.
+	\end{enumerate}
+\end{prob}
 
+\begin{prob}
+Show that the connectives `$\circ_7$', `$\land$' and `$\lor$' are not jointly expressively adequate.\\
+\end{prob}
 
+\begin{prob}
+Complete the proof of \olref{thm:expressive}.
+\end{prob}
 
-%\begin{center}
-%\begin{tabular}{c | c | c}
-%$\meta{A}$ & $\meta{A} \mathrel{\downarrow} \meta{A}$ & $\enot \meta{A}$ \\
-%\hline
-% T & F & F\\
-% F & T & T
-%\end{tabular}
-%\end{center}
-%So we can express `$\enot$' in terms of `$\downarrow$'. Similarly, observe the following:
-%\begin{center}
-%\begin{tabular}{c c | d e f |c}
-%$\meta{A}$ & $\meta{B}$ & $(\meta{A} \mathrel{\downarrow} \meta{A})$ & $\mathrel{\downarrow}$ & $(\meta{B} \mathrel{\downarrow} \meta{B})$ & $\meta{A} \eand \meta{B}$ \\
-%\hline
-%T & T & F & T & F & T\\
-%T & F & F & F & T  & F \\
-%F & T & T & F & F & F\\
-%F & F & T & F & T & F
-%\end{tabular}
-%\end{center}
-%Hence we can eliminate `$\eand$'. But since `$\enot$' and `$\eand$' are jointly expressively adequate, we now find the following: `$\downarrow$' is expressively adequate \emph{all by itself}!
-
-
-
-\practiceproblems
-
-\problempart Where `$\circ_7$' has the characteristic truth table defined in the proof of Theorem \ref{thm:Ampheck}, show that the following are jointly expressively adequate:
-	\begin{earg}
-		\item `$\circ_7$' and `$\enot$'. % $\enot (B \circledcirc A)$ expresses $A \eif B$.
-		\item `$\circ_7$' and `$\eif$'. % $A \circledcirc (B \eif A)$ expresses $A \downarrow B$.
-		\item `$\circ_7$' and `$\eiff$'. % $A \circledcirc (A \eiff B)$ expresses $A \downarrow B$.
-	\end{earg}
-
-\problempart Show that the connectives `$\circ_7$', `$\eand$' and `$\eor$' are not jointly expressively adequate.\\
-
-\problempart Complete the exercises left in each of the proofs of this chapter.
+ \end{document}
