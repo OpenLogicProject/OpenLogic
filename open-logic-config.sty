@@ -401,7 +401,12 @@
 
 % - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
 
-\DeclareDocumentCommand \pValue { m m }{\overline{\pAssign{#1}}(#2)}
+\DeclareDocumentCommand \pValue { m d() }{
+\IfNoValueTF {#2} {
+  \overline{\pAssign{#1}}}{
+  \overline{\pAssign{#1}}(#2)
+  }
+}
 
 % - `\pSat[/]{v}{!A}`, the relation of being satisfied by a
 % truth-value assignment
