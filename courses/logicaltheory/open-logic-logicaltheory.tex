@@ -46,7 +46,6 @@
 % e-book-friendly version:
 %\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}  % page geometry
 
-
 \begin{document}
 
 % First we make a titlepage
@@ -65,18 +64,28 @@ Theory
 
 \vfill
 
-% oluselicense generates a license mark that a) licenses the result
-% under a CC-BY licence and b) acknowledges the original source (the
-% OLP).  Acknowledgment of the source is a requirement under the
-% conditions of the CC-BY license used by the OLP, but you are not
-% required to license the product itself under CC-BY.
+\begin{minipage}[b]{.9cm}
+\includegraphics[width=.9cm]{\olpath/assets/logos/by}
+\includegraphics[width=.9cm]{\olpath/assets/logos/cc}
+\includegraphics[width=.9cm]{\olpath/assets/logos/remix}
+\end{minipage}
+\hspace{.3cm}
+\begin{minipage}[b]{6.5cm}
+\ollicensefont
+\textit{Logical Theory} is licensed under a
+\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}. It is based on
+\textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
+    Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
+  Project}, used under a
+\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}, and \textit{\href{http://people.ds.cam.ac.uk/tecb2/metatheory.shtml}{Metatheory}} by Tim Button, also under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}.
+\end{minipage}
+\hfill
+\href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}
 
-\oluselicense
-% Title of this version of the OLT with link to source
-{\textit{Logical Theory}}
-% Author of this version
-{Fredrik Engstr\"om}
-%{\href{http://openlogicproject.org/}{OLP}}
+
 \end{titlingpage}
 
 \frontmatter
@@ -84,41 +93,29 @@ Theory
 
 %\newpage
 \thispagestyle{empty}%
-\noindent This text is a remix of the \textit{Open Logic Text} that is made for the course Logical theory, LOG110 at the University of Gothenburg by Fredrik Engstr\"om. Please see \href{http://openlogicproject.org/}{openlogicproject.org} for
+\noindent This text is a remix of the \textit{Open Logic Text} tailormade for the course Logical theory, LOG110, at the University of Gothenburg. The original text as well as the present text is realesed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+  Attribution 4.0 International License}. Please see \href{http://openlogicproject.org/}{openlogicproject.org} for
 more information. 
 
-Included in this text are two sections from Tim Button's book \textit{Metatheory} which is generously realeased under a Creative Commons license making it possible to include parts of it here. Thank you!
+Some modified parts from Tim Button's book \textit{Metatheory} is also included in this text. \textit{Metatheory}is generously realeased under a Creative Commons license making it possible to include parts of it here.
 
+This version of the text was compiled on \today. Please check the course' Canvas activity for the most recent version.
 
-This version of the text was compiled on \today.  
+If you find typos, errors or have suggestions for improvement please contact your course instructor. 
 	
 
 \tableofcontents*
 
 \mainmatter
 
-% olimport includes an entire part
 
-%\olimport*[sets-functions-relations]{sets-functions-relations}
+% PART: PROPOSITIONAL LOGIC
 
-% you can also import individual chapters, but then don't forget to
-% include part headings
-
+{\let\newpage\relax
+\let\clearpage\relax
 \part{Propositional Logic}
+\chapter{Syntax and Semantics}}
 
-%\olimport*[propositional-logic/{propositional-logic}
-
-%\chapter{Syntax and Semantics}
-
-%\olimport*[propositional-logic/syntax-and-semantics]{introduction}
-%\olimport*[propositional-logic/syntax-and-semantics]{formulas}
-%\olimport*[propositional-logic/syntax-and-semantics]{preliminaries}
-%\olimport*[propositional-logic/syntax-and-semantics]{valuations-sat}
-%\olimport*[propositional-logic/syntax-and-semantics]{semantic-notions}
-
-%\olimport*[propositional-logic/syntax-and-semantics]{syntax-and-semantics}
-
-\chapter{Syntax and Semantics}
 \olimport*[propositional-logic/syntax-and-semantics]{introduction}
 \olimport*[propositional-logic/syntax-and-semantics]{formulas}
 \olimport*[propositional-logic/syntax-and-semantics]{preliminaries}
@@ -149,96 +146,162 @@ This version of the text was compiled on \today.
 \tagtrue{FOL}
 \OLEndPartHook
 
+% PART: FIRST-ORDER LOGIC
 
+
+\cleardoublepage
+{\let\newpage\relax
+\let\clearpage\relax
 \part{First-order Logic}
+\chapter{Syntax and Semantics}}
+\olimport*[first-order-logic/syntax-and-semantics]{introduction}
+\olimport*[first-order-logic/syntax-and-semantics]{first-order-languages}
+\olimport*[first-order-logic/syntax-and-semantics]{terms-formulas}
+\olimport*[first-order-logic/syntax-and-semantics]{unique-readability}
+\olimport*[first-order-logic/syntax-and-semantics]{main-operator}
+\olimport*[first-order-logic/syntax-and-semantics]{subformulas}
+\olimport*[first-order-logic/syntax-and-semantics]{free-vars-sentences}
+\olimport*[first-order-logic/syntax-and-semantics]{substitution}
+\olimport*[first-order-logic/syntax-and-semantics]{structures}
+\olimport*[first-order-logic/syntax-and-semantics]{covered-structures}
+\olimport*[first-order-logic/syntax-and-semantics]{satisfaction}
+\olimport*[first-order-logic/syntax-and-semantics]{assignments}
+\olimport*[first-order-logic/syntax-and-semantics]{extensionality}
+\olimport*[first-order-logic/syntax-and-semantics]{semantic-notions}
+\OLEndChapterHook
 
-\olimport*[first-order-logic/syntax-and-semantics]{syntax-and-semantics}
-
+%\olimport*[first-order-logic/syntax-and-semantics]{syntax-and-semantics}
 \olimport*[first-order-logic/models-theories]{models-theories}
 
-% For a proof system, we'll do only natural deduction. But some of the
-% texts will refer to other proof systems unless you set some tags in
-% the config.sty file.  So make sure those are set. We'll include
-% these sections by hand so we can add a couple of sections from the
-% proof-systems chapter. Of course, if new sections are added or
-% sections are moved or renamed in the main repository, this may break.
-
 \chapter{Natural Deduction}
-
 \olimport*[first-order-logic/proof-systems]{introduction}
-
 \olimport*[first-order-logic/proof-systems]{natural-deduction}
-
 \olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
-
 \olimport*[first-order-logic/natural-deduction]{propositional-rules}
-
-% We'll reorder things: let's do propositional examples first and then
-% go back to quantifiers
-
 \olimport*[first-order-logic/natural-deduction]{derivations}
-
 \olimport*[first-order-logic/natural-deduction]{proving-things}
-
 \olimport*[first-order-logic/natural-deduction]{quantifier-rules}
-
 \olimport*[first-order-logic/natural-deduction]{proving-things-quant}
-
 \olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
-
 \olimport*[first-order-logic/natural-deduction]{provability-consistency}
-
 \olimport*[first-order-logic/natural-deduction]{provability-propositional}
-
 \olimport*[first-order-logic/natural-deduction]{provability-quantifiers}
-
 \olimport*[first-order-logic/natural-deduction]{soundness}
-
 \olimport*[first-order-logic/natural-deduction]{identity}
-
 \olimport*[first-order-logic/natural-deduction]{soundness-identity}
-
-% Chapters should end with \OLEndChapterHook. They will automatically
-% if you include entire parts or chapters. Here we did a chapter ``by
-% hand'' so we should add \OLEndChapterHook by hand too
-
 \OLEndChapterHook
 
 \olimport*[first-order-logic/completeness]{completeness}
-
-\olimport*[first-order-logic/beyond]{beyond}
-
-% OLEndPartHook should come at the end of each
-% part.
+%\olimport*[first-order-logic/beyond]{beyond}
 
 \OLEndPartHook
 
-% Include some more chapters and parts
+% PART: SECOND-ORDER LOGIC
 
-\olimport*[turing-machines]{turing-machines}
+\cleardoublepage
+{\let\newpage\relax
+\let\clearpage\relax
+\part{Second-order Logic}
+\chapter{Syntax and Semantics}}
 
-% Part: incompleteness
+\olimport*[second-order-logic/syntax-and-semantics]{introduction}
+\olimport*[second-order-logic/syntax-and-semantics]{terms-formulas}
+\olimport*[second-order-logic/syntax-and-semantics]{satisfaction}
+\olimport*[second-order-logic/syntax-and-semantics]{semantic-notions}
+\olimport*[second-order-logic/syntax-and-semantics]{expressive-power}
+\olimport*[second-order-logic/syntax-and-semantics]{inf-count}
+\OLEndChapterHook
 
+\olimport*[second-order-logic/metatheory]{metatheory}
+\olimport*[second-order-logic/sol-and-set-theory]{sol-and-set-theory}
+\chapter{Beyond Second-order}
+\olimport*[first-order-logic/beyond]{higher-order-logic}
+\OLEndChapterHook
+
+\OLEndPartHook
+
+% PART: INTUITIONISTIC LOGIC
+
+\cleardoublepage
+{\let\newpage\relax
+\let\clearpage\relax
+\part{Intuitionistic Logic}
+\chapter{Introduction}}
+
+\olimport*[intuitionistic-logic/introduction]{constructive-reasoning}
+\olimport*[intuitionistic-logic/introduction]{syntax}
+\olimport*[intuitionistic-logic/introduction]{bhk-interpretation}
+\olimport*[intuitionistic-logic/introduction]{natural-deduction}
+\olimport*[intuitionistic-logic/introduction]{axiomatic-derivations}
+\OLEndChapterHook
+
+\olimport*[intuitionistic-logic/semantics]{semantics}
+\olimport*[intuitionistic-logic/soundness-completeness]{soundness-completeness}
+\olimport*[intuitionistic-logic/propositions-as-types]{propositions-as-types}
+
+\OLEndPartHook
+
+
+% PART: TURING MACHINES
+
+\cleardoublepage
+{\let\newpage\relax
+\let\clearpage\relax
+\part{Turing Machines}
+\chapter{Turing Machine Computations}}
+
+\olimport*[turing-machines/machines-computations]{introduction}
+\olimport*[turing-machines/machines-computations]{representing-tms}
+\olimport*[turing-machines/machines-computations]{turing-machines}
+\olimport*[turing-machines/machines-computations]{configuration}
+\olimport*[turing-machines/machines-computations]{unary-numbers}
+\olimport*[turing-machines/machines-computations]{halting-states}
+\olimport*[turing-machines/machines-computations]{combining-machines}
+\olimport*[turing-machines/machines-computations]{variants}
+\olimport*[turing-machines/machines-computations]{church-turing-thesis}
+\OLEndChapterHook
+
+\olimport*[turing-machines/undecidability]{undecidability}
+
+\OLEndPartHook
+
+% PART: COMPUTABILITY AND INCOMPLETENESS
+
+\cleardoublepage
+{\let\newpage\relax
+\let\clearpage\relax
 \part{Computability and Incompleteness}
+\chapter{Recursive Functions}}
 
-% include intro to recursive function from computability part
-
-\olimport*[computability/recursive-functions]{recursive-functions}
+\olimport*[computability/recursive-functions]{introduction}
+\olimport*[computability/recursive-functions]{primitive-recursion}
+\olimport*[computability/recursive-functions]{composition}
+\olimport*[computability/recursive-functions]{pr-functions}
+\olimport*[computability/recursive-functions]{notation-pr-functions}
+\olimport*[computability/recursive-functions]{pr-functions-computable}
+\olimport*[computability/recursive-functions]{examples}
+\olimport*[computability/recursive-functions]{pr-relations}
+\olimport*[computability/recursive-functions]{bounded-minimization}
+\olimport*[computability/recursive-functions]{primes}
+\olimport*[computability/recursive-functions]{sequences}
+\olimport*[computability/recursive-functions]{trees}
+\olimport*[computability/recursive-functions]{other-recursions}
+\olimport*[computability/recursive-functions]{non-pr-functions}
+\olimport*[computability/recursive-functions]{partial-functions}
+\olimport*[computability/recursive-functions]{normal-form}
+\olimport*[computability/recursive-functions]{halting-problem}
+\olimport*[computability/recursive-functions]{general-recursive-functions}
+\OLEndChapterHook
 
 \olimport*[incompleteness/arithmetization-syntax]{arithmetization-syntax}
-
 \olimport*[incompleteness/representability-in-q]{representability-in-q}
-
 % leave out this part -- it depends on computability theory chapter
 % \olimport[incompleteness/theories-computability]{theories-computability}
-
 \olimport*[incompleteness/incompleteness-provability]{incompleteness-provability}
 
 \OLEndPartHook
 
 \stopproblems
-
-% Ok, that's it. Now for the appendices
 
 \appendix
 
@@ -246,21 +309,10 @@ This version of the text was compiled on \today.
 \olimport*[methods/induction]{induction}
 \olimport*[history/biographies]{biographies}
 
-%\olimport*[methods]{methods}
-
-
-
-%\olimport*[history]{history}
-
 
 \backmatter
 
-% If you include any chapters from the history part, you have to print
-% the Photo Credits. 
-
 \photocredits
-
-% Include the bibliography
 
 \bibliographystyle{\olpath/bib/natbib-oup}
 \bibliography{\olpath/bib/open-logic}
