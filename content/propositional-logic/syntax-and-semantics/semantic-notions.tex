@@ -82,17 +82,17 @@ Exercise.
 Prove \olref[pl][syn][sem]{thm:sem-deduction}
 \end{prob}
 
-We write $!A \Entails !B$ for $\Gamma \Entails !B$ when $\Gamma = \{!A\}$ is a singleton and say that two !!{formula}s are semantically equivalent, $!A \cong !B$, if $!A \Entails !B$ and $!B \Entails !A$.
+We write $!A \Entails !B$ for $\Gamma \Entails !B$ when $\Gamma = \{!A\}$ is a singleton and say that two !!{formula}s are semantically equivalent, $!A \approx !B$, if $!A \Entails !B$ and $!B \Entails !A$.
 
-By looking at the following equivalences, known as the De Morgan Laws, we can see that the connectives $\land$ and $\lor$ seem to behave in a similar way. 
+The following equivalences, known as the De Morgan laws, seem to indicate that the connectives $\land$ and $\lor$ behave in a similar, dual, way. 
   \begin{align*}
-    ({!A} \land {!B}) &\cong \lnot(\lnot{!A} \lor \lnot{!B})\\
-    ({!A} \lor {!B}) &\cong \lnot(\lnot{!A} \land \lnot{!B})
+    ({!A} \land {!B}) &\approx \lnot(\lnot{!A} \lor \lnot{!B})\\
+    ({!A} \lor {!B}) &\approx \lnot(\lnot{!A} \land \lnot{!B})
   \end{align*}
-We will now make this tight symmetry between conjunction and disjuntion precise in the following result.
+This symmetry, or duality, between conjunction and disjunction can be made precise, but first we define the dual of !!a{formula}.
 
 \begin{defn}
-Define, by recursion on formulas, the mapping that takes a !!{formula} with only occurrences of $\lnot$, $\land$, and $\lor$ to another such !!{formula} such that:
+The mapping that maps !!a{formula} with no occurrences of $\lif$ nor $\liff$ to its \emph{dual} is defined by the following clauses:
 \begin{itemize}
   \item $!A^d \ident !A$ when $!A$ is atomic,
   \item $(\lnot !A )^d \ident \lnot !A^d$,
@@ -101,15 +101,17 @@ Define, by recursion on formulas, the mapping that takes a !!{formula} with only
 \end{itemize}
 \end{defn}
 
+Observe that the dual of the dual of !!{formula} is the !!{formula} itself, i.e., that $(!A^d)^d \ident !A$.
+
 \begin{prop}\ollabel{thm:dual}
-$!A \cong !B$ iff $!A^d \cong !B^d$ whenever the dual mapping is defined.
+$!A \approx !B$ iff $!A^d \approx !B^d$ whenever the dual is defined.
 \end{prop}
 \begin{proof}
 Exercise.
 \end{proof}
 
 \begin{prob}
-Prove \olref[pl][syn][sem]{thm:dual} by introducting an axuilliary mapping $!A^n$ just as $!A^d$ except for atomic !!{formula}s where $!A^n$ is defined to be $\lnot !A$ and proving that $!A^n \cong \lnot !A$.
+Prove \olref[pl][syn][sem]{thm:dual} by introducing an auxiliary mapping $!A^n$ just as $!A^d$ except for atomic !!{formula}s where $!A^n$ is defined to be $\lnot !A$ and proving that $!A^n \approx \lnot !A$.
 \end{prob}
 
 \end{document}
