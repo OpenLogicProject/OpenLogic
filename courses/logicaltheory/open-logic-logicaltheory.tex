@@ -22,14 +22,26 @@
 
 \problemsperchapter
 
+\hypersetup{pdftex,
+  breaklinks,
+  bookmarks,
+  bookmarksopen,
+  bookmarksopenlevel=1,
+  hidelinks}
+  %colorlinks,
+  %urlcolor=dark-gray}
+  %linkcolor=reflex-blue}
 
-% let's set the whole thing in Palatino, with Helvetica for
-% sans-serif, and spread the lines a bit to make the text more
-% readable
+\usepackage{enumitem}
+\setlist{topsep=6pt,itemsep=0pt,parsep=2pt} % or \setlist{noitemsep} to leave space around whole list
 
-\usepackage{mathpazo}
-\usepackage[scaled=0.95]{helvet}
-\linespread{1.05}
+
+\usepackage{libertine}
+%\usepackage[libertine]{newtxmath}
+
+%\usepackage{mathpazo}
+%\usepackage[scaled=0.95]{helvet}
+%\linespread{1.05}
 
 % e-book-friendly version:
 %\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}  % page geometry
@@ -130,13 +142,12 @@ This version of the text was compiled on \today.
 \olimport*[first-order-logic/natural-deduction]{provability-consistency}
 \olimport*[first-order-logic/natural-deduction]{provability-propositional}
 \olimport*[first-order-logic/natural-deduction]{soundness}
-
+\OLEndChapterHook
 
 %\olimport*[first-order-logic/natural-deduction]{natural-deduction}
 \olimport*[first-order-logic/completeness]{completeness}
 \tagtrue{FOL}
-
-\OLEndChapterHook
+\OLEndPartHook
 
 
 \part{First-order Logic}

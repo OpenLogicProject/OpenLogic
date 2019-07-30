@@ -42,8 +42,8 @@ The general point is, when we are armed with some jointly expressively adequate 
 				\item `$\lnot$' and `$\lif$'
 			\end{itemize}
 			\begin{proof}
-				Given any truth table, we can use the method of proving the DNF Theorem (or the CNF Theorem) via truth tables, to write down a scheme which has the same truth table. For example, employing the truth table method for proving the DNF Theorem, I can tell you that the following scheme has the same characteristic truth table as $\heartsuit({!A},{!B},{C})$, above:
-		$$({!A} \land {!B} \land \lnot {C}) \lor ({!A} \land \lnot{!B} \land {C}) \lor (\lnot {!A} \land {!B} \land \lnot {C})$$			
+				Given any truth table, we can use the method of proving the DNF Theorem (or the CNF Theorem) via truth tables, to write down a scheme which has the same truth table. For example, employing the truth table method for proving the DNF Theorem, I can tell you that the following scheme has the same characteristic truth table as $\heartsuit({!A},{!B},{!C})$, above:
+		$$({!A} \land {!B} \land \lnot {!C}) \lor ({!A} \land \lnot{!B} \land {!C}) \lor (\lnot {!A} \land {!B} \land \lnot {!C})$$			
 			It follows that the connectives $\lnot$', `$\lor$' and `$\land$' are jointly expressively adequate. 
 
 			We now show that there is an equivalent scheme which contains only `$\lnot$' and `$\lor$'. To show do this, we simply consider the following equivalence:
@@ -133,7 +133,7 @@ The intuitive reason, why this should be so, is simple: the top line of the desi
 			Let ${!A}$ by any scheme containing no connective other than disjunctions. Suppose, for induction on length, that every shorter scheme containing only disjunctions is true whenever all its atomic constituents are true. There are two cases to consider:
 				\begin{itemize}
 					\item ${!A}$ is atomic. Then there is nothing to prove.
-					\item ${!A}$ is $({!B} \lor {!C})$, for some schemes ${!B}$ and ${C}$ containing only disjunctions. Then, since ${!B}$ and ${C}$ are both shorter than ${!A}$, by the induction hypothesis they are both true when all their atomic constituents are true. Now the atomic constituents of ${!A}$ are just the constituents of both ${!B}$ and ${!C}$, and ${!A}$ is true whenever ${!B}$ and ${!C}$. So ${!A}$ is true when all of its atomic constituents are true.
+					\item ${!A}$ is $({!B} \lor {!C})$, for some schemes ${!B}$ and ${!C}$ containing only disjunctions. Then, since ${!B}$ and ${!C}$ are both shorter than ${!A}$, by the induction hypothesis they are both true when all their atomic constituents are true. Now the atomic constituents of ${!A}$ are just the constituents of both ${!B}$ and ${!C}$, and ${!A}$ is true whenever ${!B}$ and ${!C}$. So ${!A}$ is true when all of its atomic constituents are true.
 				\end{itemize}
 			It now follows, by induction on length, that any scheme containing no connective other than disjunctions is true whenever all of its atomic constituents are true. Consequently, no scheme containing only disjunctions has the same truth table as that of negation. Hence `$\lor$' is not expressively adequate by itself.
 		\end{proof}
