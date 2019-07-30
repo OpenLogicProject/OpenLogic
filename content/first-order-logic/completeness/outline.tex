@@ -16,17 +16,19 @@ The proof of the completeness theorem is a bit complex, and upon first
 reading it, it is easy to get lost.  So let us outline the proof.  The
 first step is a shift of perspective, that allows us to see a route to
 a proof.  When completeness is thought of as ``whenever $\Gamma
-\Entails !A$ then $\Gamma \Proves !A$,'' it may be hard to even come up
-with an idea: for to show that $\Gamma \Proves !A$ we have to find a
-!!{derivation}, and it does not look like the hypothesis that $\Gamma
-\Entails !A$ helps us for this in any way.  For some proof systems it
-is possible to directly construct a !!{derivation}, but we will take
-a slightly different tack.  The shift in perspective required is this:
-completeness can also be formulated as: ``if $\Gamma$ is consistent, it
-has a model.''  Perhaps we can use the information in~$\Gamma$ together
-with the hypothesis that it is consistent to construct a model.  After
-all, we know what kind of model we are looking for: one that is as
-$\Gamma$ describes it!
+\Entails !A$ then $\Gamma \Proves !A$,'' it may be hard to even come
+up with an idea: for to show that $\Gamma \Proves !A$ we have to find
+a !!{derivation}, and it does not look like the hypothesis that
+$\Gamma \Entails !A$ helps us for this in any way.  For some proof
+systems it is possible to directly construct !!a{derivation}, but we
+will take a slightly different approach.  The shift in perspective
+required is this: completeness can also be formulated as: ``if
+$\Gamma$ is consistent, it is satisfiable.''  Perhaps we can use the
+information in~$\Gamma$ together with the hypothesis that it is
+consistent to construct \iftag{FOL}{!!a{structure}}{!!a{valuation}}
+that satisfies every !!{sentence} in~$\Gamma$.  After all, we know
+what kind of \iftag{FOL}{!!{structure}}{!!{valuation}} we are looking
+for: one that is as $\Gamma$ describes it!{}
 
 If $\Gamma$ contains only \iftag{FOL}{atomic
   !!{sentence}s}{!!{propositional variable}s}, it is easy to construct
@@ -40,7 +42,7 @@ a model for it.\iftag{FOL}{ Suppose the atomic !!{sentence}s are all
   $\Atom{P}{a_1,\ldots,a_n} \in \Gamma$, put the tuple $\tuple{k_1,
     \dots, k_n}$ into $\Assign{P}{M}$, where $k_i$ is the index of the
   constant symbol~$a_i$ (i.e., $a_i \ident \Obj c_{k_i}$).}{%
-  !!a{valuation}~$\pAssign{v}$ such that $\pSat{v}{p}$a for all $p \in
+  !!a{valuation}~$\pAssign{v}$ such that $\pSat{v}{p}$ for all $p \in
   \Gamma$. Well, let $\pAssign{v}(p) = \True$ iff $p \in \Gamma$.}
 
 Now suppose $\Gamma$ contains some !!{formula}~$\lnot !B$, with $!B$
@@ -68,9 +70,9 @@ whenever $!A \land !B$ is in the set, so are both $!A$ and $!B$, if
 $!A \lor !B$ is in the set, at least one of $!A$ or $!B$ is also, etc.
 We keep doing this (potentially forever).  Call the set of all
 !!{formula}s so added~$\Gamma^*$.  Then our construction above would
-provide us with !!a{structure}~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
-for which we could prove, by induction, that all sentences
-in~$\Gamma^*$ are true in it, and hence also all sentence in~$\Gamma$
+provide us with \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
+for which we could prove, by induction, that it satisfies all sentences
+in~$\Gamma^*$, and hence also all sentence in~$\Gamma$
 since $\Gamma \subseteq \Gamma^*$.  It turns out that guaranteeing (a)
 and~(b) is enough. A set of sentences for which (b) holds is called
 \emph{complete}. So our task will be to extend the consistent

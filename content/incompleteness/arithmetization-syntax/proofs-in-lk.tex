@@ -9,11 +9,6 @@
 \olfileid{inc}{art}{plk}
 \olsection{\usetoken{P}{derivation} in $\Log{LK}$}
 
-\begin{editorial}
-  The definition of $\fn{Deriv}$ is not actually primitive recursive
-  and needs to be rewritten.
-\end{editorial}
-
 \begin{explain}
 In order to arithmetize !!{derivation}s, we must represent
 !!{derivation}s as numbers. Since !!{derivation}s are trees of sequents
@@ -35,166 +30,230 @@ $\Gamma \Sequent \Delta$ is
 \Gn{\Gamma \Sequent \Delta} = \tuple{\Gn{\Gamma}, \Gn{\Delta}}
 \]
 
-If $\pi$ is a !!{derivation} in $\Log{LK}$, then $\Gn{\pi}$ is
+If $\pi$ is !!a{derivation} in $\Log{LK}$, then $\Gn{\pi}$ is defined
+as follows:
 \begin{enumerate}
-\item $\tuple{0, \Gn{\Gamma \Sequent \Delta}}$ if $\pi$ consists only
-  of the initial sequent $\Gamma \Sequent \Delta$.
-\item $\tuple{1, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\pi'}}$ if $\pi$
-  ends in an inference with one premise, $k$ is given by the following
-  table according to which rule was used in the last inference, and
-  $\pi'$ is the immediate subproof ending in the premise of the last
-  inference.
+\item If $\pi$ consists only
+  of the initial sequent $\Gamma \Sequent \Delta$, then $\Gn{\pi}$ is 
+  \[
+    \tuple{0, \Gn{\Gamma \Sequent \Delta}}.
+  \]
+\item If $\pi$ ends in an inference with one or two premises, has
+  $\Gamma \Sequent \Delta$ as its conclusion, and $\pi_1$ and $\pi_2$ are the immediate subproof ending
+  in the premise of the last inference, then $\Gn{\pi}$ is 
+  \begin{align*}
+    & \tuple{1, \Gn{\pi_1}, \Gn{\Gamma \Sequent \Delta}, k} \text{ or}\\ 
+    & \tuple{2, \Gn{\pi_1}, \Gn{\pi_2}, \Gn{\Gamma \Sequent \Delta}, k}, 
+  \end{align*}
+  respectively, where $k$ is given by the following table according to
+  which rule was used in the last inference:
 
-\begin{tabular}{lccccccc}
-  \text{Rule:} & \LeftR{\Weakening} & \RightR{\Weakening} &
-  \LeftR{\Contraction} & \RightR{\Contraction} &
-  \LeftR{\Exchange} & \RightR{\Exchange} \\
-  $k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
-  \text{Rule:} &   \LeftR{\lnot} & \RightR{\lnot} &
-  \LeftR{\land} & 
-  \RightR{\lor} &
-  \RightR{\lif} \\
-$k$: & 7 & 8 & 9 & 10 & 11 \\[2ex]
-\text{Rule:} & \LeftR{\lforall} & \RightR{\lforall} &
-   \LeftR{\lexists} & \RightR{\lexists} & = \\
-$k$: & 12 & 13 & 14 & 15 & 16
-\end{tabular}
-\item $\tuple{2, \Gn{\Gamma \Sequent \Delta}, k, \Gn{\pi'},
-  \Gn{\pi''}}$ if $\pi$ ends in an inference with two premises, $k$ is
-  given by the following table according to which rule was used in the
-  last inference, and $\pi'$, $\pi''$ are the immediate subproof
-  ending in the left and right premise of the last inference,
-  respectively.
-
-\begin{tabular}{lcccc}
-\text{Rule:} & \Cut & \RightR{\land} & \LeftR{\lor} & \LeftR{\lif} \\
-$k$: & 1 & 2 & 3 & 4
-\end{tabular}
+  \begin{tabular}{lccccccc}
+    \text{Rule:} & \LeftR{\Weakening} & \RightR{\Weakening} &
+    \LeftR{\Contraction} & \RightR{\Contraction} &
+    \LeftR{\Exchange} & \RightR{\Exchange} \\
+    $k$: & 1 & 2 & 3 & 4 & 5 & 6 \\[2ex]
+    \text{Rule:} & \LeftR{\lnot} & \RightR{\lnot} &
+    \LeftR{\land} & \RightR{\land} & 
+    \LeftR{\lor} & \RightR{\lor} \\
+    $k$: & 7 & 8 & 9 & 10 & 11 & 12 \\[2ex]
+    \text{Rule:} & \LeftR{\lif} & \RightR{\lif} &
+    \LeftR{\lforall} & \RightR{\lforall} &
+    \LeftR{\lexists} & \RightR{\lexists} \\
+    $k$: & 13 & 14 & 15 & 16 & 17 & 18 \\[2ex]
+    \text{Rule:} & \Cut & = \\
+    $k$: & 19 & 20
+  \end{tabular}
 \end{enumerate}
 \end{defn}
 
+\begin{ex}
+  Consider the very simple !!{derivation}
+  \begin{prooftree}
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B \fCenter !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter (!A \land !B) \lif !A$
+  \end{prooftree}
+  The G\"odel number of the initial sequent would be $p_0 = \tuple{0,
+    \Gn{!A \Sequent !A}}$.  The G\"odel number of the !!{derivation}
+    ending in the conclusion of~$\LeftR{\land}$ would be $p_1 =
+    \tuple{1, p_0, \Gn{!A \land !B \Sequent !A}, 9}$ ($1$ since
+    $\LeftR{\land}$ has one premise, the G\"odel number of the
+    conclusion~$!A \land !B \Sequent !A$, and $9$ is the number coding
+    $\LeftR{\land}$). The G\"odel number of the entire !!{derivation} then
+    is $\tuple{1, p_1, \Gn{\Sequent (!A \land !B) \lif !A)}, 14}$, i.e.,
+  \[
+  \tuple{1, \tuple{1, \tuple{0, \Gn{!A \Sequent !A)}}, \Gn{!A \land !B \Sequent !A}, 9},
+    \Gn{\Sequent (!A \land !B) \lif !A}, 14}.
+  \]
+\end{ex}
+
 \begin{explain}
 Having settled on a representation of !!{derivation}s, we must also
-show that we can manipulate such derivations primitive recursively, and
-express their essential properties and relations so.  Some operations
-are simple: e.g., given a G\"odel number~$d$ of a !!{derivation},
-$(s)_1$ gives us the G\"odel number of its end-sequent.  Some are much
-harder.  We'll at least sketch how to do this.  The goal is to show
-that the relation ``$\pi$ is !!a{derivation} of~$!A$ from~$\Gamma$''
-is a primitive recursive relation of the G\"odel numbers of $\pi$
-and~$!A$.
+show that we can manipulate such derivations primitive recursively,
+and express their essential properties and relations so.  Some
+operations are simple: e.g., given a G\"odel number~$p$ of
+!!a{derivation}, $\fn{EndSeq}(p) = (p)_{(p)_0+1}$ gives us the G\"odel
+number of its end-sequent and $\fn{LastRule}(p) = (p)_{(p)_0+2}$ the
+code of its last rule.  The property $\fn{Sequent}(s)$ defined by
+\[
+  \len{s} = 2 \land \bforall{i<\len{(s)_0} + \len{(s)_1}}{\fn{Sent}(((s)_0 \concat (s)_1)_i)}
+\]
+holds of $s$ iff $s$ is the G\"odel number of a sequent consisting of
+!!{sentence}s. Some are much harder.  We'll at least sketch how to do
+this.  The goal is to show that the relation ``$\pi$ is
+!!a{derivation} of~$!A$ from~$\Gamma$'' is a primitive recursive
+relation of the G\"odel numbers of $\pi$ and~$!A$.
 \end{explain}
 
-\begin{prop}
-\ollabel{prop:followsby}
-The following relations are primitive recursive:
-\begin{enumerate}
-\item $\Gamma \Sequent \Delta$ is an initial sequent.
-\item $\Gamma \Sequent \Delta$ follows from $\Gamma' \Sequent \Delta'$
-  (and $\Gamma'' \Sequent \Delta''$) by a rule of $\Log{LK}$.
-\item $\pi$ is a correct $\Log{LK}$-!!{derivation}.
-\end{enumerate}
+\begin{prop}\ollabel{prop:followsby}
+  The property $\fn{Correct}(p)$ which holds iff the last inference in
+  the !!{derivation}~$\pi$ with G\"odel number~$p$ is correct, is
+  primitive recursive.
 \end{prop}
 
 \begin{proof}
-We have to show that the corresponding relations between G\"odel
-numbers of !!{formula}s, sequences of G\"odel numbers of !!{formula}s
-(which code sequences of !!{formula}s), and G\"odel numbers of sequents,
-are primitive recursive.
-\begin{enumerate}
-\item $\Gamma \Sequent \Delta$ is an initial sequent if either there
+  $\Gamma \Sequent \Delta$ is an initial sequent if either there
   is !!a{sentence}~$!A$ such that $\Gamma \Sequent \Delta$ is $!A
   \Sequent !A$, or there is a term~$t$ such that $\Gamma \Sequent
   \Delta$ is $\emptyset \Sequent \eq[t][t]$.  In terms of G\"odel
   numbers, $\fn{InitSeq}(s)$ holds iff
-\begin{align*}
-\bexists{x < s}{} (\fn{Sent}(x) & \land
-s = \tuple{\tuple{x},\tuple{x}})
-\lor {}\\
-\bexists{t<s}{} (\fn{Term}(t) & \land
-s = \tuple{0, \tuple{\Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)}}}).
-\end{align*}
-\item Here we have to show that for each rule of inference~$R$ the
-  relation $\fn{FollowsBy}_R(s, s')$ which holds if $s$ and $s'$ are
-  the G\"odel numbers of conclusion and premise of a correct
-  application of~$R$ is primitive recursive.  If $R$ has two premises,
-  $\fn{FollowsBy}_R$ of course has three arguments.
+  \begin{align*}
+  \bexists{x < s}{} (\fn{Sent}(x) & \land
+  s = \tuple{\tuple{x},\tuple{x}})
+  \lor {}\\
+  \bexists{t<s}{} (\fn{Term}(t) & \land
+  s = \tuple{0, \tuple{\Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)}}}).
+  \end{align*}
 
-For instance, $\Gamma \Sequent \Delta$ follows correctly from $\Gamma'
-\Sequent \Delta'$ by \RightR{\lexists} iff $\Gamma = \Gamma'$ and
-there is a sequence of !!{formula}s~$\Delta''$, !!a{formula}~$!A$, a
-variable~$x$ and a closed term~$t$ such that $\Delta' = \Delta'',
-\Subst{!A}{t}{x}$ and $\Delta = \Delta'', \lexists[x][!A]$. We just
-have to translate this into G\"odel numbers.  If $s = \Gn{\Gamma
-  \Sequent \Delta}$ then $(s)_0 = \Gn{\Gamma}$ and $(s)_1 =
-\Gn{\Delta}$.  So, $\fn{FollowsBy}_{\RightR{\lexists}}(s, s')$
-holds iff
-\begin{align*}
-& (s)_0 = (s')_0 \land {}\\
-&
-  \bexists{d<s}{\bexists{f<s}{\bexists{x<s}{\bexists{t<s'}{
-          (\fn{Frm}(f) \land \fn{Var}(y) \land \fn{Term}(t) \land {}}}}} \\
-  & \qquad (s')_1 = d \concat \tuple{\fn{Subst}(f,t,x)} \land {} \\
-  & \qquad (s)_1 = d \concat \tuple{\#(\lexists) \concat y \concat f}
-\end{align*}
-The individual lines express, respectively, ``$\Gamma = \Gamma$,''
-``there is a sequence~($\Delta''$) with G\"odel number~$d$,
-!!a{formula}~($!A$) with G\"odel number~$f$, a variable with G\"odel
-number~$x$, and a term with G\"odel number~$t$,'' ``$\Delta' =
-\Delta'', \Subst{!A}{t}{x}$,'' and ``$\Delta = \Delta'',
-\lexists[x][!A]$''. (Remember that $\Gn{\Delta}$ is the number of a
-sequence of G\"odel numbers of !!{formula}s in $\Delta$.)
+  We also have to show that for each rule of inference~$R$ the
+  relation $\fn{FollowsBy}_R(p)$ is primitive recursive, where
+  $\fn{FollowsBy}_R(p)$ holds iff $p$ is the G\"odel number of
+  !!{derivation}~$\pi$, and the end-sequent of~$\pi$ follows
+  by a correct application of~$R$ from the immediate
+  sub-!!{derivation}s of~$\pi$.
 
-\item We first define a helper relation $\fn{hDeriv}(s,n)$ which holds
-  if $s$ codes a correct derivation to at least~$n$ inferences up from
-  the end sequent.  If $n=0$ we let the relation be satisfied by
-  default.  Otherwise, $\fn{hDeriv}(s, n+1)$ iff either $s$ consists
-  just of an initial sequent, or it ends in a correct inference and
-  the codes of the immediate sub!!{derivation}s satisfy
-  $\fn{hDeriv}(s, n)$.
+  A simple case is that of the \RightR{\land} rule. If $\pi$ ends in
+  a correct $\RightR{\land}$ inference, it looks like this:
+  \begin{prooftree}
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma \fCenter \Delta, !A$
+    
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\Gamma \fCenter \Delta, !B$
+
+    \RightLabel{\RightR\land}
+    \BinaryInf$\Gamma \fCenter \Delta, !A \land !B$
+  \end{prooftree}
+  So, the last inference in the !!{derivation} $\pi$
+  is a correct application of $\RightR{\land}$ iff
+  there are sequences of !!{sentence}s $\Gamma$ and $\Delta$
+  as well as two !!{sentence}s $!A$ and~$!B$ such that
+  the end-sequent of $\pi_1$ is $\Gamma \Sequent \Delta, !A$,
+  the end-sequent of $\pi_2$ is $\Gamma \Sequent \Delta, !B$,
+  and the end-sequent of $\pi$ is $\Gamma \Sequent \Delta, !A \land !B$.
+  We just have to translate this into G\"odel
+  numbers.  If $s = \Gn{\Gamma \Sequent \Delta}$ then $(s)_0 =
+  \Gn{\Gamma}$ and $(s)_1 = \Gn{\Delta}$.  So,
+  $\fn{FollowsBy}_{\RightR{\land}}(p)$ holds iff
+\begin{align*}
+& \bexists{g < p}{\bexists{d < p}{\bexists{a < p}{\bexists{b < p}{\quad}}}} \\
+& \qquad \fn{EndSequent}(p) = 
+  \tuple{g, d \concat 
+    \tuple{\Gn{(} \concat a \concat \Gn{\land} \concat b \concat \Gn{)}}} \land {} \\
+& \qquad \fn{EndSequent}((p)_1) = \tuple{g, d \concat \tuple{a}} \land {}\\
+& \qquad \fn{EndSequent}((p)_2) = \tuple{g, d \concat \tuple{b}} \land {}\\
+& \qquad (p)_0 = 2 \land \fn{LastRule}(p) = 10.
+\end{align*}
+The individual lines express, respectively, ``there is a
+sequence~($\Gamma$) with G\"odel number~$g$, there is a
+sequence~($\Delta$) with G\"odel number~$d$, !!a{formula}~($!A$) with
+G\"odel number~$a$, and !!a{formula}~($!B$) with G\"odel number~$b$,''
+such that ``the end-sequent of $\pi$ is $\Gamma \Sequent \Delta, !A
+\land !B$,'' ``the end-sequent of $\pi_1$ is $\Gamma \Sequent \Delta,
+!A$,'' ``the end-sequent of $\pi_2$ is $\Gamma \Sequent \Delta, !B$,''
+and ``$\pi$ has two immediate subderivations and the last inference
+rule is $\RightR\land$ (with number~$10$).''
+
+The last inference in~$\pi$ is a correct application of
+$\RightR\lexists$ iff there are sequences $\Gamma$ and $\Delta$,
+!!a{formula}~$!A$, a variable~$x$, and a term~$t$, such that
+the end-sequent of $\pi$ is $\Gamma \Sequent \Delta, \lexists[x][!A]$
+and the end-sequent of $\pi_1$ is $\Gamma \Sequent \Delta,
+\Subst{!A}{t}{x}$. So in terms of G\"odel numbers, we have
+$\fn{FollowsBy}_{\RightR\lexists}(p)$
+iff
+\begin{align*}
+  & \bexists{g<p}{\bexists{d<p}{\bexists{a<p}{\bexists{x<p}{\bexists{t<p}{\quad}}}}}\\
+  & \qquad \fn{EndSequent}(p) = 
+  \tuple{
+    g,
+    d \concat \tuple{\Gn{\lexists} \concat x \concat a}
+  } \land {}\\
+  & \qquad \fn{EndSequent}((p)_1) = 
+  \tuple{
+    g,
+    d \concat \tuple{\fn{Subst}(a, t, x)}
+  } \land {}\\
+  & \qquad (p)_0 = 1 \land \fn{LastRule}(p) = 18.
+\end{align*}
+We then define $\fn{Correct}(p)$ as
 \begin{multline*}
-\begin{aligned}
-\fn{hDeriv}(s, 0) \defiff {} & \text{true}\\
-\fn{hDeriv}(s, n+1) \defiff {}
-\end{aligned}\\
-\begin{aligned}
-& ((s)_0 = 0 \land \fn{InitialSeq}((s)_1)) \lor{}\\
-& ((s)_0 = 1 \land {}\\
-& \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\LeftR{\Contraction}}((s)_1, ((s)_3)_1)) \lor{}\\
-& \qquad \vdots\\
-& \quad ((s)_2 = 16 \land \fn{FollowsBy}_{=}((s)_1, ((s)_3)_1)) \land {}\\
-& \quad \fn{hDeriv}((s)_3, n)) \lor {}\\
-& ((s)_0 = 2 \land {}\\
-& \quad ((s)_2 = 1 \land \fn{FollowsBy}_{\Cut}((s)_1, ((s)_3)_1), ((s)_4)_1)) \lor{}\\
-& \qquad \vdots\\
-& \quad ((s)_2 = 4 \land \fn{FollowsBy}_{\LeftR{\lif}}((s)_1, ((s)_3)_1), ((s)_4)_1)) \land {}\\
-& \quad \fn{hDeriv}((s)_3, n) \land \fn{hDeriv}((s)_4, n))
-\end{aligned}
+  \fn{Sequent}(\fn{EndSequent}(p)) \land {}\\ 
+  [(\fn{LastRule}(p) = 1 \land 
+  \fn{FollowsBy}_{\LeftR\Weakening}(p)) \lor \dots \lor {}\\
+  (\fn{LastRule}(p) = 20 \land \fn{FollowsBy}_{\eq}(p)) \lor {}\\
+  (p)_0 = 0 \land \fn{InitialSeq}(\fn{EndSequent}(p))]
 \end{multline*}
-This is a primitive recursive definition.  If the number~$n$ is large
-enough, e.g., larger than the maximum number of inferences between an
-initial sequent and the end sequent in~$s$, it holds of $s$ iff $s$ is
-the G\"odel number of a correct !!{derivation}.  The number $s$ itself
-is larger than that maximum number of inferences.  So we can now define
-$\fn{Deriv}(s)$ by $\fn{hDeriv}(s,s)$.
-\end{enumerate}
+The first line ensures that the end-sequent of~$d$ is actually a
+sequent consisting of !!{sentence}s. The last line covers the case
+where $p$ is just an initial sequent.
 \end{proof}
 
 \begin{prob}
-Define the following relations as in
-\olref[inc][art][plk]{prop:followsby}:
-\begin{enumerate}
-\item $\fn{FollowsBy}_{\RightR{\land}}(s, s', s'')$,
-\item $\fn{FollowsBy}_{\eq}(s, s')$,
-\item $\fn{FollowsBy}_{\RightR{\lforall}}(s, s')$.
-\end{enumerate}
-\end{prob}
+  Define the following properties as in
+  \olref[inc][art][plk]{prop:followsby}:
+  \begin{enumerate}
+  \item $\fn{FollowsBy}_{\Cut}(p)$,
+  \item $\fn{FollowsBy}_{\LeftR\lif}(p)$,
+  \item $\fn{FollowsBy}_{\eq}(p)$,
+  \item $\fn{FollowsBy}_{\RightR{\lforall}}(p)$.
+  \end{enumerate}
+  For the last one, you will have to also show that you can test
+  primitive recursively if the the last inference of the
+  !!{derivation} with G\"odel number~$p$ satisfies the eigenvariable
+  condition, i.e., the eigenvariable~$a$ of the $\RightR{\lforall}$
+  does not occur in the end-sequent.
+  \end{prob}
+  
+
+\begin{prop}
+  \ollabel{prop:deriv}
+  The relation $\fn{Deriv}(p)$ which holds if $p$ is the G\"odel
+  number of a correct !!{derivation}~$\pi$, is primitive recursive.
+\end{prop}
+
+\begin{proof}
+  !!^a{derivation}~$\pi$ is correct if every one of its inferences
+  is a correct application of a rule, i.e., if every one of its
+  sub-!!{derivation}s ends in a correct inference. So, $\fn{Deriv}(d)$
+  iff
+  \[
+  \bforall{i<\len{\fn{SubtreeSeq}(p)}}{\fn{Correct}((\fn{SubtreeSeq}(p))_i)}.
+  \qedhere
+  \]
+\end{proof}
+
 
 \begin{prop}
 Suppose $\Gamma$ is a primitive recursive set of !!{sentence}s.  Then
 the relation $\Prf[\Gamma](x, y)$ expressing ``$x$ is the code of
 !!a{derivation}~$\pi$ of $\Gamma_0 \Sequent !A$ for some finite
-$\Gamma_0 \subseteq \Gamma$ and $x$ is the G\"odel number of~$!A$'' is
+$\Gamma_0 \subseteq \Gamma$ and $y$ is the G\"odel number of~$!A$'' is
 primitive recursive.
 \end{prop}
 
@@ -202,25 +261,26 @@ primitive recursive.
 Suppose ``$y \in \Gamma$'' is given by the primitive recursive
 predicate~$R_\Gamma(y)$.  We have to show that $\Prf[\Gamma](x, y)$
 which holds iff $y$ is the G\"odel number of a sentence~$!A$ and
-$x$~is the code of an $\Log{LK}$-!!{derivation} with end sequent
+$x$~is the code of an $\Log{LK}$-!!{derivation} with end-sequent
 $\Gamma_0 \Sequent !A$ is primitive recursive.
 
 By the previous proposition, the property $\fn{Deriv}(x)$ which holds
 iff $x$ is the code of a correct derivation~$\pi$ in $\Log{LK}$ is
-primitive recursive.  If $x$ is such a code, then $(x)_1$ is the code
-of the end sequent of~$\pi$, and so $((x)_1)_0$ is the code of the
-left side of the end sequent and $((x)_1)_1$ the right side.  So we can
-express ``the right side of the end sequent of~$\pi$ is~$!A$'' as
-$\len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x$.  The left side of the
-end sequent of $\pi$ is of course automatically finite, we just have
-to express that every sentence in it is in~$\Gamma$.  Thus we can
-define $\Prf[\Gamma](x, y)$ by
+primitive recursive.  If $x$ is such a code, then $\fn{EndSequent}(x)$
+is the code of the end-sequent of~$\pi$, and so
+$(\fn{EndSequent}(x))_0$ is the code of the left side of the end
+sequent and $(\fn{EndSequent}(x))_1$ the right side.  So we can
+express ``the right side of the end-sequent of~$\pi$ is~$!A$'' as
+$\len{(\fn{EndSequent}(x))_1} = 1 \land ((\fn{EndSequent}(x))_1)_0 =
+x$.  The left side of the end-sequent of $\pi$ is of course
+automatically finite, we just have to express that every sentence in
+it is in~$\Gamma$.  Thus we can define $\Prf[\Gamma](x, y)$ by
 \begin{align*}
 \Prf[\Gamma](x, y) \defiff {}&
-\fn{Sent}(y) \land \fn{Deriv}(x) \land {} \\
+\fn{Deriv}(x) \land {} \\
 & \bforall{i <
-  \len{((x)_1)_0}}{R_\Gamma((((x)_1)_0)_i)} \land {}\\
-& \len{((x)_1)_1} = 1 \land (((x)_1)_1)_0 = x
+  \len{(\fn{EndSequent}(x))_0}}{R_\Gamma(((\fn{EndSequent}(x))_0)_i)} \land {}\\
+& \len{(\fn{EndSequent}(x))_1} = 1 \land ((\fn{EndSequent}(x))_1)_0 = y.\qedhere
 \end{align*}
 \end{proof}
 

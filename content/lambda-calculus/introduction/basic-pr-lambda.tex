@@ -1,0 +1,32 @@
+% Part: lambda-calculus
+% Chapter: introduction
+% Section: basic-pr-lambda
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{int}{bas}
+\olsection{The Basic Primitive Recursive Functions are \usetoken{S}{lambda definable}}
+
+\begin{lem}
+The functions $\Zero$, $\Succ$, and $\Proj{n}{i}$ are !!{lambda definable}.
+\end{lem}
+
+\begin{proof}
+$\Zero$ is just
+$\lambd[x][\lambd[y][y]]$.
+
+The successor function~$\Succ$, is
+defined by $\fn{Succ}(u) = \lambd[x][\lambd[y][x(uxy)]]$. You should
+think about why this works; for each numeral $\num{n}$, thought of as
+an iterator, and each function~$f$, $\fn{Succ}(\num{n},f)$ is a function that,
+on input~$y$, applies $f$ $n$ times starting with~$y$, and then
+applies it once more.
+
+There is nothing to say about projections: $\fn{Proj}^n_i(x_0, \dots,
+x_{n-1}) = x_i$. In other words, by our conventions, $\fn{Proj}^n_i$ is
+the lambda term $\lambd[x_0][\dots \lambd[x_{n-1}][x_i]]$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,101 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: parallel-beta-eta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{pbe}
+
+\olsection{Parallel $\beta\eta$-reduction}
+
+In this section we prove the Church-Rosser property for parallel
+$\beta\eta$-reduction, the parallel reduction notion corresponding to
+$\beta\eta$-reduction. 
+
+\begin{defn}[Parallel $\beta\eta$-reduction, $\beredpar$] \ollabel{defn:beredpar}
+  \emph{Parallel $\beta\eta$-reduction} ($\beredpar$) on terms is
+  inductively defined as follows:
+  \begin{enumerate}
+    \item \ollabel{defn:beredpar1} $x \beredpar x$.
+    \item \ollabel{defn:beredpar2} If $N \xrightarrow{\beta} N'$ then $\lambd[x][N] \beredpar
+      \lambd[x][N']$.
+    \item \ollabel{defn:beredpar3} If $P \beredpar P'$ and $Q \beredpar Q'$ then $PQ \beredpar
+      P'Q'$.
+    \item \ollabel{defn:beredpar4} If $N \beredpar N'$ and $Q \beredpar Q'$ then
+      $(\lambd[x][N])Q \beredpar \Subst{N'}{Q'}{x}$.
+    \item \ollabel{defn:beredpar5} If $N \beredpar N'$ then $\lambd[x][Nx]
+      \beredpar N'$, provided $x \notin FV(N)$.
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}\ollabel{thm:refl}
+  $M \beredpar M$.
+\end{thm}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[lam][cr][pbe]{thm:refl}.
+\end{prob}
+
+\begin{defn}[$\beta\eta$-complete development]\ollabel{defn:becd}
+  The \emph{$\beta\eta$-complete development}~$\becd{M}$ of~$M$ is defined
+  as follows:
+  \begin{align}
+    \becd{x} &= x \ollabel{defn:becd1} \\
+    \becd{(\lambd[x][N])} &= \lambd[x][\becd{N}] \ollabel{defn:becd2}\\
+    \becd{(PQ)} &= \becd{P}\becd{Q} && \text{if $P$ is not a $\lambd$-abstract} 
+    \ollabel{defn:becd3} \\
+    \becd{((\lambd[x][N])Q)} &= \Subst{\becd{N}}{\becd{Q}}{x}
+                             \ollabel{defn:becd4} \\
+    \becd{(\lambd[x][Nx])} &= \becd{N} \ollabel{defn:becd5} & \text{if $x
+                                                      \notin FV(N)$}
+  \end{align}
+\end{defn}
+
+\begin{lem}\ollabel{lem:comp}
+  If $M \beredpar M'$ and $R \beredpar R'$, then $\Subst{M}{R}{y}
+  \beredpar \Subst{M'}{R'}{y}$.
+\end{lem}
+
+\begin{proof}
+  By induction on the derivation of $M \beredpar M'$.
+
+  The first four cases are exactly like those in \olref[pb]{lem:comp}.
+  If the last rule is \olref{defn:beredpar5}, then $M$ is
+  $\lambd[x][Nx]$, $M'$ is $N'$ for some $x$ and~$N'$ where $x \notin
+  FV(N)$, and $N \beredpar N'$. We want to show that
+  $\Subst{(\lambd[x][Nx])}{R}{y} \beredpar \Subst{N'}{R'}{y}$, i.e.,
+  $\lambd[x][\Subst{N}{R}{y} x] \beredpar \Subst{N'}{R'}{y}$. It
+  follows by \olref{defn:beredpar}\olref{defn:beredpar5} and the
+  induction hypothesis.
+\end{proof}
+
+\begin{lem}\ollabel{lem:cont}
+  If $M \beredpar M'$ then $M' \beredpar \becd{M}$.
+\end{lem}
+
+\begin{proof}
+  By induction on the derivation of $M \beredpar M'$.
+
+  The first four cases are like those in \olref[pb]{lem:cont}. If the
+  last rule is \olref{defn:beredpar5}, then $M$ is $\lambd[x][Nx]$ and
+  $M'$ is $N'$ for some $x$, $N$, $N'$ where $x \notin FV(N)$ and $N
+  \beredpar N'$. We want to show that $N' \beredpar
+  \becd{(\lambd[x][Nx])}$, i.e., $N' \beredpar \becd{N}$, which is
+  immediate by induction hypothesis.
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  $\beredpar$ has the Church-Rosser property.
+\end{thm}
+
+\begin{proof}
+  Immediate from \olref{lem:cont}.
+\end{proof}
+
+\end{document}

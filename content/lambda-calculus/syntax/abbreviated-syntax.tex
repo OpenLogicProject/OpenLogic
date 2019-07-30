@@ -1,0 +1,44 @@
+% Part: lambda-calculus
+% Chapter: syntax
+% Section: abbreviated-syntax
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{syn}{abb}
+\olsection{Abbreviated Syntax}
+
+Terms as defined in \olref[trm]{defn:term} are sometimes cumbersome to
+write, so it is useful to introduce a more concise syntax. We must of
+course be careful to make sure that the terms in the concise notation
+also are uniquely readable.  One widely used version called
+\emph{abbreviated terms} is as follows.
+
+\begin{enumerate}
+\item When parentheses are left out, application takes place from left
+  to right. For example, if $M$, $N$, $P$, and~$Q$ are terms, then
+  $MNPQ$ abbreviates $(((MN)P)Q)$.
+\item Again, when parentheses are left out, lambda abstraction is
+  given the widest scope possible. From example, $\lambd[x][MNP]$ is
+  read as $(\lambd[x][MNP])$.
+\item A lambda can be used to abstract multiple variables. For
+  example, $\lambd[xyz][M]$ is short for
+  $\lambd[x][\lambd[y][\lambd[z][M]]]$.
+\end{enumerate}
+
+For example,
+\[
+\lambd[xy][xxyx \lambd[z][xz]]
+\]
+abbreviates
+\[
+(\lambd[x][(\lambd[y][((((xx)y)x)(\lambd[z][(xz)]))])]).
+\]
+
+\begin{prob}
+Expand the abbreviated term $\lambd[g][(\lambd[x][g (x x)])
+  \lambd[x][g (x x)]]$.
+\end{prob}
+
+\end{document}

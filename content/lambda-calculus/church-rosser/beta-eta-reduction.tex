@@ -1,0 +1,58 @@
+% Part: lambda-calculus
+% Chapter: church-rosser
+% Section: beta-eta-reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{lam}{cr}{be}
+
+\olsection{$\beta\eta$-reduction}
+
+The Church-Rosser property holds for
+$\beta\eta$-reduction ($\bered$).
+
+\begin{lem}\ollabel{lem:one-par}
+  If $M \beredone M'$, then $M \beredpar M'$.
+\end{lem}
+
+\begin{proof} 
+  By induction on the derivation of $M \beredone M'$. If $M \bredone
+  M'$ by $\eta$-conversion (i.e., \olref[syn][eta]{defn:beredone}), we
+  use \olref[pbe]{thm:refl}. The other cases are as in
+  \olref[b]{lem:one-par}.
+\end{proof}
+
+
+\begin{lem}\ollabel{lem:par-red}
+  If $M \beredpar M'$, then $M \bered M'$.
+\end{lem}
+
+\begin{proof} Induction on the derivation of $M \beredpar M'$.
+
+  If the last rule is \olref[pbe]{defn:beredpar5}, then $M$ is
+  $\lambd[x][Nx]$ and $M'$ is $N'$ for some $x$, $N$, $N'$ where $x
+  \notin FV(N)$ and $N \beredpar N'$. Thus we can first reduce
+  $\lambd[x][Nx]$ to $N$ by $\eta$-conversion, followed
+  by the series of $\beredone$ steps that show that $N \bered N'$,
+  which  holds by induction hypothesis.
+\end{proof}
+
+
+\begin{lem}\ollabel{lem:str}
+  $\bered$ is the smallest transitive relation containing $\beredpar$.
+\end{lem}
+
+\begin{proof}
+  As in \olref[b]{lem:str}
+\end{proof}
+
+\begin{thm}\ollabel{thm:cr}
+  $\bered$ satisfies Church-Rosser property.
+\end{thm}
+
+\begin{proof}
+  By \olref[dap]{thm:str}, \olref[pbe]{thm:cr} and \olref{lem:str}.
+\end{proof}
+\end{document}

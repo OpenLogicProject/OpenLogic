@@ -1,12 +1,12 @@
-% Part: computability
-% Chapter: lambda-calculus
+% Part: lambda-calculus
+% Chapter: introduction
 % Section: reduction
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{cmp}{lam}{red}
+\olfileid{lam}{int}{red}
 \olsection{Reduction of Lambda Terms}
 
 What can one do with lambda terms? Simplify them. If $M$ and $N$ are
@@ -25,14 +25,17 @@ also $M[x/N]$. Beware!
 
 Intuitively, $(\lambd[x][M])N$ and $\Subst{M}{N}{x}$ have the same
 meaning; the act of replacing the first term by the second is called
-$\beta$-conversion. More generally, if it is possible convert a
-term $P$ to~$P'$ by $\beta$-conversion of some subterm, one says
-\emph{$P$ $\beta$-reduces to $P'$ in one step}. If $P$ can be
-converted to~$P'$ with any number of one-step reductions (possibly
-none), then $P$ \emph{$\beta$-reduces} to~$P'$. A term that cannot be
-$\beta$-reduced any further is called \emph{$\beta$-irreducible}, or
-$\beta$-normal. I will say ``reduces'' instead of ``$\beta$-reduces,''
-etc., when the context is clear.
+\emph{$\beta$-contraction}. $(\lambd[x][M])N$ is called a \emph{redex}
+and $\Subst{M}{N}{x}$ its \emph{contractum}. Generally, if it is
+possible to change a term $P$ to~$P'$ by $\beta$-contraction of some
+subterm, we say that $P$ \emph{$\beta$-reduces to $P'$ in one step},
+and write $P \redone P'$. If from $P$ we can obtain~$P'$ with some
+number of one-step reductions (possibly none), then $P$
+\emph{$\beta$-reduces} to~$P'$; in symbols, $P \red P'$. A term that
+cannot be $\beta$-reduced any further is called
+\emph{$\beta$-irreducible}, or \emph{$\beta$-normal}. We will say
+``reduces'' instead of ``$\beta$-reduces,'' etc., when the context is
+clear.
 
 Let us consider some examples.
 \begin{enumerate}
