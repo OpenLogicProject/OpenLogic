@@ -17,4 +17,4 @@ all: open-logic-logicaltheory.pdf
 	latexmk -pdf -dvi- -ps- -interaction=nonstopmode $<
 
 clean:	
-	latexmk -c open-logic-sample.tex
+	latexmk -c open-logic-logicaltheory.tex

@@ -1,24 +1,7 @@
-% Open Logic Project
-%
-% driver file open-logic-sample.tex to produce text on letter-size paper
-% with standard layout and margins
-
-% We use the memoir class for maximal flexibility of layout, but any
-% class will do
-
-%\documentclass[b5paper]{memoir}
 \documentclass[a4paper]{memoir}
 
-% \olpath has to point to the location of the OLP main
-% directory/folder.  We're compiling from subdirectory courses/sample,
-% so the main directory is two levels up.
 \newcommand{\olpath}{../../}
-
-% load all the Open Logic definitions. This will also load the
-% local definitions in open-logic-sample-config.sty
 \input{\olpath/sty/open-logic.sty}
-
-% we want all the problems deferred to the end
 \input{\olpath/sty/open-logic-defer.sty}
 
 \problemsperchapter
@@ -38,14 +21,14 @@
 
 
 \usepackage{libertine}
-%\usepackage[libertine]{newtxmath}
+\usepackage[libertine]{newtxmath}
 
 %\usepackage{mathpazo}
 %\usepackage[scaled=0.95]{helvet}
 %\linespread{1.05}
 
 % e-book-friendly version:
-\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}
+%\usepackage[papersize={3.6in,4.8in},hmargin=0.1in,vmargin={0.1in,0.1in}]{geometry}
 
 
 \begin{document}
@@ -104,7 +87,6 @@ Some modified parts from Tim Button's book \textit{Metatheory} is also included 
 This version of the text was compiled on \today. Please check the course' Canvas activity for the most recent version.
 
 If you find typos, errors or have suggestions for improvement please contact your course instructor. 
-	
 
 \tableofcontents*
 
@@ -129,7 +111,7 @@ If you find typos, errors or have suggestions for improvement please contact you
 \OLEndChapterHook
 
 \tagfalse{FOL}
-
+\settexttoken{sentence}{formula}{formulas}
 \chapter{Natural Deduction}
 \olimport*[first-order-logic/proof-systems]{introduction}
 \olimport*[first-order-logic/proof-systems]{natural-deduction}
@@ -146,6 +128,8 @@ If you find typos, errors or have suggestions for improvement please contact you
 %\olimport*[first-order-logic/natural-deduction]{natural-deduction}
 \olimport*[first-order-logic/completeness]{completeness}
 \tagtrue{FOL}
+\settexttoken{sentence}{sentence}{sentences}
+
 \OLEndPartHook
 
 % PART: FIRST-ORDER LOGIC
@@ -176,17 +160,17 @@ If you find typos, errors or have suggestions for improvement please contact you
 \olimport*[first-order-logic/models-theories]{models-theories}
 
 \chapter{Natural Deduction}
-\olimport*[first-order-logic/proof-systems]{introduction}
-\olimport*[first-order-logic/proof-systems]{natural-deduction}
-\olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
-\olimport*[first-order-logic/natural-deduction]{propositional-rules}
-\olimport*[first-order-logic/natural-deduction]{derivations}
-\olimport*[first-order-logic/natural-deduction]{proving-things}
+%\olimport*[first-order-logic/proof-systems]{introduction}
+%\olimport*[first-order-logic/proof-systems]{natural-deduction}
+%\olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
+%\olimport*[first-order-logic/natural-deduction]{propositional-rules}
+%\olimport*[first-order-logic/natural-deduction]{derivations}
+%\olimport*[first-order-logic/natural-deduction]{proving-things}
 \olimport*[first-order-logic/natural-deduction]{quantifier-rules}
 \olimport*[first-order-logic/natural-deduction]{proving-things-quant}
-\olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
-\olimport*[first-order-logic/natural-deduction]{provability-consistency}
-\olimport*[first-order-logic/natural-deduction]{provability-propositional}
+%\olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
+%\olimport*[first-order-logic/natural-deduction]{provability-consistency}
+%\olimport*[first-order-logic/natural-deduction]{provability-propositional}
 \olimport*[first-order-logic/natural-deduction]{provability-quantifiers}
 \olimport*[first-order-logic/natural-deduction]{soundness}
 \olimport*[first-order-logic/natural-deduction]{identity}
@@ -307,10 +291,13 @@ If you find typos, errors or have suggestions for improvement please contact you
 
 \appendix
 
+\part{Appendices}
+
 \olimport*[methods/proofs]{proofs}
 \olimport*[methods/induction]{induction}
 \olimport*[history/biographies]{biographies}
 
+\OLEndPartHook
 
 \backmatter
 
