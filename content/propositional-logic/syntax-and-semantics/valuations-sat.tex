@@ -56,7 +56,6 @@ function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
 \end{align*}
 \end{defn}
 
-
 \begin{explain} 
 The clauses correspond to the following truth tables:
 \begin{center}
@@ -90,7 +89,9 @@ The clauses correspond to the following truth tables:
     $\False$ & $\False$ & $\False$ \\ 
     \hline 
   \end{tabular}
-}{}\iftag{prvAnd,prvOr,prvIf,prvIff}{\\[1em]}{}
+}{}%
+\tagcount{prvNot,prvAnd,prvOr,prvIf}%
+\ifnumgreater{\value{tagnum}}{3}{\\[1em]}{}%
 \iftag{prvIf}{
   \begin{tabular}{|cc||c|} \hline 
     $!A$ & $!B$ & $!A \lif !B$ \\ 
