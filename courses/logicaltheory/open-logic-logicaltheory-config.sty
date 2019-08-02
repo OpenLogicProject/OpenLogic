@@ -42,3 +42,27 @@
 
 \DeclareDocumentCommand \Obj { m } {#1}
 
+
+\DeclareDocumentCommand \Intro { m } {\ensuremath{{#1}\mathrm{I}}}
+
+\DeclareDocumentCommand \Elim { m } {\ensuremath{{#1}\mathrm{E}}}
+
+% - `\FalseInt`, `\FalseCl`: produces name or abbreviation for
+% intuitionistic and classical absurdity rule, e.g., ``$\bot_I$,''
+% ``$\bot_C$''.
+
+\DeclareDocumentMacro \FalseInt {\ensuremath{\lfalse_I}}
+\DeclareDocumentMacro \FalseCl {\ensuremath{\lfalse_C}}
+
+% - `\Discharge{!A}{n}`: typesets a discharged assumption with label
+% $n$, e.g., $[!A]^n$.
+
+\DeclareDocumentCommand \Discharge { m m }{[#1]^{#2}}
+
+% - `\DischargeRule{Rule}{n}`: used in a `prooftree` environment to
+% provide the labels for an inference that discharges an assumption.
+
+\DeclareDocumentCommand \DischargeRule { m m }{
+  \RightLabel{{#1}\ensuremath{{}_{#2}}}}
+  %\LeftLabel{\scriptsize $#2$}
+%}
