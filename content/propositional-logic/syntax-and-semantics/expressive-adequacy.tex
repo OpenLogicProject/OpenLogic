@@ -48,19 +48,19 @@ The general point is, when we are armed with some jointly expressively adequate 
 
 			We now show that there is an equivalent scheme which contains only `$\lnot$' and `$\lor$'. To show do this, we simply consider the following equivalence:
 		\begin{align*}
-		({!A} \land {!B}) &\cong \lnot(\lnot {!A} \lor\lnot {!B})
+		({!A} \land {!B}) &\approx \lnot(\lnot {!A} \lor\lnot {!B})
 		\end{align*}
 		(The details are left as an exercise).
 
 		For the joint expressive adequacy of `$\lnot$' and `$\land$' we note that:
 		\begin{align*}
-		({!A} \lor {!B}) &\cong \lnot(\lnot {!A} \land\lnot {!B})
+		({!A} \lor {!B}) &\approx \lnot(\lnot {!A} \land\lnot {!B})
 		\end{align*}
 
 		To get the last result we note that:
 		\begin{align*}
-		({!A} \lor {!B}) &\cong (\lnot {!A} \lif{!B})\\
-		({!A} \land {!B}) &\cong \lnot({!A} \lif \lnot{!B})
+		({!A} \lor {!B}) &\approx (\lnot {!A} \lif{!B})\\
+		({!A} \land {!B}) &\approx \lnot({!A} \lif \lnot{!B})
 		\end{align*}
 			\end{proof}
 	\end{thm}\noindent
@@ -79,13 +79,13 @@ ${!A}$ & ${!B}$ & ${!A} \mathrel{\uparrow} {!B}$\\
  F & F & T
 \end{tabular}
 \end{center}
- This is often called `the Sheffer stroke', after Harry Sheffer, who used it to show how to reduce the number of logical connectives in Russell and Whitehead's \emph{Principia Mathematica}.\footnote{Sheffer, `A Set of Five Independent Postulates for Boolean Algebras, with application to logical constants,' (1913, \emph{Transactions of the American Mathematical Society} 14.4)} (In fact, Charles Sanders Peirce had anticipated Sheffer by about 30 years, but never published his results.)\footnote{See Peirce, `A Boolian Algebra with One Constant', which dates to c.1880; and Peirce's \emph{Collected Papers}, 4.264--5.} It is quite common, as well, to call it `nand', since its characteristic truth table is the negation of the truth table for `$\land$'.
+ This is often called `the Sheffer stroke', after Harry Sheffer, who used it to show how to reduce the number of logical connectives in Russell and Whitehead's \emph{Principia Mathematica}. It is quite common, as well, to call it `nand', since its characteristic truth table is the negation of the truth table for `$\land$'.
 \begin{prop}\ollabel{prop:upexpressive}`$\uparrow$' is expressively adequate all by itself. 
 	\begin{proof}
 		\Olref{thm:expressive} tells us that `$\lnot$' and `$\lor$' are jointly expressively adequate. So it suffices to show that, given any scheme which contains only those two connectives, we can rewrite it as a semantically equivalent scheme which contains only `$\uparrow$'. As in the proof of the subsidiary cases of \olref{thm:expressive}, then, we simply apply the following equivalences:
 		\begin{align*}
-			\lnot {!A} &\cong ({!A} \uparrow {!A})\\
-			({!A} \lor {!B}) & \cong (({!A} \uparrow {!A}) \uparrow ({!B} \uparrow {!B}))
+			\lnot {!A} &\approx ({!A} \uparrow {!A})\\
+			({!A} \lor {!B}) & \approx (({!A} \uparrow {!A}) \uparrow ({!B} \uparrow {!B}))
 		\end{align*}
 	\end{proof}
 \end{prop}\noindent
@@ -106,8 +106,8 @@ This is sometimes called the `Peirce arrow' (Peirce himself called it `ampheck')
 	\begin{proof}
 	As in \olref{prop:upexpressive}, although invoking the dual equivalences:
 		\begin{align*}
-			\lnot {!A} &\cong ({!A} \downarrow {!A})\\
-			({!A} \land {!B}) & \cong (({!A} \downarrow {!A}) \downarrow ({!B} \downarrow {!B}))
+			\lnot {!A} &\approx ({!A} \downarrow {!A})\\
+			({!A} \land {!B}) & \approx (({!A} \downarrow {!A}) \downarrow ({!B} \downarrow {!B}))
 		\end{align*}
 	\end{proof}
 \end{prop}
@@ -185,8 +185,8 @@ In fact, we can generalise \olref{prop:OrNotAdequate}:
 	\end{center}
 	These connectives have redundant positions, in the sense that the truth value of the overarching scheme only depends upon the truth value of one of the atomic constituents. More precisely:
 		\begin{align*}
-		 	{!A} \circ_9 {!B} &\cong \lnot {!A}\\
-			{!A} \circ_{10} {!B} &\cong \lnot {!B}
+		 	{!A} \circ_9 {!B} &\approx \lnot {!A}\\
+			{!A} \circ_{10} {!B} &\approx \lnot {!B}
 		\end{align*}
 		Consequently, there are many truth functions that they cannot express. In particular, they cannot express either the tautologous truth function (given by `$\circ_1$'), or the contradictory truth function (given by `$\circ_8$'). To show this, it suffices to prove that any scheme whose only connective is either `$\circ_9$' or `$\circ_{10}$' (perhaps several times) is contingent, i.e.\ it is true on at least one line and false on at least one other line. I leave the details of this proof as an exercise.
 		
