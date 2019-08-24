@@ -1,0 +1,164 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{fix}
+\olsection{$\aleph$-Fixed Points}
+
+In \olref[spine][]{chap}, we suggested that Replacement stands in need
+of justification, because it forces the hierarchy to be rather tall.
+Having done some cardinal arithmetic, we can give a little
+illustration of the height of the hierarchy. 
+
+Evidently $0 < \aleph_0$, and $1 < \aleph_1$, and $2 < \aleph_2$\ldots
+and, indeed, the difference in size only gets \emph{bigger} with every
+step. So it is tempting to conjecture that $\kappa < \aleph_\kappa$
+for every ordinal $\kappa$. 
+
+But this conjecture is \emph{false}, given $\ZFC$. In fact, we can
+easily prove that there are \emph{$\aleph$-fixed-points}, i.e.,
+cardinals $\kappa$ such that $\kappa=\aleph_\kappa$. 
+
+\begin{prop}\ollabel{alephfixed}
+There is an $\aleph$-fixed-point.
+\end{prop}
+
+\begin{proof}
+Using recursion, define:
+\begin{align*}
+	\kappa_0 &= 0\\
+	\kappa_{n+1} &= \aleph_{\kappa_n}\\
+	\kappa &= \bigcup_{n < \omega}\kappa_n
+\end{align*}
+Now $\kappa$ is a cardinal by
+\olref[cardinals][classing]{unioncardinalscardinal}. But now:
+\[
+	\kappa = \bigcup_{n < \omega} \kappa_{n+1} = 
+	\bigcup_{n < \omega}\aleph_{\kappa_n} = 
+	\bigcup_{\alpha < \kappa}\aleph_\alpha = \aleph_\kappa 
+\]
+%	By construction, $\kappa$ is the least cardinal greater than each
+%	$\kappa_n$. So $\aleph_\kappa$ is the least cardinal greater than
+%	each $\aleph_{\kappa_n}$, and hence greater than each
+%	$\kappa_{n+1}$. But equally $\kappa$ is the least cardinal greater
+%	than each $\kappa_{n+1} = \aleph_{\kappa_n}$. So $\kappa =
+%	\aleph_\kappa$.
+\end{proof}
+
+Boolos once wrote an article about exactly the $\aleph$-fixed-point we
+just constructed. After noting the existence of $\kappa$, at the start
+of his article, he said:
+\begin{quote}
+	[$\kappa$ is] a \emph{pretty big} number, by the lights of those
+	with no previous exposure to  set theory,  so big, it seems to me,
+	that  it calls into question the truth of any theory, one of whose
+	assertions is the claim that there are at least $\kappa$ objects.
+	\citep[p.~257]{Boolos2000}
+\end{quote}
+And he ultimately concluded his paper by asking:
+\begin{quote}
+	[do] we  suspect that,  however  it  may  have  been  at  the
+	beginning  of  the  story,  by  the  time  we have come thus  far
+	the wheels  are  spinning  and  we  are no longer  listening  to
+	a description  of  anything  that  is the case?
+	\citep[p.~268]{Boolos2000}
+\end{quote}
+If we have, indeed, outrun ``anything that is the case'', then we must
+point the finger of blame directly at Replacement. For it is this
+axiom which allows our proof to work. In which case, one assumes,
+Boolos would need to revisit the claim he made, a few decades earlier,
+that Replacement has ``no undesirable'' consequences (see
+\olref[replacement][extrinsic]{sec}).
+
+But is the existence of $\kappa$ so bad? It might help, here, to
+consider Russell's \emph{Tristram Shandy paradox}. Tristram Shandy
+documents his life in his diary, but it takes him a year to record a
+single day. With every passing year, Tristram falls further and
+further behind: after one year, he has recorded only one day, and has
+lived 364 days unrecorded days; after two years, he has only recorded
+two days, and has lived 728 unrecorded days; after three years, he has
+only recorded three days, and lived 1092 unrecorded
+days \dots\footnote{Forgetting about leap years.} Still, if Tristram
+is \emph{immortal}, Tristram will manage to record every day, for he
+will record the $n$th day on the $n$th year of his life. And so, ``at
+the end of time'', Tristram will have a complete diary. 
+
+Now: why is this so different from the thought that $\alpha$ is
+smaller than $\aleph_\alpha$---and indeed, increasingly, desperately
+smaller---up until $\kappa$, at which point, we catch up, and $\kappa
+= \aleph_\kappa$?
+
+Setting that aside, and assuming we accept $\ZFC$, let's close with a
+little more fun concerning fixed-point constructions. The next three
+results establish, intuitively, that there is a (non-trivial) point at
+which the hierarchy is as wide as it is tall:
+
+\begin{prop}\ollabel{bethfixed}
+There is a $\beth$-fixed-point, i.e.\ a $\kappa$ such that $\kappa =
+\beth_\kappa$
+\end{prop}
+
+\begin{proof}
+As in \olref{alephfixed}, using ``$\beth$'' in place of ``$\aleph$''. 
+\end{proof}
+
+\begin{prop}\ollabel{stagesize}
+$\card{V_{\omega+\alpha}} = \beth_{\alpha}$. If $\omega \ordtimes
+\omega \leq \alpha$, then $\card{V_\alpha} = \beth_\alpha$.
+\end{prop}
+
+\begin{proof}
+The first claim holds by a simple transfinite induction. The second
+claim follows, since if $\omega \ordtimes \omega \leq \alpha$ then
+$\omega + \alpha = \alpha$. To establish this, we use facts about
+ordinal arithmetic from \olref[ord-arithmetic][]{chap}. First note
+that $\omega \ordtimes \omega = \omega \ordtimes (1 \ordplus \omega) =
+(\omega  \ordtimes 1) \ordplus (\omega\ordtimes\omega) = \omega
+\ordplus (\omega \ordtimes \omega)$. Now if $\omega \ordtimes \omega
+\leq \alpha$, i.e., $\alpha = (\omega\ordtimes\omega) \ordplus \beta$
+for some $\beta$, then $\omega \ordplus \alpha = \omega \ordplus
+((\omega \ordtimes \omega) \ordplus \beta) = (\omega \ordplus (\omega
+\ordtimes \omega)) \ordplus \beta = (\omega \ordtimes \omega) \ordplus
+\beta = \alpha$. 
+\end{proof}
+
+\begin{cor}
+There is a $\kappa$ such that $\card{V_\kappa} = \kappa$.
+\end{cor}
+
+\begin{proof}
+Let $\kappa$ be a $\beth$-fixed point, as given by \olref{bethfixed}.
+Clearly $\omega \ordtimes \omega < \kappa$. So $\card{V_\kappa} =
+\beth_\kappa = \kappa$ by \olref{stagesize}.
+\end{proof}
+
+There are as many stages beneath $V_\kappa$ as there are !!{element}s
+of $V_\kappa$. Intuitively, then, $V_\kappa$ is as wide as it is tall.
+This is very Tristram-Shandy-esque: we move from one stage to the next
+by taking \emph{powersets}, thereby making our hierarchy \emph{much}
+bigger with each step. But, ``in the end'', i.e.\ at stage $\kappa$,
+the hierarchy's width catches up with its height. 
+
+One might ask: \emph{How often does the hierarchy's width match its
+height?} The answer is: \emph{As often as there are ordinals.} But
+this needs a little explanation. 
+
+We define a term $\tau$ as follows. For any $A$, let $\tau_0(A) =
+\card{A}$, let $\tau_{n+1}(A) = \beth_{\kappa_n}$, and let $\tau(A) =
+\bigcup_{n < \omega}\kappa_n$. As in \olref{bethfixed}, $\tau(A)$ is a
+$\beth$-fixed point for any $A$, and trivially $\card{A} < \tau(A)$.
+So now consider this recursive definition of
+$\daleth$-fixed-points:\footnote{We're using the Hebrew letter
+``$\daleth$''; it has no standard definition in set theory.}
+\begin{align*}
+\daleth_0 &= 0\\
+\daleth_{\alpha + 1} &= \tau(\daleth_\alpha)\\
+\daleth_\beta &= \bigcup_{\alpha < \beta} \daleth_\alpha&&
+\text{if $\beta$ is a limit}
+\end{align*}
+The construction is defined for all ordinals. Intuitively, then,
+$\daleth$ is an injection from the ordinals to $\beth$-fixed points.
+And, exactly as before, for any ordinal $\alpha$, the stage
+$V_{\daleth_\alpha}$ is as wide as it is tall.
+
+\end{document}

@@ -1,0 +1,202 @@
+% Part: sets-functions-relations
+% Chapter: arithmetisation
+% Section: checking-details
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+	
+\olfileid{sfr}{arith}{check}
+\olsection{Ordered Rings and Fields}
+
+Throughout this chapter, we claimed that certain definitions behave
+``as they ought''. In this technical appendix, we will spell out what
+we mean, and (sketch how to) show that the definitions do behave
+``correctly''. 
+
+In \olref[int]{sec}, we defined addition and multiplication on $\Int$.
+We want to show that, as defined, they endow $\Int$ with the structure
+we ``would want'' it to have. In particular, the structure in question
+is that of a commutative ring.
+
+\begin{defn}
+	A \emph{commutative ring} is a set $S$, equipped with specific elements $0$ and $1$ and operations $+$ and $\times$, satisfying these eight formulas:\footnote{Implicitly, these are all bound with universal quantifiers restricted to $S$. Thus the first principle, more explicitly, is: $(\forall a, b, c \in S)a + (b+c) = (a+b)+c$. And note that the elements $0$ and~$1$ here need not be the natural numbers with the same name.}
+	\begin{align*}
+		\emph{Associativity}&&a + (b+ c) & = (a + b) + c & (a \times b) \times c & = a \times (b\times c)\\
+		\emph{Commutativity}&&a + b &= b+ a  &  a \times b&= b\times a\\ 
+		\emph{Identities}&&a + 0 &= a & a \times 1 &= a\\
+		\emph{Additive Inverse}&&(\exists b\in S)0&=a + b\\
+		\emph{Distributivity}&&a \times (b+ c ) &= (a \times b) + (a \times c)
+	\end{align*}
+\end{defn}
+
+So, to check that the integers form a commutative ring, we just need
+to check that we meet these eight conditions. None of the conditions
+is {difficult} to establish, but this is a bit laborious. For example,
+here is how to prove \emph{Associativity}, in the case of addition:
+
+\begin{proof} 
+Fix $i, j, k \in \Int$. So there are $m_1, n_1, m_2, n_2, m_3, n_3 \in
+\Nat$ such that $i = \equivrep{m_1, n_1}{}$ and $j =
+\equivrep{m_2,n_2}{}$ and $k = \equivrep{m_3, n_3}{}$. (For
+legibility, we write ``$\equivrep{x, y}{}$'' rather than
+``$\equivrep{x, y}{\Intequiv}$''; we'll do this throughout this
+section.) Now:
+\begin{align*}
+	i + (j + k) &= \equivrep{m_1, n_1}{}+(\equivrep{m_2, n_2}{} + \equivrep{m_3, n_3}{}) \\
+	&= \equivrep{m_1,  n_1}{} + \equivrep{m_2+m_3, n_2+n_3}{}\\
+	&= \equivrep{m_1 + (m_2 + m_3), n_1 + (n_2 + n_3)}{}\\
+	&= \equivrep{(m_1 + m_2) + m_3, (n_1 + n_2) + n_3}{}\\
+	&= \equivrep{m_1 + m_2, n_1 + n_2}{} + \equivrep{m_3, n_3}{}\\
+	&= (\equivrep{m_1, n_1}{} + \equivrep{m_2, n_2}{}) + \equivrep{m_3, n_3}{}\\
+	&= (i+j) + k
+\end{align*}
+helping ourselves freely to the behavior of addition on $\Nat$.
+\end{proof}
+
+Equally, here is how to prove \emph{Additive Inverse}:
+
+\begin{proof}
+Fix $i \in \Int$, so that $i = \equivrep{m,n}{}$ for some $m, n \in
+\Nat$. Let $j = \equivrep{n, m}{} \in \Int$. Helping myself to the
+behaviour of the naturals, $(m+n) + 0 = 0 + (n+m)$, so that
+$\tuple{m+n, n+m} \sim_\Int \tuple{0,0}$ by definition, and hence
+$\equivrep{m+n, n+m}{} = \equivrep{0, 0}{} = 0_\Int$. So now $i + j =
+\equivrep{m,n}{}+\equivrep{n,m}{}=\equivrep{m+n, n+m}{}= \equivrep{0,
+0}{} = 0_\Int$.
+\end{proof}
+
+And here is a proof of \emph{Distributivity}:
+
+\begin{proof}
+As above, fix $i = \equivrep{m_1, n_1}{}$ and $j =
+\equivrep{m_2,n_2}{}$ and $k = \equivrep{m_3, n_3}{}$. Now:
+\begin{align*}
+	i \times (j + k) 
+	&= \equivrep{m_1, n_1}{} \times (\equivrep{m_2,n_2}{} + \equivrep{m_3, n_3}{})\\
+	&= \equivrep{m_1, n_1}{} \times \equivrep{m_2 + m_3,n_2+n_3}{}\\
+	&= \equivrep{m_1  (m_2 + m_3) + n_1  (n_2+n_3), m_1  (n_2 + n_3) + n_1 (m_2 + m_3)}{}\\
+	&= \equivrep{m_1 m_2 + m_1m_3 + n_1 n_2+n_1n_3, m_1 n_2 + m_1n_3 + m_2n_1 + m_3n_1}{}\\		
+%		&= \equivrep{m_1 m_2 + n_1n_2 + m_1m_3 + n_1 n_2+n_1n_3, m_1 n_2 + m_1n_3 + m_2n_1 + m_3n_1}{}\\		
+	&= \equivrep{m_1m_2 + n_1n_2, m_1n_2 + m_2n_1}{} + \equivrep{m_1m_3 + n_1n_3, m_1n_3 + m_3n_1}{}\\
+	&= (\equivrep{m_1, n_1}{} \times \equivrep{m_2,n_2}{}) + (\equivrep{m_1, n_1}{} \times  \equivrep{m_3, n_3}{})\\
+	&= (i \times j) + (i \times k)
+\end{align*}
+\end{proof}
+
+We leave it as an exercise to prove the remaining five conditions.
+Having done that, we have shown that $\Int$ constitutes a commutative
+ring, i.e., that addition and multiplication (as defined) behave as
+they should.
+
+\begin{prob}
+Prove that $\Int$ is a commutative ring.
+\end{prob}
+
+But our task is not over. As well as defining addition and
+multiplication over $\Int$, I defined an ordering relation, $\leq$,
+and we must check that this behaves as it should. In more detail, we
+must show that $\Int$ constitutes an \emph{ordered} ring.
+
+\begin{defn}
+An \emph{ordered ring} is a commutative ring which is also equipped
+with a total ordering relation, $\leq$, such that:\footnote{Recall
+from \olref[sfr][rel][ord]{def:strictlinearorder} that a total ordering
+is a relation which is reflexive, transitive, and connected. In the
+context of order relations, connectedness is sometimes called
+\emph{trichotomy}, since for any $a$ and $b$ we have $a \leq b \lor a
+= b \lor a \geq b$.} 
+\begin{align*}
+	a \leq b &\lonlyif a + c \leq b + c\\
+	(a \leq b \land 0 \leq c) &\lonlyif a \times c \leq b \times c
+\end{align*}
+\end{defn}
+
+\begin{prob}
+Prove that $\Int$ is an ordered ring. 
+\end{prob}
+
+As before, it is laborious but routine to show that $\Int$, as
+constructed, is an ordered ring. I will leave that  to you.
+
+This takes care of the integers. But now we need to show very similar
+things of the rationals. In particular, we now need to show that the
+rationals form an ordered \emph{field}, under our given definitions of
+$+$, $\times$, and $\leq$:
+\begin{defn}\ollabel{orderedfield}
+An \emph{ordered field} is an ordered ring which also satisfies:
+\begin{align*}
+	\emph{Multiplicative Inverse}& & (\forall a \in S \setminus \{0\})(\exists b \in S) a\times b& = 1
+\end{align*}
+\end{defn}
+
+Once you have shown that $\Int$ constitutes an ordered ring, it is
+easy but laborious to show that $\Rat$ constitutes an ordered field.
+
+\begin{prob}
+Prove that $\Rat$ is an ordered field.
+\end{prob}
+
+Having dealt with the integers and the rationals, it only remains to
+deal with the reals. In particular, we need to show that $\Real$
+constitutes a \emph{complete} ordered field, i.e., an ordered field
+with the Completeness Property. Now, \olref[cuts]{realcompleteness}
+established that $\Real$ has the Completeness Property. However, it
+remains to run through the (tedious) of checking that $\Real$ is an
+ordered field. 
+
+Before tearing off into \emph{that} laborious exercise, we need to
+check some more ``immediate'' things. For example, we need a guarantee
+that $\alpha + \beta$, as defined, is indeed a \emph{cut}, for any
+cuts $\alpha$ and $\beta$. Here is a proof of that fact:
+
+\begin{proof}	
+Since $\alpha$ and $\beta$ are both cuts, $\alpha + \beta = \Setabs{p
++ q}{p \in \alpha \land q \in \beta}$ is a non-empty proper subset of
+$\Rat$. Now suppose $x < p + q$ for some $p < \alpha$ and $q < \beta$.
+Then $x - p < q$, so $x - p \in \beta$, and $x = p + (x - p) \in
+\alpha + \beta$. So $\alpha + \beta$ is an initial segment of $\Rat$.
+Finally, for any $p + q \in \alpha + \beta$, since $\alpha$ and
+$\beta$ are both cuts, there are $p_1 \in \alpha$ and $q_1 \in \beta$
+such that $p < p_1$ and $q < q_1$; so $p + q < p_1 + q_1 \in \alpha +
+\beta$; so $\alpha + \beta$ has no maximum. 
+\end{proof}
+
+Similar efforts will allow you to check that $\alpha - \beta$ and
+$\alpha \times \beta$ and $\alpha \div \beta$ are cuts (in the last
+case, ignoring the case where $\beta$ is the zero-cut). Again, though,
+I will simply leave this to you. 
+
+\begin{prob}
+Prove that $\Real$ is an ordered field.
+\end{prob}
+
+But here is a small loose end to tidy up. In
+\olref[cuts]{sec}, we suggest that we can take $\sqrt{2} =
+\Setabs{p \in \Rat}{p < 0 \text{ or }p^2 < 2}$. But we do need to show
+that this set is a \emph{cut}. Here is a proof of that fact:
+
+\begin{proof}
+Clearly this is a nonempty proper initial segment of the rationals; so
+it suffices to show that it has no maximum. In particular, it suffices
+to show that, where $p$ is a positive rational with $p^2 < 2$ and $q =
+\frac{2p+2}{p+2}$, both $p < q$ and $q^2 < 2$. To see that $p < q$,
+just note:
+\begin{align*}
+	p^2 &< 2\\
+	p^2 + 2p &< 2 + 2p\\
+	p(p + 2) &< 2 + 2p\\
+	p &< \tfrac{2+2p}{p+2} = q
+\end{align*}
+To see that $q^2 < 2$, just note:
+\begin{align*}
+	p^2 &< 2\\
+	2p^2 + 4p + 2 &< p^2 + 4p+ 4\\
+	4p^2 + 8p + 4 &< 2(p^2 + 4p + 4)\\
+	(2p+2)^2 & <2(p+2)^2\\
+	\tfrac{(2p+2)^2}{(p+2)^2} &< 2\\
+	q^2 &< 2
+\end{align*}
+\end{proof}
+\end{document}

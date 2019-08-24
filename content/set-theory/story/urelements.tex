@@ -1,0 +1,81 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{story}{urelements}
+\olsection{Urelements or Not?}
+
+In the next few chapters, we will try to extract axioms from the
+cumulative-iterative conception of set. But, before going any further,
+I need to say something more about \emph{urelements}. 
+
+The picture of \olref[approach]{sec} allowed us only to form new sets
+from old \emph{sets}. However, we might want to allow that certain
+\emph{non-sets}---cows, pigs, grains of sand, or whatever---can be
+!!{element}s of sets. In that case, we would start with certain basic
+elements, \emph{urelements}, and then say that at each stage $S$ we
+would form ``all possible'' sets consisting of urelements or sets
+formed at stages before $S$ (in any combination). The resulting
+picture would look more like this:
+\begin{center}
+	\begin{tikzpicture}[scale=0.6]
+	\tikzset{cut_here/.style={densely dotted}}
+	\draw (-4,6) -- (-1, 0) -- (1,0) -- (4,6); 
+	\draw[cut_here] (-5,8)--(-4,6);
+	\draw[cut_here] (5,8)--(4,6);
+	\draw(-1.5, 1)--(1.5, 1);
+	\draw(-2, 2)--(2, 2);
+	\draw(-2.5, 3)--(2.5,3);
+	\draw(-3, 4)--(3, 4);
+	\draw(-3.5, 5)--(3.5, 5);
+	\draw(-4, 6)--(4, 6);
+	\node[label] at (2, 0) {\small 0};
+	\node[label] at (2.5, 1) {\small 1};
+	\node[label] at (3, 2) {\small 2};
+	\node[label] at (3.5, 3) {\small 3};
+	\node[label] at (4, 4) {\small 4};
+	\node[label] at (4.5, 5) {\small 5};
+	\node[label] at (5, 6) {\small 6};
+	\end{tikzpicture}
+\end{center}
+So now we have a decision to take: \emph{Should we allow urelements?}
+
+Philosophically, it makes sense to include urelements in our
+theorising. The main reason for this is to make our set theory
+\emph{applicable}. To illustrate the point, recall from chapter
+\olref[sfr][siz][]{chap} that we say that two sets $A$ and $B$ have the same
+size, i.e., $\cardeq{A}{B}$, iff there is a bijection between them.
+Now, if the cows in the field and the pigs in the sty both form sets,
+we can offer a set-theoretical treatment of the claim ``there are as
+many cows as pigs''. But if we ban urelements, so that the cows and
+the pigs do \emph{not} form sets, then that set-theoretical treatment
+will be unavailable. Indeed, we will have no straightforward ability
+to apply set theory to anything other than sets themselves. (For more
+reasons to include urelements, see \citealt[pp.~vi, 24, 50--1]{Potter2004}.)
+
+Mathematically, however, it is quite rare to allow urelements. In
+part, this is because it is \emph{very slightly} easier to formulate
+set theory without urelements. But, occasionally, one finds more
+interesting justifications for excluding urelement from set theory:
+\begin{quote}
+	In accordance with the belief that set theory is the foundation of
+	mathematics, we should be able to capture all of mathematics by
+	just talking about sets, so our variable should not range over
+	objects like cows and pigs. 
+	%But if $C$ is a cow, $\{C\}$ is a set, but not a legitimate mathematical object. 
+	\citep[p.~8]{Kunen1980}
+\end{quote}
+So: a focus on applicability would suggest \emph{including}
+urelements; a focus on a reductive foundational goal (reducing
+mathematics to pure set theory) might suggest \emph{excluding} them.
+Mild laziness, too, points in the direction of excluding urelements. 
+
+We will follow the laziest path. Partly this \emph{is} due to my own
+laziness. Partly, though, there is a pedagogical justification. This
+small book is meant to introduce you to the elements of set theory
+that you would need in order to get started on the philosophy of set
+theory. And most of that philosophical literature discusses set
+theories formulated \emph{without} urelements. So this book will,
+perhaps, be of more use, if it hews fairly closely to that literature.
+
+\end{document}

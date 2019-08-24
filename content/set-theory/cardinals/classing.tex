@@ -1,0 +1,186 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{classing}
+\olsection{Finite, \usetoken{S}{enumerable}, \usetoken{S}{nonenumerable}}
+
+Now that we have been introduced to cardinals, it is worth spending a
+little time talking about different varieties of cardinals;
+specifically, finite, !!{enumerable}, and !!{nonenumerable} cardinals.
+
+Our first two results entail that the finite cardinals will be exactly
+the finite ordinals, which we defined as our \emph{natural numbers}
+back in \olref[z][infinity-again]{defnomega}: 
+
+\begin{prop}\ollabel{finitecardisoequal}
+Let $n, m \in \omega$. Then $n = m$ iff $\cardeq{n}{m}$.
+\end{prop}
+
+\begin{proof}
+\emph{Left-to-right} is trivial. To prove \emph{right-to-left},
+suppose $\cardeq{n}{m}$ although $n \neq m$. By Trichotomy, either $n
+\in m$ or $m \in n$; suppose $n \in m$ without loss of generality.
+Then $n \subsetneq m$ and there is !!a{bijection} $f \colon m \to n$,
+so that $m$ is Dedekind infinite, contradicting
+\olref[z][infinity-again]{naturalnumbersarentinfinite}.
+\end{proof}
+
+\begin{cor}\ollabel{naturalsarecardinals}
+If $n \in \omega$, then $n$ is a cardinal. 
+\end{cor}
+
+\begin{proof}
+Immediate.
+\end{proof}
+
+It also follows that several reasonable notions of what it might mean
+to describe a cardinal as ``finite'' or ``infinite'' coincide:
+\begin{thm}\ollabel{generalinfinitycharacter}For any set $A$, the following are equivalent:
+\begin{enumerate}
+	\item\ollabel{card:notinomega} $\card{A} \notin \omega$, i.e.,
+	$A$ is not a natural number;
+	\item\ollabel{card:omegaplus} $\omega \leq \card{A}$;
+	\item\ollabel{card:infinite} $A$ is Dedekind infinite.
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+From \olref[ord-arithmetic][using-addition]{ordinfinitycharacter},
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}, and
+\olref{naturalsarecardinals}. 
+\end{proof}
+
+This licenses the following \emph{definition} of some notions which we
+used rather informally in \olref[sfr][][]{part}:
+
+\begin{defn}\ollabel{defnfinite}
+We say that $A$ is \emph{finite} iff $\card{A}$ is a natural number,
+i.e., $\card{A} \in \omega$. Otherwise, we say that $A$ is
+\emph{infinite}.
+\end{defn}
+
+But note that this definition is presented against the background of
+$\ZFC$. After all, we needed Well-Ordering to guarantee that every set
+has a cardinality. And indeed, without Well-Ordering, there can be a
+set which is neither finite nor Dedekind infinite. We will return to
+this sort of issue in \olref[choice][]{chap}. For now, we continue to
+rely upon Well-Ordering.
+
+Let us now turn from the finite cardinals to the infinite cardinals.
+Here are two elementary points:
+
+\begin{cor}\ollabel{omegaisacardinal}
+$\omega$ is the least infinite cardinal. 
+\end{cor}
+
+\begin{proof}
+$\omega$ is a cardinal, since $\omega$ is Dedekind infinite and if
+$\cardeq{\omega}{n}$ for any $n \in \omega$ then $n$ would be Dedekind
+infinite, contradicting
+\olref[z][infinity-again]{naturalnumbersarentinfinite}. Now
+$\omega$ is the least infinite cardinal by definition. 
+\end{proof}
+
+\begin{cor}
+Every infinite cardinal is a limit ordinal.
+\end{cor}
+
+\begin{proof}
+Let $\alpha$ be an infinite successor ordinal, so $\alpha = \beta
+\ordplus 1$ for some $\beta$. By \olref{finitecardisoequal}, $\beta$
+is also infinite, so $\cardeq{\beta}{\beta \ordplus 1}$ by
+\olref[ord-arithmetic][using-addition]{ordinfinitycharacter}. Now
+$\card{\beta} = \card{\beta\ordplus 1} = \card{\alpha}$ by
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}, so
+that $\alpha \neq \card{\alpha}$.
+\end{proof}
+
+Now, as early as \olref[sfr][siz][enm-alt]{defn:enumerable}, we flagged we
+can distinguish between !!{enumerable} and !!{nonenumerable} infinite
+sets. That definition naturally leads to the following:
+
+\begin{prop}
+$A$ is !!{enumerable} iff $\card{A} \leq \omega$, and $A$ is
+!!{nonenumerable} iff $\omega < \card{A}$.
+\end{prop}
+
+\begin{proof}
+By Trichotomy, the two claims are equivalent, so it suffices to prove
+that $A$ is !!{enumerable} iff $\card{A} \leq \omega$. For
+\emph{right-to-left}: if $\card{A} \leq \omega$, then
+$\cardle{A}{\omega}$ by
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight} and
+\olref{omegaisacardinal}. For \emph{left-to-right}: suppose $A$ is
+!!{enumerable}; then by \olref[sfr][siz][enm-alt]{defn:enumerable} there
+are three possible cases:
+\begin{enumerate}
+	\item if $A = \emptyset$, then $\card{A} = 0 \in \omega$, by
+	\olref{naturalsarecardinals} and
+	\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+	\item if $\cardeq{n}{A}$, then $\card{A} = n \in \omega$, by
+	\olref{naturalsarecardinals} and
+	\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight}.
+	\item if $\cardeq{\omega}{A}$, then $\card{A} = \omega$, by \olref{omegaisacardinal}.
+\end{enumerate}
+So in all cases, $\card{A} \leq \omega$. 
+\end{proof}
+
+Indeed, $\omega$ has a special place. Whilst there are many countable ordinals:
+
+\begin{cor}
+$\omega$ is the only !!{enumerable} infinite cardinal.
+\end{cor}
+
+\begin{proof}
+Let $\cardfont{a}$ be a !!{enumerable} infinite cardinal. Since
+$\cardfont{a}$ is infinite, $\omega \leq \cardfont{a}$. Since
+$\cardfont{a}$ is a !!{enumerable} cardinal, $\cardfont{a} =
+\card{\cardfont{a}} \leq \omega$. So $\cardfont{a} = \omega$ by
+Trichotomy. \end{proof}
+
+Evidently there are infinitely many cardinals. So we might ask:
+\emph{How many cardinals are there?} The following results show that
+we might want to reconsider that question.
+
+\begin{prop}\ollabel{unioncardinalscardinal}
+If every member of $X$ is a cardinal, then $\bigcup X$ is a cardinal.
+\end{prop}
+
+\begin{proof}
+It is easy to check that $\bigcup X$ is an ordinal. Let $\alpha \in
+\bigcup X$ be an ordinal; then $\alpha \in \cardfont{b} \in X$ for
+some cardinal $\cardfont{b}$. Since $\cardfont{b}$ is a cardinal,
+$\cardless{\alpha}{\cardfont{b}}$. Since $\cardfont{b} \subseteq
+\bigcup X$, we have $\cardle{\cardfont{b}}{\bigcup X}$, and so
+$\cardneq{\alpha}{\bigcup X}$. Generalising, $\bigcup X$ is a
+cardinal.
+\end{proof} 
+
+\begin{thm}\ollabel{lem:NoLargestCardinal}
+There is no largest cardinal.
+\end{thm}
+
+\begin{proof}
+For any cardinal $\cardfont{a}$, Cantor's Theorem
+(\olref[sfr][siz][car]{thm:cantor}) and
+\olref[cardinals][cardsasords]{lem:CardinalsExist} entail that
+$\cardfont{a} < \card{\Pow{\cardfont{a}}}$.
+\end{proof}
+
+\begin{thm}
+The set of all cardinals does not exist.
+\end{thm}
+
+\begin{proof}
+For reductio, suppose $C = \Setabs{\cardfont{a}}{\cardfont{a} \text{
+is a cardinal}}$. Now $\bigcup C$ is a cardinal by
+\olref{unioncardinalscardinal}, so by \olref{lem:NoLargestCardinal}
+there is a cardinal $\cardfont{b} > \bigcup C$. By definition
+$\cardfont{b} \in C$, so $\cardfont{b} \subseteq \bigcup{C}$, so that
+$\cardfont{b} \leq \bigcup C$, a contradiction.
+\end{proof}
+
+You should compare this with both Russell's Paradox and Burali-Forti. 
+
+\end{document}

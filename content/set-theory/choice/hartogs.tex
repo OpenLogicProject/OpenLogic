@@ -1,0 +1,91 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{hartogs}
+\olsection{Comparability and Hartogs' Lemma}
+
+That's the plus side. Here's the minus side. Without Choice, things
+get \emph{messy}. To see why, here is a nice result due to
+\cite{Hartogs1915}:
+
+\begin{lem}[\emph{in $\ZF$}]\ollabel{HartogsLemma}
+For any set $A$, there is an ordinal $\alpha$ such that $\cardnless{\alpha}{A}$
+\end{lem}
+
+\begin{proof}
+If $B \subseteq A$ and $R \subseteq B^2$, then $\tuple{B, R} \subseteq
+V_{\setrank{A}+4}$ by
+\olref[ord-arithmetic][using-addition]{rankcomputation}. So, using
+Separation, consider:
+\[
+	C = \Setabs{\tuple{B, R} \in V_{\setrank{A}+5}}{B\subseteq A 
+	\text{ and $\tuple{B, R}$ is a well-ordering}}
+\]
+Using Replacement and
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}, form the set: 
+\[
+	\alpha = \Setabs{\ordtype{B, R}}{\tuple{B, R} \in C}.
+\]
+By \olref[ordinals][basic]{corordtransitiveord}, $\alpha$ is an
+ordinal, since it is a transitive set of ordinals. After all, if
+$\gamma \in \beta \in \alpha$, then $\beta = \ordtype{B, R}$ for some
+$B \subseteq R$, whereupon $\gamma = \ordtype{B_b, R_b}$ for some $b
+\in B$ by \olref[ordinals][iso]{wellordinitialsegment}, so that
+$\gamma \in \alpha$. 
+
+For reductio, suppose there is !!a{injection} $f \colon \alpha \to A$.
+Then, where:
+\begin{align*}
+	B &= \ran{f}\\
+	R &= \Setabs{\tuple{f(\alpha), f(\beta)} \in A \times A}{\alpha \in \beta}.
+\end{align*}
+Clearly $\alpha = \ordtype{B, R}$ and $\tuple{B, R} \in C$. So $\alpha
+\in \alpha$, which is a contradiction.
+\end{proof}
+
+This entails a deep result:
+
+\begin{thm}[\emph{in $\ZF$}]
+The following claims are equivalent:
+\begin{enumerate}
+	\item\ollabel{equivwo} The Axiom of Well-Ordering
+	\item\ollabel{equivcompare} Either $\cardle{A}{B}$ or
+	$\cardle{B}{A}$, for any sets $A$ and $B$
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+\emph{\olref{equivwo} $\Rightarrow$ \olref{equivcompare}.} Fix $A$ and
+$B$. Invoking \olref{equivwo}, there are well-orderings $\tuple{A, R}$
+and $\tuple{B, S}$. Invoking
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}, let $f \colon
+\alpha \to \tuple{A, R}$ and $g \colon \beta \to \tuple{B, S}$ be
+isomorphisms. By Trichotomy, either $\alpha \in \beta$ or $\alpha =
+\beta$ or $\beta \in \alpha$. In the first two cases $\alpha \subseteq
+\beta$, so 
+  %$1_\alpha \colon \alpha \to \beta$, given by $1_\alpha(\gamma) =
+  %\gamma$, is !!a{injection}; so 
+$\comp{f^{-1}}{g} \colon A \to B$ is !!a{injection}, and hence
+$\cardle{A}{B}$. Similarly if $\beta \in \alpha$ then $\cardle{B}{A}$.
+
+\emph{\olref{equivwo} $\Rightarrow$ \olref{equivcompare}.} Fix $A$; by
+\olref{HartogsLemma} there is some ordinal $\beta$ such that
+$\cardnless{\beta}{A}$. Invoking \olref{equivcompare}, we have
+$\cardle{A}{\beta}$. So there is some !!{injection} $f \colon A \to
+\beta$, and we can use this injection to well-order the elements of
+$A$, by defining an order $\Setabs{\tuple{a, b} \in A \times A}{f(a)
+\in f(b)}$.
+\end{proof}
+
+As an immediate consequence: if Well-Ordering fails, then some sets
+are \emph{literally incomparable} with regard to their size. So, if
+Well-Ordering fails, then transfinite cardinal arithmetic will be
+messy. For example, we will have to abandon the idea that if $A$ and
+$B$ are infinite then $\cardeq{\cardeq{A \disjointsum B}{A \times
+B}}{M}$, where $M$ is the larger of $A$ and $B$ (see
+\olref[card-arithmetic][simp]{cardplustimesmax}). The problem is
+simple: if we cannot \emph{compare} the size of  $A$ and $B$, then it
+is nonsensical to ask which is larger.
+
+\end{document}

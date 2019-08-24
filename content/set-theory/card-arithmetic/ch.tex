@@ -1,0 +1,155 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{card-arithmetic}{ch}
+
+\olsection{The Continuum Hypothesis}
+
+The previous result hints (correctly) that cardinal exponentiation
+would be quite \emph{easy}, if infinite cardinals are guaranteed to
+``play straightforwardly'' with powers of $2$, i.e., (by
+\olref[opps]{lem:SizePowerset2Exp}) with taking powersets. But we
+cannot assume that infinite cardinals \emph{do} play nicely with
+powersets. This section is dedicated to explaining all of this.
+(Although, to be honest, it's more of a \emph{gesture} in the
+direction of something fascinating.)
+
+We will start by introducing some nice notation.
+
+\begin{defn}
+Where $\cardsucc{\cardfont{a}}$ is the least cardinal strictly greater
+than $\cardfont{a}$, we define two infinite sequences:
+\begin{align*}
+	\aleph_{0} &:= \omega & 		
+	\beth_{0} &:= \omega\\
+	\aleph_{\alpha \ordplus 1} &:= \cardsucc{(\aleph_{\alpha})} &
+	\beth_{\alpha+1} &:= \cardexpo{2}{\beth_{\alpha}}\\
+	\aleph_{\alpha} &:= \bigcup_{\beta< \alpha} \aleph_{\beta} &
+	\beth_{\alpha} &:= \bigcup_{\beta < \alpha}\beth_{\beta} & \text{when $\alpha$ is a limit ordinal}.
+	\end{align*}
+\end{defn}
+
+The definition of $\cardsucc{\cardfont{a}}$ is in order, since
+\olref[cardinals][classing]{lem:NoLargestCardinal} tells us that, for each
+cardinal $\cardfont{a}$, there is some cardinal greater than
+$\cardfont{a}$, and Transfinite Induction guarantees that there is a
+\emph{least} cardinal greater than $\cardfont{a}$. The rest of the
+definition of $\cardfont{a}$ is provided by transfinite recursion. 
+
+Cantor introduced this ``$\aleph$'' notation; this is \emph{aleph},
+the first letter in the Hebrew alphabet and the first letter in the
+Hebrew word for ``infinite''. Peirce introduced the ``$\beth$''
+notation; this is \emph{beth}, which is the second letter in the
+Hebrew alphabet.\footnote{Peirce used this notation in a letter to
+Cantor of December 1900. Unfortunately, Peirce also gave a bad
+argument there that $\beth_\alpha$ does not exist for $\alpha \geq
+\omega$.} Now, these notations provide us with infinite cardinals.
+
+\begin{prop}
+Both $\aleph_\alpha$ and $\beth_\alpha$ are cardinals, for every
+ordinal $\alpha$. 
+\end{prop}
+
+\begin{proof}
+Both results hold by a simple transfinite induction. $\aleph_0 =
+\beth_0 = \omega$ is a cardinal by
+\olref[cardinals][classing]{omegaisacardinal}. Assuming $\aleph_\alpha$ and
+$\beth_\alpha$ are both cardinals, $\aleph_{\alpha+1}$ and
+$\beth_{\alpha+1}$ are explicitly defined as cardinals. And the union
+of a set of cardinals is a cardinal, by
+\olref[cardinals][classing]{unioncardinalscardinal}.
+\end{proof}
+
+Moreover, every infinite cardinal is an $\aleph$:
+
+\begin{prop}
+If $\cardfont{a}$ is an infinite cardinal, then $\cardfont{a} =
+\aleph_\gamma$ for some $\gamma$.
+\end{prop}
+
+\begin{proof}
+By transfinite induction on cardinals. For induction, suppose that if
+$\cardfont{b} < \cardfont{a}$ then $\cardfont{b} =
+\aleph_{\gamma_\cardfont{b}}$. If $\cardfont{a} =
+\cardsucc{\cardfont{b}}$ for some $\cardfont{b}$, then $\cardfont{a} =
+\cardsucc{\aleph_{\gamma_\cardfont{b}}}=
+\aleph_{\gamma_\cardfont{b}+1}$. If $\cardfont{a}$ is not the
+successor of any cardinal, then since cardinals are ordinals
+$\cardfont{a} = \bigcup_{\cardfont{b} < \cardfont{a}} \cardfont{b} =
+\bigcup_{\cardfont{b} < \cardfont{a}}{\aleph_{\gamma_\cardfont{b}}}$,
+so $\cardfont{a} = \aleph_\gamma$ where $\gamma =
+\bigcup_{\cardfont{b} < \cardfont{a}}\gamma_\cardfont{b}$. 
+\end{proof}
+
+Since every infinite cardinal is an $\aleph$, this prompts us to ask:
+is every infinite cardinal a~$\beth$? Certainly if that \emph{were}
+the case, then the infinite cardinals would ``play straightforwardly''
+with the operation of taking powersets. Indeed, we would have the
+following:
+
+\
+\\\emph{General Continuum Hypothesis} (GCH). $\aleph_\alpha  = \beth_\alpha$, for all $\alpha$. 
+
+\
+\\Moreover, if GCH held, then we could make some considerable
+simplifications with cardinal exponentiation. In particular, we could
+show that when $\cardfont{b} < \cardfont{a}$, the value of
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$ is trapped by
+$\cardfont{a}\leq \cardexpo{\cardfont{a}}{\cardfont{b}} \leq
+\cardsucc{\cardfont{a}}$. We could then go on to give precise
+conditions which determine which of the two possibilities obtains
+(i.e., whether $\cardfont{a} = \cardexpo{\cardfont{a}}{\cardfont{b}}$
+or $\cardexpo{\cardfont{a}}{\cardfont{b}} =
+\cardsucc{\cardfont{a}}$).\footnote{The condition is dictated by
+\emph{cofinality}; but I will not say any more than that in this
+book.}
+
+But GCH is a \emph{hypothesis}, not a \emph{theorem}. In fact,
+\citet{Godel1938} proved that if $\ZFC$ is consistent, then so is
+$\ZFC + \text{GCH}$. But it later turned out that we can equally add
+$\lnot$GCH to $\ZFC$. Indeed, consider the simplest non-trivial
+\emph{instance} of GCH, namely: 
+
+\
+\\\emph{Continuum Hypothesis} (CH). $\aleph_1 = \beth_1$. 
+
+\
+\\
+\citet{Cohen1963} proved that if $\ZFC$ is consistent then so is $\ZFC
++ \lnot\text{CH}$. 
+
+The Continuum Hypothesis is so-called, since ``the continuum'' is
+another name for the real line, $\Real$.
+\olref[opps]{continuumis2aleph0} tells us that $\card{\Real} =
+\beth_1$. So the Continuum Hypothesis states that there is no cardinal
+between the cardinality of the natural numbers, $\aleph_0 = \beth_0$,
+and the cardinality of the continuum, $\beth_1$.
+
+Given the \emph{independence} of (G)CH from $\ZFC$, what should say
+about their \emph{truth}? Well, there is \emph{much} to say. Indeed,
+and much fertile recent work in set theory has been directed at
+investigating these issues. But two quick points are certainly worth
+emphasising. 
+
+First: it does not \emph{immediately} follow from these formal
+independence results that either GCH or CH is \emph{indeterminate} in
+truth value. After all, maybe we just need to add more axioms, which
+strike us as natural, and which will settle the question one way or
+another. G\"odel himself suggested that this was the right response. 
+
+Second: the independence of CH from $\ZFC$ is certainly
+\emph{striking}, but it is certainly not \emph{incredible} (in the
+literal sense). The point is simply that, for all $\ZFC$ tells us,
+moving from cardinals to their successors may involve a less blunt
+tool than simply taking powersets.
+ %The operation of taking powersets moves us from one stage of the
+ %hierarchy to its successor stage (from $V_{\alpha}$ to
+ %$V_{\alpha+1}$). 
+
+With those two observations made, if you want to know more, you will
+now have to turn to the various philosophers and mathematicians with
+horses in the race. (Though you may want to start with the very nice
+discussion in \citeauthor{Potter2004} \citeyear[\S15.6]{Potter2004}.) 
+
+\end{document}

@@ -1,0 +1,105 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{expotough}
+
+\olsection[Some Simplifications]{Some Simplification with Cardinal Exponentiation}
+
+Whilst defining $\canonord$ was a little involved, the upshot is a
+useful result concerning cardinal addition and multiplication,
+\olref[simp]{cardplustimesmax}. Transfinite exponentiation, however,
+cannot be simplified so straightforwardly. To explain why, I start
+with a result which extends a familiar pattern from the finitary case
+(though its proof  at quite a high level of abstraction):
+
+\begin{prop}\ollabel{simplecardexpo}
+$\cardexpo{\cardfont{a}}{\cardfont{b} \cardplus \cardfont{c}} =
+\cardexpo{\cardfont{a}}{\cardfont{b}} \cardtimes
+\cardexpo{\cardfont{a}}{\cardfont{c}}$ and
+$\cardexpo{(\cardexpo{\cardfont{a}}{\cardfont{b}})}{\cardfont{c}} =
+\cardexpo{\cardfont{a}}{\cardfont{b} \cardtimes \cardfont{c}}$, for
+any cardinals $\cardfont{a}, \cardfont{b}, \cardfont{c}$.
+\end{prop}
+
+\begin{proof}
+For the first claim, consider a function $f \colon
+(\cardfont{b}\disjointsum\cardfont{c}) \to \cardfont{a}$. Now ``split
+this'', by defining $f_\cardfont{b}(\beta) = f(\beta, 0)$ for each
+$\beta \in \cardfont{b}$, and $f_\cardfont{c}(\gamma) = f(\gamma, 1)$
+for each $\gamma \in \cardfont{c}$. The map $f \mapsto
+(f_{\cardfont{b}} \times f_\cardfont{c})$ is !!a{bijection}
+$\funfromto{\cardfont{b} \disjointsum \cardfont{c}}{\cardfont{a}} \to
+(\funfromto{\cardfont{b}}{\cardfont{a}} \times
+\funfromto{\cardfont{c}}{\cardfont{a}})$. 
+
+For the second claim, consider a function $f \colon \cardfont{c} \to
+(\funfromto{\cardfont{b}}{\cardfont{a}})$; so for each $\gamma \in
+\cardfont{c}$ we have some function $f(\gamma) \colon \cardfont{b} \to
+\cardfont{a}$. Now define $f^*(\beta, \gamma) = (f(\gamma))(\beta)$
+for each $\tuple{\beta, \gamma} \in \cardfont{b} \times \cardfont{c}$.
+The map $f \mapsto f^*$ is !!a{bijection}
+$\funfromto{\cardfont{c}}{(\funfromto{\cardfont{b}}{\cardfont{a}})}
+\to \funfromto{\cardfont{b} \cardtimes \cardfont{c}}{\cardfont{a}}$. 
+\end{proof}
+
+Now, what we would \emph{like} is an easy way to compute
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$ when we are dealing with
+infinite cardinals. Here is a nice step in this direction:
+
+\begin{prop}\ollabel{cardexpo2reduct}
+If $2 \leq \cardfont{a} \leq \cardfont{b}$ and $\cardfont{b}$ is
+infinite, then $\cardexpo{\cardfont{a}}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$
+\end{prop}
+
+\begin{proof}
+\begin{align*}
+	\cardexpo{2}{\cardfont{b}} &\leq 
+	\cardexpo{\cardfont{a}}{\cardfont{b}}\text{, as $2 \leq \cardfont{a}$}\\
+	&\leq \cardexpo{(2^\cardfont{a})}{\cardfont{b}}
+	\text{, by \olref[opps]{lem:SizePowerset2Exp}}\\
+	&= \cardexpo{2}{\cardfont{a} \cardtimes \cardfont{b}}
+	\text{, by \olref{simplecardexpo}} \\
+	&= \cardexpo{2}{\cardfont{b}}
+	\text{, by \olref[simp]{cardplustimesmax}}
+\end{align*}
+\end{proof}
+
+We should not really expect to be able to simplify this any further,
+since $\cardfont{b} < \cardexpo{2}{\cardfont{b}}$ by
+\olref[card-arithmetic][opps]{lem:SizePowerset2Exp}.
+However, this does not tell us what to say about
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$ when $\cardfont{b} <
+\cardfont{a}$. Of course, if $\cardfont{b}$ is \emph{finite}, we know
+what to do.
+
+\begin{prop}
+If $\cardfont{a}$ is infinite and $n \in \omega$ then
+$\cardexpo{\cardfont{a}}{n} = \cardfont{a}$
+\end{prop}
+
+\begin{proof}
+$\cardexpo{\cardfont{a}}{n} = \cardfont{a} \cardtimes \cardfont{a}
+\cardtimes \ldots \cardtimes \cardfont{a} = \cardfont{a}$, by $n-1$
+applications of \olref[simp]{cardplustimesmax}.
+\end{proof}
+
+Additionally, in certain other cases, we can control the size of
+$\cardexpo{\cardfont{a}}{\cardfont{b}}$:
+
+\begin{prop}
+If $2 \leq \cardfont{b} < \cardfont{a} \leq
+\cardexpo{2}{\cardfont{b}}$ and $\cardfont{b}$ is infinite, then
+$\cardexpo{\cardfont{a}}{\cardfont{b}} = \cardexpo{2}{\cardfont{b}}$
+\end{prop}
+
+\begin{proof}
+$\cardexpo{2}{\cardfont{b}}\leq \cardexpo{\cardfont{a}}{\cardfont{b}}
+\leq \cardexpo{(\cardexpo{2}{\cardfont{b}})}{\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}\cardtimes\cardfont{b}} =
+\cardexpo{2}{\cardfont{b}}$, reasoning as in \olref{cardexpo2reduct}.
+\end{proof}
+
+But, beyond this point, things become rather more subtle.
+
+\end{document}

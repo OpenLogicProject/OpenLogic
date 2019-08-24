@@ -1,0 +1,135 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{infinity-again}	
+\olsection{Infinity}
+
+We already have enough axioms to ensure that there are infinitely many
+sets (if there are any). For suppose some set exists, and so
+$\emptyset$ exists (by \olref[sth][z][sep]{prop:emptyexists}). Now for
+any set~$x$, the set $x \cup \{x\}$ exists by
+\olref[sth][z][pairs]{prop:pairsconsequences}. So, applying this a few
+times, we will get sets as follows:
+\begin{enumerate}
+	\item[0.] $\emptyset$ %& $0$ & stage $0$\\
+	\item[1.] $ \{\emptyset\}$ %& $1$ & stage $1$\\
+	\item[2.] $\{\emptyset, \{\emptyset\}\}$ %& $2$ & stage $2$\\
+	\item[3.] $\{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}$ %&$3$ & stage $3$\\
+	\item[4.] $\{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}, \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}\}$% & $4$ & stage $4$ 
+\end{enumerate}
+and we can check that each of these sets is distinct. 
+
+We have started the numbering from $0$, for a few reasons. But one of
+them is this. It is not that hard to check that the set we have
+labelled ``$n$'' has exactly $n$ members, and (intuitively) is formed
+at the $n$th stage. 
+
+But. This gives us \emph{infinitely many} sets, but it does not
+guarantee that there is an \emph{infinite set}, i.e.\ a set with
+infinitely many members. And this really matters: unless we can find a
+(Dedekind) infinite set, we cannot construct a Dedekind algebra. But
+we want a Dedekind algebra, so that we can treat it as the set of
+natural numbers. (Compare
+\olref[sfr][infinite][dedekindsproof]{sec}.)
+
+Importantly, the axioms we have laid down so far do \emph{not}
+guarantee the existence of any infinite set. So we have to lay down a
+new axiom:
+
+\begin{axiom}[Infinity]
+There is a set, $I$, such that $\emptyset \in I$ and $(\forall x \in I) x \cup \{x\} \in I$.\\
+	$\exists I((\exists o \in I)\forall x(x \notin o) \land (\forall x \in I)(\exists s \in I)\forall z(z \in s \liff (z \in x \lor z = x)))$
+\end{axiom}
+
+It is easy to see that the set $I$ given to us by the Axiom of
+Infinity is Dedekind infinite. Its distinguished element is
+$\emptyset$, and the injection on $I$ is given by $s(x) = x\cup
+\{x\}$. Now,
+\olref[sfr][infinite][dedekind]{thm:DedekindInfiniteAlgebra} showed
+how to extract a Dedekind Algebra from a Dedekind infinite set; and we
+will treat this as our set of natural numbers. More precisely:
+\begin{defn}\ollabel{defnomega}
+Let $I$ be any set given to us by the Axiom of Infinity. Let $s$
+be the function $s(x) = x \cup \{x\}$. Let $\omega =
+\closureofunder{s}{\emptyset}$. We call the members of $\omega$ the
+\emph{natural numbers}, and say that $n$ is the result of $n$-many
+applications of $s$ to $\emptyset$.
+\end{defn}
+
+You can now look back and check that the set labelled ``$n$'', a few
+paragraphs earlier, will be treated \emph{as} the number $n$. 
+
+We will discuss this significance of this stipulation in
+\olref[sth][z][nat]{sec}. For now, it enables us to prove an
+intuitive result:
+
+\begin{prop}\ollabel{naturalnumbersarentinfinite}
+No natural number is Dedekind infinite.
+\end{prop}
+
+\begin{proof}
+The proof is by induction, i.e.,
+\olref[sfr][infinite][induction]{thm:dedinfiniteinduction}. Clearly $0
+= \emptyset$ is not Dedekind infinite. For the induction step, we will
+establish the contrapositive: if (absurdly) $s(n)$ is Dedekind
+infinite, then $n$ is Dedekind infinite. 
+
+So suppose that $s(n)$ is Dedekind infinite, i.e., there is some
+!!{injection} $f$ with $\ran{f}\subsetneq \dom{f} = s(n) = n \cup
+\{n\}$. There are two cases to consider. 
+
+\emph{Case 1: $n \notin \ran{f}$.} Let $g = \funrestrictionto{f}{n}$.
+Now $\ran{f} \subseteq n$, and $f(n) \in n$, so that $\ran{g} =
+\ran{f} \setminus \{f(n)\} \subsetneq n = \dom{g}$. Hence $n$ is
+Dedekind infinite. 
+
+\emph{Case 2: $n \in \ran{f}$.} Fix $m \in \dom{f} \setminus \ran{f}$, and define a function $f^*$:
+\[
+f^*(x) = 
+	\begin{cases}
+		f(x) & \text{if $x \neq f^{-1}(n)$}\\
+		m & \text{if $x = f^{-1}(n)$}
+	\end{cases}
+\]
+So $f^*$ and $f$ agree everywhere, except that $f^*(f^{-1}(n)) = m
+\neq n = f(f^{-1}(n))$. Since $f$ is !!a{injection}, $n \notin
+\ran{f^*}$; and $\ran{f^*} \subsetneq \dom{f^*} = s(n)$. Now $n$ is
+Dedekind infinite, as in Case 1.
+\end{proof}
+
+The question remains, though, of how we might \emph{justify} the Axiom
+of Infinity. The short answer is that we will need to another
+principle to the story we have been telling. That principle is as
+follows:
+\begin{enumerate}
+	\item[] \stagesinf. There is an infinite stage. That is, there is a stage which (a) is not the first stage, and which (b) has some stages before it, but which (c) has no immediate predecessor.
+\end{enumerate}
+The Axiom of Infinity follows straightforwardly from this principle.
+We know that natural number $n$ is formed at stage $n$. So the set
+$\omega$ is formed at the first infinite stage. And $\omega$ itself
+witnesses the Axiom of Infinity. 
+
+This, however, simply pushes us back to the question of how we might
+justify \stagesinf. As with \stagessucc, it was not an explicit part
+of the story we told about the cumulative-iterative hierarchy. But
+more than that: nothing in the very idea of an iterative hierarchy, in
+which sets are formed stage by stage, forces us to think that the
+process involves an \emph{infinite} stage. It seems perfectly coherent
+to think that the stages are ordered like the natural numbers. 
+
+This, however, gives rise to an obvious problem. In
+\olref[sfr][infinite][dedekindsproof]{sec}, we considered
+Dedekind's ``proof'' that there is a Dedekind infinite set (of
+thoughts). This may not have struck you as very satisfying. But if
+\stagesinf{} is not ``forced upon us'' by the iterative conception of
+set (or by ``the laws of thought''), then we are still left without an
+intrinsic justification for the claim that there is a Dedekind
+infinite set.
+
+There is much more to say here, of course. But hopefully you are now
+at a point to start thinking about what it might \emph{take} to
+justify an axiom (or principle). In what follows we will simply take
+\stagesinf{} for granted.
+
+\end{document}

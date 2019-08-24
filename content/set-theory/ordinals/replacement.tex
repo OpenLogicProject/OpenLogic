@@ -1,0 +1,68 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{replacement}
+\olsection{Replacement}
+
+In \olref{sec}, we motivated the introduction of ordinals by
+suggesting that we could treat them as order-types, i.e., canonical
+proxies for well-orderings. In order for that to work, we would need
+to prove that \emph{every well-ordering is isomorphic to some
+ordinal}. This would allow us to define $\ordtype{A, <}$ as the
+ordinal $\alpha$ such that $\tuple{A, <} \isomorphic \alpha$. 
+
+Unfortunately, we \emph{cannot} prove the desired result only the
+Axioms we provided in earlier chapters. (We will see why in
+\olref[replacement][strength]{sec}, but for now: we can't.) We need a
+new thought, and here it is:
+
+\begin{axiom}[Scheme of Replacement]
+For any formula $\phi(x, y)$,\footnote{Which may have parameters.} this is an axiom: 
+	\\for any $A$, if $(\forall x \in A)\exists\bang y\phi(x,y)$, {then} $\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
+\end{axiom}
+
+As with Separation, this is a scheme: it yields infinitely many
+axioms, for each of the infinitely many different $\phi$'s. And it can
+equally well be (and normally is) written down thus:
+
+\
+\\\emph{For any formula $\phi(x,y)$ which does not contain ``$B$'',\footnote{Which may have parameters.} this is an axiom:
+\\$\forall A[(\forall x \in A)\exists \bang y \phi(x,y) \lonlyif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]$}
+
+\
+\\ 
+On first encounter, however, this is quite a tangled formula. The
+following quick consequence of Replacement probably gives a
+\emph{clearer} expression to the intuitive idea we are working with:
+
+\begin{cor}
+For any term $\tau(x)$,\footnote{Which may have parameters.} and any set $A$, this set exists:
+\[
+	\Setabs{\tau(x)}{x \in A} = \Setabs{y}{(\exists x \in A)y = \tau(x)}.
+\]
+\end{cor}
+
+\begin{proof}
+Since $\tau$ is a \emph{term}, $\forall x \exists \bang y\,  \tau(x) =
+y$. A fortiori, $(\forall x \in A)\exists\bang y\, \tau(x) = y$. So
+$\Setabs{y}{(\exists x \in A)\tau(x) = y}$ exists by Replacement.
+\end{proof}
+
+This suggests that ``Replacement'' is a good name for the Axiom: given
+a set $A$, you can form a new set, $\Setabs{\tau(x)}{x \in A}$, by
+replacing every member of $A$ with its image under $\tau$. Indeed,
+following the notation for the image of a set under a function, we
+might write $\funimage{\tau}{A}$ for $\Setabs{\tau(x)}{x \in A}$.
+
+Crucially, however, $\tau$ is a \emph{term}. It need not be (a name
+for) a \emph{function}, in the sense of \olref[sfr][fun][rel]{sec},
+i.e., a certain set of ordered pairs. After all, if $f$ is a function
+(in that sense), then the set $\funimage{f}{A} = \Setabs{f(x)}{x \in
+A}$ is just a particular subset of $\ran{f}$, and that is already
+guaranteed to exist, just using the axioms of~$\Zminus$.\footnote{Just
+consider $\Setabs{y \in \bigcup \bigcup f}{(\exists x \in A)y =
+f(x)}$.} Replacement, by contrast, is a \emph{powerful} addition to
+our axioms, as we will see in chapter \olref[sth][replacement][]{chap}.
+
+\end{document}

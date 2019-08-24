@@ -1,0 +1,96 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{Valphabasic}
+\olsection{Basic Properties of Stages}
+
+To bring out the foundational importance of the definition of the
+$V_\alpha$s, we will start with a few results about them.
+
+\begin{lem}\ollabel{Valphabasicprops}
+For each ordinal $\alpha$:
+\begin{enumerate}
+	\item\ollabel{Valphatrans} Each $V_\alpha$ is a transitive set.
+	\item\ollabel{Valphasublative} Each $V_\alpha$ is a
+	\emph{sublative} set,\footnote{There's no standard terminology for
+	``sublativity''. But this seems good.} i.e., $\forall A(\exists
+	B(A \subseteq B \in V_\alpha) \lonlyif A \in V_\alpha)$.
+	\item\ollabel{Valphacum} If $\gamma \in \alpha$, then $V_\gamma
+	\in V_\alpha$ (and hence also $V_\gamma \subseteq V_\alpha$ by
+	\olref{Valphatrans})
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+We prove this by a (simultaneous) transfinite induction.  For
+induction, suppose that \olref{Valphatrans}--\olref{Valphacum} holds
+for each ordinal $\beta < \alpha$. 
+
+The case of $\alpha = \emptyset$ is trivial. 
+
+Suppose $\alpha = \ordsucc{\beta}$. To show \olref{Valphacum}, if
+$\gamma \in \alpha$ then $V_\gamma \subseteq V_\beta$ by hypothesis,
+so $V_\gamma \in \Pow{V_\beta} = V_\alpha$. To show
+\olref{Valphasublative}, suppose $A \subseteq B \in V_\alpha$ i.e.\ $A
+\subseteq B \subseteq V_\beta$; then $A \subseteq V_\beta$ so $A \in
+V_\alpha$. To show \olref{Valphatrans}, note that if $x \in A \in
+V_\alpha$ we have $A \subseteq V_\beta$, so $x \in V_\beta$, so $x
+\subseteq V_\beta$ as $V_\beta$ is transitive by hypothesis, and so $x
+\in V_\alpha$. 
+
+Suppose $\alpha$ is  a limit ordinal. To show \olref{Valphacum}, if
+$\gamma \in \alpha$ then $\gamma \in \ordsucc{\gamma} \in \alpha$, so
+that $V_\gamma \in V_{\ordsucc{\gamma}}$ by assumption, hence
+$V_\gamma \in \bigcup_{\beta \in \alpha} V_\beta = V_\alpha$. To show
+\olref{Valphatrans} and \olref{Valphasublative}, just observe that a
+union of transitive (respectively, sublative) sets is transitive
+(respectively, sublative). 
+\end{proof}
+
+\begin{lem}\ollabel{Valphanotref}
+For each ordinal $\alpha$, $V_\alpha \notin V_\alpha$.
+\end{lem}
+
+\begin{proof}
+By transfinite induction. Evidently $V_\emptyset \notin V_\emptyset$. 
+
+If $V_{\ordsucc{\alpha}} \in V_{\ordsucc{\alpha}} = \Pow{V_\alpha}$,
+then $V_{\ordsucc{\alpha}} \subseteq V_\alpha$; and since $V_\alpha
+\in V_{\ordsucc{\alpha}}$ by \olref{Valphabasicprops}, we have
+$V_\alpha \in V_\alpha$. Conversely: if $V_\alpha \notin V_\alpha$
+then $V_{\ordsucc{\alpha}} \notin V_{\ordsucc{\alpha}}$
+
+If $\alpha$ is a limit and $V_\alpha \in V_\alpha = \bigcup_{\beta \in
+\alpha}V_\beta$, then $V_\alpha \in V_\beta$ for some $\beta \in
+\alpha$; but then also $V_\beta \in V_\alpha$ so that $V_\beta \in
+V_\beta$ by \olref{Valphabasicprops} (twice). Conversely, if $V_\beta
+\notin V_\beta$ for all $\beta \in \alpha$, then $V_\alpha \notin
+V_\alpha$.
+\end{proof}
+
+\begin{cor}
+For any ordinals $\alpha, \beta$: $\alpha \in \beta$ iff $V_\alpha \in V_\beta$
+\end{cor}
+
+\begin{proof}
+\Olref{Valphabasicprops} gives one direction. Conversely, suppose $V_\alpha \in V_\beta$. Then $\alpha \neq \beta$ by \olref{Valphanotref}; and $\beta \notin \alpha$, for otherwise we would have $V_\beta \in V_\alpha$ and hence $V_\beta \in V_\beta$ by by \olref{Valphabasicprops} (twice), contradicting \olref{Valphanotref}. So $\alpha \in \beta$ by Trichotomy.
+\end{proof}
+
+All of this allows us to think of each $V_\alpha$ as the $\alpha$th
+stage of the hierarchy. Here is why.
+
+Certainly our $V_\alpha$s can be thought of as being formed in an
+\emph{iterative} process, for our use of ordinals tracks the notion of
+iteration. Moreover, if one stage is formed before the other, i.e.\
+$V_\beta \in V_\alpha$, i.e., $\beta \in \alpha$, then our process of
+formation is \emph{cumulative}, since $V_\beta \subseteq V_\alpha$.
+Finally, we are indeed forming \emph{all} possible collections of sets
+that were available at any earlier stage, since any successor stage
+$V_{\ordsucc{\alpha}}$ is the power-set of its predecessor $V_\alpha$.
+
+In short: with $\ZFminus$, we are \emph{almost} done, in articulating
+our vision of the cumulative-iterative hierarchy of sets. (Though, of
+course, we still need to justify Replacement.)
+
+\end{document}

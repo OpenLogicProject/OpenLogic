@@ -1,0 +1,103 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{sep}
+\olsection{Separation}
+
+I will start with a principle to replace Na\"{i}ve Comprehension:
+
+\begin{axiom}[Scheme of Separation] For every formula
+$\phi(x)$,\footnote{Which may have parameters; for an explanation of
+what this means, see the discussion immediately after
+\olref[sfr][infinite][induction]{natinductionschema}.} this is an
+axiom: for any $A$, the set $\Setabs{x \in A}{\phi(x)}$ exists.
+\end{axiom}
+
+Note that this is not a single axiom. It is a \emph{scheme} of axioms.
+There are \emph{infinitely many} Separation axioms; one for every
+formula. The scheme can equally well be (and normally is) written down
+as follows:
+
+\ \\\emph{For any formula $\phi(x)$ which does not contain
+``$S$'',\footnote{But which may contain parameters} this is an axiom:
+\\$\forall A \exists S \forall x(x \in S \liff (\phi(x) \land x \in
+A))$.}
+
+\ \\Separation is immediately justified by our cumulative-iterative
+conception of sets we have been telling. To see why, let $A$ be a set.
+So $A$ is formed by some stage, $S$ (by \stageshier). Since $A$ was
+formed at stage $S$, all of $A$'s members were formed before stage $S$
+(by \stagesacc). Now in particular, consider all the sets which are
+members of $A$ and which also satisfy $\phi$; clearly all of these
+sets, too, were formed before stage $S$. So they are formed into a set
+$\Setabs{x \in A}{\phi(x)}$ at stage $S$ too (by \stagesacc). 
+
+Unlike Na\"ive Comprehension, this avoid Russell's Paradox. For we
+cannot simply assert the existence of the set $\Setabs{x}{x \notin
+x}$. Rather, \emph{given} some set $A$, I can assert the existence of
+the set $R_A = \Setabs{x \in A}{x \notin x}$. But all this proves is
+that $R_A \notin R_A$ and $R_A \notin A$, none of which is very
+worrying. 
+
+However, Separation has an immediate and striking consequence:
+
+\begin{thm}\ollabel{thm:NoUniversalSet}
+There is no \emph{universal} set, i.e., $\Setabs{x}{x = x}$ does not exist.
+\end{thm}
+
+\begin{proof}
+For reductio, suppose $V$ is a universal set. Then by Separation, $R =
+\Setabs{x \in V}{x \notin x} = \Setabs{x}{x \notin x}$ exists,
+contradicting Russell's Paradox.
+\end{proof}
+
+The absence of a universal set---indeed, the open-endedness of the
+hierarchy of sets---is one of the most fundamental ideas behind the
+cumulative-iterative conception. So it is worth seeing that,
+intuitively, we could reach it via a different route. A universal set
+must be !!a{element} of itself. But, on our cumulative-iterative
+conception, every set appears (for the first time) in the hierarchy at
+the first stage immediately after all of its !!{element}s. But this
+entails that \emph{no} set is self-membered. For any self-membered set
+would have to first occur immediately after the stage at which it
+first occurred, which is absurd. (We will see in
+\olref[sth][spine][rank]{defnsetrank} how to make this explanation
+more rigorous, by using the notion of the ``rank'' of a set. However,
+we will need to have a few more axioms in place to do this.)
+
+Here are a few more consequences of Separation and Extensionality.
+
+\begin{prop}\ollabel{prop:emptyexists}
+If any set exists, then $\emptyset$ exists.
+\end{prop}
+
+\begin{proof}
+If $A$ is a set, $\emptyset = \Setabs{x \in A}{x \neq x}$ exists by Separation.
+\end{proof}
+
+\begin{prop}
+$A \setminus B$ exists for any sets $A$ and $B$
+\end{prop}
+
+\begin{proof}
+$A \setminus B = \Setabs{x \in A}{x \notin B}$ exists by Separation.
+\end{proof}
+
+It also turns out that (almost) arbitrary intersections exist:
+
+\begin{prop}\ollabel{prop:intersectionsexist}
+If $A \neq \emptyset$, then $\bigcap A = \Setabs{x}{(\forall y \in A)x \in y}$ exists.
+\end{prop}
+
+\begin{proof}
+Let $A \neq \emptyset$, so there is some $c \in A$. Then $\bigcap A =
+\Setabs{x}{(\forall y \in A)x \in y} = \Setabs{x \in c}{(\forall y \in
+A)x \in y}$, which exists by Separation. 
+\end{proof}
+
+Note the condition that $A \neq \emptyset$, though; for $\bigcap
+\emptyset$ would be the universal set, vacuously, contradicting
+\olref{thm:NoUniversalSet}.
+
+\end{document}

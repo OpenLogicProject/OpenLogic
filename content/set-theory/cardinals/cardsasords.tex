@@ -1,0 +1,128 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{cardsasords}
+\olsection{Cardinals as Ordinals}
+
+In fact, our theory of cardinals will just make (shameless) use of our
+theory of ordinals. That is: we will just define cardinals as certain
+specific ordinals. In particular, we will offer the following:
+
+\begin{defn}\ollabel{defcardinalasordinal}
+If $A$ can be well-ordered, then $\card{A}$ is the least ordinal
+$\gamma$ such that $\cardeq{A}{\gamma}$. For any ordinal $\gamma$, we
+say that $\gamma$ is a \emph{cardinal} iff $\gamma = \card{\gamma}$.
+\end{defn}
+
+We just used the phrase ``$A$ can be well-ordered''. As is almost
+always the case in mathematics, the modal locution here is just a
+hand-waving gloss on an existential claim: to say ``$A$ can be
+well-ordered'' is just to say ``there is a relation which
+well-orders~$A$''. 
+
+But there is a snag with \olref{defcardinalasordinal}. We would like
+it to be the case that \emph{every} set has a size, i.e., that
+$\card{A}$ exists for every~$A$. The definition we just gave, though,
+begins with a conditional: ``\emph{If} $A$ can be
+well-ordered\ldots''. If there is some set $A$ which cannot be
+well-ordered, then our definition will simply fail to define an object~$\card{A}$.
+
+So, to use \olref{defcardinalasordinal}, we need a guarantee that
+every set can be well-ordered. Sadly, though, this guarantee is
+unavailable in~$\ZF$. So, if we want to use
+\olref{defcardinalasordinal}, there is no alternative but to add a new
+axiom, such as:
+\begin{axiom}[Well-Ordering]
+Every set can be well-ordered.
+\end{axiom}
+We will discuss whether the Well-Ordering Axiom is acceptable in
+\olref[choice][]{chap}. From now on, though, we will simply help
+ourselves to it. And, using it, it is quite straightforward to prove
+that cardinals (as defined in \olref{defcardinalasordinal}) exist and
+behave nicely:
+
+\begin{lem}\ollabel{lem:CardinalsExist}
+For every set $A$:
+\begin{enumerate}
+	\item\ollabel{cardaexists} $\card{A}$ exists and is unique;
+	\item\ollabel{cardaapprox}  $\cardeq{\card{A}}{A}$;
+	\item\ollabel{cardaidem}  $\card{A}$ is a cardinal, i.e.,
+	$\card{A} = \card{\card{A}}$;
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+Fix $A$. By Well-Ordering, there is a well-ordering $\tuple{A, R}$. By
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}, $\tuple{A,
+R}$ is isomorphic to a unique ordinal, $\beta$. So
+$\cardeq{A}{\beta}$. By Transfinite Induction, there is a uniquely
+least ordinal, $\gamma$, such that $\cardeq{A}{\gamma}$. So $\card{A}
+= \gamma$, establishing \olref{cardaexists} and \olref{cardaapprox}.
+To establish \olref{cardaidem}, note that if $\delta \in \gamma$ then
+$\cardless{\delta}{A}$, by our choice of $\gamma$, so that also
+$\cardless{\delta}{\gamma}$ since equinumerosity is an equivalence
+relation (\olref[sfr][siz][equ]{equinumerosityisequi}). So $\gamma =
+\card{\gamma}$. 
+%So, for reductio, suppose that there is some ordinal $\delta \in \gamma$ such that $\cardeq{\gamma}{\delta}$. Then, $\cardeq{\cardeq{A}{\gamma}}{\delta}$ so that $\cardeq{A}{\delta}$ by \olref[sfr][set][equ]{equinumerosityisequi}, which contradicts the choice of $\gamma$ as the least ordinal such that $\cardeq{A}{\gamma}$. 
+\end{proof}
+
+The next result guarantees Cantor's Principle, and more besides.
+(Note that cardinals inherit their ordering from the ordinals, i.e.,
+$\cardfont{a} < \cardfont{b}$ iff $\cardfont{a} \in \cardfont{b}$. In
+formulating this, we will use Fraktur letters for objects we know to be
+cardinals. This is fairly standard. A common alternative is to use
+Greek letters, since cardinals are ordinals, but to choose them from
+the middle of the alphabet, e.g.: $\kappa, \lambda$.):
+\begin{lem}\ollabel{lem:CardinalsBehaveRight}
+For any sets $A$ and $B$:
+\begin{align*}
+	\cardeq{A}{B} &\text{ iff } \card{A} = \card{B}\\
+	\cardle{A}{B} &\text{ iff } \card{A} \leq \card{B}\\
+	\cardless{A}{B}&\text{ iff } \card{A} < \card{B}
+\end{align*}
+\end{lem}
+
+\begin{proof}
+We will prove the left-to-right direction of the second claim (the
+other cases are similar, and left as an exercise). So, consider the
+following diagram:
+\begin{center}
+	\begin{tikzpicture}
+	\node (nodea) {$A$};
+	\node[right = 6em of nodea] (nodeb) {$B$};
+	\node[below = 2em of nodea] (nodecarda) {$\card{A}$};
+	\node[below = 2em of nodeb] (nodecardb) {$\card{B}$};
+	\draw[->] (nodea)--(nodeb);
+	\draw[<->] (nodea)--(nodecarda);
+	\draw[<->] (nodeb)--(nodecardb);
+	\draw[->, dashed] (nodecarda)--(nodecardb);
+\end{tikzpicture}
+\end{center}
+The double-headed arrows indicate !!{bijection}s, whose existence is
+guaranteed by \olref{lem:CardinalsExist}. In assuming that
+$\cardle{A}{B}$, there is some !!a{injection} to $A\to B$. Now,
+chasing the arrows around from $\card{A}$ to $A$ to $B$ to $\card{B}$,
+we obtain !!a{injection} $\card{A} \to \card{B}$ (the dashed arrow).
+\end{proof}\noindent We can also use \olref{lem:CardinalsBehaveRight}
+to re-prove Schr\"{o}der--Bernstein. This is the claim that if
+$\cardle{A}{B}$ and $\cardle{B}{A}$ then $\cardeq{A}{B}$. We stated
+this as \olref[sfr][siz][sb]{thm:schroder-bernstein}, but first proved
+it---with some effort---in \olref[sfr][infinite][card-sb]{sec}.
+Now consider:
+
+\begin{proof}[Re-proof]
+If $\cardle{A}{B}$ and $\cardle{B}{A}$, then $\card{A} \leq \card{B}$
+and $\card{B} \leq \card{A}$ by \olref{lem:CardinalsBehaveRight}. So
+$\card{A} = \card{B}$ and $\cardeq{A}{B}$ by Trichotomy and
+\olref{lem:CardinalsBehaveRight}.
+\end{proof}
+
+Whilst this is a very simple proof, it implicitly relies on both
+Replacement (to secure
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}) and on
+Well-Ordering (to guarantee \olref{lem:CardinalsBehaveRight}). By
+contrast, the proof of \olref[sfr][infinite][card-sb]{sec} was much
+more self-standing (indeed, it can be carried out in~$\Zminus$).
+
+\end{document}

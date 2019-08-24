@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{story}{blv}
+
+\olsection{Frege's Basic Law V}
+
+In \olref[rus]{sec}, we explained that Russell's formulated his
+paradox as a problem for the system Frege outlined in his
+\emph{Grundgesetze}. Frege's system did not include a direct
+formulation of Na\"{i}ve Comprehension. So, in this appendix, we will
+very briefly explain what Frege's system \emph{did} include, and how
+it relates to Na\"ive Comprehension and how it relates to Russell's
+Paradox.
+
+Frege's system is \emph{second-order}, and was designed to formulate
+the notion of an \emph{extension of a concept}. Using notation
+inspired by Frege, we will write $\fregeext{F}$ for \emph{the extension
+of the concept $F$}. This is a device which takes a \emph{predicate},
+``$F$'', and turns it into a (first-order) \emph{term},
+``$\fregeext{F}$''. Using this device, Frege offered the following
+\emph{definition} of membership:
+\[
+	a \in b =_\text{df} \exists G(b = \fregeext{G} \land Ga)
+\]
+roughly: $a \in b$ iff $a$ falls under a concept whose extension is
+$b$. (Note that the quantifier ``$\exists G$'' is second-order.) Frege
+also maintained the following principle, known as \emph{Basic Law V}: 
+$$\fregeext{F} = \fregeext{G} \liff \forall x (Fx \liff Gx)$$
+roughly: concepts have identical extensions iff they are coextensive. (Again, both ``$F$'' and ``$G$'' are in predicate position.) Now a simple principle connects membership with property-satisfaction:
+
+\begin{lem}[working in \emph{Grundgesetze}]\ollabel{lem:Fregeextensions}
+$\forall F \forall a(a \in \fregeext{F} \liff Fa)$
+\end{lem}
+
+\begin{proof} 
+Fix $F$ and $a$. Now $a \in \fregeext{F}$ iff $\exists G(\fregeext{F}
+= \fregeext{G} \land Ga)$ (by the definition of membership) iff
+$\exists G(\forall x(Fx \liff Gx) \land Ga)$ (by Basic Law V) iff $Fa$
+(by elementary second-order logic).
+\end{proof}
+
+And this yields Na\"ive Comprehension almost immediately:
+
+\begin{lem}[working in \emph{Grundgesetze}.]
+$\forall F \exists s \forall a (a \in s \liff Fa)$
+\end{lem}
+
+\begin{proof}
+Fix $F$; now \olref{lem:Fregeextensions} yields $\forall a (a \in
+\fregeext{F} \liff Fa)$; so $\exists s\forall a(a \in s \liff Fa)$ by
+existential generalisation. The result follows since $F$ was
+arbitrary.
+\end{proof}
+
+Russell's Paradox follows by taking $Fx$ as $x \notin x$. 
+
+\end{document}

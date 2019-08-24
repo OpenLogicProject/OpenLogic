@@ -1,0 +1,136 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+\olfileid{sth}{card-arithmetic}{simp}
+
+\olsection{Simplifying Addition and Multiplication}
+
+It turns out that transfinite cardinal addition and multiplication is
+\emph{extremely} easy. This follows from the fact that cardinals are
+(certain) ordinals, and so well-ordered, and so can be manipulated in
+a certain way. Showing this, though, is \emph{not} so easy. To start,
+I need a tricksy definition:
+
+\begin{defn}
+We define a \emph{canonical ordering}, $\canonord$, on pairs of
+ordinals, by stipulating that $\tuple{\alpha_1, \alpha_2} \canonord
+\tuple{\beta_1, \beta_2}$ iff either:
+\begin{enumerate}
+	\item $\max(\alpha_1, \alpha_2) < \max(\beta_1, \beta_2)$; or
+	\item $\max(\alpha_1, \alpha_2) = \max(\beta_1, \beta_2)$ and
+	$\alpha_1 < \beta_1$; or
+	\item $\max(\alpha_1, \alpha_2) = \max(\beta_1, \beta_2)$ and
+	$\alpha_1 = \beta_1$ and $\alpha_2 < \beta_2$
+\end{enumerate}
+\end{defn}
+
+\begin{lem}
+$\tuple{\alpha \times \alpha, \canonord}$ is a well-order, for any
+ordinal $\alpha$.\footnote{Cf.\ the naughtiness described in the
+footnote to \olref[ord-arithmetic][add]{defordplus}.}
+\end{lem}
+
+\begin{proof}
+Evidently $\canonord$ is connected on $\alpha \times \alpha$. For
+suppose that neither $\tuple{\alpha_1, \alpha_2}$ nor $\tuple{\beta_1,
+\beta_2}$ is $\canonord$-less than the other. Then $\max(\alpha_1,
+\alpha_2) = \max(\beta_1, \beta_2)$ and $\alpha_1 = \beta_1$ and
+$\alpha_2 = \beta_2$, so that $\tuple{\alpha_1, \alpha_2} =
+\tuple{\beta_1,  \beta_2}$.
+
+To show well-ordering, let $X \subseteq \alpha\times\alpha$ be
+non-empty. Since $\alpha$ is an ordinal, some $\delta$ is the least
+member of $\Setabs{\max(\gamma_1, \gamma_2)}{\tuple{\gamma_1,
+\gamma_2} \in X}$. Now discard all pairs from
+$\Setabs{\tuple{\gamma_1,\gamma_2} \in X}{\max(\gamma_1, \gamma_2) =
+\delta}$ except those with least first coordinate; from among these,
+the pair with least second coordinate is the $\canonord$-least element
+of $X$.
+\end{proof}
+
+Now for a teensy, simple observation:
+
+\begin{prop}\ollabel{simplecardproduct}
+If $\cardeq{\alpha}{\beta}$, then $\cardeq{\alpha \times \alpha}{\beta
+\times \beta}$. 
+\end{prop}
+
+\begin{proof}
+Just let $f \colon \alpha \to \beta$ induce $\tuple{\gamma_1,
+\gamma_2} \mapsto \tuple{f(\gamma_1), f(\gamma_2)}$.
+\end{proof}
+
+And now we will put all this to work, in proving a crucial lemma:
+\begin{lem}\ollabel{alphatimesalpha}
+$\cardeq{\alpha}{\alpha \times \alpha}$, for any infinite ordinal
+$\alpha$
+\end{lem}
+
+\begin{proof}
+For reductio, let $\alpha$ be the least infinite ordinal for which
+this is false. \olref[sfr][siz][zigzag]{natsquaredenumerable} shows
+that $\cardeq{\omega}{\omega\times\omega}$, so $\omega \in \alpha$.
+Moreover, $\alpha$ is a cardinal: suppose otherwise, for reductio;
+then $\card{\alpha} \in \alpha$, so that
+$\cardeq{\card{\alpha}}{\card{\alpha} \times \card{\alpha}}$, by
+hypothesis; and $\cardeq{\card{\alpha}}{\alpha}$ by definition; so
+that $\cardeq{\alpha}{\alpha\times\alpha}$ by
+\olref{simplecardproduct}. 
+
+Now, for each $\tuple{\gamma_1, \gamma_2} \in \alpha \times \alpha$,
+consider the segment:
+\begin{align*}
+	\text{Seg}(\gamma_1, \gamma_2) &= \Setabs{\tuple{\delta_1, \delta_2} \in \alpha \times \alpha}{\tuple{\delta_1, \delta_2} \canonord \tuple{\gamma_1, \gamma_2}}
+\end{align*}
+Let $\gamma = \max(\gamma_1, \gamma_2)$. When $\gamma$ is infinite, observe:
+\begin{align*}
+	\text{Seg}(\gamma_1, \gamma_2) & 
+	\precsim ((\gamma \ordplus 1)\ordtimes (\gamma \ordplus 1))
+	\text{, by the first clause defining $\canonord$}\\
+	&\approx (\gamma \ordtimes \gamma)
+	\text{, by \olref[ord-arithmetic][using-addition]{ordinfinitycharacter} and 
+	\olref{simplecardproduct}}\\
+	&\approx \gamma \text{, by the induction hypothesis}\\
+	& \prec \alpha\text{, since $\alpha$ is a cardinal}
+\end{align*}
+So $\ordtype{\alpha\times \alpha, \canonord} \leq \alpha$, and hence
+$\cardle{\alpha \times \alpha}{\alpha}$. Since of course
+$\cardle{\alpha}{\alpha \times \alpha}$, the result follows by
+Schr\"oder-Bernstein. 
+\end{proof}
+
+Finally, we get to our simplifying result:
+
+\begin{thm}\ollabel{cardplustimesmax}
+If $\cardfont{a}, \cardfont{b}$ are infinite cardinals, $\cardfont{a}
+\cardtimes \cardfont{b} = \cardfont{a} \cardplus \cardfont{b} =
+\text{max}(\cardfont{a}, \cardfont{b})$.
+\end{thm}
+
+\begin{proof}
+Without loss of generality, suppose $\cardfont{a} = \max(\cardfont{a},
+\cardfont{b})$. Then invoking \olref{alphatimesalpha},
+$\cardfont{a}\cardtimes\cardfont{a} = \cardfont{a} \leq \cardfont{a}
+\cardplus \cardfont{b} \leq \cardfont{a} \cardplus \cardfont{a} \leq
+\cardfont{a} \cardtimes \cardfont{a}$. \end{proof}\noindent Similarly,
+if $\cardfont{a}$ is infinite, an $\cardfont{a}$-sized union of
+$\leq\cardfont{a}$-sized sets has size $\leq\cardfont{a}$:
+
+\begin{prop}\ollabel{kappaunionkappasize}
+Let $\cardfont{a}$ be an infinite cardinal. For each ordinal $\beta
+\in \cardfont{a}$, let $X_\beta$ be a set with $\card{X_\beta} \leq
+\cardfont{a}$. Then $\card{\bigcup_{\beta \in \cardfont{a}} X_\beta}
+\leq \cardfont{a}$.
+\end{prop}
+
+\begin{proof}
+For each $\beta \in \cardfont{a}$, fix !!a{injection} $f_\beta \colon
+X_\beta \to \cardfont{a}$. Define !!a{injection} $g \colon
+\bigcup_{\beta \in \cardfont{a}} X_\beta \to \cardfont{a} \times
+\cardfont{a}$ by $g(v) = \tuple{\beta, f_\beta(v)}$, where $v \in
+X_\beta$ and $v \notin X_\gamma$ for any $\gamma \in \beta$. Now
+$\bigcup_{\beta \in \cardfont{a}} X_\beta \preceq \cardfont{a} \times
+\cardfont{a} \approx \cardfont{a}$ by \olref{cardplustimesmax}.
+\end{proof}
+
+\end{document}

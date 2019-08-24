@@ -1,0 +1,114 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{using-addition}
+\olsection{Using Ordinal Addition}
+
+Using addition on the ordinals, we can explicitly calculate the ranks
+of various sets, in the sense of \olref[spine][rank]{defnsetrank}:
+
+\begin{lem}\ollabel{rankcomputation}
+If $\setrank{A} = \alpha$ and $\setrank{B} = \beta$, then:
+\begin{enumerate}
+	\item\ollabel{exrankpow} $\setrank{\Pow{A}} = \alpha\ordplus 1$
+	\item\ollabel{exrankpair} $\setrank{\{A, B\}} = \max(\alpha,
+	\beta) \ordplus 1$
+	\item\ollabel{exrankcup} $\setrank{A \cup B} = \max(\alpha,
+	\beta)$
+	\item\ollabel{exranktuple} $\setrank{\tuple{A,B}} = \max(\alpha,
+	\beta) \ordplus  2$
+	\item\ollabel{exranktimes} $\setrank{A \times B} \leq \max(\alpha,
+	\beta) \ordplus  2$
+	\item\ollabel{exrankunion} $\setrank{\bigcup A} = \alpha$ when
+	$\alpha$ is empty or a limit; $\setrank{\bigcup A} = \gamma$ when
+	$\alpha = \gamma\ordplus 1$
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+Throughout, we invoke \olref[spine][rank]{ranksupstrict}
+repeatedly.
+
+\emph{\olref{exrankpow}.} If $x \subseteq A$ then $\setrank{x} \leq
+\setrank{A}$. So $\setrank{\Pow{A}} \leq \alpha \ordplus  1$. Since $A
+\in \Pow{A}$ in particular, $\setrank{\Pow{A}} = \alpha \ordplus  1$.
+
+\emph{\olref{exrankpair}.} By \olref[spine][rank]{ranksupstrict}
+
+\emph{\olref{exrankcup}.} By \olref[spine][rank]{ranksupstrict}.
+
+\emph{\olref{exranktuple}.} By \olref{exrankpair}, twice.
+
+\emph{\olref{exranktimes}.} Note that $A \times B \subseteq
+\Pow{\Pow{A \cup B}}$, and invoke \olref{exranktuple}. 
+
+\emph{\olref{exrankunion}.} If $\alpha = \gamma\ordplus 1$, there is
+some $c \in A$ with $\setrank{c} = \gamma$, and no !!{element} of $A$
+has higher rank; so $\setrank{\bigcup A} = \gamma$. If $\alpha$ is a
+limit ordinal, then $A$ has !!{element}s with rank arbitrarily close
+to (but strictly less than) $\alpha$, so that $\bigcup A$ also has
+!!{element}s with rank arbitrarily close to (but strictly less than)
+$\alpha$, so that $\setrank{\bigcup A} = \alpha$.
+\end{proof}
+
+We leave it as an exercise to show why \olref{exranktimes} involves an
+\emph{in}equality.
+
+\begin{prob}
+Produce sets $A$ and $B$ such that $\setrank{A \times B}=
+\max(\setrank(A), \setrank{B})$. Produce sets $A$ and $B$ such that
+$\setrank{A \times B}\max(\setrank(A), \setrank{B}) \ordplus  2$. Are
+any other ranks possible?
+\end{prob}
+
+We are also now in a position to prove that several reasonable notions
+of ``finite'' coincide, when considering ordinals:
+
+\begin{lem}\ollabel{ordinfinitycharacter}
+For any ordinal $\alpha$, the following are equivalent:
+\begin{enumerate}
+	\item\ollabel{ord:notinomega} $\alpha\notin \omega$, i.e.\
+	$\alpha$ is not a natural number
+	\item\ollabel{ord:omegaplus} $\omega \leq \alpha$ 
+	\item\ollabel{ord:oneplus} $1 \ordplus  \alpha = \alpha$ 
+	%\alpha \approx \alpha \ordplus 1$
+	\item\ollabel{ord:plusone} $\alpha \approx \alpha\ordplus 1$,
+	i.e., $\alpha$ and $\alpha\ordplus 1$ are equinumerous
+	\item\ollabel{ord:infinite} $\alpha$ is Dedekind infinite	
+	\end{enumerate}
+\end{lem}
+
+\begin{proof}
+\emph{\olref{ord:notinomega} $\Rightarrow$ \olref{ord:omegaplus}.} By
+Trichotomy. 
+
+\emph{\olref{ord:omegaplus} $\Rightarrow$ \olref{ord:oneplus}.} Fix
+$\alpha \geq \omega$. By Transfinite Induction, there is some least
+ordinal $\gamma$ (possibly $0$) such that there is a limit ordinal
+$\beta$ with $\alpha = \beta \ordplus \gamma$. Now:
+\[
+	1 \ordplus \alpha =  
+	1 \ordplus (\beta \ordplus \gamma) = 
+	(1 \ordplus \beta) \ordplus \gamma =  
+	\supstrict_{1 \ordplus  \delta} (\delta < \beta) \ordplus  \gamma = 
+	\beta \ordplus  \gamma = 
+	\alpha.
+\]
+\emph{\olref{ord:oneplus} $\Rightarrow$ \olref{ord:plusone}.} There is
+clearly !!a{bijection} $f \colon (\alpha \disjointsum 1) \to (1
+\disjointsum \alpha)$. If $1 \ordplus \alpha = \alpha$, there is an
+isomorphism $g \colon (1 \disjointsum \alpha) \to \alpha$. Now
+consider $\comp{f}{g}$.
+
+\emph{\olref{ord:plusone} $\Rightarrow$ \olref{ord:infinite}.} If
+$\alpha \approx \alpha \ordplus 1$, there is !!a{bijection} $f \colon
+(\alpha \disjointsum 1) \to \alpha$. Define $g(\gamma) = f(\gamma, 0)$
+for each $\gamma < \alpha$; this !!{injection} witnesses that $\alpha$
+is Dedekind infinite, since $f(0,1) \in \alpha \setminus \ran{g}$. 
+
+\emph{\olref{ord:infinite} $\Rightarrow$ \olref{ord:notinomega}.} This
+is \olref[z][infinity-again]{naturalnumbersarentinfinite}.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,271 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{vitali}
+\olsection{Vitali's Paradox}
+
+To get a real sense of whether the Banach--Tarski construction is
+acceptable or not, we should examine its \emph{proof}. Unfortunately,
+that would require much more algebra than I can present in this book.
+However, I can offer some quick remarks which might shed some insight
+on the proof of Banach--Tarski,\footnote{For a much fuller treatment,
+see \cite{WestonUnpublished} or \cite{Wagon2016}.} by focussing on the
+following result:
+
+\begin{thm}[Vitali's Paradox (in $\ZFC$)]\ollabel{vitaliparadox}
+Any circle can be decomposed into countably many pieces, which can be
+reassembled (by rotation and transportation) to form two copies of
+that circle.
+\end{thm}
+
+This is much easier to prove than the Banach--Tarski Paradox. We have
+called it ``Vitali's Paradox'', since it follows follows from Vitali's
+\citeyear{Vitali1905}-construction of an unmeasurable set.  But the
+set-theoretic aspects of the proof of Vitali's Paradox and the
+Banach-Tarski Paradox are very similar. The essential difference
+between the results is just that Banach-Tarski considers a
+\emph{finite} decomposition, whereas Vitali's Paradox onsiders a
+\emph{countably infinite} decomposition.  As \citet{WestonUnpublished}
+puts it, Vitali's Paradox ``is certainly not nearly as striking as the
+Banach--Tarski paradox, but it does illustrate that geometric
+paradoxes can  happen even in `simple' situations.'' 
+
+Vitali's Paradox concerns a two-dimensional figure, a circle. So we
+will work on the plane, $\Real^2$. Let $\rotationsgroup$ be the set of
+(clockwise) rotations of points around the origin by \emph{rational}
+radian values between $[0,2\pi)$. Here are some algebraic facts about
+$\rotationsgroup$ (if you don't understand the statement of the
+result, the proof will make its meaning clear):
+
+\begin{lem}\ollabel{rotationsgroupabelian}
+$\rotationsgroup$ forms an abelian {group} under composition of functions.
+\end{lem}
+
+\begin{proof}
+Writing $0_{\rotationsgroup}$ for the rotation by $0$ radians, this is
+an identity element for $\rotationsgroup$, since
+$\comp{0_{\rotationsgroup}}{\rho} = \comp{\rho}{0_{\rotationsgroup}} =
+\rho$ for any $\rho \in \rotationsgroup$.
+
+Every element has an inverse. Where $\rho \in \rotationsgroup$ rotates
+by $r$ radians, $\rho^{-1} \in \rotationsgroup$ rotates by $2\pi - r$
+radians, so that $\rho \circ \rho^{-1} = 0_\rotationsgroup$.
+
+Composition is associative: $\comp{\rho}{(\comp{\sigma}{\tau})} =
+\comp{(\comp{\rho}{\sigma})}{\tau}$ for any $\rho, \sigma, \tau \in
+\rotationsgroup$
+
+Composition is commutative: $\comp{\rho}{\sigma} =
+\comp{\sigma}{\rho}$ for any $\rho, \sigma \in \rotationsgroup$.
+\end{proof}
+
+In fact, we can split our group $\rotationsgroup$
+in half, and then use either half to recover the whole group:
+
+\begin{lem}\ollabel{disjointgroup}
+There is a partition of $\rotationsgroup$ into two disjoint sets,
+$\rotationsgroup_{1}$ and $\rotationsgroup_{2}$, both of which are a
+basis for $\rotationsgroup$. 
+\end{lem}
+
+\begin{proof}
+Let $\rotationsgroup_{1}$ consist of the rotations by rational radian
+values in $[0, \pi)$; let $\rotationsgroup_{2} = \rotationsgroup
+\setminus \rotationsgroup_1$. By elementary algebra,
+$\Setabs{\comp{\rho}{\rho}}{\rho \in \rotationsgroup_1} =
+\rotationsgroup$. A similar result can be obtained for
+$\rotationsgroup_2$.
+\end{proof}
+
+We will use this fact about groups to establish \olref{vitaliparadox}.
+Let $\onesphere$ be the unit circle, i.e., the set of points
+exactly~$1$ unit away from the origin of the plane, i.e.,
+$\Setabs{\tuple{r,s} \in \Real^2}{\sqrt{r^2+s^2}=1}$. We will split
+$\onesphere$ into parts by considering the following relation on
+$\onesphere$:
+\[
+	r \sim s \emph{ iff }(\exists \rho \in \rotationsgroup)\rho(r) = s.
+\]
+That is, the points of $\onesphere$ are linked by this relation iff you can get from one to the other by a rational-valued rotation about the origin. Unsurprisingly:
+
+\begin{lem}
+$\sim$ is an equivalence relation.
+\end{lem}
+
+\begin{proof}
+Trivial, using \olref{rotationsgroupabelian}. 
+\end{proof}
+
+We now invoke Choice to obtain a set, $C$, containing exactly one
+member from each equivalence class of $\onesphere$ under $\sim$. That
+is, we consider a choice function $f$ on the set of equivalence
+classes,\footnote{Note: since $\rotationsgroup$ is !!{enumerable},
+each !!{element} of $E$ is !!{enumerable}. Since $\onesphere$ is
+!!{nonenumerable}, it follows from \olref{vitalicover} and
+\olref[card-arithmetic][simp]{kappaunionkappasize} that $E$ is
+!!{nonenumerable}. So this is a use of \emph{un}countable Choice.}
+\[
+	E = \Setabs{\equivrep{r}{\sim}}{r \in \onesphere},
+\]
+and let $C = \ran{f}$. For each rotation $\rho \in \rotationsgroup$,
+the set $\funimage{\rho}{C}$ consists of the points obtained by
+applying the rotation $\rho$ to each point in $C$. These next two
+results show that these sets cover the circle completely and without
+overlap:
+
+\begin{lem}\ollabel{vitalicover}
+$\onesphere = \bigcup_{\rho \in \rotationsgroup} \funimage{\rho}{C}$.
+\end{lem}
+
+\begin{proof}
+Fix $s \in \onesphere$; there is some $r \in C$ such that $r \in
+\equivrep{s}{\sim}$, i.e., $r \sim s$, i.e.\ $\rho(r) = s$ for some
+$\rho \in \rotationsgroup$. 
+\end{proof}
+
+\begin{lem}\ollabel{vitalinooverlap}
+If $\rho_1 \neq \rho_2$ then $\funimage{\rho_1}{C} \cap \funimage{\rho_2}{C} = \emptyset$. 
+\end{lem}
+
+\begin{proof}
+Suppose $s \in \funimage{\rho_{1}}{C} \cap \funimage{\rho_{2}}{C}$. So
+$s = \rho_{1}(r_{1}) = \rho_{2}(r_{2})$ for some $r_{1}, r_{2} \in C$.
+Hence $\rho^{-1}_2(\rho_1(r_1)) = r_2$, and
+$\comp{\rho_1}{\rho^{-1}_2} \in \rotationsgroup$, so $r_{1} \sim
+r_{2}$. So $r_1 = r_2$, as $C$ selects exactly one member from each
+equivalence class under $\sim$. So $s = \rho_1(r_1) = \rho_2(r_1)$,
+and hence $\rho_1 = \rho_2$.
+\end{proof}
+
+We now apply our earlier algebraic facts to our circle:
+
+\begin{lem}\ollabel{pseudobanachtarski}
+There is a partition of $\onesphere$ into two disjoint sets, $D_{1}$
+and $D_{2}$, such that $D_{1}$ can be partitioned into countably many
+sets which can be rotated to form a copy of $\onesphere$ (and
+similarly for $D_{2}$).
+\end{lem}
+
+\begin{proof}
+Using $\rotationsgroup_{1}$ and $\rotationsgroup_{2}$ from \olref{disjointgroup}, let:
+\begin{align*}
+	D_{1} &= \bigcup_{\rho \in \rotationsgroup_1} \funimage{\rho}{C} & 
+	D_{2} &= \bigcup_{\rho \in \rotationsgroup_1} \funimage{\rho}{C}
+\end{align*}
+This is a partition of $\onesphere$, by \olref{vitalicover}, and $D_1$
+and $D_2$ are disjoint by \olref{vitalinooverlap}. By construction,
+$D_1$ can be partitioned into countably many sets,
+$\funimage{\rho}{C}$ for each $\rho \in R_1$. And these can be rotated
+to form a copy of $\onesphere$, since $\onesphere = \bigcup_{\rho \in
+\rotationsgroup}\funimage{\rho}{C} = \bigcup_{\rho \in
+\rotationsgroup_1}\funimage{(\comp{\rho}{\rho})}{C}$ by
+\olref{disjointgroup} and \olref{vitalicover}. The same reasoning
+applies to $D_2$. \end{proof}\noindent This immediately entails
+Vitali's Paradox. For we can generate \emph{two} copies of
+$\onesphere$ from $\onesphere$, just by splitting it up into countably
+many pieces (the various $\funimage{\rho}{C}$'s) and then rigidly
+moving them (simply rotate each piece of $D_1$, and first transport
+and then rotate each piece of $D_2$).
+
+Let's recap the proof-strategy. We started with some algebraic facts
+about the group of rotations on the plane. We used this group to
+partition $\onesphere$ into equivalence classes. We then arrived at a
+``paradox'', by using Choice to select elements from each class.
+
+We use exactly the same strategy to prove Banach--Tarski. The main
+difference is that the algebraic facts used to prove Banach--Tarski
+are significantly more more complicated than those used to prove
+Vitali's Paradox. But those algebraic facts have nothing to do with
+Choice. We will summarise them quickly. 
+
+To prove Banach--Tarski, we start by establishing an analogue of
+\olref{disjointgroup}: any \emph{free group} can be split into four
+pieces, which intuitively we can ``move around'' to recover two copies
+of the whole group.\footnote{The fact that we can use \emph{four}
+pieces is due to \cite{Robinson1947}. For a recent proof, see
+\citet[Theorem 5.2]{Wagon2016}. We follow \citet[p.~3]{WestonUnpublished}
+in describing this as ``moving'' the pieces of the group.} We then
+show that we can use two particular rotations around the origin of
+$\Real^3$ to generate a free group of rotations, $F$.\footnote{See
+\citet[Theorem 2.1]{Wagon2016}.} (No Choice yet.) We now regard points
+on the surface of the sphere as ``similar'' iff one can be obtained
+from the other by a rotation in~$F$. We then \emph{use Choice} to
+select exactly one point from each equivalence class of ``similar''
+points. Applying our division of $F$ to the surface of the sphere, as
+in \olref{pseudobanachtarski}, we split that surface into four pieces,
+which we can ``move around'' to obtain two copies of the surface of
+the sphere. And this establishes \citep{Hausdorff1914}:
+
+\begin{thm}[Hausdorff's Paradox (in $\ZFC$)] 
+The surface of any sphere can be decomposed into finitely many pieces,
+which can be reassembled (by rotation and transportation) to form two
+disjoint copies of that sphere.
+\end{thm}
+
+A couple of further algebraic tricks are needed to obtain the full
+Banach-Tarski Theorem (which concerns not just the sphere's surface,
+but its interior too). Frankly, however, this is just icing on the
+algebraic cake. Hence Weston writes:
+\begin{quote}	
+  [\ldots] the result on free groups is the \emph{key step} in the
+  proof of the Banach-Tarski paradox. From this point of view, the
+  Banach-Tarski paradox is not a statement about $\Real^3$ so much as
+  it is a statement about the complexity of the group [of translations
+  and rotations in $\Real^3$]. \cite[p.~16]{WestonUnpublished}
+\end{quote}
+That is: whether we can offer a \emph{finite} decomposition (as in
+Banach--Tarski) or a \emph{countably infinite} decomposition (as in
+Vitali's Paradox) comes down to certain group-theoretic facts about
+working in two-dimension or three-dimensions.
+
+Admittedly, this last observation slightly spoils the joke at the end
+of \olref[banach]{sec}. Since it is  two dimensional,
+``Banach-Tarski'' must be divided into a countable \emph{infinity} of
+pieces, if one wants to rearrange those pieces to form ``Banach-Tarski
+Banach-Tarski''. To repair the joke, one must write in three
+dimensions. I leave this as an exercise for the reader.
+
+One final comment. In \olref[banach]{sec}, we mentioned that the
+``pieces'' of the sphere one obtains cannot be \emph{measurable}, but
+must be unpicturable ``infinite scatterings''. The same is true of our
+use of Choice in obtaining \olref{pseudobanachtarski}. And this is all
+worth explaining.
+
+Again, we must sketch some background (but this is \emph{just} a
+sketch; you may want to consult a textbook entry on \emph{measure}).
+To define a measure for a set $X$ is to assign a value $\mu(E) \in
+\Real$ for each $E$ in some ``$\sigma$-algebra'' on $X$. Details here
+are not essential, except that the function $\mu$ must obey the
+principle of countable additivity: the measure of a countable union of
+disjoint sets is the sum of their individual measures, i.e.,
+$\mu(\bigcup_{n < \omega} X_n) = \sum_{n < \omega}\mu(X_n)$ whenever
+the $X_n$s are disjoint. To say that a set is ``unmeasurable'' is to
+say that no measure can be suitably assigned. Now, using our
+$\rotationsgroup$ from before:
+
+\begin{cor}[Vitali]
+Let $\mu$ be a measure such that $\mu(\onesphere) = 1$, and such that
+$\mu(X) = \mu(Y)$ if $X$ and $Y$ are congruent. Then
+$\funimage{\rho}{C}$ is unmeasurable for all $\rho \in
+\rotationsgroup$. 
+\end{cor}
+
+\begin{proof}
+For reductio, suppose otherwise. So let $\mu(\funimage{\sigma}{C}) =
+r$ for some $\sigma \in \rotationsgroup$ and some $r \in \Real$. For
+any $\rho \in C$, $\funimage{\rho}{C}$ and $\funimage{\sigma}{C}$ are
+congruent, and hence  $\mu(\funimage{\rho}{C}) = r$ for any $\rho \in
+C$. By \olref{vitalicover} and \olref{vitalinooverlap}, $\onesphere =
+\bigcup_{\rho \in \rotationsgroup}\funimage{\rho}{C}$ is a countable
+union of pairwise disjoint sets. So countable additivity dictates that
+$\mu(\onesphere) = 1$ is the sum of the measures of each
+$\funimage{\rho}{C}$, i.e.,
+\[
+	1 = \mu(\onesphere) = \sum_{\rho \in \rotationsgroup}\mu(\funimage{\rho}{C}) = \sum_{\rho \in \rotationsgroup}r
+\]
+But if $r = 0$ then $\sum_{\rho \in \rotationsgroup}r = 0$, and if $r
+> 0$ then $\sum_{\rho \in \rotationsgroup}r = \infty$. 
+\end{proof}
+
+\end{document}

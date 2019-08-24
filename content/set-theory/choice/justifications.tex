@@ -1,0 +1,64 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{justifications}
+\olsection{Intrinsic Considerations about Choice}
+
+The broader question, then, is whether Well-Ordering, or Choice, or
+indeed the comparability of all sets as regards their size---it
+doesn't matter which---can be justified. 
+
+Here is an attempted \emph{intrinsic} justification. Back in
+\olref[z][story]{sec}, we introduced several principles
+about the hierarchy. One of these is worth restating:
+\begin{enumerate}
+	\item[] \stagesacc. For any stage $S$, and for any sets which were
+	formed \emph{before} stage $S$: a set is formed at stage $S$ whose
+	members are exactly those sets. Nothing else is formed at
+	stage~$S$. 
+\end{enumerate}
+In fact, many authors have suggested that the Axiom of Choice can be
+justified via (something like) this principle. I will briefly provide
+my own gloss on that approach.
+
+I will start with a simple little result, which offers \emph{yet
+another} equivalent for Choice:
+
+\begin{thm}[in $\ZF$]\ollabel{choiceset}
+Choice is equivalent to the following principle. If the !!{element}s
+of $A$ are disjoint and non-empty, then there is some $C$ such that $C
+\cap x$ is a singleton for every $x \in A$. (We call such a $C$ a
+{choice set} for $A$.)
+\end{thm}
+
+The proof of this result is straightforward, and we leave it as an
+exercise for the reader. 
+
+\begin{prob}
+Prove \olref[sth][choice][justifications]{choiceset}. If you struggle,
+you can find a proof in \cite[pp.~242--3]{Potter2004}.
+\end{prob}
+
+The essential point is that a choice set for $A$ is just the range of
+a choice function for $A$. So, to justify Choice, we can simply try to
+justify its equivalent formulation, in terms of the existence of
+choice sets. And we will now try to do exactly that. 
+
+Let $A$'s !!{element}s be disjoint and non-empty. By \stageshier{}
+(see \olref[z][story]{sec}), $A$ is formed at some stage~$S$. Note
+that all the !!{element}s of $\bigcup A$ are available before stage
+$S$. Now, by \stagesacc{}, for \emph{any} sets which were formed
+before~$S$, a set is formed whose members are exactly those sets.
+Otherwise put: every \emph{possible} collections of earlier-available
+sets will exist at~$S$. But it is certainly \emph{possible} to select
+objects which could be formed into a choice set for~$A$; that is just
+some very specific subset of $\bigcup A$. So: some such choice set
+exists, as required.
+
+Well, that's a \emph{very} quick attempt to offer a justification of
+Choice on intrinsic grounds. But, to pursue this idea further, you
+should read Potter's (\citeyear[\S14.8]{Potter2004}) neat development
+of it.
+
+\end{document}

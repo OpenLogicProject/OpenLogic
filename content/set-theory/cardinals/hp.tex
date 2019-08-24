@@ -1,0 +1,101 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{cardinals}{hp}
+\olsection{Hume's Principle}
+
+In \olref[cp]{sec}, we described Cantor's Principle. This was:
+\begin{align*}
+	\card{A} = \card{B} & \text{ iff } A \approx B.
+\intertext{This is very similar to what is now called
+\emph{Hume's Principle}, which says:}
+	\fregenum{F} = \fregenum{G} & \text{ iff } F \sim G
+\end{align*}
+where `$F \sim G$' abbreviates that there are exactly as many $F$s as
+$G$s, i.e., the $F$s can be put into a bijection with the $G$s, i.e.:
+\begin{align*}
+	\exists R(&\forall v\forall y(Rvy \lonlyif (Fv \land Gy)) \land {}\\
+		&\forall v(Fv \lonlyif \exists \bang y Rvy) \land {}\\
+		&\forall y(Gy \lonlyif \exists \bang v Rvy) \land{}\\
+		&\forall v\forall x \forall y((Rvy \land Rxy) \lonlyif x = v) \land{}\\
+		&\forall y \forall z \forall v((Rvy \land Rvz) \lonlyif y = z))
+\end{align*}
+But there is a type-difference between Hume's Principle and Cantor's
+Principle. In the statement of Cantor's Principle, the variables
+``$A$'' and ``$B$'' are first-order terms which stand for \emph{sets}.
+In the statement of Hume's Principle, ``$F$'', ``$G$'' and ``$R$'' are
+\emph{not} first-order terms; rather, they are in \emph{predicate
+position}. (Maybe they stand for \emph{properties}.) So we might gloss
+Hume's Principle in English as: the number of $F$s is the number of
+$G$s iff the $F$s are bijective with the $G$s. This is called
+\emph{Hume's Principle}, because Hume once wrote this:
+\begin{quote}
+  When two numbers are so combined as that the one has always an unit
+  answering to every unit of the other, we pronounce them equal.
+  \citep[Pt.III Bk.1 \S1]{Hume1740}
+\end{quote}
+And Hume's Principle was brought to contemporary mathematico-logical
+prominence by \citet[\S63]{Frege1884}, who quoted this passage from
+Hume, before (in effect) sketching (what we have called) Hume's
+Principle. 
+
+You should note the structural similarity between Hume's Principle and
+Basic Law~V. We formulated this in \olref[story][blv]{sec} as
+follows:
+\[
+	\fregeext{F} = \fregeext{G} \liff \forall x(Fx \liff Gx).
+\]
+And, at this point, some commentary and comparison might help. 
+
+There are two ways to take a principle like Hume's Principle or Basic
+Law~V: \emph{predicatively} or \emph{impredicatively} (recall
+\olref[story][predicative]{sec}). On the impredicative reading of
+Basic Law~V, for each~$F$, the object $\fregeext{F}$ falls within the
+domain of quantification that we used in formulating Basic Law~V
+itself. Similarly, on the impredicative reading of Hume's Principle,
+for each~$F$, the object $\fregenum{F}$ falls within the domain of
+quantification that we used in formulating Hume's Principle. By
+contrast, on the \emph{predicative} understanding, the objects
+$\fregeext{F}$ and~$\fregenum{F}$ would be entities from some
+\emph{different} domain. 
+
+Now, if we read Basic Law~V impredicatively, it leads to
+inconsistency, via Na\"ive Comprehension (for the details, see
+\olref[story][blv]{sec}). Much like Na\"ive Comprehension, it can be
+rendered consistent by reading it \emph{predicatively}. But it
+probably will not do everything that we wanted it to. 
+
+Hume's Principle, however, \emph{can} consistently be read
+impredicatively. And, read thus, it is quite powerful.
+
+To illustrate: consider the predicate ``$x \neq x$'', which obviously
+nothing satisfies. Hume's Principle now yields an object $\# x( x\neq
+x)$. We might treat this as the number~$0$. Now, on the
+\emph{impredicative} understanding---but \emph{only} on the
+impredicative understanding---this entity $0$ falls within our
+original domain of quantification. So we can sensibly apply Hume's
+Principle with the predicate ``$x = 0$'' to obtain an object $\#x (x =
+0)$. We might treat this as the number~$1$. Moreover, Hume's Principle
+entails that $0 \neq 1$, since there cannot be a bijection from the
+non-self-identical objects to the objects identical with $0$ (there
+are none of the former, but one of the latter). Now, working
+impredicatively again, $1$~falls within our original domain of
+quantification. So we can sensibly apply Hume's Principle with the
+predicate ``$(x = 0 \lor x = 1)$'' to obtain an object $\#x(x = 0 \lor
+x = 1)$. We might treat this as the number~$2$, and we can show that
+$0\neq 2$ and $1 \neq 2$ and so on. 
+
+In short, taken impredicatively, Hume's Principle entails that there
+are \emph{infinitely many objects}. And this has encouraged
+\emph{neo-Fregean logicists} to take Hume's Principle as the
+foundation for arithmetic. 
+
+Frege \emph{himself}, though, did not take Hume's Principle as his
+foundation for arithmetic. Instead, Frege proved Hume's Principle from
+an explicit definition: $\fregenum{F}$ is$_\text{df}$ the extension of
+the concept $F \sim \Phi$. In modern terms, we might attempt to render
+this as $\fregenum{F} = \Setabs{G}{F \sim G}$; but this will pull us
+back into the problems of Na\"ive Comprehension.
+
+\end{document}

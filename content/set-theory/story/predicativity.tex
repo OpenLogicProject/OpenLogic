@@ -1,0 +1,106 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{story}{predicative}	
+
+\olsection{Predicative and Impredicative}
+
+The Russell set, $R$, was defined by the formula $\Setabs{x}{x \notin
+x}$. Spelled out more fully, $R$ would be the set which contains all
+and only those sets which are not non-self-membered. So in defining
+$R$, we quantify over the domain which would contain $R$ (if it
+existed).
+
+This is an \emph{impredicative} definition. More generally, we might
+say that a definition is impredicative iff it quantifies over a domain
+which contains the object that is being defined.  
+	
+In the wake of the paradoxes, Whitehead, Russell, Poincar\'{e} and
+Weyl rejected such impredicative definitions as ``viciously
+circular'':
+\begin{quote}
+	An analysis of the paradoxes to be avoided shows that they all
+	result from a kind of vicious circle. The vicious circles in
+	question arise from supposing that a collection of objects may
+	contain members which can only be defined by means of the
+	collection as a whole[\ldots. \textparagraph]
+
+	The principle which enables us to avoid illegitimate totalities
+	may be stated as follows: `Whatever involves \emph{all} of a
+	collection must not be one of the collection'; or, conversely:
+	`If, provided a certain collection had a total, it would have
+	members only definable in terms of that total, then the said
+	collection has no total.' We shall call this the `vicious-circle
+	principle,' because it enables us to avoid the vicious circles
+	involved in the assumption of illegitimate totalities.
+	\citep[p.~37]{WhiteheadRussell1910}
+\end{quote}
+If we follow them in rejecting the \emph{vicious-circle principle},
+then we might attempt to replace the disastrous Na\"{i}ve
+Comprehension Scheme with something like the following:
+
+	\
+	\\\emph{Predicative Comprehension.} For every formula $\phi$ quantifying only over sets: the set$^\prime$ $\Setabs{x}{\phi(x)}$ exists.
+	
+\
+\\So long as sets$^{\prime}$ are not sets, no contradiction will ensue.  
+
+Unfortunately, Predicative Comprehension is not very
+\emph{comprehensive}. After all, it introduces us to new entities,
+sets$^\prime$. So we will have to consider formulas which quantify
+over sets$^\prime$. If they always yield a set$^\prime$, then
+Russell's paradox will arise again, just by considering the
+set$^\prime$ of all non-self-membered sets$^\prime$. So, pursuing the
+same thought, we must say that a formula quantifying over
+sets$^\prime$ yields a corresponding set$^{\prime\prime}$. And then we
+will need sets$^{\prime\prime\prime}$,
+sets$^{\prime\prime\prime\prime}$, etc. To prevent a rash of primes,
+it will be easier to think of these as sets$_0$, sets$_1$, sets$_2$,
+sets$_3$, sets$_4$,\ldots. And this would give us a way into the
+(simple) theory of types. 
+
+There are a few obvious objections against such a theory (though it is
+not obvious that they are \emph{overwhelming} objections). In brief:
+the resulting theory is cumbersome to use; it is profligate in
+postulating different kinds of objects; and it is not clear, in the
+end, that impredicative definitions are even  \emph{all that bad}. 
+	
+To bring out the last point, consider this remark from
+\citeauthor{Ramsey1925}:
+\begin{quote}
+	we may refer to a man as the tallest in a group, thus identifying him by means of a totality of which he is himself a member without there being any vicious circle. (\citealt{Ramsey1925}; written in 1925)
+\end{quote}
+Ramsey's point is that ``the tallest man in the group'' \emph{is} an
+impredicative definition; but it is obviously perfectly kosher. 
+
+One might respond that, in this case, we could pick out the tallest
+person by \emph{predicative} means. For example, maybe we could just
+point at the man in question. The objection against impredicative
+definitions, then, would clearly need to be limited to entities which
+can \emph{only} be picked out impredicatively. But even then, we would
+need to hear more, about why such ``essential impredicativity'' would
+be so bad.\footnote{For more, see \citet{LinneboPID}.}
+
+Admittedly, impredicative definitions are extremely bad news, if we
+want our definitions to provide us with something like a recipe for
+\emph{creating} an object. For, given an impredicative definition, one
+would genuinely be caught in a vicious circle: to create the
+impredicatively specified object, one would \emph{first} need to
+create all the objects (including the impredicatively specified
+object), since the impredicatively specified object is specified in
+terms of all the objects; so one would need to create the
+impredicatively specified object before one had created it itself. But
+again, this is only a serious objection against ``essentially
+impredicatively'' specified sets, if we think of sets as things that
+we \emph{create}. And we (probably) don't.
+
+As such---for better or worse---the approach which became common does
+not involve taking a hard line concerning (im)predicativity. Rather,
+it involves what is now regarded as the cumulative-iterative approach.
+In the end, this will allow us to stratify our sets into
+``stages''---a \emph{bit} like the predicative approach stratifies
+entities into sets$_0$, sets$_1$, sets$_2$, \ldots---but we will not
+postulate any difference in kind between them. 
+
+\end{document}

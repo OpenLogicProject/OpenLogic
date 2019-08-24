@@ -1,0 +1,57 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+	
+\olfileid{sth}{z}{nat}
+\olsection{Selecting our Natural Numbers}
+
+%Let us take it for granted that the informal principle \stagesinf{}
+%can be justified. It is also, though, worth commenting on the
+%particular axiom we extracted from that informal principle. 
+
+In \olref[infinity-again]{defnomega}, we explicitly defined
+the expression ``natural numbers''. How should you understand this
+stipulation? It is not a metaphysical claim. It is just a decision to
+\emph{treat} certain sets as the natural numbers. some metaphysically
+significant sense. We touched upon reasons for thinking this in
+\olref[sfr][rel][ref]{sec}, \olref[sfr][arith][ref]{sec} and
+\olref[sfr][infinite][dedekindsproof]{sec}. But we can make these
+reasons even more pointed.
+
+Our Axiom of Infinity follows \citet{VonNeumann1925}. But here is
+another axiom, which we could have adopted instead:
+
+\
+\\\emph{Zermelo's \citeyear{Zermelo1908Untersuchungen} Axiom of Infinity.} There is a set $A$ such that $\emptyset \in A$ and $(\forall x \in A)\{x\} \in A$. 
+
+\
+\\
+Had we used Zermelo's axiom, instead of our (von Neumann-inspired)
+Axiom of Infinity, we would equally well have been given a Dedekind
+infinite set, and so a Dedekind algebra. On Zermelo's approach, the
+distinguished element of our algebra would again have been $\emptyset$
+(our surrogate for $0$), but the injection would have been given by
+the map $x \mapsto \{x\}$, rather than $x \mapsto x \cup \{x\}$. The
+simplest upshot of this is that Zermelo treats $2$ as
+$\{\{\emptyset\}\}$, whereas we (with von Neumann) treat $2$ as
+$\{\emptyset, \{\emptyset\}\}$. 
+
+Why choose one axiom of Infinity rather than the other? The main
+practical reason is that von Neumann's approach ``scales up'' to
+handle transfinite numbers rather well. We will explore this from
+\olref[ordinals][]{chap} onwards. However, from the simple
+perspective of \emph{doing arithmetic}, both approaches would do
+equally well. So if someone tells you that the natural numbers
+\emph{are} sets, the obvious question is: \emph{Which sets are they?} 
+
+This precise question was made famous by \citet{Benacerraf1965}. But
+it is worth emphasising that it is just the most famous example of a
+phenomenon that we have encountered many times already. The basic
+point is this. Set theory gives us a way to \emph{simulate} a bunch of
+``intuitive'' kinds of entities: the reals, rationals, integers, and
+naturals, yes; but also ordered pairs, functions, and relations.
+However, set theory never provides us with a \emph{unique} choice of
+simulation. There are \emph{always} alternatives
+which---straightforwardly---would have served us just as well. 
+
+\end{document}

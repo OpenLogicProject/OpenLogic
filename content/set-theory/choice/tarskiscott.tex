@@ -1,0 +1,74 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{tarskiscott}
+\olsection{The Tarski-Scott Trick}
+
+In \olref[cardinals][cardsasords]{defcardinalasordinal}, I
+defined cardinals as ordinals. To do this, I assumed the Axiom of
+Well-Ordering. I did this, for no other reason than that it is the
+``industry standard''.
+
+Before we discuss any of the philosophical issues surrounding
+Well-Ordering, then, it is important to be clear that we \emph{can}
+depart from the industry standard, and develop a theory of cardinals
+\emph{without} assuming Well-Ordering. We can still employ the
+definitions of $\cardeq{A}{B}$, $\cardle{A}{B}$ and $\cardless{A}{B}$,
+as they appeared in \olref[sfr][siz][]{chap}. We will just need a new
+notion of \emph{cardinal}.
+
+A na\"ive thought would be to attempt to define $A$'s cardinality thus:
+\[
+	\Setabs{x}{\cardeq{A}{x}}.
+\]
+You might want to compare this with Frege's definition of $\# x Fx$,
+sketched at the very end of \olref[cardinals][hp]{sec}. And, for
+reasons we gestured at there, this definition fails. Any singleton set
+is equinumerous with $\{\emptyset\}$. But new singleton sets are
+formed at every successor stage of the hierarchy (just consider the
+singleton of the previous stage). So $\Setabs{x}{\cardeq{A}{x}}$ does
+not exist, since it cannot have a rank.
+
+To get around this problem, we use a trick due to Tarski and Scott:
+
+\begin{defn}[Tarski-Scott]
+For any formula $\phi(x)$,\footnote{Which may have parameters.} let
+$[ x : \phi(x)] $ be the set of all $x$, of least possible rank, such
+that $\phi(x)$ (or $\emptyset$, if there are no $\phi$s).
+\end{defn}
+
+We should check that this definition is legitimate. Working in $\ZF$,
+\olref[spine][foundation]{zfentailsregularity} guarantees that
+$\setrank{x}$ exists for every $x$. Now, if there are any entities
+satisfying $\phi$, then we can let $\alpha$ be the least rank such
+that  $(\exists x\subseteq V_\alpha)\phi(x)$, i.e., $(\forall \beta
+\in \alpha)(\forall x \subseteq V_\beta)\lnot \phi(x)$. We can then
+define $[x : \phi(x)]$ by Separation as $\Setabs{x \in
+V_{\alpha+1}}{\phi(x)}$. 
+
+Having justified the Tarski-Scott trick, we can now use it to define
+a notion of cardinality:
+
+\begin{defn}
+The \textsc{ts}-cardinality of $A$ is $\text{tsc}(A) = [x :
+\cardeq{A}{x}]$.
+\end{defn}
+
+The definition of a \textsc{ts}-cardinal does not use Well-Ordering.
+But, even without that Axiom, we can show that
+\emph{\textsc{ts}-cardinals} behave rather like \emph{cardinals} as
+defined in \olref[cardinals][cardsasords]{defcardinalasordinal}.
+For example, if we restate
+\olref[cardinals][cardsasords]{lem:CardinalsBehaveRight} and
+\olref[card-arithmetic][opps]{lem:SizePowerset2Exp} in terms of
+\textsc{ts}-cardinals, the proofs go through just fine in $\ZF$,
+without assuming Well-Ordering. 
+
+Whilst we are on the topic, it is worth noting that we can also
+develop a theory of ordinals using the Tarski-Scott trick. Where
+$\tuple{A, <}$ is a well-ordering, let $\text{tso}(A, <) = [\tuple{X,
+R} : \ordeq{\tuple{A, <}}{\tuple{X, R}}]$. For more on this treatment
+of cardinals and ordinals, see \citet[chs.~9--12]{Potter2004}.
+
+\end{document}

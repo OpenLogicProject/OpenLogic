@@ -1,0 +1,64 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{pairs}
+\olsection{Pairs}
+
+The next axiom to consider is the following:
+
+\begin{axiom}[Pairs]
+For any sets $a, b$, the set $\{a, b\}$ exists.\\
+	$\forall a \forall b \exists P \forall x (x \in P \liff (x = a \lor x = b))$
+\end{axiom}
+
+Here is how to justify this axiom, using the iterative conception. Suppose $a$ is available at stage $S$, and $b$ is available at stage $T$. Let $M$ be whichever of stages $S$ and $T$ comes later. Then since $a$ and $b$ are both available at stage $M$, the set $\{a,b\}$ is a possible collection available at any stage after $M$ (whichever is the greater). 
+
+But hold on!{} Why assume that there \emph{are} any stages after $M$? If there are none, then our justification will fail. So, to justify Pairs, we will have to add another principle to the story we told in \olref[sth][z][story]{sec}, namely:
+\begin{enumerate}
+	\item[] \stagessucc. There is no last stage.
+\end{enumerate}
+Is this principle justified? Nothing in Shoenfield's story stated
+\emph{explicitly} that there is no last stage. Still, even if it is
+(strictly speaking) an extra addition to our story, it fits well with
+the basic idea that sets are formed in stages. We will simply accept
+it in what follows. And so, we will accept the Axiom of Pairs too.
+
+Armed with this new Axiom, we can prove the existence of plenty more sets. For example:
+
+\begin{prop}\ollabel{prop:pairsconsequences}
+For any sets $a$ and $b$, the following sets exist:
+	\begin{enumerate}
+		\item\ollabel{singleton} $\{a\}$
+		\item\ollabel{binunion} $a \cup b$
+		\item\ollabel{tuples} $\tuple{a, b}$
+	\end{enumerate}
+\end{prop}
+
+\begin{proof}
+\olref{singleton}. By Pairs, $\{a, a\}$ exists, which is $\{a\}$ by
+Extensionality. 
+
+\olref{binunion}. By Pairs, $\{a, b\}$ exists. Now $a \cup b = \bigcup
+\{a, b\}$ exists by Union. 
+
+\olref{tuples}. By \olref{singleton}, $\{a\}$ exists. By Pairs, $\{a,
+b\}$ exists. Now $\{\{a\}, \{a, b\}\} = \tuple{a, b}$ exists, by Pairs
+again.
+\end{proof}
+
+\begin{prob}
+Show that, for any sets $a, b, c$, the set $\{a, b, c\}$ exists.
+\end{prob}
+
+\begin{prob}
+Show that, for any sets $a_1, \ldots, a_n$, the set $\{a_1, \ldots,
+a_n\}$ exists.
+\end{prob}
+
+%\begin{proof} By two applications of Pairs, $\{\{a_1, a_2\}, \{a_1,
+%   a_3\}\}$ exists. By Union and Extensionality, $\bigcup \{\{a_1,
+%   a_2\}, \{a_1, a_3\}\} = \{a_1, a_2, a_3\}$ exists. Repeat this
+%   trick as often as necessary. \end{proof}
+
+\end{document}

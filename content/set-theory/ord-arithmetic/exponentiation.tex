@@ -1,0 +1,59 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{expo}
+\olsection{Ordinal Exponentiation}
+
+We now move to ordinal exponentiation. Sadly, there is no \emph{nice}
+synthetic definition for ordinal exponentiation.
+
+Sure, there \emph{are} explicit synthetic definitions. Here is one.
+Let $\text{finfun}(\alpha,\beta)$ be the set of all functions $f
+\colon \alpha \to \beta$ such that $\Setabs{\gamma \in
+\alpha}{f(\gamma) \neq 0}$ is equinumerous with some natural number.
+Define a well-ordering on $\text{finfun}(\alpha,\beta)$ by $f
+\sqsubset g$ iff $f \neq g$ and $f(\gamma_0) < g(\gamma_0)$, where
+$\gamma_0 = \text{max}\Setabs{\gamma \in \alpha}{f(\gamma) \neq
+g(\gamma)}$. Then we can define $\ordexpo{\alpha}{\beta}$ as
+$\ordtype{\text{finfun}(\alpha, \beta), \sqsubset}$. Potter employs
+this explicit definition, and then immediately explains:
+\begin{quote}
+	The choice of this ordering is determined purely by our desire to
+	obtain a definition of ordinal exponentiation which obeys the
+	appropriate recursive condition\ldots, and it is much harder to
+	picture than either the ordered sum or the ordered product.
+	\citep[p.~199]{Potter2004}
+\end{quote}
+Quite. We explained addition as ``a copy of $\alpha$ followed by a
+copy of $\beta$'', and multiplication as ``a $\beta$-sequence of
+copies of $\alpha$''. But I have nothing pithy to say about
+$\text{finfun}(\alpha, \gamma)$. So instead, I will offer the
+definition of ordinal exponentiation just \emph{by} transfinite
+recursion, i.e.:
+
+\begin{defn}\ollabel{ordexporecursion}
+\begin{align*}
+	\ordexpo{\alpha}{0} &= 1\\
+	\ordexpo{\alpha}{\beta\ordplus 1} &=\ordexpo{\alpha}{\beta} \ordtimes \alpha\\
+	\ordexpo{\alpha}{\beta} &= \bigcup_{\delta < \beta}\ordexpo{\alpha}{\delta}& & \text{when $\beta$ is a limit ordinal}
+\end{align*}
+\end{defn}
+
+If we were working \emph{as} set theorists, we might want to explore
+some of the properties of ordinal exponentiation. But I have nothing
+much more to add, except to note the unsurprising fact that ordinal
+exponentiation does not commute. Thus $\ordexpo{2}{\omega} =
+\bigcup_{\delta < \omega}\ordexpo{2}{\delta} = \omega$, whereas
+$\ordexpo{\omega}{2} = \omega \ordtimes \omega$. But then, we should
+not \emph{expect} exponentiation to commute, since it does not commute
+with natural numbers: $\ordexpo{2}{3} = 8 < 9 = \ordexpo{3}{2}$. 
+
+\begin{prob}
+Using Transfinite Induction, prove that, if we define
+$\ordexpo{\alpha}{\beta} = \ordtype{\text{finfun}(\alpha, \beta),
+\sqsubset}$, we obtain the recursion equations of
+\olref[sth][ord-arithmetic][expo]{ordexporecursion}.
+\end{prob}
+
+\end{document}
