@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     texlive-latex-recommended \
     texlive-latex-extra \
     texlive-science \
-    latexmk \
+    latexmk 
     # Additionally install these to packages to fix a bug saying tikz.sty is missing
     # texlive-pictures \
     # pgf 
