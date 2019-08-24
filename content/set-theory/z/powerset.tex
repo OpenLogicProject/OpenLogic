@@ -1,0 +1,60 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{power}
+\olsection{Powersets}
+
+We will proceed with another axiom:
+
+\begin{axiom}[Powersets]
+For any set $A$, the set $\Pow{A} = \Setabs{x}{x \subseteq A}$ exists.\\
+		$\forall A \exists P \forall x(x \in P \liff (\forall z \in x)z \in A)$
+\end{axiom}
+
+Our justification for this is pretty straightforward. Suppose $A$ is
+formed at stage $S$. Then all of $A$'s members were available before
+$S$ (by \stagesacc). So, reasoning as in our justification for
+Separation, every subset of $A$ is formed by stage $S$. So they are
+all available, to be formed into a single set, at any stage after $S$.
+And we know that there is some such stage, since $S$ is not the last
+stage (by \stagessucc). So $\Pow{A}$ exists.
+	
+Here is a nice consequence of Powersets:
+
+\begin{prop}\label{thm:Products}
+Given any sets $A, B$, their Cartesian product $A \times B$ exists.
+\end{prop}
+
+\begin{proof}
+The set $\Pow{\Pow{A \cup B}}$ exists by Powersets and
+\olref[sth][z][pairs]{prop:pairsconsequences}. So by Separation, this
+set exists:
+\[
+	C = \Setabs{z \in \Pow{\Pow{A \cup B}}}{(\exists x \in A)(\exists y \in B) z = \tuple{x, y}}.
+\]
+Now, for any $x \in A$ and $y \in B$, the set $\tuple{x, y}$ exists by
+\olref[sth][z][pairs]{prop:pairsconsequences}. Moreover, since $x, y
+\in A \cup B$, we have that $\{x\}, \{x, y\} \in \Pow{A \cup B}$, and
+$\tuple{x,y} \in \Pow{\Pow{A \cup B}}$. So $A \times B = C$.
+\end{proof}
+
+In this proof, Powerset interacts with Separation. And that is no
+surprise. Without Separation, Powersets wouldn't be a very
+\emph{powerful} principle. After all, Separation tells us which
+subsets of a set exist, and hence determines just how ``fat'' each
+Powerset is.  
+
+\begin{prob}
+Show that, for any sets $A, B$: (i) the set of all relations with
+domain $A$ and range $B$ exists; and (ii) the set of all functions
+from $A$ to $B$ exists.
+\end{prob}
+
+\begin{prob}
+Let $A$ be a set, and let $\sim$ be an equivalence relation on $A$.
+Prove that the set of equivalence classes under $\sim$ on $A$, i.e.,
+$\equivclass{A}{\sim}$, exists.
+\end{prob}
+
+\end{document}

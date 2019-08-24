@@ -1,0 +1,90 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{story}{approach}
+\olsection{The Cumulative-Iterative Approach}
+
+Here is a slightly fuller statement of how we will stratify sets into
+stages:
+\begin{quote}
+	Sets are formed in \emph{stages}. For each stage $S$, there are
+	certain stages which are \emph{before} $S$. At stage $S$, each
+	collection consisting of sets formed at stages before $S$ is
+	formed into a set. There are no sets other than the sets which are
+	formed at stages. \citep[p.~323]{Shoenfield:AST}
+\end{quote} 
+This is a sketch of the the \emph{cumulative-iterative conception of
+set}. It will underpin the formal set theory that we present in
+\olref[sth][][]{part}. 
+
+Let's explore this in a little more detail. As Shoenfield describes
+the process, at every stage, we form new sets from the {sets} which
+were available to us from earlier stages. So, on Shoenfield's picture,
+at the initial stage, stage $0$, there are no \emph{earlier} stages,
+and so \emph{a fortiori} there are no sets available to us from
+earlier stages.\footnote{Why should we assume that there \emph{is} a
+first stage? See the footnote to \stagesord{} in
+\olref[z][story]{sec}.} So we form only one set: the set
+with no !!{element}s $\emptyset$. At stage $1$, exactly one set is
+available to us from earlier stages, so only one new set is
+$\{\emptyset\}$. At stage $2$, two sets are available to us from
+earlier stages, and we form two new sets $\{\{\emptyset\}\}$ and
+$\{\emptyset, \{\emptyset\}\}$. At stage $3$, four sets are available
+to us from earlier stages, so we form twelve new sets\ldots. As such,
+the cumulative-iterative  picture of the sets will look a bit like
+this (with numbers indicating stages):
+\begin{center}
+	\begin{tikzpicture}[scale=0.6]
+	\tikzset{cut_here/.style={densely dotted}}
+	\draw (-4,6) -- (-1, 0)-- (2,6); 
+	\draw[cut_here] (-5,8)--(-4,6);
+	\draw[cut_here] (2,6)--(3,8);
+	\draw(-1.5, 1)--(-0.5, 1);
+	\draw(-2, 2)--(0, 2);
+	\draw(-2.5, 3)--(0.5,3);
+	\draw(-3, 4)--(1, 4);
+	\draw(-3.5, 5)--(1.5, 5);
+	\draw(-4, 6)--(2, 6);
+	\node[label] at (0, 0) {\small 0};
+	\node[label] at (0.5, 1) {\small 1};
+	\node[label] at (1, 2) {\small 2};
+	\node[label] at (1.5, 3) {\small 3};
+	\node[label] at (2, 4) {\small 4};
+	\node[label] at (2.5, 5) {\small 5};
+	\node[label] at (3, 6) {\small 6};
+	\end{tikzpicture}
+\end{center}
+So: why should we embrace this story? 
+
+One reason is that it is a nice, tractable story. Given the demise of
+the most obvious story, i.e., Na\"ive Comprehension, we are in want of
+something nice. 
+
+But the story is not \emph{just} nice. We have a good reason to
+believe that any set theory based on this story will be
+\emph{consistent}. Here is why. 
+
+Given the cumulative-iterative conception of set, we form sets at
+stages; and their !!{element}s must be objects which were available
+\emph{already}. So, for any stage $S$, I can form the set 
+\[
+	R_S = \Setabs{x}{x \notin x \text{ and $x$ was available before $S$}}
+\]
+The reasoning involved in proving Russell's Paradox will now establish
+that $R_S$ itself is not available before stage $S$. And that's not a
+contradiction. Moreover, if we embrace the cumulative-iterative
+conception of set, then we shouldn't even have \emph{expected} to be
+able to form the Russell set itself. For that would be the set of all
+non-self-membered sets that ``will ever be available''. In short: the
+fact that we (provably) can't form the Russell set isn't
+\emph{surprising}, given the cumulative-iterative story; it's what we
+would \emph{predict}.
+
+%In one sense, then, the cumulative-iterative conception of set yields a response to Russell's Paradox which is rather like the \emph{predicativist}'s response. After all, the predicativist said that the collection of all non-self-membered sets$_n$ is a set$_{n+1}$, and this set$_n$ will not be self-membered. (Indeed, most predicativists will treat it as \emph{ungrammatical} to try to ask whether a set is self-membered.)
+%
+%But there is an important difference between the cumulative-iterative approach and the predicativist approach: the cumulative-iterative approach treats all of our entities as being \emph{of the same kind}. The predicativist will presumably have an empty set$_0$ (i.e.\ a set$_0$ with no !!{element}s), and an empty set$_1$ (i.e.\ a set$_1$ with no !!{element}s), and these will be \emph{different entities}. But on the cumulative-iterative approach, there is just one empty set, $\emptyset$, and it will be available at every stage of the hierarchy. 
+
+%Indeed, the Axiom of Extensionality, stated at the start of this chapter, will hold true of the elements in this hierarchy (so that there can be \emph{only one} ``empty'' set). But I do not intend to use the cumulative-iterative conception to justify Extensionality (see \cite{Boolos1971}). Again: I suggest that we should accept Extensionality, just because we are interested in extensional collections. 
+
+\end{document}

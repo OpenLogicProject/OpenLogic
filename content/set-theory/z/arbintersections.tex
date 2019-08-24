@@ -1,0 +1,56 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{arbintersections}
+\olsection{Closure, Comprehension, and Intersection}
+
+In \olref[sth][z][milestone]{sec}, we suggested that you should look
+back through the na\"ive work of \olref[sfr][][]{part} and check that
+it can be carried out in~$\Zminus$. If you followed that advice,
+\emph{one} point might have tripped you up: the use of
+\emph{intersection} in Dedekind's treatment of \emph{closures}. 
+
+Recall from \olref[sfr][infinite][dedekind]{Closure} that
+$\closureofunder{f}{o} = \bigcap\Setabs{X}{o \in X \text{ and $X$ is
+$f$-closed}}$. The general shape of this is a definition of the form:
+\[
+	C = \bigcap\Setabs{X}{\phi(X)}
+\]
+But this should ring alarm bells: since Na\"ive Comprehension fails,
+there is no guarantee that $\Setabs{X}{\phi(X)}$ exists. It looks
+dangerously, then, like such definitions are \emph{cheating}. 
+
+Fortunately, they are not cheating; or rather, if they \emph{are}
+cheating as they stand, then we can engage in some honest toil to
+render them kosher. That honest toil was foreshadowed in
+\olref[sth][z][sep]{prop:intersectionsexist}, when we explained why
+$\bigcap A$ exists for any $A \neq \emptyset$. But I will spell it out
+explicitly.
+
+Given Extensionality, if we attempt to define $C$ as
+$\bigcap\Setabs{X}{\phi(X)}$, all we are really asking is for an
+object $C$ which obeys the following:
+\begin{equation}\ollabel{bicondelimarbintersection}
+	\forall x(x \in C \liff \forall X(\phi(X) \lonlyif x \in X))
+\end{equation}
+Now, suppose there is \emph{some} set, $S$, such that $\phi(S)$. Then
+to deliver \olref{bicondelimarbintersection}, we can simply define $C$
+using \emph{Separation}, as follows:
+\[
+	C = \Setabs{x \in S}{\forall X(\phi(X) \lonlyif x \in X)}.
+\]
+I leave it as an exercise to check that this definition yields
+\olref{bicondelimarbintersection}, as desired. 
+%  fix $x$. First suppose that $x \in C$, as (re)defined; then both $x
+%  \in S$ and $\forall X(\phi(X) \lonlyif x \in X)$; but since
+%  $\phi(S)$, this reduces to the condition that $\forall X(\phi(X)
+%  \lonlyif x \in X)$. Conversely, suppose $\forall X(\phi(X) \lonlyif
+%  x \in X)$; then, since $\phi(S)$, we also have that $x \in S$; so
+%  $x \in c$, as (re)defined. 
+And this general strategy will allow us to circumvent any apparent use of na\"ive comprehension in defining intersections. In the particular case which got us started on this, namely that of $\closureofunder{f}{o}$, here is how that would work. I began the proof of \olref[sfr][infinite][dedekind]{closureproperties} by noting that $o \in \ran{f}\cup\{o\}$ and that $\ran{f} \cup \{o\}$ is $f$-closed. So, we can define what we want thus:
+\[
+	\closureofunder{f}{o} = \Setabs{x \in \ran{f} \cup \{o\}}{(\forall X \ni o)(X \text{ is $f$-closed} \lonlyif x \in X)}.
+\]
+
+\end{document}

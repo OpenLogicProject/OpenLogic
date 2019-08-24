@@ -1,0 +1,94 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{infinitesimals}
+\olsection{Infinitesimals and Differentiation}
+
+Newton and Leibniz discovered the calculus (independently) at the end
+of the 17th century. A particularly important application of the
+calculus was \emph{differentiation}. Roughly speaking, differentiation
+aims to give a notion of the ``rate of change'', or gradient, of a
+function at a point. 
+
+Here is a vivid way to illustrate the idea.  Consider the function
+$f(x) = \nicefrac{x^2}{4} + \nicefrac{1}{2}$, depicted in black below:
+\begin{center}
+	\begin{tikzpicture}[scale=1]
+	\draw[->, gray] (-1,0) -- (4.25,0) node[right] {$x$};
+	\draw[->, gray] (0,-0.25) -- (0,5.25) node[above] {$f(x)$};
+	
+	\foreach \x/\xtext in {1/1, 2/2, 3/3, 4/4}
+	\draw[shift={(\x,0)}, gray] (0pt,2pt) -- (0pt,-2pt) node[below] {$\xtext$};
+	
+	\foreach \y/\ytext in {1/1, 2/2, 3/3, 4/4, 5/5}
+	\draw[shift={(0,\y)}, gray] (2pt,0pt) -- (-2pt,0pt) node[left] {$\ytext$};
+	
+	\draw[oldiagcolorC] (0.5, 9/16) -- (3.5, 57/16) -- (3.5, 9/16)--cycle;
+	\draw[oldiagcolorD] (.5, 9/16) -- (2.5, 33/16) -- (2.5, 9/16) -- cycle;
+	\draw[oldiagcolorE] (.5, 9/16) -- (1.5, 17/16) -- (1.5, 9/16) -- cycle;
+	\draw[thick] (-1,.75) parabola bend (0,0.5) (4,4.5);
+	\end{tikzpicture}
+\end{center}
+Suppose we want to find the gradient of the function at $c =
+\nicefrac{1}{2}$. We start by drawing a triangle whose hypotenuse
+approximates the gradient at that point, perhaps the red triangle
+above. When $\beta$ is the base length of our triangle, its height is
+$f(\nicefrac{1}{2}+\beta) - f(\nicefrac{1}{2})$, so that the gradient
+of the hypotenuse is:
+\[
+\frac{f(\nicefrac{1}{2}+\beta) - f(\nicefrac{1}{2})}{\beta}.
+\]
+So the gradient of our !!{colorC} triangle, with base length~$3$, is
+exactly~$1$. The hypotenuse of a smaller triangle, the !!{colorD}
+triangle with base length~$2$, gives a better approximation; its
+gradient is $\nicefrac{3}{4}$. A yet smaller triangle, the !!{colorE}
+triangle with base length~$1$, gives a yet better approximation; with
+gradient $\nicefrac{1}{2}$. 
+
+Ever-smaller triangles give us ever-better approximations. So we might
+say something like this: the hypotenuse of a triangle with an
+\emph{infinitesimal} base length gives us the gradient at $c =
+\nicefrac{1}{2}$ itself. In this way, we would obtain a formula for
+the (first) derivative of the function $f$ at the point $c$:
+\[
+{f'}(c) = \frac{f(c+\beta) - f(c)}{\beta} \text{ where $\beta$ is infinitesimal.}
+\]
+And, roughly, this is what Newton and Leibniz said. 
+
+However, since they have said this, we must ask them: what is an
+\emph{infinitesimal}? A serious dilemma arises. If $\beta = 0$, then
+$f'$ is ill-defined, for it involves dividing by $0$. But if $\beta >
+0$, then we just get an \emph{approximation} to the gradient, and not
+the gradient itself. 
+
+This is not an anachronistic concern. Here is Berkeley, criticizing
+Newton's followers:
+\begin{quote}
+I admit that signs may be made to denote either any thing or nothing:
+and consequently that in the original notation $c + \beta$, $\beta$
+might have signified either an increment or nothing. But then which of
+these soever you make it signify, you must argue consistently with
+such its signification, and not proceed upon a double meaning: Which
+to do were a manifest sophism. (\citealt[\S{}XIII]{Berkeley1734},
+variables changed to match preceding text)
+\end{quote}
+To defend the infinitesimal calculus against Berkeley, one might reply
+that the talk of ``infinitesimals'' is merely figurative. One might
+say that, so long as we take a \emph{really small} triangle, we will
+get a \emph{good enough} approximation to the tangent. Berkeley had a
+reply to this too: whilst that might be good enough for engineering,
+it undermines the \emph{status} of mathematics,  for
+\begin{quote}
+we are told that \emph{in rebus mathematicis errores qu\`{a}m minimi
+non sunt contemnendi}. [In the case of mathematics, the smallest
+errors are not to be neglected.] \citep[\S{}IX]{Berkeley1734}
+\end{quote}
+The italicised passage is a near-verbatim quote from Newton's own
+\emph{Quadrature of Curves} (1704). 
+
+Berkeley's philosophical objections are deeply incisive. Nevertheless,
+the calculus was a massively successful enterprise, and mathematicians
+continued to use it without falling into error.
+
+\end{document}

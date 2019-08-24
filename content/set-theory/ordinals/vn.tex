@@ -1,0 +1,61 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{vn}	
+\olsection[Von Neumann's Construction]{Von Neumann's Construction of the Ordinals}
+
+\olref[sth][ordinals][iso]{thm:woalwayscomparable} gives rise to a
+thought. We could introduce certain objects, called \emph{order
+types}, to go proxy for the well-orderings. Writing $\ordtype{A, <}$
+for the order type of the well-ordering $\tuple{A, <}$, we would hope
+to secure the following two principles:
+\begin{align*}
+	\ordtype{A, <} = \ordtype{B, \lessdot} & 
+	\text{ iff } \ordeq{\tuple{A, <}}{\tuple{B, \lessdot}}\\
+	\ordtype{A, <} < \ordtype{B, \lessdot}&
+	\text{ iff }\ordeq{\tuple{A, <}}{\tuple{B_b, \lessdot_b}}\text{ for some }b \in B
+\end{align*}
+Moreover, we might hope to introduce order-types \emph{as certain
+sets}, just as we can introduce the natural numbers as certain sets. 
+
+The most common way to do this---and the approach we will follow---is
+to define these order-types via certain \emph{canonical} well-ordered
+sets. These canonical sets were first introduced by von Neumann:
+
+\begin{defn}
+The set $A$ is \emph{transitive} {iff} $(\forall x \in A)x \subseteq
+A$. Then $A$ is an \emph{ordinal} {iff} $A$ is transitive and
+well-ordered by $\in$.
+\end{defn}
+
+In what follows, we will use Greek letters for ordinals. It follows
+immediately from the definition that, if $\alpha$ is an ordinal, then
+$\tuple{\alpha, \in_\alpha}$ is a well-ordering, where $\in_\alpha =
+\Setabs{\tuple{x, y} \in \alpha^2}{x \in y}$. So, abusing notation a
+little, we can just say that $\alpha$ \emph{itself} is a
+well-ordering. 
+
+Here are our first few ordinals:
+\[
+	\emptyset, \{\emptyset\}, 
+	\{\emptyset, \{\emptyset\}\}, 
+	\{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}, \ldots
+\]
+You will note that these are the first few ordinals that we
+encountered in our Axiom of Infinity, i.e., in von Neumann's
+definition of $\omega$ (see \olref[sth][z][infinity-again]{sec}). This
+is no coincidence. Von Neumann's definition of the ordinals treats
+natural numbers as ordinals, but allows for transfinite ordinals too. 
+
+As always, we can now ask: \emph{are} these the ordinals? Or has von
+Neumann simply given us some sets that we can \emph{treat} as the
+ordinals? The kinds of discussions one might have about this question
+are similar to the discussions we had in \olref[sfr][rel][ref]{sec},
+\olref[sfr][arith][ref]{sec},
+\olref[sfr][infinite][dedekindsproof]{sec}, and
+\olref[sth][z][nat]{sec}, so we will not belabour the point.
+Instead, in what follows, we will simply use ``the ordinals'' to speak
+of ``the von Neumann ordinals''. 
+
+\end{document}

@@ -1,0 +1,123 @@
+% Part: sets-functions-relations
+% Chapter: infinite
+% Section: dedekind
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{infinite}{dedekind}
+\olsection{Dedekind Algebras}
+
+We not only want natural numbers to be infinite; we want them to have
+certain (algebraic) properties: they need to behave well under
+addition, multiplication, and so forth. 
+
+Dedekind's idea was to take the idea of the \emph{successor function}
+as basic, and then characterise the numbers as those with the
+following properties:
+\begin{enumerate}
+	\item There is a number, $0$, which is not the successor of any number
+	\\i.e., $0 \notin \ran{s}$
+	\\i.e., $\forall x\ s(x) \neq 0$
+	\item Distinct numbers have distinct successors 
+	\\i.e., $s$ is !!a{injection}
+	\\i.e., $\forall x \forall y (s(x) = s(y) \lonlyif x = y)$
+	\item\ollabel{repeatedapplication} Every number is obtained from
+	$0$ by repeated applications of the successor function.
+\end{enumerate}
+The first two conditions are easy to deal with using first-order logic
+(see above). But we cannot deal with \olref{repeatedapplication} just
+using first-order logic. Dedekind's breakthrough was to reformulate
+condition \olref{repeatedapplication}, set-theoretically, as follows:
+\begin{enumerate}
+	\item[3$'$.] The natural numbers are the smallest set that is
+	\emph{closed under the successor function}: that is, if we apply
+	$s$ to any !!{element} of the set, we obtain another !!{element}
+	of the set.
+\end{enumerate}
+But we shall need to spell this out slowly.
+
+\begin{defn}\ollabel{Closure}
+	For any function $f$, the set $X$ is $f$-\emph{closed} {iff}
+	$(\forall x \in X)f(x) \in X$. Now define, for any $o$:
+	$$\closureofunder{f}{o} = \bigcap\Setabs{X}{o \in X\text{ and }X
+\text{ is $f$-closed}}$$
+\end{defn}
+
+So $\closureofunder{f}{o}$ is the intersection of all the $f$-closed
+sets with $o$ as !!a{element}. Intuitively, then,
+$\closureofunder{f}{o}$ is the \emph{smallest} $f$-closed set with $o$
+as !!a{element}. This next result makes that intuitive thought
+precise;
+\begin{lem}\ollabel{closureproperties}
+	For any function $f$ and any $o \in A$:
+	\begin{enumerate}
+		\item\ollabel{closurehaselem} $o \in \closureofunder{f}{o}$; and
+		\item\ollabel{closureclosed} $\closureofunder{f}{o}$ is $f$-closed; and
+		\item\ollabel{closuresmallest} if $X$ is $f$-closed and $o \in
+		X$, then $\closureofunder{f}{o} \subseteq X$
+	\end{enumerate}
+\end{lem}
+
+\begin{proof}
+Note that there is at least one $f$-closed set, namely $\ran{f}\cup
+\{o\}$. So $\closureofunder{f}{o}$, the intersection of \emph{all}
+such sets, exists. We must now check
+\olref{closurehaselem}--\olref{closuresmallest}.
+
+\olref{closurehaselem}. $o \in \closureofunder{f}{o}$ as it is an
+intersection of sets which all have $o$ as !!a{element}. 
+
+\olref{closureclosed}. Let $X$ be $f$-closed with $o \in X$. If $x \in
+\closureofunder{f}{o}$, then $x \in X$, and now $f(x) \in X$ as $X$ is
+$f$-closed, so $f(x) \in \closureofunder{f}{o}$.
+
+\olref{closuresmallest}. This follows from the general fact that if $X
+\in C$ then $\bigcap C \subseteq X$.
+\end{proof}
+
+Using this, we can say:
+
+\begin{defn}
+A \emph{Dedekind algebra} is a set $A$ together with a function $f
+\colon A \to A$ and some $o \in A$  such that:
+	\begin{enumerate}
+		\item \ollabel{ded:proper} $o \notin \ran{f}$
+		\item \ollabel{ded:injection} $f$ is !!a{injection}
+		\item \ollabel{ded:closure} $A = \closureofunder{f}{o}$
+	\end{enumerate}
+\end{defn}
+
+Since $A = \closureofunder{f}{o}$, our earlier result tells us that
+$A$ is the smallest $f$-closed set with $o$ as !!a{element}. Clearly a
+Dedekind algebra is Dedekind infinite; just look at clauses
+\olref{ded:proper} and \olref{ded:injection} of the definition. But
+the more exciting fact is that any Dedekind infinite set can be turned
+into a Dedekind algebra. 
+
+\begin{thm}\ollabel{thm:DedekindInfiniteAlgebra}
+If there is a Dedekind infinite set, then there is a Dedekind algebra.
+\end{thm}
+
+\begin{proof}
+Let $D$ be Dedekind infinite. So there is an injection $g \colon D \to
+D$ and an element $o  \in D \setminus \ran{g}$. Now let $A =
+\closureofunder{g}{o}$, and note that $o \in A$. Let $f =
+\funrestrictionto{g}{A}$. We will show that this constitutes a Dedekind
+algebra. 
+
+Concerning \olref{ded:proper}: $o \notin \ran{g}$ and $\ran{f}
+\subseteq \ran{g}$ so $o\notin \ran{f}$.
+
+Concerning \olref{ded:injection}: $g$ is an injection on $D$; so $f
+\subseteq g$ must be an injection.
+
+Concerning \olref{ded:closure}: Let $o \in B$. By
+\olref{closureproperties}, if $B \subsetneq A$, then $B$ is not
+$g$-closed. So $B$ is not $f$-closed either, as $f =
+\funrestrictionto{g}{A}$. So $A$ is the \emph{smallest} $f$-closed set
+with $o$ as an element, i.e., $A = \closureofunder{f}{o}$.
+\end{proof}
+
+\end{document}

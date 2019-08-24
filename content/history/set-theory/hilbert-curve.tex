@@ -1,0 +1,150 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{hilbertcurve}
+
+\olsection{Hilbert's Space-filling Curves}
+
+In chapter \olref[pathology]{sec}, we mentioned that Cantor's proof that
+a line and a square have exactly the same number of points
+(\olref[his][set][cantorplane]{thm:cantorplane}) prompted Peano to
+ask whether there might be a space-filling \emph{curve}. He obtained a
+positive answer in 1890. In this section, we explain (in a
+hand-wavy way) how to construct Hilbert's space-filling curve (with a
+tiny tweak).\footnote{For a more rigorous explanation, see
+\cite{RoseUnpublished}. The tweak amounts to the inclusion of the red
+parts of the curves below. This makes it slightly easier to check that
+the curve is continuous.}
+
+We must define a function, $h$, as the limit of a sequence of functions $h_1$, $h_2$, $h_3$, \dots\@ We first describe the construction. Then we show it is space-filling. Then we show it is a curve. 
+
+We will take $h$'s range to be the unit square, $\unitsquare$. Here is our first approximation to $h$, i.e., $h_1$:
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 40pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[oldiagcolorC, thick] (20pt, 0)--(20pt, 20pt);
+	\draw[oldiagcolorC, thick] (60pt, 0)--(60pt, 20pt);		
+	\begin{scope}[xshift=20pt, yshift=20pt]
+	\draw [black, thick, l-system={Hilbert curve, step=40pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+To keep track of things, we have imposed a $2 \times 2$ grid on the square. We can think of the curve starting in the bottom left quarter, moving to the top left, then to the top right, then finally to the bottom right. Here is the second stage in the construction, i.e., $h_2$:
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 20pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[oldiagcolorC, thick] (0pt, 10pt)--(10pt, 10pt);
+	\draw[oldiagcolorC, thick] (70pt, 10pt)--(80pt, 10pt);
+	\draw[thick, oldiagcolorE] (10pt, 30pt)--(10pt, 50pt); 
+	\draw[thick, oldiagcolorE] (30pt, 50pt)--(50pt, 50pt); 
+	\draw[thick, oldiagcolorE] (70pt, 50pt)--(70pt, 30pt); \begin{scope}[xshift=10pt, yshift=30pt]
+	\draw [thick, rotate=270,black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=10pt, yshift=50pt]
+	\draw [thick, black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=50pt, yshift=50pt]
+	\draw [thick, black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=70pt, yshift=10pt]
+	\draw [thick, rotate=90,black, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=1}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+The different colours will help explain how $h_2$ was constructed. We first place scaled-down copies of the non-!!{colorC} bit of $h_1$ into the bottom left, top left, top right, and bottom right of our square (drawn in black). We then connect these four figures (with !!{colorE} lines). Finally, we connect our figure to the boundary of the square (with !!{colorC} lines).
+
+Now to $h_3$. Just as $h_2$ was made from four connected, scaled-down copies of the non-red bit of $h_1$, so $h_3$ is made up of four scaled-down copies of the non-red bit of $h_2$ (drawn in black), which are then joined together (with !!{colorE} lines) and finally connected to the boundary of the square (with !!{colorC} lines).
+\begin{center}
+	\begin{tikzpicture}
+	\draw[gray] (0pt, 0pt) rectangle (80pt, 80pt);
+	\draw[step = 10pt, gray, very thin] (0pt, 0pt) grid (80pt, 80pt);
+	\draw[thick, oldiagcolorC](5pt, 0pt)--(5pt, 5pt); 
+	\draw[thick, oldiagcolorC] (75pt, 0pt)--(75pt, 5pt); 
+	\draw[thick, oldiagcolorE] (75pt, 45pt)--(75pt, 35pt);
+	\draw[thick, oldiagcolorE] (5pt, 35pt)--(5pt, 45pt); 
+	\draw[thick, oldiagcolorE] (35pt, 45pt)--(45pt, 45pt); 
+	\draw[thick, oldiagcolorE] (75pt, 45pt)--(75pt, 35pt); \begin{scope}[xshift=5pt, yshift=35pt]
+	\draw [rotate=270, thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=5pt, yshift=45pt]
+	\draw [thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=45pt, yshift=45pt]
+	\draw [thick, black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\begin{scope}[xshift=75pt, yshift=5pt]
+	\draw [thick, rotate=90,black, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=2}]  lindenmayer system;
+	\end{scope}
+	\end{tikzpicture}
+\end{center}
+And now we see the general pattern for defining $h_{n+1}$ from $h_n$.
+At last we define the curve $h$ \emph{itself} by considering the
+point-by-point limit of these successive functions $h_1$, $h_2$,
+\dots\@ That is, for each $x \in \unitsquare$:
+\begin{align*}
+	h(x) &= \lim_{n \rightarrow \infty} h_n(x)
+\end{align*} 
+We now show that this curve fills space. When we draw the curve $h_n$,
+we impose a $2^n \times 2^n$ grid onto $\unitsquare$. By Pythagoras's
+Theorem, the diagonal of each grid-location is of length:
+\[
+\sqrt{\left(\nicefrac{1}{2^{n}}\right)^2+\left(\nicefrac{1}{2^{n}}\right)^2} = 2^{(\frac{1}{2}-n)}
+\]
+and evidently $h_n$ passes through every grid-location. So each point
+in $\unitsquare$ is \emph{at most} $2^{(\frac{1}{2}-n)}$ distance away
+from some point on $h_n$. Now, $h$ is defined as the limit of the
+functions $h_1$, $h_2$, $h_3$, \dots\@ So the maximum distance of any
+point from $h$ is given by:
+\[
+\lim_{n \rightarrow \infty} 2^{(\frac{1}{2}-n)} = 0.
+\]
+That is: every point in $\unitsquare$ is $0$ distance from~$h$. In
+other words, every point of $\unitsquare$ lies \emph{on} the curve. So $h$
+fills space!{}
+
+It remains to show that $h$ is, indeed, a \emph{curve}. To show this,
+we must define the notion. The modern definition builds on one given
+by Jordan in 1887 (i.e., only a few years before the first
+space-filling curve was provided): 
+
+\begin{defn}
+A curve is a continuous map from $\unitline$ to $\Real^2$. 
+\end{defn}
+
+This is fairly intuitive: a curve is, intuitively, a ``smooth'' map
+which takes a canonical line onto the plane $\Real^2$. Our function,
+$h$, is indeed a map from $\unitline$ to $\Real^2$. So, we just need
+to show that $h$ is continuous. We defined continuity in
+\olref[limits]{sec} using $\epsilon$/$\delta$ notation. In the
+vernacular, we want to establish the following: \emph{If you specify a
+point $p$ in $\unitsquare$, together with any desired level of
+precision $\epsilon$, I can find an open section of $\unitline$ such
+that, given any $x$ in that open section, $h(x)$ is within $\epsilon$
+of $p$.}
+
+So: assume that you have specified $p$ and $\epsilon$. This is, in
+effect, to draw a circle with centre $p$ and radius $\epsilon$ on
+$\unitsquare$. (The circle might spill off the edge of $\unitsquare$,
+but that doesn't matter.) Now, recall that, when describing the
+function $h_n$, we drew a $2^n \times 2^n$ grid upon $\unitsquare$. It
+is obvious that, no matter how small $\epsilon$ is, there is some $n$
+such that some individual grid-location of the $2^n \times 2^n$ grid
+on $\unitsquare$ lies wholly within the circle with centre $p$ and
+radius $\epsilon$. 
+
+So, take that $n$, and let $I$ be the largest open part of $\unitline$
+which $h_n$ maps wholly into the relevant grid location. (It is clear
+that $(a,b)$ exists, since we already noted that $h_n$ passes through
+every grid-location in the $2^n\times 2^n$ grid.) It now suffices to
+show to show that, whenever $x \in I$ the point $h(x)$ lies in that
+same grid-location. And to do \emph{this}, it suffices to show that
+$h_m(x)$ lies in that same grid location, for any $m > n$. But this is
+obvious. If we consider what happens with $h_m$ for $m > n$, we see
+that that exactly the ``same part'' of the unit interval is mapped
+into the same grid-location; we just map it into that region in an
+increasingly stretched-out, wiggly fashion. 
+
+\end{document}

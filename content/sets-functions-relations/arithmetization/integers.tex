@@ -1,0 +1,78 @@
+% Part: sets-functions-relations
+% Chapter: arithmetisation
+% Section: From N to Z
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+
+\begin{document}
+
+\olfileid{sfr}{arith}{int}
+\olsection{From $\Nat$ to $\Int$}
+
+Here are two basic realisations:
+	\begin{enumerate}
+		\item Every integer can be written in the form $n - m$, with $n, m \in\Nat$.
+		\item The information encoded in an expression $n - m$ can equally be encoded by an ordered pair $\tuple{n, m}$.
+	\end{enumerate}
+We already know that the ordered pairs of natural numbers are the !!{element}s of $\Nat^2$. And we are assuming that we understand $\Nat$. So here is a na\"{i}ve suggestion, based on the two realisations we have had: \emph{let's treat integers as ordered pairs of natural numbers}.
+
+In fact, this suggestion is too na\"{i}ve. Obviously we want it to be the case that $0- 2 = 4 - 6$. But evidently $\tuple{0, 2 }\neq \tuple{4, 6}$. So we cannot simply say that $\Nat^2$ is the set of integers. 
+
+Generalising from the preceding problem, what we want is the following:
+	$$a - b = c - d \text{ iff }a + d = c + b$$
+(It should be obvious that this is how integers are \emph{meant} to behave: just add $b$ and $d$ to both sides.) And the easy way to guarantee this behaviour is just to define an equivalence relation between ordered pairs, $\Intequiv$, as follows:
+$$\tuple{ a, b } \Intequiv \tuple{c, d}\text{ iff }a + d = c + b$$  
+We now have to show that this is an equivalence relation.
+\begin{prop} $\Intequiv$ is an equivalence relation.
+\end{prop}
+	\begin{proof}
+	We must show that $\Intequiv$ is reflexive, symmetric, and transitive. 
+	
+	\emph{Reflexivity:} Evidently $\tuple{a, b} \Intequiv \tuple{a, b}$, since $a + b = b + a$.
+	
+	\emph{Symmetry:} Suppose $\tuple{a, b} \Intequiv \tuple{c, d}$, so $a + d = c + b$. Then $c + b = a + d$, so that $\tuple{c, d} \Intequiv \tuple{a, b}$.
+	
+	\emph{Transitivity:} Suppose $\tuple{a, b} \Intequiv \tuple{c, d}\Intequiv \tuple{m, n}$. So $a + d = c + b$ and $c + n = m + d$. So $a + d + c + n = c + b + m + d$, and so $a + n = m + b$. Hence $\tuple{a, b } \Intequiv \tuple{m, n}$.		
+\end{proof}
+
+Now we can use this equivalence relation to take equivalence classes:
+
+\begin{defn}
+		The integers are the equivalence classes, under $\Intequiv$, of  ordered pairs of natural numbers; that is, $\Int = \equivclass{\Nat^2}{\Intequiv}$.
+\end{defn}
+
+Now, one might have plenty of different \emph{philosophical} reactions to this stipulative definition. Before we consider those reactions, though, it is worth continuing with some of the technicalities. 
+
+Having said what the integers are, we shall need to define basic functions and relations on them. Let's write $\equivrep{m, n}{\Intequiv}$ for the equivalence class under $\Intequiv$ with $\tuple{m, n}$ as !!a{element}.\footnote{Note: using the notation introduced in \olref[sfr][rel][eqv]{def:equivalenceclass}, we would have written $\equivrep{\tuple{m,n}}{\Intequiv}$ for the same thing. But that's just a bit harder to read.} That is: 
+	$$\equivrep{m, n}{\Intequiv} = \Setabs{\tuple{a, b} \in \Nat^2}{\tuple{a, b}\Intequiv \tuple{m, n}}$$
+So now we offer some definitions:
+	\begin{align*}
+		\equivrep{a, b}{\Intequiv} + \equivrep{c, d}{\Intequiv} &= \equivrep{a + c, b + d}{\Intequiv}\\
+		\equivrep{a, b}{\Intequiv} \times \equivrep{c, d}{\Intequiv} &= \equivrep{a c + b  d, a  d + b c}{\Intequiv}\\
+		\equivrep{a, b}{\Intequiv} \leq \equivrep{c, d}{\Intequiv} &\text{ iff }a + d \leq b c
+	\end{align*}	
+(As is common, I'm using `$ab$' stand for `$(a \times b)$', just to make the axioms easier to read.) Now, we need to make sure that these definitions behave as they \emph{ought} to. Spelling out what this means, and checking it through, is rather laborious; we relegate the details to \olref[check]{sec}. But the short point is: everything works! 
+
+One final thing remains. We have constructed the integers using natural numbers. But this will mean that the natural numbers \emph{are not themselves integers}. I will return to the philosophical significance of this in \olref[ref]{sec}. On a purely technical front, though, we will need some way to be able to treat natural numbers \emph{as} integers. The idea is quite easy: for each $n \in \Nat$, we just stipulate that $n_\Int = \equivrep{n, 0}{\Intequiv}$. We need to confirm that this definition is well-behaved, i.e.\ that for any $m, n \in \Nat$
+\begin{align*}
+	(m + n)_\Int &= m_\Int + n_\Int\\
+	(m \times n)_\Int &= m_\Int \times n_\Int\\
+	m \leq n &\liff m_\Int \leq n_\Int
+\end{align*}
+But this is all pretty straightforward. For example, to show that the second of these obtains, I can simply help myself to the behaviour of the natural numbers and reason thus:
+%\begin{proof}
+%	Helping myself to the behaviour of the natural numbers, evidently:
+	\begin{align*}
+%		(m + n)_\Int  = \equivrep{m + n, 0}{\Intequiv} = \equivrep{m + n, 0 + 0}{\Intequiv} = \equivrep{m, 0}{\Intequiv} + \equivrep{n, 0}{\Intequiv} = m_\Int + n_\Int\\
+		(m \times n)_\Int  &= \equivrep{m \times n, 0}{\Intequiv} \\
+		&= \equivrep{m \times n + 0 \times 0, m \times 0 + 0 \times n}{\Intequiv} \\
+		&= \equivrep{m, 0}{\Intequiv} \times \equivrep{n, 0}{\Intequiv} \\
+		&= m_\Int \times n_\Int
+	\end{align*}
+%\end{proof}
+We leave it as an exercise to confirm that the other two conditions hold.
+\begin{prob}
+	Show that $(m + n)_\Int = m_\Int + n_\Int$ and $m \leq n \liff m_\Int \leq n_\Int$, for any $m, n \in \Nat$.
+\end{prob}
+\end{document}

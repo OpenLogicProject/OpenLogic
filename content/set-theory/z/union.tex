@@ -1,0 +1,24 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{z}{union}
+\olsection{Union}
+
+\olref[sth][z][sep]{prop:intersectionsexist} gave us intersections.
+But if we want arbitrary unions to exist, we need to lay down another
+axiom:
+
+\begin{axiom}[Union] For any set $A$, the set $\bigcup A =
+\Setabs{x}{(\exists b \in A) x \in b}$ exists.\\
+	$\forall A \exists U \forall x(x \in U \liff (\exists b \in A)x \in b)$
+\end{axiom}
+
+This axiom is also justified by the cumulative-iterative conception.
+Let $A$ be a set, so $A$ is formed at some stage $S$ (by \stageshier).
+Every member of $A$ was formed \emph{before}  $S$ (by \stagesacc); so,
+reasoning similarly, every member of every member of $A$ was formed
+before $S$. Thus all of \emph{those} sets are available before $S$, to
+be formed into a set at $S$. And that set is just $\bigcup A$.
+
+\end{document}

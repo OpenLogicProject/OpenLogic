@@ -1,0 +1,232 @@
+% Part: sets-functions-relations
+% Chapter: arithmetisation
+% Section: cauchy
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{arith}{cauchy}
+
+\olsection{The Reals as Cauchy Sequences}
+
+In \olref[cuts]{sec}, we constructed the reals as Dedekind cuts. In
+this section, we explain an alternative construction. It builds on
+Cauchy's definition of (what we now call) a Cauchy sequence; but the
+use of this definition to \emph{construct} the reals is due to other
+nineteenth-century authors, notably Weierstrass, Heine, M\'{e}ray and
+Cantor. (For a nice history, see \citeauthor{OConnorRobertson:RN}
+\citeyear{OConnorRobertson:RN}.)
+
+Before we get to the nineteenth century, it's worth considering Simon
+Stevin (1548--1620). In brief, Stevin realised that we can think of
+each real in terms of its decimal expansion. Thus even an irrational
+number, like $\sqrt{2}$, has a nice decimal expansion, beginning:
+\[
+	1.41421356237\ldots
+\] 
+It is very easy to model decimal expansions in set theory: simply
+consider them as functions $d \colon \Nat \to \Nat$, where $d(n)$ is
+the $n$th decimal place that we are interested in. We will then need a
+bit of tweak, to handle the bit of the real number that comes before
+the decimal point (here, just $1$). We will also need a further tweak
+(an equivalence relation) to guarantee that, for example, $0.999\ldots
+= 1$. But it is not difficult to offer a perfectly rigorous
+construction of the real numbers, in the manner of Stevin, within set
+theory. 
+
+Stevin is not our focus. (For more on Stevin, see
+\citealt{KatzKatz2012}.) But here is a closely related thought.
+Instead of treating $\sqrt{2}$'s decimal expansion directly, we can
+instead consider a  \emph{sequence} of increasingly accurate rational
+approximations to $\sqrt{2}$, by considering the increasingly precise
+expansions: 
+\[
+1, 1.4, 1.414, 1.4142, 1.41421,\ldots
+\]
+The idea that reals can be considered via ``increasingly good
+approximations'' provides us with the basis for another sequence of
+insights (akin to the realisations that we used when constructing
+$\Rat$ from $\Int$, or $\Int$ from $\Nat$). The basic insights are
+these:
+\begin{enumerate}
+	\item Every real can be written as a (perhaps infinite) decimal
+	expansion.
+	\item The information encoded by a (perhaps infinite) decimal
+	expansion can be equally be encoded by a sequence of rational
+	numbers.
+	\item A sequence of rational numbers can be thought of as a
+	function from $\Nat$ to $\Rat$; just let $f(n)$ be the $n$th
+	rational in the sequence.
+\end{enumerate}
+Of course, not just \emph{any} function from $\Nat$ to $\Rat$ will
+give us a real number. For instance, consider this function:
+\[
+	f(n) =\begin{cases}
+			1 & \text{if }n\text{ is odd}\\
+			0 &\text{if }n\text{ is even}
+		\end{cases}
+\]
+Essentially the worry here is that the sequence $0,1,0,1,0,1,0,\ldots$
+doesn't seem to ``hone in'' on any real. So: to ensure that we
+consider sequences which do hone in on some real, we need to restrict
+our attention to sequences which have some \emph{limit}. 
+
+We have already encountered the idea of a limit, in
+\olref[his][set][limits]{sec}. But we cannot use \emph{quite} the same
+definition as we used there. The expression ``$(\forall \epsilon>0)$''
+there tacitly involved quantification over the real numbers; and we
+were considering the limits of functions on the real numbers; so
+invoking that definition would be to help ourselves to the real
+numbers; and they are exactly what we were aiming to \emph{construct}.
+Fortunately, we can work with a closely related idea of a limit. 
+\begin{defn}\ollabel{def:CauchySequence}
+  A function $f: \Nat \to \Rat$ is a \emph{Cauchy sequence} iff for
+  any positive $\epsilon \in \Rat$ we have that $(\exists \ell \in
+  \Nat)(\forall m, n > \ell)|f(m) - f(n)| < \epsilon$.
+\end{defn}
+
+The general idea of a limit is the same as before: if you want a
+certain level of precision (measured by $\epsilon$), I can give you a
+``region'' to look in (any input greater than $\ell$). And it is easy
+to see that our sequence $1$, $1.4$, $1.414$, $1.4142$,
+$1.41421$\ldots has a limit: if you want to approximate $\sqrt{2}$ to
+within an error of $\nicefrac{1}{10^{n}}$, then just look to any entry
+after the $n$th.
+
+The obvious thought, then, would be to say that a real number just
+\emph{is} any Cauchy sequence. But, as in the constructions of $\Int$
+and $\Rat$, this would be too na\"{i}ve: for any given real number,
+multiple different Cauchy sequences indicate that real number. A
+simple way to see this as follows. Given a Cauchy sequence~$f$, define
+$g$ to be exactly the same function as~$f$, except that $g(0)\neq
+f(0)$. Since the two sequences agree everywhere after the first
+number, we will (ultimately) want to say that they have the same
+limit, in the sense employed in \olref{def:CauchySequence},
+and so should be thought of ``defining'' the same real. So, we should
+really think of these Cauchy sequences as the same real number.
+
+Consequently, we again need to define an equivalence relation on the
+Cauchy sequences, and identify real numbers with equivalence
+relations. First we need the idea of a function which tends to $0$ in
+the limit. For any function $h : \Nat \to \Rat$, say that \emph{$h$
+tends to $0$} iff for any positive $\epsilon \in \Rat$ we have that
+$(\exists \ell \in \Nat)(\forall n > \ell)|f(n)| <
+\epsilon$.\footnote{Compare this with the definition of $\lim_{x
+\mathord{\rightarrow}\infty}f(x) = 0$ in
+\olref[his][set][limits]{sec}.} Further, where $f$ and $g$ are
+functions $\Nat \to \Rat$, let $(f-g)(n) = f(n) - g(n)$. Now define:
+\[
+	f \Realequiv g \text{ iff $(f-g)$ tends to $0$}.
+\]
+We need to check that $\Realequiv$ is an equivalence relation; and it
+is. We can then, if we like, define the reals as the equivalence
+classes, under $\Realequiv$, of all Cauchy sequences from $\Nat \to
+\Rat$.
+
+\begin{prob}
+Let $f(n) = 0$ for every $n$. Let $g(n) = \frac{1}{(n+1)^2}$. Show
+that both are Cauchy sequences, and indeed that the limit of both
+functions is $0$, so that also $f \sim_\Real g$. 
+\end{prob}
+
+Having done this, we shall as usual write $\equivrep{f}{\Realequiv}$
+for the equivalence class with $f$ as !!a{element}. However, to keep
+things readable, in what follows I will drop the subscript and write
+just $\equivrep{f}{}$. We also stipulate that, for each $q \in \Rat$,
+we have $q_{\Real} = \equivrep{c_{q}}{}$, where $c_{q}$ is the
+constant function $c_q(n) = q$ for all $n \in \Nat$. We then define
+basic relations and operations on the reals, e.g.:
+\begin{align*}
+	\equivrep{f}{} + \equivrep{g}{} &= 	\equivrep{(f + g)}{} \\
+	\equivrep{f}{} \times 	\equivrep{g}{} &= \equivrep{(f \times g)}{} 
+\end{align*}
+where $(f + g)(n) = f(n) + g(n)$ and $(f \times g)(n) = f(n) \times
+g(n)$. Of course, we also need to check that each of  $(f + g)$,
+$(f-g)$ and $(f\times g)$ are Cauchy sequences when $f$ and $g$ are;
+but they are, and we leave this to you.
+
+Finally, we define we a notion of order. Say $\equivrep{f}{}$ is
+\emph{positive} iff both $\equivrep{f}{}\neq 0_\Rat$ and $(\exists
+\ell \in \Nat)(\forall n > \ell)0 < f(n)$. Then say $\equivrep{f}{} <
+\equivrep{g}{}$ iff $\equivrep{(g - f)}{}$ is positive. We have to
+check that this is well-defined (i.e., that it does not depend upon
+choice of ``representative'' function from the equivalence class). 
+%\begin{align*}
+%	\equivrep{f}{} \leq \equivrep{g}{} \text{ iff }&\equivrep{f}{} = \equivrep{g}{} \text{ or }\\
+%	&(\exists \ell \in \Nat)(\forall n \in \Nat)(\ell < n \lonlyif f(n) \leq g(n))
+%\end{align*}
+But having done this, it is quite easy to show that these yield the
+right algebraic properties; that is:
+\begin{thm}\ollabel{thm:cauchyorderedfield}
+The Cauchy sequences constitute an \emph{ordered field}.
+\end{thm}
+
+\begin{proof}
+Exercise. 
+\end{proof}
+
+\begin{prob}
+Prove that the Cauchy sequences constitute an ordered field.
+\end{prob}
+
+It is harder to prove that the reals, so constructed, have the
+Completeness Property, so we will give the proof.
+
+\begin{thm}
+Every non-empty set of Cauchy sequences with an upper bound has a
+least upper bound.
+\end{thm}
+
+\begin{proof}[Proof sketch] Let $S$ be any non-empty set of Cauchy
+sequences with an upper bound. So there is some $p \in \Rat$ such that
+$p_{\Real}$ is an upper bound for $S$. Let $r \in S$; then there is
+some $q \in \Rat$ such that $q_{\Real} < r$. So if a least upper bound
+on $S$ exists, it is between $q_\Real$ and $p_\Real$ (inclusive). 
+
+We will hone in on the l.u.b., by approaching it simultaneously from
+below and above. In particular, we define two functions, $f, g \colon
+\Nat \to \Rat$, with the aim that $f$ will hone in on the l.u.b.\ from
+above, and $g$ will hone on in it from below. We start by defining:
+\begin{align*}
+	f(0) &= p \\
+	g(0) &= q
+\end{align*}
+Then, where $a_n = \frac{f(n) + g(n)}{2}$, let:\footnote{This is a
+recursive definition. But we have not \emph{yet} given any reason to
+think that recursive definitions are ok.}
+\begin{align*}
+	f(n+1) &=
+	\begin{cases}
+		a_n &\text{if $(a_n)_\Real$ is an upper bound for }S\\
+		f(n)&\text{otherwise}
+	\end{cases}\\
+	g(n+1) &=
+	\begin{cases}
+		a_n &\text{if $(a_n)_\Real$ is a lower bound for }S\\
+	 	g(n) &\text{otherwise}
+	\end{cases}
+\end{align*}
+Both $f$ and $g$ are Cauchy sequences. (This can be checked fairly
+easily; but I leave it as an exercise.) Note that the function $(f-g)$
+tends to $0$, since the difference between $f$ and $g$ halves at every
+step. Hence $\equivrep{f}{} = \equivrep{g}{}$. 
+
+To show that  $\equivrep{f}{}$ is an upper bound for $S$, we will
+invoke \olref{thm:cauchyorderedfield}. Let $\equivrep{h}{} \in S$ and
+suppose, for reductio, that $\equivrep{f}{} < \equivrep{h}{}$, so that
+$0_\Real < \equivrep{(h-f)}{}$. Since $f$ is a monotonically
+decreasing Cauchy sequence, there is some $k \in \Nat$ such that
+$\equivrep{(c_{f(k)} - f)}{} < \equivrep{(h-f)}{}$. So:
+\[
+(f(k))_\Real  = \equivrep{c_{f(k)}}{} < \equivrep{f}{} + \equivrep{(h-f)}{} = \equivrep{h}{},
+\]
+contradicting the fact that $(f(k)_\Real)$ is, by construction, an
+upper bound for $S$.
+
+In an exactly similar way, we can show that $\equivrep{g}{}$ is a
+lower bound for $S$. So $\equivrep{f}{} = \equivrep{g}{}$ is the
+\emph{least} upper bound for $S$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,111 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ord-arithmetic}{mult}
+
+\olsection{Ordinal Multiplication}
+
+We now turn to ordinal multiplication, and we approach this much like
+ordinal addition. So, suppose we want to multiply $\alpha$ by~$\beta$.
+To do this, you might imagine a rectangular grid, with width $\alpha$
+and height $\beta$; the product of $\alpha$ and $\beta$ is now the
+result of moving along each row, then moving through the next
+row\ldots until you have moved through the entire grid. Otherwise put,
+the product of $\alpha$ and $\beta$ arises by replacing \emph{each}
+element in $\beta$ with a copy of $\alpha$.  
+
+To make this formal, we simply use the reverse lexicographic ordering
+on the Cartesian product of $\alpha$ and $\beta$:
+
+\begin{defn}
+For any ordinals $\alpha, \beta$, their product $\alpha \ordtimes \beta = \ordtype{\alpha \times \beta, \rlexless}$.
+\end{defn}
+
+We must again confirm that this is a well-formed definition:
+
+\begin{lem}\ollabel{ordtimeslessiswo}
+$\tuple{\alpha \times \beta, \rlexless}$ is a well-order, for any
+ordinals $\alpha$ and $\beta$.
+\end{lem}
+
+\begin{proof}
+Exactly as for \olref[add]{ordsumlessiswo}.
+\end{proof}
+
+And it is also not hard to prove that multiplication behaves thus:
+
+\begin{lem}\ollabel{ordtimesrecursion}
+For any ordinals $\alpha, \beta$:
+\begin{align*}
+	\alpha \ordtimes 0 &= 0\\
+	\alpha \ordtimes (\beta \ordplus 1) &= 
+		(\alpha \ordtimes \beta) \ordplus \alpha\\
+	\alpha  \ordtimes \beta &= 
+		\supstrict_{\delta < \beta}(\alpha \ordtimes \delta) && 
+		\text{when $\beta$ is a limit ordinal}.
+\end{align*}
+\end{lem}
+
+\begin{proof}
+Left as an exercise.
+\end{proof}
+
+Indeed, just as in the case of addition, we could have defined ordinal
+multiplication via these recursion equations, rather than offering a
+direct definition. Equally, as with addition, certain behaviour is
+familiar:
+
+\begin{lem}\ollabel{ordinalmultiplicationisnice}
+If $\alpha, \beta, \gamma$ are ordinals, then:
+\begin{enumerate}
+	\item\ollabel{ordtimes1} if $\alpha \neq 0$ and $\beta < \gamma$,
+	then $\alpha \ordtimes \beta < \alpha \ordtimes \gamma$;
+	\item\ollabel{ordtimes2} if $\alpha \neq 0$ and $\alpha \ordtimes
+	\beta = \alpha\ordtimes\gamma$, then $\beta = \gamma$;
+	\item\ollabel{ordtimes3}  $\alpha \ordtimes (\beta \ordtimes
+	\gamma) = (\alpha \ordtimes \beta) \ordtimes \gamma$;
+	\item\ollabel{ordtimes4}  If $\alpha \leq \beta$, then $\alpha
+	\ordtimes \gamma \leq \beta \ordtimes \gamma$;
+	\item\ollabel{ordtimes5}  $\alpha \ordtimes (\beta \ordplus
+	\gamma) = (\alpha \ordtimes \beta )\ordplus (\alpha\ordtimes
+	\gamma)$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+Left as an exercise.
+\end{proof}
+
+You can prove (or look up) other results, to your heart's content.
+But, given
+\olref[ord-arithmetic][add]{ordsumnotcommute}, the
+following should not come as a surprise:
+
+\begin{prop}
+Ordinal multiplication is not commutative: $2 \ordtimes \omega  =
+\omega < \omega \ordtimes 2$
+\end{prop}
+
+\begin{proof}
+$2 \ordtimes \omega = \supstrict_{n < \omega}(2\ordtimes  n) = \omega \in \supstrict_{n < \omega}(\omega \ordplus n) = \omega \ordplus \omega = \omega \ordtimes 2$.
+\end{proof}
+
+Again, the intuitive rationale is quite straightforward. To compute $2
+\ordtimes \omega$, you replace each natural number with two entities.
+You would get the same order type if you simply inserted all the
+``half'' numbers into the natural numbers, i.e., you considered the
+natural ordering on $\Setabs{\nicefrac{n}{2}}{n \in \omega}$. And, put
+like that, the order type is plainly the same as that of $\omega$
+itself. But, to compute $\omega \ordtimes 2$, you place down two
+copies of $\omega$, one after the other. 
+
+\begin{prob}
+Prove
+\olref[sth][ord-arithmetic][mult]{ordtimeslessiswo},
+\olref[sth][ord-arithmetic][mult]{ordtimesrecursion},
+and
+\olref[sth][ord-arithmetic][mult]{ordinalmultiplicationisnice}
+\end{prob}
+
+\end{document}

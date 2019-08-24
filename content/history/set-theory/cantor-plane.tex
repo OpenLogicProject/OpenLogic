@@ -1,0 +1,80 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{cantorplane}
+\olsection{Cantor on the Line and the Plane}
+
+Some of the circumstances surrounding the proof of
+Schr\"oder-Bernstein tie in with the history we discussed in
+\olref[his][set][pathology]{sec}. Recall that, in 1877,
+Cantor proved that there are exactly as many points on a square as on
+one of its sides. Here, we will present his (first attempted) proof.
+
+Let $\unitline$ be the unit line, i.e., the set of points $[0,1]$. Let
+$\unitsquare$ be the unit square, i.e., the set of points $\unitline
+\times \unitline$. In these terms, Cantor proved that
+$\cardeq{\unitline}{\unitsquare}$. He wrote a note to Dedekind,
+essentially containing the following argument.
+
+\begin{thm}\ollabel{thm:cantorplane}
+$\cardeq{\unitline}{\unitsquare}$
+\end{thm}
+
+\begin{proof}[Proof: first part.] 
+Fix $a, b \in \unitline$. Write them in binary notation, so that we
+have infinite sequences of $0$s and $1$s, $a_1$, $a_2$, \dots, and
+$b_1$, $b_2$, \dots, such that:
+\begin{align*}
+a &= 0.a_1a_2a_3a_4\dots\\
+b &= 0.b_1b_2b_3b_4\dots
+\intertext{Now consider the function $f \colon \unitsquare \to \unitline$ given by} 
+f(a, b) & = 0.a_1b_1a_2b_2a_3b_3a_4b_4\dots
+\end{align*}
+Now $f$ is !!a{injection}, since if $f(a, b) = f(c,d)$, then  $a_n =
+c_n$ and $b_n = d_n$ for all $n \in \Nat$, so that $a = c$ and $b =
+d$.
+\end{proof}
+
+Unfortunately, as Dedekind pointed out to Cantor, this does not answer
+the original question. Consider $0.\dot{1}\dot{0} =
+0.1010101010\ldots$. We need that $f(a,b) = 0.\dot{1}\dot{0}$, where:
+\begin{align*}
+a&= 0.\dot{1}\dot{1} = 0.111111\ldots\\
+b&= 0
+\end{align*}
+But $a = 0.\dot{1}\dot{1} = 1$. So, when we say ``write $a$ and $b$ in
+binary notation'', we have to choose \emph{which} notation to use;
+and, since $f$ is to be a \emph{function}, we can use only \emph{one}
+of the two possible notations. But if, for example, we use the simple
+notation, and write $a$ as ``$1.000\ldots$'', then we have no pair
+$\tuple{a, b}$ such that $f(a, b) = 0.\dot{1}\dot{0}$. 
+
+To summarise: Dedekind pointed out that, given the possibility of
+certain recurring decimal expansions, Cantor's function $f$ is
+!!a{injection} but \emph{not} !!a{surjection}. So Cantor has shown
+only that $\cardle{\unitsquare}{\unitline}$ and \emph{not} that
+$\cardeq{\unitsquare}{\unitline}$. 
+
+Cantor wrote back to Dedekind almost immediately, essentially
+suggesting that the proof could be completed as follows:
+
+\begin{proof}[Proof: completed.] 
+So, we have shown that $\cardle{\unitsquare}{\unitline}$. But there is
+obviously !!a{injection} from $\unitline$ to $\unitsquare$: just lay
+the line flat along one side of the square. So
+$\cardle{\unitline}{\unitsquare}$ and
+$\cardle{\unitsquare}{\unitline}$. By Schr\"{o}der--Bernstein
+(\olref[sfr][siz][sb]{thm:schroder-bernstein}),
+$\cardeq{\unitline}{\unitsquare}$.
+\end{proof}
+
+But of course, Cantor could not complete the last line in these terms,
+for the Schr\"{o}der-Bernstein Theorem was not yet proved. Indeed,
+although Cantor would subsequently formulate this as a general
+conjecture, it was not satisfactorily proved until 1897. (And so,
+later in 1877, Cantor offered a different proof of
+\olref{thm:cantorplane}, which did not go via
+Schr\"{o}der--Bernstein.)
+
+\end{document}

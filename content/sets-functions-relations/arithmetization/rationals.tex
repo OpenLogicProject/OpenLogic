@@ -1,0 +1,70 @@
+% Part: sets-functions-relations
+% Chapter: arithmetisation
+% Section: rationals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{arith}{rat}
+\olsection{From $\Int$ to $\Rat$}
+
+We just saw how to construct the integers from the natural numbers,
+using some na\"{i}ve set theory. We shall now see how to construct the
+rationals from the integers in a very similar way. Our initial
+realisations are:
+\begin{enumerate}
+	\item Every rational can be written in the form $\nicefrac{i}{j}$,
+	where both $i$ and $j$ are integers but $j$ is non-zero.
+	\item The information encoded in an expression $\nicefrac{i}{j}$
+	can equally be encoded in an ordered pair $\tuple{ i, j}$.
+\end{enumerate}
+The obvious approach would be to think of the rationals \emph{as}
+ordered pairs drawn from $\Int \times (\Int \setminus \{0_\Int\})$. As
+before, though, that would be a bit too na\"ive, since we want
+$\nicefrac{3}{2} = \nicefrac{6}{4}$, but $\tuple{ 3, 2}\neq \tuple{ 6,
+4}$. More generally, we will want the following:
+\[
+	nicefrac{a}{b} = \nicefrac{c}{d} \text{ iff } a \times d = b \times c
+\]
+To get this, we define an {equivalence relation} on  $\Int \times
+(\Int \setminus \{0_\Int\})$ thus:
+\[
+	\tuple{ a, b }\Ratequiv \tuple{ c, d} \text{ iff }a \times d = b \times c
+\]
+We must check that this is an equivalence relation. This is very much
+like the case of $\Intequiv$, and we will leave it as an exercise. 
+
+\begin{prob}
+Show that $\Ratequiv$ is an equivalence relation.
+\end{prob}
+
+But this allows us to say:
+\begin{defn}
+The rationals are the equivalence classes, under $\Ratequiv$, of pairs
+of integers (whose second element is non-zero):  $\Rat =
+\equivclass{(\Int \times (\Int\setminus \{0_\Int\}))}{\Ratequiv}$.
+\end{defn}
+
+As with the integers, we also want to define some basic operations.
+Where $\equivrep{i,j}{\Ratequiv}$ is the equivalence class under
+$\Ratequiv$ with $\tuple{ i, j}$ as !!a{element}, we say:
+\begin{align*}
+	\equivrep{a, b}{\Ratequiv} + \equivrep{c, d}{\Ratequiv} &= \equivrep{ad + bc,  bd}{\Ratequiv}\\
+	\equivrep{a, b}{\Ratequiv} \times \equivrep{c, d}{\Ratequiv} &= \equivrep{a  c, b d}{\Ratequiv}\\
+	\equivrep{a, b}{\Ratequiv} \leq \equivrep{c, d}{\Ratequiv} &\text{ iff }ad \leq bc
+\end{align*}
+We then need to check that these definitions behave as they
+\emph{ought} to; and we relegate this to \olref[check]{sec}. But they
+indeed do!{} Finally, we want some way to treat integers \emph{as}
+rationals; so for each $i \in \Int$, we stipulate that $i_\Rat =
+\equivrep{i, 1_\Int}{\Ratequiv}$. Again, we check that all of this
+behaves correctly in \olref[check]{sec}.
+
+\begin{prob}
+Show that $(i + j)_\Rat = i_\Rat+ j_\Rat$ and $(i \times j)_\Rat =
+i_\Rat \times j_\Rat$ and $i \leq j \liff i_\Rat \leq j_\Rat$, for any
+$i, j \in \Int$.
+\end{prob}
+
+\end{document}

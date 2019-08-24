@@ -1,0 +1,106 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{spine}{foundation}
+
+\olsection{Foundation}
+
+We have almost articulated the vision of the iterative-cumulative
+hierarchy in~$\ZFminus$. ``Almost'', because there is a wrinkle. Nothing in
+$\ZFminus$ guarantees that \emph{every} set is in some $V_\alpha$,
+i.e., that every set is formed at some stage. 
+
+Now, there is a fairly straightforward (mathematical) sense in which
+we don't \emph{care} whether there are sets outside the hierarchy. (If
+there are any there, we can simply ignore them.) But we have motivated
+our \emph{concept} of set with the thought that every set is formed at
+some stage (see \stageshier{} in \olref[z][story]{sec}.) So
+we will want to preclude the possibility of sets which fall outside of
+the hierarchy. Accordingly, we must add a new axiom, which ensures
+that every set occurs somewhere in the hierarchy. 
+
+Since the $V_\alpha$s are our stages, we might simply consider adding
+the following as an axiom:
+
+\
+\\\emph{Regularity.} $\forall A \exists \alpha\, A \subseteq V_\alpha$
+
+\ \\This is \citeauthor{VonNeumann1925}'s approach
+(\citeyear{VonNeumann1925}). However, for reasons I will explain in
+the next section, we will instead adopt an alternative axiom:
+
+\begin{axiom}[Foundation]
+$(\forall A \neq \emptyset)(\exists B \in A)A \cap B = \emptyset$.
+\end{axiom}
+
+With some effort, we can show (in $\ZFminus$) that Foundation entails Regularity:
+\begin{defn}
+For each set $A$, let:
+\begin{align*}
+	\text{cl}_0(A) &= A,\\
+	\text{cl}_{n+1}(A) &= \bigcup \text{cl}_n(A),\\
+	\text{trcl}(A) &= \bigcup_{n < \omega} \text{cl}_{n}(A).
+\end{align*}
+\end{defn}
+
+We call $\text{trcl}(A)$ the \emph{transitive closure} of $A$. The name is apt:
+
+\begin{prop}\ollabel{subsetoftrcl}
+$A \subseteq \trcl{A}$ and $\trcl{A}$ is a transitive set. 
+\end{prop}
+
+\begin{proof}
+Evidently $A = \text{cl}_0(A) \subseteq \text{trcl}(A)$. And if $x
+\in b \in \trcl{A}$,  then $b \in \text{cl}_n(A)$ for some $n$, so $x
+\in \text{cl}_{n+1}(A) \subseteq \text{trcl}(A)$. 
+\end{proof}
+
+\begin{lem}\ollabel{lem:TransitiveWellFounded}
+If $A$ is a transitive set, then there is some $\alpha$ such that $A
+\subseteq V_\alpha$.
+\end{lem}
+
+\begin{proof}
+Recalling the definition of ``$\supstrict(X)$'' from
+\olref[ordinals][opps]{defsupstrict}, define:
+\begin{align*}
+	D  &= \Setabs{x \in A}{\forall \delta\ x \nsubseteq V_\delta}\\
+	\alpha &= \supstrict\Setabs{\delta}{(\exists x \in A)
+	(x \subseteq V_\delta \land (\forall \gamma \in \delta)x \nsubseteq V_\gamma)}
+\end{align*}
+Suppose $D = \emptyset$. So if $x \in A$, then there is some $\delta
+\in \alpha$ such that $x \subseteq V_\delta$, so $x \in V_\alpha$ by
+\olref[spine][Valphabasic]{Valphabasicprops}. Hence $A \subseteq
+V_{\alpha}$, as required. 
+
+So it suffices to show that $D = \emptyset$. For reductio, suppose
+otherwise. By Foundation, there is some $B \in D$ such that $D \cap B
+= \emptyset$. If $x \in B$ then $x \in A$, since $A$ is transitive,
+and since $x \notin D$, it follows that $\exists \delta\ x \subseteq
+V_\delta$. So now let
+\[
+	\beta = \supstrict\Setabs{\delta}{(\exists x \in b)(x \subseteq V_\delta \land (\forall \gamma < \delta)x \nsubseteq V_\gamma)}.
+\]
+As before, $B \subseteq V_\beta$, contradicting the claim that $B \in
+D$.	
+\end{proof}
+
+\begin{thm}\ollabel{zfentailsregularity}
+Regularity holds.
+\end{thm}
+
+\begin{proof}
+Fix $A$; now $A \subseteq \trcl{A}$ by \olref{subsetoftrcl}, which is transitive. So there is some $\alpha$ such that $A \subseteq \trcl{A} \subseteq V_\alpha$ by \olref{lem:TransitiveWellFounded}
+\end{proof}
+
+These results show that $\ZFminus$ proves the conditional
+$\emph{Foundation}\Rightarrow\emph{Regularity}$. In
+\olref[spine][rank]{zfminusregularityfoundation}, we will show that
+$\ZFminus$ proves $\emph{Regularity}\Rightarrow\emph{Foundation}$. As
+such, Foundation and Regularity are \emph{equivalent} (modulo
+$\ZFminus$). But this means that, given $\ZFminus$, we can justify
+Foundation by noting that it is equivalent to Regularity. And we can
+justify Regularity immediately on the basis of \stageshier{}. 
+
+\end{document}

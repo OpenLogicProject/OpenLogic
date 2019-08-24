@@ -1,0 +1,113 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{his}{set}{pathology}
+\olsection{Pathologies}
+
+However, the definition of a \emph{limit} turned out to allow for some rather ``pathological'' constructions. 
+
+Around the 1830s, Bolzano discovered a function which was
+\emph{continuous everywhere}, but \emph{differentiable nowhere}.
+(Unfortunately, Bolzano never published this; the idea was first
+encountered by mathematicians in 1872, thanks to Weierstrass's
+independent discovery of the same idea.)\footnote{The history is
+documented in extremely thorough footnotes to the Wikipedia article on
+\href{http://en.wikipedia.org/wiki/Weierstrass_function}{the
+Weierstrass function}.} This was, to say the least, rather surprising.
+It is easy to find functions, such as $|x|$, which are continuous
+everywhere but not differentiable at a particular point. But a
+function which is continuous everywhere but differentiable
+\emph{nowhere} is a very different beast. Consider, for a moment, how
+you might try to draw such a function. To ensure it is continuous, you
+must be able to draw it without ever removing your pen from the page;
+but to ensure it is differentiable nowhere, you would have to abruptly
+change the direction of your pen, constantly.
+
+Further ``pathologies'' followed. In January 5 1874, Cantor wrote a
+letter to Dedekind, posing the problem:
+\begin{quote}
+Can a surface (say a square including its boundary) be one-to-one
+correlated to a line (say a straight line including its endpoints) so
+that to every point of the surface there corresponds a point of the
+line, and conversely to every point of the line there corresponds a
+point of the surface?
+
+It still seems to me at the moment that the answer to this question is
+very difficult---although here too one is so impelled to say \emph{no}
+that one would like to hold the proof to be almost superfluous.
+[Quoted in \citealt{Gouvea2011}]
+\end{quote}
+But, in 1877, Cantor proved that he had been wrong. In fact, a line
+and a square have exactly the same number of points. He wrote on 29
+June 1877 to Dedekind ``\emph{je le vois, mais je ne le crois pas}'';
+that is, ``I see it, but I don't believe it''. In the ``received
+history'' of mathematics, this is often taken to indicate just how
+\emph{literally incredible} these new results were to the
+mathematicians of the time. (The correspondence is presented in
+\citet{Gouvea2011}, and we return to it in
+\olref[his][set][mythology]{sec}. Cantor's proof is outlined in
+\olref[his][set][cantorplane]{sec}.) 
+
+Inspired by Cantor's result, Peano started to consider whether it
+might be possible to map a line \emph{smoothly} onto a plane. This
+would be a \emph{curve which fills space}. In \citeyear{Peano1890},
+Peano constructed just such a curve. This is truly counter-intuitive:
+Euclid had defined a line as ``breadthless length'' (Book I,
+Definition 2), but Peano had shown that, by curling up a line
+appropriately, its length can be turned into breadth. In
+\citeyear{Hilbert1891}, Hilbert described a slightly more intuitive
+space-filling curve, together with some pictures illustrating it. The
+curve is constructed in sequence, and here are the first six stages of
+the construction:\footnote{For credit on these pictures: Aristid
+Lindenmayer developed the Lindenmayer System for describing models of
+growth, which has here been implemented in the lindenmayersystems
+library for TikZ. I was also inspired by the Wikipedia entry on
+\href{http://en.wikipedia.org/wiki/Space-filling_curve}{space-filling
+curves}.}
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[xshift=20pt, yshift=20pt]
+	\draw [oldiagcolorC, l-system={Hilbert curve, step=40pt, angle=90, axiom=L, order=1}] lindenmayer system;
+\end{scope}
+\begin{scope}[xshift=110pt, yshift=10pt]
+	\draw [oldiagcolorC, l-system={Hilbert curve, step=20pt, angle=90, axiom=L, order=2}] lindenmayer system;
+\end{scope}
+\begin{scope}[xshift=205pt, yshift=5pt]
+	\draw [oldiagcolorC, l-system={Hilbert curve, step=10pt, angle=90, axiom=L, order=3}] lindenmayer system;
+\end{scope}
+\begin{scope}[xshift=2.5pt, yshift=-97.5pt]
+	\draw [oldiagcolorC, l-system={Hilbert curve, step=5pt, angle=90, axiom=L, order=4}] lindenmayer system;
+\end{scope}
+\begin{scope}[xshift=101.25pt, yshift=-98.75pt]
+	\draw [oldiagcolorC, l-system={Hilbert curve, step=2.5pt, angle=90, axiom=L, order=5}] lindenmayer system;
+\end{scope}
+\begin{scope}[xshift=200.625pt, yshift=-99.375pt]
+	\draw [oldiagcolorC, l-system={Hilbert curve, step=1.25pt, angle=90, axiom=L, order=6}] lindenmayer system;
+\end{scope}
+\draw[gray] (0pt,0pt) rectangle (80pt, 80pt);
+\draw[gray] (100pt,0pt) rectangle (180pt, 80pt);
+\draw[gray] (200pt,0pt) rectangle (280pt, 80pt);
+\draw[gray] (0pt,-100pt) rectangle (80pt, -20pt);
+\draw[gray] (100pt,-100pt) rectangle (180pt, -20pt);
+\draw[gray] (200pt,-100pt) rectangle (280pt, -20pt);
+\end{tikzpicture}  
+\end{center}
+In the limit---a notion which had, by now, received rigorous
+definition---the entire square is filled in solid !!{colorC}. And, in
+passing, Hilbert's curve is continuous everywhere but differentiable
+nowhere; intuitively because, in the infinite limit, the function
+abruptly changes direction at every moment. (We will outline Hilbert's
+construction in more detail in \olref[his][set][hilbertcurve]{sec}.)
+
+For better or worse, these ``pathological'' geometric constructions
+were treated as a reason to doubt appeals to geometric intuition. They
+became something approaching \emph{propaganda} for a new way of doing
+mathematics, which would culminate in set theory. In the later
+myth-building of the subject, it was repeated, often, that these
+results were both perfectly rigorous and perfectly shocking. They
+therefore served a dual purpose: as a warning against relying upon
+geometric intuition, and as a demonstration of the fertility of new
+ways of thinking. 
+
+\end{document}

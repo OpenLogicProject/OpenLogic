@@ -1,0 +1,67 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{ordinals}{wo}
+\olsection{Well-Orderings}
+
+The fundamental notion is as follows:
+
+\begin{defn}
+The relation $<$ \emph{well-orders} $A$ iff it meets these two conditions:
+\begin{enumerate}
+	\item $<$ is connected, i.e., for all $a, b \in A$, either $a < b$
+	or $a = b$ or $b < a$;
+	\item every non-empty subset of $A$ has a $<$-minimal !!{element},
+	i.e., if $\emptyset \neq X \subseteq A$ then $(\exists m \in
+	X)(\forall z \in X)z \nless m$
+\end{enumerate}
+\end{defn}
+
+It is easy to see that three examples we just considered were indeed
+well-ordering relations. 
+
+\begin{prob}
+\Olref[sth][ordinals][idea]{sec} presented three example orderings
+on the natural numbers. Check that each is a well-ordering.
+\end{prob}
+
+Here are some elementary but extremely important observations
+concerning well-ordering.
+
+\begin{prop}\ollabel{wo:strictorder}
+If $<$ well-orders $A$, then every non-empty subset of $A$ has a
+$<$-least member, and $<$ is irreflexive, asymmetric and transitive.
+\end{prop}
+
+\begin{proof}
+If $X$ is a non-empty subset of $A$, it has a $<$-minimal !!{element}
+$m$, i.e.\ $(\forall z \in X)z \nless m$. Since $<$ is connected,
+$(\forall z \in X)m \leq z$. So $m$ is $<$-least.
+
+For irreflexivity, fix $a \in A$; since $\{a\}$ has a $<$-least
+!!{element}, $a \nless a$. For transitivity, if $a < b < c$, then
+since $\{a, b, c\}$ has a $<$-least !!{element}, $a < c$. Asymmetry
+follows from irreflexivity and transitivity
+\end{proof}
+
+\begin{prop}\ollabel{propwoinduction}
+If $<$ well-orders $A$, then for any formula $\phi(x)$:\footnote{which
+may have parameters} 
+\[
+	\text{if }(\forall a \in A)((\forall b < a)\phi(b) \lonlyif 
+		\phi(a))\text{, then }(\forall a \in A)\phi(a).
+\]
+\end{prop}
+
+\begin{proof}
+We will prove the contrapositive. Suppose $\lnot(\forall a \in
+A)\phi(a)$, i.e.\ that $X = \Setabs{x \in A}{\lnot\phi(x)} \neq
+\emptyset$. Then $X$ has an $<$-minimal !!{element}, $a$. So $(\forall
+b < a)\phi(b)$ but $\lnot \phi(a)$. \end{proof}\noindent This last
+property should remind you of the principle of strong induction on the
+naturals, i.e.: if $(\forall n \in \omega)((\forall m < n)\phi(m)
+\lonlyif \phi(n))$, then $(\forall n \in \omega)\phi(n)$. And this
+property makes well-ordering into a very \emph{robust} notion. 
+
+\end{document}

@@ -1,0 +1,83 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{choice}{woproblem}
+\olsection{The Well-Ordering Problem}
+
+Evidently rather a lot hangs on whether we accept Well-Ordering. But
+the discussion of this principle has tended to focus on an equivalent
+principle, the Axiom of Choice. So we will now turn our attention to
+that (and prove the equivalence). 
+
+In \citeyear{Cantor1883}, Cantor expressed his support for the Axiom
+of Well-Ordering, calling it ``a law of thought which appears to me to
+be fundamental, rich in its consequences, and particularly remarkable
+for its general validity'' (cited in \citeauthor{Potter2004}
+\citeyear[p.~243]{Potter2004}). But Cantor ultimately became convinced
+that the ``Axiom'' was in need of proof. So did the mathematical
+community. 
+
+The problem was ``solved'' by Zermelo in \citeyear{Zermelo1904}. To
+explain his solution, we need some definitions. 
+
+\begin{defn}
+A function $f$ is a \emph{choice function} iff $f(x) \in x$ for all $x \in \dom{f}$. We say that $f$ is a \emph{choice function for $A$} iff $f$ is a choice function with $\dom{f} = A \setminus \{\emptyset\}$.
+\end{defn}
+
+Intuitively, for every (non-empty) set $x \in A$, a choice function
+for $A$ \emph{chooses} a particular element, $f(x)$, from $x$. The
+Axiom of Choice is then:
+
+\begin{axiom}[Choice]
+	Every set has a choice function.
+\end{axiom}
+
+Zermelo showed that Choice entails well-ordering, and vice versa:
+
+\begin{thm}[in $\ZF$]\ollabel{thmwochoice}
+Well-Ordering and Choice are equivalent.
+\end{thm}
+
+\begin{proof}
+\emph{Left-to-right.} Let $A$ be a set of sets. Then $\bigcup A$
+exists by the Axiom of Union, and so by Well-Ordering there is some
+$<$ which well-orders $\bigcup A$. Now let $f(x) = \text{the $<$-least
+member of }x$. This is a choice function for $A$.
+
+\emph{Right-to-left.} Fix $A$. By Choice, there is a choice function,
+$f$,  for $\Pow{A} \setminus \{\emptyset\}$. Using Transfinite
+Recursion, define:
+\begin{align*}
+	g(0) &= f(A)\\
+	g(\alpha) &= 
+		\begin{cases}
+			\text{stop\bang} &\text{if }A = \funimage{g}{\alpha}\\
+			f(A \setminus \funimage{g}{\alpha}) & \text{otherwise}\\	
+		\end{cases}
+\end{align*}
+(The indication to ``stop\bang'' is just a shorthand for what would
+otherwise be a more long-winded definition. That is, when $A =
+\funimage{g}{\alpha}$ for the first time, let $g(\delta) = A$ for all
+$\delta \leq \alpha$.) Note that we do stop, since otherwise we would
+have that $\cardless{\alpha}{\Pow{A} \setminus \{\emptyset\}}$ for
+every ordinal $\alpha$, contradicting \olref[hartogs]{HartogsLemma}. 
+
+We do not stop  until we have exhausted $A$. Since we stop, $\ran{g} =
+A$. 
+
+Since $f$ is a choice function, for each $\alpha$ we have $g(\alpha) =
+f(A \setminus \funimage{g}{\alpha}) \in A \setminus
+\funimage{g}{\alpha}$; i.e., $g(\alpha) \notin \funimage{g}{\alpha}$.
+So if $g(\alpha) = g(\beta)$ then $g(\beta) \notin
+\funimage{g}{\alpha}$, i.e., $\beta \notin \alpha$, and similarly
+$\alpha \notin \beta$. So $\alpha = \beta$, by Trichotomy. So $g$ is
+!!a{injection}.
+
+Assembling these two facts, $g$ is !!a{bijection} from some ordinal to $A$. Now $g$ can be used to well-order $A$.
+\end{proof}
+
+So Well-Ordering and Choice stand or fall together. But the question
+remains: do they stand or fall?
+
+\end{document}
