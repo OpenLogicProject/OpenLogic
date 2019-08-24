@@ -4,57 +4,64 @@
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
-
 \begin{document}
 
 \olfileid{sfr}{fun}{cmp}
 \olsection{Composition of Functions}
 
 \begin{explain}
-We have already seen that the inverse~$f^{-1}$ of a !!{bijective}
-function~$f$ is itself a function. It is also possible to compose
-functions $f$ and~$g$ to define a new function by first applying $f$
-and then $g$. Of course, this is only possible if the ranges and
-domains match, i.e., the range of~$f$ must be a subset of the
-domain of~$g$.
+\oliflabeldef{sfr:fun:inv:sec}{We saw in \olref[inv]{sec} that the
+inverse~$f^{-1}$ of !!a{bijection}~$f$ is itself a function. Another
+operation on functions is composition: w}{W}e can define a new
+function by composing two functions, $f$ and~$g$, i.e., by first
+applying $f$ and then~$g$. Of course, this is only possible if the
+ranges and domains match, i.e., the range of~$f$ must be a subset of
+the domain of~$g$. \oliflabeldef{sfr:rel:ops:sec}{This operation on
+functions is the analogue of the operation of relative product on
+relations from \olref[rel][ops]{sec}.}{}
+
+A diagram might help to explain the idea of composition. In
+\olref{fig:composition}, we depict two functions $f \colon A \to B$
+and $g \colon B \to C$ and their composition~$(\comp{f}{g})$. The
+function $(\comp{f}{g}) \colon A \to C$ pairs each !!{element} of~$A$
+with !!a{element} of~$C$. We specify which !!{element} of~$C$
+!!a{element} of $A$ is paired with as follows: given an input $x \in
+A$, first apply the function $f$ to~$x$, which will output some $f(x)
+= y \in B$, then apply the function $g$ to~$y$, which will output some
+$g(f(x)) = g(y) = z \in C$.
+\begin{figure}
+  \olasset{assets/diagrams/composition.tikz}
+  \caption{The composition $g \circ f$ of two functions $f$ and~$g$.}
+  \ollabel{fig:composition}
+\end{figure}
 \end{explain}
 
 \begin{defn}[Composition]
-Let $f\colon X \to Y$ and $g\colon Y \to Z$. The \emph{composition} of
-$f$ with $g$ is the function $(g \circ f) \colon X \rightarrow Z$,
-where $(g \circ f)(x) = g(f(x))$.
+Let $f\colon A \to B$ and $g\colon B \to C$ be functions. The
+\emph{composition} of $f$ with~$g$ is $\comp{f}{g} \colon A \to C$,
+where $(\comp{f}{g})(x) = g(f(x))$.
 \end{defn}
 
-\begin{figure}
-  \centerline{\includegraphics[width=1.5\olphotowidth]
-    {\olpath/assets/diagrams/composition.tikz}}
-  \caption{The composition $g \circ f$ of two functions $f$ and~$g$.}
-\end{figure}
-
-\begin{explain}
-The function $(g \circ f) \colon X \rightarrow Z$ pairs each member of
-$X$ with a member of~$Z$. We specify which member of $Z$ a member of
-$X$ is paired with as follows---given an input $x \in X$, first apply
-the function $f$ to~$x$, which will output some $y \in Y$. Then apply
-the function $g$ to~$y$, which will output some $z \in Z$.
-\end{explain}
-
 \begin{ex}
-Consider the functions $f(x) = x + 1$, and $g(x) = 2x$. What function
-do you get when you compose these two? $(g \circ f)(x) = g(f(x))$. So
-that means for every natural number you give this function, you first
-add one, and then you multiply the result by two. So their composition
-is $(g \circ f)(x) = 2(x+1)$.
+Consider the functions $f(x) = x + 1$, and $g(x) = 2x$. Since
+$(\comp{f}{g})(x) = g(f(x))$, for each input~$x$ you must first take
+its successor, then multiply the result by two. So their composition
+is given by $(\comp{f}{g})(x) = 2(x+1)$.
 \end{ex}
 
 \begin{prob}
-Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
-!!{injective}, then $g \circ f \colon X \to Z$ is !!{injective}.
+Show that if $f \colon A \to B$ and $g \colon B \to C$ are both
+!!{injective}, then $\comp{f}{g}\colon A \to C$ is !!{injective}.
 \end{prob}
 
 \begin{prob}
-Show that if $f \colon X \to Y$ and $g \colon Y \to Z$ are both
-!!{surjective}, then $g \circ f \colon X \to Z$ is !!{surjective}.
+Show that if $f \colon A \to B$ and $g \colon B \to C$ are both
+!!{surjective}, then $\comp{f}{g}\colon A \to C$ is !!{surjective}.
+\end{prob}
+
+\begin{prob}
+Suppose $f \colon A \to B$ and $g \colon B \to C$. Show that the graph
+of $\comp{f}{g}$ is $R_f \mid R_g$.
 \end{prob}
 
 \end{document}

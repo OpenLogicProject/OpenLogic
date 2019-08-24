@@ -1,0 +1,162 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: non-enumerability-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{nen-alt}
+
+\olsection{\printtoken{S}{nonenumerable} Sets}
+
+\begin{editorial}
+  This section proves the non-enumerability of $\Bin^\omega$ and
+  $\Pow{\Nat}$ using the definitions in \olref[enm-alt]{sec}, i.e.,
+  requiring a bijection with~$\Nat$ instead of a surjection from
+  $\PosInt$.
+\end{editorial}
+
+\begin{explain}
+The set $\Nat$ of natural numbers is infinite. It is also trivially
+!!{enumerable}. But the remarkable fact is that there are
+\emph{!!{nonenumerable}} sets, i.e., sets which are not !!{enumerable}
+(see \olref[sfr][siz][enm-alt]{defn:enumerable}).
+
+This might be surprising. After all, to say that $A$ is
+!!{nonenumerable} is to say that there is \emph{no} !!{bijection} $f
+\colon \Nat \to A$; that is, no function mapping the infinitely many
+!!{element}s of~$\Nat$ to~$A$ exhausts all of~$A$.  So if $A$ is
+!!{nonenumerable}, there are ``more'' !!{element}s of~$A$ than there
+are natural numbers.
+
+To prove that a set is !!{nonenumerable}, you have to show that no
+appropriate !!{bijection} can exist. The best way to do this is to
+show that every attempt to enumerate !!{element}s of~$A$ must leave at
+least one !!{element} out; this shows that no function $f\colon \Nat
+\to A$ is !!{surjective}. And a general strategy for establishing this
+is to use Cantor's \emph{diagonal method}. Given a list of
+!!{element}s of $A$, say, $x_1$, $x_2$, \dots, we construct another
+!!{element} of~$A$ which, by its construction, cannot possibly be on
+that list.
+
+But all of this is best understood by example. So, our first example
+is the set~$\Bin^\omega$ of all infinite strings of $0$'s and $1$'s.
+(The `$\Bin$' stands for binary, and we can just think of it as the
+two-element set
+$\{0,1\}$.)\oliflabeldef{sfr:card-arithmetic:card-opps:sec}{\footnote{More
+accurately, I should stipulate that $\Bin^\omega$ is the set of all
+$\omega$-sequences of $0$'s and $1$s, i.e.\ the set
+$\funfromto{\omega}{\{0,1\}}$. But the meaning of this will only
+become clear in \olref[sfr][card-arithmetic][card-opps]{sec}.}{} This
+slightly slightly loose formulation should not cause any confusions
+for now, however.}
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:nonenum-bin-omega}
+$\Bin^\omega$~is !!{nonenumerable}.
+\end{thm}
+
+\begin{proof}
+Consider any enumeration of a subset of $\Bin^\omega$. So we have some
+list $s_{0}$, $s_{1}$, $s_{2}$, \dots{} where every $s_n$ is an
+infinite string of $0$'s and~$1$'s. Let $s_n(m)$ be the $n$th digit of
+the $m$th string in this list. So we can now think of our list as an
+array, where $s_n(m)$ is placed at the $n$th row and $m$th column:
+\[
+\begin{array}{c|c|c|c|c|c}
+& 0 & 1 & 2 & 3 & \dots \\\hline
+0 & \mathbf{s_{0}(0)} & s_{0}(1) & s_{0}(2) & s_0(3) & \dots \\\hline
+1 & s_{1}(0)& \mathbf{s_{1}(1)} & s_1(2) & s_1(3) & \dots \\\hline
+2 & s_{2}(0)& s_{2}(1) & \mathbf{s_2(2)} & s_2(3) & \dots \\\hline
+3 & s_{3}(0)& s_{3}(1) & s_3(2) & \mathbf{s_3(3)} & \dots \\\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \mathbf{\ddots}
+\end{array}
+\]
+We will now construct an infinite string, $d$, of $0$'s and $1$'s
+which is not on this list.  We will do this by specifying each of its
+entries, i.e., we specify $d(n)$ for all $n \in \Nat$.  Intuitively,
+we do this by reading down the diagonal of the array above (hence the
+name ``diagonal method'') and then changing every $1$ to a $0$ and
+every $1$ to a~$0$. More abstractly, we define $d(n)$ to be $0$ or $1$
+according to whether the $n$-th !!{element} of the diagonal, $s_n(n)$,
+is $1$ or $0$, that is:
+\[
+d(n) =
+\begin{cases}
+1 & \text{if $s_{n}(n) = 0$}\\
+0 & \text{if $s_{n}(n) = 1$}
+\end{cases}
+\]
+Clearly $d \in \Bin^\omega$, since it is an infinite string of $0$'s
+and $1$'s. But we have constructed $d$ so that $d(n) \neq s_n(n)$ for
+any $n \in \Nat$. That is, $d$ differs from $s_n$ in its $n$th entry.
+So $d \neq s_n$ for any $n\in \Nat$. So $d$ cannot be on the list
+$s_0$, $s_1$, $s_2$,
+\dots
+
+We have shown, given an arbitrary enumeration of some subset of
+$\Bin^\omega$, that it will omit some !!{element} of $\Bin^\omega$. So
+there is no enumeration of the set $\Bin^\omega$, i.e., $\Bin^\omega$
+is !!{nonenumerable}.
+\end{proof}
+
+\begin{explain}
+This proof method is called ``diagonalization'' because it uses the
+diagonal of the array to define~$d$. However, diagonalization need
+not involve the presence of an array. Indeed, we can show that some set is 
+!!{nonenumerable} by using a similar idea, even when no array and no
+actual diagonal is involved. The following result illustrates how.
+\end{explain}
+
+\begin{thm}
+\ollabel{thm:nonenum-pownat}
+$\Pow{\Nat}$ is not !!{enumerable}.
+\end{thm}
+
+\begin{proof}
+We proceed in the same way, by showing that every list of subsets
+of~$\Nat$ omits some subset of $\Nat$. So, suppose that we have some
+list $N_0, N_1, N_2, \ldots$ of subsets of $\Nat$. We define a set $D$
+as follows: $n \in D$ iff $n \notin N_{n}$:
+\[
+D = \Setabs{n \in \Nat}{n \notin N_n}
+\]
+Clearly $D\subseteq \Nat$. But $D$ cannot be on the list. After all,
+by construction $n \in D$ iff $n\notin N_n$, so that $D \neq N_n$ for
+any $n \in \Nat$. 
+\end{proof}
+
+\begin{explain}
+The preceding proof did not mention a diagonal. Still, you can think
+of it as involving a diagonal if you picture it this way: Imagine the
+sets $N_0$, $N_1$, \dots, written in an array, where we write $N_n$ on
+the $n$th row by writing $m$ in the $m$th column iff if $m \in N_n$.
+For example, say the first four sets on that list are
+$\{0,1,2,\dots\}$, $\{1, 3, 5, \dots\}$, $\{0,1,4\}$, and
+$\{2,3,4,\dots\}$; then our array would begin with
+\[
+\begin{array}{r@{}rrrrrrr}
+  N_0 = \{ & \mathbf{0}, & 1, & 2, & & & & \dots\}\\
+  N_1 = \{ &  & \mathbf{1}, &  & 3, &  & 5, & \dots\}\\
+  N_2 = \{ & 0, & 1, &  &  & 4\phantom{,} &  & \}\\
+  N_3 = \{ &  &  & 2, & \mathbf{3}, & 4, & & \dots\}\\
+  &\vdots & & & & & & \ddots\phantom{\}}
+  \end{array}
+\]
+Then $D$ is the set obtained by going down the diagonal, placing $n
+\in D$ iff $n$ is \emph{not} on the diagonal. So in the above case, we
+would leave out $0$ and $1$, we would include~$2$, we would leave
+out~$3$, etc.
+\end{explain}
+
+\begin{prob}
+Show that the set of all functions $f \colon \Nat \to \Nat$ is
+!!{nonenumerable} by an explicit diagonal argument. That is, show that
+if $f_1$, $f_2$, \dots, is a list of functions and each $f_i\colon
+\Nat \to \Nat$, then there is some $g \colon \Nat \to
+\Nat$ not on this list.
+\end{prob}
+
+\end{document}

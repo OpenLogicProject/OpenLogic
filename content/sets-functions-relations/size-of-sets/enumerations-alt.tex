@@ -1,0 +1,135 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: enumerations-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{enm-alt}
+
+\olsection{Enumerations and \usetoken{S}{enumerable} Sets}
+
+\begin{editorial}
+  This section defines enumerations as bijections with (initial
+  segments) of $\Nat$, the way it's done in set theory. So it
+  conflicts slightly with the definitions in \olref[enm]{sec}, and
+  repeats all the examples there. It is also a bit more terse than
+  that section.
+\end{editorial}
+
+We can specify finite set is by simply enumerating its
+!!{element}s. We do this when we define a set like so:
+\[
+  A = \{a_1, a_2, \ldots, a_n\}.
+\]
+Assuming that the !!{element}s $a_1$, \dots, $a_n$ are all distinct,
+this gives us !!a{bijection} between $A$ and the first $n$ natural
+numbers $0$, \dots, $n-1$. Conversely, since every finite set has only
+finitely many !!{element}s, every finite set can be put into such a
+correspondence. In other words, if $A$ is finite, there is
+!!a{bijection} between $A$ and $\{0, \dots, n-1\}$, where $n$ is the
+number of !!{element}s of~$A$.
+
+If we allow for certain kinds of infinite sets, then we will also
+allow some infinite sets to be enumerated. We can make this precise by
+saying that an infinite set is enumerated by !!a{bijection} between it
+and all of~$\Nat$.
+
+\begin{defn}[Enumeration, set-theoretic] 
+An \emph{enumeration} of a set $A$ is !!a{bijection} whose range is
+$A$ and whose domain is either an initial set of natural numbers $\{0,
+1, \ldots, n\}$ {or} the entire set of natural numbers~$\Nat$. 
+\end{defn}
+
+\begin{explain}
+There is an intuitive underpinning to this use of the word
+\emph{enumeration}. For to say that we have enumerated a set $A$ is to
+say that there is !!a{bijection} $f$ which allows us to count out the
+elements of the set $A$. The $0$th element is $f(0)$, the 1st is
+$f(1)$, \ldots the $n$th is $f(n)$\ldots.\footnote{Yes, we count
+from $0$. Of course we could also start with~$1$. This would
+make no big difference. We would just have to replace~$\Nat$
+by~$\PosInt$.} The rationale for this may be made even clearer by
+adding the following:
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:enumerable}
+  A set~$A$ is !!{enumerable} iff either $A = \emptyset$ or there is
+  an enumeration of~$A$. We say that $A$ is !!{nonenumerable} iff $A$
+  is not !!{enumerable}.
+\end{defn}
+
+\begin{explain}
+So a set is !!{enumerable} iff it is empty or you can use an
+enumeration to count out its !!{element}s.
+\end{explain}
+
+\begin{ex}
+A function enumerating the natural numbers is simply the identity
+function $\Id{\Nat} \colon \Nat \to \Nat$ given by $\Id{\Nat}(n) = n$. A
+function enumerating the \emph{positive} natural numbers, $\Nat^+ =
+\Nat \setminus \{0\}$, is the function $g(n) = n + 1$, i.e.\ the
+successor function.
+\end{ex}
+
+\begin{prob}
+Show that a set $A$ is !!{enumerable} iff either $A = \emptyset$ or
+there is !!a{surjection} $f\colon \Nat \to A$. Show that $A$ is
+!!{enumerable} iff there is !!a{injection} $g\colon A \to \Nat$. 
+\end{prob}
+
+\begin{ex}
+The functions $f\colon \Nat \to \Nat$ and $g \colon \Nat \to \Nat$
+given by
+\begin{align*}
+  f(n) & = 2n \text{ and}\\
+  g(n) & = 2n+1
+\end{align*}
+respectively enumerate the even natural numbers and the odd natural
+numbers. But neither is !!{surjective}, so neither is an enumeration
+of $\Nat$.
+\end{ex}
+
+\begin{prob}
+Define an enumeration of the square numbers $1$, $4$, $9$, $16$, \dots
+\end{prob}
+
+\begin{ex}
+Let $\lceil x \rceil$ be the \emph{ceiling} function, which rounds $x$
+up to the nearest integer. Then the function $f \colon \Nat \to \Int$
+given by:
+\[
+  f(n) = (-1)^{n} \left\lceil\tfrac{n}{2}\right\rceil
+\]
+enumerates the set of
+integers~$\Int$ as follows:
+\[
+\begin{array}{c c c c c c c c}
+f(0) & f(1) & f(2) & f(3) & f(4) & f(5) & f(6) & \dots \\ \\
+\big\lceil \tfrac{0}{2} \big\rceil & -\big\lceil \tfrac{1}{2}\big\rceil &  \big\lceil \tfrac{2}{2} \big\rceil & -\big\lceil \tfrac{3}{2} \big\rceil & \big\lceil \tfrac{4}{2} \big\rceil  & -\big\lceil \tfrac{5}{2}\big\rceil & \big\lceil \tfrac{6}{2} \big\rceil & \dots \\ \\
+0 & -1 & 1 & -2 & 2 & -3 & 3& \dots
+\end{array}
+\]
+Notice how $f$ generates the values of $\Int$ by ``hopping'' back and
+forth between positive and negative integers. You can also think of
+$f$ as defined by cases as follows:
+\[
+f(n) = \begin{cases}
+  \frac{n}{2} & \text{if $n$ is even}\\
+  -\frac{n+1}{2} & \text{if $n$ is odd}
+  \end{cases}
+\]
+\end{ex}
+
+\begin{prob}
+Show that if $A$ and $B$ are !!{enumerable}, so is $A \cup B$.
+\end{prob}
+
+\begin{prob}
+Show by induction on $n$ that if $A_1$, $A_2$, \dots, $A_n$ are all
+!!{enumerable}, so is $A_1 \cup \dots \cup A_n$.
+\end{prob}
+
+\end{document}

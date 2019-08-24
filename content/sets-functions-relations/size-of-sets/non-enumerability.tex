@@ -1,5 +1,5 @@
 % Part:sets-functions-relations
-% Chapter: sets
+% Chapter: size-of-sets
 % Section: non-enumerability
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -10,34 +10,41 @@
 
 \olsection{\printtoken{S}{nonenumerable} Sets}
 
-Some sets, such as the set $\Int^+$ of positive integers, are
+\begin{editorial}
+  This section proves the non-enumerability of $\Bin^\omega$ and
+  $\Pow{\PosInt}$ using the definition in \olref[enm]{sec}. It is
+  designed to be a little more elementary and a little more detailed
+  than the version in \olref[enm-alt]{sec}
+\end{editorial}
+
+Some sets, such as the set $\PosInt$ of positive integers, are
 infinite. So far we've seen examples of infinite sets which were all
 !!{enumerable}. However, there are also infinite sets which do not
 have this property. Such sets are called \emph{!!{nonenumerable}}.
 
 First of all, it is perhaps already surprising that there are
-!!{nonenumerable} sets.  For any !!{enumerable} set~$X$ there is
-!!a{surjective} function $f \colon \Int^+ \to X$.  If a set is
+!!{nonenumerable} sets.  For any !!{enumerable} set~$A$ there is
+!!a{surjective} function $f \colon \PosInt \to A$.  If a set is
 !!{nonenumerable} there is no such function.  That is, no function
-mapping the infinitely many !!{element}s of~$\Int^+$ to~$X$ can
-exhaust all of~$X$.  So there are ``more'' !!{element}s of~$X$ than
+mapping the infinitely many !!{element}s of~$\PosInt$ to~$A$ can
+exhaust all of~$A$.  So there are ``more'' !!{element}s of~$A$ than
 the infinitely many positive integers.
 
 How would one prove that a set is !!{nonenumerable}? You have to show
 that no such surjective function can exist. Equivalently, you have to
-show that the elements of~$X$ cannot be enumerated in a one way
+show that the elements of~$A$ cannot be enumerated in a one way
 infinite list.  The best way to do this is to show that every list of
-!!{element}s of~$X$ must leave at least one element out; or that no
-function $f\colon \Int^+ \to X$ can be surjective.  We can do this
+!!{element}s of~$A$ must leave at least one element out; or that no
+function $f\colon \PosInt \to A$ can be !!{surjective}.  We can do this
 using Cantor's \emph{diagonal method}.  Given a list of !!{element}s
-of $X$, say, $x_1$, $x_2$, \dots, we construct another element of~$X$
+of~$A$, say, $x_1$, $x_2$, \dots, we construct another element of~$A$
 which, by its construction, cannot possibly be on that list.
 
 Our first example is the set~$\Bin^\omega$ of all infinite, non-gappy
 sequences of $0$'s and $1$'s.
 
 \begin{thm}
-\ollabel{thm-nonenum-bin-omega}
+\ollabel{thm:nonenum-bin-omega}
 $\Bin^\omega$~is !!{nonenumerable}.
 \end{thm}
 
@@ -78,7 +85,7 @@ an infinite sequence~$\overline{s}$ which is guaranteed to not appear
 on the list.
 
 To define $\overline{s}$, we specify what all its !!{element}s are,
-i.e., we specify $\overline{s}(n)$ for all $n \in \Int^+$.  We do this
+i.e., we specify $\overline{s}(n)$ for all $n \in \PosInt$.  We do this
 by reading down the diagonal of the array above (hence the name
 ``diagonal method'') and then changing every $1$ to a $0$ and every
 $1$ to a~$0$. More abstractly, we define $\overline{s}(n)$ to be $0$
@@ -94,7 +101,7 @@ $s_n(n)$, is $1$ or $0$.
 If you like formulas better than definitions by cases, you could also
 define $\overline{s}(n) = 1 - s_n(n)$.
 
-Clearly $\overline{s}$ is a non-gappy infinite sequence of $0$'s and
+Clearly $\overline{s}$ is an infinite sequence of $0$'s and
 $1$'s, since it is just the mirror sequence to the sequence of $0$'s
 and $1$'s that appear on the diagonal of our array.  So $\overline{s}$
 is !!a{element} of~$\Bin^\omega$.  But it cannot be on the list $s_1$,
@@ -138,30 +145,30 @@ actual diagonal is involved.
 \end{explain}
 
 \begin{thm}
-\ollabel{thm-nonenum-pownat}
-$\Pow{\Int^+}$ is not !!{enumerable}.
+\ollabel{thm:nonenum-pownat}
+$\Pow{\PosInt}$ is not !!{enumerable}.
 \end{thm}
 
 \begin{proof}
 We proceed in the same way, by showing that for every list of subsets
-of~$\Int^+$ there is a subset of $\Int^+$ which cannot be on the list.
-Suppose the following is a given list of subsets of~$\Int^+$:
+of~$\PosInt$ there is a subset of $\PosInt$ which cannot be on the list.
+Suppose the following is a given list of subsets of~$\PosInt$:
 \[
 Z_{1}, Z_{2}, Z_{3}, \dots
 \]
-We now define a set $\overline{Z}$ such that for any $n \in \Int^+$,
+We now define a set $\overline{Z}$ such that for any $n \in \PosInt$,
 $n \in \overline{Z}$ iff $n \notin Z_{n}$:
 \[
-\overline{Z} = \Setabs{n \in \Int^+}{n \notin Z_n}
+\overline{Z} = \Setabs{n \in \PosInt}{n \notin Z_n}
 \]
 $\overline{Z}$ is clearly a set of positive integers, since by
 assumption each~$Z_n$ is, and thus $\overline{Z} \in
-\Pow{\Int^+}$. But $\overline{Z}$ cannot be on the list.  To show
-this, we'll establish that for each $k \in \Int^+$, $\overline{Z} \neq
+\Pow{\PosInt}$. But $\overline{Z}$ cannot be on the list.  To show
+this, we'll establish that for each $k \in \PosInt$, $\overline{Z} \neq
 Z_k$. 
 
-So let $k \in \Int^+$ be arbitrary. We've defined $\overline{Z}$ so
-that for any $n \in \Int^+$, $n \in \overline{Z}$ iff $n \notin Z_n$.
+So let $k \in \PosInt$ be arbitrary. We've defined $\overline{Z}$ so
+that for any $n \in \PosInt$, $n \in \overline{Z}$ iff $n \notin Z_n$.
 In particular, taking $n=k$, $k \in \overline{Z}$ iff $k \notin Z_k$.
 But this shows that $\overline{Z} \neq Z_k$, since $k$ is !!a{element}
 of one but not the other, and so $\overline{Z}$ and $Z_k$ have
@@ -197,11 +204,11 @@ Show that $\Pow{\Nat}$ is !!{nonenumerable} by a diagonal argument.
 \end{prob}
 
 \begin{prob}
-Show that the set of functions $f \colon \Int^+ \to \Int^+$ is
+Show that the set of functions $f \colon \PosInt \to \PosInt$ is
 !!{nonenumerable} by an explicit diagonal argument. That is, show that
 if $f_1$, $f_2$, \dots, is a list of functions and each $f_i\colon
-\Int^+ \to \Int^+$, then there is some $\overline{f}\colon \Int^+ \to
-\Int^+$ not on this list.
+\PosInt \to \PosInt$, then there is some $\overline{f}\colon \PosInt \to
+\PosInt$ not on this list.
 \end{prob}
 
 \end{document}

@@ -1,5 +1,5 @@
 % Part:sets-functions-relations
-% Chapter: sets
+% Chapter: size-of-sets
 % Section: comparing-sizes
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -8,107 +8,143 @@
 
 \olfileid{sfr}{siz}{car}
 
-\olsection{Comparing Sizes of Sets}
+\olsection{Sets of Different Sizes, and Cantor's Theorem}
 
 \begin{explain}
-Just like we were able to make precise when two sets have the same
-size in a way that also accounts for the size of infinite sets, we can
-also compare the sizes of sets in a precise way. Our definition of
-``is smaller than (or equinumerous)'' will require, instead of a
-!!{bijection} between the sets, a total !!{injective} function from the first
-set to the second. If such a function exists, the size of the first
-set is less than or equal to the size of the second. Intuitively,
-!!a{injective} function from one set to another guarantees that the range of
-the function has at least as many elements as the domain, since no two
-!!{element}s of the domain map to the same !!{element} of the range.
+We have offered a precise statement of the idea that two sets have the
+same size. We can also offer a precise statement of the idea that one
+set is smaller than another. Our definition of ``is smaller than (or
+equinumerous)'' will require, instead of !!a{bijection} between the
+sets, !!a{injection} from the first set to the second. If such a
+function exists, the size of the first set is less than or equal to
+the size of the second. Intuitively, !!a{injection} from one set to
+another guarantees that the range of the function has at least as many
+!!{element}s as the domain, since no two !!{element}s of the domain
+map to the same !!{element} of the range.
 \end{explain}
 
 \begin{defn}
-$X$ is \emph{no larger than}~$Y$, $\cardle{X}{Y}$, if and only if there
-  is an !!{injective} function~$f \colon X \to Y$.
+$A$ is \emph{no larger than}~$B$, written $\cardle{A}{B}$, iff there
+is !!a{injection} $f \colon A \to B$.
 \end{defn}
 
-\begin{thm}[Schr\"oder-Bernstein]
-  Let $X$ and $Y$ be sets. If $\cardle{X}{Y}$ and $\cardle{Y}{X}$,
-  then $\cardeq{X}{Y}$.
-\end{thm}
-
-\begin{explain}
-In other words, if there is a total !!{injective} function from $X$ to
-$Y$, and if there is a total !!{injective} function from $Y$ back to~$X$,
-then there is a total !!{bijection} from $X$ to~$Y$. Sometimes, it can be
-difficult to think of a !!{bijection} between two equinumerous sets, so
-the Schr\"oder-Bernstein theorem allows us to break the comparison
-down into cases so we only have to think of !!a{injection} from the
-first to the second, and vice-versa. The Schr\"oder-Bernstein theorem,
-apart from being convenient, justifies the act of discussing the
-``sizes'' of sets, for it tells us that set cardinalities have the
-familiar anti-symmetric property that numbers have.
-\end{explain}
+It is clear that this is a reflexive and transitive relation, but that
+it is not symmetric (this is left as an exercise). We can also
+introduce a notion, which states that one set is (strictly) smaller
+than another. 
 
 \begin{defn}
-$X$ is \emph{smaller than}~$Y$, $\cardless{X}{Y}$, if and only if
-  there is !!a{injective} function~$f\colon X \to Y$ but no
-  !!{bijective}~$g\colon X \to Y$.
+$A$ is \emph{smaller than}~$B$, written $\cardless{A}{B}$, iff there
+is !!a{injection}~$f\colon A \to B$ but no !!{bijection}~$g\colon A
+\to B$, i.e., $\cardle{A}{B}$ and $\cardneq{A}{B}$.
 \end{defn}
 
-\begin{thm}[Cantor]
-  \ollabel{thm:cantor}
-For all $X$, $\cardless{X}{\Pow{X}}$.
+It is clear that this is relation is anti-reflexive
+and transitive. (This is left as an exercise.) Using this notation, we
+can say that a set $A$ is !!{enumerable} iff $\cardle{A}{\Nat}$, and
+that $A$ is !!{nonenumerable} iff $\cardless{\Nat}{A}$. This allows us
+to restate
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{%
+\olref[sfr][siz][nen-alt]{thm:nonenum-pownat}
+as the observation that
+$\cardless{\Nat}{\Pow{\Nat}}$}{%
+\olref[sfr][siz][nen]{thm:nonenum-pownat}
+as the observation that $\cardless{\PosInt}{\Pow{\PosInt}}$}. In fact,
+\citet{Cantor1892} proved that this last point is \emph{perfectly
+general}:
+
+\begin{thm}[Cantor]\ollabel{thm:cantor}
+$\cardless{A}{\Pow{A}}$, for any set $A$.
 \end{thm}
 
 \begin{proof}
-The function~$f \colon X \to \Pow{X}$ that maps any $x \in X$ to its
-singleton~$\{x\}$ is !!{injective}, since if $x \neq y$ then also $f(x) =
-\{x\} \neq \{y\} = f(y)$.
+The map $f(x) = \{x\}$ is !!a{injection} $f \colon A \to \Pow{A}$,
+since if $x \neq y$, then also $\{x\} \neq \{y\}$ by extensionality,
+and so $f(x) \neq f(y)$. So we have that $\cardle{A}{\Pow{A}}$. 
 
-There cannot be !!a{surjective} function~$g\colon X \to \Pow{X}$, let
-alone a !!{bijective} one. For suppose that $g\colon X \to \Pow{X}$.
-Since $g$ is total, every $x \in X$ is mapped to a subset $g(x)
-\subseteq X$. We show that $g$ cannot be surjective. To do this, we
-define a subset~$Y \subseteq X$ which by definition cannot be in the
-range of~$g$. Let
-\[
-\overline{Y} = \Setabs{x \in X}{x \notin g(x)}.
-\]
-Since $g(x)$ is defined for all $x \in X$, $\overline{Y}$ is clearly a
-well-defined subset of~$X$.  But, it cannot be in the range
-of~$g$. Let $x \in X$ be arbitrary, we show that $\overline{Y} \neq
-g(x)$.  If $x \in g(x)$, then it does not satisfy $x \notin g(x)$, and
-so by the definition of~$\overline{Y}$, we have $x \notin
-\overline{Y}$.  If $x \in \overline{Y}$, it must satisfy the defining
-property of~$\overline{Y}$, i.e., $x \notin g(x)$.  Since $x$ was
-arbitrary this shows that for each $x \in X$, $x \in g(x)$ iff $x
-\notin \overline{Y}$, and so $g(x) \neq \overline{Y}$.  So
-$\overline{Y}$ cannot be in the range of~$g$, contradicting the
-assumption that~$g$ is surjective.
+\begin{editorial}
+We present the slow proof if \olref[nen]{sec} is
+present, otherwise a faster proof matching \olref[nen-alt]{sec}.
+\end{editorial}
+
+\oliflabeldef{sfr:siz:nen:sec}{% 
+  We show that there cannot be !!a{surjective} function~$g\colon A \to
+  \Pow{A}$, let alone a !!{bijective} one, and hence that that
+  $\cardneq{A}{\Pow{A}}$. For suppose that $g\colon A \to \Pow{A}$.
+  Since $g$ is total, every $x \in A$ is mapped to a subset $g(x)
+  \subseteq A$. We show that $g$ cannot be surjective. To do this, we
+  define a subset~$\overline{A} \subseteq A$ which by definition cannot be in the
+  range of~$g$. Let
+  \[
+  \overline{A} = \Setabs{x \in A}{x \notin g(x)}.
+  \]
+  Since $g(x)$ is defined for all $x \in A$, $\overline{A}$ is clearly
+  a well-defined subset of~$A$.  But, it cannot be in the range
+  of~$g$. Let $x \in A$ be arbitrary, we show that $\overline{A} \neq
+  g(x)$.  If $x \in g(x)$, then it does not satisfy $x \notin g(x)$,
+  and so by the definition of~$\overline{A}$, we have $x \notin
+  \overline{A}$.  If $x \in \overline{A}$, it must satisfy the
+  defining property of~$\overline{A}$, i.e., $x \in A$ and $x \notin
+  g(x)$. Since $x$ was arbitrary, this shows that for each $x \in
+  \overline{A}$, $x \in g(x)$ iff $x \notin \overline{A}$, and so
+  $g(x) \neq \overline{A}$.  In other words, $\overline{A}$ cannot be
+  in the range of~$g$, contradicting the assumption that~$g$ is
+  surjective.}{It remains to show that $\cardneq{A}{\Pow{A}}$. For
+  reductio, suppose $\cardeq{A}{\Pow{A}}$, i.e., there is some
+  !!{bijection} $g \colon A \to \Pow{A}$. Now consider:
+  \[
+    D = \Setabs{x \in A}{x \notin g(x)}
+  \]
+  Note that $D \subseteq A$, so that $D \in \Pow{A}$. Since $g$ is
+  !!a{bijection}, there is some $y \in A$ such that $g(y) = D$. But
+  now we have:
+  \[
+    y \in g(y) \text{ iff } y \in D \text{ iff } y \notin g(y).
+  \]
+  This is a contradiction; so $\cardneq{A}{\Pow{A}}$.}{}
 \end{proof}
 
 \begin{explain}
-  It's instructive to compare the proof of \olref{thm:cantor} to that
-  of \olref[nen]{thm-nonenum-pownat}. There we showed that for any
-  list $Z_1$, $Z_2$, \dots, of subsets of~$\Int^+$ one can construct a
+\oliflabeldef{sfr:siz:nen:thm:nonenum-pownat}{It's instructive to
+  compare the proof of \olref{thm:cantor} to that of
+  \olref[nen]{thm:nonenum-pownat}. There we showed that for any list
+  $Z_1$, $Z_2$, \dots, of subsets of~$\PosInt$ one can construct a
   set~$\overline{Z}$ of numbers guaranteed not to be on the list. It
   was guaranteed not to be on the list because, for every $n \in
-  \Int^+$, $n \in Z_n$ iff $n \notin \overline{Z}$. This way, there is
-  always some number that is !!a{element} of one of $Z_n$ and
+  \PosInt$, $n \in Z_n$ iff $n \notin \overline{Z}$. This way, there
+  is always some number that is !!a{element} of one of $Z_n$ or
   $\overline{Z}$ but not the other. We follow the same idea here,
-  except the indices~$n$ are now !!{element}s of~$X$ instead
-  of~$\Int^+$. The set $\overline{Y}$ is defined so that it is
-  different from~$g(x)$ for each $x \in X$, because $x \in g(x)$ iff
-  $x \notin \overline{Y}$. Again, there is always !!a{element} of~$X$
-  which is !!a{element} of one of $g(x)$ and $\overline{Y}$ but not
+  except the indices~$n$ are now !!{element}s of~$A$ instead
+  of~$\PosInt$. The set $\overline{B}$ is defined so that it is
+  different from~$g(x)$ for each $x \in A$, because $x \in g(x)$ iff
+  $x \notin \overline{B}$. Again, there is always !!a{element} of~$A$
+  which is !!a{element} of one of $g(x)$ and $\overline{B}$ but not
   the other. And just as $\overline{Z}$ therefore cannot be on the
-  list $Z_1$, $Z_2$, \dots, $\overline{Y}$ cannot be in the range
-  of~$g$.
+  list $Z_1$, $Z_2$, \dots, $\overline{B}$ cannot be in the range
+  of~$g$.}{}
+
+\oliflabeldef{sfr:siz:nen-alt:thm:nonenum-pownat}{It's instructive to
+  compare the proof of \olref{thm:cantor} to that of
+  \olref[nen-alt]{thm:nonenum-pownat}. There we showed that for any
+  list $N_0$, $N_1$, $N_2$, \dots, of subsets of~$\Nat$ we can construct a
+  set~$D$ of numbers guaranteed not to be on the list. It was
+  guaranteed not to be on the list because $n \in N_n$ iff $n \notin
+  D$, for every $n \in \Nat$. We follow the same idea here, except the
+  indices~$n$ are now !!{element}s of~$A$ rather than of~$\Nat$. The
+  set $D$ is defined so that it is different from~$g(x)$ for each $x
+  \in A$, because $x \in g(x)$ iff $x \notin D$.}{}
+
+The proof is also worth comparing with the proof of Russell's Paradox,
+\olref[sfr][set][rus]{thm:russells-paradox}. Indeed, Cantor's Theorem was
+the inspiration for Russell's own paradox.
 \end{explain}
 
 \begin{prob}
-  Show that there cannot be !!a{injective} function $g\colon \wp(X) \to
-  X$, for any set $X$. Hint: Suppose $g\colon \wp(X) \to X$ is
-  !!{injective}. Then for each $x \in X$ there is at most one $Y \subseteq
-  X$ such that $g(Y) = x$. Define a set $\overline{Y}$ such that for
-  every $x \in X$, $g(\overline{Y}) \neq x$.
+  Show that there cannot be !!a{injection} $g\colon \Pow{A} \to
+  A$, for any set~$A$. Hint: Suppose $g\colon \Pow{A} \to A$ is
+  !!{injective}. Consider $D = \Setabs{g(B)}{B \subseteq A \text{ and
+  } g(B) \notin B}$. Let $x = g(D)$. Use the fact that $g$ is
+  !!{injective} to derive a contradiction. 
 \end{prob}
 
 \end{document}

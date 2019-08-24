@@ -9,46 +9,95 @@
 
 \olfileid{sfr}{fun}{rel}
 
-\olsection{Functions and Relations}
+\olsection{Functions as Relations}
 
-\begin{explain}
-A function which maps !!{element}s of~$X$ to !!{element}s of~$Y$
-obviously defines a relation between $X$ and $Y$, namely the relation
+\begin{explain} 
+A function which maps !!{element}s of~$A$ to !!{element}s of~$B$
+obviously defines a relation between $A$ and~$B$, namely the relation
 which holds between $x$ and $y$ iff $f(x) = y$.  In fact, we might
 even---if we are interested in reducing the building blocks of
-mathematics for instance---\emph{identify} the function $f$ with this
+mathematics for instance---\emph{identify} the function~$f$ with this
 relation, i.e., with a set of pairs.  This then raises the question:
 which relations define functions in this way?
 \end{explain}
 
-\begin{defn}[Graph of a function]
-Let $f\colon X \pto Y$ be a partial function. The \emph{graph} of~$f$
-is the relation $R_f \subseteq X \times Y$ defined by
+\begin{defn}[Graph of a function] Let $f\colon A \to B$ be a function.
+The \emph{graph} of~$f$ is the relation $R_f \subseteq A \times B$
+defined by
 \[
 R_f = \Setabs{\tuple{x,y}}{f(x) = y}.
 \]
 \end{defn}
 
-\begin{prop}
-Suppose $R \subseteq X \times Y$ has the property that whenever $Rxy$
-and $Rxy'$ then $y = y'$.  Then $R$ is the graph of the partial
-function $f\colon X \pto Y$ defined by: if there is a $y$ such that
-$Rxy$, then $f(x) = y$, otherwise $f(x) \fundefined$.  If $R$ is also 
-\emph{serial}, i.e., for each $x \in X$ there is a $y \in Y$ such that
-$Rxy$, then $f$ is total.
+\begin{explain}
+The graph of a function is uniquely determined, by extensionality.
+Moreover, extensionality (on sets) will immediate vindicate the
+implicit principle of extensionality for functions,
+whereby if $f$ and~$g$ share a domain and codomain then they are
+identical if they agree on all values. 
+
+Similarly, if a relation is ``functional'', then it is the graph of a function. 
+\end{explain}
+
+\begin{prop}\ollabel{prop:graph-function}
+Let $R \subseteq A \times B$ be such that:
+\begin{enumerate}
+\item If $Rxy$ and $Rxz$ then $y = z$; and 
+\item for every $x \in A$ there is some $y \in B$ such that $\tuple{x,
+y} \in R$.  
+\end{enumerate}
+Then $R$ is the graph of the function $f\colon A \to B$ defined by
+$f(x) = y$ iff $Rxy$. 
 \end{prop}
 
 \begin{proof}
-Suppose there is a $y$ such that $Rxy$.  If there were another $y'
-\neq y$ such that $Rxy'$, the condition on $R$ would be
-violated. Hence, if there is a $y$ such that $Rxy$, that $y$ is
-unique, and so $f$ is well-defined.  Obviously, $R_f = R$ and $f$ is
-total if~$R$ is serial.
+Suppose there is a $y$ such that $Rxy$.  If there were another $z \neq
+y$ such that $Rxz$, the condition on~$R$ would be violated. Hence, if
+there is a $y$ such that $Rxy$, this $y$ is unique, and so $f$ is
+well-defined.  Obviously, $R_f = R$.
 \end{proof}
 
-\begin{prob}
-Suppose $f \colon X \to Y$ and $g \colon Y \to Z$. Show that the graph
-of $(g \circ f)$ is $R_f \mid R_g$.
-\end{prob}
+\begin{explain}
+Every function $f\colon A \to B$ has a graph, i.e., a relation on $A
+\times B$ defined by $f(x) = y$. On the other hand, every relation~$R
+\subseteq A \times B$ with the properties given in
+\olref{prop:graph-function} is the graph of a function~$f \colon A \to
+B$. Because of this close connection between functions and their
+graphs, we can think of a function simply as its graph. In other
+words, functions can be identified with certain relations, i.e., with
+certain sets of tuples. \oliflabeldef{sfr:rel:ref:sec}{Note, though,
+that the spirit of this ``identification'' is as in
+\olref[sfr][rel][ref]{sec}: it is not a claim about the metaphysics of
+functions, but an observation that it is convenient to \emph{treat}
+functions as certain sets. One reason that this is so convenient, is
+that w}{W}e can now consider performing similar operations on
+functions as we performed on relations (see
+\olref[sfr][rel][ops]{sec}). In particular:
+\end{explain}
+
+\begin{defn}\ollabel{defn:funimage}
+Let $f \colon A \to B$ be a function with $C\subseteq A$.
+
+The \emph{restriction} of~$f$ to~$C$ is the
+function~$\funrestrictionto{f}{C}\colon C \to B$ defined by
+$(\funrestrictionto{f}{C})(x) = f(x)$ for all $x \in C$. In other
+words, $\funrestrictionto{f}{C} = \Setabs{\tuple{x, y} \in R_f}{x \in
+C}$.
+
+The \emph{application} of~$f$ to~$C$ is $\funimage{f}{C} =
+\Setabs{f(x)}{x \in C}$. We also call this the \emph{image} of~$C$
+under~$f$.
+\end{defn}
+
+\begin{explain}
+It follows from these definition that $\ran{f} =
+\funimage{f}{\dom{f}}$, for any function~$f$.
+\oliflabeldef{sfr:rel:ops:sec}{These notions are exactly as one would
+expect, given the definitions in \olref[sfr][rel][ops]{sec} and our
+identification of functions with relations. But two other
+operations---inverses and relative products---require a little more
+detail. We will provide that in the \olref[inv]{sec} and
+\olref[cmp]{sec}.}{}
+\end{explain}
 
 \end{document}

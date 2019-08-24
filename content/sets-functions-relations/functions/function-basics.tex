@@ -4,44 +4,54 @@
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
-
 \begin{document}
 
 \olfileid{sfr}{fun}{bas}
 \olsection{Basics}
 
 \begin{explain}
-A \emph{function} is a mapping which pairs each object of a given
-set with a single partner in another set. For instance, the operation
-of adding~$1$ defines a function: each number~$n$ is paired with a
-unique number~$n+1$. More generally, functions may take pairs,
-triples, etc., of inputs and returns some kind of output. Many
-functions are familiar to us from basic arithmetic. For instance,
-addition and multiplication are functions. They take in two numbers
-and return a third.  In this mathematical, abstract sense, a function
-is a \emph{black box}: what matters is only what output is paired with
-what input, not the method for calculating the output.
+A \emph{function} is a map which sends each !!{element} of a given set
+to a specific !!{element} in some (other) given set. For instance, the
+operation of adding~$1$ defines a function: each number~$n$ is mapped
+to a unique number~$n+1$. 
+  
+More generally, functions may take pairs, triples, etc., as inputs and
+returns some kind of output. Many functions are familiar to us from
+basic arithmetic. For instance, addition and multiplication are
+functions. They take in two numbers and return a third.
+
+In this mathematical, abstract sense, a function is a \emph{black
+box}: what matters is only what output is paired with what input, not
+the method for calculating the output.
 \end{explain}
 
 \begin{defn}[Function]
-A \emph{function} $f \colon X \to Y$ is a mapping of each !!{element}
-of~$X$ to an !!{element} of~$Y$. We call $X$ the \emph{domain} of~$f$
-and $Y$ the \emph{codomain} of~$f$.  The !!{element}s of~$X$ are
-called inputs or \emph{arguments} of~$f$, and the !!{element} of~$Y$
-that is paired with an argument~$x$ by~$f$ is called the \emph{value
-  of~$f$} for argument~$x$, written~$f(x)$.
+A \emph{function} $f \colon A \to B$ is a mapping of each !!{element}
+of~$A$ to an !!{element} of~$B$.
+
+We call $A$ the \emph{domain} of~$f$ and $B$ the \emph{codomain}
+of~$f$.  The !!{element}s of~$A$ are called inputs or \emph{arguments}
+of~$f$, and the !!{element} of~$B$ that is paired with an argument~$x$
+by~$f$ is called the \emph{value of~$f$} for argument~$x$,
+written~$f(x)$.
 
 The \emph{range} $\ran{f}$ of~$f$ is the subset of the codomain
 consisting of the values of~$f$ for some argument; $\ran{f} =
-\Setabs{f(x)}{x \in X}$.
+\Setabs{f(x)}{x \in A}$.
 \end{defn}
 
+The diagram in \olref{fig:function} may help to think about functions. The ellipse
+on the left represents the function's \emph{domain}; the ellipse on
+the right represents the function's \emph{codomain}; and an arrow
+points from an \emph{argument} in the domain to the corresponding
+\emph{value} in the codomain.
+
 \begin{figure}
-  \centerline{\includegraphics[width=\olphotowidth]
-    {\olpath/assets/diagrams/function.tikz}}
+  \olasset{assets/diagrams/function.tikz}
   \caption{A function is a mapping of each !!{element} of one set to
     !!a{element} of another. An arrow points from an argument in the
     domain to the corresponding value in the codomain.}
+    \ollabel{fig:function}
 \end{figure}
 
 \begin{ex}
@@ -51,19 +61,25 @@ domain) to $\Nat$ (the codomain). As it turns out, the range is also
 $\Nat$, since every $n \in \Nat$ is $n \times 1$.
 \end{ex}
 
-\begin{explain}
+\begin{ex}
 Multiplication is a function because it pairs each input---each pair
 of natural numbers---with a single output: $\times \colon \Nat^2 \to
 \Nat$. By contrast, the square root operation applied to the domain
 $\Nat$ is not functional, since each positive integer $n$ has two
 square roots: $\sqrt{n}$ and $-\sqrt{n}$. We can make it functional by
 only returning the positive square root: $\sqrt{\phantom{X}} \colon
-\Nat \to \Real$. The relation that pairs each student in a class with
-their final grade is a function---no student can get two different
-final grades in the same class. The relation that pairs each student
-in a class with their parents is not a function---generally each
-student will have at least two parents.
+\Nat \to \Real$. 
+\end{ex}
 
+\begin{ex}
+The relation that pairs each student in a class with their final grade
+is a function---no student can get two different final grades in the
+same class. The relation that pairs each student in a class with their
+parents is not a function: students can have zero, or two, or more
+parents.
+\end{ex}
+
+\begin{explain}
 We can define functions by specifying in some precise way what the
 value of the function is for every possible argment. Different ways of
 doing this are by giving a formula, describing a method for computing
@@ -78,26 +94,30 @@ Let $f \colon \Nat \to \Nat$ be defined such that $f(x) = x+1$. This
 is a definition that specifies $f$ as a function which takes in
 natural numbers and outputs natural numbers. It tells us that, given a
 natural number~$x$, $f$ will output its successor~$x+1$.
-In this case, the codomain $\Nat$ is not the range of $f$, since the
-natural number $0$ is not the successor of any natural number. The
+In this case, the codomain $\Nat$ is not the range of~$f$, since the
+natural number~$0$ is not the successor of any natural number. The
 range of~$f$ is the set of all positive integers, $\Int^{+}$.
 \end{ex}
 
-\begin{ex}
+\begin{ex}\ollabel{examplefunext}
 Let $g \colon \Nat \to \Nat$ be defined such that $g(x) = x+2-1$. This
 tells us that $g$ is a function which takes in natural numbers and
 outputs natural numbers. Given a natural number~$n$, $g$ will output
 the predecessor of the successor of the successor of~$x$, i.e.,
-$x+1$. Despite their different definitions, $g$ and $f$ are the same
-function.
+$x+1$.
 \end{ex}
 
 \begin{explain}
-Functions $f$ and $g$ defined above are the same because for any
-natural number $x$, $x+2-1 = x+1$. $f$ and $g$ pair each natural
-number with the same output. The definitions for $f$ and $g$ specify
-the same mapping by means of different equations, and so count as the
-same function.
+We just considered two functions, $f$ and $g$, with different
+\emph{definitions}. However, these are the \emph{same function}. After
+all, for any natural number~$n$, we have that $f(n) = n+1 = n+2-1 =
+g(n)$. Otherwise put: our  definitions for $f$ and~$g$ specify the
+same mapping by means of different equations. Implicitly, then, we are
+relying upon a principle of extensionality for functions, 
+\[
+  \text{if }\forall x\, f(x) = g(x)\text{, then }f = g
+\]
+provided that $f$ and~$g$ share the same domain and codomain.
 \end{explain}
 
 \begin{ex}
@@ -113,7 +133,7 @@ h(x) =
 Since every natural number is either even or odd, the output of this
 function will always be a natural number. Just remember that if you
 define a function by cases, every possible input must fall into
-exactly one case.  In some cases, this will require a a proof that the
+exactly one case.  In some cases, this will require a proof that the
 cases are exhaustive and exclusive.
 \end{ex}
 

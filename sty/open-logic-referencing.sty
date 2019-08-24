@@ -62,7 +62,10 @@
   \IfNoValueTF {#1}{\csuse{\ol@chaptercs}{#4}}{\csuse{\ol@chaptercs}[#1]{#4}}%
   \label{#2:#3::chap}}
 
-\def\ol@chaptercs{chapter}
+\def\ol@defaultchaptercs{chapter}
+\def\olsetchapter#1{\def\ol@chaptercs{#1}}
+\def\olresetchapter{\let\ol@chaptercs\ol@defaultchaptercs}
+\olresetchapter
 
 % \olpart - make a part header and set a label for the part
 % \olchapter[alt title]{part}{title}

@@ -10,14 +10,13 @@
 \olsection{Orders}
 
 \begin{explain}
-Very often we are interested in comparisons between objects, where one
-object may be less or equal or greater than another in a certain
-respect.  Size is the most obvious example of such a comparative
-relation, or \emph{order}. But not all such relations are alike in all
-their properties. For instance, some comparative relations require any
-two objects to be comparable, others don't. (If they do, we call them
-\emph{linear} or \emph{total}.) Some include identity (like~$\le$) and
-some exclude it (like~$<$). Let's get some order into all this.
+Many of our comparisons involve describing some objects as being
+``less than'', ``equal to'', or ``greater than'' other objects, in a
+certain respect. These involve \emph{order} relations. But there are
+different kinds of order relations. For instance, some require that
+any two objects be comparable, others don't. Some include identity
+(like~$\le$) and some exclude it (like~$<$). It will help us to have a
+taxonomy here.
 \end{explain}
 
 \begin{defn}[Preorder]
@@ -35,44 +34,42 @@ A partial order which is also connected is called a
 \emph{total order} or \emph{linear order.}
 \end{defn}
 
+Every linear order is also a partial order, and every partial order is
+also a preorder, but the converses don't hold.
+
 \begin{ex}
 Every linear order is also a partial order, and every partial order is
 also a preorder, but the converses don't hold. The universal relation
-on~$X$ is a preorder, since it is reflexive and transitive. But, if
-$X$ has more than one !!{element}, the universal relation is not
-anti-symmetric, and so not a partial order.  For a somewhat less silly
-example, consider the \emph{no longer than} relation $\preccurlyeq$
+on~$A$ is a preorder, since it is reflexive and transitive. But, if
+$A$ has more than one !!{element}, the universal relation is not
+anti-symmetric, and so not a partial order.
+\end{ex}
+
+\begin{ex}
+Consider the \emph{no longer than} relation $\preccurlyeq$
 on~$\Bin^*$: $x \preccurlyeq y$ iff $\len{x} \le \len{y}$. This is a
 preorder (reflexive and transitive), and even connected, but not a
 partial order, since it is not anti-symmetric. For instance, $01
 \preccurlyeq 10$ and $10 \preccurlyeq 01$, but $01 \neq 10$.
-
-The relation of \emph{divisibility without remainder} gives us an
-example of a partial order which isn't a linear order: for integers
-$n$, $m$, we say $n$ (evenly) divides $m$, in symbols: $n\mid m$, if
-there is some $k$ so that $m=kn$. On $\Nat$, this is a partial order,
-but not a linear order: for instance, $2\nmid3$ and also
-$3\nmid2$. Considered as a relation on $\Int$, divisibility is only a
-preorder since anti-symmetry fails: $1\mid-1$ and $-1\mid1$ but
-$1\neq-1$. Another important partial order is the relation $\subseteq$
-on a set of sets.
-
-Notice that the examples $L$ and $G$ from \olref[set]{relations},
-although we said there that they were called ``strict orders,'' are not
-linear orders even though they are connected (they are not
-reflexive). But there is a close connection, as we will see
-momentarily.
 \end{ex}
 
-\begin{defn}[Irreflexivity]
-A relation $R$ on $X$ is called \emph{irreflexive} if, for all $x \in
-X$, $ \lnot Rxx$. 
-\end{defn}
+\begin{ex}
+An important partial order is the relation $\subseteq$ on a set of
+sets. This is not in general a linear order, since if $a \neq b$ and
+we consider $\Pow{\{a, b\}} = \{\emptyset, \{a\}, \{b\}, \{a,b\}\}$,
+we see that $\{a\} \nsubseteq \{b\}$ and $\{a\} \neq \{b\}$ and $\{b\}
+\nsubseteq \{a\}$.
+\end{ex}
 
-\begin{defn}[Asymmetry]
-A relation $R$ on $X$ is called \emph{asymmetric} if for no pair $x,y\in
-X$ we have $Rxy$ and $Ryx$. 
-\end{defn}
+\begin{ex}
+The relation of \emph{divisibility without remainder} gives us a
+partial order which isn't a linear order. For integers $n$, $m$, we
+write $n\mid m$ to mean $n$ (evenly) divides $m$, i.e., iff there is
+some integer~$k$ so that $m=kn$. On $\Nat$, this is a partial order, but not a
+linear order: for instance, $2\nmid3$ and also $3\nmid2$. Considered
+as a relation on $\Int$, divisibility is only a preorder since
+it is not anti-symmetric: $1\mid-1$ and $-1\mid1$ but $1\neq-1$.
+\end{ex}
 
 \begin{defn}[Strict order]
 A \emph{strict order} is a relation which is irreflexive, asymmetric,
@@ -84,66 +81,91 @@ A strict order which is also connected is called a
 \emph{strict linear order.}
 \end{defn}
 
-A strict order on~$X$ can be turned into a partial order
-by adding the diagonal $\Id{X}$, i.e., adding all the pairs~$\tuple{x,
-  x}$.  (This is called the \emph{reflexive closure} of~$R$.)
-Conversely, starting from a partial order, one can get a strict
-order by removing~$\Id{X}$.
+\begin{ex}
+$\le$ is the linear order corresponding to the strict linear
+order~$<$. $\subseteq$ is the partial order corresponding to the
+strict order~$\subsetneq$.
+\end{ex}
 
-\begin{prop}
-  \ollabel{strict-partial}
-  \begin{enumerate}
-  \item If $R$ is a strict (linear) order on~$X$, then $R^+ = R
-    \cup \Id{X}$ is a partial order (linear order).
-  \item If $R$ is a partial order (linear order) on~$X$, then $R^- = R
-    \setminus \Id{X}$ is a strict (linear) order.
-  \end{enumerate}
+\begin{defn}[Total order]\ollabel{def:strictlinearorder}
+A strict order which is also connected is called a \emph{total order}.
+This is also sometimes called a \emph{strict linear order}. 
+\end{defn}
+
+Any strict order $R$ on~$A$ can be turned into a partial order by
+adding the diagonal $\Id{A}$, i.e., adding all the pairs~$\tuple{x,
+x}$.  (This is called the \emph{reflexive closure} of~$R$.)
+Conversely, starting from a partial order, one can get a strict order
+by removing~$\Id{A}$. These next two results make this precise.
+
+\begin{prop}\ollabel{prop:stricttopartial}
+If $R$ is a strict order on~$A$, then $R^+ = R \cup \Id{A}$ is a
+partial order. Moreover, if $R$ is total, then $R^+$ is a linear
+order.
 \end{prop}
 
 \begin{proof}
-  \begin{enumerate}
-    \item Suppose $R$ is a strict order, i.e., $R \subseteq
-      X^2$ and $R$ is irreflexive, asymmetric, and transitive. Let $R^+
-      = R \cup \Id{X}$. We have to show that $R^+$ is reflexive,
-      antisymmetric, and transitive.
+Suppose $R$ is a strict order, i.e., $R \subseteq A^2$ and $R$ is
+irreflexive, asymmetric, and transitive. Let $R^+ = R \cup \Id{A}$. We
+have to show that $R^+$ is reflexive, antisymmetric, and transitive.
 
-      $R^+$ is clearly reflexive, since for all $x \in X$, $\tuple{x,
-        x} \in \Id{X} \subseteq R^+$.
+$R^+$ is clearly reflexive, since $\tuple{x, x} \in \Id{A} \subseteq
+R^+$ for all $x \in A$. 
 
-      To show $R^+$ is antisymmetric, suppose $R^+xy$ and $R^+yx$,
-      i.e., $\tuple{x,y}$ and $\tuple{y, x} \in R^+$, and $x \neq y$.
-      Since $\tuple{x,y} \in R \cup \Id{X}$, but $\tuple{x, y} \notin
-      \Id{X}$, we must have $\tuple{x, y} \in R$, i.e.,
-      $Rxy$. Similarly we get that~$Ryx$. But this contradicts the
-      assumption that $R$ is asymmetric.
+To show $R^+$ is antisymmetric, suppose for reductio that $R^+xy$ and
+$R^+yx$ but $x \neq y$. Since $\tuple{x,y} \in R \cup \Id{X}$, but
+$\tuple{x, y} \notin \Id{X}$, we must have $\tuple{x, y} \in R$, i.e.,
+$Rxy$. Similarly,~$Ryx$. But this contradicts the assumption
+that $R$ is asymmetric.
 
-      Now suppose that $R^+xy$ and $R^+yz$. If both $\tuple{x, y} \in
-      R$ and $\tuple{y,z} \in R$, it follows that $\tuple{x, z} \in R$
-      since $R$~is transitive. Otherwise, either $\tuple{x, y} \in
-      \Id{X}$, i.e., $x = y$, or $\tuple{y, z} \in \Id{X}$, i.e., $y =
-      z$. In the first case, we have that $R^+yz$ by assumption, $x =
-      y$, hence $R^+xz$. Similarly in the second case. In either case,
-      $R^+xz$, thus, $R^+$ is also transitive.
+To establish transitivity, suppose that $R^+xy$ and $R^+yz$. If both
+$\tuple{x, y} \in R$ and $\tuple{y,z} \in R$, then $\tuple{x, z} \in
+R$ since $R$~is transitive. Otherwise, either $\tuple{x, y} \in
+\Id{X}$, i.e., $x = y$, or $\tuple{y, z} \in \Id{X}$, i.e., $y = z$.
+In the first case, we have that $R^+yz$ by assumption, $x = y$, hence
+$R^+xz$. Similarly in the second case. In either case, $R^+xz$, thus,
+$R^+$ is also transitive.
 
-      If $R$ is connected, then for all $x \neq y$, either $Rxy$
-      or~$Ryx$, i.e., either $\tuple{x, y} \in R$ or $\tuple{y, x} \in
-      R$. Since $R \subseteq R^+$, this remains true of $R^+$, so
-      $R^+$ is connected as well.
-    \item Exercise.
-  \end{enumerate}
+Concerning the ``moreover'' clause, suppose $R$ is a total order,
+i.e., that $R$ is connected. So for all $x \neq y$, either $Rxy$
+or~$Ryx$, i.e., either $\tuple{x, y} \in R$ or $\tuple{y, x} \in R$.
+Since $R \subseteq R^+$, this remains true of $R^+$, so $R^+$ is
+connected as well.
+\end{proof}
+
+\begin{prop}\ollabel{prop:partialtostrict}
+If $R$ is a partial order on~$X$, then $R^- = R \setminus \Id{X}$ is a
+strict order. Moreover, if $R$ is linear, then $R^-$ is total.
+\end{prop}
+
+\begin{proof}
+This is left as an exercise.
 \end{proof}
 
 \begin{prob}
-  Complete the proof of \olref[sfr][rel][ord]{strict-partial}, i.e.,
-  prove that if $R$~is a partial order on~$X$, then $R^- =
-  R \setminus \Id{X}$ is a strict order. 
+Give a proof of \olref[sfr][rel][ord]{prop:partialtostrict}. 
 \end{prob}
 
-
 \begin{ex}
-$\le$ is the linear order corresponding to the strict linear
-  order~$<$. $\subseteq$ is the partial order corresponding to
-  the strict order~$\subsetneq$.
+$\le$ is the linear order corresponding to the total 
+order~$<$. $\subseteq$ is the partial order corresponding to
+the strict order~$\subsetneq$.
 \end{ex}
+
+The following simple result which establishes that total orders
+satisfy an extensionality-like property:
+
+\begin{prop}\ollabel{prop:extensionality-totalorders}
+If $<$ totally orders $A$, then: 
+\[
+  (\forall a, b \in A)((\forall x \in A)(x < a \liff x < b) \lonlyif a = b)
+\]
+\end{prop}
+
+\begin{proof}
+Suppose $(\forall x \in A)(x < a \liff x < b)$. If $a < b$, then $a <
+a$, contradicting the fact that $<$ is irreflexive; so $a \nless b$.
+Exactly similarly, $b \nless a$. So $a = b$, as $<$ is connected.
+\end{proof}
 
 \end{document}

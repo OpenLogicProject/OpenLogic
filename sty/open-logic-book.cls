@@ -118,7 +118,7 @@
     \OLPbookformat{24.589cm}{18.91cm}{90pt}{1.3}
 
     % make sure PDF conforms to PDF/X standard
-    \RequirePackage[x-1a]{pdfx}
+%    \RequirePackage[x-1a]{pdfx}
     \setlength{\barwidth}{7pt}
     }
 

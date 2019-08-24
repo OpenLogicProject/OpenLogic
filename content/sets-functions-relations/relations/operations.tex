@@ -9,46 +9,48 @@
 \olfileid{sfr}{rel}{ops}
 \olsection{Operations on Relations}
 
-It is often useful to modify or combine relations. We've already used
-the union of relations above (which is just the union of two relations
-considered as sets of pairs). Here are some other ways:
+It is often useful to modify or combine relations. In
+\olref[sfr][rel][ord]{prop:stricttopartial}, we considered the \emph{union}
+of relations, which is just the union of two relations considered as
+sets of pairs. Similarly, in \olref[sfr][rel][ord]{prop:partialtostrict},
+we considered the relative difference of relations. Here are some
+other operations we can perform on relations.
 
-\begin{defn} Let $R$, $S \subseteq X^2$ be relations and $Y$ a set.
-\begin{enumerate}
-\item The \emph{inverse}~$R^{-1}$ of $R$ is $R^{-1} = \Setabs{\tuple{y,
-    x}}{\tuple{x, y} \in R}$.
-\item The \emph{relative product}~$R \mid S$ of $R$ and $S$ is
-\[
-(R \mid S) = \{\tuple{x, z} : \text{for some } y, Rxy \text{ and } Syz\}
-\]
-\item The \emph{restriction}~$R \restrict Y$ of $R$ to $Y$ is $R \cap Y^2$
-\item The \emph{application}~$R[Y]$ of $R$ to $Y$ is
-\[
-R[Y] = \{y : \text{for some } x \in Y, Rxy\}
-\]
-\end{enumerate}
+\begin{defn}\ollabel{relationoperations} 
+Let $R$, $S$ be relations, and $A$ be any set. 
+
+The \emph{inverse} of $R$ is $R^{-1} = \Setabs{\tuple{y, x}}{\tuple{x,
+    y} \in R}$.
+
+The \emph{relative product} of $R$ and $S$ is $(R \mid S) =
+\{\tuple{x, z} : \exists y(Rxy \land Syz)\}$.
+
+The \emph{restriction} of $R$ to $A$ is $\funrestrictionto{R}{A}= R
+\cap A^2$.
+
+The \emph{application} of $R$ to $A$ is $\funimage{R}{A} = \{y :
+(\exists x \in A)Rxy\}$
 \end{defn}
 
 \begin{ex}
 Let $S \subseteq \Int^2$ be the successor relation on~$\Int$, i.e.,
-the set of pairs $\tuple{x, y}$ where $x + 1 = y$, for $x, y \in
-\Int$. $Sxy$ holds iff $y$ is the successor of~$x$.
-\begin{enumerate}
-\item The inverse $S^{-1}$ of $S$ is the predecessor relation, i.e.,
-  $S^{-1}xy$ iff $x-1 = y$.
-\item The relative product $S\mid S$ is the relation $x$ bears to $y$
-  if $x+2 = y$.
-\item The restriction of $S$ to $\Nat$ is the successor relation
-  on~$\Nat$.
-\item The application of $S$ to a set, e.g., $S[\{1, 2, 3\}]$ is $\{2,
-  3, 4\}$.
-\end{enumerate}
+$S = \Setabs{\tuple{x, y} \in \Int^2}{x + 1 = y}$, so that $Sxy$ iff $x + 1 = y$.
 
+$S^{-1}$ is the predecessor relation on $\Int$, i.e.,
+$\Setabs{\tuple{x,y}\in\Int^2}{x -1 =y}$.
+
+$S\mid S$ is 
+$ \Setabs{\tuple{x,y}\in\Int^2}{x + 2 =y}$
+
+$\funrestrictionto{S}{\Nat}$ is the successor relation on~$\Nat$.
+
+$\funimage{S}{\{1,2,3\}}$ is $\{2, 3, 4\}$.
 \end{ex}
 
-\begin{defn}[Transitive closure]
-The \emph{transitive closure}~$R^+$ of a relation $R \subseteq X^2$ is
-$R^+ = \bigcup_{i=1}^\infty R^i$ where $R^1 = R$ and $R^{i+1} = R^i
+\begin{defn}[Transitive closure]Let $R \subseteq A^2$ be a binary relation. 
+	
+The \emph{transitive closure} of~$R$ is $R^+ = \bigcup_{0 < n \in
+\Nat} R^n$, where we recursively define $R^1 = R$ and $R^{n+1} = R^n
 \mid R$.
 
 The \emph{reflexive transitive closure} of $R$ is $R^* = R^+ \cup
@@ -57,9 +59,9 @@ The \emph{reflexive transitive closure} of $R$ is $R^* = R^+ \cup
 
 \begin{ex}
 Take the successor relation $S \subseteq \Int^2$. $S^2xy$ iff $x + 2 =
-y$, $S^3xy$ iff $x + 3 = y$, etc. So $R^*xy$ iff for some $i \ge 1$,
-$x + i = y$. In other words, $S^+xy$ iff $x < y$ (and $R^*xy$ iff $x
-\le y$).
+y$, $S^3xy$ iff $x + 3 = y$, etc. So $S^+xy$ iff $x + n = y$ for some
+$n > 1$. In other words, $S^+xy$ iff $x < y$, and $S^*xy$ iff $x \le
+y$.
 \end{ex}
 
 \begin{prob}
@@ -67,4 +69,3 @@ Show that the transitive closure of $R$ is in fact transitive.
 \end{prob}
 
 \end{document}
-

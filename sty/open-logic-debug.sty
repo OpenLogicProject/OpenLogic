@@ -9,11 +9,12 @@
 % oldebugnote puts a note in the margin
 
 \DeclareDocumentCommand \oldebugnote { s o m } {
-  \IfBooleanTF{#1}{\reversemarginpar}{}
+  \IfBooleanTF{#1}{\reversemarginpar}{}%
   \marginnote{\tiny
-    \IfNoValueTF{#2}{}{\color{#2}}
-    #3}
-  \IfBooleanTF{#1}{\normalmarginpar}{}}
+    \IfNoValueTF{#2}{}{\color{#2}}%
+    #3}%
+  \IfBooleanTF{#1}{\normalmarginpar}{}%
+}
 
 % patch various commands and envs to produce margin notes
 

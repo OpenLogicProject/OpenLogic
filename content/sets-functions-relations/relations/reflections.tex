@@ -1,0 +1,77 @@
+% Part: sets-functions-relations
+% Chapter: relations
+% Section: reflections
+%
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{rel}{ref}
+\olsection{Philosophical Reflections}
+
+In \olref[set]{sec}, we defined relations as certain sets. We should
+pause and ask a quick philosophical question: what is such a
+definition \emph{doing}? It is extremely doubtful that we should want
+to say that we have \emph{discovered} some metaphysical identity
+facts; that, for example, the order relation on $\Nat$ \emph{turned
+out} to be the set $R=  \Setabs{\tuple{n,m}}{n, m \in \Nat\text{ and }
+n < m}$ we defined in \olref[set]{sec}. Here are three
+reasons why. 
+
+First: in \olref[set][pai]{wienerkuratowski}, we defined $\tuple{a, b} =
+\{\{a\}, \{a, b\}\}$. Consider instead the definition $\lVert a,
+b\rVert = \{\{b\}, \{a, b\}\} = \tuple{b,a}$. When $a \neq b$, we have
+that $\tuple{a, b} \neq \lVert a,b\rVert$. But we could equally have
+regarded $\lVert a,b\rVert$ as our definition of an ordered pair,
+rather than $\tuple{a,b}$. Both definitions would have worked equally
+well. So now we have two equally good candidates to ``be'' the order
+relation on the natural numbers, namely:
+\begin{align*}
+		R &= \Setabs{\tuple{n,m}}{n, m \in \Nat \text{ and }n < m}\\
+		S &= \Setabs{\lVert n,m\rVert}{n, m \in \Nat \text{ and }n < m}.
+\end{align*}
+Since $R \neq S$, by extensionality, it is clear that they cannot
+\emph{both} be identical to the order relation on~$\Nat$. But it would
+just be arbitrary, and hence a bit embarrassing, to claim that $R$
+rather than $S$ (or vice versa) \emph{is} the ordering relation, as a
+matter of fact. (This is a very simple instance of an argument against
+set-theoretic reductionism which Benacerraf made famous in
+\citeyear{Benacerraf1965}. We will revisit it several times.)
+
+Second: if we think that \emph{every} relation should be identified
+with a set, then the relation of set-membership itself, $\in$, should
+be a particular set. Indeed, it would have to be the set
+$\Setabs{\tuple{x,y}}{x \in y}$. But does this set exist? Given
+Russell's Paradox, it is a non-trivial claim that such a set exists.
+In fact, \oliflabeldef{cumul:::part}{the theory of sets which we develop in
+\olref[cumul][][]{part} will \emph{deny} the existence of this
+set.\footnote{Skipping ahead, here is why. For reductio, suppose $I =
+\Setabs{\tuple{x,y}}{x \in y}$ exists. Then $\bigcup \bigcup I$ is the
+universal set, contradicting
+\olref[sfr][z][sep]{thm:NoUniversalSet}.}}{it is possible to
+develop set theory in a rigorous way as an axiomatic theory. In this
+theory, it will be provable that there is no set of all sets.}
+So, even if some relations can be treated as sets, the relation of
+set-membership will have to be a special case.
+
+Third: when we ``identify'' relations with sets, we said that we would
+allow ourselves to write $Rxy$ for $\tuple{x,y} \in R$. This is fine,
+provided that the membership relation, ``$\in$'', is treated \emph{as}
+a predicate. But if we think that ``$\in$'' stands for a certain kind
+of set, then the expression ``$\tuple{x,y} \in R$'' just consists of
+three singular terms which stand for sets: ``$\tuple{x,y}$'',
+``$\in$'', and ``$R$''. And such a list of names is no more capable of
+expressing a proposition than the nonsense string: ``the cup penholder
+the table''. Again, even if some relations can be treated as sets, the
+relation of set-membership must be a special case. (This rolls
+together a simple version of Frege's concept \emph{horse} paradox, and
+a famous objection that Wittgenstein once raised against Russell.)
+
+So where does this leave us? Well, there is nothing \emph{wrong} with
+our saying that the relations on the numbers are sets. We just have to
+understand the spirit in which that remark is made. We are not stating
+a metaphysical identity fact. We are simply noting that, in certain
+contexts, we can (and will) \emph{treat} (certain) relations as
+certain sets.
+
+\end{document}
