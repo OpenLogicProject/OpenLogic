@@ -1,0 +1,279 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: enumerations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{enm}
+
+\olsection{Enumerations and \usetoken{S}{enumerable} Sets}
+
+\begin{editorial}
+  This section discusses enumerations of sets, defining them as
+  surjections from $\PosInt$. It does things slowly, for readers with
+  little mathematical background. An alternative, terser
+  version is given in \olref[enm-alt]{sec}, which defines enumerations
+  differently: as bijections with $\Nat$ (or an initial segment).
+\end{editorial}
+
+\begin{explain}
+We've already given examples of sets by listing their !!{element}s.
+Let's discuss in more general terms how and when we can list the
+!!{element}s of a set, even if that set is infinite.
+\end{explain}
+
+\begin{defn}[Enumeration, informally]
+Informally, an \emph{enumeration} of a set~$A$ is a list (possibly
+infinite) of !!{element}s of~$A$ such that every !!{element} of $A$
+appears on the list at some finite position. If $A$ has an
+enumeration, then $A$ is said to be \emph{!!{enumerable}}.
+\end{defn}
+
+\begin{explain}
+A couple of points about enumerations:
+\begin{enumerate}
+\item We count as enumerations only lists which have a beginning and
+  in which every !!{element} other than the first has a single
+  !!{element} immediately preceding it.  In other words, there are
+  only finitely many elements between the first !!{element} of the
+  list and any other !!{element}. In particular, this means that every
+  !!{element} of an enumeration has a finite position: the first
+  !!{element} has position~$1$, the second position~$2$, etc.
+\item We can have different enumerations of the same set~$A$ which
+  differ by the order in which the !!{element}s appear: $4$, $1$,
+  $25$, $16$,~$9$ enumerates the (set of the) first five square
+  numbers just as well as $1$, $4$, $9$, $16$,~$25$ does.
+\item Redundant enumerations are still enumerations: $1$, $1$, $2$,
+  $2$, $3$, $3$,~\dots{} enumerates the same set as $1$, $2$,
+  $3$,~\dots{} does.
+\item Order and redundancy \emph{do} matter when we specify an
+  enumeration: we can enumerate the positive integers beginning with
+  $1$, $2$, $3$, $1$, \dots{}, but the pattern is easier to see when
+  enumerated in the standard way as $1$, $2$, $3$, $4$,~\dots
+\item Enumerations must have a beginning: \dots, $3$, $2$, $1$ is not
+  an enumeration of the positive integers because it has no first
+  !!{element}. To see how this follows from the informal definition,
+  ask yourself, ``at what position in the list does the number 76
+  appear?''
+\item The following is not an enumeration of the positive integers:
+  $1$, $3$, $5$, \dots, $2$, $4$, $6$, \dots\@ The problem is that the
+  even numbers occur at places $\infty + 1$, $\infty + 2$, $\infty +
+  3$, rather than at finite positions.
+\item The empty set is enumerable: it is enumerated by the empty list!{}
+\end{enumerate}
+\end{explain}
+
+\begin{prop}
+  If $A$ has an enumeration, it has an enumeration without
+  repetitions.
+\end{prop}
+
+\begin{proof}
+  Suppose $A$ has an enumeration $x_1$, $x_2$, \dots{} in which each
+  $x_i$ is an !!{element} of~$A$.  We can remove repetitions from an
+  enumeration by removing repeated !!{element}s. For instance, we can
+  turn the enumeration into a new one in which we list $x_i$ if
+  it is !!a{element} of~$A$ that is not among $x_1$, \dots,
+  $x_{i-1}$ or remove $x_i$ from the list if it already appears among
+  $x_1$, \dots,~$x_{i-1}$.
+\end{proof}
+
+The last argument shows that in order to get a good handle on
+enumerations and !!{enumerable} sets and to prove things about them,
+we need a more precise definition.  The following provides it.
+
+\begin{defn}[Enumeration, formally] 
+An \emph{enumeration} of a set $A \neq \emptyset$ is any
+!!{surjective} function $f \colon \PosInt \to A$.
+\end{defn}
+
+\begin{explain}
+Let's convince ourselves that the formal definition and the informal
+definition using a possibly infinite list are equivalent. First, any
+!!{surjective} function from $\PosInt$ to a set~$A$ enumerates~$A$.
+Such a function determines an enumeration as defined informally above:
+the list $f(1)$, $f(2)$, $f(3)$, \dots. Since $f$ is !!{surjective},
+every !!{element} of~$A$ is guaranteed to be the value of~$f(n)$ for
+some~$n \in \PosInt$. Hence, every !!{element} of $A$ appears at some
+finite position in the list. Since the function may not be
+!!{injective}, the list may be redundant, but that is acceptable (as
+noted above).
+
+On the other hand, given a list that enumerates all !!{element}s
+of~$A$, we can define !!a{surjective} function $f\colon \PosInt \to A$
+by letting $f(n)$ be the $n$th !!{element} of the list, or the final
+!!{element} of the list if there is no $n$th !!{element}. The only
+case where this does not produce !!a{surjective} function is when $A$ is
+empty, and hence the list is empty. So, every non-empty list
+determines !!a{surjective} function $f\colon \PosInt \to A$.
+\end{explain}
+
+\begin{defn}
+  \ollabel{defn:enumerable}
+  A set~$A$ is !!{enumerable} iff it is empty or has an enumeration.
+\end{defn}
+
+\begin{ex}
+A function enumerating the positive integers ($\PosInt$) is simply the
+identity function given by $f(n) = n$. A function enumerating the
+natural numbers $\Nat$ is the function $g(n) = n - 1$.
+\end{ex}
+
+\begin{ex}
+The functions $f\colon \PosInt \to \PosInt$ and $g \colon \PosInt \to
+\PosInt$ given by
+\begin{align*}
+f(n) & = 2n \text{ and}\\
+g(n) & = 2n+1
+\end{align*}
+enumerate the even positive integers and the odd positive integers,
+respectively. However, neither function is an enumeration of
+$\PosInt$, since neither is !!{surjective}.
+\end{ex}
+
+\begin{prob}
+Define an enumeration of the positive squares $1$, $4$, $9$, $16$, \dots
+\end{prob}
+
+\begin{ex}
+The function $f(n) = (-1)^{n} \lceil \frac{(n-1)}{2}\rceil$ (where
+$\lceil x \rceil$ denotes the \emph{ceiling} function, which rounds
+$x$ up to the nearest integer) enumerates the set of
+integers~$\Int$. Notice how $f$ generates the values of $\Int$ by
+``hopping'' back and forth between positive and negative integers:
+\[
+\begin{array}{c c c c c c c c}
+f(1) & f(2) & f(3) & f(4) & f(5) & f(6) & f(7) & \dots \\ \\
+- \lceil \tfrac{0}{2} \rceil & \lceil \tfrac{1}{2}\rceil & - \lceil \tfrac{2}{2} \rceil & \lceil \tfrac{3}{2} \rceil & - \lceil \tfrac{4}{2} \rceil  & \lceil \tfrac{5}{2}
+\rceil & - \lceil \tfrac{6}{2} \rceil & \dots \\ \\
+0 & 1 & -1 & 2 & -2 & 3 & \dots
+\end{array}
+\]
+You can also think of $f$ as defined by cases as follows:
+\[
+f(n) = \begin{cases}
+  0 & \text{if $n = 1$}\\
+  n/2 & \text{if $n$ is even}\\
+  -(n-1)/2 & \text{if $n$ is odd and $>1$}
+  \end{cases}
+\]
+\end{ex}
+
+\begin{prob}
+  Show that if $A$ and $B$ are !!{enumerable}, so is $A \cup B$. To do
+  this, suppose there are !!{surjective} functions $f\colon \PosInt \to
+  A$ and $g\colon \PosInt \to B$, and define !!a{surjective}
+  function~$h\colon \PosInt \to A \cup B$ and prove that it is
+  !!{surjective}. Also consider the cases where $A$ or~$B = \emptyset$.
+\end{prob}
+  
+\begin{prob}
+  Show that if $B \subseteq A$ and $A$ is !!{enumerable}, so is~$B$. To
+  do this, suppose there is !!a{surjective} function $f\colon \PosInt \to
+  A$. Define !!a{surjective} function~$g\colon \PosInt \to B$ and prove
+  that it is !!{surjective}. What happens if $B = \emptyset$?
+\end{prob}
+    
+\begin{prob}
+  Show by induction on $n$ that if $A_1$, $A_2$, \dots, $A_n$ are all
+  !!{enumerable}, so is $A_1 \cup \dots \cup A_n$. You may assume the
+  fact that if two sets $A$ and~$B$ are !!{enumerable}, so is~$A \cup
+  B$. 
+\end{prob}
+
+Although it is perhaps more natural when listing the !!{element}s of a
+set to start counting from the $1$st !!{element}, mathematicians like
+to use the natural numbers~$\Nat$ for counting things. They
+talk about the $0$th, $1$st, $2$nd, and so on, !!{element}s of a list.
+Correspondingly, we can define an enumeration as !!a{surjective}
+function from $\Nat$ to~$A$. Of course, the two definitions are
+equivalent.
+
+\begin{prop}\ollabel{prop:enum-shift}
+  There is !!a{surjection} $f\colon \PosInt \to A$ iff there is
+  !!a{surjection} $g\colon \Nat \to A$.
+\end{prop}
+
+\begin{proof}
+  Given !!a{surjection} $f\colon \PosInt \to A$, we can define $g(n) =
+  f(n+1)$ for all $n \in \Nat$. It is easy to see that $g\colon \Nat
+  \to A$ is !!{surjective}. Conversely, given !!a{surjection} $g\colon
+  \Nat \to A$, define $f(n) = g(n+1)$.
+\end{proof}
+
+This gives us the following result:
+
+\begin{cor}\ollabel{cor:enum-nat}
+A set $A$ is !!{enumerable} iff there is !!a{surjective} function
+$f\colon \Nat \to A$.
+\end{cor}
+
+We discussed above than an list of !!{element}s of a set~$A$ can be
+turned into a list without repetitions. This is also true for
+enumerations, but a bit harder to formulate and prove rigorously. Any
+function $f\colon \PosInt \to A$ must be defined for all $n \in
+\PosInt$. If there are only finitely many !!{element}s in~$A$ then we
+clearly cannot have a function defined on the infinitely many
+!!{element}s of~$\PosInt$ that takes as values all the !!{element}s
+of~$A$ but never takes the same value twice. In that case, i.e., in
+the case where the list without repetitions is finite, we must choose
+a different domain for~$f$, one with only finitely many !!{element}s.
+Not having repetitions means that $f$ must be !!{injective}. Since it
+is also !!{surjective}, we are looking for !!a{bijection} between some
+finite set $\{1, \dots, n\}$ or $\PosInt$ and~$A$.
+
+\begin{prop}\ollabel{prop:enum-bij}
+If $f\colon \PosInt \to A$ is !!{surjective} (i.e., an enumeration
+of~$A$), there is !!a{bijection} $g\colon Z \to A$ where $Z$ is
+either~$\PosInt$ or $\{1, \dots, n\}$ for some~$n \in \PosInt$.
+\end{prop}
+
+\begin{proof}
+  We define the function $g$ recursively: Let $g(1) = f(1)$. If $g(i)$
+  has already been defined, let $g(i+1)$ be the first value of $f(1)$,
+  $f(2)$, \dots{} not already among $g(1)$, \dots, $g(i)$, if there is
+  one. If $A$ has just $n$ !!{element}s, then $g(1)$, \dots, $g(n)$ are all
+  defined, and so we have defined a function $g\colon \{1, \dots, n\}
+  \to A$. If $A$ has infinitely many !!{element}s, then for any $i$
+  there must be !!a{element} of~$A$ in the enumeration $f(1)$, $f(2)$,
+  \dots, which is not already among $g(1)$, \dots, $g(i)$. In this
+  case we have defined a funtion $g\colon \PosInt \to A$.
+  
+  The function $g$ is !!{surjective}, since any element of~$A$ is
+  among $f(1)$, $f(2)$, \dots{} (since $f$ is !!{surjective}) and so
+  will eventually be a value of~$g(i)$ for some~$i$. It is also
+  !!{injective}, since if there were $j < i$ such that $g(j) = g(i)$,
+  then $g(i)$ would already be among $g(1)$, \dots, $g(i-1)$, contrary
+  to how we defined~$g$.
+\end{proof}
+
+\begin{cor}\ollabel{cor:enum-nat-bij}
+A set $A$ is !!{enumerable} iff it is empty or there is !!a{bijection}
+$f\colon N \to A$ where either $N = \Nat$ or $N = \{0, \dots, n\}$ for
+some $n \in \Nat$.
+\end{cor}
+
+\begin{proof}
+$A$ is !!{enumerable} iff $A$ is empty or there is !!a{surjective}
+$f\colon \PosInt \to A$. By \olref{prop:enum-bij}, the latter holds
+iff there is !!a{bijective} function~$f\colon Z \to A$ where $Z =
+\PosInt$ or $Z = \{1, \dots, n\}$ for some $n \in \PosInt$. By the
+same argument as in the proof of \olref{prop:enum-shift}, that in turn
+is the case iff there is !!a{bijection} $g\colon N \to A$ where either
+$N = \Nat$ or $N = \{0, \dots, n-1\}$.
+\end{proof}
+
+\begin{prob}
+  According to \olref[sfr][siz][enm]{defn:enumerable}, a set $A$ is
+  enumerable iff $A = \emptyset$ or there is !!a{surjective} $f\colon
+  \PosInt \to A$.  It is also possible to define ``!!{enumerable} set''
+  precisely by: a set is enumerable iff there is !!a{injective}
+  function $g\colon A \to \PosInt$.  Show that the definitions are
+  equivalent, i.e., show that there is !!a{injective} function
+  $g\colon A \to \PosInt$ iff either $A = \emptyset$ or there is
+  !!a{surjective} $f\colon \PosInt \to A$.
+\end{prob}
+
+\end{document}

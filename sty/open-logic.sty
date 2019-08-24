@@ -45,14 +45,8 @@
 \definecolor{dark-gray}{gray}{0.2}
 \definecolor{reflex-blue}{RGB}{12, 28, 140}
 
-\colorlet{oldiagcolorA}{black}
-\colorlet{oldiagcolorB}{gray}
-\definecolor{oldiagcolorC}{HTML}{a81c21}
-\definecolor{oldiagcolorD}{HTML}{1973ba}
-
 \RequirePackage{hyperref}
-\hypersetup{pdftex,
-  breaklinks,
+\hypersetup{breaklinks,
   bookmarks,
   bookmarksopen,
   bookmarksopenlevel=1,
@@ -63,6 +57,7 @@
 \RequirePackage{amsthm}
 \RequirePackage{thmtools}
 \RequirePackage[nameinlink]{cleveref} % always after hyperref!
+\RequirePackage{nicefrac}
 
 %\usepackage{pgf}
 
@@ -257,3 +252,8 @@
         \CatchFileDef{\photocredit}{\olpath/assets/photos/#1/#1-credit.tex}{}%
         \addtocontents{pcr}{#2, p.~\thepage: \photocredit\par}}{}
 \end{wrapfigure}}}{}}
+
+\newcommand*{\olasset}[1]{%
+  \centerline{%
+    \IfFileExists{#1}{\includegraphics[width=\olphotowidth]{#1}}
+    {\includegraphics[width=\olphotowidth]{\olpath/#1}}}}

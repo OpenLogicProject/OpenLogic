@@ -6,37 +6,47 @@
 
 \begin{document}
 
-\olfileid{sfr}{set}{set}
+\olfileid{sfr}{set}{imp}
 \olsection{Some Important Sets}
 
 \begin{ex}
-Mostly we'll be dealing with sets that have mathematical objects as
-members. You will remember the various sets of numbers: $\Nat$
-is the set of \emph{natural} numbers $\{0, 1, \allowbreak 2, 3, \dots\}$;
-$\Int$ the set of \emph{integers},
-\[
-\{\dots, -3, -2,
--1, 0, 1, 2, 3, \dots\};
-\]
-$\Rat$ the set of
-\emph{rational} numbers ($\Rat = \Setabs{z/n}{z \in \Int, n \in \Nat, n \neq 0}$); and
-$\Real$ the set of \emph{real} numbers. These are all \emph{infinite}
-sets, that is, they each have infinitely many !!{element}s. As it turns
-out, $\Nat$, $\Int$, $\Rat$ have the same number
-of !!{element}s, while $\Real$ has a whole bunch more---$\Nat$,
-$\Int$, $\Rat$ are ``!!{enumerable} and infinite'' whereas
-$\Real$ is ``!!{nonenumerable}''.
+We will mostly be dealing with sets whose !!{element}s are
+mathematical objects. Four such sets are important enough to have
+specific names:
+\begin{multline*}
+    \Nat = \{0, 1, 2, 3, \ldots\} \\
+    \shoveright{\text{the set of natural numbers}}\\
+    \shoveleft{\Int = \{\ldots, -2, -1, 0, 1, 2, \ldots\}} \\
+    \shoveright{\text{the set of integers}}\\
+    \shoveleft{\Rat = \Setabs{\nicefrac{m}{n}}{m, n \in \Int\text{ and }n \neq 0}}\\
+    \shoveright{\text{the set of rationals}}\\
+    \shoveleft{\Real = (-\infty, \infty)}\\
+    \text{the set of real numbers (the continuum)}
+\end{multline*}
+These are all \emph{infinite} sets, that is, they each have
+infinitely many !!{element}s.
 
-We'll sometimes also use the set of positive integers $\Int^+ = \{1,
+As we move through these sets, we are adding \emph{more} numbers to
+our stock. Indeed, it should be clear that $\Nat \subseteq \Int
+\subseteq \Rat \subseteq \Real$: after all, every natural number is an
+integer; every integer is a rational; and every rational is a real.
+Equally, it should be clear that $\Nat \subsetneq \Int \subsetneq
+\Rat$, since $-1$ is an integer but not a natural number, and
+$\nicefrac{1}{2}$ is rational but not integer. It it is less obvious
+that $\Rat \subsetneq \Real$, i.e., that there are some real numbers
+which are not rational\oliflabeldef{sfr:arith:real:realline}{, but we'll
+return to this in \olref[arith][real]{realline}}{}. 
+
+We'll sometimes also use the set of positive integers $\PosInt = \{1,
 2, 3, \dots\}$ and the set containing just the first two natural
 numbers $\Bin = \{0, 1\}$.
 \end{ex}
 
-\begin{ex}[Strings]
-Another interesting example  is the set $A^{*}$ of
-\emph{finite strings} over an alphabet $A$: any finite sequence of elements of
-$A$ is a string over $A$. We include the \emph{empty string $\Lambda$}
-among the strings over $A$, for every alphabet~$A$. For instance,
+\begin<compsci>{ex}[Strings] 
+Another interesting example  is the set $A^{*}$ of \emph{finite
+strings} over an alphabet $A$: any finite sequence of elements of~$A$
+is a string over $A$. We include the \emph{empty string $\Lambda$}
+among the strings over~$A$, for every alphabet~$A$. For instance,
 \begin{multline*}
 \Bin^*
 =\{\Lambda,0,1,00,01,10,11,\\

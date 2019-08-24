@@ -1,0 +1,134 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: reduction-alt
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{red-alt}
+
+\olsection{Reduction}
+
+\begin{editorial}
+  This section proves non-enumerability by reduction, matching the
+  results in \olref[nen-alt]{sec}. An alternative, slightly more
+  elaborate version matching the results in \olref[nen]{sec} is
+  provided in \olref[red]{sec}.
+\end{editorial}
+
+We proved that $\Bin^\omega$ is !!{nonenumerable} by a diagonalization
+argument. We used a similar diagonalization argument to show that
+$\Pow{\Nat}$ is !!{nonenumerable}. But here's another way we can prove
+that $\Pow{\Nat}$ is !!{nonenumerable}: show that \emph{if
+$\Pow{\Nat}$ is !!{enumerable} then $\Bin^\omega$ is also
+!!{enumerable}}.  Since we know $\Bin^\omega$ is !!{nonenumerable}, it
+will follow that $\Pow{\Nat}$ is too.  
+
+This is called \emph{reducing} one problem to another. In this case,
+we reduce the problem of enumerating $\Bin^\omega$ to the problem of
+enumerating $\Pow{\Nat}$.  A solution to the latter---an enumeration
+of $\Pow{\Nat}$---would yield a solution to the former---an
+enumeration of $\Bin^\omega$.
+
+To reduce the problem of enumerating a set~$B$ to that of enumerating
+a set~$A$, we provide a way of turning an enumeration of~$A$ into an
+enumeration of~$B$.  The easiest way to do that is to define
+!!a{surjection} $f\colon A \to B$.  If $x_1$, $x_2$, \dots{}
+enumerates~$A$, then $f(x_1)$, $f(x_2)$, \dots{} would enumerate~$B$.
+In our case, we are looking for !!a{surjection} $f\colon \Pow{\Nat}
+\to \Bin^\omega$.
+
+\begin{prob}
+Show that if there is an !!{injective} function $g\colon B \to A$, and
+$B$~is !!{nonenumerable}, then so is~$A$. Do this by showing how you
+can use~$g$ to turn an enumeration of~$A$ into one of~$B$.
+\end{prob}
+
+\begin{proof}[Proof of {\olref[nen-alt]{thm:nonenum-pownat}} by reduction]
+For reductio, suppose that $\Pow{\Nat}$ is !!{enumerable}, and thus that
+there is an enumeration of it, $N_{1}$, $N_{2}$, $N_{3}$, \dots
+
+Define the function $f \colon \Pow{\Nat} \to \Bin^\omega$ by letting
+$f(N)$ be the string $s_{k}$ such that $s_{k}(n) = 1$ iff $n \in N$,
+and $s_k(n) = 0$ otherwise.  
+
+This clearly defines a function, since whenever $N \subseteq \Nat$,
+any $n \in \Nat$ either is !!a{element} of $N$ or isn't.  For
+instance, the set $2\Nat = \Setabs{2n}{n \in \Nat} = \{0,2, 4, 6,
+\dots\}$ of even naturals gets mapped to the string $1010101\dots$;
+$\emptyset$ gets mapped to $0000\dots$; $\Nat$ gets mapped to
+$1111\dots$.
+
+It is also !!{surjective}: every string of $0$s and $1$s corresponds
+to some set of natural numbers, namely the one which has as its
+members those natural numbers  corresponding to the places where the string
+has~$1$s. More precisely, if $s \in \Bin^\omega$, then define $N
+\subseteq \Nat$ by:
+\[
+N = \Setabs{n \in \Nat}{s(n) = 1}
+\]
+Then $f(N) = s$, as can be verified by consulting the definition
+of~$f$. 
+
+Now consider the list
+\[
+f(N_1), f(N_2), f(N_3), \dots
+\]
+Since $f$ is !!{surjective}, every member of $\Bin^\omega$ must
+appear as a value of~$f$ for some argument, and so must appear on the
+list. This list must therefore enumerate all of~$\Bin^\omega$.
+
+So if $\Pow{\Nat}$ were !!{enumerable}, $\Bin^\omega$ would be
+!!{enumerable}.  But $\Bin^\omega$ is !!{nonenumerable}
+(\olref[nen-alt]{thm:nonenum-bin-omega}). Hence $\Pow{\Nat}$ is
+!!{nonenumerable}.
+\end{proof}
+
+%\begin{explain}
+%It is easy to be confused about the direction the reduction goes in.
+%For instance, !!a{surjective} function $g \colon \Bin^\omega \to X$
+%does \emph{not} establish that $X$ is !!{nonenumerable}.  (Consider $g
+%\colon \Bin^\omega \to \Bin$ defined by $g(s) = s(1)$, the function
+%that maps a sequence of $0$'s and $1$'s to its first !!{element}.  It
+%is surjective, because some sequences start with $0$ and some start
+%with $1$. But $\Bin$ is finite.)  Note also that the function $f$ must
+%be surjective, or otherwise the argument does not go through:
+%$f(x_1)$, $f(x_2)$, \dots{} would then not be guaranteed to include
+%all the !!{element}s of~$Y$. For instance, $h\colon \Nat \to
+%\Bin^\omega$ defined by
+%\[
+%h(n) = \underbrace{000\dots0}_{\text{$n$ $0$'s}}
+%\]
+%is a function, but $\Nat$ is !!{enumerable}.
+%\end{explain}
+
+\begin{prob}
+Show that the set of all \emph{sets of} pairs of natural numbers,
+i.e., $\Pow{\Nat \times \Nat}$, is !!{nonenumerable} by a reduction
+argument.
+\end{prob}
+
+\begin{prob}
+Show that $\Nat^\omega$, the set of infinite sequences of natural
+numbers, is !!{nonenumerable} by a reduction argument.
+\end{prob}
+
+%\begin{prob}
+%Let $P$ be the set of functions from $\Nat$ to the set $\{0\}$, and let $Q$ be the set of \emph{partial}
+%functions from the set of positive integers to the set $\{0\}$. Show
+%that $P$~is !!{enumerable} and $Q$~is not. (Hint: reduce the problem
+%of enumerating $\Bin^\omega$ to enumerating~$Q$).
+%\end{prob}
+
+\begin{prob}
+Let $S$ be the set of all !!{surjection}s from $\Nat$ to the set
+$\{0,1\}$, i.e., $S$ consists of all !!{surjection}s~$f \colon \Nat
+\to \Bin$.  Show that $S$ is !!{nonenumerable}.
+\end{prob}
+
+\begin{prob}
+Show that the set~$\Real$ of all real numbers is !!{nonenumerable}.
+\end{prob}
+
+\end{document}

@@ -1,103 +1,111 @@
 % Part:sets-functions-relations
-% Chapter: sets
+% Chapter: size-of-sets
 % Section: equinumerous-sets
 
 \documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{sfr}{set}{equ}
+\olfileid{sfr}{siz}{equ}
 
-\olsection{Equinumerous Sets}
+\olsection{Equinumerosity}
 
-\begin{intro}
 We have an intuitive notion of ``size'' of sets, which works fine for
 finite sets. But what about infinite sets? If we want to come up with
 a formal way of comparing the sizes of two sets of \emph{any} size, it
-is a good idea to start with defining when sets are the same size.
-Let's say sets of the same size are \emph{equinumerous}. We want the
-formal notion of equinumerosity to correspond with our intuitive
-notion of ``same size,'' hence the formal notion ought to satisfy the
-following properties:
+is a good idea to start by defining when sets are the same size. Here
+is Frege:
+\begin{quote}
+  If a waiter wants to be sure that he has laid exactly as many knives
+  as plates on the table, he does not need to count either of them, if
+  he simply lays a knife to the right of each plate, so that every
+  knife on the table lies to the right of some plate. The plates and
+  knives are thus uniquely correlated to each other, and indeed
+  through that same spatial relationship. \citep[\S70]{Frege1884}
+\end{quote}
+The insight of this passage can be brought out through a formal
+definition:
 
-\begin{description}
-\item[Reflexivity:] Every set is equinumerous with itself.
-\item[Symmetry:] For any sets $X$ and $Y$, if $X$ is equinumerous with
-  $Y$, then $Y$ is equinumerous with $X$.
-\item[Transitivity:] For any sets $X, Y$, and $Z$, if $X$ is
-  equinumerous with $Y$ and $Y$ is equinumerous with $Z$, then $X$ is
-  equinumerous with $Z$.
-\end{description}
-
-In other words, we want equinumerosity to be an
-\emph{equivalence relation}.
-\end{intro}
-
-\begin{defn}
-A set $X$ is \emph{equinumerous} with a set $Y$, $\cardeq{X}{Y}$, if
-and only if there is !!a{bijective} $f \colon X \to Y$.
+\begin{defn}\ollabel{comparisondef}
+  $A$ is \emph{equinumerous} with $B$, written $\cardeq{A}{B}$, iff
+  there is !!a{bijection} $f \colon A \to B$. 
 \end{defn}
 
-\begin{prop}
-Equinumerosity defines an equivalence relation.
+\begin{prop}\ollabel{equinumerosityisequi}
+Equinumerosity is an equivalence relation.
 \end{prop}
 
-\begin{proof} Let $X, Y$, and $Z$ be sets.
+\begin{proof} 
+We must show that equinumerosity is reflexive, symmetric, and
+transitive. Let $A, B$, and $C$ be sets.
 
-\begin{description}
+\emph{Reflexivity.} The identity map $\Id{A} \colon A \to A$, where
+$\Id{A} (x) = x$ for all $x \in A$, is !!a{bijection}. So
+$\cardeq{A}{A}$.
 
-\item[Reflexivity:] Using the identity map $1_X \colon X \to X$, where
-  $1_X (x) = x$ for all $x \in X$, we see that $X$ is equinumerous
-  with itself (clearly, $1_X$ is !!{bijective}).
+\emph{Symmetry.} Suppose $\cardeq{A}{B}$, i.e., there is
+!!a{bijection} $f\colon A \to B$. Since $f$ is !!{bijective}, its
+inverse $f^{-1}$ exists and is also !!{bijective}. Hence,
+$f^{-1}\colon B \to A$ is !!a{bijection}, so $\cardeq{B}{A}$.
 
-\item[Symmetry:] Suppose that $X$ is equinumerous with~$Y$. Then there
-  is !!a{bijective} $f\colon X \rightarrow Y$. Since $f$ is
-  !!{bijective}, its inverse $f^{-1}$ exists and also
-  !!{bijective}. Hence, $f^{-1}\colon Y \to X$ is a !!{bijective}
-  function from $Y$ to~$X$, so $Y$ is also equinumerous with~$X$.
-
-\item[Transitivity:] Suppose that $X$ is equinumerous with $Y$ via the
-  !!{bijective} function~$f\colon X \to Y$ and that $Y$ is
-  equinumerous with $Z$ via the !!{bijective} function~$g\colon Y \to
-  Z$. Then the composition of $\comp{f}{g}\colon X \to Z$ is
-  !!{bijective}, and $X$ is thus equinumerous with~$Z$.
-\end{description}
-Therefore, equinumerosity is an equivalence relation.
+\emph{Transitivity.} Suppose that $\cardeq{A}{B}$ and $\cardeq{B}{C}$,
+i.e., there are !!{bijection}s $f\colon A \to B$ and $g\colon B \to
+C$. Then the composition $\comp{f}{g}\colon A \to C$ is !!{bijective},
+so that $\cardeq{A}{C}$.
 \end{proof}
 
-\begin{thm}
-Suppose $X$ and $Y$ are equinumerous. Then $X$ is !!{enumerable} if
-and only if $Y$ is.
-\end{thm}
+\begin{prop}
+If $\cardeq{A}{B}$, then $A$ is !!{enumerable} if
+and only if $B$ is.
+\end{prop}
+
+\begin{editorial}
+The following proof uses \olref[enm]{defn:enumerable} if
+\olref[enm]{sec} is included and \olref[enm-alt]{defn:enumerable}
+otherwise.
+\end{editorial}
 
 \begin{proof}
-Let $X$ and $Y$ be equinumerous.  Suppose that $X$ is
-!!{enumerable}. Then either $X = \emptyset$ or there is
-!!a{surjective} function $f\colon \Int^+ \to X$. Since $X$ and $Y$ are
-equinumerous, there is !!a{bijective} $g\colon X \to Y$. If $X =
-\emptyset$, then $Y = \emptyset$ also (otherwise there would be
-!!a{element}~$y \in Y$ but no $x \in X$ with $g(x) = y$).  If, on the
-other hand, $f\colon \Int^+ \to X$ is !!{surjective}, then
-$\comp{f}{g} \colon \Int^+ \to Y$ is !!{surjective}. To see this, let
-$y \in Y$. Since $g$ is !!{surjective}, there is an $x \in X$ such
-that $g(x) = y$. Since $f$ is !!{surjective}, there is an $n \in \Int^+$
-such that $f(n) = x$. Hence,
+Suppose $\cardeq{A}{B}$, so there is some !!{bijection} $f \colon A
+\to B$, and suppose that $A$ is !!{enumerable}.
+\oliflabeldef{sfr:siz:enm:defn:enumerable}{
+  Then either $A = \emptyset$ or there is !!a{surjective} function
+  $g\colon \PosInt \to A$. If $A = \emptyset$, then $B = \emptyset$
+  also (otherwise there would be !!a{element}~$y \in B$ but no $x \in
+  A$ with $g(x) = y$). If, on the other hand, $g\colon \PosInt \to A$
+  is !!{surjective}, then $\comp{f}{g} \colon \PosInt \to B$ is
+  !!{surjective}. To see this, let $y \in B$. Since $g$ is
+  !!{surjective}, there is an $x \in A$ such that $g(x) = y$. Since
+  $f$ is !!{surjective}, there is an $n \in \PosInt$ such that $f(n) =
+  x$. Hence,
 \[
 (\comp{f}{g})(n) = g(f(n)) = g(x) = y
 \]
 and thus $\comp{f}{g}$ is !!{surjective}. We have that $\comp{f}{g}$
-is an enumeration of~$Y$, and so $Y$~is !!{enumerable}.
+is an enumeration of~$B$, and so $B$~is !!{enumerable}.}
+{
+  Then either $A  = \emptyset$ or there is !!a{bijection}~$g$ whose
+  range is $A$ and whose domain is either $\Nat$ or an initial
+  sequence of natural numbers. If $A = \emptyset$, then $B =
+  \emptyset$ also (otherwise there would be some~$y \in B$ with no $x
+  \in A$ such that $g(x) = y$). So suppose we have our
+  !!{bijection}~$g$. Then $\comp{g}{f}$ is !!a{bijection} with
+  range~$B$ and domain the same as that of~$g$ (i.e., either $\Nat$ or
+  an initial segment of it), so that $B$ is !!{enumerable}.}
+
+If $B$ is !!{enumerable}, we obtain that $A$ is !!{enumerable} by
+repeating the argument with the !!{bijection} $f^{-1}\colon B \to A$
+instead of~$f$. 
 \end{proof}
 
 \begin{prob}
-Show that if $X$ is equinumerous with $U$ and and $Y$ is equinumerous
-with $V$, and the intersections $X \cap Y$ and $U \cap V$ are empty,
-then the unions $X \cup Y$ and $U \cup V$ are equinumerous.
+Show that if $\cardeq{A}{C}$ and and $\cardeq{B}{D}$, and $A \cap B =
+C \cap D = \emptyset$, then $\cardeq{A \cup B}{C \cup D}$.
 \end{prob}
 
 \begin{prob}
-Show that if $X$ is infinite and !!{enumerable}, then it is
-equinumerous with the positive integers~$\Int^+$.
+Show that if $A$ is infinite and !!{enumerable}, then
+$\cardeq{A}{\Nat}$.
 \end{prob}
 
 \end{document}

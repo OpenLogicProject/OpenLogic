@@ -1,0 +1,115 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: pairing
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{pai}
+\olsection{Pairing Functions and Codes}
+
+\begin{explain}
+Cantor's zig-zag method makes the enumerability of $\Nat^n$ visually
+evident. But let us focus on our array depicting $\Nat^2$. Following
+the zig-zag line in the array and counting the places, we can check
+that $\tuple{1,2}$ is associated with the number~$7$. However, it would
+be nice if we could compute this more directly. That is, it would be
+nice to have to hand the \emph{inverse} of the zig-zag enumeration,
+$g\colon \Nat^2 \to \Nat$, such that
+\[
+g(\tuple{0,0}) = 0, \qquad
+g(\tuple{0,1}) = 1, \qquad
+g(\tuple{1,0}) = 2, \quad \dots, \quad 
+g(\tuple{1,2}) = 7, \quad\dots
+\]
+This would enable to calculate exactly where $\tuple{n, m}$ will occur
+in our enumeration. 
+
+In fact, we can define $g$ directly by making two observations. First:
+if the $n$th row and $m$th column contains value~$v$, then the
+$(n+1)$st row and $(m-1)$st column contains value $v + 1$. Second: the
+first row of our enumeration consists of the triangular numbers,
+starting with $0$, $1$, $3$, $5$, etc. The $k$th triangular number is
+the sum of the natural numbers $< k$, which can be computed as
+$k(k+1)/2$. Putting these two observations together, consider this
+function:
+\[
+  g(n,m) = \frac{(n+m+1)(n+m)}{2} + n
+\]
+We often just write $g(n, m)$ rather that $g(\tuple{n, m})$, since it
+is easier on the eyes. This tells you first to determine the
+$(n+m)^\text{th}$ triangle number, and then subtract $n$ from it. And
+it populates the array in exactly the way we would like. So in
+particular, the pair $\tuple{1, 2}$ is sent to $\frac{4 \times 3}{2} +
+1 = 7$. 
+
+This function $g$ is the \emph{inverse} of an enumeration of a set of
+pairs. Such functions are called \emph{pairing functions}.
+\end{explain}
+
+\begin{defn}[Pairing function] 
+  A function $f\colon A \times B \to \Nat$ is an arithmetical
+  \emph{pairing function} if $f$ is injective. We also say that $f$
+  \emph{encodes} $A \times B$, and that $f(x,y)$ is the
+  \emph{code} for $\tuple{x,y}$.
+\end{defn}
+
+\begin{explain}
+We can use pairing functions encode, e.g., pairs of natural numbers;
+or, in other words, we can represent each \emph{pair} of elements
+using a \emph{single} number. Using the inverse of the pairing
+function, we can \emph{decode} the number, i.e., find out which
+pair it represents.
+\end{explain}
+
+\begin{prob}
+Give an enumeration of the set of all non-negative rational numbers. 
+\end{prob}
+
+\begin{prob}
+Show that $\Rat$ is !!{enumerable}. Recall that any rational number 
+can be written as a fraction $z/m$ with $z \in \Int$, $m \in \Nat^+$.
+\end{prob}
+
+\begin{prob}
+Define an enumeration of $\Bin^*$.
+\end{prob}
+
+\begin{prob}
+Recall from your introductory logic course that each possible truth
+table expresses a truth function. In other words, the truth functions
+are all functions from $\Bin^k \to \Bin$ for some~$k$. Prove that the
+set of all truth functions is enumerable.
+\end{prob}
+
+\begin{prob}
+Show that the set of all finite subsets of an arbitrary infinite
+!!{enumerable} set is !!{enumerable}.
+\end{prob}
+
+\begin{prob}
+A subset of $\Nat$ is said to be \emph{cofinite} iff it is the
+complement of a finite set $\Nat$; that is, $A \subseteq \Nat$ is
+cofinite iff $\Nat\setminus A$ is finite. Let $I$ be the set whose
+!!{element}s are exactly the finite and cofinite subsets of $\Nat$.
+Show that $I$ is !!{enumerable}.
+\end{prob}
+
+\begin{prob}
+Show that the !!{enumerable} union of !!{enumerable} sets is
+!!{enumerable}. That is, whenever $A_1$, $A_2$, \dots{} are sets, and
+each $A_i$ is !!{enumerable}, then the union $\bigcup_{i=1}^\infty
+A_i$ of all of them is also !!{enumerable}. [NB: this is hard!]
+\end{prob}
+
+\begin{prob}
+Let $f \colon A \times B \to \Nat$ be an arbitrary pairing function.
+Show that the inverse of $f$ is an enumeration of $A \times B$.
+\end{prob}
+
+\begin{prob}
+Specify a function that encodes $\Nat^3$.
+\end{prob}
+
+\end{document}

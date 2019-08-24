@@ -1,0 +1,118 @@
+% Part:sets-functions-relations
+% Chapter: size-of-sets
+% Section: zig-zag
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{siz}{zigzag}
+
+\olsection{Cantor's Zig-Zag Method}
+
+\begin{explain}
+We've already considered some ``easy'' enumerations. Now we will
+consider something a bit harder. Consider the set of pairs of natural
+numbers\oliflabeldef{sfr:set:pai:sec}{, which we defined in
+\olref[set][pai]{sec} thus:}{defined by:}
+\[
+\Nat \times \Nat = \Setabs{\tuple{n,m}}{n,m \in \Nat}
+\]
+We can organize these ordered pairs into an \emph{array}, like so:
+\[
+\begin{array}{ c | c | c | c | c | c}
+& \textbf 0 & \textbf 1 & \textbf 2 & \textbf 3 & \dots \\
+\hline
+\textbf 0 & \tuple{0,0} & \tuple{0,1} & \tuple{0,2} & \tuple{0,3} & \dots \\
+\hline
+\textbf 1 & \tuple{1,0} & \tuple{1,1} & \tuple{1,2} & \tuple{1,3} & \dots \\
+\hline
+\textbf 2 & \tuple{2,0} & \tuple{2,1} & \tuple{2,2} & \tuple{2,3} & \dots \\
+\hline
+\textbf 3 & \tuple{3,0} & \tuple{3,1} & \tuple{3,2} & \tuple{3,3} & \dots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots\\
+\end{array}
+\]
+Clearly, every ordered pair in $\Nat \times \Nat$ will appear
+exactly once in the array. In particular, $\tuple{n,m}$ will appear in
+the $n$th row and $m$th column. But how do we organize the elements of
+such an array into a ``one-dimensional'' list? The pattern in the array below
+demonstrates one way to do this (although of course there are many other options):
+\[
+\begin{array}{ c | c | c | c | c | c | c}
+& \textbf 0 & \textbf 1 & \textbf 2 & \textbf 3 & \textbf 4 &\dots \\
+\hline
+\textbf 0 & 0  & 1& 3 & 6& 10 &\ldots \\
+\hline
+\textbf 1 &2 & 4& 7 & 11 & \dots &\ldots \\
+\hline
+\textbf 2 & 5 & 8 & 12 & \ldots & \dots&\ldots \\
+\hline
+\textbf 3 & 9 & 13 & \ldots & \ldots & \dots & \ldots \\
+\hline
+\textbf 4 & 14 & \ldots & \ldots & \ldots & \dots & \ldots \\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots&\ldots & \ddots\\
+\end{array}
+\]\noindent
+This pattern is called \emph{Cantor's zig-zag method}. It  enumerates
+$\Nat \times \Nat$ as follows:
+\[
+\tuple{0,0}, \tuple{0,1}, \tuple{1,0}, \tuple{0,2}, \tuple{1,1},
+\tuple{2,0}, \tuple{0,3}, \tuple{1,2}, \tuple{2,1}, \tuple{3,0}, \dots
+\]
+And this establishes the following:
+\end{explain}
+
+\begin{prop}\ollabel{natsquaredenumerable}
+$\Nat \times \Nat$ is !!{enumerable}.
+\end{prop}
+
+\begin{proof}
+Let $f \colon \Nat \to \Nat\times\Nat$ take each $k \in \Nat$ to the
+tuple $\tuple{n,m} \in \Nat \times \Nat$ such that $k$ is the value of
+the $n$th row and $m$th column in Cantor's zig-zag array. 
+\end{proof}
+
+\begin{explain}
+This technique also generalises rather nicely. For example, we can use
+it to enumerate the set of ordered triples of natural numbers, i.e.:
+\[
+\Nat \times \Nat \times \Nat = \Setabs{\tuple{n,m,k}}{n,m,k \in \Nat}
+\]
+We think of $\Nat \times \Nat \times \Nat$ as the Cartesian
+product of $\Nat \times \Nat$ with $\Nat$, that is,
+\[
+\Nat^3 = (\Nat \times \Nat) \times \Nat =
+\Setabs{\tuple{\tuple{n,m},k}}{n, m, k
+  \in \Nat }
+\]
+and thus we can enumerate $\Nat^3$ with an array by labelling one
+axis with the enumeration of $\Nat$, and the other axis with the
+enumeration of $\Nat^2$:
+\[
+\begin{array}{ c | c | c | c | c | c}
+& \textbf 0 & \textbf 1 & \textbf 2 & \textbf 3 & \dots \\
+\hline
+\mathbf{\tuple{0,0}} & \tuple{0,0,0} & \tuple{0,0,1} & \tuple{0,0,2} & \tuple{0,0,3} & \dots \\
+\hline
+\mathbf{\tuple{0,1}} & \tuple{0,1,0} & \tuple{0,1,1} & \tuple{0,1,2} & \tuple{0,1,3} & \dots \\
+\hline
+\mathbf{\tuple{1,0}} & \tuple{1,0,0} & \tuple{1,0,1} & \tuple{1,0,2} & \tuple{1,0,3} & \dots \\
+\hline
+\mathbf{\tuple{0,2}} & \tuple{0,2,0} & \tuple{0,2,1} & \tuple{0,2,2} & \tuple{0,2,3} & \dots\\
+\hline
+\vdots & \vdots & \vdots & \vdots & \vdots & \ddots \\
+\end{array}
+\]
+Thus, by using a method like Cantor's zig-zag method, we may similarly
+obtain an enumeration of~$\Nat^3$. And we can keep going, obtaining
+enumerations of $\Nat^n$ for any natural number $n$. So, we have:
+\end{explain}
+
+\begin{prop}
+$\Nat^n$ is !!{enumerable}, for every $n \in \Nat$.
+\end{prop}
+
+\end{document}
