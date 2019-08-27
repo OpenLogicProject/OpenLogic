@@ -372,7 +372,21 @@
 
 \textblockcolor{OLPltcolor}
 \begin{textblock*}{\stockwidth}(0in,3.5in)
-  \vbox to 4.5in{\quad}
+  \noindent\hfill
+  \begin{minipage}[b][4.5in][s]{.9\stockwidth}
+    \begin{raggedleft}
+      \vfill
+
+      #1
+
+      \vfill
+      \vspace{-2cm}\vfill
+      \sffamily\fontsize{16pt}{19pt}\selectfont
+      \textbf{\OLPshortbookversion}\par
+      \vspace{.5cm}
+    \end{raggedleft}
+  \end{minipage}
+  \hfill{}
 \end{textblock*}
 
 \textblockcolor{}
@@ -385,21 +399,14 @@
       \hfill
       \sffamily\fontsize{50pt}{50pt}\selectfont
       \color{OLPcolor}
-      \textbf{\OLPbooktitlecover}%
+      \textbf{\OLPbooktitlecover}
                     
       \vspace*{1cm}
       \color{black}
       \sffamily
       \fontsize{25pt}{25pt}\selectfont
       \textbf{\OLPbooksubtitlecover}
-      \vskip2cm
 
-      #1
-
-      \vfill
-      \fontsize{16pt}{19pt}\selectfont
-      \textbf{\OLPshortbookversion}\par
-      \vspace{.5cm}
     \end{raggedleft}
   \end{minipage}
   \hfill{}
@@ -451,6 +458,8 @@ Aldo Antonelli,$^\dagger$ \emph{University of California, Davis}
 Andrew Arana, \emph{Universit\'e Paris I Panth\'enon--Sorbonne}
 
 Jeremy Avigad, \emph{Carnegie Mellon University}
+
+Tim Button, \emph{University College London}
 
 Walter Dean, \emph{University of Warwick}
 
