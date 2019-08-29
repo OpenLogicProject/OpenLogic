@@ -13,13 +13,13 @@ ordinal}. This would allow us to define $\ordtype{A, <}$ as the
 ordinal $\alpha$ such that $\tuple{A, <} \isomorphic \alpha$. 
 
 Unfortunately, we \emph{cannot} prove the desired result only the
-Axioms we provided in earlier chapters. (We will see why in
+Axioms we provided introduced so far. (We will see why in
 \olref[replacement][strength]{sec}, but for now: we can't.) We need a
 new thought, and here it is:
 
 \begin{axiom}[Scheme of Replacement]
 For any formula $\phi(x, y)$,\footnote{Which may have parameters.} this is an axiom: 
-	\\for any $A$, if $(\forall x \in A)\exists\bang y\phi(x,y)$, {then} $\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
+	\\for any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, {then} $\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
 \end{axiom}
 
 As with Separation, this is a scheme: it yields infinitely many
@@ -28,7 +28,7 @@ equally well be (and normally is) written down thus:
 
 \
 \\\emph{For any formula $\phi(x,y)$ which does not contain ``$B$'',\footnote{Which may have parameters.} this is an axiom:
-\\$\forall A[(\forall x \in A)\exists \bang y \phi(x,y) \lonlyif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]$}
+\\$\forall A[(\forall x \in A)\lexists![y][\phi(x,y)] \lif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]$}
 
 \
 \\ 
@@ -44,14 +44,14 @@ For any term $\tau(x)$,\footnote{Which may have parameters.} and any set $A$, th
 \end{cor}
 
 \begin{proof}
-Since $\tau$ is a \emph{term}, $\forall x \exists \bang y\,  \tau(x) =
-y$. A fortiori, $(\forall x \in A)\exists\bang y\, \tau(x) = y$. So
+Since $\tau$ is a \emph{term}, $\forall x \lexists![y][\tau(x) = y]$.
+A fortiori, $(\forall x \in A)\lexists![y][\tau(x) = y]$. So
 $\Setabs{y}{(\exists x \in A)\tau(x) = y}$ exists by Replacement.
 \end{proof}
 
 This suggests that ``Replacement'' is a good name for the Axiom: given
 a set $A$, you can form a new set, $\Setabs{\tau(x)}{x \in A}$, by
-replacing every member of $A$ with its image under $\tau$. Indeed,
+replacing every member of $A$ with its image under~$\tau$. Indeed,
 following the notation for the image of a set under a function, we
 might write $\funimage{\tau}{A}$ for $\Setabs{\tau(x)}{x \in A}$.
 
@@ -63,6 +63,6 @@ A}$ is just a particular subset of $\ran{f}$, and that is already
 guaranteed to exist, just using the axioms of~$\Zminus$.\footnote{Just
 consider $\Setabs{y \in \bigcup \bigcup f}{(\exists x \in A)y =
 f(x)}$.} Replacement, by contrast, is a \emph{powerful} addition to
-our axioms, as we will see in chapter \olref[sth][replacement][]{chap}.
+our axioms, as we will see in \olref[sth][replacement][]{chap}.
 
 \end{document}

@@ -38,9 +38,9 @@ intrinsic justification for Replacement. But there is much too much to
 say about it here. You must now decide for yourself whether it
 succeeds.
 
-To close the chapter, I will prove that Replacement entails
+Finally, we will prove that Replacement entails
 Reflection. This is easily the most advanced bit of mathematics in
-this textbook (so if you follow it, well done). I will start with a
+this textbook (so if you follow it, well done). We'll start with a
 lemma which, for brevity, employs the notational device of
 \emph{overlining} to deal with sequences of variables or objects. So:
 ``$\overline{a}_k$'' abbreviates ``$a_{k_1}$, \dots, $a_{k_n}$'', where
@@ -170,16 +170,16 @@ are absolute for $S$; the fourth claim follows since $0 \neq 1$.
 
 \begin{thm}[in $\Z$ + Weak-Reflection]\label{thm:replacement} 
 For any formula $\phi(v,w)$,\footnote{Which may contain parameters}
-and any $A$, if $(\forall x \in A)\exists \bang  y\phi(x,y)$, then
+and any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, then
 $\Setabs{y}{(\exists x \in A)\phi(x,y}$ exists.
 \end{thm}
 
 \begin{proof}
-Fix $A$ such that $(\forall x \in A)\exists \bang  y\phi(x,y)$, and
+Fix $A$ such that $(\forall x \in A)\lexists![y][\phi(x,y)]$, and
 define some formulas:
 \begin{align*}
 	\psi &\text{ is } (\phi(x, z) \land A = A)\\
-	\chi &\text{ is } \exists y \phi(x, y)
+	\chi &\text{ is } \lexists[y][\phi(x, y)]
 \end{align*}
 Using \olref{lem:reflect}, since $A$ is a parameter to $\psi$, there
 is a transitive~$S$ such that $0, 1, A \in S$  (along with any other
@@ -196,8 +196,8 @@ Combining these, and observing that $A \subseteq S$ since $A \in S$ and $S$ is t
 \begin{align*}
 	(\forall x \in A)(&\exists y\phi(x, y) \liff (\exists y \in S)\phi(x, y))
 \end{align*}
-Now $(\forall x \in A)(\exists \bang y \in S)\phi(x, y)$, because
-$(\forall x \in A)\exists \bang y \phi(x, y)$. Now Separation yields
+Now $(\forall x \in A)(\lexists![y \in S])\phi(x, y)$, because
+$(\forall x \in A)\lexists![y][\phi(x, y)]$. Now Separation yields
 $\Setabs{y \in S}{(\exists x \in A) \phi(x, y)} = \Setabs{y}{(\exists
 x \in A) \phi(x, y)}$. 
 \end{proof}

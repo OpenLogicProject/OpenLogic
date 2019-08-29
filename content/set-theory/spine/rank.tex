@@ -48,7 +48,7 @@ things about \emph{all sets} by a form of induction:
 \begin{thm}[$\in$-Induction Scheme] 
 For any formula $\phi$:\footnote{Which may have parameters}
 \[
-	\forall A((\forall x \in A)\phi(x) \lonlyif \phi(A)) \lonlyif \forall A \phi(A).
+	\forall A((\forall x \in A)\phi(x) \lif \phi(A)) \lif \forall A \phi(A).
 \]
 \end{thm}
 
@@ -58,7 +58,7 @@ We will prove the contrapositive. So, suppose $\lnot \forall A
 (\olref[ordinals][basic]{ordinductionschema}) tells us that there
 is a non-$\phi$ of least possible rank. That is: there is some $A$
 such that $\lnot \phi(A)$ and $\forall x(\setrank{x} \in \setrank{A}
-\lonlyif \phi(x))$. Now if $x \in A$ then $\setrank{x} \in
+\lif \phi(x))$. Now if $x \in A$ then $\setrank{x} \in
 \setrank{A}$, by \olref{rankmemberslower}. So $(\forall x \in
 A)\phi(x) \land \lnot \phi(A)$, falsifying the antecedent.
 \end{proof}\noindent Here is an informal way to gloss this powerful
@@ -67,8 +67,8 @@ result. Say that $\phi$ is \emph{hereditary} iff whenever every
 $\in$-Induction tells you the following: if $\phi$ is hereditary,
 every set is $\phi$.
 
-To wrap up the discussion of ranks (for now), I will prove a few
-claims which I have foreshadowed a few times. 
+To wrap up the discussion of ranks (for now), we'll prove a few
+claims which we have foreshadowed a few times. 
 
 \begin{prop}\ollabel{ranksupstrict}
 $\setrank{A} = \supstrict_{x \in A}\setrank{x}$.
@@ -78,7 +78,7 @@ $\setrank{A} = \supstrict_{x \in A}\setrank{x}$.
 Let $\alpha = \supstrict_{x \in A}\setrank{x}$. By
 \olref{rankmemberslower}, $\alpha \leq \setrank{A}$. But if $x \in A$
 then $\setrank{x} \in \alpha$, so that $x \in V_\alpha$, and hence $A
-\subseteq V_\alpha$, i.e.\ $\setrank{A} \leq \alpha$. Hence
+\subseteq V_\alpha$, i.e., $\setrank{A} \leq \alpha$. Hence
 $\setrank{A} = \alpha$.
 \end{proof}
 
@@ -93,7 +93,7 @@ all $\beta \in \alpha$. Now $\setrank{\alpha} = \supstrict_{\beta \in
 by \olref{ranksupstrict}.
 %	First note that $\setrank{\alpha} \neq \beta$ for any $\beta \in
 %	\alpha$. For otherwise we would have $\beta = \setrank{\beta} \in
-%	\setrank{\alpha} = \beta$ by \olref{rankmemberslower}, i.e.\
+%	\setrank{\alpha} = \beta$ by \olref{rankmemberslower}, i.e.,
 %	$\beta \in \beta$, a contradiction. 
 %
 %	Now note that $\alpha \subseteq V_\alpha$. For $\alpha =
@@ -104,7 +104,7 @@ by \olref{ranksupstrict}.
 %	\olref[sfr][spine][Valphabasic]{Valphabasicprops} twice. 
 \end{proof}
 
-Finally, here is a quick proof of the result I promised at the end of
+Finally, here is a quick proof of the result promised at the end of
 \olref[foundation]{sec}, that $\ZFminus$ proves the conditional
 $\emph{Regularity} \Rightarrow \emph{Foundation}$. (Note that the
 notion of ``rank'' and \olref{rankmemberslower} are available for use
