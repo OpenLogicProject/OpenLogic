@@ -117,13 +117,17 @@
 % `\boldsymbol{\exists}` for boldface, or redefine appropriately if
 % you want parentheses around $\exists x$.
 
-\DeclareDocumentCommand \lexists { o o } {
-    \IfNoValueTF {#1} 
-        { \exists }    % no arguments
-        { \exists #1 } % one argument: variable
+\DeclareDocumentCommand \lexists { t{!} o o } {
+    \exists 
+    \IfBooleanTF {#1} 
+        \bang    % unique
+        \relax % not unique
     \IfNoValueTF {#2} 
+        \relax     % no arguments
+        { #2 } % one argument: variable
+    \IfNoValueTF {#3} 
         \relax
-        { \, #2 }      % two arguments: space and matrix
+        { \, #3 }      % two arguments: space and matrix
 }
 
 % - The universal quantifier is `\lforall`.
@@ -801,6 +805,17 @@
 
 \DeclareDocumentCommand \Setabs { m m }{\{ #1 : #2 \}}
 
+% - Fregean extensions: Use `\fregeext{x}{!A(x)}` to produce
+%   $\oldepsilon x\, !A(x)$.
+
+\DeclareDocumentCommand \fregeext { m m }{\oldepsilon #1 \, #2 }
+
+% - Fregean number: Use `\fregenum{x}{!A(x)}` to produce 
+%   $\# x\, !A(x)$.
+
+\DeclareDocumentCommand \fregenum { m m }{\# #1 \, #2 }
+
+
 % - `\Pow{X}`: Power set, produces $\wp(X)$
 
 \DeclareDocumentCommand \Pow { m }{\wp(#1)}
@@ -1103,7 +1118,6 @@
 	\rule{L -> +RF-LFL-FR+}
 	\rule{R -> -LF+RFR+FL-}}
 
-%\newcommand\mathrm[1]{\text{\textnormal{#1}}}
 \newcommand\closureofunder[2]{\mathrm{clo}_{#1}(#2)}
 \newcommand\Closureofunder[2]{\mathrm{Clo}_{#1}(#2)}
 \newcommand\equivrep[2]{[#1]_{#2}}
@@ -1112,8 +1126,6 @@
 \newcommand\Ratequiv{\backsim}
 \newcommand\Realequiv{\Bumpeq}
 \newcommand\funrestrictionto[2]{#1\mathord{\restriction}_{#2}}
-\newcommand\fregeext[1]{\oldepsilon x #1x}
-\newcommand\fregenum[1]{\# x #1x}
 \newcommand\isomorphic{\cong}
 \newcommand\nisomorphic{\ncong}
 \newcommand*\bang{\text{\textnormal{\string!}}}
@@ -1137,17 +1149,14 @@
 \newcommand\setrank[1]{\mathrm{rank}(#1)}
 \DeclareMathOperator*{\supstrict}{\mathrm{lsub}}
 \newcommand\trcl[1]{\mathrm{trcl}(#1)}
-\newcommand\ZF{\mathrm{ZF}}
-\newcommand\SP{\mathrm{SP}}
-\newcommand\ZFC{\mathrm{ZFC}}
-\newcommand\Z{\mathrm{Z}}
+\newcommand\ZF{\Th{ZF}}
+\newcommand\SP{\Th{SP}}
+\newcommand\ZFC{\Th{ZFC}}
+\newcommand\Z{\Th{Z}}
 \newcommand\ZFminus{\ZF^{-}}
 \newcommand\Zminus{\Z^{-}}
 
 \newcommand\cardfont[1]{\mathfrak{#1}}
-
-\let\lonlyif\lif
-\let\to\longrightarrow
 
 % Commands for uniform formulations
 % =================================

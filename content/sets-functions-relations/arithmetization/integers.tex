@@ -54,13 +54,23 @@ So now we offer some definitions:
 	\end{align*}	
 (As is common, I'm using `$ab$' stand for `$(a \times b)$', just to make the axioms easier to read.) Now, we need to make sure that these definitions behave as they \emph{ought} to. Spelling out what this means, and checking it through, is rather laborious; we relegate the details to \olref[check]{sec}. But the short point is: everything works! 
 
-One final thing remains. We have constructed the integers using natural numbers. But this will mean that the natural numbers \emph{are not themselves integers}. I will return to the philosophical significance of this in \olref[ref]{sec}. On a purely technical front, though, we will need some way to be able to treat natural numbers \emph{as} integers. The idea is quite easy: for each $n \in \Nat$, we just stipulate that $n_\Int = \equivrep{n, 0}{\Intequiv}$. We need to confirm that this definition is well-behaved, i.e.\ that for any $m, n \in \Nat$
+One final thing remains. We have constructed the integers using
+natural numbers. But this will mean that the natural numbers \emph{are
+not themselves integers}. We will return to the philosophical
+significance of this in \olref[ref]{sec}. On a purely technical front,
+though, we will need some way to be able to treat natural numbers
+\emph{as} integers. The idea is quite easy: for each $n \in \Nat$, we
+just stipulate that $n_\Int = \equivrep{n, 0}{\Intequiv}$. We need to
+confirm that this definition is well-behaved, i.e., that for any $m, n
+\in \Nat$
 \begin{align*}
 	(m + n)_\Int &= m_\Int + n_\Int\\
 	(m \times n)_\Int &= m_\Int \times n_\Int\\
 	m \leq n &\liff m_\Int \leq n_\Int
 \end{align*}
-But this is all pretty straightforward. For example, to show that the second of these obtains, I can simply help myself to the behaviour of the natural numbers and reason thus:
+But this is all pretty straightforward. For example, to show that the
+second of these obtains, we can simply help ourselves to the behaviour
+of the natural numbers and reason as follows:
 %\begin{proof}
 %	Helping myself to the behaviour of the natural numbers, evidently:
 	\begin{align*}

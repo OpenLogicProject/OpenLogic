@@ -10,16 +10,16 @@ In \olref[cp]{sec}, we described Cantor's Principle. This was:
 	\card{A} = \card{B} & \text{ iff } A \approx B.
 \intertext{This is very similar to what is now called
 \emph{Hume's Principle}, which says:}
-	\fregenum{F} = \fregenum{G} & \text{ iff } F \sim G
+	\fregenum{x} {F(x)} = \fregenum{x}{G(x)} & \text{ iff } F \sim G
 \end{align*}
 where `$F \sim G$' abbreviates that there are exactly as many $F$s as
 $G$s, i.e., the $F$s can be put into a bijection with the $G$s, i.e.:
 \begin{align*}
-	\exists R(&\forall v\forall y(Rvy \lonlyif (Fv \land Gy)) \land {}\\
-		&\forall v(Fv \lonlyif \exists \bang y Rvy) \land {}\\
-		&\forall y(Gy \lonlyif \exists \bang v Rvy) \land{}\\
-		&\forall v\forall x \forall y((Rvy \land Rxy) \lonlyif x = v) \land{}\\
-		&\forall y \forall z \forall v((Rvy \land Rvz) \lonlyif y = z))
+	\exists R(&\forall v\forall y(Rvy \lif (Fv \land Gy)) \land {}\\
+		&\forall v(Fv \lif \lexists![y][Rvy]) \land {}\\
+		&\forall y(Gy \lif \lexists![v][Rvy]) \land{}\\
+		&\forall v\forall x \forall y((Rvy \land Rxy) \lif x = v) \land{}\\
+		&\forall y \forall z \forall v((Rvy \land Rvz) \lif y = z))
 \end{align*}
 But there is a type-difference between Hume's Principle and Cantor's
 Principle. In the statement of Cantor's Principle, the variables
@@ -28,7 +28,7 @@ In the statement of Hume's Principle, ``$F$'', ``$G$'' and ``$R$'' are
 \emph{not} first-order terms; rather, they are in \emph{predicate
 position}. (Maybe they stand for \emph{properties}.) So we might gloss
 Hume's Principle in English as: the number of $F$s is the number of
-$G$s iff the $F$s are bijective with the $G$s. This is called
+$G$s iff the $F$s are bijective with the~$G$s. This is called
 \emph{Hume's Principle}, because Hume once wrote this:
 \begin{quote}
   When two numbers are so combined as that the one has always an unit
@@ -44,21 +44,21 @@ You should note the structural similarity between Hume's Principle and
 Basic Law~V. We formulated this in \olref[story][blv]{sec} as
 follows:
 \[
-	\fregeext{F} = \fregeext{G} \liff \forall x(Fx \liff Gx).
+	\fregeext{x}{F(x)} = \fregeext{x}{G(x)} \liff \lforall[x][(F(x) \liff G(x))].
 \]
 And, at this point, some commentary and comparison might help. 
 
 There are two ways to take a principle like Hume's Principle or Basic
 Law~V: \emph{predicatively} or \emph{impredicatively} (recall
 \olref[story][predicative]{sec}). On the impredicative reading of
-Basic Law~V, for each~$F$, the object $\fregeext{F}$ falls within the
-domain of quantification that we used in formulating Basic Law~V
-itself. Similarly, on the impredicative reading of Hume's Principle,
-for each~$F$, the object $\fregenum{F}$ falls within the domain of
-quantification that we used in formulating Hume's Principle. By
-contrast, on the \emph{predicative} understanding, the objects
-$\fregeext{F}$ and~$\fregenum{F}$ would be entities from some
-\emph{different} domain. 
+Basic Law~V, for each~$F$, the object $\fregeext{x}{F(x)}$ falls
+within the domain of quantification that we used in formulating Basic
+Law~V itself. Similarly, on the impredicative reading of Hume's
+Principle, for each~$F$, the object $\fregenum{x}{F(x)}$ falls within
+the domain of quantification that we used in formulating Hume's
+Principle. By contrast, on the \emph{predicative} understanding, the
+objects $\fregeext{x}{F(x)}$ and~$\fregenum{x}{F(x)}$ would be
+entities from some \emph{different} domain. 
 
 Now, if we read Basic Law~V impredicatively, it leads to
 inconsistency, via Na\"ive Comprehension (for the details, see
@@ -93,9 +93,9 @@ foundation for arithmetic.
 
 Frege \emph{himself}, though, did not take Hume's Principle as his
 foundation for arithmetic. Instead, Frege proved Hume's Principle from
-an explicit definition: $\fregenum{F}$ is$_\text{df}$ the extension of
+an explicit definition: $\fregenum{x}{F(x)}$ is defined as the extension of
 the concept $F \sim \Phi$. In modern terms, we might attempt to render
-this as $\fregenum{F} = \Setabs{G}{F \sim G}$; but this will pull us
+this as $\fregenum{x}{F(x)} = \Setabs{G}{F \sim G}$; but this will pull us
 back into the problems of Na\"ive Comprehension.
 
 \end{document}
