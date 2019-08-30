@@ -30,10 +30,10 @@ $\Domain M = X$ and $\Assign{<}{M} = R$ is a model of this theory.
 The theory of groups in the language $\Obj 1$ (!!{constant}), $\cdot$
 (two-place !!{function}) is axiomatized by
 \begin{align*}
-& \lforall[x][(x \cdot \Obj 1) = x]\\
+& \lforall[x][\eq[(x \cdot \Obj 1)][x]]\\
 & \lforall[x][\lforall[y][\lforall[z][\eq[(x \cdot (y \cdot z))][((x
           \cdot y) \cdot z)]]]]\\
-& \lforall[x][\lexists[y][(x \cdot y) = \Obj 1]]
+& \lforall[x][\lexists[y][\eq[(x \cdot y)][\Obj 1]]]
 \end{align*}
 \end{ex}
 
@@ -42,8 +42,8 @@ The theory of Peano arithmetic is axiomatized by the following
 sentences in the language of arithmetic~$\Lang L_A$.
 \begin{align*}
 & \lnot\lexists[x][x' = \Obj 0]\\
-& \lforall[x][\lforall[y][(x' = y' \lif x = y)]]\\
-& \lforall[x][\lforall[y][(x < y \liff \lexists[z][(x + z' = y)])]]\\
+& \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y])])]]\\
 & \lforall[x][\eq[(x + \Obj 0)][x]]\\
 & \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
 & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
@@ -72,10 +72,10 @@ The following might be considered as an axiom system for a theory of
 pure sets:
 \begin{align*}
 & \lexists[x][\lnot \lexists[y][y \in x]]\\
-& \lforall[x][\lforall[y][(\lforall[z](z \in x \liff z \in y) \lif x =
-      y)]]\\
-& \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff (u =
-          x \lor u = y))]]]]\\
+& \lforall[x][\lforall[y][(\lforall[z](z \in x \liff z \in y) \lif 
+\eq[x][y])]]\\
+& \lforall[x][\lforall[y][\lexists[z][\lforall[u][(u \in z \liff
+(\eq[u][x] \lor \eq[u][y]))]]]]\\
 & \lforall[x][\lexists[y][\lforall[z][(z \in y \liff \lexists[u][(z \in
         u \land u \in x)])]]]\\
 \intertext{plus all sentences of the form} &
@@ -121,7 +121,7 @@ neither reflexive nor transitive.
 \begin{align*}
 & \lforall[x][\Atom{\Obj P}{x,x}], \\
 & \lforall[x][\lforall[y][((\Part{x}{y} \land \Part{y}{x})
-      \lif x = y)]], \\
+      \lif \eq[x][y])]], \\
 & \lforall[x][\lforall[y][\lforall[z][((\Part{x}{y} \land
         \Part{y}{z}) \lif \Part{x}{z})]]],\\
 \intertext{Moreover, any two objects have a mereological sum (an object that has
