@@ -136,7 +136,7 @@ We will consider each of these three cases in turn.
 
 \begin{enumerate} 
 \item Suppose there is an instruction of the form~\olref{right}.
-  By \olref[rep]{defn:tm-descr}, \olref[rep]{rep-right}, this means that
+  By \olref[rep]{defn:tm-descr}\olref[rep]{rep-right}, this means that
 \begin{align*} 
 & \lforall[x][\lforall[y][((\Obj Q_{q}(x,
   y) \land \Obj S_\sigma(x, y)) \lif {}]]\\
@@ -188,9 +188,9 @@ $\lforall[x][(\num{k}' < x \lif \Obj S_\TMblank(x, \num{n}'))]$. We
 have to verify that these two !!{sentence}s are also implied.
 
 We already have $\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x,
-  \num{n}'))]$. In particular, this gives us $\num{k} < \num{k'} \lif
+  \num{n}'))]$. In particular, this gives us $\num{k} < \num{k}' \lif
 \Obj S_\TMblank(\num{k}', \num{n}')$. From the axiom $\lforall[x][x <
-  x']$ we get $\num{k} < \num{k'}$. By modus ponens, $\Obj
+  x']$ we get $\num{k} < \num{k}'$. By modus ponens, $\Obj
 S_\TMblank(\num{k}',\num{n}')$ follows.
 
 Also, since $!T(M,w) \Proves \num{k} < \num{k}'$, the axiom for
@@ -199,7 +199,7 @@ transitivity of~$<$ gives us $\lforall[x][(\num{k}' < x \lif \Obj
 exercise.)
 
 \item Suppose there is an instruction of the form~\olref{left}.
-  Then, by \olref[rep]{defn:tm-descr}, \olref[rep]{rep-left},
+  Then, by \olref[rep]{defn:tm-descr}\olref[rep]{rep-left},
 \begin{align*} 
 & \lforall[x][\lforall[y][((\Obj Q_{q}(x', y) \land \Obj
     S_{\sigma}(x', y)) \lif {}]]\\
@@ -229,8 +229,9 @@ exercise.)
 & \qquad  \lforall[x][(\num{k} < x
   \lif \Obj S_\TMblank(x, \num{n}'))]
 \end{align*}
-as before. (Note that in the first case, $\num{l}' = \num{m}$ and in
-the second case $\num{l} = \Obj 0$.) But this just is $!C(M, w, n+1)$.
+as before. (Note that in the first case, $\num{l}' \ident \num{l+1}
+\ident \num{m}$ and in the second case $\num{l} \ident \Obj 0$.) But
+this just is $!C(M, w, n+1)$.
 
 \item Case \olref{stay} is left as an exercise.
 \end{enumerate}

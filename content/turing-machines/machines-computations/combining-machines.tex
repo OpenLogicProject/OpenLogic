@@ -59,8 +59,8 @@ the first stroke of the output of the addition machine.
   \node[initial,state] (A)              {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
   \node[state]         (C) [right of=B] {$q_2$};
-  \node[state]         (D) [below of=C] {$q_3$};
-  \node[state]         (E) [below of=D] {$q_4$};
+  \node[state]         (D) [below left of=C] {$q_3$};
+  \node[state]         (E) [below left of=D] {$q_4$};
 
   \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
             edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
@@ -68,14 +68,15 @@ the first stroke of the output of the addition machine.
             edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
         (C) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (D)
         (D) edge [loop left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (D)
-            edge node {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (E);
+            edge node[left, xshift=-2mm] {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (E);
 \end{tikzpicture}
 \]
 It is now easy to double the input---all we have to do is connect the
 doubler machine onto state $q_4$. This requires renaming the states
 of the doubler machine so that they start at $q_4$ instead of
 $q_0$---this way we don't end up with two starting states. The final
-diagram should look like:
+diagram should look as in \olref{fig:combined}.
+\begin{figure}
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -83,13 +84,13 @@ diagram should look like:
   \node[initial,state] (A)              {$q_0$};
   \node[state]         (B) [right of=A] {$q_1$};
   \node[state]         (C) [right of=B] {$q_2$};
-  \node[state]         (D) [below of=C] {$q_3$};
-  \node[state]         (E) [below of=D] {$q_4$};
-  \node[state]         (F) [below of=E] {$q_5$};
-  \node[state]         (G) [left of=F]  {$q_6$};
-  \node[state]         (H) [left of=G] {$q_7$};
-  \node[state]         (I) [above of=H] {$q_8$};
-  \node[state]         (J) [right of=I]  {$q_9$};
+  \node[state]         (D) [below left of=C] {$q_3$};
+  \node[state]         (E) [below left of=D] {$q_4$};
+  \node[state]         (2) [right of=E] {$q_5$};
+  \node[state]         (3) [right of=2] {$q_6$};
+  \node[state]         (4) [below of=3] {$q_7$};
+  \node[state]         (5) [left of=4]  {$q_8$};
+  \node[state]         (6) [left of=5]  {$q_9$};
 
   \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
             edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
@@ -97,20 +98,23 @@ diagram should look like:
             edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
         (C) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (D)
         (D) edge [loop left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (D)
-            edge node {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (E)
- 	  (E) edge              node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (F)
-          (F) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (F)
-              edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (G)
-          (G) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (G)
-              edge              node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (H)
-          (H) edge [loop left]  node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (H)
-              edge              node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (I)
-          (I) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (I)
-              edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (J)
-          (J) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (J)
-              edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (E);
+            edge node[left, xshift=-2mm] {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (E)
+    (E) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (2)
+    (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
+    (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (3)
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (4)
+    (4) edge [loop below] node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (4)
+        edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+    (5) edge [loop below]  node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (6)
+    (6) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (6)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (E);
 \end{tikzpicture}
 \]
+\caption{Combining adder and doubler machines}
+\ollabel{fig:combined}
+\end{figure}
 \end{ex}
 
 \end{document}
