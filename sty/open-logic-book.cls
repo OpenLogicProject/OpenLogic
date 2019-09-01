@@ -14,7 +14,7 @@
   
   \usepackage{helvet,amsmath}
   \usepackage{textgreek}
-  }
+}
 
   % Set the paper size for the cover
   % Assumes \OLPpagenumber is set, which should be done in the
@@ -118,13 +118,18 @@
     \OLPbookformat{24.589cm}{18.91cm}{90pt}{1.3}
 
     % make sure PDF conforms to PDF/X standard
-%    \RequirePackage[x-1a]{pdfx}
+    \usepackage[x-1a]{pdfx}
+
+    % chapter heads have bars on left
     \setlength{\barwidth}{7pt}
     }
 
   \AtBeginDocument{
     % make photos high resolution
     \tagfalse{olphotos-lowres}
+    % make links black
+    \hypersetup{hidelinks}
+
     \copypagestyle{OLPpage}{headings}
 
     \makeoddhead{OLPpage}{\small\sffamily\color{OLPcolor}\rightmark}{}
@@ -232,6 +237,9 @@
 
 \chapterstyle{OLPchapter}
 
+\captionnamefont{\footnotesize\itshape\color{OLPcolor}}
+\captiontitlefont{\footnotesize}
+
 % Commands to set author, title, subtitle, bookversion
 
 \RequirePackage{xparse}
@@ -271,7 +279,15 @@
 \newcommand{\setOLPpagenumber}[1]{
     \newcommand{\OLPpagenumber}{#1}}
 
-  \newcommand{\OLPprintcover}[1]{
+\newcommand{\setOLPrevision}[1]{
+    \newcommand{\OLPrevision}{#1}}
+
+\IfFileExists{olprevision.tex}{\input{olprevision.tex}}
+  {\setOLPrevision{unknown (\today)}}
+
+% \OLPprintcover -- make a Quarto size cover PDF for KDP
+
+\newcommand{\OLPprintcover}[1]{
   \color{black}
   \sffamily
 
@@ -365,6 +381,8 @@
   \end{textblock*}
 }
 
+% \OLPscreencover -- make a cover page for screen version
+
 \newcommand{\OLPscreencover}[1]{
     % Cover Page
 
@@ -416,8 +434,12 @@
 \setcounter{page}{1}
 }
 
+% \OLPfrontmatter -- typeset bastard title, editorial board, title
+% page, copyright page, and table of contents
+
 \newcommand{\OLPfrontmatter}{
-    % bastard title
+
+% bastard title
 
 \pagestyle{empty}
 
@@ -425,11 +447,10 @@
 
 \begin{raggedleft}
 
-{\fontsize{24pt}{24pt}\selectfont\bfseries\sffamily%
-\OLPbooktitle}
+{\fontsize{24pt}{28pt}\selectfont\bfseries\sffamily%
+\OLPbooktitle\par}
 
 \end{raggedleft}
-
 
 \newpage
 
@@ -483,18 +504,18 @@ Zesen Qian, \emph{Carnegie Mellon University}
 
 \newpage
 
-% title
+% title page
 
 \vspace*{100pt}
 
 \begin{raggedleft}
 
-{\fontsize{24pt}{24pt}\selectfont\bfseries\sffamily%
-\OLPbooktitle}
+{\fontsize{24pt}{28pt}\bfseries\sffamily\selectfont%
+\OLPbooktitle\par}
 
 \bigskip
 
-{\fontsize{18pt}{18pt}\selectfont\bfseries\itshape \OLPbooksubtitle{}}
+{\fontsize{18pt}{22pt}\selectfont\bfseries\itshape \OLPbooksubtitle\par}
 
 \vspace{100pt}
 
@@ -506,10 +527,9 @@ Zesen Qian, \emph{Carnegie Mellon University}
 
 \end{raggedleft}
 
-
 \newpage
 
-% credits
+% copyright page
 
 \noindent
 The Open Logic Project would like to acknowledge the generous support
@@ -521,11 +541,13 @@ the Alberta government.
 
 \bigskip
 
-\noindent\includegraphics[height=1cm]{\olpath/assets/logos/ti-\OLPassetversion}
+\noindent
+\includegraphics[height=1.2cm]{\olpath/assets/logos/ti-\OLPassetversion}
 
-\medskip
+\bigskip
 
-\noindent\includegraphics[width=4cm]{\olpath/assets/logos/aboer-\OLPassetversion}
+\noindent
+\includegraphics[height=1.5cm]{\olpath/assets/logos/aboer-\OLPassetversion}
 
 \vfill
 
@@ -544,7 +566,8 @@ the Alberta government.
 \noindent This version of \emph{\OLPbooktitle} is
 revision \gitAbbrevHash{} (\gitAuthorDate), with content generated
 from \emph{Open Logic Text} revision
-\input{olprevision}
+\OLPrevision. Free download at:\\[.5ex]
+\url{\OLPsourcelink}
 
 \vfill
 
@@ -562,6 +585,8 @@ from \emph{Open Logic Text} revision
 {\href{\OLPsourcelink}{\textit{\OLPbooktitle}}}
 % Author of this version
 {\href{\OLPauthorlink}{\OLPauthor}}
+
+% table of contents
 
 \newpage
 \pagestyle{OLPpage}

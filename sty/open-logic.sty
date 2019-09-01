@@ -232,28 +232,39 @@
 \newlistof{photocredits}{pcr}{Photo Credits}
 
 \newlength{\olphotowidth}
-\setlength{\olphotowidth}{.5\textwidth}
+\setlength{\olphotowidth}{.4\textwidth}
 \setlength{\intextsep}{0pt}
 \setlength{\columnsep}{0pt}
 
 \tagtrue{olphotos} % include photos
 \tagtrue{olphotos-lowres} % pick low-res images for smaller file size
 
-\newcommand*{\olphoto}[2]{%
+% \olphoto[width]{file}{caption} -- include a photo as a figure, if
+% tag olphotos is true. width defaults to \olphotowidth. file is
+% relative to \olpath/assets/photos. Will include file-large.png if
+% olphotos-lowres tag is false, otherwise file-small.png. Adds photo
+% credit if file-credit.tex exsists.
+
+\newcommand*{\olphoto}[3][\olphotowidth]{%
   \iftag{olphotos}{%
-    \IfFileExists{\olpath/assets/photos/#1/#1-large.png}{%
-      \begin{wrapfigure}{R}{\olphotowidth}
+    \IfFileExists{\olpath/assets/photos/#2/#2-large.png}{%
+      \begin{wrapfigure}{R}{1.2\olphotowidth}
         \hfil
         \iftag{olphotos-lowres}{%
-          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1/#1-small}}{
-          \includegraphics[width=0.8\olphotowidth]{\olpath/assets/photos/#1/#1-large}}
-        \caption{#2}
-      \IfFileExists{\olpath/assets/photos/#1/#1-credit.tex}{%
-        \CatchFileDef{\photocredit}{\olpath/assets/photos/#1/#1-credit.tex}{}%
-        \addtocontents{pcr}{#2, p.~\thepage: \photocredit\par}}{}
+          \includegraphics[width=#1]{\olpath/assets/photos/#2/#2-small}}{
+          \includegraphics[width=#1]{\olpath/assets/photos/#2/#2-large}}
+        \caption{#3}
+      \IfFileExists{\olpath/assets/photos/#2/#2-credit.tex}{%
+        \CatchFileDef{\photocredit}{\olpath/assets/photos/#2/#2-credit.tex}{}%
+        \addtocontents{pcr}{#3, p.~\thepage: \photocredit\par}}{}
 \end{wrapfigure}}}{}}
 
-\newcommand*{\olasset}[1]{%
+% \olasset[width]{file} - include an illustration
+% width defaults to \olphotowidth. Will include file, if it exists,
+% otherwise \olpath/file -- i.e., can replace illustrations in
+% \olpath/assets/x locally.
+
+\newcommand*{\olasset}[2][\olphotowidth]{%
   \centerline{%
-    \IfFileExists{#1}{\includegraphics[width=\olphotowidth]{#1}}
-    {\includegraphics[width=\olphotowidth]{\olpath/#1}}}}
+    \IfFileExists{#2}{\includegraphics[width=#1]{#2}}
+    {\includegraphics[width=#1]{\olpath/#2}}}}
