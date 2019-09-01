@@ -26,7 +26,7 @@ the logical action is.
 We'll start with an example. Suppose you want to prove the following:
 
 \begin{prop}
-For any sets $X$ and $Y$, $X \cup Y = Y \cup X$.
+For any sets $A$ and $B$, $A \cup B = B \cup A$.
 \end{prop}
 
 In order to even start the proof, we need to know what it means for
@@ -36,58 +36,58 @@ whenever they have the same !!{element}s.  So the definition we have
 to unpack is:
 
 \begin{defn}
-Sets $X$ and $Y$ are \emph{identical}, $X = Y$, iff every !!{element}
-of~$X$ is !!a{element} of~$Y$, and vice versa.
+Sets $A$ and $B$ are \emph{identical}, $A = B$, iff every !!{element}
+of~$A$ is !!a{element} of~$B$, and vice versa.
 \end{defn}
 
-This definition uses $X$ and~$Y$ as placeholders for arbitrary
+This definition uses $A$ and~$B$ as placeholders for arbitrary
 sets. What it defines---the \emph{definiendum}---is the expression
-``$X = Y$'' by giving the condition under which $X = Y$ is true.  This
-condition---``every !!{element} of~$X$ is !!a{element} of~$Y$, and
+``$A = B$'' by giving the condition under which $A = B$ is true.  This
+condition---``every !!{element} of~$A$ is !!a{element} of~$B$, and
 vice versa''---is the \emph{definiens}.\footnote{In this particular
-  case---and very confusingly!---when $X = Y$, the sets $X$ and $Y$
+  case---and very confusingly!---when $A = B$, the sets $A$ and $B$
   are just one and the same set, even though we use different letters
   for it on the left and the right side.  But the ways in which that
   set is picked out may be different, and that makes the definition
-  non-trivial.} The definition specifies that $X = Y$ is true if, and
+  non-trivial.} The definition specifies that $A = B$ is true if, and
 only if (we abbreviate this to ``iff'') the condition holds.
 
-When you apply the definition, you have to match the $X$ and $Y$ in
+When you apply the definition, you have to match the $A$ and $B$ in
 the definition to the case you're dealing with.  In our case, it means
-that in order for $X \cup Y = Y \cup X$ to be true, each $z \in X \cup
-Y$ must also be in $Y \cup X$, and vice versa.  The expression $X \cup
-Y$ in the proposition plays the role of~$X$ in the definition, and $Y
-\cup X$ that of~$Y$. Since $X$ and $Y$ are used both in the definition
+that in order for $A \cup B = B \cup A$ to be true, each $z \in A \cup
+B$ must also be in $B \cup A$, and vice versa.  The expression $A \cup
+B$ in the proposition plays the role of~$A$ in the definition, and $B
+\cup A$ that of~$B$. Since $A$ and $B$ are used both in the definition
 and in the statement of the proposition we're proving, but in
 different uses, you have to be careful to make sure you don't mix up
 the two.  For instance, it would be a mistake to think that you could
-prove the proposition by showing that every !!{element} of~$X$ is
-!!a{element} of~$Y$, and vice versa---that would show that $X = Y$,
-not that $X \cup Y = Y \cup X$. (Also, since $X$ and $Y$ may be any
+prove the proposition by showing that every !!{element} of~$A$ is
+!!a{element} of~$B$, and vice versa---that would show that $A = B$,
+not that $A \cup B = B \cup A$. (Also, since $A$ and $B$ may be any
 two sets, you won't get very far, because if nothing is assumed about
-$X$ and~$Y$ they may well be different sets.)
+$A$ and~$B$ they may well be different sets.)
 
 Within the proof we are dealing with set-theoretic notions such as
 union, and so we must also know the meanings of the symbol $\cup$ in
 order to understand how the proof should proceed. And sometimes,
 unpacking the definition gives rise to further definitions to
-unpack. For instance, $X \cup Y$ is defined as $\Setabs{z}{z \in X
-  \text{ or } z \in Y}$. So if you want to prove that $x \in X \cup
-Y$, unpacking the definition of $\cup$ tells you that you have to
-prove $x \in \Setabs{z}{z \in X \text{ or } z \in Y}$.  Now you also
+unpack. For instance, $A \cup B$ is defined as $\Setabs{z}{z \in A
+  \text{ or } z \in B}$. So if you want to prove that $x \in A \cup
+B$, unpacking the definition of $\cup$ tells you that you have to
+prove $x \in \Setabs{z}{z \in A \text{ or } z \in B}$.  Now you also
 have to remember that $x \in \Setabs{z}{\dots z\dots}$ iff $\dots
 x\dots$.  So, further unpacking the definition of the
 $\Setabs{z}{\dots z \dots}$ notation, what you have to show is: $x \in
-X$ or $x \in Y$. So, ``every !!{element} of $X \cup Y$ is also
-!!a{element} of $Y \cup X$'' really means: ``for every $x$, if $x \in
-X$ or $x \in Y$, then $x \in Y$ or $x \in X$.''  If we fully
+A$ or $x \in B$. So, ``every !!{element} of $A \cup B$ is also
+!!a{element} of $B \cup A$'' really means: ``for every $x$, if $x \in
+A$ or $x \in B$, then $x \in B$ or $x \in A$.''  If we fully
 unpack the definitions in the proposition, we see that what we have to
 show is this:
 
 \begin{prop}
-For any sets $X$ and $Y$: (a) for every $x$, if $x \in X$ or $x \in
-Y$, then $x \in Y$ or $x \in X$, and (b) for every $x$, if $x \in Y$
-or $x \in X$, then $x \in X$ or $x \in Y$.
+For any sets $A$ and $B$: (a) for every $x$, if $x \in A$ or $x \in
+B$, then $x \in B$ or $x \in A$, and (b) for every $x$, if $x \in B$
+or $x \in A$, then $x \in A$ or $x \in B$.
 \end{prop}
 
 What's important is that unpacking definitions is a necessary part of
@@ -101,7 +101,7 @@ solution follows almost immediately from the definitions
 themselves. Of course, it won't always be this simple.
 
 \begin{prob}
-Suppose you are asked to prove that $X \cap Y \neq \emptyset$. Unpack
+Suppose you are asked to prove that $A \cap B \neq \emptyset$. Unpack
 all the definitions occuring here, i.e., restate this in a way that
 does not mention ``$\cap$'', ``='', or ``$\emptyset$.
 \end{prob}
