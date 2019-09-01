@@ -346,6 +346,7 @@
         #1
 
       \vfill
+      \vspace{-2cm}\vfill
       \fontsize{16pt}{19pt}\selectfont
       \textbf{\OLPshortbookversion}\par
     \end{raggedleft}
