@@ -14,6 +14,9 @@
   
   \usepackage{helvet,amsmath}
   \usepackage{textgreek}
+
+  \newcommand*{\OLPtitlecoverfont}{\fontsize{65pt}{70pt}\sffamily\bfseries}
+  \newcommand*{\OLPsubtitlecoverfont}{\fontsize{25pt}{28pt}\sffamily\bfseries}
 }
 
   % Set the paper size for the cover
@@ -146,6 +149,8 @@
   \def\OLPassetversion{screen}
   \AtEndOfClass{
     \OLPbookformat{8in}{5in}{.6in}{1}
+    \newcommand*{\OLPtitlecoverfont}{\fontsize{50pt}{54pt}\sffamily\bfseries}
+    \newcommand*{\OLPsubtitlecoverfont}{\fontsize{25pt}{28pt}\sffamily\bfseries}
   }
   \AtBeginDocument{
     % make sure PDF conforms to PDF/A standard
@@ -216,7 +221,7 @@
 \makechapterstyle{OLPchapter}{%
   \setlength{\afterchapskip}{40pt}
   \setlength{\beforechapskip}{50pt}
-    \setlength{\midchapskip}{10pt}
+  \setlength{\midchapskip}{10pt}
   \renewcommand*{\afterchapternum}{\par\nobreak\vskip 0pt}
   \renewcommand*{\chapnamefont}{\fontsize{14pt}{0pt}\selectfont\sffamily\bfseries}
   \let\chapnumfont\chapnamefont
@@ -328,31 +333,39 @@
     \noindent\hfill
     \begin{minipage}[b][\coverartpos][s]{.8\spinepos}
     \vbox to\coverartpos{
-     \begin{raggedleft}
-        \vspace*{1.7cm}
-        \sffamily\fontsize{65pt}{65pt}\selectfont
-        \color{OLPcolor}
-        \textbf{\OLPbooktitlecover}
+    \begin{raggedleft}
+      \vspace*{1.7cm}
+      \OLPtitlecoverfont\selectfont
+      \color{OLPcolor}
+      \OLPbooktitlecover
 
-        \vspace*{1cm}
-        \color{black}
-        \sffamily
-        \fontsize{25pt}{25pt}\selectfont
-        \textbf{\OLPbooksubtitlecover}\par
-     \end{raggedleft}}
+      \vspace*{1cm}
+      \color{black}
+      \sffamily
+      \OLPsubtitlecoverfont\selectfont
+      \OLPbooksubtitlecover
+
+    \end{raggedleft}}
     \vbox to\coverartheight{%
-      \begin{raggedleft}
-        \vskip1cm\noindent
-        #1
+      \vfill
+      \noindent #1{}
 
       \vfill
-      \vspace{-2cm}\vfill
-      \fontsize{16pt}{19pt}\selectfont
-      \textbf{\OLPshortbookversion}\par
-    \end{raggedleft}
-    \vspace{1.5cm}}
+    \vspace{.125in}}
   \end{minipage}
-    \hspace{1.5cm}
+  \hspace{1.5cm}
+  \end{textblock*}
+
+  \textblockcolor{}
+
+  % place version number in bottom right corner
+
+  \begin{textblock*}{\spinepos}(\coverpos,0pt)
+    \vbox to \coverheight{
+      \vfill
+      \fontsize{16pt}{19pt}\selectfont
+      \hfill\textbf{\OLPshortbookversion}\hspace*{1.5cm}\par
+      \vspace*{1.5cm}}
   \end{textblock*}
 
   \textblockcolor{}
@@ -360,14 +373,14 @@
   % make back cover
   \begin{textblock*}{\spinepos}(0pt,0pt)
     \noindent\hspace{1.5cm}
-    \begin{minipage}[b][\coverheight][b]{.85\spinepos}
-      \begin{minipage}[b]{1.7cm}
+    \begin{minipage}[t][\coverheight][b]{.85\spinepos}
+      \begin{minipage}{1.7cm}
         \includegraphics[width=1.1cm]{\olpath/assets/logos/cc.pdf}
         \includegraphics[width=1.1cm]{\olpath/assets/logos/by.pdf}
         \includegraphics[width=1.1cm]{\olpath/assets/logos/remix.pdf}
       \end{minipage}
       \hspace{.3cm}
-      \begin{minipage}[b]{5.5cm}
+      \begin{minipage}{5.5cm}
         \begin{raggedright}
           \fontsize{14pt}{16pt}\selectfont\color{black}
           \textit{\OLPbooktitle} by \OLPauthor{} is
@@ -389,47 +402,51 @@
 
 \thispagestyle{empty}
 
+% front cover artwork
 \textblockcolor{OLPltcolor}
 \begin{textblock*}{\stockwidth}(0in,3.5in)
   \noindent\hfill
-  \begin{minipage}[b][4.5in][s]{.9\stockwidth}
-    \begin{raggedleft}
+  \begin{minipage}{.9\stockwidth}
+    \vbox to 4.5in{%
       \vfill
-
-      #1
-
-      \vfill
-      \vspace{-2cm}\vfill
-      \sffamily\fontsize{16pt}{19pt}\selectfont
-      \textbf{\OLPshortbookversion}\par
-      \vspace{.5cm}
-    \end{raggedleft}
+      \noindent #1{}
+      
+      \vfill}
   \end{minipage}
   \hfill{}
 \end{textblock*}
 
+% title and subtitle
 \textblockcolor{}
-% make front cover
 \begin{textblock*}{\stockwidth}(0in,0in)
   \noindent\hfill
   \begin{minipage}[b][\stockheight][s]{.9\stockwidth}
     \begin{raggedleft}
       \vspace*{1.7cm}
       \hfill
-      \sffamily\fontsize{50pt}{50pt}\selectfont
+      \OLPtitlecoverfont\selectfont
       \color{OLPcolor}
-      \textbf{\OLPbooktitlecover}
+      \OLPbooktitlecover
                     
       \vspace*{1cm}
       \color{black}
-      \sffamily
-      \fontsize{25pt}{25pt}\selectfont
-      \textbf{\OLPbooksubtitlecover}
+      \OLPsubtitlecoverfont\selectfont
+      \OLPbooksubtitlecover
 
     \end{raggedleft}
   \end{minipage}
   \hfill{}
 \end{textblock*}
+
+% place version number in bottom right corner
+  \textblockcolor{}
+  \begin{textblock*}{\stockwidth}(0pt,0pt)
+    \vbox to \stockheight{
+      \vfill
+      \fontsize{16pt}{19pt}\sffamily\selectfont
+      \hfill\textbf{\OLPshortbookversion}\hspace*{1cm}\par
+      \vspace*{1cm}}
+  \end{textblock*}
 \ 
 \newpage
 \setcounter{page}{1}
