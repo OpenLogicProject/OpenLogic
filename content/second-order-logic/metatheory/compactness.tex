@@ -38,8 +38,8 @@ Second-order logic is not compact.
 \begin{proof}
 Recall that 
 \[
-\fn{Inf} \ident \lexists[u][\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
-      \to \eq[x][y])]]]
+\fn{Inf} \ident \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)]
+      \lif \eq[x][y])]] \land \lexists[y][\lforall[x][\eq/[y][u(x)]]])]
 \]
 is satisfied in !!a{structure} iff its domain is infinite. Let
 $!A^{\ge n}$ be a sentence that asserts that the domain has at least

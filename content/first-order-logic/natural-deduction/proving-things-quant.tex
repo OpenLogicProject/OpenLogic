@@ -30,7 +30,7 @@ using the \Intro{\lif} rule.
 \[
 \AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
 \DeduceC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
+\DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
@@ -46,7 +46,7 @@ $\lexists[x][!A(x)]$ or any assumptions that it depends on.
 \DeduceC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Elim{\lexists}}{2}
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
+\DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
@@ -64,7 +64,7 @@ up as follows:
 \UnaryInfC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Elim{\lexists}}{2}
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
+\DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
@@ -85,7 +85,7 @@ using~$a$ so we can reach a contradiction.
 \UnaryInfC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Elim{\lexists}}{2}
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
-\RightLabel{\Intro{\lif}}
+\DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
 \DisplayProof
 \]
