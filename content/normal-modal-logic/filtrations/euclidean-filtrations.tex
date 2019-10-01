@@ -27,25 +27,25 @@ p$ is supposed to be true at~$w_2$, while $p$ is false at~$w_5$.
   \begin{tikzpicture}[modal]
     \node[world] (w1)
           [label={left: \mFalse{p}},
-            label={below: $\mSat{}{\Box p}$}] {$w_1$}; 
+            label={below: $\mSat{{}}{\Box p}$}] {$w_1$}; 
     \node[world] (w2)
           [label={right: \mTrue{p}},
-            label = {below: $\mSat{}{\Box p}$},
+            label = {below: $\mSat{{}}{\Box p}$},
             right=of w1] {$w_2$}; 
     \draw[->] (w1) to (w2);
     \node[world] (w3)
           [label={left: \mFalse{p}},
-            label={below: $\mSat{}{\Box p}$},
+            label={below: $\mSat{{}}{\Box p}$},
             below=of w1] {$w_3$}; 
     \node[world] (w4)
           [label={right:\mTrue{p}},
-            label={below: $\mSat/{}{\Box p}$},
+            label={below: $\mSat/{{}}{\Box p}$},
             right=of w3] {$w_4$};
     \draw[->] (w3) to (w4);
     \draw[reflexive above] (w4) to (w4);     
     \node[world] (w5)
           [label={right: \mFalse{p}},
-            label=below:$\mSat/{}{\Box p}$,
+            label=below:$\mSat/{{}}{\Box p}$,
             right=of w4] {$w_5$}; 
     \draw[->, bend left] (w4) to (w5);
     \draw[->, bend left] (w5) to (w4);
@@ -60,21 +60,21 @@ p$ is supposed to be true at~$w_2$, while $p$ is false at~$w_5$.
     \node[world] (w1)
           [label={left: \mFalse{p}},
             label={right:$[w_1]=[w_3]$},
-            label={below: $\mSat{}{\Box p}$}] {$[w_1]$}; 
+            label={below: $\mSat{{}}{\Box p}$}] {$[w_1]$}; 
     \node[world] (w2)
          [label={right: \mTrue{p}},
-           label = {below: $\mSat{}{\Box p}$},
+           label = {below: $\mSat{{}}{\Box p}$},
            right=of w1, yshift=1.5cm] {$[w_2]$}; 
     \draw[->] (w1) to (w2);
     \node[world] (w4)
          [label={right:\mTrue{p}},
-           label={below: $\mSat/{}{\Box p}$},
+           label={below: $\mSat/{{}}{\Box p}$},
            right=of w1,yshift=-1.5cm] {$[w_4]$};
     \draw[->] (w1) to (w4);
     \draw[reflexive above] (w4) to (w4);     
     \node[world] (w5)
          [label={right: \mFalse{p}},
-             label=below:$\mSat/{}{\Box p}$,
+             label=below:$\mSat/{{}}{\Box p}$,
              right=of w4] {$[w_5]$}; 
     \draw[->, bend left] (w4) to (w5);
     \draw[->, bend left] (w5) to (w4);

@@ -330,12 +330,12 @@
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \nvDash #3 }
-        { \Struct #2, #4 \nvDash #3}}{
+        { \Struct{#2} \nvDash #3 }
+        { \Struct{#2}, #4 \nvDash #3}}{
     % not negated
     \IfNoValueTF {#4} 
-        { \Struct #2 \vDash #3 }
-        { \Struct #2, #4 \vDash #3 }}
+        { \Struct{#2} \vDash #3 }
+        { \Struct{#2}, #4 \vDash #3 }}
 }
 
 % ### The derivability relation
@@ -387,12 +387,12 @@
 % - `\Domain{M}` - domain of a structure, e.g., `\Domain{M}` gives
 % $\left|\mathfrak M\right|$.
 
-\DeclareDocumentCommand \Domain { m }{\left| \Struct #1 \right|}
+\DeclareDocumentCommand \Domain { m }{\left| \Struct{#1} \right|}
 
 % - `\Assign{R}{M}` - Assignment (value of) of a constant/predicate symbol
 % in a structure; e.g., `\Assign{R}{M}` produces $R^\mathfrak{M}$.
 
-\DeclareDocumentCommand \Assign { m m }{\mathord{#1^{\Struct #2}}}
+\DeclareDocumentCommand \Assign { m m }{\mathord{#1^{\Struct{#2}}}}
 
 % - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
 % arguments (term and structure) and one optional argument (variable
@@ -402,14 +402,14 @@
 \DeclareDocumentCommand \Value { m m o} {
     \IfNoValueTF {#3}
         % optional argument not present
-        { \mathrm{Val}^{\Struct #2}(#1) }
+        { \mathrm{Val}^{\Struct{#2}}(#1) }
         % optional argument present
-        { \mathrm{Val}^{\Struct #2}_{#3}(#1) }
+        { \mathrm{Val}^{\Struct{#2}}_{#3}(#1) }
 }
 
 % - `\pAssign{v}` - Typeset a truth-value assignment
 
-\DeclareDocumentCommand \pAssign { m } {\mathfrak #1}
+\DeclareDocumentCommand \pAssign { m } {\applytofirst{\mathfrak}{#1}}
 
 % - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
 
@@ -426,9 +426,9 @@
 \DeclareDocumentCommand \pSat { t{/} m m } {
   \IfBooleanTF{#1}{
     % negated
-        \pAssign #2 \nvDash #3}{
+        \pAssign{#2} \nvDash #3}{
     % not negated
-        \pAssign #2 \vDash #3}
+        \pAssign{#2} \vDash #3}
 }
 
 % - `\substruct`: symbol for the substructure relation
@@ -467,7 +467,7 @@
         { \equiv_{#2} }}
 }
 
-% - `\eqc`: the equivalence class the element(first argument) belongs
+% - `\eqc`: the equivalence class the element (first argument) belongs
 % to; second argument is used to mark the equivalence relation if
 % there's more than one
 
@@ -721,7 +721,7 @@
 % - `\mModel{M}` - modal structures; default: set first token in
 % Fraktur
 
-\DeclareDocumentCommand \mModel { m }{\mathfrak #1}
+\DeclareDocumentCommand \mModel { m }{\applytofirst{\mathfrak}{#1}}
 
 % `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
 % model (at a world), is provided as the command
@@ -734,12 +734,12 @@
   \IfBooleanTF{#1}{%
     % negated
     \IfNoValueTF {#4} 
-        { \mModel #2 \nVdash #3 }
-        { \mModel #2, #4 \nVdash #3}}{%
+        { \mModel{#2} \nVdash #3 }
+        { \mModel{#2}, #4 \nVdash #3}}{%
     % not negated
     \IfNoValueTF {#4} 
-        { \mModel #2 \Vdash #3 }
-        { \mModel #2, #4 \Vdash #3 }}}
+        { \mModel{#2} \Vdash #3 }
+        { \mModel{#2}, #4 \Vdash #3 }}}
 
 % - `\mClass{C}` --- typeset class of models
 
@@ -768,7 +768,7 @@
 % - `\Prop{M}{A}`: the proposition defined by $A$ in $\mathfrak{M}$
 
 \DeclareDocumentCommand \Prop { m m } {
-  {[\!\![} #2 {]\!\!]_{\mModel #1}}
+  {[\!\![} #2 {]\!\!]_{\mModel{#1}}}
 }
 
 % - `\ST`: The standard translation
@@ -985,12 +985,16 @@
 % - `\Struct{M}` - First-order structures; by default, the first token
 % in Fraktur
 
-\DeclareDocumentCommand \Struct { m }{\mathfrak #1}
+% `\applytofirst` will apply #1 to #2 after expanding #2 once.
+
+\def\applytofirst#1#2{{\expandafter#1#2}}
+
+\DeclareDocumentCommand \Struct { m }{\applytofirst{\mathfrak}{#1}}
 
 % - `\Lang{L}` - Languages; default: set first token in callgraphic
 % font
 
-\DeclareDocumentCommand \Lang { m }{\mathcal #1}
+\DeclareDocumentCommand \Lang { m }{\applytofirst{\mathcal}{#1}}
 
 % - `\Log{L}` - Logics; default: set entirely in boldface
 
@@ -1091,7 +1095,7 @@
 \DeclareDocumentCommand \Sent { o } {
     \IfNoValueTF {#1} 
         { \mathrm{Sent} }
-        { \mathrm{Sent}({\Lang #1}) }
+        { \mathrm{Sent}({\Lang{#1}}) }
 }
 
 % Additional set theory stuff
@@ -1126,7 +1130,7 @@
 \newcommand\closureofunder[2]{\mathrm{clo}_{#1}(#2)}
 \newcommand\Closureofunder[2]{\mathrm{Clo}_{#1}(#2)}
 \newcommand\equivrep[2]{[#1]_{#2}}
-\newcommand\equivclass[2]{#1/{_{#2}}}
+\newcommand\equivclass[2]{#1/_{\!{#2}}}
 \newcommand\Intequiv{\sim}
 \newcommand\Ratequiv{\backsim}
 \newcommand\Realequiv{\Bumpeq}

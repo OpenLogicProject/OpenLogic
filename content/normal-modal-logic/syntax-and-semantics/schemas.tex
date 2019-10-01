@@ -90,14 +90,14 @@ to the characteristic !!{formula}s $p$, $p \lif \Box p$, $p \lif (q
 
   To prove the ``only if'' direction, we show the following: Suppose
   $\mModel{M} = \tuple{W, R, V}$ is a modal model, and $!B \ident
-  \SSubst{!A}{\subst{D_1}{p_1},\dots,\subst{D_n}{p_n}}$ is a
+  \SSubst{!A}{\subst{!D_1}{p_1},\dots,\subst{!D_n}{p_n}}$ is a
   substitution instance of~$!A$. Define $\mModel{M'} = \tuple{W, R,
-    V'}$ by $V(p_i) = \Setabs{w}{\mSat{M}{!D_i}{w}}$.  Then
-  $\mSat{M}{!B}{w}$ iff $\mSat{M'}{!A}{w}$, for any~$w \in W$. (We
+    V'}$ by $V(p_i) = \Setabs{w}{\mSat{M}{!D_i}[w]}$.  Then
+  $\mSat{M}{!B}[w]$ iff $\mSat{M'}{!A}[w]$, for any~$w \in W$. (We
   leave the proof as an exercise.) Now suppose that $!A$ was valid,
   but some substitution instance $!B$ of~$!A$ was not valid. Then for
   some $\mModel{M} = \tuple{W, R, V}$ and some $w \in W$,
-  $\mSat/{M}{!B}{w}$. But then $\mSat/{M'}{!A}{w}$ by the claim, and
+  $\mSat/{M}{!B}[w]$. But then $\mSat/{M'}{!A}[w]$ by the claim, and
   $!A$ is not valid, a contradiction.
 \end{proof}
 
