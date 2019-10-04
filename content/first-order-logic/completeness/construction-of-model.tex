@@ -167,11 +167,12 @@ We prove both directions simultaneously, and by induction on $!A$.
 
 \tagitem{prvNot}{%
   \indcase{!A}{\lnot !B}
-    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
-    iff $\iftag{FOL}{\Sat/{M(\Gamma^*)}{!B}}{\pSat{v(\Gamma^*)}{!B}}$ 
-    (by definition of satisfaction). By
-    induction hypothesis, $\Sat/{M(\Gamma^*)}{!B}$ iff $!B \notin
-    \Gamma^*$. Since $\Gamma^*$ is consistent and !!{complete}, $!B
+    {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$ iff
+    $\iftag{FOL}{\Sat/{M(\Gamma^*)}{!B}}{\pSat{v(\Gamma^*)}{!B}}$ (by
+    definition of satisfaction). By induction hypothesis,
+    $\iftag{FOL}{\Sat/{M(\Gamma^*)}{!B}}{\pSat{v(\Gamma^*)}{!B}}$ iff
+    $!B \notin \Gamma^*$. Since $\Gamma^*$ is consistent and
+    !!{complete}, $!B
     \notin \Gamma^*$ iff $\lnot !B \in \Gamma^*$.}}{}
 
 \tagitem{prvAnd}{%
@@ -192,7 +193,7 @@ We prove both directions simultaneously, and by induction on $!A$.
   \indcase!{!A}{!B \lor !C}{}}{%
   \indcase{!A}{!B \lor !C}
     {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
-    iff at $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!B}$ or
+    iff $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!B}$ or
     $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ (by
     definition of satisfaction) iff $!B \in \Gamma^*$ or $!C \in
     \Gamma^*$ (by induction hypothesis). This is the case iff $(!B
