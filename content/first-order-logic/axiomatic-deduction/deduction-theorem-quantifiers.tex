@@ -31,19 +31,19 @@ rule is \QR, we know that $!B \ident !C \lif \lforall[x][!D(x)]$ and
 !!{derivation}, where $a$ does not occur in~$!C$, $!A$, or $\Gamma$. We
 thus have that
 \begin{align*}
-  \Gamma \cup \{!A\} & \Proves !C \lif !D(a)\\
+  \Gamma \cup \{!A\} & \Proves !C \lif !D(a),\\
   \intertext{and the induction hypothesis applies, i.e., we have that}
-  \Gamma & \Proves !A \lif !D(a)\\
+    \Gamma & \Proves !A \lif (!C \lif !D(a)).\\
   \intertext{By}
   & \Proves (!A \lif (!C \lif !D(a))) \lif ((!A \land !C) \lif !D(a))\\
   \intertext{and modus ponens we get}
   \Gamma & \Proves (!A \land !C) \lif !D(a).\\
-  \intertext{Since the eigenvariale condition still applies, we can add a step to this !!{derivation} justified by \QR, and get:}
-    \Gamma & \Proves (!A \land !C) \lif \lforall[x][!D(x)]\\
+  \intertext{Since the eigenvariable condition still applies, we can add a step to this !!{derivation} justified by \QR, and get}
+    \Gamma & \Proves (!A \land !C) \lif \lforall[x][!D(x)].\\
     \intertext{We also have}
-    & \Proves ((!A \land !C) \lif \lforall[x][!D(x)]) \lif (!A \lif (!C \lif \lforall[x][!D(x)])\\
-    \intertext{so by modus ponens,}
-    \Gamma & \Proves !A \lif (!C \lif \lforall[x][!D(x)])
+    & \Proves ((!A \land !C) \lif \lforall[x][!D(x)]) \lif (!A \lif (!C \lif \lforall[x][!D(x)]),\\
+    \intertext{so by modus ponens}
+    \Gamma & \Proves !A \lif (!C \lif \lforall[x][!D(x)]),
 \end{align*}
 i.e., $\Gamma \Proves !B$.
 
