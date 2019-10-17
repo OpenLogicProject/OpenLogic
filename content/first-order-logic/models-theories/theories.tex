@@ -41,13 +41,13 @@ The theory of groups in the language $\Obj 1$ (!!{constant}), $\cdot$
 The theory of Peano arithmetic is axiomatized by the following
 sentences in the language of arithmetic~$\Lang L_A$.
 \begin{align*}
-& \lnot\lexists[x][x' = \Obj 0]\\
 & \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
-& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y])])]]\\
+& \lforall[x][\eq/[\Obj 0][x']]\\
 & \lforall[x][\eq[(x + \Obj 0)][x]]\\
 & \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
 & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
 & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y])])]]\\
 \intertext{plus all sentences of the form}
 & (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
 \end{align*}
