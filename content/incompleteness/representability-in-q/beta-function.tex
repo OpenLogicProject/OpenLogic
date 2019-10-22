@@ -77,7 +77,7 @@ this coding, we will need to find suitable values for $x_0$,
 A couple of observations will help us in this regard. Given
 $y_0$, \dots,~$y_n$, let
 \[
-j = \max(n, y_0, \dots, y_n) + 1,
+j = \max(n, y_0 + 1, \dots, y_n + 1),
 \]
 and let
 \begin{align*}
@@ -101,10 +101,13 @@ To see that (1) is true, note that if $p$ is a prime number and $p
 Since $p$ divides $1 + (i+1)j\fac$, it can't divide $j\fac$ as well
 (otherwise, the first division would leave a remainder of~$1$). So $p$
 divides $i-k$, since $p$ divides $(i-k)j\fac$. But $\left| i-k
-\right|$ is at most~$n$, and we have chosen $j > n$, so this implies
+\right|$ is at most~$n$, and we have chosen $j \geq n$, so this implies
 that $p \mid j\fac$, again a contradiction. So there is no prime
 number dividing both $x_i$ and $x_k$. Clause (2) is easy: we have $y_i <
-j < j\fac < x_i$.
+j < j\fac < x_i$.\footnote{Using techniques of proof mining, it's possible to
+extract from this argument an explicit certificate that~$x_i$ and~$x_k$ are
+relatively prime: Writing $j! = (i-k)a$, we have $1 = (1 - (i+1)(i-k)a +
+(i+1)^2 a) \cdot (1 + ij!) - (i+1)^2 a \cdot (1 + (k+1)j!)$.}
 
 Now let us prove the $\beta$ function lemma. Remember that we can use
 $0$, successor, plus, times, $\Char{=}$, projections, and any function
