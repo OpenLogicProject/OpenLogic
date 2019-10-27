@@ -139,8 +139,9 @@ h(\Assign{\Obj{0}}{N}) =\Assign{\Obj{0}}{M}$, so $g(0) = h(0)$.
 Now consider the case for $n+1$. We have
 \begin{align*}
   g(n+1) & = \Value{\num{n+1}}{M} \text{ by definition of~$g$}\\
-  & = \Value{\num{n}'}{M}\\
-  & = \Assign{\prime}{M}(\Value{\num{n}}{M}) \\
+  & = \Value{\num{n}'}{M} \text{ since $\num{n+1}\ident \num{n}'$}\\
+  & = \Assign{\prime}{M}(\Value{\num{n}}{M}) 
+    \text{ by definition of $\Value{t'}{M}$}\\
   & = \Assign{\prime}{M}(g(n))  \text{ by definition of~$g$}\\
   & = \Assign{\prime}{M}(h(n)) \text{ by induction hypothesis}\\
   & = h(\Assign{\prime}{N}(n)) \text{ since $h$ is an isomorphism}\\
@@ -149,20 +150,24 @@ Now consider the case for $n+1$. We have
 \end{proof}
 
 \begin{explain}
-For any !!{denumerable} set~$X$, there's a !!{bijection} between
-$\Nat$ and $X$, so every such set~$X$ is potentially the !!{domain} of
-a standard model. In fact, once you pick an object $z \in X$ and a
-suitable function $s\colon X \to X$ as $\Assign{\Obj{0}}{X}$ and
-$\Assign{\prime}{X}$, the interpretation of $+$, $\times$, and $<$ is
-already fixed.  Only functions~$s = \Assign{\prime}{X}$ that are both
-!!{injective} and !!{surjective} are suitable in a standard model.  It
-has to be !!{injective} since the successor function in~$\Struct{N}$
-is, and that $\prime$ is !!{injective} is expressed by !!a{sentence}
-true in $\Struct{N}$ which $\Struct{X}$ thus also has to make true. It
-has to be !!{surjective} because otherwise there would be some $x \in
-X$ not in the domain of~$s$, i.e., the !!{sentence}
-$\lforall[x][\lexists[y][\eq[y'][x]]]$ would be false---but it is true
-in~$\Struct{N}$.
+For any !!{denumerable} set~$M$, there's a !!{bijection} between
+$\Nat$ and $M$, so every such set~$M$ is potentially the !!{domain} of
+a standard model~$\Struct{M}$. In fact, once you pick an object $z \in
+M$ and a suitable function $s$ as $\Assign{\Obj{0}}{M}$ and
+$\Assign{\prime}{M}$, the interpretations of $+$, $\times$, and $<$ is
+already fixed.  Only functions~$s\colon M \to M \setminus \{z\}$ that
+are both !!{injective} and !!{surjective} are suitable in a standard
+model as~$\Assign{\prime}{M}$.  The range of $s$ cannot contain~$z$,
+since otherwise $\lforall[x][\eq/[\Obj 0][x']]$ would be false. That
+!!{sentence} is true in~$\Struct{N}$, and so $\Struct{M}$ also has to
+make it true. The function~$s$ has to be !!{injective}, since the
+successor function~$\Assign{\prime}{N}$ in~$\Struct{N}$ is, and that
+$\Assign{\prime}{N}$ is !!{injective} is expressed by !!a{sentence}
+true in~$\Struct{N}$. It has to be !!{surjective} because otherwise
+there would be some $x \in M \setminus \{z\}$ not in the domain
+of~$s$, i.e., the !!{sentence} $\lforall[x][(\eq[x][\Obj 0] \lor
+\lexists[y][\eq[y'][x]])]$ would be false in~$\Struct{M}$---but it is
+true in~$\Struct{N}$.
 \end{explain}
 
 
