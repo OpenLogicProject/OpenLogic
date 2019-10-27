@@ -19,8 +19,8 @@ trick consists in expanding the language by infinitely many !!{constant}s
 and adding, for each !!{formula} with one free !!{variable} $!A(x)$ a
 formula of the form
 \iftag{prvEx}
-      {$\lexists[x][!A] \lif !A(c)$}
-      {$\lnot\lforall[x][!A] \lif \lnot !A(c)$},
+      {$\lexists[x][!A(x)] \lif !A(c)$}
+      {$\lnot\lforall[x][!A(x)] \lif \lnot !A(c)$},
 where $c$ is one of the new !!{constant}s.  When we construct the
 !!{structure} satisfying~$\Gamma$, this will guarantee that each
 \iftag{prvEx}
@@ -128,7 +128,7 @@ we obtain
 {$\Gamma_n \Proves \lforall[x_n][!A_n(x_n)]$}.
 Thus we have that both
 \iftag{prvEx}
-{$\Gamma_n \Proves \lexists[x_n][!A_n]$ and
+{$\Gamma_n \Proves \lexists[x_n][!A_n(x_n)]$ and
 $\Gamma_n \Proves \lforall[x_n][\lnot !A_n(x_n)]$}
 {$\Gamma_n \Proves \lnot\lforall[x_n][!A_n(x_n)]$ and
 $\Gamma_n \Proves \lforall[x_n][!A_n(x_n)]$},
