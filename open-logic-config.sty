@@ -120,7 +120,7 @@
 \DeclareDocumentCommand \lexists { t{!} o o } {
     \exists 
     \IfBooleanTF {#1} 
-        \bang    % unique
+        \mathexclaim    % unique
         \relax % not unique
     \IfNoValueTF {#2} 
         \relax     % no arguments
@@ -1137,7 +1137,6 @@
 \newcommand\funrestrictionto[2]{#1\mathord{\restriction}_{#2}}
 \newcommand\isomorphic{\cong}
 \newcommand\nisomorphic{\ncong}
-\newcommand*\bang{\text{\textnormal{\string!}}}
 \newcommand\precdot{\mathrel{\prec{\mkern -12mu \cdot}}}
 \newcommand\disjointsum{\sqcup}
 \newcommand\ordtype[1]{\mathrm{ord}(#1)}
@@ -1163,6 +1162,13 @@
 \newcommand\Zminus{\Z^{-}}
 
 \newcommand\cardfont[1]{\mathfrak{#1}}
+
+% Miscellaneous
+% =============
+
+% `\fact` -- factorial function
+
+\DeclareDocumentCommand \fact {m} {#1\,\mathexclaim}
 
 % Commands for uniform formulations
 % =================================

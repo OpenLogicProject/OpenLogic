@@ -81,11 +81,11 @@ j = \max(n, y_0, \dots, y_n) + 1,
 \]
 and let
 \begin{align*}
-x_0 & = 1 + j\fac \\
-x_1 & = 1 + 2 \cdot j\fac \\
-x_2 & = 1 + 3 \cdot j\fac \\
+x_0 & = 1 + \fact{j} \\
+x_1 & = 1 + 2 \cdot \fact{j} \\
+x_2 & = 1 + 3 \cdot \fact{j} \\
 & \vdots  \\
-x_n & = 1 + (n+1) \cdot j\fac
+x_n & = 1 + (n+1) \cdot \fact{j}
 \end{align*}
 Then two things are true:
 \begin{enumerate}
@@ -93,18 +93,18 @@ Then two things are true:
 \item For each $i$, $y_i < x_i$.
 \end{enumerate}
 To see that (1) is true, note that if $p$ is a prime number and $p
-\mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) j\fac$ and $p \mid
-1 + (k+1) j\fac$. But then $p$ divides their difference,
+\mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) \fact{j}$ and $p \mid
+1 + (k+1) \fact{j}$. But then $p$ divides their difference,
 \[
-(1 + (i+1)j\fac) - (1+ (k+1)j\fac) = (i-k) j\fac.
+(1 + (i+1)\fact{j}) - (1+ (k+1)\fact{j}) = (i-k) \fact{j}.
 \]
-Since $p$ divides $1 + (i+1)j\fac$, it can't divide $j\fac$ as well
+Since $p$ divides $1 + (i+1)\fact{j}$, it can't divide $\fact{j}$ as well
 (otherwise, the first division would leave a remainder of~$1$). So $p$
-divides $i-k$, since $p$ divides $(i-k)j\fac$. But $\left| i-k
+divides $i-k$, since $p$ divides $(i-k)\fact{j}$. But $\left| i-k
 \right|$ is at most~$n$, and we have chosen $j > n$, so this implies
-that $p \mid j\fac$, again a contradiction. So there is no prime
+that $p \mid \fact{j}$, again a contradiction. So there is no prime
 number dividing both $x_i$ and $x_k$. Clause (2) is easy: we have $y_i <
-j < j\fac < x_i$.
+j < \fact{j} < x_i$.
 
 Now let us prove the $\beta$ function lemma. Remember that we can use
 $0$, successor, plus, times, $\Char{=}$, projections, and any function
@@ -154,7 +154,7 @@ This is the function we need. Given $a_0,\dots,a_n$, as above, let
 \[
 j = \max(n,a_0,\dots,a_n)+1,
 \]
-and let $d_1 = j\fac$. By the observations above, we know that $1+d_1,
+and let $d_1 = \fact{j}$. By the observations above, we know that $1+d_1,
 1+2 d_1, \dots, 1+(n+1) d_1$ are relatively prime and all are bigger
 than $a_0,\dots,a_n$. By the Chinese Remainder theorem there is a
 value $d_0$ such that for each~$i$,
