@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{mod}{prf}{dis}
+\olfileid{nml}{prf}{dis}
 
 \olsection{Showing Systems are Distinct}
 
@@ -52,9 +52,9 @@ a model of~$\Sigma$.
   \centering
   \begin{tikzpicture}[modal]
     \node[world] (w1) [label=above:\mFalse{p},
-    label={below:$\mSat{}{\Box p}$\\ $\mSat/{}{\Box\Box p}$}] {$w_1$}; 
+    label={below:$\mSat{{}}{\Box p}$\\ $\mSat/{{}}{\Box\Box p}$}] {$w_1$}; 
     \node[world] (w2) [label=above:\mTrue{p},
-      label=below:$\mSat/{}{\Box p}$, right=of w1]{$w_2$}; 
+      label=below:$\mSat/{{}}{\Box p}$, right=of w1]{$w_2$}; 
     \draw[->, bend left] (w1) to (w2); 
     \draw[->, bend left] (w2) to (w1); 
   \end{tikzpicture}
@@ -83,13 +83,13 @@ a model of~$\Sigma$.
   \centering
   \begin{tikzpicture}[modal]
     \node[world] (w1) [label={right:\mTrue{p}},
-      label={below: $\mSat{}{\Box p}$\\
-        $\mSat/{}{\Box\Box p}$\\
-        $\mSat/{}{\Diamond\lnot p}$}] {$w_1$};
+      label={below: $\mSat{{}}{\Box p}$\\
+        $\mSat/{{}}{\Box\Box p}$\\
+        $\mSat/{{}}{\Diamond\lnot p}$}] {$w_1$};
     \draw[reflexive above] (w1) to (w1);
     \node[world] (w2) [label={right:\mTrue{p}}, label={below:
-        $\mSat{}{\Diamond\lnot p}$\\
-        $\mSat/{}{\Box\Diamond\lnot p}$}, right=of w1] {$w_2$} ;
+        $\mSat{{}}{\Diamond\lnot p}$\\
+        $\mSat/{{}}{\Box\Diamond\lnot p}$}, right=of w1] {$w_2$} ;
     \draw[reflexive above] (w2) to (w2);
     \node[world] (w3) [label={right:\mFalse{p}},right=of w2] {$w_3$};
     \draw[reflexive above] (w2) to (w2);
@@ -121,7 +121,7 @@ a model of~$\Sigma$.
     \node[world] (w2) [label=north west:\mTrue{p}]{$w_2$} ;
     \draw[reflexive left] (w2) to (w2);
     \node[world] (w1) [label=right:\mFalse{p},
-      label=below:{$\mSat{}{\Box p}, \mSat/{}{\Box\Box p}$},
+      label=below:{$\mSat{{}}{\Box p}, \mSat/{{}}{\Box\Box p}$},
       below right=of w2]{$w_1$};
     \node[world] (w3) [label=north east:\mTrue{p}, above right=of w1]{$w_3$} ;
     \draw[reflexive right] (w3) to (w3);
@@ -141,7 +141,7 @@ a model of~$\Sigma$.
 \end{figure}
 
 \begin{prob}
-  Give an alternative proof of \olref[mod][prf][dis]{thm:KD5not4} using a model
+  Give an alternative proof of \olref[nml][prf][dis]{thm:KD5not4} using a model
   with $3$ worlds.
 \end{prob}
 

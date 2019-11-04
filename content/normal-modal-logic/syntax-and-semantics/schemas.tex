@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{mod}{syn}{sch}
+\olfileid{nml}{syn}{sch}
 
 \olsection{Schemas and Validity}
 
@@ -69,7 +69,7 @@ to the characteristic !!{formula}s $p$, $p \lif \Box p$, $p \lif (q
 \end{proof}
 
 \begin{prob}
-  Prove \olref[mod][syn][sch]{prop:Dual-valid}.
+  Prove \olref[nml][syn][sch]{prop:Dual-valid}.
 \end{prob}
 
 \begin{prop}\ollabel{prop:soundMP}
@@ -90,20 +90,20 @@ to the characteristic !!{formula}s $p$, $p \lif \Box p$, $p \lif (q
 
   To prove the ``only if'' direction, we show the following: Suppose
   $\mModel{M} = \tuple{W, R, V}$ is a modal model, and $!B \ident
-  \SSubst{!A}{\subst{D_1}{p_1},\dots,\subst{D_n}{p_n}}$ is a
+  \SSubst{!A}{\subst{!D_1}{p_1},\dots,\subst{!D_n}{p_n}}$ is a
   substitution instance of~$!A$. Define $\mModel{M'} = \tuple{W, R,
-    V'}$ by $V(p_i) = \Setabs{w}{\mSat{M}{!D_i}{w}}$.  Then
-  $\mSat{M}{!B}{w}$ iff $\mSat{M'}{!A}{w}$, for any~$w \in W$. (We
+    V'}$ by $V(p_i) = \Setabs{w}{\mSat{M}{!D_i}[w]}$.  Then
+  $\mSat{M}{!B}[w]$ iff $\mSat{M'}{!A}[w]$, for any~$w \in W$. (We
   leave the proof as an exercise.) Now suppose that $!A$ was valid,
   but some substitution instance $!B$ of~$!A$ was not valid. Then for
   some $\mModel{M} = \tuple{W, R, V}$ and some $w \in W$,
-  $\mSat/{M}{!B}{w}$. But then $\mSat/{M'}{!A}{w}$ by the claim, and
+  $\mSat/{M}{!B}[w]$. But then $\mSat/{M'}{!A}[w]$ by the claim, and
   $!A$ is not valid, a contradiction.
 \end{proof}
 
 \begin{prob}
   Prove the claim in the ``only if'' part of the proof of
-  \olref[mod][syn][sch]{prop:valid-instances}. (Hint: use induction
+  \olref[nml][syn][sch]{prop:valid-instances}. (Hint: use induction
   on~$!A$.)
 \end{prob}
 
@@ -151,12 +151,13 @@ at~$w$. But $\lfalse$ is an instance of~$p$, and not true at~$w$.
       & $\Box \Diamond !A \lif \Diamond \Box !A$. \\
       \hline
     \end{tabular}
-    \caption{Valid and (or?) invalid schemas.}\ollabel{tab:valid-invalidSchemas}
+    \caption{Valid and (or?) invalid schemas.}
+    \ollabel{tab:valid-invalidSchemas}
 \end{table}
 
 \begin{prob}%\ollabel{ex:in/validSchemas}
   Prove that the schemas in the first column of
-  \olref[mod][syn][sch]{tab:valid-invalidSchemas} are valid and those in
+  \olref[nml][syn][sch]{tab:valid-invalidSchemas} are valid and those in
   the second column are not valid.
 \end{prob}
 

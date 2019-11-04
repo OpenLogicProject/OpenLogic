@@ -53,10 +53,10 @@ than~$x$, $p$~can be easily defined using primitive recursion:
 Since $\fn{nextPrime}(x)$ is the least $y$ such that $y > x$ and
 $y$~is prime, it can be easily computed by unbounded search. But it
 can also be defined by bounded minimization, thanks to a result due to
-Euclid: there is always a prime number between $x$ and $x\fac+1$.
+Euclid: there is always a prime number between $x$ and $\fact{x}+1$.
 \[
   \fn{nextPrime(x)} =
-  \bmin{y \leq x\fac+1}{(y > x \land \fn{Prime}(y))}.
+  \bmin{y \leq \fact{x}+1}{(y > x \land \fn{Prime}(y))}.
 \]
 This shows, that $\fn{nextPrime}(x)$ and hence $p(x)$ are (not just
 computable but) primitive recursive.
@@ -70,8 +70,8 @@ $q < p+1$. None of the primes $\le x$ divide $p+1$. (By definition
 of~$p$, each of the primes $p_i \le x$ divides~$p$, i.e., with
 remainder~$0$. So, each of the primes $p_i \le x$ divides $p+1$ with
 remainder~$1$, and so $p_i \nmid p+1$.)  Hence, $q$ is a prime $>
-x$ and $< p+1$.  And $p \le x\fac$, so there is a prime $> x$ and $\le
-x\fac+1$.)
+x$ and $< p+1$.  And $p \le \fact{x}$, so there is a prime $> x$ and $\le
+\fact{x}+1$.)
 
 \begin{prob}
 Define integer division $d(x, y)$ using bounded minimization.

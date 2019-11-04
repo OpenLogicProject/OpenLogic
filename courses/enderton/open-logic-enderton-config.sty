@@ -9,24 +9,25 @@
 
 % Herb liked \mathfrak{A} for structures
 
-\DeclareDocumentCommand \Struct { m }{\mathfrak{\lookup{M/A,N/B}{#1}}}
+\def\switchmods#1{\expandafter\lookup\expandafter{M/{\mathfrak{A}},N/{\mathfrak{B}},S/{\mathfrak{C}},Q/{\mathfrak{Q}}}#1}
+\DeclareDocumentCommand \Struct { m }{\applytofirst{\switchmods}{#1}}
 
 \DeclareDocumentCommand \Sat { t{/} m m o } {
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4}
-        { \not\models_{\Struct #2} #3 }
-        { \not\models_{\Struct #2} #3 [#4]}}{
+        { \not\models_{\Struct{#2}} #3 }
+        { \not\models_{\Struct{#2}} #3\, [#4]}}{
     % not negated
     \IfNoValueTF {#4}
-        { \models_{\Struct #2} #3 }
-        { \models_{\Struct #2} #3 [#4] }}
+        { \models_{\Struct{#2}} #3 }
+        { \models_{\Struct{#2}} #3\, [#4] }}
 }
 
 \DeclareDocumentCommand \Value { m m o} {
     \IfNoValueTF {#3}
         % optional argument not present
-        { {#1}^{\Struct #2} }
+        { {#1}^{\Struct{#2}} }
         % optional argument present
         { \bar{#3}(#1) }
 }

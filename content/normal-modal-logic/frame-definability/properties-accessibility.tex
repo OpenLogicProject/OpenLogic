@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{mod}{frd}{acc}
+\olfileid{nml}{frd}{acc}
 
 \olsection{Properties of Accessibility Relations}
 
@@ -48,7 +48,8 @@ relations and the formulas the truth of which they guarantee.
       $\forall w \forall u \forall v ((Rwu \land Rwv) \lif Ruv$ &\\
       \hline
     \end{tabular}
-    \caption{Five correspondence facts.}\ollabel{tab:five}
+    \caption{Five correspondence facts.}
+    \ollabel{tab:five}
   \end{table} 
 
 
@@ -69,21 +70,22 @@ relations and the formulas the truth of which they guarantee.
 \end{proof}
 
 \begin{prob}
-  Complete the proof of \olref[mod][frd][acc]{thm:soundschemas}
+  Complete the proof of \olref[nml][frd][acc]{thm:soundschemas}
 \end{prob}
 
 \begin{figure}
   \begin{center}
     \begin{tikzpicture}[modal]
-      \node[world] (w1) [label={below:$\mSat{}{\formula{A}}$\\
-          $\mSat{}{\Box\Diamond \formula{A}}$}] {$w$}; 
-      \node[world] (w2) [label=below:{$\mSat{}{\Diamond \formula{A}}$},
+      \node[world] (w1) [label={below:$\mSat{{}}{\formula{A}}$\\
+          $\mSat{{}}{\Box\Diamond \formula{A}}$}] {$w$}; 
+      \node[world] (w2) [label=below:{$\mSat{{}}{\Diamond \formula{A}}$},
         right=of w1] {$w'$}; 
       \draw[->, bend left] (w1) to (w2); 
       \draw[->, bend left] (w2) to (w1); 
     \end{tikzpicture}
   \end{center}
-\caption{The argument from symmetry.}\ollabel{fig:Bsymm}
+\caption{The argument from symmetry.}
+\ollabel{fig:Bsymm}
 \end{figure}
 
 Notice that the converse implications of \olref{thm:soundschemas} do
@@ -117,7 +119,7 @@ models, too:
 \end{prop}
 
 \begin{prob}
-  Prove the claims in \olref[mod][frd][acc]{prop:reflexive}.
+  Prove the claims in \olref[nml][frd][acc]{prop:reflexive}.
 \end{prob}
 
 Although we will focus on the five classical !!{formula}s \Ax{D},
@@ -173,13 +175,14 @@ world~$t$ from both $u$ and~$v$---this is sometimes called the
       \qquad $\exists t (Rut \land Rvt)$ & \\
       \hline
     \end{tabular}
-    \caption{Five more correspondence facts.}\ollabel{tab:anotherfive}
+    \caption{Five more correspondence facts.}
+    \ollabel{tab:anotherfive}
   \end{table} 
 
 \begin{prob}
   Let $\mModel{M} = \tuple{W, R, V}$ be a model. Show that if $R$
   satisfies the left-hand properties of
-  \olref[mod][frd][acc]{tab:anotherfive}, every instance of the
+  \olref[nml][frd][acc]{tab:anotherfive}, every instance of the
   corresponding right-hand formula is true in~$\mModel{M}$.
 \end{prob}
 

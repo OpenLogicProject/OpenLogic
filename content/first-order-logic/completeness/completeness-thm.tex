@@ -30,10 +30,10 @@ is a $\Gamma^* \supseteq \iftag{FOL}{\Gamma'}{\Gamma}$ which is
 consistent and !!{complete}.
 \iftag{FOL}{
   Since $\Gamma' \subseteq \Gamma^*$, for each
-  !!{sentence}~$!A$, $\Gamma^*$ contains !!a{sentence} of the form
+  !!{formula}~$!A(x)$, $\Gamma^*$ contains !!a{sentence} of the form
   \iftag{prvEx}
-        {$\lexists[x][!A] \lif !A(c)$}
-        {$\lnot\lforall[x][!A] \lif \lnot !A(c)$}
+        {$\lexists[x][!A(x)] \lif !A(c)$}
+        {$\lnot\lforall[x][!A(x)] \lif \lnot !A(c)$}
   and so $\Gamma^*$ is saturated.  If $\Gamma$
   does not contain~$\eq$, then by}{By}
 \olref[mod]{lem:truth},
@@ -42,15 +42,15 @@ $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$ iff $!A \in
 \Gamma$, $\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!A}$, so
 $\Gamma$ is satisfiable.\iftag{FOL}{
   If $\Gamma$ does contain~$\eq$,
-  then by \olref[ide]{lem:truth}, $\Sat{M/_\approx}{!A}$ iff $!A \in
+  then by \olref[ide]{lem:truth}, $\Sat{\equivclass{M}{\approx}}{!A}$ iff $!A \in
   \Gamma^*$ for all !!{sentence}s~$!A$.  In particular,
-  $\Sat{M/_\approx}{!A}$ for all $!A \in \Gamma$, so $\Gamma$ is
+  $\Sat{\equivclass{M}{\approx}}{!A}$ for all $!A \in \Gamma$, so $\Gamma$ is
   satisfiable.}{}
 \end{proof}
 
 \begin{cor}[Completeness Theorem, Second Version]
 \ollabel{cor:completeness}
-For all $\Gamma$ and $!A$ !!{sentence}s: if $\Gamma \Entails !A$ then
+For all $\Gamma$ and !!{sentence}s~$!A$: if $\Gamma \Entails !A$ then
 $\Gamma \Proves !A$.
 \end{cor}
 

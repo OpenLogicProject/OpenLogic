@@ -36,15 +36,16 @@ number~$n$,
 
 \begin{proof}
 The proof is, as usual, by induction on $n$. In the base case, $n =
-0$, we need to show that $\Th{Q}$ proves $\eq[(a'+0)][(a+0)']$. But we have:
+0$, we need to show that $\Th{Q}$ proves $\eq[(a' + \Obj 0)][(a + \Obj
+0)']$. But we have:
 \begin{align}
-  \Th{Q} & \Proves \eq[(a' + 0)][a'] \quad \text{by axiom $Q_4$}
+  \Th{Q} & \Proves \eq[(a' + \Obj 0)][a'] \quad \text{by axiom $Q_4$}
   \ollabel{step1}\\
-  \Th{Q} & \Proves  \eq[(a + 0)][a] \quad \text{by axiom $Q_4$}
+  \Th{Q} & \Proves  \eq[(a + \Obj 0)][a] \quad \text{by axiom $Q_4$}
   \ollabel{step2} \\
-  \Th{Q} & \Proves \eq[(a + 0)'][a'] \quad \text{by \olref{step2}}
+  \Th{Q} & \Proves \eq[(a + \Obj 0)'][a'] \quad \text{by \olref{step2}}
   \ollabel{step3} \\
-  \Th{Q} & \Proves \eq[(a' + 0)][(a + 0)'] \quad
+  \Th{Q} & \Proves \eq[(a' + \Obj 0)][(a + \Obj 0)'] \quad
   \text{by \olref{step1} and \olref{step3}}\notag
 \end{align}
 In the induction step, we can assume that we have shown that $\Th{Q}
@@ -53,7 +54,7 @@ $\num{n+1}$ is $\num{n}'$, we need to show that $\Th{Q}$ proves
 $\eq[(a' + \num{n}')][(a + \num{n}')']$. We have:
 \begin{align}
   \Th{Q} & \Proves \eq[(a' + \num n')][(a' + \num n)'] \quad
-  \text{by axiom $Q_5$} \ollabel{step5}\\
+  \text{by axiom $!Q_5$} \ollabel{step5}\\
   \Th{Q} & \Proves \eq[(a' + \num n')][(a + \num n')'] \quad
   \text{inductive hypothesis} \ollabel{step6}\\
   \Th{Q} & \Proves \eq[(a' + \num n)'][(a + \num n')'] \quad
@@ -67,45 +68,71 @@ Although this !!{sentence} is true in~$\Struct{N}$, $\Th{Q}$ does not
 prove it.
 
 \begin{lem}
-\ollabel{lem:less}
-\begin{enumerate}
-\item $\Th{Q} \Proves \lforall[x][\lnot x < \Obj 0]$.
-\item For every natural number~$n$, 
+\ollabel{lem:less-zero}
+$\Th{Q} \Proves \lforall[x][\lnot x < \Obj 0]$.
+\end{lem}
+
+\begin{proof}
+We give the proof informally (i.e., only giving hints as to
+how to construct the formal derivation).
+
+We have to prove $\lnot a < \Obj 0$ for an arbitrary~$a$. By the
+definition of $<$, we need to prove $\lnot
+\lexists[y][\eq[(y'+a)][\Obj 0]]$ in $\Th{Q}$. We'll assume
+$\lexists[y][\eq[(y'+a)][\Obj 0]]$ and prove a contradiction. Suppose
+$\eq[(b'+a)][\Obj 0]$. Using $!Q_3$, we
+have that $\eq[a][\Obj 0] \lor \lexists[y][\eq[a][y']]$. We
+distinguish cases. 
+
+Case 1: $\eq[a][\Obj 0]$ holds. From $\eq[(b'+a)][\Obj 0]$, we have
+$\eq[(b' + \Obj 0)][\Obj 0]$. By axiom~$!Q_4$ of $\Th{Q}$, we have
+$\eq[(b' + \Obj 0)][b']$, and hence $\eq[b'][\Obj 0]$. But by
+axiom~$!Q_2$ we also have $\eq/[b'][\Obj 0]$, a contradiction. 
+
+Case 2: For some $c$, $\eq[a][c']$. But then we have $\eq[(b' +
+c')][\Obj 0]$. By axiom~$!Q_5$, we have $\eq[(b' + c)'][\Obj 0]$, again
+contradicting axiom~$Q_2$.
+\end{proof}
+
+\begin{lem}
+\ollabel{lem:less-nsucc}
+For every natural number~$n$, 
   \[
   \Th{Q} \Proves
   \lforall[x][(x < \num {n+1} \lif (\eq[x][\Obj 0] \lor \dots \lor
     \eq[x][\num n]))].
   \]
-\end{enumerate}
 \end{lem}
 
 \begin{proof}
-Let us do 1 and part of 2, informally (i.e., only giving hints as to
-how to construct the formal derivation).
+We use induction on~$n$. Let us consider the base case, when $n = 0$.
+In that case, we need to show $a < \num 1 \lif \eq[a][\Obj 0]$, for
+arbitrary~$a$. Suppose $a < \num 1$. Then by the defining axiom for
+$<$, we have $\lexists[y][\eq[(y'+a)][\Obj 0']]$ (since $\num 1 \ident
+\Obj 0'$).
 
-For part 1, by the definition of $<$, we need to prove $\lnot
-\lexists[y][\eq[(y'+a)][\Obj 0]]$ in $\Th{Q}$, which is equivalent
-(using the axioms and rules of first-order logic) to
-$\lforall[b][\eq/[(y' + a)][0]]$. Here is the idea: suppose
-$\eq[(y'+b)][\Obj 0]$. If $\eq[a][\Obj 0]$, we have $\eq[(y' + \Obj
-  0)][\Obj 0]$. But by axiom~$Q_4$ of $\Th{Q}$, we have $\eq[(b' +
-  \Obj 0)][b']$, and by axiom~$Q_2$ we have $\eq/[b'][\Obj 0]$, a
-contradiction. So $\lforall[y][\eq/[(y' +a)][\Obj 0]]$. If
-$\eq/[a][\Obj 0]$, by axiom~$Q_3$, there is a $c$ such that
-$\eq[a][c']$. But then we have $\eq[(b' + c')][0]$. By axiom~$Q_5$, we
-have $\eq[(b' + c)'][\Obj 0]$, again contradicting axiom~$Q_2$.
+Suppose $b$ has that property, i.e., we have $\eq[(b'+a)][\Obj 0']$.
+We need to show $\eq[a][\Obj 0]$. By axiom~$!Q_3$, we have either
+$\eq[a][\Obj 0]$ or that there is a $c$ such that $\eq[a][c']$. In the
+former case, there is nothing to show. So suppose $\eq[a][c']$. Then
+we have $\eq[(b' + c')][\Obj 0']$. By axiom~$!Q_5$ of $\Th{Q}$, we have
+$\eq[(b'+c)'][\Obj 0']$. By axiom~$!Q_1$, we have $\eq[(b' + c)][\Obj
+0]$. But this means, by axiom~$!Q_8$, that $c < \Obj 0$, contradicting
+\olref{lem:less-zero}.
 
-For part 2, use induction on~$n$. Let us consider the base case, when
-$n = 0$. In that case, we need to show $a < \num 1 \lif \eq[a][\Obj
-  0]$. Suppose $a < \num 1$. Then by the defining axiom for $<$, we
-have $\lexists[y][\eq[(y'+a)][\Obj 0']]$.
-
-Suppose $b$ has that property, i.e., we have $\eq[b'+a][\Obj 0']$. We
-need to show $\eq[a][\Obj 0]$. By axiom~$Q_3$, if $\eq/[a][\Obj 0]$,
-we get $\eq[a][c']$ for some~$z$. Then we have $\eq[(b' + c')][\Obj
-  0']$. By axiom~$Q_5$ of $\Th{Q}$, we have $\eq[(b'+c)'][\Obj
-  0']$. By axiom~$Q_1$, we have $\eq[(b' + c)][\Obj 0]$. But this
-means, by definition, $z < \Obj 0$, contradicting part~1.
+Now for the inductive step. We prove the case for $n+1$, assuming the
+case for~$n$. So suppose $a < \num {n+2}$. Again using $!Q_3$ we can
+distinguish two cases: $\eq[a][\Obj 0]$ and for some $b$,
+$\eq[a][c']$. In the first case, $\eq[a][\Obj 0] \lor \dots \lor
+\eq[a][\num{n+1}]$ follows trivially. In the second case, we have $c'
+< \num {n+2}$, i.e., $c' < \num{n+1}'$. By axiom~$!Q_8$, for some $d$,
+$\eq[(d'+c')][\num{n+1}']$. By axiom $!Q_5$,
+$\eq[(d'+c)'][\num{n+1}']$. By axiom~$!Q_1$, $\eq[(d'+c)][\num{n+1}]$,
+and so $c < \num{n+1}$ by axiom~$!Q_8$. By inductive hypothesis,
+$\eq[c][\Obj 0] \lor \dots \lor \eq[c][\num{n}]$. From this, we get
+$\eq[c'][\Obj 0'] \lor \dots \lor \eq[c'][\num{n}']$ by logic, and so
+$\eq[a][\num{1}] \lor \dots \lor \eq[a][\num{n+1}]$ since
+$\eq[a][c']$.
 \end{proof}
 
 \begin{lem}
@@ -118,14 +145,15 @@ means, by definition, $z < \Obj 0$, contradicting part~1.
 
 \begin{proof}
 By induction on~$m$. First, consider the case $m=0$. $\Th{Q} \Proves
-\lforall[y][(\eq/[y][\Obj 0] \lif \lexists[z][\eq[y][z']])]$ by~$!Q_3$.
-But if $\eq[b][c']$, then $\eq[(c' + \Obj 0)][(b + \Obj 0)]$ by the
-logic of~$\eq$. By $!Q_4$, $\eq[(b + \Obj 0)][b]$, so we have $\eq[(c'
-  + \Obj 0)][b]$, and hence $\lexists[z][\eq[(z' + \Obj 0)][b]]$. By
-the definition of $<$ in $!Q_8$, $\Obj 0 < b$.  If $\Obj 0 < b$, then also
-$\Obj 0 < b \lor b < \Obj 0$. We obtain: $\eq/[b][\Obj 0] \lif (\Obj 0
-< b \lor b < \Obj 0)$, which is equivalent to $(\Obj 0 < b \lor b <
-\Obj 0) \lor \eq[b][\Obj 0]$.
+\lforall[y][(\eq[y][\Obj 0] \lor \lexists[z][\eq[y][z']])]$ by~$!Q_3$.
+Let $a$ be arbitrary. Then either $\eq[a][\Obj 0]$ or for some~$b$,
+$\eq[a][b']$. In the former case, we also have $(a < \Obj 0 \lor \Obj
+0 < a) \lor \eq[a][\Obj 0]$. But if $\eq[a][b']$, then $\eq[(b' +
+\Obj 0)][(a + \Obj 0)]$ by the logic of~$\eq$. By $!Q_4$, $\eq[(a +
+\Obj 0)][a]$, so we have $\eq[(b' + \Obj 0)][a]$, and hence
+$\lexists[z][\eq[(z' + \Obj 0)][a]]$. By the definition of $<$ in
+$!Q_8$, $\Obj 0 < a$.  If $\Obj 0 < a$, then also $(\Obj 0 < a \lor a
+< \Obj 0) \lor \eq[a][\Obj 0]$. 
 
 Now suppose we have
 \begin{align*}
@@ -135,40 +163,34 @@ Now suppose we have
   \Th{Q} & \Proves \lforall[y][((y < \num{m+1} \lor \num{m+1} < y) \lor
     \eq[y][\num{m+1}])]
 \end{align*}
+Let $a$ be arbitrary. By $!Q_3$, either $\eq[a][\Obj 0]$ or for
+some~$b$, $\eq[a][b']$. In the first case, we have $\eq[\num{m}' +
+a][\num{m+1}]$ by $!Q_4$, and so $a < \num{m+1}$ by $!Q_8$.
+
+Now consider the second case, $\eq[a][b']$. By the induction
+hypothesis, $(b < \num{m} \lor \num{m} < b) \lor
+    \eq[b][\num{m}]$.
+
 The first disjunct $b < \num{m}$ is equivalent (by $!Q_8$) to
-$\lexists[z][\eq[(z' + b)][\num{m}]]$. Suppose $c$ has this
-property. If $\eq[(c' + b)][\num{m}]$, then also $\eq[(c' +
-  b)'][\num{m}']$. By $Q_4$, $\eq[(c' + b)'][(c'' + b)]$. Hence,
-$\eq[(c'' + b)][\num{m}']$. We get $\lexists[u][\eq[(u' +
-    b)][\num{m+1}]]$ by existentially generalizing on~$c'$ and keeping
-in mind that $\num{m}'$ is $\num{m+1}$. Hence, if $b < \num{m}$ then
-$b < \num{m+1}$.
+$\lexists[z][\eq[(z' + b)][\num{m}]]$. Suppose $c$ has this property.
+If $\eq[(c' + b)][\num{m}]$, then also $\eq[(c' + b)'][\num{m}']$. By
+$!Q_5$, $\eq[(c' + b)'][(c' + b')]$. Hence, $\eq[(c' +
+b')][\num{m}']$. We get $\lexists[u][\eq[(u' + b')][\num{m+1}]]$ by
+existentially generalizing on~$c'$ and keeping in mind that $\num{m}'
+\ident \num{m+1}$. Hence, if $b < \num{m}$ then $b' < \num{m+1}$ and
+so $a < \num{m+1}$.
 
 Now suppose $\num{m} < b$, i.e., $\lexists[z][\eq[(z' +
-    \num{m})][b]]$.  Suppose $c$ is such a~$z$. By $Q_3$ and some
-logic, we have $\eq[c][\Obj 0] \lor \lexists[u][\eq[c][u']]$.  If
-$\eq[c][\Obj 0]$, we have $\eq[(\Obj 0' + \num{m})][b]$. Since $\Th{Q}
-\Proves \eq[(\Obj 0'+\num{m})][\num{m+1}]$, we have
-$\eq[b][\num{m+1}]$. Now suppose $\lexists[u][\eq[c][u']]$. Let $d$ be
-such a~$u$. Then:
-\begin{align*}
-  b & \eq (c' + \num{m}) \quad \text{by assumption}\\
-  (c' + \num{m}) & \eq (d'' + \num{m}) \quad \text{from $\eq[c][d']$}\\
-  (d'' + \num{m}) & \eq (d' + \num{m})' \quad \text{by \olref{lem:succ}}\\
-  (d' + \num{m})' & \eq (d' + \num{m}') \quad \text{by $Q_5$, so}\\
-  b & = (d' + \num{m+1}) 
-\end{align*}
-By existential generalization, $\lexists[u][\eq[(u' + \num{m+1})][b]]$,
-  i.e., $\num{m+1} < b$. So, if $\num{m} < b$, then $\num{m+1} < b
-  \lor \eq[b][\num{m+1}]$.
+\num{m})][b]]$.  Suppose $c$ is such a~$z$, i.e., $\eq[(c' +
+\num{m})][b]$. By logic, $\eq[(c' + \num{m})'][b']$. By $!Q_5$,
+$\eq[(c' + \num{m}')][b']$. Since $\eq[a][b']$ and $\num{m}' \ident
+\num{m+1}$, $\eq[(c' + \num{m+1})][a]$. By $!Q_8$, $\num{m+1} < a$.
 
-Finally, assume $\eq[b][\num{m}]$. Then, since $\Th{Q} \Proves
-\eq[(\Obj 0' + \num{m})][\num{m+1}]$, $\eq[(\Obj 0' +
-  b)][\num{m+1}]$. From this we get $\lexists[z][\eq[(z' +
-    b)][\num{m+1}]]$, or $b < \num{m+1}$.
+Finally, assume $\eq[b][\num{m}]$. Then, by logic,
+$\eq[b'][\num{m}']$, and so $\eq[a][\num{m+1}]$.
 
-Hence, from each disjunct of the case for~$m$, we can obtain the case
-for~$m+1$.
+Hence, from each disjunct of the case for~$m$ and~$b$, we can obtain
+the corresponding disjunct for for~$m+1$ and~$a$.
 \end{proof}
   
 \begin{prop}
@@ -196,7 +218,7 @@ i.e.,
 \Th{Q} & \Proves \lforall[w][(w < \num{m} \lif \lnot
   !A_g(w, \num{n}, \Obj 0))]. \ollabel{rep-less}
 \end{align}
-by \olref{lem:less} (by (1) in case $m = 0$ and by (2) otherwise).
+by \olref{lem:less-zero} in case $m = 0$ and by \olref{lem:less-nsucc} otherwise.
 
 Now let's show that if $f(n) = m$, then $\Th{Q} \Proves
 \lforall[y][(!A_f(\num{n}, y) \lif \eq[y][\num{m}])]$.  We again

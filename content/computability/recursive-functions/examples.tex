@@ -76,7 +76,7 @@ $\fn{pred}(x) = \fn{pred}'(\Zero(x), \Proj{1}{0}(x))$.
 \end{proof}
 
 \begin{prop}
-  The factorial function $\fn{fac}(x) = x\fac = 1 \cdot 2 \cdot 3
+  The factorial function $\fn{fac}(x) = \fact{x} = 1 \cdot 2 \cdot 3
   \cdot \dots \cdot x$ is primitive recursive.
 \end{prop}
 
@@ -84,7 +84,7 @@ $\fn{pred}(x) = \fn{pred}'(\Zero(x), \Proj{1}{0}(x))$.
   The obvious primitive recursive definition is
   \begin{align*}
     \fn{fac}(0) = 1\\
-    \fn{fac}(y+1) & = \fac{y} \cdot (y+1)
+    \fn{fac}(y+1) & = \fn{fac}(y) \cdot (y+1)
     \intertext{Officially, we have to first define a two-place function $h$}
     h(x, 0) & = \fn{const}_1(x)\\
     h(x, y) & = g(x, y, h(x, y))

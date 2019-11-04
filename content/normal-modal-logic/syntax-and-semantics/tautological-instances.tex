@@ -6,7 +6,7 @@
 
 \begin{document}
 
-\olfileid{mod}{syn}{tau}
+\olfileid{nml}{syn}{tau}
 
 \olsection{Tautological Instances}
 
@@ -148,12 +148,11 @@ is valid.
 \begin{proof}
   Contrapositively, suppose $!A$ is such that
   $\mSat/{M}{\SSubst{!A}{\subst{!D_1}{p_1}, \dots,
-      \subst{!D_n}{p_n}}}[w]$, for some model $\mModel{M}$ and
-  world~$w$. Define an assignment $v$ such that $v(p_i) = \True$ if and
-  only if $\mSat{M}{!D_i}[w]$ (and $v$ assigns arbitrary values to $q
-  \notin \{p_1, \dots, p_n \}$).  Then by \olref{lem:valid-taut},
-  $\pSat/{v}{!A}$, so $!A$ is not a tautology.
+  \subst{!D_n}{p_n}}}[w]$, for some model $\mModel{M}$ and world~$w$.
+  Define an assignment $\pAssign{v}$ such that $\pAssign{v}(p_i) =
+  \True$ if and only if $\mSat{M}{!D_i}[w]$ (and $\pAssign{v}$ assigns
+  arbitrary values to $q \notin \{p_1, \dots, p_n \}$).  Then by
+  \olref{lem:valid-taut}, $\pSat/{v}{!A}$, so $!A$ is not a tautology.
 \end{proof}
-
 
 \end{document}

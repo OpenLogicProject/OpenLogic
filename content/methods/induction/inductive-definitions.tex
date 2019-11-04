@@ -102,35 +102,34 @@ length~$n$ is $< n/2$.
 To prove this result by (strong) induction, we have to show that the
 following conditional claim is true:
 \begin{quote}
-  If for every $k < n$, any parexpression of length $k$ has $k/2$
-  $[$'s, then any parexpression of length~$n$ has $n/2$ $[$'s.
+  If for every $k < n$, any nice term of length $k$ has $k/2$
+  $[$'s, then any nice term of length~$n$ has $n/2$ $[$'s.
 \end{quote}
 To show this conditional, assume that its antecedent is true, i.e.,
-assume that for any $k<n$, parexpressions of length $k$ contain $< k/2$
+assume that for any $k<n$, nice terms of length $k$ contain $< k/2$
 $[$'s.  We call this assumption the inductive hypothesis. We want to
-show the same is true for parexpressions of length~$n$.
+show the same is true for nice terms of length~$n$.
 
-So suppose $t$ is a nice term of length~$n$.  Because
-parexpressions are inductively defined, we have three two cases: (1)
-$t$ is a letter by itself, or $t$ is $[r \circ s]$ for some nice terms
-$r$ and~$s$.
+So suppose $t$ is a nice term of length~$n$.  Because nice terms are
+inductively defined, we have two cases: (1)~$t$ is a letter by
+itself, or (2)~$t$ is $[r \circ s]$ for some nice terms $r$ and~$s$.
 \begin{enumerate}
 \item $t$ is a letter.  Then $n = 1$, and the number of $[$ in $t$ is
   $0$. Since $0 < 1/2$, the claim holds.
-\item $t$ is $[s \circ s']$ for some nice terms~$s$ and~$s'$.  Let's
-  let $k$ be the length of~$s$ and $k'$ be the length of~$s'$.  Then
-  the length~$n$ of $t$ is $k+k'+3$ (the lengths of $s$ and $s'$ plus
-  three symbols $[$, $\circ$, $]$). Since $k+k'+3$ is always greater
-  than $k$, $k < n$. Similarly, $k' < n$. That means that the
-  induction hypothesis applies to the terms $s$ and~$s'$: the
-  number~$m$ of $[$ in $s$ is $< k/2$, and the number of $[$ in~$s'$ is
+\item $t$ is $[r \circ s]$ for some nice terms $r$ and~$s$.  Let's
+  let $k$ be the length of~$r$ and $l$ be the length of~$s$.  Then
+  the length~$n$ of $t$ is $k+l+3$ (the lengths of $r$ and $s$ plus
+  three symbols $[$, $\circ$, $]$). Since $k+l+3$ is always greater
+  than $k$, $k < n$. Similarly, $l < n$. That means that the
+  induction hypothesis applies to the terms $r$ and~$s$: the
+  number~$m$ of $[$ in $r$ is $< k/2$, and the number~$o$ of $[$ in~$s$ is
   $< k'/2$.
 
-  The number of $[$ in $t$ is the number of $[$ in $s$, plus the
-  number of $[$ in $s'$, plus~$1$, i.e., it is $m + m' + 1$. Since $m
-  < k/2$ and $m' < k'/2$ we have:
+  The number of $[$ in $t$ is the number of $[$ in $r$, plus the
+  number of $[$ in $s$, plus~$1$, i.e., it is $m + o + 1$. Since $m
+  < k/2$ and $o < l/2$ we have:
   \[
-  m + m' + 1 < \frac{k}{2} + \frac{k'}{2} + 1 = \frac{k+k'+2}{2} < \frac{k+k'+3}{2} = n/2.
+  m + o + 1 < \frac{k}{2} + \frac{l}{2} + 1 = \frac{k+l+2}{2} < \frac{k+l+3}{2} = n/2.
   \]
 \end{enumerate}
 In each case, we've shown that the number of $[$ in $t$ is $< n/2$ (on
