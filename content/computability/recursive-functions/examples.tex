@@ -58,8 +58,8 @@ from now on.
 \begin{proof}
  Note that 
  \begin{align*}
-   \fn{pred}(0) & = 0\\
-   \fn{pred}(y+1) & = y
+   \fn{pred}(0) & = 0 \text{ and}\\
+   \fn{pred}(y+1) & = y.
  \end{align*}
  This is almost a primitive recursive definition.  It does not,
  strictly speaking, fit into the pattern of definition by primitive
@@ -68,8 +68,8 @@ from now on.
  $\fn{pred}(y)$ in the definition of $\fn{pred}(y+1)$. But we can
  first define $\fn{pred}'(x, y)$ by
  \begin{align*}
-   \fn{pred}'(x, 0) & = \Zero(x) = 0\\
-   \fn{pred}'(x, y+1) & = \Proj{3}{1}(x, y, \fn{pred'}(x, y)) = y
+   \fn{pred}'(x, 0) & = \Zero(x) = 0,\\
+   \fn{pred}'(x, y+1) & = \Proj{3}{1}(x, y, \fn{pred'}(x, y)) = y.
  \end{align*}
 and then define $\fn{pred}$ from it by composition, e.g., as
 $\fn{pred}(x) = \fn{pred}'(\Zero(x), \Proj{1}{0}(x))$.
@@ -83,8 +83,8 @@ $\fn{pred}(x) = \fn{pred}'(\Zero(x), \Proj{1}{0}(x))$.
 \begin{proof}
   The obvious primitive recursive definition is
   \begin{align*}
-    \fn{fac}(0) = 1\\
-    \fn{fac}(y+1) & = \fn{fac}(y) \cdot (y+1)
+    \fn{fac}(0) &= 1\\
+    \fn{fac}(y+1) & = \fn{fac}(y) \cdot (y+1).
     \intertext{Officially, we have to first define a two-place function $h$}
     h(x, 0) & = \fn{const}_1(x)\\
     h(x, y) & = g(x, y, h(x, y))
@@ -108,10 +108,10 @@ $\fn{pred}(x) = \fn{pred}'(\Zero(x), \Proj{1}{0}(x))$.
 \end{prop}
 
 \begin{proof}
-  We have
+  We have:
   \begin{align*}
     x \tsub 0 & = x\\
-    x \tsub (y+1) & = \fn{pred}(x \tsub y)
+    x \tsub (y+1) & = \fn{pred}(x \tsub y) \qedhere
   \end{align*}
 \end{proof}
 
@@ -167,13 +167,13 @@ composition.
 The set of primitive recursive functions is closed under the
 following two operations:
 \begin{enumerate}
-\item Finite sums: if $f(\vec x, z)$ is primitive recursive, then so is the
-function
+\item Finite sums: if $f(\vec x, z)$ is primitive recursive, then so
+is the function
 \[
 g(\vec x, y) \defis \sum_{z = 0}^y f(\vec x, z).
 \]
-\item Finite products: if $f(\vec x, z)$ is primitive recursive, then so is the
-function
+\item Finite products: if $f(\vec x, z)$ is primitive recursive, then
+so is the function
 \[
 h(\vec x, y) \defis \prod_{z = 0}^y f(\vec x, z).
 \]
@@ -184,7 +184,7 @@ h(\vec x, y) \defis \prod_{z = 0}^y f(\vec x, z).
 For example, finite sums are defined recursively by the equations
 \begin{align*}
   g(\vec x, 0) & = f(\vec x, 0)\\
-  g(\vec x, y+1) = g(\vec x, y) + f(\vec x, y+1).
+  g(\vec x, y+1) & = g(\vec x, y) + f(\vec x, y+1).\qedhere
 \end{align*}
 \end{proof}
 

@@ -28,11 +28,11 @@ that any function defined by regular minimization from !!a{lambda
 \begin{proof}
   Suppose the lambda term~$F$ $\lambda$-defines the regular
   function $f(\vec x, y)$. To !!{lambda define}~$h$ we use a search
-  function and a fixpoint combinator.
+  function and a fixpoint combinator:
   \begin{align*}
-    H & \ident \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}]  \\
     \fn{Search} & \ident \lambd[g][\lambd[f\,\vec{x}\,y][
-        \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, \vec{x} (\fn{Succ}\, y)]]
+        \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, \vec{x} (\fn{Succ}\, y)]]\\
+    H & \ident \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}],
   \end{align*}
   where $Y$ is any fixpoint combinator. Informally speaking,
   $\fn{Search}$ is a self-referencing function: starting with~$y$,
