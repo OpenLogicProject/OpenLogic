@@ -47,6 +47,7 @@ without introducing the conjunction followed by eliminating it.
 
 Thus in general we have
 \begin{gather*}
+  \bottomAlignProof
   \AxiomC{}
   \RightLabel{$D_1$}
   \DeduceC{$!A_1$}
@@ -57,7 +58,7 @@ Thus in general we have
   \BinaryInfC{$!A_1 \land !A_2$}
   \RightLabel{$\Elim{\land}_i$}
   \UnaryInfC{$!A_i$}
-  \DisplayProof
+  \DisplayProof\bottomAlignProof
   \quad
   \redone
   \quad
@@ -95,6 +96,7 @@ $\falsee{N}$, with corresponding redexes.
 
 Similarly we have reduction for disjunction:
 \begin{gather*}
+  \bottomAlignProof
   \AxiomC{}
   \RightLabel{$D$}
   \DeduceC{$!A_i$}
@@ -108,7 +110,7 @@ Similarly we have reduction for disjunction:
   \DeduceC{$!C$}
   \DischargeRule{$\Elim{\lor}$}{u}
   \TrinaryInfC{$!C$}
-  \DisplayProof
+  \DisplayProof\bottomAlignProof
   \quad
   \redone
   \quad
@@ -141,6 +143,7 @@ lambda calculus as if we are dealing with untyped terms.
 Finally, the reduction of the function type corresponds to removal of
 a detour of a $\Intro\lif$ followd by a $\Elim\lif$.
 \begin{gather*}
+  \bottomAlignProof
   \AxiomC{$\Discharge{!A}{u}$}
   \RightLabel{$D$}
   \DeduceC{$!B$}
@@ -151,7 +154,7 @@ a detour of a $\Intro\lif$ followd by a $\Elim\lif$.
   \DeduceC{$!A$}
   \RightLabel{$\Elim{\lif}$}
   \BinaryInfC{$!B$}
-  \DisplayProof
+  \DisplayProof\bottomAlignProof
   \quad
   \redone
   \quad

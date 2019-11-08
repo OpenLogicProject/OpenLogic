@@ -20,15 +20,17 @@ number~$n$ of !!{element}s.
 
 \begin{prop}
 The !!{sentence}
-\begin{align*}
-!A_{\ge n} & \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] &
+\begin{multline*}
+  !A_{\ge n} \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]]\\
+  \begin{aligned}
   (\eq/[x_1][x_2] \land {}
   \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
-& & \eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
-& & \vdots\\
-& & \eq/[x_{n-1}][x_n])
-\end{align*}
-is true in a !!{structure}~$\Struct M$ iff $\Domain M$ contains at
+\eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+\vdots\\
+\eq/[x_{n-1}][x_n])
+\end{aligned}
+\end{multline*}
+is true in !!a{structure}~$\Struct M$ iff $\Domain M$ contains at
 least $n$ !!{element}s. Consequently, $\Sat{M}{\lnot !A_{\ge n+1}}$ iff
 $\Domain M$ contains at most~$n$ !!{element}s.
 
@@ -36,23 +38,25 @@ $\Domain M$ contains at most~$n$ !!{element}s.
 
 \begin{prop}
 The !!{sentence}
-\begin{align*}
-!A_{= n} & \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] &
+\begin{multline*}
+!A_{= n} \ident \lexists[x_1][\lexists[x_2][\dots\lexists[x_n][{}]]] \\
+\begin{aligned}
   (\eq/[x_1][x_2] \land {}
   \eq/[x_1][x_3] \land \eq/[x_1][x_4] \land \dots \land \eq/[x_1][x_n] \land {}\\
-& & \eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
-& & \vdots\\
-& & \eq/[x_{n-1}][x_n] \land {} \\
-& &\lforall[y][(\eq[y][x_1] \lor \dots \eq[y][x_n]])\dots))
-\end{align*}
-is true in a !!{structure}~$\Struct M$ iff $\Domain M$ contains
+\eq/[x_2][x_3] \land \eq/[x_2][x_4] \land \dots \land {} \eq/[x_2][x_n] \land {} \\
+\vdots\\
+\eq/[x_{n-1}][x_n] \land {} \\
+\lforall[y][(\eq[y][x_1] \lor \dots \eq[y][x_n]])\dots))
+\end{aligned}
+\end{multline*}
+is true in !!a{structure}~$\Struct M$ iff $\Domain M$ contains
 exactly $n$ !!{element}s.
 \end{prop}
 
 \begin{prop}
 A !!{structure} is infinite iff it is a model of
 \[
-\{!A_{\ge 1}, !A_{\ge 2}, !A_{\ge 3}, \dots \}
+\{!A_{\ge 1}, !A_{\ge 2}, !A_{\ge 3}, \dots \}.
 \]
 \end{prop}
 

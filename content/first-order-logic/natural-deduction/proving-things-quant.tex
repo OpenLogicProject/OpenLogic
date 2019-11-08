@@ -20,27 +20,25 @@ condition first (they will be lower down in the finished proof).
 Let's see how we'd give a !!{derivation} of the !!{formula}
 $\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$.
 Starting as usual, we write
-\[
+\begin{prooftree}
 \AxiomC{}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 We start by writing down what it would take to justify that last step
 using the \Intro{\lif} rule.
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
 \DeduceC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 Since there is no obvious rule to apply to $\lnot \lforall[x][!A(x)]$,
 we will proceed by setting up the !!{derivation} so we can use the
 \Elim{\lexists} rule. Here we must pay attention to the eigenvariable
 condition, and choose a constant that does not appear in
 $\lexists[x][!A(x)]$ or any assumptions that it depends on.
 (Since no !!{constant}s appear, however, any choice will do fine.)
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
 \AxiomC{$\Discharge{\lnot !A(a)}{2}$}
 \DeduceC{$\lnot \lforall[x][!A(x)]$}
@@ -48,15 +46,14 @@ $\lexists[x][!A(x)]$ or any assumptions that it depends on.
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)] \lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 In order to derive $\lnot \lforall[x][!A(x)]$, we will attempt to use
 the \Intro{\lnot} rule: this requires that we derive a contradiction,
 possibly using $\lforall[x][!A(x)]$ as an additional assumption. Of
 course, this contradiction may involve the assumption $\lnot !A(a)$
 which will be discharged by the \Intro{\lif} inference. We can set it
 up as follows:
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
 \AxiomC{$\Discharge{\lnot !A(a)}{2}, \Discharge{\lforall[x][!A(x)]}{3}$}
 \DeduceC{$\lfalse$}
@@ -66,14 +63,13 @@ up as follows:
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 It looks like we are close to getting a contradiction. The easiest
 rule to apply is the \Elim{\lforall}, which has no eigenvariable
 conditions. Since we can use any term we want to replace the
 universally quantified~$x$, it makes the most sense to continue
 using~$a$ so we can reach a contradiction.
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lexists[x][\lnot !A(x)]}{1}$}
 \AxiomC{$\Discharge{\lnot !A(a)}{2}$}
 \AxiomC{$\Discharge{\lforall[x][!A(x)]}{3}$}
@@ -87,8 +83,7 @@ using~$a$ so we can reach a contradiction.
 \BinaryInfC{$\lnot \lforall[x][!A(x)]$}
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$\lexists[x][\lnot !A(x)]\lif \lnot \lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 
 It is important, especially when dealing with quantifiers, to double
 check at this point that the eigenvariable condition has not been
@@ -109,28 +104,26 @@ $\lexists[x][!C(x,b)]$ from the assumptions $\lexists[x][(!A(x)
 \land !B(x))]$ and $\lforall[x][(!B(x) \lif !C(x,b))]$.
 Starting as usual, we write the conclusion at the
 bottom.
-\[
+\begin{prooftree}
 \AxiomC{}
 \UnaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
+\end{prooftree}
 
 We have two premises to work with. To use the first, i.e., try to find
 a !!{derivation} of $\lexists[x][!C(x, b)]$ from $\lexists[x][(!A(x)
   \land !B(x))]$ we would use the \Elim{\lexists} rule. Since it has
 an eigenvariable condition, we will apply that rule first. We get the
 following:
-\[
+\begin{prooftree}
 \AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
 \AxiomC{$\Discharge{!A(a) \land !B(a)}{1}$}
 \DeduceC{$\lexists[x][!C(x,b)]$}
 \DischargeRule{\Elim{\lexists}}{1}
 \BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
+\end{prooftree}
 The two assumptions we are working with share~$!B$.  It may be useful
 at this point to apply \Elim{\land} to separate out~$!B(a)$.
-\[
+\begin{prooftree}
 \AxiomC{$\lexists[x][(!A(x) \land !B(x)])$}
 \AxiomC{$\Discharge{!A(a) 
 \land !B(a)}{1}$}
@@ -139,8 +132,7 @@ at this point to apply \Elim{\land} to separate out~$!B(a)$.
 \DeduceC{$\lexists[x][!C(x,b)]$}
 \DischargeRule{\Elim{\lexists}}{1}
 \BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
+\end{prooftree}
 
 The second assumption we have to work with is~$\lforall[x][(!B(x) \lif
   !C(x,b))]$. Since there is no eigenvariable condition we can
@@ -148,7 +140,7 @@ instantiate $x$ with the !!{constant}~$a$ using \Elim{\lforall} to get
 $!B(a) \lif !C(a, b)$.  We now have both $!B(a) \lif !C(a,b)$ and
 $!B(a)$. Our next move should be a straightforward application of the
 \Elim{\lif} rule.
-\[
+\begin{prooftree}
 \AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
 \AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
 \RightLabel{\Elim{\lforall}}
@@ -163,11 +155,10 @@ $!B(a)$. Our next move should be a straightforward application of the
 \DischargeRule{\Elim{\lexists}}{1}
 \insertBetweenHyps{\hspace{-5em}}
 \BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
+\end{prooftree}
 We are so close!{} One application of \Intro{\lexists} and we
 have reached our goal.
-\[
+\begin{prooftree}
 \AxiomC{$\lexists[x][(!A(x) \land !B(x))]$}
 \AxiomC{$\lforall[x][(!B(x) \lif !C(x,b))]$}
 \RightLabel{\Elim{\lforall}}
@@ -183,8 +174,7 @@ have reached our goal.
 \DischargeRule{\Elim{\lexists}}{1}
 \insertBetweenHyps{\hspace{-5em}}
 \BinaryInfC{$\lexists[x][!C(x,b)]$}
-\DisplayProof
-\]
+\end{prooftree}
 Since we ensured at each step that the eigenvariable
 conditions were not violated, we can be confident that this
 is a correct derivation.
@@ -195,26 +185,24 @@ Give a !!{derivation} of the !!{formula}
 $\lnot\lforall[x][!A(x)]$ from the assumptions $\lforall[x][!A(x)] 
 \lif \lexists[y][!B(y)]$ and $\lnot\lexists[y][!B(y)]$.
 Starting as usual, we write the target !!{formula} at the bottom.
-\[
+\begin{prooftree}
 \AxiomC{}
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 The last line of the !!{derivation} is a negation, so let's try using
 \Intro{\lnot}. This will require that we figure out how to !!{derive}
 a contradiction.
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
 \DeduceC{$\lfalse$}
 \DischargeRule{\Intro{\lnot}}{1}
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 So far so good. We can use \Elim{\lforall} but it's not obvious
 if that will help us get to our goal. Instead, let's use one of our 
 assumptions. $\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$ together
 with $\lforall[x][!A(x)]$ will allow us to use the \Elim{\lif} rule.
-\[
+\begin{prooftree}
 \AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
 \AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
 \RightLabel{\Elim{\lif}}
@@ -222,12 +210,11 @@ with $\lforall[x][!A(x)]$ will allow us to use the \Elim{\lif} rule.
 \DeduceC{$\lfalse$}
 \DischargeRule{\Intro{\lnot}}{1}
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 We now have one final assumption to work with,
 and it looks like this will help us reach a contradiction
 by using \Elim{\lnot}.
-\[
+\begin{prooftree}
 \AxiomC{$\lnot\lexists[y][!B(y)]$}
 \AxiomC{$\lforall[x][!A(x)] \lif \lexists[y][!B(y)]$}
 \AxiomC{$\Discharge{\lforall[x][!A(x)]}{1}$}
@@ -237,8 +224,7 @@ by using \Elim{\lnot}.
 \BinaryInfC{$\lfalse$}
 \DischargeRule{\Intro{\lnot}}{1}
 \UnaryInfC{$\lnot\lforall[x][!A(x)]$}
-\DisplayProof
-\]
+\end{prooftree}
 \end{ex}
 
 \begin{prob}

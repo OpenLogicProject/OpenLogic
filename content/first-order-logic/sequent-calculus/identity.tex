@@ -45,14 +45,13 @@ This may be familiar as the principle of substitutability of
 identicals, or Leibniz' Law.
 
 $\Log{LK}$ proves that $\eq$ is symmetric and transitive:
-\[
+\begin{prooftree}
 \Axiom$ \fCenter \eq[t_1][t_1] $
 \RightLabel{\LeftR{\Weakening}}
 \UnaryInf$ \eq[t_1][t_2] \fCenter \eq[t_1][t_1] $
 \RightLabel{$\eq$}
 \UnaryInf$ \eq[t_1][t_2] \fCenter \eq[t_2][t_1]$
-\DisplayProof
-\qquad
+\DisplayProof\qquad\bottomAlignProof
 \Axiom$ \eq[t_1][t_2] \fCenter \eq[t_1][t_2] $
 \RightLabel{\LeftR{\Weakening}}
 \UnaryInf$\eq[t_2][t_3], \eq[t_1][t_2]  \fCenter \eq[t_1][t_2] $
@@ -60,8 +59,7 @@ $\Log{LK}$ proves that $\eq$ is symmetric and transitive:
 \UnaryInf$\eq[t_2][t_3], \eq[t_1][t_2]  \fCenter \eq[t_1][t_3]$
 \RightLabel{\LeftR{\Exchange}}
 \UnaryInf$\eq[t_1][t_2], \eq[t_2][t_3]  \fCenter \eq[t_1][t_3]$
-\DisplayProof
-\]
+\end{prooftree}
 In the proof on the left, the !!{formula}~$\eq[x][t_1]$ is our
 $!A(x)$. On the right, we take $!A(x)$ to be~$\eq[t_1][x]$.
 \end{ex}

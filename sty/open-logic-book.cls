@@ -80,11 +80,16 @@
 \DeclareOption{interior}{
   % Make sure standard packages are available
   \AtEndOfClass{
-    \RequirePackage{amsthm}
     \RequirePackage{xcolor}
     \RequirePackage{mdframed}
     \RequirePackage[full]{textcomp}
     \RequirePackage{gitinfo2}
+    \RequirePackage{amsmath}
+    % load ntheorem before newtxmath to avoid multiple definition of \openbox
+    \RequirePackage[thmmarks,amsmath,amsthm,hyperref]{ntheorem}
+    % redefine proof-end symbol; ntheorem's \openbox gives a hacek-C
+    % after a cases environment for some reason
+    \gdef\proofSymbol{\ensuremath{\Box}}
 
     % Set up fonts
 
@@ -109,6 +114,9 @@
     \def\captiontitlefont{\small\itfamily}
 
     \def\figurename{Fig.}
+
+    % Make justification a bit sloppy to avoid overfull lines
+    \midsloppy
   }
 }
 
