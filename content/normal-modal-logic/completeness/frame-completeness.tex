@@ -188,35 +188,39 @@ symmetric and transitive models.
     (\Diamond!B_1 \land \dots \land \Diamond!B_m)$ is !!{derivable} in
     every normal modal logic, we argue as follows, contradicting the
     consistency of~$\Delta_2$:
-    \begin{multline*}
-      !A_1, \dots, !A_n, \Diamond!B_1, \dots,
-      \Diamond!B_m\Proves[\Sigma] \lfalse \\
-    \begin{aligned}
-      & \Rightarrow
-      !A_1, \dots,!A_n \Proves[\Sigma] (\Diamond!B_1 \land
-      \dots \land \Diamond!B_m) \lif \lfalse,
-      && \text{deduction theorem;} \\
-      & \Rightarrow !A_1, \dots,!A_n \Proves[\Sigma]
+    \begin{align*}
+      !A_1, \dots, !A_n, & \Diamond!B_1, \dots,
+      \Diamond!B_m \Proves[\Sigma] \lfalse \\
+      !A_1, \dots,!A_n & \Proves[\Sigma] (\Diamond!B_1 \land
+      \dots \land \Diamond!B_m) \lif \lfalse\\
+      & \qquad\text{by the deduction theorem}\\
+      & \qquad\text{\olref[prf][prp]{prop:derivabilityfacts}\olref[prf][prp]{prop:derivabilityfacts-deduction}, and \Taut} \\
+      !A_1, \dots,!A_n & \Proves[\Sigma]
       \Diamond(!B_1 \land
-      \dots \land !B_m) \lif \lfalse, && \Sigma \text{ is normal}; \\
-      & \Rightarrow !A_1, \dots,!A_n \Proves[\Sigma]
-      \Box \lnot (!B_1 \land \dots \land !B_m), && \text{\PL}; \\
-      & \Rightarrow \Box!A_1, \dots,\Box!A_n
-      \Proves[\Sigma] \Box\Box \lnot (!B_1 \land \dots \land !B_m), &&
-      \text{\olref[mod]{lem:box1}}; \\
-      & \Rightarrow \Box!A_1, \dots,\Box!A_n
-      \Proves[\Sigma]
-      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{by the
-        schema}; \\
-      & \Rightarrow \Delta_1 \Proves[\Sigma]
-      \Box\lnot (!B_1 \land \dots \land !B_m), && \text{Monotony}; \\
-      & \Rightarrow 
-      \Box\lnot (!B_1 \land \dots \land !B_m) \in \Delta_1, && \text{deductive closure}; \\
-      & \Rightarrow 
-      \lnot (!B_1 \land \dots \land !B_m) \in \Delta_2, && \text{since }
+      \dots \land !B_m) \lif \lfalse\\
+      & \qquad \text{since $\Sigma$ is normal} \\
+      !A_1, \dots,!A_n & \Proves[\Sigma]
+      \lnot\Diamond (!B_1 \land \dots \land !B_m)\\
+      & \qquad\text{by \PL} \\
+      !A_1, \dots,!A_n & \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m)\\
+      & \qquad\text{$\Box\lnot$ for $\lnot\Diamond$} \\
+      \Box!A_1, \dots,\Box!A_n
+      & \Proves[\Sigma] \Box\Box \lnot (!B_1 \land \dots \land !B_m)\\
+      & \qquad\text{by \olref[mod]{lem:box1}} \\
+      \Box!A_1, \dots,\Box!A_n
+      & \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m)\\
+      &\qquad\text{by schema $\Box\Box!A \lif \Box!A$} \\
+      \Delta_1 & \Proves[\Sigma]
+      \Box\lnot (!B_1 \land \dots \land !B_m)\\
+      &\qquad\text{by monotony, \olref[prf][prp]{prop:derivabilityfacts}\olref[prf][prp]{prop:derivabilityfacts-monotony}} \\
+      & \Box\lnot (!B_1 \land \dots \land !B_m) \in \Delta_1\\
+      &\qquad\text{by deductive closure}; \\
+      & \lnot (!B_1 \land \dots \land !B_m) \in \Delta_2\\
+      &\qquad \text{since }
       R^\Sigma \Delta_1\Delta_2. 
-    \end{aligned}
-    \end{multline*}
+    \end{align*}
   \end{enumerate}
 \end{proof}
 

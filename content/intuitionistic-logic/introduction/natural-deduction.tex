@@ -33,18 +33,23 @@ construction of~$!A$ into a construction of~$!A$.
 \subsection{Conjunction}
 
 \begin{defish}
-  \AxiomC{$!A_1$}
-  \AxiomC{$!A_2$}
-  \RightLabel{$\Intro{\land}$}
-  \BinaryInfC{$!A_1 \land !A_2$}
-  \DisplayProof
+\AxiomC{$!A$}
+\AxiomC{$!B$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !B$}
+\DisplayProof
 \hfill
-  \AxiomC{$!A_1 \land !A_2$}
-  \RightLabel{$\Elim{\land}_i$}
-  \UnaryInfC{$!A_i$}
-  \DisplayProof
-  \quad
-  $i \in \{1,2\}$
+\begin{tabular}{l}
+\AxiomC{$!A \land !B$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A$}
+\DisplayProof
+\\[3ex]
+\AxiomC{$!A \land !B$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!B$}
+\DisplayProof
+\end{tabular}
 \end{defish}
 
 Suppose we have constructions $N_1$, $N_2$ of $!A_1$ and $!A_2$,
@@ -88,21 +93,28 @@ construction.
 \subsection{Disjunction}
 
 \begin{defish}
-  \AxiomC{$!A_i$}
-  \RightLabel{$\Intro{\lor}_i$}
-  \UnaryInfC{$!A_1 \lor !A_2$}
-  \DisplayProof\quad
-  $i \in \{1,2\}$
+\begin{tabular}{l}
+\AxiomC{$!A$}
+\RightLabel{\Intro{\lor}}
+\UnaryInfC{$!A \lor !B$}
+\DisplayProof
+\\[3ex]
+\AxiomC{$!B$}
+\RightLabel{\Intro{\lor}}
+\UnaryInfC{$!A \lor !B$}
+\DisplayProof
+\end{tabular}
 \hfill
-  \AxiomC{$!A_1 \lor !A_2$}
-  \AxiomC{$\Discharge{!A_1}{u}$}
-  \DeduceC{$!C$}
-  \AxiomC{$\Discharge{!A_2}{u}$}
-  \DeduceC{$!C$}
-  \DischargeRule{$\Elim{\lor}$}{u}
-  \TrinaryInfC{$!C$}
-  \DisplayProof
+\AxiomC{$!A \lor !B$}
+\AxiomC{$\Discharge{!A}{n}$}
+\DeduceC{$!C$}
+\AxiomC{$\Discharge{!B}{n}$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lor}}{n}
+\TrinaryInfC{$!C$}
+\DisplayProof
 \end{defish}
+
 If we have a construction~$N_i$ of~$!A_i$ we can turn it into a
 construction~$\tuple{i, N_i}$ of~$!A_1 \lor !A_2$. On the other hand, suppose
 we have a construction of~$!A_1 \lor !A_2$, i.e., a pair $\tuple{i, N_i}$
@@ -201,7 +213,7 @@ like:
 
 \item $\Proves \lnot\lnot(!A \lor \lnot !A)$, i.e., $\Proves ((!A \lor
   (!A \lif \lfalse))\lif \lfalse)\lif \lfalse$
-  \begin{prooftree}
+  \begin{prooftree}\hskip-3em
     \AxiomC{$\Discharge{(!A \lor (!A \lif \lfalse))\lif \lfalse}{2}$}
     \AxiomC{$\Discharge{(!A \lor (!A \lif \lfalse))\lif \lfalse}{2}$}
     \AxiomC{$\Discharge{!A}{1}$}
@@ -214,6 +226,7 @@ like:
     \RightLabel{\Intro\lor}
     \UnaryInfC{$!A \lor (!A \lif \lfalse)$}
     \RightLabel{\Elim\lif}
+    \insertBetweenHyps{\hskip -4em}
     \BinaryInfC{$\lfalse$}
     \DischargeRule{\Intro\lif}{2}
     \UnaryInfC{$((!A \lor (!A \lif \lfalse))\lif \lfalse)\lif \lfalse$}

@@ -18,7 +18,7 @@ $!A$-worlds are all $!B$-worlds, as depicted in \olref{fig:true}.
   \spheresystem{5}
   \draw (0,0) node {$w$};
   \propositionintersect{0}{4}{40}{3.5}
-  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
   \proposition[shift={(1.6,-1)}]{90}{1}{30}{4}}
   \path (1.5,3) node[below] {$\formula{B}$};
   \path (3,0) node {$\formula{A}$};
@@ -36,7 +36,7 @@ around~$w$ has no $!A$-admitting spheres at all. In that case it is
   \spheresystem{5}
   \draw (0,0) node {$w$};
   \proposition{0}{6.5}{40}{3.5}
-  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
   \proposition[shift={(1.2,-1)}]{90}{1}{30}{4}}
   \path (1.5,3) node[below] {$\formula{B}$};
   \spherepos{0}{7}{node {$\formula{A}$}}
@@ -55,7 +55,7 @@ not all $!B$-worlds, but some of them are. In this case, $!A \cif
   \spheresystem{5}
   \draw (0,0) node {$w$};
   \propositionintersect{0}{4}{40}{3.5}
-  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
   \proposition[shift={(1.6,0)}]{90}{1}{30}{3}}
   \path (1.5,3) node[below] {$\formula{B}$};
   \path (3,0) node {$\formula{A}$};
@@ -74,7 +74,7 @@ $\lnot !B$-worlds, and so $!A \cif \lnot !B$ is true (see
   \spheresystem{5}
   \draw (0,0) node {$w$};
   \propositionintersect{0}{4}{40}{3.5}
-  {\tikzset{proposition/.style={smooth,tension=1.4}}
+  {\tikzset{proposition/.append={smooth,tension=1.4}}
   \proposition[shift={(-1,0)}]{90}{1}{30}{3}}
   \path (-1,3) node[below] {$\formula{B}$};
   \path (3,0) node {$\formula{A}$};
@@ -102,8 +102,8 @@ $!B$-worlds, so $\mSat/{M}{!A \cif !B}[v]$.
   \proposition[shift={(1.4,-.5)}]{90}{1}{35}{5}
   \path (0,0) node {$u$};
   \path (0:3.1) node {$v$};
-  \spherepos{35}{9}{node {$\formula{A}$}};
-  \spherepos{80}{9}{node {$\formula{B}$}};
+  \spherepos{35}{9}{node {$\formula{A}$}}
+  \spherepos{80}{9}{node {$\formula{B}$}}
 \end{tikzpicture}
 \end{center}
 \caption{Contingent counterfactual}

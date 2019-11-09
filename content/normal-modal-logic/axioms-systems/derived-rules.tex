@@ -72,7 +72,7 @@ these results help establishing !!{derivability} results more easily.
 
 \begin{prop}\ollabel{prop:rewriting}
   If $\Log{K} \Proves !A \liff !B$ and $\Log{K} \Proves
-  \Subst{!C}{!A}{p}$ then $\Log{K} \Proves \Subst{!C}{B}{p}$
+  \Subst{!C}{!A}{q}$ then $\Log{K} \Proves \Subst{!C}{B}{q}$
 \end{prop}
 
 \begin{proof}
@@ -82,12 +82,21 @@ these results help establishing !!{derivability} results more easily.
 \begin{prob}
   Prove \olref[nml][prf][der]{prop:rewriting} by proving, by induction
   on the complexity of~$!C$, that if $\Log{K} \Proves !A \liff !B$
-  then $\Log{K} \Proves \Subst{!C}{!A}{p} \liff \Subst{!C}{!B}{p}$.
+  then $\Log{K} \Proves \Subst{!C}{!A}{q} \liff \Subst{!C}{!B}{q}$.
 \end{prob}
 
 This proposition comes in handy especially when we want to convert
 $\Diamond$ into $\Box$ (or vice versa), or remove double negations
-inside !!a{formula}. For instance:
+inside !!a{formula}.  In what follows, we will mark applications of
+\olref{prop:rewriting} by ``$!A$ for $!B$'' whenever we re-write
+!!a{formula}~$!C(!B)$ for~$!C(!A)$. In other words, ``$!A$ for $!B$''
+abbreviates:
+  \begin{derivation}
+    & $\Proves !C(!A)$ \\
+    & $\Proves !A \liff !B$\\
+    & $\Proves !C(!B)$ & by \olref{prop:rewriting}
+  \end{derivation}
+For instance:
 
 \begin{prop}
   $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$
@@ -99,19 +108,36 @@ inside !!a{formula}. For instance:
     1. & $\Log{K} \Proves \Diamond \lnot p \liff \lnot\Box\lnot\lnot p$ &
     \Dual\\
     2. & $\Log{K} \Proves \lnot \Box \lnot\lnot p \lif \Diamond \lnot p$ & \PL, 1\\
-    3. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & re-write $p$ for $\lnot\lnot p$\\
+    3. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & $p$ for $\lnot\lnot p$\\
   \end{derivation}
   }{% Diamond is defined
   \begin{derivation}
     1. & $\Log{K} \Proves \lnot \Box \lnot\lnot p \lif \Diamond \lnot p$ & \Taut\\
-    2. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & re-write $p$ for $\lnot\lnot p$\\
+    2. & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & $p$ for $\lnot\lnot p$\\
   \end{derivation}
   The formula on line~$1$ is an instance of $\lnot q \lif \lnot q$,
   substituting $\Box\lnot\lnot p$ for~$q$. $\Diamond\lnot p$ and
   $\lnot\Box\lnot\lnot p$ are identical, since $\Diamond$ is defined
-  as~$\lnot\Box\lnot$.
-  }
+  as~$\lnot\Box\lnot$.}
 \end{proof}
+
+In the above !!{derivation}, the final step ``$p$ for $\lnot\lnot p$''
+is short for
+  \begin{derivation}
+    & $\Log{K} \Proves \lnot \Box \lnot\lnot p \lif \Diamond \lnot
+    p$\\
+    & $\Log{K} \Proves \lnot\lnot p \liff p$ & \Taut\\
+    & $\Log{K} \Proves \lnot\Box p \lif \Diamond \lnot p$ & by \olref{prop:rewriting}
+  \end{derivation}
+The roles of $!C(q)$, $!A$, and $!B$ in \olref{prop:rewriting} are
+played here, respectively, by $\lnot \Box q \lif \Diamond \lnot p$,
+$\lnot\lnot p$, and~$p$.
+
+When !!a{formula} contains a sub-!!{formula} $\lnot\Diamond !A$,
+we can replace it by $\Box\lnot !A$ using \olref{prop:rewriting}, since
+$\Log{K} \Proves \lnot\Diamond !A \liff \Box\lnot !A$. We'll indicate
+this and similar replacements simply by ``$\Box\lnot$ for
+$\lnot\Diamond$.''
 
 The following proposition justifies that we can establish
 !!{derivability} results schematically. E.g., the previous proposition

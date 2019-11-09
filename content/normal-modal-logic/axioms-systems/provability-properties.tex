@@ -14,21 +14,23 @@
   Let $\Sigma$ be a modal system and $\Gamma$ a set of modal
   !!{formula}s. The following properties hold:
   \begin{enumerate}
-  \item \emph{Monotony}: If $\Gamma \Proves[\Sigma] !A$ and $\Gamma \subseteq
-    \Delta$ then $\Delta \Proves[\Sigma] !A$;
-  \item \emph{Reflexivity}: If $!A \in \Gamma$ then $\Gamma
+  \item\ollabel{prop:derivabilityfacts-monotony} \emph{Monotony}: If
+    $\Gamma \Proves[\Sigma] !A$ and $\Gamma \subseteq \Delta$ then
+    $\Delta \Proves[\Sigma] !A$;
+  \item\ollabel{prop:derivabilityfacts-reflexivity}
+    \emph{Reflexivity}: If $!A \in \Gamma$ then $\Gamma
     \Proves[\Sigma] !A$;
-    \item \emph{Cut}: If $\Gamma \Proves[\Sigma] !A$ and $\Delta \cup
-      \{!A\} \Proves[\Sigma] !B$ then $\Gamma \cup \Delta
-      \Proves[\Sigma] !B$;
-    \item \emph{Deduction theorem}: $\Gamma \cup \{!B\}
-      \Proves[\Sigma] !A$ if and only if $\Gamma \Proves[\Sigma] !B
-      \lif !A$;
-    \item \ollabel{prop:derivabilityfacts-ruleT}%
-      \emph{Rule T}: If $\Gamma \Proves[\Sigma] !A_1$ and
-      \dots and $\Gamma \Proves[\Sigma] !A_n$ and $!A_1 \to
-      (!A_2 \lif \cdots (!A_n \lif !B)\cdots)$ is a
-      tautological instance, then $\Gamma \Proves[\Sigma] !B$.
+  \item\ollabel{prop:derivabilityfacts-cut} \emph{Cut}: If $\Gamma
+    \Proves[\Sigma] !A$ and $\Delta \cup \{!A\} \Proves[\Sigma] !B$
+    then $\Gamma \cup \Delta \Proves[\Sigma] !B$;
+  \item\ollabel{prop:derivabilityfacts-deduction} \emph{Deduction theorem}: $\Gamma \cup \{!B\}
+    \Proves[\Sigma] !A$ if and only if $\Gamma \Proves[\Sigma] !B \lif
+      !A$;
+  \item \ollabel{prop:derivabilityfacts-ruleT}% \emph{Rule T}: If
+    $\Gamma \Proves[\Sigma] !A_1$ and \dots and $\Gamma
+    \Proves[\Sigma] !A_n$ and $!A_1 \to (!A_2 \lif \cdots (!A_n \lif
+    !B)\cdots)$ is a tautological instance, then $\Gamma
+    \Proves[\Sigma] !B$.
   \end{enumerate}
 \end{prop}
 

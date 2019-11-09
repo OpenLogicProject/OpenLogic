@@ -51,92 +51,94 @@ is valid.
       and $\mSat{M}{\ltrue}[w]$}.}{}
   \item \indcase{!A}{p_i}{%
     \begin{align*}
-      \pSat{v}{p_i} \Leftrightarrow {} & \pAssign{v}(p_i) = \True &&
-      \text{by definition of $\pSat{v}{p_i}$};\\
-      \Leftrightarrow {} & \mSat{M}{!D_i}[w] && \text{by assumption}\\
+      \pSat{v}{p_i} \Leftrightarrow {} & \pAssign{v}(p_i) = \True \\
+      & \qquad \text{by definition of $\pSat{v}{p_i}$}\\
+      \Leftrightarrow {} & \mSat{M}{!D_i}[w] \\
+      &\qquad \text{by assumption}\\
       \Leftrightarrow {} & \mSat{M}{\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]
-      && \text{since $\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\
+      &\qquad \text{since $\SSubst{p_i}{\subst{!D_1}{p_1}, \dots,
           \subst{!D_n}{p_n}} \ident !D_i$}.
       \end{align*}}
   \tagitem{prvFalse}{\indcase{!A}{\lnot !B}{%
       \begin{align*}
-        \pSat{v}{\lnot !B} \Leftrightarrow {} & \pSat/{v}{!B}
-        && \text{by definition of $\pSat{v}{}$};\\
+        \pSat{v}{\lnot !B} \Leftrightarrow {} & \pSat/{v}{!B}\\
+        &\qquad \text{by definition of $\pSat{v}{}$};\\
         \Leftrightarrow {} & \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w] && \text{by induction hypothesis};\\
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by induction hypothesis}\\
         \Leftrightarrow {} &
         \mSat{M}{\SSubst{\lnot !B}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]
-        && \text{by definition of $\pSat{v}{}$}.
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by definition of $\pSat{v}{}$}.
       \end{align*}}}{}
   \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{%
       \begin{align*}
         \pSat{v}{!B \land !C} \Leftrightarrow {} &
-        \pSat{v}{!B} \text{ and } \pSat{v}{!C}
-        && \text{by definition of $\pSat{v}{}$};\\
+        \pSat{v}{!B} \text{ and } \pSat{v}{!C}\\
+        &\qquad \text{by definition of $\pSat{v}{}$}\\
         \Leftrightarrow {} &
         \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
             \subst{!D_n}{p_n}}}[w] \text{ and } \\
         & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w],
-        && \text{by induction hypothesis}; \\
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by induction hypothesis}\\
         \Leftrightarrow{} &
         \mSat{M}{\SSubst{(!B \land !C)}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]
-        && \text{by definition of $\mSat{M}{}[w]$}.
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by definition of $\mSat{M}{}[w]$}.
       \end{align*}}}{}
   \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{%
       \begin{align*}
         \pSat{v}{!B \lor !C} \Leftrightarrow{} &
-        \pSat{v}{!B} \text{ or } \pSat{v}{!C}
-        && \text{by definition of $\pSat{v}{}$};\\
+        \pSat{v}{!B} \text{ or } \pSat{v}{!C}\\
+        &\qquad \text{by definition of $\pSat{v}{}$};\\
         \Leftrightarrow{} & \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
             \subst{!D_n}{p_n}}}[w] \text{ or }\\
         & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w],
-        && \text{by induction hypothesis}; \\
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by induction hypothesis}\\
         \Leftrightarrow{} &
         \mSat{M}{\SSubst{(!B \lor !C)}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]
-        && \text{by definition of $\mSat{M}{}[w]$}.
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by definition of $\mSat{M}{}[w]$}.
       \end{align*}}}{}
   \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{%
       \begin{align*}
         \pSat{v}{!B \lif !C} \Leftrightarrow{} &
-        \pSat/{v}{!B} \text{ or } \pSat{v}{!C}
-        && \text{by definition of $\pSat{v}{}$};\\
+        \pSat/{v}{!B} \text{ or } \pSat{v}{!C}\\
+        &\qquad \text{by definition of $\pSat{v}{}$}\\
         \Leftrightarrow{} &
         \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
             \subst{!D_n}{p_n}}}[w] \text{ or }\\
         & \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w],
-        && \text{by induction hypothesis}; \\
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by induction hypothesis}\\
         \Leftrightarrow{} &
         \mSat{M}{\SSubst{(!B \lif !C)}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]
-        && \text{by definition of $\mSat{M}{}[w]$}.
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by definition of $\mSat{M}{}[w]$}.
       \end{align*}}}{}
   \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{%
       \begin{align*}
         \pSat{v}{!B \lif !C} \Leftrightarrow {} &
         \text{either } \pSat{v}{!B} \text{ and } \pSat{v}{!C}\\
-        & \text{or } \pSat/{v}{!B} \text{ and } \pSat/{v}{!C}
-        && \text{by definition of $\pSat{v}{}$};\\
+        & \text{or } \pSat/{v}{!B} \text{ and } \pSat/{v}{!C}\\
+        &\qquad \text{by definition of $\pSat{v}{}$}\\
         \Leftrightarrow {} &
         \text{either } \mSat{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
             \subst{!D_n}{p_n}}}[w] \text{ and }\\
         & \qquad \mSat{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]\\
-        & \text{or } \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
+          \subst{!D_n}{p_n}}}[w]\\ 
+        &  \text{ or } \mSat/{M}{\SSubst{!B}{\subst{!D_1}{p_1}, \dots,
             \subst{!D_n}{p_n}}}[w] \text{ and }\\
         & \qquad \mSat/{M}{\SSubst{!C}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w],
-        && \text{by induction hypothesis}; \\
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad\text{by induction hypothesis}\\
         \Leftrightarrow {} &
         \mSat{M}{\SSubst{(!B \liff !C)}{\subst{!D_1}{p_1}, \dots,
-          \subst{!D_n}{p_n}}}[w]
-        && \text{by definition of $\mSat{M}{}[w]$}.
+          \subst{!D_n}{p_n}}}[w]\\
+        &\qquad \text{by definition of $\mSat{M}{}[w]$}.
       \end{align*}}}{}
   \end{enumerate}
   \end{proof}
