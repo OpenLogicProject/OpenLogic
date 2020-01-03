@@ -39,7 +39,7 @@ single nodes (labelled $l_2$, $l_3$) would be coded by $\tuple{2,
   primitive recursive and returns the codes of the immediate subtrees
   of a tree~$t$. Now we can define a helper function
   $\fn{hSubtreeSeq}(t,n)$ which computes the sequence of all subtrees
-  which are $n$ nodes remove from the root. The sequence of subtrees
+  which are $n$ nodes removed from the root. The sequence of subtrees
   of~$t$ which is $0$ nodes removed from the root---in other words,
   begins at the root of~$t$---is the sequence consisting just
   of~$t$. To obtain a sequence of all level~$n+1$ subtrees of $t$, we
@@ -47,7 +47,7 @@ single nodes (labelled $l_2$, $l_3$) would be coded by $\tuple{2,
   immediate subtrees of the level $n$ subtrees. To get a list of all
   these, note that if $f(x)$ is a primitive recursive function
   returning codes of sequences, then $g_f(s, k) = f((s)_0) \concat
-  \dots \concat f((s)_k)$ is also primivive recursive:
+  \dots \concat f((s)_k)$ is also primitive recursive:
     \begin{align*}
       g(s, 0) & = f((s)_0)\\
       g(s, k+1) & = g(s, k) \concat f((s)_{k+1})
