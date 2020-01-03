@@ -10,13 +10,13 @@
 
 \olsection{The Canonical Model}
 
-The worls in our model will be finite sequences~$\sigma$ of natural
+The worlds in our model will be finite sequences~$\sigma$ of natural
 numbers, i.e., $\sigma \in \Nat^*$. Note that $\Nat^*$ is inductively
 defined by:
 \begin{enumerate}
 \item $\emptyseq \in \Nat^*$.
-\item If $\sigma \in \Nat^*$ and $n \in \Sigma$, then $\sigma.n \in
-  \Nat^*$ (where $\sigma.n$ is $\sigma \concat \tuple{n}$).
+\item If $\sigma \in \Nat^*$ and $n \in \Nat$, then $\sigma.n \in
+  \Nat^*$ (where $\sigma.n$ is $\sigma \concat \tuple{n}$ and $\sigma \concat \sigma'$ is the concatenation if $\sigma$ and $\sigma'$).
 \item Nothing else is in $\Nat^*$.
 \end{enumerate}
 So we can use $\Nat^*$ to give inductive definitions.
@@ -38,14 +38,14 @@ follows:
 \end{enumerate}
 Here by $(\Delta(\sigma) \cup \{!B_n\})^*$ we mean the prime set of
 !!{formula}s which exists by \olref[lin]{lem:lindenbaum} applied to the
-set $\Delta(\sigma) \cup \{!B_n\}$. Note that by this definition, if
+set $\Delta(\sigma) \cup \{!B_n\}$ and the !!{formula} $!C_n$. Note that by this definition, if
 $\Delta(\sigma) \cup \{!B_n\} \Proves/ !C_n$, then $\Delta(\sigma.n)
 \Proves !B_n$ and $\Delta(\sigma.n) \Proves/ !C_n$.  Note also that
 $\Delta(\sigma) \subseteq \Delta(\sigma.n)$ for any~$n$. If $\Delta$
 is prime, then $\Delta(\sigma)$ is prime for all~$\sigma$.
 
 \begin{defn}\ollabel{defn:canonical-model}
-  Suppose $\Delta$ is prime.  Then the \emph{canonical model} for
+  Suppose $\Delta$ is prime.  Then the \emph{canonical model} $\mModel{M(\Delta)}$ for
   $\Delta$ is defined by:
   \begin{enumerate}
   \item $W = \Nat^*$, the set of finite sequences of natural numbers.
