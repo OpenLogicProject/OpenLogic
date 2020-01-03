@@ -73,7 +73,7 @@ yields a construction of~$\lfalse$. A construction of a conjunction
 $!B_1 \land !B_2$ is a pair $\tuple{N_1, N_2}$ where $N_1$ is a
 construction of~$!B_1$ and $N_2$ is a construction of~$!B_2$. We can
 define functions $p_1$ and $p_2$ which recover from a construction of
-$!B_1 \land !B_2$ the constructions of $B_1$ and $!B_2$, respectively:
+$!B_1 \land !B_2$ the constructions of $!B_1$ and $!B_2$, respectively:
 \begin{align*}
   p_1(\tuple{N_1, N_2}) &= N_1\\
   p_2(\tuple{N_1, N_2}) &= N_2
@@ -84,7 +84,7 @@ a construction of~$!A \lif \lfalse$. Such a construction, in turn, is
 a function~$p_2(M)$ which, if given as input a construction of~$!A$,
 yields a construction of~$\lfalse$. In other words, if we apply
 $p_2(M)$ to $p_1(M)$, we get a construction of~$\lfalse$.  Thus, we
-can define $f(M) = p_2(p_1(M))$.
+can define $f(M) = p_2(M)(p_1(M))$.
 \end{ex}
 
 \begin{ex}

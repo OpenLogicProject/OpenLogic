@@ -31,7 +31,7 @@
       $!B$ from !!{undischarged} assumptions~$\Gamma$ and of~$!C$ from
       !!{undischarged} assumptions~$\Delta$ show that $\Gamma \Proves
       !B$ and $\Delta \Proves !C$. By induction hypothesis we have
-      that $\Gamma \Entails !B$ and $\Gamma \Entails !C$. We have to
+      that $\Gamma \Entails !B$ and $\Delta \Entails !C$. We have to
       show that $\Gamma \cup \Delta \Entails !A \land !B$, since the
       !!{undischarged} assumptions of the entire derivation are
       $\Gamma$ together with $\Delta$.  So suppose $\mSat{M}{\Gamma
@@ -44,7 +44,7 @@
         \land !C$ from !!{undischarged} assumptions $\Gamma$ shows
         that $\Gamma \Proves !B \land !C$. By induction hypothesis,
         $\Gamma \Entails !B \land !C$. We have to show that $\Gamma
-        \Entails !B$. So suppose $\mSat{\Gamma}$. Since $\Gamma
+        \Entails !B$. So suppose $\mSat{M}{\Gamma}$. Since $\Gamma
         \Entails !B \land !C$, $\mSat{M}{!B \land !C}$. Then also
         $\mSat{M}{!B}$. Similarly if $\Elim\land$ ends in~$!C$, then
         $\Gamma \Entails !C$.}
@@ -53,7 +53,7 @@
     \iftag{probOr}{Exercise.}{Suppose the premise is $!B$, and the
       !!{undischarged} assumptions of the !!{derivation} ending
       in~$!B$ are $\Gamma$. Then we have $\Gamma \Proves !B$ and by
-      inductive hypothesis, $\Gamma \Entails B$. We have to show that
+      inductive hypothesis, $\Gamma \Entails !B$. We have to show that
       $\Gamma \Entails !B \lor !C$. Suppose $\mSat{M}{\Gamma}$. Since
       $\Gamma \Entails !B$, $\mSat{M}{!B}$. But then also $\mSat{M}{!B
         \lor !C}$. Similarly, if the premise is~$!C$, we have that
@@ -96,7 +96,7 @@
     $\mSat{M}{!C}[w']$, which is what we wanted to show. 
 
   \item The !!{derivation} ends in $\Elim{\lif}$ and
-    conclusion~$!C$. The premises are $!B \lif !C$ amd $!B$, with
+    conclusion~$!C$. The premises are $!B \lif !C$ and $!B$, with
     !!{derivation}s from !!{undischarged} assumptions $\Gamma$,
     $\Delta$. So we have $\Gamma \Proves !B \lif !C$ and $\Delta
     \Proves !B$. By inductive hypothesis, $\Gamma \Entails !B \lif !C$
