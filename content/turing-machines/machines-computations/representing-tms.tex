@@ -30,14 +30,17 @@ only two internal states, $q_0$ and $q_1$, and one instruction:
 \]
 Recall that the Turing machine has a read/write head and a tape with
 the input written on it. The instruction can be read as \emph{if
-  reading a blank in state $q_0$, write a stroke, move right, and move
-  to state $q_1$}. This is equivalent to the transition function
-mapping $\tuple{q_0, \TMblank}$ to $\tuple{q_1, \TMstroke, \TMright}$.
+reading a~$\TMblank$ in state $q_0$, write a~$\TMstroke$, move right,
+and move to state $q_1$}. This is equivalent to the transition
+function mapping $\tuple{q_0, \TMblank}$ to $\tuple{q_1, \TMstroke,
+\TMright}$.
 \end{explain}
 
 \begin{ex}
-\emph{Even Machine}: The following Turing machine halts if, and only if, there 
-are an even number of $\TMstroke$s (strokes) on the tape (under the assumption that all $\TMstroke$s come before the first $\TMblank$ on the tape).
+\emph{Even Machine}: The following Turing machine halts if, and only
+if, there are an even number of $\TMstroke$'s on the tape (under the
+assumption that all $\TMstroke$'s come before the first $\TMblank$ on
+the tape).
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -72,9 +75,9 @@ Configurations show the content of the tape, the state of the machine and the
 location of the read/write head.
 
 Let us trace through the configurations of the even machine if it is
-started with an input of $4$ $\TMstroke$s. In this case, we expect that the
-machine will halt.  We will then run the machine on an input of~$3$
-$\TMstroke$s, where the machine will run forever.
+started with an input of four $\TMstroke$'s. In this case, we expect that the
+machine will halt.  We will then run the machine on an input of three
+$\TMstroke$'s, where the machine will run forever.
 
 The machine starts in state~$q_0$, scanning the leftmost~$\TMstroke$.
 We can represent the initial state of the machine as follows:
@@ -90,7 +93,7 @@ the machine moves right on the tape and changes to state~$q_1$.
 \[
 \TMendtape \TMstroke \TMstroke_1 \TMstroke \TMstroke \TMblank \ldots
 \]
-Since the machine is now in state~$q_1$ scanning a stroke, we have to
+Since the machine is now in state~$q_1$ scanning a~$\TMstroke$, we have to
 ``follow'' the instruction $\delta(q_1, \TMstroke) = \tuple{q_0,
   \TMstroke, \TMright}$. This results in the configuration
 \[
@@ -104,14 +107,15 @@ order, resulting in the following two configurations:
 \[
 \TMendtape \TMstroke \TMstroke \TMstroke \TMstroke \TMblank_0 \ldots
 \]
-The machine is now in state~$q_0$ scanning a blank. Based on the
+The machine is now in state~$q_0$ scanning a~$\TMblank$. Based on the
 transition diagram, we can easily see that there is no instruction to be
 carried out, and thus the machine has halted. This means that the input
 has been accepted.
 
-Suppose next we start the machine with an input of three strokes. The
-first few configurations are similar, as the same instructions are
-carried out, with only a small difference of the tape input:
+Suppose next we start the machine with an input of three
+$\TMstroke$'s. The first few configurations are similar, as the same
+instructions are carried out, with only a small difference of the tape
+input:
 \[
 \TMendtape \TMstroke_0 \TMstroke \TMstroke \TMblank \ldots
 \]
@@ -124,13 +128,14 @@ carried out, with only a small difference of the tape input:
 \[
 \TMendtape \TMstroke \TMstroke \TMstroke \TMblank_1 \ldots
 \]
-The machine has now traversed past all the strokes, and is reading a
-blank in state~$q_1$. As shown in the diagram, there is an instruction
-of the form $\delta(q_1, \TMblank) =\tuple{q_1, \TMblank, \TMright}$.
-Since the tape is infinitely blank to the right, the machine will
-continue to execute this instruction \emph{forever}, staying in
-state~$q_1$ and moving ever further to the right. The machine will
-never halt, and does not accept the input.
+The machine has now traversed past all the $\TMstroke$'s, and is
+reading a~$\TMblank$ in state~$q_1$. As shown in the diagram, there is
+an instruction of the form $\delta(q_1, \TMblank) =\tuple{q_1,
+\TMblank, \TMright}$. Since the tape is filled with $\TMblank$
+indefinitely to the right, the machine will continue to execute this
+instruction \emph{forever}, staying in state~$q_1$ and moving ever
+further to the right. The machine will never halt, and does not accept
+the input.
 \end{explain}
 
 \begin{explain}
@@ -138,8 +143,8 @@ It is important to note that not all machines will halt. If halting
 means that the machine runs out of instructions to execute, then we
 can create a machine that never halts simply by ensuring that there is
 an outgoing arrow for each symbol at each state. The even machine can
-be modified to run infinitely by adding an instruction for scanning a
-blank at~$q_0$.
+be modified to run indefinitely by adding an instruction for scanning a
+$\TMblank$ at~$q_0$.
 \end{explain}
 
 \begin{ex}
@@ -192,28 +197,29 @@ As we can see, the machine halts when scanning a blank in state~$q_0$.
 \end{ex}
 
 \begin{explain}
-So far we have only considered machines that read and accept input. However, 
-Turing machines have the capacity to both read and write. An example of
-such a machine (although there are many, many examples) is a \emph{doubler}.
-A doubler, when started with a block of~$n$ strokes on the tape, outputs
-a block of~$2n$ strokes.
+So far we have only considered machines that read and accept input.
+However, Turing machines have the capacity to both read and write. An
+example of such a machine (although there are many, many examples) is
+a \emph{doubler}. A doubler, when started with a block of~$n$
+$\TMstroke$'s on the tape, outputs a block of~$2n$ $\TMstroke$'s.
 \end{explain}
 
 \begin{ex}
   \ollabel{ex:doubler} Before building a doubler machine, it is
-  important to come up with a \emph{strategy} for solving the
-  problem. Since the machine (as we have formulated it) cannot
-  remember how many strokes it has read, we need to come up with a way
-  to keep track of all the strokes on the tape. One such way is to
-  separate the output from the input with a blank. The machine can
-  then erase the first stroke from the input, traverse over the rest
-  of the input, leave a blank, and write two new strokes.  The machine
-  will then go back and find the second stroke in the input, and
-  double that one as well. For each one stroke of input, it will write
-  two strokes of output.  By erasing the input as the machine goes, we
-  can guarantee that no stroke is missed or doubled twice. When the
-  entire input is erased, there will be $2n$ strokes left on the tape.
-  The state diagram of the resulting Turing machine is depicted in
+  important to come up with a \emph{strategy} for solving the problem.
+  Since the machine (as we have formulated it) cannot remember how
+  many $\TMstroke$'s it has read, we need to come up with a way to
+  keep track of all the $\TMstroke$'s on the tape. One such way is to
+  separate the output from the input with a~$\TMblank$. The machine
+  can then erase the first $\TMstroke$ from the input, traverse over
+  the rest of the input, leave a $\TMblank$, and write two new
+  $\TMstroke$'s.  The machine will then go back and find the second
+  $\TMstroke$ in the input, and double that one as well. For each one
+  $\TMstroke$ of input, it will write two $\TMstroke$'s of output.  By
+  erasing the input as the machine goes, we can guarantee that no
+  $\TMstroke$ is missed or doubled twice. When the entire input is
+  erased, there will be $2n$ $\TMstroke$'s left on the tape. The state
+  diagram of the resulting Turing machine is depicted in
   \olref{fig:doubler}.
   \begin{figure}
 \[
@@ -261,37 +267,37 @@ configurations.
 \end{prob}
 
 \begin{prob}
-Design a Turing-machine with alphabet $\{\TMendtape,\TMblank, A, B\}$ that
-accepts, i.e., halts on, any string of $A$s and $B$s where the number of $A$s is the
-same as the number of $B$s \emph{and} all the $A$s precede all the
-$B$s, and rejects, i.e., does not halt on, any string where the number of $A$s is not equal to
-the number of $B$s or the $A$s do not precede all the $B$s. (E.g., the
-machine should accept $AABB$, and $AAABBB$, but reject both $AAB$ and
-$AABBAABB$.)
+Design a Turing-machine with alphabet $\{\TMendtape,\TMblank, A, B\}$
+that accepts, i.e., halts on, any string of $A$'s and $B$'s where the
+number of $A$'s is the same as the number of $B$'s \emph{and} all the
+$A$'s precede all the $B$'s, and rejects, i.e., does not halt on, any
+string where the number of $A$'s is not equal to the number of~$B$'s or
+the $A$'s do not precede all the~$B$'s. (E.g., the machine should accept
+$AABB$, and $AAABBB$, but reject both $AAB$ and $AABBAABB$.)
 \end{prob}
 
 \begin{prob}
-Design a Turing-machine with alphabet $\{\TMendtape,\TMblank, A, B\}$ that takes
-as input any string $\alpha$ of $A$s and $B$s and duplicates them to
-produce an output of the form $\alpha\alpha$. (E.g. input $ABBA$
-should result in output $ABBAABBA$).
+Design a Turing-machine with alphabet $\{\TMendtape,\TMblank, A, B\}$
+that takes as input any string $\alpha$ of $A$'s and $B$'s and
+duplicates them to produce an output of the form $\alpha\alpha$. (E.g.
+input $ABBA$ should result in output $ABBAABBA$).
 \end{prob}
 
 \begin{prob}
 \emph{Alphabetical?:} Design a Turing-machine with alphabet
-$\{\TMendtape,\TMblank, A, B\}$ that when given as input a finite sequence of As
-and Bs checks to see if all the As appear left of all the Bs or
-not. The machine should leave the input string on the tape, and output
-either halt if the string is ``alphabetical'', or loop forever if the
-string is not.
+$\{\TMendtape,\TMblank, A, B\}$ that when given as input a finite
+sequence of $A$'s and $B$'s checks to see if all the $A$'s appear to
+the left of all the $B$'s or not. The machine should leave the input
+string on the tape, and either halt if the string is
+``alphabetical'', or loop forever if the string is not.
 \end{prob}
 
 \begin{prob}
 \emph{Alphabetizer:} Design a Turing-machine with alphabet
-$\{\TMendtape,\TMblank, A, B\}$ that takes as input a finite sequence of $A$s and
-$B$s rearranges them so that all the $A$s are to the left of all
-the~$B$s. (e.g., the sequence $BABAA$ should become the sequence
-$AAABB$, and the sequence $ABBABB$ should become the sequence
+$\{\TMendtape,\TMblank, A, B\}$ that takes as input a finite sequence
+of $A$'s and $B$'s rearranges them so that all the $A$'s are to the
+left of all the~$B$'s. (e.g., the sequence $BABAA$ should become the
+sequence $AAABB$, and the sequence $ABBABB$ should become the sequence
 $AABBBB$).
 \end{prob}
 

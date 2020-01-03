@@ -60,17 +60,19 @@ For instance, consider the situation in \olref{fig:tm}.
 \end{figure}
 The visible part of the tape of the Turing machine contains the
 end-of-tape symbol $\TMendtape$ on the leftmost square, followed by
-three $\TMstroke$s, a $\TMblank$, and four more $\TMstroke$s.  The head is reading the
-third square from the left, which contains a~$\TMstroke$, and is in
-state~$q_1$---we say ``the machine is reading a $\TMstroke$ in state~$q_1$.''
-If the program of the Turing machine returns, for input $\tuple{q_1,
-  \TMstroke}$, the triple $\tuple{q_2, \TMblank, \TMstay}$, the machine would now
-replace the $1$ on the third square with a~$0$, leave the read/write
-head where it is, and switch to state~$q_2$.  If then the program
-returns $\tuple{q_3, \TMblank, \TMright}$ for input $\tuple{q_2, \TMblank}$, the
-machine would now overwrite the $\TMblank$ with another~$\TMblank$ (effectively,
-leaving the content of the tape under the read/write head unchanged),
-move one square to the right, and enter state~$q_3$. And so on.
+three $1$'s, a $0$, and four more $1$'s.  The
+head is reading the third square from the left, which contains
+a~$1$, and is in state~$q_1$---we say ``the machine is reading
+a $1$ in state~$q_1$.'' If the program of the Turing machine
+returns, for input $\tuple{q_1, 1}$, the triple $\tuple{q_2,
+0, \TMstay}$, the machine would now replace the~$1$ on
+the third square with a~$0$, leave the read/write head where it
+is, and switch to state~$q_2$.  If then the program returns
+$\tuple{q_3, 0, \TMright}$ for input $\tuple{q_2, 0}$,
+the machine would now overwrite the~$0$ with another~$0$
+(effectively, leaving the content of the tape under the read/write
+head unchanged), move one square to the right, and enter state~$q_3$.
+And so on.
 
 We say that the machine \emph{halts} when it encounters some state,
 $q_n$, and symbol, $\sigma$ such that there is no instruction for
