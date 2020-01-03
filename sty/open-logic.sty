@@ -17,6 +17,7 @@
 \RequirePackage{graphicx}
 \RequirePackage{multirow}
 \RequirePackage{longtable}
+\RequirePackage{nicefrac}
 
 \RequirePackage{natbib}
 \setcitestyle{authoryear}
@@ -26,6 +27,12 @@
 \usetikzlibrary{arrows,automata,intersections,positioning}
 
 \RequirePackage{bussproofs}
+
+% change definition of prooftree environment to align proofs at bottom
+% to make placement of qed symbols work
+\renewenvironment{prooftree}
+  {\begin{center}\bottomAlignProof}
+  {\DisplayProof\end{center}}
 \RequirePackage[tableaux]{prooftrees}
 
 \newenvironment{oltableau}{\center\tableau{}} %wff format={anchor = base west}}}
@@ -54,12 +61,16 @@
   urlcolor=dark-gray}
   %linkcolor=reflex-blue}
 
-\RequirePackage{amsthm}
-\RequirePackage{thmtools}
-\RequirePackage[nameinlink]{cleveref} % always after hyperref!
-\RequirePackage{nicefrac}
+% Load ntheorem as theorem backend thmmarks, amsmath options necessary
+% for proper placement of proof end markers. amsthm option provides
+% standard theorem styles. 
+\RequirePackage[thmmarks,amsmath,amsthm,hyperref]{ntheorem}
 
-%\usepackage{pgf}
+% Load thmtools for nice formatting of theorem environments
+\RequirePackage{thmtools}
+
+% Load cleverref for automatic includion of theorem names in references
+\RequirePackage[nameinlink]{cleveref} % always after hyperref!
 
 \makeatletter
 

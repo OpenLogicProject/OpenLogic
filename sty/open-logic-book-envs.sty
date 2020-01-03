@@ -16,7 +16,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-
 % Theorem-like Environments
 % -------------------------
 
@@ -36,10 +35,9 @@
 
 \mdfdefinestyle{thmstyle}{backgroundcolor=OLPltcolor,
   innerleftmargin=8pt,
-  innertopmargin=0pt,
   innerrightmargin=8pt,
   userdefinedwidth=\thmwidth,
-  needspace=3cm,
+  needspace=2cm,
   splittopskip=2\topsep,
   hidealllines=true,
   beforesingleframe={\hskip-8pt},
@@ -49,7 +47,6 @@
 \mdfdefinestyle{defstyle}{linecolor=OLPltcolor,
   linewidth=2pt,
   innerleftmargin=6pt,
-  innertopmargin=-2pt,
   innerrightmargin=6pt,
   userdefinedwidth=\thmwidth,
   needspace=3cm,
@@ -215,6 +212,6 @@
 % colums for line number, formula, and justification.
 
 \newenvironment{derivation}{%
-  \smallskip\par\begin{tabular}{@{}rll@{}}}{
-  \end{tabular}\smallskip\par\noindent}
+  ~\begin{trivlist}\item\begin{tabular}[b]{@{}rll@{}}}
+  {\end{tabular} \end{trivlist}}
 

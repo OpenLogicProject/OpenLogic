@@ -10,9 +10,9 @@
 \olsection{Primitive Recursion}
 
 A characteristic of the natural numbers is that every natural number
-can be reached from~$0$ by applying the successor operation~``$+1$''
+can be reached from~$0$ by applying the successor operation~$+1$
 finitely many times---any natural number is either~$0$ or the
-successor of \dots the successor of~$0$. One way to specify a
+successor of \dots{} the successor of~$0$. One way to specify a
 function~$f\colon\Nat \to \Nat$ that makes use of this fact is this:
 (a)~specify what the value of $f$ is for argument~$0$, and (b)~also
 specify how to, given the value of $f(x)$, compute the value of
@@ -26,8 +26,8 @@ $f(x)$ from $f(x+1)$, and so $f(x)$ is defined for all $x \in \Nat$.
 For instance, suppose we specify $h\colon \Nat \to \Nat$ by the following
 two equations:
 \begin{align*}
-h(0) & =  1 \\
-h(x+1) & =  2 \cdot h(x).
+h(0) & =  1\\
+h(x+1) & =  2 \cdot h(x)
 \end{align*}
 If we already know how to multiply, then these equations give us the
 information required for (a) and (b) above. Successively the second
@@ -58,7 +58,7 @@ $\Add(x, y)$ we can fix $x$ and define the value first for $y=0$
 and then for $y+1$ in terms of~$y$. Since $x$ is fixed, it will appear
 on the left and on the right side of the defining equations.
 \begin{align*}
-\Add(x,0) & =  x \\
+\Add(x,0) & =  x\\
 \Add(x,y+1) & =  \Add(x,y)+1
 \end{align*}
 These equations specify the value of $\Add$ for all $x$
@@ -78,7 +78,7 @@ is necessary---to allow the function to depend not just on the previous
 value but also on $x$ and~$y$. Consider:
 \begin{align*}
   \Mult(x,0) & =  0 \\
-  \Mult(x,y+1) & =  \Add(\Mult(x,y),x).
+  \Mult(x,y+1) & =  \Add(\Mult(x,y),x)
 \end{align*}
 This is a primitive recursive definition of a function $\Mult$ by
 applying the function $\Add$ to both the preceding value
@@ -93,7 +93,7 @@ $\Mult(2,1)$, $\Mult(2,2)$, and~$\Mult(2,3)$:
   \Mult(2,2) & = \Mult(2,1+1) =
   \Add(\Mult(2,1), 2) = \Add(2, 2) = 4\\
   \Mult(2,3) & = \Mult(2,2+1) =
-  \Add(\Mult(2,2), 2) = \Add(4, 2) = 6.
+  \Add(\Mult(2,2), 2) = \Add(4, 2) = 6
 \end{align*}
 
 The general pattern then is this: to give a primitive recursive
@@ -107,9 +107,9 @@ operations given by the right-hand-sides of these two equations as
 themselves being functions $f$ and~$g$, then the pattern to define a
 new function~$h$ by primitive recursion is this:
 \begin{align*}
-  h(x_0, \dots, x_{k-1}, 0) & = f(x_0, \dots, x_k)\\
+  h(x_0, \dots, x_{k-1}, 0) & = f(x_0, \dots, x_{k-1})\\
   h(x_0, \dots, x_{k-1}, y+1) & =
-  g(x_0, \dots, x_{k-1}, y, h(x_0, \dots, x_{k-1}, y)).
+  g(x_0, \dots, x_{k-1}, y, h(x_0, \dots, x_{k-1}, y))
 \end{align*}  
 In the case of $\Add$, we have $k=0$ and $f(x_0) = x_0$ (the
 identity function), and $g(x_0, y, z) = z + 1$ (the $3$-place function
@@ -126,7 +126,7 @@ argument):
 \begin{align*}
   \Mult(x_0,0) & =  f(x_0) = 0 \\
   \Mult(x_0,y+1) & =  g(x_0, y, \Mult(x_0,y)) =
-  \Add(\Mult(x_0,y), x_0).
+  \Add(\Mult(x_0,y), x_0)
 \end{align*}
 
 \end{document}

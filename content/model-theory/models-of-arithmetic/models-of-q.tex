@@ -83,16 +83,15 @@ We have $n \nsless m$ iff $n<m$ for $n$, $m \in \Nat$ and $x \nsless
 a$ for all~$x \in \Domain{K}$.
 
 $\Sat{K}{\lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]}$
-since $\nssucc$ is !!{injective}. $\Sat{K}{\lforall[x][\eq/[\Obj 0][x']]}$
-since $0$ is not a $\nssucc$-successor
-in~$\Struct{K}$. $\Sat{N}{\lforall[x][(\eq[x][\Obj 0] \lor
-    \lexists[y][\eq[x][y']])]}$ since for every $n>0$, $n = (n-1)^\nssucc$,
-and $a = a^\nssucc$.
+since $\nssucc$ is !!{injective}. $\Sat{K}{\lforall[x][\eq/[\Obj
+0][x']]}$ since $0$~is not a $\nssucc$-successor in~$\Struct{K}$.
+$\Sat{K}{\lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])]}$
+since for every $n>0$, $n = (n-1)^\nssucc$, and $a = a^\nssucc$.
 
-$\Sat{K}{\lforall[x][\eq[(x + \Obj 0)][x]]}$ since $n \nsplus 0 = n+0 =
-n$, and $a\nsplus 0 = a$ by definition
-of~$\nsplus$. $\Sat{K}{\lforall[x][\lforall[y][\eq[(x + y')][(x +
-        y)']]]}$ is a bit trickier.  If $n$, $m$ are both standard, we have:
+$\Sat{K}{\lforall[x][\eq[(x + \Obj 0)][x]]}$ since $n \nsplus 0 = n+0
+= n$, and $a\nsplus 0 = a$ by definition of~$\nsplus$.
+$\Sat{K}{\lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]}$ is a bit
+trickier.  If $n$, $m$ are both standard, we have:
 \begin{align*}
 (n \nsplus m^\nssucc) & = (n+(m+1)) = (n+m)+1 = (n \nsplus m)^\nssucc  
 \intertext{since $\nsplus$ and $^\nssucc$ agree with $+$ and $\prime$ on

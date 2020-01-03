@@ -20,7 +20,7 @@ and $g_0$, \dots, $g_{k-1}$ are $k$ functions which are all
 $n$-place. Then we can define a new $n$-place function $h$ as follows:
 \[
 h(x_0, \dots, x_{n-1}) =
-f(g_0(x_0, \dots, x_{n-1}), \dots, g_{k-1}(x_0, \dots, x_{n-1})).
+f(g_0(x_0, \dots, x_{n-1}), \dots, g_{k-1}(x_0, \dots, x_{n-1}))
 \]
 If $f$ and all $g_i$ are computable, so is $h$: To compute $h(x_0,
 \dots, x_{n-1})$, first compute the values $y_i = g_i(x_0, \dots,
@@ -34,12 +34,12 @@ when we defined $g(x, y, z) = \Succ(z)$ for use in the primitive
 recursive definition of~$\Add$. Suppose we are allowed use of the
 following functions:
 \[
-\Proj{n}{i}(x_0, \dots, x_{n-1}) = x_i.
+\Proj{n}{i}(x_0, \dots, x_{n-1}) = x_i
 \]
 The functions~$\Proj{k}{i}$ are called \emph{projection} functions:
-$\Proj{n}{i}$ is an $n$-place function. Then $g$ can be defined as
+$\Proj{n}{i}$ is an $n$-place function. Then $g$ can be defined by
 \[
-g(x, y, z) = \Succ(\Proj{3}{2})
+g(x, y, z) = \Succ(\Proj{3}{2}).
 \]
 Here the role of $f$ is played by the $1$-place function $\Succ$, so
 $k=1$. And we have one $3$-place function $\Proj{3}{2}$ which plays
@@ -48,9 +48,9 @@ successor of the third argument.
 
 The projection functions also allow us to define new functions by
 reordering or identifying arguments. For instance, the function $h(x)
-= \Add(x, x)$ can be defined as
+= \Add(x, x)$ can be defined by
 \[
-h(x_0) = \Add(\Proj{1}{0}(x_0),\Proj{1}{0}(x_0))
+h(x_0) = \Add(\Proj{1}{0}(x_0),\Proj{1}{0}(x_0)).
 \]
 Here $k=2$, $n=1$, the role of $f(y_0,y_1)$ is played by $\Add$, and
 the roles of $g_0(x_0)$ and $g_1(x_0)$ are both played

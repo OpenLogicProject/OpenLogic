@@ -36,8 +36,6 @@ and~$y$ free, such that $R(a, b)$ holds (i.e., $\tuple{a,b} \in R$)
 iff $\Sat{M}{!A_R(x, y)}[s]$ for $s(x) = a$ and $s(y) = b$.
 \end{defn}
 
-
-
 \begin{ex}
 In first-order logic we can define the identity
 relation~$\Id{\Domain{M}}$ (i.e., $\Setabs{\tuple{a,a}}{a \in
@@ -77,7 +75,7 @@ logic that $X$ is a transitive relation that includes~$R$:
 \begin{multline*}
   !B_R(X) \ident \lforall[x][\lforall[y][(R(x,y) \lif X(x, y))]] \land {}\\
 \lforall[x][\lforall[y][\lforall[z][((X(x,y) \land X(y,z)) \lif X(x,
-      z))]]]
+      z))]]].
 \end{multline*}
 The first conjunct says that $R \subseteq X$ and the second
 that $X$ is transitive.
@@ -88,7 +86,7 @@ transitive. So we can define the transitive closure of~$R$ by the
 !!{formula}
 \[
 R^*(X) \ident !B_R(X) \land \lforall[Y][(!B_R(Y) \lif
-  \lforall[x][\lforall[y][(X(x, y) \lif Y(x,y))]])]
+  \lforall[x][\lforall[y][(X(x, y) \lif Y(x,y))]])].
 \]
 We have $\Sat{M}{R^*(X)}[s]$ iff $s(X) = R^*$. The transitive closure
 of~$R$ cannot be expressed in first-order logic.

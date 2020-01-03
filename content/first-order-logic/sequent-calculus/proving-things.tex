@@ -253,20 +253,19 @@ So far we haven't used the contraction rule, but it is sometimes
 required. Here's an example where that happens.  Suppose we want to
 prove $\quad \Sequent !A \lor \lnot !A$. Applying $\RightR{\lor}$
 backwards would give us one of these two !!{derivation}s:
-\[
+\begin{prooftree}
 \AxiomC{}
 \UnaryInf$ \fCenter !A$
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \fCenter !A \lor \lnot !A$
-\DisplayProof\qquad
+\DisplayProof\qquad\bottomAlignProof
 \AxiomC{}
 \UnaryInf$!A \fCenter $
 \RightLabel{\RightR{\lnot}}
 \UnaryInf$ \fCenter \lnot !A$
 \RightLabel{\RightR{\lor}}
 \UnaryInf$ \fCenter !A \lor \lnot !A$
-\DisplayProof
-\]
+\end{prooftree}
 Neither of these of course ends in an initial sequent.  The trick is
 to realize that the contraction rule allows us to combine two copies
 of !!a{sentence} into one---and when we're searching for a proof,

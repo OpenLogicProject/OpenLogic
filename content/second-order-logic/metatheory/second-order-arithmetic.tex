@@ -15,13 +15,14 @@ eight axioms of~$\Th{Q}$,
 \begin{align*}
 & \lforall[x][\eq/[x'][\Obj 0]]\\
 & \lforall[x][\lforall[y][(\eq[x'][y'] \lif \eq[x][y])]]\\
-& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(x + z')][y]])]]\\
+& \lforall[x][(\eq[x][\Obj 0] \lor \lexists[y][\eq[x][y']])]\\ 
 & \lforall[x][\eq[(x + \Obj 0)][x]]\\
 & \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
 & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
 & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y]])]]\\
 \intertext{plus all sentences of the form}
-& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)].
 \end{align*}
 The latter is a ``schema,'' i.e., a pattern that generates infinitely
 many !!{sentence}s of the language of arithmetic, one for each
@@ -32,7 +33,7 @@ can be stated as a single sentence. $\Th{PA^2}$
 consists of the first eight axioms above plus the (second-order)
 \emph{induction axiom}:
 \[
-\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])]
+\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])].
 \]
 It says that if a subset~$X$ of the !!{domain}
 contains~$\Assign{\Obj{0}}{M}$ and with any~$x \in \Domain{M}$ also

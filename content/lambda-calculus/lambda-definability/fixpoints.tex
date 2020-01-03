@@ -66,7 +66,7 @@ $\fn{Fac}'$ into the definition of the factorial.
   \ollabel{defn:Turing-Y}
   The \emph{Y-combinator} is the term:
   \[
-  Y \ident (\lambd[ux][x(uux)])(\lambd[ux][x(uux)])
+  Y \ident (\lambd[ux][x(uux)])(\lambd[ux][x(uux)]).
   \]
 \end{defn}
 
@@ -80,7 +80,7 @@ $\fn{Fac}'$ into the definition of the factorial.
   \begin{align*}
     Y g &\ident (\lambd[ux][x(uux)])U\,g \\
     &\red (\lambd[x][x(UUx)])g\\
-    & \red g(UUg) \ident g(Yg)
+    & \red g(UUg) \ident g(Yg).
   \end{align*}
   Since $g(Yg)$ and $Yg$ both reduce to $g(Yg)$, $g(Yg) \equal[\beta]
   Yg$, so $Yg$ is a fixpoint of~$g$.
@@ -90,13 +90,13 @@ Of course, since $Yg$ is a redex, the reduction can continue indefinitely:
 \begin{align*}
   Y g &\red g (Y g) \\
     &\red g (g (Y g)) \\
-    &\red g(g (g (Y g)))
+    &\red g(g (g (Y g)))\\
     &\ldots
 \end{align*}
 So we can think of $Yg$ as $g$ applied to itself infinitely many
-times. If we apply $g$ to it one additional time, we---so to
-speak---aren't doing anything extra; $g$ applied to $g$ applied
-infinitely many times to $Yg$ is still $g$ applied to $Yg$ infinitely
+times. If we apply~$g$ to it one additional time, we---so to
+speak---aren't doing anything extra; $g$~applied to~$g$ applied
+infinitely many times to~$Yg$ is still $g$~applied to~$Yg$ infinitely
 many times.
 
 Note that the above sequence of $\beta$-reduction steps starting
@@ -116,7 +116,7 @@ Take the factorial for instance. Define $\fn{Fac}$ as $Y\, \fn{Fac}'$
       (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 3\\
   & \red \fn{IsZero} \, \num 3\, \num 1\,
       (\fn{Mult}\, \num 3\, (\fn{Fac} (\fn{Pred}\, \num 3))) \\
-  &\red  \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2) 
+  &\red  \fn{Mult}\, \num 3 \, (\fn{Fac} \, \num 2).
   \intertext{Similarly,}
   \fn{Fac}\,\num 2
   &\red  \fn{Mult}\, \num 2 \, (\fn{Fac} \, \num 1) \\
@@ -128,12 +128,12 @@ Take the factorial for instance. Define $\fn{Fac}$ as $Y\, \fn{Fac}'$
   &\ident (\lambd[x][\lambd[n][\fn{IsZero} \, n\, \num 1\,
       (\fn{Mult}\, n\, (x (\fn{Pred}\, n)))]]) \, \fn{Fac} \, \num 0\\
   & \red \fn{IsZero} \, \num 0\, \num 1\,
-      (\fn{Mult}\, \num 0\, (\fn{Fac} (\fn{Pred}\, \num 0))) \\
-  &\red \num 1
+      (\fn{Mult}\, \num 0\, (\fn{Fac} (\fn{Pred}\, \num 0))).\\
+  &\red \num 1.
   \intertext{So together}
   \fn{Fac}\,\num 3
   &\red  \fn{Mult}\, \num 3 \,
-  (\fn{Mult} \, \num 2\, (\fn{Mult} \, \num 1\, \num 1)) 
+  (\fn{Mult} \, \num 2\, (\fn{Mult} \, \num 1\, \num 1)).
 \end{align*}
 
 What goes for $\fn{Fac'}$ goes for any recursive definition. Suppose we
@@ -143,36 +143,34 @@ g\,x_1\dots x_n & \equal[\beta] N
 \intertext{where $N$ may contain~$g$ and $x_1$, \dots,~$x_n$. Then there is
 always a term~$G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]])$ such
 that}
-G\,x_1 \dots x_n & \equal[\beta] \Subst{N}{G}{g}
-\intertext{for by the fixpoint theorem,}
+G\,x_1 \dots x_n & \equal[\beta] \Subst{N}{G}{g}.
+\intertext{For by the fixpoint theorem,}
 G \ident (Y \lambd[g][\lambd[x_1\dots x_n][N]]) & \red \lambd[g][\lambd[x_1\dots x_n][N]](Y \lambd[g][\lambd[x_1\dots x_n][N]])\\
 & \ident (\lambd[g][\lambd[x_1\dots x_n][N]])\,G
 \intertext{and consequently}
 G\,x_1 \dots x_n 
 & \red (\lambd[g][\lambd[x_1\dots x_n][N]])\,G\,x_1\dots x_n\\
 & \red (\lambd[x_1\dots x_n][\Subst{N}{G}{g}])\,x_1\dots x_n\\
-  & \red \Subst{N}{G}{g}
+  & \red \Subst{N}{G}{g}.
 \end{align*}
-  
 
 The $Y$ combinator of \olref{defn:Turing-Y} is due to Alan
 Turing. Alonzo Church had proposed a different version which we'll
 call~$Y_C$:
 \[
-Y_C \ident \lambd[g][(\lambd[x][g(xx)])(\lambd[x][g(xx)])] \\
+Y_C \ident \lambd[g][(\lambd[x][g(xx)])(\lambd[x][g(xx)])].
 \]
-Church's combinator is a bit weaker than Turing's in that $Yg \equiv
-g(Yg)$ but not $Yg \bred g(Yg)$. Let $V$ be the term
-$\lambd[x][g(xx)]$, so that $Y_C \ident \lambd[g][VV]$. Consider
+Church's combinator is a bit weaker than Turing's in that $Yg
+\equal[\beta] g(Yg)$ but not $Yg \bred g(Yg)$. Let $V$ be the term
+$\lambd[x][g(xx)]$, so that $Y_C \ident \lambd[g][VV]$. Then
 \begin{align*}
-  VV & \ident (\lambd[x][g(xx)])V\\
-  & \red g(VV)
-  \intertext{and consequently}
-  Y_C g \ident (\lambd[g][VV])g & \red VV \red g(VV)\\
-  g(Y_C g) \ident g((\lambd[g][VV])g) & \red g(VV)
+  VV & \ident (\lambd[x][g(xx)])V \red g(VV)
+  \text{ and thus}\\
+  Y_C g & \ident (\lambd[g][VV])g \red VV \red g(VV), \text{ but also}\\
+  g(Y_C g) & \ident g((\lambd[g][VV])g) \red g(VV).
 \end{align*}
-In other words, $Yg$ and $g(Yg)$ reduce to a common term; so $Yg
-\equal[\beta] g(Yg)$. This is often enough for applications.
+In other words, $Y_Cg$ and $g(Y_Cg)$ reduce to a common term $g(VV)$; so $Y_Cg
+\equal[\beta] g(Y_Cg)$. This is often enough for applications.
 
 \end{document}
 

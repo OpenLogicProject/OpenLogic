@@ -17,11 +17,10 @@ Let's give a !!{derivation} of the !!{sentence} $(!A \land !B) \lif !A$.
 
 We begin by writing the desired conclusion at the bottom of the 
 !!{derivation}.
-\[
+\begin{prooftree}
 \AxiomC{}
 \UnaryInfC{$(!A\land !B) \lif !A$}
-\DisplayProof
-\]
+\end{prooftree}
 
 Next, we need to figure out what kind of inference could result in
 !!a{sentence} of this form. The !!{main operator} of the
@@ -30,26 +29,23 @@ conclusion using the \Intro{\lif} rule. It is best to write down
 the assumptions involved and label the inference rules as you
 progress, so it is easy to see whether all assumptions have been
 !!{discharged} at the end of the proof.
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{!A \land !B}{1}$}
 \DeduceC{$!A$}
 \DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(!A\land !B) \lif !A$}
-\DisplayProof
-\]
+\end{prooftree}
 
 We now need to fill in the steps from the assumption $!A \land !B$ to $!A$.
 Since we only have one connective to deal with, $\land$, we must
 use the $\land$ elim rule. This gives us the following proof:
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{!A \land !B}{1}$}
 \RightLabel{\Elim{\land}}
 \UnaryInfC{$!A$}
 \DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(!A\land !B) \lif !A$}
-\DisplayProof
-\]
-
+\end{prooftree}
 We now have a correct !!{derivation} of $(!A \land
 !B) \lif !A$.
 \end{ex}
@@ -60,11 +56,10 @@ Now let's give a !!{derivation} of $(\lnot !A \lor !B)
 
 We begin by writing the desired conclusion at the bottom of the 
 derivation.
-\[
+\begin{prooftree}
 \AxiomC{}
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
-\DisplayProof
-\]
+\end{prooftree}
 To find a logical rule that could give us this conclusion, we
 look at the logical connectives in the conclusion: $\lnot$,
 $\lor$, and $\lif$. We only care at the moment about the first
@@ -73,14 +68,12 @@ occurence of $\lif$ because it is the !!{main operator} of the
 occurence of $\lif$ are inside the scope of another connective, so we
 will take care of those later. We therefore start with the
 \Intro{\lif} rule.  A correct application must look like this:
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \DeduceC{$!A \lif !B$}
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
-\DisplayProof
-\]
-
+\end{prooftree}
 This leaves us with two possibilities to continue. Either we can
 keep working from the bottom up and look for another application
 of the \Intro{\lif} rule, or we can work from the top down and apply a
@@ -90,7 +83,7 @@ application of \Elim{\lor}, the other two premises must be identical
 to the conclusion $!A \lif !B$, but each may be derived in turn from
 another assumption, namely the two disjuncts of $\lnot !A \lor !B$.
 So our !!{derivation} will look like this:
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \AxiomC{$\Discharge{\lnot !A}{2}$}
 \DeduceC{$!A \lif !B$}
@@ -100,12 +93,11 @@ So our !!{derivation} will look like this:
 \TrinaryInfC{$!A \lif !B$}
 \DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
-\DisplayProof
-\]
+\end{prooftree}
 
 In each of the two branches on the right, we want to !!{derive} $!A
 \lif !B$, which is best done using \Intro{\lif}.
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \AxiomC{$\Discharge{\lnot !A}{2}, \Discharge{!A}{3}$}
 \DeduceC{$!B$}
@@ -119,24 +111,22 @@ In each of the two branches on the right, we want to !!{derive} $!A
 \TrinaryInfC{$!A \lif !B$}
 \DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
-\DisplayProof
-\]
+\end{prooftree}
 
 For the two missing parts of the !!{derivation}, we need
 !!{derivation}s of $!B$ from $\lnot !A$ and $!A$ in the middle, and
 from $!A$ and $!B$ on the left.  Let's take the former first. $\lnot
 !A$ and $!A$ are the two premises of \Elim{\lnot}:
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A}{2}$}
 \AxiomC{$\Discharge{!A}{3}$}
 \RightLabel{\Elim{\lnot}}
 \BinaryInfC{$\lfalse$}
 \DeduceC{$!B$}
-\DisplayProof
-\]
+\end{prooftree}
 By using \FalseInt, we can obtain $!B$ as a conclusion and
 complete the branch.
-\[
+\begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \AxiomC{$\Discharge{\lnot !A}{2}$}
 \AxiomC{$\Discharge{!A}{3}$}
@@ -154,8 +144,7 @@ complete the branch.
 \TrinaryInfC{$!A \lif !B$}
 \DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
-\DisplayProof
-\]
+\end{prooftree}
 
 Let's now look at the rightmost branch.  Here it's important to
 realize that the definition of !!{derivation} \emph{allows assumptions
@@ -163,8 +152,8 @@ realize that the definition of !!{derivation} \emph{allows assumptions
 words, if we can derive $!B$ from one of the assumptions $!A$ and $!B$
 without using the other, that's ok.  And to !!{derive} $!B$ from~$!B$
 is trivial: $!B$ by itself is such a !!{derivation}, and no inferences
-are needed.  So we can simply delete the assumtion $!A$.
-\[
+are needed.  So we can simply delete the assumption~$!A$.
+\begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
 \AxiomC{$\Discharge{\lnot !A}{2}$}
 \AxiomC{$\Discharge{!A}{3}$}
@@ -181,8 +170,7 @@ are needed.  So we can simply delete the assumtion $!A$.
 \TrinaryInfC{$!A \lif !B$}
 \DischargeRule{\Intro{\lif}}{1} 
 \UnaryInfC{$(\lnot !A \lor !B) \lif (!A \lif !B)$}
-\DisplayProof
-\]
+\end{prooftree}
 Note that in the finished !!{derivation}, the rightmost \Intro{\lif}
 inference does not actually discharge any assumptions.
 \end{ex}
@@ -251,7 +239,7 @@ follows from our new assumption $!A$ by~$\Intro{\lor}$:
   \DischargeRule{\FalseCl}{1}
   \UnaryInfC{$!A \lor \lnot !A$}
 \end{prooftree}
-On the right side we use the same strategy, except we get $!A$ by \FalseCl:
+On the right side we use the same strategy, except we get $!A$ by~\FalseCl:
 \begin{prooftree}
   \AxiomC{$\Discharge{\lnot(!A \lor \lnot !A)}{1}$}
   \AxiomC{$\Discharge{!A}{2}$}
@@ -284,6 +272,5 @@ Give !!{derivation}s of the following:
   !B) \lif !C$
 \end{enumerate}
 \end{prob}
-
 
 \end{document}
