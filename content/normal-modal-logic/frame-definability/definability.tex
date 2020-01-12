@@ -60,7 +60,7 @@ side.
     (and $V$ is arbitrary otherwise). Let $\mModel{M} =\tuple{W, R,
       V}$.  Now, by definition of $V$, $\mSat{M}{p}[w]$ for all $w$
     such that not $Rvw$, in particular, $\mSat{M}{p}[u]$ since
-    not~$Rvu$. Also, since $Rvw$ iff $p \notin V(w)$, there is no~$w$
+    not~$Rvu$. Also, since $Rvw$ iff $w \notin V(p)$, there is no~$w$
     such that $Rvw$ and $\mSat{M}{p}[w]$, and hence
     $\mSat/{M}{\Diamond p}[v]$. Since~$Ruv$, also
     $\mSat/{M}{\Box\Diamond p}[u]$. It follows that $\mSat/{M}{p \lif
@@ -78,7 +78,7 @@ side.
     definition of~$V$ this is possible only if $Ruw$, as desired.
   \item We proceed contrapositively, assuming that the frame
     $\mModel{F} = \tuple{W, R}$ is not euclidean, and show that it
-    falsifies~\Ax{5}, i.e., i.e., $\mModel{F} \Entails/ \Diamond p \lif
+    falsifies~\Ax{5}, i.e., $\mModel{F} \Entails/ \Diamond p \lif
       \Box\Diamond p$. Suppose there are worlds $u$, $v$, $w \in W$
     such that $Rwu$ and $Rwv$ but not~$Ruv$. Define $V$ such that for
     all worlds $z$, $z \in V(p)$ if and only if it is \emph{not} the
@@ -110,7 +110,7 @@ the class of frames which have the property on the left side.
   In \olref[acc]{thm:soundschemas}, we proved that if a model has the
   property on the left, the !!{formula} on the right is true in
   it. Thus, if a frame~$\mModel{F}$ has the property on the left, the
-  !!{formula} on the left is valid in~$\mModel{F}$. In
+  !!{formula} on the right is valid in~$\mModel{F}$. In
   \olref{thm:fullCorrespondence}, we proved the converse implications:
   if !!a{formula} on the right is valid in~$\mModel{F}$, $\mModel{F}$
   has the property on the left.
