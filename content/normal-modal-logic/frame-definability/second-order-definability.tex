@@ -59,7 +59,7 @@ agree:
 
 \begin{prop}\ollabel{prop:st}
   Let $\mModel{M} = \tuple{W, R, V}$, $\Struct{M'}$ be the first-order
-  !!{structure} with $\Domain{M'} = W$, $\Assign{Q}{M} = R$, and
+  !!{structure} with $\Domain{M'} = W$, $\Assign{Q}{M'} = R$, and
   $\Assign{P_i}{M'} = V(\Obj p_i)$, and $s(x) = w$. Then
   \[
   \mSat{M}{!A}[w] \text{ iff } \Sat{M'}{\ST_x(!A)}[s]
@@ -118,7 +118,7 @@ agree:
 
 As an example, consider again the !!{formula}~$\Box p \lif p$. It
 defines reflexivity. Reflexivity is of course first-order definable by
-the !!{sentence}~$\Atom{Q}{x,x}$. But it is also definable by the
+the !!{sentence}~$\lforall[x][\Atom{Q}{x,x}]$. But it is also definable by the
 monadic second-order !!{sentence}
 \[
 \lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif \Atom{X}{y})]
@@ -126,29 +126,29 @@ monadic second-order !!{sentence}
 \]
 This means, of course, that the two sentences are equivalent. Here's
 how you might convince yourself of this directly: First suppose the
-second-order sentence is true in !!a{structure}~$M$. Since $x$ and $X$
-is universally quantified, the remainder must hold for any $x \in W$
-and set~$X \subseteq W$, e.g, the set $\Setabs{z}{Rxz}$ where $R =
+second-order sentence is true in !!a{structure}~$\Struct{M}$. Since $x$ and $X$
+are universally quantified, the remainder must hold for any $x \in W$
+and set~$X \subseteq W$, e.g., the set $\Setabs{z}{Rxz}$ where $R =
 \Assign{Q}{M}$. So, for any $s$ with $s(x) \in W$ and $s(X) =
-\Setabs{z}{Rzx}$ we have $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
+\Setabs{z}{Rxz}$ we have $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
     \Atom{X}{y})] \lif \Atom{X}{x}}$. But by the way we've picked
 $s(X)$ that means $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
     \Atom{Q}{x,y})] \lif \Atom{Q}{x,x}}[s]$, which is equivalent to
 $\Atom{Q}{x,x}$ since the antecedent is valid. Since $s(x)$ is
 arbitrary, we have $\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$.
 
-Now suppose that $\Sat{M}{\Atom{Q}{x,x}}$ and show that
+Now suppose that $\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$ and show that
 $\Sat{M}{\lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif
         \Atom{X}{y})] \lif \Atom{X}{x})]]}$. Pick any assignment~$s$,
 and assume $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
     \Atom{X}{y})]}[s]$. Let $s'$ be the $y$-variant of~$s$ with $s'(y)
-= x$; we have $\Sat{M}{\Atom{Q}{x,y} \lif \Atom{X}{y})}[s']$, i.e.,
-$\Sat{M}{\Atom{Q}{x,x} \lif \Atom{X}{x})}[s]$. Since
+= x$; we have $\Sat{M}{\Atom{Q}{x,y} \lif \Atom{X}{y}}[s']$, i.e.,
+$\Sat{M}{\Atom{Q}{x,x} \lif \Atom{X}{x}}[s]$. Since
 $\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$, the antecedent is true, and we
 have $\Sat{M}{\Atom{X}{x}}[s]$, which is what we needed to show.
 
 Since some definable classes of frames are not first-order definable,
-not every monadic-second order !!{sentence} of the form~$!A'$ is
+not every monadic second-order !!{sentence} of the form~$!A'$ is
 equivalent to a first-order !!{sentence}. There is no effective method
 to decide which ones are.
 
