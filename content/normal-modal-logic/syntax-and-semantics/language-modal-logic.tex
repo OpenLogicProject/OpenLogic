@@ -38,31 +38,68 @@ The basic language of modal logic contains
 
 \item Every propositional variable $\Obj p_i$ is an (atomic) !!{formula}.
 
-  \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
-  !B)$ is a !!{formula}.}{}
+\tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is !!a{formula}.}{}
 
 \tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
-  is a !!{formula}.}{}
+  is !!a{formula}.}{}
 
 \tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
-  is a !!{formula}.}{}
+  is !!a{formula}.}{}
 
 \tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
-  is a !!{formula}.}{}
+  is !!a{formula}.}{}
 
-\item If $!A$ is a formula, so is $\Box !A$.
+\tagitem{prvBox}{If $!A$ is !!a{formula}, then $\Box !A$ is
+  !!a{formula}.}{}
 
-\tagitem{prvDiamond}{If $!A$ is a formula, then $\Diamond !A$ is a
-  !!{formula}.}{}
+\tagitem{prvDiamond}{If $!A$ is !!a{formula}, then $\Diamond !A$ is
+  !!a{formula}.}{}
 
 \tagitem{limitClause}{Nothing else is a !!{formula}.}{}
 \end{enumerate}
-
-\iftag{defBox}{$\Box !A$ abbreviates $\lnot\Diamond\lnot !A$. }{}%
-\iftag{defDiamond}{$\Diamond !A$ abbreviates $\lnot\Box\lnot !A$.}{}
-
-If a !!{formula}~$!A$ does not contain $\Box$ or $\Diamond$, we say it
-is \emph{modal-free}.
 \end{defn}
+
+\begin<defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defBox,defDiamond>{defn}
+Formulas constructed using the defined operators are to be understood
+as follows:
+
+\begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defBox,defDiamond}
+
+\tagitem{defTrue}{$\ltrue$ abbreviates
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$ for some
+    fixed atomic !!{formula}~$!A$}.}{}
+
+\tagitem{defFalse}{$\lfalse$ abbreviates
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$ for some
+    fixed atomic !!{formula}~$!A$}.}{}
+
+\tagitem{defNot}{$\lnot !A$ abbreviates $!A \lif \lfalse$.}{}
+
+\tagitem{defOr}{$!A \lor !B$ abbreviates
+  \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+    !B$}.}{}
+
+\tagitem{defAnd}{$!A \land !B$ abbreviates
+  \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+    \lnot !B)$}.}{}
+
+\tagitem{defIf}{$!A \lif !B$ abbreviates
+  \iftag{prvOr}{$\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+
+\tagitem{defIff}{$!A \liff !B$ abbreviates $(!A \lif !B) \land (!B
+  \lif !A)$.}{}
+
+\tagitem{defBox}{$\Box !A$ abbreviates $\lnot\Diamond\lnot !A$. }{}
+
+\tagitem{defDiamond}{$\Diamond !A$ abbreviates $\lnot\Box\lnot !A$.}{}
+\end{tagenumerate}
+\end{defn}
+
+If !!a{formula}~$!A$ does not contain $\Box$ or $\Diamond$, we say it
+is \emph{modal-free}.
 
 \end{document}
