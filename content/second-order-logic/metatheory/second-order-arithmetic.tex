@@ -33,7 +33,7 @@ can be stated as a single sentence. $\Th{PA^2}$
 consists of the first eight axioms above plus the (second-order)
 \emph{induction axiom}:
 \[
-\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])].
+\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)]].
 \]
 It says that if a subset~$X$ of the !!{domain}
 contains~$\Assign{\Obj{0}}{M}$ and with any~$x \in \Domain{M}$ also
@@ -105,7 +105,7 @@ in $\Th{PA^{2\dagger}}$.
 
 \begin{proof}
 To show that $\le$ is definable, we have to find a formula~$!A_\le(x, y)$
-such that $\Sat{N}{!A(\num n, \num m)}$ iff $n < m$. Consider the formula
+such that $\Sat{N}{!A_\le(\num n, \num m)}$ iff $n \le m$. Consider the formula
 \[
 !B(x, Y) \ident Y(x) \land \lforall[y][(Y(y) \lif Y(y'))]
 \]
