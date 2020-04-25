@@ -40,8 +40,8 @@ by some~$x$ using~$R$.
 \begin{defn}
 If $R \subseteq \Domain{M}^2$, then \emph{$x$ $R$-codes} $\Setabs{y
   \in \Domain{M}}{R(x, y)}$. $Y$ $R$-codes $\Pow{X}$ iff for every $Z
-\subseteq X$, some $x \in Y$ $R$-codes~$Y$, and every $x \in Y$
-$R$-codes some~$Y \in Z$.
+\subseteq X$, some $x \in Y$ $R$-codes~$Z$, and every $x \in Y$
+$R$-codes some~$Z \subseteq X$.
 \end{defn}
 
 \begin{prop}
@@ -72,11 +72,10 @@ of any relation that codes the power set of~$X$ to~$X$ itself.
 \begin{prop}
 The sentence
 \begin{multline*}
-  \lforall[X][\lforall[R][(\fn{Pow}(R, X) \lif \\
+  \lforall[X][\lforall[Y][\lforall[R][(\fn{Pow}(Y, R, X) \lif \\
       \lnot \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
             \eq[x][y])]] \land \\
-        \lforall[Y][(\fn{Codes}(x, R, Y) \lif
-        X(u(x)))])])]]
+        (\fn{Codes}(x, R, Y) \lif X(u(x))))])]]]
 \end{multline*}
 is valid.
 \end{prop}
@@ -84,7 +83,7 @@ is valid.
 \begin{explain}
 The power set of !!a{denumerable} set is !!{nonenumerable}, and so its
 cardinality is larger than that of any !!{denumerable} set (which is
-$\aleph_0$).  The size of $\Pow{\Real}$ is called the ``power of the
+$\aleph_0$).  The size of $\Pow{\Nat}$ is called the ``power of the
 continuum,'' since it is the same size as the points on the real
 number line,~$\Real$. If the !!{domain} is large enough to code the
 power set of !!a{denumerable} set, we can express that a set is the
@@ -97,11 +96,11 @@ with~$\Real$, then there can also be no relation that codes~$\Pow{X}$.)
 \begin{prop}
 If $\cardle{\Real}{\Domain{M}}$, then the !!{formula}
 \[
-\fn{Cont}(X) \ident
-\lforall[X][\lforall[Y][\lforall[R][((\fn{Aleph}_0(X) \land
-      \fn{Pow}(Y, R, X)) \lif \lnot \cardle{Y}{X})]]]
+\fn{Cont}(Y) \ident
+\lforall[X][\lforall[R][((\fn{Aleph}_0(X) \land
+      \fn{Pow}(Y, R, X)) \lif \lnot \cardle{Y}{X})]]
 \]
-expresses that $\cardeq{s(X)}{\Real}$.
+expresses that $\cardeq{s(Y)}{\Real}$.
 \end{prop}
 
 \begin{prop}
@@ -133,7 +132,7 @@ the Continuum Hypothesis is false:
 \begin{prop}
 The Continuum Hypothesis is false iff \[\fn{NCH} \ident
 \lforall[X][(\fn{Cont}(X) \lif \lexists[Y][(Y \subseteq X \land \lnot
-    \fn{Count}(X) \land \lnot \cardeq{X}{Y})])]\] is valid.
+    \fn{Count}(Y) \land \lnot \cardeq{X}{Y})])]\] is valid.
 \end{prop}
 
 \end{document}
