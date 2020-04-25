@@ -39,8 +39,8 @@ be different from~$\Value{\num{n}}{M}$ for all~$n \in \Nat$.
   a decidable relation.
 \end{defn}
 
-\begin{ex}
-Recall the structure $\Struct{K}$ from \olref[mdq]{ex:model-K-of-Q}
+\begin{ex}\ollabel{ex:comp-model-q}
+Recall the structure $\Struct{K}$ from \olref[mdq]{ex:model-K-of-Q}.
 Its domain was $\Domain{K} = \Nat
 \cup \{a\}$ and interpretations
 \begin{align*}
@@ -58,6 +58,7 @@ Its domain was $\Domain{K} = \Nat
   \Assign{\times}{K}(x, y) & =
   \begin{cases}
     xy & \text{if $x$, $y \in\Nat$}\\
+    0 & \text{if $x=0$ or $y=0$}\\
     a & \text{otherwise}\\
   \end{cases}\\
   \Assign{<}{K} & =
@@ -83,12 +84,13 @@ multiplication we likewise have
 \begin{align*}
 \Assign{+}{K'}(x, y) & =
   \begin{cases}
-    x+y & \text{if $x$, $y >0$}\\
+    x+y-1 & \text{if $x$, $y >0$}\\
     0 & \text{otherwise}
   \end{cases}\\
   \Assign{\times}{K'}(x, y) & =
   \begin{cases}
-    xy & \text{if $x$, $y > 0$}\\
+    1 & \text{if $x = 1$ or $y = 1$}\\
+    xy - x - y + 2 & \text{if $x$, $y > 1$}\\
     0 & \text{otherwise}\\
   \end{cases}
 \end{align*}
@@ -108,10 +110,10 @@ to~$\Struct{L}$ of \olref[mod][mar][mdq]{ex:model-L-of-Q}.
 \end{prob}
 
 \begin{explain}
-This example shows that $\Th{Q}$ has computable non-standard models
-with domain~$\Nat$.  However, the following result shows that this is
-not true for models of~$\Th{PA}$ (and thus also for models
-of~$\Th{TA}$).
+\Olref{ex:comp-model-q} shows that $\Th{Q}$ has computable
+non-standard models with domain~$\Nat$.  However, the following result
+shows that this is not true for models of~$\Th{PA}$ (and thus also for
+models of~$\Th{TA}$).
 \end{explain}
 
 \begin{thm}[Tennenbaum's Theorem]

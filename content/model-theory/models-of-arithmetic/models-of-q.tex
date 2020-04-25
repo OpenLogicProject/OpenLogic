@@ -42,6 +42,7 @@ Consider the !!{structure}~$\Struct{K}$ with domain $\Domain{K} = \Nat
   \Assign{\times}{K}(x, y) & =
   \begin{cases}
     xy & \text{if $x$, $y \in\Nat$}\\
+    0 & \text{if $x = 0$ or $y = 0$}\\
     a & \text{otherwise}\\
   \end{cases}\\
   \Assign{<}{K} & =
@@ -66,17 +67,19 @@ in~$\Struct{K}$ more perspicuously as
 \end{array}
 \qquad
 \begin{array}{c|ccc}
-  x \nsplus y & m & a \\
+  x \nsplus y & 0 & m & a \\
   \hline
-  n & n+m & a \\
-  a & a & a \\
+  0 & 0 & m & a \\
+  n & n & n+m & a \\
+  a & a & a & a \\
 \end{array}
 \qquad
 \begin{array}{c|ccc}
-  x \nstimes y & m & a \\
+  x \nstimes y & 0 & m & a \\
   \hline
-  n & nm & a \\
-  a & a & a \\
+  0 & 0 & 0 & 0 \\
+  n & 0 & nm & a \\
+  a & 0 & a & a \\
 \end{array}
 \]
 We have $n \nsless m$ iff $n<m$ for $n$, $m \in \Nat$ and $x \nsless
