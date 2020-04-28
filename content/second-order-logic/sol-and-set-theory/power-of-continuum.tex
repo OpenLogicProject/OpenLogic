@@ -39,18 +39,22 @@ by some~$x$ using~$R$.
 
 \begin{defn}
 If $R \subseteq \Domain{M}^2$, then \emph{$x$ $R$-codes} $\Setabs{y
-  \in \Domain{M}}{R(x, y)}$. $Y$ $R$-codes $\Pow{X}$ iff for every $Z
-\subseteq X$, some $x \in Y$ $R$-codes~$Z$, and every $x \in Y$
-$R$-codes some~$Z \subseteq X$.
+  \in \Domain{M}}{R(x, y)}$.
 \end{defn}
 
+If !!a{element}~$x \in \Domain{M}$ $R$-codes a set $Z \subseteq
+\Domain{M}$, then a set $Y \subseteq \Domain{M}$ codes a set of sets,
+namely the sets coded by the !!{element}s of~$Y$.  So a set $Y$ can
+$R$-code $\Pow{X}$. It does so iff for every $Z \subseteq X$, some $x
+\in Y$ $R$-codes~$Z$, and every $x \in Y$ $R$-codes a~$Z \subseteq X$.
+
 \begin{prop}
-  The !!{formula}
+The !!{formula}
   \[
-  \fn{Codes}(x, R, Y) \ident \lforall[y][(Y(y) \liff
+  \fn{Codes}(x, R, Z) \ident \lforall[y][(Z(y) \liff
     R(x, y))]
   \]
-  expresses that $s(x)$ $s(R)$-codes $s(Y)$.  The
+expresses that $s(x)$ $s(R)$-codes $s(Z)$.  The
 !!{formula} 
 \begin{multline*}
   \fn{Pow}(Y, R, X) \ident \\
@@ -58,7 +62,8 @@ $R$-codes some~$Z \subseteq X$.
     \fn{Codes}(x, R, Z))])] \land {} \\ \lforall[x][(Y(x) \lif
   \lforall[Z][(\fn{Codes}(x, R, Z) \lif Z \subseteq X)]]
 \end{multline*}
-expresses that $s(Y)$ $s(R)$-codes the power set of~$s(X)$.
+expresses that $s(Y)$ $s(R)$-codes the power set of~$s(X)$, i.e., the
+elements of $s(Y)$ $s(R)$-code exactly the subsets of $s(X)$.
 \end{prop}
 
 \begin{explain}
@@ -74,8 +79,8 @@ The sentence
 \begin{multline*}
   \lforall[X][\lforall[Y][\lforall[R][(\fn{Pow}(Y, R, X) \lif \\
       \lnot \lexists[u][(\lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
-            \eq[x][y])]] \land \\
-        (\fn{Codes}(x, R, Y) \lif X(u(x))))])]]]
+            \eq[x][y])]] \land {}\\
+        \lforall[x][(Y(x) \lif X(u(x)))])])]]]
 \end{multline*}
 is valid.
 \end{prop}
@@ -95,13 +100,25 @@ with~$\Real$, then there can also be no relation that codes~$\Pow{X}$.)
 
 \begin{prop}
 If $\cardle{\Real}{\Domain{M}}$, then the !!{formula}
-\[
-\fn{Cont}(Y) \ident
-\lforall[X][\lforall[R][((\fn{Aleph}_0(X) \land
-      \fn{Pow}(Y, R, X)) \lif \lnot \cardle{Y}{X})]]
-\]
+\begin{multline*}
+\fn{Cont}(Y) \ident 
+\lexists[X][\lexists[R][((\fn{Aleph}_0(X) \land
+      \fn{Pow}(Y, R, X)) \land \\ 
+      \lforall[x][\lforall[y][((Y(x) \land {} 
+      Y(y) \land \lforall[z][R(x,z) \liff R(y,z)]) \lif \eq[x][y])]])]]
+\end{multline*}
 expresses that $\cardeq{s(Y)}{\Real}$.
 \end{prop}
+
+\begin{proof}
+  $\fn{Pow}(Y, R, X)$ expresses that $s(Y)$ $s(R)$-codes the power set
+  of~$s(X)$, which $\fn{Aleph}_0(X)$ says is countable. So $s(Y)$ is
+  at least as large as the power of the continuum, although it may be
+  larger (if multiple elements of $s(Y)$ code the same subset of~$X$).
+  This is ruled out be the last conjunct, which requires the
+  association between elements of $s(Y)$ and subsets of $s(Z)$ via
+  $s(R)$ to be !!{injective}.
+\end{proof}
 
 \begin{prop}
 $\cardeq{\Domain{M}}{\Real}$ iff
@@ -119,7 +136,7 @@ $\Pow{\Nat}$ has size~$\aleph_1$.
 
 \begin{prop}
 The Continuum Hypothesis is true iff \[\fn{CH} \ident
-\lforall[X][(\fn{Aleph}_1(X) \liff \fn{Cont}(x))]\] is valid.
+\lforall[X][(\fn{Aleph}_1(X) \liff \fn{Cont}(X))]\] is valid.
 \end{prop}
 
 Note that it isn't true that $\lnot \fn{CH}$ is valid iff the
