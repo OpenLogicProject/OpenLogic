@@ -31,7 +31,7 @@ We will follow a few notational conventions:
   $MNPQ$ abbreviates $(((MN)P)Q)$.
 \item Again, when parentheses are left out, lambda abstraction is to
   be given the widest scope possible. From example, $\lambd[x][MNP]$ is
-  read $\lambd[x][(MNP)]$.
+  read $(\lambd[x][((MN)P)])$.
 \item A lambda can be used to abstract multiple variables. For
   example, $\lambd[xyz][M]$ is short for
   $\lambd[x][\lambd[y][\lambd[z][M]]]$.
@@ -44,7 +44,7 @@ For example,
 \]
 abbreviates
 \[
-\lambd[x][\lambd[y][((((xx)y)x) \lambd[z][(xz)])]].
+\lambd[x][\lambd[y][((((xx)y)x)(\lambd[z][(xz)]))]].
 \]
 You should memorize these conventions. They will drive you crazy at
 first, but you will get used to them, and after a while they will

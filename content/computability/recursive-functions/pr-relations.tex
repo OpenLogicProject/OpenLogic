@@ -47,9 +47,9 @@ recursive functions. So the following are also primitive recursive:
 \begin{prop}
   The set of primitive recursive relations is closed under boolean
   operations, that is, 
-  if $P(\vec x)$ and $Q(\vec x)$ are primitive, so are
+  if $P(\vec x)$ and $Q(\vec x)$ are primitive recursive, so are
   \begin{enumerate}
-  \item $\lnot R(\vec x)$
+  \item $\lnot P(\vec x)$
   \item $P(\vec x) \land Q(\vec x)$
   \item $P(\vec x) \lor Q(\vec x)$
   \item $P(\vec x) \lif Q(\vec x)$
@@ -59,7 +59,7 @@ recursive functions. So the following are also primitive recursive:
 \begin{proof}
   Suppose $P(\vec x)$ and $Q(\vec x)$ are primitive recursive, i.e.,
   their characteristic functions $\Char{P}$ and $\Char{Q}$ are.  We
-  have to show that the characteristic functions of $\lnot R(\vec x)$,
+  have to show that the characteristic functions of $\lnot P(\vec x)$,
   etc., are also primitive recursive.
   \[
   \Char{\lnot P}(\vec x) = \begin{cases}
@@ -78,7 +78,7 @@ recursive functions. So the following are also primitive recursive:
   \Char{Q}(\vec x)$ or as $\fn{min}(\Char{P}(\vec x), \Char{Q}(\vec x))$.
 
   Similarly, $\Char{P \lor Q}(\vec x) = \fn{max}(\Char{P}(\vec x),
-  \Char{Q}(\vec x))$ and $\Char{P \lor Q}(\vec x) = \fn{max}(1 \tsub
+  \Char{Q}(\vec x))$ and $\Char{P \lif Q}(\vec x) = \fn{max}(1 \tsub
   \Char{P}(\vec x), \Char{Q}(\vec x))$.
 \end{proof}
 
@@ -103,7 +103,7 @@ recursive functions. So the following are also primitive recursive:
   \begin{align*}
     \Char{P}(\vec x, 0) & = 1\\
     \Char{P}(\vec x, y+1) & =
-    \fn{min}(\Char{P}(\vec x, y), \Char{R}(\vec x, y+1))).
+    \fn{min}(\Char{P}(\vec x, y), \Char{R}(\vec x, y))).
   \end{align*}
   Bounded existential quantification can similarly be defined using
   $\fn{max}$. Alternatively, it can be defined from bounded universal
@@ -129,7 +129,7 @@ One can use this to justify definitions of primitive recursive functions
 by cases from primitive recursive relations:
 
 \begin{prop}
-If $g_0(\vec x)$, \dots,~$g_m(\vec x)$ are functions, and $R_1(\vec
+If $g_0(\vec x)$, \dots,~$g_m(\vec x)$ are primitive recursive functions, and $R_0(\vec
 x)$, \dots, $R_{m-1}(\vec x)$ are primitive recursive relations, then
 the function $f$ defined by
 \[
