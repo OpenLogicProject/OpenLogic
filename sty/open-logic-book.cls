@@ -97,6 +97,8 @@
     \usepackage[scaled=.92]{helvet}
     % Baskervald X for roman, with oldstyle figure
     \usepackage[osf]{Baskervaldx}
+    % load amssymb before newtxmath to avoid problem with \Bbbk
+    \usepackage{amssymb}
     % Math font to match
     \usepackage[bigdelims,baskervaldx]{newtxmath}
     % Nice math calligraphic font 
@@ -206,12 +208,12 @@
     \settrims{0pt}{0pt}
 
     % let's calculate the line length for 65 characters in \normalfont
-
-    \setlxvchars
+    % \setlxvchars
+    % we're hardcoding textwidth to 300pt
 
     % set the size of the type block to golden ratio calculated width
 
-    \settypeblocksize{*}{1.05\lxvchars}{1.62}
+    \settypeblocksize{*}{300pt}{1.62}
 
     % set spine and and edge margin
 

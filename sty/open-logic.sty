@@ -139,12 +139,12 @@
     \def\ol@sectioncs{section}}{%
     \def\ol@sectioncs{#4}}
   \IfNoValueTF{#2}{%
-    \def\olfilename{#3.tex}%
+    \def\olfilename{#3}%
     \subfile{\olfilebase #3}%
-}{%
-    \def\olfilename{#3.tex}%
+  }{%
+    \def\olfilename{#3}%
     \IfBooleanTF{#1}{%
-      \edef\olfilebase{\olpath content/#2/}}{%
+      \edef\olfilebase{\olpath/content/#2/}}{%
       \edef\olfilebase{\olfilebase #2/}}%
     \subfile{\olfilebase #3}}
   \endgroup}
