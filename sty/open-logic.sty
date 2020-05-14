@@ -12,7 +12,7 @@
 \RequirePackage[OMLmathsfit]{isomath}
 \RequirePackage{xparse}
 \RequirePackage{mfirstuc}
-\RequirePackage{subfiles}
+\RequirePackage{subfiles}[2019/09/28]
 \RequirePackage{framed}
 \RequirePackage{graphicx}
 \RequirePackage{multirow}
@@ -124,7 +124,7 @@
 % if present subimport #1/#2, no optional argument: just \subfile it.
 % Starred version interprets #1 as relative to main O-L directory
 % \olpath/content/.  When asking for a file from a subdirectory, change
-% \olfilepath accordingly. This happens within a gorup, so \olfilepath
+% \olfilepath accordingly. This happens within a group, so \olfilepath
 % reverts to its original content after the \subfile.  Second optional
 % argument is name of sectioning command to use for \olsection.  Use
 % ``nosection'' to supress sectioning, ``subsection'' to make it a
@@ -133,23 +133,41 @@
 \def\olfilebase{}
 \edef\olfilename{\jobname.tex}
 
+% test if we're using subfiles.sty > v1.3
+\makeatletter
+\@ifpackagelater{subfiles}{2019/09/27}{\let\subfileswitch\@firstoftwo}{\let\subfileswitch\@secondoftwo}
+\makeatother
+
 \DeclareDocumentCommand \olimport { s o m o }{
   \begingroup
   \IfNoValueTF{#4}{%
     \def\ol@sectioncs{section}}{%
     \def\ol@sectioncs{#4}}
-  \IfNoValueTF{#2}{%
+  \IfNoValueTF{#2}{% no optional path
     \def\olfilename{#3}%
-    \subfile{\olfilebase #3}%
-  }{%
+    % as of v1.3 subfiles uses the import package so no longer need
+    % to keep track of which directory we're in!
+    \subfileswitch{%
+      \subfile{#3}%
+    }{%
+      \subfile{\olfilebase #3}%
+  }}{% optional path
     \def\olfilename{#3}%
-    \IfBooleanTF{#1}{%
-      \edef\olfilebase{\olpath/content/#2/}}{%
-      \edef\olfilebase{\olfilebase #2/}}%
-    \subfile{\olfilebase #3}}
+    \IfBooleanTF{#1}{% starred: path is relative to OLP/content directory
+      \edef\olfilebase{\olpath/content/#2/}
+      \subfile{\olfilebase #3}}{%
+      \edef\olfilebase{\olfilebase #2/}
+      % as of v1.3 subfiles uses the import package so no longer need
+      % to keep track of which directory we're in!
+      \subfileswitch{%
+        \subfile{#2/#3}%
+      }{%
+        \subfile{\olfilebase #3}%
+      }}
+    }
   \endgroup}
 
-% Goedel corner quotes
+  % Goedel corner quotes
 
 \newbox\gnBoxA
 \newdimen\gnCornerHgt
