@@ -12,26 +12,27 @@
 
 In its simplest form, induction is a technique used to prove results
 for all natural numbers. It uses the fact that by starting from $0$
-and repeatedly adding~$1$ we eventually reach every natural number.  So
-to prove that something is true for every number, we can (1) establish
-that it is true for $0$ and (2) show that whenever it is true for a number~$n$,
-it is also true for the next number~$n+1$.  If we abbreviate ``number~$n$ has
-property $P$'' by $P(n)$, then a proof by induction that $P(n)$ for
-all $n \in \Nat$ consists of:
+and repeatedly adding~$1$ we eventually reach every natural number. So
+to prove that something is true for every number, we can (1)~establish
+that it is true for $0$ and (2)~show that whenever it is true for a
+number~$n$, it is also true for the next number~$n+1$.  If we
+abbreviate ``number~$n$ has property $P$'' by $P(n)$ (and ``number~$k$
+has property $P$'' by $P(k)$, etc.), then a proof by induction that
+$P(n)$ for all $n \in \Nat$ consists of:
 \begin{enumerate}
 \item a proof of $P(0)$, and
-\item a proof that, for any~$n$, if $P(n)$ then $P(n+1)$.
+\item a proof that, for any~$k$, if $P(k)$ then $P(k+1)$.
 \end{enumerate}
 To make this crystal clear, suppose we have both (1) and~(2).  Then
-(1) tells us that $P(0)$ is true.  If we also have (2), we know in
-particular that if $P(0)$ then $P(0+1)$, i.e., $P(1)$. (This follows
-from the general statement ``for any~$n$, if $P(n)$ then $P(n+1)$'' by
-putting~$0$ for~$n$.  So by modus ponens, we have that~$P(1)$.  From
-(2) again, now taking $1$ for~$n$, we have: if $P(1)$ then~$P(2)$.
-Since we've just established~$P(1)$, by modus ponens, we
-have~$P(2)$. And so on.  For any number $k$, after doing this $k$
-steps, we eventually arrive at~$P(k)$.  So (1) and (2) together
-establish~$P(k)$ for any $k \in \Nat$.
+(1) tells us that $P(0)$ is true.  If we also have~(2), we know in
+particular that if $P(0)$ then $P(0+1)$, i.e., $P(1)$. This follows
+from the general statement ``for any~$k$, if $P(k)$ then $P(k+1)$'' by
+putting~$0$ for~$k$. So by modus ponens, we have that~$P(1)$. From (2)
+again, now taking $1$ for~$n$, we have: if $P(1)$ then~$P(2)$. Since
+we've just established~$P(1)$, by modus ponens, we have~$P(2)$. And so
+on.  For any number~$n$, after doing this $n$~times, we eventually
+arrive at~$P(n)$.  So (1) and~(2) together establish~$P(n)$ for any $n
+\in \Nat$.
 
 Let's look at an example.  Suppose we want to find out how many
 different sums we can throw with $n$ dice.  Although it might seem
@@ -109,20 +110,20 @@ Now we can prove, by induction, that $s_n = n(n+1)/2$.
 \end{prop}
 
 \begin{proof}
-  We have to prove (1) that $s_0 = 0\cdot(0 + 1)/2$ and (2) if $s_n =
-  n(n+1)/2$ then $s_{n+1} = (n+1)(n+2)/2$.  (1) is obvious. To prove
-  (2), we assume the inductive hypothesis: $s_n = n(n+1)/2$. Using it,
-  we have to show that $s_{n+1} = (n+1)(n+2)/2$.
+  We have to prove (1) that $s_0 = 0\cdot(0 + 1)/2$ and (2) if $s_k =
+  k(k+1)/2$ then $s_{k+1} = (k+1)(k+2)/2$.  (1) is obvious. To prove
+  (2), we assume the inductive hypothesis: $s_k = k(k+1)/2$. Using it,
+  we have to show that $s_{k+1} = (k+1)(k+2)/2$.
 
-  What is $s_{n+1}$?  By the definition, $s_{n+1} = s_n + (n+1)$.  By
-  inductive hypothesis, $s_n = n(n+1)/2$. We can substitute this into
+  What is $s_{k+1}$?  By the definition, $s_{k+1} = s_k + (k+1)$.  By
+  inductive hypothesis, $s_k = k(k+1)/2$. We can substitute this into
   the previous equation, and then just need a bit of arithmetic of
   fractions:
   \begin{align*}
-    s_{n+1} & = \frac{n(n+1)}{2} + (n+1) = {}\\
-    & = \frac{n(n+1)}{2} + \frac{2(n+1)}{2} = {}\\
-    & = \frac{n(n+1) + 2(n+1)}{2} = {}\\
-    & = \frac{(n+2)(n+1)}{2}.
+    s_{k+1} & = \frac{k(k+1)}{2} + (k+1) = {}\\
+    & = \frac{k(k+1)}{2} + \frac{2(k+1)}{2} = {}\\
+    & = \frac{n(k+1) + 2(k+1)}{2} = {}\\
+    & = \frac{(k+2)(k+1)}{2}.
   \end{align*}
 \end{proof}
 
@@ -130,6 +131,6 @@ The important lesson here is that if you're proving something about
 some inductively defined sequence $a_n$, induction is the obvious way
 to go. And even if it isn't (as in the case of the possibilities of
 dice throws), you can use induction if you can somehow relate the case
-for~$n+1$ to the case for~$n$.
+for~$k+1$ to the case for~$k$.
 
 \end{document}

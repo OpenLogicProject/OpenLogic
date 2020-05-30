@@ -49,12 +49,11 @@ example, $\Assign{+}{M}(2,3)$ maps to~$5$, and similarly for the
 binary !!{function}~$\times$. Hence, the !!{value} of $\Obj{four}$ is
 just~$4$, and the !!{value} of $\times(\Obj{two},
 +(\Obj{three},\Obj{zero}))$ (or in infix notation, $\Obj{two} \times
-(\Obj{three} + \Obj{zero})$ ) is
+(\Obj{three} + \Obj{zero})$) is
 \begin{multline*}
 \Value{\times(\Obj{two}, +(\Obj{three},\Obj{zero})}{M} =\\
 \begin{aligned}
-& =\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{\Obj{two},
-+(\Obj{three}, \Obj{zero})}{M})\\
+& =\Assign{\times}{M}(\Value{\Obj{two}}{M}, \Value{+(\Obj{three}, \Obj{zero})}{M})\\
 & = \Assign{\times}{M}(\Value{\Obj{two}}{M}, \Assign{+}{M}(\Value{\Obj{three}}{M},
 \Value{\Obj{zero}}{M})) \\
 & = \Assign{\times}{M}(\Assign{\Obj{two}}{M}, \Assign{+}{M}(\Assign{\Obj{three}}{M},

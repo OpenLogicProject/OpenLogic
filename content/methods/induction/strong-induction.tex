@@ -11,41 +11,41 @@
 \olsection{Strong Induction}
 
 In the principle of induction discussed above, we prove $P(0)$ and
-also if $P(n)$, then $P(n+1)$.  In the second part, we assume that
-$P(n)$ is true and use this assumption to prove $P(n+1)$.
-Equivalently, of course, we could assume $P(n-1)$ and use it to prove
-$P(n)$---the important part is that we be able to carry out the
+also if $P(k)$, then $P(k+1)$.  In the second part, we assume that
+$P(k)$ is true and use this assumption to prove $P(k+1)$.
+Equivalently, of course, we could assume $P(k-1)$ and use it to prove
+$P(k)$---the important part is that we be able to carry out the
 inference from any number to its successor; that we can prove the
 claim in question for any number under the assumption it holds for its
 predecessor.
 
 There is a variant of the principle of induction in which we don't
-just assume that the claim holds for the predecessor $n-1$ of $n$, but
-for all numbers smaller than~$n$, and use this assumption to establish
-the claim for~$n$. This also gives us the claim $P(k)$ for all~$k \in
+just assume that the claim holds for the predecessor $k-1$ of $k$, but
+for all numbers smaller than~$k$, and use this assumption to establish
+the claim for~$k$. This also gives us the claim $P(n)$ for all~$n \in
 \Nat$.  For once we have established $P(0)$, we have thereby
 established that $P$ holds for all numbers less than~$1$.  And if we
-know that if $P(l)$ for all $l<n$ then $P(n)$, we know this in
-particular for $n=1$.  So we can conclude $P(2)$.  With this we have
-proved $P(0)$, $P(1)$, $P(2)$, i.e., $P(l)$ for all $l<3$, and since
-we have also the conditional, if $P(l)$ for all $l<3$, then $P(3)$, we
-can conclude~$P(3)$, and so on.
+know that if $P(l)$ for all $l<k$, then $P(k)$, we know this in
+particular for $k=1$.  So we can conclude $P(1)$.  With this we have
+proved $P(0)$ and $P(1)$, i.e., $P(l)$ for all $l<2$, and since
+we have also the conditional, if $P(l)$ for all $l<2$, then $P(2)$, we
+can conclude~$P(2)$, and so on.
 
-In fact, if we can establish the general conditional ``for all $n$, if
-$P(l)$ for all $l<n$, then $P(n)$,'' we do not have to establish
+In fact, if we can establish the general conditional ``for all $k$, if
+$P(l)$ for all $l<k$, then $P(k)$,'' we do not have to establish
 $P(0)$ anymore, since it follows from it.  For remember that a general
-claim like ``for all $l<n$, $P(l)$'' is true if there are no $l<n$.
+claim like ``for all $l<k$, $P(l)$'' is true if there are no $l<k$.
 This is a case of vacuous quantification: ``all $A$s are $B$s'' is
 true if there are no $A$s, $\lforall[x][(!A(x) \lif !B(x))]$ is true
 if no $x$ satisfies~$!A(x)$. In this case, the formalized version
-would be ``$\lforall[l][(l < n \lif P(l))]$''---and that is true if
-there are no $l < n$.  And if $n=0$ that's exactly the case: no $l<0$,
+would be ``$\lforall[l][(l < k \lif P(l))]$''---and that is true if
+there are no $l < k$.  And if $k=0$ that's exactly the case: no $l<0$,
 hence ``for all $l<0$, $P(0)$'' is true, whatever $P$ is.  A proof of
-``if $P(l)$ for all $l<n$, then $P(n)$'' thus automatically
+``if $P(l)$ for all $l<k$, then $P(k)$'' thus automatically
 establishes~$P(0)$.
 
-This variant is useful if establishing the claim for~$n$ can't be made
-to just rely on the claim for $n-1$ but may require the assumption
-that it is true for one or more $l<n$.  
+This variant is useful if establishing the claim for~$k$ can't be made
+to just rely on the claim for $k-1$ but may require the assumption
+that it is true for one or more $l<k$.  
 
 \end{document}

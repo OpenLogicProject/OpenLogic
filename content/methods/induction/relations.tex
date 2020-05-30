@@ -13,18 +13,18 @@
 When we have defined a set of objects (such as the natural numbers or
 the nice terms) inductively, we can also define \emph{relations on}
 these objects by induction.  For instance, consider the following
-idea: a nice term~$t$ is a subterm of a nice term~$t'$ if it occurs as
-a part of it.  Let's use a symbol for it: $t \sqsubseteq t'$. Every
+idea: a nice term~$t_1$ is a subterm of a nice term~$t_2$ if it occurs as
+a part of it.  Let's use a symbol for it: $t_1 \sqsubseteq t_2$. Every
 nice term is a subterm of itself, of course: $t \sqsubseteq t$. We can
 give an inductive definition of this relation as follows:
 
 \begin{defn}
-  The relation of a nice term~$t$ being a subterm of~$t'$, $t
-  \sqsubseteq t'$, is defined by induction on~$s'$ as follows:
+  The relation of a nice term~$t_1$ being a subterm of~$t_2$, $t_1
+  \sqsubseteq t_2$, is defined by induction on~$t_2$ as follows:
   \begin{enumerate}
-  \item If $t'$ is a letter, then $t \sqsubseteq t'$ iff $t = t'$.
-  \item If $t'$ is $[s \circ s']$, then $t \sqsubseteq t'$ iff $t =
-    t'$, $t \sqsubseteq s$, or $t \sqsubseteq s'$.
+  \item If $t_2$ is a letter, then $t_1 \sqsubseteq t_2$ iff $t_1 = t_2$.
+  \item If $t_2$ is $[s_1 \circ s_2]$, then $t_1 \sqsubseteq t_2$ iff $t =
+    t_2$, $t_1 \sqsubseteq s_1$, or $t_1 \sqsubseteq s_2$.
   \end{enumerate}
 \end{defn}
 
@@ -34,27 +34,28 @@ $\mathrm{a} \sqsubseteq [\mathrm{b} \circ \mathrm{a}]$ iff $\mathrm{a}
 = [\mathrm{b} \circ \mathrm{a}]$, or $\mathrm{a} \sqsubseteq b$, or
 $\mathrm{a} \sqsubseteq \mathrm{a}$. The first two are false:
 $\mathrm{a}$ clearly isn't identical to $[\mathrm{b} \circ
-  \mathrm{a}]$, and by (1), $\mathrm{a} \sqsubseteq \mathrm{b}$ iff
-$\mathrm{a} = \mathrm{b}$, which is also false. However, also by (1),
+  \mathrm{a}]$, and by~(1), $\mathrm{a} \sqsubseteq \mathrm{b}$ iff
+$\mathrm{a} = \mathrm{b}$, which is also false. However, also by~(1),
 $\mathrm{a} \sqsubseteq \mathrm{a}$ iff $\mathrm{a} = \mathrm{a}$,
 which is true.
 
 It's important to note that the success of this definition depends on
 a fact that we haven't proved yet: every nice term~$t$ is either a
-letter by itself, or there are uniquely determined nice terms $s$ and
-$s'$ such that $t = [s \circ s']$.  ``Uniquely determined'' here means
-that if $t = [s \circ s']$ it isn't \emph{also} $= [r \circ r']$ with
-$s \neq r$ or $s' \neq r'$. If this were the case, then clause~(2) may
-come in conflict with itself: reading $t'$ as $[s \circ s']$ we might
-get $t \sqsubseteq t'$, but if we read $t'$ as $[r \circ r']$ we might
-get not $t \sqsubseteq t'$.  Before we prove that this can't happen,
-let's look at an example where it \emph{can} happen.
+letter by itself, or there are \emph{uniquely determined} nice terms
+$s_1$ and $s_2$ such that $t = [s_1 \circ s_2]$.  ``Uniquely
+determined'' here means that if $t = [s_1 \circ s_2]$ it isn't
+\emph{also} $= [r_1 \circ r_2]$ with $s_1 \neq r_1$ or $s_2 \neq r_2$.
+If this were the case, then clause~(2) may come in conflict with
+itself: reading $t_2$ as $[s_1 \circ s_2]$ we might get $t_1
+\sqsubseteq t_2$, but if we read $t_2$ as $[r_1 \circ r_2]$ we might
+get not $t_1 \sqsubseteq t_2$.  Before we prove that this can't
+happen, let's look at an example where it \emph{can} happen.
 
 \begin{defn}
   Define \emph{bracketless terms} inductively by
   \begin{enumerate}
   \item Every letter is a bracketles term.
-    \item If $s$ and $s'$ are bracketless terms, then $s \circ s'$ is
+    \item If $s_1$ and $s_2$ are bracketless terms, then $s_1 \circ s_2$ is
       a bracketless term.
     \item Nothing else is a bracketless term.
   \end{enumerate}
@@ -65,17 +66,20 @@ Bracketless terms are, e.g., $\mathrm{a}$, $\mathrm{b} \circ
 defined ``subterm'' for bracketless terms the way we did above, the
 second clause would read
 \begin{center}
-  If $t' = s \circ s'$, then $t \sqsubseteq t'$ iff $t = t'$, $t
-  \sqsubseteq s$, or $t \sqsubseteq s'$.
+  If $t_2 = s_1 \circ s_2$, then $t_1 \sqsubseteq t_2$ iff $t_1 = t_2$, $t_1
+  \sqsubseteq s_1$, or $t_1 \sqsubseteq s_2$.
 \end{center}
 
-Now $\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$ is of the form $s
-\circ s'$ with $s = \mathrm{b}$ and $s' = \mathrm{a} \circ
-\mathrm{b}$. It is also of the form $r \circ r'$ with $r = \mathrm{b}
-\circ \mathrm{a}$ and $r' = \mathrm{b}$.  Now is $\mathrm{a} \circ
-\mathrm{b}$ a subterm of $\mathrm{b} \circ \mathrm{a} \circ
-\mathrm{b}$?  The answer is yes if we go by the first reading, and no
-if we go by the second.
+Now $\mathrm{b} \circ \mathrm{a} \circ \mathrm{b}$ is of the form $s_1
+\circ s_2$ with 
+\begin{align*}
+  s_1 & = \mathrm{b} \text{ and} & s_2 & = \mathrm{a} \circ \mathrm{b}.
+\intertext{It is also of the form $r_1 \circ r_2$ with}
+  r_1 & = \mathrm{b} \circ \mathrm{a} \text{ and} & r_2 &= \mathrm{b}.
+\end{align*}
+Now is $\mathrm{a} \circ \mathrm{b}$ a subterm of $\mathrm{b} \circ
+\mathrm{a} \circ \mathrm{b}$?  The answer is yes if we go by the first
+reading, and no if we go by the second.
 
 The property that the way a nice term is built up from other nice
 terms is unique is called \emph{unique readability}. Since inductive
@@ -84,23 +88,23 @@ important, we have to prove that it holds.
 
 \begin{prop}
   Suppose $t$ is a nice term. Then either $t$ is a letter by itself,
-  or there are uniquely determined nice terms $s$, $s'$ such that~$t =
-  [s \circ s']$.
+  or there are uniquely determined nice terms $s_1$, $s_2$ such that~$t =
+  [s_1 \circ s_2]$.
 \end{prop}
 
 \begin{proof}
-  If $t$ is a letter by itself, the condition issatisfied. So assume
+  If $t$ is a letter by itself, the condition is satisfied. So assume
   $t$ isn't a letter by itself. We can tell from the inductive
-  definition that then $t$ must be of the form $[s \circ s']$ for some
-  nice terms $s$ and~$s'$. It remains to show that these are uniquely
-  determined, i.e., if $t = [r \circ r']$, then $s = r$ and $s' = r'$.
+  definition that then $t$ must be of the form $[s_1 \circ s_2]$ for some
+  nice terms $s_1$ and~$s_2$. It remains to show that these are uniquely
+  determined, i.e., if $t = [r_1 \circ r_2]$, then $s_1 = r_1$ and $s_2 = r_2$.
 
-  So suppose $t = [s \circ s']$ and $t = [r \circ r']$ for nice terms
-  $s$, $s'$, $r$, $r'$. We have to show that $s = r$ and $s' = r'$.
-  First, $s$ and $r$ must be identical, for otherwise one is a proper
+  So suppose $t = [s_1 \circ s_2]$ and also $t = [r_1 \circ r_2]$ for nice terms
+  $s_1$, $s_2$, $r_1$, $r_2$. We have to show that $s_1 = r_1$ and $s_2 = r_2$.
+  First, $s_1$ and $r_1$ must be identical, for otherwise one is a proper
   initial segment of the other. But by \olref[sti]{prop:initial}, that
-  is impossible if $s$ and~$r$ are both nice terms.  But if $s = r$,
-  then clearly also $s' = r'$.
+  is impossible if $s_1$ and~$r_1$ are both nice terms.  But if $s_1 = r_1$,
+  then clearly also $s_2 = r_2$.
 \end{proof}
 
 We can also define functions inductively: e.g., we can define the
@@ -110,43 +114,53 @@ $[\dots]$ in it as follows:
 \begin{defn}
   \ollabel{defn:depth} The \emph{depth} of a nice term, $f(t)$, is
   defined inductively as follows:
-\begin{align*}
-  f(s) & = 0 \text{ if $s$ is a letter}\\
-  f([s \circ s'] & = \max(f(s), f(s')) + 1
-\end{align*}
+  \[
+  f(t) = \begin{cases}
+    0 & \text{ if $t$ is a letter}\\
+    \max(f(s), f(s')) + 1 & \text{ if $t = [s_1 \circ s_2]$.}
+  \end{cases}
+  \]
 \end{defn}
 
 For instance
 \begin{align*}
   f([\mathrm{a} \circ \mathrm{b}]) & = 
-\max(f(\mathrm{a}),f(\mathrm{b})) + 1 = \\ &= \max(0, 0) + 1 = 1, \text{ and}\\
-f([[\mathrm{a} \circ \mathrm{b}] \circ \mathrm{c}]) & = 
-\max(f([\mathrm{a} \circ \mathrm{b}]), f(\mathrm{c})) + 1 = \\ &
-= \max(1,0) +
-1 = 2.
+    \max(f(\mathrm{a}),f(\mathrm{b})) + 1 = \\ 
+  &= \max(0, 0) + 1 = 1, \text{ and}\\
+  f([[\mathrm{a} \circ \mathrm{b}] \circ \mathrm{c}]) & = 
+    \max(f([\mathrm{a} \circ \mathrm{b}]), f(\mathrm{c})) + 1 = \\ 
+  & = \max(1,0) + 1 = 2.
 \end{align*}
 
-Here, of course, we assume that $s$ an $s'$ are nice terms, and make
+Here, of course, we assume that $s_1$ an $s_2$ are nice terms, and make
 use of the fact that every nice term is either a letter or of the form
-$[s \circ s']$. It is again important that it can be of this form in
+$[s_1 \circ s_2]$. It is again important that it can be of this form in
 only one way. To see why, consider again the bracketless terms we
 defined earlier. The corresponding ``definition'' would be:
-\begin{align*}
-  g(s) & = 0 \text{ if $s$ is a letter}\\
-  g(s \circ s') & = \max(g(s), g(s')) + 1
-\end{align*}
+\[
+  g(t) = 
+  \begin{cases}
+    0 & \text{ if $t$ is a letter}\\
+   \max(g(s), g(s')) + 1 & \text{ if $t = [s_1 \circ s_2]$.}
+  \end{cases}
+\]
 Now consider the bracketless term $\mathrm{a} \circ \mathrm{b} \circ
 \mathrm{c} \circ \mathrm{d}$. It can be read in more than one way,
-e.g., as $s \circ s'$ with $s = \mathrm{a}$ and $s' = \mathrm{b} \circ
-\mathrm{c} \circ \mathrm{d}$, or as $r \circ r'$ with $r = \mathrm{a}
-\circ b$ and $r' = \mathrm{c} \circ \mathrm{d}$. Calculating $g$
-according to the first way of reading it would give
+e.g., as $s_1 \circ s_2$ with 
 \begin{align*}
-  g(s \circ s') & =
+  s_1 & = \mathrm{a} \text{ and} & 
+  s_2 & = \mathrm{b} \circ \mathrm{c} \circ \mathrm{d},
+\intertext{or as $r_1 \circ r_2$ with}
+  r_1 & = \mathrm{a} \circ b \text{ and} & 
+  r_2 &= \mathrm{c} \circ \mathrm{d}.
+\end{align*}
+Calculating $g$ according to the first way of reading it would give
+\begin{align*}
+  g(s_1 \circ s_2) & =
   \max(g(\mathrm{a}), g(\mathrm{b} \circ \mathrm{c} \circ \mathrm{d})) + 1 =\\ & =
   \max(0,2) + 1 = 3
   \intertext{while according to the other reading we get}
-  g(r \circ r') & =
+  g(r_1 \circ r_2) & =
   \max(g(\mathrm{a} \circ \mathrm{b}), g(\mathrm{c} \circ \mathrm{d})) + 1=\\ &
   = \max(1,1) + 1 = 2
 \end{align*}
@@ -159,7 +173,7 @@ of~$g$ doesn't define a function at all.
 \end{prob}
 
 \begin{prob}
-  Prove by induction on nice terms $t$ that $f(t) < l(t)$ (where
+  Prove by structural induction on nice terms $t$ that $f(t) < l(t)$ (where
   $l(t)$ is the number of symbols in~$t$ and $f(t)$ is the depth of
   $t$ as defined in \olref[mth][ind][rel]{defn:depth}).
 \end{prob}

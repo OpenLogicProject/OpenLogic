@@ -16,13 +16,13 @@ results about all !!{element}s of an inductively defined set.  This
 often called \emph{structural} induction, because it depends on the
 structure of the inductively defined objects.
 
-Generally, an inductive definition is given by (a) a list of
-``initial'' !!{element}s of the set and (b) a list of operations which
+Generally, an inductive definition is given by (a)~a list of
+``initial'' !!{element}s of the set and (b)~a list of operations which
 produce new !!{element}s of the set from old ones. In the case of nice
 terms, for instance, the initial objects are the letters. We only have
 one operation: the operations are
 \begin{align*}
-  o(s, s') = & [s \circ s']
+  o(s_1, s_2) = & [s_1 \circ s_2]
 \end{align*}
 You can even think of the natural numbers~$\Nat$ themselves as being
 given be an inductive definition: the initial object is~$0$, and the
@@ -38,7 +38,8 @@ property~$P$, we must:
 \end{enumerate}
 For instance, in order to prove something about all nice terms, we
 would prove that it is true about all letters, and that it is true
-about $[s \circ s']$ provided it is true of $s$ and $s'$ individually.
+about $[s_1 \circ s_2]$ provided it is true of $s_1$ and $s_2$
+individually.
 
 \begin{prop}
   The number of $[$ equals the number of $]$ in any nice term~$t$.
@@ -51,23 +52,22 @@ nice terms out of old ones.
 \begin{enumerate}
 \item The claim is true for every letter, since the number of $[$ in a
   letter by itself is~$0$ and the number of $]$ in it is also~$0$.
-\item Suppose the number of $[$ in $s$ equals the number of $]$, and
-  the same is true for $s'$. The number of $[$ in $o(s, s')$, i.e., in
-    $[s \circ s']$, is the sum of the number of $[$ in $s$ and
-      $s'$. The number of $]$ in $o(s, s')$ is the sum of the number
-    of $]$ in $s$ and $s'$. Thus, the number of $[$ in $o(s, s')$
-    equals the number of $]$ in $o(s,s')$.
+\item Suppose the number of $[$ in $s_1$ equals the number of $]$, and
+  the same is true for $s_2$. The number of $[$ in $o(s_1, s_2)$, i.e., in
+    $[s_1 \circ s_2]$, is the sum of the number of $[$ in $s_1$ and
+      $s_2$. The number of $]$ in $o(s_1, s_2)$ is the sum of the number
+    of $]$ in $s_1$ and $s_2$. Thus, the number of $[$ in $o(s_1, s_2)$
+    equals the number of $]$ in $o(s_1,s_2)$.
 \end{enumerate}
 \end{proof}
 
-  
 \begin{prob}
   Prove by structural induction that no nice term starts with~$]$.
 \end{prob}
 
 Let's give another proof by structural induction: a proper initial
-segment of a string of symbols~$t$ is any string~$t'$ that agrees with
-$t$ symbol by symbol, read from the left, but $t'$ is longer. So,
+segment of a string~$t$ of symbols is any string~$s$ that agrees with
+$t$ symbol by symbol, read from the left, but $t$ is longer. So,
 e.g., $[a \circ {}$ is a proper initial segment of $[a \circ b]$, but
 neither are $[b \circ {}$ (they disagree at the second symbol) nor $[a
 \circ b]$ (they are the same length).
@@ -81,25 +81,25 @@ neither are $[b \circ {}$ (they disagree at the second symbol) nor $[a
   By induction on~$t$:
   \begin{enumerate}
   \item $t$ is a letter by itself: Then $t$ has no proper initial segments.
-  \item $t = [s \circ s']$ for some nice terms $s$ and $s'$. If $r$ is
+  \item $t = [s_1 \circ s_2]$ for some nice terms $s_1$ and~$s_2$. If $r$ is
     a proper initial segment of $t$, there are a number of
     possibilities:
     \begin{enumerate}
     \item $r$ is just $[$: Then $r$ has one more $[$ than it does~$]$.
-    \item $r$ is $[r'$ where $r'$ is a proper initial segment
-      of~$s$: Since $s$ is a nice term, by induction hypothesis, $r'$
-      has more $[$ than $]$ and the same is true for $[r'$.
-    \item $r$ is $[s$ or $[s \circ {}$: By the previous result, the
-      number of $[$ and $]$ in~$s$ is equal; so the number of $[$
-      in $[s$ or $[s \circ {}$ is one more than the number of~$]$.
-    \item $r$ is $[s \circ r'$ where $r'$ is a proper initial segment
-      of~$s'$:  By induction hypothesis, $r'$ contains more $[$ than
+    \item $r$ is $[r_1$ where $r_1$ is a proper initial segment
+      of~$s_1$: Since $s_1$ is a nice term, by induction hypothesis, $r_1$
+      has more $[$ than $]$ and the same is true for $[r_1$.
+    \item $r$ is $[s_1$ or $[s_1 \circ {}$: By the previous result, the
+      number of $[$ and $]$ in~$s_1$ are equal; so the number of $[$
+      in $[s_1$ or $[s_1 \circ {}$ is one more than the number of~$]$.
+    \item $r$ is $[s_1 \circ r_2$ where $r_2$ is a proper initial segment
+      of~$s_2$:  By induction hypothesis, $r_2$ contains more $[$ than
       $]$. By the previous result, the number of $[$ and of
-      $]$ in~$s$ is equal. So the number of $[$ in $[s \circ r'$
-      is greater than the number of $]$.
-    \item $r$ is $[s \circ s'$: By the previous result, the number of
-      $[$ and $]$ in $s$ is equal, and the same for~$s'$. So there
-      is one more $[$ in $[s \circ s'$ than there are~$]$.
+      $]$ in~$s_1$ are equal. So the number of $[$ in $[s_1 \circ r_2$
+      is greater than the number of~$]$.
+    \item $r$ is $[s_1 \circ s_2$: By the previous result, the number of
+      $[$ and $]$ in $s_1$ are equal, and the same for~$s_2$. So there
+      is one more $[$ in $[s_1 \circ s_2$ than there are~$]$.
     \end{enumerate}
   \end{enumerate}
 \end{proof}

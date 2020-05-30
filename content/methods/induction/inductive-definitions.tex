@@ -43,8 +43,8 @@ to \emph{define} the set of nice terms.  This is an \emph{inductive
   \begin{enumerate}
   \item Any letter $\mathrm{a}$, $\mathrm{b}$, $\mathrm{c}$,
     $\mathrm{d}$ is a nice term.
-  \item If $s$ and $s'$ are nice terms, then so
-    is $[s \circ s']$.
+  \item If $s_1$ and $s_2$ are nice terms, then so
+    is $[s_1 \circ s_2]$.
   \item Nothing else is a nice term.
   \end{enumerate}
 \end{defn}
@@ -82,8 +82,8 @@ The key feature of inductive definitions is that if you want to prove
 something about all nice terms, the definition tells you which cases
 you must consider.  For instance, if you are told that $t$ is a nice
 term, the inductive definition tells you what $t$ can look like: $t$
-can be a letter, or it can be $[r \circ s]$ for some other pair of
-nice terms $r$ and~$s$. Because of clause (3), those are the only
+can be a letter, or it can be $[s_1 \circ s_2]$ for some pair of
+nice terms $s_1$ and~$s_2$. Because of clause (3), those are the only
 possibilities.
 
 When proving claims about all of an inductively defined set, the
@@ -102,37 +102,37 @@ length~$n$ is $< n/2$.
 To prove this result by (strong) induction, we have to show that the
 following conditional claim is true:
 \begin{quote}
-  If for every $k < n$, any nice term of length $k$ has $k/2$
-  $[$'s, then any nice term of length~$n$ has $n/2$ $[$'s.
+  If for every $l < k$, any nice term of length~$l$ has $l/2$
+  $[$'s, then any nice term of length~$k$ has $k/2$ $[$'s.
 \end{quote}
 To show this conditional, assume that its antecedent is true, i.e.,
-assume that for any $k<n$, nice terms of length $k$ contain $< k/2$
+assume that for any $l<k$, nice terms of length~$l$ contain $< l/2$
 $[$'s.  We call this assumption the inductive hypothesis. We want to
-show the same is true for nice terms of length~$n$.
+show the same is true for nice terms of length~$k$.
 
-So suppose $t$ is a nice term of length~$n$.  Because nice terms are
+So suppose $t$ is a nice term of length~$k$.  Because nice terms are
 inductively defined, we have two cases: (1)~$t$ is a letter by
-itself, or (2)~$t$ is $[r \circ s]$ for some nice terms $r$ and~$s$.
+itself, or (2)~$t$ is $[s_1 \circ s_2]$ for some nice terms $s_1$ and~$s_2$.
 \begin{enumerate}
-\item $t$ is a letter.  Then $n = 1$, and the number of $[$ in $t$ is
-  $0$. Since $0 < 1/2$, the claim holds.
-\item $t$ is $[r \circ s]$ for some nice terms $r$ and~$s$.  Let's
-  let $k$ be the length of~$r$ and $l$ be the length of~$s$.  Then
-  the length~$n$ of $t$ is $k+l+3$ (the lengths of $r$ and $s$ plus
-  three symbols $[$, $\circ$, $]$). Since $k+l+3$ is always greater
-  than $k$, $k < n$. Similarly, $l < n$. That means that the
-  induction hypothesis applies to the terms $r$ and~$s$: the
-  number~$m$ of $[$ in $r$ is $< k/2$, and the number~$o$ of $[$ in~$s$ is
-  $< k'/2$.
+\item $t$ is a letter.  Then $k = 1$, and the number of $[$ in $t$
+is~$0$. Since $0 < 1/2$, the claim holds.
+\item $t$ is $[s_1 \circ s_2]$ for some nice terms $s_1$ and~$s_2$.
+  Let's let $l_1$ be the length of~$s_1$ and $l_2$ be the length
+  of~$s_2$.  Then the length~$k$ of $t$ is $l_1+l_2+3$ (the lengths of
+  $s_1$ and $s_2$ plus three symbols $[$, $\circ$, $]$). Since
+  $l_1+l_2+3$ is always greater than $l_1$, $l_1 < k$. Similarly, $l_2
+  < n$. That means that the induction hypothesis applies to the terms
+  $s_1$ and~$s_2$: the number~$m_1$ of $[$ in $s_1$ is $< l_1/2$, and
+  the number~$m_2$ of $[$ in~$s_2$ is $< l_2/2$.
 
-  The number of $[$ in $t$ is the number of $[$ in $r$, plus the
-  number of $[$ in $s$, plus~$1$, i.e., it is $m + o + 1$. Since $m
-  < k/2$ and $o < l/2$ we have:
+  The number of $[$ in $t$ is the number of $[$ in~$s_1$, plus the
+  number of $[$ in~$s_2$, plus~$1$, i.e., it is $m_1 + m_2 + 1$. Since $m_1
+  < l_1/2$ and $m_2 < l_2/2$ we have:
   \[
-  m + o + 1 < \frac{k}{2} + \frac{l}{2} + 1 = \frac{k+l+2}{2} < \frac{k+l+3}{2} = n/2.
+  m_1 + m_2 + 1 < \frac{l_1}{2} + \frac{l_2}{2} + 1 = \frac{l_1+l_2+2}{2} < \frac{l_1+l-2+3}{2} = k/2.
   \]
 \end{enumerate}
-In each case, we've shown that the number of $[$ in $t$ is $< n/2$ (on
+In each case, we've shown that the number of $[$ in $t$ is $< k/2$ (on
 the basis of the inductive hypothesis). By strong induction, the
 proposition follows.
 \end{proof}
@@ -143,11 +143,11 @@ proposition follows.
   \item Any letter $\mathrm{a}$, $\mathrm{b}$, $\mathrm{c}$,
     $\mathrm{d}$ is a supernice term.
   \item If $s$ is a supernice term, then so is $[s]$.
-  \item If $t$ and $s$ are supernice terms, then so
-    is $[t \circ s]$.
+  \item If $s_1$ and $s_2$ are supernice terms, then so
+    is $[s_1 \circ s_2]$.
   \item Nothing else is a supernice term.
   \end{enumerate}
-  Show that the number of $[$ in a supernice term~$s$ of length~$n$ is
+  Show that the number of $[$ in a supernice term~$t$ of length~$n$ is
     $\le n/2 +1$.
 \end{prob}
 
