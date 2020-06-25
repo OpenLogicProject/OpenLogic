@@ -120,7 +120,7 @@ First, we consider the possible inferences with only one premise.
   \Sequent \Xi$ is also valid.  Let \iftag{FOL}{$\Struct{M}$ be
     !!a{structure}}{$\pAssign{v}$ be !!a{valuation}}. If (a) holds,
   then there is $!C \in \Gamma$ so that
-  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$, but $!A \in \Theta$ as
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$, but $!C \in \Theta$ as
   well. If (b) holds, there is $!C \in \Delta$ such that
   $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$, but $!C \in \Xi$ as
   well. Finally, if $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$, then
@@ -184,7 +184,7 @@ First, we consider the possible inferences with only one premise.
 \item The last inference is \RightR{\lif}: Then $\pi$ ends in
   \begin{prooftree}
     \AxiomC{}
-    \Deduce$!A, \Gamma \fCenter \Delta, !A$
+    \Deduce$!A, \Gamma \fCenter \Delta, !B$
     \RightLabel{\RightR{\lif}}
     \UnaryInf$\Gamma \fCenter \Delta, !A \lif !B$
   \end{prooftree}
@@ -195,7 +195,7 @@ First, we consider the possible inferences with only one premise.
   cases obtains: (a) $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$, (b)
   $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$, (c)
   $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ for some~$~!C \in \Gamma$, or
-  (c) $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ for some $!C \in \Delta$.
+  (d) $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ for some $!C \in \Delta$.
   In cases (a) and (b), $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$
   and so there is a $!C \in \Delta, !A \lif !B$ such that
   $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.  In case (c), for some $!C \in
@@ -318,10 +318,10 @@ Now let's consider the possible inferences with two premises.
   Again, consider
   \iftag{FOL}{!!a{structure}~$\Struct{M}$}{!!a{valuation}~$\pAssign{v}$}
   and suppose \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} doesn't satisfy
-  $\Gamma, \Pi \Sequent \Lambda, \Pi$. We have to show that
+  $\Gamma, \Pi \Sequent \Delta, \Lambda$. We have to show that
   $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A \lif !B}$. If
   \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} doesn't satisfy $\Gamma,
-  \Pi \Sequent \Lambda, \Pi$, it satisfies neither $\Gamma \Sequent
+  \Pi \Sequent \Delta, \Lambda$, it satisfies neither $\Gamma \Sequent
   \Delta$ nor $\Pi \Sequent \Lambda$. Since, $\Gamma \Sequent \Delta,
   !A$ is valid, we have $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. Since
   $!B, \Pi \Sequent \Lambda$ is valid, we have
