@@ -1,0 +1,76 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: matrixes
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{mat}
+
+\olsection{Matrixes}
+
+A many-valued logic is defined by its language, its set of truth
+values~$V$, a subset of designated truth values, and truth functions
+for its connective.  Together, these elements are called a \emph{matrix}.  
+
+\begin{defn}[Matrix]
+\ollabel{defn:matrix}
+A \emph{matrix} for the logic~$\Log L$ consists of:
+\begin{enumerate}
+\item a set of connectives making up a language~$\Lang L$;
+\item a set $V \neq \emptyset$ of truth values;
+\item a set $V^+ \subseteq V$ of designated truth values;
+\item for each $n$-place connective $\star$ in $\Lang L$, a truth
+function~$\tf{\star} : V^n \to V$. If $n = 0$, then $\tf{\star}$ is
+just an element of~$V$.
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+The matrix for classical logic~\LogCL{} consists of:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lfalse$, $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V = \{\True, \False\}$.
+  \item $\True$ is the only designated value, i.e., $V^+ = \{\True\}$.
+  \item For $\lfalse$, we have $\tf{\lfalse} = \False$. The other
+  truth functions are given by the usual truth tables (see
+  \olref{fig:tf-CL}).
+\end{enumerate}
+\begin{figure}
+  \begin{center}
+      \begin{tabular}{c|c} 
+        $\tf{\lnot}$ & \\ 
+        \hline  
+        $\True$ & $\False$ \\ 
+        $\False$ & $\True$ 
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|cc} 
+        $\tf{\land}$ & $\True$ & $\False$ \\ 
+        \hline 
+        $\True$ & $\True$ & $\False$ \\ 
+        $\False$ & $\False$ & $\False$ 
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|cc} 
+        $\tf{\lor}$ & $\True$ & $\False$ \\ 
+        \hline 
+        $\True$ & $\True$ & $\True$ \\ 
+        $\False$ & $\True$ & $\False$ 
+      \end{tabular}
+      \quad
+      \begin{tabular}{c|cc} 
+        $\tf{\lif}$ & $\True$ & $\False$ \\ 
+        \hline 
+        $\True$ & $\True$ & $\False$ \\ 
+        $\False$ & $\True$ & $\True$ 
+      \end{tabular}
+    \end{center} 
+    \caption{Truth functions for classical logic~$\LogCL$.}
+    \ollabel{fig:tf-CL}
+  \end{figure}
+  \end{ex}
+
+\end{document}

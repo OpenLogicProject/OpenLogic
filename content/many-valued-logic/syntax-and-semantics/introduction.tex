@@ -1,0 +1,63 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{int}
+
+\olsection{Introduction}
+
+In classical logic, we deal  with !!{formula}s that are built from
+!!{propositional variable}s using the propositional connectives
+$\lnot$, $\land$, $\lor$, $\lif$, and $\liff$.  When we define a
+semantics for classical logic, we do so using the two truth values
+$\True$ and $\False$.  We interpret !!{propositional variable}s in
+!!a{valuation}~$\pAssign{v}$, which assigns these truth values
+$\True$, $\False$ to the !!{propositional variable}s. Any
+!!{valuation} then determines a truth value $\pValue{v}(!A)$ for any
+!!{formula}~$!A$, and !!^a{formula} is satisfied in
+!!a{valuation}~$\pAssign{v}$, $\pSat{v}{!A}$, iff $\pValue{v}(!A) =
+\True$.
+
+Many-valued logics are generalizations of classical two-valued logic
+by allowing more truth values than just $\True$ and $\False$. So in
+many-valued logic, !!a{valuation}~$\pAssign{v}$ is a function
+assigning to every !!{propositional variable}~$p$ one of a range of
+possible truth values.  We'll generally call the set of allowed truth
+values~$V$.  Classical logic is a many-valued logic where $V =
+\{\True, \False\}$, and the truth value~$\pValue{v}(!A)$ is computed
+using the familiar characteristic truth tables for the connectives.
+
+Once we add additional truth values, we have more than one natural
+option for how to compute~$\pValue{v}(!A)$ for the connectives we read
+as ``and,'' ``or,'' ``not,'' and ``if---then.''  So a many-valued
+logic is determined not just by the set of truth values, but also by
+the \emph{truth functions} we decide to use for each connective.  Once
+these are selected for a many-valued logic~$\Log L$, however, the
+truth value $\pValue{v}(!A)[\Log L]$ is uniquely determined by the
+valuation, just like in classical logic. Many-valued logics, like
+classical logic, are \emph{truth functional}.
+
+With this semantic building blocks in hand, we can go on to define the
+analogs of the semantic concepts of tautology, entailment, and
+satisfiability.  In classical logic, !!a{formula} is a tautology if
+its truth value $\pValue{v}(!A) = \True$ for any~$\pAssign{v}$.  In
+many-valued logic, we have to generalize this a bit as well. First of
+all, there is no requirement that the set of truth values~$V$
+contains~$\True$. For instance, some many-valued logics use numbers,
+such as all rational numbers between $0$ and~$1$ as their set of truth
+values.  In such a case, $1$~usually plays the rule of~$\True$. In
+other logics, not just one but several truth values do.  So, we
+require that every many-valued logic have a set~$V^+$ of
+\emph{designated values}.  We can then say that !!a{formula} is
+satisfied in !!a{valuation}~$\pAssign{v}$, $\pSat{v}{!A}[\Log L]$, iff
+$\pValue{v}(!A)[\Log L] \in V^+$. !!^a{formula}~$!A$ is a tautology of the
+logic, $\Entails[\Log L] !A$, iff $\pValue{v}(!A) \in V^+$ for
+any~$\pAssign{v}$. And, finally, we say that $!A$ is entailed by a set
+of !!{formula}s, $\Gamma \Entails[\Log L] !A$, if every !!{valuation} that
+satisfies all the !!{formula}s in~$\Gamma$ also satisfies~$!A$.
+
+\end{document}

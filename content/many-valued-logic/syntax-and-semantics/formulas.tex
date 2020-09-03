@@ -1,0 +1,43 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{fml}
+
+\olsection{\usetoken{P}{formula}}
+
+\begin{defn}[Formula]
+\ollabel{defn:formulas}
+The set~$\Frm[L]$ of \emph{!!{formula}s} of a propositional
+language~$\Lang L$ is defined inductively as follows:
+\begin{enumerate}
+\item Every !!{propositional variable}~$\Obj p_i$ is an atomic
+  !!{formula}.
+\item Every $0$-place connective (propositional constant) of~$\Lang L$
+is an atomic !!{formula}.
+\item If $\star$ is an $n$-place connective of~$\Lang L$, and $!A_1$,
+\dots, $!A_n$ are !!{formula}s, then $\star(!A_1, \dots, !A_n)$ is
+  !!a{formula}.
+\tagitem{limitClause}{Nothing else is !!a{formula}.}{}
+\end{enumerate}
+If $\star$ is $1$-place, then $\star(!A_1)$ will often be written
+simply as $\star !A_1$. If $\star$ is $2$-place $\star(!A_1,!A_2)$
+will often be written as $(!A_1 \star !A_2)$. 
+\end{defn}
+
+As usual, we will often silently leave out the outermost parentheses.
+
+\begin{ex}
+  In the standard language~$\Lang{L_0}$, $\Obj p_1 \lif (\Obj p_1
+  \land \lnot \Obj p_2)$ is a formula. In the language of product
+  logic, it would be written instead as $\Obj p_1 \lif (\Obj p_1 \odot
+  \lnot \Obj p_2)$.  If we add the $1$-place $\triangle$ to the
+  language, we would also have formulas such as $\triangle (\Obj p_1
+  \land \Obj p_2) \lif (\triangle \Obj p_1 \land \triangle \Obj p_2)$.
+\end{ex}
+
+\end{document}

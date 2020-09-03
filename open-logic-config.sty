@@ -411,25 +411,31 @@
 
 \DeclareDocumentCommand \pAssign { m } {\applytofirst{\mathfrak}{#1}}
 
-% - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
+% - `\pValue{v}(A)[L]` - Truth value of a formula under a truth-value assignment.
 
-\DeclareDocumentCommand \pValue { m d() }{
-\IfNoValueTF {#2} {
-  \overline{\pAssign{#1}}}{
-  \overline{\pAssign{#1}}(#2)
-  }
+\DeclareDocumentCommand \pValue { m d() o}{
+  \overline{\pAssign{#1}}%
+  \IfNoValueTF{#3}{}{_{#3}}%
+  \IfNoValueTF {#2}{}{(#2)}
 }
 
-% - `\pSat[/]{v}{!A}`, the relation of being satisfied by a
-% truth-value assignment
+% - `\pSat[/]{v}{!A}[L]`, the relation of being satisfied by a
+% truth-value assignment in a logic L.
 
-\DeclareDocumentCommand \pSat { t{/} m m } {
-  \IfBooleanTF{#1}{
-    % negated
-        \pAssign{#2} \nvDash #3}{
-    % not negated
-        \pAssign{#2} \vDash #3}
+\DeclareDocumentCommand \pSat { t{/} m m o } {
+  \pAssign{#2} 
+      \IfBooleanTF{#1}{\nvDash}{\vDash}%
+      \IfNoValueTF{#4}{}{_{#4}}
+  #3
 }
+
+% - `\tf{\star}[L]`: truth function for $\star$ in $\Log L$
+
+\DeclareDocumentCommand \tf { m o } {
+      \widetilde{#1}%
+      \IfNoValueTF{#2}{}{_{#2}}
+}
+
 
 % - `\substruct`: symbol for the substructure relation
 
@@ -999,6 +1005,14 @@
 % - `\Log{L}` - Logics; default: set entirely in boldface
 
 \DeclareDocumentCommand \Log { m }{\ensuremath{\mathbf{#1}}}
+
+% - Some logics
+
+\DeclareDocumentMacro {\LogCL} {\Log{C}}
+\DeclareDocumentMacro {\LogIL} {\Log{I}}
+\DeclareDocumentMacro {\LogLuk} {\Log{\L}}
+\DeclareDocumentMacro {\LogGod} {\Log{G}}
+\DeclareDocumentMacro {\LogSK} {\Log{Kl}}
 
 % - `\Obj` - Object-language symbols; default: set entirely in
 % sans-serif italics

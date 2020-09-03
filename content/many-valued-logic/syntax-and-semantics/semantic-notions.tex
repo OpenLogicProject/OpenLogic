@@ -1,0 +1,70 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{sem}
+
+\olsection{Semantic Notions}
+
+Suppose a many-valued logic $\Log L$ is given by a matrix.  Then we
+can define the usual semantic notions for~$\Log L$.
+
+\begin{defn} 
+\begin{enumerate}
+\item !!^a{formula} $!A$ is \emph{satisfiable} if for
+  some~$\pAssign{v}$, $\pSat{v}{!A}$; it is
+  \emph{unsatisfiable} if for no $\pAssign{v}$, $\pSat{v}{!A}$;
+\item !!^a{formula} $!A$ is a \emph{tautology} if $\pSat{v}{!A}$ for
+  all !!{valuation}s~$v$;
+\item If $\Gamma$ is a set of !!{formula}s, $\Gamma \Entails !A$ (``$\Gamma$
+  entails $!A$'') if and only if $\pSat{v}{!A}$ for every
+  !!{valuation}~$\pAssign{v}$ for which $\pSat{v}{\Gamma}$.
+\item If $\Gamma$ is a set of !!{formula}s, $\Gamma$ is
+  \emph{satisfiable} if there is !!a{valuation}~$\pAssign{v}$ for which
+  $\pSat{v}{\Gamma}$, and $\Gamma$ is
+  \emph{unsatisfiable} otherwise.
+\end{enumerate} 
+\end{defn}
+
+We have some of the same facts for these notions as we do for
+the case of classical logic:
+
+\begin{prop}
+\ollabel{prop:semanticalfacts} 
+\begin{enumerate} 
+\item $!A$ is a tautology if and only if
+  $\emptyset \Entails !A$; 
+\item If $\Gamma$ is satisfiable then every finite subset of $\Gamma$
+  is also satisfiable; 
+\item\ollabel{def:Monotony}%
+Monotony: if $\Gamma \subseteq \Delta$
+  and $\Gamma \Entails !A$ then also $\Delta \Entails !A$;
+\item\ollabel{def:Cut}%
+Transitivity: if $\Gamma \Entails !A$ and
+  $\Delta \cup \{ !A\} \Entails !B$ then $\Gamma \cup \Delta \Entails
+  !B$;
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[mvl][syn][sem]{prop:semanticalfacts}
+\end{prob}
+
+In classical logic we can connect entailment and the conditional. For
+instance, we have the validity of \emph{modus ponens}: If $\Gamma
+\Entails !A$ and $\Gamma \Entails !A \lif !B$ then $\Gamma \Entails
+!B$.  Another important relationship between $\Entails$ and $\lif$ in
+classical logic is the semantic deduction theorem: $\Gamma \Entails !A
+\lif !B$ if and only if $\Gamma \cup \{!A\} \Entails !B$. These
+results \emph{do not} always hold in many-valued logics. Whether they
+do depends on the truth function~$\tf{\lif}$.
+
+\end{document}

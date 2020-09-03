@@ -1,0 +1,70 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: connectives
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{con}
+
+\olsection{Languages and Connectives}
+
+Classical propositional logic, and many other logics, use a set supply
+of \emph{propositional constants} and \emph{connectives}. For
+instance, we use the following as primitives:
+\begin{enumerate}
+\tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+\tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+\item The logical connectives:
+  \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+\end{enumerate}
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+In addition to the primitive connectives above, we also use symbols
+defined as abbreviations, such as
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defFalse}{\ycomma $\lfalse$ (!!{falsity})}{}%
+  \iftag{defTrue}{\ycomma $\ltrue$ (!!{truth})}.}{}
+
+The same connectives are used in many-valued logics as well. However,
+it is often useful to include different versions of, say, conjunction,
+in the same logic, and that would require different symbols to keep
+the versions separate. Some many-valued logics also include
+connectives that have no equivalent in classical logic. So, we'll be a
+bit more general than usual.
+
+\begin{defn}
+  A \emph{propositional language} consists of a set $\Lang L$ of
+  \emph{connectives}. Each connective $\star$ has an \emph{arity}; a
+  connective of arity~$n$ is said to be \emph{$n$-place.}
+  Connectives of arity~$0$ are also called \emph{constants};
+  connectives of arity~$1$ are called \emph{unary}, and connectives of
+  arity~$2$, \emph{binary}.
+\end{defn}
+
+\begin{ex}
+  The standard language of propositional logic $\Lang L_0$ consists of
+  the following connectives (with associated arities): 
+  $\lfalse$~($0$)
+  $\lnot$~($1$),
+  $\land$~($2$),
+  $\lor$~($2$),
+  $\lif$~($2$). Most logics we consider will use this language. Some
+  logics by tradition an convention use different symbols for some
+  connectives. For instance, in product logic, the conjunction symbol
+  is often $\odot$ instead of~$\land$. Sometimes it is convenient to
+  add a new operator, e.g., the determinateness operator $\triangle$
+  ($1$-place).
+\end{ex}
+
+\end{document}
