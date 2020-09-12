@@ -205,7 +205,7 @@ We prove both directions simultaneously, and by induction on $!A$.
   \indcase!{!A}{!B \lif !C}{}}{%
   \indcase{!A}{!B \lif !C}
     {$\iftag{FOL}{\Sat{M(\Gamma^*)}}{\pSat{v(\Gamma^*)}}{\indfrm}$
-    iff $\Sat/{M(\Gamma^*)}{!B}$ or $\Sat{M (\Gamma^*)}{!C}$ (by
+    iff $\iftag{FOL}{\Sat/{M(\Gamma^*)}}{\pSat/{v(\Gamma^*)}}{!B}$ or $\iftag{FOL}{\Sat{M (\Gamma^*)}}{\pSat{v(\Gamma^*)}}{!C}$ (by
     definition of satisfaction) iff $!B \notin \Gamma^*$ or $!C \in
     \Gamma^*$ (by induction hypothesis). This is the case iff $(!B
     \lif !C) \in \Gamma^*$ (by
