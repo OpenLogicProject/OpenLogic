@@ -1,0 +1,73 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{rul}
+
+\olsection{Rules and \usetoken{P}{derivation}}
+
+For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite
+sequences of !!{sentence}s.
+
+\begin{defn}[Sequent]
+An \emph{$n$-sided sequent} is an expression of the form
+\[
+\Gamma_1 \nSequent \dots \nSequent \Gamma_n
+\]
+where each $\Gamma_1$ is a finite (possibly empty) sequences of
+!!{sentence}s of the language~$\Lang L$.
+\end{defn}
+
+\begin{defn}[Initial Sequent]
+An \emph{$n$-sided initial sequent} is an $n$-sided sequent of the
+form $!A \nSequent \dots \nSequent !A$ for any !!{sentence} $!A$ in
+the language.
+
+If the language contains a $0$-place connective~$\star$, i.e., a
+propositional constant, then we also take the sequent $\dots \nSequent
+\star \nSequent \dots$ where $\star$ appears in the space for the truth
+value associated with~$\tf{\star} \in V$, and is empty otherwise. 
+\end{defn}
+
+For each each connective of an $n$-valued logic~$\Log{L}$, there is a
+logical rule for each truth value that this connective can take
+in~$\Log{L}$. !!^{derivation}s in an $n$-sided sequent calculus
+for~$\Log{L}$ are trees of sequents, where the topmost sequents are
+initial sequents, and if a sequent stands below one or more other
+sequents, it must follow correctly by a rule of inference for the
+connectives of~$\Log{L}$.
+
+\begin{defn}[Theorems]
+!!^a{sentence}~$!A$ is a \emph{theorem} of an $n$-valued
+logic~$\Log{L}$ if there is !!a{derivation}
+of the $n$-sequent containing $!A$ in each position corresponding to a
+designated truth value of~$\Log{L}$.  We write $\Proves[\Log{L}]
+!A$ if $!A$ is a theorem and $\Proves/[\Log{L}] !A$ if it is not.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+!!^a{sentence}~$!A$ is \emph{!!{derivable} from} a set of
+!!{sentence}s~$\Gamma$ in an $n$-valued logic~$\Log{L}$, $\Gamma
+\Proves[\Log{L}] !A$, iff there is a finite subset~$\Gamma_0 \subseteq
+\Gamma$ and a sequence $\Gamma_0'$ of the !!{sentence}s in~$\Gamma_0$
+such that the following sequent has  !!a{derivation}:
+\[ \Lambda_1 \nSequent \dots \nSequent \Lambda_n \] where $\Lambda_i$
+is $!A$ if position $i$ corresponds to a designated truth value, and
+$\Gamma_0'$otherwise. If $!A$ is not !!{derivable} from $\Gamma$ we
+write $\Gamma \Proves/ !A$.
+\end{defn}
+
+For instance, $3$-valued \L ukasiewicz logic has a $3$-sided sequent
+calculus. In a $3$-sided sequent $\Gamma \nSequent \Pi \nSequent
+\Delta$, $\Gamma$ corresponds to~$\False$, $\Delta$ to~$\True$, and
+$\Pi$ to~$\Undef$.  Axioms are $!A \nSequent !A \nSequent !A$. Since
+only $\True$ is designated, $\Gamma \Proves[\LogLuk[3]] !A$ iff the
+sequent $\Gamma \nSequent \Gamma \nSequent !A$ has !!a{derivation}.
+(If $\Undef$ were also designated, we would need !!a{derivation} of
+$\Gamma \nSequent !A \nSequent !A$.)
+
+\end{document}

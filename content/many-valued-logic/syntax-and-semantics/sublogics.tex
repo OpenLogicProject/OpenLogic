@@ -1,0 +1,90 @@
+% Part: many-valued-logic
+% Chapter: syntax-and-semantics
+% Section: sublogics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{syn}{sub}
+
+\olsection{Many-valued logics as sublogics of~$\LogCL$}
+
+The usual many-valued logics are all defined using matrices in which
+the value of a truth-function for arguments in $\{\True, \False\}$
+agrees with the classical truth functions. Specifically, in these
+logics, if $x \in \{\True, \False\}$, then $\tf{\lnot}[\Log L](x) =
+\tf{\lnot}[\LogCL](x)$, and for $\star$ any one of $\land$, $\lor$,
+$\lif$, if $x, y \in \{\True, \False\}$, then $\tf{\star}[\Log L](x,y) =
+\tf{\star}[\LogCL](x,y)$. In other words, the truth functions for
+$\lnot$, $\land$, $\lor$, $\lif$ restricted to $\{\True,\False\}$ are
+exactly the classical truth functions.
+
+\begin{prop}\ollabel{prop:mvl-cl}
+  Suppose that a many-valued logic~$\Log L$ contains the connectives
+  $\lnot$, $\land$, $\lor$, $\lif$ in its language, $\True, \False \in
+  V$, and its truth
+  functions satisfy:
+  \begin{enumerate}
+    \item\ollabel{prop:not} $\tf{\lnot}[\Log L](x) = \tf{\lnot}[\LogCL](x)$ if $x =
+    \True$ or $x = \False$;
+    \item\ollabel{prop:land} $\tf{\land}[\Log L](x,y) = \tf{\land}[\LogCL](x,y)$,
+    \item\ollabel{prop:lor} $\tf{\lor}[\Log L](x,y) = \tf{\lor}[\LogCL](x,y)$,
+    \item\ollabel{prop:lif} $\tf{\lif}[\Log L](x,y) = \tf{\lif}[\LogCL](x,y)$,
+    if $x, y \in \{\True, \False\}$.
+  \end{enumerate}
+  Then, for any valuation $\pAssign v$ into~$V$ such that $\pAssign
+  v(p) \in \{\True,\False\}$, $\pValue v[\Log L](!A) = \pValue
+  v[\LogCL](!A)$.
+\end{prop}
+
+\begin{proof}
+  By induction on~$!A$.
+  \begin{enumerate}
+  \item If $!A \ident p$ is atomic, we have $\pValue v[\Log L](!A) =
+  \pAssign v(p) = \pValue
+  v[\LogCL](!A)$.
+  \item If $!A \ident \lnot B$, we have
+  \begin{align*}
+    \pValue v[\Log L](!A) & = \tf{\lnot}[\Log L](\pValue v[\Log L](!B)) & &\text{by \olref[val]{defn:pValue}}\\
+    & = \tf{\lnot}[\Log L](\pValue v[\LogCL](!B)) && \text{by inductive hypothesis}\\
+    & = \tf{\lnot}[\LogCL](\pValue v[\LogCL](!B)) 
+&&\text{by assumption \olref{prop:not},}\\
+&&&\text{since $\pValue v[\LogCL](!B) \in \{\True, \False\}$,}\\
+& = \pValue v[\LogCL](!A) &&\text{by \olref[val]{defn:pValue}}.
+\end{align*}
+\item If $!A \ident (!B \land !C)$, we have
+\begin{align*}
+  \pValue v[\Log L](!A) & = \tf{\land}[\Log L](\pValue v[\Log L](!B), \pValue v[\Log L](!C)) & &\text{by \olref[val]{defn:pValue}}\\
+  & = \tf{\land}[\Log L](\pValue v[\LogCL](!B),\pValue v[\LogCL](!C)) && \text{by inductive hypothesis}\\
+  & = \tf{\land}[\LogCL](\pValue v[\LogCL](!B),\pValue v[\LogCL](!C)) 
+&&\text{by assumption \olref{prop:land},}\\
+&&&\text{since $\pValue v[\LogCL](!B),\pValue v[\LogCL](!C) \in \{\True, \False\}$,}\\
+& = \pValue v[\LogCL](!A) &&\text{by \olref[val]{defn:pValue}}.
+\end{align*}
+\end{enumerate}
+The cases where $!A \ident (!B \lor !C)$ and $!A \ident (!B \lif !C)$
+are similar.
+\end{proof}
+
+\begin{cor}
+  If a many-valued logic satisfies the conditions of
+  \olref{prop:mvl-cl}, $\True \in V^+$ and $\False \notin V^+$, then
+  ${\Entails[\Log L]} \subseteq {\Entails[\LogCL]}$, i.e., if $\Gamma
+  \Entails[\Log L] !B$ then $\Gamma \Entails[\LogCL] !B$. In
+  particular, every tautology of $\Log L$ is also a classical tautology.
+\end{cor}
+
+\begin{proof}
+  We prove the contrapositive. Suppose $\Gamma \Entails/[\LogCL] !B$.
+  Then there is some !!{valuation}~$\pAssign v\colon \PVar \to
+  \{\True, \False\}$ such that $\pValue v[\LogCL](!A) = \True$ for all
+  $!A \in \Gamma$ and $\pValue v[\LogCL](!B) = \False$. Since $\True,
+  \False \in V$, the !!{valuation}~$\pAssign v$ is also !!a{valuation}
+  for~$\Log L$. By \olref{prop:mvl-cl}, $\pValue v[\Log L](!A) =
+  \True$ for all $!A \in \Gamma$ and $\pValue v[\Log L](!B) = \False$.
+  Since $\True \in V^+$ and $\False \notin V^+$ that means $\pAssign v
+  \Entails[\Log L] \Gamma$ and $\pAssign v \Entails/[\Log L] !B$,
+  i.e., $\Gamma \Entails/[\Log L] !B$.
+\end{proof}
+\end{document}

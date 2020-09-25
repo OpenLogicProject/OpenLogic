@@ -1,0 +1,108 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{inf}{luk}
+
+\olsection{\L ukasiewicz logic}
+
+\begin{editorial}
+  This is a short ``stub'' of a section on infinite-valued \L
+  ukasiewicz logic.
+\end{editorial}
+
+\begin{defn}\ollabel{def:lukasiewicz} Infinite-valued \L ukasiewicz
+logic~$\LogLuk[\infty]$ is defined using the matrix:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V_\infty$.
+  \item $1$ is the only designated value, i.e., $V^+ = \{1\}$.
+  \item Truth functions are given by the following functions:
+  \begin{align*}
+    \tf{\lnot}[\LogLuk](x) & = 1 - x\\
+    \tf{\land}[\LogLuk](x,y) & = \min(x,y)\\
+    \tf{\lor}[\LogLuk](x,y) & = \max(x,y)\\
+    \tf{\lif}[\LogLuk](x,y) & = \min(1,1-(x-y)) = \begin{cases}
+      1 & \text{if } x \le y\\
+      1-(x-y) & \text{otherwise.}
+    \end{cases}
+    \end{align*}
+\end{enumerate}
+$m$-valued \L ukasiewicz logic is defined the same, except $V = V_m$.
+\end{defn}
+
+\begin{prop}
+  The logic $\LogLuk[3]$ defined by \olref[thr][luk]{def:lukasiewicz}
+  is the same as $\LogLuk[3]$ defined by \olref{def:lukasiewicz}.
+\end{prop}
+
+\begin{proof}
+  This can be seen by comparing the truth tables for the connectives
+  given in \olref[thr][luk]{def:lukasiewicz} with the truth tables
+  determined by the equations in \olref{def:lukasiewicz}:
+  \begin{center}
+    \begin{tabular}{c|c} 
+      $\tf{\lnot}$ & \\ 
+      \hline  
+      $1$ & $0$ \\ 
+      $1/2$ & $1/2$ \\
+      $0$ & $1$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\land}[\LogLuk[3]]$ & $1$ & $1/2$ & $0$ \\ 
+      \hline 
+      $1$ & $1$ & $1/2$ & $0$ \\ 
+      $1/2$ & $1/2$ & $1/2$ & $0$\\ 
+      $0$ & $0$ & $0$ & $0$ 
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc} 
+      $\tf{\lor}[\LogLuk[3]]$ & $1$ & $1/2$ & $0$ \\ 
+      \hline 
+      $1$ & $1$ & $1$ & $1$ \\ 
+      $1/2$ & $1$ & $1/2$ & $1/2$ \\
+      $0$ & $1$ & $1/2$ & $0$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\lif}[\LogLuk[3]]$ & $1$ & $1/2$ & $0$ \\ 
+      \hline 
+      $1$ & $1$ & $1/2$ & $0$ \\ 
+      $1/2$ & $1$ & $1$ & $1/2$  \\ 
+      $0$ & $1$ & $1$ & $1$ 
+    \end{tabular}
+  \end{center} 
+\end{proof}
+
+\begin{prop}\ollabel{prop:luk-infty-m}
+  If $\Gamma \Entails[\LogLuk[\infty]] !B$ then $\Gamma
+  \Entails[\LogLuk[m]] !B$ for all~$m \ge 2$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[mvl][inf][luk]{prop:luk-infty-m}.
+\end{prob}
+
+In fact, the converse holds as well.
+
+Infinite-valued \L ukasiewicz logic is the most popular fuzzy logic.
+In the fuzzy logic literature, the conditional is often defined as
+$\lnot !A \lor !B$. The result would be an infinite-valued strong
+Kleene logic.
+
+\begin{prob}
+  Show that $(p \lif q) \lor (q \lif p)$ is a
+  tautology of~$\LogLuk[\infty]$.
+\end{prob}
+
+\end{document}

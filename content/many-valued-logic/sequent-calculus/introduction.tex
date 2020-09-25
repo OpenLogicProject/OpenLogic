@@ -1,0 +1,83 @@
+% Part: many-valued-logic
+% Chapter: sequent-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{int}
+
+\olsection{Introduction}
+
+The sequent calculus for classical logic is an efficient and simple
+proof system. If a many-valued logic is defined by a matrix with
+finitly many truth values, i.e., $V$ is finite, it is possible to
+provide a sequent calculus for it.  The idea for how to do this comes
+from considering the meanings of sequents and the form of inference
+rules in the classical case. 
+
+Now recall that a sequent 
+\begin{align*}
+    !A_1, \dots, !A_n & \Sequent !B_1, \dots, !B_n
+\intertext{can be interpreted as the !!{formula}}
+    (!A_1 \land \cdots \land !A_m) & \lif (!B_1 \lor \cdots \lor
+!B_n)
+\end{align*}
+In other words, !!^a{valuation}~$\pAssign{v}$ \emph{satisfies} a
+sequent $\Gamma \Sequent \Delta$ iff either $\pValue{v}(!A) = \False$
+for some $!A \in \Gamma$ or $\pValue{v}(!A) = \True$ for some $!A \in
+\Delta$. On this interpretation, initial sequents $!A \Sequent !A$ are
+always satisfied, because either $\pValue v(!A) = \True$ or $\pValue(!A) =
+\False$.
+
+Here are the inference rules for the conditional in~$\Log{LK}$, with
+side formulas $\Gamma$, $\Delta$ left out:
+
+\begin{defish}
+    \Axiom$ \fCenter !A$
+    \Axiom$ !B \fCenter $
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$ !A \lif !B \fCenter $
+    \DisplayProof
+    \hfill
+    \Axiom$ !A \fCenter !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$ \fCenter !A \lif !B $
+    \DisplayProof
+\end{defish}
+
+If we apply the above semantic interpretation of a sequent, we can
+read the $\LeftR{\lif}$ rule as saying that if $\pValue v(!A) = \True$
+and $\pValue v(!B) = \False$, then $\pValue v(!A \lif !B) = \False$.
+Similarly, the $\RightR{\lif}$ rule says that if either $\pValue v(!A)
+= \False$ or $\pValue v(!B) = \True$, then $\pValue v(!A \lif !B) =
+\True$. And in fact, these conditionals are actually biconditionals.
+In the case of the $\LeftR{\land}$ and $\RightR{\lor}$ rules in their
+standard formulation, the corresponding conditionals would not be
+biconditionals. But there are alternative versions of these rules
+where they are:
+
+\begin{defish}
+    \Axiom$!A, !B, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \hfill
+    \Axiom$ \Gamma \fCenter \Delta, !A, !B$
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$ \Gamma \fCenter \Delta, !A \lor !B$
+    \DisplayProof
+\end{defish}
+
+This basic idea, applied to an $n$-valued logic, then results in a
+sequent calculus with $n$ instead of two places, one for each truth
+value. For a three-valued logic with $V = \{\False, \Undef, \True\}$,
+a sequent is an expression $\Gamma \mid \Pi \mid \Delta$. It is
+satisfied in !!a{valuation}~$\pAssign v$ iff either $\pValue{v}(!A) =
+\False$ for some $!A \in \Gamma$ or $\pValue{v}(!A) = \True$ for some
+$!A \in \Delta$ or $\pValue{v}(!A) = \Undef$ for some $!A \in \Pi$.
+Consequently, initial sequents $!A \mid !A \mid !A$ are always
+satisfied.
+
+\end{document}

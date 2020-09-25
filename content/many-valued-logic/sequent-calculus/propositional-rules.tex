@@ -1,0 +1,235 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: propositional-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{prl}
+
+\olsection{Propositional Rules for Selected Logics}
+
+The inference rules for a connective in an $n$-sided sequent calculus
+only depend on the characteristic truth function for the connective.
+Thus, if some connective is defined by the same truth function in
+different logics, these $n$-sided sequent rules for the connective are
+the same in those logics.
+
+\subsection{Rules for $\lnot$}
+
+The following rules for $\lnot$ apply to \L ukasiewicz and Kleene
+logics, and their variants.
+
+\begin{defish}
+  \begin{center}
+\AxiomC{$ \Gamma \nSequent \Pi \nSequent \Delta, !A $}
+\RightLabel{\iR{\lnot}{\False}}
+\UnaryInfC{$ \lnot !A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ \Gamma \nSequent !A, \Pi \nSequent \Delta $}
+\RightLabel{\iR{\lnot}{\Undef}}
+\UnaryInfC{$\Gamma \nSequent \lnot !A, \Pi \nSequent \Delta$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$!A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\RightLabel{\iR{\lnot}{\True}}
+\UnaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta,  \lnot !A$}
+\DisplayProof
+  \end{center}
+\end{defish}
+
+The following rules for $\lnot$ apply to G\"odel logic.
+
+\begin{defish}
+\AxiomC{$ \Gamma \nSequent !A, \Pi \nSequent \Delta, !A $}
+\RightLabel{\iR{\lnot}{\False}[\LogGod]}
+\UnaryInfC{$ \lnot !A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\DisplayProof
+\hfill
+\AxiomC{$!A, \Gamma \nSequent \Pi \nSequent \Delta$}
+\RightLabel{\iR{\lnot}{\True}[\LogGod]}
+\UnaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta,  \lnot !A$}
+\DisplayProof
+\hfill
+\end{defish}
+
+(In G\"odel logic, $\lnot !A$ can never take the value~$\Undef$, so
+there is no rule for the middle position.)
+
+\subsection{Rules for $\land$}
+
+These are the rules for $\land$ in \L ukasiewicz, strong Kleene, and
+G\"odel logic.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{$!A, !B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \RightLabel{$\iR{\land}{\False}$}
+  \UnaryInfC{$!A \land !B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$\Gamma \nSequent !A, \Pi \nSequent !A, \Delta$}
+  \AxiomC{$\Gamma \nSequent !B, \Pi \nSequent !B, \Delta$}
+  \AxiomC{$\Gamma \nSequent !A, !B, \Pi \nSequent \Delta$}
+  \RightLabel{$\iR\land\Undef$}
+  \TrinaryInfC{$\Gamma \nSequent !A \land !B, \Pi \nSequent \Delta$}
+  \DisplayProof
+  \\[2ex]  
+  \AxiomC{$\Gamma \nSequent \Pi \nSequent \Delta, !A$}
+  \AxiomC{$\Gamma \nSequent \Pi \nSequent \Delta, !B$}
+  \RightLabel{$\iR\land\True$}
+  \BinaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta, !A \land !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+\subsection{Rules for $\lor$}
+
+These are the rules for $\lor$ in \L ukasiewicz, strong Kleene, and
+G\"odel logic.
+
+\begin{defish}
+\begin{center}
+ \AxiomC{$!A, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \AxiomC{$!B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \RightLabel{$\iR\lor\False$}
+  \BinaryInfC{$!A \lor !B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, \Gamma \nSequent !A, \Pi \nSequent \Delta$}
+  \AxiomC{$!B, \Gamma \nSequent !B, \Pi \nSequent \Delta$}
+  \AxiomC{$\Gamma \nSequent !A, !B, \Pi \nSequent \Delta$}
+  \RightLabel{$\iR\lor\Undef$}
+  \TrinaryInfC{$\Gamma \nSequent !A \lor !B, \Pi \nSequent \Delta$}
+  \DisplayProof
+  \\[2ex]  
+  \AxiomC{$\Gamma \nSequent \Pi \nSequent \Delta, !A, !B$}
+  \RightLabel{$\iR\lor\True$}
+  \UnaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta, !A \lor !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+\subsection{Rules for $\lif$}
+
+These are the rules for $\lif$ in \L ukasiewicz logic.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{$\Gamma \nSequent \Pi \nSequent \Delta, !A$}
+  \AxiomC{$!B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \RightLabel{$\iR\lif\False[\LogLuk[3]]$}
+  \BinaryInfC{$!A \lif !B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{$\Gamma \nSequent !A, !B, \Pi \nSequent \Delta$}
+  \AxiomC{$!B, \Gamma \nSequent \Pi \nSequent \Delta, !A$}
+  \RightLabel{$\iR\lif\Undef[\LogLuk[3]]$}
+  \BinaryInfC{$\Gamma \nSequent !A \lif !B, \Pi \nSequent \Delta$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, \Gamma \nSequent !B, \Pi \nSequent \Delta, !B$}
+  \AxiomC{$!A, \Gamma \nSequent !A, \Pi \nSequent \Delta, !B$}
+  \RightLabel{$\iR{\lif}{\True}[\LogLuk[3]]$}
+  \BinaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta, !A \lif !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+These are the rules for $\lif$ in strong Kleene logic.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{$\Gamma \nSequent \Pi \nSequent \Delta, !A$}
+  \AxiomC{$!B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \RightLabel{$\iR\lif\False[\LogKs]$}
+  \BinaryInfC{$!A \lif !B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{$!B, \Gamma \nSequent !B, \Pi \nSequent \Delta$}
+  \AxiomC{$\Gamma \nSequent !A, !B, \Pi \nSequent \Delta$}
+  \AxiomC{$\Gamma \nSequent !A, \Pi \nSequent \Delta, !A$}
+  \RightLabel{$\iR\lif\Undef[\LogKs]$}
+  \TrinaryInfC{$\Gamma \nSequent !A \lif !B, \Pi \nSequent \Delta$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, \Gamma \nSequent \Pi \nSequent \Delta, !B$}
+  \RightLabel{$\iR{\lif}{\True}[\LogKs]$}
+  \UnaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta, !A \lif !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+These are the rules for $\lif$ in G\"odel logic.
+
+\begin{defish}
+\begin{center}
+  \AxiomC{$\Gamma \nSequent !A, \Pi \nSequent \Delta, !A$}
+  \AxiomC{$!B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \RightLabel{$\iR\lif\False[\LogGod[3]]$}
+  \BinaryInfC{$!A \lif !B, \Gamma \nSequent \Pi \nSequent \Delta$}
+  \DisplayProof
+  \\[2ex]
+  \AxiomC{$\Gamma \nSequent !B, \Pi \nSequent \Delta$}
+  \AxiomC{$\Gamma \nSequent \Pi \nSequent \Delta, !A$}
+  \RightLabel{$\iR\lif\Undef[\LogGod[3]]$}
+  \BinaryInfC{$\Gamma \nSequent !A \lif !B, \Pi \nSequent \Delta$}
+  \DisplayProof
+\\[2ex]
+  \AxiomC{$!A, \Gamma \nSequent !B, \Pi \nSequent \Delta, !B$}
+  \AxiomC{$!A, \Gamma \nSequent !A, \Pi \nSequent \Delta, !B$}
+  \RightLabel{$\iR{\lif}{\True}[\LogGod[3]]$}
+  \BinaryInfC{$\Gamma \nSequent \Pi \nSequent \Delta, !A \lif !B$}
+  \DisplayProof
+\end{center}
+\end{defish}
+
+
+\begin{sidewaysfigure}
+  \begin{center}  
+  \AxiomC{$A \nSequent A \nSequent A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$A \nSequent B, A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$A \nSequent A, B, A \nSequent B, A$}
+  \AxiomC{$A \nSequent A \nSequent A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent A, A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent B, A, A$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$B, A \nSequent A \nSequent B, A, A$}
+  \RightLabel{$\iR\lif\Undef$}
+  \BinaryInfC{$A \nSequent A \lif B, A \nSequent B, A$}
+  \AxiomC{$B \nSequent B \nSequent B$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$A \nSequent A, B \nSequent B$}
+  \RightLabel{\iR \Exchange \Undef}
+  \UnaryInfC{$A \nSequent B, A \nSequent B$}
+  \RightLabel{\iR \Weakening \Undef}
+  \UnaryInfC{$A \nSequent A, B, A \nSequent B$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$A, B \nSequent A, B, A \nSequent B$}
+  \RightLabel{\iR \Exchange \False}
+  \UnaryInfC{$B, A \nSequent A, B, A \nSequent B$}
+  \AxiomC{$A \nSequent A \nSequent A$}
+  \RightLabel{\iR \Weakening \True}
+  \UnaryInfC{$A \nSequent A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$B, A \nSequent A \nSequent B, A$}
+  \RightLabel{\iR \Weakening \False}
+  \UnaryInfC{$B, B, A \nSequent A \nSequent B, A$}
+  \RightLabel{$\iR\lif\Undef$}
+  \BinaryInfC{$B, A \nSequent A \lif B, A \nSequent B$}
+  \RightLabel{$\iR\lif\False$}
+  \BinaryInfC{$A \lif B, A \nSequent A \lif B, A \nSequent B$}
+  \DisplayProof
+  \end{center}
+  \caption{Example !!{derivation} in~$\LogLuk[3]$}
+\end{sidewaysfigure}
+
+\end{document}

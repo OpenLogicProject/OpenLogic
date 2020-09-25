@@ -1,0 +1,110 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: goedel
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{god}
+
+\olsection{G\"odel logics}
+
+Kurt G\"odel introduced a sequence of $n$-valued logics that each
+contain all !!{formula}s valid in intuitionistic logic, and are
+contained in classical logic.  Here is the first interesting one:
+
+\begin{defn}\ollabel{defn:goedel}
+\emph{$3$-valued G\"odel logic}~$\LogGod$ is defined using the matrix:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lfalse$, $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V = \{\True, \Undef, \False\}$.
+  \item $\True$ is the only designated value, i.e., $V^+ = \{\True\}$.
+  \item For $\lfalse$, we have $\tf{\lfalse} = \False$. Truth
+  functions for the remaining connectives are given by the following
+  tables:
+  \begin{center}
+    \begin{tabular}{c|c} 
+      $\tf{\lnot}[\LogGod]$ & \\ 
+      \hline  
+      $\True$ & $\False$ \\ 
+      $\Undef$ & $\False$ \\
+      $\False$ & $\True$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\land}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\ 
+      $\False$ & $\False$ & $\False$ & $\False$ 
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc} 
+      $\tf{\lor}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\True$ & $\True$ \\ 
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\lif}[\LogGod]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\True$ & $\True$ & $\False$  \\ 
+      $\False$ & $\True$ & $\True$ & $\True$ 
+    \end{tabular}
+  \end{center} 
+\end{enumerate}
+\end{defn}
+
+You'll notice that the truth tables for $\land$ and $\lor$ are the
+same as in \L ukasiewicz and strong Kleene logic, but the truth tables
+for $\lnot$ and $\lif$ differ for each. In G\"odel logic,
+$\tf{\lnot}(\Undef) = \False$. In contrast to \L ukasiewicz logic (but
+as in strong Kleene logic), $\tf{\lif}(\Undef, \False) = \False$ and
+in contrast to Kleene logic (but as in \L ukasiewicz logic),
+$\tf{\lif}(\Undef, \Undef) = \True$.
+
+As the connection to intuitionistic logic alluded to suggests,
+$\LogGod[3]$ is close to intuitionistic logic. All intuitionistic truths
+are tautologies in~$\LogGod[3]$, and many classical tautologies that are
+not valid intuitionistically, fail to be tautologies in $\LogGod[3]$.
+For instance, the following are not tautologies:
+\begin{align*}
+  & p \lor \lnot p && (p \lif q) \lif (\lnot p \lor q) \\
+  & \lnot\lnot p \lif p && \lnot(p \land q) \lif (\lnot p \lor \lnot q) \\
+  &&& ((p \lif q) \lif p) \lif p
+\end{align*}
+However, not every tautology of $\LogGod[3]$ is also intuitionistically
+valid, e.g., $(p \lif q) \lor (q \lif p)$.
+
+\begin{prob}
+  Give a truth table to show that $(p \lif q) \lor (q \lif p)$ is a
+  tautology of~$\LogGod[3]$.
+\end{prob}
+
+\begin{prob}
+  Give truth tables that show that the following are not tautologies
+  of~$\LogGod[3]$
+  \begin{align*}
+    & (p \lif q) \lif (\lnot p \lor q) \\
+    & \lnot(p \land q) \lif (\lnot p \lor \lnot q) \\
+    & ((p \lif q) \lif p) \lif p
+  \end{align*}
+\end{prob}
+
+\begin{prob}
+  Which of the following relations hold in G\"odel logic? Give a truth table for each.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $p \lor q, \lnot p \Entails q$
+    \item $p \land q \Entails p$
+    \item $p \Entails p \land p$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

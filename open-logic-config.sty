@@ -52,10 +52,15 @@
 
 % ### Truth Values
 %
-% - `\True` defaults to $1$ and `\False` to $0$.
+% - `\True` defaults to $\mathbb{T}$ and `\False` to $\mathbb{F}$.
 
-\DeclareDocumentMacro \True {\mathbb{T}}
-\DeclareDocumentMacro \False {\mathbb{F}}
+\DeclareDocumentMacro \True {\ensuremath{\mathbb{T}}}
+\DeclareDocumentMacro \False {\ensuremath{\mathbb{F}}}
+
+% Other truth values
+
+\DeclareDocumentMacro \Indet {\ensuremath{\mathbb{I}}}
+\DeclareDocumentMacro \Undef {\ensuremath{\mathbb{U}}}
 
 % ### Propositional Constants and Connectives
 %
@@ -163,6 +168,8 @@
 
 \DeclareDocumentMacro \Sequent {\Rightarrow}
 
+\DeclareDocumentMacro \nSequent {\mid}
+
 % The sequent symbol in proofs displays as the above sequent symbol.
 
 \DeclareDocumentMacro \fCenter {\ensuremath{\,\Sequent\,}}
@@ -174,6 +181,8 @@
 \DeclareDocumentCommand \LeftR { m } {\ensuremath{{#1}\mathrm{L}}}
 
 \DeclareDocumentCommand \RightR { m } {\ensuremath{{#1}\mathrm{R}}}
+
+\DeclareDocumentCommand \iR { m m o} {\ensuremath{{#1\IfNoValueTF{#3}{}{_{#3}}}{#2}}}
 
 % - `\Weakening`: produces name or abbreviation for weakening rule,
 % e.g., ``W''.
@@ -1004,15 +1013,21 @@
 
 % - `\Log{L}` - Logics; default: set entirely in boldface
 
-\DeclareDocumentCommand \Log { m }{\ensuremath{\mathbf{#1}}}
+\DeclareDocumentCommand \Log { m o }{\ensuremath{\mathbf{#1}
+\IfNoValueTF {#2}{}{_{#2}}}}
 
 % - Some logics
 
 \DeclareDocumentMacro {\LogCL} {\Log{C}}
 \DeclareDocumentMacro {\LogIL} {\Log{I}}
-\DeclareDocumentMacro {\LogLuk} {\Log{\L}}
+\DeclareDocumentMacro {\LogLuk} {\Log{\textbf{\L}}}
 \DeclareDocumentMacro {\LogGod} {\Log{G}}
-\DeclareDocumentMacro {\LogSK} {\Log{Kl}}
+\DeclareDocumentMacro {\LogKs} {\Log{Ks}}
+\DeclareDocumentMacro {\LogKw} {\Log{Kw}}
+\DeclareDocumentMacro {\LogLP} {\Log{LP}}
+\DeclareDocumentMacro {\LogRM} {\Log{RM}}
+\DeclareDocumentMacro {\LogHal} {\Log{Hal}}
+
 
 % - `\Obj` - Object-language symbols; default: set entirely in
 % sans-serif italics

@@ -1,0 +1,242 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{luk}
+
+\olsection{\L ukasiewicz logic}
+
+One of the first published, worked out proposals for a many-valued
+logic is due to the Polish philosopher Jan \L ukasiewicz in 1921.  \L
+ukasiewicz was motivated by Aristotle's sea battle problem: It seems
+that, \emph{today}, the sentence ``There will be a sea battle
+tomorrow'' is neither true nor false: its truth value is not yet
+settled.  \L ukasiewicz proposed to introduce a third truth value,
+to such ``future contingent'' sentences.
+\begin{quote}
+I can assume without contradiction that my presence in Warsaw at a
+certain moment of next year, e.g., at noon on 21 December, is at the
+present time determined neither positively nor negatively. Hence it is
+possible, but not necessary, that I shall be present in Warsaw at the
+given time. On this assumption the proposition ``I shall be in Warsaw
+at noon on 21 December of next year,'' can at the present time be
+neither true nor false. For if it were true now, my future presence in
+Warsaw would have to be necessary, which is contradictory to the
+assumption. If it were false now, on the other hand, my future
+presence in Warsaw would have to be impossible, which is also
+contradictory to the assumption. Therefore the proposition considered
+is at the moment neither true nor false and must possess a third
+value, different from ``0'' or falsity and ``1'' or truth. This value
+we can designate by ``$\frac{1}{2}$.'' It represents ``the possible,''
+and joins ``the true'' and ``the false'' as a third value.
+\end{quote}
+We will use $\Undef$ for \L ukasiewicz's third truth
+value.\footnote{\L ukasiewicz here uses ``possible'' in a way that is
+uncommon today, namely to mean possible but not necessary.}
+
+The truth functions for the connectives $\lnot$, $\land$, and $\lor$
+are easy to determine on this interpretation: the negation of a future
+contingent sentence is also a future contingent sentence, so
+$\tf{\lnot}(\Undef) = \Undef$.  If one conjunct of a
+conjunction is undetermined and the other is true, the conjunction is
+also undetermined---after all, depending on how the future contingent
+conjunct turns out, the conjunction might turn out to be true, and it
+might turn out to be false. So \[
+    \tf{\land}(\True, \Undef) =
+\tf{\land}(\Undef, \True) =
+\Undef.
+\]
+If the other conjunct is false, however, it cannot
+turn out true, so \[\tf{\land}(\False, \Undef) =
+\tf{\land}(\False, \Undef) = \False.\]
+The other values (if the arguments are settled truth values, $\True$
+or $\False$, are like in classical logic.
+
+For the conditional, the situation is a little trickier. Suppose $q$
+is a future contingent statement. If $p$ is false, then $p \lif q$
+will be true, regardless of how $q$ turns out, so we should set
+$\tf{\lif}(\False, \Undef) = \True$. And if $p$ is true, then
+$q \lif p$ will be true, regardless of what $q$ turns out to be, so
+$\tf{\lif}(\Undef, \True) = \True$. If $p$ is true, then $p
+\lif q$ might turn out to be true or false, so $\tf{\lif}(\True,
+\Undef) = \Undef$. Similarly, if $p$ is false, then $q
+\lif p$ might turn out to be true or false, so
+$\tf{\lif}(\Undef, \False) = \Undef$. This leaves the
+case where $p$ and $q$ are both future contingents. On the basis of
+the motivation, we should really assign $\Undef$ in this case.
+However, this would make $!A \lif !A$ \emph{not} a tautology. \L
+ukasiewicz had not trouble giving up $!A \lor \lnot !A$ and $\lnot(!A
+\land \lnot !A)$, but balked at giving up $!A \lif !A$. So he
+stipulated $\tf{\lif}(\Undef, \Undef) =
+\True$.
+
+\begin{defn}\ollabel{def:lukasiewicz}
+Three-valued \L ukasiewicz logic is defined using the matrix:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V = \{\True, \Undef, \False\}$.
+  \item $\True$ is the only designated value, i.e., $V^+ = \{\True\}$.
+  \item Truth functions are given by the following tables:
+  \begin{center}
+    \begin{tabular}{c|c} 
+      $\tf{\lnot}$ & \\ 
+      \hline  
+      $\True$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\land}[\LogLuk[3]]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\ 
+      $\False$ & $\False$ & $\False$ & $\False$ 
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc} 
+      $\tf{\lor}[\LogLuk[3]]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\True$ & $\True$ \\ 
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\lif}[\LogLuk[3]]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\True$ & $\True$ & $\Undef$  \\ 
+      $\False$ & $\True$ & $\True$ & $\True$ 
+    \end{tabular}
+  \end{center} 
+\end{enumerate}
+\end{defn}
+
+As can easily be seen, any !!{formula} $!A$ containing only $\lnot$,
+$\land$, and $\lor$ will take the truth value~$\Undef$ if all
+its !!{propositional variable}s are assigned~$\Undef$. So for
+instance, the classical tautologies $p \lor \lnot p$ and $\lnot(p
+\land \lnot p)$ are not tautologies in $\LogLuk[3]$, since $\pValue{v}(!A)
+= \Undef$ whenever $\pAssign v(p) = \Undef$.
+
+On !!{valuation}s where $\pAssign v(p) = \True$ or $\False$, $\pValue
+v(!A)$ will coincide with its classical truth value.
+
+\begin{prop}
+  If $\pAssign v(p) \in \{\True, \False\}$ for all $p$ in~$!A$, then
+  $\pValue v(!A)[\LogLuk[3]] = \pValue v(!A)[\LogCL]$.
+\end{prop}
+
+\begin{prob}\label{mvl:thr:luk:prob:luk-iff} Suppose we define
+  $\pValue v(!A \liff !B) = \pValue v((!A \lif !B) \land (!B \lif
+  !A))$ in~$\LogLuk[3]$. What truth table would $\liff$ have?
+\end{prob}
+
+Many classical tautologies \emph{are} also tautologies in \LogLuk[3],
+e.g, $\lnot p \lif (p \lif q)$. Just like in classical logic, we can
+use truth tables to verify this:
+\begin{center}
+\begin{tabular}{cc|cccccc}
+  $p$ & $q$ & $\lnot$ & $p$ & $\lif$ & $\smash{(}p$ & $\lif$ & $q\smash{)}$ \\ \hline
+  \True & \True & \False & \True & \True & \True & \True & \True \\
+  \True & \Undef & \False & \True & \True & \True & \Undef & \Undef \\
+  \True & \False & \False & \True & \True & \True & \False & \False \\
+  \Undef & \True & \Undef & \Undef & \True & \Undef & \True & \True \\
+  \Undef & \Undef & \Undef & \Undef & \True & \Undef & \True & \Undef \\
+  \Undef & \False & \Undef & \Undef & \True & \Undef & \Undef & \False \\
+  \False & \True & \True & \False & \True & \False & \True & \True \\
+  \False & \Undef & \True & \False & \True & \False & \True & \Undef \\
+  \False & \False & \True & \False & \True & \False & \True & \False \\  
+\end{tabular}
+\end{center}
+
+\begin{prob}
+  Show that the following are tautologies in \LogLuk[3]:
+  \begin{enumerate}
+    \item $p \lif (q \lif p)$
+    \item\label{mvl:thr:luk:prob:luk-taut-2} $\lnot(p \land q) \liff (\lnot p \lor \lnot q)$
+    \item\label{mvl:thr:luk:prob:luk-taut-3} $\lnot(p \lor q) \liff (\lnot p \land \lnot q)$
+  \end{enumerate}
+  (In \olref[mvl][thr][luk]{prob:luk-taut-2} and
+  \olref[mvl][thr][luk]{prob:luk-taut-3}, take $!A \liff !B$ as an
+  abbreviation for $(!A \lif !B) \land (!B \lif !A)$, or refer to your
+  solution to \olref[mvl][thr][luk]{prob:luk-iff}.)
+\end{prob}
+
+\begin{prob}
+  Show that the following classical tautologies are not tautologies in~\LogLuk[3]:
+  \begin{enumerate}
+    \item $(\lnot p \land p) \lif q)$
+    \item $((p \lif q) \lif p) \lif p$
+    \item $(p \lif (p \lif q)) \lif (p \lif q)$
+  \end{enumerate}
+\end{prob}
+
+One might therefore perhaps think that although not all classical
+tautologies are tautologies in~$\LogLuk[3]$, they should at least take
+either the value~$\True$ or the value~$\Undef$ on every
+!!{valuation}. This is not the case. A counterexample is given by
+\[
+  \lnot(p \lif \lnot p) \lor \lnot(\lnot p \lif p)
+\]
+which is $\False$ if $p$ is~$\Undef$.
+
+\begin{prob}
+  Which of the following relations hold in \L ukasiewicz logic? Give a truth table for each.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $\lnot\lnot p \Entails p$
+    \item $p \land q \Entails p$
+    \item $p \Entails p \land p$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+\L ukasiewicz hoped to build a logic of possibility on the basis of his
+three-valued system, by introducing a one-place connective $\Diamond
+!A$ (for ``$!A$ is possible'') and a corresponding $\Box !A$ (for ``$!A$
+is necessary''):
+\begin{center}
+  \begin{tabular}{c|c} 
+    $\tf{\Diamond}$ & \\ 
+    \hline  
+    $\True$ & $\True$ \\ 
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$ 
+  \end{tabular}
+  \quad
+  \begin{tabular}{c|c} 
+    $\tf{\Box}$ & \\ 
+    \hline  
+    $\True$ & $\True$ \\ 
+    $\Undef$ & $\False$ \\
+    $\False$ & $\False$ 
+  \end{tabular}
+\end{center}
+In other words, $p$ is possible iff it is not already settled as false;
+and $p$ is necessary iff it is already settled as true.
+
+\begin{prob}
+  Show that $\Box p \liff \lnot\Diamond \lnot p$ and $\Diamond p \liff
+  \lnot \Box \lnot p$ are tautologies in~\LogLuk[3], extended with the
+  truth tables for $\Box$ and~$\Diamond$.
+\end{prob}
+
+However, the shortcomings of this proposed modal logic soon became
+evident: However things turn out, $p \land \lnot p$ can never turn out
+to be true. So even if it is not now settled (and therefore
+undetermined), it should count as impossible, i.e., $\lnot \Diamond(p
+\land \lnot p)$ should be a tautology. However, if $\pAssign v(p) =
+\Undef$, then $\pValue v(\lnot \Diamond(p \land \lnot p)) =
+\Undef$. Although \L ukasiewicz was correct that two truth
+values will not be enough to accommodate modal distinctions such as
+possiblity and necessity, introducing a third truth value is also not
+enough.
+
+\end{document}

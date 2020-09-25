@@ -1,0 +1,122 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: lukasiewicz
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{inf}{god}
+
+\olsection{G\"odel logics}
+
+\begin{editorial}
+  This is a short ``stub'' of a section on infinite-valued G\"odel logic.
+\end{editorial}
+
+\begin{defn}\ollabel{def:goedel} Infinite-valued G\"odel
+logic~$\LogGod[\infty]$ is defined using the matrix:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lfalse$, $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V_\infty$.
+  \item $1$ is the only designated value, i.e., $V^+ = \{1\}$.
+  \item Truth functions are given by the following functions:
+  \begin{align*}
+    \tf{\lfalse} & = 0\\
+    \tf{\lnot}[\LogGod](x) & = \begin{cases}
+      $1$ & \text{if } x =0\\
+      $0$ & \text{otherwise}
+    \end{cases}\\
+    \tf{\land}[\LogGod](x,y) & = \min(x,y)\\
+    \tf{\lor}[\LogGod](x,y) & = \max(x,y)\\
+    \tf{\lif}[\LogGod](x,y) & = \begin{cases}
+      1 & \text{if } x \le y\\
+      y & \text{otherwise.}
+    \end{cases}
+    \end{align*}
+\end{enumerate}
+$m$-valued G\"odel logic is defined the same, except $V = V_m$.
+\end{defn}
+
+\begin{prop}
+  The logic $\LogGod[3]$ defined by \olref[thr][god]{defn:goedel}
+  is the same as $\LogGod[3]$ defined by \olref{def:goedel}.
+\end{prop}
+
+\begin{proof}
+  This can be seen by comparing the truth tables for the connectives
+  given in \olref[thr][god]{defn:goedel} with the truth tables
+  determined by the equations in \olref{def:goedel}:
+  \begin{center}
+    \begin{tabular}{c|c} 
+      $\tf{\lnot}[\LogGod[3]]$ & \\ 
+      \hline  
+      $1$ & $0$ \\ 
+      $1/2$ & $0$ \\
+      $0$ & $1$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\land}[\LogGod]$ & $1$ & $1/2$ & $0$ \\ 
+      \hline 
+      $1$ & $1$ & $1/2$ & $0$ \\ 
+      $1/2$ & $1/2$ & $1/2$ & $0$\\ 
+      $0$ & $0$ & $0$ & $0$ 
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc} 
+      $\tf{\lor}[\LogGod]$ & $1$ & $1/2$ & $0$ \\ 
+      \hline 
+      $1$ & $1$ & $1$ & $1$ \\ 
+      $1/2$ & $1$ & $1/2$ & $1/2$ \\
+      $0$ & $1$ & $1/2$ & $0$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\lif}[\LogGod]$ & $1$ & $1/2$ & $0$ \\ 
+      \hline 
+      $1$ & $1$ & $1/2$ & $0$ \\ 
+      $1/2$ & $1$ & $1$ & $0$  \\ 
+      $0$ & $1$ & $1$ & $1$ 
+    \end{tabular}
+  \end{center} 
+\end{proof}
+
+\begin{prop}\ollabel{prop:god-infty-m}
+  If $\Gamma \Entails[\LogGod[\infty]] !B$ then $\Gamma
+  \Entails[\LogGod[m]] !B$ for all~$m \ge 2$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{prob}
+  Prove \olref[mvl][inf][god]{prop:god-infty-m}.
+\end{prob}
+
+In fact, the converse holds as well.
+
+Like $\LogGod[3]$, $\LogGod[\infty]$ has all intuitionistically valid
+!!{formula}s as tautologies, and the same examples of non-tautologies
+are non-tautologies of~$\LogGod[\infty]$:
+\begin{align*}
+  & p \lor \lnot p && (p \lif q) \lif (\lnot p \lor q) \\
+  & \lnot\lnot p \lif p && \lnot(p \land q) \lif (\lnot p \lor \lnot q) \\
+  &&& ((p \lif q) \lif p) \lif p
+\end{align*}
+The example of an intuitionistically invalid !!{formula} that is
+nevertheless a tautology of~$\LogGod[3]$, $(p \lif q) \lor (q \lif
+p)$, is also a tautology in~$\LogGod[\infty]$. In fact,
+$\LogGod[\infty]$ can be characterized as intuitionistic logic to
+which the schema $(!A \lif !B) \lor (!B \lif !A)$ is added. This was
+shown by Michael Dummett, and so $\LogGod[\infty]$ is often referred to
+as G\"odel-Dummett logic~$\Log{LC}$.
+
+\begin{prob}
+  Show that $(p \lif q) \lor (q \lif p)$ is a
+  tautology of~$\LogGod[\infty]$.
+\end{prob}
+
+\end{document}

@@ -1,0 +1,197 @@
+% Part: many-valued-logic
+% Chapter: three-valued-logics
+% Section: kleene
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{thr}{skl}
+
+\olsection{Kleene logics}
+
+Stephen Kleene introduced two three-valued logics motivated by a logic
+in which truth values are thought of the outcomes of computational
+procedures: a procedure may yield $\True$ or $\False$, but it may also
+fail to terminate.  In that case the corresponding truth value is
+undefined, represented by the truth value~$\Undef$.
+
+To compute the negation of a proposition~$!A$, you would first compute
+the value of~$!A$, and then return the opposite of the result.  If the
+computation of $!A$ does not terminate, then the entire procedure does
+not either: so the negation of $\Undef$ is $\Undef$.
+
+To compute a conjunction $!A \land !B$, there are two options: one can
+first compute~$!A$, then $!B$, and then the result would be $\True$ if
+the outcome of both is~$\True$, and $\False$ otherwise.  If either
+computation fails to halt, the entire procedure does as well. So in
+this case, the if une conjunct is undefined, the conjunction is as
+well.  The same goes for disjunction.
+
+However, if we can evaluate $!A$ and $!B$ in parallel, we can do better.
+Then, if one of the two procedures halts and returns $\False$, we can
+stop, as the answer must be false.  So in that case a conjunction with
+one false conjunct is false, even if the other conjunct is undefined.
+Similarly, when computing a disjunction in parallel, we can stop once
+the procedure for one of the two disjuncts has returned true: then the
+disjunction must be true. So in this case we can know what the outcome
+of a compound claim is, even if one of the components is undefined. On
+this interpretation, we might read $\Undef$ as ``unknown'' rather than
+``undefined.''
+
+The two interpretations give rise to Kleene's strong and weak logic.
+The conditional is defined as equivalent to $\lnot !A \lor !B$.
+
+\begin{defn}
+\emph{Strong Kleene logic}~$\LogKs$ is defined using the matrix:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V = \{\True, \Undef, \False\}$.
+  \item $\True$ is the only designated value, i.e., $V^+ = \{\True\}$.
+  \item Truth functions are given by the following tables:
+  \begin{center}
+    \begin{tabular}{c|c} 
+      $\tf{\lnot}$ & \\ 
+      \hline  
+      $\True$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\land}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ & $\Undef$ & $\False$\\ 
+      $\False$ & $\False$ & $\False$ & $\False$ 
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc} 
+      $\tf{\lor}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\True$ & $\True$ \\ 
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\lif}[\LogKs]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\True$ & $\Undef$ & $\Undef$  \\ 
+      $\False$ & $\True$ & $\True$ & $\True$ 
+    \end{tabular}
+  \end{center} 
+\end{enumerate}
+\end{defn}
+
+\begin{defn}
+\emph{Weak Kleene logic}~$\LogKw$ is defined using the matrix:
+\begin{enumerate}
+  \item The standard propositional language $\Lang L_0$ with
+  $\lnot$, $\land$, $\lor$, $\lif$.
+  \item The set of truth values $V = \{\True, \Undef, \False\}$.
+  \item $\True$ is the only designated value, i.e., $V^+ = \{\True\}$.
+  \item Truth functions are given by the following tables:
+  \begin{center}
+    \begin{tabular}{c|c} 
+      $\tf{\lnot}$ & \\ 
+      \hline  
+      $\True$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\land}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$\\ 
+      $\False$ & $\False$ & $\Undef$ & $\False$ 
+    \end{tabular}
+    \\[2ex]
+    \begin{tabular}{c|ccc} 
+      $\tf{\lor}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\True$ \\ 
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$ \\
+      $\False$ & $\True$ & $\Undef$ & $\False$ 
+    \end{tabular}
+    \quad
+    \begin{tabular}{c|ccc} 
+      $\tf{\lif}[\LogKw]$ & $\True$ & $\Undef$ & $\False$ \\ 
+      \hline 
+      $\True$ & $\True$ & $\Undef$ & $\False$ \\ 
+      $\Undef$ & $\Undef$ & $\Undef$ & $\Undef$  \\ 
+      $\False$ & $\True$ & $\Undef$ & $\True$ 
+    \end{tabular}
+  \end{center} 
+\end{enumerate}
+\end{defn}
+
+\begin{prop}
+  $\LogKs$ and $\LogKw$ have no tautologies.
+\end{prop}
+
+\begin{proof}
+  If $\pAssign v(p) = \Undef$ for all !!{propositional variable}s~$p$,
+  then any formula~$!A$ will have truth value~$\pValue v(!A) =
+  \Undef$, since
+  \[
+    \tf{\lnot}(\Undef) = \tf{\lor}(\Undef, \Undef) = \tf{\land}(\Undef,
+  \Undef) = \tf{\lif}(\Undef, \Undef) = \Undef
+  \]
+  in both logics. As $\Undef \notin V^+$ for either $\LogKs$ or
+  $\LogKw$, on this !!{valuation}, $!A$ will not be designated.
+\end{proof}
+
+Although both weak and strong Kleene logic have no tautologies, they
+have non-trivial consequence relations. 
+
+\begin{prob}
+  Which of the following relations hold in (a) strong and
+  (b) weak Kleene logic? Give a truth table for each.
+  \begin{enumerate}
+    \item $p, p \lif q \Entails q$
+    \item $p \lor q, \lnot p \Entails q$
+    \item $p \land q \Entails p$
+    \item $p \Entails p \land p$
+    \item $p \Entails p \lor q$
+  \end{enumerate}
+\end{prob}
+
+Dmitry Bochvar interpreted $\Undef$ as ``meaningless'' and attempted
+to use it to solve paradoxes such as the Liar paradox by stipulating
+that paradoxical sentences take the value~$\Undef$. He introduced a
+logic which is essentially weak Kleene logic extended by additional
+connectives, two of which are ``external negation'' and the ``is
+undefined'' operator:
+\begin{center}
+  \begin{tabular}{c|c} 
+    $\tf{\sim}$ & \\ 
+    \hline  
+    $\True$ & $\False$ \\ 
+    $\Undef$ & $\True$ \\
+    $\False$ & $\True$ 
+  \end{tabular}
+\quad
+  \begin{tabular}{c|c} 
+    $\tf{+}$ & \\ 
+    \hline  
+    $\True$ & $\False$ \\ 
+    $\Undef$ & $\True$ \\
+    $\False$ & $\False$ 
+  \end{tabular}
+\end{center}
+
+\begin{prob}
+  Can you define $\sim$ in Bochvar's logic in terms of $\lnot$
+  and~$+$, i.e., find !!a{formula} with only the !!{propositional
+  variable}~$p$ and not involving $\sim$ which always takes the same
+  truth value as~$\mathord{\sim}p$?  Give a truth table to show you're
+  right.
+\end{prob}
+
+
+\end{document}

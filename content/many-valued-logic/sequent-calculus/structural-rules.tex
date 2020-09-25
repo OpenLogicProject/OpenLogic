@@ -1,0 +1,52 @@
+% Part: many-valued-logics
+% Chapter: sequent-calculus
+% Section: structural-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mvl}{seq}{str}
+
+\olsection{Structural Rules}
+
+The structural rules for $n$-sided sequent calculus operate as in the
+classical case, except for each position~$i$.
+
+\begin{defish}
+\begin{center}
+\AxiomC{$ \Gamma_1 \nSequent \dots \nSequent \phantom{!A,}\Gamma_i \nSequent \dots \nSequent \Gamma_n $}
+\RightLabel{$\iR{\Weakening}{i}$}
+\UnaryInfC{$\Gamma_1 \nSequent \dots \nSequent !A, \Gamma_i \nSequent \dots \nSequent \Gamma_n$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ \Gamma_1 \nSequent \dots \nSequent !A, !A, \Gamma_i \nSequent \dots \nSequent \Gamma_n $}
+\RightLabel{$\iR{\Contraction}{i}$}
+\UnaryInfC{$\Gamma_1 \nSequent \dots \nSequent \phantom{!A,}!A, \Gamma_i \nSequent
+\dots \nSequent \Gamma_n$}
+\DisplayProof
+\\[2ex]
+\AxiomC{$ \Gamma_1 \nSequent \dots \nSequent \Gamma_i, !A, !B, \Gamma_i' \nSequent \dots \nSequent \Gamma_n $}
+\RightLabel{$\iR{\Exchange}{i}$}
+\UnaryInfC{$\Gamma_1 \nSequent \dots \nSequent \Gamma_i, !B, !A, \Gamma_i' \nSequent \dots
+\nSequent \Gamma_n$}
+\DisplayProof
+\end{center}
+\end{defish}
+
+A series of weakening, contraction, and exchange inferences will often
+be indicated by double inference lines.
+
+The \Cut{} rule comes in several forms, one for every combination of
+distinct positions in the sequent $i \neq j$:
+\begin{defish}
+\[
+\AxiomC{$ \Gamma_1 \nSequent \dots \nSequent !A, \Gamma_i \nSequent \dots \nSequent \Gamma_n $}
+\AxiomC{$ \Delta_1 \nSequent \dots \nSequent !A, \Delta_j \nSequent \dots \nSequent \Delta_n $}
+\RightLabel{$\iR{\Cut}{i,j}$}
+\BinaryInfC{$\Gamma_1,\Delta_1 \nSequent \dots \nSequent \Gamma_n, \Delta_n$}
+\DisplayProof
+\]
+\end{defish}
+
+\end{document}
