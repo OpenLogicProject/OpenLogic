@@ -68,14 +68,16 @@ for any~$!A$.
     \end{enumerate}
 \end{prob}
 
-\begin<prvDiamond>{prop}\ollabel{prop:dual}
+% Prove duality of \Box and \Diamond
+\begin{tagblock}{prvDiamond}
+\begin{prop}\ollabel{prop:dual}
   \begin{enumerate}
   \item $\mSat{M}{\Box !A}[w]$ iff $\mSat{M}{\lnot\Diamond\lnot !A}[w]$.
   \item $\mSat{M}{\Diamond !A}[w]$ iff $\mSat{M}{\lnot\Box\lnot !A}[w]$.
   \end{enumerate}
 \end{prop}
 
-\begin<prvDiamond>{proof}
+\begin{proof}
   \begin{enumerate}
     \item $\mSat{M}{\lnot\Diamond\lnot !A}[w]$ iff $\mSat/{M}{\Diamond\lnot
       !A}$ by definition of $\mSat{M}{}[w]$. $\mSat{M}{\Diamond\lnot
@@ -102,6 +104,7 @@ for any~$!A$.
 \begin{probtag}{probDiamond}
   Complete the proof of \olref[nml][syn][trw]{prop:dual}.
 \end{probtag}
+\end{tagblock}
 
 \begin{prob}
   Let $\mModel{M} = \tuple{W, R, V}$ be a model, and suppose $w_1, w_2 \in
