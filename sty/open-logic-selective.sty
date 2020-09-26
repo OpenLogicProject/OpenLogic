@@ -70,8 +70,19 @@
     \comment\ignorespaces}% 
     {\endcomment\ignorespacesafterend}%
 
-% \excludeenv -- make the specified environment into a comment environment
+% \supressenv -- turn an envireonment into a comment 
+% \excludeenv -- make the specified environment into a comment
+% environment for the time being
 % \includeenv -- restore a previously excluded environment
+
+\def\supressenv#1{\begingroup\@bsphack
+             \let\do\@makeother\dospecials\catcode`\^^M\active
+             \let\verbatim@startline\relax
+             \let\verbatim@addtoline\@gobble
+             \let\verbatim@processline\relax
+             \let\verbatim@finish\relax
+             \def\@currenvir{#1}%
+             \verbatim@}
 
 \def\excludeenv#1{%
   \expandafter\let\csname orig@#1\expandafter
