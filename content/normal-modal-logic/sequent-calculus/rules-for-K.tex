@@ -1,0 +1,129 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: rules-for-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{rul}
+
+\olsection{Rules for \Log{K}}
+
+The rules for the regular propositional connectives are the same as
+for regular sequent calculus~$\Log{LK}$. Axioms are also the same: any
+sequent of the form $!A \Sequent !A$ counts as an axiom.
+
+For the modal operator\iftag{prvBox}{\iftag{prvDiamond}{s~$\Box$
+and}{~$\Box$}}{}\iftag{prvDiamond}{~$\Diamond$}{}, we have the
+following additional \iftag{notprvBox,notprvDiamond}{rule}{rules}:
+\[
+  \iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+    \Axiom$\Gamma \fCenter \Delta, !A$
+    \RightLabel{$\Box$}
+    \UnaryInf$\Box\Gamma \fCenter \Diamond\Delta, \Box!A$
+    \DisplayProof  
+    \qquad
+    \Axiom$!A, \Gamma \fCenter \Delta$
+    \RightLabel{$\Diamond$}
+    \UnaryInf$\Diamond!A, \Box\Gamma \fCenter \Diamond\Delta$
+    \DisplayProof
+}{% only Box primitive
+\Axiom$\Gamma \fCenter !A$
+\RightLabel{$\Box$}
+\UnaryInf$\Box\Gamma \fCenter \Box!A$
+\DisplayProof
+}}{% only <> primitive
+  \Axiom$!A \fCenter \Delta$
+  \RightLabel{$\Diamond$}
+  \UnaryInf$\Diamond!A \fCenter \Diamond\Delta$
+  \DisplayProof
+}
+\]
+Here, \iftag{prvBox}{$\Box\Gamma$ means the sequence of !!{formula}s
+resulting from~$\Gamma$ by putting $\Box$ in front of every
+!!{formula} in~$\Gamma$\iftag{prvDiamond}{ and
+}{}}{}\iftag{prvDiamond}{$\Diamond\Delta$ is the sequence of
+!!{formula}s resulting from~$\Delta$ by putting $\Diamond$ in front of
+every !!{formula} in~$\Delta$}{}. \iftag{notprvDiamond}{The right side
+of the premise of the $\Box$ rule must contain at most one
+!!{formula}~$!A$. }{}%
+\iftag{notprvBox}{The left side of the premise of the $\Diamond$
+rule must contain at most one !!{formula}~$!A$. }{}%
+\iftag{prvBox}{$\Gamma$\iftag{prvDiamond}{~and~}{}}{}\iftag{prvDiamond}{$\Delta$}{}
+may be empty; in that case the corresponding part
+\iftag{prvBox}{$\Box\Gamma$\iftag{prvDiamond}{~and~}{}}{}\iftag{prvDiamond}{$\Diamond\Delta$}{}
+of the conclusion sequent is empty as well.
+
+The restriction of adding a
+\iftag{prvBox}{$\Box$ on the right\iftag{prvDiamond}{ and
+}{}}{}\iftag{prvDiamond}{$\Diamond$ on the left}{}
+to a single !!{formula}~$!A$ is necessary. If we allowed to
+\iftag{prvBox}{add $\Box$ to any number of !!{formula}s on the
+right\iftag{prvDiamond}{ or to }{}}{}\iftag{prvDiamond}{add $\Diamond$
+to any number of !!{formula}s on the left}{} we would be able to
+!!{derive}:
+  \[
+    \iftag{prvBox}{
+      \Axiom$!A \fCenter !A$
+      \RightLabel{\RightR{\lnot}}
+      \UnaryInf$\fCenter !A, \lnot !A$
+      \RightLabel{$\Box*$}
+      \UnaryInf$\fCenter \Box!A, \Box\lnot !A$
+      \doubleLine
+      \RightLabel{\RightR{\lor}}
+      \UnaryInf$\fCenter \Box!A \lor \Box \lnot !A$
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{\qquad}
+    \iftag{prvDiamond}{
+      \Axiom$!A \fCenter !A$
+      \RightLabel{\LeftR{\lnot}}
+      \UnaryInf$\lnot !A, !A \fCenter$
+      \RightLabel{$\Diamond*$}
+      \UnaryInf$\Diamond\lnot !A,\Diamond!A \fCenter $
+      \RightLabel{\RightR{\lnot}}
+      \UnaryInf$\Diamond!A \fCenter \lnot\Diamond\lnot !A$
+      \RightLabel{\RightR{\lif}}
+      \UnaryInf$ \fCenter \Diamond!A \lif \lnot\Diamond\lnot !A$
+      \DisplayProof}{}
+  \]
+But \iftag{prvBox}{$\Box!A \lor \Box \lnot !A$\iftag{prvDiamond}{ and
+$\Diamond!A \lif \lnot\Diamond\lnot !A$ are}{is}}{$\Diamond!A \lif
+\lnot\Diamond\lnot !A$ is} not valid in~$\Log{K}$.
+
+If we allowed side formulas in addition to~$!A$ in the premise, and
+allowed \iftag{prvBox}{the $\Box$ rule to add $\Box$ to only~$!A$ on
+the right\iftag{prvDiamond}{, or allowed }{}}{}\iftag{prvDiamond}{the
+$\Diamond$ rule to add $\Diamond$ to only~$!A$ on the left}{} (but do
+nothing to the side formulas) we would be able to !!{derive}:
+\[
+  \iftag{prvBox}{
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\fCenter !A, \lnot !A$
+    \RightLabel{\RightR{\Exchange}}
+    \UnaryInf$\fCenter \lnot !A, !A$
+    \RightLabel{$\Box*$}
+    \UnaryInf$\fCenter \lnot!A, \Box !A$
+    \doubleLine
+    \RightLabel{\RightR{\lor}}
+    \UnaryInf$\fCenter \lnot!A \lor \Box !A$
+    \DisplayProof}{}
+  \iftag{notprvBox,notprvDiamond}{}{\qquad}
+  \iftag{prvDiamond}{
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot !A, !A \fCenter$
+    \RightLabel{$\Diamond*$}
+    \UnaryInf$\Diamond\lnot !A, !A \fCenter $
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$!A \fCenter \lnot\Diamond\lnot !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$ \fCenter !A \lif \lnot\Diamond\lnot !A$
+    \DisplayProof}{}
+\]
+But \iftag{prvBox}{$\lnot!A \lor \Box !A$ (which is equivalent to $!A
+\lif \Box!A$)\iftag{prvDiamond}{ and $!A \lif \lnot\Diamond\lnot !A$
+are}{is}}{$!A \lif \lnot\Diamond\lnot !A$ is} not valid in~$\Log{K}$.
+
+\end{document}

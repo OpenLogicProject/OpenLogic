@@ -1,0 +1,364 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: more-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{mru}
+
+\olsection{Rules for Other Accessibility Relations}
+
+In order to deal with logics determined by special accessibility
+relations, we consider the additional rules in \olref{tab:more-rules}.
+
+\iftag{prvBox}{\iftag{prvDiamond}{% [] and <> primitive
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}
+    \begin{tabular}{cc}
+    \hline
+      \Axiom$!A, \Gamma \fCenter \Delta$
+      \RightLabel{T$\Box$}
+      \UnaryInf$\Box!A, \Gamma \fCenter \Delta$
+      \DisplayProof
+    &
+      \Axiom$\Gamma \fCenter \Delta, !A$
+      \RightLabel{T$\Diamond$}
+      \UnaryInf$\Gamma \fCenter \Delta, \Diamond!A$
+      \DisplayProof
+    \\[1ex]
+%    \hline
+    \multicolumn{2}{c}{
+      \Axiom$\Gamma \fCenter \Delta$
+      \RightLabel{D}
+      \UnaryInf$\Box\Gamma \fCenter \Diamond\Delta$
+      \DisplayProof}
+    \\[1ex]
+%    \hline
+      \Axiom$\Gamma, \Diamond\Pi \fCenter \Box\Delta, \Lambda, !A$
+      \RightLabel{B$\Box$}
+      \UnaryInf$\Box\Gamma, \Pi \fCenter \Delta, \Diamond\Lambda, \Box!A$
+      \DisplayProof
+      &
+      \Axiom$!A, \Diamond\Gamma, \Pi \fCenter \Box\Lambda, \Delta$
+      \RightLabel{B$\Diamond$}
+      \UnaryInf$\Diamond!A, \Gamma, \Box\Pi \fCenter \Lambda, \Diamond\Delta$
+      \DisplayProof
+    \\[1ex]
+%    \hline
+      \Axiom$\Box\Gamma \fCenter \Diamond\Delta, !A$
+      \RightLabel{4$\Box$}
+      \UnaryInf$\Box\Gamma \fCenter \Diamond\Delta, \Box!A$
+      \DisplayProof
+      &
+      \Axiom$!A, \Box\Gamma \fCenter \Diamond\Delta$
+      \RightLabel{4$\Diamond$}
+      \UnaryInf$\Diamond!A, \Box\Gamma \fCenter \Diamond\Delta$
+      \DisplayProof
+    \\[1ex]
+%    \hline
+      \Axiom$\Box\Gamma, \Diamond\Pi \fCenter \Box\Delta,
+      \Diamond\Lambda, !A$
+      \RightLabel{5$\Box$}
+      \UnaryInf$\Box\Gamma, \Diamond\Pi \fCenter \Box\Delta,
+      \Diamond\Lambda, \Box!A$
+      \DisplayProof
+&
+      \Axiom$!A, \Diamond\Gamma, \Box\Pi \fCenter \Diamond\Delta, \Box\Lambda$
+      \RightLabel{5$\Diamond$}
+      \UnaryInf$\Diamond!A,\Diamond\Gamma,\Box\Pi \fCenter \Diamond\Delta,\Box\Lambda$
+      \DisplayProof
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{More modal rules.}
+  \ollabel{tab:more-rules}
+\end{table}
+}{ % only [] primitive
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}
+    \begin{tabular}{cc}
+    \hline
+      \Axiom$!A,\Gamma \fCenter \Delta$
+      \RightLabel{T$\Box$}
+      \UnaryInf$\Box!A, \Gamma \fCenter \Delta$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$\Gamma \fCenter$
+      \RightLabel{D$\Box$}
+      \UnaryInf$\Box\Gamma \fCenter$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+      \Axiom$\Gamma \fCenter \Box\Delta, !A$
+      \RightLabel{B$\Box$}
+      \UnaryInf$\Box\Gamma \fCenter \Delta, \Box!A$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$\Box\Gamma \fCenter !A$
+      \RightLabel{4$\Box$}
+      \UnaryInf$\Box\Gamma \fCenter \Box!A$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+    \multicolumn{2}{c}{\Axiom$\Box\Gamma \fCenter \Box\Delta, !A$
+      \RightLabel{5$\Box$}
+      \UnaryInf$\Box\Gamma \fCenter \Box\Delta, \Box!A$
+      \DisplayProof}
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{More modal rules.}
+  \ollabel{tab:more-rules}
+\end{table}
+}}{% only <> primitive
+\begin{table}
+  \begin{center}
+    \def\arraystretch{3}
+    \begin{tabular}{cc}
+    \hline
+      \Axiom$\Gamma \fCenter \Delta, !A$
+      \RightLabel{T$\Diamond$}
+      \UnaryInf$\Gamma \fCenter \Delta, \Diamond!A$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$\fCenter \Delta$
+      \RightLabel{D$\Diamond$}
+      \UnaryInf$\fCenter \Diamond\Delta$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+      \Axiom$!A, \Diamond\Gamma \fCenter \Delta$
+      \RightLabel{B$\Diamond$}
+      \UnaryInf$\Diamond!A, \Gamma \fCenter \Diamond\Delta$
+      \DisplayProof
+    &
+    %\hline
+      \Axiom$!A \fCenter \Diamond\Delta$
+      \RightLabel{4$\Diamond$}
+      \UnaryInf$\Diamond!A \fCenter \Diamond\Delta$
+      \DisplayProof
+    \\[1ex]
+    %\hline
+    \multicolumn{2}{c}{
+      \Axiom$!A, \Diamond\Gamma \fCenter \Diamond\Delta$
+      \RightLabel{5$\Diamond$}
+      \UnaryInf$\Diamond!A,\Diamond\Gamma \fCenter \Diamond\Delta$
+      \DisplayProof}
+    \\[1ex]
+    \hline
+    \end{tabular}
+  \end{center}
+  \caption{More modal rules.}
+  \ollabel{tab:more-rules}
+\end{table}
+}
+
+Adding these rules results in systems that are sound and complete for
+the logics given in \olref{tab:logics-rules}.
+
+\begin{table}
+  \begin{center}
+    \begin{tabular}{lll}
+      \hline
+      Logic & $R$ is \dots & Rules\\
+      \hline
+      $\Log{T} = \Log{KT}$ & reflexive & $\Box$,
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}
+      \\ \hline
+      $\Log{D} = \Log{KD}$ & serial & $\Box$,
+      \iftag{prvBox}{%
+        \iftag{prvDiamond}{D}{D$\Box$}}{D$\Diamond$}
+      \\ \hline
+      $\Log{K4}$ & transitive & $\Box$,
+      \iftag{prvBox}{4$\Box$}{}% 
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{B} = \Log{KTB}$ & reflexive, & $\Box$,
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & symmetric &
+      \iftag{prvBox}{B$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{B$\Diamond$}{}
+      \\ \hline
+      $\Log{S4} = \Log{KT4}$ & reflexive, & $\Box$,
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & transitive &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{S5} = \Log{KT5}$ & reflexive, & $\Box$,
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & transitive, &
+      \iftag{prvBox}{5$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{5$\Diamond$}{}\\
+      &  euclidean &
+      \\ \hline
+    \end{tabular}
+  \end{center}
+  \caption{Sequent rules for various modal logics.}
+  \ollabel{tab:logics-rules}
+\end{table}
+
+\iftag{prvBox}{
+\begin{ex}
+  We give a sequent proof that shows $\Log{K4} \Proves \Ax{4}$, i.e.,
+  $\Box!A \lif \Box\Box!A$.
+  \begin{prooftree}
+    \Axiom$\Box!A \fCenter \Box!A$
+    \RightLabel{4$\Box$}
+    \UnaryInf$\Box!A \fCenter \Box\Box!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Box!A \lif \Box\Box!A$
+  \end{prooftree}
+\end{ex}
+}{\iftag{prvDiamond}{
+\begin{ex}
+  We give a sequent proof that shows $\Log{K4} \Proves \Ax{4}$, i.e.,
+  $\Diamond\Diamond!A \lif \Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Diamond!A \fCenter \Diamond!A$
+    \RightLabel{4$\Diamond$}
+    \UnaryInf$\Diamond\Diamond!A \fCenter \Diamond!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Diamond\Diamond!A \lif \Diamond!A$
+  \end{prooftree}
+\end{ex}
+}{}}
+
+\iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+\begin{ex}
+  We give a sequent proof that shows $\Log{S5} \Proves \Ax{5}$, i.e.,
+  $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Diamond!A \fCenter \Diamond!A$
+    \RightLabel{5$\Box$}
+    \UnaryInf$\Diamond!A \fCenter \Box\Diamond!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Diamond!A \lif \Box\Diamond!A$
+  \end{prooftree}
+\end{ex}
+}{% only Box primitive
+\begin{ex}
+  We give a sequent proof that shows $\Log{S5} \Proves \Ax{5}$, i.e.,
+  $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Box\lnot!A \fCenter \Box\lnot!A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\fCenter \Box\lnot!A, \lnot\Box\lnot!A$
+    \RightLabel{5$\Box$}
+    \UnaryInf$ \fCenter \Box\lnot!A, \Box\lnot\Box\lnot!A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot\Box\lnot!A \fCenter \Box\lnot\Box\lnot!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \lnot\Box\lnot!A \lif \Box\lnot\Box\lnot!A$
+  \end{prooftree}
+\end{ex}
+}}{% only <> prmitive
+\begin{ex}
+  We give a sequent proof that shows $\Log{S5} \Proves \Ax{5}$, i.e.,
+  $\Diamond!A \lif \Box\Diamond!A$.
+  \begin{prooftree}
+    \Axiom$\Diamond!A \fCenter\Diamond!A$
+    \RightLabel{\LeftR{\lnot}}
+    \UnaryInf$\lnot\Diamond !A, \Diamond!A \fCenter $
+    \RightLabel{5$\Diamond$}
+    \UnaryInf$\Diamond\lnot\Diamond!A, \Diamond!A \fCenter $
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\Diamond!A \fCenter \lnot\Diamond\lnot\Diamond!A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Diamond!A \lif \lnot\Diamond\lnot\Diamond!A$
+  \end{prooftree}
+\end{ex}
+}
+\begin{ex}
+The sequent calculus for \Log{S5} is not complete without the \Cut{}
+rule; e.g., \iftag{prvBox}{$\Diamond\Box !A \lif !A$}{$!A \lif
+\Box\Diamond !A$}, which is valid in~$\Log{S5}$, has no proof
+without~\Cut. Here is a proof using~\Cut:
+\begin{prooftree}
+\iftag{prvBox}{\iftag{prvDiamond}{% both [] and <> primitive
+\Axiom$\Box !A \fCenter \Box!A$
+\RightLabel{5$\Diamond$}
+\UnaryInf$\Diamond\Box!A \fCenter \Box!A$
+
+\Axiom$!A \fCenter !A$
+\RightLabel{T$\Box$}
+\UnaryInf$\Box!A \fCenter !A$
+\RightLabel{\Cut}
+\BinaryInf$\Diamond\Box!A \fCenter !A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\fCenter \Diamond\Box!A \lif !A$
+}{% only [] primitive
+\Axiom$\Box !A \fCenter \Box!A$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter \Box!A, \lnot\Box!A$
+\RightLabel{5$\Box$}
+\UnaryInf$\fCenter \Box!A, \Box\lnot\Box!A$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$\fCenter \Box\lnot\Box!A, \Box!A$
+
+\Axiom$!A \fCenter !A$
+\RightLabel{T$\Box$}
+\UnaryInf$\Box!A \fCenter !A$
+\RightLabel{\Cut}
+\BinaryInf$ \fCenter \Box\lnot\Box!A, !A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot\Box\lnot\Box!A \fCenter !A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\fCenter \lnot\Box\lnot\Box!A \lif !A$
+}}{% only <> primitive
+\Axiom$!A \fCenter !A$
+\RightLabel{T$\Diamond$}
+\UnaryInf$!A \fCenter \Diamond!A$
+
+\Axiom$\Diamond !A \fCenter \Diamond!A$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot\Diamond!A , \Diamond!A \fCenter$
+\RightLabel{5$\Diamond$}
+\UnaryInf$\Diamond\lnot\Diamond!A , \Diamond!A\fCenter$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$\Diamond!A, \Diamond\lnot\Diamond!A\fCenter $
+
+\RightLabel{\Cut}
+\BinaryInf$\Diamond\lnot\Diamond!A, !A\fCenter $
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$!A \fCenter \lnot\Diamond\lnot\Diamond!A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\fCenter !A \lif \lnot\Diamond\lnot\Diamond!A$
+}
+\end{prooftree}
+\end{ex}
+
+\begin{prob}
+Give sequent !!{derivation}s that show the following:
+  \begin{enumerate}
+  \item $\Log{KT5} \Proves \Ax{B}$;
+  \item $\Log{KT5} \Proves \Ax{4}$;
+  \item $\Log{KDB4} \Proves \Ax{T}$;
+  \item $\Log{KB4} \Proves \Ax{5}$;
+  \item $\Log{KB5} \Proves \Ax{4}$;
+  \item $\Log{KT} \Proves \Ax{D}$.
+  \end{enumerate}
+\end{prob}
+
+\end{document}

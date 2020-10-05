@@ -1,0 +1,51 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{int}
+
+\olsection{Introduction}
+
+The sequent calculus for propositional logic can be extended by
+additional rules that deal
+with~\iftag{prvBox}{$\Box$\iftag{prvDiamond}{ and~}{}}{}%
+\iftag{prvDiamond}{$\Diamond$}{}. For instance, for~$\Log{K}$, we
+have \Log{LK} plus:
+\[
+  \iftag{prvBox}{\iftag{prvDiamond}{% <> and [] primitive
+    \Axiom$\Gamma \fCenter \Delta, !A$
+    \RightLabel{$\Box$}
+    \UnaryInf$\Box\Gamma \fCenter \Diamond\Delta, \Box!A$
+    \DisplayProof  
+    \qquad
+    \Axiom$!A, \Gamma \fCenter \Delta$
+    \RightLabel{$\Diamond$}
+    \UnaryInf$\Diamond!A, \Box\Gamma \fCenter \Diamond\Delta$
+    \DisplayProof
+}{% only Box primitive
+\Axiom$\Gamma \fCenter !A$
+\RightLabel{$\Box$}
+\UnaryInf$\Box\Gamma \fCenter \Box!A$
+\DisplayProof
+}}{% only <> primitive
+  \Axiom$!A \fCenter \Delta$
+  \RightLabel{$\Diamond$}
+  \UnaryInf$\Diamond!A \fCenter \Diamond\Delta$
+  \DisplayProof
+}
+\]
+For extensions of~$\Log{K}$, additional rules have to be added as
+well.
+
+Not every modal logic has such a sequent calculus.  Even $\Log{S5}$,
+which is semantically simple (it can be defined without using
+accessibility relations at all) is not known to have a sequent
+calculus that results from~$\Log{LK}$ which is complete without the
+rule~\Cut. However, it has a cut-free complete \emph{hypersequent}
+calculus.
+
+\end{document}

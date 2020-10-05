@@ -1,0 +1,128 @@
+% Part: normal-modal-logic
+% Chapter: sequent-calculus
+% Section: proofs-in-K
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{nml}{seq}{prk}
+
+\olsection{Sequent \usetoken{P}{derivation} for \Log{K}}
+
+\iftag{prvBox}{
+
+\begin{ex}
+  We give a sequent calculus proof that shows $\Proves (\Box!A \land \Box!B)
+  \lif \Box (!A \land !B)$.
+  \begin{prooftree}
+    \Axiom$!A \fCenter !A$
+    \doubleLine
+    \UnaryInf$!B, !A \fCenter !A$   
+    \Axiom$!B \fCenter !B$
+    \doubleLine
+    \UnaryInf$!B, !A \fCenter !B$   
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$!B, !A \fCenter !A \land !B$    
+    \RightLabel{$\Box$}
+    \UnaryInf$\Box!B, \Box!A \fCenter \Box
+    (!A \land !B)$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$\Box!A \land \Box!B, \Box!A \fCenter \Box
+    (!A \land !B)$
+    \RightLabel{\LeftR{\Exchange}}
+    \UnaryInf$\Box!A, \Box!A \land \Box!B \fCenter \Box
+    (!A \land !B)$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$\Box!A \land \Box!B, \Box!A \land \Box!B \fCenter \Box (!A \land !B)$
+    \RightLabel{\LeftR{\Contraction}}
+    \UnaryInf$\Box!A \land \Box!B \fCenter \Box (!A \land !B)$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter (\Box!A \land \Box!B)
+    \lif \Box (!A \land !B)$
+  \end{prooftree}
+\end{ex}
+}{}
+
+\iftag{prvDiamond}{
+  \begin{ex}
+    We give a sequent calculus proof that shows $\Proves \Diamond(!A
+    \lor !B) \lif (\Diamond !A \lor \Diamond!B)$.
+    \begin{prooftree}
+      \Axiom$!A \fCenter !A$
+      \doubleLine
+      \UnaryInf$!A \fCenter !A, !B$   
+      \Axiom$!B \fCenter !B$
+      \doubleLine
+      \UnaryInf$!B \fCenter !A, !B$   
+      \RightLabel{\LeftR{\lor}}
+      \BinaryInf$!A \lor !B \fCenter !A, !B$    
+      \RightLabel{$\Diamond$}
+      \UnaryInf$\Diamond(!A \lor !B) \fCenter 
+      \Diamond !A, \Diamond!B$
+      \RightLabel{\RightR{\lor}}
+      \UnaryInf$\Diamond(!A \lor !B) \fCenter 
+      \Diamond !A, \Diamond !A \lor \Diamond!B$
+      \RightLabel{\RightR{\Exchange}}
+      \UnaryInf$\Diamond(!A \lor !B) \fCenter \Diamond !A \lor \Diamond!B, \Diamond !A$
+      \RightLabel{\RightR{\lor}}
+      \UnaryInf$\Diamond(!A \lor !B) \fCenter 
+      \Diamond !A \lor \Diamond!B, \Diamond !A \lor \Diamond!B$
+      \RightLabel{\RightR{\Contraction}}
+      \UnaryInf$\Diamond(!A
+      \lor !B) \fCenter \Diamond !A \lor \Diamond!B$
+      \RightLabel{\RightR{\lif}}
+      \UnaryInf$\fCenter \Diamond(!A
+      \lor !B) \lif (\Diamond !A \lor \Diamond!B)$
+    \end{prooftree}
+  \end{ex}
+}{}
+
+\iftag{notprvBox,notprvDiamond}{}{
+  Here is !!a{derivation} of~\Dual.
+  \begin{prooftree}
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\lnot !A, !A \fCenter $
+    \RightLabel{$\Diamond$}
+    \UnaryInf$\Diamond\lnot !A, \Box !A \fCenter $
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\Box !A \fCenter \lnot\Diamond\lnot !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \Box !A \lif \lnot\Diamond\lnot !A$
+    \Axiom$!A \fCenter !A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\fCenter !A, \lnot !A $
+    \RightLabel{\RightR{\Exchange}}
+    \UnaryInf$\fCenter \lnot !A, !A $
+    \RightLabel{$\Box$}
+    \UnaryInf$\fCenter \Diamond\lnot !A, \Box !A$
+    \RightLabel{\RightR{\Exchange}}
+    \UnaryInf$\fCenter \Box !A, \Diamond\lnot !A$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\lnot\Diamond\lnot !A \fCenter \Box !A$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\fCenter \lnot \Diamond \lnot !A \lif \Box !A$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\fCenter \Box !A \liff \lnot\Diamond\lnot !A$ 
+  \end{prooftree} 
+
+% this does not work if problems are deferred
+% \begin{prob}
+%     Give !!a{derivation} of $\Diamond!A \liff \lnot\Box\lnot !A$
+%     in~$\Log{K}$.
+% \end{prob}
+}
+
+\begin{prob}
+  Find sequent calculus proofs in~$\Log{K}$ for the following
+  !!{formula}s:
+  \begin{enumerate}
+    \item $\Box \lnot p \lif \Box(p \lif q)$
+    \item $(\Box p \lor \Box q) \lif \Box(p \lor q)$
+    \item $\Diamond p \lif \Diamond(p \lor q)$
+    \item $\Box(p \land q) \lif \Box p$
+  \end{enumerate}
+\end{prob}
+
+\end{document}
