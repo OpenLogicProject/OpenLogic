@@ -13,15 +13,15 @@ A characteristic of the natural numbers is that every natural number
 can be reached from~$0$ by applying the successor operation~$+1$
 finitely many times---any natural number is either~$0$ or the
 successor of \dots{} the successor of~$0$. One way to specify a
-function~$f\colon\Nat \to \Nat$ that makes use of this fact is this:
-(a)~specify what the value of $f$ is for argument~$0$, and (b)~also
-specify how to, given the value of $f(x)$, compute the value of
-$f(x+1)$. For (a) tells us directly what $f(0)$ is, so $f$ is defined
+function~$h\colon\Nat \to \Nat$ that makes use of this fact is this:
+(a)~specify what the value of $h$ is for argument~$0$, and (b)~also
+specify how to, given the value of $h(x)$, compute the value of
+$h(x+1)$. For (a) tells us directly what $h(0)$ is, so $h$~is defined
 for~$0$. Now, using the instruction given by (b) for $x=0$, we can
-compute $f(1) = f(0+1)$ from $f(0)$. Using the same instructions for
-$x=1$, we compute $f(2) = f(1+1)$ from $f(1)$, and so on. For every
-natural number $x$, we'll eventually reach the step where we define
-$f(x)$ from $f(x+1)$, and so $f(x)$ is defined for all $x \in \Nat$.
+compute $h(1) = h(0+1)$ from~$h(0)$. Using the same instructions for
+$x=1$, we compute $h(2) = h(1+1)$ from~$h(1)$, and so on. For every
+natural number~$x$, we'll eventually reach the step where we define
+$h(x)$ from $h(x+1)$, and so $h(x)$ is defined for all $x \in \Nat$.
 
 For instance, suppose we specify $h\colon \Nat \to \Nat$ by the following
 two equations:
@@ -30,7 +30,7 @@ h(0) & =  1\\
 h(x+1) & =  2 \cdot h(x)
 \end{align*}
 If we already know how to multiply, then these equations give us the
-information required for (a) and (b) above. Successively the second
+information required for (a) and~(b) above. Successively the second
 equation, we get that
 \begin{align*}
   h(1) & = 2\cdot h(0) = 2,\\
@@ -41,20 +41,20 @@ equation, we get that
 We see that the function~$h$ we have specified is $h(x) = 2^x$.
 
 The characteristic feature of the natural numbers guarantees that
-there is only one function~$d$ that meets these two criteria.  A pair
+there is only one function~$h$ that meets these two criteria.  A pair
 of equations like these is called a \emph{definition by primitive
-  recursion} of the function~$d$. It is so-called because we define
-$f$ ``recursively,'' i.e., the definition, specifically the second
-equation, involves $f$ itself on the right-hand-side. It is
-``primitive'' because in defining $f(x+1)$ we only use the value
-$f(x)$, i.e., the immediately preceding value. This is the simplest
-way of defining a function on $\Nat$ recursively.
+recursion} of the function~$h$. It is so-called because we define~$h$
+``recursively,'' i.e., the definition, specifically the second
+equation, involves $h$ itself on the right-hand-side. It is
+``primitive'' because in defining $h(x+1)$ we only use the
+value~$h(x)$, i.e., the immediately preceding value. This is the
+simplest way of defining a function on~$\Nat$ recursively.
 
 We can define even more fundamental functions like addition and
 multiplication by primitive recursion. In these cases, however, the
 functions in question are $2$-place. We fix one of the argument
 places, and use the other for the recursion. E.g, to define
-$\Add(x, y)$ we can fix $x$ and define the value first for $y=0$
+$\Add(x, y)$ we can fix~$x$ and define the value first for $y=0$
 and then for $y+1$ in terms of~$y$. Since $x$ is fixed, it will appear
 on the left and on the right side of the defining equations.
 \begin{align*}
