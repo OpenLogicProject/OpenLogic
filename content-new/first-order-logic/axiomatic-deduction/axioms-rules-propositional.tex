@@ -1,0 +1,43 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: axioms-rules-propositional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{prp}}
+      {\olfileid{pl}{axd}{prp}}
+
+\olsection{Axiom and Rules for the Propositional Connectives}
+
+\begin{defn}[Axioms]
+The set of $\PAx$ of \emph{axioms} for the propositional connectives comprises
+all !!{formula}s of the following forms:
+\begin{align}
+  & (!A \land !B) \lif !A \ollabel{ax:land1}\\
+  & (!A \land !B) \lif !B \ollabel{ax:land2}\\
+  & !A \lif (!B \lif (!A \land !B)) \ollabel{ax:land3}\\
+  & !A \lif (!A \lor !B) \ollabel{ax:lor1}\\
+  & !A \lif (!B \lor !A) \ollabel{ax:lor2}\\
+  & (!A \lif !C) \lif ((!B \lif !C) \lif ((!A \lor !B) \lif !C)) \ollabel{ax:lor3}\\
+  & !A \lif (!B \lif !A) \ollabel{ax:lif1}\\
+  & (!A \lif (!B \lif !C)) \lif ((!A \lif !B) \lif (!A \lif !C)) \ollabel{ax:lif2}\\
+  & (!A \lif !B) \lif ((!A \lif \lnot !B) \lif \lnot !A) \ollabel{ax:lnot1}\\
+  & \lnot !A \lif (!A \lif !B) \ollabel{ax:lnot2}\\
+  & \ltrue \ollabel{ax:ltrue}\\
+  & \lfalse \lif !A \ollabel{ax:lfalse1}\\
+  & (!A \lif \lfalse) \lif \lnot !A \ollabel{ax:lfalse2}\\
+  & \lnot\lnot !A \lif !A \ollabel{ax:dne}
+\end{align}
+\end{defn}
+
+\begin{defn}[Modus ponens]
+  If $!B$ and $!B \lif !A$ already occur in a derivation, then $!A$ is
+  a correct inference step.
+\end{defn}
+
+We'll abbreviate the rule modus ponens as ``\MP.''
+
+\end{document}

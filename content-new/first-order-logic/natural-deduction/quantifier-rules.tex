@@ -1,0 +1,86 @@
+% Part: first-order-logic
+% Chapter: natural-deduction
+% Section: quantifier-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{ntd}{qrl}
+
+\olsection{Quantifier Rules}
+
+\subsection{Rules for $\lforall$}
+
+\begin{defish}
+\AxiomC{$!A(a)$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][\Atom{!A}{x}]$}
+\DisplayProof
+\hfill
+\AxiomC{$\lforall[x][\Atom{!A}{x}]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!A(t)$}
+\DisplayProof
+\end{defish}
+
+In the rules for~$\lforall$, $t$ is a ground term (a term that does
+not contain any variables), and $a$~is a !!{constant} which does not
+occur in the conclusion~$\lforall[x][!A(x)]$, or in any assumption
+which is !!{undischarged} in the !!{derivation} ending with the
+premise~$!A(a)$. We call $a$ the \emph{eigenvariable} of the
+\Intro{\lforall} inference.
+
+\subsection{Rules for $\lexists$}
+
+\begin{defish}
+\AxiomC{$\Atom{!A}{t}$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][\Atom{!A}{x}]$}
+\DisplayProof
+\hfill
+\AxiomC{$\lexists[x][\Atom{!A}{x}]$}
+\AxiomC{[$\Atom{!A}{a}$]$^n$}
+\DeduceC{$!C$}
+\DischargeRule{\Elim{\lexists}}{n}
+\BinaryInfC{$!C$}
+\DisplayProof
+\end{defish}
+
+Again, $t$ is a ground term, and $a$ is a constant which does not
+occur in the premise $\lexists[x][!A(x)]$, in the conclusion~$!C$, or
+any assumption which is !!{undischarged} in the !!{derivation}s ending
+with the two premises (other than the assumptions $!A(a)$).  We call
+$a$ the \emph{eigenvariable} of the \Elim{\lexists} inference.
+
+The condition that an eigenvariable neither occur in the premises nor in
+any assumption that is !!{undischarged} in the !!{derivation}s leading 
+to the premises for the \Intro{\lforall} or \Elim{\lexists} inference is 
+called the \emph{eigenvariable condition}.
+
+\begin{explain}
+We use the term ``eigenvariable'' even though $a$ in the above rules
+is a constant. This has historical reasons.
+
+In \Intro{\lexists} and \Elim{\lforall} there are no restrictions, and
+the term~$t$ can be anything, so we do not have to worry about any
+conditions. On the other hand, in the \Elim{\lexists} and
+\Intro{\lforall} rules, the eigenvariable condition requires that the
+!!{constant}~$a$ does not occur anywhere in the conclusion or in an
+!!{undischarged} assumption. The condition is necessary to ensure that
+the system is sound, i.e., only !!{derive}s !!{sentence}s from
+!!{undischarged} assumptions from which they follow. Without this
+condition, the following would be allowed:
+\begin{prooftree}
+  \AxiomC{$\lexists[x][!A(x)]$}
+  \AxiomC{$\Discharge{!A(a)}{1}$}
+  \RightLabel{*\Intro{\lforall}}
+  \UnaryInfC{$\lforall[x][!A(x)]$}
+  \RightLabel{\Elim{\lexists}}
+  \BinaryInfC{$\lforall[x][!A(x)]$}
+\end{prooftree}
+However, $\lexists[x][!A(x)] \Entails/ \lforall[x][!A(x)]$.
+\end{explain}
+
+
+\end{document}

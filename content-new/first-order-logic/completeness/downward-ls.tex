@@ -1,0 +1,63 @@
+% Part: first-order-logic
+% Chapter: completeness
+% Section: downward-ls
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{com}{dls}
+\olsection{The L\"owenheim-Skolem Theorem}
+
+The L\"owenheim-Skolem Theorem says that if a theory has an infinite
+model, then it also has a model that is at most !!{denumerable}. An
+immediate consequene of this fact is that first-order logic cannot
+express that the size of !!a{structure} is !!{nonenumerable}: any
+!!{sentence} or set of !!{sentence}s satisfied in all
+!!{nonenumerable} !!{structure}s is also satisfied in some
+!!{enumerable} structure.
+
+\begin{thm} 
+\ollabel{thm:downward-ls} If $\Gamma$ is consistent then it has
+!!a{enumerable} model, i.e., it is satisfiable in a !!{structure}
+whose domain is either finite or !!{denumerable}.
+\end{thm}
+
+\begin{proof}
+If $\Gamma$ is consistent, the !!{structure} $\Struct M$ delivered by
+the proof of the completeness theorem has a domain $\Domain{M}$ that
+is no larger than the set of the terms of the language~$\Lang L$. So
+$\Struct M$ is at most !!{denumerable}.
+\end{proof}
+
+\begin{thm}
+\ollabel{noidentity-ls} If $\Gamma$ is consistent set of !!{sentence}s
+in the language of first-order logic without identity, then it has
+!!a{denumerable} model, i.e., it is satisfiable in a !!{structure}
+whose domain is infinite and !!{enumerable}.
+\end{thm}
+
+\begin{proof}
+If $\Gamma$ is consistent and contains no sentences in which identity
+appears, then the !!{structure} $\Struct M$ delivered by the proof of
+the completness theorem has a domain $\Domain{M}$ identical to the set
+of terms of the language~$\Lang L'$. So $\Struct{M}$ is
+!!{denumerable}, since $\Trm[L']$ is.
+\end{proof}
+
+\begin{ex}[Skolem's Paradox]
+Zermelo-Fraenkel set theory~$\Log{ZFC}$ is a very powerful framework
+in which practically all mathematical statements can be expressed,
+including facts about the sizes of sets. So for instance, $\Log{ZFC}$
+can prove that the set~$\Real$ of real numbers is !!{nonenumerable},
+it can prove Cantor's Theorem that the power set of any set is larger
+than the set itself, etc.  If $\Log{ZFC}$ is consistent, its models
+are all infinite, and moreover, they all contain !!{element}s about
+which the theory says that they are !!{nonenumerable}, such as the
+element that makes true the theorem of~$\Log{ZFC}$ that the power set
+of the natural numbers exists. By the L\"owenheim-Skolem Theorem,
+$\Log{ZFC}$ also has !!{enumerable} models---models that contain
+``!!{nonenumerable}'' sets but which themselves are !!{enumerable}.
+\end{ex}
+
+\end{document}

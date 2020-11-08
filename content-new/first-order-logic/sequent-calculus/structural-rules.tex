@@ -1,0 +1,80 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: structural-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{srl}}
+      {\olfileid{pl}{seq}{srl}}
+
+\olsection{Structural Rules}
+
+We also need a few rules that allow us to rearrange !!{sentence}s in
+the left and right side of a sequent.  Since the logical rules require
+that the !!{sentence}s in the premise which the rule acts upon stand
+either to the far left or to the far right, we need an ``exchange''
+rule that allows us to move !!{sentence}s to the right position.  It's
+also important sometimes to be able to combine two identical
+!!{sentence}s into one, and to add !!a{sentence} on either side.
+
+\subsection{Weakening}
+
+\begin{defish}
+\Axiom$ \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\end{defish}
+
+\subsection{Contraction}
+
+\begin{defish}
+\Axiom$ !A, !A, \Gamma \fCenter \Delta $
+\RightLabel{\LeftR{\Contraction}}
+\UnaryInf$ !A, \Gamma \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A, !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A$
+\DisplayProof
+\end{defish}
+
+\subsection{Exchange}
+
+\begin{defish}
+\Axiom$ \Gamma, !A, !B, \Pi \fCenter \Delta $
+\RightLabel{\LeftR{\Exchange}}
+\UnaryInf$ \Gamma, !B, !A, \Pi \fCenter \Delta$
+\DisplayProof
+\hfill
+\Axiom$ \Gamma \fCenter \Delta, !A, !B, \Lambda$
+\RightLabel{\RightR{\Exchange}}
+\UnaryInf$ \Gamma \fCenter \Delta, !B, !A, \Lambda$
+\DisplayProof
+\end{defish}
+
+A series of weakening, contraction, and exchange inferences will often
+be indicated by double inference lines.
+
+The following rule, called ``cut,'' is not strictly speaking
+necessary, but makes it a lot easier to reuse and combine derivations.
+\begin{defish}
+\[
+\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !A, \Pi \fCenter \Lambda $
+\RightLabel{\Cut}
+\BinaryInf$ \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+\end{defish}
+
+\end{document}

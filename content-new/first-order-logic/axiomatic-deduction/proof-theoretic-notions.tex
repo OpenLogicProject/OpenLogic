@@ -1,0 +1,136 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ptn}}
+      {\olfileid{pl}{axd}{ptn}}
+
+\olsection{Proof-Theoretic Notions}
+
+\begin{explain}
+Just as we've defined a number of important semantic notions
+(\iftag{FOL}{validity}{tautology}, entailment, satisfiabilty), we now
+define corresponding \emph{proof-theoretic notions}.  These are not
+defined by appeal to satisfaction of !!{sentence}s in !!{structure}s,
+but by appeal to the !!{derivability} or !!{nonderivability} of
+certain formulas.  It was an important discovery that these notions
+coincide.  That they do is the content of the \emph{soundness} and
+\emph{completeness theorems}.
+\end{explain}
+
+\begin{defn}[!!^{derivability}]
+!!^a{formula} $!A$ is \emph{!!{derivable}} from $\Gamma$, written
+$\Gamma \Proves !A$, if there is !!a{derivation} from~$\Gamma$ ending
+in~$!A$.
+\end{defn}
+
+\begin{defn}[Theorems]
+!!^a{formula}~$!A$ is a \emph{theorem} if there is !!a{derivation} of
+$!A$ from the empty set.  We write $\Proves !A$ if $!A$ is a theorem
+and $\Proves/ !A$ if it is not.
+\end{defn}
+
+\begin{defn}[Consistency]
+A set $\Gamma$ of !!{formula}s is \emph{consistent} if and only if
+$\Gamma\Proves/ \lfalse$; it is \emph{inconsistent} otherwise.
+\end{defn}
+
+\begin{prop}[Reflexivity]
+\ollabel{prop:reflexivity}
+If $!A \in \Gamma$, then $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+  The !!{formula}~$!A$ by itself is !!a{derivation} of~$!A$ from~$\Gamma$.
+\end{proof}
+
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any !!{derivation} of $!A$ from $\Gamma$ is also !!a{derivation} of
+$!A$ from~$\Delta$.
+\end{proof}
+
+\begin{prop}[Transitivity]
+\ollabel{prop:transitivity}
+If $\Gamma \Proves !A$ and $\{!A\} \cup \Delta \Proves
+!B$, then $\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+  Suppose $\{!A\} \cup \Delta \Proves !B$. Then there is
+  !!a{derivation} $!B_1$, \dots, $!B_l = !B$ from~$\{!A\} \cup
+  \Delta$. Some of the steps in that derivation will be correct
+  because of a rule which refers to a prior line~$!B_i = !A$. By
+  hypothesis, there is !!a{derivation} of~$!A$ from~$\Gamma$, i.e.,
+  !!a{derivation}~$!A_1$, \dots, $!A_k = !A$ where every $!A_i$ is an
+  axiom, !!a{element} of~$\Gamma$, or correct by a rule of
+  inference. Now consider the sequence
+  \[
+  !A_1, \dots, !A_k = !A, !B_1, \dots, !B_l = !B.
+  \]
+  This is a correct !!{derivation} of~$!B$ from $\Gamma \cup \Delta$
+  since every $B_i = !A$ is now justified by the same rule which
+  justifies~$!A_k = !A$.
+\end{proof}
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+Prove \olref[fol][axd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+Prove \olref[pl][axd][ptn]{prop:incons}.
+\end{prob}
+\tagendprob
+
+\begin{prop}[Compactness]
+\ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is a finite sequence of
+      !!{formula}s $!A_1$, \dots,~$!A_n$ so that $!A \ident !A_n$ and
+      each $!A_i$ is either a logical axiom, !!a{element} of~$\Gamma$
+      or follows from previous !!{formula}s by modus ponens.  Take
+      $\Gamma_0$ to be those $!A_i$ which are in~$\Gamma$.  Then the
+      !!{derivation} is likewise a !!{derivation} from~$\Gamma_0$, and
+      so $\Gamma_0 \Proves !A$.
+    \item This is the contrapositive of~(1) for the special case $!A
+      \ident \lfalse$.
+\end{enumerate}
+\end{proof}
+
+\end{document}

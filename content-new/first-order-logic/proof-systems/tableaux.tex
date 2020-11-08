@@ -1,0 +1,89 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: tableaux
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{tab}}
+      {\olfileid{pl}{prf}{tab}}
+
+\olsection{\usetoken{P}{tableau}}
+
+While many !!{derivation} systems operate with arrangements of
+!!{sentence}s, !!{tableau}s operate with !!{signed formula}s.
+!!^a{signed formula} is a pair consisting of a truth value sign
+($\True$ or $\False$) and a !!{sentence}
+\[
+\sFmla{\True}{!A} \text{ or } \sFmla{\False}{!A}.
+\]
+!!^a{tableau} consists of !!{signed formula}s arranged in a
+downward-branching tree. It begins with a number of \emph{assumptions}
+and continues with !!{signed formula}s which result from one of the
+!!{signed formula}s above it by applying one of the rules of
+inference. Each rule allows us to add one or more !!{signed formula}s
+to the end of a branch, or two !!{signed formula}s side by side---in
+this case a branch splits into two, with the two added !!{signed
+  formula}s forming the ends of the two branches.
+
+A rule applied to a complex !!{signed formula} results in the addition
+of !!{signed formula}s which are immediate sub-!!{formula}s. They come
+in pairs, one rule for each of the two signs.  For instance, the
+$\TRule{\True}{\land}$ rule applies to $\sFmla{\True}{!A \land !B}$,
+and allows the addition of both the two !!{signed formula}s
+$\sFmla{\True}{!A}$ and~$\sFmla{\True}{!B}$ to the end of any branch
+containing $\sFmla{\True}{!A \land !B}$, and the rule
+$\TRule{\False}{!A \land !B}$ allows a branch to be split by adding
+$\sFmla{\False}{!A}$ and $\sFmla{\False}{!B}$ side-by-side.
+!!^a{tableau} is closed if every one of its branches contains a
+matching pair of !!{signed formula}s $\sFmla{\True}{!A}$ and
+$\sFmla{\False}{!A}$.
+
+The $\Proves$ relation based on !!{tableau}s is defined as follows:
+$\Gamma \Proves !A$ iff there is some finite set~$\Gamma_0 = \{!B_1,
+\dots, !B_n\} \subseteq \Gamma$ such that there is a closed !!{tableau}
+for the assumptions
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} 
+\]
+For instance, here is a closed !!{tableau} that shows that $\Proves
+(!A \land !B) \lif !A$:
+\begin{oltableau}
+  [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}}, just = \TAss
+    [\sFmla{\True}{\formula{A} \land \formula{B}}, just = {\TRule{\False}{\lif}[1]}
+      [\sFmla{\False}{\formula{A}}, just = {\TRule{\False}{\lif}[1]}
+        [\sFmla{\True}{\formula{A}}, just = {\TRule{\True}{\lif}[2]}
+          [\sFmla{\True}{\formula{B}}, just = {\TRule{\True}{\lif}[2]}, close]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+A set $\Gamma$ is inconsistent in the !!{tableau} calculus if there is
+a closed !!{tableau} for assumptions
+\[
+\{\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} 
+\]
+for some $!B_i \in \Gamma$.
+
+!!^{tableau}s were invented in the 1950s independently by Evert
+Beth and Jaakko Hintikka, and simplified and popularized by Raymond
+Smullyan. They are very easy to use, since constructing !!a{tableau} is a
+very systematic procedure. Because of the systematic nature of
+!!{tableau}s, they also lend themselves to implementation by
+computer. However, !!a{tableau} is often hard to read and their
+connection to proofs are sometimes not easy to see. The approach is
+also quite general, and many different logics have !!{tableau}
+systems. !!^{tableau}s also help us to find !!{structure}s that
+satisfy given (sets of) !!{sentence}s: if the set is satisfiable, it
+won't have a closed !!{tableau}, i.e., any !!{tableau} will have an
+open branch. The satisfying !!{structure} can be ``read off'' an open
+branch, provided every rule it is possible to apply has been applied
+on that branch.  There is also a very close connection to the sequent
+calculus: essentially, a closed !!{tableau} is a condensed
+!!{derivation} in the sequent calculus, written upside-down.
+
+\end{document}

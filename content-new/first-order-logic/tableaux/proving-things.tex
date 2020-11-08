@@ -1,0 +1,428 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: proving-things
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{pro}}
+      {\olfileid{pl}{tab}{pro}}
+
+\olsection{Examples of \usetoken{P}{tableau}}
+
+\begin{ex}
+Let's find a closed !!{tableau} for the !!{sentence} $(!A \land !B) \lif !A$.
+
+We begin by writing the corresponding assumption at the top of the
+!!{tableau}.
+\begin{oltableau}
+  [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}},
+    just = \TAss]
+\end{oltableau}
+
+There is only one assumption, so only one !!{signed formula} to which
+we can apply a rule. (For every !!{signed formula}, there is always at
+most one rule that can be applied: it's the rule for the corresponding
+sign and !!{main operator} of the !!{sentence}.) In this case, this
+means, we must apply $\TRule{\False}{\lif}$.
+\begin{oltableau}
+  [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}},
+    checked, just = \TAss
+    [\sFmla{\True}{\formula{A} \land \formula{B}},
+      just={\TRule{\False}{\lif}[1]}
+      [\sFmla{\False}{\formula{A}}, just={\TRule{\False}{\lif}[1]}]
+    ]
+  ]
+\end{oltableau}
+To keep track of which !!{signed formula}s we have applied their
+corresponding rules to, we write a checkmark next to the
+sentence. However, \emph{only} write a checkmark if the rule has been
+applied to all open branches. Once !!a{signed formula} has had the
+corresponding rule applied in every open branch, we will not have to
+return to it and apply the rule again. In this case, there is only one
+branch, so the rule only has to be applied once. (Note that checkmarks
+are only a convenience for constructing tableaux and are not
+officially part of the syntax of tableaux.)
+
+There is one new !!{signed formula} to which we can apply a rule: the
+$\sFmla{\True}{!A \land !B}$ on line~$3$. Applying the
+$\TRule{\True}{\land}$ rule results in:
+\begin{oltableau}
+  [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}},
+    checked, just = \TAss
+    [\sFmla{\True}{\formula{A} \land \formula{B}},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\False}{\formula{A}}, just={\TRule{\False}{\lif}[1]}
+        [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\land}[2]}
+          [\sFmla{\True}{\formula{B}}, just={\TRule{\True}{\land}[2]}, close
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+Since the branch now contains both $\sFmla{\True}{!A}$ (on line~$4$)
+and $\sFmla{\False}{!A}$ (on line~$3$), the branch is closed. Since it
+is the only branch, the !!{tableau} is closed. We have found
+a closed !!{tableau} for~$(!A \land !B) \lif !A$.
+\end{ex}
+
+\begin{ex}
+Now let's find a closed !!{tableau} for $(\lnot !A \lor !B) \lif (!A
+\lif !B)$.
+
+We begin with the corresponding assumption:
+\begin{oltableau}
+  [\sFmla{\False}{(\lnot \formula{A} \lor \formula{B}) \lif
+      (\formula{A} \lif \formula{B})}, just=\TAss]
+\end{oltableau}
+The one !!{signed formula} in this !!{tableau} has !!{main operator}~$\lif$
+and sign~$\False$, so we apply the $\TRule{\False}{\lif}$ rule to it
+to obtain:
+\begin{oltableau}
+  [\sFmla{\False}{(\lnot \formula{A} \lor \formula{B})
+      \lif (\formula{A} \lif \formula{B})}, just=\TAss, checked
+    [\sFmla{\True}{\lnot \formula{A} \lor \formula{B}},
+      just={\TRule{\False}{\lif}[1]}
+      [\sFmla{\False}{(\formula{A} \lif \formula{B})},
+        just={\TRule{\False}{\lif}[1]}
+      ]
+    ]
+  ]
+\end{oltableau}
+We now have a choice as to whether to apply~$\TRule{\True}{\lor}$ to
+line~$2$ or $\TRule{\False}{\lif}$ to line~$3$. It actually doesn't
+matter which order we pick, as long as each !!{signed formula} has its
+corresponding rule applied in every branch. So let's pick the first
+one. The $\TRule{\True}{\lor}$ rule allows the !!{tableau} to branch,
+and the two conclusions of the rule will be the new !!{signed formula}s
+added to the two new branches. This results in:
+\begin{oltableau}
+  [\sFmla{\False}{(\lnot \formula{A} \lor \formula{B}) \lif
+      (\formula{A} \lif \formula{B})}, just=\TAss, checked
+    [\sFmla{\True}{\lnot \formula{A} \lor \formula{B}},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\False}{(\formula{A} \lif \formula{B})},
+        just={\TRule{\False}{\lif}[1]}
+        [\sFmla{\True}{\lnot \formula{A}}, just={\TRule{\True}{\lor}[2]}]
+        [\sFmla{\True}{\formula{B}}, just={\TRule{\True}{\lor}[2]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+We have not applied the $\TRule{\False}{\lif}$ rule to line~$3$ yet:
+let's do that now.  To save time, we apply it to both branches.
+Recall that we write a checkmark next to !!a{signed formula} only if
+we have applied the corresponding rule in every open branch. So it's a
+good idea to apply a rule at the end of every branch that contains the
+!!{signed formula} the rule applies to. That way we won't have to
+return to that !!{signed formula} lower down in the various branches.
+\begin{oltableau}
+  [\sFmla{\False}{(\lnot \formula{A} \lor \formula{B}) \lif
+      (\formula{A} \lif \formula{B})}, just=\TAss, checked
+    [\sFmla{\True}{\lnot \formula{A} \lor \formula{B}},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\False}{(\formula{A} \lif \formula{B})},
+        just={\TRule{\False}{\lif}[1]}, checked
+        [\sFmla{\True}{\lnot \formula{A}}, just={\TRule{\True}{\lor}[2]}
+          [\sFmla{\True}{\formula{A}}, just={\TRule{\False}{\lif}[3]}
+            [\sFmla{\False}{\formula{B}}, just={\TRule{\False}{\lif}[3]}]
+          ]
+        ]
+        [\sFmla{\True}{\formula{B}}, just={\TRule{\True}{\lor}[2]}
+          [\sFmla{\True}{\formula{A}}, just={\TRule{\False}{\lif}[3]}
+            [\sFmla{\False}{\formula{B}}, just={\TRule{\False}{\lif}[3]}, close]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+The right branch is now closed. On the left branch, we can still apply
+the $\TRule{\True}{\lnot}$ rule to line~$4$. This results
+in~$\sFmla{\False}{!A}$ and closes the left branch:
+\begin{oltableau}
+  [\sFmla{\False}{(\lnot \formula{A} \lor \formula{B}) \lif
+      (\formula{A} \lif \formula{B})}, just=\TAss, checked
+    [\sFmla{\True}{\lnot \formula{A} \lor \formula{B}},
+      just={\TRule{\False}{\lif}[1]}, checked
+      [\sFmla{\False}{(\formula{A} \lif \formula{B})},
+        just={\TRule{\False}{\lif}[1]}, checked
+        [\sFmla{\True}{\lnot \formula{A}}, just={\TRule{\True}{\lor}[2]}
+          [\sFmla{\True}{\formula{A}}, just={\TRule{\False}{\lif}[3]}
+            [\sFmla{\False}{\formula{B}}, just={\TRule{\False}{\lif}[3]}
+              [\sFmla{\False}{\formula{A}},
+                just={\TRule{\True}{\lnot}[4]}, close]
+            ]
+          ]
+        ]
+        [\sFmla{\True}{\formula{B}}, just={\TRule{\True}{\lor}[2]}
+          [\sFmla{\True}{\formula{A}}, just={\TRule{\False}{\lif}[3]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lif}[3]}, close]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+\end{ex}
+
+\begin{ex}
+We can give !!{tableau}s for any number of !!{signed formula}s as
+assumptions.  Often it is also necessary to apply more than one rule
+that allows branching; and in general !!a{tableau} can have any number
+of branches. For instance, consider !!a{tableau} for
+$\{\sFmla{\True}{!A \lor (!B \land !C)}, \sFmla{\False}{(!A \lor !B) \land (!A
+  \lor !C)}\}$. We start by applying the $\TRule{\True}{\lor}$ to the
+first assumption:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}]
+    ]
+  ]
+\end{oltableau}
+Now we can apply the $\TRule{\False}{\land}$ rule to line~$2$. We do
+this on both branches simultaneously, and can therefore check off
+line~$2$:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+Now we can apply $\TRule{\False}{\lor}$ to all the branches containing
+$!A \lor !B$:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}}, just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}}, just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}]
+      ]
+    ]
+  ]
+\end{oltableau}
+The leftmost branch is now closed. Let's now apply
+$\TRule{\False}{\lor}$ to $!A \lor !C$:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}, move by=2
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}
+            ]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}, move by=2
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+Note that we moved the result of applying $\TRule{\False}{\lor}$ a
+second time below for clarity. In this instance it would not have been
+needed, since the justifications would have been the same.
+
+Two branches remain open, and $\sFmla{\True}{!B \land !C}$ on line~$3$
+remains unchecked. We apply $\TRule{\True}{\land}$ to it to obtain a
+closed !!{tableau}:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}, checked
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}
+              [\sFmla{\True}{\formula{B}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\True}{\formula{C}},
+                  just={\TRule{\True}{\land}[3]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}
+              [\sFmla{\True}{\formula{B}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\True}{\formula{C}},
+                  just={\TRule{\True}{\land}[3]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+For comparison, here's a closed !!{tableau} for the same set of
+assumptions in which the rules are applied in a different order:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\False}{\formula{A} \lor \formula{B}},
+        just={\TRule{\False}{\land}[2]}, checked
+        [\sFmla{\False}{\formula{A}},
+          just={\TRule{\False}{\lor}[3]}
+          [\sFmla{\False}{\formula{B}},
+            just={\TRule{\False}{\lor}[3]}
+            [\sFmla{\True}{\formula{A}},
+              just={\TRule{\True}{\lor}[1]},close
+            ]
+            [\sFmla{\True}{\formula{B} \land \formula{C}},
+              just={\TRule{\True}{\lor}[1]}, checked
+              [\sFmla{\True}{\formula{B}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\True}{\formula{C}},
+                  just={\TRule{\True}{\land}[3]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+      [\sFmla{\False}{\formula{A} \lor \formula{C}},
+        just={\TRule{\False}{\land}[2]}, checked
+        [\sFmla{\False}{\formula{A}},
+          just={\TRule{\False}{\lor}[3]}
+          [\sFmla{\False}{\formula{C}},
+            just={\TRule{\False}{\lor}[3]}
+            [\sFmla{\True}{\formula{A}},
+              just={\TRule{\True}{\lor}[1]},close
+            ]
+            [\sFmla{\True}{\formula{B} \land \formula{C}},
+              just={\TRule{\True}{\lor}[1]}, checked
+              [\sFmla{\True}{\formula{B}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\True}{\formula{C}},
+                  just={\TRule{\True}{\land}[3]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+\end{ex}
+
+\begin{prob}
+Give closed !!{tableau}s of the following:
+\begin{enumerate}
+\item $\sFmla{\False}{\lnot(!A \lif !B) \lif (!A \land \lnot !B)}$
+\item $\sFmla{\False}{(!A \lif !C) \lor (!B \lif !C)}, \sFmla{\True}{(!A \land
+  !B) \lif !C}$
+\end{enumerate}
+\end{prob}
+
+
+\end{document}

@@ -1,0 +1,101 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{int}}
+      {\olfileid{pl}{prf}{int}}
+
+\olsection{Introduction}
+
+Logics commonly have both a semantics and !!a{derivation}
+system. The semantics concerns concepts such as truth, satisfiability,
+validity, and entailment.  The purpose of !!{derivation} systems is to
+provide a purely syntactic method of establishing entailment and
+validity.  They are purely syntactic in the sense that a
+!!{derivation} in such a system is a finite syntactic object, usually
+a sequence (or other finite arrangement) of !!{sentence}s or
+!!{formula}s.  Good !!{derivation} systems have the property that any
+given sequence or arrangement of !!{sentence}s or !!{formula}s can be
+verified mechanically to be ``correct.''  
+
+The simplest (and historically first) !!{derivation} systems for
+first-order logic were \emph{axiomatic}.  A sequence of !!{formula}s
+counts as a !!{derivation} in such a system if each individual
+!!{formula} in it is either among a fixed set of ``axioms'' or follows
+from !!{formula}s coming before it in the sequence by one of a fixed
+number of ``inference rules''---and it can be mechanically verified if
+!!a{formula} is an axiom and whether it follows correctly from other
+!!{formula}s by one of the inference rules.  Axiomatic proof systems
+are easy to describe---and also easy to handle
+meta-theoretically---but !!{derivation}s in them are hard to read and
+understand, and are also hard to produce.
+
+Other !!{derivation} systems have been developed with the aim of making it
+easier to construct !!{derivation}s or easier to understand
+!!{derivation}s once they are complete.  Examples are natural
+deduction, truth trees, also known as tableaux proofs, and the sequent
+calculus.  Some !!{derivation} systems are designed especially with
+mechanization in mind, e.g., the resolution method is easy to
+implement in software (but its !!{derivation}s are essentially
+impossible to understand). Most of these other proof systems represent
+!!{derivation}s as trees of !!{formula}s rather than sequences. This
+makes it easier to see which parts of !!a{derivation} depend on which
+other parts.
+
+So for a given logic, such as first-order logic, the different
+!!{derivation} systems will give different explications of what it is
+for !!a{sentence} to be a \emph{theorem} and what it means for
+!!a{sentence} to be !!{derivable} from some others. However that is
+done (via axiomatic !!{derivation}s, natural deductions, sequent
+!!{derivation}s, truth trees, resolution refutations), we want these
+relations to match the semantic notions of validity and
+entailment. Let's write $\Proves !A$ for ``$!A$~is a theorem'' and
+``$\Gamma \Proves !A$'' for ``$!A$~is !!{derivable} from~$\Gamma$.''
+However $\Proves$~is defined, we want it to match up with $\Entails$,
+that is:
+\begin{enumerate}
+\item $\Proves !A$ if and only if $\Entails !A$
+\item $\Gamma \Proves !A$ if and only if $\Gamma \Entails !A$
+\end{enumerate}
+The ``only if'' direction of the above is called
+\emph{soundness}. !!^a{derivation} system is sound if !!{derivability}
+guarantees entailment (or validity). Every decent !!{derivation}
+system has to be sound; unsound !!{derivation} systems are not useful
+at all. After all, the entire purpose of !!a{derivation} is to provide
+a syntactic guarantee of validity or entailment. We'll prove soundness
+for the !!{derivation} systems we present.
+
+The converse ``if'' direction is also important: it is called
+\emph{completeness}. A complete !!{derivation} system is strong enough
+to show that $!A$~is a theorem whenever $!A$~is valid, and that
+$\Gamma \Proves !A$ whenever $\Gamma \Entails !A$.
+Completeness is harder to establish, and some logics have no complete
+!!{derivation} systems. First-order logic does. Kurt G\"odel was the
+first one to prove completeness for a !!{derivation} system of
+first-order logic in his 1929 dissertation.
+
+Another concept that is connected to !!{derivation} systems is that of
+\emph{consistency}. A set of !!{sentence}s is called inconsistent if
+anything whatsoever can be !!{derive}d from it, and consistent
+otherwise.  Inconsistency is the syntactic counterpart to
+unsatisfiablity: like unsatisfiable sets, inconsistent sets of
+!!{sentence}s do not make good theories, they are defective in a
+fundamental way. Consistent sets of !!{sentence}s may not be true or
+useful, but at least they pass that minimal threshold of logical
+usefulness.  For different !!{derivation} systems the specific
+definition of consistency of sets of !!{sentence}s might differ, but
+like $\Proves$, we want consistency to coincide with its semantic
+counterpart, satisfiability. We want it to always be the case that
+$\Gamma$ is consistent if and only if it is satisfiable. Here, the
+``if'' direction amounts to completeness (consistency guarantees
+satisfiability), and the ``only if'' direction amounts to soundness
+(satisfiability guarantees consistency).  In fact, for classical
+first-order logic, the two versions of soundness and completeness are
+equivalent.
+
+\end{document}

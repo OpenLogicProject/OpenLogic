@@ -1,0 +1,93 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: propositional-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{prl}}
+      {\olfileid{pl}{tab}{prl}}
+
+\olsection{Propositional Rules}
+
+\subsection{Rules for $\lnot$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{\lnot !A}}
+\RightLabel{\TRule{\True}{\lnot}}
+\UnaryInfC{\sFmla{\False}{!A}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{\lnot !A}}
+\RightLabel{\TRule{\False}{\lnot}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\land$}
+
+\begin{defish}\noindent
+\AxiomC{\sFmla{\True}{!A \land !B}}
+\RightLabel{\TRule{\True}{\land}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\True}{!B}}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \land !B}}
+\RightLabel{\TRule{\False}{\land}}
+\UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\False}{!B}$}
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\lor$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{!A \lor !B}}
+\RightLabel{\TRule{\True}{\lor}}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lor !B}}
+\RightLabel{\TRule{\False}{\lor}}
+\UnaryInfC{\sFmla{\False}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+\subsection{Rules for $\lif$}
+
+\begin{defish}
+\AxiomC{\sFmla{\True}{!A \lif !B}}
+\RightLabel{\TRule{\True}{\lif}}
+\UnaryInfC{$\sFmla{\False}{!A} \quad \mid \quad \sFmla{\True}{!B}$}
+\DisplayProof
+\hfill
+\AxiomC{\sFmla{\False}{!A \lif !B}}
+\RightLabel{\TRule{\False}{\lif}}
+\UnaryInfC{\sFmla{\True}{!A}}
+\noLine
+\UnaryInfC{\sFmla{\False}{!B}}
+\DisplayProof
+\end{defish}
+
+\subsection{The Cut Rule}
+
+\begin{defish}
+\AxiomC{}
+\RightLabel{\Cut}
+\UnaryInfC{$\sFmla{\True}{!A} \quad \mid \quad \sFmla{\False}{!A}$}
+\DisplayProof
+\end{defish}
+
+The \Cut{} rule is not applied ``to'' a previous !!{signed formula}; rather,
+it allows every branch in !!a{tableau} to be split in two, one branch
+containing $\sFmla{\True}{!A}$, the other~$\sFmla{\False}{!A}$. It is
+not necessary---any set of !!{signed formula}s with a closed
+!!{tableau} has one not using \Cut---but it allows us to combine
+!!{tableau}s in a convenient way.
+
+\end{document}

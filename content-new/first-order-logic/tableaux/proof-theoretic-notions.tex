@@ -1,0 +1,190 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: proof-theoretic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{ptn}}
+      {\olfileid{pl}{tab}{ptn}}
+      
+\olsection{Proof-Theoretic Notions}
+
+\begin{editorial}
+This section collects the definitions of the provability relation
+and consistency for tableaux.
+\end{editorial}
+
+\begin{explain}
+Just as we've defined a number of important semantic notions
+(validity, entailment, satisfiabilty), we now define corresponding
+\emph{proof-theoretic notions}.  These are not defined by appeal to
+satisfaction of !!{sentence}s in !!{structure}s, but by appeal to the
+existence of certain closed !!{tableau}x.  It was an important
+discovery that these notions coincide.  That they do is the content of
+the \emph{soundness} and \emph{completeness theorems}.
+\end{explain}
+
+
+\begin{defn}[Theorems]
+A !!{sentence}~$!A$ is a \emph{theorem} if there is a closed
+!!{tableau} for~$\sFmla{\False}{!A}$.  We write $\Proves !A$ if $!A$
+is a theorem and $\Proves/ !A$ if it is not.
+\end{defn}
+
+\begin{defn}[!!^{derivability}]
+!!^a{sentence} $!A$ is \emph{!!{derivable} from} a set of
+!!{sentence}s~$\Gamma$, $\Gamma \Proves !A$, iff there is a
+finite set $\{!B_1, \dots, !B_n\} \subseteq \Gamma$
+and a closed !!{tableau} for the set
+\[
+\{
+  \sFmla{\False}{!A},
+  \sFmla{\True}{!B_1}, \dots,
+  \sFmla{\True}{!B_n},  
+  \}
+\]
+If $!A$ is not !!{derivable} from $\Gamma$ we write $\Gamma \Proves/
+!A$.
+\end{defn}
+
+\begin{defn}[Consistency]
+A set of !!{sentence}s~$\Gamma$ is \emph{inconsistent} iff there is a
+finite set $\{!B_1, \dots, !B_n\} \subseteq \Gamma$ and a closed
+!!{tableau} for the set
+\[
+\{
+  \sFmla{\True}{!B_1}, \dots,
+  \sFmla{\True}{!B_n},  
+  \}.
+\]
+If $\Gamma$ is not inconsistent, we say it is \emph{consistent}.
+\end{defn}
+
+\begin{prop}[Reflexivity]
+\ollabel{prop:reflexivity}
+If $!A \in \Gamma$, then $\Gamma \Proves !A$.
+\end{prop}
+
+\begin{proof}
+If $!A \in \Gamma$, $\{!A\}$ is a finite subset of~$\Gamma$ and the !!{tableau}
+\begin{oltableau}
+  [\sFmla{\False}{\formula{A}}, just = \TAss
+    [\sFmla{\True}{\formula{A}}, just = \TAss,close]
+  ]
+\end{oltableau}
+is closed.
+\end{proof}
+  
+
+\begin{prop}[Monotony]
+\ollabel{prop:monotony}
+If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
+\Proves !A$.
+\end{prop}
+
+\begin{proof}
+Any finite subset of~$\Gamma$ is also a finite subset of~$\Delta$.
+\end{proof}
+
+\begin{prop}[Transitivity]
+\ollabel{prop:transitivity}
+If $\Gamma \Proves !A$ and $\{!A\} \cup
+\Delta \Proves !B$, then $\Gamma \cup \Delta \Proves !B$.
+\end{prop}
+
+\begin{proof}
+If $\{!A\} \cup \Delta \Proves !B$, then there is a finite subset $\Delta_0 =
+\{!C_1, \dots, !C_n\} \subseteq \Delta$ such that
+\begin{align*}
+\{\sFmla{\False}{!B}, & \sFmla{\True}{!A}, \sFmla{\True}{!C_1},
+\dots, \sFmla{\True}{!C_n}\}
+\intertext{has a closed !!{tableau}. If $\Gamma \Proves !A$ then there
+  are $!D_1$, \dots, $!D_m$ such that}
+\{\sFmla{\False}{!A}, & \sFmla{\True}{!D_1},
+\dots, \sFmla{\True}{!D_m}\}
+\end{align*}
+has a closed !!{tableau}.
+
+Now consider the !!{tableau} with assumptions
+\[
+\sFmla{\False}{!B},
+\sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_n},
+\sFmla{\True}{!D_1}, \dots, \sFmla{\True}{!D_m}.
+\]
+Apply the \Cut{} rule on~$!A$. This generates two branches, one has
+$\sFmla{\True}{!A}$ in it, the other $\sFmla{\False}{!A}$. Thus,
+on the one branch, all of
+\[
+\{\sFmla{\False}{!B}, \sFmla{\True}{!A},
+\sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_n}\}
+\]
+are available. Since there is a closed !!{tableau} for these
+assumptions, we can attach it to that branch; every branch through
+$\sFmla{\True}{!A_1}$ closes. On the other branch, all of
+\[
+\{\sFmla{\False}{!A}, \sFmla{\True}{!D_1}, \dots,
+\sFmla{\True}{!D_m}\}
+\]
+are available, so we can also complete the other side to obtain a
+closed !!{tableau}.  This shows $\Gamma \cup \Delta \Proves !B$.
+\end{proof}
+
+Note that this means that in particular if $\Gamma \Proves !A$ and $!A
+\Proves !B$, then $\Gamma \Proves !B$. It follows also that if $!A_1,
+\dots, !A_n \Proves !B$ and $\Gamma \Proves !A_i$ for each~$i$, then
+$\Gamma \Proves !B$.
+
+\begin{prop}
+\ollabel{prop:incons}
+$\Gamma$ is inconsistent iff $\Gamma \Proves !A$ for every
+  !!{sentence}~$!A$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+Prove \olref[fol][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+Prove \olref[pl][tab][ptn]{prop:incons}
+\end{prob}
+\tagendprob
+
+\begin{prop}[Compactness]
+  \ollabel{prop:proves-compact}
+  \begin{enumerate}
+  \item If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0
+    \subseteq \Gamma$ such that $\Gamma_0 \Proves !A$.
+  \item If every finite subset of~$\Gamma$ is
+    consistent, then $\Gamma$ is consistent.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\Gamma \Proves !A$, then there is a finite subset
+      $\Gamma_0 = \{!B_1, \dots, !B_n\}$ and a closed !!{tableau} for
+      \[
+      \sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dotsm \sFmla{\True}{!B_n}
+      \]
+      This !!{tableau} also shows $\Gamma_0 \Proves !A$.
+    \item If $\Gamma$ is inconsistent, then for some finite subset
+      $\Gamma_0 = \{!B_1, \dots, !B_n\}$ there is a closed !!{tableau}
+      for
+      \[
+      \sFmla{\True}{!B_1}, \dotsm \sFmla{\True}{!B_n}
+      \]
+      This closed !!{tableau} shows that $\Gamma_0$ is inconsistent.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

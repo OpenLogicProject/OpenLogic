@@ -1,0 +1,76 @@
+% Part: first-order-logic
+% Chapter: axiomatic-deduction
+% Section: provability-propositional
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{axd}{ppr}}
+      {\olfileid{pl}{axd}{ppr}}
+
+\olsection{\usetoken{S}{derivability} and the Propositional Connectives}
+
+\begin{prop}\ollabel{prop:provability-land}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-land-left} Both $!A \land !B \Proves
+    !A$ and $!A \land !B \Proves !B$
+  \item \ollabel{prop:provability-land-right} $!A, !B \Proves !A \land !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+    \item From \olref[prp]{ax:land1} and \olref[prp]{ax:land1} by
+      modus ponens.
+  \item From \olref[prp]{ax:land3} by two applications of
+    modus ponens.
+  \end{enumerate}
+\end{proof}
+
+
+\begin{prop}\ollabel{prop:provability-lor}
+  \begin{enumerate}
+  \item $!A \lor !B, \lnot !A, \lnot !B$ is inconsistent.
+  \item Both $!A \Proves !A \lor !B$ and $!B \Proves !A \lor !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item From \olref[prp]{ax:lnot1} we get $\Proves \lnot !A \lif (!A
+    \lif \lfalse)$ and $\Proves \lnot !A \lif (!A \lif \lfalse)$. So
+    by the deduction theorem, we have $\{\lnot !A\} \Proves !A \lif
+    \lfalse$ and $\{\lnot !B\} \Proves !B \lif \lfalse$. From
+    \olref[prp]{ax:lor3} we get $\{\lnot !A, \lnot !B\} \Proves (!A
+    \lor !B) \lif \lfalse$. By the deduction theorem, $\{!A \lor !B,
+    \lnot !A, \lnot !B\} \Proves \lfalse$.
+  \item From \olref[prp]{ax:lor1} and \olref[prp]{ax:lor2} by modus
+    ponsens.
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-lif}
+  \begin{enumerate}
+  \item \ollabel{prop:provability-lif-left}  $!A, !A \lif !B \Proves !B$.
+  \item \ollabel{prop:provability-lif-right}
+    Both $\lnot !A \Proves !A \lif !B$ and $!B \Proves !A \lif !B$.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  \begin{enumerate}
+  \item We can !!{derive}:
+    \begin{derivation}
+      1. & $!A$ & \Hyp\\
+      2. & $!A \lif !B$ & \Hyp\\
+      3. & $!B$ & 1, 2, \MP
+    \end{derivation}
+    
+  \item By \olref[prp]{ax:lnot2} and \olref[prp]{ax:lif1} and the
+    deduction theorem, respectively.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

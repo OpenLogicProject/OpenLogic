@@ -1,0 +1,137 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: provability-consistency
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{prv}}
+      {\olfileid{pl}{tab}{prv}}
+
+\olsection{\usetoken{S}{derivability} and Consistency}
+
+We will now establish a number of properties of the !!{derivability}
+relation.  They are independently interesting, but each will play a
+role in the proof of the completeness theorem.
+
+\begin{prop}\ollabel{prop:provability-contr}
+  If $\Gamma \Proves !A$ and $\Gamma \cup \{!A\}$ is
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+There are finite $\Gamma_0 = \{!B_1, \dots, !B_n\}$ and $\Gamma_1
+  =\{!C_1, \dots, !C_n\} \subseteq \Gamma$ such that
+  \begin{align*}
+    \{\sFmla{\False}{!A}, &
+    \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} \\
+    \{\sFmla{\True}{\lnot !A}, &
+    \sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_m}\}
+  \end{align*}
+  have closed !!{tableau}s.  Using the \Cut{} rule on $!A$ we can
+  combine these into a single closed !!{tableau} that shows $\Gamma_0
+  \cup \Gamma_1$ is inconsistent.  Since $\Gamma_0
+  \subseteq \Gamma$ and $\Gamma_1 \subseteq \Gamma$, $\Gamma_0 \cup
+  \Gamma_1 \subseteq \Gamma$, hence $\Gamma$~is inconsistent.
+\end{proof}
+
+\begin{prop}
+\ollabel{prop:prov-incons}
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+First suppose $\Gamma \Proves !A$, i.e., there is
+a closed !!{tableau} for
+\[
+\{\sFmla{\False}{!A},
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
+\]
+Using the $\TRule{\True}{\lnot}$ rule, this can be turned into a
+closed !!{tableau} for
+\[
+\{\sFmla{\True}{\lnot !A},
+\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}.
+\]
+
+On the other hand, if there is a closed !!{tableau} for the latter, we
+can turn it into a closed !!{tableau} of the former by removing every
+formula that results from \TRule{\True}{\lnot} applied to the first
+assumption~$\sFmla{\True}{\lnot !A}$ as well as that assumption, and
+adding the assumption $\sFmla{\False}{!A}$. For if a branch was closed
+before because it contained the conclusion of \TRule{\True}{\lnot}
+applied to $\sFmla{\True}{\lnot !A}$, i.e., $\sFmla{\False}{!A}$, the
+corresponding branch in the new !!{tableau} is also closed. If a
+branch in the old tableau was closed because it contained the
+assumption $\sFmla{\True}{\lnot !A}$ as well as $\sFmla{\False}{\lnot
+  !A}$ we can turn it into a closed branch by applying
+$\TRule{\False}{\lnot}$ to $\sFmla{\False}{\lnot !A}$ to obtain
+$\sFmla{\True}{!A}$. This closes the branch since we added
+$\sFmla{\False}{!A}$ as an assumption.
+\end{proof}
+
+\begin{prob}
+Prove that $\Gamma \Proves \lnot !A$ iff $\Gamma \cup \{!A\}$ is inconsistent.
+\end{prob}
+
+\begin{prop}\ollabel{prop:explicit-inc}
+  If $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$, then $\Gamma$ is
+  inconsistent.
+\end{prop}
+
+\begin{proof}
+  Suppose $\Gamma \Proves !A$ and $\lnot !A \in \Gamma$.  Then there
+  are $!B_1$, \dots, $!B_n \in \Gamma$ such that \
+  \[
+  \{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
+  \]
+  has a closed tableau. Replace the assumption \sFmla{\False}{!A} by
+  \sFmla{\True}{\lnot !A}, and insert the conclusion of
+  \TRule{\True}{\lnot} applied to \sFmla{\False}{!A} after the
+  assumptions. Any !!{sentence} in the !!{tableau} justified by appeal
+  to line~$1$ in the old !!{tableau} is now justified by appeal to
+  line~$n+1$. So if the old !!{tableau} was closed, the new one is.
+  It shows that $\Gamma$ is inconsistent, since all assumptions are
+  in~$\Gamma$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:provability-exhaustive}
+  If $\Gamma \cup \{!A\}$ and $\Gamma \cup \{\lnot !A\}$ are both
+  inconsistent, then $\Gamma$ is inconsistent.
+\end{prop}
+
+\begin{proof}
+  If there are $!B_1$, \dots, $!B_n \in \Gamma$ and $!C_1$, \dots,
+  $!C_m \in \Gamma$ such that
+  \begin{align*}
+    \{\sFmla{\True}{!A}, &
+    \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} \\
+    \{\sFmla{\True}{\lnot !A}, &
+    \sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_m}\}
+  \end{align*}
+  both have closed !!{tableau}s, we can construct !!a{tableau} that
+  shows that $\Gamma$ is inconsistent by using as assumptions
+  $\sFmla{\True}{!B_1}$, \dots, $\sFmla{\True}{!B_n}$ together with
+  $\sFmla{\True}{!C_1}$, \dots, $\sFmla{\True}{!C_m}$, followed by an
+  application of the \Cut{} rule, yielding two branches, one starting
+  with $\sFmla{\True}{!A}$, the other with $\sFmla{\False}{!A}$. Add
+  on the part below the assumptions of the first !!{tableau} on the
+  left side. Here, every rule application is still correct, and every
+  branch closes. On the right side, add the part below the assumptions
+  of the seond !!{tableau}, with the results of any applications
+  of~$\TRule{\True}{\lnot}$ to $\sFmla{\True}{\lnot !A}$ removed.
+
+  For if a branch was closed before because it contained the
+  conclusion of \TRule{\True}{\lnot} applied to $\sFmla{\True}{\lnot
+    !A}$, i.e., $\sFmla{\False}{!A}$, as well as $\sFmla{\False}{!A}$,
+  the corresponding branch in the new !!{tableau} is also closed. If a
+  branch in the old tableau was closed because it contained the
+  assumption $\sFmla{\True}{\lnot !A}$ as well as
+  $\sFmla{\False}{\lnot !A}$ we can turn it into a closed branch by
+  applying $\TRule{\False}{\lnot}$ to $\sFmla{\False}{\lnot !A}$ to
+  obtain $\sFmla{\True}{!A}$.
+  \end{proof}
+
+\end{document}

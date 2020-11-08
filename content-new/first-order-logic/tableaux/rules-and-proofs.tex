@@ -1,0 +1,59 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{rul}}
+      {\olfileid{pl}{tab}{rul}}
+
+\olsection{Rules and \usetoken{P}{tableau}}
+
+!!^a{tableau} is a systematic survey of the possible ways
+!!a{sentence} can be true or false in !!a{structure}. The bulding
+blocks of a tableau are !!{signed formula}s: !!{sentence}s plus a
+truth value ``sign,'' either $\True$ or~$\False$. These signed
+!!{formula}s are arranged in a (downward growing) tree.
+
+\begin{defn}
+  A \emph{!!{signed formula}} is a pair consisting of a truth value
+  and !!a{sentence}, i.e., either:
+  \[
+  \sFmla{\True}{!A} \text{ or } \sFmla{\False}{!A}.
+  \]
+\end{defn}
+
+Intuitively, we might read $\sFmla{\True}{!A}$ as ``$!A$ might be
+true'' and $\sFmla{\False}{!A}$ as ``$!A$ might be false'' (in some
+!!{structure}).
+
+Each !!{signed formula} in the tree is either an \emph{assumption}
+(which are listed at the very top of the tree), or it is obtained from
+!!a{signed formula} above it by one of a number of rules of
+inference. There are two rules for each possible !!{main operator} of
+the preceding !!{formula}, one for the case when the sign is~$\True$,
+and one for the case where the sign is~$\False$. Some rules allow the
+tree to branch, and some only add !!{signed formula}s to the branch.
+A rule may be (and often must be) applied not to the immediately
+preceding !!{signed formula}, but to any !!{signed formula} in the
+branch from the root to the place the rule is applied.
+
+A branch is \emph{closed} when it contains both $\sFmla{\True}{!A}$
+and $\sFmla{\False}{!A}$. A closed !!{tableau} is one where every branch
+is closed.  Under the intuitive interpretation, any branch describes a
+joint possibility, but $\sFmla{\True}{!A}$ and $\sFmla{\False}{!A}$
+are not jointly possible. In other words, if a branch is closed, the
+possibility it describes has been ruled out. In particular, that means
+that a closed !!{tableau} rules out all possibilities of simultaneously
+making every assumption of the form $\sFmla{\True}{!A}$ true and every
+assumption of the form~$\sFmla{\False}{!A}$ false.
+
+A closed !!{tableau} \emph{for $!A$} is a closed !!{tableau} with
+root~$\sFmla{\False}{!A}$. If such a closed !!{tableau} exists, all
+possibilities for~$!A$ being false have been ruled out; i.e., $!A$
+must be true in every !!{structure}.
+
+\end{document}

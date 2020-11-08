@@ -1,0 +1,341 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: assignments
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{ass}
+
+\olsection{Variable Assignments}
+
+\begin{explain}
+A !!{variable} assignment~$s$ provides a value for \emph{every}
+variable---and there are infinitely many of them. This is of course
+not necessary. We require !!{variable} assignments to assign values to
+all !!{variable}s simply because it makes things a lot easier.  The
+value of a term~$t$, and whether or not a !!{formula}~$!A$ is
+satisfied in a !!{structure} with respect to~$s$, only depend on the
+assignments~$s$ makes to the !!{variable}s in~$t$ and the free
+!!{variable}s of~$!A$.  This is the content of the next two
+propositions.  To make the idea of ``depends on'' precise, we show
+that any two variable assignments that agree on all the variables
+in~$t$ give the same value, and that $!A$ is satisfied relative to one
+iff it is satisfied relative to the other if two variable assignments
+agree on all free variables of~$!A$.
+\end{explain}
+
+\begin{prop}\ollabel{prop:valindep}
+If the !!{variable}s in a term~$t$ are among $x_1$, \dots,~$x_n$, and
+$s_1(x_i) = s_2(x_i)$ for $i = 1$, \dots,~$n$, then $\Value{t}{M}[s_1]
+= \Value{t}{M}[s_2]$.
+\end{prop}
+
+\begin{proof}
+By induction on the complexity of~$t$. For the base case, $t$ can be
+!!a{constant} or one of the variables~$x_1$, \dots,~$x_n$.  If $t
+= c$, then $\Value{t}{M}[s_1] = \Assign{c}{M} = \Value{t}{M}[s_2]$. If
+$t = x_i$, $s_1(x_i) = s_2(x_i)$ by the hypothesis of the proposition,
+and so $\Value{t}{M}[s_1] = s_1(x_i) = s_2(x_i) = \Value{t}{M}[s_2]$.
+
+For the inductive step, assume that $t = \Atom{f}{t_1, \dots, t_k}$
+and that the claim holds for $t_1$, \dots, $t_k$. Then
+\begin{align*}
+  \Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] =\\
+  & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1])
+\intertext{For $j = 1$, \dots,~$k$, the !!{variable}s of~$t_j$ are
+    among $x_1$, \dots,~$x_n$. So by induction hypothesis,
+    $\Value{t_j}{M}[s_1] = \Value{t_j}{M}[s_2]$. So,}
+\Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] =\\
+  & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]) =\\
+  & = \Assign{f}{M}(\Value{t_1}{M}[s_2], \dots, \Value{t_k}{M}[s_2]) =\\
+  & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] = \Value{t}{M}[s_2].
+\end{align*}
+\end{proof}
+
+\begin{prop}\ollabel{prop:satindep}
+If the free !!{variable}s in $!A$ are among $x_1$, \dots,~$x_n$, and
+$s_1(x_i) = s_2(x_i)$ for $i = 1$, \dots,~$n$, then $\Sat{M}{!A}[s_1]$
+iff $\Sat{M}{!A}[s_2]$.
+\end{prop}
+
+\begin{proof}
+We use induction on the complexity of $!A$. For the base case, where
+$!A$ is atomic, $!A$ can be:
+\iftag{prvTrue}{$\ltrue$,}{}
+\iftag{prvFalse}{$\lfalse$,}{}
+$\Atom{R}{t_1, \dots, t_k}$ for a $k$-place predicate $R$ and terms
+$t_1$, \dots,~$t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and~$t_2$.
+
+\begin{enumerate}
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{both $\Sat{M}{\indfrm}[s_1]$ and
+    $\Sat{M}{\indfrm}[s_2]$.}}{}
+
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{both $\Sat/{M}{!A}[s_1]$ and
+    $\Sat/{M}{!A}[s_2]$.}}{}
+
+\item
+  \indcase{!A}{\Atom{R}{t_1, \ldots, t_k}}{let
+    $\Sat{M}{\indfrm}[s_1]$. Then
+    \[
+    \langle \Value{t_1}{M}[s_1], \ldots, \Value{t_k}{M}[s_1] \rangle
+    \in \Assign{R}{M}.
+    \]
+    For $i = 1$, \dots,~$k$, $\Value{t_i}{M}[s_1] =
+    \Value{t_i}{M}[s_2]$ by \olref{prop:valindep}. So we also have
+    $\langle \Value{t_i}{M}[s_2], \ldots, \Value{t_k}{M}[s_2] \rangle
+    \in \Assign{R}{M}$.}
+\item
+  \indcase{!A}{\eq[t_1][t_2]}{suppose $\Sat{M}{\indfrm}[s_1]$.
+    Then $\Value{t_1}{M}[s_1] = \Value{t_2}{M}[s_1]$. So,
+    \begin{align*}
+      \Value{t_1}{M}[s_2] & = \Value{t_1}{M}[s_1]
+      & \text{(by \olref{prop:valindep})} \\
+      & = \Value{t_2}{M}[s_1] 
+      & \text{(since $\Sat{M}{\eq[t_1][t_2]}[s_1]$)}\\
+      &= \Value{t_2}{M}[s_2]
+      & \text{(by \olref{prop:valindep}),}
+    \end{align*}
+    so $\Sat{M}{\eq[t_1][t_2]}[s_2]$.}
+\end{enumerate}
+
+Now assume $\Sat{M}{!B}[s_1]$ iff $\Sat{M}{!B}[s_2]$ for all
+!!{formula}s $!B$ less complex than~$!A$. The induction step proceeds
+by cases determined by the main operator of~$!A$. In each case, we
+only demonstrate the forward direction of the !!{biconditional}; the
+proof of the reverse direction is symmetrical. In all cases except
+those for the quantifiers, we apply the induction hypothesis to
+sub-!!{formula}s~$!B$ of~$!A$.  The free variables of~$!B$ are among
+those of~$!A$. Thus, if $s_1$ and $s_2$ agree on the free variables
+of~$!A$, they also agree on those of~$!B$, and the induction
+hypothesis applies to~$!B$.
+
+\begin{enumerate}
+\tagitem{defNot}{}{%
+  \iftag{probNot}{%
+    \indcase!{!A}{\lnot !B}{}}{%
+    \indcase{!A}{\lnot !B}{if $\Sat{M}{\indfrm}[s_1]$, then
+      $\Sat/{M}{!B}[s_1]$, so by the induction hypothesis,
+      $\Sat/{M}{!B}[s_2]$, hence $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defAnd}{}{%
+  \iftag{probAnd}{%
+    \indcase!{!A}{!B \land !C}{}}{%
+    \indcase{!A}{!B \land !C}{if $\Sat{M}{\indfrm}[s_1]$, then
+      $\Sat{M}{!B}[s_1]$ and $\Sat{M}{!C}[s_1]$, so by induction
+      hypothesis, $\Sat{M}{!B}[s_2]$ and $\Sat{M}{!C}[s_2]$. Hence,
+      $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defOr}{}{%
+  \iftag{probOr}{%
+    \indcase!{!A}{!B \lor !C}{}}{%
+    \indcase{!A}{!B \lor !C}{if $\Sat{M}{\indfrm}[s_1]$, then
+      $\Sat{M}{!B}[s_1]$ or $\Sat{M}{!C}[s_1]$. By induction hypothesis,
+      $\Sat{M}{!B}[s_2]$ or $\Sat{M}{!C}[s_2]$, so $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defIf}{}{%
+  \iftag{probIf}{%
+    \indcase!{!A}{!B \lif !C}{}}{%
+    \indcase{!A}{!B \lif !C}{if $\Sat{M}{\indfrm}[s_1]$, then
+    $\Sat/{M}{!B}[s_1]$ or $\Sat{M}{!C}[s_1]$. By the induction hypothesis,
+    $\Sat/{M}{!B}[s_2]$ or $\Sat{M}{!C}[s_2]$, so $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defIff}{}{%
+  \iftag{probIff}{%
+    \indcase!{!A}{!B \liff !C}{}}{%
+    \indcase{!A}{!B \liff !C}{if $\Sat{M}{\indfrm}[s_1]$, then either
+      $\Sat{M}{!B}[s_1]$ and $\Sat{M}{!C}[s_1]$, or $\Sat/{M}{!B}[s_1]$ and
+      $\Sat/{M}{!C}[s_1]$. By the induction hypothesis, either
+      $\Sat{M}{!B}[s_2]$ and $\Sat{M}{!C}[s_2]$ or $\Sat/{M}{!B}[s_2]$
+      and $\Sat/{M}{!C}[s_2]$. In either case, $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defEx}{}{%
+  \iftag{probEx}{%
+    \indcase!{!A}{\lexists[x][!B]}{}}{%
+    \indcase{!A}{\lexists[x][!B]}{if $\Sat{M}{\indfrm}[s_1]$, there is
+      an $x$-variant $s_1'$ of~$s_1$ so that $\Sat{M}{!B}[s_1']$. Let
+      $s_2'$ be the $x$-variant of $s_2$ that assigns the same thing
+      to~$x$ as does $s_1'$. The free variables of $!B$ are among
+      $x_1$, \dots, $x_n$, and $x$. $s_1'(x_i) = s_2'(x_i)$, since
+      $s_1'$ and $s_2'$ are $x$-variants of $s_1$ and~$s_2$,
+      respectively, and by hypothesis $s_1(x_i) = s_2(x_i)$. $s_1'(x)
+      = s_2'(x)$ by the way we have defined $s_2'$. Then the induction
+      hypothesis applies to $!B$ and $s_1'$, $s_2'$, so
+      $\Sat{M}{!B}[s_2']$. Hence, there is an $x$-variant of $s_2$
+      that satisfies~$!B$, and so $\Sat{M}{\indfrm}[s_2]$.}}}
+
+\tagitem{defAll}{}{%
+  \iftag{probAll}{%
+    \indcase!{!A}{\lforall[x][!B]}{}}{%
+    \indcase{!A}{\lforall[x][!B]}{if $\Sat{M}{\indfrm}[s_1]$, then for
+      every $x$-variant $s_1'$ of $s_1$, $\Sat{M}{!B}[s_1']$. Take an
+      arbitrary $x$-variant~$s_2'$ of $s_2$, let $s_1'$ be the
+      $x$-variant of $s_1$ which assigns the same thing to~$x$ as
+      does~$s_2'$. The free variables of~$!B$ are among $x_1$, \dots,
+      $x_n$, and $x$. $s_1'(x_i) = s_2'(x_i)$, since $s_1'$ and $s_2'$
+      are $x$-variants of $s_1$ and~$s_2$, respectively, and by
+      hypothesis $s_1(x_i) = s_2(x_i)$. $s_1'(x) = s_2'(x)$ by the way
+      we have defined $s_1'$. Then the induction hypothesis applies
+      to~$!B$ and~$s_1'$, $s_2'$, and we have $\Sat{M}{!B}[s_2']$.
+      Since $s_2'$ is an arbitrary $x$-variant of~$s_2$, every
+      $x$-variant of $s_2$ satisfies~$!B$, and so
+      $\Sat{M}{\indfrm}[s_2]$.}}}
+\end{enumerate}
+By induction, we get that $\Sat{M}{!A}[s_1]$ iff $\Sat{M}{!A}[s_2]$
+whenever the free !!{variable}s in $!A$ are among $x_1$, \dots, $x_n$
+and $s_1(x_i)=s_2(x_i)$ for $i = 1$, \dots,~$n$.
+\end{proof}
+
+\begin{probtag}{probNot,probOr,probAnd,probIf,probIff,probEx,probAll}
+Complete the proof of \olref[fol][syn][ass]{prop:satindep}.
+\end{probtag}
+
+\begin{explain}
+!!^{sentence}s have no free variables, so any two variable assignments  
+assign the same things to all the (zero) free variables of any
+sentence. The proposition just proved then means that whether or not
+!!a{sentence} is satisfied in a structure relative to a variable
+assignment is completely independent of the assignment. We'll record
+this fact. It justifies the definition of satisfaction of
+!!a{sentence} in !!a{structure} (without mentioning a variable
+assignment) that follows.
+\end{explain}
+
+\begin{cor}
+\ollabel{cor:sat-sentence}
+If $!A$ is !!a{sentence} and $s$ a variable assignment, then
+$\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$ for every variable
+assignment~$s'$.
+\end{cor}
+
+\begin{proof}
+  Let $s'$ be any variable assignment. Since $!A$ is !!a{sentence}, it
+  has no free variables, and so every variable assignment~$s'$
+  trivially assigns the same things to all free variables of~$!A$ as
+  does~$s$. So the condition of \olref{prop:satindep} is satisfied,
+  and we have $\Sat{M}{!A}[s]$ iff $\Sat{M}{!A}[s']$.
+\end{proof}
+
+\begin{defn}
+\ollabel{defn:satisfaction}
+If $!A$ is !!a{sentence}, we say that !!a{structure}~$\Struct M$
+\emph{satisfies}~$!A$, $\Sat{M}{!A}$, iff $\Sat{M}{!A}[s]$ for all
+variable assignments~$s$.
+\end{defn}
+
+If $\Sat{M}{!A}$, we also simply say that \emph{$!A$ is true
+  in~$\Struct{M}$.}
+
+\begin{prop}\ollabel{prop:sentence-sat-true}
+  Let $\Struct{M}$ be !!a{structure}, $!A$ be a sentence, and $s$ a
+  variable assignment.  $\Sat{M}{!A}$ iff $\Sat{M}{!A}[s]$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][ass]{prop:sentence-sat-true}
+\end{prob}
+
+\begin{prop}\ollabel{prop:sat-quant}
+  Suppose $!A(x)$ only contains $x$ free, and $\Struct M$ is
+  !!a{structure}. Then:
+  \begin{tagenumerate}{prvEx,prvAll}
+    \tagitem{prvEx}{$\Sat{M}{\lexists[x][!A(x)]}$ iff $\Sat{M}{!A(x)}[s]$
+      for at least one variable assignment~$s$.}{}
+    \tagitem{prvAll}{$\Sat{M}{\lforall[x][!A(x)]}$ iff $\Sat{M}{!A(x)}[s]$
+  for all variable assignments~$s$.}{}
+\end{tagenumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][ass]{prop:sat-quant}.
+\end{prob}
+
+\begin{prob}
+\DeclareRobustCommand{\VDash}{\mathrel{||}\joinrel\Relbar}  
+Suppose $\Lang L$ is a language without !!{function}s. Given a
+!!{structure}~$\Struct M$, $c$ a !!{constant} and $a \in \Domain M$,
+define $\Struct M[a/c]$ to be the !!{structure} that is just
+like~$\Struct M$, except that $\Assign{c}{M[a/c]} = a$. Define
+$\Struct M \VDash !A$ for !!{sentence}s~$!A$ by:
+\begin{enumerate}
+\tagitem{prvFalse}{%
+  \indcase{!A}{\lfalse}{not $\Struct{M} \VDash \indfrm$.}}{}
+
+\tagitem{prvTrue}{%
+  \indcase{!A}{\ltrue}{$\Struct{M} \VDash \indfrm$.}}{}
+
+\item \indcase{!A}{\Atom{R}{d_1, \dots, d_n}}{$\Struct M \VDash \indfrm$
+  iff $\langle \Assign{d_1}{M}, \dots, \Assign{d_n}{M} \rangle \in
+  \Assign{R}{M}$.}
+
+\item \indcase{!A}{\eq[d_1][d_2]}{$\Struct M \VDash \indfrm$ iff
+  $\Assign{d_1}{M} = \Assign{d_2}{M}$.}
+
+\tagitem{prvNot}{%
+  \indcase{!A}{\lnot !B}{$\Struct{M} \VDash \indfrm$ iff
+    not $\Struct{M} \VDash {!B}$.}}{}
+
+\tagitem{prvAnd}{%
+  \indcase{!A}{(!B \land !C)}{$\Struct{M} \VDash
+    \indfrm$ iff $\Struct{M} \VDash!B$ and $\Struct{M} \VDash !C$.}}{}
+
+\tagitem{prvOr}{%
+  \indcase{!A}{(!B \lor !C)}{$\Struct{M} \VDash \indfrm$ iff
+    $\Struct{M} \VDash !B$ or $\Struct{M} \VDash !C$ (or both).}}{}
+
+\tagitem{prvIf}{%
+  \indcase{!A}{(!B \lif !C)}{$\Struct{M} \VDash \indfrm$ iff
+    not $\Struct {M} \VDash !B$ or $\Struct M \VDash !C$ (or both).}}{}
+
+\tagitem{prvIff}{%
+  \indcase{!A}{(!B \liff !C)}{$\Struct{M} \VDash {\indfrm}$ iff either
+    both $\Struct{M} \VDash {!B}$ and $\Struct{M} \VDash {!C}$, or
+    neither $\Struct{M} \VDash {!B}$ nor $\Struct{M} \VDash {!C}$.}}{}
+
+\tagitem{prvAll}{%
+  \indcase{!A}{\lforall[x][!B]}{$\Struct{M} \VDash {\indfrm}$ iff for
+    all $a \in \Domain{M}$, $\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}$,
+    if $c$ does not occur in~$!B$.}}{}
+
+\tagitem{prvEx}{%
+  \indcase{!A}{\lexists[x][!B]}{$\Struct{M} \VDash
+  {\indfrm}$ iff there is an $a \in \Domain M$ such that
+  $\Struct{M[a/c]} \VDash \Subst{!B}{c}{x}$, if $c$ does not occur
+  in~$!B$.}}{}
+\end{enumerate}
+Let $x_1$, \dots, $x_n$ be all free !!{variable}s in~$!A$,
+$c_1$, \dots, $c_n$ constant symbols not in~$!A$,
+$a_1$, \dots, $a_n \in \Domain M$, and $s(x_i) = a_i$.
+
+Show that $\Sat{M}{!A}[s]$ iff $\Struct M[a_1/c_1,\dots,a_n/c_n]
+\VDash \Subst{\Subst{!A}{c_1}{x_1}\dots}{c_n}{x_n}$.
+
+(This problem shows that it is possible to give a semantics for
+first-order logic that makes do without variable assignments.)
+\end{prob}
+
+\begin{prob}
+Suppose that $f$ is a function symbol not in~$!A(x,y)$. Show that
+there is !!a{structure}~$\Struct{M}$ such that
+$\Sat{M}{\lforall[x][\lexists[y][!A(x,y)]]}$ iff there is an~$\Struct
+M'$ such that $\Sat{M'}{\lforall[x][!A(x,f(x))]}$.
+
+(This problem is a special case of what's known as Skolem's Theorem;
+$\lforall[x][!A(x,f(x))]$ is called a \emph{Skolem normal form} of
+$\lforall[x][\lexists[y][!A(x,y)]]$.)
+\end{prob}
+
+
+
+\end{document}

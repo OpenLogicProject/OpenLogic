@@ -1,0 +1,240 @@
+% Part: first-order-logic
+% Chapter: tableaux
+% Section: soundness.tex
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{tab}{sou}}
+      {\olfileid{pl}{tab}{sou}}
+      
+\olsection{Soundness}
+
+\begin{explain}
+A !!{derivation} system, such as tableaux, is \emph{sound}
+if it cannot !!{derive} things that do not actually hold.  Soundness is
+thus a kind of guaranteed safety property for !!{derivation} systems.
+Depending on which proof theoretic property is in question, we would
+like to know for instance, that
+\begin{enumerate}
+\item every !!{derivable}~$!A$ is \iftag{FOL}{valid}{a tautology};
+\item if a !!{sentence} is !!{derivable} from some others, it is also a
+  consequence of them;
+\item if a set of !!{sentence}s is inconsistent, it is unsatisfiable.
+\end{enumerate}
+These are important properties of a !!{derivation} system.  If any of them do
+not hold, the !!{derivation} system is deficient---it would !!{derive} too much.
+Consequently, establishing the soundness of a !!{derivation} system is of the
+utmost importance.
+
+Because all these proof-theoretic properties are defined via closed
+!!{tableau}s of some kind or other, proving (1)--(3) above requires
+proving something about the semantic properties of closed
+!!{tableau}s.  We will first define what it means for !!a{signed
+  formula} to be satisfied in a structure, and then show that if a
+!!{tableau} is closed, no structure satisfies all its assumptions.
+(1)--(3) then follow as corollaries from this result.
+\end{explain}
+
+\begin{defn}
+\iftag{FOL}{!!^a{structure}}{!!^a{valuation}}~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+\emph{satisfies} !!a{signed formula} $\sFmla{\True}{!A}$ iff
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$, and it satisfies
+$\sFmla{\False}{!A}$ iff
+$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$. $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+satisfies a set of !!{signed formula}s~$\Gamma$ iff it satisfies every
+$\sFmla{S}{!A} \in \Gamma$. $\Gamma$~is \emph{satisfiable} if there is
+\iftag{FOL}{!!a{structure}}{!!a{valuation}} that satisfies it, and
+\emph{unsatisfiable} otherwise.
+\end{defn}
+
+\begin{thm}[Soundness]
+  \ollabel{thm:tableau-soundness}
+  If $\Gamma$ has a closed !!{tableau}, $\Gamma$ is unsatisfiable.
+\end{thm}
+
+\begin{proof}
+Let's call a branch of !!a{tableau} satisfiable iff the set of
+!!{signed formula}s on it is satisfiable, and let's call a !!{tableau}
+satisfiable if it contains at least one satisfiable branch.
+
+We show the following: Extending a satisfiable !!{tableau} by one of
+the rules of inference always results in a satisfiable !!{tableau}.
+This will prove the theorem: any closed !!{tableau} results by
+applying rules of inference to the !!{tableau} consisting only of
+assumptions from~$\Gamma$. So if $\Gamma$ were satisfiable, any
+!!{tableau} for it would be satisfiable. A closed !!{tableau},
+however, is clearly not satisfiable: every branch contains both
+$\sFmla{\True}{!A}$ and $\sFmla{\False}{!A}$, and no structure can
+both satisfy and not satisfy~$!A$.
+
+Suppose we have a satisfiable !!{tableau}, i.e., !!a{tableau} with at
+least one satisfiable branch. Applying a rule of inference either adds
+!!{signed formula}s to a branch, or splits a branch in two. If the
+!!{tableau} has a satisfiable branch which is not extended by the rule
+application in question, it remains a satisfiable branch in the
+extended !!{tableau}, so the extended tableau is satisfiable. So we
+only have to consider the case where a rule is applied to a
+satisfiable branch.
+
+Let $\Gamma$ be the set of !!{signed formula}s on that branch, and
+let $\sFmla{S}{!A} \in \Gamma$ be the !!{signed formula} to which the
+rule is applied. If the rule does not result in a split branch, we
+have to show that the extended branch, i.e., $\Gamma$ together with
+the conclusions of the rule, is still satisfiable. If the rule results
+in split branch, we have to show that at least one of the two
+resulting branches is satisfiable.
+  
+First, we consider the possible inferences with only one premise.
+\begin{enumerate}
+\item The branch is expanded by applying $\TRule{\True}{\lnot}$ to
+  $\sFmla{\True}{\lnot !B} \in \Gamma$. Then the extended branch
+  contains the !!{signed formula}s $\Gamma \cup
+  \{\sFmla{\False}{!B}\}$.  Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$. In particular,
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\lnot !B}$. Thus,
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$, i.e.,
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies
+  $\sFmla{\False}{!B}$.
+\item The branch is expanded by applying $\TRule{\False}{\lnot}$ to
+  $\sFmla{\False}{\lnot !B} \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\True}{\land}$ to
+  $\sFmla{\True}{!B \land !C} \in \Gamma$, which results in two new
+  !!{signed formula}s on the branch: $\sFmla{\True}{!B}$ and
+  $\sFmla{\True}{!C}$. Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, in particular
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B \land !C}$. Then
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ and
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$. This means that
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies both
+  $\sFmla{\True}{!B}$ and $\sFmla{\True}{!C}$.
+\item The branch is expanded by applying $\TRule{\False}{\lor}$ to
+  $\sFmla{\True}{!B \lor !C} \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\False}{\lif}$ to
+  $\sFmla{\True}{!B \lif !C} \in \Gamma$: This results in two new
+  !!{signed formula}s on the branch: $\sFmla{\True}{!B}$ and
+  $\sFmla{\False}{!C}$. Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, in particular
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B \lif !C}$. Then
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ and
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. This means that
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies both
+  $\sFmla{\True}{!B}$ and $\sFmla{\False}{!C}$.
+
+\iftag{FOL}{%
+\item The branch is expanded by applying $\TRule{\True}{\lforall}$ to
+  $\sFmla{\True}{\lforall[x][!B(x)]} \in \Gamma$: This results in a
+  new !!{signed formula}~$\sFmla{\True}{!A(t)}$ on the branch.
+  Suppose $\Sat{M}{\Gamma}$, in particular,
+  $\Sat{M}{\lforall[x][!A(x)]}$.  By
+  \olref[syn][sem]{prop:quant-terms}, $\Sat{M}{!A(t)}$.  Consequently,
+  $\Struct{M}$ satisfies $\sFmla{\True}{!A(t)}$.
+
+\item The branch is expanded by applying $\TRule{\False}{\lforall}$ to
+  $\sFmla{\False}{\lforall[x][!B(x)]} \in \Gamma$: This results in a
+  new !!{signed formula}~$\sFmla{\False}{!A(a)}$ where $a$ is
+  !!a{constant} not occurring in~$\Gamma$. Since $\Gamma$ is
+  satisfiable, there is a $\Struct{M}$ such that $\Sat{M}{\Gamma}$, in
+  particular $\Sat/{M}{\lforall[x][!B(x)]}$. We have to show that
+  $\Gamma \cup \{\sFmla{\False}{!A(a)}\}$ is satisfiable. To do this,
+  we define a suitable~$\Struct{M'}$ as follows.
+
+  By \olref[syn][ass]{prop:sat-quant}, $\Sat/{M}{\lforall[x][!B(x)]}$
+  iff for some $s$, $\Sat/{M}{!B(x)}[s]$. Now let $\Struct{M'}$ be
+  just like $\Struct{M}$, except $\Assign{a}{M'} = s(x)$.  By
+  \olref[syn][ext]{cor:extensionality-sent}, for any
+  $\sFmla{\True}{!C} \in \Gamma$, $\Sat{M'}{!C}$, and for any
+  $\sFmla{\False}{!C} \in \Gamma$, $\Sat/{M'}{!C}$, since $a$ does not
+  occur in~$\Gamma$.
+
+  By \olref[syn][ext]{prop:extensionality}, $\Sat/{M'}{!A(x)}[s]$.  By
+  \olref[syn][ext]{prop:ext-formulas}, $\Sat/{M'}{!A(a)}[s]$.  Since
+  $!A(a)$ is !!a{sentence}, by
+  \olref[syn][ass]{prop:sentence-sat-true}, $\Sat/{M'}{!A(a)}$, i.e.,
+  $\Struct{M'}$ satisfies $\sFmla{\False}{!A(a)}$.
+\item The branch is expanded by applying $\TRule{\True}{\lexists}$ to
+  $\sFmla{\True}{\lexists[x][!B(x)]} \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\False}{\lexists}$ to
+  $\sFmla{\False}{\lexists[x][!B(x)]} \in \Gamma$: Exercise.}{}
+\end{enumerate}
+Now let's consider the possible inferences with two premises.
+\begin{enumerate}
+\item The branch is expanded by applying $\TRule{\False}{\land}$ to
+  $\sFmla{\False}{!B \land !C} \in \Gamma$, which results in two
+  branches, a left one continuing through $\sFmla{\False}{!B}$ and a
+  right one through $\sFmla{\False}{!C}$. Suppose
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, in particular
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B \land !C}$.  Then
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$ or
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. In the former case,
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies
+  $\sFmla{\False}{!B}$, i.e., $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  satisfies the formulas on the left branch. In the latter,
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies
+  $\sFmla{\False}{!C}$, i.e., $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  satisfies the formulas on the right branch.
+\item The branch is expanded by applying $\TRule{\True}{\lor}$ to
+  $\sFmla{\True}{!B \lor !C} \in \Gamma$: Exercise.
+\item The branch is expanded by applying $\TRule{\True}{\lif}$ to
+  $\sFmla{\True}{!B \lif !C} \in \Gamma$: Exercise.
+\item The branch is expanded by \Cut: This results in two branches,
+  one containing $\sFmla{\True}{!B}$, the other containing
+  $\sFmla{\False}{!B}$. Since $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$
+  and either $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$ or
+  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!B}$,
+  $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies either the left or
+  the right branch.
+\end{enumerate}
+\end{proof}
+
+\tagprob{FOL}
+\begin{prob}
+Complete the proof of \olref[fol][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+\tagendprob
+
+\tagprob{notFOL}
+\begin{prob}
+Complete the proof of \olref[pl][tab][sou]{thm:tableau-soundness}.
+\end{prob}
+\tagendprob
+
+\begin{cor}
+\ollabel{cor:weak-soundness}
+If $\Proves !A$ then $!A$ is \iftag{FOL}{valid}{a tautology}.
+\end{cor}
+
+\begin{cor}
+\ollabel{cor:entailment-soundness}
+If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
+\end{cor}
+
+\begin{proof}
+  If $\Gamma \Proves !A$ then for some $!B_1$, \dots, $!B_n \in
+  \Gamma$, $\{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots,
+  \sFmla{\True}{!B_n}\}$ has a closed !!{tableau}. By
+  \olref{thm:tableau-soundness}, every
+  \iftag{FOL}{!!{structure}}{!!{valuation}}~$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$
+  either makes some $!B_i$ false or makes $!A$ true.  Hence, if
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$ then also
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.
+\end{proof}
+
+\begin{cor}
+\ollabel{cor:consistency-soundness}
+If $\Gamma$ is satisfiable, then it is consistent.
+\end{cor}
+
+\begin{proof}
+We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
+Then there are $!B_1$, \dots, $!B_n \in \Gamma$ and a closed
+!!{tableau} for $\{\sFmla{\True}{!B}, \dots, \sFmla{\True}{!B}\}$.  By
+\olref{thm:tableau-soundness}, there is no
+$\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ such that
+$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B_i}$ for all $i=1$, \dots,~$n$.  But
+then $\Gamma$ is not satisfiable.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,111 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: Structures
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{str}
+
+\olsection{\printtoken{P}{structure} for First-order Languages}
+
+\begin{explain}
+First-order languages are, by themselves, \emph{uninterpreted:} the
+!!{constant}s, !!{function}s, and !!{predicate}s have no specific
+meaning attached to them.  Meanings are given by specifying
+\article{structure} \emph{!!{structure}}. It specifies the
+\emph{domain}, i.e., the objects which the !!{constant}s pick out, the
+!!{function}s operate on, and the quantifiers range over. In addition,
+it specifies which !!{constant}s pick out which objects, how
+!!a{function} maps objects to objects, and which objects the
+!!{predicate}s apply to.  !!^{structure}s are the basis for
+\emph{semantic} notions in logic, e.g., the notion of consequence,
+validity, satisfiablity. They are variously called ``structures,''
+``interpretations,'' or ``models'' in the literature.
+\end{explain}
+
+\begin{defn}[!!^{structure}s]
+\Article{structure} \emph{!!{structure}}~$\Struct M$, for a language
+$\Lang{L}$ of first-order logic consists of the following elements:
+\begin{enumerate}
+\item \emph{Domain:} a non-empty set, $\Domain M$
+\item \emph{Interpretation of !!{constant}s:} for each !!{constant}~$c$ of
+  $\Lang{L}$, !!a{element} $\Assign{c}{M} \in \Domain M$
+\item \emph{Interpretation of !!{predicate}s:} for each $n$-place
+  !!{predicate}~$R$ of $\Lang{L}$ (other than $\eq$), an $n$-place
+  relation $\Assign{R}{M} \subseteq \Domain{M}^n$
+\tagitem{fnTerms}{\emph{Interpretation of !!{function}s:} for each $n$-place
+  !!{function}~$f$ of $\Lang{L}$, an $n$-place function $\Assign{f}{M}
+  \colon \Domain{M}^n \to \Domain{M}$}{}
+\end{enumerate}
+\end{defn}
+
+\iftag{fnTerms}{
+\begin{ex}
+!!^a{structure}~$\Struct M$ for the language of arithmetic consists of a
+  set, an element of $\Domain M$, $\Assign{\Obj 0}{M}$, as
+  interpretation of the !!{constant}~$\Obj 0$, a one-place function
+  $\Assign{\Obj \prime}{M} \colon \Domain{M} \to \Domain M$, two
+  two-place functions $\Assign{\Obj +}{M}$ and $\Assign{\Obj
+    \times}{M}$, both $\Domain M^2 \to \Domain M$, and a two-place
+  relation $\Assign{\Obj <}{M} \subseteq \Domain{M}^2$.
+
+An obvious example of such !!a{structure} is the following:
+\begin{enumerate}
+\item $\Domain N = \Nat$
+\item $\Assign{\Obj 0}{N} = 0$
+\item $\Assign{\Obj \prime}{N}(n) = n + 1$ for all $n \in \Nat$
+\item $\Assign{\Obj +}{N}(n, m) = n + m$ for all $n, m \in \Nat$
+\item $\Assign{\Obj \times}{N}(n, m) = n\cdot m$ for all $n, m \in \Nat$
+\item $\Assign{\Obj <}{N} = \Setabs{\tuple{n, m}}{n \in \Nat, m \in
+  \Nat, n < m}$
+\end{enumerate}
+The !!{structure}~$\Struct N$ for $\Lang L_A$ so defined is called the
+\emph{standard model of arithmetic}, because it interprets the
+non-logical constants of~$\Lang L_A$ exactly how you would expect.
+
+However, there are many other possible !!{structure}s for~$\Lang
+L_A$. For instance, we might take as the domain the set~$\Int$ of
+integers instead of~$\Nat$, and define the interpretations of $\Obj
+0$, $\Obj \prime$, $\Obj +$, $\Obj \times$, $\Obj <$ accordingly.  But
+we can also define structures for~$\Lang L_A$ which have nothing even
+remotely to do with numbers.
+\end{ex}
+}{}
+
+\begin{ex}
+!!^a{structure}~$\Struct M$ for the language~$\Lang L_Z$ of set theory requires
+just a set and a single-two place relation. So technically, e.g., the
+set of people plus the relation ``$x$ is older than $y$'' could be
+used as !!a{structure} for $\Lang L_Z$, as well as $\Nat$ together
+with $n \ge m$ for $n, m \in \Nat$.
+
+A particularly interesting !!{structure} for $\Lang L_Z$ in which the
+!!{element}s of the domain are actually sets, and the interpretation
+of $\Obj \in$ actually is the relation ``$x$ is !!a{element} of~$y$''
+is the !!{structure} $\Struct{{HF}}$ of \emph{hereditarily finite sets}:
+\begin{enumerate}
+\item $\Domain{{{HF}}} = \emptyset \cup \Pow{\emptyset} \cup
+  \Pow{\Pow{\emptyset}} \cup \Pow{\Pow{\Pow{\emptyset}}} \cup \dots$;
+\item $\Assign{\Obj \in}{{{HF}}} = \Setabs{\tuple{x, y}}{x, y \in
+  \Domain{{{HF}}}, x \in y}$.
+\end{enumerate}
+\end{ex}
+
+\begin{digress}
+The stipulations we make as to what counts as a !!{structure} impact
+our logic. For example, the choice to prevent empty domains ensures,
+given the usual account of satisfaction (or truth) for quantified
+sentences, that $\lexists[x][(!A(x) \lor \lnot !A(x))]$ is
+valid---that is, a logical truth. And the stipulation that all
+!!{constant}s must refer to an object in the domain ensures that the
+existential generalization is a sound pattern of inference: $!A(a)$,
+therefore $\lexists[x][!A(x)]$. If we allowed names to refer outside
+the domain, or to not refer, then we would be on our way to a
+\emph{free logic}, in which existential generalization requires an
+additional premise: $!A(a)$ and $\lexists[x][\eq[x][a]]$, therefore
+$\lexists[x][!A(x)]$.
+\end{digress}
+
+\end{document}

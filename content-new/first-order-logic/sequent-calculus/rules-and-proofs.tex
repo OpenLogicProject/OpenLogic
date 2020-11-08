@@ -1,0 +1,74 @@
+% Part: first-order-logic
+% Chapter: sequent-calculus
+% Section: rules-and-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{seq}{rul}}
+      {\olfileid{pl}{seq}{rul}}
+
+\olsection{Rules and \usetoken{P}{derivation}}
+
+For the following, let $\Gamma, \Delta, \Pi, \Lambda$ represent finite
+sequences of !!{sentence}s.
+
+\begin{defn}[Sequent]
+A \emph{sequent} is an expression of the form
+\[
+\Gamma \Sequent \Delta
+\]
+where $\Gamma$ and $\Delta$ are finite (possibly empty) sequences of
+!!{sentence}s of the language $\Lang L$. $\Gamma$ is called the
+\emph{antecedent}, while $\Delta$ is the \emph{succedent}.
+\end{defn}
+
+\begin{explain}
+The intuitive idea behind a sequent is: if all of the !!{sentence}s in
+the antecedent hold, then at least one of the !!{sentence}s in the
+succedent holds. That is, if $\Gamma = \tuple{!A_1, \dots, !A_m}$ and
+$\Delta = \tuple{!B_1, \dots, !B_n}$, then $\Gamma \Sequent \Delta$
+holds iff
+\[
+(!A_1 \land \cdots \land !A_m) \lif (!B_1 \lor \cdots \lor
+!B_n)
+\]
+holds. There are two special cases: where $\Gamma$ is empty and when
+$\Delta$~is empty. When $\Gamma$ is empty, i.e., $m = 0$, $\quad
+\Sequent \Delta$ holds iff $!B_1 \lor \dots \lor !B_n$ holds. When
+$\Delta$ is empty, i.e., $n = 0$, $\Gamma \Sequent \quad$ holds iff
+$\lnot(!A_1 \land \dots \land !A_m)$ does.  We say a sequent is valid
+iff the corresponding !!{sentence} is valid.
+\end{explain}
+
+If $\Gamma$ is a sequence of !!{sentence}s, we write $\Gamma, !A$ for
+the result of appending $!A$ to the right end of~$\Gamma$ (and $!A,
+\Gamma$ for the result of appending $!A$ to the left end
+of~$\Gamma$). If $\Delta$ is a sequence of !!{sentence}s also, then $\Gamma,
+\Delta$ is the concatenation of the two sequences.
+
+\begin{defn}[Initial Sequent]
+An \emph{initial sequent} is a sequent
+\iftag{prvFalse,prvTrue}{of one of the following forms:
+  \begin{enumerate}
+    \item $!A \Sequent !A$
+    \tagitem{prvTrue}{$\quad \Sequent \ltrue$}{}
+    \tagitem{prvFalse}{$\lfalse \Sequent \quad$}{}
+  \end{enumerate}}
+{of the form $!A \Sequent !A$} for any !!{sentence} $!A$ in the language.
+\end{defn}
+
+!!^{derivation}s in the sequent calculus are certain trees of
+sequents, where the topmost sequents are initial sequents, and if a
+sequent stands below one or two other sequents, it must follow
+correctly by a rule of inference.  The rules for $\Log{LK}$ are
+divided into two main types: \emph{logical} rules and
+\emph{structural} rules.  The logical rules are named for the !!{main
+  operator} of the !!{sentence} containing $!A$ and/or $!B$ in the
+lower sequent. Each one comes in two versions, one for inferring a
+sequent with the !!{sentence} containg the !!{operator} on the left,
+and one with the !!{sentence} on the right.
+
+\end{document}

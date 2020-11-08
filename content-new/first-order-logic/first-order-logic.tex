@@ -1,0 +1,62 @@
+% Part: first-order logic
+
+\documentclass[../../include/open-logic-part]{subfiles}
+
+\begin{document}
+
+\part{First-order Logic}
+
+\begin{editorial}
+  This part covers the metatheory of first-order logic through
+  completeness.  Currently it does not rely on a separate treatment of
+  propositional logic; everything is proved.  The source files will
+  exclude the material on quantifiers (and replace ``!!{structure}''
+  with ``!!{valuation}'', $\Struct{M}$ with $\pAssign{v}$, etc.) if
+  the ``FOL'' tag is false. In fact, most of the material in the part
+  on propositional logic is simply the first-order material with the
+  ``FOL'' tag turned off.
+
+  If the part on propositional logic is included, this results in a
+  lot of repetition. It is planned, however, to make it possible to
+  let this part take into account the material on propositional logic
+  (and exclude the material already covered, as well as shorten proofs
+  with references to the respective places in the propositional
+  part).
+
+  Currently four different proof systems are offered as
+  alternatives, sequent calculus, natural deduction, signed tableaux,
+  and axiomatic proofs. This part still needs an introduction
+  (\gitissue{69}).
+\end{editorial}
+
+\olimport[syntax-and-semantics]{syntax-and-semantics}
+
+\olimport[models-theories]{models-theories}
+
+\olimport[proof-systems]{proof-systems}
+
+\iftag{prfSC}{%
+  \olimport[sequent-calculus]{sequent-calculus}
+}{}
+
+\iftag{prfND}{%
+  \olimport[natural-deduction]{natural-deduction}
+}{}
+
+\iftag{prfTab}{%
+  \olimport[tableaux]{tableaux}
+}{}
+
+\iftag{prfAX}{%
+  \olimport[axiomatic-deduction]{axiomatic-deduction}
+}{}
+
+\olimport[completeness]{completeness}
+
+\olimport[beyond]{beyond}
+
+\olimport[discussion]{discussion}
+
+\OLEndPartHook
+
+\end{document}

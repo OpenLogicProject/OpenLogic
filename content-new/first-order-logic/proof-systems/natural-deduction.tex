@@ -1,0 +1,90 @@
+% Part: first-order-logic
+% Chapter: proof-systems
+% Section: natural-deduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\iftag{FOL}
+      {\olfileid{fol}{prf}{ntd}}
+      {\olfileid{pl}{prf}{ntd}}
+
+\olsection{Natural Deduction}
+
+Natural deduction is !!a{derivation} system intended to mirror actual
+reasoning (especially the kind of regimented reasoning employed by
+mathematicians).  Actual reasoning proceeds by a number of ``natural''
+patterns. For instance, proof by cases allows us to establish a
+conclusion on the basis of a disjunctive premise, by establishing that
+the conclusion follows from either of the disjuncts. Indirect proof
+allows us to establish a conclusion by showing that its negation leads
+to a contradiction. Conditional proof establishes a conditional claim
+``if \dots then \dots'' by showing that the consequent follows from
+the antecedent.  Natural deduction is a formalization of some of these
+natural inferences.  Each of the logical connectives and quantifiers
+comes with two rules, an introduction and an elimination rule, and
+they each correspond to one such natural inference pattern. For
+instance, $\Intro{\lif}$ corresponds to conditional proof, and
+$\Elim{\lor}$ to proof by cases.  A particularly simple rule is
+$\Elim{\land}$ which allows the inference from $!A \land !B$ to~$!A$
+(or $!B$).
+
+One feature that distinguishes natural deduction from other
+!!{derivation} systems is its use of assumptions. !!^a{derivation} in
+natural deduction is a tree of !!{formula}s.  A single !!{formula}
+stands at the root of the tree of !!{formula}s, and the ``leaves'' of
+the tree are !!{formula}s from which the conclusion is derived.  In
+natural deduction, some leaf !!{formula}s play a role inside the
+!!{derivation} but are ``used up'' by the time the !!{derivation}
+reaches the conclusion. This corresponds to the practice, in actual
+reasoning, of introducing hypotheses which only remain in effect for a
+short while.  For instance, in a proof by cases, we assume the truth
+of each of the disjuncts; in conditional proof, we assume the truth of
+the antecedent; in indirect proof, we assume the truth of the negation
+of the conclusion.  This way of introducing hypothetical assumptions
+and then doing away with them in the service of establishing an
+intermediate step is a hallmark of natural deduction. The formulas at
+the leaves of a natural deduction !!{derivation} are called
+assumptions, and some of the rules of inference may ``!!{discharge}''
+them.  For instance, if we have !!a{derivation} of~$!B$ from some
+assumptions which include~$!A$, then the $\Intro{\lif}$ rule allows us
+to infer~$!A \lif !B$ and discharge any assumption of the form~$!A$.
+(To keep track of which assumptions are discharged at which
+inferences, we label the inference and the assumptions it discharges
+with a number.)  The assumptions that remain !!{undischarged} at the
+end of the !!{derivation} are together sufficient for the truth of the
+conclusion, and so !!a{derivation} establishes that its
+!!{undischarged} assumptions entail its conclusion.
+
+The relation $\Gamma \Proves !A$ based on natural deduction holds iff
+there is !!a{derivation} in which $!A$~is the last !!{sentence} in the
+tree, and every leaf which is !!{undischarged} is in~$\Gamma$. $!A$~is
+a theorem in natural deduction iff there is !!a{derivation} in which
+$!A$~is the last !!{sentence} and all assumptions are !!{discharged}.
+For instance, here is !!a{derivation} that shows that $\Proves (!A
+\land !B) \lif !A$:
+\begin{prooftree}
+  \AxiomC{$\Discharge{!A \land !B}{1}$}
+  \RightLabel{\Elim{\land}}
+  \UnaryInfC{$!A$}
+  \DischargeRule{\Intro{\lif}}{1}
+  \UnaryInfC{$(!A \land !B) \lif !A$}
+\end{prooftree}
+The label~$1$ indicates that the assumption $!A \land !B$ is
+!!{discharged} at the \Intro{\lif} inference.
+  
+A set~$\Gamma$ is inconsistent iff $\Gamma \Proves \lfalse$ in natural
+deduction.  The rule \FalseInt{} makes it so that from an inconsistent
+set, any !!{sentence} can be !!{derive}d.
+
+Natural deduction systems were developed by Gerhard Gentzen and
+Stanis\l{}aw Ja\'skowski in the 1930s, and later developed by Dag
+Prawitz and Frederic Fitch. Because its inferences mirror natural
+methods of proof, it is favored by philosophers. The versions
+developed by Fitch are often used in introductory logic textbooks. In
+the philosophy of logic, the rules of natural deduction have sometimes
+been taken to give the meanings of the logical operators
+(``proof-theoretic semantics'').
+
+\end{document}
