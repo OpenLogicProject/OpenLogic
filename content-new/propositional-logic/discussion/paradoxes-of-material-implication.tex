@@ -1,0 +1,194 @@
+% Part: propositional-logic
+% Chapter: discussion
+% Section: paradoxes-of-material-implication
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{dis}{pmi}
+
+\olsection{Paradoxes of material implication}
+
+How does material implication relate to the conditional `\emph{if \ldots then \ldots}' of natural language?
+
+\paragraph*{Two kinds of conditionals}
+
+We usually distinguish two forms of conditionals in natural language, depending on the mood of the verb in the consequent.
+
+\begin{itemize}
+	\item \emph{Indicative conditional}. If Oswald didn't kill Kennedy, someone else did.
+	\item \emph{Subjunctive conditional, a.k.a counterfactuals}. If Oswald hadn't killed Kennedy, someone else would have.
+\end{itemize}
+
+The first is called `indicative' because the consequent is in the indicative mood (`somebody killed Kennedy'). The second is called `subjunctive' because the consequent is in the subjunctive mood (`somebody would have killed Kennedy'). The second is also called `counterfactual conditionals' or `counterfactuals' because we typically use it when we think the antecedent is not the case (`contrary to fact').\footnote{We don't \emph{always} use counterfactuals when often use subjunctive conditionals when we think the antecedent is not true. If you try to convince a friend to join you for a trip you might tell them: ``if you came with me you would have fun''. You do not thereby indicate that you're convinced that they won't come with you; rather, you're uncertain whether the antecedent is true.  A doctor who is comvinced that their patient has smallpox could well say to their skeptical colleague by saying ``Come on! If the patient had smallpox they would display exactly these symptoms.'' By saying so they don't indicate that they think the patient \emph{doesn't} have smallpox. Rather, they are convinced that the antecedent is true.} 
+
+It is obvious that the two mean different things. Anybody who agrees that Kennedy has been killed should accept the first. But only people who believe that there was a conspiracy to kill Kennedy should believe the second. It is not obvious what exactly the difference of meaning consists in. 
+
+\paragraph*{The material implication account}
+
+Nobody thinks that the subjunctive conditionals mean the same as material implication ($\lif$) in propositional logic.\footnote{We often assert subjunctive conditionals when we think the antecedent is false. If they meant the same as material implications they would all be trivially true. But obviously when we know it didn't rain yesterday, it is not at all trivial whether a subjunctive conditional like ``if it hadn't rained yesterday I would have got home quicker'' would be true.} But some philosophers hold that \emph{indicative} conditionals are material implications. We call that the \emph{material implication account} of indicative conditionals. 
+
+Is the material implication account of the (indicative) conditional correct? (Henceforth by ``conditional'' we mean indicative conditionals.) We can divide the question into two:
+
+\begin{itemize}
+	\item \emph{From If to $\lif$}. Does ``if $!A$ then $!B$'' entail $!A \lif !B$? 
+	\item \emph{From $\lif$ to If}. Does $!A \lif !B$ entail ``if $!A$ then $!B$''?
+\end{itemize}
+
+The material implication account answers yes to both. The yes answer to the first is widely accepted. The second is the controversial one. 
+
+\paragraph*{From If to $\lif$: modus ponens}
+
+One argument to answer ``yes'' to the first goes thus. First, \emph{modus ponens} inference in natural language is valid:
+
+\begin{quote}
+	\emph{Modus ponens}\\
+	If $!A$ then $!B$.\\
+	$!A$.\\
+	Therefore, $!B$.
+\end{quote}
+	
+But suppose ``if $!A$ then $!B$'' does \emph{not} entail $!A \lif !B$. Then there is a case in which ``if $!A$ then $!B$'' is true even though $!A$ is true and $!B$ is false. But that would mean that \emph{modus ponens} inference fails in that case. But, the argument goes, \emph{modus ponens} is valid. So ``if $!A$ then $!B$'' must entail $!A \lif !B$.
+
+\paragraph*{From $\lif$ to if: the or-to-if inference}
+
+One prominent argument to answer ``yes'' to the second is this. Inferences like the following seem correct:
+
+\begin{quote}
+	\emph{Or to if}\\
+	$\lnot !A$ or $!B$.\\
+	Therefore, if $!A$ then $!B$.
+\end{quote}
+
+For example: Alice has no kids or she has two kids. So if she has kids, she has two kids.
+
+Now if this inference is valid, then $!A \lif !B$ entails ``if $!A$ then $!B$''. For $!A \lif !B$ entail $\lnot !A$ or $!B$.\footnote{By definition, $!A \lif !B$ entails $\lnot !A \lor !B$. Assuming that the natural language ``or'' means the same as $\lor$ in propositional logic, this entails $\lnot !A$ or $!B$. There is some debate about that assumption but that's not the controversial part of the argument.} And by the inference this in turns entails ``if $!A$ then $!B$''. 
+
+So the argument is this: the or-to-if inference is valid, and that means that $!A \lif !B$ entails ``if $!A$ then $!B$''. 
+
+Putting the two arguments together: the \emph{modus ponens} inference and the or-to-if inference are valid, so $!A \lif !B$ and ``if $!A$ then $!B$'' entail each other. So they mean the same.
+
+\paragraph*{Paradoxes of material implication}
+
+In propositional logic a material implication $!A \lif !B$ is true if its antecedent $A!$ is false or its consequent $!B$ is true. Put otherwise: it is equivalent to $\lnot !A \lor !B$. As a result we have the following properties:
+
+\begin{enumerate}
+	\item $!A \Entails !B \lif !A$.
+	\item $\lnot !B \Entails !B \lif !A$.
+	\item $\lnot (!A \lif !B) \Entails \lnot !A$.
+	\item $(!A \land !B) \lif !C \Entails (!A \lif !C) \lor (!B \lif !C)$.
+\end{enumerate}
+
+These properties are called \emph{paradoxes of material implication}. To be clear, what is paradoxical is not that the logical connective $\lif$ has this properties: after all, we simply define it that way. Rather, what is paradoxical is to think that the natural language `\emph{if \ldots then \ldots}' works that way. So they are paradoxes for the \emph{material implication account}. More precisely, they put pressure on the claim that $\lif$ entails if. 
+
+$!A \Entails !B \lif !A$? Consider:
+
+\begin{quote}
+	Alice had lunch. So, if she didn't eat, she had lunch.
+\end{quote}
+
+$\lnot !B \Entails !B \lif !A$? Consider:
+
+\begin{quote}
+	Alice didn't have lunch. So, if she had lunch she didn't eat.
+\end{quote}
+
+$\lnot (!A \lif !B) \Entails \lnot !A$? Consider the dialogue:
+
+\begin{quote}
+	``Is it true that if you murdered your neighbour you greatly enjoyed it?\\
+	--- No, of course not!\\
+	--- So, you \emph{did} murder your neighbour!''
+\end{quote}
+
+Or consider:
+
+\begin{quote}
+	It's not true that if Bob slouched all day he made progress on his essay. So, he did slouch all day.
+\end{quote}
+
+$(!A \land !B) \lif !C \Entails (!A \lif !C) \lor (!B \lif !C)$? Consider:
+
+\begin{quote}
+	If there's gas and someone lit a match there's been an explosion. So (one of these at least must be the case:) if there's gas then there's been an explosion or if someone lit a match then there's been an explosion.
+\end{quote}
+
+\paragraph*{Revisiting the arguments for the material implication accounts}
+
+Disjunction has the following properties:
+
+\begin{enumerate}
+	\item $!A \Entails \lnot !B \lor !A$.
+	\item $\lnot !B \Entails \lnot !B \lif !A$.
+	\item $\lnot (\lnot !A \lor !B) \Entails \lnot !A$.
+	\item $\lnot (!A \land !B) \lor !C \Entails (\lnot !A \lor !C) \lor (\lnot !B \lor !C)$.
+\end{enumerate}
+
+This shows that the paradoxes arise if we accept the or-to-if inference.\footnote{Under the assumption that the natural language ``or'' and $\lor$ are equivalent. To get from the third property of disjunction to the corresponding paradox of material implication we have to accept the contraposition of the or-to-if inference (the not-if-to-not-or inference, if you wish), namely that from "not ($!A$ or $!B$)" one can infer "not (if $!A$ then $!B$)''.} To avoid the paradoxes, one must reject the or-to-if inference. 
+
+By contrast, the paradoxes can't be generated from the modus ponens inference only. Thus to avoid the paradoxes it is not necessary to reject the modus ponens inference.
+
+Because the paradoxes arises if we accept the or-to-if inference, the cases that are problematic for the material implication account can be used to argue against or-to-if inference. Consider: 
+
+\begin{quote}
+	Alice had lunch. \\
+	So Alice ate or Alice had lunch.\\
+	So, if she didn't eat, she had lunch.
+\end{quote}
+
+One may argue that the step from the first to the second is fine, but the step from the second to the third is invalid. If so, that is a counterexample to the or-to-if inference. Consider as well:
+
+\begin{quote}
+	Alice didn't have lunch. \\
+	So, Alice didn't have lunch or she didn't eat.\\
+	So, if she had lunch she didn't eat.
+\end{quote}
+
+Again, one might suspect the step from the second to the third.
+
+\begin{quote}
+	``Is it true that if you murdered your neighbour you greatly enjoyed it?\\
+	--- No, of course not!\\
+	--- So, it's not true that you didn't murder your neighbour or you greatly enjoyed it!\\
+	So, you did murder your neighbour and you did enjoy it.''
+\end{quote}
+
+Here one might suspect the step from the negated ``if'' sentence to the negated ``or'' sentence, which is the contraposition of the or-to-if inference.
+
+\begin{quote}
+	Either it's not true there's gas and someone lit a match, or there's been an explosion (or both).
+	So, there's no gas or no one lit a match or there's been an explosion. 
+	So, there's no gas or there's been an explosion, or: no one lit a match or there's been an explosion.
+	So, if there's gas there's been an explosion, or if someone lit a match there's been an explosion. 
+\end{quote}
+
+Here one might reject the last step.  
+
+\paragraph*{Defending the material conditional account: conversational implicature}
+
+Defenders of the material conditional account must explain why there seems to be counterexamples to the inference patterns. Their standard strategy is to say that that the problematic inferences are correct but seem wrong because asserting them would normally imply something false. 
+
+For more on this see \citet{BennettPGC} and \citet{PriestINCL}.
+
+\paragraph*{Rejecting the material conditional account: a beginning of diagnosis}
+
+Suppose we don't know whether Alice had lunch. But we know that the choices for lunch where either pasta or meat, and we know that Alice is a vegetarian. In that scenario, we would not know whether the first claim below is true but we would reject the second:
+
+\begin{enumerate}
+	\item Alice didn't have lunch or she had meat.
+	\item If Alice had lunch she had meat.
+\end{enumerate}
+
+The first claim is true if Alice didn't have lunch. Since we don't know whether she had lunch, we can't reject it. But we do reject the second. How so? What we know leaves only two \emph{possibilities} open:
+
+\begin{enumerate}
+	\item Alice didn't have lunch.
+	\item Alice had lunch, but she had no meat. 
+\end{enumerate}
+
+What seems to drive our jugement is this: we look at the possibilities in which Alice had lunch, and we check whether in those, she has meat. In this case, we see it's not the case that in all possible scenarios in which Alice had lunch she had meat. In fact, in \emph{no} scenario in which Alice had lunch she had meat. This alone seems enough for us to reject the conditional.
+
+This suggests the following thought. The material conditional $!A \lif !B$ is true if it isn't \emph{in fact} the case that $!A$ is true but $!B$ false. But for the natural language conditional ``if $!A$ then $!B$'' to be true it is required that it isn't \emph{possibly} the case that $!A$ is true but $!B$ false. Here we see that it's possible that Alice had lunch but didn't eat meat, so we deem the natural language false even though we suspend jugement on the material conditional (the disjunction).
+
+\end{document}

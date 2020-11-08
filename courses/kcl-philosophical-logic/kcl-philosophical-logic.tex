@@ -1,0 +1,180 @@
+% King's Philosophical Logic - Open Logic Project
+%
+% driver file for kcl-philosophical-logic.tex to produce text on A4 paper
+% with standard layout and margins
+
+% We use the memoir class for maximal flexibility of layout, but any
+% class will do
+
+\documentclass[a4paper,oneside]{memoir}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory courses/sample,
+% so the main directory is two levels up.
+\newcommand{\olpath}{../../}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in kcl-philosophical-logic-config.sty
+\input{\olpath/sty/open-logic.sty}
+
+% we want all the problems deferred to the end
+\input{\olpath/sty/open-logic-defer.sty}
+
+% let's set the whole thing in Palatino, with Helvetica for
+% sans-serif, and spread the lines a bit to make the text more
+% readable
+
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\linespread{1.05}
+
+% Place problems in each chapter
+\problemsperchapter
+
+% Hide answers if the tag hideAns is set to true
+\iftag{hideAns}{
+\let\ans\comment
+\let\endans\endcomment
+}
+
+\begin{document}
+
+% Memoir class only: make lists less spacious
+\firmlists
+
+% First we make a titlepage
+
+\begin{titlingpage}
+\begin{raggedleft}
+{\bfseries\sffamily
+\fontsize{52pt}{4em}\selectfont
+King's\\[.2ex]
+\textit{Philosophical}\\[0.2ex]
+Logic\\[0.2ex]
+\Large
+King's College London\\[.5ex]
+2020-21
+}
+\vskip 4ex
+\normalfont\huge\textbf{Julien Dutant\\}
+\vskip 2ex
+\normalfont\large\textbf{DRAFT of \today}
+
+\end{raggedleft}
+
+\vfill
+
+% This work's license. Generates a CC-BY-NC license mark, with 
+% the \oluselicense code (from open-logic.sty) to acknowledge 
+% the original source (the
+% OLP).  Acknowledgment of the source is a requirement under the
+% conditions of the CC-BY license used by the OLP, but you are not
+% required to license the product itself under CC-BY.
+% two parameters: title with link to the source, and author
+
+\kcluselicense
+% Title of this version of the OLT with link to source
+{\href{https://github.com/jdutant/OpenLogic/tree/kcl-philos-logic}{\textit{King's Philosophical Logic}}}
+% Author of this version
+{\href{http://julien.dutant.free.fr/}{Julien Dutant}}
+\end{titlingpage}
+
+
+\frontmatter
+
+\pagestyle{ruled}
+
+\input{about/about.tex}
+
+\newpage
+
+\tableofcontents*
+
+\mainmatter
+
+\olimport[introduction]{introduction}
+
+\olimport[\olpath/content-new/propositional-logic]{propositional-logic}
+
+\part{Modal logic}
+
+\olimport*[normal-modal-logic/syntax-and-semantics]{syntax-and-semantics}
+
+\chapter{Frame Definability}
+
+\olimport*[normal-modal-logic/frame-definability]{introduction}
+\olimport*[normal-modal-logic/frame-definability]{properties-accessibility}
+\olimport*[normal-modal-logic/frame-definability]{frames}
+\olimport*[normal-modal-logic/frame-definability]{definability}
+\olimport*[normal-modal-logic/frame-definability]{equivalence-S5}
+
+% OLEndChapterHook should come at the end of each chapter.
+
+\OLEndChapterHook
+
+\olimport*[normal-modal-logic/tableaux]{tableaux}
+
+\olimport[\olpath/content-new/normal-modal-logic/discussion]{discussion}
+
+% OLEndPartHook should come at the end of each part.
+
+\OLEndPartHook
+
+\part{First-order Logic}
+
+\olimport*[first-order-logic/syntax-and-semantics]{syntax-and-semantics}
+% \olimport[models-theories]{models-theories}
+% \olimport[proof-systems]{proof-systems}
+\iftag{prfSC}{%
+  \olimport*[first-order-logic/sequent-calculus]{sequent-calculus}
+}{}
+\iftag{prfND}{%
+  \olimport*[first-order-logic/natural-deduction]{natural-deduction}
+}{}
+\iftag{prfTab}{%
+  \olimport*[first-order-logic/tableaux]{tableaux}
+}{}
+\iftag{prfAX}{%
+  \olimport*[first-order-logic/axiomatic-deduction]{axiomatic-deduction}
+}{}
+% \olimport[completeness]{completeness}
+% \olimport[beyond]{beyond}
+\olimport[\olpath/content-new/first-order-logic/discussion]{discussion}
+\OLEndPartHook
+
+\olimport[\olpath/content-new/non-classical-logics]{non-classical-logics}
+
+
+% apparently \stopproblems is required at this point
+\stopproblems
+
+% Appendices if desired
+
+%\appendix
+
+%\olimport*[methods]{methods}
+
+%\olimport*[history/biographies]{biographies}
+
+% now typeset all the problems as an appendix. If you want problems at
+% the end of each chapter, delete this part and put
+% \problemsperchapter in the preamble
+
+%\chapter{Problems}
+
+%\printproblems
+
+\backmatter
+
+% If you include any chapters from the history part, you have to print
+% the Photo Credits. 
+
+%\photocredits
+
+% Include the bibliography
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{kcl-philosophical-logic,\olpath/bib/open-logic}
+
+\end{document}
+

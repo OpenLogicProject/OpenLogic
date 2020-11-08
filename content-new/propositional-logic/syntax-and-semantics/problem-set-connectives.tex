@@ -1,0 +1,203 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: problem-set-truth-functions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{pco}
+
+% These problems will appear in the automated Problems section
+% (either at the end of chapter or end of book)
+% after all the problems that are included within the section
+
+\begin{prob}
+Fill in the truth-tables for negation, conjunction, disjunction, material
+implication and biconditional.
+
+\noindent
+\begin{tabular}{|cc|c|}
+\hline 
+\multicolumn{2}{|c|}{$\lnot p$} & \tabularnewline
+\hline 
+\multirow{2}{*}{$p$} & 1 & $\ldots$\tabularnewline
+ & 0 & $\ldots$\tabularnewline
+\hline 
+\end{tabular}\qquad{}%
+\begin{tabular}{|cc|cc|}
+\hline 
+\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{$q$}\tabularnewline
+\multicolumn{2}{|c|}{$p\land q$} & 1 & 0\tabularnewline
+\hline 
+\multirow{2}{*}{$p$} & 1 & $\ldots$ & $\ldots$\tabularnewline
+ & 0 & $\ldots$ & $\ldots$\tabularnewline
+\hline 
+\end{tabular}\qquad{}%
+\begin{tabular}{|cc|cc|}
+\hline 
+\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{$q$}\tabularnewline
+\multicolumn{2}{|c|}{$p\lor q$} & 1 & 0\tabularnewline
+\hline 
+\multirow{2}{*}{$p$} & 1 & $\ldots$ & $\ldots$\tabularnewline
+ & 0 & $\ldots$ & $\ldots$\tabularnewline
+\hline 
+\end{tabular}
+\begin{tabular}{|cc|cc|}
+\hline 
+\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{$q$}\tabularnewline
+\multicolumn{2}{|c|}{$p\lif q$} & 1 & 0\tabularnewline
+\hline 
+\multirow{2}{*}{$p$} & 1 & $\ldots$ & $\ldots$\tabularnewline
+ & 0 & $\ldots$ & $\ldots$\tabularnewline
+\hline 
+\end{tabular}\qquad{}%
+\begin{tabular}{|cc|cc|}
+\hline 
+\multicolumn{2}{|c|}{} & \multicolumn{2}{c|}{$q$}\tabularnewline
+\multicolumn{2}{|c|}{$p\liff q$} & 1 & 0\tabularnewline
+\hline 
+\multirow{2}{*}{$p$} & 1 & $\ldots$ & $\ldots$\tabularnewline
+ & 0 & $\ldots$ & $\ldots$\tabularnewline
+\hline 
+\end{tabular}
+\end{prob}
+
+\begin{prob}
+For each formula below, give a valuation that makes it true and one
+that makes it false.
+\begin{enumerate}
+\item  $\lnot P\lor Q$.
+\item $\lnot(P\lor Q)$.
+\item $\lnot(P\lif Q)$.
+\item $\lnot P\lif Q$.
+\item $P\lif\lnot P$.
+\item $(P\liff Q)\land(\lnot Q\lif R)$.
+\item $(P\land Q)\lif R.$
+\item $\lnot(P\land(\lnot Q\lor R))$.
+\end{enumerate}
+\emph{Note: a valuation is an assignement truth-value for each of
+$P$, $Q$, $R$, $\ldots$}.
+\end{prob}
+
+\begin{prob}
+Three\emph{ }equally good poker players, Patricia, Quinn and Roy,
+are playing a game. Only one of them can be the winner.
+
+\begin{enumerate}
+\item Consider the following sentences. Does it seem to you that they must
+be true, must be false, or could be either dependening on how the
+game plays out?
+\begin{enumerate}
+\item If Patricia loses then she doesn't lose.
+\item Either if Patricia loses then Quinn loses too, or if Quinn loses then
+Patricia loses too. 
+\end{enumerate}
+\item Consider the formulas below. Check whether they can be true or false
+depending on whether $P$ and $Q$ are.
+\begin{enumerate}
+\item $P\lif\lnot P$.
+\item $(P\lif Q)\lor(Q\lif P)$.
+\end{enumerate}
+\item When, if at all, 1(a) and 2(a) come apart?
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Answer the following.
+\begin{enumerate}
+\item  Give a formula equivalent to $P\lif Q$ that only uses $\lor$
+and $\lnot$.
+\item Give a formula equivalent to $(P\land Q)\lif(Q\lor R)$ that
+only uses $\land,\lor$ and $\lnot$.
+\item Give a formula equivalent to $P\land Q$ that only uses $\lor$ and
+$\lnot$.
+\item Give a formula equivalent to $P\lor Q$ that only uses $\land$ and
+$\lnot$.
+\item Give a formula equivalent to $P\lor Q$ that only uses $\lif$
+and $\lnot$.
+\item Give a formula equivalent to $P\land Q$ that only uses $\lif$
+and $\lnot$.
+\item Give a formula equivalent to $P\liff Q$ that only uses
+$\lif$ and $\lnot$.
+\end{enumerate}
+
+\emph{Note: an equivalent formula is one that is true if the original
+is true, false if the original is false, no matter what the values
+of $P,Q,R,\ldots$ are.}
+\end{prob}
+
+\begin{prob}\ollabel{exer:possible-connectives}
+Each clause below describes a possible connective $\bullet$. For each
+of them, (a) write its truth-table, and (b) give an equivalence using
+only $\lnot,\land,\lor,\lif$. 
+\begin{enumerate}
+\item \emph{Sheffer stroke, nand}. $P\bullet Q$ is true iff one of $P$ or $Q$
+is false. (Normally noted `$|$')
+\item \emph{Quine's dagger, nor}. $P\bullet Q$ is true iff neither $P$ nor $Q$ are true.
+(Often noted `$\downarrow$'.)
+\item $P\bullet Q$ is true just if $P$ is true.
+\item $\bullet P$ is true just if $P$ is true.
+\item $\bullet P$ is always false.
+\item $P\bullet Q$ is some connective of your invention, distinct from
+any of the connectives we have seen so far. 
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Check that the pairs of formulas below are equivalent.
+\begin{enumerate}
+\item \emph{De Morgan law.} $\lnot(P\land Q)$ and $\lnot P\lor\lnot Q$.
+\item \emph{De Morgan law.} $\lnot(P\lor Q)$ and $\lnot P\land\lnot Q$.
+\item \emph{Contraposition.} $P\lif Q$ and $\lnot Q\lif\lnot P$. 
+\item \emph{Definition of negation.} $\lnot P$ and $P\lif\bot$.
+\item \emph{Import / Export.} $P\lif(Q\lif R)$ and $(P\land Q)\lif R$. 
+\end{enumerate}
+
+\emph{Notes: two formulas are equivalent iff they have the same truth
+value no matter what the values of $P,Q,R,\ldots$ are.}
+\emph{$\bot$, the falsum, is a symbol that is always false.}
+\end{prob}
+
+\begin{prob}
+Check that the formulas below are logically valid. 
+\begin{enumerate}
+\item \emph{Law of non-contradiction. }$\lnot(P\land\lnot P)$.
+\item \emph{Law of excluded middle}. $P\lor\lnot P$.
+\item $P\lif(Q\lif P)$.
+\item $\bot\lif P$.
+\item $\lnot(Q\lif P)\lif(P\lif Q)$.
+\item $\lnot(Q\land P)\lif(P\lif\lnot Q)$.
+\end{enumerate}
+\emph{Notes: a formula is logically valid iff it is true no matter
+whether $P$, $Q$, $\ldots$ are true or false.}
+\emph{$\bot$, the falsum, is a symbol that is always false.}
+\end{prob}
+
+\begin{prob}
+Say whether the formulas are logically valid. If not, give a counterexample.
+\begin{enumerate}
+\item $\lnot(P\lif Q)\lif(\lnot P\lif Q)$.
+\item $((P\lif Q)\lif Q)\lif Q$.
+\item $(P\lif Q)\lif(P\land R\lif Q)$. 
+\item $(P\lif Q)\lif\lnot(P\lif\lnot Q)$.
+\item $(\lnot(P\land Q)\lif(P\land Q))\lif Q$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+There are 16 possible two-places connectives $P\bullet Q$. Why?
+
+The following 14 are (simple variations of) the ones we've seen so
+far. What are the missing two? (One of the missing ones could be the
+one you invented in exercise \olref[pl][syn][pco]{exer:possible-connectives}.
+\begin{itemize}
+\item always true; always false;
+\item true if $P$ is true; true if $P$ is false; true if $Q$ is true;
+true if $Q$ is false;
+\item conjunction; disjunction; conditional; biconditional;
+\item Sheffer's stroke; nor.
+\end{itemize}
+\end{prob}
+
+\end{document}

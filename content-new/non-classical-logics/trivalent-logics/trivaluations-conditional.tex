@@ -1,0 +1,105 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: conditionals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{cnd}
+
+\olsection{Semantics: conditional}
+
+There are several options to assign truth-values to the conditional. What is common to all are the following:
+
+\begin{itemize}
+  \item The classical values of $!A \lif !B$ when $!A$ and $!B$ have classical values themselves.
+  \item $!A \lif !B$ is $\True$ when $!B$ is $\True$.
+  \item $!A \lif !B$ is $\True$ when $!A$ is $\False$.
+\end{itemize}
+
+\begin{center}
+  \begin{tabular}{|rc|ccc|} \hline 
+     $!A \lif !B$  & & & $!B$ &  \\
+     & & $\True$ & $\Indet$ & $\False$ \\
+    \hline \hline 
+    & $\True$ & $\True$ & \ldots & $\False$ \\ 
+    $!A$ & $\Indet$ & $\True$ & \ldots & \ldots \\ 
+    & $\False$ & $\True$ & $\True$ & $\True$ \\
+    \hline 
+  \end{tabular}
+\end{center} 
+
+Note further that the conditional contraposes ($pValue{v}{!A \lif !B} = pValue{v}{\lnot !B \lif \lnot !A}$) just if the table is symmetric along the bottom left - top right diagonal. We can ensure that if fill in the table above with the same value for the cases where $!A$ is $\True$ and $!B$ is $\Indet$ and where $!A$ is $\Indet$ and $!B$ is $\True$.
+
+In all systems the biconditional $!A \liff !B$ is equivalent $(!A \lif !B) \land ()\!B \lif !A)$. So its semantics can be inferred from that of the conditional. 
+
+\paragraph{Strong Kleene evaluation} The (strong) Kleene valuation treats $!A \lif !B$ as equivalent to $\lnot !A \lor !B$. It thus assigns $\Indet$ to the remaining cases:
+
+\begin{center}
+  \begin{tabular}{|rc|ccc|} \hline 
+     $!A \lif !B$ (Kleene) & & & $!B$ &  \\
+     & & $\True$ & $\Indet$ & $\False$ \\
+    \hline \hline 
+    & $\True$ & $\True$ & $\Indet$ & $\False$ \\ 
+    $!A$ & $\Indet$ & $\True$ & $\Indet$ & $\Indet$ \\ 
+    & $\False$ & $\True$ & $\True$ & $\True$ \\
+    \hline 
+  \end{tabular}
+\end{center} 
+
+\begin{explain}
+
+The strong Kleene conditional is what we get if we think that the conditional ``if $!A$ then $!B$'' is tantamount to saying ``it's not the case that $!A$ and $\lnot !B$''. That is, we take $!A \lif !B$ to be equivalent to $\lnot (!A \land \lnot !B)$. This is $\True$ whenever $!A$ is $\False$ or $!B$ is $\True$, $\False$ if $!A$ is $\True$ or $!B$ is $\False$, and $\Indet$ otherwise, as in the strong Kleene table for the $\lif$.
+
+The strong Kleene conditional is also what we get if we chose our truth-function as follows. For classical values, the function is the same as in classical logic. For the $\Indet$ value, we look at what the result would be with the value $\True$ and with the value $\False$; if we get the same classical value in both cases, the result is that classical value, otherwise it is $\Indet$. This method is in accordance with our tables for $\lnot$, $\land$ and $\lor$. For instance, for $\Indet \lor \True$, any way of ``resolving'' the first value to a classical value will result in $\True$: $\True \lor \True$ is $\True$ and $\False \lor \True$ is $\True$. So the value for that case is $\True$. If we apply this method to the conditional we get the strong Kleene table.
+
+\end{explain}
+
+A strong Kleene evaluation assigns values to complex formulas according the strong Kleene tables. It is the basis of two logics:
+
+\begin{defn}
+  \item The strong Kleene logic, $\Log{K_3}$, is the $\True$-preservation logic with strong Kleene evaluations. $\Gamma entails !A$ iff there is no trivalent valuation $pAssign{v}$ such that the Kleene evaluation based on it makes $pValue{v}{!B} = \True$ for every $!B$ in $\Gamma$ but $pValue{v}{!A} \neq \True$.
+  \item The Logic of Paradox, $\Log{LP}$, is the $\True$ or $\Indet$-preservation logic with strong Kleene evaluations. $\Gamma entails !A$ iff there is no trivalent valuation $pAssign{v}$ such that the Kleene evaluation based on it makes $pValue{v}{!B} \neq \False$ for every $!B$ in $\Gamma$ but $pValue{v}{!A} = \False$.  
+\end{defn}
+
+The notable properties of these logics are the following:
+
+\begin{itemize}
+  \item $\Entails/[\Log K_3] \Obj p \lif p$. 
+  \item There is no valid !!{formula} in $\Log{K_3}$, only valid arguments. For instance, $\Obj{p \land q} \Entails[\Log K_3] \Obj{p}$ but $\Entails/[\Log K_3] \Obj{(p \land q) \lif q}$. To see this, note that on the !!{valuation} that assigns $\Indet$ to all !{propositional variable}s, the Kleene valuation assigns $\Indet$ to all !{formula}s.
+  \item \emph{Modus ponens} fails in the logic of paradox. $!A \lif !B, !A \Entails/{\Log{LP}} !B$. To see this consider the !!{valuation} that assigns $\Indet$ to $\Obj{P}$ and $\False$ to $\Obj{Q}$.
+\end{itemize}
+
+\paragraph{Łukasiewicz evaluation} The Łukasiewicz valuation is like the strong Kleene except that $!A \lif !B$ get $\True$ in the case where both antecedent and consequent are $\Indet$. 
+
+\begin{center}
+  \begin{tabular}{|rc|ccc|} \hline 
+     $!A \lif !B$ (Łukas.) & & & $!B$ &  \\
+     & & $\True$ & $\Indet$ & $\False$ \\
+    \hline \hline 
+    & $\True$ & $\True$ & $\Indet$ & $\False$ \\ 
+    $!A$ & $\Indet$ & $\True$ & $\True$ & $\Indet$ \\ 
+    & $\False$ & $\True$ & $\True$ & $\True$ \\
+    \hline 
+  \end{tabular}
+\end{center} 
+
+\begin{explain}
+
+The Łukasiewicz conditional is what we get if we think as follows. Think of $\True$ as fully true, $\Indet$ as half-true, and $\False$ as completely not true. Take the conditional to tell us that \emph{the consequent is at least as true as the antecedent}. That is completely true if the consequent is ``more'' true than the antecedent or equally true as the antecdent: hence the $\True$ at all cells on or below the top left - bottom right diagonal. That is completely false is the antecedent is fully true and the consequence fully untrue: hence the $\False$ at the top right cell. That is only half true when the consequent is half a truth less than the antecedent: hence the $\Indet$ in the remaining cells. 
+
+\end{explain}
+
+The Łukasiewicz trivalent logic, $\Log{\Luk_3}$, is the $\True$-preservation logic with Łukasiewicz evaluations. 
+
+\begin{itemize}
+  \item $\Entails[\Log \Luk_3] \Obj p \lif p$. 
+  \item There are valid !!{formula}s in $\Log{\Luk_3}$ involving the conditional: $\Entails[\Log \Luk_3] \Obj p \lif p$, $\Entails[\Log{\Luk_3}] \Obj (p \land q) \lif (p)$, $\Entails[\Log{\Luk_3}] \Obj p \lif (p \lor q)$.
+\end{itemize}
+
+\begin{digress}
+We could introduce a unfalsehood-preservation logic with Łukasiewicz evaluations. It would not differ significantly from the one based on strong Kleene evaluations, the Logic of Paradox. Because the only difference between Łukasiewicz evaluations and strong Kleene evaluations is to replace a $\Indet$ value with a $\True$ in the table for the conditional, and because unfalsehood-preservation validity does not care much about the difference between $\Indet$ and $\True$, this logic would have most of the distinctive properties of the Logic of Paradox (such as the failure of \emph{modus ponens}). It's not clear to me whether its validity differs at all from that of the latter.
+\end{digress}
+
+\end{document}

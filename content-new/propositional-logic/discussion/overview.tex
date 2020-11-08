@@ -1,0 +1,67 @@
+% Part: propositional-logic
+% Chapter: discussion
+% Section: overview
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{dis}{ovw}
+
+\olsection{Overview}
+
+\subsection{The three parts of a logical system}
+
+\begin{enumerate}
+	\item $\Lang L$. Syntax. Core notion: well-formed formulas.
+	\item $\Entails$. Semantics. Core notion: validity.
+	\item $\Proves$. Proof-theory. Core notion: provability.
+\end{enumerate}
+
+\emph{Meta-logic} connects semantics and proof theory. Core notions: soundness and completeness.
+
+\subsection{Properties of the syntax}
+
+\begin{itemize}
+	\item \emph{Unique readibility}. Each !!{formula} is of one, and \emph{only} one, of the following forms: !!{propositional variable}, $\lnot !A$, $!A \lif !B$, and so on for other connectives, where $!A$ and $!B$ are themselves !!{formula}s.  
+	\item \emph{Induction on length of !!{formula}s}. If some property is such that (a) all !!{propositional variable}s have it and (b) if all the !!{formula}s shorter than $!A$ have it, $!A$ itself has it, then all the !!{formula}s have it.
+\end{itemize}
+
+Where a !!{formula} is \emph{shorter} than another iff it contains less connectives. 
+
+\subsection{Properties of the semantics of PL}
+
+\paragraph*{Expressive power}
+
+\begin{itemize}
+	\item The language of PL expresses all (bivalent) truth-functions.
+\end{itemize}
+
+\paragraph*{Important features of validity}
+
+\begin{itemize}
+	\item \emph{Local determination}. If two !!{valuation}s $\pAssign{v}$ and $\pAssign{v'}$ agree on every !!{propositional variable} in $!A$ then they agree on $!A$. That is, if $\pValue{v}{!B}=\pValue{v}{!B}$ for very !!{propositional variable} $!B$ that appears in $!A$ then $\pValue{v}{!B}=\pValue{v}{!B}$.
+	\item \emph{Bivalence}. For every !!{valuation}s $\pAssign{v}$ and every formula $!A$, $\pValue{v}{!A}=\True$ or $\pValue{v}{!A}=\True$ but not both.
+	\item \emph{Rule of tautological instance}. If $\Entails !A$ then $\Subst{!A}{!B}{!C}$ for any $B!$, $C!$. That is, if $\Entails !A$ then for every !!{propositional variable} $!B$ and formula $!C$, the result of replacing every occurrence of $!B$ in $!A$ with $!C$, that is $\Subst{!A}{!B}{!C}$ is a tautology too, $\Entails \Subst{!A}{!B}{!C}$  
+	\item \emph{Rule of subsitution of logical equivalents}.
+	\item Entailment validates reflexivity, monotonicity and Cut (transitivity).
+	\item Compactness (validity). If $\Gamma \Entails !A$ then there is a finite subset $\Gamma_0$ of $\Gamma$ such that $\Gamma \Entails !A$.
+\end{itemize}
+
+\subsection{Properties of the proof theory of PL}
+
+\begin{itemize}
+	\item Compactness (provability). If $\Gamma \Proves !A$ then there is a finite subset $\Gamma_0$ of $\Gamma$ such that $\Gamma \Proves !A$.
+	\item Decidability.
+\end{itemize}
+
+\subsection{Relations between semantics and proof theory}
+
+\begin{itemize}
+	\item Proof systems for PL are sound. If $\Gamma \Proves !A$ then $\Gamma \Entails !A$.
+	\item Proof systems for PL are complete. If $\Gamma \Entails !A$ then $\Gamma \Proves !A$.
+\end{itemize}
+
+
+
+\end{document}

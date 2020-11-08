@@ -1,0 +1,91 @@
+% Part: propositional-logic
+% Chapter: propositional-logic
+% Section: preliminaries
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{syp}
+
+\olsection{Properties of the syntax}
+
+\begin{thm}[\emph{Principle of induction on !!{formula}s}]
+  \ollabel{thm:induction}  
+  If some property~$P$ holds for all the atomic !!{formula}s and is
+  such that
+  \begin{enumerate}
+    \tagitem{prvNot}{it holds for $\lnot !A$ whenever it holds
+      for~$!A$;}{}
+    \tagitem{prvAnd}{it holds for $(!A \land !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+    \tagitem{prvOr}{it holds for $(!A \lor !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+    \tagitem{prvIf}{it holds for $(!A \lif !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+    \tagitem{prvIff}{it holds for $(!A \liff !B)$
+      whenever it holds for $!A$ and~$!B$;}{}
+  \end{enumerate}
+  then $P$ holds for all !!{formula}s.
+\end{thm}
+
+\begin{proof}
+  Let $S$ be the collection of all !!{formula}s with
+  property~$P$. Clearly $S \subseteq \Lang{L_{PL}}$. $S$~satisfies all the
+  conditions of \olref[syn]{defn:formulas}: it contains all atomic
+  !!{formula}s and is closed under the !!{operator}s.  $\Lang{L_{PL}}$ is
+  the smallest such class, so $\Lang{L_{PL}} \subseteq S$. So $\Lang{L_{PL}} = S$, and
+  every formula has property~$P$.
+\end{proof}
+
+\begin{prop}\ollabel{prop:balanced}
+   Any !!{formula} in~$\Lang{L_{PL}}$ is \emph{balanced}, in that it has
+   as many left parentheses as right ones.
+\end{prop}
+
+\begin{prob} 
+Prove \olref[pl][syn][syp]{prop:balanced}
+\end{prob}
+
+\begin{prop} \ollabel{prop:noinit}
+No proper initial segment of !!a{formula} is !!a{formula}.
+\end{prop}
+
+\begin{prob}
+  Prove \olref[pl][syn][syp]{prop:noinit}
+\end{prob}
+
+\begin{prop}[Unique Readability]
+Any !!{formula}~$!A$ in $\Lang{L_{PL}}$ has exactly one parsing as one of
+the following
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$.}{}
+
+\tagitem{prvTrue}{$\ltrue$.}{}
+
+\item $\Obj p_n$ for some $\Obj p_n \in  \PVar$.
+  
+\tagitem{prvNot}{$\lnot !B$ for some !!{formula}~$!B$.}{}
+
+\tagitem{prvAnd}{$(!B \land !C)$ for some !!{formula}s $!B$ and~$!C$.}{}
+
+\tagitem{prvOr}{$(!B \lor !C)$ for some !!{formula}s $!B$ and~$!C$.}{}
+
+\tagitem{prvIf}{$(!B \lif !C)$ for some !!{formula}s $!B$ and~$!C$.}{}
+
+\tagitem{prvIff}{$(!B \liff !C)$ for some !!{formula}s $!B$ and~$!C$.}{}
+\end{enumerate}
+Moreover, this parsing is \emph{unique}.
+\end{prop}
+
+\begin{proof}
+By induction on $!A$. For instance, suppose that $!A$ has two distinct
+readings as $(!B \lif !C)$ and $(!B' \lif !C')$. Then $!B$ and $!B'$
+must be the same (or else one would be a proper initial segment of the
+other); so if the two readings of $!A$ are distinct it must be because
+$!C$ and $!C'$ are distinct readings of the same sequence of symbols,
+which is impossible by the inductive hypothesis.
+\end{proof}
+
+\end{document}
+

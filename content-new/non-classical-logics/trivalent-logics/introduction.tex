@@ -1,0 +1,41 @@
+% Part: non-classical-logics
+% Chapter: trivalent-logics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{int}
+
+\olsection{Introduction}
+
+Many-valued logics are logics that reject bivalence: it is not the case that all formulas have a unique truth-value which is either true, or false. There is a variety of such logics. One first defining point is how many values they recognize:
+
+\begin{itemize}
+	\item Three-valued logics. Some formulas are true, some are false, some are otherwise. The latter is thought of lacking a truth-value (being ``neither true nor false''), or as an indetermediate truth-value (``indeterminate''): both of these are often called truth-value \emph{gaps}. In some logics the third value is thought of as being \emph{both} true and false: a \emph{glut}.
+	\item Four-valued logics. These have: truth, falsehood, gaps (neither true nor false) \emph{and} gluts (both true and false).
+	\item Fuzzy logics. Formulas have degrees of truth that vary continuously between $0$ (completely false) and $1$ (completely true). 
+\end{itemize}
+
+A second defining point is whether the logics are truth-functional or not:
+
+\begin{itemize}
+	\item Truth-functional logics. The truth-value of complex formulas only depends on the truth-value of their part.
+	\item Supervaluationism. The truth-value of complex formula isn't simply a function of the truth-value of its parts.
+\end{itemize}
+
+A third defining point is how they define validity. In classical logic there is only one option: validity is the preservation of \emph{truth}. In the many-valued setting we have several choices:
+
+\begin{itemize}
+	\item \emph{Preservation of designated values}. $\Gamma \models !A$ iff there is no interpretation on which all of $\Gamma$ have one of the designated values but $!A$ doesn't. 
+	\begin{itemize}
+		\item The designated value is \emph{truth}. (Strong Kleene $\Log{K_3}$, Łukasiewicz trivalent $\Log{\Luk_3}$)
+		\item The designated values are \emph{all but false} in a three-valued system. (Logic of Paradox $\Log{LP}$, logic $\Log{RM_3}$)
+		\item The deisgnated values are \emph{truth} and \emph{glut} (both true and false) in a four-valued system. (First-degree entailment $\Log FDE$)
+		\item The designated value is \emph{perfect truth} in a degree system. (Łukasiewicz continuum-valued $\Log{\Luk_\aleph}$.)
+	\end{itemize}
+	\item \emph{No loss of truth value}. $\Gamma \models !A$ iff there is no interpretation on which $!A$ is less true than the least true member(s) of $\Gamma$. Example: in a degree system, $!A \models !B$ if $!B$ is at least as true as $!A$ on any interpretation. (Łukasiewicz continuum-valued $\Log{\Luk_\aleph}$.)
+\end{itemize}
+
+\end{document}

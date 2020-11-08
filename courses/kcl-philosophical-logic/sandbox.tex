@@ -1,0 +1,133 @@
+% Sandbox for the Open Logic Text
+%
+%	can be used to try out snippets of code for the OLT
+%	- loads the OLT config, styles, environments, tokens etc.
+%	- optionally: loads this course's configurations
+%	
+
+\documentclass[a4paper]{memoir}
+
+% lipsum if dummy text needed
+%\usepackage{lipsum}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory courses/sample,
+% so the main directory is two levels up.
+\newcommand{\olpath}{../../}
+
+% use this line to load the -config.sty and -envs.sty of another file
+% defaults to the current file otherwise
+\newcommand{\oljobname}{kcl-philosophical-logic}
+
+% load all the Open Logic definitions. This will also load any
+% local definitions in \oljobname-config.sty and \oljobname-envs.sty
+\input{\olpath/sty/open-logic.sty}
+
+% we want all the problems deferred to the end
+\input{\olpath/sty/open-logic-defer.sty}
+
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\linespread{1.05}
+
+% Place problems in each chapter
+\problemsperchapter
+
+% Hide answers if the tag hideAns is set to true
+\iftag{hideAns}{
+\let\ans\comment
+\let\endans\endcomment
+}
+
+\begin{document}
+
+% Memoir class only: make lists less spacious
+\firmlists
+
+\begin{titlingpage}
+\begin{raggedleft}
+{\bfseries\sffamily
+\fontsize{52pt}{4em}\selectfont
+King's\\[.2ex]
+\textit{Philosophical}\\[0.2ex]
+Logic\\[0.2ex]
+\Large
+King's College London\\[.5ex]
+2020-21
+}
+\vskip 4ex
+{\bfseries\sffamily
+\huge Julien Dutant\\
+\vskip 2ex
+\large DRAFT of \today\\
+}
+\end{raggedleft}
+
+\vfill
+
+% This work's license. Generates a CC-BY-NC license mark, with 
+% the \oluselicense code (from open-logic.sty) to acknowledge 
+% the original source (the
+% OLP).  Acknowledgment of the source is a requirement under the
+% conditions of the CC-BY license used by the OLP, but you are not
+% required to license the product itself under CC-BY.
+% two parameters: title with link to the source, and author
+
+\kcluselicense
+% Title of this version of the OLT with link to source
+{\href{https://github.com/jdutant/OpenLogic/tree/kcl-philos-logic}{\textit{King's Philosophical Logic}}}
+% Author of this version
+{\href{http://julien.dutant.free.fr/}{Julien Dutant}}
+\end{titlingpage}
+
+
+
+\frontmatter
+
+\pagestyle{ruled}
+
+\input{about/about.tex}
+
+\newpage
+
+%\tableofcontents*
+
+\mainmatter
+
+%\olimport[\olpath/content-new/propositional-logic]{propositional-logic}
+
+% apparently \stopproblems is required at this point
+\stopproblems
+
+% Appendices if desired
+
+%\appendix
+
+%\olimport*[methods]{methods}
+
+%\olimport*[history/biographies]{biographies}
+
+% now typeset all the problems as an appendix. If you want problems at
+% the end of each chapter, delete this part and put
+% \problemsperchapter in the preamble
+
+%\chapter{Problems}
+
+%\printproblems
+
+\backmatter
+
+% If you include any chapters from the history part, you have to print
+% the Photo Credits. 
+
+%\photocredits
+
+% Include the bibliography
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{kcl-philosophical-logic,\olpath/bib/open-logic}
+
+
+
+\end{document}
+

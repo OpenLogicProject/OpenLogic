@@ -1,0 +1,187 @@
+% License box
+
+\newcommand*{\kcluselicense}[2]{%
+\begin{minipage}[b]{.9cm}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/cc}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/by}
+  \includegraphics[width=.9cm]{assets/logos/nc}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/remix}
+\end{minipage}
+\hspace{.3cm}
+\begin{minipage}[b]{5cm}
+  \ollicensefont
+  \textit{#1} by #2 is licensed under a
+  \href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
+    Attribution-NonCommercial 4.0 International License}. It is based on
+  \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
+      Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
+    Project}, used under a
+  \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+    Attribution 4.0 International License}.
+\end{minipage}
+\hfill
+\begin{minipage}[b]{2.7cm}
+  \href{https://www.kcl.ac.uk/philosophy}{\includegraphics[width=2.7cm]{assets/logos/KCL-Logo.png}}\\
+  \vspace{.3cm}
+  \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}
+\end{minipage}
+}
+
+% Logical symbols
+% ---------------
+
+% ### Truth Values
+%
+% - `\True` and `\False`. Note: 1 and 0 can't be used with  
+% signed tableaus for modal logic, they are unreadable.
+
+\DeclareDocumentMacro \Gap {\mathbb{N}}
+\DeclareDocumentMacro \Glut {\mathbb{B}}
+
+% ### Propositional Constants and Connectives
+
+% - Negation is `\lnot`
+
+\DeclareDocumentMacro \lnot {\mathord{\sim}}
+
+
+% - Existence operator in free logic
+
+\DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
+% Trivalent logics
+
+\DeclareDocumentMacro \Luk {\text{\L}}
+
+% cannot use \L in hyphenation: "not a letter"
+% \hyphenation{\L u-ka-sie-wicz}
+
+
+% Metalogical Relations
+% ---------------------
+
+% ### The satisfaction/truth relation 
+
+% - \satDash, \nsatDash the satisfaction dash. To be used in 
+% satisfaction relative to a valuation, structure, model
+
+\DeclareDocumentMacro \satDash {\vDash}
+\DeclareDocumentMacro \nsatDash {\nvDash}
+
+% - `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
+% structure (relative to an assignment), is provided as the command
+% `\Sat` with two mandatory arguents (the structure and the formula)
+% and one optional argument (the assignment).  Use `\Sat/` to create
+% the negated relation.  By default, `\Sat{M}{!A}[s]` is typeset as
+% $\mathfrak{M}, s \models \varphi$.
+
+\DeclareDocumentCommand \Sat { t{/} m m o } {
+  \IfBooleanTF{#1}{
+    % negated
+    \IfNoValueTF {#4} 
+        { \Struct{#2} \satDash #3 }
+        { \Struct{#2}, #4 \nsatDash #3}}{
+    % not negated
+    \IfNoValueTF {#4} 
+        { \Struct{#2} \satDash #3 }
+        { \Struct{#2}, #4 \nsatDash #3 }}
+}
+
+% ### Model-theoretic notions and symbols
+
+% - `\pSat[/]{v}{!A}[L]`, the relation of being satisfied by a
+% truth-value assignment in a logic L.
+
+\DeclareDocumentCommand \pSat { t{/} m m o } {
+  \pAssign{#2} 
+      \IfBooleanTF{#1}{\nsatDash}{\satDash}%
+      \IfNoValueTF{#4}{}{_{#4}}
+  #3
+}
+
+% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% model (at a world), is provided as the command
+% `\mSat` with two mandatory arguments (the model and the formula)
+% and one optional argument (the world).  Use `\mSat/` to create
+% the negated relation.  By default, `\mSat{M}{!A}[w]` is typeset as
+% $\mathfrak{M}, w \models \varphi$.
+
+\DeclareDocumentCommand \mSat { t{/} m m o } {%
+  \IfBooleanTF{#1}{%
+    % negated
+    \IfNoValueTF {#4} 
+        { \mModel{#2} \satDash #3 }
+        { \mModel{#2}, #4 \nsatDash #3}}{%
+    % not negated
+    \IfNoValueTF {#4} 
+        { \mModel{#2} \satDash #3 }
+        { \mModel{#2}, #4 \nsatDash #3 }}}
+
+
+% other typesetting
+
+% - `\Propobj` - Object-language symbols in propositional logic. Default: uppercase
+% \DeclareDocumentCommand \Propobj { m }{ \uppercase{\Obj{#1}} }
+% PROBLEM: not only you need to rewrite propositional logic, but you need to take care of the tableaus section. 
+
+%  - `\Atom{P}{t_1, t_2}` - Atomic formula or term; default produces
+%  predicate symbol followed by arguments separated by commas and surrounded by
+%  parentheses. Redefined to remove the comma and parentheses.
+
+\makeatletter
+\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}\@for\i:=#2\do{\i}}
+\makeatother
+
+% - `\pValue{v}{A}` - Truth value of a formula under a truth-value assignment.
+
+\DeclareDocumentCommand \pValue { m d() }{
+\IfNoValueTF {#2} {
+  |\cdot|_\pAssign{#1}}{
+  |#2|_\pAssign{#1}
+  }
+}
+
+% Terminology
+
+\settexttoken{constant}{constant}{constants}
+
+\settexttoken{enumerable}{countable}{countable}
+\settexttoken{nonenumerable}{uncountable}{uncountable}
+\settexttoken{denumerable}{countably infinite}{countably infinite}
+\settexttoken{valuation}{interpretation}{interpretations}
+\settexttoken{propositional variable}{sentence letter}{sentence letters}
+
+\settexttoken{structure}{model}{models}
+
+%
+% Tags: choice of material
+%
+
+% defined connectives: verum, biconditional
+\tagtrue{defIff,defTrue}
+\tagfalse{prvIff,prvTrue}
+
+% proof systems: tableaus only
+\tagfalse{prfSC,prfND,prfAX} 
+\tagtrue{prfTab}
+
+% reader category: novice, math, phil, no compsci
+
+\tagtrue{novice,math,compsci}
+\tagfalse{phil}
+
+% 
+% custom tags
+%
+
+% tag for function terms in first-order logic
+
+\tagfalse{fnTerms}
+
+% tag for a syntactic identity operator
+
+\tagfalse{synIdOp}
+
+% tag for hiding answers
+
+\tagtrue{hideAns}

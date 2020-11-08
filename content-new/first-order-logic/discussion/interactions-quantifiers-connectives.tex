@@ -1,0 +1,65 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: discussion
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{dis}{quc}
+
+\olsection{Interaction of quantifiers and connectives}
+
+\paragraph{No operators} If $!C$ is a \emph{closed} formula:
+
+\begin{itemize}
+	\item $\forall x !C$ is equivalent to $!C$
+	\item $\exists x !C$ is equivalent to $!C$
+\end{itemize}
+
+\paragraph{Negation} We have the following equivalences, called \emph{Duality}:
+
+\begin{itemize}
+	\item $\lnot \forall x !A$ is equivalent to $\exists x \lnot !A$.
+	\item $\lnot \exists x !A$ is equivalent to $\forall x \lnot !A$.
+\end{itemize}
+
+Note that Duality implies the following:
+
+\begin{itemize}
+	\item $\lnot \forall x (!A \lif !B) $ is equivalent to $\exists x (!A \land \lnot !B)$.
+	\item $\lnot \exists x (!A \land !B)$ is equivalent to $\forall x (!A \lif !\lnot !B)$.
+\end{itemize}
+
+Furthermore we have:
+
+\begin{itemize}
+	\item $\forall x \lnot !A \Entails \lnot \forall x !A$, but not the other way round unless $!A$ doesn't have free $x$.
+	\item $\lnot \exists x !A \Entails \exists x \lnot !A$, but not the other way round unless $!A$ doesn't have free $x$.
+\end{itemize}
+
+\paragraph{Conjunction} We have:
+
+\begin{itemize}
+	\item $\forall x (!A \land !B)$ is equivalent to $\forall x !A \land \forall x !B$.
+	\item $\exists x (!A \land !B) \Entails \exists x !A \land \exists x !B$, but not the other way round, though:
+	\item if $!B$ doesn't have free $x$, $\exists x !A \land !B \Entails \exists x (!A \land !B)$ .
+\end{itemize}
+
+\paragraph{Disjunction} We have:
+
+\begin{itemize}
+	\item $\exists x (!A \lor !B)$ is equivalent to $\exists x !A \lor \exists x !B$.
+	\item $\forall x !A \lor \forall x !B \Entails \forall x !A \lor \forall x !B$, but not the other way round, though:
+	\item if $!B$ doesn't have free $x$, $\forall x !A \lor \forall x !B \Entails \forall x (!A \lor !B)$ .
+\end{itemize}
+
+\paragraph{Conditional} We have:
+
+\begin{itemize}
+	\item $\forall x (!A \lif !B) \Entails \forall x !A \lif \forall x !B$, but not the other way round,
+	\item $\forall x (!A \lif !B) \Entails \exists x !A \lif \exists x !B$, but not the other way round,
+	\item if $!A$ doesn't have free $x$, $!A \lif \forall x !B$ is equivalent to $\forall x (!A \lif !B)$.
+\end{itemize}
+
+\end{document}

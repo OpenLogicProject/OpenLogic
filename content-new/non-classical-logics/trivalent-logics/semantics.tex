@@ -1,0 +1,92 @@
+% Part: non-classical-logics
+% Chapter: trivalent-logics
+% Section: semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{sem}
+
+\olsection{Semantics}
+
+\begin{defn}
+  Given a !!{valuation}~$\pAssign{v}$, define the evaluation function
+  $\pValue{v}$ that assigning either $\True$ or $\False$ or $\Indet$ to all !!{formula}s of $\Lang{L_{PL}}$, i.e. $\Lang{L_{PL}} \to \{\True, \False \}$, inductively by:
+  \begin{align*}
+    \pValue{v}(\lfalse) & = \False; \\
+    \iftag{prvTrue}{\pValue{v}(\ltrue) & = \True; \\}{}
+    \pValue{v}(\Obj p_n) & = \pAssign{v}(\Obj P_n); \\ 
+    \iftag{prvNot}{\pValue{v}(\lnot !A) & = \begin{cases}
+        \True & \text{if $\pValue{v}(!A) = \False$;}\\ 
+        \False & \text{if $\pValue{v}(!A) = \True$;}\\
+        \Indet & \text{otherwise.} 
+      \end{cases} \\ }{}
+    \iftag{prvAnd}{\pValue{v}(!A \land !B) & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}(!A) = \True$ and $\pValue{v}(!B) = \True$;}\\
+        \False &
+        \text{if $\pValue{v}(!A) = \False$ or $\pValue{v}(!B) = \False$;}\\
+        \Indet & \text{otherwise.}\\
+      \end{cases}\\}{}
+    \iftag{prvOr}{\pValue{v}(!A \lor !B) & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}(!A) = \True$ or $\pValue{v}(!B) = \True$;}\\
+        \False &
+        \text{if $\pValue{v}(!A) = \False$ and $\pValue{v}(!B) = \False$;}\\
+        \Indet & \text{otherwise.}\\
+      \end{cases}\\}{}
+    \textnormal{(Kleene)} \pValue{v}(!A \lif !B) & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}(!A) = \False$ or $\pValue{v}(!B) = \True$;}\\
+        \False &
+        \text{if $\pValue{v}(!A) = \False$ and $\pValue{v}(!B) = \False$;}\\
+        \Indet & \text{otherwise.}\\
+      \end{cases}\\
+    \textnormal{(Łukasiewicz)} \pValue{v}(!A \lif !B) & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}(!A) = \False$ or $\pValue{v}(!B) = \True$ or $\pValue{v}(!A) = \pValue{v}(!B)$;}\\
+        \False &
+        \text{if $\pValue{v}(!A) = \False$ and $\pValue{v}(!B) = \False$;}\\
+        \Indet & \text{otherwise.}\\
+      \end{cases}\\
+    \iftag{prvIff}{
+    \textnormal{(Kleene)} \pValue{v}(!A \liff !B) & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}(!A) = \pValue{v}(!B) = \True$ or $\pValue{v}(!A) = \pValue{v}(!B) = \False$;}\\
+        \False &
+        \text{if $\pValue{v}(!A) = \True$ and $\pValue{v}(!B) = \False$, or $\pValue{v}(!A) = \False$ and $\pValue{v}(!B) = \True$;}\\
+        \Indet & \text{otherwise.}\\
+      \end{cases}\\
+    \textnormal{(Łukasiewicz)} \pValue{v}(!A \liff !B) & = \begin{cases} 
+        \True &
+        \text{if $\pValue{v}(!A) = \pValue{v}(!B)$;}\\
+        \False &
+        \text{if $\pValue{v}(!A) = \True$ and $\pValue{v}(!B) = \False$, or $\pValue{v}(!A) = \False$ and $\pValue{v}(!B) = \True$;}\\
+        \Indet & \text{otherwise.}\\
+      \end{cases}\\
+      }{}
+\end{align*}
+\end{defn}
+
+With Łukasiewicz valuations, $\lfalse$ \iftag{prvTrue}{and $\ltrue$ }{}can be defined using !!a{formula} such as $\Obj{P \land \lnot P}$\iftag{prvTrue}{ for $\lfalse$ and $\lnot(P \land \lnot P)$ for $\ltrue$}{}. With Kleene valuations, however, no !!{formula} is guaranteed to be true on any valuation or false on any valuation, so $\lfalse$ \iftag{prvTrue}{and $\ltrue$ }{}can only be introduced as separate connective.
+
+\begin{defn}[strong Kleene validity]
+An argument is valid in strong Kleene logic, $\Gamma \Entails[\Log{K_3}] !A$, iff for every trivalent !!{valuation}~$\pAssign{v}$, the corresponding Kleene valuation $\pValue{v}$ is such that $\pValue{v}(!A) = \True$ or $\pValue{v}(!A) \neq \True$ for some $!B$ in $\Gamma$.
+\end{defn}
+
+\begin{defn}[Łukasiewicz validity]
+An argument is valid in Łukasiewicz trivalent logic, $\Gamma \Entails[\Log \Luk_3] !A$, iff for every trivalent !!{valuation}~$\pAssign{v}$, the corresponding Łukasiewicz valuation $\pValue{v}$ is such that $\pValue{v}(!A) = \True$ or  $\pValue{v}(!A) \neq \True$ for some $!B$ in $\Gamma$. 
+\end{defn}
+
+\begin{defn}[Logic of Paradox validity]
+An argument is valid in the Logic of Paradox, $\Gamma \Entails[\Log{LP}] !A$, iff for every trivalent !!{valuation}~$\pAssign{v}$, the corresponding Kleene valuation $\pValue{v}$ is such that $\pValue{v}(!A) \neq \False$ or $\pValue{v}(!A) = \False$ for some $!B$ in $\Gamma$.
+\end{defn}
+
+\begin{prop}[Semantic inconsistency]
+$\Gamma \Entails[\Log{K_3}] \lfalse$ iff there is no !!{valuation} on which the Kleene valuation of all !!{formula}s in $\Gamma$ is $\True$.\\
+$\Gamma \Entails[\Log \Luk_3] \lfalse$ iff there is no !!{valuation} on which the Łukasiewicz valuation of all !!{formula}s in $\Gamma$ is $\True$.\\
+$\Gamma \Entails[\Log{LP}] \lfalse$ iff there is no !!{valuation} on which the Kleene valuation of all !!{formula}s in $\Gamma$ is other than $\False$. 
+\end{prop}
+
+\end{document}

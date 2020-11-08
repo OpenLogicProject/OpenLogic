@@ -1,0 +1,267 @@
+% Part: none
+
+\documentclass[../../../include/open-logic-part]{subfiles}
+
+\begin{document}
+
+\chapter{Introduction}
+
+\begin{overview}
+
+\section*{Overview}
+
+\begin{itemize} 
+	\item Logical validity: logical consequence
+(arguments) and logical truth (propositions). 
+	\item The model-theoretic conception of validity. 
+	\item Formal logic.
+\end{itemize}
+
+\end{overview}
+
+\section{Philosophical logic}
+
+\section{Logical validity}
+
+Logic is concerned with how certain claims \emph{follow} or \emph{are
+entailed} by others. More precisely, it is concerned with
+\emph{patterns} that ensure that some claims are true if others are.
+This is called \emph{logical consequence}. It is also concerned with
+patterns that ensure that some claims are true, no matter what. This
+is called \emph{logical truth}. Logical truth can be considered a
+limiting case of logical consequence: claims that follow from any
+claims whatsoever, and even `follow from' no claim at all. Together
+logical truth and logical consequence are called \emph{logical
+validity}.
+
+A slogan often used is: \begin{quote} ``Logical truth is \emph{truth
+in virtue of form}. Logical consequence is \emph{truth-preservation in
+virtue of form. }''  \end{quote}
+
+The idea behind the slogan is that from the patterns alone we can say
+that certain claims must be true (logical truths) or that certain
+arguments are such that if the premises are true the conclusion is
+true too (logical consequence). This raises some questions: what's the
+``form'' or ``pattern''? What does it mean that we can ``see''
+something ``from the form alone''? There are various conceptions that
+try to say something more precise. We'll see three of them below.  
+
+The dominant one can be characterized thus: 
+
+\begin{description} \item
+[{Model-theoretic~conception~of~validity}] An argument is valid just
+if: \emph{no matter what its non-logical terms mean, and no matter how
+things are}, its conclusion sentence is true or some of his premises
+aren't true. \\ A sentence is valid just if: \emph{no matter what its
+non-logical terms mean, and no matter how things are}, the sentence is
+true.  \end{description}
+
+\section{Three conceptions of validity}
+
+To understand the model-theoretic conception we can contrast it with
+two alternatives, the \emph{modal conception} and what I'll call the
+\emph{re-interpretation} conception. The modal conception is the idea
+that logical validity is truth(-preservation) \emph{no matter how
+things are}. We call it ``modal'' because ``modal'' is the
+philosophers' term for matters of necessity and possibility, and on
+this view, what makes a proposition logically valid is that it
+couldn't possibly be false.
+
+\begin{description} \item [{Modal-conception~of~validity}] An argument
+is valid just if: \emph{and no matter how things are}, its conclusion
+sentence is true or some of his premises aren't true. \\ A sentence is
+valid just if: \emph{no matter how things are}, the sentence is true. 
+\end{description}
+
+The main objection to this conception is that it qualifies too many
+things as `logical' validities. 
+
+\begin{itemize} 
+	\item If Greg is a bachelor then Greg is not married.
+	\item Jay-Z is Shaw Carter. 
+	\item The glass contains water. Therefore, the glass contains 
+	hydrogen atoms. \end{itemize}
+
+Another conception is the re-interpretation one.\footnote{According to
+some this is Tarski's conception. Others think Tarski adopted the
+model-theoretic one.} This is the idea that logical validity is
+truth(-preservation) \emph{no matter what the non-logical terms mean}.
+For instance, the sentence ``if there are crabs, there are crabs''
+would express something true no matter what ``crabs'' means: whether
+it refer to crabs, trees, planes or parties. 
+
+\begin{description} \item [{Re-interpretation~conception~of~validity}]
+An argument is valid just if: \emph{no matter what its non-logical
+terms mean}, its conclusion sentence is true or some of his premises
+aren't true. \\ A sentence is valid just if: \emph{no matter what its
+non-logical terms mean, and no matter how things are}, the sentence is
+true.  \end{description}
+
+One issue with that conception is to say which terms are ``logical''
+ones and which aren't --- but set it aside. The main problem for the
+conception is that sentences expressing \emph{how many things} there
+are can be expressed in purely logical terms. For instance, we can
+have a sentence using only logical terms that states: 
+
+\begin{itemize} \item There are at least five things. \end{itemize}
+
+As it happens, the sentence is true. Since it doesn't contain any
+non-logical terms, it is \emph{a fortiori} true no matter what its
+non-logical terms mean. So, on the re-interpretation conception, it is
+a logical truth. And so is any true claim about how many things there
+are. But most reject the idea that these are \emph{logical} truths.
+One influential idea here is that logical truths are \emph{a priori}
+--- they are things that can be figured out by reasoning alone ---
+while truths about how many things there are --- truths that can only
+be discovered by doing some observation, not reasoning alone. 
+
+On the modal conception logical validity is about preserving truth no
+matter how the facts are. On the re-interepretation it is about
+preserving truth no matter what the meaning of 'non-logical' (or
+`substantial') terms are. The model-theoretic conception combines
+both: it says that logical validity is a matter of preserving truth no
+matter how the facts are and no matter what the meaning of non-logical
+terms are. 
+
+The model-theoretic conception doesn't count ``If Greg is a bachelor
+then Greg is unmarried'' as a logical truth because it wouldn't be
+true no matter what the non-logical terms ``bachelor'' and
+``unmarried'' mean. If ``bachelor'' meant ``dog'' and ``is unmarried''
+meant ``has wings'' then the sentence would not be true. The
+model-theoretic conception doesn't count ``There are at least five
+things'' as a logical truth because if the facts were different--- if
+there were only three things, for instance, then it would not be true.
+
+\section{What is a ``logical'' term?}
+
+The standard, model-theoretic conception of validity invokes the
+notion of ``non-logical terms''. (So does the re-interpretation
+conception.) It opposes ``logical terms'' (like ``or'', ``and'', ``if
+\ldots{} then'', ``something'', \ldots ) \emph{vs.}~non-logical ones
+(``hippopotamus'', ``atom'', ``song'', \ldots{} ). ``Logical terms''
+are also called ``logical constants'' \textemdash{} preferably because
+when ask whether a sentence is valid we hold ``contstant'' the meaning
+of those terms. 
+
+Thus what the standard conception counts as logically valid depends on
+what we count as ``logical terms''. What sets these terms apart? Can
+we give a principled definition of what's a ``logical term''? There
+are deep and live philosophical issues here. 
+
+\section{Formal logic}
+
+\paragraph{Formalization}
+
+We could study logical validity in English, or in any other ``natural
+language'' (Hindi, Chinese, etc.). That is how logic was studied
+from Aristotle up until the XIXth century. Unfortunately natural languages
+are highly complex, ambiguous and leave many things implicit.
+
+Contemporary logic proceeds indirectly instead. Rather than using
+natural language, we create:
+\begin{itemize}
+\item \textbf{a formal language}: an artificial language whose rules are
+stated in a mathematically precise way
+\begin{itemize}
+\item \emph{syntax} or \emph{grammar}: specification of what sentences are,
+\item \emph{semantics}: specification of what each sentence mean.
+\end{itemize}
+\item \textbf{a formal proof system}: an artificial procedure to derive
+some sentences from others, stated in a mathematically precise way.
+\end{itemize}
+That is, we create a ``toy'' language, and a ``toy'' reasoning
+procedure. These allow us to study logical validity in a very simple
+setting. That is like physicists studying the movement of planets
+by treating them as points or perfect balls: studying a simplified,
+``toy'' universe allows them to better understand the real one. 
+
+So paradoxically, while many people are 'scared' by formal logic because
+the use of formal logic make it look complicated, it actually uses
+extremely simple languages\textemdash languages so simple that even
+a dumb machine like a computer can understand it. In fact, the main
+difficulty you face when learning logic is \emph{not to think too
+fast or too much}. To think logically, you have to get used to think
+in a 'dumb' way: a step-by-step, fully explicit, simple-minded thinking
+of formal languages. 
+
+Why would anyone do this\textemdash adopt simpleminded, stripped-down
+artificial languages? First, the languages are a powerful tool. They
+allow you to clarify and simplify arguments. They allow you to process
+complex ideas that you would struggle with otherwise (e.g. infinities,
+complex 'quantification', 'binding' ambiguities - see predicate logic).
+Second, the point isn't so much to \emph{use} the languages, but to
+\emph{think about }them. The point is to study how logical validity
+works in these languages, so as to understand logical validity in
+general. This is a way, for instance, to answer questions about what
+follows - or doesn't follow - from certain theories in mathematics,
+physics or philosophy. For that purposes simple, fully explicit languages
+are perfect. 
+
+Summing up, a contemporary logic has three components:
+\begin{quote}
+1. Language: a grammar.\\
+2. Language: a semantics.\\
+3. A proof system.
+\end{quote}
+For each of the logics we study: propositional, predicate and modal,
+we'll have the three components. 
+
+\paragraph{Object language and meta-language}
+
+Once we create an artificial language we have two languages in play.
+We call them thus:
+\begin{enumerate}
+\item \emph{The object language}: the language we study. That is, the formal
+language of propositional logic, predicate logic, or modal logic.
+\item \emph{The meta-language}: the language we use to study the object
+language. This is English supplemented with some technical terms and
+some symbols.
+\end{enumerate}
+Compare with studying a foreign language. If you're an English linguist
+studying ancient Sumerian, your object language is ancient Sumerian
+(that's what you study) but your meta-language is English (that's
+the language that you us to talk about ancient Sumerian).
+
+In you meta-language we'll sometimes use symbols for convenience.
+For instance, we'll often say that some sentence in our formal language
+``can be proved on the basis'' of some other sentences. For brievity
+we'll write that with the symbol ``$\Proves$'': 
+\begin{quote}
+$P\land P,P\lif Q\Proves[PL] Q$ means ``In the system PL there
+is a proof of $P$ that uses the premises $P\land P$ and $P\lif Q$''.
+\end{quote}
+Similarly we write ``$\Entails$'' to abbreviate ``is a logical
+consequence of'': $P\land P\Entails[PL]P$ means that $P$ is a logical
+consequence of $P\land P$ in the system PL. 
+
+One of the most common metalanguage symbols are $!A$, $!B$,
+which we use to talk about unspecific formulas of our language. 
+
+\paragraph{Logic vs. logics}
+
+Logic is a discipline, like philosophy or mathematics. 
+
+\emph{A }logic is a theory or system of that discipline. For instance,
+propositional logic, modal logic, etc. Some of these systems deal
+with different objects and are thus compatible with each other: propositional
+logic deals with logical validities that arises for ``truth-functional''
+connectives like ``and'' and ``or'', while predicate logic deals
+with logical validity that arises from ``quantifiers'' like ``all''
+and ``some''. They are compatible with each other\textemdash in
+fact, predicate logic is an \emph{extension }of propositional logic. 
+
+Some of these systems are competitors of each other: for instance
+``classical'' logic (which includes propositional and predicate
+logic studied here) and ``intuitionistic'' logic (which rejects
+some of the principles of classical propositional and predicate logic)
+are rival systems. 
+
+Metalogic is the subpart of logic that contains theories \emph{about
+}logics. For instance, when you show that a certain system of logic
+(say, propositional logic) doesn't 'prove' contradictions, you're
+doing metalogic. 
+
+
+\OLEndChapterHook
+
+\end{document}
