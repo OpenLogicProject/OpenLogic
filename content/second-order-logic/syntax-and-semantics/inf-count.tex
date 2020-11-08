@@ -90,10 +90,10 @@ $s(u) = f$. We show that
 \Sat{M}{\lforall[X][((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
     \lif \lforall[x][X(x)])]}[s]
 \]
-Suppose $s' \sim_X s$ is arbitrary, and let $M = s'(X)$. Suppose
+Suppose $\varAssign{s'}{s}{X}$ is arbitrary, and let $M = s'(X)$. Suppose
 further that $\Sat{M}{(X(z) \land \lforall[x][(X(x) \lif
     X(u(x)))])}[s']$. Then $s'(z) \in M$ and whenever $x \in M$, also
-$s'(u)(x) \in M$. In other words, since $s' \sim_X s$, $m_0 \in M$ and
+$s'(u)(x) \in M$. In other words, since $\varAssign{s'}{s}{X}$, $m_0 \in M$ and
 if $x \in M$ then $f(x) \in M$, so $m_0 \in M$, $m_1 = f(m_0) \in M$,
 $m_2 = f(f(m_0)) \in M$, etc. Thus, $M = \Domain{M}$, and so
 $\Sat{M}{\lforall[x][X(x)]}[s']$. Since $s'$ was an arbitrary
