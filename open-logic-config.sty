@@ -328,6 +328,13 @@
 
 % ### The satisfaction/truth relation 
 
+% - \satDash, \nsatDash the satisfaction dash. To be used in 
+% satisfaction relative to a propositional valuation, 
+% FOL structure, Modal logic model
+
+\DeclareDocumentMacro \satDash {\vDash}
+\DeclareDocumentMacro \nsatDash {\nvDash}
+
 % - `\Sat[/]{M}{!A}[s]`, the relation of being satisfied in a
 % structure (relative to an assignment), is provided as the command
 % `\Sat` with two mandatory arguents (the structure and the formula)
@@ -339,12 +346,12 @@
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4} 
-        { \Struct{#2} \nvDash #3 }
-        { \Struct{#2}, #4 \nvDash #3}}{
+        { \Struct{#2} \satDash #3 }
+        { \Struct{#2}, #4 \nsatDash #3}}{
     % not negated
     \IfNoValueTF {#4} 
-        { \Struct{#2} \vDash #3 }
-        { \Struct{#2}, #4 \vDash #3 }}
+        { \Struct{#2} \satDash #3 }
+        { \Struct{#2}, #4 \nsatDash #3 }}
 }
 
 % ### The derivability relation
@@ -433,7 +440,7 @@
 
 \DeclareDocumentCommand \pSat { t{/} m m o } {
   \pAssign{#2} 
-      \IfBooleanTF{#1}{\nvDash}{\vDash}%
+      \IfBooleanTF{#1}{\nsatDash}{\satDash}%
       \IfNoValueTF{#4}{}{_{#4}}
   #3
 }
@@ -749,12 +756,12 @@
   \IfBooleanTF{#1}{%
     % negated
     \IfNoValueTF {#4} 
-        { \mModel{#2} \nVdash #3 }
-        { \mModel{#2}, #4 \nVdash #3}}{%
+        { \mModel{#2} \nsatDash #3 }
+        { \mModel{#2}, #4 \nsatDash #3}}{%
     % not negated
     \IfNoValueTF {#4} 
-        { \mModel{#2} \Vdash #3 }
-        { \mModel{#2}, #4 \Vdash #3 }}}
+        { \mModel{#2} \satDash #3 }
+        { \mModel{#2}, #4 \satDash #3 }}}
 
 % - `\mClass{C}` --- typeset class of models
 
