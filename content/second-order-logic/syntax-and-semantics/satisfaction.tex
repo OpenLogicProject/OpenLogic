@@ -59,7 +59,7 @@ If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$,
 then any !!{variable} assignment $s'$ for $\Struct M$ which differs
 from $s$ at most in what it assigns to $x$ is called an
 \emph{$x$-variant} of~$s$.  If $s'$ is an $x$-variant of $s$ we write
-$s \sim_x s'$. (Similarly for second-order variables $X$ or $u$.)
+$\varAssign{s'}{s}{x}$. (Similarly for second-order variables $X$ or $u$.)
 \end{defn}
 
 
@@ -126,7 +126,7 @@ like \olref[fol][syn][sat]{defn:satisfaction} with the addition of:
 \begin{ex}
 $\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
       \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ if
-  there is an $s' \sim_Y s$ such that
+  there is an $\varAssign{s'}{s}{Y}$ such that
   $\Sat{M}{(\lexists[y][\Atom{Y}{y}] \land \lforall[z][(\Atom{X}{z}
       \liff \lnot \Atom{Y}{z})])}[s']$. And that is the case iff $s'(Y)
   \neq \emptyset$ (so that $\Sat{M}{\lexists[y][\Atom{Y}{y}]}[s']$)

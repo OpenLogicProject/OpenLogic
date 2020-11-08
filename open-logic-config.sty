@@ -403,6 +403,19 @@
 
 \DeclareDocumentCommand \Assign { m m }{\mathord{#1^{\Struct{#2}}}}
 
+% - `\varAssign{s'}{s}{x}[o]` - Assignment variant. Takes three mandatory
+% argument (s' differs from s at most at x) and one optional one (s' assigns
+% o to x. Default: `\varAssign{s'}{s}{x}` produces `s' \sim_{x} s`
+% and `\varAssign{s'}{s}{x}[o] produces `s' = s^{x}_{o}`.
+
+\DeclareDocumentCommand \varAssign { m m m o } {
+    \IfNoValueTF {#4}
+        % optional argument not present
+        { #1 \sim{#3} #2 }
+        % optional argument present
+        { #1 = #2^{#3}_{#4} }
+}
+
 % - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
 % arguments (term and structure) and one optional argument (variable
 % assignment). By default, `\Value{t}{M}[s]` produces 

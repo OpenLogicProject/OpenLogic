@@ -73,7 +73,7 @@ follows:
 If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, then any
 !!{variable} assignment $s'$ for $\Struct M$ which differs from $s$ at most
 in what it assigns to $x$ is called an \emph{$x$-variant} of~$s$.  If
-$s'$ is an $x$-variant of $s$ we write $s \sim_x s'$.
+$s'$ is an $x$-variant of $s$ we write $\varAssign{s'}{s}{x}$.
 \end{defn}
 
 \begin{explain}
@@ -295,7 +295,7 @@ $\tuple{1,1} \in \Assign{R}{M}$), so the answer is yes. To determine
 if $\Sat{M}{\lexists[y][R(x,y)]}[s_2]$ we have to look at the
 $y$-variants of~$s_2$. Here, $s_2$ itself does not satisfy $R(x,y)$
 ($s_2(x) = 2$, $s_2(y) = 1$, and $\tuple{2,1}\notin
-\Assign{R}{M}$). However, consider $s_2' \sim_y s_2$ with $s_2'(y) =
+\Assign{R}{M}$). However, consider $\varAssign{s_2'}{s_2}{y}$ with $s_2'(y) =
 3$. $\Sat{M}{R(x,y)}[s_2']$ since $\tuple{2,3} \in \Assign{R}{M}$, and
 so $\Sat{M}{\lexists[y][R(x,y)]}[s_2]$. In sum, for every
 $x$-variant~$s_i$ of $s$, either $\Sat/{M}{R(a,x)}[s_i]$ ($i = 3$,
@@ -308,10 +308,10 @@ On the other hand,
 \Sat/{M}{\lexists[x][(R(a,x) \land \lforall[y][R(x,y)])]}[s].
 \]
 The only $x$-variants~$s_i$ of $s$ with $\Sat{M}{R(a,x)}[s_i]$ are
-$s_1$ and~$s_2$. But for each, there is in turn a $y$-variant $s_i'
-\sim_y s_i$ with $s_i'(y) = 4$ so that $\Sat/{M}{R(x,y)}[s_i']$ and so
-$\Sat/{M}{\lforall[y][R(x,y)]}[s_i]$ for $i = 1$, $2$. In sum, none of the
-$x$-variants~$s_i \sim_x s$ are such that $\Sat{M}{R(a,x) \land
+$s_1$ and~$s_2$. But for each, there is in turn a $y$-variant 
+$\varAssign{s_i'}{s_i}{y}$ with $s_i'(y) = 4$ so that $\Sat/{M}{R(x,y)}[s_i']$ 
+and so$\Sat/{M}{\lforall[y][R(x,y)]}[s_i]$ for $i = 1$, $2$. In sum, 
+none of the $x$-variants~$\varAssign{s_i}{s}{x}$ are such that $\Sat{M}{R(a,x) \land
   \lforall[y][R(x,y)]}[s_i]$.
 \end{ex}
 
