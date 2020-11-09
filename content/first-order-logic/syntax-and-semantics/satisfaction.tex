@@ -44,13 +44,13 @@ i.e., $s\colon \Var \to \Domain M$.
 
 \begin{explain}
 A !!{structure} assigns a !!{value} to each !!{constant}, and a
-variable assignment to each variable.  But we want to use terms built
+variable assignment to each variable.\iftag{fnTerms}{But we want to use terms built
 up from them to also name !!{element}s of the !!{domain}.  For this we
-define the !!{value} of terms inductively. For !!{constant}s and
+define the !!{value} of terms inductively.}{} For !!{constant}s and
 variables the value is just as the !!{structure} or the variable
-assignment specifies it; for more complex terms it is computed
+assignment specifies it\iftag{fnTerms}{; for more complex terms it is computed
 recursively using the functions the !!{structure} assigns to the
-!!{function}s.
+!!{function}s}{}.
 \end{explain}
 
 \begin{defn}[!!^{value} of Terms]
@@ -61,11 +61,12 @@ follows:
 \begin{enumerate}
 \item \indcase{t}{c}{$\Value{\indfrm}{M}[s] = \Assign{\indcomplex}{M}$.}
 \item \indcase{t}{x}{$\Value{\indfrm}{M}[s] = s(\indcomplex)$.}
-\item \indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
+\tagitem{fnTerms}{\indcase{t}{\Atom{f}{t_1, \ldots, t_n}}{
 \[
 \Value{\indfrm}{M}[s] = \Assign{f}{M}(\Value{t_1}{M}[s], \ldots,
 \Value{t_n}{M}[s]).
 \]}
+}{}
 \end{enumerate}
 \end{defn}
 
@@ -151,14 +152,15 @@ object.
 \end{explain}
 
 \begin{ex}
-Let $\Lang{L} = \{a, b, f, R\}$ where $a$ and $b$ are !!{constant}s, $f$
-is a two-place !!{function}, and $R$ is a two-place !!{predicate}.
+Let \iftag{fnTerms}{$\Lang = \{a, b, f, R\}$}{$\Lang = \{a, b, R\}$} 
+ $a$ and $b$ are !!{constant}s, \iftag{fnTerms}{$f$
+is a two-place !!{function}, }{}and $R$ is a two-place !!{predicate}.
 Consider the !!{structure}~$\Struct{M}$ defined by:
 \begin{enumerate}
 \item $\Domain M = \{1, 2, 3, 4\}$
 \item $\Assign{a}{M} = 1$
 \item $\Assign{b}{M} = 2$
-\item $\Assign{f}{M}(x, y) = x+y$ if $x+y \le 3$ and $= 3$ otherwise.
+\tagitem{fnTerms}{ $\Assign{f}{M}(x, y) = x+y$ if $x+y \le 3$ and $= 3$ otherwise.}{}
 \item $\Assign{R}{M} = \{\tuple{1, 1}, \tuple{1, 2}, \tuple{2, 3}, \tuple{2, 4}\}$
 \end{enumerate}
 The function $s(x) = 1$ that assigns $1 \in \Domain{M}$ to every
@@ -166,6 +168,13 @@ The function $s(x) = 1$ that assigns $1 \in \Domain{M}$ to every
 
 Then
 \begin{align*}
+\Value{b}{M}[s] & = \Assign{b}{M} = 2.
+\intertext{Since $b$ is !!a{constant}, $\Value{b}{M}[s]
+  = \Assign{b}{M}$.}
+\Value{x}{M}[s] & = s(x) = 1.
+\intertext{Since $x$ is !!a{variable}, $\Value{x}{M}[s]
+  = s(x)$.}
+\iftag{fnTerms}{
 \Value{f(a,b)}{M}[s] & = \Assign{f}{M}(\Value{a}{M}[s], \Value{b}{M}[s]).
 \intertext{Since $a$ and $b$ are !!{constant}s, $\Value{a}{M}[s]
   = \Assign{a}{M} = 1$ and $\Value{b}{M}[s] = \Assign{b}{M} = 2$. So}
@@ -177,14 +186,22 @@ Then
   s(x)$, we also have}
 \Value{f(f(a,b),x)}{M}[s] & = \Assign{f}{M}(\Value{f(a, b)}{M}[s],
 \Value{x}{M}[s]) = \Assign{f}{M}(3, 1) = 3,
+}{}
 \end{align*}
 
 An atomic !!{formula}~$R(t_1, t_2)$ is satisfied if the tuple of
 values of its arguments, i.e., $\tuple{\Value{t_1}{M}[s],
-  \Value{t_2}{M}[s]}$, is !!a{element} of~$\Assign{R}{M}$. So, e.g., we
-have $\Sat{M}{R(b,f(a,b))}[s]$ since $\tuple{\Value{b}{M},
+  \Value{t_2}{M}[s]}$, is !!a{element} of~$\Assign{R}{M}$. So, e.g., 
+\iftag{fnTerms}{%
+  we have $\Sat{M}{R(b,f(a,b))}[s]$ since $\tuple{\Value{b}{M},
   \Value{f(a,b)}{M}} = \tuple{2, 3} \in \Assign{R}{M}$, but
 $\Sat/{M}{R(x, f(a,b))}[s]$ since $\tuple{1, 3} \notin \Assign{R}{M}[s]$.
+}{%
+  we have $\Sat{M}{\Atom{R}{x,b}}[s]$ since $\tuple{\Value{x}{M}[s],
+  \Value{b}{M}[s]} = \tuple{1,2} \in \Assign{R}{M}$, but $\Sat/{M}{\Atom{R}{b,x}}[s]$ 
+  since $\tuple{\Value{b}{M}[s],
+  \Value{x}{M}[s]} = \tuple{2,1} \notin \Assign{R}{M}$.
+}
 
 To determine if a non-atomic formula~$!A$ is satisfied, you apply the
 clauses in the inductive definition that applies to the main
@@ -349,6 +366,7 @@ $\Sat{M}{\lforall[x][!B(x)]}[s]$ iff for every $x$-variant~$s'$ of $s$,
 \end{prob}
 \tagendprob
 
+\tagprob{fnTerms}
 \begin{prob}
 Let $\Lang L = \{c, f, A\}$ with one !!{constant}, one one-place
 !!{function} and one two-place !!{predicate}, and let the
@@ -369,5 +387,6 @@ Explain why or why not.
 (b) Give a different structure and variable assignment in which the
 formula is not satisfied.
 \end{prob}
+\tagendprob
 
 \end{document}

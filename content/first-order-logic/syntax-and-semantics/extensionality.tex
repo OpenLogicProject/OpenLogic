@@ -30,14 +30,14 @@ $!A$ itself is true.
   Let $!A$ be !!a{formula}, and $\Struct M_1$ and $\Struct M_2$ be
   !!{structure}s with $\Domain{M_1} = \Domain{M_2}$, and $s$ a
   variable assignment on $\Domain{M_1} = \Domain{M_2}$.  If
-  $\Assign{c}{M_1} = \Assign{c}{M_2}$, $\Assign{R}{M_1}=\Assign{R}{M_2}$,
-  and $\Assign{f}{M_1} = \Assign{f}{M_2}$ for every !!{constant}~$c$,
-  relation symbol~$R$, and !!{function} $f$ occurring in~$!A$, then
+  $\Assign{c}{M_1} = \Assign{c}{M_2}$, \iftag{fnTerms}{}{and }$\Assign{R}{M_1}=\Assign{R}{M_2}$
+  \iftag{fnTerms}{, and $\Assign{f}{M_1} = \Assign{f}{M_2}$}{} for every !!{constant}~$c$,
+  \iftag{fnTerms}{}{and }relation symbol~$R$\iftag{fnTerms}{, and !!{function} $f$}{} occurring in~$!A$, then
   $\Sat{M_1}{!A}[s]$ iff $\Sat{M_2}{!A}[s]$.
 \end{prop}
 
 \begin{proof}
-  First prove (by induction on~$t$) that for every term,
+  First prove \iftag{fnTerms}{(by induction on~$t$)}{} that for every term,
   $\Value{t}{M_1}[s] = \Value{t}{M_2}[s]$.  Then prove the proposition
   by induction on~$!A$, making use of the claim just proved for the
   induction basis (where $!A$ is atomic).
@@ -69,7 +69,7 @@ by~$s'(x) = \Value{t'}{M}[s]$. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
 \end{prop}
 
 \begin{proof}
-By induction on~$t$.
+\iftag{fnTerms}{By induction on~$t$.}{}
 \begin{enumerate}
 \item If $t$ is a constant, say, $t\ident c$, then $\Subst{t}{t'}{x} =
   c$, and $\Value{c}{M}[s] = \Assign{c}{M} = \Value{c}{M}[s']$.
@@ -81,7 +81,7 @@ By induction on~$t$.
 \item If $t \ident x$, then $\Subst{t}{t'}{x} = t'$. But
   $\Value{x}{M}[s'] = \Value{t'}{M}[s]$ by definition of~$s'$.
 
-\item If $t \ident \Atom{f}{t_1,\dots,t_n}$ then we have:
+\tagitem{fnTerms}{If $t \ident \Atom{f}{t_1,\dots,t_n}$ then we have:
 \begin{multline*}
   \Value{\Subst{t}{t'}{x}}{M}[s]  = \\
   \begin{aligned}[b]
@@ -97,6 +97,7 @@ By induction on~$t$.
     \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s']$}
   \end{aligned}
 \end{multline*}
+}{}
 \end{enumerate}
 \end{proof}
 

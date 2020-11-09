@@ -12,16 +12,17 @@
 
 
 Expressions of first-order logic are built up from a basic vocabulary
-containing \emph{!!{variable}s}, \emph{!!{constant}s},
-\emph{!!{predicate}s} and sometimes \emph{!!{function}s}.  From them,
-together with logical connectives, quantifiers, and punctuation
+containing \emph{!!{variable}s}, \emph{!!{constant}s}, \iftag{fnTerms}{}{and }
+\emph{!!{predicate}s}\iftag{fnTerms}{ and sometimes \emph{!!{function}s}}{}.
+From them, together with logical connectives, quantifiers, and punctuation
 symbols such as parentheses and commas, \emph{terms} and
 \emph{!!{formula}s} are formed.
 
 \begin{explain}
-Informally, !!{predicate}s are names for properties and relations,
-!!{constant}s are names for individual objects, and !!{function}s are
-names for mappings.  These, except for the !!{identity}~$\eq$, are the
+Informally, !!{predicate}s are names for properties and relations, 
+\iftag{fnTerms}{}{and } !!{constant}s are names for individual objects
+\iftag{fnTerms}{, and !!{function}s are names for mappings}{}.   
+These, except for the !!{identity}~$\eq$, are the
 \emph{non-logical symbols} and together make up a language.  Any
 first-order language~$\Lang L$ is determined by its non-logical
 symbols.  In the most general case, $\Lang L$ contains infinitely many
@@ -56,8 +57,8 @@ first-order logic:
   A^n_0$, $\Obj A^n_1$, $\Obj A^n_2$, \dots
 \item A !!{denumerable}s set of !!{constant}s: $\Obj c_0$, $\Obj c_1$, $\Obj
   c_2$, \dots.
-\item A !!{denumerable}s set of $n$-place !!{function}s for each $n>0$:
-  $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots
+\tagitem{fnTerms}{A !!{denumerable}s set of $n$-place !!{function}s for each $n>0$:
+  $\Obj f^n_0$, $\Obj f^n_1$, $\Obj f^n_2$, \dots}{}
 \end{enumerate}
 \item Punctuation marks: (, ), and the comma.
 \end{enumerate}
@@ -65,13 +66,16 @@ first-order logic:
 Most of our definitions and results will be formulated for the full
 standard language of first-order logic.  However, depending on the
 application, we may also restrict the language to only a few
-!!{predicate}s, !!{constant}s, and !!{function}s.
+!!{predicate}s, \iftag{fnTerms}{}{and }!!{constant}s\iftag{fnTerms}{,
+ and !!{function}s}{}.
 
+\iftag{fnTerms}{
 \begin{ex}
 The language~$\Lang L_A$ of arithmetic contains a single two-place
 !!{predicate}~$<$, a single !!{constant}~$\Obj 0$, one one-place
 !!{function}~$\prime$, and two two-place !!{function}s~$+$ and~$\times$.
 \end{ex}
+}{}
 
 \begin{ex}
 The language of set theory~$\Lang L_Z$ contains only the single
@@ -83,10 +87,15 @@ The language of orders~$\Lang L_\le$ contains only the two-place
 !!{predicate}~$\le$.
 \end{ex}
 
+\iftag{fnTerms}{
 Again, these are conventions: officially, these are just aliases,
 e.g., $<$, $\in$, and $\le$ are aliases for $\Obj A^2_0$, $\Obj 0$ for
 $\Obj c_0$, $\prime$ for $\Obj f^1_0$, $+$ for $\Obj f^2_0$, $\times$ for
 $\Obj f^2_1$.
+}{
+Again, these are conventions: officially, these are just aliases,
+e.g., $\in$, and $\le$ are aliases for $\Obj A^2_0$.
+}
 
 \iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
 In addition to the primitive connectives and
