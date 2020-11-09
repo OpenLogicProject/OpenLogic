@@ -1,0 +1,117 @@
+% Part: non-classical-logics
+% Chapter: trivalent-logics
+% Section: semantics-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{smp}
+
+\olsection{Properties of the semantics}
+
+We have seen some of the main properties of validity. Here is an overview:
+
+\begin{prop}[Structural properties]
+\ollabel{prop:structural}
+In every trivalent logic $\Log X$, entailment $\Entails[\Log X]$ is reflexive, monotonic and satisfies Cut (validity).
+\end{prop}
+
+\begin{prop}[Rule of substitution of logical equivalents]
+\ollabel{prop:substitutionrules}
+If $!A$ and $!A$ are logical equivalents then for any !!{valuation} $\pAssign{v}$ and any !!{formula} $!C$, $\pAssign{v}{!C}=\pAssign{v}{\Subst{!C}{!B}{!A}}$
+\end{prop}
+
+\begin{prop}[Trivalent logics are not stronger than classical logic]
+\ollabel{prop:at-most-classical}
+  \item Every trivalent logic $\Log X$ is at most as strong as classical logic. If $\Gamma \Entails[\Log X] !A$ then $\Gamma \Entails[\Log PL] !A$. But each trivalent logic is weaker that classical propositionallogic:
+\end{prop}
+
+\begin{prop}[Sub-classicality]
+\ollabel{prop:sub-classicality} Trivalent logics are strictly weaker than classical propositional logic.
+\begin{itemize}
+  \item The law of excluded middle and the law of non-contradiction fail in $\True$-preservation trivalent logics.
+  \item \emph{Ex falso quodlibet} (explosion) and disjunctive syllogism fail in $\True$ or $\Indet$-preservation trivalent logics.
+\end{itemize}
+\end{prop}
+
+\begin{center}
+  \begin{tabular}{|ll|cccc|} \hline 
+     &  & $\Log{PL}$ &$\Log{K_3}$ & $\Log{\Luk_3}$ & $\Log{LP}$ \\
+     \hline 
+    Law of non-contrad. & $\Entails \lnot (!A \land \lnot !A)$ & $\surd$ & $\times$ & $\times$ & $\surd$ \\
+    Law of exclud. middle & $\Entails !A \lor \lnot !A$ & $\surd$ & $\times$ & $\times$ & $\surd$ \\
+     & $!A \lif !A$ & $\surd$ & $\times$ & $\surd$ & $\surd$ \\
+    Ex falso quodlibet & $!A, \lnot !A \Entails !B$ & $\surd$ & $\surd$ & $\surd$ & $\times$ \\
+    Modus Ponens & $!A \lif !B, !A \Entails !B$ & $\surd$ & $\surd$ & $\surd$ & $\times$ \\
+    Disjunctive syllogism & $!A \lor !B, \lnot !A \Entails !B$ & $\surd$ & $\surd$ & $\surd$ & $\times$ \\
+    \hline 
+  \end{tabular}
+\end{center}
+
+Certain properties of validity in classical logic are characteristic of the connectives. Trivalent logics preserve the properties classically associated with conjunction and disjunction. They also preserve double negation elimination, unlike intuitionnistic logic. But they reject some properties classically associated with negation and the conditional. 
+
+\begin{center}
+  \begin{tabular}{|ll|ccc|} \hline 
+     &  &$\Log{K_3}$ & $\Log{\Luk_3}$ & $\Log{LP}$ \\
+     \hline 
+    $\land$ left & $\Gamma, !A \land !B \Entails !C$ iff $\Gamma, !A, !B \Entails !C$ & $\surd$ & $\surd$ & $\surd$\\
+    $\land$ right & $\Gamma \Entails !A \land !B$ iff $\Gamma \Entails !A$ and $\Gamma \Entails !B $ & $\surd$ & $\surd$ & $\surd$\\
+    $\lor$ left & $\Gamma, !A \lor !B \Entails !C$ iff $\Gamma, !A \Entails !B$ and $\Gamma, !A \Entails !C $ & $\surd$ & $\surd$ & $\surd$\\
+    $\lor$ right & $\Gamma \Entails !A \lor !B$ iff $\Gamma \Entails !A$ or $\Gamma \Entails !B$ & $\surd$ & $\surd$ & $\surd$\\
+    $\lnot$ DNE & $\lnot \lnot !A \Entails !A$ & $\surd$ & $\surd$ & $\surd$\\ 
+    $\lnot$ left intro & $\Gamma \Entails !A$ only if $\Gamma, \lnot !A \Entails \lfalse$ & $\surd$ & $\surd$ & $\times$\\
+    $\lnot$ left elim & $\Gamma \Entails !A$ if $\Gamma, \lnot !A \Entails \lfalse$ & $\times$ & $\times$ & $\surd$\\
+    $\lnot$ right intro & $\Gamma, !A \Entails \lfalse$ only if $\Gamma \Entails \lnot !A$ & $\times$ & $\times$ & $\surd$\\
+    $\lnot$ right elim & $\Gamma, !A \Entails \lfalse$ if $\Gamma \Entails \lnot !A$ & $\surd$ & $\surd$ & $\times$\\
+    Ded. thrm. ($\lif$ intro) & $\Gamma, !A \Entails !B$ only if $\Gamma \Entails !A \lif !B$ & $\times$ & $\times$ & $\surd$\\
+    Ded. thrm. ($\lif$ elim) & $\Gamma, !A \Entails !B$ if $\Gamma \Entails !A \lif !B$ & $\surd$ & $\surd$ & $\times$\\    
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{prop}[Non-classical connectives and validity]
+In the logics $\Log{K_3}$ and $\Log{\Luk_3}$ we have:
+\begin{itemize} 
+  \item Negation. If $\Gamma \Entails !A$ then $\Gamma, \lnot !A \Entails \lfalse$. And if $\Gamma \Entails \lnot !A $ then $\Gamma, !A \Entails \lfalse$. But the converse of both fails.
+  \item Conditional. If $\Gamma, !A \Entails !B$ then $\Gamma \Entails A! \lif !B$. But the converse fails. Modus ponens is preserved but hypothetical reasoning is not valid.
+\end{itemize}
+In the logic $\Log{LP}$ we have:
+\begin{itemize} 
+  \item Negation in $\Log{LP}$. If $\Gamma, !A \Entails \lfalse$ then $\Gamma \Entails \lnot !A$. And if $\Gamma, \lnot !A \Entails \lfalse$ then $\Gamma \Entails !A$. But the converse of both fails.
+  \item Conditional in $\Log{LP}$. If  $\Gamma, \Entails !A \lif !B$ then $\Gamma, !A \Entails !B$. But the converse fails. Hypothetical reasoning is valid but modus ponens fail. 
+\end{itemize}
+\end{prop}
+
+Relevant counterexamples are as follows:
+
+\begin{itemize}
+    \item $\lnot$ left intro fails in $\Log{LP}$. $\Entails[\Log{LP}] \Obj{p \lor \lnot p}$ but $\Obj{\lnot (p \lor \lnot p)} \Entails/[\Log{LP}] \lfalse$. Also, $\Obj{p} \Entails[\Log{LP}] \Obj{p}$ but $\Obj{p}, \Obj{\lnot p} \Entails/[\Log{LP}] \lfalse$.
+    \item $\lnot$ left elim fails in $\Log{K_3}$ and $\Log{\Luk_3}$. $\Entails/[\Log{K_3,\Luk_3}] \Obj{p \lor \lnot p}$ even though $\Obj{\lnot(p \lor \lnot p)} \Entails[\Log{K_3,\Luk_3}] \lfalse$. 
+    \item $\lnot$ right intro fails in $\Log{K_3}$ and $\Log{\Luk_3}$. $\Obj{p \land \lnot p} \Entails[\Log{K_3,\Luk_3}] \lfalse$ but $\Entails/[\Log{K_3,\Luk_3}] \Obj{\lnot (p \land \lnot p)}$.
+    \item $\lnot$ right elim fails in $\Log{LP}$. $\Obj{p \land \lnot p} \Entails/[\Log{LP}] \lfalse$ even though $\Entails[\Log{LP}] \Obj{\lnot (p \land \lnot p)}$. Also, $\Obj{\lnot p},\Obj{p} \Entails/[\Log{LP}] \lfalse$ even though $\Obj{\lnot p} \Entails[\Log{LP}] \Obj{\lnot p}$.
+    \item Ded. thrm. ($\lif$ intro) fails in $\Log{K_3}$ and $\Log{\Luk_3}$. In $\Log{K_3}$: $\Obj{p} \Entails[\Log{K_3}] \Obj{p}$ but $\Entails/[\Log{K_3}] \Obj{p \lif p}$. In $\Log{\Luk_3}$: $\Obj{p \land \lnot p} \Entails[\Log{\Luk_3}] \Obj{q}$ but $\Entails/[\Log{\Luk_3}] \Obj{(p \land \lnot p) \lif q}$.
+    \item Ded. thrm. ($\lif$ elim) fails in $\Log{LP}$. $\Obj{p \land \lnot p} \Entails/[\Log{LP}] \Obj{q}$ even though $\Entails[\Log{LP}] \Obj{(p \land \lnot p) \lif q}$.
+\end{itemize}
+
+\begin{explain}
+Two core principles seem central to our understanding of indicative conditionals:
+\begin{itemize}
+  \item Modus ponens. Given $!A \lif !B$ and $!A$, you have $!B$.
+  \item Hypothetical reasoning. If given $!A$, you can derive $!B$, then you have $!A \lif !B$.
+\end{itemize}
+The second is captured in the rule: if $\Gamma, \Entails !A \lif !B$ then $\Gamma, !A \Entails !B$. The first, combined with the monotonicity and Cut properties of validity, gives you the converse rule: f $\Gamma, \Entails !A \lif !B$ then $\Gamma, !A \Entails !B$ (see below). Together the two form the \emph{(semantic) Deduction theorem}: $\Gamma, \Entails !A \lif !B$ iff $\Gamma, !A \Entails !B$. Our trivalent logics each reject one side of the deduction theorem. 
+
+To see that \emph{Modus ponens} gives us one side of the Deduction theorem, start with the Modus ponens rule: $!A\lif !B, !A \Entails !B $. By monotonicity, whatever $\Gamma$ is we have: $\Gamma, !A\lif !B, !A \Entails !B $. Now one application of Cut (transitivity) is that: if $\Gamma, !A \lif !B, !A \Entails !B $ and $\Gamma \Entails !A \lif !B$ then $\Gamma, !A \Entails !B$. So we have: if $\Gamma \Entails !A \lif !B$ then $\Gamma, !A \Entails !B$. This means that a logic can only reject this rule by rejecting Modus Ponens, Cut or monotonicity. Our trivalent logics preserve the structural properties of validity (reflexivity, cut, monotonicity). So for them this rule is inseparable from modus ponens: they accept both or reject both.
+\end{explain}
+
+\begin{explain}
+Two core pairs of principles seem central to our understanding of negation:
+\begin{itemize}
+  \item If you accepting $\Gamma$ requires accepting $!A$, then you can't accept $\Gamma$ and $\lnot !A$. If accepting $\Gamma$ requires accepting $\lnot !A$, then you can't accept $\Gamma$ and $!A$.
+  \item If you can't accept $\Gamma$ and $!A$ then accepting $\Gamma$ requires accepting $\lnot !A$. If you can't accept $\Gamma$ and $\lnot !A$, then accepting $\Gamma$ requires accepting $!A$.
+\end{itemize}
+Both pairs link entailment with the joint acceptability of premises and negated conclusion. The first pair go from entailement to impossibility of accepting the premises and negated conclusion together, the second pair go from the impossibility of accepting the premises and negated conclusion together to entailement. The truth-preservation logics maintain the first pair but reject the logic. The unfalsehood-preservation logics maintain the second but reject the first.
+\end{explain}
+
+\end{document}

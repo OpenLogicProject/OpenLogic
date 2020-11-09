@@ -1,0 +1,104 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: semantics-properties
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{smp}
+
+\olsection{Properties of validity}
+
+\begin{prop}
+\ollabel{prop:semanticalfacts} 
+\begin{enumerate} 
+  \item $!A$ is a tautology if and only if $\emptyset \Entails !A$; 
+  \item $\Gamma \Entails !A$ if and only if $\Gamma \cup \{\lnot !A\}$ is unsatisfiable; 
+  \item If $\Gamma$ is satisfiable then every finite subset of $\Gamma$
+  is also satisfiable.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][smp]{prop:semanticalfacts}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:structural}
+\begin{enumerate}
+  \item \ollabel{def:Reflexivity} \emph{Reflexivity}. $\Gamma, !A \Entails !A$. 
+  \item \ollabel{def:Monotonicity} \emph{Monotonicity}. If $\Gamma \Entails !A$ and $\Gamma \subseteq \Delta$ then also $\Delta \Entails !A$;
+  \item \ollabel{def:Cut} \emph{Transitivity} (or Semantic Cut). If $\Gamma \Entails !A$ and $\Delta, !A \Entails !B$ then $\Gamma \cup \Delta \Entails !B$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][smp]{prop:structural}
+\end{prob}
+
+\begin{prop}[Local Determination]
+\ollabel{prop:localdetermination}
+\emph{Local determination}. If two !!{valuation}s $\pAssign{v}$ and $\pAssign{v'}$ agree on every !!{propositional variable} in $!A$ then they agree on $!A$. That is, if $\pValue{v}(!B)=\pValue{v}(!B)$ for very !!{propositional variable} $!B$ that appears in $!A$ then $\pValue{v}(!B)=\pValue{v}(!B)$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][smp]{prop:localdetermination}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:bivalence} \emph{Bivalence}. For every !!{valuation}s $\pAssign{v}$ and every formula $!A$, $\pValue{v}(!A)=\True$ or $\pValue{v}(!A)=\False$ but not both.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][smp]{prop:localdetermination}
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:substitutionrules}
+\begin{enumerate}
+  \item \emph{Rule of tautological instance}. If $\Entails !A$ then also $\Entails \Subst{!A}{!C}{!B}$ for any $!B$, $!C$. That is, if $\Entails !A$ then for every !!{propositional variable} $!B$ and formula $!C$, the result of replacing every occurrence of $!B$ in $!A$ with $!C$, that is $\Subst{!A}{!C}{!B}$ is a tautology too.
+  \item \emph{Rule of substitution of logical equivalents}. If $!A$ and $!A$ are logical equivalents then for any !!{valuation} $\pAssign{v}$ and any !!{formula} $!C$, $\pAssign{v}{!C}=\pAssign{v}{\Subst{!C}{!B}{!A}}$
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][smp]{prop:substitutionrules}
+\end{prob}
+
+\paragraph*{Validity and the connectives}
+
+\begin{thm}[Semantic Deduction Theorem]
+  \ollabel{thm:sem-deduction} $\Gamma \Entails !A \lif !B$ if and only
+  if $\Gamma, !A \Entails !B$.
+\end{thm}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[pl][syn][smp]{thm:sem-deduction}
+\end{prob}
+
+\end{document}

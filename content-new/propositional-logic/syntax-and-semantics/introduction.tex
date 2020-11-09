@@ -1,0 +1,56 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{int}
+
+\olsection{Introduction}
+
+Propositional logic is the logic of truth-functionality.
+
+Consider a declarative sentence like `There are dinosaurs'. The sentence can be true or false. We call that its \emph{truth-value}: a true claim has the truth-value 'true`, a false claim the truth-value of 'false'. Now consider a complex sentence like `There are dinosaurs and there are black holes'. We may not know its truth-value. But we know \emph{how its truth-value depends on the truth-value of its component sentences}. If both component sentences `there are dinosaurs' and `there are black holes' are true the complex sentence is true, otherwise it is false. As a result, certain patterns of argument are guaranteed to preserve truth and certain propositions are guaranteed to be true. For instance:
+
+\begin{itemize}
+	\item (Argument) There are dinosaurs and there are black
+holes. So, there are black holes.
+	\item (Propositon) If there are dinosaurs and there are black holes, then there are dinossaurs.
+\end{itemize}
+
+
+Propositional logic focuses exclusively on that: complex sentences whose truth-value only depends on the truth-value of their component sentences. 
+
+To do so we build a formal language where we ignore everything about a sentence's meaning except its truth-value. We start with !!{propositional variable}s $\Obj P$, $\Obj Q$, $\Obj R$ and so on. Intuitively, !!a{propositional variable}~$\Obj P$ stands for a sentence or proposition that is true or false. We then add propositional connectives $\lnot$, $\land$, $\lor$, $\lif$. These allow us to build complex !!{formula}s out of !!{propositional variable}s, such as $\Obj{\lnot P}$ and $\Obj{Q \land R}$, and complex formulas out of those, such as $\Obj {\lnot P \lif (P \land R)}$, and so on. 
+
+Each connective is associated with a \emph{truth-function}, a rule that tells how the truth-value of a complex !!{formula} built with it depends on the truth-value of its component formulas. This is why we also call the propositional connectives `truth-functional'. Propositional logic studies facts about validity that arise from truth-functional connectives. This is why it is the logic of truth-functionality. 
+
+Propositional logic leaves out of any further dimension of truth or falsity, e.g., whether something is necessarily true rather than just contingently true, or whether something is known to be true, or whether something is true now rather than was true or will be true. Moreover, `classical' propositional logic only considers the truth values true and false. It excludes from discussion the possibility that a statement may be neither true nor false, or only half true. 
+
+The system of classical propositional logic is called \textbf{PL}. As all formal logics, it has three components: syntax, semantics and proof theory. The study of their properties is often called meta-logic. 
+
+\paragraph{Syntax}
+
+Syntax defines our artificial language. We will describe one way of constructing !!{formula}s from !!{propositional variable}s using the connectives. Alternative definitions are possible. Other systems will chose different symbols, will select different sets of connectives as primitive, will use parentheses differently (or even not at all, as in the case of so-called Polish notation).  What all approaches have in
+common, though, is that the formation rules define the set of !!{formula}s \emph{inductively}. If done properly, every expression can result essentially in only one way according to the formation
+rules.  The inductive definition resulting in expressions that are \emph{uniquely readable} means we can give meanings to these expressions using the same method---inductive definition.
+
+\paragraph{Semantics}
+
+Semantics gives meaning to our language. What is meaning? That is a hard question. We can make some progress, though, by thinking about truth. Something is true if \emph{its says how things
+are.} So whether a sentence is true depends on \emph{what it means} (what it 'says') and \emph{how things are}--- \emph{meaning} and \emph{reality}. Meaning has itself two components: the meaning of basic terms (in propositional logic, these are the !!{propositional variable}s $\Obj P$, $\Obj Q$, etc.), and the meaning of complex sentences built out of basic ones using logical connectives. Now in propositional logic all that matters when it comes to reality and the meaning of a !!{propositional variable}s $\Obj P$ is \emph{whether what it says is true}. We could in principle have a semantics that consider various meanings for $\Obj P$ (it means that it is raining, it means that it is windy) and various states of reality (rain and wind, no rain and wind, rain and no wind, no rain and wind). But all that we care about in the end is whether what it says and how things are conspire to make it true---that is, all we care about is its truth-value. 
+
+Thus semantics for propositional logic has two parts. The first is !!{valuation}s. !!^a{valuation}~$\pAssign{v}$ assigns truth values to the !!{propositional variable}s. This represents reality and the meaning of non-logical terms. The second is a definition of satisfaction in a valuation. It assigns a truth-value to all !!{formula}s of the language, relative to a certain valuation of its !!{propositional variable}s. This represents the meaning of logical connectives, and how the meaning of complex sentences depends on that of their component. 
+
+With the semantics in place we can define logical validity rigorously. !!^a{formula} is logically valid (it is a logical truth) iff it is satisfied in every valuation whatsoever. A set of !!^{formula}s logically entail !!a{formula} iff no valuation (if any) that makes the former all true makes the latter false. 
+
+\paragraph{Proof theory}
+
+Finally, a proof theory is a method for reasoning within the language we created. They are step-by-step procedures that allow one to conclude that !!a{formula} is logically valid or that a set of of !!^{formula}s logically entail !!a{formula}. There are several such methods: truth-tables, natural deduction, axiomatic proofs, tableaus. It can be proved that they give the same results. But they have different strengths and weaknesses: the truth-table method, for instance, is very easy but time- and space-consuming. 
+
+\paragraph{Meta-logic}
+ Together our syntax, semantics and proof theory constitute a logic, or logical system. Our main interest with such a system is not to speak its language or use its proof methods, however. Rather, it is to study its properties: what our system can express, what comes out as valid, general properties of validity, and relations between proof system and semantics. 
+
+\end{document}

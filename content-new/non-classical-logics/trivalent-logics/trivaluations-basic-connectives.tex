@@ -1,0 +1,83 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: 
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{trb}
+
+\olsection{Semantics: basic connectives}
+
+For the semantics, we now have three truth-values: $\True$, $\False$ and $\Indet$. We call $\True$ and $\False$ the \emph{classical truth-value}. Our !!{valuation}s will now assign one of these three values to atomic formulas: 
+
+\begin{defn}[Trivalent !!^{valuation}s] 
+Let $\{\True, \False, \Indet \}$ be the set of truth values. A trivalent \emph{!!{valuation}} for is a function~$\pAssign{v}$ assigning either $\True$ or $\False$ or $\Indet$ to the
+!!{propositional variable}s of the language, i.e., $\pAssign{v} \colon
+\PVar \to \{\True, \False, \Indet \}$.
+\end{defn}
+
+We then extend the !!{valuation} to complex formulas. This is done truth-functionally: each connective is associated with a function such that the truth-value of a complex formula is a function of the truth-value of its component. The functions obey the following constraint:
+
+\begin{prop}[Preservation of classical values]
+\ollabel{prop:preservation-classical-values}
+  \item \emph{Preservation of classical !!{valuation}}. If $!A$ and $!B$ have classical truth-values, $\lnot !A$, $!A \land !B$, $!A \lif !B$ etc. have their classical !!{valuation}.
+\end{prop}
+
+What remains to be settled is what happens when component formulas have the truth-value $\Indet$.
+
+\iftag{prvNot}{For negation the standard rule is given by:
+\begin{center}
+  \begin{tabular}{|c||c|} \hline 
+    $!A$ & $ \lnot !A$ \\ 
+    \hline \hline 
+    $\True$ & $\False$ \\ 
+    $\Indet$ & $\Indet$ \\
+    $\False$ & $\True$ \\ 
+    \hline 
+  \end{tabular}
+\end{center}
+}{}
+
+For disjunction and conjunction there are two options. The first is to say that $\Indet$ `spreads': the complex has value $\Indet$ as soon as one component has. The result is a \emph{weak Kleene} !!{valuation}, and is the basis of the weak Kleene logic. Most trivalent logics adopt instead the following tables:
+
+\begin{center}
+\iftag{prvAnd}{
+  \begin{tabular}{|cc|ccc|} \hline 
+     $!A \land !B$ & & & $!B$ &  \\
+     & & $\True$ & $\Indet$ & $\False$ \\
+    \hline \hline 
+    & $\True$ & $\True$ & $\Indet$ & $\False$ \\ 
+    $!A$ & $\Indet$ & $\Indet$ & $\Indet$ & $\False$ \\ 
+    & $\False$ & $\False$ & $\False$ & $\False$ \\
+    \hline 
+  \end{tabular}
+}{}
+\iftag{prvOr}{
+  \begin{tabular}{|cc|ccc|} \hline 
+     $!A \lor !B$ & & & $!B$ &  \\
+     & & $\True$ & $\Indet$ & $\False$ \\
+    \hline \hline 
+    & $\True$ & $\True$ & $\True$ & $\True$ \\ 
+    $!A$ & $\Indet$ & $\True$ & $\Indet$ & $\Indet$ \\ 
+    & $\False$ & $\True$ & $\Indet$ & $\False$ \\
+    \hline 
+  \end{tabular}
+}{}%
+\end{center} 
+
+\begin{explain}
+These tables preserve the usual interactions between $\lnot$, $\lor$ and $\land$: 
+
+\begin{itemize}
+	\item Double negation. $\lnot \lnot !A$ is equivalent to $!A$.
+	\item De Morgan laws. $!A \lor !B$ is equivalent to $\lnot (!A \land !B)$. And similarly swapping $\land$ for $\lor$.
+	\item Distribution. $!A \lor (!B \land !C)$ is equivalent to $(!A \land !C) \lor (!A \lor !C)$. And similarly swapping $\land$ for $\lor$.
+\end{itemize}
+
+\end{explain}
+
+Finally we need to settle the conditional. But let's leave it aside for the moment and look at validity with the connectives we already have. 
+
+\end{document}

@@ -1,0 +1,145 @@
+% King's Philosophical Logic - Exercise booklet
+%
+% driver file for exercise-booklet.tex to produce text on A4 paper
+% with standard layout and margins
+
+% We use the memoir class for maximal flexibility of layout, but any
+% class will do
+
+\documentclass[a4paper,oneside]{memoir}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory courses/sample,
+% so the main directory is two levels up.
+\newcommand{\olpath}{../../}
+
+% we will load the config from kcl-philosophical-logic.tex
+\newcommand{\oljobname}{kcl-philosophical-logic}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in \oljobname.sty
+\input{\olpath/sty/open-logic.sty}
+
+% we want all the problems deferred to the end
+%\input{\olpath/sty/open-logic-defer.sty}
+
+% let's set the whole thing in Palatino, with Helvetica for
+% sans-serif, and spread the lines a bit to make the text more
+% readable
+
+\usepackage{mathpazo}
+\usepackage[scaled=0.95]{helvet}
+\linespread{1.05}
+
+% Memoir styles
+
+% part, chapter and section headings
+
+\renewcommand{\partnamefont}{\huge\bfseries\sffamily}
+\renewcommand{\partnumfont}{\huge\bfseries\sffamily}
+\renewcommand{\parttitlefont}{\Huge\bfseries\sffamily}
+\renewcommand{\chapnamefont}{\huge\bfseries\sffamily}
+\renewcommand{\chapnumfont}{\huge\bfseries\sffamily}
+\renewcommand{\chaptitlefont}{\Huge\bfseries\sffamily}
+\setsecheadstyle{\Large\bfseries\sffamily}
+\setsubsecheadstyle{\large\bfseries\sffamily}
+\setsubsubsecheadstyle{\bfseries\sffamily}
+
+% table of contents
+
+\renewcommand{\cftpartfont}{\large\bfseries\sffamily}
+\renewcommand{\cftpartpagefont}{\large\bfseries\sffamily}
+\renewcommand{\cftchapterfont}{\bfseries\sffamily}
+\renewcommand{\cftchapterpagefont}{\bfseries\sffamily}
+\renewcommand{\cftsectionfont}{\sffamily}
+\renewcommand{\cftsectionpagefont}{\sffamily}
+
+% Place problems in each chapter
+%\problemsperchapter
+
+% Hide answers if the tag hideAns is set to true
+\iftag{hideAns}{
+\let\ans\comment
+\let\endans\endcomment
+}
+
+\begin{document}
+
+% Memoir class only: make lists less spacious
+\firmlists
+
+% First we make a titlepage
+
+\begin{titlingpage}
+\begin{raggedleft}
+
+{\bfseries\sffamily
+\fontsize{52pt}{4em}\selectfont
+Exercise\\[.2ex]
+\textit{Booklet}\\[0.2ex]
+\Large \vskip 1ex
+for\\
+\vskip 1ex
+\fontsize{24pt}{24pt}\selectfont
+King's\\
+\textit{Philosophical}\\
+Logic\\
+\Large \vskip 4ex
+Julien Dutant\\[.5ex]
+King's College London\\[.5ex]
+2020-21\\[2ex]
+DRAFT of \today\\
+}
+\end{raggedleft}
+
+\vfill
+
+% This work's license. Generates a CC-BY-NC license mark, with 
+% the \oluselicense code (from open-logic.sty) to acknowledge 
+% the original source (the
+% OLP).  Acknowledgment of the source is a requirement under the
+% conditions of the CC-BY license used by the OLP, but you are not
+% required to license the product itself under CC-BY.
+% two parameters: title with link to the source, and author
+
+\kcluselicense
+% Title of this version of the OLT with link to source
+{\href{https://github.com/jdutant/OpenLogic/tree/kcl-philos-logic}{\textit{King's Philosophical Logic}}}
+% Author of this version
+{\href{http://julien.dutant.free.fr/}{Julien Dutant}}
+\end{titlingpage}
+
+\frontmatter
+
+\pagestyle{ruled}
+
+% no colored links in the TOC
+\hypersetup{linkcolor=.}
+
+\tableofcontents*
+
+% restore colored links after the TOC
+\hypersetup{linkcolor=red}
+
+
+\mainmatter
+
+\olimport[exercises]{exercises}
+
+% apparently \stopproblems is required at this point
+%\stopproblems
+
+\backmatter
+
+% If you include any chapters from the history part, you have to print
+% the Photo Credits. 
+
+%\photocredits
+
+% Include the bibliography
+
+%\bibliographystyle{\olpath/bib/natbib-oup}
+%\bibliography{kcl-philosophical-logic,\olpath/bib/open-logic}
+
+\end{document}
+

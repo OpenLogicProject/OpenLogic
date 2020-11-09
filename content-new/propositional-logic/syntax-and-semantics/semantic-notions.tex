@@ -1,0 +1,42 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{smn}
+
+\olsection{Semantic Notions}
+
+We define logical validity:
+
+\begin{defn}
+  \item !!^a{formula} $!A$ is logically valid, written $\Entails !A$, iff $\pValue{v}(!A) = \True$ for all !!{valuation}s $\pAssign{v}$.
+  \item !!^a{formula} $!A$ is a logical consequence of a set of !!{formula}s $\Gamma$, written $\Gamma \Entails !A$, iff there is no !!{valuation} $\pAssign{v}$ such that $\pValue{v}(!B) = \True$ for all $!B$ in $\Gamma$ but $\pValue{v}(!A) = \False$. We also say that $\Gamma$ `entails' $!A$.
+  \item \emph{Convention}. We omit set-theoretic notation in the premises. We write $!A, !B \Entails !C$ 
+  for $\{!A, !B\} \Entails !C$ and $\Gamma, !A, !B \Entails !C$ for $\Gamma \cup \{!A, !B\} \Entails !C$.
+\end{defn}
+
+In propositional logic, logically valid !!{formula}s are also called `tautologies'. See below. 
+
+We define some further notions:
+
+\begin{defn} 
+\begin{enumerate}
+\item !!^a{formula} $!A$ is \emph{satisfiable} if for
+  some~$\pAssign{v}$, $\pSat{v}{!A}$; it is
+  \emph{unsatisfiable} if for no $\pAssign{v}$, $\pSat{v}{!A}$;
+\item !!^a{formula} $!A$ is a \emph{tautology} if $\pSat{v}{!A}$ for
+  all !!{valuation}s~$v$;
+\item If $\Gamma$ is a set of !!{formula}s, $\Gamma$ is
+  \emph{satisfiable} if there is !!a{valuation}~$\pAssign{v}$ for which
+  $\pSat{v}{\Gamma}$, and $\Gamma$ is
+  \emph{unsatisfiable} otherwise.
+\item !!^a{formula} $!A$ is \emph{logically contingent} if it is satisfiable but
+  not a tautology;
+\end{enumerate} 
+\end{defn}
+
+\end{document}

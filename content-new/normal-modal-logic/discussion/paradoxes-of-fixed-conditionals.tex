@@ -1,0 +1,115 @@
+% Part: normal-modal-logic
+% Chapter: discussion
+% Section: paradoxes-of-fixed-conditionals
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{dis}{pfc}
+
+\olsection{Paradoxes of fixed conditionals}
+
+Material implication has the following properties:
+
+\begin{enumerate}
+	\item \emph{Antecedent strenghtening}. $!A \lif !B \Entails !A \land !C \lif !B$.
+	\item \emph{Transitivity}. $!A \lif !B, !B \lif !C \Entails !A \lif !C$.
+	\item \emph{Contraposition}. $!A \lif !B \Entails \lnot !B \lif \lnot !A$.
+\end{enumerate}
+
+Strict implication has the same properties:
+
+\begin{enumerate}
+	\item \emph{Antecedent strenghtening}. $!A \strictif !B \Entails !A \land !C \strictif !B$.
+	\item \emph{Transitivity}. $!A \strictif !B, !B \strictif !C \Entails !A \strictif !C$.
+	\item \emph{Contraposition}. $!A \strictif !B \Entails \lnot !B \strictif \lnot !A$.
+\end{enumerate}
+
+With the natural conditional, there are many instances in which these conditionals seem wrong.
+
+\paragraph*{Against antecedent strenghtening}
+
+Suppose that Alice is way stronger than Juan at tennis. She is a top ten world player and he picked up a racket for the first time of his life last week. Consider:
+
+\begin{itemize}
+	\item If Alice plays against Juan then she'll win.
+	\item If Alice plays against Juan and she is suddenly unable to play even as good as he is then she'll win.
+\end{itemize}
+
+The first seems true, but the second false. If so they are a counterexample to Antecedent strengthening. 
+
+A problem pair from Priest:
+
+\begin{itemize}
+	\item If it does not rain tomorrow we will go to the cricket. 
+	\item If it does not rain tomorrow and I am killed in a car accident tonight then we will go to the cricket.
+\end{itemize}
+
+A general source of problem cases due to Stalnaker. Consider any conditional `If $!A$, then $!B$' that seems true where `$!A \land \lnot !B$ is possible. Consider: 
+
+\begin{itemize}
+	\item If $!A$ then $!B$. If it's raining the streets are getting wet. 
+	\item So, if $!A \land \lnot !B$ then $!B$. If it's raining and the streets aren't getting wet the streets are getting wet. 
+\end{itemize}
+
+Again, the inference seems wrong.
+
+\paragraph*{Against transitivity}
+
+A problem triple from Bennett. The farmer knows that cows love turnips. But she thinks her turnips are safe because is fairly certain that the garden gate is closed. She's also fairly certain that if the garden gate was open, the cows wouldn't notice it. Consider:
+
+\begin{itemize}
+	\item If cows are in the garden, the the garden get is open.
+	\item If the garden get is open, the cows haven't noticed whether it's open.
+	\item So, if the cows are in the garden, the cows haven't noticed whether it's open.
+\end{itemize}
+
+The first two seem true but the third semms false. If so, Transitivity fails. 
+
+Another problem triple, from Priest:
+
+\begin{itemize}
+	\item If the other candidates pull out, John will get the job. 
+	\item If John gets the job, the other candidates will be disappointed. 
+	\item So, if the other candidates pull out, they will be disappointed.
+\end{itemize}
+
+\paragraph*{Against contraposition}
+
+From Priest:
+
+\begin{itemize}
+	\item If we take the car then it won’t break down en route. 
+	\item Hence, if the car does break down en route, we didn’t take it.
+\end{itemize}
+
+The case involves a consequent whose negation entails the antecedent. ``the car doesn't break down en route'' is equivalent to ``it's not the case that (we took the car and it breaks down en route)`'. But the negation of the latter, namely ``we took the car and it breaks down en route'' entails the antecedent.
+
+This suggests a recipe. Take any conditional `If $!A$, then $!B$' that seems true where `$!A \land \lnot !B$ is possible. Consider:
+
+\begin{itemize}
+	\item If $!A$ then $\lnot (!A \land \lnot !B$. If it's raining then it's not raining without the streets getting wet. 
+	\item So, if $!A \land \lnot !B$ then $\lnot !A$. If it's raining without the streets getting wet then it's not raining. 
+\end{itemize}
+
+\paragraph*{Two solutions to the paradoxes}
+
+These problematic inferences motivate more sophisticated accounts of indicative conditionals. The two main contenders are:
+
+\emph{Context-sensitive Strict Conditional}. The indicative conditional is a strict implication: `if $!A$ then $!B$'' is true that there's no possibility in which $!A$ is true and $!B$ is false. But what range of possibilities are under consideration changes with context. In the problematic inferences above, there is a shift in the set of possibilities considered between premises and conclusion. Thus the inferences are in principle valid, but it's impossible or very hard to utter them without changing the context. 
+
+% For instance, when we first consider the premise ``If it does not rain tomorrow we will go to the cricket'' and accept it as true, we don't have in mind the extraordinary scenario in which I get killed in a car accident. But when we consider the conclusion, ``if it does not rain tomorrow and I am killed in a car accident tonight then we will go to the cricket.'', that scenario is brought to the fore. In the new context, one of the possibilities under consideration is one in which it doesn't rain tomorrow, I'm killed in a car accident and we don't go to the cricket. So we have two contexts, and two sets of possibilities under consideration. Roughly put, the first only considers ordinary scenarios, the second considers some more extraodinary ones (me being killed in a car accident). Once we see that, we can see that:
+
+% \begin{itemize}
+% 	\item Among the ordinary possibilities, there is none in which it doesn't rain and we don't go to cricket. And there is of course none in which it doesn't rain and I get gilled by a car and we don't go to cricket (simply because there's none in which I get killed). 
+% 	\item Among the ordinary and extraordinary possibiilities, there \emph{is} a possiblitiy in which it doesn't rain and I get killed by a car and we don't go to cricket. And of course that means we do have a possibility in which it doesn't rain and we don't go to cricket.
+% \end{itemize}
+
+% As a result, \emph{both} conditionals (``if it doesn't rain we wont go to cricket'' and ``if it does not rain tomorrow and I am killed in a car accident tonight then we will go to the cricket'') are \emph{true} with respect to the first context and false with respect to the second. The trick is, on that view, that if you tried to assert the second conditional in the first context, that would bring the more extraordinary possibility to the fore, and that would change the context to the second kind of context, where we look both at ordinary and extraordinary possibilities. 
+
+\emph{Variable conditionals}. On that view indicative conditional are not strict implications. They don't say, all the $!A$-scenarios are $!B$-scenarios. They rather say, roughly put, the \emph{most plausible} $!A$-scenarios are $!B$ scenarios. This idea is cashed out in a semantics that uses \emph{ordering} of worlds rather than accessibility. 
+
+Both options are beyond the scope of this chapter. 
+
+\end{document}

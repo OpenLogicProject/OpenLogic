@@ -1,0 +1,39 @@
+% Part: propositional-logic
+% Chapter: discussion
+% Section: overview
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{dis}{ovw}
+
+\olsection{Overview}
+
+\subsection{Properties of the semantics}
+
+%\paragraph*{Systems of modal logic}
+
+\paragraph*{Important features of validity}
+
+\begin{itemize}
+	\item \emph{Structural features of validity}. Entailment validates reflexivity, monotonicity and Cut (transitivity).
+	\item \emph{Local determination}. If two models $\mModel{M}$ and $\mModel{M'}$ share the same set of worlds $W$ and accessibility relation $R$ and their !!{valuation}s agree on all the !!{propositional variable} in $!A$ at every world in $W$, they agree on $!A$ at every world in $W$.
+	\item \emph{Rule of tautological instance}. If $\Entails[PL] !A$ then $\Entails[X] \Subst{!A}{!B}{!C}$ for any $B!$, $C!$ and any system $\Log X$ of modal logic.
+	\emph{Rule of susbstitution of logical equivalents}. For any normal modal logic $\Log X$, if $!A$ and $!B$ are logically equivalent in this logic then for any $!C$, $\Subst{!C}{!B}{!A}$ is logically equivalent to $!C$ in this logic.
+\end{itemize}
+
+The rule of tautological instance tells us the following. If in propositional logic $\Entails[PL] !A$ then for every !!{propositional variable} $!B$ and formula $!C$, the result of replacing every occurrence of $!B$ in $!A$ with $!C$, that is $\Subst{!A}{!B}{!C}$ is a valid in any system $\Log X$ of modal logic, $\Entails[X] \Subst{!A}{!B}{!C}$.
+
+For the rule of substitution of logical equivalent, recall that $!A$ and $!B$ are logically equivalent in logic $\Log X$ iff $!A \Entails[X] !B$ and $!B \Entails[X] !A$. In modal logic, that means that in every world of every model (of type $X$), $!A$ and $!B$ have the same value. The rule tells us that when that is the case, replacing one for the other within some complex formula $!C$ will leave the truth-value of the complex formula (in every world in every model) untouched. 
+
+\subsection{Relations between semantics and proof theory}
+
+For our systems of modal logic ($\Log K$, $\Log D$, $\Log T$, $\Log B$, $\Log S4$, $\Log S5$):
+
+\begin{itemize}
+	\item Proof systems for PL are sound. If $\Gamma \Proves[X] !A$ then $\Gamma \Entails[X] !A$.
+	\item Proof systems for PL are complete. If $\Gamma \Entails[X] !A$ then $\Gamma \Proves[X] !A$.
+\end{itemize}
+
+\end{document}

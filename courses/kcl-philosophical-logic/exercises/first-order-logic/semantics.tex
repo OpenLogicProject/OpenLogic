@@ -1,0 +1,95 @@
+% Part: exercises
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{fol}{sem}
+
+\olsection{Semantics}
+
+\begin{prob}[Truth in !!a{structure}]
+Say whether the formulas below are true
+in the following !!{structure}.
+$\Struct{M}=\langle\Domain{M},\AssignSimple{M}\rangle$ with:
+
+$\Domain{M}=\{$Arthur, Balin, Caelia$\}$.
+
+$\Assign{a}{M} =$ Arthur. 
+
+$\Assign{b}{M} =$ Balin.
+
+$\Assign{c}{M} =$ Celia.
+
+$\Assign{\mathord{F}}{M} =\{\langle\mbox{Arthur},\mbox{Arthur}\rangle,\langle\mbox{Arthur},\mbox{Caelia}\rangle,\langle\mbox{Balin},\mbox{Arthur}\rangle,$
+$\langle\mbox{Balin},\mbox{Balin}\rangle,\langle\mbox{Balin},\mbox{Celia}\rangle,$
+$\langle\mbox{Celia},\mbox{Celia}\rangle,\langle\mbox{Celia},\mbox{Arthur}\rangle\}$.
+\begin{enumerate}
+\item $\Atom{F}{b,b}$
+\item $\Atom{F}{a,b}$
+\item $\Atom{F}{c,b}\lor \Atom{F}{b,c}$
+\item $\lforall x\Atom{F}{x,x}$
+\item $\lexists x\lexists y(\Atom{F}{x,y}\land\lnot \Atom{F}{y,x})$
+\item $\lexists x\lexists y(\Atom{F}{x,y}\land \Atom{F}{y,x})$
+\item $\lexists x\lforall y\Atom{F}{x,y}$
+\item $\lexists x\lforall y\Atom{F}{y,x}$
+\item $\lforall x(\lexists y\Atom{F}{x,y}\lif \Atom{F}{x,x})$
+\end{enumerate}
+\emph{Tip: }draw the model!
+\end{prob}
+
+\begin{prob}[Build !!a{structure}]
+For each of the !!{formula}s below, build !!a{structure}
+in which it is true and one in which it is false.
+\begin{enumerate}
+\item $\lexists x(\Atom{G}{x}\land\lnot \Atom{F}{x})$.
+\item $\lforall x\lforall y(\Atom{G}{x,y}\lif \Atom{G}{x,x})$.
+\item $\lexists x\Atom{F}{x}\lif\lforall x(\Atom{F}{x}\lor \Atom{G}{x})$.
+\item $\lforall x\lexists y\Atom{L}{x,y}\lif\lexists y\lforall x\Atom{L}{x,y}$.
+\item $\lforall x\lforall y\lforall z(\Atom{L}{x,y}\lif(\Atom{L}{y,z}\lif \Atom{L}{x,z}))$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Variable assignments]
+Consider the !!{structure} $\Struct{M}=\langle\Domain{M},\AssignSimple{M}\rangle$
+with $\Domain{M}=\{1,2,3\}$ and $\Assign{a}{M}=1$, $\Assign{b}{M}=2$
+, $\Assign{c}{M}=3$, $\Assign{F}{M}=\{2,3\}$, $\Assign{G}{M}=\{\langle1,2\rangle,\langle2,1\rangle,\langle2,2\rangle,\langle2,3\rangle,\langle3,3\rangle\}$. 
+Let $g$ be an assignment such that $g(x)=1$ and $g(y)=3$. Say what
+the following are:
+\begin{enumerate}
+	\item $\Value{a}{M}[g]$
+	\item $\Value{b}{M}[g]$
+	\item $\Value{y}{M}[g]$
+	\item $\Value{x}{M}[g']$, where $\varAssign{g'}{g}{x}[2]$
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{y}[1]$
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{yx}[13]$
+\end{enumerate}
+Now let $g$ be an arbitrary assignement. Say whether the following
+are correct.
+\begin{enumerate}
+	\item $\Value{a}{M}[g]$ is in $\Assign{F}{M}$
+	\item $\Value{b}{M}[g]$ is in $\Assign{F}{M}$
+	\item $\Value{x}{M}[g']$, where $\varAssign{g'}{g}{x}[3]$, is in $\Assign{F}{M}$
+	\item $\Value{y}{M}[g']$, where $\varAssign{g'}{g}{xy}[12]$, is in $\Assign{G}{M}$
+	\item $\langle\Value{a}{M}[g'], \Value{x}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{x}[2]$
+	\item $\langle\Value{x}{M}[g'], \Value{y}{M}[g']\rangle$ is in $\Assign{G}{M}$, with $\varAssign{g'}{g}{xy}[23]$
+	\item $\Sat{M}{Fa}[g]$
+	\item $\Sat{M}{Gbc}[g]$
+	\item $\Sat{M}{\Atom{G}{x,a}}[g']$, where $\varAssign{g'}{g}{x}[2]$
+	\item $\Sat{M}{\eq[a][b]}[g]$
+	\item $\Sat{M}{\eq[c][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$
+	\item $\Sat{M}{\eq/[x][y]}[g']$ where $\varAssign{g'}{g}{xy}[13]$
+	\item $\Sat{M}{\Atom{G}{y,x}}[g']$ where $\varAssign{g'}{g}{xy}[23]$
+	\item $\Sat{M}{\Atom{F}{x}\lif \Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
+	\item $\Sat{M}{\Atom{F}{x}\lif \Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[2]$
+	\item $\Sat{M}{\Atom{F}{x}\lif \Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[3]$
+	\item $\Sat{M}{\lforall x(\Atom{F}{x}\lif \Atom{G}{x,x})}[g]$
+	\item $\Sat{M}{\Atom{G}{x,x}}[g']$ where $\varAssign{g'}{g}{x}[1]$
+	\item $\Sat{M}{\lexists x\Atom{G}{x,x}}[g]$
+\end{enumerate}
+\emph{Tip}: draw the model! 
+\end{prob}
+
+\end{document}

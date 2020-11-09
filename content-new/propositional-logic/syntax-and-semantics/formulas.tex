@@ -1,0 +1,175 @@
+% Part: propositional-logic
+% Chapter: syntax-and-semantics
+% Section: formulas
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pl}{syn}{fml}
+
+\olsection{Propositional \usetoken{P}{formula}}
+
+!!^{formula}s of propositional logic are built up from
+\emph{!!{propositional
+    variable}s}\iftag{prvFalse}{\iftag{prvTrue}{,}{ and} the
+  propositional constant~$\lfalse$}{}\iftag{prvTrue}{\iftag{prvFalse}{
+    and}{} the propositional constant~$\ltrue$}{} using \emph{logical
+  connectives}.
+
+\begin{enumerate}
+\item !!^a{denumerable} set~$\PVar$ of !!{propositional variable}s $\Obj p_0$,
+  $\Obj p_1$, \dots
+\tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+\tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+\item The logical connectives:
+  \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+\item Punctuation marks: (, ), and the comma.
+\end{enumerate}
+
+We denote this language of propositional logic by $\Lang L_0$.
+
+\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}{%
+In addition to the primitive connectives introduced
+above, we also use the following \emph{defined} symbols:
+\startycommalist
+  \iftag{defNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{defAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{defOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{defIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{defIff}{\ycomma $\liff$ (!!{biconditional})}{}%
+  \iftag{defFalse}{\ycomma $\lfalse$ (!!{falsity})}{}%
+  \iftag{defTrue}{\ycomma $\ltrue$ (!!{truth})}.}{}
+
+\begin<defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll>
+  {explain}
+A defined symbol is not officially part of the language, but is
+introduced as an informal abbreviation: it allows us to abbreviate
+formulas which would, if we only used primitive symbols, get quite
+long.  This is obviously an advantage.  The bigger advantage, however,
+is that proofs become shorter.  If a symbol is primitive, it has to be
+treated separately in proofs. The more primitive symbols, therefore,
+the longer our proofs.
+\end{explain}
+
+% Alternate symbols
+
+\begin{intro}
+You may be familiar with different terminology and symbols than the
+ones we use above. Logic texts (and teachers) commonly use either
+$\sim$, $\neg$, and~!\ for ``negation'', $\wedge$, $\cdot$, and $\&$
+for ``conjunction''.  Commonly used symbols for the ``conditional'' or
+``implication'' are $\rightarrow$, $\Rightarrow$, and $\supset$.
+\iftag{prvIff,defIff}{Symbols for ``biconditional,'' ``bi-implication,''
+  or ``(material) equivalence'' are $\leftrightarrow$,
+  $\Leftrightarrow$, and $\equiv$.}{}
+\iftag{prvFalse,defFalse}{The $\lfalse$ symbol is variously called
+  ``falsity,'' ``falsum,'' ``absurdity,'' or ``bottom.''}{}
+\iftag{prvTrue,defTrue}{The $\ltrue$ symbol is variously called
+  ``truth,'' ``verum,'' or ``top.''}{}
+\end{intro}
+
+\begin{defn}[Formula]
+\ollabel{defn:formulas}
+The set~$\Frm[L_0]$ of \emph{!!{formula}s} of propositional logic
+is defined inductively as follows:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+
+\tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+
+\item Every !!{propositional variable}~$\Obj p_i$ is an atomic
+  !!{formula}.
+
+\tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+  !!{formula}.}{}
+
+\tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is a !!{formula}.}{}
+
+\tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+  is a !!{formula}.}{}
+
+\tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
+  is a !!{formula}.}{}
+
+\tagitem{limitClause}{Nothing else is a !!{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+The definition of !!{formula}s is an
+\emph{inductive definition}.  Essentially, we construct the set of
+!!{formula}s in infinitely many stages.  In the initial stage, we
+pronounce all atomic formulas to be formulas; this corresponds to the
+first few cases of the definition, i.e., the cases for
+\iftag{prvTrue}{$\ltrue$, }{}%
+\iftag{prvFalse}{$\lfalse$, }{}%
+$\Obj p_i$.  ``Atomic !!{formula}''
+thus means any !!{formula} of this form.
+
+The other cases of the definition give rules for constructing new
+!!{formula}s out of !!{formula}s already constructed.  At the second
+stage, we can use them to construct !!{formula}s out of atomic
+!!{formula}s.  At the third stage, we construct new formulas from the
+atomic formulas and those obtained in the second stage, and so on.  A
+!!{formula} is anything that is eventually constructed at such a
+stage, and nothing else.
+\end{explain}
+
+\begin<defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll>{defn}
+Formulas constructed using the defined operators are to be understood
+as follows:
+
+\begin{tagenumerate}{defTrue,defFalse,defNot,defOr,defAnd,defIf,defIff,defEx,defAll}
+
+\tagitem{defTrue}{$\ltrue$ abbreviates
+  \iftag{prvFalse}{$\lnot\lfalse$}{$(!A \lor \lnot !A)$ for some
+    fixed atomic !!{formula}~$!A$}.}{}
+
+\tagitem{defFalse}{$\lfalse$ abbreviates
+  \iftag{prvTrue}{$\lnot\ltrue$}{$(!A \land \lnot !A)$ for some
+    fixed atomic !!{formula}~$!A$}.}{}
+
+\tagitem{defNot}{$\lnot !A$ abbreviates $!A \lif \lfalse$.}{}
+
+\tagitem{defOr}{$!A \lor !B$ abbreviates
+  \iftag{prvAnd}{$\lnot(\lnot !A \land \lnot !B)$}{$\lnot !A \lif
+    !B$}.}{}
+
+\tagitem{defAnd}{$!A \land !B$ abbreviates
+  \iftag{prvOr}{$\lnot(\lnot !A \lor \lnot !B)$}{$\lnot (!A \lif
+    \lnot !B)$}.}{}
+
+\tagitem{defIf}{$!A \lif !B$ abbreviates
+  \iftag{prvOr}{$\lnot !A \lor !B)$}{$\lnot (!A \land \lnot !B)$}.}{}
+
+\tagitem{defIff}{$!A \liff !B$ abbreviates $(!A \lif !B) \land (!B
+  \lif !A)$.}{}
+\end{tagenumerate}
+\end{defn}
+
+\begin{defn}[Syntactic identity]
+The symbol $\ident$ expresses syntactic identity between strings of
+symbols, i.e., $!A \ident !B$ iff $!A$ and $!B$ are strings of symbols
+of the same length and which contain the same symbol in each place.
+\end{defn}
+
+The $\ident$ symbol may be flanked by strings obtained by
+concatenation, e.g., $!A \ident (!B \lor !C)$ means: the string of
+symbols~$!A$ is the same string as the one obtained by concatenating
+an opening parenthesis, the string $!B$, the $\lor$ symbol, the
+string~$!C$, and a closing parenthesis, in this order. If this is the
+case, then we know that the first symbol of $!A$ is an opening
+parenthesis, $!A$ contains $!B$ as a substring (starting at the second
+symbol), that substring is followed by $\lor$, etc.
+
+\end{document}

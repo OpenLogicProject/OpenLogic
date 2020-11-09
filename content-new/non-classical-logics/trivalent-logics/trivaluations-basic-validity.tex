@@ -1,0 +1,61 @@
+% Part: normal-modal-logic
+% Chapter: syntax-and-semantics
+% Section: 
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{sbv}
+
+\olsection{Semantics: validity}
+
+In classical logic validity is preservation of $\True$. Here we have two choices. 
+
+\begin{itemize}
+  \item Validity is preservation of $\True$. Strong Kleene $\Log{K_3}$, Łukasiewicz trivalent $\Log{\Luk_3}$. 
+  \item Validity is preservation of $\True$ or $\Indet$. Logic of Paradox $\Log{LP}$, logic $\Log{RM_3}$.
+\end{itemize}
+
+The first choice is natural if we think of $\Indet$ as \emph{neither true nor false} and we want validity to be the preservation of truth. The second choice is natural if we think of $\Indet$ as \emph{both true and false} and we want validity to be the preservation of truth. It is also natural if we think of $\Indet$ as \emph{neither true nor false} but we're interested in validity as the preservation of non-falsehood: logical unfalsehood rather than logical truth. 
+
+\begin{prop}[Trivalent logics are not stronger than classical logic]
+\ollabel{prop:at-most-classical}
+  \item Every trivalent logic $\Log X$ is at most as strong as classical logic. If $\Gamma \Entails[\Log X] !A$ then $\Gamma \Entails[\Log{PL}] !A$.
+\end{prop}
+
+\begin{proof}
+Let $\Log X$ be some trivalent logic. Suppose an argument is not classically valid: $\Gamma \Entails/[\Log{PL}] !A$. There is a classical !!{valuation} $\pAssign{v}$ such that $\pValue{v}{!B} = \True$ for all $!B$ in $\Gamma$ and $\pValue{v}{!A} = \False$. But a classical !!{valuation} is just a special case of a trivalent one. And since our semantics preserve classical values (\olref[ncl][trv][trb]{prop:preservation-classical-values}), in the trivalent logic $\Log X$ we also have $\pValue{v}{!B} = \True$ for all $!B$ in $\Gamma$ and $\pValue{v}{!A} = \False$. So the argument preserves neither truth nor unfalsehood: on either notion of validity, $\Gamma \Entails/[\Log X] !A$. Conversely, if an argument is valid in $\Log X$, it is valid in $\Log{PL}$ too.
+\end{proof}
+
+Trivalent logics are weaker than classical logic: some arguments that are valid in classical logics are not valid in trivalent logics. The differences depend on which notion of validity we use.
+
+\begin{prop}[Sub-classicality]
+\ollabel{prop:sub-classicality} Trivalent logics are strictly weaker than classical propositional logic.
+\begin{itemize}
+  \item The law of excluded middle and the law of non-contradiction fail in $\True$-preservation trivalent logics. (They are valid in $\True$ or $\Indet$-preservation logics.)
+  \item The \emph{ex falso quodlibet} (explosion) and \emph{disjunctive syllogism} arguments fail in $\True$ or $\Indet$-preservation trivalent logics. (They are valid in $\True$-preservation trivalent logics.)
+\end{itemize}
+\end{prop}
+
+\begin{center}
+  \begin{tabular}{|cc|cc|} \hline 
+      & & $\True$-preserving & $\True$ or $\Indet$-preserving \\ \hline
+    Law of excluded middle & $\Entails !A \lor \lnot !A$ & $\times$ & $\surd$ \\ 
+    Law of non-contradiction & $\Entails \lnot (!A \land \lnot !A)$ & $\times$ & $\surd$ \\ 
+    \emph{Ex falso quodlibet} & $!A, \lnot !A \Entails !B$ & $\surd$ & $\times$ \\
+    Disjunctive syllogism & $!A \lor !B, \lnot !A \Entails !B$ & $\surd$ & $\times$ \\
+    \hline 
+  \end{tabular}
+\end{center}
+
+Note that the failure of disjunctive syllogism is also a failure of \emph{modus ponens} when we define $!A \lif !B$ as $\lnot !A \lor !B$.  
+
+\begin{proof}
+For the first, let $\Log X$ be some $\True$-preservation logic. Consider the !!{valuation} $pAssign{v}$ such that $pAssign{v}{\Obj p} = \Indet$. We have $pValue{v}{\Obj{p \lor \lnot p}} = \Indet$ and  $pValue{v}{\Obj{\lnot (p \land \lnot p)}} = \Indet$. So we have $\not \Entails[\Log X] \Obj{p \lor \lnot p}$ and $\not \Entails[\Log X] \Obj{\lnot (p \land \lnot p)}$. By contrast, let $\Log Y$ be some $\True$ or $\Indet$-preservation logic. Let $pAssign{v}$ be some !!{valuation} and $!A$ any !!{formula}. If $pValue{v}{!A} = \True$ or $pValue{v}{!A} = \True$, then $pValue{v}{!A \lor \lnot !A} = \True$ and $pValue{v}{\lnot (!A \land \lnot !A)} = \True$. If $pValue{v}{!A} = \Indet$, then $pValue{v}{!A \lor \lnot !A} = \Indet$ and $pValue{v}{\lnot (!A \land \lnot !A)} = \Indet$. So there is no valuation and no !!{formula} $!A$ on which $!A \lor \lnot !A$ or $\lnot (!A \land \lnot !A)$ receive the value $\False$. So we have $\Entails[\Log Y] \Obj{p \lor \lnot p}$ and $\not \Entails[\Log Y] \Obj{\lnot (p \land \lnot p)}$.
+
+For the second, let $\Log Y$ be some $\True$ or $Indet$-preservation logic. Consider the !!{valuation} $pAssign{v}$ such that $pAssign{v}{\Obj p} = \Indet$ and $pAssign{v}{\Obj q} = \False$. We have $pValue{v}{\Obj{p}} = pValue{v}{\Obj{\lnot p}} = \Indet$ but $pValue{v}{\Obj{q}} = \False$. So $\Obj{p}, \Obj{\lnot p} \not \Entails[\Log Y] \Obj{q}$. We also have $pValue{v}{\Obj{p \lor q}} = \Indet$ and $pValue{v}{\Obj{\lnot q}} = \True$ but $pValue{v}{\Obj{q}} = \False$. So $\Obj{p \lor q}, \Obj{\lnot p} \not \Entails[\Log Y] \Obj{q}$. By contrast, let $\Log X$ be a $\True$-preservation logic. Let $pAssign{v}$ be some !!{valuation} and $!A$ and $!B$ any !!{formula}s. There is no !!{valuation} $pAssign{v}$ such that $pValue{v}{!A} = \True$ and $pValue{v}{\lnot !A} = \True$, so \emph{a fortiori} no !!{valuation} $pAssign{v}$ such that $pValue{v}{!A} = \True$ and $pValue{v}{\lnot !A} = \True$ and $pValue{v}{!B} = \False$. So $!A, \lnot !A \Entails[\Log X] !B$. Moreover, suppose $pAssign{v}$ is such that $pValue{v}{!A \lor !B} = \True$ and $pValue{v}{\lnot !A} = \True$. We have $pValue{v}{!A} = \False$, and when that is so $pValue{v}{!A \lor !B} = \True$ only if $pValue{v}{\lnot !B} = \True$. So $!A \lor !B, \lnot !A \Entails[\Log X] !B$.
+
+\end{proof}
+
+\end{document}

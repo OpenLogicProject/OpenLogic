@@ -1,0 +1,185 @@
+% Part: normal-modal-logic
+% Chapter: discussion
+% Section: Aristotle on future contingents
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{dis}{fco}
+
+\olsection{Aristotle on future contingents}
+
+Aristotle, \emph{On Interpretation}, chap. 9 discusses an argument intended to prove \emph{Fatalism}, the view that everything that happens happens necessarily. The now standard answer to the argument---passed down to us from medieval philosophers---is to say that the argument is ambiguous and loses its force once we recognize its ambiguity. Aristotle reject the conclusion, but he thinks that the argument gives reason to restrict the principle of bivalence---the principle according to which everthing is either true or false. While commentators agree that Aristotle embraces some restriction of bivalence, it's debated exactly what his position is.
+
+\subsection{The paradox and the standard solution}
+
+In ordinary terms we can state the paradox thus:
+
+\begin{itemize}
+	\item Either you're about to die young or you are not.
+	\item If you're about to die young then it must be that you're about to die young. 
+	\item If you're not about to die young then it must be that you're not about to die young.
+	\item So either it must be that you're about to die young, or it must be that you're not.
+\end{itemize}
+
+By generalzing the argument: for everything that will happen one way, it must be that it happens that way.
+
+The standard solution, passed down to us from medieval philosophers, is to distinguish two readings of the conditional premises: 
+
+\begin{itemize}
+	\item \emph{Simple necessity}, or \emph{Necessity of the consequent}. If $!A$ is the case, then $!A$ is a necessity. 
+	\item \emph{Conditional necessity}, or \emph{Necessity of the consequence}. It is a necessity that: if $!A$ is the case, then it is the case.
+\end{itemize}
+
+The idea is that a conditional ``if $!A$ then necessarily $!B$'' can be read in two ways. The first way, called \emph{necessity of the consequent}, ascribes necessity to $!B$ itself, provided that $!A$ is the case. The second way, called \emph{necessity of the consequence} only ascribes necessity to the `link' between $!A$ and $!B$, not to $!B$ itself. In modern notation the distinction is easy to see:
+
+\begin{itemize}
+	\item \emph{Necessity of the consequent}, or \emph{Narrow-scope reading}. $!A \lif \Box !B$.
+	\item \emph{Necessity of the consequence}, or \emph{Wide-scope reading}. $\Box (!A \lif !B)$.
+\end{itemize}
+
+In possible-world terms, the first claim tells us that in $!A$ is true, then there is no possible world where $!B$ is false. The second claim tells us that there is no possible world where $!A$ is true but $!B$ false. These are two distinct claims. Consider "If I am an academic philosopher, I must be an academic''. It is true that I am an academic philosopher, but it could have failed to be an academic. So the narrow-scope reading is false. But it couldn't have been that I am an academic philosopher that is not an academic. So the wide-scope reading is true. 
+
+\paragraph*{Wide-scope reading} With the wide-scope (``necessity of the consequence'') reading, the fatalist argument is:
+
+\begin{enumerate}
+	\item $\Obj{p \lor \lnot p}$.
+	\item $\Obj{\Box (p \lif p)}$.
+	\item $\Obj{\Box (\lnot p \lif \lnot p)}$.
+	\item $\Obj{\Box p \lor \Box \lnot p}$.
+\end{enumerate}
+
+In this version the premises are correct. But the conclusion doesn't follow. We can see that in a model with two worlds, one where $\Obj P$ is true and one where $\Obj P$ fails, each accessible to each other. At each world all the premises are true but the conclusion false. 
+
+\paragraph*{Narrow-scope reading} With the narrow-scope (``necessity of the consequent'') reading, the fatalist argument is:
+
+\begin{enumerate}
+	\item $\Obj{p \lor \lnot p}$.
+	\item $\Obj{p \lif \Box p}$.
+	\item $\Obj{\lnot p \lif \Box \lnot p}$.
+	\item $\Obj{\Box p \lor \Box \lnot p}$.
+\end{enumerate}
+
+In this version the conclusion follows from the premises, by modus ponens and disjunction elimination. But the second are third premises are now dubious. On the face of it, there are counterexamples: it rained today but it could have failed to rain. So to accept that argument, we would need some reason to think that if something is so, it is necessarily so. But note that this is just a statement of fatalism. So either the fatalist gives us an independent reason to endorse that, and the argument isn't needed, or they don't, and the argument doesn't help them because we don't have reason to accept the argument's premises. Either way, the argument is without force.
+
+We can spell out a model where the premises are false. Again, we use two worlds, one where $\Obj P$ is true and one where $\Obj P$ fails, each accessible to each other. At the $\Obj P$ world $\Obj {p \lif \Box p}$ fails and at the $\Obj{\lnot P}$ world $\Obj{\lnot p \lif \Box \lnot p}$ fails. Note that providing a model alone doesn't refute the premises. For the fatalist could object that our models don't capture all aspects of metaphysical necessity. She would say that a proper model for metaphysical necessity would impose that every world has access to itself alone. (Similarly, the fact that we can write up models where the formula $\Box !A \lif \Box \Box !A$ fails isn't enough to refute the principle that everything that is metaphysically necessary is necessarily necessary.) What providing a model does, however, is to show that these premises are a substantial further assumption, and that they don't follow from other less controversial principles of modal logic (such as duality, the claim that if $!A$ is not possible then not-$!A$ is necessary, etc.). 
+
+The standard solution is to distinguish the two readings and claim that the narrow-scope reading is false, and merely seems plausible because we confuse it with the wide-scope one. 
+
+\subsection{The paradox in Aristotle's text}
+
+We quote from the Ackrill's translation in Barnes (ed) The complete works of Aristotle. Note that in Aristotle's versions, as opposed to ours, the premises make explicit references to the notion of truth.
+
+\paragraph*{The paradoxical reasoning}
+
+In the passage below Aristotle presents the argument for Fatalism. Note that he doesn't himself endorse the argument. We number the claims for easier reconstruction:
+
+\begin{quote}
+	(A) if every affirmation or negation is true or false it is necessary for everything either to be the case or not to be the case. For (B) if one person says that something will be and another denies this same thing, it is clearly necessary for one of them to be saying what is true (...). It follows that (C) nothing either is or is happening, or will be or will not be, by chance or as chance has it, but everything of necessity and not as chance as it (since either he who says or he who denies is saying what is true). For (D) otherwise it might equally well happen or not happen, since what is as chance has it is no more thus than not thus, nor will it be. (18a-18b16)
+\end{quote}
+
+The structure is:
+
+\begin{quote}
+(A). For (B). It follows that (C). For (D). 
+\end{quote}
+
+So (B) supports (A) and (A) and (D) together support (C), which is the main conclusion. There is also an implicit premise connecting the idea that something is true and that something is ``more so than not so''. Putting that together:
+
+\begin{itemize}
+	\item (A) If someone affirms something and another denies it, then necessarily one them is speaking truly.
+	\item By (A), if every affirmation is either true or false, then necessarily, for everything, either that thing is the case or it isn't the case.
+	\item (D) If something is contingent or happening by chance, then it is no more so than not so. 
+	\item (Implicit premise) If something is so, it is more so than not so. (implicit premise)
+	\item By (B), (D) and (Implicit premise), everything that is so is necessarily so.
+\end{itemize}
+
+It's not clear how (A) supports (B). But (B) is plausible enough on its own. The premises (3) and (4) says that if something is so, it is ``more so than not so'', and if something is ``more so than not so'' it cannot be contingent or chancy. We can lump them in one claim: if something is so, then it is necessarily so. It's also easier to state the argument by focusing on an arbitrary affirmation, say, that there will be a sea-battle tomorrow. We get the simpler argument:
+
+\begin{itemize}
+	\item If everything is true or false, it is necessary that either it is the case that there will be sea-battle tomorrow or it is not.
+	\item If if it is the case that there will be a sea-battle tomorrow, it is necessary that there will be a sea-battle tomorrow. 
+	\item If it it not the case that there will be a sea-battle tomorrow, it is necessary that there will not be a sea-battle tomorrow.
+	\item By the above, it is either necessary that there will be a sea-battle tomorrow or necessary that there will not be a sea-battle tomorrow.
+\end{itemize}
+
+When stated thus we see that the first premise is superfluous:
+
+\begin{itemize}
+	\item $p$ or not-$p$ is true.
+	\item If $p$ is true it is necessary that $p$. 
+	\item If not-$p$ is true is necessary that not-$p$.
+	\item By the above, it is necessary that $p$ or it is necessary that not-$p$.
+\end{itemize}
+
+The next paragraph in the chapter states the argument again, in a slightly different form:
+
+\begin{quote}
+	Again, (A) if it is white now it was true to say earlier that it would be white, so that it was always true to say of anything that has happened that it would be so. But (B) if it was always true to say that it was so, or would be so, it could not not be so, or not going to be so. But (C) if something cannot not happen it is impossible for it not to happen; and if it is impossible for something not to happen it is necessary for it to happen. And (D) if it is impossible for something not to happen it is necessary for it to happen. (E) Everything that will be, therefore, hapens neceessarily. So nothing will come about as chance has it or by chance; ofr if by chance, not of necssity. (18a29-18b16)
+\end{quote} 
+
+By contemporary lights (C) and (D) are fairly uncontroversial conversions (what cannot be is impossible, what is impossible not to happen necessarily happens). The core of the argument is (A)-(B). We can reconstruct them and simplify as follows:
+
+\begin{itemize}
+	\item If $p$, it was always true to say that $p$.
+	\item If it was always true to say that $p$, then it was necessary that $p$.
+	\item By the above, if $p$ then it is necessary that $p$. 
+\end{itemize}
+
+\paragraph*{The `neither true' solution}
+
+Aristotle considers first a solution that he ultimately rejects:
+
+\begin{quote}
+	Nor, however, can we say that (A) \emph{neither} is true---that it neither will be or will not be so. For, firstly, (B) though the affirmation is false the negation is not true, and though the negation is false the affirmation, on this view, is not true. Moreover, (C) if it is true to say that something is white and large, both have to hold of it, and if true that they will hold tomorrow, they will have to hold tomorrow, and if neither will be nor will be the case tomorrow, then there is no `as chance has it'. Take a sea-battle: it would \emph{have} neither to happen nor not to happen. 
+\end{quote}
+
+The rejected solution states that when it comes to future contingents, ``there will be a sea-battle tomorrow'' is not true, but that ``there will not be a sea-battle tomorrow'' is not true either (A). As the following sentence indicates, Aristotle equates ``not true'' and ``false'', so the target view also takes both to be false.
+
+Aristotle presents two objections. (B) is that the view must deny the principle that if an affirmation is false, the corresponding negation is true, and vice-versa. 
+
+(C) is less clear. On one reading it argues that the view is committed to a contradiction: it's not the case that there will be a sea-battle, and it's not the case that it's not the case that there will be a sea-battle ($\Obj{\lnot p}$ and $\Obj {\lnot \lnot p}$). On another reading Aristotle is arguing here using the principle that if something is false, then it is necessarily false. (Either because he's ultimately endorsing it, or because it's part of the paradoxical reasoning and Aristotle wants to point out that with that premise the Fatalist can still create trouble for the `neither true' solution. )
+
+\subsection{Aristotle's solution}
+
+Aristotle announces his solution at the beginning of the chapter:
+
+\begin{quote}
+	With regard to what is and what has been it is necessary for the affirmation or the negation to be true or false. (...) But with particulars that are going to be it is different. (18a29-34)
+\end{quote}
+
+By ``particulars that are going to be'' Aristotle means particular facts about the future, like whether there will be a sea-battle tomorrow. He makes clear that for past and present facts, he accepts the principle that ``it is necessary for the affirmation or the negation to be true or false''. But he doesn't accept this principle for all future facts. 
+
+His solution is presented in a dense passage at the end of the chapter:
+
+\begin{quote}
+	What is, necessarily is, when it is; and what is not, necessarily is not, when it is not. But not everything that is, necessarily is; and not everything that is not, necessarily is not. For to say that everything that is, is of necessity, when it is, is not the same as saying unconditionally that it is of necessity. Similarly with what is not. And the same account holds of contradictories: everyhthing necessarily is or is not, and will be or will not be; but one cannot divide and say that one or the other is necessary. I mean, for  example: it is necessary for there to be or not to be a sea-battle tomorrow; but it is not necessary for a sea-battle to take place or not to take place. So, since statements are true according to how the actual things are, it is clear that where these are such as to allow of contraries as chance has it, the same necessarily holds for the contradictories also. This happens with things that are not always so or are not always not so. With these it is necessary for one or the other of the contradictoires to be true or false---not, however, this one or that one, but as chance has it; or for one to be true \emph{rather} than the other, yet not \emph{already} true all false. \\
+	Clearly, then, it is not necessary that of every affirmation and opposite negation one should be true and the other false. For what holds of things that are does not hold for things that are not but may possibly be or not be. (19a24-19b1)
+\end{quote}
+
+Focus on this version of the argument:
+
+\begin{itemize}
+	\item (A) Necessarily, there will be or not be sea-battle tomorrow.  
+	\item (B) If if it is the case that there will be a sea-battle tomorrow, it is necessary that there will be a sea-battle tomorrow. 
+	\item (C) If it it not the case that there will be a sea-battle tomorrow, it is necessary that there will not be a sea-battle tomorrow.
+	\item (D) By the above, it is either necessary that there will be a sea-battle tomorrow or necessary that there will not be a sea-battle tomorrow.
+\end{itemize}
+
+Clearly, Aristotle intends to accept (A) but still deny (D). (``I mean, for  example: it is necessary for there to be or not to be a sea-battle tomorrow; but it is not necessary for a sea-battle to take place or not to take place.'' and ``it is necessary for one or the other of the contradictoires to be true or false---not, however, this one or that one, but as chance has it; or for one to be true \emph{rather} than the other''). So he must either reject the form of inference (disjunction elimination) or one of the premises (B) and (C). It's clear that he intends to reject (B) and (C). He does so in the first two sentences, where he distinguishes somewhat cryptically between two claims:
+
+\begin{itemize}
+  	\item everything that is, is of necessity.
+  	\item what is, necessarily is, when it is. 
+\end{itemize}
+
+He adds that the former attributes necessity ``unconditionally'', while the latter doesn't---hence presumably attributes necessity ``conditionally''. But what does Aristotle mean by that? Suppose he merely meant: the latter says that \emph{provided that} there will be a sea-battle tomorrow, it is necessary that there will be one. While this only ascribes necessity to $p$ on the condition that $p$ is the case, it still ends up saying that if $p$ is in fact the case, then it happens of necessity, as (B) and (C) in the original argument. So that would not help in avoiding the solution. 
+
+Is Aristotle making the medieval (and now standard) distinction between necessity of the consequent and necessity of the consequence? While it's tempting to say so, that cannot be right. For Aristotle thinks he has to deny that ``it is necessary that of every affirmation and opposite negation one should be true and the other false''. If he adopted the medieval solution he wouldn't have to do so.
+
+Aristotle doesn't seem to deny that if something is true, is necessary. Rather, he seems to concede to the fatalist that \emph{once} something is so, then it is necessarily so (``What is, necessarily is, when it is;''). But what about \emph{before}? He can't say that one of affirmation or the negation is true like statements about the past are, because by his own lights, that would mean that one of them is necessarily true. He can't say that neither is true, because that's the ``neither true'' solution is rejects. So what is his view? Some commentators say that Aristotle's view is that these statements lack truth-value; others that he thinks true statements about future contingent are true in a different way (``as chance as it'') from true statements about the past. 
+
+See XXX Knuttilla in SEP. 
+
+\end{document}

@@ -1,0 +1,188 @@
+% License box
+
+\newcommand*{\kcluselicense}[2]{%
+\begin{minipage}[b]{.9cm}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/cc}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/by}
+  \includegraphics[width=.9cm]{assets/logos/nc}
+  \includegraphics[width=.9cm]{\olpath/assets/logos/remix}
+\end{minipage}
+\hspace{.3cm}
+\begin{minipage}[b]{5cm}
+  \ollicensefont
+  \textit{#1} by #2 is licensed under a
+  \href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
+    Attribution-NonCommercial 4.0 International License}. It is based on
+  \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
+      Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
+    Project}, used under a
+  \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
+    Attribution 4.0 International License}.
+\end{minipage}
+\hfill
+\begin{minipage}[b]{2.7cm}
+  \href{https://www.kcl.ac.uk/philosophy}{\includegraphics[width=2.7cm]{assets/logos/KCL-Logo.png}}\\
+  \vspace{.3cm}
+  \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}
+\end{minipage}
+}
+
+% Logical symbols
+% ---------------
+
+% ### Truth Values
+%
+% - `\True` and `\False`. Note: 1 and 0 can't be used with  
+% signed tableaus for modal logic, they are unreadable.
+
+\DeclareDocumentMacro \Gap {\mathbb{N}}
+\DeclareDocumentMacro \Glut {\mathbb{B}}
+
+% ### Propositional Constants and Connectives
+
+% - Negation is `\lnot`
+
+\DeclareDocumentMacro \lnot {\mathord{\sim}}
+
+
+% - Existence operator in free logic
+
+\DeclareDocumentMacro \lfrexists {\mathord{\mathfrak{E}}}
+
+% Trivalent logics
+
+\DeclareDocumentMacro \Luk {\text{\L}}
+
+% cannot use \L in hyphenation: "not a letter"
+% \hyphenation{\L u-ka-sie-wicz}
+
+
+% Metalogical Relations
+% ---------------------
+
+% ### Model-theoretic notions and symbols
+
+% - `\Domain{M}` - domain of a structure, e.g., `\Domain{M}` gives
+% $D_{\mathfrak{M}}$.
+
+\DeclareDocumentCommand \Domain { m }{ D_{\Struct{#1}} }
+
+% - `\Assign{R}{M}` - Assignment (value) of a constant/predicate symbol
+% in a structure; e.g., `\Assign{R}{M}` produces $I_{\mathfrak{M}}(R)$.
+
+\DeclareDocumentCommand \Assign { m m }{ I_{\Struct{#2}}(#1) }
+
+\DeclareDocumentCommand \AssignSimple { m } { I_{\Struct{#1}} } % used in some exercises
+
+% - `\varAssign{s'}{s}{x}[o]` - Assignment variant. States that s' is 
+% an assignement that differs from s at most at x (and, optionally assigns o)
+% to x
+
+\DeclareDocumentCommand \varAssign { m m m o } {
+    \IfNoValueTF {#4}
+        % optional argument not present
+        { #1 \approx_{#3} #2 }
+        % optional argument present
+        { #1 = #2^{#3}_{#4} }
+}
+
+% - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
+% arguments (term and structure) and one optional argument (variable
+% assignment). By default, `\Value{t}{M}[s]` produces 
+% $\mathrm{Val}^\mathfrak{M}_s(t)$.
+
+\DeclareDocumentCommand \Value { m m o} {
+    \IfNoValueTF {#3}
+        % optional argument not present
+        { \left| \mathord{#1} \right|_{\Struct{#2}} }
+        % optional argument present
+        { \left| \mathord{#1} \right|_{\Struct{#2}}^{#3} }
+}
+
+% - `\pAssign{v}` - Typeset a truth-value assignment (default is mathfrak)
+
+\DeclareDocumentCommand \pAssign { m } { #1 }
+
+
+% other typesetting
+
+% - `\Propobj` - Object-language symbols in propositional logic. Default: uppercase
+% \DeclareDocumentCommand \Propobj { m }{ \uppercase{\Obj{#1}} }
+% PROBLEM: not only you need to rewrite propositional logic, but you need to take care of the tableaus section. 
+
+% - `\Obj` - Object-language symbols; default: set entirely in
+% sans-serif italics
+
+\DeclareDocumentCommand \Obj { m }{\mathsf{#1}}
+
+%  - `\Atom{P}{t_1, t_2}` - Atomic formula or term; default produces
+%  predicate symbol followed by arguments separated by commas and surrounded by
+%  parentheses. Redefined to remove the commas and parentheses.
+
+\makeatletter
+\DeclareDocumentCommand \Atom { m m }{ \mathord{\Obj #1}\@for\i:=#2\do{\i}}
+\makeatother
+
+%\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}#2 } % this only removes the parentheses, not the commas
+
+% - `\pValue{v}{A}[L]` - Truth value of a formula under a truth-value assignment.
+
+\DeclareDocumentCommand \pValue { m d() o}{
+\IfNoValueTF {#2} {%
+  |\cdot|_\pAssign{#1}\IfNoValueTF{#3}{}{^{#3}}%
+  }{%
+  |#2|_\pAssign{#1}\IfNoValueTF{#3}{}{_{#3}}%
+  }
+}
+
+% Terminology
+
+\settexttoken{constant}{constant}{constants}
+
+\settexttoken{enumerable}{countable}{countable}
+\settexttoken{nonenumerable}{uncountable}{uncountable}
+\settexttoken{denumerable}{countably infinite}{countably infinite}
+\settexttoken{valuation}{interpretation}{interpretations}
+\settexttoken{propositional variable}{sentence letter}{sentence letters}
+
+\settexttoken{sentence}{closed formula}{closed formulas}
+
+\settexttoken{constant}{constant}{constants} % default is `constant symbol`
+\settexttoken{predicate}{predicate}{predicates} % default is `predicate symbol`
+\settexttoken{function}{function}{functions} % default is `function`
+
+% structure: term for first-order structures
+\settexttoken{structure}{model}{models}
+
+%
+% Tags: choice of material
+%
+
+% defined connectives: verum, biconditional
+\tagtrue{defIff,defTrue}
+\tagfalse{prvIff,prvTrue}
+
+% proof systems: tableaus only
+\tagfalse{prfSC,prfND,prfAX} 
+\tagtrue{prfTab}
+
+% reader category: novice, math, phil, no compsci
+
+\tagtrue{novice,math,compsci}
+\tagfalse{phil}
+
+% 
+% custom tags
+%
+
+% tag for function terms in first-order logic
+
+\tagfalse{fnTerms}
+
+% tag for a syntactic identity operator
+%
+%\tagfalse{synIdOp}
+
+% tag for hiding answers
+
+\tagtrue{hideAns}

@@ -1,0 +1,34 @@
+% Part: exercises
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{fol}{pft}
+
+\olsection{Proof theory}
+
+\begin{prob}[Tableau proofs]
+Give tableau proofs of the following:
+\begin{enumerate}
+\item $\Proves\lforall x\Atom{F}{x}\lif\lforall y\Atom{F}{y}$.
+\item $\Proves \Atom{F}{a}\lif\lexists x\Atom{F}{x}$.
+\item $\Proves\lforall x\Atom{F}{x}\lif\lforall y(\Atom{F}{y}\lor Gy)$.
+\item $\Proves\lexists x\Atom{F}{x}\lif\lexists y\Atom{F}{y}$.
+\item $\lforall x\Atom{F}{x},\lforall x(\Atom{F}{x}\lif \Atom{G}{x})\Proves\lforall x\Atom{G}{x}$.
+\item $\lforall x(\Atom{F}{x}\lif \Atom{G}{x}),\lforall x(\Atom{G}{x}\lif \Atom{H}{x})\Proves\lforall x(\Atom{F}{x}\lif \Atom{H}{x})$.
+\item $\Proves\lforall x(A! \lif B!)\lif(\lforall x A!\lif\lforall x B!)$.\\
+\emph{Tip}. This is a schema rather than a formula. You'll give a
+``proof schema'', which is just like a normal tableau but using
+greek letters instead, that can stand for any variable / formula whatsoever.
+\item $\lforall x\Atom{F}{x},\lexists x\Atom{G}{x}\Proves\lexists x(\Atom{F}{x}\land \Atom{G}{x})$.
+\item $\Proves\lforall x\Atom{G}{a,x}\lif\lforall x\lexists y\Atom{G}{y,x}$.
+\item $\lexists x\lforall y\Atom{G}{x,y}\Proves\lforall y\lexists x\Atom{G}{x,y}$.
+\item $\lforall x\lforall y(\Atom{G}{x,y}\lif\lnot \Atom{G}{y,x})\Proves\lforall x\lnot \Atom{G}{x,x}$.
+\item $\lexists x\Atom{G}{a,x},\lforall y(\Atom{G}{a,y}\lif\lforall z\Atom{G}{z,y})\Proves\lexists x\lforall z\Atom{G}{z,x}$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

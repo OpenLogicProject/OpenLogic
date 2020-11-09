@@ -1,0 +1,116 @@
+% Part: normal-modal-logic
+% Chapter: discussion
+% Section: paradoxes-of-strict-implication
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{dis}{psi}
+
+\olsection{Paradoxes of strict implication}
+
+In modal logic we can define a strict conditional $\strictif$. We can introduce it as a separate symbol and give it the following semantics:
+
+\begin{quote}
+\indcase{!A}{!B \strictif !C}{$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w']$ or $\mSat{M}{!C}[w']$  for all $w' \in W$ with $Rww'$}.
+\end{quote}
+
+
+Or we can define it as an abbreviation:
+
+\begin{quote}
+$!A \strictif !B$ is a shorthand for $\Box(!A \lif !B)$.
+\end{quote}
+
+\begin{prob}
+Check that the two definitions of $\strictif$ are equivalent.
+\end{prob}
+
+Note that, unlike material implication $\lif$, the exact meaning of this conditional is underspecified. Given its semantics $!A \strictif !B$ says that every accessible $!A$ world is a $!B$ world. So its meaning depends on how we think of `worlds` and `accessibility'. Still without specifying it further we can know that any conditional along those lines has two features:
+
+\begin{enumerate}
+	\item it obeys the logic of $!A \strictif !B$,
+	\item it relates necessity and conditionals: namely, if the indicative conditional is a strict implication ``necessary $!A$ is not so or $!B$ is so'' should be equivalent to ``if $!A$ then $!B$''.
+\end{enumerate}
+
+Moreover, it makes sense to assume that the relevant notion of necessity is one on which what's necessary is true. In our semantics this corresponds to accessibility being \emph{reflexive}. What this gives us is that the strict implication entails the material one:
+
+\begin{quotation}
+$!A \strictif !B \Entails !A \lif !B$.
+\end{quotation}
+
+We'll see below why this makes sense: it ensures that the modus ponens rule holds for our conditional.
+
+We'll call \emph{strict conditional account} the view that the indicative conditional in natural language is a strict conditional. How does it fare?
+
+\paragraph*{In favour of the strict implication account}
+
+The natural language conditional seems to obey the \emph{modus ponens} rule. So a good account of it should make this rule valid. Fortunately, the strict implication account does so. For we've seen that a conditional that entails material implication preserves modus ponens. And we've seen that strict implication entails material implication (given the assumption that what's necessary is true).
+
+Furthermore, the strict implication conditional does \emph{not} have the features that generated the paradoxes of material implication:
+
+\begin{enumerate}
+	\item $!A \Entails !B \strictif !A$.
+	\item $\lnot !B \Entails !B \strictif !A$.
+	\item $\lnot (!A \strictif !B) \Entails \lnot !A$.
+	\item $(!A \land !B) \strictif !C \Entails (!A \strictif !C) \lor (!B \strictif !C)$.
+\end{enumerate}
+
+Finally, the account fares better with the particular cases where the material implication account seemed to go wrong. Example: vegetarian Alice case, ``if she's had lunch she had meat'' comes out false even if she didn't have lunch.
+
+\paragraph*{Paradoxes of strict implication}
+
+It is easy to check that the following hold:
+
+\begin{enumerate}
+	\item $\Box !A \Entails/ !B \strictif !A$.
+	\item $\lnot \Diamond !B \Entails/ !B \strictif !A$.
+	\item $\Entails (!A \land \lnot !A) \strictif !B$.
+\end{enumerate}
+
+These are sometimes called ``paradoxes of strict implication". Are these problematic? For the purposes of discussion we assume that all mathematical truths are (in the relevant sense) necessary. Priest highlights two objections.
+
+\emph{Missing-link conditionals}.
+
+\begin{itemize}
+	\item Necessarily, 2 and 2 equals 4. So if Brisbane is in Australia then 2 and 2 equals 4. 
+	\item It's impossible that 2 and 2 equals 5. So if 2 and 2 equals 5 then Brisbane is in Australia.
+\end{itemize}
+
+They illustrate the first and second pattern above. Some would say that are incorrect. If so, a strict implication analysis is mistaken.
+
+It's not clear that the inference patterns are wrong. For the first, consider:
+
+\begin{itemize}
+	\item Necessarily, 2 and 2 equals 4. 
+	\item So, whether or not Brisbane is in Australia, 2 and 2 equals 4.
+	\item So, even if Brisbane is in Australia, 2 and 2 equals 4.
+	\item So, if Brisbane is in Australia, 2 and 2 equals 4. 
+\end{itemize}
+
+You may think that every step here is right. If so, the inference we started with is fine too. A similar reasoning can be used to defend the second. 
+
+Those who claim that the inferences are right need to explain why they seem wrong (to some people at least). A standard way to do so is to appeal to pragmatics: when we assert ``if $!A$ then $!B$'' we suggest that there is causal or explanatory a link between the antecedent and consequent, but that suggestion is not part of what the claim literally asserts. Since there is such connection between the location of Brisbane and the mathematical fact that 2 and 2 equals 4, the suggestion is false in the case above. Because of that, the story goes, it feels wrong to assert the conditionals (because doing so would suggest something false). But, on that story, these conditionals are literalu true.
+
+\emph{Explosion}. 
+
+One of the strongest objection to the strict implication account arises from the third inference pattern. This inference pattern tells us that every conditional with a contradictory antecedent is true. For instance, it tells us that the following is true:
+
+\begin{itemize}
+	\item If the door is closed and it isn't closed then Brisbane is not in Australia.
+\end{itemize}
+
+On the strict implication view, these kinds of conditionals would be true. And it would be true no matter what its consequent is. But (some may argue), these conditionals are not true.
+
+One problem with these conditionals is that they lack a ``link'' between antecedent and consequent. 
+
+Another problem is that combined with modus ponens, they tell us that from contradictory supposition everything follows (``ex falso quodlibet'' aka as ``explosion rule''). But, some have argued, we often reason from contradictory assumptions and not everything goes. Priest proposes three examples:
+
+\begin{itemize}
+	\item Certain scientific assumptions are contradictory. For example, we may work out a question in physicsby reasoning as if the Earth was a point, had a positive weight but also deny that they are infinitely dense objects. These assumptions are jointly contradictory, but still we may argue that there are some conclusions to draw from them that are correct and others that are wrong. 
+	\item Some legal systems are contradictory. For instance, one part of the law may say that people above 70 year-orld are entitled to free health care, another part that billionaires are not entitled to free health care. If Alice is an old billionaire, it follows from the legal system that she is and is not entitled to free health care: a contradiction. One may argue, however, that we can reason within this legal system without accepting that everything is forbidden, for instance.
+	\item Some contents of experience (illusions or hallucinations) are contradictory, as in Escher drawings. Yet we can still intuitively distinguish some things they entail from others they don't. If the distinction makes sense, it cannot be that they entail everything. 
+\end{itemize}
+
+\end{document}

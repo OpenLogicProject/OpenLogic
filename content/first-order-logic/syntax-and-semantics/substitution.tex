@@ -12,7 +12,7 @@
 
 \begin{defn}[Substitution in a term]
 We define $\Subst{s}{t}{x}$, the result of \emph{substituting} $t$
-for every occurrence of~$x$ in $s$, recursively:
+for every occurrence of~$x$ in $s$\iftag{fnTerms}{, recursively}{}:
 \begin{enumerate}
 \item \indcase{s}{c}{$\Subst{\indfrm}{t}{x}$ is just $s$.}
 
@@ -21,8 +21,10 @@ for every occurrence of~$x$ in $s$, recursively:
 
 \item \indcase{s}{x}{$\Subst{\indfrm}{t}{x}$ is~$t$.}
 
-\item\indcase{s}{\Atom{f}{t_1, \dots, t_n}}{$\Subst{\indfrmp}{t}{x}$ is
+\tagitem{fnTerms}{%
+  \indcase{s}{\Atom{f}{t_1, \dots, t_n}}{$\Subst{\indfrmp}{t}{x}$ is
   $\Atom{f}{\Subst{t_1}{t}{x}, \dots, \Subst{t_n}{t}{x}}$.}
+  }{}
 \end{enumerate}
 \end{defn}
 
@@ -37,8 +39,8 @@ binds a variable in~$t$.
 \item $\Obj v_8$ is free for $\Obj v_1$ in $\lexists[\Obj
   v_3]\Atom{\Obj A^2_4}{\Obj v_3,\Obj v_1}$
 
-\item $\Obj f^2_1(\Obj v_1, \Obj v_2)$ is \emph{not} free for $\Obj
-  v_0$ in $\lforall[\Obj v_2]\Atom{\Obj A^2_4}{\Obj v_0,\Obj v_2}$
+\tagitem{fnTerms}{$\Obj f^2_1(\Obj v_1, \Obj v_2)$ is \emph{not} free for $\Obj
+  v_0$ in $\lforall[\Obj v_2]\Atom{\Obj A^2_4}{\Obj v_0,\Obj v_2}$.}{}
 \end{enumerate}
 \end{ex}
 

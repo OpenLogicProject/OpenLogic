@@ -1,0 +1,238 @@
+% Part: propositional-logic
+% Chapter: discussion
+% Section: overview
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{mod}{dis}{mts}
+
+\olsection{Modal Tableaux Cheatsheet}
+
+\subsection{Rules for K}
+
+\begin{center}
+$\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\True}{\lnot}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\False}{\lnot}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \DisplayProof
+    \\[1ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\land}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\True}{!B}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\land}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\False}{!B}[\sigma]$}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lor}}
+    \UnaryInfC{$\sFmla{\True}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lor}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lif}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid
+      \quad \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lif}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+\end{array}$
+\end{center}
+
+\subsection{Additional rules}
+
+\begin{center}
+	\begin{tabular}{lll}
+      \hline
+      Logic & $R$ is \dots & Rules\\
+      \hline
+      $\Log{D} = \Log{KD}$ & serial &
+      \iftag{prvBox}{D$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{D$\Diamond$}{}
+      \\ \hline
+      $\Log{T} = \Log{KT}$ & reflexive &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}
+      \\ \hline
+      $\Log{B} = \Log{KTB}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{}\\
+      & symmetric &
+      \iftag{prvBox}{B$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{B$\Diamond$}{}
+      \\ \hline
+      $\Log{S4} = \Log{KT4}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{},\\
+      & transitive &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{}
+      \\ \hline
+      $\Log{S5} = \Log{KT4B}$ & reflexive, &
+      \iftag{prvBox}{T$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{T$\Diamond$}{},\\
+      & transitive, &
+      \iftag{prvBox}{4$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4$\Diamond$}{},\\
+      &  euclidean &
+      \iftag{prvBox}{4r$\Box$}{}%
+      \iftag{notprvBox,notprvDiamond}{}{, }%
+      \iftag{prvDiamond}{4r$\Diamond$}{}
+      \\ \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \iftag{notprvBox,notprvDiamond}
+          {\begin{tabular}{|c|}}
+          {\begin{tabular}{|c|c|}}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{T$\Box$}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{T$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{D$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Diamond!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{D$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Box!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma.n]}
+      \RightLabel{B$\Box$}
+      \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma.n]}
+      \RightLabel{B$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma]}
+      \RightLabel{4$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Box!A}[\sigma.n]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma]}
+      \RightLabel{4$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Diamond!A}[\sigma.n]}
+      \DisplayProof}{}
+    \\
+    \iftag{notprvBox,notprvDiamond}
+         {$\sigma.n$ is used}
+         {$\sigma.n$ is used & $\sigma.n$ is used}
+    \\[1ex]
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[\sigma.n]}
+      \RightLabel{4r$\Box$}
+      \UnaryInfC{\sFmla{\True}{\Box!A}[\sigma]}
+      \DisplayProof}{}
+    \iftag{notprvBox,notprvDiamond}{}{&}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\False}{\Diamond !A}[\sigma.n]}
+      \RightLabel{4r$\Diamond$}
+      \UnaryInfC{\sFmla{\False}{\Diamond!A}[\sigma]}
+      \DisplayProof}{}
+    \\[1ex]
+    \hline
+\end{tabular}
+\end{center}
+
+\subsection{Simplified S5 rules}
+
+  \begin{center}
+    \def\arraystretch{3}\def\fCenter{}
+    \begin{tabular}{|c|c|}
+    \hline
+    \iftag{prvBox}{
+      \AxiomC{\sFmla{\True}{\Box !A}[n]}
+      \RightLabel{\TRule{\True}{\Box}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Box !A}[n]}
+      \RightLabel{\TRule{\False}{\Box}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ is used & $m$ is new
+      \\[1ex]
+      \hline}{}
+    \iftag{prvDiamond}{
+      \AxiomC{\sFmla{\True}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\True}{\Diamond}}
+      \UnaryInfC{\sFmla{\True}{!A}[m]}
+      \DisplayProof
+      &
+      \AxiomC{\sFmla{\False}{\Diamond !A}[n]}
+      \RightLabel{\TRule{\False}{\Diamond}}
+      \UnaryInfC{\sFmla{\False}{!A}[m]}
+      \DisplayProof\\
+      $m$ is new & $m$ is used
+      \\[1ex]
+      \hline}{}
+    \end{tabular}
+\end{center}
+
+\end{document}

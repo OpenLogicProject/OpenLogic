@@ -1,0 +1,82 @@
+% Part: non-classical-logics
+% Chapter: trivalent-logics
+% Section: determinacy
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{ncl}{trv}{det}
+
+\olsection{Trivalent logics with determinacy}
+
+One extension of trivalent logics is to introduce an \emph{determinacy operator} $\Delta$. Intuitively $\Delta !A$ is read as `$!A$ is determinately the case'. Its semantics is given by the following table:
+
+\begin{center}
+  \begin{tabular}{|c||c|} \hline 
+    $!A$ & $ \Delta !A$ \\ 
+    \hline \hline 
+    $\True$ & $\True$ \\ 
+    $\Indet$ & $\False$ \\
+    $\False$ & $\False$ \\ 
+    \hline 
+  \end{tabular}
+\end{center}
+
+We add the corresponding clause to our chosen trivalent semantics:
+
+\begin{defn}
+  \begin{align*}
+    \pValue{v}(\Delta !A) & = \begin{cases}
+        \True & \text{if $\pValue{v}(!A) = \True$;}\\ 
+        \False & \text{otherwise.} 
+    \end{cases}
+\end{align*}
+\end{defn}
+
+This operator is a genuine extension of the language: there are some !!{formula}s in the new language that are not equivalent to any !!{formula} without the determinacy operator. Thus the expressive power of the new language is strictly greater.
+
+\begin{prop}
+\ollabel{prop:det-irreducible} 
+There is no determinacy-operator free !!{formula} $!A$ such that $\pValue{v}(\Delta \Obj{P
+p}) = \pValue{v}(!A)$ for every !!{valuation} $\pAssign{v}$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[ncl][trv][det]{prop:det-irreducible}.
+\end{prob}
+
+We may also introduce an interminacy operator $\nabla$, such that $\nabla !A$ is true if $!A$ is $\Indet$ and false otherwise. Intuitively, and depending what application of trivalent logics we have in mind, we can read $\nabla !A$ as `it is indeterminate whether $!A$', `there is no fact of the matter whether $!A$' or `it is borderline whether $!A$. The operator can be introduced separately or as an abbreviation: $\nabla !A$ is a shorthand for $\lnot \Delta !A \land \lnot \Delta \lnot !A$. 
+
+\begin{prob}
+  Show that $\pValue{v}(\lnot \Delta !A \land \lnot \Delta \lnot !A)= \True$ if $\pValue{v}(!A)= \True$ and $\pValue{v}(\lnot \Delta !A \land \lnot \Delta \lnot !A)= \False$ if $\pValue{v}(!A)= \Indet$ or $= \False$.
+\end{prob}
+
+Here are some salient fact about trivalent logics with determinacy. When we do not specify the system, this holds for all of the trivalent logics $\Log{\Luk_3}$, $\Log{K_3}$ and $\Log{LP}$.
+
+\begin{prop}[prop:det-facts]
+\begin{enumerate}
+  \item $\Entails/[\Log{\Luk_3,K_3,LP}] \Delta !A \lor \Delta \lnot !A$.
+  \item $\Entails[\Log{\Luk_3,K_3,LP}] \Delta !A \lor \Delta \lnot !A \lor \nabla !A$.
+  \item $\Delta !A \Entails/[\Log{\Luk_3,K_3,LP}] !A$. $\Entails/[\Log{\Luk_3,K_3,LP}] \Delta !A \lif !A$.
+  \item $!A \Entails[\Log{\Luk_3,K_3}] \Delta !A$. $!A \Entails/[\Log{LP}] \Delta !A$.
+  \item $\Entails/[\Log{\Luk_3,K_3}] !A \lif \Delta !A$. $\Entails[\Log{LP}] !A \lif \Delta !A$.
+  \item $\Delta !A \Entails[\Log{\Luk_3,K_3,LP}] \Delta \Delta !A$.
+  \item $\lnot \Delta !A \Entails[\Log{\Luk_3,K_3,LP}] \Delta \lnot \Delta !A$.
+  \item $\nabla !A \Entails[\Log{\Luk_3,K_3,LP}] \Delta \nabla !A$.
+  \item $\Entails[\Log{\Luk_3,K_3,LP}] \Delta \Delta !A \lor \Delta \lnot \Delta !A$.  
+\end{enumerate}
+\end{prop}
+
+The last four facts illustrate how our logics forbid \emph{higher-order indeterminacy}: it is always determinate whether something is determinate. 
+
+\begin{digress}
+\emph{Higher-order vagueness} is the idea that whether some claim is borderline or determinate can itself be borderline. For instance, if you imagine a continuum of colour patches from yellow to red (or a continuum of heads from being fully covered in hair to perfectly hairless, or a glass from completely empty to completely full), it is just as hard to identify a first patch (head, glass) that is determinately red (determinately bald, determinately almost full) as it is hard to identify a first patch (head, glass) that is red (bald, almost full). This motivates many philosophers to endorse the idea that being determinately red (determinately bald, determinately almost full) is vague in the way being red (bald, almost full) is. For these philosophers, the fact that trivalent logics prevent higher-order indeterminacy make them unsuitable to capture vagueness. 
+\end{digress}
+
+
+\end{document}
