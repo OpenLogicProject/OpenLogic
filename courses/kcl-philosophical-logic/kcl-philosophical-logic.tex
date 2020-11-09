@@ -28,6 +28,29 @@
 \usepackage[scaled=0.95]{helvet}
 \linespread{1.05}
 
+% Memoir styles
+
+% part, chapter and section headings
+
+\renewcommand{\partnamefont}{\huge\bfseries\sffamily}
+\renewcommand{\partnumfont}{\huge\bfseries\sffamily}
+\renewcommand{\parttitlefont}{\Huge\bfseries\sffamily}
+\renewcommand{\chapnamefont}{\huge\bfseries\sffamily}
+\renewcommand{\chapnumfont}{\huge\bfseries\sffamily}
+\renewcommand{\chaptitlefont}{\Huge\bfseries\sffamily}
+\setsecheadstyle{\Large\bfseries\sffamily}
+\setsubsecheadstyle{\large\bfseries\sffamily}
+\setsubsubsecheadstyle{\bfseries\sffamily}
+
+% table of contents
+
+\renewcommand{\cftpartfont}{\large\bfseries\sffamily}
+\renewcommand{\cftpartpagefont}{\large\bfseries\sffamily}
+\renewcommand{\cftchapterfont}{\bfseries\sffamily}
+\renewcommand{\cftchapterpagefont}{\bfseries\sffamily}
+\renewcommand{\cftsectionfont}{\sffamily}
+\renewcommand{\cftsectionpagefont}{\sffamily}
+
 % Place problems in each chapter
 \problemsperchapter
 
@@ -84,7 +107,13 @@ DRAFT of \today\\
 
 \newpage
 
+% no colored links in the TOC
+\hypersetup{linkcolor=.}
+
 \tableofcontents*
+
+% restore colored links after the TOC
+\hypersetup{linkcolor=red}
 
 \mainmatter
 
