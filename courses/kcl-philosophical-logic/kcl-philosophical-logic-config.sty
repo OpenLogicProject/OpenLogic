@@ -110,12 +110,17 @@
 % \DeclareDocumentCommand \Propobj { m }{ \uppercase{\Obj{#1}} }
 % PROBLEM: not only you need to rewrite propositional logic, but you need to take care of the tableaus section. 
 
+% - `\Obj` - Object-language symbols; default: set entirely in
+% sans-serif italics
+
+\DeclareDocumentCommand \Obj { m }{\mathsf{#1}}
+
 %  - `\Atom{P}{t_1, t_2}` - Atomic formula or term; default produces
 %  predicate symbol followed by arguments separated by commas and surrounded by
 %  parentheses. Redefined to remove the commas and parentheses.
 
 \makeatletter
-\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}\@for\i:=#2\do{\i}}
+\DeclareDocumentCommand \Atom { m m }{ \mathord{\Obj #1}\@for\i:=#2\do{\i}}
 \makeatother
 
 %\DeclareDocumentCommand \Atom { m m }{ \mathord{#1}#2 } % this only removes the parentheses, not the commas
