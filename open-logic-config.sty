@@ -346,12 +346,12 @@
   \IfBooleanTF{#1}{
     % negated
     \IfNoValueTF {#4} 
-        { \Struct{#2} \satDash #3 }
+        { \Struct{#2} \nsatDash #3 }
         { \Struct{#2}, #4 \nsatDash #3}}{
     % not negated
     \IfNoValueTF {#4} 
         { \Struct{#2} \satDash #3 }
-        { \Struct{#2}, #4 \nsatDash #3 }}
+        { \Struct{#2}, #4 \satDash #3 }}
 }
 
 % ### The derivability relation
