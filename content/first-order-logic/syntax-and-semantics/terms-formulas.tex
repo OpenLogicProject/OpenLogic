@@ -17,18 +17,23 @@ include in particular \emph{terms} and \emph{!!{formula}s}.
 \begin{defn}[Terms]
 \ollabel{defn:terms}
 The set of \emph{terms}~$\Trm[L]$ of~$\Lang L$ is
-defined inductively by:
+defined\iftag{fnTerms}{ inductively}{} by:
 \begin{enumerate}
 \item Every !!{variable} is a term.
 \item Every !!{constant} of~$\Lang L$ is a term.
-\item If $f$ is an $n$-place !!{function} and $t_1$, \dots, $t_n$
-  are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.
+\tagitem{fnTerms}{ If $f$ is an $n$-place !!{function} and $t_1$, \dots, $t_n$
+  are terms, then $\Atom{f}{t_1, \ldots, t_n}$ is a term.}{}
 \tagitem{limitClause}{
   Nothing else is a term.}{}
 \end{enumerate}
-A term containing no !!{variable}s is a \emph{closed term}.
+\iftag{fnTerms}{
+  A term containing no !!{variable}s is a \emph{closed term}.
+}{
+  A constant is a \emph{closed term}.
+}
 \end{defn}
 
+\iftag{fnTerms}{
 \begin{explain}
 The !!{constant}s appear in our specification of the language and the
 terms as a separate category of symbols, but they could instead have
@@ -37,6 +42,7 @@ the second clause in the definition of terms. We just have to
 understand $\Atom{f}{t_1, \ldots, t_n}$ as just $f$ by itself if $n =
 0$.
 \end{explain}
+}{}
 
 \begin{defn}[Formula]
 \ollabel{defn:formulas}
