@@ -1,0 +1,34 @@
+% Part: exercises
+% Chapter: first-order-logic
+% Section: semantics
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{fol}{pft}
+
+\olsection{Proof theory}
+
+\begin{prob}[Tableau proofs]
+Give tableau proofs of the following:
+\begin{enumerate}
+\item $\vdash\lforall x\Atom{F}{x}\lif\lforall y\Atom{F}{y}$.
+\item $\vdash Fa\lif\lexists x\Atom{F}{x}$.
+\item $\vdash\lforall x\Atom{F}{x}\lif\lforall y(\Atom{F}{y}\lor Gy)$.
+\item $\vdash\lexists x\Atom{F}{x}\lif\lexists y\Atom{F}{y}$.
+\item $\lforall x\Atom{F}{x},\lforall x(\Atom{F}{x}\lif \Atom{G}{x})\vdash\lforall x\Atom{G}{x}$.
+\item $\lforall x(\Atom{F}{x}\lif \Atom{G}{x}),\lforall x(\Atom{G}{x}\lif Hx)\vdash\lforall x(\Atom{F}{x}\lif Hx)$.
+\item $\vdash\lforall\nu(\phi\lif\psi)\lif(\lforall\nu\phi\lif\lforall\nu\psi)$.\\
+\emph{Tip}. This is a schema rather than a formula. You'll give a
+``proof schema'', which is just like a normal tableau but using
+greek letters instead, that can stand for any variable / formula whatsoever.
+\item $\lforall x\Atom{F}{x},\lexists x\Atom{G}{x}\vdash\lexists x(\Atom{F}{x}\land \Atom{G}{x})$.
+\item $\vdash\lforall xGax\lif\lforall x\lexists yGyx$.
+\item $\lexists x\lforall y\Atom{G}{x,y}\vdash\lforall y\lexists x\Atom{G}{x,y}$.
+\item $\lforall x\lforall y(\Atom{G}{x,y}\lif\lnot Gyx)\vdash\lforall x\lnot \Atom{G}{x,x}$.
+\item $\lexists xGax,\lforall y(Gay\lif\lforall zGzy)\vdash\lexists x\lforall zGzx$.
+\end{enumerate}
+\end{prob}
+
+\end{document}

@@ -1,0 +1,50 @@
+% Part: exercises
+% Chapter: first-order-logic
+% Section: syntax
+
+\documentclass[../../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{exe}{fol}{syn}
+
+\olsection{Syntax}
+
+\begin{prob}[Scope]
+Underline the scope of $\lforall x$ in the following
+formulas.\label{exer:Underline-the-scope}
+\begin{enumerate}
+\item $\lforall x\Atom{F}{x}\lif Ga$. 
+\item $Gx\lif\lforall xGx$. 
+\item $\lforall x\lexists y(\Atom{F}{y}\lor\lnot Gx)$. 
+\item $\lforall x(\Atom{F}{x}z\lif\lexists zGz)$. 
+\item $\lexists z(\lforall x\Atom{F}{x,z}\lor\lexists y\Atom{G}{y,z})$. 
+\item $\lexists y(\lforall x(\lnot \Atom{G}{y,z}\lif\lexists x\Atom{F}{x}))$. 
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Binding]
+In the formulas of exercise \ref{exer:Underline-the-scope},
+say:
+\begin{enumerate}
+\item which occurrences of $x$ are bound by an occurrence of $\lforall x$. 
+\item which occurrences of $z$ are bound by an occurrence of $\lexists z$. 
+\item which occurrences of $y$ are bound by an occurrence of $\lexists y$. 
+\end{enumerate}
+\end{prob}
+
+\begin{prob}[Open vs closed formulas]
+Say whether these formulas are open
+or closed. If open, underline the free variable(s).
+\begin{enumerate}
+\item $Fab$. 
+\item $\Atom{F}{x}\land\lexists yGy$. 
+\item $\lexists y(Gy\land \Atom{F}{x})$. 
+\item $\lforall x\lforall y(\Atom{G}{x,y}\lif \Atom{F}{y})$. 
+\item $\lforall x\Atom{F}{x,y}\lif Gx$. 
+\item $\lexists y(Fa\lor\lexists xGx))$.
+\end{enumerate}
+\end{prob}
+
+
+\end{document}
