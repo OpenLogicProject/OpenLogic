@@ -406,14 +406,14 @@
 % - `\varAssign{s'}{s}{x}[o]` - Assignment variant. Takes three mandatory
 % argument (s' differs from s at most at x) and one optional one (s' assigns
 % o to x. Default: `\varAssign{s'}{s}{x}` produces `s' \sim_{x} s`
-% and `\varAssign{s'}{s}{x}[o] produces `s' = s^{x}_{o}`.
+% and `\varAssign{s'}{s}{x}[o] produces `s' = s[o/x]`.
 
 \DeclareDocumentCommand \varAssign { m m m o } {
     \IfNoValueTF {#4}
         % optional argument not present
         { #1 \sim_{#3} #2 }
         % optional argument present
-        { #1 = #2^{#3}_{#4} }
+        { #1 = #2\[^{#4}/{#3}\] }
 }
 
 % - `\Value{t}{M}[s]` - Value of a term in a structure. Takes two mandatory
