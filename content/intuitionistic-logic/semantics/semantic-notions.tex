@@ -19,12 +19,18 @@
   that $\mSat{M}{\Gamma}[w]$, $\mSat{M}{!A}[w]$.
 \end{defn}
 
+$\Gamma \Entails !A$ is defined by quantifying over
+models as well as worlds $w \in W$. The next proposition tells us that 
+$\Gamma \Entails !A$ holds iff for every model~$\mModel{M}$ such
+  that $\mSat{M}{\Gamma}$, $\mSat{M}{!A}$.
+
 \begin{prop}\ollabel{prop:sat-entails}
   \begin{enumerate}
-  \item\ollabel{prop:sat-entails1} If $\mSat{M}{\Gamma}[w]$ and
-    $\Gamma \Entails !A$, then $\mSat{M}{!A}[w]$.
-  \item\ollabel{prop:sat-entails2} If $\mSat{M}{\Gamma}$ and $\Gamma
-    \Entails !A$, then $\mSat{M}{!A}$.
+  \item\ollabel{prop:sat-entails1} If $\Gamma
+    \Entails !A$ and $\mSat{M}{\Gamma}$, then $\mSat{M}{!A}$.
+  \item\ollabel{prop:sat-entails2} If for every model~$\mModel{M}$ such
+  that $\mSat{M}{\Gamma}$, $\mSat{M}{!A}$ then $\Gamma
+    \Entails !A$.
   \end{enumerate}
 \end{prop}
 
@@ -32,10 +38,27 @@
   \begin{enumerate}
   \item Suppose $\mSat{M}{\Gamma}$. Since $\Gamma \Entails !A$, we
     know that if $\mSat{M}{\Gamma}[w]$, then $\mSat{M}{!A}[w]$. Since
-    $\mSat{M}{\Gamma}[u]$ for all every $u \in W$,
-    $\mSat{M}{\Gamma}[w]$. Hence $\mSat{M}{!A}[w]$.
-  \item Follows immediately from \olref{prop:sat-entails1}.
+    $\mSat{M}{\Gamma}[u]$ for all $u \in W$, we have 
+    $\mSat{M}{!A}[w]$ for all $u \in W$. Hence $\mSat{M}{!A}$.
+  \item Given a relational model~$\mModel{M}$ and $w \in W$ define the 
+  restriction $\mModel{M}_w=\tuple{W_w, R_w, V_w}$ of $\mModel{M}$ to
+  $w$ by setting
+  \begin{itemize}
+    \item $W_w = \Setabs{u \in W}{Rwu}$,
+    \item $R_w = R \cap W^w \times W^w$, and
+    \item $V_w(p) = V(p) \cap W^w$.
+  \end{itemize}
+  The following claim that $\mModel{M}_w$ is a relational model such that
+  $$ \mSat{M}{!A}[w] \text{ iff }  \mSat{M_w}{!A}$$
+  is left as an exercise. Given this, we can now prove the proposition by 
+  assuming that $\mSat{M}{\Gamma}[w]$ and proving $\mSat{M}{!A}[w]$. By the 
+  claim we have $\mSat{M_w}{\Gamma}$ and thus by the assumption 
+  $\mSat{M_w}{!A}$. Using the claim again we get $\mSat{M}{!A}[w]$.
   \end{enumerate}
 \end{proof}
+
+\begin{prob}
+Finish the proof of \olref[int][sem][sem]{prop:sat-entails} by proving the claim. 
+\end{prob}
 
 \end{document}

@@ -10,6 +10,20 @@
 
 \olsection{Soundness of Natural Deduction}
 
+We will now prove soundness of natural deduction with regards to the 
+relational semantics, that is, showing that if a formula is deducible from
+a set of assumptions then the set of assumptions entails the formula. Observe that
+when proving that $\Gamma \Entails !A$ we may use the definition
+\begin{itemize}
+  \item for every model~$\mModel{M}$ and every~$w$ such that
+$\mSat{M}{\Gamma}[w]$, $\mSat{M}{!A}[w]$
+\end{itemize}
+or the result of \olref[int][sem][sem]{prop:sat-entails} and prove
+\begin{itemize}
+  \item if for every model~$\mModel{M}$ such
+  that $\mSat{M}{\Gamma}$, $\mSat{M}{!A}$.
+\end{itemize}
+
 \begin{thm}[Soundness]
   \ollabel{thm:soundness}
   If $\Gamma \Proves !A$, then $ \Gamma \Entails !A$.
@@ -134,6 +148,15 @@
   cases for $\Intro\lnot$ and $\Elim\lnot$, use the definition of
   $\mSat{M}{\lnot !A}[w]$ in \olref[int][sem][rel]{defn:true-at-w}, i.e.,
   don't treat $\lnot !A$ as defined by $!A \lif \lfalse$.
+\end{prob}
+
+\begin{prob}
+Show that the following formulas are not derivable in intuitionistic logic:
+\begin{enumerate}
+  \item $(!A \lif !B) \lor (!B \lif !A)$
+  \item$(\lnot\lnot !A \lif !A) \lif (!A \lor \lnot !A)$
+  \item $(!A \lif !B \lor !C) \lif \bigl((!A \lif !B)\lor(!A \lif !C)\bigr)$
+\end{enumerate}
 \end{prob}
 
 \end{document}
