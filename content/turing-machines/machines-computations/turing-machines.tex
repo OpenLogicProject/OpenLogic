@@ -39,7 +39,9 @@ We assume that the tape is infinite in one direction only. For this
 reason it is useful to designate a special symbol~$\TMendtape$ as
 a marker for the left end of the tape. This makes it easier for
 Turing machine programs to tell when they're ``in danger'' of running
-off the tape. 
+off the tape. We will also assume that this symbol is never overwritten,
+i.e., that $\delta(q,\TMendtape) = \tuple{q', \TMendtape, x}$ if
+$\delta(q,\TMendtape)$ is defined. 
 \end{explain}
 
 \begin{ex}

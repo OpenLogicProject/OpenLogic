@@ -39,11 +39,11 @@ we have a Turing machine $M = \tuple{Q, \Sigma, q, \delta}$ where
 We could specify it by the string
 \[
 q'_0 q'_1 \dots q'_n \TMendtape \sigma'_1 \dots \sigma'_m \TMendtape q
-\TMendtape S(\sigma'_0,q'_0)\TMendtape \dots \TMendtape S(\sigma'_m, q'_n)
+\TMendtape S(q_0',\sigma'_0)\TMendtape \dots \TMendtape S(q'_n,\sigma'_m)
 \]
-where $S(\sigma'_i, q'_j) $ is the string $\sigma'_i q'_j
-\delta(\sigma'_i, q'_j)$ if $\delta(\sigma'_i,q'_j)$ is defined, and
-$\sigma'_i q'_j$ otherwise.
+where $S(q'_j,\sigma'_i) $ is the string $q'_j \sigma'_i 
+\delta(q'_j, \sigma'_i)$ if $\delta(q'_j, \sigma'_i)$ is defined, and
+$q'_j \sigma'_i$ otherwise.
 \end{explain}
 
 \begin{thm}
