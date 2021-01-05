@@ -184,13 +184,15 @@ The machine table for the even machine is:
 \[
 \centering
 \begin{tabular}{lllll}
-\cline{2-3}
-\multicolumn{1}{l|}{}      & \multicolumn{1}{l|}{$\TMblank$}                
-& \multicolumn{1}{l|}{$\TMstroke$}                &  &  \\ \cline{1-3}
+\cline{2-4}
+\multicolumn{1}{l|}{}      & \multicolumn{1}{c|}{$\TMblank$}                
+& \multicolumn{1}{c|}{$\TMstroke$}     & \multicolumn{1}{c|}{$\TMendtape$}   &  \\ \cline{1-4}
 \multicolumn{1}{|l|}{$q_0$} & \multicolumn{1}{l|}{}                          
-& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_1}{\TMright}} &  &  \\ \cline{1-3}
-\multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{\TMtrans{\TMblank}{q_1}{\TMblank}} 
-& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_0}{\TMright}} &  &  \\ \cline{1-3}
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_1}{\TMright}} & 
+\multicolumn{1}{l|}{\phantom{\TMtrans{\TMstroke}{q_1}{\TMright}}} &  \\ \cline{1-4}
+\multicolumn{1}{|l|}{$q_1$} & \multicolumn{1}{l|}{\TMtrans{\TMblank}{q_1}{\TMright}} 
+& \multicolumn{1}{l|}{\TMtrans{\TMstroke}{q_0}{\TMright}} & 
+\multicolumn{1}{l|}{\phantom{\TMtrans{\TMstroke}{q_1}{\TMright}}} &  \\ \cline{1-4}
 \end{tabular}
 \]
 As we can see, the machine halts when scanning a blank in state~$q_0$.
