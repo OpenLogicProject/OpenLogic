@@ -15,24 +15,29 @@ $\Gamma \Proves/ \varphi$ and construct a model $\mSat{M}{\Gamma}$ and
 $\mSat/{M}{\varphi}$.
 
 In classical logic the relation of provability can be reduced to the 
-notion of consistency since a formula is deducable from a set of formulas 
-iff the set together with the negation of the formula is inconsistent. 
-This is not possible in intuitionistic logic since RAA is not available. 
-Thus, when constrtucting the model $\mModel{M}$ we wil need to keep track 
-of the non-deducability of the formula $\varphi$ and thus we will not be 
-able to use a full completion of the set $\Gamma$ to build the model
-$\mModel{M}$, as in every completion $\Gamma^*$ of $\Gamma$ we have
+notion of consistency since !!a{formula} is deducible from a set of !!{formula}s 
+iff the set together with the negation of the !!{formula} is inconsistent. 
+This is not possible in intuitionistic logic. In intuitionistic logic, if 
+$\lnot!A$ is inconsistent, we only get that $\Proves \lnot\lnot !A$. Since 
+$\lnot\lnot!A \lif !A$ does not hold intuitionistically in general, we cannot 
+conclude that $\Proves !A$.
+
+Thus, when constructing the model $\mModel{M}$, we will need to keep track 
+of the non-deducibility of the formula $\varphi$ and thus we will not be 
+able to use a complete set $\Gamma^* \supseteq \Gamma$ to build the model
+$\mModel{M}$, as in every complete set $\Gamma^*$, we have
 $\Gamma^* \Proves !A \lor \lnot !A$.
 
-Instead of using a completion of $\Gamma$ we willl us the notion of a prime 
+Instead of using a complete set  $\Gamma^*$,
+we will us the notion of a prime 
 set of formulas:
 
 \begin{defn}\ollabel{defn:prime}
   A set of !!{formula}s~$\Gamma$ is \emph{prime} iff 
   \begin{enumerate}
-  \item\ollabel{defn:prime1} $\Gamma$ is consistent, i.e., $\Gamma \Proves/ \lfalse$,
-  \item\ollabel{defn:prime2} If $\Gamma \Proves !A$ then $!A \in \Gamma$, and
-  \item\ollabel{defn:prime3} If $!A \lor !B \in \Gamma$ then $!A \in
+  \item\ollabel{defn:prime1} $\Gamma$ is consistent, i.e., $\Gamma \Proves/ \lfalse$;
+  \item\ollabel{defn:prime2} if $\Gamma \Proves !A$ then $!A \in \Gamma$; and
+  \item\ollabel{defn:prime3} if $!A \lor !B \in \Gamma$ then $!A \in
     \Gamma$ or $!B \in \Gamma$.
   \end{enumerate}
 \end{defn}
