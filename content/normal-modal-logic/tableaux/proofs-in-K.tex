@@ -20,20 +20,20 @@
         \Box (\formula{A} \land \formula{B})}{1},
       just =\TAss
       [\pFmla{\True}{\Box\formula{A} \land \Box\formula{B}}{1},
-        just = {\TRule{\True}{\lif}[1]}
+        just = {\TRule{\False}{\lif}[1]}
         [\pFmla{\False}{\Box(\formula{A} \land \formula{B})}{1},
-          just = {\TRule{\True}{\lif}[1]}
+          just = {\TRule{\False}{\lif}[1]}
           [\pFmla{\True}{\Box\formula{A}}{1},
             just = {\TRule{\True}{\land}[2]}
             [\pFmla{\True}{\Box\formula{B}}{1},
               just = {\TRule{\True}{\land}[2]}
               [\pFmla{\False}{\formula{A} \land \formula{B}}{1.1},
                 just = {\TRule{\False}{\Box}[3]}
-                [\pFmla{\False}{\formula{A}}{1.1}, 
+                [\pFmla{\False}{\formula{A}}{1.1},
                   just = {\TRule{\False}{\land}[6]}
                   [\pFmla{\True}{\formula{A}}{1.1},
                     just= {\TRule{\True}{\Box}[4]}, close]]
-                [\pFmla{\False}{\formula{B}}{1.1}, 
+                [\pFmla{\False}{\formula{B}}{1.1},
                   just = {\TRule{\False}{\land}[6]}
                   [\pFmla{\True}{\formula{B}}{1.1},
                     just= {\TRule{\True}{\Box}[5]}, close]]
@@ -56,20 +56,20 @@
         (\Diamond \formula{A} \lor \Diamond \formula{B})}{1},
       just =\TAss
       [\pFmla{\True}{\Diamond(\formula{A} \lor \formula{B})}{1},
-        just = {\TRule{\True}{\lif}[1]}
+        just = {\TRule{\False}{\lif}[1]}
         [\pFmla{\False}{\Diamond\formula{A} \lor \Diamond\formula{B}}{1},
-          just = {\TRule{\True}{\lif}[1]}
+          just = {\TRule{\False}{\lif}[1]}
           [\pFmla{\False}{\Diamond\formula{A}}{1},
             just = {\TRule{\False}{\lor}[3]}
             [\pFmla{\False}{\Diamond\formula{B}}{1},
               just = {\TRule{\False}{\lor}[3]}
               [\pFmla{\True}{\formula{A} \lor \formula{B}}{1.1},
                 just = {\TRule{\True}{\Diamond}[2]},
-                [\pFmla{\True}{\formula{A}}{1.1}, 
+                [\pFmla{\True}{\formula{A}}{1.1},
                   just = {\TRule{\True}{\lor}[6]}
                   [\pFmla{\False}{\formula{A}}{1.1},
                     just= {\TRule{\False}{\Diamond}[4]}, close]]
-                [\pFmla{\True}{\formula{B}}{1.1}, 
+                [\pFmla{\True}{\formula{B}}{1.1},
                   just = {\TRule{\True}{\lor}[6]}
                   [\pFmla{\False}{\formula{B}}{1.1},
                     just= {\TRule{\False}{\Diamond}[5]}, close]]

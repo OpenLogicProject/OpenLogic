@@ -40,7 +40,7 @@ defined, we define $\Delta_{n+1}$ by:
   \Delta_n \cup \{ \lnot !A_n\}, & \text{otherwise.}
 \end{cases}
 \]
-If we now let $\Delta = \bigcup_{n=0}^\infty \Delta_n$.
+Now let $\Delta = \bigcup_{n=0}^\infty \Delta_n$.
 
 We have to show that this definition actually yields a set $\Delta$
 with the required properties, i.e., $\Gamma \subseteq \Delta$ and
@@ -62,11 +62,11 @@ Finally, we have to show, that $\Delta$ is $\Sigma$-consistent.  To do
 this, we show that (a) if $\Delta$ were $\Sigma$-inconsistent, then
 some $\Delta_n$ would be $\Sigma$-inconsistent, and (b) all $\Delta_n$
 are $\Sigma$-consistent.
-  
+
 So suppose $\Delta$ were $\Sigma$-inconsistent. Then $\Delta
 \Proves[\Sigma] \lfalse$, i.e., there are $!A_1$, \dots,~$!A_k \in
 \Delta$ such that $\Sigma \Proves !A_1 \lif (!A_2 \lif \cdots (!A_k
-\lif \lfalse)\dots)$. Since $\Delta = \bigcap_{n=0}^\infty$, each
+\lif \lfalse)\dots)$. Since $\Delta = \bigcup_{n=0}^\infty \Delta_n$, each
 $!A_i \in \Delta_{n_i}$ for some~$n_i$. Let $n$ be the largest of
 these. Since $n_i \le n$, $\Delta_{n_i} \subseteq \Delta_n$. So, all
 $!A_i$ are in some~$\Delta_n$. This would mean $\Delta_n
@@ -76,7 +76,7 @@ To show that each $\Delta_n$ is $\Sigma$-consistent, we use a simple
 induction on~$n$. $\Delta_0 = \Gamma$, and we assumed $\Gamma$ was
 $\Sigma$-consistent. So the claim holds for $n = 0$. Now suppose it
 holds for $n$, i.e., $\Delta_n$ is $\Sigma$-consistent. $\Delta_{n+1}$
-is either $\Delta_n \cup \{!A_n\}$ is that is $\Sigma$-consistent,
+is either $\Delta_n \cup \{!A_n\}$ if that is $\Sigma$-consistent,
 otherwise it is $\Delta_n \cup \{\lnot!A_n\}$. In the first case,
 $\Delta_{n+1}$ is clearly $\Sigma$-consistent. However, by
 \olref[prf][con]{prop:consistencyfacts}\olref[prf][con]{prop:consistencyfacts-c},
