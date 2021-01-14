@@ -1,0 +1,49 @@
+% part: intuitionistic-logic
+% chapter: soundeness-completeness
+% section: decidability
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{sc}{dec}
+
+\olsection{Decidability}
+Observe that the proof of the completeness theorem gives us for every
+$\Gamma \Proves/ !A$ a model with an infinite number of worlds
+witnessing the fact that $\Gamma \Entails/ !A$. The following
+proposition shows that to prove $\Entails !A$ it is enough to prove
+that $\mSat{M}{!A}$ for all finite models (i.e., models with a finite
+set of worlds).
+
+\begin{thm}\ollabel{thm:decidability}
+  If $\Entails/ !A$ then there is a finite model $\mSat/{M'}{!A}$.
+\end{thm}
+
+\begin{proof}
+  Assume $\mModel{M}=\tuple{W, R, V}$ is such that $\mSat/{M}{!A}$ and $P$ 
+  is the set of !!{propositional variable}s occurring in~$!A$. Define
+  $\mModel{M'}=\tuple{W', R', V'}$ by letting $W' = \Setabs{[w]}{w \in W}$ 
+  where $[w] = \Setabs{p \in P}{w \in V(p)}$, $R'$ be the subset relation, 
+  and $V'(p)=\Setabs{[w]}{p \in [w]}$. It should be clear that $W'$ is a 
+  finite set and that $\mModel{M'}$ is a !!{relational model}.
+
+  It can be shown, by induction on~$!A$, that 
+  \[
+    \mSat{M}{!A}[w] \text{ iff } \mSat{M'}{!A}[{[w]}]
+  \]
+  for all !!{formula}s $!A$ with only !!{propositional variable}s
+  from~$P$. This is left as an exercise for the reader.
+\end{proof}
+
+\begin{prob}
+Finish the proof of \olref[int][sc][dec]{thm:decidability} by showing
+that $\mSat{M,w}{!A}$ iff $\mSat{M',[w]}{!A}$ for all !!{formula}s~$!A$
+with only propositional variables from~$P$. 
+\end{prob}
+
+From \olref{thm:decidability} it follows that there is an algorithm to
+decide whether~$\Entails !A$.
+
+
+\end{document}

@@ -10,12 +10,33 @@
 
 \olsection{Lindenbaum's Lemma}
 
+The completeness theorem for intuitionistic logic is proved by assuming
+$\Gamma \Proves/ !A$ and constructing a model $\mSat{M}{\Gamma}$ and~$\mSat/{M}{!A}$.
+
+In classical logic the relation of !!{derivability} can be reduced to
+the notion of consistency since !!a{formula}~$!A$ is !!{derivable}
+from a set of !!{formula}s iff the set together with the negation
+of~$!A$ is inconsistent. This is not possible in intuitionistic logic.
+In intuitionistic logic, if $\lnot!A$ is inconsistent, we only get
+that $\Proves \lnot\lnot !A$. Since $\lnot\lnot!A \lif !A$ does not
+hold intuitionistically in general, we cannot conclude that~$\Proves
+!A$.
+
+Thus, when constructing the model~$\mModel{M}$, we will need to keep track 
+of the non-!!{derivability} of the !!{formula}~$!A$ and thus we will not be 
+able to use a complete set $\Gamma^* \supseteq \Gamma$ to build the model
+$\mModel{M}$, as in every complete set $\Gamma^*$, we have
+$\Gamma^* \Proves !A \lor \lnot !A$.
+
+Instead of using a complete set~$\Gamma^*$, we will us the notion of
+a prime set of formulas:
+
 \begin{defn}\ollabel{defn:prime}
   A set of !!{formula}s~$\Gamma$ is \emph{prime} iff 
   \begin{enumerate}
-  \item\ollabel{defn:prime1} $\Gamma$ is consistent.
-  \item\ollabel{defn:prime2} If $\Gamma \Proves !A$ then $!A \in \Gamma$, and
-  \item\ollabel{defn:prime3} If $!A \lor !B \in \Gamma$ then $!A \in
+  \item\ollabel{defn:prime1} $\Gamma$ is consistent, i.e., $\Gamma \Proves/ \lfalse$;
+  \item\ollabel{defn:prime2} if $\Gamma \Proves !A$ then $!A \in \Gamma$; and
+  \item\ollabel{defn:prime3} if $!A \lor !B \in \Gamma$ then $!A \in
     \Gamma$ or $!B \in \Gamma$.
   \end{enumerate}
 \end{defn}
@@ -36,13 +57,13 @@
   and still $\Gamma^* \Proves/ !A$. This means that at each step we
   should find the first disjunction~$!B_i \lor !C_i$ such that:
   \begin{enumerate}
-  \item $\Gamma_n \Proves !B_i \lor !C_i$
-  \item $!B_i \notin \Gamma_n$ and $!C_i \notin \Gamma_n$
+  \item\ollabel{gamma-1} $\Gamma_n \Proves !B_i \lor !C_i$
+  \item\ollabel{gamma-2} $!B_i \notin \Gamma_n$ and $!C_i \notin \Gamma_n$
   \end{enumerate}
   We add to $\Gamma_n$ either $!B_i$ if $\Gamma_n \cup \{!B_i\}
   \Proves/ !A$, or $!C_i$ otherwise. We'll have to show that this
-  works. For now, let's define $i(n)$ as the least $i$ such
-  that (1) and~(2) hold.
+  works. For now, let's define $i(n)$ as the least $i$ such that
+  \olref{gamma-1} and~\olref{gamma-2} hold.
   
   Define $\Gamma_0 = \Gamma$ and
   \[
@@ -95,7 +116,7 @@
   similarly for~$!C$. So assume $\Gamma^* \Proves !B \lor !C$ but $!B
   \notin \Gamma^*$ and $!C \notin \Gamma^*$. Since $\Gamma^* \Proves
   !B \lor !C$, $\Gamma_n \Proves !B \lor !C$ for some~$n$. $!B \lor
-  !C$ appears on the enumeration of all disjunctions, say as $!B_j
+  !C$ appears on the enumeration of all disjunctions, say, as $!B_j
   \lor !C_j$. $!B_j \lor !C_j$ satisfies the properties in the
   definition of $i(n)$, namely we have $\Gamma_n \Proves !B_j
   \lor !C_j$, while $!B_j \notin \Gamma_n$ and $!C_j \notin \Gamma_n$. At
@@ -106,10 +127,16 @@
   to the assumption that $!B \notin \Gamma^*$ and $!C \notin
   \Gamma^*$.
 
-  Now suppose $\Gamma^* \Proves !A$. Then $\Gamma^* \Proves !A \lor
-  !A$. But we've just proved that if $\Gamma^* \Proves !A \lor !A$
-  then $!A \in \Gamma^*$. Hence, $\Gamma^*$
-  satisfies~\olref{defn:prime2} of \olref{defn:prime}.
+  Now suppose $\Gamma^* \Proves !B$. Then $\Gamma^* \Proves !B \lor
+  !B$. But we've just proved that if $\Gamma^* \Proves !B \lor !B$
+  then $!B \in \Gamma^*$. Hence, $\Gamma^*$
+  satisfies~\olref{defn:prime2} of~\olref{defn:prime}.
 \end{proof}
+
+\begin{prob}
+Show that if $\Gamma \Proves/ \bot$ then $\Gamma$ is consistent in 
+classical logic, i.e., there is a valuation making all formulas 
+in~$\Gamma$ true.
+\end{prob}
 
 \end{document}
