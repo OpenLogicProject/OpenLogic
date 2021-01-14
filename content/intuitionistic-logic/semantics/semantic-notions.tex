@@ -38,4 +38,36 @@
   \end{enumerate}
 \end{proof}
 
+
+\begin{defn}\ollabel{defn:restrict}
+  Suppose $\mModel{M}$ is a relational model and $w \in W$. The
+  \emph{restriction} $\mModel{M}_w=\tuple{W_w, R_w, V_w}$
+  of~$\mModel{M}$ to~$w$ is given by:
+  \begin{align*}
+    W_w & = \Setabs{u \in W}{Rwu},\\
+    R_w  & = R \cap (W_w)^2, \text{ and}\\
+    V_w(p) & = V(p) \cap W_w.
+  \end{align*}
+\end{defn}
+
+\begin{prop}\ollabel{prop:restrict}
+  $\mSat{M}{!A}[w]$ iff $\mSat{M_w}{!A}$.
+\end{prop}
+
+\begin{prob}
+  Prove \olref[int][sem][sem]{prop:restrict}. 
+\end{prob}
+
+\begin{prop}
+  Suppose for every model~$\mModel{M}$ such that $\mSat{M}{\Gamma}$,
+  $\mSat{M}{!A}$. Then $\Gamma \Entails !A$.
+\end{prop}
+
+\begin{proof}
+  Suppose that $\mSat{M}{\Gamma}[w]$. By the \olref{prop:restrict}
+  applied to every~$!B \in \Gamma$, we have $\mSat{M_w}{\Gamma}$. By
+  the assumption, we have $\mSat{M_w}{!A}$. By \olref{prop:restrict}
+  again, we get $\mSat{M}{!A}[w]$.
+\end{proof}
+
 \end{document}
