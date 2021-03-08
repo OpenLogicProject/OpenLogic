@@ -2,9 +2,11 @@
 echo "<a href="$1/$2.pdf">$2</a>"
 echo "<ol>"
 if grep -q 'olimport\[' $1/$2.tex ; then
-    for f in `grep 'olimport' $1/$2.tex | grep -v '\.\.' | sed "s/^.*\olimport\[[^]]*\]{\([^}]*\)}/\1/"` ; do
+    for f in `grep 'olimport' $1/$2.tex | grep -v '\.\.' | sed "s/^.*\olimport\[\([^]]*\)\]{\([^}]*\)}/\1\/\2/"` ; do
 	echo "<li>"
-	$0 $1/$f $f
+    d="$(dirname $f)"
+    ff="$(basename $f)"
+	$0 $1/$d $ff
 	echo "</li>"
    done
    fi
