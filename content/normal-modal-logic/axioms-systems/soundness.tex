@@ -27,7 +27,7 @@ true.
 
 \begin{proof}
   By induction on length of proofs. For brevity, put $\mClass{C} =
-  \mClass{C}_n \cap \dots \cap \mClass{C}_n$.
+  \mClass{C}_1 \cap \dots \cap \mClass{C}_n$.
   \begin{enumerate}
   \item Induction Basis: If $!B$ has a proof of length~$1$, then it is
     either a tautological instance, an instance
@@ -39,7 +39,8 @@ true.
     \olref[syn][sch]{prop:Kvalid}\iftag{prvDiamond}{ and
       \olref[syn][sch]{prop:Dual-valid}}{}. Finally in the third case,
     since $!B$ is valid in $\mClass{C}_i$ and $\mClass{C} \subseteq
-    \mClass{C}_i$, we have that $!B$ is valid in $\mClass{C}$ as well.
+    \mClass{C}_i$, we have that $!B$ is valid in $\mClass{C}$ as well
+    by \olref[syn][val]{prop:subset-class}.
   \item Inductive step: Suppose $!B$ has a proof of length $k>1$. If
     $!B$ is a tautological instance or an instance of one of $!A_1$,
     \dots, $!A_n$, we proceed as in the previous step. So suppose $!B$ is
