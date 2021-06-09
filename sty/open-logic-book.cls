@@ -561,11 +561,10 @@ Zesen Qian, \emph{Carnegie Mellon University}
 
 \noindent
 The Open Logic Project would like to acknowledge the generous support
-of the \href{http://www.ucalgary.ca/taylorinstitute/}{Taylor Institute of
-Teaching and Learning} of the University of Calgary,
-and the \href{http://albertaoer.com}{Alberta Open Educational Resources
-(ABOER) Initiative}, which is made possible through an investment from
-the Alberta government.
+of the \href{http://www.ucalgary.ca/taylorinstitute/}{Taylor Institute
+of Teaching and Learning} of the University of Calgary, and the
+Alberta Open Educational Resources (ABOER) Initiative, which is made
+possible through an investment from the Alberta government.
 
 \bigskip
 
