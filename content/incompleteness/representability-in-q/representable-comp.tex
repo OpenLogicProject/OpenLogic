@@ -9,26 +9,60 @@
 \olfileid{inc}{req}{rpc}
 \olsection{Functions Representable in $\Th{Q}$ are Computable}
 
+We'll prove that every function that is representable in~$\Th{Q}$ is
+computable. We first have to establish a lemma about functions
+representable in~$\Th{Q}$.
+
+\begin{lem}\ollabel{lem:rep-q}
+  If $f(x_0,
+  \dots, x_k)$ is representable in~$\Th{Q}$, there is
+  !!a{formula}~$!A(x_0, \dots, x_k, y)$ such that
+  \[
+  \Th{Q} \Proves !A_f(\num{n_0}, \dots, \num{n_k}, \num{m})
+  \quad\text{iff}\quad m = f(n_0, \dots, n_k).
+  \]
+\end{lem}
+
+\begin{proof}
+  The ``if'' part is
+\olref[int]{defn:representable-fn}\olref[int]{defn:rep:a}. The ``only
+if'' part is seen as follows: Suppose $\Th{Q} \Proves !A_f(\num{n_0},
+\dots, \num{n_k}, \num{m})$ but $m \neq f(n_0, \dots, n_k)$. Let $k =
+f(n_0, \dots, n_k)$. By
+\olref[int]{defn:representable-fn}\olref[int]{defn:rep:a}, $\Th{Q}
+\Proves !A_f(\num{n_0}, \dots, \num{n_k}, \num{k})$. By
+\olref[int]{defn:representable-fn}\olref[int]{defn:rep:b},
+$\lforall[y][(!A_f(\num{n_0}, \dots, \num{n_k}, y) \lif \num{k} =
+y)]$. Using logic and the assumption that $\Th{Q} \Proves
+!A_f(\num{n_0}, \dots, \num{n_k}, \num{m})$, we get that $\Th{Q}
+\Proves \eq[\num{k}][\num{m}]$. On the other hand, by
+\olref[bre]{lem:q-proves-neq}, $\Th{Q} \Proves
+\eq/[\num{k}][\num{m}]$. So $\Th{Q}$ is inconsistent. But that is
+impossible, since $\Th{Q}$ is satisfied by the standard model (see
+\olref[int][def]{def:standard-model}), $\Sat{N}{\Th{Q}}$, and
+satisfiable theories are always consistent by the Soundness Theorem
+(\tagrefs{prfAX/{fol:axd:sou:cor:consistency-soundness},
+prfSC/{fol:seq:sou:cor:consistency-soundness},
+prfND/{fol:ntd:sou:cor:consistency-soundness},
+prfTab/{fol:tab:sou:cor:consistency-soundness}}).
+\end{proof}
+
 \begin{lem}
 Every function that is representable in $\Th{Q}$ is computable.
 \end{lem}
 
 \begin{proof}
-Let's first give the intuitive idea for why this is true. If $f(x_0,
-\dots, x_k)$ is representable in~$\Th{Q}$, there is
-!!a{formula}~$!A(x_0, \dots, x_k, y)$ such that
-\[
-\Th{Q} \Proves !A_f(\num{n_0}, \dots, \num{n_k}, \num{m})
-\quad\text{iff}\quad m = f(n_0, \dots, n_k).
-\]
-To compute~$f$, we do the following.  List all the possible
+Let's first give the intuitive idea for why this is true. To
+compute~$f$, we do the following.  List all the possible
 !!{derivation}s~$\delta$ in the language of arithmetic. This is
 possible to do mechanically. For each one, check if it is
 !!a{derivation} of !!a{formula} of the form~$!A_f(\num{n_0}, \dots,
-\num{n_k}, \num{m})$. If it is, $m$ must be $= f(n_0, \dots, n_k)$ and
-we've found the value of~$f$. The search terminates because $\Th{Q}
-\Proves !A_f(\num{n_0}, \dots, \num{n_k}, \num{f(n_0, \dots, n_k)})$,
-so eventually we find a $\delta$ of the right sort.
+\num{n_k}, \num{m})$ (the !!{formula} representing $f$ in~$\Th{Q}$
+from \olref{lem:rep-q}). If it is, $m = f(n_0, \dots, n_k)$ by
+\olref{lem:rep-q}, and we've found the value of~$f$. The search
+terminates because $\Th{Q} \Proves !A_f(\num{n_0}, \dots, \num{n_k},
+\num{f(n_0, \dots, n_k)})$, so eventually we find a $\delta$ of the
+right sort.
 
 This is not quite precise because our procedure operates on
 !!{derivation}s and !!{formula}s instead of just on numbers, and we
@@ -36,9 +70,9 @@ haven't explained exactly why ``listing all possible !!{derivation}s''
 is mechanically possible.  But as we've seen, it is possible to code
 terms, !!{formula}s, and !!{derivation}s by G\"odel numbers. We've
 also introduced a precise model of computation, the general recursive
-functions. And we've seen that the relation $\Prf[\Th{Q}](d,y)$, which holds
-iff $d$ is the G\"odel number of !!a{derivation} of the formula with
-G\"odel number~$x$ from the axioms of~$\Th{Q}$, is (primitive)
+functions. And we've seen that the relation $\Prf[\Th{Q}](d,y)$, which
+holds iff $d$ is the G\"odel number of !!a{derivation} of the formula
+with G\"odel number~$x$ from the axioms of~$\Th{Q}$, is (primitive)
 recursive. Other primitive recursive functions we'll need are
 $\fn{num}$ (\olref[art][trm]{prop:num-primrec}) and $\fn{Subst}$
 (\olref[art][sub]{prop:subst-primrec}).  From these, it is possible to
