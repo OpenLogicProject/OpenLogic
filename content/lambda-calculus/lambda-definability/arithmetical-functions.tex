@@ -18,6 +18,8 @@
 A term that !!{lambda define}s the successor function is
 \begin{align*}
   \fn{Succ} & \ident \lambd[a][\lambd[fx][f ({a} f x)]].
+  \intertext{Given our conventions, this is short for}
+  \fn{Succ} & \ident \lambd[a][\lambd[f][\lambd[x][(f (({a} f) x))]]].
   \intertext{$\fn{Succ}$ is a function that accepts as argument a
     number~$a$, and evaluates to another function, $\lambd[fx][f ({a}
       f x)]$. That function is not itself a Church numeral. However,
@@ -31,6 +33,17 @@ A term that !!{lambda define}s the successor function is
 \end{align*}
 i.e., $\num{n+1}$.
 \end{proof}
+
+\begin{ex}
+  Let's look at what happens when we apply $\fn{Succ}$ to~$\num{0}$,
+  i.e., $\lambd[fx][x]$. We'll spell the terms out in full:
+  \begin{align*}
+    \fn{Succ}\, \num{0} & \ident (\lambd[a][\lambd[f][\lambd[x][(f (({a} f) x))]]])(\lambd[f][\lambd[x][x]])\\
+    & \redone \lambd[f][\lambd[x][(f (({(\lambd[f][\lambd[x][x]])} f) x))]] \\
+    & \redone \lambd[f][\lambd[x][(f ({(\lambd[x][x])} x))]] \\
+    & \redone \lambd[f][\lambd[x][(f x)]] \ident \num{1}\\
+  \end{align*}
+\end{ex}
 
 \begin{prob}
   The term 
@@ -92,10 +105,14 @@ reduces to~$\num{n+m}$.
   $\num{nm}$.
 \end{proof}
 
+\begin{editorial}
 We can actually simplify this term further by $\eta$-reduction:
 \[
   \fn{Mult} \ident \lambd[ab][\lambd[f][a (b f)]].
 \]
+
+But then we first have to explain $\eta$-reduction.
+\end{editorial}
 
 \begin{prob}
 Multiplication can be !!{lambda define}d by the term

@@ -16,9 +16,9 @@ representation for such numbers. Here is one that works surprisingly
 well.
 
 \begin{defn}
-For each natural number~$n$, define the \emph{Church numeral} $\num{n}$ to be
-the lambda term $\lambd[x][\lambd[y][(x(x(x(\dots x(y)))))]]$, where
-there are $n$ $x$'s in all.
+For each natural number~$n$, define the \emph{Church numeral}
+$\num{n}$ to be the lambda term $\lambd[x][\lambd[y][(x(x(x(\dots
+x(y)))))]]$, where there are $n$ $x$'s in all.
 \end{defn}
 
 The terms $\num{n}$ are ``iterators'': on input $f$, $\num{n}$ returns
@@ -27,15 +27,15 @@ normal. We can now say what it means for a lambda term to ``compute''
 a function on the natural numbers.
 
 \begin{defn}
-Let $f(x_0, \dots, x_{n-1})$ be an $n$-ary partial function from $\Nat$
-to $\Nat$. We say a lambda term $F$ \emph{!!{lambda define}s}~$f$ iff for every
-sequence of natural numbers $m_0$, \dots,~$m_{n-1}$,
+Let $f(x_0, \dots, x_{k-1})$ be an $n$-ary partial function from $\Nat$
+to $\Nat$. We say a $\lambd$-term~$F$ \emph{!!{lambda define}s}~$f$ iff for every
+sequence of natural numbers $n_0$, \dots,~$n_{k-1}$,
 \[
-F\, \num{m_0}\, \num{m_1} \dots \num{m_{n-1}} \red \num{f(m_0, m_1, \dots,
-  m_{n-1})}
+F\, \num{n_0}\, \num{n_1} \dots \num{n_{k-1}} \red \num{f(n_0, n_1, \dots,
+  n_{k-1})}
 \]
-if $f(m_0, \dots, m_{n-1})$ is defined, and $F, \num{m_0}\, \num{m_1}
-\dots \num{m_{n-1}}$ has no normal form otherwise.
+if $f(n_0, \dots, n_{k-1})$ is defined, and $F, \num{n_0}\, \num{n_1}
+\dots \num{n_{k-1}}$ has no normal form otherwise.
 \end{defn}
 
 \begin{thm}

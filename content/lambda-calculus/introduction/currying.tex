@@ -9,20 +9,39 @@
 \olfileid{lam}{rep}{cur} 
 \olsection{Currying}
 
-A $\lambd$-abstract $\lambd[x][M]$ represents a function of one argument,
-which is quite a limitation when we want to define function accepting
-multiple arguments.  One way to do this would be by extending the
-$\lambd$-calculus to allow the formation of pairs, triples, etc., in
-which case, say, a three-place function $\lambd[x][M]$ would expect
-its argument to be a triple.  However, it is more convenient to do
-this by \emph{Currying}.
+A $\lambd$-abstract $\lambd[x][M]$ represents a function of one
+argument, which is quite a limitation when we want to define function
+accepting multiple arguments.  One way to do this would be by
+extending the $\lambd$-calculus to allow the formation of pairs,
+triples, etc., in which case, say, a three-place function
+$\lambd[x][M]$ would expect its argument to be a triple.  However, it
+is more convenient to do this by \emph{Currying}.
 
-Let's consider an example. If we want to define a function that
-accepts two arguments and returns the first, we write
-$\lambd[x][\lambd[y][x]]$, which literally is a function that accepts
-an argument and returns a function that accepts another argument and
-returns the first argument while it drops the second. Let's see what
-happens when we apply it to two arguments:
+Let's consider an example. We'll pretend for a moment that we have a
+$+$ operation in the $\lambd$-calculus. The addition function is
+$2$-place, i.e., it takes two arguments.  But a $\lambd$-abstract only
+gives us functions of one argument: the syntax does not allow
+expressions like $\lambd[(x,y)][(x+y)]$.  However, we can consider the
+one-place function~$f_x(y)$ given by $\lambd[y][(x+y)]$, which adds
+$x$ to its single argument~$y$.  Actually, this is not a single
+function, but a family of different functions ``add $x$,'' one for
+each number~$x$.  Now we can define another one-place function~$g$ as
+$\lambd[x][f_x]$. Applied to argument $x$, $g(x)$ returns the
+function~$f_x$---so its values are other functions.  Now if we apply
+$g$ to $x$, and then the result to~$y$ we get: $(g(x))y = f_x(y) =
+x+y$.  In this way, the one-place function~$g$ can do the same job as
+the two-place addition function. ``Currying'' simply refers to this
+trick for turning two-place functions into one place functions (whose
+values are one-place functions).
+
+Here is an example properly in the syntax of the $\lambd$-calculus.
+How do we represent the function $f(x,y) = x$? If we want to define a
+function that accepts two arguments and returns the first, we can
+write $\lambd[x][\lambd[y][x]]$, which literally is a function that
+accepts an argument~$x$ and returns the function~$\lambd[y][x]$. The
+function $\lambd[y][x]$ accepts another argument~$y$, but drops it,
+and always returns~$x$.  Let's see what happens when we apply
+$\lambd[x][\lambd[y][x]]$ to two arguments:
 \begin{align*}
   (\lambd[x][\lambd[y][x]])MN 
   \bredone & (\lambd[y][M])N \\

@@ -30,9 +30,10 @@ x) = 1$, where $\Char{R}$ is a primitive recursive function which, on
 any input, returns either 1 or 0. For example, the relation
 $\fn{IsZero}(x)$, which holds if and only if $x = 0$, corresponds to the
 function $\Char{\fn{IsZero}}$, defined using primitive recursion by
-\[
-\Char{\fn{IsZero}}(0) = 1, \quad \Char{\fn{IsZero}}(x+1) = 0.
-\]
+\begin{align*}
+\Char{\fn{IsZero}}(0) & = 1,\\
+\Char{\fn{IsZero}}(x+1) & = 0.
+\end{align*}
 
 It should be clear that one can compose relations with other primitive
 recursive functions. So the following are also primitive recursive:
@@ -75,11 +76,13 @@ recursive functions. So the following are also primitive recursive:
   \end{cases}
   \]
   We can define $\Char{P \land Q}(\vec x)$ as $\Char{P}(\vec x) \cdot
-  \Char{Q}(\vec x)$ or as $\fn{min}(\Char{P}(\vec x), \Char{Q}(\vec x))$.
-
-  Similarly, $\Char{P \lor Q}(\vec x) = \fn{max}(\Char{P}(\vec x),
-  \Char{Q}(\vec x))$ and $\Char{P \lif Q}(\vec x) = \fn{max}(1 \tsub
-  \Char{P}(\vec x), \Char{Q}(\vec x))$.
+  \Char{Q}(\vec x)$ or as $\fn{min}(\Char{P}(\vec x), \Char{Q}(\vec
+  x))$. Similarly, 
+  \begin{align*}
+    \Char{P \lor Q}(\vec x) & = \fn{max}(\Char{P}(\vec x), \Char{Q}(\vec x))) \text{ and}\\
+    \Char{P \lif Q}(\vec x) & = \fn{max}(1 \tsub
+  \Char{P}(\vec x), \Char{Q}(\vec x)).
+  \end{align*}
 \end{proof}
 
 \begin{prop}
@@ -112,19 +115,23 @@ recursive functions. So the following are also primitive recursive:
   bounded quantifier of the form $\bexists{x \leq y}{\dots x\dots}$ is
   equivalent to $\bexists{x < y+1}{\dots x \dots}$.
 \end{proof}
-  
+
+\begin{prob}
+  Show that the three place relation $x \equiv y \mod n$ (congruence
+  modulo~$n$) is primitive recursive.
+\end{prob}
+
 Another useful primitive recursive function is the conditional
 function, $\fn{cond}(x,y,z)$, defined by
-\[
-\fn{cond}(x,y,z) = \begin{cases}
+\begin{align*}
+  \fn{cond}(x,y,z) & = \begin{cases}
   y & \text{if $x = 0$} \\
   z & \text{otherwise}.
 \end{cases}
-\]
-This is defined recursively by
-\[
-\fn{cond}(0,y,z) = y, \quad \fn{cond}(x+1,y,z) = z.
-\]
+\intertext{This is defined recursively by}
+\fn{cond}(0,y,z) & = y,\\
+\fn{cond}(x+1,y,z) & = z.
+\end{align*}
 One can use this to justify definitions of primitive recursive functions
 by cases from primitive recursive relations:
 

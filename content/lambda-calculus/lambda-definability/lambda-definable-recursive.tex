@@ -20,9 +20,9 @@ partial recursive.
 
 \begin{proof}
   We only sketch the proof. First, we arithmetize $\lambd$-terms,
-  i.e., systematially assign G\"odel numbers to $\lambd$-terms as
-  using the usual power-of-primes coding of sequences.  Then we define
-  a partial recursive function $\fn{normalize}(t)$ operating on the
+  i.e., systematially assign G\"odel numbers to $\lambd$-terms, using
+  the usual power-of-primes coding of sequences. Then we define a
+  partial recursive function $\fn{normalize}(t)$ operating on the
   G\"odel number~$t$ of a lambda term as argument, and which returns
   the G\"odel number of the normal form if it has one, or is undefined
   otherwise.  Then define two partial recursive functions
@@ -30,7 +30,7 @@ partial recursive.
   and from the G\"odel numbers of the corresponding Church numeral.
 
   Using these recursive functions, we can define the function~$f$ as a
-  partial recursive function. There is a lambda term~$F$ that
+  partial recursive function. There is a $\lambd$-term~$F$ that
   !!{lambda define}s~$f$. To compute $f(n_1, \dots, n_k)$, first obtain
   the G\"odel numbers of the corresponding Church numerals using
   $\fn{toChurch}(n_i)$, append these to $\Gn{F}$ to obtain the G\"odel
