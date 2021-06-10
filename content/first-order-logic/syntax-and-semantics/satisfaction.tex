@@ -135,24 +135,24 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 
 \begin{explain}
 The variable assignments are important in the last
-\iftag{notprvEx,notprvAll}{clause}{two clauses}.  \iftag{prvAll}{We
-  cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $a
-  \in \Domain{M}$, $\Sat{M}{!B(a)}$.''}{} \iftag{prvEx}{We cannot define
-  satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $a \in
-  \Domain{M}$, $\Sat{M}{!B(a)}$.''}{} The reason is that $a$ is not
-symbol of the language, and so $!B(a)$ is not a !!{formula} (that is,
+\iftag{notprvEx,notprvAll}{clause}{two clauses}.\iftag{prvAll}{ We
+cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $a \in
+\Domain{M}$, $\Sat{M}{!B(a)}$.''}{}\iftag{prvEx}{ We cannot define
+satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $a \in
+\Domain{M}$, $\Sat{M}{!B(a)}$.''}{} The reason is that $a$ is not
+symbol of the language, and so $!B(a)$ is not !!a{formula} (that is,
 $\Subst{!B}{a}{x}$ is undefined).  We also cannot assume that we have
 !!{constant}s or terms available that name every !!{element}
 of~$\Struct{M}$, since there is nothing in the definition of
-!!{structure}s that requires it.  Even in the standard language the
-set of !!{constant}s is !!{denumerable}, so if $\Domain{M}$ is not
+!!{structure}s that requires it.  In the standard language, the set of
+!!{constant}s is !!{denumerable}, so if $\Domain{M}$ is not
 !!{enumerable} there aren't even enough !!{constant}s to name every
 object.
 \end{explain}
 
 \begin{ex}
-Let $\Lang{L} = \{a, b, f, R\}$ where $a$ and $b$ are !!{constant}s, $f$
-is a two-place !!{function}, and $R$ is a two-place !!{predicate}.
+Let $\Lang{L} = \{a, b, f, R\}$ where $a$ and $b$ are !!{constant}s,
+$f$~is a two-place !!{function}, and $R$~is a two-place !!{predicate}.
 Consider the !!{structure}~$\Struct{M}$ defined by:
 \begin{enumerate}
 \item $\Domain M = \{1, 2, 3, 4\}$
