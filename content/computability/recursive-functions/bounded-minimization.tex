@@ -38,11 +38,16 @@ write the function~$m_R$ as
 Note than there can be no~$z < 0$ such that $R(\vec{x}, z)$ since
 there is no $z < 0$ at all.  So $m_R(\vec x, 0) = 0$.
 
-In case the bound is of the form $y + 1$ we have three cases: (a)
-There is a $z < y$ such that $R(\vec{x}, z)$, in which case
-$m_R(\vec{x}, y+1) = m_R(\vec{x}, y)$. (b) There is no such~$z<y$ but
-$R(\vec{x}, y)$ holds, then $m_R(\vec{x}, y+1) = y$. (c) There is no $z
-< y+1$ such that $R(\vec{x}, z)$, then $m_R(\vec{z}, y+1) = y+1$. So,
+In case the bound is of the form $y + 1$ we have three cases:
+\begin{enumerate}
+\item There is a $z < y$ such that $R(\vec{x}, z)$, in which case
+$m_R(\vec{x}, y+1) = m_R(\vec{x}, y)$.
+\item There is no such~$z<y$ but $R(\vec{x}, y)$ holds, then
+$m_R(\vec{x}, y+1) = y$.
+\item There is no $z < y+1$ such that $R(\vec{x}, z)$, then
+$m_R(\vec{z}, y+1) = y+1$.
+\end{enumerate}
+So we can define $m_R(\vec x, 0)$ by primitive recursion as follows:
 \begin{align*}
 m_R(\vec{x}, 0) & = 0\\
 m_R(\vec{x}, y+1) & =

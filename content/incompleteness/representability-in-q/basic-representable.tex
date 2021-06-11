@@ -7,7 +7,7 @@
 \begin{document}
 
 \olfileid{inc}{req}{bre}
-\olsection{Basic Functions are Representable in $\Th{Q}$}
+\olsection{Basic Functions are Representable in~$\Th{Q}$}
 
 First we have to show that all the basic functions are representable
 in~$\Th{Q}$. In the end, we need to show how to assign to each $k$-ary
@@ -31,19 +31,19 @@ that for every pair of natural numbers $m$ and $n$, $\Th{Q}$ proves
 \begin{prop}
 \ollabel{prop:rep-zero}
 The zero function $\Zero(x) = 0$ is represented in~$\Th{Q}$ by
-$\eq[y][\Obj 0]$.
+$!A_{\Zero}(x,y) \ident \eq[y][\Obj 0]$.
 \end{prop}
 
 \begin{prop}
 \ollabel{prop:rep-succ}
 The successor function $\Succ(x) = x+1$ is represented in~$\Th{Q}$ by
-$\eq[y][x']$.  
+$!A_{\Succ}(x,y) \ident \eq[y][x']$.  
 \end{prop}
 
 \begin{prop}
 \ollabel{prop:rep-proj}
 The projection function $\Proj{n}{i}(x_0, \dots, x_{n-1}) = x_i$ is
-represented in~$\Th{Q}$ by $\eq[y][x_i]$.
+represented in~$\Th{Q}$ by \[!A_{\Proj{n}{i}}(x_0, \dots, x_{n-1}, y) \ident \eq[y][x_i].\]
 \end{prop}
 
 \begin{prob}
@@ -63,7 +63,7 @@ The characteristic function of~$=$,
 \]
 is represented in~$\Th{Q}$ by
 \[
-(\eq[x_0][x_1] \land \eq[y][\num{1}]) \lor (\eq/[x_0][x_1] \land
+  !A_{\Char{=}}(x_0, x_1, y) \ident (\eq[x_0][x_1] \land \eq[y][\num{1}]) \lor (\eq/[x_0][x_1] \land
 \eq[y][\num{0}]).
 \]
 \end{prop}
@@ -143,7 +143,7 @@ entails $\eq[y][\num{0}]$.
 The addition function $\Add(x_0, x_1) = x_0+x_1$ is represented
 in~$\Th{Q}$ by
 \[
-y = (x_0 + x_1).
+  !A_{\Add}(x_0, x_1, y) \ident \eq[y][(x_0 + x_1)].
 \]
 \end{prop}
 
@@ -191,7 +191,7 @@ $\eq[\num{n+m}][y]$, for arbitrary~$y$.
 The multiplication function $\Mult(x_0, x_1) = x_0 \cdot x_1$ is represented
 in~$\Th{Q}$ by
 \[
-y = (x_0 \times x_1).
+  !A_{\Mult}(x_0, x_1, y) \ident y = (x_0 \times x_1).
 \]
 \end{prop}
 

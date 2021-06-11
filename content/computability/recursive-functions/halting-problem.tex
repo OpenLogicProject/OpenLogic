@@ -62,16 +62,18 @@ d(y) =
 \umin{x}{x \neq x} & \text{otherwise.}
 \end{cases}
 \]
-From this definition it follows that
+Since no number $x$ satisfies $x \neq x$, there is no $\umin{x}{x \neq
+x}$, and so $d(y) \fundefined$ iff $h(y,y) \neq 0$. From this
+definition it follows that
 \begin{enumerate}
 \item $d(y) \fdefined$ iff $\cfind{y}(y) \fundefined$ or $y$ is
   not the index of a partial recursive function.
 \item $d(y) \fundefined$ iff $\cfind{y}(y) \fdefined$.
 \end{enumerate}
 If $h$ were partial recursive, then $d$ would be partial recursive as
-well.  Thus, by the Kleene normal form theorem, it has an index
-$e_d$. Consider the value of $h(e_d, e_d)$. There are two
-possible cases, 0 and 1.
+well.  Thus, by the Kleene normal form theorem, it has an index~$e_d$.
+Consider the value of $h(e_d, e_d)$. There are two possible cases, $0$
+and~$1$.
 \begin{enumerate}
 \item If $h(e_d, e_d) = 1$ then $\cfind{e_d}(e_d) \fdefined$.  But
   $\cfind{e_d} \simeq d$, and $d(e_d)$ is defined iff $h(e_d, e_d) = 0$.

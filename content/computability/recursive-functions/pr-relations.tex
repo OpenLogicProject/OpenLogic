@@ -46,7 +46,7 @@ recursive functions. So the following are also primitive recursive:
 
 
 \begin{prop}
-  The set of primitive recursive relations is closed under boolean
+  The set of primitive recursive relations is closed under Boolean
   operations, that is, 
   if $P(\vec x)$ and $Q(\vec x)$ are primitive recursive, so are
   \begin{enumerate}
@@ -88,21 +88,23 @@ recursive functions. So the following are also primitive recursive:
 \begin{prop}
   The set of primitive recursive relations is closed under bounded
   quantification, i.e., if $R(\vec x, z)$ is a primitive recursive
-  relation, then so are the relations $\bforall{z < y}{R(\vec x, z)}$
-  and $\bexists{z < y}{R(\vec x, z)}$.
-
-  ($\bforall{z < y}{R(\vec x, z)}$ holds of $\vec x$ and $y$ if and
+  relation, then so are the relations
+  \begin{align*}
+    & \bforall{z < y}{R(\vec x, z)} \text{ and}\\
+    & \bexists{z < y}{R(\vec x, z)}.
+  \end{align*}
+  $\bforall{z < y}{R(\vec x, z)}$ holds of $\vec x$ and $y$ if and
   only if $R(\vec x, z)$ holds for every~$z$ less than~$y$, and
-  similarly for $\bexists{z < y}{R(\vec x, z)}$.)
+  similarly for $\bexists{z < y}{R(\vec x, z)}$.
 \end{prop}
 
 \begin{proof}
   By convention, we take $\bforall{z < 0}{R(\vec x, z)}$ to be true
-  (for the trivial reason that there are no $z$ less than $0$) and
-  $\bexists{z < 0}{R(\vec x, z)}$ to be false. A universal quantifier
-  functions just like a finite product or iterated minimum, i.e., if
-  $P(\vec x, y) \defiff \bforall{z < y}{R(\vec x, z)}$ then
-  $\Char{P}(\vec x, y)$ can be defined by
+  (for the trivial reason that there are no $z$ less than~$0$) and
+  $\bexists{z < 0}{R(\vec x, z)}$ to be false. A bounded
+  universal quantifier functions just like a finite product or
+  iterated minimum, i.e., if $P(\vec x, y) \defiff \bforall{z <
+  y}{R(\vec x, z)}$ then $\Char{P}(\vec x, y)$ can be defined by
   \begin{align*}
     \Char{P}(\vec x, 0) & = 1\\
     \Char{P}(\vec x, y+1) & =
@@ -110,10 +112,10 @@ recursive functions. So the following are also primitive recursive:
   \end{align*}
   Bounded existential quantification can similarly be defined using
   $\fn{max}$. Alternatively, it can be defined from bounded universal
-  quantification, using the equivalence $\bexists{z < y}{R(\vec x, z)} \liff
-  \lnot \bforall{z < y}{\lnot R(\vec x, z)}$. Note that, for example, a
-  bounded quantifier of the form $\bexists{x \leq y}{\dots x\dots}$ is
-  equivalent to $\bexists{x < y+1}{\dots x \dots}$.
+  quantification, using the equivalence $\bexists{z < y}{R(\vec x, z)}
+  \liff \lnot \bforall{z < y}{\lnot R(\vec x, z)}$. Note that, for
+  example, a bounded quantifier of the form $\bexists{x \leq y}{\dots
+  x\dots}$ is equivalent to $\bexists{x < y+1}{\dots x \dots}$.
 \end{proof}
 
 \begin{prob}

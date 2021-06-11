@@ -44,12 +44,12 @@ computes the G\"odel number of the diagonalization of the !!{formula}
 with G\"odel number~$n$, we could write $!E(x)$ as
 $!B(\Obj{diag}(x))$. And Quine's version of the liar sentence would
 then be the diagonalization of it, i.e., $!E(\gn{!E(x)})$ or
-$!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$.  Of course, $!B(x)$ could now
-be any other property, and the same construction would work. For the
-incompleteness theorem, we'll take $!B(x)$ to be ``$x$ is not !!{derivable}
-in~$\Th{T}$.'' Then $!E(x)$ would be ``yields !!a{sentence} not !!{derivable}
-in~$\Th{T}$ when applied to the G\"odel number of its
-diagonalization.''
+$!B(\Obj{diag}(\gn{!B(\Obj{diag}(x))}))$.  Of course, $!B(x)$ could
+now be any other property, and the same construction would work. For
+the incompleteness theorem, we'll take $!B(x)$ to be ``$x$~is not
+!!{derivable} in~$\Th{T}$.'' Then $!E(x)$ would be ``yields
+!!a{sentence} not !!{derivable} in~$\Th{T}$ when applied to the
+G\"odel number of its diagonalization.''
 
 To formalize this in~$\Th{T}$, we have to find a way to formalize
 $\fn{diag}$. The function $\fn{diag}(n)$ is computable, in fact, it is
@@ -110,13 +110,17 @@ definition of $!E(x)$, we see that $!E(\gn{!E(x)})$ just is
 \lexists[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \land !B(y))].
 \]
 Consider such a~$y$. Since $!D_{\fn{diag}}(\gn{!E(x)},y)$, by
-\olref{repdiag2}, $y = \gn{!A}$. So, from $!B(y)$ we have
-$!B(\gn{!A})$.
+\olref{repdiag2}, $y = \gn{!A}$. So, from $!B(y)$ we
+have~$!B(\gn{!A})$.
 
 Now suppose $!B(\gn{!A})$. By \olref{repdiag1}, we have
-$!D_{\fn{diag}}(\gn{!E(x)}, \gn{!A}) \land !B(\gn{!A})$. It follows
-that $\lexists[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \land !B(y))]$. But
-that's just $!E(\gn{!E(x)})$, i.e., $!A$.
+\begin{align*}
+& !D_{\fn{diag}}(\gn{!E(x)}, \gn{!A}) \land !B(\gn{!A}).
+\intertext{It follows
+that}
+& \lexists[y][(!D_{\fn{diag}}(\gn{!E(x)},y) \land !B(y))].
+\end{align*}
+But that's just $!E(\gn{!E(x)})$, i.e.,~$!A$.
 \end{proof}
 
 \begin{digress}

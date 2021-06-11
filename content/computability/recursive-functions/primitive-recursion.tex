@@ -30,8 +30,8 @@ h(0) & =  1\\
 h(x+1) & =  2 \cdot h(x)
 \end{align*}
 If we already know how to multiply, then these equations give us the
-information required for (a) and~(b) above. Successively the second
-equation, we get that
+information required for (a) and~(b) above. By successively applying
+the second equation, we get that
 \begin{align*}
   h(1) & = 2\cdot h(0) = 2,\\
   h(2) & = 2\cdot h(1) = 2\cdot 2,\\
@@ -100,12 +100,12 @@ The general pattern then is this: to give a primitive recursive
 definition of a function~$h(x_0, \dots, x_{k-1}, y)$, we provide two
 equations. The first defines the value of $h(x_0, \dots, x_{k-1}, 0)$
 without reference to~$h$. The second defines the value of $h(x_0,
-\dots, x_{k-1}, y+1)$ in terms of $h(x_0, \dots, x_{k-1}, y)$, the other
-arguments $x_0$, \dots,~$x_{k-1}$, and~$y$. Only the immediately preceding
-value of~$h$ may be used in that second equation.  If we think of the
-operations given by the right-hand-sides of these two equations as
-themselves being functions $f$ and~$g$, then the pattern to define a
-new function~$h$ by primitive recursion is this:
+\dots, x_{k-1}, y+1)$ in terms of $h(x_0, \dots, x_{k-1}, y)$, the
+other arguments $x_0$, \dots,~$x_{k-1}$, and~$y$. Only the immediately
+preceding value of~$h$ may be used in that second equation.  If we
+think of the operations given by the right-hand-sides of these two
+equations as themselves being functions $f$ and~$g$, then the general
+pattern to define a new function~$h$ by primitive recursion is this:
 \begin{align*}
   h(x_0, \dots, x_{k-1}, 0) & = f(x_0, \dots, x_{k-1})\\
   h(x_0, \dots, x_{k-1}, y+1) & =
