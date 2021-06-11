@@ -504,7 +504,7 @@ Richard Zach, \emph{University of Calgary}
 
 Aldo Antonelli,$^\dagger$ \emph{University of California, Davis}
 
-Andrew Arana, \emph{Universit\'e Paris I Panth\'enon--Sorbonne}
+Andrew Arana, \emph{Universit\'e de Lorraine}
 
 Jeremy Avigad, \emph{Carnegie Mellon University}
 
@@ -512,7 +512,7 @@ Tim Button, \emph{University College London}
 
 Walter Dean, \emph{University of Warwick}
 
-Gillian Russell, \emph{University of North Carolina}
+Gillian Russell, \emph{Dianoia Institute of Philosophy}
 
 Nicole Wyatt, \emph{University of Calgary}
 
@@ -524,7 +524,7 @@ Audrey Yap, \emph{University of Victoria}
 
 \medskip
 
-Samara Burns, \emph{University of Calgary}
+Samara Burns, \emph{Columbia University}
 
 Dana H\"agg, \emph{University of Calgary}
 
