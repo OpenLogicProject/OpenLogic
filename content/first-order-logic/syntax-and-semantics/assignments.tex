@@ -156,33 +156,37 @@ hypothesis applies to~$!B$.
   \iftag{probEx}{%
     \indcase!{!A}{\lexists[x][!B]}{}}{%
     \indcase{!A}{\lexists[x][!B]}{if $\Sat{M}{\indfrm}[s_1]$, there is
-      an $x$-variant $s_1'$ of~$s_1$ so that $\Sat{M}{!B}[s_1']$. Let
-      $s_2'$ be the $x$-variant of $s_2$ that assigns the same thing
-      to~$x$ as does $s_1'$. The free variables of $!B$ are among
-      $x_1$, \dots, $x_n$, and $x$. $s_1'(x_i) = s_2'(x_i)$, since
-      $s_1'$ and $s_2'$ are $x$-variants of $s_1$ and~$s_2$,
-      respectively, and by hypothesis $s_1(x_i) = s_2(x_i)$. $s_1'(x)
-      = s_2'(x)$ by the way we have defined $s_2'$. Then the induction
+      an $m \in \Domain{M}$ so that $\Sat{M}{!B}[\Subst{s_1}{m}{x}]$.
+      Let let $s_1' = \Subst{s_1}{m}{x}$ and $s_2' =
+      \Subst{s_2}{m}{x}$. The free variables of~$!B$ are among $x_1$,
+      \dots, $x_n$, and $x$. $s_1'(x_i) = s_2'(x_i)$, since $s_1'$ and
+      $s_2'$ are $x$-variants of $s_1$ and~$s_2$, respectively, and by
+      hypothesis $s_1(x_i) = s_2(x_i)$. $s_1'(x) = s_2'(x) = m$ by the
+      way we have defined $s_1'$ and~$s_2'$. Then the induction
       hypothesis applies to $!B$ and $s_1'$, $s_2'$, so
-      $\Sat{M}{!B}[s_2']$. Hence, there is an $x$-variant of $s_2$
-      that satisfies~$!B$, and so $\Sat{M}{\indfrm}[s_2]$.}}}
+      $\Sat{M}{!B}[s_2']$. Hence, since $s_2' = \Subst{s_2}{m}{x}$,
+      there is an $m \in \Domain{M}$ such that
+      $\Sat{M}{!B}{\Subst{s_2}{m}{x}}$, and so
+      $\Sat{M}{\indfrm}[s_2]$.}}}
 
 \tagitem{defAll}{}{%
   \iftag{probAll}{%
     \indcase!{!A}{\lforall[x][!B]}{}}{%
     \indcase{!A}{\lforall[x][!B]}{if $\Sat{M}{\indfrm}[s_1]$, then for
-      every $x$-variant $s_1'$ of $s_1$, $\Sat{M}{!B}[s_1']$. Take an
-      arbitrary $x$-variant~$s_2'$ of $s_2$, let $s_1'$ be the
-      $x$-variant of $s_1$ which assigns the same thing to~$x$ as
-      does~$s_2'$. The free variables of~$!B$ are among $x_1$, \dots,
-      $x_n$, and $x$. $s_1'(x_i) = s_2'(x_i)$, since $s_1'$ and $s_2'$
-      are $x$-variants of $s_1$ and~$s_2$, respectively, and by
-      hypothesis $s_1(x_i) = s_2(x_i)$. $s_1'(x) = s_2'(x)$ by the way
-      we have defined $s_1'$. Then the induction hypothesis applies
-      to~$!B$ and~$s_1'$, $s_2'$, and we have $\Sat{M}{!B}[s_2']$.
-      Since $s_2'$ is an arbitrary $x$-variant of~$s_2$, every
-      $x$-variant of $s_2$ satisfies~$!B$, and so
-      $\Sat{M}{\indfrm}[s_2]$.}}}
+      every $m \in \Domain{M}$, $\Sat{M}{!B}[\Subst{s_1}{m}{x}]$. We
+      want to show that also, for every $m \in \Domain{M}$,
+      $\Sat{M}{!B}[\Subst{s_2}{m}{x}]$. So let $m \in \Domain{M}$ be
+      arbitrary, and consider $s_1' = \Subst{s}{m}{x}$ and $s_2' =
+      \Subst{s}{m}{x}$. We have that $\Sat{M}{!B}[s_1']$. The free
+      variables of~$!B$ are among $x_1$, \dots, $x_n$, and $x$.
+      $s_1'(x_i) = s_2'(x_i)$, since $s_1'$ and $s_2'$ are
+      $x$-variants of $s_1$ and~$s_2$, respectively, and by hypothesis
+      $s_1(x_i) = s_2(x_i)$. $s_1'(x) = s_2'(x) = m$ by the way we
+      have defined $s_1'$ and~$s_2'$. Then the induction hypothesis
+      applies to~$!B$ and~$s_1'$, $s_2'$, and we have
+      $\Sat{M}{!B}[s_2']$. This applies to every $m \in \Domain{M}$,
+      i.e., $\Sat{M}{!B}[\Subst{s_2}{m}{x}]$ for all~$m \in
+      \Domain{M}$, so $\Sat{M}{\indfrm}[s_2]$.}}}
 \end{enumerate}
 By induction, we get that $\Sat{M}{!A}[s_1]$ iff $\Sat{M}{!A}[s_2]$
 whenever the free !!{variable}s in $!A$ are among $x_1$, \dots, $x_n$

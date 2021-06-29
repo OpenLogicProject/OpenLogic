@@ -13,10 +13,10 @@
 \begin{explain}
 To define the satisfaction relation $\Sat{M}{!A}[s]$ for second-order
 !!{formula}s, we have to extend the definitions to cover second-order
-variables.  The notion of !!a{structure} is the same for second-order
+!!{variable}s.  The notion of !!a{structure} is the same for second-order
 logic as it is for first-order logic. There is only a difference for
 variable assignments~$s$: these now must not just provide values for
-the first-order variables, but also for the second-order variables.
+the first-order !!{variable}s, but also for the second-order !!{variable}s.
 \end{explain}
 
 \begin{defn}[Variable Assignment]
@@ -62,6 +62,30 @@ from $s$ at most in what it assigns to $x$ is called an
 $\varAssign{s'}{s}{x}$. (Similarly for second-order variables $X$ or $u$.)
 \end{defn}
 
+\begin{defn}
+  If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$
+  and $m \in \Domain{M}$, then the assignment~$\Subst{s}{m}{x}$ is the
+  !!{variable} assignment defined by
+  \[\Subst{s}{m}{y} = \begin{cases}
+    m & \text{if } y \ident x\\
+    s(y) & \text{otherwise},
+  \end{cases}\]
+  If $X$ is an $n$-place relation !!{variable} and $M \subseteq
+  \Domain{M}^n$, then $\Subst{s}{M}{X}$ is the !!{variable} assignment
+  defined by
+  \[\Subst{s}{M}{y} = \begin{cases}
+    M & \text{if } y \ident X\\
+    s(y) & \text{otherwise}. 
+  \end{cases}\]
+  If $u$ is an $n$-place function !!{variable} and $f\colon \Domain{M}^n
+  \to \Domain{M}$, then $\Subst{s}{f}{u}$ is the !!{variable} assignment
+  defined by
+  \[\Subst{s}{f}{y} = \begin{cases}
+    f & \text{if } y \ident u\\
+    s(y) & \text{otherwise}.
+  \end{cases}\]
+  In each case, $y$ may be any first- or second-order !!{variable}.
+\end{defn}
 
 \begin{defn}[Satisfaction]
 For second-order !!{formula}s~$!A$, the definition of satisfaction is
@@ -71,43 +95,46 @@ like \olref[fol][syn][sat]{defn:satisfaction} with the addition of:
   iff $\langle \Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s] \rangle \in
   s(X^n)$.}
 \tagitem{prvAll}{%
-  \indcase{!A}{\lforall[X][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-    $X$-variant $s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lforall[X][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every $M
+  \subseteq \Domain{M}^n$, $\Sat{M}{!B}[\Subst{s}{M}{X}]$.}}{}
 
 \tagitem{prvEx}{%
-  \indcase{!A}{\lexists[X][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-    $X$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lexists[X][!B]}{$\Sat{M}{\indfrm}[s]$ iff for at least
+  one $M \subseteq \Domain{M}^n$ so that
+  $\Sat{M}{!B}[\Subst{s}{M}{X}]$.}}{}
 
 \tagitem{prvAll}{%
   \indcase{!A}{\lforall[u][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-    $u$-variant $s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+  $f\colon \Domain{M}^n \to \Domain{M}$,
+  $\Sat{M}{!B}[\Subst{s}{f}{u}]$.}}{}
 
 \tagitem{prvEx}{%
-  \indcase{!A}{\lexists[u][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-    $u$-variant $s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lexists[u][!B]}{$\Sat{M}{\indfrm}[s]$ iff for at least
+  one $f\colon \Domain{M}^n \to \Domain{M}$ so that
+  $\Sat{M}{!B}[\Subst{s}{f}{u}]$.}}{}
 \end{enumerate}
 \end{defn}
 
 \begin{ex}
   Consider the !!{formula} $\lforall[z][(\Atom{X}{z} \liff \lnot
     \Atom{Y}{z})]$. It contains no second-order quantifiers, but does
-  contain the second-order variables $X$ and~$Y$ (here understood to
+  contain the second-order !!{variable}s $X$ and~$Y$ (here understood to
   be one-place). The corresponding first-order !!{sentence}
   $\lforall[z][(\Atom{P}{z} \liff \lnot \Atom{R}{z})]$ says that
-  whatever falls under the interpretation of $P$ does not fall under
+  whatever falls under the interpretation of~$P$ does not fall under
   the interpretation of~$R$ and vice versa. In !!a{structure}, the
   interpretation of !!a{predicate}~$P$ is given by the
   interpretation~$\Assign{P}{M}$. But for second-order !!{variable}s
-  like $X$ and $Y$, the interpretation is provided, not by the
-  !!{structure} itself, but by a !!{variable} assignment. Since the
-  second-order formula is not !!a{sentence} (it includes free
-  variables $X$ and~$Y$), it is only satisfied relative to
+  like $X$ and~$Y$, the interpretation is provided, not by the
+  !!{structure} itself, but by !!a{variable} assignment. Since the
+  second-order !!{formula} is not !!a{sentence} (it includes free
+  !!{variable}s $X$ and~$Y$), it is only satisfied relative to
   !!a{structure}~$\Struct{M}$ together with !!a{variable}
   assignment~$s$.
 
   $\Sat{M}{\lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})]}[s]$
   whenever the !!{element}s of~$s(X)$ are not !!{element}s of~$s(Y)$,
-  and vice versa, i.e., iff $s(Y) = \Domain{M} \setminus s(X)$. So for
+  and vice versa, i.e., iff $s(Y) = \Domain{M} \setminus s(X)$. For
   instance, take $\Domain{M} = \{1, 2, 3\}$. Since no !!{predicate}s,
   !!{function}s, or !!{constant}s are involved, the domain
   of~$\Struct{M}$ is all that is relevant. Now for $s_1(X) = \{1, 2\}$
@@ -116,24 +143,23 @@ like \olref[fol][syn][sat]{defn:satisfaction} with the addition of:
 
   By contrast, if we have $s_2(X) = \{1, 2\}$ and $s_2(Y) = \{2, 3\}$,
   $\Sat/{M}{\lforall[z][(\Atom{X}{z} \liff \lnot
-      \Atom{Y}{z})]}[s_2]$. That's because there is a $z$-variant
-  $s_2'$ of~$s_2$ with $s_2'(z) = 2$ where
-  $\Sat{M}{\Atom{X}{z}}[s_2']$ (since $2 \in s_2'(X)$) but
-  $\Sat/{M}{\lnot \Atom{Y}{z}}[s_2']$ (since also $s_2'(z) \in
-  s_2'(Y)$).
+      \Atom{Y}{z})]}[s_2]$. That's because 
+  $\Sat{M}{\Atom{X}{z}}[\Subst{s_2}{2}{z}]$ (since $2 \in \Subst{s_2}{2}{z}(X)$) but
+  $\Sat/{M}{\lnot \Atom{Y}{z}}[\Subst{s_2}{2}{z}]$ (since also $2 \in
+  \Subst{s_2}{2}{z}(Y)$).
 \end{ex}
 
 \begin{ex}
-$\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
-      \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ if
-  there is an $\varAssign{s'}{s}{Y}$ such that
-  $\Sat{M}{(\lexists[y][\Atom{Y}{y}] \land \lforall[z][(\Atom{X}{z}
-      \liff \lnot \Atom{Y}{z})])}[s']$. And that is the case iff $s'(Y)
-  \neq \emptyset$ (so that $\Sat{M}{\lexists[y][\Atom{Y}{y}]}[s']$)
-  and, as in the previous example, $s'(Y) = \Domain{M} \setminus
-  s'(X)$. In other words,
   $\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
-      \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ iff
+  \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ if there
+  is an $N \subseteq \Domain{M}$ such that
+  $\Sat{M}{(\lexists[y][\Atom{Y}{y}] \land \lforall[z][(\Atom{X}{z}
+  \liff \lnot \Atom{Y}{z})])}[\Subst{s}{N}{Y}]$. And that is the case
+  for any $N \neq \emptyset$ (so that
+  $\Sat{M}{\lexists[y][\Atom{Y}{y}]}[\Subst{s}{N}{Y}]$) and, as in the
+  previous example, $M = \Domain{M} \setminus s(X)$. In other words,
+  $\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
+  \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]}[s]$ iff
   $\Domain{M} \setminus s(X)$ is non-empty, i.e., $s(X) \neq
   \Domain{M}$. So, the !!{formula} is satisfied, e.g., if $\Domain{M}
   = \{1, 2, 3\}$ and $s(X) = \{1, 2\}$, but not if $s(X) = \{1, 2, 3\}
@@ -153,7 +179,7 @@ $\Sat{M}{\lexists[Y][(\lexists[y][\Atom{Y}{y}] \land
       \lforall[z][(\Atom{X}{z} \liff \lnot \Atom{Y}{z})])]]
   \]
   is satisfied relative to any assignment~$s$, since we can always
-  find an $X$-variant~$s'$ of~$s$ with $s'(X) \neq \Domain{M}$.
+  find $M \subseteq \Domain{M}$ but $M \neq \Domain{M}$ (e.g., $M = \emptyset$).
 \end{ex}
 
 \end{document}

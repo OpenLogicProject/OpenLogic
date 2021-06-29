@@ -129,7 +129,7 @@ how you might convince yourself of this directly: First suppose the
 second-order sentence is true in !!a{structure}~$\Struct{M}$. Since $x$ and $X$
 are universally quantified, the remainder must hold for any $x \in W$
 and set~$X \subseteq W$, e.g., the set $\Setabs{z}{Rxz}$ where $R =
-\Assign{Q}{M}$. So, for any $s$ with $s(x) \in W$ and $s(X) =
+\Assign{Q}{M}$. So, for any~$s$ with $s(x) \in W$ and $s(X) =
 \Setabs{z}{Rxz}$ we have $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
     \Atom{X}{y})] \lif \Atom{X}{x}}$. But by the way we've picked
 $s(X)$ that means $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
@@ -142,7 +142,7 @@ $\Sat{M}{\lforall[X][\lforall[x][(\lforall[y][(\Atom{Q}{x,y} \lif
         \Atom{X}{y})] \lif \Atom{X}{x})]]}$. Pick any assignment~$s$,
 and assume $\Sat{M}{\lforall[y][(\Atom{Q}{x,y} \lif
     \Atom{X}{y})]}[s]$. Let $s'$ be the $y$-variant of~$s$ with $s'(y)
-= x$; we have $\Sat{M}{\Atom{Q}{x,y} \lif \Atom{X}{y}}[s']$, i.e.,
+= s(x)$; we have $\Sat{M}{\Atom{Q}{x,y} \lif \Atom{X}{y}}[s']$, i.e.,
 $\Sat{M}{\Atom{Q}{x,x} \lif \Atom{X}{x}}[s]$. Since
 $\Sat{M}{\lforall[x][\Atom{Q}{x,x}]}$, the antecedent is true, and we
 have $\Sat{M}{\Atom{X}{x}}[s]$, which is what we needed to show.

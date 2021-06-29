@@ -90,14 +90,16 @@ $s(u) = f$. We show that
 \Sat{M}{\lforall[X][((X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
     \lif \lforall[x][X(x)])]}[s]
 \]
-Suppose $\varAssign{s'}{s}{X}$ is arbitrary, and let $M = s'(X)$. Suppose
-further that $\Sat{M}{(X(z) \land \lforall[x][(X(x) \lif
-    X(u(x)))])}[s']$. Then $s'(z) \in M$ and whenever $x \in M$, also
-$s'(u)(x) \in M$. In other words, since $\varAssign{s'}{s}{X}$, $m_0 \in M$ and
-if $x \in M$ then $f(x) \in M$, so $m_0 \in M$, $m_1 = f(m_0) \in M$,
+Suppose $M \subseteq \Domain{M}$ is arbitrary. Suppose further that
+$\Sat{M}{(X(z) \land \lforall[x][(X(x) \lif
+X(u(x)))])}[\Subst{s}{M}{X}]$. Then $\Subst{s}{M}{X}(z) \in M$ and
+whenever $x \in M$, also $(\Subst{s}{M}{X}(u))(x) \in M$. In other
+words, since $\varAssign{\Subst{s}{M}{X}}{s}{X}$, $m_0 \in M$ and if
+$x \in M$ then $f(x) \in M$, so $m_0 \in M$, $m_1 = f(m_0) \in M$,
 $m_2 = f(f(m_0)) \in M$, etc. Thus, $M = \Domain{M}$, and so
-$\Sat{M}{\lforall[x][X(x)]}[s']$. Since $s'$ was an arbitrary
-$X$-variant of~$s$, we are done: $\Sat{M}{\fn{Count}}$.
+$\Sat{M}{\lforall[x][X(x)]}[\Subst{s}{M}{X}]$. Since $M \subseteq
+\Domain{M}$ was arbitrary, we are done:
+$\Sat{M}{\fn{Count}}$.
 
 Now assume that $\Sat{M}{\fn{Count}}$, i.e., 
 \[
@@ -105,19 +107,19 @@ Now assume that $\Sat{M}{\fn{Count}}$, i.e.,
     \lif \lforall[x][X(x)])]}[s]
 \]
 for some~$s$. Let $m = s(z)$ and $f = s(u)$ and consider $M = \{m,
-f(m), f(f(m)), \dots\}$. Let $s'$ be the $X$-variant of $s$ with $s(X)
-= M$. Then
+f(m), f(f(m)), \dots\}$. $M$ so defined is clearly !!{enumerable}.
+Then
 \[
 \Sat{M}{(X(z) \land \lforall[x][(X(x) \lif X(u(x)))])
-    \lif \lforall[x][X(x)]}[s']
+    \lif \lforall[x][X(x)]}[\Subst{s}{M}{X}]
 \]
-by assumption. Also, $\Sat{M}{X(z)}[s']$ since $s'(X) = M \ni m =
-s'(z)$, and also $\Sat{M}{\lforall[x][(X(x) \lif X(u(x)))]}[s']$ since
-whenever $x \in M$ also $f(x) \in M$. So, since both antecedent and
-conditional are satisfied, the consequent must also be:
-$\Sat{M}{\lforall[x][X(x)]}[s']$. But that means that $M =
-\Domain{M}$, and so $\Domain{M}$ is !!{enumerable} since $M$ is, by
-definition.
+by assumption. Also, $\Sat{M}{X(z)}[\Subst{s}{M}{X}]$ since $M \ni m =
+\Subst{s}{M}{X}(z)$, and also $\Sat{M}{\lforall[x][(X(x) \lif
+X(u(x)))]}[\Subst{s}{M}{X}]$ since whenever $x \in M$ also $f(x) \in
+M$. So, since both antecedent and conditional are satisfied, the
+consequent must also be: $\Sat{M}{\lforall[x][X(x)]}[\Subst{s}{M}{X}]$. But that
+means that $M = \Domain{M}$, and so $\Domain{M}$ is !!{enumerable}
+since $M$ is, by definition.
 \end{proof}
 
 \begin{prob}
