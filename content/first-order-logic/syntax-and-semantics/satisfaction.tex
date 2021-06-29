@@ -14,36 +14,38 @@
 \begin{explain}
 The basic notion that relates expressions such as terms and
 !!{formula}s, on the one hand, and !!{structure}s on the other, are
-those of \emph{!!{value}} of a term and \emph{satisfaction} of a
-!!{formula}.  Informally, the !!{value} of a term is an !!{element} of
-a !!{structure}---if the term is just a constant, its !!{value} is the
+those of \emph{!!{value}} of a term and \emph{satisfaction} of 
+!!a{formula}.  Informally, the !!{value} of a term is an !!{element} of
+!!a{structure}---if the term is just a constant, its !!{value} is the
 object assigned to the constant by the !!{structure}, and if it is
 built up using !!{function}s, the !!{value} is computed from the
 !!{value}s of constants and the functions assigned to the functions in
-the term.  A !!{formula} is \emph{satisfied} in a !!{structure} if the
+the term.  !!^a{formula} is \emph{satisfied} in !!a{structure} if the
 interpretation given to the predicates makes the !!{formula} true in
 the domain of the !!{structure}. This notion of satisfaction is
 specified inductively: the specification of the !!{structure} directly
 states when atomic !!{formula}s are satisfied, and we define when a
 complex !!{formula} is satisfied depending on the main connective or
 quantifier and whether or not the immediate !!{subformula}s are
-satisfied. The case of the quantifiers here is a bit tricky, as the
+satisfied. 
+
+The case of the quantifiers here is a bit tricky, as the
 immediate !!{subformula} of a quantified !!{formula} has a free
 !!{variable}, and !!{structure}s don't specify the !!{value}s of
 !!{variable}s.  In order to deal with this difficulty, we also
 introduce \emph{variable assignments} and define satisfaction not with
 respect to a !!{structure} alone, but with respect to a !!{structure}
-plus a !!{variable} assignment.
+plus !!a{variable} assignment.
 \end{explain}
 
 \begin{defn}[Variable Assignment]
-A \emph{variable assignment}~$s$ for a !!{structure}~$\Struct{M}$ is a
-function which maps each !!{variable} to an element of~$\Domain M$,
+A \emph{variable assignment}~$s$ for !!a{structure}~$\Struct{M}$ is a
+function which maps each !!{variable} to !!a{element} of~$\Domain M$,
 i.e., $s\colon \Var \to \Domain M$.
 \end{defn}
 
 \begin{explain}
-A !!{structure} assigns a !!{value} to each !!{constant}, and a
+!!^a{structure} assigns !!a{value} to each !!{constant}, and a
 variable assignment to each variable.  But we want to use terms built
 up from them to also name !!{element}s of the !!{domain}.  For this we
 define the !!{value} of terms inductively. For !!{constant}s and
@@ -55,7 +57,7 @@ recursively using the functions the !!{structure} assigns to the
 
 \begin{defn}[!!^{value} of Terms]
 If $t$ is a term of the language~$\Lang L$, $\Struct M$ is a
-!!{structure} for~$\Lang L$, and $s$ is a !!{variable} assignment
+!!{structure} for~$\Lang L$, and $s$ is !!a{variable} assignment
 for~$\Struct M$, the \emph{!!{value}}~$\Value{t}{M}[s]$ is defined as
 follows:
 \begin{enumerate}
@@ -70,10 +72,10 @@ follows:
 \end{defn}
 
 \begin{defn}[$x$-Variant]
-If $s$ is a !!{variable} assignment for a !!{structure}~$\Struct M$, then any
-!!{variable} assignment $s'$ for $\Struct M$ which differs from $s$ at most
-in what it assigns to $x$ is called an \emph{$x$-variant} of~$s$.  If
-$s'$ is an $x$-variant of $s$ we write $\varAssign{s'}{s}{x}$.
+If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$, then any
+!!{variable} assignment~$s'$ for~$\Struct M$ which differs from~$s$ at most
+in what it assigns to~$x$ is called an \emph{$x$-variant} of~$s$.  If
+$s'$ is an $x$-variant of~$s$ we write $\varAssign{s'}{s}{x}$.
 \end{defn}
 
 \begin{explain}
@@ -82,10 +84,24 @@ assign something different to~$x$.  In fact, every assignment counts
 as an $x$-variant of itself.
 \end{explain}
 
+\begin{defn}
+  If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$
+  and $m \in \Domain{M}$, then the assignment~$\Subst{s}{m}{x}$ is the
+  variable assignment defined by
+  \[\Subst{s}{m}{y} = \begin{cases}
+    m & \text{if } y \ident x\\
+    s(y) & \text{otherwise}.
+  \end{cases}\]
+\end{defn}
+
+In other words, $\Subst{s}{ma}{x}$ is the particular $x$-variant of~$s$
+which assigns the domain !!{element}~$m$ to~$x$, and assigns the same
+things to !!{variable}s other than~$x$.
+
 \begin{defn}[Satisfaction]
 \ollabel{defn:satisfaction}
-Satisfaction of a !!{formula}~$!A$ in a !!{structure}~$\Struct M$
-relative to a !!{variable} assignment~$s$, in symbols:
+Satisfaction of !!a{formula}~$!A$ in !!a{structure}~$\Struct M$
+relative to !!a{variable} assignment~$s$, in symbols:
 $\Sat{M}{!A}[s]$, is defined recursively as follows. (We write
 $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 \begin{enumerate}
@@ -125,29 +141,39 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 
 \tagitem{prvAll}{%
   \indcase{!A}{\lforall[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for every
-    $x$-variant~$s'$ of $s$, $\Sat{M}{!B}[s']$.}}{}
+    !!{element}~$m \in \Domain M$, $\Sat{M}{!B}[\Subst{s}{m}{x}]$.}}{}
 
 \tagitem{prvEx}{%
-  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff there is an
-    $x$-variant~$s'$ of $s$ so that $\Sat{M}{!B}[s']$.}}{}
+  \indcase{!A}{\lexists[x][!B]}{$\Sat{M}{\indfrm}[s]$ iff for at least
+  one !!{element}~$m \in \Domain M$, $\Sat{M}{!B}[\Subst{s}{m}{x}]$.}}{}
 \end{enumerate}
 \end{defn}
 
 \begin{explain}
 The variable assignments are important in the last
 \iftag{notprvEx,notprvAll}{clause}{two clauses}.\iftag{prvAll}{ We
-cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $a \in
-\Domain{M}$, $\Sat{M}{!B(a)}$.''}{}\iftag{prvEx}{ We cannot define
-satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $a \in
-\Domain{M}$, $\Sat{M}{!B(a)}$.''}{} The reason is that $a$ is not
-symbol of the language, and so $!B(a)$ is not !!a{formula} (that is,
-$\Subst{!B}{a}{x}$ is undefined).  We also cannot assume that we have
-!!{constant}s or terms available that name every !!{element}
-of~$\Struct{M}$, since there is nothing in the definition of
-!!{structure}s that requires it.  In the standard language, the set of
-!!{constant}s is !!{denumerable}, so if $\Domain{M}$ is not
-!!{enumerable} there aren't even enough !!{constant}s to name every
-object.
+cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $m \in
+\Domain{M}$, $\Sat{M}{!B(m)}$.''}{}\iftag{prvEx}{ We cannot define
+satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $m \in
+\Domain{M}$, $\Sat{M}{!B(m)}$.''}{} The reason is that if $m \in
+\Domain M$, it is not symbol of the language, and so $!B(a)$~is not
+!!a{formula} (that is, $\Subst{!B}{m}{x}$ is undefined).  We also
+cannot assume that we have !!{constant}s or terms available that name
+every !!{element} of~$\Struct{M}$, since there is nothing in the
+definition of !!{structure}s that requires it.  In the standard
+language, the set of !!{constant}s is !!{denumerable}, so if
+$\Domain{M}$ is not !!{enumerable} there aren't even enough
+!!{constant}s to name every object. 
+
+We solve this problem by introducing !!{variable} assignments, which
+allow us to link variables directly with !!{element}s of the domain.
+Then instead of saying that, e.g.,
+\iftag{prvEx}{$\lexists[x][!B(x)]$}{$\lforall[x][!B(x)]$} is satisfied
+in~$\Struct M$ iff \iftag{prvEx}{for at least one $m \in
+\Domain{M}$}{for all $m \in \Domain{M}$, $\Sat{M}{!B(m)}$}, we say it
+is satisfied in~$\Struct M$ \emph{relative to}~$s$ iff $!B(x)$ is
+satisfied relative to~$\Subst{s}{m}{x}$ \iftag{prvEx}{for at least
+one}{for every} $m \in \Domain M$.
 \end{explain}
 
 \begin{ex}
@@ -205,60 +231,72 @@ x) \lor R(x, b)$ is the~$\lif$, and
 
 Recall that an $x$-variant of~$s$ is a variable assignment that
 differs from $s$ at most in what it assigns to~$x$. For every
-!!{element} of~$\Domain{M}$, there is an $x$-variant of~$s$: $s_1(x) =
-1$, $s_2(x) = 2$, $s_3(x) = 3$, $s_4(x) = 4$, and with $s_i(y) = s(y)
-= 1$ for all variables~$y$ other than~$x$. These are all the
-$x$-variants of~$s$ for the structure~$\Struct{M}$, since $\Domain{M}
-= \{1, 2, 3, 4\}$. Note, in particular, that $s_1 = s$ is also an
-$x$-variant of~$s$, i.e., $s$~is always an $x$-variant of itself.
+!!{element} of~$\Domain{M}$, there is an $x$-variant of~$s$:
+\begin{align*}
+  s_1 & = \Subst{s}{1}{x}, &
+  s_2 & = \Subst{s}{2}{x},\\
+  s_3 & = \Subst{s}{3}{x}, &
+  s_4 & = \Subst{s}{4}{x}.
+\end{align*}
+So, e.g., $s_2(x) = 2$ and $s_2(y) = s(y) = 1$ for all variables~$y$
+other than~$x$. These are all the $x$-variants of~$s$ for the
+structure~$\Struct{M}$, since $\Domain{M} = \{1, 2, 3, 4\}$. Note, in
+particular, that $s_1 = s$ ($s$~is always an $x$-variant of itself).
 
 \iftag{prvEx}{To determine if an existentially quantified
   !!{formula}~$\lexists[x][!A(x)]$ is satisfied, we have to determine
-  if $\Sat{M}{!A(x)}[s']$ for at least one $x$-variant~$s'$
-  of~$s$. So,
+  if $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ for at least one $m \in \Domain
+  M$. So,
   \[
   \Sat{M}{\lexists[x][(R(b,x) \lor R(x,b))]}[s],
   \]
-  since $\Sat{M}{R(b,x) \lor R(x, b)}[s_1]$ ($s_3$ would also fit the
-  bill).  But,
+  since $\Sat{M}{R(b,x) \lor R(x, b)}[\Subst{s}{1}{x}]$
+  ($\Subst{s}{3}{x}$ would also fit the bill).  But,
   \[
   \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))]}[s]
   \]
-  since for none of the $s_i$, $\Sat{M}{R(b,x) \land R(x,b)}[s_i]$.}{}
+  since, whichever $m \in \Domain{M}$ we pick, $\Sat/{M}{R(b,x) \land R(x,b)}[\Subst{s}{m}{x}]$.}{}
 
 \iftag{prvAll}{To determine if a universally quantified
   !!{formula}~$\lforall[x][!A(x)]$ is satisfied, we have to determine
-  if $\Sat{M}{!A(x)}[s']$ for all $x$-variants~$s'$ of~$s$. So,
+  if $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ for all $m \in \Domain M$. So,
   \[
   \Sat{M}{\lforall[x][(R(x,a) \lif R(a,x))]}[s],
   \]
-  since $\Sat{M}{R(x,a) \lif R(a,x)}[s_i]$ for all $s_i$
-  ($\Sat{M}{R(a,x)}[s_1]$ and $\Sat/{M}{R(x,a)}[s_j]$ for $j = 2$,
-  $3$, and~$4$).  But,
+  since $\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]$ for all $m \in
+  \Domain M$. For $m = 1$, we have $\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]$
+  so the consequent is true; for $m = 2$, $3$, and~$4$, we have
+  $\Sat/{M}{R(x,a)}[\Subst{s}{m}{x}]$, so the antecedent is false).
+  But,
   \[
   \Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s]
   \]
-  since $\Sat/{M}{R(a,x) \lif R(x,a)}[s_2]$ (because $\Sat{M}{R(a,
-    x)}[s_2]$ and $\Sat/{M}{R(x, a)}[s_2]$).}{}
+  since $\Sat/{M}{R(a,x) \lif R(x,a)}[\Subst{s}{2}{x}]$ (because
+  $\Sat{M}{R(a, x)}[\Subst{s}{2}{x}]$ and $\Sat/{M}{R(x,
+  a)}[\Subst{s}{2}{x}]$).}{}
 
 \iftag{defEx}{To determine if an existentially quantified
   !!{formula}~$\lexists[x][!A(x)]$ is satisfied, we have to determine
-  if $\Sat{M}{\lnot \lforall[x][\lnot !A(x)]}[s]$. For instance, we have
+  if $\Sat{M}{\lnot \lforall[x][\lnot !A(x)]}[s]$. For instance, we
+  have
   \[
   \Sat{M}{\lexists[x][(R(b,x) \lor R(x,b))]}[s].
   \]
-  First, $\Sat{M}{R(b,x) \lor R(x, b)}[s_1]$ ($s_3$ would also fit the
-  bill).  So, $\Sat/{M}{\lnot(R(b,x) \lor R(x,b))}[s_1]$, thus
-  $\Sat/{M}{\lforall[x][\lnot((R(b,x) \lor R(x,b))]}[s]$, and therefore
-  $\Sat{M}{\lnot\lforall[x][\lnot((R(b,x) \lor R(x,b))]}[s]$.
-  On the other hand,
+  First, $\Sat{M}{R(b,x) \lor R(x, b)}[\Subst{s}{1}{x}]$
+  ($\Subst{s}{3}{x}$ would also fit the bill).  So,
+  $\Sat/{M}{\lnot(R(b,x) \lor R(x,b))}[\Subst{s}{1}{x}]$, thus
+  $\Sat/{M}{\lforall[x][\lnot((R(b,x) \lor R(x,b))]}[s]$, and
+  therefore $\Sat{M}{\lnot\lforall[x][\lnot((R(b,x) \lor
+  R(x,b))]}[s]$. On the other hand,
   \[
-  \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))],}[s]
+  \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))],}[s].
   \]
-  since for none of the $s_i$, $\Sat{M}{R(b,x) \land R(x,b)}[s_i]$,
-  $\Sat{M}{\lforall[x][\lnot(R(b,x) \land R(x,b))]}[s]$. As you can
-  probably guess from these examples, $\Sat{M}{\lexists[x][!A(x)]}[s]$
-  iff $\Sat{M}{!A(x)}[s']$ for at least one $x$-variant~$s'$ of~$s$.}{}
+  That's because $\Sat{M}{\lforall[x][\lnot(R(b,x) \land
+  R(x,b))]}[s]$, since for no $m \in \Domain M$, $\Sat{M}{R(b,x) \land
+  R(x,b)}[\Subst{s}{m}{x}]$. As you can probably guess from these
+  examples, $\Sat{M}{\lexists[x][!A(x)]}[s]$ iff
+  $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ for at least one $m \in \Domain
+  M$.}{}
 
 \iftag{defAll}{To determine if a universally quantified
   !!{formula}~$\lforall[x][!A(x)]$ is satisfied, we have to determine
@@ -266,40 +304,49 @@ $x$-variant of~$s$, i.e., $s$~is always an $x$-variant of itself.
   \[
   \Sat{M}{\lforall[x][(R(x,a) \lif R(a,x))]}[s],
   \]
-  First, $\Sat{M}{R(x,a) \lif R(a,x)}[s_i]$ for all $s_i$
-  ($\Sat{M}{R(a,x)}[s_1]$ and $\Sat/{M}{R(a,x)}[s_j]$ for $j = 2$,
-  $3$, or~$4$).  Thus, there is no $x$-variant $s_i$ of~$s$ such that
-  $\Sat{M}{\lnot(R(x,a) \lif R(a,x))}[s_i]$ and hence
+  First, $\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]$ for all $m \in
+  \Domain M$ ($\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]$ and
+  $\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]$ for $m = 2$, $3$, or~$4$).
+  Thus, there is no $m \in \Domain M$ such that
+  $\Sat{M}{\lnot(R(x,a) \lif R(a,x))}[\Subst{s}{m}{x}]$ and hence
   $\Sat/{M}{\lexists[x][\lnot(R(x,a) \lif R(a,x))]}[s]$. Therefore,
-  $\Sat{M}{\lnot\lexists[x][\lnot(R(x,a) \lif R(a,x))]}[s]$. 
-  On the other hand,
+  $\Sat{M}{\lnot\lexists[x][\lnot(R(x,a) \lif R(a,x))]}[s]$. On the
+  other hand,
   \[
   \Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s],
   \]
-  since $\Sat/{M}{R(a,x) \lif R(x,a)}[s_2]$, and so
+  since $\Sat/{M}{R(a,x) \lif R(x,a)}[\Subst{s}{2}{x}]$, and so
   $\Sat{M}{\lexists[x][\lnot(R(a,x) \lif R(x,a))]}[s]$. As you can
   probably guess from these examples, $\Sat{M}{\lforall[x][!A(x)]}[s]$
-  iff $\Sat{M}{!A(x)}[s']$ for every $x$-variant~$s'$ of~$s$.}{}
+  iff $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ for every $m \in \Domain
+  M$.}{}
 
 For a more complicated case, consider
 \[
 \lforall[x][(R(a,x) \lif \lexists[y][R(x,y)])].
 \]
-Since $\Sat/{M}{R(a,x)}[s_3]$ and $\Sat/{M}{R(a,x)}[s_4]$, the
-interesting cases where we have to worry about the consequent of the
-conditional are only $s_1$ and $s_2$. Does
-$\Sat{M}{\lexists[y][R(x,y)]}[s_1]$ hold? It does if there is at least
-one $y$-variant~$s_1'$ of $s_1$ so that $\Sat{M}{R(x,y)}[s_1']$. In
-fact, $s_1$ is such a $y$-variant ($s_1(x) = 1$, $s_1(y) = 1$, and
-$\tuple{1,1} \in \Assign{R}{M}$), so the answer is yes. To determine
-if $\Sat{M}{\lexists[y][R(x,y)]}[s_2]$ we have to look at the
-$y$-variants of~$s_2$. Here, $s_2$ itself does not satisfy $R(x,y)$
-($s_2(x) = 2$, $s_2(y) = 1$, and $\tuple{2,1}\notin
-\Assign{R}{M}$). However, consider $\varAssign{s_2'}{s_2}{y}$ with $s_2'(y) =
-3$. $\Sat{M}{R(x,y)}[s_2']$ since $\tuple{2,3} \in \Assign{R}{M}$, and
-so $\Sat{M}{\lexists[y][R(x,y)]}[s_2]$. In sum, for every
-$x$-variant~$s_i$ of $s$, either $\Sat/{M}{R(a,x)}[s_i]$ ($i = 3$,
-$4$) or $\Sat{M}{\lexists[y][R(x,y)]}[s_i]$ ($i = 1$, $2$), and so
+Since $\Sat/{M}{R(a,x)}[\Subst{s}{3}{x}]$ and
+$\Sat/{M}{R(a,x)}[\Subst{s}{4}{x}]$, the interesting cases where we
+have to worry about the consequent of the conditional are only $m = 1$
+and $ = 2$. Does $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{1}{x}]$
+hold? It does if there is at least one $n \in \Domain M$ so that
+$\Sat{M}{R(x,y)}[\Subst{\Subst{s}{1}{x}}{n}{y}]$. In fact, if we take
+$n = 1$, we have $\Subst{\Subst{s}{1}{x}}{n}{y} = \Subst{s}{1}{y} =
+s$. Since $s(x) = 1$, $s(y) = 1$, and $\tuple{1,1} \in \Assign{R}{M}$,
+the answer is yes. 
+
+To determine if $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{2}{x}]$, we
+have to look at the !!{variable} assignments
+$\Subst{\Subst{s}{2}{x}}{n}{y}$. Here, for $n = 1$, this assignment
+is~$s_2 = \Subst{s}{2}{x}$, which does not satisfy $R(x,y)$ ($s_2(x) =
+2$, $s_2(y) = 1$, and $\tuple{2,1}\notin \Assign{R}{M}$). However,
+consider $\Subst{\Subst{s}{2}{x}}{3}{y} = \Subst{s_2}{3}{y}$.
+$\Sat{M}{R(x,y)}[\Subst{s_2}{3}{y}]$ since $\tuple{2,3} \in
+\Assign{R}{M}$, and so $\Sat{M}{\lexists[y][R(x,y)]}[s_2]$.
+
+So, for all $n \in \Domain M$, either
+$\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]$ (if $m = 3$, $4$) or
+$\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{m}{x}]$ (if $m = 1$, $2$), and so
 \[
 \Sat{M}{\lforall[x][(R(a,x) \lif \lexists[y][R(x,y)])]}[s].
 \]
@@ -307,12 +354,13 @@ On the other hand,
 \[
 \Sat/{M}{\lexists[x][(R(a,x) \land \lforall[y][R(x,y)])]}[s].
 \]
-The only $x$-variants~$s_i$ of $s$ with $\Sat{M}{R(a,x)}[s_i]$ are
-$s_1$ and~$s_2$. But for each, there is in turn a $y$-variant 
-$\varAssign{s_i'}{s_i}{y}$ with $s_i'(y) = 4$ so that $\Sat/{M}{R(x,y)}[s_i']$ 
-and so $\Sat/{M}{\lforall[y][R(x,y)]}[s_i]$ for $i = 1$, $2$. In sum, 
-none of the $x$-variants~$\varAssign{s_i}{s}{x}$ are such that $\Sat{M}{R(a,x) \land
-  \lforall[y][R(x,y)]}[s_i]$.
+We have $\Sat{M}{R(a,x)}[\Subst{s}{m}{x}]$ only for $m = 1$ and $m =
+2$. But for both of these values of~$m$, there is in turn an $n \in
+\Domain M$, namely $n = 4$, so that
+$\Sat/{M}{R(x,y)}[\Subst{\Subst{s}{m}{x}}{n}{y}]$ and so
+$\Sat/{M}{\lforall[y][R(x,y)]}[\Subst{s}{m}{x}]$ for $m = 1$ and $m =
+2$. In sum, there is no $m \in \Domain M$ such that $\Sat{M}{R(a,x)
+\land \lforall[y][R(x,y)]}[\Subst{s}{m}{x}]$.
 \end{ex}
 
 \iftag{defEx}{%
@@ -359,15 +407,15 @@ Let $\Lang L = \{c, f, A\}$ with one !!{constant}, one one-place
 \item $\Assign{f}{M}(1) = 2, \Assign{f}{M}(2) = 3, \Assign{f}{M}(3) = 2$
 \item $\Assign{A}{M} = \{\tuple{1, 2}, \tuple{2, 3}, \tuple{3, 3}\}$
 \end{enumerate}
-(a) Let $s(v) = 1$ for all variables~$v$.  Find out whether
+(a) Let $s(v) = 1$ for all !!{variable}s~$v$.  Find out whether
 \[
 \Sat{M}{\lexists[x][(A(f(z), c) \lif \lforall[y][(A(y, x) \lor A(f(y),
       x))])]}[s]
 \]
 Explain why or why not.
 
-(b) Give a different structure and variable assignment in which the
-formula is not satisfied.
+(b) Give a different structure and !!{variable} assignment in which the
+!!{formula} is not satisfied.
 \end{prob}
 
 \end{document}

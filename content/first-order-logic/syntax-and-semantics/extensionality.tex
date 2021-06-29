@@ -63,23 +63,25 @@ satisfies !!a{formula}, only depends on the values of its subterms.
 
 \begin{prop}\ollabel{prop:ext-terms}
 Let $\Struct M$ be a !!{structure}, $t$ and $t'$ terms, and $s$ a
-variable assignment. Let $\varAssign{s'}{s}{x}$ be the $x$-variant of~$s$ given
-by~$s'(x) = \Value{t'}{M}[s]$. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
-\Value{t}{M}[s']$.
+variable assignment. Then $\Value{\Subst{t}{t'}{x}}{M}[s] =
+\Value{t}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$.
 \end{prop}
 
 \begin{proof}
 By induction on~$t$.
 \begin{enumerate}
 \item If $t$ is a constant, say, $t\ident c$, then $\Subst{t}{t'}{x} =
-  c$, and $\Value{c}{M}[s] = \Assign{c}{M} = \Value{c}{M}[s']$.
+  c$, and $\Value{c}{M}[s] = \Assign{c}{M} =
+  \Value{c}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$.
 
 \item If $t$ is a variable other than~$x$, say, $t \ident y$, then
-  $\Subst{t}{t'}{x} = y$, and $\Value{y}{M}[s] = \Value{y}{M}[s']$
-  since $\varAssign{s'}{s}{x}$.
+  $\Subst{t}{t'}{x} = y$, and $\Value{y}{M}[s] =
+  \Value{y}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$ since
+  $\varAssign{s}{\Subst{s}{\Value{t'}{M}[s]}{x}}{x}$.
 
 \item If $t \ident x$, then $\Subst{t}{t'}{x} = t'$. But
-  $\Value{x}{M}[s'] = \Value{t'}{M}[s]$ by definition of~$s'$.
+  $\Value{x}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}] = \Value{t'}{M}[s]$ by
+  definition of~$\Subst{s}{\Value{t'}{M}[s]}{x}$.
 
 \item If $t \ident \Atom{f}{t_1,\dots,t_n}$ then we have:
 \begin{multline*}
@@ -90,21 +92,20 @@ By induction on~$t$.
 & = \Assign{f}{M}(\Value{\Subst{t_1}{t'}{x}}{M}[s], \dots,
     \Value{\Subst{t_n}{t'}{x}}{M}[s])\\
     & \qquad  \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s]$}\\
-& = \Assign{f}{M}(\Value{t_1}{M}[s'], \dots,
-   \Value{t_n}{M}[s'])\\
+& = \Assign{f}{M}(\Value{t_1}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}], \dots,
+   \Value{t_n}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}])\\
 & \qquad    \text{ by induction hypothesis}\\
-& = \Value{t}{M}[s']
-    \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[s']$}
+& = \Value{t}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]
+    \text{ by definition of $\Value{\Atom{f}{\dots}}{M}[\Subst{s}{\Value{t'}{M}[s]}{x}]$}
   \end{aligned}
 \end{multline*}
 \end{enumerate}
 \end{proof}
 
-\begin{prop}\ollabel{prop:ext-formulas}
-Let $\Struct M$ be a !!{structure}, $!A$ !!a{formula}, $t$ a term,
-and $s$ a variable assignment. Let $\varAssign{s'}{s}{x}$ be the $x$-variant of
-$s$ given by~$s'(x) = \Value{t}{M}[s]$. Then
-$\Sat{M}{\Subst{!A}{t}{x}}[s]$ iff $\Sat{M}{!A}[s']$.
+\begin{prop}\ollabel{prop:ext-formulas} Let $\Struct M$ be
+!!a{structure}, $!A$ !!a{formula}, $t'$~a term, and $s$~a variable
+assignment. Then $\Sat{M}{\Subst{!A}{t'}{x}}[s]$ iff
+$\Sat{M}{!A}[\Subst{s}{\Value{t'}{M}[s]}{x}]$.
 \end{prop}
 
 \begin{proof}
@@ -114,5 +115,23 @@ Exercise.
 \begin{prob}
 Prove \olref[fol][syn][ext]{prop:ext-formulas}
 \end{prob}
+
+\begin{explain}
+  The point of
+  \cref{fol:syn:ext:prop:ext-terms,fol:syn:ext:prop:ext-formulas} is
+  the following. Suppose we have a term $t$ or !!a{formula}~$!A$ and
+  some term~$t'$, and we want to know the value of $\Subst{t}{t'}{x}$
+  or whether or not $\Subst{!A}{t'}{x}$ is satisfied in
+  !!a{structure}~$\Struct M$ relative to !!a{variable} assignment~$s$.
+  Then we can either perform the substitution first and then consider
+  the value or satisfaction relative to $\Struct{M}$ and~$s$, or we
+  can first determine the value~$m = \Value{t'}{M}[s]$ of $t'$ in
+  $\Struct{M}$ relative to~$s$, change the !!{variable} assignment
+  to~$\Subst{s}{m}{x}$ and then consider the value of~$t$ in
+  $\Struct{M}$ and~$\Subst{s}{m}{x}$, or whether
+  $\Sat{M}{!A}[\Subst{s}{m}{x}]$.
+  \Cref{fol:syn:ext:prop:ext-terms,fol:syn:ext:prop:ext-formulas}
+  guarantee that the answer will be the same, whichever way we do it.
+\end{explain}
 
 \end{document}

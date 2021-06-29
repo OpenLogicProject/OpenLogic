@@ -38,10 +38,9 @@ We want to show that $!A(t_2)$ follows from $\Gamma_1 \cup \Gamma_2$.
 Consider a !!{structure}~$\Struct{M}$ with $\Sat{M}{\Gamma_1 \cup
   \Gamma_2}$. By induction hypothesis, $\Sat{M}{!A(t_1)}$ and
 $\Sat{M}{\eq[t_1][t_2]}$. Therefore, $\Value{t_1}{M} = \Value{t_2}{M}$. Let
-$s$ be any variable assignment, and $s'$ be the $x$-variant given by
-$s'(x) = \Value{t_1}{M} = \Value{t_2}{M}$. By
+$s$ be any variable assignment, and $m = \Value{t_1}{M} = \Value{t_2}{M}$. By
 \olref[fol][syn][ext]{prop:ext-formulas}, $\Sat{M}{!A(t_1)}[s]$ iff
-$\Sat{M}{!A(x)}[s']$ iff $\Sat{M}{!A(t_2)}[s]$. Since
+$\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$ iff $\Sat{M}{!A(t_2)}[s]$. Since
 $\Sat{M}{!A(t_1)}$, we have $\Sat{M}{!A(t_2)}$.
 \end{proof}
 
