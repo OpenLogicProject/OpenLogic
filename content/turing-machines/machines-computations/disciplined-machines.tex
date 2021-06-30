@@ -1,0 +1,90 @@
+% Part: turing-machines
+% Chapter: machines-computations
+% Section: well-behaved-machines
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{mac}{dis}
+\olsection{Disciplined Machines}
+
+\begin{explain}
+In section \olref[hal]{sec}, we considered Turing machines that have a
+single, designated halting state~$h$---such machines are guaranteed to
+halt, if they halt at all, in state~$h$.  In this way, machines with a
+single halting state are more ``disciplined'' than we allow Turing
+machines in general to be.  There are other restrictions we might
+impose on the behavior of Turing machines.  For instance, we also have
+not prohibited Turing machines from ever erasing the tape-end marker
+on square~$0$, or to attempt to move left from square~$0$. (Our
+definition states that the head simply stays on square~$0$ in this
+case; other definitions have the machine halt.) It is likewise
+sometimes desirable to be able to assume that a Turing machine, if
+it halts at all, halts on square~$1$.
+\end{explain}
+
+\begin{defn}\ollabel{defn:disciplined}
+A Turing machine~$M$ is \emph{disciplined} iff
+\begin{enumerate}
+    \item it has a designated single halting state~$h$,
+    \item it halts, if it halts at all, while scanning square~$1$,
+    \item it never erases the $\TMendtape$ symbol on square~$0$, and
+    \item it never attempts to move left from square~$0$.
+\end{enumerate}
+\end{defn}
+
+\begin{explain}
+We have already discussed that any Turing machine can be changed into
+one with the same behavor but with a designated halting state. This is
+done simply by adding a new state~$h$, and adding an instruction
+$\delta(q, \sigma) = \tuple{h, \sigma, N}$ for any pair
+$\tuple{q,\sigma}$ where the original $\delta$~is undefined.  It is
+true, although tedious to prove, that any Turing machine~$M$ can be
+turned into a disciplined Turing machine~$M'$ which halts on the same
+inputs and produces the same output. For instance, if the Turing
+machine halts and is not on square~$1$, we can add some instructions
+to make the head move left until it finds the tape-end marker, then
+move one square to the right, then halt.  We'll leave you to think
+about how the other conditions can be dealt with.
+\end{explain}
+
+\begin{ex}
+    In \olref{fig:adder-disc}, we turn the addition machine
+    from \olref[una]{ex:adder} into a disciplined machine.
+    \begin{figure}\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+  \node[state]         (C) [below right of=B] {$q_2$};
+  \node[state]         (D) [below left of=C] {$q_3$};
+  \node[state]         (H) [left of=D] {$h$};
+
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
+           edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
+        (C) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (D)
+        (D) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (D)
+        edge node {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (H);
+\end{tikzpicture}
+\]\caption{A disciplined addition machine}
+\ollabel{fig:adder-disc}
+\end{figure}
+\end{ex}
+
+\begin{prop}\ollabel{prop:disciplined} For evevery Turing machine~$M$,
+there is a disciplined Turing machine~$M'$ which halts with output~$O$
+if $M$~halts with output~$O$, and does not halt if $M$~does not halt.
+In particular, and function $f\colon\Nat^n \to \Nat$ computable by a
+Turing machine is computable by a disciplined Turing machine.
+\end{prop}
+
+\begin{prob}\label{tur:mac:dis:prob:disc-succ}
+Give a disciplined machine that computes $f(x) = x+1$.
+\end{prob}
+
+\end{document}

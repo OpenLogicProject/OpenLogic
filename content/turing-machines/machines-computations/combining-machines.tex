@@ -21,15 +21,47 @@ constituent parts, we can tackle the problem in several stages,
 creating several simple Turing machines and combining them into one
 machine that can solve the problem. This point is especially important
 when tackling the Halting Problem in the next section.
+
+How do we combine Turing machines $M = \tuple{Q, \Sigma, q_0, \delta}$
+and~$M' = \tuple{Q', \Sigma', q_0', \delta'}$?  We now use the
+configuration of the tape after $M$~has halted as the input
+configuration of a run of machine~$M'$.  To get a single Turing
+machine $M \frown M'$ that does this, do the following:
+\begin{enumerate}
+    \item Renumber (or relabel) all the states~$Q'$ of~$M'$ so that $M$
+    and~$M'$ have no states in common ($Q \cap Q' = \emptyset$).
+    \item The states of $M \frown M'$ are $Q \cup Q'$.
+    \item The tape alphabet is $\Sigma \cup \Sigma'$.
+    \item The start state is~$q_0$.
+    \item The transition function is the function $\delta''$ given by:
+    \[\delta''(q,\sigma) =
+    \begin{cases}
+      \delta(q,\sigma) & \text{if $q \in Q$}\\
+      \delta'(q,\sigma) & \text{if $q \in Q'$}\\
+      \tuple{q_0', \sigma, \TMstay} & \text{if $q \in Q$ and
+      $\delta(q,\sigma)$ undefined}
+    \end{cases}\]
+\end{enumerate}
+The resulting machine uses the instructions of~$M$ when it is in a
+state $q \in Q$, the instructions of~$M'$ when it is in a state~$q \in
+Q'$. When it is in a state $q \in Q$ and is scanning a symbol~$\sigma$
+for which $M$ has no transition (i.e., $M$ would have halted), it
+enters the start state of~$M'$ (and leaves the tape contents and head
+position as it is).
+
+Note that unless the machine~$M$ is disciplined, we don't know where
+the tape head is when $M$~halts, so the halting configuration of~$M$
+need not have the head scanning square~$1$. When combining machines,
+it's important to keep this in mind.
 \end{explain}
 
 \begin{ex}
-\emph{Combining Machines:} Design a machine that computes the function
-$f(m,n) = 2(m+n)$.
-
-In order to build this machine, we can combine two machines we are already
-familiar with: the addition machine, and the doubler. We begin by drawing 
-a state diagram for the addition machine.
+\emph{Combining Machines:} We'll design a machine which, when started
+on input consisting of two blocks of~$\TMstroke$'s of length $n$
+and~$m$, halts with a single block of $2(m+n)$ $\TMstroke$'s on the
+tape. In order to build this machine, we can combine two machines we
+are already familiar with: the addition machine, and the doubler. We
+begin by drawing a state diagram for the addition machine.
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -39,18 +71,18 @@ a state diagram for the addition machine.
   \node[state]         (B) [right of=A] {$q_1$};
   \node[state]         (C) [right of=B] {$q_2$};
 
-  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
             edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
         (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
             edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
         (C) edge [loop above] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (C);
 \end{tikzpicture}
 \]
-Instead of halting at state $q_2$, we want to continue operation in
-order to double the output. Recall that the doubler machine erases
-the first stroke in the input and writes two strokes in a separate
-output. Let's add an instruction to make sure the tape head is reading 
-the first stroke of the output of the addition machine.
+Instead of halting in state~$q_2$, we want to continue operation in
+order to double the output. Recall that the doubler machine erases the
+first stroke in the input and writes two strokes in a separate output.
+Let's add an instruction to make sure the tape head is reading the
+first stroke of the output of the addition machine.
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
@@ -62,7 +94,7 @@ the first stroke of the output of the addition machine.
   \node[state]         (D) [below left of=C] {$q_3$};
   \node[state]         (E) [below left of=D] {$q_4$};
 
-  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
             edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
         (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
             edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
@@ -72,10 +104,10 @@ the first stroke of the output of the addition machine.
 \end{tikzpicture}
 \]
 It is now easy to double the input---all we have to do is connect the
-doubler machine onto state $q_4$. This requires renaming the states
-of the doubler machine so that they start at $q_4$ instead of
-$q_0$---this way we don't end up with two starting states. The final
-diagram should look as in \olref{fig:combined}.
+doubler machine onto state~$q_4$. This requires renaming the states of
+the doubler machine so that they start at~$q_4$ instead
+of~$q_0$---this way we don't end up with two starting states. The
+final diagram should look as in \olref{fig:combined}.
 \begin{figure}
 \[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
@@ -92,7 +124,7 @@ diagram should look as in \olref{fig:combined}.
   \node[state]         (5) [left of=4]  {$q_8$};
   \node[state]         (6) [left of=5]  {$q_9$};
 
-  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
             edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
         (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
             edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
@@ -117,4 +149,23 @@ diagram should look as in \olref{fig:combined}.
 \end{figure}
 \end{ex}
 
+\begin{prop}
+    If $M$ and $M'$ are disciplined and compute the functions $f\colon
+    \Nat^k \to \Nat$ and $f'\colon \Nat \to \Nat$, respectively, then
+    $M \frown M'$ is disciplined and computes~$\comp{f}{f'}$.
+\end{prop}
+
+\begin{proof}
+    Since $M$ is disciplined, when it halts with
+    output~$f(n_1,\dots,n_k) = m$, the head is scanning square~$1$. If
+    we now enter the start state of~$M'$, the machine will halt with
+    output $f(m)$, again scanning square~$1$. The other conditions of
+    \olref[dis]{defn:disciplined} are also satisfied.
+\end{proof}
+
+\begin{prob}
+    Give a disciplined Turing machine computing $f(x) = x+2$ by taking
+    the machine~$M$ from \cref{tur:mac:dis:prob:disc-succ} and
+    construct $M \frown M$.
+\end{prob}
 \end{document}

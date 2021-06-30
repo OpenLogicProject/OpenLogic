@@ -23,29 +23,27 @@ sequence consisting of exactly $n$ $\TMstroke$'s.
 
 \begin{defn}[Computation]
 A Turing machine~$M$ \emph{computes} the function $f\colon \Nat^n \to \Nat$ iff
-$M$ halts on input
+$M$~halts on input
 \[
 \TMstroke^{k_1} \TMblank \TMstroke^{k_2} \TMblank \dots \TMblank \TMstroke^{k_n}
 \]
 with output $\TMstroke^{f(k_1, \dots, k_n)}$. 
 \end{defn}
 
-\begin{ex} \emph{Addition:}
-Build a machine that, when given an input of two non-empty strings of
-$\TMstroke$'s of length~$n$ and $m$, computes the function $f(n,m) = n
-+ m$.
+\begin{prob}
+  Give a definition for when a Turing machine~$M$ computes the
+  function $f\colon \Nat^n \to \Nat^m$.
+\end{prob}
 
-We want to come up with a machine that starts with two blocks of
-strokes on the tape and halts with one block of strokes. We first need
-a method to carry out.  The input strokes are separated by a blank, so
-one method would be to write a stroke on the square containing the
-blank, and erase the first (or last) stroke. This would result in a
-block of~$n + m$ $\TMstroke$'s. Alternatively, we could proceed in a
-similar way to the doubler machine, by erasing a stroke from the first
-block, and adding one to the second block of strokes until the first
-block has been removed completely. We will proceed with the former
-example.
-\[
+\begin{ex}\ollabel{ex:adder}
+\emph{Addition:}
+Let's build a machine that computes the function $f(n,m) = n + m$.
+This requires a machine that starts with two blocks of $\TMstroke$'s
+of length $n$ and~$m$ on the tape, and halts with one block consisting
+of $n+m$~$\TMstroke$'s. The two input blocks of~$\TMstroke$'s are
+separated by a~$\TMblank$, so one method would be to write a stroke on
+the square containing the $\TMblank$, and erase the last~$\TMstroke$.
+\begin{figure}\[
 \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                     semithick]
   \tikzstyle{every state}=[fill=none,draw=black,text=black]
@@ -54,18 +52,131 @@ example.
   \node[state]         (B) [right of=A] {$q_1$};
   \node[state]         (C) [right of=B] {$q_2$};
 
-  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (B)
+  \path (A) edge node {\TMtrans{\TMblank}{\TMstroke}{\TMstay}} (B)
            edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
         (B) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
             edge node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (C)
         (C) edge [loop above] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (C);
 \end{tikzpicture}
-\]
+\]\caption{A machine computing $f(x,y) = x+y$}
+\ollabel{fig:adder}
+\end{figure}
 \end{ex}
 
 \begin{prob}
-Trace through the configurations of the machine for input $\tuple{3,5}$.
+Trace through the configurations of the machine from
+\olref[tur][mac][una]{ex:adder} for input~$\tuple{3,2}$. What happens
+if the machine computes $0+0$?
 \end{prob}
+
+\begin{explain}
+In \olref[rep]{ex:doubler}, we gave an example of a Turing machine
+that takes as input a sequence of~$\TMstroke$'s and halts with a sequence
+of twice as many~$\TMstroke$'s on the tape---the doubler machine.
+However, because the output contains $\TMblank$'s to the left of the
+doubled block of~$\TMstroke$'s, it does not actually compute the
+function $f(x) = 2x$, as you might have assumed. We'll describe two
+ways of fixing that.
+\end{explain}
+
+\begin{ex}
+The machine in \olref{fig:doubler-disc} computes the function $f(x) =
+2x$. Instead of erasing the input and writing two $\TMstroke$'s at the
+far right for every $\TMstroke$ in the input as the machine from
+\olref[rep]{ex:doubler} does, this machine adds a single~$\TMstroke$
+to the right for every~$\TMstroke$ in the input. It has to keep track
+of where the input ends, so it leaves a~$\TMblank$ between the input
+and the added strokes, which it fills with a~$\TMstroke$ at the very
+end. And we have to ``remember'' where we are in the input, so we
+temporarily replace a~$\TMstroke$ in the input block by a~$\TMblank$.
+  \begin{figure}
+\[
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state] (0)              {$q_0$};
+  \node[state]         (1) [above of=0] {$q_1$};
+  \node[state]         (2) [above of=1] {$q_2$};
+  \node[state]         (3) [right of=2] {$q_3$};
+  \node[state]         (4) [below of=3] {$q_4$};
+  \node[state]         (5) [below of=4] {$q_5$};
+  \node[state]         (6) [above right of=4] {$q_6$};
+  \node[state]         (7) [below of=6] {$q_7$};
+  \node[state]         (8) [below of=7] {$q_8$};
+
+  \path (0) edge node {\TMtrans{\TMstroke}{\TMblank}{\TMright}} (1)
+%    (0) edge node {\TMtrans{\TMblank}{\TMblank}{\TMstay}} (h)
+    (1) edge [loop left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (1)
+      edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (2)
+    (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (2)
+        edge node {\TMtrans{\TMblank}{\TMstroke}{\TMleft}} (3)
+    (3) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (3)
+        edge node[left] {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (4)
+    (4) edge        node[left] {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+    (5) edge [loop below] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (5)
+        edge              node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (0)
+    (4) edge      node[sloped] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (6)
+    (6) edge              node {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (7)
+    (7) edge [loop right] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (7)
+        edge              node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (8)
+    (8) edge [loop right] node {\TMtrans{\TMstroke}{\TMblank}{\TMstay}} (8);
+    \end{tikzpicture}
+\]
+\caption{A machine computing $f(x) = 2x$}
+\ollabel{fig:doubler-disc}
+\end{figure}
+\end{ex}
+
+\begin{ex}\ollabel{ex:mover}
+A second possibility for computing $f(x) = 2x$ is to keep the original
+doubler machine, but add states and instructions at the end which move
+the doubled block of strokes to the far left of the tape.  The machine
+in \olref{fig:mover} does just this last part: started on a tape
+consisting of a block of~$\TMblank$'s followed by a block
+of~$\TMstroke$'s (and the head positioned anywhere in the block
+of~$\TMblank$'s), it erases the $\TMstroke$'s one at a time and writes
+them at the beginning of the tape. In order to be able to tell when it
+is done, it first marks the end of the block of $\TMstroke$'s with
+a~$\TMendtape$ symbol, which gets deleted at the end. We've started
+numbering the states at~$q_6$, so they can be added to the doubler
+machine. All you'll need is an additional instruction $\delta(q_5,
+\TMblank) = \tuple{q_6,\TMblank,\TMstay}$, i.e., an arrow from~$q_5$
+to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$.
+\begin{figure}
+    \[
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                        semithick]
+      \tikzstyle{every state}=[fill=none,draw=black,text=black]
+    
+      \node[initial,state] (0)              {$q_6$};
+      \node[state]         (1) [right of=0] {$q_7$};
+      \node[state]         (2) [right of=1] {$q_8$};
+      \node[state]         (3) [below of=2] {$q_9$};
+      \node[state]         (4) [left of=3]  {$q_{10}$};
+      \node[state]         (5) [left of=4]  {$q_{11}$};
+      \node[state]         (6) [below of=5] {$q_{12}$};
+      \node[state]         (7) [right of=6] {$q_{13}$};
+      \path 
+      (0) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (0)
+      (0) edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (1)
+      (1) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (1)
+          edge node {\TMtrans{\TMblank}{\TMendtape}{\TMleft}} (2)
+        (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (2)
+            edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
+        (3) edge node[above] {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (4)
+        (4) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (4)
+        edge        node[above] {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (5)
+        (5) edge              node[left] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (6)
+        (6) edge [loop left] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (6)
+            edge              node[sloped] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (4)
+        (6) edge node {\TMtrans{\TMendtape}{\TMblank}{\TMstay}} (7);
+        \end{tikzpicture}
+    \]
+    \caption{Moving a block of $\TMstroke$'s to the left}
+    \ollabel{fig:mover}
+    \end{figure}
+\end{ex}
 
 \begin{prob}
 \emph{Subtraction:} Design a Turing machine that when given an input
