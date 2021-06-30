@@ -18,8 +18,8 @@ computation of a Turing machine on a given input as a sequence of
 \emph{configurations}---and a configuration in turn is a sequence of
 symbols (corresponding to the contents of the tape at a given point in
 the computation), a number indicating the position of the read/write
-head, and a state.  Using these, we can define what the Turing machine
-$M$ computes on a given input.
+head, and a state. Using these, we can define what the Turing
+machine~$M$ computes on a given input.
 \end{explain}
 
 \begin{defn}[Configuration]
@@ -56,15 +56,14 @@ The \emph{initial configuration} of $M$ for input $I \in \Sigma^*$ is
 \end{defn}
 
 \begin{explain}
-The~$\frown$ symbol is for \emph{concatenation}---we want to
-ensure that there are no blanks between the left end marker and
-the beginning of the input.
+The~$\frown$ symbol is for \emph{concatenation}---the input string
+begins immediately to the left end marker.
 \end{explain}
 
 \begin{defn}
 We say that a configuration $\tuple{C, m, q}$ \emph{yields the
-  configuration $\tuple{C', m', q'}$ in one step} (according to~$M$),
-  iff
+configuration $\tuple{C', m', q'}$ in one step} (according to~$M$),
+iff
 \begin{enumerate}
 \item the $m$-th symbol of $C$ is $\sigma$,
 \item the instruction set of $M$ specifies $\delta(q, \sigma) =
@@ -82,24 +81,24 @@ We say that a configuration $\tuple{C, m, q}$ \emph{yields the
 \end{enumerate}
 \end{defn}
 
-\begin{defn}
+\begin{defn}\ollabel{defn:run-output}
 A \emph{run of $M$ on input~$I$} is a sequence $C_i$ of configurations
 of $M$, where $C_0$ is the initial configuration of $M$ for input~$I$,
 and each $C_i$ yields $C_{i+1}$ in one step.
 
 We say that $M$ \emph{halts on input $I$ after $k$ steps} if $C_k =
-\tuple{C, m, q}$, the $m$th symbol of $C$ is~$\sigma$, and $\delta(q,
+\tuple{C, m, q}$, the $m$th symbol of~$C$ is~$\sigma$, and $\delta(q,
 \sigma)$ is undefined.  In that case, the \emph{output} of~$M$ for
-input $I$ is~$O$, where $O$ is a string of symbols not beginning or
-ending in~$\TMblank$ such that $C = \TMendtape \concat \TMblank^i
-\concat O \concat \TMblank^j$ for some~$i, j \in \Nat$.
+input~$I$ is~$O$, where $O$ is a string of symbols not ending
+in~$\TMblank$ such that $C = \TMendtape \concat O \concat \TMblank^j$
+for some~$i, j \in \Nat$.
 \end{defn}
 
 \begin{explain}
-According to this definition, the output~$O$ of~$M$ always begins and
+According to this definition, the output~$O$ of~$M$ always 
 ends in a symbol other than~$\TMblank$, or, if at time~$k$ the entire
 tape is filled with~$\TMblank$ (except for the leftmost~$\TMendtape$),
-$O$ is the empty string.
+$O$~is the empty string.
 \end{explain}
 
 \end{document}

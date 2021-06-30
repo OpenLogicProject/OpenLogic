@@ -41,17 +41,36 @@ play an important role in computational complexity theory.
 There are also different conventions for when a Turing machine halts:
 we say it halts when the transition function is undefined, other
 definitions require the machine to be in a special designated halting
-state. Since the tapes of our Turing machines are infinite in one
+state. We have explained in \olref[hal]{sec} why requiring a designated
+halting state is not a restriction which impacts what Turing machines can
+compute.  Since the tapes of our Turing machines are infinite in one
 direction only, there are cases where a Turing machine can't properly
 carry out an instruction: if it reads the leftmost square and is
 supposed to move left. According to our definition, it just stays put
-instead, but we could have defined it so that it halts when that
-happens.
+instead of ``falling off'', but we could have defined it so that it
+halts when that happens. This definition is also equivalent: we could
+simulate the behavior of a Turing machine that halts when it attempts
+to move left from square~$0$ by deleting every transition
+$\delta(q,\TMendtape) = \tuple{q',\sigma,\TMleft}$---then instead of
+attempting to move left on~$\TMendtape$ the machine
+halts.\footnote{This doesn't \emph{quite} work, since nothing prevents
+us from writing and reading $\TMendtape$ on squares other than
+square~$1$ (see \olref[una]{ex:mover}). We can get around that by
+adding a second $\TMendtape'$ symbol we use instead for such a
+purpose.}
 
 There are also different ways of representing numbers (and hence the
 input-output function computed by a Turing machine): we use unary
 representation, but you can also use binary representation. This
 requires two symbols in addition to $\TMblank$ and $\TMendtape$.
+
+What is perhaps harder to see is that we gain noadditional computing
+power by allowing a tape that is infinite in both directions, or even
+multiple tapes. The reason is, roughly, that a Turing machine with a
+single infinite tape can simulate multiple or two-way infinite tapes.
+E.g., we could use the even squares for the squares of tape~$1$ (or
+the ``positive'' squares of a two-way infinite tape) and the off
+squares for the squares of tape~$2$ (or the ``negative'' squares).
 
 Now here is an interesting fact: none of these variations matters as
 to which functions are Turing computable. \emph{If a function is Turing
