@@ -22,17 +22,17 @@ sequence consisting of exactly $n$ $\TMstroke$'s.
 \end{explain}
 
 \begin{defn}[Computation]
-A Turing machine~$M$ \emph{computes} the function $f\colon \Nat^n \to \Nat$ iff
+A Turing machine~$M$ \emph{computes} the function $f\colon \Nat^k \to \Nat$ iff
 $M$~halts on input
 \[
-\TMstroke^{k_1} \TMblank \TMstroke^{k_2} \TMblank \dots \TMblank \TMstroke^{k_n}
+\TMstroke^{n_1} \TMblank \TMstroke^{n_2} \TMblank \dots \TMblank \TMstroke^{n_k}
 \]
-with output $\TMstroke^{f(k_1, \dots, k_n)}$. 
+with output $\TMstroke^{f(n_1, \dots, n_k)}$.
 \end{defn}
 
 \begin{prob}
   Give a definition for when a Turing machine~$M$ computes the
-  function $f\colon \Nat^n \to \Nat^m$.
+  function $f\colon \Nat^k \to \Nat^m$.
 \end{prob}
 
 \begin{ex}\ollabel{ex:adder}
@@ -187,13 +187,13 @@ m$, computes the function $f(n,m) = n - m$.
 \begin{prob}
 \emph{Equality:} Design a Turing machine to compute the following function:
 \[
-\fn{equality}(x,y) = 
+\fn{equality}(n,m) = 
 \begin{cases}
-  \text{1} & \text{if~$x = y$} \\
-  \text{0} & \text{if~$x \neq y$}
+  \text{1} & \text{if~$n = m$} \\
+  \text{0} & \text{if~$n \neq m$}
 \end{cases}
 \]
-where~$x$ and~$y$ are integers greater than~$0$.
+where~$n$ and~$m \in \PosInt$.
 \end{prob}
 
 \begin{prob}
@@ -205,5 +205,16 @@ symbols in the alphabet of the machine.
 The function $\min$ selects the smallest value from its arguments, so
 $\min(3,5)=3$, $\min(20,16)=16$, and $\min(4,4)=4$, and so on.
 \end{prob}
+
+\begin{defn}
+  A Turing machine~$M$ computes the partial function $f\colon \Nat^k
+  \pto \Nat$ iff, 
+  \begin{enumerate}
+    \item $M$ halts on input $\TMstroke^{n_1}\concat\TMblank\concat
+    \dots \concat\TMblank\concat\TMstroke^{n_k}$ with output $\TMstroke^{m}$ if $f(n_1, \dots, n_k) = m$.
+    \item $M$ does not halt at all, or with an output that is not a
+    single block of~$\TMstroke$'s if $f(n_1, \dots, n_k)$ is undefined.
+  \end{enumerate}
+\end{defn}
 
 \end{document}

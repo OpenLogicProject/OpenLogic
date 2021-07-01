@@ -10,64 +10,144 @@
 \olsection{Enumerating Turing Machines}
 
 \begin{explain}
-We can show that the set of all Turing machines is
-!!{enumerable}. This follows from the fact that each Turing machine
-can be finitely described.  The set of states and the tape vocabulary
-are finite sets.  The transition function is a partial function from
-$Q \times \Sigma$ to $Q \times \Sigma \times \{\TMleft, \TMright,
-\TMstay\}$, and so likewise can be specified by listing its values for
-the finitely many argument pairs for which it is defined.  Of course,
-strictly speaking, the states and vocabulary can be anything; but the
-\emph{behavior} of the Turing machine is independent of which objects
-serve as states and vocabulary. So we may assume, for instance, that
-the states and vocabulary symbols are natural numbers, or that the
-states and vocabulary are all strings of letters and digits.
+We can show that the set of all Turing machines is !!{enumerable}.
+This follows from the fact that each Turing machine can be finitely
+described.  The set of states and the tape vocabulary are finite sets.
+The transition function is a partial function from $Q \times \Sigma$
+to $Q \times \Sigma \times \{\TMleft, \TMright, \TMstay\}$, and so
+likewise can be specified by listing its values for the finitely many
+argument pairs for which it is defined.
 
-Suppose we fix a !!{denumerable} vocabulary for specifying Turing
-machines: $\sigma_0 = \TMendtape$, $\sigma_1 = \TMblank$, $\sigma_2 =
-\TMstroke$, $\sigma_3$, \dots, $\TMright$, $\TMleft$, $\TMstay$,
-$q_0$, $q_1$, \dots. Then any Turing machine can be specified by some
-finite string of symbols from this alphabet (though not every finite
-string of symbols specifies a Turing machine). For instance, suppose
-we have a Turing machine $M = \tuple{Q, \Sigma, q, \delta}$ where
-\begin{align*}
-  Q & =
-  \{q'_0, \dots, q'_n\} \subseteq \{q_0, q_1, \dots \} \text{ and}\\
-  \Sigma & = \{\TMendtape, \sigma'_1, \sigma'_2, \dots, \sigma'_m\}
-  \subseteq \{\sigma_0, \sigma_1, \dots\}.
-\end{align*}
-We could specify it by the string
-\[
-q'_0 q'_1 \dots q'_n \TMendtape \sigma'_1 \dots \sigma'_m \TMendtape q
-\TMendtape S(q_0',\sigma'_0)\TMendtape \dots \TMendtape S(q'_n,\sigma'_m)
+This is true as far as it goes, but there is a subtle difference. The
+definition of Turing machines made no resriction on what !!{element}s
+the set of states and tape alphabet can have. So, e.g., for every real
+number, there technically is a Turing machine that uses that number as
+a state. However, the \emph{behavior} of the Turing machine is
+independent of which objects serve as states and vocabulary. Consider
+the two Turing machines in \olref{fig:variants}.
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                    semithick]
+  \tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+  \node[initial,state]         (A)              {$q_0$};
+  \node[state]         (B) [right of=A] {$q_1$};
+
+  \path (A) edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (B)
+        (B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+            edge [bend left] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (A);
+\end{tikzpicture}\\
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {$s$};
+\node[state]         (B) [right of=A] {$h$};
+
+\path (A) edge [bend left] node {\TMtrans{A}{A}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (B)
+edge [bend left] node {\TMtrans{A}{A}{\TMright}} (A);
+\end{tikzpicture}
+\end{center}
+\caption{Variants of the \emph{Even} machine}
+\ollabel{fig:variants}
+\end{figure}
+These two diagrams correspond to two machines, $M$ with the tape
+alphabet $\Sigma = \{\TMendtape,\TMblank,\TMstroke\}$ and set of
+states $\{q_0,q_1\}$, and $M'$ with alphabet $\Sigma' =
+\{\TMendtape,\TMblank,A\}$ and states $\{s,h\}$. But their
+instructions are otherwise the same: $M$ will halt on a sequence of
+$n$ $\TMstroke$'s iff $n$ is even, and $M'$ will halt on a sequence of
+$n$ $A$'s iff $n$ is even. All we've done is rename $\TMstroke$
+to~$A$, $q_0$ to~$s$, and $q_1$ to~$h$. This example generalizes: we
+can think of Turing machines as the same as long as one results from
+the other by such a renaming of symbols and states.  In fact, we can
+simply think of the symbols and states of a Turing machine as positive
+integers: instead of $\sigma_0$ think~$1$, instead of $\sigma_1$
+think~$2$, etc.; $\TMendtape$ is~$1$, $\TMblank$ is~$2$, etc. In this
+way, the \emph{Even} machine becomes the machine depicted in
+\olref{fig:standard-even}.
+\begin{figure}
+\[\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+  semithick]
+\tikzstyle{every state}=[fill=none,draw=black,text=black]
+
+\node[initial,state]         (A)              {$1$};
+\node[state]         (B) [right of=A] {$2$};
+
+\path (A) edge [bend left] node {\TMtrans{3}{3}{\TMright}} (B)
+(B) edge [loop above] node {\TMtrans{2}{2}{\TMright}} (B)
+edge [bend left] node {\TMtrans{3}{3}{\TMright}} (A);
+\end{tikzpicture}
 \]
-where $S(q'_j,\sigma'_i) $ is the string $q'_j \sigma'_i 
-\delta(q'_j, \sigma'_i)$ if $\delta(q'_j, \sigma'_i)$ is defined, and
-$q'_j \sigma'_i$ otherwise.
+\caption{A standard \emph{Even} machine}
+\ollabel{fig:standard-even}
+\end{figure}
+We might call a Turing machine with states and symbols that are
+positive integers a \emph{standard} machine, and only consider
+standard machines from now on.\footnote{The terminology ``standard
+machine'' is not standard.}
+
+We wanted to show that the set of Turing machines is !!{enumerable},
+and with the above considerations in mind, it is enough to show that
+the set of standard Turing machines is !!{enumerable}. Suppose are
+given a standard Turing machine $M = \tuple{Q, \Sigma, q_0, \delta}$.
+How could we describe it using a finite string of positive integers?
+We'll first list the number of states, the states themselves, the
+number of symbols, the symbols themselves, and the starting state.
+(Remember, all of these are positive integers, since $M$ is a standard
+machine.)  What about~$\delta$? The set of possible arguments, i.e.,
+pairs $\tuple{q,\sigma}$, is finite, since $Q$ and~$\Sigma$ are
+finite. So the information in~$\delta$ is simply the finite list of
+all $5$-tuples $\tuple{q, \sigma, q', \sigma', d}$ where
+$\delta(q,\sigma) = \tuple{q', \sigma', D}$, and $d$ is a number that
+codes the direction~$D$ (say, $1$ for~$\TMleft$, $2$ for~$\TMright$,
+and $3$ for~$\TMstay$).
+
+In this way, every standard Turing machine can be described by a
+finite list of positive integers, i.e., as a sequence $s_M \in
+(\PosInt)^*$. For instance, the standard \emph{Even} machine is coded
+by the sequence
+\[
+2, \underbrace{1, 2}_Q, 3, \overbrace{1, 2, 3}^\Sigma, 1, \underbrace{1, 3, 2, 3, 2}_{\delta(1,3) = \tuple{2,3,R}}, 
+\overbrace{2, 2, 2, 2, 2}^{\delta(2,2) = \tuple{2,2,R}},
+\underbrace{2, 3, 1, 3, 2}_{\delta(2,3) = \tuple{1,3,R}}.
+\]
 \end{explain}
 
 \begin{thm}
-There are functions from $\Nat$ to $\Nat$ which are not Turing
+There are functions from $\Nat$ to~$\Nat$ which are not Turing
 computable.
 \end{thm}
 
 \begin{proof}
-We know that the set of finite strings of symbols from
-!!a{denumerable} alphabet is !!{enumerable}. This gives us that the
-set of descriptions of Turing machines, as a subset of the finite
-strings from the !!{enumerable} vocabulary $\{q_0, q_1, \dots,
-\TMendtape, \sigma_1, \sigma_2, \dots\}$, is itself enumerable.  Since
-every Turing computable function is computed by some (in fact, many)
-Turing machines, this means that the set of all Turing computable
-functions from $\Nat$ to $\Nat$ is also enumerable.
+We know that the set of finite sequences of positive
+integers~$(\PosInt)^*$ is !!{enumerable}
+(\cref{sfr:siz:zigzag:prob:posint-star}). This gives us that the set
+of descriptions of standard Turing machines, as a subset
+of~$(\PosInt)^*$, is itself enumerable.  Every Turing computable
+function $\Nat$ to~$\Nat$ is computed by some (in fact, many) Turing
+machines. By renaming its states and symbols to positive integers (in
+particular, $\TMendtape$ as~$1$, $\TMblank$ as~$2$, and $\TMstroke$
+as~$3$) we can see that every Turing computable function is computed
+by a standard Turing machine. This means that the set of all Turing
+computable functions from $\Nat$ to~$\Nat$ is also enumerable.
 
-On the other hand, the set of all functions from $\Nat$ to $\Nat$ is
-not !!{enumerable}. This follows immediately from the fact that not
-even the set of all functions of one argument from $\Nat$
-to the set $\{0,1\}$ is !!{enumerable}.  If all functions
-were computable by some Turing machine we could enumerate the set of
-all functions. So there are some functions that are not
-Turing computable. 
+On the other hand, the set of all functions from $\Nat$ to~$\Nat$ is
+not !!{enumerable} (\cref{sfr:siz:red:prob:nat-nat}). If all functions
+were computable by some Turing machine, we could enumerate the set of
+all functions by listing all the descriptions of Turing machines that
+compute them. So there are some functions that are not Turing
+computable. 
 \end{proof}
+
+\begin{prob}
+  Can you think of a way to describe Turing machines that does not
+  require that the states and alphabet symbols are explicitly listed?
+  You may define your own notion of ``standard'' machine, but say
+  something about why every Turing machine can be computed by a
+  ``standard'' machine in your new sense.
+\end{prob}
 
 \end{document}
