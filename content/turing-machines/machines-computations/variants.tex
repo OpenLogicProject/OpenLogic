@@ -12,18 +12,18 @@
 There are in fact many possible ways to define Turing machines, of
 which ours is only one.  In some ways, our definition is more liberal
 than others. We allow arbitrary finite alphabets, a more restricted
-definition might allow only two tape symbols, $\TMstroke$ and
-$\TMblank$.  We allow the machine to write a symbol to the tape and
-move at the same time, other definitions allow either writing or
+definition might allow only two tape symbols, $\TMstroke$
+and~$\TMblank$.  We allow the machine to write a symbol to the tape
+and move at the same time, other definitions allow either writing or
 moving.  We allow the possibility of writing without moving the tape
 head, other definitions leave out the $\TMstay$ ``instruction.''  In
 other ways, our definition is more restrictive. We assumed that the
 tape is infinite in one direction only, other definitions allow the
 tape to be infinite both to the left and the right. In fact, one can
-even allow any number of separate tapes, or even an infinite grid
-of squares.  We represent the instruction set of the Turing machine by
-a transition function; other definitions use a transition relation
-where the machine has more than one possible instruction in any given
+even allow any number of separate tapes, or even an infinite grid of
+squares.  We represent the instruction set of the Turing machine by a
+transition function; other definitions use a transition relation where
+the machine has more than one possible instruction in any given
 situation.
 
 This last relaxation of the definition is particularly interesting.
@@ -41,40 +41,44 @@ play an important role in computational complexity theory.
 There are also different conventions for when a Turing machine halts:
 we say it halts when the transition function is undefined, other
 definitions require the machine to be in a special designated halting
-state. We have explained in \olref[hal]{sec} why requiring a designated
-halting state is not a restriction which impacts what Turing machines can
-compute.  Since the tapes of our Turing machines are infinite in one
-direction only, there are cases where a Turing machine can't properly
-carry out an instruction: if it reads the leftmost square and is
-supposed to move left. According to our definition, it just stays put
-instead of ``falling off'', but we could have defined it so that it
-halts when that happens. This definition is also equivalent: we could
-simulate the behavior of a Turing machine that halts when it attempts
-to move left from square~$0$ by deleting every transition
-$\delta(q,\TMendtape) = \tuple{q',\sigma,\TMleft}$---then instead of
-attempting to move left on~$\TMendtape$ the machine
-halts.\footnote{This doesn't \emph{quite} work, since nothing prevents
-us from writing and reading $\TMendtape$ on squares other than
-square~$1$ (see \olref[una]{ex:mover}). We can get around that by
-adding a second $\TMendtape'$ symbol we use instead for such a
-purpose.}
+state. We have explained in \olref[hal]{sec} why requiring a
+designated halting state is not a restriction which impacts what
+Turing machines can compute.  Since the tapes of our Turing machines
+are infinite in one direction only, there are cases where a Turing
+machine can't properly carry out an instruction: if it reads the
+leftmost square and is supposed to move left. According to our
+definition, it just stays put instead of ``falling off'', but we could
+have defined it so that it halts when that happens. This definition is
+also equivalent: we could simulate the behavior of a Turing machine
+that halts when it attempts to move left from square~$0$ by deleting
+every transition $\delta(q,\TMendtape) =
+\tuple{q',\sigma,\TMleft}$---then instead of attempting to move left
+on~$\TMendtape$ the machine halts.\footnote{This doesn't \emph{quite}
+work, since nothing prevents us from writing and reading $\TMendtape$
+on squares other than square~$1$ (see \olref[una]{ex:mover}). We can
+get around that by adding a second~$\TMendtape'$ symbol we use instead
+for such a purpose.}
 
 There are also different ways of representing numbers (and hence the
 input-output function computed by a Turing machine): we use unary
 representation, but you can also use binary representation. This
-requires two symbols in addition to $\TMblank$ and $\TMendtape$.
-
-What is perhaps harder to see is that we gain noadditional computing
-power by allowing a tape that is infinite in both directions, or even
-multiple tapes. The reason is, roughly, that a Turing machine with a
-single infinite tape can simulate multiple or two-way infinite tapes.
-E.g., we could use the even squares for the squares of tape~$1$ (or
-the ``positive'' squares of a two-way infinite tape) and the off
-squares for the squares of tape~$2$ (or the ``negative'' squares).
+requires two symbols in addition to $\TMblank$ and~$\TMendtape$.
 
 Now here is an interesting fact: none of these variations matters as
 to which functions are Turing computable. \emph{If a function is Turing
 computable according to one definition, it is Turing computable
-according to all of them.}  
+according to all of them.}
+
+We won't go into the details of verifying this. Here's just one
+example: we gain no additional computing power by allowing a tape that
+is infinite in both directions, or multiple tapes. The reason is,
+roughly, that a Turing machine with a single one-way infinite tape can
+simulate multiple or two-way infinite tapes. E.g., using additional
+states and instructions, we can ``translate'' a program for a
+machine with multiple tapes or two-way infinite tape into one with a
+single one-way infinite tape.  The translated machine can use the
+even squares for the squares of tape~$1$ (or the ``positive'' squares
+of a two-way infinite tape) and the odd squares for the squares of
+tape~$2$ (or the ``negative'' squares).
 
 \end{document}

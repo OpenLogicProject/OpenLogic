@@ -1,0 +1,139 @@
+% Part: turing-machines
+% Chapter: undecidability
+% Section: universal-tm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{tur}{und}{uni}
+\olsection{Universal Turing Machines}
+
+In \olref[enu]{sec} we discussed how every Turing machine can be
+described by a finite sequence of integers. This sequence encodes the
+states, alphabet, start state, and instructions of the Turing machine.
+We also pointed out that the set of all of these descriptions is
+!!{enumerable}. Since the set of such descriptions is !!{denumerable},
+this means that there is !!a{surjective} function from~$\Nat$ to
+these descriptions. Such !!a{surjective} function can be obtained, for
+instance, using Cantor's zig-zag method.  It gives us a way of
+enumerating all (descriptions) of Turing machines. If we fix one such
+enumeration, it now makes sense to talk of the $1$st, $2$nd, \dots,
+$e$th Turing machine.  These numbers are called \emph{indices}.
+
+\begin{defn}
+If $M$~is the $e$th Turing machine (in our fixed enumeration), we
+say that $e$~is an \emph{index} of~$M$. We write $M_e$ for the $e$th
+Turing machine.
+\end{defn}
+
+A machine may have more than one index, e.g., two descriptions of~$M$
+may differ in the order in which we list its instructions, and these
+different descriptions will have different indices.
+
+Importantly, it is possible to give the enumeration of Turing machine
+descriptions in such a way that we can effectively compute the
+description of~$M$ from its index, and to effectively compute an index
+of a machine~$M$ from its description.  By the Church-Turing thesis,
+it is then possible to find a Turing machine which recovers the
+description of the Turing machine with index~$e$ and writes the
+corresponding description on its tape as output. The description would
+be a sequence of blocks of~$\TMstroke$'s (representing the positive
+integers in the sequence describing~$M_e$).
+
+Given this, it now becomes natural to ask: what functions of Turing
+machine indices are themselves computable by Turing machines? What
+properties of Turing machine indices can be decided by Turing
+machines?  An example: the function that maps an index~$e$ to the
+number of states the Turing machine with index~$e$ has, is computable
+by a Turing machine. Here's what such a Turing machine would do:
+started on a tape containing a single block of $e$~$\TMstroke$'s, it
+would first decode $e$ into its description. The description is now
+represented by a sequence of blocks of~$\TMstroke$'s on the tape.
+Since the first !!{element} in this sequence is the number of states.
+So all that has to be done now is to erase everything but the first
+block of $\TMstroke$'s and then halt.
+
+A remarkable result is the following:
+
+\begin{thm}\ollabel{thm:universal-tm} There is a \emph{universal
+  Turing machine}~$U$ which, when started on input $\tuple{e,n}$ 
+  \begin{enumerate}
+    \item halts iff $M_e$ halts on input~$n$, and
+    \item if $M_e$ halts with output $m$, so does~$U$.
+  \end{enumerate}
+  $U$ thus computes the function $f\colon \Nat \times \Nat \pto \Nat$
+  given by $f(e,n) = m$ if $M_e$ started on input~$n$ halts with
+  output~$m$, and undefined otherwise.
+\end{thm}
+
+\begin{proof}
+  To actually produce~$U$ is basically impossible, since it is an
+  extremely complicated machine. But we can describe in outline how it
+  works, and then invoke the Church-Turing thesis.  When it starts,
+  $U$'s tape contains a block of $e$ $\TMstroke$'s followed by a block
+  of $n$~$\TMstroke$'s. It first ``decodes'' the index~$e$ to the
+  right of the input~$n$. This is produces a list of numbers (i.e.,
+  blocks of $\TMstroke$'s separated by~$\TMblank$'s) that describes
+  the instructions of machine~$M_e$. $U$ then writes the number of the
+  start state of~$M_e$ and the number~$1$ on the tape to the right of
+  the description of~$M_e$. (Again, these are represented in unary, as
+  blocks of $\TMstroke$'s.) Next, it copies the input (block of
+  $n$~$\TMstroke$'s) to the right---but it replaces each $\TMstroke$
+  by a block of three $\TMstroke$'s (remember, the number of the $\TMstroke$
+  symbol is~$3$, $1$ being the number of~$\TMendtape$ and $2$ being
+  the number of~$\TMblank$). At the left end of this sequence of blocks
+  (separated by $\TMblank$ symbols on the tape of~$U$), it writes a
+  single~$\TMstroke$, the code for~$\TMendtape$.
+
+  $U$ now has on its tape: the index~$e$, the number~$n$, the code
+  number of the start state (the ``current state''), the number of the
+  initial head position~$1$ (the ``current head position''), and the
+  initial contents of the ``tape'' (a sequence of blocks
+  of~$\TMstroke$'s representing the code numbers of the symbols
+  of~$M_e$---the ``symbols''---separated by~$\TMblank$'s).
+
+  It now simulates what $M_e$ would do if started on input~$n$, by
+  doing the following:
+  \begin{enumerate}
+    \item Find the number~$k$ of the ``current head position'' (at the
+    beginning, that's~$1$),
+    \item Move to the $k$th block in the ``tape'' to see what the
+    ``symbol'' there is,
+    \item\ollabel{find-inst}%
+    Find the instruction matching the current ``state'' and
+    ``symbol,''
+    \item Move back to the $k$th block on the ``tape'' and replace the
+    ``symbol'' there with the code number of the symbol $M_e$ would
+    write,
+    \item Move the head to where it records the current ``state'' and
+    replace the number there with the number of the new state,
+    \item Move to the place where it records the ``tape position'' and
+    erase a~$\TMstroke$ or add a~$\TMstroke$ (if the instruction says
+    to move left or right, respectively).
+    \item Repeat.\footnote{We're glossing over some subtle
+    difficulties here. E.g., $U$~may need some extra space when it
+    increases the counter where it keeps track of the ``current head
+    position''---in that case it will have to move the entire ``tape''
+    to the right.}
+  \end{enumerate}
+  If $M_e$ started on input~$n$ never halts, then $U$ also never
+  halts, so its output is undefined.
+
+  If in step~\olref{find-inst} it turns out that the description
+  of~$M_e$ contains no instruction for the current
+  ``state''/``symbol'' pair, then $M_e$ would halt. If this happens,
+  $U$ erases the part of its tape to the left of the ``tape.'' For
+  each block of three~$\TMstroke$'s (representing a~$\TMstroke$ on
+  $M_e$'s tape), it writes a $\TMstroke$ on the left end of its own
+  tape, and successively erases the ``tape.'' When this is done,
+  $U$'s~tape contains a single block of~$\TMstroke$'s of length~$m$.
+  
+  If $U$ encounters something other than a block of
+  three~$\TMstroke$'s on the ``tape,'' it immediately halts. Since
+  $U$'s~tape in this case does not contain a single block
+  of~$\TMstroke$'s, its output is not a natural number, i.e., $f(e,n)$
+  is undefined in this case.
+\end{proof}
+
+\end{document}
