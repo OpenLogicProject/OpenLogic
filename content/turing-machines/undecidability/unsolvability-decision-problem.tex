@@ -36,8 +36,8 @@ halting problem.  But we know, by \olref[hal]{thm:halting-problem},
 that no such Turing machine can exist.
 \end{proof}
 
-\begin{cor}\olref{cor:undecidable-sat}
-It is undecidable if an arbitrary sentence of first-order logic is satisfiable.
+\begin{cor}\ollabel{cor:undecidable-sat}%
+It is undecidable if an arbitrary !!{sentence} of first-order logic is satisfiable.
 \end{cor}
 
 \begin{proof}
@@ -47,19 +47,20 @@ It is undecidable if an arbitrary sentence of first-order logic is satisfiable.
   Return to square~$1$ and write the symbol~$\lnot$.
 
   Now run the Turing machine~$S$. It eventually halts with output
-  either $1$ or~$0$ on the tape. If there is a~$1$, erase it; if
-  square~$1$ is empty, write a~$1$, then halt.
+  either $1$ (if $\lnot !B$ is satisfiable) or~$0$ (if $\lnot !B$ is
+  unsatisfiable) on the tape. If there is a~$\TMstroke$ on square~$1$,
+  erase it; if square~$1$ is empty, write a~$1$, then halt.
 
-  This Turing machine always halts, and its output is~$0$ iff $\lnot
-  !B$ is valid and $0$~otherwise. Since $\lnot !B$ is valid iff
-  $!B$~is unsatisfiable, the machine outputs~$1$ iff $!B$ is
-  satisfiable, and $0$~otherwise.
+  This Turing machine always halts, and its output is~$1$ iff $\lnot
+  !B$ is unsatisfiable and $0$~otherwise. Since $!B$ is valid iff
+  $\lnot !B$~is unsatisfiable, the machine outputs~$1$ iff $!B$ is
+  valid, and $0$~otherwise, i.e., it would solve the decision problem.
 \end{proof}
 
 \begin{explain}
 So there is no Turing machine which always gives a
 correct ``yes'' or ``no'' answer to the question ``Is $!B$ a valid
-sentence of first-order logic?'' However, there \emph{is} a Turing
+!!{sentence} of first-order logic?'' However, there \emph{is} a Turing
 machine that always gives a correct ``yes'' answer---but simply does
 not halt if the answer is ``no.'' This follows from the soundness and
 completeness theorem of first-order logic, and the fact that
@@ -67,7 +68,7 @@ completeness theorem of first-order logic, and the fact that
 \end{explain}
 
 \begin{thm}
-  \ollabel{thm:valid-ce}
+  \ollabel{thm:valid-ce}%
   Validity of first-order !!{sentence}s is semi-decidable: There is a
   Turing machine~$E$, which when started on a tape that contains
   !!a{sentence}~$!B$ of first-order logic as input, $E$~eventually
