@@ -99,7 +99,7 @@ $\tuple{q',\sigma'} \in X$.
 \end{proof}
 
 \begin{explain}
-So if $M$ halts for input $w$, then there is some $n$ such that $!C(M,
+So if $M$ halts for input $w$, then there is some~$n$ such that $!C(M,
 w, n) \Entails !E(M,w)$.  We will now show that for any time~$n$,
 $!T(M, w) \Entails !C(M, w, n)$.
 \end{explain}
@@ -289,11 +289,11 @@ $M$ does in fact halt when started on input~$m$.
 If $\Entails !T(M, w) \lif !E(M, w)$, then $M$ halts on input~$w$.
 \end{lem}
 
-\begin{proof} 
+\begin{proof}
 Consider the $\Lang L_M$-!!{structure} $\Struct M$ with
-domain $\Nat$ which interprets $\Obj 0$ as $0$, $'$ as the successor
-function, and $<$ as the less-than relation, and the predicates $\Obj Q_q$
-and $\Obj S_\sigma$ as follows:
+domain~$\Nat$ which interprets $\Obj 0$ as~$0$, $'$~as the successor
+function, and $<$~as the less-than relation, and the predicates $\Obj Q_q$
+and~$\Obj S_\sigma$ as follows:
 \begin{align*}
   \Assign{\Obj Q_q}{M} & =
 \Setabs{\tuple{m, n}}{\begin{array}{ll}\text{started on~$w$, after~$n$ steps,}\\ \text{$M$ is in state $q$
@@ -312,11 +312,11 @@ then also $\Sat{M}{!E(M, w)}$, i.e.,
 \]
 As $\Domain{M} = \Nat$, there must be $m$, $n \in \Nat$ so that
 $\Sat{M}{\Obj Q_q(\num{m}, \num{n}) \land \Obj S_\sigma(\num{m},
-  \num{n})}$ for some $q$ and $\sigma$ such that $\delta(q, \sigma)$
-is undefined. By the definition of $\Struct M$, this means that $M$
+\num{n})}$ for some $q$ and~$\sigma$ such that $\delta(q, \sigma)$ is
+undefined. By the definition of~$\Struct M$, this means that $M$
 started on input~$w$ after~$n$ steps is in state~$q$ and reading
-symbol~$\sigma$, and the transition function is undefined, i.e., $M$
-has halted.
+symbol~$\sigma$, and the transition function is undefined, i.e.,
+$M$~has halted.
 \end{proof}
 
 \end{document}
