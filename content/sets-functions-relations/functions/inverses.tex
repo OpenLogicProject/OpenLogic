@@ -48,12 +48,84 @@ to be specified for every $y \in B$.  If there are $x_1$ and $x_2 \in
 A$ with $x_1 \neq x_2$ but $f(x_1) = f(x_2)$, then $g(y)$ would not be
 uniquely specified for $y = f(x_1) = f(x_2)$. And if there is no~$x$
 at all such that $f(x) = y$, then $g(y)$ is not specified at all.  In
-other words, for $g$ to be defined, $f$ must be both !!{injective} and
+other words, for $g$ to be defined, $f$~must be both !!{injective} and
 !!{surjective}.
+
+Let's go slowly. We'll divide the question into two: Given a
+function~$f\colon A \to B$, when is there a function $g\colon B \to A$
+so that $g(f(x)) = x$? Such a $g$ ``undoes'' what $f$ does, and is
+called a \emph{left inverse} of~$f$. Secondly, when is there a
+function $h\colon B \to A$ so that $f(h(y)) = y$? Such an $h$ is
+called a \emph{right inverse} of~$f$---$f$ ``undoes'' what $h$~does.
+\end{explain}
+
+\begin{prop}
+If $f\colon A \to B$ is !!{injective}, then there is a \emph{left
+inverse}~$g\colon B \to A$ of~$f$ so that $g(f(x)) = x$ for all $x
+\in A$.
+\end{prop}
+
+\begin{proof}
+Suppose that $f\colon A \to B$ is !!{injective}. Consider a $y \in B$.
+If $y \in \ran{f}$, there is an $x \in A$ so that $f(x) = y$. Because
+$f$ is !!{injective}, there is only one such~$x \in A$. Then we can
+define: $g(y) = x$, i.e., $g(y)$ is ``the'' $x \in A$ such that $f(x)
+= y$.  If $y \notin \ran{f}$, we can map it to any~$a \in A$. So, we
+can pick an $a \in A$ and define $g\colon B \to A$ by:
+\[
+g(y) = \begin{cases}
+    x & \text{if $f(x) = y$}\\
+    a & \text{if $y \notin \ran{f}$.}
+\end{cases}
+\]
+It is defined for all $y \in B$, since for each such $y \in \ran{f}$
+there is exactly one $x \in A$ such that $f(x) = y$. By definition, if
+$y = f(x)$, then $g(y) = x$, i.e., $g(f(x)) = x$.
+\end{proof}
+
+\begin{prob}
+Show that if $f\colon A \to B$ has a left inverse~$g$, then $f$~is
+!!{injective}.
+\end{prob}
+
+\begin{prop}
+    If $f\colon A \to B$ is !!{surjective}, then there is a
+    \emph{right inverse}~$h\colon B \to A$ of~$f$ so that $f(h(y)) =
+    y$ for all~$y \in B$.
+\end{prop}
+
+\begin{proof}
+Suppose that $f\colon A \to B$ is !!{surjective}. Consider a $y \in
+B$. Since $f$~is !!{surjective}, there is an $x_y \in A$ with $f(x_y)
+= y$.  Then we can define: $h(y) = x_y$, i.e., for each $y \in B$ we
+choose some $x \in A$ so that $f(x) = y$; since $f$~is !!{surjective}
+there is always at least one to choose from.\footnote{If $f$ is
+!!{surjective}, then for every~$y$ the set $\Setabs{x}{f(x) = y}$ is
+nonempty. Our definition of~$h$ requires that we choose a single $x$
+from each of these sets. That this is always possible is actually not
+obvious---in axiomatic set theory, this is simply assumed as an axiom.
+In other words, this proposition assumes the so-called axiom of
+choice, an issue we will gloss over.  In many specific cases, e.g.,
+when $A = \Nat$ or is finite, or when $f$ actually is !!{bijective},
+the axiom of choice is not required.} By definition, if $x = h(y)$,
+then $f(x) = y$, i.e., for any $y \in B$, $f(h(y)) = y$.
+\end{proof}
+
+\begin{prob}
+Show that if $f\colon A \to B$ has a right inverse~$h$, then $f$~is
+!!{surjective}.
+\end{prob}
+
+\begin{explain}
+  By combining the ideas in the previous proof, we now get that every
+  !!{surjection} has an inverse, i.e., there is a single function
+  which is both a left and right inverse of~$f$.
 \end{explain}
 
 \begin{prop}\ollabel{prop:bijection-inverse}
-Every !!{bijection} has a unique inverse.
+If $f\colon A \to B$ is !!{bijective}, there is a
+function~$f^{-1}\colon B \to A$ so that for all $x \in A$,
+$f^{-1}(f(x)) = x$ and for all $y \in B$, $f(f^{-1}(y)) = y$.
 \end{prop}
 
 \begin{proof}
@@ -61,26 +133,33 @@ Exercise.
 \end{proof}
 
 \begin{prob}
-Prove \olref[sfr][fun][inv]{prop:bijection-inverse}. That is, show that if
-$f\colon A \to B$ is !!{bijective}, an inverse $g$ of $f$ exists. You
-have to define such a $g$, show that it is a function, and show that
-it is an inverse of~$f$, i.e., $f(g(y)) = y$ and $g(f(x)) = x$ for all
-$x \in A$ and $y \in B$.
+Prove \olref[sfr][fun][inv]{prop:bijection-inverse}. You have to
+define~$f^{-1}$, show that it is a function, and show that it is an
+inverse of~$f$, i.e., $f^{-1}(f(x)) = x$ and $f(f^{-1}(y)) = y$ for
+all $x \in A$ and $y \in B$.
 \end{prob}
 
 \begin{explain}
-However, there is a slightly more general way to extract inverses. We
-saw in \olref[kin]{sec} that every function $f$ induces
-!!a{surjection} $f' \colon A \to \ran{f}$ by letting $f'(x) = f(x)$
-for all $x \in A$. Clearly, if $f$ is !!a{injection}, then $f'$ is
-!!a{bijection}, so that it has a unique inverse by
-\olref{prop:bijection-inverse}. By a very minor abuse of notation, we
-sometimes call the inverse of $f'$ simply ``the inverse of $f$.''
+There is a slightly more general way to extract inverses. We saw in
+\olref[kin]{sec} that every function $f$ induces !!a{surjection} $f'
+\colon A \to \ran{f}$ by letting $f'(x) = f(x)$ for all $x \in A$.
+Clearly, if $f$~is !!{injective}, then $f'$~is !!{bijective}, so that
+it has a unique inverse by \olref{prop:bijection-inverse}. By a very
+minor abuse of notation, we sometimes call the inverse of $f'$ simply
+``the inverse of~$f$.''
 \end{explain}
 
+\begin{prop}\ollabel{prop:left-right}%
+  Show that if $f\colon A \to B$ has a left inverse~$g$ and a right
+  inverse~$h$, then $h = g$.
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
 \begin{prob}
-Show that if $f\colon A \to B$ has an inverse~$g$, then $f$ is
-!!{bijective}.
+  Prove \olref[sfr][fun][inv]{prop:left-right}.
 \end{prob}
 
 \begin{prop}\ollabel{prop:inverse-unique}
@@ -88,13 +167,9 @@ Every function~$f$ has at most one inverse.
 \end{prop}
 
 \begin{proof}
-Exercise.
+  Suppose $g$ and $h$ are both inverses of~$f$. Then in particular
+  $g$~is a left inverse of~$f$ and $h$~is a right inverse. By
+  \olref{prop:left-right}, $g = h$.
 \end{proof}
-
-\begin{prob}
-Prove \olref[sfr][fun][inv]{prop:inverse-unique}. That is, show that
-if $g\colon B \to A$ and $g'\colon B \to A$ are inverses of~$f\colon A
-\to B$, then $g = g'$, i.e., for all $y \in B$, $g(y) = g'(y)$.
-\end{prob}
 
 \end{document}
