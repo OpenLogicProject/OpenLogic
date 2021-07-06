@@ -11,29 +11,80 @@
 
 \begin{thm}
 \ollabel{thm:decision-prob}
-The decision problem is unsolvable.  
+The decision problem is unsolvable: There is no Turing machine~$D$,
+which when started on a tape that contains !!a{sentence}~$!B$ of
+first-order logic as input, $D$~eventually halts, and outputs~$1$ iff
+$!B$ is valid and $0$ otherwise.
 \end{thm}
 
 \begin{proof}
 Suppose the decision problem were solvable, i.e., suppose there were a
-Turing machine~$D$ of the following sort. Whenever $D$ is started on a
-tape that contains a !!{sentence}~$!B$ of first-order logic as input,
-$D$ eventually halts, and outputs $1$ iff $!B$ is valid and $0$
-otherwise.  Then we could solve the halting problem as follows. We
-construct a Turing machine~$E$ that, given as input the number~$e$ of
-Turing machine~$M_e$ and input~$w$, computes the corresponding
-!!{sentence}~$!T(M_e, w) \lif !E(M_e, w)$ and halts, scanning the
-leftmost square on the tape.  The machine $E \concat D$ would then,
-given input $e$ and $w$, first compute~$!T(M_e, w) \lif !E(M_e, w)$
-and then run the decision problem machine~$D$ on that input.  $D$
-halts with output~$1$ iff $!T(M_e, w) \lif !E(M_e, w)$ is valid and
-outputs~$0$ otherwise. By \olref[ver]{lem:halt-if-valid} and
+Turing machine~$D$. Then we could solve the halting problem as
+follows. We construct a Turing machine~$E$ that, given as input the
+number~$e$ of Turing machine~$M_e$ and input~$w$, computes the
+corresponding !!{sentence}~$!T(M_e, w) \lif !E(M_e, w)$ and halts,
+scanning the leftmost square on the tape.  The machine $E \concat D$
+would then, given input $e$ and $w$, first compute~$!T(M_e, w) \lif
+!E(M_e, w)$ and then run the decision problem machine~$D$ on that
+input.  $D$ halts with output~$1$ iff $!T(M_e, w) \lif !E(M_e, w)$ is
+valid and outputs~$0$ otherwise. By \olref[ver]{lem:halt-if-valid} and
 \olref[ver]{lem:valid-if-halt}, $!T(M_e, w) \lif !E(M_e, w)$ is valid
 iff $M_e$ halts on input~$w$. Thus, $E\concat D$, given input $e$ and
 $w$ halts with output~$1$ iff $M_e$ halts on input~$w$ and halts with
 output~$0$ otherwise. In other words, $E \concat D$ would solve the
 halting problem.  But we know, by \olref[hal]{thm:halting-problem},
 that no such Turing machine can exist.
+\end{proof}
+
+\begin{cor}\olref{cor:undecidable-sat}
+It is undecidable if an arbitrary sentence of first-order logic is satisfiable.
+\end{cor}
+
+\begin{proof}
+  Suppose satisfiability were decidable by a Turing machine~$S$. Then
+  we could solve the decision problem as follows: Given
+  !!a{sentence}~$B$ as input, move $!B$ to the right one square.
+  Return to square~$1$ and write the symbol~$\lnot$.
+
+  Now run the Turing machine~$S$. It eventually halts with output
+  either $1$ or~$0$ on the tape. If there is a~$1$, erase it; if
+  square~$1$ is empty, write a~$1$, then halt.
+
+  This Turing machine always halts, and its output is~$0$ iff $\lnot
+  !B$ is valid and $0$~otherwise. Since $\lnot !B$ is valid iff
+  $!B$~is unsatisfiable, the machine outputs~$1$ iff $!B$ is
+  satisfiable, and $0$~otherwise.
+\end{proof}
+
+\begin{explain}
+So there is no Turing machine which always gives a
+correct ``yes'' or ``no'' answer to the question ``Is $!B$ a valid
+sentence of first-order logic?'' However, there \emph{is} a Turing
+machine that always gives a correct ``yes'' answer---but simply does
+not halt if the answer is ``no.'' This follows from the soundness and
+completeness theorem of first-order logic, and the fact that
+!!{derivation}s can be effectively enumerated.
+\end{explain}
+
+\begin{thm}
+  \ollabel{thm:valid-ce}
+  Validity of first-order !!{sentence}s is semi-decidable: There is a
+  Turing machine~$E$, which when started on a tape that contains
+  !!a{sentence}~$!B$ of first-order logic as input, $E$~eventually
+  halts and outputs~$1$ iff $!B$ is valid, but does not halt
+  otherwise.
+\end{thm}
+
+\begin{proof}
+  All possible !!{derivation}s of first-order logic can be generated,
+  one after another, by an effective algorithm.  The machine~$E$ does
+  this, and when it finds a !!{derivation} that shows that $\Proves
+  !B$, it halts with output~$1$. By the soundness theorem, if $E$
+  halts with output~$1$, it's because~$\Entails !B$. By the
+  completeness theorem, if $\Entails !B$ there is !!a{derivation} that
+  shows that~$\Proves !B$. Since $E$ systematically generates all
+  possible !!{derivation}s, it will eventually find one that
+  shows~$\Proves !B$, so will eventually halt with output~$1$.
 \end{proof}
 
 \end{document}

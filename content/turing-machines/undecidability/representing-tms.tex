@@ -73,13 +73,8 @@ on. More formally:
 The !!{sentence}s describing the operation of the Turing machine~$M$ on
 input $w = \sigma_{i_1}\dots\sigma_{i_k}$ are the following:
 \begin{enumerate}
-\item Axioms describing numbers:
+\item Axioms describing numbers and~$<$:
 \begin{enumerate}
-\item \ollabel{tm-rep-a} !!^a{sentence} that says that the successor function is injective:
-\[
-\lforall[x][\lforall[y][
-    (\eq[x'][y'] \lif \eq[x][y])]]
-\]
 \item !!^a{sentence} that says that every number is less than its successor:
 \[
 \lforall[x][x < x']
@@ -88,10 +83,6 @@ input $w = \sigma_{i_1}\dots\sigma_{i_k}$ are the following:
 \[
 \lforall[x][\lforall[y][\lforall[z][
       ((x < y \land y < z) \lif x < z)]]]
-\]
-\item !!^a{sentence} that connects $<$ and~$=$:
-\[
-\lforall[x][\lforall[y][(x < y \lif \eq/[x][y])]]
 \]
 \end{enumerate}
 \item Axioms describing the input configuration:
@@ -183,10 +174,10 @@ the same symbols they contained ofter $y$~steps.
 Let $!T(M, w)$ be the conjunction of all the above !!{sentence}s for Turing
 machine~$M$ and input~$w$.
 
-In order to express that $M$ eventually halts, we have to find a
+In order to express that~$M$ eventually halts, we have to find a
 !!{sentence} that says ``after some number of steps, the transition
-function will be undefined.''  Let $X$ be the set of all pairs
-$\tuple{q, \sigma}$ such that $\delta(q, \sigma)$ is undefined.  Let
+function will be undefined.''  Let $X$~be the set of all pairs
+$\tuple{q, \sigma}$ such that~$\delta(q, \sigma)$ is undefined.  Let
 $!E(M, w)$ then be the !!{sentence}
 \[
 \lexists[x][\lexists[y][(\bigvee_{\tuple{q, \sigma} \in
