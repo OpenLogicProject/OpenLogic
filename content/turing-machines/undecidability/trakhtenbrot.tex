@@ -21,7 +21,7 @@
 
   But validity and satisfiability of sentences is defined for
   arbitrary !!{structure}s, finite or infinite. You might suspect that
-  it is easier to decide if !!a{sentence} is satisfiably in a finite
+  it is easier to decide if !!a{sentence} is satisfiable in a finite
   !!{structure} (or valid in all finite !!{structure}s). We can
   improve the proof of the unsolvability of the decision so that it
   shows this is not the case.
@@ -42,7 +42,7 @@
       n &\text{otherwise.}
     \end{cases}
   \]
-  otherwise $\Struct{M}$ is defined just like~$\Struct{M'}$. By the
+  Otherwise $\Struct{M'}$ is defined just like~$\Struct{M}$. By the
   definition of~$\Struct{M'}$, just like in the proof of
   \olref[ver]{lem:halt-if-valid}, $\Sat{M'}{!T(M,w)}$.  And since we
   assumed that $M$ halts on input~$w$, $\Sat{M'}{!E(M,w)}$. So,
@@ -55,8 +55,10 @@
   then the configuration after $n+1$ steps is exactly the same as the
   configuration after $n$~steps (same state, same head position, same
   tape contents). But the machine never halts; it's in an infinite
-  loop.  The !!{structure}~$\Struct{M'}$ above satisfies $!T(M,w)$ but
-  not~$!E(M,w)$. But by changing~$!T(M,w)$ suitable we can rule this out.
+  loop.  The corresponding !!{structure}~$\Struct{M'}$ above satisfies
+  $!T(M,w)$ but not~$!E(M,w)$. (In it, the values of $\num{n+l}$ are
+  all the same, so it is finite). But by changing~$!T(M,w)$ suitable
+  we can rule out !!{structure}s like this.
 \end{explain}
 
 Consider the !!{sentence}s describing the operation of the Turing
@@ -152,9 +154,14 @@ machine~$M$ and input~$w$.
     \end{cases}
   \end{align*}
   where $n = \max(k,\len{w})$ and $k$~is the least number such that
-  $M$ started on input~$w$ has halted after~$k$ steps. It is easy to
-  verify that $\Sat{M'}{!T(M,w) \land E(M,w)}$.
+  $M$ started on input~$w$ has halted after~$k$ steps. We leave the
+  verification that $\Sat{M'}{!T(M,w) \land E(M,w)}$ as an exercise.
 \end{proof}
+
+\begin{prob}
+  Complete the proof of \olref[tur][und][tra]{lem:halts-sat} by
+  proving that $\Sat{M'}{!T(M,w) \land E(M,w)}$.
+\end{prob}
 
 \begin{lem}\ollabel{lem:sat-halts}
   If $!T'(M,w) \land !E(M,w)$ has a finite model, then $M$ started on
@@ -164,7 +171,7 @@ machine~$M$ and input~$w$.
 \begin{proof}
   We show the contrapositive. Suppose that $M$ started on~$w$ does not
   halt. If $!T'(M,w) \land !E(M,w)$ has no model at all, we are done.
-  So assume $\Struct{M}$ is a model of~$!T(M,w) \land !E(T, w)$. We
+  So assume $\Struct{M}$ is a model of~$!T(M,w) \land !E(M, w)$. We
   have to show that it cannot be finite.
   
   We can prove, just like in \olref[ver]{lem:config}, that if~$M$,
@@ -178,7 +185,7 @@ machine~$M$ and input~$w$.
   all~$k < n$, i.e., the infinitely many terms~$\num{k}$ must all have
   different values in~$\Struct{M}$. But this requires that
   $\Domain{M}$ be infinite, so $\Struct{M}$ cannot be a finite model
-  of~$!T(M,w) \land !E(T, w)$.
+  of~$!T(M,w) \land !E(M, w)$.
 \end{proof}
 
 \begin{prob}
