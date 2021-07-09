@@ -43,8 +43,8 @@ binds a variable in~$t$.
 \end{ex}
 
 \begin{defn}[Substitution in !!a{formula}]
-If $!A$ is !!a{formula}, $x$ is !!a{variable}, and $t$ is a term
-!!{free for}~$x$ in $!A$, then $\Subst{!A}{t}{x}$ is the result of
+If $!A$ is !!a{formula}, $x$~is !!a{variable}, and $t$~is a term
+!!{free for}~$x$ in~$!A$, then $\Subst{!A}{t}{x}$ is the result of
 substituting $t$ for all free occurrences of~$x$ in~$!A$.
 \begin{enumerate}
 \tagitem{prvFalse}{\indcase{!A}{\lfalse}{$\Subst{\indfrm}{t}{x}$ is
@@ -113,10 +113,14 @@ prevent this by requiring that none of the free variables in~$t$ would
 end up being bound by a quantifier in~$!A$.
 \end{explain}
 
-We often use the following convention to avoid cumbersume notation: If
-$!A$ is a formula with a free !!{variable}~$x$, we write $!A(x)$ to
-indicate this. When it is clear which $!A$ and $x$ we have in mind,
-and $t$ is a term (assumed to be free for $x$ in $!A(x)$), then we
-write $!A(t)$ as short for $\Subst{!A(x)}{t}{x}$.
+We often use the following convention to avoid cumbersome notation: If
+$!A$ is !!a{formula} which may contain the !!{variable}~$x$ free, we
+also write~$!A(x)$ to indicate this. When it is clear which $!A$
+and~$x$ we have in mind, and $t$ is a term (assumed to be free for $x$
+in $!A(x)$), then we write $!A(t)$ as short for $\Subst{!A}{t}{x}$. So
+for instance, we might say, ``we call $!A(t)$ an instance
+of~$\lforall[x][A(x)]$.'' By this we mean that if $!A$~is any
+!!{formula}, $x$~!!a{variable}, and $t$~a term that's free for~$x$
+in~$!A$, then $\Subst{!A}{t}{x}$ is an instance of~$\lforall[x][!A]$.
 
 \end{document}
