@@ -1,0 +1,58 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: sentences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{snt}
+
+\olsection{\usetoken{P}{sentence}}
+
+Ok, now we have a (sketch of a) definition of satisfaction (``true
+in'') for !!{structure}s and !!{formula}s. But it needs this
+additional bit---!!a{variable} assignment---and what we wanted is a
+definition of !!{sentence}s. How do we get rid of assignments, and
+what are !!{sentence}s?
+
+You probably remember a discussion in your first introduction to
+formal logic about the relation between !!{variable}s and quantifiers.
+A quantifier is always followed by !!a{variable}, and then in the part
+of the !!{sentence} to which that quantifier applies (its ``scope''),
+we understand that the !!{variable} is ``bound'' by that quantifier.
+In !!{formula}s it was not required that every !!{variable} has a
+matching quantifier, and !!{variable}s without matching quantifiers
+are ``free'' or ``unbound.''  We will take !!{sentence}s to be all
+those !!{formula}s that have no free !!{variable}s.
+
+Again, the intuitive idea of when an occurrence of !!a{variable} in
+!!a{formula}~$!A$ is bound, which quantifier binds it, and when it is
+free, is not difficult to get. You may have learned a method for
+testing this, perhaps involving counting parentheses.  We have to
+insist on a precise definition---and because we have defined
+!!{formula}s by induction, we can give a definition of the free and
+bound occurrences of !!a{variable}~$x$ in !!a{formula}~$!A$ also by
+induction.  E.g., it might look like this for our simplified language:
+\begin{enumerate}
+  \item If $!A$ is atomic, all occurrences of $x$ in it are free (that
+  is, the occurrence of $x$ in~$\Atom{\Obj P}{x}$ is free).
+  \item If $!A$ is of the form $\lnot !B$, then an occurrence of~$x$
+  in~$\lnot !B$ is free iff the corresponding occurrence of~$x$ is
+  free in~$!B$ (that is, the free occurrences of variables in~$
+  !B$ are exactly the corresponding occurrences in~$\lnot !B$).
+  \item If $!A$ is of the form $(!B \land !C)$, then an occurrence of~$x$
+  in~$(!B \land !C)$ is free iff the corresponding occurrence of~$x$ is
+  free in~$!B$ or in~$!C$.
+  \item If $!A$ is of the form $\lexists[x][!B]$, then no occurrence
+  of $x$ in~$!A$ is free; if it is of the form $\lexists[y][!B]$ where
+  $y$ is a different !!{variable} than~$x$, then an occurrence of~$x$
+  in $\lexists[y][!B]$ is free iff the corresponding occurrence of~$x$
+  is free in~$!B$.
+\end{enumerate}
+
+Once we have a precise definition of free and bound occurrences of
+variables, we can simply say: !!a{sentence} is any !!{formula} without
+free occurrences of !!{variable}s.
+
+\end{document}

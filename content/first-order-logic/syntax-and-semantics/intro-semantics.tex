@@ -1,0 +1,47 @@
+% Part: first-order-logic
+% Chapter: semantics
+% Section: intro-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{its}
+
+\olsection{Introduction}
+
+Giving the meaning of expressions is the domain of semantics.  The
+central concept in semantics is that of satisfaction in
+!!a{structure}. !!^a{structure} gives meaning to the building blocks
+of the language: !!a{domain} is a non-empty set of objects. The
+quantifiers are interpreted as ranging over this domain, !!{constant}s
+are assigned elements in the domain, !!{function}s are assigned
+functions from the !!{domain} to itself, and !!{predicate}s are
+assigned relations on the !!{domain}.  The !!{domain} together with
+assignments to the basic vocabulary constitutes !!a{structure}.
+!!^{variable}s may appear in !!{formula}s, and in order to give a
+semantics, we also have to assign !!{element}s of the !!{domain} to
+them---this is a variable assignment. The satisfaction relation,
+finally, brings these together. !!^a{formula} may be satisfied in
+!!a{structure}~$\Struct{M}$ relative to !!a{variable} assignment~$s$,
+written as $\Sat{M}{!A}[s]$. This relation is also defined by
+induction on the structure of~$!A$, using the truth tables for the
+logical connectives to define, say, satisfaction of $(!A \land !B)$ in
+terms of satisfaction (or not) of $!A$ and ~$!B$.  It then turns out
+that the !!{variable} assignment is irrelevant if the !!{formula}~$!A$
+is !!a{sentence}, i.e., has no free variables, and so we can talk of
+!!{sentence}s being simply satisfied (or not) in !!{structure}s.
+
+On the basis of the satisfaction relation $\Sat{M}{!A}$ for !!{sentence}s
+we can then define the basic semantic notions of validity, entailment,
+and satisfiability. !!^a{sentence} is valid, $\Entails !A$, if every
+!!{structure} satisfies it. It is entailed by a set of !!{sentence}s,
+$\Gamma \Entails !A$, if every !!{structure} that satisfies all the
+!!{sentence}s in~$\Gamma$ also satisfies~$!A$. And a set of !!{sentence}s
+is satisfiable if some !!{structure} satisfies all !!{sentence}s in it
+at the same time.  Because !!{formula}s are inductively defined, and
+satisfaction is in turn defined by induction on the structure of
+!!{formula}s, we can use induction to prove properties of our
+semantics and to relate the semantic notions defined.
+
+\end{document}

@@ -1,0 +1,114 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: satisfaction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{sat}
+
+\olsection{Satisfaction}
+
+We can already skip ahead to the semantics of first-order logic once
+we know what !!{formula}s are: here, the basic definition is that of 
+!!a{structure}. For our simple language, !!a{structure}~$\Struct M$ has
+just three components: a non-empty set $\Domain{M}$ called the
+\emph{!!{domain}}, what $\Obj a$ picks out in~$\Struct M$, and what
+$\Obj P$ is true of in~$\Struct M$.  The object picked out by~$\Obj a$
+is denoted~$\Assign{\Obj a}{M}$ and the set of things $\Obj P$ is true
+of by~$\Assign{\Obj P}{M}$. !!^a{structure}~$\Struct{M}$ consists of
+just these three things: $\Domain{M}$, $\Assign{\Obj a}{M} \in
+\Domain{M}$ and $\Assign{\Obj P}{M} \subseteq \Domain{M}$. The general
+case will be more complicated, since there will be many !!{predicate}s
+and !!{constant}s, the !!{constant}s can have more than one place, and
+there will also be !!{function}s.
+
+This is enough to give a definition of satisfaction for !!{formula}s
+that don't contain !!{variable}s.  The idea is to give an inductive
+definition that mirrors the way we have defined !!{formula}s. We
+specify when an atomic formula is satisfied in~$\Struct{M}$, and then
+when, e.g., $\lnot !A$ is satisfied in~$\Struct{M}$ on the basis of
+whether or not $!A$ is satisfied in~$\Struct{M}$. E.g., we could
+define:
+\begin{enumerate}
+  \item $\Atom{\Obj P}{\Obj a}$ is satisfied in~$\Struct{M}$ iff
+  $\Assign{\Obj a}{M} \in \Assign{\Obj P}{M}$.
+  \item $\lnot !A$ is satisfied in~$\Struct{M}$ iff $!A$ is not
+  satisfied in~$\Struct{M}$.
+  \item $(!A \land !B)$ is satisfied in~$\Struct{M}$ iff $!A$ is
+  satisfied in~$\Struct{M}$, and $!B$ is satisfied in~$\Struct{M}$ as
+  well.
+\end{enumerate}
+Let's say that $\Domain{M} = \{0, 1, 2\}$, $\Assign{\Obj a}{M} = 1$,
+and $\Assign{\Obj P}{M} = \{1, 2\}$. This definition would tell us
+that $\Atom{\Obj P}{\Obj a}$ is satisfied in~$\Struct{M}$ (since
+$\Assign{\Obj a}{M} =  1 \in \{1,2\} = \Assign{\Obj P}{M}$). It tells
+us further that $\lnot \Atom{\Obj P}{\Obj a}$ is not satisfied
+in~$\Struct{M}$, and that in turn that $\lnot\lnot \Atom{\Obj P}{\Obj
+a}$ is and $(\lnot \Atom{\Obj P}{\Obj a} \land \Atom{\Obj P}{\Obj a})$
+is not satisfied, and so on.
+
+The trouble comes when we want to give a definition for the
+quantifiers: we'd like to say something like, ``$\lexists[\Obj
+v_0][\Atom{\Obj P}{\Obj v_0}]$ is satisfied iff $\Atom{\Obj P}{\Obj
+v_0}$ is satisfied.'' But the !!{structure}~$\Struct{M}$ doesn't tell
+us what to do about !!{variable}s. What we actually want to say is
+that $\Atom{\Obj P}{\Obj v_0}$ is satisfied \emph{for some value
+of~$\Obj v_0$}.  To make this precise we need a way to assign
+!!{element}s of~$\Domain{M}$ not just to $\Obj a$ but also to~$\Obj
+v_0$. To this end, we introduce !!{variable} \emph{assignments}.
+!!^a{variable} assignment is simply a function~$s$ that maps
+!!{variable}s to !!{element}s of~$\Domain{M}$ (in our example, to one
+of $1$, $2$, or~$3$).  Since we don't know beforehand which
+!!{variable}s might appear in !!a{formula} we can't limit which
+!!{variable}s $s$ assigns values to. The simple solution is to
+require that $s$ assigns values to \emph{all} !!{variable}s~$\Obj
+v_0$, $\Obj v_1$, \dots\@ We'll just use only the ones we need.
+
+Instead of defining satisfaction of !!{formula}s just relative to
+!!a{structure}, we'll define it relative to
+!!a{structure}~$\Struct{M}$ \emph{and} !!a{variable} assignment~$s$,
+and write $\Sat{M}{!A}[s]$ for short. Our definition will now include
+an additional clause to deal with atomic !!{formula}s containing
+!!{variable}s:
+\begin{enumerate}
+  \item $\Sat{M}{\Atom{\Obj P}{\Obj a}}[s]$ iff
+  $\Assign{\Obj a}{M} \in \Assign{\Obj P}{M}$.
+  \item $\Sat{M}{\Atom{\Obj P}{\Obj v_i}}[s]$ iff
+  $s(\Obj v_i) \in \Assign{\Obj P}{M}$.
+  \item $\Sat{M}{\lnot !A}[s]$ iff not $\Sat{M}{!A}[s]$.
+  \item $\Sat{M}{(!A \land !B)}[s]$ iff $\Sat{M}{!A}[s]$ and $\Sat{M}{!B}[s]$.
+\end{enumerate}
+Ok, this solves one problem: we can now say when $\Struct{M}$
+satisfies $\Atom{\Obj P}{\Obj v_0}$ for the value~$s(\Obj v_0)$. To
+get the definition right for $\lexists[\Obj v_0][\Atom{\Obj P}{\Obj
+v_0}]$ we have to do one more thing:  We want to have that
+$\Sat{M}{\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]}[s]$ iff
+$\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[s']$ for \emph{some} way $s'$ of
+assigning a value to~$\Obj v_0$. But the value assigned to~$\Obj v_0$
+does not necessarily have to be the value that $s(\Obj v_0)$ picks
+out.  We'll introduce a notation for that: if $m \in \Domain{M}$, then
+we let $\Subst{s}{m}{\Obj v_0}$ be the assignment that is just
+like~$s$ (for all !!{variable}s other than~$\Obj v_0$), except to
+$\Obj v_0$ it assigns~$m$. Now our definition can be:
+\begin{enumerate}\setcounter{enumi}{4}
+  \item $\Sat{M}{\lexists[\Obj v_i][!A]}[s]$ iff
+  $\Sat{M}{!A}[\Subst{s}{m}{\Obj v_i}]$ for some~$m \in \Domain{M}$.
+\end{enumerate}
+Does it work out? Let's say we let $s(\Obj v_i) = 0$ for all~$i \in
+\Nat$. $\Sat{M}{\lexists[\Obj v_0][\Atom{\Obj P}{\Obj v_0}]}[s]$ iff
+there is an $m \in \Domain{M}$ so that $\Sat{M}{\Atom{\Obj P}{\Obj
+v_0}}[\Subst{s}{m}{\Obj v_0}]$. And there is: we can choose $m = 1$ or
+$m = 2$. Note that this is true even if the value~$s(\Obj v_0)$
+assigned to~$\Obj v_0$ by $s$ itself---in this case, $0$---doesn't do
+the job. We have $\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[\Subst{s}{1}{\Obj
+v_0}]$ but not $\Sat{M}{\Atom{\Obj P}{\Obj v_0}}[s]$.
+
+If this looks confusing and cumbersome: it is. But the added
+complexity is required to give a precise, inductive definition of
+satisfaction for all !!{formula}s, and we need something like it to
+precisely define the semantic notions.  There are other ways of doing
+it, but they are all equally (in)elegant.
+
+\end{document}

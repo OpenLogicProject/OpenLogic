@@ -1,0 +1,47 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: substitution
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{sub}
+
+\olsection{Substitution}
+
+We'll discuss an example to illustrate how things hang together, and
+how the development of syntax and semantics lays the foundation for
+our more advanced investigations later. Our proof systems should let
+us !!{derive} $\Atom{\Obj P}{\Obj a}$ from $\lforall[\Obj
+v_0][\Atom{\Obj P}]{\Obj v_0}$. Maybe we even want to state this as a
+rule of inference. However, to do so, we must be able to state it in
+the most general terms: not just for $\Obj P$, $\Obj a$, and $\Obj
+v_0$, but for any !!{formula}~$!A$, and term~$t$, and
+!!{variable}~$x$. (Recall that !!{constant}s are terms, but we'll
+consider also more complicated terms built from !!{constant}s and
+!!{function}s.) So we want to be able to say something like,
+``whenever you have !!{derive}d $\lforall[x][!A(x)]$ you are justified
+in inferring~$!A(t)$---the result of removing $\lforall[x]$ and
+replacing~$x$ by~$t$.'' But what exactly does ``replacing $x$ by~$t$''
+mean? What is the relation between $!A(x)$ and~$!A(t)$?  Does this
+always work?
+
+To make this precise, we define the operation of \emph{substitution}.
+Substitution is actually tricky, because we can't just replace
+all~$x$'s in~$!A$ by~$t$, and not every~$t$ can be substituted for
+any~$x$. We'll deal with this, again, using inductive definitions. But
+once this is done, specifying an inference rule as ``infer $!A(t)$
+from $\lforall[x][!A(x)]$'' becomes a precise definition.  Moreover,
+we'll be able to show that this is a good inference rule in the sense
+that $\lforall[x][!A(x)]$ entails~$!A(t)$. But to prove this, we have
+to again prove something that may at first glance prompt you to ask
+``why are we doing this?'' That $\lforall[x][!A(x)]$ entails~$!A(t)$
+relies on the fact that whether or not $\Sat{M}{!A(t)}$ holds depends
+only on the value of the term~$t$, i.e., if we let $m$ be whatever
+!!{element} of~$\Domain{M}$ is picked out by~$t$, then
+$\Sat{M}{!A(t)}[s]$ iff $\Sat{M}{!A(x)}[\Subst{s}{m}{x}]$. This holds
+even when $t$ contains !!{variable}s, but we'll have to be careful
+with how exactly we state the result.
+
+\end{document}

@@ -1,0 +1,87 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: first-order-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{fol}
+
+\olsection{First-Order Logic}
+
+You are probably familiar with first-order logic from your first
+introduction to formal logic.\footnote{In fact, we more or less assume
+you are!{} If you're not, you could review a more elementary textbook,
+such as \emph{forall x} \citep{Magnus2021}.} You may know it as
+``quantificational logic'' or ``predicate logic.''  First-order
+logic, first of all, is a formal language.  That means, it has a
+certain vocabulary, and its expressions are strings from this
+vocabulary.  But not every string is permitted.  There are different
+kinds of permitted expressions: terms, !!{formula}s, and
+!!{sentence}s.  We are mainly interested in !!{sentence}s of
+first-order logic: they provide us with a formal analogue of sentences
+of English, and about them we can ask the questions a logician
+typically is interested in. For instance: 
+\begin{itemize}
+    \item Does $!B$ follow from~$!A$ logically?
+    \item Is $!A$ logically true, logically false, or
+contingent?
+    \item Are $!A$ and $!B$ equivalent?
+\end{itemize}
+
+These questions are primarily questions about the ``meaning'' of
+!!{sentence}s of first-order logic.  For instance, a philosopher would
+analyze the question of whether $!B$ follows logically from~$!A$ as
+asking: is there a case where $!A$ is true but~$!B$ is false ($!B$
+doesn't follow from~$!A$), or does every case that makes $!A$ true
+also make~$!B$ true ($!B$ does follow from~$!A$)?  But we haven't been
+told yet what a ``case'' is---that is the job of \emph{semantics}.  The
+semantics of first-order logic provides a mathematically precise model
+of the philosopher's intuitive idea of ``case,'' and also---and this
+is important---of what it is for !!a{sentence}~$!A$ to be \emph{true
+in} a case. We call the mathematically precise model that we will
+develop !!a{structure}. The relation which makes ``true in'' precise,
+is called the relation of \emph{satisfaction}.  So what we will define
+is ``$!A$ is satisfied in~$\Struct{M}$'' (in symbols: $\Sat{M}{!A}$)
+for !!{sentence}s~$!A$ and !!{structure}s~$\Struct{M}$. Once this is
+done, we can also give precise definitions of the other semantical
+terms such as ``follows from'' or ``is logically true.'' These
+definitions will make it possible to settle, again with mathematical
+precision, whether, e.g., $\lforall[x][(!A(x) \lif !B(x)),
+\lexists[x][!A(x)] \Entails \lexists[x][!B(x)]]$. The answer will, of
+course, be ``yes.'' If you've already been trained to symbolize
+sentences of English in first-order logic, you will recognize this as,
+e.g., the symbolizations of, say, ``All ants are insects, there are
+ants, therefore there are insects.'' That is obviously a valid
+argument, and so our mathematical model of ``follows from'' for our
+formal language should give the same answer.
+
+Another topic you probably remember from your first introduction to
+formal logic is that there are \emph{formal proofs}.  If you have
+taken a first formal logic course, your instructor will have made you
+practice finding such proofs, perhaps even a proof that shows that the
+above entailment holds.  There are many different ways to give formal
+proofs: you may have done something called ``natural deduction'' or
+``truth trees,'' but there are many others.  The purpose of proof
+systems is to provide tools using which the logicians' questions above
+can be answered: e.g., a natural deduction proof in which
+$\lforall[x][(!A(x) \lif !B(x))$ and $\lexists[x][!A(x)]$ are premises
+and $\lexists[x][!B(x)]]$ is the conclusion (last line)
+\emph{verifies} that $\lexists[x][!B(x)]]$ logically follows from
+$\lforall[x][(!A(x) \lif !B(x))]$ and $\lexists[x][!A(x)]$.  
+
+But why is that?  On the face of it, proof systems have nothing to do
+with semantics: giving a formal proof merely involves arranging symbols
+in certain rule-governed ways; they don't mention ``cases'' or ``true
+in'' at all.  The connection between proof systems and semantics has
+to be established by a meta-logical investigation. What's needed is a
+mathematical proof, e.g., that a formal proof of $\lexists[x][!B(x)]$
+from premises $\lforall[x][(!A(x) \lif !B(x))]$ and
+$\lexists[x][!A(x)]$ is possible, if, and only if, $\lforall[x][(!A(x)
+\lif !B(x))$ and $\lexists[x][!A(x)]$ together
+entails~$\lexists[x][!B(x)]]$.  Before this can be done, however, a
+lot of painstaking work has to be carried out to get the definitions
+of syntax and semantics correct.
+
+\end{document}
