@@ -1,0 +1,70 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: models-theories
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{mod}
+
+\olsection{Models and Theories}
+
+Once we've defined the syntax and semantics of first-order logic, we
+can get to work investigating the properties of !!{structure}s, of the
+semantic notions, we can define proof systems, and investigate those.
+For a set of !!{sentence}s, we can ask: what !!{structure}s make all
+the !!{sentence}s in that set true?  Given a set of
+!!{sentence}s~$\Gamma$, !!a{structure}~$\Struct{M}$ that satisfies
+them is called a \emph{model of~$\Gamma$}.  We might start
+from~$\Gamma$ and try find its models---what do they look like? How
+big or small do they have to be? But we might also start with a single
+!!{structure} or collection of !!{structure}s and ask: what
+!!{sentence}s are true in them?  Are there !!{sentence}s that
+\emph{characterize} these !!{structure}s in the sense that they, and
+only they, are true in them? These kinds of questions are the domain
+of \emph{model theory}.  They also underlie the \emph{axiomatic
+method}: describing a collection of !!{structure}s by a set of
+!!{sentence}s, the axioms of a theory. This is made possible by the
+observation that exactly those !!{sentence}s entailed in first-order
+logic by the axioms are true in all models of the axioms.
+
+As a very simple example, consider preorders. A preorder is a
+relation~$R$ on some set~$A$ which is both reflexive and transitive.
+A set~$A$ with a two-place relation $R \subseteq A \times A$ on it is
+exactly what we would need to give !!a{structure} for a first-order
+language with a single two-place relation symbol~$\Obj P$: we would
+set $\Domain{M} = A$ and $\Assign{\Obj P}{M} = R$.  Since $R$~is a
+preorder, it is reflexive and transitive, and we can find a
+set~$\Gamma$ of !!{sentence}s of first-order logic that say this:
+\begin{align*}
+  & \lforall[\Obj v_0][\Atom{\Obj P}{\Obj v_0,\Obj v_0}]\\
+  & \lforall[\Obj v_0][\lforall[\Obj v_1][\lforall[\Obj v_2][((\Atom{\Obj P}{\Obj v_0,\Obj v_1} \land \Atom{\Obj P}{\Obj v_1,\Obj v_2}) \lif \Atom{\Obj P}{\Obj v_0,\Obj v_2})]]]
+\end{align*}
+These !!{sentence}s are just the symbolizations of ``for any~$x$,
+$Rxx$'' ($R$ is reflexive) and ``whenever $Rxy$ and $Ryz$ then also
+$Rxz$'' ($R$ is transitive). We see that !!a{structure}~$\Struct{M}$
+is a model of these two !!{sentence}s~$\Gamma$ iff $R$ (i.e.,
+$\Assign{\Obj P}{M}$), is a preorder on~$A$ (i.e., $\Domain{M}$). In
+other words, the models of $\Gamma$ are exactly the preorders. Any
+property of all preorders that can be expressed in the first-order
+language with just~$\Obj P$ as !!{predicate} (like reflexivity and
+transitivity above), is entailed by the two !!{sentence}s in~$\Gamma$
+and vice versa.  So anything we can prove about models of~$\Gamma$ we
+have proved about all preorders.
+
+For any particular theory and class of models (such as $\Gamma$ and
+all preorders), there will be interesting questions about what can be
+expressed in the corresponding first-order language, and what cannot
+be expressed. There are some properties of !!{structure}s that are
+interesting for all languages and classes of models, namely those
+concerning the size of the !!{domain}.  One can always express, for
+instance, that the !!{domain} contains exactly $n$~!!{element}s, for
+any~$n \in \PosInt$.  One can also express, using a set of infinitely
+many !!{sentence}s, that the !!{domain} is infinite.  But one cannot
+express that the domain is finite, or that the domain is
+!!{nonenumerable}. These results about the limitations of first-order
+languages are consequences of the compactness and L\"owenheim-Skolem
+theorems.
+
+\end{document}

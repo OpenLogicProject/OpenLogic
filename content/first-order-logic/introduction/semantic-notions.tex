@@ -1,0 +1,48 @@
+% Part: first-order-logic
+% Chapter: introduction
+% Section: semantic-notions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{int}{sem}
+
+\olsection{Semantic Notions}
+
+We mentioned above that when we consider whether $\Sat{M}{!A}[s]$
+holds, we (for convenience) let $s$ assign values to all !!{variable},
+but only the values it assigns to !!{variable}s in~$!A$ are used.  In
+fact, it's only the values of \emph{free} variables in~$!A$ that
+matter. Of course, because we're careful, we are going to prove this
+fact. Since !!{sentence}s have no free variables, $s$~doesn't matter
+at all when it comes to whether or not they are satisfied in
+!!a{structure}.  So, when $!A$ is !!a{sentence} we can define
+$\Sat{M}{!A}$ to mean ``$\Sat{M}{!A}[s]$ for all~$s$,'' which as it
+happens is true iff $\Sat{M}{!A}[s]$ for at least one~$s$. We need to
+introduce !!{variable} assignments to get a working definition of
+satisfaction for !!{formula}s, but for !!{sentence}s, satisfaction is
+independent of the !!{variable} assignments.
+
+Once we have a definition of ``$\Sat{M}{!A}$,'' we know what ``case''
+and ``true in'' mean as far as !!{sentence}s of first-order logic are
+concerned. On the basis of the definition of $\Sat{M}{!A}$ for
+!!{sentence}s we can then define the basic semantic notions of
+validity, entailment, and satisfiability.  A sentence is valid,
+$\Entails !A$, if every !!{structure} satisfies it. It is entailed by
+a set of !!{sentence}s, $\Gamma \Entails !A$, if every !!{structure}
+that satisfies all the !!{sentence}s in~$\Gamma$ also satisfies~$!A$.
+And a set of !!{sentence}s is satisfiable if some !!{structure}
+satisfies all !!{sentence}s in it at the same time.
+
+Because !!{formula}s are inductively defined, and satisfaction is in
+turn defined by induction on the structure of !!{formula}s, we can use
+induction to prove properties of our semantics and to relate the
+semantic notions defined.  We'll collect and prove some of these
+properties, partly because they are individually interesting, but
+mainly because many of them will come in handy when we go on to
+investigate the relation between semantics and proof systems. In order
+to do so, we'll also have to define (precisely, i.e., by induction)
+some syntactic notions and operations we haven't mentioned yet.
+
+\end{document}
