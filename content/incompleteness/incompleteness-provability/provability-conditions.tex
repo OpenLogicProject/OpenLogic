@@ -16,27 +16,28 @@ axioms of the form
 \[
 (!A(0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
 \]
-for every !!{formula}~$!A$. Notice that this is really a {\em schema},
-which is to say, infinitely many axioms (and it turns out that
-$\Th{PA}$ is {\em not} finitely axiomatizable). But since one can
-effectively determine whether or not a string of symbols is an
+for every !!{formula}~$!A$. Notice that this is really a
+\emph{schema}, which is to say, infinitely many axioms (and it turns
+out that $\Th{PA}$ is {\em not} finitely axiomatizable). But since one
+can effectively determine whether or not a string of symbols is an
 instance of an induction axiom, the set of axioms for $\Th{PA}$ is
-computable. $\Th{PA}$ is a much more robust theory than $\Th{Q}$. For
+computable. $\Th{PA}$ is a much more robust theory than~$\Th{Q}$. For
 example, one can easily prove that addition and multiplication are
 commutative, using induction in the usual way. In fact, most finitary
 number-theoretic and combinatorial arguments can be carried out
 in~$\Th{PA}$.
 
-Since $\Th{PA}$ is computably axiomatized, the !!{derivability} predicate
-$\Prf[\Th{PA}](x,y)$ is computable and hence represented in~$\Th{Q}$ (and
-so, in~$\Th{PA}$). As before, we will take $\OPrf[\Th{PA}](x,y)$ to denote
-the formula representing the relation.  Let $\OProv[\Th{PA}](y)$ be the
-formula $\lexists[x][\Prf[\Th{PA}](x,y)]$, which, intuitively says, ``$y$ is
-provable from the axioms of $\Th{PA}$.''  The reason we need a little
-bit more than the axioms of $\Th{Q}$ is we need to know that the
-theory we are using is strong enough to !!{derive} a few basic facts about
-this !!{derivability} predicate. In fact, what we need are the following
-facts:
+Since $\Th{PA}$ is computably axiomatized, the !!{derivability}
+predicate $\Prf[\Th{PA}](x,y)$ is computable and hence represented
+in~$\Th{Q}$ (and so, in~$\Th{PA}$). As before, we will take
+$\OPrf[\Th{PA}](x,y)$ to denote the formula representing the relation.
+Let $\OProv[\Th{PA}](y)$ be the formula
+$\lexists[x][\Prf[\Th{PA}](x,y)]$, which, intuitively says, ``$y$ is
+!!{derivable} from the axioms of $\Th{PA}$.''  The reason we need a
+little bit more than the axioms of $\Th{Q}$ is we need to know that
+the theory we are using is strong enough to !!{derive} a few basic
+facts about this !!{derivability} predicate. In fact, what we need are
+the following facts:
 \begin{enumerate}
 \item[P1.] If $\Th{PA} \Proves !A$, then $\Th{PA} \Proves
   \OProv[\Th{PA}](\gn{!A})$.
@@ -53,7 +54,7 @@ facts:
 \end{enumerate}
 The only way to verify that these three properties hold is to describe
 the !!{formula} $\OProv[\Th{PA}](y)$ carefully and use the axioms of
-$\Th{PA}$ to describe the relevant formal proofs. Conditions (1)
+$\Th{PA}$ to describe the relevant formal !!{derivation}s. Conditions (1)
 and~(2) are easy; it is really condition~(3) that requires
 work. (Think about what kind of work it entails \dots) Carrying out the
 details would be tedious and uninteresting, so here we will ask you to
