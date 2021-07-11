@@ -561,7 +561,7 @@ Zesen Qian, \emph{Carnegie Mellon University}
 
 \noindent
 The Open Logic Project would like to acknowledge the generous support
-of the \href{http://www.ucalgary.ca/taylorinstitute/}{Taylor Institute
+of the \href{https://taylorinstitute.ucalgary.ca/}{Taylor Institute
 of Teaching and Learning} of the University of Calgary, and the
 Alberta Open Educational Resources (ABOER) Initiative, which is made
 possible through an investment from the Alberta government.
@@ -580,7 +580,7 @@ possible through an investment from the Alberta government.
 
 \noindent Cover illustrations by \href{http://mattleadbeater.com}{Matthew
   Leadbeater}, used under a
-\href{http://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
+\href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
   Attribution-NonCommercial 4.0 International License}.
 
 \vfill
