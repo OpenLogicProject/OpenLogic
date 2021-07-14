@@ -176,11 +176,9 @@
     }
     \copypagestyle{OLPpage}{headings}
 
-    \makeoddhead{OLPpage}{\color{OLPcolor}\sffamily\bfseries\thepage}{}
-      {\small\sffamily\color{OLPcolor}\rightmark}
+    \makeoddhead{OLPpage}{\small\sffamily\color{OLPcolor}\leftmark}{}{\color{OLPcolor}\sffamily\bfseries\thepage}
 
-    \makeevenhead{OLPpage}{\color{OLPcolor}\sffamily\bfseries\thepage}{}
-      {\small\sffamily\color{OLPcolor}\leftmark}
+    \makeevenhead{OLPpage}{\small\sffamily\color{OLPcolor}\leftmark}{}{\color{OLPcolor}\sffamily\bfseries\thepage}
   }
 }
 
