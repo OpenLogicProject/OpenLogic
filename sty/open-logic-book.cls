@@ -145,6 +145,18 @@
 
     \copypagestyle{OLPpage}{headings}
 
+    \makepsmarks{OLPpage}{%
+      \createmark{chapter}{both}{shownumber}{\@chapapp\ }{. \ }
+      \createmark{section}{right}{shownumber}{}{. \ }
+      \createplainmark{toc}{both}{\contentsname}
+      \createplainmark{lof}{both}{\listfigurename}
+      \createplainmark{lot}{both}{\listtablename}
+      \createplainmark{bib}{both}{\bibname}
+      \createplainmark{index}{both}{\indexname}
+      \createplainmark{glossary}{both}{\glossaryname}
+      \createplainmark{pcr}{both}{Photo Credits}
+    }
+
     \makeoddhead{OLPpage}{\small\sffamily\color{OLPcolor}\rightmark}{}
       {\color{OLPcolor}\sffamily\bfseries\thepage}
 
@@ -179,6 +191,8 @@
     \makeoddhead{OLPpage}{\small\sffamily\color{OLPcolor}\leftmark}{}{\color{OLPcolor}\sffamily\bfseries\thepage}
 
     \makeevenhead{OLPpage}{\small\sffamily\color{OLPcolor}\leftmark}{}{\color{OLPcolor}\sffamily\bfseries\thepage}
+
+    \addtopsmarks{OLPpage}{}{\createplainmark{pcr}{both}{Photo Credits}}
   }
 }
 
