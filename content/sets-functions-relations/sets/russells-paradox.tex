@@ -47,26 +47,23 @@ exist? It turns out that we can prove that it does not.
 \end{thm}
 
 \begin{proof}
-For reductio, suppose that $R = \Setabs{x}{x \notin x}$ exists. Then
-$R \in R$ iff $R \notin R$, since sets are extensional.
-But this is a contradicion.
+If $R = \Setabs{x}{x \notin x}$ exists, then
+$R \in R$ iff $R \notin R$, which is a contradiction.
 \end{proof}
 
 \begin{tagblock}{novice}
 \begin{explain}
-Let's run through the proof that no set $R$ of non-self-membered sets
-can exist more slowly. If $R$ exists, it makes sense to ask if $R \in
-R$ or not---it must be either $\in R$ or $\notin R$. Suppose the
-former is true, i.e., $R \in R$. $R$~was defined as the set of all
-sets that are not !!{element}s of themselves, and so if $R \in R$,
-then $R$ does not have this defining property of~$R$. But only sets
+Let's run through this proof more slowly. If $R$ exists, it makes sense to ask whether $R \in
+R$ or not. Suppose that indeed $R \in R$. Now, $R$~was defined as the set of all
+sets that are not !!{element}s of themselves. So, if $R \in R$,
+then $R$ does not itself have $R$'s defining property. But only sets
 that have this property are in~$R$, hence, $R$ cannot be !!a{element}
 of~$R$, i.e., $R \notin R$. But $R$ can't both be and not be
 !!a{element} of~$R$, so we have a contradiction.
 
 Since the assumption that $R \in R$ leads to a contradiction, we have
 $R \notin R$. But this also leads to a contradiction!{} For if $R
-\notin R$, it does have the defining property of~$R$, and so would be
+\notin R$, then $R$ itself does have $R$'s defining property, and so $R$ would be
 !!a{element} of $R$ just like all the other non-self-membered sets.
 And again, it can't both not be and be !!a{element} of~$R$.
 \end{explain}
