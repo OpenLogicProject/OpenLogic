@@ -26,8 +26,7 @@ ordinals, by stipulating that $\tuple{\alpha_1, \alpha_2} \canonord
 
 \begin{lem}
 $\tuple{\alpha \times \alpha, \canonord}$ is a well-order, for any
-ordinal $\alpha$.\footnote{Cf.\ the naughtiness described in the
-footnote to \olref[ord-arithmetic][add]{defordplus}.}
+ordinal $\alpha$.
 \end{lem}
 
 \begin{proof}
@@ -47,7 +46,7 @@ $\Setabs{\tuple{\gamma_1,\gamma_2} \in X}{\max(\gamma_1, \gamma_2) =
 the pair with least second coordinate is the $\canonord$-least element
 of $X$.
 \end{proof}
-
+\noindent
 Now for a teensy, simple observation:
 
 \begin{prop}\ollabel{simplecardproduct}
@@ -59,7 +58,7 @@ If $\cardeq{\alpha}{\beta}$, then $\cardeq{\alpha \times \alpha}{\beta
 Just let $f \colon \alpha \to \beta$ induce $\tuple{\gamma_1,
 \gamma_2} \mapsto \tuple{f(\gamma_1), f(\gamma_2)}$.
 \end{proof}
-
+\noindent
 And now we will put all this to work, in proving a crucial lemma:
 \begin{lem}\ollabel{alphatimesalpha}
 $\cardeq{\alpha}{\alpha \times \alpha}$, for any infinite ordinal
@@ -82,11 +81,10 @@ consider the segment:
 \begin{align*}
 	\text{Seg}(\gamma_1, \gamma_2) &= \Setabs{\tuple{\delta_1, \delta_2} \in \alpha \times \alpha}{\tuple{\delta_1, \delta_2} \canonord \tuple{\gamma_1, \gamma_2}}
 \end{align*}
-Let $\gamma = \max(\gamma_1, \gamma_2)$. When $\gamma$ is infinite, observe:
+Letting $\gamma = \max(\gamma_1, \gamma_2)$, note that $\tuple{\gamma_1, \gamma_2} \canonord \tuple{\gamma+1, \gamma + 1}$. So, when $\gamma$ is infinite, observe:
 \begin{align*}
 	\text{Seg}(\gamma_1, \gamma_2) & 
-	\precsim ((\gamma \ordplus 1)\ordtimes (\gamma \ordplus 1))
-	\text{, by the first clause defining $\canonord$}\\
+	\precsim ((\gamma \ordplus 1)\ordtimes (\gamma \ordplus 1))\\
 	&\approx (\gamma \ordtimes \gamma)
 	\text{, by \olref[ord-arithmetic][using-addition]{ordinfinitycharacter} and 
 	\olref{simplecardproduct}}\\
@@ -102,9 +100,12 @@ Schr\"oder-Bernstein.
 Finally, we get to our simplifying result:
 
 \begin{thm}\ollabel{cardplustimesmax}
-If $\cardfont{a}, \cardfont{b}$ are infinite cardinals, $\cardfont{a}
+If $\cardfont{a}, \cardfont{b}$ are infinite cardinals, then:
+\[
+	\cardfont{a}
 \cardtimes \cardfont{b} = \cardfont{a} \cardplus \cardfont{b} =
-\text{max}(\cardfont{a}, \cardfont{b})$.
+\text{max}(\cardfont{a}, \cardfont{b}).
+\]
 \end{thm}
 
 \begin{proof}
@@ -125,7 +126,7 @@ Let $\cardfont{a}$ be an infinite cardinal. For each ordinal $\beta
 
 \begin{proof}
 For each $\beta \in \cardfont{a}$, fix !!a{injection} $f_\beta \colon
-X_\beta \to \cardfont{a}$. Define !!a{injection} $g \colon
+X_\beta \to \cardfont{a}$.\footnote{How are these ``fixed''? See \olref[sth][choice][countablechoice]{sec}.} Define !!a{injection} $g \colon
 \bigcup_{\beta \in \cardfont{a}} X_\beta \to \cardfont{a} \times
 \cardfont{a}$ by $g(v) = \tuple{\beta, f_\beta(v)}$, where $v \in
 X_\beta$ and $v \notin X_\gamma$ for any $\gamma \in \beta$. Now

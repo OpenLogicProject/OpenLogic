@@ -30,24 +30,22 @@ Here are some elementary but extremely important observations
 concerning well-ordering.
 
 \begin{prop}\ollabel{wo:strictorder}
-If $<$ well-orders $A$, then every non-empty subset of $A$ has a
+If $<$ well-orders $A$, then every non-empty subset of $A$ has a unique
 $<$-least member, and $<$ is irreflexive, asymmetric and transitive.
 \end{prop}
 
 \begin{proof}
 If $X$ is a non-empty subset of $A$, it has a $<$-minimal !!{element}
 $m$, i.e., $(\forall z \in X)z \nless m$. Since $<$ is connected,
-$(\forall z \in X)m \leq z$. So $m$ is $<$-least.
+$(\forall z \in X)m \leq z$. So $m$ is the $<$-least !!{element} of $X$.
 
-For irreflexivity, fix $a \in A$; since $\{a\}$ has a $<$-least
-!!{element}, $a \nless a$. For transitivity, if $a < b < c$, then
+For irreflexivity, fix $a \in A$; the $<$-least !!{element} of $\{a\}$ is $a$, so $a \nless a$. For transitivity, if $a < b < c$, then
 since $\{a, b, c\}$ has a $<$-least !!{element}, $a < c$. Asymmetry
 follows from irreflexivity and transitivity
 \end{proof}
 
 \begin{prop}\ollabel{propwoinduction}
-If $<$ well-orders $A$, then for any formula $\phi(x)$:\footnote{which
-may have parameters} 
+If $<$ well-orders $A$, then for any formula $\phi(x)$:
 \[
 	\text{if }(\forall a \in A)((\forall b < a)\phi(b) \lif 
 		\phi(a))\text{, then }(\forall a \in A)\phi(a).
@@ -62,6 +60,6 @@ b < a)\phi(b)$ but $\lnot \phi(a)$. \end{proof}\noindent This last
 property should remind you of the principle of strong induction on the
 naturals, i.e.: if $(\forall n \in \omega)((\forall m < n)\phi(m)
 \lif \phi(n))$, then $(\forall n \in \omega)\phi(n)$. And this
-property makes well-ordering into a very \emph{robust} notion. 
+property makes well-ordering into a very \emph{robust} notion.\footnote{A reminder: all formulas can have parameters (unless explicitly stated otherwise).} 
 
 \end{document}

@@ -33,6 +33,9 @@ principle was invoked fairly frequently, without  an obvious awareness
 of its use. Here are two nice examples.\footnote{Due to
 \citet[\S9.4]{Potter2004} and Luca Incurvati.}
 
+
+\
+
 \emph{Example 1.} 
 Here is a natural thought: for any set $A$, either
 $\cardle{\omega}{A}$, or $\cardeq{A}{n}$ for some $n \in \omega$. This
@@ -58,11 +61,11 @@ for each $n < \omega$ there is subset $A_n \subseteq A$ with exactly
 $\cardexpo{2}{n}$ elements. Using this sequence $A_0, A_1, A_2,
 \ldots$, we define for each $n$:
 \[
-	B_n = A_n \setminus (A_0 \cup A_1 \cup \ldots \cup A_{n-1}).
+	B_n = A_n \setminus \bigcup_{i < n} A_i.
 \]
 Now note the following
 \begin{align*}
-	\card{A_0 \cup A_1  \cup \ldots \cup A_{n-1}} 
+	\card{\bigcup_{i < n}A_n} 
 	&\leq \card{A_0} + \card{A_1} + \ldots + \card{A_{n-1}}\\
 	&=1 + 2 + \ldots + 2^{n-1}\\
 	& = 2^n - 1\\
@@ -72,9 +75,9 @@ Hence each $B_n$ has at least one member, $c_n$. Moreover, the $B_n$s
 are pairwise disjoint; so if $c_n = c_m$ then $n = m$. But every $c_n
 \in A$. So the function  $f(n) = c_n$ is an injection $\omega \to A$.
 \end{proof}
-
+\noindent 
 Dedekind did not flag that he had used Countable Choice. But, did
-\emph{you} spot its use? Look again. (Really: Look again.)
+\emph{you} spot its use? Look again. (Really: \emph{look again}.)
 
 The proof used Countable Choice twice. We used it {once}, to obtain
 our sequence of sets $A_0$, $A_1$, $A_2$, \dots\@ We then used it
@@ -83,6 +86,9 @@ of Choice is ineliminable. \citet[p.~138]{Cohen1966} proved that the
 result fails if we have no version of Choice. That is: it is
 consistent with $\ZF$ that there are sets which are
 \emph{incomparable} with~$\omega$.
+
+
+\
 
 \emph{Example 2.} In \citeyear{Cantor1878}, Cantor stated that {a
 countable union of countable sets is countable}. He did not present a
@@ -106,12 +112,11 @@ for each $n \in \omega$ there is !!a{surjection} $f_n \colon \omega
 (\olref[sfr][siz][zigzag]{natsquaredenumerable}) and $f$ is
 !!a{surjection}.
 \end{proof}
-
+\noindent 
 Did you spot the use of the Countable Choice? It is used to choose our
 sequence of functions $f_0$, $f_1$, $f_2$, \dots\footnote{A similar
 use of Choice occurred in
-\olref[card-arithmetic][simp]{kappaunionkappasize} when we
-``fixed a bijection $f_\beta$'' for each $\beta \in \alpha$.} And
+\olref[card-arithmetic][simp]{kappaunionkappasize}, when we gave the instruction ``For each $\beta \in \cardfont{a}$, fix !!a{injection} $f_\beta$''.} And
 again, the result fails in the absence of any Choice principle.
 Specifically, \citet{FefermanLevy1963} proved that it is consistent
 with $\ZF$ that a countable union of countable sets has
@@ -154,7 +159,7 @@ metaphysical possibility.
 
 More important: it is not going to give us any justification for
 Choice \emph{tout court}, rather than \emph{mere} Countable Choice.
-For if we need \emph{every} set to have a choice function, then we will
+For if we need \emph{every} set to have a choice function, then we'll
 need to be able to perform a ``supertask of arbitrary ordinal
 length''. Bluntly, that idea is laughable.
 

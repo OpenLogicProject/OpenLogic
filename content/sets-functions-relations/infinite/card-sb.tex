@@ -4,7 +4,7 @@
 
 \olfileid{sfr}{infinite}{card-sb}
 
-\olsection{A Proof of Schr\"oder-Bernstein}
+\olsection{Appendix: Proving Schr\"oder-Bernstein}
 
 Before we depart from na\"ive set theory, we have one last na\"ive
 (but sophisticated!) proof to consider. This is a proof of
@@ -14,7 +14,7 @@ $\cardle{A}{B}$ and $\cardle{B}{A}$ then $\cardeq{A}{B}$; i.e., given
 !!a{bijection} $h \colon A \to B$. 
 
 In this chapter, we followed Dedekind's notion of \emph{closures}. In
-fact, Dedekind provided a lovely proof of using this notion, and we
+fact, Dedekind provided a lovely proof of Schr\"oder-Bernstein using this notion, and we
 will present it here. The proof closely follows
 \citet[pp.~157--8]{Potter2004}, if you want a slightly different but
 essentially similar treatment. A little googling will also convince
@@ -32,7 +32,7 @@ for each set $B$ and function~$f$. Defined thus,
 $\Closureofunder{f}{B}$ is the smallest $f$-closed set containing~$B$,
 in that:
 
-\begin{prop}\ollabel{Closureprops}
+\begin{lem}\ollabel{Closureprops}
 	For any function $f$, and any $B$:
 	\begin{enumerate}
 		\item\ollabel{Closurehaselem} $B \subseteq \Closureofunder{f}{B}$; and
@@ -40,13 +40,13 @@ in that:
 		\item\ollabel{Closuresmallest} if $X$ is $f$-closed and $B
 		\subseteq X$, then $\Closureofunder{f}{B} \subseteq X$.
 	\end{enumerate}
-\end{prop}
+\end{lem}
 
 \begin{proof}
 Exactly as in \olref[sfr][infinite][dedekind]{closureproperties}.
 \end{proof}
 
-We need one last fact to get to Bernstein:
+We need one last fact to get to Schr\"oder-Bernstein:
 
 \begin{prop}\ollabel{sbhelper}
 If $A \subseteq B \subseteq C$ and $A \approx C$, then $\cardeq{\cardeq{A}{B}}{C}$.
@@ -79,22 +79,21 @@ g(y) = y$. So $g$ is !!a{injection}.
 
 It remains to show that $\ran{g} = B$. So fix $x \in B \subseteq C$.
 If $x \notin F$, then $g(x) = x$. If $x \in F$, then $x = f(y)$ for
-some $y \in F$, since $x \in B$ and $F$ is the \emph{smallest}
-$f$-closed set extending $C \setminus B$, so that $g(y) = f(y) = x$.
+some $y \in F$, since otherwise $F \setminus \{x\}$ would be $f$-closed and extend $C\setminus B$, which is impossible by \olref{Closureprops}; now $g(y) = f(y) = x$.
 \end{proof}
 
 Finally, here is the proof of the main result. Recall that given a
 function $h$ and set $D$, we define $\funimage{h}{D} = \Setabs{h(x)}{x
 \in D}$. 
 
-\begin{proof}[Proof of Schr\"oder-Berstein.] Let $f \colon A \to B$
+\begin{proof}[Proof of Schr\"oder-Bernstein] Let $f \colon A \to B$
 and $g \colon B \to A$ be !!{injection}s. Since $\funimage{f}{A}
 \subseteq B$ we have that $\funimage{g}{\funimage{f}{A}} \subseteq
 g[B] \subseteq A$. Also, $\comp{f}{g} \colon A \to
 \funimage{g}{\funimage{f}{A}}$ is an !!{injection} since both $g$ and
 $f$ are; and indeed $\comp{f}{g}$ is !!a{bijection}, just by the way
 we defined its codomain. So
-$\cardeq{A}{\funimage{g}{\funimage{f}{A}}}$, and hence by
+$\cardeq{\funimage{g}{\funimage{f}{A}}}{A}$, and hence by
 \olref{sbhelper} there is !!a{bijection} $h \colon A \to
 \funimage{g}{B}$. Moreover, $g^{-1}$ is !!a{bijection}
 $\funimage{g}{B} \to B$. So $\comp{h}{g^{-1}} \colon A \to B$ is

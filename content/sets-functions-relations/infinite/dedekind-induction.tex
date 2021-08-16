@@ -14,7 +14,7 @@ algebra---will serve as a surrogate for the natural numbers. This is
 thanks to the following trivial consequence:
 
 \begin{thm}[Arithmetical induction]\ollabel{thm:dedinfiniteinduction}
-Let $N, s, o$ yield a Dedekind algebra. Then for any set $X$:  
+Let $N, s, o$ comprise a Dedekind algebra. Then for any set $X$:  
 	\begin{center}
 		if $o \in X$ and $(\forall {n} \in N \cap X){s}({n}) \in X$, {then} $N \subseteq X$.
 	\end{center}
@@ -35,7 +35,7 @@ Admittedly, \olref{thm:dedinfiniteinduction} formulates induction in
 terms which might be more familiar:
 
 \begin{cor}\ollabel{natinductionschema}
-Let $N, s, o$ yield a Dedekind algebra. Then for any formula
+Let $N, s, o$ comprise a Dedekind algebra. Then for any formula
 $\phi(x)$, which may have parameters:
 \begin{center}
 	if $\phi(o)$ and $(\forall {n} \in N)(\phi(n)\lif
@@ -49,7 +49,7 @@ Let $X = \Setabs{n \in N}{\phi(n)}$, and now use
 \end{proof}
 
 In this result, we spoke of a formula ``having parameters''. What this
-means, roughly, is that for any objects $c_1, \ldots, c_n$, we can
+means, roughly, is that for any objects $c_1, \ldots, c_k$, we can
 work with $\phi(x, c_1, \ldots, c_k)$. More precisely, we can state
 the result without mentioning ``parameters'' as follows. For any
 formula $\phi(x, v_1, \ldots, v_k)$, whose free variables are all
@@ -71,11 +71,11 @@ technique which we shall introduce and justify much later, and in a
 much more general context. (Enthusiasts might want to revisit this
 after \olref[sth][ord-arithmetic][]{chap}, or perhaps read an alternative
 treatment, such as \citealt[pp.~95--8]{Potter2004}.) But, where $N, s, o$
-yield a Dedekind algebra, we will ultimately be able to stipulate the
+comprise a Dedekind algebra, we will ultimately be able to stipulate the
 following:
 \begin{align*}
-	{m} + {o} &= {m} & & & {m} \times {o} &= {o} & & & {m}^{o} &= s(o)\\
-{m} + {s}({n}) &= {s}({m}+{n}) &&& {m} \times {s}({n}) &= ({m}\times {n}) + {m}  & & & {m}^{{s}({n})} &= {m}^{n} \times {m}
+	{a} + {o} &= {a} & & & {a} \times {o} &= {o} & & & {a}^{o} &= s(o)\\
+{a} + {s}({b}) &= {s}({a}+{b}) &&& {a} \times {s}({b}) &= ({a}\times {b}) + {a}  & & & {a}^{{s}({b})} &= {a}^{b} \times {a}
 \end{align*}
 and show that these behave as one would hope.
 

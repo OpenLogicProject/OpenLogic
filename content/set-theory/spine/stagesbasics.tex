@@ -6,16 +6,15 @@
 \olsection{Basic Properties of Stages}
 
 To bring out the foundational importance of the definition of the
-$V_\alpha$s, we will start with a few results about them.
-
+$V_\alpha$s, we will present a few basic results about them. We start with a definition:\footnote{There's no standard terminology for ``potent''; this is the name used by \citealt{ButtonLT1}.}
+\begin{defn}
+	The set $A$ is \emph{potent} iff $\forall x((\exists y \in A)x \subseteq y \lif x \in A$. 
+\end{defn}
 \begin{lem}\ollabel{Valphabasicprops}
 For each ordinal $\alpha$:
 \begin{enumerate}
-	\item\ollabel{Valphatrans} Each $V_\alpha$ is a transitive set.
-	\item\ollabel{Valphapotent} Each $V_\alpha$ is a
-	\emph{potent} set,\footnote{There's no standard terminology for
-	``potency'', but, this is used by  \citealt{ButtonLT1}.} i.e., $\forall A(\exists
-	B(A \subseteq B \in V_\alpha) \lif A \in V_\alpha)$.
+	\item\ollabel{Valphatrans} Each $V_\alpha$ is transitive.
+	\item\ollabel{Valphapotent} Each $V_\alpha$ is potent.
 	\item\ollabel{Valphacum} If $\gamma \in \alpha$, then $V_\gamma
 	\in V_\alpha$ (and hence also $V_\gamma \subseteq V_\alpha$ by
 	\olref{Valphatrans})
@@ -76,7 +75,7 @@ For any ordinals $\alpha, \beta$: $\alpha \in \beta$ iff $V_\alpha \in V_\beta$
 \begin{proof}
 \Olref{Valphabasicprops} gives one direction. Conversely, suppose $V_\alpha \in V_\beta$. Then $\alpha \neq \beta$ by \olref{Valphanotref}; and $\beta \notin \alpha$, for otherwise we would have $V_\beta \in V_\alpha$ and hence $V_\beta \in V_\beta$ by \olref{Valphabasicprops} (twice), contradicting \olref{Valphanotref}. So $\alpha \in \beta$ by Trichotomy.
 \end{proof}
-
+\noindent
 All of this allows us to think of each $V_\alpha$ as the $\alpha$th
 stage of the hierarchy. Here is why.
 

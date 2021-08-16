@@ -38,8 +38,9 @@ guarantee the existence of any infinite set. So we have to lay down a
 new axiom:
 
 \begin{axiom}[Infinity]
-There is a set, $I$, such that $\emptyset \in I$ and $(\forall x \in I) x \cup \{x\} \in I$.\\
-	$\exists I((\exists o \in I)\forall x(x \notin o) \land (\forall x \in I)(\exists s \in I)\forall z(z \in s \liff (z \in x \lor z = x)))$
+There is a set, $I$, such that $\emptyset \in I$ and $x \cup \{x\} \in I$ whenever $x \in I$\\
+	$\exists I((\exists o \in I)\forall x\ x \notin o \land {}$\\
+	$\phantom{\exists I(}(\forall x \in I)(\exists s \in I)\forall z(z \in s \liff (z \in x \lor z = x)))$
 \end{axiom}
 
 It is easy to see that the set $I$ given to us by the Axiom of
@@ -79,27 +80,26 @@ So suppose that $s(n)$ is Dedekind infinite, i.e., there is some
 !!{injection} $f$ with $\ran{f}\subsetneq \dom{f} = s(n) = n \cup
 \{n\}$. There are two cases to consider. 
 
-\emph{Case 1: $n \notin \ran{f}$.} Let $g = \funrestrictionto{f}{n}$.
-Now $\ran{f} \subseteq n$, and $f(n) \in n$, so that $\ran{g} =
+\emph{Case 1: $n \notin \ran{f}$.} So $\ran{f} \subseteq n$, and $f(n) \in n$. Let $g = \funrestrictionto{f}{n}$; now $\ran{g} =
 \ran{f} \setminus \{f(n)\} \subsetneq n = \dom{g}$. Hence $n$ is
 Dedekind infinite. 
 
-\emph{Case 2: $n \in \ran{f}$.} Fix $m \in \dom{f} \setminus \ran{f}$, and define a function $f^*$:
+\emph{Case 2: $n \in \ran{f}$.} Fix $m \in \dom{f} \setminus \ran{f}$, and define a function $h$ with domain $s(n) = n \cup \{n\}$:
 \[
-f^*(x) = 
+h(x) = 
 	\begin{cases}
-		f(x) & \text{if $x \neq f^{-1}(n)$}\\
-		m & \text{if $x = f^{-1}(n)$}
+		f(x) & \text{if }f(x) \neq n\\
+		m & \text{if }f(x)=n
 	\end{cases}
 \]
-So $f^*$ and $f$ agree everywhere, except that $f^*(f^{-1}(n)) = m
+So $h$ and $f$ agree everywhere, except that $h(f^{-1}(n)) = m
 \neq n = f(f^{-1}(n))$. Since $f$ is !!a{injection}, $n \notin
-\ran{f^*}$; and $\ran{f^*} \subsetneq \dom{f^*} = s(n)$. Now $n$ is
-Dedekind infinite, as in Case 1.
+\ran{h}$; and $\ran{h} \subsetneq \dom{h} = s(n)$. Now $n$ is
+Dedekind infinite, using the argument of Case 1.
 \end{proof}
 
 The question remains, though, of how we might \emph{justify} the Axiom
-of Infinity. The short answer is that we will need to another
+of Infinity. The short answer is that we will need to add another
 principle to the story we have been telling. That principle is as
 follows:
 \begin{enumerate}

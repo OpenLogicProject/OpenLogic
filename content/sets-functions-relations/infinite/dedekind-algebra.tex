@@ -61,19 +61,18 @@ precise;
 \end{lem}
 
 \begin{proof}
-Note that there is at least one $f$-closed set, namely $\ran{f}\cup
+Note that there is at least one $f$-closed set with $o$ as !!a{element}, namely $\ran{f}\cup
 \{o\}$. So $\closureofunder{f}{o}$, the intersection of \emph{all}
 such sets, exists. We must now check
 \olref{closurehaselem}--\olref{closuresmallest}.
 
-\olref{closurehaselem}. $o \in \closureofunder{f}{o}$ as it is an
+Concerning \olref{closurehaselem}: $o \in \closureofunder{f}{o}$ as it is an
 intersection of sets which all have $o$ as !!a{element}. 
 
-\olref{closureclosed}. Let $X$ be $f$-closed with $o \in X$. If $x \in
-\closureofunder{f}{o}$, then $x \in X$, and now $f(x) \in X$ as $X$ is
-$f$-closed, so $f(x) \in \closureofunder{f}{o}$.
+Concerning \olref{closureclosed}: suppose $x \in \closureofunder{f}{o}$. So if $o \in X$ and $X$ is $f$-closed, then $x \in X$, and now $f(x) \in X$ as $X$ is
+$f$-closed. So $f(x) \in \closureofunder{f}{o}$.
 
-\olref{closuresmallest}. This follows from the general fact that if $X
+Concerning \olref{closuresmallest}: quite generally, if $X
 \in C$ then $\bigcap C \subseteq X$.
 \end{proof}
 
@@ -103,8 +102,8 @@ If there is a Dedekind infinite set, then there is a Dedekind algebra.
 \begin{proof}
 Let $D$ be Dedekind infinite. So there is an injection $g \colon D \to
 D$ and an element $o  \in D \setminus \ran{g}$. Now let $A =
-\closureofunder{g}{o}$, and note that $o \in A$. Let $f =
-\funrestrictionto{g}{A}$. We will show that this constitutes a Dedekind
+\closureofunder{g}{o}$; by \olref{closureproperties}, $A$ exists and $o \in A$. Let $f =
+\funrestrictionto{g}{A}$. We will show that $A, f, o$ comprise a Dedekind
 algebra. 
 
 Concerning \olref{ded:proper}: $o \notin \ran{g}$ and $\ran{f}
@@ -113,11 +112,7 @@ Concerning \olref{ded:proper}: $o \notin \ran{g}$ and $\ran{f}
 Concerning \olref{ded:injection}: $g$ is an injection on $D$; so $f
 \subseteq g$ must be an injection.
 
-Concerning \olref{ded:closure}: Let $o \in B$. By
-\olref{closureproperties}, if $B \subsetneq A$, then $B$ is not
-$g$-closed. So $B$ is not $f$-closed either, as $f =
-\funrestrictionto{g}{A}$. So $A$ is the \emph{smallest} $f$-closed set
-with $o$ as an element, i.e., $A = \closureofunder{f}{o}$.
+Concerning \olref{ded:closure}: by \olref{closureproperties}, $A$ is $g$-closed; a fortiori, $A$ is $f$-closed. So $\closureofunder{f}{o} \subseteq A$ by \olref{closureproperties}. Since also $\closureofunder{f}{o}$ is $f$-closed and $f = \funrestrictionto{g}{A}$, it follows that $\closureofunder{f}{o}$ is $g$-closed. So $A \subseteq \closureofunder{f}{o}$ by \olref{closureproperties}.
 \end{proof}
 
 \end{document}
