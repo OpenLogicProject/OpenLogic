@@ -133,7 +133,7 @@ By Weak-Reflection, we have some appropriate $S$ such that:
 \end{align*}
 The second claim entails the third because ``$z = 0$'' and ``$z=1$''
 are absolute for $S$; the fourth claim follows since $0 \neq 1$.
-\end{proof}\noindent We can now obtain Replacement, simplifying
+\end{proof}\noindent We can now obtain Replacement, just by following and simplifying 
 \citet[Theorem 6]{Levy1960}:
 
 \begin{thm}[in $\Z$ + Weak-Reflection]\label{thm:replacement} 
@@ -168,33 +168,5 @@ $(\forall x \in A)\lexists![y][\phi(x, y)]$. Now Separation yields
 $\Setabs{y \in S}{(\exists x \in A) \phi(x, y)} = \Setabs{y}{(\exists
 x \in A) \phi(x, y)}$. 
 \end{proof}
-
-We will round out this discussion, by gesturing at a lovely consequence of Replacement, due to \citet{Montague1961}: \emph{no consistent extension of $\Z$ with finitely many sentences is as strong as $\ZF$.} 
-
-Here we assume that the sentences are in the language of $\Z$, i.e.\ that they are first-order and that the only non-logical primitive is $\in$. To begin the argument for Montague's result, note a simple fact (within $\ZF$): 
-\begin{lem}\ollabel{innermodelsep}
-	Let $\psi$ be any Separation-instance and let $\alpha$ be any ordinal. Then $\psi^{V_\alpha}$.
-\end{lem}
-\begin{proof}
-	Left as an exercise.
-	%	By assumption, $\psi^{V_\alpha}$ has the form: 
-%	\[
-%		(\forall A \in V_\alpha)(\exists S \in V_\alpha)(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A))
-%	\]
-%	To establish this holds, fix $A \in V_\alpha$. Using Separation, obtain: 
-%	\[
-%		S = \Setabs{x \in A}{\phi^{V_\alpha}(x)}
-%	\]
-%	Now $S \in V_\alpha$, since $S \subseteq A \in V_\alpha$, and clearly $(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A)$.
-\end{proof}
-\begin{prob}
-	Prove \olref[sth][replacement][refproofs]{innermodelsep}	
-\end{prob}
-\noindent
-We will use this lemma to gesture towards Montague's result. 
-
-Let $\Z_\phi$ be $\Z \cup \{\phi_1, \ldots, \phi_n\}$. Suppose that $\Z_\phi$ proves all of $\ZF$'s axioms. Then also $\Z_\phi$ proves the Reflection Schema, i.e.\ \olref[sth][replacement][ref]{reflectionschema}. Let $\theta$ be the conjunction of all of $\phi_1, \ldots, \phi_n$ and all of the axioms of $\Z$ except for the Separation-instances. Invoking Reflection within $\Z_\phi$, we can explicitly define $\mu$ as the (smallest) ordinal such that $\theta \liff \theta^{V_\mu}$. Since $\Z_\phi$ proves $\theta$, we will have that $\Z_\phi$ proves $\theta^{V_\mu}$. Furthermore, by \olref{innermodelsep}, also $\Z_\phi$ proves $\psi^{V_\mu}$, whenever $\psi$ is a Separation-instance. So, in effect, $\Z_\phi$ proves that $V_\mu$ is a model of $\Z_\phi$. But then $\Z_\phi$ must prove its own consistency. So $Z_\phi$ must be inconsistent, by G\"odel's second incompleteness theorem. 
-
-As mentioned, this is a very informal argument. The idea of a model, and the relationship of this to consistency, needs to be tidied up. This can all be done; but, it is a topic for a more advanced textbook. 
 
 \end{document}

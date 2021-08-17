@@ -10,12 +10,12 @@ ordinal greater than or equal to $\omega + \omega$.
 
 Here is a sketch of
 why. Working in~$\ZF$, consider the set $V_{\omega+\omega}$. This set acts
-as the domain for a  \emph{model} for~$\Z$. Indeed, where $\phi$ is any
-axiom of~$\Z$, let $\phi^{V_{\omega+\omega}}$ be the formula which results
-by restricting all of $\phi$'s quantifiers to $V_{\omega+\omega}$ (that is,
-replace ``$\lexists[x]$'' with ``$(\lexists[x \in V_{\omega+\omega}])$'', and
-replace ``$\lforall[x]$'' with ``$(\lforall[x \in V_{\omega+\omega}])$''). It
-can be shown that, for every axiom $\phi$ of~$\Z$, we have that $\ZF \vdash
+as the domain for a \emph{model} for~$\Z$. To see this, we introduce some notation for the \emph{relativization} of a formula: 
+\begin{defn}\ollabel{formularelativization}
+	For any set $M$, and any formula $\phi$, let $\phi^M$ be the formula which results by restricting all of $\phi$'s quantifiers to $M$. That is, replace ``$\lexists[x]$'' with ``$(\lexists[x \in M])$'', and
+	replace ``$\lforall[x]$'' with ``$(\lforall[x \in M])$''. 
+\end{defn}\noindent
+It can be shown that, for every axiom $\phi$ of~$\Z$, we have that $\ZF \vdash
 \phi^{V_{\omega+\omega}}$. But $\omega+\omega$ is not \emph{in}
 $V_{\omega+\omega}$, by  \olref[spine][rank]{ordsetrankalpha}. So $\Z$ is
 consistent with the non-existence of $\omega+\omega$.
