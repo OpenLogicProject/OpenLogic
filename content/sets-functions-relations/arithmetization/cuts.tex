@@ -1,5 +1,5 @@
 % Part: sets-functions-relations
-% Chapter: arithmetisation
+% Chapter: arithmetization
 % Section: cuts
 %
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -47,10 +47,8 @@ functions and relations upon them. We begin with an easy one:
 This definition of an order allows to \emph{state} the central result,
 that the set of cuts has the Completeness Property. Spelled out fully,
 the statement has this shape. If $S$ is a non-empty set of cuts with
-an upper bound, then $S$ has a least upper bound; i.e., there is some
-cut $\lambda$ such that $(\forall \alpha \in S)\alpha \subseteq
-\lambda$ and $(\forall \alpha \in \Real)(\alpha \subsetneq \lambda
-\lif (\exists \kappa \in S)\kappa \nsubseteq \alpha)$. Now here is
+an upper bound, then $S$ has a least upper bound. In more detail: there is a cut, $\lambda$, which is an upper bound for $S$, i.e.\ $(\forall \alpha \in S)\alpha \subseteq
+\lambda$, and $\lambda$ is the least such cut, i.e.\ $(\forall \beta \in \Real)((\forall \alpha \in S)\alpha \subseteq \beta \lif \lambda \subseteq \beta)$. Now here is
 the proof of the result:
 
 \begin{thm}\ollabel{realcompleteness}
@@ -76,12 +74,7 @@ that $p \in \alpha$. Since $\alpha$ is a cut, there is some $q \in
 \alpha$ such that $p < q$. So $q \in \lambda$. 
 \end{enumerate}
 This proves the claim. Moreover, clearly $(\forall \alpha \in S)\alpha
-\subseteq \bigcup S = \lambda$. So now consider any cut $\kappa <
-\lambda$, i.e., $\kappa \subsetneq \lambda$. So there is some $p \in
-\lambda \setminus \kappa$. Since $p \in \lambda$, there is some
-$\alpha \in S$ such that $p \in \alpha$. So $\kappa \nsubseteq
-\alpha$, and hence $\kappa$ is not an upper bound on $S$. So $\lambda$
-is the \emph{least} upper bound on $S$.
+\subseteq \bigcup S = \lambda$, i.e.\ $\lambda$ is an upper bound on $S$. So now suppose $\beta \in \mathbb{R}$ is also an upper bound, i.e.\ $(\forall \alpha \in S)\alpha \subseteq \beta$. For any $p \in \Rat$, if $p \in \lambda$, then there is $\alpha \in S$ such that $p \in \alpha$, so that $p \in \beta$. Generalizing, $\lambda \subseteq \beta$. So $\lambda$ is the \emph{least} upper bound on $S$.
 \end{proof}
 
 So we have a bunch of entities which satisfy the Completeness

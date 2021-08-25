@@ -51,19 +51,19 @@ to (but strictly less than) $\alpha$, so that $\bigcup A$ also has
 !!{element}s with rank arbitrarily close to (but strictly less than)
 $\alpha$, so that $\setrank{\bigcup A} = \alpha$.
 \end{proof}
-
+\noindent
 We leave it as an exercise to show why \olref{exranktimes} involves an
 \emph{in}equality.
 
 \begin{prob}
 Produce sets $A$ and $B$ such that $\setrank{A \times B}=
-\max(\setrank(A), \setrank{B})$. Produce sets $A$ and $B$ such that
-$\setrank{A \times B}\max(\setrank(A), \setrank{B}) \ordplus  2$. Are
+\max(\setrank{A}, \setrank{B})$. Produce sets $A$ and $B$ such that
+$\setrank{A \times B}\max(\setrank{A}, \setrank{B}) \ordplus  2$. Are
 any other ranks possible?
 \end{prob}
 
-We are also now in a position to prove that several reasonable notions
-of ``finite'' coincide, when considering ordinals:
+We are also now in a position to show that several reasonable notions
+of what it might mean to describe an ordinal as ``finite'' or ``infinite'' coincide:
 
 \begin{lem}\ollabel{ordinfinitycharacter}
 For any ordinal $\alpha$, the following are equivalent:
@@ -78,6 +78,8 @@ For any ordinal $\alpha$, the following are equivalent:
 	\item\ollabel{ord:infinite} $\alpha$ is Dedekind infinite	
 	\end{enumerate}
 \end{lem}
+\noindent
+So we have five provably equivalent ways to understand what it takes for an ordinal to be (in)finite.
 
 \begin{proof}
 \emph{\olref{ord:notinomega} $\Rightarrow$ \olref{ord:omegaplus}.} By
@@ -91,7 +93,7 @@ $\beta$ with $\alpha = \beta \ordplus \gamma$. Now:
 	1 \ordplus \alpha =  
 	1 \ordplus (\beta \ordplus \gamma) = 
 	(1 \ordplus \beta) \ordplus \gamma =  
-	\supstrict_{1 \ordplus  \delta} (\delta < \beta) \ordplus  \gamma = 
+	\supstrict_{\delta < \beta} (1 \ordplus  \delta) \ordplus  \gamma = 
 	\beta \ordplus  \gamma = 
 	\alpha.
 \]

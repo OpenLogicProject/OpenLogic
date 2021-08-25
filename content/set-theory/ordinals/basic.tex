@@ -19,7 +19,7 @@ Let $\alpha$ be an ordinal with $b \in \alpha$. Since $\alpha$ is
 transitive, $b \subseteq \alpha$. So $\in$ well-orders $b$ as $\in$
 well-orders $\alpha$.
 
-For transitivity, suppose $x \in c \in b$. So $c \in \alpha$ as $b
+To see that $b$ is transitive, suppose $x \in c \in b$. So $c \in \alpha$ as $b
 \subseteq \alpha$. Again, as $\alpha$ is transitive, $c \subseteq
 \alpha$, so that $x \in \alpha$. So $x, c, b \in \alpha$. But $\in$
 well-orders $\alpha$, so that $\in$ is a transitive relation on
@@ -41,8 +41,7 @@ The rough gist of the next two main results,
 ordinals themselves are well-ordered by membership:
 
 \begin{thm}[Transfinite Induction]\ollabel{ordinductionschema}
-For any formula $\phi(x)$:\footnote{The formula may have parameters,
-which need not be ordinals.} 	
+For any formula $\phi(x)$: 	
 \[
 	\text{if }\exists \alpha \phi(\alpha)\text{, then }\exists \alpha(\phi(\alpha)
 	\land  (\forall \beta \in \alpha) \lnot \phi(\beta))
@@ -63,14 +62,14 @@ $\phi$, and this is an ordinal by \olref{ordmemberord}.
 %	\alpha) \phi(\beta)$, rendering the antecedent of the conditional
 %	false.
 \end{proof}
-
+\noindent
 Note that we can equally express \olref{ordinductionschema} as the
 scheme:
 \[
 \text{if }\forall \alpha((\forall \beta \in \alpha)\phi(\beta) \lif 
 \phi(\alpha))\text{, then }\forall \alpha\phi(\alpha)
 \]
-just by taking $\lnot\phi(\alpha)$ in \olref{ordinductionschema} and reasoning as in \olref[ordinals][wo]{propwoinduction}.
+just by taking $\lnot\phi(\alpha)$ in \olref{ordinductionschema}, and then performing elementary logical manipulations.
 
 \begin{thm}[Trichotomy]\ollabel{ordtrichotomy} 
 $\alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha$, for any
@@ -88,9 +87,7 @@ $\alpha$ is comparable with every ordinal in~$\beta$. We will show that
 $\alpha$ is comparable with~$\beta$. By induction on~$\beta$, it will
 follow that $\alpha$ is comparable with every ordinal; and so by
 induction on~$\alpha$, \emph{every} ordinal is comparable with
-\emph{every} ordinal, as required. 
-
-It suffices to assume that $\alpha \notin \beta$ and $\beta \notin
+\emph{every} ordinal, as required. It suffices to assume that $\alpha \notin \beta$ and $\beta \notin
 \alpha$, and show that $\alpha = \beta$. 
 
 To show that $\alpha \subseteq \beta$, fix $\gamma \in \alpha$; this
@@ -141,9 +138,10 @@ If $A$ is a transitive set of ordinals, then $\in$ well-orders $A$ by
 \olref{ordinductionschema} and \olref{ordtrichotomy}.
 \end{proof}
 
-But, although we have said that $\in$ well-orders the ordinals, we
-have to be \emph{very cautious} about all this, thanks to the
-following:
+Now, we glossed 
+\olref{ordinductionschema} and \olref{ordtrichotomy} as telling us that $\in$ well-orders the ordinals. However, we 
+have to be \emph{very cautious} about this sort of claim, thanks to the
+following result:
 
 \begin{thm}[Burali-Forti Paradox]\ollabel{buraliforti}
 There is no set of all the ordinals
@@ -156,8 +154,10 @@ $\alpha \in O$. So $O$ is transitive, and hence $O$ is an ordinal by
 \olref{corordtransitiveord}. Hence $O \in O$, contradicting
 \olref{ordordered}. 
 \end{proof}
-
-This result is named after \citeauthor{Burali-Forti1897}. But, as van
+\noindent
+This result is named after \citeauthor{Burali-Forti1897}. But, it was Cantor in 1899---in a letter to Dedekind---who first saw
+clearly the \emph{contradiction} in supposing that there is a set of
+all the ordinals. As van
 Heijenoort explains:
 \begin{quote}
   Burali-Forti himself considered the contradiction as establishing,
@@ -165,13 +165,8 @@ Heijenoort explains:
   of the ordinals is just a partial ordering.
   \citep[p.~105]{Heijenoort1967}
 \end{quote}
-It was Cantor in 1899---in a letter to Dedekind---who first saw
-clearly the \emph{contradiction} in supposing that there is a set of
-all the ordinals. (For further historical discussion, see
-\citealt[p.~105]{Heijenoort1967}.)
-
-To summarise, ordinals are sets which are individually well-ordered by
-membership, and collectively well-ordered by membership. 
+Setting Burali-Forti's mistake to one side, we can summarize the foregoing as follows. Ordinals are sets which are individually well-ordered by
+membership, and collectively well-ordered by membership (without collectively constituting a set). 
 
 Rounding this off, here are some more basic properties about the
 ordinals which follow from \olref{ordinductionschema} and
@@ -182,8 +177,7 @@ Any strictly descending sequence of ordinals is finite.
 \end{prop}
 
 \begin{proof}
-Any infinite strictly descending sequence of ordinals $\ldots \in
-\alpha_3 \in \alpha_2 \in \alpha_1 \in \alpha_0$ has no $\in$-minimal
+Any infinite strictly descending sequence of ordinals $\alpha_0 > \alpha_1 > \alpha_2 > \ldots$ has no $<$-minimal
 member, contradicting \olref{ordinductionschema}.
 \end{proof}
 

@@ -1,5 +1,5 @@
 % Part: sets-functions-relations
-% Chapter: arithmetisation
+% Chapter: arithmetization
 % Section: checking-details
 %
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -21,14 +21,18 @@ we ``would want'' it to have. In particular, the structure in question
 is that of a commutative ring.
 
 \begin{defn}
-	A \emph{commutative ring} is a set $S$, equipped with specific elements $0$ and $1$ and operations $+$ and $\times$, satisfying these eight formulas:\footnote{Implicitly, these are all bound with universal quantifiers restricted to $S$. Thus the first principle, more explicitly, is: $(\forall a, b, c \in S)a + (b+c) = (a+b)+c$. And note that the elements $0$ and~$1$ here need not be the natural numbers with the same name.}
+	A \emph{commutative ring} is a set $S$, equipped with specific elements $0$ and $1$ and operations $+$ and $\times$, satisfying these eight formulas:
 	\begin{align*}
-		\emph{Associativity}&&a + (b+ c) & = (a + b) + c & (a \times b) \times c & = a \times (b\times c)\\
-		\emph{Commutativity}&&a + b &= b+ a  &  a \times b&= b\times a\\ 
-		\emph{Identities}&&a + 0 &= a & a \times 1 &= a\\
+		\emph{Associativity}&&a + (b+ c) & = (a + b) + c \\
+		&& (a \times b) \times c & = a \times (b\times c)\\
+		\emph{Commutativity}&&a + b &= b+ a  \\
+		&&  a \times b&= b\times a\\ 
+		\emph{Identities}&&a + 0 &= a \\
+		&& a \times 1 &= a\\
 		\emph{Additive Inverse}&&(\exists b\in S)0&=a + b\\
 		\emph{Distributivity}&&a \times (b+ c ) &= (a \times b) + (a \times c)
 	\end{align*}
+	Implicitly, these are all bound with universal quantifiers restricted to $S$. And note that the elements $0$ and~$1$ here need not be the natural numbers with the same name.
 \end{defn}
 
 So, to check that the integers form a commutative ring, we just need
@@ -37,19 +41,19 @@ is {difficult} to establish, but this is a bit laborious. For example,
 here is how to prove \emph{Associativity}, in the case of addition:
 
 \begin{proof} 
-Fix $i, j, k \in \Int$. So there are $m_1, n_1, m_2, n_2, m_3, n_3 \in
-\Nat$ such that $i = \equivrep{m_1, n_1}{}$ and $j =
-\equivrep{m_2,n_2}{}$ and $k = \equivrep{m_3, n_3}{}$. (For
+Fix $i, j, k \in \Int$. So there are $a_1, b_1, a_2, b_2, a_3, b_3 \in
+\Nat$ such that $i = \equivrep{a_1, b_1}{}$ and $j =
+\equivrep{a_2,b_2}{}$ and $k = \equivrep{a_3, b_3}{}$. (For
 legibility, we write ``$\equivrep{x, y}{}$'' rather than
 ``$\equivrep{x, y}{\Intequiv}$''; we'll do this throughout this
 section.) Now:
 \begin{align*}
-	i + (j + k) &= \equivrep{m_1, n_1}{}+(\equivrep{m_2, n_2}{} + \equivrep{m_3, n_3}{}) \\
-	&= \equivrep{m_1,  n_1}{} + \equivrep{m_2+m_3, n_2+n_3}{}\\
-	&= \equivrep{m_1 + (m_2 + m_3), n_1 + (n_2 + n_3)}{}\\
-	&= \equivrep{(m_1 + m_2) + m_3, (n_1 + n_2) + n_3}{}\\
-	&= \equivrep{m_1 + m_2, n_1 + n_2}{} + \equivrep{m_3, n_3}{}\\
-	&= (\equivrep{m_1, n_1}{} + \equivrep{m_2, n_2}{}) + \equivrep{m_3, n_3}{}\\
+	i + (j + k) &= \equivrep{a_1, b_1}{}+(\equivrep{a_2, b_2}{} + \equivrep{a_3, b_3}{}) \\
+	&= \equivrep{a_1,  b_1}{} + \equivrep{a_2+a_3, b_2+b_3}{}\\
+	&= \equivrep{a_1 + (a_2 + a_3), b_1 + (b_2 + b_3)}{}\\
+	&= \equivrep{(a_1 + a_2) + a_3, (b_1 + b_2) + b_3}{}\\
+	&= \equivrep{a_1 + a_2, b_1 + b_2}{} + \equivrep{a_3, b_3}{}\\
+	&= (\equivrep{a_1, b_1}{} + \equivrep{a_2, b_2}{}) + \equivrep{a_3, b_3}{}\\
 	&= (i+j) + k
 \end{align*}
 helping ourselves freely to the behavior of addition on $\Nat$.
@@ -58,29 +62,29 @@ helping ourselves freely to the behavior of addition on $\Nat$.
 Equally, here is how to prove \emph{Additive Inverse}:
 
 \begin{proof}
-Fix $i \in \Int$, so that $i = \equivrep{m,n}{}$ for some $m, n \in
-\Nat$. Let $j = \equivrep{n, m}{} \in \Int$. Helping myself to the
-behaviour of the naturals, $(m+n) + 0 = 0 + (n+m)$, so that
-$\tuple{m+n, n+m} \sim_\Int \tuple{0,0}$ by definition, and hence
-$\equivrep{m+n, n+m}{} = \equivrep{0, 0}{} = 0_\Int$. So now $i + j =
-\equivrep{m,n}{}+\equivrep{n,m}{}=\equivrep{m+n, n+m}{}= \equivrep{0,
+Fix $i \in \Int$, so that $i = \equivrep{a,b}{}$ for some $a,b \in
+\Nat$. Let $j = \equivrep{b,a}{} \in \Int$. Helping ourselves to the
+behaviour of the naturals, $(a+b) + 0 = 0 + (a+b)$, so that
+$\tuple{a+b, b+a} \sim_\Int \tuple{0,0}$ by definition, and hence
+$\equivrep{a+b, b+a}{} = \equivrep{0, 0}{} = 0_\Int$. So now $i + j =
+\equivrep{a,b}{}+\equivrep{b,a}{}=\equivrep{a+b, b+a}{}= \equivrep{0,
 0}{} = 0_\Int$.
 \end{proof}
 
 And here is a proof of \emph{Distributivity}:
 
 \begin{proof}
-As above, fix $i = \equivrep{m_1, n_1}{}$ and $j =
-\equivrep{m_2,n_2}{}$ and $k = \equivrep{m_3, n_3}{}$. Now:
+As above, fix $i = \equivrep{a_1, b_1}{}$ and $j =
+\equivrep{a_2,b_2}{}$ and $k = \equivrep{a_3, b_3}{}$. Now:
 \begin{align*}
 	i \times (j + k) 
-	&= \equivrep{m_1, n_1}{} \times (\equivrep{m_2,n_2}{} + \equivrep{m_3, n_3}{})\\
-	&= \equivrep{m_1, n_1}{} \times \equivrep{m_2 + m_3,n_2+n_3}{}\\
-	&= \equivrep{m_1  (m_2 + m_3) + n_1  (n_2+n_3), m_1  (n_2 + n_3) + n_1 (m_2 + m_3)}{}\\
-	&= \equivrep{m_1 m_2 + m_1m_3 + n_1 n_2+n_1n_3, m_1 n_2 + m_1n_3 + m_2n_1 + m_3n_1}{}\\		
-%		&= \equivrep{m_1 m_2 + n_1n_2 + m_1m_3 + n_1 n_2+n_1n_3, m_1 n_2 + m_1n_3 + m_2n_1 + m_3n_1}{}\\		
-	&= \equivrep{m_1m_2 + n_1n_2, m_1n_2 + m_2n_1}{} + \equivrep{m_1m_3 + n_1n_3, m_1n_3 + m_3n_1}{}\\
-	&= (\equivrep{m_1, n_1}{} \times \equivrep{m_2,n_2}{}) + (\equivrep{m_1, n_1}{} \times  \equivrep{m_3, n_3}{})\\
+	&= \equivrep{a_1, b_1}{} \times (\equivrep{a_2,b_2}{} + \equivrep{a_3, b_3}{})\\
+	&= \equivrep{a_1, b_1}{} \times \equivrep{a_2 + a_3,b_2+b_3}{}\\
+	&= \equivrep{a_1  (a_2 + a_3) + b_1  (b_2+b_3), a_1  (b_2 + b_3) + b_1 (a_2 + a_3)}{}\\
+	&= \equivrep{a_1 a_2 + a_1a_3 + b_1 b_2+b_1b_3, a_1 b_2 + a_1b_3 + a_2b_1 + a_3b_1}{}\\		
+%		&= \equivrep{a_1 a_2 + b_1b_2 + a_1a_3 + b_1 b_2+b_1b_3, a_1 b_2 + a_1b_3 + a_2b_1 + a_3b_1}{}\\		
+	&= \equivrep{a_1a_2 + b_1b_2, a_1b_2 + a_2b_1}{} + \equivrep{a_1a_3 + b_1b_3, a_1b_3 + a_3b_1}{}\\
+	&= (\equivrep{a_1, b_1}{} \times \equivrep{a_2,b_2}{}) + (\equivrep{a_1, b_1}{} \times  \equivrep{a_3, b_3}{})\\
 	&= (i \times j) + (i \times k)
 \end{align*}
 \end{proof}
@@ -97,16 +101,16 @@ Prove that $\Int$ is a commutative ring.
 But our task is not over. As well as defining addition and
 multiplication over $\Int$, we defined an ordering relation, $\leq$,
 and we must check that this behaves as it should. In more detail, we
-must show that $\Int$ constitutes an \emph{ordered} ring.
+must show that $\Int$ constitutes an \emph{ordered} ring.\footnote{Recall
+	from \olref[sfr][rel][ord]{def:strictlinearorder} that a total ordering
+	is a relation which is reflexive, transitive, and connected. In the
+	context of order relations, connectedness is sometimes called
+	\emph{trichotomy}, since for any $a$ and $b$ we have $a \leq b \lor a
+	= b \lor a \geq b$.} 
 
 \begin{defn}
 An \emph{ordered ring} is a commutative ring which is also equipped
-with a total ordering relation, $\leq$, such that:\footnote{Recall
-from \olref[sfr][rel][ord]{def:strictlinearorder} that a total ordering
-is a relation which is reflexive, transitive, and connected. In the
-context of order relations, connectedness is sometimes called
-\emph{trichotomy}, since for any $a$ and $b$ we have $a \leq b \lor a
-= b \lor a \geq b$.} 
+with a total ordering relation, $\leq$, such that:
 \begin{align*}
 	a \leq b &\lif a + c \leq b + c\\
 	(a \leq b \land 0 \leq c) &\lif a \times c \leq b \times c

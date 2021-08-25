@@ -5,22 +5,17 @@
 \olfileid{sth}{replacement}{strength}
 \olsection{The Strength of Replacement}
 
-Replacement is the axiom which makes the difference between $\ZF$
-and~$\Z$. We helped ourselves to it throughout
-\crefrange{sth:ordinals::chap}{sth:spine::chap}. In this chapter, we
-will finally consider the question: is Replacement justified? To make
-the question sharp, it is worth observing that Replacement is really
-rather \emph{strong}.
+We begin with a simple observation about the strength of Replacement: unless we go beyond $\Z$, we cannot prove the existence of any von Neumann
+ordinal greater than or equal to $\omega + \omega$. 
 
-Unless we go beyond $\Z$, we cannot prove the existence of any von Neumann
-ordinal greater than or equal to $\omega + \omega$. Here is a sketch of
+Here is a sketch of
 why. Working in~$\ZF$, consider the set $V_{\omega+\omega}$. This set acts
-as the domain for a  \emph{model} for~$\Z$. Indeed, where $\phi$ is any
-axiom of~$\Z$, let $\phi^{V_{\omega+\omega}}$ be the formula which results
-by restricting all of $\phi$'s quantifiers to $V_{\omega+\omega}$ (that is,
-replace ``$\lexists[x]$'' with ``$(\lexists[x \in V_{\omega+\omega}])$'', and
-replace ``$\lforall[x]$'' with ``$(\lforall[x \in V_{\omega+\omega}])$''). It
-can be shown that, for every axiom $\phi$ of~$\Z$, we have that $\ZF \vdash
+as the domain for a \emph{model} for~$\Z$. To see this, we introduce some notation for the \emph{relativization} of a formula: 
+\begin{defn}\ollabel{formularelativization}
+	For any set $M$, and any formula $\phi$, let $\phi^M$ be the formula which results by restricting all of $\phi$'s quantifiers to $M$. That is, replace ``$\lexists[x]$'' with ``$(\lexists[x \in M])$'', and
+	replace ``$\lforall[x]$'' with ``$(\lforall[x \in M])$''. 
+\end{defn}\noindent
+It can be shown that, for every axiom $\phi$ of~$\Z$, we have that $\ZF \vdash
 \phi^{V_{\omega+\omega}}$. But $\omega+\omega$ is not \emph{in}
 $V_{\omega+\omega}$, by  \olref[spine][rank]{ordsetrankalpha}. So $\Z$ is
 consistent with the non-existence of $\omega+\omega$.
@@ -33,12 +28,12 @@ $\omega+\omega$. Indeed, we gave an informal example of this in
 \olref[ordinals][idea]{sec}, when we presented the ordering on the
 natural numbers given by:
 \begin{align*}
-	n \lessdot m \text{ iff }&\text{either $\left|n - m\right|$ is even and $n < m$},\\
+	n \lessdot m \text{ iff }&\text{either }n < m\text{ and }m-n\text{ is even,}\\
 	& \text{or $n$ is even and $m$ is odd.}
 \end{align*}
- But if $\omega+\omega$ does not exist, this well-ordering is not
- isomorphic to any ordinal. So $\Z$ does \emph{not} prove
- \olref[ordinals][ordtype]{thmOrdinalRepresentation}. 
+But if $\omega+\omega$ does not exist, this well-ordering is not
+isomorphic to any ordinal. So $\Z$ does \emph{not} prove
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}. 
 
 Flipping things around: Replacement allows us to prove the existence
 of $\omega+\omega$, and hence must allow us to prove the existence of

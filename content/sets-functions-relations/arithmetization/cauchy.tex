@@ -1,5 +1,5 @@
 % Part: sets-functions-relations
-% Chapter: arithmetisation
+% Chapter: arithmetization
 % Section: cauchy
 
 \documentclass[../../../include/open-logic-section]{subfiles}
@@ -8,7 +8,7 @@
 
 \olfileid{sfr}{arith}{cauchy}
 
-\olsection{The Reals as Cauchy Sequences}
+\olsection{Appendix: the Reals as Cauchy Sequences}
 
 In \olref[cuts]{sec}, we constructed the reals as Dedekind cuts. In
 this section, we explain an alternative construction. It builds on
@@ -159,7 +159,7 @@ choice of ``representative'' function from the equivalence class).
 But having done this, it is quite easy to show that these yield the
 right algebraic properties; that is:
 \begin{thm}\ollabel{thm:cauchyorderedfield}
-The Cauchy sequences constitute an \emph{ordered field}.
+The Cauchy sequences constitute an ordered field.
 \end{thm}
 
 \begin{proof}
@@ -198,12 +198,12 @@ think that recursive definitions are ok.}
 \begin{align*}
 	f(n+1) &=
 	\begin{cases}
-		a_n &\text{if $(a_n)_\Real$ is an upper bound for }S\\
+		a_n &\text{if }(\forall h \in S)\equivrep{h}{} \leq (a_n)_\Real\\
 		f(n)&\text{otherwise}
 	\end{cases}\\
 	g(n+1) &=
 	\begin{cases}
-		a_n &\text{if $(a_n)_\Real$ is a lower bound for }S\\
+		a_n &\text{if }(\exists h \in S)\equivrep{h}{} \geq (a_n)_\Real\\
 	 	g(n) &\text{otherwise}
 	\end{cases}
 \end{align*}
@@ -212,20 +212,17 @@ easily; but we leave it as an exercise.) Note that the function $(f-g)$
 tends to $0$, since the difference between $f$ and $g$ halves at every
 step. Hence $\equivrep{f}{} = \equivrep{g}{}$. 
 
-To show that  $\equivrep{f}{}$ is an upper bound for $S$, we will
-invoke \olref{thm:cauchyorderedfield}. Let $\equivrep{h}{} \in S$ and
+We will show that $(\forall h \in S)\equivrep{h}{} \leq \equivrep{f}{}$, invoking \olref{thm:cauchyorderedfield} as we go. Let $h \in S$ and
 suppose, for reductio, that $\equivrep{f}{} < \equivrep{h}{}$, so that
 $0_\Real < \equivrep{(h-f)}{}$. Since $f$ is a monotonically
-decreasing Cauchy sequence, there is some $k \in \Nat$ such that
-$\equivrep{(c_{f(k)} - f)}{} < \equivrep{(h-f)}{}$. So:
+decreasing Cauchy sequence, there is some $n \in \Nat$ such that
+$\equivrep{(c_{f(n)} - f)}{} < \equivrep{(h-f)}{}$. So:
 \[
-(f(k))_\Real  = \equivrep{c_{f(k)}}{} < \equivrep{f}{} + \equivrep{(h-f)}{} = \equivrep{h}{},
+	(f(n))_\Real = \equivrep{c_{f(k)}}{} < \equivrep{f}{} + \equivrep{(h-f)}{} = \equivrep{h}{},
 \]
-contradicting the fact that $(f(k)_\Real)$ is, by construction, an
-upper bound for $S$.
+contradicting the fact that, by construction, $\equivrep{h}{} \leq (f(k))_\Real$.
 
-In an exactly similar way, we can show that $\equivrep{g}{}$ is a
-lower bound for $S$. So $\equivrep{f}{} = \equivrep{g}{}$ is the
+In an exactly similar way, we can show that $(\forall \equivrep{h} \in S)\equivrep{g}{} \leq \equivrep{h}{}$. So $\equivrep{f}{} = \equivrep{g}{}$ is the
 \emph{least} upper bound for $S$.
 \end{proof}
 

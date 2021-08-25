@@ -1,0 +1,73 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+	
+\olfileid{sth}{replacement}{finiteaxiomatizability}
+\olsection{Appendix: Finite axiomatizability}
+We close this chapter by extracting some results from Replacement. The first result is due to \citet{Montague1961}; note that it is not a proof \emph{within} $\ZF$, but a proof \emph{about} $\ZF$:
+\begin{thm}\ollabel{zfnotfinitely}
+	$\ZF$ is not finitely axiomatizable. More generally: if $\Th{T}$ is finite and $\Th{T} \Proves \ZF$, then $\Th{T}$ is inconsistent.
+	
+	(Here, we tacitly restrict ourselves to first-order sentences whose only non-logical primitive is $\in$, and we write $\Th{T} \Proves \ZF$ to indicate that $\Th{T} \Proves \phi$ for all $\phi \in \ZF$.)
+\end{thm}
+\begin{proof}
+	Fix finite $\Th{T}$ such that $\Th{T} \Proves \ZF$. So, $\Th{T}$ proves Reflection, i.e.\ \olref[sth][replacement][ref]{reflectionschema}. Since $\Th{T}$ is finite, we can rewrite it as a single conjunction, $\theta$. Reflecting with this formula, $\Th{T} \Proves \exists \beta(\theta \liff \theta^{V_\beta})$. Since trivially $\Th{T} \Proves \theta$, we find that $\Th{T} \Proves \exists \beta\ \theta^{V_\beta}$. 
+	
+	Now, let $\psi(X)$ abbreviate:
+	\[
+		\theta^X \land X\text{ is transitive} \land (\forall Y \in X)(Y\text{ is transitive}\lif \lnot \theta^{Y})
+	\]
+	roughly this says: $X$ is a transitive model of $\theta$, and $\in$-minimal in this regard. Now, recalling that $\Th{T} \Proves \exists \beta\ \theta^{V_\beta}$, by basic facts about ranks within $\ZF$ and hence within $\Th{T}$, we have:
+	\begin{equation}
+		\Th{T} \Proves \exists M \psi(M). \tag{*}\label{Mpsi}
+	\end{equation}
+	Using the first conjunct of $\psi(X)$, whenever $\Th{T} \Proves \sigma$, we have that $\Th{T} \Proves \forall X(\psi(X) \lif \sigma^X)$. So, by \eqref{Mpsi}:
+	\begin{align*}
+		\Th{T} &\Proves \forall X(\psi(X) \lif (\exists N \psi(N))^X)\\
+	\intertext{Using this, and \eqref{Mpsi} again:}
+		\Th{T} &\Proves \exists M(\psi(M) \land (\exists N \psi(N))^M)
+	\intertext{In particular, then:}
+		\Th{T} &\Proves \exists M(\psi(M) \land (\exists N \in M)((N\text{ is transitive})^N \land (\theta^N)^M))
+	\intertext{So, by elementary reasoning concerning transitivity:}
+		\Th{T} &\Proves \exists M(\psi(M) \land (\exists N \in M)(N\text{ is transitive} \land \theta^N))
+	\end{align*} 
+	So that $\Th{T}$ is inconsistent.\footnote{This ``elementary reasoning'' involves proving certain ``absoluteness facts'' for transitive sets.}
+\end{proof}
+
+Here is a similar result:
+
+\begin{prop}\ollabel{finiteextensionofZ}
+	Let $\Th{T}$ extend $\Z$ with finitely many new axioms. If $\Th{T} \Proves \ZF$, then $\Th{T}$ is inconsistent. (Here we use the same tacit restrictions as for \olref{zfnotfinitely}.)
+\end{prop}
+\begin{proof}
+	Use $\theta$ for the conjunction of all of $\Th{T}$'s axioms \emph{except} for the (infinitely many) instances of Separation. Defining $\psi$ from $\theta$ as in \olref{zfnotfinitely}, we can show that $\Th{T} \Proves \exists M \psi(M)$. 
+	
+	As in \olref{zfnotfinitely}, we can establish the schema that, whenever $\Th{T} \Proves \sigma$, we have that $\Th{T} \Proves \forall X(\psi(X) \lif \sigma^X)$. We then finish our proof, exactly as in \olref{zfnotfinitely}.
+	
+	However, establishing the schema involves a little more work than in \olref{zfnotfinitely}. After all, the Separation-instances are in $\Th{T}$, but they are not conjuncts of $\theta$. However, we can overcome this obstacle by proving that $\Th{T} \Proves \forall X(X\text{ is transitive} \lif \sigma^X)$, for every Separation-instance $\sigma$. We leave this to the reader. 
+\end{proof}
+\begin{prob}
+	Show that, for every Separation-instance $\sigma$, we have: $\Z \Proves \forall X(X\text{ is transitive} \lif \sigma^X)$. (We used this schema in \olref[sth][replacement][finiteaxiomatizability]{finiteextensionofZ}.)
+\end{prob}
+\begin{prob}
+	Show that, for every $\phi \in \Z$, we have $\ZF \Proves \phi^{V_{\omega+\omega}}$.
+\end{prob}
+\begin{prob}
+	Confirm the remaining schematic results invoked in the proofs of \olref[sth][replacement][finiteaxiomatizability]{zfnotfinitely} and  \olref[sth][replacement][finiteaxiomatizability]{finiteextensionofZ}.
+\end{prob}
+
+As remarked in \olref[sth][replacement][absinf]{sec}, this shows that Replacement is strictly stronger than
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}. Or, slightly more strictly: if $\Z$ + ``every well-ordering is isomorphic to a unique ordinal'' is consistent, then it fails to prove some Replacement-instance.
+
+
+	%	By assumption, $\psi^{V_\alpha}$ has the form: 
+	%	\[
+	%		(\forall A \in V_\alpha)(\exists S \in V_\alpha)(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A))
+	%	\]
+	%	To establish this holds, fix $A \in V_\alpha$. Using Separation, obtain: 
+	%	\[
+	%		S = \Setabs{x \in A}{\phi^{V_\alpha}(x)}
+	%	\]
+	%	Now $S \in V_\alpha$, since $S \subseteq A \in V_\alpha$, and clearly $(\forall x \in V_\alpha)(x \in S \liff (\phi^{V_\alpha}(x) \land x \in A)$.
+
+\end{document}

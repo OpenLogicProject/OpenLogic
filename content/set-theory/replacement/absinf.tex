@@ -54,12 +54,9 @@ well-ordering.
 
 This idea certainly seems like a corollary of \stagesinex.
 Unfortunately, if our aim is to extract Replacement from this idea,
-then we face a simple, technical, barrier. By a result of
-\citet{Montague1961}, Replacement is strictly stronger than
-\olref[ordinals][ordtype]{thmOrdinalRepresentation}.\footnote{For more
-discussion of this general idea, though, see
-\citet[\S13.2]{Potter2004} and \citet{IncurvatiThesis} on the Axiom of
-Ordinals.}
+then we face a simple, technical, barrier: Replacement is strictly stronger than
+\olref[ordinals][ordtype]{thmOrdinalRepresentation}. (This observation is made by 
+\citet[\S13.2]{Potter2004}; we will prove it in \olref[sth][replacement][finiteaxiomatizability]{sec}.)
 
 The upshot is that, if we are going to understand \stagesinex{} in
 such a way as to yield Replacement, then it cannot \emph{merely} say
@@ -67,7 +64,7 @@ that the hierarchy outruns any well-ordering. It must make a stronger
 claim than that. To this end, \cite{Shoenfield:AST} proposed a very
 natural strengthening of the idea, as follows: the hierarchy is not
 \emph{cofinal} with any set.\footnote{G\"odel seems to have proposed a
-similar thought; see \cite[p.~223]{Potter2004}.} In slightly more detail:
+similar thought; see \citet[p.~223]{Potter2004}. For discussion of G\"odel and \citeauthor{Shoenfield:AST}, see \citet[90--5]{Incurvati2020}.} In slightly more detail:
 if $\tau$ is a mapping which sends sets to stages of the hierarchy,
 the image of any set $A$ under $\tau$ does not exhaust the hierarchy.
 Otherwise put (schematically): 
@@ -81,9 +78,8 @@ It is obvious that $\ZF$ proves a suitably formalised version of
 justifies Replacement.\footnote{It would be harder to prove
 Replacement using some formalisation of \stagescofin, since $\Z$ on
 its own is not strong enough to define the stages, so it is not clear
-how one would formalise \stagescofin. One good option, though, is to
-work in the theory presented by \cite{Potter2004}, which \emph{can}
-define stages.} For suppose $(\forall x \in A)\lexists![y][\phi(x,y)]$. Then for each $x \in A$, let $\sigma(x)$ be the $y$ such
+how one would formalise \stagescofin. One option, though, is to
+work in some extension of $\LT$, as discussed in \olref[sth][replacement][extrinsic]{sec}.} For suppose $(\forall x \in A)\lexists![y][\phi(x,y)]$. Then for each $x \in A$, let $\sigma(x)$ be the $y$ such
 that $\phi(x,y)$, and let $\tau(x)$ be the stage at which $\sigma(x)$
 is first formed. By \stagescofin, there is a stage $V$ such that
 $(\forall x \in A)\tau(x)\in V$. Now since each $\tau(x) \in V$ and
@@ -92,7 +88,7 @@ $\sigma(x) \subseteq \tau(x)$, by Separation we can obtain $\Setabs{y
 A)\phi(x,y)}$.
 
 \begin{prob}
-Prove \stagescofin{} within $\ZF$.
+	Formalize \stagescofin{} within $\ZF$.
 \end{prob}
 
 So \stagescofin{} vindicates Replacement. And it is at least plausible
