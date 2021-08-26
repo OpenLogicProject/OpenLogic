@@ -5,7 +5,7 @@
 \olfileid{sth}{ordinals}{replacement}
 \olsection{Replacement}
 
-In \olref{sec}, we motivated the introduction of ordinals by
+In \olref[sth][ordinals][vn]{sec}, we motivated the introduction of ordinals by
 suggesting that we could treat them as order-types, i.e., canonical
 proxies for well-orderings. In order for that to work, we would need
 to prove that \emph{every well-ordering is isomorphic to some
@@ -14,30 +14,34 @@ ordinal $\alpha$ such that $\tuple{A, <} \isomorphic \alpha$.
 
 Unfortunately, we \emph{cannot} prove the desired result only the
 Axioms we provided introduced so far. (We will see why in
-\olref[replacement][strength]{sec}, but for now: we can't.) We need a
+\olref[replacement][strength]{sec}, but for now the point is: we can't.) We need a
 new thought, and here it is:
 
 \begin{axiom}[Scheme of Replacement]
-For any formula $\phi(x, y)$,\footnote{Which may have parameters.} this is an axiom: 
-	\\for any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, {then} $\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
+For any formula $\phi(x, y)$, the following is an axiom:
+\begin{quote}
+	for any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, then
+	$\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
+\end{quote}
 \end{axiom}
-
+\noindent
 As with Separation, this is a scheme: it yields infinitely many
 axioms, for each of the infinitely many different $\phi$'s. And it can
 equally well be (and normally is) written down thus:
 
-\
-\\\emph{For any formula $\phi(x,y)$ which does not contain ``$B$'',\footnote{Which may have parameters.} this is an axiom:
-\\$\forall A[(\forall x \in A)\lexists![y][\phi(x,y)] \lif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]$}
+\begin{defish}
+For any formula $\phi(x,y)$ which does not contain ``$B$'', the following is an axiom:
+\[
+\forall A[(\forall x \in A)\lexists![y][\phi(x,y)] \lif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]
+\]
+\end{defish}
 
-\
-\\ 
 On first encounter, however, this is quite a tangled formula. The
 following quick consequence of Replacement probably gives a
 \emph{clearer} expression to the intuitive idea we are working with:
 
 \begin{cor}
-For any term $\tau(x)$,\footnote{Which may have parameters.} and any set $A$, this set exists:
+For any term $\tau(x)$, and any set $A$, this set exists:
 \[
 	\Setabs{\tau(x)}{x \in A} = \Setabs{y}{(\exists x \in A)y = \tau(x)}.
 \]
@@ -48,7 +52,7 @@ Since $\tau$ is a \emph{term}, $\forall x \lexists![y][\tau(x) = y]$.
 A fortiori, $(\forall x \in A)\lexists![y][\tau(x) = y]$. So
 $\Setabs{y}{(\exists x \in A)\tau(x) = y}$ exists by Replacement.
 \end{proof}
-
+\noindent
 This suggests that ``Replacement'' is a good name for the Axiom: given
 a set $A$, you can form a new set, $\Setabs{\tau(x)}{x \in A}$, by
 replacing every member of $A$ with its image under~$\tau$. Indeed,

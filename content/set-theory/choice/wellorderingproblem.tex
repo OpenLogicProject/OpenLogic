@@ -47,7 +47,7 @@ member of }x$. This is a choice function for $A$.
 
 \emph{Right-to-left.} Fix $A$. By Choice, there is a choice function,
 $f$,  for $\Pow{A} \setminus \{\emptyset\}$. Using Transfinite
-Recursion, define:
+Recursion, define a function:
 \begin{align*}
 	g(0) &= f(A)\\
 	g(\alpha) &= 
@@ -56,25 +56,23 @@ Recursion, define:
 			f(A \setminus \funimage{g}{\alpha}) & \text{otherwise}\\	
 		\end{cases}
 \end{align*}
-(The indication to ``stop!'' is just a shorthand for what would
+The indication to ``stop!'' is just a shorthand for what would
 otherwise be a more long-winded definition. That is, when $A =
 \funimage{g}{\alpha}$ for the first time, let $g(\delta) = A$ for all
-$\delta \leq \alpha$.) Note that we do stop, since otherwise we would
-have that $\cardless{\alpha}{\Pow{A} \setminus \{\emptyset\}}$ for
-every ordinal $\alpha$, contradicting \olref[hartogs]{HartogsLemma}. 
+$\delta \leq \alpha$. Now, in the first instance, we can only be sure that this defines a \emph{term} (see the remarks after \olref[sth][spine][recursion]{transrecursionschema}); but we will show that we indeed have a function.
 
-We do not stop  until we have exhausted $A$. Since we stop, $\ran{g} =
-A$. 
-
-Since $f$ is a choice function, for each $\alpha$ we have $g(\alpha) =
+Since $f$ is a choice function, for each $\alpha$ (when defined) we have $g(\alpha) =
 f(A \setminus \funimage{g}{\alpha}) \in A \setminus
 \funimage{g}{\alpha}$; i.e., $g(\alpha) \notin \funimage{g}{\alpha}$.
 So if $g(\alpha) = g(\beta)$ then $g(\beta) \notin
 \funimage{g}{\alpha}$, i.e., $\beta \notin \alpha$, and similarly
 $\alpha \notin \beta$. So $\alpha = \beta$, by Trichotomy. So $g$ is
-!!a{injection}.
+!!{injective}.
 
-Assembling these two facts, $g$ is !!a{bijection} from some ordinal to $A$. Now $g$ can be used to well-order $A$.
+Next, observe that we do stop!{}, i.e.\ that there is some (least) ordinal $\alpha$ such that $A = g[\alpha]$. For suppose otherwise; then as $g$ is !!{injective} we would have $\cardless{\alpha}{\Pow{A} \setminus \{\emptyset\}}$ for
+every ordinal $\alpha$, contradicting \olref[hartogs]{HartogsLemma}. Hence also $\ran{g} = A$.
+
+Assembling these facts, $g$ is !!a{bijection} from some ordinal to $A$. Now $g$ can be used to well-order $A$.
 \end{proof}
 
 So Well-Ordering and Choice stand or fall together. But the question

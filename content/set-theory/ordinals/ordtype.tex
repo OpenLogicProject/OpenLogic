@@ -5,8 +5,7 @@
 \olfileid{sth}{ordinals}{ordtype}
 \olsection{Ordinals as Order-Types}
 
-Armed with Replacement, and so now working in $\ZFminus$, we can prove
-what we wanted:
+Armed with Replacement, and so now working in $\ZFminus$, we can finally prove the result we have been aiming for:
 
 \begin{thm}\ollabel{thmOrdinalRepresentation}
 Every well-ordering is isomorphic to a unique ordinal. 
@@ -24,17 +23,17 @@ with that property; then let $B = A_a$ and $\mathord{\lessdot} =
 \mathord{<}$. 
 
 By definition, every proper initial segment of $B$ is isomorphic to
-some ordinal, which is unique by \olref[basic]{ordisoidentity}. So
+some ordinal, which is unique as above. So
 by Replacement, the following set exists, and is a function:
 \[
 	f = \Setabs{\tuple{\beta, b}}{b \in B\text{ and }\ordeq{\beta}{\tuple{B_b, \lessdot_b}}}
 \]
 To complete the reductio, we'll show that $f$ is an isomorphism
-$\alpha \to B$, for some ordinal $\alpha$. It is obvious that $\ran{f}
-= B$. And by \olref[iso]{lemordsegments}, $f$ preserves ordering,
-i.e., $\gamma \in \beta$ iff $f(\gamma) \lessdot f(\beta)$. 
+$\alpha \to B$, for some ordinal $\alpha$. 
 
-To show that $\dom{f}$ is an ordinal, by
+It is obvious that $\ran{f}
+= B$. And by \olref[iso]{lemordsegments}, $f$ preserves ordering,
+i.e., $\gamma \in \beta$ iff $f(\gamma) \lessdot f(\beta)$. To show that $\dom{f}$ is an ordinal, by
 \olref[basic]{corordtransitiveord} it suffices to show that
 $\dom{f}$ is transitive. So fix $\beta \in \dom{f}$, i.e.,
 $\ordeq{\beta}{\tuple{B_b, \lessdot_b}}$ for some $b$. If $\gamma \in
@@ -63,7 +62,7 @@ Where $\tuple{A, <}$ and $\tuple{B, \lessdot}$ are well-orderings:
 \end{cor}
 
 \begin{proof}
-The identity holds as isomorphism is an equivalence relation. To prove
+The identity holds by \olref[basic]{ordisoidentity}. To prove
 the second claim, let $\ordtype{A, <} = \alpha$ and $\ordtype{B,
 \lessdot} = \beta$, and let $f \colon \beta \to \tuple {B, \lessdot}$
 be our isomorphism. Then:

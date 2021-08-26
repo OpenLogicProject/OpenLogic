@@ -10,18 +10,19 @@ according to a \emph{very} na\"{i}ve conception, sets are just the
 extensions of predicates. This na\"ive thought would mandate the
 following principle:
 
-\
-\\\emph{Na\"{i}ve Comprehension.} $\Setabs{x}{\phi(x)}$ exists for any formula $\phi$.
+\begin{defish}
+  \emph{Na\"{i}ve Comprehension.} $\Setabs{x}{\phi(x)}$ exists for any formula $\phi$.
+\end{defish}
 
-\
-\\Tempting as this principle is, it is provably inconsistent. We saw this in \olref[sfr][set][rus]{sec}, but the result is so important, and so straightforward, that it's worth repeating. Verbatim.
+Tempting as this principle is, it is provably inconsistent. We saw this in \olref[sfr][set][rus]{sec}, but the result is so important, and so straightforward, that it's worth repeating. Verbatim.
 
 \begin{thm}[Russell's Paradox]
 There is no set $R = \Setabs{x}{x \notin x}$
 \end{thm}
 
 \begin{proof}
-For reductio, suppose that $R = \Setabs{x}{x \notin x}$ exists. Then $R \in R$ iff $R \notin R$, by Extensionality. Contradiction!
+If $R = \Setabs{x}{x \notin x}$ exists, then
+$R \in R$ iff $R \notin R$, which is a contradiction.
 \end{proof}
 
 Russell discovered this result in June 1901. (He did not, though, put
@@ -33,10 +34,9 @@ system. For the correspondence, and a bit of background, see
 \citet[pp.~124--8]{Heijenoort1967}. 
 
 It is worth emphasising that this two-line proof is a result of
-\emph{pure logic}. The only axiom we used was Extensionality. And we
-can avoid even {that} axiom, just by stating the result as follows:
+\emph{pure logic}. Granted, we implicitly used a (non-logical?)\ axiom, Extensionality, in our notation $\Setabs{x}{x \notin x}$; for $\Setabs{x}{\phi(x)}$ is to be \emph{the unique} (by Extensionality) set of the $\phi$s, if one exists. But we can avoid even the hint of Extensionality, just by stating the result as follows:
 \emph{there is no set whose members are exactly the non-self-membered
-sets}. But, as Russell himself observed, exactly similar reasoning
+sets}. And this has nothing much to do with sets. As Russell himself observed, exactly similar reasoning
 will lead you to conclude: \emph{no man shaves exactly the men who do
 not shave themselves}. Or: \emph{no pug sniffs exactly the pugs which
 don't sniff themselves}. And so on. Schematically, the shape of the

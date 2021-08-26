@@ -11,13 +11,19 @@ that every set is a subset of some stage, we can define the
 at which $A$ is formed. More precisely:
 
 \begin{defn}\ollabel{defnsetrank}
-For each set $A$, $\setrank{A}$ is the least $\alpha$ such that $A
-\subseteq V_\alpha$.\footnote{Some books define $\setrank{A}$ as the
-least $\alpha$ such that $A \in V_\alpha$. Since $A \subseteq V_\alpha
-\liff A \in V_{\alpha+1}$, this is essentially just a notational
-difference.}
+For each set $A$, $\setrank{A}$ is the least ordinal $\alpha$ such that $A
+\subseteq V_\alpha$.
 \end{defn}
-
+\begin{prop}\ollabel{ranksexist}
+	$\setrank{A}$ exists, for any $A$.
+\end{prop}
+\begin{proof}
+	Left as an exercise.
+\end{proof}
+\begin{prob}
+	Prove \olref[sth][spine][rank]{ranksexist}.	
+\end{prob}
+\noindent 
 The well-ordering of ranks allows us to prove some important results:
 \begin{prop}\ollabel{valphalowerrank}
 For any ordinal $\alpha$, $V_\alpha = \Setabs{x}{\setrank{x} \in \alpha}$.
@@ -25,13 +31,12 @@ For any ordinal $\alpha$, $V_\alpha = \Setabs{x}{\setrank{x} \in \alpha}$.
 
 \begin{proof}
 If $\setrank{x} \in \alpha$ then $x \subseteq V_{\setrank{x}} \in
-V_\alpha$, so $x \in V_\alpha$ as $V_\alpha$ is sublative (invoking
-\olref[Valphabasic]{Valphabasicprops} multiple times). Conversely, by
-definition of ``rank'' and Trichotomy on ordinals, if $\setrank{x}
-\notin  \alpha$, then $x \nsubseteq V_\beta$ for any $\beta \in
-\alpha$; and a simple transfinite induction on ordinals up to $\alpha$
-shows that $x \notin V_\alpha$. 
+V_\alpha$, so $x \in V_\alpha$ as $V_\alpha$ is potent (invoking
+\olref[Valphabasic]{Valphabasicprops} multiple times). Conversely, if $x \in V_\alpha$ then $x \subseteq V_\alpha$, so $\setrank{x} \leq \alpha$; now a simple transfinite induction shows that $x \notin V_\alpha$. 
 \end{proof}
+\begin{prob}
+	Complete the simple transfinite induction mentioned in \olref[sth][spine][rank]{valphalowerrank}.
+\end{prob}
 
 \begin{prop}\ollabel{rankmemberslower}
 If $B \in A$, then $\setrank{B} \in \setrank{A}$.
@@ -41,12 +46,12 @@ If $B \in A$, then $\setrank{B} \in \setrank{A}$.
 $A \subseteq V_{\setrank{A}} = \Setabs{x}{\setrank{x} \in
 \setrank{A}}$ by \olref{valphalowerrank}.
 \end{proof}
-
+\noindent
 Using this fact, we can establish a result which allows us to prove
 things about \emph{all sets} by a form of induction:
 
 \begin{thm}[$\in$-Induction Scheme] 
-For any formula $\phi$:\footnote{Which may have parameters}
+For any formula $\phi$:
 \[
 	\forall A((\forall x \in A)\phi(x) \lif \phi(A)) \lif \forall A \phi(A).
 \]
@@ -54,16 +59,16 @@ For any formula $\phi$:\footnote{Which may have parameters}
 
 \begin{proof}
 We will prove the contrapositive. So, suppose $\lnot \forall A
-\phi(A)$. Since every set has a rank, Transfinite Induction
-(\olref[ordinals][basic]{ordinductionschema}) tells us that there
-is a non-$\phi$ of least possible rank. That is: there is some $A$
+\phi(A)$. By Transfinite Induction
+(\olref[ordinals][basic]{ordinductionschema}), there
+is some non-$\phi$ of least possible rank; i.e.\ some $A$
 such that $\lnot \phi(A)$ and $\forall x(\setrank{x} \in \setrank{A}
 \lif \phi(x))$. Now if $x \in A$ then $\setrank{x} \in
-\setrank{A}$, by \olref{rankmemberslower}. So $(\forall x \in
-A)\phi(x) \land \lnot \phi(A)$, falsifying the antecedent.
+\setrank{A}$, by \olref{rankmemberslower}, so that $\phi(x)$; i.e.\ $(\forall x \in
+A)\phi(x) \land \lnot \phi(A)$.
 \end{proof}\noindent Here is an informal way to gloss this powerful
 result. Say that $\phi$ is \emph{hereditary} iff whenever every
-!!{element}s of a set is $\phi$, the set itself is $\phi$. Then
+!!{element} of a set is $\phi$, the set itself is $\phi$. Then
 $\in$-Induction tells you the following: if $\phi$ is hereditary,
 every set is $\phi$.
 
@@ -77,7 +82,7 @@ $\setrank{A} = \supstrict_{x \in A}\setrank{x}$.
 \begin{proof}
 Let $\alpha = \supstrict_{x \in A}\setrank{x}$. By
 \olref{rankmemberslower}, $\alpha \leq \setrank{A}$. But if $x \in A$
-then $\setrank{x} \in \alpha$, so that $x \in V_\alpha$, and hence $A
+then $\setrank{x} \in \alpha$, so that $x \in V_\alpha$ by \olref{valphalowerrank}, and hence $A
 \subseteq V_\alpha$, i.e., $\setrank{A} \leq \alpha$. Hence
 $\setrank{A} = \alpha$.
 \end{proof}

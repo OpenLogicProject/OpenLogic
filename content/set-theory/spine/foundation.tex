@@ -6,8 +6,7 @@
 
 \olsection{Foundation}
 
-We have almost articulated the vision of the iterative-cumulative
-hierarchy in~$\ZFminus$. ``Almost'', because there is a wrinkle. Nothing in
+We are only \emph{almost} done---and not \emph{quite} finished---because nothing in
 $\ZFminus$ guarantees that \emph{every} set is in some $V_\alpha$,
 i.e., that every set is formed at some stage. 
 
@@ -15,7 +14,7 @@ Now, there is a fairly straightforward (mathematical) sense in which
 we don't \emph{care} whether there are sets outside the hierarchy. (If
 there are any there, we can simply ignore them.) But we have motivated
 our \emph{concept} of set with the thought that every set is formed at
-some stage (see \stageshier{} in \olref[z][story]{sec}.) So
+some stage (see \stageshier{} in \olref[z][story]{sec}). So
 we will want to preclude the possibility of sets which fall outside of
 the hierarchy. Accordingly, we must add a new axiom, which ensures
 that every set occurs somewhere in the hierarchy. 
@@ -23,13 +22,13 @@ that every set occurs somewhere in the hierarchy.
 Since the $V_\alpha$s are our stages, we might simply consider adding
 the following as an axiom:
 
-\
-\\\emph{Regularity.} $\forall A \exists \alpha\, A \subseteq V_\alpha$
+\begin{defish}
+\emph{Regularity.} $\forall A \exists \alpha\, A \subseteq V_\alpha$
+\end{defish}
 
-\ \\This is \citeauthor{VonNeumann1925}'s approach
-(\citeyear{VonNeumann1925}). However, for reasons that will be
-explained in the next section, we will instead adopt an alternative
-axiom:
+This would be a perfectly reasonable approach. However, for reasons
+that will be explained in the next section, we will instead adopt an
+alternative axiom:
 
 \begin{axiom}[Foundation]
 $(\forall A \neq \emptyset)(\exists B \in A)A \cap B = \emptyset$.
@@ -43,10 +42,10 @@ For each set $A$, let:
 	\text{cl}_{n+1}(A) &= \bigcup \text{cl}_n(A),\\
 	\text{trcl}(A) &= \bigcup_{n < \omega} \text{cl}_{n}(A).
 \end{align*}
+We call $\text{trcl}(A)$ the \emph{transitive closure} of $A$.
 \end{defn}
-
-We call $\text{trcl}(A)$ the \emph{transitive closure} of $A$. The name is apt:
-
+\noindent
+The name ``transitive closure'' is apt:
 \begin{prop}\ollabel{subsetoftrcl}
 $A \subseteq \trcl{A}$ and $\trcl{A}$ is a transitive set. 
 \end{prop}
@@ -64,19 +63,18 @@ If $A$ is a transitive set, then there is some $\alpha$ such that $A
 
 \begin{proof}
 Recalling the definition of ``$\supstrict(X)$'' from
-\olref[ordinals][opps]{defsupstrict}, define:
+\olref[ordinals][opps]{defsupstrict}, define two sets:
 \begin{align*}
 	D  &= \Setabs{x \in A}{\forall \delta\ x \nsubseteq V_\delta}\\
 	\alpha &= \supstrict\Setabs{\delta}{(\exists x \in A)
 	(x \subseteq V_\delta \land (\forall \gamma \in \delta)x \nsubseteq V_\gamma)}
 \end{align*}
-Suppose $D = \emptyset$. So if $x \in A$, then there is some $\delta
-\in \alpha$ such that $x \subseteq V_\delta$, so $x \in V_\alpha$ by
+Suppose $D = \emptyset$. So if $x \in A$, then there is some $\delta$ such that $x \subseteq V_\delta$ and, by the well-ordering of the ordinals, $(\forall \gamma \in \delta)x \nsubseteq V_\gamma$; hence $\delta \in \alpha$ and so $x \in V_\alpha$ by
 \olref[spine][Valphabasic]{Valphabasicprops}. Hence $A \subseteq
 V_{\alpha}$, as required. 
 
 So it suffices to show that $D = \emptyset$. For reductio, suppose
-otherwise. By Foundation, there is some $B \in D$ such that $D \cap B
+otherwise. By Foundation, there is some $B \in D \subseteq A$ such that $D \cap B
 = \emptyset$. If $x \in B$ then $x \in A$, since $A$ is transitive,
 and since $x \notin D$, it follows that $\exists \delta\ x \subseteq
 V_\delta$. So now let

@@ -61,15 +61,10 @@ $B$. Invoking \olref{equivwo}, there are well-orderings $\tuple{A, R}$
 and $\tuple{B, S}$. Invoking
 \olref[ordinals][ordtype]{thmOrdinalRepresentation}, let $f \colon
 \alpha \to \tuple{A, R}$ and $g \colon \beta \to \tuple{B, S}$ be
-isomorphisms. By Trichotomy, either $\alpha \in \beta$ or $\alpha =
-\beta$ or $\beta \in \alpha$. In the first two cases $\alpha \subseteq
-\beta$, so 
-  %$1_\alpha \colon \alpha \to \beta$, given by $1_\alpha(\gamma) =
-  %\gamma$, is !!a{injection}; so 
-$\comp{f^{-1}}{g} \colon A \to B$ is !!a{injection}, and hence
-$\cardle{A}{B}$. Similarly if $\beta \in \alpha$ then $\cardle{B}{A}$.
+isomorphisms. By \olref[sth][ordinals][basic]{ordinalsaresubsets}, either $\alpha \subseteq \beta$ or $\beta \subseteq \alpha$. If $\alpha \subseteq \beta$, then $\comp{f^{-1}}{g} \colon A \to B$ is !!a{injection}, and hence
+$\cardle{A}{B}$; similarly, if $\beta \subseteq \alpha$ then $\cardle{B}{A}$.
 
-\emph{\olref{equivwo} $\Rightarrow$ \olref{equivcompare}.} Fix $A$; by
+\emph{\olref{equivcompare} $\Rightarrow$ \olref{equivwo}.} Fix $A$; by
 \olref{HartogsLemma} there is some ordinal $\beta$ such that
 $\cardnless{\beta}{A}$. Invoking \olref{equivcompare}, we have
 $\cardle{A}{\beta}$. So there is some !!{injection} $f \colon A \to
@@ -77,7 +72,7 @@ $\cardle{A}{\beta}$. So there is some !!{injection} $f \colon A \to
 $A$, by defining an order $\Setabs{\tuple{a, b} \in A \times A}{f(a)
 \in f(b)}$.
 \end{proof}
-
+\noindent
 As an immediate consequence: if Well-Ordering fails, then some sets
 are \emph{literally incomparable} with regard to their size. So, if
 Well-Ordering fails, then transfinite cardinal arithmetic will be

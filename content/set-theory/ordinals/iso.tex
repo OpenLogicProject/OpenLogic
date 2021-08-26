@@ -16,7 +16,7 @@ $f \colon A \to B$ such that: $x < y$ iff $f(x) \lessdot  f(y)$. In
 this case, we write $\ordeq{\tuple{A, <}}{\tuple{B, \lessdot}}$, and
 say that $f$ is an \emph{order-isomorphism}.
 \end{defn}
-
+\noindent
 In what follows, for brevity, we will speak of ``isomorphisms'' rather
 than ``order-isomorphisms''. Intuitively, isomorphisms are
 structure-preserving !!{bijection}s. Here are some simple facts about
@@ -25,31 +25,28 @@ isomorphisms.
 \begin{lem}\ollabel{isoscompose}
 Compositions of isomorphisms are isomorphisms, i.e.: if $f \colon A
 \to B$ and $g \colon B \to C$ are isomorphisms, then $(g \circ f)
-\colon A \to C$ are isomorphisms. (It follows that $\ordeq{X}{Y}$ is
-an equivalence relation.)
+\colon A \to C$ is an isomorphism.
 \end{lem}
-
+\begin{prob}
+	Prove \olref[sth][ordinals][iso]{isoscompose}.
+\end{prob}
 \begin{proof}
 Left as an exercise.
 \end{proof}
-
-\begin{prob}
-Prove \olref[sth][ordinals][iso]{isoscompose}.
-\end{prob}
-
+\begin{cor}\ollabel{ordisoisequiv}
+	$\ordeq{X}{Y}$ is an equivalence relation.
+\end{cor}
 \begin{prop}\ollabel{ordisounique}
 If $\tuple{A, <}$ and $\tuple{B, \lessdot}$ are isomorphic
 well-orderings, then the isomorphism between them is unique.
 \end{prop}
 
 \begin{proof}
-Let $f$ and $g$ be isomorphisms $A \to B$. 
-	%So for all $a, b \in A$ we have $f(b) \lessdot f(a)$ iff $b < a$
-	%iff $g(b) \lessdot g(a)$. 
-Fix $a\in A$, and suppose that $(\forall b < a)f(b) = g(b)$, and fix $x \in B$. 
+Let $f$ and $g$ be isomorphisms $A \to B$. We will prove the result by induction, i.e.\ using \olref[wo]{propwoinduction}. 
+Fix $a\in A$, and suppose (for induction) that $(\forall b < a)f(b) = g(b)$. Fix $x \in B$. 
 
-If $x \lessdot f(a)$, then $f^{-1}(x) < a$, so $g(f^{-1}(x) \lessdot
-g(a))$, invoking the fact that $f$ and $g$ are isomorphisms. But since
+If $x \lessdot f(a)$, then $f^{-1}(x) < a$, so $g(f^{-1}(x)) \lessdot
+g(a)$, invoking the fact that $f$ and $g$ are isomorphisms. But since
 $f^{-1}(x) < a$, by our supposition $x =f(f^{-1}(x)) = g(f^{-1}(x))$.
 So $x \lessdot g(a)$. Similarly, if $x \lessdot g(a)$ then $x \lessdot
 f(a)$. 
@@ -58,19 +55,17 @@ Generalising, $(\forall x \in B)(x \lessdot f(a) \liff x \lessdot
 g(a))$. It follows that $f(a) = g(a)$ by
 \olref[sfr][rel][ord]{prop:extensionality-totalorders}. So $(\forall
 a \in A)f(a) = g(a)$ by \olref[wo]{propwoinduction}.
-\end{proof}
-
+\end{proof}\noindent 
 This gives some sense that well-orderings are robust. But to continue
 explaining this, it will help to introduce some more notation. 
 
 \begin{defn}
-When $\tuple{A, <}$ is a well-ordering, let $A_a = \Setabs{x \in A}{x
-< a}$; we say that $A_a$ is a proper \emph{initial segment} of $A$.
-(We allow that $A$ itself is an improper initial segment of $A$.) Let
+When $\tuple{A, <}$ is a well-ordering with $a \in A$, let $A_a = \Setabs{x \in A}{x
+< a}$. We say that $A_a$ is a proper \emph{initial segment} of $A$ (and allow that $A$ itself is an improper initial segment of $A$). Let
 $<_a$ be the restriction of $<$ to the initial segment, i.e.,
 $\funrestrictionto{\mathord{<}}{A_a^2}$. 
 \end{defn}
-
+\noindent
 Using this notation, we can state and prove that no well-ordering is
 isomorphic to any of its proper initial segments.
 
@@ -81,7 +76,7 @@ $\ordneq{\tuple{A, a}}{\tuple{A_a, <_a}}$
 
 \begin{proof}
 For reductio, suppose $f \colon A \to A_a$ is an isomorphism. Since
-$f$ is a bijection and $A_a \subsetneq A$, let $b \in A$ be the
+$f$ is a bijection and $A_a \subsetneq A$, using \olref[wo]{wo:strictorder} let $b \in A$ be the
 $<$-least !!{element} of $A$ such that $b \neq f(b)$. We'll show that
 $(\forall x \in A)(x<b \liff x < f(b))$, from which it will follow by
 \olref[sfr][rel][ord]{prop:extensionality-totalorders} that $b =
@@ -163,7 +158,7 @@ suppose both are \emph{proper} initial segments. Then let $a$ be the
 $<$-least !!{element} of $A \setminus \dom{f}$, so that $\dom{f} =
 A_a$, and let $b$ be the $\lessdot$-least !!{element} of $B \setminus
 \ran{f}$, so that $\ran{f} = B_b$. So $f \colon A_a \to B_b$ is an
-isomorphism, and hence $f(a) = b$, a contradiction.
+isomorphism, and hence $\tuple{a, b} \in f$, a contradiction.
 \end{proof}
 
 \end{document}

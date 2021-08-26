@@ -10,23 +10,21 @@ The previous result hints (correctly) that cardinal exponentiation
 would be quite \emph{easy}, if infinite cardinals are guaranteed to
 ``play straightforwardly'' with powers of $2$, i.e., (by
 \olref[opps]{lem:SizePowerset2Exp}) with taking powersets. But we
-cannot assume that infinite cardinals \emph{do} play nicely with
-powersets. This section is dedicated to explaining all of this.
-(Although, to be honest, it's more of a \emph{gesture} in the
-direction of something fascinating.)
+cannot assume that infinite cardinals \emph{do} play straightforwardly 
+powersets. 
 
-We will start by introducing some nice notation.
+To start unpacking this, we introduce some nice notation.
 
 \begin{defn}
 Where $\cardsucc{\cardfont{a}}$ is the least cardinal strictly greater
 than $\cardfont{a}$, we define two infinite sequences:
 \begin{align*}
-	\aleph_{0} &:= \omega & 		
-	\beth_{0} &:= \omega\\
-	\aleph_{\alpha \ordplus 1} &:= \cardsucc{(\aleph_{\alpha})} &
-	\beth_{\alpha+1} &:= \cardexpo{2}{\beth_{\alpha}}\\
-	\aleph_{\alpha} &:= \bigcup_{\beta< \alpha} \aleph_{\beta} &
-	\beth_{\alpha} &:= \bigcup_{\beta < \alpha}\beth_{\beta} & \text{when $\alpha$ is a limit ordinal}.
+	\aleph_{0} &\defis \omega & 		
+	\beth_{0} &\defis \omega\\
+	\aleph_{\alpha \ordplus 1} &\defis \cardsucc{(\aleph_{\alpha})} &
+	\beth_{\alpha+1} &\defis \cardexpo{2}{\beth_{\alpha}}\\
+	\aleph_{\alpha} &\defis \bigcup_{\beta< \alpha} \aleph_{\beta} &
+	\beth_{\alpha} &\defis \bigcup_{\beta < \alpha}\beth_{\beta} & \text{when $\alpha$ is a limit ordinal}.
 	\end{align*}
 \end{defn}
 
@@ -47,7 +45,7 @@ argument there that $\beth_\alpha$ does not exist for $\alpha \geq
 \omega$.} Now, these notations provide us with infinite cardinals.
 
 \begin{prop}
-Both $\aleph_\alpha$ and $\beth_\alpha$ are cardinals, for every
+$\aleph_\alpha$ and $\beth_\alpha$ are cardinals, for every
 ordinal $\alpha$. 
 \end{prop}
 
@@ -60,12 +58,12 @@ $\beth_{\alpha+1}$ are explicitly defined as cardinals. And the union
 of a set of cardinals is a cardinal, by
 \olref[cardinals][classing]{unioncardinalscardinal}.
 \end{proof}
-
+\noindent
 Moreover, every infinite cardinal is an $\aleph$:
 
 \begin{prop}
 If $\cardfont{a}$ is an infinite cardinal, then $\cardfont{a} =
-\aleph_\gamma$ for some $\gamma$.
+\aleph_\gamma$ for some unique $\gamma$.
 \end{prop}
 
 \begin{proof}
@@ -73,7 +71,7 @@ By transfinite induction on cardinals. For induction, suppose that if
 $\cardfont{b} < \cardfont{a}$ then $\cardfont{b} =
 \aleph_{\gamma_\cardfont{b}}$. If $\cardfont{a} =
 \cardsucc{\cardfont{b}}$ for some $\cardfont{b}$, then $\cardfont{a} =
-\cardsucc{\aleph_{\gamma_\cardfont{b}}}=
+\cardsucc{(\aleph_{\gamma_\cardfont{b}})}=
 \aleph_{\gamma_\cardfont{b}+1}$. If $\cardfont{a}$ is not the
 successor of any cardinal, then since cardinals are ordinals
 $\cardfont{a} = \bigcup_{\cardfont{b} < \cardfont{a}} \cardfont{b} =
@@ -88,11 +86,11 @@ the case, then the infinite cardinals would ``play straightforwardly''
 with the operation of taking powersets. Indeed, we would have the
 following:
 
-\
-\\\emph{General Continuum Hypothesis} (GCH). $\aleph_\alpha  = \beth_\alpha$, for all $\alpha$. 
+\begin{defish}
+\emph{Generalized Continuum Hypothesis} (GCH). $\aleph_\alpha  = \beth_\alpha$, for all $\alpha$. 
+\end{defish}
 
-\
-\\Moreover, if GCH held, then we could make some considerable
+Moreover, if GCH held, then we could make some considerable
 simplifications with cardinal exponentiation. In particular, we could
 show that when $\cardfont{b} < \cardfont{a}$, the value of
 $\cardexpo{\cardfont{a}}{\cardfont{b}}$ is trapped by
@@ -110,13 +108,12 @@ $\ZFC + \text{GCH}$. But it later turned out that we can equally add
 $\lnot$GCH to $\ZFC$. Indeed, consider the simplest non-trivial
 \emph{instance} of GCH, namely: 
 
-\
-\\\emph{Continuum Hypothesis} (CH). $\aleph_1 = \beth_1$. 
+\begin{defish}
+\emph{Continuum Hypothesis} (CH). $\aleph_1 = \beth_1$. 
+\end{defish}
 
-\
-\\
 \citet{Cohen1963} proved that if $\ZFC$ is consistent then so is $\ZFC
-+ \lnot\text{CH}$. 
++ \lnot\text{CH}$. So the Continuum Hypothesis is independent from $\ZFC$.
 
 The Continuum Hypothesis is so-called, since ``the continuum'' is
 another name for the real line, $\Real$.
@@ -128,7 +125,7 @@ and the cardinality of the continuum, $\beth_1$.
 Given the \emph{independence} of (G)CH from $\ZFC$, what should say
 about their \emph{truth}? Well, there is \emph{much} to say. Indeed,
 and much fertile recent work in set theory has been directed at
-investigating these issues. But two quick points are certainly worth
+investigating these issues. But two very quick points are certainly worth
 emphasising. 
 
 First: it does not \emph{immediately} follow from these formal
@@ -148,7 +145,6 @@ tool than simply taking powersets.
 
 With those two observations made, if you want to know more, you will
 now have to turn to the various philosophers and mathematicians with
-horses in the race. (Though you may want to start with the very nice
-discussion in \citeauthor{Potter2004} \citeyear[\S15.6]{Potter2004}.) 
+horses in the race.\footnote{Though you might want to start by reading \citet[\S15.6]{Potter2004}.}
 
 \end{document}

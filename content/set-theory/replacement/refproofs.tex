@@ -1,0 +1,178 @@
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sth}{replacement}{refproofs}
+\olsection{Appendix: Results surrounding Replacement}
+
+In this section, we will prove Reflection within $\ZF$. We will also
+prove a sense in which Reflection is equivalent to Replacement. And we
+will prove an interesting consequence of all this, concerning the
+strength of Reflection/Replacement. \emph{Warning: this is easily the
+most advanced bit of mathematics in this textbook.} 
+
+We'll start with a lemma which, for brevity, employs the notational
+device of \emph{overlining} to deal with sequences of variables or
+objects. So: ``$\overline{a}_k$'' abbreviates ``$a_{k_1}$, \dots,
+$a_{k_n}$'', where $n$ is determined by context.
+
+\begin{lem}\ollabel{lemreflection}
+For each $1 \leq i \leq k$, let $\phi_i(\overline{v}_i, x)$ be a
+formula. Then for each $\alpha$
+there is some $\beta > \alpha$ such that, for any $\overline{a}_1,
+\ldots, \overline{a}_k \in V_\beta$ and each $1 \leq i \leq k$:
+\[
+	\exists x\phi_i(\overline{a}_i, x) \rightarrow (\exists x \in V_\beta) \phi_i(\overline{a}_i, x)
+\]
+\end{lem}
+
+\begin{proof}
+We define a term $\mu$ as follows: $\mu(\overline{a}_1, \ldots,
+\overline{a}_k)$ is the least stage, $V$, which satisfies all of the
+following conditionals, for $1 \leq i \leq k$:
+\[
+\exists x\phi_i(\overline{a}_i, x) \rightarrow (\exists x \in V) \phi_i(\overline{a}_i, x))
+\]
+It is easy to confirm that $\mu(\overline{a}_1, \ldots, \overline{a}_k)$ exists for all $\overline{a}_1, \ldots, \overline{a}_k$. Now, using Replacement and our recursion theorem, define:
+\begin{align*}
+	S_0 & = V_{\alpha+1}\\
+	S_{n+1} & = S_n \cup \bigcup
+	\Setabs{\mu(\overline{a}_1, \ldots, \overline{a}_k)}
+	{\overline{a}_1, \ldots, \overline{a}_k \in S_n} \\
+	S &= \bigcup_{m < \omega} S_n.
+\end{align*}
+Each $S_n$, and hence $S$ itself, is a stage after $V_\alpha$. Now fix
+$\overline{a}_1$, \dots,~$\overline{a}_k \in S$; so there is some $n <
+\omega$ such that $\overline{a}_1$, \dots, $\overline{a}_k \in S_n$.
+Fix some $1 \leq i \leq k$, and suppose that $\exists x
+\phi_i(\overline{a}_i,x)$. So $(\exists x \in \mu(\overline{a}_1,
+\ldots, \overline{a}_k))\phi_i(\overline{a}_i, x)$ by construction, so
+$(\exists x \in S_{n+1})\phi_i(\overline{a}_i, x)$ and hence
+$(\exists x \in S)\phi_i(\overline{a}_i, x)$. So $S$ is our $V_\beta$.
+\end{proof}
+\noindent 
+We can now prove \olref[sth][replacement][ref]{reflectionschema} quite
+straightforwardly:
+
+\begin{proof}[Proof] 
+Fix $\alpha$. Without loss of generality, we can assume $\phi$'s only
+connectives are $\exists$, $\lnot$ and $\land$ (since these are
+expressively adequate). Let $\psi_1, \ldots, \psi_k$ enumerate each of
+$\phi$'s subformulas according to complexity, so that $\psi_k = \phi$.
+By \olref{lemreflection}, there is a $\beta > \alpha$ such that, for
+any $\overline{a}_i \in V_\beta$ and each $1 \leq i \leq k$:
+\begin{align}\label{reflectionnicelybehaved}
+	\exists x\psi_i(\overline{a}_i, x) \rightarrow 
+	(\exists x \in V_\beta) \psi_i(\overline{a}_i, x)\tag{*}
+\end{align}
+By induction on complexity of $\psi_i$, we will show that
+$\psi_i(\overline{a}_i) \leftrightarrow
+\psi_i^{V_\beta}(\overline{a}_i)$, for any  $\overline{a}_i \in
+V_\beta$. 	If $\psi_i$ is atomic, this is trivial. The biconditional
+also establishes that, when $\psi_i$ is a negation or conjunction of
+subformulas satisfying this property, $\psi_i$ itself satisfies this
+property. So the only interesting case concerns quantification. Fix
+$\overline{a}_i \in V_\beta$; then:
+\begin{align*}
+	(\exists x \psi_i(\overline{a}_i, x))^{V_\beta}
+	&\text{ iff }
+	(\exists x \in V_\beta)\psi_i^{V_\beta}(\overline{a}_i, x)
+	&&\text{by definition}\\
+	&\text{ iff }
+	(\exists x \in V_\beta)\psi_i(\overline{a}_i,  x)
+	&&\text{by hypothesis}\\
+	&\text{ iff }
+	\exists x \psi_i(\overline{a}_i, x)
+	&&\text{by \eqref{reflectionnicelybehaved}}
+\end{align*}
+This completes the induction; the result follows as $\psi_k = \phi$.
+\end{proof}
+
+We have proved Reflection in $\ZF$. Our proof essentially
+followed \citet{Montague1961}. We now want to prove in $\Z$ that
+Reflection entails Replacement. The proof follows \citet{Levy1960},
+but with a simplification. 
+
+Since we are working in $\Z$, we cannot present Reflection in exactly
+the form given above. After all, we formulated Reflection using the
+``$V_\alpha$'' notation, and that cannot be defined in $\Z$ (see
+\olref[sth][spine][zf]{sec}). So instead we will offer an apparently
+weaker formulation of Replacement, as follows:
+
+\begin{defish}
+\emph{Weak-Reflection.} For any formula $\phi$, there is a transitive
+set $S$ such that $0$, $1$, and any parameters to $\phi$ are
+!!{element}s of $S$, and $(\forall \overline{x} \in S)(\phi \liff
+\phi^S)$.
+\end{defish}
+
+To use this to prove Replacement, we will first follow \citet[first
+part of Theorem 2]{Levy1960} and show that we can ``reflect'' two
+formulas at once:
+
+\begin{lem}[in $\Z + \text{Weak-Reflection}$.]\ollabel{lem:reflect}
+For any formulas $\psi, \chi$, there is a transitive set $S$ such that
+$0$ and $1$ (and any parameters to the formulas) are !!{element}s of
+$S$, and $(\forall \overline{x} \in S)((\psi \liff \psi^S) \land (\chi
+\liff \chi^S))$.
+\end{lem}
+
+\begin{proof}
+Let $\phi$ be the formula $(z = 0 \land \psi) \lor (z = 1 \land \chi)$. 
+
+Here we use an abbreviation; we should spell out ``$z = 0$'' as
+``$\forall t\, t \notin z$'' and ``$z =1$'' as ``$\forall s(s \in z
+\liff \forall t\, t \notin s)$''. But since $0, 1 \in S$ and $S$ is
+transitive, these formulas are \emph{absolute} for $S$; that is, they
+will apply to the same object whether we restrict their quantifiers to
+$S$.\footnote{More formally, letting $\xi$ be either of these
+formulas, $\xi(z) \liff \xi^S(z)$.}
+
+By Weak-Reflection, we have some appropriate $S$ such that:
+\begin{align*}
+	(\forall z, \overline{x} \in S)(&\phi \liff \phi^S)\\
+	\text{i.e. }(\forall z, \overline{x} \in S)(&((z = 0 \land \psi) \lor (z = 1 \land \chi)) \liff {}\\
+	&\phantom{(}((z = 0 \land \psi) \lor (z = 1 \land \chi))^S)\\
+	\text{i.e. }(\forall z, \overline{x} \in S)(&((z = 0 \land \psi) \lor (z = 1 \land \chi))\liff {}\\
+	&\phantom{(}((z = 0 \land \psi^S) \lor (z = 1 \land \chi^S)))\\
+	\text{i.e. }(\forall \overline{x} \in S)(&(\psi \liff \psi^S) \land (\chi \liff \chi^S))
+\end{align*}
+The second claim entails the third because ``$z = 0$'' and ``$z=1$''
+are absolute for $S$; the fourth claim follows since $0 \neq 1$.
+\end{proof}\noindent We can now obtain Replacement, just by following and simplifying 
+\citet[Theorem 6]{Levy1960}:
+
+\begin{thm}[in $\Z$ + Weak-Reflection]\label{thm:replacement} 
+For any formula $\phi(v,w)$, and any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, then
+$\Setabs{y}{(\exists x \in A)\phi(x,y}$ exists.
+\end{thm}
+
+\begin{proof}
+Fix $A$ such that $(\forall x \in A)\lexists![y][\phi(x,y)]$, and
+define formulas:
+\begin{align*}
+	\psi &\text{ is } (\phi(x, z) \land A = A)\\
+	\chi &\text{ is } \lexists[y][\phi(x, y)]
+\end{align*}
+Using \olref{lem:reflect}, since $A$ is a parameter to $\psi$, there
+is a transitive~$S$ such that $0, 1, A \in S$  (along with any other
+parameters), and such that:
+\[
+	(\forall x,z \in S)((\psi \liff \psi^S) \land (\chi \liff \chi^S))
+\]
+So in particular:
+\begin{align*}
+	(\forall  x, z \in S)(&\phi(x, z) \liff \phi^S(x, z))\\
+	(\forall x \in S)(&\exists y\phi(x, y) \liff (\exists y \in S)\phi^S(x, y)) 
+\end{align*}
+Combining these, and observing that $A \subseteq S$ since $A \in S$ and $S$ is transitive:
+\begin{align*}
+	(\forall x \in A)(&\exists y\phi(x, y) \liff (\exists y \in S)\phi(x, y))
+\end{align*}
+Now $(\forall x \in A)(\lexists![y \in S])\phi(x, y)$, because
+$(\forall x \in A)\lexists![y][\phi(x, y)]$. Now Separation yields
+$\Setabs{y \in S}{(\exists x \in A) \phi(x, y)} = \Setabs{y}{(\exists
+x \in A) \phi(x, y)}$. 
+\end{proof}
+
+\end{document}

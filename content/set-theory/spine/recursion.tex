@@ -10,77 +10,71 @@ The first thing we must do, though, is confirm that
 we need to prove that any attempt to offer a transfinite by
 (transfinite) recursion will succeed. That is the aim of this section.
 
-\emph{Warning: this is very tricky material}. The overarching moral,
+\emph{Warning: this is tricky material}. The overarching moral,
 though, is quite simple: Transfinite Induction plus Replacement
 guarantee the legitimacy of (several versions of) transfinite
-recursion.
+recursion.\footnote{A reminder: all formulas and terms can have parameters (unless explicitly stated otherwise).}
 
-\begin{thm}[Bounded Recursion]\ollabel{transrecursionfun}
-For any term $\tau(x)$ and any ordinal $\alpha$,\footnote{The term may
-have parameters.} there is a unique function $f$ with domain $\alpha$
-such that $(\forall \beta \in \alpha)f(\beta) =
-\tau(\funrestrictionto{f}{\beta})$
-\end{thm}
+\begin{defn}
+	Let $\tau(x)$ be a term; let $f$ be a function; let $\gamma$ be an ordinal. We say that $f$ is an \emph{$\alpha$-approximation} for $\tau$ iff both $\dom{f} = \alpha$ and $(\forall \beta \in \alpha)f(\beta) = \tau(\funrestrictionto{f}{\beta})$.
+\end{defn}
 
+\begin{lem}[Bounded Recursion]\ollabel{transrecursionfun}
+For any term $\tau(x)$ and any ordinal $\alpha$, there is a unique $\alpha$-approximation for $\tau$.
+\end{lem}
 \begin{proof}
-We will show that, for any $\delta \leq \alpha$, there is a unique
-$g_\delta$ with domain $\delta$ such that $(\forall \beta \in
-\delta)g(\beta) = \tau(\funrestrictionto{g}{\beta})$. 
+We will show that, for any $\gamma \leq \alpha$, there is a unique
+$\gamma$-approximation. 
 
-We first establish uniqueness. Given $g_{\delta_1}$ and
-$g_{\delta_2}$, a transfinite induction on their arguments shows that
+We first establish uniqueness. Let $g$ and $h$ (respectively) be $\gamma$- and $\delta$-approximations. A transfinite induction on their arguments shows that
 $g(\beta) = h(\beta)$ for any $\beta \in \dom{g} \cap \dom{h} =
-\delta_1 \cap \delta_2 = \min(\delta_1, \delta_2)$. So our functions
-are unique (if they exist), and agree on all values.
+\gamma \cap \delta \min(\gamma, \delta)$. So our approximations are unique (if they exist), and agree on all values.
 
 To establish existence, we now use a simple transfinite induction
 (\olref[ordinals][opps]{simpletransrecursion}) on ordinals
 $\delta \leq \alpha$. 
 
-Let $g_\emptyset = \emptyset$; this trivially behaves correctly.
+The empty function is trivially an $\emptyset$-approximation. 
 
-Given $g_\delta$, let $g_{\ordsucc{\delta}} =  g_\delta \cup
-\{\tuple{\delta, \tau(g_\delta)}\}$. This behaves correctly as
-$\funrestrictionto{g_{\ordsucc{\delta}}}{\delta} = g_\delta$. 
+If $g$ is a $\gamma$-approximation, then $g \cup
+\{\tuple{\ordsucc{\gamma}, \tau(g)}\}$ is a $\ordsucc{\gamma}$-approximation.
 
-Given $g_\gamma$ for all $\gamma \leq \delta$ with $\delta$ a limit
-ordinal, let $g_\delta = \bigcup_{\gamma \in \delta} g_\gamma$. This
-is a function, since our various $g_\beta$'s agree on all values. And
-if $\beta \in \delta$ then $g_\delta(\beta) =
-g_{\ordsucc{\beta}}(\beta) =
-\tau(\funrestrictionto{g_{\ordsucc{\beta}}}{\beta}) =
-\tau(\funrestrictionto{g_\delta}{\beta})$.
+If $\gamma$ is a limit ordinal and $g_\delta$ is a $\delta$-approximation for all $\delta < \gamma$, let $g = \bigcup_{\delta \in \gamma} g_\delta$. This
+is a function, since our various $g_\delta$s agree on all values. And
+if $\delta \in \gamma$ then $g(\delta) = g_{\ordsucc{\delta}}(\delta) =
+\tau(\funrestrictionto{g_{\ordsucc{\delta}}}{\delta}) =
+\tau(\funrestrictionto{g}{\delta})$.
 
-This completes the proof by transfinite induction. Now just let $f = g_\alpha$.
+This completes the proof by transfinite induction.
 \end{proof}
 
 If we allow ourselves to define a \emph{term} rather than a function,
-then we can remove the bound $\alpha$ from the previous result. (In
-the statement and proof of this result, when $\sigma$ is a term, we
-let $\funrestrictionto{\sigma}{\alpha} = \Setabs{\tuple{\gamma,
-\sigma(\gamma)}}{\gamma \in \alpha}$.)
+then we can remove the bound $\alpha$ from the previous result. In
+the statement and proof of the following result, when $\sigma$ is a term, we
+let $\funrestrictionto{\sigma}{\alpha} = \Setabs{\tuple{\beta,
+\sigma(\beta)}}{\beta \in \alpha}$.
 
 \begin{thm}[General Recursion]\ollabel{transrecursionschema}
-For any term $\tau(x)$ we can explicitly define a term
-$\sigma(x)$,\footnote{Both terms may have parameters.} such that
+For any term $\tau(x)$, we can explicitly define a term
+$\sigma(x)$, such that
 $\sigma(\alpha) = \tau(\funrestrictionto{\sigma}{\alpha})$ for any
 ordinal $\alpha$. 	
 \end{thm}
 
 \begin{proof}
-For each $\alpha$, by \olref{transrecursionfun} are unique
-$\ordsucc{\alpha}$-approximations, $f_{\ordsucc{\alpha}}$, and:
-\[
-	f_{\ordsucc{\alpha}}(\alpha) = 
-	\tau(\funrestrictionto{f_{\ordsucc{\alpha}}}{\alpha}) = 
-	\tau(\Setabs{\tuple{\gamma, f_{\ordsucc{\alpha}}(\gamma)}}{\gamma \in \alpha}).
-\]
-So define $\sigma(\alpha)$ as $f_{\ordsucc{\alpha}}(\alpha)$.
-Repeating the induction of \olref{transrecursionfun}, but without the
-upper bound, this is well-defined.
+For each $\alpha$, by \olref{transrecursionfun} there is a unique $\alpha$-approximation, $f_\alpha$, for $\tau$. Define $\sigma(\alpha)$ as $f_{\ordsucc{\alpha}}(\alpha)$. Now:
+	\begin{align*}
+		\sigma(\alpha) &= 
+		f_{\ordsucc{\alpha}}(\alpha) \\&= 
+		\tau(\funrestrictionto{f_{\ordsucc{\alpha}}}{\alpha}) \\&= 
+		\tau(\Setabs{\tuple{\beta, f_{\ordsucc{\alpha}}(\beta)}}{\beta \in \alpha}) \\&= 
+		\tau(\Setabs{\tuple{\beta, f_{\alpha}(\beta)}}{\beta \in \alpha})\\&=
+		\tau(\funrestrictionto{\sigma}{\alpha})
+	\end{align*}
+noting that $f_{\alpha}(\beta) = f_{\ordsucc{\alpha}}(\beta)$ for all $\beta < \alpha$, as in \olref{transrecursionfun}. 
 \end{proof}
-
-Note that these results are \emph{schemas}. Crucially, we cannot
+\noindent 
+Note that \olref{transrecursionschema} is a \emph{schema}. Crucially, we cannot
 expect $\sigma$ to define a function, i.e., a certain kind of
 \emph{set}, since then $\dom{\sigma}$ would be the set of all
 ordinals, contradicting the Burali-Forti Paradox
@@ -92,14 +86,13 @@ immediately obvious; but it will become apparent with a last, simple,
 version of transfinite recursion.
 
 \begin{thm}[Simple Recursion]\ollabel{simplerecursionschema} 
-For any terms $\tau_1(x)$ and $\tau_2(x)$ and any set $A$, we can
-explicitly define a term $\sigma(x)$ such that:\footnote{The terms may
-have parameters.}
+For any terms $\tau(x)$ and $\theta(x)$ and any set $A$, we can
+explicitly define a term $\sigma(x)$ such that:
 \begin{align*}
 	\sigma(\emptyset) &= A\\
-	\sigma(\ordsucc{\alpha}) &= \tau_1(\sigma(\alpha)) &&
+	\sigma(\ordsucc{\alpha}) &= \tau(\sigma(\alpha)) &&
 		\text{for any ordinal }\alpha\\
-	\sigma(\alpha) &= \tau_2(\ran{\funrestrictionto{\sigma}{\alpha}})&&
+	\sigma(\alpha) &= \theta(\ran{\funrestrictionto{\sigma}{\alpha}})&&
 	\text{when }\alpha\text{ is a limit ordinal}
 \end{align*}
 \end{thm}
@@ -111,10 +104,10 @@ We start by defining a term, $\xi(x)$, as follows:
 \[
 	\xi(x) = 
 	\begin{cases}
-			A &\text{if $x$ is not a function whose domain is an ordinal;}\\
-			&\hspace{2em}\text{otherwise:}\\
-			\tau_1(x(\alpha)) & \text{if $\dom{x} = \ordsucc{\alpha}$}\\
-			\tau_2(\ran{x}) & \text{if $\dom{x}$ is a limit ordinal}
+			A &\text{if $x$ is not a function whose}\\
+			&\hspace{1em}\text{domain is an ordinal; otherwise:}\\
+			\tau(x(\alpha)) & \text{if $\dom{x} = \ordsucc{\alpha}$}\\
+			\theta(\ran{x}) & \text{if $\dom{x}$ is a limit ordinal}
 	\end{cases}
 \]
 By \olref{transrecursionschema}, there is a term $\sigma(x)$ such that
@@ -126,13 +119,12 @@ properties, by simple transfinite induction
 
 First, $\sigma(\emptyset) = \xi(\emptyset) = A$. 
 
-Next, $\sigma(\ordsucc{\alpha}) = \xi(\funrestrictionto{\sigma}{\ordsucc{\alpha}}) = \tau_1(\funrestrictionto{\sigma}{\ordsucc{\alpha}}(\alpha)) = \tau_1(\sigma(\alpha))$.
+Next, $\sigma(\ordsucc{\alpha}) = \xi(\funrestrictionto{\sigma}{\ordsucc{\alpha}}) = \tau(\funrestrictionto{\sigma}{\ordsucc{\alpha}}(\alpha)) = \tau(\sigma(\alpha))$.
 
-Finally, if $\alpha$ is a limit ordinal, $\sigma(\alpha) = \xi(\funrestrictionto{\sigma}{\alpha}) = \tau_2(\ran{\funrestrictionto{\sigma}{\alpha}})$. % = \tau_2(\Setabs{\sigma(\gamma)}{\gamma\in \alpha})$.
+Last, $\sigma(\alpha) = \xi(\funrestrictionto{\sigma}{\alpha}) = \theta(\ran{\funrestrictionto{\sigma}{\alpha}})$, when $\alpha$ is a limit.
 \end{proof}
-
+\noindent
 Now, to vindicate \olref[valpha]{defValphas}, just take $A
-= \emptyset$ and $\tau_1(x) = \Pow{x}$ and $\tau_2(x) = \bigcup x$. So
-we have vindicated the definition of the $V_\alpha$s!{}
+= \emptyset$ and $\tau(x) = \Pow{x}$ and $\theta(x) = \bigcup x$. At long last, this vindicates the definition of the $V_\alpha$s!{}
 
 \end{document}

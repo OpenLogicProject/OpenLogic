@@ -7,27 +7,33 @@
 
 We start with a principle to replace Na\"{i}ve Comprehension:
 
-\begin{axiom}[Scheme of Separation] For every formula
-$\phi(x)$,\footnote{Which may have parameters; for an explanation of
-what this means, see the discussion immediately after
-\olref[sfr][infinite][induction]{natinductionschema}.} this is an
+\begin{axiom}[Scheme of Separation] For every formula $\phi(x)$, this is an
 axiom: for any $A$, the set $\Setabs{x \in A}{\phi(x)}$ exists.
 \end{axiom}
 
 Note that this is not a single axiom. It is a \emph{scheme} of axioms.
 There are \emph{infinitely many} Separation axioms; one for every
-formula. The scheme can equally well be (and normally is) written down
-as follows:
+formula $\phi(x)$. The scheme can equally well be (and normally is)
+written down as follows:
 
-\ \\\emph{For any formula $\phi(x)$ which does not contain
-``$S$'',\footnote{But which may contain parameters} this is an axiom:
-\\$\forall A \exists S \forall x(x \in S \liff (\phi(x) \land x \in
-A))$.}
+\begin{defish}
+For any formula $\phi(x)$ which does not contain ``$S$'', this is an
+axiom:
+\[
+	\forall A \exists S \forall x(x \in S \liff (\phi(x) \land x \in A)).
+\]
+\end{defish}
 
-\ \\Separation is immediately justified by our cumulative-iterative
+In keeping with the convention noted at the start of
+\olref[sth][][]{part}, the formulas~$\phi$ in the Separation axioms
+may have parameters.\footnote{For an explanation of what this means,
+see the discussion immediately after
+\olref[sfr][infinite][induction]{natinductionschema}.}
+
+Separation is immediately justified by our cumulative-iterative
 conception of sets we have been telling. To see why, let $A$ be a set.
-So $A$ is formed by some stage, $S$ (by \stageshier). Since $A$ was
-formed at stage $S$, all of $A$'s members were formed before stage $S$
+So $A$ is formed by some stage~$S$ (by \stageshier). Since $A$ was
+formed at stage~$S$, all of $A$'s members were formed before stage $S$
 (by \stagesacc). Now in particular, consider all the sets which are
 members of $A$ and which also satisfy $\phi$; clearly all of these
 sets, too, were formed before stage~$S$. So they are formed into a set

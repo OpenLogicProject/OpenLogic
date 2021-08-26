@@ -6,16 +6,15 @@
 \olsection{Basic Properties of Stages}
 
 To bring out the foundational importance of the definition of the
-$V_\alpha$s, we will start with a few results about them.
-
+$V_\alpha$s, we will present a few basic results about them. We start with a definition:\footnote{There's no standard terminology for ``potent''; this is the name used by \citet{ButtonLT1}.}
+\begin{defn}
+	The set $A$ is \emph{potent} iff $\forall x((\exists y \in A)x \subseteq y \lif x \in A$. 
+\end{defn}
 \begin{lem}\ollabel{Valphabasicprops}
 For each ordinal $\alpha$:
 \begin{enumerate}
-	\item\ollabel{Valphatrans} Each $V_\alpha$ is a transitive set.
-	\item\ollabel{Valphasublative} Each $V_\alpha$ is a
-	\emph{sublative} set,\footnote{There's no standard terminology for
-	``sublativity''. But this seems good.} i.e., $\forall A(\exists
-	B(A \subseteq B \in V_\alpha) \lif A \in V_\alpha)$.
+	\item\ollabel{Valphatrans} Each $V_\alpha$ is transitive.
+	\item\ollabel{Valphapotent} Each $V_\alpha$ is potent.
 	\item\ollabel{Valphacum} If $\gamma \in \alpha$, then $V_\gamma
 	\in V_\alpha$ (and hence also $V_\gamma \subseteq V_\alpha$ by
 	\olref{Valphatrans})
@@ -32,7 +31,7 @@ The case of $\alpha = \emptyset$ is trivial.
 Suppose $\alpha = \ordsucc{\beta}$. To show \olref{Valphacum}, if
 $\gamma \in \alpha$ then $V_\gamma \subseteq V_\beta$ by hypothesis,
 so $V_\gamma \in \Pow{V_\beta} = V_\alpha$. To show
-\olref{Valphasublative}, suppose $A \subseteq B \in V_\alpha$ i.e., $A
+\olref{Valphapotent}, suppose $A \subseteq B \in V_\alpha$ i.e., $A
 \subseteq B \subseteq V_\beta$; then $A \subseteq V_\beta$ so $A \in
 V_\alpha$. To show \olref{Valphatrans}, note that if $x \in A \in
 V_\alpha$ we have $A \subseteq V_\beta$, so $x \in V_\beta$, so $x
@@ -43,9 +42,9 @@ Suppose $\alpha$ is  a limit ordinal. To show \olref{Valphacum}, if
 $\gamma \in \alpha$ then $\gamma \in \ordsucc{\gamma} \in \alpha$, so
 that $V_\gamma \in V_{\ordsucc{\gamma}}$ by assumption, hence
 $V_\gamma \in \bigcup_{\beta \in \alpha} V_\beta = V_\alpha$. To show
-\olref{Valphatrans} and \olref{Valphasublative}, just observe that a
-union of transitive (respectively, sublative) sets is transitive
-(respectively, sublative). 
+\olref{Valphatrans} and \olref{Valphapotent}, just observe that a
+union of transitive (respectively, potent) sets is transitive
+(respectively, potent). 
 \end{proof}
 
 \begin{lem}\ollabel{Valphanotref}
@@ -76,7 +75,7 @@ For any ordinals $\alpha, \beta$: $\alpha \in \beta$ iff $V_\alpha \in V_\beta$
 \begin{proof}
 \Olref{Valphabasicprops} gives one direction. Conversely, suppose $V_\alpha \in V_\beta$. Then $\alpha \neq \beta$ by \olref{Valphanotref}; and $\beta \notin \alpha$, for otherwise we would have $V_\beta \in V_\alpha$ and hence $V_\beta \in V_\beta$ by \olref{Valphabasicprops} (twice), contradicting \olref{Valphanotref}. So $\alpha \in \beta$ by Trichotomy.
 \end{proof}
-
+\noindent
 All of this allows us to think of each $V_\alpha$ as the $\alpha$th
 stage of the hierarchy. Here is why.
 

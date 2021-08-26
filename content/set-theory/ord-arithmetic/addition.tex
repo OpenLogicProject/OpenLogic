@@ -10,7 +10,7 @@ Suppose we want to add $\alpha$ and $\beta$. We can simply put a
 take \emph{copies}, since we know from
 \olref[ordinals][basic]{ordinalsaresubsets} that either $\alpha
 \subseteq \beta$ or $\beta \subseteq \alpha$.) The intuitive effect of
-this is to run through an $\alpha$-sequence of stages, \emph{and then}
+this is to run through an $\alpha$-sequence of steps, \emph{and then}
 to run through a $\beta$-sequence. The resulting sequence will be
 well-ordered; so by
 \olref[ordinals][ordtype]{thmOrdinalRepresentation} it is isomorphic
@@ -45,11 +45,10 @@ followed by a copy of $\beta$. To achieve that, we say:
 
 \begin{defn}\ollabel{defordplus}
 For any ordinals $\alpha$, $\beta$, their sum is $\alpha \ordplus
-\beta = \ordtype{\alpha \disjointsum \beta, \rlexless}$.\footnote{This
-is a slight abuse of notation; strictly we should write
-``$\Setabs{\tuple{x,y}\in \alpha\disjointsum\beta}{x \rlexless y}$''
-in place of ``$\rlexless$''.}
+\beta = \ordtype{\alpha \disjointsum \beta, \rlexless}$.
 \end{defn}
+\noindent
+Note that we slgihtly abused notation here; strictly we should write ``$\Setabs{\tuple{x,y}\in \alpha\disjointsum\beta}{x \rlexless y}$'' in place of ``$\rlexless$''. For brevity, though, we will continue to abuse notation in this way in what follows. 
 
 The following result, together with
 \olref[ordinals][ordtype]{thmOrdinalRepresentation}, confirms that our
@@ -63,14 +62,10 @@ any ordinals $\alpha$ and $\beta$.
 \begin{proof}
 Obviously $\rlexless$ is connected on $\alpha \disjointsum \beta$. To
 show it is well-founded, fix a non-empty $X \subseteq \alpha
-\disjointsum \beta$, and let 
-\[
-	X_0 = \Setabs{\tuple{a, b} \in X}{(\forall \tuple{x, y} \in X)b \leq y}.
-\]
-Now choose the element of $X_0$ with smallest first coordinate. 
+\disjointsum \beta$. Let $Y$ be the subset of $X$ whose second coordinate is as small as possible, i.e.\ $Y = \Setabs{\tuple{\gamma, i} \in X}{(\forall \tuple{\delta, j} \in X)i \leq j}$. Now choose the element of $Y$ with smallest first coordinate. 
 \end{proof}
-
-So we have a lovely, explicit definition of ordinal addition. Here is
+\noindent 
+So we have a nice, explicit definition of ordinal addition. Here is
 an unsurprising fact (recall that  $1 = \{0\}$, by
 \olref[z][infinity-again]{defnomega}):
 \begin{prop}
@@ -84,7 +79,7 @@ Consider the isomorphism $f$ from $\ordsucc{\alpha} = \alpha \cup
 \tuple{\gamma, 0}$ for $\gamma \in \alpha$, and $f(\alpha) = \tuple{0,
 1}$.
 \end{proof}
-
+\noindent
 Moreover, it is easy to show that addition obeys certain recursive
 conditions:
 
@@ -101,9 +96,8 @@ For any ordinals $\alpha, \beta$, we have:
 We check case-by-case; first:
 \begin{align*}
 	\alpha \ordplus  0 
-	& = \ordtype{(\alpha \times \{0\}) \disjointsum (0 \times \{1\}), \rlexless} \\
-	&= \ordtype{(\alpha \times \{0\})\times\{0\}, \rlexless}\\
-%			&= \ordtype{ \alpha, <} \\
+	& = \ordtype{(\alpha \times \{0\}) \cup (0 \times \{1\}), \rlexless} \\
+	&= \ordtype{(\alpha \times \{0\}) \cup \{0\}, \rlexless}\\
 	&= \alpha\\
 	\alpha \ordplus (\beta \ordplus  1) 
 	%&= \ordtype{(\alpha\times \{0\}) \cup (\ordtype{\beta \ordplus  1}\times \{1\}), \rlexless} \\
@@ -162,7 +156,7 @@ proof is by Simple Transfinite Induction on $\gamma$, using
 \]
 When $\gamma = \delta\ordplus 1$, suppose for induction that $(\alpha
 \ordplus  \beta) \ordplus  \delta = \alpha \ordplus  (\beta \ordplus
-\delta)$; now:
+\delta)$; now using \olref{ordadditionrecursion} three times:
 \begin{align*}
 	(\alpha \ordplus  \beta) \ordplus  (\delta \ordplus  1) & = ((\alpha \ordplus  \beta) \ordplus  \delta)\ordplus 1\\
 	& = (\alpha \ordplus  (\beta \ordplus  \delta)) \ordplus  1\\
@@ -180,15 +174,12 @@ $\delta \in \gamma$ then $(\alpha \ordplus  \beta) \ordplus  \delta =
 \end{align*}
 \end{proof}
 
-In these ways, ordinal addition should be very familiar. 
-
 \begin{prob}
 Prove the remainder of
 \olref[sth][ord-arithmetic][add]{ordinaladditionisnice}.
 \end{prob}
 
-But, there is a crucial way in which ordinal addition is \emph{not}
-like addition on the natural numbers.
+In these ways, ordinal addition should be very familiar. But, there is a crucial way in which ordinal addition is \emph{not} like addition on the natural numbers.
 
 \begin{prop}\ollabel{ordsumnotcommute}
 Ordinal addition is {not} commutative; $1 \ordplus  \omega = \omega <
@@ -200,7 +191,7 @@ Note that $1 \ordplus  \omega = \supstrict_{n < \omega} (1 \ordplus n)
 = \omega \in \omega \cup \{\omega\} = \ordsucc{\omega} = \omega
 \ordplus  1$.
 \end{proof}
-
+\noindent 
 Whilst this may initially come as a surprise, \emph{it shouldn't}. On
 the one hand, when you consider $1 \ordplus  \omega$, you are thinking
 about the order type you get by putting an extra element \emph{before}
