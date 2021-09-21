@@ -39,7 +39,7 @@ is !!a{injection}~$f\colon A \to B$ but no !!{bijection}~$g\colon A
 \to B$, i.e., $\cardle{A}{B}$ and $\cardneq{A}{B}$.
 \end{defn}
 
-It is clear that this is relation is anti-reflexive
+It is clear that this relation is irreflexive
 and transitive. (This is left as an exercise.) Using this notation, we
 can say that a set $A$ is !!{enumerable} iff $\cardle{A}{\Nat}$, and
 that $A$ is !!{nonenumerable} iff $\cardless{\Nat}{A}$. This allows us
@@ -68,11 +68,11 @@ present, otherwise a faster proof matching \olref[nen-alt]{sec}.
 \end{editorial}
 
 \oliflabeldef{sfr:siz:nen:sec}{% 
-  We show that there cannot be !!a{surjective} function~$g\colon A \to
+  We will now show that there cannot be !!a{surjective} function~$g\colon A \to
   \Pow{A}$, let alone a !!{bijective} one, and hence that
   $\cardneq{A}{\Pow{A}}$. For suppose that $g\colon A \to \Pow{A}$.
   Since $g$ is total, every $x \in A$ is mapped to a subset $g(x)
-  \subseteq A$. We show that $g$ cannot be surjective. To do this, we
+  \subseteq A$. We can show that $g$ cannot be surjective. To do this, we
   define a subset~$\overline{A} \subseteq A$ which by definition cannot be in the
   range of~$g$. Let
   \[
@@ -80,7 +80,7 @@ present, otherwise a faster proof matching \olref[nen-alt]{sec}.
   \]
   Since $g(x)$ is defined for all $x \in A$, $\overline{A}$ is clearly
   a well-defined subset of~$A$.  But, it cannot be in the range
-  of~$g$. Let $x \in A$ be arbitrary, we show that $\overline{A} \neq
+  of~$g$. Let $x \in A$ be arbitrary, we will show that $\overline{A} \neq
   g(x)$.  If $x \in g(x)$, then it does not satisfy $x \notin g(x)$,
   and so by the definition of~$\overline{A}$, we have $x \notin
   \overline{A}$.  If $x \in \overline{A}$, it must satisfy the
