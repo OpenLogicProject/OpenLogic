@@ -45,7 +45,7 @@ and that the claim holds for $t_1$, \dots, $t_k$. Then
   \Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] =\\
   & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1])
 \intertext{For $j = 1$, \dots,~$k$, the !!{variable}s of~$t_j$ are
-    among $x_1$, \dots,~$x_n$. So by induction hypothesis,
+    among $x_1$, \dots,~$x_n$. By induction hypothesis,
     $\Value{t_j}{M}[s_1] = \Value{t_j}{M}[s_2]$. So,}
 \Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] =\\
   & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]) =\\
@@ -157,7 +157,7 @@ hypothesis applies to~$!B$.
     \indcase!{!A}{\lexists[x][!B]}{}}{%
     \indcase{!A}{\lexists[x][!B]}{if $\Sat{M}{\indfrm}[s_1]$, there is
       an $m \in \Domain{M}$ so that $\Sat{M}{!B}[\Subst{s_1}{m}{x}]$.
-      Let let $s_1' = \Subst{s_1}{m}{x}$ and $s_2' =
+      Let $s_1' = \Subst{s_1}{m}{x}$ and $s_2' =
       \Subst{s_2}{m}{x}$. The free variables of~$!B$ are among $x_1$,
       \dots, $x_n$, and $x$. $s_1'(x_i) = s_2'(x_i)$, since $s_1'$ and
       $s_2'$ are $x$-variants of $s_1$ and~$s_2$, respectively, and by
@@ -166,7 +166,7 @@ hypothesis applies to~$!B$.
       hypothesis applies to $!B$ and $s_1'$, $s_2'$, so
       $\Sat{M}{!B}[s_2']$. Hence, since $s_2' = \Subst{s_2}{m}{x}$,
       there is an $m \in \Domain{M}$ such that
-      $\Sat{M}{!B}{\Subst{s_2}{m}{x}}$, and so
+      $\Sat{M}{!B}[\Subst{s_2}{m}{x}]$, and so
       $\Sat{M}{\indfrm}[s_2]$.}}}
 
 \tagitem{defAll}{}{%
