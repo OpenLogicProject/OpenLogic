@@ -16,7 +16,7 @@ guarantee the legitimacy of (several versions of) transfinite
 recursion.\footnote{A reminder: all formulas and terms can have parameters (unless explicitly stated otherwise).}
 
 \begin{defn}
-	Let $\tau(x)$ be a term; let $f$ be a function; let $\gamma$ be an ordinal. We say that $f$ is an \emph{$\alpha$-approximation} for $\tau$ iff both $\dom{f} = \alpha$ and $(\forall \beta \in \alpha)f(\beta) = \tau(\funrestrictionto{f}{\beta})$.
+	Let $\tau(x)$ be a term; let $f$ be a function; let $\alpha$ be an ordinal. We say that $f$ is an \emph{$\alpha$-approximation} for $\tau$ iff both $\dom{f} = \alpha$ and $(\forall \beta \in \alpha)f(\beta) = \tau(\funrestrictionto{f}{\beta})$.
 \end{defn}
 
 \begin{lem}[Bounded Recursion]\ollabel{transrecursionfun}
@@ -28,7 +28,7 @@ $\gamma$-approximation.
 
 We first establish uniqueness. Let $g$ and $h$ (respectively) be $\gamma$- and $\delta$-approximations. A transfinite induction on their arguments shows that
 $g(\beta) = h(\beta)$ for any $\beta \in \dom{g} \cap \dom{h} =
-\gamma \cap \delta \min(\gamma, \delta)$. So our approximations are unique (if they exist), and agree on all values.
+\gamma \cap \delta = \min(\gamma, \delta)$. So our approximations are unique (if they exist), and agree on all values.
 
 To establish existence, we now use a simple transfinite induction
 (\olref[ordinals][opps]{simpletransrecursion}) on ordinals
