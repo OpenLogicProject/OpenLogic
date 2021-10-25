@@ -267,6 +267,10 @@
 \captionnamefont{\footnotesize\itshape\color{OLPcolor}}
 \captiontitlefont{\footnotesize}
 
+\setlength{\cftbeforepartskip}{2em plus 0.5em minus 0.5em}
+\setlength{\cftbeforechapterskip}{1.0em plus 0.5em minus 0.25em}
+
+
 % Commands to set author, title, subtitle, bookversion
 
 \RequirePackage{xparse}
