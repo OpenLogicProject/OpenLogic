@@ -99,10 +99,11 @@
     \usepackage[osf]{Baskervaldx}
     % load amssymb before newtxmath to avoid problem with \Bbbk
     \usepackage{amssymb}
+    % Nice math calligraphic font 
+    \usepackage[cal=boondoxo]{mathalpha}
     % Math font to match
     \usepackage[bigdelims,baskervaldx]{newtxmath}
-    % Nice math calligraphic font 
-    \usepackage[cal=boondoxo]{mathalfa}
+    % use Bodono greek for math
     \usepackage{textgreek}
   }
 
