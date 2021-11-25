@@ -13,34 +13,34 @@
 \subsection{Rules for $\lforall$}
 
 \begin{defish}
-\AxiomC{$!A(a)$}
+\AxiomC{$!\Subst{!A}{a}{x}$}
 \RightLabel{\Intro{\lforall}}
-\UnaryInfC{$\lforall[x][\Atom{!A}{x}]$}
+\UnaryInfC{$\lforall[x][!A]$}
 \DisplayProof
 \hfill
-\AxiomC{$\lforall[x][\Atom{!A}{x}]$}
+\AxiomC{$\lforall[x][!A]$}
 \RightLabel{\Elim{\lforall}}
-\UnaryInfC{$!A(t)$}
+\UnaryInfC{$!\Subst{!A}{t}{x}$}
 \DisplayProof
 \end{defish}
 
 In the rules for~$\lforall$, $t$ is a closed term (a term that does
 not contain any variables), and $a$~is a !!{constant} which does not
-occur in the conclusion~$\lforall[x][!A(x)]$, or in any assumption
+occur in the conclusion~$\lforall[x][!A]$, or in any assumption
 which is !!{undischarged} in the !!{derivation} ending with the
-premise~$!A(a)$. We call $a$ the \emph{eigenvariable} of the
+premise~$!\Subst{!A}{a}{x}$. We call $a$ the \emph{eigenvariable} of the
 \Intro{\lforall} inference.
 
 \subsection{Rules for $\lexists$}
 
 \begin{defish}
-\AxiomC{$\Atom{!A}{t}$}
+\AxiomC{$\Subst{!A}{t}{x}$}
 \RightLabel{\Intro{\lexists}}
-\UnaryInfC{$\lexists[x][\Atom{!A}{x}]$}
+\UnaryInfC{$\lexists[x][!A]$}
 \DisplayProof
 \hfill
-\AxiomC{$\lexists[x][\Atom{!A}{x}]$}
-\AxiomC{[$\Atom{!A}{a}$]$^n$}
+\AxiomC{$\lexists[x][!A]$}
+\AxiomC{[$\Subst{!A}{a}{x}$]$^n$}
 \DeduceC{$!C$}
 \DischargeRule{\Elim{\lexists}}{n}
 \BinaryInfC{$!C$}
@@ -48,9 +48,9 @@ premise~$!A(a)$. We call $a$ the \emph{eigenvariable} of the
 \end{defish}
 
 Again, $t$ is a closed term, and $a$ is a constant which does not
-occur in the premise $\lexists[x][!A(x)]$, in the conclusion~$!C$, or
+occur in the premise $\lexists[x][!A]$, in the conclusion~$!C$, or
 any assumption which is !!{undischarged} in the !!{derivation}s ending
-with the two premises (other than the assumptions $!A(a)$).  We call
+with the two premises (other than the assumptions $!\Subst{!A}{a}{x}$).  We call
 $a$ the \emph{eigenvariable} of the \Elim{\lexists} inference.
 
 The condition that an eigenvariable neither occur in the premises nor in
@@ -72,7 +72,7 @@ the system is sound, i.e., only !!{derive}s !!{sentence}s from
 !!{undischarged} assumptions from which they follow. Without this
 condition, the following would be allowed:
 \begin{prooftree}
-  \AxiomC{$\lexists[x][!A(x)]$}
+  \AxiomC{$\lexists[x][!A]$}
   \AxiomC{$\Discharge{!A(a)}{1}$}
   \RightLabel{*\Intro{\lforall}}
   \UnaryInfC{$\lforall[x][!A(x)]$}
@@ -80,6 +80,17 @@ condition, the following would be allowed:
   \BinaryInfC{$\lforall[x][!A(x)]$}
 \end{prooftree}
 However, $\lexists[x][!A(x)] \Entails/ \lforall[x][!A(x)]$.
+
+In the above derivation we have used $!A(a)$ as a short hand for $\Subst{!A}
+{a}{x}$. This is possible since the notation $\lforall[x][!A(x)]$ in the
+conclusion of the rule indicates that the variable used in the substitution
+is $x$.
+\end{explain}
+
+\begin{explain}
+As the elimination rules for quantifiers only allow substituting closed
+terms for variables, it follows that any formula that can be derived from a
+set of sentences is itself a sentence.
 \end{explain}
 
 
