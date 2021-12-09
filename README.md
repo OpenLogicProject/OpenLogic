@@ -1,7 +1,7 @@
 The Open Logic Project
 ======================
 
-[![Build Status](https://travis-ci.org/OpenLogicProject/OpenLogic.svg?branch=master)](https://travis-ci.org/OpenLogicProject/OpenLogic)
+[![Build Status](https://travis-ci.com/OpenLogicProject/OpenLogic.svg?branch=master)](https://travis-ci.com/OpenLogicProject/OpenLogic)
 
 The Open Logic Project is an open source, open access collection of materials on advanced logic, aimed mainly at philosophers, but also suitable for computer scientists and mathematicians. The text can be rearranged and remixed. You can produce custom textbooks from it, so they take the aim of the course and the preferences of the instructor into account. It is written in LaTeX.
 
