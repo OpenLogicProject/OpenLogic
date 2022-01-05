@@ -148,29 +148,31 @@ to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$.
     \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
                         semithick]
       \tikzstyle{every state}=[fill=none,draw=black,text=black]
-    
-      \node[initial,state] (0)              {$q_6$};
-      \node[state]         (1) [right of=0] {$q_7$};
-      \node[state]         (2) [right of=1] {$q_8$};
-      \node[state]         (3) [below of=2] {$q_9$};
-      \node[state]         (4) [left of=3]  {$q_{10}$};
-      \node[state]         (5) [left of=4]  {$q_{11}$};
-      \node[state]         (6) [below of=5] {$q_{12}$};
-      \node[state]         (7) [right of=6] {$q_{13}$};
+
+      \node[initial,state] (6)              {$q_6$};
+      \node[state]         (7) [right of=6] {$q_7$};
+      \node[state]         (8) [right of=7] {$q_8$};
+      \node[state]         (9) [below of=8] {$q_9$};
+      \node[state]         (10) [left of=9] {$q_{10}$};
+      \node[state]         (11) [left of=10]  {$q_{11}$};
+      \node[state]         (12) [below of=11]  {$q_{12}$};
+      \node[state]         (13) [right of=12] {$q_{13}$};
+      \node[state]         (14) [right of=13] {$q_{14}$};
       \path 
-      (0) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (0)
-      (0) edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (1)
-      (1) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (1)
-          edge node {\TMtrans{\TMblank}{\TMendtape}{\TMleft}} (2)
-        (2) edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (2)
-            edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (3)
-        (3) edge node[above] {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (4)
-        (4) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (4)
-        edge        node[above] {\TMtrans{\TMendtape}{\TMendtape}{\TMright}} (5)
-        (5) edge              node[left] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (6)
-        (6) edge [loop left] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (6)
-            edge              node[sloped] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (4)
-        (6) edge node {\TMtrans{\TMendtape}{\TMblank}{\TMstay}} (7);
+      (6)  edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
+      (7)  edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
+           edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
+      (8)  edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
+           edge node {\TMtrans{\TMblank}{\TMendtape}{\TMleft}} (9)
+      (9)  edge [loop right] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (9)
+           edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (10)
+      (10) edge node[above] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
+      (11) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (11)
+           edge node[left] {$\genfrac{}{}{0pt}{0}{\TMtrans{\TMendtape}{\TMendtape}{\TMright}}{\TMtrans{\TMstroke}{\TMstroke}{\TMright}}$} (12)
+      (12) edge node[] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (13)
+      (13) edge [loop below] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (13)
+           edge node[sloped] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
+      (13) edge node {\TMtrans{\TMendtape}{\TMblank}{\TMstay}} (14);
         \end{tikzpicture}
     \]
     \caption{Moving a block of $\TMstroke$'s to the left}
