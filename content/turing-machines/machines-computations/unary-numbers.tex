@@ -142,43 +142,58 @@ a~$\TMendtape$ symbol, which gets deleted at the end. We've started
 numbering the states at~$q_6$, so they can be added to the doubler
 machine. All you'll need is an additional instruction $\delta(q_5,
 \TMblank) = \tuple{q_6,\TMblank,\TMstay}$, i.e., an arrow from~$q_5$
-to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$.
+to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$. (There is
+one subtle problem: the resulting machine does not work for
+input~$x=0$. We'll leave this as an exercise.)
 \begin{figure}
-    \[
-    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
-                        semithick]
-      \tikzstyle{every state}=[fill=none,draw=black,text=black]
-
-      \node[initial,state] (6)              {$q_6$};
-      \node[state]         (7) [right of=6] {$q_7$};
-      \node[state]         (8) [right of=7] {$q_8$};
-      \node[state]         (9) [below of=8] {$q_9$};
-      \node[state]         (10) [left of=9] {$q_{10}$};
-      \node[state]         (11) [left of=10]  {$q_{11}$};
-      \node[state]         (12) [below of=11]  {$q_{12}$};
-      \node[state]         (13) [right of=12] {$q_{13}$};
-      \node[state]         (14) [right of=13] {$q_{14}$};
-      \path 
-      (6)  edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
-      (7)  edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
-           edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
-      (8)  edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
-           edge node {\TMtrans{\TMblank}{\TMendtape}{\TMleft}} (9)
-      (9)  edge [loop right] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (9)
-           edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (10)
-      (10) edge node[above] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
-      (11) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (11)
-           edge node[left] {$\genfrac{}{}{0pt}{0}{\TMtrans{\TMendtape}{\TMendtape}{\TMright}}{\TMtrans{\TMstroke}{\TMstroke}{\TMright}}$} (12)
-      (12) edge node[] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (13)
-      (13) edge [loop below] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (13)
-           edge node[sloped] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
-      (13) edge node {\TMtrans{\TMendtape}{\TMblank}{\TMstay}} (14);
-        \end{tikzpicture}
-    \]
-    \caption{Moving a block of $\TMstroke$'s to the left}
-    \ollabel{fig:mover}
-    \end{figure}
+  \[
+  \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
+                      semithick]
+    \tikzstyle{every state}=[fill=none,draw=black,text=black]
+    \node[initial,state] (6)              {$q_6$};
+    \node[state]         (7) [right of=6] {$q_7$};
+    \node[state]         (8) [right of=7] {$q_8$};
+    \node[state]         (9) [below of=8] {$q_9$};
+    \node[state]         (10) [left of=9] {$q_{10}$};
+    \node[state]         (11) [left of=10]  {$q_{11}$};
+    \node[state]         (12) [below of=11]  {$q_{12}$};
+    \node[state]         (13) [right of=12] {$q_{13}$};
+    \node[state]         (14) [right of=13] {$q_{14}$};
+    \path
+    (6)  edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
+    (7)  edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (7)
+         edge node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
+    (8)  edge [loop above] node {\TMtrans{\TMstroke}{\TMstroke}{\TMright}} (8)
+         edge node {\TMtrans{\TMblank}{\TMendtape}{\TMleft}} (9)
+    (9)  edge [loop right] node {\TMtrans{\TMstroke}{\TMstroke}{\TMleft}} (9)
+         edge node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (10)
+    (10) edge node[above] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
+    (11) edge [loop above] node {\TMtrans{\TMblank}{\TMblank}{\TMleft}} (11)
+         edge node[left] {\begin{tabular}{@{}l@{}}
+          \TMtrans{\TMendtape}{\TMendtape}{\TMright}\\
+          \TMtrans{\TMstroke}{\TMstroke}{\TMright}
+         \end{tabular}} (12)
+    (12) edge node[] {\TMtrans{\TMblank}{\TMstroke}{\TMright}} (13)
+    (13) edge [loop below] node {\TMtrans{\TMblank}{\TMblank}{\TMright}} (13)
+         edge node[sloped] {\TMtrans{\TMstroke}{\TMblank}{\TMleft}} (11)
+    (13) edge node {\TMtrans{\TMendtape}{\TMblank}{\TMstay}} (14);
+  \end{tikzpicture}
+  \]
+  \caption{Moving a block of $\TMstroke$'s to the left}
+  \ollabel{fig:mover}
+\end{figure}
 \end{ex}
+
+\begin{prob}
+In \olref[tur][mac][una]{ex:mover} we described a machine consisting
+of a combination of the doubler machine from
+\olref[tur][mac][una]{fig:doubler-disc} and the mover machine from
+\olref[tur][mac][una]{fig:mover}. What happens if you start this
+combined machine on input~$x=0$, i.e., on an empty tape?  How would
+you fix the machine so that in this case the machine halts with
+output~$2x=0$? (You should be able to do this by adding one state and
+one transition.)
+\end{prob}
 
 \begin{prob}
 \emph{Subtraction:} Design a Turing machine that when given an input
