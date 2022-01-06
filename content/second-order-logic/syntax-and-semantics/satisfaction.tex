@@ -182,4 +182,29 @@ like \olref[fol][syn][sat]{defn:satisfaction} with the addition of:
   find $M \subseteq \Domain{M}$ but $M \neq \Domain{M}$ (e.g., $M = \emptyset$).
 \end{ex}
 
+\begin{ex}
+  The second-order !!{sentence}~$\lforall[X][\lforall[y][X(y)]]$ says
+  that every $1$-place relation, i.e., every property, holds of every
+  object. That is clearly never true, since in every~$\Struct{M}$, for
+  a variable assignment~$s$ with $s(X) = \emptyset$, and $s(y) = a \in
+  \Domain{M}$ we have $\Sat/{M}{X(y)}[s]$. This means that $!A \lif
+  \lforall[X][\lforall[y][X(y)]]$ is equivalent in second-order logic
+  to $\lnot !A$, that is: $\Sat{M}{!A \lif
+  \lforall[X][\lforall[y][X(y)]]}$ iff $\Sat{M}{\lnot !A}$. In other
+  words, in second-order logic we can define $\lnot$ using $\lforall$
+  and~$\lif$.
+\end{ex}
+
+\begin{prob}
+  Show that in second-order logic $\lforall$ and~$\lif$ can define the other
+  connectives:
+  \begin{enumerate}
+    \item Prove that in second-order logic $!A \land !B$ is equivalent
+    to $\lforall[X][(!A \lif (!B \lif \lforall[x][X(x)])\lif
+    \lforall[x][X(x)])]$.
+    \item Find a second-order formula using only $\lforall$ and $\lif$
+    equivalent to $!A \lor !B$.
+  \end{enumerate}
+\end{prob}
+
 \end{document}
