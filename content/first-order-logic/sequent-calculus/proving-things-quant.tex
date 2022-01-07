@@ -85,9 +85,26 @@ correct derivation.
 \begin{prob}
 Give !!{derivation}s of the following sequents:
 \begin{enumerate}
-\item $\lforall[x][(!A(x) \lif !B)] \Sequent (\lexists[y][!A(y)] \lif !B)$
-\item $\lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$
+\item $\Sequent (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) \lif
+\lforall[z][(!A(z) \land !B(z))]$.
+\item $\Sequent (\lexists[x][!A(x)] \lor \lexists[y][!B(y)]) \lif
+\lexists[z][(!A(z) \lor !B(z))]$.
+\item $\lforall[x][(!A(x) \lif !B)] \Sequent \lexists[y][!A(y)] \lif !B$.
+\item $\lforall[x][\lnot !A(x)] \Sequent \lnot\lexists[x][!A(x)]$.
+\item $\Sequent \lnot\lexists[x][!A(x)] \lif \lforall[x][\lnot !A(x)]$.
+\item $\Sequent \lnot\lexists[x][\lforall[y][((!A(x,y) \lif \lnot
+!A(y,y)) \land (\lnot !A(y,y) \lif !A(x,y)))]]$.
 \end{enumerate}
+\end{prob}
+
+\begin{prob}
+Give !!{derivation}s of the following sequents:
+\begin{enumerate}
+\item $\Sequent \lnot\lforall[x][!A(x)] \lif \lexists[x][\lnot!A(x)]$.
+\item $(\lforall[x][!A(x)] \lif !B) \Sequent \lexists[y][(!A(y) \lif !B)]$.
+\item $\Sequent \lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$.
+\end{enumerate}
+(These all require the $\RightR{\Contraction}$~rule.)
 \end{prob}
 
 \end{document}

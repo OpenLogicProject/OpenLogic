@@ -265,40 +265,46 @@ On the right side we use the same strategy, except we get $!A$ by~\FalseCl:
 \end{ex}
 
 \begin{prob}
-Give !!{derivation}s of the following:
+Give !!{derivation}s that show the following:
 \begin{enumerate}
-\item $\lnot(!A \lif !B) \lif (!A \land \lnot !B)$
-\item $(!A \lif !C) \lor (!B \lif !C)$ from the assumption $(!A \land
-  !B) \lif !C$
-\item \( \lnot \lnot !A \lif !A \)
-\item \( \lnot !A \lif \lnot !B \) from the assumption \( !B \lif !A \)
-\item \( \lnot !A \) from the assumption \( ( !A \lif \lnot !A ) \)
-\item \( !A \) from the assumptions \( !B \lif !A \) and \( \lnot !B \lif !A \)
+\item $!A \land (!B \land !C) \Proves (!A \land !B) \land !C$.
+\item $!A \lor (!B \lor !C) \Proves (!A \lor !B) \lor !C$.
+\item $!A \lif (!B \lif !C) \Proves !B \lif (!A \lif !C)$.
+\item $!A \Proves \lnot\lnot !A$.
 \end{enumerate}
 \end{prob}
 
 \begin{prob}
-Give !!{derivation}s to show the following statements:
+Give !!{derivation}s that show the following:
 \begin{enumerate}
-  \item $((!A \land !B) \land !C) \Proves (!B \lor \lnot !C)$
-  \item $(!A \lif !C), (!B \lif \lnot !C) \Proves \lnot (!A \land !B)$
-  \item $((!A \land !B) \land (!A \lif !C)) \Proves (!C \land !B)$
-  \item $((!A \land !C) \lor (!B \land \lnot !C) \Proves (!A \lor \lnot !C)$
-  \item $(!A \lif !B), (!B \lif \lnot !C) \Proves (!A \lif \lnot !C)$
-  \item $(!A \lif !B), (!B \lif \lnot !C) \Proves (!C \lif \lnot !A)$
-  \item $(!A \lif !C) \Proves \lnot (!A \land  \lnot !C)$
-  \item $(!A \land \lnot !C) \Proves \lnot (!A \lif !C)$
-  \item $(!A \lor !B), \lnot !B \Proves !A$
-  \item $\Proves (!A \lif ((!A \lif !B) \lif !A))$
-  \item $(!B \lor \lnot \lnot \lnot !A) \Proves (\lnot !A \lor \lnot \lnot !B)$
-  \item $(!A \land !B), (!B \lif !C), (!A \lif \lnot !C) \Proves !D$
-  \item $(!C \lif (!A \lif \lnot !B)) \Proves ((!A \land !B) \lif \lnot !C)$
-  \item $\Proves ((!B \lor !C) \lor (!A \lif !A))$
-  \item $(!A \lor (!B \lif !C)), \lnot !C \Proves (\lnot !A \lif \lnot !B)$
-  \item $(!A \lif !B), (\lnot !A \lif !B) \Proves !B$
-  \item $\Proves (((!A \lif !B) \lif !A) \lif !A)$
- \end{enumerate} 
+\item $(!A \lor !B) \lif !C \Proves !A \lif !C$.
+\item $(!A \lif !C) \land (!B \lif !C) \Proves (!A \lor !B) \lif !C$.
+\item $\Proves \lnot(!A \land \lnot !A)$.
+\item $!B \lif !A \Proves \lnot !A \lif \lnot !B$.
+\item $\Proves (!A \lif \lnot !A) \lif \lnot !A$.
+\item $\Proves \lnot(!A \lif !B) \lif \lnot !B$.
+\item $!A \lif !C \Proves \lnot (!A \land \lnot !C)$.
+\item $!A \land \lnot !C \Proves \lnot (!A \lif !C)$.
+\item $!A \lor !B, \lnot !B \Proves !A$.
+\item $\lnot !A \lor \lnot !B \Proves \lnot(!A \land !B)$.
+\item $\Proves (\lnot !A \land \lnot !B) \lif\lnot(!A \lor !B)$.
+\item $\Proves \lnot(!A \lor !B) \lif (\lnot !A \land \lnot !B)$.
+\end{enumerate}
 \end{prob}
 
+\begin{prob}
+Give !!{derivation}s that show the following:
+\begin{enumerate}
+\item $\lnot(!A \lif !B) \Proves !A$.
+\item $\lnot(!A \land !B) \Proves \lnot !A \lor \lnot !B$.
+\item $!A \lif !B \Proves \lnot !A \lor !B$.
+\item $\Proves \lnot \lnot !A \lif !A$.
+\item $!A \lif !B, \lnot !A \lif !B \Proves !B$.
+\item $(!A \land !B) \lif !C \Proves (!A \lif !C) \lor (!B \lif !C)$.
+\item $(!A \lif !B) \lif !A \Proves !A$.
+\item $\Proves (!A \lif !B) \lor (!B \lif !C)$.
+\end{enumerate}
+(These all require the $\FalseCl$~rule.)
+\end{prob}
 
 \end{document}
