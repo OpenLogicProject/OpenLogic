@@ -59,7 +59,7 @@ N$ defined as follows:
 Note the difference between $\times$ and $\cdot$: $\times$ is a symbol
 in the language of arithmetic. Of course, we've chosen it to remind us
 of multiplication, but $\times$ is not the multiplication operation
-but a two-place function symbol (officially, $\Obj f^2_1$. By
+but a two-place function symbol (officially, $\Obj f^2_1$). By
 contrast, $\cdot$ \emph{is} the ordinary multiplication function. When
 you see something like $n \cdot m$, we mean the product of the numbers
 $n$ and $m$; when you see something like $x \times y$ we are talking
@@ -137,19 +137,19 @@ schema.
 \begin{explain}
 Every instance of the induction schema is true in~$\Struct{N}$. This
 is easiest to see if the !!{formula}~$!A$ only has one free
-!!{variable}~$x$.  Then $!A(x)$ defines a subset~$X_A$ of~$\Nat$
-in~$\Struct{N}$.  $X_A$ is the set of all~$n \in \Nat$ such that
+!!{variable}~$x$.  Then $!A(x)$ defines a subset~$X_{!A}$ of~$\Nat$
+in~$\Struct{N}$.  $X_{!A}$ is the set of all~$n \in \Nat$ such that
 $\Sat{N}{!A(x)}[s]$ when $s(x) = n$.  The corresponding instance of
 the induction schema is
 \[
 ((!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif 
   \lforall[x][!A(x)]).
 \]
-If its antecedent is true in~$\Struct{N}$, then $0 \in X_A$ and,
-whenever $n \in X_A$, so is $n+1$.  Since $0 \in X_A$, we get $1 \in
-X_A$. With $1 \in X_A$ we get $2 \in X_A$. And so on. So for every $n
-\in \Nat$, $n \in X_A$. But this means that $\lforall[x][!A(x)]$ is
-satisfied in~$\Struct{N}$.
+If its antecedent is true in~$\Struct{N}$, then $0 \in X_{!A}$ and,
+whenever $n \in X_{!A}$, so is $n+1$.  Since $0 \in X_{!A}$, we get
+$1 \in X_{!A}$. With $1 \in X_{!A}$ we get $2 \in X_{!A}$. And so on.
+So for every $n \in \Nat$, $n \in X_{!A}$. But this means that
+$\lforall[x][!A(x)]$ is satisfied in~$\Struct{N}$.
 \end{explain}
 
 Both $\Th{Q}$ and $\Th{PA}$ are axiomatized theories.  The big
