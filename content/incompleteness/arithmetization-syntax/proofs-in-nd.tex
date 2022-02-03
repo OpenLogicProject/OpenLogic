@@ -276,9 +276,9 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
   !!{discharged} and !!{undischarged} occurrences of~$!A$.
 
   Consider a sequence $\delta_0$, \dots, $\delta_k$ where $\delta_0 =
-  d$, $\delta_k$ is the assumption $\Discharge{!A}{n}$ (for some~$n$),
-  and $\delta_{i}$ is an immediate sub-!!{derivation}
-  of~$\delta_{i+1}$. If such a sequence exists in which no $\delta_i$
+  \delta$, $\delta_k$ is the assumption $\Discharge{!A}{n}$
+  (for some~$n$), and $\delta_{i+1}$ is an immediate sub-!!{derivation}
+  of~$\delta_i$. If such a sequence exists in which no $\delta_i$
   ends in an inference with discharge label~$n$, then $!A$ is
   !!a{undischarged} assumption of~$\delta$.
 
@@ -295,7 +295,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     \bexists{s<\fn{SubtreeSeq}(d)}{(\fn{Subseq}(s, \fn{SubtreeSeq}(d))
       \land (s)_0 = d \land {}} \\
     \bexists{n<d}{((s)_{\len{s} \tsub 1} = \tuple{0, z, n} \land {}}\\
-      \bforall{i<(\len{s} \tsub 1)}{(\fn{Subderiv}((s)_i, (s)_{i+1})] \land {}}\\
+      \bforall{i<(\len{s} \tsub 1)}{(\fn{Subderiv}((s)_{i+1}, (s)_i)] \land {}}\\
       \fn{DischargeLabel}((s)_{i+1}) \neq n))).
   \end{multline*}
 \end{proof}
