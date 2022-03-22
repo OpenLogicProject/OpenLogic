@@ -38,7 +38,7 @@ understand $\Atom{f}{t_1, \ldots, t_n}$ as just $f$ by itself if $n =
 0$.
 \end{explain}
 
-\begin{defn}[Formula]
+\begin{defn}[Formulas]
 \ollabel{defn:formulas}
 The set of \emph{!!{formula}s}~$\Frm[L]$ of the language~$\Lang L$
 is defined inductively as follows:
@@ -181,5 +181,57 @@ string~$!C$, and a closing parenthesis, in this order. If this is the
 case, then we know that the first symbol of $!A$ is an opening
 parenthesis, $!A$ contains $!B$ as a substring (starting at the second
 symbol), that substring is followed by $\lor$, etc.
+
+As terms and !!{formula}s are built up from basic elements via inductive
+definitions, we can use the following induction principles to prove
+things about them.
+
+\begin{lem}[\emph{Principle of induction on terms}]
+    \ollabel{lem:trmind}
+    Let $\Lang L$ be a first-order language.
+    If some property~$P$ holds in all of the following cases,
+    then $P(t)$ for every $t \in \Trm[L]$.
+    %
+    \begin{enumerate}
+        \item $P(v)$ for every variable $v$,
+        %
+        \item $P(a)$ for every constant symbol $a$ of $\Lang L$,
+        %
+        \item If $t_1,\dotsc,t_n \in \Trm[L]$, $f$ is an $n$-place
+            function symbol of $\Lang L$, and $P(t_1),\dotsc,P(t_n)$,
+            then $P(f(t_1,\dotsc,t_n))$.
+    \end{enumerate}
+\end{lem}
+
+\begin{prob}
+    Prove \olref[fol][syn][frm]{lem:trmind}.
+\end{prob}
+
+\begin{lem}[\emph{Principle of induction on !!{formula}s}]
+    \ollabel{thm:frmind}
+    Let $\Lang L$ be a first-order language.
+    If some property~$P$ holds for all the atomic !!{formula}s
+    and is such that
+    %
+    \begin{enumerate}
+        \item $!A$ is an atomic formula.
+        \tagitem{prvNot}{it holds for $\lnot !A$ whenever it
+            holds for~$!A$;}{}
+        \tagitem{prvAnd}{it holds for $(!A \land !B)$
+            whenever it holds for $!A$ and~$!B$;}{}
+        \tagitem{prvOr}{it holds for $(!A \lor !B)$
+            whenever it holds for $!A$ and~$!B$;}{}
+        \tagitem{prvIf}{it holds for $(!A \lif !B)$
+            whenever it holds for $!A$ and~$!B$;}{}
+        \tagitem{prvIff}{it holds for $(!A \liff !B)$
+            whenever it holds for $!A$ and~$!B$;}{}
+        \tagitem{prvEx}{it holds for $\lexists[x]!A$
+            whenever it holds for $!A$;}{}
+        \tagitem{prvAll}{it holds for $\lforall[x]!A$
+            whenever it holds for $!A$;}{}
+  \end{enumerate}
+  %
+  then $P$ holds for all formulas $!A \in \Frm[L]$.
+\end{lem}
 
 \end{document}
