@@ -38,33 +38,34 @@ The set of \emph{!!{formula}s}~$\Frm$ is defined as follows:
 \item\ollabel{fmls-atom} $\Atom{\Obj P}{\Obj a}$ and $\Atom{\Obj
   P}{\Obj v_i}$ are !!{formula}s ($i \in \Nat$).
 
-\tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+\tagitem{prvNot}{\ollabel{fmls-not}If $!A$ is !!a{formula}, then $\lnot !A$ is
   !!{formula}.}{}
 
 \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
   !B)$ is !!a{formula}.}{}
 
-\tagitem{prvEx}{If $!A$ is !!a{formula} and $x$ is !!a{variable},
+\tagitem{prvEx}{\ollabel{fmls-ex}If $!A$ is !!a{formula} and $x$ is !!a{variable},
   then $\lexists[x][!A]$ is !!a{formula}.}{}
 
 \tagitem{limitClause}{\ollabel{fmls-limit}Nothing else is !!a{formula}.}{}
 \end{enumerate}
 \end{defn}
 
-\olref{fmls-atom} tell us that $\Atom{\Obj P}{\Obj a}$ and $\Atom{\Obj
-P}{\Obj v_i}$ are !!{formula}s, for any $i \in \Nat$. These are
-the so-called \emph{atomic} !!{formula}s. They give us something to
-start from.  The other clauses give us ways of forming new
-!!{formula}s from ones we have already formed. So for instance, we get
-that $\lnot \Atom{\Obj P}{\Obj v_2}$ is !!a{formula}, since
-$\Atom{\Obj P}{\Obj v_2}$ is already !!a{formula} by
-\olref{fmls-atom}, and then we get that $\lexists[\Obj v_2][\lnot
-\Atom{\Obj P}{\Obj v_2}]$ is another !!{formula}, and so on.
-\olref{fmls-limit} tells us that \emph{only} strings we can form in
-this way count as !!{formula}s. In particular, $\lexists[\Obj
-v_0][\Atom{\Obj P}{\Obj a}]$ and $\lexists[\Obj v_0][\lexists[\Obj
-v_0][\Atom{\Obj P}{\Obj a}]]$ \emph{do} count as !!{formula}s, and
-$(\lnot \Atom{\Obj P}{\Obj a})$ does not.
+\olref{fmls-atom} tells us that $\Atom{\Obj P}{\Obj a}$ and
+$\Atom{\Obj P}{\Obj v_i}$ are !!{formula}s, for any $i \in
+\Nat$. These are the so-called \emph{atomic} !!{formula}s. They give
+us something to start from.  The other clauses give us ways of forming
+new !!{formula}s from ones we have already formed. So for instance, by
+\olref{fmls-not}, we get that $\lnot \Atom{\Obj P}{\Obj v_2}$ is
+!!a{formula}, since $\Atom{\Obj P}{\Obj v_2}$ is already !!a{formula}
+by \olref{fmls-atom}. Then, by \olref{fmls-ex}, we get that
+$\lexists[\Obj v_2][\lnot \Atom{\Obj P}{\Obj v_2}]$ is another
+!!{formula}, and so on.  \olref{fmls-limit} tells us that \emph{only}
+strings we can form in this way count as !!{formula}s. In particular,
+$\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]$ and $\lexists[\Obj
+  v_0][\lexists[\Obj v_0][\Atom{\Obj P}{\Obj a}]]$ \emph{do} count as
+!!{formula}s, and $(\lnot \Atom{\Obj P}{\Obj a})$ does not, because of
+the extraneous outer parentheses.
 
 This way of defining !!{formula}s is called an \emph{inductive
 definition}, and it allows us to prove things about !!{formula}s using
@@ -72,7 +73,7 @@ a version of proof by induction called \emph{structural induction}.
 These are discussed in a general way in \olref[mth][ind][idf]{sec} and
 \olref[mth][ind][sti]{sec}, which you should review before delving
 into the proofs later on. Basically, the idea is that if you want to
-give a proof that something is true for all !!{formula}s you show
+give a proof that something is true for all !!{formula}s, you show
 first that it is true for the atomic !!{formula}s, and then that
 \emph{if} it's true for any !!{formula}~$!A$ (and~$!B$), it's
 \emph{also} true for $\lnot !A$, $(!A \land !B)$, and
