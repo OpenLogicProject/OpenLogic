@@ -68,10 +68,15 @@ constructed are uniquely determined in each case, the !!{main
 function.
 \end{explain}
 
-We call !!{formula}s by the following names depending on which symbol their
-!!{main operator} is:
+We call !!{formula}s by the names in \olref{tab:main-op} depending on
+which symbol their !!{main operator}
+is.\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+{Recall, however, that defined operators do not officially appear in
+!!{formula}s. They are just abbreviations, so officially they cannot
+be the main operator of a formula. In proofs about all !!{formula}s
+they therefore do not have to be treated separately.}
 
-\begin{figure}[!h]
+\begin{table}[!h]
 \centering
 \begin{tabular}{c | c | c}
 !!^{main operator} & Type of !!{formula} & Example\\
@@ -85,10 +90,12 @@ $\lnot$ & negation & $\lnot !A$ \\
 $\land$ & conjunction & $(!A \land !B$) \\
 $\lor$ & disjunction & $(!A \lor !B$) \\
 $\lif$ & !!{conditional} & $(!A \lif !B$) \\
-\iftag{prvIff,defIff}{}{$\liff$ & !!{biconditional} & $!A \liff !B$ \\}
+$\liff$ & !!{biconditional} & $(!A \liff !B)$ \\
 $\lforall[][]$ & universal (!!{formula})& $\lforall[x][!A]$ \\
 $\lexists[][]$ & existential (!!{formula})& $\lexists[x][!A]$
 \end{tabular}
-\end{figure}
+\caption{Main operator and names of !!{formula}s}
+\ollabel{tab:main-op}
+\end{table}
 
 \end{document}
