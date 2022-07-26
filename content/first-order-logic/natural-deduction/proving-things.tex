@@ -63,9 +63,9 @@ derivation.
 To find a logical rule that could give us this conclusion, we
 look at the logical connectives in the conclusion: $\lnot$,
 $\lor$, and $\lif$. We only care at the moment about the first
-occurence of $\lif$ because it is the !!{main operator} of the
+occurrence of $\lif$ because it is the !!{main operator} of the
 !!{sentence} in the end-sequent, while $\lnot$, $\lor$ and the second
-occurence of $\lif$ are inside the scope of another connective, so we
+occurrence of $\lif$ are inside the scope of another connective, so we
 will take care of those later. We therefore start with the
 \Intro{\lif} rule.  A correct application must look like this:
 \begin{prooftree}
@@ -81,7 +81,7 @@ of the \Intro{\lif} rule, or we can work from the top down and apply a
 $\lnot !A \lor !B$ as the leftmost premise of \Elim{\lor}.  For a valid
 application of \Elim{\lor}, the other two premises must be identical
 to the conclusion $!A \lif !B$, but each may be derived in turn from
-another assumption, namely the two disjuncts of $\lnot !A \lor !B$.
+another assumption, namely one of the two disjuncts of $\lnot !A \lor !B$.
 So our !!{derivation} will look like this:
 \begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
