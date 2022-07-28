@@ -16,7 +16,7 @@ is the greatest lower bound. To \emph{construct} the real numbers from
 the rational numbers, Dedekind suggested that we simply think of the
 reals as the \emph{cuts} that partition the rationals. That is, we
 identify $\sqrt{2}$ with the \emph{cut} which separates the rationals
-$< \sqrt{2}$ from the rationals $ \sqrt{2}$. 
+$< \sqrt{2}$ from the rationals $> \sqrt{2}$. 
 
 Let's tidy this up. If we cut the rational numbers into two halves, we
 can uniquely identify the partition we made just by considering its
@@ -62,7 +62,7 @@ Let $S$ be any non-empty set of cuts with an upper bound. Let $\lambda
 We first claim that $\lambda$ is a cut:
 \begin{enumerate}
 \item Since $S$ has an upper bound, at least one cut is in $S$, so
-$\emptyset \neq \alpha$. Since $S$ is a set of cuts, $\lambda
+$\emptyset \neq \lambda$. Since $S$ is a set of cuts, $\lambda
 \subseteq \Rat$. Since $S$ has an upper bound, some $p \in \Rat$ is
 absent from every cut $\alpha \in S$. So $p\notin \lambda$, and hence
 $\lambda \subsetneq \Rat$.
@@ -102,8 +102,8 @@ and then stipulate:
 	\alpha \times \beta &\defis 
 	\begin{cases}
 		\mathord{-}\alpha \times \mathord{-}\beta &\text{if }\alpha < 0_\Real\text{ and }\beta < 0_\Real\\
-		\mathord{-}(\mathord{-}\alpha \times \mathord{-}\beta) &\text{if }\alpha < 0_\Real \text{ and }\beta > 0_\Real\\
-		\mathord{-}(\mathord{-}\alpha \times \mathord{-}\beta) &\text{if }\alpha > 0_\Real \text{ and }\beta < 0_\Real
+		\mathord{-}(\mathord{-}\alpha \times \beta) &\text{if }\alpha < 0_\Real \text{ and }\beta > 0_\Real\\
+		\mathord{-}(\alpha \times \mathord{-}\beta) &\text{if }\alpha > 0_\Real \text{ and }\beta < 0_\Real
 	\end{cases}
 \end{align*}
 We then need to check that each of these definitions always yields a
