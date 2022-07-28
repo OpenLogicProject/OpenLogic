@@ -4,14 +4,17 @@
 
 \olfileid{sth}{replacement}{refproofs}
 \olsection{Appendix: Results surrounding Replacement}
-In this section, we will prove Reflection within $\ZF$. We will also prove a sense in which Reflection is equivalent to Replacement. And we will prove an interesting consequence of all this, concerning the strength of Reflection/Replacement. \emph{Warning: this is easily the most advanced bit of mathematics in
-this textbook.} 
 
-We'll start with a
-lemma which, for brevity, employs the notational device of
-\emph{overlining} to deal with sequences of variables or objects. So:
-``$\overline{a}_k$'' abbreviates ``$a_{k_1}$, \dots, $a_{k_n}$'', where
-$n$ is determined by context.
+In this section, we will prove Reflection within $\ZF$. We will also
+prove a sense in which Reflection is equivalent to Replacement. And we
+will prove an interesting consequence of all this, concerning the
+strength of Reflection/Replacement. \emph{Warning: this is easily the
+most advanced bit of mathematics in this textbook.} 
+
+We'll start with a lemma which, for brevity, employs the notational
+device of \emph{overlining} to deal with sequences of variables or
+objects. So: ``$\overline{a}_k$'' abbreviates ``$a_{k_1}$, \dots,
+$a_{k_n}$'', where $n$ is determined by context.
 
 \begin{lem}\ollabel{lemreflection}
 For each $1 \leq i \leq k$, let $\phi_i(\overline{v}_i, x)$ be a
@@ -92,23 +95,26 @@ but with a simplification.
 
 Since we are working in $\Z$, we cannot present Reflection in exactly
 the form given above. After all, we formulated Reflection using the
-``$V_\alpha$'' notation, and that cannot be defined in $\Z$ (see \olref[sth][spine][zf]{sec}). So
-instead we will offer an apparently weaker formulation of Replacement,
-as follows:
+``$V_\alpha$'' notation, and that cannot be defined in $\Z$ (see
+\olref[sth][spine][zf]{sec}). So instead we will offer an apparently
+weaker formulation of Replacement, as follows:
 
-\ \\\emph{Weak-Reflection.} For any formula $\phi$, there is a
-transitive set $S$ such that $0$, $1$, and any parameters to $\phi$
-are !!{element}s of $S$, and $(\forall \overline{x} \in S)(\phi \liff
+\begin{defish}
+\emph{Weak-Reflection.} For any formula $\phi$, there is a transitive
+set $S$ such that $0$, $1$, and any parameters to $\phi$ are
+!!{element}s of $S$, and $(\forall \overline{x} \in S)(\phi \liff
 \phi^S)$.
+\end{defish}
 
-\
-\\
 To use this to prove Replacement, we will first follow \citet[first
 part of Theorem 2]{Levy1960} and show that we can ``reflect'' two
 formulas at once:
 
 \begin{lem}[in $\Z + \text{Weak-Reflection}$.]\ollabel{lem:reflect}
-For any formulas $\psi, \chi$, there is a transitive set $S$ such that $0$ and $1$ (and any parameters to the formulas) are !!{element}s of $S$, and $(\forall \overline{x} \in S)((\psi \liff \psi^S) \land (\chi \liff \chi^S))$.
+For any formulas $\psi, \chi$, there is a transitive set $S$ such that
+$0$ and $1$ (and any parameters to the formulas) are !!{element}s of
+$S$, and $(\forall \overline{x} \in S)((\psi \liff \psi^S) \land (\chi
+\liff \chi^S))$.
 \end{lem}
 
 \begin{proof}

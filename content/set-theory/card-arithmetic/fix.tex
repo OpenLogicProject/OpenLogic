@@ -12,7 +12,7 @@ illustration of the height of the hierarchy.
 
 Evidently $0 < \aleph_0$, and $1 < \aleph_1$, and $2 < \aleph_2$\ldots
 and, indeed, the difference in size only gets \emph{bigger} with every
-step. So it is tempting to conjecture that $\kappa < \aleph_\kappa$
+step. So it is tempting to conjecture that $\kappa< \aleph_\kappa$
 for every ordinal $\kappa$. 
 
 But this conjecture is \emph{false}, given $\ZFC$. In fact, we can
@@ -28,20 +28,20 @@ Using recursion, define:
 \begin{align*}
 	\kappa_0 &= 0\\
 	\kappa_{n+1} &= \aleph_{\kappa_n}\\
-	\kappa &= \bigcup_{n < \omega}\kappa_n
+	\kappa&= \bigcup_{n < \omega}\kappa_n
 \end{align*}
 Now $\kappa$ is a cardinal by
 \olref[cardinals][classing]{unioncardinalscardinal}. But now:
 \[
-	\kappa = \bigcup_{n < \omega} \kappa_{n+1} = 
+	\kappa= \bigcup_{n < \omega} \kappa_{n+1} = 
 	\bigcup_{n < \omega}\aleph_{\kappa_n} = 
-	\bigcup_{\alpha < \kappa}\aleph_\alpha = \aleph_\kappa 
+	\bigcup_{\alpha < \kappa}\aleph_\alpha = \aleph_\kappa
 \]
 %	By construction, $\kappa$ is the least cardinal greater than each
 %	$\kappa_n$. So $\aleph_\kappa$ is the least cardinal greater than
 %	each $\aleph_{\kappa_n}$, and hence greater than each
 %	$\kappa_{n+1}$. But equally $\kappa$ is the least cardinal greater
-%	than each $\kappa_{n+1} = \aleph_{\kappa_n}$. So $\kappa =
+%	than each $\kappa_{n+1} = \aleph_{\kappa_n}$. So $\kappa=
 %	\aleph_\kappa$.
 \end{proof}
 
@@ -94,8 +94,8 @@ results establish, intuitively, that there is a (non-trivial) point at
 which the hierarchy is as wide as it is tall:
 
 \begin{prop}\ollabel{bethfixed}
-There is a $\beth$-fixed-point, i.e., a $\kappa$ such that $\kappa =
-\beth_\kappa$
+There is a $\beth$-fixed-point, i.e., a $\kappa$ such that $\kappa=
+\beth_\kappa$.
 \end{prop}
 
 \begin{proof}
@@ -129,7 +129,7 @@ There is a $\kappa$ such that $\card{V_\kappa} = \kappa$.
 \begin{proof}
 Let $\kappa$ be a $\beth$-fixed point, as given by \olref{bethfixed}.
 Clearly $\omega \ordtimes \omega < \kappa$. So $\card{V_\kappa} =
-\beth_\kappa = \kappa$ by \olref{stagesize}.
+\beth_\kappa= \kappa$ by \olref{stagesize}.
 \end{proof}
 
 There are as many stages beneath $V_\kappa$ as there are !!{element}s
@@ -145,15 +145,15 @@ this needs a little explanation.
 
 We define a term $\tau$ as follows. For any $A$, let:
 \begin{align*}
-	\tau_0(A) & \coloneq \card{A}\\
-	\tau_{n+1}(A) & \coloneq \beth_{\tau_n(A)}\\
-	\tau(A) & \coloneq \bigcup_{n < \omega}\tau_n(A)
+	\tau_0(A) & \defis \card{A}\\
+	\tau_{n+1}(A) & \defis \beth_{\tau_n(A)}\\
+	\tau(A) & \defis \bigcup_{n < \omega}\tau_n(A)
 \intertext{As in \olref{bethfixed}, $\tau(A)$ is a
 $\beth$-fixed point for any $A$, and trivially $\card{A} < \tau(A)$.
 So now consider this recursive definition:}
-	W_0 &\coloneq 0\\
-	W_{\alpha + 1} & \coloneq \tau(W_\alpha)\\
-	W_\alpha & \coloneq \bigcup_{\beta < \alpha} W_\beta
+	W_0 &\defis 0\\
+	W_{\alpha + 1} & \defis \tau(W_\alpha)\\
+	W_\alpha & \defis \bigcup_{\beta < \alpha} W_\beta
 	\text{, when $\alpha$ is a limit}
 \end{align*}
 The construction is defined for all ordinals. Intuitively, then,

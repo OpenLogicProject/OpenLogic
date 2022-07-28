@@ -102,8 +102,8 @@ length~$n$ is $< n/2$.
 To prove this result by (strong) induction, we have to show that the
 following conditional claim is true:
 \begin{quote}
-  If for every $l < k$, any nice term of length~$l$ has $l/2$
-  $[$'s, then any nice term of length~$k$ has $k/2$ $[$'s.
+  If for every $l < k$, any nice term of length~$l$ has $< l/2$
+  $[$'s, then any nice term of length~$k$ has $< k/2$ $[$'s.
 \end{quote}
 To show this conditional, assume that its antecedent is true, i.e.,
 assume that for any $l<k$, nice terms of length~$l$ contain $< l/2$
@@ -121,7 +121,7 @@ is~$0$. Since $0 < 1/2$, the claim holds.
   of~$s_2$.  Then the length~$k$ of $t$ is $l_1+l_2+3$ (the lengths of
   $s_1$ and $s_2$ plus three symbols $[$, $\circ$, $]$). Since
   $l_1+l_2+3$ is always greater than $l_1$, $l_1 < k$. Similarly, $l_2
-  < n$. That means that the induction hypothesis applies to the terms
+  < k$. That means that the induction hypothesis applies to the terms
   $s_1$ and~$s_2$: the number~$m_1$ of $[$ in $s_1$ is $< l_1/2$, and
   the number~$m_2$ of $[$ in~$s_2$ is $< l_2/2$.
 
@@ -129,7 +129,7 @@ is~$0$. Since $0 < 1/2$, the claim holds.
   number of $[$ in~$s_2$, plus~$1$, i.e., it is $m_1 + m_2 + 1$. Since $m_1
   < l_1/2$ and $m_2 < l_2/2$ we have:
   \[
-  m_1 + m_2 + 1 < \frac{l_1}{2} + \frac{l_2}{2} + 1 = \frac{l_1+l_2+2}{2} < \frac{l_1+l-2+3}{2} = k/2.
+  m_1 + m_2 + 1 < \frac{l_1}{2} + \frac{l_2}{2} + 1 = \frac{l_1+l_2+2}{2} < \frac{l_1+l_2+3}{2} = k/2.
   \]
 \end{enumerate}
 In each case, we've shown that the number of $[$ in $t$ is $< k/2$ (on

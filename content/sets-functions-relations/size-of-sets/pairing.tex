@@ -23,14 +23,14 @@ g(\tuple{0,1}) = 1, \;
 g(\tuple{1,0}) = 2, \; \dots,  
 g(\tuple{1,2}) = 7, \; \dots
 \]
-This would enable to calculate exactly where $\tuple{n, m}$ will occur
+This would enable us to calculate exactly where $\tuple{n, m}$ will occur
 in our enumeration. 
 
 In fact, we can define $g$ directly by making two observations. First:
 if the $n$th row and $m$th column contains value~$v$, then the
 $(n+1)$st row and $(m-1)$st column contains value $v + 1$. Second: the
 first row of our enumeration consists of the triangular numbers,
-starting with $0$, $1$, $3$, $5$, etc. The $k$th triangular number is
+starting with $0$, $1$, $3$, $6$, etc. The $k$th triangular number is
 the sum of the natural numbers $< k$, which can be computed as
 $k(k+1)/2$. Putting these two observations together, consider this
 function:
@@ -39,7 +39,7 @@ function:
 \]
 We often just write $g(n, m)$ rather that $g(\tuple{n, m})$, since it
 is easier on the eyes. This tells you first to determine the
-$(n+m)^\text{th}$ triangle number, and then subtract $n$ from it. And
+$(n+m)^\text{th}$ triangle number, and then add $n$ to it. And
 it populates the array in exactly the way we would like. So in
 particular, the pair $\tuple{1, 2}$ is sent to $\frac{4 \times 3}{2} +
 1 = 7$. 
@@ -56,7 +56,7 @@ pairs. Such functions are called \emph{pairing functions}.
 \end{defn}
 
 \begin{explain}
-We can use pairing functions encode, e.g., pairs of natural numbers;
+We can use pairing functions to encode, e.g., pairs of natural numbers;
 or, in other words, we can represent each \emph{pair} of elements
 using a \emph{single} number. Using the inverse of the pairing
 function, we can \emph{decode} the number, i.e., find out which

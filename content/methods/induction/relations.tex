@@ -23,7 +23,7 @@ give an inductive definition of this relation as follows:
   \sqsubseteq t_2$, is defined by induction on~$t_2$ as follows:
   \begin{enumerate}
   \item If $t_2$ is a letter, then $t_1 \sqsubseteq t_2$ iff $t_1 = t_2$.
-  \item If $t_2$ is $[s_1 \circ s_2]$, then $t_1 \sqsubseteq t_2$ iff $t =
+  \item If $t_2$ is $[s_1 \circ s_2]$, then $t_1 \sqsubseteq t_2$ iff $t_1 =
     t_2$, $t_1 \sqsubseteq s_1$, or $t_1 \sqsubseteq s_2$.
   \end{enumerate}
 \end{defn}
@@ -141,7 +141,7 @@ defined earlier. The corresponding ``definition'' would be:
   g(t) = 
   \begin{cases}
     0 & \text{ if $t$ is a letter}\\
-   \max(g(s), g(s')) + 1 & \text{ if $t = [s_1 \circ s_2]$.}
+   \max(g(s_1), g(s_2)) + 1 & \text{ if $t = s_1 \circ s_2$.}
   \end{cases}
 \]
 Now consider the bracketless term $\mathrm{a} \circ \mathrm{b} \circ

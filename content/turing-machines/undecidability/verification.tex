@@ -152,13 +152,13 @@ We will consider each of these three cases in turn.
 \intertext{By induction hypothesis, $!T(M, w) \Entails !C(M, w, n)$,
   i.e.,}
 & \Obj Q_q(\num{m}, \num{n}) \land \Obj S_{\sigma_0}(\num{0}, \num{n})
-\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land
-\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]\\
+\land \dots \land \Obj S_{\sigma_k}(\num{k}, \num{n}) \land \\
+& \qquad\lforall[x][(\num{k} < x \lif \Obj S_\TMblank(x, \num{n}))]\\
 \intertext{Since after $n$ steps, tape square~$m$ contains~$\sigma$,
   the corresponding conjunct is~$\Obj S_\sigma(\num{m}, \num{n})$,
   so this entails:}
 & \Obj Q_{q}(\num{m}, \num{n}) \land \Obj S_{\sigma}(\num{m},
-   \num{n}))
+   \num{n})
 \intertext{We now get}
 & \Obj Q_{q'}(\num{m}', \num{n}') \land \Obj S_{\sigma'}(\num{m},
   \num{n}') \land {}\\
@@ -267,21 +267,21 @@ If $M$ halts on input~$w$, then $!T(M, w) \lif
 \begin{proof}
 By \olref{lem:config}, we know that, for any time~$n$, the
 description~$!C(M, w, n)$ of the configuration of $M$ at time~$n$ is
-entailed by~$!T(M, w)$.  Suppose $M$ halts after $k$ steps. It will be
-scanning square~$m$, say. Then $!C(M, w, k)$ describes a halting
-configuration of~$M$, i.e., it contains as conjuncts both $\Obj
-Q_q(\num{m}, \num{k})$ and $\Obj S_\sigma(\num{m}, \num{k})$ with
-$\delta(q,\sigma)$ undefined.  Thus, by \olref{lem:halt-config-implies-halt},
-$!C(M, w, k) \Entails !E(M, w)$. But since $!T(M, w) \Entails
-!C(M, w, k)$, we have $!T(M, w) \Entails !E(M, w)$ and therefore
-$!T(M, w) \lif !E(M, w)$ is valid.
+entailed by~$!T(M, w)$.  Suppose $M$ halts after $k$ steps. At that
+point, it will be scanning square~$m$, for some~$m \in \Nat$. Then
+$!C(M, w, k)$ describes a halting configuration of~$M$, i.e., it
+contains as conjuncts both $\Obj Q_q(\num{m}, \num{k})$ and $\Obj
+S_\sigma(\num{m}, \num{k})$ with $\delta(q,\sigma)$ undefined.  Thus,
+by \olref{lem:halt-config-implies-halt}, $!C(M, w, k) \Entails !E(M,
+w)$. But since $!T(M, w) \Entails !C(M, w, k)$, we have $!T(M, w)
+\Entails !E(M, w)$ and therefore $!T(M, w) \lif !E(M, w)$ is valid.
 \end{proof}
 
 
 \begin{explain} 
 To complete the verification of our claim, we also have to
 establish the reverse direction: if $!T(M, w) \lif !E(M, w)$ is valid, then
-$M$ does in fact halt when started on input~$m$. 
+$M$ does in fact halt when started on input~$w$. 
 \end{explain}
 
 \begin{lem}
@@ -290,8 +290,8 @@ If $\Entails !T(M, w) \lif !E(M, w)$, then $M$ halts on input~$w$.
 \end{lem}
 
 \begin{proof}
-Consider the $\Lang L_M$-!!{structure} $\Struct M$ with
-domain~$\Nat$ which interprets $\Obj 0$ as~$0$, $'$~as the successor
+Consider the $\Lang L_M$-!!{structure}~$\Struct M$ with
+domain~$\Nat$ which interprets $\Obj 0$ as~$0$, $\prime$~as the successor
 function, and $<$~as the less-than relation, and the predicates $\Obj Q_q$
 and~$\Obj S_\sigma$ as follows:
 \begin{align*}
@@ -312,7 +312,7 @@ then also $\Sat{M}{!E(M, w)}$, i.e.,
 \]
 As $\Domain{M} = \Nat$, there must be $m$, $n \in \Nat$ so that
 $\Sat{M}{\Obj Q_q(\num{m}, \num{n}) \land \Obj S_\sigma(\num{m},
-\num{n})}$ for some $q$ and~$\sigma$ such that $\delta(q, \sigma)$ is
+\num{n})}$ for some~$q$ and~$\sigma$ such that $\delta(q, \sigma)$ is
 undefined. By the definition of~$\Struct M$, this means that $M$
 started on input~$w$ after~$n$ steps is in state~$q$ and reading
 symbol~$\sigma$, and the transition function is undefined, i.e.,

@@ -46,12 +46,19 @@ of integers (whose second element is non-zero). That is, $\Rat =
 
 As with the integers, we also want to define some basic operations.
 Where $\equivrep{i,j}{\Ratequiv}$ is the equivalence class under
-$\Ratequiv$ with $\tuple{ i, j}$ as !!a{element}, we say:
+$\Ratequiv$ with $\tuple{i, j}$ as !!a{element}, we say:
 \begin{align*}
 	\equivrep{a, b}{\Ratequiv} + \equivrep{c, d}{\Ratequiv} &= \equivrep{ad + bc,  bd}{\Ratequiv}\\
-	\equivrep{a, b}{\Ratequiv} \times \equivrep{c, d}{\Ratequiv} &= \equivrep{a  c, b d}{\Ratequiv}\\
-	\equivrep{a, b}{\Ratequiv} \leq \equivrep{c, d}{\Ratequiv} &\text{ iff }ad \leq bc
+	\equivrep{a, b}{\Ratequiv} \times \equivrep{c, d}{\Ratequiv} &= \equivrep{a  c, b d}{\Ratequiv}.
+\intertext{To define $r \leq s$ on these rationals, we use the fact that 
+$r \le s$ iff $s - r$ is not negative, i.e., $r - s$ can be written as 
+$\nicefrac{i}{j}$ with $i$ non-negative and $j$~positive:}
+	\equivrep{a, b}{\Ratequiv} \leq \equivrep{c, d}{\Ratequiv} &\text{ iff }
+	\equivrep{c, d}{\Ratequiv} - \equivrep{a, b}{\Ratequiv} = 
+	\equivrep{i_\Int, j_\Int}{\Ratequiv}
 \end{align*}
+for some $i \in \Nat$ and $0 \neq j \in \Nat$.
+
 We then need to check that these definitions behave as they
 \emph{ought} to; and we relegate this to \olref[check]{sec}. But they
 indeed do!{} Finally, we want some way to treat integers \emph{as}

@@ -19,7 +19,7 @@ function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
 \end{defn}
 
 \begin{defn}
-  Given a !!{valuation}~$\pAssign{v}$, define the evaluation function
+  Given !!a{valuation}~$\pAssign{v}$, define the evaluation function
   $\pValue{v} \colon \Frm[L_0] \to \{\True, \False \}$ inductively by:
   \begin{align*}
     \iftag{prvFalse}{\pValue{v}(\lfalse) & = \False; \\}{}
@@ -116,6 +116,20 @@ The clauses correspond to the following truth tables:
 \end{center} 
 \end{explain}
 
+\begin{prob}
+Consider adding to $\Lang{L_0}$ a ternary connective $\diamondsuit$ 
+with evaluation given by 
+\begin{gather*}
+  \pValue{v}(\diamondsuit( !A , !B , !C ) ) = \begin{cases} 
+    \pValue{v}( !B ) &
+    \text{if $\pValue{v}(!A) = \True$;}\\
+    \pValue{v}( !C ) &
+    \text{if $\pValue{v}(!A) = \False $}.
+  \end{cases}
+\end{gather*}
+Write down the truth table for this connective.
+\end{prob}
+
 \begin{thm} [Local Determination] 
 \ollabel{thm:LocalDetermination} Suppose that $\pAssign{v_1}$ and
 $\pAssign{v_2}$ are !!{valuation}s that agree on the propositional
@@ -129,7 +143,7 @@ By induction on $!A$.
 
 \begin{defn}[Satisfaction]
 \ollabel{defn:satisfaction} Using the evaluation function, we can
-define the notion of \emph{satisfaction of a !!{formula}~$!A$ by
+define the notion of \emph{satisfaction of !!a{formula}~$!A$ by
   !!a{valuation}~$\pAssign{v}$}, $\pSat{v}{!A}$, inductively as
   follows. (We write $\pSat/{v}{!A}$ to mean ``not
   $\pSat{v}{!A}$.'')
@@ -153,7 +167,7 @@ define the notion of \emph{satisfaction of a !!{formula}~$!A$ by
 
 \tagitem{prvOr}{%
   \indcase{!A}{(!B \lor !C)}{$\pSat{v}{\indfrm}$ iff
-    $\pSat{v}{!A}$ or $\pSat{v}{!B}$ (or both).}}{}
+    $\pSat{v}{!B}$ or $\pSat{v}{!C}$ (or both).}}{}
 
 \tagitem{prvIf}{%
   \indcase{!A}{(!B \lif !C)}{$\pSat{v}{\indfrm}$ iff $\pSat/{v}{!B}$

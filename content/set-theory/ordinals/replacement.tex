@@ -18,20 +18,24 @@ Axioms we provided introduced so far. (We will see why in
 new thought, and here it is:
 
 \begin{axiom}[Scheme of Replacement]
-For any formula $\phi(x, y)$, this is an axiom: 
-	\\for any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, {then} $\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
+For any formula $\phi(x, y)$, the following is an axiom:
+\begin{quote}
+	for any $A$, if $(\forall x \in A)\lexists![y][\phi(x,y)]$, then
+	$\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists.
+\end{quote}
 \end{axiom}
 \noindent
 As with Separation, this is a scheme: it yields infinitely many
 axioms, for each of the infinitely many different $\phi$'s. And it can
 equally well be (and normally is) written down thus:
 
-\
-\\\emph{For any formula $\phi(x,y)$ which does not contain ``$B$'', this is an axiom:
-\\$\forall A[(\forall x \in A)\lexists![y][\phi(x,y)] \lif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]$}
+\begin{defish}
+For any formula $\phi(x,y)$ which does not contain ``$B$'', the following is an axiom:
+\[
+\forall A[(\forall x \in A)\lexists![y][\phi(x,y)] \lif \exists B\forall y (y \in B \liff (\exists x \in A)\phi(x,y))]
+\]
+\end{defish}
 
-\
-\\ 
 On first encounter, however, this is quite a tangled formula. The
 following quick consequence of Replacement probably gives a
 \emph{clearer} expression to the intuitive idea we are working with:

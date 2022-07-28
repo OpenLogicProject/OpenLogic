@@ -112,19 +112,21 @@ such that $\Sat{N}{!A_\le(\num n, \num m)}$ iff $n \le m$. Consider the formula
 Clearly, $!B(\num n, Y)$ is satisfied by a set $Y \subseteq \Nat$ iff
 $\Setabs{m}{n \le m} \subseteq Y$, so we can take $!A_\le(x, y) \ident
 \lforall[Y][(!B(x, Y) \lif Y(y))]$.
+
+To see that addition is definable observe that $k+l=m$ iff there is a
+function $u$ such that $u(0)=k$, $u(n')=u(n)'$ for all $n$, and $m = u(l)$. 
+We can use this equivalence to define addition in $\Th{PA^{2\dagger}}$ 
+by the following formula:
+\[
+!A_+(x,y,z) \ident \lexists[u][(u(\Obj 0)=x \land \lforall[w][u(x')=u
+ (x)'] \land u(y)=z)]
+\] 
+It should be clear that $\Sat{N}{!A_+(\num k, \num l, \num m)}$ 
+iff $k+l=m$.
 \end{proof}
 
 \begin{prob}
 Complete the proof of \olref[sol][met][spa]{prop:sol-pa-definable}.
 \end{prob}
-
-\begin{cor}
-$\Sat{M}{\Th{PA^2}}$ iff $\Sat{M}{\Th{PA^{2\dagger}}}$.
-\end{cor}
-
-\begin{proof}
-Immediate from \olref[sol][met][spa]{prop:sol-pa-definable}.
-\end{proof}
-
 
 \end{document}

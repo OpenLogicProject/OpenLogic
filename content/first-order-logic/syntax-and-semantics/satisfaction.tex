@@ -34,7 +34,7 @@ immediate !!{subformula} of a quantified !!{formula} has a free
 !!{variable}, and !!{structure}s don't specify the !!{value}s of
 !!{variable}s.  In order to deal with this difficulty, we also
 introduce \emph{variable assignments} and define satisfaction not with
-respect to a !!{structure} alone, but with respect to a !!{structure}
+respect to !!a{structure} alone, but with respect to !!a{structure}
 plus !!a{variable} assignment.
 \end{explain}
 
@@ -88,7 +88,7 @@ as an $x$-variant of itself.
   If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$
   and $m \in \Domain{M}$, then the assignment~$\Subst{s}{m}{x}$ is the
   variable assignment defined by
-  \[\Subst{s}{m}{y} = \begin{cases}
+  \[\Subst{s}{m}{x}(y) = \begin{cases}
     m & \text{if } y \ident x\\
     s(y) & \text{otherwise}.
   \end{cases}\]
@@ -128,7 +128,7 @@ $\Sat/{M}{!A}[s]$ to mean ``not $\Sat{M}{!A}[s]$.'')
 
 \tagitem{prvOr}{%
   \indcase{!A}{(!B \lor !C)}{$\Sat{M}{\indfrm}[s]$ iff
-    $\Sat{M}{!A}[s]$ or $\Sat{M}{!B}[s]$ (or both).}}{}
+    $\Sat{M}{!B}[s]$ or $\Sat{M}{!C}[s]$ (or both).}}{}
 
 \tagitem{prvIf}{%
   \indcase{!A}{(!B \lif !C)}{$\Sat{M}{\indfrm}[s]$ iff $\Sat/{M}{!B}[s]$
@@ -215,7 +215,7 @@ $\Sat/{M}{R(x, f(a,b))}[s]$ since $\tuple{1, 3} \notin \Assign{R}{M}[s]$.
 To determine if a non-atomic formula~$!A$ is satisfied, you apply the
 clauses in the inductive definition that applies to the main
 connective. For instance, the main connective in $R(a, a) \lif (R(b,
-x) \lor R(x, b)$ is the~$\lif$, and
+x) \lor R(x, b))$ is the~$\lif$, and
 \begin{align*}
   & \Sat{M}{R(a, a) \lif (R(b, x) \lor R(x, b))}[s] \text{ iff }\\
   & \qquad
@@ -266,7 +266,7 @@ particular, that $s_1 = s$ ($s$~is always an $x$-variant of itself).
   since $\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]$ for all $m \in
   \Domain M$. For $m = 1$, we have $\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]$
   so the consequent is true; for $m = 2$, $3$, and~$4$, we have
-  $\Sat/{M}{R(x,a)}[\Subst{s}{m}{x}]$, so the antecedent is false).
+  $\Sat/{M}{R(x,a)}[\Subst{s}{m}{x}]$, so the antecedent is false.
   But,
   \[
   \Sat/{M}{\lforall[x][(R(a,x) \lif R(x,a))]}[s]
@@ -400,7 +400,7 @@ $\Sat{M}{\lforall[x][!B(x)]}[s]$ iff for every $x$-variant~$s'$ of $s$,
 \begin{prob}
 Let $\Lang L = \{c, f, A\}$ with one !!{constant}, one one-place
 !!{function} and one two-place !!{predicate}, and let the
-!!{structure} $\Struct{M}$ be given by
+!!{structure}~$\Struct{M}$ be given by
 \begin{enumerate}
 \item $\Domain M = \{1, 2, 3\}$
 \item $\Assign{c}{M} = 3$

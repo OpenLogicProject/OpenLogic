@@ -25,7 +25,7 @@ one operation: the operations are
   o(s_1, s_2) = & [s_1 \circ s_2]
 \end{align*}
 You can even think of the natural numbers~$\Nat$ themselves as being
-given be an inductive definition: the initial object is~$0$, and the
+given by an inductive definition: the initial object is~$0$, and the
 operation is the successor function~$x + 1$.
 
 In order to prove something about all elements of an inductively
@@ -47,7 +47,7 @@ individually.
 
 \begin{proof}
 We use structural induction.  Nice terms are inductively defined, with
-letters as initial objects and the operations $o$ for constructing new
+letters as initial objects and the operation $o$ for constructing new
 nice terms out of old ones.
 \begin{enumerate}
 \item The claim is true for every letter, since the number of $[$ in a
@@ -55,8 +55,8 @@ nice terms out of old ones.
 \item Suppose the number of $[$ in $s_1$ equals the number of $]$, and
   the same is true for $s_2$. The number of $[$ in $o(s_1, s_2)$, i.e., in
     $[s_1 \circ s_2]$, is the sum of the number of $[$ in $s_1$ and
-      $s_2$. The number of $]$ in $o(s_1, s_2)$ is the sum of the number
-    of $]$ in $s_1$ and $s_2$. Thus, the number of $[$ in $o(s_1, s_2)$
+      $s_2$ plus one. The number of $]$ in $o(s_1, s_2)$ is the sum of the number
+    of $]$ in $s_1$ and $s_2$ plus one. Thus, the number of $[$ in $o(s_1, s_2)$
     equals the number of $]$ in $o(s_1,s_2)$.
 \end{enumerate}
 \end{proof}

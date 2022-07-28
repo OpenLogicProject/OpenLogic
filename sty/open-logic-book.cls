@@ -99,10 +99,11 @@
     \usepackage[osf]{Baskervaldx}
     % load amssymb before newtxmath to avoid problem with \Bbbk
     \usepackage{amssymb}
+    % Nice math calligraphic font 
+    \usepackage[cal=boondoxo]{mathalpha}
     % Math font to match
     \usepackage[bigdelims,baskervaldx]{newtxmath}
-    % Nice math calligraphic font 
-    \usepackage[cal=boondoxo]{mathalfa}
+    % use Bodono greek for math
     \usepackage{textgreek}
   }
 
@@ -266,6 +267,10 @@
 
 \captionnamefont{\footnotesize\itshape\color{OLPcolor}}
 \captiontitlefont{\footnotesize}
+
+\setlength{\cftbeforepartskip}{2em plus 0.5em minus 0.5em}
+\setlength{\cftbeforechapterskip}{1.0em plus 0.5em minus 0.25em}
+
 
 % Commands to set author, title, subtitle, bookversion
 

@@ -25,10 +25,12 @@
 \end{defish}
 
 In \TRule{\True}{\lforall}, $t$ is a closed term (i.e., one without
-variables). In \TRule{\False}{\lforall}, $a$~is !!a{constant} which must
-not occur anywhere in the branch above \TRule{\False}{\lforall}
-rule. We call $a$ the \emph{eigenvariable} of the \TRule{\False}{\forall}
-inference.
+variables). In \TRule{\False}{\lforall}, $a$~is !!a{constant} which
+must not occur anywhere in the branch above \TRule{\False}{\lforall}
+rule. We call $a$ the \emph{eigenvariable} of the
+\TRule{\False}{\forall} inference.\footnote{We use the term
+``eigenvariable'' even though $a$ in the above rule is !!a{constant}.
+This has historical reasons.}
 
 \subsection{Rules for $\lexists$}
 
@@ -44,18 +46,37 @@ inference.
 \DisplayProof
 \end{defish}
 
-Again, $t$~is a closed term, and $a$~is !!a{constant} which does
-not occur in the branch above the~\TRule{\False}{\lexists} rule. We call
-$a$ the \emph{eigenvariable} of the \TRule{\False}{\lexists} inference.
+Again, $t$~is a closed term, and $a$~is !!a{constant} which does not
+occur in the branch above the~\TRule{\True}{\lexists} rule. We call
+$a$ the \emph{eigenvariable} of the \TRule{\True}{\lexists} inference.
 
-The condition that an eigenvariable not occur in the branch above 
-the \TRule{\False}{\lforall} or \TRule{\True}{\lexists} inference is called the
-\emph{eigenvariable condition}.
+The condition that an eigenvariable not occur in the branch above the
+\TRule{\False}{\lforall} or \TRule{\True}{\lexists} inference is
+called the \emph{eigenvariable condition}.
 
 \begin{explain}
-We use the term ``eigenvariable'' even though $a$ in the above rules
-is !!a{constant}. This has historical reasons.
+Recall the convention that when $!A$ is !!a{formula} with the
+!!{variable}~$x$ free, we indicate this by writing~$!A(x)$. In the
+same context, $!A(t)$ then is short for~$\Subst{!A}{t}{x}$. So we
+could also write the \TRule{\False}{\lexists} rule as:
+\begin{prooftree}
+  \AxiomC{\sFmla{\False}{\lexists[x][!A]}}
+  \RightLabel{\TRule{\False}{\lexists}}
+  \UnaryInfC{\sFmla{\False}{\Subst{!A}{t}{x}}}
+\end{prooftree}
+Note that $t$ may already occur in~$!A$, e.g., $!A$~might
+be~$\Atom{\Obj P}{t,x}$. Thus, inferring $\sFmla{\False}{\Atom{\Obj
+P}{t,t}}$ from~$ \sFmla{\False}{\lexists[x][\Atom{\Obj P}{t,x}]}$ is
+a correct application of~\TRule{\False}{\lexists}. However, the
+eigenvariable conditions in \TRule{\False}{\lforall}
+and~\TRule{\True}{\lexists} require that the !!{constant}~$a$ does
+not occur in~$!A$. So, you cannot correctly infer
+$\sFmla{\False}{\Atom{\Obj P}{a,a}}$ from
+$\sFmla{\False}{\lforall[x][\Atom{\Obj P}{a,x}]}$
+using~$\TRule{\False}{\lforall}$.
+\end{explain}
 
+\begin{explain}
 In \TRule{\True}{\lforall} and \TRule{\False}{\lexists} there are no
 restrictions on the term~$t$. On the other hand, in the
 \TRule{\True}{\lexists} and \TRule{\False}{\lforall} rules, the

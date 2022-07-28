@@ -13,7 +13,7 @@
   In \olref[rep]{sec} we defined !!{sentence}s $!T(M,w)$ and~$!E(M,w)$
   for a Turing machine~$M$ and input string~$w$. Then we showed in
   \olref[ver]{lem:valid-if-halt} and \olref[ver]{lem:halt-if-valid}
-  that $!T(M,w) \lif !E(M,w)$ is valid iff $T$~started on input~$w$
+  that $!T(M,w) \lif !E(M,w)$ is valid iff $M$, started on input~$w$,
   eventually halts. Since the Halting Problem is undecidable, this
   implies that validity and satisfiability of !!{sentence}s of
   first-order logic is undecidable
@@ -22,8 +22,8 @@
   But validity and satisfiability of sentences is defined for
   arbitrary !!{structure}s, finite or infinite. You might suspect that
   it is easier to decide if !!a{sentence} is satisfiable in a finite
-  !!{structure} (or valid in all finite !!{structure}s). We can
-  improve the proof of the unsolvability of the decision so that it
+  !!{structure} (or valid in all finite !!{structure}s). We can adapt
+  the proof of the unsolvability of the decision problem so that it
   shows this is not the case.
 
   First, if you go back to the proof of
@@ -33,21 +33,24 @@
   model was~$\Nat$, i.e., infinite. But if $M$ actually halts on
   input~$w$, we can build a finite model~$\Struct M'$ in the same way.
   Suppose $M$ started on input~$w$ halts after~$k$ steps. Take as
-  domain $\Domain{M'}$ the set $\{0, \dots, n\}$, where $n$ is the
+  domain~$\Domain{M'}$ the set $\{0, \dots, n\}$, where $n$ is the
   larger of~$k$ and the length of~$w$, and let
   \[
     \Assign{\prime}{M'}(x) = 
     \begin{cases}
       x + 1 &\text{if $x < n$}\\
-      n &\text{otherwise.}
+      n &\text{otherwise,}
     \end{cases}
   \]
+  and $\tuple{x,y} \in \Assign{<}{M'}$ iff $x < y$ or $x = y = n$.
   Otherwise $\Struct{M'}$ is defined just like~$\Struct{M}$. By the
   definition of~$\Struct{M'}$, just like in the proof of
   \olref[ver]{lem:halt-if-valid}, $\Sat{M'}{!T(M,w)}$.  And since we
   assumed that $M$ halts on input~$w$, $\Sat{M'}{!E(M,w)}$. So,
   $\Struct{M'}$ is a finite model of~$!T(M,w) \land !E(M,w)$ (note
-  that we've replaced $\lif$ by~$\land$). We are halfway to a proof:
+  that we've replaced $\lif$ with~$\land$).
+  
+  We are halfway to a proof: we've shown that
   if $M$ halts on input~$w$, then $!T(M,e) \land !E(M,w)$ has a finite
   model. Unfortunately, the ``only if'' direction does not hold.  For
   instance, if $M$ after $n$~steps is in state~$q$ and reads a
@@ -57,8 +60,8 @@
   tape contents). But the machine never halts; it's in an infinite
   loop.  The corresponding !!{structure}~$\Struct{M'}$ above satisfies
   $!T(M,w)$ but not~$!E(M,w)$. (In it, the values of $\num{n+l}$ are
-  all the same, so it is finite). But by changing~$!T(M,w)$ suitable
-  we can rule out !!{structure}s like this.
+  all the same, so it is finite). But by changing~$!T(M,w)$ in a
+  suitable way we can rule out !!{structure}s like this.
 \end{explain}
 
 Consider the !!{sentence}s describing the operation of the Turing
@@ -84,11 +87,6 @@ For the following, let $!A(x, y)$ be as before, and let
 &\qquad   (\Obj Q_{q_j}(x', y') \land \Obj S_{\sigma'}(x, y') \land
 !A(x, y) \land !B(y')))
 \end{align*}
-In other words, the same as the corresponding !!{sentence}
-in~$!T(M,w)$, except we add $!B(y')$ at the end. ($!B(y')$~ensures
-that the number $y'$ of the ``next'' configuration is different from
-all previous numbers $\Obj 0$, $\Obj 0'$, \dots)
-
 \item \ollabel{rep-left} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMleft}$, the !!{sentence}
 \begin{align*}
@@ -110,6 +108,11 @@ all previous numbers $\Obj 0$, $\Obj 0'$, \dots)
 !A(x, y) \land !B(y')))
 \end{align*}
 \end{enumerate}
+As you can see, the !!{sentence}s describing the transitions of~$M$ 
+are the same as the corresponding !!{sentence}
+in~$!T(M,w)$, except we add $!B(y')$ at the end. $!B(y')$~ensures
+that the number $y'$ of the ``next'' configuration is different from
+all previous numbers $\Obj 0$, $\Obj 0'$, \dots.
 % \item Sentences that express consistency conditions:
 % \begin{enumerate}
 %   \item\ollabel{rep-con-symb}%
@@ -146,16 +149,17 @@ machine~$M$ and input~$w$.
   Let $\Struct{M'}$ be as in the proof of
   \olref[ver]{lem:halt-if-valid}, except
   \begin{align*}
-    \Domain{M'} & = \{0, \dots, n\}\\
+    \Domain{M'} & = \{0, \dots, n\},\\
     \Assign{\prime}{M'}(x) & = 
     \begin{cases}
       x + 1 &\text{if $x < n$}\\
       n &\text{otherwise,}
-    \end{cases}
+    \end{cases} \\
+    \tuple{x,y} \in \Assign{<}{M'} &\text{iff $x < y$ or $x = y = n$,}
   \end{align*}
   where $n = \max(k,\len{w})$ and $k$~is the least number such that
   $M$ started on input~$w$ has halted after~$k$ steps. We leave the
-  verification that $\Sat{M'}{!T(M,w) \land E(M,w)}$ as an exercise.
+  verification that $\Sat{M'}{!T'(M,w) \land E(M,w)}$ as an exercise.
 \end{proof}
 
 \begin{prob}
@@ -185,7 +189,7 @@ machine~$M$ and input~$w$.
   all~$k < n$, i.e., the infinitely many terms~$\num{k}$ must all have
   different values in~$\Struct{M}$. But this requires that
   $\Domain{M}$ be infinite, so $\Struct{M}$ cannot be a finite model
-  of~$!T(M,w) \land !E(M, w)$.
+  of~$!T'(M,w) \land !E(M, w)$.
 \end{proof}
 
 \begin{prob}
@@ -212,7 +216,7 @@ machine~$M$ and input~$w$.
 
 \begin{cor}\ollabel{cor:fproof-incomp}%
   There can be no !!{derivation} system that is sound and complete for
-  \emph{finite} validity, i.e., a !!{derivation} system which has $\Proves !B$
+  \emph{finite} validity, i.e., !!a{derivation} system which has $\Proves !B$
   iff $\Sat{M}{!B}$ for every finite !!{structure}~$\Struct{M}$.
 \end{cor}
 
@@ -226,7 +230,7 @@ machine~$M$ and input~$w$.
   finitely satisfiable.  Explain why finite satisfiability is
   semi-decidable in the sense of
   \olref[tur][und][uns]{thm:valid-ce}. Use this to argue that if
-  there were a !!{derivation} system for finite validity, then finite
+  there were !!a{derivation} system for finite validity, then finite
   satisfiability would be decidable.
 \end{prob}
 

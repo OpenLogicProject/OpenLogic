@@ -23,20 +23,16 @@ choice function for~$a$.
 But matters get murkier as soon as we consider infinite sets. For
 example, consider this ``minimal'' extension to the above:
 
-\
-\\\emph{Countable Choice.} Every \emph{countable} set has a choice function. 
+\begin{defish}
+\emph{Countable Choice.} Every \emph{countable} set has a choice function. 
+\end{defish}
 
-\
-\\
 This is a special case of Choice. And it transpires that this
 principle was invoked fairly frequently, without  an obvious awareness
 of its use. Here are two nice examples.\footnote{Due to
 \citet[\S9.4]{Potter2004} and Luca Incurvati.}
 
-
-\
-
-\emph{Example 1.} 
+\begin{ex}
 Here is a natural thought: for any set $A$, either
 $\cardle{\omega}{A}$, or $\cardeq{A}{n}$ for some $n \in \omega$. This
 is one way to state the intuitive idea, that every set is either
@@ -50,7 +46,7 @@ guaranteed to exist. That is: we explicitly assumed Choice.
 In fact, \citet{Dedekind1888} offered his own proof of
 this claim, as follows:
 
-\begin{thm}[\emph{in $\Zminus$ + Countable Choice}]
+\begin{thm}[in $\Zminus + \text{Countable Choice}$]
 For any $A$, either $\cardle{\omega}{A}$ or $\cardeq{A}{n}$ for some
 $n \in \omega$.
 \end{thm}
@@ -79,26 +75,25 @@ are pairwise disjoint; so if $c_n = c_m$ then $n = m$. But every $c_n
 Dedekind did not flag that he had used Countable Choice. But, did
 \emph{you} spot its use? Look again. (Really: \emph{look again}.)
 
-The proof used Countable Choice twice. We used it {once}, to obtain
+The proof used Countable Choice twice. We used it once, to obtain
 our sequence of sets $A_0$, $A_1$, $A_2$, \dots\@ We then used it
 again to select our elements $c_n$ from each~$B_n$. Moreover, this use
 of Choice is ineliminable. \citet[p.~138]{Cohen1966} proved that the
 result fails if we have no version of Choice. That is: it is
 consistent with $\ZF$ that there are sets which are
 \emph{incomparable} with~$\omega$.
+\end{ex}
 
+\begin{ex} 
+In \citeyear{Cantor1878}, Cantor stated that a countable union of
+countable sets is countable. He did not present a proof, perhaps
+indicating that he took the proof to be obvious. Now, cautious as we
+are, we proved a more general version of this result in
+\olref[card-arithmetic][simp]{kappaunionkappasize}.  But our proof
+explicitly assumed Choice. And even the proof of the less general
+result requires Countable Choice.
 
-\
-
-\emph{Example 2.} In \citeyear{Cantor1878}, Cantor stated that {a
-countable union of countable sets is countable}. He did not present a
-proof, perhaps indicating that he took the proof to be obvious. Now,
-cautious as we are, we proved a more general version of this result in
-\olref[card-arithmetic][simp]{kappaunionkappasize}.  But our
-proof explicitly assumed Choice. And even the proof of the less
-general result requires Countable Choice.
-
-\begin{thm}[\emph{in $\Zminus$ + Countable Choice}]
+\begin{thm}[in $\Zminus + \text{Countable Choice}$]
 If $A_n$ is countable for each $n \in \omega$, then $\bigcup_{n <
 \omega} A_n$ is countable.
 \end{thm}
@@ -116,10 +111,11 @@ for each $n \in \omega$ there is !!a{surjection} $f_n \colon \omega
 Did you spot the use of the Countable Choice? It is used to choose our
 sequence of functions $f_0$, $f_1$, $f_2$, \dots\footnote{A similar
 use of Choice occurred in
-\olref[card-arithmetic][simp]{kappaunionkappasize}, when we gave the instruction ``For each $\beta \in \cardfont{a}$, fix !!a{injection} $f_\beta$''.} And
-again, the result fails in the absence of any Choice principle.
-Specifically, \citet{FefermanLevy1963} proved that it is consistent
-with $\ZF$ that a countable union of countable sets has
+\olref[card-arithmetic][simp]{kappaunionkappasize}, when we gave the
+instruction ``For each $\beta \in \cardfont{a}$, fix !!a{injection}
+$f_\beta$''.} And again, the result fails in the absence of any Choice
+principle. Specifically, \citet{FefermanLevy1963} proved that it is
+consistent with $\ZF$ that a countable union of countable sets has
 cardinality~$\beth_1$. But here is a much funnier statement of the
 point, from Russell:
 \begin{quote}
@@ -140,6 +136,7 @@ have countably many pairs of socks, then you have (only) countably
 many socks. And in fact, without Countable Choice (or something
 equivalent), a countable union of countable sets can fail to be
 countable. 
+\end{ex}
 
 The moral is that Countable Choice was used repeatedly, without much
 awareness of its users. The philosophicaly question is: How could we
@@ -148,8 +145,7 @@ awareness of its users. The philosophicaly question is: How could we
 An attempt at an intuitive justification might invoke an appeal to a
 supertask. Suppose we make the first choice in $\nicefrac{1}{2}$ a
 minute, our second choice in $\nicefrac{1}{4}$ a minute, \dots, our
-$n$-th choice in $\nicefrac{1}{2^n}$ a minute, \dots\@ Then within $1$
-minute, we will have made an $\omega$-sequence of choices, and defined
+$n$-th choice in $\nicefrac{1}{2^n}$ a minute, \dots\@ Then within $1$~minute, we will have made an $\omega$-sequence of choices, and defined
 a choice function. 
 
 But what, really, could such a thought-experiment tell us? For a
@@ -161,6 +157,6 @@ More important: it is not going to give us any justification for
 Choice \emph{tout court}, rather than \emph{mere} Countable Choice.
 For if we need \emph{every} set to have a choice function, then we'll
 need to be able to perform a ``supertask of arbitrary ordinal
-length''. Bluntly, that idea is laughable.
+length.'' Bluntly, that idea is laughable.
 
 \end{document}

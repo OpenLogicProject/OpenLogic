@@ -17,7 +17,7 @@ Natural deduction with rules for $\eq$ is sound.
 \begin{proof}
 Any !!{formula} of the form $\eq[t][t]$ is valid, since
 for every !!{structure}~$\Struct M$, $\Sat{M}{\eq[t][t]}$. (Note that
-we assume the term $t$ to be ground, i.e., it contains no variables,
+we assume the term $t$ to be closed, i.e., it contains no variables,
 so variable assignments are irrelevant).
 
 Suppose the last inference in !!a{derivation} is \Elim{\eq}, i.e., the
@@ -35,7 +35,7 @@ derivation has the following form:
 The premises $\eq[t_1][t_2]$ and $!A(t_1)$ are !!{derive}d from
 !!{undischarged} assumptions~$\Gamma_1$ and $\Gamma_2$, respectively.
 We want to show that $!A(t_2)$ follows from $\Gamma_1 \cup \Gamma_2$.
-Consider a !!{structure}~$\Struct{M}$ with $\Sat{M}{\Gamma_1 \cup
+Consider !!a{structure}~$\Struct{M}$ with $\Sat{M}{\Gamma_1 \cup
   \Gamma_2}$. By induction hypothesis, $\Sat{M}{!A(t_1)}$ and
 $\Sat{M}{\eq[t_1][t_2]}$. Therefore, $\Value{t_1}{M} = \Value{t_2}{M}$. Let
 $s$ be any variable assignment, and $m = \Value{t_1}{M} = \Value{t_2}{M}$. By
