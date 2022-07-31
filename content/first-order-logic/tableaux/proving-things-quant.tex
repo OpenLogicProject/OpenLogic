@@ -98,14 +98,14 @@ Let's see how we'd give !!a{tableau} for the set
 \[
 \sFmla{\False}{\lexists[x][!C(x,b)]},
 \sFmla{\True}{\lexists[x][(!A(x) \land !B(x))]},
-\sFmla{\True}{\lforall[x][(!B(x) \lif !C(x,b)]}.
+\sFmla{\True}{\lforall[x][(!B(x) \lif !C(x,b))]}.
 \]
 Starting as usual, we start with the assumptions:
 \begin{oltableau}
   [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
     [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
       just=\TAss
-      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b)]},
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
         just=\TAss]
     ]
   ]
@@ -118,7 +118,7 @@ to use a different one; let's pick~$a$ again.
   [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
     [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
       just=\TAss, checked
-      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b)]},
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
         just=\TAss
         [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
           just={\TRule{\True}{\lexists}[2]}]
@@ -127,22 +127,22 @@ to use a different one; let's pick~$a$ again.
   ]
 \end{oltableau}
 If we now apply $\TRule{\False}{\lexists}$ to line~$1$ or
-$\TRule{\True}{\lforall}$ to line~$3$, we have to decide with term~$t$
+$\TRule{\True}{\lforall}$ to line~$3$, we have to decide which term~$t$
 to substitute for~$x$. Since there is no eigenvariable condition for
 these rules, we can pick any term we like. In some cases we may even
 have to apply the rule several times with different~$t$s. But as a
-general rule, it pays to pick one of the terms already occuring in the
+general rule, it pays to pick one of the terms already occurring in the
 !!{tableau}---in this case, $a$ and~$b$---and in this case we can
 guess that $a$ will be more likely to result in a closed branch.
 \begin{oltableau}
   [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
     [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
       just=\TAss, checked
-      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b)]}, just=\TAss
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]}, just=\TAss
         [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)}, just={\TRule{\True}{\lexists}[2]}
           [\sFmla{\False}{\formula{C}(a,b)}, just={\TRule{\False}{\lexists}[1]}
             [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
-              just={\TRule{\True}{\lforall}[1]}
+              just={\TRule{\True}{\lforall}[3]}
             ]
           ]
         ]
@@ -156,12 +156,12 @@ have to use them again. Now apply $\TRule{\True}{\land}$ to line~$4$:
   [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
     [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
       just=\TAss, checked
-      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b)]}, just=\TAss
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]}, just=\TAss
         [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
           just={\TRule{\True}{\lexists}[2]}, checked
           [\sFmla{\False}{\formula{C}(a,b)}, just={\TRule{\False}{\lexists}[1]}
             [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
-              just={\TRule{\True}{\lforall}[1]}
+              just={\TRule{\True}{\lforall}[3]}
               [\sFmla{\True}{\formula{A}(a)}, just={\TRule{\True}{\land}[4]}
                 [\sFmla{\True}{\formula{B}(a)}, just={\TRule{\True}{\land}[4]}
                 ]
@@ -173,19 +173,19 @@ have to use them again. Now apply $\TRule{\True}{\land}$ to line~$4$:
     ]
   ]
 \end{oltableau}
-If we now apply $\TRule{\True}{\lif}$ to line~$5$, the !!{tableau} closes:
+If we now apply $\TRule{\True}{\lif}$ to line~$6$, the !!{tableau} closes:
 \begin{oltableau}
   [\sFmla{\False}{\lexists[x][\formula{C}(x,b)]}, just=\TAss
     [\sFmla{\True}{\lexists[x][(\formula{A}(x) \land \formula{B}(x))]},
       just=\TAss, checked
-      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b)]},
+      [\sFmla{\True}{\lforall[x][(\formula{B}(x) \lif \formula{C}(x,b))]},
         just=\TAss
         [\sFmla{\True}{\formula{A}(a) \land \formula{B}(a)},
           just={\TRule{\True}{\lexists}[2]}, checked
           [\sFmla{\False}{\formula{C}(a,b)},
             just={\TRule{\False}{\lexists}[1]}
             [\sFmla{\True}{\formula{B}(a) \lif \formula{C}(a,b)},
-              just={\TRule{\True}{\lforall}[1]}, checked
+              just={\TRule{\True}{\lforall}[3]}, checked
               [\sFmla{\True}{\formula{A}(a)},
                 just={\TRule{\True}{\land}[4]}
                 [\sFmla{\True}{\formula{B}(a)},
@@ -265,12 +265,12 @@ these should be next:
         \lexists[y][\formula{B}(y)]}, just=\TAss, checked
       [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
         [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
-          just={\TRule{\True}{\lnot}[3]}, checked
-          [\sFmla{\False}{\lforall[x][\formula{A}(x)]}, just={\TRule{\True}{\lif}[2]}
+          just={\TRule{\True}{\lnot}[3]}
+          [\sFmla{\False}{\lforall[x][\formula{A}(x)]}, just={\TRule{\True}{\lif}[2]},checked
             [\sFmla{\False}{\formula{A}(b)}, just={\TRule{\False}{\lforall}[5]}]
           ]
-          [\sFmla{\True}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lif}[2]}
-            [\sFmla{\True}{\formula{A}(c)}, just={\TRule{\False}{\lforall}[5]}]
+          [\sFmla{\True}{\lexists[y][\formula{B}(y)]}, just={\TRule{\True}{\lif}[2]},checked
+            [\sFmla{\True}{\formula{B}(c)}, just={\TRule{\True}{\lexists}[5]}]
           ]
         ]
       ]
@@ -288,22 +288,22 @@ $b$ and~$c$, respectively.
         \lexists[y][\formula{B}(y)]}, just=\TAss, checked
       [\sFmla{\True}{\lnot\lexists[y][\formula{B}(y)]}, just=\TAss, checked
         [\sFmla{\False}{\lexists[y][\formula{B}(y)]},
-          just={\TRule{\True}{\lnot}[3]}, checked
+          just={\TRule{\True}{\lnot}[3]}
           [\sFmla{\False}{\lforall[x][\formula{A}(x)]},
-            just={\TRule{\True}{\lif}[2]}
+            just={\TRule{\True}{\lif}[2]},checked
             [\sFmla{\False}{\formula{A}(b)},
               just={\TRule{\False}{\lforall}[5]}
               [\sFmla{\True}{\formula{A}(b)},
-                just={\TRule{\True}{\lforall}[1]}
+                just={\TRule{\True}{\lforall}[1]},close
               ]
             ]
           ]
           [\sFmla{\True}{\lexists[y][\formula{B}(y)]},
-            just={\TRule{\True}{\lif}[2]}
+            just={\TRule{\True}{\lif}[2]},checked
             [\sFmla{\True}{\formula{B}(c)},
               just={\TRule{\True}{\lexists}[5]}
               [\sFmla{\False}{\formula{B}(c)},
-                just={\TRule{\False}{\lexists}[4]}
+                just={\TRule{\False}{\lexists}[4]},close
               ]
             ]
           ]
