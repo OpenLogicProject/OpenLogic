@@ -84,10 +84,10 @@ let $\sFmla{S}{!A} \in \Gamma$ be the !!{signed formula} to which the
 rule is applied. If the rule does not result in a split branch, we
 have to show that the extended branch, i.e., $\Gamma$ together with
 the conclusions of the rule, is still satisfiable. If the rule results
-in split branch, we have to show that at least one of the two
+in a split branch, we have to show that at least one of the two
 resulting branches is satisfiable.
   
-First, we consider the possible inferences with only one premise.
+First, we consider the possible inferences that do not result in a split branch.
 \begin{enumerate}
 \item The branch is expanded by applying $\TRule{\True}{\lnot}$ to
   $\sFmla{\True}{\lnot !B} \in \Gamma$. Then the extended branch
@@ -111,9 +111,9 @@ First, we consider the possible inferences with only one premise.
   $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ satisfies both
   $\sFmla{\True}{!B}$ and $\sFmla{\True}{!C}$.
 \item The branch is expanded by applying $\TRule{\False}{\lor}$ to
-  $\sFmla{\True}{!B \lor !C} \in \Gamma$: Exercise.
+  $\sFmla{\False}{!B \lor !C} \in \Gamma$: Exercise.
 \item The branch is expanded by applying $\TRule{\False}{\lif}$ to
-  $\sFmla{\True}{!B \lif !C} \in \Gamma$: This results in two new
+  $\sFmla{\False}{!B \lif !C} \in \Gamma$: This results in two new
   !!{signed formula}s on the branch: $\sFmla{\True}{!B}$ and
   $\sFmla{\False}{!C}$. Suppose
   $\iftag{FOL}{\Sat{M}}{\pSat{v}}{\Gamma}$, in particular
@@ -159,7 +159,7 @@ First, we consider the possible inferences with only one premise.
 \item The branch is expanded by applying $\TRule{\False}{\lexists}$ to
   $\sFmla{\False}{\lexists[x][!B(x)]} \in \Gamma$: Exercise.}{}
 \end{enumerate}
-Now let's consider the possible inferences with two premises.
+Now let's consider the possible inferences that result in a split branch.
 \begin{enumerate}
 \item The branch is expanded by applying $\TRule{\False}{\land}$ to
   $\sFmla{\False}{!B \land !C} \in \Gamma$, which results in two
@@ -230,7 +230,7 @@ If $\Gamma$ is satisfiable, then it is consistent.
 \begin{proof}
 We prove the contrapositive.  Suppose that $\Gamma$ is not consistent.
 Then there are $!B_1$, \dots, $!B_n \in \Gamma$ and a closed
-!!{tableau} for $\{\sFmla{\True}{!B}, \dots, \sFmla{\True}{!B}\}$.  By
+!!{tableau} for $\{\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}$.  By
 \olref{thm:tableau-soundness}, there is no
 $\iftag{FOL}{\Struct{M}}{\pAssign{v}}$ such that
 $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B_i}$ for all $i=1$, \dots,~$n$.  But
