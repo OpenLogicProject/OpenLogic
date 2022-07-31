@@ -27,7 +27,7 @@ There are finite $\Gamma_0 = \{!B_1, \dots, !B_n\}$ and $\Gamma_1
   \begin{align*}
     \{\sFmla{\False}{!A}, &
     \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\} \\
-    \{\sFmla{\True}{\lnot !A}, &
+    \{\sFmla{\True}{!A}, &
     \sFmla{\True}{!C_1}, \dots, \sFmla{\True}{!C_m}\}
   \end{align*}
   have closed !!{tableau}s.  Using the \Cut{} rule on $!A$ we can
@@ -116,16 +116,17 @@ Prove that $\Gamma \Proves \lnot !A$ iff $\Gamma \cup \{!A\}$ is inconsistent.
   $\sFmla{\True}{!B_1}$, \dots, $\sFmla{\True}{!B_n}$ together with
   $\sFmla{\True}{!C_1}$, \dots, $\sFmla{\True}{!C_m}$, followed by an
   application of the \Cut{} rule, yielding two branches, one starting
-  with $\sFmla{\True}{!A}$, the other with $\sFmla{\False}{!A}$. Add
-  on the part below the assumptions of the first !!{tableau} on the
-  left side. Here, every rule application is still correct, and every
-  branch closes. On the right side, add the part below the assumptions
-  of the seond !!{tableau}, with the results of any applications
-  of~$\TRule{\True}{\lnot}$ to $\sFmla{\True}{\lnot !A}$ removed.
+  with $\sFmla{\True}{!A}$, the other with $\sFmla{\False}{!A}$.  On
+  the left side, add the part of the first
+  !!{tableau} below the assumptions. Here, every rule application is still
+  correct, and every branch closes. On the right side, add the part
+ of the second !!{tableau}  below the assumption, with the results of
+  any applications of~$\TRule{\True}{\lnot}$ to $\sFmla{\True}{\lnot
+    !A}$ removed.
 
   For if a branch was closed before because it contained the
   conclusion of \TRule{\True}{\lnot} applied to $\sFmla{\True}{\lnot
-    !A}$, i.e., $\sFmla{\False}{!A}$, as well as $\sFmla{\False}{!A}$,
+    !A}$, i.e., $\sFmla{\False}{!A}$, as well as $\sFmla{\True}{!A}$,
   the corresponding branch in the new !!{tableau} is also closed. If a
   branch in the old tableau was closed because it contained the
   assumption $\sFmla{\True}{\lnot !A}$ as well as
