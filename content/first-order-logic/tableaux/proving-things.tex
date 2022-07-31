@@ -47,7 +47,7 @@ are only a convenience for constructing tableaux and are not
 officially part of the syntax of tableaux.)
 
 There is one new !!{signed formula} to which we can apply a rule: the
-$\sFmla{\True}{!A \land !B}$ on line~$3$. Applying the
+$\sFmla{\True}{!A \land !B}$ on line~$2$. Applying the
 $\TRule{\True}{\land}$ rule results in:
 \begin{oltableau}
   [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}},
@@ -380,9 +380,9 @@ assumptions in which the rules are applied in a different order:
             [\sFmla{\True}{\formula{B} \land \formula{C}},
               just={\TRule{\True}{\lor}[1]}, checked
               [\sFmla{\True}{\formula{B}},
-                just={\TRule{\True}{\land}[3]}
+                just={\TRule{\True}{\land}[6]}
                 [\sFmla{\True}{\formula{C}},
-                  just={\TRule{\True}{\land}[3]},close
+                  just={\TRule{\True}{\land}[6]},close
                 ]
               ]
             ]
@@ -401,9 +401,9 @@ assumptions in which the rules are applied in a different order:
             [\sFmla{\True}{\formula{B} \land \formula{C}},
               just={\TRule{\True}{\lor}[1]}, checked
               [\sFmla{\True}{\formula{B}},
-                just={\TRule{\True}{\land}[3]}
+                just={\TRule{\True}{\land}[6]}
                 [\sFmla{\True}{\formula{C}},
-                  just={\TRule{\True}{\land}[3]},close
+                  just={\TRule{\True}{\land}[6]},close
                 ]
               ]
             ]
