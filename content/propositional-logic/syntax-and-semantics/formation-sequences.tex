@@ -20,10 +20,10 @@ notion of a \emph{formation sequence}.
 \begin{defn}[Formation sequences for formulas]
 \ollabel{defn:fseq-frm}
 A finite sequence $\tuple{!A_0,\dotsc,!A_n}$ of strings of
-symbols from the language $\Lang L_0$ is a \emph{formation
+symbols from the language~$\Lang L_0$ is a \emph{formation
 sequence} for $!A$ if $!A \ident !A_n$ and for all $i \leq n$,
 either $!A_i$ is an atomic formula or there exist $j,k < i$ and
-a variable $x$ such that one of the following holds:
+a variable~$x$ such that one of the following holds:
 \begin{enumerate}
     \tagitem{prvNot}{$!A_i \ident \lnot !A_j$.}{}%
     \tagitem{prvAnd}{$!A_i \ident (!A_j \land !A_k)$.}{}%
@@ -62,33 +62,33 @@ contribute to the construction.
 
 \begin{prop}
 \ollabel{prop:formed}
-Every !!{formula}~$!A$ in $\Frm[L_0]$ has a formation sequence.
+Every !!{formula}~$!A$ in~$\Frm[L_0]$ has a formation sequence.
 \end{prop}
 
 \begin{proof}
-Suppose $!A$ is atomic. Then the sequence $\tuple{!A}$ is a
-formation sequence for $!A$.
+Suppose $!A$ is atomic. Then the sequence~$\tuple{!A}$ is a
+formation sequence for~$!A$.
 %
-Now suppose that $!B$ and $!C$ have formation sequences
+Now suppose that $!B$ and~$!C$ have formation sequences
 $\tuple{!B_0,\dotsc,!B_n}$ and $\tuple{!C_0,\dotsc,!C_m}$
 respectively.
 %
 \begin{enumerate}
   \tagitem{prvNot}{If $!A \ident \lnot !B$,
       then $\tuple{!B_0,\dotsc,!B_n,\lnot !B_n}$
-      is a formation sequence for $!A$.}{}
+      is a formation sequence for~$!A$.}{}
   \tagitem{prvAnd}{If $!A \ident (!B \land !C)$,
       then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \land !C_m)}$
-      is a formation sequence for $!A$.}{}
+      is a formation sequence for~$!A$.}{}
   \tagitem{prvOr}{If $!A \ident (!B \lor !C)$,
       then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lor !C_m)}$
-      is a formation sequence for $!A$.}{}
+      is a formation sequence for~$!A$.}{}
   \tagitem{prvIf}{If $!A \ident (!B \lif !C)$,
       then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lif !C_m)}$
-      is a formation sequence for $!A$.}{}
+      is a formation sequence for~$!A$.}{}
   \tagitem{prvIff}{If $!A \ident (!B \liff !C)$,
       then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \liff !C_m)}$
-      is a formation sequence for $!A$.}{}
+      is a formation sequence for~$!A$.}{}
 \end{enumerate}
 By the principle of induction on !!{formula}s,
 every !!{formula} has a formation sequence.
@@ -103,26 +103,26 @@ sequences.
 \begin{lem}
 \ollabel{lem:fseq-init}
 Suppose that $\tuple{!A_0,\dotsc,!A_n}$ is a formation sequence
-for $!A_n$, and that $k \leq n$. Then $\tuple{!A_0,\dotsc,!A_k}$
-is a formation sequence for $!A_k$.
+for~$!A_n$, and that $k \leq n$. Then $\tuple{!A_0,\dotsc,!A_k}$
+is a formation sequence for~$!A_k$.
 \end{lem}
 
 \begin{thm}
 \ollabel{thm:fseq-frm-equiv}
 $\Frm[L_0]$ is the set of all expressions (strings of symbols)
-in the language $\Lang L_0$ with a formation sequence.
+in the language~$\Lang L_0$ with a formation sequence.
 \end{thm}
 
 \begin{proof}
-Let $F$ be the set of all strings of symbols in the language
-$\Lang L_0$ that have a formation sequence. We have seen in
-\olref[pl][syn][fseq]{prop:formed} that $\Frm[L_0] \subseteq F$,
-so now we prove the converse.
+Let $F$ be the set of all strings of symbols in the language~$\Lang
+L_0$ that have a formation sequence. We have seen in
+\olref[pl][syn][fseq]{prop:formed} that $\Frm[L_0] \subseteq F$, so
+now we prove the converse.
 
 Suppose $!A$ has a formation sequence $\tuple{!A_0,\dotsc,!A_n}$.
-We prove that $!A \in \Frm[L_0]$ by strong induction on $n$.
+We prove that $!A \in \Frm[L_0]$ by strong induction on~$n$.
 Our induction hypothesis is that every string of symbols with a
-formation sequence of length $m < n$ is in $\Frm[L_0]$.
+formation sequence of length $m < n$ is in~$\Frm[L_0]$.
 By the definition of a formation sequence, either $!A_n$ is
 atomic or there must exist $j,k < n$ such that one of the
 following is the case:
@@ -134,14 +134,14 @@ following is the case:
     \tagitem{prvIff}{$!A_i \ident (!A_j \liff !A_k)$.}{}%
 \end{enumerate}
 Now we reason by cases. If $!A_n$ is atomic then
-$!A_n \in \Frm[L_0]$. Suppose instead that $\varphi \equiv
-(!A_j \land !A_k)$. By lemma \olref[pl][syn][fseq]{lem:fseq-init},
+$!A_n \in \Frm[L_0]$. Suppose instead that $!A \equiv
+(!A_j \land !A_k)$. By \olref[pl][syn][fseq]{lem:fseq-init},
 $\tuple{!A_0,\dotsc,!A_j}$ and $\tuple{!A_0,\dotsc,!A_k}$ are
-formation sequences for $!A_j$ and $!A_k$ respectively. Since
+formation sequences for $!A_j$ and~$!A_k$ respectively. Since
 these are proper initial subsequences of the formation sequence
-for $\varphi$, they both have length less than $n$. Therefore by
-the induction hypothesis, $!A_j$ and $!A_k$ are in $\Frm[L_0]$,
-and so by the definition of a !!{formula}, so is
+for~$!A$, they both have length less than~$n$. Therefore by
+the induction hypothesis, $!A_j$ and~$!A_k$ are in~$\Frm[L_0]$,
+and so by the definition of !!a{formula}, so is
 $(!A_j \land !A_k)$. The other cases follow by parallel
 reasoning.
 \end{proof}
