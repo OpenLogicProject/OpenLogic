@@ -885,7 +885,9 @@
 \DeclareDocumentCommand \cardeq { m m } {#1 \approx #2}
 
 % - `\tuple{x,y}`: pairs, tuples, sequences
-\DeclareDocumentCommand \tuple { m } {\langle #1 \rangle}
+\DeclareDocumentMacro \openTuple {\langle}
+\DeclareDocumentMacro \closeTuple {\rangle}
+\DeclareDocumentCommand \tuple { m } {\openTuple #1 \closeTuple}
 
 % - `\comp{f}{g}`: composition of f with g, defaults to $g \circ f$
 \DeclareDocumentCommand \comp { m m }{#2 \circ #1}

@@ -25,18 +25,19 @@ $!A_1$, \dots,~$!A_n$, then $\Gn{\delta}$ is
 \end{defn}
 
 \begin{ex}
-  Consider the very simple !!{derivation}
+  Consider the very simple !!{derivation}:
   \begin{derivation}
   1. & $!B \lif (!B \lor !A)$ \\
   2. & $(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))$\\
   3. & $!A  \lif (!B \lif (!B \lor !A))$
   \end{derivation}
-  The G\"odel number of this derivation would simply be
-  \[
-  \tuple{\Gn{!B \lif (!B \lor !A)}, 
-  \Gn{(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))},
-  \Gn{!A  \lif (!B \lif (!B \lor !A))}}.
-  \]
+  The G\"odel number of this derivation would be
+  \begin{align*}
+  \openTuple\, 
+    & \Gn{!B \lif (!B \lor !A)}, \\
+    &\Gn{(!B \lif (!B \lor !A)) \lif (!A  \lif (!B \lif (!B \lor !A)))},\\
+    & \Gn{!A  \lif (!B \lif (!B \lor !A))} \,\closeTuple.
+  \end{align*}
 \end{ex}
 
 \begin{explain}
@@ -47,7 +48,7 @@ are simple: e.g., given a G\"odel number~$d$ of !!a{derivation},
 $(d)_{\len{d}-1}$ gives us the G\"odel number of its end-!!{formula}.  Some are
 much harder.  We'll at least sketch how to do this.  The goal is to
 show that the relation ``$\delta$ is !!a{derivation} of~$!A$
-from~$\Gamma$'' is primitive recursive on the G\"odel numbers of
+from~$\Gamma$'' is primitive recursive in the G\"odel numbers of
 $\delta$ and~$!A$.
 \end{explain}
 
@@ -56,8 +57,8 @@ $\delta$ and~$!A$.
 The following relations are primitive recursive:
 \begin{enumerate}
 \item $!A$ is an axiom.
-\item The $i$th line in $\delta$ is justified by modus ponens
-\item The $i$th line in $\delta$ is justified by \QR.
+\item The $i$-th line in $\delta$ is justified by modus ponens
+\item The $i$-th line in $\delta$ is justified by \QR.
 \item $\delta$ is a correct !!{derivation}.
 \end{enumerate}
 \end{prop}
@@ -76,13 +77,14 @@ are primitive recursive.
   !B \lif (!C \lif !B).
   \]
   $!A$ is an instance of this axiom schema if there are !!{formula}s
-  $!B$ and $!C$ such that we obtain $!A$ when we concatenate $($ with
-  $!B$ with $\lif$ with $($ with $!C$ with $\lif$ with $!B$ and with
-  $))$. We can test the corresponding property of the G\"odel number
-  $n$ of~$!A$, since concatenation of sequences is primitive
-  recursive, and the G\"odel numbers of $!B$ and $C$ must be smaller
-  than the G\"odel number of~$!A$, since when the relation holds, both
-  $!B$ and $!C$ are sub-!!{formula}s of~$!A$. Hence, we can define
+  $!B$ and $!C$ such that we obtain $!A$ when we concatenate `$($'
+  with $!B$ with `$\lif$' with `$($' with $!C$ with `$\lif$' with $!B$
+  and with~`$))$'. We can test the corresponding property of the
+  G\"odel number $n$ of~$!A$, since concatenation of sequences is
+  primitive recursive and the G\"odel numbers of $!B$ and $!C$ must
+  be smaller than the G\"odel number of~$!A$, since when the relation
+  holds, both $!B$ and $!C$ are sub-!!{formula}s of~$!A$. Hence, we
+  can define:
   \begin{multline*}
   \fn{IsAx}_{!B \lif (!C \lif !B)}(n) \defiff \bexists{b< n}{
     \bexists{c < n}{(\fn{Sent}(b) \land \fn{Sent}(c) \land {}}}\\ n =
@@ -90,10 +92,10 @@ are primitive recursive.
   \Gn{\lif} \concat b \concat \Gn{))}).
   \end{multline*}
   If we have such a definition for each axiom schema, their
-  disjunction defines the property $\fn{IsAx}(n)$, ``$n$ is the
+  disjunction defines the property $\fn{IsAx}(n)$, ``$n$~is the
   G\"odel number of an axiom.''
-\item The $i$th line in $\delta$ is justified by modus ponens iff there
-  are lines $j$ and $k < i$ where the !!{sentence} on line $j$ is some
+\item The $i$-th line in $\delta$ is justified by modus ponens iff there
+  are lines $j$ and $k < i$ where the !!{sentence} on line~$j$ is some
   formula $!A$, the sentence on line~$k$ is $!A \lif !B$, and the
   sentence on line~$i$ is~$!B$.
   \begin{multline*}
@@ -139,7 +141,7 @@ are primitive recursive.
 
   We leave the other version of \QR{} as an exercise.
 \item $d$ is the G\"odel number of a correct !!{derivation} iff every
-  line in it is an axiom, or justified by modus ponens or \QR. Hence:
+  line in it is an axiom, or justified by modus ponens or~\QR. Hence:
   \[
   \fn{Deriv}(d) \defiff \bforall{i < \len{d}}{(\fn{IsAx}((d)_i) \lor
     \fn{MP}(d,i) \lor \fn{QR}(d, i))}
@@ -205,7 +207,7 @@ antecedents and given !!{sentence} as consequent:
   &\qquad\fn{Deriv}(x)).
 \end{align*}
 The bound on~$s$ is given by considering that each $(s)_i$ is the
-G\"odel number of a subformula of the last line of the derivation,
+G\"odel number of a sub-!!{formula} of the last line of the !!{derivation},
 i.e., is less than $(x)_{\len{x}-1}$. The number of antecedents $!B
 \in \Gamma$, i.e., the length of~$s$, is less than the length of the
 last line of~$x$.
