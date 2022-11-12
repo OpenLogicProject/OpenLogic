@@ -74,7 +74,7 @@
 
 \begin{prop}\ollabel{prop:provability-lor}
   \begin{enumerate}
-  \item $!A \lor !B, \lnot !A, \lnot !B$ is inconsistent.
+  \item $\{!A \lor !B, \lnot !A, \lnot !B\}$ is inconsistent.
   \item Both $!A \Proves !A \lor !B$ and $!B \Proves !A \lor !B$.
   \end{enumerate}
 \end{prop}
@@ -145,9 +145,9 @@
           ]
         ]
       \end{oltableau}
-    \item Both s$\{\sFmla{\False}{!A \lif !B},
+    \item Both $\{\sFmla{\False}{!A \lif !B},
       \sFmla{\True}{\lnot !A}\}$ and $\{\sFmla{\False}{!A \lif !B},
-      \sFmla{\True}{\lnot !B}\}$ have closed !!{tableau}s:
+      \sFmla{\True}{!B}\}$ have closed !!{tableau}s:
       \begin{oltableau}
         [\sFmla{\False}{\formula{A} \lif \formula{B}}, just = \TAss
           [\sFmla{\True}{\lnot \formula{A}}, just = \TAss
@@ -161,10 +161,9 @@
       \end{oltableau}
       \begin{oltableau}
         [\sFmla{\False}{\formula{A} \lif \formula{B}}, just = \TAss
-          [\sFmla{\True}{\lnot \formula{B}}, just = \TAss
+          [\sFmla{\True}{\formula{B}}, just = \TAss
             [\sFmla{\True}{\formula{A}}, just = {\TRule{\False}{\lif}[1]}
-              [\sFmla{\False}{\formula{B}}, just = {\TRule{\False}{\lif}[1]}
-                [\sFmla{\False}{\formula{B}}, just = {\TRule{\True}{\lnot}[2]}, close]
+              [\sFmla{\False}{\formula{B}}, just = {\TRule{\False}{\lif}[1]},close
               ]
             ]
           ]

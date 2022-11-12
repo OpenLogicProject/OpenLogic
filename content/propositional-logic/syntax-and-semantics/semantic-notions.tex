@@ -14,12 +14,12 @@ We define the following semantic notions:
 
 \begin{defn} 
 \begin{enumerate}
-\item !!^a{formula} $!A$ is \emph{satisfiable} if for
+\item !!^a{formula}~$!A$ is \emph{satisfiable} if for
   some~$\pAssign{v}$, $\pSat{v}{!A}$; it is
   \emph{unsatisfiable} if for no $\pAssign{v}$, $\pSat{v}{!A}$;
-\item !!^a{formula} $!A$ is a \emph{tautology} if $\pSat{v}{!A}$ for
+\item !!^a{formula}~$!A$ is a \emph{tautology} if $\pSat{v}{!A}$ for
   all !!{valuation}s~$v$;
-\item !!^a{formula} $!A$ is \emph{contingent} if it is satisfiable but
+\item !!^a{formula}~$!A$ is \emph{contingent} if it is satisfiable but
   not a tautology;
 \item If $\Gamma$ is a set of !!{formula}s, $\Gamma \Entails !A$ (``$\Gamma$
   entails $!A$'') if and only if $\pSat{v}{!A}$ for every
@@ -31,6 +31,17 @@ We define the following semantic notions:
 \end{enumerate} 
 \end{defn}
 
+\begin{prob} 
+ For each of the following four !!{formula}s determine whether it
+ is (a)~satisfiable, (b)~tautology, and (c)~contingent.
+\begin{enumerate}
+  \item \( ( \Obj p_0 \lif ( \lnot \Obj p_1 \lif \lnot \Obj p_0 ) ) \).
+  \item \( ( ( \Obj p_0 \land \lnot \Obj p_1 ) \lif ( \lnot \Obj p_0 \land \Obj p_2 )) \liff ( ( \Obj p_2 \lif \Obj p_0 ) \lif ( \Obj p_0 \lif \Obj p_1 )) \).
+  \item \( ( \Obj p_0 \liff \Obj p_1 ) \lif ( \Obj p_2 \liff \lnot \Obj p_1 ) \).
+  \item \( (( \Obj p_0 \liff ( \lnot \Obj p_1 \land \Obj p_2 )) \lor ( \Obj p_2 \lif ( \Obj p_0 \liff \Obj p_1 ))) \).
+\end{enumerate}
+\end{prob}
+
 \begin{prop}
 \ollabel{prop:semanticalfacts} 
 \begin{enumerate} 
@@ -40,7 +51,7 @@ We define the following semantic notions:
   $\Gamma \Entails !B$;
 \item If $\Gamma$ is satisfiable then every finite subset of $\Gamma$
   is also satisfiable; 
-\item \ollabel{def:Monotony} Monotony: if $\Gamma \subseteq \Delta$
+\item \ollabel{def:monotonicity} Monotonicity: if $\Gamma \subseteq \Delta$
   and $\Gamma \Entails !A$ then also $\Delta \Entails !A$;
 \item \ollabel{def:Cut} Transitivity: if $\Gamma \Entails !A$ and
   $\Delta \cup \{ !A\} \Entails !B$ then $\Gamma \cup \Delta \Entails

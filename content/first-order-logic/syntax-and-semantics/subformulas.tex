@@ -13,7 +13,7 @@
 \begin{explain}
 It is often useful to talk about the !!{formula}s that ``make up'' a
 given !!{formula}.  We call these its \emph{!!{subformula}s}.  Any
-!!{formula} counts as a !!{subformula} of itself; a subformula of $!A$
+!!{formula} counts as !!a{subformula} of itself; a subformula of $!A$
 other than $!A$ itself is a \emph{proper !!{subformula}}.
 \end{explain}
 
@@ -40,7 +40,7 @@ of $!A$ are defined inductively as follows:
 
 \begin{defn}[Proper !!^{subformula}]
 If $!A$ is !!a{formula}, the \emph{proper !!{subformula}s}
-of $!A$ are recursively as follows:
+of $!A$ are defined recursively as follows:
 \begin{enumerate}
 \item Atomic !!{formula}s have no proper !!{subformula}s.
 
@@ -86,5 +86,26 @@ come ``before'' the one we are defining---in our case, when defining
 ``proper !!{subformula}'' for $(!B \ast !C)$ we only use the proper
 !!{subformula}s of the ``earlier'' !!{formula}s $!B$ and $!C$.
 \end{explain}
+
+\begin{prop}
+\ollabel{prop:subfrm-trans}
+Suppose $!B$ is a subformula of $!A$ and $!C$ is a subformula of $!B$.
+Then $!C$ is a subformula of $!A$. In other words, the subformula
+relation is transitive.
+\end{prop}
+
+\begin{prob}
+Prove \olref[fol][syn][sbf]{prop:subfrm-trans}.
+\end{prob}
+
+\begin{prop}
+\ollabel{prop:count-subfrms}
+Suppose $!A$ is a formula with $n$ connectives and quantifiers.
+Then $!A$ has at most $2n+1$ subformulas.
+\end{prop}
+
+\begin{prob}
+Prove \olref[fol][syn][sbf]{prop:count-subfrms}.
+\end{prob}
 
 \end{document}

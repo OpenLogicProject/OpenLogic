@@ -94,7 +94,7 @@ correct derivation.
 \end{ex}
 
 \begin{ex}
-Sometimes we may derive a !!{formula} from other !!{formula}s.
+Sometimes we may derive !!a{formula} from other !!{formula}s.
 In these cases, we may have undischarged assumptions. It is 
 important to keep track of our assumptions as well
 as the end goal.
@@ -228,14 +228,28 @@ by using \Elim{\lnot}.
 \end{ex}
 
 \begin{prob}
-Give !!{derivation}s of the following:
+Give !!{derivation}s that show the following:
 \begin{enumerate}
-\item $\lexists[y][!A(y)] \lif !B$ from the assumption
-  $\lforall[x][(!A(x) \lif !B)]$
-\item $\lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$
+\item $\Proves (\lforall[x][!A(x)] \land \lforall[y][!B(y)]) \lif
+\lforall[z][(!A(z) \land !B(z))]$.
+\item $\Proves (\lexists[x][!A(x)] \lor \lexists[y][!B(y)]) \lif
+\lexists[z][(!A(z) \lor !B(z))]$.
+\item $\lforall[x][(!A(x) \lif !B)] \Proves \lexists[y][!A(y)] \lif !B$.
+\item $\lforall[x][\lnot !A(x)] \Proves \lnot\lexists[x][!A(x)]$.
+\item $\Proves \lnot\lexists[x][!A(x)] \lif \lforall[x][\lnot !A(x)]$.
+\item $\Proves \lnot\lexists[x][\lforall[y][((!A(x,y) \lif \lnot
+!A(y,y)) \land (\lnot !A(y,y) \lif !A(x,y)))]]$.
 \end{enumerate}
 \end{prob}
 
-
+\begin{prob}
+Give !!{derivation}s that show the following:
+\begin{enumerate}
+\item $\Proves \lnot\lforall[x][!A(x)] \lif \lexists[x][\lnot!A(x)]$.
+\item $(\lforall[x][!A(x)] \lif !B) \Proves \lexists[y][(!A(y) \lif !B)]$.
+\item $\Proves \lexists[x][(!A(x) \lif \lforall[y][!A(y)])]$.
+\end{enumerate}
+(These all require the $\FalseCl$~rule.)
+\end{prob}
 
 \end{document}

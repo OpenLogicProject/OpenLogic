@@ -21,8 +21,9 @@ by a correct inference.
 \end{explain}
 
 \begin{defn}[!!^{derivation}]
-A \emph{!!{derivation}} of !!a{sentence}~$!A$ from assumptions~$\Gamma$
-is a tree of !!{sentence}s satisfying the following conditions:
+\Article{derivation} \emph{!!{derivation}} of !!a{sentence}~$!A$ from
+assumptions~$\Gamma$ is a finite tree of !!{sentence}s satisfying the
+following conditions:
 \begin{enumerate}
 \item The topmost !!{sentence}s of the tree are either in $\Gamma$ or
   are !!{discharged} by an inference in the tree.
@@ -32,13 +33,18 @@ is a tree of !!{sentence}s satisfying the following conditions:
   rule whose conclusion stands directly below that !!{sentence} in the
   tree.
 \end{enumerate}
-We then say that $!A$ is the \emph{conclusion} of the
-!!{derivation} and that $!A$ is \emph{!!{derivable}} from~$\Gamma$.
+We then say that $!A$ is the \emph{conclusion} of the !!{derivation}
+and $\Gamma$ its !!{undischarged} assumptions.
+
+If !!a{derivation} of $!A$ from~$\Gamma$ exists, we say that $!A$ is
+\emph{!!{derivable}} from~$\Gamma$, or in symbols: $\Gamma \Proves
+!A$. If there is !!a{derivation} of~$!A$ in which every assumption is
+!!{discharged}, we write~$\Proves !A$.
 \end{defn}
 
 \begin{ex}
-Every assumption on its own is !!a{derivation}. So, e.g., $!C$ by
-itself is !!a{derivation}, and so is $!D$ by itself.  We can obtain a
+Every assumption on its own is !!a{derivation}. So, e.g., $!A$ by
+itself is !!a{derivation}, and so is $!B$ by itself.  We can obtain a
 new !!{derivation} from these by applying, say, the $\Intro{\land}$
 rule,
 \begin{prooftree}
@@ -86,6 +92,8 @@ the following would be correct !!{derivation}s:
 \DischargeRule{\Intro{\lif}}{1}
 \UnaryInfC{$!D \lif (!C \land !D)$}
 \end{prooftree}
+They show, respectively, that $!D \Proves !C \lif (!C \land !D)$ and
+$!C \Proves !D \lif (!C \land !D)$.
 
 Remember that discharging of assumptions is a permission, not a
 requirement: we don't have to discharge the assumptions. In

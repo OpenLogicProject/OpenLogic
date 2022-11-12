@@ -1,0 +1,4 @@
+#!/bin/bash
+
+grep shash $1/.git/gitHeadInfo.gin |sed 's/[^{]*{\([^}]*\)},/\\setOLPrevision\{\1/' > olprevision.tex
+grep authsdate $1/.git/gitHeadInfo.gin |sed 's/[^{]*{\([^}]*\)},/(\1)\}/' >> olprevision.tex

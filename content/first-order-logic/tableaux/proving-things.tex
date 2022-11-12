@@ -47,7 +47,7 @@ are only a convenience for constructing tableaux and are not
 officially part of the syntax of tableaux.)
 
 There is one new !!{signed formula} to which we can apply a rule: the
-$\sFmla{\True}{!A \land !B}$ on line~$3$. Applying the
+$\sFmla{\True}{!A \land !B}$ on line~$2$. Applying the
 $\TRule{\True}{\land}$ rule results in:
 \begin{oltableau}
   [\sFmla{\False}{(\formula{A} \land \formula{B}) \lif \formula{A}},
@@ -380,9 +380,9 @@ assumptions in which the rules are applied in a different order:
             [\sFmla{\True}{\formula{B} \land \formula{C}},
               just={\TRule{\True}{\lor}[1]}, checked
               [\sFmla{\True}{\formula{B}},
-                just={\TRule{\True}{\land}[3]}
+                just={\TRule{\True}{\land}[6]}
                 [\sFmla{\True}{\formula{C}},
-                  just={\TRule{\True}{\land}[3]},close
+                  just={\TRule{\True}{\land}[6]},close
                 ]
               ]
             ]
@@ -401,9 +401,9 @@ assumptions in which the rules are applied in a different order:
             [\sFmla{\True}{\formula{B} \land \formula{C}},
               just={\TRule{\True}{\lor}[1]}, checked
               [\sFmla{\True}{\formula{B}},
-                just={\TRule{\True}{\land}[3]}
+                just={\TRule{\True}{\land}[6]}
                 [\sFmla{\True}{\formula{C}},
-                  just={\TRule{\True}{\land}[3]},close
+                  just={\TRule{\True}{\land}[6]},close
                 ]
               ]
             ]
@@ -418,11 +418,43 @@ assumptions in which the rules are applied in a different order:
 \begin{prob}
 Give closed !!{tableau}s of the following:
 \begin{enumerate}
-\item $\sFmla{\False}{\lnot(!A \lif !B) \lif (!A \land \lnot !B)}$
-\item $\sFmla{\False}{(!A \lif !C) \lor (!B \lif !C)}, \sFmla{\True}{(!A \land
-  !B) \lif !C}$
+\item $\sFmla{\True}{!A \land (!B \land !C)}, \sFmla{\False}{(!A \land !B) \land !C}$.
+\item $\sFmla{\True}{!A \lor (!B \lor !C)}, \sFmla{\False}{(!A \lor !B) \lor !C}$.
+\item $\sFmla{\True}{!A \lif (!B \lif !C)}, \sFmla{\False}{!B \lif (!A \lif !C)}$.
+\item $\sFmla{\True}{!A}, \sFmla{\False}{\lnot\lnot !A}$.
 \end{enumerate}
 \end{prob}
 
+\begin{prob}
+Give closed !!{tableau}s of the following:
+\begin{enumerate}
+\item $\sFmla{\True}{(!A \lor !B) \lif !C}, \sFmla{\False}{!A \lif !C}$.
+\item $\sFmla{\True}{(!A \lif !C) \land (!B \lif !C)}, \sFmla{\False}{(!A \lor !B) \lif !C}$.
+\item $\sFmla{\False}{\lnot(!A \land \lnot !A)}$.
+\item $\sFmla{\True}{!B \lif !A}, \sFmla{\False}{\lnot !A \lif \lnot !B}$.
+\item $\sFmla{\False}{(!A \lif \lnot !A) \lif \lnot !A}$.
+\item $\sFmla{\False}{\lnot(!A \lif !B) \lif \lnot !B}$.
+\item $\sFmla{\True}{!A \lif !C}, \sFmla{\False}{\lnot (!A \land \lnot !C)}$.
+\item $\sFmla{\True}{!A \land \lnot !C}, \sFmla{\False}{\lnot (!A \lif !C)}$.
+\item $\sFmla{\True}{!A \lor !B, \lnot !B}, \sFmla{\False}{!A}$.
+\item $\sFmla{\True}{\lnot !A \lor \lnot !B}, \sFmla{\False}{\lnot(!A \land !B)}$.
+\item $\sFmla{\False}{(\lnot !A \land \lnot !B) \lif\lnot(!A \lor !B)}$.
+\item $\sFmla{\False}{\lnot(!A \lor !B) \lif (\lnot !A \land \lnot !B)}$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Give closed !!{tableau}s of the following:
+\begin{enumerate}
+\item $\sFmla{\True}{\lnot(!A \lif !B)}, \sFmla{\False}{!A}$.
+\item $\sFmla{\True}{\lnot(!A \land !B)}, \sFmla{\False}{\lnot !A \lor \lnot !B}$.
+\item $\sFmla{\True}{!A \lif !B}, \sFmla{\False}{\lnot !A \lor !B}$.
+\item $\sFmla{\False}{\lnot \lnot !A \lif !A}$.
+\item $\sFmla{\True}{!A \lif !B}, \sFmla{\True}{\lnot !A \lif !B}, \sFmla{\False}{!B}$.
+\item $\sFmla{\True}{(!A \land !B) \lif !C}, \sFmla{\False}{(!A \lif !C) \lor (!B \lif !C)}$.
+\item $\sFmla{\True}{(!A \lif !B) \lif !A}, \sFmla{\False}{!A}$.
+\item $\sFmla{\False}{(!A \lif !B) \lor (!B \lif !C)}$.
+\end{enumerate}
+\end{prob}
 
 \end{document}

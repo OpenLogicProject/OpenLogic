@@ -31,13 +31,13 @@ Think of $d$ as coding the sequence $\tuple{a_0, \dots, a_n}$, and
 $\beta(d,i)$ returning the $i$-th element. (Note that this ``coding''
 does \emph{not} use the power-of-primes coding we're already familiar
 with!). The lemma is fairly minimal; it doesn't say we can concatenate
-sequences or append elements, or even that we can \emph{compute} $d$
+sequences or append elements, or even that we can \emph{compute}~$d$
 from $a_0$, \dots,~$a_n$ using functions definable by composition and
 regular minimization. All it says is that there is a ``decoding''
 function such that every sequence is ``coded.''
 
 The use of the notation $\beta$ is G\"odel's. To repeat, the hard part
-of proving the lemma is defining a suitable $\beta$ using the
+of proving the lemma is defining a suitable~$\beta$ using the
 seemingly restricted resources, i.e., using just composition and
 minimization---however, we're allowed to use addition, multiplication,
 and~$\Char{=}$. There are various ways to prove this lemma, but one of
@@ -45,13 +45,13 @@ the cleanest is still G\"odel's original method, which used a
 number-theoretic fact called the Chinese Remainder theorem.
 
 \begin{defn}
-Two natural numbers $a$ and $b$ are \emph{relatively prime} if their
+Two natural numbers $a$ and $b$ are \emph{relatively prime} iff their
 greatest common divisor is~$1$; in other words, they have no other
 divisors in common.
 \end{defn}
 
 \begin{defn}
-$a \equiv b \mod c$ means $c \mid (a-b)$, i.e., $a$ and $b$ have the
+Natural numbers $a$ and $b$ are \emph{congruent modulo~$c$}, $a \equiv b \mod c$, iff $c \mid (a-b)$, i.e., $a$ and $b$ have the
 same remainder when divided by~$c$.
 \end{defn}
 
@@ -69,10 +69,10 @@ z & \equiv y_n \mod x_n.
 
 Here is how we will use the Chinese Remainder theorem: if $x_0$,
 \dots,~$x_n$ are bigger than $y_0$, \dots,~$y_n$ respectively, then we
-can take $z$ to code the sequence $\tuple{y_0, \dots,y_n}$. To recover
-$y_i$, we need only divide $z$ by~$x_i$ and take the remainder. To use
-this coding, we will need to find suitable values for $x_0$,
-\dots,~$x_n$.
+can take $z$ to code the sequence $\tuple{y_0, \dots,y_n}$. To
+recover~$y_i$, we need only divide $z$ by~$x_i$ and take the
+remainder. To use this coding, we will need to find suitable values
+for $x_0$, \dots,~$x_n$.
 
 A couple of observations will help us in this regard. Given
 $y_0$, \dots,~$y_n$, let
@@ -89,10 +89,10 @@ x_n & = 1 + (n+1) \cdot \fact{j}
 \end{align*}
 Then two things are true:
 \begin{enumerate}
-\item $x_0$, \dots,~$x_n$ are relatively prime.
-\item For each $i$, $y_i < x_i$.
+\item\ollabel{rel-prime} $x_0$, \dots,~$x_n$ are relatively prime.
+\item\ollabel{less} For each $i$, $y_i < x_i$.
 \end{enumerate}
-To see that (1) is true, note that if $p$ is a prime number and $p
+To see that \olref{rel-prime} is true, note that if $p$ is a prime number and $p
 \mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) \fact{j}$ and $p \mid
 1 + (k+1) \fact{j}$. But then $p$ divides their difference,
 \[
@@ -103,7 +103,7 @@ Since $p$ divides $1 + (i+1)\fact{j}$, it can't divide $\fact{j}$ as well
 divides $i-k$, since $p$ divides $(i-k)\fact{j}$. But $\left| i-k
 \right|$ is at most~$n$, and we have chosen $j > n$, so this implies
 that $p \mid \fact{j}$, again a contradiction. So there is no prime
-number dividing both $x_i$ and $x_k$. Clause (2) is easy: we have $y_i <
+number dividing both $x_i$ and $x_k$. Clause~\olref{less} is easy: we have $y_i <
 j < \fact{j} < x_i$.
 
 Now let us prove the $\beta$ function lemma. Remember that we can use
@@ -113,65 +113,67 @@ regular functions. We can also use a relation if its characteristic
 function is so definable. As before we can show that these relations
 are closed under Boolean combinations and bounded quantification; for
 example:
-\begin{enumerate}
-\item $\fn{not}(x) \defis \Char{=}(x,0)$
-\item $\bmin{x \leq z}{R(x,y)} \defis \umin{x}{(R(x,y) \lor x = z)}$
-\item $\bexists{x \leq z}{R(x,y)} \defiff R(\bmin{x \leq z}{R(x,y)}, y)$
-\end{enumerate}
+\begin{align*}
+\fn{not}(x) & \defis \Char{=}(x,0)\\
+\bmin{x \leq z}{R(x,y)} & \defis \umin{x}{(R(x,y) \lor x = z)}\\
+\bexists{x \leq z}{R(x,y)} & \defiff R(\bmin{x \leq z}{R(x,y)}, y)
+\end{align*}
 We can then show that all of the following are also definable without
 primitive recursion:
 \begin{enumerate}
-\item The pairing function, $J(x,y) = \frac{1}{2}[(x+y)(x+y+1)] + x$
+\item The pairing function, $J(x,y) = \frac{1}{2}[(x+y)(x+y+1)] + x$;
 % maybe explain more what is going on here, a bit confusing.
-\item Projections
-\[
-K(z) = \bmin{x \leq q}{(\lexists[y \leq z] \, [z = J(x,y)])}
-\]
-and
-\[
-L(z) = \bmin{y \leq q}{(\lexists[x \leq z]\, [z = J(x,y)])}.
-\]
-\item $x < y$
-\item $x \mid y$
+\item the projection functions
+\begin{align*}
+K(z) & = \bmin{x \leq z}{\bexists{y \leq z}{z = J(x,y)}},\\
+L(z) & = \bmin{y \leq z}{\bexists{x \leq z}{z = J(x,y)}};
+\end{align*}
+\item the less-than relation $x < y$;
+\item the divisibility relation $x \mid y$;
 % \item $x \tsub y$
 % \item $\fn{Prime}(x)$
 % \item Assuming $p$ is prime, the relation ``$x$ is a power of $p$'':
 % \[
-% \lforall[y \leq x][(y \mid x \lif y = 1 \lor y = x)].
+% \bforall{y \leq x}{(y \mid x \lif y = 1 \lor y = x)}.
 % \]
-\item The function $\fn{rem}(x,y)$ which returns the remainder when
-  $y$ is divided by~$x$
+\item the function $\fn{rem}(x,y)$ which returns the remainder when
+  $y$ is divided by~$x$.
 \end{enumerate}
 Now define
-\[
-\beta^*(d_0,d_1,i) = \fn{rem}(1+(i+1) d_1,d_0)
-\]
-and
-\[
-\beta(d,i) = \beta^*(K(d),L(d),i).
-\]
-This is the function we need. Given $a_0,\dots,a_n$, as above, let
+\begin{align*}
+\beta^*(d_0,d_1,i) & = \fn{rem}(1+(i+1) d_1,d_0) \text{ and}\\
+\beta(d,i) & = \beta^*(K(d),L(d),i).
+\end{align*}
+This is the function we want. Given $a_0$, \dots,~$a_n$ as above, let
 \[
 j = \max(n,a_0,\dots,a_n)+1,
 \]
-and let $d_1 = \fact{j}$. By the observations above, we know that $1+d_1,
-1+2 d_1, \dots, 1+(n+1) d_1$ are relatively prime and all are bigger
-than $a_0,\dots,a_n$. By the Chinese Remainder theorem there is a
-value $d_0$ such that for each~$i$,
+and let $d_1 = \fact{j}$. By \olref{rel-prime} above, we know that
+$1+d_1$, $1+2 d_1$, \dots, $1+(n+1) d_1$ are relatively prime, and
+by~\olref{less} that all are greater than $a_0$, \dots,~$a_n$. By the
+Chinese Remainder theorem there is a value~$d_0$ such that for
+each~$i$,
 \[
 d_0 \equiv a_i \mod (1+(i+1)d_1)
 \]
-and so (because $d_1$ is greater than $a_i$),
+and so (because $d_1$ is greater than~$a_i$),
 \[
 a_i = \fn{rem}(1+(i+1)d_1,d_0).
 \]
 Let $d = J(d_0,d_1)$. Then for each $i \le n$, we have
-\begin{eqnarray*}
-\beta(d,i) & = & \beta^*(d_0,d_1,i) \\
-& = & \fn{rem}(1+(i+1) d_1,d_0) \\
-& = & a_i
-\end{eqnarray*}
+\begin{align*}
+\beta(d,i) & =  \beta^*(d_0,d_1,i) \\
+& =  \fn{rem}(1+(i+1) d_1,d_0) \\
+& =  a_i
+\end{align*}
 which is what we need. This completes the proof of the
 $\beta$-function lemma.
+
+\begin{prob}
+  Show that the relations $x < y$, $x \mid y$, and the
+  function~$\fn{rem}(x,y)$ can be defined without primitive recursion.
+  You may use $0$, successor, plus, times, $\Char{=}$, projections,
+  and bounded minimization and quantification.
+\end{prob}
 
 \end{document}

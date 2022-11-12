@@ -10,7 +10,7 @@
 
 \olsection{\usetoken{P}{valuation} and Satisfaction}
 
-\begin{defn}[!!^{valuation}s] 
+\begin{defn}[!!^{valuation}s]
 Let $\{\True, \False\}$ be the set of the two truth values, ``true''
 and ``false.'' A \emph{!!{valuation}} for $\Lang{L_0}$ is a
 function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
@@ -19,35 +19,35 @@ function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
 \end{defn}
 
 \begin{defn}
-  Given a !!{valuation}~$\pAssign{v}$, define the evaluation function
+  Given !!a{valuation}~$\pAssign{v}$, define the evaluation function
   $\pValue{v} \colon \Frm[L_0] \to \{\True, \False \}$ inductively by:
   \begin{align*}
     \iftag{prvFalse}{\pValue{v}(\lfalse) & = \False; \\}{}
     \iftag{prvTrue}{\pValue{v}(\ltrue) & = \True; \\}{}
-    \pValue{v}(\Obj p_n) & = \pAssign{v}(\Obj p_n); \\ 
+    \pValue{v}(\Obj p_n) & = \pAssign{v}(\Obj p_n); \\
     \iftag{prvNot}{\pValue{v}(\lnot !A) & = \begin{cases}
-        \True & \text{if } \pValue{v}(!A) = \False;\\ 
-        \False & \text{otherwise.} 
+        \True & \text{if } \pValue{v}(!A) = \False;\\
+        \False & \text{otherwise.}
       \end{cases} \\ }{}
-    \iftag{prvAnd}{\pValue{v}(!A \land !B) & = \begin{cases} 
+    \iftag{prvAnd}{\pValue{v}(!A \land !B) & = \begin{cases}
         \True &
         \text{if $\pValue{v}(!A) = \True$ and $\pValue{v}(!B) = \True$;}\\
         \False &
         \text{if $\pValue{v}(!A) = \False$ or $\pValue{v}(!B) = \False$}.
       \end{cases}\\}{}
-    \iftag{prvOr}{\pValue{v}(!A \lor !B) & = \begin{cases} 
+    \iftag{prvOr}{\pValue{v}(!A \lor !B) & = \begin{cases}
         \True &
         \text{if $\pValue{v}(!A) = \True$ or $\pValue{v}(!B) = \True$;}\\
         \False &
         \text{if $\pValue{v}(!A) = \False$ and $\pValue{v}(!B) = \False$}.
       \end{cases}\\}{}
-    \iftag{prvIf}{\pValue{v}(!A \lif !B) & = \begin{cases} 
+    \iftag{prvIf}{\pValue{v}(!A \lif !B) & = \begin{cases}
         \True &
         \text{if $\pValue{v}(!A) = \False$ or $\pValue{v}(!B) = \True$;}\\
         \False &
         \text{if $\pValue{v}(!A) = \True$ and $\pValue{v}(!B) = \False$}.
       \end{cases}\\}{}
-    \iftag{prvIff}{\pValue{v}(!A \liff !B) & = \begin{cases} 
+    \iftag{prvIff}{\pValue{v}(!A \liff !B) & = \begin{cases}
         \True &
         \text{if $\pValue{v}(!A) = \pValue{v}(!B)$;}\\
         \False &
@@ -56,83 +56,98 @@ function~$\pAssign{v}$ assigning either $\True$ or $\False$ to the
 \end{align*}
 \end{defn}
 
-\begin{explain} 
+\begin{explain}
 The clauses correspond to the following truth tables:
 \begin{center}
 \iftag{prvNot}{
-  \begin{tabular}{|c||c|} \hline 
-    $!A$ & $ \lnot !A$ \\ 
-    \hline \hline 
-    $\True$ & $\False$ \\ 
-    $\False$ & $\True$ \\ 
-    \hline 
+  \begin{tabular}{|c||c|} \hline
+    $!A$ & $ \lnot !A$ \\
+    \hline \hline
+    $\True$ & $\False$ \\
+    $\False$ & $\True$ \\
+    \hline
   \end{tabular}
 }{}
 \iftag{prvAnd}{
-  \begin{tabular}{|cc||c|} \hline 
-    $!A$ & $!B$ & $!A \land !B$ \\ 
-    \hline \hline 
-    $\True$ & $\True$ & $\True$ \\ 
-    $\True$ & $\False$ & $\False$ \\ 
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \land !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
     $\False$ & $\True$ & $\False$ \\
-    $\False$ & $\False$ & $\False$ \\ 
-    \hline 
+    $\False$ & $\False$ & $\False$ \\
+    \hline
   \end{tabular}
 }{}
 \iftag{prvOr}{
-  \begin{tabular}{|cc||c|} \hline 
-    $!A$ & $!B$ & $!A \lor !B$ \\ 
-    \hline \hline 
-    $\True$ & $\True$ & $\True$ \\ 
-    $\True$ & $\False$ & $\True$ \\ 
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \lor !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\True$ \\
     $\False$ & $\True$ & $\True$ \\
-    $\False$ & $\False$ & $\False$ \\ 
-    \hline 
+    $\False$ & $\False$ & $\False$ \\
+    \hline
   \end{tabular}
 }{}%
 \iftag{notprvNot,notprvAnd,notprvOr,notprvIf}{}{\\[1em]}
 \iftag{prvIf}{
-  \begin{tabular}{|cc||c|} \hline 
-    $!A$ & $!B$ & $!A \lif !B$ \\ 
-    \hline \hline 
-    $\True$ & $\True$ & $\True$ \\ 
-    $\True$ & $\False$ & $\False$ \\ 
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \lif !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
     $\False$ & $\True$ & $\True$ \\
-    $\False$ & $\False$ & $\True$ \\ 
-    \hline 
+    $\False$ & $\False$ & $\True$ \\
+    \hline
   \end{tabular}
 }{}
 \iftag{prvIff}{
-  \begin{tabular}{|cc||c|} \hline 
-    $!A$ & $!B$ & $!A \liff !B$ \\ 
-    \hline \hline 
-    $\True$ & $\True$ & $\True$ \\ 
-    $\True$ & $\False$ & $\False$ \\ 
+  \begin{tabular}{|cc||c|} \hline
+    $!A$ & $!B$ & $!A \liff !B$ \\
+    \hline \hline
+    $\True$ & $\True$ & $\True$ \\
+    $\True$ & $\False$ & $\False$ \\
     $\False$ & $\True$ & $\False$ \\
-    $\False$ & $\False$ & $\True$ \\ 
-    \hline 
+    $\False$ & $\False$ & $\True$ \\
+    \hline
   \end{tabular}
 }{}
-\end{center} 
+\end{center}
 \end{explain}
 
-\begin{thm} [Local Determination] 
+\begin{prob}
+Consider adding to $\Lang{L_0}$ a ternary connective $\diamondsuit$
+with evaluation given by
+\begin{gather*}
+  \pValue{v}(\diamondsuit( !A , !B , !C ) ) = \begin{cases}
+    \pValue{v}( !B ) &
+    \text{if $\pValue{v}(!A) = \True$;}\\
+    \pValue{v}( !C ) &
+    \text{if $\pValue{v}(!A) = \False $}.
+  \end{cases}
+\end{gather*}
+Write down the truth table for this connective.
+\end{prob}
+
+\begin{thm}[Local Determination]
 \ollabel{thm:LocalDetermination} Suppose that $\pAssign{v_1}$ and
 $\pAssign{v_2}$ are !!{valuation}s that agree on the propositional
 letters occurring in $!A$, i.e., $\pAssign{v_1}(\Obj p_n) =
-\pAssign{v_2}(\Obj p_n)$ whenever $\Obj p_n$ occurs in some !!{formula}~$!A$. Then $\pValue{v_1}$ and $\pValue{v_2}$ also agree on~$!A$, i.e., $\pValue{v_1}(!A) = \pValue{v_2}(!A)$.
+\pAssign{v_2}(\Obj p_n)$ whenever $\Obj p_n$ occurs in some
+!!{formula}~$!A$. Then $\pValue{v_1}$ and $\pValue{v_2}$ also agree
+on~$!A$, i.e., $\pValue{v_1}(!A) = \pValue{v_2}(!A)$.
 \end{thm}
 
-\begin{proof} 
-By induction on $!A$. 
+\begin{proof}
+By induction on $!A$.
 \end{proof}
 
 \begin{defn}[Satisfaction]
-\ollabel{defn:satisfaction} Using the evaluation function, we can
-define the notion of \emph{satisfaction of a !!{formula}~$!A$ by
-  !!a{valuation}~$\pAssign{v}$}, $\pSat{v}{!A}$, inductively as
-  follows. (We write $\pSat/{v}{!A}$ to mean ``not
-  $\pSat{v}{!A}$.'')
+\ollabel{defn:satisfaction} We can inductively define the notion of
+  \emph{satisfaction of !!a{formula}~$!A$ by
+  !!a{valuation}~$\pAssign{v}$}, $\pSat{v}{!A}$, as follows.
+  (We write $\pSat/{v}{!A}$ to mean ``not $\pSat{v}{!A}$.'')
 \begin{enumerate}
 \tagitem{prvFalse}{%
   \indcase{!A}{\lfalse}{$\pSat/{v}{\indfrm}$.}}{}
@@ -153,7 +168,7 @@ define the notion of \emph{satisfaction of a !!{formula}~$!A$ by
 
 \tagitem{prvOr}{%
   \indcase{!A}{(!B \lor !C)}{$\pSat{v}{\indfrm}$ iff
-    $\pSat{v}{!A}$ or $\pSat{v}{!B}$ (or both).}}{}
+    $\pSat{v}{!B}$ or $\pSat{v}{!C}$ (or both).}}{}
 
 \tagitem{prvIf}{%
   \indcase{!A}{(!B \lif !C)}{$\pSat{v}{\indfrm}$ iff $\pSat/{v}{!B}$

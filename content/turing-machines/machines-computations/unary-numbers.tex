@@ -142,7 +142,9 @@ a~$\TMendtape$ symbol, which gets deleted at the end. We've started
 numbering the states at~$q_6$, so they can be added to the doubler
 machine. All you'll need is an additional instruction $\delta(q_5,
 \TMblank) = \tuple{q_6,\TMblank,\TMstay}$, i.e., an arrow from~$q_5$
-to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$.
+to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$. (There is
+one subtle problem: the resulting machine does not work for
+input~$x=0$. We'll leave this as an exercise.)
 \begin{figure}
     \[
     \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,
@@ -179,6 +181,17 @@ to~$q_6$ labelled~$\TMtrans{\TMblank}{\TMblank}{\TMstay}$.
     \ollabel{fig:mover}
     \end{figure}
 \end{ex}
+
+\begin{prob}
+In \olref[tur][mac][una]{ex:mover} we described a machine consisting
+of a combination of the doubler machine from
+\olref[tur][mac][una]{fig:doubler-disc} and the mover machine from
+\olref[tur][mac][una]{fig:mover}. What happens if you start this
+combined machine on input~$x=0$, i.e., on an empty tape?  How would
+you fix the machine so that in this case the machine halts with
+output~$2x=0$? (You should be able to do this by adding one state and
+one transition.)
+\end{prob}
 
 \begin{prob}
 \emph{Subtraction:} Design a Turing machine that when given an input

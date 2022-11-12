@@ -1,0 +1,265 @@
+% Part: first-order-logic
+% Chapter: syntax-and-semantics
+% Section: formation-sequences
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{fol}{syn}{fseq}
+
+\olsection{Formation Sequences}
+
+Defining !!{formula}s via an inductive definition, and the
+complementary technique of proving properties of !!{formula}s via
+induction, is an elegant and efficient approach. However, it can
+also be useful to consider a more bottom-up, step-by-step approach
+to the construction of !!{formula}s, which we do here using the
+notion of a \emph{formation sequence}.
+%
+To show how terms and !!{formula}s can be introduced in this way
+without needing to refer to their inductive definitions, we first
+introduce the notion of an arbitrary string of symbols drawn from
+some language~$\Lang L$.
+
+\begin{defn}[Strings]
+\ollabel{defn:string}
+Suppose $\Lang L$ is a first-order language. An \emph{$\Lang
+L$-string} is a finite sequence of symbols of~$\Lang L$. Where the
+language~$\Lang L$ is clearly fixed by the context, we will often
+refer to a $\Lang L$-string as a \emph{string} simpliciter.
+\end{defn}
+
+\begin{ex}
+For any first-order language $\Lang L$, all
+$\Lang L$-!!{formula}s are $\Lang L$-strings, but not
+conversely. For example, \[)(\Obj v_0\lif\lexists\] is an
+$\Lang L$-string but not an $\Lang L$-!!{formula}.
+\end{ex}
+
+\begin{defn}[Formation sequences for terms]
+\ollabel{defn:fseq-trm}
+A finite sequence of $\Lang L$-strings $\tuple{t_0,\dotsc,t_n}$ is a
+\emph{formation sequence} for a term $t$ if $t \ident t_n$ and for all
+$i \leq n$, either $t_i$ is !!a{variable} or !!a{constant}, or $\Lang
+L$ contains a $k$-ary !!{function}~$f$ and there exist
+$m_0,\dotsc,m_k < i$ such that $t_i \ident f(t_{m_0},\dotsc,t_{m_k})$.
+\end{defn}
+
+\begin{ex}
+The sequence
+\[
+    \tuple{\Obj c_0, \Obj v_0, \Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}, \Atom{\Obj f^1_0}{\Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}}}
+\]
+is a formation sequence for the term $\Atom{\Obj f^1_0}{\Atom{\Obj
+f^2_0}{\Obj c_0, \Obj v_0}}$, as is
+\[
+    \tuple{\Obj v_0, \Obj c_0, \Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}, \Atom{\Obj f^1_0}{\Atom{\Obj f^2_0}{\Obj c_0, \Obj v_0}}}.
+\]
+\end{ex}
+
+\begin{defn}[Formation sequences for formulas]
+\ollabel{defn:fseq-frm}
+A finite sequence of $\Lang L$-strings $\tuple{!A_0,\dotsc,!A_n}$
+is a \emph{formation sequence} for~$!A$ if $!A \ident !A_n$ and
+for all $i \leq n$, either $!A_i$ is an atomic !!{formula} or there
+exist $j,k < i$ and !!a{variable}~$x$ such that one of the following
+holds:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_i \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A_i \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A_i \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A_i \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A_i \ident (!A_j \liff !A_k)$.}{}%
+    \tagitem{prvAll}{$!A_i \ident \lforall[x][!A_j]$.}{}%
+    \tagitem{prvEx}{$!A_i \ident \lexists[x][!A_j]$.}{}%
+\end{enumerate}
+\end{defn}
+
+\begin{ex}
+\[
+\tuple{
+    \Atom{\Obj A^1_0}{\Obj v_0},
+    \Atom{\Obj A^1_1}{\Obj c_1},
+    (\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0}),
+    \lexists[\Obj v_0][(\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]
+}
+\]
+is a formation sequence of $\lexists[\Obj v_0][(\Atom{\Obj A^1_1}{\Obj
+c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]$, as is
+\begin{multline*}
+\tuple{
+    \Atom{\Obj A^1_0}{\Obj v_0},
+    \Atom{\Obj A^1_1}{\Obj c_1},
+    (\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0}),
+    \Atom{\Obj A^1_1}{\Obj c_1},\\
+    \lforall[\Obj v_1][\Atom{\Obj A^1_0}{\Obj v_0}],
+    \lexists[\Obj v_0][(\Atom{\Obj A^1_1}{\Obj c_1} \land \Atom{\Obj A^1_0}{\Obj v_0})]
+}.
+\end{multline*}
+%
+As can be seen from the second example, formation sequences
+may contain ``junk'': !!{formula}s which are redundant or do not
+contribute to the construction.
+\end{ex}
+
+\begin{prop}\ollabel{prop:formed}
+Every !!{formula}~$!A$ in~$\Frm[L]$ has a formation sequence.
+\end{prop}
+
+\begin{proof}
+Suppose $!A$ is atomic. Then the sequence $\tuple{!A}$ is a
+formation sequence for~$!A$.
+%
+Now suppose that $!B$ and~$!C$ have formation sequences
+$\tuple{!B_0,\dotsc,!B_n}$ and $\tuple{!C_0,\dotsc,!C_m}$
+respectively.
+%
+\begin{enumerate}
+  \tagitem{prvNot}{If $!A \ident \lnot !B$,
+      then $\tuple{!B_0,\dotsc,!B_n,\lnot !B_n}$
+      is a formation sequence for~$!A$.}{}
+  \tagitem{prvAnd}{If $!A \ident (!B \land !C)$,
+      then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \land !C_m)}$
+      is a formation sequence for~$!A$.}{}
+  \tagitem{prvOr}{If $!A \ident (!B \lor !C)$,
+      then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lor !C_m)}$
+      is a formation sequence for~$!A$.}{}
+  \tagitem{prvIf}{If $!A \ident (!B \lif !C)$,
+      then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \lif !C_m)}$
+      is a formation sequence for~$!A$.}{}
+  \tagitem{prvIff}{If $!A \ident (!B \liff !C)$,
+      then $\tuple{!B_0,\dotsc,!B_n,!C_0,\dotsc,!C_m,(!B_n \liff !C_m)}$
+      is a formation sequence for~$!A$.}{}
+  \tagitem{prvAll}{If $!A \ident \lforall[x][!B]$,
+      then $\tuple{!B_0,\dotsc,!B_n,\lforall[x][!B_n]}$
+      is a formation sequence for~$!A$.}{}
+  \tagitem{prvEx}{If $!A \ident \lexists[x][!B]$,
+      then $\tuple{!B_0,\dotsc,!B_n,\lexists[x][!B_n]}$
+      is a formation sequence for~$!A$.}{}
+\end{enumerate}
+By the principle of induction on !!{formula}s,
+every !!{formula} has a formation sequence.
+\end{proof}
+
+We can also prove the converse. This is important because it shows
+that our two ways of defining formulas are equivalent: they give
+the same results. It also means that we can prove theorems about
+formulas by using ordinary induction on the length of formation
+sequences.
+
+\begin{lem}
+\ollabel{lem:fseq-init}
+Suppose that $\tuple{!A_0,\dotsc,!A_n}$ is a formation sequence
+for~$!A_n$, and that $k \leq n$. Then $\tuple{!A_0,\dotsc,!A_k}$
+is a formation sequence for~$!A_k$.
+\end{lem}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][fseq]{lem:fseq-init}.
+\end{prob}
+
+\begin{thm}
+\ollabel{thm:fseq-frm-equiv}
+$\Frm[L]$ is the set of all expressions (strings of symbols)
+in the language~$\Lang L$ with a formation sequence.
+\end{thm}
+
+\begin{proof}
+Let $F$ be the set of all strings of symbols in the language~$\Lang L$
+that have a formation sequence. We have seen in
+\olref[fol][syn][fseq]{prop:formed} that $\Frm[L] \subseteq F$, so now
+we prove the converse.
+
+Suppose $!A$ has a formation sequence $\tuple{!A_0,\dotsc,!A_n}$.
+We prove that $!A \in \Frm[L]$ by strong induction on~$n$.
+Our induction hypothesis is that every string of symbols with a
+formation sequence of length $m < n$ is in $\Frm[L]$.
+By the definition of a formation sequence, either $!A_n$ is
+atomic or there must exist $j,k < n$ such that one of the
+following is the case:
+\begin{enumerate}
+    \tagitem{prvNot}{$!A_i \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A_i \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A_i \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A_i \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A_i \ident (!A_j \liff !A_k)$.}{}%
+    \tagitem{prvAll}{$!A_i \ident \lforall[x][!A_j]$.}{}%
+    \tagitem{prvEx}{$!A_i \ident \lexists[x][!A_j]$.}{}%
+\end{enumerate}
+Now we reason by cases. If $!A_n$ is atomic then
+$!A_n \in \Frm[L_0]$. Suppose instead that
+$!A \equiv (!A_j \land !A_k)$. By 
+\olref[fol][syn][fseq]{lem:fseq-init},
+$\tuple{!A_0,\dotsc,!A_j}$ and $\tuple{!A_0,\dotsc,!A_k}$ are
+formation sequences for $!A_j$ and~$!A_k$, respectively. Since
+these are proper initial subsequences of the formation sequence
+for~$!A$, they both have length less than~$n$. Therefore by
+the induction hypothesis, $!A_j$ and~$!A_k$ are in~$\Frm[L_0]$,
+and by the definition of !!a{formula}, so is
+$(!A_j \land !A_k)$. The other cases follow by parallel
+reasoning.
+\end{proof}
+
+Formation sequences for terms have similar properties to those
+for !!{formula}s.
+
+\begin{prop}
+\ollabel{prop:fseq-trm-equiv}
+$\Trm[L]$ is the set of all expressions~$t$ in the language~$\Lang L$
+such that there exists a (term) formation sequence fo~ $t$.
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][fseq]{prop:fseq-trm-equiv}.
+Hint: use a similar strategy to that used in the proof of
+\olref[fol][syn][fseq]{thm:fseq-frm-equiv}.
+\end{prob}
+
+There are two types of ``junk'' that can appear in formation
+sequences: repeated elements, and elements that are irrelevant
+to the construction of the formation or term. We can eliminate
+both by looking at minimal formation sequences.
+
+\begin{defn}[Minimal formation sequences]
+\ollabel{defn:minimal-fseq}
+A formation sequence $\tuple{!A_0,\dotsc,!A_n}$ for~$!A$ is a
+\emph{minimal formation sequence} for~$!A$
+if for every other formation sequence~$s$ for~$!A$, the length
+of~$s$ is greater than or equal to~$n+1$.
+\end{defn}
+
+\begin{prop}
+\ollabel{prop:subformula-equivs}
+The following are equivalent:
+\begin{enumerate}
+    \item $!B$ is a sub-!!{formula} of~$!A$.
+    \item $!B$ occurs in every formation sequence of~$!A$.
+    \item $!B$ occurs in a minimal formation sequence of~$!A$.
+\end{enumerate}
+\end{prop}
+
+\begin{proof}
+Exercise.
+\end{proof}
+
+\begin{prob}
+Prove \olref[fol][syn][fseq]{prop:subformula-equivs}.
+\end{prob}
+
+\begin{history}
+Formation sequences were introduced by Raymond Smullyan in his
+textbook \emph{First-Order Logic} \citep{Smullyan1968}.
+Additional properties of formation sequences were established by
+\citet{Zuckerman1973}.
+\end{history}
+
+\end{document}

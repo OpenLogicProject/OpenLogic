@@ -17,8 +17,8 @@ that number~$x$ which (a) satisfies $g(x, z) = 0$ and (b) is the least
 such, i.e., for any $w < x$, $g(w, z) \neq 0$.  So the following is a
 natural choice:
 \[
-!A_f(z,y) \ident !A_g(y, z, 0) \land \lforall[w][(w < y \lif \lnot
-  !A_g(w, z, 0))].
+!A_f(z,y) \ident !A_g(y, z, \Obj 0) \land \lforall[w][(w < y \lif \lnot
+  !A_g(w, z, \Obj 0))].
 \]
 In the general case, of course, we would have to replace $z$ with
 $z_0$, \dots, $z_k$.
@@ -198,7 +198,7 @@ the corresponding disjunct for for~$m+1$ and~$a$.
 If $!A_g(x, z, y)$ represents $g(x, z)$ in~$\Th{Q}$, then
 \[
 !A_f(z,y) \ident !A_g(y, z, \Obj 0) \land \lforall[w][(w < y \lif \lnot
-  !A_g(w, z, \Obj 0))].
+  !A_g(w, z, \Obj 0))]
 \]
 represents $f(z) = \umin{x}{[g(x, z) = 0]}$.
 \end{prop}

@@ -34,7 +34,7 @@ immediate !!{subformula} of a quantified !!{formula} has a free
 !!{variable}, and !!{structure}s don't specify the !!{value}s of
 !!{variable}s.  In order to deal with this difficulty, we also
 introduce \emph{variable assignments} and define satisfaction not with
-respect to a !!{structure} alone, but with respect to a !!{structure}
+respect to !!a{structure} alone, but with respect to !!a{structure}
 plus !!a{variable} assignment.
 \end{explain}
 
@@ -88,7 +88,7 @@ as an $x$-variant of itself.
   If $s$ is !!a{variable} assignment for !!a{structure}~$\Struct M$
   and $m \in \Domain{M}$, then the assignment~$\Subst{s}{m}{x}$ is the
   variable assignment defined by
-  \[\Subst{s}{m}{y} = \begin{cases}
+  \[\Subst{s}{m}{x}(y) = \begin{cases}
     m & \text{if } y \ident x\\
     s(y) & \text{otherwise}.
   \end{cases}\]
@@ -156,7 +156,7 @@ cannot define satisfaction of $\lforall[x][!B(x)]$ by ``for all $m \in
 \Domain{M}$, $\Sat{M}{!B(m)}$.''}{}\iftag{prvEx}{ We cannot define
 satisfaction of $\lexists[x][!B(x)]$ by ``for at least one $m \in
 \Domain{M}$, $\Sat{M}{!B(m)}$.''}{} The reason is that if $m \in
-\Domain M$, it is not symbol of the language, and so $!B(a)$~is not
+\Domain M$, it is not a symbol of the language, and so $!B(m)$~is not
 !!a{formula} (that is, $\Subst{!B}{m}{x}$ is undefined).  We also
 cannot assume that we have !!{constant}s or terms available that name
 every !!{element} of~$\Struct{M}$, since there is nothing in the
@@ -400,7 +400,7 @@ $\Sat{M}{\lforall[x][!B(x)]}[s]$ iff for every $x$-variant~$s'$ of $s$,
 \begin{prob}
 Let $\Lang L = \{c, f, A\}$ with one !!{constant}, one one-place
 !!{function} and one two-place !!{predicate}, and let the
-!!{structure} $\Struct{M}$ be given by
+!!{structure}~$\Struct{M}$ be given by
 \begin{enumerate}
 \item $\Domain M = \{1, 2, 3\}$
 \item $\Assign{c}{M} = 3$

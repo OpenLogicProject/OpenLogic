@@ -12,7 +12,7 @@
 
 \begin{explain}
 It is often useful to talk about the last operator used in
-constructing a !!{formula}~$!A$.  This operator is called the \emph{main
+constructing !!a{formula}~$!A$.  This operator is called the \emph{main
   operator} of~$!A$. Intuitively, it is the ``outermost'' operator
 of $!A$. For example, the main operator of $\lnot !A$ is $\lnot$,
 the main operator of $(!A \lor !B)$ is $\lor$, etc.
@@ -21,7 +21,7 @@ the main operator of $(!A \lor !B)$ is $\lor$, etc.
 
 \begin{defn}[!!^{main operator}]
 \ollabel{def:main-op}
-The \emph{!!{main operator}} of a !!{formula}~$!A$ is
+The \emph{!!{main operator}} of !!a{formula}~$!A$ is
 defined as follows:
 \begin{enumerate}
 \item \indcase*{!A}{!A}{$\indfrm$ has no !!{main operator}.}
@@ -60,7 +60,7 @@ This is a \emph{recursive} definition of a function which maps all
 non-atomic !!{formula}s to their !!{main operator} occurrence. Because
 of the way !!{formula}s are defined inductively, every
 !!{formula}~$!A$ satisfies one of the cases in \olref{def:main-op}.
-This guarantees that for each non-atomic !!{formula}~$!A$ a !!{main
+This guarantees that for each non-atomic !!{formula}~$!A$ !!a{main
   operator} exists. Because each !!{formula} satisfies only one of these
 conditions, and because the smaller !!{formula}s from which $!A$ is
 constructed are uniquely determined in each case, the !!{main
@@ -68,10 +68,15 @@ constructed are uniquely determined in each case, the !!{main
 function.
 \end{explain}
 
-We call !!{formula}s by the following names depending on which symbol their
-!!{main operator} is:
+We call !!{formula}s by the names in \olref{tab:main-op} depending on
+which symbol their !!{main operator}
+is.\iftag{defNot,defOr,defAnd,defIf,defIff,defTrue,defFalse,defEx,defAll}
+{Recall, however, that defined operators do not officially appear in
+!!{formula}s. They are just abbreviations, so officially they cannot
+be the main operator of a formula. In proofs about all !!{formula}s
+they therefore do not have to be treated separately.}
 
-\begin{figure}[!h]
+\begin{table}[!h]
 \centering
 \begin{tabular}{c | c | c}
 !!^{main operator} & Type of !!{formula} & Example\\
@@ -85,10 +90,12 @@ $\lnot$ & negation & $\lnot !A$ \\
 $\land$ & conjunction & $(!A \land !B$) \\
 $\lor$ & disjunction & $(!A \lor !B$) \\
 $\lif$ & !!{conditional} & $(!A \lif !B$) \\
-\iftag{prvIff,defIff}{}{$\liff$ & !!{biconditional} & $!A \liff !B$ \\}
+$\liff$ & !!{biconditional} & $(!A \liff !B)$ \\
 $\lforall[][]$ & universal (!!{formula})& $\lforall[x][!A]$ \\
 $\lexists[][]$ & existential (!!{formula})& $\lexists[x][!A]$
 \end{tabular}
-\end{figure}
+\caption{Main operator and names of !!{formula}s}
+\ollabel{tab:main-op}
+\end{table}
 
 \end{document}

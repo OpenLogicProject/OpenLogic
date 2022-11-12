@@ -15,8 +15,8 @@ A !!{variable} assignment~$s$ provides a value for \emph{every}
 variable---and there are infinitely many of them. This is of course
 not necessary. We require !!{variable} assignments to assign values to
 all !!{variable}s simply because it makes things a lot easier.  The
-value of a term~$t$, and whether or not a !!{formula}~$!A$ is
-satisfied in a !!{structure} with respect to~$s$, only depend on the
+value of a term~$t$, and whether or not !!a{formula}~$!A$ is
+satisfied in !!a{structure} with respect to~$s$, only depend on the
 assignments~$s$ makes to the !!{variable}s in~$t$ and the free
 !!{variable}s of~$!A$.  This is the content of the next two
 propositions.  To make the idea of ``depends on'' precise, we show
@@ -47,7 +47,7 @@ and that the claim holds for $t_1$, \dots, $t_k$. Then
 \intertext{For $j = 1$, \dots,~$k$, the !!{variable}s of~$t_j$ are
     among $x_1$, \dots,~$x_n$. By induction hypothesis,
     $\Value{t_j}{M}[s_1] = \Value{t_j}{M}[s_2]$. So,}
-\Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] =\\
+\Value{t}{M}[s_1] & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_1] =\\
   & = \Assign{f}{M}(\Value{t_1}{M}[s_1], \dots, \Value{t_k}{M}[s_1]) =\\
   & = \Assign{f}{M}(\Value{t_1}{M}[s_2], \dots, \Value{t_k}{M}[s_2]) =\\
   & = \Value{\Atom{f}{t_1, \dots, t_k}}{M}[s_2] = \Value{t}{M}[s_2].
@@ -268,7 +268,7 @@ Prove \olref[fol][syn][ass]{prop:sat-quant}.
 \begin{prob}
 \DeclareRobustCommand{\VDash}{\mathrel{||}\joinrel\Relbar}  
 Suppose $\Lang L$ is a language without !!{function}s. Given a
-!!{structure}~$\Struct M$, $c$ a !!{constant} and $a \in \Domain M$,
+!!{structure}~$\Struct M$, $c$ !!a{constant} and $a \in \Domain M$,
 define $\Struct M[a/c]$ to be the !!{structure} that is just
 like~$\Struct M$, except that $\Assign{c}{M[a/c]} = a$. Define
 $\Struct M \VDash !A$ for !!{sentence}s~$!A$ by:

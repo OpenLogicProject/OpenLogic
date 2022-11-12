@@ -23,14 +23,14 @@ The rules for $\eq$ are ($t$, $t_1$, and $t_2$ are closed terms):
 \noLine
 \UnaryInfC{\sFmla{\True}{!A(t_1)}}
 \RightLabel{$\TRule{\True}{\eq}$}
-\UnaryInfC{\sFmla{\True}{!A(t_1)}}
+\UnaryInfC{\sFmla{\True}{!A(t_2)}}
 \DisplayProof
 \hfill
 \AxiomC{\sFmla{\True}{\eq[t_1][t_2]}}
 \noLine
 \UnaryInfC{\sFmla{\False}{!A(t_1)}}
-\RightLabel{$\TRule{\True}{\eq}$}
-\UnaryInfC{\sFmla{\False}{!A(t_1)}}
+\RightLabel{$\TRule{\False}{\eq}$}
+\UnaryInfC{\sFmla{\False}{!A(t_2)}}
 \DisplayProof
 \end{defish}
 Note that in contrast to all the other rules, $\TRule{\True}{\eq}$ and
@@ -53,36 +53,41 @@ If $s$ and $t$ are closed terms, then $\eq[s][t], !A(s)
 This may be familiar as the principle of substitutability of
 identicals, or Leibniz' Law.
 
-!!^{tableau}s prove that $\eq$ is symmetric:
+!!^{tableau}s prove that $\eq$ is symmetric, i.e., that $\eq[s_1][s_2]
+\Proves \eq[s_2][s_1]$:
 \begin{oltableau}
-  [\sFmla{\False}{\eq[t][s]}, just = \TAss
-    [\sFmla{\True}{\eq[s][t]}, just = \TAss
-      [\sFmla{\True}{\eq[s][s]}, just = {$\eq$}
-        [\sFmla{\True}{\eq[t][s]}, just = {\TRule{\True}{\eq}[2, 3]}, close]
+  [\sFmla{\False}{\eq[s_2][s_1]}, just = \TAss
+    [\sFmla{\True}{\eq[s_1][s_2]}, just = \TAss
+      [\sFmla{\True}{\eq[s_1][s_1]}, just = {$\eq$}
+        [\sFmla{\True}{\eq[s_2][s_1]}, just = {\TRule{\True}{\eq}[2, 3]}, close]
       ]
     ]
   ]
 \end{oltableau}
 Here, line $2$ is the first prerequisite
-!!{formula}~$\sFmla{\True}{\eq[s][t]}$ of $\TRule{\True}{\eq}$, and
-line~$3$ the second one, $\sFmla{\True}{!A(s)}$---think of $!A(x)$ as
-$\eq[x][s]$, then $!A(s)$ is $\eq[s][s]$ and $!A(t)$ is $\eq[t][s]$.
+!!{formula}~$\sFmla{\True}{\eq[s_1][s_2]}$ of $\TRule{\True}{\eq}$.
+Line~$3$ is the second one, of the form $\sFmla{\True}{!A(s_2)}$---think of
+$!A(x)$ as
+$\eq[x][s_1]$, then $!A(s_1)$ is $\eq[s_1][s_1]$ and $!A(s_2)$ is $\eq[s_2][s_1]$.
 
-They also prove that $\eq$ is transitive:
+They also prove that $\eq$ is transitive, i.e., that $\eq[s_1][s_2],
+\eq[s_2][s_3] \Proves \eq[s_1][s_3]$:
 \begin{oltableau}
-  [\sFmla{\False}{\eq[t_1][t_3]}, just = \TAss
-    [\sFmla{\True}{\eq[t_1][t_2]}, just = \TAss
-      [\sFmla{\True}{\eq[t_2][t_3]}, just = \TAss
-        [\sFmla{\True}{\eq[t_1][t_3]}, just = {\TRule{\True}{\eq}[3, 2]}, close]
+  [\sFmla{\False}{\eq[s_1][s_3]}, just = \TAss
+    [\sFmla{\True}{\eq[s_1][s_2]}, just = \TAss
+      [\sFmla{\True}{\eq[s_2][s_3]}, just = \TAss
+        [\sFmla{\True}{\eq[s_1][s_3]}, just = {\TRule{\True}{\eq}[3, 2]}, close]
       ]
     ]
   ]
 \end{oltableau}
 In this !!{tableau}, the first prerequisite !!{formula} of
-$\TRule{\True}{\eq}$ is line~$3$, $\sFmla{\True}{\eq[t_2][t_3]}$. The
-second one, $\sFmla{\True}{!A(t_2)}$ is line~$2$. Think of $!A(x)$ as
-$\eq[t_1][x]$; that makes $!A(t_2)$ into $\eq[t_1][t_2]$ and $!A(t_3)$
-into $\eq[t_1][t_3]$.
+$\TRule{\True}{\eq}$ is line~$3$, $\sFmla{\True}{\eq[s_2][s_3]}$
+($s_2$ plays the role of~$t_1$, and $s_3$ the role of~$t_2$). The
+second prerequisite, of the form~$\sFmla{\True}{!A(s_2)}$ is line~$2$.
+Here, think of $!A(x)$ as $\eq[s_1][x]$; that makes $!A(s_2)$ into
+$\eq[t_1][t_2]$ (i.e., line~$2$) and $!A(s_3)$ into the
+!!{formula}~$\eq[s_1][s_3]$ in the conclusion.
 \end{ex}
 
 \begin{prob}

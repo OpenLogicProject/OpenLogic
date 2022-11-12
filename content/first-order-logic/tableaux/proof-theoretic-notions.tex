@@ -19,7 +19,7 @@ and consistency for tableaux.
 
 \begin{explain}
 Just as we've defined a number of important semantic notions
-(validity, entailment, satisfiabilty), we now define corresponding
+(validity, entailment, satisfiability), we now define corresponding
 \emph{proof-theoretic notions}.  These are not defined by appeal to
 satisfaction of !!{sentence}s in !!{structure}s, but by appeal to the
 existence of certain closed !!{tableau}x.  It was an important
@@ -36,15 +36,15 @@ is a theorem and $\Proves/ !A$ if it is not.
 
 \begin{defn}[!!^{derivability}]
 !!^a{sentence} $!A$ is \emph{!!{derivable} from} a set of
-!!{sentence}s~$\Gamma$, $\Gamma \Proves !A$, iff there is a
+!!{sentence}s~$\Gamma$, $\Gamma \Proves !A$ iff there is a
 finite set $\{!B_1, \dots, !B_n\} \subseteq \Gamma$
 and a closed !!{tableau} for the set
 \[
 \{
   \sFmla{\False}{!A},
   \sFmla{\True}{!B_1}, \dots,
-  \sFmla{\True}{!B_n},  
-  \}
+  \sFmla{\True}{!B_n}
+  \}.
 \]
 If $!A$ is not !!{derivable} from $\Gamma$ we write $\Gamma \Proves/
 !A$.
@@ -57,7 +57,7 @@ finite set $\{!B_1, \dots, !B_n\} \subseteq \Gamma$ and a closed
 \[
 \{
   \sFmla{\True}{!B_1}, \dots,
-  \sFmla{\True}{!B_n},  
+  \sFmla{\True}{!B_n}  
   \}.
 \]
 If $\Gamma$ is not inconsistent, we say it is \emph{consistent}.
@@ -79,8 +79,8 @@ is closed.
 \end{proof}
   
 
-\begin{prop}[Monotony]
-\ollabel{prop:monotony}
+\begin{prop}[Monotonicity]
+\ollabel{prop:monotonicity}
 If $\Gamma \subseteq \Delta$ and $\Gamma \Proves !A$, then $\Delta
 \Proves !A$.
 \end{prop}
@@ -123,7 +123,7 @@ on the one branch, all of
 \]
 are available. Since there is a closed !!{tableau} for these
 assumptions, we can attach it to that branch; every branch through
-$\sFmla{\True}{!A_1}$ closes. On the other branch, all of
+$\sFmla{\True}{!A}$ closes. On the other branch, all of
 \[
 \{\sFmla{\False}{!A}, \sFmla{\True}{!D_1}, \dots,
 \sFmla{\True}{!D_m}\}
@@ -174,14 +174,14 @@ Prove \olref[pl][tab][ptn]{prop:incons}
     \item If $\Gamma \Proves !A$, then there is a finite subset
       $\Gamma_0 = \{!B_1, \dots, !B_n\}$ and a closed !!{tableau} for
       \[
-      \sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dotsm \sFmla{\True}{!B_n}
+      \{\sFmla{\False}{!A}, \sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
       \]
       This !!{tableau} also shows $\Gamma_0 \Proves !A$.
     \item If $\Gamma$ is inconsistent, then for some finite subset
       $\Gamma_0 = \{!B_1, \dots, !B_n\}$ there is a closed !!{tableau}
       for
       \[
-      \sFmla{\True}{!B_1}, \dotsm \sFmla{\True}{!B_n}
+      \{\sFmla{\True}{!B_1}, \dots, \sFmla{\True}{!B_n}\}
       \]
       This closed !!{tableau} shows that $\Gamma_0$ is inconsistent.
   \end{enumerate}

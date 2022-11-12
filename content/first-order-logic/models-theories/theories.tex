@@ -14,11 +14,11 @@
 The theory of strict linear orders in the language~$\Lang L_<$ is
 axiomatized by the set
 \begin{align*}
-& \lforall[x][\lnot x < x], \\
+\{\quad & \lforall[x][\lnot x < x], \\
 & \lforall[x][\lforall[y][((x < y \lor y <
     x) \lor x = y)]], \\
 & \lforall[x][\lforall[y][\lforall[z][((x < y
-      \land y < z) \lif x < z)]]]
+      \land y < z) \lif x < z)]]] \quad \}
 \end{align*}
 It completely captures the intended !!{structure}s: every strict
 linear order is a model of this axiom system, and vice versa, if $R$
@@ -47,7 +47,7 @@ sentences in the language of arithmetic~$\Lang L_A$.
 & \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
 & \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
 & \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
-& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y])])]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y])]]]\\
 \intertext{plus all sentences of the form}
 & (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
 \end{align*}
@@ -120,11 +120,11 @@ object.  Note that in this sense ``is a part of'' resembles ``is a
 subset of,'' but does not resemble ``is an element of'' which is
 neither reflexive nor transitive.
 \begin{align*}
-& \lforall[x][\Atom{\Obj P}{x,x}], \\
+& \lforall[x][\Atom{\Obj P}{x,x}] \\
 & \lforall[x][\lforall[y][((\Part{x}{y} \land \Part{y}{x})
-      \lif \eq[x][y])]], \\
+      \lif \eq[x][y])]] \\
 & \lforall[x][\lforall[y][\lforall[z][((\Part{x}{y} \land
-        \Part{y}{z}) \lif \Part{x}{z})]]],\\
+        \Part{y}{z}) \lif \Part{x}{z})]]]\\
 \intertext{Moreover, any two objects have a mereological sum (an object that has
   these two objects as parts, and is minimal in this respect).}  &
 \lforall[x][\lforall[y][\lexists[z][\lforall[u][(\Part{z}{u} \liff

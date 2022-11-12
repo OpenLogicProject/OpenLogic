@@ -36,7 +36,7 @@
 \iftag{FOL}{%
 \begin{defn}[Term model]
 \ollabel{defn:termmodel}
-Let $\Gamma^*$ be a !!{complete} and consistent,
+Let $\Gamma^*$ be !!a{complete} and consistent,
 saturated set of !!{sentence}s in a language~$\Lang L$. The \emph{term
   model}~$\Struct M(\Gamma^*)$ of $\Gamma^*$ is the !!{structure}
 defined as follows:
@@ -70,6 +70,30 @@ Suppose $\Gamma^*$ is a complete consistent set of !!{formula}s. Then we let
   \end{cases}
 \]
 \end{defn}
+}
+
+\iftag{FOL}{%
+We will now check that we indeed have $\Value{t}{M(\Gamma^*)} = t$.
+
+\begin{lem} 
+\ollabel{lem:val-in-termmodel} Let $\Struct M(\Gamma^*)$ be the term model
+of \olref{defn:termmodel}, then $\Value{t}{M(\Gamma^*)} = t$.
+\end{lem}
+\begin{proof} 
+ The proof is by induction on $t$, where the base case, when $t$
+ is !!a{constant}, follows directly from the definition of the term
+ model. For the induction step assume $t_1, \ldots, t_n$ are closed terms
+ such that $\Value{t_i}{M(\Gamma^*)} = t_i$ and that $f$ is an $n$-ary
+ !!{function}. Then 
+\begin{align*}
+\Value{f(t_1,\ldots,t_n)}{M(\Gamma^*)} &= \Assign{f}{M(\Gamma^*)}(\Value{t_1}
+ {M(\Gamma^*)}, 
+\ldots, \Value{t_n}{M(\Gamma^*)}) \\
+&= \Assign{f}{M(\Gamma^*)}(t_1, \dots, t_n) \\
+&= f(t_1,\dots, t_n),
+\end{align*} 
+and so by induction this holds for every closed term~$t$.
+\end{proof}
 }
 
 \iftag{FOL}{%

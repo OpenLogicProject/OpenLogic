@@ -63,9 +63,9 @@ derivation.
 To find a logical rule that could give us this conclusion, we
 look at the logical connectives in the conclusion: $\lnot$,
 $\lor$, and $\lif$. We only care at the moment about the first
-occurence of $\lif$ because it is the !!{main operator} of the
+occurrence of $\lif$ because it is the !!{main operator} of the
 !!{sentence} in the end-sequent, while $\lnot$, $\lor$ and the second
-occurence of $\lif$ are inside the scope of another connective, so we
+occurrence of $\lif$ are inside the scope of another connective, so we
 will take care of those later. We therefore start with the
 \Intro{\lif} rule.  A correct application must look like this:
 \begin{prooftree}
@@ -81,7 +81,7 @@ of the \Intro{\lif} rule, or we can work from the top down and apply a
 $\lnot !A \lor !B$ as the leftmost premise of \Elim{\lor}.  For a valid
 application of \Elim{\lor}, the other two premises must be identical
 to the conclusion $!A \lif !B$, but each may be derived in turn from
-another assumption, namely the two disjuncts of $\lnot !A \lor !B$.
+another assumption, namely one of the two disjuncts of $\lnot !A \lor !B$.
 So our !!{derivation} will look like this:
 \begin{prooftree}
 \AxiomC{$\Discharge{\lnot !A \lor !B}{1}$}
@@ -265,16 +265,46 @@ On the right side we use the same strategy, except we get $!A$ by~\FalseCl:
 \end{ex}
 
 \begin{prob}
-Give !!{derivation}s of the following:
+Give !!{derivation}s that show the following:
 \begin{enumerate}
-\item $\lnot(!A \lif !B) \lif (!A \land \lnot !B)$
-\item $(!A \lif !C) \lor (!B \lif !C)$ from the assumption $(!A \land
-  !B) \lif !C$
-\item \( \lnot \lnot !A \lif !A \)
-\item \( \lnot !A \lif \lnot !B \) from the assumption \( !B \lif !A \)
-\item \( \lnot !A \) from the assumption \( ( !A \lif \lnot !A ) \)
-\item \( !A \) from the assumptions \( !B \lif !A \) and \( \lnot !B \lif !A \)
+\item $!A \land (!B \land !C) \Proves (!A \land !B) \land !C$.
+\item $!A \lor (!B \lor !C) \Proves (!A \lor !B) \lor !C$.
+\item $!A \lif (!B \lif !C) \Proves !B \lif (!A \lif !C)$.
+\item $!A \Proves \lnot\lnot !A$.
 \end{enumerate}
+\end{prob}
+
+\begin{prob}
+Give !!{derivation}s that show the following:
+\begin{enumerate}
+\item $(!A \lor !B) \lif !C \Proves !A \lif !C$.
+\item $(!A \lif !C) \land (!B \lif !C) \Proves (!A \lor !B) \lif !C$.
+\item $\Proves \lnot(!A \land \lnot !A)$.
+\item $!B \lif !A \Proves \lnot !A \lif \lnot !B$.
+\item $\Proves (!A \lif \lnot !A) \lif \lnot !A$.
+\item $\Proves \lnot(!A \lif !B) \lif \lnot !B$.
+\item $!A \lif !C \Proves \lnot (!A \land \lnot !C)$.
+\item $!A \land \lnot !C \Proves \lnot (!A \lif !C)$.
+\item $!A \lor !B, \lnot !B \Proves !A$.
+\item $\lnot !A \lor \lnot !B \Proves \lnot(!A \land !B)$.
+\item $\Proves (\lnot !A \land \lnot !B) \lif\lnot(!A \lor !B)$.
+\item $\Proves \lnot(!A \lor !B) \lif (\lnot !A \land \lnot !B)$.
+\end{enumerate}
+\end{prob}
+
+\begin{prob}
+Give !!{derivation}s that show the following:
+\begin{enumerate}
+\item $\lnot(!A \lif !B) \Proves !A$.
+\item $\lnot(!A \land !B) \Proves \lnot !A \lor \lnot !B$.
+\item $!A \lif !B \Proves \lnot !A \lor !B$.
+\item $\Proves \lnot \lnot !A \lif !A$.
+\item $!A \lif !B, \lnot !A \lif !B \Proves !B$.
+\item $(!A \land !B) \lif !C \Proves (!A \lif !C) \lor (!B \lif !C)$.
+\item $(!A \lif !B) \lif !A \Proves !A$.
+\item $\Proves (!A \lif !B) \lor (!B \lif !C)$.
+\end{enumerate}
+(These all require the $\FalseCl$~rule.)
 \end{prob}
 
 \end{document}
