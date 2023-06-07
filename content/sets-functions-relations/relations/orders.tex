@@ -29,7 +29,7 @@ A preorder which is also anti-symmetric is called a
 \emph{partial order}.
 \end{defn}
 
-\begin{defn}[Linear order]
+\begin{defn}[Linear order]\ollabel{def:linearorder}
 A partial order which is also connected is called a
 \emph{total order} or \emph{linear order.}
 \end{defn}
@@ -73,9 +73,9 @@ A \emph{strict order} is a relation which is irreflexive, asymmetric,
 and transitive.
 \end{defn}
 
-\begin{defn}[Strict linear order]
-A strict order which is also connected is called a
-\emph{strict linear order.}
+\begin{defn}[Strict linear order]\ollabel{def:strictlinearorder}
+A strict order which is also connected is called a 
+\emph{strict total order} or \emph{strict linear order.}
 \end{defn}
 
 \begin{ex}
@@ -83,11 +83,6 @@ $\le$ is the linear order corresponding to the strict linear
 order~$<$. $\subseteq$ is the partial order corresponding to the
 strict order~$\subsetneq$.
 \end{ex}
-
-\begin{defn}[Total order]\ollabel{def:strictlinearorder}
-A strict order which is also connected is called a \emph{total order}.
-This is also sometimes called a \emph{strict linear order}. 
-\end{defn}
 
 Any strict order $R$ on~$A$ can be turned into a partial order by
 adding the diagonal $\Id{A}$, i.e., adding all the pairs~$\tuple{x,
@@ -97,42 +92,42 @@ by removing~$\Id{A}$. These next two results make this precise.
 
 \begin{prop}\ollabel{prop:stricttopartial}
 If $R$ is a strict order on~$A$, then $R^+ = R \cup \Id{A}$ is a
-partial order. Moreover, if $R$ is total, then $R^+$ is a linear
-order.
+partial order. Moreover, if $R$ is a strict linear order, then $R^+$ is 
+a linear order.
 \end{prop}
 
 \begin{proof}
 Suppose $R$ is a strict order, i.e., $R \subseteq A^2$ and $R$ is
 irreflexive, asymmetric, and transitive. Let $R^+ = R \cup \Id{A}$. We
-have to show that $R^+$ is reflexive, antisymmetric, and transitive.
+have to show that $R^+$ is reflexive, anti-symmetric, and transitive.
 
 $R^+$ is clearly reflexive, since $\tuple{x, x} \in \Id{A} \subseteq
 R^+$ for all $x \in A$. 
 
-To show $R^+$ is antisymmetric, suppose for reductio that $R^+xy$ and
-$R^+yx$ but $x \neq y$. Since $\tuple{x,y} \in R \cup \Id{X}$, but
-$\tuple{x, y} \notin \Id{X}$, we must have $\tuple{x, y} \in R$, i.e.,
+To show $R^+$ is anti-symmetric, suppose for reductio that $R^+xy$ and
+$R^+yx$ but $x \neq y$. Since $\tuple{x,y} \in R \cup \Id{A}$, but
+$\tuple{x, y} \notin \Id{A}$, we must have $\tuple{x, y} \in R$, i.e.,
 $Rxy$. Similarly,~$Ryx$. But this contradicts the assumption
 that $R$ is asymmetric.
 
 To establish transitivity, suppose that $R^+xy$ and $R^+yz$. If both
 $\tuple{x, y} \in R$ and $\tuple{y,z} \in R$, then $\tuple{x, z} \in
 R$ since $R$~is transitive. Otherwise, either $\tuple{x, y} \in
-\Id{X}$, i.e., $x = y$, or $\tuple{y, z} \in \Id{X}$, i.e., $y = z$.
+\Id{A}$, i.e., $x = y$, or $\tuple{y, z} \in \Id{A}$, i.e., $y = z$.
 In the first case, we have that $R^+yz$ by assumption, $x = y$, hence
 $R^+xz$. Similarly in the second case. In either case, $R^+xz$, thus,
 $R^+$ is also transitive.
 
-Concerning the ``moreover'' clause, suppose $R$ is a total order,
-i.e., that $R$ is connected. So for all $x \neq y$, either $Rxy$
-or~$Ryx$, i.e., either $\tuple{x, y} \in R$ or $\tuple{y, x} \in R$.
-Since $R \subseteq R^+$, this remains true of $R^+$, so $R^+$ is
-connected as well.
+Concerning the ``moreover'' clause, suppose that $R$ is also connected. 
+So for all $x \neq y$, either $Rxy$ or~$Ryx$, i.e., either 
+$\tuple{x, y} \in R$ or $\tuple{y, x} \in R$. Since $R \subseteq R^+$, 
+this remains true of $R^+$, so $R^+$ is connected as well.
 \end{proof}
 
 \begin{prop}\ollabel{prop:partialtostrict}
-If $R$ is a partial order on~$X$, then $R^- = R \setminus \Id{X}$ is a
-strict order. Moreover, if $R$ is linear, then $R^-$ is total.
+If $R$ is a partial order on~$A$, then $R^- = R \setminus \Id{A}$ is a
+strict order. Moreover, if $R$ is a linear order, then $R^-$ is a strict 
+linear order.
 \end{prop}
 
 \begin{proof}
@@ -143,19 +138,13 @@ This is left as an exercise.
 Give a proof of \olref[sfr][rel][ord]{prop:partialtostrict}. 
 \end{prob}
 
-\begin{ex}
-$\le$ is the linear order corresponding to the total 
-order~$<$. $\subseteq$ is the partial order corresponding to
-the strict order~$\subsetneq$.
-\end{ex}
-
-The following simple result which establishes that total orders
+The following simple result establishes that strict linear orders
 satisfy an extensionality-like property:
 
-\begin{prop}\ollabel{prop:extensionality-totalorders}
-If $<$ totally orders $A$, then: 
+\begin{prop}\ollabel{prop:extensionality-strictlinearorders}
+If $<$ is a strict linear order on $A$, then:
 \[
-  (\forall a, b \in A)((\forall x \in A)(x < a \liff x < b) \lif a = b)
+  (\forall a, b \in A)((\forall x \in A)(x < a \liff x < b) \lif a = b).
 \]
 \end{prop}
 
