@@ -10,18 +10,18 @@
 
 \olsection{Definition and Properties}
 
-In this chapter we introduce the concept of Church-Rosser property and
+In this chapter we introduce the concept of Church--Rosser property and
 some common properties of this property.
 
-\begin{defn}[Church-Rosser property, CR] A relation $\xredone$ on
-  terms is said to satisfy the \emph{Church-Rosser property} iff,
+\begin{defn}[Church--Rosser property, CR] A relation $\xredone$ on
+  terms is said to satisfy the \emph{Church--Rosser property} iff,
   whenever $M \xredone P$ and $M \xredone Q$, then there exists
   some~$N$ such that $P \xredone N$ and $Q \xredone N$.
 \end{defn}
 
 We can view the lambda calculus as a model of computation in which
 terms in normal form are ``values'' and a reducibility relation on
-terms are the ``calculation rules.'' The Church-Rosser property states
+terms are the ``calculation rules.'' The Church--Rosser property states
 is that when there is more than one way to proceed with a calculation,
 there is still only a single value of the expression.
 
@@ -33,9 +33,9 @@ distributivity). Both of these, however, can be further reduced to
 $12+3$.
 
 If we take $\xredone$ to be $\beta$-reduction, we easily see that a
-consequence of the Church-Rosser property is that if a term has a
+consequence of the Church--Rosser property is that if a term has a
 normal form, then it is unique. For suppose $M$ can be reduced to $P$
-and $Q$, both of which are normal forms. By Church-Rosser property,
+and $Q$, both of which are normal forms. By the Church--Rosser property,
 there exists some $N$ such that both $P$ and $Q$ reduce to it. Since
 by assumption $P$ and $Q$ are normal forms, the reduction of $P$ and
 $Q$ to $N$ can only be the trivial reduction, i.e., $P$, $Q$, and $N$
@@ -49,9 +49,9 @@ only one, if any, final result of a computation, just like there is
 only one result of computing $4 \times (1+2)+3$, namely~$15$.
 
 \begin{thm} \ollabel{thm:str}
-  If a relation $\xredone$ satisfies the Church-Rosser property, and $\xred$ is the
+  If a relation $\xredone$ satisfies the Church--Rosser property, and $\xred$ is the
   smallest transitive relation containing $\xredone$, then $\xred$ satisfies
-  the Church-Rosser property too.
+  the Church--Rosser property too.
 \end{thm}
 
 \begin{proof}
@@ -74,7 +74,7 @@ only one result of computing $4 \times (1+2)+3$, namely~$15$.
     N_{i,j} &= R
   \end{align*}
   where $R$ is a term such that $N_{i-1,j} \xredone R$ and $N_{i,j-1}
-  \xredone R$. By the Church-Rosser property of $\xredone$, such a
+  \xredone R$. By the Church--Rosser property of $\xredone$, such a
   term always exists.
 
   Now we have $N_{m,0} \xredone \dots \xredone N_{m,n}$ and $N_{0,n}
