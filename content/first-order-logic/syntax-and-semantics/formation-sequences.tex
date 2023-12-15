@@ -27,7 +27,7 @@ some language~$\Lang L$.
 Suppose $\Lang L$ is a first-order language. An \emph{$\Lang
 L$-string} is a finite sequence of symbols of~$\Lang L$. Where the
 language~$\Lang L$ is clearly fixed by the context, we will often
-refer to a $\Lang L$-string as a \emph{string} simpliciter.
+refer to a $\Lang L$-string simply as a \emph{string}.
 \end{defn}
 
 \begin{ex}
@@ -179,19 +179,19 @@ Suppose $!A$ has a formation sequence $\tuple{!A_0,\dotsc,!A_n}$.
 We prove that $!A \in \Frm[L]$ by strong induction on~$n$.
 Our induction hypothesis is that every string of symbols with a
 formation sequence of length $m < n$ is in $\Frm[L]$.
-By the definition of a formation sequence, either $!A_n$ is
+By the definition of a formation sequence, either $!A \ident !A_n$ is
 atomic or there must exist $j,k < n$ such that one of the
 following is the case:
 \begin{enumerate}
-    \tagitem{prvNot}{$!A_i \ident \lnot !A_j$.}{}%
-    \tagitem{prvAnd}{$!A_i \ident (!A_j \land !A_k)$.}{}%
-    \tagitem{prvOr}{$!A_i \ident (!A_j \lor !A_k)$.}{}%
-    \tagitem{prvIf}{$!A_i \ident (!A_j \lif !A_k)$.}{}%
-    \tagitem{prvIff}{$!A_i \ident (!A_j \liff !A_k)$.}{}%
-    \tagitem{prvAll}{$!A_i \ident \lforall[x][!A_j]$.}{}%
-    \tagitem{prvEx}{$!A_i \ident \lexists[x][!A_j]$.}{}%
+    \tagitem{prvNot}{$!A \ident \lnot !A_j$.}{}%
+    \tagitem{prvAnd}{$!A \ident (!A_j \land !A_k)$.}{}%
+    \tagitem{prvOr}{$!A \ident (!A_j \lor !A_k)$.}{}%
+    \tagitem{prvIf}{$!A \ident (!A_j \lif !A_k)$.}{}%
+    \tagitem{prvIff}{$!A \ident (!A_j \liff !A_k)$.}{}%
+    \tagitem{prvAll}{$!A \ident \lforall[x][!A_j]$.}{}%
+    \tagitem{prvEx}{$!A \ident \lexists[x][!A_j]$.}{}%
 \end{enumerate}
-Now we reason by cases. If $!A_n$ is atomic then
+Now we reason by cases. If $!A$ is atomic then
 $!A_n \in \Frm[L_0]$. Suppose instead that
 $!A \equiv (!A_j \land !A_k)$. By 
 \olref[fol][syn][fseq]{lem:fseq-init},
@@ -211,7 +211,7 @@ for !!{formula}s.
 \begin{prop}
 \ollabel{prop:fseq-trm-equiv}
 $\Trm[L]$ is the set of all expressions~$t$ in the language~$\Lang L$
-such that there exists a (term) formation sequence fo~ $t$.
+such that there exists a (term) formation sequence for~$t$.
 \end{prop}
 
 \begin{proof}
