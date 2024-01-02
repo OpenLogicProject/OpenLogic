@@ -178,9 +178,9 @@ concatenation, e.g., $!A \ident (!B \lor !C)$ means: the string of
 symbols~$!A$ is the same string as the one obtained by concatenating
 an opening parenthesis, the string $!B$, the $\lor$ symbol, the
 string~$!C$, and a closing parenthesis, in this order. If this is the
-case, then we know that the first symbol of $!A$ is an opening
+case, then we know that the first symbol of~$!A$ is an opening
 parenthesis, $!A$ contains $!B$ as a substring (starting at the second
-symbol), that substring is followed by $\lor$, etc.
+symbol), that substring is followed by~$\lor$, etc.
 
 As terms and !!{formula}s are built up from basic elements via inductive
 definitions, we can use the following induction principles to prove
@@ -189,18 +189,19 @@ things about them.
 \begin{lem}[\emph{Principle of induction on terms}]
     \ollabel{lem:trmind}
     Let $\Lang L$ be a first-order language.
-    If some property~$P$ holds in all of the following cases,
-    then $P(t)$ for every $t \in \Trm[L]$.
+    If some property~$P$ is such that
     %
     \begin{enumerate}
-        \item $P(v)$ for every variable $v$,
+        \item it holds for every !!{variable}~$v$,
         %
-        \item $P(a)$ for every constant symbol $a$ of $\Lang L$,
+        \item it holds for every !!{constant}~$a$ of~$\Lang L$, and
         %
-        \item If $t_1,\dotsc,t_n \in \Trm[L]$, $f$ is an $n$-place
-            function symbol of $\Lang L$, and $P(t_1),\dotsc,P(t_n)$,
-            then $P(f(t_1,\dotsc,t_n))$.
+        \item it holds for $f(t_1,\dotsc,t_n)$ whenever it holds for
+        $t_1$,~\dots, $t_n$ and $f$~is an $n$-place
+            !!{function} of~$\Lang L$
     \end{enumerate}
+    (assuming $t_1$,~\dots, $t_n$ are terms of~$\Lang{L}$),
+    then $P$ holds for every term in~$\Trm[L]$.
 \end{lem}
 
 \begin{prob}
@@ -214,7 +215,6 @@ things about them.
     and is such that
     %
     \begin{enumerate}
-        \item $!A$ is an atomic formula.
         \tagitem{prvNot}{it holds for $\lnot !A$ whenever it
             holds for~$!A$;}{}
         \tagitem{prvAnd}{it holds for $(!A \land !B)$
@@ -225,13 +225,13 @@ things about them.
             whenever it holds for $!A$ and~$!B$;}{}
         \tagitem{prvIff}{it holds for $(!A \liff !B)$
             whenever it holds for $!A$ and~$!B$;}{}
-        \tagitem{prvEx}{it holds for $\lexists[x]!A$
-            whenever it holds for $!A$;}{}
-        \tagitem{prvAll}{it holds for $\lforall[x]!A$
-            whenever it holds for $!A$;}{}
+        \tagitem{prvEx}{it holds for $\lexists[x][!A]$
+            whenever it holds for~$!A$;}{}
+        \tagitem{prvAll}{it holds for $\lforall[x][!A]$
+            whenever it holds for~$!A$;}{}
   \end{enumerate}
-  %
-  then $P$ holds for all formulas $!A \in \Frm[L]$.
+  (assuming $!A$ and $!B$ are !!{formula}s of~$\Lang{L}$),
+  then $P$ holds for all formulas in~$\Frm[L]$.
 \end{lem}
 
 \end{document}
