@@ -69,24 +69,27 @@ expressed by~$!A$. Not every set of points is a potential proposition;
 only the !!{element}s of $\Top{O}$ are.  $!A \Entails !B$ iff $!B$ is
 true at every point at which~$!A$ is true, i.e., $\Prop{X}{!A}
 \subseteq \Prop{X}{!B}$, for all~$X$. The absurd statement~$\lfalse$
-is never true, so $\Prop{X}{\lfalse} = \emptyset$. How must the
-propositions expressed by $!B \land !C$, $!B \lor !C$, and $!B \lif
-!C$ be related to those expressed by $!B$ and~$!C$ for the
-intuitionistically valid laws to hold, i.e., so that $!A \Proves !B$
-iff $\Prop{X}{!A} \subset \Prop{X}{!B}$. $\lfalse \Proves !A$ for any
-$!A$, and only $\emptyset \subseteq U$ for all $U$.  Since $!B \land
-!C \Proves !B$, $\Prop{X}{!B \land !C} \subseteq \Prop{X}{!B}$, and
-similarly $\Prop{X}{!B \land !C} \subseteq \Prop{X}{!C}$. The largest
-set satisfying $W \subseteq U$ and $W \subseteq V$ is $U \cap V$.
+is never true, so $\Prop{X}{\lfalse} = \emptyset$.
+
+How must the propositions expressed by $!B \land !C$, $!B \lor !C$,
+and $!B \lif !C$ be related to those expressed by $!B$ and~$!C$ for
+the intuitionistically valid laws to hold, i.e., so that $!A \Proves
+!B$ iff $\Prop{X}{!A} \subset \Prop{X}{!B}$? We require $\lfalse
+\Proves !A$ for any $!A$, which is satisfied because $\emptyset
+\subseteq U$ for all $U$.  Since $!B \land !C \Proves !B$, we require
+that $\Prop{X}{!B \land !C} \subseteq \Prop{X}{!B}$, and similarly
+$\Prop{X}{!B \land !C} \subseteq \Prop{X}{!C}$. The largest set
+satisfying $W \subseteq U$ and $W \subseteq V$ is $U \cap V$.
 Conversely, $!B \Proves !B \lor !C$ and $!C \Proves !B \lor !C$, and
-so $\Prop{X}{!B} \subseteq \Prop{X}{!B \lor !C}$ and $\Prop{X}{!C}
-\subseteq \Prop{X}{!B \lor !C}$. The smallest set~$W$ such that $U
-\subseteq W$ and $V \subseteq W$ is $U \cup V$.  The definition for
-$\lif$ is tricky: $!A \lif !B$ expresses the weakest proposition that,
-combined with $!A$, entails $!B$. That $!A \lif !B$ combined with $!A$
-entails~$!B$ is clear from $(!A \lif !B) \land !A \Proves !B $. So
-$\Prop{X}{!A \lif !B}$ should be the greatest open set such that
-$\Prop{X}{!A \lif !B} \cap \Prop{X}{!A} \subset \Prop{X}{!B}$, leading
-to our definition.
+so we require that $\Prop{X}{!B} \subseteq \Prop{X}{!B \lor !C}$ and
+$\Prop{X}{!C} \subseteq \Prop{X}{!B \lor !C}$. The smallest set~$W$
+such that $U \subseteq W$ and $V \subseteq W$ is $U \cup V$.
+
+The definition for $\lif$ is tricky: $!A \lif !B$ expresses the
+weakest proposition that, combined with $!A$, entails $!B$. That $!A
+\lif !B$ combined with $!A$ entails~$!B$ is clear from $(!A \lif !B)
+\land !A \Proves !B $. So $\Prop{X}{!A \lif !B}$ should be the
+greatest open set such that $\Prop{X}{!A \lif !B} \cap \Prop{X}{!A}
+\subset \Prop{X}{!B}$, leading to our definition.
 
 \end{document}
