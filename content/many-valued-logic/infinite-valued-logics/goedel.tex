@@ -103,8 +103,8 @@ Like $\LogGod[3]$, $\LogGod[\infty]$ has all intuitionistically valid
 are non-tautologies of~$\LogGod[\infty]$:
 \begin{align*}
   & p \lor \lnot p && (p \lif q) \lif (\lnot p \lor q) \\
-  & \lnot\lnot p \lif p && \lnot(p \land q) \lif (\lnot p \lor \lnot q) \\
-  &&& ((p \lif q) \lif p) \lif p
+  & \lnot\lnot p \lif p && \lnot(\lnot p \land \lnot q) \lif (p \lor q) \\
+  & ((p \lif q) \lif p) \lif p && \lnot(p \lif q) \lif (p \land \lnot q)
 \end{align*}
 The example of an intuitionistically invalid !!{formula} that is
 nevertheless a tautology of~$\LogGod[3]$, $(p \lif q) \lor (q \lif
@@ -117,6 +117,11 @@ as G\"odel--Dummett logic~$\Log{LC}$.
 \begin{prob}
   Show that $(p \lif q) \lor (q \lif p)$ is a
   tautology of~$\LogGod[\infty]$.
+\end{prob}
+
+\begin{prob}
+  Show that $(p \lif q) \lor (q \lif r) \lor (r \lif s)$, which is 
+  a tautology of $\LogGod[3]$, is not a tautology of~$\LogGod[\infty]$.
 \end{prob}
 
 \end{document}
