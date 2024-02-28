@@ -58,20 +58,20 @@ let $\funrestrictionto{\sigma}{\alpha} = \Setabs{\tuple{\beta,
 For any term $\tau(x)$, we can explicitly define a term
 $\sigma(x)$, such that
 $\sigma(\alpha) = \tau(\funrestrictionto{\sigma}{\alpha})$ for any
-ordinal $\alpha$. 	
+ordinal~$\alpha$.
 \end{thm}
 
 \begin{proof}
-For each $\alpha$, by \olref{transrecursionfun} there is a unique $\alpha$-approximation, $f_\alpha$, for $\tau$. Define $\sigma(\alpha)$ as $f_{\ordsucc{\alpha}}(\alpha)$. Now:
+For each $\alpha$, by \olref{transrecursionfun} there is a unique $\alpha$-approximation, $f_\alpha$, for~$\tau$. Define $\sigma(\alpha)$ as $f_{\ordsucc{\alpha}}(\alpha)$. Now:
 	\begin{align*}
 		\sigma(\alpha) &= 
 		f_{\ordsucc{\alpha}}(\alpha) \\&= 
 		\tau(\funrestrictionto{f_{\ordsucc{\alpha}}}{\alpha}) \\&= 
 		\tau(\Setabs{\tuple{\beta, f_{\ordsucc{\alpha}}(\beta)}}{\beta \in \alpha}) \\&= 
-		\tau(\Setabs{\tuple{\beta, f_{\alpha}(\beta)}}{\beta \in \alpha})\\&=
+		\tau(\Setabs{\tuple{\beta, f_{\ordsucc{\beta}}(\beta)}}{\beta \in \alpha})\\&=
 		\tau(\funrestrictionto{\sigma}{\alpha})
 	\end{align*}
-noting that $f_{\alpha}(\beta) = f_{\ordsucc{\alpha}}(\beta)$ for all $\beta < \alpha$, as in \olref{transrecursionfun}. 
+noting that $f_{\ordsucc{\beta}}(\beta) = f_{\ordsucc{\alpha}}(\beta)$ for all $\beta < \alpha$, as in \olref{transrecursionfun}. 
 \end{proof}
 \noindent 
 Note that \olref{transrecursionschema} is a \emph{schema}. Crucially, we cannot
