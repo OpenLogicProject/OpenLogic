@@ -208,10 +208,34 @@ reasoning.
 Formation sequences for terms have similar properties to those
 for !!{formula}s.
 
+\begin{defn}[Formation sequences for terms]
+\ollabel{defn:fseq-trm}
+A finite sequence of $\Lang L$-strings $\tuple{t_0, \ldots, t_n}$
+is a \emph{term formation sequence} for~$t$ if $t \ident t_n$ and
+for all $i \leq n$,
+either $t_i$ is a !!{constant},
+or $t_i$ is a !!{variable},
+or there exist $j_1, \ldots, j_k < i$ such that
+$t_i \ident \Atom{f}{t_{j_1}, \ldots, t_{j_k}}$
+where $f$ is a $k$-place !!{function} of~$\Lang L$.
+\end{defn}
+
+\begin{ex}
+\[
+\tuple{
+    \Obj v_0,
+    \Obj c_1,
+    \Obj f^2_0({\Obj v_0}, {\Obj c_1})
+}
+\]
+is a formation sequence of
+$\Obj f^2_0({\Obj v_0}, {\Obj c_1})$.
+\end{ex}
+
 \begin{prop}
 \ollabel{prop:fseq-trm-equiv}
-$\Trm[L]$ is the set of all expressions~$t$ in the language~$\Lang L$
-such that there exists a (term) formation sequence for~$t$.
+$\Trm[L]$ is the set of all expressions~$t$ of~$\Lang L$
+such that there exists a term formation sequence for~$t$.
 \end{prop}
 
 \begin{proof}
@@ -231,11 +255,20 @@ both by looking at minimal formation sequences.
 
 \begin{defn}[Minimal formation sequences]
 \ollabel{defn:minimal-fseq}
-A formation sequence $\tuple{!A_0,\dotsc,!A_n}$ for~$!A$ is a
-\emph{minimal formation sequence} for~$!A$
+A formation sequence $\tuple{!A_0, \ldots, !A_n}$ for~$!A$
+is a \emph{minimal formation sequence} for~$!A$
 if for every other formation sequence~$s$ for~$!A$, the length
 of~$s$ is greater than or equal to~$n+1$.
+
+Similarly, a term formation sequence $\tuple{t_0, \ldots, t_n}$
+for~$t$ is a \emph{minimal term formation sequence} for~$t$
+if for every other term formation sequence~$s$ for~$t$, the
+length of~$s$ is greater than or equal to~$n+1$.
 \end{defn}
+
+Note that a formula or term can have more than one minimal
+formation sequence, but they will contain exactly the same
+expressions.
 
 \begin{prop}
 \ollabel{prop:subformula-equivs}
