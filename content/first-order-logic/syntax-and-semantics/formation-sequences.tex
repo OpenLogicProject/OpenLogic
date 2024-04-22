@@ -44,6 +44,8 @@ A finite sequence of $\Lang L$-strings $\tuple{t_0,\dotsc,t_n}$ is a
 $i \leq n$, either $t_i$ is !!a{variable} or !!a{constant}, or $\Lang
 L$ contains a $k$-ary !!{function}~$f$ and there exist
 $m_0,\dotsc,m_k < i$ such that $t_i \ident f(t_{m_0},\dotsc,t_{m_k})$.
+When it is necessary to distinguish, we will refer to formation
+sequences for terms as \emph{term formation sequences}.
 \end{defn}
 
 \begin{ex}
@@ -74,6 +76,8 @@ holds:
     \tagitem{prvAll}{$!A_i \ident \lforall[x][!A_j]$.}{}%
     \tagitem{prvEx}{$!A_i \ident \lexists[x][!A_j]$.}{}%
 \end{enumerate}
+When it is necessary to distinguish, we will refer to formation
+sequences for formulas as \emph{formula formation sequences}.
 \end{defn}
 
 \begin{ex}
@@ -165,8 +169,8 @@ Prove \olref[fol][syn][fseq]{lem:fseq-init}.
 
 \begin{thm}
 \ollabel{thm:fseq-frm-equiv}
-$\Frm[L]$ is the set of all expressions (strings of symbols)
-in the language~$\Lang L$ with a formation sequence.
+$\Frm[L]$ is the set of all $\Lang L$-strings $\varphi$ such that
+there exists a formula formation sequence for $\varphi$.
 \end{thm}
 
 \begin{proof}
@@ -210,8 +214,8 @@ for !!{formula}s.
 
 \begin{prop}
 \ollabel{prop:fseq-trm-equiv}
-$\Trm[L]$ is the set of all expressions~$t$ of~$\Lang L$
-such that there exists a formation sequence for~$t$.
+$\Trm[L]$ is the set of all $\Lang L$-strings $t$
+such that there exists a term formation sequence for~$t$.
 \end{prop}
 
 \begin{proof}
@@ -231,20 +235,20 @@ both by looking at minimal formation sequences.
 
 \begin{defn}[Minimal formation sequences]
 \ollabel{defn:minimal-fseq}
-A formation sequence $\tuple{!A_0, \ldots, !A_n}$ for~$!A$
-is a \emph{minimal formation sequence} for~$!A$
-if for every other formation sequence~$s$ for~$!A$, the length
-of~$s$ is greater than or equal to~$n+1$.
+A formation sequence $\tuple{!A_0, \ldots, !A_n}$ for a
+formula~$!A$ is a \emph{minimal formation sequence} for~$!A$
+if for every other formation sequence~$s$ for~$!A$,
+the length of~$s$ is greater than or equal to~$n+1$.
 
-Similarly, a term formation sequence $\tuple{t_0, \ldots, t_n}$
-for~$t$ is a \emph{minimal term formation sequence} for~$t$
-if for every other term formation sequence~$s$ for~$t$, the
-length of~$s$ is greater than or equal to~$n+1$.
+Similarly, a formation sequence $\tuple{t_0, \ldots, t_n}$
+for a term~$t$ is a \emph{minimal formation sequence}
+for~$t$ if for every other formation sequence~$s$ for~$t$,
+the length of~$s$ is greater than or equal to~$n+1$.
 \end{defn}
 
 Note that a formula or term can have more than one minimal
 formation sequence, but they will contain exactly the same
-expressions.
+strings.
 
 \begin{prop}
 \ollabel{prop:subformula-equivs}
