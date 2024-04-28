@@ -65,18 +65,21 @@ contrary to the induction hypothesis.
 For every~$n$ and every $i < n$, $\Gamma_i \subseteq \Gamma_n$. This
 follows by a simple induction on~$n$. For $n=0$, there are no $i < 0$,
 so the claim holds automatically.  For the inductive step, suppose it
-is true for~$n$. We have $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$ or $=
+is true for~$n$. We show that if $i < n+1$ then $\Gamma_i \subseteq
+\Gamma_{n+1}$. We have $\Gamma_{n+1} = \Gamma_n \cup \{!A_n\}$ or $=
 \Gamma_n \cup \{\lnot !A_n\}$ by construction. So $\Gamma_n \subseteq
-\Gamma_{n+1}$. If $i < n$, then $\Gamma_i \subseteq \Gamma_n$ by
-inductive hypothesis, and so $\Gamma_i \subseteq \Gamma_{n+1}$ by transitivity
-of~$\subseteq$.
+\Gamma_{n+1}$. If $i < n+1$, then $\Gamma_i \subseteq \Gamma_n$ by
+inductive hypothesis (if $i < n$) or the trivial fact that $\Gamma_n
+\subseteq \Gamma_n$ (if $i = n$). We get that $\Gamma_i \subseteq
+\Gamma_{n+1}$ by transitivity of~$\subseteq$.
 
-From this it follows that every finite subset of $\Gamma^*$ is a
-subset of~$\Gamma_n$ for some~$n$, since each $!B \in \Gamma^*$ not
-already in~$\Gamma_0$ is added at some stage~$i$. If $n$ is the last
-one of these, then all~$!B$ in the finite subset are
-in~$\Gamma_n$. So, every finite subset of~$\Gamma^*$ is consistent. By
-\iftag{FOL}{%
+From this it follows that $\Gamma^*$ is consistent. Here's why: Let
+$\Gamma' \subseteq \Gamma^*$ be finite. Each $!B \in \Gamma'$ is also
+in~$\Gamma_i$ for some~$i$. Let $n$ be the largest of these. Since
+$\Gamma_i \subseteq \Gamma_n$ if $i \le n$, every $!B \in \Gamma'$ is
+also $\in \Gamma_n$, i.e., $\Gamma' \subseteq \Gamma_n$, and
+$\Gamma_n$~is consistent. So, every finite subset $\Gamma' \subseteq
+\Gamma^*$ is consistent. By \iftag{FOL}{%
   \tagrefs{prfAX/{fol:axd:ptn:prop:proves-compact},
     prfSC/{fol:seq:ptn:prop:proves-compact},
     prfND/{fol:ntd:ptn:prop:proves-compact},
