@@ -7,7 +7,7 @@
 \begin{document}
 
 \olfileid{tur}{und}{tra}
-\olsection{Trakthenbrot's Theorem}
+\olsection{Trakhtenbrot's Theorem}
 
 \begin{explain}
   In \olref[rep]{sec} we defined !!{sentence}s $!T(M,w)$ and~$!E(M,w)$
@@ -94,10 +94,10 @@ For the following, let $!A(x, y)$ be as before, and let
     ((\Obj Q_{q_i}(x', y) \land \Obj S_{\sigma}(x', y)) \lif {}]]\\
 & \qquad   (\Obj Q_{q_j}(x, y') \land \Obj S_{\sigma'}(x', y') \land
 !A(x, y))) \land {}\\
-& \lforall[y][((\Obj Q_{q_i}(\Obj 0, y) \land \Obj S_{\sigma}(\Obj 0,
+& \lforall[y][((\Obj Q_{q_i}(\num{0}, y) \land \Obj S_{\sigma}(\num{0},
     y)) \lif {}]\\
-& \qquad (\Obj Q_{q_j}(\Obj 0, y') \land \Obj S_{\sigma'}(\Obj 0,
-  y') \land !A(\Obj 0, y) \land !B(y')))
+& \qquad (\Obj Q_{q_j}(\num{0}, y') \land \Obj S_{\sigma'}(\num{0},
+  y') \land !A(\num{0}, y) \land !B(y')))
 \end{align*}
 \item \ollabel{rep-stay} For every instruction $\delta(q_i, \sigma) =
   \tuple{q_j, \sigma', \TMstay}$, the !!{sentence}:
@@ -198,7 +198,7 @@ machine~$M$ and input~$w$.
   steps, then $!T'(M,w) \Entails !B(\num{n})$.
 \end{prob}
 
-\begin{thm}[Trakthenbrot's Theorem]
+\begin{thm}[Trakhtenbrot's Theorem]
   \ollabel{thm:trakhtenbrodt}
   It is undecidable if an arbitrary !!{sentence} of first-order logic has
   a finite model (i.e., is finitely satisfiable).
@@ -206,7 +206,7 @@ machine~$M$ and input~$w$.
 
 \begin{proof}
   Suppose there were a Turing machine~$F$ that decides the finite
-  satisfiability problem. Then given any Turing machine $M$ and
+  satisfiability problem. Then given any Turing machine~$M$ and
   input~$w$, we could compute the sentence~$!T'(M,w) \land !E(M,w)$,
   and use~$F$ to decide if it has a finite model. By
   \cref{tur:und:tra:lem:halts-sat,tur:und:tra:lem:sat-halts}, it does iff $M$
