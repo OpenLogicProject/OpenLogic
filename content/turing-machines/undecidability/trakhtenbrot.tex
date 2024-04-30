@@ -50,18 +50,40 @@
   $\Struct{M'}$ is a finite model of~$!T(M,w) \land !E(M,w)$ (note
   that we've replaced $\lif$ with~$\land$).
   
-  We are halfway to a proof: we've shown that
-  if $M$ halts on input~$w$, then $!T(M,e) \land !E(M,w)$ has a finite
-  model. Unfortunately, the ``only if'' direction does not hold.  For
-  instance, if $M$ after $n$~steps is in state~$q$ and reads a
-  symbol~$\sigma$, and $\delta(q,\sigma) = \tuple{q,\sigma,\TMstay}$,
-  then the configuration after $n+1$ steps is exactly the same as the
-  configuration after $n$~steps (same state, same head position, same
-  tape contents). But the machine never halts; it's in an infinite
-  loop.  The corresponding !!{structure}~$\Struct{M'}$ above satisfies
-  $!T(M,w)$ but not~$!E(M,w)$. (In it, the values of $\num{n+l}$ are
-  all the same, so it is finite). But by changing~$!T(M,w)$ in a
-  suitable way we can rule out !!{structure}s like this.
+  We are halfway to a proof: we've shown that if $M$ halts on
+  input~$w$, then $!T(M,w) \land !E(M,w)$ has a finite model.
+  Unfortunately, the converse of this does not hold, i.e., there are
+  Turing machines that don't halt on some input~$w$, but $!T(M,w)
+  \land !E(M,w)$ still has a finite model. For instance, consider the
+  machine~$M$ with the single state $q_0$ and instruction
+  $\delta(q_0,\TMblank) = \tuple{q,\TMblank,\TMstay}$. Started on
+  empty input, this machine never halts: it is in an infinite loop,
+  but does not change the tape or move the head. All configurations
+  are the same (same state, same head position, same tape contents).
+  We can define a finite !!{structure}~$\Struct{M''}$ that satisfies
+  $!T(M,\emptyseq) \land !E(M,\emptyseq)$ (exercise). We can
+  change~$!T(M,w)$ in a suitable way we so that such !!{structure}s
+  are ruled out.
+
+  \begin{prob}
+    Let $M$ be a Turing machine with the single state $q_0$ and single
+    instruction $\delta(q_0,\TMblank) = \tuple{q,\TMblank,\TMstay}$.
+    Let $\Domain{M''} = \{0, 1, 2\}$, $\Assign{\prime}{M''}(0) =
+    \Assign{\prime}{M'}(1) = 1$ and $\Assign{\prime}{M''}(2) = 2$, and
+    $\Assign{<}{M''} = \{\tuple{0,1}, \tuple{1,1}, \tuple{2,2}\}$.
+    Define $\Assign{\Obj Q_{q_0}}{M''}$, $\Assign{\Obj
+    S_{\TMblank}}{M''}$, and $\Assign{\Obj S_{\TMendtape}}{M''}$ so
+    that $!T(M,\emptyseq)$ and $!E(M,\emptyseq)$ become true and
+    explain why they are. Hint: Observe that $\delta(q_0, \TMendtape)$
+    is undefined. Ensure that
+    \begin{align*}
+    & \Obj Q_{q_0}(\num{1}, \num{n}) \land \Obj S_{\TMendtape}(\num{0}, \num{n})
+      \land 
+      \lforall[x][(\num{0} < x \lif \Obj S_\TMblank(x, \num{n}))] \text{\quad for all $n \in \Nat$}\\
+    & \lexists[y][(\Obj Q_{q_0}(\num{0}, y) \land \Obj S_{\TMendtape}(\num{0}, y))]
+    \end{align*}
+    are both true in~$\Struct{M''}$.
+  \end{prob}
 \end{explain}
 
 Consider the !!{sentence}s describing the operation of the Turing
