@@ -56,14 +56,14 @@
   Turing machines that don't halt on some input~$w$, but $!T(M,w)
   \land !E(M,w)$ still has a finite model. For instance, consider the
   machine~$M$ with the single state $q_0$ and instruction
-  $\delta(q_0,\TMblank) = \tuple{q,\TMblank,\TMstay}$. Started on
-  empty input, this machine never halts: it is in an infinite loop,
-  but does not change the tape or move the head. All configurations
-  are the same (same state, same head position, same tape contents).
-  We can define a finite !!{structure}~$\Struct{M''}$ that satisfies
-  $!T(M,\emptyseq) \land !E(M,\emptyseq)$ (exercise). We can
-  change~$!T(M,w)$ in a suitable way so that such !!{structure}s
-  are ruled out.
+  $\delta(q_0,\TMblank) = \tuple{q_0,\TMblank,\TMstay}$. Started on
+  empty input~$w = \emptyseq$, this machine never halts: it is in an
+  infinite loop, but does not change the tape or move the head. All
+  configurations are the same (same state, same head position, same
+  tape contents). We can define a finite !!{structure}~$\Struct{M''}$
+  that satisfies $!T(M,\emptyseq) \land !E(M,\emptyseq)$ (exercise).
+  We can, however, change~$!T(M,w)$ in a suitable way so that such
+  !!{structure}s are ruled out.
 
   \begin{prob}
     Let $M$ be a Turing machine with the single state $q_0$ and single
