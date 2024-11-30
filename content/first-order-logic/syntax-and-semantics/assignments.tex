@@ -231,10 +231,18 @@ variable assignments~$s$.
 \end{defn}
 
 If $\Sat{M}{!A}$, we also simply say that \emph{$!A$ is true
-  in~$\Struct{M}$.}
+in~$\Struct{M}$.} The notion of satisfaction naturally extends
+from individual !!{sentence}s to sets of !!{sentence}s.
+
+\begin{defn}
+\ollabel{defn:sat}
+If $\Gamma$ is a set of !!{sentence}s~$\Gamma$, we say that
+!!a{structure}~$\Struct M$ \emph{satisfies}~$\Gamma$,
+$\Sat{M}{\Gamma}$, iff $\Sat{M}{!A}$ for all $!A \in \Gamma$.
+\end{defn}
 
 \begin{prop}\ollabel{prop:sentence-sat-true}
-  Let $\Struct{M}$ be !!a{structure}, $!A$ be a sentence, and $s$ a
+  Let $\Struct{M}$ be !!a{structure}, $!A$ be !!a{sentence}, and $s$ a
   variable assignment.  $\Sat{M}{!A}$ iff $\Sat{M}{!A}[s]$.
 \end{prop}
 
@@ -339,7 +347,5 @@ M'$ such that $\Sat{M'}{\lforall[x][!A(x,f(x))]}$.
 $\lforall[x][!A(x,f(x))]$ is called a \emph{Skolem normal form} of
 $\lforall[x][\lexists[y][!A(x,y)]]$.)
 \end{prob}
-
-
 
 \end{document}
