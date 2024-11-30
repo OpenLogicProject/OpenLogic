@@ -67,6 +67,8 @@ $!A$ is atomic, $!A$ can be:
 \iftag{prvFalse}{$\lfalse$,}{}
 $\Atom{R}{t_1, \dots, t_k}$ for a $k$-place predicate $R$ and terms
 $t_1$, \dots,~$t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and~$t_2$.
+In the latter two cases, we only demonstrate the forward direction of
+the !!{biconditional}, since the proof of the reverse is symmetrical.
 
 \begin{enumerate}
 \tagitem{prvTrue}{%
@@ -87,7 +89,7 @@ $t_1$, \dots,~$t_k$, or $\eq[t_1][t_2]$ for terms $t_1$ and~$t_2$.
     For $i = 1$, \dots,~$k$, $\Value{t_i}{M}[s_1] =
     \Value{t_i}{M}[s_2]$ by \olref{prop:valindep}. So we also have
     $\langle \Value{t_i}{M}[s_2], \ldots, \Value{t_k}{M}[s_2] \rangle
-    \in \Assign{R}{M}$.}
+    \in \Assign{R}{M}$, and hence $\Sat{M}{\indfrm}[s_2]$.}
 \item
   \indcase{!A}{\eq[t_1][t_2]}{suppose $\Sat{M}{\indfrm}[s_1]$.
     Then $\Value{t_1}{M}[s_1] = \Value{t_2}{M}[s_1]$. So,
