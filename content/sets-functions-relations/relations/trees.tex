@@ -1,0 +1,78 @@
+% Part: sets-functions-relations
+% Chapter: relations
+% Section: trees
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{sfr}{rel}{tre}
+\olsection{Trees}
+
+A particular kind of partial order which plays an important role in
+all parts of logic is a \emph{tree}. Finite trees occur in elementary
+parts of logic: for example, !!{formula}s can be understood in terms
+of their decomposition into a syntax tree, while !!{derivation}s in
+natural deduction also take the form of a finite tree.
+%
+Infinite trees appear already in the proof of the completeness
+theorems for propositional and first-order logic, and are used
+throughout mathematical logic. For example, in descriptive set theory,
+many pointclasses of real numbers (such as Borel sets or analytic sets)
+have representations in terms of trees.
+
+\begin{defn}[Tree]
+A \emph{tree} is a pair $T = \tuple{X,\le}$ such that $X$ is a set
+and $\le$ is a partial order on $X$ with a unique minimal element
+$r \in X$ (called a \emph{root}) such that for all $t \in X$,
+the set $\Setabs{s}{s \le t}$ is well-ordered by $\le$.
+\end{defn}
+
+\begin{defn}[Successors]
+Suppose $T = \tuple{X,\le}$ is a tree.
+%
+If $t,s \in X$, $t < s$, and there is no $s' \in X$ such that
+$t < s' < s$, then we say that $s$ is a \emph{successor} of $t$.
+\end{defn}
+
+\begin{defn}[Infinite and finitely branching trees]
+Suppose that $T = \tuple{X,\le}$ is a tree.
+%
+$T$ is said to be \emph{infinite} if $X$ is an infinite set,
+\emph{finite} otherwise.
+%
+If $T$ is such that every $t \in X$ has only finitely many
+successors, then we say that $T$ is \emph{finitely branching}.
+\end{defn}
+
+\begin{defn}[Branches]
+Given a tree $T = \tuple{X,\le}$, a \emph{branch} of $T$ is a
+maximal chain in $T$, i.e.\ a set $B \subseteq X$ such that
+for any $a,b \in B$ either $a \le b$ or $b \le a$, and for any
+$c \in X \setminus B$ there exists $d \in B$ such that neither
+$c \le d$ nor $d \le c$.
+%
+We use $[T]$ to denote the set of all branches of $T$.
+\end{defn}
+
+\begin{ex}
+A classic example of a finitely branching tree is the
+\emph{binary tree} of finite sequences of $0$s and $1$s,
+sometimes denoted $\{0,1\}^*$, ordered by the extension
+relation $\sqsubseteq$ (e.g., $101 \sqsubseteq 101101$).
+Since any binary string can always be extended by adding
+a $0$ or a $1$ on the end, this tree contains infinitely
+many elements. Its root is the empty sequence $\emptyseq$.
+\end{ex}
+
+\begin{prop}[K\H{o}nig's lemma]
+If $T = \tuple{X,\le}$ is a finitely branching infinite tree,
+then $T$ has an infinite branch.
+\end{prop}
+
+A special case of K\H{o}nig's lemma widely used in
+computability theory, known as \emph{weak K\H{o}nig's lemma},
+is the following:
+any infinite subtree of $\{0,1\}^*$ has an infinite branch.
+
+\end{document}
