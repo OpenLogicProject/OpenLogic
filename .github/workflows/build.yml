@@ -1,5 +1,8 @@
 name: Build LaTeX document
-on: [push]
+on:
+  push:
+  pull_request:
+
 jobs:
   build_latex:
     runs-on: ubuntu-latest
@@ -10,3 +13,8 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: open-logic-debug.tex
+      - name: Upload open-logic-debug.pdf
+        uses: actions/upload-artifact@master
+        with:
+          name: open-logic-debug.pdf
+          path: open-logic-debug.pdf
