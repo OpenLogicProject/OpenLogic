@@ -30,10 +30,12 @@
 \Newassociation{prob}{probdeferred}{\jobname}
 \Newassociation{probtag}{probdeferredtag}{\jobname}
 
+\newcommand*{\olprobsavefileid}{\Writetofile{\jobname}{\string\olfileid{\theolpart}{\theolchapter}{\theolsection}}}
+
 % every prob environment, execute \ifproblems\ifproblemswrite
 
-\pretocmd{\prob}{\ifproblems\ifproblemswrite}{}{}
-\pretocmd{\probtag}{\ifproblems\ifproblemswrite}{}{}
+\pretocmd{\prob}{\olprobsavefileid\ifproblems\ifproblemswrite}{}{}
+\pretocmd{\probtag}{\olprobsavefileid\ifproblems\ifproblemswrite}{}{}
 
 % probdeferred and probdeferredtag are just wrappers for theorem
 % environments which do the actual typesetting.  answers.sty writes
@@ -93,7 +95,7 @@
   \renewcommand{\memendofchapterhook}{%
     \Closesolutionfile{\jobname}
     \Opensolutionfile{\jobname}
-    \Writetofile{\jobname}{
+    \Writetofile{\jobname}{%
       \string\renewcommand*{\string\probch}{\thechapter}
       \string\setcounter{probd}{0}}
     \let\ifproblems\makeifproblemsprint}
