@@ -35,7 +35,12 @@
 
 \olgreekformulas
 
-% Greek symbols: prefer varphi and varepsilon
+% We prefer `\varphi` to `\phi` and `\varepsilon` to `\epsilon`. If
+% you don't, you can say
+% ```
+% \let\phi\oldphi
+% \let\epsilon\oldepsilon
+% ```
 
 \let\oldphi\phi
 \let\phi\varphi
@@ -57,7 +62,7 @@
 \DeclareDocumentMacro \True {\ensuremath{\mathbb{T}}}
 \DeclareDocumentMacro \False {\ensuremath{\mathbb{F}}}
 
-% Other truth values
+% For many-valued logic we have `\Indet` ($\mathbb{I}$) and `Undef' ($\mathbb{U}$).
 
 \DeclareDocumentMacro \Indet {\ensuremath{\mathbb{I}}}
 \DeclareDocumentMacro \Undef {\ensuremath{\mathbb{U}}}
@@ -73,14 +78,16 @@
 \DeclareDocumentMacro \ltrue {\top}
 
 % - Negation is `\lnot` and defaults to $\lnot$.  To use a different
-% symbol (e.g., tilde), use the following line.
+% symbol (e.g., tilde), include the following code:
+% ```
+% \DeclareDocumentMacro \lnot {\mathord{\sim}}
+% ```
 
-% `\DeclareDocumentMacro \lnot {\mathord{\sim}}`
-
-% - Conjunction is `\land` and deaults to $\land$.  to use ampersand,
-% uncomment the following line
-
-% `\DeclareDocumentMacro \land {\mathbin{\&}}`
+% - Conjunction is `\land` and deaults to $\land$. To use ampersand,
+% include the following code:
+% ```
+% \DeclareDocumentMacro \land {\mathbin{\&}}
+% ```
 
 % - Disjunction is `\lor` and defaults to $\lor$.
 
@@ -96,11 +103,11 @@
 \DeclareDocumentMacro \liff {\mathbin{\leftrightarrow}}
 
 % - The conditional `\cif` and defaults to `\boxright` which produces
-% - Lewis's box-arrow symbol.
+%   Lewis's box-arrow symbol.
 
 \DeclareDocumentMacro \cif {\boxright}
 
-% - The strict conditional `\strictif`
+% - The strict conditional `\strictif` defaults to `\fishhookright`
 
 \DeclareDocumentMacro \strictif {\fishhookright}
 
@@ -170,7 +177,8 @@
 
 \DeclareDocumentMacro \nSequent {\mid}
 
-% The sequent symbol in proofs displays as the above sequent symbol.
+% - The sequent symbol in proofs displays as the above sequent symbol.
+%   (We use the `bussproofs` package to typeset proofs.)
 
 \DeclareDocumentMacro \fCenter {\ensuremath{\,\Sequent\,}}
 
@@ -220,7 +228,7 @@
 \DeclareDocumentMacro \FalseCl {\ensuremath{\lfalse_C}}
 
 % - `\Discharge{!A}{n}`: typesets a discharged assumption with label
-% $n$, e.g., $[!A]^n$.
+% $n$, e.g., $[\phi]^n$.
 
 \DeclareDocumentCommand \Discharge { m m }{[#1]^{#2}}
 
@@ -302,7 +310,7 @@
 
 % ### Substitution
 
-% -`\subst{t}{x}`: typeset the substitution notation
+% - `\subst{t}{x}`: typeset the substitution notation
 
 \DeclareDocumentCommand \subst { m m } {#1/#2}
 
@@ -349,7 +357,7 @@
 
 % ### The derivability relation
 
-% `\Proves[L]` is used to create the symbol for the derivability
+% - `\Proves[L]` is used to create the symbol for the derivability
 % relation, `\Proves/` for the negation. By default this creates
 % $\vdash$; e.g., `\Gamma \Proves !A` yields $\Gamma \vdash
 % \varphi$. An optional argument may be used for the calculus or logic
@@ -376,7 +384,7 @@
 
 % ### The semantic consequence relation relation
 
-% `\Entails` is the semantic counterpart of `\Proves` and defaults to
+% - `\Entails` is the semantic counterpart of `\Proves` and defaults to
 % $\vDash$. It also takes an optional `/` for $\nvDash$ and an
 % optional argument for a subscript.
 
@@ -541,7 +549,7 @@
 
 \DeclareDocumentCommand \Expan { m m } {(\Struct{#1}, #2)}
 
-% `\nssucc`, `\nsplus`, `\nstimes`, `\nsless`: non-standard
+% - `\nssucc`, `\nsplus`, `\nstimes`, `\nsless`: non-standard
 % arithmetical operations
 
 \DeclareDocumentMacro \nszero {\mathbf{z}}
@@ -628,6 +636,13 @@
         % optional argument present
         { \varphi_{#1}^{#2} }
 }
+
+% - `\fdefined`, `\fundefined`: postfix for defined, undefined
+%   functions; LaTeX code for this is under ``Special sets and
+%   mathematical symbols''
+
+% Lambda calculus
+% ---------------
 
 % - `\redone`: one-step reduction
 
@@ -736,22 +751,19 @@
 
 \DeclareDocumentCommand \scode { m } {\fn{c}_{#1}}
 
-% - `\Gn{!A}`: G\"odel number of a string of symbols
+% - `\Gn{!A}`: Gödel number of a string of symbols
 
 \DeclareDocumentCommand \Gn { m } {{^{\reflectbox{\tiny\#}}}{#1}{^{\mbox{\tiny\#}}}}
 
 % Modal Logic 
 % -----------
 
-% Modal logic
-% ===========
-
 % - `\mModel{M}` - modal structures; default: set first token in
-% Fraktur
+% arguemnt in Fraktur
 
 \DeclareDocumentCommand \mModel { m }{\applytofirst{\mathfrak}{#1}}
 
-% `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
+% - `\mSat[/]{M}{!A}[w]`, the relation of being satisfied in a
 % model (at a world), is provided as the command
 % `\mSat` with two mandatory arguments (the model and the formula)
 % and one optional argument (the world).  Use `\mSat/` to create
@@ -839,15 +851,14 @@
 \DeclareDocumentCommand \Setabs { m m }{\{ #1 : #2 \}}
 
 % - Fregean extensions: Use `\fregeext{x}{!A(x)}` to produce
-%   $\epsilon x\, !A(x)$.
+%   $\epsilon x\, \varphi(x)$.
 
 \DeclareDocumentCommand \fregeext { m m }{\oldepsilon #1 \, #2 }
 
 % - Fregean number: Use `\fregenum{x}{!A(x)}` to produce 
-%   $\# x\, !A(x)$.
+%   $\# x\, \varphi(x)$.
 
 \DeclareDocumentCommand \fregenum { m m }{\# #1 \, #2 }
-
 
 % - `\Pow{X}`: Power set, produces $\wp(X)$
 
@@ -1015,7 +1026,10 @@
 % - `\Struct{M}` - First-order structures; by default, the first token
 % in Fraktur
 
-% `\applytofirst` will apply #1 to #2 after expanding #2 once.
+% - `\applytofirst` will apply #1 to #2 after expanding #2 once. We
+%   use it to apply formatting to only the first token in the argument
+%   so that, e.g., `\Struct{M_k}` produces $\mathfrak{M}_k$ and not
+%   $\mathfrak{M_k }$.
 
 \def\applytofirst#1#2{{\expandafter#1#2}}
 
@@ -1031,7 +1045,7 @@
 \DeclareDocumentCommand \Log { m o }{\ensuremath{\mathbf{#1}
 \IfNoValueTF {#2}{}{_{#2}}}}
 
-% - Some logics
+% - We include names for some specific logics
 
 \DeclareDocumentMacro {\LogCL} {\Log{C}}
 \DeclareDocumentMacro {\LogIL} {\Log{I}}
@@ -1042,7 +1056,6 @@
 \DeclareDocumentMacro {\LogLP} {\Log{LP}}
 \DeclareDocumentMacro {\LogRM} {\Log{RM}}
 \DeclareDocumentMacro {\LogHal} {\Log{Hal}}
-
 
 % - `\Obj` - Object-language symbols; default: set entirely in
 % sans-serif italics
@@ -1143,7 +1156,7 @@
 }
 
 % Additional set theory stuff
-% ================
+% ---------------------------
 % From Tim Button's Open Set Theory
 
 \DeclareDocumentMacro \unitline {\text{L}}
@@ -1210,7 +1223,7 @@
 \newcommand\cardfont[1]{\mathfrak{#1}}
 
 % Miscellaneous
-% =============
+% -------------
 
 % `\fact` -- factorial function
 
