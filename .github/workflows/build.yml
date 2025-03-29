@@ -13,10 +13,8 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: open-logic-debug.tex
-      - name: List directory contents to find file name
-        run: ls -R
-      - name: Upload PDF
+      - name: Upload open-logic-debug.pdf
         uses: actions/upload-artifact@master
         with:
-          name: build-pdf
-          path: .
+          name: Upload open-logic-debug.pdf
+          path: open-logic-debug.pdf
