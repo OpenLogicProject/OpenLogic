@@ -9,8 +9,12 @@
 \olfileid{cmp}{thy}{ppr}
 \olsection{Properties of Reducibility}
 
-The intuition behind writing $A \leq_m B$ is that $A$ is ``no harder
-than'' $B$. The following two propositions support this intuition.
+We write $A \leq_m B$ if $A$ reduces to~$B$, and this notation
+suggests that if $A \leq_m B$, then $A$ is ``no harder than''~$B$ and
+that $B$ is ``as hard or harder than''~$A$, and that $\le_m$, like the
+usual $\le$ on numbers, orders sets (or decision problems) by their
+complexity. The following two propositions support this intuition. The
+first one say taht $\le_m$ is transitive.
 
 \begin{prop}
 \ollabel{prop:trans-red}
@@ -18,13 +22,19 @@ If $A \leq_m B$ and $B \leq_m C$, then $A \leq_m C$.
 \end{prop}
 
 \begin{proof}
-Composing a reduction of $A$ to $B$ with a reduction of $B$ to
-$C$ yields a reduction of $A$ to $C$. (You should check the details!{})
+Composing a reduction of $A$ to~$B$ with a reduction of $B$ to
+$C$ yields a reduction of $A$ to~$C$.
 \end{proof}
+
+\begin{prob}
+Prove \olref{prop:trans-red} by showing that if $f$ and~$g$ are
+many-one reductions of $A$ to~$B$ and $B$ to~$C$, respectively, then
+$\comp{f}{g}$ is a many-one reduction of $A$ to~$C$.
+\end{prob}
 
 \begin{prop}
 \ollabel{prop:reduce}
-Let $A$ and $B$ be any sets, and suppose $A$ is many-one reducible to~$B$.
+Let $A$ and $B$ be any sets, and suppose $A \leq_m B$.
 \begin{enumerate}
 \item If $B$ is computably enumerable, so is~$A$.
 \item If $B$ is computable, so is~$A$.
@@ -32,26 +42,37 @@ Let $A$ and $B$ be any sets, and suppose $A$ is many-one reducible to~$B$.
 \end{prop}
 
 \begin{proof}
-Let $f$ be a many-one reduction from $A$ to $B$. For the first
+Let $f$ be a many-one reduction from $A$ to~$B$. For the first
 claim, just check that if $B$ is the domain of a partial function~$g$,
-then $A$ is the domain of~$g \circ f$:
+then $A$ is the domain of~$\comp{f}{g}$:
 \begin{align*}
-x \in A & \text{iff } f(x) \in B \\
-& \text{iff }  g(f(x)) \fdefined.
+x \in A & \text{ iff } f(x) \in B \\
+& \text{ iff }  g(f(x)) \fdefined.
 \end{align*}
 
 For the second claim, remember that if $B$~is computable then $B$
-and~$\Complement{B}$ are computably enumerable. It is not hard to
-check that $f$~is also a many-one reduction of $\Complement{A}$ to
-$\Complement{B}$, so, by the first part of this proof, $A$ and
-$\Complement{A}$ are computably enumerable. So $A$ is computable as
-well. (Alternatively, you can check that $\Char{A} = \Char{B} \circ
-f$; so if $\Char{B}$ is computable, then so is~$\Char{A}$.)
+and~$\Complement{B}$ are computably enumerable
+(\olref[cmp]{thm:ce-comp}). It is not hard to check that $f$~is also a
+many-one reduction of $\Complement{A}$ to $\Complement{B}$, so, by the
+first part of this proof, $A$ and~$\Complement{A}$ are !!{computably
+enumerable}. So $A$ is computable as well by \olref[cmp]{thm:ce-comp}.
+(Alternatively, you can check that $\Char{A} = \comp{f}{\Char{B}}$; so
+if $\Char{B}$ is computable, then so is~$\Char{A}$.)
 \end{proof}
+
+\begin{prob}
+Suppose $f$ is a many-one reduction of $A$ to~$B$. Show that $f$ is
+also a many-one reduction of $\Complement{A}$ to $\Complement{B}$.
+\end{prob}
+
+\begin{prob}
+Show that if $f\colon A \to B$ is a many-one reduction, then $\Char{A}
+= \comp{f}{\Char{B}}$.
+\end{prob}
 
 \begin{digress}
 A more general notion of reducibility called \emph{Turing
-  reducibility} is useful in other contexts, especially for proving
+reducibility} is useful in other contexts, especially for proving
 undecidability results. Note that by \olref[cmp]{cor:comp-k}, the
 complement of~$K_0$ is not reducible to~$K_0$, since it is not
 computably enumerable. But, intuitively, if you knew the answers to
@@ -59,8 +80,8 @@ questions about $K_0$, you would know the answer to questions about
 its complement as well. A set $A$ is said to be Turing reducible
 to~$B$ if one can determine answers to questions in~$A$ using a
 computable procedure that can ask questions about~$B$. This is more
-liberal than many-one reducibility, in which (1) you are only allowed
-to ask one question about $B$, and (2) a ``yes'' answer has to
+liberal than many-one reducibility, in which (1)~you are only allowed
+to ask one question about $B$, and (2)~a ``yes'' answer has to
 translate to a ``yes'' answer to the question about $A$, and similarly
 for ``no.'' It is still the case that if $A$~is Turing reducible
 to~$B$ and $B$~is computable then $A$~is computable as well (though,
@@ -68,14 +89,14 @@ as we have seen, the analogous statement does not hold for computable
 enumerability).
 
 You should think about the various notions of reducibility we have
-discussed, and understand the distinctions between
-them. We will, however, only deal with many-one reducibility in this
-chapter. Incidentally, both types of reducibility discussed in the
-last paragraph have analogues in computational complexity, with the
-added requirement that the Turing machines run in polynomial time: the
+discussed, and understand the distinctions between them. We will,
+however, only deal with many-one reducibility in this chapter.
+Incidentally, both types of reducibility discussed in the last
+paragraph have analogues in computational complexity, with the added
+requirement that the Turing machines run in polynomial time: the
 complexity version of many-one reducibility is known as \emph{Karp
-  reducibility}, while the complexity version of Turing reducibility
-is known as \emph{Cook reducibility}.
+reducibility}, while the complexity version of Turing reducibility is
+known as \emph{Cook reducibility}.
 \end{digress}
 
 \end{document}

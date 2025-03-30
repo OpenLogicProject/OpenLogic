@@ -9,8 +9,8 @@
 \olfileid{cmp}{thy}{cmp}
 \olsection{Computably Enumerable Sets not Closed under Complement}
 
-Suppose $A$ is computably enumerable. Is the complement of $A$,
-$\Complement{A} = \Nat \setminus A$, necessarily computably enumerable
+Suppose $A$ is computably enumerable. Is the complement of~$A$,
+$\Complement{A} = \Nat \setminus A$, always computably enumerable
 as well? The following theorem and corollary show that the answer is
 ``no.''
 
@@ -25,19 +25,19 @@ The forwards direction is easy: if $A$ is computable, then
 $\Complement{A}$ is computable as well ($\Char{A} = 1 \tsub
 \Char{\Complement{A}}$), and so both are computably enumerable.
 
-In the other direction, suppose $A$ and $\Complement{A}$ are both
-computably enumerable. Let $A$ be the domain of $\cfind{d}$, and let
-$\Complement{A}$ be the domain of $\cfind{e}$. Define $h$ by
+In the other direction, suppose $A$ and~$\Complement{A}$ are both
+computably enumerable. Let $A$ be the domain of~$\cfind{d}$, and let
+$\Complement{A}$ be the domain of~$\cfind{e}$. Define $h$ by
 \[
 h(x) = \umin{s}{(T(d,x,s) \lor T(e,x,s))}.
 \]
-In other words, on input $x$, $h$ searches for either a halting
-computation of~$\cfind{d}$ or a halting computation
-of~$\cfind{e}$. Now, if $x \in A$, it will succeed in the first case,
-and if $x \in \Complement{A}$, it will succeed in the second case. So,
-$h$~is a total computable function. But now we have that for every
-$x$, $x \in A$ if and only if $T(e, x, h(x))$, i.e., if $\cfind{e}$ is
-the one that is defined. Since $T(e, x, h(x))$ is a computable relation,
+In other words, on input~$x$, $h$~searches for either a halting
+computation of~$\cfind{d}$ or a halting computation of~$\cfind{e}$.
+Now, if $x \in A$, it will succeed in the first case, and if $x \in
+\Complement{A}$, it will succeed in the second case. So, $h$~is a
+total computable function. But now we have that for every~$x$, $x \in
+A$ if and only if $T(e, x, h(x))$, i.e., if $\cfind{e}$ is the one
+that is defined. Since $T(e, x, h(x))$ is a computable relation,
 $A$~is computable.
 \end{proof}
 
@@ -56,7 +56,7 @@ $\Complement{K_0}$ is not computably enumerable.
 \begin{proof}
 We know that $K_0$ is computably enumerable, but not computable. If
 $\Complement{K_0}$ were computably enumerable, then $K_0$ would be
-computable by \olref{thm:ce-comp}.
+computable by \olref{thm:ce-comp}, contradicting \olref[ncp]{thm:K-0}.
 \end{proof}
 
 \end{document}

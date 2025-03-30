@@ -23,7 +23,7 @@ standard enumeration of the partial computable functions.
 \begin{thm}[Rice's Theorem]
   Let $C$ be any set of partial computable functions, and let $A =
   \Setabs{n}{\cfind{n} \in C}$. If $A$ is computable, then either $C$
-  is $\emptyset$ or $C$ is the set of all the partial computable
+  is empty or $C$ is the set of all the partial computable
   functions.
 \end{thm}
 
@@ -43,7 +43,7 @@ functions they compute. There are certainly questions about programs
 (indices), which are syntactic objects, that are computable: does this
 program have more than 150 symbols? Does it have more than 22 lines?
 Does it have a ``while'' statement? Does the string ``hello world''
-every appear in the argument to a ``print'' statement? Rice's theorem
+ever appear as the argument to a ``print'' statement? Rice's theorem
 says that no nontrivial question about the program's \emph{behavior}
 is computable. This includes questions like these: does the program
 halt on input $0$? Does it ever halt? Does it ever output an even
@@ -51,7 +51,7 @@ number?
 \end{explain}
 
 \begin{proof}[Proof of Rice's theorem]
-Suppose $C$ is neither $\emptyset$ nor the set of all the partial
+Suppose $C$ is neither empty nor the set of all the partial
 computable functions, and let $A$ be the set of indices of functions
 in~$C$. We will show that if $A$ were computable, we could solve the
 halting problem; so $A$~is not computable.
@@ -63,8 +63,8 @@ idea is that if we could decide~$A$, we could tell the difference
 between indices computing~$f$, and indices computing~$g$; and then we
 could use that capability to solve the halting problem.
 
-Here's how. Using the universal computation predicate, we can define a
-function
+Here's how. Using the universal partial computable functions, we can
+define a function
 \[
 h(x,y) \simeq
 \begin{cases}
@@ -73,7 +73,7 @@ g(y) & \text{otherwise.}
 \end{cases}
 \]
 To compute $h$, first we try to compute $\cfind{x}(x)$; if that
-computation halts, we go on to compute $g(y)$; and if {\em that}
+computation halts, we go on to compute~$g(y)$; and if {\em that}
 computation halts, we return the output. More formally, we can write
 \[
 h(x,y) \simeq \Proj{2}{0}(g(y),\fn{Un}(x,x)).
@@ -82,28 +82,28 @@ where $\Proj{2}{0}(z_0, z_1) = z_0$ is the $2$-place projection
 function returning the $0$-th argument, which is computable.
 
 Then $h$ is a composition of partial computable functions, and the right
-side is defined and equal to $g(y)$ just when $\fn{Un}(x,x)$ and
+side is defined and equal to~$g(y)$ just when $\fn{Un}(x,x)$ and
 $g(y)$ are both defined.
 
-Notice that for a fixed $x$, if $\cfind{x}(x)$ is undefined, then
+Notice that for a fixed~$x$, if $\cfind{x}(x)$ is undefined, then
 $h(x,y)$ is undefined for every~$y$; and if $\cfind{x}(x)$ is defined,
 then $h(x,y) \simeq g(y)$. So, for any fixed value of~$x$, either
 $h(x,y)$ acts just like $f$ or it acts just like $g$, and deciding
 whether or not $\cfind{x}(x)$ is defined amounts to deciding which of
 these two cases holds. But this amounts to deciding whether or not
-$h_x(y) \simeq h(x,y)$ is in $C$ or not, and if $A$ were computable,
+$h_x(y) \simeq h(x,y)$ is in~$C$ or not, and if $A$ were computable,
 we could do just that.
 
 More formally, since $h$~is partial computable, it is equal to the
-function $\cfind{k}$ for some index~$k$. By the $s$-$m$-$n$ theorem
-there is a primitive recursive function $s$ such that for each $x$,
-$\cfind{s(k,x)}(y) = h_x(y)$. Now we have that for each $x$, if
-$\cfind{x}(x) \fdefined$, then $\cfind{s(k,x)}$ is the same function
-as~$g$, and so $s(k,x)$ is in $A$. On the other hand, if $\cfind{x}(x)
-\uparrow$, then $\cfind{s(k,x)}$ is the same function as $f$, and so
-$s(k,x)$ is not in $A$. In other words we have that for every $x$, $x
-\in K$ if and only if $s(k,x) \in A$. If $A$ were computable, $K$
-would be also, which is a contradiction. So $A$ is not computable.
+function $\cfind{e}$ for some index~$e$. By the $s$-$m$-$n$ theorem
+there is a primitive recursive function~$s$ such that for each~$x$,
+$\cfind{s(e,x)}(y) = h_x(y)$. Now we have that for each $x$, if
+$\cfind{x}(x) \fdefined$, then $\cfind{s(e,x)}$ is the same function
+as~$g$, and so $s(e,x)$ is in $A$. On the other hand, if $\cfind{x}(x)
+\uparrow$, then $\cfind{s(e,x)}$ is the same function as~$f$, and so
+$s(e,x)$ is not in~$A$. In other words, we have that for every~$x$, $x
+\in K$ if and only if $s(e,x) \in A$. If $A$ were computable,
+$K$~would be also, which is a contradiction. So $A$ is not computable.
 \end{proof}
 
 Rice's theorem is very powerful. The following immediate corollary
@@ -111,7 +111,7 @@ shows some sample applications.
 \begin{cor}
 The following sets are undecidable.
 \begin{enumerate}
-\item $\Setabs{x}{\text{17 is in the range of $\cfind{x}$}}$
+\item $\Setabs{x}{\text{$17$ is in the range of $\cfind{x}$}}$
 \item $\Setabs{x}{\text{$\cfind{x}$ is constant}}$
 \item $\Setabs{x}{\text{$\cfind{x}$ is total}}$
 \item $\Setabs{x}{\text{whenever $y < y'$, $\cfind{x}(y) \fdefined$, and
@@ -119,7 +119,9 @@ The following sets are undecidable.
 \end{enumerate}
 \end{cor}
 
-\begin{proof}These are all nontrivial index sets. \end{proof}
+\begin{proof}
+  These are all nontrivial index sets.
+\end{proof}
 
 \end{document}
 
