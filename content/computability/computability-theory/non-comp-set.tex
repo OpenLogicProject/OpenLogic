@@ -1,22 +1,22 @@
 % Part: computability
 % Chapter: computability-theory
-% Section: equiv-ce-defs
-non-comp-set
-\documentclass[../../include/open-logic-section]{subfiles}
+% Section: non-comp-set
+
+\documentclass[../../../include/open-logic-section]{subfiles}
 
 \begin{document}
 
-\olfileid{cmp}{thy}{ces}
+\olfileid{cmp}{thy}{ncp}
 \olsection{There Are Non-Computable Sets}
 
 
 We saw above that every computable set is computably enumerable. Is
 the converse true? The following shows that, in general, it is not.
 
-\begin{thm}
+\begin{thm}\ollabel{thm:K-0}
 Let $K_0$ be the set $\Setabs{\tuple{e, x}}{\cfind{e}(x) \fdefined}$.
 Then $K_0$ is computably enumerable but not computable.
-\end{them}
+\end{thm}
 
 \begin{proof}
 To see that $K_0$ is computably enumerable, note that it is the
@@ -30,7 +30,34 @@ $f(\tuple{e, x})$; and if $z$ doesn't even code a pair, then $f(z)$ is
 also undefined.
 
 The fact that $K_0$ is not computable is just the undecidability of
-the halting problem, \olref[hlt]{thm:halting-thm}.
+the halting problem, \olref[hlt]{thm:halting-problem}.
+\end{proof}
+
+The set $K_0$ is the set of pairs $\tuple{e,x}$ such that
+$\cfind{e}(x) \fdefined$, i.e., $\tuple{e,x} \in K_0$ iff $\cfind{e}$
+is defined (halts) on input~$x$, so it is also called the ``halting
+set.'' The set $K = \Setabs{e}{\cfind{e}(e) \fdefined}$ is the
+``self-halting set.'' It is often used as a canonical undecidable set.
+
+\begin{thm}\ollabel{thm:K}
+The self-halting set $K = \Setabs{e}{\cfind{e}(e) \fdefined}$ is
+!!{c.e.} but not decidable.
+\end{thm}
+
+\begin{proof}
+  Suppose $K$ is decidable, i.e., its characteristic function
+  $\Char{K}$ is computable. Let 
+  \[d(e) = \begin{cases}
+  1 & \text{if\/ $\Char{K}(e) = 0$}\\
+  \fundefined & \text{otherwise.}
+  \end{cases}
+  \] 
+  Let $k$ be the index of~$d$, i.e., $d \simeq \cfind{k}$. Then $d(k)
+  \simeq \cfind{k}(k)$. This contradicts the fact that $d(k)
+  \fdefined$ iff $\cfind{k}(k) \fundefined$, which follows from the
+  definition of~$d$.
+
+  $K$ is the domain of $f(x) = \umin{y}{T(x,x,y)}$ and so is !!{c.e.}
 \end{proof}
 
 \end{document}
