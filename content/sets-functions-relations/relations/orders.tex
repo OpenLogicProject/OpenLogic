@@ -60,12 +60,23 @@ we see that $\{a\} \nsubseteq \{b\}$ and $\{a\} \neq \{b\}$ and $\{b\}
 
 \begin{ex}
 The relation of \emph{divisibility without remainder} gives us a
-partial order which isn't a linear order. For integers $n$, $m$, we
-write $n\mid m$ to mean $n$ (evenly) divides $m$, i.e., iff there is
-some integer~$k$ so that $m=kn$. On $\Nat$, this is a partial order, but not a
-linear order: for instance, $2\nmid3$ and also $3\nmid2$. Considered
-as a relation on $\Int$, divisibility is only a preorder since
-it is not anti-symmetric: $1\mid-1$ and $-1\mid1$ but $1\neq-1$.
+partial order which isn't a linear order. For integers $n$ and~$m$, we
+write $n \mid m$ to mean $n$ (evenly) divides $m$, i.e., iff there is
+some integer~$k$ so that $m = kn$. On~$\Nat$, this is a partial order,
+but not a linear order: for instance, $2 \nmid 3$ and also $3 \nmid
+2$. Considered as a relation on $\Int$, divisibility is only a
+preorder since it is not anti-symmetric: $1 \mid -1$ and $-1 \mid 1$
+but $1 \neq -1$.
+\end{ex}
+
+\begin{ex}
+The \emph{extension} relation on a set of sequences~$A^*$ is the
+following: $s \sqsubseteq s'$ iff $s = \emptyseq$ (the empty
+sequence), $s = s'$, or $s = \tuple{s_1, \dots, s_n}$ and $s' =
+\tuple{s_1, \dots, s_n, s_{n+1}, \dots, s_m}$. If $s \sqsubseteq s'$
+we also say that $s$ is an \emph{initial segment} of~$s'$. The
+extension relation on $A^*$ is a partial order but not a linear order,
+e.g., if $a \neq b$, then $ab \not\sqsubseteq ba$ and $ba \not\sqsubseteq ab$.
 \end{ex}
 
 \begin{defn}[Strict order]
