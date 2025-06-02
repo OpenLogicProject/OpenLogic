@@ -39,4 +39,27 @@ confused!{} \iftag{TMs}{The Turing machine computing a partial function
   the set or not.}{}
 \end{explain}
 
+\begin{prob}
+  Consider an arbitrary finite set of naturals $A$. Prove that $A$ is computable.
+\end{prob}
+
+\begin{prob}
+  Consider an arbitrary finite relation $B$ on the naturals. Prove that $B$ is computable.
+\end{prob}
+
+\begin{prob}
+  Consider the relation $<$ on the naturals. Notice that it is an infinite set, so it is not obviously computable; but it is computable! Prove that $<$ is computable.
+\end{prob}
+
+\begin{prob}
+  Let $k$ be some positive integer. Prove that the union of $k$ computable sets (of natural numbers) is a computable set. Also prove that the union of $k$ computable relations (on the naturals) is a computable relation.
+\end{prob}
+
+\begin{prob}
+  There are problems where one makes a yes-or-no decision. We intuitively call these problems "decision problems". In computability theory, one can represent many decision problems as sets. In this problem, we examine one such instance. We consider a simplified version of the blackjack card game. \newline
+  Let $d$ be some positive integer. In our simplified gane, let us say that there are $d$ decks of cards, where every deck contains 52 cards (there are no joker cards). Each card is assigned a natural value from 1 to 13. For example, an ace is going to have a value of 1. The numbered cards are going to have the value printed on them (for example, a 2 card is going to have a value of 2). The king, queen, and jack cards each have a value of 10. All $52d$ cards are shuffled together in a pile. \newline
+  In our simplified game, we have two moves: "hit" and "stand". When you call "hit", a random card is drawn from the pile and is added to your hand. You are then allowed to call "hit" as many times as you want, until cards run out from the pile. Whenever you call "stand" (or when you are forced to call "stand" because you cannot call "hit" anymore), you look at your hand as it is; you count the total value of cards in your hand. If the value is at most 21, then we say that the hand is a "winning hand." (Recall that we are playing a simplified version of blackjack, so this will suffice.) \newline
+  Formally, we can represent a non-empty "hand" (of cards that you are holding) as an element of the following set: $HANDS = \bigcup_{x \in \mathbb{N}, x>0} ( \mathbb{N}^x )$. Let $WINNING$ be the set of all winning hands for our game. Observe that $WINNING$ is a subset of $HANDS$. Now, prove that $WINNING$ is a computable set. (Note: by proving this, we will show that the decision problem of "whether a hand is a winning hand" is a problem that computers can solve.)
+\end{prob}
+
 \end{document}
