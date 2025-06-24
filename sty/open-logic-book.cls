@@ -116,6 +116,10 @@
     \def\captionnamefont{\small\sffamily\color{OLPcolor}}
     \def\captiontitlefont{\small\itfamily}
 
+    % change cref references to appendix after \appendix 
+    \crefname{appendix}{appendix}{appendices}
+    \apptocmd{\appendix}{\crefalias{chapter}{appendix}}{}{}
+  
     \def\figurename{Fig.}
 
     % Make justification a bit sloppy to avoid overfull lines
@@ -637,4 +641,3 @@ from \emph{Open Logic Text} revision
 \currentpdfbookmark{Table of Contents}{name}
 \tableofcontents*
 }
-
