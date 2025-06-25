@@ -188,8 +188,8 @@
     \hypersetup{
       pdfdisplaydoctitle,
       allcolors=OLPdkcolor,
-  %    pdftitle={\OLPbooktitle. \OLPbooksubtitle{} (\OLPshortbookversion)},
-  %    pdfauthor = {\OLPauthor, Open Logic Project}
+      pdftitle={\OLPbooktitle. \OLPbooksubtitle{} (\OLPshortbookversion)},
+      pdfauthor = {\OLPauthor, Open Logic Project}
     }
     \copypagestyle{OLPpage}{headings}
 
