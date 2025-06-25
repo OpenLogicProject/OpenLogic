@@ -1,0 +1,58 @@
+% Part: intuitionistic-logic
+% Chapter: tableaux
+% Section: proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{tab}{prf}
+
+\olsection{\usetoken{P}{tableau} for Intuitionistic Logic}
+
+\begin{ex}
+  We give a closed tableau that shows $(!A \land !B) \lif !C \Proves 
+  !A \lif (!B \lif !C)$.
+  \begin{oltableau}
+    [\pFmla{\True}{(\formula{A} \land \formula{B}) \lif \formula{C}}{1},
+      just =\TAss
+      [\pFmla{\False}{\formula{A} \lif (\formula{B} \lif \formula{C})}{1},
+        just =\TAss
+        [\pFmla{\True}{\formula{A}}{1.1},
+          just = {\TRule{\False}{\lif}[2]}
+          [\pFmla{\False}{\formula{B} \lif \formula{C}}{1.1},
+            just = {\TRule{\False}{\lif}[2]}
+            [\pFmla{\True}{\formula{B}}{1.1.1},
+              just = {\TRule{\False}{\lif}[4]}
+              [\pFmla{\False}{\formula{C}}{1.1.1},
+                just = {\TRule{\False}{\lif}[4]}
+                [\pFmla{\False}{\formula{A} \land \formula{B}}{1.1.1},
+                  just = {\TRule{\True}{\lif}[1]}
+                  [\pFmla{\False}{\formula{A}}{1.1.1},
+                    just= {\TRule{\False}{\land}[4]}, close]
+                  [\pFmla{\False}{\formula{B}}{1.1.1},
+                    just= {\TRule{\False}{\land}[4]}, close]]
+                [\pFmla{\True}{\formula{C}}{1.1.1},
+                  just = {\TRule{\True}{\lif}[1]}, close]]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{oltableau}
+\end{ex}
+
+
+
+\begin{prob}
+  Find closed intuitionistic !!{tableau}s to show the following:
+  \begin{enumerate}
+    \item $\Proves !A \lif (!B \lif !A)$
+    \item $\Proves \lnot(!A \land \lnot !A)$
+    \item $!A \lif (!B \lif !C) \Proves (!A \land !B) \lif !C$
+    \item $\lnot !A \lor \lnot !B \Proves \lnot(!A \land !B)$
+  \end{enumerate}
+\end{prob}
+
+\end{document}

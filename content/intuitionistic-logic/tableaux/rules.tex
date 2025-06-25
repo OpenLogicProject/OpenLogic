@@ -1,0 +1,145 @@
+% Part: intuitionistic-logic
+% Chapter: tableaux
+% Section: rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{tab}{rul}
+
+\olsection{Rules for Intuitionistic Logic}
+
+The rules for the connectives $\land$ and $\lor$ are the same as for
+regular propositional signed !!{tableau}s, just with prefixes added.
+In each case, the rule applied to a signed !!{formula}
+$\sFmla{S}{!A}[\sigma]$ produces new !!{formula}s that are also
+prefixed by~$\sigma$. This should be intuitively clear: e.g., if $!A
+\land !B$ is true at (a world named by)~$\sigma$, then $!A$ and $!B$
+are true at~$\sigma$ (and not at any other world). We collect the
+rules for $\land$ and $\lor$ in \olref{tab:prop-rules}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\land}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\True}{!B}[\sigma]}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \land !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\land}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\False}{!B}[\sigma]$}
+    \DisplayProof
+    \\[2ex]
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lor}}
+    \UnaryInfC{$\sFmla{\True}{!A}[\sigma] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lor !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lor}}
+    \UnaryInfC{\sFmla{\False}{!A}[\sigma]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma]}
+    \DisplayProof
+    \\[2ex]
+    \hline
+  \end{array}\]
+  \caption{Prefixed !!{tableau} rules for $\land$ and $\lor$}
+  \ollabel{tab:prop-rules}
+\end{table}
+
+The closure condition is similar to that for ordinary !!{tableau}s,
+although we require that not just the !!{formula}s, but also that the
+prefixes must match. In fact, we can be somewhat more liberal: Since
+in intuitionistic models, !!{formula}s, once true, remain true, it is
+impossible that $!A$ is true at~$\sigma$ but false at any accessible
+prefix~$\sigma.{*}$. So a branch is closed if it contains both
+\[
+\sFmla{\True}{!A}[\sigma] \quad\text{and}\quad \sFmla{\False}{!A}[\sigma.{*}]
+\]
+for some prefix $\sigma$ and !!{formula}~$!A$. Note that if the signs
+are reversed, i.e., if it contains
+\[
+\sFmla{\False}{!A}[\sigma] \quad\text{and}\quad \sFmla{\True}{!A}[\sigma.{*}]
+\]
+the branch is closed only if $*$ is the empty sequence.
+
+In addition, a branch is closed if it contains~$\sFmla{\True}{\bot}[\sigma]$.
+
+The rules for setting up assumptions is also as for ordinary
+!!{tableau}s, except that for assumptions we always use the
+prefix~$1$. (It does not matter which prefix we use, as long as it's
+the same for all assumptions.) So, e.g., we say that
+\[
+!B_1, \dots, !B_n \Proves !A
+\]
+iff there is a closed tableau for the assumptions
+\[
+\sFmla{\True}{!B_1}[1], \dots, \sFmla{\True}{!B_n}[1],
+\sFmla{\False}{!A}[1].
+\]
+
+For the conditional~$\lif$, the rules differ from the classical and
+modal cases. The $\TRule{\lif}{\True}$ rule extends a branch
+containing $\sFmla{\True}{!A \lif !B}[\sigma]$ by
+$\sFmla{\True}{!A}[\sigma.{*}]$ and $\sFmla{\False}{!B}[\sigma.{*}]$ on two
+different branches. It can only be applied for a prefix~$\sigma.{*}$
+which \emph{already} occurs on the branch in which it is applied.
+Let's call such a prefix ``used'' (on the branch). (Since $\sigma.{*}$
+includes $\sigma$ itself, the rule can always be applied by adding the
+prefixed signed formulas $\sFmla{\True}{!A}[\sigma]$ and
+$\sFmla{\False}{!B}[\sigma]$ on separate branches.)
+
+The $\TRule{\lif}{\False}$ rule extends a branch containing
+$\sFmla{\False}{!A \lif !B}[\sigma]$ by both
+$\sFmla{\True}{!A}[\sigma.n]$ and $\sFmla{\False}{!B}[\sigma.n]$ on
+the same branch, with $\sigma.n$ a prefix new to the branch. 
+
+The rules for $\lnot$ are defined analogously (using the definition of
+$\lnot !A$ as $!A \lif \lfalse$).
+
+The rules are given in \olref{tab:rules-lif-lnot}.
+
+\begin{table}
+  \[\def\arraystretch{3}\begin{array}{|c|c|}
+    \hline
+    \AxiomC{\sFmla{\True}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\True}{\lnot}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma.{*}]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{\lnot !A}[\sigma]}
+    \RightLabel{\TRule{\False}{\lnot}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+    \DisplayProof
+    \\[1ex]
+    \text{$\sigma.{*}$ is used} & \text{$\sigma.n$ is new}\\
+    \hline
+    \AxiomC{\sFmla{\True}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\True}{\lif}}
+    \UnaryInfC{$\sFmla{\False}{!A}[\sigma.{*}] \quad \mid \quad
+      \sFmla{\True}{!B}[\sigma.{*}]$}
+    \DisplayProof
+    &
+    \AxiomC{\sFmla{\False}{!A \lif !B}[\sigma]}
+    \RightLabel{\TRule{\False}{\lif}}
+    \UnaryInfC{\sFmla{\True}{!A}[\sigma.n]}
+    \noLine
+    \UnaryInfC{\sFmla{\False}{!B}[\sigma.n]}
+    \DisplayProof
+    \\[1ex]
+    \text{$\sigma.{*}$ is used} & \text{$\sigma.n$ is new}\\
+    \hline
+  \end{array}\]
+  \caption{Prefixed !!{tableau} rules for $\lnot$ and $\lif$}
+  \ollabel{tab:rules-lif-lnot}
+\end{table}
+
+\end{document}
