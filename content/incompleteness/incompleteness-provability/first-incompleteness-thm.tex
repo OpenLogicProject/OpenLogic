@@ -17,34 +17,34 @@ includes the axioms of $\Th{Q}$. This means that, in particular, $\Th{T}$
 represents computable functions and relations.
 
 We have argued that, given a reasonable coding of formulas and proofs
-as numbers, the relation $\Prf[T](x,y)$ is computable, where
-$\Prf[T](x,y)$ holds if and only if $x$ is the G\"odel number of
+as numbers, the relation $\Prf[\Th{T}](x,y)$ is computable, where
+$\Prf[\Th{T}](x,y)$ holds if and only if $x$ is the G\"odel number of
 !!a{derivation} of the !!{formula} with G\"odel number~$y$
 in~$\Th{T}$. In fact, for the particular theory that G\"odel had in
 mind, G\"odel was able to show that this relation is primitive
 recursive, using the list of 45 functions and relations in his
-paper. The 45th relation, $x B y$, is just $\Prf[T](x,y)$ for his
+paper. The 45th relation, $x B y$, is just $\Prf[\Th{T}](x,y)$ for his
 particular choice of~$\Th{T}$. Remember that where G\"odel uses the
 word ``recursive'' in his paper, we would now use the phrase
 ``primitive recursive.''
 
-Since $\Prf[T](x,y)$ is computable, it is representable in $\Th{T}$. We
-will use $\OPrf[T](x,y)$ to refer to the formula that represents
-it. Let $\OProv[T](y)$ be the formula
-$\lexists[x][\OPrf[T](x,y)]$. This describes the 46th relation,
+Since $\Prf[\Th{T}](x,y)$ is computable, it is representable in $\Th{T}$. We
+will use $\OPrf[\Th{T}](x,y)$ to refer to the formula that represents
+it. Let $\OProv[\Th{T}](y)$ be the formula
+$\lexists[x][\OPrf[\Th{T}](x,y)]$. This describes the 46th relation,
 $\fn{Bew}(y)$, on G\"odel's list. As G\"odel notes, this is the only
 relation that ``cannot be asserted to be recursive.''  What he
 probably meant is this: from the definition, it is not clear that it
 is computable; and later developments, in fact, show that it isn't.
 
 Let $\Th{T}$ be an !!{axiomatizable} theory containing~$\Th{Q}$. Then
-$\Prf[T](x, y)$ is decidable, hence representable in~$\Th{Q}$ by
-!!a{formula}~$\OPrf[T](x, y)$. Let $\OProv[T](y)$ be the formula we
+$\Prf[\Th{T}](x, y)$ is decidable, hence representable in~$\Th{Q}$ by
+!!a{formula}~$\OPrf[\Th{T}](x, y)$. Let $\OProv[\Th{T}](y)$ be the formula we
 described above. By the fixed-point lemma, there is a formula
 $!G_\Th{T}$ such that $\Th{Q}$ (and hence $\Th{T}$) !!{derive}s
 \begin{equation}
 \ollabel{eqn:qpf}
-!G_\Th{T} \liff \lnot \OProv[T](\gn{!G_\Th{T}}).
+!G_\Th{T} \liff \lnot \OProv[\Th{T}](\gn{!G_\Th{T}}).
 \end{equation}
 Note that $!G_\Th{T}$ says, in essence, ``$!G_\Th{T}$ is not
 !!{derivable} in~$\Th{T}$.''
@@ -56,11 +56,11 @@ extending~$\Th{Q}$, then $\Th{T} \Proves/ !G_\Th{T}$.
 
 \begin{proof}
 Suppose $\Th{T}$ !!{derive}s $!G_\Th{T}$. Then there \emph{is}
-!!a{derivation}, and so, for some number $m$, the relation $\Prf[T](m,
+!!a{derivation}, and so, for some number $m$, the relation $\Prf[\Th{T}](m,
 \Gn{!G_\Th{T}})$ holds. But then $\Th{Q}$ !!{derive}s the sentence
-$\OPrf[T](\num m, \gn{!G_\Th{T}})$. So $\Th{Q}$ !!{derive}s
-$\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$, which is, by definition,
-$\OProv[T](\gn{!G_\Th{T}})$. By \olref{eqn:qpf}, $\Th{Q}$ !!{derive}s
+$\OPrf[\Th{T}](\num m, \gn{!G_\Th{T}})$. So $\Th{Q}$ !!{derive}s
+$\lexists[x][\OPrf[\Th{T}](x,\gn{!G_\Th{T}})]$, which is, by definition,
+$\OProv[\Th{T}](\gn{!G_\Th{T}})$. By \olref{eqn:qpf}, $\Th{Q}$ !!{derive}s
 $\lnot !G_\Th{T}$, and since $\Th{T}$ extends $\Th{Q}$, so
 does~$\Th{T}$. We have shown that if $\Th{T}$ !!{derive}s $!G_\Th{T}$, then
 it also !!{derive}s $\lnot !G_\Th{T}$, and hence it would be inconsistent.
@@ -95,12 +95,12 @@ done. Otherwise, $\Th{T}$ is consistent, so it does not !!{derive}
 $!G_\Th{T}$ by \olref{lem:cons-G-unprov}. Since there is no
 !!{derivation} of $!G_\Th{T}$ in $\Th{T}$, $\Th{Q}$ !!{derive}s
 \[
-\lnot \OPrf[T](\num 0, \gn{!G_\Th{T}}), \lnot \OPrf[T](\num 1,
-\gn{!G_\Th{T}}), \lnot \OPrf[T](\num 2, \gn{!G_\Th{T}}), \dots
+\lnot \OPrf[\Th{T}](\num 0, \gn{!G_\Th{T}}), \lnot \OPrf[\Th{T}](\num 1,
+\gn{!G_\Th{T}}), \lnot \OPrf[\Th{T}](\num 2, \gn{!G_\Th{T}}), \dots
 \]
 and so does~$\Th{T}$.  On the other hand, by \olref{eqn:qpf}, $\lnot
 !G_\Th{T}$ is equivalent to
-$\lexists[x][\OPrf[T](x,\gn{!G_\Th{T}})]$. So $\Th{T}$ is
+$\lexists[x][\OPrf[\Th{T}](x,\gn{!G_\Th{T}})]$. So $\Th{T}$ is
 $\omega$-inconsistent.
 \end{proof}
 

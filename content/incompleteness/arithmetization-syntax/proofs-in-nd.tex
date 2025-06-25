@@ -121,7 +121,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     !!{derivation}s is a special case of the coding of trees introduced in
     \olref[cmp][rec][tre]{sec}, so the primitive recursive function
     $\fn{SubtreeSeq}(d)$ gives a sequence of G\"odel numbers of all
-    sub-!!{derivation}s of~$d$ (of length a most $d$). So we can
+    sub-!!{derivation}s of~$d$ (of length at most $d$). So we can
     define
     \[
     \fn{Assum}(x, d, n) \defiff \bexists{i<d}{(\fn{SubtreeSeq}(d))_i =
@@ -174,7 +174,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     \concat \fn{EndFmla}((d)_2) \concat \Gn{)}.
   \end{multline*}
 
-  Another simple example if the $\Intro\eq$ rule. Here the premise is
+  Another simple example is the $\Intro\eq$ rule. Here the premise is
   an empty !!{derivation}, i.e., $(d)_1 = 0$, and no discharge label,
   i.e., $n=0$.  However, $!A$ must be of the form $\eq[t][t]$, for a
   closed term~$t$. Here, a primitive recursive definition is
@@ -295,7 +295,7 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     \bexists{s<\fn{SubtreeSeq}(d)}{(\fn{Subseq}(s, \fn{SubtreeSeq}(d))
       \land (s)_0 = d \land {}} \\
     \bexists{n<d}{((s)_{\len{s} \tsub 1} = \tuple{0, z, n} \land {}}\\
-      \bforall{i<(\len{s} \tsub 1)}{(\fn{Subderiv}((s)_{i+1}, (s)_i)] \land {}}\\
+      \bforall{i<(\len{s} \tsub 1)}{(\fn{Subderiv}((s)_{i+1}, (s)_i) \land {}}\\
       \fn{DischargeLabel}((s)_{i+1}) \neq n))).
   \end{multline*}
 \end{proof}

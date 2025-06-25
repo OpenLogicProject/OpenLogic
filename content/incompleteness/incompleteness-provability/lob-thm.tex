@@ -11,21 +11,21 @@
 \olsection{L\"ob's Theorem}
 
 The G\"odel sentence for a theory~$\Th{T}$ is a fixed point of $\lnot
-\OProv[T](y)$, i.e., !!a{sentence}~$!G$ such that
+\OProv[\Th{T}](y)$, i.e., !!a{sentence}~$!G$ such that
 \[
-\Th{T} \Proves \lnot \OProv[T](\gn{!G}) \liff !G.
+\Th{T} \Proves \lnot \OProv[\Th{T}](\gn{!G}) \liff !G.
 \]
 It is not !!{derivable}, because if $\Th{T} \Proves !G$, (a) by !!{derivability}
-condition~(1), $\Th{T} \Proves \OProv[T](\gn{!G})$, and (b) $\Th{T}
-\Proves !G$ together with $\Th{T} \Proves \lnot \OProv[T](\gn{!G})
-\liff !G$ gives $\Th{T} \Proves \lnot \OProv[T](\gn{!G})$, and so
+condition~(1), $\Th{T} \Proves \OProv[\Th{T}](\gn{!G})$, and (b) $\Th{T}
+\Proves !G$ together with $\Th{T} \Proves \lnot \OProv[\Th{T}](\gn{!G})
+\liff !G$ gives $\Th{T} \Proves \lnot \OProv[\Th{T}](\gn{!G})$, and so
 $\Th{T}$ would be inconsistent.  Now it is natural to ask about the
-status of a fixed point of $\OProv[T](y)$, i.e., !!a{sentence}~$!H$
+status of a fixed point of $\OProv[\Th{T}](y)$, i.e., !!a{sentence}~$!H$
 such that
 \[
-\Th{T} \Proves \OProv[T](\gn{!H}) \liff !H.
+\Th{T} \Proves \OProv[\Th{T}](\gn{!H}) \liff !H.
 \]
-If it were !!{derivable}, $\Th{T} \Proves \OProv[T](\gn{!H})$ by
+If it were !!{derivable}, $\Th{T} \Proves \OProv[\Th{T}](\gn{!H})$ by
 condition~(1), but the same conclusion follows if we apply modus
 ponens to the equivalence above. Hence, we don't get that $\Th{T}$ is
 inconsistent, at least not by the same argument as in the case of the
@@ -34,8 +34,8 @@ G\"odel sentence. This of course does not show that $\Th{T}$
 
 We can make headway on this question if we generalize it a bit. The
 left-to-right direction of the fixed point equivalence,
-$\OProv[T](\gn{!H}) \lif !H$, is an instance of a general schema
-called a \emph{reflection principle}: $\OProv[T](\gn{!A}) \lif !A$.
+$\OProv[\Th{T}](\gn{!H}) \lif !H$, is an instance of a general schema
+called a \emph{reflection principle}: $\OProv[\Th{T}](\gn{!A}) \lif !A$.
 It is called that because it expresses, in a sense, that $\Th{T}$ can
 ``reflect'' about what it can !!{derive}; basically it says, ``If $\Th{T}$
 can !!{derive}~$!A$, then~$!A$ is true,'' for any~$!A$.  This is true for
@@ -47,13 +47,13 @@ it, as the next result shows.
 
 \begin{thm}\ollabel{thm:lob}
 Let $\Th{T}$ be !!a{axiomatizable} theory extending $\Th{Q}$, and
-suppose $\OProv[T](y)$ is a formula satisfying conditions P1--P3 from
-\olref[2in]{sec}. If $\Th{T}$ !!{derive}s $\OProv[T](\gn{!A}) \lif !A$,
+suppose $\OProv[\Th{T}](y)$ is a formula satisfying conditions P1--P3 from
+\olref[2in]{sec}. If $\Th{T}$ !!{derive}s $\OProv[\Th{T}](\gn{!A}) \lif !A$,
 then in fact $\Th{T}$ !!{derive}s $!A$.
 \end{thm}
 
 Put differently, if $\Th{T} \Proves/ !A$, then $\Th{T} \Proves/
-\OProv[T](\gn{!A}) \lif !A$. This result is known as L\"ob's
+\OProv[\Th{T}](\gn{!A}) \lif !A$. This result is known as L\"ob's
 theorem.
 
 \begin{explain}
@@ -78,41 +78,41 @@ to substitute any other conclusion you would like.) Here it is:
 A formalization of this idea, replacing ``is true'' with ``is
 !!{derivable},'' and ``Santa Claus exists'' with~$!A$, yields the proof of
 L\"ob's theorem. The trick is to apply the fixed-point lemma to the
-!!{formula}~$\OProv[T](y) \lif !A$. The fixed point of that
+!!{formula}~$\OProv[\Th{T}](y) \lif !A$. The fixed point of that
 corresponds to the sentence~$X$ in the preceding sketch.
 \end{explain}
 
 \begin{proof}[Proof of \olref{thm:lob}]
 Suppose $!A$ is !!a{sentence} such that $\Th{T}$ !!{derive}s
-$\OProv[T](\gn{!A}) \lif !A$. Let $!B(y)$ be the !!{formula}~$\OProv[T](y)
+$\OProv[\Th{T}](\gn{!A}) \lif !A$. Let $!B(y)$ be the !!{formula}~$\OProv[\Th{T}](y)
 \lif !A$, and use the fixed-point lemma to find !!a{sentence}~$!D$
 such that $\Th{T}$ !!{derive}s $!D \liff !B(\gn{!D})$. Then each of the
 following is !!{derivable} in $\Th{T}$:
 \begin{align}
-  & !D \liff (\OProv[T](\gn{!D}) \lif !A) \ollabel{L-1}\\
+  & !D \liff (\OProv[\Th{T}](\gn{!D}) \lif !A) \ollabel{L-1}\\
   & \qquad \text{$!D$ is a fixed point of~$!B(y)$}\notag \\
-  & !D \lif (\OProv[T](\gn{!D}) \lif !A) \ollabel{L-2}\\
+  & !D \lif (\OProv[\Th{T}](\gn{!D}) \lif !A) \ollabel{L-2}\\
   & \qquad\text{from \olref{L-1}}\notag\\
-  & \OProv[T](\gn{!D \lif (\OProv[T](\gn{!D}) \lif !A)}) \ollabel{L-3}\\
+  & \OProv[\Th{T}](\gn{!D \lif (\OProv[\Th{T}](\gn{!D}) \lif !A)}) \ollabel{L-3}\\
   & \qquad \text{from \olref{L-2} by condition P1}\notag \\
-  & \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D}) \lif !A})
+  & \OProv[\Th{T}](\gn{!D}) \lif \OProv[\Th{T}](\gn{\OProv[\Th{T}](\gn{!D}) \lif !A})
   \ollabel{L-4}\\
   &\qquad \text{from \olref{L-3} using condition P2}\notag \\
-  & \OProv[T](\gn{!D}) \lif (\OProv[T](\gn{\OProv[T](\gn{!D})}) \lif \OProv[T](\gn{!A})) \ollabel{L-5}\\
+  & \OProv[\Th{T}](\gn{!D}) \lif (\OProv[\Th{T}](\gn{\OProv[\Th{T}](\gn{!D})}) \lif \OProv[\Th{T}](\gn{!A})) \ollabel{L-5}\\
   &\qquad \text{from \olref{L-4} using P2 again} \notag\\
-& \OProv[T](\gn{!D}) \lif \OProv[T](\gn{\OProv[T](\gn{!D})}) \ollabel{L-6}\\
+& \OProv[\Th{T}](\gn{!D}) \lif \OProv[\Th{T}](\gn{\OProv[\Th{T}](\gn{!D})}) \ollabel{L-6}\\
   & \qquad\text{by !!{derivability} condition P3} \notag\\
-  & \OProv[T](\gn{!D}) \lif \OProv[T](\gn{!A}) \ollabel{L-7} \\
+  & \OProv[\Th{T}](\gn{!D}) \lif \OProv[\Th{T}](\gn{!A}) \ollabel{L-7} \\
   &\qquad\text{from \olref{L-5} and \olref{L-6}}\notag\\
-  & \OProv[T](\gn{!A}) \lif !A \ollabel{L-8}\\
+  & \OProv[\Th{T}](\gn{!A}) \lif !A \ollabel{L-8}\\
   &\qquad\text{by assumption of the theorem} \notag\\
-  & \OProv[T](\gn{!D}) \lif !A \ollabel{L-9}\\
+  & \OProv[\Th{T}](\gn{!D}) \lif !A \ollabel{L-9}\\
   &\qquad\text{from \olref{L-7} and \olref{L-8}}\notag\\
-  & (\OProv[T](\gn{!D}) \lif !A) \lif !D \ollabel{L-10}\\
+  & (\OProv[\Th{T}](\gn{!D}) \lif !A) \lif !D \ollabel{L-10}\\
   & \qquad \text{from \olref{L-1}}\notag \\
   & !D \ollabel{L-11}\\
   & \qquad\text{from \olref{L-9} and \olref{L-10}}\notag \\
-  & \OProv[T](\gn{!D}) \ollabel{L-12}\\
+  & \OProv[\Th{T}](\gn{!D}) \ollabel{L-12}\\
   & \qquad\text{from \olref{L-11} by condition~P1}\notag \\
   & !A \qquad\qquad\text{from \olref{L-8} and \olref{L-12}}\notag
 \end{align}
@@ -121,15 +121,15 @@ following is !!{derivable} in $\Th{T}$:
 With L\"ob's theorem in hand, there is a short proof of the second
 incompleteness theorem (for theories having !!a{derivability} predicate
 satisfying conditions P1--P3): if $\Th{T} \Proves
-\OProv[T](\gn{\lfalse}) \lif \lfalse$, then $\Th{T} \Proves \lfalse$.
+\OProv[\Th{T}](\gn{\lfalse}) \lif \lfalse$, then $\Th{T} \Proves \lfalse$.
 If $\Th{T}$ is consistent, $\Th{T} \Proves/ \lfalse$. So, $\Th{T}
-\Proves/ \OProv[T](\gn{\lfalse}) \lif \lfalse$, i.e., $\Th{T} \Proves/
+\Proves/ \OProv[\Th{T}](\gn{\lfalse}) \lif \lfalse$, i.e., $\Th{T} \Proves/
 \OCon[\Th{T}]$.  We can also apply it to show that~$!H$, the fixed
-point of $\OProv[T](x)$, is !!{derivable}. For since
+point of $\OProv[\Th{T}](x)$, is !!{derivable}. For since
 \begin{align*}
-  \Th{T} & \Proves \OProv[T](\gn{!H}) \liff !H\\
+  \Th{T} & \Proves \OProv[\Th{T}](\gn{!H}) \liff !H\\
   \intertext{in particular}
-    \Th{T} & \Proves \OProv[T](\gn{!H}) \lif !H
+    \Th{T} & \Proves \OProv[\Th{T}](\gn{!H}) \lif !H
 \end{align*}
 and so by L\"ob's theorem, $\Th{T} \Proves !H$.
 
@@ -139,13 +139,13 @@ and so by L\"ob's theorem, $\Th{T} \Proves !H$.
 
 \begin{prob}
 Let $\Th{T}$ be a computably axiomatized theory, and
-let $\OProv[T]$ be !!a{derivability} predicate for $\Th{T}$. Consider the
+let $\OProv[\Th{T}]$ be !!a{derivability} predicate for $\Th{T}$. Consider the
 following four statements:
 \begin{enumerate}
-\item If $T \Proves !A$, then $T \Proves \OProv[T](\gn{!A})$.
-\item $T \Proves !A \lif \OProv[T](\gn{!A})$.
-\item If $T \Proves \OProv[T](\gn{!A})$, then $T \Proves !A$.
-\item $T \Proves \OProv[T](\gn{!A}) \lif !A$
+\item If $T \Proves !A$, then $T \Proves \OProv[\Th{T}](\gn{!A})$.
+\item $T \Proves !A \lif \OProv[\Th{T}](\gn{!A})$.
+\item If $T \Proves \OProv[\Th{T}](\gn{!A})$, then $T \Proves !A$.
+\item $T \Proves \OProv[\Th{T}](\gn{!A}) \lif !A$
 \end{enumerate}
 Under what conditions are each of these statements true?
 \end{prob}

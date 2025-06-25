@@ -52,7 +52,14 @@ The halting relation is definable in $\Struct{N}$.
 \end{lem}
 
 \begin{proof}
-Let $H$ be the halting relation, i.e.,
+Recall that the Kleene normal form theorem states that every partial
+computable function~$f$ has an index~$e$ such that $f(x) =
+U(\umin{s}{T(e,x,s)})$ for all $x \in \Nat$, where $U$ and $T$ are
+primitive recursive and therefore total. Thus, $f(x)$ is defined
+(i.e., the computation halts) iff there is an~$s$ such that $T(e,x,s)$
+holds.
+
+Now let $H$ be the halting relation, i.e.,
 \[
 H = \Setabs{\tuple{e,x}}{\lexists[s][T(e, x, s)]}.
 \]
