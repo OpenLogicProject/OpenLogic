@@ -1,0 +1,83 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: language-epistemic-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{pal}
+
+\olsection{Public Announcement Logic}
+
+Dynamic epistemic logics allow us to represent the ways in which
+agents' knowledge changes over time, or as they gain new information.
+Many of these represent changes in knowlege using informational
+\emph{events} or \emph{updates}. The most basic kind of update is a
+public announcement in which some formula is truthfully announced and
+all of the agents witness this taking place together. To do this, we
+expand the language as follows
+
+\begin{defn}
+Let $G$ be a set of agent-symbols. The basic language of multi-agent
+epistemic logic with public announcements contains
+\begin{enumerate}
+  \tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+  \item A !!{denumerable}s set of !!{propositional variable}s: $\Obj
+    p_0$, $\Obj p_1$, $\Obj p_2$, \dots
+  \item The propositional connectives: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \item The knowledge operator $\Knows_a$ where $a \in G$.
+  \item The public announcement operator $[!B]$ where $!B$ is !!a{formula}.
+\end{enumerate}
+\end{defn}
+
+The public announcement operator functions as a box operator, and our
+inductive definition of the language is given accordingly:
+
+\begin{defn}
+  \emph{!!^{formula}s} of the epistemic language are inductively
+  defined as follows:
+  \begin{enumerate}
+  \tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+
+  \tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+
+  \item Every propositional variable $\Obj p_i$ is an (atomic)
+  !!{formula}.
+
+  \tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+  !!a{formula}.}{}
+
+  \tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is !!a{formula}.}{}
+
+  \tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+  is !!a{formula}.}{}
+
+  \tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+  is !!a{formula}.}{}
+
+  \tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
+  is !!a{formula}.}{}
+
+  \item If $!A$ is !!a{formula} and $a \in G$, then $\Knows_a !A$ is
+  !!a{formula}.
+  
+  \item If $!A$ and $!B$ are !!{formula}s, then $[!A] !B$ is !!a{formula}.
+
+  \tagitem{limitClause}{Nothing else is !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+The intended reading of the !!{formula} $[!A] !B$ is ``After $!A$ is
+truthfully announced, $!B$~holds. It will sometimes also be useful to
+talk about common knowledge in the context of public announcements, so
+the language may also include the common knowledge operator~$\CKnows_G
+!A$.
+
+\end{document}

@@ -1,0 +1,75 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: possible-histories
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{poss}
+
+\olsection{Possible Histories}
+
+The relational models of temporal logic that we have been using are
+extremely flexible, since we do not have to place any restrictions on
+the accessibility relation. This means that temporal models can branch
+in the past and in the future, but we might want to consider a more
+``modal'' conception of branching, in which we consider sequences of
+events as possible histories. This does not necessarily require
+changing our language, though we might also add our ``ordinary'' modal
+operators $\Box$ and~$\Diamond$, and we could also consider adding
+epistemic accessibility relations to represent changes in agents'
+knowledge over time.
+
+\begin{defn}
+  A \emph{possible histories model} for the temporal language is a triple
+  $\mModel{M} = \tuple{T, C, V}$, where
+  \begin{enumerate}
+    \item $T$ is a nonempty set, interpreted as states in time.
+    \item $C$ is a set of computational paths, or \emph{possible
+      histories} of a system. In other words, $C$~is a set of
+      sequences~$\sigma$ of states $s_1$, $s_2$,~$s_3$, \dots, where
+      every $s_i \in T$.
+    \item $V$ is a function assigning to each !!{propositional
+      variable}~$p$ a set~$V(p)$ of points in time.
+  \end{enumerate}
+  To make things simpler, we will also generally assume that when a
+  history is in~$C$, then so are all of its suffixes. For example, if
+  $s_1$, $s_2$,~$s_3$ is a sequence in~$C$, then so are $s_2$, $s_3$
+  and~$s_3$. Also, when two states $s_i$ and~$s_j$ appear in a
+  sequence~$\sigma$, we say that $s_i \prec_\sigma s_j$ when $i < j$.
+  When $t \in V(p)$ we say $p$~is \emph{true at}~$t$.
+\end{defn}
+
+The one relevant change is that when we evaluate the truth of
+!!a{formula} at a point in time~$t$ in a model~$\mModel M$, we do so
+relative to a history~$\sigma$, in which $t$ appears as a state. We do
+not need to change any of the semantics for !!{propositional
+variable}s or for truth-functional connectives, though. All of those
+are exactly as they were in \olref[sem]{defn:tmodels}, since none of
+those will make reference to~$\sigma$. However, we now redefine our
+future operator~$\Ftemp$ and add our~$\Diamond$ operator with respect
+to these histories. 
+
+\begin{defn}\ollabel{defn:phmodels}
+  \emph{Truth of !!a{formula}~$!A$ at~$t, \sigma$} in~$\mModel M$, in symbols:
+  $\mSat{M}{!A}[t, \sigma]$:
+  \begin{enumerate}
+  \item\ollabel{defn:sub:phmodels-f} \indcase{!A}{\Ftemp
+    !B}{$\mSat{M}{\indfrm}[t, \sigma]$ iff $\mSat{M}{!B}[t', \sigma]$
+    for some $t' \in T$ such that $t \prec_\sigma t'$.}
+  \item\ollabel{defn:sub:phmodels-diamond} \indcase{!A}{\Diamond
+    !B}{$\mSat{M}{\indfrm}[t, \sigma]$ iff $\mSat{M}{!B}[t, \sigma']$
+    for some $\sigma' \in C$ in which $t$ occurs.}
+  \end{enumerate} 
+\end{defn}
+
+Other temporal and modal operators can be defined similarly. However,
+we can now represent claims that combine tense and modality. For
+example, we might symbolize ``$p$~will not occur, but it might have
+occurred'' using the formula $\lnot \Ftemp p \land \Diamond \Ftemp p$.
+This would hold at a point and a history at which $p$ does not become
+true at a successor state, but there is an alternative history at
+which $p$ will become true. 
+
+\end{document}

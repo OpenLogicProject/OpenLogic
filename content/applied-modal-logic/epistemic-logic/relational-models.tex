@@ -1,0 +1,49 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: relational-models
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{rel}
+
+\olsection{Relational Models}
+
+The basic semantic concept for epistemic logics is the same as that of
+ordinary modal logics. Relational models still consist of a set of
+worlds, and an assignment that determines which !!{propositional
+variable}s count as ``true'' at which worlds. And if we are only
+dealing with a single agent, we have a single accessibility relation
+as usual. However, if we have a multi-agent epistemic logic, then our
+single accessibility relation becomes a set of accessibility
+relations, one for each~$a$ in our set of agent symbols~$G$.
+
+A \emph{relational model} consists of a set of worlds, which are
+related by binary accessibility relations---one for each
+agent---together with an assignment which determines which
+!!{propositional variable}s are true at which worlds.
+
+\begin{defn}
+  A \emph{model} for the multi-agent epistemic language is a triple
+  $\mModel{M} = \tuple{W, R, V}$, where
+  \begin{enumerate}
+  \item $W$ is a nonempty set of ``worlds,''
+  \item For each $a \in G$, ${R}_a$ is a binary accessibility relation
+  on~$W$, and
+  \item $V$ is a function assigning to each !!{propositional
+    variable}~$p$ a set $V(p)$ of possible worlds.
+  \end{enumerate}
+  When $R_a ww'$ holds, we say that $w'$ is \emph{accessible by a
+    from}~$w$. When $w \in V(p)$ we say $p$ is \emph{true at}~$w$.
+\end{defn}
+
+The mechanics are just like the mechanics for normal modal logic, just
+with more accessibility relations added in. For a given agent, we will
+generally interpret their accessibility relation as representing
+something about their informational states. For example, we often
+treat $R_a ww'$, as expressing that $w'$ is consistent with~$a$'s
+information at~$w$. Or to put it another way, at~$w$, they cannot tell
+the difference between world $w$ and world~$w'$.  
+
+\end{document}

@@ -1,0 +1,78 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{acc}
+
+\olsection{Accessibility Relations and Epistemic Principles}
+
+Given what we already know about frame correspondence in normal modal
+logics, we might want to see what the characteristic !!{formula}s look
+like given epistemic interpretations. We have already said that
+epistemic logics are typically interpreted in S5. So let's take a look
+at how various epistemic principles are represented, and consider how
+they correspond to various frame conditions.
+
+Recall from normal modal logic, that different modal !!{formula}s
+characterized different properties of accessibility relations. This
+table picks out a few that correspond to particular epistemic
+principles.
+
+\begin{table}[t]
+    \begin{tabular}{| p{.48\textwidth} || p{.48\textwidth} |}
+      \hline
+      {\emph{If $R$ is \dots}} & {\emph{then \dots is true in~$\mModel{M}$:}} \\
+      \hline \hline
+        
+      & $\Knows (p \lif q) \lif (\Knows p \lif \Knows q)$ 
+      \hfill \newline{(Closure)} \\
+      \hline
+      \emph{reflexive}: $\forall w Rww$  
+      & $\Knows p \lif p$ \hfill \newline{(Veridicality)} \\
+      \hline
+      \emph{transitive}: \newline
+      $\forall u \forall v \forall w ((Ruv \land Rvw) \lif Ruw)$ & 
+      $\Knows p \lif \Knows \Knows p$ \hfill 
+           \newline{(Positive Introspection)} \\
+      \hline 
+      \emph{euclidean}: \newline
+      $\forall w \forall u \forall v ((Rwu \land Rwv) \lif Ruv)$ &  
+      $\lnot \Knows p \lif \Knows \neg \Knows p$ \hfill 
+        \newline{(Negative Introspection)} \\
+      \hline
+    \end{tabular}
+    \caption{Four epistemic principles.}
+    \ollabel{tab:four}
+  \end{table} 
+
+Veridicality, corresponding to the $T$ axiom, is often treated as the
+most uncontroversial of these principles, as it represents that claim
+that if !!a{formula} is known, then it must be true. Closure, as well
+as Positive and Negative Introspection are much more contested. 
+
+Closure, corresponding to the $K$ axiom, represents the idea that an
+agent's knowledge is closed under implication. This might seem
+plausible to us in some cases. For instance, I might know that if I am
+in Victoria, then I am on Vancouver Island. Barring odd skeptical
+scenarios, I do know that I am in Victoria, and this should also
+suggest that I know I am on Vancouver Island. So in this case, the
+logical closure of my knowledge might seem relatively intuitive. On
+the other hand, we do not always think through the consequences of our
+knowledge, and so this might lead to less intuitive results in other
+cases.
+
+Positive Introspection, sometimes known as the KK-principle, is
+sometimes articulated as the statement that if I know something, then
+I know that I know. It is the epistemic counterpart of the 4 axiom.
+Correspondingly, negative introspection is articulated as the
+statement that if I \emph{don't} know something, then I know that I
+don't know it, which is the counterpart of the 5 axiom. Both of these
+seem to admit of relatively ordinary counterexamples, in which I am
+unsure whether or not I know something that I do in fact know. 
+
+
+\end{document}

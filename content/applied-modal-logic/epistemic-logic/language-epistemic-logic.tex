@@ -1,0 +1,87 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: language-epistemic-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{lan}
+
+\olsection{The Language of Epistemic Logic}
+
+\begin{defn}
+Let $G$ be a set of agent-symbols. The basic language of multi-agent
+epistemic logic contains
+\begin{enumerate}
+  \tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+  \item A !!{denumerable}s set of !!{propositional variable}s: $\Obj
+    p_0$, $\Obj p_1$, $\Obj p_2$, \dots
+  \item The propositional connectives: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \item The knowledge operator $\Knows_a$ where $a \in G$.
+\end{enumerate}
+\end{defn}
+
+If we are only concerned with the knowledge of a single agent in our
+system, we can drop the reference to the set~$G$, and individual
+agents. In that case, we only have the basic operator~$\Knows$.
+
+\begin{defn}
+\emph{!!^{formula}s} of the epistemic language are inductively
+  defined as follows:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+
+\tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+
+\item Every propositional variable $\Obj p_i$ is an (atomic) !!{formula}.
+
+\tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is !!a{formula}.}{}
+
+\tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+  is !!a{formula}.}{}
+
+\tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+  is !!a{formula}.}{}
+
+\tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
+  is !!a{formula}.}{}
+
+\item If $!A$ is !!a{formula} and $a \in G$, then $\Knows_a !A$ is
+  !!a{formula}.
+
+\tagitem{limitClause}{Nothing else is !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+If !!a{formula}~$!A$ does not contain $\Knows_a$, we say it
+is \emph{modal-free}.
+
+\begin{defn}
+  While the $\Knows$ operator is intended to symbolize individual
+  knowledge, $\EKnows$, often read as ``everybody knows,'' symbolizes
+  group knowledge. Where $G' \subseteq G$, we define $\EKnows_{G'} !A$
+ as an abbreviation for \[\bigwedge_{b \in G'} \Knows_b !A.\]
+\end{defn}
+
+We can also define an even stronger sense of knowledge, namely
+\emph{common knowledge} among a group of agents~$G$. When a piece of
+information is common knowledge among a group of agents, it means that
+for every combination of agents in that group, they all know that each
+other knows that each other knows \dots ad infinitum. This is
+significantly stronger than group knowledge, and it is easy to come up
+with relational models in which !!a{formula} is group knowledge, but
+not common knowledge. We will use $\CKnows_G !A$ to symbolize ``it is
+common knowledge among~$G$ that~$!A$.''
+
+\end{document}

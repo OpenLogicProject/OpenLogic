@@ -1,0 +1,125 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: public-announcement-logic-semantics
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{psm}
+
+\olsection{Semantics of Public Announcement Logic}
+
+Relational models for public announcement logics are the same as they
+were in epistemic logics. However, the semantics for the public
+announcement operator are something new.
+
+\begin{defn}\ollabel{defn:mmodels} \emph{Truth of !!a{formula}~$!A$
+  at~$w$} in a~$\mModel M = \tuple{W, R, V}$, in symbols:
+  $\mSat{M}{!A}[w]$, is defined inductively as follows:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{Never $\mSat{M}{\lfalse}[w]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Always $\mSat{M}{\ltrue}[w]$}.}{}
+  \item $\mSat{M}{p}[w]$ iff $w \in V(p)$
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat/{M}{!B}[w]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ or $\mSat{M}{!C}[w]$} (or both).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat/{M}{!B}[w]$ or $\mSat{M}{!C}[w]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[w]$ iff
+    either both $\mSat{M}{!B}[w]$ and $\mSat{M}{!C}[w]$ or
+    neither $\mSat{M}{!B}[w]$ nor $\mSat{M}{!C}[w]$}.}{}
+  \item\ollabel{defn:sub:mmodels-box}
+    \indcase{!A}{\Knows_a !B}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w']$ for all $w' \in W$ with $R_a ww'$}
+  \item\ollabel{defn:sub:mmodels-pal}
+    \indcase{!A}{[!B] !C}{$\mSat{M}{\indfrm}[w]$ iff
+    $\mSat{M}{!B}[w]$ implies $\mSat{M \mid !B}{!C}[w]$}
+
+  
+  Where $\mModel M \mid !B = \tuple{W', R', V'}$ is defined as
+  follows:
+  \begin{enumerate}
+    \item $W' = \Setabs{ u \in W}{\mSat{M}{!B}[u]}$. So the worlds of
+      $\mModel M \mid !B$ are the worlds in~$\mModel M$ at which $!B$
+      holds.
+    \item $R'_a = R_a \cap (W' \times W')$. Each agent's accessibility
+      relation is simply restricted to the worlds that remain in~$W'$.
+    \item $V'(p) = \Setabs{ u \in W'}{u \in V(p) }$. Similarly, the
+      propositional valuations at worlds remain the same, representing
+      the idea that informational events will not change the truth
+      value of propositional variables.
+  \end{enumerate}
+  
+  \end{enumerate} 
+\end{defn}
+
+What is distinctive, then, about public announcement logics, is that
+the truth of !!a{formula} at~$\mModel M$ can sometimes only be decided
+by referring to a model other than~$\mModel M$ itself.
+
+Notice also that our semantics treats the announcement operator as a
+$\Box$~operator, and so if !!a{formula}~$!A$ cannot be truthfully
+announced at a world, then $[!A]B$ will hold there trivially, just as
+all $\Box$ !!{formula}s hold at endpoints. 
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) [label={below left:$p, \lnot q$}]{$w_1$}; 
+      \node[world] (w2) [left=of w1, label={left:$\lnot p, \lnot q$}]{$w_2$}; 
+      \node[world] (w3) [above=of w1, label={right:$p, q$}] {$w_3$};
+      \draw[<->] (w1) to [swap] node {$b$} (w2);
+      \draw[->,loop below] (w1) to node {$a, b$} (w1);
+      \draw[<->] (w1) to [swap] node {$a$} (w3);
+      \draw[->,loop above] (w2) to node {$a, b$} (w2) ;
+      \draw[->,loop above] (w3) to node {$a, b$} (w3) ;
+      
+      \node[world](v1)[right of=w1, xshift=1.25in, label={right:$p, \lnot q$}]{$w'_1$};
+      \node[world](v3)[above of=v1,label={right:$p,q$}]{$w'_3$};
+      \draw[<->] (v1) to node {$a$} (v3);
+      \draw[->,loop below] (v1) to node {$a,b$} (v1);
+      \draw[->,loop above] (v3) to node {$a,b$} (v3) ;
+      
+      \node(m)[below=of w1]{$\mModel M$};
+      \node(m')[below=of v1]{$\mModel M \mid p$}; 
+
+      \draw[-,dotted] (w1) to node {\footnotesize announcement of $p$}(v1) ;
+     
+    \end{tikzpicture}
+  \end{center}
+  \caption{Before and after the public announcement of $p$.}
+  \ollabel{fig:announcement-example}
+\end{figure}
+
+We can see the public announcement of !!a{formula} as shrinking a
+model, or restricting it to the worlds at which the !!{formula} was
+true. \olref{fig:announcement-example} gives an example of the effects
+of publicly announcing~$p$. One notable thing about that model is that
+agent~$b$ learns that~$p$ as a result of the announcement, while
+agent~$a$ does not (since $a$ already knew that~$p$ was true).
+
+More formally, we have $\mSat{M}{\lnot \Knows_b p}[w_1]$ but $\mSat{M
+\mid p}{\Knows_b p}[w'_1]$. This implies that $\mSat{M}{[p] \Knows_b
+p}[w_1]$. But we have some even stronger claims that we can make about
+the result of the announcement. In fact, it is the case that
+$\mSat{M}{[p]\CKnows_{\{a,b\}} p}[w_1]$. In other words, after $p$ is
+announced, it becomes \emph{common knowledge}.
+
+We might wonder, though, whether this holds in the general case, and
+whether a truthful announcement of~$!A$ will \emph{always} result in
+$!A$ becoming common knowledge. It may be surprising that the answer
+is no. And in fact, it is possible to truthfully announce !!{formula}s
+that will no longer be true once they are announced. For example,
+consider the effects of announcing $p \land \lnot \Knows_b p$ at~$w_1$
+in \olref{fig:announcement-example}. In fact, $\mModel M \mid p$ and
+$\mModel M \mid (p \land \lnot \Knows_b p)$ are the same model.
+However, as we have already noted, $\mSat{M \mid p}{\Knows_b
+p}[w'_1]$. Therefore, $\mSat{M \mid (p \land \lnot \Knows_b p)}{\lnot
+(p \land \lnot \Knows_b p)}[w'_1]$, so this is !!a{formula} that
+becomes false once it has been announced. 
+
+\end{document}

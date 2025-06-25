@@ -1,0 +1,103 @@
+% Part: applied-modal-logics
+% Chapter: epistemic-logic
+% Section: bisimulations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{el}{bsd}
+
+\olsection{Bisimulations}
+
+One remaining question that we might have about the expressive power
+of our epistemic language has to do with the relationship between
+models and the formulas that hold in them. We have seen from our frame
+correspondence results that when certain formulas are valid in a
+frame, they will also ensure that those frames satisfy certain
+properties. But does our modal language, for example, allow us to
+distinguish between a world at which there is a reflexive arrow, and
+an infinite chain of worlds, each of which leads to the next? That is,
+is there any formula $A$ that might hold at only one of these two
+worlds?
+
+Bisimulation is a relationship that we can define between relational
+models to say that they have effectively the same structure. And as we
+will see, it will capture a sense of equivalence between models that
+can be captured in our epistemic language.
+
+\begin{defn}[Bisimulation]
+Let $M_1 = \tuple{W_1, R_1, V_1}$ and $M_2 = \tuple{W_2, R_2, V_2}$ be
+two relational models. And let $\mathcal{R} \subseteq W_1 \times W_2$
+be a binary relation. We say that $\mathcal{R}$ is a
+\emph{bisimulation} when for every $\tuple{w_1, w_2} \in \mathcal{R}$,
+we have:
+
+\begin{enumerate}
+  \item $w_1 \in V_1(p)$ iff $w_2 \in V_2(p)$ for all
+  !!{propositional variable}s~$p$.
+  \item For all agents $a \in A$ and worlds $v_1 \in W_1$, if
+  $R_{1_a} w_1 v_1$ then there is some $v_2 \in W_2$ such that
+  $R_{2_a} w_2 v_2$, and $\tuple{v_1, v_2} \in
+  \mathcal{R}$.
+  \item For all agents $a \in A$ and worlds $v_2 \in W_2$, if
+   $R_{2_a} w_2 v_2$ then there is some $v_1 \in W_1$ such that
+   $R_{1_a} w_1 v_1$, and $\tuple{v_1, v_2} \in
+   \mathcal{R}$.
+\end{enumerate}
+
+When there is a bisimulation between $M_1$ and $M_2$ that links worlds
+$w_1$ and $w_2$, we can also write $\tuple{M_1, w_1} \leftrightarroweq
+\tuple{M_2, w_2}$, and call $\tuple{M_1, w_1}$ and $\tuple{M_2, w_2}$
+\emph{bisimilar}.
+\end{defn}
+
+The different clauses in the bisimulation relation ensure different
+things. Clause 1 ensures that bisimilar worlds will satisfy the same
+modal-free formulas, since it ensures agreement on all
+!!{propositional variable}s. The other two clauses, sometimes referred
+to as ``forth'' and ``back,'' respectively, ensure that the
+accessibility relations will have the same structure.
+
+\begin{thm}
+If $\tuple{M_1, w_1} \leftrightarroweq \tuple{M_2, w_2}$, then for
+every !!{formula}~$!A$, we have that $\mSat{M_1}{!A}[w_1]$ iff
+$\mSat{M_2}{!A}[w_2]$.
+\end{thm}
+
+\begin{figure}
+  \begin{center}
+    \begin{tikzpicture}[modal]
+      \node[world] (w1) {$w_1$}; 
+      \node[world] (w2) [above left=of w1]{$w_2$}; 
+      \node[world] (w3) [above right=of w1] {$w_3$};
+      \draw[<->] (w1) to node {$a$} (w2);
+      \draw[->,loop below] (w1) to node {$a$} (w1);
+      \draw[<->] (w1) to [swap] node {$a$} (w3);
+      \draw[->,loop above] (w2) to node {$a$} (w2) ;
+      \draw[->,loop above] (w3) to node {$a$} (w3) ;
+      
+      \node[world](v1)[right of=w1, xshift=1.5in]{$v_1$};
+      \node[world](v2)[above of=v1]{$v_2$};
+      \draw[<->] (v1) to node {$a$} (v2);
+      \draw[->,loop below] (v1) to node {$a$} (v1);
+      \draw[->,loop above] (v2) to node {$a$} (v2) ;
+
+      \draw[-,dotted] (w1) to (v1) ;
+      \draw[-,dotted,bend left=45] (w2) to (v2) ;
+      \draw[-,dotted,bend left=30] (w3) to (v2) ;
+    \end{tikzpicture}
+  \end{center}
+  \caption{Two bisimilar models.}
+  \ollabel{fig:bisimilar}
+\end{figure}
+
+Even though the two models pictured in \olref{fig:bisimilar} aren't
+quite the same as each other, there is a bisimulation linking worlds
+$w_1$ and~$v_1$. This bisimulation will also link both $w_2$ and $w_3$
+to~$v_2$, with the idea being that there is nothing expressible in our
+modal language that can really distinguish between them. The situation
+would be different if $w_2$ and~$w_3$ satisfied different
+!!{propositional variable}s, however. 
+
+\end{document}

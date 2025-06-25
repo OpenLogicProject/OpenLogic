@@ -1,0 +1,125 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: language-epistemic-logic
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{sem}
+
+\olsection{Semantics for Temporal Logic}
+
+\begin{defn}
+The basic language of temporal logic contains
+\begin{enumerate}
+  \tagitem{prvFalse}{The propositional constant for !!{falsity}~$\lfalse$.}{}
+  \tagitem{prvTrue}{The propositional constant for !!{truth}~$\ltrue$.}{}
+  \item A !!{denumerable}s set of !!{propositional variable}s: $\Obj
+    p_0$, $\Obj p_1$, $\Obj p_2$, \dots
+  \item The propositional connectives: \startycommalist
+  \iftag{prvNot}{\ycomma $\lnot$ (negation)}{}%
+  \iftag{prvAnd}{\ycomma $\land$ (conjunction)}{}%
+  \iftag{prvOr}{\ycomma $\lor$ (disjunction)}{}%
+  \iftag{prvIf}{\ycomma $\lif$ (!!{conditional})}{}%
+  \iftag{prvIff}{\ycomma $\liff$ (!!{biconditional})}{}.
+  \item Past operators $\Ptemp$ and $\Htemp$.
+  \item Future operators $\Ftemp$ and $\Gtemp$.
+\end{enumerate}
+\end{defn}
+
+Later on, we will discuss the potential addition of other kinds of modal operators.
+
+\begin{defn}
+\emph{!!^{formula}s} of the temporal language are inductively
+  defined as follows:
+\begin{enumerate}
+\tagitem{prvFalse}{$\lfalse$ is an atomic !!{formula}.}{}
+
+\tagitem{prvTrue}{$\ltrue$ is an atomic !!{formula}.}{}
+
+\item Every propositional variable $\Obj p_i$ is an (atomic) !!{formula}.
+
+\tagitem{prvNot}{If $!A$ is !!a{formula}, then $\lnot !A$ is
+  !!a{formula}.}{}
+
+\tagitem{prvAnd}{If $!A$ and $!B$ are !!{formula}s, then $(!A \land
+  !B)$ is !!a{formula}.}{}
+
+\tagitem{prvOr}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lor !B)$
+  is !!a{formula}.}{}
+
+\tagitem{prvIf}{If $!A$ and $!B$ are !!{formula}s, then $(!A \lif !B)$
+  is !!a{formula}.}{}
+
+\tagitem{prvIff}{If $!A$ and $!B$ are !!{formula}s, then $(!A \liff !B)$
+  is !!a{formula}.}{}
+
+\item If $!A$ is !!a{formula}, then $\Ptemp  !A$, $\Htemp  !A$, $F !A$, $\Gtemp  !A$ are all
+  !!{formula}s.
+
+\tagitem{limitClause}{Nothing else is !!a{formula}.}{}
+\end{enumerate}
+\end{defn}
+
+The semantics of temporal logics are given in terms of relational models, as with other kinds of intensional logics. 
+
+\begin{defn}
+  A \emph{model} for temporal language is a triple
+  $\mModel{M} = \tuple{T, \prec, V}$, where
+  \begin{enumerate}
+  \item $T$ is a nonempty set, interpreted as points in time.
+  \item $\prec$ is a binary relation on $T$.
+  \item $V$ is a function assigning to each !!{propositional
+    variable}~$p$ a set $V(p)$ of points in time.
+  \end{enumerate}
+  When $t \prec t'$ holds, we say that $t$ \emph{precedes}~$t'$. 
+  When $t \in V(p)$ we say $p$ is \emph{true at}~$t$.
+\end{defn}
+
+For now, you will notice that we do not impose any conditions on our precedence relation $\prec$. This means that at present, there are no restrictions on the structure of our temporal models, so we could have models in which time is linear, branching, circular, or has any structure whatsoever. 
+
+Just as with normal modal logic, every temporal model determines which
+!!{formula}s count as true at which points in it. We use the same
+notation ``model $\mModel{M}$ makes !!{formula}~$!A$ true at
+point~$t$'' for the basic notion of relational semantics. The relation
+is defined inductively and is identical to the normal modal case for
+all non-modal operators.
+
+\begin{defn}\ollabel{defn:tmodels}
+  \emph{Truth of !!a{formula}~$!A$ at~$t$} in a~$\mModel M$, in symbols:
+  $\mSat{M}{!A}[t]$, is defined inductively as follows:
+  \begin{enumerate}
+  \tagitem{prvFalse}{\indcase{!A}{\lfalse}{Never $\mSat{M}{\lfalse}[t]$}.}{}
+  \tagitem{prvTrue}{\indcase{!A}{\ltrue}{Always $\mSat{M}{\ltrue}[t]$}.}{}
+  \item $\mSat{M}{p}[t]$ iff $t \in V(p)$
+  \tagitem{prvNot}{\indcase{!A}{\lnot !B}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat/{M}{!B}[t]$}.}{}
+  \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat{M}{!B}[t]$ and $\mSat{M}{!C}[t]$}.}{}
+  \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat{M}{!B}[t]$ or $\mSat{M}{!C}[t]$} (or both).}{}
+  \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat/{M}{!B}[t]$ or $\mSat{M}{!C}[t]$}.}{}
+  \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}{$\mSat{M}{\indfrm}[t]$ iff
+    either both $\mSat{M}{!B}[t]$ and $\mSat{M}{!C}[t]$ or
+    neither $\mSat{M}{!B}[t]$ nor $\mSat{M}{!C}[t]$}.}{}
+  \item\ollabel{defn:sub:mmodels-p}
+    \indcase{!A}{\Ptemp  !B}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat{M}{!B}[t']$ for some $t' \in T$ with $t' \prec t$}
+\item\ollabel{defn:sub:mmodels-h}
+    \indcase{!A}{\Htemp  !B}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat{M}{!B}[t']$ for every $t' \in T$ with $t' \prec t$}
+   \item\ollabel{defn:sub:mmodels-f}
+    \indcase{!A}{\Ftemp  !B}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat{M}{!B}[t']$ for some $t' \in T$ with $t \prec t'$}
+\item\ollabel{defn:sub:mmodels-g}
+    \indcase{!A}{\Gtemp  !B}{$\mSat{M}{\indfrm}[t]$ iff
+    $\mSat{M}{!B}[t']$ for every $t' \in T$ with $t \prec t'$}
+  \end{enumerate} 
+\end{defn}
+
+Based on the semantics, you might be able to see that the operators $\Ptemp$ and~$\Htemp$ are duals, as well as the
+operators $\Ftemp$ and $\Gtemp$, such that we could define $\Htemp  !A$ as $\lnot \Ptemp \lnot !A$, and the same with $\Gtemp$ and~$\Ftemp$.
+
+\end{document}

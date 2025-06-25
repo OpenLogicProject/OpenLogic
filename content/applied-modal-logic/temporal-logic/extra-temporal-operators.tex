@@ -1,0 +1,44 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: extra-operators
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{ext}
+
+\olsection{Additional Operators for Temporal Logic}
+
+In addition to the unary operators for past and future, temporal
+logics also sometimes include binary operators $\Since $ and~$\Until$,
+intended to symbolize ``since'' and ``until''. This means adding
+$\Since $ and~$\Until$ into the language of temporal logic and adding
+the following clause into the definition of a temporal !!{formula}:
+
+\begin{itemize}
+\item[] If $!A$ and $!B$ are !!{formula}s, then $(\Since  !A !B)$ and
+  $(\Until !A !B)$ are both !!{formula}s.
+\end{itemize}
+
+The semantics for these operators are then given as follows:
+
+\begin{defn}\ollabel{defn:since-until}
+  \emph{Truth of !!a{formula}~$!A$ at~$t$} in a~$\mModel M$:
+  \begin{enumerate}
+  \item\ollabel{defn:sub:mmodels-since} \indcase{!A}{\Since  !B
+    !C}{$\mSat{M}{\indfrm}[t]$ iff $\mSat{M}{!B}[t']$ for some $t' \in
+    T$ with $t' \prec t$, and for all $s$ with $t' \prec s \prec t$,
+    $\mSat{M}{!C}[s]$}
+   \item\ollabel{defn:sub:mmodels-until} \indcase{!A}{\Until !B
+    !C}{$\mSat{M}{\indfrm}[t]$ iff $\mSat{M}{!B}[t']$ for some $t' \in
+    T$ with $t \prec t'$, and for all $s$ with $t \prec s \prec t'$,
+    $\mSat{M}{!C}[s]$}
+  \end{enumerate} 
+\end{defn}
+
+The intuitive reading of $\Since  !B !C$ is ``Since $!B$ was the case,
+$!C$~has been the case.'' And the intuitive reading of $\Until !B !C$
+is ``Until $!B$ will be the case, $!C$~will be the case.''
+
+\end{document}

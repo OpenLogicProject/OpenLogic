@@ -1,0 +1,64 @@
+% Part: applied-modal-logics
+% Chapter: temporal-logic
+% Section: properties-accessibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{aml}{tl}{acc}
+
+\olsection{Properties of Temporal Frames}
+
+Given that our temporal models do not impose any conditions on the
+relation~$\prec$, the only one of our familiar axioms that holds in
+all models is~$K$, or its analogues $K_{\Gtemp}$ and~$K_{\Htemp}$:
+\begin{align*}
+\tag{$K_{\Gtemp}$}  \Gtemp (p \to q) & \to (\Gtemp p \to \Gtemp q)\\
+\tag{$K_{\Htemp}$}  \Htemp (p \to q) & \to (\Htemp p \to \Htemp q)
+\end{align*}
+
+However, if we want our models to impose stricter conditions on how
+time is represented, for instance by ensuring that $\prec$ is a linear
+order, then we will end up with other validities in our models.
+
+\begin{table}[t]
+  \begin{tabular}{| p{.48\textwidth} || p{.48\textwidth} |}
+    \hline
+    {\emph{If $\prec$ is \dots}} & {\emph{then \dots is true in~$\mModel{M}$:}} \\
+    \hline \hline
+    \emph{transitive}: \newline
+    $\forall u \forall v \forall w ((u \prec v \land v \prec w) \lif u \prec w)$ & 
+    $\Ftemp \Ftemp p \lif \Ftemp p$  \\
+    \hline 
+    \emph{linear}: \newline
+    $\forall w \forall v (w \prec v \lor w = v \lor v \prec w)$ &  
+    $(\Ftemp \Ptemp  p \lor \Ptemp \Ftemp p) \lif (\Ptemp p \lor p \lor \Ftemp p)$\\
+    \hline
+    \emph{dense}: \newline
+    $\forall w \forall v (w \prec v \to \exists u(w \prec u \land u \prec v))$ &  
+    $\Ftemp p \lif \Ftemp \Ftemp p$ \\
+    \hline
+    \emph{unbounded (past)}: \newline
+    $\forall w \exists v( v \prec w)$ &  
+    $\Htemp p \to \Ptemp p$ \\
+    \hline
+    \emph{unbounded (future)}: \newline
+    $\forall w \exists v( w \prec v)$ &  
+    $\Gtemp p \to \Ftemp p$ \\
+    \hline
+  \end{tabular}
+  \caption{Some temporal frame correspondence properties.}
+  \ollabel{tab:correspondence}
+\end{table} 
+
+Several of the properties from \olref{tab:correspondence} might seem
+like desirable features for a model that is intended to represent
+time. However, it is worth noting that, even though we can impose
+whichever conditions we like on the $\prec$ relation, not all
+conditions correspond to !!{formula}s that can be expressed in the
+language of temporal logic. For example, irreflexivity, or the idea
+that $\forall w \lnot (w \prec w)$, does not have a corresponding
+formula in temporal logic. 
+
+\end{document}
