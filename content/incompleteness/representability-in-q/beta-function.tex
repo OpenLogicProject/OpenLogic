@@ -78,35 +78,36 @@ for $x_0$, \dots,~$x_n$.
 
 A couple of observations will help us in this regard. Given
 $y_0$, \dots,~$y_n$, let
-\[
-j = \max(n, y_0, \dots, y_n) + 1,
-\]
+\begin{align*}
+j &= \max(n, y_0 + 1, \dots, y_n + 1), \\
+m &= \lcm(1,\dotsc,j),
+\end{align*}
 and let
 \begin{align*}
-x_0 & = 1 + \fact{j} \\
-x_1 & = 1 + 2 \cdot \fact{j} \\
-x_2 & = 1 + 3 \cdot \fact{j} \\
+x_0 & = 1 + m \\
+x_1 & = 1 + 2 \cdot m \\
+x_2 & = 1 + 3 \cdot m \\
 & \vdots  \\
-x_n & = 1 + (n+1) \cdot \fact{j}
+x_n & = 1 + (n+1) \cdot m
 \end{align*}
 Then two things are true:
 \begin{enumerate}
-\item\ollabel{rel-prime} $x_0$, \dots,~$x_n$ are relatively prime.
+\item\ollabel{rel-prime} $x_0,\dotsc,x_n$ are relatively prime.
 \item\ollabel{less} For each $i$, $y_i < x_i$.
 \end{enumerate}
-To see that \olref{rel-prime} is true, note that if $p$ is a prime number and $p
-\mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) \fact{j}$ and $p \mid
-1 + (k+1) \fact{j}$. But then $p$ divides their difference,
+To see that \olref{rel-prime} is true, note that if $p$ is a prime number
+and $p \mid x_i$ and $p \mid x_k$, then $p \mid 1 + (i+1) m$ and
+$p \mid 1 + (k+1) m$. But then $p$ divides their difference,
 \[
-(1 + (i+1)\fact{j}) - (1+ (k+1)\fact{j}) = (i-k) \fact{j}.
+(1 + (i+1)m) - (1+ (k+1)m) = (i-k) m.
 \]
-Since $p$ divides $1 + (i+1)\fact{j}$, it can't divide $\fact{j}$ as well
+Since $p$ divides $1 + (i+1)m$, it can't divide $m$ as well
 (otherwise, the first division would leave a remainder of~$1$). So $p$
-divides $i-k$, since $p$ divides $(i-k)\fact{j}$. But $\left| i-k
-\right|$ is at most~$n$, and we have chosen $j > n$, so this implies
-that $p \mid \fact{j}$, again a contradiction. So there is no prime
-number dividing both $x_i$ and $x_k$. Clause~\olref{less} is easy: we have $y_i <
-j < \fact{j} < x_i$.
+divides $i-k$, since $p$ divides $(i-k)m$. But $\left|i-k\right|$ is at
+most~$n$, and we have chosen $j \geq n$, so this implies that
+$p \mid m$, again a contradiction. So there is no prime number dividing
+both $x_i$ and $x_k$. Clause~\olref{less} is easy:
+we have $y_i < j \leq m < x_i$.
 
 Now let us prove the $\beta$ function lemma. Remember that we can use
 $0$, successor, plus, times, $\Char{=}$, projections, and any function
@@ -146,14 +147,14 @@ Now define
 \beta^*(d_0,d_1,i) & = \fn{rem}(1+(i+1) d_1,d_0) \text{ and}\\
 \beta(d,i) & = \beta^*(K(d),L(d),i).
 \end{align*}
-This is the function we want. Given $a_0$, \dots,~$a_n$ as above, let
+This is the function we want. Given $a_0,\dotsc,a_n$ as above, let
 \[
-j = \max(n,a_0,\dots,a_n)+1,
+j = \max(n,a_0+1,\dotsc,a_n+1),
 \]
-and let $d_1 = \fact{j}$. By \olref{rel-prime} above, we know that
-$1+d_1$, $1+2 d_1$, \dots, $1+(n+1) d_1$ are relatively prime, and
-by~\olref{less} that all are greater than $a_0$, \dots,~$a_n$. By
-Sunzi's Theorem there is a value~$d_0$ such that for each~$i$,
+and let $d_1 = \lcm(1,\dotsc,j)$. By \olref{rel-prime} above,
+we know that $1+d_1$, $1+2 d_1$, \dots, $1+(n+1) d_1$ are relatively
+prime, and by~\olref{less} that all are greater than $a_0,\dotsc,a_n$.
+By Sunzi's Theorem there is a value~$d_0$ such that for each~$i$,
 \[
 d_0 \equiv a_i \mod (1+(i+1)d_1)
 \]
