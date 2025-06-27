@@ -15,14 +15,10 @@ numerals. In fact, this can be extended quite considerably. To understand
 the scope of what can be proved in $\Th{Q}$, we introduce the notions of
 $\Delta_0$, $\Sigma_1$, and $\Pi_1$ !!{formula}s. Roughly speaking, a
 $\Sigma_1$ !!{formula} is one of the form $\lexists{x}!A(x)$, where $!A$
-is constructed using only Boolean connectives and bounded quantifiers.
-We shall show that if $!A$ is a correct $\Sigma_1$ sentence, then
-$\Th{Q} \Proves !A$ (\olref{thm:sigma1-completeness}).
-
-\begin{defn}
-\ollabel{defn:correct-frm}
-A sentence $!A$ is \emph{correct} if $\Struct{N} \Entails !A$.
-\end{defn}
+is constructed using only propositional connectives and bounded
+quantifiers. We shall show that if $!A$ is a $\Sigma_1$ !!{sentence}
+which is true in $\Struct{N}$, then $\Th{Q} \Proves !A$
+(\olref{thm:sigma1-completeness}).
 
 \begin{defn}
 \ollabel{defn:bd-quant}
@@ -38,23 +34,14 @@ conventionally write as $\bforall{x < t}{!A(x)}$.
 \begin{defn}
 \ollabel{defn:delta0-sigma1-pi1-frm}
 A !!{formula} $!B$ is $\Delta_0$ if it is built up from atomic
-!!{formula}s using only Boolean connectives and bounded quantification.
+!!{formula}s using only propositional connectives and bounded
+quantification.
 %
 A !!{formula} $!A$ is $\Sigma_1$ if $!A \ident \lexists[x][!B(x)]$
 where $!B$ is $\Delta_0$.
 %
-A !!{formula} $!C$ is \emph{generalized $\Sigma_1$} if it can be
-constructed from $\Delta_0$ !!{formula}s using only conjunction,
-disjunction, implication, bounded universal quantification, and
-unbounded existential quantification.
-%
-A formula $!A$ is $\Pi_1$ if $!A \ident \lforall[x][!B(x)]$
+A !!{formula} $!A$ is $\Pi_1$ if $!A \ident \lforall[x][!B(x)]$
 where $!B$ is $\Delta_0$.
-%
-A !!{formula} $!C$ is \emph{generalized $\Pi_1$} if it can be
-constructed from $\Delta_0$ !!{formula}s using only conjunction,
-disjunction, implication, bounded existential quantification, and
-unbounded universal quantification.
 \end{defn}
 
 \begin{lem}
@@ -163,67 +150,6 @@ So $\Th{Q} \Proves \lnot(t_1 < t_2)$.
 \end{proof}
 
 \begin{lem}
-\ollabel{lem:boolean-completeness}
-Suppose $!A$ and $!B$ are either atomic !!{formula}s,
-or are built up from atomic !!{formula}s using only
-Boolean connectives.
-\begin{enumerate}
-\item If $(!A \land !B)$ is correct,
-    then $\Th{Q} \Proves (!A \land !B)$.
-%
-\item If $\lnot(!A \land !B)$ is correct,
-    then $\Th{Q} \Proves \lnot(!A \land !B)$.
-%
-\item If $(!A \lor !B)$ is correct,
-    then $\Th{Q} \Proves (!A \lor !B)$.
-%
-\item If $\lnot(!A \lor !B)$ is correct,
-    then $\Th{Q} \Proves (!A \lor !B)$.
-%
-\item If $\lnot !A$ is correct,
-    then $\Th{Q} \Proves \lnot !A$.
-\end{enumerate}
-\end{lem}
-
-\begin{proof}
-We prove this by induction on formula complexity.
-%
-\begin{enumerate}
-\item Suppose $(!A \land !B)$ is correct, so $!A$ and $!B$
-are correct. By the induction hypothesis, $\Th{Q} \Proves !A$
-and $\Th{Q} \Proves !B$, so $\Th{Q} \Proves (!A \land !B)$
-by logic.
-%
-\item Suppose $\lnot(!A \land !B)$ is correct, so either
-$\lnot !A$ or $\lnot !B$ are correct. For concreteness, and
-without loss of generality, suppose the former. Then
-$\Th{Q} \Proves \lnot !A$ by the induction hypothesis, and
-hence $\Th{Q} \Proves \lnot(!A \land !B)$ by logic.
-%
-\item Suppose $(!A \lor !B)$ is correct, so either
-$!A$ is correct or $!B$ is correct. Suppose the former.
-Then by the induction hypothesis $\Th{Q} \Proves !A$, and
-hence $\Th{Q} \Proves (!A \lor !B)$ by logic.
-%
-\item Suppose $\lnot(!A \lor !B)$ is correct, so $\lnot !A$
-and $\lnot !B$ are correct. Then $\Th{Q} \Proves \lnot !A$
-and $\Th{Q} \Proves \lnot !B$ by the induction hypothesis.
-Consequently, $\Th{Q} \Proves \lnot(!A \land !B)$ by logic.
-%
-\item Suppose $\lnot !A$ is correct, so $!A$ is not correct
-and $\Th{Q} \not\Proves !A$. Either $!A$ is atomic or $!A$
-has the form $\lnot\lnot !B$, $\lnot(!B \land !C)$, or
-$\lnot(!B \lor !C)$. If $!A$ is atomic then by
-\olref{lem:atomic-completeness}, $\Th{Q} \Proves \lnot !A$.
-The other cases are dealt with above, except $\lnot\lnot !B$.
-By logic this is provably equivalent (in $\Th{Q}$) to $!B$,
-which is correct since $\lnot !A \ident \lnot\lnot !B$ is
-correct, so by the induction hypothesis we have that
-$\Th{Q} \Proves \lnot !A$.
-\end{enumerate}
-\end{proof}
-
-\begin{lem}
 \ollabel{lem:bounded-quant-equiv}
 Suppose $!A$ is a !!{formula}. Then
 \begin{enumerate}
@@ -244,8 +170,8 @@ Suppose $!A$ is a !!{formula}. Then
     %
     We therefore suppose that $t^\Struct{N} = k+1$ for some
     natural number $k$. By \olref{lem:q-proves-clterm-id} we
-    can assume that we are working with a formula of the form
-    $\bforall{x<\num{k+1}}{!A(x)}$.
+    can assume that we are working with a !!{formula} of the
+    form $\bforall{x<\num{k+1}}{!A(x)}$.
     
     Suppose that $\Th{Q} \Proves \bforall{x<\num{k+1}}{!A(x)}$,
     and let $n \leq k$. Since $\Th{Q} \Proves \num n < \num{k+1}$
@@ -263,7 +189,7 @@ Suppose $!A$ is a !!{formula}. Then
     $\bforall{x<\num{k+1}}!A(x)$ follows.
     
     The proof of the equivalence for bounded existentially
-    quantified formulas is similar.
+    quantified !!{formula}s is similar.
 \end{proof}
 
 \begin{prob}
@@ -273,57 +199,102 @@ Give a detailed proof of the existential case in
 
 \begin{lem}
 \ollabel{lem:delta0-completeness}
-If $!A$ is a correct $\Delta_0$ sentence,
-then $\Th{Q} \Proves !A$.
+If $!A$ is a $\Delta_0$ !!{sentence} which is true in
+$\Struct{N}$, then $\Th{Q} \Proves !A$.
 \end{lem}
 
 \begin{proof}
-By induction on !!{formula} complexity.
+We prove this by induction on !!{formula} complexity.
 %
-Suppose $!A$ is a correct atomic formula. Then
-$\Th{Q} \vdash !A$ by \olref{lem:atomic-completeness}.
+The base case is given by \olref{lem:atomic-completeness},
+so we move to the induction step. For simplicity we split
+the case of negation into subcases depending on the
+structure of the !!{formula} to which the negation is
+applied.
+
+\begin{enumerate}
+\item Suppose $(!A \land !B)$ is true in $\Struct{N}$,
+so $!A$ and $!B$ are true in $\Struct{N}$.
+By the induction hypothesis, $\Th{Q} \Proves !A$ and
+$\Th{Q} \Proves !B$,
+so $\Th{Q} \Proves (!A \land !B)$ by logic.
 %
-If $!A$ is a Boolean combination of correct $\Delta_0$
-formulas, we apply \olref{lem:boolean-completeness}.
+\item Suppose $\lnot (!A \land !B)$ is true in $\Struct{N}$,
+so either $\lnot !A$ or $\lnot !B$ is true in $\Struct{N}$.
+Without loss of generality, suppose the former. By the
+induction hypothesis $\Th{Q} \Proves \lnot !A$, and hence
+$\Th{Q} \Proves \lnot (!A \land !B)$ by logic.
 %
-If $!A$ has the form $\bforall{x<t}!B(x)$,
-then $\Th{Q} \Proves \bforall{x<t}!B(x) \liff
-!B(\num 0) \land \dotsc !B(\num{t^\Struct{N}-1})$ by
-\olref{lem:bounded-quant-equiv}. By the induction
-hypothesis, if $!B(\num n)$ is correct for all
-$n < t^\Struct{N}$ then $\Th{Q} \Proves !B(\num 0)
-\land \dotsc !B(\num t-1)$, so $\Th{Q} \Proves
-\bforall{x<t}!B(x)$. The case for bounded existential
-quantification parallels this one.
+\item Suppose $(!A \lor !B)$ is true in $\Struct{N}$, so
+either $!A$ is true in $\Struct{N}$ or $!B$ is true in
+$\Struct{N}$. Without loss of generality, suppose the former
+holds. By the induction hypothesis $\Th{Q} \Proves !A$, and
+hence $\Th{Q} \Proves (!A \lor !B)$ by logic.
+%
+\item Suppose $\lnot(!A \lor !B)$ is true in $\Struct{N}$,
+so $\lnot !A$ and $\lnot !B$ are true in $\Struct{N}$.
+Then $\Th{Q} \Proves \lnot !A$ and $\Th{Q} \Proves \lnot !B$
+by the induction hypothesis. Consequently,
+$\Th{Q} \Proves \lnot(!A \lor !B)$ by logic.
+%
+\item Suppose that $\bforall{x<t}!A(x)$ is true in
+$\Struct{N}$, where $t$ is a closed term. By the induction
+hypothesis and logic, if $!A(\num n)$ is true in $\Struct{N}$
+for all $n < t^\Struct{N}$ then $\Th{Q} \Proves
+!A(\num 0) \land \dots \land !A(\num{t^\Struct{N}-1})$.
+By \olref{lem:bounded-quant-equiv} it follows that
+$\Th{Q} \Proves \bforall{x<t}!A(x)$.
+%
+\item The case for the bounded existential quantifier, where
+we have a !!{sentence} of the form $\bexists{x < t}!A(x)$,
+is similar to that for the bounded universal quantifier.
+%
+\item Suppose that $\lnot \bforall{x<t}!A(x)$ is true in
+$\Struct{N}$, where $t$ is a closed term. This !!{sentence}
+is equivalent to the !!{sentence} $\bexists{x<t}\lnot!A(x)$,
+with the equivalence derivable in $\Th{Q}$, so we may apply
+the reasoning for bounded existential quantifiers.
+%
+\item Similarly, suppose that $\lnot \bexists{x<t}!A(x)$ is
+true in $\Struct{N}$, where $t$ is a closed term. This
+!!{sentence} is equivalent in $\Th{Q}$ to
+$\bforall{x<t}\lnot!A(x)$, and so we may apply the reasoning
+for bounded universal quantifiers.
+%
+\item Finally, suppose $\lnot !A$ is true in $\Struct{N}$.
+The only cases remaining are when $!A$ is atomic and when
+$\lnot !A \ident \lnot\lnot !B$ for some $\Delta_0$
+!!{sentence} $!B$. If $!A$ is atomic then by
+\olref{lem:atomic-completeness}, $\Th{Q} \Proves \lnot !A$.
+If $\lnot !A \ident \lnot\lnot !B$, then by logic it is
+provably equivalent in $\Th{Q}$ to $!B$, which is true in
+$\Struct{N}$ since $\lnot !A$ is true in $\Struct{N}$.
+By the induction hypothesis we therefore have that
+$\Th{Q} \Proves \lnot !A$.
+\end{enumerate}
 \end{proof}
+
+\begin{prob}
+Give a detailed proof of the existential case in
+\olref{lem:delta0-completeness}.
+\end{prob}
 
 \begin{thm}
 \ollabel{thm:sigma1-completeness}
-If $!A$ is a correct $\Sigma_1$ sentence,
-then $\Th{Q} \Proves !A$.
+If $!A$ is a $\Sigma_1$ !!{sentence} which is true in
+$\Struct{N}$, then $\Th{Q} \Proves !A$.
 \end{thm}
 
 \begin{proof}
-Let $\lexists{x}!A(x)$ be a correct $\Sigma_1$ sentence.
-By correctness there exists a natural number $n$ and a
-variable assignment $s$ such that $s(x) = n$ and
+If $\lexists{x}!A(x)$ is a $\Sigma_1$ !!{sentence} which
+is true in $\Struct{N}$, then there exists a natural number
+$n$ and a variable assignment $s$ such that $s(x) = n$ and
 $\Struct{N},s \Entails !A(x)$. By standard facts about
 the satisfaction relation it follows that
 $\Struct{N} \Entails !A(\num n)$. But $!A(\num n)$ is a
-$\Delta_0$ formula, so by \olref{lem:delta0-completeness}
+$\Delta_0$ !!{formula}, so by \olref{lem:delta0-completeness}
 we have that $\Th{Q} \Proves !A(\num n)$, and hence by
 logic we also have that $\Th{Q} \Proves \exists{x}!A(x)$.
 \end{proof}
-
-Note that $\Sigma_1$ !!{formula}s are not closed under Boolean
-operations. For example, $\OProv[\Th{PA}](x)$ is a $\Sigma_1$
-!!{formula} but $\lnot\OProv[\Th{PA}](x)$ is not. One can show that
-there is a $\Sigma_1$ sentence $!B$ such that
-$\Th{PA} \Proves \lnot!B \liff !G_\Th{PA}$.
-Since, if $\Th{PA}$ is consistent, $\Th{PA} \Proves/ !G_\Th{PA}$
-by the first incompleteness theorem, $\Th{PA} \Proves/ \lnot!B$ and
-a fortiori $\Th{Q} \Proves/ \lnot!B$. $\lnot!B$ is therefore not a
-$\Sigma_1$ !!{formula}, since this would contradict
-\olref{thm:sigma1-completeness}.
 
 \end{document}
