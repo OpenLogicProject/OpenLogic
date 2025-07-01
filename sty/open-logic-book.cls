@@ -533,7 +533,9 @@ Tim Button, \emph{University College London}
 
 Walter Dean, \emph{University of Warwick}
 
-Gillian Russell, \emph{Dianoia Institute of Philosophy}
+Benedict Eastaugh, \emph{University of Warwick}
+
+Gillian Russell, \emph{Australian National University}
 
 Nicole Wyatt, \emph{University of Calgary}
 
