@@ -12,9 +12,9 @@
 Despite the incompleteness of $\Th{Q}$ and its consistent, axiomatizable
 extensions, we have seen that $\Th{Q}$ does prove many basic facts about
 numerals. In fact, this can be extended quite considerably. To understand
-the scope of what can be proved in $\Th{Q}$, we introduce the notions of
+the scope of what can be proved in~$\Th{Q}$, we introduce the notions of
 $\Delta_0$, $\Sigma_1$, and $\Pi_1$ !!{formula}s. Roughly speaking, a
-$\Sigma_1$ !!{formula} is one of the form $\lexists{x}!A(x)$, where $!A$
+$\Sigma_1$ !!{formula} is one of the form $\lexists[x][!B(x)]$, where $!B$
 is constructed using only propositional connectives and bounded
 quantifiers. We shall show that if $!A$ is a $\Sigma_1$ !!{sentence}
 which is true in $\Struct{N}$, then $\Th{Q} \Proves !A$
@@ -46,20 +46,20 @@ where $!B$ is $\Delta_0$.
 
 \begin{lem}
 \ollabel{lem:q-proves-clterm-id} Suppose $t$ is a closed term such that
-$\Assign{t}{N} = n$. Then $\Th{Q} \Proves \eq[t][\num n]$.
+$\Value{t}{N} = n$. Then $\Th{Q} \Proves \eq[t][\num n]$.
 \end{lem}
 
 \begin{proof}
-We prove this by induction on the complexity of $t$. For the base case,
-${\Obj 0}^\Struct{N} = 0$, and $\Th{Q} \Proves \eq[\Obj 0][\num 0]$
+We prove this by induction on the complexity of~$t$. For the base case,
+$\Value{\Obj 0}{N} = 0$, and $\Th{Q} \Proves \eq[\Obj 0][\num 0]$
 since $\num 0 \ident \Obj 0$.
 %
 For the inductive case, let $t_1$ and $t_2$ be terms such that
-$t_1^\Struct{N} = n_1$, $t_2^\Struct{N} = n_2$,
+$\Value{t_1}{N} = n_1$, $\Value{t_2}{N} = n_2$,
 $\Th{Q} \Proves \eq[t_1][\num n_1]$, and
 $\Th{Q} \Proves \eq[t_2][\num n_2]$.
 
-Then $(t_1')^\Struct{N} = n_1 + 1$, and we have that $\Th{Q} \Proves
+Then $\Value{(t_1')}{N} = n_1 + 1$, and we have that $\Th{Q} \Proves
 \eq[t_1'][{\num n_1}']$ by the first-order rules for identity applied
 to the induction hypothesis and the !!{formula}
 $\eq[\num{n_1}'][\num{n_1}']$,
@@ -67,50 +67,50 @@ so we have $\Th{Q} \Proves \eq[t_1'][\num{n_1 + 1}]$
 by the definition of numerals.
 
 For sums we have
-$$
-      (t_1 + t_2)^\mathfrak{N}
-    = t_1^\mathfrak{N} + t_2^\mathfrak{N}
+\[
+      \Value{(t_1 + t_2)}{N}
+    = \Value{t_1}{N} + \Value{t_2}{N}
     = n_1 + n_2.
-$$
+\]
 By the induction hypothesis and the rules for identity,
-$\Th{Q} \Proves \eq[t_1 + t_2][\num n_1 + t_2]$, and then
-$\Th{Q} \Proves \eq[t_1 + t_2][\num n_1 + \num n_2]$
+$\Th{Q} \Proves \eq[t_1 + t_2][\num{n_1} + t_2]$, and then
+$\Th{Q} \Proves \eq[t_1 + t_2][\num{n_1} + \num{n_2}]$
 by a second application of the rules for identity.
 By \olref[inc][req][bre]{lem:q-proves-add},
-$\Th{Q} \Proves \eq[\num n_1 + \num n_2][\num{n_1 + n_2}]$,
+$\Th{Q} \Proves \eq[\num{n_1} + \num{n_2}][\num{n_1 + n_2}]$,
 so $\Th{Q} \Proves \eq[t_1 + t_2][\num{n_1 + n_2}]$.
 
-Similar reasoning also works for $\times$, using
+Similar reasoning also works for~$\times$, using
 \olref[inc][req][bre]{lem:q-proves-mult}.
 %
 Since this exhausts the closed terms of arithmetic, we have that
-$\Th{Q} \Proves \eq[t][\num n]$ for all closed terms $t$ such that
-$t^\Struct{N} = n$.
+$\Th{Q} \Proves \eq[t][\num n]$ for all closed terms~$t$ such that
+$\Value{t}{N} = n$.
 \end{proof}
 
 \begin{prob}
 Prove in detail the part of \olref{lem:q-proves-clterm-id}
-involving $\times$.
+involving~$\times$.
 \end{prob}
 
 \begin{lem}
 \ollabel{lem:atomic-completeness}
 Suppose $t_1$ and $t_2$ are closed terms. Then
 \begin{enumerate}
-\item If $t_1^\Struct{N} = t_2^\Struct{N}$,
+\item If $\Value{t_1}{N} = \Value{t_2}{N}$,
     then $\Th{Q} \Proves \eq[t_1][t_2]$.
-\item If $t_1^\Struct{N} \neq t_2^\Struct{N}$,
+\item If $\Value{t_1}{N} \neq \Value{t_2}{N}$,
     then $\Th{Q} \Proves \eq/[t_1][t_2]$.
-\item If $t_1^\Struct{N} < t_2^\Struct{N}$,
+\item If $\Value{t_1}{N} < \Value{t_2}{N}$,
     then $\Th{Q} \Proves t_1 < t_2$.
-\item If $t_2^\Struct{N} \leq t_1^\Struct{N}$,
+\item If $\Value{t_2}{N} \leq \Value{t_1}{N}$,
     then $\Th{Q} \Proves \lnot(t_1 < t_2)$.
 \end{enumerate}
 \end{lem}
 
 \begin{proof}
-Given terms $t_1$ and $t_2$, we fix $n = t_1^\mathfrak{N}$ and
-$m = t_2^\mathfrak{N}$.
+Given terms $t_1$ and $t_2$, we fix $n = \Value{t_1}{N}$ and
+$m = \Value{t_2}{N}$.
 
 Suppose $!A \ident t_1 = t_2$. By \olref{lem:q-proves-clterm-id},
 $\Th{Q} \Proves \eq[t_1][\num n]$ and $\Th{Q} \Proves \eq[t_2][\num n]$.
@@ -120,8 +120,8 @@ If $n \neq m$ then $\Th{Q} \Proves \eq/[\num n][\num m]$,
 and by the transitivity of identity again,
 $\Th{Q} \Proves \eq/[t_1][t_2]$.
 
-Now let $!A \ident t_1 < t_2$. For both cases, we rely on axiom $!Q_8$,
-which states that $x < y \leftrightarrow \lexists[z][\eq[z' + x][y]]$
+Now let $!A \ident t_1 < t_2$. For both cases, we rely on axiom~$!Q_8$,
+which states that $x < y \liff \lexists[z][\eq[z' + x][y]]$
 for all $x,y$.
 
 Suppose $\Sat{N}{t_1 < t_2}$. Then there exists some $k \in \Nat$
@@ -132,45 +132,45 @@ $\Th{Q} \Proves \eq[\num n + {\num k}'][\num m]$.
 By the transitivity of identity it follows that
 $\Th{Q} \Proves \eq[{\num k}' + t_1][t_2]$,
 so $\Th{Q} \Proves \lexists[z][\eq[z' + t_1][t_2]]$.
-By the right-to-left direction of $!Q_8$, $\Th{Q} \Proves t_1 < t_2$.
+By the right-to-left direction of~$!Q_8$, $\Th{Q} \Proves t_1 < t_2$.
 
-Suppose instead that $\Sat/{N}{t_1 < t_2}$, i.e.\ $m \leq n$.
+Suppose instead that $\Sat/{N}{t_1 < t_2}$, i.e., $m \leq n$.
 %
-We work in $\Th{Q}$ and assume that $t_1 < t_2$. By the left-to-right
-direction of $!Q_8$, there is some $z$ such that $\eq[z' + t_1][t_2]$.
+We work in~$\Th{Q}$ and assume that $t_1 < t_2$. By the left-to-right
+direction of~$!Q_8$, there is some~$z$ such that $\eq[z' + t_1][t_2]$.
 Since $\Th{Q} \Proves \eq[t_1][\num n]$ and
 $\Th{Q} \Proves \eq[t_2][\num m]$, $\eq[z' + \num n][\num m]$.
 %
-By an external induction on $m$ using $!Q_5$,
+By an external induction on~$m$ using~$!Q_5$,
 $\eq[z' + \num{n - m}][\Obj 0]$.
-If $m = n$ then $\eq/[z'][\Obj 0]$, giving a contradiction via $!Q_3$.
-If $m < n$ then $\eq[(z' + \num{n - m - 1})'][\Obj 0]$ by $!Q_5$ again,
-giving a contradiction via $!Q_3$.
+If $m = n$ then $\eq/[z'][\Obj 0]$, giving a contradiction via~$!Q_3$.
+If $m < n$ then $\eq[(z' + \num{n - m - 1})'][\Obj 0]$ by~$!Q_5$ again,
+giving a contradiction via~$!Q_3$.
 So $\Th{Q} \Proves \lnot(t_1 < t_2)$.
 \end{proof}
 
 \begin{lem}
 \ollabel{lem:bounded-quant-equiv}
-Suppose $!A$ is a !!{formula}. Then
+Suppose $!A$ is !!a{formula}, $t$ a closed term, and $k=\Value{t}{N}$. Then
 \begin{enumerate}
 \item $\Th{Q} \Proves \bforall{x<t}{!A(x)}$ iff $\Th{Q} \Proves
-    !A(\num 0) \land \dotsc \land !A(\num{t^\Struct{N}-1})$.
+    !A(\num 0) \land \dots \land !A(\num{k-1})$.
 \item $\Th{Q} \Proves \bexists{x<t}{!A(x)}$ iff $\Th{Q} \Proves
-    !A(\num 0) \lor \dotsc \lor !A(\num{t^\Struct{N}-1})$.
+    !A(\num 0) \lor \dots \lor !A(\num{k-1})$.
 \end{enumerate}
 \end{lem}
 
 \begin{proof}
     We prove the case for the bounded universal quantifier.
-    If $t^\Struct{N} = 0$ then the left-hand side of the
-    equivalence is provable in $\Th{Q}$, because there is no
+    If $\Value{t}{N} = 0$ then the left-hand side of the
+    equivalence is provable in~$\Th{Q}$, because there is no
     $x<\num 0$ by \olref[inc][req][min]{lem:less-zero}.
     Similarly, we can take an empty disjunction to be simply
-    $\ltrue$, which is also provable in $\Th{Q}$.
+    $\ltrue$, which is also provable in~$\Th{Q}$.
     %
-    We therefore suppose that $t^\Struct{N} = k+1$ for some
-    natural number $k$. By \olref{lem:q-proves-clterm-id} we
-    can assume that we are working with a !!{formula} of the
+    We therefore suppose that $\Value{t}{N} = k+1$ for some
+    natural number~$k$. By \olref{lem:q-proves-clterm-id} we
+    can assume that we are working with !!a{formula} of the
     form $\bforall{x<\num{k+1}}{!A(x)}$.
     
     Suppose that $\Th{Q} \Proves \bforall{x<\num{k+1}}{!A(x)}$,
@@ -178,15 +178,15 @@ Suppose $!A$ is a !!{formula}. Then
     by \olref{lem:atomic-completeness}, it follows by logic that
     $\Th{Q} \Proves !A(\num n)$. Applying this fact $k+1$ times
     for each $n \leq k$, we get that $\Th{Q} \Proves !A(\num 0)
-    \land \dotsc \land !A(\num k)$ as desired.
+    \land \dots \land !A(\num k)$ as desired.
     
     For the other direction, suppose that $\Th{Q} \Proves
-    !A(\num 0) \land \dotsc \land !A(\num k)$. Working in
+    !A(\num 0) \land \dots \land !A(\num k)$. Working in
     $\Th{Q}$, suppose that $x < \num{k+1}$.
     By \olref[inc][req][min]{lem:less-nsucc} we have that
-    $x = \num 0 \lor \dotsc \lor x = \num k$, so by logic it
-    follows that $!A(x)$, and hence the universal claim
-    $\bforall{x<\num{k+1}}!A(x)$ follows.
+    $x = \num 0 \lor \dots \lor x = \num k$, so by logic it
+    follows that~$!A(x)$, and hence the universal claim
+    $\bforall{x<\num{k+1}}{!A(x)}$ follows.
     
     The proof of the equivalence for bounded existentially
     quantified !!{formula}s is similar.
@@ -214,7 +214,7 @@ applied.
 
 \begin{enumerate}
 \item Suppose $(!A \land !B)$ is true in $\Struct{N}$,
-so $!A$ and $!B$ are true in $\Struct{N}$.
+so $!A$ and $!B$ are true in~$\Struct{N}$.
 By the induction hypothesis, $\Th{Q} \Proves !A$ and
 $\Th{Q} \Proves !B$,
 so $\Th{Q} \Proves (!A \land !B)$ by logic.
@@ -237,28 +237,28 @@ Then $\Th{Q} \Proves \lnot !A$ and $\Th{Q} \Proves \lnot !B$
 by the induction hypothesis. Consequently,
 $\Th{Q} \Proves \lnot(!A \lor !B)$ by logic.
 %
-\item Suppose that $\bforall{x<t}!A(x)$ is true in
-$\Struct{N}$, where $t$ is a closed term. By the induction
-hypothesis and logic, if $!A(\num n)$ is true in $\Struct{N}$
-for all $n < t^\Struct{N}$ then $\Th{Q} \Proves
-!A(\num 0) \land \dots \land !A(\num{t^\Struct{N}-1})$.
+\item Suppose that $\bforall{x<t}{!A(x)}$ is true 
+in~$\Struct{N}$, where $t$ is a closed term and $k=\Value{t}{N}$. By the induction
+hypothesis and logic, if $!A(\num n)$ is true in~$\Struct{N}$
+for all $n < \Value{t}{N}$ then $\Th{Q} \Proves
+!A(\num 0) \land \dots \land !A(\num{k-1})$.
 By \olref{lem:bounded-quant-equiv} it follows that
-$\Th{Q} \Proves \bforall{x<t}!A(x)$.
+$\Th{Q} \Proves \bforall{x<t}{!A(x)}$.
 %
 \item The case for the bounded existential quantifier, where
-we have a !!{sentence} of the form $\bexists{x < t}!A(x)$,
+we have !!a{sentence} of the form $\bexists{x < t}{!A(x)}$,
 is similar to that for the bounded universal quantifier.
 %
-\item Suppose that $\lnot \bforall{x<t}!A(x)$ is true in
-$\Struct{N}$, where $t$ is a closed term. This !!{sentence}
-is equivalent to the !!{sentence} $\bexists{x<t}\lnot!A(x)$,
-with the equivalence derivable in $\Th{Q}$, so we may apply
+\item Suppose that $\lnot \bforall{x<t}{!A(x)}$ is true 
+in~$\Struct{N}$, where $t$ is a closed term. This !!{sentence}
+is equivalent to the !!{sentence} $\bexists{x<t}{\lnot !A(x)}$,
+with the equivalence derivable in~$\Th{Q}$, so we may apply
 the reasoning for bounded existential quantifiers.
 %
 \item Similarly, suppose that $\lnot \bexists{x<t}!A(x)$ is
 true in $\Struct{N}$, where $t$ is a closed term. This
 !!{sentence} is equivalent in $\Th{Q}$ to
-$\bforall{x<t}\lnot!A(x)$, and so we may apply the reasoning
+$\bforall{x<t}{\lnot!A(x)}$, and so we may apply the reasoning
 for bounded universal quantifiers.
 %
 \item Finally, suppose $\lnot !A$ is true in $\Struct{N}$.
@@ -267,8 +267,8 @@ $\lnot !A \ident \lnot\lnot !B$ for some $\Delta_0$
 !!{sentence} $!B$. If $!A$ is atomic then by
 \olref{lem:atomic-completeness}, $\Th{Q} \Proves \lnot !A$.
 If $\lnot !A \ident \lnot\lnot !B$, then by logic it is
-provably equivalent in $\Th{Q}$ to $!B$, which is true in
-$\Struct{N}$ since $\lnot !A$ is true in $\Struct{N}$.
+provably equivalent in~$\Th{Q}$ to~$!B$, which is true 
+in~$\Struct{N}$ since $\lnot !A$ is true in~$\Struct{N}$.
 By the induction hypothesis we therefore have that
 $\Th{Q} \Proves \lnot !A$.
 \end{enumerate}
@@ -281,20 +281,20 @@ Give a detailed proof of the existential case in
 
 \begin{thm}
 \ollabel{thm:sigma1-completeness}
-If $!A$ is a $\Sigma_1$ !!{sentence} which is true in
-$\Struct{N}$, then $\Th{Q} \Proves !A$.
+If $!A$ is a $\Sigma_1$ !!{sentence} which is true
+in~$\Struct{N}$, then $\Th{Q} \Proves !A$.
 \end{thm}
 
 \begin{proof}
 If $\lexists{x}!A(x)$ is a $\Sigma_1$ !!{sentence} which
-is true in $\Struct{N}$, then there exists a natural number
-$n$ and a variable assignment $s$ such that $s(x) = n$ and
-$\Struct{N},s \Entails !A(x)$. By standard facts about
+is true in~$\Struct{N}$, then there exists a natural
+number~$n$ and a variable assignment~$s$ such that $s(x) = n$ and
+$\Sat{N}{!A(x)}[s]$. By standard facts about
 the satisfaction relation it follows that
-$\Struct{N} \Entails !A(\num n)$. But $!A(\num n)$ is a
+$\Sat{N}{!A(\num n)}$. But $!A(\num n)$ is a
 $\Delta_0$ !!{formula}, so by \olref{lem:delta0-completeness}
 we have that $\Th{Q} \Proves !A(\num n)$, and hence by
-logic we also have that $\Th{Q} \Proves \exists{x}!A(x)$.
+logic we also have that $\Th{Q} \Proves \lexists[x][!A(x)]$.
 \end{proof}
 
 \end{document}
