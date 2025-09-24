@@ -24,20 +24,20 @@ of a tree in graph theory. Here is a picture of a (finite) tree:
 
 \begin{center}
 \begin{tikzpicture}[nodes={draw, circle}, -]
-\node{r} [grow'=up]
-    child { node {a} 
-        child { node {c} }
-        child { node {d} }
-        child { node {e} }
+\node{$r$} [grow'=up]
+    child { node {$a$} 
+        child { node {$c$} }
+        child { node {$d$} }
+        child { node {$e$} }
     }
-    child { node {b} };
+    child { node {$b$} };
 \end{tikzpicture}
 \end{center}
 
 The lowermost node~$r$ is the root. Every node other than $r$ has
 exactly one parent node immediately below it. We can think of the relation
-a node~$x$ stands in to a node~$y$ if $y$ can be reached from $x$ by
-following edges upwards as $x$ being an ancestor of~$y$. 
+a node~$x$ stands in to a node~$y$ if $y$ can be reached from~$x$ by
+following edges upwards as $x$ being an \emph{ancestor} of~$y$. 
 
 The ancestor relation in a tree is a strict partial order. This
 motivates the set-theoretic definition. To state it we need two
@@ -69,13 +69,14 @@ has at most one predecessor.
 \end{prop}
 
 \begin{proof}
-  Suppose $y < x$ and $y' < x$ and $y \neq y$. Then both $\{y,
-  y'\} \subseteq \Setabs{z}{z<x}$. Since $\Setabs{z}{z<x}$ is
-  well-ordered by~$\le$, it has a minimal element, which obviously
-  must be either $y$ or~$y'$. So either $y \le y'$ or $y' \le y$. We
-  assumed that $y \neq y'$, so actually either $y < y'$ or $y' < y$.
-  Since we assumed that $y < x$ and $y' < x$, we furthermore have that
-  either $y < y' < x$ or $y' < y < x$. So $y$ and $y'$ cannot both be
+  Suppose $y_1 < x$ and $y_2 < x$ and $y_1 \neq y_2$. Then $\{y_1,
+  y_2\} \subseteq \Setabs{z}{z<x}$. Since $\Setabs{z}{z<x}$ is
+  well-ordered by~$\le$, its subset $\{y_1, y_2\}$ has a minimal
+  element, which obviously must be either $y_1$ or~$y_2$. So either
+  $y_1 \le y_2$ or $y_2 \le y_1$. We assumed that $y_1 \neq y_2$, so
+  actually either $y_1 < y_2$ or $y_2 < y_1$. Since we assumed that
+  $y_1 < x$ and $y_2 < x$, we furthermore have that either $y_1 < y_2
+  < x$ or $y_2 < y_1 < x$. So $y_1$ and $y_2$ cannot both be
   predecessors of~$x$.
 \end{proof}
 
@@ -110,7 +111,7 @@ many elements: every element~$s$ has exactly two successors, $s0$ and~$s1$. Its 
 Slightly more generally, the set of finite sequences of natural
 numbers~$\Nat^*$ with the extension relation~$\sqsubseteq$ is also a
 tree. It is obviously not finitely branching: every $s \in \Nat^*$ has
-infinitely many successurs~$sn$, one for every $n \in \Nat$. Every $A
+infinitely many successors~$sn$, one for every $n \in \Nat$. Every $A
 \subseteq \Nat^*$ which is closed under~$\sqsubseteq$ is a
 \emph{subtree} of~$\Nat^*$. (That is, $A$ is such that if $s \in A$
 and $s' \sqsubseteq s$, then also $s' \in A$.) All finite trees can be
