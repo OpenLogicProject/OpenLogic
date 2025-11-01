@@ -69,7 +69,7 @@ If the last step of the !!{derivation} of~$!A$ is justified by modus
 ponens, then there are !!{formula}s $!B$ and $!B \lif !A$ in the
 !!{derivation}, and the induction hypothesis applies to the part of
 the !!{derivation} ending in those !!{formula}s (since they contain at
-least one fewer steps justified by an inference).  So, by induction
+least one fewer step justified by an inference).  So, by induction
 hypothesis, $\Gamma \Entails !B$ and $\Gamma \Entails !B \lif
 !A$. Then $\Gamma \Entails !A$ by
 \iftag{FOL}
@@ -80,7 +80,7 @@ hypothesis, $\Gamma \Entails !B$ and $\Gamma \Entails !B \lif
 \QR. Then that step has the form $!C \lif \lforall[x][B(x)]$ and
 there is a preceding step $!C \lif !B(c)$ with $c$ not in $\Gamma$,
 $!C$, or $\lforall[x][B(x)]$. By induction hypothesis, $\Gamma
-\Entails !C \lif \lforall[x][B(x)]$. By
+\Entails !C \lif !B(c)$. By
 \olref[syn][sem]{thm:sem-deduction}, $\Gamma \cup \{!C\} \Entails
 !B(c)$.
 
@@ -95,9 +95,9 @@ like $\Struct{M}$ except that $\Assign{c}{M'} = s(x)$.  Since $c$ does
 not occur in~$\Gamma$ or~$!C$, $\Sat{M'}{\Gamma \cup \{!C\}}$ by
 \olref[syn][ext]{cor:extensionality-sent}. Since $\Gamma \cup \{!C\}
 \Entails !B(c)$, $\Sat{M'}{B(c)}$.  Since $!B(c)$ is !!a{sentence},
-$\Sat{M}{!B(c)}[s]$ by
+$\Sat{M'}{!B(c)}[s]$ by
 \olref[syn][ass]{prop:sentence-sat-true}. $\Sat{M'}{!B(x)}[s]$ iff
-$\Sat{M'}{!B(c)}$ by \olref[syn][ext]{prop:ext-formulas} (recall that
+$\Sat{M'}{!B(c)}[s]$ by \olref[syn][ext]{prop:ext-formulas} (recall that
 $!B(c)$ is just $\Subst{!B(x)}{c}{x}$). So,
 $\Sat{M'}{!B(x)}[s]$. Since $c$ does not occur in~$!B(x)$, by
 \olref[syn][ext]{prop:extensionality}, $\Sat{M}{!B(x)}[s]$. But $s$
