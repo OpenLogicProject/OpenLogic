@@ -94,14 +94,14 @@ The first is proved by induction on the complexity of~$t$.
   \begin{align}
     h(\Value{t}{M}[s]) 
     & = h(\Assign{f}{M}(\Value{t_1}{M}[s], \dots, \Value{t_n}{M}[s]) \notag\\
-    & = h(\Assign{f}{M}(\Value{t_1}{M'}[h \circ s], \dots,
-    \Value{t_n}{M'}[h \circ s]) \ollabel{iso-1}\\
+    & = \Assign{f}{M'}(h(\Value{t_1}{M}[s]), \dots,
+    h(\Value{t_n}{M}[s])) \ollabel{iso-1}\\
     & = \Assign{f}{M'}(\Value{t_1}{M'}[h \circ s], \dots,
     \Value{t_n}{M'}[h \circ s]) \ollabel{iso-2}\\
     & = \Value{t}{M'}[h\circ s] \notag
   \end{align}
-  Here, \olref{iso-1} follows by induction hypothesis and \olref{iso-2} by
-  \olref{defn:iso-func} of \olref{defn:isomorphism}.
+  Here, \olref{iso-1} follows by \olref{defn:iso-func} of
+  \olref{defn:isomorphism} and \olref{iso-2} by induction hypothesis.
 \end{enumerate}
 Part (b) is left as an exercise.
 
