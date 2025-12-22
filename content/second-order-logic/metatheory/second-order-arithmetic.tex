@@ -33,7 +33,7 @@ can be stated as a single sentence. $\Th{PA^2}$
 consists of the first eight axioms above plus the (second-order)
 \emph{induction axiom}:
 \[
-\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)]].
+\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif \lforall[x][X(x)])].
 \]
 It says that if a subset~$X$ of the !!{domain}
 contains~$\Assign{\Obj{0}}{M}$ and with any~$x \in \Domain{M}$ also
@@ -60,8 +60,8 @@ $\Value{\num{n}}{M} \in \Domain{M}$, so $N \subseteq \Domain{M}$.
 Now for inclusion in the other direction. Consider a variable
 assignment $s$ with $s(X) = N$. By assumption,
 \begin{align*}
-\Sat{M}{\lforall[X][(X(\Obj 0) \land \lforall[x][(X(x)
-      \lif X(x'))]) \lif \lforall[x][X(x)]]}, & \text{ thus}\\
+\Sat{M}{\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x)
+      \lif X(x'))]) \lif \lforall[x][X(x)])]}, & \text{ thus}\\
 \Sat{M}{(X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif
   \lforall[x][X(x)]}[s]. & 
 \end{align*}
