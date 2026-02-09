@@ -30,9 +30,10 @@ number indicating the type of the last inference.
     is $\tuple{0, \Gn{!A}, n}$. The number~$n$ is~$0$ if it is an
     !!{undischarged} assumption, and the numerical label otherwise.
   \item 
-    If $\delta$ ends in an inference with one, two, or three premises,
+    If $\delta$ ends in an inference with zero, one, two, or three premises,
     then $\Gn{\delta}$ is
     \begin{align*}
+      & \tuple{0, \Gn{!A}, n, k}, \\
       & \tuple{1, \Gn{\delta_1}, \Gn{!A}, n, k}, \\
       & \tuple{2, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{!A}, n, k}, \text{ or}\\
       & \tuple{3, \Gn{\delta_1}, \Gn{\delta_2}, \Gn{\delta_3}, \Gn{!A}, n,
@@ -175,12 +176,12 @@ recursive relation of the G\"odel numbers of $\delta$ and~$!A$.
     \concat \fn{EndFmla}((d)_2) \concat \Gn{)}.
   \end{multline*}
 
-  Another simple example is the $\Intro\eq$ rule. Here the premise is
-  an empty !!{derivation}, i.e., $(d)_1 = 0$, and no discharge label,
+  Another simple example is the $\Intro\eq$ rule. This has no premises,
+  so $(d)_0 = 0$, like assumptions. It also has no discharge label,
   i.e., $n=0$.  However, $!A$ must be of the form $\eq[t][t]$, for a
   closed term~$t$. Here, a primitive recursive definition is
   \begin{multline*}
-    (d)_0 = 1 \land (d)_1 = 0 \land \fn{DischargeLabel}(d) = 0 \land {}\\
+    (d)_0 = 0 \land \fn{DischargeLabel}(d) = 0 \land {}\\
     \bexists{t<d}{(\fn{ClTerm}(t) \land 
       \fn{EndFmla}(d) = {}\\
       \Gn{{\eq}(} \concat t \concat \Gn{,} \concat t \concat \Gn{)})}.
