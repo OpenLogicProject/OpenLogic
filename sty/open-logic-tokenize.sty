@@ -56,28 +56,28 @@
 \@ifpackagelater{xparse}{2018/04/17}{
 \DeclareDocumentCommand \@printtoken { t^ ta m !ts } {%
   \IfBooleanTF {#1} 
-               {\IfBooleanTF {#2}{\printtoken{A}{#3}~% 
+               {\IfBooleanTF {#2}{\Article{#3}~%
                 \IfBooleanTF {#4}
                  {\printtoken{p}{#3}}
                  {\printtoken{s}{#3}}}{%
                 \IfBooleanTF {#4}
                  {\printtoken{P}{#3}}
                  {\printtoken{S}{#3}}}}{%
-               {\IfBooleanTF {#2}{\printtoken{a}{#3}~}{}%
+               {\IfBooleanTF {#2}{\article{#3}~}{}%
                 \IfBooleanTF {#4}
                  {\printtoken{p}{#3}}
                  {\printtoken{s}{#3}}}}}
 }{
 \DeclareDocumentCommand \@printtoken { t^ ta m ts } {%
   \IfBooleanTF {#1} 
-               {\IfBooleanTF {#2}{\printtoken{A}{#3}~% 
+               {\IfBooleanTF {#2}{\Article{#3}~%
                 \IfBooleanTF {#4}
                  {\printtoken{p}{#3}}
                  {\printtoken{s}{#3}}}{%
                 \IfBooleanTF {#4}
                  {\printtoken{P}{#3}}
                  {\printtoken{S}{#3}}}}{%
-               {\IfBooleanTF {#2}{\printtoken{a}{#3}~}{}%
+               {\IfBooleanTF {#2}{\article{#3}~}{}%
                 \IfBooleanTF {#4}
                  {\printtoken{p}{#3}}
                  {\printtoken{s}{#3}}}}}
@@ -101,8 +101,13 @@
 % `\article{token}`, `\Article{token}` - just print the article for a
 % token
 
-\def\article#1{\printtoken{a}{#1}}
-\def\Article#1{\printtoken{A}{#1}}
+\def\article#1{\ifcsname TOK@a@#1\endcsname
+    \tokenformat{\usetoken{a}{#1}}\else
+    \PackageWarning{open-logic-tokenize}{Token #1 undefined}{\color{red}a}\fi}
+\def\Article#1{\ifcsname TOK@a@#1\endcsname
+    \tokenformat{\usetoken{A}{#1}}\else
+    \PackageWarning{open-logic-tokenize}{Token #1 undefined}{\color{red}A}\fi}
+%\def\Article#1{\printtoken{A}{#1}}
 
 % use shorthand mechanism from `babel.sty` to define `!!` as shorthand
 % for `\printtoken`
