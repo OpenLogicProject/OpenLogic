@@ -41,14 +41,14 @@ following edges upwards as $x$ being an \emph{ancestor} of~$y$.
 
 The ancestor relation in a tree is a strict partial order. This
 motivates the set-theoretic definition. To state it we need two
-concepts. A \emph{minimal element} in a set~$A$ partially ordered
+concepts. A \emph{least element} in a set~$A$ partially ordered
 by~$\le$ is !!a{element} $x \in A$ such that for all $y \in A$ we have
 that~$x \le y$. A set is \emph{well-ordered} by~$\le$ if every one of
-its subsets has a minimal element.
+its non-empty subsets has a least element.
 
 \begin{defn}[Tree]
 A \emph{tree} is a pair $T = \tuple{A, \le}$ such that $A$ is a set
-and $\le$ is a partial order on~$A$ with a unique minimal element
+and $\le$ is a partial order on~$A$ with a unique least element
 $r \in A$ (called the \emph{root}) such that for all $x \in A$,
 the set $\Setabs{y}{y \le x}$ is well-ordered by~$\le$.
 \end{defn}
@@ -71,7 +71,7 @@ has at most one predecessor.
 \begin{proof}
   Suppose $y_1 < x$ and $y_2 < x$ and $y_1 \neq y_2$. Then $\{y_1,
   y_2\} \subseteq \Setabs{z}{z<x}$. Since $\Setabs{z}{z<x}$ is
-  well-ordered by~$\le$, its subset $\{y_1, y_2\}$ has a minimal
+  well-ordered by~$\le$, its subset $\{y_1, y_2\}$ has a least
   element, which obviously must be either $y_1$ or~$y_2$. So either
   $y_1 \le y_2$ or $y_2 \le y_1$. We assumed that $y_1 \neq y_2$, so
   actually either $y_1 < y_2$ or $y_2 < y_1$. Since we assumed that
