@@ -1,0 +1,196 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: rules-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{rp}
+
+\olsection{Rules and \usetoken{P}{proof}}
+
+We begin by giving some definitions and fixing some terminology.
+
+Consider, for example, the two rules in \Log{G3c} that allow !!{proving}
+sequents containing $!A \land !B$ from sequents containing $!A$
+and~$!B$:
+\[
+\Axiom$ !A, !B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$ !A \land !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\qquad
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$ \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\land}}
+\BinaryInf$ \Gamma \fCenter \Delta, !A \land !B $
+\DisplayProof
+\]
+The sequents on top of the line are called the \emph{premises} and the
+sequent below the line the \emph{conclusion}. The !!{formula}s in
+$\Gamma$ and $\Delta$ in each rule are called the \emph{context} or
+the \emph{side !!{formula}s}. The !!{formula} in the conclusion that
+isn't part of the context is called the \emph{principal} !!{formula},
+and the !!{formula}s in the premises not in the context the
+\emph{active} (or \emph{auxiliary}) !!{formula}s.
+
+The quantifier rules are slightly more complicated. E.g., the rules in
+\Log{G1c} for $\lforall$ are:
+\[\Axiom$ !A(t), \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$ \lforall[x][!A(x)],\Gamma \fCenter \Delta$
+\DisplayProof
+\qquad
+\Axiom$ \Gamma \fCenter \Delta, !A(a) $
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$ \Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+\DisplayProof
+\]
+In the \LeftR{\lforall} rule, the active !!{formula} is~$!A(t)$ where
+$t$~is a closed term, i.e., a term without variables. Such an
+inference is correct---that is, it matches the schematic rule
+\LeftR{\lforall}---if there is some !!{formula}~$!A$, some
+variable~$x$, and some closed term~$t$ such that the principal
+!!{formula} in the conclusion is $\lforall[x][!A]$ and the active
+!!{formula} in the premise is~$\Subst{!A}{t}{x}$. The
+\RightR{\lforall} rule works the same, except that instead of any
+term~$t$ the active !!{formula} in the premise must
+be~$\Subst{!A}{a}{x}$, where $a$ is !!a{constant}. This constant is
+called the \emph{eigenvariable} of the \RightR{\lforall} inference.
+The inference is only correct the lower sequent does not contain~$a$,
+that is, if $a$ does not occur in $\Gamma$, $\Delta$, or~$!A$. This is
+called the \emph{eigenvariable condition}.
+
+Sequent systems like \Log{G1c} and \Log{G3c} consists of a collection
+of such schematically specified rules together with some (also
+schematically specified) sequents that count as axioms.
+!!^{proof}s in such a system are finite trees of sequents that
+are inductively generated from axioms using the rules of inference.
+Each leaf is an axiom, and every other sequent follows from the
+sequents immediately above it by one of the inference rules of the
+system.
+
+\begin{defn}\ollabel{defn:proof}
+\emph{!!^{proof}s} in a sequent system are finite trees of
+sequents inductively as follows:
+\begin{enumerate}
+  \item\ollabel{defn:prf:axiom} Every axiom is !!a{proof}.
+  \item\ollabel{defn:prf:one-prem} If $\pi_1$ is !!a{proof} ending in
+  a sequent~$S_1$, and $S$ is a sequent that follows from~$S_1$ by a
+  one-premise rule~$R$, then
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \DeduceC{$S_1$}
+  \RightLabel{$R$}
+  \UnaryInfC{$S$}
+  \DisplayProof
+  \]
+  is !!a{proof}.
+  \item\ollabel{defn:prf:two-prem} If $\pi_1$ and $\pi_2$ are !!{proof}s ending in sequents~$S_1$ and~$S_2$, and $S$ is a
+  sequent that follows from~$S_1$ and$S_2$ by a two-premise rule~$R$, then
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \DeduceC{$S_1$}
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \DeduceC{$S_2$}
+  \RightLabel{$R$}
+  \BinaryInfC{$S$}
+  \DisplayProof
+  \]
+  is !!a{proof}.
+\end{enumerate}
+\end{defn}
+
+\Olref{defn:proof} defines !!{proof}s as trees of sequents. We think
+of these trees as growing ``upwards.'' The topmost (leaf) nodes of
+this tree are axioms and called \emph{initial sequents}. The
+bottom-most sequent is called the \emph{end-sequent}. If $\pi$ is
+!!a{proof} with end-sequent~$S$ we also write $\pi \Proves S$. If
+there is !!a{proof} of a sequent~$S$ we write $\Proves S$, possibly
+indicating the system in which the proof exists on the left of the
+$\Proves$~symbol, e.g., $\Log{G1c} \Proves !A, !B \Sequent !A \land
+!B$. Every sequent in !!a{proof}, with the exception of initial
+sequents, is the \emph{conclusion} of an inference by some rule~$R$.
+The one or two sequents standing immediately above a sequent in
+!!a{proof} (i.e., the parents of the node) are called the
+\emph{premises} of the inference.
+
+The !!{proof}s used in the inductive construction of
+!!a{proof} are called its \emph{sub-!!{proof}s}. The
+sub-!!{proof}s ending in the premises of an inference are called
+the \emph{immediate sub-!!{proof}s} of the inference.
+
+It is often necessary to measure the complexity of !!{proof}s as
+a natural number. We could simply count the number of sequents in
+!!a{proof}, but often a more useful measure is the !!{height} of
+!!a{proof}: it is the maximal number of sequents between the
+end-sequent and an initial sequent. We can also give an inductive
+definition.
+
+\begin{defn}
+The \emph{!!{height}}~$\pheight{\pi}$ of !!a{proof}~$\pi$ is
+inductively defined as follows.
+\begin{enumerate}
+  \item If $\pi$ consists of a single axiom, $\pheight{\pi} = 0$.
+  \item If $\pi$ ends in an inference with one premise with immediate
+  sub-!!{proof}~$\pi_1$, then $\pheight{\pi} = \pheight{\pi_1} + 1$.
+  \item If $\pi$ ends in an inference with two premises with immediate
+  sub-!!{proof}s~$\pi_1$ and~$\pi_2$, then $\pheight{\pi} =
+  \max(\pheight{\pi_1}, \pheight{\pi_2}) + 1$.
+\end{enumerate}
+If a sequent~$S$ has !!a{proof} of height $\le n$, we write $\Proves[n] S$.
+\end{defn}
+
+\begin{ex}
+In \Log{G3c}, any sequent of the form $!C, \Gamma \Sequent \Delta, !C$
+is an axiom, where $!C$ must be atomic. Suppose $!D$ and $!E$ are
+atomic sentences. Then $!D, !E \Sequent !D$ and $!D, !E \Sequent !E$
+are instances of the axiom $!C, \Gamma \Sequent \Delta, !C$. E.g., if
+we take $!C \ident !E$, $\Gamma = \{!D\}$ and $\Delta = \emptyset$ in
+$!C, \Gamma \Sequent \Delta, !C$ we get exactly the sequent $!D, !E
+\Sequent !E$. (Remember that we are dealing with multi\emph{sets} and
+so $!D, !E \Sequent !E$ and $!E, !D \Sequent !D$ are the same
+sequent.)
+
+Since $!D, !E \Sequent !D$ is an instance of an axiom of~\Log{G3c}, it
+(by itself) counts as !!a{proof} in~\Log{G3c}, and so does $!D, !E
+\Sequent !E$ by \olref{defn:proof}\olref{defn:prf:axiom}. Let's
+call them $\pi_1$ and~$\pi_2$. By \olref{defn:prf:two-prem}, we can
+take these two !!{proof}s and generate a new one ($\pi_3$) using the
+two-premise rule~$\RightR{\land}$:
+\[
+\Axiom$!D, !E \fCenter !D$
+\Axiom$!D, !E \fCenter !E$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !E  \fCenter !D \land !E $
+\DisplayProof
+\]
+From $\pi_3$ in turn we obtain the !!{proof}~$\pi_4$
+\[
+\Axiom$!D, !E \fCenter !D$
+\Axiom$!D, !E \fCenter !E$
+\RightLabel{\RightR{\land}}
+\insertBetweenHyps{\hspace{5ex}}
+\BinaryInf$!D, !E  \fCenter !D \land !E $
+\LeftSubproofLabel{$\pi_3$}
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!D \land !E  \fCenter !D \land !E$
+\RightSubproofLabel{$\pi_4$}
+\DisplayProof
+\]
+using the one-premise rule~$\LeftR{\land}$ (using
+\olref{defn:proof}\olref{defn:prf:one-prem}). The immediate
+sub-!!{proof} of the last inference in~$\pi_4$ is~$\pi_3$. The
+immediate sub-!!{proof}s of the $\RightR{\land}$ inference are $\pi_1$
+and~$\pi_2$. The sub-!!{proof}s of $\pi_4$ are all of $\pi_1$,
+$\pi_2$, $\pi_3$, and $\pi_4$ itself. We have $\pheight{\pi_1} =
+\pheight{\pi_2} = 0$, $\pheight{\pi_3} = 1$ and $\pheight{\pi_4} = 2$.
+We have shown that $\Log{G3c} \Proves[4] !D \land !E  \fCenter !D
+\land !E$ for any atomic $!D$ and~$!E$.
+\end{ex}
+
+\end{document}

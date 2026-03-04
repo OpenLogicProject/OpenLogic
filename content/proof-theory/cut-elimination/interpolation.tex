@@ -1,0 +1,585 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: interpolation
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{itp}
+
+\olsection{Maehara's Lemma and Craig's Interpolation Theorem}
+
+The interpolation theorem, due to William Craig, states that if $!A
+\Entails !B$ then there is !!a{sentence}~$!C$ (the \emph{interpolant})
+such that $!A \Entails !C$ and $!C \Entails !B$. Importantly, the
+interpolant~$!C$ can be chosen so that the !!{constant}s and
+!!{predicate}s occurring in~$!C$ all occur in both~$!A$ and~$!B$. (We
+assume that no !!{function}s are involved.) Without this restriction,
+$!A$~and $!B$ could trivially serve as interpolants.
+
+The interpolation theorem holds for classical first-order logic and
+has been called the ``last important property of first-order logic''
+to be discovered. It has important applications in model theory, and
+automated reasoning. Its original motivation and application was in
+the philosophy of science, since it can be used to study the
+primitives by which a theory can or cannot be axiomatized. It also
+implies Beth's definability theorem, which states that if a theory can
+implicitly define a concept, if can define it explicitly.
+
+Like many results in mathematical logic, the interpolation theorem can
+be proved both using the methods of model theory and those of proof
+theory. The advantage of proof theoretic methods is that not only do
+they show the existence of an interpolant, but provide an algorithm
+that computes the interpolant from !!a{proof} that $!A \Entails !B$,
+e.g., !!a{proof} in~\Log{G3c} of $!A \Sequent !B$.
+
+Let $\Lang L(!A)$ be the set of !!{constant}s and !!{predicate}s
+in~$!A$ and $\Lang L(\Gamma) = \bigcup \Setabs{\Lang L(!A)}{!A \in
+\Gamma}$. Throughout this section, we assume we are dealing with
+!!{formula}s without !!{function}s.
+
+\begin{thm}[Craig's Interpolation Theorem]\ollabel{thm:interpolation}
+Let the !!{language} of~$!A$ be $\Lang L(!A)$ and that of $!B$ be
+$\Lang L(!B)$. If $\Log{G3c} \Proves !A \Sequent !B$ then there is
+!!a{formula}~$!C$ in the !!{language}~$\Lang L(!A) \cap \Lang L(!B)$
+such that $\Log{G3c} \Proves !A \Sequent !C$ and $\Log{G3c} \Proves !C \Sequent !B$.
+\end{thm}
+
+We prove a generalization of the interpolation theorem to make use of
+the structure of !!{proof}s in~\Log{G3c}. To this end, imagine the
+antecendent and succedents of sequents to be separated into two parts
+each. We write $\maeh{\Gamma_1}{\Gamma_2} \Sequent \maeh{\Delta_1}{\Delta_2}$ to
+indicate that $\Gamma_1$ and $\Delta_1$ belong to the first part and
+$\Gamma_2$ and $\Delta_2$ to the second part. The interpolation
+theorem then follows immediately from the following lemma.
+
+\begin{lem}[Maehara's Lemma]\ollabel{lem:maehara} If $\Log{G3c}
+\Proves \maeh{\Gamma_1}{\Gamma_2} \Sequent \maeh{\Delta_1}{\Delta_2}$
+then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
+\Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)$ such that $\Log{G3c}
+\Proves \Gamma_1 \Sequent \Delta_1, !C$ and $\Log{G3c} \Proves !C,
+\Gamma_2 \Sequent \Delta_2$.
+\end{lem}
+
+\begin{proof}
+  Assume that $\pi \Proves \maeh{\Gamma_1}{\Gamma_2} \Sequent
+  \maeh{\Delta_1}{\Delta_2}$. We prove the claim by induction on
+  $n=\pheight{\pi}$.
+
+  If $n=0$, then $\maeh{\Gamma_1}{\Gamma_2} \Sequent
+  \maeh{\Delta_1}{\Delta_2}$ is an axiom, and some atomic
+  !!{formula}~$!A$ occurs in both $\Gamma_1, \Gamma_2$ and $\Delta_1,
+  \Delta_2$. There are four cases depending on whether $!A$~belongs to
+  the first part or the second on the left, and whether it belongs to
+  the first or second part on the right.
+  \begin{enumerate}
+    \item $!A \in \Gamma_1$ and $!A \in \Delta_1$. We want a~$!C$ such
+    that both $\Gamma_1 \Sequent \Delta_1, !C$ and $!C, \Gamma_2
+    \Sequent \Delta_2$ are !!{provable}. The first is already an axiom
+    regardless of how we pick~$!C$ since $!A$ occurs on both the left
+    and right. Our only option to guarantee that $!C, \Gamma_2
+    \Sequent \Delta_2$ is !!{provable} is to let $!C \ident \lfalse$.
+    \item $!A \in \Gamma_1$ and $!A \in \Delta_2$. Then $\Gamma_1
+    \Sequent \Delta_1, !A$ and $!A, \Gamma_2 \Sequent \Delta_2$ are
+    both axioms, so we can pick $!C \ident !A$.
+    \item $!A \in \Gamma_2$ and $!A \in \Delta_1$. Then $!A, \Gamma_1
+    \Sequent \Delta_1$ and $\Gamma_2 \Sequent \Delta_2, !A$ would be 
+    axioms, but they have~$!A$ on the wrong sides. So $!A$ isn't the
+    interpolant. However, using $\RightR{\lnot}$ and $\LeftR{\lnot}$
+    we can !!{prove} $\Gamma_1
+    \Sequent \Delta_1, \lnot!A$ and $\lnot !A, \Gamma_2 \Sequent
+    \Delta_2$.
+    \item $!A \in \Gamma_2$ and $!A \in \Delta_2$. Exercise.
+  \end{enumerate}
+  The cases where $\maeh{\Gamma_1}{\Gamma_2} \Sequent
+  \maeh{\Delta_1}{\Delta_2}$ is an axiom because $\lfalse \in
+  \Gamma_1$ or $\lfalse \in \Gamma_2$ are left as exercises.
+
+  If $n>0$, $\pi$ ends in a logical inference. We have to distinguish
+  cases cases according to which rule was used, and to which part the
+  principal formula belongs. In each case we can use the induction
+  hypothesis that the lemma holds for all !!{proof}s~$\pi_1$ with
+  $\pheight{\pi_1} < n$, and however the end-sequent of~$\pi_1$ may be
+  partitioned into two parts. Let's consider some specific cases.
+  \begin{enumerate}
+    \item $\pi$ ends in $\RightR{\lnot}$ with principal formula~$\lnot
+    !A$. We have two cases: depending on whether $\lnot !A$ belongs to
+    the first or second part, $\pi$ ends in either
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{!A, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lnot !A}{\Delta_2}$
+    \DisplayProof
+    \]
+    or
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{!A, \Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, \lnot !A}$
+    \DisplayProof
+    \]
+    Note that if the principal !!{formula}~$\lnot !A$ belongs to the
+    first part we assigned the active !!{formula}~$!A$ also to the
+    first part the premise. This is a choice we get to make. The
+    inductive hypothesis would also apply if we assigned the active
+    formula to the other part, but then we would not be able to find
+    an interpolant (exercise: try it).
+
+    Consider the first situation first, where $\lnot !A$~belongs
+    to the first part. By inductive hypothesis, there is an
+    interpolant of the end-sequent of~$\pi_1$, i.e., !!a{formula}~$!C_1$
+    such that both
+    \begin{align*}
+    !A, \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{and} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2
+    \intertext{are provable. What we need is !!a{formula}~$!C$ such that
+    both of the following are !!{provable}:}
+    \Gamma_1 & \Sequent \Delta_1, \lnot !A, !C &&\text{and} &
+    !C, \Gamma_2 & \Sequent \Delta_2
+    \end{align*}
+    Clearly, we can just take $!C \ident !C_1$: the inductive hypothesis
+    already told us that the sequent on the right is !!{provable}, and
+    the sequent on the left follows from the sequent we got from the
+    inductive hypothesis by~$\RightR{\lnot}$. The inductive hypothesis
+    also tells us that $\Lang L(!C_1) \in \Lang L(!A, \Gamma_1,
+    \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)$. Since $\Lang L(\lnot
+    !A) = \Lang L(!A)$ and $\Lang L(!C) = \Lang L(!C_1)$ we have that
+    $\Lang L(!C_1) \in \Lang L(\Gamma_1, \Delta_1, \lnot !A) \cap \Lang
+    L(\Gamma_2, \Delta_2)$.
+
+    In the second scenario the situation is slightly different
+    in that $\lnot !A$~belongs to the second part. We assign the
+    active !!{formula} in the premise also to the second part and
+    apply the inductive hypothesis to
+    \begin{align*}
+    \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{and} &
+    !C_1, !A, \Gamma_2 & \Sequent \Delta_2
+    \intertext{are provable. If we again apply the \RightR{\lnot} rule to the second of these, we get !!{proof}s of}
+    \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{and} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2, \lnot !A
+    \end{align*}
+    These are again exactly the sequents we want to be !!{provable} if
+    $!C_1$ is an interpolant; we again let $!C \ident !C_1$. $\Lang
+    L(!C_1) \in \Lang L(\Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2,
+    \Delta_2, \lnot !A)$ as before.
+    \item $\pi$ ends in $\RightR{\lif}$ with principal !!{formula}~$!A
+    \lif !B$. We again have two cases, depending on whether $!A \lif
+    !B$ belongs to the first or second part. The !!{proof}~$\pi$ ends
+    in either
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{!A, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, !B}{\Delta_2}$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, !A \lif !B}{\Delta_2}$
+    \DisplayProof
+    \]
+    or
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{!A, \Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, !B}$
+    \RightLabel{\RightR{\lnot}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, !A \lif !B}$
+    \DisplayProof
+    \]
+    Again we have assigned the active !!{formula}s to the same part in
+    the premise as the principal !!{formula} in the conclusion. In the
+    first secenario, we apply the inductive hypothesis and get
+    !!{proof}s of
+    \begin{align*}
+    !A, \Gamma_1 & \Sequent \Delta_1, !B, !C_1 &&\text{and} & !C_1, \Gamma_2 & \Sequent \Delta_2
+    \intertext{The sequent on the left is a suitable premise for \RightR{\lif}. So we have the following !!{provable} sequents:}
+    \Gamma_1 & \Sequent \Delta_1, !A \lif !B, !C_1 &&\text{and} & !C_1, \Gamma_2 & \Sequent \Delta_2
+    \end{align*}
+    This means that $!C_1$ is also an interpolant for the end-sequent
+    of~$\pi$ and we can take $!C \ident !C_1$ once more.
+    
+    The other scenario is handled the same way.
+    \item $\pi$ ends in $\LeftR{\lif}$ with principal !!{formula}~$!A
+    \lif !B$. If $!A \lif !B$ belongs to the first part, the !!{proof}~$\pi$ ends
+    in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, !A}{\Delta_2}$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\maeh{!B, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \BinaryInf$\maeh{!A \lif !B, \Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2}$
+    \DisplayProof
+    \]
+    The inductive hypothesis now gives us four !!{provable} sequents,
+    two for the interpolant $!C_1$ of the left premise and two for the
+    interpolant $!C_2$ of the second premise:
+    \begin{align*}
+    \Gamma_1 & \Sequent \Delta_1, !A, !C_1 &&\text{(1)} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2 && \text{(2)}\\
+    !B, \Gamma_1 & \Sequent \Delta_1, !C_2 &&\text{(3)} &
+    !C_2, \Gamma_2 & \Sequent \Delta_2 && \text{(4)}
+    \end{align*}
+    Sequents (1) and (3) can serve as premises of~\LeftR{\lif}, if we
+    apply weakening and add $!C_2$ on the right to~(1) and $!C_1$ on
+    the right to~(3):
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter \Delta_1, !A, !C_1, !C_2$
+    \AxiomC{}
+    \Deduce$!B, \Gamma_1 \fCenter \Delta_1, !C_1, !C_2$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \Gamma_1 \fCenter \Delta_1, !C_1, !C_2$
+    \DisplayProof
+    \]
+    By applying $\RightR{\lor}$ we get the sequent
+    \[
+    !A \lif !B, \Gamma_1 \fCenter \Delta_1, !C_1 \lor !C_2
+    \]
+    This suggests that $!C_1 \lor !C_2$ might be our interpolant in
+    this case. And indeed, we can !!{prove} the other required sequent
+    from the remaining sequents (2) and~(4):
+    \[
+    \AxiomC{}
+    \Deduce$!C_1, \Gamma_2 \fCenter \Delta_2$
+    \AxiomC{}
+    \Deduce$!C_2, \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lor}}
+    \BinaryInf$!C_1 \lor !C_2, \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    It remains to verify that $!C_1 \lor !C_2$ is in the correct
+    language. The inductive hypothesis gives us that 
+    \begin{align*}
+    \Lang L(!C_1) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A) \cap \Lang L(\Gamma_2, \Delta_2) &\text{and}\\
+    \Lang L(!C_2) & \subseteq
+    \Lang L(!B, \Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)
+    \intertext{Since}
+    \Lang L(!A) & \subseteq \Lang L(!A \lif !B) &\text{and}\\
+    \Lang L(!B) & \subseteq \Lang L(!A \lif !B)
+    \intertext{we have both}
+    \Lang L(!C_1) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A \lif !B) \cap \Lang L(\Gamma_2, \Delta_2) &\text{and}\\
+    \Lang L(!C_2) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A \lif !B) \cap \Lang L(\Gamma_2, \Delta_2)
+    \intertext{and consequently, $\Lang L (!C_1 \lor !C_2) = {}$}
+    \Lang L(!C_1) \cup \Lang L(!C_2) & \subseteq
+    \Lang L(\Gamma_1, \Delta_1, !A \lif !B) \cap \Lang L(\Gamma_2, \Delta_2),
+    \end{align*}
+    which is as required.
+
+    In the case where $!A \lif !B$ belongs to the second part, the
+    situation is different, but handled in a similar way. The
+    inductive hypothesis again gives us four !!{provable} sequents:
+    \begin{align*}
+    \Gamma_1 & \Sequent \Delta_1, !C_1 &&\text{(1)} &
+    !C_1, \Gamma_2 & \Sequent \Delta_2, !A && \text{(2)}\\
+    \Gamma_1 & \Sequent \Delta_1, !C_2 &&\text{(3)} &
+    !C_2, !B, \Gamma_2 & \Sequent \Delta_2 && \text{(4)}
+    \end{align*}
+    Now sequents (2) and (4)---plus some weakened !!{formula}s---serve as premises of~\LeftR{\lif}:
+    \[
+    \AxiomC{}
+    \Deduce$!C_1, !C_2, \Gamma_2 \fCenter \Delta_2, !A$
+    \AxiomC{}
+    \Deduce$!B, !C_1, !C_2, \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, !C_1, !C_2, \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    We again want to turn this into a sequent that has a single
+    !!{formula} built from $!C_1$ and $!C_2$, but this time we need it
+    in the antecedent (since we're now dealing with the second part).
+    Applying $\LeftR{\land}$ does the trick; we should take $!C \ident
+    (!C_1 \land !C_2)$ as the interpolant.
+    Fortuitously, we can use the remaining sequents (1) and (3) to
+    !!{prove} the corresponding sequent for the other part:
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter \Delta_1, !C_1$
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter \Delta_1, !C_2$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\Gamma_1 \fCenter \Delta_1, !C_1 \land !C_2$
+    \DisplayProof
+    \]
+    As before, we have $\Lang L(!C_1 \land !C_2) \subseteq \Lang
+    L(\Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2, !A \lif
+    !B)$.
+    \item $\pi$ ends in $\RightR{\lforall}$:
+        \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+    \maeh{\Delta_1, !A(c)}{\Delta_2}$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lforall[x][!A(x)]}{\Delta_2}$
+    \DisplayProof
+    \]
+    or
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, !A(c)}$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1}{\Delta_2, \lforall[x][!A(x)]}$
+    \DisplayProof
+    \]
+    In the first scenario, the induction hypothesis gives us !!{proof}s
+    of $\Gamma_1 \Sequent \Delta_1, !A(c), !C_1$ and $!C_1, \Gamma_2
+    \Sequent \Delta_2$. We can apply $\RightR{\lforall}$ to the first
+    to obtain $\Gamma_1 \Sequent \Delta_1, \lforall[x][!A(x)], !C_1$.
+    (The eigenvariable condition is satisfied, since it was already
+    satisfied in the \RightR{\lforall} rule at the end of~$\pi$.) Thus
+    $!C_1$ would be an interpolant if the condition that $\Lang
+    L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1, \lforall[x][!A(x)])
+    \cap \Lang L(\Gamma_2, \Delta_2)$ is satisfied. By the inductive
+    hypothesis, we have $\Lang L(!C_1) \subseteq \Lang L(\Gamma_1,
+    \Delta_1, !A(c)) \cap \Lang L(\Gamma_2, \Delta_2)$. So we have to
+    worry about~$c$---can $c$ occur in~$!C_1$? It can't. If $c$ occurs
+    in $!C_1$, we would have both $c \in \Lang L(\Gamma_1, \Delta_1,
+    !A(c))$ (which is true) and also $c \in \Lang L(\Gamma_2,
+    \Delta_2)$. But then $c$ would occur in the conclusion of the
+    $\RightR{\lforall}$ inference in~$\pi$, violating the eigenvariable
+    condition.
+    
+    The other scenario is similar.
+    \item $\pi$ ends in $\RightR{\lexists}$. We again have two
+    scenarios. We consider the scenario where $\lexists[x][!A(x)]$
+    belongs to the first part, and leave the other as an exercise.
+
+    In the first scenario, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lexists[x][!A(x)], !A(t)}{\Delta_2}$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\maeh{\Gamma_1}{\Gamma_2} \fCenter
+      \maeh{\Delta_1, \lexists[x][!A(x)]}{\Delta_2}$
+    \DisplayProof
+    \]
+    The induction hypothesis gives us !!{proof}s of $\Gamma_1 \Sequent
+    \Delta_1, \lexists[x][!A(x)], !A(t), !C_1$ and $!C_1, \Gamma_2
+    \Sequent \Delta_2$. We can apply $\RightR{\lexists}$ to the first
+    to obtain $\Gamma_1 \Sequent \Delta_1, \lexists[x][!A(x)], !C_1$.
+    Thus $!C_1$ would again be an interpolant if the condition that
+    $\Lang L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)]) \cap \Lang L(\Gamma_2, \Delta_2)$ is
+    satisfied. Here the inductive hypothesis gives us $\Lang L(!C_1)
+    \subseteq \Lang L(\Gamma_1, \Delta_1, \lexists[x][!A(x)], !A(t))
+    \cap \Lang L(\Gamma_2, \Delta_2)$. Now remember that we assumed
+    that there are no !!{function}s. That means the term~$t$ can only
+    be !!a{constant}, i.e., $t \ident b$. If $b \notin \Lang L(!C_1)$
+    or $b \in \Lang L(\Gamma_1, \Delta_1, \lexists[x][!A(x)]) \cap
+    \Lang L(\Gamma_2, \Delta_2)$ there is nothing to worry about: we
+    can take $!C_1$ as the interpolant. But what if $b \in \Lang
+    L(!C_1)$ and $b \notin \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)]) \cap \Lang L(\Gamma_2, \Delta_2)$? First of
+    all, by replacing all occurrences of~$b$ in~$!C_1$ by
+    !!a{variable}~$y$ we can write $!C_1 \ident \Subst{!C_1'}{b}{y}$
+    where $!C_1'$~does not contain~$b$. Furthermore, either $b \notin
+    \Lang L(\Gamma_1, \Delta_1, \lexists[x][!A(x)])$ or $b \notin
+    \Lang L(\Gamma_2, \Delta_2)$. We can take $!C \ident
+    \lforall[y][!C_1'(y)]$ or $!C \ident \lexists[y][!C_1'(y)]$,
+    respectively. In the first case, we have:
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], !A(b), !C_1'(b)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\Gamma_1 \fCenter \Delta_1, \lexists[x][!A(x)], !C_1'(b)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], \lforall[y][!C_1'(y)]$
+    \DisplayProof
+    \]
+    and
+    \[
+    \AxiomC{}
+    \Deduce$!C_1'(b), \lforall[y][!C_1'(y)], \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lforall}}
+    \UnaryInf$\lforall[y][!C_1'(y)], \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    The !!{proof}s of the top sequents are from the inductive
+    hypothesis (in the second one, we apply admissibility of weakening
+    with $\lforall[y][!C_1'(y)]$ in the antecedent). The eigenvariable
+    condition on \RightR{\lforall} in the first !!{proof} is satisfied
+    because $b \notin \Lang L(\Gamma_1, \Delta_1,
+    \lexists[x][!A(x)])$, and $!C_1'$~was defined so it does not
+    contain~$b$.
+    
+    In the second case, we have (from the inductive hypothesis plus
+    admissibility of weakening by~$\lexists[y][!C_1'(y)]$):
+    \[
+    \AxiomC{}
+    \Deduce$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], !A(b), \lexists[y][!C_1'(y)], !C_1'(b)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], \lexists[y][!C_1'(y)], !C_1'(b)$
+    \RightLabel{\RightR{\lexists}}
+    \UnaryInf$\Gamma_1 \fCenter
+      \Delta_1, \lexists[x][!A(x)], \lexists[y][!C_1'(y)]$
+    \DisplayProof
+    \]
+    and
+    \[
+    \AxiomC{}
+    \Deduce$!C_1'(b), \Gamma_2 \fCenter \Delta_2$
+    \RightLabel{\LeftR{\lexists}}
+    \UnaryInf$\lexists[y][!C_1'(y)], \Gamma_2 \fCenter \Delta_2$
+    \DisplayProof
+    \]
+    The eigenvariable condition on \LeftR{\lexists} in the second
+    !!{proof} is satisfied because $b \notin \Lang L(\Gamma_2,
+    \Delta_2)$, and $!C_1'$ was defined so it does not contain~$b$.
+  \end{enumerate}
+\end{proof}
+
+\begin{prob}
+Suppose we had a connective $\lnand$ with rules
+\[
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$\Gamma \fCenter \Delta, !B$
+\RightLabel{\LeftR{\lnand}}
+\BinaryInf$!A \lnand !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\quad
+\Axiom$!A, !B, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\lnand}}
+\UnaryInf$\Gamma \fCenter \Delta, !A \lnand !B$
+\DisplayProof
+\]
+Show that Maehara's Lemma still holds by carrying out the cases in the
+proof of \olref{lem:maehara} where $\pi$ ends in one of these rules.
+\end{prob}
+
+Having established Maehara's Lemma, we can use it to prove Craig's
+Interpolation Theorem.
+
+\begin{proof}[Proof of \olref{thm:interpolation}]
+  Suppose $!A \Sequent !B$ is !!{provable}. Apply \olref{lem:maehara}
+  to $\maeh{!A}{\ } \Sequent \maeh{\ }{!B}$ to obtain the
+  interpolant~$!C$. We have $\Proves !A \Sequent !C$ and $\Proves !C
+  \Sequent !B$.
+\end{proof}
+
+Suppose $\Gamma$ is a theory (set of !!{sentence}s) in
+!!a{language}~$\Lang L$ containing an $n$-place {predicate}~$R$. We
+say that $\Gamma$ \emph{implicitly defines}~$R$, iff
+\begin{align*}
+\Gamma, \Gamma'
+& \Entails \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff
+R'(x_1, \dots, x_n))]],
+\intertext{where $\Gamma'$ is $\Gamma$ with all
+occurrences of~$R$ replaced by~$R' \notin \Lang L$. $\Gamma$
+\emph{explicitly defines}~$R$ iff there is some~$!A(x_1, \dots, x_n)$
+not containing~$R$ such that}
+\Gamma &\Entails
+\lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff !A(x_1,
+\dots, x_n))]].
+\end{align*}
+Clearly, if $\Gamma$ explicitly defines $R$ it implicitly defines~$R$.
+The converse is not obvious, but nevertheless holds:
+
+\begin{lem}[Beth Definability Theorem]
+  If $\Gamma$ implicitly defines~$R$ then it also explicitly defines it.
+\end{lem}
+
+\begin{proof}
+  Suppose $\Gamma$ implicitly defines~$R$. Let $R'$, $\Gamma'$ be as
+  above and $\Lang L' = \Lang L(\Gamma') = \Lang L \setminus \{R\}
+  \cup \{R'\}$. By hypothesis, we have
+  \begin{align*}
+    \Gamma, \Gamma' & 
+    \Sequent \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) 
+    \liff R'(x_1, \dots, x_n))]]
+  \intertext{Let $c_1$, \dots,~$c_n$ be !!{constant}s not occurring in~$\Gamma$. By the invertibility lemma we have}
+    \Gamma, \Gamma', R(c_1,\dots,c_n) & \Sequent  R'(c_1, \dots, c_n)
+  \intertext{Apply Maehara's Lemma to}
+    \maeh{\Gamma, R(c_1,\dots,c_n)}{\Gamma'} & \Sequent
+      \maeh{\ }{R'(c_1, \dots, c_n)}
+  \intertext{to find an~$!A \ident !A(x_1, \dots, x_n)$ such that}
+    \Gamma, R(c_1,\dots,c_n) & \Sequent !A(c_1, \dots, c_n) \\
+    !A(c_1, \dots, c_n), \Gamma' & \Sequent R'(c_1, \dots, c_n)
+  \intertext{have !!{proof}s. Since $\Lang L(!A) = \Lang L_1 \cap
+  \Lang L_2 = \Lang L(\Gamma) \setminus \{R\}$, $!A$~does not contain~$R$.
+  Replace $R'$ everywhere by~$R$ in the !!{proof} of the second sequent
+  to get !!a{proof} of}
+    !A(c_1, \dots, c_n), \Gamma & \Sequent R(c_1, \dots, c_n)
+  \intertext{Apply \RightR{\lif} and \RightR{\lforall} to get !!a{proof} of}
+    \Gamma & \Sequent \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff !A(x_1, \dots, x_n))]].
+  \end{align*}
+  This shows that $!A(x_1, \dots, x_n)$ explicitly defines $!R$
+  in~$\Gamma$.
+\end{proof}
+
+A third result which is equivalent to interpolation (and, like it, can
+be proved using Maehara's Lemma) is the following theorem: If two
+consistent theories~$\Gamma_1$, $\Gamma_2$ contain a complete theory
+$\Gamma$ in the language~$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$,
+then $\Gamma_1 \cup \Gamma_2$ is consistent.
+
+Recall that a complete theory is one such that for every
+!!{sentence}~$!A$ in its language either $\Gamma \Proves !A$ or
+$\Gamma \Proves \lnot !A$. Since $\Gamma_1$, $\Gamma_2$ are consistent
+extensions of~$\Gamma$, $\Gamma$ must be consistent. It follows that
+if $!A$ is !!a{sentence} in the language $\Lang L(\Gamma_1) \cap \Lang
+L(\Gamma_2)$, we can't have $\Gamma_1 \Entails !A$ and $\Gamma_2
+\Entails \lnot !A$. To see this, suppose there were such an~$!A$. If
+$\Gamma_1 \Entails !A$ then $\Gamma \Entails !A$. Otherwise, by
+completeness of~$\Gamma$, $\Gamma \Entails \lnot !A$, and since
+$\Gamma \subseteq \Gamma_1$, $\Gamma_1 \Entails \lnot !A$, making
+$\Gamma_1$ inconsistent. So $\Gamma \Entails !A$ and since $\Gamma
+\subseteq \Gamma_2$, $\Gamma_2 \Entails !A$. So $\Gamma \Entails/
+\lnot !A$, or $\Gamma_2$ would be inconsistent.
+
+The non-existence of !!a{sentence}~$!A$ in the joint
+!!{language}~$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$ with $\Gamma_1
+\Entails !A$ and $\Gamma_2 \Entails \lnot !A$ is all that's needed for
+the proof, which we give here proof-theoretically using Maehara's
+Lemma.
+
+\begin{thm}[Robinson's Joint Consistency Theorem]
+Suppose $\Gamma_1$, $\Gamma_2$ are consistent theories and for no~$!A$
+in the !!{language} $\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$ do we
+have $\Gamma_1 \Entails !A$ and $\Gamma_2 \Entails \lnot !A$. Then
+$\Gamma_1 \cup \Gamma_2$ is consistent.
+\end{thm}
+
+\begin{proof}
+  Suppose for the contrary that $\Gamma_1 \cup \Gamma_2$ is
+  inconsistent. Then the sequent $\Gamma_1, \Gamma_2 \Sequent \ $ has
+  !!a{proof}. Apply Maehara's Lemma to $\maeh{\Gamma_1}{\Gamma_2}
+  \Sequent \maeh{\ }{\ }$ to get !!a{sentence}~$!A$ in the
+  !!{language}~$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$ such that
+  $\Proves \Gamma_1 \Sequent !A$ and $\Proves !A, \Gamma_2 \Sequent
+  \quad$. From the latter we get $\Proves \Gamma_2 \Sequent \lnot !A$.
+  But we assumed that no such !!{sentence} exists.
+\end{proof}
+
+Above we have tacitly assumed that the theories $\Gamma$, $\Gamma_1$,
+$\Gamma_2$ are finite. By compactness, the results also hold for
+infinite theories.
+
+\end{document}

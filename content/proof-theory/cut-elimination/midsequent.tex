@@ -1,0 +1,255 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: midsequent
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{mid}
+
+\olsection{The Midsequent Theorem and Herbrand's Theorem}
+
+An important consequence of the cut-elimination theorem is the
+midsequent theorem. It states that if there is !!a{proof}~$\pi$
+of~$\Gamma \Sequent \Delta$ in which every !!{formula} is prenex, then
+there is !!a{proof}~$\pi'$ containing a sequent $S \ident \Pi \Sequent
+\Lambda$ (called the \emph{midsequent}) such that all inferences above
+$S$ in~$\pi'$ are propositional and all inferences below~$S$ are
+quantifier inferences. (!!^a{formula}~$!A$ is \emph{prenex} (or in
+\emph{prenex form}) if it is of the form
+\[\mathsf{Q}_1x_1\dots\mathsf{Q}_nx_n\,!B(x_1,\dots,x_n)\] where each
+$\mathsf{Q}_i$ is either $\lforall$ or~$\lexists$.) An important
+consequence of the midsequent theorem is Herbrand's theorem. Its
+general case is a little hard to describe, but very generally it takes
+the form: for every !!{provable} !!{sentence}~$!A$ of first-order
+logic, there is a propositional tautology~$!A'$ from which $!A$ can be !!{prove}d. Here is the version for
+!!{sentence}s of the form~$\lexists[x][!B(x)]$ where $!B$ is
+quantifier-free:
+
+\begin{thm}[Herbrand's Theorem]
+Suppose that $!B(x)$ is quantifier-free and that $\Proves 
+\lexists[x][!B(x)]$. Then there are terms~$t_1$, \dots, $t_n$
+such that $\Proves !B(t_1) \lor \dots \lor !B(t_n)$.
+\end{thm}
+
+The !!{formula}~$!B(t_1) \lor \dots \lor !B(t_n)$ is called a
+\emph{Herbrand disjunction} of~$\lexists[x][!B(x)]$. Since $!B$ is
+quantifier-free, this disjunction is also quantifier-free. So if it is
+!!{provable}, it is !!{provable} by a cut-free proof and consequently
+with !!a{proof} that only uses propositional inferences. Hence, it is
+a tautology.
+
+The difficult part of Herbrand's Theorem is showing that a Herbrand
+disjunction exists for every !!{provable}
+!!{formula}~$\lexists[x][!B(x)]$. The converse, i.e., that if
+$\lexists[x][!B(x)]$ has a Herbrand disjunction, then it is provable,
+is easy. In fact, the Herbrand disjunction entails $\lexists[x][!B(x)]$.
+E.g., here is !!a{proof} in~$\Log{G3c}$ for the case where $n=2$:
+\[
+\Axiom$!B(t_1) \fCenter \lexists[x][!B(x)], !B(t_1), !B(t_2)$
+\Axiom$!B(t_2) \fCenter \lexists[x][!B(x)], !B(t_1), !B(t_2)$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!B(t_1) \lor !B(t_2) \fCenter \lexists[x][!B(x)], !B(t_1), !B(t_2)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!B(t_1) \lor !B(t_2) \fCenter \lexists[x][!B(x)], !B(t_2)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!B(t_1) \lor !B(t_2) \fCenter \lexists[x][!B(x)]$
+\DisplayProof
+\]
+
+To extract the Herbrand disjunction from !!a{proof}~$\pi$ of~$\Sequent
+\lexists[x][!B(x)]$, consider the case where all $\RightR{\lexists}$
+inferences in a cut-free !!{proof}~$\pi$ are at the end:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$ \fCenter \lexists[x][!B(x)], !B(t_1), \dots, !B(t_n)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$ \fCenter \lexists[x][!B(x)], !B(t_2), \dots, !B(t_n)$
+\RightLabel{$(n-1) \times \RightR{\lexists}$}
+\Deduce$ \fCenter \lexists[x][!B(x)]$
+\DisplayProof
+\]
+If these are all the $\RightR{\lexists}$ inferences in~$\pi$ with
+$\lexists[x][!B(x)]$ active, then there are no other quantifier
+inferences in~$\pi_1'$. That's because $!B(x)$ contains no other
+quantifiers, and the end-sequent doesn't contain any !!{formula}s on
+the left. In other words, $ \fCenter \lexists[x][!B(x)], !B(t_1),
+\dots, !B(t_n)$ is the mid-sequent of~$\pi$. Moreover, since there are
+no quantifier inferences above the mid-sequent, all sequents above it
+contain $\lexists[x][!B(x)]$ and these are neither active nor
+principal. So they can be deleted from the !!{proof}~$\pi_1$, and we
+get !!a{proof} of~$\fCenter !B(t_1), \dots, !B(t_n)$, and using $n-1$
+applications of $\RightR{\lor}$, !!a{proof} of the Herbrand
+disjunction~$\Sequent !B(t_1) \lor \dots \lor !B(t_n)$.
+
+The trouble is that we can't assume that even a cut-free !!{proof} of
+$\Sequent \lexists[x][!B(x)]$ has all its \RightR{\lexists} inferences
+in one block at the end. There might be inferences in between these
+\RightR{\lexists} inferences in which some $!B(t_i)$ is principal.
+Hence, the need for the midsequent theorem.
+
+\begin{thm}[Midsequent Theorem]\ollabel{thm:midsequent} If there is a
+  \Log{G3c}-!!{proof}~$\pi$ of $\Gamma \Sequent \Delta$ where all
+  !!{formula}s in $\Gamma$ and $\Delta$ are prenex, then there is
+  !!a{proof}~$\pi'$ containing a sequent $\Pi \Sequent \Lambda$ such
+  that all inferences below it are quantifier inferences and all
+  inferences above it are propositional inferences.
+\end{thm}
+
+\begin{proof}
+  Define the \emph{order} of a quantifier inference in~$\pi$ as the
+  number of propositional inferences below it, and the order~$o(\pi)$
+  of $\pi$ as the sum of the orders of all its quantifier inferences.
+  If $o(\pi) = 0$, then no quantifier inference has a propositional
+  inference below it, and we are done: Since all quantifier inferences
+  have one premise, there is a single topmost quantifier inference.
+  Its premise is the midsequent.
+
+  If $o(\pi) > 0$, pick a bottom-most quantifier inference with order
+  $>0$. Since it has order $>0$, there must be a propositional
+  inference below it. Since it is a bottom-most one, its conclusion
+  can't be the premise of a quantifier inference: that second, lower
+  quantifier inference would also have a propositional inference below
+  it otherwise. We distinguish (many!) cases according to what quantifier
+  inference we have, and what the propositional inference below it is.
+  Because the end-sequent consists of prenex formulas only, the
+  principal formula of the quantifier inference can't be active in the
+  following propositional inference. Otherwise the principal formula
+  of that inference would have a quantifier in the scope of a
+  propositional connective. By the sub-!!{formula} property, this would
+  have to be a sub-!!{formula} of !!a{formula} in the end-sequent.
+  So, the principal !!{formula} of the quantifier inference is
+  !!a{element} of the context of the lower propositional inference.
+
+  Here are two examples:
+
+First, suppose we have a $\RightR{\lforall}$ which ends in the right
+premise of $\LeftR{\lif}$. Then the relevant sub-!!{proof} of~$\pi$
+ends in the sub-!!{proof}~$\pi_1$.
+\[
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma' \fCenter \Delta', \lforall[x][!A(x)], !B$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!C, \Gamma' \fCenter \Delta', !A(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$!C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)]$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)]$
+\DisplayProof
+\]
+We can assume that $\pi$ is regular, and so the eigenvariable~$c$ does
+not occur outside~$\pi_3$; in particular, it does not occur in $!B
+\lif !C$ or in~$\pi_2$. Now consider the proof~$\pi_1'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma' \fCenter \Delta', \lforall[x][!A(x)], !A(c), !B$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)], !A(c)$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)], !A(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$!B \lif !C, \Gamma' \fCenter \Delta', \lforall[x][!A(x)], \lforall[x][!A(x)]$
+\DisplayProof
+\]
+where $\pi_2'$ is obtained from~$\pi_2$ by weakening with~$!A(c)$ on
+the right. (This does not add any inferences, in particular, no
+quantifier inferences which might affect the order. It also does not
+violate any eigenvariable conditions in~$\pi_2$, since no constants
+in~$!A(c)$ are used as eigenvariables in~$\pi_2$.) The eigenvariable
+condition on \RightR{\lforall} is still satisfied, since $c$ does not
+occur in~$!B \lif !C$.
+
+We invoke the admissibility of contraction to
+obtain !!a{proof}~$\pi_1''$ of $!B \lif !C, \Gamma' \fCenter \Delta',
+\lforall[x][!A(x)]$. The proof of the admissibility of
+$\RightR{\Contraction}$ for $\lforall[x][!A(x)]$ and the proof of
+invertibility of $\RightR{\lforall}$ used in that proof did not change
+the order of any inference: it, at most, deleted inferences. Thus,
+there are no more quantifier inferences in~$\pi_1''$ than in~$\pi_1$,
+and each quantifier inference in~$\pi_1''$  has the same number of
+proposional inferences below it as its corresponding inference
+in~$\pi_1$---with the exception of the last \RightR{\lforall}: it had
+a \LeftR{\lif} below it in~$\pi$, which we have moved above it
+in~$\pi_1''$. Replace $\pi_1$ in $\pi$ by $\pi_1''$. The resulting
+!!{proof} has a lower order, since at least the order of the
+$\RightR{\lforall}$ inference has been reduced by (at least)~$1$.
+Now apply the inductive hypothesis.
+
+The cases where the quantifier inference is \RightR{\lexists} is even
+easier, since contraction is not needed and no eigenvariable condition
+needs to be worried about. E.g., suppose $\RightR{\lexists}$ is
+followed by $\RightR{\land}$ (this time as the left premise). The
+relevant sub-!!{proof} is $\pi_1$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !B$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$!\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !B$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !B \land !C$
+\DisplayProof
+\]
+Replace $\pi_1$ in~$\pi$ by $\pi_1'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !B$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !A(t), !B \land !C$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma' \fCenter \Delta', \lexists[x][!A(x)], !B \land !C$
+\DisplayProof
+\]
+where $\pi_3'$ is obtained from $\pi_3$ by weakening with~$!A(t)$ on
+the right. This weakening involves merely adding $!A(t)$ to the right
+side of every sequent in~$\pi_3$, so does not change the order of any
+quantifier inference. The order of quantifier inferences is the same
+in~$\pi'$ as in~$\pi$, except the order of the \RightR{\lexists}
+inference permuted with~\RightR{\land} has decreased by~$1$. The
+inductive hypothesis applies.
+\end{proof}
+
+\begin{prob}
+Describe the cases in the proof of \olref{thm:midsequent} where
+\LeftR{\lexists} ends in the premise of~\RightR{\lif}, and where
+\LeftR{\lforall} ends in the left premise of~\LeftR{\lor}.
+\end{prob}
+
+\begin{proof}[Proof of Herbrand's Theorem]
+Suppose $\pi$ ends in $\Sequent \lexists[x][!A(x)]$. By
+\olref{thm:midsequent}, we can transform $\pi$ into !!a{proof}~$\pi'$
+with a midsequent~$S$, which must be of the form \[\Sequent
+\lexists[x][!A(x)], !A(t_1), \dots, !A(t_n).\] Since all inferences
+above $S$ are propositional, $\lexists[x][!A(x)]$ cannot be principal
+in an inference above~$S$. Since it is not atomic, it cannot be
+principal in an axiom. Since $\lexists[x][!A(x)]$ cannot be a proper
+subformula of $!A(t_1)$ (remember that $!A(x)$ is quantifier-free), it
+can also not be active above~$S$. Deleting $\lexists[x][!A(x)]$ from
+the sub-!!{proof} ending in~$S$ therefore yields a correct !!{proof}
+of $\Sequent !A(t_1), \dots, !A(t_n)$, from which !!a{proof} of
+$\Sequent !A(t_1) \lor \dots \lor !A(t_n)$ can be obtained by $n-1$
+$\RightR{\lor}$ inferences.
+\end{proof}
+
+% \begin{prob}
+% Find a Herbrand disjunction of $\lexists[x][\lforall[y][(!A(x) \lif
+% !A(y))]]$ by finding a cut-free !!{proof} of $\Sequent
+% \lexists[x][\lforall[y][(!A(x) \lif !A(y))]]$ and applying the
+% transformation in \olref{thm:midsequent} to find a midsequent (if
+% necessary).
+% \end{prob}
+
+\end{document}

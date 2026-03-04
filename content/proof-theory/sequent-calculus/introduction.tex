@@ -1,0 +1,129 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{int}
+
+\olsection{Introduction}
+
+Sequent calculi are !!{proof} systems that were introduced in the
+1930s by Gerhard Gentzen. They were intended less as a practical
+method for !!{proving} things. Rather, Gentzen used them in order to
+be able to prove certain results about the possible structure of
+!!{proof}s and their property. These kinds of questions are
+exactly the questions with which proof theory is concerned.
+
+Sequent calculi operate on \emph{sequents}, as the name suggests, and
+not on !!{formula}s. A sequent is a pair of sequences or multisets of
+!!{formula}s. Gentzen's original systems (\Log{LK} and \Log{LJ}) used
+sequences; proof theorists now prefer to use multisets. A multiset is
+like a set, except that a multiset can contain an !!{element} more
+than once. Just as in sets, the order of !!{element}s does not matter,
+however. So the expressions $\{!A, !A, !B\}$ and $\{!A, !B, !A\}$
+describe the same multiset, but that multiset is different from $\{!A,
+!B\}$ and from $\{!A, !A, !B, !B\}$, since the latter contain
+different numbers of $!A$ and $!B$ than the former.
+
+Traditionally, multisets of !!{formula}s in proof theory are written
+using uppercase Greek letters. So when we write $\Gamma$, $\Delta$,
+$\Pi$, $\Lambda$, or $\Theta$, we intend these to be multisets of
+!!{formula}s of whatever logic we are working with. Traditionally
+also, instead of writing $\tuple{\Gamma, \Delta}$ proof theorists
+separate the two components by a sequent symbol; we use~$\Sequent$. 
+
+\begin{defn}[Sequent]
+A \emph{sequent} is an expression of the form
+\[
+\Gamma \Sequent \Delta
+\]
+where $\Gamma$ and $\Delta$ are finite (possibly empty) multisets of
+!!{formula}s. $\Gamma$ is called the \emph{antecedent}, while
+$\Delta$ is the \emph{succedent}.
+\end{defn}
+
+Let $!G$~be the conjunction of the !!{formula}s in~$\Gamma$ (taking
+the empty conjunction to be~$\ltrue$) and $!D$~be the disjunction of
+the !!{formula}s in~$\Delta$ (taking the empty disjunction to
+be~$\lfalse$). Then the sequent $\Gamma \Sequent \Delta$ is true (in
+some structure~$\Struct{M}$) iff $!G \lif !D$ is true. In classical
+logic, this amounts to the same as saying that either one of the
+!!{formula}s in~$\Gamma$ is false, or one of the !!{formula}s
+in~$\Delta$ is true.
+
+If $\Gamma$ is a multiset of !!{formula}s, we write $\Gamma, !A$ (or
+$!A, \Gamma$) for the result of adding $!A$ to~$\Gamma$. If $\Delta$
+is also a multiset of !!{formula}s, then $\Gamma, \Delta$ is the
+multiset union of the two sequences---if $\Gamma$ contains $!A$ with
+\emph{multiplicity}~n (i.e., it contains $n$ copies of~$!A$) and
+$\Delta$ with multiplicity~$m$, then $\Gamma, \Delta$ contains $!A$
+with multiplicity~$n+m$. If the multiset on one side of a sequent is
+empty, we usually just leave a blank. For instance, $\Sequent !A$ is
+the sequent with an empty antecendent and the succedent contains $!A$
+with multiplicity~$1$.
+
+!!^a{proof} in the sequent calculus is a tree of sequents, where
+the topmost (or initial) sequents are axioms in the system considered,
+and if a sequent stands below one or two other sequents, it must
+follow correctly by a rule of inference in the system. We will first
+consider two different sequent systems for classical logic,
+$\Log{G1c}$ and~$\Log{G3c}$. Their axioms and rules are given in
+\cref{pt:seq:int:tab:G1c,pt:seq:int:tab:G3c}. \oliflabeldef{fol:seq::chap}{ (Gentzen's
+original system \Log{LK} is described in \olref[fol][seq][]{chap}.)}{}
+
+\subfile{rules-G1c}
+\subfile{rules-G3c}
+
+The systems are subtly different, and these differences mean that they
+have different proof theoretic properties. \Log{G1c} has axioms $!A
+\Sequent !A$ with no other !!{formula}s allowed. \Log{G3c} has axioms
+of the form $!C, \Gamma \Sequent \Delta, !C$ with arbitrary ``side''
+!!{formula}s in $\Gamma$ and~$\Delta$, but the !!{formula}~$!C$
+appearing on both sides must be \emph{atomic}. \Log{G1c} has two versions
+each of the $\LeftR{\land}$ and $\RightR{\lor}$ rules whereas \Log{G3c}
+has just one each. And \Log{G1c} has additional ``structural rules''
+called ``contraction'' (\LeftR{\Contraction}, \RightR{\Contraction})
+and ``weakening'' (\LeftR{\Weakening}, \RightR{\Weakening}).
+
+The systems \Log{G1c} and \Log{G3c} happen to be sound and complete
+for classical logic. In other words, every sequent !!{provable} in
+these systems is true in every !!{structure}, and every sequent that
+is true in every !!{structure} has !!a{proof}. So the question
+\emph{whether} a sequent has !!a{proof} can also be answered by other
+methods of logic (e.g., those of model theory). And since both systems
+!!{prove} exactly the sequents true in every !!{structure}, they in
+particular prove the same sequents.
+
+Proof theory, however, is not just concerned with \emph{whether}
+something is provable, but \emph{how}. Proof theorists consider
+questions such as ``Can a certain rule always be avoided?,'' ``Can
+this rule be added to the system without resulting in new sequents
+becoming provable?,'' or ``Can !!{proof}s in one system be turned into
+!!{proof}s in another?'' If the answer is ``yes'' to such a question,
+the proof of this fact is often proved by induction on the complexity
+of !!{proof}s, or, equivalently, by induction on the structure of
+!!{proof}s. This yields not just a proof of the fact (e.g., if
+\Log{G1c} proves a sequent then \Log{G3c} proves the same sequent),
+but a procedure (e.g., of turning !!{proof}s in~\Log{G1c} into
+!!{proof}s in~\Log{G3c}).
+
+A central result in proof theory is the \emph{cut-elimination
+theorem}. It shows that we can add the cut rule
+\[
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$!A, \Pi \fCenter \Lambda$
+\RightLabel{\Cut}
+\BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+to the sequent systems without changing which sequents are
+!!{provable}. Moreover, the proof provides a method that transforms
+any !!{proof} using the rules of \Log{G1c} (or \Log{G3c}) together with
+\Cut{} into one that only uses the rules of \Log{G1c} (or \Log{G3c}).
+In other words, this procedure ``eliminates'' the \Cut{} rule from
+!!{proof}s using it; hence the name.
+
+\end{document}

@@ -1,0 +1,100 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: translations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{tr}
+
+\olsection{Translating between \Log{G1c} and \Log{G3c}}
+
+We mentioned that both \Log{G1c} and \Log{G3c} are sound and complete
+for classical logic, i.e., they each prove all and only the sequents
+true in every !!{structure}. In particular, they prove the same
+sequents. We are now in a position to prove this fact without the
+detour through the soundness and completeness theorems, but using
+purely proof-theoretically. Such a proof provides
+\emph{transformations} of !!{proof}s in \Log{G1c} into !!{proof}s in
+\Log{G3c} and vice versa.
+
+\begin{prop}
+If $\Log{G1c} \Proves S$ then $\Log{G3c} \Proves S$.
+\end{prop}
+
+\begin{proof}
+  We show that if $\pi$ is !!a{proof} in \Log{G1c}, then there is
+  !!a{proof}~$\pi'$ of~$S$ in\Log{G3c}. We do this by induction on $n
+  = \pheight{\pi}$.
+
+  If $n = 0$, then $\pi$ is an axiom. The axiom $\lfalse \Sequent
+  \quad$ is also an axiom in~\Log{G3c} (take the context $\Gamma,
+  \Delta$ to be empty). \Log{G3c} allows axioms $!A \Sequent !A$ with
+  arbitrary, not just atomic~$!A$. But we proved in
+  \olref[ex]{prop:G3c-axioms} that all such sequents are !!{provable}
+  in~\Log{G3c}.
+  
+  If $n>0$, $\pi$ ends in a rule~$R$. The inductive hypothesis
+  guarantees that there are !!{proof}s of the premises of that rule
+  in~\Log{G3c}, i.e., that the immediate sub-!!{proof}s have
+  translations in~\Log{G3c}. If the rule~$R$ is also a rule in
+  \Log{G3c}, we apply it to the translated !!{proof}s of the premises.
+  For those rules that are no also rules of~\Log{G3c}, we have already
+  shown that they are at least admissible. So, if rule~$R$ was
+  $\LeftR{\land}$ or $\RightR{\lor}$, apply
+  \olref[adm]{prop:lor-G3-adm}. If it was a weakening rule, apply
+  \olref[adm]{prop:weak-G3c-adm}. If it was a contraction rule, apply
+  \olref[inv]{prop:G3c-cont-adm}.
+\end{proof}
+
+\begin{prop}
+If $\Log{G3c} \Proves S$ then $\Log{G1c} \Proves S$.
+\end{prop}
+
+\begin{proof}
+  We again proceed by induction on the !!{height} of !!a{proof}~$\pi$
+  of $S$. Every axiom of \Log{G3c} can be !!{prove}d in~\Log{G1c} from
+  an axiom plus several applications of the \LeftR{\Weakening} and
+  \RightR{\Weakening} rules:
+  \[
+  \Axiom$!C \fCenter !C$
+  \RightLabel{\LeftR{\Weakening}}
+  \Deduce$!C, \Gamma \fCenter !C$
+  \RightLabel{\RightR{\Weakening}}
+  \Deduce$!C, \Gamma \fCenter \Delta, !C$
+  \DisplayProof
+\qquad
+  \Axiom$\lfalse \fCenter$
+  \RightLabel{\LeftR{\Weakening}}
+  \Deduce$\lfalse, \Gamma \fCenter$
+  \RightLabel{\RightR{\Weakening}}
+  \Deduce$\lfalse, \Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  If $\pi$ ends in a rule~$R$, the inductive hypothesis yields
+  !!{proof}s in \Log{G1c} of the premises, and we can apply the same
+  rule~$R$ to those !!{proof}s. The exceptions are the rules
+  \LeftR{\land} and \RightR{\lor}, which are derivable in \Log{G1c}:
+  \[
+  \Axiom$!A, !B, \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B, !B, \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!A \land !B, !A \land !B, \Gamma \fCenter \Delta$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+    \DisplayProof
+\qquad
+  \Axiom$\Gamma \fCenter \Delta, !A, !B$
+  \RightLabel{\RightR{\lor}}
+  \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B, !B$
+  \RightLabel{\RightR{\lor}}
+  \UnaryInf$\Gamma \fCenter \Delta, , !A \lor !B, !A \lor !B$
+  \RightLabel{\RightR{\Contraction}}
+  \UnaryInf$\Gamma \fCenter \Delta, !A \lor !B$
+    \DisplayProof
+  \]
+\end{proof}
+
+\end{document}

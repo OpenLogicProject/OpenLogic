@@ -1,0 +1,641 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: ce-topmost
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{top}
+
+\olsection{Removing Topmost Cuts}
+
+\begin{defn}
+Consider !!a{proof}~$\pi$ ending in a \CutCS{} rule,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+and containing no other \CutCS{} inferences. The \emph{cut height}
+of~$\pi$ is $\cheight{\pi} = \pheight{\pi_1} + \pheight{\pi_2}$. The
+\emph{cut rank} of~$\pi$ is $\cutrank{\pi} = \depth{!A}$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:cut-adm-G3c}
+The \CutCS{} rule is admissible in~\Log{G3c}. In other words, if $\pi$
+is !!a{proof} ending in a single~\CutCS{} and otherwise using only rules
+of~$\Log{G3c}$, then there is !!a{proof}~$\pi'$ of the same end-sequent in~\Log{G3c}.
+\end{lem}
+
+\begin{proof}
+The proof is by double induction on cut !!{height} and rank. The
+!!{proof}~$\pi$ ends in:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+
+Induction basis: $\cheight{\pi} = 0$ and $\cutrank{\pi} = 0$. Since
+$\cheight{\pi} = \pheight{\pi_1} + \pheight{\pi_2} = 0$, both $\Gamma
+\Sequent \Delta, !A$ and $!A, \Gamma \Sequent \Delta$ are axioms.
+There are two cases: (a)~either $!A$ is not principal in one of them,
+or (b)~$!A$ is principal in both of them. In both cases we'll show
+below that $\Gamma \Sequent \Delta$ must be an axiom (and we don't
+need the inductive hypothesis to do that).
+
+We'll now distinguish a number of possible cases according to whether
+$\pi_1$ and $\pi_2$ are axioms or end in an inference, and whether
+$!A$~is principal in that inference or not. Cases A and~B cover the
+induction basis. In the inductive step we assume $\cheight{\pi} > 0$
+or $\cutrank{\pi} > 0$ (or both). We can use the inductive hypothesis,
+namely that the last~\CutCS{} can be removed from any !!{proof} which
+either has at most the same cut rank and a lower cut !!{height}, or
+has a lower cut rank. The case where $\cheight{\pi} = 0$ (both
+premises are axioms) are covered by cases~A and~B. The cases where
+$\cheight{\pi} > 0$ are covered by cases C--D.
+
+\paragraph{Case A:}
+Some $!B$ occurs in both $\Gamma$ and~$\Delta$. 
+Then $\Gamma \Sequent \Delta$ is an axiom (if $!B$~is atomic), or has
+!!a{proof}~$\pi'$ in \Log{G3c} without \CutCS{} by
+\olref[seq][ex]{prop:G3c-axioms}. This covers case~(a) of the
+induction basis, since if $!A$ is not principal in $\Gamma
+\Sequent \Delta, !A$ or not principal in $!A, \Gamma \Sequent \Delta$
+and these are axioms, then some other atomic~$!B$ must occur in both
+$\Gamma$ and~$\Delta$. It also covers the inductive step if one of the
+premises is an axiom in which $!A$ is not principal (even if the other
+premise is the conclusion of a rule).
+
+\paragraph{Case B:} Both premises are axioms, and $!A$ is principal
+and hence atomic. Consider the left premise, $\Gamma \Sequent
+\Delta, !A$. Since $!A$ is principal, it must occur in $\Gamma$
+(otherwise $\Gamma \Sequent \Delta, !A$ wouldn't be an axiom). Similarly,
+$!A$ must occur in $\Delta$, or else $!A, \Gamma \Sequent \Delta$
+wouldn't be an axiom. Thus $!A$ is atomic and occurs in both $\Gamma$
+and $\Delta$, i.e., $\Gamma \Sequent \Delta$ is an axiom. This covers
+case~(b) of the induction basis.
+
+\begin{center}
+Alternative cases A and B
+\end{center}
+
+\paragraph{Case A:} One of the premises of the cut is an axiom of the
+form $!C, \Gamma' \Sequent \Delta', !C$ with $!C$~atomic. If $!C$ is
+not the cut !!{formula}~$!A$, then $!C$ must occur in both $\Gamma$
+and~$\Delta$. In that case, $\Gamma \Sequent \Delta$ is an axiom and
+we can take it as~$\pi'$. If $!C \ident !A$ is the cut !!{formula}
+then either (if the left premise is an axiom) $!A \in \Gamma$ and
+$\Gamma = \Gamma', !A$, or (if the right premise is an axiom) $!A \in
+\Delta$ and $\Delta = \Delta', !A$. In the first case, $\pi_2$ is
+!!a{proof} of $!A, !A, \Gamma' \Sequent \Delta$ and by admissibility
+of \LeftR{\Contraction} (\olref[seq][inv]{prop:G3c-cont-adm}) there is
+!!a{proof} of $\Gamma \Sequent \Delta$. In the second case, $\pi_2$ is
+!!a{proof} of $\Gamma \Sequent \Delta', !A, !A$ and by admissibility
+of \RightR{\Contraction} we get !!a{proof} of $\Gamma \Sequent
+\Delta$.
+
+\paragraph{Case B:} One of the premises is an axiom of the
+form~$\lfalse, \Gamma' \Sequent \Delta'$. If the left premise is such
+an axiom, then $\lfalse \in \Gamma$ and $\Gamma \Sequent \Delta$ is
+also an axiom. If the right premise is such an axiom, then either
+$\lfalse \in \Gamma$ (in which case $\Gamma \Sequent \Delta$ again is
+an axiom), or $!A \ident \lfalse$. In the latter case, $\pi_1$ is
+!!a{proof} of $\Gamma \Sequent \Delta, \lfalse$. We can turn it into
+!!a{proof} of~$\Gamma \Sequent \Delta$ by deleting one copy
+of~$\lfalse$ from the consequent of every sequent in~$\pi_1$.
+(Exercise: verify this by induction on~$\pheight{\pi_1}$.)
+
+Now suppose that neither case~A nor case~B applies. In the remaining
+cases, $\cheight{\pi} > 0$, i.e., at least one of the premises is the
+conclusion of an inference.
+
+\paragraph{Cases C and D: Permuting cuts.}
+The possibilities considered in cases~C and~D all have a common
+pattern. We begin with !!a{proof} ending in~\CutCS{} where one premise
+is obtained by a rule~$R$ in which the cut !!{formula}~$!A$ is not
+principal (some other !!{formula}~$!D$ is). In this !!{proof},
+\CutCS{} follows the rule~$R$, and schematically looks as follows:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !D, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, \Gamma, \Pi \fCenter \Delta', \Lambda$
+\RightLabel{$R$}
+\UnaryInf$!A, \Gamma \fCenter \Delta', !D$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !D$
+\DisplayProof
+\]
+This only covers the case where $R$~is a right rule with one premise,
+$A$~is not principal on the right, and the !!{formula}~$!D$ which
+\emph{is} principal occurs in the succedent of the right premise
+of~\CutCS. If $!D$~occurs in the antecedent (i.e., $R$ is a left rule)
+or in the left premise of~\CutCS, it would look different, of course.
+The !!{formula}s in $\Pi$ and $\Lambda$ represent the active
+!!{formula}s of rule~$R$.
+
+We turn this order around and consider !!a{proof}
+where $R$ follows~\CutCS{}:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma, \Pi \fCenter \Delta', !D, \Lambda, !A$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$!A, \Gamma, \Pi \fCenter \Delta', !D, \Lambda$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma, \Pi \fCenter \Delta', !D, \Lambda$
+\RightLabel{$R$}
+\UnaryInf$\Gamma, \fCenter \Delta', !D, !D$
+\DisplayProof
+\]
+We use !!{height}-preserving weakening to obtain $\pi_1'$ and $\pi_3'$
+from $\pi_1$ and $\pi_3$, respectively.
+
+Because we switch the order of \CutCS{} and~$R$, this is referred to
+as ``permuting a cut upwards across~$R$.'' Doing so decreases the
+height of the !!{proof} ending in the right premise of~\CutCS, and so
+decreases the cut !!{height}. That is, the sub-!!{proof}s ending in the
+new \CutCS{} can be assumed to have !!{height} no larger than
+$\pi_1$ and $\pi_3$, so the cut !!{height} is reduced (we've removed
+one inference on the right). Now the induction hypothesis applies,
+which tells us that the \CutCS{} inference can be removed. Finally, we
+remove the extra copy of~$!D$ using the admissibility
+of~$\RightR{\Contraction}$.
+
+\paragraph{Case C:}
+At least one of $\pi_1$ and $\pi_2$ ends in a one-premise rule~$R$ in
+which $!A$~is not principal. There are a total of 18 cases, depending
+on whether $!A$~is not principal in the left or the right premise
+of~\CutCS, and depending on which of the nine one-premise rules
+(\LeftR{\lnot}, \RightR{\lnot}, \RightR{\lor}, \LeftR{\land},
+\RightR{\lif}, and the four quantifier rules) the rule~$R$ is. We only
+consider two examples: where $!A$~is not principal in the last
+inference of~$\pi_2$, which ends in~$\RightR{\lif}$ or
+in~\LeftR{\lexists}. The other cases are analogous and left as
+exercises.
+
+Suppose $\pi$ ends in:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !B \lif !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, !B, \Gamma \fCenter \Delta', !C$
+\RightLabel{$\RightR{\lif}$}
+\UnaryInf$!A, \Gamma \fCenter \Delta', !B \lif !C$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !B \lif !C$
+\DisplayProof
+\]
+where $\Delta = \Delta', !B \lif !C$. We apply !!{height}-preserving
+weakening (\olref[seq][adm]{prop:weak-G3c-adm}) to $\pi_1$ to obtain
+!!a{proof} $\pi_1'$ of $!B, \Gamma \fCenter \Delta', !B \lif !C, !C,
+!A$ (we weaken with $!B$ on the left and $!C$ on the right).
+Similarly, we apply \olref[seq][adm]{prop:weak-G3c-adm}
+to~$\pi_3$ to get !!a{proof}~$\pi_3'$ of $!A, !B, \Gamma \fCenter
+\Delta', !B \lif !C, !C$ (by weakening with $!B \lif !C$ on the right).
+The induction hypothesis applies to
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta', !B \lif !C, !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$!A, !B, \Gamma \fCenter \Delta', !B \lif !C, !C$
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta', !B \lif !C, !C$
+\DisplayProof
+\]
+with cut !!{formula}~$!A$: This !!{proof} has the same cut rank and a
+lower cut !!{height} than~$\pi$. This gives us !!a{proof}~$\pi_4$ in
+\Log{G3c} without \CutCS{} of~$!B, \Gamma \fCenter \Delta', !B \lif
+!C, !C$. Apply $\RightR{\lif}$ to get !!a{proof} of $\Gamma \fCenter
+\Delta', !B \lif !C, !B \lif !C$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_4$}
+\Deduce$!B, \Gamma \fCenter \Delta', !B \lif !C, !C$
+\RightLabel{$\RightR{\lif}$}
+\UnaryInf$\Gamma \fCenter \Delta', !B \lif !C, !B \lif !C$
+\DisplayProof
+\]
+To get !!a{proof}~$\pi'$ of $\Gamma \Sequent \Delta$, i.e., $\Gamma
+\fCenter \Delta', !B \lif !C$, apply
+\olref[seq][inv]{prop:G3c-cont-adm} (the admissibility of
+contraction).
+
+Now suppose $\pi$ ends in:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\lexists[x][!B(x)], \Gamma' \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, !B(c), \Gamma' \fCenter \Delta$
+\RightLabel{$\LeftR{\lexists}$}
+\UnaryInf$!A, \lexists[x][!B(x)], \Gamma' \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma' \fCenter \Delta$
+\DisplayProof
+\]
+We again apply the inductive hypothesis to
+\[
+\AxiomC{}
+\RightLabel{$\pi_1[!B(c) \Sequent {}]$}
+\Deduce$\lexists[x][!B(x)], !B(c), \Gamma' \fCenter \Delta, !A$
+\AxiomC{}
+\LeftLabel{$\pi_3[\lexists[x][!B(x)] \Sequent {}]$}
+\Deduce$!A, \lexists[x][!B(x)], !B(c), \Gamma' \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\lexists[x][!B(x)], !B(c), \Gamma' \fCenter \Delta$
+\RightLabel{\LeftR{\lexists}}
+\UnaryInf$\lexists[x][!B(x)], \lexists[x][!B(x)], \Gamma' \fCenter \Delta$
+\DisplayProof
+\]
+Note that the eigenvariable condition is satisfied, since the
+eigenvariable condition on~\LeftR{\lexists} in~$\pi_2$ guarantees that
+$c$ does not occur in $\lexists[x][!B(x)]$, $\Gamma'$, or~$\Delta$.
+Finally, apply \olref[seq][inv]{prop:G3c-cont-adm}.
+
+
+\paragraph{Case D:}
+At least one of $\pi_1$ and $\pi_2$ ends in a two-premise rule~$R$ in
+which $!A$ is not principal. There are 6 cases. We consider the case
+where $!A$ is not principal in the last inference of~$\pi_2$, which
+ends in~$\RightR{\land}$; the other cases are analogous.
+
+Assume $\pi$ ends in:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_3$}
+\Deduce$!A, \Gamma \fCenter \Delta', !B$
+\AxiomC{}
+\RightLabel{$\pi_4$}
+\Deduce$!A, \Gamma \fCenter \Delta', !C$
+\RightLabel{$\RightR{\land}$}
+\BinaryInf$!A, \Gamma \fCenter \Delta', !B \land !C$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+The inductive hypothesis applies to the !!{proof}s
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !B, !A$
+\AxiomC{}
+\RightLabel{$\pi_3'$}
+\Deduce$!A, \Gamma \fCenter \Delta', !B \land !C, !B$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !B$
+\DisplayProof
+\]
+and
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C, !C, !A$
+\AxiomC{}
+\RightLabel{$\pi_4'$}
+\Deduce$!A, \Gamma \fCenter \Delta', !B \land !C, !C$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !C$
+\DisplayProof
+\]
+Here, the \Log{G3c} !!{proof}s $\pi_1'$ and $\pi_1''$ are obtained by
+!!{height}-preserving weakening (\olref[seq][adm]{prop:weak-G3c-adm})
+from~$\pi_1$ (once weakening on the right with $!B$, and once with
+$!C$). The !!{proof}s $\pi_3'$ and~$\pi_4'$ are obtained from $\pi_3$
+and~$\pi_4$ also by !!{height}-preserving weakening from $\pi_3$
+and~$\pi_4$, respectively (by weakening with $!B \land !C$ on the
+right).
+
+The inductive hypothesis gives us !!{proof}s~$\pi_5$ and~$\pi_6$ in
+\Log{G3c} of $\Gamma \fCenter \Delta', !B \land !C, !B$ and $\Gamma
+\fCenter \Delta', !B \land !C, !C$. We combine these into !!a{proof}
+of $\Gamma \Sequent \Delta', !B \land !C, !B \land !C$ using the
+rule~$\RightR{\land}$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_5$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !B$
+\AxiomC{}
+\RightLabel{$\pi_6$}
+\Deduce$\Gamma \fCenter \Delta', !B \land !C, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta, !B \land !C, !B \land !C$
+\DisplayProof
+\]
+To get !!a{proof} of $\Gamma \Sequent \Delta$, i.e., $\Gamma \fCenter
+\Delta', !B \land !C$, apply \olref[seq][inv]{prop:G3c-cont-adm} (the
+admissibility of contraction).
+
+\paragraph{Case E: Reducing cuts.}
+The final case concerns the situation where both $\pi_1$ and $\pi_2$
+end in inferences in which $!A$ is principal. There are six cases,
+one for each possible !!{main operator} of~$!A$.
+
+In each case, we turn a \CutCS{} with cut !!{formula}~$!A$ into one or more
+cuts on sub-!!{formula}s of~$!A$, namely on the active !!{formula}s of
+the inferences of which~$!A$ is the principal !!{formula}. These cases
+are therefore often referred to as ``reduction'' or ``conversion'' of
+the cut inference.
+
+\begin{enumerate}
+\item If $!A \ident \lnot !B$ then $\pi$ ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\Gamma \fCenter \Delta, \lnot !B$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+By inductive hypothesis, \CutCS{} can be eliminated from
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+
+\item
+If $!A \ident (!B \lor !C)$ then $\pi$ ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, !B, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\Gamma \fCenter \Delta, !B \lor !C$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!B \lor !C, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+Consider the !!{proof} ending in \CutCS,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, !B, !C$
+\AxiomC{}
+\RightLabel{$\pi_2'''$}
+\Deduce$!C, \Gamma \fCenter \Delta, !B$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta, !B$
+\DisplayProof
+\]
+where $\pi_2'''$ is obtained from $\pi_2''$ by !!{height}-preserving weakening.
+It has cut rank $< \cutr{\pi}$ as $\depth{!C} < \depth{!B \lor !C}$, so the
+inductive hypothesis yields !!a{proof} in \Log{G3c} of $\pi_1''$ of
+$\Gamma \fCenter \Delta, !B$. The !!{proof} ending in \CutCS,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+has cut rank $= \depth{!B} < \depth{!B \lor !C}$, so the inductive
+hypothesis applies again, and yields !!a{proof} $\pi'$ of $\Gamma
+\fCenter \Delta$.
+
+\item $!A \ident (!B \land !C)$. Exercise.
+
+\item If $!A \ident (!B \lif !C)$ then $\pi$ ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\Gamma \fCenter \Delta, !B \lif !C$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+The !!{proof} ending in \CutCS,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+has lower cut rank than~$\pi$. The inductive hypthesis yields
+!!a{proof}~$\pi_1''$ of $!B, \Gamma \fCenter \Delta$.
+Now consider the !!{proof} ending in \CutCS,
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$!B, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+Its cut rank is also less than the cut rank of~$\pi$, so the induction
+hypothesis yields a \Log{G3c}-!!{proof}~$\pi'$ of $\Gamma \fCenter
+\Delta$.
+\item If $!A \ident \lforall[x][!B(x)]$ then $\pi$ ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta, !B(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B(t), \lforall[x][!B(x)], \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!B(x)], \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+By inductive hypothesis, \CutCS{} can be eliminated from
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$!B(t), \Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B(t), \lforall[x][!B(x)], \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B(t), \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+where $\pi_1''$ is obtained from $\pi_1$ (not~$\pi_1'$!) by
+!!{height}-preserving weakening. (The !!{proof} has the same cut rank
+but lower cut !!{height}.) This gives us !!a{proof}~$\pi_2''$ of
+$!B(t), \Gamma \fCenter \Delta$.
+
+The !!{proof}~$\pi_1'$ has end-sequent $\Gamma \Sequent \Delta,
+!B(c)$, where $c$~is the eigenvariable of a~$\RightR{\lforall}$
+inference. So $c$~does not occur in~$!B(x)$, $\Gamma$, or~$\Delta$. We
+assume the !!{proof}~$\pi$ is regular, so $c$~is the eigenvariable of
+only the following~$\RightR{\lforall}$ inference and only occurs above
+it, i.e., only occurs in~$\pi_1'$ and is not an eigenvariable of an
+inference in~$\pi_1'$. Since $c$ does not occur in~$\pi_2$, it cannot
+occur in~$t$. By \olref[seq][qua]{lem:subst-regular}, the
+!!{proof}~$\Subst{\pi_1'}{t}{c}$ is !!a{proof} of $\Gamma \Sequent \Delta,
+!B(t)$. We now apply the inductive hypothesis to the !!{proof}
+\[
+\AxiomC{}
+\RightLabel{$\Subst{\pi_1'}{t}{c}$}
+\Deduce$\Gamma \fCenter \Delta, !B(t)$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!B(t), \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+(The induction hypothesis applies since the cut !!{formula}
+is~$!B(t)$, so the !!{proof} has lower cut rank than~$\pi$.)
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+Verify the sub-case of case~D in the proof of \olref{lem:cut-adm-G3c}
+where $!A$ is not principal in the last inference of~$\pi_1$, which
+ends in~$\LeftR{\lif}$. (Note: part of this exercise is to clearly
+state what you have to prove, i.e., what form $\pi$ has in this case.)
+\end{prob}
+
+\begin{prob}
+Verify the sub-case of case~D in the proof of \olref{lem:cut-adm-G3c}
+where $!A$ is not principal in the last inference of~$\pi_1$, which
+ends in~$\LeftR{\lforall}$.
+\end{prob}
+
+\begin{prob}
+Verify the sub-case of case~E in the proof of \olref{lem:cut-adm-G3c}
+where $!A$ is principal in the last inferences of both $\pi_1$ and
+$\pi_2$ and $!A \ident (!B \land !C)$.
+\end{prob}
+
+\begin{prob}
+Verify the sub-case of case~E in the proof of \olref{lem:cut-adm-G3c}
+where $!A$ is principal in the last inferences of both $\pi_1$ and
+$\pi_2$ and $!A \ident \lexists[x][!B(x)]$.
+\end{prob}
+
+Note that in case~E the cut !!{height} of the !!{proof} ending in
+\CutCS{} to which we apply the inductive hypothesis can be larger than
+the cut !!{height} of the original proof. E.g., in the case where $!A
+\ident (!B \lif !C)$ we turned $\pi$ into !!a{proof} involving two
+\CutCS{} inferences,
+\[
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta$
+\RightSubproofLabel{$\pi_1''$}
+\RightLabel{\CutCS}
+\BinaryInf$!B, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+The top \CutCS{} between $\pi_1'$ and $\pi_2''$ has both lower cut
+rank and lower cut !!{height} than~$\pi$. But the
+!!{proof}~$\pi_1''$---the result of applying the inductive
+hypothesis---no longer has lower cut !!{height} than~$\pi$. Since the
+cut !!{formula} of the lower \CutCS{} is $!B$, its cut \emph{rank},
+however, is lower than the cut rank of~$\pi$.
+
+\olref{lem:cut-adm-G3c} establishes that we can eliminate a single topmost
+\CutCS{} inference from !!a{proof}. We can show that we can eliminate
+any number of \CutCS{} inferences from !!a{proof} by successively
+applying it to the topmost sub-!!{proof}s ending in~\CutCS.
+
+\begin{thm}\ollabel{thm:cut-elim-G3c-topmost} Any !!{proof} $\pi$ in
+$\Log{G3c} + \CutCS$ can be transformed into !!a{proof} in~\Log{G3c}.
+\end{thm}
+
+\begin{proof}
+  By induction on the number~$n$ of \CutCS{} inferences in~$\pi$. If
+  $n=0$, there is nothing to do: $\pi$ is already !!a{proof}
+  in~\Log{G3c}. Otherwise, consider the sub-!!{proof}~$\pi'$ ending in
+  a top-most \CutCS{} inference. It contains a single \CutCS{} rule as the
+  last inference. Apply \olref{lem:cut-adm-G3c} to transform it into a
+  \CutCS{}-free proof~$\pi''$, and replace the sub-!!{proof}~$\pi'$
+  by~$\pi''$. The result is !!a{proof} containing $n-1$ \CutCS{}
+  inferences, and the induction hypothesis applies.
+\end{proof}
+
+\end{document}

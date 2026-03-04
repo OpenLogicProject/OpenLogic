@@ -1,0 +1,109 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{int}
+
+\olsection{Introduction}
+
+The \Cut{} rule is the rule
+\[
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$!A, \Pi \fCenter \Lambda$
+\RightLabel{\Cut}
+\BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+(The !!{formula}~$!A$ is called the \emph{cut formula}.)
+
+\Cut{} was included in Gentzen's original sequent calculus~\Log{LK}.
+Gentzen's \emph{Hauptsatz} (``main theorem'') states that every
+sequent !!{provable} in~\Log{LK} is also !!{provable} without using
+the \Cut{} rule, i.e., that \Cut{} can be ``eliminated'' from
+\Log{LK}-proofs. Our systems \Log{G1c} and \Log{G3c} do not contain
+\Cut, but the question can be raised for them as well: can \Cut{} be
+eliminated from !!{proof}s that use \Cut{} plus the other rules of
+\Log{G1c} (or those of \Log{G3c})? In our established terminology it
+can be asked equivalently as: Is \Cut{} an admissible rule of
+\Log{G1c} (or \Log{G3c}).
+
+The cut elimination theorem is perhaps the most important and
+celebrated result of proof theory. It first of all establishes that
+\Log{G1c} and \Log{G3c} don't need a rule which you might, at first
+blush, think is clearly required. For when you try to formalize actual
+proofs, you'll notice that you need a way to deal with the use of
+lemmas. Mathematicians like to prove results, and then appeal to these
+results in proofs of other results. So you might first formalize a
+proof of result $L$ (the lemma) as the !!{proof} of a sequent
+$\Sequent L$. Then you formalize the proof of the second result~$R$,
+the proof of which uses~$L$, as the !!{proof} of a sequent $L \Sequent
+R$. How do you know that there is a proof of~$R$, i.e., !!a{proof} of
+just $\Sequent R$? You need a way to combine the two !!{proof}s, and
+the \Cut{} rule would allow you to do that.
+
+We mentioned that \Log{G1c} and \Log{G3c} are complete, and so they
+prove any sequent you might expect to be able to prove---all valid
+sequents. This can be proved directly. But at the time Gentzen was
+writing, only axiomatic derivation systems were known to be complete.
+To show \Log{LK} complete, Gentzen provided a translation of
+!!{derivation}s in the axiomatic system into \Log{LK}-!!{proof}s. This
+translation used \Cut{} essentially. Cut elimination is not just an
+important result for classical logic: many other logics have sequent
+calculi. For some logics, a direct proof of completeness for their
+sequent calculi is hard or impossible, so translations from other
+systems (using \Cut) are the only way to show completeness. Then
+proving cut elimination proof-theoretically is necessary to establish
+that \Cut{} is superfluous and that the system without \Cut{} is
+complete.
+
+Cut elimination is also important because it can be applied to obtain
+other, independently interesting results. Two cases we'll consider are
+the Craig interpolation lemma and Herbrand' theorem.
+
+The ideas used to prove cut elimination typically involve showing how
+!!a{proof} that uses \Cut{} can be transformed into one without. These
+transformations are usually ``local,'' i.e., we take a part of !!
+a{proof} (usually a sub-!!{proof} ending in a \Cut{} inference) and
+replace it with another sub-!!{proof} of the same sequent but in which
+the \Cut{} inference has been removed or replaced by others. Such
+arguments provide step-by-step algorithms for transforming !!{proof}s
+with \Cut{} into ones without. This provides more information when cut
+elimination procedures are used in applications. For instance, there
+are model theoretic proofs of the interpolation lemma the form ``if
+$!A \lif !B$'' is valid then an interpolant exists (never mind what
+and interpolant is for the moment). A proof-theoretic argument using
+cut elimination provides an algorithm that takes !!a{proof} of $!A
+\lif !B$ and returns an interpolant. In contrast to the model
+theoretic argument, the proof theoretic argument is
+\emph{constructive}.
+
+There are two popular ways to prove the cut elimination theorem. One
+(going back to Gentzen) shows that you can remove top-most cuts in a
+proof, and then just removes top-most cuts until none are left. The
+other (originally due to Sch\"utte and Tait) focuses on the most
+complex cuts in !!a{proof}, and successively removes cuts that are
+maximal in the sense that no other cut has a cut !!{formula} of higher
+depth. They each have their advantages and drawbacks. For some
+systems, one approach works while another is hard to implement or even
+impossible. So, we describe both approaches. We'll prove cut
+elimination for~\Log{G3c}. In fact, we'll show not that \Cut{} can be
+eliminated, but \emph{context-sharing cut}~\CutCS:
+\[
+\Axiom$\Gamma \fCenter \Delta, !A$
+\Axiom$!A, \Gamma \fCenter \Delta$
+\RightLabel{\Cut}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+If a sequent calculus allows weakening and contraction (either as
+actual rules like in \Log{G1c} or as admissible rules like in
+\Log{G3c}), \Cut{} can simulate \CutCS, and vice versa. We choose
+\CutCS{} over \Cut because the first cut elimination strategy is
+easier to describe for~\CutCS, and the second strategy only works
+for~\CutCS.
+
+\end{document}

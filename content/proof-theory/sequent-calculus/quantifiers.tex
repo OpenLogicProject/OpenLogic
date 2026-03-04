@@ -1,0 +1,161 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{qua}
+
+\olsection{Regular Proofs and Substitution}
+
+The rules for the quantifiers introduce some complications owing to
+the ``eigenvariable conditions'' that apply to the \LeftR{\lexists}
+and~\RightR{\lforall} rules. Most of these complications can be dealt
+with by ensuring that the !!{constant}~$a$ in these inferences is
+never reused. Let's introduce the following definition.
+
+\begin{defn}
+!!^a{proof}~$\pi$ in \Log{G1c} or \Log{G3c} is \emph{regular} if
+\begin{enumerate}
+  \item no eigenvariable~$a$ is used as the eigenvariable of more than
+  one \LeftR{\lexists} or~\RightR{\lforall} inference, and
+  \item if $a$ is the eigenvariable of a \LeftR{\lexists}
+  or~\RightR{\lforall} inference, it only occurs above that inference
+  in~$\pi$.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}\ollabel{lem:subst-regular} If $\pi$ is regular, ends in
+$\Gamma \Sequent \Delta$, $c$ is !!a{constant} not used as an
+eigenvariable in~$\pi$, and $t$~is a term not containing any
+eigenvariables of~$\pi$, then $\Subst{\pi}{t}{c}$ resulting from~$\pi$
+by replacing every occurrence of~$c$ by~$t$ is a regular !!{proof}.
+The end-sequent of $\Subst{\pi}{t}{c}$ is $\Subst{\Gamma}{t}{c}
+\Sequent \Subst{\Delta}{t}{c}$, where $\Subst{\Gamma}{t}{c} =
+\Setabs{!A(t)}{!A(c) \in \Gamma}$.
+\end{lem}
+
+\begin{proof}
+  By induction on $\pheight{\pi}$. If $\pheight{\pi} = 0$, it consists
+  simply of an axiom. Then $\Subst{\pi}{t}{c}$ is also an axiom, since
+  any !!{formula}~$!A(c)$ in it turns into $!A(t)$.
+
+  If $\pheight{\pi} > 0$ we distinguish cases according to the last
+  inference in~$\pi$. The cases for structural rules (in \Log{G1c})
+  and logical rules for propositional connectives are easy and left as
+  exercises. We consider the cases where $\pi$ ends in a quantifier
+  inference.
+  \begin{enumerate}
+    \item If the last inference is $\RightR{\lforall}$, $\pi$ is of
+    the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi'$}
+    \Deduce$\Gamma(c) \fCenter \Delta'(c), !A(a,c)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma(c) \fCenter \Delta'(c), \lforall[x][!A(x,c)]$
+    \DisplayProof
+    \]
+    By induction hypothesis, $\Subst{\pi'}{t}{c}$ is a regular
+    !!{proof} of $\Gamma(t) \fCenter \Delta'(t), !A(a,t)$. Since $a$
+    is an eigenvariable of~$\pi$, $a$~does not occur in~$t$.
+    Therefore, the last inference in $\Subst{\pi}{t}{c}$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi'}{t}{c}$}
+    \Deduce$\Gamma(t) \fCenter \Delta'(t), !A(a,t)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma(t) \fCenter \Delta'(t), \lforall[x][!A(x,t)]$
+    \DisplayProof
+    \]
+    is correct: the conclusion does not contain~$a$. 
+    \item If the last inference is $\LeftR{\lforall}$ in \Log{G3c},
+    $\pi$ is of the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi'$}
+    \Deduce$!A(s(c),c), \lforall[x][!A(x,c)], \Gamma(c) \fCenter \Delta'(c)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x,c)], \Gamma(c) \fCenter \Delta'(c)$
+    \DisplayProof
+    \]
+    By induction hypothesis, $\Subst{\pi'}{t}{c}$ is a regular
+    !!{proof} of $!A(s(t),t), \lforall[x][!A(x,t)], \Gamma(t) \fCenter
+    \Delta'(t)$. The last inference in
+    $\Subst{\pi}{t}{c}$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi'}{t}{c}$}
+    \Deduce$!A(s(t),t), \lforall[x][!A(x,t)], \Gamma(t) \fCenter \Delta'(t)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\lforall[x][!A(x,t)], \Gamma(t) \fCenter \Delta'(t)$
+    \DisplayProof
+    \]
+    is correct. The case for \LeftR{\lforall} in~\Log{G1c} is similar,
+    but slightly less complicated.
+    \item The last inference is \RightR{\lexists} or \LeftR{\lexists}: exercise.
+  \end{enumerate}
+  In each case, we added a sequent to the end of a regular !!{proof}
+  (or two regular !!{proof}s in the case of two-premise rules). The
+  new sequent differs from the end-sequent of $\pi$ only in that $c$
+  was replaced by the term~$t$. Moreover, the eigenvariables of $\pi$
+  and Since $t$ was assumed not to contain an eigenvariable of~$\pi$
+  and $\Subst{\pi}{t}{c}$ are the same, the new end-sequent does not
+  contain an eigenvariable of $\Subst{\pi}{t}{c}$. Consequently,
+  $\Subst{\pi}{t}{c}$ is regular.
+\end{proof}
+
+\begin{prop}
+If $\pi$ is !!a{proof} in \Log{G1c} or \Log{G3c}, then there is a
+regular !!{proof}~$\pi'$ with the same structure (in particular, the
+same !!{height}) which differs from $\pi$ only by replacing
+eigenvariables.
+\end{prop}
+
+\begin{proof}
+For the purpose of the proof only, call an eigenvariable inference
+of~$\pi$ \emph{clean} if its eigenvariable is not the eigenvariable of
+another inference nor does it occur anywhere in~$\pi$ except the
+immediate sub-!!{proof} of the inference, and \emph{dirty} otherwise.
+Let $n$ be the number of dirty eigenvariable inferences in~$\pi$. We
+show, by induction on~$n$, that $\pi$~can be transformed into the
+required regular !!{proof}~$\pi'$. If $n=0$, all eigenvariable
+inferences in~$\pi$ are clean, so and $\pi$ is regular, and there is
+nothing to prove. Otherwise, pick a highest eigenvariable inference,
+say \RightR{\lforall}. The sub-!!{proof}~$\pi_1$ of~$\pi$ ending in it
+is of the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\Gamma \fCenter \Delta, !A(c)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+    \DisplayProof
+    \]
+Note that as $c$ is an eigenvariable, it does not occur in~$\Gamma$,
+$\Delta$, or $\lforall[x][!A(x)]$. The proof $\pi_2$ is regular, since
+it contains no eigenvariable inferences at all. Let $a$ be
+!!a{constant} not occuring in~$\pi$. By \olref{lem:subst-regular},
+$\Subst{\pi_2}{a}{c}$ is a regular proof of $\Gamma \fCenter \Delta,
+!A(a)$, to which we can apply~$\RightR{\lforall}$. If we replace $\pi_1$ in~$\pi$ by the proof $\pi_1'$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\pi_2}{a}{c}$}
+    \Deduce$\Gamma \fCenter \Delta, !A(a)$
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!A(x)]$
+    \DisplayProof
+    \]
+we have replaced a dirty eigenvariable inference by a clean one, and
+the only difference is the replacement of the eigenvariable $c$
+by~$a$. The resulting proof has $n-1$ dirty eigenvariable inferences,
+and the result follows from the inductive hypothesis.
+\end{proof}
+
+We will not appeal to the proposition just proved explicitly, but we
+will assume that all !!{proof}s considered are regular---if they are
+not, we can always replace eigenvariables to make them regular.
+
+\end{document}

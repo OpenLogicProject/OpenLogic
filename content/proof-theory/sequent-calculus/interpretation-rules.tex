@@ -1,0 +1,143 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: interpretation-rules
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{irl}
+
+\olsection{Interpretation of Rules}
+
+Recall the interpretation of a sequent: A sequent $\Gamma \Sequent
+\Delta$ is true in !!a{structure}~$\Struct{M}$ if either at least one
+$!A \in \Gamma$ is false or at least one~$!A \in \Delta$ is true. We
+can read the logical rules of~\Log{G3c} as codifying the truth
+conditions for their principal !!{formula}s. Consider \RightR{\lif}.
+Its principal !!{formula} is $!A \lif !B$. It is true if either $!A$
+is false or~$!B$ is true. Hence the sequent $\ \Sequent !A \lif !B$ is
+true iff $!A \Sequent !B$ is true. If we add the context !!{formula}s
+$\Gamma$, $\Delta$ to the antecedents and succedents of these
+sequents, we get exactly the conclusion and premise of the
+\RightR{\lif} rule. The situation is similar for~\LeftR{\lif}. $!A
+\lif !B$ is false if $!A$~is true and $!B$~is false. So $!A \lif !B
+\Sequent \ $ is true iff both $\ \Sequent !A$ and $!B \Sequent \ $ are
+true. The conclusion of \LeftR{\lif} is equivalent to the
+conjunction of its premises. This pattern ensures that the rules
+of~\Log{G3c} are sound (if all premises are true, the conclusion is
+true). They also ensure completeness.
+
+In fact, the truth conditions for any truth-functional connective can
+be described in this way as a set of sequents. This follows from the
+fact that every truth-function in classical logic can be described by
+!!a{formula} in conjunctive normal form: a conjunction of disjunctions
+of atomic and negated atomic !!{formula}s. For instance, take $!A
+\oplus !B$ to be true iff exactly one of $!A$ and $!B$ is true, i.e.,
+``exclusive or.'' Then $!A \oplus !B$ is true iff $(!A \lor !B) \land
+(\lnot !A \lor \lnot !B)$ is, and it is false if $(\lnot !A \lor !B)
+\land (!A \lor \lnot !B)$ is true. Hence, we could introduce sequent
+calculus rules for $\oplus$ as
+\begin{align*}
+&
+\Axiom$\Gamma \fCenter \Delta, !A, !B$
+\Axiom$!A, !B, \Gamma \fCenter \Delta$
+\RightLabel{\RightR{\oplus}}
+\BinaryInf$\Gamma \fCenter \Delta, !A \oplus !B$
+\DisplayProof
+\\
+& \Axiom$!A, \Gamma \fCenter \Delta, !B$
+\Axiom$!B, \Gamma \fCenter \Delta, !A$
+\RightLabel{\RightR{\oplus}}
+\BinaryInf$!A \oplus !B, \Gamma \fCenter \Delta$
+\DisplayProof
+\end{align*}
+and these rules would also be sound and complete. Their conclusions
+are true iff all premises are true.
+
+\begin{prob}
+Suppose $!A \downarrow !B$ is true iff neither $!A$ nor~$!B$ is true
+(``NOR''). What would its \Log{G3c} rules be? (Find two sequents which
+are true at the same time iff $!A \downarrow !B$ is true. That gives
+you the \RightR{\downarrow} rule. Then find one sequent that is true
+iff $!A \downarrow !B$ is false. That gives you the \LeftR{\downarrow}
+rule.)
+\end{prob}
+
+In \Log{G3c}, each connective and quantifier has exactly two rules: a
+left rule and a right rule. In \Log{G1c}, however, there are two
+\LeftR{\land} and two \RightR{\lor} rules. The reason is that
+Gentzen's original system~\Log{LK}, on which \Log{G1c} is modeled, had
+a variant~\Log{LJ} for an important non-classical logic, viz.,
+intuitionistic logic. To get a system that was sound and complete for
+intuitionistic logic, the succedents of any sequent in~\Log{LJ} is
+restricted to contain at most one !!{formula}. This makes it
+impossible to use the \RightR{\lor} rule of~\Log{G3c}, as its premise
+contains both $!A$ and~$!B$ in the succedent. Gentzen thus used a pair
+of \RightR{\lor} rules for \Log{LJ}, and used the same for~\Log{LK}.
+The intuitionistic version~\Log{G1i} similarly is just~\Log{G1c} with
+all succedents restricted to at most one !!{formula}. (\Log{G3c} also
+has an intuitionistic version, but it some of its rules differ from
+the corresponding rules in~\Log{G3c}. For instance, it, too, uses a
+pair of \RightR{\lor} rules.)
+
+That the structural rules of~\Log{G1c} are sound is easy to see. For
+instance, if $\Gamma \Sequent \Delta$ contains a false !!{formula} on
+the right or a true !!{formula} on the left, so does $\Gamma \Sequent
+\Delta, !A$: the same one, whether $!A$ is true or false is
+irrelevant. So if the premise of~\RightR{\Weakening} is true, so is
+its conclusion. Note that here the converse is not true. The
+conclusion may be true because $!A$ is true, and then the premise is
+not guaranteed to be true.
+
+Why have structural rules at all? Contraction (\RightR{\Contraction},
+\LeftR{\Contraction}) is needed for instance to !!{prove} $\ \Sequent !A
+\lor \lnot !A$. If you start with $!A \Sequent !A$ you first get
+$\Sequent !A, \lnot !A$ by~\RightR{\lnot}. Then you can use the two
+versions of \RightR{\lor} in succession, once to get $!A \lor \lnot
+!A$ from $\lnot !A$, and once to get $!A \lor \lnot !A$ from~$!A$.
+What you get is $\ \Sequent !A \lor \lnot !A, !A \lor \lnot !A$. So to
+get $\Sequent !A \lor \lnot !A$ in~\Log{G1c} you need to be able to
+``contract'' two occurrences of the same !!{formula} in !!a{proof}:
+\[
+\Axiom$!A \fCenter !A$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !A, \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\fCenter !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$\fCenter !A \lor \lnot !A, !A \lor \lnot !A$
+\RightLabel{\RightR{\Contraction}}
+\UnaryInf$\fCenter !A \lor \lnot !A$
+\DisplayProof
+\]
+There are in fact valid sequents which you could not !!{prove}
+in~\Log{G1c} without weakening or contraction. For instance,
+!!a{proof} of the sequent $!A \Sequent !B \lif !A$ in~\Log{G1c} has to
+end in \RightR{\lif} (since only $!B \lif !A$ can be principal), and
+that requires $!B, !A \Sequent !A$ as a premise. This, in turn,
+requires \LeftR{\Weakening} to get it from the axiom $!A \Sequent !A$:
+\[
+\Axiom$!A \fCenter !A$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!B, !A \fCenter !A$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!A \fCenter !B \lif !A$
+\DisplayProof
+\]
+
+In \Log{G3c} the contraction and weakening rules are not needed at
+all. Weakening is built into the axioms. Contraction can mostly be
+avoided by merging the two copies of the context $\Gamma$, $\Delta$ in
+rules with two premises into one. Both \Log{G1c} and \Log{G3c} have
+such ``context sharing'' rules. In one-premise rules, contraction is
+only needed for \RightR{\lor}, \LeftR{\land}, \RightR{\lexists},
+and~\LeftR{\lforall}. The versions of these rules in~\Log{G3c} make
+contraction entirely superfluous. There is a system \Log{G2c} (see
+\olref{tab:G2c}) in which the two-premise rules have independent
+contexts. In \Log{G2c} contraction is even more important than
+in~\Log{G1c}.
+
+\subfile{rules-G2c}
+
+\end{document}

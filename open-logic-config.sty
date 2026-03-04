@@ -102,6 +102,11 @@
 
 \DeclareDocumentMacro \liff {\mathbin{\leftrightarrow}}
 
+% - NAND (Sheffer stroke) and NOR (Peirce arrow) operators
+
+\DeclareDocumentMacro \lnand {\mathbin{\uparrow}}
+\DeclareDocumentMacro \lnor {\mathbin{\downarrow}}
+
 % - The conditional `\cif` and defaults to `\boxright` which produces
 %   Lewis's box-arrow symbol.
 
@@ -853,6 +858,33 @@
 \DeclareDocumentMacro {\Since} {\mathord{\mathsf{S}}}
 \DeclareDocumentMacro {\Until} {\mathord{\mathsf{U}}}
 
+% Proof theory
+% ------------
+
+% height of a derivation
+
+\settexttoken{height}{height}{heights}
+\settexttoken{hp}{hp}{hp}
+
+\DeclareDocumentCommand \pheight { m }{\fn{ht}(#1)}
+
+% depth of a formula
+
+\settexttoken{depth}{depth}{depths}
+
+\DeclareDocumentCommand \depth { m }{\fn{dp}(#1)}
+
+% cut measures
+
+\DeclareDocumentCommand \cheight { m }{\fn{ch}(#1)}
+\DeclareDocumentCommand \cutr { m }{\fn{cr}(#1)}
+
+\DeclareDocumentMacro \CutCS {\ensuremath{\mathrm{Cut}_\mathrm{CS}}}
+
+% delimiter for Maehara's lemma
+
+\DeclareDocumentCommand \maeh { m m }{{#1 \mathrel{;} #2}}
+
 % Special Sets and Mathematical Symbols
 % -------------------------------------
 
@@ -1428,6 +1460,17 @@
 % - `nonderivability`: derivability in a calculus, unprovability
 
 \settexttoken{nonderivability}{non-derivability}{non-derivabilities}
+
+% - `proof' and cognates: used in section on Proof Theory, mainly
+% because writing "derivation" when seems wrong there. But defined
+% as "derivation" for uniformity
+
+\settexttoken{proof}{derivation}{derivations}
+\settexttoken{prove}{derive}{derives}
+\settexttoken{proving}{deriving}{deriving}
+\settexttoken{provable}{derivable}{derivable}
+\settexttoken{provability}{derivability}{derivabilities}
+\settexttoken{nonprovability}{non-derivability}{non-derivabilities}
 
 % - `tableau`: tableau, tableaux; or truth tree
 

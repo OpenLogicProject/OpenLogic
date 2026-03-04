@@ -1,0 +1,348 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: proof-examples
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{ex}
+
+\olsection{Examples of Proofs}
+
+To give !!{proof}s of sequents it is typically convenient to work your
+way upwards from the end-sequent by selecting !!a{formula} in it as
+the active !!{formula} and writing the premises of the corresponding
+rule on top of the sequent, then repeating the process until it leads
+to axioms. For instance, suppose we want to prove the sequent
+\[(!C \land !D) \lif !E \Sequent !C \lif (!D \lif !E)\]
+Consider $!C \lif (!D \lif !E)$: it is of the form $!A \lif !B$ and
+occurs on the right of the sequent. Matching the entire sequent with
+the $\RightR{\lif}$ rule of \Log{G1c},
+\[\Axiom$ !A, \Gamma \fCenter \Delta, !B$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$ \Gamma \fCenter \Delta, !A \lif !B $
+\DisplayProof\]
+suggests we should take $\Gamma = \{!C \lif (!D \lif !E)\}$, $\Delta =
+\emptyset$, $!A \ident !C$ and $!B \ident !D \lif !E$. So the last
+inference of a proof could be
+\[\Axiom$ !C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+If we repeat this idea, focusing on $!D \lif !E$ as active formula, we
+generate
+\[\Axiom$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+Now we have to focus on $(!C \land !D) \lif !E$ and use the $\LeftR{\lif}$ rule of \Log{G1c},
+\[\Axiom$ \Gamma \fCenter \Delta, !A$
+\Axiom$ !B, \Gamma \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !A \lif !B, \Gamma \fCenter \Delta$
+\DisplayProof\]
+This leads us to
+\[\Axiom$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof\]
+Using the !!{formula} $!C \land !D$ in the left topmost sequent as
+principal and the $\RightR{\land}$ rule gives us
+\[
+\Axiom$!D, !C \fCenter !E, !C$
+\Axiom$!D, !C \fCenter !E, !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!D, !C, !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof
+\]
+So far so good. Note that everything we did also works in \Log{G3c},
+since the rules we've made use of so far are the same in \Log{G1c}
+and~\Log{G3c}. We've arrived at !!a{proof} fragment where all top
+sequents contain the same !!{formula} on the left as on the right. But
+they are not quite axioms yet.
+
+In \Log{G1c}, we have to give !!{proof}s of the topmost sequents from
+axioms of the form $!A \Sequent !A$. This is easily done using the
+weakening rules, e.g., the leftmost topmost sequent $!D, !C \Sequent
+!E, !C$ can be !!{prove}d
+as follows:
+\[
+\Axiom$!C \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !C$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !C$
+\]
+Overall, we have !!a{proof} in \Log{G1c} which looks like this:
+\[
+\Axiom$!C \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !C$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !C$
+\Axiom$!D \fCenter !D$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !D$
+\RightLabel{\RightR{\Weakening}}
+\UnaryInf$!D, !C \fCenter !E, !D$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!D, !C \fCenter !E, !C \land !D$
+\Axiom$!E \fCenter !E$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!C, !E \fCenter !C$
+\RightLabel{\LeftR{\Weakening}}
+\UnaryInf$!D, !C, !E \fCenter !E$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$ !D, !C, (!C \land !D) \lif !E \fCenter !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$!C, (!C \land !D) \lif !E \fCenter !D \lif !E$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$(!C \land !D) \lif !E \fCenter !C \lif (!D \lif !E)$
+\DisplayProof
+\]
+The structure of this proof (in particular, its height) is independent
+of what the !!{formula}s $!C$, $!D$, and~$!E$ are. We can replace
+these symbols in the !!{proof} above by any !!{formula}s and the
+result will still be a !!{proof} in~\Log{G1c}. The proof in \Log{G1c}
+is \emph{schematic}.
+
+In \Log{G3c}, axioms are sequents of the form $!A, \Gamma \Sequent
+\Delta, !A$ where $!A$ must be atomic. So although $!D, !C \Sequent
+!E, !C$ looks like an axiom of \Log{G3c} ($\Gamma = \{!D\}$; $\Delta =
+\{!E\}$), it is only \emph{really} an axiom if $!C$ in fact is atomic.
+Our proof fragment is only a complete proof in \Log{G3c} if $!C$,
+$!D$, and $!E$ are atomic !!{formula}s.
+
+Although we haven't, strictly speaking, shown that
+\[\Log{G1c} \Proves (!C \land !D) \lif !E \fCenter !C \lif (!D \lif
+!E),\] in practice this is all we need to do (and can do). That's
+because every sequent of the form $!A, \Gamma \Sequent \Delta, !A$ is
+provable in \Log{G3c}, even if $!A$ itself is not atomic. We can show
+this by induction on the depth~$\depth{!A}$ of~$!A$.
+
+\begin{defn}\ollabel{defn:depth}
+The \emph{depth}~$\depth{!A}$ of !!a{formula} is defined as follows:
+\begin{enumerate}
+  \item If $!A$ is atomic, $\depth{!A} = 0$.
+  \item If $!A \ident \lnot !B$, $!A \ident \lforall[x][A]$, or 
+  $!A \ident \lexists[x][A]$, then $\depth{!A} = \depth{!B} + 1$.
+  \item If $!A \ident (!B \land !C)$, $(!B \lor !C)$, or $(!B \lif
+  !C)$, then $\depth{!A} = \max(\depth{!B},\depth{!C}) + 1$.
+\end{enumerate}
+\end{defn}
+
+It is not hard to prove that $\depth{A(x)} = \depth{A(t)}$ for any
+term~$t$. The important fact for us is that in any rule, the depth of
+the principal !!{formula} is always greater than the depth of the
+active !!{formula}s. For instance, we have:
+\begin{align*}
+\depth{P(x)} = \depth{P(a)} & = 0,\\
+\depth{\lforall[x][P(x)]} & = 1,\\
+\depth{(\lforall[x][P(x)] \lif P(a))} & = \max(1,0) + 1 = 2.
+\end{align*}
+We can use this to prove some results by induction on~$\depth{!A}$,
+such as the following.
+
+\begin{prop}\ollabel{prop:G1c-axioms}
+For any~$!A$, there is !!a{proof} in $\Log{G1c}$ of $!A \Sequent !A$
+in which all axioms are atomic.
+\end{prop}
+
+\begin{proof}
+  By induction on~$\depth{!A}$. If $\depth{!A} = 0$ then $!A$ is
+  atomic and $!A \Sequent !A$ already is a !!{proof} in~\Log{G1c} of
+  the required form. If $\depth{!A} > 0$, $!A$ is constructed from
+  !!{formula}s of lower depth, e.g, $!A \ident \lnot !B$, $!A \ident
+  (!B \land !C)$, or $!A \ident \lforall[x][A(x)]$. The inductive
+  hypothesis is that for all $!D$ with $\depth{!D} < \depth{!A}$,
+  $\Log{G1c} \Proves !D \Sequent !D$ from atomic axioms.
+
+  If $!A \ident \lnot !B$, then $\depth{!B} < \depth{!A}$ and by
+  inductive hypothesis, there is !!a{proof}~$\pi_1$ in \Log{G1c} from
+  atomic axioms of
+  $!B \Sequent !B$. We can extend this to !!a{proof}
+  of $\lnot !B \Sequent \lnot !B$ as follows:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B \fCenter !B$
+  \RightLabel{\LeftR{\lnot}}
+  \UnaryInf$\lnot !B, !B \fCenter $
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\lnot !B \fCenter \lnot !B$
+  \DisplayProof
+\]
+
+  If $!A \ident (!B \land !C)$, then $\depth{!B} < \depth{!A}$ and
+  $\depth{!C} < \depth{!A}$. By inductive hypothesis, there are
+  !!{proof}s~$\pi_1$ and~$\pi_2$ in \Log{G1c} from atomic axioms of $!B
+  \Sequent !B$ and $!C \Sequent !C$. We can extend these
+  to !!a{proof} of $!B \land !C \Sequent !B \land !C$
+  as follows:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B, \fCenter !B$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!B, !C, \fCenter !B$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !C\fCenter !B$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !B \land !C \fCenter !B$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!C, \fCenter !C$
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!B, !C, \fCenter !C$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !C \fCenter !C$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!B \land !C, !B \land !C \fCenter !C$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$!B \land !C \fCenter !B \land !C$
+  \RightLabel{\LeftR{\Contraction}}
+  \UnaryInf$!B \land !C \fCenter !B$
+  \DisplayProof
+  \]
+
+  Now suppose $!A \ident \lforall[x][B(x)]$. Take !!a{constant}~$c$
+  that does not occur in $\lforall[x][B(x)]$. Then $\depth{B(c)} =
+  \depth{!B(x)} < \depth{!A}$ and by inductive hypothesis, there is
+  !!a{proof}~$\pi_1$ in \Log{G1c} from atomic axioms of $!B(c)
+  \Sequent !B(c)$. We can extend this to !!a{proof} of
+  $\lforall[x][B(x)] \Sequent \lforall[x][B(x)]$ as
+  follows:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B(c) \fCenter !B(c)$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[x][!B(x)] \fCenter !B(c)$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$\lforall[x][!B(x)] \fCenter \lforall[x][!B(x)]$
+  \DisplayProof
+\]
+
+  The remaining cases are left as exercises.
+\end{proof}
+
+\begin{prob}
+  Complete the proof of \olref{prop:G1c-axioms} by carrying out the
+  cases where $!A \ident (!B \lor !C)$, $!A \ident (!B \lif !C)$ and
+  $!A \ident \lexists[x][B(x)]$.
+\end{prob}
+
+For our purposes, we could also have used the !!{proof}
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B \fCenter !B$
+\RightLabel{\RightR{\lnot}}
+\UnaryInf$\fCenter !B, \lnot !B$
+\RightLabel{\LeftR{\lnot}}
+\UnaryInf$\lnot !B \fCenter \lnot !B$
+\DisplayProof
+\]
+in the case where $!A \ident \lnot !B$. However, there are sequent
+systems in which this wouldn't have worked. The intuitionistic
+sequent calculus \Log{G1i} is like \Log{G1c}, except it restricts all
+sequents to at most one !!{formula} on the right side of a sequent. If
+$\Delta = \emptyset$, then the first !!{proof} would also be
+!!a{proof} in~\Log{G1i}, but the second would not be, since
+one sequent contains both $!B$ and~$\lnot !B$ on the right.
+
+Note that even in \Log{G1c} we could not have used an alternate order
+of rules in the case where $!A \ident \lforall[x][!B(x)]$. The
+following is \emph{not} !!a{proof}
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!B(c) \fCenter !B(c)$
+  \RightLabel{\RightR{\lforall}}
+  \UnaryInf$!B(c) \fCenter \lforall[x][!B(x)]$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\lforall[x][!B(x)] \fCenter \lforall[x][!B(x)]$
+  \DisplayProof
+\]
+since the eigenvariable condition on~$\RightR{\lforall}$ is violated.
+
+\begin{prop}\ollabel{prop:G3c-axioms}
+Any sequent of the form $!A, \Gamma
+\Sequent \Delta, !A$ (with $!A$ \emph{not} necessarily atomic) is
+provable in~\Log{G3c}.
+\end{prop}
+
+\begin{proof}
+The proof is very similar to the one of \olref{prop:G1c-axioms}, but
+we must be careful with the inductive hypothesis. The case where $n =
+\depth{!A} = 0$ is again easy. If $n=0$, $!A$ is atomic, and $!A,
+\Gamma \Sequent \Delta, !A$ is an axiom of~\Log{G3c}.
+
+Now suppose $n>0$. Again we distinguish cases. The inductive
+hypothesis is: for all $D!$ with $\depth{!D} < n$, and all $\Pi$
+and $\Lambda$, $\Log{G3c} \Proves !D, \Pi \Sequent \Lambda, !D$. Here
+is the case for $!A \ident (!B \land !C)$. We use the inductive
+hypothesis twice: once for $!D = !B$, $\Pi = !C, \Gamma$, and $\Lambda
+= \Delta$ to get !!a{proof}~$\pi_1$ of $!B, !C, \Gamma \Sequent
+\Delta, !B$, and once for $!D = !C$, $\Pi = !B, \Lambda$, and $\Lambda
+= \Delta$ to get !!a{proof}~$\pi_2$ of $!B, !C, \Gamma \Sequent
+\Delta, !C$. Here is the !!{proof} of~$!B \land !C, \Gamma \Sequent
+\Delta, !B \land !C$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B, !C, \Gamma \fCenter \Delta, !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C, \Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!B, !C, \Gamma \fCenter \Delta, !C$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C, \Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!B \land !C, \Gamma \fCenter \Delta, !B \land !C$
+\DisplayProof
+\]
+
+For $!A \ident \lforall[x][!B(x)]$, pick !!a{constant} not
+in~$\lforall[x][!B(x)]$, $\Gamma$, or~$\Delta$. Apply the inductive
+hypothesis for $!D = !B(c)$, $\Pi = \lforall[x][!B(x)], \Gamma$
+and $\Lambda = \Delta$. This gives !!a{proof}~$\pi_1$ of $!B(c),
+\lforall[x][!B(x)], \Gamma \Sequent \Delta, !B(c)$, from which we
+obtain:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B(c), \lforall[x][!B(x)], \Gamma \fCenter \Delta, !B(c)$
+\RightLabel{\LeftR{\lforall}}
+\UnaryInf$\lforall[x][!B(x)], \Gamma \fCenter \Delta, !B(c)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\lforall[x][!B(x)], \Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\DisplayProof
+\]
+The eigenvariable condition on $\RightR{\lforall}$ is satisfied by the
+way we chose~$c$.
+\end{proof}
+
+\begin{prob}
+  Continue the proof of \olref{prop:G3c-axioms} by carrying out the
+  cases where $!A \ident (!B \lif !C)$ and $!A \ident
+  \lexists[x][B(x)]$.
+\end{prob}
+
+\end{document}

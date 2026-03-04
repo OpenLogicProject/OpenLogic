@@ -1,0 +1,71 @@
+If $!A \ident (!B \lif !C)$ then $\pi$ ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\Gamma \fCenter \Delta, !B \lif !C$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B \lif !C, \Pi \fCenter \Lambda, !B$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Pi \fCenter \Lambda$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!B \lif !C, \Pi \fCenter \Lambda$
+\RightSubproofLabel{$\pi_2$}
+\RightLabel{\Cut}
+\BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+The !!{proof} ending in \Cut,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, \Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\lif}}
+\UnaryInf$\Gamma \fCenter \Delta, !B \lif !C$
+\LeftSubproofLabel{$\pi_1$}
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!B \lif !C, \Pi \fCenter \Lambda, !B$
+\RightLabel{\Cut}
+\BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda, !B$
+\DisplayProof
+\]
+has lower cut !!{height} than~$\pi$. The inductive hypthesis yields
+!!a{proof}~$\pi_1''$ of $\Gamma, \Pi \fCenter \Delta, \Lambda, !B$.
+The !!{proof} ending in \Cut,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$B!, \Gamma \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$!C, \Pi \fCenter \Lambda$
+\RightLabel{\Cut}
+\BinaryInf$!B, \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+Both its cut rank and cut !!{height} are less than the cut rank and
+!!{height} of~$\pi$, so the induction hypothesis yields a
+\Log{G3c}-!!{proof}~$\pi_2'''$ of $!B, \Gamma, \Pi, \Pi \fCenter \Delta, \Lambda,
+\Lambda$. Now apply the inductive hypothesis to the !!{proof} ending
+in \Cut,
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma, \Pi \fCenter \Delta, \Lambda, !B$
+\AxiomC{}
+\RightLabel{$\pi_2'''$}
+\Deduce$!B, \Gamma, \Pi, \Pi \fCenter \Delta, \Lambda,
+\Lambda$
+\RightLabel{\Cut}
+\BinaryInf$!B, \Gamma, \Pi \fCenter \Delta, \Lambda$
+\DisplayProof
+\]
+(it has cut rank $< \cutr{\pi}$) to obtain !!a{proof} of $\Gamma,
+\Gamma, \Pi, \Pi, \Pi \fCenter \Delta, \Lambda, \Lambda, \Lambda$. We
+obtain the !!{proof} $\pi'$ of $\Gamma, \Pi \fCenter \Delta, \Lambda$
+by applying \olref[seq][inv]{prop:G3c-cont-adm}.

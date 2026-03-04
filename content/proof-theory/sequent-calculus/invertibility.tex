@@ -1,0 +1,393 @@
+% Part: proof-theory
+% Chapter: sequent-calculus
+% Section: invertibility
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{seq}{inv}
+
+\olsection{Invertibility of Rules}
+
+\begin{defn}
+A rule~$R$,
+\[
+\AxiomC{$S_1$}
+\AxiomC{$\dots$}
+\AxiomC{$S_n$}
+\RightLabel{$R$}
+\TrinaryInfC{$S$}
+\DisplayProof
+\]
+is \emph{invertible} in a system if, whenever $\Proves S$ then
+$\Proves[h_i] S_i$ for $i = 1$, \dots,~$n$. It is
+\emph{!!{height}-preserving invertible} (or \emph{!!{hp}-invertible})
+in a system if, whenever $\Proves_n S$ then $\Proves[n] S_i$ for $i =
+1$, \dots,~$n$.
+\end{defn}
+
+\begin{lem}\ollabel{lem:G3c-invert}
+The rules of~\Log{G3c} for $\lnot$, $\land$, $\lor$, and $\lif$ are
+!!{height}-preserving invertible, that is:
+\begin{enumerate}
+  \item \RightR{\lnot}: If $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, \lnot !A$, then $\Log{G3c} \Proves[n] !A, \Gamma \Sequent
+  \Delta$.
+  \item \LeftR{\lnot}: If $\Log{G3c} \Proves[n] \Gamma, \lnot !A
+  \Sequent \Delta$, then $\Log{G3c} \Proves[n] \Gamma \Sequent \Delta,
+  !A$.
+  \item \RightR{\land}: If $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A \land !B$, then $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A$ and $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !B$.
+  \item \LeftR{\land}: If $\Log{G3c} \Proves[n] \Gamma, !A \land !B
+  \Sequent \Delta$, then $\Log{G3c} \Proves[n] !A, !B, \Gamma \Sequent
+  \Delta$.
+  \item \RightR{\lor}: If $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A \lor !B$, then $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A, !B$.
+  \item \LeftR{\lor}: If $\Log{G3c} \Proves[n] !A \lor !B, \Gamma \Sequent
+  \Delta$, then $\Log{G3c} \Proves[n] !A, \Gamma \Sequent
+  \Delta$ and $\Log{G3c} \Proves[n] !B, \Gamma \Sequent
+  \Delta$.
+  \item \RightR{\lif}: If $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A \lif !B$, then $\Log{G3c} \Proves[n] !A, \Gamma \Sequent
+  \Delta, !B$.
+  \item \LeftR{\lif}: If $\Log{G3c} \Proves[n] !A \lif !B, \Gamma
+  \Sequent \Delta$, then $\Log{G3c} \Proves[n] \Gamma \Sequent \Delta,
+  !A$ and $\Log{G3c} \Proves[n] !B, \Gamma \Sequent \Delta$.
+\end{enumerate}
+\end{lem}
+
+\begin{proof}
+We have to show that, for any rule~$R$ of~\Log{G3c}, if there is
+!!a{proof}~$\pi$ of the conclusion~$S$ of~$R$, then there are also
+!!{proof}s~$\pi_i$ of the premises $S_i$ of~$R$, with $\pheight{\pi_i}
+\le \pheight{\pi}$. Consider the rule \LeftR{\land}: suppose there is
+!!a{proof}~$\pi$ with end-sequent of the form $!A \land !B, \Gamma
+\Sequent \Delta$. We have to show that there is !!a{proof} $\pi'$ of
+$!A, !B, \Gamma \Sequent \Delta$ with $\pheight{\pi'} \le
+\pheight{\pi}$. We do this by induction on $n = \pheight{\pi}$.
+
+If $n = 0$, $\pi$ consists of just an axiom: $!A \land !B, \Gamma
+\Sequent \Delta$. In \Log{G3c}, axioms are of the form $!C, \Gamma
+\Sequent \Delta, !C$ with $!C$ atomic. In other words, $!C$ can't be
+$!A \land !B$. If $!A \land !B, \Gamma \Sequent \Delta$ is an axiom,
+then some atomic $!C$ must be !!a{element} of both $\Gamma$
+and~$\Delta$. But then $!A, !B, \Gamma \Sequent \Delta$ is also an
+axiom, and we have found our !!{proof}~$\pi'$ (which is also of
+!!{height}~$0$).
+
+If $n>0$ it ends in an inference. We have to prove the claim for~$n$,
+but may assume that it is true for any !!{proof} of height~$<n$, even
+if the context is different. In other words, for any $k<n$ and any
+$\Pi$ and $\Lambda$, if $!A \land !B, \Pi \Sequent \Lambda$ has
+!!a{proof} of !!{height}~$k$, then there is !!a{proof} of
+!!{height}~$\le k$ of $!A, !B, \Pi \Sequent \Lambda$.
+
+We have two cases: either $!A \land
+!B$ on the left is principal, or it is not. If it is principal, the
+last inference is \LeftR{\land} and the immediate
+sub-!!{proof}~$\pi_1$ ends in $!A, !B, \Gamma \Sequent \Delta$. The
+result holds in this case as $\pheight{\pi_1} < \pheight{\pi}$.
+
+If $!A \land !B$ is not principal, some other !!{formula} is and $!A
+\land !B$ belongs to the context of the last inference. Then the
+inductive hypothesis applies to the immediate sub-!!{proof}s of the
+last rule~$R$, which yields !!a{proof}~$\pi_1'$ or two
+!!{proof}s~$\pi_1'$ and~$\pi_2'$ of !!{height} no greater than the
+height(s) of the immediate sub-!!{proof}s of~$\pi$. The end-sequents
+of $\pi_1'$ and $\pi_2'$ contain $!A, !B$ in the context on the left
+instead of $!A \land !B$. Apply the rule~$R$ to obtain the
+proof~$\pi'$. For instance, suppose $\pi$ ends in~\LeftR{\lif}:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!A \land !B, \Gamma' \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A \land !B, \Gamma', !D \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!A \land !B, \Gamma', !C \lif !D \fCenter \Delta$
+\DisplayProof
+\]
+Here $!C \lif !D$ on the left is principal, and the context on the
+left is $!A \land !B, \Gamma'$ (i.e., $\Gamma = \Gamma', !C \lif !D$).
+The inductive hypothesis yields !!{proof}s $\pi_1'$ and $\pi_2'$ of 
+$!A \land !B, \Gamma' \Sequent \Delta, !C$ and $!A \land !B, \Gamma',
+!D \Sequent \Delta$, respectively. These two sequents can again
+serve as premises for the \LeftR{\lif} rule to get~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!A, !B, \Gamma' \fCenter \Delta, !C$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!A, !B, \Gamma', !D \fCenter \Delta$
+\RightLabel{\LeftR{\lif}}
+\BinaryInf$!A, !B, \Gamma', !C \lif !D \fCenter \Delta$
+\DisplayProof
+\]
+We have 
+\begin{align*}
+\pheight{\pi} & = \max(\pheight{\pi_1}, \pheight{\pi_2}) + 1\\
+\pheight{\pi'} & = \max(\pheight{\pi_1'}, \pheight{\pi_2'}) + 1
+\intertext{by definition, and}
+\pheight{\pi_1'} & \le \pheight{\pi_1}\\
+\pheight{\pi_2'} & \le \pheight{\pi_2}
+\intertext{by inductive hypothesis. So,}
+\pheight{\pi'} & \le \pheight{\pi}.
+\end{align*}
+\end{proof}
+
+\begin{prob}
+Give the proof of \olref{lem:G3c-invert} for \RightR{\lif}.
+\end{prob}
+
+\begin{lem}\ollabel{lem:invert-quant}
+The rules \RightR{\lforall} and \LeftR{\lexists} are
+!!{height}-preserving invertible in the following sense:
+\begin{enumerate}
+  \item If $\Log{G3c} \Proves[n] \Gamma \Sequent \Delta,
+  \lforall[x][!A(x)]$ then $\Log{G3c} \Proves[n] \Gamma \Sequent
+  \Delta, !A(c)$, and
+  \item if $\Log{G3c} \Proves[n] \lexists[x][!A(x)], \Gamma \Sequent
+  \Delta$ then $\Log{G3c} \Proves[n] !A(c), \Gamma \Sequent \Delta$,
+\end{enumerate}
+for any $c$ not occuring in $\Gamma$, $\Delta$, and $\lforall[x][!A(x)]$
+or $\lexists[x][!A(x)]$, respectively.
+\end{lem}
+
+\begin{proof}
+  We show (1) and leave (2) as an exercise. The argument is similar to
+  the proof of \olref{lem:G3c-invert}. In the inductive step, there
+  are again two cases. The case where $\lforall[x][!A(x)]$ is
+  principal again is quick: the premise of the last
+  $\RightR{\lforall}$ inference is of the required form $\Gamma
+  \Sequent \Delta, !A(a)$ and the immediate sub-!!{proof}~$\pi_1$
+  ending in it has $\pheight{\pi_1} < \pheight{\pi}$. Moreover, the
+  eigenvariable condition gives us that $a$ does not occur in
+  $\Gamma$, $\Delta$, or $\lforall[x][!A(x)]$. Since we may assume that
+  $\pi_1$ is regular, $\Subst{\pi_1}{c}{a}$ is !!a{proof} of the same
+  !!{height} of $\Gamma \Sequent \Delta, !A(c)$ by
+  \olref[qua]{lem:subst-regular}.
+
+  In the second case, $\lforall[x][!A(x)]$ is not principal in the
+  last inference; some other formula is. We again consider a case by
+  way of example. Suppose the last inference is~\RightR{\land}. Some
+  !!{formula} in $\Delta$ is of the form~$!B \land !C$ and is principal.
+  The !!{proof}~$\pi$ ends in
+  \[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', \lforall[x][!A(x)], !B$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma \fCenter \Delta', \lforall[x][!A(x)], !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', \lforall[x][!A(x)], !B \land !C$
+\DisplayProof
+\]
+where $\Delta = \Delta', !B \land !C$. Let $c$ be !!a{constant} that
+does not appear in $\Delta$; then clearly it also does not occur in
+$\Delta', !B$ or in $\Delta', !C$. So the inductive hypothesis applies
+to $\pi_1$ and~$\pi_2$; we have !!{proof}s~$\pi_1'$ and $\pi_2'$ with
+$\pheight{\pi_1'} \le \pheight{\pi_1}$ and $\pheight{\pi_2'} \le
+\pheight{\pi_2}$. The required !!{proof}~$\pi'$ of $\Gamma \Sequent
+\Delta, !A(c)$ is:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta', !A(c), !B$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta', !A(c), !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !A(c), !B \land !C$
+\DisplayProof
+\]
+with $\pheight{\pi'} = \max(\pheight{\pi_1'}, \pheight{\pi_2'})+1 \le \pheight{\pi}$.
+\end{proof}
+
+\Olref{lem:G3c-invert} plays an important role in the proof of the
+cut-elimination theorem. But it can also be used to show the
+following:
+
+\begin{prop}\ollabel{prop:G3c-cont-adm}
+The contraction rules \LeftR{\Contraction} and \RightR{\Contraction}
+of~\Log{G1c} are !!{height}-preserving admissible in~\Log{G3c}.
+\end{prop}
+
+\begin{proof}
+We give the argument for \RightR{\Contraction} and
+\LeftR{\Contraction} at the same time. Suppose $\pi$ is !!a{proof} of
+$\Gamma \Sequent \Delta, !A, !A$ or of $!A, !A, \Gamma \Sequent
+\Delta$ in~\Log{G3c}. We have to show that there is also a
+\Log{G3c}-!!{proof}~$\pi'$ of $\Gamma \Sequent \Delta, !A$ or $!A,
+\Gamma \Sequent \Delta$, respectively, with $\pheight{\pi'} \le
+\pheight{\pi}$. We do this by induction on $n = \pheight{\pi}$.
+
+If $n=0$, $\pi$ is just an axiom. But if $\Gamma \Sequent \Delta, !A,
+!A$ is an axiom of~\Log{G3c}, so is $\Gamma \Sequent \Delta, !A$:
+either some atomic~$!C$ is !!a{element} of both $\Gamma$ and~$\Delta$,
+or $!A$ is atomic and !!a{element} of~$\Gamma$. The same reasoning
+applies if the end-sequent is $!A, !A, \Gamma \Sequent
+\Delta$.
+
+If $n>0$, $\pi$ ends in some rule~$R$. If $!A$ is not principal in
+this last inference, we can obtain !!a{proof}~$\pi'$ as in the proof
+of \olref{lem:G3c-invert} by applying the inductive hypothesis to the
+immediate sub-!!{proof}s of~$\pi$ and applying the same rule~$R$ to
+the resulting !!{proof}(s). The inductive hypothesis is that if there
+is !!a{proof} of !!{height}~$k<n$ of either $\Pi \Sequent \Lambda, !D,
+!D$ or $!D, !D, \Pi \Sequent \Lambda$, then there is !!a{proof} of
+!!{height}~$\le k$ of $\Pi \Sequent \Lambda, !D$ or $!D, \Pi \Sequent
+\Lambda$, respectively. (Note that the inductive hypothesis applies if
+the contexts or contracted !!{formula} are different from $\Gamma$,
+$\Delta$, or~$!A$!)
+
+For instance, suppose $R$ is $\RightR{\land}$
+and $\pi$~ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta', !B, !A, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma \fCenter \Delta', !C, !A, !A$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !A, !A$
+\DisplayProof
+\]
+where $\Delta = \Delta', !B \land !C$. The inductive hypothesis yields
+!!{proof}s $\pi_1'$ and $\pi_2'$ of $\Gamma \fCenter \Delta', !B, !A$
+and $\Gamma \fCenter \Delta', !C, !A$, respectively, with
+$\pheight{\pi_1'} \le  \pheight{\pi_1}$ and $\pheight{\pi_2'} \le
+\pheight{\pi_2}$. The !!{proof}~$\pi'$ is:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta', !B, !A$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$\Gamma \fCenter \Delta', !C, !A$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta', !B \land !C, !A$
+\DisplayProof
+\]
+
+If $!A$ is principal in the last inference, we apply the inversion
+lemma (\olref{lem:G3c-invert}) to the immediate sub-!!{proof}s
+of~$\pi$, then the inductive hypothesis, and then rule~$R$ again. For
+instance, suppose $\pi$ proves $\Gamma \Sequent \Delta, !A, !A$, $!A
+\ident (!B \land !C)$ and principal in the last inference. Then $\pi$
+looks as follows:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C, !B$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta, !B \land !C, !B \land !C$
+\DisplayProof
+\]
+Apply \olref{lem:G3c-invert} to $\pi_1$ to get !!a{proof}~$\pi_1'$ of
+$\Gamma \Sequent \Delta, !B, !B$. (It also yields !!a{proof} of
+$\Gamma \Sequent \Delta, !C, !B$, but we don't need that.) Similarly,
+by applying \olref{lem:G3c-invert} to~$\pi_2$ we obtain
+!!a{proof}~$\pi_2'$ of $\Gamma \Sequent \Delta, !C, !C$. As the
+inversion of \RightR{\land} is !!{height}-preserving,
+$\pheight{\pi_1'} \le  \pheight{\pi_1} < \pheight{\pi}$ and
+$\pheight{\pi_2'} \le  \pheight{\pi_2} < \pheight{\pi}$. Thus, the
+inductive hypothesis applies to $\pi_1'$ and $\pi_2'$: there are
+!!{proof}s~$\pi_1''$ and $\pi_2''$ of $\Gamma \Sequent \Delta, !B$ and
+$\Gamma \Sequent \Delta, !C$, respectively, with $\pheight{\pi_1''}
+\le \pheight{\pi_1'} \le \pheight{\pi_1}$ and $\pheight{\pi_2''} \le
+\pheight{\pi_2'} \le \pheight{\pi_2}$. The !!{proof}~$\pi'$ then is:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B$
+\AxiomC{}
+\RightLabel{$\pi_2''$}
+\Deduce$\Gamma \fCenter \Delta, !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$\Gamma \fCenter \Delta, !B \land !C$
+\DisplayProof
+\]
+with $\pheight{\pi'} \le \pheight{\pi}$.
+
+We must take special care for the quantifier rules in the cases where
+the !!{formula} is principal.
+
+Suppose $!A \ident \lforall[x][!B(x)]$ is principal on the right. Then $\pi$ ends in
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, \lforall[x][!B(x)], !B(a)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)], \lforall[x][!B(x)]$
+\DisplayProof
+\]
+By \olref{lem:invert-quant}, there is !!a{proof}~$\pi_1'$ with
+!!{height} $\le \pheight{\pi_1}$ of $\Gamma \fCenter \Delta, !B(c),
+!B(a)$ for any~$c$ not occuring in $\Gamma \fCenter \Delta,
+\lforall[x][!B(x)], !B(a)$. We may assume that $\pi_1'$ is regular; so
+by \olref[qua]{lem:subst-regular} the !!{proof} $\Subst{\pi_1'}{a}{c}$
+is !!a{proof} of $\Gamma \fCenter \Delta, !B(a),
+!B(a)$ also of !!{height} $\le \pheight{\pi_1}$. Now the inductive
+hypothesis applies and gives us !!a{proof}~$\pi_1''$ of $\Gamma
+\fCenter \Delta, !B(a)$. Apply the \RightR{\lforall} rule to
+get~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1''$}
+\Deduce$\Gamma \fCenter \Delta, !B(a)$
+\RightLabel{\RightR{\lforall}}
+\UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)]$
+\DisplayProof
+\]
+with $\pheight{\pi'} \le \pheight{\pi}$.
+
+Now suppose $!A \ident \lexists[x][!B(x)]$
+and principal on the right. Then $\pi$ looks as follows:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, \lexists[x][!B(x)], \lexists[x][!B(x)], !B(t)$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!B(x)], \lexists[x][!B(x)]$
+\DisplayProof
+\]
+The inductive hypothesis applies to~$\pi_1$ and there is
+!!a{proof}s~$\pi_1'$ of $\Gamma \Sequent \Delta, \lexists[x][!B(x)],
+!B$. (Note that no inversion lemma is needed here!) The
+!!{proof}~$\pi'$ then is:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$\Gamma \fCenter \Delta,  \lexists[x][!B(x)], !B$
+\RightLabel{\RightR{\lexists}}
+\UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!B(x)]$
+\DisplayProof
+\]
+with $\pheight{\pi'} \le \pheight{\pi}$.
+\end{proof}
+
+\begin{prob}
+Sketch the proof of \olref{prop:G3c-cont-adm} for \LeftR{\Contraction}.
+Describe the cases where $!A \ident (!B \land !C)$ and $!A \ident (!B
+\lif !C)$.
+\end{prob}
+
+\begin{prob}
+Sketch the proof of \olref{prop:G3c-cont-adm} for \LeftR{\Contraction}
+for the remaining quantifier cases, i.e., where $!A \ident
+\lforall[x][!B(x)]$ and $!A \ident \lexists[x][!B(x)]$.
+\end{prob}
+
+
+\end{document}

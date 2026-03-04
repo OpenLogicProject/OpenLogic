@@ -1,0 +1,340 @@
+% Part: proof-theory
+% Chapter: cut-elimination
+% Section: ce-largest
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{cut}{inv}
+
+\olsection{Removing Largest Cuts}
+
+The proof of \olref[seq][inv]{lem:G3c-invert} shown that if \Log{G3c}
+!!{prove}s the conclusion of a logical rule (other than
+\RightR{\lexists} and \LeftR{\lforall}), it also !!{prove}s each of
+the premises of the rule without increasing the !!{height} of the
+proof. We can do better and show that this holds also for $\Log{G3c} +
+\CutCS$.
+
+As before, we take the \emph{cut rank} of a \CutCS{} inference to be
+the depth of its cut !!{formula}.
+
+\begin{lem}\ollabel{lem:inv-G3c-cut}
+If $\Log{G3c} + \CutCS$ !!{prove}s the conclusion of a logical
+rule~$R$ other than \RightR{\lexists} or \LeftR{\lforall} using !!a{proof}~$\pi$ then it also !!{prove}s each premise
+with !!{proof}~$\pi'$ (or !!{proof}s~$\pi'$, $\pi''$ depending on
+whether the rule has one or two premises). Moreover,
+(a)~$\pheight{\pi'}\le\pheight{\pi}$ (and
+$\pheight{\pi''}\le\pheight{\pi}$) and (b)~the number of \CutCS{}
+inferences as well as their ranks is the same in~$\pi'$ (and $\pi''$)
+as in~$\pi$.
+\end{lem}
+
+\begin{proof}
+By inspection of the proofs of
+\cref{pt:seq:inv:lem:G3c-invert,pt:seq:inv:lem:invert-quant}. That
+proof was by induction on~$\pheight{\pi}$. In the base case, we
+replaced an axiom by another axiom. So conditions (a) and~(b) are
+trivially satisfied. If the last rule of~$\pi$ was~$R$, its immediate
+sub-!!{proof}s are the !!{proof}s~$\pi_i$ we want, and (a) and~(b) are
+both satisfied. In all other cases, we applied the inductive
+hypothesis to the immediate sub-!!{proof}s of~$\pi$, i.e., those
+leading to the premise(s) of the last inference~$R$, and then applied
+that same rule $R$ to the results. The conditions (a) and~(b) hold for
+the immediate sub-!!{proof}s of the new proof, and so (a) and~(b) hold
+for the entire proof. It remains to verify the case where the last
+inference is~\CutCS. We do this again for one example only: suppose
+$\pi$ is !!a{proof} of the conclusion $!B \land !C, \Gamma \Sequent
+\Delta$ of \LeftR{\land}, and ends in~\CutCS:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$!B \land !C, \Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, !B \land !C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B \land !C, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+The induction hypothesis applies to $\pi_1$ and~$\pi_2$ (which are
+also !!{proof}s of instances of the conclusion of $\LeftR{\land}$) and
+yields !!{proof}s $\pi_1'$ and~$\pi_2'$ of $!B, !C, \Gamma \fCenter
+\Delta, !A$ and $!A, !B, !C, \Gamma \fCenter \Delta$,
+respectively. We combine these using \CutCS{} to obtain~$\pi'$:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1'$}
+\Deduce$!B, !C, \Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2'$}
+\Deduce$!A, !B, !C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$!B, !C, \Gamma \fCenter \Delta$
+\DisplayProof
+\]
+Clearly, (a) and~(b) are satisfied.
+\end{proof}
+
+Note that this would not work if we used \Cut{} instead of \CutCS, as
+then the conclusion of the last !!{proof} would have two copies of
+$!B, !C, \Gamma$ in the antecedent and two copies of $\Delta$ in the
+succedent. We would have to appeal to the admissibility of
+contraction, but the proof of \olref[seq][inv]{prop:G3c-cont-adm} uses
+the invertibility lemma. We'd thus be arguing in a circle.
+
+We can use \cref{pt:cut:inv:lem:inv-G3c-cut} to give an alternative
+proof of cut elimination. In this proof we do not successively remove
+topmost occurrences of \CutCS{} inferences, but occurrences of \CutCS{}
+inferences of maximal rank. That is, we start with !!a{proof}~$\pi$ in
+$\Log{G3c} + \CutCS$ and remove a cut anywhere in it (possibly
+replacing it with cuts of smaller rank)---and then keep doing that
+until no cuts remain. The only condition is that above the cut we deal
+with, no cuts of the same or higher rank occur.
+
+\begin{lem}\ollabel{lem:max-cut-red-G3c} If $\pi$ is !!a{proof} in
+$\Log{G3c}+\CutCS$ ending in a~\CutCS{} inference of rank~$n$ and
+otherwise using only rules of~$\Log{G3c}$ and \CutCS{} inferences of
+rank $<n$, then there is a proof~$\pi'$ of the same end-sequent
+in~$\Log{G3c} + \CutCS$ where every \CutCS{} inference has rank~$<n$.
+\end{lem}
+
+\begin{proof}
+The !!{proof}~$\pi$ ends in:
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !A$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!A, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+We distinguish cases according to the form of~$!A$.
+
+Suppose $!A$ is atomic. Observe that by the condition that all
+\CutCS{} inferences in~$\pi_1$ and $\pi_2$ must have rank $<
+\depth{!A} = 0$, there can be no \CutCS{} inferences in~$\pi_1$
+or~$\pi_2$. We show that $\Gamma \Sequent \Delta$ has a cut-free proof
+by induction on $\pheight{\pi_2}$. If $\pheight{\pi_2} = 0$, then $!A,
+\Gamma \Sequent \Delta$ is an axiom. If $!A$ is not principal, some
+atomic $!C$ is !!a{element} of both~$\Gamma$ and $\Delta$, and $\Gamma
+\Sequent \Delta$ itself is an axiom. If $!A$ is principal, then
+$\Delta = \Delta, !A$. In this case, $\pi_1$ ends in $\Gamma \Sequent
+\Delta', !A, !A$. We obtain a cut-free proof of $\Gamma \Sequent
+\Delta', !A$ by applying \olref[seq][inv]{prop:G3c-cont-adm}
+(admissibility of contraction). If $\pheight{\pi_2} > 0$ it ends in a
+rule~$R$. Take a premise of that rule: it has the form $!A, \Gamma',
+\Pi \Sequent \Delta', \Lambda$, where $\Pi$ and $\Lambda$ are the
+active !!{formula}s of~$R$. \olref[seq][adm]{prop:weak-G3c-adm}
+applied to~$\pi_1$ and $\pi_2$ yields !!{proof}s of $\Gamma, \Gamma',
+\Pi \Sequent \Delta, \Delta', \Lambda, !A$ and $!A, \Gamma, \Gamma',
+\Pi \Sequent \Delta, \Delta', \Lambda$, to which the induction
+hypothesis applies. This gives us !!a{proof} of $\Gamma, \Gamma', \Pi
+\Sequent \Delta, \Delta', \Lambda$, for each premise of~$R$. Applying
+$R$ yields $\Gamma, \Gamma \Sequent \Delta, \Delta$, and
+\olref[seq][inv]{prop:G3c-cont-adm} provides the cut-free proof of
+$\Gamma \Sequent \Delta$.
+
+If $!A$ is not atomic, we distinguish cases according to the !!{main
+operator} of~$!A$. In each case, we apply \olref{lem:inv-G3c-cut} to
+obtain !!{proof}s of the premises of the left- and right-rules with
+$!A$ as principal formula. We then proceed as in case~E of the proof
+of \olref[top]{lem:cut-adm-G3c}.
+\begin{enumerate}
+  \item $!A \ident \lnot !B$. The !!{proof}s $\pi_1$ and $\pi_2$ end
+  in $\Gamma \Sequent \Delta, \lnot !B$ and $\lnot !B, \Gamma \Sequent
+  \Delta$. By \olref{lem:inv-G3c-cut}, there are !!{proof}s $\pi_1'$
+  and $\pi_2'$ of $!B, \Gamma \Sequent
+  \Delta$ and $\Gamma \Sequent \Delta, !B$. The !!{proof}~$\pi'$ is:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$\Gamma \fCenter \Delta, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$!B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  \item $!A \ident (!B \lor !C)$. The !!{proof}s $\pi_1$ and $\pi_2$
+  end in $\Gamma \Sequent \Delta, !B \lor !C$ and $!B \lor !C, \Gamma
+  \Sequent \Delta$. By \olref{lem:inv-G3c-cut} (inversion for for
+  \RightR{\lor} applied to~$\pi_1$), there is !!a{proof} $\pi_1'$ of
+  $\Gamma \Sequent \Delta, !B, !C$. By \olref{lem:inv-G3c-cut}
+  (inversion for \LeftR{\lor} applied to~$\pi_2$), there is !!a{proof}
+  $\pi_2'$ of $!B, \Gamma \Sequent \Delta$ and !!a{proof} $\pi_2''$ of
+  $!C, \Gamma \Sequent \Delta$. By applying
+  \olref[seq][adm]{prop:weak-G3c-adm} to $\pi_2''$ we also get
+  !!a{proof}~$\pi_2'''$ of $!C, \Gamma \Sequent \Delta, !B$. The
+  !!{proof}~$\pi'$ is:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$\Gamma \fCenter \Delta, !B, !C$
+  \AxiomC{}
+  \RightLabel{$\pi_2'''$}
+  \Deduce$!C, \Gamma \fCenter \Delta, !B$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$!B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  \item $!A \ident (!B \land !C)$. Exercise.
+  \item $!A \ident (!B \lif !C)$. The !!{proof}s $\pi_1$ and $\pi_2$
+  end in $\Gamma \Sequent \Delta, !B \lif !C$ and $!B \lif !C, \Gamma
+  \Sequent \Delta$. By \olref{lem:inv-G3c-cut} (inversion for
+  \RightR{\lif} applied to~$\pi_1$), there is !!a{proof} $\pi_1'$ of
+  $!B, \Gamma \Sequent \Delta, !C$. By \olref{lem:inv-G3c-cut}
+  (inversion for \LeftR{\lif} applied to~$\pi_2$), there is
+  !!a{proof} $\pi_2'$ of $\Gamma \Sequent \Delta, !B$ and !!a{proof}
+  $\pi_2''$ of $!C, \Gamma \Sequent \Delta$. By applying
+  \olref[seq][adm]{prop:weak-G3c-adm} to $\pi_2''$ we also get
+  !!a{proof}~$\pi_2'''$ of $!C, !B, \Gamma \Sequent \Delta$. The
+  !!{proof}~$\pi'$ is:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_2'$}
+  \Deduce$\Gamma \fCenter \Delta, !B$
+  \AxiomC{}
+  \RightLabel{$\pi_1'$}
+  \Deduce$!B, \Gamma \fCenter \Delta, !C$
+  \AxiomC{}
+  \RightLabel{$\pi_2'''$}
+  \Deduce$!C, !B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$!B, \Gamma \fCenter \Delta$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma \fCenter \Delta$
+  \DisplayProof
+  \]
+  \item $!A \ident \lforall[x][!B(x)]$. The !!{proof}s $\pi_1$ and
+  $\pi_2$ end in $\Gamma \Sequent \Delta, \lforall[x][!B(x)]$ and
+  $\lforall[x][!B(x)], \Gamma \Sequent \Delta$. By
+  \olref{lem:inv-G3c-cut}, there is !!a{proof}~$\pi_1'$ of $\Gamma
+  \Sequent \Delta, !B(c)$.
+
+  Now consider the !!{proof}~$\pi_2$. It ends in $\lforall[x][!B(x)],
+  \Gamma \Sequent \Delta$. Moving upward from the end-sequent
+  of~$\pi_2$, mark every occurrence of $\lforall[x][!B(x)]$ on the
+  left of a sequent that ``leads to'' the occurrence of
+  $\lforall[x][!B(x)]$ in the end-sequent of~$\pi_2$, that is:
+  (a)~Mark $\lforall[x][!B(x)]$ in the end-sequent of~$\pi_2$. (b)~If
+  $\lforall[x][!B(x)]$ occurs in the context of the conclusion of a
+  rule and is marked, mark a corresponding occurrence in the
+  premise(s) of the rule. (c)~If $\lforall[x][!B(x)]$ is principal in
+  the conclusion of a \LeftR{\lforall} rule and is marked, mark the
+  corresponding active occurrences of $\lforall[x][!B(x)]$ and $!B(t)$
+  in the premise.
+  
+  Now consider all these marked occurrences of $\lforall[x][!B(x)]$.
+  None of them are active in a rule other than \LeftR{\lforall} (only
+  active !!{formula}s of \LeftR{\lforall} get marked). Delete all
+  marked occurrences of $\lforall[x][!B(x)]$ in $\pi_2$.
+  If this is a correct !!{proof}, the marked occurrences of
+  $\lforall[x][!B(x)]$ were never active; they all came directly from
+  axioms. The !!{proof} ends in~$\Gamma \Sequent \Delta$ and we can
+  replace $\pi$ by it. We have a removed a cut of maximal rank.
+
+  Otherwise, what we have is not a correct proof because we have
+  deleted !!{formula}s $\lforall[x][!B(x)]$ which were active in some
+  \LeftR{\lforall} inferences. We have turned these into
+  ``inferences'' of the form
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_t$}
+  \Deduce$!B(t), \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\lforall}}
+  \UnaryInf$\Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  Replace each topmost such ``inference'' by
+  \[
+  \AxiomC{}
+  \RightLabel{$\Subst{\pi_1'}{t}{c}[\Pi \Sequent \Lambda]$}
+  \Deduce$\Gamma, \Pi \fCenter \Delta, \Lambda, !B(t)$
+  \AxiomC{}
+  \RightLabel{$\pi_t[\Gamma \Sequent \Delta]$}
+  \Deduce$!B(t), \Gamma, \Pi \fCenter \Delta, \Lambda$
+  \RightLabel{\CutCS}
+  \BinaryInf$\Gamma, \Pi \fCenter \Delta, \Lambda$
+  \DisplayProof
+  \]
+  and add $\Gamma$ to the left and $\Delta$ to the right of every
+  sequent below it. Repeat until all \LeftR{\lforall} ``inferences''
+  with a marked $!B(t)$ in the premise have been replaced by a
+  \CutCS{} inference on some~$!B(t)$. The end-sequent of the resulting
+  !!{proof} (and it now is a correct !!{proof}) is of the form
+  $\Gamma, \dots, \Gamma \Sequent \Delta, \dots, \Delta$. Apply
+  admissibility of contraction to turn it into !!a{proof} of~$\Gamma
+  \Sequent \Delta$ and replace $\pi$ with it. We have replaced one cut
+  on $\lforall[x][!B(x)]$ with (possibly many) cuts on $!B(t)$, but
+  these are all of lower rank. Any cuts already occurring in $\pi_1$ or
+  $\pi_2$ remain present, but they are also all of lower rank.
+\end{enumerate}
+\end{proof}
+
+\begin{prob}
+Verify the case where $!A \ident (!B \land !C)$ in the proof of
+\olref{lem:inv-G3c-cut}. That is, show that if there is
+!!a{proof}~$\pi$ ending in 
+\[
+\AxiomC{}
+\RightLabel{$\pi_1$}
+\Deduce$\Gamma \fCenter \Delta, !B \land !C$
+\AxiomC{}
+\RightLabel{$\pi_2$}
+\Deduce$!B \land !C, \Gamma \fCenter \Delta$
+\RightLabel{\CutCS}
+\BinaryInf$\Gamma \fCenter \Delta$
+\DisplayProof
+\]
+with $\pi_1$ and $\pi_2$ containing only cuts of rank $<\depth{!B
+\land !C}$ then there is !!a{proof}~$\pi'$ of $\Gamma \Sequent \Delta$
+containing only cuts of rank $<\depth{!B \land !C}$.
+\end{prob}
+
+% \begin{prob}
+% Verify the case where $!A \ident \lexists[x][!B(x)]$ in the proof of
+% \olref{lem:inv-G3c-cut}.
+% \end{prob}
+
+
+\olref[top]{lem:cut-adm-G3c} establishes that we can replace a \CutCS{}
+inference of highest rank in !!a{proof} by \CutCS{} inferences of
+lower rank. We can again use this lemma to show that we can eliminate
+any number of \CutCS{} inferences from !!a{proof} by successively
+applying it to the topmost sub-!!{proof}s ending in maximal~\CutCS.
+
+\begin{thm}\ollabel{thm:cut-elim-G3c-largest}
+Any !!{proof} $\pi$ in $\Log{G3c} + \CutCS$ can be transformed into a proof in~\Log{G3c}.
+\end{thm}
+
+\begin{proof}
+  First we prove that all cuts of maximal rank in~$\pi$ can be
+  removed. Let $d$ be the maximal rank of cuts occuring in~$\pi$, and
+  let $n$ be the number of cuts of rank~$d$. The proof is by induction
+  on~$n$. If $n=0$ there is nothing to prove. If $n>0$, pick a topmost
+  cut of rank~$d$, and let $\pi_1$ be the sub-!!{proof} ending in it.
+  By \olref{lem:max-cut-red-G3c}, there is !!a{proof}~$\pi_1'$ of the
+  same end-sequent with all cuts of rank $<d$. Replace $\pi_1$ by
+  $\pi_1'$ in~$\pi$. This results in !!a{proof} containing $n-1$ cuts
+  of rank~$d$, and the induction hypothesis applies.
+
+  Now the result follows by induction on~$d$. If $d=0$, all cuts are
+  atomic, and by the previous result can all be removed. If $d>0$,
+  the previous result yields a proof in which all cuts of rank $d$
+  have been replaced by cuts of rank~$<d$. Since $d$ was the maximum
+  rank of cuts in~$\pi$, we have proof in which the maximal rank of
+  cuts is $<d$, and the induction hypothesis applies.
+\end{proof}
+
+\end{document}
