@@ -25,7 +25,7 @@ automated reasoning. Its original motivation and application was in
 the philosophy of science, since it can be used to study the
 primitives by which a theory can or cannot be axiomatized. It also
 implies Beth's definability theorem, which states that if a theory can
-implicitly define a concept, if can define it explicitly.
+implicitly define a concept, it can define it explicitly.
 
 Like many results in mathematical logic, the interpolation theorem can
 be proved both using the methods of model theory and those of proof
@@ -42,21 +42,24 @@ in~$!A$ and $\Lang L(\Gamma) = \bigcup \Setabs{\Lang L(!A)}{!A \in
 \begin{thm}[Craig's Interpolation Theorem]\ollabel{thm:interpolation}
 Let the !!{language} of~$!A$ be $\Lang L(!A)$ and that of $!B$ be
 $\Lang L(!B)$. If $\Log{G3c} \Proves !A \Sequent !B$ then there is
-!!a{formula}~$!C$ in the !!{language}~$\Lang L(!A) \cap \Lang L(!B)$
-such that $\Log{G3c} \Proves !A \Sequent !C$ and $\Log{G3c} \Proves !C \Sequent !B$.
+!!a{formula}~$!C$ in the !!{language}~$\Lang L(!C) \subseteq \Lang
+L(!A) \cap \Lang L(!B)$ such that $\Log{G3c} \Proves !A \Sequent !C$
+and $\Log{G3c} \Proves !C \Sequent !B$.
 \end{thm}
 
 We prove a generalization of the interpolation theorem to make use of
 the structure of !!{proof}s in~\Log{G3c}. To this end, imagine the
 antecendent and succedents of sequents to be separated into two parts
-each. We write $\maeh{\Gamma_1}{\Gamma_2} \Sequent \maeh{\Delta_1}{\Delta_2}$ to
-indicate that $\Gamma_1$ and $\Delta_1$ belong to the first part and
-$\Gamma_2$ and $\Delta_2$ to the second part. The interpolation
-theorem then follows immediately from the following lemma.
+each. We write $\maeh{\Gamma_1}{\Gamma_2} \Sequent
+\maeh{\Delta_1}{\Delta_2}$ to indicate that $\Gamma_1$ and $\Delta_1$
+belong to the first part and $\Gamma_2$ and $\Delta_2$ to the second
+part. The interpolation theorem then follows immediately from the
+following lemma.
 
 \begin{lem}[Maehara's Lemma]\ollabel{lem:maehara} If $\Log{G3c}
 \Proves \maeh{\Gamma_1}{\Gamma_2} \Sequent \maeh{\Delta_1}{\Delta_2}$
-then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
+then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(!C)
+\subseteq \Lang L(\Gamma_1,
 \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)$ such that $\Log{G3c}
 \Proves \Gamma_1 \Sequent \Delta_1, !C$ and $\Log{G3c} \Proves !C,
 \Gamma_2 \Sequent \Delta_2$.
@@ -150,10 +153,10 @@ then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
     already told us that the sequent on the right is !!{provable}, and
     the sequent on the left follows from the sequent we got from the
     inductive hypothesis by~$\RightR{\lnot}$. The inductive hypothesis
-    also tells us that $\Lang L(!C_1) \in \Lang L(!A, \Gamma_1,
+    also tells us that $\Lang L(!C_1) \subseteq \Lang L(!A, \Gamma_1,
     \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2)$. Since $\Lang L(\lnot
     !A) = \Lang L(!A)$ and $\Lang L(!C) = \Lang L(!C_1)$ we have that
-    $\Lang L(!C_1) \in \Lang L(\Gamma_1, \Delta_1, \lnot !A) \cap \Lang
+    $\Lang L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1, \lnot !A) \cap \Lang
     L(\Gamma_2, \Delta_2)$.
 
     In the second scenario the situation is slightly different
@@ -169,7 +172,7 @@ then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
     \end{align*}
     These are again exactly the sequents we want to be !!{provable} if
     $!C_1$ is an interpolant; we again let $!C \ident !C_1$. $\Lang
-    L(!C_1) \in \Lang L(\Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2,
+    L(!C_1) \subseteq \Lang L(\Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2,
     \Delta_2, \lnot !A)$ as before.
     \item $\pi$ ends in $\RightR{\lif}$ with principal !!{formula}~$!A
     \lif !B$. We again have two cases, depending on whether $!A \lif
@@ -306,9 +309,9 @@ then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
     !!{formula} built from $!C_1$ and $!C_2$, but this time we need it
     in the antecedent (since we're now dealing with the second part).
     Applying $\LeftR{\land}$ does the trick; we should take $!C \ident
-    (!C_1 \land !C_2)$ as the interpolant.
-    Fortuitously, we can use the remaining sequents (1) and (3) to
-    !!{prove} the corresponding sequent for the other part:
+    (!C_1 \land !C_2)$ as the interpolant. Fortuitously, we can use
+    the remaining sequents (1) and (3) to !!{prove} the corresponding
+    sequent for the other part:
     \[
     \AxiomC{}
     \Deduce$\Gamma_1 \fCenter \Delta_1, !C_1$
@@ -321,8 +324,9 @@ then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
     As before, we have $\Lang L(!C_1 \land !C_2) \subseteq \Lang
     L(\Gamma_1, \Delta_1) \cap \Lang L(\Gamma_2, \Delta_2, !A \lif
     !B)$.
-    \item $\pi$ ends in $\RightR{\lforall}$:
-        \[
+
+    \item $\pi$ ends in $\RightR{\lforall}$ with principal !!{formula}~$\lforall[x][!A(x)]$:
+    \[
     \AxiomC{}
     \RightLabel{$\pi_1$}
     \Deduce$\maeh{\Gamma_1}{\Gamma_2} \fCenter
@@ -362,9 +366,11 @@ then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
     condition.
     
     The other scenario is similar.
-    \item $\pi$ ends in $\RightR{\lexists}$. We again have two
-    scenarios. We consider the scenario where $\lexists[x][!A(x)]$
-    belongs to the first part, and leave the other as an exercise.
+
+    \item $\pi$ ends in $\RightR{\lexists}$ with principal
+    !!{formula}~$\lexists[x][!A(x)]$. We again have two scenarios. We
+    consider the scenario where $\lexists[x][!A(x)]$ belongs to the
+    first part, and leave the other as an exercise.
 
     In the first scenario, $\pi$ ends in
     \[
@@ -454,6 +460,7 @@ then there is !!a{formula}~$!C$ in the !!{language}~$\Lang L(\Gamma_1,
     !!{proof} is satisfied because $b \notin \Lang L(\Gamma_2,
     \Delta_2)$, and $!C_1'$ was defined so it does not contain~$b$.
   \end{enumerate}
+  The other cases are similary; we leave them as exercises.
 \end{proof}
 
 \begin{prob}
@@ -527,9 +534,11 @@ The converse is not obvious, but nevertheless holds:
   Replace $R'$ everywhere by~$R$ in the !!{proof} of the second sequent
   to get !!a{proof} of}
     !A(c_1, \dots, c_n), \Gamma & \Sequent R(c_1, \dots, c_n)
-  \intertext{Apply \RightR{\lif} and \RightR{\lforall} to get !!a{proof} of}
-    \Gamma & \Sequent \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff !A(x_1, \dots, x_n))]].
   \end{align*}
+  Apply \RightR{\lif} and \RightR{\lforall} to get !!a{proof} of
+  \[
+    \Gamma \Sequent \lforall[x_1][\dots\lforall[x_n][(R(x_1,\dots,x_n) \liff !A(x_1, \dots, x_n))]].
+  \]
   This shows that $!A(x_1, \dots, x_n)$ explicitly defines $!R$
   in~$\Gamma$.
 \end{proof}
@@ -537,12 +546,12 @@ The converse is not obvious, but nevertheless holds:
 A third result which is equivalent to interpolation (and, like it, can
 be proved using Maehara's Lemma) is the following theorem: If two
 consistent theories~$\Gamma_1$, $\Gamma_2$ contain a complete theory
-$\Gamma$ in the language~$\Lang L(\Gamma_1) \cap \Lang L(\Gamma_2)$,
-then $\Gamma_1 \cup \Gamma_2$ is consistent.
+$\Gamma$ in the language~$\Lang L(\Gamma) \subseteq \Lang L(\Gamma_1)
+\cap \Lang L(\Gamma_2)$, then $\Gamma_1 \cup \Gamma_2$ is consistent.
 
 Recall that a complete theory is one such that for every
 !!{sentence}~$!A$ in its language either $\Gamma \Proves !A$ or
-$\Gamma \Proves \lnot !A$. Since $\Gamma_1$, $\Gamma_2$ are consistent
+$\Gamma \Proves \lnot !A$. Since $\Gamma_1$ and~$\Gamma_2$ are consistent
 extensions of~$\Gamma$, $\Gamma$ must be consistent. It follows that
 if $!A$ is !!a{sentence} in the language $\Lang L(\Gamma_1) \cap \Lang
 L(\Gamma_2)$, we can't have $\Gamma_1 \Entails !A$ and $\Gamma_2

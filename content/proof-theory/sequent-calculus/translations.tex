@@ -25,13 +25,13 @@ If $\Log{G1c} \Proves S$ then $\Log{G3c} \Proves S$.
 
 \begin{proof}
   We show that if $\pi$ is !!a{proof} in \Log{G1c}, then there is
-  !!a{proof}~$\pi'$ of~$S$ in\Log{G3c}. We do this by induction on $n
+  !!a{proof}~$\pi'$ of~$S$ in \Log{G3c}. We do this by induction on $n
   = \pheight{\pi}$.
 
   If $n = 0$, then $\pi$ is an axiom. The axiom $\lfalse \Sequent
   \quad$ is also an axiom in~\Log{G3c} (take the context $\Gamma,
-  \Delta$ to be empty). \Log{G3c} allows axioms $!A \Sequent !A$ with
-  arbitrary, not just atomic~$!A$. But we proved in
+  \Delta$ to be empty). In \Log{G3c}, axioms $!A \Sequent !A$ with
+  arbitrary, not just atomic~$!A$ are allowed. But we proved in
   \olref[ex]{prop:G3c-axioms} that all such sequents are !!{provable}
   in~\Log{G3c}.
   
@@ -75,7 +75,8 @@ If $\Log{G3c} \Proves S$ then $\Log{G1c} \Proves S$.
   If $\pi$ ends in a rule~$R$, the inductive hypothesis yields
   !!{proof}s in \Log{G1c} of the premises, and we can apply the same
   rule~$R$ to those !!{proof}s. The exceptions are the rules
-  \LeftR{\land} and \RightR{\lor}, which are derivable in \Log{G1c}:
+  \LeftR{\land} and \RightR{\lor}, which differ between \Log{G1c}
+  and~\Log{G3c}. The \Log{G3c} versions are derivable in \Log{G1c} as follows:
   \[
   \Axiom$!A, !B, \Gamma \fCenter \Delta$
   \RightLabel{\LeftR{\land}}

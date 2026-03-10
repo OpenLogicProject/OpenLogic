@@ -63,10 +63,11 @@ $!A$~is principal in that inference or not. Cases A and~B cover the
 induction basis. In the inductive step we assume $\cheight{\pi} > 0$
 or $\cutrank{\pi} > 0$ (or both). We can use the inductive hypothesis,
 namely that the last~\CutCS{} can be removed from any !!{proof} which
-either has at most the same cut rank and a lower cut !!{height}, or
-has a lower cut rank. The case where $\cheight{\pi} = 0$ (both
-premises are axioms) are covered by cases~A and~B. The cases where
-$\cheight{\pi} > 0$ are covered by cases C--D.
+ends in a single~\CutCS{} which either has cut rank $= \cutrank{\pi}$
+and a cut !!{height} $< \cheight{\pi}$, or has cut rank~$<
+\cutrank{\pi}$. The case where $\cheight{\pi} = 0$ (both premises are
+axioms) are covered by cases~A and~B. The cases where $\cheight{\pi} >
+0$ are covered by cases C--D.
 
 \paragraph{Case A:}
 Some $!B$ occurs in both $\Gamma$ and~$\Delta$. 
@@ -144,11 +145,11 @@ principal (some other !!{formula}~$!D$ is). In this !!{proof},
 \DisplayProof
 \]
 This only covers the case where $R$~is a right rule with one premise,
-$A$~is not principal on the right, and the !!{formula}~$!D$ which
+$A$~is not the principal !!{formula} of~$R$, and the !!{formula}~$!D$ which
 \emph{is} principal occurs in the succedent of the right premise
 of~\CutCS. If $!D$~occurs in the antecedent (i.e., $R$ is a left rule)
 or in the left premise of~\CutCS, it would look different, of course.
-The !!{formula}s in $\Pi$ and $\Lambda$ represent the active
+The !!{formula}s in $\Pi$ and~$\Lambda$ represent the active
 !!{formula}s of rule~$R$.
 
 We turn this order around and consider !!a{proof}
@@ -561,6 +562,7 @@ occur in~$t$. By \olref[seq][qua]{lem:subst-regular}, the
 \]
 (The induction hypothesis applies since the cut !!{formula}
 is~$!B(t)$, so the !!{proof} has lower cut rank than~$\pi$.)
+\item We leave the case $!A \ident \lexists[x][!B(x)]$ as an exercise.
 \end{enumerate}
 \end{proof}
 
