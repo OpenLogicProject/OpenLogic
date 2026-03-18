@@ -1,0 +1,111 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{int}
+
+\olsection{Introduction}
+
+Natural deduction is a family of !!{proof} systems in which each
+logical connective or quantifier has a pair of inferences, one that
+``introduces'' the operator (!!a{introduction} rule) and one that
+``eliminates'' the operator (!!a{elimination} rule). For instance,
+\Intro{\lif} has !!{formula}s of the form~$!A \lif !B$ as conclusion,
+and \Elim{\lif} has !!{formula}s of the form~$!A \lif !B$ as premises.
+
+The first two versions of natural deduction were introduced in the
+1930s by Gerhard Gentzen and Stanisław Jaśkowski. Gentzen's is the
+system proof theorists discuss mostly, and Jaśkowski gave rise to the
+systems most widely used in teaching. In both systems, one can start
+with \emph{assumptions}---!!{formula}s that don't need to be
+!!{prove}d, but that can be used in !!{prove}ing other !!{formula}s.
+An entire !!{proof} may depend on such assumptions, and since those
+are unproven, the !!{proof} does not establish its conclusion (its
+\emph{end-!!{formula}}), but only that its conclusion follows from the
+assumptions.
+
+Some inference rules are such that their conclusions no longer depend
+on some assumptions: they ``discharge'' assumptions. For instance, the
+\Intro{\lif} rule takes !!a{proof} of the conclusion~$!B$ from an
+assumption~$!A$, and has $!A \lif !B$ as its conclusion. The !!{proof}
+ending in $!A \lif !B$ no longer depends on~$!A$; the assumption $!A$
+is discharged. In Gentzen's systems, !!{proof}s are trees of
+!!{formula}s, the assumptions are the topmost !!{formula}s, and rules
+like~\Intro{\lif} carry labels that indicate which assumptions are
+discharged. In Jaśkowski's systems, parts of the !!{proof} that depend
+on an assumption are set off in some way, e.g, indented behind a
+vertical line or in a box, with the assumption~$!A$ discharged and the
+consequent $!B$ of the conditional the first and last line in the box,
+and the conclusion~$!A \lif !B$ of \Intro{\lif} outside the box.
+
+The systems are ``natural'' because the inference rules mirror how we
+(or mathematicians, at least) reason naturally. To establish a
+hypothetical result (a conditional), we assume the antecedent and use
+it to prove the consequent. That's~\Intro{\lif}. When we know a
+conditional $!A \lif !B$ and its antecedent~$!A$, we conclude~$!B$.
+That's~\Elim{\lif}. We use proof-by-cases to show that, assuming a
+disjunction~$!A \lor !B$, some conclusion holds. That's~\Elim{\lor}.
+To prove a general claim~$\lforall[x][!A(x)]$ we prove that $!A(c)$
+holds, for an arbitrary~$c$. That's~\Intro{\lforall}. And so on.
+
+For instance here's a simple !!{proof} of~$!A \lif (!A \lor !B)$ in
+Gentzen-style natural deduction:
+\[
+\AxiomC{$\Discharge{!A}{x}$}
+\RightLabel{\Intro{\lor}}
+\UnaryInfC{$!A \lor !B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif (!A \lor !B)$}
+\DisplayProof
+\]
+It starts with the assumption~$!A$, uses \Intro{\lor} to infer~$!A
+\lor !B$, and then \Intro{\lif} to infer~$!A \lif (!A \lor !B)$. The
+\Intro{\lif} inference discharges the assumption~$!A$; that's
+indicated by the label~$x$.
+
+Proof theorists prefer Gentzen's original systems working with trees
+of !!{formula}s, although one variant is also important in proof
+theory. !!^a{proof} of~$!A$ from assumptions~$\Gamma$ shows that $!A$
+follows from~$\Gamma$, i.e., $\Gamma \Entails !A$. The inference rules
+of natural deduction can naturally be read as telling us something
+about such entailments, e.g., \Intro{\lif} says that if $\Gamma + !A
+\Entails !B$ then $\Gamma \Entails !B$. It is only natural to
+formulate the rules directly so that they operate on both the
+assumptions and the conclusion that follow from them in the premises
+and conclusion of the inference rule, i.e., they operate on sequents
+$\Gamma \Sequent !A$. The simple proof above would look like this in
+such a system:
+\[
+\Axiom$x:!A \fCenter !A$
+\RightLabel{\Intro{\lor}}
+\UnaryInf$x:!A \fCenter !A \lor !B$
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInf$\fCenter !A \lif (!A \lor !B)$
+\DisplayProof
+\]
+As you see, the rules are the same: they work on the !!{formula} to
+the right of~$\Sequent$, the !!{formula}s on the left just list the
+assumptions they depend on at each step.
+
+The complete set of !!{introduction}/!!{elimination} rule pairs is not
+complete for classical logic by itself. We need to add two additional
+rules that have to do with~$\lfalse$. The first is the
+``intuitionistic absurdity rule''~\FalseInt, or ``explosion,'' which
+says that from $\lfalse$ we can infer anything. The second is the
+classical principle of indirect proof~\FalseCl{} (or the ``classical
+absurdity rule'') which says that if we can !!{prove}~$\lfalse$
+from~$\lnot !A$, we have !!{prove}d~$!A$. If we leave out~\FalseCl, we
+get a system appropriate for intuitionsitic logic. If we leave out
+both, we have what's known as ``minimal logic.''
+
+We will discuss Gentzen-style natural deduction for classical and
+intuitionsitic logic. These are the systems \Log{N1c} and \Log{N1i}.
+The systems \Log{N2c} and \Log{N2i} are the corresponding systems
+working on sequents $\Gamma \Sequent !A$ rather than single
+!!{formula}s~$!A$.
+
+\end{document}

@@ -1,0 +1,60 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{int}
+
+\olsection{Introduction}
+
+If you have !!{prove}d a conditional~$!A \lif !B$, you might be in a
+position to use it in !!a{proof} of~$!B$ by using~\Elim{\lif}. This
+would of course also a require !!a{proof}~$\delta_1$ of~$!A$. Your
+!!{proof}~$\delta_1$ of~$!A \lif !B$, more likely than not, ends
+in~\Intro{\lif}, which turns !!a{proof}~$\delta_2$ of~$!B$ from the
+open assumption~$!A$ into one of~$!A \lif !B$. If it does, in your
+final !!{proof} has the form
+\[
+\AxiomC{$\Discharge{!A}{x}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+Although your strategy is efficient in that you re-used something you
+already had (!!a{proof} of~$!A \lif !B$), your !!{proof} isn't. It
+seems like a detour to introduce $!A \lif !B$ only to immediately
+eliminate it. There should be a more direct way to !!{prove}~$!B$.
+
+In fact, there always is. ``Detours'' like the
+above---!!a{introduction} rule immediately followed by
+!!a{elimination} rule---can always be removed from natural
+deduction~!!{proof}s. This is called \emph{normalization} and the
+result is a \emph{normal} !!{proof} (or !!a{proof} \emph{in normal
+form}).
+
+The proof of this result is, like the cut-elimination theorem in the
+sequent calculus, somewhat involved and requires us to consider lots
+of cases. It is harder to prove for classical \Log{N1c} than it is for
+intuitionistic \Log{N1i}. Just like cut-elimination shows that you
+can't !!{prove} more using the \Cut{} rule in the sequent calculus,
+normalization shows that you can't prove more things using detours
+than you can while avoiding them. There are other similarities: normal
+!!{proof} can be much longer than the shortest !!{proof} with detours
+of the same result, just like !!{proof}s in the sequent calculus can
+be much shorter with cuts than the shortest cut-free !!{proof}. The
+sub-!!{formula} property, that you can always !!{prove} a result using
+only sub-!!{formula}s of the result in your !!{proof}, follows from
+normalization for natural deduction just as it follows from
+cut-elimination for the sequent calculus.
+
+\end{document}

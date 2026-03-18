@@ -1,0 +1,124 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: translation-N2i
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{tni}
+
+\olsection{Translating from \Log{N2ci} to \Log{G2ci}}
+
+\begin{prop}\ollabel{prop:N2-to-G2}
+If $\Log{N2ci} \Proves \Gamma \Sequent !A$ then $\Log{G2ci} + \Cut \Proves
+\Gamma' \Sequent \Delta$ where $\Gamma'$ is the multiset of
+!!{formula}s resulting from $\Gamma$ by removing labels, and $\Delta =
+\{!C\}$ if $!A$ is not~$\lfalse$, and $\Delta = \emptyset$ if it is.
+\end{prop}
+
+\begin{proof}
+The proof is again by induction on the height of the
+!!{proof}~$\delta$ of $\Gamma \Sequent !A$. If $\delta$ is an axiom
+$x:!A \Sequent !A$, $\pi$ is the corresponding axiom $!A \Sequent !A$
+or $\lfalse \Sequent \ $ if $!A \ident \lfalse$.
+
+If $\delta$ ends in an inference rule, we distinguish cases:
+\begin{enumerate}
+  \item If $R$ is \Intro{\lif} with principal formula $!B \lif !C$ and
+  $x:!B$ is present in the context of the premise but not the
+  conclusion, then $\delta$ ends in
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$x:!B, \Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  The inductive hypothesis yields !!a{proof}~$\pi_1$ of $!B, \Gamma'
+  \Sequent !C$ (or of $!B, \Gamma'
+  \Sequent \ $ if $!C \ident \lfalse$), from which we obtain $\pi$ by
+  applying~\RightR{\lif} (after applying \RightR{\Weakening} in case
+  $!C \ident \lfalse$).
+  \item If $R$ is \Intro{\lif}, but $x:!B$ is not present in the
+  context of the premise, then $\delta$ ends in
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  The inductive hypothesis yields !!a{proof}~$\pi_1$ of $\Gamma'
+  \Sequent !C$, from which we obtain $\pi$ by applying
+  \LeftR{\Weakening} with~$!B$, and then~\RightR{\lif}.
+  \item If $R$ is \Elim{\lif}, $\delta$ ends in
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma_1 \fCenter !B \lif !A$
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \Deduce$\Gamma_2 \fCenter !B$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$\Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  where $\Gamma = \Gamma_1 \cup \Gamma_2$. The inductive hypothesis
+  yields !!{proof}s $\pi_1$ of $\Gamma_1' \Sequent !B \lif !A$ and
+  $\pi_2$ of $\Gamma_2' \Sequent !B$. We obtain the !!{proof}~$\pi$ as
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter !B \lif !A$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$\Gamma_2' \fCenter !B$
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!B \lif !A, \Gamma_2' \fCenter !A$
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma_1', \Gamma_2' \fCenter !A$
+  \DisplayProof
+  \]
+  The multiset $\Gamma_1' \cup \Gamma_2'$ may not equal $\Gamma' =
+  (\Gamma_1 \cup \Gamma_2)'$: e.g., if both $\Gamma_1$ and $\Gamma_2$
+  contain $x:!C$ then $\Gamma_1' \cup \Gamma_2'$ contains two copies of
+  $!C$ but $(\Gamma_1 \cup \Gamma_2)'$ contains only one copy. We can
+  correct this by adding suitable \LeftR{\Contraction} inferences.
+
+  In the event that $!A \ident \lfalse$, the inductive hypothesis
+  applied to $\delta_2$ yields !!a{proof} of $\Gamma_2' \Sequent \ $,
+  from which we can obtain the !!{proof}~$\pi$ by adding suitable
+  \LeftR{\Weakening} inferences and a \RightR{\Weakening} with~$!A$.
+\item If $R$ is \FalseCl, $\delta$ ends in
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$x: \lnot !A, \Gamma \fCenter \lfalse$
+  \RightLabel{\FalseCl}
+  \UnaryInf$\Gamma \fCenter !A$
+  \DisplayProof
+  \]
+  By inductive hypothesis, there is !!a{proof} $\pi_1$ of $\lnot !A,
+  \Gamma' \Sequent \ $. We take the !!{proof}~$\pi$ to be
+  \[
+  \Axiom$!A \fCenter !A$
+  \RightLabel{\RightR{\lnot}}
+  \UnaryInf$\fCenter !A, \lnot !A$
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$x: \lnot !A, \Gamma' \fCenter $
+  \RightLabel{\Cut}
+  \BinaryInf$\Gamma' \fCenter !A$
+  \DisplayProof
+  \]
+\end{enumerate}
+Note that only the translation of \FalseCl{} results in
+!!a{proof}~$\pi$ with more than one !!{formula} on the right. That is,
+the translation of a~\Log{N2i} !!{proof} is a \Log{G2i}-!!{proof}.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,192 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: quantifiers
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{qua}
+
+\olsection{Regular \usetoken{P}{proof} and Substitution}
+
+The rules for the quantifiers introduce some complications owing to
+the ``eigenvariable conditions'' that apply to the \Elim{\lexists}
+and~\Intro{\lforall} rules. Most of these complications can be dealt
+with by ensuring that the !!{constant}~$c$ in these inferences is
+never reused. Let's introduce the following definition.
+
+\begin{defn}
+!!^a{proof}~$\delta$ in \Log{N1ci} or \Log{N2ci} is \emph{regular} if
+\begin{enumerate}
+  \item no eigenvariable~$a$ is used as the eigenvariable of more than
+  one \Elim{\lexists} or~\Intro{\lforall} inference, and
+  \item if $a$ is the eigenvariable of an \Elim{\lexists}
+  or~\Intro{\lforall} inference, it only occurs in the immediate
+  sub-!!{proof} leading to the minor premise, or the premise, respectively.
+\end{enumerate}
+\end{defn}
+
+\begin{lem}\ollabel{lem:subst-regular} If $\delta$ is regular, ends
+in~$!C$, $c$ is !!a{constant} not used as an eigenvariable
+in~$\delta$, and $t$~is a term not containing any eigenvariables
+of~$\delta$, then $\Subst{\delta}{t}{c}$ resulting from~$\delta$ by
+replacing every occurrence of~$c$ by~$t$ is a regular !!{proof}. The
+end-!!{formula} of $\Subst{\delta}{t}{c}$ is $\Subst{!C}{t}{c}$. If
+$!A^x$ is an open assumption of~$\delta$ then $\Subst{!A}{t}{c}^x$ is
+an open assumption of~$\Subst{\delta}{t}{c}$.
+\end{lem}
+
+\begin{proof}
+  By induction on $\pheight{\delta}$. If $\pheight{\delta} = 0$, it
+  consists simply of an assumption~$!A^x$. Then $\Subst{\delta}{t}{c}$
+  is~$\Subst{!A}{t}{c}^x$.
+
+  If $\pheight{\delta} > 0$ we distinguish cases according to the last
+  inference in~$\delta$. The cases for rules for propositional
+  connectives are easy and left as exercises. We consider the cases
+  where $\delta$ ends in a quantifier inference.
+  \begin{enumerate}
+    \item If the last inference is $\Intro{\lforall}$, $\delta$ is of
+    the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta'$}
+    \DeduceC{$!A(a,c)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x,c)]$}
+    \DisplayProof
+    \]
+    By induction hypothesis, $\Subst{\delta'}{t}{c}$ is a regular
+    !!{proof} of $!A(a,t)$. Since $a$ is an eigenvariable of~$\delta$,
+    $a$~does not occur in~$t$. Therefore, the last inference in
+    $\Subst{\delta}{t}{c}$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{t}{c}$}
+    \DeduceC{$!A(a,t)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x,t)]$}
+    \DisplayProof
+    \]
+    is correct: since $t$ does not contain~$a$, neither the conclusion
+    nor any open assumption contains~$a$.
+    \item If the last inference is $\Elim{\lforall}$,
+    $\delta$ is of the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta'$}
+    \DeduceC{$\lforall[x][!A(x,c)]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$!A(s(c),c)$}
+    \DisplayProof
+    \]
+    By induction hypothesis, $\Subst{\delta'}{t}{c}$ is a regular
+    !!{proof} of $\lforall[x][!A(x,t)]$. (The term~$s(c)$ in the
+    conclusion may, but need not, contain~$c$.) The last inference in
+    $\Subst{\delta}{t}{c}$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{t}{c}$}
+    \DeduceC{$\lforall[x][!A(x,t)]$}
+    \RightLabel{\Elim{\lforall}}
+    \UnaryInfC{$!A(s(t),t)$}
+    \DisplayProof
+    \]
+    is correct, and $!A(s(t),t) \ident \Subst{!A(s(c),c)}{t}{c}$. The
+    case for \Intro{\lexists} is similar.
+  \item If the last inference is $\Elim{\lexists}$, $\delta$ is of
+    the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta_1'$}
+    \DeduceC{$\lexists[x][!A(x,c)]$}
+    \AxiomC{$\Discharge{!A(a,c)}{x}$}
+    \RightLabel{$\delta_2'$}
+    \DeduceC{$!C$}
+    \DischargeRule{\Elim{\lexists}}{x}
+    \BinaryInfC{$!C$}
+    \DisplayProof
+    \]
+    By induction hypothesis, $\Subst{\delta_1'}{t}{c}$ and
+    $\Subst{\delta_2'}{t}{c}$ are regular !!{proof}s of
+    $\lexists[x][!A(x,c)]$ and of $!C$ from the open
+    assumption~$!A(a,t)$. Since $a$ is an eigenvariable of~$\delta$,
+    $a$~does not occur in~$t$. Therefore, the last inference in
+    $\Subst{\delta}{t}{c}$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta'}{t}{c}$}
+    \DeduceC{$!A(a,t)$}
+    \RightLabel{\RightR{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x,t)]$}
+    \DisplayProof
+    \]
+    is correct: $\Subst{!A(x,t)}{a}{x} \ident \Subst{!A(a,c)}{t}{c}$, neither the conclusion~$!C$ nor any open assumption contains~$a$. 
+  \end{enumerate}
+\end{proof}
+
+\begin{prop}\ollabel{prop:regular}
+If $\delta$ is !!a{proof} in \Log{N1c} or \Log{N1i}, then there is a
+regular !!{proof}~$\delta'$ with the same structure (in particular, the
+same !!{height}) which differs from $\delta$ only by replacing
+eigenvariables.
+\end{prop}
+
+\begin{proof}
+For the purpose of the proof only, call an eigenvariable inference
+of~$\delta$ \emph{clean} if its eigenvariable is not the eigenvariable of
+another inference nor does it occur anywhere in~$\delta$ except the
+immediate sub-!!{proof} of the inference, and \emph{dirty} otherwise.
+Let $n$ be the number of dirty eigenvariable inferences in~$\delta$. We
+show, by induction on~$n$, that $\delta$~can be transformed into the
+required regular !!{proof}~$\delta'$. If $n=0$, all eigenvariable
+inferences in~$\delta$ are clean, and so $\delta$ is regular, and there is
+nothing to prove. Otherwise, pick a highest eigenvariable inference,
+say \Intro{\lforall}. The sub-!!{proof}~$\delta_1$ of~$\delta$ ending in it
+is of the form
+    \[
+    \AxiomC{}
+    \RightLabel{$\delta_2$}
+    \DeduceC{$!A(c)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x)]$}
+    \DisplayProof
+    \]
+Note that as $c$ is an eigenvariable, it does not occur
+in~$\lforall[x][!A(x)]$ or an open assumption. The proof $\delta_2$ is
+regular, since it contains no eigenvariable inferences at all. Let $a$
+be !!a{constant} not occuring in~$\delta$. By
+\olref{lem:subst-regular}, $\Subst{\delta_2}{a}{c}$ is a regular proof
+of $!A(a)$. By the eigenvariable condition, no open assumption
+of~$\delta_2$ contains~$c$, hence no open assumption
+of~$\Subst{\delta_2}{a}{c}$ contains~$a$. Thuse we can
+apply~$\Intro{\lforall}$. If we replace $\delta_1$ in~$\delta$ by the
+proof $\delta_1'$,
+    \[
+    \AxiomC{}
+    \RightLabel{$\Subst{\delta_2}{a}{c}$}
+    \DeduceC{$!A(a)$}
+    \RightLabel{\Intro{\lforall}}
+    \UnaryInfC{$\lforall[x][!A(x)]$}
+    \DisplayProof
+    \]
+we have replaced a dirty eigenvariable inference by a clean one, and
+the only difference is the replacement of the eigenvariable $c$
+by~$a$. The resulting proof has $n-1$ dirty eigenvariable inferences,
+and the result follows from the inductive hypothesis.
+\end{proof}
+
+\begin{prob}
+Describe the case in the proof of \olref{prop:regular} where the
+topmost eigenvariable inference is~\Elim{\lexists}.
+\end{prob}
+
+We will not appeal to the proposition just proved explicitly, but we
+will assume that all !!{proof}s considered are regular---if they are
+not, we can always replace eigenvariables to make them regular.
+
+\Olref{lem:subst-regular} and \olref{prop:regular} also hold for
+\Log{N2ci}. We leave the proofs as exercises.
+
+\end{document}

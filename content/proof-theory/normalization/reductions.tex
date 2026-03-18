@@ -1,0 +1,345 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: reductions
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{red}
+
+\olsection{Reduction Conversions}
+
+If a cut in !!a{proof} in \Log{N1i} has length~$1$, it is a segment
+consisting of a single !!{formula} occurrence, and that !!{formula} is
+both the conclusion of !!a{introduction} inference and the major
+premise of !!a{elimination} inference. In the normalization proof,
+such cuts are ``reduced'' by replacing the sub-!!{proof} ending in
+such an !!{introduction}/!!{elimination} pair by a new !!{proof} in
+which the pair of inferences has been eliminated. Such a replacement
+may result in new cuts. However, we can convince ourselves that the
+new cuts have lower rank than the cut being reduced. Thus, the new
+!!{proof} either has lower cut length (because a maximal cut of
+length~$1$ has been removed) or the cut rank of the !!{proof} has been
+reduced (if the maximal cut in question was the only maximal cut).
+
+For instance, if the inferences involved are \Intro{\lif} and
+\Elim{\lif}, $!A \ident !B \lif !C$ and there is a
+sub-!!{proof}~$\delta_1$ that ends in:
+\[
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_2$}
+\DeduceC{$!C$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\]
+To remove this cut
+we replace the subproof~$\delta_1$ in~$\delta$ by the following:
+\[
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_2}{\delta_3}{!B^x}$}
+\DeduceC{$!C$}
+\DisplayProof
+\]
+By $\Subst{\delta_2}{\delta_3}{!B^x}$ we mean the !!{proof} that
+results from~$\delta_2$ by replacing every assumption~$!B$ that's
+labelled~$x$ with the entire !!{proof}~$\delta_3$. This !!{proof} no
+longer has open assumptions of the form~$!B$ with label~$x$. It has no
+other assumptions labelled~$x$, since we assume, as usual, that no two
+!!{formula}s occur as assumptions with the same label. Hence, the new
+!!{proof} has the same open assumptions as~$\delta_1$, every inference
+in~$\delta_2$ that discharges assumptions discharges the same
+assumptions in~$\Subst{\delta_2}{\delta_3}{!B^x}$, and every inference
+in~$\delta_3$ that discharges assumptions results in possibly multiple
+copies, which discharge the corresponding assumptions
+in~$\Subst{\delta_2}{\delta_3}{!B^x}$.
+
+Any cut that lies entirely within $\delta_2$, $\delta_3$, or
+$\delta_4$, or entirely outside~$\delta_1$ in~$\delta$ is unchanged:
+it still involves the same !!{formula}s, goes through the same
+inferences, so in particular has the same rank and length as the
+corresponding cut in~$\delta$. We have removed a maximal cut of
+length~$1$ and so either have reduced the cut length, or reduced the
+cut rank (if the cut length of~$\delta$ was~$1$ and this was the only
+maximal cut).
+
+However, two things may happen:
+\begin{enumerate}
+  \item By replacing all assumptions $!B^x$ by $\delta_3$, we have
+  multiplied all the cuts in~$\delta_3$. If some of those were maximal
+  cuts, the cut length of the new !!{proof} may be greater than the cut
+  length of the old !!{proof}. We have to guarantee that this does not
+  happen. We do so by applying reduction conversions only to
+  \emph{rightmost} maximal cuts, that is, to cuts which are such that
+  no maximal cut lies on a branch through~$\delta$ to the right of the
+  cut being reduced. If there were a cut in~$\delta_3$ it would be to
+  the right of the cut being reduced here, and so we wouldn't be
+  working on a rightmost cut. By always selecting rightmost cuts, we
+  guarantee that either we decrease the cut length of the !!{proof},
+  or even reduce the cut rank.
+  \item If an assumption $!B^x$ in $\delta_2$ is the major premise of
+  !!a{elimination} inference, and the last inference of~$\delta_3$ is
+  \Elim{\lor}, \Elim{\lexists}, or !!a{introduction} inference, we
+  have generated a new cut by grafting~$\delta_3$ onto $\delta_2$ at
+  such an assumption. What was just an assumption in~$\delta_2$ is now
+  a cut of length~$1$ (the conclusion of !!a{introduction} inference
+  and major premise of !!a{elimination} inference) or the last
+  !!{formula} occurrence of a cut segment (major premise of
+  !!a{elimination} inference and conclusion of~\Elim{\lor} or
+  \Elim{\lexists}). If $B^x$ was a minor premise of \Elim{\lor} or
+  \Elim{\lexists}, it already was the first !!{formula} occurrence of
+  a segment, and possibly of a cut segment. In the new !!{proof} that
+  segment may now be longer. However, observe that the !!{formula}
+  making up this new cut or existing cut segment is~$!B$, and
+  $\depth{!B} < \depth{!B \lif !C}$. Hence, although we have
+  potentially added cuts or increased the length of cuts, none of
+  these are maximal cuts. Thus we have either decreased the cut rank,
+  or, if there are cuts of the same rank remaining, have decreased the
+  cut length.
+\end{enumerate}
+
+The process of reducing cut of length~$1$ is called a \emph{reduction
+conversion} (or \emph{detour conversion}). The
+patterns for some of the rule pairs is given in
+\olref{tab:reduction-conversions}. (The remaining are left as
+exercises.) 
+
+\begin{table}
+\begin{multline*}
+\bottomAlignProof
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!C$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\quad \longrightarrow\quad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_2}{\delta_3}{!B^x}$}
+\shortDeduce
+\DeduceC{$!C$}
+\DisplayProof}
+\\[4ex]
+\shoveleft{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\DisplayProof}\qquad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!C$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !C$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!C$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!C$}
+\DisplayProof}
+\\[4ex]
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{\Intro{\lor}[1]}
+\UnaryInfC{$!B \lor !C$}
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!D$}
+\AxiomC{$\Discharge{!C}{y}$}
+\RightLabel{$\delta_4$}
+\shortDeduce
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lor}}{x\,y}
+\TrinaryInfC{$!D$}
+\DisplayProof
+\quad \longrightarrow\quad
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B$}
+\RightLabel{$\Subst{\delta_3}{\delta_2}{!B^x}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DisplayProof}
+\\[2ex]
+\shoveleft{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B(c)$}
+\RightLabel{\Intro{\lforall}}
+\UnaryInfC{$\lforall[x][!B(x)]$}
+\RightLabel{\Elim{\lforall}}
+\UnaryInfC{$!B(t)$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\Subst{\delta_2}{t}{c}$}
+\shortDeduce
+\DeduceC{$!B(t)$}
+\DisplayProof}
+\\[4ex]
+\shoveright{\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B(t)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!B(x)]$}
+\AxiomC{$\Discharge{!B(c)}{x}$}
+\RightLabel{$\delta_3$}
+\shortDeduce
+\DeduceC{$!D$}
+\DischargeRule{\Elim{\lexists}}{x}
+\BinaryInfC{$!D$}
+\DisplayProof
+\quad \longrightarrow\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\shortDeduce
+\DeduceC{$!B(t)$}
+\RightLabel{$\Subst{\Subst{\delta_3}{t}{c}}{\delta_2}{!B(t)^x}$}
+\shortDeduce
+\DeduceC{$!D$}
+\DisplayProof}
+\end{multline*}
+\caption{Some reduction conversions for \Log{N1i}.}
+\ollabel{tab:reduction-conversions}
+\end{table}
+
+\begin{prob}
+Give the reduction conversion for \Intro{\lnot} followed by
+\Elim{\lnot}.
+\end{prob}
+
+There is one case still to be considered. The definition of cut
+includes the case where the length of the cut is~$1$ and $!A$ is the
+conclusion of~\FalseInt{} as well as the major premise of
+!!a{elimination} inference. This case is dealt with in a similar way
+as when $!A$ is the conclusion of !!a{introduction} rule. For
+instance, replace
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\RightLabel{$\delta_3$}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!C$}
+\DisplayProof
+\quad\text{by}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\UnaryInfC{$!C$}
+\DisplayProof
+\]
+We must be a little careful in the cases where $!A \ident (!B \lor
+!C)$ or $!A \ident \lexists[x][!B(x)]$. E.g., if we replaced
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B \lor !C$}
+\AxiomC{$\Discharge{!B}{x}$}
+\RightLabel{$\delta_3$}
+\DeduceC{$!D$}
+\AxiomC{$\Discharge{!C}{x}$}
+\RightLabel{$\delta_4$}
+\DeduceC{$!D$}
+\RightLabel{\Elim{\lor}}
+\TrinaryInfC{$!D$}
+\DisplayProof
+\quad\text{by}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!D$}
+\DisplayProof
+\]
+we might be introducing a new cut with cut !!{formula}~$!D$, and there
+is no guarantee that $\depth{!D} < \depth{!B \lor !C}$!{} So we must
+proceed the same way here as we did for an \Intro{\lor}/\Elim{\lor}
+reduction and replace with
+\[
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!B$}
+\RightLabel{$\delta_3$}
+\DeduceC{$!D$}
+\DisplayProof
+\quad\text{or}\quad
+\bottomAlignProof
+\AxiomC{}
+\RightLabel{$\delta_2$}
+\DeduceC{$\lfalse$}
+\RightLabel{\FalseInt}
+\UnaryInfC{$!C$}
+\RightLabel{$\delta_4$}
+\DeduceC{$!D$}
+\DisplayProof
+\]
+
+\end{document}

@@ -1,0 +1,327 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: translations
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{tr}
+
+\olsection{Translating Between Normal \Log{N2i}-\usetoken{P}{proof} and \Log{G2i}}
+
+!!^{proof}s in \Log{N2i} can be translated to !!{proof}s in \Log{G2i}
+and vice versa. First of all, the result of translating cut-free
+\Log{2i} !!{proof}s results in normal \Log{N2i}-!!{proof}s.
+
+To state the result we need a bit of terminology to let us relate
+antecendents of sequents in~\Log{N2i} and in~\Log{G2i} more easily: a
+set~$\Gamma'$ of labelled !!{formula}s \emph{corresponds to} the
+multiset~$\Gamma$ of unlabelled !!{formula}s if, for every
+!!{formula}~$!A$, the number of !!{element}s of~$\Gamma'$ of the form
+$x : !A$ is less than or equal to the multiplicity of~$!A$
+in~$\Gamma$.
+
+\begin{cor}
+If $\Log{G2i} \Proves \Gamma \Sequent \Delta$ then there is a normal
+\Log{N2c}-!!{proof}~$\delta$ of $\Gamma' \Sequent !C$, where the
+set~$\Gamma'$ of labelled !!{formula}s corresponds to the
+multiset~$\Gamma$, i.e., for every !!{formula}~$!A$, the number of
+!!{element}s of~$\Gamma'$ of the form $x : !A$ is less than or equal
+to the multiplicity of~$!A$ (i.e., the number of copies of~$!A$)
+in~$\Gamma$.
+\end{cor}
+
+\begin{proof}
+By inspection of the proof of \ollabel[nat][tgi]{prop:G2i-to-N2i}: we
+add !!{introduction} rules to the end of !!{proof}s, and
+!!{elimination} rules only at the top of !!{proof}s, so never
+introduce an !!{introduction} rule above !!a{elimination} rule.
+\end{proof}
+
+The translation of the \Cut{} rule given in
+\olref[nat][tgi]{prop:G2i-to-N2i}, however, can introduce cuts in the
+\Log{N2i}-!!{proof}~$\delta$. If a \Log{G2i} !!{proof} ends in~\Cut{}
+with immediate sub-!!{proof}s $\pi_1$ and $\pi_2$ of $\Gamma_1
+\Sequent !A$ and $!A, \Gamma_2 \Sequent \Delta_2$, respectively, we
+graft the translation $\delta_1$ of~$\pi_1$ onto the axioms $x:!A
+\Sequent !A$ occurring in the translation~$\delta_2$ of~$\pi_2$. If
+$\delta_1$ ends in !!a{introduction} rule with principal
+!!{formula}~$!A$ and the axiom $x:!A \Sequent !A$ in~$\delta_2$ is the
+major premise of !!a{elimination} rule, this would result in a cut
+in~$\delta$.
+
+It is also possible to translate !!{proof}s in \Log{N2i} to !!{proof}s
+in~\Log{G2i}. In the proof of \olref[nat][tni]{prop:N2-to-G2}, the
+translation of \Elim{\land}, \Elim{\lif}, \Elim{\lnot},
+\Elim{\lforall} results in~\Cut{} inferences in the resulting
+\Log{G2i} !!{proof}. If the \Log{N2i}-!!{proof} we start from, this
+can, however, be avoided.
+
+Let's call a list $S_1$, \dots,~$S_n$ of occurrences of sequents in a
+\Log{N2i}-!!{proof}~$\delta$ a \emph{branch} if $S_1$ is an axiom, and
+whenever $S_i$ is a major premise of an inference, $S_{i+1}$ is its
+conclusion. In other words, a branch traces sequents downwards
+in~$\delta$ from axioms, but stops at minor premises of
+!!{elimination} rules. A \emph{main branch} of~$\delta$ is a branch
+where $S_n$ is the end-sequent. Every !!{proof}~$\delta$ must have at
+least one main branch, since every rule has at least one major premise
+(only \Intro{\land} has two).
+
+
+\begin{prop}\ollabel{prop:normal-N2i-to-G2i}
+If $\delta$ is a normal $\Log{N2ci}$-!!{proof} of~$\Gamma \Sequent !A$
+then there is a (cut-free) $\Log{G2ci}$-!!{proof}~$\pi$ of $\Gamma'
+\Sequent \Delta$, where $\Gamma'$ is the multiset of !!{formula}s
+resulting from $\Gamma$ by removing labels, and $\Delta = \{!C\}$ if
+$!A$ is not~$\lfalse$, and $\Delta = \emptyset$ if it is.
+\end{prop}
+
+\begin{proof}
+This time, induction is on the number of inferences in the
+!!{proof}~$\delta$ of $\Gamma \Sequent !A$. If there is no inference in~$\delta$, it is an axiom $x:!A \Sequent !A$, and $\pi$ is the
+corresponding axiom $!A \Sequent !A$ or $\lfalse \Sequent \ $ if $!A
+\ident \lfalse$.
+
+If $\delta$ ends in an inference rule, we distinguish cases:
+\begin{enumerate}
+  \item If $R$ is !!a{introduction} rule or~\FalseInt, the
+  translations proceeds exactly as in the proof of
+  \olref[nat][tni]{prop:N2-to-G2}, and does not require~\Cut.
+
+  If the last rule~$R$ of~$\delta$ is !!a{elimination} rule, observe
+  the following:
+  \begin{enumerate}
+    \item A main branch of~$\delta$ passes through no
+    !!{introduction} rules, as otherwise there would be
+    !!a{introduction} rule or~\FalseInt{} followed by !!a{elimination}
+    rule along the main branch, and $\delta$ would not be normal.
+    \item Since there are no !!{introduction} rules along main
+    branches of~$\delta$, there is only one main branch. (Only
+    \Intro{\land} has two major premises, so multiple main branches
+    would have to go through the premises of a \Intro{\land} rule.)
+    \item If the main branch includes the major premise of \Elim{\lor}
+    or \Elim{\lexists}, there is only one such rule and it is the last
+    one, i.e.,~$R$. (Otherwise the main branch would contain an
+    \Elim{\lor} or \Elim{\lexists} rule where the conclusion of the
+    rule is major premise of !!a{elimination} rule, and the proof
+    would not be normal as we could apply a permutation conversion.)
+  \item No !!{elimination} rules other than \Elim{\lor} and
+  \Elim{\lexists} discharge assumptions, i.e., change the left context
+  of sequents. \Elim{\lor} and \Elim{\lexists} only discharge
+  assumptions above a minor premise, i.e., change the left context
+  only of their minor premises. In other words, if a sequent $S_i$ on
+  the main branch of~$\delta$ has context~$\Gamma_1$, the
+  conclusion~$S_{i+1}$ of the inference of which $S_i$ is the major
+  premise has context $\Gamma_1' \supseteq \Gamma_1$.
+  \item Consequently, if $x: !C \Sequent !C$ is the topmost
+  sequent~$S_1$ in the main branch, $x:!C \in \Gamma$. 
+  \end{enumerate}
+  We now distiguish cases according to the form of~$!C$. Since every
+  $S_i$ in the main branch is major premise of !!a{elimination} rule,
+  this also applies to $x:!C \Sequent !C$.
+
+  \item $!C \ident !D \land !E$. Then $\delta$ has the form
+  \[
+  \Axiom$x:!D \land !E \fCenter !D \land !E$
+  \RightLabel{\Elim{\land}[1]}
+  \UnaryInf$x:!D \land !E \fCenter !D$
+  \Deduce$x:!D \land !E, \Gamma_1 \fCenter !A$
+  \DisplayProof
+  \]
+  The main branch includes $x:!D \land !E \Sequent !D$ contains no
+  major premise of \Intro{\lif}, \Intro{\lnot} nor a minor premise of
+  \Elim{\lor} or \Elim{\lexists}, the context !!{formula}s in $x:!D
+  \land !E$ remain unchanged along the main branch. This explains why
+  the context of the end-sequent must contain~$x:!D \land !E$.
+  Moreover, we can turn the !!{proof} $\delta$ into a
+  !!{proof}~$\delta_1$ by replacing the sub-!!{proof} ending in
+  \Elim{\land} by $x:!D \Sequent !D$ and replacing $x:!D \land !E$ in
+  the context of every sequent along the main branch by $x:!D$, i.e.,
+  turn
+  \[
+  \bottomAlignProof
+  \Axiom$x:!D \land !E \fCenter !D \land !E$
+  \RightLabel{\Elim{\land}[1]}
+  \UnaryInf$x:!D \land !E \fCenter !D$
+  \Deduce$x:!D \land !E, \Gamma_1 \fCenter !A$
+  \DisplayProof
+  \quad\text{ into }\quad
+  \bottomAlignProof
+  \Axiom$x:!D \fCenter !D$
+  \Deduce$x:!D, \Gamma_1 \fCenter !A$
+  \DisplayProof
+  \]
+  The induction hypothesis applies to $\delta_1$,
+  since the number of inferences in $\delta$ is the number
+  of inferences in $\delta'$ plus~$1$.
+
+  By induction hypothesis, there is a \Log{G2i}-!!{proof} $\pi_1$ of
+  $x:!D, \Gamma_1 \Sequent !A$. 
+  We obtain the !!{proof}~$\pi$ by applying \LeftR{\land}:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!D, \Gamma_1' \fCenter !A$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!D \land !E, \Gamma_1' \fCenter !A$
+  \DisplayProof
+  \]
+  If $!A \ident \lfalse$ we insert a
+  \RightR{\Weakening}, e.g,
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!D, \Gamma_1' \fCenter $
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$!D \land !E, \Gamma_1' \fCenter $
+  \RightLabel{\RightR{\Weakening}}
+  \UnaryInf$!D \land !E, \Gamma_1' \fCenter !A$
+  \DisplayProof
+  \]
+  \item If $!C \ident !D \lor !E$, it must be the major premise of
+  \Elim{\lor}, and this inference must be the last inference~$R$ on
+  the main branch. In other words, $\delta$ has the form:
+  \[
+  \Axiom$x:!D \lor !E \fCenter !D \lor !E$
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$y:!D, \Gamma_1 \fCenter!A$
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \Deduce$z:!E, \Gamma_2 \fCenter !A$
+  \RightLabel{\Elim{\lor}}
+  \TrinaryInf$x:!D \lor !E, \Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  The induction hypothesis applies to the !!{proof}s $\delta_1$ and
+  $\delta_2$; we obtain \Log{G2i}-!!{proof}s $\pi_1$ and $\pi_2$ of
+  $!D, \Gamma_1' \Sequent !A$ and $!E, \Gamma_2' \Sequent !A$. We apply
+  $\LeftR{\lor}$ to get~$\pi$:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$!D, \Gamma_1' \fCenter !A$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!E, \Gamma_2' \fCenter !A$
+  \RightLabel{\LeftR{\lor}}
+  \BinaryInf$!D \lor !E, \Gamma_1', \Gamma_2' \fCenter !A$
+  \DisplayProof
+  \]
+  Should $\Elim{\lor}$ not discharge $y: !D$ or $z: !E$ (i.e., these
+  aren't present in the context of the minor premises), or should~$!A$
+  happen to be $\lfalse$, we have to add some \LeftR{\Weakening} and
+  \RightR{\Weakening}. For instance,
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter $
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!D, \Gamma_1' \fCenter $
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$\Gamma_2' \fCenter $
+  \RightLabel{\LeftR{\Weakening}}
+  \UnaryInf$!E, \Gamma_2' \fCenter $
+  \RightLabel{\LeftR{\lor}}
+  \BinaryInf$!D \lor !E, \Gamma_1', \Gamma_2' \fCenter $
+  \RightLabel{\RightR{\Weakening}}
+  \UnaryInf$!D \lor !E, \Gamma_1', \Gamma_2' \fCenter !A$
+  \DisplayProof
+  \]
+  
+  \item $!C \ident !D \lif !E$. Then $\delta$ has the form
+  \[
+  \Axiom$x:!D \lif !E \fCenter !D \lif !E$
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma_1 \fCenter!D$
+  \RightLabel{\Elim{\lif}}
+  \BinaryInf$x:!D \lif !E, \Gamma_1 \fCenter !E$
+  \RightLabel{$\delta_2$}
+  \Deduce$x:!D \lif !E, \Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  Here note that since the main branch, which includes $x:!D \lif !E,
+  \Gamma_1 \Sequent !E$, contains no major premise of \Intro{\lif},
+  \Intro{\lnot} nor a minor premise of \Elim{\lor} or \Elim{\lexists},
+  the context !!{formula}s in $x:!D \lif !E, \Gamma_1$ remain
+  unchanged along the main branch. This explains why the context of
+  the end-sequent must contain~$x:!D \lif !E, \Gamma_1$. Moreover, we
+  can turn the !!{proof} fragment $\delta_2$ into a correct
+  !!{proof}~$\delta_2'$ by replacing the sub-!!{proof} ending in
+  \Elim{\lif} by $x:!E \Sequent !E$ and replacing $x:!D \lif !E,
+  \Gamma_1$ in the context of every sequent along the main branch by
+  $x:!E$, i.e., turn
+  \[
+  \bottomAlignProof
+  \Axiom$x:!D \lif !E, \Gamma_1 \fCenter !E$
+  \RightLabel{$\delta_2$}
+  \Deduce$x:!D \lif !E, \Gamma_1, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \quad\text{ into }\quad
+  \bottomAlignProof
+  \Axiom$x:!E \fCenter !E$
+  \RightLabel{$\delta_2'$}
+  \Deduce$x:!E, \Gamma_2 \fCenter !A$
+  \DisplayProof
+  \]
+  The induction hypothesis applies to $\delta_1$ and $\delta_2'$,
+  since the number of inferences in $\delta$ is the sum of the numbers
+  of inferences in $\delta_1$ and~$\delta_2$, plus~$1$ to account for
+  the \Elim{\lif} inference at the start of the main branch. (If that
+  inference is also the last inference~$R$ in $\delta$ then $\delta_1$
+  contains $0$ inferences.)
+
+  By induction hypothesis, there are \Log{G2i}-!!{proof}s $\pi_1$ of
+  $\Gamma_1 \Sequent !D$ and $\pi_2$ of $!E, \Gamma_1' \Sequent !A$.
+  We obtain the !!{proof}~$\pi$ by applying \LeftR{\lif}:
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter !D$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!E, \Gamma_2' \fCenter !A$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!D \lif !E, \Gamma_1', \Gamma_2' \fCenter !A$
+  \DisplayProof
+  \]
+  If $!D$ and/or $!A \ident \lfalse$ we insert one or two
+  \RightR{\Weakening}, e.g,
+  \[
+  \AxiomC{}
+  \RightLabel{$\pi_1$}
+  \Deduce$\Gamma_1' \fCenter $
+  \RightLabel{\RightR{\Weakening}}
+  \UnaryInf$\Gamma_1' \fCenter !D$
+  \AxiomC{}
+  \RightLabel{$\pi_2$}
+  \Deduce$!E, \Gamma_2' \fCenter $
+  \RightLabel{\RightR{\Weakening}}
+  \UnaryInf$!E, \Gamma_2' \fCenter !A$
+  \RightLabel{\LeftR{\lif}}
+  \BinaryInf$!D \lif !E, \Gamma_1', \Gamma_2' \fCenter !A$
+  \DisplayProof
+  \]
+
+\end{enumerate}
+The remaining cases are treated similarly and are left as exercises.
+\end{proof}
+
+\begin{cor}
+Every !!{formula} occuring in a normal \Log{N1i} or
+\Log{N2i}-!!{proof} is a sub-!!{formula} of the end-!!{formula} or
+end-sequent.
+\end{cor}
+
+\begin{proof}
+  By \olref{prop:normal-N2i-to-G2i}, every normal \Log{N2i}-!!{proof}
+  can be translated into a \Log{G2i}-!!{proof}. An inspection of the proof
+  shows that every !!{formula} occurring in the \Log{N2i}-!!{proof}
+  also occurs in the \Log{G2i}-!!{proof}. \Log{G2i}, lacking the
+  \Cut{} rule, has the sub-!!{formula} property.
+\end{proof}
+
+\end{document}

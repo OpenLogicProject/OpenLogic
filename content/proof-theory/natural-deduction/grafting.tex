@@ -1,0 +1,83 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: grafting
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{gra}
+
+\olsection{Grafting \usetoken{P}{proof}}
+
+!!^{proof}s in \Log{N1ci} are !!{proof}s of !!{formula}s~$!A$ from
+assumptions~$!B$. Suppose $!B$ itself has !!a{proof}. How do we
+combine the !!{proof} of~$!B$ with the !!{proof} of $!A$ from~$!B$ to
+get !!a{proof} of~$!A$ that doesn't use the assumption~$!B$?
+
+One option is to remove the assumption~$!B$ from the !!{proof} of~$!A$
+by applying~\Intro{\lif}. Then we can combine the resulting !!{proof}
+of~$!B \lif !A$ with the !!{proof} of~$!B$ to obtain
+\[
+\AxiomC{$\Discharge{!B}{x}$}
+\DeduceC{$!A$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !C$}
+\AxiomC{}
+\DeduceC{$!B$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!A$}
+\DisplayProof
+\]
+This is straightforward, but somewhat ugly: why introduce $\lif$ only
+to eliminate it right away? It should be possible to avoid this kind
+of ``detour'' through $!B \lif !A$. (That they can always be avoided
+is in fact the content of the normalization theorem.)
+
+In \Log{N1ci} we can actually avoid it in this case quite easily: we
+can simply replace the assumptions~$!B^x$ by the entire !!{proof}
+of~$!B$. This ``grafting'' of !!{proof}s onto the assumptions of
+others is quite useful and so we record it as a definition.
+
+\begin{defn}
+If $\delta_1$ is a \Log{N1ci}-!!{proof} of~$!A$ from open
+assumption~$!B^x$, and $\delta_2$ is a \Log{N1ci}-!!{proof} of~$!B$,
+then $\Subst{\delta_1}{\delta_2}{!B^x}$ is the result of replacing
+every undischarged occurrence of~$!B^x$ in~$\delta_1$ by~$\delta_2$.
+\end{defn}
+
+Provided that $\delta_1$ and $\delta_2$ don't have different
+assumption !!{formula}s labelled with the same label, and no open
+assumption of~$\delta_2$ contains an eigenvariable of~$\delta_1$, the
+resulting $\Subst{\delta_1}{\delta_2}{!B^x}$ is a correct !!{proof},
+and its open assumptions are those of $\delta_1$ together with those
+of~$\delta_2$. When grafting !!{proof}s, these conditions will
+typically be satisfied. The first is satisfied whenever $\delta_1$ and
+$\delta_2$ are subproofs of a larger !!{proof}. If the second is not
+satisfied, we can rename the eigenvariables of~$\delta_1$ so that it
+is.
+
+A corresponding definition applies to \Log{N2ci}.
+
+\begin{defn}
+If $\delta_1$ is a \Log{N2ci}-!!{proof} of~$x:!B, \Gamma_1 \Sequent
+!A$, and $\delta_2$ is a \Log{N1ci}-!!{proof} of~$\Gamma_2 \Sequent
+!B$, then $\Subst{\delta_1}{\delta_2}{x:!B}$ is the result of
+replacing every axiom $x:!B \Sequent !B$ in~$\delta_1$ by~$\delta_2$,
+and adding $\Gamma_2$ to the context of every sequent below such
+axioms.
+\end{defn}
+
+\begin{prop}
+If $\delta_1 \Proves x:!B, \Gamma_1 \Sequent
+!A$ and $\delta_2 \Proves \Gamma_2 \Sequent !B$, then
+$\Subst{\delta_1}{\delta_2}{x:!B} \Proves \Gamma_1, \Gamma_2 \Sequent
+!A$, provided no eigenvariable of~$\delta_1$ occurs in~$\Gamma_2$.
+\end{prop}
+
+
+\begin{proof}
+  By induction on $\pheight{\delta}$.
+\end{proof}
+
+\end{document}

@@ -1,0 +1,107 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{seg}
+
+\olsection{Segments and Cuts}
+
+!!^a{introduction} rule followed by !!a{elimination} rule is a detour
+in !!a{proof}, and to normalize !!a{proof} is to eliminate such
+detours. However, the \Elim{\lor} and \Elim{\lexists} make even the
+definition of ``detour we want to eliminate'' a bit complicated. The
+problem is this. Because of these rules, it's not guaranteed that in a
+detour the !!{elimination} rule \emph{immediately} follows the
+!!{introduction} rule. There could be an \Elim{\lor} or
+\Elim{\lexists} in between, e.g.,
+\[
+\AxiomC{}
+\DeduceC{$\lexists[x][!C(x)]$}
+\AxiomC{$\Discharge{!A}{x}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lexists}}{y}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+In fact, any number of \Elim{\lor} or
+\Elim{\lexists} can separate the \Intro{\lif} from the \Elim{\lif}, e.g.,
+\[
+\AxiomC{}
+\DeduceC{$\lexists[x][!C(x)]$}
+\AxiomC{}
+\DeduceC{$!D \lor !E$}
+\AxiomC{$\Discharge{!A}{x}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\AxiomC{$\Discharge{!A}{x}$}
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\RightLabel{\Elim{\lor}}
+\TrinaryInfC{$!A \lif !B$}
+\DischargeRule{\Elim{\lexists}}{y}
+\BinaryInfC{$!A \lif !B$}
+\AxiomC{}
+\DeduceC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+This example shows that the same \Elim{\lif} might be involved in
+multiple detours, even, as it follows more than one~\Intro{\lif}. To
+account for all these possibilities, we define detours using certain
+kinds of sequences of !!{formula} occurrences in an \Log{N1i}-proof
+called \emph{segments}. In our example, it's a sequence of occurrences
+of~$!A \lif !B$, where a minor premise of $\Elim{\lor}$ or
+$\Elim{\lexists}$ follows its conclusion. In the example, there are
+two such segments, each containing three occurrences of~$!A \lif !B$.
+Here is the official definition.
+
+\begin{defn}
+A \emph{segment} in a \Log{N1i} !!{proof}~$\delta$ is a sequence of
+occurrences $!A_1$, \dots, $!A_n$ of the same !!{formula}~$!A$ in $\delta$ where
+\begin{enumerate}
+  \item $!A_1$ is not the conclusion of \Elim{\lor} or \Elim{\lexists};
+  \item $!A_n$ is not a minor premise of \Elim{\lor} or \Elim{\lexists};
+  \item For $i = 1$, \dots,~$n-1$, $!A_i$ is a minor premise of
+  \Elim{\lor} or \Elim{\lexists} and $A_{i+1}$ is the conclusion of
+  that inference.
+\end{enumerate}
+The \emph{length} of that segment is~$n$.
+\end{defn}
+
+Not ever segment is a target for elimination (a detour). The ones that
+are are called \emph{cuts}.
+
+\begin{defn}
+A \emph{cut} is a segment in which $!A_n$ is the major premise of
+!!a{elimination} inference, and either $n=1$ and $!A_1 = !A_n$ is the
+conclusion of !!a{introduction} inference or of~\FalseInt, or~$n>1$.
+\end{defn}
+
+Note that a cut segment need not begin with the conclusion of
+!!a{introduction} rule. All that's required is that it ends with the
+major premise of !!a{elimination} rule. However, a segment of
+length~$1$ does have to be the conclusions of !!{introduction} rules
+to count as a cut.
+
+\begin{defn}
+The \emph{rank} of a cut is~$\depth{!A}$. The \emph{cut
+rank}~$\cutrank{\delta}$ of !!a{proof}~$\delta$ is the maximal rank of
+cuts in~$\delta$. A cut is \emph{maximal} in~$\delta$ if its rank
+is~$\cutrank{\delta}$, i.e., it has maximal rank. The \emph{cut length}
+of~$\delta$ is the sum of the lengths of all its critical cuts.
+\end{defn}
+
+\end{document}

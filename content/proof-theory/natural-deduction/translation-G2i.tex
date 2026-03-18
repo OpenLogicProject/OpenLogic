@@ -1,0 +1,206 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: translation-G2i
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{tgi}
+
+\olsection{Translating from \Log{G2i} to \Log{N2i}}
+
+The antecedents of sequents in \Log{G2i} are multisets~$\Gamma$ of
+!!{formula}s, while those of sequents in \Log{N2i} are sets~$\Gamma'$
+of labelled formulas with the property that every label occurs only
+once. Let's say a set~$\Gamma'$ of labelled !!{formula}s
+\emph{corresponds to} the multiset~$\Gamma$ if, for every
+!!{formula}~$!A$, the number of !!{element}s of~$\Gamma'$ of the form
+$x : !A$ is less than or equal to the multiplicity of~$!A$ (i.e., the
+number of copies of~$!A$) in~$\Gamma$.
+
+\begin{prop}\ollabel{prop:G2i-to-N2i}
+If $\Log{G2i} + \Cut \Proves \Gamma \Sequent \Delta$ then $\Log{N2i}
+\Proves \Gamma' \Sequent !C$, where $!C \ident \lfalse$ if $\Delta$ is
+empty and $\Delta = \{!C\}$ otherwise, and $\Gamma'$ corresponds
+to~$\Gamma$.
+\end{prop}
+
+\begin{proof}
+  We show that if $\pi$ is !!a{proof} of $\Gamma \Sequent \Delta$ in
+  \Log{G2ci}, then there is a~$\Gamma'$ corresponding to~$\Gamma$ and
+  !!a{proof}~$\delta$ of~$\Gamma' \Sequent !C$ in~\Log{N2ci}. We do
+  this by induction on $n = \pheight{\pi}$.
+
+  If $n = 0$, then $\pi$ is an axiom. If it is the axiom $\lfalse \Sequent
+  \quad$, $\delta$ is the axiom $x:\lfalse \Sequent \lfalse$, i.e.,
+  $\Gamma' = \{x:\lfalse\}$ and $!C \ident \lfalse$. If $\pi$ is an
+  axiom of the form $!A \Sequent !A$, then $\delta$ is $x: !A \Sequent !A$.
+  
+  If $n>0$, $\pi$ ends in a rule~$R$. The inductive hypothesis
+  guarantees that there are !!{proof}s of sequents corresponding to
+  the premises of that rule in~\Log{N2c}. We can assume that all
+  discharge labels in those proofs are distinct, and that a label $x$
+  only occurs above an inference that discharges it, if it is
+  discharged at all (by relabelling if necessary). We then show how
+  these !!{proof}s can be combined to provide proofs of a suitable
+  $\Gamma' \Sequent !C$. We distinguish cases according to~$R$.
+
+  \begin{enumerate}
+    \item If $R$ is \RightR{\Weakening}, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma \fCenter$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf$\Gamma \fCenter !A$
+    \DisplayProof
+    \]
+    The induction hypothesis applied to $\pi_1$ yields !!a{proof}
+    of~$\Gamma' \Sequent \lfalse$. We apply $\FalseInt$ to get
+    !!a{proof} of $\Gamma' \Sequent !A$.
+    \item If $R$ is \LeftR{\Weakening}, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma \fCenter \Delta$
+    \RightLabel{\RightR{\Weakening}}
+    \UnaryInf$!A, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \]
+    The induction hypothesis applied to $\pi_1$ yields !!a{proof}
+    of~$\Gamma' \Sequent !C$. Which we take as $\delta$. Note that if
+    $\Gamma'$ corresponds to $\Gamma$, it also corresponds to $!A,
+    \Gamma$ as the number of $x : !A$ in $\Gamma'$ is no greater than
+    the number of copies of~$!A$ in $\Gamma$, and so also no greater
+    than the number of copies of $!A$ in $\Gamma \cup \{!A\}$.
+    \item If $R$ is \LeftR{\Contraction}, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$!A, !A, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\Contraction}}
+    \UnaryInf$!A, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \]
+    The induction hypothesis applied to $\pi_1$ yields !!a{proof}
+    of~$\Pi, \Gamma' \Sequent !C$, where $\Pi \subseteq \{x : !A,
+    y:!A\}$. If $\Pi = \{x : !A, y:!A\}$, replace all labelled
+    !!{formula}s $y:!A$ in~$\pi_1$ by $x:!A$. Since $x$~occurs in the
+    context of the end-sequent of~$\pi_1$ we can assume that no
+    inference in~$\pi_1$ discharges !!a{formula} of the form~$x:!B$,
+    i.e., no $x:!B$ on the left side of a sequent in~$\pi_1$ is
+    active. Consequently, the result is still !!a{proof} in~\Log{N2i}.
+    \item If $R$ is $\RightR{\lif}$, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$!A, \Gamma \fCenter !B$
+    \RightLabel{\RightR{\lif}}
+    \UnaryInf$\Gamma \fCenter !A \lif !B$
+    \DisplayProof
+    \]
+    By the inductive hypothesis, there is !!a{proof}~$\delta_1$ of $x:
+    !A, \Gamma' \Sequent !B$ or $\Gamma' \Sequent !B$ where $\Gamma'$
+    corresponds to~$\Gamma$. We can take $\delta_1$
+    to be $\delta$ plus an application of \Intro{\lif}.
+    \item If $R$ is \LeftR{\lif}, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma_1 \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$!B, \Gamma_2 \fCenter \Delta$
+    \RightLabel{\LeftR{\lif}}
+    \BinaryInf$!A \lif !B, \Gamma_1, \Gamma_2 \fCenter \Delta$
+    \DisplayProof
+    \]
+    The inductive hypothesis yields !!{proof}s $\delta_1$ of $\Gamma_1'
+    \Sequent !A$ and $\delta_2$ of $x: !B, \Gamma_2' \Sequent !C$ or of
+    of $\Gamma_2' \Sequent !C$. If $\delta_2$ is of the latter form,
+    $\delta_2$ can serve as~$\delta$. Otherwise, we can relabel all
+    formulas and discharge labels in~$\pi_1$ to ensure that no label
+    occurs in both $\delta_1$ and~$\delta_2$. Then $\Gamma_1' \cup
+    \Gamma_2'$ corresponds to $\Gamma_1 \cup \Gamma_2$. Since $x:!B$
+    occurs in the end-sequent of~$\delta_2$, $x:!B$ cannot be active in
+    any inference with discharge label~$x$ in~$\delta_2$. Replace every
+    axiom $x:!B \Sequent !B$ in~$\delta_2$ with the !!{proof}~$\delta_3$
+    \[
+    \Axiom$x: !A \lif !B \fCenter !A \lif !B$
+    \AxiomC{}
+    \RightLabel{$\delta_1$}
+    \Deduce$\Gamma_1' \fCenter !A$
+    \RightLabel{\Elim{\lif}}
+    \BinaryInf$x: !A \lif !B \fCenter !B$
+    \DisplayProof
+    \]
+    and every occurrence of $x:!B$ in~$\delta_2$ by $x:!A \lif !B$.
+    The result $\Subst{\delta_2}{\delta_3}{x:!B}$ is !!a{proof} of
+    $x:!A \lif !B, \Gamma_1', \Gamma_2' \Sequent !C$.
+    \item If $R$ is \RightR{\land}, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma_1 \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$\Gamma_2 \fCenter !B$
+    \RightLabel{\RightR{\land}}
+    \BinaryInf$\Gamma_1, \Gamma_2 \fCenter !A \land !B$
+    \DisplayProof
+    \]
+    The inductive hypothesis yields proof $\delta_1$ of $\Gamma_1'
+    \Sequent !A$ and $\delta_2$ of $\Gamma_2' \Sequent !A$. By
+    relabelling all formulas and discharge labels in~$\pi_2$ we can
+    ensure that no label occurs in both $\delta_1$ and $\delta_2$. Then
+    $\Gamma_1' \cup \Gamma_2'$ corresponds to $\Gamma_1 \cup
+    \Gamma_2$. We obtain !!a{proof}~$\delta$ by applying $\Intro{\land}$
+    to the end-sequents of $\delta_1$ and~$\delta_2$.
+    \item If $R$ is $\LeftR{\land}$, $\pi$ ends in, e.g.,
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$!A, \Gamma \fCenter \Delta$
+    \RightLabel{\LeftR{\land}}
+    \UnaryInf$!A \land !B, \Gamma \fCenter \Delta$
+    \DisplayProof
+    \]
+    By the inductive hypothesis, there is !!a{proof}~$\delta_1$ of $x:
+    !A, \Gamma' \Sequent !C$ or $\Gamma' \Sequent !C$ where $\Gamma'$
+    corresponds to~$\Gamma$. In the latter case, we can take $\delta_1$
+    to be $\delta$. In the former case, observe that since $x:!A$ occurs
+    in the end-sequent, $x:!A$ is not active in any inference with
+    discharge label~$x$ in~$\delta_1$. Replace every axiom $x:!A
+    \Sequent !A$ with the !!{proof}~$\delta_2$
+    \[
+    \Axiom$x: !A \land !B \fCenter !A \land !B$
+    \RightLabel{\Elim{\land}}
+    \UnaryInf$x: !A \land !B \fCenter !A$
+    \DisplayProof
+    \]
+    and every occurrence of $x:!A$ by $x:!A \land !B$, i.e., consider
+    $\Subst{\delta_1}{\delta_2}{x:!A}$. This is !!a{proof} of $x:!A
+    \land !B, \Gamma' \Sequent !C$.
+    \item If $R$ is \Cut, $\pi$ ends in
+    \[
+    \AxiomC{}
+    \RightLabel{$\pi_1$}
+    \Deduce$\Gamma_1 \fCenter !A$
+    \AxiomC{}
+    \RightLabel{$\pi_2$}
+    \Deduce$!A, \Gamma_2 \fCenter \Delta$
+    \RightLabel{\Cut}
+    \BinaryInf$\Gamma_1, \Gamma_2 \fCenter \Delta$
+    \DisplayProof
+    \]
+    The inductive hypothesis yields proof $\delta_1$ of $\Gamma_1'
+    \Sequent !A$ and $\delta_2$ of $x:!A, \Gamma_2' \Sequent !C$ or of
+    $\Gamma_2' \Sequent !C$. In the latter case, take $\delta$ to
+    be~$\delta_2$. Otherwise, replace every axiom $x:!A \Sequent !A$ in
+    $\delta_2$ by $\delta_1$ to obtain~$\delta$ as the !!{proof}~$\Subst{\delta_2}{\delta_1}{x:!A}$ of $\Gamma_1',
+    \Gamma_2' \Sequent !C$.
+  \end{enumerate}
+\end{proof}
+
+\end{document}

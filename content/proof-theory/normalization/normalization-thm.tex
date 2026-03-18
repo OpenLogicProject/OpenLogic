@@ -1,0 +1,57 @@
+% Part: proof-theory
+% Chapter: normalization
+% Section: normalization-thm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nor}{thm}
+
+\olsection{The Normalization Theorem}
+
+!!^a{proof} is in \emph{normal} form if it has no cut segments.
+Clearly this is the case iff we can apply neither a permutation
+conversion nor a reduction conversion to it. To \emph{normalize}
+!!a{proof} means to transform it into a normal proof by applying
+permutation and reduction conversions until no cuts remain. That this
+is always possible is the \emph{normalization theorem}.
+
+\begin{thm}\ollabel{thm:normalization} Any \Log{N1i}-!!{proof}
+$\delta$ normalizes, i.e., can be transformed into
+!!a{proof}~$\delta'$ without cuts.
+\end{thm}
+
+\begin{proof}
+  By induction on the cut rank and length of~$\delta$. The induction
+  hypothesis is that any !!{proof} which either has lower cut rank, or
+  the same cut rank but lower cut length, normalizes.
+
+  If the cut length is~$0$, there are no cuts, $\delta$ is already
+  normal. So assume that cut rank and cut length of~$\delta$ are~$>
+  0$. Pick a topmost, rightmost maximal cut segment. If the cut
+  segment has length $>1$, apply a permutation conversion. If the cut
+  segment has length~$1$, apply the corresponding reduction
+  conversion. This results in a new !!{proof} which either has the
+  same cut rank but a lower cut length, or a lower cut rank, and the
+  inductive hypothesis applies.
+\end{proof}
+
+The strategy used in the above proof (always deal with a
+topmost rightmost maximal cut) suggests a specific order in which
+conversions must be applied to !!a{proof} in order to result in a
+normal !!{proof}. Surprisingly enough, the order actually does not
+matter. Applying permutation and reduction conversions in any order
+eventually results in a normal proof.
+
+The definition of segment and cut can easily be formulated for
+\Log{N2i}, and the permutation and reduction conversions for \Log{N1i}
+directly translate to \Log{N2i}. Consequently, the normalization
+theorem also holds for \Log{N2i}.
+
+\begin{thm}\ollabel{thm:normalization-N2i} Any \Log{N2i}-!!{proof}
+$\delta$ normalizes, i.e., can be transformed into
+!!a{proof}~$\delta'$ without cuts.
+\end{thm}
+
+\end{document}

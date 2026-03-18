@@ -1,0 +1,293 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{rp}
+
+\olsection{Rules and \usetoken{P}{proof}}
+
+We begin by giving some definitions and fixing some terminology.
+
+Consider the two rules in \Log{N1ci} that mention $!A
+\lif !B$.
+\[
+\bottomAlignProof
+\AxiomC{$\Discharge{!A}{x}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !B$}
+\DisplayProof
+\qquad
+\bottomAlignProof
+\AxiomC{$!A \lif !B$}
+\AxiomC{$!A$}
+\RightLabel{\Elim{\lif}}
+\BinaryInfC{$!B$}
+\DisplayProof
+\]
+The \Elim{\lif} rule is simple enough. The !!{formula}s above the line
+are the \emph{premises}. The one on the left the \emph{principal}
+!!{formula}~$!A \lif !B$. All !!{elimination} rules have one such
+premise, always on the far left. It is called the \emph{major} premise
+of the inference. If there are others, such as an this case, they are
+called \emph{minor} premises. The premise(s) of !!{introduction} rules
+are both called major premise(s). The !!{formula} below the line is the
+\emph{conclusion}.
+
+The \Intro{\lif} rule only has one premise, and here the conclusion
+is the principal formula~$!A \lif !B$. All !!{introduction} rules are
+like this: the conclusion is the principal formula; its main operator
+is the one being ``introduced.''
+
+The notation $\Discharge{!A}{x}$ means the following. In !!a{proof},
+the \Intro{\lif} inference is applied to !!a{formula}~$!B$ as premise.
+The sub-!!{proof} ending in~$!B$ has a number of initial !!{formula}s.
+These are called \emph{assumptions}. !!^a{proof} of~$!B$ from one or
+more assumptions of the form~$!A$ is !!a{proof} that $!A$
+entails~$!B$. When we apply the \Intro{\lif} rule, we conclude~$!A
+\lif !B$, and the conclusion no longer depends on the assumption~$!A$.
+To indicate this, the assumptions of the form~$!A$ in the !!{proof}
+including the~\Intro{\lif} inference are \emph{discharged} or
+\emph{closed}. The rule states which assumptions can be discharged. In
+the case of \Intro{\lif} with conclusion $!A \lif !B$, that's
+assumptions that have the form~$!A$, i.e., agree with the antecedent
+of the conditional. It is sometimes important to indicate which
+assumptions are discharged at which rule, and this is accomplished
+with the discharge label~$x$. Importantly, rules that discharge
+assumptions don't \emph{have to} discharge \emph{all} assumptions of the
+requisite form, or indeed any at all. For instance, the following is
+correct even though the second \Intro{\lif} does not discharge any
+assumptions:
+\[
+\AxiomC{$\Discharge{!A}{y}$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!B \lif !A$}
+\DischargeRule{\Intro{\lif}}{y}
+\UnaryInfC{$!A \lif (!B \lif !A)$}
+\DisplayProof
+\]
+When a rule does not discharge any assumptions, we just leave out the
+discharge label (as we did here).
+
+In the !!{proof}
+\[
+\AxiomC{$\Discharge{!A}{x}$}
+\AxiomC{$\Discharge{!A}{y}$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!A \land !A$}
+\RightLabel{\Elim{\land}}
+\UnaryInfC{$!A$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$!A \lif !A$}
+\DischargeRule{\Intro{\lif}}{y}
+\UnaryInfC{$!A \lif (!A \lif !A)$}
+\DisplayProof
+\]
+the first \Intro{\lif} inference discharges the left assumption
+$!A^x$, the second the right assumption~$!A^y$. That is, all
+assumptions labelled~$x$ are discharged by the \Intro{\lif} with
+label~$x$, and all assumptions with label~$y$ by the one labelled~$y$.
+For this to work, it is important that all assumptions with the same
+label are also the same !!{formula}.
+
+The quantifier rules are slightly more complicated. E.g., the rules in
+\Log{N1i} for $\lexists$ are:
+\[
+\bottomAlignProof
+\AxiomC{$!A(t)$}
+\RightLabel{\Intro{\lexists}}
+\UnaryInfC{$\lexists[x][!A(x)]$}
+\DisplayProof
+\qquad
+\bottomAlignProof
+\AxiomC{$\lexists[x][!A(x)]$} 
+\AxiomC{$\Discharge{!A(c)}{x}$}
+\shortDeduce
+\DeduceC{$!B$}
+\DischargeRule{\Elim{\lexists}}{x}
+\BinaryInfC{$!B$} \DisplayProof 
+\bottomAlignProof
+\] In the
+\Intro{\lexists} rule, the premise is~$!A(t)$ where $t$~is a closed
+term, i.e., a term without variables. Such an inference is
+correct---that is, it matches the schematic rule \Intro{\lexists}---if
+there is some !!{formula}~$!A$, some variable~$x$, and some closed
+term~$t$ such that the conclusion is $\lexists[x][!A]$ and premise
+is~$\Subst{!A}{t}{x}$. The \Elim{\lexists} allows us to discharge
+assumptions of the form~$!A(c)$, i.e., for every inference there is
+some !!{constant}~$c$ and assumptions of the form $\Subst{!A}{c}{x}$
+can be discharged. The discharged assumptions of one inference all
+have to use the same~$c$. This constant is called the
+\emph{eigenvariable} of the \Elim{\lexists} inference. The inference
+is only correct if $c$~does not occur in an open assumption other than
+the discharged~$!A(c)$, does not occur in~$!B$, and does not occur
+in~$!A$. This is called the \emph{eigenvariable condition}.
+
+!!^{proof}s in \Log{N1ci} are finite trees of sequents that are
+inductively generated from axioms using the rules of inference. Each
+leaf is an assumption, possibly labelled with a discharge label, and
+every other !!{formula} follows from the !!{formula}s immediately
+above it by one of the inference rules of the system. If an occurence
+of a !!{formula} as an assumption in the tree above an inference has
+not been discharged by an inference above it, it is called \emph{open}
+(at the inference).
+
+\begin{defn}\ollabel{defn:proof}
+\emph{!!^{proof}s} in \Log{N1ci} are finite trees of
+!!{formula}s inductively as follows:
+\begin{enumerate}
+  \item\ollabel{defn:prf:assumption} Every !!{formula} 
+  labelled by a discharge label such as $x$ or $y$, by itself is
+  !!a{proof}. In !!a{proof} consisting of a single !!{formula}, the
+  !!{formula} counts as an open assumption.
+  \item\ollabel{defn:prf:one-prem} If $R$ is a rule with one, two, or
+  three premises $!A_1$, $!A_2$, $!A_3$, conclusion~$!A$, and
+  $\delta_1$, $\delta_2$, $\delta_3$ are !!{proof}s ending in $!A_1$,
+  $!A_2$, $!A_3$, respectively, the
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \RightLabel{$R$}
+  \UnaryInfC{$!A$}
+  \DisplayProof
+\qquad
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A_2$}
+  \RightLabel{$R$}
+  \BinaryInfC{$!A$}
+  \DisplayProof
+\qquad
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A_2$}
+  \AxiomC{}
+  \RightLabel{$\delta_3$}
+  \DeduceC{$!A_2$}
+  \RightLabel{$R$}
+  \TrinaryInfC{$!A$}
+  \DisplayProof
+  \]
+  is !!a{proof}, respectively, provided the assumption labels in the
+  !!{proof}s are compatible (no two different !!{formula}s have the
+  same discharge label) and the inferences are correct applications
+  of~$R$.
+  \item Topmost !!{formula} occurrences in the new !!{proof} count as
+  \emph{open assumptions} of the !!{proof} if they are open
+  assumptions of $\delta_1$, $\delta_2$, or~$\delta_3$, except those
+  occurrences discharged by the rule. If the rule is labelled~$x$ (or
+  $x\, y$), then for \Intro{\lif} and~\Intro{\lnot}, that is all open
+  assumptions in~$\delta_1$ labelled~$x$; for \Elim{\lexists}, it is
+  all open assumptions labelled~$x$ in~$\delta_2$; for \Elim{\lor}, it
+  is all open assumptions labelled~$x$ in~$\delta_2$ and all open
+  assumptions labelled~$y$ in~$\delta_3$.
+\end{enumerate}
+\end{defn}
+
+The !!{proof}s used in the inductive construction of !!a{proof} are
+called its \emph{sub-!!{proof}s}. The sub-!!{proof}s ending in the
+premises of an inference are called the \emph{immediate
+sub-!!{proof}s} of the inference. The rules of \Log{N2c} and \Log{N2i}
+are given in \olref{tab:N1}
+
+\subfile{rules-N1}
+
+\begin{defn}
+The \emph{!!{height}}~$\pheight{\delta}$ of !!a{proof}~$\delta$ is
+inductively defined as follows.
+\begin{enumerate}
+  \item If $\delta$ consists of an assumption, $\pheight{\delta} = 0$.
+  \item If $\delta$ ends in an inference with one premise with immediate
+  sub-!!{proof}~$\delta_1$, then $\pheight{\delta} = \pheight{\delta_1} + 1$.
+  \item If $\delta$ ends in an inference with two premises with immediate
+  sub-!!{proof}s~$\delta_1$ and~$\delta_2$, then $\pheight{\delta} =
+  \max(\pheight{\delta_1}, \pheight{\delta_2}) + 1$.
+  \item If $\delta$ ends in \Elim{\lor} with immediate
+  sub-!!{proof}s~$\delta_1$, $\delta_2$, and~$\delta_3$, then $\pheight{\delta} =
+  \max(\pheight{\delta_1}, \pheight{\delta_2}, \pheight{\delta_3}) + 1$.
+\end{enumerate}
+If a sequent~$S$ has !!a{proof} of height $\le n$, we write $\Proves[n] S$.
+\end{defn}
+
+\begin{ex}
+In \Log{N1i}, any !!{formula} counts as !!a{proof} from itself as an
+open assumption. So
+\[
+!A \land !B^x
+\]
+is !!a{proof}~$\delta_1$. Its height is~$0$.
+From $\delta_1$ we can obtain two !!{proof}s~$\delta_2$ and~$\delta_3$
+by applying one of the two version of~\Elim{\land}
+\[
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\DisplayProof
+\qquad
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\DisplayProof
+\]
+The immediate sub-!!{proof}s of the last inference in~$\delta_2$ and
+in~$\delta_3$ is the same: $!A \land !B$. Both !!{proof}s have the
+occurrence of $!A\land !B$ as an open assumption. We have
+$\pheight{\delta_1} = \pheight{\delta_2} = 1$.
+
+The rule \Intro{\land} requires two premises of the form $!B$ and $!A$
+to justify a conclusion of the form~$!B \land !A$. Thus, the following
+is !!a{proof}~$\delta_4$:
+\[
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\LeftSubproofLabel{$\delta_2$}
+\AxiomC{$!A \land !B^x$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\RightSubproofLabel{$\delta_3$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !A$}
+\DisplayProof
+\]
+Its height $\pheight{\delta_4} = \max(\pheight{\delta_2},
+\pheight{\delta_3})+1 = \max(1,1) + 1 = 2$. It has two occurences of
+$!A \land !B$ as assumptions, both are open.
+
+Finally we can apply \Intro{\lif} to obtain $\delta_5$:
+\[
+\AxiomC{$\Discharge{!A \land !B}{x}$}
+\RightLabel{\Elim{\land}[2]}
+\UnaryInfC{$!B$}
+\LeftSubproofLabel{$\delta_2$}
+\AxiomC{$\Discharge{!A \land !B}{x}$}
+\RightLabel{\Elim{\land}[1]}
+\UnaryInfC{$!A$}
+\RightSubproofLabel{$\delta_3$}
+\RightLabel{\Intro{\land}}
+\BinaryInfC{$!B \land !A$}
+\DischargeRule{\Intro{\lif}}{x}
+\UnaryInfC{$(!A \land !B) \lif (!B \land !A)$}
+\DisplayProof
+\]
+Its height is $\pheight{\delta_4} + 1 = 3$. The \Intro{\lif} inference
+discharges all occurrences of assumptions of the form $!A \land !B$
+labelled~$x$, i.e., both previously open assumptions of the immediate
+subproof. Since those are the only assumptions of $\delta_5$, it has
+no open assumptions, and so is !!a{proof} \emph{of} its end-!!{formula}
+$(!A \land !B) \lif (!B \land !A)$.
+\end{ex}
+
+\end{document}

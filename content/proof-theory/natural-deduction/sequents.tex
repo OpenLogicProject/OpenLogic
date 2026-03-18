@@ -1,0 +1,157 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: sequents
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{nat}{seq}
+
+\olsection{Natural Deduction with Sequents: \Log{N2ci}}
+
+!!^a{proof}~$\delta$ in \Log{G1ci} shows that its end-!!{formula}~$!A$
+follows from its open assumptions. If $\Gamma$ is the set of
+!!{formula}s $!B$ for all $!B^x$ that occur as open assumptions
+in~$\delta$, we can write this as $\delta \Proves \Gamma \Sequent !A$.
+This suggests that we can formulate a natural deduction system also
+for sequents. In such a system, each sequent carries the information
+which open assumptions the !!{formula} on the right depends on, i.e.,
+which are open in the sub-!!{proof} ending in a sequent. This is
+natural deduction with sequents~\Log{N2ci}, or natural deduction ``in
+sequent style.''
+
+To make the correspondence between \Log{N1ci} and \Log{N2ci} closer,
+let's take the sets~$\Gamma$ on the left to consist of labelled
+!!{formula}s~$x:!B$. Since rules in \Log{N1ci} only operate on
+the !!{formula}s in the premises, i.e., the end-!!{formula}s of the
+immediate sub-!!{proof}s, rules of \Log{N2ci} only operate on the
+succedent of the sequent. We can thus refer to the labelled formulas
+on the left of sequents simply as the context.
+
+Instead of assumptions, \Log{N2ci} proofs have as topmost sequents
+axioms of the form
+\[x:!A \Sequent !A.\]
+The rules correspond exactly to the rules of \Log{N1ci} and are given
+in \olref{tab:N2}.
+
+\subfile{rules-N2}
+
+Because we must allow (as we do in \Log{N1ci}) that the rules
+\Intro{\lif}, \Intro{\lnot}, \Elim{\lor}, and \Elim{\lexists} may, but
+need not actually discharge assumptions, we allow correct applications
+of the corresponding rules in~\Log{n2ci} also when the corresponding
+context !!{formula}s $!A$, $!B$, and $!A(a)$ are not present in the
+context of the relevant premise.
+
+\begin{prop}
+If $\delta$ is !!a{proof} in~\Log{N1ci} of~$!A$, then there is
+!!a{proof}~$\delta'$ of $\Gamma \Sequent !A$ in~\Log{N2ci}, where
+$\Gamma$ is the set of all~$x:!B$ such that $!B^x$ is an open
+assumption of~$\delta$.
+\end{prop}
+
+\begin{proof}
+  By induction on $n=\pheight{\delta}$. If $n=0$, $\delta$ is a single
+  open assumption~$!A^x$. Then $\Gamma = \{x:!A\}$ and $\Gamma
+  \Sequent !A$ is an axiom of~\Log{N2ci}.
+
+  If $n>0$ we distinguish cases according to the last inference
+  in~$\delta$. We discuss just a one case; the rest are left as
+  exercises.
+
+  Suppose the last inference is $\Intro{\lif}$. Then $\delta$ ends in
+  \[
+  \AxiomC{$\Discharge{!B}{x}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C$}
+  \DischargeRule{\Intro{\lif}}{x}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \]
+  By induction hypothesis there is !!a{proof}~$\delta_1'$
+  in~\Log{N2ci} of $\Gamma' \Sequent !C$, where $\Gamma'$ are the
+  labelled assumptions open in~$\delta_1$. If $!B^x$ is an open
+  assumption of $\delta_1$, then it is discharged at the
+  \Intro{\lif} inference, and the open assumptions of~$\delta$ are
+  $\Gamma = \Gamma' \setminus \{x:!A\}$. In other words, $\delta_1'$
+  is !!a{proof} of~$x:!B, \Gamma \Sequent !C$, and we can take
+  $\delta'$ to be
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1'$}
+  \Deduce$x:B, \Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  If $!A^x$ is not an open assumption of~$\delta_1$, then \Intro{\lif}
+  does not discharge an assumption, and the open assumptions of
+  $\delta$ and $\delta_1$ are the same. Since the context formula
+  $x:!A$ is not required to be present in the premise of \Intro{\lif}
+  in~\Log{N2ci}, we can take $\delta'$ to be
+  \[
+  \AxiomC{}
+  \RightLabel{$\delta_1'$}
+  \Deduce$\Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+\end{proof}
+
+\begin{prop}
+If $\delta$ is !!a{proof} in \Log{N2ci} of $\Gamma \Sequent !A$, then
+there is !!a{proof}~$\delta'$ in \Log{N1ci} with end-!!{formula}~$!A$
+and open assumptions $!B^x$ for every $x:!B \in \Gamma$.
+\end{prop}
+
+\begin{proof}
+  We again proceed by induction on the !!{height}~$n$ of~$\delta$. If
+  $n=0$, $\delta$ is an axiom, $x:!A \Sequent !A$. The
+  !!{proof}~$\delta'$ is the assumption~$!A^x$.
+
+  If $n>0$, we distinguish cases according to the last inference
+  in~$\delta$. For instance, if that inference is~$\Intro{\lif}$,
+  $\delta$~ends in
+  \[
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$x:!B, \Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \quad\text{ or }\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \Deduce$\Gamma \fCenter !C$
+  \RightLabel{\Intro{\lif}}
+  \UnaryInf$\Gamma \fCenter !B \lif !C$
+  \DisplayProof
+  \]
+  By inductive hypothesis, there is !!a{proof} in~\Log{N1ci} of~$!C$.
+  In the first case, $!B^x$ is an open assumption of~$\delta'$; in the
+  second case it is not. We can take the !!{proof}~$\delta'$ to be
+  \[
+  \bottomAlignProof
+  \AxiomC{$\Discharge{!B}{x}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C$}
+  \DischargeRule{\Intro{\lif}}{x}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \quad\text{ or }\quad
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C$}
+  \RightLabel{\Intro{\lif}}
+  \UnaryInfC{$!B \lif !C$}
+  \DisplayProof
+  \]
+  respectively.
+\end{proof}
+
+\end{document}
