@@ -1,0 +1,109 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: types
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{typ}
+
+\olsection{Types}
+
+A proof term such as $(MN)$ by itself does not uniquely determine the
+proof it is a proof term of. That's because the free variables, i.e.,
+the proof terms of axioms, do not specify the !!{formula}s in the
+corresponding axioms. However, if we specify these in a
+context~$\Gamma$, the proof \emph{is} uniquely determined.
+
+\begin{defn}
+A \emph{context} for a proof term~$N$ is a set $\Gamma$ such that for
+every free variable of~$N$, $\Gamma$ contains exactly one pair $x : !A$.
+\end{defn}
+
+Note that the definition does not require that $\Gamma$ contains
+$x:!A$ \emph{only} for free variables of~$N$. This, e.g., $\Gamma =
+\{x:!A, y:!B, z:!C\}$ is a context for $\pair{x}{y}$.
+
+\begin{defn}\ollabel{defn:type}
+  Suppose $\Gamma$ is a context for~$N$. The \emph{type} of~$N$
+  (relative to~$\Gamma$) is inductively defined as follows:
+  \begin{enumerate}
+  \item The type of $x$ is $!A$ iff $x:!A \in \Gamma$.
+  \item If $N$ has type~$!B$ relative to $x:!A, \Gamma$, then the type of $\lambd[\typeof{x}{!A}][N]$ is $!A \lif !B$.
+  \item If $N$ has type $!A \lif !B$ and $M$ has type~$!A$ then $(NM)$
+  has type~$!B$
+  \item If $N$ has type $!A$ and $M$ has type~$!B$, then $\pair{N}{M}$
+  has type $!A \land !B$.
+  \item If $N$ has type~$!A_1 \land !A_2$, then $\proj{i}{N}$ has type~$!A_i$.
+  \item If $N$ has type $!A$, then
+    $\inj[!B]{i}{!M}$ has type $!A \lor !B$ if $i=1$ and type $!B \lor
+    !A$ if $i=2$.
+  \item If $M$ has type $!A \lor !B$, and $N_1$ has type $!C$ relative
+  to $x:!A, \Gamma$ and $N_2$ has type~$!C$ relative to $y:!B,
+  \Gamma$, then $\dcase{M}{x_1}{N_1}{x_2}{N_2}$ has type~$!C$.
+  \item If $N$ has type~$\lfalse$, then
+    $\abort{!A}{N}$ has type~$!A$.
+  \end{enumerate}
+\end{defn}
+
+\begin{prop}
+Every proof term~$N$ has exactly one type relative to a
+context~$\Gamma$ for~$N$.
+\end{prop}
+
+\begin{proof}
+  By induction on~$N$.
+\end{proof}
+
+We write $\Gamma \Sequent N : !A$ if the type of $N$ relative to
+$\Gamma$ is~$!A$. The clauses in \olref{defn:type} should seem familiar:
+they are precisely the rules of \Log{tN2i} with one slight difference:
+the context~$\Gamma$ is the same throughout. We can codify the
+definition as a calculus \Log{tN3i} with the rules given in \olref{tab:tN2ip}.
+
+\subfile{rules-tN3}
+
+Proof terms are terms in a version of the $\lambd$-calculus, the
+\emph{typed $\lambd$-calculus with products, sums, and empty type}. The
+classical $\lambd$-calculus only has term built from variables,
+\emph{$\lambd$-abstracts}~$\lambd[x][N]$ and application $(MN)$, and
+it lacks the annotation by~$!A$ of the typed $\lambd$-abstract
+$\lambd[\typeof{x}{!A}][N]$. The $\lambd$-calculus is a model of
+computation which is Turing complete (i.e., every partial computable
+function can be represented in it by a term). The version of the
+$\lambd$-calculus given by proof terms and typing rules is a
+restricted model of computation, but the basic ideas are the same. It
+is restricted by the type assignment: only \emph{well-typed} terms,
+i.e., proof terms with types (relative to a context~$\Gamma$) are
+legal terms. For instance, $\lambd[x][(xx)]$ is a legal term in the
+classical untyped $\lambd$-calculus, but
+$\lambd[\typeof{x}{!A}][(xx)]$ is not well-typed for any $!A$. That's
+because the typing rules require that in order for $(xx)$ to have a
+type, the first~$x$ would have to have type $!A \lif !B$ and the
+second $x$ type~$!A$, and that's impossible since $!A$ is a proper
+sub-!!{formula} of~$!A \lif !B$.
+
+We can think of types intuitively as the kind of thing named by a term
+of that type. So a term of type $!A \land !B$ picks out a pair with
+first component of type~$!A$ and second component of type~$!B$, i.e.,
+!!a{element} of the product~$!A \times !B$. A term of type $!A \lif !B$
+is a function from things of type $!A$ to things of type~$!B$. A term
+of type $!A \lor !B$ is either something of type $!A$ or something of
+type~$!B$, plus the information which one it is. This is like the
+disjoint union of the two sets $!A$ and $!B$ defined as $\{\tuple{i,x}
+: i = 1 \text{ or } 2, x \in !A \text{ if } i = 1, x \in !B \text{ if
+} i=2\}$. The type $\lfalse$ is the empty set, i.e., if a term has
+that type it can't name anything. Since natural deduction (including
+\Log{tN3i}) is consistent, there is no !!{proof} of~$\lfalse$ unless
+there are open assumptions, and so there is no closed proof term (term
+without free variables) that has type~$\lfalse$.
+
+The operators of the typed $\lambd$-calculus produce terms that
+intuitively name the right sort of thing, provided the terms it is
+applied to name certain things. E.g., ``if $N_1 : !A$ and $N_2 : !B$,
+then $\pair{N_1}{N_2} : !A \land !B$'' says that if $N_1$ names
+somethign of type~$!A$ and $N_2$ names something of type~$!B$, then
+$\pair{N_1}{N_2}$ names something of type $!A \land !B$.
+
+\end{document}

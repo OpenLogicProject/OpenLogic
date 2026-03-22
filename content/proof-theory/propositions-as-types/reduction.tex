@@ -1,0 +1,197 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: reduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{red}
+
+\olsection{Reduction}
+
+In natural deduction !!{derivation}s, !!a{introduction} rule that is
+followed by !!a{elimination} rule is a detour that can be ``reduced''.
+For instance, an $\Intro{\land}$ followed by $\Elim{\land}$ ``cancel
+out,'' since the conclusion of $\Elim{\land}$ is always one of the
+conjuncts of the conjunction that \Intro{\land} produces, and the
+premises of $\Intro{\land}$ are both conjuncts. Thus if we need
+!!a{derivation} of either conjunct, we can simply use that
+!!{derivation} without introducing the conjunction followed by
+eliminating it. We have
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!A_1$}
+  \AxiomC{}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!A_2$}
+  \RightLabel{$\Intro{\land}$}
+  \BinaryInfC{$!A_1 \land !A_2$}
+  \RightLabel{$\Elim{\land}_i$}
+  \UnaryInfC{$!A_i$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta_i$}
+  \DeduceC{$!A_i$}
+  \DisplayProof
+\end{gather*}
+
+We can consider a similar relation of reduction on the associated
+proof terms suggested by this simplification. If $N_1$ is the proof
+term for~$\delta_1$ and $N_2$ the one for~$\delta_2$, then we can say
+the proof term for the proof on the left reduces (in one step) to the
+proof term for the proof on the right:
+\[
+  \proj{i}{\pair{N_1, N_2}} \redone N_i
+\]
+In the typed lambda calculus, this is the \emph{beta reduction} rule for
+the product type.
+
+In natural deduction, a pair of inferences such as a \Intro{\land}
+folloed by \Elim{\land}, i.e., a pair that is subject to reduction, is
+called a \emph{cut}. In the typed lambda calculus the term on the left
+of $\redone$ is called a \emph{redex}, and the term to the right is
+called the \emph{reductum}. Unlike untyped lambda calculus, where only
+$(\lambd[x][N])Q$ is considered to be redex, in the typed lambda
+calculus the syntax is extended to terms involving $\pair{N}{M}$,
+$\proj{i}{N}$, $\inj{i}{!A}{N}$, $\dcase{N}{x_1}{M_1}{x_2}{M_2}$, and
+$\abort{!A}{N}$, with corresponding redexes.
+
+Similarly we have reduction for disjunction:
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{x_1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C$}
+  \AxiomC{$\Discharge{!A_2}{x_2}$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!C$}
+  \DischargeRule{$\Elim{\lor}$}{x_1,x_2}
+  \TrinaryInfC{$!C$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\delta_i$}
+  \DeduceC{$!C$}
+  \DisplayProof
+\end{gather*}
+This corresponds to a reduction on proof terms:
+\begin{gather*}
+  \dcase{\inj[!A_i]{i}{M}}{x_1}{N_1}{x_2}{N_2} \redone \Subst{N_i}{M}{x_i}
+\end{gather*}
+where $M$ is the proof term of~$\delta$, and $N_i$ is the proof term
+of~$\delta_i$. This is the beta reduction rule of for sum types.
+Here, $\Subst{M}{N_i}{x}$ means replacing all free occurrences of the
+variable~$x$ in $M$ by~$N_i$.
+
+The reduction of the function type corresponds to removal of
+a detour of $\Intro\lif$ followed by a $\Elim\lif$.
+\begin{gather*}
+  \bottomAlignProof
+  \AxiomC{$\Discharge{!A}{x}$}
+  \RightLabel{$\delta$}
+  \DeduceC{$!B$}
+  \DischargeRule{$\Intro{\lif}$}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{}
+  \RightLabel{$\delta'$}
+  \DeduceC{$!A$}
+  \RightLabel{$\Elim{\lif}$}
+  \BinaryInfC{$!B$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \quad
+  \AxiomC{}
+  \RightLabel{$\delta'$}
+  \DeduceC{$!A$}
+  \RightLabel{$\delta$}
+  \DeduceC{$!B$}
+  \DisplayProof
+\end{gather*}
+For proof terms, this amounts to ordinary beta reduction:
+\begin{gather*}
+  (\lambd[\typeof{x}{!A}][N]M)
+  \redone \Subst{N}{M}{x}
+\end{gather*}
+
+In addition to reduction conversions on !!{proof}s, we can consider
+permutation conversions. These apply to (sub)!!{proof}s that end in a
+\Elim{\lor} followed by another !!{elimination} rule, e.g.:
+\begin{multline*}
+  \bottomAlignProof
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{x_1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \AxiomC{$\Discharge{!A_2}{x_2}$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \DischargeRule{$\Elim{\lor}$}{x_1,x_2}
+  \TrinaryInfC{$!C_1 \land !C_2$}
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInfC{$!C_i$}
+  \DisplayProof\bottomAlignProof
+  \quad
+  \redone
+  \\
+  \AxiomC{}
+  \RightLabel{$\delta$}
+  \DeduceC{$!A_i$}
+  \RightLabel{$\Intro{\lor}$}
+  \UnaryInfC{$!A_1 \lor !A_2$}
+  \AxiomC{$\Discharge{!A_1}{x_1}$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInfC{$!C_i$}
+  \AxiomC{$\Discharge{!A_2}{x_2}$}
+  \RightLabel{$\delta_2$}
+  \DeduceC{$!C_1 \land !C_2$}
+  \RightLabel{\Elim{\land}[i]}
+  \UnaryInfC{$!C_i$}
+  \DischargeRule{$\Elim{\lor}$}{x_1,x_2}
+  \TrinaryInfC{$!C_i$}
+  \DisplayProof
+\end{multline*}
+If the proof terms of $\delta$, $\delta_1$, and $\delta_2$ are $M$,
+$N_1$, and $N_2$, respectively, the corresponding reduction rule for
+proof terms, i.e., $\lambd$ terms, is:
+\[
+  \proj{i}{\dcase{M}{x_1}{N_1}{x_2}{N_2}} \redone 
+\dcase{M}{x_1}{\proj{i}{N_1}}{x_2}{\proj{i}{N_2}}
+\]
+
+Of course we can eliminate detours not just at the ends of !!{proof}s,
+but also within !!{proof}s, by applying the reduction conversion to a
+sub-!!{proof} ending in a detour. Similarly, $\beta$-reduction applies
+to subterms of $\lambd$-terms. If $N$ is a subterm of $M$, $N \redone
+N'$, we can replace the subterm $N$ in~$M$ by $N'$ to obtain $M'$. In
+that case we also write $M \redone M'$. If there is a sequence $M = M_1
+\redone M_2 \redone M_2 \redone \dots \redone M_k = M'$ (including
+where $k=1$, i.e., $M = M'$) we write $M \red M'$.
+
+A !!{proof} where no conversion can be applied to any sub-!!{proof}
+is called \emph{normal}. Similarly, a $\lambd$-term where no
+conversion can be applied (to any sub-term) is called \emph{normal}. A
+normal $\lambd$-term is also called a \emph{normal form}.
+
+\end{document}

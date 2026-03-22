@@ -1,0 +1,142 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{int}
+
+\olsection{Introduction}
+
+The lambda calculus is a simple model of computation. It operates on
+terms built from variables. If $N$ and $M$ are terms, then $(NM)$ is
+also a term (``$N$ applied to~$M$''). If $N$ is a term, then
+$\lambd[x][N]$ is a term. If $N$ contains the variable~$x$, then the
+corresponding occurrences of~$x$ in $\lambd[x][N]$ are bound by the
+$\lambd[x]$ operator, and so are no longer free. A term of the form
+$(\lambd[x][N]M)$ is said to $\beta$-contract to $\Subst{N}{M}{x}$
+(the result of replacing every free occurrence of $x$ in~$N$ by $M$).
+A term $N$ $\beta$-converts to~$N'$ if $N'$ results from $N$ by
+$\beta$-contracting a subterm, and we write $N \redone N'$. A
+computation in the $\lambd$-calculus is a sequence $N \redone N_1
+\redone N_2 \redone \dots$. If this sequence ends in a term $N_k$
+where no subterm can be $\beta$-contracted, it is called \emph{normal}
+or a normal form of~$N$. Think of computation in the $\lambd$-calculus
+as such sequences. The computation halts if it results in a normal
+form, and the normal form is the result of the computation. This
+simple model of computations turns out to be Turing complete: every
+partial recursive function can be computated by a term in the $\lambd$-calculus.
+
+Haskell Curry and William Howard independently discovered a close
+similarity between natural deduction and the $\lambd$-calculus.
+Intuitively, a term $\lambd[x][N]$ is a function: $x$ is the argument;
+$N$ tells us how to compute the value given~$x$. A term
+$(\lambd[x][N]M)$ then is applying the function $\lambd[x][N]$ to an
+argument~$M$, and $\beta$-contraction tells us how to evaluate it:
+replace $x$ in $N$ by~$M$ (and keep evaluating the resulting term).
+Now think of these as functions with a fixed domain and range. If the
+domain of $\lambd[x][N]$ is $A$ and and its range~$B$, then we should
+think of the variable~$x$ as only taking arguments from~$A$ and $N$ as
+producing values from~$B$. Consequently, $(\lambd[x][N]M)$ only should
+make sense if $\lambd[x][N]$ is a function $A \to B$, and $M \in A$.
+If we want to add this information to the $\lambd$-calculus we obtain
+the \emph{typed} $\lambd$-calculus. In the typed $\lambd$-calculus not
+every expression $(\lambd[x][N]M)$ is legal, but only those where the
+``types'' of $\lambd[x][N]$ and $M$ fit together, i.e., $\lambd[x][N]$
+has type $A \lif B$ and $M$ has type~$A$. In fact, not every term
+$(M_1M_2)$ is legal only if $x$ is of type $A$ and $N$ is of type only
+those where $M_1$ has type $A \to B$ and $M_2$ has type~$A$; if so,
+then $(M_1M_2)$ has type~$B$. And if the type of $x$ is $A$ and the
+type of $N$ is $B$ then the type of $\lambd[x][N]$ is $A \to B$.
+
+These typing rules now clearly correspond to !!{derivation}s in
+natural deduction, where the types are represented by !!{formula}s,
+and the !!{derivation}s themselves to $\lambd$-terms. For instance,
+!!a{derivation} of $!A \lif !B$ corresponds to a term
+$\lambd[\typeof{x}{!A}][N]$, which has the function type
+$!A \lif !B$. The inference rules of natural deduction correspond to
+typing rules in the typed lambda calculus, e.g.,
+\begin{prooftree}
+  \AxiomC{$\Discharge{!A}{x}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro\lif}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \DisplayProof\bottomAlignProof
+  \quad\text{corresponds to}\quad
+  \Axiom$x: !A \fCenter N: !B$
+  \UnaryInf$ \fCenter \lambd[\typeof{x}{!A}][N] : !A \lif !B$
+\end{prooftree}
+where the rule on the right means that if $x$ is of type~$!A$ and $N$
+is of type~$!B$, then $\lambd[\typeof{x}{!A}][N]$ is of type~$!A \lif
+!B$.
+
+The $\Elim\lif$ rule corresponds to the typing rule for composition
+terms, i.e.,
+\[
+  \AxiomC{$!A \lif !B$}
+  \AxiomC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+  \quad\text{corresponds to}\quad
+  \Axiom$\fCenter M_1: !A \lif !B$
+  \Axiom$\fCenter M_2: !A$
+  \BinaryInf$ \fCenter (M_1M_2) : !B$
+  \DisplayProof
+\]
+If a \Intro\lif{} rule is followed immediately by a \Elim\lif{} rule,
+the !!{derivation} can be simplified:
+\begin{gather*}
+  \AxiomC{$\Discharge{!A}{x}$}
+  \DeduceC{$!B$}
+  \DischargeRule{\Intro\lif}{x}
+  \UnaryInfC{$!A \lif !B$}
+  \AxiomC{}
+  \DeduceC{$!A$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$!B$}
+  \DisplayProof
+  \quad\redone\quad
+  \AxiomC{}
+  \DeduceC{$!A$}
+  \DeduceC{$!B$}
+  \DisplayProof
+\end{gather*}
+which corresponds to $\beta$-contraction of lambda terms
+\[
+(\lambd[\typeof{x}{!A}][N]M) \quad\redone\quad
+\Subst{N}{M}{x}.
+\]
+
+Similar correspondences hold between the rules for $\land$ and ``product''
+types, and between the rules for $\lor$ and ``sum'' types.
+
+This correspondence between terms in the simply typed lambda calculus
+and natural deduction !!{derivation}s is called the ``Curry--Howard'',
+``proofs-as-programs,'' or ``propositions as types'' correspondence.
+In addition to !!{formula}s (propositions) corresponding to types, and
+proofs to terms, we can summarize the correspondences as follows:
+\begin{center}
+  \begin{tabular}{c c c}
+    logic & program \\
+    \hline
+    proposition/!!{formula} & type \\
+    proof & term \\
+    assumption & variable \\
+    discharged assumption & bond variable \\
+    undischarged assumption & free variable \\
+    $!A \lif !B$ & function type \\
+    $!A \land !B$ & product type \\
+    $!A \lor !B$ & sum type \\
+    $\lfalse$ & empty type \\
+    \hline
+  \end{tabular}
+\end{center}
+
+The Curry--Howard correspondence is one of the cornerstones of
+automated proof assistants and type checkers for programs, since
+checking a proof witnessing a proposition (as we did above) amounts to
+checking if a program (term) has the declared type.
+\end{document}

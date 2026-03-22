@@ -1,0 +1,96 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: proofs-to-terms
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{pt}
+
+\olsection{Converting \usetoken{P}{derivation} to Proof Terms}
+
+The process of converting natural deduction !!{proof}s to proof terms,
+i.e., translating !!{proof}s in~\Log{N2i} to !!{proof}s in~\Log{tN2i},
+is extremely straightforward. It simply amounts to writing a proof
+term to the left of each !!{formula} on the right of a sequent in the
+!!{derivation}, resulting in sequents of the form $\Gamma \Sequent M :
+!A$.  We'll then say that $M$ \emph{witnesses}~$!A$ in
+context~$\Gamma$. Which proof term to write is entirely determined by
+the rules of \Log{tN2i}.
+
+\begin{prop}
+Every !!{proof}~$\delta$ of $\Gamma \Sequent !A$ in \Log{N2i}
+corresponds to !!a{proof}~$\delta'$ of $\Gamma \Sequent N : !A$ in
+\Log{tN2i}. The proof term $N$ is uniquely determined by~$\delta$.
+\end{prop}
+
+\begin{proof}
+We proceed by induction on the height of~$\delta$. If $\delta$ is the
+axiom $x:!A \Sequent !A$, then $\delta'$ is the axiom~$x:!A \Sequent
+x:!A$. If $\delta$ ends in an inference rule, the inductive hypothesis
+provides proof terms for each premise, and \Log{tN2i}-!!{proof}s of
+sequents including these proof terms  corresponding to each premise.
+We apply the corresponding rule of \Log{tN2i}; the corresponding proof
+term is determined by the \Log{tN2i} inference rule.
+\end{proof}
+
+\begin{ex}
+  Consider the very simple !!{proof} in \Log{N1i} of $(!A \land !B)
+  \lif (!B \land !A)$:
+  \[
+  \AxiomC{$\Discharge{!A\land !B}{x}$}
+  \RightLabel{\Elim\land[2]}
+  \UnaryInfC{$!B$}
+  \AxiomC{$\Discharge{!A\land !B}{x}$}
+  \RightLabel{\Elim\land[1]}
+  \UnaryInfC{$!A$}
+  \RightLabel{\Intro\land}
+  \BinaryInfC{$!B \land !A$}
+  \DischargeRule{\Intro\lif}{x}
+  \UnaryInfC{$(!A \land !B) \lif (!B \land !A)$}
+  \DisplayProof
+  \]
+  In \Log{N2i} it looks like this:
+  \[
+  \Axiom$x : !A\land !B \fCenter !A\land !B$
+  \RightLabel{\Elim\land[2]}
+  \UnaryInf$x : !A\land !B \fCenter !B$
+  \Axiom$x : !A\land !B \fCenter !A\land !B$
+  \RightLabel{\Elim\land[1]}
+  \UnaryInf$x : !A\land !B \fCenter !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+  We assign proof terms from the top down. The proof terms for the
+  axioms are just the same as the variable in the context,~$x$. The
+  proof terms associated with $\Elim\land[i]$ are then determined as
+  $\proj{2}{x}$ and~$\proj{1}{x}$. When we apply \Intro{\land}, we
+  combine these two proof terms: $\pair{\proj{2}{x}}{\proj{1}{x}}$.
+  Finally, the \Intro{\lif} rule applies a $\lambd$-abstraction,
+  binding~$x$ and recording that $x$ labelled the assumption~$!A \land
+  !B$: $\lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}]$.
+  The !!{proof} in \Log{tN2i} then is:
+  \[
+  \Axiom$x : !A\land !B \fCenter x: !A\land !B$
+  \RightLabel{\Elim\land[2]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{2}{x} : !B$
+  \Axiom$x : !A\land !B \fCenter x: !A\land !B$
+  \RightLabel{\Elim\land[1]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{1}{x} : !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} : 
+    !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+\end{ex}
+
+
+\end{document}

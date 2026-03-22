@@ -157,8 +157,99 @@ redex in it, and $0$ if it is normal:
 \end{enumerate}
 \end{proof}
 
-The normalization of terms is actually not specific to the reduction
-order we chose. In fact, one can prove that regardless of the order in
-which redexes are reduced, the term always reduces to a normal
-form. This property is called \emph{strong normalization}.
+The fact that typed $\lambd$-terms normalize means that every such
+term \emph{has a normal form}. If we think of $\beta$-reducing
+$\lambd$-terms to their normal form as executing a computation and the
+normal form as the value of the computation, this means that every
+computation in the typed $\lambd$-calculus eventually halts an
+produces a value. Moreover, type preservation ensures that the value
+has the right type. E.g., if $N$ has type $!A \lif !B$ (i.e., it is a
+function that is supposed to work for arguments of type~$!A$ and
+produces values of type~$!B$) and we apply it to a term~$M$ of type~$!A$
+(the input), $(NM)$ reduces to a term $N'$ (the output) and that
+output is guaranteed to be of type~$!B$.
+
+In fact, terms in the typed $\lambd$-calculus don't just reduce to
+normal forms for one way of applying $\beta$-reductions to subterms,
+but \emph{any} way of applying $\beta$-reductions to subtems
+eventually terminates in a normal form. This property is called
+\emph{strong normalization}. It means that not only is there a way to
+guarantee that a computation eventually halts and produces a value,
+but \emph{any} way to execute the computation eventually produces a
+value.
+
+How do we know that different ways of executing a computation produce
+the \emph{same} value? So far we just know (from type preservation)
+that all values it produces are of the same type. The typed
+$\lambd$-calculus has another important property: it is
+\emph{confluent} or \emph{Church-Rosser}. If $N \red N_1$ and $N \red
+N_2$ then there is some term~$N'$ such that $N_1 \red N'$ and $N_2 \red
+N'$. Recall that $N \red N'$ means: $N'$ results from zero or more
+$\redone$-reduction steps. If $N_1$ is in normal form then the only
+term $N'$ such that $N_1 \red N'$ is $N_1$ itself (via zero
+$\redone$-reduction steps). It follows that if $N_1$ and $N_2$ are
+both in normal form, then $N_1 = N' = N_2$. In other words, since
+$\red$ is strongly normalizing, every way of reducing a term
+eventually results in a normal form. Since $\red$ is Church-Rosser,
+any two normal forms are equal. Hence, computation in the typed
+$\lambd$-calculus always terminates and the value (normal form) is the
+same regardless of how the computation proceeds.
+
+Proving that a relation is confluent is typically difficult. However,
+we can easily establish the following weaker condition:
+
+\begin{prop}[Weak Church-Rosser Property]
+If $N \redone N_1$ and $N \redone N_2$ then there is a term $N'$ such
+that $N_1 \red N'$ and $N_2 \red N'$.
+\end{prop}
+
+\begin{proof}
+  The two terms $N_1$ and $N_2$ result from $N$ by replacing the redex
+  $M_1$ or $M_2$ by its reductum, respectively. The redexes $M_1$ and
+  $M_2$ are subterms of $N$, and so cannot overlap. This means that
+  either one is a subterm of the other, or they occur in different
+  non-overlapping places in $N$. Consider the latter case: $N$ is of
+  the form $N(M_1,M_2)$. Replacing $M_1$ by its reductum $M_1'$
+  results in $N_1$ which is $N(M_1',M_2)$, and replacing $M_2$ by its
+  reductum $M_2'$ results in $N_2$ which is $N(M_1,M_2')$. Both reduce
+  to $N(M_1',M_2')$. For the other case, suppose $M_2$ is a sub-term
+  of~$M_1$ (the other case is symmetric) and distinguish cases
+  according to what kind of redex $M_1$ is. E.g., if $M_1 \ident
+  \proj{1}{\pair{O_1}{O_2}}$ it reduces to $O_1$. If $M_2$ is a
+  subterm of $O_1$, then converting $M_2$ results in $O_1'$. So
+  converting $M_1$ first and then $M_2$ results in $O_1'$. But
+  converting $M_2$ first results in $\proj{1}{\pair{O_1'}{O_2}}$ and
+  this reduces also to~$O_2$.
+\end{proof}
+
+\begin{lem}[Newman's Lemma]
+If $\red$ is strongly normalizing and has the weak Church-Rosser
+property, it is confluent.
+\end{lem}
+
+\begin{proof}
+  Since $\red$ is strongly normalizing, any reduction sequence results
+  in a normal form. Normal forms are unique iff $\red$ is confluent.
+  So suppose some term $N$ has two distinct normal forms $N'$ and
+  $N''$, the result of reduction sequences
+  \begin{align*}
+  N & = N_1' \redone N_2' \redone \dots \redone N_k' = N' \text{ and}\\
+  N & = N_1'' \redone N_2'' \redone \dots \redone N_l'' = N''
+  \end{align*}
+  (The reduction sequence must have length $>0$ since otherwise $N$
+  would already be in normal form.)
+
+  If $N_1' = N_1''$ then it has two distinct normal forms ($N'$ and
+  $N''$). If $N_1' \neq N_1''$ then by weak Church-Rosser there is
+  some $N'''$ such that $N_1' \red N'''$ and $N_1'' \red N'''$. Since
+  $N' \neq N''$, either $N''' \neq N'$ or $N''' \neq N''$.
+  Consequently, either $N_1'$ or $N_1''$ has two distinct normal
+  forms. We've shown that if $N$ has two distinct normal forms, there
+  is an $N_1$ such that $N \redone N_1$ and $N_1$ has two distinct
+  normal forms. Obviously we can keep going and produce $N \redone N_1
+  \redone N_2 \redone \dots$, but this is impossible because $\redone$
+  is strongly normalizing.
+\end{proof}
+
+
 \end{document}

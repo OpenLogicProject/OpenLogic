@@ -748,6 +748,21 @@
         { .\, #2 }      % two arguments
 }
 
+% Typed Lambda Calculus
+% ---------------------
+
+\DeclareDocumentCommand \pair { m m } {\tuple{#1,#2}}
+\DeclareDocumentCommand \proj { m m } {\pi_{#1}(#2) }
+\DeclareDocumentCommand \dcase { m m m m m } {\delta\, #1\, #2.#3\, #4.#5}
+\DeclareDocumentCommand \inj {o m m} {
+  \IfNoValueTF {#1} 
+    { \iota_{#2}(#3) }
+    { \iota_{#2}^{#1}(#3) }}
+\DeclareDocumentCommand \abort {m m} {\varepsilon^{#1}(#2)}
+
+% Arithmetization
+% ---------------
+
 % - `\num{n}` : numeral corresponding to a number
 
 \DeclareDocumentCommand \num { m } {\overline{#1}}

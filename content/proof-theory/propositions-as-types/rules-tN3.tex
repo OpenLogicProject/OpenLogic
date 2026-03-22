@@ -1,0 +1,73 @@
+% Part: proof-theory
+% Chapter: natural-deduction
+% Section: rules-N2
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\begin{table}
+\begin{tabular}{@{}c@{}c@{}}
+\multicolumn{2}{l}{\textbf{Axioms:}}\\
+\multicolumn{2}{c}{$\Gamma \Sequent x:!A$ if $x:!A \in \Gamma$}\\[3ex]
+\multicolumn{2}{l}{\textbf{Inference Rules:}}\\[3ex]
+\multicolumn{2}{c}{\Axiom$x: !A, \Gamma \fCenter N:!B$
+\RightLabel{\Intro{\lif}}
+\UnaryInf$\Gamma \fCenter \lambd[\typeof{x}{!A}][N] : !A \lif !B $
+\DisplayProof}
+\\[4ex]
+\multicolumn{2}{c}{\Axiom$\Gamma \fCenter N:!A \lif !B$
+\Axiom$\Gamma \fCenter M:!A$
+\RightLabel{\Elim{\lif}}
+\BinaryInf$\Gamma \fCenter (NM) : !B$
+\DisplayProof}
+\\[4ex]
+\multicolumn{2}{c}{\Axiom$\Gamma \fCenter N_1 : !A$
+\Axiom$\Gamma \fCenter N_2 : !B$
+\RightLabel{\Intro{\land}}
+\BinaryInf$\Gamma \fCenter \pair{N_1}{N_2} : !A \land !B $
+\DisplayProof}
+\\[4ex]
+\Axiom$\Gamma \fCenter N: !A \land !B$
+\RightLabel{\Elim{\land}[1]}
+\UnaryInf$\Gamma \fCenter \proj{1}{N} : !A$
+\DisplayProof
+&
+\Axiom$\Gamma \fCenter N:!A \land !B$
+\RightLabel{\Elim{\land}[2]}
+\UnaryInf$\Gamma \fCenter \proj{2}{N} : !B$
+\DisplayProof\\[3ex]
+\\[4ex]
+\Axiom$\Gamma \fCenter N: !A$
+\RightLabel{\Intro{\lor}[1]}
+\UnaryInf$\Gamma \fCenter \inj[!B]{1}{N} : !A \lor !B$
+\DisplayProof
+&
+\Axiom$ \Gamma \fCenter N : !A$
+\RightLabel{\Intro{\lor}[2]}
+\UnaryInf$\Gamma \fCenter \inj[!B]{2}{N} : !B \lor !A$
+\DisplayProof\\[3ex]
+\multicolumn{2}{c}{
+\begin{tabular}[b]{@{}l@{}}
+\Axiom$\Gamma \fCenter M : !A \lor !B$
+\Axiom$x:!A, \Gamma \fCenter N_1 : !C$
+\Axiom$y:!B, \Gamma \fCenter N_2: !C$
+\RightLabel{\Elim{\lor}}
+\TrinaryInf$\Gamma \fCenter
+\dcase{M}{x}{N_1}{y}{N_2} : !C$
+\DisplayProof
+\end{tabular}
+}
+\\[4ex]
+\multicolumn{2}{c}{\Axiom$\Gamma \fCenter N: \lfalse$
+\RightLabel{\FalseInt}
+\UnaryInf$\Gamma \fCenter \abort{!A}{N} : !A$
+\DisplayProof}
+\end{tabular}
+\caption{Rules of the propositional term-labelled intuitionistic
+natural deduction system \Log{tN3ip} serving as a type assignment
+system.}
+\ollabel{tab:tN2ip}
+\end{table}
+
+\end{document}

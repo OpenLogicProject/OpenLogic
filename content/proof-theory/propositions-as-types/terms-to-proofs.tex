@@ -1,0 +1,97 @@
+% part: intuitionistic-logic
+% chapter: propositions-as-types
+% section: terms-to-proofs
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{int}{pty}{tp}
+
+\olsection{Recovering \usetoken{P}{derivation} from Proof Terms}
+
+Now let us consider the other direction: translating a proof term~$N$
+back to !!a{proof} in \Log{N2i}. In general, it is only possible to do
+this relative to a context that contains pairs $x : !A$ for every
+variable~$x$ that occurs free in the given proof term. But let's start
+with an example where there are no free variables, namely the term
+\[
+\lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}]
+\]
+It is of the form $\lambd[\typeof{x}{!A \land !B}][N_1]$. Since the
+only rule of \Log{tN2i} that produces a term of this form
+is~\Intro{\lif}, we know that the !!{proof} encoded by~$N$ has to end
+with~\Intro{\lif}, i.e., it ends in
+  \[
+  \Axiom$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} : 
+    !C$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif !C$
+  \DisplayProof
+  \]
+We don't yet know what $!C$ is, but we do know that the antecedent is
+$!A \land !B$, and that the context of the premise has to include
+$x:!A \land !B$.
+
+Now the proof term associated with the premise is already determined:
+$\pair{\proj{2}{x}}{\proj{1}{x}}$. The !!{proof} \emph{it} encodes
+must end with \Intro{\land}. We still don't know what $!C$ is, but
+because it is the conclusion of~\Intro{\land}, we know it must be a
+conjunction, i.e., $!C \ident (!C_1 \land !C_2)$. We continue the
+reconstruction:
+  \[
+  \Axiom$x : !A\land !B \fCenter \proj{2}{x} : !C_1$
+  \Axiom$x : !A\land !B \fCenter \proj{1}{x} : !C_2$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} : 
+    !C_1 \land !C_2$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!C_1 \land !C_2)$
+  \DisplayProof
+  \]
+The proof term $\pi_2(x)$ means that top sequent on the left was
+obtained by \Elim{\land}[2], i.e., the premise is of the form $!D
+\land !C_1$. On the right, we can determine that the inference leading
+to $!C_2$ must be \Elim{\land}[1], and that the premise is of the form
+$!C_2 \land !E$.
+  \[
+  \Axiom$x : !A\land !B \fCenter x: !D\land !C_1$
+  \RightLabel{\Elim\land[2]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{2}{x} : !C_1$
+  \Axiom$x : !A\land !B \fCenter x: !C_2\land !E$
+  \RightLabel{\Elim\land[1]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{1}{x} : !C_2$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} : 
+    !C_1 \land !C_2$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!C_1 \land !C_2)$
+  \DisplayProof
+  \]
+Since the proof terms of the topmost sequents are now variables, we
+know that they must be axioms. This determines $!C_1$, $!C_2$, $!D$, and
+$!E$: $!D \ident !A$ and $!C_1 \ident !B$ or else the left sequent is
+not an axiom, and $!C_2 \ident !A$ and $!E \ident !B$, or else the
+right sequent isn't. We have recovered the proof fully:
+  \[
+  \Axiom$x : !A\land !B \fCenter x: !A\land !B$
+  \RightLabel{\Elim\land[2]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{2}{x} : !B$
+  \Axiom$x : !A\land !B \fCenter x: !A\land !B$
+  \RightLabel{\Elim\land[1]}
+  \UnaryInf$x : !A\land !B \fCenter \proj{1}{x} : !A$
+  \RightLabel{\Intro\land}
+  \BinaryInf$x : !A\land !B \fCenter \pair{\proj{2}{x}}{\proj{1}{x}} : 
+    !B \land !A$
+  \RightLabel{\Intro\lif}
+  \UnaryInf$\fCenter \lambd[\typeof{x}{!A \land
+  !B}][\pair{\proj{2}{x}}{\proj{1}{x}}] : (!A \land !B) \lif (!B \land !A)$
+  \DisplayProof
+  \]
+
+
+\end{document}
