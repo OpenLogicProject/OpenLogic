@@ -1,0 +1,194 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: tableaux
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{tab}
+
+\olsection{Tableaux}
+
+Tableaux systems are !!{proof} systems closely related to sequent
+calculi that are particularly well-suited for proof search, both by
+hand and implemented in software. Rather than build trees of sequents,
+in tableaux !!a{proof} is a tree of !!{formula}s. But unlike natural
+deduction, the rules mirror those of the sequent calculus. A tableau
+!!{proof} is essentially an explicit search for a model. Hence they
+are sometimes called \emph{semantic} tableaux or also \emph{truth
+trees}.
+
+A \emph{signed} tableau is a tree of signed !!{formula}s, which can be
+of the form $\sFmla{\True}{!A}$ or $\sFmla{\False}{!A}$. Trees grow
+downwards. They begin with !!{formula}s that specify what we want to
+!!{prove}. E.g., to !!{prove} a sequent $!A, !B \Sequent !C, !D$ it
+would begin with $\sFmla{\True}{!A}, \sFmla{\True}{!B},
+\sFmla{\False}{!C}, \sFmla{\True}{!D}$. !!^a{structure} that makes
+$!A$ and $!B$ true and $!C$ and $!D$ false is !!a{structure} that
+shows that would show that $!A, !B \Sequent !C, !D$ is not valid. 
+
+A leaf (bottommost) node of the tableau can be extended by branch
+extension rules which add additional nodes to the same branch or add
+two sibling nodes below, splitting the branch into two new branches.
+The rules can be applied to any signed !!{formula} above it in the
+same branch. The branch extension rules for the classical tableaux
+system \Log{Tc} are given in \olref{tab:Tc}.
+
+\subfile{rules-Tc}
+
+As you can see, the rules are just those of \Log{G3c} upside-down, and
+the signs $\True$ and $\False$ indicate whether !!a{formula} is
+principal on the left or right side of a sequent, respectively.
+
+A branch of a tableau is \emph{closed} if it contains both
+$\sFmla{\True}{!A}$ and $\sFmla{\False}{!A}$. If every branch is
+closed, we say the entire tableaux is closed. For instance, here is a
+clause tableau for $!A \lor (!B \land !C) \Sequent (!A \lor !B) \land
+(!A \lor !C)$, i.e., starting with $\sFmla{\True}{!A \lor (!B \land
+!C)}$ and $\sFmla{\False}{(!A \lor !B) \land (!A \lor !C)}$:
+\begin{oltableau}
+  [\sFmla{\True}{\formula{A} \lor (\formula{B} \land \formula{C})},
+    just=\TAss, checked
+    [\sFmla{\False}{(\formula{A} \lor \formula{B}) \land
+        (\formula{A} \lor \formula{C})}, just=\TAss, checked
+      [\sFmla{\True}{\formula{A}}, just={\TRule{\True}{\lor}[1]}
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{B}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\False}{\formula{A}},
+            just={\TRule{\False}{\lor}[4]}
+            [\sFmla{\False}{\formula{C}},
+              just={\TRule{\False}{\lor}[4]}, close]
+          ]
+        ]
+      ]
+      [\sFmla{\True}{\formula{B} \land \formula{C}},
+        just={\TRule{\True}{\lor}[1]}, checked
+        [\sFmla{\False}{\formula{A} \lor \formula{B}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\True}{\formula{B}},
+            just={\TRule{\True}{\land}[3]}, move by=2
+            [\sFmla{\True}{\formula{C}},
+              just={\TRule{\True}{\land}[3]}
+              [\sFmla{\False}{\formula{A}},
+                just={\TRule{\False}{\lor}[4]}
+                [\sFmla{\False}{\formula{B}},
+                  just={\TRule{\False}{\lor}[4]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+        [\sFmla{\False}{\formula{A} \lor \formula{C}},
+          just={\TRule{\False}{\land}[2]}, checked
+          [\sFmla{\True}{\formula{B}},
+            just={\TRule{\True}{\land}[3]}, move by=2
+              [\sFmla{\True}{\formula{C}},
+                just={\TRule{\True}{\land}[3]}
+                [\sFmla{\False}{\formula{A}},
+                  just={\TRule{\False}{\lor}[4]}
+                  [\sFmla{\False}{\formula{C}},
+                  just={\TRule{\False}{\lor}[4]},close
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  ]
+\end{oltableau}
+
+The checkmarks indicate that the corresponding rule has been applied
+to !!a{formula} on all branches below it. The $\otimes$ symbol
+indicates that a branch is closed. The line numbers after the rules
+serve as indications which signed !!{formula}s the rule is applied to
+(namely the !!{formula} in the same branch on the line indicated).
+
+Proof search is easy in tableaux. We generate a tableau in stages. At
+stage $0$, simply write down the starting !!{formula}s at the top. At
+stage $n+1$, do the following for each leaf node: Find the first
+(top-most) signed formula not yet checked off. Apply the branch
+extension rule to that formula. Once the rule has been applied in
+every branch that includes the signed formula in question, check it
+off. (The example above is generated using this algorithm.)
+
+Signed !!{formula}s of the form $\sFmla{\True}{\lforall}$ and
+$\sFmla{\False}{\lexists}$ are never checked off, so must be treated
+specially. If they are present, we must ensure that the
+$\TRule{\True}{\forall}$ and $\TRule{\False}{\lexists}$ rules are
+eventually applied for all applicable terms. This can be guaranteed,
+for instance, by applying them at every stage to all such formulas on
+every branch (after dealing with the topmost signed !!{formula} not of
+this form). The term $t$ to use is the first term~$t$ that can be
+built from the !!{constant}s already occurring on the branch (or $\Obj
+c_0$ if no !!{constant} occurs) and the !!{function}s occurring in the
+starting !!{formula}s, and such that the corresponding signed
+!!{formula} $\sFmla{\True}{!B(t)}$ or~$\sFmla{\False}{!B(t)}$ does not
+already occur on the branch.
+
+If this proof search does not produce a closed tableau, it either
+contains a finite open branch where all non-atomic !!{formula}s are
+checked off, or the search produces an infinite, finitely branching
+tree, which must contain an infinite branch. Just like in
+\olref[cpl]{sec}, we can define !!a{structure}~$\Struct{M}$ such that
+if $\sFmla{\True}{!A}$ occurs on the branch, then $\Sat{M}{!A}$ and if
+$\sFmla{\False}{!A}$ occurs, then $\Sat/{M}{!A}$. (Take $\Theta =
+\Setabs{!A}{\sFmla{\True}{!A} \text{ on the branch}}$ and $\Xi =
+\Setabs{!A}{\sFmla{\False}{!A} \text{ on the branch}}$.)
+
+Tableaux generated by this proof search method can easily be
+translated into \Log{G3c} proofs by assigning a sequent to every node.
+If the starting formulas correspond to a sequent $\Gamma \Sequent
+\Delta$, label each of the starting formulas by $\Gamma \Sequent
+\Delta$. If a branch is extended by applying a branch extension rule
+to a signed !!{formula} $\sFmla{\True}{!A}$, then the leaf is
+labelled $!A, \Pi \Sequent \Lambda$, and if it is applied to a signed
+!!{formula} $\sFmla{\False}{!A}$, the leaf is labelled $\Pi \Sequent
+\Lambda, !A$. Where the tableau applies a \TRule{\True}{\star} rule,
+apply the \LeftR{\star} rule to the sequent (with $!A$ principal);
+where it applies a \TRule{\False}{\star} rule, apply the \RightR{\star}
+rule. The premises of the rule are the sequents that label the
+corresponding nodes added to the tableau. Once a tableau closes with
+$\sFmla{\True}{!A}$ and $\sFmla{\False}{!A}$, the label of the final
+leaf node will be a sequent of the form $!A, \Pi \Sequent \Lambda,
+!A$. Some successive nodes in the tableau will be assigned the same
+sequent; delete duplicates. For instance, the tableau above translates
+into the !!{proof}:
+\[\small
+\Axiom$!A \fCenter !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!A \fCenter !A \lor !B$
+\Axiom$!A \fCenter !A, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!A \fCenter !A \lor !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!A \fCenter (!A \lor !B) \land (!A \lor !C)$
+\Axiom$!B, !C \fCenter !A, !B$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!B, !C \fCenter !A \lor !B$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C \fCenter !A \lor !B$
+\Axiom$!B, !C \fCenter !A, !C$
+\RightLabel{\RightR{\lor}}
+\UnaryInf$!B, !C \fCenter !A \lor !C$
+\RightLabel{\LeftR{\land}}
+\UnaryInf$!B \land !C \fCenter !A \lor !C$
+\RightLabel{\RightR{\land}}
+\BinaryInf$!B \land !C \fCenter (!A \lor !B) \land
+(!A \lor !C)$
+\RightLabel{\LeftR{\lor}}
+\BinaryInf$!A \lor (!B \land !C) \fCenter (!A \lor !B) \land
+(!A \lor !C)$
+\DisplayProof
+\]
+
+\end{document}

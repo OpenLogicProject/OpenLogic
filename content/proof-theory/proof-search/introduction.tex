@@ -1,0 +1,119 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{int}
+
+\olsection{Introduction}
+
+The axioms and inference rules of !!{proof} systems like \Log{G3c} or
+\Log{N1i} define what trees of sequents or !!{formula}s count as
+correct !!{proof}s. Given such a tree of sequents or !!{formula}s
+(possibly with additional information such as which rules are applied
+at each step, or labels for assumptions and inference rules that
+discharge them) the definitions of axioms and rules allow us to check
+whether the given tree is a correct !!{proof}. It is a diferent, and
+typically more difficult, problem to \emph{find} !!a{proof} of a given
+sequent or of a given !!{formula} from given assumptions. That is the
+problem of \emph{proof search}.
+
+There is a very simple-minded procedure for proof search. We can think
+of !!{formula}s as sequences of symbols from a finite alphabet.
+Sequents and trees of sequents or !!{formula}s can be thought of as
+sequences of !!{formula}s as well (perhaps using special brackets to
+indicate tree branching). The axioms and rules allow us to
+mechanically check if a sequence of symbols represents a correct
+!!{proof}. Consequently, we can mechanically generate \emph{all
+possible} correct !!{proof}s (by generating all sequences of symbols
+from the alphabet used to represent !!{proof}s and checking for each
+candidate sequence whether it represents a correct !!{proof}). The
+simple-minded proof search precedure is: generate all correct
+!!{proof}s until we find one that is a !!{proof} of the given sequent
+(or of the given !!{formula} with open assumptions among the given
+ones).
+
+A better method is to use the naive method you'd use to find
+!!a{proof} by hand: you start with the end-sequent, pick !!a{formula},
+and apply an inference rule ``backwards'' to generate a premise or
+premises which, if they had !!{proof}s, would combine with the last
+inference to !!a{proof} of the given sequent. A similar method
+(although more complicated) is what you'd use to find !!a{proof} in a
+natural deduction system.
+
+But this method is not fool-proof: if you pick the wrong rule, or
+!!{formula}s in the wrong order, you may hit a dead end. It is also
+not completely specified: at each point, there may be more than one
+possible !!{formula} to chose, or more than one rule to apply
+backwards. A \emph{proof search algorithm} is a completely specified
+procedure that will find !!a{proof} if one exists (i.e., is
+fool-proof).
+
+Some !!{proof} systems lend themselves to simpler proof search
+algorithms than others. In sequent systems, the !!{main operator} of
+!!a{formula}, and whether it occurs on the left or the right,
+determines which rule to apply backwards. E.g., if you want to find
+!!a{proof} of $\Gamma \Sequent \Delta, !A \land !B$ in which $!A \land
+!B$ occurs on the right, you should apply \RightR{\land} backwards and
+generate two corresponding premises $\Gamma \Sequent \Delta, !A$ and
+$\Gamma \Sequent \Delta, !B$. If your system is \Log{G1c}, however,
+the presence of contraction makes things more difficult because it
+gives you more options: You could also apply \RightR{\Contraction}
+backward and generate the premise $\Gamma \Sequent \Delta, !A \land
+!B, !A \land !B$ instead. And then the premise $\Gamma \Sequent
+\Delta, !A \land !B, !A \land !B, !A \land !B$, and so on. In
+\Log{G2c} it's even worse. Applying the rule \RightR{\land} backwards
+also means you have to guess $\Gamma_1$, $\Gamma_2$ such that $\Gamma
+= \Gamma_1 \cup \Gamma_2$ and $\Delta_1$, $\Delta_2$ such that $\Delta
+= \Delta_1 \cup \Delta_2$ and try your luck with the premises
+$\Gamma_1 \Sequent \Delta_1, !A$ and $\Gamma_2 \Sequent \Delta_2, !B$.
+A wrong guess might lead you into a dead end later on, and you'd have
+to backtrack to the beginning and pick different $\Gamma_1$,
+$\Gamma_2$, $\Delta_1$, $\Delta_2$. If the !!{formula} is $!A \lor !B$
+you have to chose one of the two possibilities for \RightR{\lor},
+producing one of the two possible premises $\Gamma \Sequent \Delta,
+!A$ or $\Gamma \Sequent \Delta, !B$. A wrong choice would again lead
+to having to backtrack.
+
+The system \Log{G3c} does not have these problems. It has no
+structural rules, and the choice of inference rule is determined by
+the !!{main operator} and the side the !!{formula} occurs on. Hence,
+\Log{G3c} is better suited to proof search than \Log{G1c} or
+\Log{G2c}. A successful search will yield !!a{proof} in \Log{G3c}, and
+that !!{proof} can then be translated into \Log{G1c} or \Log{G2c} (or
+\Log{N1c} for that matter). So having a proof search algorithm for
+\Log{G3c} and translation algorithms for \Log{G3c} !!{proof}s to
+!!{proof}s in other systems also solves the proof search methods for
+those systems.
+
+How do we know that a proof search algorithm is fool-proof? This would
+involve showing that if the algorithm fails to find !!a{proof}, no
+!!{proof} can exist. After all, if we pick a bad algorithm, we might
+run into cases where it fails to find a proof even if one exists. This
+is not a problem the simple minded algorithm has, because it searches
+through all possible !!{proof}s. But a proof search algorithm is
+supposed to be efficient and expend the minimum amount of effort.
+
+The key idea to showing that a proof search algorithm is fool-proof is
+to show that if the algorithm fails, we can show from the way it fails
+that the sequent can't possibly have !!a{proof}. And the way to show
+that is to show that it is not valid. In classical first-order logic,
+valid sequents $\Gamma \Sequent \Delta$ are those where every
+!!{structure} makes at least one !!{formula} in $\Gamma$ is false or
+at least one !!{formula} in~$\Delta$ is true. \Log{G3c} is
+\emph{sound}, i.e., it !!{prove}s only valid sequents. This is
+established by induction on !!{proof}s: Axioms are obvioulsy valid,
+and if the premises of a rule are valid, so is the conclusion. To show
+that a proof search algorithm is fool-proof we show that if the search
+for !!a{proof} of $\Gamma \Sequent \Delta$ fails, we can define
+!!a{structure} in which all !!{formula}s in $\Gamma$ are true and all
+!!{formula}s in~$\Delta$ are false. This also establishes that
+\Log{G3c} is \emph{complete}, i.e., that if $\Gamma \Sequent \Delta$
+is valid, there is a \Log{G3c}-!!{proof} of it. Since all failed
+proof searches show that $\Gamma \Sequent \Delta$ is invalid, every
+proof search for a valid sequent must succeed.
+
+\end{document}

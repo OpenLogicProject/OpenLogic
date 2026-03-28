@@ -1,0 +1,149 @@
+% Part: proof-theory
+% Chapter: proof-search
+% Section: search-algorithm
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{pt}{ps}{sal}
+
+\olsection{Search Algorithm for \Log{G3c}}
+
+We describe a search algorithm for \Log{G3c}. It is not the only
+possible one, and not even the most efficient one. But it is correct:
+if a sequent $\Gamma \Sequent \Delta$ has !!a{proof}, it will
+eventually halt and find !!a{proof}. It is also fool-proof: if it
+halts without having found !!a{proof}, or never halts, then $\Gamma
+\Sequent \Delta$ is not valid to begin with.
+
+A key necessary feature of the algorithm is that it ensures that every
+!!{formula} in $\Gamma \Sequent \Delta$, or in a sequent produced in
+the proof search, is ``reduced,'' i.e., it is treated as the principal
+formula of an inference rule applied backwards, and that this happens
+as often as necessary. We call this feature \emph{fairness}
+
+The algorithm works in stages. The output of each stage is a tree of
+sequents, and the output of the next stage is produced by reducing
+!!a{formula} in every topmost sequent that isn't already an axiom.
+
+At stage $0$ we start with $\Gamma \Sequent \Delta$. In order to
+ensure fairness we assign numbers as indices to the !!{formula}s in
+$\Gamma$ and $\Delta$ in such a way that different !!{formula}s
+receive different numbers. E.g., think of counting off the
+!!{formula}s from left to right. We write the numbers as superscripts.
+E.g., if we are searching for !!a{proof} of $!A, !B \Sequent !C$, the
+output of stage~$0$ is $!A^1, !B^2 \Sequent !C^3$. The largest~$n$
+occurring as a superscript in such an indexed sequent is its
+\emph{maximal index} ($3$~in the example).
+
+If the sequent contains quantifiers, we will also need to know which
+terms to use when reducing $\lexists[x][!A(x)]$ on the right or
+$\lforall[x][!A(x)]$ on the left. We will only need terms built from
+the !!{constant}s $\Obj c_0$, $\Obj c_1$, $\Obj c_2$, \dots, using any
+of the function symbols occurring in~$\Gamma$ and $\Delta$. We assume
+that the set of all these terms is given in some fixed enumeration, so
+that we can talk about, e.g., ``the first !!{constant} not occuring in
+$\Gamma \Sequent \Delta$.'' Each indexed sequent in the tree the
+algorithm produces has an associated set of !!{constant}s. The set of
+!!{constant}s assigned to the sequent in stage~$0$ is the set of all
+!!{constant}s occuring in it (if there are any), and $\{\Obj c_0\}$ if
+it contains no !!{constant}s.
+
+Suppose the algorithm has generated a tree of indexed sequents, with
+associated sets of !!{constant}s, at stage~$n$. At stage~$n+1$, we do
+the following, for each topmost sequent. 
+
+If there is !!a{formula}~$!A$ that occurs on both the left and the
+right of the sequent, or the left contains~$\lfalse$, we do nothing:
+such sequents have !!{proof}s in~\Log{G3c}, and for this particular
+topmost sequent there is nothing left to do.
+
+If there is no non-atomic !!{formula} in the sequent, then abort the
+algorithm. There is no proof of $\Gamma \Sequent \Delta$.
+
+Otherwise, pick the non-atomic !!{formula}~$!A$ with the smallest
+index~$i$. Then the topmost sequent in question is either $!A^i, \Pi
+\Sequent \Lambda$ or $\Pi \Sequent \Lambda, !A^i$. Let $k$ be the
+maximum index of the sequent, and $C$ the set of !!{constant}s
+assigned to it.
+
+We ``reduce'' $!A^i$, i.e., we generate new topmost sequents according
+to the inference rule determined by the !!{main operator} of~$!A$
+and according to whether $!A^i$ appears on the left or the right.
+
+\begin{enumerate}
+  \item $!A \ident !B \land !C$ and occurs on the left: Add one new
+  topmost sequent above $(!B \land !C)^i, \Pi \Sequent \Lambda$:
+  \[
+  \Axiom$!B^k, !C^{k+1}, \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\land}}
+  \UnaryInf$(!B \land !C)^i, \Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  The set of !!{constant}s assigned to the new sequent is~$C$.
+  \item $!A \ident !B \land !C$ and occurs on the right: Add two new
+  topmost sequents above $\Pi \Sequent \Lambda, (!B \land !C)^i$:
+  \[
+  \Axiom$\Pi \fCenter \Lambda, !B^k$
+  \Axiom$\Pi \fCenter \Lambda, !C^k$
+  \RightLabel{\RightR{\land}}
+  \BinaryInf$\Pi \fCenter \Lambda, (!B \land !C)^i$
+  \DisplayProof
+  \]
+  The set of !!{constant}s assigned to the new sequent is~$C$.
+
+  \item The cases where $!A \ident \lnot !B$, $!A \ident !B \lor !C$,
+  and $!A \ident !B \lif !C$ are similar and left as exercises.
+
+  \item $!A \ident \lexists[x][!B(x)]$ and occurs on the left: Add one new
+  topmost sequent above $\lexists[x][!B(x)]^i, \Pi \Sequent \Lambda$:
+  \[
+  \Axiom$!B(c)^k, \Pi \fCenter \Lambda$
+  \RightLabel{\LeftR{\lexists}}
+  \UnaryInf$\lexists[x][!B(x)]^i, \Pi \fCenter \Lambda$
+  \DisplayProof
+  \]
+  where $c$ is the first !!{constant} not in~$C$. The set of
+  !!{constant}s assigned to the new sequent is $C \cup \{c\}$.
+  \item $!A \ident \lexists[x][!B(x)]$ and occurs on the right: Add one new
+  topmost sequent above $\Pi \Sequent \Lambda, \lexists[x][!B(x)]$:
+  \[
+  \Axiom$\Pi \fCenter \Lambda, \lexists[x][!B(x)]^k, !B(t)^{k+1}$
+  \RightLabel{\LeftR{\lexists}}
+  \UnaryInf$\Pi \fCenter \Lambda, \lexists[x][!B(x)]^i$
+  \DisplayProof
+  \]
+  where $t$ is the first term containing only !!{constant}s in~$C$ not
+  already used in the reduction of $\lexists[x][!B(x)]$ on the right
+  below this sequent (or $\Obj c_0$ if all such terms have been used).
+  The set of !!{constant}s assigned to the new sequent is $C$.
+  \item The cases where $!A \ident \lforall[x][!B(x)]$ are similar and
+  left as exercises.
+\end{enumerate}
+
+If at stage $n+1$ we have not added a new sequent to any topmost
+sequent, the algorithm terminates successfully. In this case we have
+found !!a{proof} of~$\Gamma \Sequent \Delta$, obtained from the tree
+at stage $n+1$ by erasing all indices. The topmost sequents are all of
+the form $!A, \Pi \Sequent \Lambda, !A$ or of the form $\lfalse, \Pi
+\Sequent \Lambda$. All inferences are correct inferences of~\Log{G3c}.
+This is obvious for the propositional inferences. Observe that at each
+step, the set~$C$ of !!{constant}s assigned to a sequent contains all
+the !!{constant}s occuring in the sequent. Hence, in the reduction
+using \LeftR{\lexists} and \RightR{\lforall}, the eigenvariable
+condition is satisfied, since the eigenvariable~$c$ was !!a{constant}
+not in the set~$C$ assigned to the conclusion, $c$ also did not occur
+in the conclusion. We have:
+
+\begin{prop}
+The proof search algorithm for \Log{G3c} is correct: if it terminates
+successfully, the starting sequent~$\Gamma \Sequent \Delta$ has
+!!a{proof}.
+\end{prop}
+
+
+
+
+
+\end{document}
