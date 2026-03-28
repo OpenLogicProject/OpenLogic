@@ -45,11 +45,11 @@ If we want to add this information to the $\lambd$-calculus we obtain
 the \emph{typed} $\lambd$-calculus. In the typed $\lambd$-calculus not
 every expression $(\lambd[x][N]M)$ is legal, but only those where the
 ``types'' of $\lambd[x][N]$ and $M$ fit together, i.e., $\lambd[x][N]$
-has type $A \lif B$ and $M$ has type~$A$. In fact, not every term
-$(M_1M_2)$ is legal only if $x$ is of type $A$ and $N$ is of type only
-those where $M_1$ has type $A \to B$ and $M_2$ has type~$A$; if so,
-then $(M_1M_2)$ has type~$B$. And if the type of $x$ is $A$ and the
-type of $N$ is $B$ then the type of $\lambd[x][N]$ is $A \to B$.
+has type $A \lif B$ and $M$ has type~$A$. The type of $\lambd[x][N]$
+is $A \to B$ only if the type of $x$ is $A$ and the type of $N$
+is~$B$. In general, not every expression $(M_1M_2)$ is legal. Only
+those terms $(M_1M_2)$ are legal where $M_1$ has type $A \to B$ and
+$M_2$ has type~$A$; if so, then $(M_1M_2)$ has type~$B$. 
 
 These typing rules now clearly correspond to !!{derivation}s in
 natural deduction, where the types are represented by !!{formula}s,
