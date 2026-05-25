@@ -12,7 +12,7 @@
 
 We begin by giving some definitions and fixing some terminology.
 
-Consider the two rules in \Log{N1ci} that mention $!A
+Consider the two rules in \Log{N1c} and~\Log{N1i} that mention $!A
 \lif !B$.
 \[
 \bottomAlignProof
@@ -31,13 +31,13 @@ Consider the two rules in \Log{N1ci} that mention $!A
 \DisplayProof
 \]
 The \Elim{\lif} rule is simple enough. The !!{formula}s above the line
-are the \emph{premises}. The one on the left the \emph{principal}
-!!{formula}~$!A \lif !B$. All !!{elimination} rules have one such
-premise, always on the far left. It is called the \emph{major} premise
-of the inference. If there are others, such as an this case, they are
-called \emph{minor} premises. The premise(s) of !!{introduction} rules
-are both called major premise(s). The !!{formula} below the line is the
-\emph{conclusion}.
+are the \emph{premises}. The !!{formula} on the left is the
+\emph{principal} !!{formula}~$!A \lif !B$. All !!{elimination} rules
+have one such premise, always on the far left. It is called the
+\emph{major} premise of the inference. If there are others, such as an
+this case, they are called \emph{minor} premises. The premise(s) of
+!!{introduction} rules are also called major premise(s). The
+!!{formula} below the line is the \emph{conclusion}.
 
 The \Intro{\lif} rule only has one premise, and here the conclusion
 is the principal formula~$!A \lif !B$. All !!{introduction} rules are
@@ -61,7 +61,7 @@ assumptions are discharged at which rule, and this is accomplished
 with the discharge label~$x$. Importantly, rules that discharge
 assumptions don't \emph{have to} discharge \emph{all} assumptions of the
 requisite form, or indeed any at all. For instance, the following is
-correct even though the second \Intro{\lif} does not discharge any
+correct, even though the first \Intro{\lif} does not discharge any
 assumptions:
 \[
 \AxiomC{$\Discharge{!A}{y}$}
@@ -128,17 +128,17 @@ is only correct if $c$~does not occur in an open assumption other than
 the discharged~$!A(c)$, does not occur in~$!B$, and does not occur
 in~$!A$. This is called the \emph{eigenvariable condition}.
 
-!!^{proof}s in \Log{N1ci} are finite trees of sequents that are
-inductively generated from axioms using the rules of inference. Each
-leaf is an assumption, possibly labelled with a discharge label, and
-every other !!{formula} follows from the !!{formula}s immediately
-above it by one of the inference rules of the system. If an occurence
-of a !!{formula} as an assumption in the tree above an inference has
-not been discharged by an inference above it, it is called \emph{open}
-(at the inference).
+!!^{proof}s in \Log{N1c} and~\Log{N1i} are finite trees of sequents
+that are inductively generated from axioms using the rules of
+inference. Each leaf is an assumption, possibly labelled with a
+discharge label, and every other !!{formula} follows from the
+!!{formula}s immediately above it by one of the inference rules of the
+system. If an occurence of a !!{formula} as an assumption in the tree
+above an inference has not been discharged by an inference above it,
+it is called \emph{open} (at the inference).
 
 \begin{defn}\ollabel{defn:proof}
-\emph{!!^{proof}s} in \Log{N1ci} are finite trees of
+\emph{!!^{proof}s} in \Log{N1c} and~\Log{N1i} are finite trees of
 !!{formula}s inductively as follows:
 \begin{enumerate}
   \item\ollabel{defn:prf:assumption} Every !!{formula} 

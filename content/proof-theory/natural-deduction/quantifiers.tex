@@ -17,7 +17,7 @@ with by ensuring that the !!{constant}~$c$ in these inferences is
 never reused. Let's introduce the following definition.
 
 \begin{defn}
-!!^a{proof}~$\delta$ in \Log{N1ci} or \Log{N2ci} is \emph{regular} if
+A natural deduction !!{proof}~$\delta$ is \emph{regular} if
 \begin{enumerate}
   \item no eigenvariable~$a$ is used as the eigenvariable of more than
   one \Elim{\lexists} or~\Intro{\lforall} inference, and
@@ -118,7 +118,7 @@ an open assumption of~$\Subst{\delta}{t}{c}$.
     \AxiomC{}
     \RightLabel{$\Subst{\delta'}{t}{c}$}
     \DeduceC{$!A(a,t)$}
-    \RightLabel{\RightR{\lforall}}
+    \RightLabel{\Intro{\lforall}}
     \UnaryInfC{$\lforall[x][!A(x,t)]$}
     \DisplayProof
     \]
@@ -187,6 +187,6 @@ will assume that all !!{proof}s considered are regular---if they are
 not, we can always replace eigenvariables to make them regular.
 
 \Olref{lem:subst-regular} and \olref{prop:regular} also hold for
-\Log{N2ci}. We leave the proofs as exercises.
+\Log{N2c} and~\Log{N2i}. We leave the proofs as exercises.
 
 \end{document}
