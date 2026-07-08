@@ -315,9 +315,17 @@
           \includegraphics[width=#1]{\olpath/assets/photos/#2/#2-small}}{
           \includegraphics[width=#1]{\olpath/assets/photos/#2/#2-large}}
         \caption{#3}
+        \label{photo-#2}
       \IfFileExists{\olpath/assets/photos/#2/#2-credit.tex}{%
+      \ifdefined\ollangid
+        \IfFileExists{\olpath/locale/\ollangid/photocredits/#2-credit.tex}{
+          \CatchFileDef{\photocredit}{\olpath/locale/\ollangid/photocredits/#2-credit.tex}{}%
+          \addtocontents{pcr}{#3, \cpageref{photo-#2}: \photocredit\par}}{
+          \PackageWarning{open-logic}{Photo credits \olpath/locale/\ollangid/photocredits/#2-credit.tex not found}}
+      \else
         \CatchFileDef{\photocredit}{\olpath/assets/photos/#2/#2-credit.tex}{}%
-        \addtocontents{pcr}{#3, p.~\thepage: \photocredit\par}}{}
+        \addtocontents{pcr}{#3, \cpageref{photo-#2}: \photocredit\par}
+      \fi}{}
 \end{wrapfigure}}}{}}
 
 % \olasset[width]{file} - include an illustration
