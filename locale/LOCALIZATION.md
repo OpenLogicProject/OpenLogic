@@ -61,8 +61,8 @@ of the file, e.g.,
 \olfileid[fr]{sfr}{siz}{int}
 ```
 
-To prepare translations of textbooks, e.g., (_Set
-Theory_)[https://github.com/OpenLogicProject/set-theory], put the
+To prepare translations of textbooks, e.g., [_Set
+Theory_](https://github.com/OpenLogicProject/set-theory), put the
 contents of the corresponding repository in `locale/fr/courses/`. To
 do this, either download the code as a ZIP file and uncompress it, or
 make a fork of the repository, rename it by adding `-<langid>` to the
