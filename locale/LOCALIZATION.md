@@ -65,7 +65,7 @@ If you include photos from the [OLP photo
 repository](https://github.com/OpenLogicProject/photos), you should
 translate the photo credit files in
 `assets/photos/<name>/<name>-credit.tex` and put those into a (new)
-directory `locale/fr/photocredits.
+directory `locale/fr/photocredits`.
 
 To prepare translations of textbooks, e.g., [_Set
 Theory_](https://github.com/OpenLogicProject/set-theory), put the
