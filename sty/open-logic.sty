@@ -4,7 +4,14 @@
 % load various required standard packages
 % let LaTeX find those
 
-\RequirePackage[english]{babel}
+\ifdefined\ollanguage
+  \RequirePackage[english,\ollanguage]{babel}
+  \AtBeginDocument{\selectlanguage{\ollanguage}}
+\else
+  \RequirePackage[english]{babel}
+  \AtBeginDocument{\selectlanguage{english}}
+\fi
+
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{extarrows}
@@ -71,8 +78,22 @@
 % Load thmtools for nice formatting of theorem environments
 \RequirePackage{thmtools}
 
-% Load cleverref for automatic includion of theorem names in references
-\RequirePackage[nameinlink]{cleveref} % always after hyperref!
+% Load cleveref for automatic inclusion of theorem names in
+% references
+% cleveref must be loaded after hyperref
+
+\ifdefined\ollanguage
+  \RequirePackage[capitalize,nameinlink,english,\ollanguage]{cleveref}
+\else
+  \RequirePackage[capitalize,nameinlink]{cleveref} 
+\fi
+
+% Load localization file for English
+\input{\olpath/open-logic-locale.sty}
+
+\ifdefined\ollanguage
+    \input{\olpath/locale/\ollangid/open-logic-locale.sty}
+\fi
 
 \makeatletter
 
@@ -92,8 +113,9 @@
 
 % If compiled standalone as a subfile, execute \OLSubfileHook at beginning
 \ifx\document\comment
-\AtBeginDocument{\OLSubfileHook}
+  \AtBeginDocument{\OLSubfileHook}
 \fi
+
 \let\OLSubfileHook\relax
 
 % DeclareDocumentMacro -- for macros (no argument), doesn't check if defined
@@ -106,18 +128,31 @@
 
 \ifdefined\oljobname\relax\else\let\oljobname\jobname\fi
 
+% Localizations
+
 % Load configuration file, then custom changes if available
 
+% Load master file
 \input{\olpath/open-logic-config.sty}
-\IfFileExists{\oljobname-config.sty}
-             {\input{\oljobname-config.sty}}
-             {}
+
+% Load config file for a different language if specified
+\ifdefined\ollangid%
+  \InputIfFileExists{\olpath/locale/\ollangid/open-logic-config.sty}{}{}
+\fi
+
+% Load local config file for this job, if it exists.
+\InputIfFileExists{\oljobname-config.sty}{}{}
 
 % Load environment definition file, or custom file if available
 
-\IfFileExists{\oljobname-envs.sty}
-             {\input{\oljobname-envs.sty}}
-             {\input{\olpath/open-logic-envs.sty}}
+\InputIfFileExists{\oljobname-envs.sty}{}
+             {\ifdefined\ollangid%
+               \IfFileExists{\olpath/locale/\ollangid/open-logic-envs.sty}
+                  {\input{\olpath/locale/\ollangid/open-logic-envs.sty}}
+                  {\input{\olpath/open-logic-envs.sty}}
+              \else
+                \input{\olpath/open-logic-envs.sty}
+             \fi}
 
 % olfilepath -- holds the path of the currently processed file
 % relative to the main input file.
@@ -156,7 +191,11 @@
   }}{% optional path
     \def\olfilename{#3}%
     \IfBooleanTF{#1}{% starred: path is relative to OLP/content directory
-      \edef\olfilebase{\olpath/content/#2/}
+      \ifdefined\ollangid
+        \edef\olfilebase{\olpath/locale/\ollangid/content/#2/}
+      \else
+        \edef\olfilebase{\olpath/content/#2/}
+      \fi
       \subfile{\olfilebase #3}}{%
       \edef\olfilebase{\olfilebase #2/}
       % as of v1.3 subfiles uses the import package so no longer need
@@ -191,6 +230,16 @@
 \DeclareMathSymbol{\diamondright}{\mathbin}{symbolsC}{132}
 \DeclareMathSymbol{\fishhookright}{\mathbin}{symbolsC}{74}
 
+% - `\ifgitinfo`: produced Git revision information if `gitinfo` is used
+
+\newcommand*{\ifgitinfo}{\ifdefined\gitVtags\sffamily\footnotesize
+  rev\gitVtags:
+  \href{\OLTlinkname/commits/master}
+       {\gitAbbrevHash}
+  (\gitAuthorDate)\else\relax\fi}
+
+\newcommand*{\ollicensefont}{\sffamily\fontsize{9pt}{12pt}\selectfont}
+
 % License boxes
 
 \newcommand*{\ollicense}{%
@@ -201,29 +250,16 @@
 \hspace{.3cm}
 \begin{minipage}[b]{3.5cm}
 \ollicensefont
-\textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
-    Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
-  Project} is licensed under a
-\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
-  Attribution 4.0 International License}.
+\ollicensetext
+  {\href{\OLTlinkname}{\OLTname}}
+  {\href{http://openlogicproject.org/}{\OLPname}}
+  {\href{http://creativecommons.org/licenses/by/4.0/}{\licensename}}
 \end{minipage}
 \hfill
 \href{http://openlogicproject.org/}{\includegraphics[width=2.4cm]{\olpath/assets/logos/openlogic-logo-bw}}}
 
-% - `\ifgitinfo`: produced Git revision information if `gitinfo` is used
-
-\newcommand*{\ifgitinfo}{\ifdefined\gitVtags\sffamily\footnotesize
-  rev\gitVtags:
-  \href{https://github.com/OpenLogicProject/OpenLogic/commits/master}
-       {\gitAbbrevHash}
-  (\gitAuthorDate)\else\relax\fi}
-
-\newcommand*{\ollicensefont}{\sffamily\fontsize{9pt}{12pt}\selectfont}
-
 \newcommand*{\shortollicense}{\ollicensefont
-  \textit{\href{https://github.com/OpenLogicProject/OpenLogic}{\jobname}}
-  \ifgitinfo\ by \href{http://openlogicproject.org/}{OLP} /
-  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
+  \olshortlicensetext{\href{http://openlogicproject.org/}{OLP}}}
 
 \newcommand*{\oluselicense}[2]{%
 \begin{minipage}[b]{.9cm}
@@ -233,23 +269,17 @@
 \end{minipage}
 \hspace{.3cm}
 \begin{minipage}[b]{5cm}
-\ollicensefont
-\textit{#1} by #2 is licensed under a
-\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
-  Attribution 4.0 International License}. It is based on
-\textit{\href{https://github.com/OpenLogicProject/OpenLogic}{The Open
-    Logic Text}} by the \href{http://openlogicproject.org/}{Open Logic
-  Project}, used under a
-\href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons
-  Attribution 4.0 International License}.
+  \ollicensefont
+  \ollicensetext{#1}{#2}
+    {\href{http://creativecommons.org/licenses/by/4.0/}{\licensename}}
+  \oluselicensetext
 \end{minipage}
 \hfill
 \href{http://openlogicproject.org/}{\includegraphics[width=2.7cm]{\olpath/assets/logos/openlogic-logo-bw}}}
 
 \newcommand*{\shortoluselicense}[2]{\ollicensefont
-  \textit{#1}
-  by #2 based on \href{http://openlogicproject.org/}{OLP} /
-  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}}
+  \olshortuselicensetext{#1}{#2}}
+
 
 \newcommand\gitissue[1]
   {\href{https://github.com/OpenLogicProject/OpenLogic/issues/#1}{issue
@@ -260,7 +290,7 @@
 % Photos
 
 % Photo credits
-\newlistof{photocredits}{pcr}{Photo Credits}
+\newlistof{photocredits}{pcr}{\photocreditsname}
 
 \newlength{\olphotowidth}
 \setlength{\olphotowidth}{.4\textwidth}

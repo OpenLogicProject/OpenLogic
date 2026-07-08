@@ -1,0 +1,124 @@
+% Localization file for English
+
+% If you're preparing a translation you should have a copy of this
+% file (with the same name) in `locale/<langid>/`. Any file you use to
+% compile texts in your translation should load this file after
+% `open-logic.sty`. (This will be done automatically if `\ollangid' is
+% defined.)
+
+% babel Names for English
+
+% If this is a copy for a translation, change `english` to the babel
+% name for your language, and put in the translated names. Keep the
+% LaTeX references the same, however. So, e.g.,
+% \setlocalecaption{german}{theorem}{Satz}
+
+\setlocalecaption{english}{photocredits}{Photo Credits}
+\setlocalecaption{english}{history}{Historical Remarks}
+\setlocalecaption{english}{reading}{Further Reading}
+\setlocalecaption{english}{appendix}{Appendix}
+\setlocalecaption{english}{appendices}{Appendices}
+
+\setlocalecaption{english}{theorem}{Theorem}
+\setlocalecaption{english}{example}{Example}
+\setlocalecaption{english}{definition}{Definition}
+\setlocalecaption{english}{lemma}{Lemma}
+\setlocalecaption{english}{proposition}{Proposition}
+\setlocalecaption{english}{corollary}{Corollary}
+\setlocalecaption{english}{problem}{Problem}
+\setlocalecaption{english}{problems}{Problems}
+\setlocalecaption{english}{remark}{Remark}
+\setlocalecaption{english}{axiom}{Axiom}
+\setlocalecaption{english}{note}{Note}
+\setlocalecaption{english}{case}{Case}
+\setlocalecaption{english}{convention}{Convention}
+
+\setlocalecaption{english}{OLP}{Open Logic Project}
+\setlocalecaption{english}{OLT}{The Open Logic Text}
+\setlocalecaption{english}{OLTlink}{https://github.com/OpenLogicProject/OpenLogic}
+\setlocalecaption{english}{license}{Creative Commons
+  Attribution 4.0 International License}
+\setlocalecaption{english}{instigator}{Instigator}
+\setlocalecaption{english}{editorialboard}{Editorial Board}
+\setlocalecaption{english}{contributors}{Contributors}
+
+% These are the names of the environments that `\cref` adds
+% automatically. `thmtools` should do that as well, but sometimes it
+% doesn't work, and it can't do it automatically in languages other
+% than English, so we set them explicitly.  Redefine, e.g., if you
+% want references to "Prop. 5.4"
+
+% If you are working on a translation, change the command
+% `\addto\extrasenglish` to `\addto\extras<language>` where
+% `<language>` is the babel name for your language. Then change the
+% names of the environments to the appropriate translations, e.g.,
+% `\crefname{thm}{Satz}{Sätze}` for German.
+
+\addto\extrasenglish{
+% execute whenever the language switches to English
+\Crefname{thm}{Theorem}{Theorems}
+\Crefname{ex}{Example}{Examples}
+\Crefname{defn}{Definition}{Definitions}
+\Crefname{lem}{Lemma}{Lemmata}
+\Crefname{prop}{Proposition}{Propositions}
+\Crefname{prob}{Problem}{Problems}
+\Crefname{rem}{Remark}{Remarks}
+\Crefname{cor}{Corollary}{Corollaries}
+\Crefname{axiom}{Axiom}{Axioms}
+\Crefname{note}{Note}{Notes}
+\Crefname{case}{Case}{Cases}
+\Crefname{conv}{Convention}{Conventions}
+\Crefname{figure}{Figure}{Figures}
+\Crefname{table}{Table}{Tables}
+}
+
+% Boilerplate texts for licenses, etc. You can customize these for
+% your translation. In that case, change each `\newcommand` to
+% `\renewcommand`. For the text of the license in your language, go to
+% https://creativecommons.org/licenses/by/4.0/ and select your
+% language in the top right corner.
+
+\newcommand*{\ollicensetext}[3]
+  {\textit{#1}
+  by
+  #2
+  is licensed under a 
+  #3.}
+\newcommand*{\olshortlicensetext}[1]
+  {\textit{\href{\OLTlinkname}{\jobname}}
+  \ifgitinfo\ 
+  by #1 /
+  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}.}
+\newcommand*{\oluselicensetext}
+  {It is based on
+  \textit{\href{\OLTlinktext}{\OLTname}}
+  by the
+  \href{http://openlogicproject.org/}{\OLPname},
+  used under a
+  \href{http://creativecommons.org/licenses/by/4.0/}{\licensename}.}
+\newcommand*{\olshortuselicensetext}[2]
+  {\textit{#1}
+  by #2 based on
+  \href{http://openlogicproject.org/}{OLP} /
+  \href{http://creativecommons.org/licenses/by/4.0/}{CC--BY}.}
+
+% Text and boilerplates for the open-logic-book cover and front matter
+
+\newcommand*{\olremixedby}
+  {Remixed by \OLPauthor}
+\newcommand*{\olacknowledgements}
+  {The Open Logic Project would like to acknowledge the generous support
+  of the \href{https://taylorinstitute.ucalgary.ca/}{Taylor Institute
+  of Teaching and Learning} of the University of Calgary, and the
+  Alberta Open Educational Resources (ABOER) Initiative, which is made
+  possible through an investment from the Alberta government.}
+\newcommand*{\olillustrations}
+  {Cover illustrations by \href{http://mattleadbeater.com}{Matthew
+  Leadbeater}, used under a
+  \href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
+  Attribution-NonCommercial 4.0 International License}.}
+\newcommand*{\olcolophon}
+  {Typeset in Baskervald X and Nimbus Sans by \LaTeX.}
+\newcommand*{\olbookrevision}
+  {This version of \emph{\OLPbooktitle} is revision \gitAbbrevHash{} (\gitAuthorDate), with content generated from \emph{Open Logic Text} revision \OLPrevision. Free download at:\\[.5ex]
+  \url{\OLPsourcelink}}

@@ -117,7 +117,7 @@
     \def\captiontitlefont{\small\itfamily}
 
     % change cref references to appendix after \appendix 
-    \crefname{appendix}{appendix}{appendices}
+    \crefname{appendix}{\appendixname}{\appendicesname}
     \apptocmd{\appendix}{\crefalias{chapter}{appendix}}{}{}
   
     \def\figurename{Fig.}
@@ -159,7 +159,7 @@
       \createplainmark{bib}{both}{\bibname}
       \createplainmark{index}{both}{\indexname}
       \createplainmark{glossary}{both}{\glossaryname}
-      \createplainmark{pcr}{both}{Photo Credits}
+      \createplainmark{pcr}{both}{\photocreditsname}
     }
 
     \makeoddhead{OLPpage}{\small\sffamily\color{OLPcolor}\rightmark}{}
@@ -197,7 +197,7 @@
 
     \makeevenhead{OLPpage}{\small\sffamily\color{OLPcolor}\leftmark}{}{\color{OLPcolor}\sffamily\bfseries\thepage}
 
-    \addtopsmarks{OLPpage}{}{\createplainmark{pcr}{both}{Photo Credits}}
+    \addtopsmarks{OLPpage}{}{\createplainmark{pcr}{both}{\photocreditsname}}
   }
 }
 
@@ -265,7 +265,7 @@
 \renewcommand*{\partnumfont}{\fontsize{24pt}{0pt}\selectfont\bfseries\sffamily}
 \renewcommand*{\parttitlefont}{\normalfont\fontsize{54pt}{54pt}\selectfont\bfseries\itshape\color{OLPcolor}}
 \renewcommand*{\printpartname}{%
-  \partnamefont PART}
+  \partnamefont\MakeUppercase{\partname}}
 
 \chapterstyle{OLPchapter}
 
@@ -414,9 +414,7 @@
       \begin{minipage}{5.5cm}
         \begin{raggedright}
           \fontsize{14pt}{16pt}\selectfont\color{black}
-          \textit{\OLPbooktitle} by \OLPauthor{} is
-          licensed under a Creative Commons Attribution 4.0 International
-          License.\par
+          \ollicensetext{\OLPbooktitle}{\OLPauthor}{\licensename}\par
         \end{raggedright}
       \end{minipage}
       \hfill
@@ -507,11 +505,11 @@
 
 \vspace*{100pt}
 
-{\bfseries\itshape The Open Logic Project}
+{\bfseries\itshape \OLPname}
 
 \bigskip
 
-\textbf{\color{OLPcolor}Instigator}
+\textbf{\color{OLPcolor}\instigatorname}
 
 \medskip
 
@@ -519,7 +517,7 @@ Richard Zach, \emph{University of Calgary}
 
 \bigskip
 
-\textbf{\color{OLPcolor}Editorial Board}
+\textbf{\color{OLPcolor}\editorialboardname}
 
 \medskip
 
@@ -543,7 +541,7 @@ Audrey Yap, \emph{University of Victoria}
 
 \bigskip
 
-\textbf{\color{OLPcolor}Contributors}
+\textbf{\color{OLPcolor}\contributorsname}
 
 \medskip
 
@@ -570,7 +568,7 @@ Zesen Qian, \emph{Carnegie Mellon University}
 
 \vspace{100pt}
 
-\fontsize{14pt}{14pt}\selectfont Remixed by \OLPauthor{}
+\fontsize{14pt}{14pt}\selectfont \olremixedby{}
 
 \vfill
 
@@ -582,12 +580,7 @@ Zesen Qian, \emph{Carnegie Mellon University}
 
 % copyright page
 
-\noindent
-The Open Logic Project would like to acknowledge the generous support
-of the \href{https://taylorinstitute.ucalgary.ca/}{Taylor Institute
-of Teaching and Learning} of the University of Calgary, and the
-Alberta Open Educational Resources (ABOER) Initiative, which is made
-possible through an investment from the Alberta government.
+\noindent\olacknowledgements
 
 \bigskip
 
@@ -601,23 +594,15 @@ possible through an investment from the Alberta government.
 
 \vfill
 
-\noindent Cover illustrations by \href{http://mattleadbeater.com}{Matthew
-  Leadbeater}, used under a
-\href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons
-  Attribution-NonCommercial 4.0 International License}.
+\noindent\olillustrations
 
 \vfill
 
-\noindent Typeset in Baskervald X and Nimbus Sans by
-\LaTeX.
+\noindent\olcolophon
 
 \vfill
 
-\noindent This version of \emph{\OLPbooktitle} is
-revision \gitAbbrevHash{} (\gitAuthorDate), with content generated
-from \emph{Open Logic Text} revision
-\OLPrevision. Free download at:\\[.5ex]
-\url{\OLPsourcelink}
+\noindent\olbookrevision
 
 \vfill
 
@@ -640,6 +625,6 @@ from \emph{Open Logic Text} revision
 
 \newpage
 \pagestyle{OLPpage}
-\currentpdfbookmark{Table of Contents}{name}
+\currentpdfbookmark{\contentsname}{name}
 \tableofcontents*
 }

@@ -15,6 +15,7 @@
 \usepackage{gitinfo2}
 
 \input{\olpath/sty/open-logic.sty}
+
 \input{\olpath/sty/open-logic-defer.sty}
 
 \includeenv{editorial}
@@ -31,12 +32,15 @@
 \begin{raggedleft}
 \HUGE
 \selectfont\bfseries\sffamily
-THE OPEN LOGIC TEXT
+\MakeUppercase{\OLTname}
 \vskip 3ex
 \normalfont\huge
 Complete Build
+\ifdefined\ollangid
+  \quad (\ollanguage~/ \ollangid)
+\fi
 \vskip 4ex
-\textbf{\href{http://openlogicproject.org/}{Open Logic Project}}
+\textbf{\href{http://openlogicproject.org/}{\OLPname}}
 \vskip 4ex
 \Large
 Revision\gitRel: \gitAbbrevHash{} (\gitBranch)\\

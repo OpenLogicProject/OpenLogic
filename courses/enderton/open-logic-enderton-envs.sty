@@ -16,7 +16,6 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
-
 % Theorem-like Environments
 % -------------------------
 
@@ -28,6 +27,8 @@
 % adjust their definitions. Refer to the [`thmtools`
 % documentation](http://www.ctan.org/pkg/thmtools).
 
+\RequirePackage{alphalph}
+
 \declaretheoremstyle[
 headfont=\scshape,
 notefont=\scshape, notebraces={(}{)},
@@ -37,88 +38,77 @@ postheadspace=1em]{enderton}
 
 \declaretheoremstyle[
 bodyfont=\normalfont,
-headformat={\NUMBER}]{problem}
+headformat={\NUMBER.}]{problem}
 
 \declaretheorem[
   style=enderton,
-  name=Theorem,
-  numberwithin=section]{thm}
+  name=\theoremname,
+  numberwithin=chapter]{thm}
 
 \declaretheorem[
-  style=remark,
-  name=Example,
+  style=definition,
+  name=\examplename,
   sibling=thm]{ex}
 
 \declaretheorem[
   style=enderton,
-  name=Lemma,
-  refname={lemma,lemmata},
+  name=\lemmaname,
   sibling=thm]{lem}
 
 \declaretheorem[
   style=enderton,
-  name=Proposition,
+  name=\propositionname,
   sibling=thm]{prop}
 
 \declaretheorem[
   style=enderton,
-  name=Corollary,
-  refname={corollary,corollaries},
+  name=\corollaryname,
   sibling=thm]{cor}
 
 \declaretheorem[
   style=enderton,
-  name=Definition,
+  name=\definitionname,
   sibling=thm]{defn}
 
 \declaretheorem[
   style=problem,
-  name=Problem,
+  name=\problemname,
   numberwithin=chapter]{prob}
 
 \declaretheorem[
   style=problem,
-  name=Problem,
-  numberwithin=chapter]{probdeferred}
+  numbered=yes,
+  name=\problemname]{probd}
+
+\declaretheorem[
+  style=definition,
+  name=\axiomname,
+  unnumbered]{axiom}
+
+\declaretheorem[
+  style=remark,
+  name=\remarkname]{rem}
+
+\declaretheorem[
+  style=remark,
+  name=\notename]{note}
+
+\declaretheorem[
+  style=remark,
+  name=\casename]{case}
+
+\declaretheorem[
+  style=remark,
+  name=\conventionname]{conv}
+
+\def\thethm{\arabic{chapter}\arabic{section}\AlphAlph{\value{thm}}}
+\def\thedefn{\arabic{chapter}\arabic{section}\AlphAlph{\value{defn}}}
+\def\thelem{\arabic{chapter}\arabic{section}\AlphAlph{\value{lem}}}
+\def\theprop{\arabic{chapter}\arabic{section}\AlphAlph{\value{prop}}}
+\def\thecor{\arabic{chapter}\arabic{section}\AlphAlph{\value{cor}}}
 
 % A wrapper to allow problems with tags, use \begin{probtag}{tags}
 \newenvironment{probtag}[1]{\begin{prob}}{\end{prob}}
-
-\declaretheorem[
-  style=remark,
-  name=Remark]{rem}
-
-\declaretheorem[
-  style=remark,
-  name=Note]{note}
-
-\declaretheorem[
-  style=remark,
-  name=Case]{case}
-
-\declaretheorem[
-  style=remark,
-  name=Convention]{conv}
-
-% These are the names of the environments that `\cref` adds
-% automatically. `thmtools` should do that as well, but sometimes it
-% doesn't work, so we set them explicitly.  Redefine, e.g., if you
-% want references to "Prop. 5.4"
-
-\crefname{thm}{Theorem}{Theorems}
-\crefname{ex}{Example}{Examples}
-\crefname{defn}{Definition}{Definitions}
-\crefname{lem}{Lemma}{Lemmata}
-\crefname{prop}{Proposition}{Propositions}
-\crefname{prob}{Problem}{Problems}
-\crefname{rem}{Remark}{Remarks}
-\crefname{figure}{Figure}{Figures}
-
-\def\thethm{\arabic{chapter}\arabic{section}\Alph{thm}}
-\def\thedefn{\arabic{chapter}\arabic{section}\Alph{defn}}
-\def\thelem{\arabic{chapter}\arabic{section}\Alph{lem}}
-\def\theprop{\arabic{chapter}\arabic{section}\Alph{prop}}
-\def\thecor{\arabic{chapter}\arabic{section}\Alph{cor}}
 
 % Other Environments
 % -----------------
@@ -165,7 +155,7 @@ headformat={\NUMBER}]{problem}
 
 % - `reading`: for further reading
 
-\newenvironment{reading}{\paragraph{Further Reading}\par}{}
+\newenvironment{reading}{\paragraph{\readingname}\par}{}
 
 % - `editorial`: for editorial remarks, warnings about missing parts, etc.
 

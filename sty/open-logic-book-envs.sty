@@ -70,90 +70,75 @@
 
 \declaretheorem[
   style=plain,
-  name=Theorem,
+  name=\theoremname,
   mdframed={style=thmstyle},
   numberwithin=chapter]{thm}
 
 \declaretheorem[
   style=definition,
-  name=Example,
+  name=\examplename,
   sibling=thm]{ex}
 
 \declaretheorem[
   style=plain,
-  name=Lemma,
+  name=\lemmaname,
   mdframed={style=thmstyle},
-  refname={Lemma,Lemmas},
   sibling=thm]{lem}
 
 \declaretheorem[
   style=plain,
-  name=Proposition,
+  name=\propositionname,
   mdframed={style=thmstyle},
   sibling=thm]{prop}
 
 \declaretheorem[
   style=plain,
-  name=Corollary,
+  name=\corollaryname,
   mdframed={style=thmstyle},
-  refname={Corollary,Corollaries},
   sibling=thm]{cor}
 
 \declaretheorem[
   style=definition,
-  name=Definition,
+  name=\definitionname,
   mdframed={style=defstyle},
   sibling=thm]{defn}
 
 \declaretheorem[
   style=definition,
-  name=Problem,
+  name=\problemname,
   numberwithin=chapter]{prob}
-
-% A wrapper to allow problems with tags, use \begin{probtag}{tags}
-\newenvironment{probtag}[1]{\begin{prob}}{\end{prob}}
 
 \declaretheorem[
   style=definition,
-  name=Axiom,
+  name=\problemname,
+  numbered=yes]{probd}
+
+\declaretheorem[
+  style=definition,
+  name=\axiomname,
   mdframed={style=defstyle},
   unnumbered]{axiom}
 
 \declaretheorem[
   style=remark,
-  name=Remark]{rem}
+  name=\remarkname]{rem}
 
 \declaretheorem[
   style=remark,
-  name=Note]{note}
+  name=\notename]{note}
 
 \declaretheorem[
   style=remark,
-  name=Case]{case}
+  name=\casename]{case}
 
 \declaretheorem[
   style=remark,
-  name=Convention,
+  name=\conventionname,
   mdframed={style=defstyle},
   sibling=thm]{conv}
 
-% These are the names of the environments that `\cref` adds
-% automatically. `thmtools` should do that as well, but sometimes it
-% doesn't work, so we set them explicitly.  Redefine, e.g., if you
-% want references to "Prop. 5.4"
-
-\crefname{thm}{Theorem}{Theorems}
-\crefname{ex}{Example}{Examples}
-\crefname{defn}{Definition}{Definitions}
-\crefname{lem}{Lemma}{Lemmas}
-\crefname{prop}{Proposition}{Propositions}
-\crefname{prob}{Problem}{Problems}
-\crefname{rem}{Remark}{Remarks}
-\crefname{figure}{Figure}{Figures}
-\crefname{table}{Table}{Tables}
-
-
-
+% A wrapper to allow problems with tags, use \begin{probtag}{tags}
+\newenvironment{probtag}[1]{\begin{prob}}{\end{prob}}
 
 % Other Enviroments
 % -----------------
@@ -196,13 +181,13 @@
 
 % - `history`: for historical notes and remarks
 
-\newenvironment{history}{\paragraph{Historical Remarks}\par}{}
+\newenvironment{history}{\paragraph{\historyname}\par}{}
 
 \excludeenv{history} % exclude historical remarks in books for now
 
 % - `reading`: for further reading
 
-\newenvironment{reading}{\paragraph{Further Reading}\par}{}
+\newenvironment{reading}{\paragraph{\readingname}\par}{}
 
 % - `editorial`: for editorial remarks, warnings about missing parts, etc.
 

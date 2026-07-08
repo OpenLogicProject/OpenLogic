@@ -8,15 +8,28 @@
 \newcommand*{\theolpart}{udf}
 \newcommand*{\theolchapter}{udf}
 \newcommand*{\theolsection}{udf}
-\newcommand*{\olfileid}[3]{
-  \renewcommand*{\theolpart}{#1}
-  \renewcommand*{\theolchapter}{#2}
-  \renewcommand*{\theolsection}{#3}}
-\newcommand*{\olchapterid}[2]{
-  \renewcommand*{\theolpart}{#1}
-  \renewcommand*{\theolchapter}{#2}}
-\newcommand*{\olpartid}[1]{
-  \renewcommand*{\theolpart}{#1}}
+
+\DeclareDocumentCommand \olfileid { o m m m }{
+  \renewcommand*{\theolsection}{#4}
+  \olchapterid[#1]{#2}{#3}}
+\DeclareDocumentCommand \olchapterid { o m m }{
+  \renewcommand*{\theolchapter}{#3}
+  \olpartid[#1]{#2}}
+\DeclareDocumentCommand \olpartid { o m }{
+  \renewcommand*{\theolpart}{#2}
+  % Call \olunlocalizedhook if file is compiled for non-English locale
+  % but not localized
+  \IfNoValueT {#1}
+    {\ifdefined\ollangid
+      \OLUnLocalizedHook{#1}
+    \fi}}
+
+% \OLUnLocalizedHook is called if a file is not localized but included
+% in a localized version. By default, it skips the file.
+
+\newcommand*{\OLUnLocalizedHook}[1]{
+  \endinput
+}
 
 \newcommand*{\ollabel}[1]{%
   \label{\theolpart:\theolchapter:\theolsection:#1}}

@@ -17,6 +17,8 @@
 
 \makeatletter
 
+
+%\AtBeginDocument{%
 % Undefine the prob and probtag environments
 
 \csundef{prob}
@@ -29,8 +31,6 @@
 
 \Newassociation{prob}{probdeferred}{\jobname}
 \Newassociation{probtag}{probdeferredtag}{\jobname}
-
-\newcommand*{\olprobsavefileid}{\Writetofile{\jobname}{\string\olfileid{\theolpart}{\theolchapter}{\theolsection}}}
 
 % every prob environment, execute \ifproblems\ifproblemswrite
 
@@ -47,12 +47,9 @@
 \renewenvironment{probdeferred}[1]{\begin{probd}}{\end{probd}}
 \renewenvironment{probdeferredtag}[2]{\begin{probd}}{\end{probd}}
 
-% the probd environment does the actual typesetting.
-
-\declaretheorem[
-  style=definition, numbered=yes,
-  name={Problem}]{probd}
-
+% the probd environment does the actual typesetting. It's defined in
+% the -env.sty file.
+%}
 % \probch holds the chapter number
 
 \newcommand*{\probch}{0}
@@ -62,6 +59,10 @@
 \renewcommand*{\theprobd}{\probch.\arabic{probd}}
 \renewcommand{\theHprobd}{\probch.\arabic{probd}}
 
+\newcommand*{\olprobsavefileid}{\Writetofile{\jobname}{
+  \string\renewcommand*\string\theolpart{\theolpart}
+  \string\renewcommand*\string\theolchapter{\theolchapter}
+  \string\renewcommand*\string\theolsection{\theolsection}}}
 
 % make sure the .prb file is open
 \Opensolutionfile{\jobname}
@@ -104,8 +105,8 @@
     \Closesolutionfile{\jobname}
     \renewcommand*{\probch}{\thechapter}
     \ifproblems{% print problems if there are any
-      \section*{Problems}
-      \addcontentsline{toc}{section}{Problems}
+      \section*{\problemsname}
+      \addcontentsline{toc}{section}{\problemsname}
       \Readsolutionfile{\jobname}}}}
 
 % - `\collectproblems`: execute this in the preamble to arrange for
@@ -119,7 +120,7 @@
   \let\ifproblems\makeifproblemsgobble
   \def\ifproblemswrite{%
       \Writetofile{\jobname}{%
-        \string\section*{Problems for Chapter~\thechapter}}}
+        \string\section*{\chaptername~\thechapter}}}
   \renewcommand\memendofchapterhook{%
     \let\ifproblems\makeifproblemsgobble
     \Writetofile{\jobname}{
