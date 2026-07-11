@@ -34,6 +34,7 @@
 \newcommand*{\usetoken}[2]{\csname TOK@#1@#2\endcsname}
 
 \DeclareDocumentCommand \settexttoken { m s m m o o } {%
+    \PackageInfo{open-logic-tokenize}{Setting token #1 to #3 / #4}
     \definetoken{s}{#1}{#3}
     \definetoken{p}{#1}{#4}
     \IfBooleanTF {#2} 
