@@ -6,6 +6,10 @@ codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)
 of the corresponding localization, e.g., a French localization
 would live in `locale/fr/`.
 
+Existing localizations include:
+
+  - [Portuguese (pt)](https://github.com/OpenLogicProject/OpenLogic-pt)
+
 Assuming you're in the main directory of your local `OpenLogic` tree:
 To start a new localization, navigate to `locale/` and create a new
 subfolder, e.g.,
