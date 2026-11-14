@@ -29,10 +29,10 @@ They are !!{lambda define}d by the following terms:
 \end{proof}
 
 \begin{lem}
-  \ollabel{lem:comp} Suppose the $k$-ary function $f$, and $n$-ary
-  functions $g_0, \dots, g_{k-1}$, are !!{lambda definable} by terms
-  $F$, $G_0$, \dots, $G_k$, and $h$ is defined from them by composition.
-  Then $H$ is !!{lambda definable}.
+  \ollabel{lem:comp} Suppose the $k$-ary function~$f$ and $n$-ary
+  functions $g_0$, \dots,~$g_{k-1}$ are !!{lambda definable} by terms
+  $F$, $G_0$, \dots, $G_{k-1}$, and $h$ is defined from them by
+  composition. Then $h$ is !!{lambda definable}.
 \end{lem}
 
 \begin{proof}
@@ -65,10 +65,10 @@ they are total and !!{lambda definable}.
   Recall that $h$ is defined by
   \begin{align*}
     h(x_1, \dots, x_n, 0) &= f(x_1, \dots, x_n)\\
-    h(x_1, \dots, x_n, y+1) & = h(x_1, \dots, x_n, y, h(x_1, \dots, x_n, y)).
+    h(x_1, \dots, x_n, y+1) & = g(x_1, \dots, x_n, y, h(x_1, \dots, x_n, y)).
   \end{align*}
   Informally speaking, the primitive recursive definition iterates the
-  application of the function $h$ $y$ times and applies it to $f(x_1,
+  application of the function $g$ $y$ times and applies it to $f(x_1,
   \dots, x_n)$. This is reminiscent of the definition of Church
   numerals, which is also defined as a iterator.
 

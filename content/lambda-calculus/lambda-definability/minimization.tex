@@ -18,9 +18,9 @@ that any function defined by regular minimization from !!a{lambda
 
 \begin{lem}
   \ollabel{lem:min} If $f(x_1, \dots, x_k, y)$ is regular and
-  !!{lambda definable}, then $g$~defined by
+  !!{lambda definable}, then $h$~defined by
   \[
-  g(x_1, \dots, x_k) = \umin{y}{f(x_1,\dots,x_k, y) = 0}
+  h(x_1, \dots, x_k) = \umin{y}{f(x_1,\dots,x_k, y) = 0}
   \]
   is also !!{lambda definable}.
 \end{lem}
@@ -31,7 +31,7 @@ that any function defined by regular minimization from !!a{lambda
   function and a fixpoint combinator:
   \begin{align*}
     \fn{Search} & \ident \lambd[g][\lambd[f\,\vec{x}\,y][
-        \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, \vec{x} (\fn{Succ}\, y)]]\\
+        \fn{IsZero} (f\, \vec{x}\, y)\, y\, (g\, f\, \vec{x} (\fn{Succ}\, y)]]]\\
     H & \ident \lambd[\vec x][(Y \, \fn{Search}) F\, \vec{x}\, \num{0}],
   \end{align*}
   where $Y$ is any fixpoint combinator. Informally speaking,

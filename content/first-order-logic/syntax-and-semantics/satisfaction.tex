@@ -169,8 +169,8 @@ We solve this problem by introducing !!{variable} assignments, which
 allow us to link variables directly with !!{element}s of the domain.
 Then instead of saying that, e.g.,
 \iftag{prvEx}{$\lexists[x][!B(x)]$}{$\lforall[x][!B(x)]$} is satisfied
-in~$\Struct M$ iff \iftag{prvEx}{for at least one $m \in
-\Domain{M}$}{for all $m \in \Domain{M}$, $\Sat{M}{!B(m)}$}, we say it
+in~$\Struct M$ iff $\Sat{M}{!B(m)}$ \iftag{prvEx}{for at least one $m \in
+\Domain{M}$}{for every $m \in \Domain{M}$}, we say it
 is satisfied in~$\Struct M$ \emph{relative to}~$s$ iff $!B(x)$ is
 satisfied relative to~$\Subst{s}{m}{x}$ \iftag{prvEx}{for at least
 one}{for every} $m \in \Domain M$.
@@ -210,7 +210,7 @@ values of its arguments, i.e., $\tuple{\Value{t_1}{M}[s],
   \Value{t_2}{M}[s]}$, is !!a{element} of~$\Assign{R}{M}$. So, e.g., we
 have $\Sat{M}{R(b,f(a,b))}[s]$ since $\tuple{\Value{b}{M},
   \Value{f(a,b)}{M}} = \tuple{2, 3} \in \Assign{R}{M}$, but
-$\Sat/{M}{R(x, f(a,b))}[s]$ since $\tuple{1, 3} \notin \Assign{R}{M}[s]$.
+$\Sat/{M}{R(x, f(a,b))}[s]$ since $\tuple{1, 3} \notin \Assign{R}{M}$.
 
 To determine if a non-atomic formula~$!A$ is satisfied, you apply the
 clauses in the inductive definition that applies to the main
@@ -285,11 +285,11 @@ particular, that $s_1 = s$ ($s$~is always an $x$-variant of itself).
   First, $\Sat{M}{R(b,x) \lor R(x, b)}[\Subst{s}{1}{x}]$
   ($\Subst{s}{3}{x}$ would also fit the bill).  So,
   $\Sat/{M}{\lnot(R(b,x) \lor R(x,b))}[\Subst{s}{1}{x}]$, thus
-  $\Sat/{M}{\lforall[x][\lnot((R(b,x) \lor R(x,b))]}[s]$, and
-  therefore $\Sat{M}{\lnot\lforall[x][\lnot((R(b,x) \lor
+  $\Sat/{M}{\lforall[x][\lnot(R(b,x) \lor R(x,b))]}[s]$, and
+  therefore $\Sat{M}{\lnot\lforall[x][\lnot(R(b,x) \lor
   R(x,b))]}[s]$. On the other hand,
   \[
-  \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))],}[s].
+  \Sat/{M}{\lexists[x][(R(b,x) \land R(x,b))]}[s].
   \]
   That's because $\Sat{M}{\lforall[x][\lnot(R(b,x) \land
   R(x,b))]}[s]$, since for no $m \in \Domain M$, $\Sat{M}{R(b,x) \land
@@ -306,7 +306,7 @@ particular, that $s_1 = s$ ($s$~is always an $x$-variant of itself).
   \]
   First, $\Sat{M}{R(x,a) \lif R(a,x)}[\Subst{s}{m}{x}]$ for all $m \in
   \Domain M$ ($\Sat{M}{R(a,x)}[\Subst{s}{1}{x}]$ and
-  $\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]$ for $m = 2$, $3$, or~$4$).
+  $\Sat/{M}{R(x,a)}[\Subst{s}{m}{x}]$ for $m = 2$, $3$, or~$4$).
   Thus, there is no $m \in \Domain M$ such that
   $\Sat{M}{\lnot(R(x,a) \lif R(a,x))}[\Subst{s}{m}{x}]$ and hence
   $\Sat/{M}{\lexists[x][\lnot(R(x,a) \lif R(a,x))]}[s]$. Therefore,
@@ -328,7 +328,7 @@ For a more complicated case, consider
 Since $\Sat/{M}{R(a,x)}[\Subst{s}{3}{x}]$ and
 $\Sat/{M}{R(a,x)}[\Subst{s}{4}{x}]$, the interesting cases where we
 have to worry about the consequent of the conditional are only $m = 1$
-and $ = 2$. Does $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{1}{x}]$
+and $m = 2$. Does $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{1}{x}]$
 hold? It does if there is at least one $n \in \Domain M$ so that
 $\Sat{M}{R(x,y)}[\Subst{\Subst{s}{1}{x}}{n}{y}]$. In fact, if we take
 $n = 1$, we have $\Subst{\Subst{s}{1}{x}}{n}{y} = \Subst{s}{1}{y} =
@@ -344,7 +344,7 @@ consider $\Subst{\Subst{s}{2}{x}}{3}{y} = \Subst{s_2}{3}{y}$.
 $\Sat{M}{R(x,y)}[\Subst{s_2}{3}{y}]$ since $\tuple{2,3} \in
 \Assign{R}{M}$, and so $\Sat{M}{\lexists[y][R(x,y)]}[s_2]$.
 
-So, for all $n \in \Domain M$, either
+So, for all $m \in \Domain M$, either
 $\Sat/{M}{R(a,x)}[\Subst{s}{m}{x}]$ (if $m = 3$, $4$) or
 $\Sat{M}{\lexists[y][R(x,y)]}[\Subst{s}{m}{x}]$ (if $m = 1$, $2$), and so
 \[
@@ -355,9 +355,9 @@ On the other hand,
 \Sat/{M}{\lexists[x][(R(a,x) \land \lforall[y][R(x,y)])]}[s].
 \]
 We have $\Sat{M}{R(a,x)}[\Subst{s}{m}{x}]$ only for $m = 1$ and $m =
-2$. But for both of these values of~$m$, there is in turn an $n \in
-\Domain M$, namely $n = 4$, so that
-$\Sat/{M}{R(x,y)}[\Subst{\Subst{s}{m}{x}}{n}{y}]$ and so
+2$. But for each of these values of~$m$, there is in turn an $n \in
+\Domain M$ so that $\Sat/{M}{R(x,y)}[\Subst{\Subst{s}{m}{x}}{n}{y}]$,
+e.g., $n=4$ if $m=1$ and $n=1$ if $m=2$. Consequently, we have
 $\Sat/{M}{\lforall[y][R(x,y)]}[\Subst{s}{m}{x}]$ for $m = 1$ and $m =
 2$. In sum, there is no $m \in \Domain M$ such that $\Sat{M}{R(a,x)
 \land \lforall[y][R(x,y)]}[\Subst{s}{m}{x}]$.

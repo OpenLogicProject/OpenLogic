@@ -21,16 +21,16 @@ $\fn{Fac}$ this way since $\fn{Fac}$ itself occurs in the right-hand
 side. Such recursive definitions involving self-reference
 are not part of the lambda calculus. Defining a term, e.g., by
 \[
-\fn{Mult} \ident \lambd[ab][a (\fn{Add}\, a) 0]
+\fn{Mult} \ident \lambd[ab][a (\fn{Add}\, b) 0]
 \]
-only involves previously defined terms in the right-hand side, such as
+only involves previously defined terms on the right-hand side, such as
 $\fn{Add}$. We can always remove $\fn{Add}$ by replacing it with its
 defining term.  This would give the term $\fn{Mult}$ as a pure lambda
-term; if $\fn{Add}$ itself involved defined terms (as, e.g.,
+term. If $\fn{Add}$ itself involved defined terms (as, e.g.,
 $\fn{Add}'$ does), we could continue this process and finally arrive at
 a pure lambda term.
 
-However this is not true in the case of recursive definitions like the
+However, this is not true in the case of recursive definitions like the
 one of $\fn{Fac}$ above. If we replace the occurrence of $\fn{Fac}$ on
 the right-hand side with the definition of $\fn{Fac}$ itself, we get:
 \begin{align*}
@@ -160,8 +160,8 @@ call~$Y_C$:
 \[
 Y_C \ident \lambd[g][(\lambd[x][g(xx)])(\lambd[x][g(xx)])].
 \]
-Church's combinator is a bit weaker than Turing's in that $Yg
-\equal[\beta] g(Yg)$ but not $Yg \bred g(Yg)$. Let $V$ be the term
+Church's combinator is a bit weaker than Turing's in that $Y_C g
+\equal[\beta] g(Y_C g)$ but not $Y_C g \bred g(Y_C g)$. Let $V$ be the term
 $\lambd[x][g(xx)]$, so that $Y_C \ident \lambd[g][VV]$. Then
 \begin{align*}
   VV & \ident (\lambd[x][g(xx)])V \red g(VV)
@@ -169,8 +169,9 @@ $\lambd[x][g(xx)]$, so that $Y_C \ident \lambd[g][VV]$. Then
   Y_C g & \ident (\lambd[g][VV])g \red VV \red g(VV), \text{ but also}\\
   g(Y_C g) & \ident g((\lambd[g][VV])g) \red g(VV).
 \end{align*}
-In other words, $Y_Cg$ and $g(Y_Cg)$ reduce to a common term $g(VV)$; so $Y_Cg
-\equal[\beta] g(Y_Cg)$. This is often enough for applications.
+In other words, $Y_C g$ and $g(Y_C g)$ reduce to a common term
+$g(VV)$; so $Y_C g \equal[\beta] g(Y_C g)$. This is often enough for
+applications.
 
 \end{document}
 
