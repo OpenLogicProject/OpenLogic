@@ -153,10 +153,10 @@ First, we consider the possible inferences with only one premise.
   that $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$, and $!C \in \Xi$ as well
   since $\Xi = \Delta$. So in each case, \iftag{FOL}{$\Struct
     M$}{$\pAssign{v}$} satisfies $!A \land !B, \Gamma \Sequent
-  \Delta$.  Since \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} was
-  arbitrary, $\Gamma \Sequent \Delta$ is valid.  The case where $!A
+  \Delta$, i.e., $\Theta \Sequent \Xi$.  Since \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} was
+  arbitrary, $\Theta \Sequent \Xi$ is valid.  The case where $!A
   \land !B$ is inferred from $!B$ is handled the same, changing $!A$
-  to $!B$.
+  to~$!B$.
 \item The last inference is \RightR{\lor}: There are two variants: $!A
   \lor !B$ may be inferred on the right from $!A$ or from $!B$ on the
   right side of the premise.  In the first case, $\pi$ ends in
@@ -180,7 +180,7 @@ First, we consider the possible inferences with only one premise.
   $\Gamma \Sequent \Delta, !A \lor !B$, i.e., $\Theta \Sequent \Xi$.
   Since \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} was arbitrary,
   $\Theta \Sequent \Xi$ is valid.  The case where $!A \lor !B$ is
-  inferred from $!B$ is handled the same, changing $!A$ to $!B$.
+  inferred from $!B$ is handled the same, changing $!A$ to~$!B$.
 \item The last inference is \RightR{\lif}: Then $\pi$ ends in
   \begin{prooftree}
     \AxiomC{}
@@ -192,19 +192,18 @@ First, we consider the possible inferences with only one premise.
   want to show that the conclusion is valid as well. Let
   \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} be arbitrary. Since $!A,
   \Gamma \Sequent \Delta, !B$ is valid, at least one of the following
-  cases obtains: (a) $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$, (b)
-  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$, (c)
-  $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ for some~$~!C \in \Gamma$, or
-  (d) $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ for some $!C \in \Delta$.
-  In cases (a) and (b), $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$
+  cases obtains: (a)~$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$, (b)~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!B}$, (c)~$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$ for some~$~!C \in \Gamma$, or
+  (d)~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$ for some $!C \in \Delta$.
+  In cases (a) and~(b), $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A \lif !B}$
   and so there is a $!C \in \Delta, !A \lif !B$ such that
-  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.  In case (c), for some $!C \in
-  \Gamma$, $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. In case (d), for
+  $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.  In case~(c), for some $!C \in
+  \Gamma$, $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!C}$. In case~(d), for
   some $!C \in \Delta$, $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!C}$.  In each
   case, \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} satisfies $\Gamma
-  \Sequent \Delta, !A \lif !B$.  Since
-  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} was arbitrary, $\Gamma
-  \Sequent \Delta, !A \lif !B$ is valid.  \iftag{FOL}{%
+  \Sequent \Delta, !A \lif !B$, i.e., $\Theta \Sequent
+  \Xi$.  Since
+  \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} was arbitrary, $\Theta
+  \Sequent \Xi$ is valid.  \iftag{FOL}{%
 \item The last inference is \LeftR{\lforall}: Then there is
   !!a{formula}~$!A(x)$ and a closed term~$t$ such that $\pi$ ends in
   \begin{prooftree}
@@ -215,15 +214,16 @@ First, we consider the possible inferences with only one premise.
   \end{prooftree}
   We want to show that the conclusion $\lforall[x][!A(x)], \Gamma
   \Sequent \Delta$ is valid.  Consider !!a{structure}~$\Struct M$.
-  Since the premise $!A(t), \Gamma \Sequent \Delta$ is valid, (a)
-  $\Sat/{M}{!A(t)}$, (b) $\Sat/{M}{!C}$ for some $!C \in \Gamma$, or
-  (c)~$\Sat{M}{!C}$ for some $!C \in \Delta$.  In case (a), by
+  Since the premise $!A(t), \Gamma \Sequent \Delta$ is valid,
+  (a)~$\Sat/{M}{!A(t)}$, (b)~$\Sat/{M}{!C}$ for some $!C \in \Gamma$,
+  or (c)~$\Sat{M}{!C}$ for some $!C \in \Delta$.  In case~(a), by
   \olref[syn][sem]{prop:quant-terms}, if
   $\Sat{M}{\lforall[x][!A(x)]}$, then $\Sat{M}{!A(t)}$. Since
-  $\Sat/{M}{!A(t)}$, $\Sat/{M}{\lforall[x][!A(x)]}$ . In case (b) and
-  (c), $\Struct{M}$ also satisfies $\lforall[x][!A(x)], \Gamma
+  $\Sat/{M}{!A(t)}$, $\Sat/{M}{\lforall[x][!A(x)]}$ . In case (b)
+  and~(c), $\Struct{M}$ also satisfies $\lforall[x][!A(x)], \Gamma
   \Sequent \Delta$.  Since $\Struct M$ was arbitrary,
-  $\lforall[x][!A(x)], \Gamma \Sequent \Delta$ is valid.
+  $\lforall[x][!A(x)], \Gamma \Sequent \Delta$, i.e., $\Theta \Sequent
+  \Xi$, is valid.
 \item The last inference is \RightR{\lexists}: Exercise.
 \item The last inference is \RightR{\lforall}: Then there is
   !!a{formula}~$!A(x)$ and !!a{constant}~$a$ such that $\pi$ ends in
@@ -237,14 +237,14 @@ First, we consider the possible inferences with only one premise.
   occur in $!A(x)$, $\Gamma$, or $\Delta$.  By induction hypothesis,
   the premise of the last inference is valid.  We have to show that
   the conclusion is valid as well, i.e., that for any
-  !!{structure}~$\Struct M$, (a) $\Sat{M}{\lforall[x][!A(x)]}$, (b)
-  $\Sat/{M}{!C}$ for some $!C \in \Gamma$, or (c)~$\Sat{M}{!C}$ for
-  some $!C \in \Delta$.
+  !!{structure}~$\Struct M$, (a)~$\Sat{M}{\lforall[x][!A(x)]}$,
+  (b)~$\Sat/{M}{!C}$ for some $!C \in \Gamma$, or (c)~$\Sat{M}{!C}$
+  for some $!C \in \Delta$.
 
-  Suppose $\Struct{M}$ is an arbitrary !!{structure}. If (b) or (c)
+  Suppose $\Struct{M}$ is an arbitrary !!{structure}. If (b) or~(c)
   holds, we are done, so suppose neither holds: for all $!C \in
   \Gamma$, $\Sat{M}{!C}$, and for all $!C \in \Delta$,
-  $\Sat/{M}{!C}$. We have to show that (a) holds, i.e.,
+  $\Sat/{M}{!C}$. We have to show that (a)~holds, i.e.,
   $\Sat{M}{\lforall[x][!A(x)]}$.  By
   \olref[syn][ass]{prop:sat-quant}, if suffices to show that
   $\Sat{M}{!A(x)}[s]$ for all variable assignments~$s$.  So let $s$ be
@@ -279,13 +279,13 @@ Now let's consider the possible inferences with two premises.
   Let \iftag{FOL}{$\Struct{M}$ be !!a{structure}}{$\pAssign{v}$ be
     !!a{valuation}}.  By induction hypothesis, the premises are valid,
   so \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} satisfies both premises.
-  We distinguish two cases: (a) $\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$
-  and (b) $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.  In case (a), in order
+  We distinguish two cases: (a)~$\iftag{FOL}{\Sat/{M}}{\pSat/{v}}{!A}$
+  and (b)~$\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$.  In case~(a), in order
   for \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} to satisfy the left
   premise, it must satisfy $\Gamma \Sequent \Delta$.  But then it also
-  satisfies the conclusion.  In case (b), in order for
+  satisfies the conclusion.  In case~(b), in order for
   \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} to satisfy the right
-  premise, it must satisfy $\Pi \setminus \Lambda$.  Again,
+  premise, it must satisfy $\Pi \Sequent \Lambda$.  Again,
   \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} satisfies the conclusion.
 \item The last inference is \RightR{\land}.  Then $\pi$ ends in
   \begin{prooftree}
@@ -299,7 +299,7 @@ Now let's consider the possible inferences with two premises.
   Consider \iftag{FOL}{!!a{structure}~$\Struct
     M$}{!!a{valuation}~$\pAssign{v}$}. If
   \iftag{FOL}{$\Struct{M}$}{$\pAssign{v}$} satisfies $\Gamma \Sequent
-  \Delta$, we are done. So suppose it doesn't. Since $\Gamma \fCenter
+  \Delta$, we are done. So suppose it doesn't. Since $\Gamma \Sequent
   \Delta, !A$ is valid by induction hypothesis,
   $\iftag{FOL}{\Sat{M}}{\pSat{v}}{!A}$. Similarly, since $\Gamma
   \Sequent \Delta, !B$ is valid,
