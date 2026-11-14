@@ -78,38 +78,43 @@ V(p)$.
       the same !!{formula}s from~$\Gamma$ true. Since by assumption $p
       \in \Gamma$ and $\mSat{M}{p}[v]$, $\mSat{M}{\indfrm}[w]$.}
 
-    \tagitem{prvNot}{\iftag{probNot}{Exercise.}{\indcase{!A}{\lnot
-          !B}{$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w]$. By
+    \tagitem{prvNot}{\indcase{!A}{\lnot !B}
+         {\iftag{probNot}{Exercise.}
+         {$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w]$. By
           induction hypothesis, $\mSat/{M}{!B}[w]$ iff
           $\mSat/{M^*}{!B}[{[w]}]$.  Finally, $\mSat/{M^*}{!B}[{[w]}]$
           iff $\mSat{M^*}{\indfrm}[{[w]}]$.}}}{}
         
-    \tagitem{prvAnd}{\iftag{probAnd}{Exercise.}{\indcase{!A}{(!B \land
-          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ and
+    \tagitem{prvAnd}{\indcase{!A}{(!B \land !C)}
+          {\iftag{probAnd}{Exercise.}
+          {$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ and
           $\mSat{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
           iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
           $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
           iff $\mSat{M^*}{!B}[{[w]}]$ and
           $\mSat{M^*}{!C}[{[w]}]$.}}}{}
 
-    \tagitem{prvOr}{\iftag{probOr}{Exercise.}{\indcase{!A}{(!B \lor
-          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ or
+    \tagitem{prvOr}{\indcase{!A}{(!B \lor !C)}
+          {\iftag{probOr}{Exercise.}
+          {$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ or
           $\mSat{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
           iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
           $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
           iff $\mSat{M^*}{!B}[{[w]}]$ or
           $\mSat{M^*}{!C}[{[w]}]$.}}}{}
 
-    \tagitem{prvIf}{\iftag{probIf}{Exercise.}{\indcase{!A}{(!B \lif
-          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w]$ or
+    \tagitem{prvIf}{\indcase{!A}{(!B \lif !C)}
+          {\iftag{probIf}{Exercise.}
+          {$\mSat{M}{\indfrm}[w]$ iff $\mSat/{M}{!B}[w]$ or
           $\mSat{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
           iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
           $\mSat{M^*}{!C}[{[w]}]$. And $\mSat{M^*}{\indfrm}[{[w]}]$
           iff $\mSat/{M^*}{!B}[{[w]}]$ or
           $\mSat{M^*}{!C}[{[w]}]$.}}}{}
 
-    \tagitem{prvIff}{\iftag{probIff}{Exercise.}{\indcase{!A}{(!B \liff
-          !C)}{$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ and
+    \tagitem{prvIff}{\indcase{!A}{(!B \liff !C)}
+          {\iftag{probIff}{Exercise.}
+          {$\mSat{M}{\indfrm}[w]$ iff $\mSat{M}{!B}[w]$ and
           $\mSat{M}{!C}[w]$, or $\mSat/{M}{!B}[w]$ and
           $\mSat/{M}{!C}[w]$. By induction hypothesis, $\mSat{M}{!B}[w]$
           iff $\mSat{M^*}{!B}[{[w]}]$, and $\mSat{M}{!C}[w]$ iff
@@ -118,8 +123,9 @@ V(p)$.
           $\mSat{M^*}{!C}[{[w]}]$, or $\mSat/{M^*}{!B}[{[w]}]$ and
           $\mSat/{M^*}{!C}[{[w]}]$.}}}{}
 
-    \tagitem{prvBox}{\iftag{probBox}{Exercise.}{\indcase{!A}{\Box
-          !B}{Suppose $\mSat{M}{\indfrm}[w]$; to show that
+    \tagitem{prvBox}{\indcase{!A}{\Box !B}
+          {\iftag{probBox}{Exercise.}
+          {Suppose $\mSat{M}{\indfrm}[w]$; to show that
           $\mSat{M^*}{\indfrm}[{[w]}]$, let $v$ be such that
           $R^*[w][v]$. From
           \olref{defn:filtration}\olref{defn:filtration-R2}, we have
@@ -134,8 +140,9 @@ V(p)$.
           hypothesis $\mSat{M}{!B}[v]$, and since $v$ was arbitrary,
           $\mSat{M}{\indfrm}[w]$.}}}{}
     
-    \tagitem{prvDiamond}{\iftag{probDiamond}{Exercise.}{\indcase{!A}{\Diamond
-          !B}{Suppose $\mSat{M}{\indfrm}[w]$. Then for some $v \in W$,
+    \tagitem{prvDiamond}{\indcase{!A}{\Diamond !B}
+          {\iftag{probDiamond}{Exercise.}
+          {Suppose $\mSat{M}{\indfrm}[w]$. Then for some $v \in W$,
           $Rwv$ and $\mSat{M}{!B}[v]$.  By inductive hypothesis
           $\mSat{M^*}{!B}[{[v]}]$, and by
           \olref{defn:filtration}\olref{defn:filtration-R1}, we have
