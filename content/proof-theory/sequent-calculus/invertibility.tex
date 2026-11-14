@@ -328,7 +328,7 @@ Suppose $!A \ident \lforall[x][!B(x)]$ is principal on the right. Then $\pi$ end
 \AxiomC{}
 \RightLabel{$\pi_1$}
 \Deduce$\Gamma \fCenter \Delta, \lforall[x][!B(x)], !B(a)$
-\RightLabel{\RightR{\lexists}}
+\RightLabel{\RightR{\lforall}}
 \UnaryInf$\Gamma \fCenter \Delta, \lforall[x][!B(x)], \lforall[x][!B(x)]$
 \DisplayProof
 \]
@@ -364,12 +364,12 @@ and principal on the right. Then $\pi$ looks as follows:
 \]
 The inductive hypothesis applies to~$\pi_1$ and there is
 !!a{proof}s~$\pi_1'$ of $\Gamma \Sequent \Delta, \lexists[x][!B(x)],
-!B$. (Note that no inversion lemma is needed here!) The
+!B(t)$. (Note that no inversion lemma is needed here!) The
 !!{proof}~$\pi'$ then is:
 \[
 \AxiomC{}
 \RightLabel{$\pi_1'$}
-\Deduce$\Gamma \fCenter \Delta,  \lexists[x][!B(x)], !B$
+\Deduce$\Gamma \fCenter \Delta,  \lexists[x][!B(x)], !B(t)$
 \RightLabel{\RightR{\lexists}}
 \UnaryInf$\Gamma \fCenter \Delta, \lexists[x][!B(x)]$
 \DisplayProof
