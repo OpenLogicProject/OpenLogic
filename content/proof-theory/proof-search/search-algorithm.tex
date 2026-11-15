@@ -54,7 +54,7 @@ Suppose the algorithm has generated a tree of indexed sequents, with
 associated sets of !!{constant}s, at stage~$n$. At stage~$n+1$, we do
 the following, for each topmost sequent. 
 
-If there is !!a{formula}~$!A$ that occurs on both the left and the
+If there is an atomic !!{formula}~$!A$ that occurs on both the left and the
 right of the sequent, or the left contains~$\lfalse$, we do nothing:
 such sequents have !!{proof}s in~\Log{G3c}, and for this particular
 topmost sequent there is nothing left to do.
@@ -126,7 +126,7 @@ If at stage $n+1$ we have not added a new sequent to any topmost
 sequent, the algorithm terminates successfully. In this case we have
 found !!a{proof} of~$\Gamma \Sequent \Delta$, obtained from the tree
 at stage $n+1$ by erasing all indices. The topmost sequents are all of
-the form $!A, \Pi \Sequent \Lambda, !A$ or of the form $\lfalse, \Pi
+the form $!A, \Pi \Sequent \Lambda, !A$ with $!A$ atomic, or of the form $\lfalse, \Pi
 \Sequent \Lambda$. All inferences are correct inferences of~\Log{G3c}.
 This is obvious for the propositional inferences. Observe that at each
 step, the set~$C$ of !!{constant}s assigned to a sequent contains all
