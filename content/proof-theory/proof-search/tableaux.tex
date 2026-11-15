@@ -118,7 +118,7 @@ serve as indications which signed !!{formula}s the rule is applied to
 Proof search is easy in tableaux. We generate a tableau in stages. At
 stage $0$, simply write down the starting !!{formula}s at the top. At
 stage $n+1$, do the following for each leaf node: Find the first
-(top-most) signed formula not yet checked off. Apply the branch
+(top-most) non-atomic signed formula not yet checked off that is not of the form $\sFmla{\True}{\lforall}$ or $\sFmla{\False}{\lexists}$. Apply the branch
 extension rule to that formula. Once the rule has been applied in
 every branch that includes the signed formula in question, check it
 off. (The example above is generated using this algorithm.)
