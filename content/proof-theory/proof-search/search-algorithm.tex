@@ -21,7 +21,7 @@ A key necessary feature of the algorithm is that it ensures that every
 !!{formula} in $\Gamma \Sequent \Delta$, or in a sequent produced in
 the proof search, is ``reduced,'' i.e., it is treated as the principal
 formula of an inference rule applied backwards, and that this happens
-as often as necessary. We call this feature \emph{fairness}
+as often as necessary. We call this feature \emph{fairness}.
 
 The algorithm works in stages. The output of each stage is a tree of
 sequents, and the output of the next stage is produced by reducing
@@ -43,11 +43,11 @@ $\lforall[x][!A(x)]$ on the left. We will only need terms built from
 the !!{constant}s $\Obj c_0$, $\Obj c_1$, $\Obj c_2$, \dots, using any
 of the function symbols occurring in~$\Gamma$ and $\Delta$. We assume
 that the set of all these terms is given in some fixed enumeration, so
-that we can talk about, e.g., ``the first !!{constant} not occuring in
+that we can talk about, e.g., ``the first !!{constant} not occurring in
 $\Gamma \Sequent \Delta$.'' Each indexed sequent in the tree the
 algorithm produces has an associated set of !!{constant}s. The set of
 !!{constant}s assigned to the sequent in stage~$0$ is the set of all
-!!{constant}s occuring in it (if there are any), and $\{\Obj c_0\}$ if
+!!{constant}s occurring in it (if there are any), and $\{\Obj c_0\}$ if
 it contains no !!{constant}s.
 
 Suppose the algorithm has generated a tree of indexed sequents, with
@@ -130,7 +130,7 @@ the form $!A, \Pi \Sequent \Lambda, !A$ or of the form $\lfalse, \Pi
 \Sequent \Lambda$. All inferences are correct inferences of~\Log{G3c}.
 This is obvious for the propositional inferences. Observe that at each
 step, the set~$C$ of !!{constant}s assigned to a sequent contains all
-the !!{constant}s occuring in the sequent. Hence, in the reduction
+the !!{constant}s occurring in the sequent. Hence, in the reduction
 using \LeftR{\lexists} and \RightR{\lforall}, the eigenvariable
 condition is satisfied, since the eigenvariable~$c$ was !!a{constant}
 not in the set~$C$ assigned to the conclusion, $c$ also did not occur
