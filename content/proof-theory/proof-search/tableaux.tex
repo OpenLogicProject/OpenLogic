@@ -139,7 +139,8 @@ already occur on the branch.
 
 If this proof search does not produce a closed tableau, it either
 contains a finite open branch where all non-atomic !!{formula}s are
-checked off, or the search produces an infinite, finitely branching
+checked off, except those of the form $\sFmla{\True}{\lforall}$ and
+$\sFmla{\False}{\lexists}$, which have been applied to every available term, or the search produces an infinite, finitely branching
 tree, which must contain an infinite branch. Just like in
 \olref[cpl]{sec}, we can define !!a{structure}~$\Struct{M}$ such that
 if $\sFmla{\True}{!A}$ occurs on the branch, then $\Sat{M}{!A}$ and if
