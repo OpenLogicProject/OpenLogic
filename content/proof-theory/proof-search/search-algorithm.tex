@@ -76,7 +76,7 @@ and according to whether $!A^i$ appears on the left or the right.
   \item $!A \ident !B \land !C$ and occurs on the left: Add one new
   topmost sequent above $(!B \land !C)^i, \Pi \Sequent \Lambda$:
   \[
-  \Axiom$!B^k, !C^{k+1}, \Pi \fCenter \Lambda$
+  \Axiom$!B^{k+1}, !C^{k+2}, \Pi \fCenter \Lambda$
   \RightLabel{\LeftR{\land}}
   \UnaryInf$(!B \land !C)^i, \Pi \fCenter \Lambda$
   \DisplayProof
@@ -85,8 +85,8 @@ and according to whether $!A^i$ appears on the left or the right.
   \item $!A \ident !B \land !C$ and occurs on the right: Add two new
   topmost sequents above $\Pi \Sequent \Lambda, (!B \land !C)^i$:
   \[
-  \Axiom$\Pi \fCenter \Lambda, !B^k$
-  \Axiom$\Pi \fCenter \Lambda, !C^k$
+  \Axiom$\Pi \fCenter \Lambda, !B^{k+1}$
+  \Axiom$\Pi \fCenter \Lambda, !C^{k+1}$
   \RightLabel{\RightR{\land}}
   \BinaryInf$\Pi \fCenter \Lambda, (!B \land !C)^i$
   \DisplayProof
@@ -99,7 +99,7 @@ and according to whether $!A^i$ appears on the left or the right.
   \item $!A \ident \lexists[x][!B(x)]$ and occurs on the left: Add one new
   topmost sequent above $\lexists[x][!B(x)]^i, \Pi \Sequent \Lambda$:
   \[
-  \Axiom$!B(c)^k, \Pi \fCenter \Lambda$
+  \Axiom$!B(c)^{k+1}, \Pi \fCenter \Lambda$
   \RightLabel{\LeftR{\lexists}}
   \UnaryInf$\lexists[x][!B(x)]^i, \Pi \fCenter \Lambda$
   \DisplayProof
@@ -109,8 +109,8 @@ and according to whether $!A^i$ appears on the left or the right.
   \item $!A \ident \lexists[x][!B(x)]$ and occurs on the right: Add one new
   topmost sequent above $\Pi \Sequent \Lambda, \lexists[x][!B(x)]$:
   \[
-  \Axiom$\Pi \fCenter \Lambda, \lexists[x][!B(x)]^k, !B(t)^{k+1}$
-  \RightLabel{\LeftR{\lexists}}
+  \Axiom$\Pi \fCenter \Lambda, \lexists[x][!B(x)]^{k+1}, !B(t)^{k+2}$
+  \RightLabel{\RightR{\lexists}}
   \UnaryInf$\Pi \fCenter \Lambda, \lexists[x][!B(x)]^i$
   \DisplayProof
   \]
