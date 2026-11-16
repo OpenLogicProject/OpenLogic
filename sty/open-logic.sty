@@ -87,8 +87,13 @@
 % references
 % cleveref must be loaded after hyperref
 
+% The cross-reference package can use a language different from Babel.
+% A localization may define \olreferencelanguage before loading this package.
 \ifdefined\ollanguage
-  \RequirePackage[capitalize,nameinlink,english,\ollanguage]{cleveref}
+  \providecommand*{\olreferencelanguage}{\ollanguage}
+\fi
+\ifdefined\olreferencelanguage
+  \RequirePackage[capitalize,nameinlink,english,\olreferencelanguage]{cleveref}
 \else
   \RequirePackage[capitalize,nameinlink]{cleveref} 
 \fi
