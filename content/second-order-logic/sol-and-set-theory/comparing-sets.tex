@@ -30,16 +30,17 @@ non-empty, i.e., $\Sat{M}{\lexists[x][X(x)]}[s]$ iff $s(X) \neq
 
 A set~$X$ is no larger than a set~$Y$, $\cardle{X}{Y}$, iff there is
 !!a{injective} function $f\colon X \to Y$.  Since we can express that
-a function is injective, and also that its values for arguments in~$X$
-are in~$Y$, we can also define the relation of being no larger than on
-subsets of the domain.
+(for arguments in~$X$) a function has values in~$Y$ and is injective, we
+can also define the relation of being no larger than on subsets of the
+domain.
 
 \begin{prop}
 The formula
-\[
-\lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land \lforall[x][\lforall[y][(\eq[u(x)][u(y)] \lif
+\begin{multline*}
+\lexists[u][(\lforall[x][(X(x) \lif Y(u(x)))] \land {}\\
+\lforall[x][\lforall[y][((X(x) \land X(y) \land \eq[u(x)][u(y)]) \lif
       \eq[x][y])]])]
-\]
+\end{multline*}
 defines the relation of being no larger than.
 \end{prop}
 
