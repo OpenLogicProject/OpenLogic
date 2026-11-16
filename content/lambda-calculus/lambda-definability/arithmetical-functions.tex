@@ -128,9 +128,11 @@ surprisingly simple:
   \fn{Exp} \ident \lambd[be][e b].
 \]
 The first argument $b$ is the base and the second~$e$ is the exponent.
-Intuitively, $e f$ is $f^e$ by our encoding of numbers. If you find it
-hard to understand, we can still define exponentiation also by
-iterated multiplication:
+Intuitively, $e f$ is $f^e$ by our encoding of numbers. (For $e = 0$,
+however, $\fn{Exp}\, b\, \num{0}$ reduces to $\lambd[x][x]$, which is
+$\num{1}$ only up to $\eta$-reduction.) If you find it hard to understand,
+or want a term that works for $e = 0$ as well, we can still define
+exponentiation also by iterated multiplication:
 \[
   \fn{Exp}' \ident \lambd[be][e (\fn{Mult}\, b) \num{1}].
 \]
