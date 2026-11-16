@@ -12,7 +12,8 @@
   \usepackage{rotating}
   \usepackage{xcolor}
   
-  \usepackage{helvet,amsmath}
+  \OLPloadCoverSansFont
+  \usepackage{amsmath}
   \usepackage{textgreek}
 
   \newcommand*{\OLPtitlecoverfont}{\fontsize{65pt}{70pt}\sffamily\bfseries}
@@ -76,6 +77,15 @@
   }
 }
 
+% Localizations may override these hooks before \documentclass. Defaults
+% retain the existing package options and font-loading order.
+\providecommand*{\OLPloadCoverSansFont}{\usepackage{helvet}}
+\providecommand*{\OLPloadSansFont}{\usepackage[scaled=.92]{helvet}}
+\providecommand*{\OLPloadMainFont}{\usepackage[osf]{Baskervaldx}}
+\providecommand*{\OLPloadMathFont}{\usepackage[bigdelims,baskervaldx]{newtxmath}}
+\providecommand*{\OLPscreenPDFStandard}{a-1b}
+\providecommand*{\OLPprintPDFStandard}{x-1a}
+
 % class option interior for tyepsetting the interior of a book
 \DeclareOption{interior}{
   % Make sure standard packages are available
@@ -94,15 +104,15 @@
     % Set up fonts
 
     % Helvetica for sans-serif
-    \usepackage[scaled=.92]{helvet}
+    \OLPloadSansFont
     % Baskervald X for roman, with oldstyle figure
-    \usepackage[osf]{Baskervaldx}
+    \OLPloadMainFont
     % load amssymb before newtxmath to avoid problem with \Bbbk
     \usepackage{amssymb}
     % Nice math calligraphic font 
     \usepackage[cal=boondoxo]{mathalpha}
     % Math font to match
-    \usepackage[bigdelims,baskervaldx]{newtxmath}
+    \OLPloadMathFont
     % use Bodono greek for math
     \usepackage{textgreek}
   }
@@ -136,7 +146,7 @@
     \OLPbookformat{24.589cm}{18.91cm}{90pt}{1.3}
 
     % make sure PDF conforms to PDF/X standard
-    \usepackage[x-1a]{pdfx}
+    \usepackage[\OLPprintPDFStandard]{pdfx}
 
     % chapter heads have bars on left
     \setlength{\barwidth}{7pt}
@@ -181,7 +191,7 @@
   }
   \AtBeginDocument{
     % make sure PDF conforms to PDF/A standard
-    \RequirePackage[a-1b]{pdfx}
+    \RequirePackage[\OLPscreenPDFStandard]{pdfx}
     % no bars next to chapter headings
     \setlength{\barwidth}{0pt}
     \RequirePackage[numbered]{bookmark}
