@@ -48,7 +48,7 @@ For any ordinals $\alpha$, $\beta$, their sum is $\alpha \ordplus
 \beta = \ordtype{\alpha \disjointsum \beta, \rlexless}$.
 \end{defn}
 \noindent
-Note that we slightly abused notation here; strictly we should write ``$\Setabs{\tuple{x,y}\in \alpha\disjointsum\beta}{x \rlexless y}$'' in place of ``$\rlexless$''. For brevity, though, we will continue to abuse notation in this way in what follows. 
+Note that we slightly abused notation here; strictly we should write ``$\Setabs{\tuple{x,y}\in (\alpha\disjointsum\beta)^2}{x \rlexless y}$'' in place of ``$\rlexless$''. For brevity, though, we will continue to abuse notation in this way in what follows. 
 
 The following result, together with
 \olref[ordinals][ordtype]{thmOrdinalRepresentation}, confirms that our
@@ -75,7 +75,7 @@ $\alpha \ordplus  1 = \ordsucc{\alpha}$, for any ordinal $\alpha$.
 \begin{proof}
 Consider the isomorphism $f$ from $\ordsucc{\alpha} = \alpha \cup
 \{\alpha\}$ to $\alpha\disjointsum1 = (\alpha \times \{0\})
-\disjointsum (\{0\} \times \{1\})$ given by $f(\gamma) =
+\cup (\{0\} \times \{1\})$ given by $f(\gamma) =
 \tuple{\gamma, 0}$ for $\gamma \in \alpha$, and $f(\alpha) = \tuple{0,
 1}$.
 \end{proof}
@@ -97,7 +97,7 @@ We check case-by-case; first:
 \begin{align*}
 	\alpha \ordplus  0 
 	& = \ordtype{(\alpha \times \{0\}) \cup (0 \times \{1\}), \rlexless} \\
-	&= \ordtype{(\alpha \times \{0\}) \cup \{0\}, \rlexless}\\
+	&= \ordtype{\alpha \times \{0\}, \rlexless}\\
 	&= \alpha\\
 	\alpha \ordplus (\beta \ordplus  1) 
 	%&= \ordtype{(\alpha\times \{0\}) \cup (\ordtype{\beta \ordplus  1}\times \{1\}), \rlexless} \\
