@@ -114,28 +114,34 @@ We can actually simplify this term further by $\eta$-reduction:
 But then we first have to explain $\eta$-reduction.
 \end{editorial}
 
+\begin{prop}\ollabel{prop:mult-exp-ld}
+Multiplication and exponentiation can be !!{lambda define}d by the terms
+\begin{align*}
+  \fn{Mult}' & \ident \lambd[ab][a (\fn{Add}\, b) \num{0}] \text{ and}\\
+  \fn{Exp}'  & \ident \lambd[be][e (\fn{Mult}\, b) \num{1}].
+\end{align*}
+\end{prop}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
 \begin{prob}
-Multiplication can be !!{lambda define}d by the term
-\[
-  \fn{Mult}' \ident \lambd[ab][a (\fn{Add}\, b) \num{0}].
-\]
-Explain why this works.
+  Explain why the definitions of multiplication and exponentiation
+  given in \olref{prop:mult-exp-ld} work.
 \end{prob}
 
-The definition of exponentiation as a $\lambd$-term is
-surprisingly simple:
+\begin{editorial}
+A surprisingly simple definition of exponentiation as a $\lambd$-term is:
 \[
   \fn{Exp} \ident \lambd[be][e b].
 \]
 The first argument $b$ is the base and the second~$e$ is the exponent.
-Intuitively, $e f$ is $f^e$ by our encoding of numbers. If you find it
-hard to understand, we can still define exponentiation also by
-iterated multiplication:
-\[
-  \fn{Exp}' \ident \lambd[be][e (\fn{Mult}\, b) \num{1}].
-\]
+Intuitively, $e b$ is $b^e$ by our encoding of numbers. Without
+$\eta$-reduction, this does not work for exponent~$0$ however.
+\end{editorial}
 
-Predecessor and subtraction on Church numeral is not as simple as we
-might think: it requires encoding of pairs.
+Predecessor and subtraction on Church numeral are not as easy to
+define as we might think: it requires encoding of pairs.
 
 \end{document}
