@@ -1,0 +1,146 @@
+% !TeX root = ./spt-screen.tex
+% sp.tex
+%
+% driver file sp.tex to produce text
+
+\preto\OLEndChapterHook{\IfFileExists{include/summary-\thechapter}
+        {\section*{Summary}\addcontentsline{toc}{section}{Summary}
+        \let\emph\textbf\input{include/summary-\thechapter}\let\emph\textit}{}}
+
+\problemsperchapter
+
+\allowdisplaybreaks
+
+\frontmatter
+
+\OLPfrontmatter
+
+\input{include/preface}
+
+\input{include/introduction}
+
+\mainmatter
+
+\part{Sequent Calculus}
+
+\olimport*[proof-theory/sequent-calculus]{sequent-calculus}
+\olimport*[proof-theory/cut-elimination]{cut-elimination}
+
+\part{Natural Deduction}
+
+\chapter{Intuitionistic Logic}\label{int:int::chap}
+
+\olimport*[intuitionistic-logic/introduction]{constructive-reasoning}
+\olimport*[intuitionistic-logic/introduction]{syntax}
+\olimport*[intuitionistic-logic/introduction]{bhk-interpretation}
+\olimport*[intuitionistic-logic/introduction]{natural-deduction}
+
+\OLEndChapterHook
+
+\olimport*[proof-theory/natural-deduction]{natural-deduction}
+\olimport*[proof-theory/normalization]{normalization}
+
+\part{Propositions as Types}
+
+\olimport*[proof-theory/propositions-as-types]{propositions-as-types}
+
+\part{Proof Search}
+
+\olimport*[proof-theory/proof-search]{proof-search}
+
+\appendix
+\part*{Appendices}\addcontentsline{toc}{part}{Appendix}
+
+\chapter{Proof Systems Reference}
+
+\olfileid{pt}{ref}{systems} % set new file id to avoid reference conflicts
+\olimport*[proof-theory/sequent-calculus]{rules-LK}
+\olimport*[proof-theory/sequent-calculus]{rules-G1c}
+\olimport*[proof-theory/sequent-calculus]{rules-G2c}
+\olimport*[proof-theory/sequent-calculus]{rules-G3c}
+\olimport*[proof-theory/proof-search]{rules-Tc}
+\olimport*[proof-theory/natural-deduction]{rules-N1}
+\olimport*[proof-theory/natural-deduction]{rules-N2}
+\olimport*[proof-theory/propositions-as-types]{rules-tN2}
+\olimport*[proof-theory/propositions-as-types]{rules-tN3}
+
+\olimport*[sets-functions-relations/sets]{sets}
+\olimport*[sets-functions-relations/relations]{relations}
+
+\olimport*[first-order-logic/syntax-and-semantics]{syntax-and-semantics}
+
+
+
+\chapter{Sequent Calculus}\label{fol:seq::chap}
+
+\olimport*[first-order-logic/proof-systems]{sequent-calculus}
+\olimport*[first-order-logic/sequent-calculus]{rules-and-proofs}
+\olimport*[first-order-logic/sequent-calculus]{propositional-rules}
+\olimport*[first-order-logic/sequent-calculus]{quantifier-rules}
+\olimport*[first-order-logic/sequent-calculus]{structural-rules}
+\olimport*[first-order-logic/sequent-calculus]{derivations}
+\olimport*[first-order-logic/sequent-calculus]{proving-things}
+\olimport*[first-order-logic/sequent-calculus]{proving-things-quant}
+\olimport*[first-order-logic/sequent-calculus]{proof-theoretic-notions}
+\olimport*[first-order-logic/sequent-calculus]{soundness}
+
+\OLEndChapterHook
+
+\chapter{Natural Deduction}
+
+\olimport*[first-order-logic/proof-systems]{natural-deduction}
+\olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
+\olimport*[first-order-logic/natural-deduction]{propositional-rules}
+\olimport*[first-order-logic/natural-deduction]{quantifier-rules}
+\olimport*[first-order-logic/natural-deduction]{derivations}
+\olimport*[first-order-logic/natural-deduction]{proving-things}
+\olimport*[first-order-logic/natural-deduction]{proving-things-quant}
+\olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
+\olimport*[first-order-logic/natural-deduction]{soundness}
+
+\OLEndChapterHook
+
+\chapter{Tableaux}
+
+\olimport*[first-order-logic/proof-systems]{tableaux}
+\olimport*[first-order-logic/tableaux]{rules-and-proofs}
+\olimport*[first-order-logic/tableaux]{propositional-rules}
+\olimport*[first-order-logic/tableaux]{quantifier-rules}
+\olimport*[first-order-logic/tableaux]{derivations}
+\olimport*[first-order-logic/tableaux]{proving-things}
+\olimport*[first-order-logic/tableaux]{proving-things-quant}
+\olimport*[first-order-logic/tableaux]{proof-theoretic-notions}
+\olimport*[first-order-logic/tableaux]{soundness}
+
+\OLEndChapterHook
+
+\chapter{Axiomatic Derivations}
+
+\olimport*[first-order-logic/proof-systems]{axiomatic-deduction}
+\olimport*[first-order-logic/axiomatic-deduction]{rules-and-proofs}
+\olimport*[first-order-logic/axiomatic-deduction]{axioms-rules-propositional}
+\olimport*[first-order-logic/axiomatic-deduction]{axioms-rules-quantifiers}
+\olimport*[first-order-logic/axiomatic-deduction]{proving-things}
+\olimport*[first-order-logic/axiomatic-deduction]{proving-things-quant}
+\olimport*[first-order-logic/axiomatic-deduction]{proof-theoretic-notions}
+\olimport*[first-order-logic/axiomatic-deduction]{deduction-theorem}
+\olimport*[first-order-logic/axiomatic-deduction]{deduction-theorem-quantifiers}
+\olimport*[first-order-logic/axiomatic-deduction]{soundness}
+
+\OLEndChapterHook
+
+\olimport*[reference/greek-alphabet]{greek-alphabet}
+
+\stopproblems
+\def\ifproblems#1{}
+
+\backmatter
+
+\clearpage
+%\photocredits
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+
+%\bibliography{\olpath/bib/open-logic.bib}
+
+\olimport*{\olpath/content/open-logic-about}

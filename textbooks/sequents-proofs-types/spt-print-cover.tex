@@ -1,0 +1,33 @@
+% spt-print-cover.tex
+
+% make a cover PDF for KDP Crown Quarto booksize.
+
+\documentclass[cover]{../../sty/open-logic-book}
+
+\def\olpath{../../}
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{spt-metadata.tex}
+
+\setOLPpagenumber{314}
+
+\definecolor{OLPcolor}{RGB}{124,67,110}
+\definecolor{OLPdkcolor}{RGB}{173, 94, 153}
+\definecolor{OLPltcolor}{RGB}{239,189,227}
+
+%\usepackage[x-1a]{pdfx}
+
+\begin{document}
+
+\OLPscreencover{\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/curry-circle.pdf}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/gentzen-circle.pdf}\hfill{}
+
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/hilbert-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/kleene-circle.pdf}\hfill
+
+\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/heyting-circle.pdf}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/craig-circle.pdf}\hfill{}
+
+\vspace{-.5cm}}
+\end{document}
