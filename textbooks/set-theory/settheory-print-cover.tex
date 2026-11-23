@@ -1,0 +1,34 @@
+% settheory-print-cover.tex
+
+% make a cover PDF for KDP Crown Quarto booksize.
+
+\documentclass[cover]{../../sty/open-logic-book}
+
+\def\olpath{../../}
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{settheory-metadata.tex}
+
+\setOLPpagenumber{262}
+
+\definecolor{OLPcolor}{HTML}{4c9141}
+\definecolor{OLPdkcolor}{HTML}{2a4724}
+\definecolor{OLPltcolor}{HTML}{c4dabd}
+
+%\usepackage[x-1a]{pdfx}
+
+\begin{document}
+
+\OLPprintcover{\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/cantor-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/skolem-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/frege-circle.pdf}
+
+\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/zermelo-circle.pdf}\hfill
+%\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/goedel-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/russell-circle.pdf}\hfill{}
+
+%\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/noether-circle.pdf}
+\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/dedekind-circle.pdf}\hfill{}
+}
+\end{document}

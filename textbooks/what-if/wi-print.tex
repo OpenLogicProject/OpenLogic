@@ -1,0 +1,43 @@
+% wi-print.tex
+
+% driver file wi-print.tex to produce the Boxes and Diamonds textbook
+% with same type block as in screen version.
+
+\documentclass[print]{../../sty/open-logic-book}
+
+%\usepackage[nonumberlist,toc,style=index]{glossaries}
+%\makeglossaries
+
+\newcommand{\olpath}{../../}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory
+% courses/what-if/, so the main directory is two
+% levels up.
+
+\def\oljobname{wi}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in bd-config.sty
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{wi-metadata}
+
+\input{\olpath/sty/open-logic-defer.sty}
+
+% load glossary entries
+
+%\loadglsentries{include/glossary}
+
+% end preamble
+
+\begin{document}
+\raggedbottom
+
+% Now load the actual text
+
+\input{wi}
+
+\end{document}
+

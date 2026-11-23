@@ -1,0 +1,134 @@
+% Part: incompleteness
+% Chapter: computability-incompleteness
+% Section: introduction
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{cpi}{int}
+\olsection{Computable Enumerability and Axiomatizable Theories}
+
+There is a close connection between the incompleteness theorems and
+computability. This should be apparent from the fact that in order to
+obtain the proof-theoretic versions of the first and second
+incompleteness theorems, we had to first develop a fair bit of
+computable function theory. We had to define primitive recursive
+functions, show that we can arithmetize provability using primitive
+recursive functions, and show that $\Th{Q}$ represents all primitive
+recursive functions and relations, in particular the proof
+relation~$\Prf[\Th{T}]$ of any axiomatizable theory~$\Th{T}$. Two of the
+assumptions of the incompleteness theorem are essentially assumptions
+about computability. The assumption that $\Th{T}$ is axiomatizable
+means that $\Th{T}$ is axiomatized by a \emph{decidable} set of
+axioms. The assumption that $\Th{T}$ extends $\Th{Q}$ was needed to
+guarantee that $\Th{T}$ represents all primitive recursive functions
+and relations.
+
+In fact, we can generalize the incompleteness theorems by making use
+of ideas from computability theory. This requires only that our model
+of computation can handle !!{formula}s and proofs. The arithmetization of
+provability shows that models of computation that directly only apply
+to numbers can do this---via G\"odel numbering. Other models of
+computability may not require as much work, and can avoid all the
+trouble of coding sequences, !!{formula}s, and !!{derivation}s we went through
+to show that $\Prf[\Th{T}]$ is primitive recursive. For instance, a
+suitably general notion of Turing machine would allow us to represent
+!!{formula}s and proofs directly as sequences of symbols by including
+symbols for logical connectives and quantifiers, !!{variable}s,
+!!{predicate}s, etc., as symbols that are allowed on the tape.
+\emph{Some} coding will still be necessary, as Turing machines only
+allow finitely many symbols in their alphabet, but there are
+infinitely many !!{variable}s, !!{constant}s, etc. In fact, to verify
+all the details required for showing that there is a Turing machine
+that decides the proof relation would be much more complicated than
+showing that it (understood as a relation of G\"odel numbers) is
+primitive recursive.
+
+The assumption that $\Th{T}$ is axiomatizable can be generalized to
+the assumption that the set of theorems of~$\Th{T}$ is !!{computably
+enumerable}. If our model of computability requires G\"odel numbering
+(e.g., the partial recursive functions), then this amounts to saying
+that 
+\[
+  \Gn{\Th{T}} = \Setabs{\Gn{!A}}{\Th{T} \Proves !A}
+\]
+is !!{c.e.} This is implied by the assumption that $\Th{T}$ is
+axiomatizable.
+
+\begin{prop}\ollabel{prop:ax-theory-ce} Suppose $\Th{T}$ is
+axiomatized by a decidable set of axioms~$\Gamma$. Then $\Th{T}$ is
+!!{c.e.}
+\end{prop}
+
+\begin{proof}
+  Informally, we can computably enumerate all theorems of~$\Th{T}$ by
+  searching through all possible proofs in the language
+  of~$\Th{T}$ in whatever proof system we prefer. Acceptable proof
+  systems have the property that it can be decided if an arrangements
+  of symbols and !!{formula}s is a correct proof, e.g., testing whether
+  a given putative application of an inference rule in natural deduction is
+  correct is decidable. The assumption that $\Gamma$ is decidable
+  allows us to check if a correct !!{derivation} is !!a{derivation}
+  \emph{from}~$\Gamma$. E.g., we can check, for each open assumption
+  of a natural deduction !!{derivation}, that it is an axiom in~$\Gamma$.
+  If !!a{derivation} passes these checks, we output the end-!!{formula}; it
+  is a theorem of~$\Th{T}$.
+
+  More formally, we can proceed as follows. If $\Gn{\Gamma}$ is
+  primitive recursive, \tagrefs{prfAX/{inc:art:pax:prop:prf-prim-rec},
+  prfSC/{inc:art:plk:prop:prf-prim-rec},
+  prfND/{inc:art:pnd:prop:prf-prim-rec}} shows
+  that the proof predicate $\Prf[\Gamma]$ is primitive recursive. It
+  takes little effort to verify that the same proof shows that if
+  $\Gn{\Gamma}$ is computable then $\Prf[\Gamma]$ is computable. Let
+  $f(y) = \umin{x}{\Prf[\Gamma](x,y)}$. Obviously, $f(y)\fdefined$ iff
+  $y$ is the G\"odel number of a theorem of~$\Th{T}$. Thus,
+  $\Gn{\Th{T}}$ is the domain of a partial computable function and so
+  !!{c.e.} by \olref[cmp][thy][eqc]{thm:ce-equiv}.
+\end{proof}
+
+It is perhaps surprising that the converse of
+\olref{prop:ax-theory-ce} is also true: every !!{c.e.} theory is
+axiomatizable. This is proved using what's known as ``Craig's trick.''
+
+\begin{prop}\ollabel{prop:ce-ax}
+If\/ $\Th{T}$ is !!a{c.e.} theory, then $\Th{T}$ is axiomatizable by a
+decidable (in fact, primitive recursive) set of axioms.
+\end{prop}
+
+\begin{proof}
+  Since $\Th{T}$ is !!{c.e.}, there is a computable enumeration~$f$ of
+  it. We may assume that the enumeration is primitive recursive by
+  \olref[cmp][thy][eqc]{thm:ce-equiv},
+  case~\olref[cmp][thy][eqc]{case:ran-prim}. Let $!A_n$ be the $n$-th
+  element of this enumeration. Consider the
+  set
+  \[
+  \Gamma = \{!A_0, !A_1 \land !A_1, !A_2 \land (!A_2 \land !A_2), \dots\}
+  \]
+  $\Gamma$ clearly axiomatizes~$\Th{T}$, since every theorem
+  of~$\Th{T}$ appears as some $!A_n$ in the enumeration, and follows
+  from $!A_n \land \dots \land !A_n$ ($n+1$ copies of $!A_n$), which
+  is the $(n+1)$-st element of $\Gamma$. $\Gamma$ is also decidable: to
+  test if $!A \in \Gamma$, determine if it is of the form $!B \land
+  (!B \land \dots \land !B)\dots)$, and if so, how many conjuncts
+  of~$!B$ it contains. Let $n$ be that number. If $!A$ is not a
+  conjunction of identical conjuncts, let $n=0$ and $!B \ident !A$.
+  Then $!A \in \Gamma$ iff $!B \ident !A_{n}$
+
+  More formally, we can proceed as follows. Let  $f(n) = \Gn{!A_n}$ be
+  a primitive recursive enumeration of~$\Th{T}$. Verify that the
+  functions~$i$ and $b$ such that $i(\Gn{A}) = n$ and $b(\Gn{A}) =
+  \Gn{B}$ are primitive recursive. $!A \in \Gamma$ iff $b(\Gn{A}) =
+  f(i(\Gn{A}))$. The latter expression defines a primitive recursive
+  predicate.
+\end{proof}
+
+\begin{prob}
+  Assume $f$ is a primitive recursive enumeration of some set of
+  G\"odel numbers of !!{formula}s~$\Gamma$. Verify that the functions $b$
+  and~$i$ in the proof of \olref{prop:ce-ax} are primitive recursive.
+\end{prob}
+
+\end{document}

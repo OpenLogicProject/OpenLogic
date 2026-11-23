@@ -1,0 +1,163 @@
+% !TeX root = ../ic-screen.tex
+
+\chapter{Preface}
+
+G\"odel's incompleteness theorems are some of the most celebrated
+results in mathematical logic, if not in mathematics. The first of
+these states, roughly, that axiomatized mathematical theories that can
+carry out a minimal amount of arithmetic are either inconsistent
+(trivial, prove everything) or incomplete. In other words, if a
+mathematical theory can be written down in a compact way (is
+axiomatized), is strong enough to state and prove some basic facts
+about natural numbers, and contains no contradictions that would
+render it useless, there are always statements in the language of the
+theory it doesn't settle, i.e., sentences~$A$ such that the theory
+proves neither $A$ nor~$\lnot A$. (This is the first incompleteness
+theorem.)
+
+This result was historically surprising since it might be
+taken to mean that we can never write down an axiomatic theory that
+``captures'' all mathematical truths---at least if we require that
+what follows from the theory must be verified by a finite !!{derivation}
+or proof which we can mechanically test for correctness. One
+consequence of the result is that mathematical truth is undecidable:
+there cannot be a mechanical way to decide, given a statement in a
+mathematical theory, whether it follows from the axioms. Another
+consequence is that mathematical theories that are strong enough and
+consistent cannot \emph{prove} their own consistency---at least for
+the most straightforward way of formalizing the statement of the
+theory's consistency in the theory itself. (This is the second
+incompleteness theorem.)
+
+Assuming a minimal background of formal logic on the part of the
+reader, it is actually not hard to state and prove the first two of
+these results. In fact, we do so below in \cref{inc:int::chap}. But
+the version of the result we prove makes stronger assumptions for the
+first incompleteness than actually needed. We also do not show that
+these assumptions hold for the theories discussed, and the proofs are
+not constructive: they show that theories are incomplete, but don't
+give examples of sentences that the theory leaves undecided. To do
+this in detail requires more background.
+
+In \cref{cmp:rec::chap,inc:art::chap,inc:req::chap} we provide this
+background: we discuss a model of computability (the primitive
+recursive functions), we show that by assigning numbers to symbols we
+can ``arithmetize'' the syntax and proof theory of arithmetical
+theories using primitive recursive functions and relations, and
+finally that the very simple arithmetical theory~$\Th{Q}$
+``represents'' all primitive recursive functions and relations.
+
+With this background it is then possible to state and prove the
+incompleteness theorems in the same level of detail as any thorough
+mathematical exposition of these results would. In
+\cref{inc:inp::chap} we prove G\"odel's original version of the first
+incompleteness theorem, Rosser's improved version, the second
+incompleteness theorem, as well as L\"ob's theorem and Tarski's
+theorem about the undefinability of truth.
+
+The incompleteness phenomena are closely tied to the notion of
+computability. The incompleteness theorem applies to theories that can
+be computably generated from computable sets of axioms. The mechanics
+of the arithmetization of syntax requires a model of computation
+(recursive functions) to spell out the details. And the result itself
+is structurally related to a famous result from the theory of
+computability, namely the theorem that the halting problem is
+undecidable due to Church and Turing. So it is natural to give an
+alternative description and proof of the incompleteness theorem that
+makes use of computability theory. We do this in \cref{comp-inc:chap}
+after introducing the basic theory of partial computable functions
+and decidable and computably enumerable sets.
+
+That theories of arithmetic are incomplete means that they have models
+that not only don't look like the ``standard model'' of the natural
+numbers, but that make sentences false which are true in the standard
+model. The structure of such models is itself an interesting area of
+research. We provide a brief glimpse of it in \cref{mod:chap}.
+
+The incompleteness theorems concern, in the first instance, theories
+formulated and axiomatized in first-order languages, and for which we
+assume the usual first-order consequence and provability relation. By
+G\"odel's completeness theorem, we know that the proof systems we have
+for first-order logic and theories axiomatized in it are as strong as
+we want them to be: they prove everything that follows from the
+axioms. In a sense, the incompleteness theorems say that it is exactly
+this feature of first-order logic that prevents us from writing down
+mathematical theories that ``settle every question.'' A natural way
+out would be to adopt a stronger logic with a stronger consequence
+relation which does: second-order logic. We discuss its most important
+properties in \cref{sol:chap}: it is strong enough to characterize
+arithmetical truth and it is much more expressive than first-order
+logic. Second-order arithmetic is complete. But many results that hold
+for first-order logic (such as the compactness and L\"owenheim--Skolem
+theorems) fail for second-order logic.
+
+This book introduces recursive functions explicitly as a model of
+computability. Representability in $\Th{Q}$ can also be taken as a
+model of computability, and along the way we (almost) show that it is
+equivalent to recursive functions. The companion book
+\href{https://slc.openlogicproject.org/}{\emph{Sets, Logic, Computation}}
+discusses the Turing machine model of computation. In
+\cref{lambda:chap}, we introduce yet another model of computability:
+the (untyped) lambda-calculus.
+
+\section*{Notes for Instructors}
+
+This is a textbook on G\"odel's incompleteness theorems and recursive
+function theory. I use it as the main text when I teach Philosophy 479
+(Logic III) at the University of Calgary. It is based on material from the
+\href{https://openlogicproject.org}{Open Logic Project}.
+
+As its name suggests, the course is the third in a sequence, so
+students (and hence readers of this book) are expected to be familiar
+with first-order logic already. (Logic~I uses the text
+\href{https://forallx.openlogicproject.org}{\emph{forall x: Calgary}},
+and Logic~II another textbook based on the OLP,
+\href{https://slc.openlogicproject.org}{\emph{Sets, Logic,
+Computation}}.) The material assumed from Logic~II, however, is
+included as \cref{fol:chap,nd:chap}, and it is not absolutely
+necessary to assume more than that as background for a course based on
+this book.
+
+Logic III is a thirteen-week course, meeting three hours per week.
+This is typically enough to cover the material in
+\cref{inc:int::chap,cmp:rec::chap,inc:art::chap,inc:req::chap,inc:inp::chap}
+and one or two of \cref{comp-inc:chap,mod:chap,sol:chap,lambda:chap},
+depending on student interest. You may want to spend more time on the
+basics of first-order logic and especially on natural deduction, if
+students are not already familiar with it. Note that when provability
+in arithmetical theories (such as $\Th{Q}$ and $\Th{PA}$) is discussed
+in the main text, the proofs of provability claims are not given using
+a specific !!{derivation} system. Rather, that certain claims follow
+from the axioms by first-order logic is justified intuitively.
+However, \cref{deriv:chap} contains a number of examples of actual
+natural deduction !!{derivation}s from the axioms of~$\Th{Q}$.
+\Cref{inc:art::chap} carries out the arithmetization of syntax for
+natural deduction. This is a perhaps unique feature of this book; most
+other tests just do it for axiomatic !!{derivation}s. Those are much
+easier to code, but much harder to give proofs with.
+
+\section*{Acknowledgments}
+
+The material in the OLP used in
+\cref{inc:int::chap,cmp:rec::chap,inc:art::chap,inc:req::chap,inc:inp::chap,comp-inc:chap,lambda:chap}
+was based originally on Jeremy Avigad's lecture notes on
+``Computability and Incompleteness,'' which he contributed to the OLP.
+I have heavily revised and expanded this material. The lecture notes,
+e.g., based theories of arithmetic on an axiomatic !!{derivation} system. Here,
+we use Gentzen's standard natural deduction system (described in
+\cref{nd:chap}), which requires dealing with trees primitive
+recursively (in \cref{cmp:rec:tre:sec}) and a more complicated
+approach to the arithmetization of !!{derivation}s (in
+\cref{inc:art:pnd:sec}). The material in \cref{lambda:chap} was also
+expanded by Zesen Qian during his stay in Calgary as a Mitacs summer
+intern.
+
+The material in the OLP on model theory and models of arithmetic in
+\cref{mod:chap} was originally taken from Aldo Antonelli's lecture
+notes on ``The Completeness of Classical Propositional and Predicate
+Logic,'' which he contributed to the OLP before his untimely death in
+2015.
+
+The biographies of logicians in \cref{bios:chap} and much of the
+material in \cref{nd:chap} are originally due to Sam Burns.
+Dana H\"agg originally worked on the material in \cref{fol:chap}.

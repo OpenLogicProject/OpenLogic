@@ -27,6 +27,11 @@ courses: FORCE_MAKE
 		make -C $$course ;\
 	done
 
+textbooks: FORCE_MAKE
+	for text in textbooks/* ; do \
+		make -C $$text all index.html;\
+	done
+
 branches: FORCE_MAKE
 	git checkout master
 	for branch in `git branch --list --no-column |grep -v master` ; do \

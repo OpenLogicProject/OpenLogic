@@ -1,0 +1,34 @@
+\emph{Proof systems} provide purely syntactic methods for
+characterizing consequence and compatibility between sentences.
+The \emph{sequent calculus} is one such proof
+system. A \emph{derivation} in it consists of a tree of sequents (a
+sequent $\Gamma \Sequent \Delta$ consists of two sequences of formulas
+separated by~$\Sequent$). The topmost sequents in !!a{derivation}
+are \emph{initial sequents} of the form $!A \Sequent !A$.  All other
+sequents, for the !!{derivation} to be correct, must be correctly
+justified by one of a number of \emph{inference rules}. These come in
+pairs; a rule for operating on the left and on the right side of a
+sequent for each connective and quantifier. For instance, if a sequent
+$\Gamma \Sequent \Delta, !A \lif !B$ is justified by the
+$\RightR{\lif}$ rule, the preceding sequent (the \emph{premise}) must
+be $!A, \Gamma \Sequent \Delta, !B$. Some rules also allow the order
+or number of sentences in a sequent to be manipulated, e.g.,
+the \RightR{\Exchange} rule allows two formulas on the right side of a
+sequent to be switched.
+
+If there is !!a{derivation} of the sequent $\quad \Sequent !A$, we say
+$!A$ is a \emph{theorem} and write~$\Proves !A$. If there is
+!!a{derivation} of $\Gamma_0 \Sequent !A$ where every $!B$ in $\Gamma_0$ is
+in~$\Gamma$, we say $!A$ is \emph{derivable from}~$\Gamma$ and write
+$\Gamma \Proves !A$. If there is !!a{derivation} of
+$\Gamma_0 \Sequent \quad$ where every $!B$ in $\Gamma_0$ is
+in~$\Gamma$, we say $\Gamma$ is \emph{inconsistent}, otherwise
+\emph{consistent}. These notions are interrelated, e.g., $\Gamma
+\Proves !A$ iff $\Gamma \cup \{\lnot !A\}$ is inconsistent. They are
+also related to the corresponding semantic notions, e.g., if $\Gamma
+\Proves !A$ then $\Gamma \Entails !A$. This property of proof
+systems---what can be derived from $\Gamma$ is guaranteed to be
+entailed by~$\Gamma$---is called \emph{soundness}. The \emph{soundness
+theorem} is proved by induction on the length of !!{derivation}s, showing
+that each individual inference preserves validity of the conclusion
+sequent provided the premise sequents are valid.

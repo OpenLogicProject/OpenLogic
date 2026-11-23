@@ -1,0 +1,63 @@
+% slc-screen.tex
+
+% driver file slc-screen.tex to produce the Sets, Logic, Computation
+% textbook on with same type block as in printed version, but but with
+% on-screen features (color, links, etc).
+
+\documentclass[screen]{../../sty/open-logic-book}
+
+\usepackage[all]{nowidow}
+
+\definecolor{OLPcolor}{RGB}{248,154,14}
+\definecolor{OLPdkcolor}{RGB}{104,65,6}
+\definecolor{OLPltcolor}{RGB}{248,203,137}
+
+\usepackage[nonumberlist,toc,style=index]{glossaries}
+\makeglossaries
+
+\def\oljobname{slc}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder. We're compiling from subdirectory
+% courses/sets-logic-computation/, so the main directory is two
+% levels up.
+
+\newcommand{\olpath}{../..}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in open-logic-sample-config.sty
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{slc-metadata}
+
+% we want all the problems deferred to the very end
+
+\input{\olpath/sty/open-logic-defer.sty}
+
+% load glossary entries
+
+\loadglsentries{include/glossary}
+
+% end preamble
+
+\begin{document}
+\raggedbottom
+
+\OLPscreencover{\hfill\hspace{.29\textwidth}\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/cantor-circle.pdf}\hfill{}
+
+\hfill{}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/goedel-circle.pdf}
+\hfil\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/turing-circle.pdf}\hfil{}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/skolem-circle.pdf}
+\hfill{}
+
+\hfill{}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/noether-circle.pdf}\hspace{.29\textwidth}\hfill{}
+}
+
+% Now load the actual text
+
+\input{slc}
+
+\end{document}

@@ -1,0 +1,64 @@
+% il-screen.tex
+
+% driver file il-screen.tex to produce the Intermediate Logic textbook on
+% with same type block as in printed version, but but with on-screen
+% features (color, links, etc).
+
+\documentclass[screen]{../../sty/open-logic-book}
+
+\definecolor{OLPcolor}{RGB}{237, 27, 47}
+%\definecolor{OLPdkcolor}{RGB}{179,0,33}
+\definecolor{coolgrey}{RGB}{93, 103, 113}
+\colorlet{OLPltcolor}{coolgrey!20}
+\colorlet{OLPdkcolor}{OLPcolor}
+
+%\renewcommand*{\OLPtitlecoverfont}{\fontsize{40pt}{45pt}\sffamily\bfseries}
+
+%\usepackage[nonumberlist,toc,style=index]{glossaries}
+%\makeglossaries
+
+\def\oljobname{il}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory
+% courses/incompleteness-computability/, so the main directory is two
+% levels up.
+
+\newcommand{\olpath}{../../}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in open-logic-sample-config.sty
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{il-metadata}
+
+% we want all the problems deferred to the very end
+
+\input{\olpath/sty/open-logic-defer.sty}
+
+% load glossary entries
+
+%\loadglsentries{include/glossary}
+
+% end preamble
+
+\begin{document}
+\raggedbottom
+
+\OLPscreencover{\centerline{\includegraphics[width=.3\textwidth]{\olpath/assets/portraits/cantor-circle.pdf}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/noether-circle.pdf}}
+
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/goedel-circle.pdf}
+\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/tarski-circle.pdf}
+
+\centerline{\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/peter-circle.pdf}
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/kleene-circle.pdf}}
+}
+% Now load the actual text
+
+\input{il}
+
+\end{document}
+

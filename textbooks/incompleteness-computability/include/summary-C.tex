@@ -1,0 +1,31 @@
+\emph{Proof systems} provide purely syntactic methods for
+characterizing consequence and compatibility between sentences.
+\emph{Natural deduction} is one such !!{derivation} system. A \emph{derivation}
+in it consists of a tree of formulas. The topmost formula !!a{derivation}
+are \emph{assumptions}. All other formulas, for the !!{derivation} to be
+correct, must be correctly justified by one of a number of
+\emph{inference rules}. These come in pairs; an introduction and an
+elimination rule for each connective and quantifier. For instance, if
+a formula~$!A$ is justified by a $\Elim{\lif}$ rule, the preceding
+formulas (the \emph{premises}) must be $!B \lif !A$ and $!B$ (for
+some~$!B$). Some inference rules also allow assumptions to be
+\emph{discharged}. For instance, if $!A \lif !B$ is inferred from $!B$
+using $\Intro{\lif}$, any occurrences of~$!A$ as assumptions in the
+!!{derivation}leading to the premise~$!B$ may be discharged, given a
+label that is also recorded at the inference.
+
+If there is !!a{derivation} with end formula~$!A$ and all assumptions are
+discharged, we say $!A$ is a theorem and write~$\Proves !A$. If all
+undischarged assumptions are in some set~$\Gamma$, we say $!A$ is
+\emph{derivable from}~$\Gamma$ and write $\Gamma \Proves !A$. If
+$\Gamma \Proves \lfalse$ we say $\Gamma$ is \emph{inconsistent},
+otherwise \emph{consistent}. These notions are interrelated, e.g.,
+$\Gamma \Proves !A$ iff $\Gamma \cup \{\lnot !A\} \Proves
+\lfalse$. They are also related to the corresponding semantic notions,
+e.g., if $\Gamma \Proves !A$ then $\Gamma \Entails !A$. This property
+of natural deduction---what can be derived from $\Gamma$ is guaranteed
+to be entailed by~$\Gamma$---is called \emph{soundness}. The
+\emph{soundness theorem} is proved by induction on the length of
+derivations, showing that each individual inference preserves
+entailment of its conclusion from open assumptions provided its premises are
+entailed by their open assumptions.

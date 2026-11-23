@@ -1,0 +1,41 @@
+The \textbf{lambda calculus} is an early model of computation. Its
+syntax is very simple: $\lambd$-terms are generated inductively from
+variables $x$, $y$, \dots{} and constants $f$, $g$, \dots{} by the
+operations of \textbf{application} and \textbf{lambda abstraction}. If
+$M$ and~$N$ are $\lambd$-terms, then the application of $M$ to~$N$,
+$(MN)$, is a term. And if $N$ is a term and $x$ a variable, then
+$\lambd[x][M]$ is a term. Intuitively, terms of the lambda calculus
+stand for functions. An application term ($MN)$ stands for the result
+of applying the function $M$ to~$N$. And if $M$ is a term, then
+$\lambd[x][M]$ is the function of~$x$ specified by~$M$. In
+$\lambd[x][M]$, every occurrence of~$x$ is bound by $\lambd[x]$ in
+much the same way that they are in, say, $\lforall[x][A]$.
+
+Lambda terms of the form $(\lambd[x][M])N$ can be simplified to
+$\Subst{M}{N}{x}$ by replacing every free occurrence of~$x$ in~$M$
+by~$N$. Successive simplification steps generate the notion of
+(\textbf{$\beta$-reduction}). We write $M \red N$ to mean that $M$
+can be simplified to~$N$ in a finite number of steps. A term that
+cannot be $\beta$-reduced to another is called a \textbf{normal form}.
+The \textbf{normal form} of a term is unique if it exists. (This
+follows from the \textbf{Church-Rosser property}.) Not every term
+reduces to a normal form.
+
+We can take special $\lambd$-terms to represent the natural numbers.
+The \textbf{Church numeral}~$\num{n}$ for~$n$ is the term
+$\lambd[x][f^n(x)]$, where $f^n(x)$ stands for $(f(f(\dots(f x))))$ with
+$n$ occurrences of~$f$. Using these numerals, we can define when a
+function~$h\colon \Nat \to \Nat$ is \textbf{$\lambd$-definable},
+namely when there is a term~$H$ such that $(H\, \num{n})$
+$\beta$-reduces to the normal form~$\num{m}$, whenever $h(n) = m$.
+Using \textbf{Currying}, it is possible to extend this definition to
+functions of more than one argument.
+
+It turns out that the $\lambd$-definable functions are exactly the
+partial recursive functions. This is proved by showing that the
+initial functions $\Zero$, $\Succ$, and~$\Proj{i}{j}$ are
+$\lambd$-definable, and that moreover that the $\lambd$-definable
+functions are closed under composition, primitive recursion, and
+unbounded minimization. This shows that all partial recursive functions
+are $\lambd$-definable. Using coding of $\lambd$-terms one can show
+the converse, that every $\lambd$-computable function is partial recursive.

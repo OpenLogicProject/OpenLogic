@@ -1,0 +1,38 @@
+The \textbf{partial recursive functions} are those that can be defined
+from the basic functions $\Zero$, $\Succ$, $\Proj{i}{j}$ using
+composition, primitive recursion, and unbounded search. Such
+definitions can themselves be encoded as numbers. When a suitable
+coding is fixed and a partial recursive function~$f$ has code~$e$ we
+call $e$ an \textbf{index} of~$f$ and denote $f$ also by~$\cfind{e}$.
+Not just definitions of functions, but also computations of functions
+applied to arguments can be coded as numbers. The property of deciding
+whether $s$ codes the computation of $\cfind{e}$ applied to argument
+$x$, $T(e, x, s)$, and the function that given a code~$s$ of a
+computation as input returns the output of that computation, $U(s)$,
+are both primitive recursive. Thus, we have $\cfind{e}(x) \simeq
+U(\umin{s}{T(e,x,s)})$. This is the \textbf{Kleene normal form
+theorem}.
+
+The Kleene noremal form theorem actually applies not just to partial
+recursive functions, but to any known model of computability. E.g., it
+is also true for Turing machines that their definitions and
+computations can be coded as numbers in such a way that the Kleene
+normal form theorem holds. The indexing of partial computable
+functions via the Kleene normal form theorem thus enables a very
+general investigation of computable functions. This area of research is
+called \textbf{computability theory}. Among its results are that there
+is a universal two-place partial recursive function~$\fn{Un}$ such
+that $\fn{Un}(e,x) \simeq \cfind{e}(x)$, that there is no total
+universal computable function, and that the question whether
+$\cfind{e}(x)$ is defined is undecidable (the \textbf{Halting
+problem}). The \textbf{self-halting set}~$K = \Setabs{e}{\cfind{e}(e)
+\text{ is defined}}$ is another example of a set of natural numbers
+that is undecidable. It is \textbf{computably enumerable}, however,
+i.e., it is the range of a computable function.
+
+Via G\"odel numbering, computability theory can be used to give very
+general formulations of G\"odel's theorems about undecidability and
+incompleteness of theories. We can prove, using results from
+computability theory, that every $\omega$-consistent theory that
+represents all primitive recursive relations is undecidable, and that
+when such a theory is computably enumerable, it must be incomplete.

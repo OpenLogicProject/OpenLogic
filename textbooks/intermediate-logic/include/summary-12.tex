@@ -1,0 +1,35 @@
+The \emph{completeness theorem} is the converse of the \emph{soundness
+  theorem}. In one form it states that if $\Gamma \Entails !A$ then
+$\Gamma \Proves !A$, in another that if $\Gamma$ is consistent then it
+is satisfiable. We proved the second form (and derived the first from
+the second). The proof is involved and requires a number of steps. We
+start with a consistent set~$\Gamma$. First we add infinitely many
+new constant symbols~$c_i$ as well as formulas of the form
+$\lexists[x][!A(x)] \lif !A(c)$ where each formula~$!A(x)$ with a free
+variable in the expanded language is paired with one of the new
+constants. This results in a \emph{saturated} consistent set of
+sentences containing~$\Gamma$. It is still consistent. Now we take
+that set and extend it to a \emph{complete consistent set}. A
+complete consistent set has the nice property that for any
+sentence~$!A$, either $!A$ or $\lnot !A$ is in the set (but never
+both). Since we started from a saturated set, we now have a saturated,
+complete, consistent set of sentences~$\Gamma^*$ that
+includes~$\Gamma$. From this set it is now possible to define a
+structure~$\Struct{M}$ such that $\Sat{M(\Gamma^*)}{!A}$ iff
+$!A \in \Gamma^*$. In particular, $\Sat{M(\Gamma^*)}{\Gamma}$, i.e.,
+$\Gamma$ is satisfiable. If $=$ is present, the construction is
+slightly more complex.
+
+Two important corollaries follow from the completeness theorem. The
+\emph{compactness theorem} states that $\Gamma \Entails !A$ iff
+$\Gamma_0 \Entails !A$ for some finite $\Gamma_0 \subseteq \Gamma$. An
+equivalent formulation is that $\Gamma$ is satisfiable iff every
+finite $\Gamma_0 \subseteq \Gamma$ is satisfiable. The compactness
+theorem is useful to prove the existence of structures with certain
+properties. For instance, we can use it to show that there are
+infinite models for every theory which has arbitrarily large finite
+models. This means in particular that finitude cannot be expressed in
+first-order logic. The second corollary, the \emph{L\"owenheim-Skolem
+  Theorem}, states that every satisfiable $\Gamma$ has a countable
+model. It in turn shows that uncountability cannot be expressed in
+first-order logic.

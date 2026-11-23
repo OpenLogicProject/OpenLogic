@@ -1,0 +1,46 @@
+In order to show that $\Th{Q}$ represents all computable functions, we
+need a precise model of computability that we can take as the basis
+for a proof.  There are, of course, many models of computability, such
+as Turing machines. One model that plays a significant role
+historically---it's one of the first models proposed, and is also the
+one used by G\"odel himself---is that of the \textbf{recursive
+functions}.  The recursive functions are a class of arithmetical
+functions---that is, their domain and range are the natural
+numbers---that can be defined from a few basic functions using a few
+operations. The basic functions are $\Zero$, $\Succ$, and the
+projection functions. The operations are \textbf{composition},
+\textbf{primitive recursion}, and \textbf{unbounded search}.
+Composition is simply a general version of ``chaining together''
+functions: first apply one, then apply the other to the result.
+Primitive recursion defines a new function~$f$ from two functions $g$,
+$h$ already defined, by stipulating that the value of $f$ for $0$ is
+given by~$g$, and the value for any number $n+1$ is given by $h$
+applied to $f(n)$.  Functions that can be defined using just these two
+principles are called \textbf{primitive recursive}. A relation is
+primitive recursive iff its characteristic function is.
+
+It turns out that a whole list of interesting functions and relations
+are primitive recursive (such as addition, multiplication,
+exponentiation, divisibility), and that we can define new primitive
+recursive functions and relations from old ones using principles such
+as bounded quantification and bounded minimization. In particular,
+this allowed us to show that we can deal with \emph{sequences} of
+numbers in primitive recursive ways. That is, there is a way to
+``code'' sequences of numbers as single numbers in such a way that we
+can compute the $i$-the element, the length, the concatenation of two
+sequences, etc., all using primitive recursive functions operating on
+these codes.
+
+To obtain the partial recursive functions, we finally added
+definition by \textbf{unbounded search} to composition and primitive
+recursion. To get the total computable functions, we restricted
+unbounded search to \textbf{regular} functions. A function~$g(x, y)$
+is regular iff, for every~$y$ it takes the value~$0$ for at least
+one~$x$. If $f$ is regular, the least $x$ such that $g(x, y) = 0$
+always exists, and can be found simply by computing all the values of
+$g(0, y)$, $g(1, y)$, etc., until one of them is $= 0$. The resulting
+function~$f(y) = \umin{x}{g(x, y) = 0}$ is the function defined by
+unbounded search from~$g$. It is always total and computable. The
+resulting set of functions are called \textbf{general recursive}. One
+version of the Church-Turing Thesis says that the computable
+arithmetical functions are exactly the general recursive ones.

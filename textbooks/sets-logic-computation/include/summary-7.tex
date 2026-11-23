@@ -1,0 +1,22 @@
+The \emph{semantics} for a first-order language is given by a
+\emph{structure} for that language. It consists of a \emph{domain} and
+elements of that domain are assigned to each constant symbol. Function
+symbols are interpreted by functions and relation symbols by relation
+on the domain. A function from the set of variables to the domain is
+a \emph{variable assignment}. The relation of \emph{satisfaction}
+relates structures, variable assignments and formulas;
+$\Sat{M}{!A}[s]$ is defined by induction on the structure of~$!A$.
+$\Sat{M}{!A}[s]$ only depends on the interpretation of the symbols
+actually occurring in~$!A$, and in particular does not depend on $s$
+if $!A$ contains no free variables. So if $!A$ is a sentence,
+$\Sat{M}{!A}$ if $\Sat{M}{!A}[s]$ for any (or all)~$s$.
+
+The satisfaction relation is the basis for all semantic notions. A
+sentence is \emph{valid}, $\Sat{{}}{!A}$, if it is satisfied in every
+structure. A sentence $!A$ is \emph{entailed} by set of
+sentences~$\Gamma$, $\Gamma \Entails !A$, iff $\Sat{M}{!A}$ for all
+$\Struct{M}$ which satisfy every sentence in~$\Gamma$. A set~$\Gamma$
+is \emph{satisfiable} iff there is some structure that satisfies every
+sentence in~$\Gamma$, otherwise \emph{unsatisfiable}. These notions are
+interrelated, e.g., $\Gamma \Entails !A$ iff $\Gamma \cup \{\lnot
+!A\}$ is unsatisfiable.

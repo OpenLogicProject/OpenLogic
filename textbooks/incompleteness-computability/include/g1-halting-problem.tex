@@ -1,0 +1,145 @@
+% Part: incompleteness
+% Chapter: computability-incompleteness
+% Section: g1-halting-problem
+
+\documentclass[../../../include/open-logic-section]{subfiles}
+
+\begin{document}
+
+\olfileid{inc}{cpi}{hal}
+\olsection{Incompleteness via the Halting Problem}
+
+\begin{thm}\ollabel{thm:undecidable}
+If $\Th{T}$ is an $\omega$-consistent theory that represents all
+primitive recursive relations, then $\Th{T}$~is undecidable.
+\end{thm}
+
+\begin{proof}
+  Since $\Th{T}$ represents all primitive recursive functions, it
+  represents in particular Kleene's $T$ predicate. That is, there is a
+  !!{formula}~$!T(e, x, s)$ such that:
+  \begin{enumerate}
+    \item\ollabel{case:def} if $\cfind{e}(n) \fdefined$ there is a~$k \in \Nat$ such
+    that $\Th{T} \Proves !T(\num{e}, \num{n}, \num{k})$, and
+    \item\ollabel{case:undef} if $\cfind{e}(n) \fundefined$, then for all $k \in \Nat$,
+    $\Th{T} \Proves \lnot !T(\num{e}, \num{n}, \num{k})$.
+  \end{enumerate}
+  We will show that if $\Th{T}$ is $\omega$-consistent and represents
+  all primitive recursive relations, we would be able to decide the
+  set $K = \Setabs{e}{\cfind{e}(e) \fdefined}$, the ``self-halting
+  problem.'' 
+
+  Since $\Th{T}$ is a theory, it is closed under consequence. In
+  particular if $\Th{T} \Proves !T(\num{e}, \num{e}, \num{k})$, then
+  also $\Th{T} \Proves \lexists[z][!T(\num{e}, \num{e}, z)]$. Together
+  with~\olref{case:def}, this means that if $\cfind{e}(e) \fdefined$,
+  then $\Th{T} \Proves \lexists[z][!T(\num{e}, \num{e}, z)]$. On the
+  other hand, as $\Th{T}$ is $\omega$-consistent, we cannot have both
+  that $\Th{T} \Proves \lnot !T(\num{e}, \num{e}, \num{k})$ for all $k
+  \in \Nat$ and also $\Th{T} \Proves \lexists[z][!T(\num{e}, \num{e},
+  z)]$. So, by \olref{case:undef}, if $\cfind{e}(e) \fundefined$, then $\Th{T} \Proves/
+  \lexists[z][!T(\num{e}, \num{n}, z)]$. Together, we have that
+  $\cfind{e}(e) \fdefined$ iff $\Th{T} \Proves \lexists[z][!T(\num{e},
+  \num{n}, z)]$.
+
+  If $\Th{T}$ were decidable, then this would allow us to answer
+  whether $\cfind{e}(e)$ is defined, i.e., if $e \in K$, by deciding
+  whether $\Th{T} \Proves \lexists[z][!T(\num{e}, \num{e}, z)]$.
+  However, $K$ is undecidable (\olref[cmp][thy][ncp]{thm:K}).
+\end{proof}
+
+\begin{thm}
+  \ollabel{thm:complete-decidable}
+  If\/ $\Th{T}$ is !!a{complete} consistent !!{c.e.} theory, then
+  $\Th{T}$ is decidable.
+\end{thm}
+
+\begin{proof}
+  Informally, we can computably enumerate all theorems of !!a{c.e.}
+  theory. To decide if $\Th{T} \Proves !A$ for a given $!A$, just
+  search through this enumeration of all theorems until we find either
+  $!A$ or~$\lnot !A$. Since $\Th{T}$ is !!{complete}, this must
+  eventually happen. When $!A$ shows up in the enumeration we
+  know that $\Th{T} \Proves !A$. Consistency ensures that only one of $!A$ or
+  $\lnot !A$ is a theorem. This, when $\lnot !A$ shows up in the enumeration we
+  know that $\Th{T} \Proves/ !A$.
+
+  More formally, since $\Th{T}$ is complete, consistent, and
+  enumerated by a computable function~$f$, the
+  complement of the set of G\"odel numbers of theorems of $\Th{T}$ is
+  \[\Complement{\Gn{\Th{T}}} = \Setabs{n}{\lexists[k][(\lnot
+  \fn{Sent}(n) \lor (\Gn{\lnot} \concat f(k)) = n)]},\] ($\Gn{!A} \in
+  \Nat \setminus \Gn{\Th{T}}$ iff $!A$ is not a sentence at all or its
+  negation is a theorem of~$\Th{T}$. By
+  \olref[cmp][thy][eqc]{thm:exists-char}, $\Complement{\Gn{\Th{T}}}$
+  is !!{c.e.}, and so by \olref[cmp][thy][cmp]{thm:ce-comp}, $\Th{T}$
+  is decidable.
+\end{proof}
+
+\begin{cor}
+  If\/ $\Th{T}$ is $\omega$-consistent, !!{c.e.} and represents all
+  primitive recursive relations, it is incomplete.
+\end{cor}
+
+\begin{proof}
+  Suppose $\Th{T}$ is complete. Since $\omega$-consistent theories
+  are consistent, $\Th{T}$ is consistent and decidable by
+  \olref{thm:complete-decidable}. This contradicts
+  \olref{thm:undecidable}.
+\end{proof}
+
+This proof of G\"odel's first incompleteness theorem does not provide
+an example of an undecidable sentence the way a proof via the diagonal
+lemma does (see \olref[inc][inp][1in]{sec}).
+
+\begin{thm}\ollabel{thm:g1} Suppose $\Th{T}$ is an $\omega$-consistent
+  !!{c.e.} theory that represents all primitive recursive relations.
+  Then there is !!a{sentence}~$G$ such that $\Th{T} \Proves/ G$ and
+  $\Th{T} \Proves/ \lnot G$. $G$~can be specified explicitly from the
+  computable enumeration of\/~$\Th{T}$.
+\end{thm}
+
+\begin{proof}
+  Let $f$ be a computable enumeration of~$\Th{T}$. Consider the
+  function~$g(e)$ which returns $0$ if a search for a proof of
+  $\lnot\lexists[z][!T(\num{e}, \num{e}, z)]$ using~$f$ is successful,
+  and is undefined if it is not. Let $k$ be the index of~$g$, i.e., $g
+  = \cfind{k}$. Then $g(e) \fdefined$ iff $\Th{T} \Proves
+  \lnot\lexists[z][!T(\num{e}, \num{e}, z)]$ by $g$'s definition.
+  Consequently there is an $m$ such that $T(k, e, m)$ iff $\Th{T}
+  \Proves \lnot\lexists[z][!T(\num{e}, \num{e}, z)]$. Taking $e = k$,
+  we have that there is an $m$ such that $T(k, k, m)$ iff $\Th{T}
+  \Proves \lnot\lexists[z][!T(\num{k}, \num{k}, z)]$.
+
+  Suppose that $g(k) \fdefined$, i.e., $\cfind{k}(k) \fdefined$, i.e.,
+  for some $m$, $T(k, k, m)$ holds. By the preceding equivalence, we
+  have that $\Th{T} \Proves \lnot\lexists[z][!T(\num{k}, \num{k},
+  z)]$. On the other hand, since $\Th{T}$ represents~$T$, we have that
+  $\Th{T} \Proves !T(\num{k}, \num{k}, \num{m})$, and so also $\Th{T}
+  \Proves \lexists[z][!T(\num{k}, \num{k}, z)]$. This contradicts the
+  consistency of~$\Th{T}$. We can conclude that $g(k) \fundefined$,
+  i.e., $\Th{T} \Proves/ \lnot\lexists[z][!T(\num{k}, \num{k}, z)]$.
+
+  Since $g(k) \fundefined$, $T(k, k, m)$ holds for no~$m$. Since
+  $\Th{T}$ represents~$T$, we have that $\Th{T} \Proves \lnot
+  !T(\num{k}, \num{k}, \num{m})$ for all~$m$. Since $\Th{T}$ is
+  $\omega$-consistent, $\Th{T} \Proves/ \lexists[z][!T(\num{k},
+  \num{k}, z)]$.
+
+  We've shown that we can the sentence $G$ to be
+  $\lnot\lexists[z][!T(\num{k}, \num{k}, z)]$. If we have an explicit
+  description of~$g$, we can determine the index~$k$ of~$g$. Together
+  with an explicit description of~$T$ and an effective proof of the
+  representability of~$T$ in~$\Th{T}$ as !!a{formula}~$!T$, we have
+  that $G$ can be found effectively from the computable enumeration
+  of~$\Th{T}$.
+\end{proof}
+
+Remember that $\lexists[z][!T(\num{e}, \num{k}, z)]$ ``says that''
+$\cfind{e}(k)\fdefined$. Consequently, $\lexists[z][!T(\num{k},
+\num{k}, z)]$ ``says that'' $g(k) = \cfind{k}(k)\fdefined$, or that
+$g$ self-halts. In other words then, $g$ searches for a proof
+in~$\Th{T}$ of a formula that says ``$g$ does not self-halt'' and
+halts if such a proof exists, but doesn't halt if it doesn't. 
+
+\end{document}

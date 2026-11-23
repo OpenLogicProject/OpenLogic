@@ -1,0 +1,34 @@
+A \emph{Turing machine} is a kind of idealized computation
+mechanism. It consists of a one-way infinite \emph{tape}, divided into
+squares, each of which can contain a \emph{symbol} from a
+pre-determined alphabet. The machine operates by moving a
+\emph{read-write head} along the tape. It may also be in one of a
+pre-determined number of \emph{states}. The actions of the read-write
+head are determined by a set of instructions; each instruction is
+conditional on the machine being in a certain state and reading a
+certain symbol, and specifies which symbol the machine will write onto
+the current square, whether it will move the read-write head one
+square left, right, or stay put, and which state it will switch to.
+If the tape contains a certain \emph{input}, represented as a sequence
+of symbols on the tape, and the machine is put into the designated
+start state with the read-write head reading the leftmost square of
+the input, the instruction set will step-wise determine a sequence of
+\emph{configurations} of the machine: content of tape, position of
+read-write head, and state of the machine. Should the machine
+encounter a configuration in which the instruction set does not
+contain an instruction for the current symbol read/state combination,
+the machine \emph{halts}, and the content of the tape is the
+\emph{output}.
+
+Numbers can very easily be represented as sequences of strokes on the
+Tape of a Turing machine. We say a function $\Nat \to \Nat$ is
+\emph{Turing computable} if there is a Turing machine which, whenever
+it is started on the unary representation of~$n$ as input, eventually
+halts with its tape containing the unary representation of~$f(n)$ as
+output. Many familiar arithmetical functions are easily (or
+not-so-easily) shown to be Turing computable. Many other models of
+computation other than Turing machines have been proposed; and it has
+always turned out that the arithmetical functions computable there are
+also Turing computable. This is seen as support for the
+\emph{Church-Turing Thesis}, that every arithmetical function that can
+effectively be computed is Turing computable.

@@ -1,0 +1,90 @@
+% !TeX root = ../bd-screen.tex
+
+\chapter{Introduction}
+
+Modal logics are extensions of classical logic by the operators $\Box$
+(``box'') and $\Diamond$ (``diamond''), which attach to !!{formula}s.
+Intuitively, $\Box$ may be read as ``necessarily'' and $\Diamond$ as
+``possibly,'' so $\Box p$ is ``$p$ is necessarily true'' and $\Diamond
+p$ is ``$p$ is possibly true.'' As necessity and possibility are
+fundamental metaphysical notions, modal logic is obviously of great
+philosophical interest. It allows the formalization of metaphysical
+principles such as ``$\Box p \lif p$'' (if $p$ is necessary, it is
+true) or ``$\Diamond p \lif \Box\Diamond p$'' (if $p$ is possible,
+it is necessarily possible).
+
+The operators $\Box$ and $\Diamond$ are \emph{intensional}. This means
+that whether $\Box !A$ or $\Diamond !A$ holds does not just depend on
+whether $!A$ holds or doesn't.  An operator which is not intensional
+is \emph{extensional}. Negation is extensional: $\lnot !A$ holds iff
+$!A$ does not; so whether $\lnot !A$ holds only depends on whether
+$!A$ holds or doesn't. $\Box$ and $\Diamond$ are not like that:
+whether $\Box !A$ or $\Diamond !A$ holds depends also on the meaning
+of~$!A$.  While ordinary truth-functional semantics is enough to deal
+with extensional operators, intensional operators like $\Box$ and
+$\Diamond$ require a different kind of semantics. One such semantics
+which takes center stage in this book is relational semantics (also
+called possible-worlds semantics or Kripke semantics). 
+
+For the logic which corresponds to the interpretation of $\Box$ as
+``necessarily,'' this semantics is relatively simple: instead of
+assigning truth values to !!{propositional variable}s, an
+interpretation~$\mModel{M}$ assigns a set of ``worlds'' to
+them---intuitively, those worlds~$w$ at which $p$ is interpreted as true.
+On the basis of such an interpretation, we can define a satisfaction
+relation. The definition of this satisfaction relation makes $\Box !A$ satisfied at a world~$w$ iff $!A$ is
+satisfied at \emph{all} worlds: $\mSat{M}{\Box !A}[w]$ iff
+$\mSat{M}{!A}[v]$ for all worlds~$v$. This corresponds to Leibniz's
+idea that what's necessarily true is what's true in every possible world.
+
+``Necessarily'' is not the only way to interpret the $\Box$ operator,
+but it is the standard one---``necessarily'' and ``possibly'' are the
+so-called \emph{alethic} modalities. Other interpretations read $\Box$
+as ``it is known (by some person~$A$) that,'' as ``some person $A$
+believes that,'' ``it ought to be the case that,'' or ``it will always
+be true that.'' These are epistemic, doxastic, deontic, and temporal
+modalities, respectively. Different interpretations of $\Box$ will
+make different !!{formula}s logically true, and pronounce different
+inferences as valid. For instance, everything necessary and everything
+known is true, so $\Box !A \lif !A$ is a logical truth on the alethic
+and epistemic interpretations. By contrast, not everything believed
+nor everything that ought to be the case actually is the case, so
+$\Box !A \lif !A$ is not a logical truth on the doxastic or deontic
+interpretations. 
+
+In order to deal with different interpretations of the modal
+operators, the semantics is extended by a relation between worlds, the
+so-called accessibility relation.  Then $\mSat{M}{\Box !A}[w]$ iff
+$\mSat{M}{!A}[v]$ for all worlds~$v$ which are accessible from~$w$.
+The resulting semantics is very versatile and powerful, and the basic
+idea can be used to provide semantic interpretations for logics based
+on other intensional operators. One such logic is intuitionistic
+logic, a constructive logic based on L. E. J. Brouwer's branch of
+constructive mathematics. Intuitionistic logic is philosophically
+interesting for this reason---it plays an important role in
+constructive accounts of mathematics---but was also proposed as a logic
+superior to classical logic by the influential English philosopher
+Michael Dummett in the 20th century. Another application of relational
+models is as a semantics for subjunctive, or counterfactual,
+conditionals, an approach pioneered by Robert Stalnaker and David K.
+Lewis.
+
+This book is an introduction to the syntax, semantics, and proof
+theory of intensional logics. It only deals with propositional logics,
+although future editions will also treat predicate logics.  The
+material is divided into three parts: The first part deals with normal
+modal logics. These are logics with the operators $\Box$
+and~$\Diamond$. We discuss their syntax, relational models and
+semantic notions based on them (such as validity and consequence) and
+!!{derivation} systems (both axiomatic systems and tableaux). We establish some
+basic results about these logics, such as the soundness and
+completeness of the !!{derivation} systems considered, and discuss some
+model-theoretic constructions such as filtrations. The second part
+deals with intuitionistic logic. Here we discuss natural deduction and
+axiomatic !!{derivation}s, relational and topological semantics, and
+soundness and completeness of the !!{derivation} systems. The third part deals
+with the Lewis-Stalnaker semantics of counterfactual conditionals. The
+appendices discuss some ideas and results from set theory and the
+theory of relations that's crucial to the relational semantics, and
+review syntax, semantics, and !!{derivation} theory of classical propositional
+logic.

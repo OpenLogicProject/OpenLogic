@@ -1,0 +1,58 @@
+% settheory-screen.tex
+
+% driver file settheory-screen.tex to produce the Set Theory textbook
+% with same type block as in printed version, but but with on-screen
+% features (color, links, etc).
+
+% We use the memoir class for maximal flexibility of layout, but any
+% class will do
+
+\documentclass[screen]{../../sty/open-logic-book}
+
+%\usepackage[nonumberlist,toc,style=index]{glossaries}
+%\makeglossaries
+
+\definecolor{OLPcolor}{HTML}{4c9141}
+\definecolor{OLPdkcolor}{HTML}{2a4724}
+\definecolor{OLPltcolor}{HTML}{c4dabd}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory
+% courses/set-theory/, so the main directory is two
+% levels up.
+
+\newcommand{\olpath}{../../}
+\def\oljobname{settheory}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in bd-config.sty
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{settheory-metadata}
+
+\input{\olpath/sty/open-logic-defer.sty}
+
+% end preamble
+
+\excludeenv{editorial}
+
+\begin{document}
+
+\OLPscreencover{\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/cantor-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/skolem-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/frege-circle.pdf}
+
+\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/zermelo-circle.pdf}\hfill
+%\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/goedel-circle.pdf}\hfill
+\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/russell-circle.pdf}\hfill{}
+
+%\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/noether-circle.pdf}
+\hfill\includegraphics[width=.29\textwidth]{\olpath/assets/portraits/dedekind-circle.pdf}\hfill{}
+}
+
+% Now load the actual text
+
+\input{settheory}
+
+\end{document}

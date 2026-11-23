@@ -1,0 +1,45 @@
+\textbf{Second-order logic} is an extension of first-order logic by
+variables for relations and functions, which can be
+quantified. Structures for second-order logic are just like
+first-order structures and give the interpretations of all non-logical
+symbols of the language.  Variable assignments, however, also assign
+relations and functions on the domain to the second-order
+variables. The satisfaction relation is defined for second-order
+!!{formula}s just like in the first-order case, but extended to deal
+with second-order variables and quantifiers.
+
+Second-order quantifiers make second-order logic \textbf{more
+  expressive} than first-order logic.  For instance, the identity
+relation on the domain of a structure can be defined without~$\eq$, by
+$\lforall[X][(X(x) \liff X(y))]$. Second-order logic can express the
+\textbf{transitive closure} of a relation, which is not expressible in
+first-order logic.  Second-order quantifiers can also express
+properties of the domain, that it is finite or infinite,
+!!{enumerable} or !!{nonenumerable}. This means that, e.g., there is a
+second-order !!{sentence}~$\fn{Inf}$ such that $\Sat{M}{\fn{Inf}}$ iff
+$\Domain{M}$ is infinite. Importantly, these are \textbf{pure}
+second-order sentences, i.e., they contain no non-logical
+symbols. Because of the compactness and L\"owenheim-Skolem theorems,
+there are no first-order sentences that have these properties.  It
+also shows that the \textbf{compactness and L\"owenheim-Skolem
+  theorems fail for second-order logic}.
+
+Second-order quantification also makes it possible to replace
+first-order schemas by single sentences. For instance,
+\textbf{second-order arithmetic}~$\Th{PA^2}$ is comprised of the
+axioms of~$\Th{Q}$ plus the single \textbf{induction axiom}
+\[
+\lforall[X][((X(\Obj 0) \land \lforall[x][(X(x) \lif X(x'))]) \lif
+  \lforall[x][X(x)])].
+\]
+In contrast to first-order~$\Th{PA}$, all second-order models
+of~$\Th{PA^2}$ are isomorphic to the standard model. In other words,
+$\Th{PA^2}$ has \textbf{no non-standard models}. 
+
+Since second-order logic includes first-order logic, it is
+undecidable. First-order logic is at least axiomatizable, i.e., it has
+a sound and complete !!{derivation} system. Second-order logic does not, it is
+\textbf{not axiomatizable}. Thus, the set of validities of
+second-order logic is highly non-computable. In fact, pure second-order
+logic can express set-theoretic claims like the \textbf{continuum
+  hypothesis}, which are independent of set theory.

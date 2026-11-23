@@ -1,0 +1,217 @@
+\chapter{Preface}
+
+This book is an introduction to metalogic, aimed especially at
+students of computer science and philosophy. ``Metalogic'' is
+so-called because it is the discipline that studies logic itself.
+Logic proper is concerned with canons of valid inference, and its
+symbolic or formal version presents these canons using formal
+languages, such as those of propositional and first-order logic.
+Meta-logic investigates the properties of these languages, and of the
+canons of correct inference that use them. It studies topics such as
+how to give precise meaning to the expressions of these formal
+languages, how to justify the canons of valid inference, what the
+properties of various !!{derivation} systems are, including their
+computational properties. These questions are important and
+interesting in their own right, because the languages and
+!!{derivation} systems investigated are applied in many different
+areas---in mathematics, philosophy, computer science, and linguistics,
+especially---but they also serve as examples of how to study formal
+systems in general. The logical languages we study here are not the
+only ones people are interested in. For instance, linguists and
+philosophers are interested in languages that are much more
+complicated than those of propositional and first-order logic, and
+computer scientists are interested in other \emph{kinds} of languages
+altogether, such as programming languages. And the methods we
+discuss---how to give semantics for formal languages, how to prove
+results about formal languages, how to investigate the properties of
+formal languages---are applicable in those cases as well.
+
+Like any discipline, metalogic both has a set of results or facts,
+and a store of methods and techniques, and this text covers both.
+Many students won't need to know all of the results we discuss
+outside of this course, but they will need and use the methods we use
+to establish them. The L\"owenheim-Skolem theorem, say, does not
+often make an appearance in computer science, but the methods we use
+to prove it do. On the other hand, many of the results we discuss do
+have relevance for certain debates, say, in the philosophy of science
+and in metaphysics. Philosophy students may not need to be able to
+prove these results outside this course, but they do need to
+understand what the results are---and you really only
+\emph{understand} these results if you have thought through the
+definitions and proofs needed to establish them. These are, in part,
+the reasons for why the results and the methods covered in this text
+are recommended study---in some cases even required---for students of
+computer science and philosophy.
+
+The material is divided into three parts. \Olref[sfr][][]{part}
+concerns itself with the theory of sets. Logic and metalogic is
+historically connected very closely to what's called the ``foundations
+of mathematics.''  Mathematical foundations deal with how ultimately
+mathematical objects such as integers, rational, and real numbers,
+functions, spaces, etc., should be understood. Set theory provides one
+answer (there are others), and so set theory and logic have long been
+studied side-by-side. Sets, relations, and functions are also
+ubiquitous in any sort of formal investigation, not just in
+mathematics but also in computer science and in some of the more
+technical corners of philosophy. Certainly for the purposes of
+formulating and proving results about the semantics and proof theory
+of logic and the foundation of computability it is essential to have a
+terminology in which to do this. For instance, we will talk about sets
+of expressions, relations of consequence and provability,
+interpretations of predicate symbols (which turn out to be relations),
+computable functions, and various relations between and constructions
+using them. It will be good to have shorthand symbols for these, and
+think through the general properties of sets, relations, and
+functions. If you are not used to thinking mathematically and to
+formulating mathematical proofs, then think of the first part on set
+theory as a training ground: all the basic definitions will be given,
+and we'll give increasingly complicated proofs using them. Note that
+understanding these proofs---and being able to find and formulate them
+yourself---is perhaps more important than understanding the results,
+especially in the first part. If mathematical thinking is new to you,
+it is important that you think through the examples and problems.
+
+In the first part we will establish one important result, however.
+This result---Cantor's theorem---relies on one of the most striking
+examples of conceptual analysis to be found anywhere in the sciences,
+namely, Cantor's analysis of infinity. Infinity has puzzled
+mathematicians and philosophers alike for centuries. Until Cantor,
+no-one knew how to properly think about it. Many people even
+considered it a mistake to think about it at all, and believed that
+the notion of an infinite collection itself was incoherent. Cantor
+made infinity into a subject we can coherently work with, and
+developed an entire theory of infinite collections---and infinite
+numbers with which we can measure the sizes of infinite collections.
+He showed that there are different levels of infinity. This theory of
+``transfinite'' numbers is beautiful and intricate, and we won't get
+very far into it; but we will be able to show that there are different
+levels of infinity, specifically, that there are ``countable'' and
+``uncountable'' levels of infinity. This result has important
+applications, but it is also really the kind of result that any
+self-respecting mathematician, computer scientist, and philosopher
+should know.
+
+In \olref[fol][][]{part}, we turn to first-order logic. We will define
+the language of first-order logic and its semantics, i.e., what
+first-order structures are and when a sentence of first-order logic is
+true in a structure. This will enable us to do two important things:
+(1)~We can define, with mathematical precision, when a sentence is a
+logical consequence of another. (2)~We can also consider how the
+relations that make up a first-order structure are
+described---characterized---by the sentences that are true in them.
+This in particular leads us to a discussion of the axiomatic method,
+in which sentences of first-order languages are used to characterize
+certain kinds of structures. Proof theory will occupy us next, and we
+will consider the original version of the sequent calculus and natural
+deduction as defined in the 1930s by Gerhard Gentzen. (Your instructor
+may choose to cover only one, then any reference to
+``!!{derivation}s'' and ``!!{derivability}'' will mean whatever system
+they chose.) The semantic notion of consequence and the syntactic
+notion of !!{derivability} give us two completely different ways to
+make precise the idea that a sentence may follow from some others. The
+soundness and completeness theorems link these two characterization.
+In particular, we will prove G\"odel's completeness theorem, which
+states that whenever a sentence is a semantic consequence of some
+others, then it is also !!{derivable} from them. An equivalent
+formulation is: if a collection of sentences is consistent---in the
+sense that nothing contradictory can be proved from them---then there
+is a structure that makes all of them true.
+
+The second formulation of the completeness theorem is perhaps the more
+surprising. Around the time G\"odel proved this result (in 1929), the
+German mathematician David Hilbert famously held the view that
+consistency (i.e., freedom from contradiction) is all that mathematical
+existence requires. In other words, whenever a mathematician can
+coherently describe a structure or class of structures, then they
+should be entitled to believe in the existence of such structures.
+At the time, many found this idea preposterous: just because you can
+describe a structure without contradicting yourself, it surely does
+not follow that such a structure actually exists. But that is exactly
+what G\"odel's completeness theorem says. In addition to this
+paradoxical---and certainly philosophically intriguing---aspect, the
+completeness theorem also has two important applications which allow
+us to prove further results about the existence of structures which
+make given sentences true. These are the compactness and the
+L\"owenheim-Skolem theorems.
+
+In \olref[tur][][]{part}, we connect logic with computability. Again,
+there is a historical connection: David Hilbert had posed as a
+fundamental problem of logic to find a mechanical method which would
+decide, of a given sentence of logic, whether it has a proof. Such a
+method exists, of course, for propositional logic: one just has to
+check all truth tables, and since there are only finitely many of
+them, the method eventually yields a correct answer. Such a
+straightforward method is not possible for first-order logic, since
+the number of possible structures is infinite (and structures
+themselves may be infinite). Logicians were working to find a more
+ingenious methods for years. Alonzo Church and Alan Turing eventually
+established that there is no such method. In order to do this, it was
+necessary to first provide a precise definition of what a mechanical
+method is in general. If a decision procedure had been proposed,
+presumably it would have been recognized as an effective method. To
+prove that no effective method exists, you have to define ``effective
+method'' first and give an impossibility proof on the basis of that
+definition. This is what Turing did: he proposed the idea of a Turing
+machine\footnote{Turing of course did not call it that himself.} as a
+mathematical model of what a mechanical procedure can, in principle,
+do. This is another example of a \emph{conceptual analysis} of an
+informal concept using mathematical machinery; and it is perhaps of
+the same order of importance for computer science as Cantor's analysis
+of infinity is for mathematics. Our last major undertaking will be the
+proof of two impossibility theorems: we will show that the so-called
+``halting problem'' cannot be solved by Turing machines, and finally
+that Hilbert's ``decision problem'' (for logic) also cannot.
+
+This text is mathematical, in the sense that we discuss mathematical
+definitions and prove our results mathematically. But it is not
+mathematical in the sense that you need extensive mathematical
+background knowledge. Nothing in this text requires knowledge of
+algebra, trigonometry, or calculus. We have made a special effort to
+also not require any familiarity with the way mathematics works: in
+fact, part of the point is to \emph{develop} the kinds of reasoning
+and proof skills required to understand and prove our results. The
+organization of the text follows mathematical convention, for one
+reason: these conventions have been developed because clarity and
+precision are especially important, and so, e.g., it is critical to
+know when something is asserted as the conclusion of an argument, is
+offered as a reason for something else, or is intended to introduce
+new vocabulary. So we follow mathematical convention and label
+passages as ``definitions'' if they are used to introduce new
+terminology or symbols; and as ``theorems,'' ``propositions,''
+``lemmas,'' or ``corollaries'' when we record a result or finding.
+Other than these conventions, we will use the methods of logical proof
+that may already be familiar from a first logic course, and we will
+also make extensive use of the method of \emph{induction} to prove
+results. Two chapters of the appendix are devoted to these proof
+methods.
+
+\paragraph{Notes for instructors} The material in this book is
+suitable for a semester-long second course  in formal logic. I cover
+it in 12 weeks in Logic~II taught at the University of Calgary,
+although I don't cover everything in as much detail as there is in
+this book. For instance, I typically only talk about natural
+deduction, and leave out detailed proofs of completeness for identity.
+Students have taken Logic~I, typically taught from
+\emph{\href{https://forallx.openlogicproject.org}{forall x: Calgary}},
+which uses the same natural deduction rules, except in Fitch format.
+
+The most recent version of this book is available in PDF at
+\href{https://slc.openlogicproject.org}{slc.openlogicproject.org}, but
+changes frequently.  The CC BY license gives you the right to download
+and distribute the book yourself. In order to ensure that all your
+students have the same version of the book throughout the term you're
+using it, you should do so: upload the PDF you decide to use to your
+LMS rather than merely give your students the link. You are also free
+to have the PDFs printed by your bookstore, but some bookstores will
+be able to purchase and stock the softcover books available on Amazon.
+
+The syntax, semantics, and proof systems for first-order logic are
+supported by Graham Leach-Krouses's free, online logic teaching
+software application \emph{Carnap}
+(\href{https://carnap.io}{carnap.io}). This allows for submission and
+automated marking of exercises such as natural deduction and sequent
+calculus !!{derivation}s, giving structures for simple theories, and
+symbolization exercises.  There is also a Turing machine simulator at
+\href{https://turing.openlogicproject.org}{turing.openlogicproject.org}
+that can be used to illustrate the material in \olref[tur][][]{part}.
+The examples there are available pre-loaded in the simulator.

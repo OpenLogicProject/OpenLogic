@@ -1,0 +1,47 @@
+A \emph{first-order language} consists of \emph{constant},
+\emph{function}, and \emph{predicate} symbols. Function and constant
+symbols take a specified number of arguments. In the \emph{language
+  of arithmetic}, e.g., we have a single constant symbol~$\Obj 0$, one
+1-place function symbol $\prime$, two 2-place function symbols~$+$ and
+$\times$, and one 2-place predicate symbol~$<$. From \emph{variables}
+and constant and function symbols we form the \emph{terms} of a
+language. From the terms of a language together with its predicate
+symbol, as well as the \emph{identity symbol}~$\eq$, we form the
+  \emph{atomic formulas}. And in turn from them, using the logical
+  connectives $\lnot$, $\lor$, $\land$, $\lif$, $\liff$ and the
+  quantifiers $\lforall$ and $\lexists$ we form its formulas. Since
+  we are careful to always include necessary parentheses in the
+  process of forming terms and formulas, there is always exactly one
+  way of reading a formula. This makes it possible to define things by
+  induction on the structure of formulas.
+
+Occurrences of variables in formulas are sometimes governed by a
+corresponding quantifier: if a variable occurs in the \emph{scope} of
+a quantifier it is considered \emph{bound}, otherwise
+\emph{free}. These concepts all have inductive definitions, and we
+also inductively define the operation of \emph{substitution} of a term
+for a variable in a formula. Formulas without free variable
+occurrences are called \emph{sentences}.
+
+The \emph{semantics} for a first-order language is given by a
+\emph{structure} for that language. It consists of a \emph{domain} and
+elements of that domain are assigned to each constant symbol. Function
+symbols are interpreted by functions and relation symbols by relation
+on the domain. A function from the set of variables to the domain is
+a \emph{variable assignment}. The relation of \emph{satisfaction}
+relates structures, variable assignments and formulas;
+$\Sat{M}{!A}[s]$ is defined by induction on the structure of~$!A$.
+$\Sat{M}{!A}[s]$ only depends on the interpretation of the symbols
+actually occurring in~$!A$, and in particular does not depend on $s$
+if $!A$ contains no free variables. So if $!A$ is a sentence,
+$\Sat{M}{!A}$ if $\Sat{M}{!A}[s]$ for any (or all)~$s$.
+
+The satisfaction relation is the basis for all semantic notions. A
+sentence is \emph{valid}, $\Sat{{}}{!A}$, if it is satisfied in every
+structure. A sentence $!A$ is \emph{entailed} by set of
+sentences~$\Gamma$, $\Gamma \Entails !A$, iff $\Sat{M}{!A}$ for all
+$\Struct{M}$ which satisfy every sentence in~$\Gamma$. A set~$\Gamma$
+is \emph{satisfiable} iff there is some structure that satisfies every
+sentence in~$\Gamma$, otherwise unsatisfiable. These notions are
+interrelated, e.g., $\Gamma \Entails !A$ iff $\Gamma \cup \{\lnot
+!A\}$ is unsatisfiable.

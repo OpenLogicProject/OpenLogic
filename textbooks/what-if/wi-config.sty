@@ -1,0 +1,49 @@
+% Configuration file for What If textbook
+
+% Let's be unpretentious and use A, B, C, etc. for formulas ...
+
+\ollatinformulas
+
+% use the complex formula in induction cases rather
+
+\DeclareDocumentCommand \indcase { s t{!} m m +m }{%
+  \DeclareDocumentMacro \indfrm {#3}%
+  \DeclareDocumentMacro \indfrmp {#3}%
+  \DeclareDocumentMacro \indcomplex {#4}%
+  \IfBooleanTF{#1}
+     {$#3$ is atomic: }{$#3 \ident #4$: }
+  \IfBooleanTF{#2}
+     {exercise.}
+     {#5}}
+
+% no Fraktur
+
+\DeclareDocumentCommand \Struct { m }{\applytofirst{\mathbi}{#1}}
+\DeclareDocumentCommand \mModel { m }{\applytofirst{\mathbi}{#1}}
+\DeclareDocumentCommand \pAssign { m }{\applytofirst{\mathbi}{#1}}
+
+% I think I like ``countable'' and ``uncountable'' better?
+
+\settexttoken{enumerable}{countable}{countable}
+
+\settexttoken{nonenumerable}*{uncountable}{uncountable}
+
+\settexttoken{denumerable}{countably infinite}{countably infinite}
+
+% Biconditional, verum are defined symbols
+
+\tagtrue{defIff,defTrue}
+\tagfalse{prvIff,prvTrue}
+
+% I'll leave cases for conditional, universal quantifier as exercises
+
+\tagtrue{probAnd,probIf,probAll,probDiamond}
+
+% Which proof system?  We'll need axiomatic deduction and tableaux
+
+\tagfalse{prfSC,prfND}
+
+\tikzset{
+   sphere/.style = {dotted,thick},
+   proposition/.style={thick,smooth,tension=1.7}
+}

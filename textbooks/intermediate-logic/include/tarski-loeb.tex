@@ -1,0 +1,365 @@
+
+\section{Tarski's Theorem and L\"ob's Theorem}
+
+Tarski's Theorem shows that there's a gap between the notions of
+``\emph{sentence provable in the theory}~$\Th{PA}$'' (focusing on
+$\Th{PA}$ as the best theory of arithmetic we have and that of
+`sentence true in $N$, the standard structure of natural numbers'.
+The former notion is \emph{definable} in $\mathcal{L}_{A}$, and the
+latter is \emph{not definable}. Remember, `true in $N$' is really the
+same as `provable in $\Th{TA}$', so the difference, if you want to
+put it this way, is between these two notions of provable. 
+
+Tarski's paper ``Truth and proof'' \citep{Tarski1969} makes the
+following interesting remarks, which emphasize this gap, but which put
+an optimistic gloss on it:
+
+\begin{quotation}
+Nothing is detracted from the significance of this result [these
+results] by the fact that its philosophical implications are
+essentially negative in character. \emph{The result shows indeed that
+in no domain of mathematics is the notion of provability a perfect
+substitute for the notion of truth. The belief that formal proof can
+serve as an adequate instrument for establishing truth of all
+mathematical statements has proved to be unfounded.} The original
+triumph of formal methods has been followed by a serious setback.
+
+Whatever can he said to conclude this discussion is bound to be an
+anticlimax. The notion of truth for formalized the­ories can now be
+introduced by means of a precise and ad­equate definition. It can
+therefore be used without any re­strictions and reservations in
+metalogical discussion. It has actually become a basic metalogical
+notion involved in im­portant problems and results. On the other hand,
+the notion of proof has not lost its significance either. \emph{Proof
+is still the only method used to ascertain the truth of sentences
+within any specific mathematical theory. We are now aware of the fact,
+however, that there are sentences formulated in the language of the
+theory which are true but not provable, and we cannot discount the
+possibility that some such sentences occur among those in which we are
+interested and which we attempt to prove.} Hence in some situations we
+may wish to explore the possibility of widening the set of provable
+sen­tences. To this end we enrich the given theory by including new
+sentences in its axiom system or by providing it with new rules of
+proof. In doing so we use the notion of truth as a guide; for we do
+not wish to add a new axiom or a new rule of proof if we have reason
+to believe that the new axiom is not a true sentence, or that the new
+rule of proof when applied to true sentences may yield a false
+sentence. The process of extending a theory may of course be repeated
+arbitrarily many times. The notion of a true sentence functions thus
+as an ideal limit which can never be reached but which we try to
+approximate by gradually widening the set of provable sentences. (It
+seems likely, although for different reasons, that the notion of truth
+plays an analogous role in the realm of empirical knowledge.) There is
+no conflict between the notions of truth and proof in the development
+of mathematics; the two notions are not at war but live in peaceful
+coexistence. \citep[p.~77, emphasis added]{Tarski1969}.
+\end{quotation}
+What Tarski brings out here is the gap between truth and proof, and
+the fact that there must be, in effect, a dialectical relationship
+between the two, perhaps more than what he calls here `peaceful
+coexistence'. This gap was dramatically emphasised by G\"odel, in  a
+lecture in 1951, in a comment he made about the Second Incompleteness
+Theorem, a comment which supports Tarski's point that we should use
+``truth as a guide'':
+\begin{quote}
+It is \emph{this} [the second] theorem which makes the
+incompletability of mathematics particularly evident. For, \emph{it
+makes it impossible that someone should set up a certain well-defined
+system of axioms and rules and consistently make the following
+assertion about it: All of these axioms and rules I perceive (with
+mathematical certitude) to be correct, and moreover I believe that
+they contain all of mathematics}. If someone makes such a statement he
+contradicts himself.\footnote{[G\"odel's footnote:] If he only says
+``I believe I shall be able to perceive one after the other to be
+true'' (where their number is supposed to be infinite), he does not
+contradict himself.} For if he perceives the axioms under
+consideration to be correct, he also perceives (with the same
+certainty) that they are consistent. Hence he has a mathematical
+insight not derivable from his axioms. However, one has to be careful
+in order to understand clearly the meaning of this state of affairs.
+Does it mean that no well-defined system of correct axioms can contain
+all of mathematics proper? It does, if by mathematics proper is
+understood the system of all true mathematical propositions; it does
+not, however, if one understands by it the system of all demonstrable
+mathematical propositions. \citep[p.~309]{Godel1951}
+\end{quote}
+
+The juxtaposition of Tarski's Theorem and the G\"odel results show us
+that the gap between truth and provability is large; what L\"ob's
+Theorem does is emphasise how large that gap really is, and in
+particular how unlike the notion of truth the notion of proof is.
+Above all it shows that  proof can't really act as a surrogate for
+truth, that provability can't be just a form of ``supertruth'', like
+logical truth or necessary truth.  
+
+Let us show how L\"ob's Theorem brings out the difference. 
+
+First,  if we proceeded with truth in much the same way as we proceed
+in the prove of L\"ob's Theorem we would get something quite absurd, a
+proof of the existence of Santa Claus. Note the fact that we have
+``Santa Claus exists'' here plays no role whatsoever. It could be
+``The Dark Lord exists'', or any one of your favourite nonsense
+claims, e.g., ``The Moon is made of green cheese''. We presented a
+version of this argument in the textbook. Here is the same argument
+given by George Boolos in his book \emph{The Logic of Provability}:
+\begin{quote} 
+Let Sam be the sentence ``if Sam is true, SC'' [where ``SC''
+abbreviates the sentence ``Santa Claus exists'']. Assume that Sam is
+true; then ``if Sam is true, SC'' is true; thus if Sam is true, SC;
+and so SC by modus ponens. Thus we have shown that SC on the
+assumption that Sam is true and have therefore shown outright that if
+Sam is true, SC. But then ``If Sam is true, SC'' is true, i.e., Sam is
+true, and by modus ponens again, SC. \citep[p.~56]{Boolos1993}
+\end{quote}
+To reiterate,  \emph{any} statement can be proved this way. What this
+means is that we can easily get a contradiction, which means that we
+must be operating with inconsistent assumptions! But which
+inconsistent assumptions? In fact, the argument above is just an
+elaborate version of the Liar Paradox, and we are in fact operating
+with the same inconsistent assumption as is behind that.
+
+We can show this as follows. If you look carefully at the argument
+Boolos presents, you will notice that several times we make use of the
+principle:
+\begin{equation*}\label{eqn:convention-t}
+\text{``$X$'' is true iff $X$}\tag{T}
+\end{equation*}
+which we saw earlier illustrated through the particular instance
+``\,`Snow is white' is true iff snow is white''. We use the principle
+here in the shift (left-to-right) from ``{}`If Sam is true, SC' is
+true'' to ``If Sam is true, SC''. Then later we have the shift
+(right-to-left here) from ``If Sam is true, SC'' to ``{}`If Sam is
+true, SC' is true''. The principle (T) (often referred to as
+``convention~(T)'') is the  basic principle that a correct
+truth-definition has to satisfy. Moreover, it is the principle which
+in English (taken as the meta-language for discussion of English)
+allows us to deduce a contradiction from ``This sentence is false'',
+i.e., the statement which gives us the Liar Paradox. 
+
+Let's now go back to Tarski's Theorem in the form that we proved it,
+i.e., showing that no $1$-place predicate of the language can define
+the set of G\"odel-numbers of sentences true in the standard model.
+Assume that there were such a predicate~$!D(x)$. We would have that
+$n$ is the G\"odel number of sentence $!A$ (so $n= \Gn{!A}$) true in
+the standard model if, and only if, $\Sat{N}{!D(\gn{!A})}$. From this
+follows $\Sat{N}{!A}$ iff $\Sat{N}{!D(\gn{!A})}$. But this means that
+$\Sat{N}{!A \liff !D(\gn{!A})}$. And  remember that saying
+``$\Sat{N}{!X}$'' is the same as saying ``$\Th{TA} \Proves !X$'. Put
+all this together and we have:
+\begin{equation*}\label{eqn:t-for-ta}
+ \Th{TA} \Proves !A \liff !D(\gn{!A}),\tag{T$_{\Th{TA}}$}
+\end{equation*}
+which, if we read $!D(x)$ as ``is true'', really says that $\Th{TA}$
+can produce the principle \cref{eqn:convention-t} above. We often say
+that principles like  \cref{eqn:t-for-ta} are ``truth-definitions'',
+holding as they do for all sentences of the language concerned. But
+this immediately gives rise here to a contradiction, for we can apply
+the Diagonal Lemma to $\lnot !D(x)$ and get a sentence~$!L$ such that
+\begin{align*}
+    \Th{TA} &\Proves !L \liff \lnot !D(\gn{!L}).
+\intertext{But \cref{eqn:t-for-ta} above instantiated for~$!L$
+will give us:}
+\Th{TA} & \Proves !L \liff !D(\gn{!L}),
+\end{align*}
+thus contradiction. 
+
+Let's come back to the difference between truth and provability.
+First, as we've seen, what the principle \cref{eqn:convention-t}
+allows is switching  as we please between ``{}'$X$' is true''
+and~``$X$''. But the reasoning presented in the proof of L\"ob's
+Theorem ``mimics'' the Santa Claus argument when ``is true'' replaced
+by ``is provable'', and where the requisite switching between
+``{}'$X$' is provable'' and ``$X$'' is now provided by the
+derivability conditions. We do not, of course, get a contradiction. 
+
+Second, we can use L\"ob's Theorem to give us Tarski's Theorem in the
+form that we cannot have a truth-definition, i.e., that ``true in
+$\Struct N$'' cannot be definable.  The argument goes roughly like
+this:
+
+Suppose $\mathrm{Tr}(x)$ is a truth-predicate for an appropriate
+theory $\Th{T}$, and the truth-definition  
+\begin{equation}\label{eqn:loeb-td}
+\Th{T}\Proves A \liff \mathrm{Tr}(\gn{A})\tag{\textit{Tr}}
+\end{equation}
+holds. Then it's clear using this that all of the derivability
+conditions hold for $\mathrm{Tr}(x)$, which means that we must have a
+L\"ob Theorem for $\mathrm{Tr}(x)$. (Remember, in the statement of
+L\"ob's Theorem, all we really need to know about the provability
+predicate is that the derivability conditions hold for it. We know
+nothing else about the ``inner workings'' of the predicate. Thus, if
+there were a truth-predicate, it would satisfy the conditions of
+L\"ob's Theorem.) Now take \textit{any} sentence~$!A$. Then by
+\eqref{eqn:loeb-td} we have $\Th{T} \Proves \mathrm{Tr}(\gn{!A}) \liff
+!A$, so in particular $\Th{T} \Proves \mathrm{Tr}(\gn{!A}) \lif !A$.
+By L\"ob's Theorem applied to $\mathrm{Tr}(x)$, this means that we
+have $\Th{T} \Proves !A$. So \emph{any} sentence would be provable in
+$\Th{T}$ if $\Th{T}$ were equipped with a truth-definition, which of
+course would make $\Th{T}$ inconsistent. So a sufficient condition for
+a sentence~$!A$ to be provable is that $\Th{T} \Proves
+\mathrm{Tr}(\gn{A}) \lif A$, but \eqref{eqn:loeb-td} says that this
+must be the case for any sentence.
+%\footnote{Part of what we're saying here is that, as far as L\"ob's
+%Theorem goes, the only thing that's really important about
+%`$\OProv(x)$' is that it satisfies the three Hilbert-Bernays
+%derivability conditions , which amounts to saying that we can prove a
+%L\"ob Theorem for any 1-place predicate which satisfies analogous
+%conditions.} 
+Hence, using L\"ob's Theorem, we've shown that if $\Th{T}$ is
+consistent, there can't be a truth-definition for~$\Th{T}$. 
+
+In short, if we could get L\"ob for truth, we would get contradiction,
+but L\"ob for provability \emph{does not} give us contradiction. But
+if go further into the comparison, we can see  how wide the gap is. 
+
+Boolos has some  comments on the remarkable nature of the L\"ob
+Theorem which touch on what we've just observed, and which emphasize
+just how big the gap really is. In reading these comments, first think
+of ``$\OProv(x)$'' as a natural replacement for ``truth$(x)$''; that will
+highlight the surprise. Boolos comments as follows:
+\begin{quotation}
+L\"ob's theorem is utterly astonishing for at least five reasons. In
+the first place, it is often hard to understand how vast the
+mathematical gap is between truth and provability. And to one who
+lacks that understanding and does not distinguish between truth and
+provability, $\OProv(\gn{S})\lif S$, which the hypothesis of
+L\"ob's theorem asserts to be provable, might appear to be trivially
+true in all cases, whether $S$ is true or false, provable or
+unprovable. But if $S$ is false,  $S$ had better not be provable. Thus
+it would seem that $S$ ought not always to be provable provided merely
+that (the possibly trivial-seeming) $\OProv(\gn{S})\lif S$ is
+provable.
+
+Secondly, $\OProv$ seems here to be working like negation. After
+all, if $\lnot S \lif S$ is provable, then so is $S$; proving $S$ by
+proving $\lnot S\lif S$ is called \emph{reductio ad absurdum} (or,
+sometimes, the law of Clavius). Moreover, inferring $S$ solely on the
+ground that ($S\lif S$) is demonstrable is known as begging the
+question, or reasoning in a circle. To one who conflates truth and
+provability, it may then seem that L\"ob's theorem asserts that
+begging the question is an admissible form of reasoning in PA.
+
+Thirdly, one might have thought that \emph{at least on occasion}, PA
+would claim to be sound with regard to an unprovable sentence $S$,
+i.e., claim that \emph{if} it proves $S$, then $S$ holds. But L\"ob's
+theorem tells us that it never does so: PA makes the claim
+$\OProv(\gn{S})\lif S$ that it is sound with regard to $S$ only
+when it obviously must, when the consequent $S$ is actually provable.
+As Rohit Parikh once put it, ``PA couldn't be more modest about its
+own veracity''.
+
+Fourthly, one might very naturally suppose that provability is a kind
+of necessity, and therefore, just as $\Box(\Box p \lif p)$ always
+expresses a truth if the box is interpreted as ``it is necessary
+that'' ---~for then $\Box(\Box p \lif p)$ says that it is necessarily
+true that if a statement is necessarily true, it is true
+---~$\OProv(\gn{\OProv(\gn{S})\lif S})$ would also always
+be true or at least true in some cases in which $S$ is false and not
+true only in the rather exceptional cases in which $S$ is actually
+provable.
+
+Finally, it seems wholly bizarre that the statement that if $S$ is
+provable, then $S$ is true is not itself provable, in general. For
+isn't it perfectly obvious, for any $S$, that $S$ is true if provable?
+Why are we bothering with PA if its theorems are false? And how could
+any such (apparently) obvious truth not be provable?
+\citep[pp.~54--55]{Boolos1993}\footnote{We've replaced Boolos' use
+of G\"odel's \textit{Bew} with our `$\OProv$'.}
+\end{quotation}
+
+%Here, we can fill out some of these points with the following highly
+%relevant observation. 
+%
+%With the informal argument (for SC), we were implicitly using a
+%truth-definition, for we were constantly going back and forth between
+%`$\varphi$' and `\,``$\varphi$'' is true' (so in effect between
+%$T(\gn{\varphi})$ and $\varphi$).  And in fact, this is what we do in
+%the argument for the various Liar Paradoxes. But notice that L\"ob's
+%Theorem does not use a truth predicate like this, but rather a
+%provability predicate, `$\OProv(x)$'. Indeed, we can use
+%L\"ob's Theorem \emph{to show} that there \emph{cannot} be a
+%truth-definition for $S$ if $S$ is consistent. 
+%
+%The argument goes roughly like this:
+%
+%Suppose $\mathrm{Tr}(x)$ is a truth-predicate for $S$, i.e.,  the
+%truth-definition  
+%
+%\begin{equation}\label{loeb-td} S\Proves \mathrm{Tr}(\gn{\varphi})
+%\liff \varphi \end{equation} holds. Then it's clear using this that
+%all of the derivability conditions hold for $\mathrm{Tr}(x)$, which
+%means that we must have a L\"ob Theorem for $\mathrm{Tr}(x)$. Now
+%take \textit{any} sentence $\varphi$. Then by (\ref{loeb-td}) we have
+%$S\Proves \mathrm{Tr}(\gn{\varphi}) \liff \varphi$, so $S\Proves
+%\mathrm{Tr}(\gn{\varphi}) \lif \varphi$. By L\"ob's Theorem, this
+%means that we have $\Proves \varphi$. So \emph{any} sentence would be
+%provable in $S$ if $S$ were equipped with a truth-definition, which
+%of course would make $S$ inconsistent.\footnote{Part of what we're
+%saying here is that, as far as L\"ob's Theorem goes, the only thing
+%that's really important about `$\OProv(x)$' is that it
+%satisfies the three Hilbert-Bernays provability condition, which
+%amounts to saying that we can prove a L\"ob Theorem for any 1-place
+%predicate which satisfies analogous conditions.} 
+%
+%Hence,  using L\"ob's Theorem, we've shown that  if $S$ is
+%consistent, there can't be a truth-definition for  $S$. 
+
+
+Let's elaborate a little on some of these points.
+
+The first point. Take an example like ``$2+2=5$''. We certainly can't
+have it that $\Th{PA}$ can prove $2+2=5$, which means (following
+L\"ob's Theorem) that it can't be the case that $\Th{PA} \Proves
+\OProv(\gn{2+2=5}) \to 2+2=5$!{} In other words, $\Th{PA}$ can't
+tell us that whatever it proves is true, or that the notion of proof
+it recognizes is a good one!{} And haven't we designed it so that the
+formal provability predicate ``$\OProv(x)$'' (for $\Th{PA}$)
+matches ``is provable in~$\Th{PA}$''?
+
+The third point extends this. Suppose we take something like the
+Goldbach Conjecture (\textit{GC\/}) or the Twin Prime Conjecture
+(\textit{TPC\/}), propositions that we don't know to be provable
+in~$\Th{PA}$. We would hope that $\Th{PA}$ would be able to prove of
+such propositions, at least some of the time, that
+$\OProv(\gn{\textit{GC\/}}) \to \textit{GC}$ or
+$\OProv(\gn{\textit{TPC\/}}) \to \textit{TPC}$, i.e., that it knows a
+$\Th{PA}$ proof of $\textit{TPC}$ would show that $\textit{TPC}$ is
+correct. But L\"ob's Theorem tells us it can't do that, or rather that
+it can only do that if there is \emph{already} a $\Th{PA}$ proof of
+\textit{GC} or~\textit{TPC}!{}
+
+Think about how different this is from truth. For a truth-definition
+(if we have one), it has got to be the case that $\mathrm{Tr}(\gn{A})
+\liff A$ holds regardless of whether $A$ is true, false, contradictory
+or ridiculous: and therefore $\mathrm{Tr}(\gn{A}) \lif A$ holds  also,
+regardless of what $A$ asserts. In other words (switching to English)
+``{}`The moon is made of green cheese' is true $\Leftrightarrow$ [or
+even just $\Rightarrow$]  the moon is made of green cheese'', even
+though the sentence involved here is not true, and is even faintly
+ludicrous, one we're only prepared to contemplate by reason of it's
+syntactic formulation.  But L\"ob's Theorem tells us that ``$\Th{T}
+\Proves S$'' cannot be a surrogate for truth in this sense, for we
+could then, it seems,  prove that the moon is made of green cheese (or
+any other kind of cheese, or marshmallow or sphagnum moss \dots), or
+some arithmetic equivalents. That shows us (Tarski's Theorem) that we
+can't have a truth-definition for $\Th{PA}$ where (T$_{\Th{PA}}$) is
+provable in $\Th{PA}$. But if ``provable'' is a surrogate for ``is
+true'', then we we would certainly expect $\Th{PA}$ to be able to
+prove ``$\OProv(\gn{A}) \lif A$'' in general. This is stressed in
+Point 5.
+
+Lastly, consider the second point. As Boolos points out, suppose we
+think that ``$\OProv(\gn{S})$'' is really some sort of strong
+affirmation of $S$ (``being true and more''). In this case, then
+``$\OProv(\gn{S}) \lif S$'' would be  something like ``$S \lif S$''
+(or at least this should follow from ``$\OProv(\gn{S}) \lif S$'').
+But then using this as a \emph{justification} for ``$\Th{T}\Proves S$''
+is really like arguing by begging the question!{} However,  if
+``$\OProv(\gn{S}) \lif S$'' really acts as a genuine justification
+for $S$,  then it looks as if ``$\OProv(\gn{S})$'' is behaving,
+not like an affirmation at all, but really rather like like a
+\emph{negation}, as in the proof of~``$S$'' given by proving ``$\lnot S
+\lif S$''!{} So it seems as if it can't be the case that
+``$\OProv(\gn{S})$'' is like a strong \emph{affirmation} of $S$
+(``being true and more'') at all, and is actually more like a
+\emph{denial} of~$S$.

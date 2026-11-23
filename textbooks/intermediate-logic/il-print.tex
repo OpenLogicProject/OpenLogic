@@ -1,0 +1,44 @@
+% il-print.tex
+
+% driver file il-print.tex to produce the Intermediate logic textbook for
+% printing on KDPs's quarto stock.
+
+\documentclass[print]{../../sty/open-logic-book}
+
+%\usepackage[nonumberlist,toc,style=index]{glossaries}
+%\makeglossaries
+
+\def\oljobname{il}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory
+% courses/incompleteness-computability/, so the main directory is two
+% levels up.
+
+\newcommand{\olpath}{../../}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in open-logic-sample-config.sty
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{il-metadata}
+
+% we want all the problems deferred to the very end
+
+\input{\olpath/sty/open-logic-defer.sty}
+
+% load glossary entries
+
+%\loadglsentries{include/glossary}
+
+% end preamble
+
+\begin{document}
+
+% Now load the actual text
+
+\input{il}
+
+\end{document}
+

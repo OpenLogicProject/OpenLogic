@@ -1,0 +1,108 @@
+% slc.tex
+%
+% driver file slc.tex to produce text
+
+\preto\OLEndChapterHook{\IfFileExists{include/summary-\thechapter}
+        {\section*{Summary}\addcontentsline{toc}{section}{Summary}
+        \let\emph\textbf\input{include/summary-\thechapter}\let\emph\textit}{}}
+
+\problemsperchapter
+
+\frontmatter
+
+\OLPfrontmatter
+
+\cleartoverso
+\thispagestyle{empty}
+\ \vfill
+\noindent\includegraphics[width=\textwidth]{illustrations/SkolemChapter}
+\vfill
+
+\input{include/preface}
+
+\cleartoverso 
+
+
+\thispagestyle{empty}
+\ \vfill
+\noindent\includegraphics[width=\textwidth]{illustrations/CantorChapter}
+\vfill
+
+\mainmatter
+
+\olimport*[sets-functions-relations]{sets-functions-relations}
+
+\cleartoverso
+\ifodd\value{page}\stepcounter{page}\fi
+\thispagestyle{empty}
+\ \vfill
+\noindent\includegraphics[width=\textwidth]{illustrations/GodelChapter}
+\vfill
+
+\olimport*[first-order-logic]{first-order-logic}
+
+\cleartoverso
+\ifodd\value{page}\stepcounter{page}\fi
+\thispagestyle{empty}
+\ \vfill
+\noindent\includegraphics[width=\textwidth]{illustrations/TuringChapter}
+\vfill
+
+\olimport*[turing-machines]{turing-machines}
+
+% appendices
+
+\cleartoverso
+\ifodd\value{page}\stepcounter{page}\fi
+\thispagestyle{empty}
+\ \vfill
+\noindent\includegraphics[width=\textwidth]{illustrations/NoetherChapter}
+\vfill
+
+\appendix
+\part*{Appendices}\addcontentsline{toc}{part}{Appendices}
+
+\olimport*[methods/proofs]{proofs}
+
+\olimport*[methods/induction]{induction}
+
+\stopproblems
+\def\ifproblems#1{}
+
+\def\figurename{Fig.}
+\setlength{\olphotowidth}{.45\textwidth}
+
+\chapter{Biographies}
+
+\olimport*[history/biographies]{georg-cantor}
+
+\olimport*[history/biographies]{alonzo-church}
+
+\olimport*[history/biographies]{gerhard-gentzen}
+
+\olimport*[history/biographies]{kurt-goedel}
+
+\olimport*[history/biographies]{emmy-noether}
+
+\olimport*[history/biographies]{bertrand-russell}
+
+\olimport*[history/biographies]{alfred-tarski}
+
+\olimport*[history/biographies]{alan-turing}
+
+\olimport*[history/biographies]{ernst-zermelo}
+
+\olimport*[reference/greek-alphabet]{greek-alphabet}
+
+%\backmatter
+
+\glsaddall
+\printglossaries
+
+\clearpage
+\photocredits
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic.bib}
+
+\olimport*{\olpath/content/open-logic-about}

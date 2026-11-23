@@ -1,0 +1,26 @@
+In order to show how theories like~$\Th{Q}$ can ``talk'' about
+computable functions---and especially about provability (via G\"odel
+numbers)---we established that $\Th{Q}$ \textbf{represents} all
+computable functions. By ``$\Th{Q}$ represents $f(n)$'' we mean that
+there is !!a{formula}~$!A_f(x, y)$ in~$\Lang{L_A}$ which expresses
+that $f(x) = y$, and $\Th{Q}$ can prove that it does.  This, in turn,
+means that whenever $f(n) = m$, then $\Th{Q} \Proves !A_f(\num{n},
+\num{m})$ and $\Th{Q} \Proves \lforall[y][(!A_f(\num{n}, y) \lif y =
+\num{m})]$. (Here, $\num{n}$ is the \textbf{standard numeral} for~$n$,
+i.e., the term $\Obj 0^{\prime\dots\prime}$ with $n$~$\prime$s. The
+term~$\num{n}$ picks out the number~$n$ in the standard
+model~$\Struct{N}$, so it's a convenient way of representing the
+number~$n$ in $\Lang{L_A}$.) To prove that $\Th{Q}$ represents all
+computable functions we go back to the characterization of computable
+functions as those that can be defined from $\Zero$, $\Succ$, and the
+projection functions, by composition, primitive recursion, and regular
+minimization. While it is relatively easy to prove that the basic
+functions are representable and that functions defined by composition
+and regular minimization from representable functions are also
+representable, primitive recursion is harder. We showed that we can
+actually avoid definition by primitive recursion, if we allow a few
+additional basic functions (namely, addition, multiplication, and the
+characteristic function of~$=$). This required a \textbf{beta
+function} which allows us to deal with sequences of numbers in a
+rudimentary way, and which can be defined without using primitive
+recursion.

@@ -1,0 +1,418 @@
+
+\chapter{Derivations in Arithmetic Theories}\label{deriv:chap}
+
+
+When we showed that all general recursive functions are representable
+in~$\Th{Q}$, and in the proofs of the incompleteness theorems, we
+claimed that various things are provable in $\Th{Q}$ and~$\Th{PA}$. The
+proofs of these claims, however, just gave the arguments informally
+without exhibiting actual !!{derivation}s in natural deduction. We provide
+some of these !!{derivation}s in this capter.
+
+For instance, in \olref[inc][req][bre]{lem:q-proves-add} we proved
+that, for all $n$ and $m \in \Nat$, $\Th{Q} \Proves (\num{n} +
+\num{m}) = \num{n+m}$. We did this by induction on $m$.
+
+\begin{proof}[Proof of {\olref[inc][req][bre]{lem:q-proves-add}}]
+Base case: $m = 0$. Then what has to be proved is that, for all $n$,
+$\Th{Q} \Proves \num{n} + \num{0} = \num{n+0}$. Since $\num{0}$ is
+just $\Obj 0$ and $\num{n+0}$ is $\num{n}$, this amounts to showing
+that $\Th{Q} \Proves (\num{n} + \Obj 0) = \num{n}$. The !!{derivation}
+\begin{prooftree}
+  \AxiomC{$\lforall[x][(x + \Obj 0) = x]$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$(\num{n} + \Obj 0) = \num{n}$}
+\end{prooftree}
+is a natural deduction !!{derivation} of $(\num{n} + \Obj 0) = \num{n}$
+with one undischarged assumption, and that undischarged assumption is
+an axiom of~$\Th{Q}$.
+
+Inductive step: Suppose that, for any $n$, $\Th{Q} \Proves (\num{n} +
+\num{m}) = \num{n+m}$ (say, by !!a{derivation} $\delta_{n,m}$). We have
+to show that also $\Th{Q} \Proves (\num{n} + \num{m+1}) =
+\num{n+m+1}$. Note that $\num{m+1} \ident \num{m}'$, and that
+$\num{n+m+1} \ident \num{n+m}'$. So we are looking for !!a{derivation} of
+$(\num{n} + \num{m}') = \num{n+m}'$ from the axioms of~$\Th{Q}$. Our
+!!{derivation}may use the !!{derivation} $\delta_{n,m}$ which exists by inductive
+hypothesis.
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$\delta_{n,m}$}
+  \DeduceC{$(\num{n} + \num{m}) = \num{n+m}$}
+  \AxiomC{$\lforall[x][\lforall[y][(x+y') = (x+y)']]$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$\lforall[y][(\num{n}+y') = (\num{n}+y)']$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$(\num{n}+\num{m}') = (\num{n}+\num{m})'$}
+    \RightLabel{\Elim=}
+    \BinaryInfC{$(\num{n}+\num{m}') = \num{n+m}'$}
+\end{prooftree}
+In the last $\Elim=$ inference, we replace the subterm $\num{n} +
+\num{m}$ of the right side $(\num{n} + \num{m})'$ of the right premise
+by the term $\num{n+m}$.
+\end{proof}
+
+In \olref[inc][req][min]{lem:less-zero}, we showed that $\Th{Q} \Proves
+\lforall[x][\lnot x < \Obj 0]$. What does an actual !!{derivation} look like?
+
+\begin{proof}[Proof of {\olref[inc][req][min]{lem:less-zero}}]
+To prove a universal claim like this, we use $\Intro\lforall$, which
+requires !!a{derivation} of $\lnot a < \Obj 0$. Looking at axiom $!Q_8$,
+this means proving $\lnot \exists z (z' + a) = \Obj 0$. Specifically,
+if we had a proof of the latter, $!Q_8$ would allow us to prove the
+former (recall that $A \liff B$ is short for $(A \lif B) \land (B \lif
+A)$.
+\begin{prooftree}\footnotesize
+  \AxiomC{$\lnot\lexists[z][(z' + a) = \Obj 0]$}
+  \AxiomC{$\lforall[x][\lforall[y][(x < y \liff \lexists[z][(z' + x) = y])]]$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$\lforall[y][(a < y \liff \lexists[z][(z' + a) = y])]$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$a < \Obj 0 \liff \lexists[z][(z' + a) = \Obj 0]$}
+  \RightLabel{\Elim\land}
+  \UnaryInfC{$a < \Obj 0 \lif \lexists[z][(z' + a) = \Obj 0]$}
+  \AxiomC{$\Discharge{a < \Obj 0}{1}$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$\lexists[z][(z' + a) = \Obj 0]$}
+  \RightLabel{\Elim\lnot}
+  \insertBetweenHyps{\hskip -3em}
+  \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro\lnot}{1}
+  \UnaryInfC{$\lnot a<\Obj 0$}
+\end{prooftree}
+This is !!a{derivation} of $\lnot a<\Obj 0$ from $\lnot\lexists[z][(z' +
+a) = \Obj 0]$ (and~$!Q_8$); let's call it~$\delta_1$.
+
+Now how do we prove $\lnot\lexists[z][(z' + a) = \Obj 0]$ from the
+axioms of~$\Th{Q}$? To prove a negated claim like this, we'd need
+!!a{derivation} of the form
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lexists[z][(z' + a) = \Obj 0]}{2}$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\Intro\lnot}{2}
+  \UnaryInfC{$\lnot\lexists[z][(z' + a) = \Obj 0]$}
+  \end{prooftree}
+To get a contradiction from an existential claim, we introduce a
+constant~$b$ for the existentially quantified variable~$z$ and use
+\Elim\lexists:
+\begin{prooftree}
+  \AxiomC{$\Discharge{\lexists[z][(z' + a) = \Obj 0]}{2}$}
+  \AxiomC{$\Discharge{(b'+a) = \Obj 0}{3}$}
+  \RightLabel{$\delta_2$}
+    \DeduceC{$\lfalse$}
+    \DischargeRule{\Elim\exists}{3}
+    \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro\lnot}{2}
+  \UnaryInfC{$\lnot\lexists[z][(z' + a) = \Obj 0]$}
+  \end{prooftree}
+Now the task is to fill in $\delta_2$, i.e., prove $\lfalse$ from
+$(b'+a) = \Obj 0$ and the axioms of~$\Th{Q}$. $Q_2$ says that $\Obj 0$
+can't be the successor of some number, so one way of doing that would
+be to show that $(b' + a)$ is equal to the successor of some number.
+Since that expression itself is a sum, the axioms for addition must
+come into play. If $\eq[a][\Obj 0]$, $Q_5$ would tell us that $\eq[(b'
++ a)][b']$, i.e., $b' + a$ is the successor of some number, namely
+of~$b$. On the other hand, if $\eq[a][c']$ for some $c$, then
+$\eq[(b'+a)][(b'+c')]$ by \Elim\eq, and $\eq[(b'+c')][(b'+c)']$
+by~$Q_6$. So again, $b'+a$ is the successor of a number---in this
+case, $b'+c$. So the strategy is to divide the task into these two
+cases. We also have to verify that $\Th{Q}$ proves that one of these
+cases holds, i.e., $\Th{Q} \Proves a = 0 \lor \lexists[y][(a = y')]$,
+but this follows directly from $Q_3$ by \Elim\lforall. Here are the
+two cases:
+
+Case 1: Prove $\lfalse$ from $\eq[a][\Obj 0]$ and $\eq[(b'+a)][\Obj
+  0]$ (and axioms $Q_2$, $Q_5$):
+\begin{prooftree}\footnotesize
+  \AxiomC{$\lforall[x][\lnot \Obj 0 = x']$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$\lnot \Obj 0 = b'$}
+  \AxiomC{$\lforall[x][(x+\Obj 0) = x]$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$(b' + \Obj 0) = b'$}
+  \AxiomC{$a = \Obj 0$}
+  \AxiomC{$(b'+a) = \Obj 0$}
+  \RightLabel{\Elim=}
+  \BinaryInfC{$(b' + \Obj 0) = \Obj 0$}
+  \doubleLine
+  \UnaryInfC{$\Obj 0 = (b' + \Obj 0)$}
+      \insertBetweenHyps{\hskip -.5em}
+  \RightLabel{\Elim=}
+  \BinaryInfC{$\Obj 0 = b'$}
+  \RightLabel{\Elim\lnot}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
+Call this !!{derivation}~$\delta_3$. (We've abbreviated the !!{derivation} of
+$\Obj 0 = (b' + \Obj 0)$ from $(b' + \Obj 0) = \Obj 0$ by a double
+inference line.)
+
+Case 2: Prove $\lfalse$ from $\lexists[y][a = y']$ and
+$\eq[(b'+a)][\Obj 0]$ (and axioms $Q_2$, $Q_6$). We first show how to
+derive $\lfalse$ from $\eq[a][c']$ and $\eq[(b'+a)][\Obj 0]$.
+\begin{prooftree}\footnotesize
+  \AxiomC{$\lforall[x][\lnot \Obj 0 = x']$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$\lnot \Obj 0 = (b'+c)'$}
+  \AxiomC{$a = c'$}
+  \AxiomC{$(b'+a) = \Obj 0$}
+  \RightLabel{\Elim=}
+          \insertBetweenHyps{\hskip -.3em}
+  \BinaryInfC{$\Obj (b'+c') = \Obj 0$}
+  \AxiomC{$\lforall[x][\lforall[y][(x+y') = (x+y)']]$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$\lforall[y][(b'+y') = (b'+y)']$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$(b' + c') = (b'+c)'$}
+  \RightLabel{\Elim=}
+        \insertBetweenHyps{\hskip .5em}
+  \BinaryInfC{$\Obj 0 = (b' + c)'$}
+  \RightLabel{\Elim\lnot}
+          \insertBetweenHyps{\hskip -.5em}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
+Call this $\delta_4$. We get the required !!{derivation} $\delta_5$ by
+applying $\Elim\lexists$ and discharging the assumption $\eq[a][c']$:
+\begin{prooftree}
+  \AxiomC{$\lexists[y][a=y']$}
+  \AxiomC{$\Discharge{a = c'}{6} \quad \eq[(b'+a)][\Obj 0]$}
+  \RightLabel{$\delta_4$}
+  \DeduceC{$\lfalse$}
+  \DischargeRule{\Elim\exists}{6}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
+
+  
+Putting everything together, the full proof looks like this:
+\begin{prooftree}\footnotesize
+  \AxiomC{$\Discharge{\lexists[z][(z' + a) = \Obj 0]}{2}$}
+  \AxiomC{$\begin{gathered}
+  \lforall[x][(x = 0 \lor {}]\\
+  \lexists[y][(a = y')])
+  \end{gathered}$}
+  \RightLabel{\Elim\lforall}
+  \UnaryInfC{$\begin{gathered}a = 0 \lor {}\\
+  \lexists[y][(a = y')]
+  \end{gathered}$}
+  \AxiomC{$\begin{gathered}[b]
+      \Discharge{a = \Obj 0}{7} \\
+      \Discharge{(b'+a) = \Obj 0}{3}
+      \end{gathered}$}
+    \RightLabel{$\delta_3$}
+    \DeduceC{$\lfalse$}
+    \AxiomC{$\begin{gathered}[b]
+        \Discharge{\lexists[y][a=y']}{7} \\
+        \Discharge{(b'+a) = \Obj 0}{3}
+        \end{gathered}$\quad}
+    \RightLabel{$\delta_5$}
+    \DeduceC{$\lfalse$}
+    \DischargeRule{\Elim\lor}{7}
+    \insertBetweenHyps{\hskip -.5em}
+    \TrinaryInfC{$\lfalse$}
+    \RightSubproofLabel{$\delta_2$}
+    \DischargeRule{\Elim\exists}{3}
+    \BinaryInfC{$\lfalse$}
+  \DischargeRule{\Intro\lnot}{2}
+  \UnaryInfC{$\lnot\lexists[z][(z' + a) = \Obj 0]$}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\lnot a<\Obj 0$}
+  \RightLabel{\Intro\lforall}
+  \UnaryInfC{$\lforall[x][\lnot x < \Obj 0]$}
+\end{prooftree}
+\end{proof}
+
+In the proof of \olref[inc][inp][ros]{thm:rosser}, we defined
+$\ORProv(y)$ as \[\lexists[x][(\OPrf(x, y) \land \lforall[z][(z < x
+    \lif \lnot \ORefut(z, y))])].\] $\OPrf(x,y)$ is the formula
+representing the proof relation of~$\Th{T}$ (a consistent,
+axiomatizable extension of~$\Th{Q}$) in $\Th{Q}$, and $\ORefut(z, y)$
+is the formula representing the refutation relation. That means that
+if $n$ is the G\"odel number of a proof of~$!A$, then $\Th{Q} \Proves
+\OPrf(\num{n}, \gn{!A})$, and otherwise $\Th{Q} \Proves
+\lnot\OPrf(\num{n}, \gn{!A})$. Similarly, if $n$ is the G\"odel number
+of a proof of $\lnot !A$, then $\Th{Q} \Proves \ORefut(\num{n},
+\gn{!A})$, and otherwise $\Th{Q} \Proves \lnot\ORefut(\num{n},
+\gn{!A})$. We use the Diagonal Lemma to find a sentence $!R$ such that
+$\Th{Q} \Proves !R \liff \lnot \ORProv(\gn{!R})$. Rosser's Theorem
+states that $\Th{T} \Proves/ !R$ and $\Th{T} \Proves/ \lnot !R$. Both
+claims were proved indirectly: we show that if $\Th{T} \Proves !R$,
+$\Th{T}$ is inconsistent, i.e., $\Th{T} \Proves \lfalse$, and the same
+if $\Th{T} \Proves \lnot !R$. 
+
+\begin{proof}[Proof of {\olref[inc][inp][ros]{thm:rosser}}]
+First we prove something things about~$<$. By
+\olref[inc][req][min]{lem:less-nsucc}, we know that $\Th{Q} \Proves
+\lforall[x][(x < \num {n+1} \lif (\eq[x][\Obj 0] \lor \dots \lor
+  \eq[x][\num n]))]$ for every~$n$. So of course also (if $n>1$),
+$\Th{Q} \Proves \lforall[x][(x < \num {n} \lif (\eq[x][\Obj 0] \lor
+  \dots \lor \eq[x][\num{n-1}]))]$. We can use this to derive
+$\eq[a][\Obj 0] \lor \dots \lor \eq[a][\num{n-1}]$ from $a < \num{n}$:
+\begin{prooftree}
+  \AxiomC{$a < \num{n}$}
+  \AxiomC{}
+  \DeduceC{$\lforall[x][(x < \num{n} \lif (x = \num{0} \lor 
+      \dots \lor x = \num{n-1}))]$}
+  \RightLabel{\Elim\forall}
+  \UnaryInfC{$a < \num{n} \lif (a = \num{0} \lor 
+      \dots \lor a = \num{n-1})$}
+  \RightLabel{\Elim\lif}
+  \BinaryInfC{$a = \num{0} \lor \dots \lor a = \num{n-1}$}
+\end{prooftree}
+Let's call this !!{derivation} $\lambda_1$.
+
+Now, to show that $\Th{T} \Proves/ !R$, we assume that $\Th{T}
+\Proves !R$ (with !!a{derivation}~$\delta$) and show that $\Th{T}$ then
+would be inconsistent. Let $n$ be the G\"odel number
+of~$\delta$. Since $\OPrf$ represents the proof relation in~$\Th{Q}$,
+there is !!a{derivation}~$\delta_1$ of $\OPrf(\num{n},
+\gn{!R})$. Furthermore, no $k < n$ is the G\"odel number of a
+refutation of~$!R$ since $\Th{T}$ is assumed to be consistent, so for
+each $k < n$, $\Th{Q} \Proves \lnot \ORefut(\num{k}, \gn{!R})$; let
+$\rho_k$ be the corresponding !!{derivation}. We get !!a{derivation} of
+$\ORProv(\gn{!R})$:
+\begin{prooftree}\footnotesize
+  \AxiomC{}
+  \RightLabel{$\delta_1$}
+  \DeduceC{$\OPrf(\num{n}, \gn{!R})$}
+
+  \AxiomC{$\Discharge{a < \num{n}}{1}$}
+  \RightLabel{$\lambda_1$}
+  \DeduceC{$\begin{gathered}[b]
+      a= \num{0} \lor \dots {} \\
+      {} \lor a = \num{n-1}
+      \end{gathered}$}
+  \AxiomC{$\dots$}
+
+  \AxiomC{$\Discharge{a=\num{k}}{2}$}
+  \AxiomC{}
+  \RightLabel{$\rho_k$}
+  \DeduceC{$\lnot \ORefut(\num{k}, \gn{!R})$}
+  \RightLabel{\Elim=}
+  \BinaryInfC{$\lnot \ORefut(a, \gn{!R})$}
+  \AxiomC{$\dots$}
+  \DischargeRule{$\Elim\lor^*$}{2}
+  \doubleLine
+  \insertBetweenHyps{\hskip -1pt}
+  \QuaternaryInfC{$\lnot \ORefut(a, \gn{!R})$}
+  \DischargeRule{\Intro\lif}{1}
+  \UnaryInfC{$a < \num{n} \lif \lnot \ORefut(a, \gn{!R})$}
+  \RightLabel{\Intro\lforall}
+  \UnaryInfC{$\lforall[z][(z < \num{n} \lif \lnot \ORefut(z, \gn{!R}))]$}
+
+    \insertBetweenHyps{\hskip -5pt}
+  \RightLabel{\Intro\land}
+  \BinaryInfC{$\OPrf(\num{n}, \gn{!R}) \land \lforall[z][(z < \num{n} \lif \lnot \ORefut(\num{z}, \gn{!R}))]$}
+  \RightLabel{\Intro\lexists}
+  \UnaryInfC{$\lexists[x][(\OPrf(x, \gn{!R}) \land \lforall[z][(z < x \lif \lnot \ORefut(z, \gn{!R}))])]$}
+\end{prooftree}
+(We abbreviate multiple applications of $\Elim\lor$ by $\Elim\lor^*$
+above.)  We've shown that if $\Th{T} \Proves !R$ there would be
+!!a{derivation} of~$\ORProv(\gn{!R})$.  Then, since $\Th{T} \Proves R \liff
+\lnot \ORProv(\gn{!R})$, also $\Th{T} \Proves \ORProv(\gn{!R}) \lif
+\lnot R$, we'd have $\Th{T} \Proves \lnot !R$ and $\Th{T}$ would be
+inconsistent.
+
+Now let's show that $\Th{T} \Proves/ \lnot !R$. Again, suppose it
+did. Then there is !!a{derivation} $\rho$ of $\lnot !R$ with G\"odel
+number $m$---a refutation of~$!R$---and so $\Th{Q} \Proves
+\ORefut(\num{m}, \gn{!R})$ by !!a{derivation}~$\rho_1$. Since we assume
+$\Th{T}$ is consistent, $\Th{T} \Proves/ !R$. So for all $k$, $k$ is
+not a G\"odel number of !!a{derivation} of~$!R$, and hence $\Th{Q} \Proves \lnot
+\OPrf(\num{k}, \gn{!R})$ by !!a{derivation}~$\pi_k$. So we have:
+  
+\begin{prooftree}\footnotesize
+  \AxiomC{}
+  \RightLabel{$\lambda_2$}
+  \DeduceC{$\begin{gathered}[b] a = \num{0} \lor \dots \lor\\
+      a = \num{m} \lor \num{m} < a\end{gathered}$}
+  \AxiomC{$\dots$}
+  \AxiomC{$\begin{gathered}\Discharge{\OPrf(a, \gn{!R})}{1}\\
+    \Discharge{a = \num{k}}{2}\end{gathered}$}
+  \RightLabel{$\pi_k'$}
+  \DeduceC{$\lfalse$}
+  \RightLabel{$\lfalse_I$}
+  \UnaryInfC{$\num{m}<a$}
+  \AxiomC{$\dots$}
+  \AxiomC{$\Discharge{\num{m} < a}{2}$}
+  \DischargeRule{$\Elim\lor^*$}{2}
+  \insertBetweenHyps{\hspace{-.1em}}
+  \doubleLine
+  \QuinaryInfC{$\num{m} < a$}
+  \AxiomC{}
+  \RightLabel{$\rho_1$}
+  \DeduceC{$\ORefut(\num{m}, \gn{!R})$}
+  \RightLabel{\Intro\land}
+    \insertBetweenHyps{\hspace{-.1em}}
+  \BinaryInfC{$\num{m}
+    < a \land \ORefut(\num{m}, \gn{!R})$}
+  \RightLabel{\Intro\exists}
+  \UnaryInfC{$\exists z(z
+    < a \land \ORefut(z, \gn{!R}))$}
+  \DischargeRule{\Intro\lif}{1}
+  \UnaryInfC{$\OPrf(a, \gn{!R}) \lif \exists z(z
+    < a \land \ORefut(z, \gn{!R}))$}
+  \RightLabel{\Intro\forall}
+  \UnaryInfC{$\forall x(\OPrf(x, \gn{!R}) \lif \exists z(z
+    < x \land \ORefut(z, \gn{!R})))$}
+  \DeduceC{$\lnot\exists x(\OPrf(x, \gn{!R}) \land \forall z(z
+    < x \lif \lnot \ORefut(z, \gn{!R})))$}
+\end{prooftree}
+where $\pi_k'$ is the !!{derivation}
+\begin{prooftree}
+  \AxiomC{}
+  \RightLabel{$\pi_k$}
+  \DeduceC{$\lnot \OPrf(\num{k}, \gn{!R})$}
+  \AxiomC{$a = \num{k}$}
+  \AxiomC{$\OPrf(a, \gn{!R})$}
+  \RightLabel{\Elim=}
+  \BinaryInfC{$\OPrf(\num{k}, \gn{!R})$}
+  \RightLabel{\Elim\lnot}
+  \BinaryInfC{$\lfalse$}
+\end{prooftree}
+and $\lambda_2$ is
+\begin{prooftree}\footnotesize
+  \AxiomC{}
+  \RightLabel{$\lambda_3$}
+  \DeduceC{$\begin{gathered}[b](a < \num{m} \lor {}\\a = \num{m}) \lor {}\\ \num{m} < a\end{gathered}$}
+
+  \AxiomC{$\Discharge{a < \num{m}}{3}$}
+  \RightLabel{$\lambda_1$}
+  \DeduceC{$\begin{gathered}[b]a = \num{0} \lor \dots \lor {}\\
+  a = \num{m-1}\end{gathered}$}
+  %\RightLabel{\Intro\lor}
+  \doubleLine
+  \UnaryInfC{$\begin{gathered}[b]
+      a = \num{0} \lor \dots \lor \\
+      a = \num{m} \lor \num{m} < a
+    \end{gathered}$}
+
+  \AxiomC{$\Discharge{a = \num{m}}{3}$}
+  %\RightLabel{\Intro\lor}
+  \doubleLine
+  \UnaryInfC{$\begin{gathered}[b]
+      a = \num{0} \lor \dots \lor \\
+      a = \num{m} \lor \num{m} < a
+    \end{gathered}$}
+  
+  \AxiomC{$\Discharge{\num{m} < a}{3}$}
+  \doubleLine
+  \RightLabel{$\Intro\lor^*$}
+  \UnaryInfC{$\begin{gathered}[b]
+      a = \num{0} \lor \dots \lor \\
+      a = \num{m} \lor \num{m} < a
+    \end{gathered}$}
+
+  %\insertBetweenHyps{\hskip 5pt}
+  \doubleLine
+  \DischargeRule{$\Elim\lor^2$}{3}
+  \QuaternaryInfC{$a = \num{0} \lor \dots \lor a = \num{m} \lor \num{m} < a$}
+\end{prooftree}
+(The !!{derivation} $\lambda_3$ exists by
+\olref[inc][req][min]{lem:trichotomy}. We abbreviate repeated use of
+$\Intro\lor$ by $\Intro\lor^*$ and the double use of $\Elim\lor$ to
+derive $a = \num{0} \lor \dots \lor a = \num{m} \lor \num{m} < a$ from
+$(a < \num{m} \lor a = \num{m}) \lor \num{m} < a$ as $\Elim\lor^2$.)
+\end{proof}
+
+\OLEndChapterHook
+
+

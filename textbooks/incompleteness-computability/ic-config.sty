@@ -1,0 +1,41 @@
+% Configuration file for Logic II textbook
+
+% Let's be unpretentious and use A, B, C, etc. for formulas ...
+
+\ollatinformulas
+
+% ... and use bold italic instead of Fraktur for structures
+
+\DeclareMathAlphabet{\mathbi}{OT1}{pplx}{b}{it}
+
+\DeclareDocumentCommand \Struct { m }{\applytofirst{\mathbi}{#1}}
+
+% - `\TMblank` - symbol for a blank
+\DeclareDocumentMacro \TMblank {\sqcup}
+
+% - `\TMstroke` - single stroke symbol on tape
+\DeclareDocumentMacro \TMstroke {I}
+
+
+% I think I like ``countable'' and ``uncountable'' better?
+
+\settexttoken{enumerable}{countable}{countable}
+
+\settexttoken{nonenumerable}*{uncountable}{uncountable}
+
+\settexttoken{denumerable}{countably infinite}{countably infinite}
+
+% Biconditional, verum are defined symbols
+
+\tagtrue{defIff,defTrue}
+\tagfalse{prvIff,prvTrue}
+
+% I'll leave cases for conditional, universal quantifier as exercises
+
+\tagtrue{probAnd,probIf,probAll}
+
+% Which proof system?  Not sure yet, let's use natural deduction for
+% now. prfND is on by default, we just have to supress includion of
+% the sequent calculus.
+
+\tagfalse{prfSC,prfAX,prfTab}

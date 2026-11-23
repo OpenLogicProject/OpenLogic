@@ -1,0 +1,280 @@
+% !TeX root = ic-screen.tex
+
+% ic.tex
+%
+% driver file ic.tex to produce text
+
+\preto\OLEndChapterHook{\IfFileExists{include/summary-\thechapter}
+        {\section*{Summary}\addcontentsline{toc}{section}{Summary}
+        \let\emph\textbf\input{include/summary-\thechapter}\let\emph\textit}{}}
+
+\problemsperchapter
+\allowdisplaybreaks
+
+\frontmatter
+
+\OLPfrontmatter
+
+\input{include/preface}
+
+\mainmatter
+
+\olimport*[incompleteness/introduction]{introduction}
+
+\olimport*[computability/recursive-functions]{recursive-functions}
+
+\olimport*[incompleteness/arithmetization-syntax]{arithmetization-syntax}
+
+\olimport*[incompleteness/representability-in-q]{representability-in-q}
+
+\olimport*[incompleteness/incompleteness-provability]{incompleteness-provability}
+
+\chapter{Computability and Incompleteness}\label{comp-inc:chap}
+
+\olimport*[computability/computability-theory]{introduction}
+\olimport*[computability/computability-theory]{coding-computations}
+\olimport*[computability/computability-theory]{normal-form}
+\olimport*[computability/computability-theory]{s-m-n}
+\olimport*[computability/computability-theory]{universal-part-function}
+\olimport*[computability/computability-theory]{no-universal-function}
+\olimport*[computability/computability-theory]{halting-problem}
+%\olimport*[computability/computability-theory]{russells-paradox}
+\olimport*[computability/computability-theory]{computable-sets}
+\olimport*[computability/computability-theory]{ce-sets}
+\olimport*[computability/computability-theory]{equiv-ce-defs}
+\olimport*[computability/computability-theory]{non-comp-set}
+\olimport*[computability/computability-theory]{complement-ce}
+\olimport[include]{ce-theories}
+\olimport[include]{g1-halting-problem}
+
+\OLEndChapterHook
+
+\chapter{Models of Arithmetic}\label{mod:chap}
+
+\olimport*[model-theory/models-of-arithmetic]{introduction}
+
+\olimport*[model-theory/basics]{reducts-and-expansions}
+
+\olimport*[model-theory/basics]{isomorphism}
+
+\olimport*[model-theory/basics]{theory-of-m}
+
+\olimport*[model-theory/models-of-arithmetic]{standard-models}
+
+\olimport*[model-theory/models-of-arithmetic]{non-standard-models}
+
+\olimport*[model-theory/models-of-arithmetic]{models-of-q}
+
+\olimport*[model-theory/models-of-arithmetic]{models-of-pa}
+
+\olimport*[model-theory/models-of-arithmetic]{computable-models}
+
+\OLEndChapterHook
+
+\chapter{Second-Order Logic}\label{sol:chap}
+
+\olimport*[second-order-logic/syntax-and-semantics]{introduction}
+
+\let\oldolsection\olsection
+\let\olsection\nosection
+\olimport*[second-order-logic/sol-and-set-theory]{introduction}
+\let\olsection\oldolsection
+
+\olimport*[second-order-logic/syntax-and-semantics]{terms-formulas}
+
+\olimport*[second-order-logic/syntax-and-semantics]{satisfaction}
+
+\olimport*[second-order-logic/syntax-and-semantics]{semantic-notions}
+
+\olimport*[second-order-logic/syntax-and-semantics]{expressive-power}
+
+\olimport*[second-order-logic/syntax-and-semantics]{inf-count}
+
+\olimport*[second-order-logic/metatheory]{second-order-arithmetic}
+
+\olimport*[second-order-logic/metatheory]{undecidability-and-axiomatizability}
+
+\olimport*[second-order-logic/metatheory]{compactness}
+
+\olimport*[second-order-logic/metatheory]{loewenheim-skolem}
+
+\olimport*[second-order-logic/sol-and-set-theory]{comparing-sets}
+
+\olimport*[second-order-logic/sol-and-set-theory]{cardinalities}
+
+\olimport*[second-order-logic/sol-and-set-theory]{power-of-continuum}
+
+\OLEndChapterHook
+
+\chapter{The Lambda Calculus}\label{lambda:chap}
+
+\olimport*[lambda-calculus/introduction]{overview}
+
+\olimport*[lambda-calculus/introduction]{syntax}
+
+\olimport*[lambda-calculus/introduction]{reduction}
+
+\olimport*[lambda-calculus/introduction]{church-rosser}
+
+\olimport*[lambda-calculus/introduction]{currying}
+
+\olsection{Lambda Definability}
+
+\let\oldolsection\olsection
+\def\olsection#1{}
+\olimport*[lambda-calculus/lambda-definability]{introduction}
+\let\olsection\oldolsection
+
+\olimport*[lambda-calculus/lambda-definability]{arithmetical-functions}
+\olimport*[lambda-calculus/lambda-definability]{pairs}
+\olimport*[lambda-calculus/lambda-definability]{truth-values}
+%\olimport{lists}
+\olimport*[lambda-calculus/lambda-definability]{primitive-recursive-functions}
+\olimport*[lambda-calculus/lambda-definability]{fixpoints}
+\olimport*[lambda-calculus/lambda-definability]{minimization}
+\olimport*[lambda-calculus/lambda-definability]{partial-recursive-functions}
+\olimport*[lambda-calculus/lambda-definability]{lambda-definable-recursive}
+
+\OLEndChapterHook
+
+\appendix
+
+\input{include/ic-derivations}
+
+\let\intro\comment
+\let\endintro\endcomment
+
+\chapter{First-order Logic}\label{fol:chap}
+
+\olimport*[first-order-logic/syntax-and-semantics]{first-order-languages}
+
+\olimport*[first-order-logic/syntax-and-semantics]{terms-formulas}
+
+\olimport*[first-order-logic/syntax-and-semantics]{free-vars-sentences}
+
+\olimport*[first-order-logic/syntax-and-semantics]{substitution}
+
+\olimport*[first-order-logic/syntax-and-semantics]{structures}
+
+\olimport*[first-order-logic/syntax-and-semantics]{satisfaction}
+
+\olimport*[first-order-logic/syntax-and-semantics]{assignments}
+
+\olimport*[first-order-logic/syntax-and-semantics]{extensionality}
+
+\olimport*[first-order-logic/syntax-and-semantics]{semantic-notions}
+
+\section{Theories}
+
+\begin{defn}
+A set of !!{sentence}s~$\Gamma$ is \emph{closed} iff, whenever
+$\Gamma \Entails !A$ then $!A \in \Gamma$.  The \emph{closure} of a set
+of !!{sentence}s~$\Gamma$ is $\Setabs{!A}{\Gamma \Entails !A}$.
+
+We say that~$\Gamma$ is \emph{axiomatized by} a set of
+sentences~$\Delta$ if $\Gamma$ is the closure of~$\Delta$.
+\end{defn}
+
+\begin{ex}
+The theory of strict linear orders in the language~$\Lang L_<$ is
+axiomatized by the set
+\begin{align*}
+& \lforall[x][\lnot x < x], \\
+& \lforall[x][\lforall[y][((x < y \lor y <
+    x) \lor x = y)]], \\
+& \lforall[x][\lforall[y][\lforall[z][((x < y
+      \land y < z) \lif x < z)]]]
+\end{align*}
+It completely captures the intended !!{structure}s: every strict
+linear order is a model of this axiom system, and vice versa, if $R$
+is a linear order on a set $X$, then the structure $\Struct M$ with
+$\Domain M = X$ and $\Assign{<}{M} = R$ is a model of this theory.
+\end{ex}
+
+\begin{ex}
+The theory of groups in the language $\Obj 1$ (!!{constant}), $\cdot$
+(two-place !!{function}) is axiomatized by
+\begin{align*}
+& \lforall[x][(x \cdot \Obj 1) = x]\\
+& \lforall[x][\lforall[y][\lforall[z][\eq[(x \cdot (y \cdot z))][((x
+          \cdot y) \cdot z)]]]]\\
+& \lforall[x][\lexists[y][(x \cdot y) = \Obj 1]]
+\end{align*}
+\end{ex}
+
+\begin{ex}
+The theory of Peano arithmetic is axiomatized by the following
+sentences in the language of arithmetic~$\Lang L_A$.
+\begin{align*}
+& \lnot\lexists[x][x' = \Obj 0]\\
+& \lforall[x][\lforall[y][(x' = y' \lif x = y)]]\\
+& \lforall[x][\lforall[y][(x < y \liff \lexists[z][\eq[(z' + x)][y]])]]\\
+& \lforall[x][\eq[(x + \Obj 0)][x]]\\
+& \lforall[x][\lforall[y][\eq[(x + y')][(x + y)']]]\\
+& \lforall[x][\eq[(x \times \Obj 0)][\Obj 0]]\\
+& \lforall[x][\lforall[y][\eq[(x \times y')][((x \times y) + x)]]]\\
+\intertext{plus all sentences of the form}
+& (!A(\Obj 0) \land \lforall[x][(!A(x) \lif !A(x'))]) \lif \lforall[x][!A(x)]
+\end{align*}
+Since there are infinitely many sentences of the latter form, this
+axiom system is infinite.  The latter form is called the
+\emph{induction schema}. (Actually, the induction schema is a bit more
+complicated than we let on here.)
+
+The third axiom is an \emph{explicit definition} of~$<$.
+\end{ex}
+
+\OLEndChapterHook
+
+\chapter{Natural Deduction}\label{nd:chap}
+
+\olimport*[first-order-logic/proof-systems]{natural-deduction}[\nosection]
+
+\olimport*[first-order-logic/natural-deduction]{rules-and-proofs}
+
+\olimport*[first-order-logic/natural-deduction]{propositional-rules}
+
+\olimport*[first-order-logic/natural-deduction]{quantifier-rules}
+
+\olimport*[first-order-logic/natural-deduction]{derivations}
+
+\olimport*[first-order-logic/natural-deduction]{proving-things}
+
+\olimport*[first-order-logic/natural-deduction]{proving-things-quant}
+
+\olimport*[first-order-logic/natural-deduction]{identity}
+
+\olimport*[first-order-logic/natural-deduction]{proof-theoretic-notions}
+
+\olimport*[first-order-logic/natural-deduction]{soundness}
+
+\OLEndChapterHook
+
+%\olimport[additions]{computing-recursive}
+
+\stopproblems
+\def\ifproblems#1{}
+
+\def\figurename{Fig.}
+
+\chapter{Biographies}\label{bios:chap}
+
+\olimport*[history/biographies]{alonzo-church}
+
+\olimport*[history/biographies]{kurt-goedel}
+
+\olimport*[history/biographies]{rozsa-peter}
+
+\olimport*[history/biographies]{julia-robinson}
+
+\olimport*[history/biographies]{alfred-tarski}
+
+\backmatter
+
+\clearpage
+\photocredits
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic.bib}
+
+\olimport*{\olpath/content/open-logic-about}

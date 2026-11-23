@@ -1,0 +1,31 @@
+The proof of the incompleteness theorems requires that we have a way
+to talk about provability in a theory (such as $\Th{PA}$) in the
+language of the theory itself, i.e., in the language of
+arithmetic. But the language of arithmetic only deals with numbers,
+not with formulas or !!{derivation}s.  The solution to this problem is
+to define a systematic mapping from !!{formula}s and !!{derivation}s to
+numbers. The number associated with !!a{formula} or !!a{derivation}
+is called its \textbf{G\"odel number}.  If $!A$ is !!a{formula},
+$\Gn{!A}$ is its G\"odel number. We showed that important operations on
+!!{formula}s turn into primitive
+recursive functions on the respective G\"odel
+numbers. For instance, $\Subst{!A}{t}{x}$, the operation of
+substituting a term~$t$ for every free occurrence of~$x$ in~$!A$,
+corresponds to an arithmetical function $\fn{subst}(n,m,k)$ which, if
+applied to the G\"odel numbers of $!A$, $t$, and $x$, yields the
+G\"odel number of~$\Subst{!A}{t}{x}$. In other words,
+$\fn{subst}(\Gn{!A}, \Gn{t}, \Gn{x}) = \Gn{\Subst{!A}{t}{x}}$.
+Likewise, properties of !!{derivation}s
+turn into primitive recursive relations on the respective G\"odel
+numbers.  In particular, the property $\fn{Deriv}(n)$ that holds
+of~$n$ if it is the G\"odel number of a correct !!{derivation} in
+natural deduction, is primitive recursive.  Showing that these are
+primitive recursive required a fair amount of work, and at times some
+ingenuity, and depended essentially on the fact that operating with
+sequences is primitive recursive.  If a theory~$\Th{T}$ is
+!!{decidable}, then we can use $\fn{Deriv}$ to define !!a{decidable}
+relation $\Prf[\Th{T}](n, m)$ which holds if $n$ is the G\"odel number
+of !!a{derivation} of the !!{sentence} with G\"odel number~$m$
+from~$\Th{T}$.  This relation is primitive recursive if the set of
+axioms of~$\Th{T}$ is, and merely general recursive if the axioms
+of~$\Th{T}$ are !!{decidable} but not primitive recursive.

@@ -1,0 +1,43 @@
+% slc-print.tex
+%
+% driver file slc-print.tex to produce the Sets, Logic, Computation
+% textbook for printing on KDPs's quarto stock.
+
+\documentclass[print]{../../sty/open-logic-book}
+
+\usepackage[nonumberlist,toc,style=index]{glossaries}
+\makeglossaries
+
+\def\oljobname{slc}
+
+% \olpath has to point to the location of the OLP main
+% directory/folder.  We're compiling from subdirectory
+% courses/phil379/, so the main directory is two
+% levels up.
+
+\newcommand{\olpath}{../../}
+
+% load all the Open Logic definitions. This will also load the
+% local definitions in open-logic-sample-config.sty
+
+\input{\olpath/sty/open-logic.sty}
+
+\input{slc-metadata}
+
+% we want all the problems deferred to the very end
+
+\input{\olpath/sty/open-logic-defer.sty}
+
+% load glossary entries
+
+\loadglsentries{include/glossary}
+
+% end preamble           
+
+\begin{document}
+
+% load the text
+
+\input{slc}
+
+\end{document}

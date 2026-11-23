@@ -1,0 +1,27 @@
+Turing machines are determined by their instruction sets, which are
+finite sets of quintuples (for every state and symbol read, specify
+new state, symbol written, and movement of the head). The finite sets
+of quintuples are enumerable, so there is a way of associating a
+number with each Turing machine instruction set. The \emph{index} of
+a Turing machine is the number associated with its instruction set
+under a fixed such schema. In this way we can ``talk about'' Turing
+machines indirectly---by talking about their indices.
+
+One important problem about the behavior of Turing machines is whether
+they eventually halt. Let $h(e, n)$ be the function which $= 1$ if the
+Turing machine with index~$e$ halts when started on input~$n$, and
+$=0$ otherwise. It is called the \emph{halting function}. The question
+of whether the halting function is itself Turing computable is called
+the \emph{halting problem}. The answer is no: the halting problem is
+unsolvable. This is established using a diagonal argument.
+
+The halting problem is only one example of a larger class of problems
+of the form ``can $X$ be accomplished using Turing machines.'' Another
+central problem of logic is the \emph{decision problem for first-order
+  logic}: is there a Turing machine that can decide if a given
+sentence is valid or not. This famous problem was also solved
+negatively: the decision problem is unsolvable. This is established by
+a reduction argument: we can associate with each Turing machine~$M$
+and input~$w$ a first-order sentence~$T(M, w) \lif E(M, w)$ which is
+valid iff $M$ halts when started on input~$w$. If the decision problem
+were solvable, we could thus use it to solve the halting problem.

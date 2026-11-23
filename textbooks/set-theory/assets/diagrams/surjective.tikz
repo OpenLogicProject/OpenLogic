@@ -1,0 +1,15 @@
+\begin{tikzpicture}[blob/.style={fill=black, circle, minimum width=5pt, inner sep=1pt},every fit/.style={ellipse,draw,inner sep=-2pt}]
+\node[blob] (a1) at (0,4) {}; %
+\node[blob] (a2) at (0,3) {};    %
+\node[blob] (a3) at (0,2) {};%
+\node[blob] (a4) at (0,1) {};%
+\node[blob] (b1) at (4,3.5) {};%
+\node[blob] (b2) at (4,2.5) {};%
+\node[blob] (b3) at (4,1.5) {};%
+\node[draw,fit= (a1) (a2) (a3) (a4),minimum width=2cm] {} ;%
+\node[draw,fit= (b1) (b2) (b3),minimum width=2cm] {} ;
+\draw[->,thick,shorten <=2pt,shorten >=2pt] (a1) -- (b2);
+\draw[->,thick,shorten <=2pt,shorten >=2] (a2) -- (b1);
+\draw[->,thick,shorten <=2pt,shorten >=2] (a3) -- (b3);
+\draw[->,thick,shorten <=2pt,shorten >=2] (a4) -- (b3);
+\end{tikzpicture}

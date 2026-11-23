@@ -1,0 +1,347 @@
+% !TeX root = ./settheory-screen.tex
+% settheory.tex
+%
+% driver file settheory.tex to produce text
+
+\preto\OLEndChapterHook{\IfFileExists{include/summary-\thechapter}
+        {\section*{Summary}\addcontentsline{toc}{section}{Summary}
+        \let\emph\textbf\input{include/summary-\thechapter}\let\emph\textit}{}}
+
+\problemsperchapter
+
+\allowdisplaybreaks
+
+\frontmatter
+
+\OLPfrontmatter
+
+\input{include/preface}
+
+\mainmatter
+
+\part{Prelude}
+
+\olchapter{his}{set}{History and Mythology}
+
+To understand the philosophical significance of set theory, it will
+help to have some sense of why set theory arose at all. To understand
+that, it will help to think a little bit about the history and
+mythology of mathematics. So, before we get started on discussing set
+theory at all, we will start with a very brief ``history''. But we put
+this in scare-quotes, because it is very brief, extremely selective,
+and somewhat contestable.
+
+\olimport*[history/set-theory]{infinitesimals}
+\olimport*[history/set-theory]{limits}
+\olimport*[history/set-theory]{pathologies}
+\olimport*[history/set-theory]{mythology}
+
+\section{Roadmap}
+
+Part of the moral of the previous section is that the history of
+mathematics was largely written by the victors. They had axes to
+grind; philosophical and mathematical axes. Serious study of the
+history of mathematics is seriously difficult (and rewarding), and the
+Owl of Minerva takes flight only at dusk.
+
+For all that, it's incontestable that the ``pathological'' results
+involved the development of fascinating new mathematical tools, and a
+re-thinking of the standards of mathematical rigour. For example, they
+required thinking of the continuum (the ``real line'') in a particular
+way, and thinking of functions as point-by-point maps. And, in the
+end, the full development of all of these tools required the rigorous
+development of set theory. The rest of this book will explain some of
+that development.
+
+\Olref[sfr][][]{part} will present a version of \emph{na\"ive} set
+theory, which is easily sufficient to develop all of the mathematics
+just described. This will take a while. But, by end of
+\olref[sfr][][]{part} we will be in a position to understand how to
+treat real numbers as certain sets, and how to treat functions on
+them---including space-filling curves---as \emph{further} sets. 
+
+But the \emph{na\"ivety} of this set theory will emerge in
+\olref[sth][][]{part}, as we encounter set-theoretic paradoxes, and
+the felt need to describe things much more precisely. At this point,
+we will need to develop an axiomatic treatment of sets, which we can
+use to recapture all of our na\"ive results, whilst (hopefully)
+avoiding paradoxes. (The Owl of mathematical rigour takes flight only
+at dusk, too.)
+
+\OLEndChapterHook
+
+\olpart{sfr}{Na\"ive Set Theory}
+
+\section*{Introduction to \Olref[sfr][][]{part}}
+
+In \olref[sfr][][]{part}, we will consider sets in a na\"ive, informal
+way. \Olref[sfr][set][]{chap} will introduce the basic idea, that sets
+are collections considered extensionally, and will introduce some very
+basic operations. Then \crefrange{sfr:rel::chap}{sfr:fun::chap} will
+explain how set theory allows us to speak about relations and
+(therefore) functions. 
+
+\Crefrange{sfr:siz::chap}{sfr:infinite::chap} will then consider some of the
+early achievements of na\"ive set theory. In
+\olref[sfr][siz][]{chap}, we explore how to compare sets with regard
+to their size. In \olref[sfr][arith][]{chap}, we explore how one
+might reduce the integers, rationals, and reals to set theory plus
+basic arithmetic. In \olref[sfr][infinite][]{chap}, we consider how one
+might implement basic arithmetic within set theory. 
+
+To repeat, all of this will be done \emph{na\"ively}. But everything
+we do in \olref[sfr][][]{part} can be done perfectly rigorously, in
+the formal set theory which we introduce in \olref[sth][][]{part}.
+
+\olchapter{sfr}{set}{Getting Started}
+
+\olimport*[sets-functions-relations/sets]{basics}
+\olimport*[sets-functions-relations/sets]{subsets}
+\olimport*[sets-functions-relations/sets]{important-sets}
+\olimport*[sets-functions-relations/sets]{unions-and-intersections}
+\olimport*[sets-functions-relations/sets]{pairs-and-products}
+\olimport*[sets-functions-relations/sets]{russells-paradox}
+
+\OLEndChapterHook
+
+\olchapter{sfr}{rel}{Relations}
+
+\olimport*[sets-functions-relations/relations]{relations-as-sets}
+\olimport*[sets-functions-relations/relations]{reflections}
+\olimport*[sets-functions-relations/relations]{special-properties}
+\olimport*[sets-functions-relations/relations]{equivalence-relations}
+\olimport*[sets-functions-relations/relations]{orders}
+\olimport*[sets-functions-relations/relations]{operations}
+
+\OLEndChapterHook
+
+\olchapter{sfr}{fun}{Functions}
+
+\olimport*[sets-functions-relations/functions]{function-basics}
+\olimport*[sets-functions-relations/functions]{function-kinds}
+\olimport*[sets-functions-relations/functions]{functions-relations}
+\olimport*[sets-functions-relations/functions]{inverses}
+\olimport*[sets-functions-relations/functions]{composition}
+
+\OLEndChapterHook
+
+\olchapter{sfr}{siz}{The Size of Sets}
+
+\olimport*[sets-functions-relations/size-of-sets]{introduction}
+\olimport*[sets-functions-relations/size-of-sets]{enumerability-alt}
+\olimport*[sets-functions-relations/size-of-sets]{zig-zag}
+\olimport*[sets-functions-relations/size-of-sets]{pairing}
+\olimport*[sets-functions-relations/size-of-sets]{non-enumerability-alt}
+\olimport*[sets-functions-relations/size-of-sets]{reduction-alt}
+\olimport*[sets-functions-relations/size-of-sets]{equinumerous-sets}
+\olimport*[sets-functions-relations/size-of-sets]{comparing-size}
+\olimport*[sets-functions-relations/size-of-sets]{schroder-bernstein}
+\olimport*[history/set-theory]{cantor-plane}
+\olimport*[history/set-theory]{hilbert-curve}
+
+\OLEndChapterHook
+
+\olsetchapter{nosection}
+\chapter{Arithmetization}
+
+In \olref[his][set][]{chap}, we considered some of the historical
+background, as to \emph{why} we even have set theory.
+\Crefrange{sfr:set::chap}{sfr:siz::chap} then worked through through
+some principles of na\"ive set theory. So we now understand,
+na\"ively, how to construct relations and functions and compare the
+sizes of sets, and \emph{things like that}. 
+
+With this under our belts, we can approach some of the early
+achievements of set theory, in reducing (in some sense) large chunks
+of mathematics to set theory and arithmetic. That is the aim of this
+chapter.
+
+\olimport*[sets-functions-relations/arithmetization]{arithmetization}
+
+\chapter{Infinite Sets}
+
+In the previous chapter, we showed how to construct a bunch of
+things---integers, rationals, and reals---assuming some na\"{i}ve set
+theory and the natural numbers. The question for this chapter is: Can
+we construct the set of natural numbers \emph{itself} using set
+theory?
+
+\olimport*[sets-functions-relations/infinite]{infinite}
+\olresetchapter
+
+\OLEndPartHook
+
+\olpart{sth}{The Iterative Conception}
+
+\section*{Introduction to \Olref[sth][][]{part}}
+
+\Olref[sfr][][]{part} discussed sets in a na\"{i}ve, informal way. It
+is now time to tighten this up, and provide a formal theory of sets.
+That is the aim of \olref[sth][][]{part}. 
+
+Our formal theory is a first-order theory with just one two-place
+predicate, $\in$. We will lay down several axioms that govern the
+behaviour of the membership relation. However, we will introduce these
+axioms only as we need them, and consider how we might justify them as
+we encounter them. As a result, we will introduce our axioms
+\emph{throughout} the ensuing chapters.
+
+It might, though, be helpful for the reader to have a list of all the
+axioms in one place. So, here are \emph{all} the axioms that we will
+consider in \olref[sth][][]{part}. As in \olref[sfr][][]{part}, the
+choice of lowercase and uppercase letters is guided only by
+readability:
+
+\begin{defish}
+\emph{Extensionality.} 
+\[\forall A \forall B(\forall x(x \in A \liff x \in B) \lif A = B)\]
+\end{defish}
+
+\begin{defish}
+\emph{Union.} 
+\[
+\forall A \exists U \forall x(x \in U \liff (\exists b \in A)x \in b),
+\]
+i.e., $\bigcup A$ exists for any set~$A$.
+\end{defish}
+
+\begin{defish}
+\emph{Pairs.} 
+\[
+\forall a \forall b \exists P \forall x (x \in P \liff
+(x = a \lor x = b)),
+\]
+i.e., $\{a, b\}$ exists for any $a$ and~$b$.
+\end{defish}
+
+\begin{defish}
+\emph{Powersets.}
+\[
+\forall A \exists P \forall x(x \in P \liff (\forall z \in x)z \in A),
+\]
+i.e., $\Pow{A}$ exists for any set~$A$.
+\end{defish}
+
+\begin{defish}
+\emph{Infinity.}
+\begin{multline*}
+\exists I((\exists o \in I)\forall x(x \notin o) \land {}\\
+(\forall x \in I)(\exists s \in I)\forall z(z \in s \liff (z \in x \lor z = x))),
+\end{multline*}
+i.e., there is a set with $\emptyset$ as !!a{element} and which 
+is closed under $x \mapsto x \cup \{x\}$.
+\end{defish}
+
+\begin{defish}
+\emph{Foundation.}
+\[
+\forall A(\forall x\, x \notin A \lor (\exists b \in A)(\forall x \in A)x \notin b),
+\]
+i.e., $A = \emptyset$ or $(\exists b \in A)A\cap b = \emptyset$.
+\end{defish}
+
+\begin{defish}
+\emph{Well-Ordering.} 
+For every set $A$, there is a relation that well-orders $A$.
+(Writing this one out in first-order logic is too painful to bother with.)
+\end{defish}
+
+\begin{defish}
+\emph{Separation Scheme.}
+For any formula $\phi(x)$ which does not contain~``$S$'':
+\[
+\forall A \exists S \forall x(x \in S \liff (\phi(x) \land x \in A)),
+\]
+i.e., $\Setabs{x \in A}{\phi(x)}$ exists for any set~$A$.
+\end{defish}
+
+\begin{defish}
+\emph{Replacement Scheme.} For any formula $\phi(x, y)$ which does not contain~``$B$'':
+\[
+\forall A((\forall x \in A)\lexists![y][\phi(x,y)] \lif \exists B \forall y (y \in B \liff (\exists x \in A)\phi(x,y))),
+\]
+i.e., $\Setabs{y}{(\exists x \in A)\phi(x,y)}$ exists for any $A$, if $\phi$ is ``functional.''
+\end{defish}
+
+In both schemes, the formulas may contain parameters. Indeed,
+throughout \olref[sth][][]{part}, we follow the convention that any
+formula can contain parameters. (See
+\olref[sfr][infinite][induction]{sec} for a reminder of what it means
+to say that a formula may contain parameters.)
+
+\begin{description}
+\item[$\Zminus$] is Extensionality, Union, Pairs, Powersets, Infinity, Separation.
+\item[$\Z$] is $\Zminus$ plus Foundation.
+\item[$\ZFminus$] is $\Z$ plus Replacement.
+\item[$\ZF$] is $\ZFminus$ plus Foundation.
+\item[$\ZFC$] is $\ZF$ plus Well-Ordering.
+\end{description}
+
+\olimport*[set-theory/story]{story}
+
+\chapter{Steps towards $\Z$}
+
+In the previous chapter, we considered the iterative conception of
+set. In this chapter, we will attempt to extract most of the axioms of
+Zermelo's set theory, i.e.,~$\Z$. The approach is \emph{entirely}
+inspired by \citet{Boolos1971},  \citet{Scott1974}, and
+\citet{Shoenfield:AST}. 
+
+\olsetchapter{nosection}
+\olimport*[set-theory/z]{z}
+\olresetchapter
+
+\olimport*[set-theory/ordinals]{ordinals}
+
+\olimport*[set-theory/spine]{spine}
+
+\olimport*[set-theory/replacement]{replacement}
+
+\olimport*[set-theory/ord-arithmetic]{ord-arithmetic}
+
+\olimport*[set-theory/cardinals]{cardinals}
+
+\chapter{Cardinal Arithmetic}
+
+In \olref[sth][cardinals][]{chap}, we developed a theory of cardinals.
+Our next step is to outline a theory of cardinal arithmetic. This
+chapter briefly summarises some of the elementary facts, and then
+points to some of the difficulties, which turn out to be fascinating
+and philosophically rich.
+
+\olsetchapter{nosection}
+\olimport*[set-theory/card-arithmetic]{card-arithmetic}
+\olresetchapter
+
+\olimport*[set-theory/choice]{choice}
+
+\stopproblems
+\def\ifproblems#1{}
+
+\appendix
+\part*{Appendix}\addcontentsline{toc}{part}{Appendix}
+\def\figurename{Fig.}
+\setlength{\olphotowidth}{.45\textwidth}
+
+\chapter{Biographies}
+
+\olimport*[history/biographies]{georg-cantor}
+
+\olimport*[history/biographies]{kurt-goedel}
+
+\olimport*[history/biographies]{bertrand-russell}
+
+\olimport*[history/biographies]{alfred-tarski}
+
+\olimport*[history/biographies]{ernst-zermelo}
+
+\backmatter
+
+\clearpage
+
+\photocredits
+
+\bibliographystyle{\olpath/bib/natbib-oup}
+\bibliography{\olpath/bib/open-logic}
+
+\olimport*{\olpath/content/open-logic-about}

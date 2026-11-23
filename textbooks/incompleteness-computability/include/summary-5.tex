@@ -1,0 +1,56 @@
+The \textbf{first incompleteness theorem} states that for any
+consistent, !!{axiomatizable} theory~$\Th{T}$ that extends $\Th{Q}$,
+there is !!a{sentence}~$!G_\Th{T}$ such that $\Th{T} \Proves/
+!G_\Th{T}$. $!G_\Th{T}$ is constructed in such a way that $!G_\Th{T}$,
+in a roundabout way, says ``$\Th{T}$ does not prove~$!G_\Th{T}$.''
+Since $\Th{T}$ does not, in fact, prove it, what it says is true. If
+$\Sat{N}{\Th{T}}$, then $\Th{T}$ does not prove any false claims, so
+$\Th{T} \Proves/ \lnot !G_\Th{T}$. Such !!a{sentence} is
+\textbf{independent} or \textbf{undecidable} in~$\Th{T}$.  G\"odel's
+original proof established that $!G_\Th{T}$ is independent on the
+assumption that $\Th{T}$ is \textbf{$\omega$-consistent}. Rosser
+improved the result by finding a different sentence~$!R_\Th{T}$ with
+is neither provable nor refutable in~$\Th{T}$ as long as $\Th{T}$ is
+simply consistent.
+
+The construction of~$!G_\Th{T}$ is effective: given an axiomatization
+of~$\Th{T}$ we could, in principle, write down~$!G_\Th{T}$. The
+``roundabout way'' in which $!G_\Th{T}$ states its own unprovability,
+is a special case of a general result, the \textbf{fixed-point
+  lemma}. It states that for any !!{formula}~$!B(y)$ in~$\Lang{L_A}$,
+there is !!a{sentence}~$!A$ such that $\Th{Q} \Proves !A \liff
+!B(\gn{!A})$. (Here, $\gn{!A}$ is the standard numeral for the G\"odel
+number of~$!A$, i.e., $\num{\Gn{!A}}$.)  To obtain $!G_\Th{T}$, we use
+the !!{formula}~$\lnot\OProv[\Th{T}](y)$ as~$!B(y)$.  We get
+$\OProv[\Th{T}]$ as the culmination of our previous efforts: We know
+that $\Prf[\Th{T}](n, m)$, which holds if $n$ is the G\"odel number of
+!!a{derivation} of the !!{sentence} with G\"odel number~$m$
+from~$\Th{T}$, is primitive recursive. We also know that $\Th{Q}$
+represents all primitive recursive relations, and so there is some
+!!{formula} $\OPrf[\Th{T}](x,y)$ that represents~$\Prf[\Th{T}]$
+in~$\Th{Q}$.  The \textbf{provability predicate} for $\Th{T}$ is
+$\Prov[\Th{T}](y)$ is $\lexists[x][\Prf[\Th{T}](x, y)]$ then expresses
+provability in~$\Th{T}$. (It doesn't represent it though: if $\Th{T}
+\Proves !A$, then $\Th{Q} \Proves \OProv[\Th{T}](\gn{!A})$; but if
+$\Th{T} \Proves/ !A$, then $\Th{Q}$ does not in general prove $\lnot
+\OProv[\Th{T}](\gn{!A})$.)
+
+The \textbf{second incompleteness theorem} establishes that $\Th{T}$
+also does not prove the !!{sentence}~$\OCon[\Th{T}]$ that expresses
+that $\Th{T}$ is consistent, i.e., $\Th{T}$~does not prove $\lnot
+\OProv[\Th{T}](\gn{\lfalse})$.  The proof of the second incompleteness
+theorem requires some additional conditions on~$\Th{T}$, the
+\textbf{provability conditions}. $\Th{PA}$ satisfies them,
+although~$\Th{Q}$ does not. Theories that satisfy the provability
+conditions also satisfy \textbf{L\"ob's theorem}: $\Th{T} \Proves
+\OProv[\Th{T}](\gn{!A}) \lif !A$ iff $\Th{T} \Proves !A$.
+
+The fixed-point theorem also has another important consequence. We say
+a relation $R(n)$ is \textbf{definable} in $\Lang{L_A}$ if there is
+!!a{formula}~$!A_R(x)$ such that $\Sat{N}{!A_R(\num{n})}$ iff $R(n)$
+holds. For instance, $\Prov[\Th{T}]$ is definable, since
+$\OProv[\Th{T}]$ defines it. The property of being the G\"odel number
+of a true !!{sentence} (i.e., the property $n$ has iff $n = \Gn{!A}$ for
+some !!{sentence} and $\Sat{N}{!A}$), however, is not
+definable. This is \textbf{Tarski's theorem} about the undefinability
+of truth.

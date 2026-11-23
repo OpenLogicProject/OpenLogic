@@ -1,0 +1,22 @@
+\begin{tikzpicture}[blob/.style={fill=black, circle, minimum width=5pt, inner sep=1pt},every fit/.style={ellipse,draw,inner sep=-2pt}]
+	\node[blob] (a2) at (0,3.5) {};    %
+	\node[blob] (a3) at (0,2.5) {};%
+	\node[blob] (a4) at (0,1.5) {};%
+	\node[blob] (b2) at (4,3) {};%
+	\node[blob] (b4) at (4,2) {};
+	\node[blob] (c1) at (8,4) {};%
+	\node[blob] (c2) at (8,3) {};
+	\node[blob] (c3) at (8,2) {};%
+	\node[blob] (c4) at (8,1) {};
+	\node[draw,fit= (a2) (a3) (a4),minimum width=2cm] {} ;%
+	\node[draw,fit= (b2) (b4),minimum width=2cm] {} ;
+	\node[draw,fit= (c1) (c2) (c3) (c4),minimum width=2cm] {} ;
+	\draw[->,thick,shorten <=2pt,shorten >=2] (a2) -- (b2);
+	\draw[->,thick,shorten <=2pt,shorten >=2] (a3) -- (b2);
+	\draw[->,thick,shorten <=2pt,shorten >=2] (a4) -- (b4);
+	\draw[->,thick,shorten <=2pt,shorten >=2] (b2) -- (c1);
+	\draw[->,thick,shorten <=2pt,shorten >=2] (b4) -- (c4);
+	\draw[->,dashed,shorten <=2pt,shorten >=2] (a2) -- (c1);
+	\draw[->,dashed,shorten <=2pt,shorten >=2] (a3) -- (c1);
+	\draw[->,dashed,shorten <=2pt,shorten >=2, bend right] (a4) -- (c4);
+	\end{tikzpicture}

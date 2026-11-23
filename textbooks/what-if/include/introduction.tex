@@ -1,0 +1,146 @@
+% !TeX root = ../wi-screen.tex
+
+\chapter{Introduction}
+
+Classical logic is very useful, widely used, has a long
+history, and is relatively simple.  But it has limitations: for
+instance, it does not (and cannot) deal well with certain locutions of
+natural language such as tense and subjunctive mood, nor with certain
+constructions such as ``Audrey knows that $p$.'' It makes certain
+assumptions, for instance that every sentence is either true or false
+and never both.  It pronounces some formulas tautologies and some
+arguments as valid, even though these tautologies and arguments
+formalize arguments in English which some do not consider true or
+valid, at least not obviously.  Thus it seems there are examples where
+classical logic is not expressive enough, or even where classical
+logic gets things wrong.
+
+This book discusses some alternative, \emph{non-classical}
+logics. These non-classical logics are either more expressive than
+classical logic or have different tautologies or valid arguments. For
+instance, temporal logic extends classical logic by operators that
+express tense; conditional logics have an additional, different
+conditional (``if---then'') that does not suffer from the so-called
+paradoxes of the material conditional.  All of these logics
+\emph{extend} classical logic by new operators or connectives, and
+fall into the broad category of intensional logics. Other logics such
+as many-valued, intuitionistic, and paraconsistent logics have the
+same basic connectives as classical logic, but different infrences
+count as valid.  In many-valued and intutionistic logic, for instance,
+the law of excluded middle $!A \lor \lnot !A$ fails to hold; in
+paraconsistent logic the inference \emph{ex contradictione quodlibet},
+$\lfalse \Entails !A$ for arbitrary~$!A$.
+
+After we review the basics of classical propositional logic in
+\cref{part:classical}, we begin our discussion of non-classical logics
+in \ref{part:many-valued}. There we will relax one assumption
+classical logic makes: that everything is either true or false. There
+are good reasons to think that some sentences of English are
+neither---they have some intermediate truth value. Examples of this
+are sentences involving vagueness (``Mary is rich''), sentences the
+truth of which is not yet determined (``There will be a sea battle
+tomorrow''), and---an important case for philosopers---sentences that
+are paradoxical such as ``This sentence is false.'' One of the
+earliest non-classical logics allow truth values in addition to the
+classical ``true'' and ``false''; they are called \emph{many-valued}.
+We cover them in \cref{part:many-valued}.
+
+Modal logics are extensions of classical logic by the operators $\Box$
+(``box'') and $\Diamond$ (``diamond''), which attach to !!{formula}s.
+Intuitively, $\Box$ may be read as ``necessarily'' and $\Diamond$ as
+``possibly,'' so $\Box p$ is ``$p$ is necessarily true'' and $\Diamond
+p$ is ``$p$ is possibly true.'' As necessity and possibility are
+fundamental metaphysical notions, modal logic is obviously of great
+philosophical interest. It allows the formalization of metaphysical
+principles such as ``$\Box p \lif p$'' (if $p$ is necessary, it is
+true) or ``$\Diamond p \lif \Box\Diamond p$'' (if $p$ is possible,
+it is necessarily possible).
+
+For the logic which corresponds to the interpretation of $\Box$ as
+``necessarily,'' this semantics is relatively simple: instead of
+assigning truth values to !!{propositional variable}s, an
+interpretation~$\mModel{M}$ assigns a set of ``worlds'' to
+them---intuitively, those worlds~$w$ at which $p$ is interpreted as
+true. On the basis of such an interpretation, we can define a
+satisfaction relation. The definition of this satisfaction relation
+makes $\Box !A$ satisfied at a world~$w$ iff $!A$ is satisfied at
+\emph{all} worlds: $\mSat{M}{\Box !A}[w]$ iff $\mSat{M}{!A}[v]$ for
+all worlds~$v$. This corresponds to Leibniz's idea that what's
+necessarily true is what's true in every possible world.
+
+``Necessarily'' is not the only way to interpret the $\Box$ operator,
+but it is the standard one---``necessarily'' and ``possibly'' are the
+so-called \emph{alethic} modalities. Other interpretations read $\Box$
+as ``it is known (by some person~$A$) that,'' as ``some person $A$
+believes that,'' ``it ought to be the case that,'' or ``it will always
+be true that.'' These are epistemic, doxastic, deontic, and temporal
+modalities, respectively. Different interpretations of $\Box$ will
+make different !!{formula}s logically true, and pronounce different
+inferences as valid. For instance, everything necessary and everything
+known is true, so $\Box !A \lif !A$ is a logical truth on the alethic
+and epistemic interpretations. By contrast, not everything believed
+nor everything that ought to be the case actually is the case, so
+$\Box !A \lif !A$ is not a logical truth on the doxastic or deontic
+interpretations. We discuss modal logics in general in
+\cref{part:modal1,part:modal2} and epistemic logics in particular in
+\cref{part:epistemic}.
+
+In order to deal with different interpretations of the modal
+operators, the semantics is extended by a relation between worlds, the
+so-called accessibility relation.  Then $\mSat{M}{\Box !A}[w]$ if
+$\mSat{M}{!A}[v]$ for all worlds~$v$ which are accessible from~$w$.
+The resulting semantics is very versatile and powerful, and the basic
+idea can be used to provide semantic interpretations for logics based
+on other intensional operators. One such logic is a close relative of
+modal logic called temporal logic. Instead of having just one modality
+$\Box$ (plus its dual $\Diamond$), it has \emph{temporal operators}
+such as ``always $P$,'' ``$p$ will be true'', etc. We study these in
+\cref{part:temporal}.
+
+Whereas the material conditional is best read as an English indicative
+conditional (``If $p$ is true then $q$ is true''), subjunctive
+conditionals are in the subjunctive mood: ``if $p$ were true then $q$
+would be true.'' While a material conditional with a false antecedent
+is true, a subjunctive conditional need not be, e.g., ``if humans had
+tails, they would be able to fly.'' In \cref{part:counterfactuals}, we
+discuss logics of counterfactual coditionals.
+
+Intuitionistic logic is a constructive logic based on L. E. J.
+Brouwer's branch of constructive mathematics. Intuitionistic logic is
+philosophically interesting for this reason---it plays an important
+role in constructive accounts of mathematics---but was also proposed
+as a logic superior to classical logic by the influential English
+philosopher Michael Dummett in the 20th century. As mentioned above,
+intuitionistic logic is non-classical because it has fewer valid
+inferences and theorems, e.g., $!A \lor \lnot !A$ and $\lnot\lnot !A
+\lif !A$ fail in general. Intuitively, this is a consequence of the
+intuitionist principle that something shouldn't count as true---you
+should not assert it---unless you have a proof of it. And
+obviously there are cases where we neither have a proof of~$!A$ nor a
+proof of~$\lnot !A$. Intuitionistic logic can be given a relational
+semantics very much like modal logic. We discuss it in
+\cref{part:intuitionistic}.
+
+One of the weirdest features of classical logic is the principle of
+explosion: from a contradiction, anything follows. This principle
+flows from the way we set up the semantics of classical logic, but it
+is \emph{very} counterintuitive and goes against what we actually do
+when we reason. After all, once you discover that some things you
+believe are contradictory, you don't (usually) go on to conclude
+arbitrary claims since they follow from your beliefs!{} This has led
+logicians to develop systems of logic in which the inference \emph{ex
+contradictione, quodlibet} is blocked. Some of these are simply
+further weakenings of classical logic, designed just to get rid of
+explosion. Some are more philosophically motivated. Part of what makes
+the principle of explosion weird is that when it pronounces that $!A$
+and $\lnot !A$ together entail $!B$, there is no connection at all
+between the premises and the conclusion.  And shouldn't there be such
+a connection in any valid argument? Shouldn't the premises be
+\emph{relevant} to the conclusion?  This leads to so-valled
+\emph{relevant} (or \emph{relevance}) logic. Another motivation is the
+philosophical position called \emph{dialetheism:} the belief that
+there can be true contradictions.  (If you believe that contradictions
+can be true, then you would not want them to entail anything
+whatsoever, e.g., something false.) All of these logic fall under the
+umbrella term \emph{paraconsistent}. We discuss paraconsistent logics
+in \cref{part:paraconsistent}.
